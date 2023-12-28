@@ -13,6 +13,10 @@ export const protobufPackage = "google.protobuf";
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface Empty {}
+export interface EmptyProtoMsg {
+  typeUrl: "/google.protobuf.Empty";
+  value: Uint8Array;
+}
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
  * empty messages in your APIs. A typical example is to use it as the request
@@ -69,7 +73,8 @@ export const Empty = {
     return obj;
   },
   fromAmino(_: EmptyAmino): Empty {
-    return {};
+    const message = createBaseEmpty();
+    return message;
   },
   toAmino(_: Empty): EmptyAmino {
     const obj: any = {};

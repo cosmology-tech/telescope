@@ -37,16 +37,16 @@ export interface DeclType {
 /** An identifier declaration. */
 export interface IdentDecl {
   /** Optional type of the identifier. */
-  type: DeclType;
+  type?: DeclType;
   /** Optional value of the identifier. */
-  value: Expr;
+  value?: Expr;
 }
 /** A function declaration. */
 export interface FunctionDecl {
   /** The function arguments. */
   args: IdentDecl[];
   /** Optional declared return type. */
-  returnType: DeclType;
+  returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
 }
@@ -206,8 +206,8 @@ export const DeclType = {
 };
 function createBaseIdentDecl(): IdentDecl {
   return {
-    type: DeclType.fromPartial({}),
-    value: Expr.fromPartial({})
+    type: undefined,
+    value: undefined
   };
 }
 export const IdentDecl = {
@@ -262,7 +262,7 @@ export const IdentDecl = {
 function createBaseFunctionDecl(): FunctionDecl {
   return {
     args: [],
-    returnType: DeclType.fromPartial({}),
+    returnType: undefined,
     receiverFunction: false
   };
 }

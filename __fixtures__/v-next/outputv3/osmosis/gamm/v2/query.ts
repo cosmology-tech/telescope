@@ -19,13 +19,9 @@ export interface QuerySpotPriceRequestProtoMsg {
  * query.
  */
 export interface QuerySpotPriceRequestAmino {
-  pool_id: string;
-  base_asset_denom: string;
-  quote_asset_denom: string;
-}
-export interface QuerySpotPriceRequestAminoMsg {
-  type: "osmosis/gamm/v2/query-spot-price-request";
-  value: QuerySpotPriceRequestAmino;
+  pool_id?: string;
+  base_asset_denom?: string;
+  quote_asset_denom?: string;
 }
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -54,11 +50,7 @@ export interface QuerySpotPriceResponseProtoMsg {
  */
 export interface QuerySpotPriceResponseAmino {
   /** String of the Dec. Ex) 10.203uatom */
-  spot_price: string;
-}
-export interface QuerySpotPriceResponseAminoMsg {
-  type: "osmosis/gamm/v2/query-spot-price-response";
-  value: QuerySpotPriceResponseAmino;
+  spot_price?: string;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -89,7 +81,7 @@ export const QuerySpotPriceRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySpotPriceRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceRequest();
@@ -150,30 +142,27 @@ export const QuerySpotPriceRequest = {
     return obj;
   },
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      baseAssetDenom: object.base_asset_denom,
-      quoteAssetDenom: object.quote_asset_denom
-    };
+    const message = createBaseQuerySpotPriceRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.base_asset_denom !== undefined && object.base_asset_denom !== null) {
+      message.baseAssetDenom = object.base_asset_denom;
+    }
+    if (object.quote_asset_denom !== undefined && object.quote_asset_denom !== null) {
+      message.quoteAssetDenom = object.quote_asset_denom;
+    }
+    return message;
   },
-  toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
+  toAmino(message: QuerySpotPriceRequest, useInterfaces: boolean = true): QuerySpotPriceRequestAmino {
     const obj: any = {};
     obj.pool_id = omitDefault(message.poolId);
     obj.base_asset_denom = omitDefault(message.baseAssetDenom);
     obj.quote_asset_denom = omitDefault(message.quoteAssetDenom);
     return obj;
   },
-  fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
-    return QuerySpotPriceRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpotPriceRequest): QuerySpotPriceRequestAminoMsg {
-    return {
-      type: "osmosis/gamm/v2/query-spot-price-request",
-      value: QuerySpotPriceRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg): QuerySpotPriceRequest {
-    return QuerySpotPriceRequest.decode(message.value);
+  fromProtoMsg(message: QuerySpotPriceRequestProtoMsg, useInterfaces: boolean = true): QuerySpotPriceRequest {
+    return QuerySpotPriceRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySpotPriceRequest): Uint8Array {
     return QuerySpotPriceRequest.encode(message).finish();
@@ -199,7 +188,7 @@ export const QuerySpotPriceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySpotPriceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySpotPriceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySpotPriceResponse();
@@ -242,26 +231,19 @@ export const QuerySpotPriceResponse = {
     return obj;
   },
   fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {
-    return {
-      spotPrice: object.spot_price
-    };
+    const message = createBaseQuerySpotPriceResponse();
+    if (object.spot_price !== undefined && object.spot_price !== null) {
+      message.spotPrice = object.spot_price;
+    }
+    return message;
   },
-  toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {
+  toAmino(message: QuerySpotPriceResponse, useInterfaces: boolean = true): QuerySpotPriceResponseAmino {
     const obj: any = {};
     obj.spot_price = omitDefault(message.spotPrice);
     return obj;
   },
-  fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {
-    return QuerySpotPriceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySpotPriceResponse): QuerySpotPriceResponseAminoMsg {
-    return {
-      type: "osmosis/gamm/v2/query-spot-price-response",
-      value: QuerySpotPriceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg): QuerySpotPriceResponse {
-    return QuerySpotPriceResponse.decode(message.value);
+  fromProtoMsg(message: QuerySpotPriceResponseProtoMsg, useInterfaces: boolean = true): QuerySpotPriceResponse {
+    return QuerySpotPriceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySpotPriceResponse): Uint8Array {
     return QuerySpotPriceResponse.encode(message).finish();

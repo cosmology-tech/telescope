@@ -6,10 +6,18 @@ import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet, omitDefault } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
+export interface ModuleToDistributeCoinsRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsRequest";
+  value: Uint8Array;
+}
 export interface ModuleToDistributeCoinsRequestSDKType {}
 export interface ModuleToDistributeCoinsResponse {
   /** Coins that have yet to be distributed */
   coins: Coin[];
+}
+export interface ModuleToDistributeCoinsResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.ModuleToDistributeCoinsResponse";
+  value: Uint8Array;
 }
 export interface ModuleToDistributeCoinsResponseSDKType {
   coins: CoinSDKType[];
@@ -18,106 +26,154 @@ export interface GaugeByIDRequest {
   /** Gague ID being queried */
   id: bigint;
 }
+export interface GaugeByIDRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.GaugeByIDRequest";
+  value: Uint8Array;
+}
 export interface GaugeByIDRequestSDKType {
   id: bigint;
 }
 export interface GaugeByIDResponse {
   /** Gauge that corresponds to provided gague ID */
-  gauge: Gauge;
+  gauge?: Gauge;
+}
+export interface GaugeByIDResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.GaugeByIDResponse";
+  value: Uint8Array;
 }
 export interface GaugeByIDResponseSDKType {
-  gauge: GaugeSDKType;
+  gauge?: GaugeSDKType;
 }
 export interface GaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface GaugesRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.GaugesRequest";
+  value: Uint8Array;
 }
 export interface GaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface GaugesResponse {
   /** Upcoming and active gauges */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface GaugesResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.GaugesResponse";
+  value: Uint8Array;
 }
 export interface GaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface ActiveGaugesRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.ActiveGaugesRequest";
+  value: Uint8Array;
 }
 export interface ActiveGaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesResponse {
   /** Active gagues only */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface ActiveGaugesResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.ActiveGaugesResponse";
+  value: Uint8Array;
 }
 export interface ActiveGaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface ActiveGaugesPerDenomRequest {
   /** Desired denom when querying active gagues */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface ActiveGaugesPerDenomRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomRequest";
+  value: Uint8Array;
 }
 export interface ActiveGaugesPerDenomRequestSDKType {
   denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface ActiveGaugesPerDenomResponse {
   /** Active gagues that match denom in query */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface ActiveGaugesPerDenomResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.ActiveGaugesPerDenomResponse";
+  value: Uint8Array;
 }
 export interface ActiveGaugesPerDenomResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesRequest {
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface UpcomingGaugesRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesRequest";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesResponse {
   /** Gauges whose distribution is upcoming */
   data: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface UpcomingGaugesResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesResponse";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesResponseSDKType {
   data: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface UpcomingGaugesPerDenomRequest {
   /** Filter for upcoming gagues that match specific denom */
   denom: string;
   /** Pagination defines pagination for the request */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface UpcomingGaugesPerDenomRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomRequest";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesPerDenomRequestSDKType {
   denom: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface UpcomingGaugesPerDenomResponse {
   /** Upcoming gagues that match denom in query */
   upcomingGauges: Gauge[];
   /** Pagination defines pagination for the response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface UpcomingGaugesPerDenomResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.UpcomingGaugesPerDenomResponse";
+  value: Uint8Array;
 }
 export interface UpcomingGaugesPerDenomResponseSDKType {
   upcoming_gauges: GaugeSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface RewardsEstRequest {
   /** Address that is being queried for future estimated rewards */
@@ -129,6 +185,10 @@ export interface RewardsEstRequest {
    * Lower limit is current epoch
    */
   endEpoch: bigint;
+}
+export interface RewardsEstRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.RewardsEstRequest";
+  value: Uint8Array;
 }
 export interface RewardsEstRequestSDKType {
   owner: string;
@@ -142,14 +202,26 @@ export interface RewardsEstResponse {
    */
   coins: Coin[];
 }
+export interface RewardsEstResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.RewardsEstResponse";
+  value: Uint8Array;
+}
 export interface RewardsEstResponseSDKType {
   coins: CoinSDKType[];
 }
 export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequestProtoMsg {
+  typeUrl: "/osmosis.incentives.QueryLockableDurationsRequest";
+  value: Uint8Array;
+}
 export interface QueryLockableDurationsRequestSDKType {}
 export interface QueryLockableDurationsResponse {
   /** Time durations that users can lock coins for in order to recieve rewards */
   lockableDurations: Duration[];
+}
+export interface QueryLockableDurationsResponseProtoMsg {
+  typeUrl: "/osmosis.incentives.QueryLockableDurationsResponse";
+  value: Uint8Array;
 }
 export interface QueryLockableDurationsResponseSDKType {
   lockable_durations: DurationSDKType[];
@@ -198,7 +270,8 @@ export const ModuleToDistributeCoinsRequest = {
     return obj;
   },
   fromAmino(_: ModuleToDistributeCoinsRequestAmino): ModuleToDistributeCoinsRequest {
-    return {};
+    const message = createBaseModuleToDistributeCoinsRequest();
+    return message;
   },
   toAmino(_: ModuleToDistributeCoinsRequest): ModuleToDistributeCoinsRequestAmino {
     const obj: any = {};
@@ -295,9 +368,9 @@ export const ModuleToDistributeCoinsResponse = {
     return obj;
   },
   fromAmino(object: ModuleToDistributeCoinsResponseAmino): ModuleToDistributeCoinsResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseModuleToDistributeCoinsResponse();
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ModuleToDistributeCoinsResponse): ModuleToDistributeCoinsResponseAmino {
     const obj: any = {};
@@ -391,9 +464,11 @@ export const GaugeByIDRequest = {
     return obj;
   },
   fromAmino(object: GaugeByIDRequestAmino): GaugeByIDRequest {
-    return {
-      id: BigInt(object.id)
-    };
+    const message = createBaseGaugeByIDRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    return message;
   },
   toAmino(message: GaugeByIDRequest): GaugeByIDRequestAmino {
     const obj: any = {};
@@ -424,7 +499,7 @@ export const GaugeByIDRequest = {
 };
 function createBaseGaugeByIDResponse(): GaugeByIDResponse {
   return {
-    gauge: Gauge.fromPartial({})
+    gauge: undefined
   };
 }
 export const GaugeByIDResponse = {
@@ -483,9 +558,11 @@ export const GaugeByIDResponse = {
     return obj;
   },
   fromAmino(object: GaugeByIDResponseAmino): GaugeByIDResponse {
-    return {
-      gauge: object?.gauge ? Gauge.fromAmino(object.gauge) : undefined
-    };
+    const message = createBaseGaugeByIDResponse();
+    if (object.gauge !== undefined && object.gauge !== null) {
+      message.gauge = Gauge.fromAmino(object.gauge);
+    }
+    return message;
   },
   toAmino(message: GaugeByIDResponse): GaugeByIDResponseAmino {
     const obj: any = {};
@@ -516,7 +593,7 @@ export const GaugeByIDResponse = {
 };
 function createBaseGaugesRequest(): GaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GaugesRequest = {
@@ -575,9 +652,11 @@ export const GaugesRequest = {
     return obj;
   },
   fromAmino(object: GaugesRequestAmino): GaugesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGaugesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GaugesRequest): GaugesRequestAmino {
     const obj: any = {};
@@ -609,7 +688,7 @@ export const GaugesRequest = {
 function createBaseGaugesResponse(): GaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GaugesResponse = {
@@ -688,10 +767,12 @@ export const GaugesResponse = {
     return obj;
   },
   fromAmino(object: GaugesResponseAmino): GaugesResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGaugesResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GaugesResponse): GaugesResponseAmino {
     const obj: any = {};
@@ -727,7 +808,7 @@ export const GaugesResponse = {
 };
 function createBaseActiveGaugesRequest(): ActiveGaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesRequest = {
@@ -786,9 +867,11 @@ export const ActiveGaugesRequest = {
     return obj;
   },
   fromAmino(object: ActiveGaugesRequestAmino): ActiveGaugesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseActiveGaugesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: ActiveGaugesRequest): ActiveGaugesRequestAmino {
     const obj: any = {};
@@ -820,7 +903,7 @@ export const ActiveGaugesRequest = {
 function createBaseActiveGaugesResponse(): ActiveGaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesResponse = {
@@ -899,10 +982,12 @@ export const ActiveGaugesResponse = {
     return obj;
   },
   fromAmino(object: ActiveGaugesResponseAmino): ActiveGaugesResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseActiveGaugesResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: ActiveGaugesResponse): ActiveGaugesResponseAmino {
     const obj: any = {};
@@ -939,7 +1024,7 @@ export const ActiveGaugesResponse = {
 function createBaseActiveGaugesPerDenomRequest(): ActiveGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesPerDenomRequest = {
@@ -1010,10 +1095,14 @@ export const ActiveGaugesPerDenomRequest = {
     return obj;
   },
   fromAmino(object: ActiveGaugesPerDenomRequestAmino): ActiveGaugesPerDenomRequest {
-    return {
-      denom: object.denom,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseActiveGaugesPerDenomRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: ActiveGaugesPerDenomRequest): ActiveGaugesPerDenomRequestAmino {
     const obj: any = {};
@@ -1046,7 +1135,7 @@ export const ActiveGaugesPerDenomRequest = {
 function createBaseActiveGaugesPerDenomResponse(): ActiveGaugesPerDenomResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const ActiveGaugesPerDenomResponse = {
@@ -1125,10 +1214,12 @@ export const ActiveGaugesPerDenomResponse = {
     return obj;
   },
   fromAmino(object: ActiveGaugesPerDenomResponseAmino): ActiveGaugesPerDenomResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseActiveGaugesPerDenomResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: ActiveGaugesPerDenomResponse): ActiveGaugesPerDenomResponseAmino {
     const obj: any = {};
@@ -1164,7 +1255,7 @@ export const ActiveGaugesPerDenomResponse = {
 };
 function createBaseUpcomingGaugesRequest(): UpcomingGaugesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesRequest = {
@@ -1223,9 +1314,11 @@ export const UpcomingGaugesRequest = {
     return obj;
   },
   fromAmino(object: UpcomingGaugesRequestAmino): UpcomingGaugesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseUpcomingGaugesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: UpcomingGaugesRequest): UpcomingGaugesRequestAmino {
     const obj: any = {};
@@ -1257,7 +1350,7 @@ export const UpcomingGaugesRequest = {
 function createBaseUpcomingGaugesResponse(): UpcomingGaugesResponse {
   return {
     data: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesResponse = {
@@ -1336,10 +1429,12 @@ export const UpcomingGaugesResponse = {
     return obj;
   },
   fromAmino(object: UpcomingGaugesResponseAmino): UpcomingGaugesResponse {
-    return {
-      data: Array.isArray(object?.data) ? object.data.map((e: any) => Gauge.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseUpcomingGaugesResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: UpcomingGaugesResponse): UpcomingGaugesResponseAmino {
     const obj: any = {};
@@ -1376,7 +1471,7 @@ export const UpcomingGaugesResponse = {
 function createBaseUpcomingGaugesPerDenomRequest(): UpcomingGaugesPerDenomRequest {
   return {
     denom: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesPerDenomRequest = {
@@ -1447,10 +1542,14 @@ export const UpcomingGaugesPerDenomRequest = {
     return obj;
   },
   fromAmino(object: UpcomingGaugesPerDenomRequestAmino): UpcomingGaugesPerDenomRequest {
-    return {
-      denom: object.denom,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseUpcomingGaugesPerDenomRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: UpcomingGaugesPerDenomRequest): UpcomingGaugesPerDenomRequestAmino {
     const obj: any = {};
@@ -1483,7 +1582,7 @@ export const UpcomingGaugesPerDenomRequest = {
 function createBaseUpcomingGaugesPerDenomResponse(): UpcomingGaugesPerDenomResponse {
   return {
     upcomingGauges: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const UpcomingGaugesPerDenomResponse = {
@@ -1562,10 +1661,12 @@ export const UpcomingGaugesPerDenomResponse = {
     return obj;
   },
   fromAmino(object: UpcomingGaugesPerDenomResponseAmino): UpcomingGaugesPerDenomResponse {
-    return {
-      upcomingGauges: Array.isArray(object?.upcoming_gauges) ? object.upcoming_gauges.map((e: any) => Gauge.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseUpcomingGaugesPerDenomResponse();
+    message.upcomingGauges = object.upcoming_gauges?.map(e => Gauge.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: UpcomingGaugesPerDenomResponse): UpcomingGaugesPerDenomResponseAmino {
     const obj: any = {};
@@ -1703,11 +1804,15 @@ export const RewardsEstRequest = {
     return obj;
   },
   fromAmino(object: RewardsEstRequestAmino): RewardsEstRequest {
-    return {
-      owner: object.owner,
-      lockIds: Array.isArray(object?.lock_ids) ? object.lock_ids.map((e: any) => BigInt(e)) : [],
-      endEpoch: BigInt(object.end_epoch)
-    };
+    const message = createBaseRewardsEstRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    message.lockIds = object.lock_ids?.map(e => BigInt(e)) || [];
+    if (object.end_epoch !== undefined && object.end_epoch !== null) {
+      message.endEpoch = BigInt(object.end_epoch);
+    }
+    return message;
   },
   toAmino(message: RewardsEstRequest): RewardsEstRequestAmino {
     const obj: any = {};
@@ -1811,9 +1916,9 @@ export const RewardsEstResponse = {
     return obj;
   },
   fromAmino(object: RewardsEstResponseAmino): RewardsEstResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseRewardsEstResponse();
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: RewardsEstResponse): RewardsEstResponseAmino {
     const obj: any = {};
@@ -1890,7 +1995,8 @@ export const QueryLockableDurationsRequest = {
     return obj;
   },
   fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
-    return {};
+    const message = createBaseQueryLockableDurationsRequest();
+    return message;
   },
   toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestAmino {
     const obj: any = {};
@@ -1987,9 +2093,9 @@ export const QueryLockableDurationsResponse = {
     return obj;
   },
   fromAmino(object: QueryLockableDurationsResponseAmino): QueryLockableDurationsResponse {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseQueryLockableDurationsResponse();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAmino {
     const obj: any = {};

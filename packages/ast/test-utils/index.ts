@@ -44,6 +44,11 @@ export const getTestProtoStore = (options?: TelescopeOptions) => {
     return store;
 }
 
+export const getMiscTestProtoStore = (options?: TelescopeOptions) => {
+  const store = new ProtoStore([__dirname + '/../../../__fixtures__/misc/proto'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
+  return store;
+}
+
 
 export const prepareContext = (store: ProtoStore, protoFile: string) => {
     const ref = store.findProto(protoFile);
@@ -69,8 +74,8 @@ export const prepareContext = (store: ProtoStore, protoFile: string) => {
     };
 };
 
-export const getGenericParseContext = () => {
-    const context = new GenericParseContext(null, null, defaultTelescopeOptions);
+export const getGenericParseContext = (options?: TelescopeOptions) => {
+    const context = new GenericParseContext(null, null, options ?? defaultTelescopeOptions);
     return context;
 };
 

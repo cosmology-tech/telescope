@@ -15,6 +15,10 @@ export interface Config {
   /** modules are the module configurations for the app. */
   modules: ModuleConfig[];
 }
+export interface ConfigProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.Config";
+  value: Uint8Array;
+}
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -46,12 +50,16 @@ export interface ModuleConfig {
    * config is the config object for the module. Module config messages should
    * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
    */
-  config: Any;
+  config?: Any;
+}
+export interface ModuleConfigProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.ModuleConfig";
+  value: Uint8Array;
 }
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfigSDKType {
   name: string;
-  config: AnySDKType;
+  config?: AnySDKType;
 }
 function createBaseConfig(): Config {
   return {
@@ -122,9 +130,9 @@ export const Config = {
     return obj;
   },
   fromAmino(object: ConfigAmino): Config {
-    return {
-      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromAmino(e)) : []
-    };
+    const message = createBaseConfig();
+    message.modules = object.modules?.map(e => ModuleConfig.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Config): ConfigAmino {
     const obj: any = {};
@@ -160,13 +168,13 @@ export const Config = {
 function createBaseModuleConfig(): ModuleConfig {
   return {
     name: "",
-    config: Any.fromPartial({})
+    config: undefined
   };
 }
 export const ModuleConfig = {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
   encode(message: ModuleConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.config !== undefined) {
@@ -233,10 +241,14 @@ export const ModuleConfig = {
     return obj;
   },
   fromAmino(object: ModuleConfigAmino): ModuleConfig {
-    return {
-      name: object.name,
-      config: object?.config ? Any.fromAmino(object.config) : undefined
-    };
+    const message = createBaseModuleConfig();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Any.fromAmino(object.config);
+    }
+    return message;
   },
   toAmino(message: ModuleConfig): ModuleConfigAmino {
     const obj: any = {};

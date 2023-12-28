@@ -19,11 +19,7 @@ export interface ParamsAmino {
    * distr_epoch_identifier is what epoch type distribution will be triggered by
    * (day, week, etc.)
    */
-  distr_epoch_identifier: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/incentives/params";
-  value: ParamsAmino;
+  distr_epoch_identifier?: string;
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
@@ -43,7 +39,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -86,26 +82,19 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
+    const message = createBaseParams();
+    if (object.distr_epoch_identifier !== undefined && object.distr_epoch_identifier !== null) {
+      message.distrEpochIdentifier = object.distr_epoch_identifier;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.distr_epoch_identifier = omitDefault(message.distrEpochIdentifier);
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/incentives/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

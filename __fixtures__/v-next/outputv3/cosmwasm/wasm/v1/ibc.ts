@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
 export interface MsgIBCSend {
@@ -28,26 +28,22 @@ export interface MsgIBCSendProtoMsg {
 /** MsgIBCSend */
 export interface MsgIBCSendAmino {
   /** the channel by which the packet will be sent */
-  channel: string;
+  channel?: string;
   /**
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
    */
-  timeout_height: string;
+  timeout_height?: string;
   /**
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-  timeout_timestamp: string;
+  timeout_timestamp?: string;
   /**
    * Data is the payload to transfer. We must not make assumption what format or
    * content is in here.
    */
-  data: Uint8Array;
-}
-export interface MsgIBCSendAminoMsg {
-  type: "wasm/MsgIBCSend";
-  value: MsgIBCSendAmino;
+  data?: string;
 }
 /** MsgIBCSend */
 export interface MsgIBCSendSDKType {
@@ -66,11 +62,7 @@ export interface MsgIBCCloseChannelProtoMsg {
 }
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelAmino {
-  channel: string;
-}
-export interface MsgIBCCloseChannelAminoMsg {
-  type: "wasm/MsgIBCCloseChannel";
-  value: MsgIBCCloseChannelAmino;
+  channel?: string;
 }
 /** MsgIBCCloseChannel port and channel need to be owned by the contract */
 export interface MsgIBCCloseChannelSDKType {
@@ -102,7 +94,7 @@ export const MsgIBCSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgIBCSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgIBCSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgIBCSend();
@@ -173,32 +165,31 @@ export const MsgIBCSend = {
     return obj;
   },
   fromAmino(object: MsgIBCSendAmino): MsgIBCSend {
-    return {
-      channel: object.channel,
-      timeoutHeight: BigInt(object.timeout_height),
-      timeoutTimestamp: BigInt(object.timeout_timestamp),
-      data: object.data
-    };
+    const message = createBaseMsgIBCSend();
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = object.channel;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = BigInt(object.timeout_height);
+    }
+    if (object.timeout_timestamp !== undefined && object.timeout_timestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeout_timestamp);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
-  toAmino(message: MsgIBCSend): MsgIBCSendAmino {
+  toAmino(message: MsgIBCSend, useInterfaces: boolean = true): MsgIBCSendAmino {
     const obj: any = {};
-    obj.channel = omitDefault(message.channel);
-    obj.timeout_height = omitDefault(message.timeoutHeight);
-    obj.timeout_timestamp = omitDefault(message.timeoutTimestamp);
-    obj.data = message.data;
+    obj.channel = message.channel;
+    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgIBCSendAminoMsg): MsgIBCSend {
-    return MsgIBCSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgIBCSend): MsgIBCSendAminoMsg {
-    return {
-      type: "wasm/MsgIBCSend",
-      value: MsgIBCSend.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgIBCSendProtoMsg): MsgIBCSend {
-    return MsgIBCSend.decode(message.value);
+  fromProtoMsg(message: MsgIBCSendProtoMsg, useInterfaces: boolean = true): MsgIBCSend {
+    return MsgIBCSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgIBCSend): Uint8Array {
     return MsgIBCSend.encode(message).finish();
@@ -224,7 +215,7 @@ export const MsgIBCCloseChannel = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgIBCCloseChannel {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgIBCCloseChannel {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgIBCCloseChannel();
@@ -267,26 +258,19 @@ export const MsgIBCCloseChannel = {
     return obj;
   },
   fromAmino(object: MsgIBCCloseChannelAmino): MsgIBCCloseChannel {
-    return {
-      channel: object.channel
-    };
+    const message = createBaseMsgIBCCloseChannel();
+    if (object.channel !== undefined && object.channel !== null) {
+      message.channel = object.channel;
+    }
+    return message;
   },
-  toAmino(message: MsgIBCCloseChannel): MsgIBCCloseChannelAmino {
+  toAmino(message: MsgIBCCloseChannel, useInterfaces: boolean = true): MsgIBCCloseChannelAmino {
     const obj: any = {};
-    obj.channel = omitDefault(message.channel);
+    obj.channel = message.channel;
     return obj;
   },
-  fromAminoMsg(object: MsgIBCCloseChannelAminoMsg): MsgIBCCloseChannel {
-    return MsgIBCCloseChannel.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgIBCCloseChannel): MsgIBCCloseChannelAminoMsg {
-    return {
-      type: "wasm/MsgIBCCloseChannel",
-      value: MsgIBCCloseChannel.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg): MsgIBCCloseChannel {
-    return MsgIBCCloseChannel.decode(message.value);
+  fromProtoMsg(message: MsgIBCCloseChannelProtoMsg, useInterfaces: boolean = true): MsgIBCCloseChannel {
+    return MsgIBCCloseChannel.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgIBCCloseChannel): Uint8Array {
     return MsgIBCCloseChannel.encode(message).finish();

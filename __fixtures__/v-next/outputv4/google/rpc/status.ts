@@ -26,6 +26,10 @@ export interface Status {
    */
   details: Any[];
 }
+export interface StatusProtoMsg {
+  typeUrl: "/google.rpc.Status";
+  value: Uint8Array;
+}
 /**
  * The `Status` type defines a logical error model that is suitable for
  * different programming environments, including REST APIs and RPC APIs. It is
@@ -50,10 +54,10 @@ function createBaseStatus(): Status {
 export const Status = {
   typeUrl: "/google.rpc.Status",
   encode(message: Status, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     for (const v of message.details) {
@@ -135,11 +139,15 @@ export const Status = {
     return obj;
   },
   fromAmino(object: StatusAmino): Status {
-    return {
-      code: object.code,
-      message: object.message,
-      details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseStatus();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    message.details = object.details?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Status): StatusAmino {
     const obj: any = {};

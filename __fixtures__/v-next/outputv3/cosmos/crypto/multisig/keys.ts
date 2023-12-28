@@ -21,12 +21,8 @@ export interface LegacyAminoPubKeyProtoMsg {
  * it uses legacy amino address rules.
  */
 export interface LegacyAminoPubKeyAmino {
-  threshold: number;
-  public_keys: AnyAmino[];
-}
-export interface LegacyAminoPubKeyAminoMsg {
-  type: "cosmos-sdk/LegacyAminoPubKey";
-  value: LegacyAminoPubKeyAmino;
+  threshold?: number;
+  public_keys?: AnyAmino[];
 }
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -55,7 +51,7 @@ export const LegacyAminoPubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LegacyAminoPubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LegacyAminoPubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLegacyAminoPubKey();
@@ -66,7 +62,7 @@ export const LegacyAminoPubKey = {
           message.threshold = reader.uint32();
           break;
         case 2:
-          message.publicKeys.push(Any.decode(reader, reader.uint32()));
+          message.publicKeys.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -114,32 +110,25 @@ export const LegacyAminoPubKey = {
     return obj;
   },
   fromAmino(object: LegacyAminoPubKeyAmino): LegacyAminoPubKey {
-    return {
-      threshold: object.threshold,
-      publicKeys: Array.isArray(object?.public_keys) ? object.public_keys.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseLegacyAminoPubKey();
+    if (object.threshold !== undefined && object.threshold !== null) {
+      message.threshold = object.threshold;
+    }
+    message.publicKeys = object.public_keys?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
+  toAmino(message: LegacyAminoPubKey, useInterfaces: boolean = true): LegacyAminoPubKeyAmino {
     const obj: any = {};
     obj.threshold = omitDefault(message.threshold);
     if (message.publicKeys) {
-      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
+      obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.public_keys = [];
     }
     return obj;
   },
-  fromAminoMsg(object: LegacyAminoPubKeyAminoMsg): LegacyAminoPubKey {
-    return LegacyAminoPubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: LegacyAminoPubKey): LegacyAminoPubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/LegacyAminoPubKey",
-      value: LegacyAminoPubKey.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg): LegacyAminoPubKey {
-    return LegacyAminoPubKey.decode(message.value);
+  fromProtoMsg(message: LegacyAminoPubKeyProtoMsg, useInterfaces: boolean = true): LegacyAminoPubKey {
+    return LegacyAminoPubKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LegacyAminoPubKey): Uint8Array {
     return LegacyAminoPubKey.encode(message).finish();

@@ -56,6 +56,10 @@ export interface InterfaceDescriptor {
    */
   description: string;
 }
+export interface InterfaceDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.InterfaceDescriptor";
+  value: Uint8Array;
+}
 /**
  * InterfaceDescriptor describes an interface type to be used with
  * accepts_interface and implements_interface and declared by declare_interface.
@@ -95,6 +99,10 @@ export interface ScalarDescriptor {
    */
   fieldType: ScalarType[];
 }
+export interface ScalarDescriptorProtoMsg {
+  typeUrl: "/cosmos_proto.ScalarDescriptor";
+  value: Uint8Array;
+}
 /**
  * ScalarDescriptor describes an scalar type to be used with
  * the scalar field option and declared by declare_scalar.
@@ -118,10 +126,10 @@ function createBaseInterfaceDescriptor(): InterfaceDescriptor {
 export const InterfaceDescriptor = {
   typeUrl: "/cosmos_proto.InterfaceDescriptor",
   encode(message: InterfaceDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -183,10 +191,14 @@ export const InterfaceDescriptor = {
     return obj;
   },
   fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
-    return {
-      name: object.name,
-      description: object.description
-    };
+    const message = createBaseInterfaceDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
@@ -220,10 +232,10 @@ function createBaseScalarDescriptor(): ScalarDescriptor {
 export const ScalarDescriptor = {
   typeUrl: "/cosmos_proto.ScalarDescriptor",
   encode(message: ScalarDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     writer.uint32(26).fork();
@@ -314,11 +326,15 @@ export const ScalarDescriptor = {
     return obj;
   },
   fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
-    return {
-      name: object.name,
-      description: object.description,
-      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
+    const message = createBaseScalarDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.fieldType = object.field_type?.map(e => scalarTypeFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
     const obj: any = {};

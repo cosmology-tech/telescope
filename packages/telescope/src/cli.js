@@ -1,8 +1,14 @@
 import { prompt } from './prompt';
 import { Commands as commands } from './cmds';
 import { Contracts as contracts } from './cmds';
+import * as pkg from '../package.json';
 
 export const cli = async (argv) => {
+  if (argv.v || argv.version) {
+    console.log(pkg.version);
+    return;
+  }
+
   if (argv.contract) {
     const { cmd } = await prompt(
       [
@@ -24,6 +30,7 @@ export const cli = async (argv) => {
     return;
   }
 
+  console.log(`Telescope ${pkg.version}`);
   const { cmd } = await prompt(
     [
       {

@@ -87,11 +87,7 @@ export interface SystemParametersAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: SystemParameterRuleAmino[];
-}
-export interface SystemParametersAminoMsg {
-  type: "/google.api.SystemParameters";
-  value: SystemParametersAmino;
+  rules?: SystemParameterRuleAmino[];
 }
 /**
  * ### System parameter configuration
@@ -140,7 +136,7 @@ export interface SystemParameterRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * Define parameters. Multiple names may be defined for a parameter.
    * For a given method call, only one of them should be used. If multiple
@@ -148,11 +144,7 @@ export interface SystemParameterRuleAmino {
    * If none of the specified names are present the behavior is
    * parameter-dependent.
    */
-  parameters: SystemParameterAmino[];
-}
-export interface SystemParameterRuleAminoMsg {
-  type: "/google.api.SystemParameterRule";
-  value: SystemParameterRuleAmino;
+  parameters?: SystemParameterAmino[];
 }
 /**
  * Define a system parameter rule mapping system parameter definitions to
@@ -192,21 +184,17 @@ export interface SystemParameterProtoMsg {
  */
 export interface SystemParameterAmino {
   /** Define the name of the parameter, such as "api_key" . It is case sensitive. */
-  name: string;
+  name?: string;
   /**
    * Define the HTTP header name to use for the parameter. It is case
    * insensitive.
    */
-  http_header: string;
+  http_header?: string;
   /**
    * Define the URL query parameter name to use for the parameter. It is case
    * sensitive.
    */
-  url_query_parameter: string;
-}
-export interface SystemParameterAminoMsg {
-  type: "/google.api.SystemParameter";
-  value: SystemParameterAmino;
+  url_query_parameter?: string;
 }
 /**
  * Define a parameter's name and location. The parameter may be passed as either
@@ -231,7 +219,7 @@ export const SystemParameters = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameters {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameters {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameters();
@@ -239,7 +227,7 @@ export const SystemParameters = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(SystemParameterRule.decode(reader, reader.uint32()));
+          message.rules.push(SystemParameterRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -282,24 +270,21 @@ export const SystemParameters = {
     return obj;
   },
   fromAmino(object: SystemParametersAmino): SystemParameters {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameters();
+    message.rules = object.rules?.map(e => SystemParameterRule.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: SystemParameters): SystemParametersAmino {
+  toAmino(message: SystemParameters, useInterfaces: boolean = true): SystemParametersAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromAminoMsg(object: SystemParametersAminoMsg): SystemParameters {
-    return SystemParameters.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SystemParametersProtoMsg): SystemParameters {
-    return SystemParameters.decode(message.value);
+  fromProtoMsg(message: SystemParametersProtoMsg, useInterfaces: boolean = true): SystemParameters {
+    return SystemParameters.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameters): Uint8Array {
     return SystemParameters.encode(message).finish();
@@ -328,7 +313,7 @@ export const SystemParameterRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameterRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameterRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameterRule();
@@ -339,7 +324,7 @@ export const SystemParameterRule = {
           message.selector = reader.string();
           break;
         case 2:
-          message.parameters.push(SystemParameter.decode(reader, reader.uint32()));
+          message.parameters.push(SystemParameter.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -387,26 +372,25 @@ export const SystemParameterRule = {
     return obj;
   },
   fromAmino(object: SystemParameterRuleAmino): SystemParameterRule {
-    return {
-      selector: object.selector,
-      parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromAmino(e)) : []
-    };
+    const message = createBaseSystemParameterRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.parameters = object.parameters?.map(e => SystemParameter.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: SystemParameterRule): SystemParameterRuleAmino {
+  toAmino(message: SystemParameterRule, useInterfaces: boolean = true): SystemParameterRuleAmino {
     const obj: any = {};
     obj.selector = omitDefault(message.selector);
     if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e) : undefined);
+      obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.parameters = [];
     }
     return obj;
   },
-  fromAminoMsg(object: SystemParameterRuleAminoMsg): SystemParameterRule {
-    return SystemParameterRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SystemParameterRuleProtoMsg): SystemParameterRule {
-    return SystemParameterRule.decode(message.value);
+  fromProtoMsg(message: SystemParameterRuleProtoMsg, useInterfaces: boolean = true): SystemParameterRule {
+    return SystemParameterRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameterRule): Uint8Array {
     return SystemParameterRule.encode(message).finish();
@@ -439,7 +423,7 @@ export const SystemParameter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SystemParameter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SystemParameter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSystemParameter();
@@ -498,24 +482,27 @@ export const SystemParameter = {
     return obj;
   },
   fromAmino(object: SystemParameterAmino): SystemParameter {
-    return {
-      name: object.name,
-      httpHeader: object.http_header,
-      urlQueryParameter: object.url_query_parameter
-    };
+    const message = createBaseSystemParameter();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.http_header !== undefined && object.http_header !== null) {
+      message.httpHeader = object.http_header;
+    }
+    if (object.url_query_parameter !== undefined && object.url_query_parameter !== null) {
+      message.urlQueryParameter = object.url_query_parameter;
+    }
+    return message;
   },
-  toAmino(message: SystemParameter): SystemParameterAmino {
+  toAmino(message: SystemParameter, useInterfaces: boolean = true): SystemParameterAmino {
     const obj: any = {};
     obj.name = omitDefault(message.name);
     obj.http_header = omitDefault(message.httpHeader);
     obj.url_query_parameter = omitDefault(message.urlQueryParameter);
     return obj;
   },
-  fromAminoMsg(object: SystemParameterAminoMsg): SystemParameter {
-    return SystemParameter.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SystemParameterProtoMsg): SystemParameter {
-    return SystemParameter.decode(message.value);
+  fromProtoMsg(message: SystemParameterProtoMsg, useInterfaces: boolean = true): SystemParameter {
+    return SystemParameter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SystemParameter): Uint8Array {
     return SystemParameter.encode(message).finish();

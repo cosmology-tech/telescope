@@ -10,7 +10,7 @@ export const protobufPackage = "evmos.erc20.v1";
  */
 export interface QueryTokenPairsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryTokenPairsRequestProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsRequest";
@@ -33,7 +33,7 @@ export interface QueryTokenPairsRequestAminoMsg {
  * method.
  */
 export interface QueryTokenPairsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryTokenPairsResponse is the response type for the Query/TokenPairs RPC
@@ -42,7 +42,7 @@ export interface QueryTokenPairsRequestSDKType {
 export interface QueryTokenPairsResponse {
   tokenPairs: TokenPair[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryTokenPairsResponseProtoMsg {
   typeUrl: "/evmos.erc20.v1.QueryTokenPairsResponse";
@@ -53,7 +53,7 @@ export interface QueryTokenPairsResponseProtoMsg {
  * method.
  */
 export interface QueryTokenPairsResponseAmino {
-  token_pairs: TokenPairAmino[];
+  token_pairs?: TokenPairAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -67,7 +67,7 @@ export interface QueryTokenPairsResponseAminoMsg {
  */
 export interface QueryTokenPairsResponseSDKType {
   token_pairs: TokenPairSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryTokenPairRequest is the request type for the Query/TokenPair RPC method. */
 export interface QueryTokenPairRequest {
@@ -87,7 +87,7 @@ export interface QueryTokenPairRequestAmino {
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token: string;
+  token?: string;
 }
 export interface QueryTokenPairRequestAminoMsg {
   type: "/evmos.erc20.v1.QueryTokenPairRequest";
@@ -171,7 +171,7 @@ export interface QueryParamsResponseSDKType {
 }
 function createBaseQueryTokenPairsRequest(): QueryTokenPairsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTokenPairsRequest = {
@@ -227,9 +227,11 @@ export const QueryTokenPairsRequest = {
     return obj;
   },
   fromAmino(object: QueryTokenPairsRequestAmino): QueryTokenPairsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTokenPairsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairsRequest): QueryTokenPairsRequestAmino {
     const obj: any = {};
@@ -255,7 +257,7 @@ export const QueryTokenPairsRequest = {
 function createBaseQueryTokenPairsResponse(): QueryTokenPairsResponse {
   return {
     tokenPairs: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryTokenPairsResponse = {
@@ -330,10 +332,12 @@ export const QueryTokenPairsResponse = {
     return obj;
   },
   fromAmino(object: QueryTokenPairsResponseAmino): QueryTokenPairsResponse {
-    return {
-      tokenPairs: Array.isArray(object?.token_pairs) ? object.token_pairs.map((e: any) => TokenPair.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryTokenPairsResponse();
+    message.tokenPairs = object.token_pairs?.map(e => TokenPair.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairsResponse): QueryTokenPairsResponseAmino {
     const obj: any = {};
@@ -417,9 +421,11 @@ export const QueryTokenPairRequest = {
     return obj;
   },
   fromAmino(object: QueryTokenPairRequestAmino): QueryTokenPairRequest {
-    return {
-      token: object.token
-    };
+    const message = createBaseQueryTokenPairRequest();
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {
     const obj: any = {};
@@ -500,9 +506,11 @@ export const QueryTokenPairResponse = {
     return obj;
   },
   fromAmino(object: QueryTokenPairResponseAmino): QueryTokenPairResponse {
-    return {
-      tokenPair: object?.token_pair ? TokenPair.fromAmino(object.token_pair) : undefined
-    };
+    const message = createBaseQueryTokenPairResponse();
+    if (object.token_pair !== undefined && object.token_pair !== null) {
+      message.tokenPair = TokenPair.fromAmino(object.token_pair);
+    }
+    return message;
   },
   toAmino(message: QueryTokenPairResponse): QueryTokenPairResponseAmino {
     const obj: any = {};
@@ -567,7 +575,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -647,9 +656,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};

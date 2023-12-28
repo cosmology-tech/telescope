@@ -4,10 +4,18 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** =============================== Params */
 export interface ParamsRequest {}
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;
@@ -56,7 +64,8 @@ export const ParamsRequest = {
     return obj;
   },
   fromAmino(_: ParamsRequestAmino): ParamsRequest {
-    return {};
+    const message = createBaseParamsRequest();
+    return message;
   },
   toAmino(_: ParamsRequest): ParamsRequestAmino {
     const obj: any = {};
@@ -145,9 +154,11 @@ export const ParamsResponse = {
     return obj;
   },
   fromAmino(object: ParamsResponseAmino): ParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: ParamsResponse): ParamsResponseAmino {
     const obj: any = {};

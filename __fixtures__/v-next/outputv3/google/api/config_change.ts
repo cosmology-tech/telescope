@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -125,28 +125,24 @@ export interface ConfigChangeAmino {
    * - quota.metric_rules[selector=="google"].metric_costs[key=="reads"].value
    * - logging.producer_destinations[0]
    */
-  element: string;
+  element?: string;
   /**
    * Value of the changed object in the old Service configuration,
    * in JSON format. This field will not be populated if ChangeType == ADDED.
    */
-  old_value: string;
+  old_value?: string;
   /**
    * Value of the changed object in the new Service configuration,
    * in JSON format. This field will not be populated if ChangeType == REMOVED.
    */
-  new_value: string;
+  new_value?: string;
   /** The type for this change, either ADDED, REMOVED, or MODIFIED. */
-  change_type: ChangeType;
+  change_type?: ChangeType;
   /**
    * Collection of advice provided for this change, useful for determining the
    * possible impact of this change.
    */
-  advices: AdviceAmino[];
-}
-export interface ConfigChangeAminoMsg {
-  type: "/google.api.ConfigChange";
-  value: ConfigChangeAmino;
+  advices?: AdviceAmino[];
 }
 /**
  * Output generated from semantically comparing two versions of a service
@@ -187,11 +183,7 @@ export interface AdviceAmino {
    * Useful description for why this advice was applied and what actions should
    * be taken to mitigate any implied risks.
    */
-  description: string;
-}
-export interface AdviceAminoMsg {
-  type: "/google.api.Advice";
-  value: AdviceAmino;
+  description?: string;
 }
 /**
  * Generated advice about this change, used for providing more
@@ -229,7 +221,7 @@ export const ConfigChange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ConfigChange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ConfigChange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConfigChange();
@@ -249,7 +241,7 @@ export const ConfigChange = {
           message.changeType = (reader.int32() as any);
           break;
         case 5:
-          message.advices.push(Advice.decode(reader, reader.uint32()));
+          message.advices.push(Advice.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -312,32 +304,37 @@ export const ConfigChange = {
     return obj;
   },
   fromAmino(object: ConfigChangeAmino): ConfigChange {
-    return {
-      element: object.element,
-      oldValue: object.old_value,
-      newValue: object.new_value,
-      changeType: isSet(object.change_type) ? changeTypeFromJSON(object.change_type) : -1,
-      advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromAmino(e)) : []
-    };
+    const message = createBaseConfigChange();
+    if (object.element !== undefined && object.element !== null) {
+      message.element = object.element;
+    }
+    if (object.old_value !== undefined && object.old_value !== null) {
+      message.oldValue = object.old_value;
+    }
+    if (object.new_value !== undefined && object.new_value !== null) {
+      message.newValue = object.new_value;
+    }
+    if (object.change_type !== undefined && object.change_type !== null) {
+      message.changeType = changeTypeFromJSON(object.change_type);
+    }
+    message.advices = object.advices?.map(e => Advice.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ConfigChange): ConfigChangeAmino {
+  toAmino(message: ConfigChange, useInterfaces: boolean = true): ConfigChangeAmino {
     const obj: any = {};
-    obj.element = omitDefault(message.element);
-    obj.old_value = omitDefault(message.oldValue);
-    obj.new_value = omitDefault(message.newValue);
-    obj.change_type = omitDefault(message.changeType);
+    obj.element = message.element;
+    obj.old_value = message.oldValue;
+    obj.new_value = message.newValue;
+    obj.change_type = changeTypeToJSON(message.changeType);
     if (message.advices) {
-      obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
+      obj.advices = message.advices.map(e => e ? Advice.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.advices = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ConfigChangeAminoMsg): ConfigChange {
-    return ConfigChange.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConfigChangeProtoMsg): ConfigChange {
-    return ConfigChange.decode(message.value);
+  fromProtoMsg(message: ConfigChangeProtoMsg, useInterfaces: boolean = true): ConfigChange {
+    return ConfigChange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ConfigChange): Uint8Array {
     return ConfigChange.encode(message).finish();
@@ -362,7 +359,7 @@ export const Advice = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Advice {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Advice {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdvice();
@@ -405,20 +402,19 @@ export const Advice = {
     return obj;
   },
   fromAmino(object: AdviceAmino): Advice {
-    return {
-      description: object.description
-    };
+    const message = createBaseAdvice();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: Advice): AdviceAmino {
+  toAmino(message: Advice, useInterfaces: boolean = true): AdviceAmino {
     const obj: any = {};
-    obj.description = omitDefault(message.description);
+    obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: AdviceAminoMsg): Advice {
-    return Advice.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AdviceProtoMsg): Advice {
-    return Advice.decode(message.value);
+  fromProtoMsg(message: AdviceProtoMsg, useInterfaces: boolean = true): Advice {
+    return Advice.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Advice): Uint8Array {
     return Advice.encode(message).finish();

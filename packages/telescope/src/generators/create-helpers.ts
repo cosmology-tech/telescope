@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, internal, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary } from '../helpers';
+import { external, externalComet, internal, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary, types, registryHelper } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -29,10 +29,10 @@ export const plugin = (
   write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? internalForBigInt : internal);
 
   // should be exported
-  if (builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
+  if (builder.options.stargateClients.addGetTxRpc || builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
     // also react-query needs these...
     builder.files.push('extern.ts');
-    write(builder, 'extern.ts', external);
+    write(builder, 'extern.ts', builder.options.rpcClients?.useConnectComet ? externalComet : external);
   }
 
   if (builder.options.reactQuery?.enabled) {
@@ -71,4 +71,13 @@ export const plugin = (
     write(builder, "binary.ts", binary);
   }
 
+  if (builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType || builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+    builder.files.push('types.ts');
+    write(builder, 'types.ts', types);
+  }
+
+  if (builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+    builder.files.push('registry.ts');
+    write(builder, 'registry.ts', registryHelper);
+  }
 };

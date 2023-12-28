@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.base.tendermint.v1beta1";
 export interface GetValidatorSetByHeightRequest {
   height: bigint;
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GetValidatorSetByHeightRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightRequest";
@@ -18,7 +18,7 @@ export interface GetValidatorSetByHeightRequestProtoMsg {
 }
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequestAmino {
-  height: string;
+  height?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
 }
@@ -29,14 +29,14 @@ export interface GetValidatorSetByHeightRequestAminoMsg {
 /** GetValidatorSetByHeightRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightRequestSDKType {
   height: bigint;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponse {
   blockHeight: bigint;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface GetValidatorSetByHeightResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetValidatorSetByHeightResponse";
@@ -44,8 +44,8 @@ export interface GetValidatorSetByHeightResponseProtoMsg {
 }
 /** GetValidatorSetByHeightResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetValidatorSetByHeightResponseAmino {
-  block_height: string;
-  validators: ValidatorAmino[];
+  block_height?: string;
+  validators?: ValidatorAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -57,12 +57,12 @@ export interface GetValidatorSetByHeightResponseAminoMsg {
 export interface GetValidatorSetByHeightResponseSDKType {
   block_height: bigint;
   validators: ValidatorSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequest {
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface GetLatestValidatorSetRequestProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetRequest";
@@ -79,14 +79,14 @@ export interface GetLatestValidatorSetRequestAminoMsg {
 }
 /** GetLatestValidatorSetRequest is the request type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponse {
   blockHeight: bigint;
   validators: Validator[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface GetLatestValidatorSetResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestValidatorSetResponse";
@@ -94,8 +94,8 @@ export interface GetLatestValidatorSetResponseProtoMsg {
 }
 /** GetLatestValidatorSetResponse is the response type for the Query/GetValidatorSetByHeight RPC method. */
 export interface GetLatestValidatorSetResponseAmino {
-  block_height: string;
-  validators: ValidatorAmino[];
+  block_height?: string;
+  validators?: ValidatorAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
 }
@@ -107,12 +107,12 @@ export interface GetLatestValidatorSetResponseAminoMsg {
 export interface GetLatestValidatorSetResponseSDKType {
   block_height: bigint;
   validators: ValidatorSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** Validator is the type for the validator-set. */
 export interface Validator {
   address: string;
-  pubKey: Any;
+  pubKey?: Any;
   votingPower: bigint;
   proposerPriority: bigint;
 }
@@ -122,10 +122,10 @@ export interface ValidatorProtoMsg {
 }
 /** Validator is the type for the validator-set. */
 export interface ValidatorAmino {
-  address: string;
+  address?: string;
   pub_key?: AnyAmino;
-  voting_power: string;
-  proposer_priority: string;
+  voting_power?: string;
+  proposer_priority?: string;
 }
 export interface ValidatorAminoMsg {
   type: "cosmos-sdk/Validator";
@@ -134,7 +134,7 @@ export interface ValidatorAminoMsg {
 /** Validator is the type for the validator-set. */
 export interface ValidatorSDKType {
   address: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   voting_power: bigint;
   proposer_priority: bigint;
 }
@@ -148,7 +148,7 @@ export interface GetBlockByHeightRequestProtoMsg {
 }
 /** GetBlockByHeightRequest is the request type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightRequestAmino {
-  height: string;
+  height?: string;
 }
 export interface GetBlockByHeightRequestAminoMsg {
   type: "cosmos-sdk/GetBlockByHeightRequest";
@@ -160,8 +160,8 @@ export interface GetBlockByHeightRequestSDKType {
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponse {
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
 }
 export interface GetBlockByHeightResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetBlockByHeightResponse";
@@ -178,8 +178,8 @@ export interface GetBlockByHeightResponseAminoMsg {
 }
 /** GetBlockByHeightResponse is the response type for the Query/GetBlockByHeight RPC method. */
 export interface GetBlockByHeightResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
 }
 /** GetLatestBlockRequest is the request type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockRequest {}
@@ -197,8 +197,8 @@ export interface GetLatestBlockRequestAminoMsg {
 export interface GetLatestBlockRequestSDKType {}
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponse {
-  blockId: BlockID;
-  block: Block;
+  blockId?: BlockID;
+  block?: Block;
 }
 export interface GetLatestBlockResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetLatestBlockResponse";
@@ -215,8 +215,8 @@ export interface GetLatestBlockResponseAminoMsg {
 }
 /** GetLatestBlockResponse is the response type for the Query/GetLatestBlock RPC method. */
 export interface GetLatestBlockResponseSDKType {
-  block_id: BlockIDSDKType;
-  block: BlockSDKType;
+  block_id?: BlockIDSDKType;
+  block?: BlockSDKType;
 }
 /** GetSyncingRequest is the request type for the Query/GetSyncing RPC method. */
 export interface GetSyncingRequest {}
@@ -242,7 +242,7 @@ export interface GetSyncingResponseProtoMsg {
 }
 /** GetSyncingResponse is the response type for the Query/GetSyncing RPC method. */
 export interface GetSyncingResponseAmino {
-  syncing: boolean;
+  syncing?: boolean;
 }
 export interface GetSyncingResponseAminoMsg {
   type: "cosmos-sdk/GetSyncingResponse";
@@ -268,8 +268,8 @@ export interface GetNodeInfoRequestAminoMsg {
 export interface GetNodeInfoRequestSDKType {}
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponse {
-  nodeInfo: NodeInfo;
-  applicationVersion: VersionInfo;
+  nodeInfo?: NodeInfo;
+  applicationVersion?: VersionInfo;
 }
 export interface GetNodeInfoResponseProtoMsg {
   typeUrl: "/cosmos.base.tendermint.v1beta1.GetNodeInfoResponse";
@@ -286,8 +286,8 @@ export interface GetNodeInfoResponseAminoMsg {
 }
 /** GetNodeInfoResponse is the response type for the Query/GetNodeInfo RPC method. */
 export interface GetNodeInfoResponseSDKType {
-  node_info: NodeInfoSDKType;
-  application_version: VersionInfoSDKType;
+  node_info?: NodeInfoSDKType;
+  application_version?: VersionInfoSDKType;
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfo {
@@ -307,15 +307,15 @@ export interface VersionInfoProtoMsg {
 }
 /** VersionInfo is the type for the GetNodeInfoResponse message. */
 export interface VersionInfoAmino {
-  name: string;
-  app_name: string;
-  version: string;
-  git_commit: string;
-  build_tags: string;
-  go_version: string;
-  build_deps: ModuleAmino[];
+  name?: string;
+  app_name?: string;
+  version?: string;
+  git_commit?: string;
+  build_tags?: string;
+  go_version?: string;
+  build_deps?: ModuleAmino[];
   /** Since: cosmos-sdk 0.43 */
-  cosmos_sdk_version: string;
+  cosmos_sdk_version?: string;
 }
 export interface VersionInfoAminoMsg {
   type: "cosmos-sdk/VersionInfo";
@@ -348,11 +348,11 @@ export interface ModuleProtoMsg {
 /** Module is the type for VersionInfo */
 export interface ModuleAmino {
   /** module path */
-  path: string;
+  path?: string;
   /** module version */
-  version: string;
+  version?: string;
   /** checksum */
-  sum: string;
+  sum?: string;
 }
 export interface ModuleAminoMsg {
   type: "cosmos-sdk/Module";
@@ -367,7 +367,7 @@ export interface ModuleSDKType {
 function createBaseGetValidatorSetByHeightRequest(): GetValidatorSetByHeightRequest {
   return {
     height: BigInt(0),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetValidatorSetByHeightRequest = {
@@ -437,10 +437,14 @@ export const GetValidatorSetByHeightRequest = {
     return obj;
   },
   fromAmino(object: GetValidatorSetByHeightRequestAmino): GetValidatorSetByHeightRequest {
-    return {
-      height: BigInt(object.height),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetValidatorSetByHeightRequest();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetValidatorSetByHeightRequest): GetValidatorSetByHeightRequestAmino {
     const obj: any = {};
@@ -474,7 +478,7 @@ function createBaseGetValidatorSetByHeightResponse(): GetValidatorSetByHeightRes
   return {
     blockHeight: BigInt(0),
     validators: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetValidatorSetByHeightResponse = {
@@ -563,11 +567,15 @@ export const GetValidatorSetByHeightResponse = {
     return obj;
   },
   fromAmino(object: GetValidatorSetByHeightResponseAmino): GetValidatorSetByHeightResponse {
-    return {
-      blockHeight: BigInt(object.block_height),
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetValidatorSetByHeightResponse();
+    if (object.block_height !== undefined && object.block_height !== null) {
+      message.blockHeight = BigInt(object.block_height);
+    }
+    message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetValidatorSetByHeightResponse): GetValidatorSetByHeightResponseAmino {
     const obj: any = {};
@@ -604,7 +612,7 @@ export const GetValidatorSetByHeightResponse = {
 };
 function createBaseGetLatestValidatorSetRequest(): GetLatestValidatorSetRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetLatestValidatorSetRequest = {
@@ -661,9 +669,11 @@ export const GetLatestValidatorSetRequest = {
     return obj;
   },
   fromAmino(object: GetLatestValidatorSetRequestAmino): GetLatestValidatorSetRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetLatestValidatorSetRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetLatestValidatorSetRequest): GetLatestValidatorSetRequestAmino {
     const obj: any = {};
@@ -696,7 +706,7 @@ function createBaseGetLatestValidatorSetResponse(): GetLatestValidatorSetRespons
   return {
     blockHeight: BigInt(0),
     validators: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const GetLatestValidatorSetResponse = {
@@ -785,11 +795,15 @@ export const GetLatestValidatorSetResponse = {
     return obj;
   },
   fromAmino(object: GetLatestValidatorSetResponseAmino): GetLatestValidatorSetResponse {
-    return {
-      blockHeight: BigInt(object.block_height),
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseGetLatestValidatorSetResponse();
+    if (object.block_height !== undefined && object.block_height !== null) {
+      message.blockHeight = BigInt(object.block_height);
+    }
+    message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: GetLatestValidatorSetResponse): GetLatestValidatorSetResponseAmino {
     const obj: any = {};
@@ -827,7 +841,7 @@ export const GetLatestValidatorSetResponse = {
 function createBaseValidator(): Validator {
   return {
     address: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     votingPower: BigInt(0),
     proposerPriority: BigInt(0)
   };
@@ -923,12 +937,20 @@ export const Validator = {
     return obj;
   },
   fromAmino(object: ValidatorAmino): Validator {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power),
-      proposerPriority: BigInt(object.proposer_priority)
-    };
+    const message = createBaseValidator();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.voting_power !== undefined && object.voting_power !== null) {
+      message.votingPower = BigInt(object.voting_power);
+    }
+    if (object.proposer_priority !== undefined && object.proposer_priority !== null) {
+      message.proposerPriority = BigInt(object.proposer_priority);
+    }
+    return message;
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
@@ -1019,9 +1041,11 @@ export const GetBlockByHeightRequest = {
     return obj;
   },
   fromAmino(object: GetBlockByHeightRequestAmino): GetBlockByHeightRequest {
-    return {
-      height: BigInt(object.height)
-    };
+    const message = createBaseGetBlockByHeightRequest();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    return message;
   },
   toAmino(message: GetBlockByHeightRequest): GetBlockByHeightRequestAmino {
     const obj: any = {};
@@ -1052,8 +1076,8 @@ export const GetBlockByHeightRequest = {
 };
 function createBaseGetBlockByHeightResponse(): GetBlockByHeightResponse {
   return {
-    blockId: BlockID.fromPartial({}),
-    block: Block.fromPartial({})
+    blockId: undefined,
+    block: undefined
   };
 }
 export const GetBlockByHeightResponse = {
@@ -1123,10 +1147,14 @@ export const GetBlockByHeightResponse = {
     return obj;
   },
   fromAmino(object: GetBlockByHeightResponseAmino): GetBlockByHeightResponse {
-    return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      block: object?.block ? Block.fromAmino(object.block) : undefined
-    };
+    const message = createBaseGetBlockByHeightResponse();
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromAmino(object.block);
+    }
+    return message;
   },
   toAmino(message: GetBlockByHeightResponse): GetBlockByHeightResponseAmino {
     const obj: any = {};
@@ -1199,7 +1227,8 @@ export const GetLatestBlockRequest = {
     return obj;
   },
   fromAmino(_: GetLatestBlockRequestAmino): GetLatestBlockRequest {
-    return {};
+    const message = createBaseGetLatestBlockRequest();
+    return message;
   },
   toAmino(_: GetLatestBlockRequest): GetLatestBlockRequestAmino {
     const obj: any = {};
@@ -1229,8 +1258,8 @@ export const GetLatestBlockRequest = {
 };
 function createBaseGetLatestBlockResponse(): GetLatestBlockResponse {
   return {
-    blockId: BlockID.fromPartial({}),
-    block: Block.fromPartial({})
+    blockId: undefined,
+    block: undefined
   };
 }
 export const GetLatestBlockResponse = {
@@ -1300,10 +1329,14 @@ export const GetLatestBlockResponse = {
     return obj;
   },
   fromAmino(object: GetLatestBlockResponseAmino): GetLatestBlockResponse {
-    return {
-      blockId: object?.block_id ? BlockID.fromAmino(object.block_id) : undefined,
-      block: object?.block ? Block.fromAmino(object.block) : undefined
-    };
+    const message = createBaseGetLatestBlockResponse();
+    if (object.block_id !== undefined && object.block_id !== null) {
+      message.blockId = BlockID.fromAmino(object.block_id);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = Block.fromAmino(object.block);
+    }
+    return message;
   },
   toAmino(message: GetLatestBlockResponse): GetLatestBlockResponseAmino {
     const obj: any = {};
@@ -1376,7 +1409,8 @@ export const GetSyncingRequest = {
     return obj;
   },
   fromAmino(_: GetSyncingRequestAmino): GetSyncingRequest {
-    return {};
+    const message = createBaseGetSyncingRequest();
+    return message;
   },
   toAmino(_: GetSyncingRequest): GetSyncingRequestAmino {
     const obj: any = {};
@@ -1461,9 +1495,11 @@ export const GetSyncingResponse = {
     return obj;
   },
   fromAmino(object: GetSyncingResponseAmino): GetSyncingResponse {
-    return {
-      syncing: object.syncing
-    };
+    const message = createBaseGetSyncingResponse();
+    if (object.syncing !== undefined && object.syncing !== null) {
+      message.syncing = object.syncing;
+    }
+    return message;
   },
   toAmino(message: GetSyncingResponse): GetSyncingResponseAmino {
     const obj: any = {};
@@ -1535,7 +1571,8 @@ export const GetNodeInfoRequest = {
     return obj;
   },
   fromAmino(_: GetNodeInfoRequestAmino): GetNodeInfoRequest {
-    return {};
+    const message = createBaseGetNodeInfoRequest();
+    return message;
   },
   toAmino(_: GetNodeInfoRequest): GetNodeInfoRequestAmino {
     const obj: any = {};
@@ -1565,8 +1602,8 @@ export const GetNodeInfoRequest = {
 };
 function createBaseGetNodeInfoResponse(): GetNodeInfoResponse {
   return {
-    nodeInfo: NodeInfo.fromPartial({}),
-    applicationVersion: VersionInfo.fromPartial({})
+    nodeInfo: undefined,
+    applicationVersion: undefined
   };
 }
 export const GetNodeInfoResponse = {
@@ -1636,10 +1673,14 @@ export const GetNodeInfoResponse = {
     return obj;
   },
   fromAmino(object: GetNodeInfoResponseAmino): GetNodeInfoResponse {
-    return {
-      nodeInfo: object?.node_info ? NodeInfo.fromAmino(object.node_info) : undefined,
-      applicationVersion: object?.application_version ? VersionInfo.fromAmino(object.application_version) : undefined
-    };
+    const message = createBaseGetNodeInfoResponse();
+    if (object.node_info !== undefined && object.node_info !== null) {
+      message.nodeInfo = NodeInfo.fromAmino(object.node_info);
+    }
+    if (object.application_version !== undefined && object.application_version !== null) {
+      message.applicationVersion = VersionInfo.fromAmino(object.application_version);
+    }
+    return message;
   },
   toAmino(message: GetNodeInfoResponse): GetNodeInfoResponseAmino {
     const obj: any = {};
@@ -1818,16 +1859,30 @@ export const VersionInfo = {
     return obj;
   },
   fromAmino(object: VersionInfoAmino): VersionInfo {
-    return {
-      name: object.name,
-      appName: object.app_name,
-      version: object.version,
-      gitCommit: object.git_commit,
-      buildTags: object.build_tags,
-      goVersion: object.go_version,
-      buildDeps: Array.isArray(object?.build_deps) ? object.build_deps.map((e: any) => Module.fromAmino(e)) : [],
-      cosmosSdkVersion: object.cosmos_sdk_version
-    };
+    const message = createBaseVersionInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.app_name !== undefined && object.app_name !== null) {
+      message.appName = object.app_name;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.git_commit !== undefined && object.git_commit !== null) {
+      message.gitCommit = object.git_commit;
+    }
+    if (object.build_tags !== undefined && object.build_tags !== null) {
+      message.buildTags = object.build_tags;
+    }
+    if (object.go_version !== undefined && object.go_version !== null) {
+      message.goVersion = object.go_version;
+    }
+    message.buildDeps = object.build_deps?.map(e => Module.fromAmino(e)) || [];
+    if (object.cosmos_sdk_version !== undefined && object.cosmos_sdk_version !== null) {
+      message.cosmosSdkVersion = object.cosmos_sdk_version;
+    }
+    return message;
   },
   toAmino(message: VersionInfo): VersionInfoAmino {
     const obj: any = {};
@@ -1948,11 +2003,17 @@ export const Module = {
     return obj;
   },
   fromAmino(object: ModuleAmino): Module {
-    return {
-      path: object.path,
-      version: object.version,
-      sum: object.sum
-    };
+    const message = createBaseModule();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.sum !== undefined && object.sum !== null) {
+      message.sum = object.sum;
+    }
+    return message;
   },
   toAmino(message: Module): ModuleAmino {
     const obj: any = {};

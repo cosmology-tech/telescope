@@ -16,13 +16,9 @@ export interface MinterProtoMsg {
 /** Minter represents the minting state. */
 export interface MinterAmino {
   /** current annual inflation rate */
-  inflation: string;
+  inflation?: string;
   /** current annual expected provisions */
-  annual_provisions: string;
-}
-export interface MinterAminoMsg {
-  type: "cosmos-sdk/Minter";
-  value: MinterAmino;
+  annual_provisions?: string;
 }
 /** Minter represents the minting state. */
 export interface MinterSDKType {
@@ -51,21 +47,17 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the mint module. */
 export interface ParamsAmino {
   /** type of coin to mint */
-  mint_denom: string;
+  mint_denom?: string;
   /** maximum annual change in inflation rate */
-  inflation_rate_change: string;
+  inflation_rate_change?: string;
   /** maximum inflation rate */
-  inflation_max: string;
+  inflation_max?: string;
   /** minimum inflation rate */
-  inflation_min: string;
+  inflation_min?: string;
   /** goal of percent bonded atoms */
-  goal_bonded: string;
+  goal_bonded?: string;
   /** expected blocks per year */
-  blocks_per_year: string;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
+  blocks_per_year?: string;
 }
 /** Params holds parameters for the mint module. */
 export interface ParamsSDKType {
@@ -94,7 +86,7 @@ export const Minter = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Minter {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Minter {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMinter();
@@ -145,28 +137,23 @@ export const Minter = {
     return obj;
   },
   fromAmino(object: MinterAmino): Minter {
-    return {
-      inflation: object.inflation,
-      annualProvisions: object.annual_provisions
-    };
+    const message = createBaseMinter();
+    if (object.inflation !== undefined && object.inflation !== null) {
+      message.inflation = object.inflation;
+    }
+    if (object.annual_provisions !== undefined && object.annual_provisions !== null) {
+      message.annualProvisions = object.annual_provisions;
+    }
+    return message;
   },
-  toAmino(message: Minter): MinterAmino {
+  toAmino(message: Minter, useInterfaces: boolean = true): MinterAmino {
     const obj: any = {};
     obj.inflation = padDecimal(message.inflation);
     obj.annual_provisions = padDecimal(message.annualProvisions);
     return obj;
   },
-  fromAminoMsg(object: MinterAminoMsg): Minter {
-    return Minter.fromAmino(object.value);
-  },
-  toAminoMsg(message: Minter): MinterAminoMsg {
-    return {
-      type: "cosmos-sdk/Minter",
-      value: Minter.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MinterProtoMsg): Minter {
-    return Minter.decode(message.value);
+  fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = true): Minter {
+    return Minter.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Minter): Uint8Array {
     return Minter.encode(message).finish();
@@ -212,7 +199,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -297,16 +284,28 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      inflationRateChange: object.inflation_rate_change,
-      inflationMax: object.inflation_max,
-      inflationMin: object.inflation_min,
-      goalBonded: object.goal_bonded,
-      blocksPerYear: BigInt(object.blocks_per_year)
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.inflation_rate_change !== undefined && object.inflation_rate_change !== null) {
+      message.inflationRateChange = object.inflation_rate_change;
+    }
+    if (object.inflation_max !== undefined && object.inflation_max !== null) {
+      message.inflationMax = object.inflation_max;
+    }
+    if (object.inflation_min !== undefined && object.inflation_min !== null) {
+      message.inflationMin = object.inflation_min;
+    }
+    if (object.goal_bonded !== undefined && object.goal_bonded !== null) {
+      message.goalBonded = object.goal_bonded;
+    }
+    if (object.blocks_per_year !== undefined && object.blocks_per_year !== null) {
+      message.blocksPerYear = BigInt(object.blocks_per_year);
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.mint_denom = omitDefault(message.mintDenom);
     obj.inflation_rate_change = padDecimal(message.inflationRateChange);
@@ -316,17 +315,8 @@ export const Params = {
     obj.blocks_per_year = omitDefault(message.blocksPerYear);
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -27,6 +27,10 @@ export interface MsgCreateClawbackVestingAccount {
    */
   merge: boolean;
 }
+export interface MsgCreateClawbackVestingAccountProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount";
+  value: Uint8Array;
+}
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccountSDKType {
   from_address: string;
@@ -41,6 +45,10 @@ export interface MsgCreateClawbackVestingAccountSDKType {
  * MsgCreateClawbackVestingAccount response type.
  */
 export interface MsgCreateClawbackVestingAccountResponse {}
+export interface MsgCreateClawbackVestingAccountResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccountResponse";
+  value: Uint8Array;
+}
 /**
  * MsgCreateClawbackVestingAccountResponse defines the
  * MsgCreateClawbackVestingAccount response type.
@@ -62,6 +70,10 @@ export interface MsgClawback {
    */
   destAddress: string;
 }
+export interface MsgClawbackProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawback";
+  value: Uint8Array;
+}
 /**
  * MsgClawback defines a message that removes unvested tokens from a
  * ClawbackVestingAccount.
@@ -73,6 +85,10 @@ export interface MsgClawbackSDKType {
 }
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponse {}
+export interface MsgClawbackResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.MsgClawbackResponse";
+  value: Uint8Array;
+}
 /** MsgClawbackResponse defines the MsgClawback response type. */
 export interface MsgClawbackResponseSDKType {}
 function createBaseMsgCreateClawbackVestingAccount(): MsgCreateClawbackVestingAccount {
@@ -217,20 +233,28 @@ export const MsgCreateClawbackVestingAccount = {
     return obj;
   },
   fromAmino(object: MsgCreateClawbackVestingAccountAmino): MsgCreateClawbackVestingAccount {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      lockupPeriods: Array.isArray(object?.lockup_periods) ? object.lockup_periods.map((e: any) => Period.fromAmino(e)) : [],
-      vestingPeriods: Array.isArray(object?.vesting_periods) ? object.vesting_periods.map((e: any) => Period.fromAmino(e)) : [],
-      merge: object.merge
-    };
+    const message = createBaseMsgCreateClawbackVestingAccount();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    message.lockupPeriods = object.lockup_periods?.map(e => Period.fromAmino(e)) || [];
+    message.vestingPeriods = object.vesting_periods?.map(e => Period.fromAmino(e)) || [];
+    if (object.merge !== undefined && object.merge !== null) {
+      message.merge = object.merge;
+    }
+    return message;
   },
   toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
     const obj: any = {};
-    obj.from_address = omitDefault(message.fromAddress);
-    obj.to_address = omitDefault(message.toAddress);
-    obj.start_time = message.startTime;
+    obj.from_address = message.fromAddress;
+    obj.to_address = message.toAddress;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
@@ -241,7 +265,7 @@ export const MsgCreateClawbackVestingAccount = {
     } else {
       obj.vesting_periods = [];
     }
-    obj.merge = omitDefault(message.merge);
+    obj.merge = message.merge;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
@@ -304,7 +328,8 @@ export const MsgCreateClawbackVestingAccountResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateClawbackVestingAccountResponseAmino): MsgCreateClawbackVestingAccountResponse {
-    return {};
+    const message = createBaseMsgCreateClawbackVestingAccountResponse();
+    return message;
   },
   toAmino(_: MsgCreateClawbackVestingAccountResponse): MsgCreateClawbackVestingAccountResponseAmino {
     const obj: any = {};
@@ -413,17 +438,23 @@ export const MsgClawback = {
     return obj;
   },
   fromAmino(object: MsgClawbackAmino): MsgClawback {
-    return {
-      funderAddress: object.funder_address,
-      accountAddress: object.account_address,
-      destAddress: object.dest_address
-    };
+    const message = createBaseMsgClawback();
+    if (object.funder_address !== undefined && object.funder_address !== null) {
+      message.funderAddress = object.funder_address;
+    }
+    if (object.account_address !== undefined && object.account_address !== null) {
+      message.accountAddress = object.account_address;
+    }
+    if (object.dest_address !== undefined && object.dest_address !== null) {
+      message.destAddress = object.dest_address;
+    }
+    return message;
   },
   toAmino(message: MsgClawback): MsgClawbackAmino {
     const obj: any = {};
-    obj.funder_address = omitDefault(message.funderAddress);
-    obj.account_address = omitDefault(message.accountAddress);
-    obj.dest_address = omitDefault(message.destAddress);
+    obj.funder_address = message.funderAddress;
+    obj.account_address = message.accountAddress;
+    obj.dest_address = message.destAddress;
     return obj;
   },
   fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {
@@ -486,7 +517,8 @@ export const MsgClawbackResponse = {
     return obj;
   },
   fromAmino(_: MsgClawbackResponseAmino): MsgClawbackResponse {
-    return {};
+    const message = createBaseMsgClawbackResponse();
+    return message;
   },
   toAmino(_: MsgClawbackResponse): MsgClawbackResponseAmino {
     const obj: any = {};

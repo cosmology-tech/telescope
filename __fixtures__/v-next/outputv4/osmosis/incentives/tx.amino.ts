@@ -18,19 +18,13 @@ export interface MsgCreateGaugeAminoType extends AminoMsg {
         seconds: string;
         nanos: number;
       };
-      timestamp: {
-        seconds: string;
-        nanos: number;
-      };
+      timestamp: string;
     };
     coins: {
       denom: string;
       amount: string;
     }[];
-    start_time: {
-      seconds: string;
-      nanos: number;
-    };
+    start_time: string;
     num_epochs_paid_over: string;
   };
 }

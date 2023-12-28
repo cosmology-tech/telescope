@@ -1,7 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -35,13 +35,9 @@ export interface MsgCreateDenomProtoMsg {
  * denom does not indicate the current admin.
  */
 export interface MsgCreateDenomAmino {
-  sender: string;
+  sender?: string;
   /** subdenom can be up to 44 "alphanumeric" characters long. */
-  subdenom: string;
-}
-export interface MsgCreateDenomAminoMsg {
-  type: "osmosis/tokenfactory/create-denom";
-  value: MsgCreateDenomAmino;
+  subdenom?: string;
 }
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -74,11 +70,7 @@ export interface MsgCreateDenomResponseProtoMsg {
  * It returns the full string of the newly created denom
  */
 export interface MsgCreateDenomResponseAmino {
-  new_token_denom: string;
-}
-export interface MsgCreateDenomResponseAminoMsg {
-  type: "osmosis/tokenfactory/create-denom-response";
-  value: MsgCreateDenomResponseAmino;
+  new_token_denom?: string;
 }
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
@@ -104,12 +96,8 @@ export interface MsgMintProtoMsg {
  * more of a token.  For now, we only support minting to the sender account
  */
 export interface MsgMintAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
-}
-export interface MsgMintAminoMsg {
-  type: "osmosis/tokenfactory/mint";
-  value: MsgMintAmino;
 }
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
@@ -125,10 +113,6 @@ export interface MsgMintResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgMintResponseAmino {}
-export interface MsgMintResponseAminoMsg {
-  type: "osmosis/tokenfactory/mint-response";
-  value: MsgMintResponseAmino;
-}
 export interface MsgMintResponseSDKType {}
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -147,12 +131,8 @@ export interface MsgBurnProtoMsg {
  * a token.  For now, we only support burning from the sender account.
  */
 export interface MsgBurnAmino {
-  sender: string;
+  sender?: string;
   amount?: CoinAmino;
-}
-export interface MsgBurnAminoMsg {
-  type: "osmosis/tokenfactory/burn";
-  value: MsgBurnAmino;
 }
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -168,10 +148,6 @@ export interface MsgBurnResponseProtoMsg {
   value: Uint8Array;
 }
 export interface MsgBurnResponseAmino {}
-export interface MsgBurnResponseAminoMsg {
-  type: "osmosis/tokenfactory/burn-response";
-  value: MsgBurnResponseAmino;
-}
 export interface MsgBurnResponseSDKType {}
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -191,13 +167,9 @@ export interface MsgChangeAdminProtoMsg {
  * adminship of a denom to a new account
  */
 export interface MsgChangeAdminAmino {
-  sender: string;
-  denom: string;
-  new_admin: string;
-}
-export interface MsgChangeAdminAminoMsg {
-  type: "osmosis/tokenfactory/change-admin";
-  value: MsgChangeAdminAmino;
+  sender?: string;
+  denom?: string;
+  new_admin?: string;
 }
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -222,10 +194,6 @@ export interface MsgChangeAdminResponseProtoMsg {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponseAmino {}
-export interface MsgChangeAdminResponseAminoMsg {
-  type: "osmosis/tokenfactory/change-admin-response";
-  value: MsgChangeAdminResponseAmino;
-}
 /**
  * MsgChangeAdminResponse defines the response structure for an executed
  * MsgChangeAdmin message.
@@ -248,12 +216,8 @@ export interface MsgSetDenomMetadataProtoMsg {
  * the denom's bank metadata
  */
 export interface MsgSetDenomMetadataAmino {
-  sender: string;
+  sender?: string;
   metadata?: MetadataAmino;
-}
-export interface MsgSetDenomMetadataAminoMsg {
-  type: "osmosis/tokenfactory/set-denom-metadata";
-  value: MsgSetDenomMetadataAmino;
 }
 /**
  * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
@@ -277,10 +241,6 @@ export interface MsgSetDenomMetadataResponseProtoMsg {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponseAmino {}
-export interface MsgSetDenomMetadataResponseAminoMsg {
-  type: "osmosis/tokenfactory/set-denom-metadata-response";
-  value: MsgSetDenomMetadataResponseAmino;
-}
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
  * MsgSetDenomMetadata message.
@@ -304,7 +264,7 @@ export const MsgCreateDenom = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDenom {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateDenom {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDenom();
@@ -355,28 +315,23 @@ export const MsgCreateDenom = {
     return obj;
   },
   fromAmino(object: MsgCreateDenomAmino): MsgCreateDenom {
-    return {
-      sender: object.sender,
-      subdenom: object.subdenom
-    };
+    const message = createBaseMsgCreateDenom();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.subdenom !== undefined && object.subdenom !== null) {
+      message.subdenom = object.subdenom;
+    }
+    return message;
   },
-  toAmino(message: MsgCreateDenom): MsgCreateDenomAmino {
+  toAmino(message: MsgCreateDenom, useInterfaces: boolean = true): MsgCreateDenomAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.subdenom = omitDefault(message.subdenom);
+    obj.sender = message.sender;
+    obj.subdenom = message.subdenom;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateDenomAminoMsg): MsgCreateDenom {
-    return MsgCreateDenom.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDenom): MsgCreateDenomAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/create-denom",
-      value: MsgCreateDenom.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateDenomProtoMsg): MsgCreateDenom {
-    return MsgCreateDenom.decode(message.value);
+  fromProtoMsg(message: MsgCreateDenomProtoMsg, useInterfaces: boolean = true): MsgCreateDenom {
+    return MsgCreateDenom.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateDenom): Uint8Array {
     return MsgCreateDenom.encode(message).finish();
@@ -402,7 +357,7 @@ export const MsgCreateDenomResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDenomResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateDenomResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDenomResponse();
@@ -445,26 +400,19 @@ export const MsgCreateDenomResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateDenomResponseAmino): MsgCreateDenomResponse {
-    return {
-      newTokenDenom: object.new_token_denom
-    };
+    const message = createBaseMsgCreateDenomResponse();
+    if (object.new_token_denom !== undefined && object.new_token_denom !== null) {
+      message.newTokenDenom = object.new_token_denom;
+    }
+    return message;
   },
-  toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseAmino {
+  toAmino(message: MsgCreateDenomResponse, useInterfaces: boolean = true): MsgCreateDenomResponseAmino {
     const obj: any = {};
-    obj.new_token_denom = omitDefault(message.newTokenDenom);
+    obj.new_token_denom = message.newTokenDenom;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateDenomResponseAminoMsg): MsgCreateDenomResponse {
-    return MsgCreateDenomResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgCreateDenomResponse): MsgCreateDenomResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/create-denom-response",
-      value: MsgCreateDenomResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgCreateDenomResponseProtoMsg): MsgCreateDenomResponse {
-    return MsgCreateDenomResponse.decode(message.value);
+  fromProtoMsg(message: MsgCreateDenomResponseProtoMsg, useInterfaces: boolean = true): MsgCreateDenomResponse {
+    return MsgCreateDenomResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateDenomResponse): Uint8Array {
     return MsgCreateDenomResponse.encode(message).finish();
@@ -494,7 +442,7 @@ export const MsgMint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMint();
@@ -505,7 +453,7 @@ export const MsgMint = {
           message.sender = reader.string();
           break;
         case 2:
-          message.amount = Coin.decode(reader, reader.uint32());
+          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -547,28 +495,23 @@ export const MsgMint = {
     return obj;
   },
   fromAmino(object: MsgMintAmino): MsgMint {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgMint();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
-  toAmino(message: MsgMint): MsgMintAmino {
+  toAmino(message: MsgMint, useInterfaces: boolean = true): MsgMintAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    obj.sender = message.sender;
+    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgMintAminoMsg): MsgMint {
-    return MsgMint.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMint): MsgMintAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/mint",
-      value: MsgMint.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMintProtoMsg): MsgMint {
-    return MsgMint.decode(message.value);
+  fromProtoMsg(message: MsgMintProtoMsg, useInterfaces: boolean = true): MsgMint {
+    return MsgMint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMint): Uint8Array {
     return MsgMint.encode(message).finish();
@@ -589,7 +532,7 @@ export const MsgMintResponse = {
   encode(_: MsgMintResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMintResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMintResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMintResponse();
@@ -623,23 +566,15 @@ export const MsgMintResponse = {
     return obj;
   },
   fromAmino(_: MsgMintResponseAmino): MsgMintResponse {
-    return {};
+    const message = createBaseMsgMintResponse();
+    return message;
   },
-  toAmino(_: MsgMintResponse): MsgMintResponseAmino {
+  toAmino(_: MsgMintResponse, useInterfaces: boolean = true): MsgMintResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgMintResponseAminoMsg): MsgMintResponse {
-    return MsgMintResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMintResponse): MsgMintResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/mint-response",
-      value: MsgMintResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMintResponseProtoMsg): MsgMintResponse {
-    return MsgMintResponse.decode(message.value);
+  fromProtoMsg(message: MsgMintResponseProtoMsg, useInterfaces: boolean = true): MsgMintResponse {
+    return MsgMintResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMintResponse): Uint8Array {
     return MsgMintResponse.encode(message).finish();
@@ -669,7 +604,7 @@ export const MsgBurn = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBurn {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBurn {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBurn();
@@ -680,7 +615,7 @@ export const MsgBurn = {
           message.sender = reader.string();
           break;
         case 2:
-          message.amount = Coin.decode(reader, reader.uint32());
+          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -722,28 +657,23 @@ export const MsgBurn = {
     return obj;
   },
   fromAmino(object: MsgBurnAmino): MsgBurn {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgBurn();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
-  toAmino(message: MsgBurn): MsgBurnAmino {
+  toAmino(message: MsgBurn, useInterfaces: boolean = true): MsgBurnAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    obj.sender = message.sender;
+    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgBurnAminoMsg): MsgBurn {
-    return MsgBurn.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBurn): MsgBurnAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/burn",
-      value: MsgBurn.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgBurnProtoMsg): MsgBurn {
-    return MsgBurn.decode(message.value);
+  fromProtoMsg(message: MsgBurnProtoMsg, useInterfaces: boolean = true): MsgBurn {
+    return MsgBurn.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBurn): Uint8Array {
     return MsgBurn.encode(message).finish();
@@ -764,7 +694,7 @@ export const MsgBurnResponse = {
   encode(_: MsgBurnResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgBurnResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgBurnResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgBurnResponse();
@@ -798,23 +728,15 @@ export const MsgBurnResponse = {
     return obj;
   },
   fromAmino(_: MsgBurnResponseAmino): MsgBurnResponse {
-    return {};
+    const message = createBaseMsgBurnResponse();
+    return message;
   },
-  toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
+  toAmino(_: MsgBurnResponse, useInterfaces: boolean = true): MsgBurnResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgBurnResponseAminoMsg): MsgBurnResponse {
-    return MsgBurnResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgBurnResponse): MsgBurnResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/burn-response",
-      value: MsgBurnResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgBurnResponseProtoMsg): MsgBurnResponse {
-    return MsgBurnResponse.decode(message.value);
+  fromProtoMsg(message: MsgBurnResponseProtoMsg, useInterfaces: boolean = true): MsgBurnResponse {
+    return MsgBurnResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgBurnResponse): Uint8Array {
     return MsgBurnResponse.encode(message).finish();
@@ -848,7 +770,7 @@ export const MsgChangeAdmin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgChangeAdmin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChangeAdmin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChangeAdmin();
@@ -907,30 +829,27 @@ export const MsgChangeAdmin = {
     return obj;
   },
   fromAmino(object: MsgChangeAdminAmino): MsgChangeAdmin {
-    return {
-      sender: object.sender,
-      denom: object.denom,
-      newAdmin: object.new_admin
-    };
+    const message = createBaseMsgChangeAdmin();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    return message;
   },
-  toAmino(message: MsgChangeAdmin): MsgChangeAdminAmino {
+  toAmino(message: MsgChangeAdmin, useInterfaces: boolean = true): MsgChangeAdminAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.denom = omitDefault(message.denom);
-    obj.new_admin = omitDefault(message.newAdmin);
+    obj.sender = message.sender;
+    obj.denom = message.denom;
+    obj.new_admin = message.newAdmin;
     return obj;
   },
-  fromAminoMsg(object: MsgChangeAdminAminoMsg): MsgChangeAdmin {
-    return MsgChangeAdmin.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgChangeAdmin): MsgChangeAdminAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/change-admin",
-      value: MsgChangeAdmin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgChangeAdminProtoMsg): MsgChangeAdmin {
-    return MsgChangeAdmin.decode(message.value);
+  fromProtoMsg(message: MsgChangeAdminProtoMsg, useInterfaces: boolean = true): MsgChangeAdmin {
+    return MsgChangeAdmin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChangeAdmin): Uint8Array {
     return MsgChangeAdmin.encode(message).finish();
@@ -951,7 +870,7 @@ export const MsgChangeAdminResponse = {
   encode(_: MsgChangeAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgChangeAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgChangeAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgChangeAdminResponse();
@@ -985,23 +904,15 @@ export const MsgChangeAdminResponse = {
     return obj;
   },
   fromAmino(_: MsgChangeAdminResponseAmino): MsgChangeAdminResponse {
-    return {};
+    const message = createBaseMsgChangeAdminResponse();
+    return message;
   },
-  toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
+  toAmino(_: MsgChangeAdminResponse, useInterfaces: boolean = true): MsgChangeAdminResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgChangeAdminResponseAminoMsg): MsgChangeAdminResponse {
-    return MsgChangeAdminResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgChangeAdminResponse): MsgChangeAdminResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/change-admin-response",
-      value: MsgChangeAdminResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgChangeAdminResponseProtoMsg): MsgChangeAdminResponse {
-    return MsgChangeAdminResponse.decode(message.value);
+  fromProtoMsg(message: MsgChangeAdminResponseProtoMsg, useInterfaces: boolean = true): MsgChangeAdminResponse {
+    return MsgChangeAdminResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgChangeAdminResponse): Uint8Array {
     return MsgChangeAdminResponse.encode(message).finish();
@@ -1031,7 +942,7 @@ export const MsgSetDenomMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDenomMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSetDenomMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDenomMetadata();
@@ -1042,7 +953,7 @@ export const MsgSetDenomMetadata = {
           message.sender = reader.string();
           break;
         case 2:
-          message.metadata = Metadata.decode(reader, reader.uint32());
+          message.metadata = Metadata.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1084,28 +995,23 @@ export const MsgSetDenomMetadata = {
     return obj;
   },
   fromAmino(object: MsgSetDenomMetadataAmino): MsgSetDenomMetadata {
-    return {
-      sender: object.sender,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseMsgSetDenomMetadata();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
-  toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {
+  toAmino(message: MsgSetDenomMetadata, useInterfaces: boolean = true): MsgSetDenomMetadataAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
+    obj.sender = message.sender;
+    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSetDenomMetadataAminoMsg): MsgSetDenomMetadata {
-    return MsgSetDenomMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSetDenomMetadata): MsgSetDenomMetadataAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/set-denom-metadata",
-      value: MsgSetDenomMetadata.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSetDenomMetadataProtoMsg): MsgSetDenomMetadata {
-    return MsgSetDenomMetadata.decode(message.value);
+  fromProtoMsg(message: MsgSetDenomMetadataProtoMsg, useInterfaces: boolean = true): MsgSetDenomMetadata {
+    return MsgSetDenomMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSetDenomMetadata): Uint8Array {
     return MsgSetDenomMetadata.encode(message).finish();
@@ -1126,7 +1032,7 @@ export const MsgSetDenomMetadataResponse = {
   encode(_: MsgSetDenomMetadataResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSetDenomMetadataResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSetDenomMetadataResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSetDenomMetadataResponse();
@@ -1160,23 +1066,15 @@ export const MsgSetDenomMetadataResponse = {
     return obj;
   },
   fromAmino(_: MsgSetDenomMetadataResponseAmino): MsgSetDenomMetadataResponse {
-    return {};
+    const message = createBaseMsgSetDenomMetadataResponse();
+    return message;
   },
-  toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
+  toAmino(_: MsgSetDenomMetadataResponse, useInterfaces: boolean = true): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgSetDenomMetadataResponseAminoMsg): MsgSetDenomMetadataResponse {
-    return MsgSetDenomMetadataResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/set-denom-metadata-response",
-      value: MsgSetDenomMetadataResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSetDenomMetadataResponseProtoMsg): MsgSetDenomMetadataResponse {
-    return MsgSetDenomMetadataResponse.decode(message.value);
+  fromProtoMsg(message: MsgSetDenomMetadataResponseProtoMsg, useInterfaces: boolean = true): MsgSetDenomMetadataResponse {
+    return MsgSetDenomMetadataResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSetDenomMetadataResponse): Uint8Array {
     return MsgSetDenomMetadataResponse.encode(message).finish();

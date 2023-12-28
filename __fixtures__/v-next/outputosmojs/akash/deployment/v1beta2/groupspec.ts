@@ -9,6 +9,10 @@ export interface GroupSpec {
   requirements: PlacementRequirements;
   resources: Resource[];
 }
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupSpec";
+  value: Uint8Array;
+}
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
   name: string;
@@ -110,11 +114,15 @@ export const GroupSpec = {
     return obj;
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
-    return {
-      name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
-    };
+    const message = createBaseGroupSpec();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromAmino(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};

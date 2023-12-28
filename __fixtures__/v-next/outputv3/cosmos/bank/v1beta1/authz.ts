@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.bank.v1beta1";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spendLimit: Coin[];
 }
 export interface SendAuthorizationProtoMsg {
@@ -23,11 +23,7 @@ export interface SendAuthorizationProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationAmino {
-  spend_limit: CoinAmino[];
-}
-export interface SendAuthorizationAminoMsg {
-  type: "cosmos-sdk/SendAuthorization";
-  value: SendAuthorizationAmino;
+  spend_limit?: CoinAmino[];
 }
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
@@ -36,7 +32,7 @@ export interface SendAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spend_limit: CoinSDKType[];
 }
 function createBaseSendAuthorization(): SendAuthorization {
@@ -54,7 +50,7 @@ export const SendAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SendAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SendAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSendAuthorization();
@@ -62,7 +58,7 @@ export const SendAuthorization = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.spendLimit.push(Coin.decode(reader, reader.uint32()));
+          message.spendLimit.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -105,30 +101,21 @@ export const SendAuthorization = {
     return obj;
   },
   fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: SendAuthorization): SendAuthorizationAmino {
+  toAmino(message: SendAuthorization, useInterfaces: boolean = true): SendAuthorizationAmino {
     const obj: any = {};
     if (message.spendLimit) {
-      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.spend_limit = [];
     }
     return obj;
   },
-  fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
-    return SendAuthorization.fromAmino(object.value);
-  },
-  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
-    return {
-      type: "cosmos-sdk/SendAuthorization",
-      value: SendAuthorization.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
-    return SendAuthorization.decode(message.value);
+  fromProtoMsg(message: SendAuthorizationProtoMsg, useInterfaces: boolean = true): SendAuthorization {
+    return SendAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SendAuthorization): Uint8Array {
     return SendAuthorization.encode(message).finish();

@@ -13,6 +13,10 @@ export interface Allocation {
   /** allow list of receivers, an empty allow list permits any receiver address */
   allowList: string[];
 }
+export interface AllocationProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.Allocation";
+  value: Uint8Array;
+}
 /** Allocation defines the spend limit for a particular port and channel */
 export interface AllocationSDKType {
   source_port: string;
@@ -27,6 +31,10 @@ export interface AllocationSDKType {
 export interface TransferAuthorization {
   /** port and channel amounts */
   allocations: Allocation[];
+}
+export interface TransferAuthorizationProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.TransferAuthorization";
+  value: Uint8Array;
 }
 /**
  * TransferAuthorization allows the grantee to spend up to spend_limit coins from
@@ -151,12 +159,16 @@ export const Allocation = {
     return obj;
   },
   fromAmino(object: AllocationAmino): Allocation {
-    return {
-      sourcePort: object.source_port,
-      sourceChannel: object.source_channel,
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      allowList: Array.isArray(object?.allow_list) ? object.allow_list.map((e: any) => e) : []
-    };
+    const message = createBaseAllocation();
+    if (object.source_port !== undefined && object.source_port !== null) {
+      message.sourcePort = object.source_port;
+    }
+    if (object.source_channel !== undefined && object.source_channel !== null) {
+      message.sourceChannel = object.source_channel;
+    }
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    message.allowList = object.allow_list?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Allocation): AllocationAmino {
     const obj: any = {};
@@ -265,9 +277,9 @@ export const TransferAuthorization = {
     return obj;
   },
   fromAmino(object: TransferAuthorizationAmino): TransferAuthorization {
-    return {
-      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => Allocation.fromAmino(e)) : []
-    };
+    const message = createBaseTransferAuthorization();
+    message.allocations = object.allocations?.map(e => Allocation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: TransferAuthorization): TransferAuthorizationAmino {
     const obj: any = {};

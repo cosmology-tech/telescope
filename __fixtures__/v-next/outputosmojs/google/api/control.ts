@@ -13,6 +13,10 @@ export interface Control {
    */
   environment: string;
 }
+export interface ControlProtoMsg {
+  typeUrl: "/google.api.Control";
+  value: Uint8Array;
+}
 /**
  * Selects and configures the service controller used by the service.  The
  * service controller handles features like abuse, quota, billing, logging,
@@ -82,9 +86,11 @@ export const Control = {
     return obj;
   },
   fromAmino(object: ControlAmino): Control {
-    return {
-      environment: object.environment
-    };
+    const message = createBaseControl();
+    if (object.environment !== undefined && object.environment !== null) {
+      message.environment = object.environment;
+    }
+    return message;
   },
   toAmino(message: Control): ControlAmino {
     const obj: any = {};

@@ -2,14 +2,14 @@ import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from 
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr: Expr;
+  expr?: Expr;
   /** The source info derived from input that generated the parsed `expr`. */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
 }
 export interface ParsedExprProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.ParsedExpr";
@@ -22,14 +22,10 @@ export interface ParsedExprAmino {
   /** The source info derived from input that generated the parsed `expr`. */
   source_info?: SourceInfoAmino;
 }
-export interface ParsedExprAminoMsg {
-  type: "/google.api.expr.v1alpha1.ParsedExpr";
-  value: ParsedExprAmino;
-}
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExprSDKType {
-  expr: ExprSDKType;
-  source_info: SourceInfoSDKType;
+  expr?: ExprSDKType;
+  source_info?: SourceInfoSDKType;
 }
 /**
  * An abstract representation of a common expression.
@@ -97,7 +93,7 @@ export interface ExprAmino {
    * given expression tree. This is used to associate type information and other
    * attributes to a node in the parse tree.
    */
-  id: string;
+  id?: string;
   /** A literal expression. */
   const_expr?: ConstantAmino;
   /** An identifier expression. */
@@ -112,10 +108,6 @@ export interface ExprAmino {
   struct_expr?: Expr_CreateStructAmino;
   /** A comprehension expression. */
   comprehension_expr?: Expr_ComprehensionAmino;
-}
-export interface ExprAminoMsg {
-  type: "/google.api.expr.v1alpha1.Expr";
-  value: ExprAmino;
 }
 /**
  * An abstract representation of a common expression.
@@ -166,11 +158,7 @@ export interface Expr_IdentAmino {
    * 
    * Qualified names are represented by the [Expr.Select][google.api.expr.v1alpha1.Expr.Select] expression.
    */
-  name: string;
-}
-export interface Expr_IdentAminoMsg {
-  type: "/google.api.expr.v1alpha1.Ident";
-  value: Expr_IdentAmino;
+  name?: string;
 }
 /** An identifier expression. e.g. `request`. */
 export interface Expr_IdentSDKType {
@@ -184,7 +172,7 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand: Expr;
+  operand?: Expr;
   /**
    * Required. The name of the field to select.
    * 
@@ -218,21 +206,17 @@ export interface Expr_SelectAmino {
    * For example, in the select expression `request.auth`, the `auth` portion
    * of the expression would be the `field`.
    */
-  field: string;
+  field?: string;
   /**
    * Whether the select is to be interpreted as a field presence test.
    * 
    * This results from the macro `has(request.auth)`.
    */
-  test_only: boolean;
-}
-export interface Expr_SelectAminoMsg {
-  type: "/google.api.expr.v1alpha1.Select";
-  value: Expr_SelectAmino;
+  test_only?: boolean;
 }
 /** A field selection expression. e.g. `request.auth`. */
 export interface Expr_SelectSDKType {
-  operand: ExprSDKType;
+  operand?: ExprSDKType;
   field: string;
   test_only: boolean;
 }
@@ -246,7 +230,7 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target: Expr;
+  target?: Expr;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -268,13 +252,9 @@ export interface Expr_CallAmino {
    */
   target?: ExprAmino;
   /** Required. The name of the function or method being called. */
-  function: string;
+  function?: string;
   /** The arguments. */
-  args: ExprAmino[];
-}
-export interface Expr_CallAminoMsg {
-  type: "/google.api.expr.v1alpha1.Call";
-  value: Expr_CallAmino;
+  args?: ExprAmino[];
 }
 /**
  * A call expression, including calls to predefined functions and operators.
@@ -282,7 +262,7 @@ export interface Expr_CallAminoMsg {
  * For example, `value == 10`, `size(map_value)`.
  */
 export interface Expr_CallSDKType {
-  target: ExprSDKType;
+  target?: ExprSDKType;
   function: string;
   args: ExprSDKType[];
 }
@@ -308,11 +288,7 @@ export interface Expr_CreateListProtoMsg {
  */
 export interface Expr_CreateListAmino {
   /** The elements part of the list. */
-  elements: ExprAmino[];
-}
-export interface Expr_CreateListAminoMsg {
-  type: "/google.api.expr.v1alpha1.CreateList";
-  value: Expr_CreateListAmino;
+  elements?: ExprAmino[];
 }
 /**
  * A list creation expression.
@@ -355,13 +331,9 @@ export interface Expr_CreateStructAmino {
    * The type name of the message to be created, empty when creating map
    * literals.
    */
-  message_name: string;
+  message_name?: string;
   /** The entries in the creation expression. */
-  entries: Expr_CreateStruct_EntryAmino[];
-}
-export interface Expr_CreateStructAminoMsg {
-  type: "/google.api.expr.v1alpha1.CreateStruct";
-  value: Expr_CreateStructAmino;
+  entries?: Expr_CreateStruct_EntryAmino[];
 }
 /**
  * A map or message creation expression.
@@ -387,7 +359,7 @@ export interface Expr_CreateStruct_Entry {
   /** The key expression for a map creation statement. */
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
-  value: Expr;
+  value?: Expr;
 }
 export interface Expr_CreateStruct_EntryProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Entry";
@@ -400,7 +372,7 @@ export interface Expr_CreateStruct_EntryAmino {
    * in a given expression tree. This is used to associate type
    * information and other attributes to the node.
    */
-  id: string;
+  id?: string;
   /** The field key for a message creator statement. */
   field_key?: string;
   /** The key expression for a map creation statement. */
@@ -408,16 +380,12 @@ export interface Expr_CreateStruct_EntryAmino {
   /** Required. The value assigned to the key. */
   value?: ExprAmino;
 }
-export interface Expr_CreateStruct_EntryAminoMsg {
-  type: "/google.api.expr.v1alpha1.Entry";
-  value: Expr_CreateStruct_EntryAmino;
-}
 /** Represents an entry. */
 export interface Expr_CreateStruct_EntrySDKType {
   id: bigint;
   field_key?: string;
   map_key?: ExprSDKType;
-  value: ExprSDKType;
+  value?: ExprSDKType;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -451,30 +419,30 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange: Expr;
+  iterRange?: Expr;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit: Expr;
+  accuInit?: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition: Expr;
+  loopCondition?: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Computes the next value of accu_var.
    */
-  loopStep: Expr;
+  loopStep?: Expr;
   /**
    * An expression which can contain accu_var.
    * 
    * Computes the result.
    */
-  result: Expr;
+  result?: Expr;
 }
 export interface Expr_ComprehensionProtoMsg {
   typeUrl: "/google.api.expr.v1alpha1.Comprehension";
@@ -510,11 +478,11 @@ export interface Expr_ComprehensionProtoMsg {
  */
 export interface Expr_ComprehensionAmino {
   /** The name of the iteration variable. */
-  iter_var: string;
+  iter_var?: string;
   /** The range over which var iterates. */
   iter_range?: ExprAmino;
   /** The name of the variable used for accumulation of the result. */
-  accu_var: string;
+  accu_var?: string;
   /** The initial value of the accumulator. */
   accu_init?: ExprAmino;
   /**
@@ -536,10 +504,6 @@ export interface Expr_ComprehensionAmino {
    * Computes the result.
    */
   result?: ExprAmino;
-}
-export interface Expr_ComprehensionAminoMsg {
-  type: "/google.api.expr.v1alpha1.Comprehension";
-  value: Expr_ComprehensionAmino;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -571,12 +535,12 @@ export interface Expr_ComprehensionAminoMsg {
  */
 export interface Expr_ComprehensionSDKType {
   iter_var: string;
-  iter_range: ExprSDKType;
+  iter_range?: ExprSDKType;
   accu_var: string;
-  accu_init: ExprSDKType;
-  loop_condition: ExprSDKType;
-  loop_step: ExprSDKType;
-  result: ExprSDKType;
+  accu_init?: ExprSDKType;
+  loop_condition?: ExprSDKType;
+  loop_step?: ExprSDKType;
+  result?: ExprSDKType;
 }
 /**
  * Represents a primitive literal.
@@ -656,7 +620,7 @@ export interface ConstantAmino {
   /** string value. */
   string_value?: string;
   /** bytes value. */
-  bytes_value?: Uint8Array;
+  bytes_value?: string;
   /**
    * protobuf.Duration value.
    * 
@@ -670,11 +634,7 @@ export interface ConstantAmino {
    * Deprecated: timestamp is no longer considered a builtin cel type.
    */
   /** @deprecated */
-  timestamp_value?: Date;
-}
-export interface ConstantAminoMsg {
-  type: "/google.api.expr.v1alpha1.Constant";
-  value: ConstantAmino;
+  timestamp_value?: string;
 }
 /**
  * Represents a primitive literal.
@@ -713,12 +673,8 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntryAmino {
-  key: string;
-  value: number;
-}
-export interface SourceInfo_PositionsEntryAminoMsg {
-  type: string;
-  value: SourceInfo_PositionsEntryAmino;
+  key?: string;
+  value?: number;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: bigint;
@@ -726,23 +682,19 @@ export interface SourceInfo_PositionsEntrySDKType {
 }
 export interface SourceInfo_MacroCallsEntry {
   key: bigint;
-  value: Expr;
+  value?: Expr;
 }
 export interface SourceInfo_MacroCallsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
 export interface SourceInfo_MacroCallsEntryAmino {
-  key: string;
+  key?: string;
   value?: ExprAmino;
-}
-export interface SourceInfo_MacroCallsEntryAminoMsg {
-  type: string;
-  value: SourceInfo_MacroCallsEntryAmino;
 }
 export interface SourceInfo_MacroCallsEntrySDKType {
   key: bigint;
-  value: ExprSDKType;
+  value?: ExprSDKType;
 }
 /** Source information collected at parse time. */
 export interface SourceInfo {
@@ -793,7 +745,7 @@ export interface SourceInfoProtoMsg {
 /** Source information collected at parse time. */
 export interface SourceInfoAmino {
   /** The syntax version of the source, e.g. `cel1`. */
-  syntax_version: string;
+  syntax_version?: string;
   /**
    * The location name. All position information attached to an expression is
    * relative to this location.
@@ -801,7 +753,7 @@ export interface SourceInfoAmino {
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
-  location: string;
+  location?: string;
   /**
    * Monotonically increasing list of code point offsets where newlines
    * `\n` appear.
@@ -810,12 +762,12 @@ export interface SourceInfoAmino {
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-  line_offsets: number[];
+  line_offsets?: number[];
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the code point offset
    * within the source.
    */
-  positions: {
+  positions?: {
     [key: string]: number;
   };
   /**
@@ -831,10 +783,6 @@ export interface SourceInfoAmino {
   macro_calls?: {
     [key: string]: ExprAmino;
   };
-}
-export interface SourceInfoAminoMsg {
-  type: "/google.api.expr.v1alpha1.SourceInfo";
-  value: SourceInfoAmino;
 }
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
@@ -872,23 +820,19 @@ export interface SourcePositionProtoMsg {
 /** A specific position in source. */
 export interface SourcePositionAmino {
   /** The soucre location name (e.g. file name). */
-  location: string;
+  location?: string;
   /** The UTF-8 code unit offset. */
-  offset: number;
+  offset?: number;
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-  line: number;
+  line?: number;
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzero.
    */
-  column: number;
-}
-export interface SourcePositionAminoMsg {
-  type: "/google.api.expr.v1alpha1.SourcePosition";
-  value: SourcePositionAmino;
+  column?: number;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -899,8 +843,8 @@ export interface SourcePositionSDKType {
 }
 function createBaseParsedExpr(): ParsedExpr {
   return {
-    expr: Expr.fromPartial({}),
-    sourceInfo: SourceInfo.fromPartial({})
+    expr: undefined,
+    sourceInfo: undefined
   };
 }
 export const ParsedExpr = {
@@ -914,7 +858,7 @@ export const ParsedExpr = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParsedExpr {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParsedExpr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParsedExpr();
@@ -922,10 +866,10 @@ export const ParsedExpr = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.expr = Expr.decode(reader, reader.uint32());
+          message.expr = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.sourceInfo = SourceInfo.decode(reader, reader.uint32());
+          message.sourceInfo = SourceInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -969,22 +913,23 @@ export const ParsedExpr = {
     return obj;
   },
   fromAmino(object: ParsedExprAmino): ParsedExpr {
-    return {
-      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined,
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined
-    };
+    const message = createBaseParsedExpr();
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromAmino(object.expr);
+    }
+    if (object.source_info !== undefined && object.source_info !== null) {
+      message.sourceInfo = SourceInfo.fromAmino(object.source_info);
+    }
+    return message;
   },
-  toAmino(message: ParsedExpr): ParsedExprAmino {
+  toAmino(message: ParsedExpr, useInterfaces: boolean = true): ParsedExprAmino {
     const obj: any = {};
-    obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
-    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
+    obj.expr = message.expr ? Expr.toAmino(message.expr, useInterfaces) : undefined;
+    obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
-    return ParsedExpr.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParsedExprProtoMsg): ParsedExpr {
-    return ParsedExpr.decode(message.value);
+  fromProtoMsg(message: ParsedExprProtoMsg, useInterfaces: boolean = true): ParsedExpr {
+    return ParsedExpr.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParsedExpr): Uint8Array {
     return ParsedExpr.encode(message).finish();
@@ -1037,7 +982,7 @@ export const Expr = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr();
@@ -1048,25 +993,25 @@ export const Expr = {
           message.id = reader.int64();
           break;
         case 3:
-          message.constExpr = Constant.decode(reader, reader.uint32());
+          message.constExpr = Constant.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.identExpr = Expr_Ident.decode(reader, reader.uint32());
+          message.identExpr = Expr_Ident.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.selectExpr = Expr_Select.decode(reader, reader.uint32());
+          message.selectExpr = Expr_Select.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.callExpr = Expr_Call.decode(reader, reader.uint32());
+          message.callExpr = Expr_Call.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.listExpr = Expr_CreateList.decode(reader, reader.uint32());
+          message.listExpr = Expr_CreateList.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 8:
-          message.structExpr = Expr_CreateStruct.decode(reader, reader.uint32());
+          message.structExpr = Expr_CreateStruct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
-          message.comprehensionExpr = Expr_Comprehension.decode(reader, reader.uint32());
+          message.comprehensionExpr = Expr_Comprehension.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1152,34 +1097,47 @@ export const Expr = {
     return obj;
   },
   fromAmino(object: ExprAmino): Expr {
-    return {
-      id: BigInt(object.id),
-      constExpr: object?.const_expr ? Constant.fromAmino(object.const_expr) : undefined,
-      identExpr: object?.ident_expr ? Expr_Ident.fromAmino(object.ident_expr) : undefined,
-      selectExpr: object?.select_expr ? Expr_Select.fromAmino(object.select_expr) : undefined,
-      callExpr: object?.call_expr ? Expr_Call.fromAmino(object.call_expr) : undefined,
-      listExpr: object?.list_expr ? Expr_CreateList.fromAmino(object.list_expr) : undefined,
-      structExpr: object?.struct_expr ? Expr_CreateStruct.fromAmino(object.struct_expr) : undefined,
-      comprehensionExpr: object?.comprehension_expr ? Expr_Comprehension.fromAmino(object.comprehension_expr) : undefined
-    };
+    const message = createBaseExpr();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.const_expr !== undefined && object.const_expr !== null) {
+      message.constExpr = Constant.fromAmino(object.const_expr);
+    }
+    if (object.ident_expr !== undefined && object.ident_expr !== null) {
+      message.identExpr = Expr_Ident.fromAmino(object.ident_expr);
+    }
+    if (object.select_expr !== undefined && object.select_expr !== null) {
+      message.selectExpr = Expr_Select.fromAmino(object.select_expr);
+    }
+    if (object.call_expr !== undefined && object.call_expr !== null) {
+      message.callExpr = Expr_Call.fromAmino(object.call_expr);
+    }
+    if (object.list_expr !== undefined && object.list_expr !== null) {
+      message.listExpr = Expr_CreateList.fromAmino(object.list_expr);
+    }
+    if (object.struct_expr !== undefined && object.struct_expr !== null) {
+      message.structExpr = Expr_CreateStruct.fromAmino(object.struct_expr);
+    }
+    if (object.comprehension_expr !== undefined && object.comprehension_expr !== null) {
+      message.comprehensionExpr = Expr_Comprehension.fromAmino(object.comprehension_expr);
+    }
+    return message;
   },
-  toAmino(message: Expr): ExprAmino {
+  toAmino(message: Expr, useInterfaces: boolean = true): ExprAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.const_expr = message.constExpr ? Constant.toAmino(message.constExpr) : undefined;
-    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
-    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
-    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr) : undefined;
-    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr) : undefined;
-    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr) : undefined;
-    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr) : undefined;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.const_expr = message.constExpr ? Constant.toAmino(message.constExpr, useInterfaces) : undefined;
+    obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr, useInterfaces) : undefined;
+    obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr, useInterfaces) : undefined;
+    obj.call_expr = message.callExpr ? Expr_Call.toAmino(message.callExpr, useInterfaces) : undefined;
+    obj.list_expr = message.listExpr ? Expr_CreateList.toAmino(message.listExpr, useInterfaces) : undefined;
+    obj.struct_expr = message.structExpr ? Expr_CreateStruct.toAmino(message.structExpr, useInterfaces) : undefined;
+    obj.comprehension_expr = message.comprehensionExpr ? Expr_Comprehension.toAmino(message.comprehensionExpr, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ExprAminoMsg): Expr {
-    return Expr.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExprProtoMsg): Expr {
-    return Expr.decode(message.value);
+  fromProtoMsg(message: ExprProtoMsg, useInterfaces: boolean = true): Expr {
+    return Expr.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr): Uint8Array {
     return Expr.encode(message).finish();
@@ -1204,7 +1162,7 @@ export const Expr_Ident = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Ident {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Ident {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Ident();
@@ -1247,20 +1205,19 @@ export const Expr_Ident = {
     return obj;
   },
   fromAmino(object: Expr_IdentAmino): Expr_Ident {
-    return {
-      name: object.name
-    };
+    const message = createBaseExpr_Ident();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
-  toAmino(message: Expr_Ident): Expr_IdentAmino {
+  toAmino(message: Expr_Ident, useInterfaces: boolean = true): Expr_IdentAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     return obj;
   },
-  fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
-    return Expr_Ident.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_IdentProtoMsg): Expr_Ident {
-    return Expr_Ident.decode(message.value);
+  fromProtoMsg(message: Expr_IdentProtoMsg, useInterfaces: boolean = true): Expr_Ident {
+    return Expr_Ident.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_Ident): Uint8Array {
     return Expr_Ident.encode(message).finish();
@@ -1274,7 +1231,7 @@ export const Expr_Ident = {
 };
 function createBaseExpr_Select(): Expr_Select {
   return {
-    operand: Expr.fromPartial({}),
+    operand: undefined,
     field: "",
     testOnly: false
   };
@@ -1293,7 +1250,7 @@ export const Expr_Select = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Select {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Select {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Select();
@@ -1301,7 +1258,7 @@ export const Expr_Select = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.operand = Expr.decode(reader, reader.uint32());
+          message.operand = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.field = reader.string();
@@ -1354,24 +1311,27 @@ export const Expr_Select = {
     return obj;
   },
   fromAmino(object: Expr_SelectAmino): Expr_Select {
-    return {
-      operand: object?.operand ? Expr.fromAmino(object.operand) : undefined,
-      field: object.field,
-      testOnly: object.test_only
-    };
+    const message = createBaseExpr_Select();
+    if (object.operand !== undefined && object.operand !== null) {
+      message.operand = Expr.fromAmino(object.operand);
+    }
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.test_only !== undefined && object.test_only !== null) {
+      message.testOnly = object.test_only;
+    }
+    return message;
   },
-  toAmino(message: Expr_Select): Expr_SelectAmino {
+  toAmino(message: Expr_Select, useInterfaces: boolean = true): Expr_SelectAmino {
     const obj: any = {};
-    obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
-    obj.field = omitDefault(message.field);
-    obj.test_only = omitDefault(message.testOnly);
+    obj.operand = message.operand ? Expr.toAmino(message.operand, useInterfaces) : undefined;
+    obj.field = message.field;
+    obj.test_only = message.testOnly;
     return obj;
   },
-  fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
-    return Expr_Select.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_SelectProtoMsg): Expr_Select {
-    return Expr_Select.decode(message.value);
+  fromProtoMsg(message: Expr_SelectProtoMsg, useInterfaces: boolean = true): Expr_Select {
+    return Expr_Select.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_Select): Uint8Array {
     return Expr_Select.encode(message).finish();
@@ -1385,7 +1345,7 @@ export const Expr_Select = {
 };
 function createBaseExpr_Call(): Expr_Call {
   return {
-    target: Expr.fromPartial({}),
+    target: undefined,
     function: "",
     args: []
   };
@@ -1404,7 +1364,7 @@ export const Expr_Call = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Call {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Call {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Call();
@@ -1412,13 +1372,13 @@ export const Expr_Call = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.target = Expr.decode(reader, reader.uint32());
+          message.target = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.function = reader.string();
           break;
         case 3:
-          message.args.push(Expr.decode(reader, reader.uint32()));
+          message.args.push(Expr.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1473,28 +1433,29 @@ export const Expr_Call = {
     return obj;
   },
   fromAmino(object: Expr_CallAmino): Expr_Call {
-    return {
-      target: object?.target ? Expr.fromAmino(object.target) : undefined,
-      function: object.function,
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => Expr.fromAmino(e)) : []
-    };
+    const message = createBaseExpr_Call();
+    if (object.target !== undefined && object.target !== null) {
+      message.target = Expr.fromAmino(object.target);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = object.function;
+    }
+    message.args = object.args?.map(e => Expr.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Expr_Call): Expr_CallAmino {
+  toAmino(message: Expr_Call, useInterfaces: boolean = true): Expr_CallAmino {
     const obj: any = {};
-    obj.target = message.target ? Expr.toAmino(message.target) : undefined;
-    obj.function = omitDefault(message.function);
+    obj.target = message.target ? Expr.toAmino(message.target, useInterfaces) : undefined;
+    obj.function = message.function;
     if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
+      obj.args = message.args.map(e => e ? Expr.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.args = [];
     }
     return obj;
   },
-  fromAminoMsg(object: Expr_CallAminoMsg): Expr_Call {
-    return Expr_Call.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_CallProtoMsg): Expr_Call {
-    return Expr_Call.decode(message.value);
+  fromProtoMsg(message: Expr_CallProtoMsg, useInterfaces: boolean = true): Expr_Call {
+    return Expr_Call.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_Call): Uint8Array {
     return Expr_Call.encode(message).finish();
@@ -1519,7 +1480,7 @@ export const Expr_CreateList = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateList {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateList {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateList();
@@ -1527,7 +1488,7 @@ export const Expr_CreateList = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.elements.push(Expr.decode(reader, reader.uint32()));
+          message.elements.push(Expr.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1570,24 +1531,21 @@ export const Expr_CreateList = {
     return obj;
   },
   fromAmino(object: Expr_CreateListAmino): Expr_CreateList {
-    return {
-      elements: Array.isArray(object?.elements) ? object.elements.map((e: any) => Expr.fromAmino(e)) : []
-    };
+    const message = createBaseExpr_CreateList();
+    message.elements = object.elements?.map(e => Expr.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Expr_CreateList): Expr_CreateListAmino {
+  toAmino(message: Expr_CreateList, useInterfaces: boolean = true): Expr_CreateListAmino {
     const obj: any = {};
     if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
+      obj.elements = message.elements.map(e => e ? Expr.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.elements = [];
     }
     return obj;
   },
-  fromAminoMsg(object: Expr_CreateListAminoMsg): Expr_CreateList {
-    return Expr_CreateList.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_CreateListProtoMsg): Expr_CreateList {
-    return Expr_CreateList.decode(message.value);
+  fromProtoMsg(message: Expr_CreateListProtoMsg, useInterfaces: boolean = true): Expr_CreateList {
+    return Expr_CreateList.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_CreateList): Uint8Array {
     return Expr_CreateList.encode(message).finish();
@@ -1616,7 +1574,7 @@ export const Expr_CreateStruct = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateStruct {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateStruct {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct();
@@ -1627,7 +1585,7 @@ export const Expr_CreateStruct = {
           message.messageName = reader.string();
           break;
         case 2:
-          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32()));
+          message.entries.push(Expr_CreateStruct_Entry.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1675,26 +1633,25 @@ export const Expr_CreateStruct = {
     return obj;
   },
   fromAmino(object: Expr_CreateStructAmino): Expr_CreateStruct {
-    return {
-      messageName: object.message_name,
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Expr_CreateStruct_Entry.fromAmino(e)) : []
-    };
+    const message = createBaseExpr_CreateStruct();
+    if (object.message_name !== undefined && object.message_name !== null) {
+      message.messageName = object.message_name;
+    }
+    message.entries = object.entries?.map(e => Expr_CreateStruct_Entry.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
+  toAmino(message: Expr_CreateStruct, useInterfaces: boolean = true): Expr_CreateStructAmino {
     const obj: any = {};
-    obj.message_name = omitDefault(message.messageName);
+    obj.message_name = message.messageName;
     if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
+      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.entries = [];
     }
     return obj;
   },
-  fromAminoMsg(object: Expr_CreateStructAminoMsg): Expr_CreateStruct {
-    return Expr_CreateStruct.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_CreateStructProtoMsg): Expr_CreateStruct {
-    return Expr_CreateStruct.decode(message.value);
+  fromProtoMsg(message: Expr_CreateStructProtoMsg, useInterfaces: boolean = true): Expr_CreateStruct {
+    return Expr_CreateStruct.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_CreateStruct): Uint8Array {
     return Expr_CreateStruct.encode(message).finish();
@@ -1711,7 +1668,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
     id: BigInt(0),
     fieldKey: undefined,
     mapKey: undefined,
-    value: Expr.fromPartial({})
+    value: undefined
   };
 }
 export const Expr_CreateStruct_Entry = {
@@ -1731,7 +1688,7 @@ export const Expr_CreateStruct_Entry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_CreateStruct_Entry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_CreateStruct_Entry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_CreateStruct_Entry();
@@ -1745,10 +1702,10 @@ export const Expr_CreateStruct_Entry = {
           message.fieldKey = reader.string();
           break;
         case 3:
-          message.mapKey = Expr.decode(reader, reader.uint32());
+          message.mapKey = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.value = Expr.decode(reader, reader.uint32());
+          message.value = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1804,26 +1761,31 @@ export const Expr_CreateStruct_Entry = {
     return obj;
   },
   fromAmino(object: Expr_CreateStruct_EntryAmino): Expr_CreateStruct_Entry {
-    return {
-      id: BigInt(object.id),
-      fieldKey: object?.field_key,
-      mapKey: object?.map_key ? Expr.fromAmino(object.map_key) : undefined,
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
+    const message = createBaseExpr_CreateStruct_Entry();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.field_key !== undefined && object.field_key !== null) {
+      message.fieldKey = object.field_key;
+    }
+    if (object.map_key !== undefined && object.map_key !== null) {
+      message.mapKey = Expr.fromAmino(object.map_key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
+  toAmino(message: Expr_CreateStruct_Entry, useInterfaces: boolean = true): Expr_CreateStruct_EntryAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.field_key = omitDefault(message.fieldKey);
-    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
-    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.field_key = message.fieldKey;
+    obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey, useInterfaces) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Expr_CreateStruct_EntryAminoMsg): Expr_CreateStruct_Entry {
-    return Expr_CreateStruct_Entry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg): Expr_CreateStruct_Entry {
-    return Expr_CreateStruct_Entry.decode(message.value);
+  fromProtoMsg(message: Expr_CreateStruct_EntryProtoMsg, useInterfaces: boolean = true): Expr_CreateStruct_Entry {
+    return Expr_CreateStruct_Entry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_CreateStruct_Entry): Uint8Array {
     return Expr_CreateStruct_Entry.encode(message).finish();
@@ -1838,12 +1800,12 @@ export const Expr_CreateStruct_Entry = {
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
     iterVar: "",
-    iterRange: Expr.fromPartial({}),
+    iterRange: undefined,
     accuVar: "",
-    accuInit: Expr.fromPartial({}),
-    loopCondition: Expr.fromPartial({}),
-    loopStep: Expr.fromPartial({}),
-    result: Expr.fromPartial({})
+    accuInit: undefined,
+    loopCondition: undefined,
+    loopStep: undefined,
+    result: undefined
   };
 }
 export const Expr_Comprehension = {
@@ -1872,7 +1834,7 @@ export const Expr_Comprehension = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Expr_Comprehension {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Expr_Comprehension {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExpr_Comprehension();
@@ -1883,22 +1845,22 @@ export const Expr_Comprehension = {
           message.iterVar = reader.string();
           break;
         case 2:
-          message.iterRange = Expr.decode(reader, reader.uint32());
+          message.iterRange = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.accuVar = reader.string();
           break;
         case 4:
-          message.accuInit = Expr.decode(reader, reader.uint32());
+          message.accuInit = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.loopCondition = Expr.decode(reader, reader.uint32());
+          message.loopCondition = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.loopStep = Expr.decode(reader, reader.uint32());
+          message.loopStep = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 7:
-          message.result = Expr.decode(reader, reader.uint32());
+          message.result = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1973,32 +1935,43 @@ export const Expr_Comprehension = {
     return obj;
   },
   fromAmino(object: Expr_ComprehensionAmino): Expr_Comprehension {
-    return {
-      iterVar: object.iter_var,
-      iterRange: object?.iter_range ? Expr.fromAmino(object.iter_range) : undefined,
-      accuVar: object.accu_var,
-      accuInit: object?.accu_init ? Expr.fromAmino(object.accu_init) : undefined,
-      loopCondition: object?.loop_condition ? Expr.fromAmino(object.loop_condition) : undefined,
-      loopStep: object?.loop_step ? Expr.fromAmino(object.loop_step) : undefined,
-      result: object?.result ? Expr.fromAmino(object.result) : undefined
-    };
+    const message = createBaseExpr_Comprehension();
+    if (object.iter_var !== undefined && object.iter_var !== null) {
+      message.iterVar = object.iter_var;
+    }
+    if (object.iter_range !== undefined && object.iter_range !== null) {
+      message.iterRange = Expr.fromAmino(object.iter_range);
+    }
+    if (object.accu_var !== undefined && object.accu_var !== null) {
+      message.accuVar = object.accu_var;
+    }
+    if (object.accu_init !== undefined && object.accu_init !== null) {
+      message.accuInit = Expr.fromAmino(object.accu_init);
+    }
+    if (object.loop_condition !== undefined && object.loop_condition !== null) {
+      message.loopCondition = Expr.fromAmino(object.loop_condition);
+    }
+    if (object.loop_step !== undefined && object.loop_step !== null) {
+      message.loopStep = Expr.fromAmino(object.loop_step);
+    }
+    if (object.result !== undefined && object.result !== null) {
+      message.result = Expr.fromAmino(object.result);
+    }
+    return message;
   },
-  toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
+  toAmino(message: Expr_Comprehension, useInterfaces: boolean = true): Expr_ComprehensionAmino {
     const obj: any = {};
-    obj.iter_var = omitDefault(message.iterVar);
-    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
-    obj.accu_var = omitDefault(message.accuVar);
-    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
-    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
-    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
-    obj.result = message.result ? Expr.toAmino(message.result) : undefined;
+    obj.iter_var = message.iterVar;
+    obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange, useInterfaces) : undefined;
+    obj.accu_var = message.accuVar;
+    obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit, useInterfaces) : undefined;
+    obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition, useInterfaces) : undefined;
+    obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep, useInterfaces) : undefined;
+    obj.result = message.result ? Expr.toAmino(message.result, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Expr_ComprehensionAminoMsg): Expr_Comprehension {
-    return Expr_Comprehension.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Expr_ComprehensionProtoMsg): Expr_Comprehension {
-    return Expr_Comprehension.decode(message.value);
+  fromProtoMsg(message: Expr_ComprehensionProtoMsg, useInterfaces: boolean = true): Expr_Comprehension {
+    return Expr_Comprehension.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Expr_Comprehension): Uint8Array {
     return Expr_Comprehension.encode(message).finish();
@@ -2055,7 +2028,7 @@ export const Constant = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Constant {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Constant {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConstant();
@@ -2084,7 +2057,7 @@ export const Constant = {
           message.bytesValue = reader.bytes();
           break;
         case 8:
-          message.durationValue = Duration.decode(reader, reader.uint32());
+          message.durationValue = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
           message.timestampValue = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -2113,8 +2086,12 @@ export const Constant = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    if (message.uint64Value !== undefined) {
+      obj.uint64Value = message.uint64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
@@ -2168,36 +2145,51 @@ export const Constant = {
     return obj;
   },
   fromAmino(object: ConstantAmino): Constant {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
-      uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
-      durationValue: object?.duration_value ? Duration.fromAmino(object.duration_value) : undefined,
-      timestampValue: object?.timestamp_value ? Timestamp.fromAmino(object.timestamp_value) : undefined
-    };
+    const message = createBaseConstant();
+    if (object.null_value !== undefined && object.null_value !== null) {
+      message.nullValue = nullValueFromJSON(object.null_value);
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.int64_value !== undefined && object.int64_value !== null) {
+      message.int64Value = BigInt(object.int64_value);
+    }
+    if (object.uint64_value !== undefined && object.uint64_value !== null) {
+      message.uint64Value = BigInt(object.uint64_value);
+    }
+    if (object.double_value !== undefined && object.double_value !== null) {
+      message.doubleValue = object.double_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.bytes_value !== undefined && object.bytes_value !== null) {
+      message.bytesValue = bytesFromBase64(object.bytes_value);
+    }
+    if (object.duration_value !== undefined && object.duration_value !== null) {
+      message.durationValue = Duration.fromAmino(object.duration_value);
+    }
+    if (object.timestamp_value !== undefined && object.timestamp_value !== null) {
+      message.timestampValue = fromTimestamp(Timestamp.fromAmino(object.timestamp_value));
+    }
+    return message;
   },
-  toAmino(message: Constant): ConstantAmino {
+  toAmino(message: Constant, useInterfaces: boolean = true): ConstantAmino {
     const obj: any = {};
-    obj.null_value = omitDefault(message.nullValue);
-    obj.bool_value = omitDefault(message.boolValue);
-    obj.int64_value = omitDefault(message.int64Value);
-    obj.uint64_value = omitDefault(message.uint64Value);
-    obj.double_value = omitDefault(message.doubleValue);
-    obj.string_value = omitDefault(message.stringValue);
-    obj.bytes_value = message.bytesValue;
-    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue) : undefined;
-    obj.timestamp_value = message.timestampValue;
+    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
+    obj.duration_value = message.durationValue ? Duration.toAmino(message.durationValue, useInterfaces) : undefined;
+    obj.timestamp_value = message.timestampValue ? Timestamp.toAmino(toTimestamp(message.timestampValue)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ConstantAminoMsg): Constant {
-    return Constant.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConstantProtoMsg): Constant {
-    return Constant.decode(message.value);
+  fromProtoMsg(message: ConstantProtoMsg, useInterfaces: boolean = true): Constant {
+    return Constant.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Constant): Uint8Array {
     return Constant.encode(message).finish();
@@ -2225,7 +2217,7 @@ export const SourceInfo_PositionsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_PositionsEntry();
@@ -2278,22 +2270,23 @@ export const SourceInfo_PositionsEntry = {
     return obj;
   },
   fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
-    return {
-      key: BigInt(object.key),
-      value: object.value
-    };
+    const message = createBaseSourceInfo_PositionsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
+  toAmino(message: SourceInfo_PositionsEntry, useInterfaces: boolean = true): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key ? message.key.toString() : undefined;
+    obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.decode(message.value);
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo_PositionsEntry): Uint8Array {
     return SourceInfo_PositionsEntry.encode(message).finish();
@@ -2302,7 +2295,7 @@ export const SourceInfo_PositionsEntry = {
 function createBaseSourceInfo_MacroCallsEntry(): SourceInfo_MacroCallsEntry {
   return {
     key: BigInt(0),
-    value: Expr.fromPartial({})
+    value: undefined
   };
 }
 export const SourceInfo_MacroCallsEntry = {
@@ -2315,7 +2308,7 @@ export const SourceInfo_MacroCallsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo_MacroCallsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo_MacroCallsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_MacroCallsEntry();
@@ -2326,7 +2319,7 @@ export const SourceInfo_MacroCallsEntry = {
           message.key = reader.int64();
           break;
         case 2:
-          message.value = Expr.decode(reader, reader.uint32());
+          message.value = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -2370,22 +2363,23 @@ export const SourceInfo_MacroCallsEntry = {
     return obj;
   },
   fromAmino(object: SourceInfo_MacroCallsEntryAmino): SourceInfo_MacroCallsEntry {
-    return {
-      key: BigInt(object.key),
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
+    const message = createBaseSourceInfo_MacroCallsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: SourceInfo_MacroCallsEntry): SourceInfo_MacroCallsEntryAmino {
+  toAmino(message: SourceInfo_MacroCallsEntry, useInterfaces: boolean = true): SourceInfo_MacroCallsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    obj.key = message.key ? message.key.toString() : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SourceInfo_MacroCallsEntryAminoMsg): SourceInfo_MacroCallsEntry {
-    return SourceInfo_MacroCallsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfo_MacroCallsEntryProtoMsg): SourceInfo_MacroCallsEntry {
-    return SourceInfo_MacroCallsEntry.decode(message.value);
+  fromProtoMsg(message: SourceInfo_MacroCallsEntryProtoMsg, useInterfaces: boolean = true): SourceInfo_MacroCallsEntry {
+    return SourceInfo_MacroCallsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo_MacroCallsEntry): Uint8Array {
     return SourceInfo_MacroCallsEntry.encode(message).finish();
@@ -2428,7 +2422,7 @@ export const SourceInfo = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -2578,28 +2572,36 @@ export const SourceInfo = {
     return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      syntaxVersion: object.syntax_version,
-      location: object.location,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: bigint]: number;
-      }>((acc, [key, value]) => {
+    const message = createBaseSourceInfo();
+    if (object.syntax_version !== undefined && object.syntax_version !== null) {
+      message.syntaxVersion = object.syntax_version;
+    }
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    message.lineOffsets = object.line_offsets?.map(e => e) || [];
+    message.positions = Object.entries(object.positions ?? {}).reduce<{
+      [key: bigint]: number;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {},
-      macroCalls: isObject(object.macro_calls) ? Object.entries(object.macro_calls).reduce<{
-        [key: bigint]: Expr;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    message.macroCalls = Object.entries(object.macro_calls ?? {}).reduce<{
+      [key: bigint]: Expr;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Expr.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
-  toAmino(message: SourceInfo): SourceInfoAmino {
+  toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};
-    obj.syntax_version = omitDefault(message.syntaxVersion);
-    obj.location = omitDefault(message.location);
+    obj.syntax_version = message.syntaxVersion;
+    obj.location = message.location;
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
@@ -2619,11 +2621,8 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
-    return SourceInfo.decode(message.value);
+  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = true): SourceInfo {
+    return SourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo): Uint8Array {
     return SourceInfo.encode(message).finish();
@@ -2660,7 +2659,7 @@ export const SourcePosition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourcePosition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourcePosition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourcePosition();
@@ -2727,26 +2726,31 @@ export const SourcePosition = {
     return obj;
   },
   fromAmino(object: SourcePositionAmino): SourcePosition {
-    return {
-      location: object.location,
-      offset: object.offset,
-      line: object.line,
-      column: object.column
-    };
+    const message = createBaseSourcePosition();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = object.line;
+    }
+    if (object.column !== undefined && object.column !== null) {
+      message.column = object.column;
+    }
+    return message;
   },
-  toAmino(message: SourcePosition): SourcePositionAmino {
+  toAmino(message: SourcePosition, useInterfaces: boolean = true): SourcePositionAmino {
     const obj: any = {};
-    obj.location = omitDefault(message.location);
-    obj.offset = omitDefault(message.offset);
-    obj.line = omitDefault(message.line);
-    obj.column = omitDefault(message.column);
+    obj.location = message.location;
+    obj.offset = message.offset;
+    obj.line = message.line;
+    obj.column = message.column;
     return obj;
   },
-  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
-    return SourcePosition.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
-    return SourcePosition.decode(message.value);
+  fromProtoMsg(message: SourcePositionProtoMsg, useInterfaces: boolean = true): SourcePosition {
+    return SourcePosition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourcePosition): Uint8Array {
     return SourcePosition.encode(message).finish();

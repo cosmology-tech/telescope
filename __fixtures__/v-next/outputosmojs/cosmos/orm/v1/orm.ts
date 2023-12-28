@@ -4,7 +4,7 @@ export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
   /** primary_key defines the primary key for the table. */
-  primaryKey: PrimaryKeyDescriptor;
+  primaryKey?: PrimaryKeyDescriptor;
   /** index defines one or more secondary indexes. */
   index: SecondaryIndexDescriptor[];
   /**
@@ -14,9 +14,13 @@ export interface TableDescriptor {
    */
   id: number;
 }
+export interface TableDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.TableDescriptor";
+  value: Uint8Array;
+}
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptorSDKType {
-  primary_key: PrimaryKeyDescriptorSDKType;
+  primary_key?: PrimaryKeyDescriptorSDKType;
   index: SecondaryIndexDescriptorSDKType[];
   id: number;
 }
@@ -62,6 +66,10 @@ export interface PrimaryKeyDescriptor {
    */
   autoIncrement: boolean;
 }
+export interface PrimaryKeyDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.PrimaryKeyDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table primary key. */
 export interface PrimaryKeyDescriptorSDKType {
   fields: string;
@@ -90,6 +98,10 @@ export interface SecondaryIndexDescriptor {
   /** unique specifies that this an unique index. */
   unique: boolean;
 }
+export interface SecondaryIndexDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SecondaryIndexDescriptor";
+  value: Uint8Array;
+}
 /** PrimaryKeyDescriptor describes a table secondary index. */
 export interface SecondaryIndexDescriptorSDKType {
   fields: string;
@@ -105,13 +117,17 @@ export interface SingletonDescriptor {
    */
   id: number;
 }
+export interface SingletonDescriptorProtoMsg {
+  typeUrl: "/cosmos.orm.v1.SingletonDescriptor";
+  value: Uint8Array;
+}
 /** TableDescriptor describes an ORM singleton table which has at most one instance. */
 export interface SingletonDescriptorSDKType {
   id: number;
 }
 function createBaseTableDescriptor(): TableDescriptor {
   return {
-    primaryKey: PrimaryKeyDescriptor.fromPartial({}),
+    primaryKey: undefined,
     index: [],
     id: 0
   };
@@ -204,11 +220,15 @@ export const TableDescriptor = {
     return obj;
   },
   fromAmino(object: TableDescriptorAmino): TableDescriptor {
-    return {
-      primaryKey: object?.primary_key ? PrimaryKeyDescriptor.fromAmino(object.primary_key) : undefined,
-      index: Array.isArray(object?.index) ? object.index.map((e: any) => SecondaryIndexDescriptor.fromAmino(e)) : [],
-      id: object.id
-    };
+    const message = createBaseTableDescriptor();
+    if (object.primary_key !== undefined && object.primary_key !== null) {
+      message.primaryKey = PrimaryKeyDescriptor.fromAmino(object.primary_key);
+    }
+    message.index = object.index?.map(e => SecondaryIndexDescriptor.fromAmino(e)) || [];
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: TableDescriptor): TableDescriptorAmino {
     const obj: any = {};
@@ -317,10 +337,14 @@ export const PrimaryKeyDescriptor = {
     return obj;
   },
   fromAmino(object: PrimaryKeyDescriptorAmino): PrimaryKeyDescriptor {
-    return {
-      fields: object.fields,
-      autoIncrement: object.auto_increment
-    };
+    const message = createBasePrimaryKeyDescriptor();
+    if (object.fields !== undefined && object.fields !== null) {
+      message.fields = object.fields;
+    }
+    if (object.auto_increment !== undefined && object.auto_increment !== null) {
+      message.autoIncrement = object.auto_increment;
+    }
+    return message;
   },
   toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
     const obj: any = {};
@@ -437,11 +461,17 @@ export const SecondaryIndexDescriptor = {
     return obj;
   },
   fromAmino(object: SecondaryIndexDescriptorAmino): SecondaryIndexDescriptor {
-    return {
-      fields: object.fields,
-      id: object.id,
-      unique: object.unique
-    };
+    const message = createBaseSecondaryIndexDescriptor();
+    if (object.fields !== undefined && object.fields !== null) {
+      message.fields = object.fields;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.unique !== undefined && object.unique !== null) {
+      message.unique = object.unique;
+    }
+    return message;
   },
   toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
     const obj: any = {};
@@ -533,9 +563,11 @@ export const SingletonDescriptor = {
     return obj;
   },
   fromAmino(object: SingletonDescriptorAmino): SingletonDescriptor {
-    return {
-      id: object.id
-    };
+    const message = createBaseSingletonDescriptor();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
     const obj: any = {};

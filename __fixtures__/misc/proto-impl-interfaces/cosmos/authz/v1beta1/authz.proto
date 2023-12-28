@@ -1,0 +1,68 @@
+// Since: cosmos-sdk 0.43
+syntax = "proto3";
+package cosmos.authz.v1beta1;
+
+import "cosmos_proto/cosmos.proto";
+import "google/protobuf/timestamp.proto";
+import "gogoproto/gogo.proto";
+import "google/protobuf/any.proto";
+
+option go_package                      = "github.com/cosmos/cosmos-sdk/x/authz";
+option (gogoproto.goproto_getters_all) = false;
+
+// VoteOption enumerates the valid vote options for a given governance proposal.
+enum VoteOption {
+  // VOTE_OPTION_UNSPECIFIED defines a no-op vote option.
+  VOTE_OPTION_UNSPECIFIED = 0;
+  // VOTE_OPTION_YES defines a yes vote option.
+  VOTE_OPTION_YES = 1;
+  // VOTE_OPTION_ABSTAIN defines an abstain vote option.
+  VOTE_OPTION_ABSTAIN = 2;
+  // VOTE_OPTION_NO defines a no vote option.
+  VOTE_OPTION_NO = 3;
+  // VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+  VOTE_OPTION_NO_WITH_VETO = 4;
+}
+
+// GenericAuthorization gives the grantee unrestricted permissions to execute
+// the provided method on behalf of the granter's account.
+message GenericAuthorization {
+  option (cosmos_proto.implements_interface) = "Authorization";
+
+  // Msg, identified by it's type URL, to grant unrestricted permissions to execute
+  string msg = 1;
+}
+
+// Grant gives permissions to execute
+// the provide method with expiration time.
+message Grant {
+  google.protobuf.Any authorization = 1 [(gogoproto.nullable) = false, (cosmos_proto.accepts_interface) = "Authorization"];
+  // time when the grant will expire and will be pruned. If null, then the grant
+  // doesn't have a time expiration (other conditions  in `authorization`
+  // may apply to invalidate the grant)
+  google.protobuf.Timestamp expiration = 2 [(gogoproto.stdtime) = true, (gogoproto.nullable) = true];
+  VoteOption opt = 3;
+  google.protobuf.Any single_msg             = 4[(gogoproto.nullable) = false];
+  repeated google.protobuf.Any messages             = 5;
+}
+
+// GrantAuthorization extends a grant with both the addresses of the grantee and granter.
+// It is used in genesis.proto and query.proto
+message GrantAuthorization {
+  string granter = 1 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+  string grantee = 2 [(cosmos_proto.scalar) = "cosmos.AddressString"];
+
+  google.protobuf.Any       authorization = 3 [(cosmos_proto.accepts_interface) = "Authorization"];
+  google.protobuf.Timestamp expiration    = 4 [(gogoproto.stdtime) = true];
+}
+
+// GrantQueueItem contains the list of TypeURL of a sdk.Msg.
+message GrantQueueItem {
+  // msg_type_urls contains the list of TypeURL of a sdk.Msg.
+  repeated string msg_type_urls = 1;
+}
+
+// test Any array
+message Grants {
+  repeated google.protobuf.Any authorization = 1 [(gogoproto.nullable) = false, (cosmos_proto.accepts_interface) = "Authorization"];
+}

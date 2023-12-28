@@ -4,21 +4,33 @@ import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, omitDefault } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryEpochsInfoRequestProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoRequest";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface QueryEpochsInfoResponse {
   epochs: EpochInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryEpochsInfoResponseProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryEpochsInfoResponse";
+  value: Uint8Array;
 }
 export interface QueryEpochsInfoResponseSDKType {
   epochs: EpochInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 export interface QueryCurrentEpochRequest {
   identifier: string;
+}
+export interface QueryCurrentEpochRequestProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest";
+  value: Uint8Array;
 }
 export interface QueryCurrentEpochRequestSDKType {
   identifier: string;
@@ -26,12 +38,16 @@ export interface QueryCurrentEpochRequestSDKType {
 export interface QueryCurrentEpochResponse {
   currentEpoch: bigint;
 }
+export interface QueryCurrentEpochResponseProtoMsg {
+  typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse";
+  value: Uint8Array;
+}
 export interface QueryCurrentEpochResponseSDKType {
   current_epoch: bigint;
 }
 function createBaseQueryEpochsInfoRequest(): QueryEpochsInfoRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryEpochsInfoRequest = {
@@ -92,9 +108,11 @@ export const QueryEpochsInfoRequest = {
     return obj;
   },
   fromAmino(object: QueryEpochsInfoRequestAmino): QueryEpochsInfoRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryEpochsInfoRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryEpochsInfoRequest): QueryEpochsInfoRequestAmino {
     const obj: any = {};
@@ -120,7 +138,7 @@ export const QueryEpochsInfoRequest = {
 function createBaseQueryEpochsInfoResponse(): QueryEpochsInfoResponse {
   return {
     epochs: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryEpochsInfoResponse = {
@@ -201,10 +219,12 @@ export const QueryEpochsInfoResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochsInfoResponseAmino): QueryEpochsInfoResponse {
-    return {
-      epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryEpochsInfoResponse();
+    message.epochs = object.epochs?.map(e => EpochInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryEpochsInfoResponse): QueryEpochsInfoResponseAmino {
     const obj: any = {};
@@ -240,7 +260,7 @@ function createBaseQueryCurrentEpochRequest(): QueryCurrentEpochRequest {
 export const QueryCurrentEpochRequest = {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochRequest",
   encode(message: QueryCurrentEpochRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.identifier !== "") {
+    if (message.identifier !== undefined) {
       writer.uint32(10).string(message.identifier);
     }
     return writer;
@@ -293,9 +313,11 @@ export const QueryCurrentEpochRequest = {
     return obj;
   },
   fromAmino(object: QueryCurrentEpochRequestAmino): QueryCurrentEpochRequest {
-    return {
-      identifier: object.identifier
-    };
+    const message = createBaseQueryCurrentEpochRequest();
+    if (object.identifier !== undefined && object.identifier !== null) {
+      message.identifier = object.identifier;
+    }
+    return message;
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
@@ -326,7 +348,7 @@ function createBaseQueryCurrentEpochResponse(): QueryCurrentEpochResponse {
 export const QueryCurrentEpochResponse = {
   typeUrl: "/evmos.epochs.v1.QueryCurrentEpochResponse",
   encode(message: QueryCurrentEpochResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.currentEpoch !== BigInt(0)) {
+    if (message.currentEpoch !== undefined) {
       writer.uint32(8).int64(message.currentEpoch);
     }
     return writer;
@@ -381,9 +403,11 @@ export const QueryCurrentEpochResponse = {
     return obj;
   },
   fromAmino(object: QueryCurrentEpochResponseAmino): QueryCurrentEpochResponse {
-    return {
-      currentEpoch: BigInt(object.current_epoch)
-    };
+    const message = createBaseQueryCurrentEpochResponse();
+    if (object.current_epoch !== undefined && object.current_epoch !== null) {
+      message.currentEpoch = BigInt(object.current_epoch);
+    }
+    return message;
   },
   toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
     const obj: any = {};

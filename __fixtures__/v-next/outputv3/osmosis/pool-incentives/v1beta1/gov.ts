@@ -12,7 +12,7 @@ export const protobufPackage = "osmosis.poolincentives.v1beta1";
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -31,13 +31,9 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
-}
-export interface ReplacePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
-  value: ReplacePoolIncentivesProposalAmino;
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -49,7 +45,7 @@ export interface ReplacePoolIncentivesProposalAminoMsg {
  * configuration. Note that gaugeId=0 represents the community pool.
  */
 export interface ReplacePoolIncentivesProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];
@@ -64,7 +60,7 @@ export interface ReplacePoolIncentivesProposalSDKType {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecord[];
@@ -83,13 +79,9 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposalAmino {
-  title: string;
-  description: string;
-  records: DistrRecordAmino[];
-}
-export interface UpdatePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/update-pool-incentives-proposal";
-  value: UpdatePoolIncentivesProposalAmino;
+  title?: string;
+  description?: string;
+  records?: DistrRecordAmino[];
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -101,7 +93,7 @@ export interface UpdatePoolIncentivesProposalAminoMsg {
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
 export interface UpdatePoolIncentivesProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
   title: string;
   description: string;
   records: DistrRecordSDKType[];
@@ -129,7 +121,7 @@ export const ReplacePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReplacePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ReplacePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReplacePoolIncentivesProposal();
@@ -143,7 +135,7 @@ export const ReplacePoolIncentivesProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.records.push(DistrRecord.decode(reader, reader.uint32()));
+          message.records.push(DistrRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -196,34 +188,29 @@ export const ReplacePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseReplacePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
+  toAmino(message: ReplacePoolIncentivesProposal, useInterfaces: boolean = true): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.records = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ReplacePoolIncentivesProposalAminoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-      value: ReplacePoolIncentivesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg): ReplacePoolIncentivesProposal {
-    return ReplacePoolIncentivesProposal.decode(message.value);
+  fromProtoMsg(message: ReplacePoolIncentivesProposalProtoMsg, useInterfaces: boolean = true): ReplacePoolIncentivesProposal {
+    return ReplacePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReplacePoolIncentivesProposal): Uint8Array {
     return ReplacePoolIncentivesProposal.encode(message).finish();
@@ -258,7 +245,7 @@ export const UpdatePoolIncentivesProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdatePoolIncentivesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdatePoolIncentivesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdatePoolIncentivesProposal();
@@ -272,7 +259,7 @@ export const UpdatePoolIncentivesProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.records.push(DistrRecord.decode(reader, reader.uint32()));
+          message.records.push(DistrRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -325,34 +312,29 @@ export const UpdatePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseUpdatePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
+  toAmino(message: UpdatePoolIncentivesProposal, useInterfaces: boolean = true): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.records = [];
     }
     return obj;
   },
-  fromAminoMsg(object: UpdatePoolIncentivesProposalAminoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAminoMsg {
-    return {
-      type: "osmosis/poolincentives/update-pool-incentives-proposal",
-      value: UpdatePoolIncentivesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg): UpdatePoolIncentivesProposal {
-    return UpdatePoolIncentivesProposal.decode(message.value);
+  fromProtoMsg(message: UpdatePoolIncentivesProposalProtoMsg, useInterfaces: boolean = true): UpdatePoolIncentivesProposal {
+    return UpdatePoolIncentivesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdatePoolIncentivesProposal): Uint8Array {
     return UpdatePoolIncentivesProposal.encode(message).finish();

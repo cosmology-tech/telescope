@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { ProtoField } from '@cosmology/types';
 import { getDefaultTSTypeFromProtoType } from '../../types';
 import { ToJSONMethod } from './index';
+import { getFieldOptionalityForDefaults } from '../types';
 
 const notUndefinedSetValue = (messageProp: string, objProp: string, expr: t.Expression) => {
     return t.expressionStatement(
@@ -103,7 +104,37 @@ export const toJSON = {
     // message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
     long(args: ToJSONMethod) {
         const { messageProp, objProp } = getPropNames(args.field);
-        return notUndefinedSetValue(
+
+        const isOptional = getFieldOptionalityForDefaults(args.context, args.field, args.isOneOf);
+
+        if(isOptional){
+          return t.ifStatement(
+            t.binaryExpression(
+              "!==",
+              t.memberExpression(t.identifier("message"), t.identifier(messageProp)),
+              t.identifier("undefined")
+            ),
+            t.blockStatement([
+              t.expressionStatement(
+                t.assignmentExpression(
+                  "=",
+                  t.memberExpression(t.identifier("obj"), t.identifier(objProp)),
+                  t.callExpression(
+                    t.memberExpression(
+                      t.memberExpression(
+                        t.identifier("message"),
+                        t.identifier(messageProp)
+                      ),
+                      t.identifier("toString")
+                    ),
+                    []
+                  )
+                )
+              ),
+            ])
+          );
+        } else {
+          return notUndefinedSetValue(
             messageProp,
             objProp,
             t.callExpression(
@@ -120,7 +151,8 @@ export const toJSON = {
                 ),
                 []
             )
-        );
+          );
+        }
     },
 
     int64(args: ToJSONMethod) {
@@ -141,8 +173,19 @@ export const toJSON = {
 
     // message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
     type(args: ToJSONMethod) {
-        const name = args.context.getTypeName(args.field);
+        let name = args.context.getTypeName(args.field);
         const { messageProp, objProp } = getPropNames(args.field);
+
+        if (
+          !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+          args.context.options.interfaces.enabled &&
+          args.context.options.interfaces?.useGlobalDecoderRegistry &&
+          args.field.type === 'google.protobuf.Any' &&
+          args.field.options['(cosmos_proto.accepts_interface)']
+        ) {
+          name = 'GlobalDecoderRegistry';
+        }
+
         // TODO isn't the nested conditional a waste? (using ts-proto as reference)
         // maybe null is OK?
         return notUndefinedSetValue(messageProp, objProp, t.conditionalExpression(
@@ -637,7 +680,18 @@ export const arrayTypes = {
     // }
 
     type(args: ToJSONMethod) {
-        const name = args.context.getTypeName(args.field);
+        let name = args.context.getTypeName(args.field);
+
+        if (
+          !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+          args.context.options.interfaces.enabled &&
+          args.context.options.interfaces?.useGlobalDecoderRegistry &&
+          args.field.type === 'google.protobuf.Any' &&
+          args.field.options['(cosmos_proto.accepts_interface)']
+        ) {
+          name = 'GlobalDecoderRegistry';
+        }
+
         return t.conditionalExpression(
             t.identifier('e'),
             t.callExpression(

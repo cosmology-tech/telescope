@@ -24,11 +24,7 @@ export interface ParamsAmino {
    * to counter-balance the staked amount on chain's exposure to various asset
    * volatilities, and have base staking be 'resistant' to volatility.
    */
-  minimum_risk_factor: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/params";
-  value: ParamsAmino;
+  minimum_risk_factor?: string;
 }
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
@@ -48,7 +44,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -91,26 +87,19 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      minimumRiskFactor: object.minimum_risk_factor
-    };
+    const message = createBaseParams();
+    if (object.minimum_risk_factor !== undefined && object.minimum_risk_factor !== null) {
+      message.minimumRiskFactor = object.minimum_risk_factor;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.minimum_risk_factor = padDecimal(message.minimumRiskFactor);
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

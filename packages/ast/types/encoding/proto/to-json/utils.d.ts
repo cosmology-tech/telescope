@@ -12,12 +12,12 @@ export declare const toJSON: {
     sint32(args: ToJSONMethod): t.ExpressionStatement;
     fixed32(args: ToJSONMethod): t.ExpressionStatement;
     sfixed32(args: ToJSONMethod): t.ExpressionStatement;
-    long(args: ToJSONMethod): t.ExpressionStatement;
-    int64(args: ToJSONMethod): t.ExpressionStatement;
-    uint64(args: ToJSONMethod): t.ExpressionStatement;
-    sint64(args: ToJSONMethod): t.ExpressionStatement;
-    fixed64(args: ToJSONMethod): t.ExpressionStatement;
-    sfixed64(args: ToJSONMethod): t.ExpressionStatement;
+    long(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
+    int64(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
+    uint64(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
+    sint64(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
+    fixed64(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
+    sfixed64(args: ToJSONMethod): t.ExpressionStatement | t.IfStatement;
     type(args: ToJSONMethod): t.ExpressionStatement;
     enum(args: ToJSONMethod): t.ExpressionStatement;
     bytes(args: ToJSONMethod): t.ExpressionStatement;

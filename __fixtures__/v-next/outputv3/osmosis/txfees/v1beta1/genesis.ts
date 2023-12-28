@@ -13,12 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateAmino {
-  basedenom: string;
-  feetokens: FeeTokenAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/txfees/genesis-state";
-  value: GenesisStateAmino;
+  basedenom?: string;
+  feetokens?: FeeTokenAmino[];
 }
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisStateSDKType {
@@ -43,7 +39,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -54,7 +50,7 @@ export const GenesisState = {
           message.basedenom = reader.string();
           break;
         case 2:
-          message.feetokens.push(FeeToken.decode(reader, reader.uint32()));
+          message.feetokens.push(FeeToken.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -102,32 +98,25 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      basedenom: object.basedenom,
-      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.basedenom !== undefined && object.basedenom !== null) {
+      message.basedenom = object.basedenom;
+    }
+    message.feetokens = object.feetokens?.map(e => FeeToken.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.basedenom = omitDefault(message.basedenom);
     if (message.feetokens) {
-      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e) : undefined);
+      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.feetokens = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/txfees/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

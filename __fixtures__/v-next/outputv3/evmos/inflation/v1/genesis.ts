@@ -1,6 +1,6 @@
 import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
@@ -24,17 +24,13 @@ export interface GenesisStateAmino {
   /** params defines all the paramaters of the module. */
   params?: ParamsAmino;
   /** amount of past periods, based on the epochs per period param */
-  period: string;
+  period?: string;
   /** inflation epoch identifier */
-  epoch_identifier: string;
+  epoch_identifier?: string;
   /** number of epochs after which inflation is recalculated */
-  epochs_per_period: string;
+  epochs_per_period?: string;
   /** number of epochs that have passed while inflation is disabled */
-  skipped_epochs: string;
-}
-export interface GenesisStateAminoMsg {
-  type: "/evmos.inflation.v1.GenesisState";
-  value: GenesisStateAmino;
+  skipped_epochs?: string;
 }
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
@@ -62,17 +58,13 @@ export interface ParamsProtoMsg {
 /** Params holds parameters for the inflation module. */
 export interface ParamsAmino {
   /** type of coin to mint */
-  mint_denom: string;
+  mint_denom?: string;
   /** variables to calculate exponential inflation */
   exponential_calculation?: ExponentialCalculationAmino;
   /** inflation distribution of the minted denom */
   inflation_distribution?: InflationDistributionAmino;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
-  enable_inflation: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.inflation.v1.Params";
-  value: ParamsAmino;
+  enable_inflation?: boolean;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -110,7 +102,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -118,7 +110,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.period = reader.uint64();
@@ -193,28 +185,35 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: BigInt(object.period),
-      epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: BigInt(object.epochs_per_period),
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    if (object.epoch_identifier !== undefined && object.epoch_identifier !== null) {
+      message.epochIdentifier = object.epoch_identifier;
+    }
+    if (object.epochs_per_period !== undefined && object.epochs_per_period !== null) {
+      message.epochsPerPeriod = BigInt(object.epochs_per_period);
+    }
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.period = omitDefault(message.period);
-    obj.epoch_identifier = omitDefault(message.epochIdentifier);
-    obj.epochs_per_period = omitDefault(message.epochsPerPeriod);
-    obj.skipped_epochs = omitDefault(message.skippedEpochs);
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.epoch_identifier = message.epochIdentifier;
+    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
+    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -251,7 +250,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -262,10 +261,10 @@ export const Params = {
           message.mintDenom = reader.string();
           break;
         case 2:
-          message.exponentialCalculation = ExponentialCalculation.decode(reader, reader.uint32());
+          message.exponentialCalculation = ExponentialCalculation.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.inflationDistribution = InflationDistribution.decode(reader, reader.uint32());
+          message.inflationDistribution = InflationDistribution.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.enableInflation = reader.bool();
@@ -322,26 +321,31 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
-      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
-      enableInflation: object.enable_inflation
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.exponential_calculation !== undefined && object.exponential_calculation !== null) {
+      message.exponentialCalculation = ExponentialCalculation.fromAmino(object.exponential_calculation);
+    }
+    if (object.inflation_distribution !== undefined && object.inflation_distribution !== null) {
+      message.inflationDistribution = InflationDistribution.fromAmino(object.inflation_distribution);
+    }
+    if (object.enable_inflation !== undefined && object.enable_inflation !== null) {
+      message.enableInflation = object.enable_inflation;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.mint_denom = omitDefault(message.mintDenom);
-    obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined;
-    obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
-    obj.enable_inflation = omitDefault(message.enableInflation);
+    obj.mint_denom = message.mintDenom;
+    obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation, useInterfaces) : undefined;
+    obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution, useInterfaces) : undefined;
+    obj.enable_inflation = message.enableInflation;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

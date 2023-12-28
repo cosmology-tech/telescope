@@ -2,7 +2,7 @@ import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
 import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
 import { Struct, StructSDKType } from "../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
+import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -51,6 +51,10 @@ export interface MonitoredResourceDescriptor {
   /** Optional. The launch stage of the monitored resource definition. */
   launchStage: LaunchStage;
 }
+export interface MonitoredResourceDescriptorProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceDescriptor";
+  value: Uint8Array;
+}
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
  * type name and a set of labels.  For example, the monitored resource
@@ -73,6 +77,10 @@ export interface MonitoredResourceDescriptorSDKType {
 export interface MonitoredResource_LabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResource_LabelsEntrySDKType {
   key: string;
@@ -109,6 +117,10 @@ export interface MonitoredResource {
     [key: string]: string;
   };
 }
+export interface MonitoredResourceProtoMsg {
+  typeUrl: "/google.api.MonitoredResource";
+  value: Uint8Array;
+}
 /**
  * An object representing a resource that can be used for monitoring, logging,
  * billing, or other purposes. Examples include virtual machine instances,
@@ -133,6 +145,10 @@ export interface MonitoredResourceSDKType {
 export interface MonitoredResourceMetadata_UserLabelsEntry {
   key: string;
   value: string;
+}
+export interface MonitoredResourceMetadata_UserLabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface MonitoredResourceMetadata_UserLabelsEntrySDKType {
   key: string;
@@ -159,11 +175,15 @@ export interface MonitoredResourceMetadata {
    *       "security_group": ["a", "b", "c"],
    *       "spot_instance": false }
    */
-  systemLabels: Struct;
+  systemLabels?: Struct;
   /** Output only. A map of user-defined metadata labels. */
   userLabels: {
     [key: string]: string;
   };
+}
+export interface MonitoredResourceMetadataProtoMsg {
+  typeUrl: "/google.api.MonitoredResourceMetadata";
+  value: Uint8Array;
 }
 /**
  * Auxiliary metadata for a [MonitoredResource][google.api.MonitoredResource] object.
@@ -174,7 +194,7 @@ export interface MonitoredResourceMetadata {
  * the metadata in this message.
  */
 export interface MonitoredResourceMetadataSDKType {
-  system_labels: StructSDKType;
+  system_labels?: StructSDKType;
   user_labels: {
     [key: string]: string;
   };
@@ -313,27 +333,37 @@ export const MonitoredResourceDescriptor = {
     return obj;
   },
   fromAmino(object: MonitoredResourceDescriptorAmino): MonitoredResourceDescriptor {
-    return {
-      name: object.name,
-      type: object.type,
-      displayName: object.display_name,
-      description: object.description,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      launchStage: isSet(object.launch_stage) ? launchStageFromJSON(object.launch_stage) : -1
-    };
+    const message = createBaseMonitoredResourceDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = launchStageFromJSON(object.launch_stage);
+    }
+    return message;
   },
   toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.type = omitDefault(message.type);
-    obj.display_name = omitDefault(message.displayName);
-    obj.description = omitDefault(message.description);
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.display_name = message.displayName;
+    obj.description = message.description;
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
       obj.labels = [];
     }
-    obj.launch_stage = omitDefault(message.launchStage);
+    obj.launch_stage = launchStageToJSON(message.launchStage);
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
@@ -425,15 +455,19 @@ export const MonitoredResource_LabelsEntry = {
     return obj;
   },
   fromAmino(object: MonitoredResource_LabelsEntryAmino): MonitoredResource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMonitoredResource_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
@@ -558,19 +592,23 @@ export const MonitoredResource = {
     return obj;
   },
   fromAmino(object: MonitoredResourceAmino): MonitoredResource {
-    return {
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMonitoredResource();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: MonitoredResource): MonitoredResourceAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
+    obj.type = message.type;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -668,15 +706,19 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     return obj;
   },
   fromAmino(object: MonitoredResourceMetadata_UserLabelsEntryAmino): MonitoredResourceMetadata_UserLabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {
@@ -691,7 +733,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
 };
 function createBaseMonitoredResourceMetadata(): MonitoredResourceMetadata {
   return {
-    systemLabels: Struct.fromPartial({}),
+    systemLabels: undefined,
     userLabels: {}
   };
 }
@@ -801,15 +843,19 @@ export const MonitoredResourceMetadata = {
     return obj;
   },
   fromAmino(object: MonitoredResourceMetadataAmino): MonitoredResourceMetadata {
-    return {
-      systemLabels: object?.system_labels ? Struct.fromAmino(object.system_labels) : undefined,
-      userLabels: isObject(object.user_labels) ? Object.entries(object.user_labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMonitoredResourceMetadata();
+    if (object.system_labels !== undefined && object.system_labels !== null) {
+      message.systemLabels = Struct.fromAmino(object.system_labels);
+    }
+    message.userLabels = Object.entries(object.user_labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: MonitoredResourceMetadata): MonitoredResourceMetadataAmino {
     const obj: any = {};

@@ -10,6 +10,10 @@ export interface MsgSwapExactAmountIn {
   tokenIn: Coin;
   tokenOutMinAmount: string;
 }
+export interface MsgSwapExactAmountInProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountIn";
+  value: Uint8Array;
+}
 /** ===================== MsgSwapExactAmountIn */
 export interface MsgSwapExactAmountInSDKType {
   sender: string;
@@ -19,6 +23,10 @@ export interface MsgSwapExactAmountInSDKType {
 }
 export interface MsgSwapExactAmountInResponse {
   tokenOutAmount: string;
+}
+export interface MsgSwapExactAmountInResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountInResponse";
+  value: Uint8Array;
 }
 export interface MsgSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -30,6 +38,10 @@ export interface MsgSwapExactAmountOut {
   tokenInMaxAmount: string;
   tokenOut: Coin;
 }
+export interface MsgSwapExactAmountOutProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOut";
+  value: Uint8Array;
+}
 /** ===================== MsgSwapExactAmountOut */
 export interface MsgSwapExactAmountOutSDKType {
   sender: string;
@@ -39,6 +51,10 @@ export interface MsgSwapExactAmountOutSDKType {
 }
 export interface MsgSwapExactAmountOutResponse {
   tokenInAmount: string;
+}
+export interface MsgSwapExactAmountOutResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.MsgSwapExactAmountOutResponse";
+  value: Uint8Array;
 }
 export interface MsgSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
@@ -151,12 +167,18 @@ export const MsgSwapExactAmountIn = {
     return obj;
   },
   fromAmino(object: MsgSwapExactAmountInAmino): MsgSwapExactAmountIn {
-    return {
-      sender: object.sender,
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : [],
-      tokenIn: object?.token_in ? Coin.fromAmino(object.token_in) : undefined,
-      tokenOutMinAmount: object.token_out_min_amount
-    };
+    const message = createBaseMsgSwapExactAmountIn();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    message.routes = object.routes?.map(e => SwapAmountInRoute.fromAmino(e)) || [];
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = Coin.fromAmino(object.token_in);
+    }
+    if (object.token_out_min_amount !== undefined && object.token_out_min_amount !== null) {
+      message.tokenOutMinAmount = object.token_out_min_amount;
+    }
+    return message;
   },
   toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
     const obj: any = {};
@@ -253,9 +275,11 @@ export const MsgSwapExactAmountInResponse = {
     return obj;
   },
   fromAmino(object: MsgSwapExactAmountInResponseAmino): MsgSwapExactAmountInResponse {
-    return {
-      tokenOutAmount: object.token_out_amount
-    };
+    const message = createBaseMsgSwapExactAmountInResponse();
+    if (object.token_out_amount !== undefined && object.token_out_amount !== null) {
+      message.tokenOutAmount = object.token_out_amount;
+    }
+    return message;
   },
   toAmino(message: MsgSwapExactAmountInResponse): MsgSwapExactAmountInResponseAmino {
     const obj: any = {};
@@ -392,12 +416,18 @@ export const MsgSwapExactAmountOut = {
     return obj;
   },
   fromAmino(object: MsgSwapExactAmountOutAmino): MsgSwapExactAmountOut {
-    return {
-      sender: object.sender,
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
-      tokenInMaxAmount: object.token_in_max_amount,
-      tokenOut: object?.token_out ? Coin.fromAmino(object.token_out) : undefined
-    };
+    const message = createBaseMsgSwapExactAmountOut();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    message.routes = object.routes?.map(e => SwapAmountOutRoute.fromAmino(e)) || [];
+    if (object.token_in_max_amount !== undefined && object.token_in_max_amount !== null) {
+      message.tokenInMaxAmount = object.token_in_max_amount;
+    }
+    if (object.token_out !== undefined && object.token_out !== null) {
+      message.tokenOut = Coin.fromAmino(object.token_out);
+    }
+    return message;
   },
   toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
     const obj: any = {};
@@ -494,9 +524,11 @@ export const MsgSwapExactAmountOutResponse = {
     return obj;
   },
   fromAmino(object: MsgSwapExactAmountOutResponseAmino): MsgSwapExactAmountOutResponse {
-    return {
-      tokenInAmount: object.token_in_amount
-    };
+    const message = createBaseMsgSwapExactAmountOutResponse();
+    if (object.token_in_amount !== undefined && object.token_in_amount !== null) {
+      message.tokenInAmount = object.token_in_amount;
+    }
+    return message;
   },
   toAmino(message: MsgSwapExactAmountOutResponse): MsgSwapExactAmountOutResponseAmino {
     const obj: any = {};

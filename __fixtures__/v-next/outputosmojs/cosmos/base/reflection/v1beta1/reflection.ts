@@ -3,12 +3,20 @@ import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
+export interface ListAllInterfacesRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest";
+  value: Uint8Array;
+}
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequestSDKType {}
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
   interfaceNames: string[];
+}
+export interface ListAllInterfacesResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse";
+  value: Uint8Array;
 }
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponseSDKType {
@@ -21,6 +29,10 @@ export interface ListAllInterfacesResponseSDKType {
 export interface ListImplementationsRequest {
   /** interface_name defines the interface to query the implementations for. */
   interfaceName: string;
+}
+export interface ListImplementationsRequestProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest";
+  value: Uint8Array;
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -35,6 +47,10 @@ export interface ListImplementationsRequestSDKType {
  */
 export interface ListImplementationsResponse {
   implementationMessageNames: string[];
+}
+export interface ListImplementationsResponseProtoMsg {
+  typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse";
+  value: Uint8Array;
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
@@ -87,7 +103,8 @@ export const ListAllInterfacesRequest = {
     return obj;
   },
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
-    return {};
+    const message = createBaseListAllInterfacesRequest();
+    return message;
   },
   toAmino(_: ListAllInterfacesRequest): ListAllInterfacesRequestAmino {
     const obj: any = {};
@@ -184,9 +201,9 @@ export const ListAllInterfacesResponse = {
     return obj;
   },
   fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
-    return {
-      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
-    };
+    const message = createBaseListAllInterfacesResponse();
+    message.interfaceNames = object.interface_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListAllInterfacesResponse): ListAllInterfacesResponseAmino {
     const obj: any = {};
@@ -280,9 +297,11 @@ export const ListImplementationsRequest = {
     return obj;
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
-    return {
-      interfaceName: object.interface_name
-    };
+    const message = createBaseListImplementationsRequest();
+    if (object.interface_name !== undefined && object.interface_name !== null) {
+      message.interfaceName = object.interface_name;
+    }
+    return message;
   },
   toAmino(message: ListImplementationsRequest): ListImplementationsRequestAmino {
     const obj: any = {};
@@ -380,9 +399,9 @@ export const ListImplementationsResponse = {
     return obj;
   },
   fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
-    return {
-      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
-    };
+    const message = createBaseListImplementationsResponse();
+    message.implementationMessageNames = object.implementation_message_names?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ListImplementationsResponse): ListImplementationsResponseAmino {
     const obj: any = {};

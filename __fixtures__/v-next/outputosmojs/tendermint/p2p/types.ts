@@ -1,11 +1,15 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
   block: bigint;
   app: bigint;
+}
+export interface ProtocolVersionProtoMsg {
+  typeUrl: "/tendermint.p2p.ProtocolVersion";
+  value: Uint8Array;
 }
 export interface ProtocolVersionSDKType {
   p2p: bigint;
@@ -22,6 +26,10 @@ export interface NodeInfo {
   moniker: string;
   other: NodeInfoOther;
 }
+export interface NodeInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfo";
+  value: Uint8Array;
+}
 export interface NodeInfoSDKType {
   protocol_version: ProtocolVersionSDKType;
   node_id: string;
@@ -36,6 +44,10 @@ export interface NodeInfoOther {
   txIndex: string;
   rpcAddress: string;
 }
+export interface NodeInfoOtherProtoMsg {
+  typeUrl: "/tendermint.p2p.NodeInfoOther";
+  value: Uint8Array;
+}
 export interface NodeInfoOtherSDKType {
   tx_index: string;
   rpc_address: string;
@@ -43,23 +55,31 @@ export interface NodeInfoOtherSDKType {
 export interface PeerInfo {
   id: string;
   addressInfo: PeerAddressInfo[];
-  lastConnected: Date;
+  lastConnected?: Date;
+}
+export interface PeerInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerInfo";
+  value: Uint8Array;
 }
 export interface PeerInfoSDKType {
   id: string;
   address_info: PeerAddressInfoSDKType[];
-  last_connected: Date;
+  last_connected?: Date;
 }
 export interface PeerAddressInfo {
   address: string;
-  lastDialSuccess: Date;
-  lastDialFailure: Date;
+  lastDialSuccess?: Date;
+  lastDialFailure?: Date;
   dialFailures: number;
+}
+export interface PeerAddressInfoProtoMsg {
+  typeUrl: "/tendermint.p2p.PeerAddressInfo";
+  value: Uint8Array;
 }
 export interface PeerAddressInfoSDKType {
   address: string;
-  last_dial_success: Date;
-  last_dial_failure: Date;
+  last_dial_success?: Date;
+  last_dial_failure?: Date;
   dial_failures: number;
 }
 function createBaseProtocolVersion(): ProtocolVersion {
@@ -149,17 +169,23 @@ export const ProtocolVersion = {
     return obj;
   },
   fromAmino(object: ProtocolVersionAmino): ProtocolVersion {
-    return {
-      p2p: BigInt(object.p2p),
-      block: BigInt(object.block),
-      app: BigInt(object.app)
-    };
+    const message = createBaseProtocolVersion();
+    if (object.p2p !== undefined && object.p2p !== null) {
+      message.p2p = BigInt(object.p2p);
+    }
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app);
+    }
+    return message;
   },
   toAmino(message: ProtocolVersion): ProtocolVersionAmino {
     const obj: any = {};
-    obj.p2p = omitDefault(message.p2p);
-    obj.block = omitDefault(message.block);
-    obj.app = omitDefault(message.app);
+    obj.p2p = message.p2p ? message.p2p.toString() : undefined;
+    obj.block = message.block ? message.block.toString() : undefined;
+    obj.app = message.app ? message.app.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ProtocolVersionAminoMsg): ProtocolVersion {
@@ -330,26 +356,42 @@ export const NodeInfo = {
     return obj;
   },
   fromAmino(object: NodeInfoAmino): NodeInfo {
-    return {
-      protocolVersion: object?.protocol_version ? ProtocolVersion.fromAmino(object.protocol_version) : undefined,
-      nodeId: object.node_id,
-      listenAddr: object.listen_addr,
-      network: object.network,
-      version: object.version,
-      channels: object.channels,
-      moniker: object.moniker,
-      other: object?.other ? NodeInfoOther.fromAmino(object.other) : undefined
-    };
+    const message = createBaseNodeInfo();
+    if (object.protocol_version !== undefined && object.protocol_version !== null) {
+      message.protocolVersion = ProtocolVersion.fromAmino(object.protocol_version);
+    }
+    if (object.node_id !== undefined && object.node_id !== null) {
+      message.nodeId = object.node_id;
+    }
+    if (object.listen_addr !== undefined && object.listen_addr !== null) {
+      message.listenAddr = object.listen_addr;
+    }
+    if (object.network !== undefined && object.network !== null) {
+      message.network = object.network;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.channels !== undefined && object.channels !== null) {
+      message.channels = bytesFromBase64(object.channels);
+    }
+    if (object.moniker !== undefined && object.moniker !== null) {
+      message.moniker = object.moniker;
+    }
+    if (object.other !== undefined && object.other !== null) {
+      message.other = NodeInfoOther.fromAmino(object.other);
+    }
+    return message;
   },
   toAmino(message: NodeInfo): NodeInfoAmino {
     const obj: any = {};
     obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion) : undefined;
-    obj.node_id = omitDefault(message.nodeId);
-    obj.listen_addr = omitDefault(message.listenAddr);
-    obj.network = omitDefault(message.network);
-    obj.version = omitDefault(message.version);
-    obj.channels = message.channels;
-    obj.moniker = omitDefault(message.moniker);
+    obj.node_id = message.nodeId;
+    obj.listen_addr = message.listenAddr;
+    obj.network = message.network;
+    obj.version = message.version;
+    obj.channels = message.channels ? base64FromBytes(message.channels) : undefined;
+    obj.moniker = message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other) : undefined;
     return obj;
   },
@@ -443,15 +485,19 @@ export const NodeInfoOther = {
     return obj;
   },
   fromAmino(object: NodeInfoOtherAmino): NodeInfoOther {
-    return {
-      txIndex: object.tx_index,
-      rpcAddress: object.rpc_address
-    };
+    const message = createBaseNodeInfoOther();
+    if (object.tx_index !== undefined && object.tx_index !== null) {
+      message.txIndex = object.tx_index;
+    }
+    if (object.rpc_address !== undefined && object.rpc_address !== null) {
+      message.rpcAddress = object.rpc_address;
+    }
+    return message;
   },
   toAmino(message: NodeInfoOther): NodeInfoOtherAmino {
     const obj: any = {};
-    obj.tx_index = omitDefault(message.txIndex);
-    obj.rpc_address = omitDefault(message.rpcAddress);
+    obj.tx_index = message.txIndex;
+    obj.rpc_address = message.rpcAddress;
     return obj;
   },
   fromAminoMsg(object: NodeInfoOtherAminoMsg): NodeInfoOther {
@@ -474,7 +520,7 @@ function createBasePeerInfo(): PeerInfo {
   return {
     id: "",
     addressInfo: [],
-    lastConnected: new Date()
+    lastConnected: undefined
   };
 }
 export const PeerInfo = {
@@ -565,21 +611,25 @@ export const PeerInfo = {
     return obj;
   },
   fromAmino(object: PeerInfoAmino): PeerInfo {
-    return {
-      id: object.id,
-      addressInfo: Array.isArray(object?.address_info) ? object.address_info.map((e: any) => PeerAddressInfo.fromAmino(e)) : [],
-      lastConnected: object?.last_connected ? Timestamp.fromAmino(object.last_connected) : undefined
-    };
+    const message = createBasePeerInfo();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    message.addressInfo = object.address_info?.map(e => PeerAddressInfo.fromAmino(e)) || [];
+    if (object.last_connected !== undefined && object.last_connected !== null) {
+      message.lastConnected = fromTimestamp(Timestamp.fromAmino(object.last_connected));
+    }
+    return message;
   },
   toAmino(message: PeerInfo): PeerInfoAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id;
     if (message.addressInfo) {
       obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toAmino(e) : undefined);
     } else {
       obj.address_info = [];
     }
-    obj.last_connected = message.lastConnected;
+    obj.last_connected = message.lastConnected ? Timestamp.toAmino(toTimestamp(message.lastConnected)) : undefined;
     return obj;
   },
   fromAminoMsg(object: PeerInfoAminoMsg): PeerInfo {
@@ -601,8 +651,8 @@ export const PeerInfo = {
 function createBasePeerAddressInfo(): PeerAddressInfo {
   return {
     address: "",
-    lastDialSuccess: new Date(),
-    lastDialFailure: new Date(),
+    lastDialSuccess: undefined,
+    lastDialFailure: undefined,
     dialFailures: 0
   };
 }
@@ -698,19 +748,27 @@ export const PeerAddressInfo = {
     return obj;
   },
   fromAmino(object: PeerAddressInfoAmino): PeerAddressInfo {
-    return {
-      address: object.address,
-      lastDialSuccess: object?.last_dial_success ? Timestamp.fromAmino(object.last_dial_success) : undefined,
-      lastDialFailure: object?.last_dial_failure ? Timestamp.fromAmino(object.last_dial_failure) : undefined,
-      dialFailures: object.dial_failures
-    };
+    const message = createBasePeerAddressInfo();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.last_dial_success !== undefined && object.last_dial_success !== null) {
+      message.lastDialSuccess = fromTimestamp(Timestamp.fromAmino(object.last_dial_success));
+    }
+    if (object.last_dial_failure !== undefined && object.last_dial_failure !== null) {
+      message.lastDialFailure = fromTimestamp(Timestamp.fromAmino(object.last_dial_failure));
+    }
+    if (object.dial_failures !== undefined && object.dial_failures !== null) {
+      message.dialFailures = object.dial_failures;
+    }
+    return message;
   },
   toAmino(message: PeerAddressInfo): PeerAddressInfoAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.last_dial_success = message.lastDialSuccess;
-    obj.last_dial_failure = message.lastDialFailure;
-    obj.dial_failures = omitDefault(message.dialFailures);
+    obj.address = message.address;
+    obj.last_dial_success = message.lastDialSuccess ? Timestamp.toAmino(toTimestamp(message.lastDialSuccess)) : undefined;
+    obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(toTimestamp(message.lastDialFailure)) : undefined;
+    obj.dial_failures = message.dialFailures;
     return obj;
   },
   fromAminoMsg(object: PeerAddressInfoAminoMsg): PeerAddressInfo {

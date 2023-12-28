@@ -21,7 +21,8 @@ export const mutations: ServiceMethod[] = [
 
 
 const context: unknown = {
-  addUtil: () => { }
+  addUtil: () => { },
+  pluginValue: () => { }
 }
 
 const expectCode = (ast) => {

@@ -16,6 +16,10 @@ export interface ReplacePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
+export interface ReplacePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal";
+  value: Uint8Array;
+}
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -44,6 +48,10 @@ export interface UpdatePoolIncentivesProposal {
   description: string;
   records: DistrRecord[];
 }
+export interface UpdatePoolIncentivesProposalProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal";
+  value: Uint8Array;
+}
 /**
  * For example: if the existing DistrRecords were:
  * [(Gauge 0, 5), (Gauge 1, 6), (Gauge 2, 6)]
@@ -68,10 +76,10 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
 export const ReplacePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
   encode(message: ReplacePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -153,11 +161,15 @@ export const ReplacePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseReplacePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
@@ -202,10 +214,10 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
 export const UpdatePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
   encode(message: UpdatePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -287,11 +299,15 @@ export const UpdatePoolIncentivesProposal = {
     return obj;
   },
   fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseUpdatePoolIncentivesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};

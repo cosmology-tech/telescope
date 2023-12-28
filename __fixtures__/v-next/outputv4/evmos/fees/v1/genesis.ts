@@ -10,6 +10,10 @@ export interface GenesisState {
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.fees.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -36,6 +40,10 @@ export interface Params {
   addrDerivationCostCreate: bigint;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.fees.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the fees module params */
 export interface ParamsSDKType {
@@ -129,10 +137,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      devFeeInfos: Array.isArray(object?.dev_fee_infos) ? object.dev_fee_infos.map((e: any) => DevFeeInfo.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.devFeeInfos = object.dev_fee_infos?.map(e => DevFeeInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -172,19 +182,19 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.fees.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableFees === true) {
+    if (message.enableFees !== undefined) {
       writer.uint32(8).bool(message.enableFees);
     }
-    if (message.developerShares !== "") {
+    if (message.developerShares !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.developerShares, 18).atomics);
     }
-    if (message.validatorShares !== "") {
+    if (message.validatorShares !== undefined) {
       writer.uint32(26).string(Decimal.fromUserInput(message.validatorShares, 18).atomics);
     }
-    if (message.addrDerivationCostCreate !== BigInt(0)) {
+    if (message.addrDerivationCostCreate !== undefined) {
       writer.uint32(32).uint64(message.addrDerivationCostCreate);
     }
-    if (message.minGasPrice !== "") {
+    if (message.minGasPrice !== undefined) {
       writer.uint32(42).string(Decimal.fromUserInput(message.minGasPrice, 18).atomics);
     }
     return writer;
@@ -275,13 +285,23 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableFees: object.enable_fees,
-      developerShares: object.developer_shares,
-      validatorShares: object.validator_shares,
-      addrDerivationCostCreate: BigInt(object.addr_derivation_cost_create),
-      minGasPrice: object.min_gas_price
-    };
+    const message = createBaseParams();
+    if (object.enable_fees !== undefined && object.enable_fees !== null) {
+      message.enableFees = object.enable_fees;
+    }
+    if (object.developer_shares !== undefined && object.developer_shares !== null) {
+      message.developerShares = object.developer_shares;
+    }
+    if (object.validator_shares !== undefined && object.validator_shares !== null) {
+      message.validatorShares = object.validator_shares;
+    }
+    if (object.addr_derivation_cost_create !== undefined && object.addr_derivation_cost_create !== null) {
+      message.addrDerivationCostCreate = BigInt(object.addr_derivation_cost_create);
+    }
+    if (object.min_gas_price !== undefined && object.min_gas_price !== null) {
+      message.minGasPrice = object.min_gas_price;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

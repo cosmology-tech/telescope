@@ -9,6 +9,10 @@ export interface GenesisOwners {
   /** index_owners are the owners at the given index. */
   indexOwners: CapabilityOwners;
 }
+export interface GenesisOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
+  value: Uint8Array;
+}
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: bigint;
@@ -24,6 +28,10 @@ export interface GenesisState {
    */
   owners: GenesisOwners[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {
   index: bigint;
@@ -38,7 +46,7 @@ function createBaseGenesisOwners(): GenesisOwners {
 export const GenesisOwners = {
   typeUrl: "/cosmos.capability.v1beta1.GenesisOwners",
   encode(message: GenesisOwners, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     if (message.indexOwners !== undefined) {
@@ -107,10 +115,14 @@ export const GenesisOwners = {
     return obj;
   },
   fromAmino(object: GenesisOwnersAmino): GenesisOwners {
-    return {
-      index: BigInt(object.index),
-      indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
-    };
+    const message = createBaseGenesisOwners();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.index_owners !== undefined && object.index_owners !== null) {
+      message.indexOwners = CapabilityOwners.fromAmino(object.index_owners);
+    }
+    return message;
   },
   toAmino(message: GenesisOwners): GenesisOwnersAmino {
     const obj: any = {};
@@ -149,7 +161,7 @@ function createBaseGenesisState(): GenesisState {
 export const GenesisState = {
   typeUrl: "/cosmos.capability.v1beta1.GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     for (const v of message.owners) {
@@ -224,10 +236,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      index: BigInt(object.index),
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    message.owners = object.owners?.map(e => GenesisOwners.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

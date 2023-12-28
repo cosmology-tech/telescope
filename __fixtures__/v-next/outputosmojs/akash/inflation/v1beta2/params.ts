@@ -17,6 +17,10 @@ export interface Params {
    */
   variance: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
   inflation_decay_factor: string;
@@ -110,11 +114,17 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      inflationDecayFactor: object.inflation_decay_factor,
-      initialInflation: object.initial_inflation,
-      variance: object.variance
-    };
+    const message = createBaseParams();
+    if (object.inflation_decay_factor !== undefined && object.inflation_decay_factor !== null) {
+      message.inflationDecayFactor = object.inflation_decay_factor;
+    }
+    if (object.initial_inflation !== undefined && object.initial_inflation !== null) {
+      message.initialInflation = object.initial_inflation;
+    }
+    if (object.variance !== undefined && object.variance !== null) {
+      message.variance = object.variance;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

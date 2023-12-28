@@ -1,7 +1,7 @@
 import { Value, ValueAmino, ValueSDKType } from "./value";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * The state of an evaluation.
@@ -30,18 +30,14 @@ export interface EvalStateProtoMsg {
  */
 export interface EvalStateAmino {
   /** The unique values referenced in this message. */
-  values: ExprValueAmino[];
+  values?: ExprValueAmino[];
   /**
    * An ordered list of results.
    * 
    * Tracks the flow of evaluation through the expression.
    * May be sparse.
    */
-  results: EvalState_ResultAmino[];
-}
-export interface EvalStateAminoMsg {
-  type: "/google.api.expr.v1beta1.EvalState";
-  value: EvalStateAmino;
+  results?: EvalState_ResultAmino[];
 }
 /**
  * The state of an evaluation.
@@ -55,7 +51,7 @@ export interface EvalStateSDKType {
 /** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
-  expr: IdRef;
+  expr?: IdRef;
   /** The index in `values` of the resulting value. */
   value: number;
 }
@@ -68,15 +64,11 @@ export interface EvalState_ResultAmino {
   /** The expression this result is for. */
   expr?: IdRefAmino;
   /** The index in `values` of the resulting value. */
-  value: number;
-}
-export interface EvalState_ResultAminoMsg {
-  type: "/google.api.expr.v1beta1.Result";
-  value: EvalState_ResultAmino;
+  value?: number;
 }
 /** A single evaluation result. */
 export interface EvalState_ResultSDKType {
-  expr: IdRefSDKType;
+  expr?: IdRefSDKType;
   value: number;
 }
 /** The value of an evaluated expression. */
@@ -185,10 +177,6 @@ export interface ExprValueAmino {
    */
   unknown?: UnknownSetAmino;
 }
-export interface ExprValueAminoMsg {
-  type: "/google.api.expr.v1beta1.ExprValue";
-  value: ExprValueAmino;
-}
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
@@ -215,11 +203,7 @@ export interface ErrorSetProtoMsg {
  */
 export interface ErrorSetAmino {
   /** The errors in the set. */
-  errors: StatusAmino[];
-}
-export interface ErrorSetAminoMsg {
-  type: "/google.api.expr.v1beta1.ErrorSet";
-  value: ErrorSetAmino;
+  errors?: StatusAmino[];
 }
 /**
  * A set of errors.
@@ -249,11 +233,7 @@ export interface UnknownSetProtoMsg {
  */
 export interface UnknownSetAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
-}
-export interface UnknownSetAminoMsg {
-  type: "/google.api.expr.v1beta1.UnknownSet";
-  value: UnknownSetAmino;
+  exprs?: IdRefAmino[];
 }
 /**
  * A set of expressions for which the value is unknown.
@@ -275,11 +255,7 @@ export interface IdRefProtoMsg {
 /** A reference to an expression id. */
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
-}
-export interface IdRefAminoMsg {
-  type: "/google.api.expr.v1beta1.IdRef";
-  value: IdRefAmino;
+  id?: number;
 }
 /** A reference to an expression id. */
 export interface IdRefSDKType {
@@ -302,7 +278,7 @@ export const EvalState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EvalState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState();
@@ -310,10 +286,10 @@ export const EvalState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(ExprValue.decode(reader, reader.uint32()));
+          message.values.push(ExprValue.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.results.push(EvalState_Result.decode(reader, reader.uint32()));
+          message.results.push(EvalState_Result.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -369,30 +345,27 @@ export const EvalState = {
     return obj;
   },
   fromAmino(object: EvalStateAmino): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
-    };
+    const message = createBaseEvalState();
+    message.values = object.values?.map(e => ExprValue.fromAmino(e)) || [];
+    message.results = object.results?.map(e => EvalState_Result.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: EvalState): EvalStateAmino {
+  toAmino(message: EvalState, useInterfaces: boolean = true): EvalStateAmino {
     const obj: any = {};
     if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toAmino(e) : undefined);
+      obj.values = message.values.map(e => e ? ExprValue.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.values = [];
     }
     if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e) : undefined);
+      obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.results = [];
     }
     return obj;
   },
-  fromAminoMsg(object: EvalStateAminoMsg): EvalState {
-    return EvalState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalStateProtoMsg): EvalState {
-    return EvalState.decode(message.value);
+  fromProtoMsg(message: EvalStateProtoMsg, useInterfaces: boolean = true): EvalState {
+    return EvalState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalState): Uint8Array {
     return EvalState.encode(message).finish();
@@ -406,7 +379,7 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: IdRef.fromPartial({}),
+    expr: undefined,
     value: 0
   };
 }
@@ -421,7 +394,7 @@ export const EvalState_Result = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EvalState_Result {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalState_Result {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalState_Result();
@@ -429,7 +402,7 @@ export const EvalState_Result = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.expr = IdRef.decode(reader, reader.uint32());
+          message.expr = IdRef.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.value = reader.int32();
@@ -474,22 +447,23 @@ export const EvalState_Result = {
     return obj;
   },
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
-    return {
-      expr: object?.expr ? IdRef.fromAmino(object.expr) : undefined,
-      value: object.value
-    };
+    const message = createBaseEvalState_Result();
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = IdRef.fromAmino(object.expr);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: EvalState_Result): EvalState_ResultAmino {
+  toAmino(message: EvalState_Result, useInterfaces: boolean = true): EvalState_ResultAmino {
     const obj: any = {};
-    obj.expr = message.expr ? IdRef.toAmino(message.expr) : undefined;
-    obj.value = omitDefault(message.value);
+    obj.expr = message.expr ? IdRef.toAmino(message.expr, useInterfaces) : undefined;
+    obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
-    return EvalState_Result.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalState_ResultProtoMsg): EvalState_Result {
-    return EvalState_Result.decode(message.value);
+  fromProtoMsg(message: EvalState_ResultProtoMsg, useInterfaces: boolean = true): EvalState_Result {
+    return EvalState_Result.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalState_Result): Uint8Array {
     return EvalState_Result.encode(message).finish();
@@ -522,7 +496,7 @@ export const ExprValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ExprValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExprValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExprValue();
@@ -530,13 +504,13 @@ export const ExprValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.value = Value.decode(reader, reader.uint32());
+          message.value = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.error = ErrorSet.decode(reader, reader.uint32());
+          message.error = ErrorSet.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.unknown = UnknownSet.decode(reader, reader.uint32());
+          message.unknown = UnknownSet.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -587,24 +561,27 @@ export const ExprValue = {
     return obj;
   },
   fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      value: object?.value ? Value.fromAmino(object.value) : undefined,
-      error: object?.error ? ErrorSet.fromAmino(object.error) : undefined,
-      unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
-    };
+    const message = createBaseExprValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromAmino(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromAmino(object.unknown);
+    }
+    return message;
   },
-  toAmino(message: ExprValue): ExprValueAmino {
+  toAmino(message: ExprValue, useInterfaces: boolean = true): ExprValueAmino {
     const obj: any = {};
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
-    obj.error = message.error ? ErrorSet.toAmino(message.error) : undefined;
-    obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown) : undefined;
+    obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
+    obj.error = message.error ? ErrorSet.toAmino(message.error, useInterfaces) : undefined;
+    obj.unknown = message.unknown ? UnknownSet.toAmino(message.unknown, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ExprValueAminoMsg): ExprValue {
-    return ExprValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExprValueProtoMsg): ExprValue {
-    return ExprValue.decode(message.value);
+  fromProtoMsg(message: ExprValueProtoMsg, useInterfaces: boolean = true): ExprValue {
+    return ExprValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExprValue): Uint8Array {
     return ExprValue.encode(message).finish();
@@ -629,7 +606,7 @@ export const ErrorSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ErrorSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ErrorSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorSet();
@@ -637,7 +614,7 @@ export const ErrorSet = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.errors.push(Status.decode(reader, reader.uint32()));
+          message.errors.push(Status.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -680,24 +657,21 @@ export const ErrorSet = {
     return obj;
   },
   fromAmino(object: ErrorSetAmino): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseErrorSet();
+    message.errors = object.errors?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ErrorSet): ErrorSetAmino {
+  toAmino(message: ErrorSet, useInterfaces: boolean = true): ErrorSetAmino {
     const obj: any = {};
     if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toAmino(e) : undefined);
+      obj.errors = message.errors.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.errors = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ErrorSetAminoMsg): ErrorSet {
-    return ErrorSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ErrorSetProtoMsg): ErrorSet {
-    return ErrorSet.decode(message.value);
+  fromProtoMsg(message: ErrorSetProtoMsg, useInterfaces: boolean = true): ErrorSet {
+    return ErrorSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ErrorSet): Uint8Array {
     return ErrorSet.encode(message).finish();
@@ -722,7 +696,7 @@ export const UnknownSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UnknownSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnknownSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnknownSet();
@@ -730,7 +704,7 @@ export const UnknownSet = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.exprs.push(IdRef.decode(reader, reader.uint32()));
+          message.exprs.push(IdRef.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -773,24 +747,21 @@ export const UnknownSet = {
     return obj;
   },
   fromAmino(object: UnknownSetAmino): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
-    };
+    const message = createBaseUnknownSet();
+    message.exprs = object.exprs?.map(e => IdRef.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: UnknownSet): UnknownSetAmino {
+  toAmino(message: UnknownSet, useInterfaces: boolean = true): UnknownSetAmino {
     const obj: any = {};
     if (message.exprs) {
-      obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e) : undefined);
+      obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.exprs = [];
     }
     return obj;
   },
-  fromAminoMsg(object: UnknownSetAminoMsg): UnknownSet {
-    return UnknownSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UnknownSetProtoMsg): UnknownSet {
-    return UnknownSet.decode(message.value);
+  fromProtoMsg(message: UnknownSetProtoMsg, useInterfaces: boolean = true): UnknownSet {
+    return UnknownSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnknownSet): Uint8Array {
     return UnknownSet.encode(message).finish();
@@ -815,7 +786,7 @@ export const IdRef = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IdRef {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdRef {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdRef();
@@ -858,20 +829,19 @@ export const IdRef = {
     return obj;
   },
   fromAmino(object: IdRefAmino): IdRef {
-    return {
-      id: object.id
-    };
+    const message = createBaseIdRef();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
-  toAmino(message: IdRef): IdRefAmino {
+  toAmino(message: IdRef, useInterfaces: boolean = true): IdRefAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id;
     return obj;
   },
-  fromAminoMsg(object: IdRefAminoMsg): IdRef {
-    return IdRef.fromAmino(object.value);
-  },
-  fromProtoMsg(message: IdRefProtoMsg): IdRef {
-    return IdRef.decode(message.value);
+  fromProtoMsg(message: IdRefProtoMsg, useInterfaces: boolean = true): IdRef {
+    return IdRef.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdRef): Uint8Array {
     return IdRef.encode(message).finish();

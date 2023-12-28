@@ -26,6 +26,7 @@ import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
 import { plugin as createPiniaStore } from './generators/create-pinia-store'
 import { plugin as createPiniaStoreBundle } from './generators/create-pinia-store-bundle'
+import { plugin as createRpcOpsBundle } from './generators/create-rpc-ops-bundle'
 
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
@@ -110,8 +111,16 @@ export class TelescopeBuilder {
   }
 
   async build() {
-    // [x] get bundle of all packages
+    // check warnings
+    if(!this.options.aminoEncoding?.enabled && (this.options.prototypes?.methods?.fromAmino || this.options.prototypes?.methods?.toAmino)){
+      console.warn("There could be compilation errors in generated code, because 'aminoEncoding.enabled: false' means amino types wouldn't be created, but 'toAmino' or 'fromAmino' need amino types.");
+    }
 
+    if(!this.options.prototypes.methods.fromPartial){
+      console.warn("The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on, otherwise there could be compilation errors in generated code.");
+    }
+
+    // [x] get bundle of all packages
     const bundles = bundlePackages(this.store).map((bundle) => {
       // store bundleFile in filesToInclude
       const bundler = new Bundler(this, bundle);
@@ -147,6 +156,7 @@ export class TelescopeBuilder {
       createBundle(this, bundler);
     });
 
+    createRpcOpsBundle(this);
     createReactQueryBundle(this);
     createMobxBundle(this);
     createAggregatedLCDClient(this);
@@ -157,5 +167,7 @@ export class TelescopeBuilder {
 
     // finally, write one index file with all files, exported
     createIndex(this);
+
+    console.log(`✨ files transpiled in '${this.outPath}'`);
   }
 }

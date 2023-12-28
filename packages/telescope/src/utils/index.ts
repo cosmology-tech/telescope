@@ -19,6 +19,7 @@ export const UTILS = {
   base64FromBytes: '__helpers__',
   bytesFromBase64: '__helpers__',
   BrowserHeaders: 'browser-headers',
+  connectComet: '@cosmjs/tendermint-rpc',
   Decimal: '@cosmjs/math',
   padDecimal: '__helpers__',
   createProtobufRpcClient: '@cosmjs/stargate',
@@ -52,6 +53,13 @@ export const UTILS = {
   QueryClient: '@cosmjs/stargate',
   Registry: '@cosmjs/proto-signing',
   Rpc: '__helpers__',
+  StdFee: '__types__',
+  TxRpc: '__types__',
+  BroadcastTxReq: '__types__',
+  BroadcastTxRes: '__types__',
+  DeliverTxResponse: '__types__',
+  EncodeObject: '__types__',
+  SigningClientParams: '__types__',
   grpc: '@improbable-eng/grpc-web',
   setPaginationParams: '__helpers__',
   SigningStargateClient: '@cosmjs/stargate',
@@ -75,7 +83,9 @@ export const UTILS = {
   UnaryMethodDefinitionishR: '__grpc-web__',
   UnaryMethodDefinitionish: '__grpc-web__',
   BinaryReader: '__binary__',
-  BinaryWriter: '__binary__'
+  BinaryWriter: '__binary__',
+  TelescopeGeneratedType: '__types__',
+  GlobalDecoderRegistry: '__registry__',
 };
 
 export const UTIL_HELPERS = [
@@ -86,7 +96,9 @@ export const UTIL_HELPERS = [
   '__binary__',
   '__pinia-endpoint__',
   '__grpc-gateway__',
-  '__grpc-web__'
+  '__grpc-web__',
+  '__types__',
+  '__registry__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {

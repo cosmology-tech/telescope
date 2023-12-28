@@ -235,14 +235,14 @@ export interface ThresholdDecisionPolicy {
   /** threshold is the minimum weighted sum of yes votes that must be met or exceeded for a proposal to succeed. */
   threshold: string;
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindows;
+  windows?: DecisionPolicyWindows;
 }
 /** PercentageDecisionPolicy implements the DecisionPolicy interface */
 export interface PercentageDecisionPolicy {
   /** percentage is the minimum percentage the weighted sum of yes votes must meet for a proposal to succeed. */
   percentage: string;
   /** windows defines the different windows for voting and execution. */
-  windows: DecisionPolicyWindows;
+  windows?: DecisionPolicyWindows;
 }
 /** DecisionPolicyWindows defines the different windows for voting and execution. */
 export interface DecisionPolicyWindows {
@@ -291,7 +291,7 @@ export interface GroupMember {
   /** group_id is the unique ID of the group. */
   groupId: Long;
   /** member is the member data. */
-  member: Member;
+  member?: Member;
 }
 /** GroupPolicyInfo represents the high-level on-chain information for a group policy. */
 export interface GroupPolicyInfo {
@@ -309,7 +309,7 @@ export interface GroupPolicyInfo {
    */
   version: Long;
   /** decision_policy specifies the group policy's decision policy. */
-  decisionPolicy: Any;
+  decisionPolicy?: Any;
   /** created_at is a timestamp specifying when a group policy was created. */
   createdAt: Timestamp;
 }
@@ -518,7 +518,7 @@ export const Members = {
 function createBaseThresholdDecisionPolicy(): ThresholdDecisionPolicy {
   return {
     threshold: "",
-    windows: DecisionPolicyWindows.fromPartial({})
+    windows: undefined
   };
 }
 export const ThresholdDecisionPolicy = {
@@ -573,7 +573,7 @@ export const ThresholdDecisionPolicy = {
 function createBasePercentageDecisionPolicy(): PercentageDecisionPolicy {
   return {
     percentage: "",
-    windows: DecisionPolicyWindows.fromPartial({})
+    windows: undefined
   };
 }
 export const PercentageDecisionPolicy = {
@@ -778,7 +778,7 @@ export const GroupInfo = {
 function createBaseGroupMember(): GroupMember {
   return {
     groupId: Long.UZERO,
-    member: Member.fromPartial({})
+    member: undefined
   };
 }
 export const GroupMember = {
@@ -837,7 +837,7 @@ function createBaseGroupPolicyInfo(): GroupPolicyInfo {
     admin: "",
     metadata: "",
     version: Long.UZERO,
-    decisionPolicy: Any.fromPartial({}),
+    decisionPolicy: undefined,
     createdAt: Timestamp.fromPartial({})
   };
 }

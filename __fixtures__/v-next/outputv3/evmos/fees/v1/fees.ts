@@ -26,18 +26,14 @@ export interface DevFeeInfoProtoMsg {
  */
 export interface DevFeeInfoAmino {
   /** hex address of registered contract */
-  contract_address: string;
+  contract_address?: string;
   /** bech32 address of contract deployer */
-  deployer_address: string;
+  deployer_address?: string;
   /**
    * bech32 address of account receiving the transaction fees
    * it defaults to deployer_address
    */
-  withdraw_address: string;
-}
-export interface DevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.DevFeeInfo";
-  value: DevFeeInfoAmino;
+  withdraw_address?: string;
 }
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -69,7 +65,7 @@ export const DevFeeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDevFeeInfo();
@@ -128,24 +124,27 @@ export const DevFeeInfo = {
     return obj;
   },
   fromAmino(object: DevFeeInfoAmino): DevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
+    const message = createBaseDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
   },
-  toAmino(message: DevFeeInfo): DevFeeInfoAmino {
+  toAmino(message: DevFeeInfo, useInterfaces: boolean = true): DevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = omitDefault(message.contractAddress);
     obj.deployer_address = omitDefault(message.deployerAddress);
     obj.withdraw_address = omitDefault(message.withdrawAddress);
     return obj;
   },
-  fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
-    return DevFeeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DevFeeInfoProtoMsg): DevFeeInfo {
-    return DevFeeInfo.decode(message.value);
+  fromProtoMsg(message: DevFeeInfoProtoMsg, useInterfaces: boolean = true): DevFeeInfo {
+    return DevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DevFeeInfo): Uint8Array {
     return DevFeeInfo.encode(message).finish();

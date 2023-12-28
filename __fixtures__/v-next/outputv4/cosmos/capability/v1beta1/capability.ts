@@ -8,6 +8,10 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 export interface Capability {
   index: bigint;
 }
+export interface CapabilityProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Capability";
+  value: Uint8Array;
+}
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
@@ -22,6 +26,10 @@ export interface CapabilitySDKType {
 export interface Owner {
   module: string;
   name: string;
+}
+export interface OwnerProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Owner";
+  value: Uint8Array;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -38,6 +46,10 @@ export interface OwnerSDKType {
 export interface CapabilityOwners {
   owners: Owner[];
 }
+export interface CapabilityOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
+  value: Uint8Array;
+}
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
  * owners must be unique.
@@ -53,7 +65,7 @@ function createBaseCapability(): Capability {
 export const Capability = {
   typeUrl: "/cosmos.capability.v1beta1.Capability",
   encode(message: Capability, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint64(message.index);
     }
     return writer;
@@ -108,9 +120,11 @@ export const Capability = {
     return obj;
   },
   fromAmino(object: CapabilityAmino): Capability {
-    return {
-      index: BigInt(object.index)
-    };
+    const message = createBaseCapability();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    return message;
   },
   toAmino(message: Capability): CapabilityAmino {
     const obj: any = {};
@@ -148,10 +162,10 @@ function createBaseOwner(): Owner {
 export const Owner = {
   typeUrl: "/cosmos.capability.v1beta1.Owner",
   encode(message: Owner, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.module !== "") {
+    if (message.module !== undefined) {
       writer.uint32(10).string(message.module);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
     return writer;
@@ -213,10 +227,14 @@ export const Owner = {
     return obj;
   },
   fromAmino(object: OwnerAmino): Owner {
-    return {
-      module: object.module,
-      name: object.name
-    };
+    const message = createBaseOwner();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: Owner): OwnerAmino {
     const obj: any = {};
@@ -315,9 +333,9 @@ export const CapabilityOwners = {
     return obj;
   },
   fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
+    const message = createBaseCapabilityOwners();
+    message.owners = object.owners?.map(e => Owner.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
     const obj: any = {};

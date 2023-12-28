@@ -1,7 +1,7 @@
 import { MsgStoreCode, MsgStoreCodeAmino, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractAmino, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractAmino, MsgExecuteContractSDKType } from "./tx";
 import { Params, ParamsAmino, ParamsSDKType, CodeInfo, CodeInfoAmino, CodeInfoSDKType, ContractInfo, ContractInfoAmino, ContractInfoSDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -18,14 +18,10 @@ export interface GenesisStateProtoMsg {
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateAmino {
   params?: ParamsAmino;
-  codes: CodeAmino[];
-  contracts: ContractAmino[];
-  sequences: SequenceAmino[];
-  gen_msgs: GenesisState_GenMsgsAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "wasm/GenesisState";
-  value: GenesisStateAmino;
+  codes?: CodeAmino[];
+  contracts?: ContractAmino[];
+  sequences?: SequenceAmino[];
+  gen_msgs?: GenesisState_GenMsgsAmino[];
 }
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisStateSDKType {
@@ -57,10 +53,6 @@ export interface GenesisState_GenMsgsAmino {
   instantiate_contract?: MsgInstantiateContractAmino;
   execute_contract?: MsgExecuteContractAmino;
 }
-export interface GenesisState_GenMsgsAminoMsg {
-  type: "wasm/GenMsgs";
-  value: GenesisState_GenMsgsAmino;
-}
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
@@ -84,15 +76,11 @@ export interface CodeProtoMsg {
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeAmino {
-  code_id: string;
+  code_id?: string;
   code_info?: CodeInfoAmino;
-  code_bytes: Uint8Array;
+  code_bytes?: string;
   /** Pinned to wasmvm cache */
-  pinned: boolean;
-}
-export interface CodeAminoMsg {
-  type: "wasm/Code";
-  value: CodeAmino;
+  pinned?: boolean;
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface CodeSDKType {
@@ -113,13 +101,9 @@ export interface ContractProtoMsg {
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractAmino {
-  contract_address: string;
+  contract_address?: string;
   contract_info?: ContractInfoAmino;
-  contract_state: ModelAmino[];
-}
-export interface ContractAminoMsg {
-  type: "wasm/Contract";
-  value: ContractAmino;
+  contract_state?: ModelAmino[];
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface ContractSDKType {
@@ -138,12 +122,8 @@ export interface SequenceProtoMsg {
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceAmino {
-  id_key: Uint8Array;
-  value: string;
-}
-export interface SequenceAminoMsg {
-  type: "wasm/Sequence";
-  value: SequenceAmino;
+  id_key?: string;
+  value?: string;
 }
 /** Sequence key and value of an id generation counter */
 export interface SequenceSDKType {
@@ -180,7 +160,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -188,19 +168,19 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.codes.push(Code.decode(reader, reader.uint32()));
+          message.codes.push(Code.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.contracts.push(Contract.decode(reader, reader.uint32()));
+          message.contracts.push(Contract.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.sequences.push(Sequence.decode(reader, reader.uint32()));
+          message.sequences.push(Sequence.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.genMsgs.push(GenesisState_GenMsgs.decode(reader, reader.uint32()));
+          message.genMsgs.push(GenesisState_GenMsgs.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -289,50 +269,43 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromAmino(e)) : [],
-      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromAmino(e)) : [],
-      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromAmino(e)) : [],
-      genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.codes = object.codes?.map(e => Code.fromAmino(e)) || [];
+    message.contracts = object.contracts?.map(e => Contract.fromAmino(e)) || [];
+    message.sequences = object.sequences?.map(e => Sequence.fromAmino(e)) || [];
+    message.genMsgs = object.gen_msgs?.map(e => GenesisState_GenMsgs.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.codes) {
-      obj.codes = message.codes.map(e => e ? Code.toAmino(e) : undefined);
+      obj.codes = message.codes.map(e => e ? Code.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.codes = [];
     }
     if (message.contracts) {
-      obj.contracts = message.contracts.map(e => e ? Contract.toAmino(e) : undefined);
+      obj.contracts = message.contracts.map(e => e ? Contract.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.contracts = [];
     }
     if (message.sequences) {
-      obj.sequences = message.sequences.map(e => e ? Sequence.toAmino(e) : undefined);
+      obj.sequences = message.sequences.map(e => e ? Sequence.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.sequences = [];
     }
     if (message.genMsgs) {
-      obj.gen_msgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toAmino(e) : undefined);
+      obj.gen_msgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.gen_msgs = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "wasm/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -366,7 +339,7 @@ export const GenesisState_GenMsgs = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState_GenMsgs {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState_GenMsgs {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState_GenMsgs();
@@ -374,13 +347,13 @@ export const GenesisState_GenMsgs = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.storeCode = MsgStoreCode.decode(reader, reader.uint32());
+          message.storeCode = MsgStoreCode.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.instantiateContract = MsgInstantiateContract.decode(reader, reader.uint32());
+          message.instantiateContract = MsgInstantiateContract.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.executeContract = MsgExecuteContract.decode(reader, reader.uint32());
+          message.executeContract = MsgExecuteContract.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -431,30 +404,27 @@ export const GenesisState_GenMsgs = {
     return obj;
   },
   fromAmino(object: GenesisState_GenMsgsAmino): GenesisState_GenMsgs {
-    return {
-      storeCode: object?.store_code ? MsgStoreCode.fromAmino(object.store_code) : undefined,
-      instantiateContract: object?.instantiate_contract ? MsgInstantiateContract.fromAmino(object.instantiate_contract) : undefined,
-      executeContract: object?.execute_contract ? MsgExecuteContract.fromAmino(object.execute_contract) : undefined
-    };
+    const message = createBaseGenesisState_GenMsgs();
+    if (object.store_code !== undefined && object.store_code !== null) {
+      message.storeCode = MsgStoreCode.fromAmino(object.store_code);
+    }
+    if (object.instantiate_contract !== undefined && object.instantiate_contract !== null) {
+      message.instantiateContract = MsgInstantiateContract.fromAmino(object.instantiate_contract);
+    }
+    if (object.execute_contract !== undefined && object.execute_contract !== null) {
+      message.executeContract = MsgExecuteContract.fromAmino(object.execute_contract);
+    }
+    return message;
   },
-  toAmino(message: GenesisState_GenMsgs): GenesisState_GenMsgsAmino {
+  toAmino(message: GenesisState_GenMsgs, useInterfaces: boolean = true): GenesisState_GenMsgsAmino {
     const obj: any = {};
-    obj.store_code = message.storeCode ? MsgStoreCode.toAmino(message.storeCode) : undefined;
-    obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract) : undefined;
-    obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract) : undefined;
+    obj.store_code = message.storeCode ? MsgStoreCode.toAmino(message.storeCode, useInterfaces) : undefined;
+    obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toAmino(message.instantiateContract, useInterfaces) : undefined;
+    obj.execute_contract = message.executeContract ? MsgExecuteContract.toAmino(message.executeContract, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisState_GenMsgsAminoMsg): GenesisState_GenMsgs {
-    return GenesisState_GenMsgs.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState_GenMsgs): GenesisState_GenMsgsAminoMsg {
-    return {
-      type: "wasm/GenMsgs",
-      value: GenesisState_GenMsgs.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisState_GenMsgsProtoMsg): GenesisState_GenMsgs {
-    return GenesisState_GenMsgs.decode(message.value);
+  fromProtoMsg(message: GenesisState_GenMsgsProtoMsg, useInterfaces: boolean = true): GenesisState_GenMsgs {
+    return GenesisState_GenMsgs.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState_GenMsgs): Uint8Array {
     return GenesisState_GenMsgs.encode(message).finish();
@@ -492,7 +462,7 @@ export const Code = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Code {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Code {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCode();
@@ -503,7 +473,7 @@ export const Code = {
           message.codeId = reader.uint64();
           break;
         case 2:
-          message.codeInfo = CodeInfo.decode(reader, reader.uint32());
+          message.codeInfo = CodeInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.codeBytes = reader.bytes();
@@ -563,32 +533,31 @@ export const Code = {
     return obj;
   },
   fromAmino(object: CodeAmino): Code {
-    return {
-      codeId: BigInt(object.code_id),
-      codeInfo: object?.code_info ? CodeInfo.fromAmino(object.code_info) : undefined,
-      codeBytes: object.code_bytes,
-      pinned: object.pinned
-    };
+    const message = createBaseCode();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.code_info !== undefined && object.code_info !== null) {
+      message.codeInfo = CodeInfo.fromAmino(object.code_info);
+    }
+    if (object.code_bytes !== undefined && object.code_bytes !== null) {
+      message.codeBytes = bytesFromBase64(object.code_bytes);
+    }
+    if (object.pinned !== undefined && object.pinned !== null) {
+      message.pinned = object.pinned;
+    }
+    return message;
   },
-  toAmino(message: Code): CodeAmino {
+  toAmino(message: Code, useInterfaces: boolean = true): CodeAmino {
     const obj: any = {};
-    obj.code_id = omitDefault(message.codeId);
-    obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined;
-    obj.code_bytes = message.codeBytes;
-    obj.pinned = omitDefault(message.pinned);
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo, useInterfaces) : undefined;
+    obj.code_bytes = message.codeBytes ? base64FromBytes(message.codeBytes) : undefined;
+    obj.pinned = message.pinned;
     return obj;
   },
-  fromAminoMsg(object: CodeAminoMsg): Code {
-    return Code.fromAmino(object.value);
-  },
-  toAminoMsg(message: Code): CodeAminoMsg {
-    return {
-      type: "wasm/Code",
-      value: Code.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CodeProtoMsg): Code {
-    return Code.decode(message.value);
+  fromProtoMsg(message: CodeProtoMsg, useInterfaces: boolean = true): Code {
+    return Code.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Code): Uint8Array {
     return Code.encode(message).finish();
@@ -622,7 +591,7 @@ export const Contract = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Contract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Contract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContract();
@@ -633,10 +602,10 @@ export const Contract = {
           message.contractAddress = reader.string();
           break;
         case 2:
-          message.contractInfo = ContractInfo.decode(reader, reader.uint32());
+          message.contractInfo = ContractInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.contractState.push(Model.decode(reader, reader.uint32()));
+          message.contractState.push(Model.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -691,34 +660,29 @@ export const Contract = {
     return obj;
   },
   fromAmino(object: ContractAmino): Contract {
-    return {
-      contractAddress: object.contract_address,
-      contractInfo: object?.contract_info ? ContractInfo.fromAmino(object.contract_info) : undefined,
-      contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromAmino(e)) : []
-    };
+    const message = createBaseContract();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.contract_info !== undefined && object.contract_info !== null) {
+      message.contractInfo = ContractInfo.fromAmino(object.contract_info);
+    }
+    message.contractState = object.contract_state?.map(e => Model.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Contract): ContractAmino {
+  toAmino(message: Contract, useInterfaces: boolean = true): ContractAmino {
     const obj: any = {};
-    obj.contract_address = omitDefault(message.contractAddress);
-    obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo) : undefined;
+    obj.contract_address = message.contractAddress;
+    obj.contract_info = message.contractInfo ? ContractInfo.toAmino(message.contractInfo, useInterfaces) : undefined;
     if (message.contractState) {
-      obj.contract_state = message.contractState.map(e => e ? Model.toAmino(e) : undefined);
+      obj.contract_state = message.contractState.map(e => e ? Model.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.contract_state = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ContractAminoMsg): Contract {
-    return Contract.fromAmino(object.value);
-  },
-  toAminoMsg(message: Contract): ContractAminoMsg {
-    return {
-      type: "wasm/Contract",
-      value: Contract.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ContractProtoMsg): Contract {
-    return Contract.decode(message.value);
+  fromProtoMsg(message: ContractProtoMsg, useInterfaces: boolean = true): Contract {
+    return Contract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Contract): Uint8Array {
     return Contract.encode(message).finish();
@@ -748,7 +712,7 @@ export const Sequence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Sequence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Sequence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequence();
@@ -801,28 +765,23 @@ export const Sequence = {
     return obj;
   },
   fromAmino(object: SequenceAmino): Sequence {
-    return {
-      idKey: object.id_key,
-      value: BigInt(object.value)
-    };
+    const message = createBaseSequence();
+    if (object.id_key !== undefined && object.id_key !== null) {
+      message.idKey = bytesFromBase64(object.id_key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
-  toAmino(message: Sequence): SequenceAmino {
+  toAmino(message: Sequence, useInterfaces: boolean = true): SequenceAmino {
     const obj: any = {};
-    obj.id_key = message.idKey;
-    obj.value = omitDefault(message.value);
+    obj.id_key = message.idKey ? base64FromBytes(message.idKey) : undefined;
+    obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: SequenceAminoMsg): Sequence {
-    return Sequence.fromAmino(object.value);
-  },
-  toAminoMsg(message: Sequence): SequenceAminoMsg {
-    return {
-      type: "wasm/Sequence",
-      value: Sequence.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SequenceProtoMsg): Sequence {
-    return Sequence.decode(message.value);
+  fromProtoMsg(message: SequenceProtoMsg, useInterfaces: boolean = true): Sequence {
+    return Sequence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Sequence): Uint8Array {
     return Sequence.encode(message).finish();

@@ -48,6 +48,10 @@ export interface Logging {
    */
   consumerDestinations: Logging_LoggingDestination[];
 }
+export interface LoggingProtoMsg {
+  typeUrl: "/google.api.Logging";
+  value: Uint8Array;
+}
 /**
  * Logging configuration of the service.
  * 
@@ -100,6 +104,10 @@ export interface Logging_LoggingDestination {
    * the service name followed by "/".
    */
   logs: string[];
+}
+export interface Logging_LoggingDestinationProtoMsg {
+  typeUrl: "/google.api.LoggingDestination";
+  value: Uint8Array;
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -199,10 +207,10 @@ export const Logging = {
     return obj;
   },
   fromAmino(object: LoggingAmino): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseLogging();
+    message.producerDestinations = object.producer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Logging): LoggingAmino {
     const obj: any = {};
@@ -243,7 +251,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {
@@ -316,10 +324,12 @@ export const Logging_LoggingDestination = {
     return obj;
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
+    const message = createBaseLogging_LoggingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.logs = object.logs?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
     const obj: any = {};

@@ -61,7 +61,7 @@ export interface HttpRequest {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency: Duration;
+  latency?: Duration;
   /** Whether or not a cache lookup was attempted. */
   cacheLookup: boolean;
   /**
@@ -94,7 +94,7 @@ function createBaseHttpRequest(): HttpRequest {
     remoteIp: "",
     serverIp: "",
     referer: "",
-    latency: Duration.fromPartial({}),
+    latency: undefined,
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,

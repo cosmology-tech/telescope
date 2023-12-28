@@ -6,17 +6,25 @@ export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryProvidersResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse";
+  value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
   auditor: string;
   owner: string;
+}
+export interface QueryProviderRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderRequest";
+  value: Uint8Array;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
@@ -25,26 +33,38 @@ export interface QueryProviderRequestSDKType {
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryAllProvidersAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
+  value: Uint8Array;
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequest {
   owner: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryProviderAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
+  value: Uint8Array;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequestSDKType {
   owner: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequest {
   auditor: string;
   owner: string;
+}
+export interface QueryProviderAuditorRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest";
+  value: Uint8Array;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestSDKType {
@@ -54,17 +74,21 @@ export interface QueryProviderAuditorRequestSDKType {
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequest {
   auditor: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryAuditorAttributesRequestProtoMsg {
+  typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";
+  value: Uint8Array;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequestSDKType {
   auditor: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProvidersResponse = {
@@ -143,10 +167,12 @@ export const QueryProvidersResponse = {
     return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersResponse();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
     const obj: any = {};
@@ -254,10 +280,14 @@ export const QueryProviderRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
@@ -289,7 +319,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttributesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllProvidersAttributesRequest = {
@@ -348,9 +378,11 @@ export const QueryAllProvidersAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllProvidersAttributesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAmino {
     const obj: any = {};
@@ -382,7 +414,7 @@ export const QueryAllProvidersAttributesRequest = {
 function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequest {
   return {
     owner: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProviderAttributesRequest = {
@@ -453,10 +485,14 @@ export const QueryProviderAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
-    return {
-      owner: object.owner,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProviderAttributesRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
     const obj: any = {};
@@ -560,10 +596,14 @@ export const QueryProviderAuditorRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderAuditorRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
     const obj: any = {};
@@ -596,7 +636,7 @@ export const QueryProviderAuditorRequest = {
 function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesRequest {
   return {
     auditor: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAuditorAttributesRequest = {
@@ -667,10 +707,14 @@ export const QueryAuditorAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
-    return {
-      auditor: object.auditor,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAuditorAttributesRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
     const obj: any = {};

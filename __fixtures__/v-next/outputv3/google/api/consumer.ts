@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
 export enum Property_PropertyType {
@@ -103,11 +103,7 @@ export interface ProjectPropertiesProtoMsg {
  */
 export interface ProjectPropertiesAmino {
   /** List of per consumer project-specific properties. */
-  properties: PropertyAmino[];
-}
-export interface ProjectPropertiesAminoMsg {
-  type: "/google.api.ProjectProperties";
-  value: ProjectPropertiesAmino;
+  properties?: PropertyAmino[];
 }
 /**
  * A descriptor for defining project properties for a service. One service may
@@ -168,15 +164,11 @@ export interface PropertyProtoMsg {
  */
 export interface PropertyAmino {
   /** The name of the property (a.k.a key). */
-  name: string;
+  name?: string;
   /** The type of this property. */
-  type: Property_PropertyType;
+  type?: Property_PropertyType;
   /** The description of the property */
-  description: string;
-}
-export interface PropertyAminoMsg {
-  type: "/google.api.Property";
-  value: PropertyAmino;
+  description?: string;
 }
 /**
  * Defines project properties.
@@ -208,7 +200,7 @@ export const ProjectProperties = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ProjectProperties {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ProjectProperties {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProjectProperties();
@@ -216,7 +208,7 @@ export const ProjectProperties = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.properties.push(Property.decode(reader, reader.uint32()));
+          message.properties.push(Property.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -259,24 +251,21 @@ export const ProjectProperties = {
     return obj;
   },
   fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
-    return {
-      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromAmino(e)) : []
-    };
+    const message = createBaseProjectProperties();
+    message.properties = object.properties?.map(e => Property.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
+  toAmino(message: ProjectProperties, useInterfaces: boolean = true): ProjectPropertiesAmino {
     const obj: any = {};
     if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
+      obj.properties = message.properties.map(e => e ? Property.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.properties = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
-    return ProjectProperties.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
-    return ProjectProperties.decode(message.value);
+  fromProtoMsg(message: ProjectPropertiesProtoMsg, useInterfaces: boolean = true): ProjectProperties {
+    return ProjectProperties.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ProjectProperties): Uint8Array {
     return ProjectProperties.encode(message).finish();
@@ -309,7 +298,7 @@ export const Property = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Property {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Property {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProperty();
@@ -368,24 +357,27 @@ export const Property = {
     return obj;
   },
   fromAmino(object: PropertyAmino): Property {
-    return {
-      name: object.name,
-      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
-      description: object.description
-    };
+    const message = createBaseProperty();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = property_PropertyTypeFromJSON(object.type);
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: Property): PropertyAmino {
+  toAmino(message: Property, useInterfaces: boolean = true): PropertyAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.type = omitDefault(message.type);
-    obj.description = omitDefault(message.description);
+    obj.name = message.name;
+    obj.type = property_PropertyTypeToJSON(message.type);
+    obj.description = message.description;
     return obj;
   },
-  fromAminoMsg(object: PropertyAminoMsg): Property {
-    return Property.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PropertyProtoMsg): Property {
-    return Property.decode(message.value);
+  fromProtoMsg(message: PropertyProtoMsg, useInterfaces: boolean = true): Property {
+    return Property.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Property): Uint8Array {
     return Property.encode(message).finish();

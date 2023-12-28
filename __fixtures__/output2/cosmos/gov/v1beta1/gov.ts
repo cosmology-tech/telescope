@@ -166,7 +166,7 @@ export interface Deposit {
 /** Proposal defines the core field members of a governance proposal. */
 export interface Proposal {
   proposalId: Long;
-  content: Any;
+  content?: Any;
   status: ProposalStatus;
   finalTallyResult: TallyResult;
   submitTime: Timestamp;
@@ -411,7 +411,7 @@ export const Deposit = {
 function createBaseProposal(): Proposal {
   return {
     proposalId: Long.UZERO,
-    content: Any.fromPartial({}),
+    content: undefined,
     status: 0,
     finalTallyResult: TallyResult.fromPartial({}),
     submitTime: Timestamp.fromPartial({}),

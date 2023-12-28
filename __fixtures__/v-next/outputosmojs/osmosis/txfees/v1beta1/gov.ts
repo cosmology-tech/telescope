@@ -14,6 +14,10 @@ export interface UpdateFeeTokenProposal {
   description: string;
   feetoken: FeeToken;
 }
+export interface UpdateFeeTokenProposalProtoMsg {
+  typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal";
+  value: Uint8Array;
+}
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -113,11 +117,17 @@ export const UpdateFeeTokenProposal = {
     return obj;
   },
   fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      feetoken: object?.feetoken ? FeeToken.fromAmino(object.feetoken) : undefined
-    };
+    const message = createBaseUpdateFeeTokenProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.feetoken !== undefined && object.feetoken !== null) {
+      message.feetoken = FeeToken.fromAmino(object.feetoken);
+    }
+    return message;
   },
   toAmino(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalAmino {
     const obj: any = {};

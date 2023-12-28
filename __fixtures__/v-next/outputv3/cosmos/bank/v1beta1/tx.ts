@@ -15,13 +15,9 @@ export interface MsgSendProtoMsg {
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendAmino {
-  from_address: string;
-  to_address: string;
-  amount: CoinAmino[];
-}
-export interface MsgSendAminoMsg {
-  type: "cosmos-sdk/MsgSend";
-  value: MsgSendAmino;
+  from_address?: string;
+  to_address?: string;
+  amount?: CoinAmino[];
 }
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSendSDKType {
@@ -37,10 +33,6 @@ export interface MsgSendResponseProtoMsg {
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgSendResponse";
-  value: MsgSendResponseAmino;
-}
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponseSDKType {}
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
@@ -54,12 +46,8 @@ export interface MsgMultiSendProtoMsg {
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendAmino {
-  inputs: InputAmino[];
-  outputs: OutputAmino[];
-}
-export interface MsgMultiSendAminoMsg {
-  type: "cosmos-sdk/MsgMultiSend";
-  value: MsgMultiSendAmino;
+  inputs?: InputAmino[];
+  outputs?: OutputAmino[];
 }
 /** MsgMultiSend represents an arbitrary multi-in, multi-out send message. */
 export interface MsgMultiSendSDKType {
@@ -74,10 +62,6 @@ export interface MsgMultiSendResponseProtoMsg {
 }
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseAmino {}
-export interface MsgMultiSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgMultiSendResponse";
-  value: MsgMultiSendResponseAmino;
-}
 /** MsgMultiSendResponse defines the Msg/MultiSend response type. */
 export interface MsgMultiSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
@@ -102,7 +86,7 @@ export const MsgSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSend();
@@ -116,7 +100,7 @@ export const MsgSend = {
           message.toAddress = reader.string();
           break;
         case 3:
-          message.amount.push(Coin.decode(reader, reader.uint32()));
+          message.amount.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -169,34 +153,29 @@ export const MsgSend = {
     return obj;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
-    return {
-      fromAddress: object.from_address,
-      toAddress: object.to_address,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgSend();
+    if (object.from_address !== undefined && object.from_address !== null) {
+      message.fromAddress = object.from_address;
+    }
+    if (object.to_address !== undefined && object.to_address !== null) {
+      message.toAddress = object.to_address;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MsgSend): MsgSendAmino {
+  toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
     const obj: any = {};
     obj.from_address = omitDefault(message.fromAddress);
     obj.to_address = omitDefault(message.toAddress);
     if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.amount = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MsgSendAminoMsg): MsgSend {
-    return MsgSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSend): MsgSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSend",
-      value: MsgSend.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSendProtoMsg): MsgSend {
-    return MsgSend.decode(message.value);
+  fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = true): MsgSend {
+    return MsgSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSend): Uint8Array {
     return MsgSend.encode(message).finish();
@@ -217,7 +196,7 @@ export const MsgSendResponse = {
   encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSendResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSendResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSendResponse();
@@ -251,23 +230,15 @@ export const MsgSendResponse = {
     return obj;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
-    return {};
+    const message = createBaseMsgSendResponse();
+    return message;
   },
-  toAmino(_: MsgSendResponse): MsgSendResponseAmino {
+  toAmino(_: MsgSendResponse, useInterfaces: boolean = true): MsgSendResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgSendResponseAminoMsg): MsgSendResponse {
-    return MsgSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSendResponse): MsgSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSendResponse",
-      value: MsgSendResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSendResponseProtoMsg): MsgSendResponse {
-    return MsgSendResponse.decode(message.value);
+  fromProtoMsg(message: MsgSendResponseProtoMsg, useInterfaces: boolean = true): MsgSendResponse {
+    return MsgSendResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSendResponse): Uint8Array {
     return MsgSendResponse.encode(message).finish();
@@ -297,7 +268,7 @@ export const MsgMultiSend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMultiSend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMultiSend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSend();
@@ -305,10 +276,10 @@ export const MsgMultiSend = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.inputs.push(Input.decode(reader, reader.uint32()));
+          message.inputs.push(Input.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.outputs.push(Output.decode(reader, reader.uint32()));
+          message.outputs.push(Output.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -364,36 +335,27 @@ export const MsgMultiSend = {
     return obj;
   },
   fromAmino(object: MsgMultiSendAmino): MsgMultiSend {
-    return {
-      inputs: Array.isArray(object?.inputs) ? object.inputs.map((e: any) => Input.fromAmino(e)) : [],
-      outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromAmino(e)) : []
-    };
+    const message = createBaseMsgMultiSend();
+    message.inputs = object.inputs?.map(e => Input.fromAmino(e)) || [];
+    message.outputs = object.outputs?.map(e => Output.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MsgMultiSend): MsgMultiSendAmino {
+  toAmino(message: MsgMultiSend, useInterfaces: boolean = true): MsgMultiSendAmino {
     const obj: any = {};
     if (message.inputs) {
-      obj.inputs = message.inputs.map(e => e ? Input.toAmino(e) : undefined);
+      obj.inputs = message.inputs.map(e => e ? Input.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.inputs = [];
     }
     if (message.outputs) {
-      obj.outputs = message.outputs.map(e => e ? Output.toAmino(e) : undefined);
+      obj.outputs = message.outputs.map(e => e ? Output.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.outputs = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MsgMultiSendAminoMsg): MsgMultiSend {
-    return MsgMultiSend.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMultiSend): MsgMultiSendAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgMultiSend",
-      value: MsgMultiSend.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMultiSendProtoMsg): MsgMultiSend {
-    return MsgMultiSend.decode(message.value);
+  fromProtoMsg(message: MsgMultiSendProtoMsg, useInterfaces: boolean = true): MsgMultiSend {
+    return MsgMultiSend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMultiSend): Uint8Array {
     return MsgMultiSend.encode(message).finish();
@@ -414,7 +376,7 @@ export const MsgMultiSendResponse = {
   encode(_: MsgMultiSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMultiSendResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMultiSendResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMultiSendResponse();
@@ -448,23 +410,15 @@ export const MsgMultiSendResponse = {
     return obj;
   },
   fromAmino(_: MsgMultiSendResponseAmino): MsgMultiSendResponse {
-    return {};
+    const message = createBaseMsgMultiSendResponse();
+    return message;
   },
-  toAmino(_: MsgMultiSendResponse): MsgMultiSendResponseAmino {
+  toAmino(_: MsgMultiSendResponse, useInterfaces: boolean = true): MsgMultiSendResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgMultiSendResponseAminoMsg): MsgMultiSendResponse {
-    return MsgMultiSendResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMultiSendResponse): MsgMultiSendResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgMultiSendResponse",
-      value: MsgMultiSendResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMultiSendResponseProtoMsg): MsgMultiSendResponse {
-    return MsgMultiSendResponse.decode(message.value);
+  fromProtoMsg(message: MsgMultiSendResponseProtoMsg, useInterfaces: boolean = true): MsgMultiSendResponse {
+    return MsgMultiSendResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMultiSendResponse): Uint8Array {
     return MsgMultiSendResponse.encode(message).finish();

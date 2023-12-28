@@ -10,12 +10,12 @@ export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
   /** body is the processable content of the transaction */
-  body: TxBody;
+  body?: TxBody;
   /**
    * auth_info is the authorization related content of the transaction,
    * specifically signers, signer modes and fee
    */
-  authInfo: AuthInfo;
+  authInfo?: AuthInfo;
   /**
    * signatures is a list of signatures that matches the length and order of
    * AuthInfo's signer_infos to allow connecting signature meta information like
@@ -123,7 +123,7 @@ export interface AuthInfo {
    * based on the cost of evaluating the body and doing signature verification
    * of the signers. This can be estimated via simulation.
    */
-  fee: Fee;
+  fee?: Fee;
 }
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
@@ -135,12 +135,12 @@ export interface SignerInfo {
    * that already exist in state. If unset, the verifier can use the required \
    * signer address for this position and lookup the public key.
    */
-  publicKey: Any;
+  publicKey?: Any;
   /**
    * mode_info describes the signing mode of the signer and is a nested
    * structure to support nested multisig pubkey's
    */
-  modeInfo: ModeInfo;
+  modeInfo?: ModeInfo;
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to
@@ -167,7 +167,7 @@ export interface ModeInfo_Single {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArray;
+  bitarray?: CompactBitArray;
   /**
    * mode_infos is the corresponding modes of the signers of the multisig
    * which could include nested multisig public keys
@@ -202,8 +202,8 @@ export interface Fee {
 }
 function createBaseTx(): Tx {
   return {
-    body: TxBody.fromPartial({}),
-    authInfo: AuthInfo.fromPartial({}),
+    body: undefined,
+    authInfo: undefined,
     signatures: []
   };
 }
@@ -513,7 +513,7 @@ export const TxBody = {
 function createBaseAuthInfo(): AuthInfo {
   return {
     signerInfos: [],
-    fee: Fee.fromPartial({})
+    fee: undefined
   };
 }
 export const AuthInfo = {
@@ -571,8 +571,8 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: Any.fromPartial({}),
-    modeInfo: ModeInfo.fromPartial({}),
+    publicKey: undefined,
+    modeInfo: undefined,
     sequence: Long.UZERO
   };
 }
@@ -736,7 +736,7 @@ export const ModeInfo_Single = {
 };
 function createBaseModeInfo_Multi(): ModeInfo_Multi {
   return {
-    bitarray: CompactBitArray.fromPartial({}),
+    bitarray: undefined,
     modeInfos: []
   };
 }

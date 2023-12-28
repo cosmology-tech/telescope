@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Path Translation specifies how to combine the backend address with the
@@ -114,11 +114,7 @@ export interface BackendAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: BackendRuleAmino[];
-}
-export interface BackendAminoMsg {
-  type: "/google.api.Backend";
-  value: BackendAmino;
+  rules?: BackendRuleAmino[];
 }
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
@@ -220,7 +216,7 @@ export interface BackendRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * The address of the API backend.
    * 
@@ -243,23 +239,23 @@ export interface BackendRuleAmino {
    * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
    * to specify the protocol version.
    */
-  address: string;
+  address?: string;
   /**
    * The number of seconds to wait for a response from a request. The default
    * varies based on the request protocol and deployment environment.
    */
-  deadline: number;
+  deadline?: number;
   /**
    * Minimum deadline in seconds needed for this method. Calls having deadline
    * value lower than this will be rejected.
    */
-  min_deadline: number;
+  min_deadline?: number;
   /**
    * The number of seconds to wait for the completion of a long running
    * operation. The default is no deadline.
    */
-  operation_deadline: number;
-  path_translation: BackendRule_PathTranslation;
+  operation_deadline?: number;
+  path_translation?: BackendRule_PathTranslation;
   /**
    * The JWT audience is used when generating a JWT ID token for the backend.
    * This ID token will be added in the HTTP "authorization" header, and sent
@@ -296,11 +292,7 @@ export interface BackendRuleAmino {
    * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
    * for more details on the supported values.
    */
-  protocol: string;
-}
-export interface BackendRuleAminoMsg {
-  type: "/google.api.BackendRule";
-  value: BackendRuleAmino;
+  protocol?: string;
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {
@@ -327,7 +319,7 @@ export const Backend = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Backend {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Backend {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBackend();
@@ -335,7 +327,7 @@ export const Backend = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(BackendRule.decode(reader, reader.uint32()));
+          message.rules.push(BackendRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -378,24 +370,21 @@ export const Backend = {
     return obj;
   },
   fromAmino(object: BackendAmino): Backend {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromAmino(e)) : []
-    };
+    const message = createBaseBackend();
+    message.rules = object.rules?.map(e => BackendRule.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Backend): BackendAmino {
+  toAmino(message: Backend, useInterfaces: boolean = true): BackendAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromAminoMsg(object: BackendAminoMsg): Backend {
-    return Backend.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BackendProtoMsg): Backend {
-    return Backend.decode(message.value);
+  fromProtoMsg(message: BackendProtoMsg, useInterfaces: boolean = true): Backend {
+    return Backend.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Backend): Uint8Array {
     return Backend.encode(message).finish();
@@ -452,7 +441,7 @@ export const BackendRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BackendRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BackendRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBackendRule();
@@ -559,36 +548,51 @@ export const BackendRule = {
     return obj;
   },
   fromAmino(object: BackendRuleAmino): BackendRule {
-    return {
-      selector: object.selector,
-      address: object.address,
-      deadline: object.deadline,
-      minDeadline: object.min_deadline,
-      operationDeadline: object.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
-      jwtAudience: object?.jwt_audience,
-      disableAuth: object?.disable_auth,
-      protocol: object.protocol
-    };
+    const message = createBaseBackendRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.deadline !== undefined && object.deadline !== null) {
+      message.deadline = object.deadline;
+    }
+    if (object.min_deadline !== undefined && object.min_deadline !== null) {
+      message.minDeadline = object.min_deadline;
+    }
+    if (object.operation_deadline !== undefined && object.operation_deadline !== null) {
+      message.operationDeadline = object.operation_deadline;
+    }
+    if (object.path_translation !== undefined && object.path_translation !== null) {
+      message.pathTranslation = backendRule_PathTranslationFromJSON(object.path_translation);
+    }
+    if (object.jwt_audience !== undefined && object.jwt_audience !== null) {
+      message.jwtAudience = object.jwt_audience;
+    }
+    if (object.disable_auth !== undefined && object.disable_auth !== null) {
+      message.disableAuth = object.disable_auth;
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
   },
-  toAmino(message: BackendRule): BackendRuleAmino {
+  toAmino(message: BackendRule, useInterfaces: boolean = true): BackendRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.address = omitDefault(message.address);
-    obj.deadline = omitDefault(message.deadline);
-    obj.min_deadline = omitDefault(message.minDeadline);
-    obj.operation_deadline = omitDefault(message.operationDeadline);
-    obj.path_translation = omitDefault(message.pathTranslation);
-    obj.jwt_audience = omitDefault(message.jwtAudience);
-    obj.disable_auth = omitDefault(message.disableAuth);
-    obj.protocol = omitDefault(message.protocol);
+    obj.selector = message.selector;
+    obj.address = message.address;
+    obj.deadline = message.deadline;
+    obj.min_deadline = message.minDeadline;
+    obj.operation_deadline = message.operationDeadline;
+    obj.path_translation = backendRule_PathTranslationToJSON(message.pathTranslation);
+    obj.jwt_audience = message.jwtAudience;
+    obj.disable_auth = message.disableAuth;
+    obj.protocol = message.protocol;
     return obj;
   },
-  fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {
-    return BackendRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BackendRuleProtoMsg): BackendRule {
-    return BackendRule.decode(message.value);
+  fromProtoMsg(message: BackendRuleProtoMsg, useInterfaces: boolean = true): BackendRule {
+    return BackendRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BackendRule): Uint8Array {
     return BackendRule.encode(message).finish();

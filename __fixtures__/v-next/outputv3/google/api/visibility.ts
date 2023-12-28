@@ -67,11 +67,7 @@ export interface VisibilityAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: VisibilityRuleAmino[];
-}
-export interface VisibilityAminoMsg {
-  type: "/google.api.Visibility";
-  value: VisibilityAmino;
+  rules?: VisibilityRuleAmino[];
 }
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -144,7 +140,7 @@ export interface VisibilityRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * A comma-separated list of visibility labels that apply to the `selector`.
    * Any of the listed labels can be used to grant the visibility.
@@ -162,11 +158,7 @@ export interface VisibilityRuleAmino {
    * Removing INTERNAL from this restriction will break clients that rely on
    * this method and only had access to it through INTERNAL.
    */
-  restriction: string;
-}
-export interface VisibilityRuleAminoMsg {
-  type: "/google.api.VisibilityRule";
-  value: VisibilityRuleAmino;
+  restriction?: string;
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
@@ -189,7 +181,7 @@ export const Visibility = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Visibility {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Visibility {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibility();
@@ -197,7 +189,7 @@ export const Visibility = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(VisibilityRule.decode(reader, reader.uint32()));
+          message.rules.push(VisibilityRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -240,24 +232,21 @@ export const Visibility = {
     return obj;
   },
   fromAmino(object: VisibilityAmino): Visibility {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromAmino(e)) : []
-    };
+    const message = createBaseVisibility();
+    message.rules = object.rules?.map(e => VisibilityRule.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Visibility): VisibilityAmino {
+  toAmino(message: Visibility, useInterfaces: boolean = true): VisibilityAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromAminoMsg(object: VisibilityAminoMsg): Visibility {
-    return Visibility.fromAmino(object.value);
-  },
-  fromProtoMsg(message: VisibilityProtoMsg): Visibility {
-    return Visibility.decode(message.value);
+  fromProtoMsg(message: VisibilityProtoMsg, useInterfaces: boolean = true): Visibility {
+    return Visibility.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Visibility): Uint8Array {
     return Visibility.encode(message).finish();
@@ -286,7 +275,7 @@ export const VisibilityRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): VisibilityRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): VisibilityRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseVisibilityRule();
@@ -337,22 +326,23 @@ export const VisibilityRule = {
     return obj;
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
-    return {
-      selector: object.selector,
-      restriction: object.restriction
-    };
+    const message = createBaseVisibilityRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.restriction !== undefined && object.restriction !== null) {
+      message.restriction = object.restriction;
+    }
+    return message;
   },
-  toAmino(message: VisibilityRule): VisibilityRuleAmino {
+  toAmino(message: VisibilityRule, useInterfaces: boolean = true): VisibilityRuleAmino {
     const obj: any = {};
     obj.selector = omitDefault(message.selector);
     obj.restriction = omitDefault(message.restriction);
     return obj;
   },
-  fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {
-    return VisibilityRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: VisibilityRuleProtoMsg): VisibilityRule {
-    return VisibilityRule.decode(message.value);
+  fromProtoMsg(message: VisibilityRuleProtoMsg, useInterfaces: boolean = true): VisibilityRule {
+    return VisibilityRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: VisibilityRule): Uint8Array {
     return VisibilityRule.encode(message).finish();

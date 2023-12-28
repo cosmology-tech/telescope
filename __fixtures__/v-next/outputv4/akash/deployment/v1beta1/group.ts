@@ -63,17 +63,29 @@ export function group_StateToJSON(object: Group_State): string {
 export interface MsgCloseGroup {
   id: GroupID | undefined;
 }
+export interface MsgCloseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup";
+  value: Uint8Array;
+}
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
   id: GroupIDSDKType | undefined;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
+export interface MsgCloseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id: GroupID | undefined;
+}
+export interface MsgPauseGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup";
+  value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -81,11 +93,19 @@ export interface MsgPauseGroupSDKType {
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
+export interface MsgPauseGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgPauseGroupResponse";
+  value: Uint8Array;
+}
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id: GroupID | undefined;
+}
+export interface MsgStartGroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgStartGroup";
+  value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -93,6 +113,10 @@ export interface MsgStartGroupSDKType {
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
+export interface MsgStartGroupResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgStartGroupResponse";
+  value: Uint8Array;
+}
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponseSDKType {}
 /** GroupID stores owner, deployment sequence number and group sequence number */
@@ -100,6 +124,10 @@ export interface GroupID {
   owner: string;
   dseq: bigint;
   gseq: number;
+}
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GroupID";
+  value: Uint8Array;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -112,6 +140,10 @@ export interface GroupSpec {
   name: string;
   requirements: PlacementRequirements | undefined;
   resources: Resource[];
+}
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GroupSpec";
+  value: Uint8Array;
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -126,6 +158,10 @@ export interface Group {
   groupSpec: GroupSpec | undefined;
   createdAt: bigint;
 }
+export interface GroupProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Group";
+  value: Uint8Array;
+}
 /** Group stores group id, state and specifications of group */
 export interface GroupSDKType {
   group_id: GroupIDSDKType | undefined;
@@ -138,6 +174,10 @@ export interface Resource {
   resources: ResourceUnits | undefined;
   count: number;
   price: Coin | undefined;
+}
+export interface ResourceProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Resource";
+  value: Uint8Array;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -208,9 +248,11 @@ export const MsgCloseGroup = {
     return obj;
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgCloseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
     const obj: any = {};
@@ -284,7 +326,8 @@ export const MsgCloseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
-    return {};
+    const message = createBaseMsgCloseGroupResponse();
+    return message;
   },
   toAmino(_: MsgCloseGroupResponse): MsgCloseGroupResponseAmino {
     const obj: any = {};
@@ -375,9 +418,11 @@ export const MsgPauseGroup = {
     return obj;
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgPauseGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
     const obj: any = {};
@@ -451,7 +496,8 @@ export const MsgPauseGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
-    return {};
+    const message = createBaseMsgPauseGroupResponse();
+    return message;
   },
   toAmino(_: MsgPauseGroupResponse): MsgPauseGroupResponseAmino {
     const obj: any = {};
@@ -542,9 +588,11 @@ export const MsgStartGroup = {
     return obj;
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgStartGroup();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {
     const obj: any = {};
@@ -618,7 +666,8 @@ export const MsgStartGroupResponse = {
     return obj;
   },
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
-    return {};
+    const message = createBaseMsgStartGroupResponse();
+    return message;
   },
   toAmino(_: MsgStartGroupResponse): MsgStartGroupResponseAmino {
     const obj: any = {};
@@ -656,13 +705,13 @@ function createBaseGroupID(): GroupID {
 export const GroupID = {
   typeUrl: "/akash.deployment.v1beta1.GroupID",
   encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
     return writer;
@@ -735,11 +784,17 @@ export const GroupID = {
     return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq
-    };
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
   },
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};
@@ -780,7 +835,7 @@ function createBaseGroupSpec(): GroupSpec {
 export const GroupSpec = {
   typeUrl: "/akash.deployment.v1beta1.GroupSpec",
   encode(message: GroupSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.requirements !== undefined) {
@@ -867,11 +922,15 @@ export const GroupSpec = {
     return obj;
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
-    return {
-      name: object.name,
-      requirements: object?.requirements ? PlacementRequirements.fromAmino(object.requirements) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromAmino(e)) : []
-    };
+    const message = createBaseGroupSpec();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromAmino(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
@@ -926,7 +985,7 @@ export const Group = {
     if (message.groupSpec !== undefined) {
       GroupSpec.encode(message.groupSpec, writer.uint32(26).fork()).ldelim();
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (message.createdAt !== undefined) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
@@ -1012,17 +1071,25 @@ export const Group = {
     return obj;
   },
   fromAmino(object: GroupAmino): Group {
-    return {
-      groupId: object?.group_id ? GroupID.fromAmino(object.group_id) : undefined,
-      state: isSet(object.state) ? group_StateFromJSON(object.state) : -1,
-      groupSpec: object?.group_spec ? GroupSpec.fromAmino(object.group_spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseGroup();
+    if (object.group_id !== undefined && object.group_id !== null) {
+      message.groupId = GroupID.fromAmino(object.group_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = group_StateFromJSON(object.state);
+    }
+    if (object.group_spec !== undefined && object.group_spec !== null) {
+      message.groupSpec = GroupSpec.fromAmino(object.group_spec);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Group): GroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
-    obj.state = message.state;
+    obj.state = group_StateToJSON(message.state);
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
     obj.created_at = omitDefault(message.createdAt);
     return obj;
@@ -1062,7 +1129,7 @@ export const Resource = {
     if (message.resources !== undefined) {
       ResourceUnits.encode(message.resources, writer.uint32(10).fork()).ldelim();
     }
-    if (message.count !== 0) {
+    if (message.count !== undefined) {
       writer.uint32(16).uint32(message.count);
     }
     if (message.price !== undefined) {
@@ -1140,11 +1207,17 @@ export const Resource = {
     return obj;
   },
   fromAmino(object: ResourceAmino): Resource {
-    return {
-      resources: object?.resources ? ResourceUnits.fromAmino(object.resources) : undefined,
-      count: object.count,
-      price: object?.price ? Coin.fromAmino(object.price) : undefined
-    };
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromAmino(object.resources);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = object.count;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = Coin.fromAmino(object.price);
+    }
+    return message;
   },
   toAmino(message: Resource): ResourceAmino {
     const obj: any = {};

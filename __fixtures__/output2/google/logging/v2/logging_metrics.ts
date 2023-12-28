@@ -112,7 +112,7 @@ export interface LogMetric {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metricDescriptor: MetricDescriptor;
+  metricDescriptor?: MetricDescriptor;
   /**
    * Optional. A `value_extractor` is required when using a distribution
    * logs-based metric to extract the values to record from a log entry.
@@ -159,19 +159,19 @@ export interface LogMetric {
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  createTime: Timestamp;
+  createTime?: Timestamp;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  updateTime: Timestamp;
+  updateTime?: Timestamp;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
@@ -235,7 +235,7 @@ export interface CreateLogMetricRequest {
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequest {
@@ -250,7 +250,7 @@ export interface UpdateLogMetricRequest {
    */
   metricName: string;
   /** Required. The updated metric. */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequest {
@@ -322,12 +322,12 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: MetricDescriptor.fromPartial({}),
+    metricDescriptor: undefined,
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: Distribution_BucketOptions.fromPartial({}),
-    createTime: Timestamp.fromPartial({}),
-    updateTime: Timestamp.fromPartial({}),
+    bucketOptions: undefined,
+    createTime: undefined,
+    updateTime: undefined,
     version: 0
   };
 }
@@ -656,7 +656,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: LogMetric.fromPartial({})
+    metric: undefined
   };
 }
 export const CreateLogMetricRequest = {
@@ -711,7 +711,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: LogMetric.fromPartial({})
+    metric: undefined
   };
 }
 export const UpdateLogMetricRequest = {

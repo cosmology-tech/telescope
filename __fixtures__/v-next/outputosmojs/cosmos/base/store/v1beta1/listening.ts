@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -14,6 +14,10 @@ export interface StoreKVPair {
   /** true indicates a delete operation, false indicates a set operation */
   delete: boolean;
   key: Uint8Array;
+  value: Uint8Array;
+}
+export interface StoreKVPairProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreKVPair";
   value: Uint8Array;
 }
 /**
@@ -129,19 +133,27 @@ export const StoreKVPair = {
     return obj;
   },
   fromAmino(object: StoreKVPairAmino): StoreKVPair {
-    return {
-      storeKey: object.store_key,
-      delete: object.delete,
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseStoreKVPair();
+    if (object.store_key !== undefined && object.store_key !== null) {
+      message.storeKey = object.store_key;
+    }
+    if (object.delete !== undefined && object.delete !== null) {
+      message.delete = object.delete;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: StoreKVPair): StoreKVPairAmino {
     const obj: any = {};
-    obj.store_key = omitDefault(message.storeKey);
-    obj.delete = omitDefault(message.delete);
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.store_key = message.storeKey;
+    obj.delete = message.delete;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {

@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -8,9 +8,9 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccount {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
-  pubKey: Any;
+  pubKey?: Any;
   accountNumber: bigint;
   sequence: bigint;
 }
@@ -24,14 +24,10 @@ export interface BaseAccountProtoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountAmino {
-  address: string;
+  address?: string;
   pub_key?: AnyAmino;
-  account_number: string;
-  sequence: string;
-}
-export interface BaseAccountAminoMsg {
-  type: "cosmos-sdk/BaseAccount";
-  value: BaseAccountAmino;
+  account_number?: string;
+  sequence?: string;
 }
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -39,16 +35,16 @@ export interface BaseAccountAminoMsg {
  * type for additional functionality (e.g. vesting).
  */
 export interface BaseAccountSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.auth.v1beta1.BaseAccount";
   address: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   account_number: bigint;
   sequence: bigint;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  $typeUrl?: string;
-  baseAccount: BaseAccount;
+  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
+  baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
 }
@@ -59,17 +55,13 @@ export interface ModuleAccountProtoMsg {
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountAmino {
   base_account?: BaseAccountAmino;
-  name: string;
-  permissions: string[];
-}
-export interface ModuleAccountAminoMsg {
-  type: "cosmos-sdk/ModuleAccount";
-  value: ModuleAccountAmino;
+  name?: string;
+  permissions?: string[];
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-  $typeUrl?: string;
-  base_account: BaseAccountSDKType;
+  $typeUrl?: "/cosmos.auth.v1beta1.ModuleAccount";
+  base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];
 }
@@ -87,15 +79,11 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsAmino {
-  max_memo_characters: string;
-  tx_sig_limit: string;
-  tx_size_cost_per_byte: string;
-  sig_verify_cost_ed25519: string;
-  sig_verify_cost_secp256k1: string;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
+  max_memo_characters?: string;
+  tx_sig_limit?: string;
+  tx_size_cost_per_byte?: string;
+  sig_verify_cost_ed25519?: string;
+  sig_verify_cost_secp256k1?: string;
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsSDKType {
@@ -109,7 +97,7 @@ function createBaseBaseAccount(): BaseAccount {
   return {
     $typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
     address: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     accountNumber: BigInt(0),
     sequence: BigInt(0)
   };
@@ -132,7 +120,7 @@ export const BaseAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BaseAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BaseAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBaseAccount();
@@ -143,7 +131,7 @@ export const BaseAccount = {
           message.address = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32());
+          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.accountNumber = reader.uint64();
@@ -205,32 +193,31 @@ export const BaseAccount = {
     return obj;
   },
   fromAmino(object: BaseAccountAmino): BaseAccount {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      accountNumber: BigInt(object.account_number),
-      sequence: BigInt(object.sequence)
-    };
+    const message = createBaseBaseAccount();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    return message;
   },
-  toAmino(message: BaseAccount): BaseAccountAmino {
+  toAmino(message: BaseAccount, useInterfaces: boolean = true): BaseAccountAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.account_number = omitDefault(message.accountNumber);
-    obj.sequence = omitDefault(message.sequence);
+    obj.address = message.address;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
+    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: BaseAccountAminoMsg): BaseAccount {
-    return BaseAccount.fromAmino(object.value);
-  },
-  toAminoMsg(message: BaseAccount): BaseAccountAminoMsg {
-    return {
-      type: "cosmos-sdk/BaseAccount",
-      value: BaseAccount.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: BaseAccountProtoMsg): BaseAccount {
-    return BaseAccount.decode(message.value);
+  fromProtoMsg(message: BaseAccountProtoMsg, useInterfaces: boolean = true): BaseAccount {
+    return BaseAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BaseAccount): Uint8Array {
     return BaseAccount.encode(message).finish();
@@ -245,7 +232,7 @@ export const BaseAccount = {
 function createBaseModuleAccount(): ModuleAccount {
   return {
     $typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
-    baseAccount: BaseAccount.fromPartial({}),
+    baseAccount: undefined,
     name: "",
     permissions: []
   };
@@ -265,7 +252,7 @@ export const ModuleAccount = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleAccount {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleAccount {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleAccount();
@@ -273,7 +260,7 @@ export const ModuleAccount = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.baseAccount = BaseAccount.decode(reader, reader.uint32());
+          message.baseAccount = BaseAccount.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.name = reader.string();
@@ -334,16 +321,20 @@ export const ModuleAccount = {
     return obj;
   },
   fromAmino(object: ModuleAccountAmino): ModuleAccount {
-    return {
-      baseAccount: object?.base_account ? BaseAccount.fromAmino(object.base_account) : undefined,
-      name: object.name,
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
-    };
+    const message = createBaseModuleAccount();
+    if (object.base_account !== undefined && object.base_account !== null) {
+      message.baseAccount = BaseAccount.fromAmino(object.base_account);
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.permissions = object.permissions?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: ModuleAccount): ModuleAccountAmino {
+  toAmino(message: ModuleAccount, useInterfaces: boolean = true): ModuleAccountAmino {
     const obj: any = {};
-    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.name = omitDefault(message.name);
+    obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount, useInterfaces) : undefined;
+    obj.name = message.name;
     if (message.permissions) {
       obj.permissions = message.permissions.map(e => e);
     } else {
@@ -351,17 +342,8 @@ export const ModuleAccount = {
     }
     return obj;
   },
-  fromAminoMsg(object: ModuleAccountAminoMsg): ModuleAccount {
-    return ModuleAccount.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleAccount): ModuleAccountAminoMsg {
-    return {
-      type: "cosmos-sdk/ModuleAccount",
-      value: ModuleAccount.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleAccountProtoMsg): ModuleAccount {
-    return ModuleAccount.decode(message.value);
+  fromProtoMsg(message: ModuleAccountProtoMsg, useInterfaces: boolean = true): ModuleAccount {
+    return ModuleAccount.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleAccount): Uint8Array {
     return ModuleAccount.encode(message).finish();
@@ -403,7 +385,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -488,34 +470,35 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      maxMemoCharacters: BigInt(object.max_memo_characters),
-      txSigLimit: BigInt(object.tx_sig_limit),
-      txSizeCostPerByte: BigInt(object.tx_size_cost_per_byte),
-      sigVerifyCostEd25519: BigInt(object.sig_verify_cost_ed25519),
-      sigVerifyCostSecp256k1: BigInt(object.sig_verify_cost_secp256k1)
-    };
+    const message = createBaseParams();
+    if (object.max_memo_characters !== undefined && object.max_memo_characters !== null) {
+      message.maxMemoCharacters = BigInt(object.max_memo_characters);
+    }
+    if (object.tx_sig_limit !== undefined && object.tx_sig_limit !== null) {
+      message.txSigLimit = BigInt(object.tx_sig_limit);
+    }
+    if (object.tx_size_cost_per_byte !== undefined && object.tx_size_cost_per_byte !== null) {
+      message.txSizeCostPerByte = BigInt(object.tx_size_cost_per_byte);
+    }
+    if (object.sig_verify_cost_ed25519 !== undefined && object.sig_verify_cost_ed25519 !== null) {
+      message.sigVerifyCostEd25519 = BigInt(object.sig_verify_cost_ed25519);
+    }
+    if (object.sig_verify_cost_secp256k1 !== undefined && object.sig_verify_cost_secp256k1 !== null) {
+      message.sigVerifyCostSecp256k1 = BigInt(object.sig_verify_cost_secp256k1);
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.max_memo_characters = omitDefault(message.maxMemoCharacters);
-    obj.tx_sig_limit = omitDefault(message.txSigLimit);
-    obj.tx_size_cost_per_byte = omitDefault(message.txSizeCostPerByte);
-    obj.sig_verify_cost_ed25519 = omitDefault(message.sigVerifyCostEd25519);
-    obj.sig_verify_cost_secp256k1 = omitDefault(message.sigVerifyCostSecp256k1);
+    obj.max_memo_characters = message.maxMemoCharacters ? message.maxMemoCharacters.toString() : undefined;
+    obj.tx_sig_limit = message.txSigLimit ? message.txSigLimit.toString() : undefined;
+    obj.tx_size_cost_per_byte = message.txSizeCostPerByte ? message.txSizeCostPerByte.toString() : undefined;
+    obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519 ? message.sigVerifyCostEd25519.toString() : undefined;
+    obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1 ? message.sigVerifyCostSecp256k1.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

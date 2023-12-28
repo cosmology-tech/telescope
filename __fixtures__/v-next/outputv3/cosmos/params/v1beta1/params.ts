@@ -13,13 +13,9 @@ export interface ParameterChangeProposalProtoMsg {
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalAmino {
-  title: string;
-  description: string;
-  changes: ParamChangeAmino[];
-}
-export interface ParameterChangeProposalAminoMsg {
-  type: "cosmos-sdk/ParameterChangeProposal";
-  value: ParameterChangeProposalAmino;
+  title?: string;
+  description?: string;
+  changes?: ParamChangeAmino[];
 }
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
@@ -45,13 +41,9 @@ export interface ParamChangeProtoMsg {
  * ParameterChangeProposal.
  */
 export interface ParamChangeAmino {
-  subspace: string;
-  key: string;
-  value: string;
-}
-export interface ParamChangeAminoMsg {
-  type: "cosmos-sdk/ParamChange";
-  value: ParamChangeAmino;
+  subspace?: string;
+  key?: string;
+  value?: string;
 }
 /**
  * ParamChange defines an individual parameter change, for use in
@@ -84,7 +76,7 @@ export const ParameterChangeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParameterChangeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParameterChangeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParameterChangeProposal();
@@ -98,7 +90,7 @@ export const ParameterChangeProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.changes.push(ParamChange.decode(reader, reader.uint32()));
+          message.changes.push(ParamChange.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -151,34 +143,29 @@ export const ParameterChangeProposal = {
     return obj;
   },
   fromAmino(object: ParameterChangeProposalAmino): ParameterChangeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
-    };
+    const message = createBaseParameterChangeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.changes = object.changes?.map(e => ParamChange.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ParameterChangeProposal): ParameterChangeProposalAmino {
+  toAmino(message: ParameterChangeProposal, useInterfaces: boolean = true): ParameterChangeProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     if (message.changes) {
-      obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e) : undefined);
+      obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.changes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ParameterChangeProposalAminoMsg): ParameterChangeProposal {
-    return ParameterChangeProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParameterChangeProposal): ParameterChangeProposalAminoMsg {
-    return {
-      type: "cosmos-sdk/ParameterChangeProposal",
-      value: ParameterChangeProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParameterChangeProposalProtoMsg): ParameterChangeProposal {
-    return ParameterChangeProposal.decode(message.value);
+  fromProtoMsg(message: ParameterChangeProposalProtoMsg, useInterfaces: boolean = true): ParameterChangeProposal {
+    return ParameterChangeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParameterChangeProposal): Uint8Array {
     return ParameterChangeProposal.encode(message).finish();
@@ -212,7 +199,7 @@ export const ParamChange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamChange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParamChange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamChange();
@@ -271,30 +258,27 @@ export const ParamChange = {
     return obj;
   },
   fromAmino(object: ParamChangeAmino): ParamChange {
-    return {
-      subspace: object.subspace,
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseParamChange();
+    if (object.subspace !== undefined && object.subspace !== null) {
+      message.subspace = object.subspace;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: ParamChange): ParamChangeAmino {
+  toAmino(message: ParamChange, useInterfaces: boolean = true): ParamChangeAmino {
     const obj: any = {};
     obj.subspace = omitDefault(message.subspace);
     obj.key = omitDefault(message.key);
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: ParamChangeAminoMsg): ParamChange {
-    return ParamChange.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamChange): ParamChangeAminoMsg {
-    return {
-      type: "cosmos-sdk/ParamChange",
-      value: ParamChange.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamChangeProtoMsg): ParamChange {
-    return ParamChange.decode(message.value);
+  fromProtoMsg(message: ParamChangeProtoMsg, useInterfaces: boolean = true): ParamChange {
+    return ParamChange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamChange): Uint8Array {
     return ParamChange.encode(message).finish();

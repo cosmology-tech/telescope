@@ -6,12 +6,20 @@ import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequest {}
+export interface QueryPeriodRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodRequest";
+  value: Uint8Array;
+}
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestSDKType {}
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponse {
   /** period is the current minting per epoch provision value. */
   period: bigint;
+}
+export interface QueryPeriodResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryPeriodResponse";
+  value: Uint8Array;
 }
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
@@ -22,6 +30,10 @@ export interface QueryPeriodResponseSDKType {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequest {}
+export interface QueryEpochMintProvisionRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
+  value: Uint8Array;
+}
 /**
  * QueryEpochMintProvisionRequest is the request type for the
  * Query/EpochMintProvision RPC method.
@@ -35,6 +47,10 @@ export interface QueryEpochMintProvisionResponse {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epochMintProvision: DecCoin;
 }
+export interface QueryEpochMintProvisionResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
+  value: Uint8Array;
+}
 /**
  * QueryEpochMintProvisionResponse is the response type for the
  * Query/EpochMintProvision RPC method.
@@ -47,6 +63,10 @@ export interface QueryEpochMintProvisionResponseSDKType {
  * method.
  */
 export interface QuerySkippedEpochsRequest {}
+export interface QuerySkippedEpochsRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
+  value: Uint8Array;
+}
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
  * method.
@@ -60,6 +80,10 @@ export interface QuerySkippedEpochsResponse {
   /** number of epochs that the inflation module has been disabled. */
   skippedEpochs: bigint;
 }
+export interface QuerySkippedEpochsResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
+  value: Uint8Array;
+}
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
  * RPC method.
@@ -72,6 +96,10 @@ export interface QuerySkippedEpochsResponseSDKType {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequest {}
+export interface QueryCirculatingSupplyRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
+  value: Uint8Array;
+}
 /**
  * QueryCirculatingSupplyRequest is the request type for the
  * Query/CirculatingSupply RPC method.
@@ -85,6 +113,10 @@ export interface QueryCirculatingSupplyResponse {
   /** total amount of coins in circulation */
   circulatingSupply: DecCoin;
 }
+export interface QueryCirculatingSupplyResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
+  value: Uint8Array;
+}
 /**
  * QueryCirculatingSupplyResponse is the response type for the
  * Query/CirculatingSupply RPC method.
@@ -97,6 +129,10 @@ export interface QueryCirculatingSupplyResponseSDKType {
  * method.
  */
 export interface QueryInflationRateRequest {}
+export interface QueryInflationRateRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateRequest";
+  value: Uint8Array;
+}
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
  * method.
@@ -110,6 +146,10 @@ export interface QueryInflationRateResponse {
   /** rate by which the total supply increases within one period */
   inflationRate: string;
 }
+export interface QueryInflationRateResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryInflationRateResponse";
+  value: Uint8Array;
+}
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
  * RPC method.
@@ -119,12 +159,20 @@ export interface QueryInflationRateResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.inflation.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -174,7 +222,8 @@ export const QueryPeriodRequest = {
     return obj;
   },
   fromAmino(_: QueryPeriodRequestAmino): QueryPeriodRequest {
-    return {};
+    const message = createBaseQueryPeriodRequest();
+    return message;
   },
   toAmino(_: QueryPeriodRequest): QueryPeriodRequestAmino {
     const obj: any = {};
@@ -257,9 +306,11 @@ export const QueryPeriodResponse = {
     return obj;
   },
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
-    return {
-      period: BigInt(object.period)
-    };
+    const message = createBaseQueryPeriodResponse();
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    return message;
   },
   toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
     const obj: any = {};
@@ -326,7 +377,8 @@ export const QueryEpochMintProvisionRequest = {
     return obj;
   },
   fromAmino(_: QueryEpochMintProvisionRequestAmino): QueryEpochMintProvisionRequest {
-    return {};
+    const message = createBaseQueryEpochMintProvisionRequest();
+    return message;
   },
   toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestAmino {
     const obj: any = {};
@@ -409,9 +461,11 @@ export const QueryEpochMintProvisionResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
-    };
+    const message = createBaseQueryEpochMintProvisionResponse();
+    if (object.epoch_mint_provision !== undefined && object.epoch_mint_provision !== null) {
+      message.epochMintProvision = DecCoin.fromAmino(object.epoch_mint_provision);
+    }
+    return message;
   },
   toAmino(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseAmino {
     const obj: any = {};
@@ -478,7 +532,8 @@ export const QuerySkippedEpochsRequest = {
     return obj;
   },
   fromAmino(_: QuerySkippedEpochsRequestAmino): QuerySkippedEpochsRequest {
-    return {};
+    const message = createBaseQuerySkippedEpochsRequest();
+    return message;
   },
   toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestAmino {
     const obj: any = {};
@@ -561,9 +616,11 @@ export const QuerySkippedEpochsResponse = {
     return obj;
   },
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseQuerySkippedEpochsResponse();
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
   toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
@@ -630,7 +687,8 @@ export const QueryCirculatingSupplyRequest = {
     return obj;
   },
   fromAmino(_: QueryCirculatingSupplyRequestAmino): QueryCirculatingSupplyRequest {
-    return {};
+    const message = createBaseQueryCirculatingSupplyRequest();
+    return message;
   },
   toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestAmino {
     const obj: any = {};
@@ -713,9 +771,11 @@ export const QueryCirculatingSupplyResponse = {
     return obj;
   },
   fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : undefined
-    };
+    const message = createBaseQueryCirculatingSupplyResponse();
+    if (object.circulating_supply !== undefined && object.circulating_supply !== null) {
+      message.circulatingSupply = DecCoin.fromAmino(object.circulating_supply);
+    }
+    return message;
   },
   toAmino(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseAmino {
     const obj: any = {};
@@ -782,7 +842,8 @@ export const QueryInflationRateRequest = {
     return obj;
   },
   fromAmino(_: QueryInflationRateRequestAmino): QueryInflationRateRequest {
-    return {};
+    const message = createBaseQueryInflationRateRequest();
+    return message;
   },
   toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestAmino {
     const obj: any = {};
@@ -865,9 +926,11 @@ export const QueryInflationRateResponse = {
     return obj;
   },
   fromAmino(object: QueryInflationRateResponseAmino): QueryInflationRateResponse {
-    return {
-      inflationRate: object.inflation_rate
-    };
+    const message = createBaseQueryInflationRateResponse();
+    if (object.inflation_rate !== undefined && object.inflation_rate !== null) {
+      message.inflationRate = object.inflation_rate;
+    }
+    return message;
   },
   toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseAmino {
     const obj: any = {};
@@ -934,7 +997,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -1017,9 +1081,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};

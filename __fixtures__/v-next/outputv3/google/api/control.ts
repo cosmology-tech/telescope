@@ -27,11 +27,7 @@ export interface ControlAmino {
    * The service control environment to use. If empty, no control plane
    * feature (like quota and billing) will be enabled.
    */
-  environment: string;
-}
-export interface ControlAminoMsg {
-  type: "/google.api.Control";
-  value: ControlAmino;
+  environment?: string;
 }
 /**
  * Selects and configures the service controller used by the service.  The
@@ -54,7 +50,7 @@ export const Control = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Control {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Control {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseControl();
@@ -97,20 +93,19 @@ export const Control = {
     return obj;
   },
   fromAmino(object: ControlAmino): Control {
-    return {
-      environment: object.environment
-    };
+    const message = createBaseControl();
+    if (object.environment !== undefined && object.environment !== null) {
+      message.environment = object.environment;
+    }
+    return message;
   },
-  toAmino(message: Control): ControlAmino {
+  toAmino(message: Control, useInterfaces: boolean = true): ControlAmino {
     const obj: any = {};
     obj.environment = omitDefault(message.environment);
     return obj;
   },
-  fromAminoMsg(object: ControlAminoMsg): Control {
-    return Control.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ControlProtoMsg): Control {
-    return Control.decode(message.value);
+  fromProtoMsg(message: ControlProtoMsg, useInterfaces: boolean = true): Control {
+    return Control.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Control): Uint8Array {
     return Control.encode(message).finish();

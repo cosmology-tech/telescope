@@ -40,31 +40,27 @@ export interface GenesisStateAmino {
    * group_seq is the group table orm.Sequence,
    * it is used to get the next group ID.
    */
-  group_seq: string;
+  group_seq?: string;
   /** groups is the list of groups info. */
-  groups: GroupInfoAmino[];
+  groups?: GroupInfoAmino[];
   /** group_members is the list of groups members. */
-  group_members: GroupMemberAmino[];
+  group_members?: GroupMemberAmino[];
   /**
    * group_policy_seq is the group policy table orm.Sequence,
    * it is used to generate the next group policy account address.
    */
-  group_policy_seq: string;
+  group_policy_seq?: string;
   /** group_policies is the list of group policies info. */
-  group_policies: GroupPolicyInfoAmino[];
+  group_policies?: GroupPolicyInfoAmino[];
   /**
    * proposal_seq is the proposal table orm.Sequence,
    * it is used to get the next proposal ID.
    */
-  proposal_seq: string;
+  proposal_seq?: string;
   /** proposals is the list of proposals. */
-  proposals: ProposalAmino[];
+  proposals?: ProposalAmino[];
   /** votes is the list of votes. */
-  votes: VoteAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+  votes?: VoteAmino[];
 }
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisStateSDKType {
@@ -119,7 +115,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -130,25 +126,25 @@ export const GenesisState = {
           message.groupSeq = reader.uint64();
           break;
         case 2:
-          message.groups.push(GroupInfo.decode(reader, reader.uint32()));
+          message.groups.push(GroupInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.groupMembers.push(GroupMember.decode(reader, reader.uint32()));
+          message.groupMembers.push(GroupMember.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           message.groupPolicySeq = reader.uint64();
           break;
         case 5:
-          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32()));
+          message.groupPolicies.push(GroupPolicyInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
           message.proposalSeq = reader.uint64();
           break;
         case 7:
-          message.proposals.push(Proposal.decode(reader, reader.uint32()));
+          message.proposals.push(Proposal.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
-          message.votes.push(Vote.decode(reader, reader.uint32()));
+          message.votes.push(Vote.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -264,60 +260,57 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      groupSeq: BigInt(object.group_seq),
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromAmino(e)) : [],
-      groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromAmino(e)) : [],
-      groupPolicySeq: BigInt(object.group_policy_seq),
-      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromAmino(e)) : [],
-      proposalSeq: BigInt(object.proposal_seq),
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.group_seq !== undefined && object.group_seq !== null) {
+      message.groupSeq = BigInt(object.group_seq);
+    }
+    message.groups = object.groups?.map(e => GroupInfo.fromAmino(e)) || [];
+    message.groupMembers = object.group_members?.map(e => GroupMember.fromAmino(e)) || [];
+    if (object.group_policy_seq !== undefined && object.group_policy_seq !== null) {
+      message.groupPolicySeq = BigInt(object.group_policy_seq);
+    }
+    message.groupPolicies = object.group_policies?.map(e => GroupPolicyInfo.fromAmino(e)) || [];
+    if (object.proposal_seq !== undefined && object.proposal_seq !== null) {
+      message.proposalSeq = BigInt(object.proposal_seq);
+    }
+    message.proposals = object.proposals?.map(e => Proposal.fromAmino(e)) || [];
+    message.votes = object.votes?.map(e => Vote.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.group_seq = omitDefault(message.groupSeq);
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
+      obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.groups = [];
     }
     if (message.groupMembers) {
-      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e) : undefined);
+      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.group_members = [];
     }
     obj.group_policy_seq = omitDefault(message.groupPolicySeq);
     if (message.groupPolicies) {
-      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.group_policies = [];
     }
     obj.proposal_seq = omitDefault(message.proposalSeq);
     if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
+      obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.proposals = [];
     }
     if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
+      obj.votes = message.votes.map(e => e ? Vote.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.votes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

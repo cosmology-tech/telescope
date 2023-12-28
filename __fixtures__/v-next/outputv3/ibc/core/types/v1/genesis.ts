@@ -32,10 +32,6 @@ export interface GenesisStateAmino {
   /** ICS004 - Channel genesis state */
   channel_genesis?: GenesisState3Amino;
 }
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
-}
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisStateSDKType {
   client_genesis: GenesisState1SDKType;
@@ -64,7 +60,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -72,13 +68,13 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.clientGenesis = GenesisState1.decode(reader, reader.uint32());
+          message.clientGenesis = GenesisState1.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32());
+          message.connectionGenesis = GenesisState2.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.channelGenesis = GenesisState3.decode(reader, reader.uint32());
+          message.channelGenesis = GenesisState3.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -129,30 +125,27 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      clientGenesis: object?.client_genesis ? GenesisState1.fromAmino(object.client_genesis) : undefined,
-      connectionGenesis: object?.connection_genesis ? GenesisState2.fromAmino(object.connection_genesis) : undefined,
-      channelGenesis: object?.channel_genesis ? GenesisState3.fromAmino(object.channel_genesis) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.client_genesis !== undefined && object.client_genesis !== null) {
+      message.clientGenesis = GenesisState1.fromAmino(object.client_genesis);
+    }
+    if (object.connection_genesis !== undefined && object.connection_genesis !== null) {
+      message.connectionGenesis = GenesisState2.fromAmino(object.connection_genesis);
+    }
+    if (object.channel_genesis !== undefined && object.channel_genesis !== null) {
+      message.channelGenesis = GenesisState3.fromAmino(object.channel_genesis);
+    }
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis) : undefined;
-    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis) : undefined;
-    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis) : undefined;
+    obj.client_genesis = message.clientGenesis ? GenesisState1.toAmino(message.clientGenesis, useInterfaces) : undefined;
+    obj.connection_genesis = message.connectionGenesis ? GenesisState2.toAmino(message.connectionGenesis, useInterfaces) : undefined;
+    obj.channel_genesis = message.channelGenesis ? GenesisState3.toAmino(message.channelGenesis, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

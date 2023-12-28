@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
@@ -375,11 +375,7 @@ export interface FileDescriptorSetProtoMsg {
  * files it parses.
  */
 export interface FileDescriptorSetAmino {
-  file: FileDescriptorProtoAmino[];
-}
-export interface FileDescriptorSetAminoMsg {
-  type: "/google.protobuf.FileDescriptorSet";
-  value: FileDescriptorSetAmino;
+  file?: FileDescriptorProtoAmino[];
 }
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
@@ -407,14 +403,14 @@ export interface FileDescriptorProto {
   enumType: EnumDescriptorProto[];
   service: ServiceDescriptorProto[];
   extension: FieldDescriptorProto[];
-  options: FileOptions;
+  options?: FileOptions;
   /**
    * This field contains optional information about the original source code.
    * You may safely remove this entire field without harming runtime
    * functionality of the descriptors -- the information is needed only by
    * development tools.
    */
-  sourceCodeInfo: SourceCodeInfo;
+  sourceCodeInfo?: SourceCodeInfo;
   /**
    * The syntax of the proto file.
    * The supported values are "proto2" and "proto3".
@@ -428,22 +424,22 @@ export interface FileDescriptorProtoProtoMsg {
 /** Describes a complete .proto file. */
 export interface FileDescriptorProtoAmino {
   /** file name, relative to root of source tree */
-  name: string;
-  package: string;
+  name?: string;
+  package?: string;
   /** Names of files imported by this file. */
-  dependency: string[];
+  dependency?: string[];
   /** Indexes of the public imported files in the dependency list above. */
-  public_dependency: number[];
+  public_dependency?: number[];
   /**
    * Indexes of the weak imported files in the dependency list.
    * For Google-internal migration only. Do not use.
    */
-  weak_dependency: number[];
+  weak_dependency?: number[];
   /** All top-level definitions in this file. */
-  message_type: DescriptorProtoAmino[];
-  enum_type: EnumDescriptorProtoAmino[];
-  service: ServiceDescriptorProtoAmino[];
-  extension: FieldDescriptorProtoAmino[];
+  message_type?: DescriptorProtoAmino[];
+  enum_type?: EnumDescriptorProtoAmino[];
+  service?: ServiceDescriptorProtoAmino[];
+  extension?: FieldDescriptorProtoAmino[];
   options?: FileOptionsAmino;
   /**
    * This field contains optional information about the original source code.
@@ -456,11 +452,7 @@ export interface FileDescriptorProtoAmino {
    * The syntax of the proto file.
    * The supported values are "proto2" and "proto3".
    */
-  syntax: string;
-}
-export interface FileDescriptorProtoAminoMsg {
-  type: "/google.protobuf.FileDescriptorProto";
-  value: FileDescriptorProtoAmino;
+  syntax?: string;
 }
 /** Describes a complete .proto file. */
 export interface FileDescriptorProtoSDKType {
@@ -473,8 +465,8 @@ export interface FileDescriptorProtoSDKType {
   enum_type: EnumDescriptorProtoSDKType[];
   service: ServiceDescriptorProtoSDKType[];
   extension: FieldDescriptorProtoSDKType[];
-  options: FileOptionsSDKType;
-  source_code_info: SourceCodeInfoSDKType;
+  options?: FileOptionsSDKType;
+  source_code_info?: SourceCodeInfoSDKType;
   syntax: string;
 }
 /** Describes a message type. */
@@ -486,7 +478,7 @@ export interface DescriptorProto {
   enumType: EnumDescriptorProto[];
   extensionRange: DescriptorProto_ExtensionRange[];
   oneofDecl: OneofDescriptorProto[];
-  options: MessageOptions;
+  options?: MessageOptions;
   reservedRange: DescriptorProto_ReservedRange[];
   /**
    * Reserved field names, which may not be used by fields in the same message.
@@ -500,24 +492,20 @@ export interface DescriptorProtoProtoMsg {
 }
 /** Describes a message type. */
 export interface DescriptorProtoAmino {
-  name: string;
-  field: FieldDescriptorProtoAmino[];
-  extension: FieldDescriptorProtoAmino[];
-  nested_type: DescriptorProtoAmino[];
-  enum_type: EnumDescriptorProtoAmino[];
-  extension_range: DescriptorProto_ExtensionRangeAmino[];
-  oneof_decl: OneofDescriptorProtoAmino[];
+  name?: string;
+  field?: FieldDescriptorProtoAmino[];
+  extension?: FieldDescriptorProtoAmino[];
+  nested_type?: DescriptorProtoAmino[];
+  enum_type?: EnumDescriptorProtoAmino[];
+  extension_range?: DescriptorProto_ExtensionRangeAmino[];
+  oneof_decl?: OneofDescriptorProtoAmino[];
   options?: MessageOptionsAmino;
-  reserved_range: DescriptorProto_ReservedRangeAmino[];
+  reserved_range?: DescriptorProto_ReservedRangeAmino[];
   /**
    * Reserved field names, which may not be used by fields in the same message.
    * A given name may only be reserved once.
    */
-  reserved_name: string[];
-}
-export interface DescriptorProtoAminoMsg {
-  type: "/google.protobuf.DescriptorProto";
-  value: DescriptorProtoAmino;
+  reserved_name?: string[];
 }
 /** Describes a message type. */
 export interface DescriptorProtoSDKType {
@@ -528,7 +516,7 @@ export interface DescriptorProtoSDKType {
   enum_type: EnumDescriptorProtoSDKType[];
   extension_range: DescriptorProto_ExtensionRangeSDKType[];
   oneof_decl: OneofDescriptorProtoSDKType[];
-  options: MessageOptionsSDKType;
+  options?: MessageOptionsSDKType;
   reserved_range: DescriptorProto_ReservedRangeSDKType[];
   reserved_name: string[];
 }
@@ -537,7 +525,7 @@ export interface DescriptorProto_ExtensionRange {
   start: number;
   /** Exclusive. */
   end: number;
-  options: ExtensionRangeOptions;
+  options?: ExtensionRangeOptions;
 }
 export interface DescriptorProto_ExtensionRangeProtoMsg {
   typeUrl: "/google.protobuf.ExtensionRange";
@@ -545,19 +533,15 @@ export interface DescriptorProto_ExtensionRangeProtoMsg {
 }
 export interface DescriptorProto_ExtensionRangeAmino {
   /** Inclusive. */
-  start: number;
+  start?: number;
   /** Exclusive. */
-  end: number;
+  end?: number;
   options?: ExtensionRangeOptionsAmino;
-}
-export interface DescriptorProto_ExtensionRangeAminoMsg {
-  type: "/google.protobuf.ExtensionRange";
-  value: DescriptorProto_ExtensionRangeAmino;
 }
 export interface DescriptorProto_ExtensionRangeSDKType {
   start: number;
   end: number;
-  options: ExtensionRangeOptionsSDKType;
+  options?: ExtensionRangeOptionsSDKType;
 }
 /**
  * Range of reserved tag numbers. Reserved tag numbers may not be used by
@@ -581,13 +565,9 @@ export interface DescriptorProto_ReservedRangeProtoMsg {
  */
 export interface DescriptorProto_ReservedRangeAmino {
   /** Inclusive. */
-  start: number;
+  start?: number;
   /** Exclusive. */
-  end: number;
-}
-export interface DescriptorProto_ReservedRangeAminoMsg {
-  type: "/google.protobuf.ReservedRange";
-  value: DescriptorProto_ReservedRangeAmino;
+  end?: number;
 }
 /**
  * Range of reserved tag numbers. Reserved tag numbers may not be used by
@@ -608,11 +588,7 @@ export interface ExtensionRangeOptionsProtoMsg {
 }
 export interface ExtensionRangeOptionsAmino {
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface ExtensionRangeOptionsAminoMsg {
-  type: "/google.protobuf.ExtensionRangeOptions";
-  value: ExtensionRangeOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface ExtensionRangeOptionsSDKType {
   uninterpreted_option: UninterpretedOptionSDKType[];
@@ -660,7 +636,7 @@ export interface FieldDescriptorProto {
    * it to camelCase.
    */
   jsonName: string;
-  options: FieldOptions;
+  options?: FieldOptions;
 }
 export interface FieldDescriptorProtoProtoMsg {
   typeUrl: "/google.protobuf.FieldDescriptorProto";
@@ -668,14 +644,14 @@ export interface FieldDescriptorProtoProtoMsg {
 }
 /** Describes a field within a message. */
 export interface FieldDescriptorProtoAmino {
-  name: string;
-  number: number;
-  label: FieldDescriptorProto_Label;
+  name?: string;
+  number?: number;
+  label?: FieldDescriptorProto_Label;
   /**
    * If type_name is set, this need not be set.  If both this and type_name
    * are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP.
    */
-  type: FieldDescriptorProto_Type;
+  type?: FieldDescriptorProto_Type;
   /**
    * For message and enum types, this is the name of the type.  If the name
    * starts with a '.', it is fully-qualified.  Otherwise, C++-like scoping
@@ -683,12 +659,12 @@ export interface FieldDescriptorProtoAmino {
    * message are searched, then within the parent, on up to the root
    * namespace).
    */
-  type_name: string;
+  type_name?: string;
   /**
    * For extensions, this is the name of the type being extended.  It is
    * resolved in the same manner as type_name.
    */
-  extendee: string;
+  extendee?: string;
   /**
    * For numeric types, contains the original text representation of the value.
    * For booleans, "true" or "false".
@@ -696,24 +672,20 @@ export interface FieldDescriptorProtoAmino {
    * For bytes, contains the C escaped value.  All bytes >= 128 are escaped.
    * TODO(kenton):  Base-64 encode?
    */
-  default_value: string;
+  default_value?: string;
   /**
    * If set, gives the index of a oneof in the containing type's oneof_decl
    * list.  This field is a member of that oneof.
    */
-  oneof_index: number;
+  oneof_index?: number;
   /**
    * JSON name of this field. The value is set by protocol compiler. If the
    * user has set a "json_name" option on this field, that option's value
    * will be used. Otherwise, it's deduced from the field's name by converting
    * it to camelCase.
    */
-  json_name: string;
+  json_name?: string;
   options?: FieldOptionsAmino;
-}
-export interface FieldDescriptorProtoAminoMsg {
-  type: "/google.protobuf.FieldDescriptorProto";
-  value: FieldDescriptorProtoAmino;
 }
 /** Describes a field within a message. */
 export interface FieldDescriptorProtoSDKType {
@@ -726,12 +698,12 @@ export interface FieldDescriptorProtoSDKType {
   default_value: string;
   oneof_index: number;
   json_name: string;
-  options: FieldOptionsSDKType;
+  options?: FieldOptionsSDKType;
 }
 /** Describes a oneof. */
 export interface OneofDescriptorProto {
   name: string;
-  options: OneofOptions;
+  options?: OneofOptions;
 }
 export interface OneofDescriptorProtoProtoMsg {
   typeUrl: "/google.protobuf.OneofDescriptorProto";
@@ -739,23 +711,19 @@ export interface OneofDescriptorProtoProtoMsg {
 }
 /** Describes a oneof. */
 export interface OneofDescriptorProtoAmino {
-  name: string;
+  name?: string;
   options?: OneofOptionsAmino;
-}
-export interface OneofDescriptorProtoAminoMsg {
-  type: "/google.protobuf.OneofDescriptorProto";
-  value: OneofDescriptorProtoAmino;
 }
 /** Describes a oneof. */
 export interface OneofDescriptorProtoSDKType {
   name: string;
-  options: OneofOptionsSDKType;
+  options?: OneofOptionsSDKType;
 }
 /** Describes an enum type. */
 export interface EnumDescriptorProto {
   name: string;
   value: EnumValueDescriptorProto[];
-  options: EnumOptions;
+  options?: EnumOptions;
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
    * by enum values in the same enum declaration. Reserved ranges may not
@@ -774,30 +742,26 @@ export interface EnumDescriptorProtoProtoMsg {
 }
 /** Describes an enum type. */
 export interface EnumDescriptorProtoAmino {
-  name: string;
-  value: EnumValueDescriptorProtoAmino[];
+  name?: string;
+  value?: EnumValueDescriptorProtoAmino[];
   options?: EnumOptionsAmino;
   /**
    * Range of reserved numeric values. Reserved numeric values may not be used
    * by enum values in the same enum declaration. Reserved ranges may not
    * overlap.
    */
-  reserved_range: EnumDescriptorProto_EnumReservedRangeAmino[];
+  reserved_range?: EnumDescriptorProto_EnumReservedRangeAmino[];
   /**
    * Reserved enum value names, which may not be reused. A given name may only
    * be reserved once.
    */
-  reserved_name: string[];
-}
-export interface EnumDescriptorProtoAminoMsg {
-  type: "/google.protobuf.EnumDescriptorProto";
-  value: EnumDescriptorProtoAmino;
+  reserved_name?: string[];
 }
 /** Describes an enum type. */
 export interface EnumDescriptorProtoSDKType {
   name: string;
   value: EnumValueDescriptorProtoSDKType[];
-  options: EnumOptionsSDKType;
+  options?: EnumOptionsSDKType;
   reserved_range: EnumDescriptorProto_EnumReservedRangeSDKType[];
   reserved_name: string[];
 }
@@ -829,13 +793,9 @@ export interface EnumDescriptorProto_EnumReservedRangeProtoMsg {
  */
 export interface EnumDescriptorProto_EnumReservedRangeAmino {
   /** Inclusive. */
-  start: number;
+  start?: number;
   /** Inclusive. */
-  end: number;
-}
-export interface EnumDescriptorProto_EnumReservedRangeAminoMsg {
-  type: "/google.protobuf.EnumReservedRange";
-  value: EnumDescriptorProto_EnumReservedRangeAmino;
+  end?: number;
 }
 /**
  * Range of reserved numeric values. Reserved values may not be used by
@@ -853,7 +813,7 @@ export interface EnumDescriptorProto_EnumReservedRangeSDKType {
 export interface EnumValueDescriptorProto {
   name: string;
   number: number;
-  options: EnumValueOptions;
+  options?: EnumValueOptions;
 }
 export interface EnumValueDescriptorProtoProtoMsg {
   typeUrl: "/google.protobuf.EnumValueDescriptorProto";
@@ -861,25 +821,21 @@ export interface EnumValueDescriptorProtoProtoMsg {
 }
 /** Describes a value within an enum. */
 export interface EnumValueDescriptorProtoAmino {
-  name: string;
-  number: number;
+  name?: string;
+  number?: number;
   options?: EnumValueOptionsAmino;
-}
-export interface EnumValueDescriptorProtoAminoMsg {
-  type: "/google.protobuf.EnumValueDescriptorProto";
-  value: EnumValueDescriptorProtoAmino;
 }
 /** Describes a value within an enum. */
 export interface EnumValueDescriptorProtoSDKType {
   name: string;
   number: number;
-  options: EnumValueOptionsSDKType;
+  options?: EnumValueOptionsSDKType;
 }
 /** Describes a service. */
 export interface ServiceDescriptorProto {
   name: string;
   method: MethodDescriptorProto[];
-  options: ServiceOptions;
+  options?: ServiceOptions;
 }
 export interface ServiceDescriptorProtoProtoMsg {
   typeUrl: "/google.protobuf.ServiceDescriptorProto";
@@ -887,19 +843,15 @@ export interface ServiceDescriptorProtoProtoMsg {
 }
 /** Describes a service. */
 export interface ServiceDescriptorProtoAmino {
-  name: string;
-  method: MethodDescriptorProtoAmino[];
+  name?: string;
+  method?: MethodDescriptorProtoAmino[];
   options?: ServiceOptionsAmino;
-}
-export interface ServiceDescriptorProtoAminoMsg {
-  type: "/google.protobuf.ServiceDescriptorProto";
-  value: ServiceDescriptorProtoAmino;
 }
 /** Describes a service. */
 export interface ServiceDescriptorProtoSDKType {
   name: string;
   method: MethodDescriptorProtoSDKType[];
-  options: ServiceOptionsSDKType;
+  options?: ServiceOptionsSDKType;
 }
 /** Describes a method of a service. */
 export interface MethodDescriptorProto {
@@ -910,7 +862,7 @@ export interface MethodDescriptorProto {
    */
   inputType: string;
   outputType: string;
-  options: MethodOptions;
+  options?: MethodOptions;
   /** Identifies if client streams multiple client messages */
   clientStreaming: boolean;
   /** Identifies if server streams multiple server messages */
@@ -922,29 +874,25 @@ export interface MethodDescriptorProtoProtoMsg {
 }
 /** Describes a method of a service. */
 export interface MethodDescriptorProtoAmino {
-  name: string;
+  name?: string;
   /**
    * Input and output type names.  These are resolved in the same way as
    * FieldDescriptorProto.type_name, but must refer to a message type.
    */
-  input_type: string;
-  output_type: string;
+  input_type?: string;
+  output_type?: string;
   options?: MethodOptionsAmino;
   /** Identifies if client streams multiple client messages */
-  client_streaming: boolean;
+  client_streaming?: boolean;
   /** Identifies if server streams multiple server messages */
-  server_streaming: boolean;
-}
-export interface MethodDescriptorProtoAminoMsg {
-  type: "/google.protobuf.MethodDescriptorProto";
-  value: MethodDescriptorProtoAmino;
+  server_streaming?: boolean;
 }
 /** Describes a method of a service. */
 export interface MethodDescriptorProtoSDKType {
   name: string;
   input_type: string;
   output_type: string;
-  options: MethodOptionsSDKType;
+  options?: MethodOptionsSDKType;
   client_streaming: boolean;
   server_streaming: boolean;
 }
@@ -1076,7 +1024,7 @@ export interface FileOptionsAmino {
    * inappropriate because proto packages do not normally start with backwards
    * domain names.
    */
-  java_package: string;
+  java_package?: string;
   /**
    * If set, all the classes from the .proto file are wrapped in a single
    * outer class with the given name.  This applies to both Proto1
@@ -1084,7 +1032,7 @@ export interface FileOptionsAmino {
    * a .proto always translates to a single class, but you may want to
    * explicitly choose the class name).
    */
-  java_outer_classname: string;
+  java_outer_classname?: string;
   /**
    * If set true, then the Java code generator will generate a separate .java
    * file for each top-level message, enum, and service defined in the .proto
@@ -1093,10 +1041,10 @@ export interface FileOptionsAmino {
    * generated to contain the file's getDescriptor() method as well as any
    * top-level extensions defined in the file.
    */
-  java_multiple_files: boolean;
+  java_multiple_files?: boolean;
   /** This option does nothing. */
   /** @deprecated */
-  java_generate_equals_and_hash: boolean;
+  java_generate_equals_and_hash?: boolean;
   /**
    * If set true, then the Java2 code generator will generate code that
    * throws an exception whenever an attempt is made to assign a non-UTF-8
@@ -1105,8 +1053,8 @@ export interface FileOptionsAmino {
    * However, an extension field still accepts non-UTF-8 byte sequences.
    * This option has no effect on when used with the lite runtime.
    */
-  java_string_check_utf8: boolean;
-  optimize_for: FileOptions_OptimizeMode;
+  java_string_check_utf8?: boolean;
+  optimize_for?: FileOptions_OptimizeMode;
   /**
    * Sets the Go package where structs generated from this .proto will be
    * placed. If omitted, the Go package will be derived from the following:
@@ -1114,7 +1062,7 @@ export interface FileOptionsAmino {
    *   - Otherwise, the package statement in the .proto file, if present.
    *   - Otherwise, the basename of the .proto file, without extension.
    */
-  go_package: string;
+  go_package?: string;
   /**
    * Should generic services be generated in each language?  "Generic" services
    * are not specific to any particular RPC system.  They are generated by the
@@ -1127,68 +1075,64 @@ export interface FileOptionsAmino {
    * these default to false.  Old code which depends on generic services should
    * explicitly set them to true.
    */
-  cc_generic_services: boolean;
-  java_generic_services: boolean;
-  py_generic_services: boolean;
-  php_generic_services: boolean;
+  cc_generic_services?: boolean;
+  java_generic_services?: boolean;
+  py_generic_services?: boolean;
+  php_generic_services?: boolean;
   /**
    * Is this file deprecated?
    * Depending on the target platform, this can emit Deprecated annotations
    * for everything in the file, or it will be completely ignored; in the very
    * least, this is a formalization for deprecating files.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /**
    * Enables the use of arenas for the proto messages in this file. This applies
    * only to generated classes for C++.
    */
-  cc_enable_arenas: boolean;
+  cc_enable_arenas?: boolean;
   /**
    * Sets the objective c class prefix which is prepended to all objective c
    * generated classes from this .proto. There is no default.
    */
-  objc_class_prefix: string;
+  objc_class_prefix?: string;
   /** Namespace for generated classes; defaults to the package. */
-  csharp_namespace: string;
+  csharp_namespace?: string;
   /**
    * By default Swift generators will take the proto package and CamelCase it
    * replacing '.' with underscore and use that to prefix the types/symbols
    * defined. When this options is provided, they will use this value instead
    * to prefix the types/symbols defined.
    */
-  swift_prefix: string;
+  swift_prefix?: string;
   /**
    * Sets the php class prefix which is prepended to all php generated classes
    * from this .proto. Default is empty.
    */
-  php_class_prefix: string;
+  php_class_prefix?: string;
   /**
    * Use this option to change the namespace of php generated classes. Default
    * is empty. When this option is empty, the package name will be used for
    * determining the namespace.
    */
-  php_namespace: string;
+  php_namespace?: string;
   /**
    * Use this option to change the namespace of php generated metadata classes.
    * Default is empty. When this option is empty, the proto file name will be
    * used for determining the namespace.
    */
-  php_metadata_namespace: string;
+  php_metadata_namespace?: string;
   /**
    * Use this option to change the package of ruby generated classes. Default
    * is empty. When this option is not set, the package name will be used for
    * determining the ruby package.
    */
-  ruby_package: string;
+  ruby_package?: string;
   /**
    * The parser stores options it doesn't recognize here.
    * See the documentation for the "Options" section above.
    */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface FileOptionsAminoMsg {
-  type: "/google.protobuf.FileOptions";
-  value: FileOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface FileOptionsSDKType {
   java_package: string;
@@ -1301,20 +1245,20 @@ export interface MessageOptionsAmino {
    * Because this is an option, the above two restrictions are not enforced by
    * the protocol compiler.
    */
-  message_set_wire_format: boolean;
+  message_set_wire_format?: boolean;
   /**
    * Disables the generation of the standard "descriptor()" accessor, which can
    * conflict with a field of the same name.  This is meant to make migration
    * from proto1 easier; new code should avoid fields named "descriptor".
    */
-  no_standard_descriptor_accessor: boolean;
+  no_standard_descriptor_accessor?: boolean;
   /**
    * Is this message deprecated?
    * Depending on the target platform, this can emit Deprecated annotations
    * for the message, or it will be completely ignored; in the very least,
    * this is a formalization for deprecating messages.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /**
    * Whether the message is an automatically generated map entry type for the
    * maps field.
@@ -1338,13 +1282,9 @@ export interface MessageOptionsAmino {
    * instead. The option should only be implicitly set by the proto compiler
    * parser.
    */
-  map_entry: boolean;
+  map_entry?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface MessageOptionsAminoMsg {
-  type: "/google.protobuf.MessageOptions";
-  value: MessageOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface MessageOptionsSDKType {
   message_set_wire_format: boolean;
@@ -1437,7 +1377,7 @@ export interface FieldOptionsAmino {
    * options below.  This option is not yet implemented in the open source
    * release -- sorry, we'll try to include it in a future version!
    */
-  ctype: FieldOptions_CType;
+  ctype?: FieldOptions_CType;
   /**
    * The packed option can be enabled for repeated primitive fields to enable
    * a more efficient representation on the wire. Rather than repeatedly
@@ -1445,7 +1385,7 @@ export interface FieldOptionsAmino {
    * a single length-delimited blob. In proto3, only explicit setting it to
    * false will avoid using packed encoding.
    */
-  packed: boolean;
+  packed?: boolean;
   /**
    * The jstype option determines the JavaScript type used for values of the
    * field.  The option is permitted only for 64 bit integral and fixed types
@@ -1459,7 +1399,7 @@ export interface FieldOptionsAmino {
    * This option is an enum to permit additional types to be added, e.g.
    * goog.math.Integer.
    */
-  jstype: FieldOptions_JSType;
+  jstype?: FieldOptions_JSType;
   /**
    * Should this field be parsed lazily?  Lazy applies only to message-type
    * fields.  It means that when the outer message is initially parsed, the
@@ -1490,22 +1430,18 @@ export interface FieldOptionsAmino {
    * check its required fields, regardless of whether or not the message has
    * been parsed.
    */
-  lazy: boolean;
+  lazy?: boolean;
   /**
    * Is this field deprecated?
    * Depending on the target platform, this can emit Deprecated annotations
    * for accessors, or it will be completely ignored; in the very least, this
    * is a formalization for deprecating fields.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /** For Google-internal migration only. Do not use. */
-  weak: boolean;
+  weak?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface FieldOptionsAminoMsg {
-  type: "/google.protobuf.FieldOptions";
-  value: FieldOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface FieldOptionsSDKType {
   ctype: FieldOptions_CType;
@@ -1526,11 +1462,7 @@ export interface OneofOptionsProtoMsg {
 }
 export interface OneofOptionsAmino {
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface OneofOptionsAminoMsg {
-  type: "/google.protobuf.OneofOptions";
-  value: OneofOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface OneofOptionsSDKType {
   uninterpreted_option: UninterpretedOptionSDKType[];
@@ -1560,20 +1492,16 @@ export interface EnumOptionsAmino {
    * Set this option to true to allow mapping different tag names to the same
    * value.
    */
-  allow_alias: boolean;
+  allow_alias?: boolean;
   /**
    * Is this enum deprecated?
    * Depending on the target platform, this can emit Deprecated annotations
    * for the enum, or it will be completely ignored; in the very least, this
    * is a formalization for deprecating enums.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface EnumOptionsAminoMsg {
-  type: "/google.protobuf.EnumOptions";
-  value: EnumOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface EnumOptionsSDKType {
   allow_alias: boolean;
@@ -1602,13 +1530,9 @@ export interface EnumValueOptionsAmino {
    * for the enum value, or it will be completely ignored; in the very least,
    * this is a formalization for deprecating enum values.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface EnumValueOptionsAminoMsg {
-  type: "/google.protobuf.EnumValueOptions";
-  value: EnumValueOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface EnumValueOptionsSDKType {
   deprecated: boolean;
@@ -1636,13 +1560,9 @@ export interface ServiceOptionsAmino {
    * for the service, or it will be completely ignored; in the very least,
    * this is a formalization for deprecating services.
    */
-  deprecated: boolean;
+  deprecated?: boolean;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface ServiceOptionsAminoMsg {
-  type: "/google.protobuf.ServiceOptions";
-  value: ServiceOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface ServiceOptionsSDKType {
   deprecated: boolean;
@@ -1671,14 +1591,10 @@ export interface MethodOptionsAmino {
    * for the method, or it will be completely ignored; in the very least,
    * this is a formalization for deprecating methods.
    */
-  deprecated: boolean;
-  idempotency_level: MethodOptions_IdempotencyLevel;
+  deprecated?: boolean;
+  idempotency_level?: MethodOptions_IdempotencyLevel;
   /** The parser stores options it doesn't recognize here. See above. */
-  uninterpreted_option: UninterpretedOptionAmino[];
-}
-export interface MethodOptionsAminoMsg {
-  type: "/google.protobuf.MethodOptions";
-  value: MethodOptionsAmino;
+  uninterpreted_option?: UninterpretedOptionAmino[];
 }
 export interface MethodOptionsSDKType {
   deprecated: boolean;
@@ -1719,21 +1635,17 @@ export interface UninterpretedOptionProtoMsg {
  * in them.
  */
 export interface UninterpretedOptionAmino {
-  name: UninterpretedOption_NamePartAmino[];
+  name?: UninterpretedOption_NamePartAmino[];
   /**
    * The value of the uninterpreted option, in whatever type the tokenizer
    * identified it as during parsing. Exactly one of these should be set.
    */
-  identifier_value: string;
-  positive_int_value: string;
-  negative_int_value: string;
-  double_value: number;
-  string_value: Uint8Array;
-  aggregate_value: string;
-}
-export interface UninterpretedOptionAminoMsg {
-  type: "/google.protobuf.UninterpretedOption";
-  value: UninterpretedOptionAmino;
+  identifier_value?: string;
+  positive_int_value?: string;
+  negative_int_value?: string;
+  double_value?: number;
+  string_value?: string;
+  aggregate_value?: string;
 }
 /**
  * A message representing a option the parser does not recognize. This only
@@ -1775,12 +1687,8 @@ export interface UninterpretedOption_NamePartProtoMsg {
  * "foo.(bar.baz).qux".
  */
 export interface UninterpretedOption_NamePartAmino {
-  name_part: string;
-  is_extension: boolean;
-}
-export interface UninterpretedOption_NamePartAminoMsg {
-  type: "/google.protobuf.NamePart";
-  value: UninterpretedOption_NamePartAmino;
+  name_part?: string;
+  is_extension?: boolean;
 }
 /**
  * The name of the uninterpreted option.  Each string represents a segment in
@@ -1899,11 +1807,7 @@ export interface SourceCodeInfoAmino {
    *   ignore those that it doesn't understand, as more types of locations could
    *   be recorded in the future.
    */
-  location: SourceCodeInfo_LocationAmino[];
-}
-export interface SourceCodeInfoAminoMsg {
-  type: "/google.protobuf.SourceCodeInfo";
-  value: SourceCodeInfoAmino;
+  location?: SourceCodeInfo_LocationAmino[];
 }
 /**
  * Encapsulates information about the original source file from which a
@@ -2030,7 +1934,7 @@ export interface SourceCodeInfo_LocationAmino {
    * this path refers to the whole field declaration (from the beginning
    * of the label to the terminating semicolon).
    */
-  path: number[];
+  path?: number[];
   /**
    * Always has exactly three or four elements: start line, start column,
    * end line (optional, otherwise assumed same as start line), end column.
@@ -2038,7 +1942,7 @@ export interface SourceCodeInfo_LocationAmino {
    * and column numbers are zero-based -- typically you will want to add
    * 1 to each before displaying to a user.
    */
-  span: number[];
+  span?: number[];
   /**
    * If this SourceCodeInfo represents a complete declaration, these are any
    * comments appearing before and after the declaration which appear to be
@@ -2088,13 +1992,9 @@ export interface SourceCodeInfo_LocationAmino {
    * 
    *   // ignored detached comments.
    */
-  leading_comments: string;
-  trailing_comments: string;
-  leading_detached_comments: string[];
-}
-export interface SourceCodeInfo_LocationAminoMsg {
-  type: "/google.protobuf.Location";
-  value: SourceCodeInfo_LocationAmino;
+  leading_comments?: string;
+  trailing_comments?: string;
+  leading_detached_comments?: string[];
 }
 export interface SourceCodeInfo_LocationSDKType {
   path: number[];
@@ -2129,11 +2029,7 @@ export interface GeneratedCodeInfoAmino {
    * An Annotation connects some span of text in generated code to an element
    * of its generating .proto file.
    */
-  annotation: GeneratedCodeInfo_AnnotationAmino[];
-}
-export interface GeneratedCodeInfoAminoMsg {
-  type: "/google.protobuf.GeneratedCodeInfo";
-  value: GeneratedCodeInfoAmino;
+  annotation?: GeneratedCodeInfo_AnnotationAmino[];
 }
 /**
  * Describes the relationship between generated code and its original source
@@ -2172,24 +2068,20 @@ export interface GeneratedCodeInfo_AnnotationAmino {
    * Identifies the element in the original source .proto file. This field
    * is formatted the same as SourceCodeInfo.Location.path.
    */
-  path: number[];
+  path?: number[];
   /** Identifies the filesystem path to the original source .proto. */
-  source_file: string;
+  source_file?: string;
   /**
    * Identifies the starting offset in bytes in the generated code
    * that relates to the identified object.
    */
-  begin: number;
+  begin?: number;
   /**
    * Identifies the ending offset in bytes in the generated code that
    * relates to the identified offset. The end offset should be one past
    * the last relevant byte (so the length of the text = end - begin).
    */
-  end: number;
-}
-export interface GeneratedCodeInfo_AnnotationAminoMsg {
-  type: "/google.protobuf.Annotation";
-  value: GeneratedCodeInfo_AnnotationAmino;
+  end?: number;
 }
 export interface GeneratedCodeInfo_AnnotationSDKType {
   path: number[];
@@ -2210,7 +2102,7 @@ export const FileDescriptorSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FileDescriptorSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FileDescriptorSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileDescriptorSet();
@@ -2218,7 +2110,7 @@ export const FileDescriptorSet = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.file.push(FileDescriptorProto.decode(reader, reader.uint32()));
+          message.file.push(FileDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2261,24 +2153,21 @@ export const FileDescriptorSet = {
     return obj;
   },
   fromAmino(object: FileDescriptorSetAmino): FileDescriptorSet {
-    return {
-      file: Array.isArray(object?.file) ? object.file.map((e: any) => FileDescriptorProto.fromAmino(e)) : []
-    };
+    const message = createBaseFileDescriptorSet();
+    message.file = object.file?.map(e => FileDescriptorProto.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: FileDescriptorSet): FileDescriptorSetAmino {
+  toAmino(message: FileDescriptorSet, useInterfaces: boolean = true): FileDescriptorSetAmino {
     const obj: any = {};
     if (message.file) {
-      obj.file = message.file.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
+      obj.file = message.file.map(e => e ? FileDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.file = [];
     }
     return obj;
   },
-  fromAminoMsg(object: FileDescriptorSetAminoMsg): FileDescriptorSet {
-    return FileDescriptorSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FileDescriptorSetProtoMsg): FileDescriptorSet {
-    return FileDescriptorSet.decode(message.value);
+  fromProtoMsg(message: FileDescriptorSetProtoMsg, useInterfaces: boolean = true): FileDescriptorSet {
+    return FileDescriptorSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FileDescriptorSet): Uint8Array {
     return FileDescriptorSet.encode(message).finish();
@@ -2301,8 +2190,8 @@ function createBaseFileDescriptorProto(): FileDescriptorProto {
     enumType: [],
     service: [],
     extension: [],
-    options: FileOptions.fromPartial({}),
-    sourceCodeInfo: SourceCodeInfo.fromPartial({}),
+    options: undefined,
+    sourceCodeInfo: undefined,
     syntax: ""
   };
 }
@@ -2351,7 +2240,7 @@ export const FileDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FileDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FileDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileDescriptorProto();
@@ -2388,22 +2277,22 @@ export const FileDescriptorProto = {
           }
           break;
         case 4:
-          message.messageType.push(DescriptorProto.decode(reader, reader.uint32()));
+          message.messageType.push(DescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
+          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
-          message.service.push(ServiceDescriptorProto.decode(reader, reader.uint32()));
+          message.service.push(ServiceDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
-          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
+          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
-          message.options = FileOptions.decode(reader, reader.uint32());
+          message.options = FileOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
-          message.sourceCodeInfo = SourceCodeInfo.decode(reader, reader.uint32());
+          message.sourceCodeInfo = SourceCodeInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 12:
           message.syntax = reader.string();
@@ -2556,25 +2445,35 @@ export const FileDescriptorProto = {
     return obj;
   },
   fromAmino(object: FileDescriptorProtoAmino): FileDescriptorProto {
-    return {
-      name: object.name,
-      package: object.package,
-      dependency: Array.isArray(object?.dependency) ? object.dependency.map((e: any) => e) : [],
-      publicDependency: Array.isArray(object?.public_dependency) ? object.public_dependency.map((e: any) => e) : [],
-      weakDependency: Array.isArray(object?.weak_dependency) ? object.weak_dependency.map((e: any) => e) : [],
-      messageType: Array.isArray(object?.message_type) ? object.message_type.map((e: any) => DescriptorProto.fromAmino(e)) : [],
-      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromAmino(e)) : [],
-      service: Array.isArray(object?.service) ? object.service.map((e: any) => ServiceDescriptorProto.fromAmino(e)) : [],
-      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
-      options: object?.options ? FileOptions.fromAmino(object.options) : undefined,
-      sourceCodeInfo: object?.source_code_info ? SourceCodeInfo.fromAmino(object.source_code_info) : undefined,
-      syntax: object.syntax
-    };
+    const message = createBaseFileDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.package !== undefined && object.package !== null) {
+      message.package = object.package;
+    }
+    message.dependency = object.dependency?.map(e => e) || [];
+    message.publicDependency = object.public_dependency?.map(e => e) || [];
+    message.weakDependency = object.weak_dependency?.map(e => e) || [];
+    message.messageType = object.message_type?.map(e => DescriptorProto.fromAmino(e)) || [];
+    message.enumType = object.enum_type?.map(e => EnumDescriptorProto.fromAmino(e)) || [];
+    message.service = object.service?.map(e => ServiceDescriptorProto.fromAmino(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.fromAmino(e)) || [];
+    if (object.options !== undefined && object.options !== null) {
+      message.options = FileOptions.fromAmino(object.options);
+    }
+    if (object.source_code_info !== undefined && object.source_code_info !== null) {
+      message.sourceCodeInfo = SourceCodeInfo.fromAmino(object.source_code_info);
+    }
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = object.syntax;
+    }
+    return message;
   },
-  toAmino(message: FileDescriptorProto): FileDescriptorProtoAmino {
+  toAmino(message: FileDescriptorProto, useInterfaces: boolean = true): FileDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.package = omitDefault(message.package);
+    obj.name = message.name;
+    obj.package = message.package;
     if (message.dependency) {
       obj.dependency = message.dependency.map(e => e);
     } else {
@@ -2591,35 +2490,32 @@ export const FileDescriptorProto = {
       obj.weak_dependency = [];
     }
     if (message.messageType) {
-      obj.message_type = message.messageType.map(e => e ? DescriptorProto.toAmino(e) : undefined);
+      obj.message_type = message.messageType.map(e => e ? DescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.message_type = [];
     }
     if (message.enumType) {
-      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e) : undefined);
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.enum_type = [];
     }
     if (message.service) {
-      obj.service = message.service.map(e => e ? ServiceDescriptorProto.toAmino(e) : undefined);
+      obj.service = message.service.map(e => e ? ServiceDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.service = [];
     }
     if (message.extension) {
-      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extension = [];
     }
-    obj.options = message.options ? FileOptions.toAmino(message.options) : undefined;
-    obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toAmino(message.sourceCodeInfo) : undefined;
-    obj.syntax = omitDefault(message.syntax);
+    obj.options = message.options ? FileOptions.toAmino(message.options, useInterfaces) : undefined;
+    obj.source_code_info = message.sourceCodeInfo ? SourceCodeInfo.toAmino(message.sourceCodeInfo, useInterfaces) : undefined;
+    obj.syntax = message.syntax;
     return obj;
   },
-  fromAminoMsg(object: FileDescriptorProtoAminoMsg): FileDescriptorProto {
-    return FileDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FileDescriptorProtoProtoMsg): FileDescriptorProto {
-    return FileDescriptorProto.decode(message.value);
+  fromProtoMsg(message: FileDescriptorProtoProtoMsg, useInterfaces: boolean = true): FileDescriptorProto {
+    return FileDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FileDescriptorProto): Uint8Array {
     return FileDescriptorProto.encode(message).finish();
@@ -2640,7 +2536,7 @@ function createBaseDescriptorProto(): DescriptorProto {
     enumType: [],
     extensionRange: [],
     oneofDecl: [],
-    options: MessageOptions.fromPartial({}),
+    options: undefined,
     reservedRange: [],
     reservedName: []
   };
@@ -2680,7 +2576,7 @@ export const DescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto();
@@ -2691,28 +2587,28 @@ export const DescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.field.push(FieldDescriptorProto.decode(reader, reader.uint32()));
+          message.field.push(FieldDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
-          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32()));
+          message.extension.push(FieldDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.nestedType.push(DescriptorProto.decode(reader, reader.uint32()));
+          message.nestedType.push(DescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32()));
+          message.enumType.push(EnumDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.extensionRange.push(DescriptorProto_ExtensionRange.decode(reader, reader.uint32()));
+          message.extensionRange.push(DescriptorProto_ExtensionRange.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
-          message.oneofDecl.push(OneofDescriptorProto.decode(reader, reader.uint32()));
+          message.oneofDecl.push(OneofDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
-          message.options = MessageOptions.decode(reader, reader.uint32());
+          message.options = MessageOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
-          message.reservedRange.push(DescriptorProto_ReservedRange.decode(reader, reader.uint32()));
+          message.reservedRange.push(DescriptorProto_ReservedRange.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 10:
           message.reservedName.push(reader.string());
@@ -2861,55 +2757,59 @@ export const DescriptorProto = {
     return obj;
   },
   fromAmino(object: DescriptorProtoAmino): DescriptorProto {
-    return {
-      name: object.name,
-      field: Array.isArray(object?.field) ? object.field.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
-      extension: Array.isArray(object?.extension) ? object.extension.map((e: any) => FieldDescriptorProto.fromAmino(e)) : [],
-      nestedType: Array.isArray(object?.nested_type) ? object.nested_type.map((e: any) => DescriptorProto.fromAmino(e)) : [],
-      enumType: Array.isArray(object?.enum_type) ? object.enum_type.map((e: any) => EnumDescriptorProto.fromAmino(e)) : [],
-      extensionRange: Array.isArray(object?.extension_range) ? object.extension_range.map((e: any) => DescriptorProto_ExtensionRange.fromAmino(e)) : [],
-      oneofDecl: Array.isArray(object?.oneof_decl) ? object.oneof_decl.map((e: any) => OneofDescriptorProto.fromAmino(e)) : [],
-      options: object?.options ? MessageOptions.fromAmino(object.options) : undefined,
-      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => DescriptorProto_ReservedRange.fromAmino(e)) : [],
-      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
-    };
+    const message = createBaseDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.field = object.field?.map(e => FieldDescriptorProto.fromAmino(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.fromAmino(e)) || [];
+    message.nestedType = object.nested_type?.map(e => DescriptorProto.fromAmino(e)) || [];
+    message.enumType = object.enum_type?.map(e => EnumDescriptorProto.fromAmino(e)) || [];
+    message.extensionRange = object.extension_range?.map(e => DescriptorProto_ExtensionRange.fromAmino(e)) || [];
+    message.oneofDecl = object.oneof_decl?.map(e => OneofDescriptorProto.fromAmino(e)) || [];
+    if (object.options !== undefined && object.options !== null) {
+      message.options = MessageOptions.fromAmino(object.options);
+    }
+    message.reservedRange = object.reserved_range?.map(e => DescriptorProto_ReservedRange.fromAmino(e)) || [];
+    message.reservedName = object.reserved_name?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: DescriptorProto): DescriptorProtoAmino {
+  toAmino(message: DescriptorProto, useInterfaces: boolean = true): DescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.field) {
-      obj.field = message.field.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+      obj.field = message.field.map(e => e ? FieldDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.field = [];
     }
     if (message.extension) {
-      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e) : undefined);
+      obj.extension = message.extension.map(e => e ? FieldDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extension = [];
     }
     if (message.nestedType) {
-      obj.nested_type = message.nestedType.map(e => e ? DescriptorProto.toAmino(e) : undefined);
+      obj.nested_type = message.nestedType.map(e => e ? DescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.nested_type = [];
     }
     if (message.enumType) {
-      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e) : undefined);
+      obj.enum_type = message.enumType.map(e => e ? EnumDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.enum_type = [];
     }
     if (message.extensionRange) {
-      obj.extension_range = message.extensionRange.map(e => e ? DescriptorProto_ExtensionRange.toAmino(e) : undefined);
+      obj.extension_range = message.extensionRange.map(e => e ? DescriptorProto_ExtensionRange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extension_range = [];
     }
     if (message.oneofDecl) {
-      obj.oneof_decl = message.oneofDecl.map(e => e ? OneofDescriptorProto.toAmino(e) : undefined);
+      obj.oneof_decl = message.oneofDecl.map(e => e ? OneofDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.oneof_decl = [];
     }
-    obj.options = message.options ? MessageOptions.toAmino(message.options) : undefined;
+    obj.options = message.options ? MessageOptions.toAmino(message.options, useInterfaces) : undefined;
     if (message.reservedRange) {
-      obj.reserved_range = message.reservedRange.map(e => e ? DescriptorProto_ReservedRange.toAmino(e) : undefined);
+      obj.reserved_range = message.reservedRange.map(e => e ? DescriptorProto_ReservedRange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.reserved_range = [];
     }
@@ -2920,11 +2820,8 @@ export const DescriptorProto = {
     }
     return obj;
   },
-  fromAminoMsg(object: DescriptorProtoAminoMsg): DescriptorProto {
-    return DescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DescriptorProtoProtoMsg): DescriptorProto {
-    return DescriptorProto.decode(message.value);
+  fromProtoMsg(message: DescriptorProtoProtoMsg, useInterfaces: boolean = true): DescriptorProto {
+    return DescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DescriptorProto): Uint8Array {
     return DescriptorProto.encode(message).finish();
@@ -2940,7 +2837,7 @@ function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRa
   return {
     start: 0,
     end: 0,
-    options: ExtensionRangeOptions.fromPartial({})
+    options: undefined
   };
 }
 export const DescriptorProto_ExtensionRange = {
@@ -2957,7 +2854,7 @@ export const DescriptorProto_ExtensionRange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DescriptorProto_ExtensionRange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DescriptorProto_ExtensionRange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ExtensionRange();
@@ -2971,7 +2868,7 @@ export const DescriptorProto_ExtensionRange = {
           message.end = reader.int32();
           break;
         case 3:
-          message.options = ExtensionRangeOptions.decode(reader, reader.uint32());
+          message.options = ExtensionRangeOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3018,24 +2915,27 @@ export const DescriptorProto_ExtensionRange = {
     return obj;
   },
   fromAmino(object: DescriptorProto_ExtensionRangeAmino): DescriptorProto_ExtensionRange {
-    return {
-      start: object.start,
-      end: object.end,
-      options: object?.options ? ExtensionRangeOptions.fromAmino(object.options) : undefined
-    };
+    const message = createBaseDescriptorProto_ExtensionRange();
+    if (object.start !== undefined && object.start !== null) {
+      message.start = object.start;
+    }
+    if (object.end !== undefined && object.end !== null) {
+      message.end = object.end;
+    }
+    if (object.options !== undefined && object.options !== null) {
+      message.options = ExtensionRangeOptions.fromAmino(object.options);
+    }
+    return message;
   },
-  toAmino(message: DescriptorProto_ExtensionRange): DescriptorProto_ExtensionRangeAmino {
+  toAmino(message: DescriptorProto_ExtensionRange, useInterfaces: boolean = true): DescriptorProto_ExtensionRangeAmino {
     const obj: any = {};
-    obj.start = omitDefault(message.start);
-    obj.end = omitDefault(message.end);
-    obj.options = message.options ? ExtensionRangeOptions.toAmino(message.options) : undefined;
+    obj.start = message.start;
+    obj.end = message.end;
+    obj.options = message.options ? ExtensionRangeOptions.toAmino(message.options, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DescriptorProto_ExtensionRangeAminoMsg): DescriptorProto_ExtensionRange {
-    return DescriptorProto_ExtensionRange.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DescriptorProto_ExtensionRangeProtoMsg): DescriptorProto_ExtensionRange {
-    return DescriptorProto_ExtensionRange.decode(message.value);
+  fromProtoMsg(message: DescriptorProto_ExtensionRangeProtoMsg, useInterfaces: boolean = true): DescriptorProto_ExtensionRange {
+    return DescriptorProto_ExtensionRange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DescriptorProto_ExtensionRange): Uint8Array {
     return DescriptorProto_ExtensionRange.encode(message).finish();
@@ -3064,7 +2964,7 @@ export const DescriptorProto_ReservedRange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DescriptorProto_ReservedRange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DescriptorProto_ReservedRange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDescriptorProto_ReservedRange();
@@ -3115,22 +3015,23 @@ export const DescriptorProto_ReservedRange = {
     return obj;
   },
   fromAmino(object: DescriptorProto_ReservedRangeAmino): DescriptorProto_ReservedRange {
-    return {
-      start: object.start,
-      end: object.end
-    };
+    const message = createBaseDescriptorProto_ReservedRange();
+    if (object.start !== undefined && object.start !== null) {
+      message.start = object.start;
+    }
+    if (object.end !== undefined && object.end !== null) {
+      message.end = object.end;
+    }
+    return message;
   },
-  toAmino(message: DescriptorProto_ReservedRange): DescriptorProto_ReservedRangeAmino {
+  toAmino(message: DescriptorProto_ReservedRange, useInterfaces: boolean = true): DescriptorProto_ReservedRangeAmino {
     const obj: any = {};
-    obj.start = omitDefault(message.start);
-    obj.end = omitDefault(message.end);
+    obj.start = message.start;
+    obj.end = message.end;
     return obj;
   },
-  fromAminoMsg(object: DescriptorProto_ReservedRangeAminoMsg): DescriptorProto_ReservedRange {
-    return DescriptorProto_ReservedRange.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DescriptorProto_ReservedRangeProtoMsg): DescriptorProto_ReservedRange {
-    return DescriptorProto_ReservedRange.decode(message.value);
+  fromProtoMsg(message: DescriptorProto_ReservedRangeProtoMsg, useInterfaces: boolean = true): DescriptorProto_ReservedRange {
+    return DescriptorProto_ReservedRange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DescriptorProto_ReservedRange): Uint8Array {
     return DescriptorProto_ReservedRange.encode(message).finish();
@@ -3155,7 +3056,7 @@ export const ExtensionRangeOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ExtensionRangeOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExtensionRangeOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtensionRangeOptions();
@@ -3163,7 +3064,7 @@ export const ExtensionRangeOptions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -3206,24 +3107,21 @@ export const ExtensionRangeOptions = {
     return obj;
   },
   fromAmino(object: ExtensionRangeOptionsAmino): ExtensionRangeOptions {
-    return {
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseExtensionRangeOptions();
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ExtensionRangeOptions): ExtensionRangeOptionsAmino {
+  toAmino(message: ExtensionRangeOptions, useInterfaces: boolean = true): ExtensionRangeOptionsAmino {
     const obj: any = {};
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ExtensionRangeOptionsAminoMsg): ExtensionRangeOptions {
-    return ExtensionRangeOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ExtensionRangeOptionsProtoMsg): ExtensionRangeOptions {
-    return ExtensionRangeOptions.decode(message.value);
+  fromProtoMsg(message: ExtensionRangeOptionsProtoMsg, useInterfaces: boolean = true): ExtensionRangeOptions {
+    return ExtensionRangeOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExtensionRangeOptions): Uint8Array {
     return ExtensionRangeOptions.encode(message).finish();
@@ -3246,7 +3144,7 @@ function createBaseFieldDescriptorProto(): FieldDescriptorProto {
     defaultValue: "",
     oneofIndex: 0,
     jsonName: "",
-    options: FieldOptions.fromPartial({})
+    options: undefined
   };
 }
 export const FieldDescriptorProto = {
@@ -3284,7 +3182,7 @@ export const FieldDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FieldDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FieldDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldDescriptorProto();
@@ -3319,7 +3217,7 @@ export const FieldDescriptorProto = {
           message.jsonName = reader.string();
           break;
         case 8:
-          message.options = FieldOptions.decode(reader, reader.uint32());
+          message.options = FieldOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3401,38 +3299,55 @@ export const FieldDescriptorProto = {
     return obj;
   },
   fromAmino(object: FieldDescriptorProtoAmino): FieldDescriptorProto {
-    return {
-      name: object.name,
-      number: object.number,
-      label: isSet(object.label) ? fieldDescriptorProto_LabelFromJSON(object.label) : -1,
-      type: isSet(object.type) ? fieldDescriptorProto_TypeFromJSON(object.type) : -1,
-      typeName: object.type_name,
-      extendee: object.extendee,
-      defaultValue: object.default_value,
-      oneofIndex: object.oneof_index,
-      jsonName: object.json_name,
-      options: object?.options ? FieldOptions.fromAmino(object.options) : undefined
-    };
+    const message = createBaseFieldDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.number !== undefined && object.number !== null) {
+      message.number = object.number;
+    }
+    if (object.label !== undefined && object.label !== null) {
+      message.label = fieldDescriptorProto_LabelFromJSON(object.label);
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = fieldDescriptorProto_TypeFromJSON(object.type);
+    }
+    if (object.type_name !== undefined && object.type_name !== null) {
+      message.typeName = object.type_name;
+    }
+    if (object.extendee !== undefined && object.extendee !== null) {
+      message.extendee = object.extendee;
+    }
+    if (object.default_value !== undefined && object.default_value !== null) {
+      message.defaultValue = object.default_value;
+    }
+    if (object.oneof_index !== undefined && object.oneof_index !== null) {
+      message.oneofIndex = object.oneof_index;
+    }
+    if (object.json_name !== undefined && object.json_name !== null) {
+      message.jsonName = object.json_name;
+    }
+    if (object.options !== undefined && object.options !== null) {
+      message.options = FieldOptions.fromAmino(object.options);
+    }
+    return message;
   },
-  toAmino(message: FieldDescriptorProto): FieldDescriptorProtoAmino {
+  toAmino(message: FieldDescriptorProto, useInterfaces: boolean = true): FieldDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.number = omitDefault(message.number);
-    obj.label = omitDefault(message.label);
-    obj.type = omitDefault(message.type);
-    obj.type_name = omitDefault(message.typeName);
-    obj.extendee = omitDefault(message.extendee);
-    obj.default_value = omitDefault(message.defaultValue);
-    obj.oneof_index = omitDefault(message.oneofIndex);
-    obj.json_name = omitDefault(message.jsonName);
-    obj.options = message.options ? FieldOptions.toAmino(message.options) : undefined;
+    obj.name = message.name;
+    obj.number = message.number;
+    obj.label = fieldDescriptorProto_LabelToJSON(message.label);
+    obj.type = fieldDescriptorProto_TypeToJSON(message.type);
+    obj.type_name = message.typeName;
+    obj.extendee = message.extendee;
+    obj.default_value = message.defaultValue;
+    obj.oneof_index = message.oneofIndex;
+    obj.json_name = message.jsonName;
+    obj.options = message.options ? FieldOptions.toAmino(message.options, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: FieldDescriptorProtoAminoMsg): FieldDescriptorProto {
-    return FieldDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FieldDescriptorProtoProtoMsg): FieldDescriptorProto {
-    return FieldDescriptorProto.decode(message.value);
+  fromProtoMsg(message: FieldDescriptorProtoProtoMsg, useInterfaces: boolean = true): FieldDescriptorProto {
+    return FieldDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FieldDescriptorProto): Uint8Array {
     return FieldDescriptorProto.encode(message).finish();
@@ -3447,7 +3362,7 @@ export const FieldDescriptorProto = {
 function createBaseOneofDescriptorProto(): OneofDescriptorProto {
   return {
     name: "",
-    options: OneofOptions.fromPartial({})
+    options: undefined
   };
 }
 export const OneofDescriptorProto = {
@@ -3461,7 +3376,7 @@ export const OneofDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OneofDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OneofDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofDescriptorProto();
@@ -3472,7 +3387,7 @@ export const OneofDescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.options = OneofOptions.decode(reader, reader.uint32());
+          message.options = OneofOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3514,22 +3429,23 @@ export const OneofDescriptorProto = {
     return obj;
   },
   fromAmino(object: OneofDescriptorProtoAmino): OneofDescriptorProto {
-    return {
-      name: object.name,
-      options: object?.options ? OneofOptions.fromAmino(object.options) : undefined
-    };
+    const message = createBaseOneofDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.options !== undefined && object.options !== null) {
+      message.options = OneofOptions.fromAmino(object.options);
+    }
+    return message;
   },
-  toAmino(message: OneofDescriptorProto): OneofDescriptorProtoAmino {
+  toAmino(message: OneofDescriptorProto, useInterfaces: boolean = true): OneofDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.options = message.options ? OneofOptions.toAmino(message.options) : undefined;
+    obj.name = message.name;
+    obj.options = message.options ? OneofOptions.toAmino(message.options, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: OneofDescriptorProtoAminoMsg): OneofDescriptorProto {
-    return OneofDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OneofDescriptorProtoProtoMsg): OneofDescriptorProto {
-    return OneofDescriptorProto.decode(message.value);
+  fromProtoMsg(message: OneofDescriptorProtoProtoMsg, useInterfaces: boolean = true): OneofDescriptorProto {
+    return OneofDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OneofDescriptorProto): Uint8Array {
     return OneofDescriptorProto.encode(message).finish();
@@ -3545,7 +3461,7 @@ function createBaseEnumDescriptorProto(): EnumDescriptorProto {
   return {
     name: "",
     value: [],
-    options: EnumOptions.fromPartial({}),
+    options: undefined,
     reservedRange: [],
     reservedName: []
   };
@@ -3570,7 +3486,7 @@ export const EnumDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumDescriptorProto();
@@ -3581,13 +3497,13 @@ export const EnumDescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.value.push(EnumValueDescriptorProto.decode(reader, reader.uint32()));
+          message.value.push(EnumValueDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.options = EnumOptions.decode(reader, reader.uint32());
+          message.options = EnumOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.reservedRange.push(EnumDescriptorProto_EnumReservedRange.decode(reader, reader.uint32()));
+          message.reservedRange.push(EnumDescriptorProto_EnumReservedRange.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
           message.reservedName.push(reader.string());
@@ -3671,25 +3587,29 @@ export const EnumDescriptorProto = {
     return obj;
   },
   fromAmino(object: EnumDescriptorProtoAmino): EnumDescriptorProto {
-    return {
-      name: object.name,
-      value: Array.isArray(object?.value) ? object.value.map((e: any) => EnumValueDescriptorProto.fromAmino(e)) : [],
-      options: object?.options ? EnumOptions.fromAmino(object.options) : undefined,
-      reservedRange: Array.isArray(object?.reserved_range) ? object.reserved_range.map((e: any) => EnumDescriptorProto_EnumReservedRange.fromAmino(e)) : [],
-      reservedName: Array.isArray(object?.reserved_name) ? object.reserved_name.map((e: any) => e) : []
-    };
+    const message = createBaseEnumDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.value = object.value?.map(e => EnumValueDescriptorProto.fromAmino(e)) || [];
+    if (object.options !== undefined && object.options !== null) {
+      message.options = EnumOptions.fromAmino(object.options);
+    }
+    message.reservedRange = object.reserved_range?.map(e => EnumDescriptorProto_EnumReservedRange.fromAmino(e)) || [];
+    message.reservedName = object.reserved_name?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: EnumDescriptorProto): EnumDescriptorProtoAmino {
+  toAmino(message: EnumDescriptorProto, useInterfaces: boolean = true): EnumDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.value) {
-      obj.value = message.value.map(e => e ? EnumValueDescriptorProto.toAmino(e) : undefined);
+      obj.value = message.value.map(e => e ? EnumValueDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.value = [];
     }
-    obj.options = message.options ? EnumOptions.toAmino(message.options) : undefined;
+    obj.options = message.options ? EnumOptions.toAmino(message.options, useInterfaces) : undefined;
     if (message.reservedRange) {
-      obj.reserved_range = message.reservedRange.map(e => e ? EnumDescriptorProto_EnumReservedRange.toAmino(e) : undefined);
+      obj.reserved_range = message.reservedRange.map(e => e ? EnumDescriptorProto_EnumReservedRange.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.reserved_range = [];
     }
@@ -3700,11 +3620,8 @@ export const EnumDescriptorProto = {
     }
     return obj;
   },
-  fromAminoMsg(object: EnumDescriptorProtoAminoMsg): EnumDescriptorProto {
-    return EnumDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumDescriptorProtoProtoMsg): EnumDescriptorProto {
-    return EnumDescriptorProto.decode(message.value);
+  fromProtoMsg(message: EnumDescriptorProtoProtoMsg, useInterfaces: boolean = true): EnumDescriptorProto {
+    return EnumDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumDescriptorProto): Uint8Array {
     return EnumDescriptorProto.encode(message).finish();
@@ -3733,7 +3650,7 @@ export const EnumDescriptorProto_EnumReservedRange = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumDescriptorProto_EnumReservedRange {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumDescriptorProto_EnumReservedRange {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumDescriptorProto_EnumReservedRange();
@@ -3784,22 +3701,23 @@ export const EnumDescriptorProto_EnumReservedRange = {
     return obj;
   },
   fromAmino(object: EnumDescriptorProto_EnumReservedRangeAmino): EnumDescriptorProto_EnumReservedRange {
-    return {
-      start: object.start,
-      end: object.end
-    };
+    const message = createBaseEnumDescriptorProto_EnumReservedRange();
+    if (object.start !== undefined && object.start !== null) {
+      message.start = object.start;
+    }
+    if (object.end !== undefined && object.end !== null) {
+      message.end = object.end;
+    }
+    return message;
   },
-  toAmino(message: EnumDescriptorProto_EnumReservedRange): EnumDescriptorProto_EnumReservedRangeAmino {
+  toAmino(message: EnumDescriptorProto_EnumReservedRange, useInterfaces: boolean = true): EnumDescriptorProto_EnumReservedRangeAmino {
     const obj: any = {};
-    obj.start = omitDefault(message.start);
-    obj.end = omitDefault(message.end);
+    obj.start = message.start;
+    obj.end = message.end;
     return obj;
   },
-  fromAminoMsg(object: EnumDescriptorProto_EnumReservedRangeAminoMsg): EnumDescriptorProto_EnumReservedRange {
-    return EnumDescriptorProto_EnumReservedRange.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumDescriptorProto_EnumReservedRangeProtoMsg): EnumDescriptorProto_EnumReservedRange {
-    return EnumDescriptorProto_EnumReservedRange.decode(message.value);
+  fromProtoMsg(message: EnumDescriptorProto_EnumReservedRangeProtoMsg, useInterfaces: boolean = true): EnumDescriptorProto_EnumReservedRange {
+    return EnumDescriptorProto_EnumReservedRange.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumDescriptorProto_EnumReservedRange): Uint8Array {
     return EnumDescriptorProto_EnumReservedRange.encode(message).finish();
@@ -3815,7 +3733,7 @@ function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
   return {
     name: "",
     number: 0,
-    options: EnumValueOptions.fromPartial({})
+    options: undefined
   };
 }
 export const EnumValueDescriptorProto = {
@@ -3832,7 +3750,7 @@ export const EnumValueDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumValueDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumValueDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValueDescriptorProto();
@@ -3846,7 +3764,7 @@ export const EnumValueDescriptorProto = {
           message.number = reader.int32();
           break;
         case 3:
-          message.options = EnumValueOptions.decode(reader, reader.uint32());
+          message.options = EnumValueOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -3893,24 +3811,27 @@ export const EnumValueDescriptorProto = {
     return obj;
   },
   fromAmino(object: EnumValueDescriptorProtoAmino): EnumValueDescriptorProto {
-    return {
-      name: object.name,
-      number: object.number,
-      options: object?.options ? EnumValueOptions.fromAmino(object.options) : undefined
-    };
+    const message = createBaseEnumValueDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.number !== undefined && object.number !== null) {
+      message.number = object.number;
+    }
+    if (object.options !== undefined && object.options !== null) {
+      message.options = EnumValueOptions.fromAmino(object.options);
+    }
+    return message;
   },
-  toAmino(message: EnumValueDescriptorProto): EnumValueDescriptorProtoAmino {
+  toAmino(message: EnumValueDescriptorProto, useInterfaces: boolean = true): EnumValueDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.number = omitDefault(message.number);
-    obj.options = message.options ? EnumValueOptions.toAmino(message.options) : undefined;
+    obj.name = message.name;
+    obj.number = message.number;
+    obj.options = message.options ? EnumValueOptions.toAmino(message.options, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: EnumValueDescriptorProtoAminoMsg): EnumValueDescriptorProto {
-    return EnumValueDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumValueDescriptorProtoProtoMsg): EnumValueDescriptorProto {
-    return EnumValueDescriptorProto.decode(message.value);
+  fromProtoMsg(message: EnumValueDescriptorProtoProtoMsg, useInterfaces: boolean = true): EnumValueDescriptorProto {
+    return EnumValueDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumValueDescriptorProto): Uint8Array {
     return EnumValueDescriptorProto.encode(message).finish();
@@ -3926,7 +3847,7 @@ function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
   return {
     name: "",
     method: [],
-    options: ServiceOptions.fromPartial({})
+    options: undefined
   };
 }
 export const ServiceDescriptorProto = {
@@ -3943,7 +3864,7 @@ export const ServiceDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ServiceDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ServiceDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceDescriptorProto();
@@ -3954,10 +3875,10 @@ export const ServiceDescriptorProto = {
           message.name = reader.string();
           break;
         case 2:
-          message.method.push(MethodDescriptorProto.decode(reader, reader.uint32()));
+          message.method.push(MethodDescriptorProto.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.options = ServiceOptions.decode(reader, reader.uint32());
+          message.options = ServiceOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -4012,28 +3933,29 @@ export const ServiceDescriptorProto = {
     return obj;
   },
   fromAmino(object: ServiceDescriptorProtoAmino): ServiceDescriptorProto {
-    return {
-      name: object.name,
-      method: Array.isArray(object?.method) ? object.method.map((e: any) => MethodDescriptorProto.fromAmino(e)) : [],
-      options: object?.options ? ServiceOptions.fromAmino(object.options) : undefined
-    };
+    const message = createBaseServiceDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.method = object.method?.map(e => MethodDescriptorProto.fromAmino(e)) || [];
+    if (object.options !== undefined && object.options !== null) {
+      message.options = ServiceOptions.fromAmino(object.options);
+    }
+    return message;
   },
-  toAmino(message: ServiceDescriptorProto): ServiceDescriptorProtoAmino {
+  toAmino(message: ServiceDescriptorProto, useInterfaces: boolean = true): ServiceDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.method) {
-      obj.method = message.method.map(e => e ? MethodDescriptorProto.toAmino(e) : undefined);
+      obj.method = message.method.map(e => e ? MethodDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.method = [];
     }
-    obj.options = message.options ? ServiceOptions.toAmino(message.options) : undefined;
+    obj.options = message.options ? ServiceOptions.toAmino(message.options, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ServiceDescriptorProtoAminoMsg): ServiceDescriptorProto {
-    return ServiceDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ServiceDescriptorProtoProtoMsg): ServiceDescriptorProto {
-    return ServiceDescriptorProto.decode(message.value);
+  fromProtoMsg(message: ServiceDescriptorProtoProtoMsg, useInterfaces: boolean = true): ServiceDescriptorProto {
+    return ServiceDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ServiceDescriptorProto): Uint8Array {
     return ServiceDescriptorProto.encode(message).finish();
@@ -4050,7 +3972,7 @@ function createBaseMethodDescriptorProto(): MethodDescriptorProto {
     name: "",
     inputType: "",
     outputType: "",
-    options: MethodOptions.fromPartial({}),
+    options: undefined,
     clientStreaming: false,
     serverStreaming: false
   };
@@ -4078,7 +4000,7 @@ export const MethodDescriptorProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MethodDescriptorProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MethodDescriptorProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodDescriptorProto();
@@ -4095,7 +4017,7 @@ export const MethodDescriptorProto = {
           message.outputType = reader.string();
           break;
         case 4:
-          message.options = MethodOptions.decode(reader, reader.uint32());
+          message.options = MethodOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.clientStreaming = reader.bool();
@@ -4163,30 +4085,39 @@ export const MethodDescriptorProto = {
     return obj;
   },
   fromAmino(object: MethodDescriptorProtoAmino): MethodDescriptorProto {
-    return {
-      name: object.name,
-      inputType: object.input_type,
-      outputType: object.output_type,
-      options: object?.options ? MethodOptions.fromAmino(object.options) : undefined,
-      clientStreaming: object.client_streaming,
-      serverStreaming: object.server_streaming
-    };
+    const message = createBaseMethodDescriptorProto();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.input_type !== undefined && object.input_type !== null) {
+      message.inputType = object.input_type;
+    }
+    if (object.output_type !== undefined && object.output_type !== null) {
+      message.outputType = object.output_type;
+    }
+    if (object.options !== undefined && object.options !== null) {
+      message.options = MethodOptions.fromAmino(object.options);
+    }
+    if (object.client_streaming !== undefined && object.client_streaming !== null) {
+      message.clientStreaming = object.client_streaming;
+    }
+    if (object.server_streaming !== undefined && object.server_streaming !== null) {
+      message.serverStreaming = object.server_streaming;
+    }
+    return message;
   },
-  toAmino(message: MethodDescriptorProto): MethodDescriptorProtoAmino {
+  toAmino(message: MethodDescriptorProto, useInterfaces: boolean = true): MethodDescriptorProtoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.input_type = omitDefault(message.inputType);
-    obj.output_type = omitDefault(message.outputType);
-    obj.options = message.options ? MethodOptions.toAmino(message.options) : undefined;
-    obj.client_streaming = omitDefault(message.clientStreaming);
-    obj.server_streaming = omitDefault(message.serverStreaming);
+    obj.name = message.name;
+    obj.input_type = message.inputType;
+    obj.output_type = message.outputType;
+    obj.options = message.options ? MethodOptions.toAmino(message.options, useInterfaces) : undefined;
+    obj.client_streaming = message.clientStreaming;
+    obj.server_streaming = message.serverStreaming;
     return obj;
   },
-  fromAminoMsg(object: MethodDescriptorProtoAminoMsg): MethodDescriptorProto {
-    return MethodDescriptorProto.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MethodDescriptorProtoProtoMsg): MethodDescriptorProto {
-    return MethodDescriptorProto.decode(message.value);
+  fromProtoMsg(message: MethodDescriptorProtoProtoMsg, useInterfaces: boolean = true): MethodDescriptorProto {
+    return MethodDescriptorProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MethodDescriptorProto): Uint8Array {
     return MethodDescriptorProto.encode(message).finish();
@@ -4291,7 +4222,7 @@ export const FileOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FileOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FileOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFileOptions();
@@ -4359,7 +4290,7 @@ export const FileOptions = {
           message.rubyPackage = reader.string();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4502,64 +4433,101 @@ export const FileOptions = {
     return obj;
   },
   fromAmino(object: FileOptionsAmino): FileOptions {
-    return {
-      javaPackage: object.java_package,
-      javaOuterClassname: object.java_outer_classname,
-      javaMultipleFiles: object.java_multiple_files,
-      javaGenerateEqualsAndHash: object.java_generate_equals_and_hash,
-      javaStringCheckUtf8: object.java_string_check_utf8,
-      optimizeFor: isSet(object.optimize_for) ? fileOptions_OptimizeModeFromJSON(object.optimize_for) : -1,
-      goPackage: object.go_package,
-      ccGenericServices: object.cc_generic_services,
-      javaGenericServices: object.java_generic_services,
-      pyGenericServices: object.py_generic_services,
-      phpGenericServices: object.php_generic_services,
-      deprecated: object.deprecated,
-      ccEnableArenas: object.cc_enable_arenas,
-      objcClassPrefix: object.objc_class_prefix,
-      csharpNamespace: object.csharp_namespace,
-      swiftPrefix: object.swift_prefix,
-      phpClassPrefix: object.php_class_prefix,
-      phpNamespace: object.php_namespace,
-      phpMetadataNamespace: object.php_metadata_namespace,
-      rubyPackage: object.ruby_package,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseFileOptions();
+    if (object.java_package !== undefined && object.java_package !== null) {
+      message.javaPackage = object.java_package;
+    }
+    if (object.java_outer_classname !== undefined && object.java_outer_classname !== null) {
+      message.javaOuterClassname = object.java_outer_classname;
+    }
+    if (object.java_multiple_files !== undefined && object.java_multiple_files !== null) {
+      message.javaMultipleFiles = object.java_multiple_files;
+    }
+    if (object.java_generate_equals_and_hash !== undefined && object.java_generate_equals_and_hash !== null) {
+      message.javaGenerateEqualsAndHash = object.java_generate_equals_and_hash;
+    }
+    if (object.java_string_check_utf8 !== undefined && object.java_string_check_utf8 !== null) {
+      message.javaStringCheckUtf8 = object.java_string_check_utf8;
+    }
+    if (object.optimize_for !== undefined && object.optimize_for !== null) {
+      message.optimizeFor = fileOptions_OptimizeModeFromJSON(object.optimize_for);
+    }
+    if (object.go_package !== undefined && object.go_package !== null) {
+      message.goPackage = object.go_package;
+    }
+    if (object.cc_generic_services !== undefined && object.cc_generic_services !== null) {
+      message.ccGenericServices = object.cc_generic_services;
+    }
+    if (object.java_generic_services !== undefined && object.java_generic_services !== null) {
+      message.javaGenericServices = object.java_generic_services;
+    }
+    if (object.py_generic_services !== undefined && object.py_generic_services !== null) {
+      message.pyGenericServices = object.py_generic_services;
+    }
+    if (object.php_generic_services !== undefined && object.php_generic_services !== null) {
+      message.phpGenericServices = object.php_generic_services;
+    }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    if (object.cc_enable_arenas !== undefined && object.cc_enable_arenas !== null) {
+      message.ccEnableArenas = object.cc_enable_arenas;
+    }
+    if (object.objc_class_prefix !== undefined && object.objc_class_prefix !== null) {
+      message.objcClassPrefix = object.objc_class_prefix;
+    }
+    if (object.csharp_namespace !== undefined && object.csharp_namespace !== null) {
+      message.csharpNamespace = object.csharp_namespace;
+    }
+    if (object.swift_prefix !== undefined && object.swift_prefix !== null) {
+      message.swiftPrefix = object.swift_prefix;
+    }
+    if (object.php_class_prefix !== undefined && object.php_class_prefix !== null) {
+      message.phpClassPrefix = object.php_class_prefix;
+    }
+    if (object.php_namespace !== undefined && object.php_namespace !== null) {
+      message.phpNamespace = object.php_namespace;
+    }
+    if (object.php_metadata_namespace !== undefined && object.php_metadata_namespace !== null) {
+      message.phpMetadataNamespace = object.php_metadata_namespace;
+    }
+    if (object.ruby_package !== undefined && object.ruby_package !== null) {
+      message.rubyPackage = object.ruby_package;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: FileOptions): FileOptionsAmino {
+  toAmino(message: FileOptions, useInterfaces: boolean = true): FileOptionsAmino {
     const obj: any = {};
-    obj.java_package = omitDefault(message.javaPackage);
-    obj.java_outer_classname = omitDefault(message.javaOuterClassname);
-    obj.java_multiple_files = omitDefault(message.javaMultipleFiles);
-    obj.java_generate_equals_and_hash = omitDefault(message.javaGenerateEqualsAndHash);
-    obj.java_string_check_utf8 = omitDefault(message.javaStringCheckUtf8);
-    obj.optimize_for = omitDefault(message.optimizeFor);
-    obj.go_package = omitDefault(message.goPackage);
-    obj.cc_generic_services = omitDefault(message.ccGenericServices);
-    obj.java_generic_services = omitDefault(message.javaGenericServices);
-    obj.py_generic_services = omitDefault(message.pyGenericServices);
-    obj.php_generic_services = omitDefault(message.phpGenericServices);
-    obj.deprecated = omitDefault(message.deprecated);
-    obj.cc_enable_arenas = omitDefault(message.ccEnableArenas);
-    obj.objc_class_prefix = omitDefault(message.objcClassPrefix);
-    obj.csharp_namespace = omitDefault(message.csharpNamespace);
-    obj.swift_prefix = omitDefault(message.swiftPrefix);
-    obj.php_class_prefix = omitDefault(message.phpClassPrefix);
-    obj.php_namespace = omitDefault(message.phpNamespace);
-    obj.php_metadata_namespace = omitDefault(message.phpMetadataNamespace);
-    obj.ruby_package = omitDefault(message.rubyPackage);
+    obj.java_package = message.javaPackage;
+    obj.java_outer_classname = message.javaOuterClassname;
+    obj.java_multiple_files = message.javaMultipleFiles;
+    obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash;
+    obj.java_string_check_utf8 = message.javaStringCheckUtf8;
+    obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimizeFor);
+    obj.go_package = message.goPackage;
+    obj.cc_generic_services = message.ccGenericServices;
+    obj.java_generic_services = message.javaGenericServices;
+    obj.py_generic_services = message.pyGenericServices;
+    obj.php_generic_services = message.phpGenericServices;
+    obj.deprecated = message.deprecated;
+    obj.cc_enable_arenas = message.ccEnableArenas;
+    obj.objc_class_prefix = message.objcClassPrefix;
+    obj.csharp_namespace = message.csharpNamespace;
+    obj.swift_prefix = message.swiftPrefix;
+    obj.php_class_prefix = message.phpClassPrefix;
+    obj.php_namespace = message.phpNamespace;
+    obj.php_metadata_namespace = message.phpMetadataNamespace;
+    obj.ruby_package = message.rubyPackage;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: FileOptionsAminoMsg): FileOptions {
-    return FileOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FileOptionsProtoMsg): FileOptions {
-    return FileOptions.decode(message.value);
+  fromProtoMsg(message: FileOptionsProtoMsg, useInterfaces: boolean = true): FileOptions {
+    return FileOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FileOptions): Uint8Array {
     return FileOptions.encode(message).finish();
@@ -4600,7 +4568,7 @@ export const MessageOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MessageOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MessageOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMessageOptions();
@@ -4620,7 +4588,7 @@ export const MessageOptions = {
           message.mapEntry = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4683,32 +4651,37 @@ export const MessageOptions = {
     return obj;
   },
   fromAmino(object: MessageOptionsAmino): MessageOptions {
-    return {
-      messageSetWireFormat: object.message_set_wire_format,
-      noStandardDescriptorAccessor: object.no_standard_descriptor_accessor,
-      deprecated: object.deprecated,
-      mapEntry: object.map_entry,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseMessageOptions();
+    if (object.message_set_wire_format !== undefined && object.message_set_wire_format !== null) {
+      message.messageSetWireFormat = object.message_set_wire_format;
+    }
+    if (object.no_standard_descriptor_accessor !== undefined && object.no_standard_descriptor_accessor !== null) {
+      message.noStandardDescriptorAccessor = object.no_standard_descriptor_accessor;
+    }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    if (object.map_entry !== undefined && object.map_entry !== null) {
+      message.mapEntry = object.map_entry;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MessageOptions): MessageOptionsAmino {
+  toAmino(message: MessageOptions, useInterfaces: boolean = true): MessageOptionsAmino {
     const obj: any = {};
-    obj.message_set_wire_format = omitDefault(message.messageSetWireFormat);
-    obj.no_standard_descriptor_accessor = omitDefault(message.noStandardDescriptorAccessor);
-    obj.deprecated = omitDefault(message.deprecated);
-    obj.map_entry = omitDefault(message.mapEntry);
+    obj.message_set_wire_format = message.messageSetWireFormat;
+    obj.no_standard_descriptor_accessor = message.noStandardDescriptorAccessor;
+    obj.deprecated = message.deprecated;
+    obj.map_entry = message.mapEntry;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MessageOptionsAminoMsg): MessageOptions {
-    return MessageOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MessageOptionsProtoMsg): MessageOptions {
-    return MessageOptions.decode(message.value);
+  fromProtoMsg(message: MessageOptionsProtoMsg, useInterfaces: boolean = true): MessageOptions {
+    return MessageOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MessageOptions): Uint8Array {
     return MessageOptions.encode(message).finish();
@@ -4757,7 +4730,7 @@ export const FieldOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FieldOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FieldOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldOptions();
@@ -4783,7 +4756,7 @@ export const FieldOptions = {
           message.weak = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4856,36 +4829,45 @@ export const FieldOptions = {
     return obj;
   },
   fromAmino(object: FieldOptionsAmino): FieldOptions {
-    return {
-      ctype: isSet(object.ctype) ? fieldOptions_CTypeFromJSON(object.ctype) : -1,
-      packed: object.packed,
-      jstype: isSet(object.jstype) ? fieldOptions_JSTypeFromJSON(object.jstype) : -1,
-      lazy: object.lazy,
-      deprecated: object.deprecated,
-      weak: object.weak,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseFieldOptions();
+    if (object.ctype !== undefined && object.ctype !== null) {
+      message.ctype = fieldOptions_CTypeFromJSON(object.ctype);
+    }
+    if (object.packed !== undefined && object.packed !== null) {
+      message.packed = object.packed;
+    }
+    if (object.jstype !== undefined && object.jstype !== null) {
+      message.jstype = fieldOptions_JSTypeFromJSON(object.jstype);
+    }
+    if (object.lazy !== undefined && object.lazy !== null) {
+      message.lazy = object.lazy;
+    }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    if (object.weak !== undefined && object.weak !== null) {
+      message.weak = object.weak;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: FieldOptions): FieldOptionsAmino {
+  toAmino(message: FieldOptions, useInterfaces: boolean = true): FieldOptionsAmino {
     const obj: any = {};
-    obj.ctype = omitDefault(message.ctype);
-    obj.packed = omitDefault(message.packed);
-    obj.jstype = omitDefault(message.jstype);
-    obj.lazy = omitDefault(message.lazy);
-    obj.deprecated = omitDefault(message.deprecated);
-    obj.weak = omitDefault(message.weak);
+    obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
+    obj.packed = message.packed;
+    obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+    obj.lazy = message.lazy;
+    obj.deprecated = message.deprecated;
+    obj.weak = message.weak;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: FieldOptionsAminoMsg): FieldOptions {
-    return FieldOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FieldOptionsProtoMsg): FieldOptions {
-    return FieldOptions.decode(message.value);
+  fromProtoMsg(message: FieldOptionsProtoMsg, useInterfaces: boolean = true): FieldOptions {
+    return FieldOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FieldOptions): Uint8Array {
     return FieldOptions.encode(message).finish();
@@ -4910,7 +4892,7 @@ export const OneofOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OneofOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OneofOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOneofOptions();
@@ -4918,7 +4900,7 @@ export const OneofOptions = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -4961,24 +4943,21 @@ export const OneofOptions = {
     return obj;
   },
   fromAmino(object: OneofOptionsAmino): OneofOptions {
-    return {
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseOneofOptions();
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: OneofOptions): OneofOptionsAmino {
+  toAmino(message: OneofOptions, useInterfaces: boolean = true): OneofOptionsAmino {
     const obj: any = {};
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: OneofOptionsAminoMsg): OneofOptions {
-    return OneofOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OneofOptionsProtoMsg): OneofOptions {
-    return OneofOptions.decode(message.value);
+  fromProtoMsg(message: OneofOptionsProtoMsg, useInterfaces: boolean = true): OneofOptions {
+    return OneofOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OneofOptions): Uint8Array {
     return OneofOptions.encode(message).finish();
@@ -5011,7 +4990,7 @@ export const EnumOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumOptions();
@@ -5025,7 +5004,7 @@ export const EnumOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -5078,28 +5057,29 @@ export const EnumOptions = {
     return obj;
   },
   fromAmino(object: EnumOptionsAmino): EnumOptions {
-    return {
-      allowAlias: object.allow_alias,
-      deprecated: object.deprecated,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseEnumOptions();
+    if (object.allow_alias !== undefined && object.allow_alias !== null) {
+      message.allowAlias = object.allow_alias;
+    }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: EnumOptions): EnumOptionsAmino {
+  toAmino(message: EnumOptions, useInterfaces: boolean = true): EnumOptionsAmino {
     const obj: any = {};
-    obj.allow_alias = omitDefault(message.allowAlias);
-    obj.deprecated = omitDefault(message.deprecated);
+    obj.allow_alias = message.allowAlias;
+    obj.deprecated = message.deprecated;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: EnumOptionsAminoMsg): EnumOptions {
-    return EnumOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumOptionsProtoMsg): EnumOptions {
-    return EnumOptions.decode(message.value);
+  fromProtoMsg(message: EnumOptionsProtoMsg, useInterfaces: boolean = true): EnumOptions {
+    return EnumOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumOptions): Uint8Array {
     return EnumOptions.encode(message).finish();
@@ -5128,7 +5108,7 @@ export const EnumValueOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumValueOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumValueOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValueOptions();
@@ -5139,7 +5119,7 @@ export const EnumValueOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -5187,26 +5167,25 @@ export const EnumValueOptions = {
     return obj;
   },
   fromAmino(object: EnumValueOptionsAmino): EnumValueOptions {
-    return {
-      deprecated: object.deprecated,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseEnumValueOptions();
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: EnumValueOptions): EnumValueOptionsAmino {
+  toAmino(message: EnumValueOptions, useInterfaces: boolean = true): EnumValueOptionsAmino {
     const obj: any = {};
-    obj.deprecated = omitDefault(message.deprecated);
+    obj.deprecated = message.deprecated;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: EnumValueOptionsAminoMsg): EnumValueOptions {
-    return EnumValueOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumValueOptionsProtoMsg): EnumValueOptions {
-    return EnumValueOptions.decode(message.value);
+  fromProtoMsg(message: EnumValueOptionsProtoMsg, useInterfaces: boolean = true): EnumValueOptions {
+    return EnumValueOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumValueOptions): Uint8Array {
     return EnumValueOptions.encode(message).finish();
@@ -5235,7 +5214,7 @@ export const ServiceOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ServiceOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ServiceOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseServiceOptions();
@@ -5246,7 +5225,7 @@ export const ServiceOptions = {
           message.deprecated = reader.bool();
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -5294,26 +5273,25 @@ export const ServiceOptions = {
     return obj;
   },
   fromAmino(object: ServiceOptionsAmino): ServiceOptions {
-    return {
-      deprecated: object.deprecated,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseServiceOptions();
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ServiceOptions): ServiceOptionsAmino {
+  toAmino(message: ServiceOptions, useInterfaces: boolean = true): ServiceOptionsAmino {
     const obj: any = {};
-    obj.deprecated = omitDefault(message.deprecated);
+    obj.deprecated = message.deprecated;
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ServiceOptionsAminoMsg): ServiceOptions {
-    return ServiceOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ServiceOptionsProtoMsg): ServiceOptions {
-    return ServiceOptions.decode(message.value);
+  fromProtoMsg(message: ServiceOptionsProtoMsg, useInterfaces: boolean = true): ServiceOptions {
+    return ServiceOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ServiceOptions): Uint8Array {
     return ServiceOptions.encode(message).finish();
@@ -5346,7 +5324,7 @@ export const MethodOptions = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MethodOptions {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MethodOptions {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMethodOptions();
@@ -5360,7 +5338,7 @@ export const MethodOptions = {
           message.idempotencyLevel = (reader.int32() as any);
           break;
         case 999:
-          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32()));
+          message.uninterpretedOption.push(UninterpretedOption.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -5413,28 +5391,29 @@ export const MethodOptions = {
     return obj;
   },
   fromAmino(object: MethodOptionsAmino): MethodOptions {
-    return {
-      deprecated: object.deprecated,
-      idempotencyLevel: isSet(object.idempotency_level) ? methodOptions_IdempotencyLevelFromJSON(object.idempotency_level) : -1,
-      uninterpretedOption: Array.isArray(object?.uninterpreted_option) ? object.uninterpreted_option.map((e: any) => UninterpretedOption.fromAmino(e)) : []
-    };
+    const message = createBaseMethodOptions();
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
+    if (object.idempotency_level !== undefined && object.idempotency_level !== null) {
+      message.idempotencyLevel = methodOptions_IdempotencyLevelFromJSON(object.idempotency_level);
+    }
+    message.uninterpretedOption = object.uninterpreted_option?.map(e => UninterpretedOption.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MethodOptions): MethodOptionsAmino {
+  toAmino(message: MethodOptions, useInterfaces: boolean = true): MethodOptionsAmino {
     const obj: any = {};
-    obj.deprecated = omitDefault(message.deprecated);
-    obj.idempotency_level = omitDefault(message.idempotencyLevel);
+    obj.deprecated = message.deprecated;
+    obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel);
     if (message.uninterpretedOption) {
-      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
+      obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.uninterpreted_option = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MethodOptionsAminoMsg): MethodOptions {
-    return MethodOptions.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MethodOptionsProtoMsg): MethodOptions {
-    return MethodOptions.decode(message.value);
+  fromProtoMsg(message: MethodOptionsProtoMsg, useInterfaces: boolean = true): MethodOptions {
+    return MethodOptions.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MethodOptions): Uint8Array {
     return MethodOptions.encode(message).finish();
@@ -5483,7 +5462,7 @@ export const UninterpretedOption = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UninterpretedOption {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UninterpretedOption {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption();
@@ -5491,7 +5470,7 @@ export const UninterpretedOption = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.name.push(UninterpretedOption_NamePart.decode(reader, reader.uint32()));
+          message.name.push(UninterpretedOption_NamePart.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.identifierValue = reader.string();
@@ -5586,36 +5565,45 @@ export const UninterpretedOption = {
     return obj;
   },
   fromAmino(object: UninterpretedOptionAmino): UninterpretedOption {
-    return {
-      name: Array.isArray(object?.name) ? object.name.map((e: any) => UninterpretedOption_NamePart.fromAmino(e)) : [],
-      identifierValue: object.identifier_value,
-      positiveIntValue: BigInt(object.positive_int_value),
-      negativeIntValue: BigInt(object.negative_int_value),
-      doubleValue: object.double_value,
-      stringValue: object.string_value,
-      aggregateValue: object.aggregate_value
-    };
+    const message = createBaseUninterpretedOption();
+    message.name = object.name?.map(e => UninterpretedOption_NamePart.fromAmino(e)) || [];
+    if (object.identifier_value !== undefined && object.identifier_value !== null) {
+      message.identifierValue = object.identifier_value;
+    }
+    if (object.positive_int_value !== undefined && object.positive_int_value !== null) {
+      message.positiveIntValue = BigInt(object.positive_int_value);
+    }
+    if (object.negative_int_value !== undefined && object.negative_int_value !== null) {
+      message.negativeIntValue = BigInt(object.negative_int_value);
+    }
+    if (object.double_value !== undefined && object.double_value !== null) {
+      message.doubleValue = object.double_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = bytesFromBase64(object.string_value);
+    }
+    if (object.aggregate_value !== undefined && object.aggregate_value !== null) {
+      message.aggregateValue = object.aggregate_value;
+    }
+    return message;
   },
-  toAmino(message: UninterpretedOption): UninterpretedOptionAmino {
+  toAmino(message: UninterpretedOption, useInterfaces: boolean = true): UninterpretedOptionAmino {
     const obj: any = {};
     if (message.name) {
-      obj.name = message.name.map(e => e ? UninterpretedOption_NamePart.toAmino(e) : undefined);
+      obj.name = message.name.map(e => e ? UninterpretedOption_NamePart.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.name = [];
     }
-    obj.identifier_value = omitDefault(message.identifierValue);
-    obj.positive_int_value = omitDefault(message.positiveIntValue);
-    obj.negative_int_value = omitDefault(message.negativeIntValue);
-    obj.double_value = omitDefault(message.doubleValue);
-    obj.string_value = message.stringValue;
-    obj.aggregate_value = omitDefault(message.aggregateValue);
+    obj.identifier_value = message.identifierValue;
+    obj.positive_int_value = message.positiveIntValue ? message.positiveIntValue.toString() : undefined;
+    obj.negative_int_value = message.negativeIntValue ? message.negativeIntValue.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue ? base64FromBytes(message.stringValue) : undefined;
+    obj.aggregate_value = message.aggregateValue;
     return obj;
   },
-  fromAminoMsg(object: UninterpretedOptionAminoMsg): UninterpretedOption {
-    return UninterpretedOption.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UninterpretedOptionProtoMsg): UninterpretedOption {
-    return UninterpretedOption.decode(message.value);
+  fromProtoMsg(message: UninterpretedOptionProtoMsg, useInterfaces: boolean = true): UninterpretedOption {
+    return UninterpretedOption.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UninterpretedOption): Uint8Array {
     return UninterpretedOption.encode(message).finish();
@@ -5644,7 +5632,7 @@ export const UninterpretedOption_NamePart = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UninterpretedOption_NamePart {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UninterpretedOption_NamePart {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUninterpretedOption_NamePart();
@@ -5695,22 +5683,23 @@ export const UninterpretedOption_NamePart = {
     return obj;
   },
   fromAmino(object: UninterpretedOption_NamePartAmino): UninterpretedOption_NamePart {
-    return {
-      namePart: object.name_part,
-      isExtension: object.is_extension
-    };
+    const message = createBaseUninterpretedOption_NamePart();
+    if (object.name_part !== undefined && object.name_part !== null) {
+      message.namePart = object.name_part;
+    }
+    if (object.is_extension !== undefined && object.is_extension !== null) {
+      message.isExtension = object.is_extension;
+    }
+    return message;
   },
-  toAmino(message: UninterpretedOption_NamePart): UninterpretedOption_NamePartAmino {
+  toAmino(message: UninterpretedOption_NamePart, useInterfaces: boolean = true): UninterpretedOption_NamePartAmino {
     const obj: any = {};
-    obj.name_part = omitDefault(message.namePart);
-    obj.is_extension = omitDefault(message.isExtension);
+    obj.name_part = message.namePart;
+    obj.is_extension = message.isExtension;
     return obj;
   },
-  fromAminoMsg(object: UninterpretedOption_NamePartAminoMsg): UninterpretedOption_NamePart {
-    return UninterpretedOption_NamePart.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UninterpretedOption_NamePartProtoMsg): UninterpretedOption_NamePart {
-    return UninterpretedOption_NamePart.decode(message.value);
+  fromProtoMsg(message: UninterpretedOption_NamePartProtoMsg, useInterfaces: boolean = true): UninterpretedOption_NamePart {
+    return UninterpretedOption_NamePart.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UninterpretedOption_NamePart): Uint8Array {
     return UninterpretedOption_NamePart.encode(message).finish();
@@ -5735,7 +5724,7 @@ export const SourceCodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceCodeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceCodeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceCodeInfo();
@@ -5743,7 +5732,7 @@ export const SourceCodeInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.location.push(SourceCodeInfo_Location.decode(reader, reader.uint32()));
+          message.location.push(SourceCodeInfo_Location.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -5786,24 +5775,21 @@ export const SourceCodeInfo = {
     return obj;
   },
   fromAmino(object: SourceCodeInfoAmino): SourceCodeInfo {
-    return {
-      location: Array.isArray(object?.location) ? object.location.map((e: any) => SourceCodeInfo_Location.fromAmino(e)) : []
-    };
+    const message = createBaseSourceCodeInfo();
+    message.location = object.location?.map(e => SourceCodeInfo_Location.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: SourceCodeInfo): SourceCodeInfoAmino {
+  toAmino(message: SourceCodeInfo, useInterfaces: boolean = true): SourceCodeInfoAmino {
     const obj: any = {};
     if (message.location) {
-      obj.location = message.location.map(e => e ? SourceCodeInfo_Location.toAmino(e) : undefined);
+      obj.location = message.location.map(e => e ? SourceCodeInfo_Location.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.location = [];
     }
     return obj;
   },
-  fromAminoMsg(object: SourceCodeInfoAminoMsg): SourceCodeInfo {
-    return SourceCodeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceCodeInfoProtoMsg): SourceCodeInfo {
-    return SourceCodeInfo.decode(message.value);
+  fromProtoMsg(message: SourceCodeInfoProtoMsg, useInterfaces: boolean = true): SourceCodeInfo {
+    return SourceCodeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceCodeInfo): Uint8Array {
     return SourceCodeInfo.encode(message).finish();
@@ -5848,7 +5834,7 @@ export const SourceCodeInfo_Location = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceCodeInfo_Location {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceCodeInfo_Location {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceCodeInfo_Location();
@@ -5961,15 +5947,19 @@ export const SourceCodeInfo_Location = {
     return obj;
   },
   fromAmino(object: SourceCodeInfo_LocationAmino): SourceCodeInfo_Location {
-    return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
-      span: Array.isArray(object?.span) ? object.span.map((e: any) => e) : [],
-      leadingComments: object.leading_comments,
-      trailingComments: object.trailing_comments,
-      leadingDetachedComments: Array.isArray(object?.leading_detached_comments) ? object.leading_detached_comments.map((e: any) => e) : []
-    };
+    const message = createBaseSourceCodeInfo_Location();
+    message.path = object.path?.map(e => e) || [];
+    message.span = object.span?.map(e => e) || [];
+    if (object.leading_comments !== undefined && object.leading_comments !== null) {
+      message.leadingComments = object.leading_comments;
+    }
+    if (object.trailing_comments !== undefined && object.trailing_comments !== null) {
+      message.trailingComments = object.trailing_comments;
+    }
+    message.leadingDetachedComments = object.leading_detached_comments?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: SourceCodeInfo_Location): SourceCodeInfo_LocationAmino {
+  toAmino(message: SourceCodeInfo_Location, useInterfaces: boolean = true): SourceCodeInfo_LocationAmino {
     const obj: any = {};
     if (message.path) {
       obj.path = message.path.map(e => e);
@@ -5981,8 +5971,8 @@ export const SourceCodeInfo_Location = {
     } else {
       obj.span = [];
     }
-    obj.leading_comments = omitDefault(message.leadingComments);
-    obj.trailing_comments = omitDefault(message.trailingComments);
+    obj.leading_comments = message.leadingComments;
+    obj.trailing_comments = message.trailingComments;
     if (message.leadingDetachedComments) {
       obj.leading_detached_comments = message.leadingDetachedComments.map(e => e);
     } else {
@@ -5990,11 +5980,8 @@ export const SourceCodeInfo_Location = {
     }
     return obj;
   },
-  fromAminoMsg(object: SourceCodeInfo_LocationAminoMsg): SourceCodeInfo_Location {
-    return SourceCodeInfo_Location.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceCodeInfo_LocationProtoMsg): SourceCodeInfo_Location {
-    return SourceCodeInfo_Location.decode(message.value);
+  fromProtoMsg(message: SourceCodeInfo_LocationProtoMsg, useInterfaces: boolean = true): SourceCodeInfo_Location {
+    return SourceCodeInfo_Location.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceCodeInfo_Location): Uint8Array {
     return SourceCodeInfo_Location.encode(message).finish();
@@ -6019,7 +6006,7 @@ export const GeneratedCodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GeneratedCodeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GeneratedCodeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGeneratedCodeInfo();
@@ -6027,7 +6014,7 @@ export const GeneratedCodeInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.annotation.push(GeneratedCodeInfo_Annotation.decode(reader, reader.uint32()));
+          message.annotation.push(GeneratedCodeInfo_Annotation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -6070,24 +6057,21 @@ export const GeneratedCodeInfo = {
     return obj;
   },
   fromAmino(object: GeneratedCodeInfoAmino): GeneratedCodeInfo {
-    return {
-      annotation: Array.isArray(object?.annotation) ? object.annotation.map((e: any) => GeneratedCodeInfo_Annotation.fromAmino(e)) : []
-    };
+    const message = createBaseGeneratedCodeInfo();
+    message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GeneratedCodeInfo): GeneratedCodeInfoAmino {
+  toAmino(message: GeneratedCodeInfo, useInterfaces: boolean = true): GeneratedCodeInfoAmino {
     const obj: any = {};
     if (message.annotation) {
-      obj.annotation = message.annotation.map(e => e ? GeneratedCodeInfo_Annotation.toAmino(e) : undefined);
+      obj.annotation = message.annotation.map(e => e ? GeneratedCodeInfo_Annotation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.annotation = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GeneratedCodeInfoAminoMsg): GeneratedCodeInfo {
-    return GeneratedCodeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GeneratedCodeInfoProtoMsg): GeneratedCodeInfo {
-    return GeneratedCodeInfo.decode(message.value);
+  fromProtoMsg(message: GeneratedCodeInfoProtoMsg, useInterfaces: boolean = true): GeneratedCodeInfo {
+    return GeneratedCodeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GeneratedCodeInfo): Uint8Array {
     return GeneratedCodeInfo.encode(message).finish();
@@ -6126,7 +6110,7 @@ export const GeneratedCodeInfo_Annotation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GeneratedCodeInfo_Annotation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GeneratedCodeInfo_Annotation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGeneratedCodeInfo_Annotation();
@@ -6208,30 +6192,33 @@ export const GeneratedCodeInfo_Annotation = {
     return obj;
   },
   fromAmino(object: GeneratedCodeInfo_AnnotationAmino): GeneratedCodeInfo_Annotation {
-    return {
-      path: Array.isArray(object?.path) ? object.path.map((e: any) => e) : [],
-      sourceFile: object.source_file,
-      begin: object.begin,
-      end: object.end
-    };
+    const message = createBaseGeneratedCodeInfo_Annotation();
+    message.path = object.path?.map(e => e) || [];
+    if (object.source_file !== undefined && object.source_file !== null) {
+      message.sourceFile = object.source_file;
+    }
+    if (object.begin !== undefined && object.begin !== null) {
+      message.begin = object.begin;
+    }
+    if (object.end !== undefined && object.end !== null) {
+      message.end = object.end;
+    }
+    return message;
   },
-  toAmino(message: GeneratedCodeInfo_Annotation): GeneratedCodeInfo_AnnotationAmino {
+  toAmino(message: GeneratedCodeInfo_Annotation, useInterfaces: boolean = true): GeneratedCodeInfo_AnnotationAmino {
     const obj: any = {};
     if (message.path) {
       obj.path = message.path.map(e => e);
     } else {
       obj.path = [];
     }
-    obj.source_file = omitDefault(message.sourceFile);
-    obj.begin = omitDefault(message.begin);
-    obj.end = omitDefault(message.end);
+    obj.source_file = message.sourceFile;
+    obj.begin = message.begin;
+    obj.end = message.end;
     return obj;
   },
-  fromAminoMsg(object: GeneratedCodeInfo_AnnotationAminoMsg): GeneratedCodeInfo_Annotation {
-    return GeneratedCodeInfo_Annotation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GeneratedCodeInfo_AnnotationProtoMsg): GeneratedCodeInfo_Annotation {
-    return GeneratedCodeInfo_Annotation.decode(message.value);
+  fromProtoMsg(message: GeneratedCodeInfo_AnnotationProtoMsg, useInterfaces: boolean = true): GeneratedCodeInfo_Annotation {
+    return GeneratedCodeInfo_Annotation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GeneratedCodeInfo_Annotation): Uint8Array {
     return GeneratedCodeInfo_Annotation.encode(message).finish();

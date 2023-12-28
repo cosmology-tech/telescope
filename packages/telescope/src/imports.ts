@@ -304,7 +304,7 @@ const addDerivativeTypesToImports = (
                     obj
                 ];
 
-                if (!context.options.aminoEncoding.useLegacyInlineEncoding) {
+                if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding.useLegacyInlineEncoding) {
 
                     // check and see if this derived import has been required...
                     const foundEnc = context.proto.derivedImports.find(a => {
@@ -393,7 +393,7 @@ export const aggregateImports = (
 
     if (
         context.options.useSDKTypes ||
-        !context.options.aminoEncoding.useLegacyInlineEncoding) {
+        context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding) {
         return addDerivativeTypesToImports(context, list);
     } else {
         return list;

@@ -11,6 +11,10 @@ export interface Params {
   /** allow_messages defines a list of sdk message typeURLs allowed to be executed on a host chain. */
   allowMessages: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.host.v1.Params";
+  value: Uint8Array;
+}
 /**
  * Params defines the set of on-chain interchain accounts parameters.
  * The following parameters may be used to disable the host submodule.
@@ -101,10 +105,12 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      hostEnabled: object.host_enabled,
-      allowMessages: Array.isArray(object?.allow_messages) ? object.allow_messages.map((e: any) => e) : []
-    };
+    const message = createBaseParams();
+    if (object.host_enabled !== undefined && object.host_enabled !== null) {
+      message.hostEnabled = object.host_enabled;
+    }
+    message.allowMessages = object.allow_messages?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

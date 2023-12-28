@@ -1,11 +1,15 @@
 import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./downtime_duration";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 export interface GenesisDowntimeEntry {
   duration: Downtime;
   lastDowntime: Date;
+}
+export interface GenesisDowntimeEntryProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisDowntimeEntry";
+  value: Uint8Array;
 }
 export interface GenesisDowntimeEntrySDKType {
   duration: Downtime;
@@ -15,6 +19,10 @@ export interface GenesisDowntimeEntrySDKType {
 export interface GenesisState {
   downtimes: GenesisDowntimeEntry[];
   lastBlockTime: Date;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the twap module's genesis state. */
 export interface GenesisStateSDKType {
@@ -95,15 +103,19 @@ export const GenesisDowntimeEntry = {
     return obj;
   },
   fromAmino(object: GenesisDowntimeEntryAmino): GenesisDowntimeEntry {
-    return {
-      duration: isSet(object.duration) ? downtimeFromJSON(object.duration) : -1,
-      lastDowntime: object?.last_downtime ? Timestamp.fromAmino(object.last_downtime) : undefined
-    };
+    const message = createBaseGenesisDowntimeEntry();
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = downtimeFromJSON(object.duration);
+    }
+    if (object.last_downtime !== undefined && object.last_downtime !== null) {
+      message.lastDowntime = fromTimestamp(Timestamp.fromAmino(object.last_downtime));
+    }
+    return message;
   },
   toAmino(message: GenesisDowntimeEntry): GenesisDowntimeEntryAmino {
     const obj: any = {};
-    obj.duration = omitDefault(message.duration);
-    obj.last_downtime = message.lastDowntime;
+    obj.duration = downtimeToJSON(message.duration);
+    obj.last_downtime = message.lastDowntime ? Timestamp.toAmino(toTimestamp(message.lastDowntime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisDowntimeEntryAminoMsg): GenesisDowntimeEntry {
@@ -210,10 +222,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      downtimes: Array.isArray(object?.downtimes) ? object.downtimes.map((e: any) => GenesisDowntimeEntry.fromAmino(e)) : [],
-      lastBlockTime: object?.last_block_time ? Timestamp.fromAmino(object.last_block_time) : undefined
-    };
+    const message = createBaseGenesisState();
+    message.downtimes = object.downtimes?.map(e => GenesisDowntimeEntry.fromAmino(e)) || [];
+    if (object.last_block_time !== undefined && object.last_block_time !== null) {
+      message.lastBlockTime = fromTimestamp(Timestamp.fromAmino(object.last_block_time));
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -222,7 +236,7 @@ export const GenesisState = {
     } else {
       obj.downtimes = [];
     }
-    obj.last_block_time = message.lastBlockTime;
+    obj.last_block_time = message.lastBlockTime ? Timestamp.toAmino(toTimestamp(message.lastBlockTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

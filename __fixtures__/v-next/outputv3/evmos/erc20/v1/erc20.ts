@@ -1,6 +1,6 @@
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -68,17 +68,13 @@ export interface TokenPairProtoMsg {
  */
 export interface TokenPairAmino {
   /** address of ERC20 contract token */
-  erc20_address: string;
+  erc20_address?: string;
   /** cosmos base denomination to be mapped to */
-  denom: string;
+  denom?: string;
   /** shows token mapping enable status */
-  enabled: boolean;
+  enabled?: boolean;
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
-  contract_owner: Owner;
-}
-export interface TokenPairAminoMsg {
-  type: "/evmos.erc20.v1.TokenPair";
-  value: TokenPairAmino;
+  contract_owner?: Owner;
 }
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
@@ -112,15 +108,11 @@ export interface RegisterCoinProposalProtoMsg {
  */
 export interface RegisterCoinProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** metadata of the native Cosmos coin */
   metadata?: MetadataAmino;
-}
-export interface RegisterCoinProposalAminoMsg {
-  type: "/evmos.erc20.v1.RegisterCoinProposal";
-  value: RegisterCoinProposalAmino;
 }
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
@@ -153,15 +145,11 @@ export interface RegisterERC20ProposalProtoMsg {
  */
 export interface RegisterERC20ProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /** contract address of ERC20 token */
-  erc20address: string;
-}
-export interface RegisterERC20ProposalAminoMsg {
-  type: "/evmos.erc20.v1.RegisterERC20Proposal";
-  value: RegisterERC20ProposalAmino;
+  erc20address?: string;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -197,18 +185,14 @@ export interface ToggleTokenConversionProposalProtoMsg {
  */
 export interface ToggleTokenConversionProposalAmino {
   /** title of the proposal */
-  title: string;
+  title?: string;
   /** proposal description */
-  description: string;
+  description?: string;
   /**
    * token identifier can be either the hex contract address of the ERC20 or the
    * Cosmos base denomination
    */
-  token: string;
-}
-export interface ToggleTokenConversionProposalAminoMsg {
-  type: "/evmos.erc20.v1.ToggleTokenConversionProposal";
-  value: ToggleTokenConversionProposalAmino;
+  token?: string;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
@@ -244,7 +228,7 @@ export const TokenPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): TokenPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): TokenPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTokenPair();
@@ -311,26 +295,31 @@ export const TokenPair = {
     return obj;
   },
   fromAmino(object: TokenPairAmino): TokenPair {
-    return {
-      erc20Address: object.erc20_address,
-      denom: object.denom,
-      enabled: object.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
-    };
+    const message = createBaseTokenPair();
+    if (object.erc20_address !== undefined && object.erc20_address !== null) {
+      message.erc20Address = object.erc20_address;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    if (object.contract_owner !== undefined && object.contract_owner !== null) {
+      message.contractOwner = ownerFromJSON(object.contract_owner);
+    }
+    return message;
   },
-  toAmino(message: TokenPair): TokenPairAmino {
+  toAmino(message: TokenPair, useInterfaces: boolean = true): TokenPairAmino {
     const obj: any = {};
-    obj.erc20_address = omitDefault(message.erc20Address);
-    obj.denom = omitDefault(message.denom);
-    obj.enabled = omitDefault(message.enabled);
-    obj.contract_owner = omitDefault(message.contractOwner);
+    obj.erc20_address = message.erc20Address;
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    obj.contract_owner = ownerToJSON(message.contractOwner);
     return obj;
   },
-  fromAminoMsg(object: TokenPairAminoMsg): TokenPair {
-    return TokenPair.fromAmino(object.value);
-  },
-  fromProtoMsg(message: TokenPairProtoMsg): TokenPair {
-    return TokenPair.decode(message.value);
+  fromProtoMsg(message: TokenPairProtoMsg, useInterfaces: boolean = true): TokenPair {
+    return TokenPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: TokenPair): Uint8Array {
     return TokenPair.encode(message).finish();
@@ -363,7 +352,7 @@ export const RegisterCoinProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): RegisterCoinProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RegisterCoinProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterCoinProposal();
@@ -377,7 +366,7 @@ export const RegisterCoinProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.metadata = Metadata.decode(reader, reader.uint32());
+          message.metadata = Metadata.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -424,24 +413,27 @@ export const RegisterCoinProposal = {
     return obj;
   },
   fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseRegisterCoinProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
-  toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
+  toAmino(message: RegisterCoinProposal, useInterfaces: boolean = true): RegisterCoinProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: RegisterCoinProposalAminoMsg): RegisterCoinProposal {
-    return RegisterCoinProposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RegisterCoinProposalProtoMsg): RegisterCoinProposal {
-    return RegisterCoinProposal.decode(message.value);
+  fromProtoMsg(message: RegisterCoinProposalProtoMsg, useInterfaces: boolean = true): RegisterCoinProposal {
+    return RegisterCoinProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RegisterCoinProposal): Uint8Array {
     return RegisterCoinProposal.encode(message).finish();
@@ -474,7 +466,7 @@ export const RegisterERC20Proposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): RegisterERC20Proposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RegisterERC20Proposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRegisterERC20Proposal();
@@ -533,24 +525,27 @@ export const RegisterERC20Proposal = {
     return obj;
   },
   fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
-    return {
-      title: object.title,
-      description: object.description,
-      erc20address: object.erc20address
-    };
+    const message = createBaseRegisterERC20Proposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.erc20address !== undefined && object.erc20address !== null) {
+      message.erc20address = object.erc20address;
+    }
+    return message;
   },
-  toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
+  toAmino(message: RegisterERC20Proposal, useInterfaces: boolean = true): RegisterERC20ProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.erc20address = omitDefault(message.erc20address);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.erc20address = message.erc20address;
     return obj;
   },
-  fromAminoMsg(object: RegisterERC20ProposalAminoMsg): RegisterERC20Proposal {
-    return RegisterERC20Proposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RegisterERC20ProposalProtoMsg): RegisterERC20Proposal {
-    return RegisterERC20Proposal.decode(message.value);
+  fromProtoMsg(message: RegisterERC20ProposalProtoMsg, useInterfaces: boolean = true): RegisterERC20Proposal {
+    return RegisterERC20Proposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RegisterERC20Proposal): Uint8Array {
     return RegisterERC20Proposal.encode(message).finish();
@@ -583,7 +578,7 @@ export const ToggleTokenConversionProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ToggleTokenConversionProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ToggleTokenConversionProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseToggleTokenConversionProposal();
@@ -642,24 +637,27 @@ export const ToggleTokenConversionProposal = {
     return obj;
   },
   fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      token: object.token
-    };
+    const message = createBaseToggleTokenConversionProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    }
+    return message;
   },
-  toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
+  toAmino(message: ToggleTokenConversionProposal, useInterfaces: boolean = true): ToggleTokenConversionProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.token = omitDefault(message.token);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.token = message.token;
     return obj;
   },
-  fromAminoMsg(object: ToggleTokenConversionProposalAminoMsg): ToggleTokenConversionProposal {
-    return ToggleTokenConversionProposal.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg): ToggleTokenConversionProposal {
-    return ToggleTokenConversionProposal.decode(message.value);
+  fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg, useInterfaces: boolean = true): ToggleTokenConversionProposal {
+    return ToggleTokenConversionProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ToggleTokenConversionProposal): Uint8Array {
     return ToggleTokenConversionProposal.encode(message).finish();

@@ -11,11 +11,7 @@ export interface ResourceValueProtoMsg {
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueAmino {
-  val: Uint8Array;
-}
-export interface ResourceValueAminoMsg {
-  type: "/akash.base.v1beta2.ResourceValue";
-  value: ResourceValueAmino;
+  val?: string;
 }
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValueSDKType {
@@ -34,7 +30,7 @@ export const ResourceValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceValue();
@@ -77,20 +73,19 @@ export const ResourceValue = {
     return obj;
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
-    return {
-      val: object.val
-    };
+    const message = createBaseResourceValue();
+    if (object.val !== undefined && object.val !== null) {
+      message.val = bytesFromBase64(object.val);
+    }
+    return message;
   },
-  toAmino(message: ResourceValue): ResourceValueAmino {
+  toAmino(message: ResourceValue, useInterfaces: boolean = true): ResourceValueAmino {
     const obj: any = {};
-    obj.val = message.val;
+    obj.val = message.val ? base64FromBytes(message.val) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
-    return ResourceValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
-    return ResourceValue.decode(message.value);
+  fromProtoMsg(message: ResourceValueProtoMsg, useInterfaces: boolean = true): ResourceValue {
+    return ResourceValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceValue): Uint8Array {
     return ResourceValue.encode(message).finish();

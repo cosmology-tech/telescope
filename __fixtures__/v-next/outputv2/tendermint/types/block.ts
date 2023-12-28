@@ -7,7 +7,7 @@ export interface Block {
   header: Header;
   data: Data;
   evidence: EvidenceList;
-  lastCommit: Commit;
+  lastCommit?: Commit;
 }
 export interface BlockProtoMsg {
   typeUrl: "/tendermint.types.Block";
@@ -27,14 +27,14 @@ export interface BlockSDKType {
   header: HeaderSDKType;
   data: DataSDKType;
   evidence: EvidenceListSDKType;
-  last_commit: CommitSDKType;
+  last_commit?: CommitSDKType;
 }
 function createBaseBlock(): Block {
   return {
     header: Header.fromPartial({}),
     data: Data.fromPartial({}),
     evidence: EvidenceList.fromPartial({}),
-    lastCommit: Commit.fromPartial({})
+    lastCommit: undefined
   };
 }
 export const Block = {
@@ -129,12 +129,20 @@ export const Block = {
     return obj;
   },
   fromAmino(object: BlockAmino): Block {
-    return {
-      header: object?.header ? Header.fromAmino(object.header) : undefined,
-      data: object?.data ? Data.fromAmino(object.data) : undefined,
-      evidence: object?.evidence ? EvidenceList.fromAmino(object.evidence) : undefined,
-      lastCommit: object?.last_commit ? Commit.fromAmino(object.last_commit) : undefined
-    };
+    const message = createBaseBlock();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromAmino(object.header);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Data.fromAmino(object.data);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceList.fromAmino(object.evidence);
+    }
+    if (object.last_commit !== undefined && object.last_commit !== null) {
+      message.lastCommit = Commit.fromAmino(object.last_commit);
+    }
+    return message;
   },
   toAmino(message: Block): BlockAmino {
     const obj: any = {};

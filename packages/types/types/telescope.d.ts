@@ -16,6 +16,10 @@ interface TelescopeOpts {
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
+        useGlobalDecoderRegistry?: boolean;
+        useUseInterfacesParams?: boolean;
+        useByDefault?: boolean;
+        useByDefaultRpc?: boolean;
         useUnionTypes?: boolean;
     };
     prototypes?: {
@@ -30,6 +34,9 @@ interface TelescopeOpts {
             decode?: boolean;
             fromJSON?: boolean;
             toJSON?: boolean;
+            /**
+            * @deprecated The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on.
+            */
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
@@ -45,14 +52,18 @@ interface TelescopeOpts {
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
         allowUndefinedTypes?: boolean;
+        allowEncodeDefaultScalars?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
         addTypeUrlToObjects?: boolean;
         addAminoTypeToObjects?: boolean;
         addTypeUrlToDecoders?: boolean;
+        enableRegistryLoader?: boolean;
+        enableMessageComposer?: boolean;
         excluded?: {
             packages?: string[];
             protos?: string[];
+            hardProtos?: string[];
         };
         includes?: {
             packages?: string[];
@@ -70,6 +81,7 @@ interface TelescopeOpts {
             setDefaultEnumToUnrecognized?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
             updatedDuration?: boolean;
+            useTelescopeGeneratedType?: boolean;
         };
     };
     tsDisable?: {
@@ -96,9 +108,12 @@ interface TelescopeOpts {
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
+        addGetTxRpc?: boolean;
     };
     aminoEncoding?: {
         enabled: boolean;
+        useProtoOptionality?: boolean;
+        disableMsgTypes?: boolean;
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
@@ -128,6 +143,14 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        serviceImplement?: {
+            [key: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string]: {
+                include?: {
+                    patterns?: string[];
+                };
+                type: "Query" | "Tx" | string;
+            };
+        };
         enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
         scoped?: {
             dir: string;
@@ -138,6 +161,24 @@ interface TelescopeOpts {
             methodNameQuery?: string;
             methodNameTx?: string;
         }[];
+        instantOps?: {
+            className: string;
+            include: {
+                patterns?: string[];
+            };
+            nameMapping?: {
+                All: {
+                    [key: string]: string;
+                };
+                Query?: {
+                    [key: string]: string;
+                };
+                Msg?: {
+                    [key: string]: string;
+                };
+            };
+        }[];
+        useConnectComet?: boolean;
     };
     reactQuery?: {
         enabled: boolean;

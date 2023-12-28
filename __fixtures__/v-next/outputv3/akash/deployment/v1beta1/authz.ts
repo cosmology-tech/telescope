@@ -7,7 +7,7 @@ export const protobufPackage = "akash.deployment.v1beta1";
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
-  $typeUrl?: string;
+  $typeUrl?: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
@@ -29,16 +29,12 @@ export interface DepositDeploymentAuthorizationAmino {
    */
   spend_limit?: CoinAmino;
 }
-export interface DepositDeploymentAuthorizationAminoMsg {
-  type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
-  value: DepositDeploymentAuthorizationAmino;
-}
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
   spend_limit: CoinSDKType;
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
@@ -55,7 +51,7 @@ export const DepositDeploymentAuthorization = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DepositDeploymentAuthorization {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DepositDeploymentAuthorization {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDepositDeploymentAuthorization();
@@ -63,7 +59,7 @@ export const DepositDeploymentAuthorization = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.spendLimit = Coin.decode(reader, reader.uint32());
+          message.spendLimit = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -100,20 +96,19 @@ export const DepositDeploymentAuthorization = {
     return obj;
   },
   fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
-    };
+    const message = createBaseDepositDeploymentAuthorization();
+    if (object.spend_limit !== undefined && object.spend_limit !== null) {
+      message.spendLimit = Coin.fromAmino(object.spend_limit);
+    }
+    return message;
   },
-  toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
+  toAmino(message: DepositDeploymentAuthorization, useInterfaces: boolean = true): DepositDeploymentAuthorizationAmino {
     const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : undefined;
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg): DepositDeploymentAuthorization {
-    return DepositDeploymentAuthorization.decode(message.value);
+  fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg, useInterfaces: boolean = true): DepositDeploymentAuthorization {
+    return DepositDeploymentAuthorization.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DepositDeploymentAuthorization): Uint8Array {
     return DepositDeploymentAuthorization.encode(message).finish();

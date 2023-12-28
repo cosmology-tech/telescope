@@ -11,6 +11,10 @@ export interface SetSuperfluidAssetsProposal {
   description: string;
   assets: SuperfluidAsset[];
 }
+export interface SetSuperfluidAssetsProposalProtoMsg {
+  typeUrl: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
+  value: Uint8Array;
+}
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
  * assets
@@ -28,6 +32,10 @@ export interface RemoveSuperfluidAssetsProposal {
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
+}
+export interface RemoveSuperfluidAssetsProposalProtoMsg {
+  typeUrl: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
+  value: Uint8Array;
 }
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
@@ -47,6 +55,10 @@ export interface UpdateUnpoolWhiteListProposal {
   description: string;
   ids: bigint[];
   isOverwrite: boolean;
+}
+export interface UpdateUnpoolWhiteListProposalProtoMsg {
+  typeUrl: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
+  value: Uint8Array;
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
@@ -153,11 +165,15 @@ export const SetSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: SetSuperfluidAssetsProposalAmino): SetSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
-    };
+    const message = createBaseSetSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.assets = object.assets?.map(e => SuperfluidAsset.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
@@ -287,11 +303,15 @@ export const RemoveSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: RemoveSuperfluidAssetsProposalAmino): RemoveSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
-    };
+    const message = createBaseRemoveSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.superfluidAssetDenoms = object.superfluid_asset_denoms?.map(e => e) || [];
+    return message;
   },
   toAmino(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
@@ -443,12 +463,18 @@ export const UpdateUnpoolWhiteListProposal = {
     return obj;
   },
   fromAmino(object: UpdateUnpoolWhiteListProposalAmino): UpdateUnpoolWhiteListProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e)) : [],
-      isOverwrite: object.is_overwrite
-    };
+    const message = createBaseUpdateUnpoolWhiteListProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.ids = object.ids?.map(e => BigInt(e)) || [];
+    if (object.is_overwrite !== undefined && object.is_overwrite !== null) {
+      message.isOverwrite = object.is_overwrite;
+    }
+    return message;
   },
   toAmino(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};

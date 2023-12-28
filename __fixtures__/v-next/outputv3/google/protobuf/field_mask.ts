@@ -413,11 +413,7 @@ export interface FieldMaskProtoMsg {
  */
 export interface FieldMaskAmino {
   /** The set of field mask paths. */
-  paths: string[];
-}
-export interface FieldMaskAminoMsg {
-  type: "/google.protobuf.FieldMask";
-  value: FieldMaskAmino;
+  paths?: string[];
 }
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
@@ -636,7 +632,7 @@ export const FieldMask = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FieldMask {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FieldMask {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFieldMask();
@@ -687,11 +683,11 @@ export const FieldMask = {
     return obj;
   },
   fromAmino(object: FieldMaskAmino): FieldMask {
-    return {
-      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
-    };
+    const message = createBaseFieldMask();
+    message.paths = object.paths?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: FieldMask): FieldMaskAmino {
+  toAmino(message: FieldMask, useInterfaces: boolean = true): FieldMaskAmino {
     const obj: any = {};
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
@@ -700,11 +696,8 @@ export const FieldMask = {
     }
     return obj;
   },
-  fromAminoMsg(object: FieldMaskAminoMsg): FieldMask {
-    return FieldMask.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FieldMaskProtoMsg): FieldMask {
-    return FieldMask.decode(message.value);
+  fromProtoMsg(message: FieldMaskProtoMsg, useInterfaces: boolean = true): FieldMask {
+    return FieldMask.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FieldMask): Uint8Array {
     return FieldMask.encode(message).finish();

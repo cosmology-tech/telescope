@@ -19,6 +19,10 @@ export interface MsgCreateDenom {
   /** subdenom can be up to 44 "alphanumeric" characters long. */
   subdenom: string;
 }
+export interface MsgCreateDenomProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom";
+  value: Uint8Array;
+}
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
  * method. It allows an account to create a new denom. It requires a sender
@@ -41,6 +45,10 @@ export interface MsgCreateDenomSDKType {
 export interface MsgCreateDenomResponse {
   newTokenDenom: string;
 }
+export interface MsgCreateDenomResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenomResponse";
+  value: Uint8Array;
+}
 /**
  * MsgCreateDenomResponse is the return value of MsgCreateDenom
  * It returns the full string of the newly created denom
@@ -56,6 +64,10 @@ export interface MsgMint {
   sender: string;
   amount: Coin;
 }
+export interface MsgMintProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint";
+  value: Uint8Array;
+}
 /**
  * MsgMint is the sdk.Msg type for allowing an admin account to mint
  * more of a token.  For now, we only support minting to the sender account
@@ -65,6 +77,10 @@ export interface MsgMintSDKType {
   amount: CoinSDKType;
 }
 export interface MsgMintResponse {}
+export interface MsgMintResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMintResponse";
+  value: Uint8Array;
+}
 export interface MsgMintResponseSDKType {}
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -73,6 +89,10 @@ export interface MsgMintResponseSDKType {}
 export interface MsgBurn {
   sender: string;
   amount: Coin;
+}
+export interface MsgBurnProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn";
+  value: Uint8Array;
 }
 /**
  * MsgBurn is the sdk.Msg type for allowing an admin account to burn
@@ -83,6 +103,10 @@ export interface MsgBurnSDKType {
   amount: CoinSDKType;
 }
 export interface MsgBurnResponse {}
+export interface MsgBurnResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurnResponse";
+  value: Uint8Array;
+}
 export interface MsgBurnResponseSDKType {}
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -92,6 +116,10 @@ export interface MsgChangeAdmin {
   sender: string;
   denom: string;
   newAdmin: string;
+}
+export interface MsgChangeAdminProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin";
+  value: Uint8Array;
 }
 /**
  * MsgChangeAdmin is the sdk.Msg type for allowing an admin account to reassign
@@ -107,6 +135,10 @@ export interface MsgChangeAdminSDKType {
  * MsgChangeAdmin message.
  */
 export interface MsgChangeAdminResponse {}
+export interface MsgChangeAdminResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdminResponse";
+  value: Uint8Array;
+}
 /**
  * MsgChangeAdminResponse defines the response structure for an executed
  * MsgChangeAdmin message.
@@ -119,6 +151,10 @@ export interface MsgChangeAdminResponseSDKType {}
 export interface MsgSetDenomMetadata {
   sender: string;
   metadata: Metadata;
+}
+export interface MsgSetDenomMetadataProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata";
+  value: Uint8Array;
 }
 /**
  * MsgSetDenomMetadata is the sdk.Msg type for allowing an admin account to set
@@ -133,6 +169,10 @@ export interface MsgSetDenomMetadataSDKType {
  * MsgSetDenomMetadata message.
  */
 export interface MsgSetDenomMetadataResponse {}
+export interface MsgSetDenomMetadataResponseProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadataResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSetDenomMetadataResponse defines the response structure for an executed
  * MsgSetDenomMetadata message.
@@ -147,10 +187,10 @@ function createBaseMsgCreateDenom(): MsgCreateDenom {
 export const MsgCreateDenom = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom",
   encode(message: MsgCreateDenom, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.subdenom !== "") {
+    if (message.subdenom !== undefined) {
       writer.uint32(18).string(message.subdenom);
     }
     return writer;
@@ -212,10 +252,14 @@ export const MsgCreateDenom = {
     return obj;
   },
   fromAmino(object: MsgCreateDenomAmino): MsgCreateDenom {
-    return {
-      sender: object.sender,
-      subdenom: object.subdenom
-    };
+    const message = createBaseMsgCreateDenom();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.subdenom !== undefined && object.subdenom !== null) {
+      message.subdenom = object.subdenom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDenom): MsgCreateDenomAmino {
     const obj: any = {};
@@ -253,7 +297,7 @@ function createBaseMsgCreateDenomResponse(): MsgCreateDenomResponse {
 export const MsgCreateDenomResponse = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenomResponse",
   encode(message: MsgCreateDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.newTokenDenom !== "") {
+    if (message.newTokenDenom !== undefined) {
       writer.uint32(10).string(message.newTokenDenom);
     }
     return writer;
@@ -306,9 +350,11 @@ export const MsgCreateDenomResponse = {
     return obj;
   },
   fromAmino(object: MsgCreateDenomResponseAmino): MsgCreateDenomResponse {
-    return {
-      newTokenDenom: object.new_token_denom
-    };
+    const message = createBaseMsgCreateDenomResponse();
+    if (object.new_token_denom !== undefined && object.new_token_denom !== null) {
+      message.newTokenDenom = object.new_token_denom;
+    }
+    return message;
   },
   toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseAmino {
     const obj: any = {};
@@ -346,7 +392,7 @@ function createBaseMsgMint(): MsgMint {
 export const MsgMint = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint",
   encode(message: MsgMint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     if (message.amount !== undefined) {
@@ -413,10 +459,14 @@ export const MsgMint = {
     return obj;
   },
   fromAmino(object: MsgMintAmino): MsgMint {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgMint();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: MsgMint): MsgMintAmino {
     const obj: any = {};
@@ -491,7 +541,8 @@ export const MsgMintResponse = {
     return obj;
   },
   fromAmino(_: MsgMintResponseAmino): MsgMintResponse {
-    return {};
+    const message = createBaseMsgMintResponse();
+    return message;
   },
   toAmino(_: MsgMintResponse): MsgMintResponseAmino {
     const obj: any = {};
@@ -528,7 +579,7 @@ function createBaseMsgBurn(): MsgBurn {
 export const MsgBurn = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn",
   encode(message: MsgBurn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     if (message.amount !== undefined) {
@@ -595,10 +646,14 @@ export const MsgBurn = {
     return obj;
   },
   fromAmino(object: MsgBurnAmino): MsgBurn {
-    return {
-      sender: object.sender,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgBurn();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: MsgBurn): MsgBurnAmino {
     const obj: any = {};
@@ -673,7 +728,8 @@ export const MsgBurnResponse = {
     return obj;
   },
   fromAmino(_: MsgBurnResponseAmino): MsgBurnResponse {
-    return {};
+    const message = createBaseMsgBurnResponse();
+    return message;
   },
   toAmino(_: MsgBurnResponse): MsgBurnResponseAmino {
     const obj: any = {};
@@ -711,13 +767,13 @@ function createBaseMsgChangeAdmin(): MsgChangeAdmin {
 export const MsgChangeAdmin = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin",
   encode(message: MsgChangeAdmin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(18).string(message.denom);
     }
-    if (message.newAdmin !== "") {
+    if (message.newAdmin !== undefined) {
       writer.uint32(26).string(message.newAdmin);
     }
     return writer;
@@ -788,11 +844,17 @@ export const MsgChangeAdmin = {
     return obj;
   },
   fromAmino(object: MsgChangeAdminAmino): MsgChangeAdmin {
-    return {
-      sender: object.sender,
-      denom: object.denom,
-      newAdmin: object.new_admin
-    };
+    const message = createBaseMsgChangeAdmin();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    return message;
   },
   toAmino(message: MsgChangeAdmin): MsgChangeAdminAmino {
     const obj: any = {};
@@ -868,7 +930,8 @@ export const MsgChangeAdminResponse = {
     return obj;
   },
   fromAmino(_: MsgChangeAdminResponseAmino): MsgChangeAdminResponse {
-    return {};
+    const message = createBaseMsgChangeAdminResponse();
+    return message;
   },
   toAmino(_: MsgChangeAdminResponse): MsgChangeAdminResponseAmino {
     const obj: any = {};
@@ -905,7 +968,7 @@ function createBaseMsgSetDenomMetadata(): MsgSetDenomMetadata {
 export const MsgSetDenomMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata",
   encode(message: MsgSetDenomMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     if (message.metadata !== undefined) {
@@ -972,10 +1035,14 @@ export const MsgSetDenomMetadata = {
     return obj;
   },
   fromAmino(object: MsgSetDenomMetadataAmino): MsgSetDenomMetadata {
-    return {
-      sender: object.sender,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseMsgSetDenomMetadata();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
   toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {
     const obj: any = {};
@@ -1050,7 +1117,8 @@ export const MsgSetDenomMetadataResponse = {
     return obj;
   },
   fromAmino(_: MsgSetDenomMetadataResponseAmino): MsgSetDenomMetadataResponse {
-    return {};
+    const message = createBaseMsgSetDenomMetadataResponse();
+    return message;
   },
   toAmino(_: MsgSetDenomMetadataResponse): MsgSetDenomMetadataResponseAmino {
     const obj: any = {};

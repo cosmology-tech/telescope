@@ -25,11 +25,7 @@ export interface SourceContextAmino {
    * The path-qualified name of the .proto file that contained the associated
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
-  file_name: string;
-}
-export interface SourceContextAminoMsg {
-  type: "/google.protobuf.SourceContext";
-  value: SourceContextAmino;
+  file_name?: string;
 }
 /**
  * `SourceContext` represents information about the source of a
@@ -51,7 +47,7 @@ export const SourceContext = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceContext {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceContext {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceContext();
@@ -94,20 +90,19 @@ export const SourceContext = {
     return obj;
   },
   fromAmino(object: SourceContextAmino): SourceContext {
-    return {
-      fileName: object.file_name
-    };
+    const message = createBaseSourceContext();
+    if (object.file_name !== undefined && object.file_name !== null) {
+      message.fileName = object.file_name;
+    }
+    return message;
   },
-  toAmino(message: SourceContext): SourceContextAmino {
+  toAmino(message: SourceContext, useInterfaces: boolean = true): SourceContextAmino {
     const obj: any = {};
     obj.file_name = omitDefault(message.fileName);
     return obj;
   },
-  fromAminoMsg(object: SourceContextAminoMsg): SourceContext {
-    return SourceContext.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceContextProtoMsg): SourceContext {
-    return SourceContext.decode(message.value);
+  fromProtoMsg(message: SourceContextProtoMsg, useInterfaces: boolean = true): SourceContext {
+    return SourceContext.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceContext): Uint8Array {
     return SourceContext.encode(message).finish();

@@ -29,10 +29,6 @@ export interface EmptyProtoMsg {
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
 export interface EmptyAmino {}
-export interface EmptyAminoMsg {
-  type: "/google.protobuf.Empty";
-  value: EmptyAmino;
-}
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
  * empty messages in your APIs. A typical example is to use it as the request
@@ -53,7 +49,7 @@ export const Empty = {
   encode(_: Empty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Empty {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Empty {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEmpty();
@@ -87,17 +83,15 @@ export const Empty = {
     return obj;
   },
   fromAmino(_: EmptyAmino): Empty {
-    return {};
+    const message = createBaseEmpty();
+    return message;
   },
-  toAmino(_: Empty): EmptyAmino {
+  toAmino(_: Empty, useInterfaces: boolean = true): EmptyAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: EmptyAminoMsg): Empty {
-    return Empty.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EmptyProtoMsg): Empty {
-    return Empty.decode(message.value);
+  fromProtoMsg(message: EmptyProtoMsg, useInterfaces: boolean = true): Empty {
+    return Empty.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Empty): Uint8Array {
     return Empty.encode(message).finish();

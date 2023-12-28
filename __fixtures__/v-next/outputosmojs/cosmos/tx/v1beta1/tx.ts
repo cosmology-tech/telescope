@@ -3,17 +3,17 @@ import { SignMode, SignModeSDKType, signModeFromJSON, signModeToJSON } from "../
 import { CompactBitArray, CompactBitArraySDKType } from "../../crypto/multisig/v1beta1/multisig";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
   /** body is the processable content of the transaction */
-  body: TxBody;
+  body?: TxBody;
   /**
    * auth_info is the authorization related content of the transaction,
    * specifically signers, signer modes and fee
    */
-  authInfo: AuthInfo;
+  authInfo?: AuthInfo;
   /**
    * signatures is a list of signatures that matches the length and order of
    * AuthInfo's signer_infos to allow connecting signature meta information like
@@ -21,10 +21,14 @@ export interface Tx {
    */
   signatures: Uint8Array[];
 }
+export interface TxProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.Tx";
+  value: Uint8Array;
+}
 /** Tx is the standard type used for broadcasting transactions. */
 export interface TxSDKType {
-  body: TxBodySDKType;
-  auth_info: AuthInfoSDKType;
+  body?: TxBodySDKType;
+  auth_info?: AuthInfoSDKType;
   signatures: Uint8Array[];
 }
 /**
@@ -51,6 +55,10 @@ export interface TxRaw {
    * public key and signing mode by position.
    */
   signatures: Uint8Array[];
+}
+export interface TxRawProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.TxRaw";
+  value: Uint8Array;
 }
 /**
  * TxRaw is a variant of Tx that pins the signer's exact binary representation
@@ -85,6 +93,10 @@ export interface SignDoc {
   /** account_number is the account number of the account in state */
   accountNumber: bigint;
 }
+export interface SignDocProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.SignDoc";
+  value: Uint8Array;
+}
 /** SignDoc is the type used for generating sign bytes for SIGN_MODE_DIRECT. */
 export interface SignDocSDKType {
   body_bytes: Uint8Array;
@@ -105,7 +117,7 @@ export interface SignDocDirectAux {
    */
   bodyBytes: Uint8Array;
   /** public_key is the public key of the signing account. */
-  publicKey: Any;
+  publicKey?: Any;
   /**
    * chain_id is the identifier of the chain this transaction targets.
    * It prevents signed transactions from being used on another chain by an
@@ -120,7 +132,11 @@ export interface SignDocDirectAux {
    * Tip is the optional tip used for meta-transactions. It should be left
    * empty if the signer is not the tipper for this transaction.
    */
-  tip: Tip;
+  tip?: Tip;
+}
+export interface SignDocDirectAuxProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.SignDocDirectAux";
+  value: Uint8Array;
 }
 /**
  * SignDocDirectAux is the type used for generating sign bytes for
@@ -130,11 +146,11 @@ export interface SignDocDirectAux {
  */
 export interface SignDocDirectAuxSDKType {
   body_bytes: Uint8Array;
-  public_key: AnySDKType;
+  public_key?: AnySDKType;
   chain_id: string;
   account_number: bigint;
   sequence: bigint;
-  tip: TipSDKType;
+  tip?: TipSDKType;
 }
 /** TxBody is the body of a transaction that all signers sign over. */
 export interface TxBody {
@@ -172,6 +188,10 @@ export interface TxBody {
    */
   nonCriticalExtensionOptions: Any[];
 }
+export interface TxBodyProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.TxBody";
+  value: Uint8Array;
+}
 /** TxBody is the body of a transaction that all signers sign over. */
 export interface TxBodySDKType {
   messages: AnySDKType[];
@@ -198,13 +218,17 @@ export interface AuthInfo {
    * based on the cost of evaluating the body and doing signature verification
    * of the signers. This can be estimated via simulation.
    */
-  fee: Fee;
+  fee?: Fee;
   /**
    * Tip is the optional tip used for meta-transactions.
    * 
    * Since: cosmos-sdk 0.46
    */
-  tip: Tip;
+  tip?: Tip;
+}
+export interface AuthInfoProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.AuthInfo";
+  value: Uint8Array;
 }
 /**
  * AuthInfo describes the fee and signer modes that are used to sign a
@@ -212,8 +236,8 @@ export interface AuthInfo {
  */
 export interface AuthInfoSDKType {
   signer_infos: SignerInfoSDKType[];
-  fee: FeeSDKType;
-  tip: TipSDKType;
+  fee?: FeeSDKType;
+  tip?: TipSDKType;
 }
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
@@ -225,12 +249,12 @@ export interface SignerInfo {
    * that already exist in state. If unset, the verifier can use the required \
    * signer address for this position and lookup the public key.
    */
-  publicKey: Any;
+  publicKey?: Any;
   /**
    * mode_info describes the signing mode of the signer and is a nested
    * structure to support nested multisig pubkey's
    */
-  modeInfo: ModeInfo;
+  modeInfo?: ModeInfo;
   /**
    * sequence is the sequence of the account, which describes the
    * number of committed transactions signed by a given address. It is used to
@@ -238,13 +262,17 @@ export interface SignerInfo {
    */
   sequence: bigint;
 }
+export interface SignerInfoProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.SignerInfo";
+  value: Uint8Array;
+}
 /**
  * SignerInfo describes the public key and signing mode of a single top-level
  * signer.
  */
 export interface SignerInfoSDKType {
-  public_key: AnySDKType;
-  mode_info: ModeInfoSDKType;
+  public_key?: AnySDKType;
+  mode_info?: ModeInfoSDKType;
   sequence: bigint;
 }
 /** ModeInfo describes the signing mode of a single or nested multisig signer. */
@@ -253,6 +281,10 @@ export interface ModeInfo {
   single?: ModeInfo_Single;
   /** multi represents a nested multisig signer */
   multi?: ModeInfo_Multi;
+}
+export interface ModeInfoProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.ModeInfo";
+  value: Uint8Array;
 }
 /** ModeInfo describes the signing mode of a single or nested multisig signer. */
 export interface ModeInfoSDKType {
@@ -268,6 +300,10 @@ export interface ModeInfo_Single {
   /** mode is the signing mode of the single signer */
   mode: SignMode;
 }
+export interface ModeInfo_SingleProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.Single";
+  value: Uint8Array;
+}
 /**
  * Single is the mode info for a single signer. It is structured as a message
  * to allow for additional fields such as locale for SIGN_MODE_TEXTUAL in the
@@ -279,16 +315,20 @@ export interface ModeInfo_SingleSDKType {
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_Multi {
   /** bitarray specifies which keys within the multisig are signing */
-  bitarray: CompactBitArray;
+  bitarray?: CompactBitArray;
   /**
    * mode_infos is the corresponding modes of the signers of the multisig
    * which could include nested multisig public keys
    */
   modeInfos: ModeInfo[];
 }
+export interface ModeInfo_MultiProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.Multi";
+  value: Uint8Array;
+}
 /** Multi is the mode info for a multisig public key */
 export interface ModeInfo_MultiSDKType {
-  bitarray: CompactBitArraySDKType;
+  bitarray?: CompactBitArraySDKType;
   mode_infos: ModeInfoSDKType[];
 }
 /**
@@ -317,6 +357,10 @@ export interface Fee {
    */
   granter: string;
 }
+export interface FeeProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.Fee";
+  value: Uint8Array;
+}
 /**
  * Fee includes the amount of coins paid in fees and the maximum
  * gas to be used by the transaction. The ratio yields an effective "gasprice",
@@ -338,6 +382,10 @@ export interface Tip {
   amount: Coin[];
   /** tipper is the address of the account paying for the tip */
   tipper: string;
+}
+export interface TipProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.Tip";
+  value: Uint8Array;
 }
 /**
  * Tip is the tip used for meta-transactions.
@@ -368,11 +416,15 @@ export interface AuxSignerData {
    * signs. Note: we use the same sign doc even if we're signing with
    * LEGACY_AMINO_JSON.
    */
-  signDoc: SignDocDirectAux;
+  signDoc?: SignDocDirectAux;
   /** mode is the signing mode of the single signer */
   mode: SignMode;
   /** sig is the signature of the sign doc. */
   sig: Uint8Array;
+}
+export interface AuxSignerDataProtoMsg {
+  typeUrl: "/cosmos.tx.v1beta1.AuxSignerData";
+  value: Uint8Array;
 }
 /**
  * AuxSignerData is the intermediary format that an auxiliary signer (e.g. a
@@ -384,14 +436,14 @@ export interface AuxSignerData {
  */
 export interface AuxSignerDataSDKType {
   address: string;
-  sign_doc: SignDocDirectAuxSDKType;
+  sign_doc?: SignDocDirectAuxSDKType;
   mode: SignMode;
   sig: Uint8Array;
 }
 function createBaseTx(): Tx {
   return {
-    body: TxBody.fromPartial({}),
-    authInfo: AuthInfo.fromPartial({}),
+    body: undefined,
+    authInfo: undefined,
     signatures: []
   };
 }
@@ -483,18 +535,22 @@ export const Tx = {
     return obj;
   },
   fromAmino(object: TxAmino): Tx {
-    return {
-      body: object?.body ? TxBody.fromAmino(object.body) : undefined,
-      authInfo: object?.auth_info ? AuthInfo.fromAmino(object.auth_info) : undefined,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseTx();
+    if (object.body !== undefined && object.body !== null) {
+      message.body = TxBody.fromAmino(object.body);
+    }
+    if (object.auth_info !== undefined && object.auth_info !== null) {
+      message.authInfo = AuthInfo.fromAmino(object.auth_info);
+    }
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Tx): TxAmino {
     const obj: any = {};
     obj.body = message.body ? TxBody.toAmino(message.body) : undefined;
     obj.auth_info = message.authInfo ? AuthInfo.toAmino(message.authInfo) : undefined;
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -617,18 +673,22 @@ export const TxRaw = {
     return obj;
   },
   fromAmino(object: TxRawAmino): TxRaw {
-    return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseTxRaw();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
+    }
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: TxRaw): TxRawAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
@@ -756,19 +816,27 @@ export const SignDoc = {
     return obj;
   },
   fromAmino(object: SignDocAmino): SignDoc {
-    return {
-      bodyBytes: object.body_bytes,
-      authInfoBytes: object.auth_info_bytes,
-      chainId: object.chain_id,
-      accountNumber: BigInt(object.account_number)
-    };
+    const message = createBaseSignDoc();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.auth_info_bytes !== undefined && object.auth_info_bytes !== null) {
+      message.authInfoBytes = bytesFromBase64(object.auth_info_bytes);
+    }
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    return message;
   },
   toAmino(message: SignDoc): SignDocAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
-    obj.auth_info_bytes = message.authInfoBytes;
-    obj.chain_id = omitDefault(message.chainId);
-    obj.account_number = omitDefault(message.accountNumber);
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
+    obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
+    obj.chain_id = message.chainId;
+    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignDocAminoMsg): SignDoc {
@@ -796,11 +864,11 @@ export const SignDoc = {
 function createBaseSignDocDirectAux(): SignDocDirectAux {
   return {
     bodyBytes: new Uint8Array(),
-    publicKey: Any.fromPartial({}),
+    publicKey: undefined,
     chainId: "",
     accountNumber: BigInt(0),
     sequence: BigInt(0),
-    tip: Tip.fromPartial({})
+    tip: undefined
   };
 }
 export const SignDocDirectAux = {
@@ -919,22 +987,34 @@ export const SignDocDirectAux = {
     return obj;
   },
   fromAmino(object: SignDocDirectAuxAmino): SignDocDirectAux {
-    return {
-      bodyBytes: object.body_bytes,
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      chainId: object.chain_id,
-      accountNumber: BigInt(object.account_number),
-      sequence: BigInt(object.sequence),
-      tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
-    };
+    const message = createBaseSignDocDirectAux();
+    if (object.body_bytes !== undefined && object.body_bytes !== null) {
+      message.bodyBytes = bytesFromBase64(object.body_bytes);
+    }
+    if (object.public_key !== undefined && object.public_key !== null) {
+      message.publicKey = Any.fromAmino(object.public_key);
+    }
+    if (object.chain_id !== undefined && object.chain_id !== null) {
+      message.chainId = object.chain_id;
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    if (object.tip !== undefined && object.tip !== null) {
+      message.tip = Tip.fromAmino(object.tip);
+    }
+    return message;
   },
   toAmino(message: SignDocDirectAux): SignDocDirectAuxAmino {
     const obj: any = {};
-    obj.body_bytes = message.bodyBytes;
+    obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.chain_id = omitDefault(message.chainId);
-    obj.account_number = omitDefault(message.accountNumber);
-    obj.sequence = omitDefault(message.sequence);
+    obj.chain_id = message.chainId;
+    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.tip = message.tip ? Tip.toAmino(message.tip) : undefined;
     return obj;
   },
@@ -1097,13 +1177,17 @@ export const TxBody = {
     return obj;
   },
   fromAmino(object: TxBodyAmino): TxBody {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : [],
-      memo: object.memo,
-      timeoutHeight: BigInt(object.timeout_height),
-      extensionOptions: Array.isArray(object?.extension_options) ? object.extension_options.map((e: any) => Any.fromAmino(e)) : [],
-      nonCriticalExtensionOptions: Array.isArray(object?.non_critical_extension_options) ? object.non_critical_extension_options.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseTxBody();
+    message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
+    if (object.memo !== undefined && object.memo !== null) {
+      message.memo = object.memo;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = BigInt(object.timeout_height);
+    }
+    message.extensionOptions = object.extension_options?.map(e => Any.fromAmino(e)) || [];
+    message.nonCriticalExtensionOptions = object.non_critical_extension_options?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: TxBody): TxBodyAmino {
     const obj: any = {};
@@ -1112,8 +1196,8 @@ export const TxBody = {
     } else {
       obj.messages = [];
     }
-    obj.memo = omitDefault(message.memo);
-    obj.timeout_height = omitDefault(message.timeoutHeight);
+    obj.memo = message.memo;
+    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
     if (message.extensionOptions) {
       obj.extension_options = message.extensionOptions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
@@ -1151,8 +1235,8 @@ export const TxBody = {
 function createBaseAuthInfo(): AuthInfo {
   return {
     signerInfos: [],
-    fee: Fee.fromPartial({}),
-    tip: Tip.fromPartial({})
+    fee: undefined,
+    tip: undefined
   };
 }
 export const AuthInfo = {
@@ -1243,11 +1327,15 @@ export const AuthInfo = {
     return obj;
   },
   fromAmino(object: AuthInfoAmino): AuthInfo {
-    return {
-      signerInfos: Array.isArray(object?.signer_infos) ? object.signer_infos.map((e: any) => SignerInfo.fromAmino(e)) : [],
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
-      tip: object?.tip ? Tip.fromAmino(object.tip) : undefined
-    };
+    const message = createBaseAuthInfo();
+    message.signerInfos = object.signer_infos?.map(e => SignerInfo.fromAmino(e)) || [];
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Fee.fromAmino(object.fee);
+    }
+    if (object.tip !== undefined && object.tip !== null) {
+      message.tip = Tip.fromAmino(object.tip);
+    }
+    return message;
   },
   toAmino(message: AuthInfo): AuthInfoAmino {
     const obj: any = {};
@@ -1284,8 +1372,8 @@ export const AuthInfo = {
 };
 function createBaseSignerInfo(): SignerInfo {
   return {
-    publicKey: Any.fromPartial({}),
-    modeInfo: ModeInfo.fromPartial({}),
+    publicKey: undefined,
+    modeInfo: undefined,
     sequence: BigInt(0)
   };
 }
@@ -1369,17 +1457,23 @@ export const SignerInfo = {
     return obj;
   },
   fromAmino(object: SignerInfoAmino): SignerInfo {
-    return {
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      modeInfo: object?.mode_info ? ModeInfo.fromAmino(object.mode_info) : undefined,
-      sequence: BigInt(object.sequence)
-    };
+    const message = createBaseSignerInfo();
+    if (object.public_key !== undefined && object.public_key !== null) {
+      message.publicKey = Any.fromAmino(object.public_key);
+    }
+    if (object.mode_info !== undefined && object.mode_info !== null) {
+      message.modeInfo = ModeInfo.fromAmino(object.mode_info);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    return message;
   },
   toAmino(message: SignerInfo): SignerInfoAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.mode_info = message.modeInfo ? ModeInfo.toAmino(message.modeInfo) : undefined;
-    obj.sequence = omitDefault(message.sequence);
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignerInfoAminoMsg): SignerInfo {
@@ -1478,10 +1572,14 @@ export const ModeInfo = {
     return obj;
   },
   fromAmino(object: ModeInfoAmino): ModeInfo {
-    return {
-      single: object?.single ? ModeInfo_Single.fromAmino(object.single) : undefined,
-      multi: object?.multi ? ModeInfo_Multi.fromAmino(object.multi) : undefined
-    };
+    const message = createBaseModeInfo();
+    if (object.single !== undefined && object.single !== null) {
+      message.single = ModeInfo_Single.fromAmino(object.single);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = ModeInfo_Multi.fromAmino(object.multi);
+    }
+    return message;
   },
   toAmino(message: ModeInfo): ModeInfoAmino {
     const obj: any = {};
@@ -1572,13 +1670,15 @@ export const ModeInfo_Single = {
     return obj;
   },
   fromAmino(object: ModeInfo_SingleAmino): ModeInfo_Single {
-    return {
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
-    };
+    const message = createBaseModeInfo_Single();
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = signModeFromJSON(object.mode);
+    }
+    return message;
   },
   toAmino(message: ModeInfo_Single): ModeInfo_SingleAmino {
     const obj: any = {};
-    obj.mode = omitDefault(message.mode);
+    obj.mode = signModeToJSON(message.mode);
     return obj;
   },
   fromAminoMsg(object: ModeInfo_SingleAminoMsg): ModeInfo_Single {
@@ -1605,7 +1705,7 @@ export const ModeInfo_Single = {
 };
 function createBaseModeInfo_Multi(): ModeInfo_Multi {
   return {
-    bitarray: CompactBitArray.fromPartial({}),
+    bitarray: undefined,
     modeInfos: []
   };
 }
@@ -1685,10 +1785,12 @@ export const ModeInfo_Multi = {
     return obj;
   },
   fromAmino(object: ModeInfo_MultiAmino): ModeInfo_Multi {
-    return {
-      bitarray: object?.bitarray ? CompactBitArray.fromAmino(object.bitarray) : undefined,
-      modeInfos: Array.isArray(object?.mode_infos) ? object.mode_infos.map((e: any) => ModeInfo.fromAmino(e)) : []
-    };
+    const message = createBaseModeInfo_Multi();
+    if (object.bitarray !== undefined && object.bitarray !== null) {
+      message.bitarray = CompactBitArray.fromAmino(object.bitarray);
+    }
+    message.modeInfos = object.mode_infos?.map(e => ModeInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ModeInfo_Multi): ModeInfo_MultiAmino {
     const obj: any = {};
@@ -1830,12 +1932,18 @@ export const Fee = {
     return obj;
   },
   fromAmino(object: FeeAmino): Fee {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      gasLimit: BigInt(object.gas_limit),
-      payer: object.payer,
-      granter: object.granter
-    };
+    const message = createBaseFee();
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    if (object.gas_limit !== undefined && object.gas_limit !== null) {
+      message.gasLimit = BigInt(object.gas_limit);
+    }
+    if (object.payer !== undefined && object.payer !== null) {
+      message.payer = object.payer;
+    }
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    return message;
   },
   toAmino(message: Fee): FeeAmino {
     const obj: any = {};
@@ -1844,9 +1952,9 @@ export const Fee = {
     } else {
       obj.amount = [];
     }
-    obj.gas_limit = omitDefault(message.gasLimit);
-    obj.payer = omitDefault(message.payer);
-    obj.granter = omitDefault(message.granter);
+    obj.gas_limit = message.gasLimit ? message.gasLimit.toString() : undefined;
+    obj.payer = message.payer;
+    obj.granter = message.granter;
     return obj;
   },
   fromAminoMsg(object: FeeAminoMsg): Fee {
@@ -1953,10 +2061,12 @@ export const Tip = {
     return obj;
   },
   fromAmino(object: TipAmino): Tip {
-    return {
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : [],
-      tipper: object.tipper
-    };
+    const message = createBaseTip();
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    if (object.tipper !== undefined && object.tipper !== null) {
+      message.tipper = object.tipper;
+    }
+    return message;
   },
   toAmino(message: Tip): TipAmino {
     const obj: any = {};
@@ -1965,7 +2075,7 @@ export const Tip = {
     } else {
       obj.amount = [];
     }
-    obj.tipper = omitDefault(message.tipper);
+    obj.tipper = message.tipper;
     return obj;
   },
   fromAminoMsg(object: TipAminoMsg): Tip {
@@ -1993,7 +2103,7 @@ export const Tip = {
 function createBaseAuxSignerData(): AuxSignerData {
   return {
     address: "",
-    signDoc: SignDocDirectAux.fromPartial({}),
+    signDoc: undefined,
     mode: 0,
     sig: new Uint8Array()
   };
@@ -2090,19 +2200,27 @@ export const AuxSignerData = {
     return obj;
   },
   fromAmino(object: AuxSignerDataAmino): AuxSignerData {
-    return {
-      address: object.address,
-      signDoc: object?.sign_doc ? SignDocDirectAux.fromAmino(object.sign_doc) : undefined,
-      mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1,
-      sig: object.sig
-    };
+    const message = createBaseAuxSignerData();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.sign_doc !== undefined && object.sign_doc !== null) {
+      message.signDoc = SignDocDirectAux.fromAmino(object.sign_doc);
+    }
+    if (object.mode !== undefined && object.mode !== null) {
+      message.mode = signModeFromJSON(object.mode);
+    }
+    if (object.sig !== undefined && object.sig !== null) {
+      message.sig = bytesFromBase64(object.sig);
+    }
+    return message;
   },
   toAmino(message: AuxSignerData): AuxSignerDataAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = omitDefault(message.mode);
-    obj.sig = message.sig;
+    obj.mode = signModeToJSON(message.mode);
+    obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },
   fromAminoMsg(object: AuxSignerDataAminoMsg): AuxSignerData {

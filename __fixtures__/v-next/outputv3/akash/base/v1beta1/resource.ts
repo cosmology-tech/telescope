@@ -16,11 +16,7 @@ export interface CPUProtoMsg {
 /** CPU stores resource units and cpu config attributes */
 export interface CPUAmino {
   units?: ResourceValueAmino;
-  attributes: AttributeAmino[];
-}
-export interface CPUAminoMsg {
-  type: "/akash.base.v1beta1.CPU";
-  value: CPUAmino;
+  attributes?: AttributeAmino[];
 }
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
@@ -39,11 +35,7 @@ export interface MemoryProtoMsg {
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
-}
-export interface MemoryAminoMsg {
-  type: "/akash.base.v1beta1.Memory";
-  value: MemoryAmino;
+  attributes?: AttributeAmino[];
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
@@ -62,11 +54,7 @@ export interface StorageProtoMsg {
 /** Storage stores resource quantity and storage attributes */
 export interface StorageAmino {
   quantity?: ResourceValueAmino;
-  attributes: AttributeAmino[];
-}
-export interface StorageAminoMsg {
-  type: "/akash.base.v1beta1.Storage";
-  value: StorageAmino;
+  attributes?: AttributeAmino[];
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -95,11 +83,7 @@ export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
   storage?: StorageAmino;
-  endpoints: EndpointAmino[];
-}
-export interface ResourceUnitsAminoMsg {
-  type: "/akash.base.v1beta1.ResourceUnits";
-  value: ResourceUnitsAmino;
+  endpoints?: EndpointAmino[];
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -128,7 +112,7 @@ export const CPU = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CPU {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CPU {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCPU();
@@ -136,10 +120,10 @@ export const CPU = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.units = ResourceValue.decode(reader, reader.uint32());
+          message.units = ResourceValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -189,26 +173,25 @@ export const CPU = {
     return obj;
   },
   fromAmino(object: CPUAmino): CPU {
-    return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseCPU();
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromAmino(object.units);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: CPU): CPUAmino {
+  toAmino(message: CPU, useInterfaces: boolean = true): CPUAmino {
     const obj: any = {};
-    obj.units = message.units ? ResourceValue.toAmino(message.units) : undefined;
+    obj.units = message.units ? ResourceValue.toAmino(message.units, useInterfaces) : undefined;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: CPUAminoMsg): CPU {
-    return CPU.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CPUProtoMsg): CPU {
-    return CPU.decode(message.value);
+  fromProtoMsg(message: CPUProtoMsg, useInterfaces: boolean = true): CPU {
+    return CPU.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CPU): Uint8Array {
     return CPU.encode(message).finish();
@@ -237,7 +220,7 @@ export const Memory = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Memory {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Memory {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMemory();
@@ -245,10 +228,10 @@ export const Memory = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.quantity = ResourceValue.decode(reader, reader.uint32());
+          message.quantity = ResourceValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -298,26 +281,25 @@ export const Memory = {
     return obj;
   },
   fromAmino(object: MemoryAmino): Memory {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMemory();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Memory): MemoryAmino {
+  toAmino(message: Memory, useInterfaces: boolean = true): MemoryAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MemoryAminoMsg): Memory {
-    return Memory.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MemoryProtoMsg): Memory {
-    return Memory.decode(message.value);
+  fromProtoMsg(message: MemoryProtoMsg, useInterfaces: boolean = true): Memory {
+    return Memory.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Memory): Uint8Array {
     return Memory.encode(message).finish();
@@ -346,7 +328,7 @@ export const Storage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Storage {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Storage {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStorage();
@@ -354,10 +336,10 @@ export const Storage = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.quantity = ResourceValue.decode(reader, reader.uint32());
+          message.quantity = ResourceValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -407,26 +389,25 @@ export const Storage = {
     return obj;
   },
   fromAmino(object: StorageAmino): Storage {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseStorage();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Storage): StorageAmino {
+  toAmino(message: Storage, useInterfaces: boolean = true): StorageAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: StorageAminoMsg): Storage {
-    return Storage.fromAmino(object.value);
-  },
-  fromProtoMsg(message: StorageProtoMsg): Storage {
-    return Storage.decode(message.value);
+  fromProtoMsg(message: StorageProtoMsg, useInterfaces: boolean = true): Storage {
+    return Storage.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Storage): Uint8Array {
     return Storage.encode(message).finish();
@@ -463,7 +444,7 @@ export const ResourceUnits = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceUnits {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceUnits {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceUnits();
@@ -471,16 +452,16 @@ export const ResourceUnits = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cpu = CPU.decode(reader, reader.uint32());
+          message.cpu = CPU.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.memory = Memory.decode(reader, reader.uint32());
+          message.memory = Memory.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.storage = Storage.decode(reader, reader.uint32());
+          message.storage = Storage.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.endpoints.push(Endpoint.decode(reader, reader.uint32()));
+          message.endpoints.push(Endpoint.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -544,30 +525,33 @@ export const ResourceUnits = {
     return obj;
   },
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: object?.storage ? Storage.fromAmino(object.storage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromAmino(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromAmino(object.memory);
+    }
+    if (object.storage !== undefined && object.storage !== null) {
+      message.storage = Storage.fromAmino(object.storage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+  toAmino(message: ResourceUnits, useInterfaces: boolean = true): ResourceUnitsAmino {
     const obj: any = {};
-    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
-    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
-    obj.storage = message.storage ? Storage.toAmino(message.storage) : undefined;
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu, useInterfaces) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory, useInterfaces) : undefined;
+    obj.storage = message.storage ? Storage.toAmino(message.storage, useInterfaces) : undefined;
     if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.endpoints = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
-    return ResourceUnits.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
-    return ResourceUnits.decode(message.value);
+  fromProtoMsg(message: ResourceUnitsProtoMsg, useInterfaces: boolean = true): ResourceUnits {
+    return ResourceUnits.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceUnits): Uint8Array {
     return ResourceUnits.encode(message).finish();

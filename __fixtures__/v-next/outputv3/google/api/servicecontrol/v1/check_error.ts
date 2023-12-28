@@ -1,6 +1,6 @@
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -214,7 +214,7 @@ export interface CheckError {
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status: Status;
+  status?: Status;
 }
 export interface CheckErrorProtoMsg {
   typeUrl: "/google.api.servicecontrol.v1.CheckError";
@@ -226,7 +226,7 @@ export interface CheckErrorProtoMsg {
  */
 export interface CheckErrorAmino {
   /** The error code. */
-  code: CheckError_Code;
+  code?: CheckError_Code;
   /**
    * Subject to whom this error applies. See the specific code enum for more
    * details on this field. For example:
@@ -235,19 +235,15 @@ export interface CheckErrorAmino {
    * - "folder:<folder-id>"
    * - "organization:<organization-id>"
    */
-  subject: string;
+  subject?: string;
   /** Free-form text providing details on the error cause of the error. */
-  detail: string;
+  detail?: string;
   /**
    * Contains public information about the check error. If available,
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
   status?: StatusAmino;
-}
-export interface CheckErrorAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckError";
-  value: CheckErrorAmino;
 }
 /**
  * Defines the errors to be returned in
@@ -257,14 +253,14 @@ export interface CheckErrorSDKType {
   code: CheckError_Code;
   subject: string;
   detail: string;
-  status: StatusSDKType;
+  status?: StatusSDKType;
 }
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
     subject: "",
     detail: "",
-    status: Status.fromPartial({})
+    status: undefined
   };
 }
 export const CheckError = {
@@ -284,7 +280,7 @@ export const CheckError = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckError {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckError {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckError();
@@ -301,7 +297,7 @@ export const CheckError = {
           message.detail = reader.string();
           break;
         case 3:
-          message.status = Status.decode(reader, reader.uint32());
+          message.status = Status.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -353,26 +349,31 @@ export const CheckError = {
     return obj;
   },
   fromAmino(object: CheckErrorAmino): CheckError {
-    return {
-      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      detail: object.detail,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseCheckError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = checkError_CodeFromJSON(object.code);
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
-  toAmino(message: CheckError): CheckErrorAmino {
+  toAmino(message: CheckError, useInterfaces: boolean = true): CheckErrorAmino {
     const obj: any = {};
-    obj.code = omitDefault(message.code);
-    obj.subject = omitDefault(message.subject);
-    obj.detail = omitDefault(message.detail);
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.code = checkError_CodeToJSON(message.code);
+    obj.subject = message.subject;
+    obj.detail = message.detail;
+    obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
-    return CheckError.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
-    return CheckError.decode(message.value);
+  fromProtoMsg(message: CheckErrorProtoMsg, useInterfaces: boolean = true): CheckError {
+    return CheckError.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckError): Uint8Array {
     return CheckError.encode(message).finish();

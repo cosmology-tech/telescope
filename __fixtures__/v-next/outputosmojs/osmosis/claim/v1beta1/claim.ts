@@ -57,6 +57,10 @@ export interface ClaimRecord {
    */
   actionCompleted: boolean[];
 }
+export interface ClaimRecordProtoMsg {
+  typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";
+  value: Uint8Array;
+}
 /** A Claim Records is the metadata of claim data per address */
 export interface ClaimRecordSDKType {
   address: string;
@@ -175,11 +179,13 @@ export const ClaimRecord = {
     return obj;
   },
   fromAmino(object: ClaimRecordAmino): ClaimRecord {
-    return {
-      address: object.address,
-      initialClaimableAmount: Array.isArray(object?.initial_claimable_amount) ? object.initial_claimable_amount.map((e: any) => Coin.fromAmino(e)) : [],
-      actionCompleted: Array.isArray(object?.action_completed) ? object.action_completed.map((e: any) => e) : []
-    };
+    const message = createBaseClaimRecord();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    message.initialClaimableAmount = object.initial_claimable_amount?.map(e => Coin.fromAmino(e)) || [];
+    message.actionCompleted = object.action_completed?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ClaimRecord): ClaimRecordAmino {
     const obj: any = {};

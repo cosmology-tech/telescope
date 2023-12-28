@@ -9,6 +9,10 @@ export interface CPU {
   units: ResourceValue;
   attributes: Attribute[];
 }
+export interface CPUProtoMsg {
+  typeUrl: "/akash.base.v1beta1.CPU";
+  value: Uint8Array;
+}
 /** CPU stores resource units and cpu config attributes */
 export interface CPUSDKType {
   units: ResourceValueSDKType;
@@ -19,6 +23,10 @@ export interface Memory {
   quantity: ResourceValue;
   attributes: Attribute[];
 }
+export interface MemoryProtoMsg {
+  typeUrl: "/akash.base.v1beta1.Memory";
+  value: Uint8Array;
+}
 /** Memory stores resource quantity and memory attributes */
 export interface MemorySDKType {
   quantity: ResourceValueSDKType;
@@ -28,6 +36,10 @@ export interface MemorySDKType {
 export interface Storage {
   quantity: ResourceValue;
   attributes: Attribute[];
+}
+export interface StorageProtoMsg {
+  typeUrl: "/akash.base.v1beta1.Storage";
+  value: Uint8Array;
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageSDKType {
@@ -43,6 +55,10 @@ export interface ResourceUnits {
   memory?: Memory;
   storage?: Storage;
   endpoints: Endpoint[];
+}
+export interface ResourceUnitsProtoMsg {
+  typeUrl: "/akash.base.v1beta1.ResourceUnits";
+  value: Uint8Array;
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -136,10 +152,12 @@ export const CPU = {
     return obj;
   },
   fromAmino(object: CPUAmino): CPU {
-    return {
-      units: object?.units ? ResourceValue.fromAmino(object.units) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseCPU();
+    if (object.units !== undefined && object.units !== null) {
+      message.units = ResourceValue.fromAmino(object.units);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CPU): CPUAmino {
     const obj: any = {};
@@ -255,10 +273,12 @@ export const Memory = {
     return obj;
   },
   fromAmino(object: MemoryAmino): Memory {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseMemory();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Memory): MemoryAmino {
     const obj: any = {};
@@ -374,10 +394,12 @@ export const Storage = {
     return obj;
   },
   fromAmino(object: StorageAmino): Storage {
-    return {
-      quantity: object?.quantity ? ResourceValue.fromAmino(object.quantity) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBaseStorage();
+    if (object.quantity !== undefined && object.quantity !== null) {
+      message.quantity = ResourceValue.fromAmino(object.quantity);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Storage): StorageAmino {
     const obj: any = {};
@@ -519,12 +541,18 @@ export const ResourceUnits = {
     return obj;
   },
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: object?.storage ? Storage.fromAmino(object.storage) : undefined,
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromAmino(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromAmino(object.memory);
+    }
+    if (object.storage !== undefined && object.storage !== null) {
+      message.storage = Storage.fromAmino(object.storage);
+    }
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ResourceUnits): ResourceUnitsAmino {
     const obj: any = {};

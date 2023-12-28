@@ -10,7 +10,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: Any;
+  evidence?: Any;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
@@ -20,7 +20,7 @@ export interface MsgSubmitEvidenceResponse {
 function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   return {
     submitter: "",
-    evidence: Any.fromPartial({})
+    evidence: undefined
   };
 }
 export const MsgSubmitEvidence = {

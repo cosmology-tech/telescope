@@ -1,9 +1,11 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl } from '@cosmology/ast';
+import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl, createRpcClientImpl } from '@cosmology/ast';
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
+import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { BundlerFile } from 'src/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -12,6 +14,9 @@ export const plugin = (
     // if (!builder.options.rpcClients.enabled) {
     //     return;
     // }
+    const instantRpcBundlerFiles: {
+      [key: string]: BundlerFile[]
+    } = {};
 
     const mutationContexts = bundler
         .contexts
@@ -27,6 +32,8 @@ export const plugin = (
 
         if (c.proto.isExcluded()) return;
 
+        const useCamelCase = c.proto.pluginValue("rpcClients.camelCase");
+
         const localname = bundler.getLocalFilename(c.ref, 'rpc.msg');
         const filename = bundler.getFilename(localname);
         const ctx = bundler.getFreshContext(c);
@@ -40,8 +47,15 @@ export const plugin = (
             return;
         }
 
-        //////// 
+        ////////
         const asts = [];
+        const bundlerFile: BundlerFile = {
+          proto: c.ref.filename,
+          package: c.ref.proto.package,
+          localname,
+          filename,
+          isMsg: true
+        };
         switch (c.proto.pluginValue("rpcClients.type")) {
             case 'grpc-gateway':
                 asts.push(createGRPCGatewayMsgClass(ctx.generic, proto.Msg))
@@ -61,7 +75,54 @@ export const plugin = (
             case 'tendermint':
             default:
                 asts.push(createRpcClientInterface(ctx.generic, proto.Msg))
+
+                const svc = proto.Msg;
+                const instantOps = c.options.rpcClients?.instantOps ?? [];
+
+                instantOps.forEach((item) => {
+                  let nameMapping = {
+                    ...swapKeyValue(item.nameMapping?.All ?? {}),
+                    ...swapKeyValue(item.nameMapping?.Msg ?? {})
+                  };
+
+                  // get all query methods
+                  const patterns = item.include?.patterns;
+                  const methodKeys = getQueryMethodNames(
+                    bundlerFile.package,
+                    Object.keys(svc.methods ?? {}),
+                    patterns,
+                    useCamelCase ? camel : String
+                  );
+
+                  if(!methodKeys || !methodKeys.length){
+                    return
+                  }
+
+                  asts.push(
+                    createRpcClientInterface(
+                      ctx.generic,
+                      svc,
+                      item.className,
+                      methodKeys,
+                      nameMapping
+                    )
+                  );
+
+                  bundlerFile.instantExportedMethods = methodKeys.map((key) => svc.methods[key]);
+
+                  if(!instantRpcBundlerFiles[item.className]){
+                    instantRpcBundlerFiles[item.className] = [];
+                  }
+
+                  instantRpcBundlerFiles[item.className].push({...bundlerFile});
+                });
+
                 asts.push(createRpcClientClass(ctx.generic, proto.Msg))
+
+                const env = c.proto.pluginValue('env');
+                if(env === 'v-next'){
+                  asts.push(createRpcClientImpl(ctx.generic, svc));
+                }
         }
 
         ////////
@@ -92,4 +153,7 @@ export const plugin = (
 
     bundler.addRPCMsgClients(clients);
 
+    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
+      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    })
 };

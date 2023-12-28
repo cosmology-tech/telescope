@@ -36,21 +36,17 @@ export interface GenesisStateAmino {
   /** params are all the parameters of the module */
   params?: ParamsAmino;
   /** gauges are all gauges that should exist at genesis */
-  gauges: GaugeAmino[];
+  gauges?: GaugeAmino[];
   /**
    * lockable_durations are all lockup durations that gauges can be locked for
    * in order to recieve incentives
    */
-  lockable_durations: DurationAmino[];
+  lockable_durations?: DurationAmino[];
   /**
    * last_gauge_id is what the gauge number will increment from when creating
    * the next gauge after genesis
    */
-  last_gauge_id: string;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/incentives/genesis-state";
-  value: GenesisStateAmino;
+  last_gauge_id?: string;
 }
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -88,7 +84,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -96,13 +92,13 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.gauges.push(Gauge.decode(reader, reader.uint32()));
+          message.gauges.push(Gauge.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           message.lastGaugeId = reader.uint64();
@@ -175,40 +171,35 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromAmino(e)) : [],
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : [],
-      lastGaugeId: BigInt(object.last_gauge_id)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.gauges = object.gauges?.map(e => Gauge.fromAmino(e)) || [];
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    if (object.last_gauge_id !== undefined && object.last_gauge_id !== null) {
+      message.lastGaugeId = BigInt(object.last_gauge_id);
+    }
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.gauges) {
-      obj.gauges = message.gauges.map(e => e ? Gauge.toAmino(e) : undefined);
+      obj.gauges = message.gauges.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.gauges = [];
     }
     if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.lockable_durations = [];
     }
     obj.last_gauge_id = omitDefault(message.lastGaugeId);
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/incentives/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

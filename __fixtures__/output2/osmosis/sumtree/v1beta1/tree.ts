@@ -11,7 +11,7 @@ export interface Child {
   accumulation: string;
 }
 export interface Leaf {
-  leaf: Child;
+  leaf?: Child;
 }
 function createBaseNode(): Node {
   return {
@@ -119,7 +119,7 @@ export const Child = {
 };
 function createBaseLeaf(): Leaf {
   return {
-    leaf: Child.fromPartial({})
+    leaf: undefined
   };
 }
 export const Leaf = {

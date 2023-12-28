@@ -27,13 +27,9 @@ export interface DenomTraceAmino {
    * path defines the chain of port/channel identifiers used for tracing the
    * source of the fungible token.
    */
-  path: string;
+  path?: string;
   /** base denomination of the relayed fungible token. */
-  base_denom: string;
-}
-export interface DenomTraceAminoMsg {
-  type: "cosmos-sdk/DenomTrace";
-  value: DenomTraceAmino;
+  base_denom?: string;
 }
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -76,16 +72,12 @@ export interface ParamsAmino {
    * send_enabled enables or disables all cross-chain token transfers from this
    * chain.
    */
-  send_enabled: boolean;
+  send_enabled?: boolean;
   /**
    * receive_enabled enables or disables all cross-chain token transfers to this
    * chain.
    */
-  receive_enabled: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
+  receive_enabled?: boolean;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -115,7 +107,7 @@ export const DenomTrace = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DenomTrace {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DenomTrace {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomTrace();
@@ -166,28 +158,23 @@ export const DenomTrace = {
     return obj;
   },
   fromAmino(object: DenomTraceAmino): DenomTrace {
-    return {
-      path: object.path,
-      baseDenom: object.base_denom
-    };
+    const message = createBaseDenomTrace();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.base_denom !== undefined && object.base_denom !== null) {
+      message.baseDenom = object.base_denom;
+    }
+    return message;
   },
-  toAmino(message: DenomTrace): DenomTraceAmino {
+  toAmino(message: DenomTrace, useInterfaces: boolean = true): DenomTraceAmino {
     const obj: any = {};
     obj.path = omitDefault(message.path);
     obj.base_denom = omitDefault(message.baseDenom);
     return obj;
   },
-  fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
-    return DenomTrace.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomTrace): DenomTraceAminoMsg {
-    return {
-      type: "cosmos-sdk/DenomTrace",
-      value: DenomTrace.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DenomTraceProtoMsg): DenomTrace {
-    return DenomTrace.decode(message.value);
+  fromProtoMsg(message: DenomTraceProtoMsg, useInterfaces: boolean = true): DenomTrace {
+    return DenomTrace.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DenomTrace): Uint8Array {
     return DenomTrace.encode(message).finish();
@@ -217,7 +204,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -268,28 +255,23 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: object.send_enabled,
-      receiveEnabled: object.receive_enabled
-    };
+    const message = createBaseParams();
+    if (object.send_enabled !== undefined && object.send_enabled !== null) {
+      message.sendEnabled = object.send_enabled;
+    }
+    if (object.receive_enabled !== undefined && object.receive_enabled !== null) {
+      message.receiveEnabled = object.receive_enabled;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.send_enabled = omitDefault(message.sendEnabled);
     obj.receive_enabled = omitDefault(message.receiveEnabled);
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "cosmos-sdk/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

@@ -7,6 +7,10 @@ export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
 }
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.SourceInfo";
+  value: Uint8Array;
+}
 /** Source information used to create a Service Config */
 export interface SourceInfoSDKType {
   source_files: AnySDKType[];
@@ -80,9 +84,9 @@ export const SourceInfo = {
     return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseSourceInfo();
+    message.sourceFiles = object.source_files?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};

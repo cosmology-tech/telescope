@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
@@ -38,7 +38,7 @@ export interface Plan {
    * If this field is not empty, an error will be thrown.
    */
   /** @deprecated */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
 }
 export interface PlanProtoMsg {
   typeUrl: "/cosmos.upgrade.v1beta1.Plan";
@@ -55,24 +55,24 @@ export interface PlanAmino {
    * assumed that the software is out-of-date when the upgrade Time or Height is
    * reached and the software will exit.
    */
-  name: string;
+  name?: string;
   /**
    * Deprecated: Time based upgrades have been deprecated. Time based upgrade logic
    * has been removed from the SDK.
    * If this field is not empty, an error will be thrown.
    */
   /** @deprecated */
-  time?: Date;
+  time?: string;
   /**
    * The height at which the upgrade must be performed.
    * Only used if Time is not set.
    */
-  height: string;
+  height?: string;
   /**
    * Any application specific upgrade info to be included on-chain
    * such as a git commit that validators could automatically upgrade to
    */
-  info: string;
+  info?: string;
   /**
    * Deprecated: UpgradedClientState field has been deprecated. IBC upgrade logic has been
    * moved to the IBC module in the sub module 02-client.
@@ -93,7 +93,7 @@ export interface PlanSDKType {
   height: bigint;
   info: string;
   /** @deprecated */
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 /**
  * SoftwareUpgradeProposal is a gov Content type for initiating a software
@@ -119,8 +119,8 @@ export interface SoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface SoftwareUpgradeProposalAmino {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   plan?: PlanAmino;
 }
 export interface SoftwareUpgradeProposalAminoMsg {
@@ -162,8 +162,8 @@ export interface CancelSoftwareUpgradeProposalProtoMsg {
  */
 /** @deprecated */
 export interface CancelSoftwareUpgradeProposalAmino {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
 }
 export interface CancelSoftwareUpgradeProposalAminoMsg {
   type: "cosmos-sdk/CancelSoftwareUpgradeProposal";
@@ -202,9 +202,9 @@ export interface ModuleVersionProtoMsg {
  */
 export interface ModuleVersionAmino {
   /** name of the app module */
-  name: string;
+  name?: string;
   /** consensus version of the app module */
-  version: string;
+  version?: string;
 }
 export interface ModuleVersionAminoMsg {
   type: "cosmos-sdk/ModuleVersion";
@@ -225,7 +225,7 @@ function createBasePlan(): Plan {
     time: new Date(),
     height: BigInt(0),
     info: "",
-    upgradedClientState: Any.fromPartial({})
+    upgradedClientState: undefined
   };
 }
 export const Plan = {
@@ -328,20 +328,30 @@ export const Plan = {
     return obj;
   },
   fromAmino(object: PlanAmino): Plan {
-    return {
-      name: object.name,
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
-      height: BigInt(object.height),
-      info: object.info,
-      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
+    const message = createBasePlan();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = object.info;
+    }
+    if (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null) {
+      message.upgradedClientState = Any.fromAmino(object.upgraded_client_state);
+    }
+    return message;
   },
   toAmino(message: Plan): PlanAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.time = message.time;
-    obj.height = omitDefault(message.height);
-    obj.info = omitDefault(message.info);
+    obj.name = message.name;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.info = message.info;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
     return obj;
   },
@@ -450,16 +460,22 @@ export const SoftwareUpgradeProposal = {
     return obj;
   },
   fromAmino(object: SoftwareUpgradeProposalAmino): SoftwareUpgradeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
-    };
+    const message = createBaseSoftwareUpgradeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromAmino(object.plan);
+    }
+    return message;
   },
   toAmino(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
     return obj;
   },
@@ -554,15 +570,19 @@ export const CancelSoftwareUpgradeProposal = {
     return obj;
   },
   fromAmino(object: CancelSoftwareUpgradeProposalAmino): CancelSoftwareUpgradeProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
+    const message = createBaseCancelSoftwareUpgradeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     return obj;
   },
   fromAminoMsg(object: CancelSoftwareUpgradeProposalAminoMsg): CancelSoftwareUpgradeProposal {
@@ -658,15 +678,19 @@ export const ModuleVersion = {
     return obj;
   },
   fromAmino(object: ModuleVersionAmino): ModuleVersion {
-    return {
-      name: object.name,
-      version: BigInt(object.version)
-    };
+    const message = createBaseModuleVersion();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    return message;
   },
   toAmino(message: ModuleVersion): ModuleVersionAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.version = omitDefault(message.version);
+    obj.name = message.name;
+    obj.version = message.version ? message.version.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleVersionAminoMsg): ModuleVersion {

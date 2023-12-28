@@ -214,14 +214,14 @@ export interface CheckError {
    * `status.code` will be non zero and client can propagate it out as public
    * error.
    */
-  status: Status;
+  status?: Status;
 }
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
     subject: "",
     detail: "",
-    status: Status.fromPartial({})
+    status: undefined
   };
 }
 export const CheckError = {

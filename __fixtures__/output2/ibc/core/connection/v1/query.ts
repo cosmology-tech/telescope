@@ -22,7 +22,7 @@ export interface QueryConnectionRequest {
  */
 export interface QueryConnectionResponse {
   /** connection associated with the request identifier */
-  connection: ConnectionEnd;
+  connection?: ConnectionEnd;
   /** merkle proof of existence */
   proof: Uint8Array;
   /** height at which the proof was retrieved */
@@ -33,7 +33,7 @@ export interface QueryConnectionResponse {
  * method
  */
 export interface QueryConnectionsRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryConnectionsResponse is the response type for the Query/Connections RPC
@@ -43,7 +43,7 @@ export interface QueryConnectionsResponse {
   /** list of stored connections of the chain. */
   connections: IdentifiedConnection[];
   /** pagination response */
-  pagination: PageResponse;
+  pagination?: PageResponse;
   /** query block height */
   height: Height;
 }
@@ -81,7 +81,7 @@ export interface QueryConnectionClientStateRequest {
  */
 export interface QueryConnectionClientStateResponse {
   /** client state associated with the channel */
-  identifiedClientState: IdentifiedClientState;
+  identifiedClientState?: IdentifiedClientState;
   /** merkle proof of existence */
   proof: Uint8Array;
   /** height at which the proof was retrieved */
@@ -103,7 +103,7 @@ export interface QueryConnectionConsensusStateRequest {
  */
 export interface QueryConnectionConsensusStateResponse {
   /** consensus state associated with the channel */
-  consensusState: Any;
+  consensusState?: Any;
   /** client ID associated with the consensus state */
   clientId: string;
   /** merkle proof of existence */
@@ -158,7 +158,7 @@ export const QueryConnectionRequest = {
 };
 function createBaseQueryConnectionResponse(): QueryConnectionResponse {
   return {
-    connection: ConnectionEnd.fromPartial({}),
+    connection: undefined,
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
@@ -223,7 +223,7 @@ export const QueryConnectionResponse = {
 };
 function createBaseQueryConnectionsRequest(): QueryConnectionsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryConnectionsRequest = {
@@ -269,7 +269,7 @@ export const QueryConnectionsRequest = {
 function createBaseQueryConnectionsResponse(): QueryConnectionsResponse {
   return {
     connections: [],
-    pagination: PageResponse.fromPartial({}),
+    pagination: undefined,
     height: Height.fromPartial({})
   };
 }
@@ -496,7 +496,7 @@ export const QueryConnectionClientStateRequest = {
 };
 function createBaseQueryConnectionClientStateResponse(): QueryConnectionClientStateResponse {
   return {
-    identifiedClientState: IdentifiedClientState.fromPartial({}),
+    identifiedClientState: undefined,
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})
   };
@@ -626,7 +626,7 @@ export const QueryConnectionConsensusStateRequest = {
 };
 function createBaseQueryConnectionConsensusStateResponse(): QueryConnectionConsensusStateResponse {
   return {
-    consensusState: Any.fromPartial({}),
+    consensusState: undefined,
     clientId: "",
     proof: new Uint8Array(),
     proofHeight: Height.fromPartial({})

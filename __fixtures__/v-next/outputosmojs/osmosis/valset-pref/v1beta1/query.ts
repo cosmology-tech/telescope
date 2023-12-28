@@ -7,6 +7,10 @@ export interface UserValidatorPreferencesRequest {
   /** user account address */
   address: string;
 }
+export interface UserValidatorPreferencesRequestProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesRequest";
+  value: Uint8Array;
+}
 /** Request type for UserValidatorPreferences. */
 export interface UserValidatorPreferencesRequestSDKType {
   address: string;
@@ -14,6 +18,10 @@ export interface UserValidatorPreferencesRequestSDKType {
 /** Response type the QueryUserValidatorPreferences query request */
 export interface UserValidatorPreferencesResponse {
   preferences: ValidatorPreference[];
+}
+export interface UserValidatorPreferencesResponseProtoMsg {
+  typeUrl: "/osmosis.valsetpref.v1beta1.UserValidatorPreferencesResponse";
+  value: Uint8Array;
 }
 /** Response type the QueryUserValidatorPreferences query request */
 export interface UserValidatorPreferencesResponseSDKType {
@@ -80,9 +88,11 @@ export const UserValidatorPreferencesRequest = {
     return obj;
   },
   fromAmino(object: UserValidatorPreferencesRequestAmino): UserValidatorPreferencesRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseUserValidatorPreferencesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: UserValidatorPreferencesRequest): UserValidatorPreferencesRequestAmino {
     const obj: any = {};
@@ -180,9 +190,9 @@ export const UserValidatorPreferencesResponse = {
     return obj;
   },
   fromAmino(object: UserValidatorPreferencesResponseAmino): UserValidatorPreferencesResponse {
-    return {
-      preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromAmino(e)) : []
-    };
+    const message = createBaseUserValidatorPreferencesResponse();
+    message.preferences = object.preferences?.map(e => ValidatorPreference.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UserValidatorPreferencesResponse): UserValidatorPreferencesResponseAmino {
     const obj: any = {};

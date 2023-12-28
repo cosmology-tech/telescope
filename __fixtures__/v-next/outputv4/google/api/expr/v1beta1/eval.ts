@@ -19,6 +19,10 @@ export interface EvalState {
    */
   results: EvalState_Result[];
 }
+export interface EvalStateProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.EvalState";
+  value: Uint8Array;
+}
 /**
  * The state of an evaluation.
  * 
@@ -31,13 +35,17 @@ export interface EvalStateSDKType {
 /** A single evaluation result. */
 export interface EvalState_Result {
   /** The expression this result is for. */
-  expr: IdRef;
+  expr?: IdRef;
   /** The index in `values` of the resulting value. */
   value: number;
 }
+export interface EvalState_ResultProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Result";
+  value: Uint8Array;
+}
 /** A single evaluation result. */
 export interface EvalState_ResultSDKType {
-  expr: IdRefSDKType;
+  expr?: IdRefSDKType;
   value: number;
 }
 /** The value of an evaluated expression. */
@@ -91,6 +99,10 @@ export interface ExprValue {
    */
   unknown?: UnknownSet;
 }
+export interface ExprValueProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ExprValue";
+  value: Uint8Array;
+}
 /** The value of an evaluated expression. */
 export interface ExprValueSDKType {
   value?: ValueSDKType;
@@ -105,6 +117,10 @@ export interface ExprValueSDKType {
 export interface ErrorSet {
   /** The errors in the set. */
   errors: Status[];
+}
+export interface ErrorSetProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ErrorSet";
+  value: Uint8Array;
 }
 /**
  * A set of errors.
@@ -123,6 +139,10 @@ export interface UnknownSet {
   /** The ids of the expressions with unknown values. */
   exprs: IdRef[];
 }
+export interface UnknownSetProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.UnknownSet";
+  value: Uint8Array;
+}
 /**
  * A set of expressions for which the value is unknown.
  * 
@@ -135,6 +155,10 @@ export interface UnknownSetSDKType {
 export interface IdRef {
   /** The expression id. */
   id: number;
+}
+export interface IdRefProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.IdRef";
+  value: Uint8Array;
 }
 /** A reference to an expression id. */
 export interface IdRefSDKType {
@@ -230,10 +254,10 @@ export const EvalState = {
     return obj;
   },
   fromAmino(object: EvalStateAmino): EvalState {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => ExprValue.fromAmino(e)) : [],
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromAmino(e)) : []
-    };
+    const message = createBaseEvalState();
+    message.values = object.values?.map(e => ExprValue.fromAmino(e)) || [];
+    message.results = object.results?.map(e => EvalState_Result.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: EvalState): EvalStateAmino {
     const obj: any = {};
@@ -267,7 +291,7 @@ export const EvalState = {
 };
 function createBaseEvalState_Result(): EvalState_Result {
   return {
-    expr: IdRef.fromPartial({}),
+    expr: undefined,
     value: 0
   };
 }
@@ -277,7 +301,7 @@ export const EvalState_Result = {
     if (message.expr !== undefined) {
       IdRef.encode(message.expr, writer.uint32(10).fork()).ldelim();
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -341,10 +365,14 @@ export const EvalState_Result = {
     return obj;
   },
   fromAmino(object: EvalState_ResultAmino): EvalState_Result {
-    return {
-      expr: object?.expr ? IdRef.fromAmino(object.expr) : undefined,
-      value: object.value
-    };
+    const message = createBaseEvalState_Result();
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = IdRef.fromAmino(object.expr);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
     const obj: any = {};
@@ -461,11 +489,17 @@ export const ExprValue = {
     return obj;
   },
   fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      value: object?.value ? Value.fromAmino(object.value) : undefined,
-      error: object?.error ? ErrorSet.fromAmino(object.error) : undefined,
-      unknown: object?.unknown ? UnknownSet.fromAmino(object.unknown) : undefined
-    };
+    const message = createBaseExprValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = ErrorSet.fromAmino(object.error);
+    }
+    if (object.unknown !== undefined && object.unknown !== null) {
+      message.unknown = UnknownSet.fromAmino(object.unknown);
+    }
+    return message;
   },
   toAmino(message: ExprValue): ExprValueAmino {
     const obj: any = {};
@@ -559,9 +593,9 @@ export const ErrorSet = {
     return obj;
   },
   fromAmino(object: ErrorSetAmino): ErrorSet {
-    return {
-      errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseErrorSet();
+    message.errors = object.errors?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ErrorSet): ErrorSetAmino {
     const obj: any = {};
@@ -657,9 +691,9 @@ export const UnknownSet = {
     return obj;
   },
   fromAmino(object: UnknownSetAmino): UnknownSet {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
-    };
+    const message = createBaseUnknownSet();
+    message.exprs = object.exprs?.map(e => IdRef.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: UnknownSet): UnknownSetAmino {
     const obj: any = {};
@@ -694,7 +728,7 @@ function createBaseIdRef(): IdRef {
 export const IdRef = {
   typeUrl: "/google.api.expr.v1beta1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id !== undefined) {
       writer.uint32(8).int32(message.id);
     }
     return writer;
@@ -747,9 +781,11 @@ export const IdRef = {
     return obj;
   },
   fromAmino(object: IdRefAmino): IdRef {
-    return {
-      id: object.id
-    };
+    const message = createBaseIdRef();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};

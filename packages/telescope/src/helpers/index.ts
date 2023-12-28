@@ -1,6 +1,7 @@
 export * from './external';
+export * from './external-comet';
 export * from './internal';
-export * from './internalForBigInt';
+export * from './internal-for-bigint';
 export * from './react-query';
 export * from './mobx';
 export * from './grpc-gateway';
@@ -9,3 +10,5 @@ export * from './pinia-endpoint';
 export * from './varint';
 export * from './utf8-helper';
 export * from './binary-coder';
+export * from './types-helper';
+export * from './registry-helper';

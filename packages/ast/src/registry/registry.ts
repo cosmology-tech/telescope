@@ -16,7 +16,29 @@ export const createTypeRegistryObject = (mutation: ServiceMethod) => {
 };
 
 export const createTypeRegistry = (context: AminoParseContext, mutations: ServiceMethod[]) => {
-  context.addUtil('GeneratedType');
+  const useTelescopeGeneratedType = context.pluginValue('prototypes.typingsFormat.useTelescopeGeneratedType');
+  let generatedTypeExpr;
+
+  if(useTelescopeGeneratedType){
+    context.addUtil('TelescopeGeneratedType');
+
+    generatedTypeExpr = t.tsTypeReference(
+      t.identifier('TelescopeGeneratedType'),
+      t.tsTypeParameterInstantiation(
+        [
+          t.tsAnyKeyword(),
+          t.tsAnyKeyword(),
+          t.tsAnyKeyword()
+        ]
+      )
+    )
+  } else {
+    context.addUtil('GeneratedType');
+
+    generatedTypeExpr = t.tsTypeReference(
+      t.identifier('GeneratedType')
+    )
+  }
 
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
@@ -27,9 +49,7 @@ export const createTypeRegistry = (context: AminoParseContext, mutations: Servic
             [
               t.tsTupleType([
                 t.tsStringKeyword(),
-                t.tsTypeReference(
-                  t.identifier('GeneratedType')
-                )]
+                generatedTypeExpr]
               )
             ]
           ))

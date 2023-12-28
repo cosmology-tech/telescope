@@ -1,12 +1,16 @@
 import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, VotingParams, VotingParamsSDKType, DepositParams, DepositParamsSDKType, TallyParams, TallyParamsSDKType, Deposit, DepositSDKType, TallyResult, TallyResultSDKType, proposalStatusFromJSON, proposalStatusToJSON } from "./gov";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1";
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: bigint;
+}
+export interface QueryProposalRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryProposalRequest";
+  value: Uint8Array;
 }
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequestSDKType {
@@ -14,11 +18,15 @@ export interface QueryProposalRequestSDKType {
 }
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponse {
-  proposal: Proposal;
+  proposal?: Proposal;
+}
+export interface QueryProposalResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryProposalResponse";
+  value: Uint8Array;
 }
 /** QueryProposalResponse is the response type for the Query/Proposal RPC method. */
 export interface QueryProposalResponseSDKType {
-  proposal: ProposalSDKType;
+  proposal?: ProposalSDKType;
 }
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequest {
@@ -29,14 +37,18 @@ export interface QueryProposalsRequest {
   /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryProposalsRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryProposalsRequest";
+  value: Uint8Array;
 }
 /** QueryProposalsRequest is the request type for the Query/Proposals RPC method. */
 export interface QueryProposalsRequestSDKType {
   proposal_status: ProposalStatus;
   voter: string;
   depositor: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
@@ -45,7 +57,11 @@ export interface QueryProposalsRequestSDKType {
 export interface QueryProposalsResponse {
   proposals: Proposal[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryProposalsResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryProposalsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryProposalsResponse is the response type for the Query/Proposals RPC
@@ -53,7 +69,7 @@ export interface QueryProposalsResponse {
  */
 export interface QueryProposalsResponseSDKType {
   proposals: ProposalSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequest {
@@ -61,6 +77,10 @@ export interface QueryVoteRequest {
   proposalId: bigint;
   /** voter defines the oter address for the proposals. */
   voter: string;
+}
+export interface QueryVoteRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryVoteRequest";
+  value: Uint8Array;
 }
 /** QueryVoteRequest is the request type for the Query/Vote RPC method. */
 export interface QueryVoteRequestSDKType {
@@ -70,35 +90,47 @@ export interface QueryVoteRequestSDKType {
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponse {
   /** vote defined the queried vote. */
-  vote: Vote;
+  vote?: Vote;
+}
+export interface QueryVoteResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryVoteResponse";
+  value: Uint8Array;
 }
 /** QueryVoteResponse is the response type for the Query/Vote RPC method. */
 export interface QueryVoteResponseSDKType {
-  vote: VoteSDKType;
+  vote?: VoteSDKType;
 }
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: bigint;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryVotesRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryVotesRequest";
+  value: Uint8Array;
 }
 /** QueryVotesRequest is the request type for the Query/Votes RPC method. */
 export interface QueryVotesRequestSDKType {
   proposal_id: bigint;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponse {
   /** votes defined the queried votes. */
   votes: Vote[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryVotesResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryVotesResponse";
+  value: Uint8Array;
 }
 /** QueryVotesResponse is the response type for the Query/Votes RPC method. */
 export interface QueryVotesResponseSDKType {
   votes: VoteSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -108,6 +140,10 @@ export interface QueryParamsRequest {
    */
   paramsType: string;
 }
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {
   params_type: string;
@@ -115,17 +151,21 @@ export interface QueryParamsRequestSDKType {
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** voting_params defines the parameters related to voting. */
-  votingParams: VotingParams;
+  votingParams?: VotingParams;
   /** deposit_params defines the parameters related to deposit. */
-  depositParams: DepositParams;
+  depositParams?: DepositParams;
   /** tally_params defines the parameters related to tally. */
-  tallyParams: TallyParams;
+  tallyParams?: TallyParams;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  voting_params: VotingParamsSDKType;
-  deposit_params: DepositParamsSDKType;
-  tally_params: TallyParamsSDKType;
+  voting_params?: VotingParamsSDKType;
+  deposit_params?: DepositParamsSDKType;
+  tally_params?: TallyParamsSDKType;
 }
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequest {
@@ -133,6 +173,10 @@ export interface QueryDepositRequest {
   proposalId: bigint;
   /** depositor defines the deposit addresses from the proposals. */
   depositor: string;
+}
+export interface QueryDepositRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryDepositRequest";
+  value: Uint8Array;
 }
 /** QueryDepositRequest is the request type for the Query/Deposit RPC method. */
 export interface QueryDepositRequestSDKType {
@@ -142,39 +186,55 @@ export interface QueryDepositRequestSDKType {
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponse {
   /** deposit defines the requested deposit. */
-  deposit: Deposit;
+  deposit?: Deposit;
+}
+export interface QueryDepositResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryDepositResponse";
+  value: Uint8Array;
 }
 /** QueryDepositResponse is the response type for the Query/Deposit RPC method. */
 export interface QueryDepositResponseSDKType {
-  deposit: DepositSDKType;
+  deposit?: DepositSDKType;
 }
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: bigint;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryDepositsRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryDepositsRequest";
+  value: Uint8Array;
 }
 /** QueryDepositsRequest is the request type for the Query/Deposits RPC method. */
 export interface QueryDepositsRequestSDKType {
   proposal_id: bigint;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponse {
   deposits: Deposit[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryDepositsResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryDepositsResponse";
+  value: Uint8Array;
 }
 /** QueryDepositsResponse is the response type for the Query/Deposits RPC method. */
 export interface QueryDepositsResponseSDKType {
   deposits: DepositSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequest {
   /** proposal_id defines the unique id of the proposal. */
   proposalId: bigint;
+}
+export interface QueryTallyResultRequestProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryTallyResultRequest";
+  value: Uint8Array;
 }
 /** QueryTallyResultRequest is the request type for the Query/Tally RPC method. */
 export interface QueryTallyResultRequestSDKType {
@@ -183,11 +243,15 @@ export interface QueryTallyResultRequestSDKType {
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponse {
   /** tally defines the requested tally. */
-  tally: TallyResult;
+  tally?: TallyResult;
+}
+export interface QueryTallyResultResponseProtoMsg {
+  typeUrl: "/cosmos.gov.v1.QueryTallyResultResponse";
+  value: Uint8Array;
 }
 /** QueryTallyResultResponse is the response type for the Query/Tally RPC method. */
 export interface QueryTallyResultResponseSDKType {
-  tally: TallyResultSDKType;
+  tally?: TallyResultSDKType;
 }
 function createBaseQueryProposalRequest(): QueryProposalRequest {
   return {
@@ -250,13 +314,15 @@ export const QueryProposalRequest = {
     return obj;
   },
   fromAmino(object: QueryProposalRequestAmino): QueryProposalRequest {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseQueryProposalRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: QueryProposalRequest): QueryProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProposalRequestAminoMsg): QueryProposalRequest {
@@ -283,7 +349,7 @@ export const QueryProposalRequest = {
 };
 function createBaseQueryProposalResponse(): QueryProposalResponse {
   return {
-    proposal: Proposal.fromPartial({})
+    proposal: undefined
   };
 }
 export const QueryProposalResponse = {
@@ -342,9 +408,11 @@ export const QueryProposalResponse = {
     return obj;
   },
   fromAmino(object: QueryProposalResponseAmino): QueryProposalResponse {
-    return {
-      proposal: object?.proposal ? Proposal.fromAmino(object.proposal) : undefined
-    };
+    const message = createBaseQueryProposalResponse();
+    if (object.proposal !== undefined && object.proposal !== null) {
+      message.proposal = Proposal.fromAmino(object.proposal);
+    }
+    return message;
   },
   toAmino(message: QueryProposalResponse): QueryProposalResponseAmino {
     const obj: any = {};
@@ -378,7 +446,7 @@ function createBaseQueryProposalsRequest(): QueryProposalsRequest {
     proposalStatus: 0,
     voter: "",
     depositor: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProposalsRequest = {
@@ -473,18 +541,26 @@ export const QueryProposalsRequest = {
     return obj;
   },
   fromAmino(object: QueryProposalsRequestAmino): QueryProposalsRequest {
-    return {
-      proposalStatus: isSet(object.proposal_status) ? proposalStatusFromJSON(object.proposal_status) : -1,
-      voter: object.voter,
-      depositor: object.depositor,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProposalsRequest();
+    if (object.proposal_status !== undefined && object.proposal_status !== null) {
+      message.proposalStatus = proposalStatusFromJSON(object.proposal_status);
+    }
+    if (object.voter !== undefined && object.voter !== null) {
+      message.voter = object.voter;
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProposalsRequest): QueryProposalsRequestAmino {
     const obj: any = {};
-    obj.proposal_status = omitDefault(message.proposalStatus);
-    obj.voter = omitDefault(message.voter);
-    obj.depositor = omitDefault(message.depositor);
+    obj.proposal_status = proposalStatusToJSON(message.proposalStatus);
+    obj.voter = message.voter;
+    obj.depositor = message.depositor;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -513,7 +589,7 @@ export const QueryProposalsRequest = {
 function createBaseQueryProposalsResponse(): QueryProposalsResponse {
   return {
     proposals: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProposalsResponse = {
@@ -592,10 +668,12 @@ export const QueryProposalsResponse = {
     return obj;
   },
   fromAmino(object: QueryProposalsResponseAmino): QueryProposalsResponse {
-    return {
-      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProposalsResponse();
+    message.proposals = object.proposals?.map(e => Proposal.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryProposalsResponse): QueryProposalsResponseAmino {
     const obj: any = {};
@@ -703,15 +781,19 @@ export const QueryVoteRequest = {
     return obj;
   },
   fromAmino(object: QueryVoteRequestAmino): QueryVoteRequest {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter
-    };
+    const message = createBaseQueryVoteRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.voter !== undefined && object.voter !== null) {
+      message.voter = object.voter;
+    }
+    return message;
   },
   toAmino(message: QueryVoteRequest): QueryVoteRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
-    obj.voter = omitDefault(message.voter);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.voter = message.voter;
     return obj;
   },
   fromAminoMsg(object: QueryVoteRequestAminoMsg): QueryVoteRequest {
@@ -738,7 +820,7 @@ export const QueryVoteRequest = {
 };
 function createBaseQueryVoteResponse(): QueryVoteResponse {
   return {
-    vote: Vote.fromPartial({})
+    vote: undefined
   };
 }
 export const QueryVoteResponse = {
@@ -797,9 +879,11 @@ export const QueryVoteResponse = {
     return obj;
   },
   fromAmino(object: QueryVoteResponseAmino): QueryVoteResponse {
-    return {
-      vote: object?.vote ? Vote.fromAmino(object.vote) : undefined
-    };
+    const message = createBaseQueryVoteResponse();
+    if (object.vote !== undefined && object.vote !== null) {
+      message.vote = Vote.fromAmino(object.vote);
+    }
+    return message;
   },
   toAmino(message: QueryVoteResponse): QueryVoteResponseAmino {
     const obj: any = {};
@@ -831,7 +915,7 @@ export const QueryVoteResponse = {
 function createBaseQueryVotesRequest(): QueryVotesRequest {
   return {
     proposalId: BigInt(0),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryVotesRequest = {
@@ -902,14 +986,18 @@ export const QueryVotesRequest = {
     return obj;
   },
   fromAmino(object: QueryVotesRequestAmino): QueryVotesRequest {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryVotesRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryVotesRequest): QueryVotesRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -938,7 +1026,7 @@ export const QueryVotesRequest = {
 function createBaseQueryVotesResponse(): QueryVotesResponse {
   return {
     votes: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryVotesResponse = {
@@ -1017,10 +1105,12 @@ export const QueryVotesResponse = {
     return obj;
   },
   fromAmino(object: QueryVotesResponseAmino): QueryVotesResponse {
-    return {
-      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryVotesResponse();
+    message.votes = object.votes?.map(e => Vote.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryVotesResponse): QueryVotesResponseAmino {
     const obj: any = {};
@@ -1115,13 +1205,15 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(object: QueryParamsRequestAmino): QueryParamsRequest {
-    return {
-      paramsType: object.params_type
-    };
+    const message = createBaseQueryParamsRequest();
+    if (object.params_type !== undefined && object.params_type !== null) {
+      message.paramsType = object.params_type;
+    }
+    return message;
   },
   toAmino(message: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
-    obj.params_type = omitDefault(message.paramsType);
+    obj.params_type = message.paramsType;
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
@@ -1148,9 +1240,9 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    votingParams: VotingParams.fromPartial({}),
-    depositParams: DepositParams.fromPartial({}),
-    tallyParams: TallyParams.fromPartial({})
+    votingParams: undefined,
+    depositParams: undefined,
+    tallyParams: undefined
   };
 }
 export const QueryParamsResponse = {
@@ -1233,11 +1325,17 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      votingParams: object?.voting_params ? VotingParams.fromAmino(object.voting_params) : undefined,
-      depositParams: object?.deposit_params ? DepositParams.fromAmino(object.deposit_params) : undefined,
-      tallyParams: object?.tally_params ? TallyParams.fromAmino(object.tally_params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.voting_params !== undefined && object.voting_params !== null) {
+      message.votingParams = VotingParams.fromAmino(object.voting_params);
+    }
+    if (object.deposit_params !== undefined && object.deposit_params !== null) {
+      message.depositParams = DepositParams.fromAmino(object.deposit_params);
+    }
+    if (object.tally_params !== undefined && object.tally_params !== null) {
+      message.tallyParams = TallyParams.fromAmino(object.tally_params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -1342,15 +1440,19 @@ export const QueryDepositRequest = {
     return obj;
   },
   fromAmino(object: QueryDepositRequestAmino): QueryDepositRequest {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      depositor: object.depositor
-    };
+    const message = createBaseQueryDepositRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
   toAmino(message: QueryDepositRequest): QueryDepositRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
-    obj.depositor = omitDefault(message.depositor);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.depositor = message.depositor;
     return obj;
   },
   fromAminoMsg(object: QueryDepositRequestAminoMsg): QueryDepositRequest {
@@ -1377,7 +1479,7 @@ export const QueryDepositRequest = {
 };
 function createBaseQueryDepositResponse(): QueryDepositResponse {
   return {
-    deposit: Deposit.fromPartial({})
+    deposit: undefined
   };
 }
 export const QueryDepositResponse = {
@@ -1436,9 +1538,11 @@ export const QueryDepositResponse = {
     return obj;
   },
   fromAmino(object: QueryDepositResponseAmino): QueryDepositResponse {
-    return {
-      deposit: object?.deposit ? Deposit.fromAmino(object.deposit) : undefined
-    };
+    const message = createBaseQueryDepositResponse();
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Deposit.fromAmino(object.deposit);
+    }
+    return message;
   },
   toAmino(message: QueryDepositResponse): QueryDepositResponseAmino {
     const obj: any = {};
@@ -1470,7 +1574,7 @@ export const QueryDepositResponse = {
 function createBaseQueryDepositsRequest(): QueryDepositsRequest {
   return {
     proposalId: BigInt(0),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDepositsRequest = {
@@ -1541,14 +1645,18 @@ export const QueryDepositsRequest = {
     return obj;
   },
   fromAmino(object: QueryDepositsRequestAmino): QueryDepositsRequest {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDepositsRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDepositsRequest): QueryDepositsRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1577,7 +1685,7 @@ export const QueryDepositsRequest = {
 function createBaseQueryDepositsResponse(): QueryDepositsResponse {
   return {
     deposits: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDepositsResponse = {
@@ -1656,10 +1764,12 @@ export const QueryDepositsResponse = {
     return obj;
   },
   fromAmino(object: QueryDepositsResponseAmino): QueryDepositsResponse {
-    return {
-      deposits: Array.isArray(object?.deposits) ? object.deposits.map((e: any) => Deposit.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDepositsResponse();
+    message.deposits = object.deposits?.map(e => Deposit.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDepositsResponse): QueryDepositsResponseAmino {
     const obj: any = {};
@@ -1754,13 +1864,15 @@ export const QueryTallyResultRequest = {
     return obj;
   },
   fromAmino(object: QueryTallyResultRequestAmino): QueryTallyResultRequest {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseQueryTallyResultRequest();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTallyResultRequestAminoMsg): QueryTallyResultRequest {
@@ -1787,7 +1899,7 @@ export const QueryTallyResultRequest = {
 };
 function createBaseQueryTallyResultResponse(): QueryTallyResultResponse {
   return {
-    tally: TallyResult.fromPartial({})
+    tally: undefined
   };
 }
 export const QueryTallyResultResponse = {
@@ -1846,9 +1958,11 @@ export const QueryTallyResultResponse = {
     return obj;
   },
   fromAmino(object: QueryTallyResultResponseAmino): QueryTallyResultResponse {
-    return {
-      tally: object?.tally ? TallyResult.fromAmino(object.tally) : undefined
-    };
+    const message = createBaseQueryTallyResultResponse();
+    if (object.tally !== undefined && object.tally !== null) {
+      message.tally = TallyResult.fromAmino(object.tally);
+    }
+    return message;
   },
   toAmino(message: QueryTallyResultResponse): QueryTallyResultResponseAmino {
     const obj: any = {};

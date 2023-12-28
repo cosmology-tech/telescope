@@ -1,6 +1,8 @@
 import * as t from '@babel/types';
 import { getFieldOptionality, getOneOfs } from '..';
 import { AminoUtils, identifier, objectMethod } from '../../../utils';
+import { getFieldOptionalityForAmino, getOneOfs } from '..';
+import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '@cosmology/types';
 import { arrayTypes, toAminoJSON, toAminoMessages } from './utils';
@@ -14,6 +16,7 @@ const needsImplementation = (name: string, field: ProtoField) => {
 export interface ToAminoJSONMethod {
     context: ProtoParseContext;
     field: ProtoField;
+    isOneOf: boolean;
     isOptional: boolean;
 }
 
@@ -26,11 +29,12 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         };
 
         const isOneOf = oneOfs.includes(fieldName);
-        const isOptional = getFieldOptionality(context, field, isOneOf);
+        const isOptional = getFieldOptionalityForAmino(context, field, isOneOf);
 
         const args: ToAminoJSONMethod = {
             context,
             field,
+            isOneOf,
             isOptional
         };
 
@@ -119,40 +123,38 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         }
 
 
-        const omitEmpty = AminoUtils.shouldOmitEmpty(field);
-
         // default types
         switch (field.type) {
             case 'string':
-                return [...m, toAminoJSON.string(args, omitEmpty)];
+                return [...m, toAminoJSON.string(args)];
             case 'double':
-                return [...m, toAminoJSON.double(args, omitEmpty)];
+                return [...m, toAminoJSON.double(args)];
             case 'float':
-                return [...m, toAminoJSON.float(args, omitEmpty)];
+                return [...m, toAminoJSON.float(args)];
             case 'bytes':
                 return [...m, toAminoJSON.bytes(args)];
             case 'bool':
-                return [...m, toAminoJSON.bool(args, omitEmpty)];
+                return [...m, toAminoJSON.bool(args)];
             case 'int32':
-                return [...m, toAminoJSON.int32(args, omitEmpty)];
+                return [...m, toAminoJSON.int32(args)];
             case 'sint32':
-                return [...m, toAminoJSON.sint32(args, omitEmpty)];
+                return [...m, toAminoJSON.sint32(args)];
             case 'uint32':
-                return [...m, toAminoJSON.uint32(args, omitEmpty)];
+                return [...m, toAminoJSON.uint32(args)];
             case 'fixed32':
-                return [...m, toAminoJSON.fixed32(args, omitEmpty)];
+                return [...m, toAminoJSON.fixed32(args)];
             case 'sfixed32':
-                return [...m, toAminoJSON.sfixed32(args, omitEmpty)];
+                return [...m, toAminoJSON.sfixed32(args)];
             case 'int64':
-                return [...m, toAminoJSON.int64(args, omitEmpty)];
+                return [...m, toAminoJSON.int64(args)];
             case 'sint64':
-                return [...m, toAminoJSON.sint64(args, omitEmpty)];
+                return [...m, toAminoJSON.sint64(args)];
             case 'uint64':
-                return [...m, toAminoJSON.uint64(args, omitEmpty)];
+                return [...m, toAminoJSON.uint64(args)];
             case 'fixed64':
-                return [...m, toAminoJSON.fixed64(args, omitEmpty)];
+                return [...m, toAminoJSON.fixed64(args)];
             case 'sfixed64':
-                return [...m, toAminoJSON.sfixed64(args, omitEmpty)];
+                return [...m, toAminoJSON.sfixed64(args)];
             case 'google.protobuf.Duration':
             case 'Duration':
                 return [...m, toAminoJSON.duration(args)];
@@ -162,7 +164,7 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
             default:
                 switch (field.parsedType.type) {
                     case 'Enum':
-                        return [...m, toAminoJSON.enum(args, omitEmpty)];
+                        return [...m, toAminoJSON.enum(args)];
                     case 'Type':
                         return [...m, toAminoJSON.type(args)];
                 }
@@ -235,7 +237,18 @@ export const toAminoJSONMethod = (context: ProtoParseContext, name: string, prot
                         t.identifier(name)
                     )
                 )
-            )
+            ),
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
+                )
+            ] : []),
         ],
         t.blockStatement(body),
         false,
@@ -276,7 +289,10 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                             t.identifier('toAmino')
                         ),
                         [
-                            t.identifier(varName)
+                            t.identifier(varName),
+                            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
                         ]
                     )
                 )
@@ -294,7 +310,18 @@ export const toAminoMsgMethod = (context: ProtoParseContext, name: string, proto
                         t.identifier(TypeName)
                     )
                 )
-            )
+            ),
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
+                )
+            ] : []),
         ],
         t.blockStatement(body),
         false,

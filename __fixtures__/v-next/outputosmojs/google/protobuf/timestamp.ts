@@ -100,6 +100,10 @@ export interface Timestamp {
    */
   nanos: number;
 }
+export interface TimestampProtoMsg {
+  typeUrl: "/google.protobuf.Timestamp";
+  value: Uint8Array;
+}
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -265,7 +269,7 @@ export const Timestamp = {
     return fromJsonTimestamp(object);
   },
   toAmino(message: Timestamp): TimestampAmino {
-    return fromTimestamp(message).toString();
+    return fromTimestamp(message).toISOString().replace(/\.\d+Z$/, "Z");
   },
   fromAminoMsg(object: TimestampAminoMsg): Timestamp {
     return Timestamp.fromAmino(object.value);

@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
@@ -111,11 +111,7 @@ export interface AccessTypeParamProtoMsg {
 }
 /** AccessTypeParam */
 export interface AccessTypeParamAmino {
-  value: AccessType;
-}
-export interface AccessTypeParamAminoMsg {
-  type: "wasm/AccessTypeParam";
-  value: AccessTypeParamAmino;
+  value?: AccessType;
 }
 /** AccessTypeParam */
 export interface AccessTypeParamSDKType {
@@ -132,12 +128,8 @@ export interface AccessConfigProtoMsg {
 }
 /** AccessConfig access control type. */
 export interface AccessConfigAmino {
-  permission: AccessType;
-  address: string;
-}
-export interface AccessConfigAminoMsg {
-  type: "wasm/AccessConfig";
-  value: AccessConfigAmino;
+  permission?: AccessType;
+  address?: string;
 }
 /** AccessConfig access control type. */
 export interface AccessConfigSDKType {
@@ -157,12 +149,8 @@ export interface ParamsProtoMsg {
 /** Params defines the set of wasm parameters. */
 export interface ParamsAmino {
   code_upload_access?: AccessConfigAmino;
-  instantiate_default_permission: AccessType;
-  max_wasm_code_size: string;
-}
-export interface ParamsAminoMsg {
-  type: "wasm/Params";
-  value: ParamsAmino;
+  instantiate_default_permission?: AccessType;
+  max_wasm_code_size?: string;
 }
 /** Params defines the set of wasm parameters. */
 export interface ParamsSDKType {
@@ -186,15 +174,11 @@ export interface CodeInfoProtoMsg {
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoAmino {
   /** CodeHash is the unique identifier created by wasmvm */
-  code_hash: Uint8Array;
+  code_hash?: string;
   /** Creator address who initially stored the code */
-  creator: string;
+  creator?: string;
   /** InstantiateConfig access control to apply on contract creation, optional */
   instantiate_config?: AccessConfigAmino;
-}
-export interface CodeInfoAminoMsg {
-  type: "wasm/CodeInfo";
-  value: CodeInfoAmino;
 }
 /** CodeInfo is data for the uploaded contract WASM code */
 export interface CodeInfoSDKType {
@@ -217,13 +201,13 @@ export interface ContractInfo {
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
-  created: AbsoluteTxPosition;
+  created?: AbsoluteTxPosition;
   ibcPortId: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
-  extension: Any | undefined;
+  extension?: Any | undefined;
 }
 export interface ContractInfoProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.ContractInfo";
@@ -239,29 +223,25 @@ export type ContractInfoEncoded = Omit<ContractInfo, "extension"> & {
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoAmino {
   /** CodeID is the reference to the stored Wasm code */
-  code_id: string;
+  code_id?: string;
   /** Creator address who initially instantiated the contract */
-  creator: string;
+  creator?: string;
   /** Admin is an optional address that can execute migrations */
-  admin: string;
+  admin?: string;
   /** Label is optional metadata to be stored with a contract instance. */
-  label: string;
+  label?: string;
   /**
    * Created Tx position when the contract was instantiated.
    * This data should kept internal and not be exposed via query results. Just
    * use for sorting
    */
   created?: AbsoluteTxPositionAmino;
-  ibc_port_id: string;
+  ibc_port_id?: string;
   /**
    * Extension is an extension point to store custom metadata within the
    * persistence model.
    */
   extension?: AnyAmino;
-}
-export interface ContractInfoAminoMsg {
-  type: "wasm/ContractInfo";
-  value: ContractInfoAmino;
 }
 /** ContractInfo stores a WASM contract instance */
 export interface ContractInfoSDKType {
@@ -269,9 +249,9 @@ export interface ContractInfoSDKType {
   creator: string;
   admin: string;
   label: string;
-  created: AbsoluteTxPositionSDKType;
+  created?: AbsoluteTxPositionSDKType;
   ibc_port_id: string;
-  extension: AnySDKType | undefined;
+  extension?: AnySDKType | undefined;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntry {
@@ -279,7 +259,7 @@ export interface ContractCodeHistoryEntry {
   /** CodeID is the reference to the stored WASM code */
   codeId: bigint;
   /** Updated Tx position when the operation was executed. */
-  updated: AbsoluteTxPosition;
+  updated?: AbsoluteTxPosition;
   msg: Uint8Array;
 }
 export interface ContractCodeHistoryEntryProtoMsg {
@@ -288,22 +268,18 @@ export interface ContractCodeHistoryEntryProtoMsg {
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntryAmino {
-  operation: ContractCodeHistoryOperationType;
+  operation?: ContractCodeHistoryOperationType;
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
+  code_id?: string;
   /** Updated Tx position when the operation was executed. */
   updated?: AbsoluteTxPositionAmino;
-  msg: Uint8Array;
-}
-export interface ContractCodeHistoryEntryAminoMsg {
-  type: "wasm/ContractCodeHistoryEntry";
-  value: ContractCodeHistoryEntryAmino;
+  msg?: any;
 }
 /** ContractCodeHistoryEntry metadata to a contract. */
 export interface ContractCodeHistoryEntrySDKType {
   operation: ContractCodeHistoryOperationType;
   code_id: bigint;
-  updated: AbsoluteTxPositionSDKType;
+  updated?: AbsoluteTxPositionSDKType;
   msg: Uint8Array;
 }
 /**
@@ -329,16 +305,12 @@ export interface AbsoluteTxPositionProtoMsg {
  */
 export interface AbsoluteTxPositionAmino {
   /** BlockHeight is the block the contract was created at */
-  block_height: string;
+  block_height?: string;
   /**
    * TxIndex is a monotonic counter within the block (actual transaction index,
    * or gas consumed)
    */
-  tx_index: string;
-}
-export interface AbsoluteTxPositionAminoMsg {
-  type: "wasm/AbsoluteTxPosition";
-  value: AbsoluteTxPositionAmino;
+  tx_index?: string;
 }
 /**
  * AbsoluteTxPosition is a unique transaction position that allows for global
@@ -362,13 +334,9 @@ export interface ModelProtoMsg {
 /** Model is a struct that holds a KV pair */
 export interface ModelAmino {
   /** hex-encode key to read it better (this is often ascii) */
-  key: Uint8Array;
+  key?: string;
   /** base64-encode raw value */
-  value: Uint8Array;
-}
-export interface ModelAminoMsg {
-  type: "wasm/Model";
-  value: ModelAmino;
+  value?: string;
 }
 /** Model is a struct that holds a KV pair */
 export interface ModelSDKType {
@@ -389,7 +357,7 @@ export const AccessTypeParam = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessTypeParam {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccessTypeParam {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessTypeParam();
@@ -432,26 +400,19 @@ export const AccessTypeParam = {
     return obj;
   },
   fromAmino(object: AccessTypeParamAmino): AccessTypeParam {
-    return {
-      value: isSet(object.value) ? accessTypeFromJSON(object.value) : -1
-    };
+    const message = createBaseAccessTypeParam();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = accessTypeFromJSON(object.value);
+    }
+    return message;
   },
-  toAmino(message: AccessTypeParam): AccessTypeParamAmino {
+  toAmino(message: AccessTypeParam, useInterfaces: boolean = true): AccessTypeParamAmino {
     const obj: any = {};
-    obj.value = omitDefault(message.value);
+    obj.value = accessTypeToJSON(message.value);
     return obj;
   },
-  fromAminoMsg(object: AccessTypeParamAminoMsg): AccessTypeParam {
-    return AccessTypeParam.fromAmino(object.value);
-  },
-  toAminoMsg(message: AccessTypeParam): AccessTypeParamAminoMsg {
-    return {
-      type: "wasm/AccessTypeParam",
-      value: AccessTypeParam.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AccessTypeParamProtoMsg): AccessTypeParam {
-    return AccessTypeParam.decode(message.value);
+  fromProtoMsg(message: AccessTypeParamProtoMsg, useInterfaces: boolean = true): AccessTypeParam {
+    return AccessTypeParam.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AccessTypeParam): Uint8Array {
     return AccessTypeParam.encode(message).finish();
@@ -481,7 +442,7 @@ export const AccessConfig = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AccessConfig {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AccessConfig {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAccessConfig();
@@ -532,28 +493,23 @@ export const AccessConfig = {
     return obj;
   },
   fromAmino(object: AccessConfigAmino): AccessConfig {
-    return {
-      permission: isSet(object.permission) ? accessTypeFromJSON(object.permission) : -1,
-      address: object.address
-    };
+    const message = createBaseAccessConfig();
+    if (object.permission !== undefined && object.permission !== null) {
+      message.permission = accessTypeFromJSON(object.permission);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
-  toAmino(message: AccessConfig): AccessConfigAmino {
+  toAmino(message: AccessConfig, useInterfaces: boolean = true): AccessConfigAmino {
     const obj: any = {};
-    obj.permission = omitDefault(message.permission);
-    obj.address = omitDefault(message.address);
+    obj.permission = accessTypeToJSON(message.permission);
+    obj.address = message.address;
     return obj;
   },
-  fromAminoMsg(object: AccessConfigAminoMsg): AccessConfig {
-    return AccessConfig.fromAmino(object.value);
-  },
-  toAminoMsg(message: AccessConfig): AccessConfigAminoMsg {
-    return {
-      type: "wasm/AccessConfig",
-      value: AccessConfig.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AccessConfigProtoMsg): AccessConfig {
-    return AccessConfig.decode(message.value);
+  fromProtoMsg(message: AccessConfigProtoMsg, useInterfaces: boolean = true): AccessConfig {
+    return AccessConfig.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AccessConfig): Uint8Array {
     return AccessConfig.encode(message).finish();
@@ -587,7 +543,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -595,7 +551,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.codeUploadAccess = AccessConfig.decode(reader, reader.uint32());
+          message.codeUploadAccess = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.instantiateDefaultPermission = (reader.int32() as any);
@@ -650,30 +606,27 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      codeUploadAccess: object?.code_upload_access ? AccessConfig.fromAmino(object.code_upload_access) : undefined,
-      instantiateDefaultPermission: isSet(object.instantiate_default_permission) ? accessTypeFromJSON(object.instantiate_default_permission) : -1,
-      maxWasmCodeSize: BigInt(object.max_wasm_code_size)
-    };
+    const message = createBaseParams();
+    if (object.code_upload_access !== undefined && object.code_upload_access !== null) {
+      message.codeUploadAccess = AccessConfig.fromAmino(object.code_upload_access);
+    }
+    if (object.instantiate_default_permission !== undefined && object.instantiate_default_permission !== null) {
+      message.instantiateDefaultPermission = accessTypeFromJSON(object.instantiate_default_permission);
+    }
+    if (object.max_wasm_code_size !== undefined && object.max_wasm_code_size !== null) {
+      message.maxWasmCodeSize = BigInt(object.max_wasm_code_size);
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess) : undefined;
-    obj.instantiate_default_permission = omitDefault(message.instantiateDefaultPermission);
-    obj.max_wasm_code_size = omitDefault(message.maxWasmCodeSize);
+    obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess, useInterfaces) : undefined;
+    obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission);
+    obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "wasm/Params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -707,7 +660,7 @@ export const CodeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CodeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CodeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCodeInfo();
@@ -721,7 +674,7 @@ export const CodeInfo = {
           message.creator = reader.string();
           break;
         case 5:
-          message.instantiateConfig = AccessConfig.decode(reader, reader.uint32());
+          message.instantiateConfig = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -768,30 +721,27 @@ export const CodeInfo = {
     return obj;
   },
   fromAmino(object: CodeInfoAmino): CodeInfo {
-    return {
-      codeHash: object.code_hash,
-      creator: object.creator,
-      instantiateConfig: object?.instantiate_config ? AccessConfig.fromAmino(object.instantiate_config) : undefined
-    };
+    const message = createBaseCodeInfo();
+    if (object.code_hash !== undefined && object.code_hash !== null) {
+      message.codeHash = bytesFromBase64(object.code_hash);
+    }
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    }
+    if (object.instantiate_config !== undefined && object.instantiate_config !== null) {
+      message.instantiateConfig = AccessConfig.fromAmino(object.instantiate_config);
+    }
+    return message;
   },
-  toAmino(message: CodeInfo): CodeInfoAmino {
+  toAmino(message: CodeInfo, useInterfaces: boolean = true): CodeInfoAmino {
     const obj: any = {};
-    obj.code_hash = message.codeHash;
-    obj.creator = omitDefault(message.creator);
-    obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig) : undefined;
+    obj.code_hash = message.codeHash ? base64FromBytes(message.codeHash) : undefined;
+    obj.creator = message.creator;
+    obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CodeInfoAminoMsg): CodeInfo {
-    return CodeInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: CodeInfo): CodeInfoAminoMsg {
-    return {
-      type: "wasm/CodeInfo",
-      value: CodeInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CodeInfoProtoMsg): CodeInfo {
-    return CodeInfo.decode(message.value);
+  fromProtoMsg(message: CodeInfoProtoMsg, useInterfaces: boolean = true): CodeInfo {
+    return CodeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CodeInfo): Uint8Array {
     return CodeInfo.encode(message).finish();
@@ -809,9 +759,9 @@ function createBaseContractInfo(): ContractInfo {
     creator: "",
     admin: "",
     label: "",
-    created: AbsoluteTxPosition.fromPartial({}),
+    created: undefined,
     ibcPortId: "",
-    extension: Any.fromPartial({})
+    extension: undefined
   };
 }
 export const ContractInfo = {
@@ -841,7 +791,7 @@ export const ContractInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ContractInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractInfo();
@@ -861,13 +811,13 @@ export const ContractInfo = {
           message.label = reader.string();
           break;
         case 5:
-          message.created = AbsoluteTxPosition.decode(reader, reader.uint32());
+          message.created = AbsoluteTxPosition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.ibcPortId = reader.string();
           break;
         case 7:
-          message.extension = (ContractInfoExtension_InterfaceDecoder(reader) as Any);
+          message.extension = useInterfaces ? (ContractInfoExtension_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -938,38 +888,43 @@ export const ContractInfo = {
     return obj;
   },
   fromAmino(object: ContractInfoAmino): ContractInfo {
-    return {
-      codeId: BigInt(object.code_id),
-      creator: object.creator,
-      admin: object.admin,
-      label: object.label,
-      created: object?.created ? AbsoluteTxPosition.fromAmino(object.created) : undefined,
-      ibcPortId: object.ibc_port_id,
-      extension: object?.extension ? ContractInfoExtension_FromAmino(object.extension) : undefined
-    };
+    const message = createBaseContractInfo();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.label !== undefined && object.label !== null) {
+      message.label = object.label;
+    }
+    if (object.created !== undefined && object.created !== null) {
+      message.created = AbsoluteTxPosition.fromAmino(object.created);
+    }
+    if (object.ibc_port_id !== undefined && object.ibc_port_id !== null) {
+      message.ibcPortId = object.ibc_port_id;
+    }
+    if (object.extension !== undefined && object.extension !== null) {
+      message.extension = ContractInfoExtension_FromAmino(object.extension);
+    }
+    return message;
   },
-  toAmino(message: ContractInfo): ContractInfoAmino {
+  toAmino(message: ContractInfo, useInterfaces: boolean = true): ContractInfoAmino {
     const obj: any = {};
-    obj.code_id = omitDefault(message.codeId);
-    obj.creator = omitDefault(message.creator);
-    obj.admin = omitDefault(message.admin);
-    obj.label = omitDefault(message.label);
-    obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created) : undefined;
-    obj.ibc_port_id = omitDefault(message.ibcPortId);
-    obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any)) : undefined;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.creator = message.creator;
+    obj.admin = message.admin;
+    obj.label = message.label;
+    obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created, useInterfaces) : undefined;
+    obj.ibc_port_id = message.ibcPortId;
+    obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ContractInfoAminoMsg): ContractInfo {
-    return ContractInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: ContractInfo): ContractInfoAminoMsg {
-    return {
-      type: "wasm/ContractInfo",
-      value: ContractInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ContractInfoProtoMsg): ContractInfo {
-    return ContractInfo.decode(message.value);
+  fromProtoMsg(message: ContractInfoProtoMsg, useInterfaces: boolean = true): ContractInfo {
+    return ContractInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContractInfo): Uint8Array {
     return ContractInfo.encode(message).finish();
@@ -985,7 +940,7 @@ function createBaseContractCodeHistoryEntry(): ContractCodeHistoryEntry {
   return {
     operation: 0,
     codeId: BigInt(0),
-    updated: AbsoluteTxPosition.fromPartial({}),
+    updated: undefined,
     msg: new Uint8Array()
   };
 }
@@ -1007,7 +962,7 @@ export const ContractCodeHistoryEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContractCodeHistoryEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ContractCodeHistoryEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContractCodeHistoryEntry();
@@ -1021,7 +976,7 @@ export const ContractCodeHistoryEntry = {
           message.codeId = reader.uint64();
           break;
         case 3:
-          message.updated = AbsoluteTxPosition.decode(reader, reader.uint32());
+          message.updated = AbsoluteTxPosition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
           message.msg = reader.bytes();
@@ -1078,32 +1033,31 @@ export const ContractCodeHistoryEntry = {
     return obj;
   },
   fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
-    return {
-      operation: isSet(object.operation) ? contractCodeHistoryOperationTypeFromJSON(object.operation) : -1,
-      codeId: BigInt(object.code_id),
-      updated: object?.updated ? AbsoluteTxPosition.fromAmino(object.updated) : undefined,
-      msg: toUtf8(JSON.stringify(object.msg))
-    };
+    const message = createBaseContractCodeHistoryEntry();
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = contractCodeHistoryOperationTypeFromJSON(object.operation);
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.updated !== undefined && object.updated !== null) {
+      message.updated = AbsoluteTxPosition.fromAmino(object.updated);
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    return message;
   },
-  toAmino(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAmino {
+  toAmino(message: ContractCodeHistoryEntry, useInterfaces: boolean = true): ContractCodeHistoryEntryAmino {
     const obj: any = {};
-    obj.operation = omitDefault(message.operation);
-    obj.code_id = omitDefault(message.codeId);
-    obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated) : undefined;
+    obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation);
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated, useInterfaces) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ContractCodeHistoryEntryAminoMsg): ContractCodeHistoryEntry {
-    return ContractCodeHistoryEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: ContractCodeHistoryEntry): ContractCodeHistoryEntryAminoMsg {
-    return {
-      type: "wasm/ContractCodeHistoryEntry",
-      value: ContractCodeHistoryEntry.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ContractCodeHistoryEntryProtoMsg): ContractCodeHistoryEntry {
-    return ContractCodeHistoryEntry.decode(message.value);
+  fromProtoMsg(message: ContractCodeHistoryEntryProtoMsg, useInterfaces: boolean = true): ContractCodeHistoryEntry {
+    return ContractCodeHistoryEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContractCodeHistoryEntry): Uint8Array {
     return ContractCodeHistoryEntry.encode(message).finish();
@@ -1133,7 +1087,7 @@ export const AbsoluteTxPosition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AbsoluteTxPosition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AbsoluteTxPosition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAbsoluteTxPosition();
@@ -1188,28 +1142,23 @@ export const AbsoluteTxPosition = {
     return obj;
   },
   fromAmino(object: AbsoluteTxPositionAmino): AbsoluteTxPosition {
-    return {
-      blockHeight: BigInt(object.block_height),
-      txIndex: BigInt(object.tx_index)
-    };
+    const message = createBaseAbsoluteTxPosition();
+    if (object.block_height !== undefined && object.block_height !== null) {
+      message.blockHeight = BigInt(object.block_height);
+    }
+    if (object.tx_index !== undefined && object.tx_index !== null) {
+      message.txIndex = BigInt(object.tx_index);
+    }
+    return message;
   },
-  toAmino(message: AbsoluteTxPosition): AbsoluteTxPositionAmino {
+  toAmino(message: AbsoluteTxPosition, useInterfaces: boolean = true): AbsoluteTxPositionAmino {
     const obj: any = {};
-    obj.block_height = omitDefault(message.blockHeight);
-    obj.tx_index = omitDefault(message.txIndex);
+    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
+    obj.tx_index = message.txIndex ? message.txIndex.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: AbsoluteTxPositionAminoMsg): AbsoluteTxPosition {
-    return AbsoluteTxPosition.fromAmino(object.value);
-  },
-  toAminoMsg(message: AbsoluteTxPosition): AbsoluteTxPositionAminoMsg {
-    return {
-      type: "wasm/AbsoluteTxPosition",
-      value: AbsoluteTxPosition.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AbsoluteTxPositionProtoMsg): AbsoluteTxPosition {
-    return AbsoluteTxPosition.decode(message.value);
+  fromProtoMsg(message: AbsoluteTxPositionProtoMsg, useInterfaces: boolean = true): AbsoluteTxPosition {
+    return AbsoluteTxPosition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AbsoluteTxPosition): Uint8Array {
     return AbsoluteTxPosition.encode(message).finish();
@@ -1239,7 +1188,7 @@ export const Model = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Model {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Model {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModel();
@@ -1290,28 +1239,23 @@ export const Model = {
     return obj;
   },
   fromAmino(object: ModelAmino): Model {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseModel();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
-  toAmino(message: Model): ModelAmino {
+  toAmino(message: Model, useInterfaces: boolean = true): ModelAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ModelAminoMsg): Model {
-    return Model.fromAmino(object.value);
-  },
-  toAminoMsg(message: Model): ModelAminoMsg {
-    return {
-      type: "wasm/Model",
-      value: Model.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModelProtoMsg): Model {
-    return Model.decode(message.value);
+  fromProtoMsg(message: ModelProtoMsg, useInterfaces: boolean = true): Model {
+    return Model.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Model): Uint8Array {
     return Model.encode(message).finish();
@@ -1325,7 +1269,7 @@ export const Model = {
 };
 export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -1334,6 +1278,6 @@ export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uin
 export const ContractInfoExtension_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const ContractInfoExtension_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const ContractInfoExtension_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+  return Any.toAmino(content, useInterfaces);
 };

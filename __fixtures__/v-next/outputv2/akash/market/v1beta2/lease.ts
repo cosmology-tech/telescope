@@ -66,11 +66,11 @@ export interface LeaseIDProtoMsg {
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
 }
 export interface LeaseIDAminoMsg {
   type: "/akash.market.v1beta2.LeaseID";
@@ -99,10 +99,10 @@ export interface LeaseProtoMsg {
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseAmino {
   lease_id?: LeaseIDAmino;
-  state: Lease_State;
+  state?: Lease_State;
   price?: DecCoinAmino;
-  created_at: string;
-  closed_on: string;
+  created_at?: string;
+  closed_on?: string;
 }
 export interface LeaseAminoMsg {
   type: "/akash.market.v1beta2.Lease";
@@ -131,12 +131,12 @@ export interface LeaseFiltersProtoMsg {
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-  oseq: number;
-  provider: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
+  oseq?: number;
+  provider?: string;
+  state?: string;
 }
 export interface LeaseFiltersAminoMsg {
   type: "/akash.market.v1beta2.LeaseFilters";
@@ -359,13 +359,23 @@ export const LeaseID = {
     return obj;
   },
   fromAmino(object: LeaseIDAmino): LeaseID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider
-    };
+    const message = createBaseLeaseID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = object.provider;
+    }
+    return message;
   },
   toAmino(message: LeaseID): LeaseIDAmino {
     const obj: any = {};
@@ -504,18 +514,28 @@ export const Lease = {
     return obj;
   },
   fromAmino(object: LeaseAmino): Lease {
-    return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined,
-      state: isSet(object.state) ? lease_StateFromJSON(object.state) : -1,
-      price: object?.price ? DecCoin.fromAmino(object.price) : undefined,
-      createdAt: BigInt(object.created_at),
-      closedOn: BigInt(object.closed_on)
-    };
+    const message = createBaseLease();
+    if (object.lease_id !== undefined && object.lease_id !== null) {
+      message.leaseId = LeaseID.fromAmino(object.lease_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = lease_StateFromJSON(object.state);
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    if (object.closed_on !== undefined && object.closed_on !== null) {
+      message.closedOn = BigInt(object.closed_on);
+    }
+    return message;
   },
   toAmino(message: Lease): LeaseAmino {
     const obj: any = {};
     obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
-    obj.state = message.state;
+    obj.state = lease_StateToJSON(message.state);
     obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
     obj.created_at = omitDefault(message.createdAt);
     obj.closed_on = omitDefault(message.closedOn);
@@ -655,14 +675,26 @@ export const LeaseFilters = {
     return obj;
   },
   fromAmino(object: LeaseFiltersAmino): LeaseFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      provider: object.provider,
-      state: object.state
-    };
+    const message = createBaseLeaseFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = object.provider;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: LeaseFilters): LeaseFiltersAmino {
     const obj: any = {};
@@ -748,9 +780,11 @@ export const MsgCreateLease = {
     return obj;
   },
   fromAmino(object: MsgCreateLeaseAmino): MsgCreateLease {
-    return {
-      bidId: object?.bid_id ? BidID.fromAmino(object.bid_id) : undefined
-    };
+    const message = createBaseMsgCreateLease();
+    if (object.bid_id !== undefined && object.bid_id !== null) {
+      message.bidId = BidID.fromAmino(object.bid_id);
+    }
+    return message;
   },
   toAmino(message: MsgCreateLease): MsgCreateLeaseAmino {
     const obj: any = {};
@@ -815,7 +849,8 @@ export const MsgCreateLeaseResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateLeaseResponseAmino): MsgCreateLeaseResponse {
-    return {};
+    const message = createBaseMsgCreateLeaseResponse();
+    return message;
   },
   toAmino(_: MsgCreateLeaseResponse): MsgCreateLeaseResponseAmino {
     const obj: any = {};
@@ -895,9 +930,11 @@ export const MsgWithdrawLease = {
     return obj;
   },
   fromAmino(object: MsgWithdrawLeaseAmino): MsgWithdrawLease {
-    return {
-      bidId: object?.bid_id ? LeaseID.fromAmino(object.bid_id) : undefined
-    };
+    const message = createBaseMsgWithdrawLease();
+    if (object.bid_id !== undefined && object.bid_id !== null) {
+      message.bidId = LeaseID.fromAmino(object.bid_id);
+    }
+    return message;
   },
   toAmino(message: MsgWithdrawLease): MsgWithdrawLeaseAmino {
     const obj: any = {};
@@ -962,7 +999,8 @@ export const MsgWithdrawLeaseResponse = {
     return obj;
   },
   fromAmino(_: MsgWithdrawLeaseResponseAmino): MsgWithdrawLeaseResponse {
-    return {};
+    const message = createBaseMsgWithdrawLeaseResponse();
+    return message;
   },
   toAmino(_: MsgWithdrawLeaseResponse): MsgWithdrawLeaseResponseAmino {
     const obj: any = {};
@@ -1042,9 +1080,11 @@ export const MsgCloseLease = {
     return obj;
   },
   fromAmino(object: MsgCloseLeaseAmino): MsgCloseLease {
-    return {
-      leaseId: object?.lease_id ? LeaseID.fromAmino(object.lease_id) : undefined
-    };
+    const message = createBaseMsgCloseLease();
+    if (object.lease_id !== undefined && object.lease_id !== null) {
+      message.leaseId = LeaseID.fromAmino(object.lease_id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseLease): MsgCloseLeaseAmino {
     const obj: any = {};
@@ -1109,7 +1149,8 @@ export const MsgCloseLeaseResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseLeaseResponseAmino): MsgCloseLeaseResponse {
-    return {};
+    const message = createBaseMsgCloseLeaseResponse();
+    return message;
   },
   toAmino(_: MsgCloseLeaseResponse): MsgCloseLeaseResponseAmino {
     const obj: any = {};

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -47,12 +47,12 @@ export interface Distribution {
    * If specified, contains the range of the population values. The field
    * must not be present if the `count` is zero.
    */
-  range: Distribution_Range;
+  range?: Distribution_Range;
   /**
    * Defines the histogram bucket boundaries. If the distribution does not
    * contain a histogram, then omit this field.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * The number of values in each bucket of the histogram, as described in
    * `bucket_options`. If the distribution does not have a histogram, then omit
@@ -74,6 +74,10 @@ export interface Distribution {
   /** Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoMsg {
+  typeUrl: "/google.api.Distribution";
+  value: Uint8Array;
+}
 /**
  * `Distribution` contains summary statistics for a population of values. It
  * optionally contains a histogram representing the distribution of those values
@@ -94,8 +98,8 @@ export interface DistributionSDKType {
   count: bigint;
   mean: number;
   sum_of_squared_deviation: number;
-  range: Distribution_RangeSDKType;
-  bucket_options: Distribution_BucketOptionsSDKType;
+  range?: Distribution_RangeSDKType;
+  bucket_options?: Distribution_BucketOptionsSDKType;
   bucket_counts: bigint[];
   exemplars: Distribution_ExemplarSDKType[];
 }
@@ -105,6 +109,10 @@ export interface Distribution_Range {
   min: number;
   /** The maximum of the population values. */
   max: number;
+}
+export interface Distribution_RangeProtoMsg {
+  typeUrl: "/google.api.Range";
+  value: Uint8Array;
 }
 /** The range of the population values. */
 export interface Distribution_RangeSDKType {
@@ -135,6 +143,10 @@ export interface Distribution_BucketOptions {
   exponentialBuckets?: Distribution_BucketOptions_Exponential;
   /** The explicit buckets. */
   explicitBuckets?: Distribution_BucketOptions_Explicit;
+}
+export interface Distribution_BucketOptionsProtoMsg {
+  typeUrl: "/google.api.BucketOptions";
+  value: Uint8Array;
 }
 /**
  * `BucketOptions` describes the bucket boundaries used to create a histogram
@@ -177,6 +189,10 @@ export interface Distribution_BucketOptions_Linear {
   /** Lower bound of the first bucket. */
   offset: number;
 }
+export interface Distribution_BucketOptions_LinearProtoMsg {
+  typeUrl: "/google.api.Linear";
+  value: Uint8Array;
+}
 /**
  * Specifies a linear sequence of buckets that all have the same width
  * (except overflow and underflow). Each bucket represents a constant
@@ -212,6 +228,10 @@ export interface Distribution_BucketOptions_Exponential {
   /** Must be greater than 0. */
   scale: number;
 }
+export interface Distribution_BucketOptions_ExponentialProtoMsg {
+  typeUrl: "/google.api.Exponential";
+  value: Uint8Array;
+}
 /**
  * Specifies an exponential sequence of buckets that have a width that is
  * proportional to the value of the lower bound. Each bucket represents a
@@ -245,6 +265,10 @@ export interface Distribution_BucketOptions_Explicit {
   /** The values must be monotonically increasing. */
   bounds: number[];
 }
+export interface Distribution_BucketOptions_ExplicitProtoMsg {
+  typeUrl: "/google.api.Explicit";
+  value: Uint8Array;
+}
 /**
  * Specifies a set of buckets with arbitrary widths.
  * 
@@ -275,7 +299,7 @@ export interface Distribution_Exemplar {
    */
   value: number;
   /** The observation (sampling) time of the above value. */
-  timestamp: Date;
+  timestamp?: Date;
   /**
    * Contextual information about the example value. Examples are:
    * 
@@ -291,6 +315,10 @@ export interface Distribution_Exemplar {
    */
   attachments: Any[];
 }
+export interface Distribution_ExemplarProtoMsg {
+  typeUrl: "/google.api.Exemplar";
+  value: Uint8Array;
+}
 /**
  * Exemplars are example points that may be used to annotate aggregated
  * distribution values. They are metadata that gives information about a
@@ -300,7 +328,7 @@ export interface Distribution_Exemplar {
  */
 export interface Distribution_ExemplarSDKType {
   value: number;
-  timestamp: Date;
+  timestamp?: Date;
   attachments: AnySDKType[];
 }
 function createBaseDistribution(): Distribution {
@@ -308,8 +336,8 @@ function createBaseDistribution(): Distribution {
     count: BigInt(0),
     mean: 0,
     sumOfSquaredDeviation: 0,
-    range: Distribution_Range.fromPartial({}),
-    bucketOptions: Distribution_BucketOptions.fromPartial({}),
+    range: undefined,
+    bucketOptions: undefined,
     bucketCounts: [],
     exemplars: []
   };
@@ -467,21 +495,31 @@ export const Distribution = {
     return obj;
   },
   fromAmino(object: DistributionAmino): Distribution {
-    return {
-      count: BigInt(object.count),
-      mean: object.mean,
-      sumOfSquaredDeviation: object.sum_of_squared_deviation,
-      range: object?.range ? Distribution_Range.fromAmino(object.range) : undefined,
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution();
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count);
+    }
+    if (object.mean !== undefined && object.mean !== null) {
+      message.mean = object.mean;
+    }
+    if (object.sum_of_squared_deviation !== undefined && object.sum_of_squared_deviation !== null) {
+      message.sumOfSquaredDeviation = object.sum_of_squared_deviation;
+    }
+    if (object.range !== undefined && object.range !== null) {
+      message.range = Distribution_Range.fromAmino(object.range);
+    }
+    if (object.bucket_options !== undefined && object.bucket_options !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromAmino(object.bucket_options);
+    }
+    message.bucketCounts = object.bucket_counts?.map(e => BigInt(e)) || [];
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
-    obj.count = omitDefault(message.count);
-    obj.mean = omitDefault(message.mean);
-    obj.sum_of_squared_deviation = omitDefault(message.sumOfSquaredDeviation);
+    obj.count = message.count ? message.count.toString() : undefined;
+    obj.mean = message.mean;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
     obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined;
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
     if (message.bucketCounts) {
@@ -586,15 +624,19 @@ export const Distribution_Range = {
     return obj;
   },
   fromAmino(object: Distribution_RangeAmino): Distribution_Range {
-    return {
-      min: object.min,
-      max: object.max
-    };
+    const message = createBaseDistribution_Range();
+    if (object.min !== undefined && object.min !== null) {
+      message.min = object.min;
+    }
+    if (object.max !== undefined && object.max !== null) {
+      message.max = object.max;
+    }
+    return message;
   },
   toAmino(message: Distribution_Range): Distribution_RangeAmino {
     const obj: any = {};
-    obj.min = omitDefault(message.min);
-    obj.max = omitDefault(message.max);
+    obj.min = message.min;
+    obj.max = message.max;
     return obj;
   },
   fromAminoMsg(object: Distribution_RangeAminoMsg): Distribution_Range {
@@ -700,11 +742,17 @@ export const Distribution_BucketOptions = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptionsAmino): Distribution_BucketOptions {
-    return {
-      linearBuckets: object?.linear_buckets ? Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: object?.exponential_buckets ? Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: object?.explicit_buckets ? Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets) : undefined
-    };
+    const message = createBaseDistribution_BucketOptions();
+    if (object.linear_buckets !== undefined && object.linear_buckets !== null) {
+      message.linearBuckets = Distribution_BucketOptions_Linear.fromAmino(object.linear_buckets);
+    }
+    if (object.exponential_buckets !== undefined && object.exponential_buckets !== null) {
+      message.exponentialBuckets = Distribution_BucketOptions_Exponential.fromAmino(object.exponential_buckets);
+    }
+    if (object.explicit_buckets !== undefined && object.explicit_buckets !== null) {
+      message.explicitBuckets = Distribution_BucketOptions_Explicit.fromAmino(object.explicit_buckets);
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions): Distribution_BucketOptionsAmino {
     const obj: any = {};
@@ -816,17 +864,23 @@ export const Distribution_BucketOptions_Linear = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_LinearAmino): Distribution_BucketOptions_Linear {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      width: object.width,
-      offset: object.offset
-    };
+    const message = createBaseDistribution_BucketOptions_Linear();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.width !== undefined && object.width !== null) {
+      message.width = object.width;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Linear): Distribution_BucketOptions_LinearAmino {
     const obj: any = {};
-    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
-    obj.width = omitDefault(message.width);
-    obj.offset = omitDefault(message.offset);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.width = message.width;
+    obj.offset = message.offset;
     return obj;
   },
   fromAminoMsg(object: Distribution_BucketOptions_LinearAminoMsg): Distribution_BucketOptions_Linear {
@@ -932,17 +986,23 @@ export const Distribution_BucketOptions_Exponential = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_ExponentialAmino): Distribution_BucketOptions_Exponential {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      growthFactor: object.growth_factor,
-      scale: object.scale
-    };
+    const message = createBaseDistribution_BucketOptions_Exponential();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.growth_factor !== undefined && object.growth_factor !== null) {
+      message.growthFactor = object.growth_factor;
+    }
+    if (object.scale !== undefined && object.scale !== null) {
+      message.scale = object.scale;
+    }
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Exponential): Distribution_BucketOptions_ExponentialAmino {
     const obj: any = {};
-    obj.num_finite_buckets = omitDefault(message.numFiniteBuckets);
-    obj.growth_factor = omitDefault(message.growthFactor);
-    obj.scale = omitDefault(message.scale);
+    obj.num_finite_buckets = message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor;
+    obj.scale = message.scale;
     return obj;
   },
   fromAminoMsg(object: Distribution_BucketOptions_ExponentialAminoMsg): Distribution_BucketOptions_Exponential {
@@ -1039,9 +1099,9 @@ export const Distribution_BucketOptions_Explicit = {
     return obj;
   },
   fromAmino(object: Distribution_BucketOptions_ExplicitAmino): Distribution_BucketOptions_Explicit {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
+    const message = createBaseDistribution_BucketOptions_Explicit();
+    message.bounds = object.bounds?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Distribution_BucketOptions_Explicit): Distribution_BucketOptions_ExplicitAmino {
     const obj: any = {};
@@ -1071,7 +1131,7 @@ export const Distribution_BucketOptions_Explicit = {
 function createBaseDistribution_Exemplar(): Distribution_Exemplar {
   return {
     value: 0,
-    timestamp: new Date(),
+    timestamp: undefined,
     attachments: []
   };
 }
@@ -1163,16 +1223,20 @@ export const Distribution_Exemplar = {
     return obj;
   },
   fromAmino(object: Distribution_ExemplarAmino): Distribution_Exemplar {
-    return {
-      value: object.value,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
-      attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution_Exemplar();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    message.attachments = object.attachments?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution_Exemplar): Distribution_ExemplarAmino {
     const obj: any = {};
-    obj.value = omitDefault(message.value);
-    obj.timestamp = message.timestamp;
+    obj.value = message.value;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e) : undefined);
     } else {

@@ -2,7 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timesta
 import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal, omitDefault } from "../../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -43,6 +43,10 @@ export interface SmoothWeightChangeParams {
    */
   targetPoolWeights: PoolAsset[];
 }
+export interface SmoothWeightChangeParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.SmoothWeightChangeParams";
+  value: Uint8Array;
+}
 /**
  * Parameters for changing the weights in a balancer pool smoothly from
  * a start weight and end weight over a period of time.
@@ -73,6 +77,10 @@ export interface PoolParams {
   exitFee: string;
   smoothWeightChangeParams?: SmoothWeightChangeParams;
 }
+export interface PoolParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -98,6 +106,10 @@ export interface PoolAsset {
   token: Coin;
   /** Weight that is not normalized. This weight must be less than 2^50 */
   weight: string;
+}
+export interface PoolAssetProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.PoolAsset";
+  value: Uint8Array;
 }
 /**
  * Pool asset is an internal struct that combines the amount of the
@@ -134,6 +146,10 @@ export interface Pool {
   poolAssets: PoolAsset[];
   /** sum of all non-normalized pool weights */
   totalWeight: string;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.Pool";
+  value: Uint8Array;
 }
 export interface PoolSDKType {
   address: string;
@@ -260,16 +276,20 @@ export const SmoothWeightChangeParams = {
     return obj;
   },
   fromAmino(object: SmoothWeightChangeParamsAmino): SmoothWeightChangeParams {
-    return {
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      initialPoolWeights: Array.isArray(object?.initial_pool_weights) ? object.initial_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      targetPoolWeights: Array.isArray(object?.target_pool_weights) ? object.target_pool_weights.map((e: any) => PoolAsset.fromAmino(e)) : []
-    };
+    const message = createBaseSmoothWeightChangeParams();
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    message.initialPoolWeights = object.initial_pool_weights?.map(e => PoolAsset.fromAmino(e)) || [];
+    message.targetPoolWeights = object.target_pool_weights?.map(e => PoolAsset.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SmoothWeightChangeParams): SmoothWeightChangeParamsAmino {
     const obj: any = {};
-    obj.start_time = message.startTime;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.initialPoolWeights) {
       obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
@@ -392,16 +412,22 @@ export const PoolParams = {
     return obj;
   },
   fromAmino(object: PoolParamsAmino): PoolParams {
-    return {
-      swapFee: object.swap_fee,
-      exitFee: object.exit_fee,
-      smoothWeightChangeParams: object?.smooth_weight_change_params ? SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params) : undefined
-    };
+    const message = createBasePoolParams();
+    if (object.swap_fee !== undefined && object.swap_fee !== null) {
+      message.swapFee = object.swap_fee;
+    }
+    if (object.exit_fee !== undefined && object.exit_fee !== null) {
+      message.exitFee = object.exit_fee;
+    }
+    if (object.smooth_weight_change_params !== undefined && object.smooth_weight_change_params !== null) {
+      message.smoothWeightChangeParams = SmoothWeightChangeParams.fromAmino(object.smooth_weight_change_params);
+    }
+    return message;
   },
   toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
-    obj.swap_fee = padDecimal(message.swapFee);
-    obj.exit_fee = padDecimal(message.exitFee);
+    obj.swap_fee = message.swapFee;
+    obj.exit_fee = message.exitFee;
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
   },
@@ -501,15 +527,19 @@ export const PoolAsset = {
     return obj;
   },
   fromAmino(object: PoolAssetAmino): PoolAsset {
-    return {
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      weight: object.weight
-    };
+    const message = createBasePoolAsset();
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromAmino(object.token);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: PoolAsset): PoolAssetAmino {
     const obj: any = {};
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
-    obj.weight = omitDefault(message.weight);
+    obj.weight = message.weight;
     return obj;
   },
   fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
@@ -681,29 +711,41 @@ export const Pool = {
     return obj;
   },
   fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
-      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromAmino(e)) : [],
-      totalWeight: object.total_weight
-    };
+    const message = createBasePool();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.pool_params !== undefined && object.pool_params !== null) {
+      message.poolParams = PoolParams.fromAmino(object.pool_params);
+    }
+    if (object.future_pool_governor !== undefined && object.future_pool_governor !== null) {
+      message.futurePoolGovernor = object.future_pool_governor;
+    }
+    if (object.total_shares !== undefined && object.total_shares !== null) {
+      message.totalShares = Coin.fromAmino(object.total_shares);
+    }
+    message.poolAssets = object.pool_assets?.map(e => PoolAsset.fromAmino(e)) || [];
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    return message;
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.id = omitDefault(message.id);
+    obj.address = message.address;
+    obj.id = message.id ? message.id.toString() : undefined;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
-    obj.future_pool_governor = omitDefault(message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
       obj.pool_assets = [];
     }
-    obj.total_weight = omitDefault(message.totalWeight);
+    obj.total_weight = message.totalWeight;
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

@@ -12,6 +12,10 @@ export interface QueryUserPositionsRequest {
   address: string;
   poolId: bigint;
 }
+export interface QueryUserPositionsRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryUserPositionsRequest";
+  value: Uint8Array;
+}
 /** =============================== UserPositions */
 export interface QueryUserPositionsRequestSDKType {
   address: string;
@@ -20,12 +24,20 @@ export interface QueryUserPositionsRequestSDKType {
 export interface QueryUserPositionsResponse {
   positions: PositionWithUnderlyingAssetBreakdown[];
 }
+export interface QueryUserPositionsResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryUserPositionsResponse";
+  value: Uint8Array;
+}
 export interface QueryUserPositionsResponseSDKType {
   positions: PositionWithUnderlyingAssetBreakdownSDKType[];
 }
 /** =============================== PositionById */
 export interface QueryPositionByIdRequest {
   positionId: bigint;
+}
+export interface QueryPositionByIdRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryPositionByIdRequest";
+  value: Uint8Array;
 }
 /** =============================== PositionById */
 export interface QueryPositionByIdRequestSDKType {
@@ -34,33 +46,53 @@ export interface QueryPositionByIdRequestSDKType {
 export interface QueryPositionByIdResponse {
   position: PositionWithUnderlyingAssetBreakdown;
 }
+export interface QueryPositionByIdResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryPositionByIdResponse";
+  value: Uint8Array;
+}
 export interface QueryPositionByIdResponseSDKType {
   position: PositionWithUnderlyingAssetBreakdownSDKType;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryPoolsRequest";
+  value: Uint8Array;
 }
 /** =============================== Pools */
 export interface QueryPoolsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 export interface QueryPoolsResponse {
   pools: Any[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryPoolsResponse";
+  value: Uint8Array;
 }
 export interface QueryPoolsResponseSDKType {
   pools: AnySDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** =============================== ModuleParams */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** =============================== ModuleParams */
 export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -68,6 +100,10 @@ export interface QueryParamsResponseSDKType {
 export interface TickLiquidityNet {
   liquidityNet: string;
   tickIndex: string;
+}
+export interface TickLiquidityNetProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.TickLiquidityNet";
+  value: Uint8Array;
 }
 export interface TickLiquidityNetSDKType {
   liquidity_net: string;
@@ -77,6 +113,10 @@ export interface LiquidityDepthWithRange {
   liquidityAmount: string;
   lowerTick: string;
   upperTick: string;
+}
+export interface LiquidityDepthWithRangeProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.LiquidityDepthWithRange";
+  value: Uint8Array;
 }
 export interface LiquidityDepthWithRangeSDKType {
   liquidity_amount: string;
@@ -90,6 +130,10 @@ export interface QueryLiquidityNetInDirectionRequest {
   startTick?: string;
   boundTick?: string;
 }
+export interface QueryLiquidityNetInDirectionRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryLiquidityNetInDirectionRequest";
+  value: Uint8Array;
+}
 /** =============================== LiquidityNetInDirection */
 export interface QueryLiquidityNetInDirectionRequestSDKType {
   pool_id: bigint;
@@ -102,6 +146,10 @@ export interface QueryLiquidityNetInDirectionResponse {
   currentTick: bigint;
   currentLiquidity: string;
 }
+export interface QueryLiquidityNetInDirectionResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryLiquidityNetInDirectionResponse";
+  value: Uint8Array;
+}
 export interface QueryLiquidityNetInDirectionResponseSDKType {
   liquidity_depths: TickLiquidityNetSDKType[];
   current_tick: bigint;
@@ -111,12 +159,20 @@ export interface QueryLiquidityNetInDirectionResponseSDKType {
 export interface QueryTotalLiquidityForRangeRequest {
   poolId: bigint;
 }
+export interface QueryTotalLiquidityForRangeRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryTotalLiquidityForRangeRequest";
+  value: Uint8Array;
+}
 /** =============================== TotalLiquidityForRange */
 export interface QueryTotalLiquidityForRangeRequestSDKType {
   pool_id: bigint;
 }
 export interface QueryTotalLiquidityForRangeResponse {
   liquidity: LiquidityDepthWithRange[];
+}
+export interface QueryTotalLiquidityForRangeResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryTotalLiquidityForRangeResponse";
+  value: Uint8Array;
 }
 export interface QueryTotalLiquidityForRangeResponseSDKType {
   liquidity: LiquidityDepthWithRangeSDKType[];
@@ -125,12 +181,20 @@ export interface QueryTotalLiquidityForRangeResponseSDKType {
 export interface QueryClaimableFeesRequest {
   positionId: bigint;
 }
+export interface QueryClaimableFeesRequestProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryClaimableFeesRequest";
+  value: Uint8Array;
+}
 /** ===================== MsgQueryClaimableFees */
 export interface QueryClaimableFeesRequestSDKType {
   position_id: bigint;
 }
 export interface QueryClaimableFeesResponse {
   claimableFees: Coin[];
+}
+export interface QueryClaimableFeesResponseProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.QueryClaimableFeesResponse";
+  value: Uint8Array;
 }
 export interface QueryClaimableFeesResponseSDKType {
   claimable_fees: CoinSDKType[];
@@ -209,10 +273,14 @@ export const QueryUserPositionsRequest = {
     return obj;
   },
   fromAmino(object: QueryUserPositionsRequestAmino): QueryUserPositionsRequest {
-    return {
-      address: object.address,
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseQueryUserPositionsRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: QueryUserPositionsRequest): QueryUserPositionsRequestAmino {
     const obj: any = {};
@@ -311,9 +379,9 @@ export const QueryUserPositionsResponse = {
     return obj;
   },
   fromAmino(object: QueryUserPositionsResponseAmino): QueryUserPositionsResponse {
-    return {
-      positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => PositionWithUnderlyingAssetBreakdown.fromAmino(e)) : []
-    };
+    const message = createBaseQueryUserPositionsResponse();
+    message.positions = object.positions?.map(e => PositionWithUnderlyingAssetBreakdown.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryUserPositionsResponse): QueryUserPositionsResponseAmino {
     const obj: any = {};
@@ -407,9 +475,11 @@ export const QueryPositionByIdRequest = {
     return obj;
   },
   fromAmino(object: QueryPositionByIdRequestAmino): QueryPositionByIdRequest {
-    return {
-      positionId: BigInt(object.position_id)
-    };
+    const message = createBaseQueryPositionByIdRequest();
+    if (object.position_id !== undefined && object.position_id !== null) {
+      message.positionId = BigInt(object.position_id);
+    }
+    return message;
   },
   toAmino(message: QueryPositionByIdRequest): QueryPositionByIdRequestAmino {
     const obj: any = {};
@@ -499,9 +569,11 @@ export const QueryPositionByIdResponse = {
     return obj;
   },
   fromAmino(object: QueryPositionByIdResponseAmino): QueryPositionByIdResponse {
-    return {
-      position: object?.position ? PositionWithUnderlyingAssetBreakdown.fromAmino(object.position) : undefined
-    };
+    const message = createBaseQueryPositionByIdResponse();
+    if (object.position !== undefined && object.position !== null) {
+      message.position = PositionWithUnderlyingAssetBreakdown.fromAmino(object.position);
+    }
+    return message;
   },
   toAmino(message: QueryPositionByIdResponse): QueryPositionByIdResponseAmino {
     const obj: any = {};
@@ -532,7 +604,7 @@ export const QueryPositionByIdResponse = {
 };
 function createBaseQueryPoolsRequest(): QueryPoolsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryPoolsRequest = {
@@ -591,9 +663,11 @@ export const QueryPoolsRequest = {
     return obj;
   },
   fromAmino(object: QueryPoolsRequestAmino): QueryPoolsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryPoolsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryPoolsRequest): QueryPoolsRequestAmino {
     const obj: any = {};
@@ -625,7 +699,7 @@ export const QueryPoolsRequest = {
 function createBaseQueryPoolsResponse(): QueryPoolsResponse {
   return {
     pools: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryPoolsResponse = {
@@ -704,10 +778,12 @@ export const QueryPoolsResponse = {
     return obj;
   },
   fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryPoolsResponse();
+    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryPoolsResponse): QueryPoolsResponseAmino {
     const obj: any = {};
@@ -785,7 +861,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -874,9 +951,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -979,10 +1058,14 @@ export const TickLiquidityNet = {
     return obj;
   },
   fromAmino(object: TickLiquidityNetAmino): TickLiquidityNet {
-    return {
-      liquidityNet: object.liquidity_net,
-      tickIndex: object.tick_index
-    };
+    const message = createBaseTickLiquidityNet();
+    if (object.liquidity_net !== undefined && object.liquidity_net !== null) {
+      message.liquidityNet = object.liquidity_net;
+    }
+    if (object.tick_index !== undefined && object.tick_index !== null) {
+      message.tickIndex = object.tick_index;
+    }
+    return message;
   },
   toAmino(message: TickLiquidityNet): TickLiquidityNetAmino {
     const obj: any = {};
@@ -1099,11 +1182,17 @@ export const LiquidityDepthWithRange = {
     return obj;
   },
   fromAmino(object: LiquidityDepthWithRangeAmino): LiquidityDepthWithRange {
-    return {
-      liquidityAmount: object.liquidity_amount,
-      lowerTick: object.lower_tick,
-      upperTick: object.upper_tick
-    };
+    const message = createBaseLiquidityDepthWithRange();
+    if (object.liquidity_amount !== undefined && object.liquidity_amount !== null) {
+      message.liquidityAmount = object.liquidity_amount;
+    }
+    if (object.lower_tick !== undefined && object.lower_tick !== null) {
+      message.lowerTick = object.lower_tick;
+    }
+    if (object.upper_tick !== undefined && object.upper_tick !== null) {
+      message.upperTick = object.upper_tick;
+    }
+    return message;
   },
   toAmino(message: LiquidityDepthWithRange): LiquidityDepthWithRangeAmino {
     const obj: any = {};
@@ -1234,12 +1323,20 @@ export const QueryLiquidityNetInDirectionRequest = {
     return obj;
   },
   fromAmino(object: QueryLiquidityNetInDirectionRequestAmino): QueryLiquidityNetInDirectionRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      tokenIn: object.token_in,
-      startTick: object?.start_tick,
-      boundTick: object?.bound_tick
-    };
+    const message = createBaseQueryLiquidityNetInDirectionRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = object.token_in;
+    }
+    if (object.start_tick !== undefined && object.start_tick !== null) {
+      message.startTick = object.start_tick;
+    }
+    if (object.bound_tick !== undefined && object.bound_tick !== null) {
+      message.boundTick = object.bound_tick;
+    }
+    return message;
   },
   toAmino(message: QueryLiquidityNetInDirectionRequest): QueryLiquidityNetInDirectionRequestAmino {
     const obj: any = {};
@@ -1366,11 +1463,15 @@ export const QueryLiquidityNetInDirectionResponse = {
     return obj;
   },
   fromAmino(object: QueryLiquidityNetInDirectionResponseAmino): QueryLiquidityNetInDirectionResponse {
-    return {
-      liquidityDepths: Array.isArray(object?.liquidity_depths) ? object.liquidity_depths.map((e: any) => TickLiquidityNet.fromAmino(e)) : [],
-      currentTick: BigInt(object.current_tick),
-      currentLiquidity: object.current_liquidity
-    };
+    const message = createBaseQueryLiquidityNetInDirectionResponse();
+    message.liquidityDepths = object.liquidity_depths?.map(e => TickLiquidityNet.fromAmino(e)) || [];
+    if (object.current_tick !== undefined && object.current_tick !== null) {
+      message.currentTick = BigInt(object.current_tick);
+    }
+    if (object.current_liquidity !== undefined && object.current_liquidity !== null) {
+      message.currentLiquidity = object.current_liquidity;
+    }
+    return message;
   },
   toAmino(message: QueryLiquidityNetInDirectionResponse): QueryLiquidityNetInDirectionResponseAmino {
     const obj: any = {};
@@ -1466,9 +1567,11 @@ export const QueryTotalLiquidityForRangeRequest = {
     return obj;
   },
   fromAmino(object: QueryTotalLiquidityForRangeRequestAmino): QueryTotalLiquidityForRangeRequest {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseQueryTotalLiquidityForRangeRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: QueryTotalLiquidityForRangeRequest): QueryTotalLiquidityForRangeRequestAmino {
     const obj: any = {};
@@ -1566,9 +1669,9 @@ export const QueryTotalLiquidityForRangeResponse = {
     return obj;
   },
   fromAmino(object: QueryTotalLiquidityForRangeResponseAmino): QueryTotalLiquidityForRangeResponse {
-    return {
-      liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => LiquidityDepthWithRange.fromAmino(e)) : []
-    };
+    const message = createBaseQueryTotalLiquidityForRangeResponse();
+    message.liquidity = object.liquidity?.map(e => LiquidityDepthWithRange.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryTotalLiquidityForRangeResponse): QueryTotalLiquidityForRangeResponseAmino {
     const obj: any = {};
@@ -1662,9 +1765,11 @@ export const QueryClaimableFeesRequest = {
     return obj;
   },
   fromAmino(object: QueryClaimableFeesRequestAmino): QueryClaimableFeesRequest {
-    return {
-      positionId: BigInt(object.position_id)
-    };
+    const message = createBaseQueryClaimableFeesRequest();
+    if (object.position_id !== undefined && object.position_id !== null) {
+      message.positionId = BigInt(object.position_id);
+    }
+    return message;
   },
   toAmino(message: QueryClaimableFeesRequest): QueryClaimableFeesRequestAmino {
     const obj: any = {};
@@ -1762,9 +1867,9 @@ export const QueryClaimableFeesResponse = {
     return obj;
   },
   fromAmino(object: QueryClaimableFeesResponseAmino): QueryClaimableFeesResponse {
-    return {
-      claimableFees: Array.isArray(object?.claimable_fees) ? object.claimable_fees.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryClaimableFeesResponse();
+    message.claimableFees = object.claimable_fees?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryClaimableFeesResponse): QueryClaimableFeesResponseAmino {
     const obj: any = {};

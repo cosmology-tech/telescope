@@ -3,7 +3,7 @@ import { Decl, DeclAmino, DeclSDKType, CheckedExpr, CheckedExprAmino, CheckedExp
 import { ExprValue, ExprValueAmino, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../../helpers";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -75,17 +75,13 @@ export interface ParseRequestProtoMsg {
 /** Request message for the Parse method. */
 export interface ParseRequestAmino {
   /** Required. Source text in CEL syntax. */
-  cel_source: string;
+  cel_source?: string;
   /** Tag for version of CEL syntax, for future use. */
-  syntax_version: string;
+  syntax_version?: string;
   /** File or resource for source text, used in [SourceInfo][google.api.SourceInfo]. */
-  source_location: string;
+  source_location?: string;
   /** Prevent macro expansion.  See "Macros" in Language Defiinition. */
-  disable_macros: boolean;
-}
-export interface ParseRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.ParseRequest";
-  value: ParseRequestAmino;
+  disable_macros?: boolean;
 }
 /** Request message for the Parse method. */
 export interface ParseRequestSDKType {
@@ -97,7 +93,7 @@ export interface ParseRequestSDKType {
 /** Response message for the Parse method. */
 export interface ParseResponse {
   /** The parsed representation, or unset if parsing failed. */
-  parsedExpr: ParsedExpr;
+  parsedExpr?: ParsedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
@@ -110,21 +106,17 @@ export interface ParseResponseAmino {
   /** The parsed representation, or unset if parsing failed. */
   parsed_expr?: ParsedExprAmino;
   /** Any number of issues with [StatusDetails][] as the details. */
-  issues: StatusAmino[];
-}
-export interface ParseResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.ParseResponse";
-  value: ParseResponseAmino;
+  issues?: StatusAmino[];
 }
 /** Response message for the Parse method. */
 export interface ParseResponseSDKType {
-  parsed_expr: ParsedExprSDKType;
+  parsed_expr?: ParsedExprSDKType;
   issues: StatusSDKType[];
 }
 /** Request message for the Check method. */
 export interface CheckRequest {
   /** Required. The parsed representation of the CEL program. */
-  parsedExpr: ParsedExpr;
+  parsedExpr?: ParsedExpr;
   /**
    * Declarations of types for external variables and functions.
    * Required if program uses external variables or functions
@@ -156,26 +148,22 @@ export interface CheckRequestAmino {
    * Required if program uses external variables or functions
    * not in the default environment.
    */
-  type_env: DeclAmino[];
+  type_env?: DeclAmino[];
   /**
    * The protocol buffer context.  See "Name Resolution" in the
    * Language Definition.
    */
-  container: string;
+  container?: string;
   /**
    * If true, use only the declarations in [type_env][google.api.expr.conformance.v1alpha1.CheckRequest.type_env].  If false (default),
    * add declarations for the standard definitions to the type environment.  See
    * "Standard Definitions" in the Language Definition.
    */
-  no_std_env: boolean;
-}
-export interface CheckRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.CheckRequest";
-  value: CheckRequestAmino;
+  no_std_env?: boolean;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
-  parsed_expr: ParsedExprSDKType;
+  parsed_expr?: ParsedExprSDKType;
   type_env: DeclSDKType[];
   container: string;
   no_std_env: boolean;
@@ -183,7 +171,7 @@ export interface CheckRequestSDKType {
 /** Response message for the Check method. */
 export interface CheckResponse {
   /** The annotated representation, or unset if checking failed. */
-  checkedExpr: CheckedExpr;
+  checkedExpr?: CheckedExpr;
   /** Any number of issues with [StatusDetails][] as the details. */
   issues: Status[];
 }
@@ -196,36 +184,28 @@ export interface CheckResponseAmino {
   /** The annotated representation, or unset if checking failed. */
   checked_expr?: CheckedExprAmino;
   /** Any number of issues with [StatusDetails][] as the details. */
-  issues: StatusAmino[];
-}
-export interface CheckResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.CheckResponse";
-  value: CheckResponseAmino;
+  issues?: StatusAmino[];
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  checked_expr: CheckedExprSDKType;
+  checked_expr?: CheckedExprSDKType;
   issues: StatusSDKType[];
 }
 export interface EvalRequest_BindingsEntry {
   key: string;
-  value: ExprValue;
+  value?: ExprValue;
 }
 export interface EvalRequest_BindingsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
 export interface EvalRequest_BindingsEntryAmino {
-  key: string;
+  key?: string;
   value?: ExprValueAmino;
-}
-export interface EvalRequest_BindingsEntryAminoMsg {
-  type: string;
-  value: EvalRequest_BindingsEntryAmino;
 }
 export interface EvalRequest_BindingsEntrySDKType {
   key: string;
-  value: ExprValueSDKType;
+  value?: ExprValueSDKType;
 }
 /** Request message for the Eval method. */
 export interface EvalRequest {
@@ -261,11 +241,7 @@ export interface EvalRequestAmino {
     [key: string]: ExprValueAmino;
   };
   /** SHOULD be the same container as used in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked. */
-  container: string;
-}
-export interface EvalRequestAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.EvalRequest";
-  value: EvalRequestAmino;
+  container?: string;
 }
 /** Request message for the Eval method. */
 export interface EvalRequestSDKType {
@@ -279,7 +255,7 @@ export interface EvalRequestSDKType {
 /** Response message for the Eval method. */
 export interface EvalResponse {
   /** The execution result, or unset if execution couldn't start. */
-  result: ExprValue;
+  result?: ExprValue;
   /**
    * Any number of issues with [StatusDetails][] as the details.
    * Note that CEL execution errors are reified into [ExprValue][].
@@ -302,15 +278,11 @@ export interface EvalResponseAmino {
    * Nevertheless, we'll allow out-of-band issues to be raised,
    * which also makes the replies more regular.
    */
-  issues: StatusAmino[];
-}
-export interface EvalResponseAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.EvalResponse";
-  value: EvalResponseAmino;
+  issues?: StatusAmino[];
 }
 /** Response message for the Eval method. */
 export interface EvalResponseSDKType {
-  result: ExprValueSDKType;
+  result?: ExprValueSDKType;
   issues: StatusSDKType[];
 }
 /**
@@ -322,7 +294,7 @@ export interface IssueDetails {
   /** The severity of the issue. */
   severity: IssueDetails_Severity;
   /** Position in the source, if known. */
-  position: SourcePosition;
+  position?: SourcePosition;
   /** Expression ID from [Expr][], 0 if unknown. */
   id: bigint;
 }
@@ -337,15 +309,11 @@ export interface IssueDetailsProtoMsg {
  */
 export interface IssueDetailsAmino {
   /** The severity of the issue. */
-  severity: IssueDetails_Severity;
+  severity?: IssueDetails_Severity;
   /** Position in the source, if known. */
   position?: SourcePositionAmino;
   /** Expression ID from [Expr][], 0 if unknown. */
-  id: string;
-}
-export interface IssueDetailsAminoMsg {
-  type: "/google.api.expr.conformance.v1alpha1.IssueDetails";
-  value: IssueDetailsAmino;
+  id?: string;
 }
 /**
  * Warnings or errors in service execution are represented by
@@ -354,7 +322,7 @@ export interface IssueDetailsAminoMsg {
  */
 export interface IssueDetailsSDKType {
   severity: IssueDetails_Severity;
-  position: SourcePositionSDKType;
+  position?: SourcePositionSDKType;
   id: bigint;
 }
 function createBaseParseRequest(): ParseRequest {
@@ -382,7 +350,7 @@ export const ParseRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParseRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParseRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseRequest();
@@ -449,26 +417,31 @@ export const ParseRequest = {
     return obj;
   },
   fromAmino(object: ParseRequestAmino): ParseRequest {
-    return {
-      celSource: object.cel_source,
-      syntaxVersion: object.syntax_version,
-      sourceLocation: object.source_location,
-      disableMacros: object.disable_macros
-    };
+    const message = createBaseParseRequest();
+    if (object.cel_source !== undefined && object.cel_source !== null) {
+      message.celSource = object.cel_source;
+    }
+    if (object.syntax_version !== undefined && object.syntax_version !== null) {
+      message.syntaxVersion = object.syntax_version;
+    }
+    if (object.source_location !== undefined && object.source_location !== null) {
+      message.sourceLocation = object.source_location;
+    }
+    if (object.disable_macros !== undefined && object.disable_macros !== null) {
+      message.disableMacros = object.disable_macros;
+    }
+    return message;
   },
-  toAmino(message: ParseRequest): ParseRequestAmino {
+  toAmino(message: ParseRequest, useInterfaces: boolean = true): ParseRequestAmino {
     const obj: any = {};
-    obj.cel_source = omitDefault(message.celSource);
-    obj.syntax_version = omitDefault(message.syntaxVersion);
-    obj.source_location = omitDefault(message.sourceLocation);
-    obj.disable_macros = omitDefault(message.disableMacros);
+    obj.cel_source = message.celSource;
+    obj.syntax_version = message.syntaxVersion;
+    obj.source_location = message.sourceLocation;
+    obj.disable_macros = message.disableMacros;
     return obj;
   },
-  fromAminoMsg(object: ParseRequestAminoMsg): ParseRequest {
-    return ParseRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParseRequestProtoMsg): ParseRequest {
-    return ParseRequest.decode(message.value);
+  fromProtoMsg(message: ParseRequestProtoMsg, useInterfaces: boolean = true): ParseRequest {
+    return ParseRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParseRequest): Uint8Array {
     return ParseRequest.encode(message).finish();
@@ -482,7 +455,7 @@ export const ParseRequest = {
 };
 function createBaseParseResponse(): ParseResponse {
   return {
-    parsedExpr: ParsedExpr.fromPartial({}),
+    parsedExpr: undefined,
     issues: []
   };
 }
@@ -497,7 +470,7 @@ export const ParseResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParseResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParseResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParseResponse();
@@ -505,10 +478,10 @@ export const ParseResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32());
+          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.issues.push(Status.decode(reader, reader.uint32()));
+          message.issues.push(Status.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -558,26 +531,25 @@ export const ParseResponse = {
     return obj;
   },
   fromAmino(object: ParseResponseAmino): ParseResponse {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseParseResponse();
+    if (object.parsed_expr !== undefined && object.parsed_expr !== null) {
+      message.parsedExpr = ParsedExpr.fromAmino(object.parsed_expr);
+    }
+    message.issues = object.issues?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ParseResponse): ParseResponseAmino {
+  toAmino(message: ParseResponse, useInterfaces: boolean = true): ParseResponseAmino {
     const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
     if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.issues = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ParseResponseAminoMsg): ParseResponse {
-    return ParseResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParseResponseProtoMsg): ParseResponse {
-    return ParseResponse.decode(message.value);
+  fromProtoMsg(message: ParseResponseProtoMsg, useInterfaces: boolean = true): ParseResponse {
+    return ParseResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParseResponse): Uint8Array {
     return ParseResponse.encode(message).finish();
@@ -591,7 +563,7 @@ export const ParseResponse = {
 };
 function createBaseCheckRequest(): CheckRequest {
   return {
-    parsedExpr: ParsedExpr.fromPartial({}),
+    parsedExpr: undefined,
     typeEnv: [],
     container: "",
     noStdEnv: false
@@ -614,7 +586,7 @@ export const CheckRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -622,10 +594,10 @@ export const CheckRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32());
+          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.typeEnv.push(Decl.decode(reader, reader.uint32()));
+          message.typeEnv.push(Decl.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.container = reader.string();
@@ -691,30 +663,33 @@ export const CheckRequest = {
     return obj;
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      typeEnv: Array.isArray(object?.type_env) ? object.type_env.map((e: any) => Decl.fromAmino(e)) : [],
-      container: object.container,
-      noStdEnv: object.no_std_env
-    };
+    const message = createBaseCheckRequest();
+    if (object.parsed_expr !== undefined && object.parsed_expr !== null) {
+      message.parsedExpr = ParsedExpr.fromAmino(object.parsed_expr);
+    }
+    message.typeEnv = object.type_env?.map(e => Decl.fromAmino(e)) || [];
+    if (object.container !== undefined && object.container !== null) {
+      message.container = object.container;
+    }
+    if (object.no_std_env !== undefined && object.no_std_env !== null) {
+      message.noStdEnv = object.no_std_env;
+    }
+    return message;
   },
-  toAmino(message: CheckRequest): CheckRequestAmino {
+  toAmino(message: CheckRequest, useInterfaces: boolean = true): CheckRequestAmino {
     const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
     if (message.typeEnv) {
-      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e) : undefined);
+      obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.type_env = [];
     }
-    obj.container = omitDefault(message.container);
-    obj.no_std_env = omitDefault(message.noStdEnv);
+    obj.container = message.container;
+    obj.no_std_env = message.noStdEnv;
     return obj;
   },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
-    return CheckRequest.decode(message.value);
+  fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
+    return CheckRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckRequest): Uint8Array {
     return CheckRequest.encode(message).finish();
@@ -728,7 +703,7 @@ export const CheckRequest = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    checkedExpr: CheckedExpr.fromPartial({}),
+    checkedExpr: undefined,
     issues: []
   };
 }
@@ -743,7 +718,7 @@ export const CheckResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -751,10 +726,10 @@ export const CheckResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.checkedExpr = CheckedExpr.decode(reader, reader.uint32());
+          message.checkedExpr = CheckedExpr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.issues.push(Status.decode(reader, reader.uint32()));
+          message.issues.push(Status.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -804,26 +779,25 @@ export const CheckResponse = {
     return obj;
   },
   fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseCheckResponse();
+    if (object.checked_expr !== undefined && object.checked_expr !== null) {
+      message.checkedExpr = CheckedExpr.fromAmino(object.checked_expr);
+    }
+    message.issues = object.issues?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: CheckResponse): CheckResponseAmino {
+  toAmino(message: CheckResponse, useInterfaces: boolean = true): CheckResponseAmino {
     const obj: any = {};
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
+    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr, useInterfaces) : undefined;
     if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.issues = [];
     }
     return obj;
   },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
-    return CheckResponse.decode(message.value);
+  fromProtoMsg(message: CheckResponseProtoMsg, useInterfaces: boolean = true): CheckResponse {
+    return CheckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse): Uint8Array {
     return CheckResponse.encode(message).finish();
@@ -838,7 +812,7 @@ export const CheckResponse = {
 function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
   return {
     key: "",
-    value: ExprValue.fromPartial({})
+    value: undefined
   };
 }
 export const EvalRequest_BindingsEntry = {
@@ -851,7 +825,7 @@ export const EvalRequest_BindingsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest_BindingsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalRequest_BindingsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest_BindingsEntry();
@@ -862,7 +836,7 @@ export const EvalRequest_BindingsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = ExprValue.decode(reader, reader.uint32());
+          message.value = ExprValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -904,22 +878,23 @@ export const EvalRequest_BindingsEntry = {
     return obj;
   },
   fromAmino(object: EvalRequest_BindingsEntryAmino): EvalRequest_BindingsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? ExprValue.fromAmino(object.value) : undefined
-    };
+    const message = createBaseEvalRequest_BindingsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = ExprValue.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
+  toAmino(message: EvalRequest_BindingsEntry, useInterfaces: boolean = true): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
+    obj.key = message.key;
+    obj.value = message.value ? ExprValue.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: EvalRequest_BindingsEntryAminoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg): EvalRequest_BindingsEntry {
-    return EvalRequest_BindingsEntry.decode(message.value);
+  fromProtoMsg(message: EvalRequest_BindingsEntryProtoMsg, useInterfaces: boolean = true): EvalRequest_BindingsEntry {
+    return EvalRequest_BindingsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalRequest_BindingsEntry): Uint8Array {
     return EvalRequest_BindingsEntry.encode(message).finish();
@@ -953,7 +928,7 @@ export const EvalRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalRequest();
@@ -961,10 +936,10 @@ export const EvalRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32());
+          message.parsedExpr = ParsedExpr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.checkedExpr = CheckedExpr.decode(reader, reader.uint32());
+          message.checkedExpr = CheckedExpr.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           const entry3 = EvalRequest_BindingsEntry.decode(reader, reader.uint32());
@@ -1054,36 +1029,41 @@ export const EvalRequest = {
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
-    return {
-      parsedExpr: object?.parsed_expr ? ParsedExpr.fromAmino(object.parsed_expr) : undefined,
-      checkedExpr: object?.checked_expr ? CheckedExpr.fromAmino(object.checked_expr) : undefined,
-      bindings: isObject(object.bindings) ? Object.entries(object.bindings).reduce<{
-        [key: string]: ExprValue;
-      }>((acc, [key, value]) => {
+    const message = createBaseEvalRequest();
+    if (object.parsed_expr !== undefined && object.parsed_expr !== null) {
+      message.parsedExpr = ParsedExpr.fromAmino(object.parsed_expr);
+    }
+    if (object.checked_expr !== undefined && object.checked_expr !== null) {
+      message.checkedExpr = CheckedExpr.fromAmino(object.checked_expr);
+    }
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = ExprValue.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      container: object.container
-    };
+      }
+      return acc;
+    }, {});
+    if (object.container !== undefined && object.container !== null) {
+      message.container = object.container;
+    }
+    return message;
   },
-  toAmino(message: EvalRequest): EvalRequestAmino {
+  toAmino(message: EvalRequest, useInterfaces: boolean = true): EvalRequestAmino {
     const obj: any = {};
-    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr) : undefined;
-    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr) : undefined;
+    obj.parsed_expr = message.parsedExpr ? ParsedExpr.toAmino(message.parsedExpr, useInterfaces) : undefined;
+    obj.checked_expr = message.checkedExpr ? CheckedExpr.toAmino(message.checkedExpr, useInterfaces) : undefined;
     obj.bindings = {};
     if (message.bindings) {
       Object.entries(message.bindings).forEach(([k, v]) => {
         obj.bindings[k] = ExprValue.toAmino(v);
       });
     }
-    obj.container = omitDefault(message.container);
+    obj.container = message.container;
     return obj;
   },
-  fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
-    return EvalRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalRequestProtoMsg): EvalRequest {
-    return EvalRequest.decode(message.value);
+  fromProtoMsg(message: EvalRequestProtoMsg, useInterfaces: boolean = true): EvalRequest {
+    return EvalRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalRequest): Uint8Array {
     return EvalRequest.encode(message).finish();
@@ -1097,7 +1077,7 @@ export const EvalRequest = {
 };
 function createBaseEvalResponse(): EvalResponse {
   return {
-    result: ExprValue.fromPartial({}),
+    result: undefined,
     issues: []
   };
 }
@@ -1112,7 +1092,7 @@ export const EvalResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EvalResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EvalResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEvalResponse();
@@ -1120,10 +1100,10 @@ export const EvalResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.result = ExprValue.decode(reader, reader.uint32());
+          message.result = ExprValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.issues.push(Status.decode(reader, reader.uint32()));
+          message.issues.push(Status.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1173,26 +1153,25 @@ export const EvalResponse = {
     return obj;
   },
   fromAmino(object: EvalResponseAmino): EvalResponse {
-    return {
-      result: object?.result ? ExprValue.fromAmino(object.result) : undefined,
-      issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromAmino(e)) : []
-    };
+    const message = createBaseEvalResponse();
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ExprValue.fromAmino(object.result);
+    }
+    message.issues = object.issues?.map(e => Status.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: EvalResponse): EvalResponseAmino {
+  toAmino(message: EvalResponse, useInterfaces: boolean = true): EvalResponseAmino {
     const obj: any = {};
-    obj.result = message.result ? ExprValue.toAmino(message.result) : undefined;
+    obj.result = message.result ? ExprValue.toAmino(message.result, useInterfaces) : undefined;
     if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toAmino(e) : undefined);
+      obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.issues = [];
     }
     return obj;
   },
-  fromAminoMsg(object: EvalResponseAminoMsg): EvalResponse {
-    return EvalResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EvalResponseProtoMsg): EvalResponse {
-    return EvalResponse.decode(message.value);
+  fromProtoMsg(message: EvalResponseProtoMsg, useInterfaces: boolean = true): EvalResponse {
+    return EvalResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EvalResponse): Uint8Array {
     return EvalResponse.encode(message).finish();
@@ -1207,7 +1186,7 @@ export const EvalResponse = {
 function createBaseIssueDetails(): IssueDetails {
   return {
     severity: 0,
-    position: SourcePosition.fromPartial({}),
+    position: undefined,
     id: BigInt(0)
   };
 }
@@ -1225,7 +1204,7 @@ export const IssueDetails = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IssueDetails {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IssueDetails {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIssueDetails();
@@ -1236,7 +1215,7 @@ export const IssueDetails = {
           message.severity = (reader.int32() as any);
           break;
         case 2:
-          message.position = SourcePosition.decode(reader, reader.uint32());
+          message.position = SourcePosition.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.id = reader.int64();
@@ -1288,24 +1267,27 @@ export const IssueDetails = {
     return obj;
   },
   fromAmino(object: IssueDetailsAmino): IssueDetails {
-    return {
-      severity: isSet(object.severity) ? issueDetails_SeverityFromJSON(object.severity) : -1,
-      position: object?.position ? SourcePosition.fromAmino(object.position) : undefined,
-      id: BigInt(object.id)
-    };
+    const message = createBaseIssueDetails();
+    if (object.severity !== undefined && object.severity !== null) {
+      message.severity = issueDetails_SeverityFromJSON(object.severity);
+    }
+    if (object.position !== undefined && object.position !== null) {
+      message.position = SourcePosition.fromAmino(object.position);
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    return message;
   },
-  toAmino(message: IssueDetails): IssueDetailsAmino {
+  toAmino(message: IssueDetails, useInterfaces: boolean = true): IssueDetailsAmino {
     const obj: any = {};
-    obj.severity = omitDefault(message.severity);
-    obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
-    obj.id = omitDefault(message.id);
+    obj.severity = issueDetails_SeverityToJSON(message.severity);
+    obj.position = message.position ? SourcePosition.toAmino(message.position, useInterfaces) : undefined;
+    obj.id = message.id ? message.id.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {
-    return IssueDetails.fromAmino(object.value);
-  },
-  fromProtoMsg(message: IssueDetailsProtoMsg): IssueDetails {
-    return IssueDetails.decode(message.value);
+  fromProtoMsg(message: IssueDetailsProtoMsg, useInterfaces: boolean = true): IssueDetails {
+    return IssueDetails.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IssueDetails): Uint8Array {
     return IssueDetails.encode(message).finish();

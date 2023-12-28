@@ -4,7 +4,7 @@ import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } fro
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
-  proposer: Validator;
+  proposer?: Validator;
   totalVotingPower: bigint;
 }
 export interface ValidatorSetProtoMsg {
@@ -12,9 +12,9 @@ export interface ValidatorSetProtoMsg {
   value: Uint8Array;
 }
 export interface ValidatorSetAmino {
-  validators: ValidatorAmino[];
+  validators?: ValidatorAmino[];
   proposer?: ValidatorAmino;
-  total_voting_power: string;
+  total_voting_power?: string;
 }
 export interface ValidatorSetAminoMsg {
   type: "/tendermint.types.ValidatorSet";
@@ -22,7 +22,7 @@ export interface ValidatorSetAminoMsg {
 }
 export interface ValidatorSetSDKType {
   validators: ValidatorSDKType[];
-  proposer: ValidatorSDKType;
+  proposer?: ValidatorSDKType;
   total_voting_power: bigint;
 }
 export interface Validator {
@@ -36,10 +36,10 @@ export interface ValidatorProtoMsg {
   value: Uint8Array;
 }
 export interface ValidatorAmino {
-  address: Uint8Array;
+  address?: string;
   pub_key?: PublicKeyAmino;
-  voting_power: string;
-  proposer_priority: string;
+  voting_power?: string;
+  proposer_priority?: string;
 }
 export interface ValidatorAminoMsg {
   type: "/tendermint.types.Validator";
@@ -52,7 +52,7 @@ export interface ValidatorSDKType {
   proposer_priority: bigint;
 }
 export interface SimpleValidator {
-  pubKey: PublicKey;
+  pubKey?: PublicKey;
   votingPower: bigint;
 }
 export interface SimpleValidatorProtoMsg {
@@ -61,20 +61,20 @@ export interface SimpleValidatorProtoMsg {
 }
 export interface SimpleValidatorAmino {
   pub_key?: PublicKeyAmino;
-  voting_power: string;
+  voting_power?: string;
 }
 export interface SimpleValidatorAminoMsg {
   type: "/tendermint.types.SimpleValidator";
   value: SimpleValidatorAmino;
 }
 export interface SimpleValidatorSDKType {
-  pub_key: PublicKeySDKType;
+  pub_key?: PublicKeySDKType;
   voting_power: bigint;
 }
 function createBaseValidatorSet(): ValidatorSet {
   return {
     validators: [],
-    proposer: Validator.fromPartial({}),
+    proposer: undefined,
     totalVotingPower: BigInt(0)
   };
 }
@@ -163,11 +163,15 @@ export const ValidatorSet = {
     return obj;
   },
   fromAmino(object: ValidatorSetAmino): ValidatorSet {
-    return {
-      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => Validator.fromAmino(e)) : [],
-      proposer: object?.proposer ? Validator.fromAmino(object.proposer) : undefined,
-      totalVotingPower: BigInt(object.total_voting_power)
-    };
+    const message = createBaseValidatorSet();
+    message.validators = object.validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = Validator.fromAmino(object.proposer);
+    }
+    if (object.total_voting_power !== undefined && object.total_voting_power !== null) {
+      message.totalVotingPower = BigInt(object.total_voting_power);
+    }
+    return message;
   },
   toAmino(message: ValidatorSet): ValidatorSetAmino {
     const obj: any = {};
@@ -294,16 +298,24 @@ export const Validator = {
     return obj;
   },
   fromAmino(object: ValidatorAmino): Validator {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power),
-      proposerPriority: BigInt(object.proposer_priority)
-    };
+    const message = createBaseValidator();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = bytesFromBase64(object.address);
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = PublicKey.fromAmino(object.pub_key);
+    }
+    if (object.voting_power !== undefined && object.voting_power !== null) {
+      message.votingPower = BigInt(object.voting_power);
+    }
+    if (object.proposer_priority !== undefined && object.proposer_priority !== null) {
+      message.proposerPriority = BigInt(object.proposer_priority);
+    }
+    return message;
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address ? base64FromBytes(message.address) : undefined;
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
     obj.voting_power = omitDefault(message.votingPower);
     obj.proposer_priority = omitDefault(message.proposerPriority);
@@ -327,7 +339,7 @@ export const Validator = {
 };
 function createBaseSimpleValidator(): SimpleValidator {
   return {
-    pubKey: PublicKey.fromPartial({}),
+    pubKey: undefined,
     votingPower: BigInt(0)
   };
 }
@@ -397,10 +409,14 @@ export const SimpleValidator = {
     return obj;
   },
   fromAmino(object: SimpleValidatorAmino): SimpleValidator {
-    return {
-      pubKey: object?.pub_key ? PublicKey.fromAmino(object.pub_key) : undefined,
-      votingPower: BigInt(object.voting_power)
-    };
+    const message = createBaseSimpleValidator();
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = PublicKey.fromAmino(object.pub_key);
+    }
+    if (object.voting_power !== undefined && object.voting_power !== null) {
+      message.votingPower = BigInt(object.voting_power);
+    }
+    return message;
   },
   toAmino(message: SimpleValidator): SimpleValidatorAmino {
     const obj: any = {};

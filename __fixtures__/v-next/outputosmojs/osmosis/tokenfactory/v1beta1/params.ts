@@ -6,6 +6,10 @@ export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 export interface Params {
   denomCreationFee: Coin[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the tokenfactory module. */
 export interface ParamsSDKType {
   denom_creation_fee: CoinSDKType[];
@@ -79,9 +83,9 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      denomCreationFee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.denomCreationFee = object.denom_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

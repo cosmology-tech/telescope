@@ -11,7 +11,7 @@ export const protobufPackage = "cosmos.gov.v1beta1";
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  content: Any;
+  content?: Any;
   initialDeposit: Coin[];
   proposer: string;
 }
@@ -53,7 +53,7 @@ export interface MsgDeposit {
 export interface MsgDepositResponse {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    content: Any.fromPartial({}),
+    content: undefined,
     initialDeposit: [],
     proposer: ""
   };

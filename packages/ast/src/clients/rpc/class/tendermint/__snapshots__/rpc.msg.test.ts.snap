@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RPC Msg Client 1`] = `
+exports[`RPC Msg Client but Query implement 1`] = `
 "/** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
@@ -10,7 +10,7 @@ export interface Msg {
 }"
 `;
 
-exports[`RPC Msg Client 2`] = `
+exports[`RPC Msg Client but Query implement 2`] = `
 "export class MsgClientImpl implements Msg {
   private readonly rpc: Rpc;
   constructor(rpc: Rpc) {
@@ -31,8 +31,76 @@ exports[`RPC Msg Client 2`] = `
 }"
 `;
 
-exports[`RPC Msg Client 3`] = `
+exports[`RPC Msg Client but Query implement 3`] = `
 "interface Rpc {
   request(service: string, method: string, data: Uint8Array): Promise<Uint8Array>;
+}"
+`;
+
+exports[`RPC Msg Query mixed implement Client 1`] = `
+"/** Msg defines the bank Msg service. */
+export interface Msg {
+  /** Send defines a method for sending coins from one account to another account. */
+  send(request: MsgSend): Promise<MsgSendResponse>;
+  /** MultiSend defines a method for sending coins from some accounts to other accounts. */
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+}"
+`;
+
+exports[`RPC Msg Query mixed implement Client 2`] = `
+"export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.send = this.send.bind(this);
+    this.multiSend = this.multiSend.bind(this);
+  }
+  send(request: MsgSend): Promise<MsgSendResponse> {
+    const data = MsgSend.encode(request).finish();
+    const promise = this.rpc.request("cosmos.bank.v1beta1.Msg", "Send", data);
+    return promise.then(data => MsgSendResponse.decode(new BinaryReader(data)));
+  }
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
+    const data = [{
+      typeUrl: MsgMultiSend.typeUrl,
+      value: message
+    }];
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
+  }
+}"
+`;
+
+exports[`RPC Msg implement Client 1`] = `
+"/** Msg defines the bank Msg service. */
+export interface Msg {
+  /** Send defines a method for sending coins from one account to another account. */
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  /** MultiSend defines a method for sending coins from some accounts to other accounts. */
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+}"
+`;
+
+exports[`RPC Msg implement Client 2`] = `
+"export class MsgClientImpl implements Msg {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+    this.send = this.send.bind(this);
+    this.multiSend = this.multiSend.bind(this);
+  }
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
+    const data = [{
+      typeUrl: MsgSend.typeUrl,
+      value: message
+    }];
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
+  }
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto" = "auto", memo: string = ""): Promise<DeliverTxResponse> {
+    const data = [{
+      typeUrl: MsgMultiSend.typeUrl,
+      value: message
+    }];
+    return this.rpc.signAndBroadcast!(signerAddress, data, fee, memo);
+  }
 }"
 `;

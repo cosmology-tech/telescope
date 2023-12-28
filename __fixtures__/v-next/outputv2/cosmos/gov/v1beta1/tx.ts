@@ -7,14 +7,14 @@ import { ReplacePoolIncentivesProposal, ReplacePoolIncentivesProposalProtoMsg, R
 import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalProtoMsg, SetSuperfluidAssetsProposalSDKType, RemoveSuperfluidAssetsProposal, RemoveSuperfluidAssetsProposalProtoMsg, RemoveSuperfluidAssetsProposalSDKType, UpdateUnpoolWhiteListProposal, UpdateUnpoolWhiteListProposalProtoMsg, UpdateUnpoolWhiteListProposalSDKType } from "../../../osmosis/superfluid/v1beta1/gov";
 import { UpdateFeeTokenProposal, UpdateFeeTokenProposalProtoMsg, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
  * proposal Content.
  */
 export interface MsgSubmitProposal {
-  content: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
+  content?: TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any | undefined;
   initialDeposit: Coin[];
   proposer: string;
 }
@@ -31,8 +31,8 @@ export type MsgSubmitProposalEncoded = Omit<MsgSubmitProposal, "content"> & {
  */
 export interface MsgSubmitProposalAmino {
   content?: AnyAmino;
-  initial_deposit: CoinAmino[];
-  proposer: string;
+  initial_deposit?: CoinAmino[];
+  proposer?: string;
 }
 export interface MsgSubmitProposalAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
@@ -43,7 +43,7 @@ export interface MsgSubmitProposalAminoMsg {
  * proposal Content.
  */
 export interface MsgSubmitProposalSDKType {
-  content: TextProposalSDKType | RegisterIncentiveProposalSDKType | ClientUpdateProposalSDKType | UpgradeProposalSDKType | ReplacePoolIncentivesProposalSDKType | UpdatePoolIncentivesProposalSDKType | SetSuperfluidAssetsProposalSDKType | RemoveSuperfluidAssetsProposalSDKType | UpdateUnpoolWhiteListProposalSDKType | UpdateFeeTokenProposalSDKType | AnySDKType | undefined;
+  content?: TextProposalSDKType | RegisterIncentiveProposalSDKType | ClientUpdateProposalSDKType | UpgradeProposalSDKType | ReplacePoolIncentivesProposalSDKType | UpdatePoolIncentivesProposalSDKType | SetSuperfluidAssetsProposalSDKType | RemoveSuperfluidAssetsProposalSDKType | UpdateUnpoolWhiteListProposalSDKType | UpdateFeeTokenProposalSDKType | AnySDKType | undefined;
   initial_deposit: CoinSDKType[];
   proposer: string;
 }
@@ -57,7 +57,7 @@ export interface MsgSubmitProposalResponseProtoMsg {
 }
 /** MsgSubmitProposalResponse defines the Msg/SubmitProposal response type. */
 export interface MsgSubmitProposalResponseAmino {
-  proposal_id: string;
+  proposal_id?: string;
 }
 export interface MsgSubmitProposalResponseAminoMsg {
   type: "cosmos-sdk/MsgSubmitProposalResponse";
@@ -79,9 +79,9 @@ export interface MsgVoteProtoMsg {
 }
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteAmino {
-  proposal_id: string;
-  voter: string;
-  option: VoteOption;
+  proposal_id?: string;
+  voter?: string;
+  option?: VoteOption;
 }
 export interface MsgVoteAminoMsg {
   type: "cosmos-sdk/MsgVote";
@@ -127,9 +127,9 @@ export interface MsgVoteWeightedProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface MsgVoteWeightedAmino {
-  proposal_id: string;
-  voter: string;
-  options: WeightedVoteOptionAmino[];
+  proposal_id?: string;
+  voter?: string;
+  options?: WeightedVoteOptionAmino[];
 }
 export interface MsgVoteWeightedAminoMsg {
   type: "cosmos-sdk/MsgVoteWeighted";
@@ -183,9 +183,9 @@ export interface MsgDepositProtoMsg {
 }
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositAmino {
-  proposal_id: string;
-  depositor: string;
-  amount: CoinAmino[];
+  proposal_id?: string;
+  depositor?: string;
+  amount?: CoinAmino[];
 }
 export interface MsgDepositAminoMsg {
   type: "cosmos-sdk/MsgDeposit";
@@ -213,7 +213,7 @@ export interface MsgDepositResponseAminoMsg {
 export interface MsgDepositResponseSDKType {}
 function createBaseMsgSubmitProposal(): MsgSubmitProposal {
   return {
-    content: Any.fromPartial({}),
+    content: undefined,
     initialDeposit: [],
     proposer: ""
   };
@@ -302,11 +302,15 @@ export const MsgSubmitProposal = {
     return obj;
   },
   fromAmino(object: MsgSubmitProposalAmino): MsgSubmitProposal {
-    return {
-      content: object?.content ? ProposalContentI_FromAmino(object.content) : undefined,
-      initialDeposit: Array.isArray(object?.initial_deposit) ? object.initial_deposit.map((e: any) => Coin.fromAmino(e)) : [],
-      proposer: object.proposer
-    };
+    const message = createBaseMsgSubmitProposal();
+    if (object.content !== undefined && object.content !== null) {
+      message.content = ProposalContentI_FromAmino(object.content);
+    }
+    message.initialDeposit = object.initial_deposit?.map(e => Coin.fromAmino(e)) || [];
+    if (object.proposer !== undefined && object.proposer !== null) {
+      message.proposer = object.proposer;
+    }
+    return message;
   },
   toAmino(message: MsgSubmitProposal): MsgSubmitProposalAmino {
     const obj: any = {};
@@ -316,7 +320,7 @@ export const MsgSubmitProposal = {
     } else {
       obj.initial_deposit = [];
     }
-    obj.proposer = omitDefault(message.proposer);
+    obj.proposer = message.proposer;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitProposalAminoMsg): MsgSubmitProposal {
@@ -400,13 +404,15 @@ export const MsgSubmitProposalResponse = {
     return obj;
   },
   fromAmino(object: MsgSubmitProposalResponseAmino): MsgSubmitProposalResponse {
-    return {
-      proposalId: BigInt(object.proposal_id)
-    };
+    const message = createBaseMsgSubmitProposalResponse();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId;
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {
@@ -514,17 +520,23 @@ export const MsgVote = {
     return obj;
   },
   fromAmino(object: MsgVoteAmino): MsgVote {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      option: isSet(object.option) ? voteOptionFromJSON(object.option) : -1
-    };
+    const message = createBaseMsgVote();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.voter !== undefined && object.voter !== null) {
+      message.voter = object.voter;
+    }
+    if (object.option !== undefined && object.option !== null) {
+      message.option = voteOptionFromJSON(object.option);
+    }
+    return message;
   },
   toAmino(message: MsgVote): MsgVoteAmino {
     const obj: any = {};
-    obj.proposal_id = omitDefault(message.proposalId);
-    obj.voter = omitDefault(message.voter);
-    obj.option = omitDefault(message.option);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.voter = message.voter;
+    obj.option = voteOptionToJSON(message.option);
     return obj;
   },
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {
@@ -592,7 +604,8 @@ export const MsgVoteResponse = {
     return obj;
   },
   fromAmino(_: MsgVoteResponseAmino): MsgVoteResponse {
-    return {};
+    const message = createBaseMsgVoteResponse();
+    return message;
   },
   toAmino(_: MsgVoteResponse): MsgVoteResponseAmino {
     const obj: any = {};
@@ -711,16 +724,20 @@ export const MsgVoteWeighted = {
     return obj;
   },
   fromAmino(object: MsgVoteWeightedAmino): MsgVoteWeighted {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      voter: object.voter,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromAmino(e)) : []
-    };
+    const message = createBaseMsgVoteWeighted();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.voter !== undefined && object.voter !== null) {
+      message.voter = object.voter;
+    }
+    message.options = object.options?.map(e => WeightedVoteOption.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgVoteWeighted): MsgVoteWeightedAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.voter = omitDefault(message.voter);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.voter = message.voter;
     if (message.options) {
       obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e) : undefined);
     } else {
@@ -793,7 +810,8 @@ export const MsgVoteWeightedResponse = {
     return obj;
   },
   fromAmino(_: MsgVoteWeightedResponseAmino): MsgVoteWeightedResponse {
-    return {};
+    const message = createBaseMsgVoteWeightedResponse();
+    return message;
   },
   toAmino(_: MsgVoteWeightedResponse): MsgVoteWeightedResponseAmino {
     const obj: any = {};
@@ -912,16 +930,20 @@ export const MsgDeposit = {
     return obj;
   },
   fromAmino(object: MsgDepositAmino): MsgDeposit {
-    return {
-      proposalId: BigInt(object.proposal_id),
-      depositor: object.depositor,
-      amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgDeposit();
+    if (object.proposal_id !== undefined && object.proposal_id !== null) {
+      message.proposalId = BigInt(object.proposal_id);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    message.amount = object.amount?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgDeposit): MsgDepositAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId;
-    obj.depositor = omitDefault(message.depositor);
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.depositor = message.depositor;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -994,7 +1016,8 @@ export const MsgDepositResponse = {
     return obj;
   },
   fromAmino(_: MsgDepositResponseAmino): MsgDepositResponse {
-    return {};
+    const message = createBaseMsgDepositResponse();
+    return message;
   },
   toAmino(_: MsgDepositResponse): MsgDepositResponseAmino {
     const obj: any = {};
@@ -1024,28 +1047,28 @@ export const MsgDepositResponse = {
 };
 export const ProposalContentI_InterfaceDecoder = (input: BinaryReader | Uint8Array): TextProposal | RegisterIncentiveProposal | ClientUpdateProposal | UpgradeProposal | ReplacePoolIncentivesProposal | UpdatePoolIncentivesProposal | SetSuperfluidAssetsProposal | RemoveSuperfluidAssetsProposal | UpdateUnpoolWhiteListProposal | UpdateFeeTokenProposal | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/cosmos.gov.v1beta1.TextProposal":
-      return TextProposal.decode(data.value);
+      return TextProposal.decode(data.value, undefined, true);
     case "/evmos.incentives.v1.RegisterIncentiveProposal":
-      return RegisterIncentiveProposal.decode(data.value);
+      return RegisterIncentiveProposal.decode(data.value, undefined, true);
     case "/ibc.core.client.v1.ClientUpdateProposal":
-      return ClientUpdateProposal.decode(data.value);
+      return ClientUpdateProposal.decode(data.value, undefined, true);
     case "/ibc.core.client.v1.UpgradeProposal":
-      return UpgradeProposal.decode(data.value);
+      return UpgradeProposal.decode(data.value, undefined, true);
     case "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal":
-      return ReplacePoolIncentivesProposal.decode(data.value);
+      return ReplacePoolIncentivesProposal.decode(data.value, undefined, true);
     case "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal":
-      return UpdatePoolIncentivesProposal.decode(data.value);
+      return UpdatePoolIncentivesProposal.decode(data.value, undefined, true);
     case "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal":
-      return SetSuperfluidAssetsProposal.decode(data.value);
+      return SetSuperfluidAssetsProposal.decode(data.value, undefined, true);
     case "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal":
-      return RemoveSuperfluidAssetsProposal.decode(data.value);
+      return RemoveSuperfluidAssetsProposal.decode(data.value, undefined, true);
     case "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal":
-      return UpdateUnpoolWhiteListProposal.decode(data.value);
+      return UpdateUnpoolWhiteListProposal.decode(data.value, undefined, true);
     case "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal":
-      return UpdateFeeTokenProposal.decode(data.value);
+      return UpdateFeeTokenProposal.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -1111,52 +1134,52 @@ export const ProposalContentI_ToAmino = (content: Any) => {
     case "/cosmos.gov.v1beta1.TextProposal":
       return {
         type: "cosmos-sdk/TextProposal",
-        value: TextProposal.toAmino(TextProposal.decode(content.value))
+        value: TextProposal.toAmino(TextProposal.decode(content.value, undefined))
       };
     case "/evmos.incentives.v1.RegisterIncentiveProposal":
       return {
         type: "/evmos.incentives.v1.RegisterIncentiveProposal",
-        value: RegisterIncentiveProposal.toAmino(RegisterIncentiveProposal.decode(content.value))
+        value: RegisterIncentiveProposal.toAmino(RegisterIncentiveProposal.decode(content.value, undefined))
       };
     case "/ibc.core.client.v1.ClientUpdateProposal":
       return {
         type: "cosmos-sdk/ClientUpdateProposal",
-        value: ClientUpdateProposal.toAmino(ClientUpdateProposal.decode(content.value))
+        value: ClientUpdateProposal.toAmino(ClientUpdateProposal.decode(content.value, undefined))
       };
     case "/ibc.core.client.v1.UpgradeProposal":
       return {
         type: "cosmos-sdk/UpgradeProposal",
-        value: UpgradeProposal.toAmino(UpgradeProposal.decode(content.value))
+        value: UpgradeProposal.toAmino(UpgradeProposal.decode(content.value, undefined))
       };
     case "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal":
       return {
         type: "osmosis/poolincentives/replace-pool-incentives-proposal",
-        value: ReplacePoolIncentivesProposal.toAmino(ReplacePoolIncentivesProposal.decode(content.value))
+        value: ReplacePoolIncentivesProposal.toAmino(ReplacePoolIncentivesProposal.decode(content.value, undefined))
       };
     case "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal":
       return {
         type: "osmosis/poolincentives/update-pool-incentives-proposal",
-        value: UpdatePoolIncentivesProposal.toAmino(UpdatePoolIncentivesProposal.decode(content.value))
+        value: UpdatePoolIncentivesProposal.toAmino(UpdatePoolIncentivesProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal":
       return {
         type: "osmosis/v1beta1/set-superfluid-assets-proposal",
-        value: SetSuperfluidAssetsProposal.toAmino(SetSuperfluidAssetsProposal.decode(content.value))
+        value: SetSuperfluidAssetsProposal.toAmino(SetSuperfluidAssetsProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal":
       return {
         type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
-        value: RemoveSuperfluidAssetsProposal.toAmino(RemoveSuperfluidAssetsProposal.decode(content.value))
+        value: RemoveSuperfluidAssetsProposal.toAmino(RemoveSuperfluidAssetsProposal.decode(content.value, undefined))
       };
     case "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal":
       return {
         type: "osmosis/v1beta1/update-unpool-white-list-proposal",
-        value: UpdateUnpoolWhiteListProposal.toAmino(UpdateUnpoolWhiteListProposal.decode(content.value))
+        value: UpdateUnpoolWhiteListProposal.toAmino(UpdateUnpoolWhiteListProposal.decode(content.value, undefined))
       };
     case "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal":
       return {
         type: "osmosis/txfees/update-fee-token-proposal",
-        value: UpdateFeeTokenProposal.toAmino(UpdateFeeTokenProposal.decode(content.value))
+        value: UpdateFeeTokenProposal.toAmino(UpdateFeeTokenProposal.decode(content.value, undefined))
       };
     default:
       return Any.toAmino(content);

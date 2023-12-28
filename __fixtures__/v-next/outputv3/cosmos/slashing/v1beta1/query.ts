@@ -11,10 +11,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
@@ -28,10 +24,6 @@ export interface QueryParamsResponseProtoMsg {
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method */
 export interface QueryParamsResponseSDKType {
@@ -55,11 +47,7 @@ export interface QuerySigningInfoRequestProtoMsg {
  */
 export interface QuerySigningInfoRequestAmino {
   /** cons_address is the address to query signing info of */
-  cons_address: string;
-}
-export interface QuerySigningInfoRequestAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfoRequest";
-  value: QuerySigningInfoRequestAmino;
+  cons_address?: string;
 }
 /**
  * QuerySigningInfoRequest is the request type for the Query/SigningInfo RPC
@@ -88,10 +76,6 @@ export interface QuerySigningInfoResponseAmino {
   /** val_signing_info is the signing info of requested val cons address */
   val_signing_info?: ValidatorSigningInfoAmino;
 }
-export interface QuerySigningInfoResponseAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfoResponse";
-  value: QuerySigningInfoResponseAmino;
-}
 /**
  * QuerySigningInfoResponse is the response type for the Query/SigningInfo RPC
  * method
@@ -104,7 +88,7 @@ export interface QuerySigningInfoResponseSDKType {
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QuerySigningInfosRequestProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosRequest";
@@ -117,16 +101,12 @@ export interface QuerySigningInfosRequestProtoMsg {
 export interface QuerySigningInfosRequestAmino {
   pagination?: PageRequestAmino;
 }
-export interface QuerySigningInfosRequestAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfosRequest";
-  value: QuerySigningInfosRequestAmino;
-}
 /**
  * QuerySigningInfosRequest is the request type for the Query/SigningInfos RPC
  * method
  */
 export interface QuerySigningInfosRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -135,7 +115,7 @@ export interface QuerySigningInfosRequestSDKType {
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QuerySigningInfosResponseProtoMsg {
   typeUrl: "/cosmos.slashing.v1beta1.QuerySigningInfosResponse";
@@ -147,12 +127,8 @@ export interface QuerySigningInfosResponseProtoMsg {
  */
 export interface QuerySigningInfosResponseAmino {
   /** info is the signing info of all validators */
-  info: ValidatorSigningInfoAmino[];
+  info?: ValidatorSigningInfoAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QuerySigningInfosResponseAminoMsg {
-  type: "cosmos-sdk/QuerySigningInfosResponse";
-  value: QuerySigningInfosResponseAmino;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -160,7 +136,7 @@ export interface QuerySigningInfosResponseAminoMsg {
  */
 export interface QuerySigningInfosResponseSDKType {
   info: ValidatorSigningInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -171,7 +147,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -205,23 +181,15 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -247,7 +215,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -255,7 +223,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -292,26 +260,19 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -337,7 +298,7 @@ export const QuerySigningInfoRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfoRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfoRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoRequest();
@@ -380,26 +341,19 @@ export const QuerySigningInfoRequest = {
     return obj;
   },
   fromAmino(object: QuerySigningInfoRequestAmino): QuerySigningInfoRequest {
-    return {
-      consAddress: object.cons_address
-    };
+    const message = createBaseQuerySigningInfoRequest();
+    if (object.cons_address !== undefined && object.cons_address !== null) {
+      message.consAddress = object.cons_address;
+    }
+    return message;
   },
-  toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestAmino {
+  toAmino(message: QuerySigningInfoRequest, useInterfaces: boolean = true): QuerySigningInfoRequestAmino {
     const obj: any = {};
     obj.cons_address = omitDefault(message.consAddress);
     return obj;
   },
-  fromAminoMsg(object: QuerySigningInfoRequestAminoMsg): QuerySigningInfoRequest {
-    return QuerySigningInfoRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoRequest): QuerySigningInfoRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoRequest",
-      value: QuerySigningInfoRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfoRequestProtoMsg): QuerySigningInfoRequest {
-    return QuerySigningInfoRequest.decode(message.value);
+  fromProtoMsg(message: QuerySigningInfoRequestProtoMsg, useInterfaces: boolean = true): QuerySigningInfoRequest {
+    return QuerySigningInfoRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfoRequest): Uint8Array {
     return QuerySigningInfoRequest.encode(message).finish();
@@ -425,7 +379,7 @@ export const QuerySigningInfoResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfoResponse();
@@ -433,7 +387,7 @@ export const QuerySigningInfoResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.valSigningInfo = ValidatorSigningInfo.decode(reader, reader.uint32());
+          message.valSigningInfo = ValidatorSigningInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -470,26 +424,19 @@ export const QuerySigningInfoResponse = {
     return obj;
   },
   fromAmino(object: QuerySigningInfoResponseAmino): QuerySigningInfoResponse {
-    return {
-      valSigningInfo: object?.val_signing_info ? ValidatorSigningInfo.fromAmino(object.val_signing_info) : undefined
-    };
+    const message = createBaseQuerySigningInfoResponse();
+    if (object.val_signing_info !== undefined && object.val_signing_info !== null) {
+      message.valSigningInfo = ValidatorSigningInfo.fromAmino(object.val_signing_info);
+    }
+    return message;
   },
-  toAmino(message: QuerySigningInfoResponse): QuerySigningInfoResponseAmino {
+  toAmino(message: QuerySigningInfoResponse, useInterfaces: boolean = true): QuerySigningInfoResponseAmino {
     const obj: any = {};
-    obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo) : undefined;
+    obj.val_signing_info = message.valSigningInfo ? ValidatorSigningInfo.toAmino(message.valSigningInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySigningInfoResponseAminoMsg): QuerySigningInfoResponse {
-    return QuerySigningInfoResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfoResponse): QuerySigningInfoResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfoResponse",
-      value: QuerySigningInfoResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfoResponseProtoMsg): QuerySigningInfoResponse {
-    return QuerySigningInfoResponse.decode(message.value);
+  fromProtoMsg(message: QuerySigningInfoResponseProtoMsg, useInterfaces: boolean = true): QuerySigningInfoResponse {
+    return QuerySigningInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfoResponse): Uint8Array {
     return QuerySigningInfoResponse.encode(message).finish();
@@ -503,7 +450,7 @@ export const QuerySigningInfoResponse = {
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosRequest = {
@@ -515,7 +462,7 @@ export const QuerySigningInfosRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfosRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfosRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosRequest();
@@ -523,7 +470,7 @@ export const QuerySigningInfosRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -560,26 +507,19 @@ export const QuerySigningInfosRequest = {
     return obj;
   },
   fromAmino(object: QuerySigningInfosRequestAmino): QuerySigningInfosRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySigningInfosRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QuerySigningInfosRequest): QuerySigningInfosRequestAmino {
+  toAmino(message: QuerySigningInfosRequest, useInterfaces: boolean = true): QuerySigningInfosRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySigningInfosRequestAminoMsg): QuerySigningInfosRequest {
-    return QuerySigningInfosRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosRequest): QuerySigningInfosRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosRequest",
-      value: QuerySigningInfosRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfosRequestProtoMsg): QuerySigningInfosRequest {
-    return QuerySigningInfosRequest.decode(message.value);
+  fromProtoMsg(message: QuerySigningInfosRequestProtoMsg, useInterfaces: boolean = true): QuerySigningInfosRequest {
+    return QuerySigningInfosRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfosRequest): Uint8Array {
     return QuerySigningInfosRequest.encode(message).finish();
@@ -594,7 +534,7 @@ export const QuerySigningInfosRequest = {
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {
     info: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosResponse = {
@@ -609,7 +549,7 @@ export const QuerySigningInfosResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySigningInfosResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySigningInfosResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySigningInfosResponse();
@@ -617,10 +557,10 @@ export const QuerySigningInfosResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.info.push(ValidatorSigningInfo.decode(reader, reader.uint32()));
+          message.info.push(ValidatorSigningInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -670,32 +610,25 @@ export const QuerySigningInfosResponse = {
     return obj;
   },
   fromAmino(object: QuerySigningInfosResponseAmino): QuerySigningInfosResponse {
-    return {
-      info: Array.isArray(object?.info) ? object.info.map((e: any) => ValidatorSigningInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQuerySigningInfosResponse();
+    message.info = object.info?.map(e => ValidatorSigningInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QuerySigningInfosResponse): QuerySigningInfosResponseAmino {
+  toAmino(message: QuerySigningInfosResponse, useInterfaces: boolean = true): QuerySigningInfosResponseAmino {
     const obj: any = {};
     if (message.info) {
-      obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e) : undefined);
+      obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.info = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QuerySigningInfosResponseAminoMsg): QuerySigningInfosResponse {
-    return QuerySigningInfosResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QuerySigningInfosResponse): QuerySigningInfosResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QuerySigningInfosResponse",
-      value: QuerySigningInfosResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QuerySigningInfosResponseProtoMsg): QuerySigningInfosResponse {
-    return QuerySigningInfosResponse.decode(message.value);
+  fromProtoMsg(message: QuerySigningInfosResponseProtoMsg, useInterfaces: boolean = true): QuerySigningInfosResponse {
+    return QuerySigningInfosResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySigningInfosResponse): Uint8Array {
     return QuerySigningInfosResponse.encode(message).finish();

@@ -16,6 +16,10 @@ export interface GenesisState {
   /** the sequence for the next generated client identifier */
   nextClientSequence: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisStateSDKType {
   clients: IdentifiedClientStateSDKType[];
@@ -35,6 +39,10 @@ export interface GenesisMetadata {
   /** metadata value */
   value: Uint8Array;
 }
+export interface GenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.GenesisMetadata";
+  value: Uint8Array;
+}
 /**
  * GenesisMetadata defines the genesis type for metadata that clients may return
  * with ExportMetadata
@@ -50,6 +58,10 @@ export interface GenesisMetadataSDKType {
 export interface IdentifiedGenesisMetadata {
   clientId: string;
   clientMetadata: GenesisMetadata[];
+}
+export interface IdentifiedGenesisMetadataProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata";
+  value: Uint8Array;
 }
 /**
  * IdentifiedGenesisMetadata has the client metadata with the corresponding
@@ -84,10 +96,10 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(34).fork()).ldelim();
     }
-    if (message.createLocalhost === true) {
+    if (message.createLocalhost !== undefined) {
       writer.uint32(40).bool(message.createLocalhost);
     }
-    if (message.nextClientSequence !== BigInt(0)) {
+    if (message.nextClientSequence !== undefined) {
       writer.uint32(48).uint64(message.nextClientSequence);
     }
     return writer;
@@ -213,14 +225,20 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      clients: Array.isArray(object?.clients) ? object.clients.map((e: any) => IdentifiedClientState.fromAmino(e)) : [],
-      clientsConsensus: Array.isArray(object?.clients_consensus) ? object.clients_consensus.map((e: any) => ClientConsensusStates.fromAmino(e)) : [],
-      clientsMetadata: Array.isArray(object?.clients_metadata) ? object.clients_metadata.map((e: any) => IdentifiedGenesisMetadata.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      createLocalhost: object.create_localhost,
-      nextClientSequence: BigInt(object.next_client_sequence)
-    };
+    const message = createBaseGenesisState();
+    message.clients = object.clients?.map(e => IdentifiedClientState.fromAmino(e)) || [];
+    message.clientsConsensus = object.clients_consensus?.map(e => ClientConsensusStates.fromAmino(e)) || [];
+    message.clientsMetadata = object.clients_metadata?.map(e => IdentifiedGenesisMetadata.fromAmino(e)) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.create_localhost !== undefined && object.create_localhost !== null) {
+      message.createLocalhost = object.create_localhost;
+    }
+    if (object.next_client_sequence !== undefined && object.next_client_sequence !== null) {
+      message.nextClientSequence = BigInt(object.next_client_sequence);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -340,15 +358,19 @@ export const GenesisMetadata = {
     return obj;
   },
   fromAmino(object: GenesisMetadataAmino): GenesisMetadata {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseGenesisMetadata();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: GenesisMetadata): GenesisMetadataAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisMetadataAminoMsg): GenesisMetadata {
@@ -382,7 +404,7 @@ function createBaseIdentifiedGenesisMetadata(): IdentifiedGenesisMetadata {
 export const IdentifiedGenesisMetadata = {
   typeUrl: "/ibc.core.client.v1.IdentifiedGenesisMetadata",
   encode(message: IdentifiedGenesisMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.clientMetadata) {
@@ -455,10 +477,12 @@ export const IdentifiedGenesisMetadata = {
     return obj;
   },
   fromAmino(object: IdentifiedGenesisMetadataAmino): IdentifiedGenesisMetadata {
-    return {
-      clientId: object.client_id,
-      clientMetadata: Array.isArray(object?.client_metadata) ? object.client_metadata.map((e: any) => GenesisMetadata.fromAmino(e)) : []
-    };
+    const message = createBaseIdentifiedGenesisMetadata();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    message.clientMetadata = object.client_metadata?.map(e => GenesisMetadata.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAmino {
     const obj: any = {};

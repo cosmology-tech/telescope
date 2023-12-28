@@ -8,6 +8,10 @@ export interface EventSend {
   sender: string;
   receiver: string;
 }
+export interface EventSendProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventSend";
+  value: Uint8Array;
+}
 /** EventSend is emitted on Msg/Send */
 export interface EventSendSDKType {
   class_id: string;
@@ -21,6 +25,10 @@ export interface EventMint {
   id: string;
   owner: string;
 }
+export interface EventMintProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventMint";
+  value: Uint8Array;
+}
 /** EventMint is emitted on Mint */
 export interface EventMintSDKType {
   class_id: string;
@@ -32,6 +40,10 @@ export interface EventBurn {
   classId: string;
   id: string;
   owner: string;
+}
+export interface EventBurnProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.EventBurn";
+  value: Uint8Array;
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnSDKType {
@@ -50,16 +62,16 @@ function createBaseEventSend(): EventSend {
 export const EventSend = {
   typeUrl: "/cosmos.nft.v1beta1.EventSend",
   encode(message: EventSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -139,12 +151,20 @@ export const EventSend = {
     return obj;
   },
   fromAmino(object: EventSendAmino): EventSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseEventSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: EventSend): EventSendAmino {
     const obj: any = {};
@@ -186,13 +206,13 @@ function createBaseEventMint(): EventMint {
 export const EventMint = {
   typeUrl: "/cosmos.nft.v1beta1.EventMint",
   encode(message: EventMint, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -263,11 +283,17 @@ export const EventMint = {
     return obj;
   },
   fromAmino(object: EventMintAmino): EventMint {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventMint();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventMint): EventMintAmino {
     const obj: any = {};
@@ -308,13 +334,13 @@ function createBaseEventBurn(): EventBurn {
 export const EventBurn = {
   typeUrl: "/cosmos.nft.v1beta1.EventBurn",
   encode(message: EventBurn, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     return writer;
@@ -385,11 +411,17 @@ export const EventBurn = {
     return obj;
   },
   fromAmino(object: EventBurnAmino): EventBurn {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventBurn();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventBurn): EventBurnAmino {
     const obj: any = {};

@@ -22,6 +22,10 @@ export interface Metadata {
   /** tx_type defines the type of transactions the interchain account can execute */
   txType: string;
 }
+export interface MetadataProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.Metadata";
+  value: Uint8Array;
+}
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
  * See ICS004: https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#Versioning
@@ -160,14 +164,26 @@ export const Metadata = {
     return obj;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      version: object.version,
-      controllerConnectionId: object.controller_connection_id,
-      hostConnectionId: object.host_connection_id,
-      address: object.address,
-      encoding: object.encoding,
-      txType: object.tx_type
-    };
+    const message = createBaseMetadata();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.controller_connection_id !== undefined && object.controller_connection_id !== null) {
+      message.controllerConnectionId = object.controller_connection_id;
+    }
+    if (object.host_connection_id !== undefined && object.host_connection_id !== null) {
+      message.hostConnectionId = object.host_connection_id;
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.encoding !== undefined && object.encoding !== null) {
+      message.encoding = object.encoding;
+    }
+    if (object.tx_type !== undefined && object.tx_type !== null) {
+      message.txType = object.tx_type;
+    }
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};

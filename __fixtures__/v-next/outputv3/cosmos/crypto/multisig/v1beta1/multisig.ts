@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { bytesFromBase64, base64FromBytes, DeepPartial, isSet, omitDefault } from "../../../../helpers";
+import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -19,11 +19,7 @@ export interface MultiSignatureProtoMsg {
  * signed and with which modes.
  */
 export interface MultiSignatureAmino {
-  signatures: Uint8Array[];
-}
-export interface MultiSignatureAminoMsg {
-  type: "cosmos-sdk/MultiSignature";
-  value: MultiSignatureAmino;
+  signatures?: string[];
 }
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -54,12 +50,8 @@ export interface CompactBitArrayProtoMsg {
  * This is not thread safe, and is not intended for concurrent usage.
  */
 export interface CompactBitArrayAmino {
-  extra_bits_stored: number;
-  elems: Uint8Array;
-}
-export interface CompactBitArrayAminoMsg {
-  type: "cosmos-sdk/CompactBitArray";
-  value: CompactBitArrayAmino;
+  extra_bits_stored?: number;
+  elems?: string;
 }
 /**
  * CompactBitArray is an implementation of a space efficient bit array.
@@ -85,7 +77,7 @@ export const MultiSignature = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MultiSignature {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MultiSignature {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMultiSignature();
@@ -136,30 +128,21 @@ export const MultiSignature = {
     return obj;
   },
   fromAmino(object: MultiSignatureAmino): MultiSignature {
-    return {
-      signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => e) : []
-    };
+    const message = createBaseMultiSignature();
+    message.signatures = object.signatures?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
-  toAmino(message: MultiSignature): MultiSignatureAmino {
+  toAmino(message: MultiSignature, useInterfaces: boolean = true): MultiSignatureAmino {
     const obj: any = {};
     if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e);
+      obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
       obj.signatures = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MultiSignatureAminoMsg): MultiSignature {
-    return MultiSignature.fromAmino(object.value);
-  },
-  toAminoMsg(message: MultiSignature): MultiSignatureAminoMsg {
-    return {
-      type: "cosmos-sdk/MultiSignature",
-      value: MultiSignature.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MultiSignatureProtoMsg): MultiSignature {
-    return MultiSignature.decode(message.value);
+  fromProtoMsg(message: MultiSignatureProtoMsg, useInterfaces: boolean = true): MultiSignature {
+    return MultiSignature.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MultiSignature): Uint8Array {
     return MultiSignature.encode(message).finish();
@@ -189,7 +172,7 @@ export const CompactBitArray = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CompactBitArray {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CompactBitArray {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCompactBitArray();
@@ -240,28 +223,23 @@ export const CompactBitArray = {
     return obj;
   },
   fromAmino(object: CompactBitArrayAmino): CompactBitArray {
-    return {
-      extraBitsStored: object.extra_bits_stored,
-      elems: object.elems
-    };
+    const message = createBaseCompactBitArray();
+    if (object.extra_bits_stored !== undefined && object.extra_bits_stored !== null) {
+      message.extraBitsStored = object.extra_bits_stored;
+    }
+    if (object.elems !== undefined && object.elems !== null) {
+      message.elems = bytesFromBase64(object.elems);
+    }
+    return message;
   },
-  toAmino(message: CompactBitArray): CompactBitArrayAmino {
+  toAmino(message: CompactBitArray, useInterfaces: boolean = true): CompactBitArrayAmino {
     const obj: any = {};
-    obj.extra_bits_stored = omitDefault(message.extraBitsStored);
-    obj.elems = message.elems;
+    obj.extra_bits_stored = message.extraBitsStored;
+    obj.elems = message.elems ? base64FromBytes(message.elems) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CompactBitArrayAminoMsg): CompactBitArray {
-    return CompactBitArray.fromAmino(object.value);
-  },
-  toAminoMsg(message: CompactBitArray): CompactBitArrayAminoMsg {
-    return {
-      type: "cosmos-sdk/CompactBitArray",
-      value: CompactBitArray.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CompactBitArrayProtoMsg): CompactBitArray {
-    return CompactBitArray.decode(message.value);
+  fromProtoMsg(message: CompactBitArrayProtoMsg, useInterfaces: boolean = true): CompactBitArray {
+    return CompactBitArray.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CompactBitArray): Uint8Array {
     return CompactBitArray.encode(message).finish();

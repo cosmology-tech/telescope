@@ -11,6 +11,10 @@ export const protobufPackage = "cosmos.crypto.secp256k1";
 export interface PubKey {
   key: Uint8Array;
 }
+export interface PubKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PubKey";
+  value: Uint8Array;
+}
 /**
  * PubKey defines a secp256k1 public key
  * Key is the compressed form of the pubkey. The first byte depends is a 0x02 byte
@@ -24,6 +28,10 @@ export interface PubKeySDKType {
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKey {
   key: Uint8Array;
+}
+export interface PrivKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256k1.PrivKey";
+  value: Uint8Array;
 }
 /** PrivKey defines a secp256k1 private key. */
 export interface PrivKeySDKType {
@@ -90,13 +98,15 @@ export const PubKey = {
     return obj;
   },
   fromAmino(object: PubKeyAmino): PubKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePubKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -182,13 +192,15 @@ export const PrivKey = {
     return obj;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePrivKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

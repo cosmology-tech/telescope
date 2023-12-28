@@ -41,6 +41,10 @@ export interface GenesisState {
   /** The number of pool points that have been consumed in the current block. */
   pointCountForBlock: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -270,19 +274,35 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      tokenPairArbRoutes: Array.isArray(object?.token_pair_arb_routes) ? object.token_pair_arb_routes.map((e: any) => TokenPairArbRoutes.fromAmino(e)) : [],
-      baseDenoms: Array.isArray(object?.base_denoms) ? object.base_denoms.map((e: any) => BaseDenom.fromAmino(e)) : [],
-      poolWeights: object?.pool_weights ? PoolWeights.fromAmino(object.pool_weights) : undefined,
-      daysSinceModuleGenesis: BigInt(object.days_since_module_genesis),
-      developerFees: Array.isArray(object?.developer_fees) ? object.developer_fees.map((e: any) => Coin.fromAmino(e)) : [],
-      latestBlockHeight: BigInt(object.latest_block_height),
-      developerAddress: object.developer_address,
-      maxPoolPointsPerBlock: BigInt(object.max_pool_points_per_block),
-      maxPoolPointsPerTx: BigInt(object.max_pool_points_per_tx),
-      pointCountForBlock: BigInt(object.point_count_for_block)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.tokenPairArbRoutes = object.token_pair_arb_routes?.map(e => TokenPairArbRoutes.fromAmino(e)) || [];
+    message.baseDenoms = object.base_denoms?.map(e => BaseDenom.fromAmino(e)) || [];
+    if (object.pool_weights !== undefined && object.pool_weights !== null) {
+      message.poolWeights = PoolWeights.fromAmino(object.pool_weights);
+    }
+    if (object.days_since_module_genesis !== undefined && object.days_since_module_genesis !== null) {
+      message.daysSinceModuleGenesis = BigInt(object.days_since_module_genesis);
+    }
+    message.developerFees = object.developer_fees?.map(e => Coin.fromAmino(e)) || [];
+    if (object.latest_block_height !== undefined && object.latest_block_height !== null) {
+      message.latestBlockHeight = BigInt(object.latest_block_height);
+    }
+    if (object.developer_address !== undefined && object.developer_address !== null) {
+      message.developerAddress = object.developer_address;
+    }
+    if (object.max_pool_points_per_block !== undefined && object.max_pool_points_per_block !== null) {
+      message.maxPoolPointsPerBlock = BigInt(object.max_pool_points_per_block);
+    }
+    if (object.max_pool_points_per_tx !== undefined && object.max_pool_points_per_tx !== null) {
+      message.maxPoolPointsPerTx = BigInt(object.max_pool_points_per_tx);
+    }
+    if (object.point_count_for_block !== undefined && object.point_count_for_block !== null) {
+      message.pointCountForBlock = BigInt(object.point_count_for_block);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

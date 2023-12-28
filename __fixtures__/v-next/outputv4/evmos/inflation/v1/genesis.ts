@@ -15,6 +15,10 @@ export interface GenesisState {
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.inflation.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -33,6 +37,10 @@ export interface Params {
   inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.inflation.v1.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -56,16 +64,16 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
     }
-    if (message.period !== BigInt(0)) {
+    if (message.period !== undefined) {
       writer.uint32(16).uint64(message.period);
     }
-    if (message.epochIdentifier !== "") {
+    if (message.epochIdentifier !== undefined) {
       writer.uint32(26).string(message.epochIdentifier);
     }
-    if (message.epochsPerPeriod !== BigInt(0)) {
+    if (message.epochsPerPeriod !== undefined) {
       writer.uint32(32).int64(message.epochsPerPeriod);
     }
-    if (message.skippedEpochs !== BigInt(0)) {
+    if (message.skippedEpochs !== undefined) {
       writer.uint32(40).uint64(message.skippedEpochs);
     }
     return writer;
@@ -162,13 +170,23 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: BigInt(object.period),
-      epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: BigInt(object.epochs_per_period),
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    if (object.epoch_identifier !== undefined && object.epoch_identifier !== null) {
+      message.epochIdentifier = object.epoch_identifier;
+    }
+    if (object.epochs_per_period !== undefined && object.epochs_per_period !== null) {
+      message.epochsPerPeriod = BigInt(object.epochs_per_period);
+    }
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -206,7 +224,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.inflation.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintDenom !== "") {
+    if (message.mintDenom !== undefined) {
       writer.uint32(10).string(message.mintDenom);
     }
     if (message.exponentialCalculation !== undefined) {
@@ -215,7 +233,7 @@ export const Params = {
     if (message.inflationDistribution !== undefined) {
       InflationDistribution.encode(message.inflationDistribution, writer.uint32(26).fork()).ldelim();
     }
-    if (message.enableInflation === true) {
+    if (message.enableInflation !== undefined) {
       writer.uint32(32).bool(message.enableInflation);
     }
     return writer;
@@ -299,12 +317,20 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
-      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
-      enableInflation: object.enable_inflation
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.exponential_calculation !== undefined && object.exponential_calculation !== null) {
+      message.exponentialCalculation = ExponentialCalculation.fromAmino(object.exponential_calculation);
+    }
+    if (object.inflation_distribution !== undefined && object.inflation_distribution !== null) {
+      message.inflationDistribution = InflationDistribution.fromAmino(object.inflation_distribution);
+    }
+    if (object.enable_inflation !== undefined && object.enable_inflation !== null) {
+      message.enableInflation = object.enable_inflation;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

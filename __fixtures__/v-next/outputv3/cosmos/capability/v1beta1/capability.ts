@@ -17,11 +17,7 @@ export interface CapabilityProtoMsg {
  * provided to a Capability must be globally unique.
  */
 export interface CapabilityAmino {
-  index: string;
-}
-export interface CapabilityAminoMsg {
-  type: "cosmos-sdk/Capability";
-  value: CapabilityAmino;
+  index?: string;
 }
 /**
  * Capability defines an implementation of an object capability. The index
@@ -47,12 +43,8 @@ export interface OwnerProtoMsg {
  * capability and the module name.
  */
 export interface OwnerAmino {
-  module: string;
-  name: string;
-}
-export interface OwnerAminoMsg {
-  type: "cosmos-sdk/Owner";
-  value: OwnerAmino;
+  module?: string;
+  name?: string;
 }
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
@@ -78,11 +70,7 @@ export interface CapabilityOwnersProtoMsg {
  * owners must be unique.
  */
 export interface CapabilityOwnersAmino {
-  owners: OwnerAmino[];
-}
-export interface CapabilityOwnersAminoMsg {
-  type: "cosmos-sdk/CapabilityOwners";
-  value: CapabilityOwnersAmino;
+  owners?: OwnerAmino[];
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -105,7 +93,7 @@ export const Capability = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Capability {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Capability {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapability();
@@ -150,26 +138,19 @@ export const Capability = {
     return obj;
   },
   fromAmino(object: CapabilityAmino): Capability {
-    return {
-      index: BigInt(object.index)
-    };
+    const message = createBaseCapability();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    return message;
   },
-  toAmino(message: Capability): CapabilityAmino {
+  toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
     obj.index = omitDefault(message.index);
     return obj;
   },
-  fromAminoMsg(object: CapabilityAminoMsg): Capability {
-    return Capability.fromAmino(object.value);
-  },
-  toAminoMsg(message: Capability): CapabilityAminoMsg {
-    return {
-      type: "cosmos-sdk/Capability",
-      value: Capability.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CapabilityProtoMsg): Capability {
-    return Capability.decode(message.value);
+  fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = true): Capability {
+    return Capability.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Capability): Uint8Array {
     return Capability.encode(message).finish();
@@ -199,7 +180,7 @@ export const Owner = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Owner {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Owner {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOwner();
@@ -250,28 +231,23 @@ export const Owner = {
     return obj;
   },
   fromAmino(object: OwnerAmino): Owner {
-    return {
-      module: object.module,
-      name: object.name
-    };
+    const message = createBaseOwner();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
-  toAmino(message: Owner): OwnerAmino {
+  toAmino(message: Owner, useInterfaces: boolean = true): OwnerAmino {
     const obj: any = {};
     obj.module = omitDefault(message.module);
     obj.name = omitDefault(message.name);
     return obj;
   },
-  fromAminoMsg(object: OwnerAminoMsg): Owner {
-    return Owner.fromAmino(object.value);
-  },
-  toAminoMsg(message: Owner): OwnerAminoMsg {
-    return {
-      type: "cosmos-sdk/Owner",
-      value: Owner.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: OwnerProtoMsg): Owner {
-    return Owner.decode(message.value);
+  fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = true): Owner {
+    return Owner.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Owner): Uint8Array {
     return Owner.encode(message).finish();
@@ -297,7 +273,7 @@ export const CapabilityOwners = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CapabilityOwners {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CapabilityOwners {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCapabilityOwners();
@@ -305,7 +281,7 @@ export const CapabilityOwners = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.owners.push(Owner.decode(reader, reader.uint32()));
+          message.owners.push(Owner.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -348,30 +324,21 @@ export const CapabilityOwners = {
     return obj;
   },
   fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
+    const message = createBaseCapabilityOwners();
+    message.owners = object.owners?.map(e => Owner.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
+  toAmino(message: CapabilityOwners, useInterfaces: boolean = true): CapabilityOwnersAmino {
     const obj: any = {};
     if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
+      obj.owners = message.owners.map(e => e ? Owner.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.owners = [];
     }
     return obj;
   },
-  fromAminoMsg(object: CapabilityOwnersAminoMsg): CapabilityOwners {
-    return CapabilityOwners.fromAmino(object.value);
-  },
-  toAminoMsg(message: CapabilityOwners): CapabilityOwnersAminoMsg {
-    return {
-      type: "cosmos-sdk/CapabilityOwners",
-      value: CapabilityOwners.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CapabilityOwnersProtoMsg): CapabilityOwners {
-    return CapabilityOwners.decode(message.value);
+  fromProtoMsg(message: CapabilityOwnersProtoMsg, useInterfaces: boolean = true): CapabilityOwners {
+    return CapabilityOwners.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CapabilityOwners): Uint8Array {
     return CapabilityOwners.encode(message).finish();

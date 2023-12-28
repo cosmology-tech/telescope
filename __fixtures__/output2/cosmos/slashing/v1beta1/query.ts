@@ -32,7 +32,7 @@ export interface QuerySigningInfoResponse {
  * method
  */
 export interface QuerySigningInfosRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QuerySigningInfosResponse is the response type for the Query/SigningInfos RPC
@@ -41,7 +41,7 @@ export interface QuerySigningInfosRequest {
 export interface QuerySigningInfosResponse {
   /** info is the signing info of all validators */
   info: ValidatorSigningInfo[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -213,7 +213,7 @@ export const QuerySigningInfoResponse = {
 };
 function createBaseQuerySigningInfosRequest(): QuerySigningInfosRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosRequest = {
@@ -259,7 +259,7 @@ export const QuerySigningInfosRequest = {
 function createBaseQuerySigningInfosResponse(): QuerySigningInfosResponse {
   return {
     info: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QuerySigningInfosResponse = {

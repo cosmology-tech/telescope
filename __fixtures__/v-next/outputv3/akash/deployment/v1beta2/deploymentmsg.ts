@@ -20,15 +20,11 @@ export interface MsgCreateDeploymentProtoMsg {
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
   id?: DeploymentIDAmino;
-  groups: GroupSpecAmino[];
-  version: Uint8Array;
+  groups?: GroupSpecAmino[];
+  version?: string;
   deposit?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
-}
-export interface MsgCreateDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCreateDeployment";
-  value: MsgCreateDeploymentAmino;
+  depositor?: string;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
@@ -46,10 +42,6 @@ export interface MsgCreateDeploymentResponseProtoMsg {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseAmino {}
-export interface MsgCreateDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCreateDeploymentResponse";
-  value: MsgCreateDeploymentResponseAmino;
-}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
@@ -68,11 +60,7 @@ export interface MsgDepositDeploymentAmino {
   id?: DeploymentIDAmino;
   amount?: CoinAmino;
   /** Depositor pays for the deposit */
-  depositor: string;
-}
-export interface MsgDepositDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgDepositDeployment";
-  value: MsgDepositDeploymentAmino;
+  depositor?: string;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -88,10 +76,6 @@ export interface MsgDepositDeploymentResponseProtoMsg {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseAmino {}
-export interface MsgDepositDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgDepositDeploymentResponse";
-  value: MsgDepositDeploymentResponseAmino;
-}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
@@ -106,11 +90,7 @@ export interface MsgUpdateDeploymentProtoMsg {
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
   id?: DeploymentIDAmino;
-  version: Uint8Array;
-}
-export interface MsgUpdateDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgUpdateDeployment";
-  value: MsgUpdateDeploymentAmino;
+  version?: string;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -125,10 +105,6 @@ export interface MsgUpdateDeploymentResponseProtoMsg {
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseAmino {}
-export interface MsgUpdateDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgUpdateDeploymentResponse";
-  value: MsgUpdateDeploymentResponseAmino;
-}
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
@@ -143,10 +119,6 @@ export interface MsgCloseDeploymentProtoMsg {
 export interface MsgCloseDeploymentAmino {
   id?: DeploymentIDAmino;
 }
-export interface MsgCloseDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseDeployment";
-  value: MsgCloseDeploymentAmino;
-}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
   id: DeploymentIDSDKType;
@@ -159,10 +131,6 @@ export interface MsgCloseDeploymentResponseProtoMsg {
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseAmino {}
-export interface MsgCloseDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseDeploymentResponse";
-  value: MsgCloseDeploymentResponseAmino;
-}
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 function createBaseMsgCreateDeployment(): MsgCreateDeployment {
@@ -194,7 +162,7 @@ export const MsgCreateDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeployment();
@@ -202,16 +170,16 @@ export const MsgCreateDeployment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = DeploymentID.decode(reader, reader.uint32());
+          message.id = DeploymentID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.groups.push(GroupSpec.decode(reader, reader.uint32()));
+          message.groups.push(GroupSpec.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.version = reader.bytes();
           break;
         case 4:
-          message.deposit = Coin.decode(reader, reader.uint32());
+          message.deposit = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.depositor = reader.string();
@@ -281,32 +249,37 @@ export const MsgCreateDeployment = {
     return obj;
   },
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined,
-      depositor: object.depositor
-    };
+    const message = createBaseMsgCreateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromAmino(object.deposit);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
-  toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
+  toAmino(message: MsgCreateDeployment, useInterfaces: boolean = true): MsgCreateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
+      obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
     obj.depositor = message.depositor;
     return obj;
   },
-  fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
-    return MsgCreateDeployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCreateDeploymentProtoMsg): MsgCreateDeployment {
-    return MsgCreateDeployment.decode(message.value);
+  fromProtoMsg(message: MsgCreateDeploymentProtoMsg, useInterfaces: boolean = true): MsgCreateDeployment {
+    return MsgCreateDeployment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateDeployment): Uint8Array {
     return MsgCreateDeployment.encode(message).finish();
@@ -326,7 +299,7 @@ export const MsgCreateDeploymentResponse = {
   encode(_: MsgCreateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCreateDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCreateDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCreateDeploymentResponse();
@@ -360,17 +333,15 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
-    return {};
+    const message = createBaseMsgCreateDeploymentResponse();
+    return message;
   },
-  toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
+  toAmino(_: MsgCreateDeploymentResponse, useInterfaces: boolean = true): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgCreateDeploymentResponseAminoMsg): MsgCreateDeploymentResponse {
-    return MsgCreateDeploymentResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg): MsgCreateDeploymentResponse {
-    return MsgCreateDeploymentResponse.decode(message.value);
+  fromProtoMsg(message: MsgCreateDeploymentResponseProtoMsg, useInterfaces: boolean = true): MsgCreateDeploymentResponse {
+    return MsgCreateDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCreateDeploymentResponse): Uint8Array {
     return MsgCreateDeploymentResponse.encode(message).finish();
@@ -403,7 +374,7 @@ export const MsgDepositDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDepositDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeployment();
@@ -411,10 +382,10 @@ export const MsgDepositDeployment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = DeploymentID.decode(reader, reader.uint32());
+          message.id = DeploymentID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.amount = Coin.decode(reader, reader.uint32());
+          message.amount = Coin.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.depositor = reader.string();
@@ -466,24 +437,27 @@ export const MsgDepositDeployment = {
     return obj;
   },
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined,
-      depositor: object.depositor
-    };
+    const message = createBaseMsgDepositDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    if (object.depositor !== undefined && object.depositor !== null) {
+      message.depositor = object.depositor;
+    }
+    return message;
   },
-  toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
+  toAmino(message: MsgDepositDeployment, useInterfaces: boolean = true): MsgDepositDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     obj.depositor = message.depositor;
     return obj;
   },
-  fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
-    return MsgDepositDeployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgDepositDeploymentProtoMsg): MsgDepositDeployment {
-    return MsgDepositDeployment.decode(message.value);
+  fromProtoMsg(message: MsgDepositDeploymentProtoMsg, useInterfaces: boolean = true): MsgDepositDeployment {
+    return MsgDepositDeployment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDepositDeployment): Uint8Array {
     return MsgDepositDeployment.encode(message).finish();
@@ -503,7 +477,7 @@ export const MsgDepositDeploymentResponse = {
   encode(_: MsgDepositDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgDepositDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgDepositDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgDepositDeploymentResponse();
@@ -537,17 +511,15 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
-    return {};
+    const message = createBaseMsgDepositDeploymentResponse();
+    return message;
   },
-  toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
+  toAmino(_: MsgDepositDeploymentResponse, useInterfaces: boolean = true): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgDepositDeploymentResponseAminoMsg): MsgDepositDeploymentResponse {
-    return MsgDepositDeploymentResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg): MsgDepositDeploymentResponse {
-    return MsgDepositDeploymentResponse.decode(message.value);
+  fromProtoMsg(message: MsgDepositDeploymentResponseProtoMsg, useInterfaces: boolean = true): MsgDepositDeploymentResponse {
+    return MsgDepositDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgDepositDeploymentResponse): Uint8Array {
     return MsgDepositDeploymentResponse.encode(message).finish();
@@ -576,7 +548,7 @@ export const MsgUpdateDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeployment();
@@ -584,7 +556,7 @@ export const MsgUpdateDeployment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = DeploymentID.decode(reader, reader.uint32());
+          message.id = DeploymentID.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.version = reader.bytes();
@@ -629,22 +601,23 @@ export const MsgUpdateDeployment = {
     return obj;
   },
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      version: object.version
-    };
+    const message = createBaseMsgUpdateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    return message;
   },
-  toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
+  toAmino(message: MsgUpdateDeployment, useInterfaces: boolean = true): MsgUpdateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.version = message.version;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
-    return MsgUpdateDeployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgUpdateDeploymentProtoMsg): MsgUpdateDeployment {
-    return MsgUpdateDeployment.decode(message.value);
+  fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {
+    return MsgUpdateDeployment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateDeployment): Uint8Array {
     return MsgUpdateDeployment.encode(message).finish();
@@ -664,7 +637,7 @@ export const MsgUpdateDeploymentResponse = {
   encode(_: MsgUpdateDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDeploymentResponse();
@@ -698,17 +671,15 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
-    return {};
+    const message = createBaseMsgUpdateDeploymentResponse();
+    return message;
   },
-  toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
+  toAmino(_: MsgUpdateDeploymentResponse, useInterfaces: boolean = true): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateDeploymentResponseAminoMsg): MsgUpdateDeploymentResponse {
-    return MsgUpdateDeploymentResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg): MsgUpdateDeploymentResponse {
-    return MsgUpdateDeploymentResponse.decode(message.value);
+  fromProtoMsg(message: MsgUpdateDeploymentResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateDeploymentResponse {
+    return MsgUpdateDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateDeploymentResponse): Uint8Array {
     return MsgUpdateDeploymentResponse.encode(message).finish();
@@ -733,7 +704,7 @@ export const MsgCloseDeployment = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeployment {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseDeployment {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeployment();
@@ -741,7 +712,7 @@ export const MsgCloseDeployment = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = DeploymentID.decode(reader, reader.uint32());
+          message.id = DeploymentID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -778,20 +749,19 @@ export const MsgCloseDeployment = {
     return obj;
   },
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgCloseDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
-  toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
+  toAmino(message: MsgCloseDeployment, useInterfaces: boolean = true): MsgCloseDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {
-    return MsgCloseDeployment.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCloseDeploymentProtoMsg): MsgCloseDeployment {
-    return MsgCloseDeployment.decode(message.value);
+  fromProtoMsg(message: MsgCloseDeploymentProtoMsg, useInterfaces: boolean = true): MsgCloseDeployment {
+    return MsgCloseDeployment.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseDeployment): Uint8Array {
     return MsgCloseDeployment.encode(message).finish();
@@ -811,7 +781,7 @@ export const MsgCloseDeploymentResponse = {
   encode(_: MsgCloseDeploymentResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCloseDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCloseDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCloseDeploymentResponse();
@@ -845,17 +815,15 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
-    return {};
+    const message = createBaseMsgCloseDeploymentResponse();
+    return message;
   },
-  toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
+  toAmino(_: MsgCloseDeploymentResponse, useInterfaces: boolean = true): MsgCloseDeploymentResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgCloseDeploymentResponseAminoMsg): MsgCloseDeploymentResponse {
-    return MsgCloseDeploymentResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg): MsgCloseDeploymentResponse {
-    return MsgCloseDeploymentResponse.decode(message.value);
+  fromProtoMsg(message: MsgCloseDeploymentResponseProtoMsg, useInterfaces: boolean = true): MsgCloseDeploymentResponse {
+    return MsgCloseDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCloseDeploymentResponse): Uint8Array {
     return MsgCloseDeploymentResponse.encode(message).finish();

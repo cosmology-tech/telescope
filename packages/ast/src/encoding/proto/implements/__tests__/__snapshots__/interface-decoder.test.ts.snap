@@ -3,12 +3,12 @@
 exports[`PoolI PoolI 1`] = `
 "export const PoolI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Pool1 | Pool2 | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
-      return Pool1.decode(data.value);
+      return Pool1.decode(data.value, undefined, true);
     case "/osmosis.gamm.v1beta1.Pool":
-      return Pool2.decode(data.value);
+      return Pool2.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -18,12 +18,12 @@ exports[`PoolI PoolI 1`] = `
 exports[`PoolI getMapFromTypeUrlMap 1`] = `
 "export const PoolI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Pool1 | Pool2 | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/osmosis.gamm.v1beta1.Pool":
-      return Pool1.decode(data.value);
+      return Pool1.decode(data.value, undefined, true);
     case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
-      return Pool2.decode(data.value);
+      return Pool2.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -50,7 +50,7 @@ exports[`PoolI objects 1`] = `
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push((PoolI_InterfaceDecoder(reader) as Any));
+          message.pools.push((Any(reader) as Any));
           break;
         case 2:
           message.pagination = PageResponse.decode(reader, reader.uint32());
@@ -101,10 +101,12 @@ exports[`PoolI objects 1`] = `
     return obj;
   },
   fromAmino(object: QueryPoolsResponseAmino): QueryPoolsResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryPoolsResponse();
+    message.pools = object.pools?.map(e => PoolI_FromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryPoolsResponse): QueryPoolsResponseAmino {
     const obj: any = {};

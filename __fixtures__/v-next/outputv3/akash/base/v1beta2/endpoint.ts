@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -54,12 +54,8 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
-  sequence_number: number;
-}
-export interface EndpointAminoMsg {
-  type: "/akash.base.v1beta2.Endpoint";
-  value: EndpointAmino;
+  kind?: Endpoint_Kind;
+  sequence_number?: number;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
@@ -83,7 +79,7 @@ export const Endpoint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Endpoint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Endpoint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();
@@ -134,22 +130,23 @@ export const Endpoint = {
     return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
-      sequenceNumber: object.sequence_number
-    };
+    const message = createBaseEndpoint();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = endpoint_KindFromJSON(object.kind);
+    }
+    if (object.sequence_number !== undefined && object.sequence_number !== null) {
+      message.sequenceNumber = object.sequence_number;
+    }
+    return message;
   },
-  toAmino(message: Endpoint): EndpointAmino {
+  toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.kind = omitDefault(message.kind);
+    obj.kind = endpoint_KindToJSON(message.kind);
     obj.sequence_number = message.sequenceNumber;
     return obj;
   },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
-    return Endpoint.decode(message.value);
+  fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {
+    return Endpoint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Endpoint): Uint8Array {
     return Endpoint.encode(message).finish();

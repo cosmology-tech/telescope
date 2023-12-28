@@ -48,5 +48,5 @@ yarn.lock
 # others
 .DS_Store
 
-src/codegen
+src/codegen**
 types

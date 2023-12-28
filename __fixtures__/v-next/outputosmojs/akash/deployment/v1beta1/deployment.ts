@@ -3,7 +3,7 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, Exact, omitDefault, Rpc } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, Exact, Rpc } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -53,6 +53,10 @@ export interface MsgCreateDeployment {
   version: Uint8Array;
   deposit: Coin | undefined;
 }
+export interface MsgCreateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment";
+  value: Uint8Array;
+}
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
   id: DeploymentIDSDKType | undefined;
@@ -62,12 +66,20 @@ export interface MsgCreateDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponse {}
+export interface MsgCreateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCreateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgCreateDeploymentResponseSDKType {}
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeployment {
   id: DeploymentID | undefined;
   amount: Coin | undefined;
+}
+export interface MsgDepositDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment";
+  value: Uint8Array;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -76,6 +88,10 @@ export interface MsgDepositDeploymentSDKType {
 }
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponse {}
+export interface MsgDepositDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgDepositDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCreateDeploymentResponse defines the Msg/CreateDeployment response type. */
 export interface MsgDepositDeploymentResponseSDKType {}
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
@@ -83,6 +99,10 @@ export interface MsgUpdateDeployment {
   id: DeploymentID | undefined;
   groups: GroupSpec[];
   version: Uint8Array;
+}
+export interface MsgUpdateDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment";
+  value: Uint8Array;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -92,11 +112,19 @@ export interface MsgUpdateDeploymentSDKType {
 }
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponse {}
+export interface MsgUpdateDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateDeploymentResponse defines the Msg/UpdateDeployment response type. */
 export interface MsgUpdateDeploymentResponseSDKType {}
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeployment {
   id: DeploymentID | undefined;
+}
+export interface MsgCloseDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment";
+  value: Uint8Array;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -104,12 +132,20 @@ export interface MsgCloseDeploymentSDKType {
 }
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponse {}
+export interface MsgCloseDeploymentResponseProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.MsgCloseDeploymentResponse";
+  value: Uint8Array;
+}
 /** MsgCloseDeploymentResponse defines the Msg/CloseDeployment response type. */
 export interface MsgCloseDeploymentResponseSDKType {}
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentID {
   owner: string;
   dseq: bigint;
+}
+export interface DeploymentIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentID";
+  value: Uint8Array;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -123,6 +159,10 @@ export interface Deployment {
   version: Uint8Array;
   createdAt: bigint;
 }
+export interface DeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Deployment";
+  value: Uint8Array;
+}
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentSDKType {
   deployment_id: DeploymentIDSDKType | undefined;
@@ -135,6 +175,10 @@ export interface DeploymentFilters {
   owner: string;
   dseq: bigint;
   state: string;
+}
+export interface DeploymentFiltersProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.DeploymentFilters";
+  value: Uint8Array;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -250,12 +294,18 @@ export const MsgCreateDeployment = {
     return obj;
   },
   fromAmino(object: MsgCreateDeploymentAmino): MsgCreateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version,
-      deposit: object?.deposit ? Coin.fromAmino(object.deposit) : undefined
-    };
+    const message = createBaseMsgCreateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    if (object.deposit !== undefined && object.deposit !== null) {
+      message.deposit = Coin.fromAmino(object.deposit);
+    }
+    return message;
   },
   toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
     const obj: any = {};
@@ -265,7 +315,7 @@ export const MsgCreateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
     return obj;
   },
@@ -335,7 +385,8 @@ export const MsgCreateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateDeploymentResponseAmino): MsgCreateDeploymentResponse {
-    return {};
+    const message = createBaseMsgCreateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCreateDeploymentResponse): MsgCreateDeploymentResponseAmino {
     const obj: any = {};
@@ -437,10 +488,14 @@ export const MsgDepositDeployment = {
     return obj;
   },
   fromAmino(object: MsgDepositDeploymentAmino): MsgDepositDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      amount: object?.amount ? Coin.fromAmino(object.amount) : undefined
-    };
+    const message = createBaseMsgDepositDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Coin.fromAmino(object.amount);
+    }
+    return message;
   },
   toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
     const obj: any = {};
@@ -514,7 +569,8 @@ export const MsgDepositDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgDepositDeploymentResponseAmino): MsgDepositDeploymentResponse {
-    return {};
+    const message = createBaseMsgDepositDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgDepositDeploymentResponse): MsgDepositDeploymentResponseAmino {
     const obj: any = {};
@@ -637,11 +693,15 @@ export const MsgUpdateDeployment = {
     return obj;
   },
   fromAmino(object: MsgUpdateDeploymentAmino): MsgUpdateDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupSpec.fromAmino(e)) : [],
-      version: object.version
-    };
+    const message = createBaseMsgUpdateDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    message.groups = object.groups?.map(e => GroupSpec.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
@@ -651,7 +711,7 @@ export const MsgUpdateDeployment = {
     } else {
       obj.groups = [];
     }
-    obj.version = message.version;
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -720,7 +780,8 @@ export const MsgUpdateDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDeploymentResponseAmino): MsgUpdateDeploymentResponse {
-    return {};
+    const message = createBaseMsgUpdateDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDeploymentResponse): MsgUpdateDeploymentResponseAmino {
     const obj: any = {};
@@ -809,9 +870,11 @@ export const MsgCloseDeployment = {
     return obj;
   },
   fromAmino(object: MsgCloseDeploymentAmino): MsgCloseDeployment {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgCloseDeployment();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
     const obj: any = {};
@@ -884,7 +947,8 @@ export const MsgCloseDeploymentResponse = {
     return obj;
   },
   fromAmino(_: MsgCloseDeploymentResponseAmino): MsgCloseDeploymentResponse {
-    return {};
+    const message = createBaseMsgCloseDeploymentResponse();
+    return message;
   },
   toAmino(_: MsgCloseDeploymentResponse): MsgCloseDeploymentResponseAmino {
     const obj: any = {};
@@ -986,15 +1050,19 @@ export const DeploymentID = {
     return obj;
   },
   fromAmino(object: DeploymentIDAmino): DeploymentID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq)
-    };
+    const message = createBaseDeploymentID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    return message;
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
@@ -1119,19 +1187,27 @@ export const Deployment = {
     return obj;
   },
   fromAmino(object: DeploymentAmino): Deployment {
-    return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseDeployment();
+    if (object.deployment_id !== undefined && object.deployment_id !== null) {
+      message.deploymentId = DeploymentID.fromAmino(object.deployment_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = deployment_StateFromJSON(object.state);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Deployment): DeploymentAmino {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = message.state;
-    obj.version = message.version;
-    obj.created_at = omitDefault(message.createdAt);
+    obj.state = deployment_StateToJSON(message.state);
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentAminoMsg): Deployment {
@@ -1243,16 +1319,22 @@ export const DeploymentFilters = {
     return obj;
   },
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      state: object.state
-    };
+    const message = createBaseDeploymentFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
   },
@@ -1343,3 +1425,6 @@ export class MsgClientImpl implements Msg {
     return promise.then(data => MsgStartGroupResponse.decode(new BinaryReader(data)));
   };
 }
+export const createClientImpl = (rpc: Rpc) => {
+  return new MsgClientImpl(rpc);
+};

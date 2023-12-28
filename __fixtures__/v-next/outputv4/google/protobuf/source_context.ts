@@ -12,6 +12,10 @@ export interface SourceContext {
    */
   fileName: string;
 }
+export interface SourceContextProtoMsg {
+  typeUrl: "/google.protobuf.SourceContext";
+  value: Uint8Array;
+}
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
@@ -27,7 +31,7 @@ function createBaseSourceContext(): SourceContext {
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fileName !== "") {
+    if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
     }
     return writer;
@@ -80,9 +84,11 @@ export const SourceContext = {
     return obj;
   },
   fromAmino(object: SourceContextAmino): SourceContext {
-    return {
-      fileName: object.file_name
-    };
+    const message = createBaseSourceContext();
+    if (object.file_name !== undefined && object.file_name !== null) {
+      message.fileName = object.file_name;
+    }
+    return message;
   },
   toAmino(message: SourceContext): SourceContextAmino {
     const obj: any = {};

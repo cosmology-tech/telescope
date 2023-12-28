@@ -12,10 +12,6 @@ export interface QueryPeriodRequestProtoMsg {
 }
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestAmino {}
-export interface QueryPeriodRequestAminoMsg {
-  type: "/evmos.inflation.v1.QueryPeriodRequest";
-  value: QueryPeriodRequestAmino;
-}
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
 export interface QueryPeriodRequestSDKType {}
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
@@ -30,11 +26,7 @@ export interface QueryPeriodResponseProtoMsg {
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseAmino {
   /** period is the current minting per epoch provision value. */
-  period: string;
-}
-export interface QueryPeriodResponseAminoMsg {
-  type: "/evmos.inflation.v1.QueryPeriodResponse";
-  value: QueryPeriodResponseAmino;
+  period?: string;
 }
 /** QueryPeriodResponse is the response type for the Query/Period RPC method. */
 export interface QueryPeriodResponseSDKType {
@@ -54,10 +46,6 @@ export interface QueryEpochMintProvisionRequestProtoMsg {
  * Query/EpochMintProvision RPC method.
  */
 export interface QueryEpochMintProvisionRequestAmino {}
-export interface QueryEpochMintProvisionRequestAminoMsg {
-  type: "/evmos.inflation.v1.QueryEpochMintProvisionRequest";
-  value: QueryEpochMintProvisionRequestAmino;
-}
 /**
  * QueryEpochMintProvisionRequest is the request type for the
  * Query/EpochMintProvision RPC method.
@@ -83,10 +71,6 @@ export interface QueryEpochMintProvisionResponseAmino {
   /** epoch_mint_provision is the current minting per epoch provision value. */
   epoch_mint_provision?: DecCoinAmino;
 }
-export interface QueryEpochMintProvisionResponseAminoMsg {
-  type: "/evmos.inflation.v1.QueryEpochMintProvisionResponse";
-  value: QueryEpochMintProvisionResponseAmino;
-}
 /**
  * QueryEpochMintProvisionResponse is the response type for the
  * Query/EpochMintProvision RPC method.
@@ -108,10 +92,6 @@ export interface QuerySkippedEpochsRequestProtoMsg {
  * method.
  */
 export interface QuerySkippedEpochsRequestAmino {}
-export interface QuerySkippedEpochsRequestAminoMsg {
-  type: "/evmos.inflation.v1.QuerySkippedEpochsRequest";
-  value: QuerySkippedEpochsRequestAmino;
-}
 /**
  * QuerySkippedEpochsRequest is the request type for the Query/SkippedEpochs RPC
  * method.
@@ -135,11 +115,7 @@ export interface QuerySkippedEpochsResponseProtoMsg {
  */
 export interface QuerySkippedEpochsResponseAmino {
   /** number of epochs that the inflation module has been disabled. */
-  skipped_epochs: string;
-}
-export interface QuerySkippedEpochsResponseAminoMsg {
-  type: "/evmos.inflation.v1.QuerySkippedEpochsResponse";
-  value: QuerySkippedEpochsResponseAmino;
+  skipped_epochs?: string;
 }
 /**
  * QuerySkippedEpochsResponse is the response type for the Query/SkippedEpochs
@@ -162,10 +138,6 @@ export interface QueryCirculatingSupplyRequestProtoMsg {
  * Query/CirculatingSupply RPC method.
  */
 export interface QueryCirculatingSupplyRequestAmino {}
-export interface QueryCirculatingSupplyRequestAminoMsg {
-  type: "/evmos.inflation.v1.QueryCirculatingSupplyRequest";
-  value: QueryCirculatingSupplyRequestAmino;
-}
 /**
  * QueryCirculatingSupplyRequest is the request type for the
  * Query/CirculatingSupply RPC method.
@@ -191,10 +163,6 @@ export interface QueryCirculatingSupplyResponseAmino {
   /** total amount of coins in circulation */
   circulating_supply?: DecCoinAmino;
 }
-export interface QueryCirculatingSupplyResponseAminoMsg {
-  type: "/evmos.inflation.v1.QueryCirculatingSupplyResponse";
-  value: QueryCirculatingSupplyResponseAmino;
-}
 /**
  * QueryCirculatingSupplyResponse is the response type for the
  * Query/CirculatingSupply RPC method.
@@ -216,10 +184,6 @@ export interface QueryInflationRateRequestProtoMsg {
  * method.
  */
 export interface QueryInflationRateRequestAmino {}
-export interface QueryInflationRateRequestAminoMsg {
-  type: "/evmos.inflation.v1.QueryInflationRateRequest";
-  value: QueryInflationRateRequestAmino;
-}
 /**
  * QueryInflationRateRequest is the request type for the Query/InflationRate RPC
  * method.
@@ -243,11 +207,7 @@ export interface QueryInflationRateResponseProtoMsg {
  */
 export interface QueryInflationRateResponseAmino {
   /** rate by which the total supply increases within one period */
-  inflation_rate: string;
-}
-export interface QueryInflationRateResponseAminoMsg {
-  type: "/evmos.inflation.v1.QueryInflationRateResponse";
-  value: QueryInflationRateResponseAmino;
+  inflation_rate?: string;
 }
 /**
  * QueryInflationRateResponse is the response type for the Query/InflationRate
@@ -264,10 +224,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "/evmos.inflation.v1.QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -284,10 +240,6 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoMsg {
-  type: "/evmos.inflation.v1.QueryParamsResponse";
-  value: QueryParamsResponseAmino;
-}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -300,7 +252,7 @@ export const QueryPeriodRequest = {
   encode(_: QueryPeriodRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPeriodRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryPeriodRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPeriodRequest();
@@ -334,17 +286,15 @@ export const QueryPeriodRequest = {
     return obj;
   },
   fromAmino(_: QueryPeriodRequestAmino): QueryPeriodRequest {
-    return {};
+    const message = createBaseQueryPeriodRequest();
+    return message;
   },
-  toAmino(_: QueryPeriodRequest): QueryPeriodRequestAmino {
+  toAmino(_: QueryPeriodRequest, useInterfaces: boolean = true): QueryPeriodRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryPeriodRequestAminoMsg): QueryPeriodRequest {
-    return QueryPeriodRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryPeriodRequestProtoMsg): QueryPeriodRequest {
-    return QueryPeriodRequest.decode(message.value);
+  fromProtoMsg(message: QueryPeriodRequestProtoMsg, useInterfaces: boolean = true): QueryPeriodRequest {
+    return QueryPeriodRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPeriodRequest): Uint8Array {
     return QueryPeriodRequest.encode(message).finish();
@@ -369,7 +319,7 @@ export const QueryPeriodResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryPeriodResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryPeriodResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryPeriodResponse();
@@ -414,20 +364,19 @@ export const QueryPeriodResponse = {
     return obj;
   },
   fromAmino(object: QueryPeriodResponseAmino): QueryPeriodResponse {
-    return {
-      period: BigInt(object.period)
-    };
+    const message = createBaseQueryPeriodResponse();
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    return message;
   },
-  toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
+  toAmino(message: QueryPeriodResponse, useInterfaces: boolean = true): QueryPeriodResponseAmino {
     const obj: any = {};
     obj.period = omitDefault(message.period);
     return obj;
   },
-  fromAminoMsg(object: QueryPeriodResponseAminoMsg): QueryPeriodResponse {
-    return QueryPeriodResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryPeriodResponseProtoMsg): QueryPeriodResponse {
-    return QueryPeriodResponse.decode(message.value);
+  fromProtoMsg(message: QueryPeriodResponseProtoMsg, useInterfaces: boolean = true): QueryPeriodResponse {
+    return QueryPeriodResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryPeriodResponse): Uint8Array {
     return QueryPeriodResponse.encode(message).finish();
@@ -447,7 +396,7 @@ export const QueryEpochMintProvisionRequest = {
   encode(_: QueryEpochMintProvisionRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryEpochMintProvisionRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochMintProvisionRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochMintProvisionRequest();
@@ -481,17 +430,15 @@ export const QueryEpochMintProvisionRequest = {
     return obj;
   },
   fromAmino(_: QueryEpochMintProvisionRequestAmino): QueryEpochMintProvisionRequest {
-    return {};
+    const message = createBaseQueryEpochMintProvisionRequest();
+    return message;
   },
-  toAmino(_: QueryEpochMintProvisionRequest): QueryEpochMintProvisionRequestAmino {
+  toAmino(_: QueryEpochMintProvisionRequest, useInterfaces: boolean = true): QueryEpochMintProvisionRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryEpochMintProvisionRequestAminoMsg): QueryEpochMintProvisionRequest {
-    return QueryEpochMintProvisionRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryEpochMintProvisionRequestProtoMsg): QueryEpochMintProvisionRequest {
-    return QueryEpochMintProvisionRequest.decode(message.value);
+  fromProtoMsg(message: QueryEpochMintProvisionRequestProtoMsg, useInterfaces: boolean = true): QueryEpochMintProvisionRequest {
+    return QueryEpochMintProvisionRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochMintProvisionRequest): Uint8Array {
     return QueryEpochMintProvisionRequest.encode(message).finish();
@@ -516,7 +463,7 @@ export const QueryEpochMintProvisionResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryEpochMintProvisionResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryEpochMintProvisionResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryEpochMintProvisionResponse();
@@ -524,7 +471,7 @@ export const QueryEpochMintProvisionResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.epochMintProvision = DecCoin.decode(reader, reader.uint32());
+          message.epochMintProvision = DecCoin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -561,20 +508,19 @@ export const QueryEpochMintProvisionResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochMintProvisionResponseAmino): QueryEpochMintProvisionResponse {
-    return {
-      epochMintProvision: object?.epoch_mint_provision ? DecCoin.fromAmino(object.epoch_mint_provision) : undefined
-    };
+    const message = createBaseQueryEpochMintProvisionResponse();
+    if (object.epoch_mint_provision !== undefined && object.epoch_mint_provision !== null) {
+      message.epochMintProvision = DecCoin.fromAmino(object.epoch_mint_provision);
+    }
+    return message;
   },
-  toAmino(message: QueryEpochMintProvisionResponse): QueryEpochMintProvisionResponseAmino {
+  toAmino(message: QueryEpochMintProvisionResponse, useInterfaces: boolean = true): QueryEpochMintProvisionResponseAmino {
     const obj: any = {};
-    obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision) : undefined;
+    obj.epoch_mint_provision = message.epochMintProvision ? DecCoin.toAmino(message.epochMintProvision, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryEpochMintProvisionResponseAminoMsg): QueryEpochMintProvisionResponse {
-    return QueryEpochMintProvisionResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryEpochMintProvisionResponseProtoMsg): QueryEpochMintProvisionResponse {
-    return QueryEpochMintProvisionResponse.decode(message.value);
+  fromProtoMsg(message: QueryEpochMintProvisionResponseProtoMsg, useInterfaces: boolean = true): QueryEpochMintProvisionResponse {
+    return QueryEpochMintProvisionResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryEpochMintProvisionResponse): Uint8Array {
     return QueryEpochMintProvisionResponse.encode(message).finish();
@@ -594,7 +540,7 @@ export const QuerySkippedEpochsRequest = {
   encode(_: QuerySkippedEpochsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySkippedEpochsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySkippedEpochsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySkippedEpochsRequest();
@@ -628,17 +574,15 @@ export const QuerySkippedEpochsRequest = {
     return obj;
   },
   fromAmino(_: QuerySkippedEpochsRequestAmino): QuerySkippedEpochsRequest {
-    return {};
+    const message = createBaseQuerySkippedEpochsRequest();
+    return message;
   },
-  toAmino(_: QuerySkippedEpochsRequest): QuerySkippedEpochsRequestAmino {
+  toAmino(_: QuerySkippedEpochsRequest, useInterfaces: boolean = true): QuerySkippedEpochsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QuerySkippedEpochsRequestAminoMsg): QuerySkippedEpochsRequest {
-    return QuerySkippedEpochsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuerySkippedEpochsRequestProtoMsg): QuerySkippedEpochsRequest {
-    return QuerySkippedEpochsRequest.decode(message.value);
+  fromProtoMsg(message: QuerySkippedEpochsRequestProtoMsg, useInterfaces: boolean = true): QuerySkippedEpochsRequest {
+    return QuerySkippedEpochsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySkippedEpochsRequest): Uint8Array {
     return QuerySkippedEpochsRequest.encode(message).finish();
@@ -663,7 +607,7 @@ export const QuerySkippedEpochsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuerySkippedEpochsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuerySkippedEpochsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuerySkippedEpochsResponse();
@@ -708,20 +652,19 @@ export const QuerySkippedEpochsResponse = {
     return obj;
   },
   fromAmino(object: QuerySkippedEpochsResponseAmino): QuerySkippedEpochsResponse {
-    return {
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseQuerySkippedEpochsResponse();
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
-  toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
+  toAmino(message: QuerySkippedEpochsResponse, useInterfaces: boolean = true): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
     obj.skipped_epochs = omitDefault(message.skippedEpochs);
     return obj;
   },
-  fromAminoMsg(object: QuerySkippedEpochsResponseAminoMsg): QuerySkippedEpochsResponse {
-    return QuerySkippedEpochsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuerySkippedEpochsResponseProtoMsg): QuerySkippedEpochsResponse {
-    return QuerySkippedEpochsResponse.decode(message.value);
+  fromProtoMsg(message: QuerySkippedEpochsResponseProtoMsg, useInterfaces: boolean = true): QuerySkippedEpochsResponse {
+    return QuerySkippedEpochsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuerySkippedEpochsResponse): Uint8Array {
     return QuerySkippedEpochsResponse.encode(message).finish();
@@ -741,7 +684,7 @@ export const QueryCirculatingSupplyRequest = {
   encode(_: QueryCirculatingSupplyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCirculatingSupplyRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCirculatingSupplyRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCirculatingSupplyRequest();
@@ -775,17 +718,15 @@ export const QueryCirculatingSupplyRequest = {
     return obj;
   },
   fromAmino(_: QueryCirculatingSupplyRequestAmino): QueryCirculatingSupplyRequest {
-    return {};
+    const message = createBaseQueryCirculatingSupplyRequest();
+    return message;
   },
-  toAmino(_: QueryCirculatingSupplyRequest): QueryCirculatingSupplyRequestAmino {
+  toAmino(_: QueryCirculatingSupplyRequest, useInterfaces: boolean = true): QueryCirculatingSupplyRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryCirculatingSupplyRequestAminoMsg): QueryCirculatingSupplyRequest {
-    return QueryCirculatingSupplyRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryCirculatingSupplyRequestProtoMsg): QueryCirculatingSupplyRequest {
-    return QueryCirculatingSupplyRequest.decode(message.value);
+  fromProtoMsg(message: QueryCirculatingSupplyRequestProtoMsg, useInterfaces: boolean = true): QueryCirculatingSupplyRequest {
+    return QueryCirculatingSupplyRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCirculatingSupplyRequest): Uint8Array {
     return QueryCirculatingSupplyRequest.encode(message).finish();
@@ -810,7 +751,7 @@ export const QueryCirculatingSupplyResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryCirculatingSupplyResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryCirculatingSupplyResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryCirculatingSupplyResponse();
@@ -818,7 +759,7 @@ export const QueryCirculatingSupplyResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.circulatingSupply = DecCoin.decode(reader, reader.uint32());
+          message.circulatingSupply = DecCoin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -855,20 +796,19 @@ export const QueryCirculatingSupplyResponse = {
     return obj;
   },
   fromAmino(object: QueryCirculatingSupplyResponseAmino): QueryCirculatingSupplyResponse {
-    return {
-      circulatingSupply: object?.circulating_supply ? DecCoin.fromAmino(object.circulating_supply) : undefined
-    };
+    const message = createBaseQueryCirculatingSupplyResponse();
+    if (object.circulating_supply !== undefined && object.circulating_supply !== null) {
+      message.circulatingSupply = DecCoin.fromAmino(object.circulating_supply);
+    }
+    return message;
   },
-  toAmino(message: QueryCirculatingSupplyResponse): QueryCirculatingSupplyResponseAmino {
+  toAmino(message: QueryCirculatingSupplyResponse, useInterfaces: boolean = true): QueryCirculatingSupplyResponseAmino {
     const obj: any = {};
-    obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply) : undefined;
+    obj.circulating_supply = message.circulatingSupply ? DecCoin.toAmino(message.circulatingSupply, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryCirculatingSupplyResponseAminoMsg): QueryCirculatingSupplyResponse {
-    return QueryCirculatingSupplyResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryCirculatingSupplyResponseProtoMsg): QueryCirculatingSupplyResponse {
-    return QueryCirculatingSupplyResponse.decode(message.value);
+  fromProtoMsg(message: QueryCirculatingSupplyResponseProtoMsg, useInterfaces: boolean = true): QueryCirculatingSupplyResponse {
+    return QueryCirculatingSupplyResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryCirculatingSupplyResponse): Uint8Array {
     return QueryCirculatingSupplyResponse.encode(message).finish();
@@ -888,7 +828,7 @@ export const QueryInflationRateRequest = {
   encode(_: QueryInflationRateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryInflationRateRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryInflationRateRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRateRequest();
@@ -922,17 +862,15 @@ export const QueryInflationRateRequest = {
     return obj;
   },
   fromAmino(_: QueryInflationRateRequestAmino): QueryInflationRateRequest {
-    return {};
+    const message = createBaseQueryInflationRateRequest();
+    return message;
   },
-  toAmino(_: QueryInflationRateRequest): QueryInflationRateRequestAmino {
+  toAmino(_: QueryInflationRateRequest, useInterfaces: boolean = true): QueryInflationRateRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryInflationRateRequestAminoMsg): QueryInflationRateRequest {
-    return QueryInflationRateRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryInflationRateRequestProtoMsg): QueryInflationRateRequest {
-    return QueryInflationRateRequest.decode(message.value);
+  fromProtoMsg(message: QueryInflationRateRequestProtoMsg, useInterfaces: boolean = true): QueryInflationRateRequest {
+    return QueryInflationRateRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryInflationRateRequest): Uint8Array {
     return QueryInflationRateRequest.encode(message).finish();
@@ -957,7 +895,7 @@ export const QueryInflationRateResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryInflationRateResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryInflationRateResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryInflationRateResponse();
@@ -1000,20 +938,19 @@ export const QueryInflationRateResponse = {
     return obj;
   },
   fromAmino(object: QueryInflationRateResponseAmino): QueryInflationRateResponse {
-    return {
-      inflationRate: object.inflation_rate
-    };
+    const message = createBaseQueryInflationRateResponse();
+    if (object.inflation_rate !== undefined && object.inflation_rate !== null) {
+      message.inflationRate = object.inflation_rate;
+    }
+    return message;
   },
-  toAmino(message: QueryInflationRateResponse): QueryInflationRateResponseAmino {
+  toAmino(message: QueryInflationRateResponse, useInterfaces: boolean = true): QueryInflationRateResponseAmino {
     const obj: any = {};
     obj.inflation_rate = padDecimal(message.inflationRate);
     return obj;
   },
-  fromAminoMsg(object: QueryInflationRateResponseAminoMsg): QueryInflationRateResponse {
-    return QueryInflationRateResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryInflationRateResponseProtoMsg): QueryInflationRateResponse {
-    return QueryInflationRateResponse.decode(message.value);
+  fromProtoMsg(message: QueryInflationRateResponseProtoMsg, useInterfaces: boolean = true): QueryInflationRateResponse {
+    return QueryInflationRateResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryInflationRateResponse): Uint8Array {
     return QueryInflationRateResponse.encode(message).finish();
@@ -1033,7 +970,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -1067,17 +1004,15 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -1102,7 +1037,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -1110,7 +1045,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1147,20 +1082,19 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();

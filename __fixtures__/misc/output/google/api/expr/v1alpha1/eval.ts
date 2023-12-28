@@ -11,7 +11,7 @@ export interface ExprValueProtoMsg {
 }
 export interface ExprValueAmino {
   /** The ids of the expressions with unknown values. */
-  exprs: IdRefAmino[];
+  exprs?: IdRefAmino[];
 }
 export interface ExprValueAminoMsg {
   type: "/google.api.expr.v1alpha1.ExprValue";
@@ -30,7 +30,7 @@ export interface IdRefProtoMsg {
 }
 export interface IdRefAmino {
   /** The expression id. */
-  id: number;
+  id?: number;
 }
 export interface IdRefAminoMsg {
   type: "/google.api.expr.v1alpha1.IdRef";
@@ -70,9 +70,9 @@ export const ExprValue = {
     return message;
   },
   fromJSON(object: any): ExprValue {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromJSON(e)) : []
-    };
+    const obj = createBaseExprValue();
+    if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => IdRef.fromJSON(e));
+    return obj;
   },
   toJSON(message: ExprValue): unknown {
     const obj: any = {};
@@ -108,9 +108,9 @@ export const ExprValue = {
     return obj;
   },
   fromAmino(object: ExprValueAmino): ExprValue {
-    return {
-      exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => IdRef.fromAmino(e)) : []
-    };
+    const message = createBaseExprValue();
+    message.exprs = object.exprs?.map(e => IdRef.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ExprValue): ExprValueAmino {
     const obj: any = {};
@@ -168,9 +168,9 @@ export const IdRef = {
     return message;
   },
   fromJSON(object: any): IdRef {
-    return {
-      id: isSet(object.id) ? Number(object.id) : 0
-    };
+    const obj = createBaseIdRef();
+    if (isSet(object.id)) obj.id = Number(object.id);
+    return obj;
   },
   toJSON(message: IdRef): unknown {
     const obj: any = {};
@@ -198,9 +198,11 @@ export const IdRef = {
     return obj;
   },
   fromAmino(object: IdRefAmino): IdRef {
-    return {
-      id: object.id
-    };
+    const message = createBaseIdRef();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    return message;
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};

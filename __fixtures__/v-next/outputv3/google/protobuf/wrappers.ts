@@ -21,11 +21,7 @@ export interface DoubleValueProtoMsg {
  */
 export interface DoubleValueAmino {
   /** The double value. */
-  value: number;
-}
-export interface DoubleValueAminoMsg {
-  type: "/google.protobuf.DoubleValue";
-  value: DoubleValueAmino;
+  value?: number;
 }
 /**
  * Wrapper message for `double`.
@@ -55,11 +51,7 @@ export interface FloatValueProtoMsg {
  */
 export interface FloatValueAmino {
   /** The float value. */
-  value: number;
-}
-export interface FloatValueAminoMsg {
-  type: "/google.protobuf.FloatValue";
-  value: FloatValueAmino;
+  value?: number;
 }
 /**
  * Wrapper message for `float`.
@@ -89,11 +81,7 @@ export interface Int64ValueProtoMsg {
  */
 export interface Int64ValueAmino {
   /** The int64 value. */
-  value: string;
-}
-export interface Int64ValueAminoMsg {
-  type: "/google.protobuf.Int64Value";
-  value: Int64ValueAmino;
+  value?: string;
 }
 /**
  * Wrapper message for `int64`.
@@ -123,11 +111,7 @@ export interface UInt64ValueProtoMsg {
  */
 export interface UInt64ValueAmino {
   /** The uint64 value. */
-  value: string;
-}
-export interface UInt64ValueAminoMsg {
-  type: "/google.protobuf.UInt64Value";
-  value: UInt64ValueAmino;
+  value?: string;
 }
 /**
  * Wrapper message for `uint64`.
@@ -157,11 +141,7 @@ export interface Int32ValueProtoMsg {
  */
 export interface Int32ValueAmino {
   /** The int32 value. */
-  value: number;
-}
-export interface Int32ValueAminoMsg {
-  type: "/google.protobuf.Int32Value";
-  value: Int32ValueAmino;
+  value?: number;
 }
 /**
  * Wrapper message for `int32`.
@@ -191,11 +171,7 @@ export interface UInt32ValueProtoMsg {
  */
 export interface UInt32ValueAmino {
   /** The uint32 value. */
-  value: number;
-}
-export interface UInt32ValueAminoMsg {
-  type: "/google.protobuf.UInt32Value";
-  value: UInt32ValueAmino;
+  value?: number;
 }
 /**
  * Wrapper message for `uint32`.
@@ -225,11 +201,7 @@ export interface BoolValueProtoMsg {
  */
 export interface BoolValueAmino {
   /** The bool value. */
-  value: boolean;
-}
-export interface BoolValueAminoMsg {
-  type: "/google.protobuf.BoolValue";
-  value: BoolValueAmino;
+  value?: boolean;
 }
 /**
  * Wrapper message for `bool`.
@@ -259,11 +231,7 @@ export interface StringValueProtoMsg {
  */
 export interface StringValueAmino {
   /** The string value. */
-  value: string;
-}
-export interface StringValueAminoMsg {
-  type: "/google.protobuf.StringValue";
-  value: StringValueAmino;
+  value?: string;
 }
 /**
  * Wrapper message for `string`.
@@ -293,11 +261,7 @@ export interface BytesValueProtoMsg {
  */
 export interface BytesValueAmino {
   /** The bytes value. */
-  value: Uint8Array;
-}
-export interface BytesValueAminoMsg {
-  type: "/google.protobuf.BytesValue";
-  value: BytesValueAmino;
+  value?: string;
 }
 /**
  * Wrapper message for `bytes`.
@@ -320,7 +284,7 @@ export const DoubleValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DoubleValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DoubleValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDoubleValue();
@@ -363,20 +327,19 @@ export const DoubleValue = {
     return obj;
   },
   fromAmino(object: DoubleValueAmino): DoubleValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseDoubleValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: DoubleValue): DoubleValueAmino {
+  toAmino(message: DoubleValue, useInterfaces: boolean = true): DoubleValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: DoubleValueAminoMsg): DoubleValue {
-    return DoubleValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DoubleValueProtoMsg): DoubleValue {
-    return DoubleValue.decode(message.value);
+  fromProtoMsg(message: DoubleValueProtoMsg, useInterfaces: boolean = true): DoubleValue {
+    return DoubleValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DoubleValue): Uint8Array {
     return DoubleValue.encode(message).finish();
@@ -401,7 +364,7 @@ export const FloatValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FloatValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FloatValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFloatValue();
@@ -444,20 +407,19 @@ export const FloatValue = {
     return obj;
   },
   fromAmino(object: FloatValueAmino): FloatValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseFloatValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: FloatValue): FloatValueAmino {
+  toAmino(message: FloatValue, useInterfaces: boolean = true): FloatValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: FloatValueAminoMsg): FloatValue {
-    return FloatValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FloatValueProtoMsg): FloatValue {
-    return FloatValue.decode(message.value);
+  fromProtoMsg(message: FloatValueProtoMsg, useInterfaces: boolean = true): FloatValue {
+    return FloatValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FloatValue): Uint8Array {
     return FloatValue.encode(message).finish();
@@ -482,7 +444,7 @@ export const Int64Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Int64Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Int64Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt64Value();
@@ -527,20 +489,19 @@ export const Int64Value = {
     return obj;
   },
   fromAmino(object: Int64ValueAmino): Int64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
-  toAmino(message: Int64Value): Int64ValueAmino {
+  toAmino(message: Int64Value, useInterfaces: boolean = true): Int64ValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: Int64ValueAminoMsg): Int64Value {
-    return Int64Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Int64ValueProtoMsg): Int64Value {
-    return Int64Value.decode(message.value);
+  fromProtoMsg(message: Int64ValueProtoMsg, useInterfaces: boolean = true): Int64Value {
+    return Int64Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Int64Value): Uint8Array {
     return Int64Value.encode(message).finish();
@@ -565,7 +526,7 @@ export const UInt64Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UInt64Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UInt64Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt64Value();
@@ -610,20 +571,19 @@ export const UInt64Value = {
     return obj;
   },
   fromAmino(object: UInt64ValueAmino): UInt64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseUInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
-  toAmino(message: UInt64Value): UInt64ValueAmino {
+  toAmino(message: UInt64Value, useInterfaces: boolean = true): UInt64ValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: UInt64ValueAminoMsg): UInt64Value {
-    return UInt64Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UInt64ValueProtoMsg): UInt64Value {
-    return UInt64Value.decode(message.value);
+  fromProtoMsg(message: UInt64ValueProtoMsg, useInterfaces: boolean = true): UInt64Value {
+    return UInt64Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UInt64Value): Uint8Array {
     return UInt64Value.encode(message).finish();
@@ -648,7 +608,7 @@ export const Int32Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Int32Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Int32Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInt32Value();
@@ -691,20 +651,19 @@ export const Int32Value = {
     return obj;
   },
   fromAmino(object: Int32ValueAmino): Int32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: Int32Value): Int32ValueAmino {
+  toAmino(message: Int32Value, useInterfaces: boolean = true): Int32ValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: Int32ValueAminoMsg): Int32Value {
-    return Int32Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Int32ValueProtoMsg): Int32Value {
-    return Int32Value.decode(message.value);
+  fromProtoMsg(message: Int32ValueProtoMsg, useInterfaces: boolean = true): Int32Value {
+    return Int32Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Int32Value): Uint8Array {
     return Int32Value.encode(message).finish();
@@ -729,7 +688,7 @@ export const UInt32Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UInt32Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UInt32Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUInt32Value();
@@ -772,20 +731,19 @@ export const UInt32Value = {
     return obj;
   },
   fromAmino(object: UInt32ValueAmino): UInt32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseUInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: UInt32Value): UInt32ValueAmino {
+  toAmino(message: UInt32Value, useInterfaces: boolean = true): UInt32ValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: UInt32ValueAminoMsg): UInt32Value {
-    return UInt32Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UInt32ValueProtoMsg): UInt32Value {
-    return UInt32Value.decode(message.value);
+  fromProtoMsg(message: UInt32ValueProtoMsg, useInterfaces: boolean = true): UInt32Value {
+    return UInt32Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UInt32Value): Uint8Array {
     return UInt32Value.encode(message).finish();
@@ -810,7 +768,7 @@ export const BoolValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BoolValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BoolValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBoolValue();
@@ -853,20 +811,19 @@ export const BoolValue = {
     return obj;
   },
   fromAmino(object: BoolValueAmino): BoolValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBoolValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: BoolValue): BoolValueAmino {
+  toAmino(message: BoolValue, useInterfaces: boolean = true): BoolValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: BoolValueAminoMsg): BoolValue {
-    return BoolValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BoolValueProtoMsg): BoolValue {
-    return BoolValue.decode(message.value);
+  fromProtoMsg(message: BoolValueProtoMsg, useInterfaces: boolean = true): BoolValue {
+    return BoolValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BoolValue): Uint8Array {
     return BoolValue.encode(message).finish();
@@ -891,7 +848,7 @@ export const StringValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StringValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StringValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStringValue();
@@ -934,20 +891,19 @@ export const StringValue = {
     return obj;
   },
   fromAmino(object: StringValueAmino): StringValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseStringValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: StringValue): StringValueAmino {
+  toAmino(message: StringValue, useInterfaces: boolean = true): StringValueAmino {
     const obj: any = {};
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: StringValueAminoMsg): StringValue {
-    return StringValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: StringValueProtoMsg): StringValue {
-    return StringValue.decode(message.value);
+  fromProtoMsg(message: StringValueProtoMsg, useInterfaces: boolean = true): StringValue {
+    return StringValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StringValue): Uint8Array {
     return StringValue.encode(message).finish();
@@ -972,7 +928,7 @@ export const BytesValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BytesValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BytesValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBytesValue();
@@ -1015,20 +971,19 @@ export const BytesValue = {
     return obj;
   },
   fromAmino(object: BytesValueAmino): BytesValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBytesValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
-  toAmino(message: BytesValue): BytesValueAmino {
+  toAmino(message: BytesValue, useInterfaces: boolean = true): BytesValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
-  fromAminoMsg(object: BytesValueAminoMsg): BytesValue {
-    return BytesValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BytesValueProtoMsg): BytesValue {
-    return BytesValue.decode(message.value);
+  fromProtoMsg(message: BytesValueProtoMsg, useInterfaces: boolean = true): BytesValue {
+    return BytesValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BytesValue): Uint8Array {
     return BytesValue.encode(message).finish();

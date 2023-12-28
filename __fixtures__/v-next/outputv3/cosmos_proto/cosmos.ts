@@ -72,16 +72,12 @@ export interface InterfaceDescriptorAmino {
    * package.name, ex. for the package a.b and interface named C, the
    * fully-qualified name will be a.b.C.
    */
-  name: string;
+  name?: string;
   /**
    * description is a human-readable description of the interface and its
    * purpose.
    */
-  description: string;
-}
-export interface InterfaceDescriptorAminoMsg {
-  type: "/cosmos_proto.InterfaceDescriptor";
-  value: InterfaceDescriptorAmino;
+  description?: string;
 }
 /**
  * InterfaceDescriptor describes an interface type to be used with
@@ -142,24 +138,20 @@ export interface ScalarDescriptorAmino {
    * package.name, ex. for the package a.b and scalar named C, the
    * fully-qualified name will be a.b.C.
    */
-  name: string;
+  name?: string;
   /**
    * description is a human-readable description of the scalar and its
    * encoding format. For instance a big integer or decimal scalar should
    * specify precisely the expected encoding format.
    */
-  description: string;
+  description?: string;
   /**
    * field_type is the type of field with which this scalar can be used.
    * Scalars can be used with one and only one type of field so that
    * encoding standards and simple and clear. Currently only string and
    * bytes fields are supported for scalars.
    */
-  field_type: ScalarType[];
-}
-export interface ScalarDescriptorAminoMsg {
-  type: "/cosmos_proto.ScalarDescriptor";
-  value: ScalarDescriptorAmino;
+  field_type?: ScalarType[];
 }
 /**
  * ScalarDescriptor describes an scalar type to be used with
@@ -192,7 +184,7 @@ export const InterfaceDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InterfaceDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InterfaceDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInterfaceDescriptor();
@@ -243,22 +235,23 @@ export const InterfaceDescriptor = {
     return obj;
   },
   fromAmino(object: InterfaceDescriptorAmino): InterfaceDescriptor {
-    return {
-      name: object.name,
-      description: object.description
-    };
+    const message = createBaseInterfaceDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
+  toAmino(message: InterfaceDescriptor, useInterfaces: boolean = true): InterfaceDescriptorAmino {
     const obj: any = {};
     obj.name = omitDefault(message.name);
     obj.description = omitDefault(message.description);
     return obj;
   },
-  fromAminoMsg(object: InterfaceDescriptorAminoMsg): InterfaceDescriptor {
-    return InterfaceDescriptor.fromAmino(object.value);
-  },
-  fromProtoMsg(message: InterfaceDescriptorProtoMsg): InterfaceDescriptor {
-    return InterfaceDescriptor.decode(message.value);
+  fromProtoMsg(message: InterfaceDescriptorProtoMsg, useInterfaces: boolean = true): InterfaceDescriptor {
+    return InterfaceDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InterfaceDescriptor): Uint8Array {
     return InterfaceDescriptor.encode(message).finish();
@@ -293,7 +286,7 @@ export const ScalarDescriptor = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ScalarDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ScalarDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseScalarDescriptor();
@@ -367,13 +360,17 @@ export const ScalarDescriptor = {
     return obj;
   },
   fromAmino(object: ScalarDescriptorAmino): ScalarDescriptor {
-    return {
-      name: object.name,
-      description: object.description,
-      fieldType: Array.isArray(object?.field_type) ? object.field_type.map((e: any) => scalarTypeFromJSON(e)) : []
-    };
+    const message = createBaseScalarDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.fieldType = object.field_type?.map(e => scalarTypeFromJSON(e)) || [];
+    return message;
   },
-  toAmino(message: ScalarDescriptor): ScalarDescriptorAmino {
+  toAmino(message: ScalarDescriptor, useInterfaces: boolean = true): ScalarDescriptorAmino {
     const obj: any = {};
     obj.name = omitDefault(message.name);
     obj.description = omitDefault(message.description);
@@ -384,11 +381,8 @@ export const ScalarDescriptor = {
     }
     return obj;
   },
-  fromAminoMsg(object: ScalarDescriptorAminoMsg): ScalarDescriptor {
-    return ScalarDescriptor.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ScalarDescriptorProtoMsg): ScalarDescriptor {
-    return ScalarDescriptor.decode(message.value);
+  fromProtoMsg(message: ScalarDescriptorProtoMsg, useInterfaces: boolean = true): ScalarDescriptor {
+    return ScalarDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ScalarDescriptor): Uint8Array {
     return ScalarDescriptor.encode(message).finish();

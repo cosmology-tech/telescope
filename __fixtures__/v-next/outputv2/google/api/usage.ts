@@ -50,13 +50,13 @@ export interface UsageAmino {
    * "serviceusage.googleapis.com/tos/universal". Additional ToS can be
    * included based on the business needs.
    */
-  requirements: string[];
+  requirements?: string[];
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRuleAmino[];
+  rules?: UsageRuleAmino[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -67,7 +67,7 @@ export interface UsageAmino {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
-  producer_notification_channel: string;
+  producer_notification_channel?: string;
 }
 export interface UsageAminoMsg {
   type: "/google.api.Usage";
@@ -165,19 +165,19 @@ export interface UsageRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allow_unregistered_calls: boolean;
+  allow_unregistered_calls?: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
-  skip_service_control: boolean;
+  skip_service_control?: boolean;
 }
 export interface UsageRuleAminoMsg {
   type: "/google.api.UsageRule";
@@ -311,11 +311,13 @@ export const Usage = {
     return obj;
   },
   fromAmino(object: UsageAmino): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: object.producer_notification_channel
-    };
+    const message = createBaseUsage();
+    message.requirements = object.requirements?.map(e => e) || [];
+    message.rules = object.rules?.map(e => UsageRule.fromAmino(e)) || [];
+    if (object.producer_notification_channel !== undefined && object.producer_notification_channel !== null) {
+      message.producerNotificationChannel = object.producer_notification_channel;
+    }
+    return message;
   },
   toAmino(message: Usage): UsageAmino {
     const obj: any = {};
@@ -428,11 +430,17 @@ export const UsageRule = {
     return obj;
   },
   fromAmino(object: UsageRuleAmino): UsageRule {
-    return {
-      selector: object.selector,
-      allowUnregisteredCalls: object.allow_unregistered_calls,
-      skipServiceControl: object.skip_service_control
-    };
+    const message = createBaseUsageRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.allow_unregistered_calls !== undefined && object.allow_unregistered_calls !== null) {
+      message.allowUnregisteredCalls = object.allow_unregistered_calls;
+    }
+    if (object.skip_service_control !== undefined && object.skip_service_control !== null) {
+      message.skipServiceControl = object.skip_service_control;
+    }
+    return message;
   },
   toAmino(message: UsageRule): UsageRuleAmino {
     const obj: any = {};

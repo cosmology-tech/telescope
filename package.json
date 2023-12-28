@@ -9,6 +9,8 @@
     "build": "lerna run prepare --parallel",
     "buidl": "lerna run buidl --parallel",
     "ast:fixture": "lerna run test:ast --parallel --scope \"@cosmology/ast\"",
+    "ast:watch": "lerna run test:watch --parallel --scope \"@cosmology/ast\"",
+    "regen": "lerna run test --parallel --scope \"@cosmology/telescope\"",
     "buidl:clean": "lerna run buidl:clean",
     "buidl:ast": "lerna run buidl --parallel --scope \"@cosmology/ast\"",
     "buidl:parser": "lerna run buidl --parallel --scope \"@cosmology/proto-parser\"",
@@ -26,7 +28,11 @@
     "jest": "29.5.0",
     "lerna": "7.0.2",
     "esprima": "4.0.1",
-    "prettier": "2.8.7"
+    "prettier": "2.8.7",
+    "@cosmjs/amino": "^0.32.0",
+    "@cosmjs/proto-signing": "^0.32.0",
+    "@cosmjs/stargate": "^0.32.0",
+    "@cosmjs/tendermint-rpc": "^0.32.0"
   },
   "workspaces": [
     "packages/*"

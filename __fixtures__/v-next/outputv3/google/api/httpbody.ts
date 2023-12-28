@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -109,18 +109,14 @@ export interface HttpBodyProtoMsg {
  */
 export interface HttpBodyAmino {
   /** The HTTP Content-Type header value specifying the content type of the body. */
-  content_type: string;
+  content_type?: string;
   /** The HTTP request/response body as raw binary. */
-  data: Uint8Array;
+  data?: string;
   /**
    * Application specific response metadata. Must be set in the first response
    * for streaming APIs.
    */
-  extensions: AnyAmino[];
-}
-export interface HttpBodyAminoMsg {
-  type: "/google.api.HttpBody";
-  value: HttpBodyAmino;
+  extensions?: AnyAmino[];
 }
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -193,7 +189,7 @@ export const HttpBody = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): HttpBody {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpBody {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpBody();
@@ -207,7 +203,7 @@ export const HttpBody = {
           message.data = reader.bytes();
           break;
         case 3:
-          message.extensions.push(Any.decode(reader, reader.uint32()));
+          message.extensions.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -260,28 +256,29 @@ export const HttpBody = {
     return obj;
   },
   fromAmino(object: HttpBodyAmino): HttpBody {
-    return {
-      contentType: object.content_type,
-      data: object.data,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseHttpBody();
+    if (object.content_type !== undefined && object.content_type !== null) {
+      message.contentType = object.content_type;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: HttpBody): HttpBodyAmino {
+  toAmino(message: HttpBody, useInterfaces: boolean = true): HttpBodyAmino {
     const obj: any = {};
-    obj.content_type = omitDefault(message.contentType);
-    obj.data = message.data;
+    obj.content_type = message.contentType;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.extensions = [];
     }
     return obj;
   },
-  fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
-    return HttpBody.fromAmino(object.value);
-  },
-  fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
-    return HttpBody.decode(message.value);
+  fromProtoMsg(message: HttpBodyProtoMsg, useInterfaces: boolean = true): HttpBody {
+    return HttpBody.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpBody): Uint8Array {
     return HttpBody.encode(message).finish();

@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -16,6 +16,10 @@ export interface Position {
   upperTick: bigint;
   joinTime: Date;
   liquidity: string;
+}
+export interface PositionProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Position";
+  value: Uint8Array;
 }
 /**
  * Position contains position's id, address, pool id, lower tick, upper tick
@@ -34,6 +38,10 @@ export interface PositionWithUnderlyingAssetBreakdown {
   position: Position;
   asset0: Coin;
   asset1: Coin;
+}
+export interface PositionWithUnderlyingAssetBreakdownProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.PositionWithUnderlyingAssetBreakdown";
+  value: Uint8Array;
 }
 export interface PositionWithUnderlyingAssetBreakdownSDKType {
   position: PositionSDKType;
@@ -179,25 +187,39 @@ export const Position = {
     return obj;
   },
   fromAmino(object: PositionAmino): Position {
-    return {
-      positionId: BigInt(object.position_id),
-      address: object.address,
-      poolId: BigInt(object.pool_id),
-      lowerTick: BigInt(object.lower_tick),
-      upperTick: BigInt(object.upper_tick),
-      joinTime: object?.join_time ? Timestamp.fromAmino(object.join_time) : undefined,
-      liquidity: object.liquidity
-    };
+    const message = createBasePosition();
+    if (object.position_id !== undefined && object.position_id !== null) {
+      message.positionId = BigInt(object.position_id);
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.lower_tick !== undefined && object.lower_tick !== null) {
+      message.lowerTick = BigInt(object.lower_tick);
+    }
+    if (object.upper_tick !== undefined && object.upper_tick !== null) {
+      message.upperTick = BigInt(object.upper_tick);
+    }
+    if (object.join_time !== undefined && object.join_time !== null) {
+      message.joinTime = fromTimestamp(Timestamp.fromAmino(object.join_time));
+    }
+    if (object.liquidity !== undefined && object.liquidity !== null) {
+      message.liquidity = object.liquidity;
+    }
+    return message;
   },
   toAmino(message: Position): PositionAmino {
     const obj: any = {};
-    obj.position_id = omitDefault(message.positionId);
-    obj.address = omitDefault(message.address);
-    obj.pool_id = omitDefault(message.poolId);
-    obj.lower_tick = omitDefault(message.lowerTick);
-    obj.upper_tick = omitDefault(message.upperTick);
-    obj.join_time = message.joinTime;
-    obj.liquidity = padDecimal(message.liquidity);
+    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.address = message.address;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.lower_tick = message.lowerTick ? message.lowerTick.toString() : undefined;
+    obj.upper_tick = message.upperTick ? message.upperTick.toString() : undefined;
+    obj.join_time = message.joinTime ? Timestamp.toAmino(toTimestamp(message.joinTime)) : undefined;
+    obj.liquidity = message.liquidity;
     return obj;
   },
   fromAminoMsg(object: PositionAminoMsg): Position {
@@ -309,11 +331,17 @@ export const PositionWithUnderlyingAssetBreakdown = {
     return obj;
   },
   fromAmino(object: PositionWithUnderlyingAssetBreakdownAmino): PositionWithUnderlyingAssetBreakdown {
-    return {
-      position: object?.position ? Position.fromAmino(object.position) : undefined,
-      asset0: object?.asset0 ? Coin.fromAmino(object.asset0) : undefined,
-      asset1: object?.asset1 ? Coin.fromAmino(object.asset1) : undefined
-    };
+    const message = createBasePositionWithUnderlyingAssetBreakdown();
+    if (object.position !== undefined && object.position !== null) {
+      message.position = Position.fromAmino(object.position);
+    }
+    if (object.asset0 !== undefined && object.asset0 !== null) {
+      message.asset0 = Coin.fromAmino(object.asset0);
+    }
+    if (object.asset1 !== undefined && object.asset1 !== null) {
+      message.asset1 = Coin.fromAmino(object.asset1);
+    }
+    return message;
   },
   toAmino(message: PositionWithUnderlyingAssetBreakdown): PositionWithUnderlyingAssetBreakdownAmino {
     const obj: any = {};

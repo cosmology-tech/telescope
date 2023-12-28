@@ -10,6 +10,10 @@ export interface GenesisState {
   controllerGenesisState: ControllerGenesisState;
   hostGenesisState: HostGenesisState;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisStateSDKType {
   controller_genesis_state: ControllerGenesisStateSDKType;
@@ -21,6 +25,10 @@ export interface ControllerGenesisState {
   interchainAccounts: RegisteredInterchainAccount[];
   ports: string[];
   params: Params1;
+}
+export interface ControllerGenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.ControllerGenesisState";
+  value: Uint8Array;
 }
 /** ControllerGenesisState defines the interchain accounts controller genesis state */
 export interface ControllerGenesisStateSDKType {
@@ -35,6 +43,10 @@ export interface HostGenesisState {
   interchainAccounts: RegisteredInterchainAccount[];
   port: string;
   params: Params2;
+}
+export interface HostGenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.HostGenesisState";
+  value: Uint8Array;
 }
 /** HostGenesisState defines the interchain accounts host genesis state */
 export interface HostGenesisStateSDKType {
@@ -53,6 +65,10 @@ export interface ActiveChannel {
   channelId: string;
   isMiddlewareEnabled: boolean;
 }
+export interface ActiveChannelProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.ActiveChannel";
+  value: Uint8Array;
+}
 /**
  * ActiveChannel contains a connection ID, port ID and associated active channel ID, as well as a boolean flag to
  * indicate if the channel is middleware enabled
@@ -68,6 +84,10 @@ export interface RegisteredInterchainAccount {
   connectionId: string;
   portId: string;
   accountAddress: string;
+}
+export interface RegisteredInterchainAccountProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.genesis.v1.RegisteredInterchainAccount";
+  value: Uint8Array;
 }
 /** RegisteredInterchainAccount contains a connection ID, port ID and associated interchain account address */
 export interface RegisteredInterchainAccountSDKType {
@@ -149,10 +169,14 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      controllerGenesisState: object?.controller_genesis_state ? ControllerGenesisState.fromAmino(object.controller_genesis_state) : undefined,
-      hostGenesisState: object?.host_genesis_state ? HostGenesisState.fromAmino(object.host_genesis_state) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.controller_genesis_state !== undefined && object.controller_genesis_state !== null) {
+      message.controllerGenesisState = ControllerGenesisState.fromAmino(object.controller_genesis_state);
+    }
+    if (object.host_genesis_state !== undefined && object.host_genesis_state !== null) {
+      message.hostGenesisState = HostGenesisState.fromAmino(object.host_genesis_state);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -306,12 +330,14 @@ export const ControllerGenesisState = {
     return obj;
   },
   fromAmino(object: ControllerGenesisStateAmino): ControllerGenesisState {
-    return {
-      activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
-      interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
-      ports: Array.isArray(object?.ports) ? object.ports.map((e: any) => e) : [],
-      params: object?.params ? Params1.fromAmino(object.params) : undefined
-    };
+    const message = createBaseControllerGenesisState();
+    message.activeChannels = object.active_channels?.map(e => ActiveChannel.fromAmino(e)) || [];
+    message.interchainAccounts = object.interchain_accounts?.map(e => RegisteredInterchainAccount.fromAmino(e)) || [];
+    message.ports = object.ports?.map(e => e) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params1.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: ControllerGenesisState): ControllerGenesisStateAmino {
     const obj: any = {};
@@ -471,12 +497,16 @@ export const HostGenesisState = {
     return obj;
   },
   fromAmino(object: HostGenesisStateAmino): HostGenesisState {
-    return {
-      activeChannels: Array.isArray(object?.active_channels) ? object.active_channels.map((e: any) => ActiveChannel.fromAmino(e)) : [],
-      interchainAccounts: Array.isArray(object?.interchain_accounts) ? object.interchain_accounts.map((e: any) => RegisteredInterchainAccount.fromAmino(e)) : [],
-      port: object.port,
-      params: object?.params ? Params2.fromAmino(object.params) : undefined
-    };
+    const message = createBaseHostGenesisState();
+    message.activeChannels = object.active_channels?.map(e => ActiveChannel.fromAmino(e)) || [];
+    message.interchainAccounts = object.interchain_accounts?.map(e => RegisteredInterchainAccount.fromAmino(e)) || [];
+    if (object.port !== undefined && object.port !== null) {
+      message.port = object.port;
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params2.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: HostGenesisState): HostGenesisStateAmino {
     const obj: any = {};
@@ -616,12 +646,20 @@ export const ActiveChannel = {
     return obj;
   },
   fromAmino(object: ActiveChannelAmino): ActiveChannel {
-    return {
-      connectionId: object.connection_id,
-      portId: object.port_id,
-      channelId: object.channel_id,
-      isMiddlewareEnabled: object.is_middleware_enabled
-    };
+    const message = createBaseActiveChannel();
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.is_middleware_enabled !== undefined && object.is_middleware_enabled !== null) {
+      message.isMiddlewareEnabled = object.is_middleware_enabled;
+    }
+    return message;
   },
   toAmino(message: ActiveChannel): ActiveChannelAmino {
     const obj: any = {};
@@ -740,11 +778,17 @@ export const RegisteredInterchainAccount = {
     return obj;
   },
   fromAmino(object: RegisteredInterchainAccountAmino): RegisteredInterchainAccount {
-    return {
-      connectionId: object.connection_id,
-      portId: object.port_id,
-      accountAddress: object.account_address
-    };
+    const message = createBaseRegisteredInterchainAccount();
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.account_address !== undefined && object.account_address !== null) {
+      message.accountAddress = object.account_address;
+    }
+    return message;
   },
   toAmino(message: RegisteredInterchainAccount): RegisteredInterchainAccountAmino {
     const obj: any = {};

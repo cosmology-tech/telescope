@@ -21,7 +21,7 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
   /** Describes attributes about the operation being executed by the service. */
-  attributes: AttributeContext;
+  attributes?: AttributeContext;
   /** Describes the resources and the policies applied to each resource. */
   resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
@@ -31,7 +31,7 @@ export interface CheckRequest {
 export interface CheckRequestSDKType {
   service_name: string;
   service_config_id: string;
-  attributes: AttributeContextSDKType;
+  attributes?: AttributeContextSDKType;
   resources: ResourceInfoSDKType[];
   flags: string;
 }
@@ -87,7 +87,7 @@ export interface CheckResponse {
    * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
    * would contain additional details about the denial.
    */
-  status: Status;
+  status?: Status;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
   headers: {
     [key: string]: string;
@@ -95,7 +95,7 @@ export interface CheckResponse {
 }
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  status: StatusSDKType;
+  status?: StatusSDKType;
   headers: {
     [key: string]: string;
   };
@@ -144,7 +144,7 @@ function createBaseCheckRequest(): CheckRequest {
   return {
     serviceName: "",
     serviceConfigId: "",
-    attributes: AttributeContext.fromPartial({}),
+    attributes: undefined,
     resources: [],
     flags: ""
   };
@@ -423,7 +423,7 @@ export const CheckResponse_HeadersEntry = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    status: Status.fromPartial({}),
+    status: undefined,
     headers: {}
   };
 }

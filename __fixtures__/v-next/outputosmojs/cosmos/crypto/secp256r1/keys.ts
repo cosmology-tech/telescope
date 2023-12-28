@@ -9,6 +9,10 @@ export interface PubKey {
    */
   key: Uint8Array;
 }
+export interface PubKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256r1.PubKey";
+  value: Uint8Array;
+}
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKeySDKType {
   key: Uint8Array;
@@ -17,6 +21,10 @@ export interface PubKeySDKType {
 export interface PrivKey {
   /** secret number serialized using big-endian encoding */
   secret: Uint8Array;
+}
+export interface PrivKeyProtoMsg {
+  typeUrl: "/cosmos.crypto.secp256r1.PrivKey";
+  value: Uint8Array;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeySDKType {
@@ -83,13 +91,15 @@ export const PubKey = {
     return obj;
   },
   fromAmino(object: PubKeyAmino): PubKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePubKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
   toAmino(message: PubKey): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
   fromAminoMsg(object: PubKeyAminoMsg): PubKey {
@@ -175,13 +185,15 @@ export const PrivKey = {
     return obj;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
-    return {
-      secret: object.secret
-    };
+    const message = createBasePrivKey();
+    if (object.secret !== undefined && object.secret !== null) {
+      message.secret = bytesFromBase64(object.secret);
+    }
+    return message;
   },
   toAmino(message: PrivKey): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = message.secret;
+    obj.secret = message.secret ? base64FromBytes(message.secret) : undefined;
     return obj;
   },
   fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {

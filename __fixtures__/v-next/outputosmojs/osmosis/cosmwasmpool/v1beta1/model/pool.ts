@@ -7,6 +7,10 @@ export interface CosmWasmPool {
   poolId: bigint;
   codeId: bigint;
 }
+export interface CosmWasmPoolProtoMsg {
+  typeUrl: "/osmosis.cosmwasmpool.v1beta1.CosmWasmPool";
+  value: Uint8Array;
+}
 export interface CosmWasmPoolSDKType {
   pool_address: string;
   contract_address: string;
@@ -113,12 +117,20 @@ export const CosmWasmPool = {
     return obj;
   },
   fromAmino(object: CosmWasmPoolAmino): CosmWasmPool {
-    return {
-      poolAddress: object.pool_address,
-      contractAddress: object.contract_address,
-      poolId: BigInt(object.pool_id),
-      codeId: BigInt(object.code_id)
-    };
+    const message = createBaseCosmWasmPool();
+    if (object.pool_address !== undefined && object.pool_address !== null) {
+      message.poolAddress = object.pool_address;
+    }
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    return message;
   },
   toAmino(message: CosmWasmPool): CosmWasmPoolAmino {
     const obj: any = {};

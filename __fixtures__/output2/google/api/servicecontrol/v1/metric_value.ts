@@ -27,13 +27,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime: Timestamp;
+  startTime?: Timestamp;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime: Timestamp;
+  endTime?: Timestamp;
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */
@@ -114,8 +114,8 @@ export const MetricValue_LabelsEntry = {
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
-    startTime: Timestamp.fromPartial({}),
-    endTime: Timestamp.fromPartial({}),
+    startTime: undefined,
+    endTime: undefined,
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,
@@ -223,7 +223,9 @@ export const MetricValue = {
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
     message.endTime !== undefined && (obj.endTime = fromTimestamp(message.endTime).toISOString());
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);

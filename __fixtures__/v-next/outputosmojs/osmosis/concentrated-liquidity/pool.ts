@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface Pool {
   /** pool's address holding all liquidity tokens. */
@@ -28,6 +28,10 @@ export interface Pool {
    * active tick changed
    */
   lastLiquidityUpdate: Date;
+}
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.Pool";
+  value: Uint8Array;
 }
 export interface PoolSDKType {
   address: string;
@@ -247,35 +251,59 @@ export const Pool = {
     return obj;
   },
   fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      incentivesAddress: object.incentives_address,
-      id: BigInt(object.id),
-      currentTickLiquidity: object.current_tick_liquidity,
-      token0: object.token0,
-      token1: object.token1,
-      currentSqrtPrice: object.current_sqrt_price,
-      currentTick: object.current_tick,
-      tickSpacing: BigInt(object.tick_spacing),
-      exponentAtPriceOne: object.exponent_at_price_one,
-      swapFee: object.swap_fee,
-      lastLiquidityUpdate: object?.last_liquidity_update ? Timestamp.fromAmino(object.last_liquidity_update) : undefined
-    };
+    const message = createBasePool();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.incentives_address !== undefined && object.incentives_address !== null) {
+      message.incentivesAddress = object.incentives_address;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.current_tick_liquidity !== undefined && object.current_tick_liquidity !== null) {
+      message.currentTickLiquidity = object.current_tick_liquidity;
+    }
+    if (object.token0 !== undefined && object.token0 !== null) {
+      message.token0 = object.token0;
+    }
+    if (object.token1 !== undefined && object.token1 !== null) {
+      message.token1 = object.token1;
+    }
+    if (object.current_sqrt_price !== undefined && object.current_sqrt_price !== null) {
+      message.currentSqrtPrice = object.current_sqrt_price;
+    }
+    if (object.current_tick !== undefined && object.current_tick !== null) {
+      message.currentTick = object.current_tick;
+    }
+    if (object.tick_spacing !== undefined && object.tick_spacing !== null) {
+      message.tickSpacing = BigInt(object.tick_spacing);
+    }
+    if (object.exponent_at_price_one !== undefined && object.exponent_at_price_one !== null) {
+      message.exponentAtPriceOne = object.exponent_at_price_one;
+    }
+    if (object.swap_fee !== undefined && object.swap_fee !== null) {
+      message.swapFee = object.swap_fee;
+    }
+    if (object.last_liquidity_update !== undefined && object.last_liquidity_update !== null) {
+      message.lastLiquidityUpdate = fromTimestamp(Timestamp.fromAmino(object.last_liquidity_update));
+    }
+    return message;
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.incentives_address = omitDefault(message.incentivesAddress);
-    obj.id = omitDefault(message.id);
-    obj.current_tick_liquidity = padDecimal(message.currentTickLiquidity);
-    obj.token0 = omitDefault(message.token0);
-    obj.token1 = omitDefault(message.token1);
-    obj.current_sqrt_price = padDecimal(message.currentSqrtPrice);
-    obj.current_tick = omitDefault(message.currentTick);
-    obj.tick_spacing = omitDefault(message.tickSpacing);
-    obj.exponent_at_price_one = omitDefault(message.exponentAtPriceOne);
-    obj.swap_fee = padDecimal(message.swapFee);
-    obj.last_liquidity_update = message.lastLiquidityUpdate;
+    obj.address = message.address;
+    obj.incentives_address = message.incentivesAddress;
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.current_tick_liquidity = message.currentTickLiquidity;
+    obj.token0 = message.token0;
+    obj.token1 = message.token1;
+    obj.current_sqrt_price = message.currentSqrtPrice;
+    obj.current_tick = message.currentTick;
+    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
+    obj.exponent_at_price_one = message.exponentAtPriceOne;
+    obj.swap_fee = message.swapFee;
+    obj.last_liquidity_update = message.lastLiquidityUpdate ? Timestamp.toAmino(toTimestamp(message.lastLiquidityUpdate)) : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

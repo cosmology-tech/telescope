@@ -4,16 +4,24 @@ import { DeepPartial, isSet } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.host.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.host.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {};
@@ -59,7 +67,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -89,7 +98,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: Params.fromPartial({})
+    params: undefined
   };
 }
 export const QueryParamsResponse = {
@@ -148,9 +157,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};

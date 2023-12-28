@@ -15,6 +15,10 @@ export interface GenesisState {
   /** number of epochs that have passed while inflation is disabled */
   skippedEpochs: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.inflation.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -33,6 +37,10 @@ export interface Params {
   inflationDistribution: InflationDistribution;
   /** parameter to enable inflation and halt increasing the skipped_epochs */
   enableInflation: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.inflation.v1.Params";
+  value: Uint8Array;
 }
 /** Params holds parameters for the inflation module. */
 export interface ParamsSDKType {
@@ -154,13 +162,23 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      period: BigInt(object.period),
-      epochIdentifier: object.epoch_identifier,
-      epochsPerPeriod: BigInt(object.epochs_per_period),
-      skippedEpochs: BigInt(object.skipped_epochs)
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    if (object.epoch_identifier !== undefined && object.epoch_identifier !== null) {
+      message.epochIdentifier = object.epoch_identifier;
+    }
+    if (object.epochs_per_period !== undefined && object.epochs_per_period !== null) {
+      message.epochsPerPeriod = BigInt(object.epochs_per_period);
+    }
+    if (object.skipped_epochs !== undefined && object.skipped_epochs !== null) {
+      message.skippedEpochs = BigInt(object.skipped_epochs);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -287,12 +305,20 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintDenom: object.mint_denom,
-      exponentialCalculation: object?.exponential_calculation ? ExponentialCalculation.fromAmino(object.exponential_calculation) : undefined,
-      inflationDistribution: object?.inflation_distribution ? InflationDistribution.fromAmino(object.inflation_distribution) : undefined,
-      enableInflation: object.enable_inflation
-    };
+    const message = createBaseParams();
+    if (object.mint_denom !== undefined && object.mint_denom !== null) {
+      message.mintDenom = object.mint_denom;
+    }
+    if (object.exponential_calculation !== undefined && object.exponential_calculation !== null) {
+      message.exponentialCalculation = ExponentialCalculation.fromAmino(object.exponential_calculation);
+    }
+    if (object.inflation_distribution !== undefined && object.inflation_distribution !== null) {
+      message.inflationDistribution = InflationDistribution.fromAmino(object.inflation_distribution);
+    }
+    if (object.enable_inflation !== undefined && object.enable_inflation !== null) {
+      message.enableInflation = object.enable_inflation;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

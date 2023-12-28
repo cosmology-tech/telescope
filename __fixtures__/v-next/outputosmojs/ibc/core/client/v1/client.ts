@@ -11,7 +11,11 @@ export interface IdentifiedClientState {
   /** client identifier */
   clientId: string;
   /** client state */
-  clientState: Any;
+  clientState?: Any;
+}
+export interface IdentifiedClientStateProtoMsg {
+  typeUrl: "/ibc.core.client.v1.IdentifiedClientState";
+  value: Uint8Array;
 }
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -19,7 +23,7 @@ export interface IdentifiedClientState {
  */
 export interface IdentifiedClientStateSDKType {
   client_id: string;
-  client_state: AnySDKType;
+  client_state?: AnySDKType;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -29,7 +33,11 @@ export interface ConsensusStateWithHeight {
   /** consensus state height */
   height: Height;
   /** consensus state */
-  consensusState: Any;
+  consensusState?: Any;
+}
+export interface ConsensusStateWithHeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight";
+  value: Uint8Array;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -37,7 +45,7 @@ export interface ConsensusStateWithHeight {
  */
 export interface ConsensusStateWithHeightSDKType {
   height: HeightSDKType;
-  consensus_state: AnySDKType;
+  consensus_state?: AnySDKType;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -48,6 +56,10 @@ export interface ClientConsensusStates {
   clientId: string;
   /** consensus states and their heights associated with the client */
   consensusStates: ConsensusStateWithHeight[];
+}
+export interface ClientConsensusStatesProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientConsensusStates";
+  value: Uint8Array;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -75,6 +87,10 @@ export interface ClientUpdateProposal {
    * client
    */
   substituteClientId: string;
+}
+export interface ClientUpdateProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.ClientUpdateProposal";
+  value: Uint8Array;
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -104,7 +120,11 @@ export interface UpgradeProposal {
    * of the chain. This will allow IBC connections to persist smoothly across
    * planned chain upgrades
    */
-  upgradedClientState: Any;
+  upgradedClientState?: Any;
+}
+export interface UpgradeProposalProtoMsg {
+  typeUrl: "/ibc.core.client.v1.UpgradeProposal";
+  value: Uint8Array;
 }
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
@@ -114,7 +134,7 @@ export interface UpgradeProposalSDKType {
   title: string;
   description: string;
   plan: PlanSDKType;
-  upgraded_client_state: AnySDKType;
+  upgraded_client_state?: AnySDKType;
 }
 /**
  * Height is a monotonically increasing data type
@@ -133,6 +153,10 @@ export interface Height {
   revisionNumber: bigint;
   /** the height within the given revision */
   revisionHeight: bigint;
+}
+export interface HeightProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Height";
+  value: Uint8Array;
 }
 /**
  * Height is a monotonically increasing data type
@@ -155,6 +179,10 @@ export interface Params {
   /** allowed_clients defines the list of allowed client state types. */
   allowedClients: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.core.client.v1.Params";
+  value: Uint8Array;
+}
 /** Params defines the set of IBC light client parameters. */
 export interface ParamsSDKType {
   allowed_clients: string[];
@@ -162,7 +190,7 @@ export interface ParamsSDKType {
 function createBaseIdentifiedClientState(): IdentifiedClientState {
   return {
     clientId: "",
-    clientState: Any.fromPartial({})
+    clientState: undefined
   };
 }
 export const IdentifiedClientState = {
@@ -233,10 +261,14 @@ export const IdentifiedClientState = {
     return obj;
   },
   fromAmino(object: IdentifiedClientStateAmino): IdentifiedClientState {
-    return {
-      clientId: object.client_id,
-      clientState: object?.client_state ? Any.fromAmino(object.client_state) : undefined
-    };
+    const message = createBaseIdentifiedClientState();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    if (object.client_state !== undefined && object.client_state !== null) {
+      message.clientState = Any.fromAmino(object.client_state);
+    }
+    return message;
   },
   toAmino(message: IdentifiedClientState): IdentifiedClientStateAmino {
     const obj: any = {};
@@ -269,7 +301,7 @@ export const IdentifiedClientState = {
 function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
   return {
     height: Height.fromPartial({}),
-    consensusState: Any.fromPartial({})
+    consensusState: undefined
   };
 }
 export const ConsensusStateWithHeight = {
@@ -340,10 +372,14 @@ export const ConsensusStateWithHeight = {
     return obj;
   },
   fromAmino(object: ConsensusStateWithHeightAmino): ConsensusStateWithHeight {
-    return {
-      height: object?.height ? Height.fromAmino(object.height) : undefined,
-      consensusState: object?.consensus_state ? Any.fromAmino(object.consensus_state) : undefined
-    };
+    const message = createBaseConsensusStateWithHeight();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromAmino(object.height);
+    }
+    if (object.consensus_state !== undefined && object.consensus_state !== null) {
+      message.consensusState = Any.fromAmino(object.consensus_state);
+    }
+    return message;
   },
   toAmino(message: ConsensusStateWithHeight): ConsensusStateWithHeightAmino {
     const obj: any = {};
@@ -455,10 +491,12 @@ export const ClientConsensusStates = {
     return obj;
   },
   fromAmino(object: ClientConsensusStatesAmino): ClientConsensusStates {
-    return {
-      clientId: object.client_id,
-      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromAmino(e)) : []
-    };
+    const message = createBaseClientConsensusStates();
+    if (object.client_id !== undefined && object.client_id !== null) {
+      message.clientId = object.client_id;
+    }
+    message.consensusStates = object.consensus_states?.map(e => ConsensusStateWithHeight.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ClientConsensusStates): ClientConsensusStatesAmino {
     const obj: any = {};
@@ -592,12 +630,20 @@ export const ClientUpdateProposal = {
     return obj;
   },
   fromAmino(object: ClientUpdateProposalAmino): ClientUpdateProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      subjectClientId: object.subject_client_id,
-      substituteClientId: object.substitute_client_id
-    };
+    const message = createBaseClientUpdateProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.subject_client_id !== undefined && object.subject_client_id !== null) {
+      message.subjectClientId = object.subject_client_id;
+    }
+    if (object.substitute_client_id !== undefined && object.substitute_client_id !== null) {
+      message.substituteClientId = object.substitute_client_id;
+    }
+    return message;
   },
   toAmino(message: ClientUpdateProposal): ClientUpdateProposalAmino {
     const obj: any = {};
@@ -634,7 +680,7 @@ function createBaseUpgradeProposal(): UpgradeProposal {
     title: "",
     description: "",
     plan: Plan.fromPartial({}),
-    upgradedClientState: Any.fromPartial({})
+    upgradedClientState: undefined
   };
 }
 export const UpgradeProposal = {
@@ -729,12 +775,20 @@ export const UpgradeProposal = {
     return obj;
   },
   fromAmino(object: UpgradeProposalAmino): UpgradeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined,
-      upgradedClientState: object?.upgraded_client_state ? Any.fromAmino(object.upgraded_client_state) : undefined
-    };
+    const message = createBaseUpgradeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromAmino(object.plan);
+    }
+    if (object.upgraded_client_state !== undefined && object.upgraded_client_state !== null) {
+      message.upgradedClientState = Any.fromAmino(object.upgraded_client_state);
+    }
+    return message;
   },
   toAmino(message: UpgradeProposal): UpgradeProposalAmino {
     const obj: any = {};
@@ -942,9 +996,9 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
-    };
+    const message = createBaseParams();
+    message.allowedClients = object.allowed_clients?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

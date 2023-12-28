@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -30,33 +30,37 @@ export interface AttributeContext {
    * the origin represents the sender of the first hop. For the first hop,
    * the `source` and the `origin` must have the same content.
    */
-  origin: AttributeContext_Peer;
+  origin?: AttributeContext_Peer;
   /**
    * The source of a network activity, such as starting a TCP connection.
    * In a multi hop network activity, the source represents the sender of the
    * last hop.
    */
-  source: AttributeContext_Peer;
+  source?: AttributeContext_Peer;
   /**
    * The destination of a network activity, such as accepting a TCP connection.
    * In a multi hop network activity, the destination represents the receiver of
    * the last hop.
    */
-  destination: AttributeContext_Peer;
+  destination?: AttributeContext_Peer;
   /** Represents a network request, such as an HTTP request. */
-  request: AttributeContext_Request;
+  request?: AttributeContext_Request;
   /** Represents a network response, such as an HTTP response. */
-  response: AttributeContext_Response;
+  response?: AttributeContext_Response;
   /**
    * Represents a target resource that is involved with a network activity.
    * If multiple resources are involved with an activity, this must be the
    * primary one.
    */
-  resource: AttributeContext_Resource;
+  resource?: AttributeContext_Resource;
   /** Represents an API operation that is involved to a network activity. */
-  api: AttributeContext_Api;
+  api?: AttributeContext_Api;
   /** Supports extensions for advanced use cases, such as logs and metrics. */
   extensions: Any[];
+}
+export interface AttributeContextProtoMsg {
+  typeUrl: "/google.rpc.context.AttributeContext";
+  value: Uint8Array;
 }
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -78,18 +82,22 @@ export interface AttributeContext {
  * a system.
  */
 export interface AttributeContextSDKType {
-  origin: AttributeContext_PeerSDKType;
-  source: AttributeContext_PeerSDKType;
-  destination: AttributeContext_PeerSDKType;
-  request: AttributeContext_RequestSDKType;
-  response: AttributeContext_ResponseSDKType;
-  resource: AttributeContext_ResourceSDKType;
-  api: AttributeContext_ApiSDKType;
+  origin?: AttributeContext_PeerSDKType;
+  source?: AttributeContext_PeerSDKType;
+  destination?: AttributeContext_PeerSDKType;
+  request?: AttributeContext_RequestSDKType;
+  response?: AttributeContext_ResponseSDKType;
+  resource?: AttributeContext_ResourceSDKType;
+  api?: AttributeContext_ApiSDKType;
   extensions: AnySDKType[];
 }
 export interface AttributeContext_Peer_LabelsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Peer_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Peer_LabelsEntrySDKType {
   key: string;
@@ -122,6 +130,10 @@ export interface AttributeContext_Peer {
    * physical location where this peer is running.
    */
   regionCode: string;
+}
+export interface AttributeContext_PeerProtoMsg {
+  typeUrl: "/google.rpc.context.Peer";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes for a node that handles a network request.
@@ -166,6 +178,10 @@ export interface AttributeContext_Api {
    * "v1alpha1".
    */
   version: string;
+}
+export interface AttributeContext_ApiProtoMsg {
+  typeUrl: "/google.rpc.context.Api";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes associated with API operations, such as
@@ -233,7 +249,7 @@ export interface AttributeContext_Auth {
    * SAML assertions are similarly specified, but with an identity provider
    * dependent structure.
    */
-  claims: Struct;
+  claims?: Struct;
   /**
    * A list of access level resource names that allow resources to be
    * accessed by authenticated requester. It is part of Secure GCP processing
@@ -245,6 +261,10 @@ export interface AttributeContext_Auth {
    */
   accessLevels: string[];
 }
+export interface AttributeContext_AuthProtoMsg {
+  typeUrl: "/google.rpc.context.Auth";
+  value: Uint8Array;
+}
 /**
  * This message defines request authentication attributes. Terminology is
  * based on the JSON Web Token (JWT) standard, but the terms also
@@ -254,12 +274,16 @@ export interface AttributeContext_AuthSDKType {
   principal: string;
   audiences: string[];
   presenter: string;
-  claims: StructSDKType;
+  claims?: StructSDKType;
   access_levels: string[];
 }
 export interface AttributeContext_Request_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Request_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Request_HeadersEntrySDKType {
   key: string;
@@ -302,7 +326,7 @@ export interface AttributeContext_Request {
    * The timestamp when the `destination` service receives the last byte of
    * the request.
    */
-  time: Date;
+  time?: Date;
   /** The HTTP request size in bytes. If unknown, it must be -1. */
   size: bigint;
   /**
@@ -321,7 +345,11 @@ export interface AttributeContext_Request {
    * The request authentication. May be absent for unauthenticated requests.
    * Derived from the HTTP request `Authorization` header or equivalent.
    */
-  auth: AttributeContext_Auth;
+  auth?: AttributeContext_Auth;
+}
+export interface AttributeContext_RequestProtoMsg {
+  typeUrl: "/google.rpc.context.Request";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes for an HTTP request. If the actual
@@ -338,15 +366,19 @@ export interface AttributeContext_RequestSDKType {
   host: string;
   scheme: string;
   query: string;
-  time: Date;
+  time?: Date;
   size: bigint;
   protocol: string;
   reason: string;
-  auth: AttributeContext_AuthSDKType;
+  auth?: AttributeContext_AuthSDKType;
 }
 export interface AttributeContext_Response_HeadersEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Response_HeadersEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Response_HeadersEntrySDKType {
   key: string;
@@ -373,14 +405,18 @@ export interface AttributeContext_Response {
    * The timestamp when the `destination` service sends the last byte of
    * the response.
    */
-  time: Date;
+  time?: Date;
   /**
    * The length of time it takes the backend service to fully respond to a
    * request. Measured from when the destination service starts to send the
    * request to the backend until when the destination service receives the
    * complete response from the backend.
    */
-  backendLatency: Duration;
+  backendLatency?: Duration;
+}
+export interface AttributeContext_ResponseProtoMsg {
+  typeUrl: "/google.rpc.context.Response";
+  value: Uint8Array;
 }
 /**
  * This message defines attributes for a typical network response. It
@@ -392,12 +428,16 @@ export interface AttributeContext_ResponseSDKType {
   headers: {
     [key: string]: string;
   };
-  time: Date;
-  backend_latency: DurationSDKType;
+  time?: Date;
+  backend_latency?: DurationSDKType;
 }
 export interface AttributeContext_Resource_LabelsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Resource_LabelsEntrySDKType {
   key: string;
@@ -406,6 +446,10 @@ export interface AttributeContext_Resource_LabelsEntrySDKType {
 export interface AttributeContext_Resource_AnnotationsEntry {
   key: string;
   value: string;
+}
+export interface AttributeContext_Resource_AnnotationsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface AttributeContext_Resource_AnnotationsEntrySDKType {
   key: string;
@@ -476,18 +520,18 @@ export interface AttributeContext_Resource {
    * Output only. The timestamp when the resource was created. This may
    * be either the time creation was initiated or when it was completed.
    */
-  createTime: Date;
+  createTime?: Date;
   /**
    * Output only. The timestamp when the resource was last updated. Any
    * change to the resource made by users must refresh this value.
    * Changes to a resource made by the service should refresh this value.
    */
-  updateTime: Date;
+  updateTime?: Date;
   /**
    * Output only. The timestamp when the resource was deleted.
    * If the resource is not deleted, this must be empty.
    */
-  deleteTime: Date;
+  deleteTime?: Date;
   /**
    * Output only. An opaque value that uniquely identifies a version or
    * generation of a resource. It can be used to confirm that the client
@@ -506,6 +550,10 @@ export interface AttributeContext_Resource {
    */
   location: string;
 }
+export interface AttributeContext_ResourceProtoMsg {
+  typeUrl: "/google.rpc.context.Resource";
+  value: Uint8Array;
+}
 /**
  * This message defines core attributes for a resource. A resource is an
  * addressable (named) entity provided by the destination service. For
@@ -523,21 +571,21 @@ export interface AttributeContext_ResourceSDKType {
     [key: string]: string;
   };
   display_name: string;
-  create_time: Date;
-  update_time: Date;
-  delete_time: Date;
+  create_time?: Date;
+  update_time?: Date;
+  delete_time?: Date;
   etag: string;
   location: string;
 }
 function createBaseAttributeContext(): AttributeContext {
   return {
-    origin: AttributeContext_Peer.fromPartial({}),
-    source: AttributeContext_Peer.fromPartial({}),
-    destination: AttributeContext_Peer.fromPartial({}),
-    request: AttributeContext_Request.fromPartial({}),
-    response: AttributeContext_Response.fromPartial({}),
-    resource: AttributeContext_Resource.fromPartial({}),
-    api: AttributeContext_Api.fromPartial({}),
+    origin: undefined,
+    source: undefined,
+    destination: undefined,
+    request: undefined,
+    response: undefined,
+    resource: undefined,
+    api: undefined,
     extensions: []
   };
 }
@@ -689,16 +737,30 @@ export const AttributeContext = {
     return obj;
   },
   fromAmino(object: AttributeContextAmino): AttributeContext {
-    return {
-      origin: object?.origin ? AttributeContext_Peer.fromAmino(object.origin) : undefined,
-      source: object?.source ? AttributeContext_Peer.fromAmino(object.source) : undefined,
-      destination: object?.destination ? AttributeContext_Peer.fromAmino(object.destination) : undefined,
-      request: object?.request ? AttributeContext_Request.fromAmino(object.request) : undefined,
-      response: object?.response ? AttributeContext_Response.fromAmino(object.response) : undefined,
-      resource: object?.resource ? AttributeContext_Resource.fromAmino(object.resource) : undefined,
-      api: object?.api ? AttributeContext_Api.fromAmino(object.api) : undefined,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseAttributeContext();
+    if (object.origin !== undefined && object.origin !== null) {
+      message.origin = AttributeContext_Peer.fromAmino(object.origin);
+    }
+    if (object.source !== undefined && object.source !== null) {
+      message.source = AttributeContext_Peer.fromAmino(object.source);
+    }
+    if (object.destination !== undefined && object.destination !== null) {
+      message.destination = AttributeContext_Peer.fromAmino(object.destination);
+    }
+    if (object.request !== undefined && object.request !== null) {
+      message.request = AttributeContext_Request.fromAmino(object.request);
+    }
+    if (object.response !== undefined && object.response !== null) {
+      message.response = AttributeContext_Response.fromAmino(object.response);
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = AttributeContext_Resource.fromAmino(object.resource);
+    }
+    if (object.api !== undefined && object.api !== null) {
+      message.api = AttributeContext_Api.fromAmino(object.api);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AttributeContext): AttributeContextAmino {
     const obj: any = {};
@@ -805,15 +867,19 @@ export const AttributeContext_Peer_LabelsEntry = {
     return obj;
   },
   fromAmino(object: AttributeContext_Peer_LabelsEntryAmino): AttributeContext_Peer_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttributeContext_Peer_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
@@ -977,31 +1043,41 @@ export const AttributeContext_Peer = {
     return obj;
   },
   fromAmino(object: AttributeContext_PeerAmino): AttributeContext_Peer {
-    return {
-      ip: object.ip,
-      port: BigInt(object.port),
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseAttributeContext_Peer();
+    if (object.ip !== undefined && object.ip !== null) {
+      message.ip = object.ip;
+    }
+    if (object.port !== undefined && object.port !== null) {
+      message.port = BigInt(object.port);
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      principal: object.principal,
-      regionCode: object.region_code
-    };
+      }
+      return acc;
+    }, {});
+    if (object.principal !== undefined && object.principal !== null) {
+      message.principal = object.principal;
+    }
+    if (object.region_code !== undefined && object.region_code !== null) {
+      message.regionCode = object.region_code;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
     const obj: any = {};
-    obj.ip = omitDefault(message.ip);
-    obj.port = omitDefault(message.port);
+    obj.ip = message.ip;
+    obj.port = message.port ? message.port.toString() : undefined;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.principal = omitDefault(message.principal);
-    obj.region_code = omitDefault(message.regionCode);
+    obj.principal = message.principal;
+    obj.region_code = message.regionCode;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
@@ -1120,19 +1196,27 @@ export const AttributeContext_Api = {
     return obj;
   },
   fromAmino(object: AttributeContext_ApiAmino): AttributeContext_Api {
-    return {
-      service: object.service,
-      operation: object.operation,
-      protocol: object.protocol,
-      version: object.version
-    };
+    const message = createBaseAttributeContext_Api();
+    if (object.service !== undefined && object.service !== null) {
+      message.service = object.service;
+    }
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = object.operation;
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
     const obj: any = {};
-    obj.service = omitDefault(message.service);
-    obj.operation = omitDefault(message.operation);
-    obj.protocol = omitDefault(message.protocol);
-    obj.version = omitDefault(message.version);
+    obj.service = message.service;
+    obj.operation = message.operation;
+    obj.protocol = message.protocol;
+    obj.version = message.version;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
@@ -1156,7 +1240,7 @@ function createBaseAttributeContext_Auth(): AttributeContext_Auth {
     principal: "",
     audiences: [],
     presenter: "",
-    claims: Struct.fromPartial({}),
+    claims: undefined,
     accessLevels: []
   };
 }
@@ -1280,23 +1364,29 @@ export const AttributeContext_Auth = {
     return obj;
   },
   fromAmino(object: AttributeContext_AuthAmino): AttributeContext_Auth {
-    return {
-      principal: object.principal,
-      audiences: Array.isArray(object?.audiences) ? object.audiences.map((e: any) => e) : [],
-      presenter: object.presenter,
-      claims: object?.claims ? Struct.fromAmino(object.claims) : undefined,
-      accessLevels: Array.isArray(object?.access_levels) ? object.access_levels.map((e: any) => e) : []
-    };
+    const message = createBaseAttributeContext_Auth();
+    if (object.principal !== undefined && object.principal !== null) {
+      message.principal = object.principal;
+    }
+    message.audiences = object.audiences?.map(e => e) || [];
+    if (object.presenter !== undefined && object.presenter !== null) {
+      message.presenter = object.presenter;
+    }
+    if (object.claims !== undefined && object.claims !== null) {
+      message.claims = Struct.fromAmino(object.claims);
+    }
+    message.accessLevels = object.access_levels?.map(e => e) || [];
+    return message;
   },
   toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
     const obj: any = {};
-    obj.principal = omitDefault(message.principal);
+    obj.principal = message.principal;
     if (message.audiences) {
       obj.audiences = message.audiences.map(e => e);
     } else {
       obj.audiences = [];
     }
-    obj.presenter = omitDefault(message.presenter);
+    obj.presenter = message.presenter;
     obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
     if (message.accessLevels) {
       obj.access_levels = message.accessLevels.map(e => e);
@@ -1394,15 +1484,19 @@ export const AttributeContext_Request_HeadersEntry = {
     return obj;
   },
   fromAmino(object: AttributeContext_Request_HeadersEntryAmino): AttributeContext_Request_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttributeContext_Request_HeadersEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
@@ -1424,11 +1518,11 @@ function createBaseAttributeContext_Request(): AttributeContext_Request {
     host: "",
     scheme: "",
     query: "",
-    time: new Date(),
+    time: undefined,
     size: BigInt(0),
     protocol: "",
     reason: "",
-    auth: AttributeContext_Auth.fromPartial({})
+    auth: undefined
   };
 }
 export const AttributeContext_Request = {
@@ -1657,44 +1751,68 @@ export const AttributeContext_Request = {
     return obj;
   },
   fromAmino(object: AttributeContext_RequestAmino): AttributeContext_Request {
-    return {
-      id: object.id,
-      method: object.method,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseAttributeContext_Request();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.method !== undefined && object.method !== null) {
+      message.method = object.method;
+    }
+    message.headers = Object.entries(object.headers ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      path: object.path,
-      host: object.host,
-      scheme: object.scheme,
-      query: object.query,
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
-      size: BigInt(object.size),
-      protocol: object.protocol,
-      reason: object.reason,
-      auth: object?.auth ? AttributeContext_Auth.fromAmino(object.auth) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.host !== undefined && object.host !== null) {
+      message.host = object.host;
+    }
+    if (object.scheme !== undefined && object.scheme !== null) {
+      message.scheme = object.scheme;
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = object.query;
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.size !== undefined && object.size !== null) {
+      message.size = BigInt(object.size);
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    if (object.auth !== undefined && object.auth !== null) {
+      message.auth = AttributeContext_Auth.fromAmino(object.auth);
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.method = omitDefault(message.method);
+    obj.id = message.id;
+    obj.method = message.method;
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
         obj.headers[k] = v;
       });
     }
-    obj.path = omitDefault(message.path);
-    obj.host = omitDefault(message.host);
-    obj.scheme = omitDefault(message.scheme);
-    obj.query = omitDefault(message.query);
-    obj.time = message.time;
-    obj.size = omitDefault(message.size);
-    obj.protocol = omitDefault(message.protocol);
-    obj.reason = omitDefault(message.reason);
+    obj.path = message.path;
+    obj.host = message.host;
+    obj.scheme = message.scheme;
+    obj.query = message.query;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
+    obj.size = message.size ? message.size.toString() : undefined;
+    obj.protocol = message.protocol;
+    obj.reason = message.reason;
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
     return obj;
   },
@@ -1787,15 +1905,19 @@ export const AttributeContext_Response_HeadersEntry = {
     return obj;
   },
   fromAmino(object: AttributeContext_Response_HeadersEntryAmino): AttributeContext_Response_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttributeContext_Response_HeadersEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
@@ -1813,8 +1935,8 @@ function createBaseAttributeContext_Response(): AttributeContext_Response {
     code: BigInt(0),
     size: BigInt(0),
     headers: {},
-    time: new Date(),
-    backendLatency: Duration.fromPartial({})
+    time: undefined,
+    backendLatency: undefined
   };
 }
 export const AttributeContext_Response = {
@@ -1959,30 +2081,40 @@ export const AttributeContext_Response = {
     return obj;
   },
   fromAmino(object: AttributeContext_ResponseAmino): AttributeContext_Response {
-    return {
-      code: BigInt(object.code),
-      size: BigInt(object.size),
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseAttributeContext_Response();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = BigInt(object.code);
+    }
+    if (object.size !== undefined && object.size !== null) {
+      message.size = BigInt(object.size);
+    }
+    message.headers = Object.entries(object.headers ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
-      backendLatency: object?.backend_latency ? Duration.fromAmino(object.backend_latency) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.backend_latency !== undefined && object.backend_latency !== null) {
+      message.backendLatency = Duration.fromAmino(object.backend_latency);
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
     const obj: any = {};
-    obj.code = omitDefault(message.code);
-    obj.size = omitDefault(message.size);
+    obj.code = message.code ? message.code.toString() : undefined;
+    obj.size = message.size ? message.size.toString() : undefined;
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
         obj.headers[k] = v;
       });
     }
-    obj.time = message.time;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.backend_latency = message.backendLatency ? Duration.toAmino(message.backendLatency) : undefined;
     return obj;
   },
@@ -2075,15 +2207,19 @@ export const AttributeContext_Resource_LabelsEntry = {
     return obj;
   },
   fromAmino(object: AttributeContext_Resource_LabelsEntryAmino): AttributeContext_Resource_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttributeContext_Resource_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
@@ -2169,15 +2305,19 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     return obj;
   },
   fromAmino(object: AttributeContext_Resource_AnnotationsEntryAmino): AttributeContext_Resource_AnnotationsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttributeContext_Resource_AnnotationsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
@@ -2199,9 +2339,9 @@ function createBaseAttributeContext_Resource(): AttributeContext_Resource {
     uid: "",
     annotations: {},
     displayName: "",
-    createTime: new Date(),
-    updateTime: new Date(),
-    deleteTime: new Date(),
+    createTime: undefined,
+    updateTime: undefined,
+    deleteTime: undefined,
     etag: "",
     location: ""
   };
@@ -2470,55 +2610,79 @@ export const AttributeContext_Resource = {
     return obj;
   },
   fromAmino(object: AttributeContext_ResourceAmino): AttributeContext_Resource {
-    return {
-      service: object.service,
-      name: object.name,
-      type: object.type,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseAttributeContext_Resource();
+    if (object.service !== undefined && object.service !== null) {
+      message.service = object.service;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      uid: object.uid,
-      annotations: isObject(object.annotations) ? Object.entries(object.annotations).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = object.uid;
+    }
+    message.annotations = Object.entries(object.annotations ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      displayName: object.display_name,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
-      deleteTime: object?.delete_time ? Timestamp.fromAmino(object.delete_time) : undefined,
-      etag: object.etag,
-      location: object.location
-    };
+      }
+      return acc;
+    }, {});
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    if (object.delete_time !== undefined && object.delete_time !== null) {
+      message.deleteTime = fromTimestamp(Timestamp.fromAmino(object.delete_time));
+    }
+    if (object.etag !== undefined && object.etag !== null) {
+      message.etag = object.etag;
+    }
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    return message;
   },
   toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
     const obj: any = {};
-    obj.service = omitDefault(message.service);
-    obj.name = omitDefault(message.name);
-    obj.type = omitDefault(message.type);
+    obj.service = message.service;
+    obj.name = message.name;
+    obj.type = message.type;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.uid = omitDefault(message.uid);
+    obj.uid = message.uid;
     obj.annotations = {};
     if (message.annotations) {
       Object.entries(message.annotations).forEach(([k, v]) => {
         obj.annotations[k] = v;
       });
     }
-    obj.display_name = omitDefault(message.displayName);
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.delete_time = message.deleteTime;
-    obj.etag = omitDefault(message.etag);
-    obj.location = omitDefault(message.location);
+    obj.display_name = message.displayName;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
+    obj.delete_time = message.deleteTime ? Timestamp.toAmino(toTimestamp(message.deleteTime)) : undefined;
+    obj.etag = message.etag;
+    obj.location = message.location;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {

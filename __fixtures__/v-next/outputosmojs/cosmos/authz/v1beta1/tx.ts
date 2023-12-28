@@ -12,6 +12,10 @@ export interface MsgGrant {
   grantee: string;
   grant: Grant;
 }
+export interface MsgGrantProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgGrant";
+  value: Uint8Array;
+}
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
  * on behalf of the granter with the provided expiration time.
@@ -24,6 +28,10 @@ export interface MsgGrantSDKType {
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponse {
   results: Uint8Array[];
+}
+export interface MsgExecResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgExecResponse";
+  value: Uint8Array;
 }
 /** MsgExecResponse defines the Msg/MsgExecResponse response type. */
 export interface MsgExecResponseSDKType {
@@ -43,6 +51,10 @@ export interface MsgExec {
    */
   msgs: Any[];
 }
+export interface MsgExecProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgExec";
+  value: Uint8Array;
+}
 /**
  * MsgExec attempts to execute the provided messages using
  * authorizations granted to the grantee. Each message should have only
@@ -54,6 +66,10 @@ export interface MsgExecSDKType {
 }
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponse {}
+export interface MsgGrantResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgGrantResponse";
+  value: Uint8Array;
+}
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgGrantResponseSDKType {}
 /**
@@ -64,6 +80,10 @@ export interface MsgRevoke {
   granter: string;
   grantee: string;
   msgTypeUrl: string;
+}
+export interface MsgRevokeProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgRevoke";
+  value: Uint8Array;
 }
 /**
  * MsgRevoke revokes any authorization with the provided sdk.Msg type on the
@@ -76,6 +96,10 @@ export interface MsgRevokeSDKType {
 }
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponse {}
+export interface MsgRevokeResponseProtoMsg {
+  typeUrl: "/cosmos.authz.v1beta1.MsgRevokeResponse";
+  value: Uint8Array;
+}
 /** MsgRevokeResponse defines the Msg/MsgRevokeResponse response type. */
 export interface MsgRevokeResponseSDKType {}
 function createBaseMsgGrant(): MsgGrant {
@@ -165,11 +189,17 @@ export const MsgGrant = {
     return obj;
   },
   fromAmino(object: MsgGrantAmino): MsgGrant {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      grant: object?.grant ? Grant.fromAmino(object.grant) : undefined
-    };
+    const message = createBaseMsgGrant();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.grant !== undefined && object.grant !== null) {
+      message.grant = Grant.fromAmino(object.grant);
+    }
+    return message;
   },
   toAmino(message: MsgGrant): MsgGrantAmino {
     const obj: any = {};
@@ -269,14 +299,14 @@ export const MsgExecResponse = {
     return obj;
   },
   fromAmino(object: MsgExecResponseAmino): MsgExecResponse {
-    return {
-      results: Array.isArray(object?.results) ? object.results.map((e: any) => e) : []
-    };
+    const message = createBaseMsgExecResponse();
+    message.results = object.results?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: MsgExecResponse): MsgExecResponseAmino {
     const obj: any = {};
     if (message.results) {
-      obj.results = message.results.map(e => e);
+      obj.results = message.results.map(e => base64FromBytes(e));
     } else {
       obj.results = [];
     }
@@ -386,10 +416,12 @@ export const MsgExec = {
     return obj;
   },
   fromAmino(object: MsgExecAmino): MsgExec {
-    return {
-      grantee: object.grantee,
-      msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseMsgExec();
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    message.msgs = object.msgs?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgExec): MsgExecAmino {
     const obj: any = {};
@@ -467,7 +499,8 @@ export const MsgGrantResponse = {
     return obj;
   },
   fromAmino(_: MsgGrantResponseAmino): MsgGrantResponse {
-    return {};
+    const message = createBaseMsgGrantResponse();
+    return message;
   },
   toAmino(_: MsgGrantResponse): MsgGrantResponseAmino {
     const obj: any = {};
@@ -582,11 +615,17 @@ export const MsgRevoke = {
     return obj;
   },
   fromAmino(object: MsgRevokeAmino): MsgRevoke {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      msgTypeUrl: object.msg_type_url
-    };
+    const message = createBaseMsgRevoke();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    return message;
   },
   toAmino(message: MsgRevoke): MsgRevokeAmino {
     const obj: any = {};
@@ -661,7 +700,8 @@ export const MsgRevokeResponse = {
     return obj;
   },
   fromAmino(_: MsgRevokeResponseAmino): MsgRevokeResponse {
-    return {};
+    const message = createBaseMsgRevokeResponse();
+    return message;
   },
   toAmino(_: MsgRevokeResponse): MsgRevokeResponseAmino {
     const obj: any = {};

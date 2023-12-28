@@ -11,7 +11,11 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  */
 export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryAccountsRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest";
+  value: Uint8Array;
 }
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -19,7 +23,7 @@ export interface QueryAccountsRequest {
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -30,7 +34,11 @@ export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
   accounts: Any[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryAccountsResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -39,12 +47,16 @@ export interface QueryAccountsResponse {
  */
 export interface QueryAccountsResponseSDKType {
   accounts: AnySDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
   /** address defines the address to query for. */
   address: string;
+}
+export interface QueryAccountRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountRequest";
+  value: Uint8Array;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequestSDKType {
@@ -52,12 +64,20 @@ export interface QueryAccountRequestSDKType {
 }
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequest {}
+export interface QueryModuleAccountsRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsRequest";
+  value: Uint8Array;
+}
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -66,19 +86,31 @@ export interface QueryParamsResponseSDKType {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
-  account: Any;
+  account?: Any;
+}
+export interface QueryAccountResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
+  value: Uint8Array;
 }
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
-  account: AnySDKType;
+  account?: AnySDKType;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponse {
   accounts: Any[];
+}
+export interface QueryModuleAccountsResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.QueryModuleAccountsResponse";
+  value: Uint8Array;
 }
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseSDKType {
@@ -86,11 +118,19 @@ export interface QueryModuleAccountsResponseSDKType {
 }
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequest {}
+export interface Bech32PrefixRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixRequest";
+  value: Uint8Array;
+}
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequestSDKType {}
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponse {
   bech32Prefix: string;
+}
+export interface Bech32PrefixResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.Bech32PrefixResponse";
+  value: Uint8Array;
 }
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponseSDKType {
@@ -100,6 +140,10 @@ export interface Bech32PrefixResponseSDKType {
 export interface AddressBytesToStringRequest {
   addressBytes: Uint8Array;
 }
+export interface AddressBytesToStringRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringRequest";
+  value: Uint8Array;
+}
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestSDKType {
   address_bytes: Uint8Array;
@@ -107,6 +151,10 @@ export interface AddressBytesToStringRequestSDKType {
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponse {
   addressString: string;
+}
+export interface AddressBytesToStringResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.AddressBytesToStringResponse";
+  value: Uint8Array;
 }
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponseSDKType {
@@ -116,6 +164,10 @@ export interface AddressBytesToStringResponseSDKType {
 export interface AddressStringToBytesRequest {
   addressString: string;
 }
+export interface AddressStringToBytesRequestProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesRequest";
+  value: Uint8Array;
+}
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequestSDKType {
   address_string: string;
@@ -124,13 +176,17 @@ export interface AddressStringToBytesRequestSDKType {
 export interface AddressStringToBytesResponse {
   addressBytes: Uint8Array;
 }
+export interface AddressStringToBytesResponseProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.AddressStringToBytesResponse";
+  value: Uint8Array;
+}
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponseSDKType {
   address_bytes: Uint8Array;
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsRequest = {
@@ -189,9 +245,11 @@ export const QueryAccountsRequest = {
     return obj;
   },
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
     const obj: any = {};
@@ -223,7 +281,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsResponse = {
@@ -302,10 +360,12 @@ export const QueryAccountsResponse = {
     return obj;
   },
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsResponse();
+    message.accounts = object.accounts?.map(e => Any.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
     const obj: any = {};
@@ -400,9 +460,11 @@ export const QueryAccountRequest = {
     return obj;
   },
   fromAmino(object: QueryAccountRequestAmino): QueryAccountRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryAccountRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryAccountRequest): QueryAccountRequestAmino {
     const obj: any = {};
@@ -475,7 +537,8 @@ export const QueryModuleAccountsRequest = {
     return obj;
   },
   fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
-    return {};
+    const message = createBaseQueryModuleAccountsRequest();
+    return message;
   },
   toAmino(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestAmino {
     const obj: any = {};
@@ -564,9 +627,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -597,7 +662,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryAccountResponse(): QueryAccountResponse {
   return {
-    account: Any.fromPartial({})
+    account: undefined
   };
 }
 export const QueryAccountResponse = {
@@ -656,9 +721,11 @@ export const QueryAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryAccountResponseAmino): QueryAccountResponse {
-    return {
-      account: object?.account ? Any.fromAmino(object.account) : undefined
-    };
+    const message = createBaseQueryAccountResponse();
+    if (object.account !== undefined && object.account !== null) {
+      message.account = Any.fromAmino(object.account);
+    }
+    return message;
   },
   toAmino(message: QueryAccountResponse): QueryAccountResponseAmino {
     const obj: any = {};
@@ -731,7 +798,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -828,9 +896,9 @@ export const QueryModuleAccountsResponse = {
     return obj;
   },
   fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseQueryModuleAccountsResponse();
+    message.accounts = object.accounts?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAmino {
     const obj: any = {};
@@ -907,7 +975,8 @@ export const Bech32PrefixRequest = {
     return obj;
   },
   fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
-    return {};
+    const message = createBaseBech32PrefixRequest();
+    return message;
   },
   toAmino(_: Bech32PrefixRequest): Bech32PrefixRequestAmino {
     const obj: any = {};
@@ -996,9 +1065,11 @@ export const Bech32PrefixResponse = {
     return obj;
   },
   fromAmino(object: Bech32PrefixResponseAmino): Bech32PrefixResponse {
-    return {
-      bech32Prefix: object.bech32_prefix
-    };
+    const message = createBaseBech32PrefixResponse();
+    if (object.bech32_prefix !== undefined && object.bech32_prefix !== null) {
+      message.bech32Prefix = object.bech32_prefix;
+    }
+    return message;
   },
   toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseAmino {
     const obj: any = {};
@@ -1088,13 +1159,15 @@ export const AddressBytesToStringRequest = {
     return obj;
   },
   fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
-    return {
-      addressBytes: object.address_bytes
-    };
+    const message = createBaseAddressBytesToStringRequest();
+    if (object.address_bytes !== undefined && object.address_bytes !== null) {
+      message.addressBytes = bytesFromBase64(object.address_bytes);
+    }
+    return message;
   },
   toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
   fromAminoMsg(object: AddressBytesToStringRequestAminoMsg): AddressBytesToStringRequest {
@@ -1180,9 +1253,11 @@ export const AddressBytesToStringResponse = {
     return obj;
   },
   fromAmino(object: AddressBytesToStringResponseAmino): AddressBytesToStringResponse {
-    return {
-      addressString: object.address_string
-    };
+    const message = createBaseAddressBytesToStringResponse();
+    if (object.address_string !== undefined && object.address_string !== null) {
+      message.addressString = object.address_string;
+    }
+    return message;
   },
   toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseAmino {
     const obj: any = {};
@@ -1272,9 +1347,11 @@ export const AddressStringToBytesRequest = {
     return obj;
   },
   fromAmino(object: AddressStringToBytesRequestAmino): AddressStringToBytesRequest {
-    return {
-      addressString: object.address_string
-    };
+    const message = createBaseAddressStringToBytesRequest();
+    if (object.address_string !== undefined && object.address_string !== null) {
+      message.addressString = object.address_string;
+    }
+    return message;
   },
   toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestAmino {
     const obj: any = {};
@@ -1364,13 +1441,15 @@ export const AddressStringToBytesResponse = {
     return obj;
   },
   fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
-    return {
-      addressBytes: object.address_bytes
-    };
+    const message = createBaseAddressStringToBytesResponse();
+    if (object.address_bytes !== undefined && object.address_bytes !== null) {
+      message.addressBytes = bytesFromBase64(object.address_bytes);
+    }
+    return message;
   },
   toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
   fromAminoMsg(object: AddressStringToBytesResponseAminoMsg): AddressStringToBytesResponse {

@@ -9,9 +9,13 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  */
 export interface BaseAccount {
   address: string;
-  pubKey: Any;
+  pubKey?: Any;
   accountNumber: bigint;
   sequence: bigint;
+}
+export interface BaseAccountProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.BaseAccount";
+  value: Uint8Array;
 }
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -20,19 +24,23 @@ export interface BaseAccount {
  */
 export interface BaseAccountSDKType {
   address: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   account_number: bigint;
   sequence: bigint;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
-  baseAccount: BaseAccount;
+  baseAccount?: BaseAccount;
   name: string;
   permissions: string[];
 }
+export interface ModuleAccountProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.ModuleAccount";
+  value: Uint8Array;
+}
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccountSDKType {
-  base_account: BaseAccountSDKType;
+  base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];
 }
@@ -43,6 +51,10 @@ export interface Params {
   txSizeCostPerByte: bigint;
   sigVerifyCostEd25519: bigint;
   sigVerifyCostSecp256k1: bigint;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.Params";
+  value: Uint8Array;
 }
 /** Params defines the parameters for the auth module. */
 export interface ParamsSDKType {
@@ -55,7 +67,7 @@ export interface ParamsSDKType {
 function createBaseBaseAccount(): BaseAccount {
   return {
     address: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     accountNumber: BigInt(0),
     sequence: BigInt(0)
   };
@@ -152,12 +164,20 @@ export const BaseAccount = {
     return obj;
   },
   fromAmino(object: BaseAccountAmino): BaseAccount {
-    return {
-      address: object.address,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      accountNumber: BigInt(object.account_number),
-      sequence: BigInt(object.sequence)
-    };
+    const message = createBaseBaseAccount();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.account_number !== undefined && object.account_number !== null) {
+      message.accountNumber = BigInt(object.account_number);
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    return message;
   },
   toAmino(message: BaseAccount): BaseAccountAmino {
     const obj: any = {};
@@ -191,7 +211,7 @@ export const BaseAccount = {
 };
 function createBaseModuleAccount(): ModuleAccount {
   return {
-    baseAccount: BaseAccount.fromPartial({}),
+    baseAccount: undefined,
     name: "",
     permissions: []
   };
@@ -284,11 +304,15 @@ export const ModuleAccount = {
     return obj;
   },
   fromAmino(object: ModuleAccountAmino): ModuleAccount {
-    return {
-      baseAccount: object?.base_account ? BaseAccount.fromAmino(object.base_account) : undefined,
-      name: object.name,
-      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
-    };
+    const message = createBaseModuleAccount();
+    if (object.base_account !== undefined && object.base_account !== null) {
+      message.baseAccount = BaseAccount.fromAmino(object.base_account);
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.permissions = object.permissions?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ModuleAccount): ModuleAccountAmino {
     const obj: any = {};
@@ -436,13 +460,23 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      maxMemoCharacters: BigInt(object.max_memo_characters),
-      txSigLimit: BigInt(object.tx_sig_limit),
-      txSizeCostPerByte: BigInt(object.tx_size_cost_per_byte),
-      sigVerifyCostEd25519: BigInt(object.sig_verify_cost_ed25519),
-      sigVerifyCostSecp256k1: BigInt(object.sig_verify_cost_secp256k1)
-    };
+    const message = createBaseParams();
+    if (object.max_memo_characters !== undefined && object.max_memo_characters !== null) {
+      message.maxMemoCharacters = BigInt(object.max_memo_characters);
+    }
+    if (object.tx_sig_limit !== undefined && object.tx_sig_limit !== null) {
+      message.txSigLimit = BigInt(object.tx_sig_limit);
+    }
+    if (object.tx_size_cost_per_byte !== undefined && object.tx_size_cost_per_byte !== null) {
+      message.txSizeCostPerByte = BigInt(object.tx_size_cost_per_byte);
+    }
+    if (object.sig_verify_cost_ed25519 !== undefined && object.sig_verify_cost_ed25519 !== null) {
+      message.sigVerifyCostEd25519 = BigInt(object.sig_verify_cost_ed25519);
+    }
+    if (object.sig_verify_cost_secp256k1 !== undefined && object.sig_verify_cost_secp256k1 !== null) {
+      message.sigVerifyCostSecp256k1 = BigInt(object.sig_verify_cost_secp256k1);
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

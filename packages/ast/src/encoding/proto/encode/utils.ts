@@ -72,8 +72,8 @@ const notZero = (prop: string): t.Expression => {
 };
 
 // TODO research, shouldn't we AND these two tests?
-const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean) => {
-    if (isOptional) {
+const wrapOptional = (prop: string, test: t.Expression, isOptional: boolean, args?: EncodeMethod) => {
+    if (isOptional || args?.context?.options?.prototypes?.allowEncodeDefaultScalars) {
         return notUndefined(prop);
     }
     return test;
@@ -122,6 +122,7 @@ const scalarType = (num: number, prop: string, type: string, args?: EncodeMethod
 const customType = (num: number, prop: string, type: string, customType: string, args: EncodeMethod) => {
     switch (customType) {
         case "github.com/cosmos/cosmos-sdk/types.Dec":
+        case "cosmossdk.io/math.LegacyDec":
         default:
             args.context.addUtil("Decimal");
 
@@ -175,43 +176,43 @@ export const encode = {
     double(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.double(num, prop, args.isOptional);
+        return types.double(num, prop, args.isOptional, args);
     },
 
     float(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.float(num, prop, args.isOptional);
+        return types.float(num, prop, args.isOptional, args);
     },
 
     int32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.int32(num, prop, args.isOptional);
+        return types.int32(num, prop, args.isOptional, args);
     },
 
     sint32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.sint32(num, prop, args.isOptional);
+        return types.sint32(num, prop, args.isOptional, args);
     },
 
     uint32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.uint32(num, prop, args.isOptional);
+        return types.uint32(num, prop, args.isOptional, args);
     },
 
     fixed32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.fixed32(num, prop, args.isOptional);
+        return types.fixed32(num, prop, args.isOptional, args);
     },
 
     sfixed32(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.sfixed32(num, prop, args.isOptional);
+        return types.sfixed32(num, prop, args.isOptional, args);
     },
 
     int64(args: EncodeMethod) {
@@ -247,7 +248,7 @@ export const encode = {
     bool(args: EncodeMethod) {
         const prop = args.field.name;
         const num = getTagNumber(args.field);
-        return types.bool(num, prop, args.isOptional);
+        return types.bool(num, prop, args.isOptional, args);
     },
 
     type(args: EncodeMethod) {
@@ -266,7 +267,9 @@ export const encode = {
             isAnyType = true;
         }
 
-        return types.type(num, prop, name, isAnyType);
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        return types.type(num, prop, name, isAnyType, isGlobalRegistry);
     },
 
     enum(args: EncodeMethod) {
@@ -336,7 +339,9 @@ export const encode = {
             isAnyType = true;
         }
 
-        return types.typeArray(num, prop, name, isAnyType);
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        return types.typeArray(num, prop, name, isAnyType, isGlobalRegistry);
     },
 
     keyHash(args: EncodeMethod) {
@@ -359,11 +364,13 @@ export const types = {
             'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-            args.field.options?.['(gogoproto.customtype)'] ==
-            'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         return t.ifStatement(
-            wrapOptional(prop, notEmptyString(prop), isOptional),
+            wrapOptional(prop, notEmptyString(prop), isOptional, args),
             useCosmosSDKDec && isCosmosSDKDec
                 ? customType(num, prop, 'string', args.field.options?.['(gogoproto.customtype)'], args)
                 : scalarType(num, prop, 'string')
@@ -376,9 +383,9 @@ export const types = {
         }
     */
 
-    double(num: number, prop: string, isOptional: boolean) {
+    double(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'double')
         )
     },
@@ -389,9 +396,9 @@ export const types = {
         }
     */
 
-    float(num: number, prop: string, isOptional: boolean) {
+    float(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'float')
         )
     },
@@ -401,9 +408,9 @@ export const types = {
     //     writer.uint32(24).int32(message.int32Value);
     //   }
 
-    int32(num: number, prop: string, isOptional: boolean) {
+    int32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'int32')
         );
     },
@@ -412,9 +419,9 @@ export const types = {
     //     writer.uint32(24).sint32(message.sint32Value);
     //   }
 
-    sint32(num: number, prop: string, isOptional: boolean) {
+    sint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'sint32')
         );
     },
@@ -423,23 +430,23 @@ export const types = {
     //     writer.uint32(24).uint32(message.int32Value);
     //   }
 
-    uint32(num: number, prop: string, isOptional: boolean) {
+    uint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'uint32')
         );
     },
 
-    fixed32(num: number, prop: string, isOptional: boolean) {
+    fixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'fixed32')
         );
     },
 
-    sfixed32(num: number, prop: string, isOptional: boolean) {
+    sfixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional),
+            wrapOptional(prop, notZero(prop), isOptional, args),
             scalarType(num, prop, 'sfixed32')
         );
     },
@@ -451,7 +458,7 @@ export const types = {
 
     int64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
             scalarType(num, prop, 'int64', args)
         )
     },
@@ -462,7 +469,7 @@ export const types = {
 
     sint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
             scalarType(num, prop, 'sint64', args)
         )
     },
@@ -473,21 +480,21 @@ export const types = {
 
     uint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
             scalarType(num, prop, 'uint64', args)
         )
     },
 
     fixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
             scalarType(num, prop, 'fixed64', args)
         )
     },
 
     sfixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional),
+            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
             scalarType(num, prop, 'sfixed64', args)
         )
     },
@@ -496,28 +503,34 @@ export const types = {
     //     writer.uint32(32).bool(message.disableMacros);
     //   }
 
-    bool(num: number, prop: string, isOptional: boolean) {
+    bool(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
 
         return t.ifStatement(
-            wrapOptional(prop, ifTrue(prop), isOptional),
+            wrapOptional(prop, ifTrue(prop), isOptional, args),
             scalarType(num, prop, 'bool')
         )
     },
 
-    type(num: number, prop: string, name: string, isAnyType: boolean) {
+    type(num: number, prop: string, name: string, isAnyType: boolean, isGlobalRegistry: boolean) {
 
-        let messageProp: t.MemberExpression | t.TSAsExpression = t.memberExpression(
+        let messageProp: t.MemberExpression | t.TSAsExpression | t.CallExpression = t.memberExpression(
             t.identifier('message'),
             t.identifier(prop)
         );
 
         if (isAnyType) {
+          if(isGlobalRegistry){
+            messageProp = t.callExpression(t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("wrapAny")),[
+              messageProp
+            ])
+          } else {
             messageProp = t.tsAsExpression(
                 messageProp,
                 t.tsTypeReference(
                     t.identifier('Any')
                 )
             )
+          }
         }
 
         return t.ifStatement(
@@ -816,18 +829,25 @@ export const types = {
         ];
     },
 
-    typeArray(num: number, prop: string, name: string, isAnyType: boolean) {
+    typeArray(num: number, prop: string, name: string, isAnyType: boolean, isGlobalRegistry: boolean) {
         // "v!" just means it's NOT NULLABLE
-        let nestedProp: t.TSNonNullExpression | t.TSAsExpression = t.tsNonNullExpression(
+        let nestedProp: t.TSNonNullExpression | t.TSAsExpression | t.CallExpression = t.tsNonNullExpression(
             t.identifier('v')
         );
+
         if (isAnyType) {
-            nestedProp = t.tsAsExpression(
-                nestedProp,
-                t.tsTypeReference(
-                    t.identifier('Any')
-                )
-            )
+            if(isGlobalRegistry){
+              nestedProp = t.callExpression(t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("wrapAny")),[
+                nestedProp
+              ])
+            } else {
+              nestedProp = t.tsAsExpression(
+                  nestedProp,
+                  t.tsTypeReference(
+                      t.identifier('Any')
+                  )
+              )
+            }
         }
 
 
@@ -1115,8 +1135,10 @@ export const arrayTypes = {
             'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-            args.field.options?.['(gogoproto.customtype)'] ==
-            'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         const num = getTagNumber(args.field);
 

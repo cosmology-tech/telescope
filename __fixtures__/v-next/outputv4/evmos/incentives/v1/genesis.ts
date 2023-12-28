@@ -12,6 +12,10 @@ export interface GenesisState {
   /** active Gasmeters */
   gasMeters: GasMeter[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.incentives.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -28,6 +32,10 @@ export interface Params {
   incentivesEpochIdentifier: string;
   /** scaling factor for capping rewards */
   rewardScaler: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.incentives.v1.Params";
+  value: Uint8Array;
 }
 /** Params defines the incentives module params */
 export interface ParamsSDKType {
@@ -141,11 +149,13 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.incentives = object.incentives?.map(e => Incentive.fromAmino(e)) || [];
+    message.gasMeters = object.gas_meters?.map(e => GasMeter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -189,16 +199,16 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableIncentives === true) {
+    if (message.enableIncentives !== undefined) {
       writer.uint32(8).bool(message.enableIncentives);
     }
-    if (message.allocationLimit !== "") {
+    if (message.allocationLimit !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
-    if (message.incentivesEpochIdentifier !== "") {
+    if (message.incentivesEpochIdentifier !== undefined) {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
-    if (message.rewardScaler !== "") {
+    if (message.rewardScaler !== undefined) {
       writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
     }
     return writer;
@@ -278,12 +288,20 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableIncentives: object.enable_incentives,
-      allocationLimit: object.allocation_limit,
-      incentivesEpochIdentifier: object.incentives_epoch_identifier,
-      rewardScaler: object.reward_scaler
-    };
+    const message = createBaseParams();
+    if (object.enable_incentives !== undefined && object.enable_incentives !== null) {
+      message.enableIncentives = object.enable_incentives;
+    }
+    if (object.allocation_limit !== undefined && object.allocation_limit !== null) {
+      message.allocationLimit = object.allocation_limit;
+    }
+    if (object.incentives_epoch_identifier !== undefined && object.incentives_epoch_identifier !== null) {
+      message.incentivesEpochIdentifier = object.incentives_epoch_identifier;
+    }
+    if (object.reward_scaler !== undefined && object.reward_scaler !== null) {
+      message.rewardScaler = object.reward_scaler;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

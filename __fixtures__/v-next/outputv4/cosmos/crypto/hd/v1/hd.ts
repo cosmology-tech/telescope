@@ -17,6 +17,10 @@ export interface BIP44Params {
   /** address_index is used as child index in BIP32 derivation */
   addressIndex: number;
 }
+export interface BIP44ParamsProtoMsg {
+  typeUrl: "/cosmos.crypto.hd.v1.BIP44Params";
+  value: Uint8Array;
+}
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44ParamsSDKType {
   purpose: number;
@@ -37,19 +41,19 @@ function createBaseBIP44Params(): BIP44Params {
 export const BIP44Params = {
   typeUrl: "/cosmos.crypto.hd.v1.BIP44Params",
   encode(message: BIP44Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.purpose !== 0) {
+    if (message.purpose !== undefined) {
       writer.uint32(8).uint32(message.purpose);
     }
-    if (message.coinType !== 0) {
+    if (message.coinType !== undefined) {
       writer.uint32(16).uint32(message.coinType);
     }
-    if (message.account !== 0) {
+    if (message.account !== undefined) {
       writer.uint32(24).uint32(message.account);
     }
-    if (message.change === true) {
+    if (message.change !== undefined) {
       writer.uint32(32).bool(message.change);
     }
-    if (message.addressIndex !== 0) {
+    if (message.addressIndex !== undefined) {
       writer.uint32(40).uint32(message.addressIndex);
     }
     return writer;
@@ -138,13 +142,23 @@ export const BIP44Params = {
     return obj;
   },
   fromAmino(object: BIP44ParamsAmino): BIP44Params {
-    return {
-      purpose: object.purpose,
-      coinType: object.coin_type,
-      account: object.account,
-      change: object.change,
-      addressIndex: object.address_index
-    };
+    const message = createBaseBIP44Params();
+    if (object.purpose !== undefined && object.purpose !== null) {
+      message.purpose = object.purpose;
+    }
+    if (object.coin_type !== undefined && object.coin_type !== null) {
+      message.coinType = object.coin_type;
+    }
+    if (object.account !== undefined && object.account !== null) {
+      message.account = object.account;
+    }
+    if (object.change !== undefined && object.change !== null) {
+      message.change = object.change;
+    }
+    if (object.address_index !== undefined && object.address_index !== null) {
+      message.addressIndex = object.address_index;
+    }
+    return message;
   },
   toAmino(message: BIP44Params): BIP44ParamsAmino {
     const obj: any = {};

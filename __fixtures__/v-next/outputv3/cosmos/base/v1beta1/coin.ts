@@ -22,12 +22,8 @@ export interface CoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface CoinAmino {
-  denom: string;
-  amount: string;
-}
-export interface CoinAminoMsg {
-  type: "cosmos-sdk/Coin";
-  value: CoinAmino;
+  denom?: string;
+  amount?: string;
 }
 /**
  * Coin defines a token with a denomination and an amount.
@@ -60,12 +56,8 @@ export interface DecCoinProtoMsg {
  * signatures required by gogoproto.
  */
 export interface DecCoinAmino {
-  denom: string;
-  amount: string;
-}
-export interface DecCoinAminoMsg {
-  type: "cosmos-sdk/DecCoin";
-  value: DecCoinAmino;
+  denom?: string;
+  amount?: string;
 }
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
@@ -87,11 +79,7 @@ export interface IntProtoProtoMsg {
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoAmino {
-  int: string;
-}
-export interface IntProtoAminoMsg {
-  type: "cosmos-sdk/IntProto";
-  value: IntProtoAmino;
+  int?: string;
 }
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
@@ -107,11 +95,7 @@ export interface DecProtoProtoMsg {
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoAmino {
-  dec: string;
-}
-export interface DecProtoAminoMsg {
-  type: "cosmos-sdk/DecProto";
-  value: DecProtoAmino;
+  dec?: string;
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoSDKType {
@@ -135,7 +119,7 @@ export const Coin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Coin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Coin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCoin();
@@ -186,28 +170,23 @@ export const Coin = {
     return obj;
   },
   fromAmino(object: CoinAmino): Coin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
-  toAmino(message: Coin): CoinAmino {
+  toAmino(message: Coin, useInterfaces: boolean = true): CoinAmino {
     const obj: any = {};
     obj.denom = omitDefault(message.denom);
     obj.amount = omitDefault(message.amount);
     return obj;
   },
-  fromAminoMsg(object: CoinAminoMsg): Coin {
-    return Coin.fromAmino(object.value);
-  },
-  toAminoMsg(message: Coin): CoinAminoMsg {
-    return {
-      type: "cosmos-sdk/Coin",
-      value: Coin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: CoinProtoMsg): Coin {
-    return Coin.decode(message.value);
+  fromProtoMsg(message: CoinProtoMsg, useInterfaces: boolean = true): Coin {
+    return Coin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Coin): Uint8Array {
     return Coin.encode(message).finish();
@@ -237,7 +216,7 @@ export const DecCoin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DecCoin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DecCoin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecCoin();
@@ -288,28 +267,23 @@ export const DecCoin = {
     return obj;
   },
   fromAmino(object: DecCoinAmino): DecCoin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseDecCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
-  toAmino(message: DecCoin): DecCoinAmino {
+  toAmino(message: DecCoin, useInterfaces: boolean = true): DecCoinAmino {
     const obj: any = {};
     obj.denom = omitDefault(message.denom);
     obj.amount = omitDefault(message.amount);
     return obj;
   },
-  fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
-    return DecCoin.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecCoin): DecCoinAminoMsg {
-    return {
-      type: "cosmos-sdk/DecCoin",
-      value: DecCoin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DecCoinProtoMsg): DecCoin {
-    return DecCoin.decode(message.value);
+  fromProtoMsg(message: DecCoinProtoMsg, useInterfaces: boolean = true): DecCoin {
+    return DecCoin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DecCoin): Uint8Array {
     return DecCoin.encode(message).finish();
@@ -335,7 +309,7 @@ export const IntProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IntProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IntProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIntProto();
@@ -378,26 +352,19 @@ export const IntProto = {
     return obj;
   },
   fromAmino(object: IntProtoAmino): IntProto {
-    return {
-      int: object.int
-    };
+    const message = createBaseIntProto();
+    if (object.int !== undefined && object.int !== null) {
+      message.int = object.int;
+    }
+    return message;
   },
-  toAmino(message: IntProto): IntProtoAmino {
+  toAmino(message: IntProto, useInterfaces: boolean = true): IntProtoAmino {
     const obj: any = {};
     obj.int = omitDefault(message.int);
     return obj;
   },
-  fromAminoMsg(object: IntProtoAminoMsg): IntProto {
-    return IntProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: IntProto): IntProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/IntProto",
-      value: IntProto.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: IntProtoProtoMsg): IntProto {
-    return IntProto.decode(message.value);
+  fromProtoMsg(message: IntProtoProtoMsg, useInterfaces: boolean = true): IntProto {
+    return IntProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IntProto): Uint8Array {
     return IntProto.encode(message).finish();
@@ -423,7 +390,7 @@ export const DecProto = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DecProto {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DecProto {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecProto();
@@ -466,26 +433,19 @@ export const DecProto = {
     return obj;
   },
   fromAmino(object: DecProtoAmino): DecProto {
-    return {
-      dec: object.dec
-    };
+    const message = createBaseDecProto();
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    return message;
   },
-  toAmino(message: DecProto): DecProtoAmino {
+  toAmino(message: DecProto, useInterfaces: boolean = true): DecProtoAmino {
     const obj: any = {};
     obj.dec = omitDefault(message.dec);
     return obj;
   },
-  fromAminoMsg(object: DecProtoAminoMsg): DecProto {
-    return DecProto.fromAmino(object.value);
-  },
-  toAminoMsg(message: DecProto): DecProtoAminoMsg {
-    return {
-      type: "cosmos-sdk/DecProto",
-      value: DecProto.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DecProtoProtoMsg): DecProto {
-    return DecProto.decode(message.value);
+  fromProtoMsg(message: DecProtoProtoMsg, useInterfaces: boolean = true): DecProto {
+    return DecProto.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DecProto): Uint8Array {
     return DecProto.encode(message).finish();

@@ -142,7 +142,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  producer_destinations: Monitoring_MonitoringDestinationAmino[];
+  producer_destinations?: Monitoring_MonitoringDestinationAmino[];
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -151,11 +151,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  consumer_destinations: Monitoring_MonitoringDestinationAmino[];
-}
-export interface MonitoringAminoMsg {
-  type: "/google.api.Monitoring";
-  value: MonitoringAmino;
+  consumer_destinations?: Monitoring_MonitoringDestinationAmino[];
 }
 /**
  * Monitoring configuration of the service.
@@ -244,16 +240,12 @@ export interface Monitoring_MonitoringDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
-}
-export interface Monitoring_MonitoringDestinationAminoMsg {
-  type: "/google.api.MonitoringDestination";
-  value: Monitoring_MonitoringDestinationAmino;
+  metrics?: string[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -280,7 +272,7 @@ export const Monitoring = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Monitoring {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Monitoring {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring();
@@ -288,10 +280,10 @@ export const Monitoring = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.producerDestinations.push(Monitoring_MonitoringDestination.decode(reader, reader.uint32()));
+          message.producerDestinations.push(Monitoring_MonitoringDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.consumerDestinations.push(Monitoring_MonitoringDestination.decode(reader, reader.uint32()));
+          message.consumerDestinations.push(Monitoring_MonitoringDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -347,30 +339,27 @@ export const Monitoring = {
     return obj;
   },
   fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
+    const message = createBaseMonitoring();
+    message.producerDestinations = object.producer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Monitoring): MonitoringAmino {
+  toAmino(message: Monitoring, useInterfaces: boolean = true): MonitoringAmino {
     const obj: any = {};
     if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.producer_destinations = [];
     }
     if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e) : undefined);
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.consumer_destinations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MonitoringAminoMsg): Monitoring {
-    return Monitoring.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MonitoringProtoMsg): Monitoring {
-    return Monitoring.decode(message.value);
+  fromProtoMsg(message: MonitoringProtoMsg, useInterfaces: boolean = true): Monitoring {
+    return Monitoring.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Monitoring): Uint8Array {
     return Monitoring.encode(message).finish();
@@ -399,7 +388,7 @@ export const Monitoring_MonitoringDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Monitoring_MonitoringDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Monitoring_MonitoringDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMonitoring_MonitoringDestination();
@@ -458,12 +447,14 @@ export const Monitoring_MonitoringDestination = {
     return obj;
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseMonitoring_MonitoringDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationAmino {
+  toAmino(message: Monitoring_MonitoringDestination, useInterfaces: boolean = true): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = omitDefault(message.monitoredResource);
     if (message.metrics) {
@@ -473,11 +464,8 @@ export const Monitoring_MonitoringDestination = {
     }
     return obj;
   },
-  fromAminoMsg(object: Monitoring_MonitoringDestinationAminoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg): Monitoring_MonitoringDestination {
-    return Monitoring_MonitoringDestination.decode(message.value);
+  fromProtoMsg(message: Monitoring_MonitoringDestinationProtoMsg, useInterfaces: boolean = true): Monitoring_MonitoringDestination {
+    return Monitoring_MonitoringDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Monitoring_MonitoringDestination): Uint8Array {
     return Monitoring_MonitoringDestination.encode(message).finish();

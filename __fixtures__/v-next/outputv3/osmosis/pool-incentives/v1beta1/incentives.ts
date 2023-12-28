@@ -1,6 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -22,11 +22,7 @@ export interface ParamsAmino {
    * itself, but rather manages the distribution of coins that matches the
    * defined minted_denom.
    */
-  minted_denom: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/poolincentives/params";
-  value: ParamsAmino;
+  minted_denom?: string;
 }
 export interface ParamsSDKType {
   minted_denom: string;
@@ -39,11 +35,7 @@ export interface LockableDurationsInfoProtoMsg {
   value: Uint8Array;
 }
 export interface LockableDurationsInfoAmino {
-  lockable_durations: DurationAmino[];
-}
-export interface LockableDurationsInfoAminoMsg {
-  type: "osmosis/poolincentives/lockable-durations-info";
-  value: LockableDurationsInfoAmino;
+  lockable_durations?: DurationAmino[];
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -57,12 +49,8 @@ export interface DistrInfoProtoMsg {
   value: Uint8Array;
 }
 export interface DistrInfoAmino {
-  total_weight: string;
-  records: DistrRecordAmino[];
-}
-export interface DistrInfoAminoMsg {
-  type: "osmosis/poolincentives/distr-info";
-  value: DistrInfoAmino;
+  total_weight?: string;
+  records?: DistrRecordAmino[];
 }
 export interface DistrInfoSDKType {
   total_weight: string;
@@ -77,12 +65,8 @@ export interface DistrRecordProtoMsg {
   value: Uint8Array;
 }
 export interface DistrRecordAmino {
-  gauge_id: string;
-  weight: string;
-}
-export interface DistrRecordAminoMsg {
-  type: "osmosis/poolincentives/distr-record";
-  value: DistrRecordAmino;
+  gauge_id?: string;
+  weight?: string;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -98,13 +82,9 @@ export interface PoolToGaugeProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugeAmino {
-  pool_id: string;
-  gauge_id: string;
+  pool_id?: string;
+  gauge_id?: string;
   duration?: DurationAmino;
-}
-export interface PoolToGaugeAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauge";
-  value: PoolToGaugeAmino;
 }
 export interface PoolToGaugeSDKType {
   pool_id: bigint;
@@ -119,11 +99,7 @@ export interface PoolToGaugesProtoMsg {
   value: Uint8Array;
 }
 export interface PoolToGaugesAmino {
-  pool_to_gauge: PoolToGaugeAmino[];
-}
-export interface PoolToGaugesAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauges";
-  value: PoolToGaugesAmino;
+  pool_to_gauge?: PoolToGaugeAmino[];
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];
@@ -142,7 +118,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -185,26 +161,19 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintedDenom: object.minted_denom
-    };
+    const message = createBaseParams();
+    if (object.minted_denom !== undefined && object.minted_denom !== null) {
+      message.mintedDenom = object.minted_denom;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.minted_denom = omitDefault(message.mintedDenom);
+    obj.minted_denom = message.mintedDenom;
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/poolincentives/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -230,7 +199,7 @@ export const LockableDurationsInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LockableDurationsInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LockableDurationsInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLockableDurationsInfo();
@@ -238,7 +207,7 @@ export const LockableDurationsInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.lockableDurations.push(Duration.decode(reader, reader.uint32()));
+          message.lockableDurations.push(Duration.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -281,30 +250,21 @@ export const LockableDurationsInfo = {
     return obj;
   },
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseLockableDurationsInfo();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
+  toAmino(message: LockableDurationsInfo, useInterfaces: boolean = true): LockableDurationsInfoAmino {
     const obj: any = {};
     if (message.lockableDurations) {
-      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.lockable_durations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: LockableDurationsInfoAminoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: LockableDurationsInfo): LockableDurationsInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/lockable-durations-info",
-      value: LockableDurationsInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: LockableDurationsInfoProtoMsg): LockableDurationsInfo {
-    return LockableDurationsInfo.decode(message.value);
+  fromProtoMsg(message: LockableDurationsInfoProtoMsg, useInterfaces: boolean = true): LockableDurationsInfo {
+    return LockableDurationsInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LockableDurationsInfo): Uint8Array {
     return LockableDurationsInfo.encode(message).finish();
@@ -334,7 +294,7 @@ export const DistrInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DistrInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DistrInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrInfo();
@@ -345,7 +305,7 @@ export const DistrInfo = {
           message.totalWeight = reader.string();
           break;
         case 2:
-          message.records.push(DistrRecord.decode(reader, reader.uint32()));
+          message.records.push(DistrRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -393,32 +353,25 @@ export const DistrInfo = {
     return obj;
   },
   fromAmino(object: DistrInfoAmino): DistrInfo {
-    return {
-      totalWeight: object.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseDistrInfo();
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: DistrInfo): DistrInfoAmino {
+  toAmino(message: DistrInfo, useInterfaces: boolean = true): DistrInfoAmino {
     const obj: any = {};
-    obj.total_weight = omitDefault(message.totalWeight);
+    obj.total_weight = message.totalWeight;
     if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
+      obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.records = [];
     }
     return obj;
   },
-  fromAminoMsg(object: DistrInfoAminoMsg): DistrInfo {
-    return DistrInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrInfo): DistrInfoAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-info",
-      value: DistrInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DistrInfoProtoMsg): DistrInfo {
-    return DistrInfo.decode(message.value);
+  fromProtoMsg(message: DistrInfoProtoMsg, useInterfaces: boolean = true): DistrInfo {
+    return DistrInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DistrInfo): Uint8Array {
     return DistrInfo.encode(message).finish();
@@ -448,7 +401,7 @@ export const DistrRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DistrRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DistrRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDistrRecord();
@@ -501,28 +454,23 @@ export const DistrRecord = {
     return obj;
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      weight: object.weight
-    };
+    const message = createBaseDistrRecord();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
-  toAmino(message: DistrRecord): DistrRecordAmino {
+  toAmino(message: DistrRecord, useInterfaces: boolean = true): DistrRecordAmino {
     const obj: any = {};
-    obj.gauge_id = omitDefault(message.gaugeId);
-    obj.weight = omitDefault(message.weight);
+    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.weight = message.weight;
     return obj;
   },
-  fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
-    return DistrRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: DistrRecord): DistrRecordAminoMsg {
-    return {
-      type: "osmosis/poolincentives/distr-record",
-      value: DistrRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DistrRecordProtoMsg): DistrRecord {
-    return DistrRecord.decode(message.value);
+  fromProtoMsg(message: DistrRecordProtoMsg, useInterfaces: boolean = true): DistrRecord {
+    return DistrRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DistrRecord): Uint8Array {
     return DistrRecord.encode(message).finish();
@@ -556,7 +504,7 @@ export const PoolToGauge = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PoolToGauge {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolToGauge {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauge();
@@ -570,7 +518,7 @@ export const PoolToGauge = {
           message.gaugeId = reader.uint64();
           break;
         case 3:
-          message.duration = Duration.decode(reader, reader.uint32());
+          message.duration = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -621,30 +569,27 @@ export const PoolToGauge = {
     return obj;
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
-    return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
-    };
+    const message = createBasePoolToGauge();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    return message;
   },
-  toAmino(message: PoolToGauge): PoolToGaugeAmino {
+  toAmino(message: PoolToGauge, useInterfaces: boolean = true): PoolToGaugeAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.gauge_id = omitDefault(message.gaugeId);
-    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PoolToGaugeAminoMsg): PoolToGauge {
-    return PoolToGauge.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauge): PoolToGaugeAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauge",
-      value: PoolToGauge.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PoolToGaugeProtoMsg): PoolToGauge {
-    return PoolToGauge.decode(message.value);
+  fromProtoMsg(message: PoolToGaugeProtoMsg, useInterfaces: boolean = true): PoolToGauge {
+    return PoolToGauge.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolToGauge): Uint8Array {
     return PoolToGauge.encode(message).finish();
@@ -670,7 +615,7 @@ export const PoolToGauges = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PoolToGauges {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PoolToGauges {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePoolToGauges();
@@ -678,7 +623,7 @@ export const PoolToGauges = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 2:
-          message.poolToGauge.push(PoolToGauge.decode(reader, reader.uint32()));
+          message.poolToGauge.push(PoolToGauge.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -721,30 +666,21 @@ export const PoolToGauges = {
     return obj;
   },
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
+    const message = createBasePoolToGauges();
+    message.poolToGauge = object.pool_to_gauge?.map(e => PoolToGauge.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: PoolToGauges): PoolToGaugesAmino {
+  toAmino(message: PoolToGauges, useInterfaces: boolean = true): PoolToGaugesAmino {
     const obj: any = {};
     if (message.poolToGauge) {
-      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e) : undefined);
+      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pool_to_gauge = [];
     }
     return obj;
   },
-  fromAminoMsg(object: PoolToGaugesAminoMsg): PoolToGauges {
-    return PoolToGauges.fromAmino(object.value);
-  },
-  toAminoMsg(message: PoolToGauges): PoolToGaugesAminoMsg {
-    return {
-      type: "osmosis/poolincentives/pool-to-gauges",
-      value: PoolToGauges.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PoolToGaugesProtoMsg): PoolToGauges {
-    return PoolToGauges.decode(message.value);
+  fromProtoMsg(message: PoolToGaugesProtoMsg, useInterfaces: boolean = true): PoolToGauges {
+    return PoolToGauges.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PoolToGauges): Uint8Array {
     return PoolToGauges.encode(message).finish();

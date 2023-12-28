@@ -1,7 +1,7 @@
 import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgStoreCode submit Wasm code to the system */
@@ -14,7 +14,7 @@ export interface MsgStoreCode {
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
-  instantiatePermission: AccessConfig;
+  instantiatePermission?: AccessConfig;
 }
 export interface MsgStoreCodeProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.MsgStoreCode";
@@ -23,24 +23,20 @@ export interface MsgStoreCodeProtoMsg {
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasm_byte_code: string;
+  wasm_byte_code?: string;
   /**
    * InstantiatePermission access control to apply on contract creation,
    * optional
    */
   instantiate_permission?: AccessConfigAmino;
 }
-export interface MsgStoreCodeAminoMsg {
-  type: "wasm/MsgStoreCode";
-  value: MsgStoreCodeAmino;
-}
 /** MsgStoreCode submit Wasm code to the system */
 export interface MsgStoreCodeSDKType {
   sender: string;
   wasm_byte_code: Uint8Array;
-  instantiate_permission: AccessConfigSDKType;
+  instantiate_permission?: AccessConfigSDKType;
 }
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponse {
@@ -54,11 +50,7 @@ export interface MsgStoreCodeResponseProtoMsg {
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponseAmino {
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
-}
-export interface MsgStoreCodeResponseAminoMsg {
-  type: "wasm/MsgStoreCodeResponse";
-  value: MsgStoreCodeResponseAmino;
+  code_id?: string;
 }
 /** MsgStoreCodeResponse returns store result data. */
 export interface MsgStoreCodeResponseSDKType {
@@ -92,21 +84,17 @@ export interface MsgInstantiateContractProtoMsg {
  */
 export interface MsgInstantiateContractAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** Admin is an optional address that can execute migrations */
-  admin: string;
+  admin?: string;
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
+  code_id?: string;
   /** Label is optional metadata to be stored with a contract instance. */
-  label: string;
+  label?: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
-  msg: Uint8Array;
+  msg?: any;
   /** Funds coins that are transferred to the contract on instantiation */
-  funds: CoinAmino[];
-}
-export interface MsgInstantiateContractAminoMsg {
-  type: "wasm/MsgInstantiateContract";
-  value: MsgInstantiateContractAmino;
+  funds?: CoinAmino[];
 }
 /**
  * MsgInstantiateContract create a new smart contract instance for the given
@@ -134,13 +122,9 @@ export interface MsgInstantiateContractResponseProtoMsg {
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponseAmino {
   /** Address is the bech32 address of the new contract instance. */
-  address: string;
+  address?: string;
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
-}
-export interface MsgInstantiateContractResponseAminoMsg {
-  type: "wasm/MsgInstantiateContractResponse";
-  value: MsgInstantiateContractResponseAmino;
+  data?: string;
 }
 /** MsgInstantiateContractResponse return instantiation result data */
 export interface MsgInstantiateContractResponseSDKType {
@@ -165,17 +149,13 @@ export interface MsgExecuteContractProtoMsg {
 /** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContractAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
+  contract?: string;
   /** Msg json encoded message to be passed to the contract */
-  msg: Uint8Array;
+  msg?: any;
   /** Funds coins that are transferred to the contract on execution */
-  funds: CoinAmino[];
-}
-export interface MsgExecuteContractAminoMsg {
-  type: "wasm/MsgExecuteContract";
-  value: MsgExecuteContractAmino;
+  funds?: CoinAmino[];
 }
 /** MsgExecuteContract submits the given message data to a smart contract */
 export interface MsgExecuteContractSDKType {
@@ -196,11 +176,7 @@ export interface MsgExecuteContractResponseProtoMsg {
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseAmino {
   /** Data contains base64-encoded bytes to returned from the contract */
-  data: Uint8Array;
-}
-export interface MsgExecuteContractResponseAminoMsg {
-  type: "wasm/MsgExecuteContractResponse";
-  value: MsgExecuteContractResponseAmino;
+  data?: string;
 }
 /** MsgExecuteContractResponse returns execution result data. */
 export interface MsgExecuteContractResponseSDKType {
@@ -224,17 +200,13 @@ export interface MsgMigrateContractProtoMsg {
 /** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContractAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
+  contract?: string;
   /** CodeID references the new WASM code */
-  code_id: string;
+  code_id?: string;
   /** Msg json encoded message to be passed to the contract on migration */
-  msg: Uint8Array;
-}
-export interface MsgMigrateContractAminoMsg {
-  type: "wasm/MsgMigrateContract";
-  value: MsgMigrateContractAmino;
+  msg?: any;
 }
 /** MsgMigrateContract runs a code upgrade/ downgrade for a smart contract */
 export interface MsgMigrateContractSDKType {
@@ -261,11 +233,7 @@ export interface MsgMigrateContractResponseAmino {
    * Data contains same raw bytes returned as data from the wasm contract.
    * (May be empty)
    */
-  data: Uint8Array;
-}
-export interface MsgMigrateContractResponseAminoMsg {
-  type: "wasm/MsgMigrateContractResponse";
-  value: MsgMigrateContractResponseAmino;
+  data?: string;
 }
 /** MsgMigrateContractResponse returns contract migration result data. */
 export interface MsgMigrateContractResponseSDKType {
@@ -287,15 +255,11 @@ export interface MsgUpdateAdminProtoMsg {
 /** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdminAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** NewAdmin address to be set */
-  new_admin: string;
+  new_admin?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
-}
-export interface MsgUpdateAdminAminoMsg {
-  type: "wasm/MsgUpdateAdmin";
-  value: MsgUpdateAdminAmino;
+  contract?: string;
 }
 /** MsgUpdateAdmin sets a new admin for a smart contract */
 export interface MsgUpdateAdminSDKType {
@@ -311,10 +275,6 @@ export interface MsgUpdateAdminResponseProtoMsg {
 }
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseAmino {}
-export interface MsgUpdateAdminResponseAminoMsg {
-  type: "wasm/MsgUpdateAdminResponse";
-  value: MsgUpdateAdminResponseAmino;
-}
 /** MsgUpdateAdminResponse returns empty data */
 export interface MsgUpdateAdminResponseSDKType {}
 /** MsgClearAdmin removes any admin stored for a smart contract */
@@ -331,13 +291,9 @@ export interface MsgClearAdminProtoMsg {
 /** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdminAmino {
   /** Sender is the that actor that signed the messages */
-  sender: string;
+  sender?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
-}
-export interface MsgClearAdminAminoMsg {
-  type: "wasm/MsgClearAdmin";
-  value: MsgClearAdminAmino;
+  contract?: string;
 }
 /** MsgClearAdmin removes any admin stored for a smart contract */
 export interface MsgClearAdminSDKType {
@@ -352,17 +308,13 @@ export interface MsgClearAdminResponseProtoMsg {
 }
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponseAmino {}
-export interface MsgClearAdminResponseAminoMsg {
-  type: "wasm/MsgClearAdminResponse";
-  value: MsgClearAdminResponseAmino;
-}
 /** MsgClearAdminResponse returns empty data */
 export interface MsgClearAdminResponseSDKType {}
 function createBaseMsgStoreCode(): MsgStoreCode {
   return {
     sender: "",
     wasmByteCode: new Uint8Array(),
-    instantiatePermission: AccessConfig.fromPartial({})
+    instantiatePermission: undefined
   };
 }
 export const MsgStoreCode = {
@@ -380,7 +332,7 @@ export const MsgStoreCode = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgStoreCode {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStoreCode {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCode();
@@ -394,7 +346,7 @@ export const MsgStoreCode = {
           message.wasmByteCode = reader.bytes();
           break;
         case 5:
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -441,30 +393,27 @@ export const MsgStoreCode = {
     return obj;
   },
   fromAmino(object: MsgStoreCodeAmino): MsgStoreCode {
-    return {
-      sender: object.sender,
-      wasmByteCode: fromBase64(object.wasm_byte_code),
-      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
-    };
+    const message = createBaseMsgStoreCode();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.wasm_byte_code !== undefined && object.wasm_byte_code !== null) {
+      message.wasmByteCode = fromBase64(object.wasm_byte_code);
+    }
+    if (object.instantiate_permission !== undefined && object.instantiate_permission !== null) {
+      message.instantiatePermission = AccessConfig.fromAmino(object.instantiate_permission);
+    }
+    return message;
   },
-  toAmino(message: MsgStoreCode): MsgStoreCodeAmino {
+  toAmino(message: MsgStoreCode, useInterfaces: boolean = true): MsgStoreCodeAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
+    obj.sender = message.sender;
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
-    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgStoreCodeAminoMsg): MsgStoreCode {
-    return MsgStoreCode.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgStoreCode): MsgStoreCodeAminoMsg {
-    return {
-      type: "wasm/MsgStoreCode",
-      value: MsgStoreCode.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgStoreCodeProtoMsg): MsgStoreCode {
-    return MsgStoreCode.decode(message.value);
+  fromProtoMsg(message: MsgStoreCodeProtoMsg, useInterfaces: boolean = true): MsgStoreCode {
+    return MsgStoreCode.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStoreCode): Uint8Array {
     return MsgStoreCode.encode(message).finish();
@@ -490,7 +439,7 @@ export const MsgStoreCodeResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgStoreCodeResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgStoreCodeResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgStoreCodeResponse();
@@ -535,26 +484,19 @@ export const MsgStoreCodeResponse = {
     return obj;
   },
   fromAmino(object: MsgStoreCodeResponseAmino): MsgStoreCodeResponse {
-    return {
-      codeId: BigInt(object.code_id)
-    };
+    const message = createBaseMsgStoreCodeResponse();
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    return message;
   },
-  toAmino(message: MsgStoreCodeResponse): MsgStoreCodeResponseAmino {
+  toAmino(message: MsgStoreCodeResponse, useInterfaces: boolean = true): MsgStoreCodeResponseAmino {
     const obj: any = {};
-    obj.code_id = omitDefault(message.codeId);
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgStoreCodeResponseAminoMsg): MsgStoreCodeResponse {
-    return MsgStoreCodeResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgStoreCodeResponse): MsgStoreCodeResponseAminoMsg {
-    return {
-      type: "wasm/MsgStoreCodeResponse",
-      value: MsgStoreCodeResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgStoreCodeResponseProtoMsg): MsgStoreCodeResponse {
-    return MsgStoreCodeResponse.decode(message.value);
+  fromProtoMsg(message: MsgStoreCodeResponseProtoMsg, useInterfaces: boolean = true): MsgStoreCodeResponse {
+    return MsgStoreCodeResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgStoreCodeResponse): Uint8Array {
     return MsgStoreCodeResponse.encode(message).finish();
@@ -600,7 +542,7 @@ export const MsgInstantiateContract = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantiateContract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgInstantiateContract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContract();
@@ -623,7 +565,7 @@ export const MsgInstantiateContract = {
           message.msg = reader.bytes();
           break;
         case 6:
-          message.funds.push(Coin.decode(reader, reader.uint32()));
+          message.funds.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -693,40 +635,41 @@ export const MsgInstantiateContract = {
     return obj;
   },
   fromAmino(object: MsgInstantiateContractAmino): MsgInstantiateContract {
-    return {
-      sender: object.sender,
-      admin: object.admin,
-      codeId: BigInt(object.code_id),
-      label: object.label,
-      msg: toUtf8(JSON.stringify(object.msg)),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgInstantiateContract();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.label !== undefined && object.label !== null) {
+      message.label = object.label;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MsgInstantiateContract): MsgInstantiateContractAmino {
+  toAmino(message: MsgInstantiateContract, useInterfaces: boolean = true): MsgInstantiateContractAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.admin = omitDefault(message.admin);
-    obj.code_id = omitDefault(message.codeId);
-    obj.label = omitDefault(message.label);
+    obj.sender = message.sender;
+    obj.admin = message.admin;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.label = message.label;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.funds = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MsgInstantiateContractAminoMsg): MsgInstantiateContract {
-    return MsgInstantiateContract.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgInstantiateContract): MsgInstantiateContractAminoMsg {
-    return {
-      type: "wasm/MsgInstantiateContract",
-      value: MsgInstantiateContract.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgInstantiateContractProtoMsg): MsgInstantiateContract {
-    return MsgInstantiateContract.decode(message.value);
+  fromProtoMsg(message: MsgInstantiateContractProtoMsg, useInterfaces: boolean = true): MsgInstantiateContract {
+    return MsgInstantiateContract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgInstantiateContract): Uint8Array {
     return MsgInstantiateContract.encode(message).finish();
@@ -756,7 +699,7 @@ export const MsgInstantiateContractResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgInstantiateContractResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgInstantiateContractResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgInstantiateContractResponse();
@@ -807,28 +750,23 @@ export const MsgInstantiateContractResponse = {
     return obj;
   },
   fromAmino(object: MsgInstantiateContractResponseAmino): MsgInstantiateContractResponse {
-    return {
-      address: object.address,
-      data: object.data
-    };
+    const message = createBaseMsgInstantiateContractResponse();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
-  toAmino(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAmino {
+  toAmino(message: MsgInstantiateContractResponse, useInterfaces: boolean = true): MsgInstantiateContractResponseAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.data = message.data;
+    obj.address = message.address;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgInstantiateContractResponseAminoMsg): MsgInstantiateContractResponse {
-    return MsgInstantiateContractResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgInstantiateContractResponse): MsgInstantiateContractResponseAminoMsg {
-    return {
-      type: "wasm/MsgInstantiateContractResponse",
-      value: MsgInstantiateContractResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgInstantiateContractResponseProtoMsg): MsgInstantiateContractResponse {
-    return MsgInstantiateContractResponse.decode(message.value);
+  fromProtoMsg(message: MsgInstantiateContractResponseProtoMsg, useInterfaces: boolean = true): MsgInstantiateContractResponse {
+    return MsgInstantiateContractResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgInstantiateContractResponse): Uint8Array {
     return MsgInstantiateContractResponse.encode(message).finish();
@@ -866,7 +804,7 @@ export const MsgExecuteContract = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecuteContract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecuteContract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContract();
@@ -883,7 +821,7 @@ export const MsgExecuteContract = {
           message.msg = reader.bytes();
           break;
         case 5:
-          message.funds.push(Coin.decode(reader, reader.uint32()));
+          message.funds.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -941,36 +879,33 @@ export const MsgExecuteContract = {
     return obj;
   },
   fromAmino(object: MsgExecuteContractAmino): MsgExecuteContract {
-    return {
-      sender: object.sender,
-      contract: object.contract,
-      msg: toUtf8(JSON.stringify(object.msg)),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgExecuteContract();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
+  toAmino(message: MsgExecuteContract, useInterfaces: boolean = true): MsgExecuteContractAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.contract = omitDefault(message.contract);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.funds = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MsgExecuteContractAminoMsg): MsgExecuteContract {
-    return MsgExecuteContract.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExecuteContract): MsgExecuteContractAminoMsg {
-    return {
-      type: "wasm/MsgExecuteContract",
-      value: MsgExecuteContract.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgExecuteContractProtoMsg): MsgExecuteContract {
-    return MsgExecuteContract.decode(message.value);
+  fromProtoMsg(message: MsgExecuteContractProtoMsg, useInterfaces: boolean = true): MsgExecuteContract {
+    return MsgExecuteContract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExecuteContract): Uint8Array {
     return MsgExecuteContract.encode(message).finish();
@@ -996,7 +931,7 @@ export const MsgExecuteContractResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgExecuteContractResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgExecuteContractResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgExecuteContractResponse();
@@ -1039,26 +974,19 @@ export const MsgExecuteContractResponse = {
     return obj;
   },
   fromAmino(object: MsgExecuteContractResponseAmino): MsgExecuteContractResponse {
-    return {
-      data: object.data
-    };
+    const message = createBaseMsgExecuteContractResponse();
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
-  toAmino(message: MsgExecuteContractResponse): MsgExecuteContractResponseAmino {
+  toAmino(message: MsgExecuteContractResponse, useInterfaces: boolean = true): MsgExecuteContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgExecuteContractResponseAminoMsg): MsgExecuteContractResponse {
-    return MsgExecuteContractResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgExecuteContractResponse): MsgExecuteContractResponseAminoMsg {
-    return {
-      type: "wasm/MsgExecuteContractResponse",
-      value: MsgExecuteContractResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgExecuteContractResponseProtoMsg): MsgExecuteContractResponse {
-    return MsgExecuteContractResponse.decode(message.value);
+  fromProtoMsg(message: MsgExecuteContractResponseProtoMsg, useInterfaces: boolean = true): MsgExecuteContractResponse {
+    return MsgExecuteContractResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgExecuteContractResponse): Uint8Array {
     return MsgExecuteContractResponse.encode(message).finish();
@@ -1096,7 +1024,7 @@ export const MsgMigrateContract = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMigrateContract {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMigrateContract {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMigrateContract();
@@ -1165,32 +1093,31 @@ export const MsgMigrateContract = {
     return obj;
   },
   fromAmino(object: MsgMigrateContractAmino): MsgMigrateContract {
-    return {
-      sender: object.sender,
-      contract: object.contract,
-      codeId: BigInt(object.code_id),
-      msg: toUtf8(JSON.stringify(object.msg))
-    };
+    const message = createBaseMsgMigrateContract();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    return message;
   },
-  toAmino(message: MsgMigrateContract): MsgMigrateContractAmino {
+  toAmino(message: MsgMigrateContract, useInterfaces: boolean = true): MsgMigrateContractAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.contract = omitDefault(message.contract);
-    obj.code_id = omitDefault(message.codeId);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgMigrateContractAminoMsg): MsgMigrateContract {
-    return MsgMigrateContract.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMigrateContract): MsgMigrateContractAminoMsg {
-    return {
-      type: "wasm/MsgMigrateContract",
-      value: MsgMigrateContract.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMigrateContractProtoMsg): MsgMigrateContract {
-    return MsgMigrateContract.decode(message.value);
+  fromProtoMsg(message: MsgMigrateContractProtoMsg, useInterfaces: boolean = true): MsgMigrateContract {
+    return MsgMigrateContract.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMigrateContract): Uint8Array {
     return MsgMigrateContract.encode(message).finish();
@@ -1216,7 +1143,7 @@ export const MsgMigrateContractResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgMigrateContractResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgMigrateContractResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgMigrateContractResponse();
@@ -1259,26 +1186,19 @@ export const MsgMigrateContractResponse = {
     return obj;
   },
   fromAmino(object: MsgMigrateContractResponseAmino): MsgMigrateContractResponse {
-    return {
-      data: object.data
-    };
+    const message = createBaseMsgMigrateContractResponse();
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
-  toAmino(message: MsgMigrateContractResponse): MsgMigrateContractResponseAmino {
+  toAmino(message: MsgMigrateContractResponse, useInterfaces: boolean = true): MsgMigrateContractResponseAmino {
     const obj: any = {};
-    obj.data = message.data;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgMigrateContractResponseAminoMsg): MsgMigrateContractResponse {
-    return MsgMigrateContractResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgMigrateContractResponse): MsgMigrateContractResponseAminoMsg {
-    return {
-      type: "wasm/MsgMigrateContractResponse",
-      value: MsgMigrateContractResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgMigrateContractResponseProtoMsg): MsgMigrateContractResponse {
-    return MsgMigrateContractResponse.decode(message.value);
+  fromProtoMsg(message: MsgMigrateContractResponseProtoMsg, useInterfaces: boolean = true): MsgMigrateContractResponse {
+    return MsgMigrateContractResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgMigrateContractResponse): Uint8Array {
     return MsgMigrateContractResponse.encode(message).finish();
@@ -1312,7 +1232,7 @@ export const MsgUpdateAdmin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateAdmin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateAdmin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateAdmin();
@@ -1371,30 +1291,27 @@ export const MsgUpdateAdmin = {
     return obj;
   },
   fromAmino(object: MsgUpdateAdminAmino): MsgUpdateAdmin {
-    return {
-      sender: object.sender,
-      newAdmin: object.new_admin,
-      contract: object.contract
-    };
+    const message = createBaseMsgUpdateAdmin();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
-  toAmino(message: MsgUpdateAdmin): MsgUpdateAdminAmino {
+  toAmino(message: MsgUpdateAdmin, useInterfaces: boolean = true): MsgUpdateAdminAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.new_admin = omitDefault(message.newAdmin);
-    obj.contract = omitDefault(message.contract);
+    obj.sender = message.sender;
+    obj.new_admin = message.newAdmin;
+    obj.contract = message.contract;
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateAdminAminoMsg): MsgUpdateAdmin {
-    return MsgUpdateAdmin.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateAdmin): MsgUpdateAdminAminoMsg {
-    return {
-      type: "wasm/MsgUpdateAdmin",
-      value: MsgUpdateAdmin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgUpdateAdminProtoMsg): MsgUpdateAdmin {
-    return MsgUpdateAdmin.decode(message.value);
+  fromProtoMsg(message: MsgUpdateAdminProtoMsg, useInterfaces: boolean = true): MsgUpdateAdmin {
+    return MsgUpdateAdmin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateAdmin): Uint8Array {
     return MsgUpdateAdmin.encode(message).finish();
@@ -1415,7 +1332,7 @@ export const MsgUpdateAdminResponse = {
   encode(_: MsgUpdateAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateAdminResponse();
@@ -1449,23 +1366,15 @@ export const MsgUpdateAdminResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateAdminResponseAmino): MsgUpdateAdminResponse {
-    return {};
+    const message = createBaseMsgUpdateAdminResponse();
+    return message;
   },
-  toAmino(_: MsgUpdateAdminResponse): MsgUpdateAdminResponseAmino {
+  toAmino(_: MsgUpdateAdminResponse, useInterfaces: boolean = true): MsgUpdateAdminResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateAdminResponseAminoMsg): MsgUpdateAdminResponse {
-    return MsgUpdateAdminResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUpdateAdminResponse): MsgUpdateAdminResponseAminoMsg {
-    return {
-      type: "wasm/MsgUpdateAdminResponse",
-      value: MsgUpdateAdminResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgUpdateAdminResponseProtoMsg): MsgUpdateAdminResponse {
-    return MsgUpdateAdminResponse.decode(message.value);
+  fromProtoMsg(message: MsgUpdateAdminResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateAdminResponse {
+    return MsgUpdateAdminResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateAdminResponse): Uint8Array {
     return MsgUpdateAdminResponse.encode(message).finish();
@@ -1495,7 +1404,7 @@ export const MsgClearAdmin = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgClearAdmin {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgClearAdmin {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClearAdmin();
@@ -1546,28 +1455,23 @@ export const MsgClearAdmin = {
     return obj;
   },
   fromAmino(object: MsgClearAdminAmino): MsgClearAdmin {
-    return {
-      sender: object.sender,
-      contract: object.contract
-    };
+    const message = createBaseMsgClearAdmin();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
-  toAmino(message: MsgClearAdmin): MsgClearAdminAmino {
+  toAmino(message: MsgClearAdmin, useInterfaces: boolean = true): MsgClearAdminAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.contract = omitDefault(message.contract);
+    obj.sender = message.sender;
+    obj.contract = message.contract;
     return obj;
   },
-  fromAminoMsg(object: MsgClearAdminAminoMsg): MsgClearAdmin {
-    return MsgClearAdmin.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgClearAdmin): MsgClearAdminAminoMsg {
-    return {
-      type: "wasm/MsgClearAdmin",
-      value: MsgClearAdmin.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgClearAdminProtoMsg): MsgClearAdmin {
-    return MsgClearAdmin.decode(message.value);
+  fromProtoMsg(message: MsgClearAdminProtoMsg, useInterfaces: boolean = true): MsgClearAdmin {
+    return MsgClearAdmin.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgClearAdmin): Uint8Array {
     return MsgClearAdmin.encode(message).finish();
@@ -1588,7 +1492,7 @@ export const MsgClearAdminResponse = {
   encode(_: MsgClearAdminResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgClearAdminResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgClearAdminResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgClearAdminResponse();
@@ -1622,23 +1526,15 @@ export const MsgClearAdminResponse = {
     return obj;
   },
   fromAmino(_: MsgClearAdminResponseAmino): MsgClearAdminResponse {
-    return {};
+    const message = createBaseMsgClearAdminResponse();
+    return message;
   },
-  toAmino(_: MsgClearAdminResponse): MsgClearAdminResponseAmino {
+  toAmino(_: MsgClearAdminResponse, useInterfaces: boolean = true): MsgClearAdminResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgClearAdminResponseAminoMsg): MsgClearAdminResponse {
-    return MsgClearAdminResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgClearAdminResponse): MsgClearAdminResponseAminoMsg {
-    return {
-      type: "wasm/MsgClearAdminResponse",
-      value: MsgClearAdminResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgClearAdminResponseProtoMsg): MsgClearAdminResponse {
-    return MsgClearAdminResponse.decode(message.value);
+  fromProtoMsg(message: MsgClearAdminResponseProtoMsg, useInterfaces: boolean = true): MsgClearAdminResponse {
+    return MsgClearAdminResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgClearAdminResponse): Uint8Array {
     return MsgClearAdminResponse.encode(message).finish();

@@ -70,23 +70,23 @@ export interface DistributionProtoMsg {
  */
 export interface DistributionAmino {
   /** The total number of samples in the distribution. Must be >= 0. */
-  count: string;
+  count?: string;
   /**
    * The arithmetic mean of the samples in the distribution. If `count` is
    * zero then this field must be zero.
    */
-  mean: number;
+  mean?: number;
   /** The minimum of the population of values. Ignored if `count` is zero. */
-  minimum: number;
+  minimum?: number;
   /** The maximum of the population of values. Ignored if `count` is zero. */
-  maximum: number;
+  maximum?: number;
   /**
    * The sum of squared deviations from the mean:
    *   Sum[i=1..count]((x_i - mean)^2)
    * where each x_i is a sample values. If `count` is zero then this field
    * must be zero, otherwise validation of the request fails.
    */
-  sum_of_squared_deviation: number;
+  sum_of_squared_deviation?: number;
   /**
    * The number of samples in each histogram bucket. `bucket_counts` are
    * optional. If present, they must sum to the `count` value.
@@ -100,7 +100,7 @@ export interface DistributionAmino {
    * 
    * Any suffix of trailing zeros may be omitted.
    */
-  bucket_counts: string[];
+  bucket_counts?: string[];
   /** Buckets with constant width. */
   linear_buckets?: Distribution_LinearBucketsAmino;
   /** Buckets with exponentially growing width. */
@@ -108,7 +108,7 @@ export interface DistributionAmino {
   /** Buckets with arbitrary user-provided width. */
   explicit_buckets?: Distribution_ExplicitBucketsAmino;
   /** Example points. Must be in increasing order of `value` field. */
-  exemplars: Distribution_ExemplarAmino[];
+  exemplars?: Distribution_ExemplarAmino[];
 }
 export interface DistributionAminoMsg {
   type: "/google.api.servicecontrol.v1.Distribution";
@@ -169,20 +169,20 @@ export interface Distribution_LinearBucketsAmino {
    * the total number of buckets is `num_finite_buckets` + 2.
    * See comments on `bucket_options` for details.
    */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    * Must be strictly positive.
    */
-  width: number;
+  width?: number;
   /**
    * The i'th linear bucket covers the interval
    *   [offset + (i-1) * width, offset + i * width)
    * where i ranges from 1 to num_finite_buckets, inclusive.
    */
-  offset: number;
+  offset?: number;
 }
 export interface Distribution_LinearBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.LinearBuckets";
@@ -228,21 +228,21 @@ export interface Distribution_ExponentialBucketsAmino {
    * the total number of buckets is `num_finite_buckets` + 2.
    * See comments on `bucket_options` for details.
    */
-  num_finite_buckets: number;
+  num_finite_buckets?: number;
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be larger than 1.0.
    */
-  growth_factor: number;
+  growth_factor?: number;
   /**
    * The i'th exponential bucket covers the interval
    *   [scale * growth_factor^(i-1), scale * growth_factor^i)
    * where i ranges from 1 to num_finite_buckets inclusive.
    * Must be > 0.
    */
-  scale: number;
+  scale?: number;
 }
 export interface Distribution_ExponentialBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExponentialBuckets";
@@ -298,7 +298,7 @@ export interface Distribution_ExplicitBucketsAmino {
    *  0 < i < bound_size()            bound[i-1]     bound[i]
    *  i == bound_size() (overflow)    bound[i-1]     +inf
    */
-  bounds: number[];
+  bounds?: number[];
 }
 export interface Distribution_ExplicitBucketsAminoMsg {
   type: "/google.api.servicecontrol.v1.ExplicitBuckets";
@@ -505,18 +505,34 @@ export const Distribution = {
     return obj;
   },
   fromAmino(object: DistributionAmino): Distribution {
-    return {
-      count: BigInt(object.count),
-      mean: object.mean,
-      minimum: object.minimum,
-      maximum: object.maximum,
-      sumOfSquaredDeviation: object.sum_of_squared_deviation,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
-      linearBuckets: object?.linear_buckets ? Distribution_LinearBuckets.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: object?.exponential_buckets ? Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: object?.explicit_buckets ? Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets) : undefined,
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution();
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count);
+    }
+    if (object.mean !== undefined && object.mean !== null) {
+      message.mean = object.mean;
+    }
+    if (object.minimum !== undefined && object.minimum !== null) {
+      message.minimum = object.minimum;
+    }
+    if (object.maximum !== undefined && object.maximum !== null) {
+      message.maximum = object.maximum;
+    }
+    if (object.sum_of_squared_deviation !== undefined && object.sum_of_squared_deviation !== null) {
+      message.sumOfSquaredDeviation = object.sum_of_squared_deviation;
+    }
+    message.bucketCounts = object.bucket_counts?.map(e => BigInt(e)) || [];
+    if (object.linear_buckets !== undefined && object.linear_buckets !== null) {
+      message.linearBuckets = Distribution_LinearBuckets.fromAmino(object.linear_buckets);
+    }
+    if (object.exponential_buckets !== undefined && object.exponential_buckets !== null) {
+      message.exponentialBuckets = Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets);
+    }
+    if (object.explicit_buckets !== undefined && object.explicit_buckets !== null) {
+      message.explicitBuckets = Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets);
+    }
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
@@ -636,11 +652,17 @@ export const Distribution_LinearBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_LinearBucketsAmino): Distribution_LinearBuckets {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      width: object.width,
-      offset: object.offset
-    };
+    const message = createBaseDistribution_LinearBuckets();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.width !== undefined && object.width !== null) {
+      message.width = object.width;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    return message;
   },
   toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
@@ -745,11 +767,17 @@ export const Distribution_ExponentialBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_ExponentialBucketsAmino): Distribution_ExponentialBuckets {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      growthFactor: object.growth_factor,
-      scale: object.scale
-    };
+    const message = createBaseDistribution_ExponentialBuckets();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.growth_factor !== undefined && object.growth_factor !== null) {
+      message.growthFactor = object.growth_factor;
+    }
+    if (object.scale !== undefined && object.scale !== null) {
+      message.scale = object.scale;
+    }
+    return message;
   },
   toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
@@ -847,9 +875,9 @@ export const Distribution_ExplicitBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_ExplicitBucketsAmino): Distribution_ExplicitBuckets {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
+    const message = createBaseDistribution_ExplicitBuckets();
+    message.bounds = object.bounds?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsAmino {
     const obj: any = {};

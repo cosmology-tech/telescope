@@ -7,7 +7,7 @@ export const protobufPackage = "osmosis.superfluid.v1beta1";
  * assets
  */
 export interface SetSuperfluidAssetsProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   title: string;
   description: string;
   assets: SuperfluidAsset[];
@@ -21,20 +21,16 @@ export interface SetSuperfluidAssetsProposalProtoMsg {
  * assets
  */
 export interface SetSuperfluidAssetsProposalAmino {
-  title: string;
-  description: string;
-  assets: SuperfluidAssetAmino[];
-}
-export interface SetSuperfluidAssetsProposalAminoMsg {
-  type: "osmosis/v1beta1/set-superfluid-assets-proposal";
-  value: SetSuperfluidAssetsProposalAmino;
+  title?: string;
+  description?: string;
+  assets?: SuperfluidAssetAmino[];
 }
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
  * assets
  */
 export interface SetSuperfluidAssetsProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.SetSuperfluidAssetsProposal";
   title: string;
   description: string;
   assets: SuperfluidAssetSDKType[];
@@ -44,7 +40,7 @@ export interface SetSuperfluidAssetsProposalSDKType {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   title: string;
   description: string;
   superfluidAssetDenoms: string[];
@@ -58,20 +54,16 @@ export interface RemoveSuperfluidAssetsProposalProtoMsg {
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalAmino {
-  title: string;
-  description: string;
-  superfluid_asset_denoms: string[];
-}
-export interface RemoveSuperfluidAssetsProposalAminoMsg {
-  type: "osmosis/v1beta1/remove-superfluid-assets-proposal";
-  value: RemoveSuperfluidAssetsProposalAmino;
+  title?: string;
+  description?: string;
+  superfluid_asset_denoms?: string[];
 }
 /**
  * RemoveSuperfluidAssetsProposal is a gov Content type to remove the superfluid
  * assets by denom
  */
 export interface RemoveSuperfluidAssetsProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.RemoveSuperfluidAssetsProposal";
   title: string;
   description: string;
   superfluid_asset_denoms: string[];
@@ -81,7 +73,7 @@ export interface RemoveSuperfluidAssetsProposalSDKType {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposal {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
   title: string;
   description: string;
   ids: bigint[];
@@ -96,21 +88,17 @@ export interface UpdateUnpoolWhiteListProposalProtoMsg {
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposalAmino {
-  title: string;
-  description: string;
-  ids: string[];
-  is_overwrite: boolean;
-}
-export interface UpdateUnpoolWhiteListProposalAminoMsg {
-  type: "osmosis/v1beta1/update-unpool-white-list-proposal";
-  value: UpdateUnpoolWhiteListProposalAmino;
+  title?: string;
+  description?: string;
+  ids?: string[];
+  is_overwrite?: boolean;
 }
 /**
  * UpdateUnpoolWhiteListProposal is a gov Content type to update the
  * allowed list of pool ids.
  */
 export interface UpdateUnpoolWhiteListProposalSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/osmosis.superfluid.v1beta1.UpdateUnpoolWhiteListProposal";
   title: string;
   description: string;
   ids: bigint[];
@@ -139,7 +127,7 @@ export const SetSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SetSuperfluidAssetsProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SetSuperfluidAssetsProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSetSuperfluidAssetsProposal();
@@ -153,7 +141,7 @@ export const SetSuperfluidAssetsProposal = {
           message.description = reader.string();
           break;
         case 3:
-          message.assets.push(SuperfluidAsset.decode(reader, reader.uint32()));
+          message.assets.push(SuperfluidAsset.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -206,34 +194,29 @@ export const SetSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: SetSuperfluidAssetsProposalAmino): SetSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromAmino(e)) : []
-    };
+    const message = createBaseSetSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.assets = object.assets?.map(e => SuperfluidAsset.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAmino {
+  toAmino(message: SetSuperfluidAssetsProposal, useInterfaces: boolean = true): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
+      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.assets = [];
     }
     return obj;
   },
-  fromAminoMsg(object: SetSuperfluidAssetsProposalAminoMsg): SetSuperfluidAssetsProposal {
-    return SetSuperfluidAssetsProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/set-superfluid-assets-proposal",
-      value: SetSuperfluidAssetsProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg): SetSuperfluidAssetsProposal {
-    return SetSuperfluidAssetsProposal.decode(message.value);
+  fromProtoMsg(message: SetSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = true): SetSuperfluidAssetsProposal {
+    return SetSuperfluidAssetsProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SetSuperfluidAssetsProposal): Uint8Array {
     return SetSuperfluidAssetsProposal.encode(message).finish();
@@ -268,7 +251,7 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): RemoveSuperfluidAssetsProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRemoveSuperfluidAssetsProposal();
@@ -335,13 +318,17 @@ export const RemoveSuperfluidAssetsProposal = {
     return obj;
   },
   fromAmino(object: RemoveSuperfluidAssetsProposalAmino): RemoveSuperfluidAssetsProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      superfluidAssetDenoms: Array.isArray(object?.superfluid_asset_denoms) ? object.superfluid_asset_denoms.map((e: any) => e) : []
-    };
+    const message = createBaseRemoveSuperfluidAssetsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.superfluidAssetDenoms = object.superfluid_asset_denoms?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAmino {
+  toAmino(message: RemoveSuperfluidAssetsProposal, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -352,17 +339,8 @@ export const RemoveSuperfluidAssetsProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: RemoveSuperfluidAssetsProposalAminoMsg): RemoveSuperfluidAssetsProposal {
-    return RemoveSuperfluidAssetsProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/remove-superfluid-assets-proposal",
-      value: RemoveSuperfluidAssetsProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg): RemoveSuperfluidAssetsProposal {
-    return RemoveSuperfluidAssetsProposal.decode(message.value);
+  fromProtoMsg(message: RemoveSuperfluidAssetsProposalProtoMsg, useInterfaces: boolean = true): RemoveSuperfluidAssetsProposal {
+    return RemoveSuperfluidAssetsProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RemoveSuperfluidAssetsProposal): Uint8Array {
     return RemoveSuperfluidAssetsProposal.encode(message).finish();
@@ -403,7 +381,7 @@ export const UpdateUnpoolWhiteListProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateUnpoolWhiteListProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateUnpoolWhiteListProposal();
@@ -485,14 +463,20 @@ export const UpdateUnpoolWhiteListProposal = {
     return obj;
   },
   fromAmino(object: UpdateUnpoolWhiteListProposalAmino): UpdateUnpoolWhiteListProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => BigInt(e)) : [],
-      isOverwrite: object.is_overwrite
-    };
+    const message = createBaseUpdateUnpoolWhiteListProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.ids = object.ids?.map(e => BigInt(e)) || [];
+    if (object.is_overwrite !== undefined && object.is_overwrite !== null) {
+      message.isOverwrite = object.is_overwrite;
+    }
+    return message;
   },
-  toAmino(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAmino {
+  toAmino(message: UpdateUnpoolWhiteListProposal, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -504,17 +488,8 @@ export const UpdateUnpoolWhiteListProposal = {
     obj.is_overwrite = omitDefault(message.isOverwrite);
     return obj;
   },
-  fromAminoMsg(object: UpdateUnpoolWhiteListProposalAminoMsg): UpdateUnpoolWhiteListProposal {
-    return UpdateUnpoolWhiteListProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAminoMsg {
-    return {
-      type: "osmosis/v1beta1/update-unpool-white-list-proposal",
-      value: UpdateUnpoolWhiteListProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg): UpdateUnpoolWhiteListProposal {
-    return UpdateUnpoolWhiteListProposal.decode(message.value);
+  fromProtoMsg(message: UpdateUnpoolWhiteListProposalProtoMsg, useInterfaces: boolean = true): UpdateUnpoolWhiteListProposal {
+    return UpdateUnpoolWhiteListProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateUnpoolWhiteListProposal): Uint8Array {
     return UpdateUnpoolWhiteListProposal.encode(message).finish();

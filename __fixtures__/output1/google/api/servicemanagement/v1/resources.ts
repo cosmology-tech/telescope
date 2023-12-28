@@ -285,14 +285,14 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
-  start_time: Date;
+  start_time?: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -416,7 +416,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime: Date;
+  createTime?: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -445,7 +445,7 @@ export interface Rollout {
  */
 export interface RolloutSDKType {
   rollout_id: string;
-  create_time: Date;
+  create_time?: Date;
   created_by: string;
   status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
@@ -621,7 +621,7 @@ function createBaseOperationMetadata(): OperationMetadata {
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
-    startTime: new Date()
+    startTime: undefined
   };
 }
 export const OperationMetadata = {
@@ -1144,7 +1144,7 @@ export const ChangeReport = {
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
-    createTime: new Date(),
+    createTime: undefined,
     createdBy: "",
     status: 0,
     trafficPercentStrategy: undefined,

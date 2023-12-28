@@ -8,7 +8,11 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: Any;
+  evidence?: Any;
+}
+export interface MsgSubmitEvidenceProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
+  value: Uint8Array;
 }
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -16,12 +20,16 @@ export interface MsgSubmitEvidence {
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
-  evidence: AnySDKType;
+  evidence?: AnySDKType;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
   /** hash defines the hash of the evidence. */
   hash: Uint8Array;
+}
+export interface MsgSubmitEvidenceResponseProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidenceResponse";
+  value: Uint8Array;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -30,7 +38,7 @@ export interface MsgSubmitEvidenceResponseSDKType {
 function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   return {
     submitter: "",
-    evidence: Any.fromPartial({})
+    evidence: undefined
   };
 }
 export const MsgSubmitEvidence = {
@@ -101,10 +109,14 @@ export const MsgSubmitEvidence = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
-    return {
-      submitter: object.submitter,
-      evidence: object?.evidence ? Any.fromAmino(object.evidence) : undefined
-    };
+    const message = createBaseMsgSubmitEvidence();
+    if (object.submitter !== undefined && object.submitter !== null) {
+      message.submitter = object.submitter;
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromAmino(object.evidence);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
     const obj: any = {};
@@ -195,13 +207,15 @@ export const MsgSubmitEvidenceResponse = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
-    return {
-      hash: object.hash
-    };
+    const message = createBaseMsgSubmitEvidenceResponse();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {

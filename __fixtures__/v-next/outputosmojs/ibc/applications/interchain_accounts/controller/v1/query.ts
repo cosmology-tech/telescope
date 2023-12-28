@@ -7,6 +7,10 @@ export interface QueryInterchainAccountRequest {
   owner: string;
   connectionId: string;
 }
+export interface QueryInterchainAccountRequestProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.QueryInterchainAccountRequest";
+  value: Uint8Array;
+}
 /** QueryInterchainAccountRequest is the request type for the Query/InterchainAccount RPC method. */
 export interface QueryInterchainAccountRequestSDKType {
   owner: string;
@@ -16,22 +20,34 @@ export interface QueryInterchainAccountRequestSDKType {
 export interface QueryInterchainAccountResponse {
   address: string;
 }
+export interface QueryInterchainAccountResponseProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.QueryInterchainAccountResponse";
+  value: Uint8Array;
+}
 /** QueryInterchainAccountResponse the response type for the Query/InterchainAccount RPC method. */
 export interface QueryInterchainAccountResponseSDKType {
   address: string;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
-  params: Params;
+  params?: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.controller.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
-  params: ParamsSDKType;
+  params?: ParamsSDKType;
 }
 function createBaseQueryInterchainAccountRequest(): QueryInterchainAccountRequest {
   return {
@@ -107,10 +123,14 @@ export const QueryInterchainAccountRequest = {
     return obj;
   },
   fromAmino(object: QueryInterchainAccountRequestAmino): QueryInterchainAccountRequest {
-    return {
-      owner: object.owner,
-      connectionId: object.connection_id
-    };
+    const message = createBaseQueryInterchainAccountRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.connection_id !== undefined && object.connection_id !== null) {
+      message.connectionId = object.connection_id;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountRequest): QueryInterchainAccountRequestAmino {
     const obj: any = {};
@@ -201,9 +221,11 @@ export const QueryInterchainAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryInterchainAccountResponseAmino): QueryInterchainAccountResponse {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryInterchainAccountResponse();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryInterchainAccountResponse): QueryInterchainAccountResponseAmino {
     const obj: any = {};
@@ -276,7 +298,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -306,7 +329,7 @@ export const QueryParamsRequest = {
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
   return {
-    params: Params.fromPartial({})
+    params: undefined
   };
 }
 export const QueryParamsResponse = {
@@ -365,9 +388,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};

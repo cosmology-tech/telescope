@@ -59,7 +59,7 @@ export interface HttpRequest {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency: Duration;
+  latency?: Duration;
   /** Whether or not a cache lookup was attempted. */
   cacheLookup: boolean;
   /**
@@ -81,6 +81,10 @@ export interface HttpRequest {
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
 }
+export interface HttpRequestProtoMsg {
+  typeUrl: "/google.logging.type.HttpRequest";
+  value: Uint8Array;
+}
 /**
  * A common proto for logging HTTP requests. Only contains semantics
  * defined by the HTTP specification. Product-specific logging
@@ -96,7 +100,7 @@ export interface HttpRequestSDKType {
   remote_ip: string;
   server_ip: string;
   referer: string;
-  latency: DurationSDKType;
+  latency?: DurationSDKType;
   cache_lookup: boolean;
   cache_hit: boolean;
   cache_validated_with_origin_server: boolean;
@@ -114,7 +118,7 @@ function createBaseHttpRequest(): HttpRequest {
     remoteIp: "",
     serverIp: "",
     referer: "",
-    latency: Duration.fromPartial({}),
+    latency: undefined,
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,
@@ -125,49 +129,49 @@ function createBaseHttpRequest(): HttpRequest {
 export const HttpRequest = {
   typeUrl: "/google.logging.type.HttpRequest",
   encode(message: HttpRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestMethod !== "") {
+    if (message.requestMethod !== undefined) {
       writer.uint32(10).string(message.requestMethod);
     }
-    if (message.requestUrl !== "") {
+    if (message.requestUrl !== undefined) {
       writer.uint32(18).string(message.requestUrl);
     }
-    if (message.requestSize !== BigInt(0)) {
+    if (message.requestSize !== undefined) {
       writer.uint32(24).int64(message.requestSize);
     }
-    if (message.status !== 0) {
+    if (message.status !== undefined) {
       writer.uint32(32).int32(message.status);
     }
-    if (message.responseSize !== BigInt(0)) {
+    if (message.responseSize !== undefined) {
       writer.uint32(40).int64(message.responseSize);
     }
-    if (message.userAgent !== "") {
+    if (message.userAgent !== undefined) {
       writer.uint32(50).string(message.userAgent);
     }
-    if (message.remoteIp !== "") {
+    if (message.remoteIp !== undefined) {
       writer.uint32(58).string(message.remoteIp);
     }
-    if (message.serverIp !== "") {
+    if (message.serverIp !== undefined) {
       writer.uint32(106).string(message.serverIp);
     }
-    if (message.referer !== "") {
+    if (message.referer !== undefined) {
       writer.uint32(66).string(message.referer);
     }
     if (message.latency !== undefined) {
       Duration.encode(message.latency, writer.uint32(114).fork()).ldelim();
     }
-    if (message.cacheLookup === true) {
+    if (message.cacheLookup !== undefined) {
       writer.uint32(88).bool(message.cacheLookup);
     }
-    if (message.cacheHit === true) {
+    if (message.cacheHit !== undefined) {
       writer.uint32(72).bool(message.cacheHit);
     }
-    if (message.cacheValidatedWithOriginServer === true) {
+    if (message.cacheValidatedWithOriginServer !== undefined) {
       writer.uint32(80).bool(message.cacheValidatedWithOriginServer);
     }
-    if (message.cacheFillBytes !== BigInt(0)) {
+    if (message.cacheFillBytes !== undefined) {
       writer.uint32(96).int64(message.cacheFillBytes);
     }
-    if (message.protocol !== "") {
+    if (message.protocol !== undefined) {
       writer.uint32(122).string(message.protocol);
     }
     return writer;
@@ -354,23 +358,53 @@ export const HttpRequest = {
     return obj;
   },
   fromAmino(object: HttpRequestAmino): HttpRequest {
-    return {
-      requestMethod: object.request_method,
-      requestUrl: object.request_url,
-      requestSize: BigInt(object.request_size),
-      status: object.status,
-      responseSize: BigInt(object.response_size),
-      userAgent: object.user_agent,
-      remoteIp: object.remote_ip,
-      serverIp: object.server_ip,
-      referer: object.referer,
-      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
-      cacheLookup: object.cache_lookup,
-      cacheHit: object.cache_hit,
-      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
-      cacheFillBytes: BigInt(object.cache_fill_bytes),
-      protocol: object.protocol
-    };
+    const message = createBaseHttpRequest();
+    if (object.request_method !== undefined && object.request_method !== null) {
+      message.requestMethod = object.request_method;
+    }
+    if (object.request_url !== undefined && object.request_url !== null) {
+      message.requestUrl = object.request_url;
+    }
+    if (object.request_size !== undefined && object.request_size !== null) {
+      message.requestSize = BigInt(object.request_size);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.response_size !== undefined && object.response_size !== null) {
+      message.responseSize = BigInt(object.response_size);
+    }
+    if (object.user_agent !== undefined && object.user_agent !== null) {
+      message.userAgent = object.user_agent;
+    }
+    if (object.remote_ip !== undefined && object.remote_ip !== null) {
+      message.remoteIp = object.remote_ip;
+    }
+    if (object.server_ip !== undefined && object.server_ip !== null) {
+      message.serverIp = object.server_ip;
+    }
+    if (object.referer !== undefined && object.referer !== null) {
+      message.referer = object.referer;
+    }
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromAmino(object.latency);
+    }
+    if (object.cache_lookup !== undefined && object.cache_lookup !== null) {
+      message.cacheLookup = object.cache_lookup;
+    }
+    if (object.cache_hit !== undefined && object.cache_hit !== null) {
+      message.cacheHit = object.cache_hit;
+    }
+    if (object.cache_validated_with_origin_server !== undefined && object.cache_validated_with_origin_server !== null) {
+      message.cacheValidatedWithOriginServer = object.cache_validated_with_origin_server;
+    }
+    if (object.cache_fill_bytes !== undefined && object.cache_fill_bytes !== null) {
+      message.cacheFillBytes = BigInt(object.cache_fill_bytes);
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
   },
   toAmino(message: HttpRequest): HttpRequestAmino {
     const obj: any = {};

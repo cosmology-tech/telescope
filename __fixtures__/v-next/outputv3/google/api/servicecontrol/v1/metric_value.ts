@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -12,12 +12,8 @@ export interface MetricValue_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface MetricValue_LabelsEntryAmino {
-  key: string;
-  value: string;
-}
-export interface MetricValue_LabelsEntryAminoMsg {
-  type: string;
-  value: MetricValue_LabelsEntryAmino;
+  key?: string;
+  value?: string;
 }
 export interface MetricValue_LabelsEntrySDKType {
   key: string;
@@ -41,13 +37,13 @@ export interface MetricValue {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  startTime: Date;
+  startTime?: Date;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  endTime: Date;
+  endTime?: Date;
   /** A boolean value. */
   boolValue?: boolean;
   /** A signed 64-bit integer value. */
@@ -71,7 +67,7 @@ export interface MetricValueAmino {
    * the overriding relationship.
    * Note that this map must not contain monitored resource labels.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -81,13 +77,13 @@ export interface MetricValueAmino {
    * documentation in the service configuration for details. If not specified,
    * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
    */
-  start_time?: Date;
+  start_time?: string;
   /**
    * The end of the time period over which this metric value's measurement
    * applies.  If not specified,
    * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
    */
-  end_time?: Date;
+  end_time?: string;
   /** A boolean value. */
   bool_value?: boolean;
   /** A signed 64-bit integer value. */
@@ -99,17 +95,13 @@ export interface MetricValueAmino {
   /** A distribution value. */
   distribution_value?: DistributionAmino;
 }
-export interface MetricValueAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValue";
-  value: MetricValueAmino;
-}
 /** Represents a single metric value. */
 export interface MetricValueSDKType {
   labels: {
     [key: string]: string;
   };
-  start_time: Date;
-  end_time: Date;
+  start_time?: Date;
+  end_time?: Date;
   bool_value?: boolean;
   int64_value?: bigint;
   double_value?: number;
@@ -138,13 +130,9 @@ export interface MetricValueSetProtoMsg {
  */
 export interface MetricValueSetAmino {
   /** The metric name defined in the service configuration. */
-  metric_name: string;
+  metric_name?: string;
   /** The values in this metric. */
-  metric_values: MetricValueAmino[];
-}
-export interface MetricValueSetAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValueSet";
-  value: MetricValueSetAmino;
+  metric_values?: MetricValueAmino[];
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -171,7 +159,7 @@ export const MetricValue_LabelsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue_LabelsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValue_LabelsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue_LabelsEntry();
@@ -222,22 +210,23 @@ export const MetricValue_LabelsEntry = {
     return obj;
   },
   fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseMetricValue_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: MetricValue_LabelsEntry): MetricValue_LabelsEntryAmino {
+  toAmino(message: MetricValue_LabelsEntry, useInterfaces: boolean = true): MetricValue_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: MetricValue_LabelsEntryAminoMsg): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg): MetricValue_LabelsEntry {
-    return MetricValue_LabelsEntry.decode(message.value);
+  fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg, useInterfaces: boolean = true): MetricValue_LabelsEntry {
+    return MetricValue_LabelsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricValue_LabelsEntry): Uint8Array {
     return MetricValue_LabelsEntry.encode(message).finish();
@@ -246,8 +235,8 @@ export const MetricValue_LabelsEntry = {
 function createBaseMetricValue(): MetricValue {
   return {
     labels: {},
-    startTime: new Date(),
-    endTime: new Date(),
+    startTime: undefined,
+    endTime: undefined,
     boolValue: undefined,
     int64Value: undefined,
     doubleValue: undefined,
@@ -287,7 +276,7 @@ export const MetricValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValue();
@@ -319,7 +308,7 @@ export const MetricValue = {
           message.stringValue = reader.string();
           break;
         case 8:
-          message.distributionValue = Distribution.decode(reader, reader.uint32());
+          message.distributionValue = Distribution.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -356,7 +345,9 @@ export const MetricValue = {
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);
@@ -420,23 +411,39 @@ export const MetricValue = {
     return obj;
   },
   fromAmino(object: MetricValueAmino): MetricValue {
-    return {
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseMetricValue();
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      distributionValue: object?.distribution_value ? Distribution.fromAmino(object.distribution_value) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.int64_value !== undefined && object.int64_value !== null) {
+      message.int64Value = BigInt(object.int64_value);
+    }
+    if (object.double_value !== undefined && object.double_value !== null) {
+      message.doubleValue = object.double_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.distribution_value !== undefined && object.distribution_value !== null) {
+      message.distributionValue = Distribution.fromAmino(object.distribution_value);
+    }
+    return message;
   },
-  toAmino(message: MetricValue): MetricValueAmino {
+  toAmino(message: MetricValue, useInterfaces: boolean = true): MetricValueAmino {
     const obj: any = {};
     obj.labels = {};
     if (message.labels) {
@@ -444,20 +451,17 @@ export const MetricValue = {
         obj.labels[k] = v;
       });
     }
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
-    obj.bool_value = omitDefault(message.boolValue);
-    obj.int64_value = omitDefault(message.int64Value);
-    obj.double_value = omitDefault(message.doubleValue);
-    obj.string_value = omitDefault(message.stringValue);
-    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MetricValueAminoMsg): MetricValue {
-    return MetricValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValueProtoMsg): MetricValue {
-    return MetricValue.decode(message.value);
+  fromProtoMsg(message: MetricValueProtoMsg, useInterfaces: boolean = true): MetricValue {
+    return MetricValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricValue): Uint8Array {
     return MetricValue.encode(message).finish();
@@ -486,7 +490,7 @@ export const MetricValueSet = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MetricValueSet {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MetricValueSet {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMetricValueSet();
@@ -497,7 +501,7 @@ export const MetricValueSet = {
           message.metricName = reader.string();
           break;
         case 2:
-          message.metricValues.push(MetricValue.decode(reader, reader.uint32()));
+          message.metricValues.push(MetricValue.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -545,26 +549,25 @@ export const MetricValueSet = {
     return obj;
   },
   fromAmino(object: MetricValueSetAmino): MetricValueSet {
-    return {
-      metricName: object.metric_name,
-      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromAmino(e)) : []
-    };
+    const message = createBaseMetricValueSet();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    message.metricValues = object.metric_values?.map(e => MetricValue.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: MetricValueSet): MetricValueSetAmino {
+  toAmino(message: MetricValueSet, useInterfaces: boolean = true): MetricValueSetAmino {
     const obj: any = {};
-    obj.metric_name = omitDefault(message.metricName);
+    obj.metric_name = message.metricName;
     if (message.metricValues) {
-      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e) : undefined);
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.metric_values = [];
     }
     return obj;
   },
-  fromAminoMsg(object: MetricValueSetAminoMsg): MetricValueSet {
-    return MetricValueSet.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MetricValueSetProtoMsg): MetricValueSet {
-    return MetricValueSet.decode(message.value);
+  fromProtoMsg(message: MetricValueSetProtoMsg, useInterfaces: boolean = true): MetricValueSet {
+    return MetricValueSet.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MetricValueSet): Uint8Array {
     return MetricValueSet.encode(message).finish();

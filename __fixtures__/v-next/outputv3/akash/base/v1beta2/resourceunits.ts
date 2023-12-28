@@ -24,12 +24,8 @@ export interface ResourceUnitsProtoMsg {
 export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
-  storage: StorageAmino[];
-  endpoints: EndpointAmino[];
-}
-export interface ResourceUnitsAminoMsg {
-  type: "/akash.base.v1beta2.ResourceUnits";
-  value: ResourceUnitsAmino;
+  storage?: StorageAmino[];
+  endpoints?: EndpointAmino[];
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -66,7 +62,7 @@ export const ResourceUnits = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceUnits {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceUnits {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceUnits();
@@ -74,16 +70,16 @@ export const ResourceUnits = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.cpu = CPU.decode(reader, reader.uint32());
+          message.cpu = CPU.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.memory = Memory.decode(reader, reader.uint32());
+          message.memory = Memory.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.storage.push(Storage.decode(reader, reader.uint32()));
+          message.storage.push(Storage.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.endpoints.push(Endpoint.decode(reader, reader.uint32()));
+          message.endpoints.push(Endpoint.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -153,34 +149,35 @@ export const ResourceUnits = {
     return obj;
   },
   fromAmino(object: ResourceUnitsAmino): ResourceUnits {
-    return {
-      cpu: object?.cpu ? CPU.fromAmino(object.cpu) : undefined,
-      memory: object?.memory ? Memory.fromAmino(object.memory) : undefined,
-      storage: Array.isArray(object?.storage) ? object.storage.map((e: any) => Storage.fromAmino(e)) : [],
-      endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromAmino(e)) : []
-    };
+    const message = createBaseResourceUnits();
+    if (object.cpu !== undefined && object.cpu !== null) {
+      message.cpu = CPU.fromAmino(object.cpu);
+    }
+    if (object.memory !== undefined && object.memory !== null) {
+      message.memory = Memory.fromAmino(object.memory);
+    }
+    message.storage = object.storage?.map(e => Storage.fromAmino(e)) || [];
+    message.endpoints = object.endpoints?.map(e => Endpoint.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ResourceUnits): ResourceUnitsAmino {
+  toAmino(message: ResourceUnits, useInterfaces: boolean = true): ResourceUnitsAmino {
     const obj: any = {};
-    obj.cpu = message.cpu ? CPU.toAmino(message.cpu) : undefined;
-    obj.memory = message.memory ? Memory.toAmino(message.memory) : undefined;
+    obj.cpu = message.cpu ? CPU.toAmino(message.cpu, useInterfaces) : undefined;
+    obj.memory = message.memory ? Memory.toAmino(message.memory, useInterfaces) : undefined;
     if (message.storage) {
-      obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
+      obj.storage = message.storage.map(e => e ? Storage.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.storage = [];
     }
     if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
+      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.endpoints = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ResourceUnitsAminoMsg): ResourceUnits {
-    return ResourceUnits.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceUnitsProtoMsg): ResourceUnits {
-    return ResourceUnits.decode(message.value);
+  fromProtoMsg(message: ResourceUnitsProtoMsg, useInterfaces: boolean = true): ResourceUnits {
+    return ResourceUnits.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceUnits): Uint8Array {
     return ResourceUnits.encode(message).finish();

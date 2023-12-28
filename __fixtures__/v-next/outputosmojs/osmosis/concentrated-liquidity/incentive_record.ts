@@ -1,7 +1,7 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, padDecimal } from "../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -32,6 +32,10 @@ export interface IncentiveRecord {
    */
   minUptime: Duration;
 }
+export interface IncentiveRecordProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecord";
+  value: Uint8Array;
+}
 /**
  * IncentiveRecord is the high-level struct we use to deal with an independent
  * incentive being distributed on a pool. Note that PoolId, Denom, and MinUptime
@@ -56,6 +60,10 @@ export interface IncentiveRecordBody {
   emissionRate: string;
   /** start_time is the time when the incentive starts distributing */
   startTime: Date;
+}
+export interface IncentiveRecordBodyProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.v1beta1.IncentiveRecordBody";
+  value: Uint8Array;
 }
 /**
  * IncentiveRecordBody represents the body stored in state for each individual
@@ -179,19 +187,29 @@ export const IncentiveRecord = {
     return obj;
   },
   fromAmino(object: IncentiveRecordAmino): IncentiveRecord {
-    return {
-      poolId: BigInt(object.pool_id),
-      incentiveDenom: object.incentive_denom,
-      incentiveCreatorAddr: object.incentive_creator_addr,
-      incentiveRecordBody: object?.incentive_record_body ? IncentiveRecordBody.fromAmino(object.incentive_record_body) : undefined,
-      minUptime: object?.min_uptime ? Duration.fromAmino(object.min_uptime) : undefined
-    };
+    const message = createBaseIncentiveRecord();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.incentive_denom !== undefined && object.incentive_denom !== null) {
+      message.incentiveDenom = object.incentive_denom;
+    }
+    if (object.incentive_creator_addr !== undefined && object.incentive_creator_addr !== null) {
+      message.incentiveCreatorAddr = object.incentive_creator_addr;
+    }
+    if (object.incentive_record_body !== undefined && object.incentive_record_body !== null) {
+      message.incentiveRecordBody = IncentiveRecordBody.fromAmino(object.incentive_record_body);
+    }
+    if (object.min_uptime !== undefined && object.min_uptime !== null) {
+      message.minUptime = Duration.fromAmino(object.min_uptime);
+    }
+    return message;
   },
   toAmino(message: IncentiveRecord): IncentiveRecordAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.incentive_denom = omitDefault(message.incentiveDenom);
-    obj.incentive_creator_addr = omitDefault(message.incentiveCreatorAddr);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.incentive_denom = message.incentiveDenom;
+    obj.incentive_creator_addr = message.incentiveCreatorAddr;
     obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toAmino(message.incentiveRecordBody) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
@@ -305,17 +323,23 @@ export const IncentiveRecordBody = {
     return obj;
   },
   fromAmino(object: IncentiveRecordBodyAmino): IncentiveRecordBody {
-    return {
-      remainingAmount: object.remaining_amount,
-      emissionRate: object.emission_rate,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
-    };
+    const message = createBaseIncentiveRecordBody();
+    if (object.remaining_amount !== undefined && object.remaining_amount !== null) {
+      message.remainingAmount = object.remaining_amount;
+    }
+    if (object.emission_rate !== undefined && object.emission_rate !== null) {
+      message.emissionRate = object.emission_rate;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    return message;
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
     const obj: any = {};
-    obj.remaining_amount = padDecimal(message.remainingAmount);
-    obj.emission_rate = padDecimal(message.emissionRate);
-    obj.start_time = message.startTime;
+    obj.remaining_amount = message.remainingAmount;
+    obj.emission_rate = message.emissionRate;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: IncentiveRecordBodyAminoMsg): IncentiveRecordBody {

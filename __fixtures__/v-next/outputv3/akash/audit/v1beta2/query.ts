@@ -1,12 +1,12 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryProvidersResponseProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProvidersResponse";
@@ -14,17 +14,13 @@ export interface QueryProvidersResponseProtoMsg {
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
+  providers?: ProviderAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryProvidersResponseAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProvidersResponse";
-  value: QueryProvidersResponseAmino;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponseSDKType {
   providers: ProviderSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -37,12 +33,8 @@ export interface QueryProviderRequestProtoMsg {
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestAmino {
-  auditor: string;
-  owner: string;
-}
-export interface QueryProviderRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderRequest";
-  value: QueryProviderRequestAmino;
+  auditor?: string;
+  owner?: string;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequestSDKType {
@@ -51,7 +43,7 @@ export interface QueryProviderRequestSDKType {
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequest {
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAllProvidersAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
@@ -61,18 +53,14 @@ export interface QueryAllProvidersAttributesRequestProtoMsg {
 export interface QueryAllProvidersAttributesRequestAmino {
   pagination?: PageRequestAmino;
 }
-export interface QueryAllProvidersAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
-  value: QueryAllProvidersAttributesRequestAmino;
-}
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequest {
   owner: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryProviderAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
@@ -80,17 +68,13 @@ export interface QueryProviderAttributesRequestProtoMsg {
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequestAmino {
-  owner: string;
+  owner?: string;
   pagination?: PageRequestAmino;
-}
-export interface QueryProviderAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
-  value: QueryProviderAttributesRequestAmino;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequestSDKType {
   owner: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequest {
@@ -103,12 +87,8 @@ export interface QueryProviderAuditorRequestProtoMsg {
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestAmino {
-  auditor: string;
-  owner: string;
-}
-export interface QueryProviderAuditorRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderAuditorRequest";
-  value: QueryProviderAuditorRequestAmino;
+  auditor?: string;
+  owner?: string;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequestSDKType {
@@ -118,7 +98,7 @@ export interface QueryProviderAuditorRequestSDKType {
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequest {
   auditor: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAuditorAttributesRequestProtoMsg {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";
@@ -126,22 +106,18 @@ export interface QueryAuditorAttributesRequestProtoMsg {
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequestAmino {
-  auditor: string;
+  auditor?: string;
   pagination?: PageRequestAmino;
-}
-export interface QueryAuditorAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";
-  value: QueryAuditorAttributesRequestAmino;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequestSDKType {
   auditor: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
     providers: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProvidersResponse = {
@@ -155,7 +131,7 @@ export const QueryProvidersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProvidersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProvidersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProvidersResponse();
@@ -163,10 +139,10 @@ export const QueryProvidersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.providers.push(Provider.decode(reader, reader.uint32()));
+          message.providers.push(Provider.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -216,26 +192,25 @@ export const QueryProvidersResponse = {
     return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProvidersResponse();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryProvidersResponse): QueryProvidersResponseAmino {
+  toAmino(message: QueryProvidersResponse, useInterfaces: boolean = true): QueryProvidersResponseAmino {
     const obj: any = {};
     if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
+      obj.providers = message.providers.map(e => e ? Provider.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.providers = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
-    return QueryProvidersResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
-    return QueryProvidersResponse.decode(message.value);
+  fromProtoMsg(message: QueryProvidersResponseProtoMsg, useInterfaces: boolean = true): QueryProvidersResponse {
+    return QueryProvidersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProvidersResponse): Uint8Array {
     return QueryProvidersResponse.encode(message).finish();
@@ -264,7 +239,7 @@ export const QueryProviderRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProviderRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderRequest();
@@ -315,22 +290,23 @@ export const QueryProviderRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
-  toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
+  toAmino(message: QueryProviderRequest, useInterfaces: boolean = true): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
-    obj.owner = omitDefault(message.owner);
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
     return obj;
   },
-  fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
-    return QueryProviderRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
-    return QueryProviderRequest.decode(message.value);
+  fromProtoMsg(message: QueryProviderRequestProtoMsg, useInterfaces: boolean = true): QueryProviderRequest {
+    return QueryProviderRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProviderRequest): Uint8Array {
     return QueryProviderRequest.encode(message).finish();
@@ -344,7 +320,7 @@ export const QueryProviderRequest = {
 };
 function createBaseQueryAllProvidersAttributesRequest(): QueryAllProvidersAttributesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllProvidersAttributesRequest = {
@@ -355,7 +331,7 @@ export const QueryAllProvidersAttributesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllProvidersAttributesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllProvidersAttributesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllProvidersAttributesRequest();
@@ -363,7 +339,7 @@ export const QueryAllProvidersAttributesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -400,20 +376,19 @@ export const QueryAllProvidersAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllProvidersAttributesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAmino {
+  toAmino(message: QueryAllProvidersAttributesRequest, useInterfaces: boolean = true): QueryAllProvidersAttributesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAllProvidersAttributesRequestAminoMsg): QueryAllProvidersAttributesRequest {
-    return QueryAllProvidersAttributesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAllProvidersAttributesRequestProtoMsg): QueryAllProvidersAttributesRequest {
-    return QueryAllProvidersAttributesRequest.decode(message.value);
+  fromProtoMsg(message: QueryAllProvidersAttributesRequestProtoMsg, useInterfaces: boolean = true): QueryAllProvidersAttributesRequest {
+    return QueryAllProvidersAttributesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllProvidersAttributesRequest): Uint8Array {
     return QueryAllProvidersAttributesRequest.encode(message).finish();
@@ -428,7 +403,7 @@ export const QueryAllProvidersAttributesRequest = {
 function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequest {
   return {
     owner: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryProviderAttributesRequest = {
@@ -442,7 +417,7 @@ export const QueryProviderAttributesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderAttributesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProviderAttributesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderAttributesRequest();
@@ -453,7 +428,7 @@ export const QueryProviderAttributesRequest = {
           message.owner = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -495,22 +470,23 @@ export const QueryProviderAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
-    return {
-      owner: object.owner,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryProviderAttributesRequest();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
+  toAmino(message: QueryProviderAttributesRequest, useInterfaces: boolean = true): QueryProviderAttributesRequestAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.owner = message.owner;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryProviderAttributesRequestAminoMsg): QueryProviderAttributesRequest {
-    return QueryProviderAttributesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryProviderAttributesRequestProtoMsg): QueryProviderAttributesRequest {
-    return QueryProviderAttributesRequest.decode(message.value);
+  fromProtoMsg(message: QueryProviderAttributesRequestProtoMsg, useInterfaces: boolean = true): QueryProviderAttributesRequest {
+    return QueryProviderAttributesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProviderAttributesRequest): Uint8Array {
     return QueryProviderAttributesRequest.encode(message).finish();
@@ -539,7 +515,7 @@ export const QueryProviderAuditorRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryProviderAuditorRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryProviderAuditorRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryProviderAuditorRequest();
@@ -590,22 +566,23 @@ export const QueryProviderAuditorRequest = {
     return obj;
   },
   fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
-    return {
-      auditor: object.auditor,
-      owner: object.owner
-    };
+    const message = createBaseQueryProviderAuditorRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
-  toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
+  toAmino(message: QueryProviderAuditorRequest, useInterfaces: boolean = true): QueryProviderAuditorRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
-    obj.owner = omitDefault(message.owner);
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
     return obj;
   },
-  fromAminoMsg(object: QueryProviderAuditorRequestAminoMsg): QueryProviderAuditorRequest {
-    return QueryProviderAuditorRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryProviderAuditorRequestProtoMsg): QueryProviderAuditorRequest {
-    return QueryProviderAuditorRequest.decode(message.value);
+  fromProtoMsg(message: QueryProviderAuditorRequestProtoMsg, useInterfaces: boolean = true): QueryProviderAuditorRequest {
+    return QueryProviderAuditorRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryProviderAuditorRequest): Uint8Array {
     return QueryProviderAuditorRequest.encode(message).finish();
@@ -620,7 +597,7 @@ export const QueryProviderAuditorRequest = {
 function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesRequest {
   return {
     auditor: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAuditorAttributesRequest = {
@@ -634,7 +611,7 @@ export const QueryAuditorAttributesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAuditorAttributesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAuditorAttributesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAuditorAttributesRequest();
@@ -645,7 +622,7 @@ export const QueryAuditorAttributesRequest = {
           message.auditor = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -687,22 +664,23 @@ export const QueryAuditorAttributesRequest = {
     return obj;
   },
   fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
-    return {
-      auditor: object.auditor,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAuditorAttributesRequest();
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
+  toAmino(message: QueryAuditorAttributesRequest, useInterfaces: boolean = true): QueryAuditorAttributesRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.auditor = message.auditor;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAuditorAttributesRequestAminoMsg): QueryAuditorAttributesRequest {
-    return QueryAuditorAttributesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAuditorAttributesRequestProtoMsg): QueryAuditorAttributesRequest {
-    return QueryAuditorAttributesRequest.decode(message.value);
+  fromProtoMsg(message: QueryAuditorAttributesRequestProtoMsg, useInterfaces: boolean = true): QueryAuditorAttributesRequest {
+    return QueryAuditorAttributesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAuditorAttributesRequest): Uint8Array {
     return QueryAuditorAttributesRequest.encode(message).finish();

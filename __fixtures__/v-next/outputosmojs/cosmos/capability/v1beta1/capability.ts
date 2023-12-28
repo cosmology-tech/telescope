@@ -8,6 +8,10 @@ export const protobufPackage = "cosmos.capability.v1beta1";
 export interface Capability {
   index: bigint;
 }
+export interface CapabilityProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Capability";
+  value: Uint8Array;
+}
 /**
  * Capability defines an implementation of an object capability. The index
  * provided to a Capability must be globally unique.
@@ -23,6 +27,10 @@ export interface Owner {
   module: string;
   name: string;
 }
+export interface OwnerProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.Owner";
+  value: Uint8Array;
+}
 /**
  * Owner defines a single capability owner. An owner is defined by the name of
  * capability and the module name.
@@ -37,6 +45,10 @@ export interface OwnerSDKType {
  */
 export interface CapabilityOwners {
   owners: Owner[];
+}
+export interface CapabilityOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.CapabilityOwners";
+  value: Uint8Array;
 }
 /**
  * CapabilityOwners defines a set of owners of a single Capability. The set of
@@ -106,9 +118,11 @@ export const Capability = {
     return obj;
   },
   fromAmino(object: CapabilityAmino): Capability {
-    return {
-      index: BigInt(object.index)
-    };
+    const message = createBaseCapability();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    return message;
   },
   toAmino(message: Capability): CapabilityAmino {
     const obj: any = {};
@@ -211,10 +225,14 @@ export const Owner = {
     return obj;
   },
   fromAmino(object: OwnerAmino): Owner {
-    return {
-      module: object.module,
-      name: object.name
-    };
+    const message = createBaseOwner();
+    if (object.module !== undefined && object.module !== null) {
+      message.module = object.module;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: Owner): OwnerAmino {
     const obj: any = {};
@@ -313,9 +331,9 @@ export const CapabilityOwners = {
     return obj;
   },
   fromAmino(object: CapabilityOwnersAmino): CapabilityOwners {
-    return {
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromAmino(e)) : []
-    };
+    const message = createBaseCapabilityOwners();
+    message.owners = object.owners?.map(e => Owner.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CapabilityOwners): CapabilityOwnersAmino {
     const obj: any = {};

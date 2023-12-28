@@ -1,7 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
@@ -35,6 +35,10 @@ export interface Value {
   /** A Type value represented by the fully qualified name of the type. */
   typeValue?: string;
 }
+export interface ValueProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Value";
+  value: Uint8Array;
+}
 /**
  * Represents a CEL value.
  * 
@@ -62,6 +66,10 @@ export interface EnumValue {
   /** The value of the enum. */
   value: number;
 }
+export interface EnumValueProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.EnumValue";
+  value: Uint8Array;
+}
 /** An enum value. */
 export interface EnumValueSDKType {
   type: string;
@@ -76,6 +84,10 @@ export interface EnumValueSDKType {
 export interface ListValue {
   /** The ordered values in the list. */
   values: Value[];
+}
+export interface ListValueProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.ListValue";
+  value: Uint8Array;
 }
 /**
  * A list.
@@ -101,6 +113,10 @@ export interface MapValue {
    */
   entries: MapValue_Entry[];
 }
+export interface MapValueProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.MapValue";
+  value: Uint8Array;
+}
 /**
  * A map.
  * 
@@ -118,14 +134,18 @@ export interface MapValue_Entry {
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key: Value;
+  key?: Value;
   /** The value. */
-  value: Value;
+  value?: Value;
+}
+export interface MapValue_EntryProtoMsg {
+  typeUrl: "/google.api.expr.v1beta1.Entry";
+  value: Uint8Array;
 }
 /** An entry in the map. */
 export interface MapValue_EntrySDKType {
-  key: ValueSDKType;
-  value: ValueSDKType;
+  key?: ValueSDKType;
+  value?: ValueSDKType;
 }
 function createBaseValue(): Value {
   return {
@@ -254,8 +274,12 @@ export const Value = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    if (message.uint64Value !== undefined) {
+      obj.uint64Value = message.uint64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
@@ -331,35 +355,59 @@ export const Value = {
     return obj;
   },
   fromAmino(object: ValueAmino): Value {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      boolValue: object?.bool_value,
-      int64Value: object?.int64_value ? BigInt(object.int64_value) : undefined,
-      uint64Value: object?.uint64_value ? BigInt(object.uint64_value) : undefined,
-      doubleValue: object?.double_value,
-      stringValue: object?.string_value,
-      bytesValue: object?.bytes_value,
-      enumValue: object?.enum_value ? EnumValue.fromAmino(object.enum_value) : undefined,
-      objectValue: object?.object_value ? Any.fromAmino(object.object_value) : undefined,
-      mapValue: object?.map_value ? MapValue.fromAmino(object.map_value) : undefined,
-      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined,
-      typeValue: object?.type_value
-    };
+    const message = createBaseValue();
+    if (object.null_value !== undefined && object.null_value !== null) {
+      message.nullValue = nullValueFromJSON(object.null_value);
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.int64_value !== undefined && object.int64_value !== null) {
+      message.int64Value = BigInt(object.int64_value);
+    }
+    if (object.uint64_value !== undefined && object.uint64_value !== null) {
+      message.uint64Value = BigInt(object.uint64_value);
+    }
+    if (object.double_value !== undefined && object.double_value !== null) {
+      message.doubleValue = object.double_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.bytes_value !== undefined && object.bytes_value !== null) {
+      message.bytesValue = bytesFromBase64(object.bytes_value);
+    }
+    if (object.enum_value !== undefined && object.enum_value !== null) {
+      message.enumValue = EnumValue.fromAmino(object.enum_value);
+    }
+    if (object.object_value !== undefined && object.object_value !== null) {
+      message.objectValue = Any.fromAmino(object.object_value);
+    }
+    if (object.map_value !== undefined && object.map_value !== null) {
+      message.mapValue = MapValue.fromAmino(object.map_value);
+    }
+    if (object.list_value !== undefined && object.list_value !== null) {
+      message.listValue = ListValue.fromAmino(object.list_value);
+    }
+    if (object.type_value !== undefined && object.type_value !== null) {
+      message.typeValue = object.type_value;
+    }
+    return message;
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = omitDefault(message.nullValue);
-    obj.bool_value = omitDefault(message.boolValue);
-    obj.int64_value = omitDefault(message.int64Value);
-    obj.uint64_value = omitDefault(message.uint64Value);
-    obj.double_value = omitDefault(message.doubleValue);
-    obj.string_value = omitDefault(message.stringValue);
-    obj.bytes_value = message.bytesValue;
+    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue) : undefined;
     obj.object_value = message.objectValue ? Any.toAmino(message.objectValue) : undefined;
     obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
-    obj.type_value = omitDefault(message.typeValue);
+    obj.type_value = message.typeValue;
     return obj;
   },
   fromAminoMsg(object: ValueAminoMsg): Value {
@@ -452,15 +500,19 @@ export const EnumValue = {
     return obj;
   },
   fromAmino(object: EnumValueAmino): EnumValue {
-    return {
-      type: object.type,
-      value: object.value
-    };
+    const message = createBaseEnumValue();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: EnumValue): EnumValueAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
-    obj.value = omitDefault(message.value);
+    obj.type = message.type;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
@@ -548,9 +600,9 @@ export const ListValue = {
     return obj;
   },
   fromAmino(object: ListValueAmino): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
-    };
+    const message = createBaseListValue();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ListValue): ListValueAmino {
     const obj: any = {};
@@ -646,9 +698,9 @@ export const MapValue = {
     return obj;
   },
   fromAmino(object: MapValueAmino): MapValue {
-    return {
-      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromAmino(e)) : []
-    };
+    const message = createBaseMapValue();
+    message.entries = object.entries?.map(e => MapValue_Entry.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MapValue): MapValueAmino {
     const obj: any = {};
@@ -677,8 +729,8 @@ export const MapValue = {
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
-    key: Value.fromPartial({}),
-    value: Value.fromPartial({})
+    key: undefined,
+    value: undefined
   };
 }
 export const MapValue_Entry = {
@@ -749,10 +801,14 @@ export const MapValue_Entry = {
     return obj;
   },
   fromAmino(object: MapValue_EntryAmino): MapValue_Entry {
-    return {
-      key: object?.key ? Value.fromAmino(object.key) : undefined,
-      value: object?.value ? Value.fromAmino(object.value) : undefined
-    };
+    const message = createBaseMapValue_Entry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromAmino(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: MapValue_Entry): MapValue_EntryAmino {
     const obj: any = {};

@@ -13,12 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
-  accounts: AccountAmino[];
-  payments: PaymentAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.escrow.v1beta1.GenesisState";
-  value: GenesisStateAmino;
+  accounts?: AccountAmino[];
+  payments?: PaymentAmino[];
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
@@ -42,7 +38,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -50,10 +46,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push(Account.decode(reader, reader.uint32()));
+          message.accounts.push(Account.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.payments.push(Payment.decode(reader, reader.uint32()));
+          message.payments.push(Payment.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -109,30 +105,27 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.accounts = object.accounts?.map(e => Account.fromAmino(e)) || [];
+    message.payments = object.payments?.map(e => Payment.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.accounts = [];
     }
     if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toAmino(e) : undefined);
+      obj.payments = message.payments.map(e => e ? Payment.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.payments = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

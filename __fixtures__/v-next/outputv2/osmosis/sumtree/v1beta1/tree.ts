@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
   children: Child[];
@@ -9,7 +9,7 @@ export interface NodeProtoMsg {
   value: Uint8Array;
 }
 export interface NodeAmino {
-  children: ChildAmino[];
+  children?: ChildAmino[];
 }
 export interface NodeAminoMsg {
   type: "osmosis/store/node";
@@ -27,8 +27,8 @@ export interface ChildProtoMsg {
   value: Uint8Array;
 }
 export interface ChildAmino {
-  index: Uint8Array;
-  accumulation: string;
+  index?: string;
+  accumulation?: string;
 }
 export interface ChildAminoMsg {
   type: "osmosis/store/child";
@@ -39,7 +39,7 @@ export interface ChildSDKType {
   accumulation: string;
 }
 export interface Leaf {
-  leaf: Child;
+  leaf?: Child;
 }
 export interface LeafProtoMsg {
   typeUrl: "/osmosis.store.v1beta1.Leaf";
@@ -53,7 +53,7 @@ export interface LeafAminoMsg {
   value: LeafAmino;
 }
 export interface LeafSDKType {
-  leaf: ChildSDKType;
+  leaf?: ChildSDKType;
 }
 function createBaseNode(): Node {
   return {
@@ -120,9 +120,9 @@ export const Node = {
     return obj;
   },
   fromAmino(object: NodeAmino): Node {
-    return {
-      children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromAmino(e)) : []
-    };
+    const message = createBaseNode();
+    message.children = object.children?.map(e => Child.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Node): NodeAmino {
     const obj: any = {};
@@ -224,15 +224,19 @@ export const Child = {
     return obj;
   },
   fromAmino(object: ChildAmino): Child {
-    return {
-      index: object.index,
-      accumulation: object.accumulation
-    };
+    const message = createBaseChild();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = bytesFromBase64(object.index);
+    }
+    if (object.accumulation !== undefined && object.accumulation !== null) {
+      message.accumulation = object.accumulation;
+    }
+    return message;
   },
   toAmino(message: Child): ChildAmino {
     const obj: any = {};
-    obj.index = message.index;
-    obj.accumulation = omitDefault(message.accumulation);
+    obj.index = message.index ? base64FromBytes(message.index) : undefined;
+    obj.accumulation = message.accumulation;
     return obj;
   },
   fromAminoMsg(object: ChildAminoMsg): Child {
@@ -259,7 +263,7 @@ export const Child = {
 };
 function createBaseLeaf(): Leaf {
   return {
-    leaf: Child.fromPartial({})
+    leaf: undefined
   };
 }
 export const Leaf = {
@@ -316,9 +320,11 @@ export const Leaf = {
     return obj;
   },
   fromAmino(object: LeafAmino): Leaf {
-    return {
-      leaf: object?.leaf ? Child.fromAmino(object.leaf) : undefined
-    };
+    const message = createBaseLeaf();
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromAmino(object.leaf);
+    }
+    return message;
   },
   toAmino(message: Leaf): LeafAmino {
     const obj: any = {};

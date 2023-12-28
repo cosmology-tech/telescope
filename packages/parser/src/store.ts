@@ -173,7 +173,7 @@ export class ProtoStore implements IProtoStore {
         // LONGEST strings first, for better matching
         this.packages = this.packages.sort((a, b) => {
             return b.length - a.length;
-        })
+        }).filter(Boolean);
         return this.packages;
     }
 
@@ -215,6 +215,14 @@ export class ProtoStore implements IProtoStore {
         let resolver = new ProtoResolver(this.getDeps());
 
         this.protos = this.getProtos().map((ref: ProtoRef) => {
+            const isHardExcluded = this.options?.prototypes?.excluded?.hardProtos && isRefExcluded(ref, {
+              protos: this.options?.prototypes?.excluded?.hardProtos
+            })
+
+            if(isHardExcluded){
+              return null;
+            }
+
             if (!actualFiles.has(ref.filename)) {
                 // get included imported files
                 const isIncluded = isRefIncluded(ref, this.options.prototypes.includes)
@@ -235,7 +243,7 @@ export class ProtoStore implements IProtoStore {
                 proto: ref.proto,
                 traversed: traverse(this, ref)
             };
-        });
+        }).filter(Boolean);
         this._symbols = parseFullyTraversedProtoImports(this);
 
         // process import names

@@ -13,6 +13,10 @@ export interface MsgSoftwareUpgrade {
   /** plan is the upgrade plan. */
   plan: Plan;
 }
+export interface MsgSoftwareUpgradeProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade";
+  value: Uint8Array;
+}
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  * 
@@ -28,6 +32,10 @@ export interface MsgSoftwareUpgradeSDKType {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgSoftwareUpgradeResponse {}
+export interface MsgSoftwareUpgradeResponseProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse";
+  value: Uint8Array;
+}
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
  * 
@@ -43,6 +51,10 @@ export interface MsgCancelUpgrade {
   /** authority is the address of the governance account. */
   authority: string;
 }
+export interface MsgCancelUpgradeProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade";
+  value: Uint8Array;
+}
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
  * 
@@ -57,6 +69,10 @@ export interface MsgCancelUpgradeSDKType {
  * Since: cosmos-sdk 0.46
  */
 export interface MsgCancelUpgradeResponse {}
+export interface MsgCancelUpgradeResponseProtoMsg {
+  typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse";
+  value: Uint8Array;
+}
 /**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
  * 
@@ -137,10 +153,14 @@ export const MsgSoftwareUpgrade = {
     return obj;
   },
   fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
-    return {
-      authority: object.authority,
-      plan: object?.plan ? Plan.fromAmino(object.plan) : undefined
-    };
+    const message = createBaseMsgSoftwareUpgrade();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromAmino(object.plan);
+    }
+    return message;
   },
   toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAmino {
     const obj: any = {};
@@ -214,7 +234,8 @@ export const MsgSoftwareUpgradeResponse = {
     return obj;
   },
   fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
-    return {};
+    const message = createBaseMsgSoftwareUpgradeResponse();
+    return message;
   },
   toAmino(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseAmino {
     const obj: any = {};
@@ -303,9 +324,11 @@ export const MsgCancelUpgrade = {
     return obj;
   },
   fromAmino(object: MsgCancelUpgradeAmino): MsgCancelUpgrade {
-    return {
-      authority: object.authority
-    };
+    const message = createBaseMsgCancelUpgrade();
+    if (object.authority !== undefined && object.authority !== null) {
+      message.authority = object.authority;
+    }
+    return message;
   },
   toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeAmino {
     const obj: any = {};
@@ -378,7 +401,8 @@ export const MsgCancelUpgradeResponse = {
     return obj;
   },
   fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {
-    return {};
+    const message = createBaseMsgCancelUpgradeResponse();
+    return message;
   },
   toAmino(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseAmino {
     const obj: any = {};

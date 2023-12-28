@@ -90,18 +90,14 @@ export interface LoggingAmino {
    * different monitored resource type. A log can be used in at most
    * one producer destination.
    */
-  producer_destinations: Logging_LoggingDestinationAmino[];
+  producer_destinations?: Logging_LoggingDestinationAmino[];
   /**
    * Logging configurations for sending logs to the consumer project.
    * There can be multiple consumer destinations, each one must have a
    * different monitored resource type. A log can be used in at most
    * one consumer destination.
    */
-  consumer_destinations: Logging_LoggingDestinationAmino[];
-}
-export interface LoggingAminoMsg {
-  type: "/google.api.Logging";
-  value: LoggingAmino;
+  consumer_destinations?: Logging_LoggingDestinationAmino[];
 }
 /**
  * Logging configuration of the service.
@@ -169,18 +165,14 @@ export interface Logging_LoggingDestinationAmino {
    * The monitored resource type. The type must be defined in the
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Names of the logs to be sent to this destination. Each name must
    * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
    * not a domain scoped name, it will be automatically prefixed with
    * the service name followed by "/".
    */
-  logs: string[];
-}
-export interface Logging_LoggingDestinationAminoMsg {
-  type: "/google.api.LoggingDestination";
-  value: Logging_LoggingDestinationAmino;
+  logs?: string[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -207,7 +199,7 @@ export const Logging = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Logging {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging();
@@ -215,10 +207,10 @@ export const Logging = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.producerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32()));
+          message.producerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.consumerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32()));
+          message.consumerDestinations.push(Logging_LoggingDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -274,30 +266,27 @@ export const Logging = {
     return obj;
   },
   fromAmino(object: LoggingAmino): Logging {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseLogging();
+    message.producerDestinations = object.producer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Logging_LoggingDestination.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Logging): LoggingAmino {
+  toAmino(message: Logging, useInterfaces: boolean = true): LoggingAmino {
     const obj: any = {};
     if (message.producerDestinations) {
-      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.producer_destinations = [];
     }
     if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e) : undefined);
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.consumer_destinations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: LoggingAminoMsg): Logging {
-    return Logging.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LoggingProtoMsg): Logging {
-    return Logging.decode(message.value);
+  fromProtoMsg(message: LoggingProtoMsg, useInterfaces: boolean = true): Logging {
+    return Logging.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging): Uint8Array {
     return Logging.encode(message).finish();
@@ -326,7 +315,7 @@ export const Logging_LoggingDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Logging_LoggingDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Logging_LoggingDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogging_LoggingDestination();
@@ -385,12 +374,14 @@ export const Logging_LoggingDestination = {
     return obj;
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
-    };
+    const message = createBaseLogging_LoggingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.logs = object.logs?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: Logging_LoggingDestination): Logging_LoggingDestinationAmino {
+  toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = true): Logging_LoggingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = omitDefault(message.monitoredResource);
     if (message.logs) {
@@ -400,11 +391,8 @@ export const Logging_LoggingDestination = {
     }
     return obj;
   },
-  fromAminoMsg(object: Logging_LoggingDestinationAminoMsg): Logging_LoggingDestination {
-    return Logging_LoggingDestination.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg): Logging_LoggingDestination {
-    return Logging_LoggingDestination.decode(message.value);
+  fromProtoMsg(message: Logging_LoggingDestinationProtoMsg, useInterfaces: boolean = true): Logging_LoggingDestination {
+    return Logging_LoggingDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Logging_LoggingDestination): Uint8Array {
     return Logging_LoggingDestination.encode(message).finish();

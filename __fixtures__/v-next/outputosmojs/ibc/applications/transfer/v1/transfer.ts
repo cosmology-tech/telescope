@@ -14,6 +14,10 @@ export interface DenomTrace {
   /** base denomination of the relayed fungible token. */
   baseDenom: string;
 }
+export interface DenomTraceProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.DenomTrace";
+  value: Uint8Array;
+}
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
@@ -39,6 +43,10 @@ export interface Params {
    * chain.
    */
   receiveEnabled: boolean;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.Params";
+  value: Uint8Array;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -124,10 +132,14 @@ export const DenomTrace = {
     return obj;
   },
   fromAmino(object: DenomTraceAmino): DenomTrace {
-    return {
-      path: object.path,
-      baseDenom: object.base_denom
-    };
+    const message = createBaseDenomTrace();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = object.path;
+    }
+    if (object.base_denom !== undefined && object.base_denom !== null) {
+      message.baseDenom = object.base_denom;
+    }
+    return message;
   },
   toAmino(message: DenomTrace): DenomTraceAmino {
     const obj: any = {};
@@ -231,10 +243,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      sendEnabled: object.send_enabled,
-      receiveEnabled: object.receive_enabled
-    };
+    const message = createBaseParams();
+    if (object.send_enabled !== undefined && object.send_enabled !== null) {
+      message.sendEnabled = object.send_enabled;
+    }
+    if (object.receive_enabled !== undefined && object.receive_enabled !== null) {
+      message.receiveEnabled = object.receive_enabled;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

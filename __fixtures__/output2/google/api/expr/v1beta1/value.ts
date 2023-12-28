@@ -77,9 +77,9 @@ export interface MapValue_Entry {
    * Must be unique with in the map.
    * Currently only boolean, int, uint, and string values can be keys.
    */
-  key: Value;
+  key?: Value;
   /** The value. */
-  value: Value;
+  value?: Value;
 }
 function createBaseValue(): Value {
   return {
@@ -207,8 +207,12 @@ export const Value = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    if (message.uint64Value !== undefined) {
+      obj.uint64Value = message.uint64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
@@ -391,8 +395,8 @@ export const MapValue = {
 };
 function createBaseMapValue_Entry(): MapValue_Entry {
   return {
-    key: Value.fromPartial({}),
-    value: Value.fromPartial({})
+    key: undefined,
+    value: undefined
   };
 }
 export const MapValue_Entry = {

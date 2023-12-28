@@ -6,6 +6,10 @@ export const protobufPackage = "akash.provider.v1beta2";
 export interface GenesisState {
   providers: Provider[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.provider.v1beta2.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateSDKType {
   providers: ProviderSDKType[];
@@ -79,9 +83,9 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.providers = object.providers?.map(e => Provider.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

@@ -7,6 +7,10 @@ export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Params";
+  value: Uint8Array;
+}
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
   bid_min_deposit: CoinSDKType;
@@ -86,10 +90,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      bidMinDeposit: object?.bid_min_deposit ? Coin.fromAmino(object.bid_min_deposit) : undefined,
-      orderMaxBids: object.order_max_bids
-    };
+    const message = createBaseParams();
+    if (object.bid_min_deposit !== undefined && object.bid_min_deposit !== null) {
+      message.bidMinDeposit = Coin.fromAmino(object.bid_min_deposit);
+    }
+    if (object.order_max_bids !== undefined && object.order_max_bids !== null) {
+      message.orderMaxBids = object.order_max_bids;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

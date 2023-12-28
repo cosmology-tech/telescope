@@ -6,9 +6,6 @@ coverage
 packages/**/build
 packages/**/main
 packages/**/module
-/.idea/inspectionProfiles/Project_Default.xml
-/.idea/.gitignore
-/.idea/misc.xml
-/.idea/modules.xml
-/.idea/telescope.iml
-/.idea/vcs.xml
+launch.json
+.vscode/settings.json
+.idea/

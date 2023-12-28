@@ -5,7 +5,7 @@ import { Timestamp } from "../../protobuf/timestamp";
 import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "../type/http_request";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -16,8 +16,8 @@ export interface LogEntry_LabelsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface LogEntry_LabelsEntryAmino {
-  key: string;
-  value: string;
+  key?: string;
+  value?: string;
 }
 export interface LogEntry_LabelsEntryAminoMsg {
   type: string;
@@ -62,7 +62,7 @@ export interface LogEntry {
    * the monitored resource designating the particular database that reported
    * the error.
    */
-  resource: MonitoredResource;
+  resource?: MonitoredResource;
   /**
    * The log entry payload, represented as a protocol buffer. Some Google
    * Cloud Platform services use this field for their log entry payloads.
@@ -94,9 +94,9 @@ export interface LogEntry {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
-  timestamp: Date;
+  timestamp?: Date;
   /** Output only. The time the log entry was received by Logging. */
-  receiveTimestamp: Date;
+  receiveTimestamp?: Date;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
   severity: LogSeverity;
   /**
@@ -117,7 +117,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
    */
-  httpRequest: HttpRequest;
+  httpRequest?: HttpRequest;
   /**
    * Optional. A map of key, value pairs that provides additional information about the
    * log entry. The labels can be user-defined or system-defined.
@@ -141,7 +141,7 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperation;
+  operation?: LogEntryOperation;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any. If it
    * contains a relative resource name, the name is assumed to be relative to
@@ -168,12 +168,12 @@ export interface LogEntry {
    */
   traceSampled: boolean;
   /** Optional. Source code location information associated with the log entry, if any. */
-  sourceLocation: LogEntrySourceLocation;
+  sourceLocation?: LogEntrySourceLocation;
   /**
    * Optional. Information indicating this LogEntry is part of a sequence of multiple log
    * entries split from a single LogEntry.
    */
-  split: LogSplit;
+  split?: LogSplit;
 }
 export interface LogEntryProtoMsg {
   typeUrl: "/google.logging.v2.LogEntry";
@@ -206,7 +206,7 @@ export interface LogEntryAmino {
    * slash and filtering for a log name with a leading slash will never return
    * any results.
    */
-  log_name: string;
+  log_name?: string;
   /**
    * Required. The monitored resource that produced this log entry.
    * 
@@ -246,11 +246,11 @@ export interface LogEntryAmino {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
-  timestamp?: Date;
+  timestamp?: string;
   /** Output only. The time the log entry was received by Logging. */
-  receive_timestamp?: Date;
+  receive_timestamp?: string;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
-  severity: LogSeverity;
+  severity?: LogSeverity;
   /**
    * Optional. A unique identifier for the log entry. If you provide a value, then
    * Logging considers other log entries in the same project, with the same
@@ -264,7 +264,7 @@ export interface LogEntryAmino {
    * In queries, the `insert_id` is also used to order log entries that have
    * the same `log_name` and `timestamp` values.
    */
-  insert_id: string;
+  insert_id?: string;
   /**
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
@@ -286,7 +286,7 @@ export interface LogEntryAmino {
    * written. The truncation is indicated by an ellipsis at the
    * end of the character string.
    */
-  labels: {
+  labels?: {
     [key: string]: string;
   };
   /**
@@ -300,7 +300,7 @@ export interface LogEntryAmino {
    * `//tracing.googleapis.com`. Example:
    * `projects/my-projectid/traces/06796866738c859f2f19b7cfb3214824`
    */
-  trace: string;
+  trace?: string;
   /**
    * Optional. The span ID within the trace associated with the log entry.
    * 
@@ -308,7 +308,7 @@ export interface LogEntryAmino {
    * 16-character hexadecimal encoding of an 8-byte array, such as
    * `000000000000004a`.
    */
-  span_id: string;
+  span_id?: string;
   /**
    * Optional. The sampling decision of the trace associated with the log entry.
    * 
@@ -318,7 +318,7 @@ export interface LogEntryAmino {
    * unknown at the time. A non-sampled `trace` value is still useful as a
    * request correlation identifier. The default is False.
    */
-  trace_sampled: boolean;
+  trace_sampled?: boolean;
   /** Optional. Source code location information associated with the log entry, if any. */
   source_location?: LogEntrySourceLocationAmino;
   /**
@@ -334,24 +334,24 @@ export interface LogEntryAminoMsg {
 /** An individual entry in a log. */
 export interface LogEntrySDKType {
   log_name: string;
-  resource: MonitoredResourceSDKType;
+  resource?: MonitoredResourceSDKType;
   proto_payload?: AnySDKType;
   text_payload?: string;
   json_payload?: StructSDKType;
-  timestamp: Date;
-  receive_timestamp: Date;
+  timestamp?: Date;
+  receive_timestamp?: Date;
   severity: LogSeverity;
   insert_id: string;
-  http_request: HttpRequestSDKType;
+  http_request?: HttpRequestSDKType;
   labels: {
     [key: string]: string;
   };
-  operation: LogEntryOperationSDKType;
+  operation?: LogEntryOperationSDKType;
   trace: string;
   span_id: string;
   trace_sampled: boolean;
-  source_location: LogEntrySourceLocationSDKType;
-  split: LogSplitSDKType;
+  source_location?: LogEntrySourceLocationSDKType;
+  split?: LogSplitSDKType;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -387,17 +387,17 @@ export interface LogEntryOperationAmino {
    * Optional. An arbitrary operation identifier. Log entries with the same
    * identifier are assumed to be part of the same operation.
    */
-  id: string;
+  id?: string;
   /**
    * Optional. An arbitrary producer identifier. The combination of `id` and
    * `producer` must be globally unique. Examples for `producer`:
    * `"MyDivision.MyBigCompany.com"`, `"github.com/MyProject/MyApplication"`.
    */
-  producer: string;
+  producer?: string;
   /** Optional. Set this to True if this is the first log entry in the operation. */
-  first: boolean;
+  first?: boolean;
   /** Optional. Set this to True if this is the last log entry in the operation. */
-  last: boolean;
+  last?: boolean;
 }
 export interface LogEntryOperationAminoMsg {
   type: "/google.logging.v2.LogEntryOperation";
@@ -451,12 +451,12 @@ export interface LogEntrySourceLocationAmino {
    * Optional. Source file name. Depending on the runtime environment, this
    * might be a simple name or a fully-qualified name.
    */
-  file: string;
+  file?: string;
   /**
    * Optional. Line within the source file. 1-based; 0 indicates no line number
    * available.
    */
-  line: string;
+  line?: string;
   /**
    * Optional. Human-readable name of the function or method being invoked, with
    * optional context such as the class or package name. This information may be
@@ -465,7 +465,7 @@ export interface LogEntrySourceLocationAmino {
    * `qual.if.ied.Class.method` (Java), `dir/package.func` (Go), `function`
    * (Python).
    */
-  function: string;
+  function?: string;
 }
 export interface LogEntrySourceLocationAminoMsg {
   type: "/google.logging.v2.LogEntrySourceLocation";
@@ -516,15 +516,15 @@ export interface LogSplitAmino {
    * entries. All log entries with the same |LogSplit.uid| are assumed to be
    * part of the same sequence of split log entries.
    */
-  uid: string;
+  uid?: string;
   /**
    * The index of this LogEntry in the sequence of split log entries. Log
    * entries are given |index| values 0, 1, ..., n-1 for a sequence of n log
    * entries.
    */
-  index: number;
+  index?: number;
   /** The total number of log entries that the original LogEntry was split into. */
-  total_splits: number;
+  total_splits?: number;
 }
 export interface LogSplitAminoMsg {
   type: "/google.logging.v2.LogSplit";
@@ -607,15 +607,19 @@ export const LogEntry_LabelsEntry = {
     return obj;
   },
   fromAmino(object: LogEntry_LabelsEntryAmino): LogEntry_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseLogEntry_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: LogEntry_LabelsEntry): LogEntry_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: LogEntry_LabelsEntryAminoMsg): LogEntry_LabelsEntry {
@@ -631,22 +635,22 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
-    resource: MonitoredResource.fromPartial({}),
+    resource: undefined,
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
-    timestamp: new Date(),
-    receiveTimestamp: new Date(),
+    timestamp: undefined,
+    receiveTimestamp: undefined,
     severity: 0,
     insertId: "",
-    httpRequest: HttpRequest.fromPartial({}),
+    httpRequest: undefined,
     labels: {},
-    operation: LogEntryOperation.fromPartial({}),
+    operation: undefined,
     trace: "",
     spanId: "",
     traceSampled: false,
-    sourceLocation: LogEntrySourceLocation.fromPartial({}),
-    split: LogSplit.fromPartial({})
+    sourceLocation: undefined,
+    split: undefined
   };
 }
 export const LogEntry = {
@@ -923,42 +927,76 @@ export const LogEntry = {
     return obj;
   },
   fromAmino(object: LogEntryAmino): LogEntry {
-    return {
-      logName: object.log_name,
-      resource: object?.resource ? MonitoredResource.fromAmino(object.resource) : undefined,
-      protoPayload: object?.proto_payload ? Any.fromAmino(object.proto_payload) : undefined,
-      textPayload: object?.text_payload,
-      jsonPayload: object?.json_payload ? Struct.fromAmino(object.json_payload) : undefined,
-      timestamp: object?.timestamp ? Timestamp.fromAmino(object.timestamp) : undefined,
-      receiveTimestamp: object?.receive_timestamp ? Timestamp.fromAmino(object.receive_timestamp) : undefined,
-      severity: isSet(object.severity) ? logSeverityFromJSON(object.severity) : -1,
-      insertId: object.insert_id,
-      httpRequest: object?.http_request ? HttpRequest.fromAmino(object.http_request) : undefined,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseLogEntry();
+    if (object.log_name !== undefined && object.log_name !== null) {
+      message.logName = object.log_name;
+    }
+    if (object.resource !== undefined && object.resource !== null) {
+      message.resource = MonitoredResource.fromAmino(object.resource);
+    }
+    if (object.proto_payload !== undefined && object.proto_payload !== null) {
+      message.protoPayload = Any.fromAmino(object.proto_payload);
+    }
+    if (object.text_payload !== undefined && object.text_payload !== null) {
+      message.textPayload = object.text_payload;
+    }
+    if (object.json_payload !== undefined && object.json_payload !== null) {
+      message.jsonPayload = Struct.fromAmino(object.json_payload);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    if (object.receive_timestamp !== undefined && object.receive_timestamp !== null) {
+      message.receiveTimestamp = fromTimestamp(Timestamp.fromAmino(object.receive_timestamp));
+    }
+    if (object.severity !== undefined && object.severity !== null) {
+      message.severity = logSeverityFromJSON(object.severity);
+    }
+    if (object.insert_id !== undefined && object.insert_id !== null) {
+      message.insertId = object.insert_id;
+    }
+    if (object.http_request !== undefined && object.http_request !== null) {
+      message.httpRequest = HttpRequest.fromAmino(object.http_request);
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      operation: object?.operation ? LogEntryOperation.fromAmino(object.operation) : undefined,
-      trace: object.trace,
-      spanId: object.span_id,
-      traceSampled: object.trace_sampled,
-      sourceLocation: object?.source_location ? LogEntrySourceLocation.fromAmino(object.source_location) : undefined,
-      split: object?.split ? LogSplit.fromAmino(object.split) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.operation !== undefined && object.operation !== null) {
+      message.operation = LogEntryOperation.fromAmino(object.operation);
+    }
+    if (object.trace !== undefined && object.trace !== null) {
+      message.trace = object.trace;
+    }
+    if (object.span_id !== undefined && object.span_id !== null) {
+      message.spanId = object.span_id;
+    }
+    if (object.trace_sampled !== undefined && object.trace_sampled !== null) {
+      message.traceSampled = object.trace_sampled;
+    }
+    if (object.source_location !== undefined && object.source_location !== null) {
+      message.sourceLocation = LogEntrySourceLocation.fromAmino(object.source_location);
+    }
+    if (object.split !== undefined && object.split !== null) {
+      message.split = LogSplit.fromAmino(object.split);
+    }
+    return message;
   },
   toAmino(message: LogEntry): LogEntryAmino {
     const obj: any = {};
-    obj.log_name = omitDefault(message.logName);
+    obj.log_name = message.logName;
     obj.resource = message.resource ? MonitoredResource.toAmino(message.resource) : undefined;
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload) : undefined;
-    obj.text_payload = omitDefault(message.textPayload);
+    obj.text_payload = message.textPayload;
     obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload) : undefined;
-    obj.timestamp = message.timestamp;
-    obj.receive_timestamp = message.receiveTimestamp;
-    obj.severity = omitDefault(message.severity);
-    obj.insert_id = omitDefault(message.insertId);
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
+    obj.severity = logSeverityToJSON(message.severity);
+    obj.insert_id = message.insertId;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.labels = {};
     if (message.labels) {
@@ -967,9 +1005,9 @@ export const LogEntry = {
       });
     }
     obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation) : undefined;
-    obj.trace = omitDefault(message.trace);
-    obj.span_id = omitDefault(message.spanId);
-    obj.trace_sampled = omitDefault(message.traceSampled);
+    obj.trace = message.trace;
+    obj.span_id = message.spanId;
+    obj.trace_sampled = message.traceSampled;
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation) : undefined;
     obj.split = message.split ? LogSplit.toAmino(message.split) : undefined;
     return obj;
@@ -1082,19 +1120,27 @@ export const LogEntryOperation = {
     return obj;
   },
   fromAmino(object: LogEntryOperationAmino): LogEntryOperation {
-    return {
-      id: object.id,
-      producer: object.producer,
-      first: object.first,
-      last: object.last
-    };
+    const message = createBaseLogEntryOperation();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.producer !== undefined && object.producer !== null) {
+      message.producer = object.producer;
+    }
+    if (object.first !== undefined && object.first !== null) {
+      message.first = object.first;
+    }
+    if (object.last !== undefined && object.last !== null) {
+      message.last = object.last;
+    }
+    return message;
   },
   toAmino(message: LogEntryOperation): LogEntryOperationAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.producer = omitDefault(message.producer);
-    obj.first = omitDefault(message.first);
-    obj.last = omitDefault(message.last);
+    obj.id = message.id;
+    obj.producer = message.producer;
+    obj.first = message.first;
+    obj.last = message.last;
     return obj;
   },
   fromAminoMsg(object: LogEntryOperationAminoMsg): LogEntryOperation {
@@ -1195,17 +1241,23 @@ export const LogEntrySourceLocation = {
     return obj;
   },
   fromAmino(object: LogEntrySourceLocationAmino): LogEntrySourceLocation {
-    return {
-      file: object.file,
-      line: BigInt(object.line),
-      function: object.function
-    };
+    const message = createBaseLogEntrySourceLocation();
+    if (object.file !== undefined && object.file !== null) {
+      message.file = object.file;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = BigInt(object.line);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = object.function;
+    }
+    return message;
   },
   toAmino(message: LogEntrySourceLocation): LogEntrySourceLocationAmino {
     const obj: any = {};
-    obj.file = omitDefault(message.file);
-    obj.line = omitDefault(message.line);
-    obj.function = omitDefault(message.function);
+    obj.file = message.file;
+    obj.line = message.line ? message.line.toString() : undefined;
+    obj.function = message.function;
     return obj;
   },
   fromAminoMsg(object: LogEntrySourceLocationAminoMsg): LogEntrySourceLocation {
@@ -1304,17 +1356,23 @@ export const LogSplit = {
     return obj;
   },
   fromAmino(object: LogSplitAmino): LogSplit {
-    return {
-      uid: object.uid,
-      index: object.index,
-      totalSplits: object.total_splits
-    };
+    const message = createBaseLogSplit();
+    if (object.uid !== undefined && object.uid !== null) {
+      message.uid = object.uid;
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = object.index;
+    }
+    if (object.total_splits !== undefined && object.total_splits !== null) {
+      message.totalSplits = object.total_splits;
+    }
+    return message;
   },
   toAmino(message: LogSplit): LogSplitAmino {
     const obj: any = {};
-    obj.uid = omitDefault(message.uid);
-    obj.index = omitDefault(message.index);
-    obj.total_splits = omitDefault(message.totalSplits);
+    obj.uid = message.uid;
+    obj.index = message.index;
+    obj.total_splits = message.totalSplits;
     return obj;
   },
   fromAminoMsg(object: LogSplitAminoMsg): LogSplit {

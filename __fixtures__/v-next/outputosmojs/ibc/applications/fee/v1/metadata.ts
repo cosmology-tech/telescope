@@ -11,6 +11,10 @@ export interface Metadata {
   /** app_version defines the underlying application version, which may or may not be a JSON encoded bytestring */
   appVersion: string;
 }
+export interface MetadataProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.Metadata";
+  value: Uint8Array;
+}
 /**
  * Metadata defines the ICS29 channel specific metadata encoded into the channel version bytestring
  * See ICS004: https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#Versioning
@@ -93,10 +97,14 @@ export const Metadata = {
     return obj;
   },
   fromAmino(object: MetadataAmino): Metadata {
-    return {
-      feeVersion: object.fee_version,
-      appVersion: object.app_version
-    };
+    const message = createBaseMetadata();
+    if (object.fee_version !== undefined && object.fee_version !== null) {
+      message.feeVersion = object.fee_version;
+    }
+    if (object.app_version !== undefined && object.app_version !== null) {
+      message.appVersion = object.app_version;
+    }
+    return message;
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};

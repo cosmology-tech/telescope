@@ -22,13 +22,13 @@ const options: TelescopeOptions = {
         enabled: false
     },
     interfaces: {
-      enabled: false,
-      useUnionTypes: false
+        enabled: false,
+        useUnionTypes: false
     },
     prototypes: {
         includePackageVar: true,
-        addTypeUrlToObjects: false,
         addTypeUrlToDecoders: false,
+        addTypeUrlToObjects: false,
         excluded: {
             protos: [
                 'cosmos/authz/v1beta1/event.proto',

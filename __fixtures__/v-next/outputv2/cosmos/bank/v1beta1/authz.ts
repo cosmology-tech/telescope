@@ -9,7 +9,7 @@ export const protobufPackage = "cosmos.bank.v1beta1";
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorization {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spendLimit: Coin[];
 }
 export interface SendAuthorizationProtoMsg {
@@ -23,7 +23,7 @@ export interface SendAuthorizationProtoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationAmino {
-  spend_limit: CoinAmino[];
+  spend_limit?: CoinAmino[];
 }
 export interface SendAuthorizationAminoMsg {
   type: "cosmos-sdk/SendAuthorization";
@@ -36,7 +36,7 @@ export interface SendAuthorizationAminoMsg {
  * Since: cosmos-sdk 0.43
  */
 export interface SendAuthorizationSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/cosmos.bank.v1beta1.SendAuthorization";
   spend_limit: CoinSDKType[];
 }
 function createBaseSendAuthorization(): SendAuthorization {
@@ -105,9 +105,9 @@ export const SendAuthorization = {
     return obj;
   },
   fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SendAuthorization): SendAuthorizationAmino {
     const obj: any = {};

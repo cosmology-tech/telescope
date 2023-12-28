@@ -38,19 +38,21 @@ const options: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
+        useUseInterfacesParams: true,
         useUnionTypes: true
     },
     aminoEncoding: {
         enabled: true,
-        useLegacyInlineEncoding: false
+        useLegacyInlineEncoding: false,
+        disableMsgTypes: true
     },
     prototypes: {
         enabled: true,
         parser: {
             keepCase: false
         },
+
         addAminoTypeToObjects: true,
-        addTypeUrlToObjects: true,
 
         methods: {
             encode: true,

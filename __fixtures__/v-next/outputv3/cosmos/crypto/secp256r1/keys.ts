@@ -19,11 +19,7 @@ export interface PubKeyAmino {
    * Point on secp256r1 curve in a compressed representation as specified in section
    * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
    */
-  key: Uint8Array;
-}
-export interface PubKeyAminoMsg {
-  type: "cosmos-sdk/PubKey";
-  value: PubKeyAmino;
+  key?: string;
 }
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKeySDKType {
@@ -41,11 +37,7 @@ export interface PrivKeyProtoMsg {
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeyAmino {
   /** secret number serialized using big-endian encoding */
-  secret: Uint8Array;
-}
-export interface PrivKeyAminoMsg {
-  type: "cosmos-sdk/PrivKey";
-  value: PrivKeyAmino;
+  secret?: string;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKeySDKType {
@@ -65,7 +57,7 @@ export const PubKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PubKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PubKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePubKey();
@@ -108,26 +100,19 @@ export const PubKey = {
     return obj;
   },
   fromAmino(object: PubKeyAmino): PubKey {
-    return {
-      key: object.key
-    };
+    const message = createBasePubKey();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    return message;
   },
-  toAmino(message: PubKey): PubKeyAmino {
+  toAmino(message: PubKey, useInterfaces: boolean = true): PubKeyAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PubKeyAminoMsg): PubKey {
-    return PubKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PubKey): PubKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PubKey",
-      value: PubKey.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PubKeyProtoMsg): PubKey {
-    return PubKey.decode(message.value);
+  fromProtoMsg(message: PubKeyProtoMsg, useInterfaces: boolean = true): PubKey {
+    return PubKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PubKey): Uint8Array {
     return PubKey.encode(message).finish();
@@ -153,7 +138,7 @@ export const PrivKey = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PrivKey {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PrivKey {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePrivKey();
@@ -196,26 +181,19 @@ export const PrivKey = {
     return obj;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
-    return {
-      secret: object.secret
-    };
+    const message = createBasePrivKey();
+    if (object.secret !== undefined && object.secret !== null) {
+      message.secret = bytesFromBase64(object.secret);
+    }
+    return message;
   },
-  toAmino(message: PrivKey): PrivKeyAmino {
+  toAmino(message: PrivKey, useInterfaces: boolean = true): PrivKeyAmino {
     const obj: any = {};
-    obj.secret = message.secret;
+    obj.secret = message.secret ? base64FromBytes(message.secret) : undefined;
     return obj;
   },
-  fromAminoMsg(object: PrivKeyAminoMsg): PrivKey {
-    return PrivKey.fromAmino(object.value);
-  },
-  toAminoMsg(message: PrivKey): PrivKeyAminoMsg {
-    return {
-      type: "cosmos-sdk/PrivKey",
-      value: PrivKey.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PrivKeyProtoMsg): PrivKey {
-    return PrivKey.decode(message.value);
+  fromProtoMsg(message: PrivKeyProtoMsg, useInterfaces: boolean = true): PrivKey {
+    return PrivKey.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PrivKey): Uint8Array {
     return PrivKey.encode(message).finish();

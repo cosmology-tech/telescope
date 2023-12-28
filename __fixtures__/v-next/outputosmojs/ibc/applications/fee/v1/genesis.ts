@@ -15,6 +15,10 @@ export interface GenesisState {
   /** list of forward relayer addresses */
   forwardRelayers: ForwardRelayerAddress[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ICS29 fee middleware genesis state */
 export interface GenesisStateSDKType {
   identified_fees: IdentifiedPacketFeesSDKType[];
@@ -30,6 +34,10 @@ export interface FeeEnabledChannel {
   /** unique channel identifier */
   channelId: string;
 }
+export interface FeeEnabledChannelProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.FeeEnabledChannel";
+  value: Uint8Array;
+}
 /** FeeEnabledChannel contains the PortID & ChannelID for a fee enabled channel */
 export interface FeeEnabledChannelSDKType {
   port_id: string;
@@ -43,6 +51,10 @@ export interface RegisteredPayee {
   relayer: string;
   /** the payee address */
   payee: string;
+}
+export interface RegisteredPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.RegisteredPayee";
+  value: Uint8Array;
 }
 /** RegisteredPayee contains the relayer address and payee address for a specific channel */
 export interface RegisteredPayeeSDKType {
@@ -62,6 +74,10 @@ export interface RegisteredCounterpartyPayee {
   /** the counterparty payee address */
   counterpartyPayee: string;
 }
+export interface RegisteredCounterpartyPayeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.RegisteredCounterpartyPayee";
+  value: Uint8Array;
+}
 /**
  * RegisteredCounterpartyPayee contains the relayer address and counterparty payee address for a specific channel (used
  * for recv fee distribution)
@@ -75,6 +91,10 @@ export interface RegisteredCounterpartyPayeeSDKType {
 export interface ForwardRelayerAddress {
   /** the forward relayer address */
   address: string;
+}
+export interface ForwardRelayerAddressProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.ForwardRelayerAddress";
+  value: Uint8Array;
 }
 /** ForwardRelayerAddress contains the forward relayer address and PacketId used for async acknowledgements */
 export interface ForwardRelayerAddressSDKType {
@@ -233,13 +253,13 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      identifiedFees: Array.isArray(object?.identified_fees) ? object.identified_fees.map((e: any) => IdentifiedPacketFees.fromAmino(e)) : [],
-      feeEnabledChannels: Array.isArray(object?.fee_enabled_channels) ? object.fee_enabled_channels.map((e: any) => FeeEnabledChannel.fromAmino(e)) : [],
-      registeredPayees: Array.isArray(object?.registered_payees) ? object.registered_payees.map((e: any) => RegisteredPayee.fromAmino(e)) : [],
-      registeredCounterpartyPayees: Array.isArray(object?.registered_counterparty_payees) ? object.registered_counterparty_payees.map((e: any) => RegisteredCounterpartyPayee.fromAmino(e)) : [],
-      forwardRelayers: Array.isArray(object?.forward_relayers) ? object.forward_relayers.map((e: any) => ForwardRelayerAddress.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.identifiedFees = object.identified_fees?.map(e => IdentifiedPacketFees.fromAmino(e)) || [];
+    message.feeEnabledChannels = object.fee_enabled_channels?.map(e => FeeEnabledChannel.fromAmino(e)) || [];
+    message.registeredPayees = object.registered_payees?.map(e => RegisteredPayee.fromAmino(e)) || [];
+    message.registeredCounterpartyPayees = object.registered_counterparty_payees?.map(e => RegisteredCounterpartyPayee.fromAmino(e)) || [];
+    message.forwardRelayers = object.forward_relayers?.map(e => ForwardRelayerAddress.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -366,10 +386,14 @@ export const FeeEnabledChannel = {
     return obj;
   },
   fromAmino(object: FeeEnabledChannelAmino): FeeEnabledChannel {
-    return {
-      portId: object.port_id,
-      channelId: object.channel_id
-    };
+    const message = createBaseFeeEnabledChannel();
+    if (object.port_id !== undefined && object.port_id !== null) {
+      message.portId = object.port_id;
+    }
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    return message;
   },
   toAmino(message: FeeEnabledChannel): FeeEnabledChannelAmino {
     const obj: any = {};
@@ -486,11 +510,17 @@ export const RegisteredPayee = {
     return obj;
   },
   fromAmino(object: RegisteredPayeeAmino): RegisteredPayee {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      payee: object.payee
-    };
+    const message = createBaseRegisteredPayee();
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    if (object.payee !== undefined && object.payee !== null) {
+      message.payee = object.payee;
+    }
+    return message;
   },
   toAmino(message: RegisteredPayee): RegisteredPayeeAmino {
     const obj: any = {};
@@ -608,11 +638,17 @@ export const RegisteredCounterpartyPayee = {
     return obj;
   },
   fromAmino(object: RegisteredCounterpartyPayeeAmino): RegisteredCounterpartyPayee {
-    return {
-      channelId: object.channel_id,
-      relayer: object.relayer,
-      counterpartyPayee: object.counterparty_payee
-    };
+    const message = createBaseRegisteredCounterpartyPayee();
+    if (object.channel_id !== undefined && object.channel_id !== null) {
+      message.channelId = object.channel_id;
+    }
+    if (object.relayer !== undefined && object.relayer !== null) {
+      message.relayer = object.relayer;
+    }
+    if (object.counterparty_payee !== undefined && object.counterparty_payee !== null) {
+      message.counterpartyPayee = object.counterparty_payee;
+    }
+    return message;
   },
   toAmino(message: RegisteredCounterpartyPayee): RegisteredCounterpartyPayeeAmino {
     const obj: any = {};
@@ -704,9 +740,11 @@ export const ForwardRelayerAddress = {
     return obj;
   },
   fromAmino(object: ForwardRelayerAddressAmino): ForwardRelayerAddress {
-    return {
-      address: object.address
-    };
+    const message = createBaseForwardRelayerAddress();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: ForwardRelayerAddress): ForwardRelayerAddressAmino {
     const obj: any = {};

@@ -1,6 +1,6 @@
 import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
@@ -28,11 +28,7 @@ export interface GenesisStateAmino {
    * reduction_started_epoch is the first epoch in which the reduction of mint
    * begins.
    */
-  reduction_started_epoch: string;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/mint/genesis-state";
-  value: GenesisStateAmino;
+  reduction_started_epoch?: string;
 }
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
@@ -62,7 +58,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -70,10 +66,10 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minter = Minter.decode(reader, reader.uint32());
+          message.minter = Minter.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.reductionStartedEpoch = reader.int64();
@@ -127,30 +123,27 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      reductionStartedEpoch: BigInt(object.reduction_started_epoch)
-    };
+    const message = createBaseGenesisState();
+    if (object.minter !== undefined && object.minter !== null) {
+      message.minter = Minter.fromAmino(object.minter);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.reduction_started_epoch !== undefined && object.reduction_started_epoch !== null) {
+      message.reductionStartedEpoch = BigInt(object.reduction_started_epoch);
+    }
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.reduction_started_epoch = omitDefault(message.reductionStartedEpoch);
+    obj.minter = message.minter ? Minter.toAmino(message.minter, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.reduction_started_epoch = message.reductionStartedEpoch ? message.reductionStartedEpoch.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/mint/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

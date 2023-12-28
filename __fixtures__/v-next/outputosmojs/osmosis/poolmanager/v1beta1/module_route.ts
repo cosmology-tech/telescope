@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** PoolType is an enumeration of all supported pool types. */
 export enum PoolType {
@@ -69,6 +69,10 @@ export interface ModuleRoute {
   poolType: PoolType;
   poolId?: bigint;
 }
+export interface ModuleRouteProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ModuleRoute";
+  value: Uint8Array;
+}
 /**
  * ModuleRouter defines a route encapsulating pool type.
  * It is used as the value of a mapping from pool id to the pool type,
@@ -125,7 +129,9 @@ export const ModuleRoute = {
   toJSON(message: ModuleRoute): unknown {
     const obj: any = {};
     message.poolType !== undefined && (obj.poolType = poolTypeToJSON(message.poolType));
-    message.poolId !== undefined && (obj.poolId = (message.poolId || undefined).toString());
+    if (message.poolId !== undefined) {
+      obj.poolId = message.poolId.toString();
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleRoute>): ModuleRoute {
@@ -153,15 +159,19 @@ export const ModuleRoute = {
     return obj;
   },
   fromAmino(object: ModuleRouteAmino): ModuleRoute {
-    return {
-      poolType: isSet(object.pool_type) ? poolTypeFromJSON(object.pool_type) : -1,
-      poolId: object?.pool_id ? BigInt(object.pool_id) : undefined
-    };
+    const message = createBaseModuleRoute();
+    if (object.pool_type !== undefined && object.pool_type !== null) {
+      message.poolType = poolTypeFromJSON(object.pool_type);
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: ModuleRoute): ModuleRouteAmino {
     const obj: any = {};
-    obj.pool_type = omitDefault(message.poolType);
-    obj.pool_id = omitDefault(message.poolId);
+    obj.pool_type = poolTypeToJSON(message.poolType);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleRouteAminoMsg): ModuleRoute {

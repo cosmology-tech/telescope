@@ -11,6 +11,10 @@ export const protobufPackage = "cosmos.bank.v1beta1";
 export interface SendAuthorization {
   spendLimit: Coin[];
 }
+export interface SendAuthorizationProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendAuthorization";
+  value: Uint8Array;
+}
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
  * the granter's account.
@@ -89,9 +93,9 @@ export const SendAuthorization = {
     return obj;
   },
   fromAmino(object: SendAuthorizationAmino): SendAuthorization {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: SendAuthorization): SendAuthorizationAmino {
     const obj: any = {};

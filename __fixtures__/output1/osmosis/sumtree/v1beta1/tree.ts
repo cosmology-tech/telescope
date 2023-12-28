@@ -16,10 +16,10 @@ export interface ChildSDKType {
   accumulation: string;
 }
 export interface Leaf {
-  leaf: Child;
+  leaf?: Child;
 }
 export interface LeafSDKType {
-  leaf: ChildSDKType;
+  leaf?: ChildSDKType;
 }
 function createBaseNode(): Node {
   return {
@@ -153,7 +153,7 @@ export const Child = {
 };
 function createBaseLeaf(): Leaf {
   return {
-    leaf: Child.fromPartial({})
+    leaf: undefined
   };
 }
 export const Leaf = {

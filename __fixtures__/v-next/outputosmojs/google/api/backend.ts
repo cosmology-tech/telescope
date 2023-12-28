@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Path Translation specifies how to combine the backend address with the
@@ -102,6 +102,10 @@ export interface Backend {
    */
   rules: BackendRule[];
 }
+export interface BackendProtoMsg {
+  typeUrl: "/google.api.Backend";
+  value: Uint8Array;
+}
 /** `Backend` defines the backend configuration for a service. */
 export interface BackendSDKType {
   rules: BackendRuleSDKType[];
@@ -191,6 +195,10 @@ export interface BackendRule {
    */
   protocol: string;
 }
+export interface BackendRuleProtoMsg {
+  typeUrl: "/google.api.BackendRule";
+  value: Uint8Array;
+}
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRuleSDKType {
   selector: string;
@@ -272,9 +280,9 @@ export const Backend = {
     return obj;
   },
   fromAmino(object: BackendAmino): Backend {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromAmino(e)) : []
-    };
+    const message = createBaseBackend();
+    message.rules = object.rules?.map(e => BackendRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Backend): BackendAmino {
     const obj: any = {};
@@ -466,29 +474,47 @@ export const BackendRule = {
     return obj;
   },
   fromAmino(object: BackendRuleAmino): BackendRule {
-    return {
-      selector: object.selector,
-      address: object.address,
-      deadline: object.deadline,
-      minDeadline: object.min_deadline,
-      operationDeadline: object.operation_deadline,
-      pathTranslation: isSet(object.path_translation) ? backendRule_PathTranslationFromJSON(object.path_translation) : -1,
-      jwtAudience: object?.jwt_audience,
-      disableAuth: object?.disable_auth,
-      protocol: object.protocol
-    };
+    const message = createBaseBackendRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.deadline !== undefined && object.deadline !== null) {
+      message.deadline = object.deadline;
+    }
+    if (object.min_deadline !== undefined && object.min_deadline !== null) {
+      message.minDeadline = object.min_deadline;
+    }
+    if (object.operation_deadline !== undefined && object.operation_deadline !== null) {
+      message.operationDeadline = object.operation_deadline;
+    }
+    if (object.path_translation !== undefined && object.path_translation !== null) {
+      message.pathTranslation = backendRule_PathTranslationFromJSON(object.path_translation);
+    }
+    if (object.jwt_audience !== undefined && object.jwt_audience !== null) {
+      message.jwtAudience = object.jwt_audience;
+    }
+    if (object.disable_auth !== undefined && object.disable_auth !== null) {
+      message.disableAuth = object.disable_auth;
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
   },
   toAmino(message: BackendRule): BackendRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.address = omitDefault(message.address);
-    obj.deadline = omitDefault(message.deadline);
-    obj.min_deadline = omitDefault(message.minDeadline);
-    obj.operation_deadline = omitDefault(message.operationDeadline);
-    obj.path_translation = omitDefault(message.pathTranslation);
-    obj.jwt_audience = omitDefault(message.jwtAudience);
-    obj.disable_auth = omitDefault(message.disableAuth);
-    obj.protocol = omitDefault(message.protocol);
+    obj.selector = message.selector;
+    obj.address = message.address;
+    obj.deadline = message.deadline;
+    obj.min_deadline = message.minDeadline;
+    obj.operation_deadline = message.operationDeadline;
+    obj.path_translation = backendRule_PathTranslationToJSON(message.pathTranslation);
+    obj.jwt_audience = message.jwtAudience;
+    obj.disable_auth = message.disableAuth;
+    obj.protocol = message.protocol;
     return obj;
   },
   fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {

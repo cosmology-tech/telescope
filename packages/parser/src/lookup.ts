@@ -206,6 +206,12 @@ export const lookup = (
     allowNested = true
 ) => {
     const root = getRoot(ref);
+
+    if(!root.package) {
+      console.warn(`There's no package definition in ${ref.filename}`)
+      return
+    }
+
     const nested = getNestedProto(root);
     return recursiveLookup(nested, name, [root.package], allowNested);
 };

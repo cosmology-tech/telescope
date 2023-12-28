@@ -4,6 +4,10 @@ import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../h
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -11,12 +15,20 @@ export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
 }
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
+}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
 }
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequest {}
+export interface QueryInflationRequestProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryInflationRequest";
+  value: Uint8Array;
+}
 /** QueryInflationRequest is the request type for the Query/Inflation RPC method. */
 export interface QueryInflationRequestSDKType {}
 /**
@@ -26,6 +38,10 @@ export interface QueryInflationRequestSDKType {}
 export interface QueryInflationResponse {
   /** inflation is the current minting inflation value. */
   inflation: Uint8Array;
+}
+export interface QueryInflationResponseProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryInflationResponse";
+  value: Uint8Array;
 }
 /**
  * QueryInflationResponse is the response type for the Query/Inflation RPC
@@ -39,6 +55,10 @@ export interface QueryInflationResponseSDKType {
  * Query/AnnualProvisions RPC method.
  */
 export interface QueryAnnualProvisionsRequest {}
+export interface QueryAnnualProvisionsRequestProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryAnnualProvisionsRequest is the request type for the
  * Query/AnnualProvisions RPC method.
@@ -51,6 +71,10 @@ export interface QueryAnnualProvisionsRequestSDKType {}
 export interface QueryAnnualProvisionsResponse {
   /** annual_provisions is the current minting annual provisions value. */
   annualProvisions: Uint8Array;
+}
+export interface QueryAnnualProvisionsResponseProtoMsg {
+  typeUrl: "/cosmos.mint.v1beta1.QueryAnnualProvisionsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryAnnualProvisionsResponse is the response type for the
@@ -103,7 +127,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -192,9 +217,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -267,7 +294,8 @@ export const QueryInflationRequest = {
     return obj;
   },
   fromAmino(_: QueryInflationRequestAmino): QueryInflationRequest {
-    return {};
+    const message = createBaseQueryInflationRequest();
+    return message;
   },
   toAmino(_: QueryInflationRequest): QueryInflationRequestAmino {
     const obj: any = {};
@@ -356,13 +384,15 @@ export const QueryInflationResponse = {
     return obj;
   },
   fromAmino(object: QueryInflationResponseAmino): QueryInflationResponse {
-    return {
-      inflation: object.inflation
-    };
+    const message = createBaseQueryInflationResponse();
+    if (object.inflation !== undefined && object.inflation !== null) {
+      message.inflation = bytesFromBase64(object.inflation);
+    }
+    return message;
   },
   toAmino(message: QueryInflationResponse): QueryInflationResponseAmino {
     const obj: any = {};
-    obj.inflation = message.inflation;
+    obj.inflation = message.inflation ? base64FromBytes(message.inflation) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryInflationResponseAminoMsg): QueryInflationResponse {
@@ -431,7 +461,8 @@ export const QueryAnnualProvisionsRequest = {
     return obj;
   },
   fromAmino(_: QueryAnnualProvisionsRequestAmino): QueryAnnualProvisionsRequest {
-    return {};
+    const message = createBaseQueryAnnualProvisionsRequest();
+    return message;
   },
   toAmino(_: QueryAnnualProvisionsRequest): QueryAnnualProvisionsRequestAmino {
     const obj: any = {};
@@ -520,13 +551,15 @@ export const QueryAnnualProvisionsResponse = {
     return obj;
   },
   fromAmino(object: QueryAnnualProvisionsResponseAmino): QueryAnnualProvisionsResponse {
-    return {
-      annualProvisions: object.annual_provisions
-    };
+    const message = createBaseQueryAnnualProvisionsResponse();
+    if (object.annual_provisions !== undefined && object.annual_provisions !== null) {
+      message.annualProvisions = bytesFromBase64(object.annual_provisions);
+    }
+    return message;
   },
   toAmino(message: QueryAnnualProvisionsResponse): QueryAnnualProvisionsResponseAmino {
     const obj: any = {};
-    obj.annual_provisions = message.annualProvisions;
+    obj.annual_provisions = message.annualProvisions ? base64FromBytes(message.annualProvisions) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryAnnualProvisionsResponseAminoMsg): QueryAnnualProvisionsResponse {

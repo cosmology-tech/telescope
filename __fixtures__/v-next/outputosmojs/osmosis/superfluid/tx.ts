@@ -7,32 +7,56 @@ export interface MsgSuperfluidDelegate {
   lockId: bigint;
   valAddr: string;
 }
+export interface MsgSuperfluidDelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegate";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateSDKType {
   sender: string;
   lock_id: bigint;
   val_addr: string;
 }
 export interface MsgSuperfluidDelegateResponse {}
+export interface MsgSuperfluidDelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidDelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidDelegateResponseSDKType {}
 export interface MsgSuperfluidUndelegate {
   sender: string;
   lockId: bigint;
+}
+export interface MsgSuperfluidUndelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegate";
+  value: Uint8Array;
 }
 export interface MsgSuperfluidUndelegateSDKType {
   sender: string;
   lock_id: bigint;
 }
 export interface MsgSuperfluidUndelegateResponse {}
+export interface MsgSuperfluidUndelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUndelegateResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUndelegateResponseSDKType {}
 export interface MsgSuperfluidUnbondLock {
   sender: string;
   lockId: bigint;
+}
+export interface MsgSuperfluidUnbondLockProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLock";
+  value: Uint8Array;
 }
 export interface MsgSuperfluidUnbondLockSDKType {
   sender: string;
   lock_id: bigint;
 }
 export interface MsgSuperfluidUnbondLockResponse {}
+export interface MsgSuperfluidUnbondLockResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgSuperfluidUnbondLockResponse";
+  value: Uint8Array;
+}
 export interface MsgSuperfluidUnbondLockResponseSDKType {}
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -43,6 +67,10 @@ export interface MsgLockAndSuperfluidDelegate {
   sender: string;
   coins: Coin[];
   valAddr: string;
+}
+export interface MsgLockAndSuperfluidDelegateProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegate";
+  value: Uint8Array;
 }
 /**
  * MsgLockAndSuperfluidDelegate locks coins with the unbonding period duration,
@@ -56,6 +84,10 @@ export interface MsgLockAndSuperfluidDelegateSDKType {
 }
 export interface MsgLockAndSuperfluidDelegateResponse {
   ID: bigint;
+}
+export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
+  value: Uint8Array;
 }
 export interface MsgLockAndSuperfluidDelegateResponseSDKType {
   ID: bigint;
@@ -74,6 +106,10 @@ export interface MsgUnPoolWhitelistedPool {
   sender: string;
   poolId: bigint;
 }
+export interface MsgUnPoolWhitelistedPoolProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPool";
+  value: Uint8Array;
+}
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
  * associated with pool pool_id. If pool_id is not approved for unpooling by
@@ -90,6 +126,10 @@ export interface MsgUnPoolWhitelistedPoolSDKType {
 }
 export interface MsgUnPoolWhitelistedPoolResponse {
   exitedLockIds: bigint[];
+}
+export interface MsgUnPoolWhitelistedPoolResponseProtoMsg {
+  typeUrl: "/osmosis.superfluid.MsgUnPoolWhitelistedPoolResponse";
+  value: Uint8Array;
 }
 export interface MsgUnPoolWhitelistedPoolResponseSDKType {
   exited_lock_ids: bigint[];
@@ -181,11 +221,17 @@ export const MsgSuperfluidDelegate = {
     return obj;
   },
   fromAmino(object: MsgSuperfluidDelegateAmino): MsgSuperfluidDelegate {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id),
-      valAddr: object.val_addr
-    };
+    const message = createBaseMsgSuperfluidDelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    if (object.val_addr !== undefined && object.val_addr !== null) {
+      message.valAddr = object.val_addr;
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
     const obj: any = {};
@@ -260,7 +306,8 @@ export const MsgSuperfluidDelegateResponse = {
     return obj;
   },
   fromAmino(_: MsgSuperfluidDelegateResponseAmino): MsgSuperfluidDelegateResponse {
-    return {};
+    const message = createBaseMsgSuperfluidDelegateResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidDelegateResponse): MsgSuperfluidDelegateResponseAmino {
     const obj: any = {};
@@ -362,10 +409,14 @@ export const MsgSuperfluidUndelegate = {
     return obj;
   },
   fromAmino(object: MsgSuperfluidUndelegateAmino): MsgSuperfluidUndelegate {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id)
-    };
+    const message = createBaseMsgSuperfluidUndelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
@@ -439,7 +490,8 @@ export const MsgSuperfluidUndelegateResponse = {
     return obj;
   },
   fromAmino(_: MsgSuperfluidUndelegateResponseAmino): MsgSuperfluidUndelegateResponse {
-    return {};
+    const message = createBaseMsgSuperfluidUndelegateResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidUndelegateResponse): MsgSuperfluidUndelegateResponseAmino {
     const obj: any = {};
@@ -541,10 +593,14 @@ export const MsgSuperfluidUnbondLock = {
     return obj;
   },
   fromAmino(object: MsgSuperfluidUnbondLockAmino): MsgSuperfluidUnbondLock {
-    return {
-      sender: object.sender,
-      lockId: BigInt(object.lock_id)
-    };
+    const message = createBaseMsgSuperfluidUnbondLock();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.lock_id !== undefined && object.lock_id !== null) {
+      message.lockId = BigInt(object.lock_id);
+    }
+    return message;
   },
   toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
@@ -618,7 +674,8 @@ export const MsgSuperfluidUnbondLockResponse = {
     return obj;
   },
   fromAmino(_: MsgSuperfluidUnbondLockResponseAmino): MsgSuperfluidUnbondLockResponse {
-    return {};
+    const message = createBaseMsgSuperfluidUnbondLockResponse();
+    return message;
   },
   toAmino(_: MsgSuperfluidUnbondLockResponse): MsgSuperfluidUnbondLockResponseAmino {
     const obj: any = {};
@@ -741,11 +798,15 @@ export const MsgLockAndSuperfluidDelegate = {
     return obj;
   },
   fromAmino(object: MsgLockAndSuperfluidDelegateAmino): MsgLockAndSuperfluidDelegate {
-    return {
-      sender: object.sender,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : [],
-      valAddr: object.val_addr
-    };
+    const message = createBaseMsgLockAndSuperfluidDelegate();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    if (object.val_addr !== undefined && object.val_addr !== null) {
+      message.valAddr = object.val_addr;
+    }
+    return message;
   },
   toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAmino {
     const obj: any = {};
@@ -841,9 +902,11 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     return obj;
   },
   fromAmino(object: MsgLockAndSuperfluidDelegateResponseAmino): MsgLockAndSuperfluidDelegateResponse {
-    return {
-      ID: BigInt(object.ID)
-    };
+    const message = createBaseMsgLockAndSuperfluidDelegateResponse();
+    if (object.ID !== undefined && object.ID !== null) {
+      message.ID = BigInt(object.ID);
+    }
+    return message;
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
@@ -946,10 +1009,14 @@ export const MsgUnPoolWhitelistedPool = {
     return obj;
   },
   fromAmino(object: MsgUnPoolWhitelistedPoolAmino): MsgUnPoolWhitelistedPool {
-    return {
-      sender: object.sender,
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseMsgUnPoolWhitelistedPool();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
@@ -1057,9 +1124,9 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     return obj;
   },
   fromAmino(object: MsgUnPoolWhitelistedPoolResponseAmino): MsgUnPoolWhitelistedPoolResponse {
-    return {
-      exitedLockIds: Array.isArray(object?.exited_lock_ids) ? object.exited_lock_ids.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseMsgUnPoolWhitelistedPoolResponse();
+    message.exitedLockIds = object.exited_lock_ids?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: MsgUnPoolWhitelistedPoolResponse): MsgUnPoolWhitelistedPoolResponseAmino {
     const obj: any = {};

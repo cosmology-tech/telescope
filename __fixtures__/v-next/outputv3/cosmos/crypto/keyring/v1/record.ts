@@ -1,14 +1,14 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BIP44Params, BIP44ParamsAmino, BIP44ParamsSDKType } from "../../hd/v1/hd";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
   /** name represents a name of Record */
   name: string;
   /** pub_key represents a public key in any format */
-  pubKey: Any;
+  pubKey?: Any;
   /** local stores the public information about a locally stored key */
   local?: Record_Local;
   /** ledger stores the public information about a Ledger key */
@@ -25,7 +25,7 @@ export interface RecordProtoMsg {
 /** Record is used for representing a key in the keyring. */
 export interface RecordAmino {
   /** name represents a name of Record */
-  name: string;
+  name?: string;
   /** pub_key represents a public key in any format */
   pub_key?: AnyAmino;
   /** local stores the public information about a locally stored key */
@@ -37,14 +37,10 @@ export interface RecordAmino {
   /** Offline does not store any information. */
   offline?: Record_OfflineAmino;
 }
-export interface RecordAminoMsg {
-  type: "cosmos-sdk/Record";
-  value: RecordAmino;
-}
 /** Record is used for representing a key in the keyring. */
 export interface RecordSDKType {
   name: string;
-  pub_key: AnySDKType;
+  pub_key?: AnySDKType;
   local?: Record_LocalSDKType;
   ledger?: Record_LedgerSDKType;
   multi?: Record_MultiSDKType;
@@ -55,7 +51,7 @@ export interface RecordSDKType {
  * Local item
  */
 export interface Record_Local {
-  privKey: Any;
+  privKey?: Any;
   privKeyType: string;
 }
 export interface Record_LocalProtoMsg {
@@ -68,23 +64,19 @@ export interface Record_LocalProtoMsg {
  */
 export interface Record_LocalAmino {
   priv_key?: AnyAmino;
-  priv_key_type: string;
-}
-export interface Record_LocalAminoMsg {
-  type: "cosmos-sdk/Local";
-  value: Record_LocalAmino;
+  priv_key_type?: string;
 }
 /**
  * Item is a keyring item stored in a keyring backend.
  * Local item
  */
 export interface Record_LocalSDKType {
-  priv_key: AnySDKType;
+  priv_key?: AnySDKType;
   priv_key_type: string;
 }
 /** Ledger item */
 export interface Record_Ledger {
-  path: BIP44Params;
+  path?: BIP44Params;
 }
 export interface Record_LedgerProtoMsg {
   typeUrl: "/cosmos.crypto.keyring.v1.Ledger";
@@ -94,13 +86,9 @@ export interface Record_LedgerProtoMsg {
 export interface Record_LedgerAmino {
   path?: BIP44ParamsAmino;
 }
-export interface Record_LedgerAminoMsg {
-  type: "cosmos-sdk/Ledger";
-  value: Record_LedgerAmino;
-}
 /** Ledger item */
 export interface Record_LedgerSDKType {
-  path: BIP44ParamsSDKType;
+  path?: BIP44ParamsSDKType;
 }
 /** Multi item */
 export interface Record_Multi {}
@@ -110,10 +98,6 @@ export interface Record_MultiProtoMsg {
 }
 /** Multi item */
 export interface Record_MultiAmino {}
-export interface Record_MultiAminoMsg {
-  type: "cosmos-sdk/Multi";
-  value: Record_MultiAmino;
-}
 /** Multi item */
 export interface Record_MultiSDKType {}
 /** Offline item */
@@ -124,16 +108,12 @@ export interface Record_OfflineProtoMsg {
 }
 /** Offline item */
 export interface Record_OfflineAmino {}
-export interface Record_OfflineAminoMsg {
-  type: "cosmos-sdk/Offline";
-  value: Record_OfflineAmino;
-}
 /** Offline item */
 export interface Record_OfflineSDKType {}
 function createBaseRecord(): Record {
   return {
     name: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -164,7 +144,7 @@ export const Record = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Record {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord();
@@ -175,19 +155,19 @@ export const Record = {
           message.name = reader.string();
           break;
         case 2:
-          message.pubKey = Any.decode(reader, reader.uint32());
+          message.pubKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.local = Record_Local.decode(reader, reader.uint32());
+          message.local = Record_Local.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.ledger = Record_Ledger.decode(reader, reader.uint32());
+          message.ledger = Record_Ledger.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.multi = Record_Multi.decode(reader, reader.uint32());
+          message.multi = Record_Multi.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.offline = Record_Offline.decode(reader, reader.uint32());
+          message.offline = Record_Offline.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -257,36 +237,39 @@ export const Record = {
     return obj;
   },
   fromAmino(object: RecordAmino): Record {
-    return {
-      name: object.name,
-      pubKey: object?.pub_key ? Any.fromAmino(object.pub_key) : undefined,
-      local: object?.local ? Record_Local.fromAmino(object.local) : undefined,
-      ledger: object?.ledger ? Record_Ledger.fromAmino(object.ledger) : undefined,
-      multi: object?.multi ? Record_Multi.fromAmino(object.multi) : undefined,
-      offline: object?.offline ? Record_Offline.fromAmino(object.offline) : undefined
-    };
+    const message = createBaseRecord();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.pub_key !== undefined && object.pub_key !== null) {
+      message.pubKey = Any.fromAmino(object.pub_key);
+    }
+    if (object.local !== undefined && object.local !== null) {
+      message.local = Record_Local.fromAmino(object.local);
+    }
+    if (object.ledger !== undefined && object.ledger !== null) {
+      message.ledger = Record_Ledger.fromAmino(object.ledger);
+    }
+    if (object.multi !== undefined && object.multi !== null) {
+      message.multi = Record_Multi.fromAmino(object.multi);
+    }
+    if (object.offline !== undefined && object.offline !== null) {
+      message.offline = Record_Offline.fromAmino(object.offline);
+    }
+    return message;
   },
-  toAmino(message: Record): RecordAmino {
+  toAmino(message: Record, useInterfaces: boolean = true): RecordAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.local = message.local ? Record_Local.toAmino(message.local) : undefined;
-    obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger) : undefined;
-    obj.multi = message.multi ? Record_Multi.toAmino(message.multi) : undefined;
-    obj.offline = message.offline ? Record_Offline.toAmino(message.offline) : undefined;
+    obj.name = message.name;
+    obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
+    obj.local = message.local ? Record_Local.toAmino(message.local, useInterfaces) : undefined;
+    obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger, useInterfaces) : undefined;
+    obj.multi = message.multi ? Record_Multi.toAmino(message.multi, useInterfaces) : undefined;
+    obj.offline = message.offline ? Record_Offline.toAmino(message.offline, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: RecordAminoMsg): Record {
-    return Record.fromAmino(object.value);
-  },
-  toAminoMsg(message: Record): RecordAminoMsg {
-    return {
-      type: "cosmos-sdk/Record",
-      value: Record.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: RecordProtoMsg): Record {
-    return Record.decode(message.value);
+  fromProtoMsg(message: RecordProtoMsg, useInterfaces: boolean = true): Record {
+    return Record.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record): Uint8Array {
     return Record.encode(message).finish();
@@ -300,7 +283,7 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: Any.fromPartial({}),
+    privKey: undefined,
     privKeyType: ""
   };
 }
@@ -316,7 +299,7 @@ export const Record_Local = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Local {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Record_Local {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Local();
@@ -324,7 +307,7 @@ export const Record_Local = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.privKey = Any.decode(reader, reader.uint32());
+          message.privKey = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           message.privKeyType = reader.string();
@@ -369,28 +352,23 @@ export const Record_Local = {
     return obj;
   },
   fromAmino(object: Record_LocalAmino): Record_Local {
-    return {
-      privKey: object?.priv_key ? Any.fromAmino(object.priv_key) : undefined,
-      privKeyType: object.priv_key_type
-    };
+    const message = createBaseRecord_Local();
+    if (object.priv_key !== undefined && object.priv_key !== null) {
+      message.privKey = Any.fromAmino(object.priv_key);
+    }
+    if (object.priv_key_type !== undefined && object.priv_key_type !== null) {
+      message.privKeyType = object.priv_key_type;
+    }
+    return message;
   },
-  toAmino(message: Record_Local): Record_LocalAmino {
+  toAmino(message: Record_Local, useInterfaces: boolean = true): Record_LocalAmino {
     const obj: any = {};
-    obj.priv_key = message.privKey ? Any.toAmino(message.privKey) : undefined;
-    obj.priv_key_type = omitDefault(message.privKeyType);
+    obj.priv_key = message.privKey ? Any.toAmino(message.privKey, useInterfaces) : undefined;
+    obj.priv_key_type = message.privKeyType;
     return obj;
   },
-  fromAminoMsg(object: Record_LocalAminoMsg): Record_Local {
-    return Record_Local.fromAmino(object.value);
-  },
-  toAminoMsg(message: Record_Local): Record_LocalAminoMsg {
-    return {
-      type: "cosmos-sdk/Local",
-      value: Record_Local.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Record_LocalProtoMsg): Record_Local {
-    return Record_Local.decode(message.value);
+  fromProtoMsg(message: Record_LocalProtoMsg, useInterfaces: boolean = true): Record_Local {
+    return Record_Local.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Local): Uint8Array {
     return Record_Local.encode(message).finish();
@@ -404,7 +382,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: BIP44Params.fromPartial({})
+    path: undefined
   };
 }
 export const Record_Ledger = {
@@ -416,7 +394,7 @@ export const Record_Ledger = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Ledger {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Record_Ledger {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Ledger();
@@ -424,7 +402,7 @@ export const Record_Ledger = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.path = BIP44Params.decode(reader, reader.uint32());
+          message.path = BIP44Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -461,26 +439,19 @@ export const Record_Ledger = {
     return obj;
   },
   fromAmino(object: Record_LedgerAmino): Record_Ledger {
-    return {
-      path: object?.path ? BIP44Params.fromAmino(object.path) : undefined
-    };
+    const message = createBaseRecord_Ledger();
+    if (object.path !== undefined && object.path !== null) {
+      message.path = BIP44Params.fromAmino(object.path);
+    }
+    return message;
   },
-  toAmino(message: Record_Ledger): Record_LedgerAmino {
+  toAmino(message: Record_Ledger, useInterfaces: boolean = true): Record_LedgerAmino {
     const obj: any = {};
-    obj.path = message.path ? BIP44Params.toAmino(message.path) : undefined;
+    obj.path = message.path ? BIP44Params.toAmino(message.path, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Record_LedgerAminoMsg): Record_Ledger {
-    return Record_Ledger.fromAmino(object.value);
-  },
-  toAminoMsg(message: Record_Ledger): Record_LedgerAminoMsg {
-    return {
-      type: "cosmos-sdk/Ledger",
-      value: Record_Ledger.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Record_LedgerProtoMsg): Record_Ledger {
-    return Record_Ledger.decode(message.value);
+  fromProtoMsg(message: Record_LedgerProtoMsg, useInterfaces: boolean = true): Record_Ledger {
+    return Record_Ledger.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Ledger): Uint8Array {
     return Record_Ledger.encode(message).finish();
@@ -501,7 +472,7 @@ export const Record_Multi = {
   encode(_: Record_Multi, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Multi {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Record_Multi {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Multi();
@@ -535,23 +506,15 @@ export const Record_Multi = {
     return obj;
   },
   fromAmino(_: Record_MultiAmino): Record_Multi {
-    return {};
+    const message = createBaseRecord_Multi();
+    return message;
   },
-  toAmino(_: Record_Multi): Record_MultiAmino {
+  toAmino(_: Record_Multi, useInterfaces: boolean = true): Record_MultiAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: Record_MultiAminoMsg): Record_Multi {
-    return Record_Multi.fromAmino(object.value);
-  },
-  toAminoMsg(message: Record_Multi): Record_MultiAminoMsg {
-    return {
-      type: "cosmos-sdk/Multi",
-      value: Record_Multi.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Record_MultiProtoMsg): Record_Multi {
-    return Record_Multi.decode(message.value);
+  fromProtoMsg(message: Record_MultiProtoMsg, useInterfaces: boolean = true): Record_Multi {
+    return Record_Multi.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Multi): Uint8Array {
     return Record_Multi.encode(message).finish();
@@ -572,7 +535,7 @@ export const Record_Offline = {
   encode(_: Record_Offline, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Record_Offline {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Record_Offline {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRecord_Offline();
@@ -606,23 +569,15 @@ export const Record_Offline = {
     return obj;
   },
   fromAmino(_: Record_OfflineAmino): Record_Offline {
-    return {};
+    const message = createBaseRecord_Offline();
+    return message;
   },
-  toAmino(_: Record_Offline): Record_OfflineAmino {
+  toAmino(_: Record_Offline, useInterfaces: boolean = true): Record_OfflineAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: Record_OfflineAminoMsg): Record_Offline {
-    return Record_Offline.fromAmino(object.value);
-  },
-  toAminoMsg(message: Record_Offline): Record_OfflineAminoMsg {
-    return {
-      type: "cosmos-sdk/Offline",
-      value: Record_Offline.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Record_OfflineProtoMsg): Record_Offline {
-    return Record_Offline.decode(message.value);
+  fromProtoMsg(message: Record_OfflineProtoMsg, useInterfaces: boolean = true): Record_Offline {
+    return Record_Offline.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Record_Offline): Uint8Array {
     return Record_Offline.encode(message).finish();

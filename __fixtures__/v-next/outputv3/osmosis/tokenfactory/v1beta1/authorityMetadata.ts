@@ -21,11 +21,7 @@ export interface DenomAuthorityMetadataProtoMsg {
  */
 export interface DenomAuthorityMetadataAmino {
   /** Can be empty for no admin, or a valid osmosis address */
-  admin: string;
-}
-export interface DenomAuthorityMetadataAminoMsg {
-  type: "osmosis/tokenfactory/denom-authority-metadata";
-  value: DenomAuthorityMetadataAmino;
+  admin?: string;
 }
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -49,7 +45,7 @@ export const DenomAuthorityMetadata = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DenomAuthorityMetadata {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DenomAuthorityMetadata {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDenomAuthorityMetadata();
@@ -92,26 +88,19 @@ export const DenomAuthorityMetadata = {
     return obj;
   },
   fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
-    return {
-      admin: object.admin
-    };
+    const message = createBaseDenomAuthorityMetadata();
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    return message;
   },
-  toAmino(message: DenomAuthorityMetadata): DenomAuthorityMetadataAmino {
+  toAmino(message: DenomAuthorityMetadata, useInterfaces: boolean = true): DenomAuthorityMetadataAmino {
     const obj: any = {};
     obj.admin = omitDefault(message.admin);
     return obj;
   },
-  fromAminoMsg(object: DenomAuthorityMetadataAminoMsg): DenomAuthorityMetadata {
-    return DenomAuthorityMetadata.fromAmino(object.value);
-  },
-  toAminoMsg(message: DenomAuthorityMetadata): DenomAuthorityMetadataAminoMsg {
-    return {
-      type: "osmosis/tokenfactory/denom-authority-metadata",
-      value: DenomAuthorityMetadata.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DenomAuthorityMetadataProtoMsg): DenomAuthorityMetadata {
-    return DenomAuthorityMetadata.decode(message.value);
+  fromProtoMsg(message: DenomAuthorityMetadataProtoMsg, useInterfaces: boolean = true): DenomAuthorityMetadata {
+    return DenomAuthorityMetadata.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DenomAuthorityMetadata): Uint8Array {
     return DenomAuthorityMetadata.encode(message).finish();

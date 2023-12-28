@@ -28,6 +28,10 @@ export interface InflationDistribution {
    */
   communityPool: string;
 }
+export interface InflationDistributionProtoMsg {
+  typeUrl: "/evmos.inflation.v1.InflationDistribution";
+  value: Uint8Array;
+}
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -60,6 +64,10 @@ export interface ExponentialCalculation {
   bondingTarget: string;
   /** max variance */
   maxVariance: string;
+}
+export interface ExponentialCalculationProtoMsg {
+  typeUrl: "/evmos.inflation.v1.ExponentialCalculation";
+  value: Uint8Array;
 }
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
@@ -162,11 +170,17 @@ export const InflationDistribution = {
     return obj;
   },
   fromAmino(object: InflationDistributionAmino): InflationDistribution {
-    return {
-      stakingRewards: object.staking_rewards,
-      usageIncentives: object.usage_incentives,
-      communityPool: object.community_pool
-    };
+    const message = createBaseInflationDistribution();
+    if (object.staking_rewards !== undefined && object.staking_rewards !== null) {
+      message.stakingRewards = object.staking_rewards;
+    }
+    if (object.usage_incentives !== undefined && object.usage_incentives !== null) {
+      message.usageIncentives = object.usage_incentives;
+    }
+    if (object.community_pool !== undefined && object.community_pool !== null) {
+      message.communityPool = object.community_pool;
+    }
+    return message;
   },
   toAmino(message: InflationDistribution): InflationDistributionAmino {
     const obj: any = {};
@@ -304,13 +318,23 @@ export const ExponentialCalculation = {
     return obj;
   },
   fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
-    return {
-      a: object.a,
-      r: object.r,
-      c: object.c,
-      bondingTarget: object.bonding_target,
-      maxVariance: object.max_variance
-    };
+    const message = createBaseExponentialCalculation();
+    if (object.a !== undefined && object.a !== null) {
+      message.a = object.a;
+    }
+    if (object.r !== undefined && object.r !== null) {
+      message.r = object.r;
+    }
+    if (object.c !== undefined && object.c !== null) {
+      message.c = object.c;
+    }
+    if (object.bonding_target !== undefined && object.bonding_target !== null) {
+      message.bondingTarget = object.bonding_target;
+    }
+    if (object.max_variance !== undefined && object.max_variance !== null) {
+      message.maxVariance = object.max_variance;
+    }
+    return message;
   },
   toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
     const obj: any = {};

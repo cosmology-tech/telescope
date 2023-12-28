@@ -10,6 +10,10 @@ export interface QuerySpotPriceRequest {
   baseAssetDenom: string;
   quoteAssetDenom: string;
 }
+export interface QuerySpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceRequest";
+  value: Uint8Array;
+}
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
  * query.
@@ -26,6 +30,10 @@ export interface QuerySpotPriceRequestSDKType {
 export interface QuerySpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
+}
+export interface QuerySpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.v2.QuerySpotPriceResponse";
+  value: Uint8Array;
 }
 /**
  * QuerySpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -121,11 +129,17 @@ export const QuerySpotPriceRequest = {
     return obj;
   },
   fromAmino(object: QuerySpotPriceRequestAmino): QuerySpotPriceRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      baseAssetDenom: object.base_asset_denom,
-      quoteAssetDenom: object.quote_asset_denom
-    };
+    const message = createBaseQuerySpotPriceRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.base_asset_denom !== undefined && object.base_asset_denom !== null) {
+      message.baseAssetDenom = object.base_asset_denom;
+    }
+    if (object.quote_asset_denom !== undefined && object.quote_asset_denom !== null) {
+      message.quoteAssetDenom = object.quote_asset_denom;
+    }
+    return message;
   },
   toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
     const obj: any = {};
@@ -217,9 +231,11 @@ export const QuerySpotPriceResponse = {
     return obj;
   },
   fromAmino(object: QuerySpotPriceResponseAmino): QuerySpotPriceResponse {
-    return {
-      spotPrice: object.spot_price
-    };
+    const message = createBaseQuerySpotPriceResponse();
+    if (object.spot_price !== undefined && object.spot_price !== null) {
+      message.spotPrice = object.spot_price;
+    }
+    return message;
   },
   toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {
     const obj: any = {};

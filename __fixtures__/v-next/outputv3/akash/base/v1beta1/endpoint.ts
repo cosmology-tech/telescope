@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -46,11 +46,7 @@ export interface EndpointProtoMsg {
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
-  kind: Endpoint_Kind;
-}
-export interface EndpointAminoMsg {
-  type: "/akash.base.v1beta1.Endpoint";
-  value: EndpointAmino;
+  kind?: Endpoint_Kind;
 }
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointSDKType {
@@ -69,7 +65,7 @@ export const Endpoint = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Endpoint {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Endpoint {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEndpoint();
@@ -112,20 +108,19 @@ export const Endpoint = {
     return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
-    return {
-      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
-    };
+    const message = createBaseEndpoint();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = endpoint_KindFromJSON(object.kind);
+    }
+    return message;
   },
-  toAmino(message: Endpoint): EndpointAmino {
+  toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.kind = omitDefault(message.kind);
+    obj.kind = endpoint_KindToJSON(message.kind);
     return obj;
   },
-  fromAminoMsg(object: EndpointAminoMsg): Endpoint {
-    return Endpoint.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EndpointProtoMsg): Endpoint {
-    return Endpoint.decode(message.value);
+  fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {
+    return Endpoint.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Endpoint): Uint8Array {
     return Endpoint.encode(message).finish();

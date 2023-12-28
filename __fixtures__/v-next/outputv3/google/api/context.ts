@@ -95,11 +95,7 @@ export interface ContextAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: ContextRuleAmino[];
-}
-export interface ContextAminoMsg {
-  type: "/google.api.Context";
-  value: ContextAmino;
+  rules?: ContextRuleAmino[];
 }
 /**
  * `Context` defines which contexts an API requests.
@@ -182,25 +178,21 @@ export interface ContextRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** A list of full type names of requested contexts. */
-  requested: string[];
+  requested?: string[];
   /** A list of full type names of provided contexts. */
-  provided: string[];
+  provided?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowed_request_extensions: string[];
+  allowed_request_extensions?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
-  allowed_response_extensions: string[];
-}
-export interface ContextRuleAminoMsg {
-  type: "/google.api.ContextRule";
-  value: ContextRuleAmino;
+  allowed_response_extensions?: string[];
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -226,7 +218,7 @@ export const Context = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Context {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Context {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContext();
@@ -234,7 +226,7 @@ export const Context = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.rules.push(ContextRule.decode(reader, reader.uint32()));
+          message.rules.push(ContextRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -277,24 +269,21 @@ export const Context = {
     return obj;
   },
   fromAmino(object: ContextAmino): Context {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
-    };
+    const message = createBaseContext();
+    message.rules = object.rules?.map(e => ContextRule.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Context): ContextAmino {
+  toAmino(message: Context, useInterfaces: boolean = true): ContextAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ContextAminoMsg): Context {
-    return Context.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ContextProtoMsg): Context {
-    return Context.decode(message.value);
+  fromProtoMsg(message: ContextProtoMsg, useInterfaces: boolean = true): Context {
+    return Context.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Context): Uint8Array {
     return Context.encode(message).finish();
@@ -335,7 +324,7 @@ export const ContextRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ContextRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ContextRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseContextRule();
@@ -442,15 +431,17 @@ export const ContextRule = {
     return obj;
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
-    return {
-      selector: object.selector,
-      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
-      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
-      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
-      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
-    };
+    const message = createBaseContextRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.requested = object.requested?.map(e => e) || [];
+    message.provided = object.provided?.map(e => e) || [];
+    message.allowedRequestExtensions = object.allowed_request_extensions?.map(e => e) || [];
+    message.allowedResponseExtensions = object.allowed_response_extensions?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: ContextRule): ContextRuleAmino {
+  toAmino(message: ContextRule, useInterfaces: boolean = true): ContextRuleAmino {
     const obj: any = {};
     obj.selector = omitDefault(message.selector);
     if (message.requested) {
@@ -475,11 +466,8 @@ export const ContextRule = {
     }
     return obj;
   },
-  fromAminoMsg(object: ContextRuleAminoMsg): ContextRule {
-    return ContextRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ContextRuleProtoMsg): ContextRule {
-    return ContextRule.decode(message.value);
+  fromProtoMsg(message: ContextRuleProtoMsg, useInterfaces: boolean = true): ContextRule {
+    return ContextRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ContextRule): Uint8Array {
     return ContextRule.encode(message).finish();

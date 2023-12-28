@@ -89,11 +89,7 @@ export interface BillingAmino {
    * a different monitored resource type. A metric can be used in at most
    * one consumer destination.
    */
-  consumer_destinations: Billing_BillingDestinationAmino[];
-}
-export interface BillingAminoMsg {
-  type: "/google.api.Billing";
-  value: BillingAmino;
+  consumer_destinations?: Billing_BillingDestinationAmino[];
 }
 /**
  * Billing related configuration of the service.
@@ -161,16 +157,12 @@ export interface Billing_BillingDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
-}
-export interface Billing_BillingDestinationAminoMsg {
-  type: "/google.api.BillingDestination";
-  value: Billing_BillingDestinationAmino;
+  metrics?: string[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -193,7 +185,7 @@ export const Billing = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Billing {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Billing {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling();
@@ -201,7 +193,7 @@ export const Billing = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 8:
-          message.consumerDestinations.push(Billing_BillingDestination.decode(reader, reader.uint32()));
+          message.consumerDestinations.push(Billing_BillingDestination.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -244,24 +236,21 @@ export const Billing = {
     return obj;
   },
   fromAmino(object: BillingAmino): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseBilling();
+    message.consumerDestinations = object.consumer_destinations?.map(e => Billing_BillingDestination.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Billing): BillingAmino {
+  toAmino(message: Billing, useInterfaces: boolean = true): BillingAmino {
     const obj: any = {};
     if (message.consumerDestinations) {
-      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.consumer_destinations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: BillingAminoMsg): Billing {
-    return Billing.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BillingProtoMsg): Billing {
-    return Billing.decode(message.value);
+  fromProtoMsg(message: BillingProtoMsg, useInterfaces: boolean = true): Billing {
+    return Billing.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Billing): Uint8Array {
     return Billing.encode(message).finish();
@@ -290,7 +279,7 @@ export const Billing_BillingDestination = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Billing_BillingDestination {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Billing_BillingDestination {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBilling_BillingDestination();
@@ -349,12 +338,14 @@ export const Billing_BillingDestination = {
     return obj;
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseBilling_BillingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
+  toAmino(message: Billing_BillingDestination, useInterfaces: boolean = true): Billing_BillingDestinationAmino {
     const obj: any = {};
     obj.monitored_resource = omitDefault(message.monitoredResource);
     if (message.metrics) {
@@ -364,11 +355,8 @@ export const Billing_BillingDestination = {
     }
     return obj;
   },
-  fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
-    return Billing_BillingDestination.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
-    return Billing_BillingDestination.decode(message.value);
+  fromProtoMsg(message: Billing_BillingDestinationProtoMsg, useInterfaces: boolean = true): Billing_BillingDestination {
+    return Billing_BillingDestination.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Billing_BillingDestination): Uint8Array {
     return Billing_BillingDestination.encode(message).finish();

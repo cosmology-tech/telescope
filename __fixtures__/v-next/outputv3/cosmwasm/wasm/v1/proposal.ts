@@ -15,7 +15,7 @@ export interface StoreCodeProposal {
   /** WASMByteCode can be raw or gzip compressed */
   wasmByteCode: Uint8Array;
   /** InstantiatePermission to apply on contract creation, optional */
-  instantiatePermission: AccessConfig;
+  instantiatePermission?: AccessConfig;
 }
 export interface StoreCodeProposalProtoMsg {
   typeUrl: "/cosmwasm.wasm.v1.StoreCodeProposal";
@@ -24,19 +24,15 @@ export interface StoreCodeProposalProtoMsg {
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  run_as: string;
+  run_as?: string;
   /** WASMByteCode can be raw or gzip compressed */
-  wasm_byte_code: string;
+  wasm_byte_code?: string;
   /** InstantiatePermission to apply on contract creation, optional */
   instantiate_permission?: AccessConfigAmino;
-}
-export interface StoreCodeProposalAminoMsg {
-  type: "wasm/StoreCodeProposal";
-  value: StoreCodeProposalAmino;
 }
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposalSDKType {
@@ -44,7 +40,7 @@ export interface StoreCodeProposalSDKType {
   description: string;
   run_as: string;
   wasm_byte_code: Uint8Array;
-  instantiate_permission: AccessConfigSDKType;
+  instantiate_permission?: AccessConfigSDKType;
 }
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
@@ -78,25 +74,21 @@ export interface InstantiateContractProposalProtoMsg {
  */
 export interface InstantiateContractProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  run_as: string;
+  run_as?: string;
   /** Admin is an optional address that can execute migrations */
-  admin: string;
+  admin?: string;
   /** CodeID is the reference to the stored WASM code */
-  code_id: string;
+  code_id?: string;
   /** Label is optional metadata to be stored with a constract instance. */
-  label: string;
+  label?: string;
   /** Msg json encoded message to be passed to the contract on instantiation */
-  msg: Uint8Array;
+  msg?: any;
   /** Funds coins that are transferred to the contract on instantiation */
-  funds: CoinAmino[];
-}
-export interface InstantiateContractProposalAminoMsg {
-  type: "wasm/InstantiateContractProposal";
-  value: InstantiateContractProposalAmino;
+  funds?: CoinAmino[];
 }
 /**
  * InstantiateContractProposal gov proposal content type to instantiate a
@@ -132,19 +124,15 @@ export interface MigrateContractProposalProtoMsg {
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
+  contract?: string;
   /** CodeID references the new WASM codesudo */
-  code_id: string;
+  code_id?: string;
   /** Msg json encoded message to be passed to the contract on migration */
-  msg: Uint8Array;
-}
-export interface MigrateContractProposalAminoMsg {
-  type: "wasm/MigrateContractProposal";
-  value: MigrateContractProposalAmino;
+  msg?: any;
 }
 /** MigrateContractProposal gov proposal content type to migrate a contract. */
 export interface MigrateContractProposalSDKType {
@@ -172,17 +160,13 @@ export interface SudoContractProposalProtoMsg {
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
+  contract?: string;
   /** Msg json encoded message to be passed to the contract as sudo */
-  msg: Uint8Array;
-}
-export interface SudoContractProposalAminoMsg {
-  type: "wasm/SudoContractProposal";
-  value: SudoContractProposalAmino;
+  msg?: any;
 }
 /** SudoContractProposal gov proposal content type to call sudo on a contract. */
 export interface SudoContractProposalSDKType {
@@ -219,21 +203,17 @@ export interface ExecuteContractProposalProtoMsg {
  */
 export interface ExecuteContractProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** RunAs is the address that is passed to the contract's environment as sender */
-  run_as: string;
+  run_as?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
+  contract?: string;
   /** Msg json encoded message to be passed to the contract as execute */
-  msg: Uint8Array;
+  msg?: any;
   /** Funds coins that are transferred to the contract on instantiation */
-  funds: CoinAmino[];
-}
-export interface ExecuteContractProposalAminoMsg {
-  type: "wasm/ExecuteContractProposal";
-  value: ExecuteContractProposalAmino;
+  funds?: CoinAmino[];
 }
 /**
  * ExecuteContractProposal gov proposal content type to call execute on a
@@ -265,17 +245,13 @@ export interface UpdateAdminProposalProtoMsg {
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** NewAdmin address to be set */
-  new_admin: string;
+  new_admin?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
-}
-export interface UpdateAdminProposalAminoMsg {
-  type: "wasm/UpdateAdminProposal";
-  value: UpdateAdminProposalAmino;
+  contract?: string;
 }
 /** UpdateAdminProposal gov proposal content type to set an admin for a contract. */
 export interface UpdateAdminProposalSDKType {
@@ -306,15 +282,11 @@ export interface ClearAdminProposalProtoMsg {
  */
 export interface ClearAdminProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** Contract is the address of the smart contract */
-  contract: string;
-}
-export interface ClearAdminProposalAminoMsg {
-  type: "wasm/ClearAdminProposal";
-  value: ClearAdminProposalAmino;
+  contract?: string;
 }
 /**
  * ClearAdminProposal gov proposal content type to clear the admin of a
@@ -347,15 +319,11 @@ export interface PinCodesProposalProtoMsg {
  */
 export interface PinCodesProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** CodeIDs references the new WASM codes */
-  code_ids: string[];
-}
-export interface PinCodesProposalAminoMsg {
-  type: "wasm/PinCodesProposal";
-  value: PinCodesProposalAmino;
+  code_ids?: string[];
 }
 /**
  * PinCodesProposal gov proposal content type to pin a set of code ids in the
@@ -388,15 +356,11 @@ export interface UnpinCodesProposalProtoMsg {
  */
 export interface UnpinCodesProposalAmino {
   /** Title is a short summary */
-  title: string;
+  title?: string;
   /** Description is a human readable text */
-  description: string;
+  description?: string;
   /** CodeIDs references the WASM codes */
-  code_ids: string[];
-}
-export interface UnpinCodesProposalAminoMsg {
-  type: "wasm/UnpinCodesProposal";
-  value: UnpinCodesProposalAmino;
+  code_ids?: string[];
 }
 /**
  * UnpinCodesProposal gov proposal content type to unpin a set of code ids in
@@ -413,7 +377,7 @@ function createBaseStoreCodeProposal(): StoreCodeProposal {
     description: "",
     runAs: "",
     wasmByteCode: new Uint8Array(),
-    instantiatePermission: AccessConfig.fromPartial({})
+    instantiatePermission: undefined
   };
 }
 export const StoreCodeProposal = {
@@ -437,7 +401,7 @@ export const StoreCodeProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StoreCodeProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StoreCodeProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreCodeProposal();
@@ -457,7 +421,7 @@ export const StoreCodeProposal = {
           message.wasmByteCode = reader.bytes();
           break;
         case 7:
-          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32());
+          message.instantiatePermission = AccessConfig.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -514,34 +478,35 @@ export const StoreCodeProposal = {
     return obj;
   },
   fromAmino(object: StoreCodeProposalAmino): StoreCodeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      runAs: object.run_as,
-      wasmByteCode: fromBase64(object.wasm_byte_code),
-      instantiatePermission: object?.instantiate_permission ? AccessConfig.fromAmino(object.instantiate_permission) : undefined
-    };
+    const message = createBaseStoreCodeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.run_as !== undefined && object.run_as !== null) {
+      message.runAs = object.run_as;
+    }
+    if (object.wasm_byte_code !== undefined && object.wasm_byte_code !== null) {
+      message.wasmByteCode = fromBase64(object.wasm_byte_code);
+    }
+    if (object.instantiate_permission !== undefined && object.instantiate_permission !== null) {
+      message.instantiatePermission = AccessConfig.fromAmino(object.instantiate_permission);
+    }
+    return message;
   },
-  toAmino(message: StoreCodeProposal): StoreCodeProposalAmino {
+  toAmino(message: StoreCodeProposal, useInterfaces: boolean = true): StoreCodeProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     obj.run_as = omitDefault(message.runAs);
     obj.wasm_byte_code = message.wasmByteCode ? toBase64(message.wasmByteCode) : undefined;
-    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
+    obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: StoreCodeProposalAminoMsg): StoreCodeProposal {
-    return StoreCodeProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreCodeProposal): StoreCodeProposalAminoMsg {
-    return {
-      type: "wasm/StoreCodeProposal",
-      value: StoreCodeProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: StoreCodeProposalProtoMsg): StoreCodeProposal {
-    return StoreCodeProposal.decode(message.value);
+  fromProtoMsg(message: StoreCodeProposalProtoMsg, useInterfaces: boolean = true): StoreCodeProposal {
+    return StoreCodeProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreCodeProposal): Uint8Array {
     return StoreCodeProposal.encode(message).finish();
@@ -595,7 +560,7 @@ export const InstantiateContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): InstantiateContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): InstantiateContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseInstantiateContractProposal();
@@ -624,7 +589,7 @@ export const InstantiateContractProposal = {
           message.msg = reader.bytes();
           break;
         case 8:
-          message.funds.push(Coin.decode(reader, reader.uint32()));
+          message.funds.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -704,18 +669,32 @@ export const InstantiateContractProposal = {
     return obj;
   },
   fromAmino(object: InstantiateContractProposalAmino): InstantiateContractProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      runAs: object.run_as,
-      admin: object.admin,
-      codeId: BigInt(object.code_id),
-      label: object.label,
-      msg: toUtf8(JSON.stringify(object.msg)),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseInstantiateContractProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.run_as !== undefined && object.run_as !== null) {
+      message.runAs = object.run_as;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.label !== undefined && object.label !== null) {
+      message.label = object.label;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: InstantiateContractProposal): InstantiateContractProposalAmino {
+  toAmino(message: InstantiateContractProposal, useInterfaces: boolean = true): InstantiateContractProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -725,23 +704,14 @@ export const InstantiateContractProposal = {
     obj.label = omitDefault(message.label);
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.funds = [];
     }
     return obj;
   },
-  fromAminoMsg(object: InstantiateContractProposalAminoMsg): InstantiateContractProposal {
-    return InstantiateContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: InstantiateContractProposal): InstantiateContractProposalAminoMsg {
-    return {
-      type: "wasm/InstantiateContractProposal",
-      value: InstantiateContractProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: InstantiateContractProposalProtoMsg): InstantiateContractProposal {
-    return InstantiateContractProposal.decode(message.value);
+  fromProtoMsg(message: InstantiateContractProposalProtoMsg, useInterfaces: boolean = true): InstantiateContractProposal {
+    return InstantiateContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: InstantiateContractProposal): Uint8Array {
     return InstantiateContractProposal.encode(message).finish();
@@ -783,7 +753,7 @@ export const MigrateContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MigrateContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MigrateContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMigrateContractProposal();
@@ -860,15 +830,25 @@ export const MigrateContractProposal = {
     return obj;
   },
   fromAmino(object: MigrateContractProposalAmino): MigrateContractProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      contract: object.contract,
-      codeId: BigInt(object.code_id),
-      msg: toUtf8(JSON.stringify(object.msg))
-    };
+    const message = createBaseMigrateContractProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.code_id !== undefined && object.code_id !== null) {
+      message.codeId = BigInt(object.code_id);
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    return message;
   },
-  toAmino(message: MigrateContractProposal): MigrateContractProposalAmino {
+  toAmino(message: MigrateContractProposal, useInterfaces: boolean = true): MigrateContractProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -877,17 +857,8 @@ export const MigrateContractProposal = {
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MigrateContractProposalAminoMsg): MigrateContractProposal {
-    return MigrateContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: MigrateContractProposal): MigrateContractProposalAminoMsg {
-    return {
-      type: "wasm/MigrateContractProposal",
-      value: MigrateContractProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MigrateContractProposalProtoMsg): MigrateContractProposal {
-    return MigrateContractProposal.decode(message.value);
+  fromProtoMsg(message: MigrateContractProposalProtoMsg, useInterfaces: boolean = true): MigrateContractProposal {
+    return MigrateContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MigrateContractProposal): Uint8Array {
     return MigrateContractProposal.encode(message).finish();
@@ -925,7 +896,7 @@ export const SudoContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SudoContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SudoContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSudoContractProposal();
@@ -992,14 +963,22 @@ export const SudoContractProposal = {
     return obj;
   },
   fromAmino(object: SudoContractProposalAmino): SudoContractProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      contract: object.contract,
-      msg: toUtf8(JSON.stringify(object.msg))
-    };
+    const message = createBaseSudoContractProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    return message;
   },
-  toAmino(message: SudoContractProposal): SudoContractProposalAmino {
+  toAmino(message: SudoContractProposal, useInterfaces: boolean = true): SudoContractProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -1007,17 +986,8 @@ export const SudoContractProposal = {
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: SudoContractProposalAminoMsg): SudoContractProposal {
-    return SudoContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: SudoContractProposal): SudoContractProposalAminoMsg {
-    return {
-      type: "wasm/SudoContractProposal",
-      value: SudoContractProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: SudoContractProposalProtoMsg): SudoContractProposal {
-    return SudoContractProposal.decode(message.value);
+  fromProtoMsg(message: SudoContractProposalProtoMsg, useInterfaces: boolean = true): SudoContractProposal {
+    return SudoContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SudoContractProposal): Uint8Array {
     return SudoContractProposal.encode(message).finish();
@@ -1063,7 +1033,7 @@ export const ExecuteContractProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ExecuteContractProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ExecuteContractProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExecuteContractProposal();
@@ -1086,7 +1056,7 @@ export const ExecuteContractProposal = {
           message.msg = reader.bytes();
           break;
         case 6:
-          message.funds.push(Coin.decode(reader, reader.uint32()));
+          message.funds.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1154,16 +1124,26 @@ export const ExecuteContractProposal = {
     return obj;
   },
   fromAmino(object: ExecuteContractProposalAmino): ExecuteContractProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      runAs: object.run_as,
-      contract: object.contract,
-      msg: toUtf8(JSON.stringify(object.msg)),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseExecuteContractProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.run_as !== undefined && object.run_as !== null) {
+      message.runAs = object.run_as;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ExecuteContractProposal): ExecuteContractProposalAmino {
+  toAmino(message: ExecuteContractProposal, useInterfaces: boolean = true): ExecuteContractProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -1171,23 +1151,14 @@ export const ExecuteContractProposal = {
     obj.contract = omitDefault(message.contract);
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.funds = message.funds.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.funds = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ExecuteContractProposalAminoMsg): ExecuteContractProposal {
-    return ExecuteContractProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ExecuteContractProposal): ExecuteContractProposalAminoMsg {
-    return {
-      type: "wasm/ExecuteContractProposal",
-      value: ExecuteContractProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ExecuteContractProposalProtoMsg): ExecuteContractProposal {
-    return ExecuteContractProposal.decode(message.value);
+  fromProtoMsg(message: ExecuteContractProposalProtoMsg, useInterfaces: boolean = true): ExecuteContractProposal {
+    return ExecuteContractProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ExecuteContractProposal): Uint8Array {
     return ExecuteContractProposal.encode(message).finish();
@@ -1225,7 +1196,7 @@ export const UpdateAdminProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateAdminProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateAdminProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateAdminProposal();
@@ -1292,14 +1263,22 @@ export const UpdateAdminProposal = {
     return obj;
   },
   fromAmino(object: UpdateAdminProposalAmino): UpdateAdminProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      newAdmin: object.new_admin,
-      contract: object.contract
-    };
+    const message = createBaseUpdateAdminProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.new_admin !== undefined && object.new_admin !== null) {
+      message.newAdmin = object.new_admin;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
-  toAmino(message: UpdateAdminProposal): UpdateAdminProposalAmino {
+  toAmino(message: UpdateAdminProposal, useInterfaces: boolean = true): UpdateAdminProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -1307,17 +1286,8 @@ export const UpdateAdminProposal = {
     obj.contract = omitDefault(message.contract);
     return obj;
   },
-  fromAminoMsg(object: UpdateAdminProposalAminoMsg): UpdateAdminProposal {
-    return UpdateAdminProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UpdateAdminProposal): UpdateAdminProposalAminoMsg {
-    return {
-      type: "wasm/UpdateAdminProposal",
-      value: UpdateAdminProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UpdateAdminProposalProtoMsg): UpdateAdminProposal {
-    return UpdateAdminProposal.decode(message.value);
+  fromProtoMsg(message: UpdateAdminProposalProtoMsg, useInterfaces: boolean = true): UpdateAdminProposal {
+    return UpdateAdminProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateAdminProposal): Uint8Array {
     return UpdateAdminProposal.encode(message).finish();
@@ -1351,7 +1321,7 @@ export const ClearAdminProposal = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ClearAdminProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ClearAdminProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseClearAdminProposal();
@@ -1410,30 +1380,27 @@ export const ClearAdminProposal = {
     return obj;
   },
   fromAmino(object: ClearAdminProposalAmino): ClearAdminProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      contract: object.contract
-    };
+    const message = createBaseClearAdminProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
-  toAmino(message: ClearAdminProposal): ClearAdminProposalAmino {
+  toAmino(message: ClearAdminProposal, useInterfaces: boolean = true): ClearAdminProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
     obj.contract = omitDefault(message.contract);
     return obj;
   },
-  fromAminoMsg(object: ClearAdminProposalAminoMsg): ClearAdminProposal {
-    return ClearAdminProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: ClearAdminProposal): ClearAdminProposalAminoMsg {
-    return {
-      type: "wasm/ClearAdminProposal",
-      value: ClearAdminProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ClearAdminProposalProtoMsg): ClearAdminProposal {
-    return ClearAdminProposal.decode(message.value);
+  fromProtoMsg(message: ClearAdminProposalProtoMsg, useInterfaces: boolean = true): ClearAdminProposal {
+    return ClearAdminProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ClearAdminProposal): Uint8Array {
     return ClearAdminProposal.encode(message).finish();
@@ -1469,7 +1436,7 @@ export const PinCodesProposal = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePinCodesProposal();
@@ -1543,13 +1510,17 @@ export const PinCodesProposal = {
     return obj;
   },
   fromAmino(object: PinCodesProposalAmino): PinCodesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBasePinCodesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.codeIds = object.code_ids?.map(e => BigInt(e)) || [];
+    return message;
   },
-  toAmino(message: PinCodesProposal): PinCodesProposalAmino {
+  toAmino(message: PinCodesProposal, useInterfaces: boolean = true): PinCodesProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -1560,17 +1531,8 @@ export const PinCodesProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: PinCodesProposalAminoMsg): PinCodesProposal {
-    return PinCodesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: PinCodesProposal): PinCodesProposalAminoMsg {
-    return {
-      type: "wasm/PinCodesProposal",
-      value: PinCodesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: PinCodesProposalProtoMsg): PinCodesProposal {
-    return PinCodesProposal.decode(message.value);
+  fromProtoMsg(message: PinCodesProposalProtoMsg, useInterfaces: boolean = true): PinCodesProposal {
+    return PinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PinCodesProposal): Uint8Array {
     return PinCodesProposal.encode(message).finish();
@@ -1606,7 +1568,7 @@ export const UnpinCodesProposal = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UnpinCodesProposal {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UnpinCodesProposal {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUnpinCodesProposal();
@@ -1680,13 +1642,17 @@ export const UnpinCodesProposal = {
     return obj;
   },
   fromAmino(object: UnpinCodesProposalAmino): UnpinCodesProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      codeIds: Array.isArray(object?.code_ids) ? object.code_ids.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseUnpinCodesProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.codeIds = object.code_ids?.map(e => BigInt(e)) || [];
+    return message;
   },
-  toAmino(message: UnpinCodesProposal): UnpinCodesProposalAmino {
+  toAmino(message: UnpinCodesProposal, useInterfaces: boolean = true): UnpinCodesProposalAmino {
     const obj: any = {};
     obj.title = omitDefault(message.title);
     obj.description = omitDefault(message.description);
@@ -1697,17 +1663,8 @@ export const UnpinCodesProposal = {
     }
     return obj;
   },
-  fromAminoMsg(object: UnpinCodesProposalAminoMsg): UnpinCodesProposal {
-    return UnpinCodesProposal.fromAmino(object.value);
-  },
-  toAminoMsg(message: UnpinCodesProposal): UnpinCodesProposalAminoMsg {
-    return {
-      type: "wasm/UnpinCodesProposal",
-      value: UnpinCodesProposal.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: UnpinCodesProposalProtoMsg): UnpinCodesProposal {
-    return UnpinCodesProposal.decode(message.value);
+  fromProtoMsg(message: UnpinCodesProposalProtoMsg, useInterfaces: boolean = true): UnpinCodesProposal {
+    return UnpinCodesProposal.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UnpinCodesProposal): Uint8Array {
     return UnpinCodesProposal.encode(message).finish();

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -8,6 +8,10 @@ export const protobufPackage = "cosmos.base.store.v1beta1";
 export interface CommitInfo {
   version: bigint;
   storeInfos: StoreInfo[];
+}
+export interface CommitInfoProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitInfo";
+  value: Uint8Array;
 }
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -25,6 +29,10 @@ export interface StoreInfo {
   name: string;
   commitId: CommitID;
 }
+export interface StoreInfoProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.StoreInfo";
+  value: Uint8Array;
+}
 /**
  * StoreInfo defines store-specific commit information. It contains a reference
  * between a store name and the commit ID.
@@ -40,6 +48,10 @@ export interface StoreInfoSDKType {
 export interface CommitID {
   version: bigint;
   hash: Uint8Array;
+}
+export interface CommitIDProtoMsg {
+  typeUrl: "/cosmos.base.store.v1beta1.CommitID";
+  value: Uint8Array;
 }
 /**
  * CommitID defines the committment information when a specific store is
@@ -131,14 +143,16 @@ export const CommitInfo = {
     return obj;
   },
   fromAmino(object: CommitInfoAmino): CommitInfo {
-    return {
-      version: BigInt(object.version),
-      storeInfos: Array.isArray(object?.store_infos) ? object.store_infos.map((e: any) => StoreInfo.fromAmino(e)) : []
-    };
+    const message = createBaseCommitInfo();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    message.storeInfos = object.store_infos?.map(e => StoreInfo.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CommitInfo): CommitInfoAmino {
     const obj: any = {};
-    obj.version = omitDefault(message.version);
+    obj.version = message.version ? message.version.toString() : undefined;
     if (message.storeInfos) {
       obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e) : undefined);
     } else {
@@ -242,14 +256,18 @@ export const StoreInfo = {
     return obj;
   },
   fromAmino(object: StoreInfoAmino): StoreInfo {
-    return {
-      name: object.name,
-      commitId: object?.commit_id ? CommitID.fromAmino(object.commit_id) : undefined
-    };
+    const message = createBaseStoreInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.commit_id !== undefined && object.commit_id !== null) {
+      message.commitId = CommitID.fromAmino(object.commit_id);
+    }
+    return message;
   },
   toAmino(message: StoreInfo): StoreInfoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId) : undefined;
     return obj;
   },
@@ -349,15 +367,19 @@ export const CommitID = {
     return obj;
   },
   fromAmino(object: CommitIDAmino): CommitID {
-    return {
-      version: BigInt(object.version),
-      hash: object.hash
-    };
+    const message = createBaseCommitID();
+    if (object.version !== undefined && object.version !== null) {
+      message.version = BigInt(object.version);
+    }
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: CommitID): CommitIDAmino {
     const obj: any = {};
-    obj.version = omitDefault(message.version);
-    obj.hash = message.hash;
+    obj.version = message.version ? message.version.toString() : undefined;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: CommitIDAminoMsg): CommitID {

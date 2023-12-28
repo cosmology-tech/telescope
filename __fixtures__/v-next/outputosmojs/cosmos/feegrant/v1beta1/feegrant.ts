@@ -3,7 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -17,7 +17,11 @@ export interface BasicAllowance {
    */
   spendLimit: Coin[];
   /** expiration specifies an optional time when this allowance expires */
-  expiration: Date;
+  expiration?: Date;
+}
+export interface BasicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.BasicAllowance";
+  value: Uint8Array;
 }
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -25,7 +29,7 @@ export interface BasicAllowance {
  */
 export interface BasicAllowanceSDKType {
   spend_limit: CoinSDKType[];
-  expiration: Date;
+  expiration?: Date;
 }
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
@@ -53,6 +57,10 @@ export interface PeriodicAllowance {
    */
   periodReset: Date;
 }
+export interface PeriodicAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.PeriodicAllowance";
+  value: Uint8Array;
+}
 /**
  * PeriodicAllowance extends Allowance to allow for both a maximum cap,
  * as well as a limit per time period.
@@ -67,13 +75,17 @@ export interface PeriodicAllowanceSDKType {
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowance {
   /** allowance can be any of basic and periodic fee allowance. */
-  allowance: Any;
+  allowance?: Any;
   /** allowed_messages are the messages for which the grantee has the access. */
   allowedMessages: string[];
 }
+export interface AllowedMsgAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.AllowedMsgAllowance";
+  value: Uint8Array;
+}
 /** AllowedMsgAllowance creates allowance only for specified message types. */
 export interface AllowedMsgAllowanceSDKType {
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
   allowed_messages: string[];
 }
 /** Grant is stored in the KVStore to record a grant with full context */
@@ -83,18 +95,22 @@ export interface Grant {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
+  allowance?: Any;
+}
+export interface GrantProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.Grant";
+  value: Uint8Array;
 }
 /** Grant is stored in the KVStore to record a grant with full context */
 export interface GrantSDKType {
   granter: string;
   grantee: string;
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
 }
 function createBaseBasicAllowance(): BasicAllowance {
   return {
     spendLimit: [],
-    expiration: new Date()
+    expiration: undefined
   };
 }
 export const BasicAllowance = {
@@ -173,10 +189,12 @@ export const BasicAllowance = {
     return obj;
   },
   fromAmino(object: BasicAllowanceAmino): BasicAllowance {
-    return {
-      spendLimit: Array.isArray(object?.spend_limit) ? object.spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      expiration: object?.expiration ? Timestamp.fromAmino(object.expiration) : undefined
-    };
+    const message = createBaseBasicAllowance();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    if (object.expiration !== undefined && object.expiration !== null) {
+      message.expiration = fromTimestamp(Timestamp.fromAmino(object.expiration));
+    }
+    return message;
   },
   toAmino(message: BasicAllowance): BasicAllowanceAmino {
     const obj: any = {};
@@ -185,7 +203,7 @@ export const BasicAllowance = {
     } else {
       obj.spend_limit = [];
     }
-    obj.expiration = message.expiration;
+    obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
   },
   fromAminoMsg(object: BasicAllowanceAminoMsg): BasicAllowance {
@@ -339,13 +357,19 @@ export const PeriodicAllowance = {
     return obj;
   },
   fromAmino(object: PeriodicAllowanceAmino): PeriodicAllowance {
-    return {
-      basic: object?.basic ? BasicAllowance.fromAmino(object.basic) : undefined,
-      period: object?.period ? Duration.fromAmino(object.period) : undefined,
-      periodSpendLimit: Array.isArray(object?.period_spend_limit) ? object.period_spend_limit.map((e: any) => Coin.fromAmino(e)) : [],
-      periodCanSpend: Array.isArray(object?.period_can_spend) ? object.period_can_spend.map((e: any) => Coin.fromAmino(e)) : [],
-      periodReset: object?.period_reset ? Timestamp.fromAmino(object.period_reset) : undefined
-    };
+    const message = createBasePeriodicAllowance();
+    if (object.basic !== undefined && object.basic !== null) {
+      message.basic = BasicAllowance.fromAmino(object.basic);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = Duration.fromAmino(object.period);
+    }
+    message.periodSpendLimit = object.period_spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    message.periodCanSpend = object.period_can_spend?.map(e => Coin.fromAmino(e)) || [];
+    if (object.period_reset !== undefined && object.period_reset !== null) {
+      message.periodReset = fromTimestamp(Timestamp.fromAmino(object.period_reset));
+    }
+    return message;
   },
   toAmino(message: PeriodicAllowance): PeriodicAllowanceAmino {
     const obj: any = {};
@@ -361,7 +385,7 @@ export const PeriodicAllowance = {
     } else {
       obj.period_can_spend = [];
     }
-    obj.period_reset = message.periodReset;
+    obj.period_reset = message.periodReset ? Timestamp.toAmino(toTimestamp(message.periodReset)) : undefined;
     return obj;
   },
   fromAminoMsg(object: PeriodicAllowanceAminoMsg): PeriodicAllowance {
@@ -388,7 +412,7 @@ export const PeriodicAllowance = {
 };
 function createBaseAllowedMsgAllowance(): AllowedMsgAllowance {
   return {
-    allowance: Any.fromPartial({}),
+    allowance: undefined,
     allowedMessages: []
   };
 }
@@ -468,10 +492,12 @@ export const AllowedMsgAllowance = {
     return obj;
   },
   fromAmino(object: AllowedMsgAllowanceAmino): AllowedMsgAllowance {
-    return {
-      allowance: object?.allowance ? Any.fromAmino(object.allowance) : undefined,
-      allowedMessages: Array.isArray(object?.allowed_messages) ? object.allowed_messages.map((e: any) => e) : []
-    };
+    const message = createBaseAllowedMsgAllowance();
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromAmino(object.allowance);
+    }
+    message.allowedMessages = object.allowed_messages?.map(e => e) || [];
+    return message;
   },
   toAmino(message: AllowedMsgAllowance): AllowedMsgAllowanceAmino {
     const obj: any = {};
@@ -509,7 +535,7 @@ function createBaseGrant(): Grant {
   return {
     granter: "",
     grantee: "",
-    allowance: Any.fromPartial({})
+    allowance: undefined
   };
 }
 export const Grant = {
@@ -592,16 +618,22 @@ export const Grant = {
     return obj;
   },
   fromAmino(object: GrantAmino): Grant {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      allowance: object?.allowance ? Any.fromAmino(object.allowance) : undefined
-    };
+    const message = createBaseGrant();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromAmino(object.allowance);
+    }
+    return message;
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
-    obj.granter = omitDefault(message.granter);
-    obj.grantee = omitDefault(message.grantee);
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
     obj.allowance = message.allowance ? Any.toAmino(message.allowance) : undefined;
     return obj;
   },

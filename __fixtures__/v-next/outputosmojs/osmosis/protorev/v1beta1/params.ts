@@ -8,6 +8,10 @@ export interface Params {
   /** The admin account (settings manager) of the protorev module. */
   admin: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the module. */
 export interface ParamsSDKType {
   enabled: boolean;
@@ -87,10 +91,14 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enabled: object.enabled,
-      admin: object.admin
-    };
+    const message = createBaseParams();
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    if (object.admin !== undefined && object.admin !== null) {
+      message.admin = object.admin;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

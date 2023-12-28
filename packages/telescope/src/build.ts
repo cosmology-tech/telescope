@@ -5,6 +5,7 @@ import {
     createAminoConverter,
     createCreateProtoType,
     createObjectWithMethods,
+    createRegisterObject,
     createProtoEnum,
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
@@ -27,6 +28,7 @@ import {
     createInterfaceDecoder,
     createInterfaceFromAmino,
     createInterfaceToAmino,
+    createRegisterAminoProtoMapping,
 } from '@cosmology/ast';
 import { ServiceMutation, ServiceQuery } from '@cosmology/types';
 
@@ -55,6 +57,19 @@ export const buildBaseTypeScriptClass = (
     if (context.options.prototypes.enabled) {
         context.body.push(createCreateProtoType(context.proto, name, obj));
         context.body.push(createObjectWithMethods(context.proto, name, obj));
+
+        if(context.options.interfaces?.enabled && context.options.interfaces?.useGlobalDecoderRegistry){
+          const registerObj = createRegisterObject(context.proto, name, obj);
+          if(registerObj){
+            context.body.push(registerObj);
+
+            //createRegisterAminoProtoMapping
+            const registerAminoObj = createRegisterAminoProtoMapping(context.proto, name, obj);
+            if(registerAminoObj){
+              context.body.push(registerAminoObj);
+            }
+          }
+        }
     }
 };
 
@@ -66,8 +81,11 @@ export const buildBaseTypeScriptInterface = (
 
     context.body.push(createProtoType(context.proto, name, obj));
 
-    if (!context.options.aminoEncoding.useLegacyInlineEncoding) {
+    if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding || context.options.prototypes?.methods?.fromProto || context.options.prototypes?.methods?.toProto) {
         context.body.push(createProtoTypeType(context.proto, name, obj));
+    }
+
+    if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding) {
         // conditional type
         const interfaceType = createProtoInterfaceEncodedType(context.proto, name, obj);
         if (interfaceType) {
@@ -75,10 +93,9 @@ export const buildBaseTypeScriptInterface = (
         }
         context.body.push(createAminoType(context.proto, name, obj));
 
-        // TODO optimization:
-        // maybe in future, we can only print AminoTypeType if it's needed,
-        // for example, if it's used in msgs, or inside of a implements/accepts
-        context.body.push(createAminoTypeType(context.proto, name, obj));
+        if(!context.options.aminoEncoding?.disableMsgTypes){
+            context.body.push(createAminoTypeType(context.proto, name, obj));
+        }
     }
     if (context.options.useSDKTypes) {
         context.body.push(createSDKType(context.proto, name, obj));
@@ -94,7 +111,7 @@ export const buildEnums = (
     if (context.options.useSDKTypes) {
         context.body.push(createEnumSDKType(context.proto, name, obj));
     }
-    if (!context.options.aminoEncoding.useLegacyInlineEncoding) {
+    if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding) {
         context.body.push(createEnumAminoType(context.proto, name, obj));
     }
     context.body.push(createProtoEnumFromJSON(context.proto, name, obj));
@@ -178,14 +195,14 @@ export class TelescopeParseContext implements TelescopeParseContext {
         });
 
         // interfaces
-        if (this.options.interfaces.enabled) {
+        if (this.options.interfaces.enabled && !this.options.interfaces.useGlobalDecoderRegistry) {
             const interfaces = Object.keys(this.ref.traversed.acceptsInterface ?? {});
             if (interfaces.length) {
                 interfaces.forEach(interfaceName => {
                     this.body.push(createInterfaceDecoder(this.proto, this.ref, interfaceName));
                     if (
-                        this.options.aminoEncoding.enabled &&
-                        !this.options.aminoEncoding.useLegacyInlineEncoding
+                        this.options.aminoEncoding?.enabled &&
+                        !this.options.aminoEncoding?.useLegacyInlineEncoding
                     ) {
                         this.body.push(createInterfaceFromAmino(this.proto, this.ref, interfaceName));
                         this.body.push(createInterfaceToAmino(this.proto, this.ref, interfaceName));
@@ -200,10 +217,14 @@ export class TelescopeParseContext implements TelescopeParseContext {
         this.body.push(createTypeRegistry(this.amino, getMutations(this.mutations)));
     }
     buildRegistryLoader() {
+        if (!this.options?.prototypes?.enableRegistryLoader) {
+          return
+        }
+
         this.body.push(createRegistryLoader(this.amino));
     }
     buildAminoInterfaces() {
-        if (!this.options.aminoEncoding.useLegacyInlineEncoding) return;
+        if (!this.options?.aminoEncoding?.enabled || !this.options?.aminoEncoding?.useLegacyInlineEncoding) return;
         //
         const protos = getAminoProtos(this.mutations, this.store);
         protos.forEach(proto => {
@@ -222,6 +243,9 @@ export class TelescopeParseContext implements TelescopeParseContext {
         }));
     }
     buildHelperObject() {
+        if (!this.options?.prototypes?.enableMessageComposer) {
+          return
+        }
         // add methods
         this.body.push(createHelperObject({
             context: this.amino,

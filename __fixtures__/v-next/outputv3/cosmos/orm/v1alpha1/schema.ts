@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -101,16 +101,12 @@ export interface ModuleSchemaDescriptorProtoMsg {
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorAmino {
-  schema_file: ModuleSchemaDescriptor_FileEntryAmino[];
+  schema_file?: ModuleSchemaDescriptor_FileEntryAmino[];
   /**
    * prefix is an optional prefix that precedes all keys in this module's
    * store.
    */
-  prefix: Uint8Array;
-}
-export interface ModuleSchemaDescriptorAminoMsg {
-  type: "cosmos-sdk/ModuleSchemaDescriptor";
-  value: ModuleSchemaDescriptorAmino;
+  prefix?: string;
 }
 /** ModuleSchemaDescriptor describe's a module's ORM schema. */
 export interface ModuleSchemaDescriptorSDKType {
@@ -147,23 +143,19 @@ export interface ModuleSchemaDescriptor_FileEntryAmino {
    * id is a prefix that will be varint encoded and prepended to all the
    * table keys specified in the file's tables.
    */
-  id: number;
+  id?: number;
   /**
    * proto_file_name is the name of a file .proto in that contains
    * table definitions. The .proto file must be in a package that the
    * module has referenced using cosmos.app.v1.ModuleDescriptor.use_package.
    */
-  proto_file_name: string;
+  proto_file_name?: string;
   /**
    * storage_type optionally indicates the type of storage this file's
    * tables should used. If it is left unspecified, the default KV-storage
    * of the app will be used.
    */
-  storage_type: StorageType;
-}
-export interface ModuleSchemaDescriptor_FileEntryAminoMsg {
-  type: "cosmos-sdk/FileEntry";
-  value: ModuleSchemaDescriptor_FileEntryAmino;
+  storage_type?: StorageType;
 }
 /** FileEntry describes an ORM file used in a module. */
 export interface ModuleSchemaDescriptor_FileEntrySDKType {
@@ -189,7 +181,7 @@ export const ModuleSchemaDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor();
@@ -197,7 +189,7 @@ export const ModuleSchemaDescriptor = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.schemaFile.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32()));
+          message.schemaFile.push(ModuleSchemaDescriptor_FileEntry.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.prefix = reader.bytes();
@@ -248,32 +240,25 @@ export const ModuleSchemaDescriptor = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptorAmino): ModuleSchemaDescriptor {
-    return {
-      schemaFile: Array.isArray(object?.schema_file) ? object.schema_file.map((e: any) => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) : [],
-      prefix: object.prefix
-    };
+    const message = createBaseModuleSchemaDescriptor();
+    message.schemaFile = object.schema_file?.map(e => ModuleSchemaDescriptor_FileEntry.fromAmino(e)) || [];
+    if (object.prefix !== undefined && object.prefix !== null) {
+      message.prefix = bytesFromBase64(object.prefix);
+    }
+    return message;
   },
-  toAmino(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAmino {
+  toAmino(message: ModuleSchemaDescriptor, useInterfaces: boolean = true): ModuleSchemaDescriptorAmino {
     const obj: any = {};
     if (message.schemaFile) {
-      obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e) : undefined);
+      obj.schema_file = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.schema_file = [];
     }
-    obj.prefix = message.prefix;
+    obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ModuleSchemaDescriptorAminoMsg): ModuleSchemaDescriptor {
-    return ModuleSchemaDescriptor.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleSchemaDescriptor): ModuleSchemaDescriptorAminoMsg {
-    return {
-      type: "cosmos-sdk/ModuleSchemaDescriptor",
-      value: ModuleSchemaDescriptor.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg): ModuleSchemaDescriptor {
-    return ModuleSchemaDescriptor.decode(message.value);
+  fromProtoMsg(message: ModuleSchemaDescriptorProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor {
+    return ModuleSchemaDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleSchemaDescriptor): Uint8Array {
     return ModuleSchemaDescriptor.encode(message).finish();
@@ -307,7 +292,7 @@ export const ModuleSchemaDescriptor_FileEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ModuleSchemaDescriptor_FileEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModuleSchemaDescriptor_FileEntry();
@@ -366,30 +351,27 @@ export const ModuleSchemaDescriptor_FileEntry = {
     return obj;
   },
   fromAmino(object: ModuleSchemaDescriptor_FileEntryAmino): ModuleSchemaDescriptor_FileEntry {
-    return {
-      id: object.id,
-      protoFileName: object.proto_file_name,
-      storageType: isSet(object.storage_type) ? storageTypeFromJSON(object.storage_type) : -1
-    };
+    const message = createBaseModuleSchemaDescriptor_FileEntry();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.proto_file_name !== undefined && object.proto_file_name !== null) {
+      message.protoFileName = object.proto_file_name;
+    }
+    if (object.storage_type !== undefined && object.storage_type !== null) {
+      message.storageType = storageTypeFromJSON(object.storage_type);
+    }
+    return message;
   },
-  toAmino(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAmino {
+  toAmino(message: ModuleSchemaDescriptor_FileEntry, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntryAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.proto_file_name = omitDefault(message.protoFileName);
-    obj.storage_type = omitDefault(message.storageType);
+    obj.id = message.id;
+    obj.proto_file_name = message.protoFileName;
+    obj.storage_type = storageTypeToJSON(message.storageType);
     return obj;
   },
-  fromAminoMsg(object: ModuleSchemaDescriptor_FileEntryAminoMsg): ModuleSchemaDescriptor_FileEntry {
-    return ModuleSchemaDescriptor_FileEntry.fromAmino(object.value);
-  },
-  toAminoMsg(message: ModuleSchemaDescriptor_FileEntry): ModuleSchemaDescriptor_FileEntryAminoMsg {
-    return {
-      type: "cosmos-sdk/FileEntry",
-      value: ModuleSchemaDescriptor_FileEntry.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg): ModuleSchemaDescriptor_FileEntry {
-    return ModuleSchemaDescriptor_FileEntry.decode(message.value);
+  fromProtoMsg(message: ModuleSchemaDescriptor_FileEntryProtoMsg, useInterfaces: boolean = true): ModuleSchemaDescriptor_FileEntry {
+    return ModuleSchemaDescriptor_FileEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ModuleSchemaDescriptor_FileEntry): Uint8Array {
     return ModuleSchemaDescriptor_FileEntry.encode(message).finish();

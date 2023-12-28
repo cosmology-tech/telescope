@@ -12,6 +12,10 @@ export interface Params {
   authorizedTickSpacing: bigint[];
   authorizedSwapFees: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.concentratedliquidity.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   authorized_tick_spacing: bigint[];
   authorized_swap_fees: string[];
@@ -115,10 +119,10 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      authorizedTickSpacing: Array.isArray(object?.authorized_tick_spacing) ? object.authorized_tick_spacing.map((e: any) => BigInt(e)) : [],
-      authorizedSwapFees: Array.isArray(object?.authorized_swap_fees) ? object.authorized_swap_fees.map((e: any) => e) : []
-    };
+    const message = createBaseParams();
+    message.authorizedTickSpacing = object.authorized_tick_spacing?.map(e => BigInt(e)) || [];
+    message.authorizedSwapFees = object.authorized_swap_fees?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

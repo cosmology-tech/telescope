@@ -2,7 +2,7 @@ import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDK
 import { Empty, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -141,19 +141,27 @@ export function type_WellKnownTypeToJSON(object: Type_WellKnownType): string {
 }
 export interface CheckedExpr_ReferenceMapEntry {
   key: bigint;
-  value: Reference;
+  value?: Reference;
+}
+export interface CheckedExpr_ReferenceMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckedExpr_ReferenceMapEntrySDKType {
   key: bigint;
-  value: ReferenceSDKType;
+  value?: ReferenceSDKType;
 }
 export interface CheckedExpr_TypeMapEntry {
   key: bigint;
-  value: Type;
+  value?: Type;
+}
+export interface CheckedExpr_TypeMapEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface CheckedExpr_TypeMapEntrySDKType {
   key: bigint;
-  value: TypeSDKType;
+  value?: TypeSDKType;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExpr {
@@ -191,7 +199,7 @@ export interface CheckedExpr {
    * The source info derived from input that generated the parsed `expr` and
    * any optimizations made during the type-checking pass.
    */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
   /**
    * The expr version indicates the major / minor version number of the `expr`
    * representation.
@@ -206,7 +214,11 @@ export interface CheckedExpr {
    * The checked expression. Semantically equivalent to the parsed `expr`, but
    * may have structural differences.
    */
-  expr: Expr;
+  expr?: Expr;
+}
+export interface CheckedExprProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.CheckedExpr";
+  value: Uint8Array;
 }
 /** A CEL expression which has been successfully type checked. */
 export interface CheckedExprSDKType {
@@ -216,9 +228,9 @@ export interface CheckedExprSDKType {
   type_map: {
     [key: bigint]: TypeSDKType;
   };
-  source_info: SourceInfoSDKType;
+  source_info?: SourceInfoSDKType;
   expr_version: string;
-  expr: ExprSDKType;
+  expr?: ExprSDKType;
 }
 /** Represents a CEL type. */
 export interface Type {
@@ -271,6 +283,10 @@ export interface Type {
   /** Abstract, application defined type. */
   abstractType?: Type_AbstractType;
 }
+export interface TypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Type";
+  value: Uint8Array;
+}
 /** Represents a CEL type. */
 export interface TypeSDKType {
   dyn?: EmptySDKType;
@@ -290,34 +306,46 @@ export interface TypeSDKType {
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListType {
   /** The element type. */
-  elemType: Type;
+  elemType?: Type;
+}
+export interface Type_ListTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ListType";
+  value: Uint8Array;
 }
 /** List type with typed elements, e.g. `list<example.proto.MyMessage>`. */
 export interface Type_ListTypeSDKType {
-  elem_type: TypeSDKType;
+  elem_type?: TypeSDKType;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapType {
   /** The type of the key. */
-  keyType: Type;
+  keyType?: Type;
   /** The type of the value. */
-  valueType: Type;
+  valueType?: Type;
+}
+export interface Type_MapTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.MapType";
+  value: Uint8Array;
 }
 /** Map type with parameterized key and value types, e.g. `map<string, int>`. */
 export interface Type_MapTypeSDKType {
-  key_type: TypeSDKType;
-  value_type: TypeSDKType;
+  key_type?: TypeSDKType;
+  value_type?: TypeSDKType;
 }
 /** Function type with result and arg types. */
 export interface Type_FunctionType {
   /** Result type of the function. */
-  resultType: Type;
+  resultType?: Type;
   /** Argument types of the function. */
   argTypes: Type[];
 }
+export interface Type_FunctionTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionType";
+  value: Uint8Array;
+}
 /** Function type with result and arg types. */
 export interface Type_FunctionTypeSDKType {
-  result_type: TypeSDKType;
+  result_type?: TypeSDKType;
   arg_types: TypeSDKType[];
 }
 /** Application defined abstract type. */
@@ -326,6 +354,10 @@ export interface Type_AbstractType {
   name: string;
   /** Parameter types for this abstract type. */
   parameterTypes: Type[];
+}
+export interface Type_AbstractTypeProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.AbstractType";
+  value: Uint8Array;
 }
 /** Application defined abstract type. */
 export interface Type_AbstractTypeSDKType {
@@ -355,6 +387,10 @@ export interface Decl {
   /** Function declaration. */
   function?: Decl_FunctionDecl;
 }
+export interface DeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Decl";
+  value: Uint8Array;
+}
 /**
  * Represents a declaration of a named value or function.
  * 
@@ -376,14 +412,18 @@ export interface DeclSDKType {
  */
 export interface Decl_IdentDecl {
   /** Required. The type of the identifier. */
-  type: Type;
+  type?: Type;
   /**
    * The constant value of the identifier. If not specified, the identifier
    * must be supplied at evaluation time.
    */
-  value: Constant;
+  value?: Constant;
   /** Documentation string for the identifier. */
   doc: string;
+}
+export interface Decl_IdentDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.IdentDecl";
+  value: Uint8Array;
 }
 /**
  * Identifier declaration which specifies its type and optional `Expr` value.
@@ -394,8 +434,8 @@ export interface Decl_IdentDecl {
  * time.
  */
 export interface Decl_IdentDeclSDKType {
-  type: TypeSDKType;
-  value: ConstantSDKType;
+  type?: TypeSDKType;
+  value?: ConstantSDKType;
   doc: string;
 }
 /**
@@ -408,6 +448,10 @@ export interface Decl_IdentDeclSDKType {
 export interface Decl_FunctionDecl {
   /** Required. List of function overloads, must contain at least one overload. */
   overloads: Decl_FunctionDecl_Overload[];
+}
+export interface Decl_FunctionDeclProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.FunctionDecl";
+  value: Uint8Array;
 }
 /**
  * Function declaration specifies one or more overloads which indicate the
@@ -464,7 +508,7 @@ export interface Decl_FunctionDecl_Overload {
    * Required. The result type of the function. For example, the operator
    * `string.isEmpty()` would have `result_type` of `kind: BOOL`.
    */
-  resultType: Type;
+  resultType?: Type;
   /**
    * Whether the function is to be used in a method call-style `x.f(...)`
    * of a function call-style `f(x, ...)`.
@@ -475,6 +519,10 @@ export interface Decl_FunctionDecl_Overload {
   isInstanceFunction: boolean;
   /** Documentation string for the overload. */
   doc: string;
+}
+export interface Decl_FunctionDecl_OverloadProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Overload";
+  value: Uint8Array;
 }
 /**
  * An overload indicates a function's parameter types and return type, and
@@ -492,7 +540,7 @@ export interface Decl_FunctionDecl_OverloadSDKType {
   overload_id: string;
   params: TypeSDKType[];
   type_params: string[];
-  result_type: TypeSDKType;
+  result_type?: TypeSDKType;
   is_instance_function: boolean;
   doc: string;
 }
@@ -515,18 +563,22 @@ export interface Reference {
    * For references to constants, this may contain the value of the
    * constant if known at compile time.
    */
-  value: Constant;
+  value?: Constant;
+}
+export interface ReferenceProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Reference";
+  value: Uint8Array;
 }
 /** Describes a resolved reference to a declaration. */
 export interface ReferenceSDKType {
   name: string;
   overload_id: string[];
-  value: ConstantSDKType;
+  value?: ConstantSDKType;
 }
 function createBaseCheckedExpr_ReferenceMapEntry(): CheckedExpr_ReferenceMapEntry {
   return {
     key: BigInt(0),
-    value: Reference.fromPartial({})
+    value: undefined
   };
 }
 export const CheckedExpr_ReferenceMapEntry = {
@@ -596,14 +648,18 @@ export const CheckedExpr_ReferenceMapEntry = {
     return obj;
   },
   fromAmino(object: CheckedExpr_ReferenceMapEntryAmino): CheckedExpr_ReferenceMapEntry {
-    return {
-      key: BigInt(object.key),
-      value: object?.value ? Reference.fromAmino(object.value) : undefined
-    };
+    const message = createBaseCheckedExpr_ReferenceMapEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Reference.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
+    obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Reference.toAmino(message.value) : undefined;
     return obj;
   },
@@ -620,7 +676,7 @@ export const CheckedExpr_ReferenceMapEntry = {
 function createBaseCheckedExpr_TypeMapEntry(): CheckedExpr_TypeMapEntry {
   return {
     key: BigInt(0),
-    value: Type.fromPartial({})
+    value: undefined
   };
 }
 export const CheckedExpr_TypeMapEntry = {
@@ -690,14 +746,18 @@ export const CheckedExpr_TypeMapEntry = {
     return obj;
   },
   fromAmino(object: CheckedExpr_TypeMapEntryAmino): CheckedExpr_TypeMapEntry {
-    return {
-      key: BigInt(object.key),
-      value: object?.value ? Type.fromAmino(object.value) : undefined
-    };
+    const message = createBaseCheckedExpr_TypeMapEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = BigInt(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Type.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
+    obj.key = message.key ? message.key.toString() : undefined;
     obj.value = message.value ? Type.toAmino(message.value) : undefined;
     return obj;
   },
@@ -715,9 +775,9 @@ function createBaseCheckedExpr(): CheckedExpr {
   return {
     referenceMap: {},
     typeMap: {},
-    sourceInfo: SourceInfo.fromPartial({}),
+    sourceInfo: undefined,
     exprVersion: "",
-    expr: Expr.fromPartial({})
+    expr: undefined
   };
 }
 export const CheckedExpr = {
@@ -900,23 +960,33 @@ export const CheckedExpr = {
     return obj;
   },
   fromAmino(object: CheckedExprAmino): CheckedExpr {
-    return {
-      referenceMap: isObject(object.reference_map) ? Object.entries(object.reference_map).reduce<{
-        [key: bigint]: Reference;
-      }>((acc, [key, value]) => {
+    const message = createBaseCheckedExpr();
+    message.referenceMap = Object.entries(object.reference_map ?? {}).reduce<{
+      [key: bigint]: Reference;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Reference.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      typeMap: isObject(object.type_map) ? Object.entries(object.type_map).reduce<{
-        [key: bigint]: Type;
-      }>((acc, [key, value]) => {
+      }
+      return acc;
+    }, {});
+    message.typeMap = Object.entries(object.type_map ?? {}).reduce<{
+      [key: bigint]: Type;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Type.fromAmino(value);
-        return acc;
-      }, {}) : {},
-      sourceInfo: object?.source_info ? SourceInfo.fromAmino(object.source_info) : undefined,
-      exprVersion: object.expr_version,
-      expr: object?.expr ? Expr.fromAmino(object.expr) : undefined
-    };
+      }
+      return acc;
+    }, {});
+    if (object.source_info !== undefined && object.source_info !== null) {
+      message.sourceInfo = SourceInfo.fromAmino(object.source_info);
+    }
+    if (object.expr_version !== undefined && object.expr_version !== null) {
+      message.exprVersion = object.expr_version;
+    }
+    if (object.expr !== undefined && object.expr !== null) {
+      message.expr = Expr.fromAmino(object.expr);
+    }
+    return message;
   },
   toAmino(message: CheckedExpr): CheckedExprAmino {
     const obj: any = {};
@@ -933,7 +1003,7 @@ export const CheckedExpr = {
       });
     }
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.expr_version = omitDefault(message.exprVersion);
+    obj.expr_version = message.exprVersion;
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     return obj;
   },
@@ -1170,34 +1240,60 @@ export const Type = {
     return obj;
   },
   fromAmino(object: TypeAmino): Type {
-    return {
-      dyn: object?.dyn ? Empty.fromAmino(object.dyn) : undefined,
-      null: isSet(object.null) ? nullValueFromJSON(object.null) : undefined,
-      primitive: isSet(object.primitive) ? type_PrimitiveTypeFromJSON(object.primitive) : undefined,
-      wrapper: isSet(object.wrapper) ? type_PrimitiveTypeFromJSON(object.wrapper) : undefined,
-      wellKnown: isSet(object.well_known) ? type_WellKnownTypeFromJSON(object.well_known) : undefined,
-      listType: object?.list_type ? Type_ListType.fromAmino(object.list_type) : undefined,
-      mapType: object?.map_type ? Type_MapType.fromAmino(object.map_type) : undefined,
-      function: object?.function ? Type_FunctionType.fromAmino(object.function) : undefined,
-      messageType: object?.message_type,
-      typeParam: object?.type_param,
-      type: object?.type ? Type.fromAmino(object.type) : undefined,
-      error: object?.error ? Empty.fromAmino(object.error) : undefined,
-      abstractType: object?.abstract_type ? Type_AbstractType.fromAmino(object.abstract_type) : undefined
-    };
+    const message = createBaseType();
+    if (object.dyn !== undefined && object.dyn !== null) {
+      message.dyn = Empty.fromAmino(object.dyn);
+    }
+    if (object.null !== undefined && object.null !== null) {
+      message.null = nullValueFromJSON(object.null);
+    }
+    if (object.primitive !== undefined && object.primitive !== null) {
+      message.primitive = type_PrimitiveTypeFromJSON(object.primitive);
+    }
+    if (object.wrapper !== undefined && object.wrapper !== null) {
+      message.wrapper = type_PrimitiveTypeFromJSON(object.wrapper);
+    }
+    if (object.well_known !== undefined && object.well_known !== null) {
+      message.wellKnown = type_WellKnownTypeFromJSON(object.well_known);
+    }
+    if (object.list_type !== undefined && object.list_type !== null) {
+      message.listType = Type_ListType.fromAmino(object.list_type);
+    }
+    if (object.map_type !== undefined && object.map_type !== null) {
+      message.mapType = Type_MapType.fromAmino(object.map_type);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = Type_FunctionType.fromAmino(object.function);
+    }
+    if (object.message_type !== undefined && object.message_type !== null) {
+      message.messageType = object.message_type;
+    }
+    if (object.type_param !== undefined && object.type_param !== null) {
+      message.typeParam = object.type_param;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = Type.fromAmino(object.type);
+    }
+    if (object.error !== undefined && object.error !== null) {
+      message.error = Empty.fromAmino(object.error);
+    }
+    if (object.abstract_type !== undefined && object.abstract_type !== null) {
+      message.abstractType = Type_AbstractType.fromAmino(object.abstract_type);
+    }
+    return message;
   },
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = omitDefault(message.null);
-    obj.primitive = omitDefault(message.primitive);
-    obj.wrapper = omitDefault(message.wrapper);
-    obj.well_known = omitDefault(message.wellKnown);
+    obj.null = nullValueToJSON(message.null);
+    obj.primitive = type_PrimitiveTypeToJSON(message.primitive);
+    obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper);
+    obj.well_known = type_WellKnownTypeToJSON(message.wellKnown);
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
-    obj.message_type = omitDefault(message.messageType);
-    obj.type_param = omitDefault(message.typeParam);
+    obj.message_type = message.messageType;
+    obj.type_param = message.typeParam;
     obj.type = message.type ? Type.toAmino(message.type) : undefined;
     obj.error = message.error ? Empty.toAmino(message.error) : undefined;
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType) : undefined;
@@ -1221,7 +1317,7 @@ export const Type = {
 };
 function createBaseType_ListType(): Type_ListType {
   return {
-    elemType: Type.fromPartial({})
+    elemType: undefined
   };
 }
 export const Type_ListType = {
@@ -1280,9 +1376,11 @@ export const Type_ListType = {
     return obj;
   },
   fromAmino(object: Type_ListTypeAmino): Type_ListType {
-    return {
-      elemType: object?.elem_type ? Type.fromAmino(object.elem_type) : undefined
-    };
+    const message = createBaseType_ListType();
+    if (object.elem_type !== undefined && object.elem_type !== null) {
+      message.elemType = Type.fromAmino(object.elem_type);
+    }
+    return message;
   },
   toAmino(message: Type_ListType): Type_ListTypeAmino {
     const obj: any = {};
@@ -1307,8 +1405,8 @@ export const Type_ListType = {
 };
 function createBaseType_MapType(): Type_MapType {
   return {
-    keyType: Type.fromPartial({}),
-    valueType: Type.fromPartial({})
+    keyType: undefined,
+    valueType: undefined
   };
 }
 export const Type_MapType = {
@@ -1379,10 +1477,14 @@ export const Type_MapType = {
     return obj;
   },
   fromAmino(object: Type_MapTypeAmino): Type_MapType {
-    return {
-      keyType: object?.key_type ? Type.fromAmino(object.key_type) : undefined,
-      valueType: object?.value_type ? Type.fromAmino(object.value_type) : undefined
-    };
+    const message = createBaseType_MapType();
+    if (object.key_type !== undefined && object.key_type !== null) {
+      message.keyType = Type.fromAmino(object.key_type);
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = Type.fromAmino(object.value_type);
+    }
+    return message;
   },
   toAmino(message: Type_MapType): Type_MapTypeAmino {
     const obj: any = {};
@@ -1408,7 +1510,7 @@ export const Type_MapType = {
 };
 function createBaseType_FunctionType(): Type_FunctionType {
   return {
-    resultType: Type.fromPartial({}),
+    resultType: undefined,
     argTypes: []
   };
 }
@@ -1488,10 +1590,12 @@ export const Type_FunctionType = {
     return obj;
   },
   fromAmino(object: Type_FunctionTypeAmino): Type_FunctionType {
-    return {
-      resultType: object?.result_type ? Type.fromAmino(object.result_type) : undefined,
-      argTypes: Array.isArray(object?.arg_types) ? object.arg_types.map((e: any) => Type.fromAmino(e)) : []
-    };
+    const message = createBaseType_FunctionType();
+    if (object.result_type !== undefined && object.result_type !== null) {
+      message.resultType = Type.fromAmino(object.result_type);
+    }
+    message.argTypes = object.arg_types?.map(e => Type.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Type_FunctionType): Type_FunctionTypeAmino {
     const obj: any = {};
@@ -1601,14 +1705,16 @@ export const Type_AbstractType = {
     return obj;
   },
   fromAmino(object: Type_AbstractTypeAmino): Type_AbstractType {
-    return {
-      name: object.name,
-      parameterTypes: Array.isArray(object?.parameter_types) ? object.parameter_types.map((e: any) => Type.fromAmino(e)) : []
-    };
+    const message = createBaseType_AbstractType();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.parameterTypes = object.parameter_types?.map(e => Type.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Type_AbstractType): Type_AbstractTypeAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.parameterTypes) {
       obj.parameter_types = message.parameterTypes.map(e => e ? Type.toAmino(e) : undefined);
     } else {
@@ -1719,15 +1825,21 @@ export const Decl = {
     return obj;
   },
   fromAmino(object: DeclAmino): Decl {
-    return {
-      name: object.name,
-      ident: object?.ident ? Decl_IdentDecl.fromAmino(object.ident) : undefined,
-      function: object?.function ? Decl_FunctionDecl.fromAmino(object.function) : undefined
-    };
+    const message = createBaseDecl();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = Decl_IdentDecl.fromAmino(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = Decl_FunctionDecl.fromAmino(object.function);
+    }
+    return message;
   },
   toAmino(message: Decl): DeclAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function) : undefined;
     return obj;
@@ -1750,8 +1862,8 @@ export const Decl = {
 };
 function createBaseDecl_IdentDecl(): Decl_IdentDecl {
   return {
-    type: Type.fromPartial({}),
-    value: Constant.fromPartial({}),
+    type: undefined,
+    value: undefined,
     doc: ""
   };
 }
@@ -1835,17 +1947,23 @@ export const Decl_IdentDecl = {
     return obj;
   },
   fromAmino(object: Decl_IdentDeclAmino): Decl_IdentDecl {
-    return {
-      type: object?.type ? Type.fromAmino(object.type) : undefined,
-      value: object?.value ? Constant.fromAmino(object.value) : undefined,
-      doc: object.doc
-    };
+    const message = createBaseDecl_IdentDecl();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = Type.fromAmino(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Constant.fromAmino(object.value);
+    }
+    if (object.doc !== undefined && object.doc !== null) {
+      message.doc = object.doc;
+    }
+    return message;
   },
   toAmino(message: Decl_IdentDecl): Decl_IdentDeclAmino {
     const obj: any = {};
     obj.type = message.type ? Type.toAmino(message.type) : undefined;
     obj.value = message.value ? Constant.toAmino(message.value) : undefined;
-    obj.doc = omitDefault(message.doc);
+    obj.doc = message.doc;
     return obj;
   },
   fromAminoMsg(object: Decl_IdentDeclAminoMsg): Decl_IdentDecl {
@@ -1933,9 +2051,9 @@ export const Decl_FunctionDecl = {
     return obj;
   },
   fromAmino(object: Decl_FunctionDeclAmino): Decl_FunctionDecl {
-    return {
-      overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromAmino(e)) : []
-    };
+    const message = createBaseDecl_FunctionDecl();
+    message.overloads = object.overloads?.map(e => Decl_FunctionDecl_Overload.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Decl_FunctionDecl): Decl_FunctionDeclAmino {
     const obj: any = {};
@@ -1967,7 +2085,7 @@ function createBaseDecl_FunctionDecl_Overload(): Decl_FunctionDecl_Overload {
     overloadId: "",
     params: [],
     typeParams: [],
-    resultType: Type.fromPartial({}),
+    resultType: undefined,
     isInstanceFunction: false,
     doc: ""
   };
@@ -2104,18 +2222,26 @@ export const Decl_FunctionDecl_Overload = {
     return obj;
   },
   fromAmino(object: Decl_FunctionDecl_OverloadAmino): Decl_FunctionDecl_Overload {
-    return {
-      overloadId: object.overload_id,
-      params: Array.isArray(object?.params) ? object.params.map((e: any) => Type.fromAmino(e)) : [],
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => e) : [],
-      resultType: object?.result_type ? Type.fromAmino(object.result_type) : undefined,
-      isInstanceFunction: object.is_instance_function,
-      doc: object.doc
-    };
+    const message = createBaseDecl_FunctionDecl_Overload();
+    if (object.overload_id !== undefined && object.overload_id !== null) {
+      message.overloadId = object.overload_id;
+    }
+    message.params = object.params?.map(e => Type.fromAmino(e)) || [];
+    message.typeParams = object.type_params?.map(e => e) || [];
+    if (object.result_type !== undefined && object.result_type !== null) {
+      message.resultType = Type.fromAmino(object.result_type);
+    }
+    if (object.is_instance_function !== undefined && object.is_instance_function !== null) {
+      message.isInstanceFunction = object.is_instance_function;
+    }
+    if (object.doc !== undefined && object.doc !== null) {
+      message.doc = object.doc;
+    }
+    return message;
   },
   toAmino(message: Decl_FunctionDecl_Overload): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
-    obj.overload_id = omitDefault(message.overloadId);
+    obj.overload_id = message.overloadId;
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toAmino(e) : undefined);
     } else {
@@ -2127,8 +2253,8 @@ export const Decl_FunctionDecl_Overload = {
       obj.type_params = [];
     }
     obj.result_type = message.resultType ? Type.toAmino(message.resultType) : undefined;
-    obj.is_instance_function = omitDefault(message.isInstanceFunction);
-    obj.doc = omitDefault(message.doc);
+    obj.is_instance_function = message.isInstanceFunction;
+    obj.doc = message.doc;
     return obj;
   },
   fromAminoMsg(object: Decl_FunctionDecl_OverloadAminoMsg): Decl_FunctionDecl_Overload {
@@ -2151,7 +2277,7 @@ function createBaseReference(): Reference {
   return {
     name: "",
     overloadId: [],
-    value: Constant.fromPartial({})
+    value: undefined
   };
 }
 export const Reference = {
@@ -2242,15 +2368,19 @@ export const Reference = {
     return obj;
   },
   fromAmino(object: ReferenceAmino): Reference {
-    return {
-      name: object.name,
-      overloadId: Array.isArray(object?.overload_id) ? object.overload_id.map((e: any) => e) : [],
-      value: object?.value ? Constant.fromAmino(object.value) : undefined
-    };
+    const message = createBaseReference();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.overloadId = object.overload_id?.map(e => e) || [];
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Constant.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: Reference): ReferenceAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.overloadId) {
       obj.overload_id = message.overloadId.map(e => e);
     } else {

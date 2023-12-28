@@ -75,6 +75,10 @@ export interface Monitoring {
    */
   consumerDestinations: Monitoring_MonitoringDestination[];
 }
+export interface MonitoringProtoMsg {
+  typeUrl: "/google.api.Monitoring";
+  value: Uint8Array;
+}
 /**
  * Monitoring configuration of the service.
  * 
@@ -148,6 +152,10 @@ export interface Monitoring_MonitoringDestination {
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Monitoring_MonitoringDestinationProtoMsg {
+  typeUrl: "/google.api.MonitoringDestination";
+  value: Uint8Array;
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -247,10 +255,10 @@ export const Monitoring = {
     return obj;
   },
   fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
+    const message = createBaseMonitoring();
+    message.producerDestinations = object.producer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Monitoring): MonitoringAmino {
     const obj: any = {};
@@ -291,7 +299,7 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -364,10 +372,12 @@ export const Monitoring_MonitoringDestination = {
     return obj;
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseMonitoring_MonitoringDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};

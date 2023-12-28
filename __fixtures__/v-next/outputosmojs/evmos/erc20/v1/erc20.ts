@@ -1,6 +1,6 @@
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -57,6 +57,10 @@ export interface TokenPair {
   /** ERC20 owner address ENUM (0 invalid, 1 ModuleAccount, 2 external address) */
   contractOwner: Owner;
 }
+export interface TokenPairProtoMsg {
+  typeUrl: "/evmos.erc20.v1.TokenPair";
+  value: Uint8Array;
+}
 /**
  * TokenPair defines an instance that records a pairing consisting of a native
  *  Cosmos Coin and an ERC20 token address.
@@ -79,6 +83,10 @@ export interface RegisterCoinProposal {
   /** metadata of the native Cosmos coin */
   metadata: Metadata;
 }
+export interface RegisterCoinProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterCoinProposal";
+  value: Uint8Array;
+}
 /**
  * RegisterCoinProposal is a gov Content type to register a token pair for a
  * native Cosmos coin.
@@ -99,6 +107,10 @@ export interface RegisterERC20Proposal {
   description: string;
   /** contract address of ERC20 token */
   erc20address: string;
+}
+export interface RegisterERC20ProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.RegisterERC20Proposal";
+  value: Uint8Array;
 }
 /**
  * RegisterERC20Proposal is a gov Content type to register a token pair for an
@@ -123,6 +135,10 @@ export interface ToggleTokenConversionProposal {
    * Cosmos base denomination
    */
   token: string;
+}
+export interface ToggleTokenConversionProposalProtoMsg {
+  typeUrl: "/evmos.erc20.v1.ToggleTokenConversionProposal";
+  value: Uint8Array;
 }
 /**
  * ToggleTokenConversionProposal is a gov Content type to toggle the conversion
@@ -233,19 +249,27 @@ export const TokenPair = {
     return obj;
   },
   fromAmino(object: TokenPairAmino): TokenPair {
-    return {
-      erc20Address: object.erc20_address,
-      denom: object.denom,
-      enabled: object.enabled,
-      contractOwner: isSet(object.contract_owner) ? ownerFromJSON(object.contract_owner) : -1
-    };
+    const message = createBaseTokenPair();
+    if (object.erc20_address !== undefined && object.erc20_address !== null) {
+      message.erc20Address = object.erc20_address;
+    }
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.enabled !== undefined && object.enabled !== null) {
+      message.enabled = object.enabled;
+    }
+    if (object.contract_owner !== undefined && object.contract_owner !== null) {
+      message.contractOwner = ownerFromJSON(object.contract_owner);
+    }
+    return message;
   },
   toAmino(message: TokenPair): TokenPairAmino {
     const obj: any = {};
-    obj.erc20_address = omitDefault(message.erc20Address);
-    obj.denom = omitDefault(message.denom);
-    obj.enabled = omitDefault(message.enabled);
-    obj.contract_owner = omitDefault(message.contractOwner);
+    obj.erc20_address = message.erc20Address;
+    obj.denom = message.denom;
+    obj.enabled = message.enabled;
+    obj.contract_owner = ownerToJSON(message.contractOwner);
     return obj;
   },
   fromAminoMsg(object: TokenPairAminoMsg): TokenPair {
@@ -351,16 +375,22 @@ export const RegisterCoinProposal = {
     return obj;
   },
   fromAmino(object: RegisterCoinProposalAmino): RegisterCoinProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      metadata: object?.metadata ? Metadata.fromAmino(object.metadata) : undefined
-    };
+    const message = createBaseRegisterCoinProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = Metadata.fromAmino(object.metadata);
+    }
+    return message;
   },
   toAmino(message: RegisterCoinProposal): RegisterCoinProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title;
+    obj.description = message.description;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },
@@ -467,17 +497,23 @@ export const RegisterERC20Proposal = {
     return obj;
   },
   fromAmino(object: RegisterERC20ProposalAmino): RegisterERC20Proposal {
-    return {
-      title: object.title,
-      description: object.description,
-      erc20address: object.erc20address
-    };
+    const message = createBaseRegisterERC20Proposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.erc20address !== undefined && object.erc20address !== null) {
+      message.erc20address = object.erc20address;
+    }
+    return message;
   },
   toAmino(message: RegisterERC20Proposal): RegisterERC20ProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.erc20address = omitDefault(message.erc20address);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.erc20address = message.erc20address;
     return obj;
   },
   fromAminoMsg(object: RegisterERC20ProposalAminoMsg): RegisterERC20Proposal {
@@ -583,17 +619,23 @@ export const ToggleTokenConversionProposal = {
     return obj;
   },
   fromAmino(object: ToggleTokenConversionProposalAmino): ToggleTokenConversionProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      token: object.token
-    };
+    const message = createBaseToggleTokenConversionProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.token !== undefined && object.token !== null) {
+      message.token = object.token;
+    }
+    return message;
   },
   toAmino(message: ToggleTokenConversionProposal): ToggleTokenConversionProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.token = omitDefault(message.token);
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.token = message.token;
     return obj;
   },
   fromAminoMsg(object: ToggleTokenConversionProposalAminoMsg): ToggleTokenConversionProposal {

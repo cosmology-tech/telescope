@@ -9,11 +9,7 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 export interface ParamsAmino {
-  force_unlock_allowed_addresses: string[];
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/lockup/params";
-  value: ParamsAmino;
+  force_unlock_allowed_addresses?: string[];
 }
 export interface ParamsSDKType {
   force_unlock_allowed_addresses: string[];
@@ -32,7 +28,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -83,11 +79,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      forceUnlockAllowedAddresses: Array.isArray(object?.force_unlock_allowed_addresses) ? object.force_unlock_allowed_addresses.map((e: any) => e) : []
-    };
+    const message = createBaseParams();
+    message.forceUnlockAllowedAddresses = object.force_unlock_allowed_addresses?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     if (message.forceUnlockAllowedAddresses) {
       obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
@@ -96,17 +92,8 @@ export const Params = {
     }
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/lockup/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

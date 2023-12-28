@@ -1,4 +1,4 @@
-import { getQueryMethodNames, makeUsePkgHookName } from "..";
+import { getQueryMethodNames, makePkgMethodName, makeUsePkgHookName } from "..";
 
 it("is empty if there's no pattern for getQueryMethodNames", () => {
   const result = getQueryMethodNames("cosmos.bank.v1beta1", [
@@ -65,4 +65,28 @@ it("returns useABalance for makeUsePkgHookName('a', 'Balance')", () => {
   const result = makeUsePkgHookName("a", "Balance")
 
   expect(result).toBe("useABalance")
+});
+
+it("returns pkgAB1CAllBalance for makePkgMethodName('a.b1.c', 'AllBalance')", () => {
+  const result = makePkgMethodName("a.b1.c", "AllBalance")
+
+  expect(result).toBe("pkgAB1CAllBalance")
+});
+
+it("returns pkgAB1CBalance for makePkgMethodName('a.b1.c', 'Balance')", () => {
+  const result = makePkgMethodName("a.b1.c", "Balance")
+
+  expect(result).toBe("pkgAB1CBalance")
+});
+
+it("returns pkgABalance for makePkgMethodName('a', 'Balance')", () => {
+  const result = makePkgMethodName("a", "Balance")
+
+  expect(result).toBe("pkgABalance")
+});
+
+it("returns pkgABalance for makePkgMethodName('a', 'balance')", () => {
+  const result = makePkgMethodName("a", "balance")
+
+  expect(result).toBe("pkgABalance")
 });

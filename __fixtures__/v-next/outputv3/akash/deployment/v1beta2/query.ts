@@ -9,7 +9,7 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
   filters: DeploymentFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
@@ -20,19 +20,15 @@ export interface QueryDeploymentsRequestAmino {
   filters?: DeploymentFiltersAmino;
   pagination?: PageRequestAmino;
 }
-export interface QueryDeploymentsRequestAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
-  value: QueryDeploymentsRequestAmino;
-}
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
   filters: DeploymentFiltersSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryDeploymentsResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
@@ -40,17 +36,13 @@ export interface QueryDeploymentsResponseProtoMsg {
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseAmino {
-  deployments: QueryDeploymentResponseAmino[];
+  deployments?: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
-}
-export interface QueryDeploymentsResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
-  value: QueryDeploymentsResponseAmino;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
@@ -63,10 +55,6 @@ export interface QueryDeploymentRequestProtoMsg {
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestAmino {
   id?: DeploymentIDAmino;
-}
-export interface QueryDeploymentRequestAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryDeploymentRequest";
-  value: QueryDeploymentRequestAmino;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequestSDKType {
@@ -85,12 +73,8 @@ export interface QueryDeploymentResponseProtoMsg {
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
   deployment?: DeploymentAmino;
-  groups: GroupAmino[];
+  groups?: GroupAmino[];
   escrow_account?: AccountAmino;
-}
-export interface QueryDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryDeploymentResponse";
-  value: QueryDeploymentResponseAmino;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseSDKType {
@@ -110,10 +94,6 @@ export interface QueryGroupRequestProtoMsg {
 export interface QueryGroupRequestAmino {
   id?: GroupIDAmino;
 }
-export interface QueryGroupRequestAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryGroupRequest";
-  value: QueryGroupRequestAmino;
-}
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequestSDKType {
   id: GroupIDSDKType;
@@ -130,10 +110,6 @@ export interface QueryGroupResponseProtoMsg {
 export interface QueryGroupResponseAmino {
   group?: GroupAmino;
 }
-export interface QueryGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.QueryGroupResponse";
-  value: QueryGroupResponseAmino;
-}
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponseSDKType {
   group: GroupSDKType;
@@ -141,7 +117,7 @@ export interface QueryGroupResponseSDKType {
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
     filters: DeploymentFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsRequest = {
@@ -155,7 +131,7 @@ export const QueryDeploymentsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsRequest();
@@ -163,10 +139,10 @@ export const QueryDeploymentsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.filters = DeploymentFilters.decode(reader, reader.uint32());
+          message.filters = DeploymentFilters.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -210,22 +186,23 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
-    return {
-      filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestAmino {
+  toAmino(message: QueryDeploymentsRequest, useInterfaces: boolean = true): QueryDeploymentsRequestAmino {
     const obj: any = {};
-    obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters) : undefined;
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.filters = message.filters ? DeploymentFilters.toAmino(message.filters, useInterfaces) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentsRequestAminoMsg): QueryDeploymentsRequest {
-    return QueryDeploymentsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg): QueryDeploymentsRequest {
-    return QueryDeploymentsRequest.decode(message.value);
+  fromProtoMsg(message: QueryDeploymentsRequestProtoMsg, useInterfaces: boolean = true): QueryDeploymentsRequest {
+    return QueryDeploymentsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentsRequest): Uint8Array {
     return QueryDeploymentsRequest.encode(message).finish();
@@ -240,7 +217,7 @@ export const QueryDeploymentsRequest = {
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   return {
     deployments: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsResponse = {
@@ -254,7 +231,7 @@ export const QueryDeploymentsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentsResponse();
@@ -262,10 +239,10 @@ export const QueryDeploymentsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.deployments.push(QueryDeploymentResponse.decode(reader, reader.uint32()));
+          message.deployments.push(QueryDeploymentResponse.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -315,26 +292,25 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsResponse();
+    message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseAmino {
+  toAmino(message: QueryDeploymentsResponse, useInterfaces: boolean = true): QueryDeploymentsResponseAmino {
     const obj: any = {};
     if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e) : undefined);
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.deployments = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentsResponseAminoMsg): QueryDeploymentsResponse {
-    return QueryDeploymentsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
-    return QueryDeploymentsResponse.decode(message.value);
+  fromProtoMsg(message: QueryDeploymentsResponseProtoMsg, useInterfaces: boolean = true): QueryDeploymentsResponse {
+    return QueryDeploymentsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentsResponse): Uint8Array {
     return QueryDeploymentsResponse.encode(message).finish();
@@ -359,7 +335,7 @@ export const QueryDeploymentRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentRequest();
@@ -367,7 +343,7 @@ export const QueryDeploymentRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = DeploymentID.decode(reader, reader.uint32());
+          message.id = DeploymentID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -404,20 +380,19 @@ export const QueryDeploymentRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseQueryDeploymentRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
-  toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestAmino {
+  toAmino(message: QueryDeploymentRequest, useInterfaces: boolean = true): QueryDeploymentRequestAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentRequestAminoMsg): QueryDeploymentRequest {
-    return QueryDeploymentRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryDeploymentRequestProtoMsg): QueryDeploymentRequest {
-    return QueryDeploymentRequest.decode(message.value);
+  fromProtoMsg(message: QueryDeploymentRequestProtoMsg, useInterfaces: boolean = true): QueryDeploymentRequest {
+    return QueryDeploymentRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentRequest): Uint8Array {
     return QueryDeploymentRequest.encode(message).finish();
@@ -450,7 +425,7 @@ export const QueryDeploymentResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryDeploymentResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryDeploymentResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryDeploymentResponse();
@@ -458,13 +433,13 @@ export const QueryDeploymentResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.deployment = Deployment.decode(reader, reader.uint32());
+          message.deployment = Deployment.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.groups.push(Group.decode(reader, reader.uint32()));
+          message.groups.push(Group.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.escrowAccount = Account.decode(reader, reader.uint32());
+          message.escrowAccount = Account.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -521,28 +496,29 @@ export const QueryDeploymentResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
-    };
+    const message = createBaseQueryDeploymentResponse();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromAmino(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromAmino(e)) || [];
+    if (object.escrow_account !== undefined && object.escrow_account !== null) {
+      message.escrowAccount = Account.fromAmino(object.escrow_account);
+    }
+    return message;
   },
-  toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
+  toAmino(message: QueryDeploymentResponse, useInterfaces: boolean = true): QueryDeploymentResponseAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : undefined;
     if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
+      obj.groups = message.groups.map(e => e ? Group.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.groups = [];
     }
-    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
+    obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryDeploymentResponseAminoMsg): QueryDeploymentResponse {
-    return QueryDeploymentResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
-    return QueryDeploymentResponse.decode(message.value);
+  fromProtoMsg(message: QueryDeploymentResponseProtoMsg, useInterfaces: boolean = true): QueryDeploymentResponse {
+    return QueryDeploymentResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryDeploymentResponse): Uint8Array {
     return QueryDeploymentResponse.encode(message).finish();
@@ -567,7 +543,7 @@ export const QueryGroupRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupRequest();
@@ -575,7 +551,7 @@ export const QueryGroupRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.id = GroupID.decode(reader, reader.uint32());
+          message.id = GroupID.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -612,20 +588,19 @@ export const QueryGroupRequest = {
     return obj;
   },
   fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseQueryGroupRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
-  toAmino(message: QueryGroupRequest): QueryGroupRequestAmino {
+  toAmino(message: QueryGroupRequest, useInterfaces: boolean = true): QueryGroupRequestAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGroupRequestAminoMsg): QueryGroupRequest {
-    return QueryGroupRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
-    return QueryGroupRequest.decode(message.value);
+  fromProtoMsg(message: QueryGroupRequestProtoMsg, useInterfaces: boolean = true): QueryGroupRequest {
+    return QueryGroupRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGroupRequest): Uint8Array {
     return QueryGroupRequest.encode(message).finish();
@@ -650,7 +625,7 @@ export const QueryGroupResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGroupResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGroupResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGroupResponse();
@@ -658,7 +633,7 @@ export const QueryGroupResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.group = Group.decode(reader, reader.uint32());
+          message.group = Group.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -695,20 +670,19 @@ export const QueryGroupResponse = {
     return obj;
   },
   fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
-    return {
-      group: object?.group ? Group.fromAmino(object.group) : undefined
-    };
+    const message = createBaseQueryGroupResponse();
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromAmino(object.group);
+    }
+    return message;
   },
-  toAmino(message: QueryGroupResponse): QueryGroupResponseAmino {
+  toAmino(message: QueryGroupResponse, useInterfaces: boolean = true): QueryGroupResponseAmino {
     const obj: any = {};
-    obj.group = message.group ? Group.toAmino(message.group) : undefined;
+    obj.group = message.group ? Group.toAmino(message.group, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGroupResponseAminoMsg): QueryGroupResponse {
-    return QueryGroupResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGroupResponseProtoMsg): QueryGroupResponse {
-    return QueryGroupResponse.decode(message.value);
+  fromProtoMsg(message: QueryGroupResponseProtoMsg, useInterfaces: boolean = true): QueryGroupResponse {
+    return QueryGroupResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGroupResponse): Uint8Array {
     return QueryGroupResponse.encode(message).finish();

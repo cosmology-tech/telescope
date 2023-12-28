@@ -12,6 +12,10 @@ export interface ReplaceMigrationRecordsProposal {
   title: string;
   description: string;
 }
+export interface ReplaceMigrationRecordsProposalProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.ReplaceMigrationRecordsProposal";
+  value: Uint8Array;
+}
 /**
  * ReplaceMigrationRecordsProposal is a gov Content type for updating the
  * migration records. If a ReplaceMigrationRecordsProposal passes, the
@@ -36,6 +40,10 @@ export interface ReplaceMigrationRecordsProposalSDKType {
 export interface UpdateMigrationRecordsProposal {
   title: string;
   description: string;
+}
+export interface UpdateMigrationRecordsProposalProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.UpdateMigrationRecordsProposal";
+  value: Uint8Array;
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -125,10 +133,14 @@ export const ReplaceMigrationRecordsProposal = {
     return obj;
   },
   fromAmino(object: ReplaceMigrationRecordsProposalAmino): ReplaceMigrationRecordsProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
+    const message = createBaseReplaceMigrationRecordsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: ReplaceMigrationRecordsProposal): ReplaceMigrationRecordsProposalAmino {
     const obj: any = {};
@@ -232,10 +244,14 @@ export const UpdateMigrationRecordsProposal = {
     return obj;
   },
   fromAmino(object: UpdateMigrationRecordsProposalAmino): UpdateMigrationRecordsProposal {
-    return {
-      title: object.title,
-      description: object.description
-    };
+    const message = createBaseUpdateMigrationRecordsProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: UpdateMigrationRecordsProposal): UpdateMigrationRecordsProposalAmino {
     const obj: any = {};

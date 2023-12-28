@@ -1,7 +1,7 @@
 import { AttributeContext, AttributeContextAmino, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -21,7 +21,7 @@ export interface CheckRequest {
    */
   serviceConfigId: string;
   /** Describes attributes about the operation being executed by the service. */
-  attributes: AttributeContext;
+  attributes?: AttributeContext;
   /** Describes the resources and the policies applied to each resource. */
   resources: ResourceInfo[];
   /** Optional. Contains a comma-separated list of flags. */
@@ -41,29 +41,25 @@ export interface CheckRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  service_config_id: string;
+  service_config_id?: string;
   /** Describes attributes about the operation being executed by the service. */
   attributes?: AttributeContextAmino;
   /** Describes the resources and the policies applied to each resource. */
-  resources: ResourceInfoAmino[];
+  resources?: ResourceInfoAmino[];
   /** Optional. Contains a comma-separated list of flags. */
-  flags: string;
-}
-export interface CheckRequestAminoMsg {
-  type: "/google.api.servicecontrol.v2.CheckRequest";
-  value: CheckRequestAmino;
+  flags?: string;
 }
 /** Request message for the Check method. */
 export interface CheckRequestSDKType {
   service_name: string;
   service_config_id: string;
-  attributes: AttributeContextSDKType;
+  attributes?: AttributeContextSDKType;
   resources: ResourceInfoSDKType[];
   flags: string;
 }
@@ -103,14 +99,14 @@ export interface ResourceInfoProtoMsg {
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoAmino {
   /** The name of the resource referenced in the request. */
-  name: string;
+  name?: string;
   /** The resource type in the format of "{service}/{kind}". */
-  type: string;
+  type?: string;
   /**
    * The resource permission needed for this request.
    * The format must be "{service}/{plural}.{verb}".
    */
-  permission: string;
+  permission?: string;
   /**
    * Optional. The identifier of the container of this resource. For Google
    * Cloud APIs, the resource container must be one of the following formats:
@@ -121,17 +117,13 @@ export interface ResourceInfoAmino {
    * Policy check), this field takes precedence on the container extracted from
    * name when presents.
    */
-  container: string;
+  container?: string;
   /**
    * Optional. The location of the resource. The value must be a valid zone,
    * region or multiregion. For example: "europe-west4" or
    * "northamerica-northeast1-a"
    */
-  location: string;
-}
-export interface ResourceInfoAminoMsg {
-  type: "/google.api.servicecontrol.v2.ResourceInfo";
-  value: ResourceInfoAmino;
+  location?: string;
 }
 /** Describes a resource referenced in the request. */
 export interface ResourceInfoSDKType {
@@ -150,12 +142,8 @@ export interface CheckResponse_HeadersEntryProtoMsg {
   value: Uint8Array;
 }
 export interface CheckResponse_HeadersEntryAmino {
-  key: string;
-  value: string;
-}
-export interface CheckResponse_HeadersEntryAminoMsg {
-  type: string;
-  value: CheckResponse_HeadersEntryAmino;
+  key?: string;
+  value?: string;
 }
 export interface CheckResponse_HeadersEntrySDKType {
   key: string;
@@ -168,7 +156,7 @@ export interface CheckResponse {
    * indicates a denial; [google.rpc.Status.details][google.rpc.Status.details]
    * would contain additional details about the denial.
    */
-  status: Status;
+  status?: Status;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
   headers: {
     [key: string]: string;
@@ -187,17 +175,13 @@ export interface CheckResponseAmino {
    */
   status?: StatusAmino;
   /** Returns a set of request contexts generated from the `CheckRequest`. */
-  headers: {
+  headers?: {
     [key: string]: string;
   };
 }
-export interface CheckResponseAminoMsg {
-  type: "/google.api.servicecontrol.v2.CheckResponse";
-  value: CheckResponseAmino;
-}
 /** Response message for the Check method. */
 export interface CheckResponseSDKType {
-  status: StatusSDKType;
+  status?: StatusSDKType;
   headers: {
     [key: string]: string;
   };
@@ -240,23 +224,19 @@ export interface ReportRequestAmino {
    * [google.api.Service](https://cloud.google.com/service-management/reference/rpc/google.api#google.api.Service)
    * for the definition of a service name.
    */
-  service_name: string;
+  service_name?: string;
   /**
    * Specifies the version of the service configuration that should be used to
    * process the request. Must not be empty. Set this field to 'latest' to
    * specify using the latest configuration.
    */
-  service_config_id: string;
+  service_config_id?: string;
   /**
    * Describes the list of operations to be reported. Each operation is
    * represented as an AttributeContext, and contains all attributes around an
    * API access.
    */
-  operations: AttributeContextAmino[];
-}
-export interface ReportRequestAminoMsg {
-  type: "/google.api.servicecontrol.v2.ReportRequest";
-  value: ReportRequestAmino;
+  operations?: AttributeContextAmino[];
 }
 /** Request message for the Report method. */
 export interface ReportRequestSDKType {
@@ -278,10 +258,6 @@ export interface ReportResponseProtoMsg {
  * If the request contains any invalid data, the server returns an RPC error.
  */
 export interface ReportResponseAmino {}
-export interface ReportResponseAminoMsg {
-  type: "/google.api.servicecontrol.v2.ReportResponse";
-  value: ReportResponseAmino;
-}
 /**
  * Response message for the Report method.
  * If the request contains any invalid data, the server returns an RPC error.
@@ -291,7 +267,7 @@ function createBaseCheckRequest(): CheckRequest {
   return {
     serviceName: "",
     serviceConfigId: "",
-    attributes: AttributeContext.fromPartial({}),
+    attributes: undefined,
     resources: [],
     flags: ""
   };
@@ -316,7 +292,7 @@ export const CheckRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckRequest();
@@ -330,10 +306,10 @@ export const CheckRequest = {
           message.serviceConfigId = reader.string();
           break;
         case 3:
-          message.attributes = AttributeContext.decode(reader, reader.uint32());
+          message.attributes = AttributeContext.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.resources.push(ResourceInfo.decode(reader, reader.uint32()));
+          message.resources.push(ResourceInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
           message.flags = reader.string();
@@ -401,32 +377,37 @@ export const CheckRequest = {
     return obj;
   },
   fromAmino(object: CheckRequestAmino): CheckRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      attributes: object?.attributes ? AttributeContext.fromAmino(object.attributes) : undefined,
-      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => ResourceInfo.fromAmino(e)) : [],
-      flags: object.flags
-    };
+    const message = createBaseCheckRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    if (object.attributes !== undefined && object.attributes !== null) {
+      message.attributes = AttributeContext.fromAmino(object.attributes);
+    }
+    message.resources = object.resources?.map(e => ResourceInfo.fromAmino(e)) || [];
+    if (object.flags !== undefined && object.flags !== null) {
+      message.flags = object.flags;
+    }
+    return message;
   },
-  toAmino(message: CheckRequest): CheckRequestAmino {
+  toAmino(message: CheckRequest, useInterfaces: boolean = true): CheckRequestAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
-    obj.service_config_id = omitDefault(message.serviceConfigId);
-    obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined;
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
+    obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes, useInterfaces) : undefined;
     if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
+      obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.resources = [];
     }
-    obj.flags = omitDefault(message.flags);
+    obj.flags = message.flags;
     return obj;
   },
-  fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
-    return CheckRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckRequestProtoMsg): CheckRequest {
-    return CheckRequest.decode(message.value);
+  fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
+    return CheckRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckRequest): Uint8Array {
     return CheckRequest.encode(message).finish();
@@ -467,7 +448,7 @@ export const ResourceInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
@@ -542,28 +523,35 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      name: object.name,
-      type: object.type,
-      permission: object.permission,
-      container: object.container,
-      location: object.location
-    };
+    const message = createBaseResourceInfo();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.permission !== undefined && object.permission !== null) {
+      message.permission = object.permission;
+    }
+    if (object.container !== undefined && object.container !== null) {
+      message.container = object.container;
+    }
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    return message;
   },
-  toAmino(message: ResourceInfo): ResourceInfoAmino {
+  toAmino(message: ResourceInfo, useInterfaces: boolean = true): ResourceInfoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.type = omitDefault(message.type);
-    obj.permission = omitDefault(message.permission);
-    obj.container = omitDefault(message.container);
-    obj.location = omitDefault(message.location);
+    obj.name = message.name;
+    obj.type = message.type;
+    obj.permission = message.permission;
+    obj.container = message.container;
+    obj.location = message.location;
     return obj;
   },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
-    return ResourceInfo.decode(message.value);
+  fromProtoMsg(message: ResourceInfoProtoMsg, useInterfaces: boolean = true): ResourceInfo {
+    return ResourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceInfo): Uint8Array {
     return ResourceInfo.encode(message).finish();
@@ -591,7 +579,7 @@ export const CheckResponse_HeadersEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse_HeadersEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckResponse_HeadersEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse_HeadersEntry();
@@ -642,22 +630,23 @@ export const CheckResponse_HeadersEntry = {
     return obj;
   },
   fromAmino(object: CheckResponse_HeadersEntryAmino): CheckResponse_HeadersEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseCheckResponse_HeadersEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
+  toAmino(message: CheckResponse_HeadersEntry, useInterfaces: boolean = true): CheckResponse_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
-    return CheckResponse_HeadersEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg): CheckResponse_HeadersEntry {
-    return CheckResponse_HeadersEntry.decode(message.value);
+  fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg, useInterfaces: boolean = true): CheckResponse_HeadersEntry {
+    return CheckResponse_HeadersEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse_HeadersEntry): Uint8Array {
     return CheckResponse_HeadersEntry.encode(message).finish();
@@ -665,7 +654,7 @@ export const CheckResponse_HeadersEntry = {
 };
 function createBaseCheckResponse(): CheckResponse {
   return {
-    status: Status.fromPartial({}),
+    status: undefined,
     headers: {}
   };
 }
@@ -683,7 +672,7 @@ export const CheckResponse = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CheckResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckResponse();
@@ -691,7 +680,7 @@ export const CheckResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.status = Status.decode(reader, reader.uint32());
+          message.status = Status.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
           const entry2 = CheckResponse_HeadersEntry.decode(reader, reader.uint32());
@@ -766,19 +755,23 @@ export const CheckResponse = {
     return obj;
   },
   fromAmino(object: CheckResponseAmino): CheckResponse {
-    return {
-      status: object?.status ? Status.fromAmino(object.status) : undefined,
-      headers: isObject(object.headers) ? Object.entries(object.headers).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseCheckResponse();
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    message.headers = Object.entries(object.headers ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
-  toAmino(message: CheckResponse): CheckResponseAmino {
+  toAmino(message: CheckResponse, useInterfaces: boolean = true): CheckResponseAmino {
     const obj: any = {};
-    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
@@ -787,11 +780,8 @@ export const CheckResponse = {
     }
     return obj;
   },
-  fromAminoMsg(object: CheckResponseAminoMsg): CheckResponse {
-    return CheckResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CheckResponseProtoMsg): CheckResponse {
-    return CheckResponse.decode(message.value);
+  fromProtoMsg(message: CheckResponseProtoMsg, useInterfaces: boolean = true): CheckResponse {
+    return CheckResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CheckResponse): Uint8Array {
     return CheckResponse.encode(message).finish();
@@ -824,7 +814,7 @@ export const ReportRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReportRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ReportRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportRequest();
@@ -838,7 +828,7 @@ export const ReportRequest = {
           message.serviceConfigId = reader.string();
           break;
         case 3:
-          message.operations.push(AttributeContext.decode(reader, reader.uint32()));
+          message.operations.push(AttributeContext.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -891,28 +881,29 @@ export const ReportRequest = {
     return obj;
   },
   fromAmino(object: ReportRequestAmino): ReportRequest {
-    return {
-      serviceName: object.service_name,
-      serviceConfigId: object.service_config_id,
-      operations: Array.isArray(object?.operations) ? object.operations.map((e: any) => AttributeContext.fromAmino(e)) : []
-    };
+    const message = createBaseReportRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    message.operations = object.operations?.map(e => AttributeContext.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ReportRequest): ReportRequestAmino {
+  toAmino(message: ReportRequest, useInterfaces: boolean = true): ReportRequestAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
-    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_name = message.serviceName;
+    obj.service_config_id = message.serviceConfigId;
     if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
+      obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.operations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ReportRequestAminoMsg): ReportRequest {
-    return ReportRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ReportRequestProtoMsg): ReportRequest {
-    return ReportRequest.decode(message.value);
+  fromProtoMsg(message: ReportRequestProtoMsg, useInterfaces: boolean = true): ReportRequest {
+    return ReportRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReportRequest): Uint8Array {
     return ReportRequest.encode(message).finish();
@@ -932,7 +923,7 @@ export const ReportResponse = {
   encode(_: ReportResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ReportResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ReportResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseReportResponse();
@@ -966,17 +957,15 @@ export const ReportResponse = {
     return obj;
   },
   fromAmino(_: ReportResponseAmino): ReportResponse {
-    return {};
+    const message = createBaseReportResponse();
+    return message;
   },
-  toAmino(_: ReportResponse): ReportResponseAmino {
+  toAmino(_: ReportResponse, useInterfaces: boolean = true): ReportResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: ReportResponseAminoMsg): ReportResponse {
-    return ReportResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ReportResponseProtoMsg): ReportResponse {
-    return ReportResponse.decode(message.value);
+  fromProtoMsg(message: ReportResponseProtoMsg, useInterfaces: boolean = true): ReportResponse {
+    return ReportResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ReportResponse): Uint8Array {
     return ReportResponse.encode(message).finish();

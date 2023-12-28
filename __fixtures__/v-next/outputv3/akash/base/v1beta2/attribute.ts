@@ -12,12 +12,8 @@ export interface AttributeProtoMsg {
 }
 /** Attribute represents key value pair */
 export interface AttributeAmino {
-  key: string;
-  value: string;
-}
-export interface AttributeAminoMsg {
-  type: "/akash.base.v1beta2.Attribute";
-  value: AttributeAmino;
+  key?: string;
+  value?: string;
 }
 /** Attribute represents key value pair */
 export interface AttributeSDKType {
@@ -48,13 +44,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of: string[];
+  all_of?: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of: string[];
-}
-export interface SignedByAminoMsg {
-  type: "/akash.base.v1beta2.SignedBy";
-  value: SignedByAmino;
+  any_of?: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -82,11 +74,7 @@ export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
   signed_by?: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes: AttributeAmino[];
-}
-export interface PlacementRequirementsAminoMsg {
-  type: "/akash.base.v1beta2.PlacementRequirements";
-  value: PlacementRequirementsAmino;
+  attributes?: AttributeAmino[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
@@ -110,7 +98,7 @@ export const Attribute = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Attribute {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Attribute {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAttribute();
@@ -161,22 +149,23 @@ export const Attribute = {
     return obj;
   },
   fromAmino(object: AttributeAmino): Attribute {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseAttribute();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: Attribute): AttributeAmino {
+  toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
     obj.key = omitDefault(message.key);
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: AttributeAminoMsg): Attribute {
-    return Attribute.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AttributeProtoMsg): Attribute {
-    return Attribute.decode(message.value);
+  fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = true): Attribute {
+    return Attribute.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Attribute): Uint8Array {
     return Attribute.encode(message).finish();
@@ -205,7 +194,7 @@ export const SignedBy = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SignedBy {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SignedBy {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSignedBy();
@@ -272,12 +261,12 @@ export const SignedBy = {
     return obj;
   },
   fromAmino(object: SignedByAmino): SignedBy {
-    return {
-      allOf: Array.isArray(object?.all_of) ? object.all_of.map((e: any) => e) : [],
-      anyOf: Array.isArray(object?.any_of) ? object.any_of.map((e: any) => e) : []
-    };
+    const message = createBaseSignedBy();
+    message.allOf = object.all_of?.map(e => e) || [];
+    message.anyOf = object.any_of?.map(e => e) || [];
+    return message;
   },
-  toAmino(message: SignedBy): SignedByAmino {
+  toAmino(message: SignedBy, useInterfaces: boolean = true): SignedByAmino {
     const obj: any = {};
     if (message.allOf) {
       obj.all_of = message.allOf.map(e => e);
@@ -291,11 +280,8 @@ export const SignedBy = {
     }
     return obj;
   },
-  fromAminoMsg(object: SignedByAminoMsg): SignedBy {
-    return SignedBy.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SignedByProtoMsg): SignedBy {
-    return SignedBy.decode(message.value);
+  fromProtoMsg(message: SignedByProtoMsg, useInterfaces: boolean = true): SignedBy {
+    return SignedBy.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SignedBy): Uint8Array {
     return SignedBy.encode(message).finish();
@@ -324,7 +310,7 @@ export const PlacementRequirements = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PlacementRequirements {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PlacementRequirements {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePlacementRequirements();
@@ -332,10 +318,10 @@ export const PlacementRequirements = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.signedBy = SignedBy.decode(reader, reader.uint32());
+          message.signedBy = SignedBy.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.attributes.push(Attribute.decode(reader, reader.uint32()));
+          message.attributes.push(Attribute.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -385,26 +371,25 @@ export const PlacementRequirements = {
     return obj;
   },
   fromAmino(object: PlacementRequirementsAmino): PlacementRequirements {
-    return {
-      signedBy: object?.signed_by ? SignedBy.fromAmino(object.signed_by) : undefined,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : []
-    };
+    const message = createBasePlacementRequirements();
+    if (object.signed_by !== undefined && object.signed_by !== null) {
+      message.signedBy = SignedBy.fromAmino(object.signed_by);
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
+  toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : undefined;
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : undefined;
     if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.attributes = [];
     }
     return obj;
   },
-  fromAminoMsg(object: PlacementRequirementsAminoMsg): PlacementRequirements {
-    return PlacementRequirements.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PlacementRequirementsProtoMsg): PlacementRequirements {
-    return PlacementRequirements.decode(message.value);
+  fromProtoMsg(message: PlacementRequirementsProtoMsg, useInterfaces: boolean = true): PlacementRequirements {
+    return PlacementRequirements.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PlacementRequirements): Uint8Array {
     return PlacementRequirements.encode(message).finish();

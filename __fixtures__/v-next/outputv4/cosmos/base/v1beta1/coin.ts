@@ -11,6 +11,10 @@ export interface Coin {
   denom: string;
   amount: string;
 }
+export interface CoinProtoMsg {
+  typeUrl: "/cosmos.base.v1beta1.Coin";
+  value: Uint8Array;
+}
 /**
  * Coin defines a token with a denomination and an amount.
  * 
@@ -31,6 +35,10 @@ export interface DecCoin {
   denom: string;
   amount: string;
 }
+export interface DecCoinProtoMsg {
+  typeUrl: "/cosmos.base.v1beta1.DecCoin";
+  value: Uint8Array;
+}
 /**
  * DecCoin defines a token with a denomination and a decimal amount.
  * 
@@ -45,6 +53,10 @@ export interface DecCoinSDKType {
 export interface IntProto {
   int: string;
 }
+export interface IntProtoProtoMsg {
+  typeUrl: "/cosmos.base.v1beta1.IntProto";
+  value: Uint8Array;
+}
 /** IntProto defines a Protobuf wrapper around an Int object. */
 export interface IntProtoSDKType {
   int: string;
@@ -52,6 +64,10 @@ export interface IntProtoSDKType {
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProto {
   dec: string;
+}
+export interface DecProtoProtoMsg {
+  typeUrl: "/cosmos.base.v1beta1.DecProto";
+  value: Uint8Array;
 }
 /** DecProto defines a Protobuf wrapper around a Dec object. */
 export interface DecProtoSDKType {
@@ -66,10 +82,10 @@ function createBaseCoin(): Coin {
 export const Coin = {
   typeUrl: "/cosmos.base.v1beta1.Coin",
   encode(message: Coin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.amount !== "") {
+    if (message.amount !== undefined) {
       writer.uint32(18).string(message.amount);
     }
     return writer;
@@ -131,10 +147,14 @@ export const Coin = {
     return obj;
   },
   fromAmino(object: CoinAmino): Coin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: Coin): CoinAmino {
     const obj: any = {};
@@ -173,10 +193,10 @@ function createBaseDecCoin(): DecCoin {
 export const DecCoin = {
   typeUrl: "/cosmos.base.v1beta1.DecCoin",
   encode(message: DecCoin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.amount !== "") {
+    if (message.amount !== undefined) {
       writer.uint32(18).string(message.amount);
     }
     return writer;
@@ -238,10 +258,14 @@ export const DecCoin = {
     return obj;
   },
   fromAmino(object: DecCoinAmino): DecCoin {
-    return {
-      denom: object.denom,
-      amount: object.amount
-    };
+    const message = createBaseDecCoin();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    return message;
   },
   toAmino(message: DecCoin): DecCoinAmino {
     const obj: any = {};
@@ -279,7 +303,7 @@ function createBaseIntProto(): IntProto {
 export const IntProto = {
   typeUrl: "/cosmos.base.v1beta1.IntProto",
   encode(message: IntProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.int !== "") {
+    if (message.int !== undefined) {
       writer.uint32(10).string(message.int);
     }
     return writer;
@@ -332,9 +356,11 @@ export const IntProto = {
     return obj;
   },
   fromAmino(object: IntProtoAmino): IntProto {
-    return {
-      int: object.int
-    };
+    const message = createBaseIntProto();
+    if (object.int !== undefined && object.int !== null) {
+      message.int = object.int;
+    }
+    return message;
   },
   toAmino(message: IntProto): IntProtoAmino {
     const obj: any = {};
@@ -371,7 +397,7 @@ function createBaseDecProto(): DecProto {
 export const DecProto = {
   typeUrl: "/cosmos.base.v1beta1.DecProto",
   encode(message: DecProto, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.dec !== "") {
+    if (message.dec !== undefined) {
       writer.uint32(10).string(message.dec);
     }
     return writer;
@@ -424,9 +450,11 @@ export const DecProto = {
     return obj;
   },
   fromAmino(object: DecProtoAmino): DecProto {
-    return {
-      dec: object.dec
-    };
+    const message = createBaseDecProto();
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    return message;
   },
   toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};

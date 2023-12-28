@@ -1,7 +1,7 @@
 import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./downtime_duration";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -10,6 +10,10 @@ export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 export interface RecoveredSinceDowntimeOfLengthRequest {
   downtime: Downtime;
   recovery: Duration;
+}
+export interface RecoveredSinceDowntimeOfLengthRequestProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthRequest";
+  value: Uint8Array;
 }
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -21,6 +25,10 @@ export interface RecoveredSinceDowntimeOfLengthRequestSDKType {
 }
 export interface RecoveredSinceDowntimeOfLengthResponse {
   succesfullyRecovered: boolean;
+}
+export interface RecoveredSinceDowntimeOfLengthResponseProtoMsg {
+  typeUrl: "/osmosis.downtimedetector.v1beta1.RecoveredSinceDowntimeOfLengthResponse";
+  value: Uint8Array;
 }
 export interface RecoveredSinceDowntimeOfLengthResponseSDKType {
   succesfully_recovered: boolean;
@@ -99,14 +107,18 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
     return obj;
   },
   fromAmino(object: RecoveredSinceDowntimeOfLengthRequestAmino): RecoveredSinceDowntimeOfLengthRequest {
-    return {
-      downtime: isSet(object.downtime) ? downtimeFromJSON(object.downtime) : -1,
-      recovery: object?.recovery ? Duration.fromAmino(object.recovery) : undefined
-    };
+    const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
+    if (object.downtime !== undefined && object.downtime !== null) {
+      message.downtime = downtimeFromJSON(object.downtime);
+    }
+    if (object.recovery !== undefined && object.recovery !== null) {
+      message.recovery = Duration.fromAmino(object.recovery);
+    }
+    return message;
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
     const obj: any = {};
-    obj.downtime = omitDefault(message.downtime);
+    obj.downtime = downtimeToJSON(message.downtime);
     obj.recovery = message.recovery ? Duration.toAmino(message.recovery) : undefined;
     return obj;
   },
@@ -193,13 +205,15 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
     return obj;
   },
   fromAmino(object: RecoveredSinceDowntimeOfLengthResponseAmino): RecoveredSinceDowntimeOfLengthResponse {
-    return {
-      succesfullyRecovered: object.succesfully_recovered
-    };
+    const message = createBaseRecoveredSinceDowntimeOfLengthResponse();
+    if (object.succesfully_recovered !== undefined && object.succesfully_recovered !== null) {
+      message.succesfullyRecovered = object.succesfully_recovered;
+    }
+    return message;
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAmino {
     const obj: any = {};
-    obj.succesfully_recovered = omitDefault(message.succesfullyRecovered);
+    obj.succesfully_recovered = message.succesfullyRecovered;
     return obj;
   },
   fromAminoMsg(object: RecoveredSinceDowntimeOfLengthResponseAminoMsg): RecoveredSinceDowntimeOfLengthResponse {

@@ -1,7 +1,7 @@
 import { Option, OptionAmino, OptionSDKType, Syntax, syntaxFromJSON, syntaxToJSON } from "./type";
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -50,7 +50,7 @@ export interface Api {
    * Source context for the protocol buffer service represented by this
    * message.
    */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** Included interfaces. See [Mixin][]. */
   mixins: Mixin[];
   /** The source syntax of the service. */
@@ -76,11 +76,11 @@ export interface ApiAmino {
    * The fully qualified name of this interface, including package name
    * followed by the interface's simple name.
    */
-  name: string;
+  name?: string;
   /** The methods of this interface, in unspecified order. */
-  methods: MethodAmino[];
+  methods?: MethodAmino[];
   /** Any metadata attached to the interface. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /**
    * A version string for this interface. If specified, must have the form
    * `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -102,16 +102,16 @@ export interface ApiAmino {
    * be omitted. Zero major versions must only be used for
    * experimental, non-GA interfaces.
    */
-  version: string;
+  version?: string;
   /**
    * Source context for the protocol buffer service represented by this
    * message.
    */
   source_context?: SourceContextAmino;
   /** Included interfaces. See [Mixin][]. */
-  mixins: MixinAmino[];
+  mixins?: MixinAmino[];
   /** The source syntax of the service. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 export interface ApiAminoMsg {
   type: "/google.protobuf.Api";
@@ -133,7 +133,7 @@ export interface ApiSDKType {
   methods: MethodSDKType[];
   options: OptionSDKType[];
   version: string;
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
   mixins: MixinSDKType[];
   syntax: Syntax;
 }
@@ -161,19 +161,19 @@ export interface MethodProtoMsg {
 /** Method represents a method of an API interface. */
 export interface MethodAmino {
   /** The simple name of this method. */
-  name: string;
+  name?: string;
   /** A URL of the input message type. */
-  request_type_url: string;
+  request_type_url?: string;
   /** If true, the request is streamed. */
-  request_streaming: boolean;
+  request_streaming?: boolean;
   /** The URL of the output message type. */
-  response_type_url: string;
+  response_type_url?: string;
   /** If true, the response is streamed. */
-  response_streaming: boolean;
+  response_streaming?: boolean;
   /** Any metadata attached to the method. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source syntax of this method. */
-  syntax: Syntax;
+  syntax?: Syntax;
 }
 export interface MethodAminoMsg {
   type: "/google.protobuf.Method";
@@ -364,12 +364,12 @@ export interface MixinProtoMsg {
  */
 export interface MixinAmino {
   /** The fully qualified name of the interface which is included. */
-  name: string;
+  name?: string;
   /**
    * If non-empty specifies a path under which inherited HTTP paths
    * are rooted.
    */
-  root: string;
+  root?: string;
 }
 export interface MixinAminoMsg {
   type: "/google.protobuf.Mixin";
@@ -465,7 +465,7 @@ function createBaseApi(): Api {
     methods: [],
     options: [],
     version: "",
-    sourceContext: SourceContext.fromPartial({}),
+    sourceContext: undefined,
     mixins: [],
     syntax: 0
   };
@@ -613,19 +613,27 @@ export const Api = {
     return obj;
   },
   fromAmino(object: ApiAmino): Api {
-    return {
-      name: object.name,
-      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromAmino(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      version: object.version,
-      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
-      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseApi();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.methods = object.methods?.map(e => Method.fromAmino(e)) || [];
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.version !== undefined && object.version !== null) {
+      message.version = object.version;
+    }
+    if (object.source_context !== undefined && object.source_context !== null) {
+      message.sourceContext = SourceContext.fromAmino(object.source_context);
+    }
+    message.mixins = object.mixins?.map(e => Mixin.fromAmino(e)) || [];
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
   toAmino(message: Api): ApiAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? Method.toAmino(e) : undefined);
     } else {
@@ -636,14 +644,14 @@ export const Api = {
     } else {
       obj.options = [];
     }
-    obj.version = omitDefault(message.version);
+    obj.version = message.version;
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
     if (message.mixins) {
       obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e) : undefined);
     } else {
       obj.mixins = [];
     }
-    obj.syntax = omitDefault(message.syntax);
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: ApiAminoMsg): Api {
@@ -798,29 +806,41 @@ export const Method = {
     return obj;
   },
   fromAmino(object: MethodAmino): Method {
-    return {
-      name: object.name,
-      requestTypeUrl: object.request_type_url,
-      requestStreaming: object.request_streaming,
-      responseTypeUrl: object.response_type_url,
-      responseStreaming: object.response_streaming,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseMethod();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.request_type_url !== undefined && object.request_type_url !== null) {
+      message.requestTypeUrl = object.request_type_url;
+    }
+    if (object.request_streaming !== undefined && object.request_streaming !== null) {
+      message.requestStreaming = object.request_streaming;
+    }
+    if (object.response_type_url !== undefined && object.response_type_url !== null) {
+      message.responseTypeUrl = object.response_type_url;
+    }
+    if (object.response_streaming !== undefined && object.response_streaming !== null) {
+      message.responseStreaming = object.response_streaming;
+    }
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
   toAmino(message: Method): MethodAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.request_type_url = omitDefault(message.requestTypeUrl);
-    obj.request_streaming = omitDefault(message.requestStreaming);
-    obj.response_type_url = omitDefault(message.responseTypeUrl);
-    obj.response_streaming = omitDefault(message.responseStreaming);
+    obj.name = message.name;
+    obj.request_type_url = message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming;
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
       obj.options = [];
     }
-    obj.syntax = omitDefault(message.syntax);
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
   fromAminoMsg(object: MethodAminoMsg): Method {
@@ -907,15 +927,19 @@ export const Mixin = {
     return obj;
   },
   fromAmino(object: MixinAmino): Mixin {
-    return {
-      name: object.name,
-      root: object.root
-    };
+    const message = createBaseMixin();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.root !== undefined && object.root !== null) {
+      message.root = object.root;
+    }
+    return message;
   },
   toAmino(message: Mixin): MixinAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.root = omitDefault(message.root);
+    obj.name = message.name;
+    obj.root = message.root;
     return obj;
   },
   fromAminoMsg(object: MixinAminoMsg): Mixin {

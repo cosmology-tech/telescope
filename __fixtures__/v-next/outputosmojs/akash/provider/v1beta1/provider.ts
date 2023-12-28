@@ -7,6 +7,10 @@ export interface ProviderInfo {
   email: string;
   website: string;
 }
+export interface ProviderInfoProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.ProviderInfo";
+  value: Uint8Array;
+}
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
   email: string;
@@ -19,6 +23,10 @@ export interface MsgCreateProvider {
   attributes: Attribute[];
   info: ProviderInfo;
 }
+export interface MsgCreateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProvider";
+  value: Uint8Array;
+}
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
   owner: string;
@@ -28,6 +36,10 @@ export interface MsgCreateProviderSDKType {
 }
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponse {}
+export interface MsgCreateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgCreateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgCreateProviderResponse defines the Msg/CreateProvider response type. */
 export interface MsgCreateProviderResponseSDKType {}
 /** MsgUpdateProvider defines an SDK message for updating a provider */
@@ -36,6 +48,10 @@ export interface MsgUpdateProvider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface MsgUpdateProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProvider";
+  value: Uint8Array;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -46,11 +62,19 @@ export interface MsgUpdateProviderSDKType {
 }
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponse {}
+export interface MsgUpdateProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgUpdateProviderResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateProviderResponse defines the Msg/UpdateProvider response type. */
 export interface MsgUpdateProviderResponseSDKType {}
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProvider {
   owner: string;
+}
+export interface MsgDeleteProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProvider";
+  value: Uint8Array;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -58,6 +82,10 @@ export interface MsgDeleteProviderSDKType {
 }
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponse {}
+export interface MsgDeleteProviderResponseProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.MsgDeleteProviderResponse";
+  value: Uint8Array;
+}
 /** MsgDeleteProviderResponse defines the Msg/DeleteProvider response type. */
 export interface MsgDeleteProviderResponseSDKType {}
 /** Provider stores owner and host details */
@@ -66,6 +94,10 @@ export interface Provider {
   hostUri: string;
   attributes: Attribute[];
   info: ProviderInfo;
+}
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.provider.v1beta1.Provider";
+  value: Uint8Array;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {
@@ -148,10 +180,14 @@ export const ProviderInfo = {
     return obj;
   },
   fromAmino(object: ProviderInfoAmino): ProviderInfo {
-    return {
-      email: object.email,
-      website: object.website
-    };
+    const message = createBaseProviderInfo();
+    if (object.email !== undefined && object.email !== null) {
+      message.email = object.email;
+    }
+    if (object.website !== undefined && object.website !== null) {
+      message.website = object.website;
+    }
+    return message;
   },
   toAmino(message: ProviderInfo): ProviderInfoAmino {
     const obj: any = {};
@@ -289,12 +325,18 @@ export const MsgCreateProvider = {
     return obj;
   },
   fromAmino(object: MsgCreateProviderAmino): MsgCreateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
+    const message = createBaseMsgCreateProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
     const obj: any = {};
@@ -374,7 +416,8 @@ export const MsgCreateProviderResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateProviderResponseAmino): MsgCreateProviderResponse {
-    return {};
+    const message = createBaseMsgCreateProviderResponse();
+    return message;
   },
   toAmino(_: MsgCreateProviderResponse): MsgCreateProviderResponseAmino {
     const obj: any = {};
@@ -510,12 +553,18 @@ export const MsgUpdateProvider = {
     return obj;
   },
   fromAmino(object: MsgUpdateProviderAmino): MsgUpdateProvider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
+    const message = createBaseMsgUpdateProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
     const obj: any = {};
@@ -595,7 +644,8 @@ export const MsgUpdateProviderResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateProviderResponseAmino): MsgUpdateProviderResponse {
-    return {};
+    const message = createBaseMsgUpdateProviderResponse();
+    return message;
   },
   toAmino(_: MsgUpdateProviderResponse): MsgUpdateProviderResponseAmino {
     const obj: any = {};
@@ -684,9 +734,11 @@ export const MsgDeleteProvider = {
     return obj;
   },
   fromAmino(object: MsgDeleteProviderAmino): MsgDeleteProvider {
-    return {
-      owner: object.owner
-    };
+    const message = createBaseMsgDeleteProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
     const obj: any = {};
@@ -759,7 +811,8 @@ export const MsgDeleteProviderResponse = {
     return obj;
   },
   fromAmino(_: MsgDeleteProviderResponseAmino): MsgDeleteProviderResponse {
-    return {};
+    const message = createBaseMsgDeleteProviderResponse();
+    return message;
   },
   toAmino(_: MsgDeleteProviderResponse): MsgDeleteProviderResponseAmino {
     const obj: any = {};
@@ -895,12 +948,18 @@ export const Provider = {
     return obj;
   },
   fromAmino(object: ProviderAmino): Provider {
-    return {
-      owner: object.owner,
-      hostUri: object.host_uri,
-      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromAmino(e)) : [],
-      info: object?.info ? ProviderInfo.fromAmino(object.info) : undefined
-    };
+    const message = createBaseProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.host_uri !== undefined && object.host_uri !== null) {
+      message.hostUri = object.host_uri;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ProviderInfo.fromAmino(object.info);
+    }
+    return message;
   },
   toAmino(message: Provider): ProviderAmino {
     const obj: any = {};

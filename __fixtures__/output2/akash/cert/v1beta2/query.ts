@@ -13,12 +13,12 @@ export interface CertificateResponse {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter: CertificateFilter;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
@@ -78,7 +78,7 @@ export const CertificateResponse = {
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
     filter: CertificateFilter.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesRequest = {
@@ -133,7 +133,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesResponse = {

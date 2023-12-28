@@ -6,10 +6,18 @@ import { DeepPartial, isSet, omitDefault } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** =============================== Params */
 export interface ParamsRequest {}
+export interface ParamsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ParamsRequest";
+  value: Uint8Array;
+}
 /** =============================== Params */
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
+}
+export interface ParamsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.ParamsResponse";
+  value: Uint8Array;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;
@@ -19,6 +27,10 @@ export interface EstimateSwapExactAmountInRequest {
   poolId: bigint;
   tokenIn: string;
   routes: SwapAmountInRoute[];
+}
+export interface EstimateSwapExactAmountInRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountInRequest";
+  value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountIn */
 export interface EstimateSwapExactAmountInRequestSDKType {
@@ -31,6 +43,10 @@ export interface EstimateSinglePoolSwapExactAmountInRequest {
   tokenIn: string;
   tokenOutDenom: string;
 }
+export interface EstimateSinglePoolSwapExactAmountInRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSinglePoolSwapExactAmountInRequest";
+  value: Uint8Array;
+}
 export interface EstimateSinglePoolSwapExactAmountInRequestSDKType {
   pool_id: bigint;
   token_in: string;
@@ -38,6 +54,10 @@ export interface EstimateSinglePoolSwapExactAmountInRequestSDKType {
 }
 export interface EstimateSwapExactAmountInResponse {
   tokenOutAmount: string;
+}
+export interface EstimateSwapExactAmountInResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountInResponse";
+  value: Uint8Array;
 }
 export interface EstimateSwapExactAmountInResponseSDKType {
   token_out_amount: string;
@@ -47,6 +67,10 @@ export interface EstimateSwapExactAmountOutRequest {
   poolId: bigint;
   routes: SwapAmountOutRoute[];
   tokenOut: string;
+}
+export interface EstimateSwapExactAmountOutRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountOutRequest";
+  value: Uint8Array;
 }
 /** =============================== EstimateSwapExactAmountOut */
 export interface EstimateSwapExactAmountOutRequestSDKType {
@@ -59,6 +83,10 @@ export interface EstimateSinglePoolSwapExactAmountOutRequest {
   tokenInDenom: string;
   tokenOut: string;
 }
+export interface EstimateSinglePoolSwapExactAmountOutRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSinglePoolSwapExactAmountOutRequest";
+  value: Uint8Array;
+}
 export interface EstimateSinglePoolSwapExactAmountOutRequestSDKType {
   pool_id: bigint;
   token_in_denom: string;
@@ -67,15 +95,27 @@ export interface EstimateSinglePoolSwapExactAmountOutRequestSDKType {
 export interface EstimateSwapExactAmountOutResponse {
   tokenInAmount: string;
 }
+export interface EstimateSwapExactAmountOutResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.EstimateSwapExactAmountOutResponse";
+  value: Uint8Array;
+}
 export interface EstimateSwapExactAmountOutResponseSDKType {
   token_in_amount: string;
 }
 /** =============================== NumPools */
 export interface NumPoolsRequest {}
+export interface NumPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.NumPoolsRequest";
+  value: Uint8Array;
+}
 /** =============================== NumPools */
 export interface NumPoolsRequestSDKType {}
 export interface NumPoolsResponse {
   numPools: bigint;
+}
+export interface NumPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.NumPoolsResponse";
+  value: Uint8Array;
 }
 export interface NumPoolsResponseSDKType {
   num_pools: bigint;
@@ -84,19 +124,31 @@ export interface NumPoolsResponseSDKType {
 export interface PoolRequest {
   poolId: bigint;
 }
+export interface PoolRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.PoolRequest";
+  value: Uint8Array;
+}
 /** =============================== Pool */
 export interface PoolRequestSDKType {
   pool_id: bigint;
 }
 export interface PoolResponse {
-  pool: Any;
+  pool?: Any;
+}
+export interface PoolResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.PoolResponse";
+  value: Uint8Array;
 }
 export interface PoolResponseSDKType {
-  pool: AnySDKType;
+  pool?: AnySDKType;
 }
 /** =============================== AllPools */
 export interface AllPoolsRequest {
   poolId: bigint;
+}
+export interface AllPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.AllPoolsRequest";
+  value: Uint8Array;
 }
 /** =============================== AllPools */
 export interface AllPoolsRequestSDKType {
@@ -104,6 +156,10 @@ export interface AllPoolsRequestSDKType {
 }
 export interface AllPoolsResponse {
   pools: Any[];
+}
+export interface AllPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.AllPoolsResponse";
+  value: Uint8Array;
 }
 export interface AllPoolsResponseSDKType {
   pools: AnySDKType[];
@@ -116,6 +172,10 @@ export interface SpotPriceRequest {
   poolId: bigint;
   baseAssetDenom: string;
   quoteAssetDenom: string;
+}
+export interface SpotPriceRequestProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SpotPriceRequest";
+  value: Uint8Array;
 }
 /**
  * SpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -133,6 +193,10 @@ export interface SpotPriceRequestSDKType {
 export interface SpotPriceResponse {
   /** String of the Dec. Ex) 10.203uatom */
   spotPrice: string;
+}
+export interface SpotPriceResponseProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.SpotPriceResponse";
+  value: Uint8Array;
 }
 /**
  * SpotPriceResponse defines the gRPC response structure for a SpotPrice
@@ -185,7 +249,8 @@ export const ParamsRequest = {
     return obj;
   },
   fromAmino(_: ParamsRequestAmino): ParamsRequest {
-    return {};
+    const message = createBaseParamsRequest();
+    return message;
   },
   toAmino(_: ParamsRequest): ParamsRequestAmino {
     const obj: any = {};
@@ -274,9 +339,11 @@ export const ParamsResponse = {
     return obj;
   },
   fromAmino(object: ParamsResponseAmino): ParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: ParamsResponse): ParamsResponseAmino {
     const obj: any = {};
@@ -400,11 +467,15 @@ export const EstimateSwapExactAmountInRequest = {
     return obj;
   },
   fromAmino(object: EstimateSwapExactAmountInRequestAmino): EstimateSwapExactAmountInRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      tokenIn: object.token_in,
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromAmino(e)) : []
-    };
+    const message = createBaseEstimateSwapExactAmountInRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = object.token_in;
+    }
+    message.routes = object.routes?.map(e => SwapAmountInRoute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: EstimateSwapExactAmountInRequest): EstimateSwapExactAmountInRequestAmino {
     const obj: any = {};
@@ -526,11 +597,17 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
     return obj;
   },
   fromAmino(object: EstimateSinglePoolSwapExactAmountInRequestAmino): EstimateSinglePoolSwapExactAmountInRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      tokenIn: object.token_in,
-      tokenOutDenom: object.token_out_denom
-    };
+    const message = createBaseEstimateSinglePoolSwapExactAmountInRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = object.token_in;
+    }
+    if (object.token_out_denom !== undefined && object.token_out_denom !== null) {
+      message.tokenOutDenom = object.token_out_denom;
+    }
+    return message;
   },
   toAmino(message: EstimateSinglePoolSwapExactAmountInRequest): EstimateSinglePoolSwapExactAmountInRequestAmino {
     const obj: any = {};
@@ -622,9 +699,11 @@ export const EstimateSwapExactAmountInResponse = {
     return obj;
   },
   fromAmino(object: EstimateSwapExactAmountInResponseAmino): EstimateSwapExactAmountInResponse {
-    return {
-      tokenOutAmount: object.token_out_amount
-    };
+    const message = createBaseEstimateSwapExactAmountInResponse();
+    if (object.token_out_amount !== undefined && object.token_out_amount !== null) {
+      message.tokenOutAmount = object.token_out_amount;
+    }
+    return message;
   },
   toAmino(message: EstimateSwapExactAmountInResponse): EstimateSwapExactAmountInResponseAmino {
     const obj: any = {};
@@ -748,11 +827,15 @@ export const EstimateSwapExactAmountOutRequest = {
     return obj;
   },
   fromAmino(object: EstimateSwapExactAmountOutRequestAmino): EstimateSwapExactAmountOutRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountOutRoute.fromAmino(e)) : [],
-      tokenOut: object.token_out
-    };
+    const message = createBaseEstimateSwapExactAmountOutRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    message.routes = object.routes?.map(e => SwapAmountOutRoute.fromAmino(e)) || [];
+    if (object.token_out !== undefined && object.token_out !== null) {
+      message.tokenOut = object.token_out;
+    }
+    return message;
   },
   toAmino(message: EstimateSwapExactAmountOutRequest): EstimateSwapExactAmountOutRequestAmino {
     const obj: any = {};
@@ -874,11 +957,17 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
     return obj;
   },
   fromAmino(object: EstimateSinglePoolSwapExactAmountOutRequestAmino): EstimateSinglePoolSwapExactAmountOutRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      tokenInDenom: object.token_in_denom,
-      tokenOut: object.token_out
-    };
+    const message = createBaseEstimateSinglePoolSwapExactAmountOutRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.token_in_denom !== undefined && object.token_in_denom !== null) {
+      message.tokenInDenom = object.token_in_denom;
+    }
+    if (object.token_out !== undefined && object.token_out !== null) {
+      message.tokenOut = object.token_out;
+    }
+    return message;
   },
   toAmino(message: EstimateSinglePoolSwapExactAmountOutRequest): EstimateSinglePoolSwapExactAmountOutRequestAmino {
     const obj: any = {};
@@ -970,9 +1059,11 @@ export const EstimateSwapExactAmountOutResponse = {
     return obj;
   },
   fromAmino(object: EstimateSwapExactAmountOutResponseAmino): EstimateSwapExactAmountOutResponse {
-    return {
-      tokenInAmount: object.token_in_amount
-    };
+    const message = createBaseEstimateSwapExactAmountOutResponse();
+    if (object.token_in_amount !== undefined && object.token_in_amount !== null) {
+      message.tokenInAmount = object.token_in_amount;
+    }
+    return message;
   },
   toAmino(message: EstimateSwapExactAmountOutResponse): EstimateSwapExactAmountOutResponseAmino {
     const obj: any = {};
@@ -1045,7 +1136,8 @@ export const NumPoolsRequest = {
     return obj;
   },
   fromAmino(_: NumPoolsRequestAmino): NumPoolsRequest {
-    return {};
+    const message = createBaseNumPoolsRequest();
+    return message;
   },
   toAmino(_: NumPoolsRequest): NumPoolsRequestAmino {
     const obj: any = {};
@@ -1134,9 +1226,11 @@ export const NumPoolsResponse = {
     return obj;
   },
   fromAmino(object: NumPoolsResponseAmino): NumPoolsResponse {
-    return {
-      numPools: BigInt(object.num_pools)
-    };
+    const message = createBaseNumPoolsResponse();
+    if (object.num_pools !== undefined && object.num_pools !== null) {
+      message.numPools = BigInt(object.num_pools);
+    }
+    return message;
   },
   toAmino(message: NumPoolsResponse): NumPoolsResponseAmino {
     const obj: any = {};
@@ -1226,9 +1320,11 @@ export const PoolRequest = {
     return obj;
   },
   fromAmino(object: PoolRequestAmino): PoolRequest {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBasePoolRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: PoolRequest): PoolRequestAmino {
     const obj: any = {};
@@ -1259,7 +1355,7 @@ export const PoolRequest = {
 };
 function createBasePoolResponse(): PoolResponse {
   return {
-    pool: Any.fromPartial({})
+    pool: undefined
   };
 }
 export const PoolResponse = {
@@ -1318,9 +1414,11 @@ export const PoolResponse = {
     return obj;
   },
   fromAmino(object: PoolResponseAmino): PoolResponse {
-    return {
-      pool: object?.pool ? Any.fromAmino(object.pool) : undefined
-    };
+    const message = createBasePoolResponse();
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = Any.fromAmino(object.pool);
+    }
+    return message;
   },
   toAmino(message: PoolResponse): PoolResponseAmino {
     const obj: any = {};
@@ -1410,9 +1508,11 @@ export const AllPoolsRequest = {
     return obj;
   },
   fromAmino(object: AllPoolsRequestAmino): AllPoolsRequest {
-    return {
-      poolId: BigInt(object.pool_id)
-    };
+    const message = createBaseAllPoolsRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
   },
   toAmino(message: AllPoolsRequest): AllPoolsRequestAmino {
     const obj: any = {};
@@ -1510,9 +1610,9 @@ export const AllPoolsResponse = {
     return obj;
   },
   fromAmino(object: AllPoolsResponseAmino): AllPoolsResponse {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseAllPoolsResponse();
+    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AllPoolsResponse): AllPoolsResponseAmino {
     const obj: any = {};
@@ -1632,11 +1732,17 @@ export const SpotPriceRequest = {
     return obj;
   },
   fromAmino(object: SpotPriceRequestAmino): SpotPriceRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      baseAssetDenom: object.base_asset_denom,
-      quoteAssetDenom: object.quote_asset_denom
-    };
+    const message = createBaseSpotPriceRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.base_asset_denom !== undefined && object.base_asset_denom !== null) {
+      message.baseAssetDenom = object.base_asset_denom;
+    }
+    if (object.quote_asset_denom !== undefined && object.quote_asset_denom !== null) {
+      message.quoteAssetDenom = object.quote_asset_denom;
+    }
+    return message;
   },
   toAmino(message: SpotPriceRequest): SpotPriceRequestAmino {
     const obj: any = {};
@@ -1728,9 +1834,11 @@ export const SpotPriceResponse = {
     return obj;
   },
   fromAmino(object: SpotPriceResponseAmino): SpotPriceResponse {
-    return {
-      spotPrice: object.spot_price
-    };
+    const message = createBaseSpotPriceResponse();
+    if (object.spot_price !== undefined && object.spot_price !== null) {
+      message.spotPrice = object.spot_price;
+    }
+    return message;
   },
   toAmino(message: SpotPriceResponse): SpotPriceResponseAmino {
     const obj: any = {};

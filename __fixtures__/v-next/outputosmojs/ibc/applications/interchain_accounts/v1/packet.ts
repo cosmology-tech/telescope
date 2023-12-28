@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -45,6 +45,10 @@ export interface InterchainAccountPacketData {
   data: Uint8Array;
   memo: string;
 }
+export interface InterchainAccountPacketDataProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.InterchainAccountPacketData";
+  value: Uint8Array;
+}
 /** InterchainAccountPacketData is comprised of a raw transaction, type of transaction and optional memo field. */
 export interface InterchainAccountPacketDataSDKType {
   type: Type;
@@ -54,6 +58,10 @@ export interface InterchainAccountPacketDataSDKType {
 /** CosmosTx contains a list of sdk.Msg's. It should be used when sending transactions to an SDK host chain. */
 export interface CosmosTx {
   messages: Any[];
+}
+export interface CosmosTxProtoMsg {
+  typeUrl: "/ibc.applications.interchain_accounts.v1.CosmosTx";
+  value: Uint8Array;
 }
 /** CosmosTx contains a list of sdk.Msg's. It should be used when sending transactions to an SDK host chain. */
 export interface CosmosTxSDKType {
@@ -146,17 +154,23 @@ export const InterchainAccountPacketData = {
     return obj;
   },
   fromAmino(object: InterchainAccountPacketDataAmino): InterchainAccountPacketData {
-    return {
-      type: isSet(object.type) ? typeFromJSON(object.type) : -1,
-      data: object.data,
-      memo: object.memo
-    };
+    const message = createBaseInterchainAccountPacketData();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = typeFromJSON(object.type);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    if (object.memo !== undefined && object.memo !== null) {
+      message.memo = object.memo;
+    }
+    return message;
   },
   toAmino(message: InterchainAccountPacketData): InterchainAccountPacketDataAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
-    obj.data = message.data;
-    obj.memo = omitDefault(message.memo);
+    obj.type = typeToJSON(message.type);
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
+    obj.memo = message.memo;
     return obj;
   },
   fromAminoMsg(object: InterchainAccountPacketDataAminoMsg): InterchainAccountPacketData {
@@ -250,9 +264,9 @@ export const CosmosTx = {
     return obj;
   },
   fromAmino(object: CosmosTxAmino): CosmosTx {
-    return {
-      messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseCosmosTx();
+    message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: CosmosTx): CosmosTxAmino {
     const obj: any = {};

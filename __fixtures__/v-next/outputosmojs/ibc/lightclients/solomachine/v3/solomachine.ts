@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.solomachine.v3";
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -11,7 +11,11 @@ export interface ClientState {
   sequence: bigint;
   /** frozen sequence of the solo machine */
   isFrozen: boolean;
-  consensusState: ConsensusState;
+  consensusState?: ConsensusState;
+}
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.ClientState";
+  value: Uint8Array;
 }
 /**
  * ClientState defines a solo machine client that tracks the current consensus
@@ -20,7 +24,7 @@ export interface ClientState {
 export interface ClientStateSDKType {
   sequence: bigint;
   is_frozen: boolean;
-  consensus_state: ConsensusStateSDKType;
+  consensus_state?: ConsensusStateSDKType;
 }
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
@@ -29,7 +33,7 @@ export interface ClientStateSDKType {
  */
 export interface ConsensusState {
   /** public key of the solo machine */
-  publicKey: Any;
+  publicKey?: Any;
   /**
    * diversifier allows the same public key to be re-used across different solo
    * machine clients (potentially on different chains) without being considered
@@ -38,13 +42,17 @@ export interface ConsensusState {
   diversifier: string;
   timestamp: bigint;
 }
+export interface ConsensusStateProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.ConsensusState";
+  value: Uint8Array;
+}
 /**
  * ConsensusState defines a solo machine consensus state. The sequence of a
  * consensus state is contained in the "height" key used in storing the
  * consensus state.
  */
 export interface ConsensusStateSDKType {
-  public_key: AnySDKType;
+  public_key?: AnySDKType;
   diversifier: string;
   timestamp: bigint;
 }
@@ -52,14 +60,18 @@ export interface ConsensusStateSDKType {
 export interface Header {
   timestamp: bigint;
   signature: Uint8Array;
-  newPublicKey: Any;
+  newPublicKey?: Any;
   newDiversifier: string;
+}
+export interface HeaderProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.Header";
+  value: Uint8Array;
 }
 /** Header defines a solo machine consensus header */
 export interface HeaderSDKType {
   timestamp: bigint;
   signature: Uint8Array;
-  new_public_key: AnySDKType;
+  new_public_key?: AnySDKType;
   new_diversifier: string;
 }
 /**
@@ -68,8 +80,12 @@ export interface HeaderSDKType {
  */
 export interface Misbehaviour {
   sequence: bigint;
-  signatureOne: SignatureAndData;
-  signatureTwo: SignatureAndData;
+  signatureOne?: SignatureAndData;
+  signatureTwo?: SignatureAndData;
+}
+export interface MisbehaviourProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.Misbehaviour";
+  value: Uint8Array;
 }
 /**
  * Misbehaviour defines misbehaviour for a solo machine which consists
@@ -77,8 +93,8 @@ export interface Misbehaviour {
  */
 export interface MisbehaviourSDKType {
   sequence: bigint;
-  signature_one: SignatureAndDataSDKType;
-  signature_two: SignatureAndDataSDKType;
+  signature_one?: SignatureAndDataSDKType;
+  signature_two?: SignatureAndDataSDKType;
 }
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -89,6 +105,10 @@ export interface SignatureAndData {
   path: Uint8Array;
   data: Uint8Array;
   timestamp: bigint;
+}
+export interface SignatureAndDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.SignatureAndData";
+  value: Uint8Array;
 }
 /**
  * SignatureAndData contains a signature and the data signed over to create that
@@ -107,6 +127,10 @@ export interface SignatureAndDataSDKType {
 export interface TimestampedSignatureData {
   signatureData: Uint8Array;
   timestamp: bigint;
+}
+export interface TimestampedSignatureDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.TimestampedSignatureData";
+  value: Uint8Array;
 }
 /**
  * TimestampedSignatureData contains the signature data and the timestamp of the
@@ -129,6 +153,10 @@ export interface SignBytes {
   /** the marshaled data bytes */
   data: Uint8Array;
 }
+export interface SignBytesProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.SignBytes";
+  value: Uint8Array;
+}
 /** SignBytes defines the signed bytes used for signature verification. */
 export interface SignBytesSDKType {
   sequence: bigint;
@@ -140,20 +168,24 @@ export interface SignBytesSDKType {
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderData {
   /** header public key */
-  newPubKey: Any;
+  newPubKey?: Any;
   /** header diversifier */
   newDiversifier: string;
 }
+export interface HeaderDataProtoMsg {
+  typeUrl: "/ibc.lightclients.solomachine.v3.HeaderData";
+  value: Uint8Array;
+}
 /** HeaderData returns the SignBytes data for update verification. */
 export interface HeaderDataSDKType {
-  new_pub_key: AnySDKType;
+  new_pub_key?: AnySDKType;
   new_diversifier: string;
 }
 function createBaseClientState(): ClientState {
   return {
     sequence: BigInt(0),
     isFrozen: false,
-    consensusState: ConsensusState.fromPartial({})
+    consensusState: undefined
   };
 }
 export const ClientState = {
@@ -236,16 +268,22 @@ export const ClientState = {
     return obj;
   },
   fromAmino(object: ClientStateAmino): ClientState {
-    return {
-      sequence: BigInt(object.sequence),
-      isFrozen: object.is_frozen,
-      consensusState: object?.consensus_state ? ConsensusState.fromAmino(object.consensus_state) : undefined
-    };
+    const message = createBaseClientState();
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    if (object.is_frozen !== undefined && object.is_frozen !== null) {
+      message.isFrozen = object.is_frozen;
+    }
+    if (object.consensus_state !== undefined && object.consensus_state !== null) {
+      message.consensusState = ConsensusState.fromAmino(object.consensus_state);
+    }
+    return message;
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.sequence = omitDefault(message.sequence);
-    obj.is_frozen = omitDefault(message.isFrozen);
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.is_frozen = message.isFrozen;
     obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined;
     return obj;
   },
@@ -273,7 +311,7 @@ export const ClientState = {
 };
 function createBaseConsensusState(): ConsensusState {
   return {
-    publicKey: Any.fromPartial({}),
+    publicKey: undefined,
     diversifier: "",
     timestamp: BigInt(0)
   };
@@ -358,17 +396,23 @@ export const ConsensusState = {
     return obj;
   },
   fromAmino(object: ConsensusStateAmino): ConsensusState {
-    return {
-      publicKey: object?.public_key ? Any.fromAmino(object.public_key) : undefined,
-      diversifier: object.diversifier,
-      timestamp: BigInt(object.timestamp)
-    };
+    const message = createBaseConsensusState();
+    if (object.public_key !== undefined && object.public_key !== null) {
+      message.publicKey = Any.fromAmino(object.public_key);
+    }
+    if (object.diversifier !== undefined && object.diversifier !== null) {
+      message.diversifier = object.diversifier;
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.diversifier = omitDefault(message.diversifier);
-    obj.timestamp = omitDefault(message.timestamp);
+    obj.diversifier = message.diversifier;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
@@ -397,7 +441,7 @@ function createBaseHeader(): Header {
   return {
     timestamp: BigInt(0),
     signature: new Uint8Array(),
-    newPublicKey: Any.fromPartial({}),
+    newPublicKey: undefined,
     newDiversifier: ""
   };
 }
@@ -493,19 +537,27 @@ export const Header = {
     return obj;
   },
   fromAmino(object: HeaderAmino): Header {
-    return {
-      timestamp: BigInt(object.timestamp),
-      signature: object.signature,
-      newPublicKey: object?.new_public_key ? Any.fromAmino(object.new_public_key) : undefined,
-      newDiversifier: object.new_diversifier
-    };
+    const message = createBaseHeader();
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp);
+    }
+    if (object.signature !== undefined && object.signature !== null) {
+      message.signature = bytesFromBase64(object.signature);
+    }
+    if (object.new_public_key !== undefined && object.new_public_key !== null) {
+      message.newPublicKey = Any.fromAmino(object.new_public_key);
+    }
+    if (object.new_diversifier !== undefined && object.new_diversifier !== null) {
+      message.newDiversifier = object.new_diversifier;
+    }
+    return message;
   },
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
-    obj.timestamp = omitDefault(message.timestamp);
-    obj.signature = message.signature;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
-    obj.new_diversifier = omitDefault(message.newDiversifier);
+    obj.new_diversifier = message.newDiversifier;
     return obj;
   },
   fromAminoMsg(object: HeaderAminoMsg): Header {
@@ -533,8 +585,8 @@ export const Header = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     sequence: BigInt(0),
-    signatureOne: SignatureAndData.fromPartial({}),
-    signatureTwo: SignatureAndData.fromPartial({})
+    signatureOne: undefined,
+    signatureTwo: undefined
   };
 }
 export const Misbehaviour = {
@@ -617,15 +669,21 @@ export const Misbehaviour = {
     return obj;
   },
   fromAmino(object: MisbehaviourAmino): Misbehaviour {
-    return {
-      sequence: BigInt(object.sequence),
-      signatureOne: object?.signature_one ? SignatureAndData.fromAmino(object.signature_one) : undefined,
-      signatureTwo: object?.signature_two ? SignatureAndData.fromAmino(object.signature_two) : undefined
-    };
+    const message = createBaseMisbehaviour();
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    if (object.signature_one !== undefined && object.signature_one !== null) {
+      message.signatureOne = SignatureAndData.fromAmino(object.signature_one);
+    }
+    if (object.signature_two !== undefined && object.signature_two !== null) {
+      message.signatureTwo = SignatureAndData.fromAmino(object.signature_two);
+    }
+    return message;
   },
   toAmino(message: Misbehaviour): MisbehaviourAmino {
     const obj: any = {};
-    obj.sequence = omitDefault(message.sequence);
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined;
     obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
@@ -752,19 +810,27 @@ export const SignatureAndData = {
     return obj;
   },
   fromAmino(object: SignatureAndDataAmino): SignatureAndData {
-    return {
-      signature: object.signature,
-      path: object.path,
-      data: object.data,
-      timestamp: BigInt(object.timestamp)
-    };
+    const message = createBaseSignatureAndData();
+    if (object.signature !== undefined && object.signature !== null) {
+      message.signature = bytesFromBase64(object.signature);
+    }
+    if (object.path !== undefined && object.path !== null) {
+      message.path = bytesFromBase64(object.path);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
-    obj.signature = message.signature;
-    obj.path = message.path;
-    obj.data = message.data;
-    obj.timestamp = omitDefault(message.timestamp);
+    obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignatureAndDataAminoMsg): SignatureAndData {
@@ -863,15 +929,19 @@ export const TimestampedSignatureData = {
     return obj;
   },
   fromAmino(object: TimestampedSignatureDataAmino): TimestampedSignatureData {
-    return {
-      signatureData: object.signature_data,
-      timestamp: BigInt(object.timestamp)
-    };
+    const message = createBaseTimestampedSignatureData();
+    if (object.signature_data !== undefined && object.signature_data !== null) {
+      message.signatureData = bytesFromBase64(object.signature_data);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp);
+    }
+    return message;
   },
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
-    obj.signature_data = message.signatureData;
-    obj.timestamp = omitDefault(message.timestamp);
+    obj.signature_data = message.signatureData ? base64FromBytes(message.signatureData) : undefined;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: TimestampedSignatureDataAminoMsg): TimestampedSignatureData {
@@ -1009,21 +1079,31 @@ export const SignBytes = {
     return obj;
   },
   fromAmino(object: SignBytesAmino): SignBytes {
-    return {
-      sequence: BigInt(object.sequence),
-      timestamp: BigInt(object.timestamp),
-      diversifier: object.diversifier,
-      path: object.path,
-      data: object.data
-    };
+    const message = createBaseSignBytes();
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = BigInt(object.timestamp);
+    }
+    if (object.diversifier !== undefined && object.diversifier !== null) {
+      message.diversifier = object.diversifier;
+    }
+    if (object.path !== undefined && object.path !== null) {
+      message.path = bytesFromBase64(object.path);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
   toAmino(message: SignBytes): SignBytesAmino {
     const obj: any = {};
-    obj.sequence = omitDefault(message.sequence);
-    obj.timestamp = omitDefault(message.timestamp);
-    obj.diversifier = omitDefault(message.diversifier);
-    obj.path = message.path;
-    obj.data = message.data;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.diversifier = message.diversifier;
+    obj.path = message.path ? base64FromBytes(message.path) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: SignBytesAminoMsg): SignBytes {
@@ -1050,7 +1130,7 @@ export const SignBytes = {
 };
 function createBaseHeaderData(): HeaderData {
   return {
-    newPubKey: Any.fromPartial({}),
+    newPubKey: undefined,
     newDiversifier: ""
   };
 }
@@ -1122,15 +1202,19 @@ export const HeaderData = {
     return obj;
   },
   fromAmino(object: HeaderDataAmino): HeaderData {
-    return {
-      newPubKey: object?.new_pub_key ? Any.fromAmino(object.new_pub_key) : undefined,
-      newDiversifier: object.new_diversifier
-    };
+    const message = createBaseHeaderData();
+    if (object.new_pub_key !== undefined && object.new_pub_key !== null) {
+      message.newPubKey = Any.fromAmino(object.new_pub_key);
+    }
+    if (object.new_diversifier !== undefined && object.new_diversifier !== null) {
+      message.newDiversifier = object.new_diversifier;
+    }
+    return message;
   },
   toAmino(message: HeaderData): HeaderDataAmino {
     const obj: any = {};
     obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
-    obj.new_diversifier = omitDefault(message.newDiversifier);
+    obj.new_diversifier = message.newDiversifier;
     return obj;
   },
   fromAminoMsg(object: HeaderDataAminoMsg): HeaderData {

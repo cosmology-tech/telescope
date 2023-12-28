@@ -4,12 +4,20 @@ import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../h
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
@@ -20,6 +28,10 @@ export interface QueryParamsResponseSDKType {
  * Query/EpochProvisions RPC method.
  */
 export interface QueryEpochProvisionsRequest {}
+export interface QueryEpochProvisionsRequestProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsRequest";
+  value: Uint8Array;
+}
 /**
  * QueryEpochProvisionsRequest is the request type for the
  * Query/EpochProvisions RPC method.
@@ -32,6 +44,10 @@ export interface QueryEpochProvisionsRequestSDKType {}
 export interface QueryEpochProvisionsResponse {
   /** epoch_provisions is the current minting per epoch provisions value. */
   epochProvisions: Uint8Array;
+}
+export interface QueryEpochProvisionsResponseProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.QueryEpochProvisionsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryEpochProvisionsResponse is the response type for the
@@ -84,7 +100,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -173,9 +190,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -248,7 +267,8 @@ export const QueryEpochProvisionsRequest = {
     return obj;
   },
   fromAmino(_: QueryEpochProvisionsRequestAmino): QueryEpochProvisionsRequest {
-    return {};
+    const message = createBaseQueryEpochProvisionsRequest();
+    return message;
   },
   toAmino(_: QueryEpochProvisionsRequest): QueryEpochProvisionsRequestAmino {
     const obj: any = {};
@@ -337,13 +357,15 @@ export const QueryEpochProvisionsResponse = {
     return obj;
   },
   fromAmino(object: QueryEpochProvisionsResponseAmino): QueryEpochProvisionsResponse {
-    return {
-      epochProvisions: object.epoch_provisions
-    };
+    const message = createBaseQueryEpochProvisionsResponse();
+    if (object.epoch_provisions !== undefined && object.epoch_provisions !== null) {
+      message.epochProvisions = bytesFromBase64(object.epoch_provisions);
+    }
+    return message;
   },
   toAmino(message: QueryEpochProvisionsResponse): QueryEpochProvisionsResponseAmino {
     const obj: any = {};
-    obj.epoch_provisions = message.epochProvisions;
+    obj.epoch_provisions = message.epochProvisions ? base64FromBytes(message.epochProvisions) : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryEpochProvisionsResponseAminoMsg): QueryEpochProvisionsResponse {

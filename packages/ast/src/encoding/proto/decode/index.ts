@@ -163,7 +163,18 @@ export const decodeMethod = (context: ProtoParseContext, name: string, proto: Pr
             ),
             identifier('length', t.tsTypeAnnotation(
                 t.tsNumberKeyword()
-            ), true)
+            ), true),
+            ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                t.assignmentPattern(
+                    identifier(
+                        'useInterfaces',
+                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                    ),
+                    t.identifier(
+                        (context.pluginValue('interfaces.useByDefault') ?? true).toString()
+                    )
+                )
+            ] : []),
         ],
         t.blockStatement([
 

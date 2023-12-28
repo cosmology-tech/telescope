@@ -1,7 +1,7 @@
 import { MetricValueSet, MetricValueSetSDKType } from "./metric_value";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -181,7 +181,7 @@ export interface AllocateQuotaRequest {
    */
   serviceName: string;
   /** Operation that describes the quota allocation. */
-  allocateOperation: QuotaOperation;
+  allocateOperation?: QuotaOperation;
   /**
    * Specifies which version of service configuration should be used to process
    * the request. If unspecified or no matching version can be found, the latest
@@ -189,15 +189,23 @@ export interface AllocateQuotaRequest {
    */
   serviceConfigId: string;
 }
+export interface AllocateQuotaRequestProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaRequest";
+  value: Uint8Array;
+}
 /** Request message for the AllocateQuota method. */
 export interface AllocateQuotaRequestSDKType {
   service_name: string;
-  allocate_operation: QuotaOperationSDKType;
+  allocate_operation?: QuotaOperationSDKType;
   service_config_id: string;
 }
 export interface QuotaOperation_LabelsEntry {
   key: string;
   value: string;
+}
+export interface QuotaOperation_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface QuotaOperation_LabelsEntrySDKType {
   key: string;
@@ -262,6 +270,10 @@ export interface QuotaOperation {
   /** Quota mode for this operation. */
   quotaMode: QuotaOperation_QuotaMode;
 }
+export interface QuotaOperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaOperation";
+  value: Uint8Array;
+}
 /** Represents information regarding a quota operation. */
 export interface QuotaOperationSDKType {
   operation_id: string;
@@ -298,6 +310,10 @@ export interface AllocateQuotaResponse {
   /** ID of the actual config used to process the request. */
   serviceConfigId: string;
 }
+export interface AllocateQuotaResponseProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.AllocateQuotaResponse";
+  value: Uint8Array;
+}
 /** Response message for the AllocateQuota method. */
 export interface AllocateQuotaResponseSDKType {
   operation_id: string;
@@ -321,19 +337,23 @@ export interface QuotaError {
    * Contains additional information about the quota error.
    * If available, `status.code` will be non zero.
    */
-  status: Status;
+  status?: Status;
+}
+export interface QuotaErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.QuotaError";
+  value: Uint8Array;
 }
 /** Represents error information for [QuotaOperation][google.api.servicecontrol.v1.QuotaOperation]. */
 export interface QuotaErrorSDKType {
   code: QuotaError_Code;
   subject: string;
   description: string;
-  status: StatusSDKType;
+  status?: StatusSDKType;
 }
 function createBaseAllocateQuotaRequest(): AllocateQuotaRequest {
   return {
     serviceName: "",
-    allocateOperation: QuotaOperation.fromPartial({}),
+    allocateOperation: undefined,
     serviceConfigId: ""
   };
 }
@@ -417,17 +437,23 @@ export const AllocateQuotaRequest = {
     return obj;
   },
   fromAmino(object: AllocateQuotaRequestAmino): AllocateQuotaRequest {
-    return {
-      serviceName: object.service_name,
-      allocateOperation: object?.allocate_operation ? QuotaOperation.fromAmino(object.allocate_operation) : undefined,
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseAllocateQuotaRequest();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.allocate_operation !== undefined && object.allocate_operation !== null) {
+      message.allocateOperation = QuotaOperation.fromAmino(object.allocate_operation);
+    }
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: AllocateQuotaRequest): AllocateQuotaRequestAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
+    obj.service_name = message.serviceName;
     obj.allocate_operation = message.allocateOperation ? QuotaOperation.toAmino(message.allocateOperation) : undefined;
-    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   },
   fromAminoMsg(object: AllocateQuotaRequestAminoMsg): AllocateQuotaRequest {
@@ -519,15 +545,19 @@ export const QuotaOperation_LabelsEntry = {
     return obj;
   },
   fromAmino(object: QuotaOperation_LabelsEntryAmino): QuotaOperation_LabelsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseQuotaOperation_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: QuotaOperation_LabelsEntry): QuotaOperation_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: QuotaOperation_LabelsEntryAminoMsg): QuotaOperation_LabelsEntry {
@@ -712,25 +742,35 @@ export const QuotaOperation = {
     return obj;
   },
   fromAmino(object: QuotaOperationAmino): QuotaOperation {
-    return {
-      operationId: object.operation_id,
-      methodName: object.method_name,
-      consumerId: object.consumer_id,
-      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseQuotaOperation();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    if (object.method_name !== undefined && object.method_name !== null) {
+      message.methodName = object.method_name;
+    }
+    if (object.consumer_id !== undefined && object.consumer_id !== null) {
+      message.consumerId = object.consumer_id;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      quotaMode: isSet(object.quota_mode) ? quotaOperation_QuotaModeFromJSON(object.quota_mode) : -1
-    };
+      }
+      return acc;
+    }, {});
+    message.quotaMetrics = object.quota_metrics?.map(e => MetricValueSet.fromAmino(e)) || [];
+    if (object.quota_mode !== undefined && object.quota_mode !== null) {
+      message.quotaMode = quotaOperation_QuotaModeFromJSON(object.quota_mode);
+    }
+    return message;
   },
   toAmino(message: QuotaOperation): QuotaOperationAmino {
     const obj: any = {};
-    obj.operation_id = omitDefault(message.operationId);
-    obj.method_name = omitDefault(message.methodName);
-    obj.consumer_id = omitDefault(message.consumerId);
+    obj.operation_id = message.operationId;
+    obj.method_name = message.methodName;
+    obj.consumer_id = message.consumerId;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -742,7 +782,7 @@ export const QuotaOperation = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.quota_mode = omitDefault(message.quotaMode);
+    obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode);
     return obj;
   },
   fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
@@ -877,16 +917,20 @@ export const AllocateQuotaResponse = {
     return obj;
   },
   fromAmino(object: AllocateQuotaResponseAmino): AllocateQuotaResponse {
-    return {
-      operationId: object.operation_id,
-      allocateErrors: Array.isArray(object?.allocate_errors) ? object.allocate_errors.map((e: any) => QuotaError.fromAmino(e)) : [],
-      quotaMetrics: Array.isArray(object?.quota_metrics) ? object.quota_metrics.map((e: any) => MetricValueSet.fromAmino(e)) : [],
-      serviceConfigId: object.service_config_id
-    };
+    const message = createBaseAllocateQuotaResponse();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    message.allocateErrors = object.allocate_errors?.map(e => QuotaError.fromAmino(e)) || [];
+    message.quotaMetrics = object.quota_metrics?.map(e => MetricValueSet.fromAmino(e)) || [];
+    if (object.service_config_id !== undefined && object.service_config_id !== null) {
+      message.serviceConfigId = object.service_config_id;
+    }
+    return message;
   },
   toAmino(message: AllocateQuotaResponse): AllocateQuotaResponseAmino {
     const obj: any = {};
-    obj.operation_id = omitDefault(message.operationId);
+    obj.operation_id = message.operationId;
     if (message.allocateErrors) {
       obj.allocate_errors = message.allocateErrors.map(e => e ? QuotaError.toAmino(e) : undefined);
     } else {
@@ -897,7 +941,7 @@ export const AllocateQuotaResponse = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_config_id = message.serviceConfigId;
     return obj;
   },
   fromAminoMsg(object: AllocateQuotaResponseAminoMsg): AllocateQuotaResponse {
@@ -921,7 +965,7 @@ function createBaseQuotaError(): QuotaError {
     code: 0,
     subject: "",
     description: "",
-    status: Status.fromPartial({})
+    status: undefined
   };
 }
 export const QuotaError = {
@@ -1016,18 +1060,26 @@ export const QuotaError = {
     return obj;
   },
   fromAmino(object: QuotaErrorAmino): QuotaError {
-    return {
-      code: isSet(object.code) ? quotaError_CodeFromJSON(object.code) : -1,
-      subject: object.subject,
-      description: object.description,
-      status: object?.status ? Status.fromAmino(object.status) : undefined
-    };
+    const message = createBaseQuotaError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = quotaError_CodeFromJSON(object.code);
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
   },
   toAmino(message: QuotaError): QuotaErrorAmino {
     const obj: any = {};
-    obj.code = omitDefault(message.code);
-    obj.subject = omitDefault(message.subject);
-    obj.description = omitDefault(message.description);
+    obj.code = quotaError_CodeToJSON(message.code);
+    obj.subject = message.subject;
+    obj.description = message.description;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
   },

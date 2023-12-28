@@ -12,6 +12,10 @@ export interface Params {
    */
   minimumRiskFactor: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.superfluid.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the superfluid module */
 export interface ParamsSDKType {
   minimum_risk_factor: string;
@@ -24,7 +28,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.minimumRiskFactor !== "") {
+    if (message.minimumRiskFactor !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
     }
     return writer;
@@ -77,9 +81,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      minimumRiskFactor: object.minimum_risk_factor
-    };
+    const message = createBaseParams();
+    if (object.minimum_risk_factor !== undefined && object.minimum_risk_factor !== null) {
+      message.minimumRiskFactor = object.minimum_risk_factor;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

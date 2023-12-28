@@ -11,11 +11,7 @@ export interface MsgUnjailProtoMsg {
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailAmino {
-  validator_addr: string;
-}
-export interface MsgUnjailAminoMsg {
-  type: "cosmos-sdk/MsgUnjail";
-  value: MsgUnjailAmino;
+  validator_addr?: string;
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailSDKType {
@@ -29,10 +25,6 @@ export interface MsgUnjailResponseProtoMsg {
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseAmino {}
-export interface MsgUnjailResponseAminoMsg {
-  type: "cosmos-sdk/MsgUnjailResponse";
-  value: MsgUnjailResponseAmino;
-}
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseSDKType {}
 function createBaseMsgUnjail(): MsgUnjail {
@@ -49,7 +41,7 @@ export const MsgUnjail = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnjail {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnjail {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjail();
@@ -92,26 +84,19 @@ export const MsgUnjail = {
     return obj;
   },
   fromAmino(object: MsgUnjailAmino): MsgUnjail {
-    return {
-      validatorAddr: object.validator_addr
-    };
+    const message = createBaseMsgUnjail();
+    if (object.validator_addr !== undefined && object.validator_addr !== null) {
+      message.validatorAddr = object.validator_addr;
+    }
+    return message;
   },
-  toAmino(message: MsgUnjail): MsgUnjailAmino {
+  toAmino(message: MsgUnjail, useInterfaces: boolean = true): MsgUnjailAmino {
     const obj: any = {};
     obj.validator_addr = message.validatorAddr;
     return obj;
   },
-  fromAminoMsg(object: MsgUnjailAminoMsg): MsgUnjail {
-    return MsgUnjail.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUnjail): MsgUnjailAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUnjail",
-      value: MsgUnjail.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgUnjailProtoMsg): MsgUnjail {
-    return MsgUnjail.decode(message.value);
+  fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = true): MsgUnjail {
+    return MsgUnjail.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjail): Uint8Array {
     return MsgUnjail.encode(message).finish();
@@ -132,7 +117,7 @@ export const MsgUnjailResponse = {
   encode(_: MsgUnjailResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUnjailResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUnjailResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUnjailResponse();
@@ -166,23 +151,15 @@ export const MsgUnjailResponse = {
     return obj;
   },
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
-    return {};
+    const message = createBaseMsgUnjailResponse();
+    return message;
   },
-  toAmino(_: MsgUnjailResponse): MsgUnjailResponseAmino {
+  toAmino(_: MsgUnjailResponse, useInterfaces: boolean = true): MsgUnjailResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgUnjailResponseAminoMsg): MsgUnjailResponse {
-    return MsgUnjailResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgUnjailResponse): MsgUnjailResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgUnjailResponse",
-      value: MsgUnjailResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgUnjailResponseProtoMsg): MsgUnjailResponse {
-    return MsgUnjailResponse.decode(message.value);
+  fromProtoMsg(message: MsgUnjailResponseProtoMsg, useInterfaces: boolean = true): MsgUnjailResponse {
+    return MsgUnjailResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUnjailResponse): Uint8Array {
     return MsgUnjailResponse.encode(message).finish();

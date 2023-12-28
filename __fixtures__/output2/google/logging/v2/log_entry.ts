@@ -48,7 +48,7 @@ export interface LogEntry {
    * the monitored resource designating the particular database that reported
    * the error.
    */
-  resource: MonitoredResource;
+  resource?: MonitoredResource;
   /**
    * The log entry payload, represented as a protocol buffer. Some Google
    * Cloud Platform services use this field for their log entry payloads.
@@ -80,9 +80,9 @@ export interface LogEntry {
    * the past, and that don't exceed 24 hours in the future. Log entries outside
    * those time boundaries aren't ingested by Logging.
    */
-  timestamp: Timestamp;
+  timestamp?: Timestamp;
   /** Output only. The time the log entry was received by Logging. */
-  receiveTimestamp: Timestamp;
+  receiveTimestamp?: Timestamp;
   /** Optional. The severity of the log entry. The default value is `LogSeverity.DEFAULT`. */
   severity: LogSeverity;
   /**
@@ -103,7 +103,7 @@ export interface LogEntry {
    * Optional. Information about the HTTP request associated with this log entry, if
    * applicable.
    */
-  httpRequest: HttpRequest;
+  httpRequest?: HttpRequest;
   /**
    * Optional. A map of key, value pairs that provides additional information about the
    * log entry. The labels can be user-defined or system-defined.
@@ -127,7 +127,7 @@ export interface LogEntry {
    * Optional. Information about an operation associated with the log entry, if
    * applicable.
    */
-  operation: LogEntryOperation;
+  operation?: LogEntryOperation;
   /**
    * Optional. Resource name of the trace associated with the log entry, if any. If it
    * contains a relative resource name, the name is assumed to be relative to
@@ -154,12 +154,12 @@ export interface LogEntry {
    */
   traceSampled: boolean;
   /** Optional. Source code location information associated with the log entry, if any. */
-  sourceLocation: LogEntrySourceLocation;
+  sourceLocation?: LogEntrySourceLocation;
   /**
    * Optional. Information indicating this LogEntry is part of a sequence of multiple log
    * entries split from a single LogEntry.
    */
-  split: LogSplit;
+  split?: LogSplit;
 }
 /**
  * Additional information about a potentially long-running operation with which
@@ -286,22 +286,22 @@ export const LogEntry_LabelsEntry = {
 function createBaseLogEntry(): LogEntry {
   return {
     logName: "",
-    resource: MonitoredResource.fromPartial({}),
+    resource: undefined,
     protoPayload: undefined,
     textPayload: undefined,
     jsonPayload: undefined,
-    timestamp: Timestamp.fromPartial({}),
-    receiveTimestamp: Timestamp.fromPartial({}),
+    timestamp: undefined,
+    receiveTimestamp: undefined,
     severity: 0,
     insertId: "",
-    httpRequest: HttpRequest.fromPartial({}),
+    httpRequest: undefined,
     labels: {},
-    operation: LogEntryOperation.fromPartial({}),
+    operation: undefined,
     trace: "",
     spanId: "",
     traceSampled: false,
-    sourceLocation: LogEntrySourceLocation.fromPartial({}),
-    split: LogSplit.fromPartial({})
+    sourceLocation: undefined,
+    split: undefined
   };
 }
 export const LogEntry = {

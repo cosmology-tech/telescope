@@ -13,12 +13,8 @@ export interface GenesisCertificateProtoMsg {
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateAmino {
-  owner: string;
+  owner?: string;
   certificate?: CertificateAmino;
-}
-export interface GenesisCertificateAminoMsg {
-  type: "/akash.cert.v1beta2.GenesisCertificate";
-  value: GenesisCertificateAmino;
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
@@ -35,11 +31,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateAmino {
-  certificates: GenesisCertificateAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.cert.v1beta2.GenesisState";
-  value: GenesisStateAmino;
+  certificates?: GenesisCertificateAmino[];
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {
@@ -62,7 +54,7 @@ export const GenesisCertificate = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisCertificate {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisCertificate {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisCertificate();
@@ -73,7 +65,7 @@ export const GenesisCertificate = {
           message.owner = reader.string();
           break;
         case 2:
-          message.certificate = Certificate.decode(reader, reader.uint32());
+          message.certificate = Certificate.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -115,22 +107,23 @@ export const GenesisCertificate = {
     return obj;
   },
   fromAmino(object: GenesisCertificateAmino): GenesisCertificate {
-    return {
-      owner: object.owner,
-      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined
-    };
+    const message = createBaseGenesisCertificate();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromAmino(object.certificate);
+    }
+    return message;
   },
-  toAmino(message: GenesisCertificate): GenesisCertificateAmino {
+  toAmino(message: GenesisCertificate, useInterfaces: boolean = true): GenesisCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {
-    return GenesisCertificate.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisCertificateProtoMsg): GenesisCertificate {
-    return GenesisCertificate.decode(message.value);
+  fromProtoMsg(message: GenesisCertificateProtoMsg, useInterfaces: boolean = true): GenesisCertificate {
+    return GenesisCertificate.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisCertificate): Uint8Array {
     return GenesisCertificate.encode(message).finish();
@@ -155,7 +148,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -163,7 +156,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.certificates.push(GenesisCertificate.decode(reader, reader.uint32()));
+          message.certificates.push(GenesisCertificate.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -206,24 +199,21 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.certificates = object.certificates?.map(e => GenesisCertificate.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.certificates) {
-      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e) : undefined);
+      obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.certificates = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

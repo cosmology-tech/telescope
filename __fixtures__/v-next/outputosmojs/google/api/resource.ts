@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -227,6 +227,10 @@ export interface ResourceDescriptor {
    */
   style: ResourceDescriptor_Style[];
 }
+export interface ResourceDescriptorProtoMsg {
+  typeUrl: "/google.api.ResourceDescriptor";
+  value: Uint8Array;
+}
 /**
  * A simple descriptor of a resource type.
  * 
@@ -327,6 +331,10 @@ export interface ResourceReference {
    *     }
    */
   childType: string;
+}
+export interface ResourceReferenceProtoMsg {
+  typeUrl: "/google.api.ResourceReference";
+  value: Uint8Array;
 }
 /**
  * Defines a proto annotation that describes a string field that refers to
@@ -500,28 +508,38 @@ export const ResourceDescriptor = {
     return obj;
   },
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
-    return {
-      type: object.type,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: object.plural,
-      singular: object.singular,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
+    const message = createBaseResourceDescriptor();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.pattern = object.pattern?.map(e => e) || [];
+    if (object.name_field !== undefined && object.name_field !== null) {
+      message.nameField = object.name_field;
+    }
+    if (object.history !== undefined && object.history !== null) {
+      message.history = resourceDescriptor_HistoryFromJSON(object.history);
+    }
+    if (object.plural !== undefined && object.plural !== null) {
+      message.plural = object.plural;
+    }
+    if (object.singular !== undefined && object.singular !== null) {
+      message.singular = object.singular;
+    }
+    message.style = object.style?.map(e => resourceDescriptor_StyleFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
+    obj.type = message.type;
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-    obj.name_field = omitDefault(message.nameField);
-    obj.history = omitDefault(message.history);
-    obj.plural = omitDefault(message.plural);
-    obj.singular = omitDefault(message.singular);
+    obj.name_field = message.nameField;
+    obj.history = resourceDescriptor_HistoryToJSON(message.history);
+    obj.plural = message.plural;
+    obj.singular = message.singular;
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
@@ -619,15 +637,19 @@ export const ResourceReference = {
     return obj;
   },
   fromAmino(object: ResourceReferenceAmino): ResourceReference {
-    return {
-      type: object.type,
-      childType: object.child_type
-    };
+    const message = createBaseResourceReference();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.child_type !== undefined && object.child_type !== null) {
+      message.childType = object.child_type;
+    }
+    return message;
   },
   toAmino(message: ResourceReference): ResourceReferenceAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
-    obj.child_type = omitDefault(message.childType);
+    obj.type = message.type;
+    obj.child_type = message.childType;
     return obj;
   },
   fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {

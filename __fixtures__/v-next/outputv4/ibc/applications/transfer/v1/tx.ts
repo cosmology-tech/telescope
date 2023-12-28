@@ -30,6 +30,10 @@ export interface MsgTransfer {
    */
   timeoutTimestamp: bigint;
 }
+export interface MsgTransferProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransfer";
+  value: Uint8Array;
+}
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
  * ICS20 enabled chains. See ICS Spec here:
@@ -46,6 +50,10 @@ export interface MsgTransferSDKType {
 }
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponse {}
+export interface MsgTransferResponseProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v1.MsgTransferResponse";
+  value: Uint8Array;
+}
 /** MsgTransferResponse defines the Msg/Transfer response type. */
 export interface MsgTransferResponseSDKType {}
 function createBaseMsgTransfer(): MsgTransfer {
@@ -62,25 +70,25 @@ function createBaseMsgTransfer(): MsgTransfer {
 export const MsgTransfer = {
   typeUrl: "/ibc.applications.transfer.v1.MsgTransfer",
   encode(message: MsgTransfer, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sourcePort !== "") {
+    if (message.sourcePort !== undefined) {
       writer.uint32(10).string(message.sourcePort);
     }
-    if (message.sourceChannel !== "") {
+    if (message.sourceChannel !== undefined) {
       writer.uint32(18).string(message.sourceChannel);
     }
     if (message.token !== undefined) {
       Coin.encode(message.token, writer.uint32(26).fork()).ldelim();
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(34).string(message.sender);
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       writer.uint32(42).string(message.receiver);
     }
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(50).fork()).ldelim();
     }
-    if (message.timeoutTimestamp !== BigInt(0)) {
+    if (message.timeoutTimestamp !== undefined) {
       writer.uint32(56).uint64(message.timeoutTimestamp);
     }
     return writer;
@@ -193,15 +201,29 @@ export const MsgTransfer = {
     return obj;
   },
   fromAmino(object: MsgTransferAmino): MsgTransfer {
-    return {
-      sourcePort: object.source_port,
-      sourceChannel: object.source_channel,
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      sender: object.sender,
-      receiver: object.receiver,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: BigInt(object.timeout_timestamp)
-    };
+    const message = createBaseMsgTransfer();
+    if (object.source_port !== undefined && object.source_port !== null) {
+      message.sourcePort = object.source_port;
+    }
+    if (object.source_channel !== undefined && object.source_channel !== null) {
+      message.sourceChannel = object.source_channel;
+    }
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromAmino(object.token);
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = Height.fromAmino(object.timeout_height);
+    }
+    if (object.timeout_timestamp !== undefined && object.timeout_timestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeout_timestamp);
+    }
+    return message;
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {
     const obj: any = {};
@@ -281,7 +303,8 @@ export const MsgTransferResponse = {
     return obj;
   },
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
-    return {};
+    const message = createBaseMsgTransferResponse();
+    return message;
   },
   toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};

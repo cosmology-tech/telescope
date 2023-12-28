@@ -9,10 +9,7 @@ export interface MsgCreateClawbackVestingAccountAminoType extends AminoMsg {
   value: {
     from_address: string;
     to_address: string;
-    start_time: {
-      seconds: string;
-      nanos: number;
-    };
+    start_time: string;
     lockup_periods: {
       length: string;
       amount: {

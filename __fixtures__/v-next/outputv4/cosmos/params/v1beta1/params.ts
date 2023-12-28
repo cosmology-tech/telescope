@@ -7,6 +7,10 @@ export interface ParameterChangeProposal {
   description: string;
   changes: ParamChange[];
 }
+export interface ParameterChangeProposalProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal";
+  value: Uint8Array;
+}
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposalSDKType {
   title: string;
@@ -21,6 +25,10 @@ export interface ParamChange {
   subspace: string;
   key: string;
   value: string;
+}
+export interface ParamChangeProtoMsg {
+  typeUrl: "/cosmos.params.v1beta1.ParamChange";
+  value: Uint8Array;
 }
 /**
  * ParamChange defines an individual parameter change, for use in
@@ -41,10 +49,10 @@ function createBaseParameterChangeProposal(): ParameterChangeProposal {
 export const ParameterChangeProposal = {
   typeUrl: "/cosmos.params.v1beta1.ParameterChangeProposal",
   encode(message: ParameterChangeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.changes) {
@@ -126,11 +134,15 @@ export const ParameterChangeProposal = {
     return obj;
   },
   fromAmino(object: ParameterChangeProposalAmino): ParameterChangeProposal {
-    return {
-      title: object.title,
-      description: object.description,
-      changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromAmino(e)) : []
-    };
+    const message = createBaseParameterChangeProposal();
+    if (object.title !== undefined && object.title !== null) {
+      message.title = object.title;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    message.changes = object.changes?.map(e => ParamChange.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ParameterChangeProposal): ParameterChangeProposalAmino {
     const obj: any = {};
@@ -175,13 +187,13 @@ function createBaseParamChange(): ParamChange {
 export const ParamChange = {
   typeUrl: "/cosmos.params.v1beta1.ParamChange",
   encode(message: ParamChange, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(18).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(26).string(message.value);
     }
     return writer;
@@ -252,11 +264,17 @@ export const ParamChange = {
     return obj;
   },
   fromAmino(object: ParamChangeAmino): ParamChange {
-    return {
-      subspace: object.subspace,
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseParamChange();
+    if (object.subspace !== undefined && object.subspace !== null) {
+      message.subspace = object.subspace;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: ParamChange): ParamChangeAmino {
     const obj: any = {};

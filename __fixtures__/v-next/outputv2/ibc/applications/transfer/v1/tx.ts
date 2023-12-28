@@ -41,15 +41,15 @@ export interface MsgTransferProtoMsg {
  */
 export interface MsgTransferAmino {
   /** the port on which the packet will be sent */
-  source_port: string;
+  source_port?: string;
   /** the channel by which the packet will be sent */
-  source_channel: string;
+  source_channel?: string;
   /** the tokens to be transferred */
   token?: CoinAmino;
   /** the sender address */
-  sender: string;
+  sender?: string;
   /** the recipient address on the destination chain */
-  receiver: string;
+  receiver?: string;
   /**
    * Timeout height relative to the current block height.
    * The timeout is disabled when set to 0.
@@ -59,7 +59,7 @@ export interface MsgTransferAmino {
    * Timeout timestamp (in nanoseconds) relative to the current block timestamp.
    * The timeout is disabled when set to 0.
    */
-  timeout_timestamp: string;
+  timeout_timestamp?: string;
 }
 export interface MsgTransferAminoMsg {
   type: "cosmos-sdk/MsgTransfer";
@@ -228,15 +228,29 @@ export const MsgTransfer = {
     return obj;
   },
   fromAmino(object: MsgTransferAmino): MsgTransfer {
-    return {
-      sourcePort: object.source_port,
-      sourceChannel: object.source_channel,
-      token: object?.token ? Coin.fromAmino(object.token) : undefined,
-      sender: object.sender,
-      receiver: object.receiver,
-      timeoutHeight: object?.timeout_height ? Height.fromAmino(object.timeout_height) : undefined,
-      timeoutTimestamp: BigInt(object.timeout_timestamp)
-    };
+    const message = createBaseMsgTransfer();
+    if (object.source_port !== undefined && object.source_port !== null) {
+      message.sourcePort = object.source_port;
+    }
+    if (object.source_channel !== undefined && object.source_channel !== null) {
+      message.sourceChannel = object.source_channel;
+    }
+    if (object.token !== undefined && object.token !== null) {
+      message.token = Coin.fromAmino(object.token);
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    if (object.timeout_height !== undefined && object.timeout_height !== null) {
+      message.timeoutHeight = Height.fromAmino(object.timeout_height);
+    }
+    if (object.timeout_timestamp !== undefined && object.timeout_timestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeout_timestamp);
+    }
+    return message;
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {
     const obj: any = {};
@@ -314,7 +328,8 @@ export const MsgTransferResponse = {
     return obj;
   },
   fromAmino(_: MsgTransferResponseAmino): MsgTransferResponse {
-    return {};
+    const message = createBaseMsgTransferResponse();
+    return message;
   },
   toAmino(_: MsgTransferResponse): MsgTransferResponseAmino {
     const obj: any = {};

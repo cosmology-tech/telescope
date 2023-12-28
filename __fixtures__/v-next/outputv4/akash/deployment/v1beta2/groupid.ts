@@ -7,6 +7,10 @@ export interface GroupID {
   dseq: bigint;
   gseq: number;
 }
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupID";
+  value: Uint8Array;
+}
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
   owner: string;
@@ -23,13 +27,13 @@ function createBaseGroupID(): GroupID {
 export const GroupID = {
   typeUrl: "/akash.deployment.v1beta2.GroupID",
   encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
     return writer;
@@ -102,11 +106,17 @@ export const GroupID = {
     return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq
-    };
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
   },
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};

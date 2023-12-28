@@ -10,14 +10,18 @@ export const protobufPackage = "evmos.fees.v1";
  */
 export interface QueryDevFeeInfosRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryDevFeeInfosRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
  * method.
  */
 export interface QueryDevFeeInfosRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -26,7 +30,11 @@ export interface QueryDevFeeInfosRequestSDKType {
 export interface QueryDevFeeInfosResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryDevFeeInfosResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosResponse";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosResponse is the response type for the Query/DevFeeInfos
@@ -34,7 +42,7 @@ export interface QueryDevFeeInfosResponse {
  */
 export interface QueryDevFeeInfosResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -43,6 +51,10 @@ export interface QueryDevFeeInfosResponseSDKType {
 export interface QueryDevFeeInfoRequest {
   /** contract identifier is the hex contract address of a contract */
   contractAddress: string;
+}
+export interface QueryDevFeeInfoRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfoRequest is the request type for the Query/DevFeeInfo RPC
@@ -58,6 +70,10 @@ export interface QueryDevFeeInfoRequestSDKType {
 export interface QueryDevFeeInfoResponse {
   fee: DevFeeInfo;
 }
+export interface QueryDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /**
  * QueryDevFeeInfoResponse is the response type for the Query/DevFeeInfo RPC
  * method.
@@ -67,6 +83,10 @@ export interface QueryDevFeeInfoResponseSDKType {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryParamsRequest";
+  value: Uint8Array;
+}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /**
@@ -75,6 +95,10 @@ export interface QueryParamsRequestSDKType {}
  */
 export interface QueryParamsResponse {
   params: Params;
+}
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryParamsResponse";
+  value: Uint8Array;
 }
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
@@ -91,7 +115,11 @@ export interface QueryDevFeeInfosPerDeployerRequest {
   /** deployer bech32 address */
   deployerAddress: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryDevFeeInfosPerDeployerRequestProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerRequest";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosPerDeployerRequest is the request type for the
@@ -99,7 +127,7 @@ export interface QueryDevFeeInfosPerDeployerRequest {
  */
 export interface QueryDevFeeInfosPerDeployerRequestSDKType {
   deployer_address: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -108,7 +136,11 @@ export interface QueryDevFeeInfosPerDeployerRequestSDKType {
 export interface QueryDevFeeInfosPerDeployerResponse {
   fees: DevFeeInfo[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryDevFeeInfosPerDeployerResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.QueryDevFeeInfosPerDeployerResponse";
+  value: Uint8Array;
 }
 /**
  * QueryDevFeeInfosPerDeployerResponse is the response type for the
@@ -116,11 +148,11 @@ export interface QueryDevFeeInfosPerDeployerResponse {
  */
 export interface QueryDevFeeInfosPerDeployerResponseSDKType {
   fees: DevFeeInfoSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryDevFeeInfosRequest(): QueryDevFeeInfosRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosRequest = {
@@ -179,9 +211,11 @@ export const QueryDevFeeInfosRequest = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfosRequestAmino): QueryDevFeeInfosRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDevFeeInfosRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfosRequest): QueryDevFeeInfosRequestAmino {
     const obj: any = {};
@@ -207,7 +241,7 @@ export const QueryDevFeeInfosRequest = {
 function createBaseQueryDevFeeInfosResponse(): QueryDevFeeInfosResponse {
   return {
     fees: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosResponse = {
@@ -286,10 +320,12 @@ export const QueryDevFeeInfosResponse = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfosResponseAmino): QueryDevFeeInfosResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDevFeeInfosResponse();
+    message.fees = object.fees?.map(e => DevFeeInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfosResponse): QueryDevFeeInfosResponseAmino {
     const obj: any = {};
@@ -378,9 +414,11 @@ export const QueryDevFeeInfoRequest = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfoRequestAmino): QueryDevFeeInfoRequest {
-    return {
-      contractAddress: object.contract_address
-    };
+    const message = createBaseQueryDevFeeInfoRequest();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
@@ -464,9 +502,11 @@ export const QueryDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfoResponseAmino): QueryDevFeeInfoResponse {
-    return {
-      fee: object?.fee ? DevFeeInfo.fromAmino(object.fee) : undefined
-    };
+    const message = createBaseQueryDevFeeInfoResponse();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = DevFeeInfo.fromAmino(object.fee);
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfoResponse): QueryDevFeeInfoResponseAmino {
     const obj: any = {};
@@ -533,7 +573,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -616,9 +657,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -644,7 +687,7 @@ export const QueryParamsResponse = {
 function createBaseQueryDevFeeInfosPerDeployerRequest(): QueryDevFeeInfosPerDeployerRequest {
   return {
     deployerAddress: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosPerDeployerRequest = {
@@ -715,10 +758,14 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfosPerDeployerRequestAmino): QueryDevFeeInfosPerDeployerRequest {
-    return {
-      deployerAddress: object.deployer_address,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDevFeeInfosPerDeployerRequest();
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
     const obj: any = {};
@@ -745,7 +792,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
 function createBaseQueryDevFeeInfosPerDeployerResponse(): QueryDevFeeInfosPerDeployerResponse {
   return {
     fees: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDevFeeInfosPerDeployerResponse = {
@@ -824,10 +871,12 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     return obj;
   },
   fromAmino(object: QueryDevFeeInfosPerDeployerResponseAmino): QueryDevFeeInfosPerDeployerResponse {
-    return {
-      fees: Array.isArray(object?.fees) ? object.fees.map((e: any) => DevFeeInfo.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDevFeeInfosPerDeployerResponse();
+    message.fees = object.fees?.map(e => DevFeeInfo.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDevFeeInfosPerDeployerResponse): QueryDevFeeInfosPerDeployerResponseAmino {
     const obj: any = {};

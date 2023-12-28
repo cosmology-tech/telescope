@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../base/v1beta1/coin";
 import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionAmino, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsAmino, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsAmino, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoAmino, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventAmino, ValidatorSlashEventSDKType, Params, ParamsAmino, ParamsSDKType, FeePool, FeePoolAmino, FeePoolSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -25,13 +25,9 @@ export interface DelegatorWithdrawInfoProtoMsg {
  */
 export interface DelegatorWithdrawInfoAmino {
   /** delegator_address is the address of the delegator. */
-  delegator_address: string;
+  delegator_address?: string;
   /** withdraw_address is the address to withdraw the delegation rewards to. */
-  withdraw_address: string;
-}
-export interface DelegatorWithdrawInfoAminoMsg {
-  type: "cosmos-sdk/DelegatorWithdrawInfo";
-  value: DelegatorWithdrawInfoAmino;
+  withdraw_address?: string;
 }
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -56,13 +52,9 @@ export interface ValidatorOutstandingRewardsRecordProtoMsg {
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
 export interface ValidatorOutstandingRewardsRecordAmino {
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** outstanding_rewards represents the oustanding rewards of a validator. */
-  outstanding_rewards: DecCoinAmino[];
-}
-export interface ValidatorOutstandingRewardsRecordAminoMsg {
-  type: "cosmos-sdk/ValidatorOutstandingRewardsRecord";
-  value: ValidatorOutstandingRewardsRecordAmino;
+  outstanding_rewards?: DecCoinAmino[];
 }
 /** ValidatorOutstandingRewardsRecord is used for import/export via genesis json. */
 export interface ValidatorOutstandingRewardsRecordSDKType {
@@ -89,13 +81,9 @@ export interface ValidatorAccumulatedCommissionRecordProtoMsg {
  */
 export interface ValidatorAccumulatedCommissionRecordAmino {
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** accumulated is the accumulated commission of a validator. */
   accumulated?: ValidatorAccumulatedCommissionAmino;
-}
-export interface ValidatorAccumulatedCommissionRecordAminoMsg {
-  type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord";
-  value: ValidatorAccumulatedCommissionRecordAmino;
 }
 /**
  * ValidatorAccumulatedCommissionRecord is used for import / export via genesis
@@ -127,15 +115,11 @@ export interface ValidatorHistoricalRewardsRecordProtoMsg {
  */
 export interface ValidatorHistoricalRewardsRecordAmino {
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** period defines the period the historical rewards apply to. */
-  period: string;
+  period?: string;
   /** rewards defines the historical rewards of a validator. */
   rewards?: ValidatorHistoricalRewardsAmino;
-}
-export interface ValidatorHistoricalRewardsRecordAminoMsg {
-  type: "cosmos-sdk/ValidatorHistoricalRewardsRecord";
-  value: ValidatorHistoricalRewardsRecordAmino;
 }
 /**
  * ValidatorHistoricalRewardsRecord is used for import / export via genesis
@@ -160,13 +144,9 @@ export interface ValidatorCurrentRewardsRecordProtoMsg {
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordAmino {
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** rewards defines the current rewards of a validator. */
   rewards?: ValidatorCurrentRewardsAmino;
-}
-export interface ValidatorCurrentRewardsRecordAminoMsg {
-  type: "cosmos-sdk/ValidatorCurrentRewardsRecord";
-  value: ValidatorCurrentRewardsRecordAmino;
 }
 /** ValidatorCurrentRewardsRecord is used for import / export via genesis json. */
 export interface ValidatorCurrentRewardsRecordSDKType {
@@ -189,15 +169,11 @@ export interface DelegatorStartingInfoRecordProtoMsg {
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecordAmino {
   /** delegator_address is the address of the delegator. */
-  delegator_address: string;
+  delegator_address?: string;
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** starting_info defines the starting info of a delegator. */
   starting_info?: DelegatorStartingInfoAmino;
-}
-export interface DelegatorStartingInfoRecordAminoMsg {
-  type: "cosmos-sdk/DelegatorStartingInfoRecord";
-  value: DelegatorStartingInfoRecordAmino;
 }
 /** DelegatorStartingInfoRecord used for import / export via genesis json. */
 export interface DelegatorStartingInfoRecordSDKType {
@@ -223,17 +199,13 @@ export interface ValidatorSlashEventRecordProtoMsg {
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecordAmino {
   /** validator_address is the address of the validator. */
-  validator_address: string;
+  validator_address?: string;
   /** height defines the block height at which the slash event occured. */
-  height: string;
+  height?: string;
   /** period is the period of the slash event. */
-  period: string;
+  period?: string;
   /** validator_slash_event describes the slash event. */
   validator_slash_event?: ValidatorSlashEventAmino;
-}
-export interface ValidatorSlashEventRecordAminoMsg {
-  type: "cosmos-sdk/ValidatorSlashEventRecord";
-  value: ValidatorSlashEventRecordAmino;
 }
 /** ValidatorSlashEventRecord is used for import / export via genesis json. */
 export interface ValidatorSlashEventRecordSDKType {
@@ -276,25 +248,21 @@ export interface GenesisStateAmino {
   /** fee_pool defines the fee pool at genesis. */
   fee_pool?: FeePoolAmino;
   /** fee_pool defines the delegator withdraw infos at genesis. */
-  delegator_withdraw_infos: DelegatorWithdrawInfoAmino[];
+  delegator_withdraw_infos?: DelegatorWithdrawInfoAmino[];
   /** fee_pool defines the previous proposer at genesis. */
-  previous_proposer: string;
+  previous_proposer?: string;
   /** fee_pool defines the outstanding rewards of all validators at genesis. */
-  outstanding_rewards: ValidatorOutstandingRewardsRecordAmino[];
+  outstanding_rewards?: ValidatorOutstandingRewardsRecordAmino[];
   /** fee_pool defines the accumulated commisions of all validators at genesis. */
-  validator_accumulated_commissions: ValidatorAccumulatedCommissionRecordAmino[];
+  validator_accumulated_commissions?: ValidatorAccumulatedCommissionRecordAmino[];
   /** fee_pool defines the historical rewards of all validators at genesis. */
-  validator_historical_rewards: ValidatorHistoricalRewardsRecordAmino[];
+  validator_historical_rewards?: ValidatorHistoricalRewardsRecordAmino[];
   /** fee_pool defines the current rewards of all validators at genesis. */
-  validator_current_rewards: ValidatorCurrentRewardsRecordAmino[];
+  validator_current_rewards?: ValidatorCurrentRewardsRecordAmino[];
   /** fee_pool defines the delegator starting infos at genesis. */
-  delegator_starting_infos: DelegatorStartingInfoRecordAmino[];
+  delegator_starting_infos?: DelegatorStartingInfoRecordAmino[];
   /** fee_pool defines the validator slash events at genesis. */
-  validator_slash_events: ValidatorSlashEventRecordAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+  validator_slash_events?: ValidatorSlashEventRecordAmino[];
 }
 /** GenesisState defines the distribution module's genesis state. */
 export interface GenesisStateSDKType {
@@ -327,7 +295,7 @@ export const DelegatorWithdrawInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorWithdrawInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorWithdrawInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorWithdrawInfo();
@@ -378,28 +346,23 @@ export const DelegatorWithdrawInfo = {
     return obj;
   },
   fromAmino(object: DelegatorWithdrawInfoAmino): DelegatorWithdrawInfo {
-    return {
-      delegatorAddress: object.delegator_address,
-      withdrawAddress: object.withdraw_address
-    };
+    const message = createBaseDelegatorWithdrawInfo();
+    if (object.delegator_address !== undefined && object.delegator_address !== null) {
+      message.delegatorAddress = object.delegator_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
   },
-  toAmino(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAmino {
+  toAmino(message: DelegatorWithdrawInfo, useInterfaces: boolean = true): DelegatorWithdrawInfoAmino {
     const obj: any = {};
-    obj.delegator_address = omitDefault(message.delegatorAddress);
-    obj.withdraw_address = omitDefault(message.withdrawAddress);
+    obj.delegator_address = message.delegatorAddress;
+    obj.withdraw_address = message.withdrawAddress;
     return obj;
   },
-  fromAminoMsg(object: DelegatorWithdrawInfoAminoMsg): DelegatorWithdrawInfo {
-    return DelegatorWithdrawInfo.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegatorWithdrawInfo): DelegatorWithdrawInfoAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegatorWithdrawInfo",
-      value: DelegatorWithdrawInfo.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg): DelegatorWithdrawInfo {
-    return DelegatorWithdrawInfo.decode(message.value);
+  fromProtoMsg(message: DelegatorWithdrawInfoProtoMsg, useInterfaces: boolean = true): DelegatorWithdrawInfo {
+    return DelegatorWithdrawInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegatorWithdrawInfo): Uint8Array {
     return DelegatorWithdrawInfo.encode(message).finish();
@@ -429,7 +392,7 @@ export const ValidatorOutstandingRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorOutstandingRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorOutstandingRewardsRecord();
@@ -440,7 +403,7 @@ export const ValidatorOutstandingRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.outstandingRewards.push(DecCoin.decode(reader, reader.uint32()));
+          message.outstandingRewards.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -488,32 +451,25 @@ export const ValidatorOutstandingRewardsRecord = {
     return obj;
   },
   fromAmino(object: ValidatorOutstandingRewardsRecordAmino): ValidatorOutstandingRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => DecCoin.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorOutstandingRewardsRecord();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    message.outstandingRewards = object.outstanding_rewards?.map(e => DecCoin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAmino {
+  toAmino(message: ValidatorOutstandingRewardsRecord, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecordAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.validator_address = message.validatorAddress;
     if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.outstanding_rewards = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ValidatorOutstandingRewardsRecordAminoMsg): ValidatorOutstandingRewardsRecord {
-    return ValidatorOutstandingRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorOutstandingRewardsRecord): ValidatorOutstandingRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorOutstandingRewardsRecord",
-      value: ValidatorOutstandingRewardsRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg): ValidatorOutstandingRewardsRecord {
-    return ValidatorOutstandingRewardsRecord.decode(message.value);
+  fromProtoMsg(message: ValidatorOutstandingRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorOutstandingRewardsRecord {
+    return ValidatorOutstandingRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorOutstandingRewardsRecord): Uint8Array {
     return ValidatorOutstandingRewardsRecord.encode(message).finish();
@@ -543,7 +499,7 @@ export const ValidatorAccumulatedCommissionRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorAccumulatedCommissionRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorAccumulatedCommissionRecord();
@@ -554,7 +510,7 @@ export const ValidatorAccumulatedCommissionRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.accumulated = ValidatorAccumulatedCommission.decode(reader, reader.uint32());
+          message.accumulated = ValidatorAccumulatedCommission.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -596,28 +552,23 @@ export const ValidatorAccumulatedCommissionRecord = {
     return obj;
   },
   fromAmino(object: ValidatorAccumulatedCommissionRecordAmino): ValidatorAccumulatedCommissionRecord {
-    return {
-      validatorAddress: object.validator_address,
-      accumulated: object?.accumulated ? ValidatorAccumulatedCommission.fromAmino(object.accumulated) : undefined
-    };
+    const message = createBaseValidatorAccumulatedCommissionRecord();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    if (object.accumulated !== undefined && object.accumulated !== null) {
+      message.accumulated = ValidatorAccumulatedCommission.fromAmino(object.accumulated);
+    }
+    return message;
   },
-  toAmino(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAmino {
+  toAmino(message: ValidatorAccumulatedCommissionRecord, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecordAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
-    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated) : undefined;
+    obj.validator_address = message.validatorAddress;
+    obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toAmino(message.accumulated, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorAccumulatedCommissionRecordAminoMsg): ValidatorAccumulatedCommissionRecord {
-    return ValidatorAccumulatedCommissionRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorAccumulatedCommissionRecord): ValidatorAccumulatedCommissionRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorAccumulatedCommissionRecord",
-      value: ValidatorAccumulatedCommissionRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg): ValidatorAccumulatedCommissionRecord {
-    return ValidatorAccumulatedCommissionRecord.decode(message.value);
+  fromProtoMsg(message: ValidatorAccumulatedCommissionRecordProtoMsg, useInterfaces: boolean = true): ValidatorAccumulatedCommissionRecord {
+    return ValidatorAccumulatedCommissionRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorAccumulatedCommissionRecord): Uint8Array {
     return ValidatorAccumulatedCommissionRecord.encode(message).finish();
@@ -651,7 +602,7 @@ export const ValidatorHistoricalRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorHistoricalRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorHistoricalRewardsRecord();
@@ -665,7 +616,7 @@ export const ValidatorHistoricalRewardsRecord = {
           message.period = reader.uint64();
           break;
         case 3:
-          message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32());
+          message.rewards = ValidatorHistoricalRewards.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -714,30 +665,27 @@ export const ValidatorHistoricalRewardsRecord = {
     return obj;
   },
   fromAmino(object: ValidatorHistoricalRewardsRecordAmino): ValidatorHistoricalRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      period: BigInt(object.period),
-      rewards: object?.rewards ? ValidatorHistoricalRewards.fromAmino(object.rewards) : undefined
-    };
+    const message = createBaseValidatorHistoricalRewardsRecord();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    if (object.rewards !== undefined && object.rewards !== null) {
+      message.rewards = ValidatorHistoricalRewards.fromAmino(object.rewards);
+    }
+    return message;
   },
-  toAmino(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAmino {
+  toAmino(message: ValidatorHistoricalRewardsRecord, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecordAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
-    obj.period = omitDefault(message.period);
-    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards) : undefined;
+    obj.validator_address = message.validatorAddress;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.rewards = message.rewards ? ValidatorHistoricalRewards.toAmino(message.rewards, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorHistoricalRewardsRecordAminoMsg): ValidatorHistoricalRewardsRecord {
-    return ValidatorHistoricalRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorHistoricalRewardsRecord): ValidatorHistoricalRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorHistoricalRewardsRecord",
-      value: ValidatorHistoricalRewardsRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg): ValidatorHistoricalRewardsRecord {
-    return ValidatorHistoricalRewardsRecord.decode(message.value);
+  fromProtoMsg(message: ValidatorHistoricalRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorHistoricalRewardsRecord {
+    return ValidatorHistoricalRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorHistoricalRewardsRecord): Uint8Array {
     return ValidatorHistoricalRewardsRecord.encode(message).finish();
@@ -767,7 +715,7 @@ export const ValidatorCurrentRewardsRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorCurrentRewardsRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorCurrentRewardsRecord();
@@ -778,7 +726,7 @@ export const ValidatorCurrentRewardsRecord = {
           message.validatorAddress = reader.string();
           break;
         case 2:
-          message.rewards = ValidatorCurrentRewards.decode(reader, reader.uint32());
+          message.rewards = ValidatorCurrentRewards.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -820,28 +768,23 @@ export const ValidatorCurrentRewardsRecord = {
     return obj;
   },
   fromAmino(object: ValidatorCurrentRewardsRecordAmino): ValidatorCurrentRewardsRecord {
-    return {
-      validatorAddress: object.validator_address,
-      rewards: object?.rewards ? ValidatorCurrentRewards.fromAmino(object.rewards) : undefined
-    };
+    const message = createBaseValidatorCurrentRewardsRecord();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    if (object.rewards !== undefined && object.rewards !== null) {
+      message.rewards = ValidatorCurrentRewards.fromAmino(object.rewards);
+    }
+    return message;
   },
-  toAmino(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAmino {
+  toAmino(message: ValidatorCurrentRewardsRecord, useInterfaces: boolean = true): ValidatorCurrentRewardsRecordAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
-    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards) : undefined;
+    obj.validator_address = message.validatorAddress;
+    obj.rewards = message.rewards ? ValidatorCurrentRewards.toAmino(message.rewards, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorCurrentRewardsRecordAminoMsg): ValidatorCurrentRewardsRecord {
-    return ValidatorCurrentRewardsRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorCurrentRewardsRecord): ValidatorCurrentRewardsRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorCurrentRewardsRecord",
-      value: ValidatorCurrentRewardsRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg): ValidatorCurrentRewardsRecord {
-    return ValidatorCurrentRewardsRecord.decode(message.value);
+  fromProtoMsg(message: ValidatorCurrentRewardsRecordProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewardsRecord {
+    return ValidatorCurrentRewardsRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorCurrentRewardsRecord): Uint8Array {
     return ValidatorCurrentRewardsRecord.encode(message).finish();
@@ -875,7 +818,7 @@ export const DelegatorStartingInfoRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DelegatorStartingInfoRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDelegatorStartingInfoRecord();
@@ -889,7 +832,7 @@ export const DelegatorStartingInfoRecord = {
           message.validatorAddress = reader.string();
           break;
         case 3:
-          message.startingInfo = DelegatorStartingInfo.decode(reader, reader.uint32());
+          message.startingInfo = DelegatorStartingInfo.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -936,30 +879,27 @@ export const DelegatorStartingInfoRecord = {
     return obj;
   },
   fromAmino(object: DelegatorStartingInfoRecordAmino): DelegatorStartingInfoRecord {
-    return {
-      delegatorAddress: object.delegator_address,
-      validatorAddress: object.validator_address,
-      startingInfo: object?.starting_info ? DelegatorStartingInfo.fromAmino(object.starting_info) : undefined
-    };
+    const message = createBaseDelegatorStartingInfoRecord();
+    if (object.delegator_address !== undefined && object.delegator_address !== null) {
+      message.delegatorAddress = object.delegator_address;
+    }
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    if (object.starting_info !== undefined && object.starting_info !== null) {
+      message.startingInfo = DelegatorStartingInfo.fromAmino(object.starting_info);
+    }
+    return message;
   },
-  toAmino(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAmino {
+  toAmino(message: DelegatorStartingInfoRecord, useInterfaces: boolean = true): DelegatorStartingInfoRecordAmino {
     const obj: any = {};
-    obj.delegator_address = omitDefault(message.delegatorAddress);
-    obj.validator_address = omitDefault(message.validatorAddress);
-    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo) : undefined;
+    obj.delegator_address = message.delegatorAddress;
+    obj.validator_address = message.validatorAddress;
+    obj.starting_info = message.startingInfo ? DelegatorStartingInfo.toAmino(message.startingInfo, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DelegatorStartingInfoRecordAminoMsg): DelegatorStartingInfoRecord {
-    return DelegatorStartingInfoRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: DelegatorStartingInfoRecord): DelegatorStartingInfoRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/DelegatorStartingInfoRecord",
-      value: DelegatorStartingInfoRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg): DelegatorStartingInfoRecord {
-    return DelegatorStartingInfoRecord.decode(message.value);
+  fromProtoMsg(message: DelegatorStartingInfoRecordProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfoRecord {
+    return DelegatorStartingInfoRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DelegatorStartingInfoRecord): Uint8Array {
     return DelegatorStartingInfoRecord.encode(message).finish();
@@ -997,7 +937,7 @@ export const ValidatorSlashEventRecord = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ValidatorSlashEventRecord {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ValidatorSlashEventRecord {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValidatorSlashEventRecord();
@@ -1014,7 +954,7 @@ export const ValidatorSlashEventRecord = {
           message.period = reader.uint64();
           break;
         case 4:
-          message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32());
+          message.validatorSlashEvent = ValidatorSlashEvent.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1070,32 +1010,31 @@ export const ValidatorSlashEventRecord = {
     return obj;
   },
   fromAmino(object: ValidatorSlashEventRecordAmino): ValidatorSlashEventRecord {
-    return {
-      validatorAddress: object.validator_address,
-      height: BigInt(object.height),
-      period: BigInt(object.period),
-      validatorSlashEvent: object?.validator_slash_event ? ValidatorSlashEvent.fromAmino(object.validator_slash_event) : undefined
-    };
+    const message = createBaseValidatorSlashEventRecord();
+    if (object.validator_address !== undefined && object.validator_address !== null) {
+      message.validatorAddress = object.validator_address;
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.period !== undefined && object.period !== null) {
+      message.period = BigInt(object.period);
+    }
+    if (object.validator_slash_event !== undefined && object.validator_slash_event !== null) {
+      message.validatorSlashEvent = ValidatorSlashEvent.fromAmino(object.validator_slash_event);
+    }
+    return message;
   },
-  toAmino(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAmino {
+  toAmino(message: ValidatorSlashEventRecord, useInterfaces: boolean = true): ValidatorSlashEventRecordAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
-    obj.height = omitDefault(message.height);
-    obj.period = omitDefault(message.period);
-    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent) : undefined;
+    obj.validator_address = message.validatorAddress;
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.period = message.period ? message.period.toString() : undefined;
+    obj.validator_slash_event = message.validatorSlashEvent ? ValidatorSlashEvent.toAmino(message.validatorSlashEvent, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValidatorSlashEventRecordAminoMsg): ValidatorSlashEventRecord {
-    return ValidatorSlashEventRecord.fromAmino(object.value);
-  },
-  toAminoMsg(message: ValidatorSlashEventRecord): ValidatorSlashEventRecordAminoMsg {
-    return {
-      type: "cosmos-sdk/ValidatorSlashEventRecord",
-      value: ValidatorSlashEventRecord.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg): ValidatorSlashEventRecord {
-    return ValidatorSlashEventRecord.decode(message.value);
+  fromProtoMsg(message: ValidatorSlashEventRecordProtoMsg, useInterfaces: boolean = true): ValidatorSlashEventRecord {
+    return ValidatorSlashEventRecord.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ValidatorSlashEventRecord): Uint8Array {
     return ValidatorSlashEventRecord.encode(message).finish();
@@ -1157,7 +1096,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -1165,34 +1104,34 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.feePool = FeePool.decode(reader, reader.uint32());
+          message.feePool = FeePool.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
-          message.delegatorWithdrawInfos.push(DelegatorWithdrawInfo.decode(reader, reader.uint32()));
+          message.delegatorWithdrawInfos.push(DelegatorWithdrawInfo.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           message.previousProposer = reader.string();
           break;
         case 5:
-          message.outstandingRewards.push(ValidatorOutstandingRewardsRecord.decode(reader, reader.uint32()));
+          message.outstandingRewards.push(ValidatorOutstandingRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 6:
-          message.validatorAccumulatedCommissions.push(ValidatorAccumulatedCommissionRecord.decode(reader, reader.uint32()));
+          message.validatorAccumulatedCommissions.push(ValidatorAccumulatedCommissionRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
-          message.validatorHistoricalRewards.push(ValidatorHistoricalRewardsRecord.decode(reader, reader.uint32()));
+          message.validatorHistoricalRewards.push(ValidatorHistoricalRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 8:
-          message.validatorCurrentRewards.push(ValidatorCurrentRewardsRecord.decode(reader, reader.uint32()));
+          message.validatorCurrentRewards.push(ValidatorCurrentRewardsRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 9:
-          message.delegatorStartingInfos.push(DelegatorStartingInfoRecord.decode(reader, reader.uint32()));
+          message.delegatorStartingInfos.push(DelegatorStartingInfoRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 10:
-          message.validatorSlashEvents.push(ValidatorSlashEventRecord.decode(reader, reader.uint32()));
+          message.validatorSlashEvents.push(ValidatorSlashEventRecord.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1332,72 +1271,69 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      feePool: object?.fee_pool ? FeePool.fromAmino(object.fee_pool) : undefined,
-      delegatorWithdrawInfos: Array.isArray(object?.delegator_withdraw_infos) ? object.delegator_withdraw_infos.map((e: any) => DelegatorWithdrawInfo.fromAmino(e)) : [],
-      previousProposer: object.previous_proposer,
-      outstandingRewards: Array.isArray(object?.outstanding_rewards) ? object.outstanding_rewards.map((e: any) => ValidatorOutstandingRewardsRecord.fromAmino(e)) : [],
-      validatorAccumulatedCommissions: Array.isArray(object?.validator_accumulated_commissions) ? object.validator_accumulated_commissions.map((e: any) => ValidatorAccumulatedCommissionRecord.fromAmino(e)) : [],
-      validatorHistoricalRewards: Array.isArray(object?.validator_historical_rewards) ? object.validator_historical_rewards.map((e: any) => ValidatorHistoricalRewardsRecord.fromAmino(e)) : [],
-      validatorCurrentRewards: Array.isArray(object?.validator_current_rewards) ? object.validator_current_rewards.map((e: any) => ValidatorCurrentRewardsRecord.fromAmino(e)) : [],
-      delegatorStartingInfos: Array.isArray(object?.delegator_starting_infos) ? object.delegator_starting_infos.map((e: any) => DelegatorStartingInfoRecord.fromAmino(e)) : [],
-      validatorSlashEvents: Array.isArray(object?.validator_slash_events) ? object.validator_slash_events.map((e: any) => ValidatorSlashEventRecord.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.fee_pool !== undefined && object.fee_pool !== null) {
+      message.feePool = FeePool.fromAmino(object.fee_pool);
+    }
+    message.delegatorWithdrawInfos = object.delegator_withdraw_infos?.map(e => DelegatorWithdrawInfo.fromAmino(e)) || [];
+    if (object.previous_proposer !== undefined && object.previous_proposer !== null) {
+      message.previousProposer = object.previous_proposer;
+    }
+    message.outstandingRewards = object.outstanding_rewards?.map(e => ValidatorOutstandingRewardsRecord.fromAmino(e)) || [];
+    message.validatorAccumulatedCommissions = object.validator_accumulated_commissions?.map(e => ValidatorAccumulatedCommissionRecord.fromAmino(e)) || [];
+    message.validatorHistoricalRewards = object.validator_historical_rewards?.map(e => ValidatorHistoricalRewardsRecord.fromAmino(e)) || [];
+    message.validatorCurrentRewards = object.validator_current_rewards?.map(e => ValidatorCurrentRewardsRecord.fromAmino(e)) || [];
+    message.delegatorStartingInfos = object.delegator_starting_infos?.map(e => DelegatorStartingInfoRecord.fromAmino(e)) || [];
+    message.validatorSlashEvents = object.validator_slash_events?.map(e => ValidatorSlashEventRecord.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.fee_pool = message.feePool ? FeePool.toAmino(message.feePool, useInterfaces) : undefined;
     if (message.delegatorWithdrawInfos) {
-      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e) : undefined);
+      obj.delegator_withdraw_infos = message.delegatorWithdrawInfos.map(e => e ? DelegatorWithdrawInfo.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegator_withdraw_infos = [];
     }
-    obj.previous_proposer = omitDefault(message.previousProposer);
+    obj.previous_proposer = message.previousProposer;
     if (message.outstandingRewards) {
-      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e) : undefined);
+      obj.outstanding_rewards = message.outstandingRewards.map(e => e ? ValidatorOutstandingRewardsRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.outstanding_rewards = [];
     }
     if (message.validatorAccumulatedCommissions) {
-      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e) : undefined);
+      obj.validator_accumulated_commissions = message.validatorAccumulatedCommissions.map(e => e ? ValidatorAccumulatedCommissionRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validator_accumulated_commissions = [];
     }
     if (message.validatorHistoricalRewards) {
-      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e) : undefined);
+      obj.validator_historical_rewards = message.validatorHistoricalRewards.map(e => e ? ValidatorHistoricalRewardsRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validator_historical_rewards = [];
     }
     if (message.validatorCurrentRewards) {
-      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e) : undefined);
+      obj.validator_current_rewards = message.validatorCurrentRewards.map(e => e ? ValidatorCurrentRewardsRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validator_current_rewards = [];
     }
     if (message.delegatorStartingInfos) {
-      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e) : undefined);
+      obj.delegator_starting_infos = message.delegatorStartingInfos.map(e => e ? DelegatorStartingInfoRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.delegator_starting_infos = [];
     }
     if (message.validatorSlashEvents) {
-      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e) : undefined);
+      obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEventRecord.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.validator_slash_events = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

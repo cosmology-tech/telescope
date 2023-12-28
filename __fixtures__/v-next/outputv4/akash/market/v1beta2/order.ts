@@ -57,6 +57,10 @@ export interface OrderID {
   gseq: number;
   oseq: number;
 }
+export interface OrderIDProtoMsg {
+  typeUrl: "/akash.market.v1beta2.OrderID";
+  value: Uint8Array;
+}
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
   owner: string;
@@ -70,6 +74,10 @@ export interface Order {
   state: Order_State;
   spec: GroupSpec;
   createdAt: bigint;
+}
+export interface OrderProtoMsg {
+  typeUrl: "/akash.market.v1beta2.Order";
+  value: Uint8Array;
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderSDKType {
@@ -85,6 +93,10 @@ export interface OrderFilters {
   gseq: number;
   oseq: number;
   state: string;
+}
+export interface OrderFiltersProtoMsg {
+  typeUrl: "/akash.market.v1beta2.OrderFilters";
+  value: Uint8Array;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -105,16 +117,16 @@ function createBaseOrderID(): OrderID {
 export const OrderID = {
   typeUrl: "/akash.market.v1beta2.OrderID",
   encode(message: OrderID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== 0) {
+    if (message.oseq !== undefined) {
       writer.uint32(32).uint32(message.oseq);
     }
     return writer;
@@ -196,12 +208,20 @@ export const OrderID = {
     return obj;
   },
   fromAmino(object: OrderIDAmino): OrderID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq
-    };
+    const message = createBaseOrderID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    return message;
   },
   toAmino(message: OrderID): OrderIDAmino {
     const obj: any = {};
@@ -253,7 +273,7 @@ export const Order = {
     if (message.spec !== undefined) {
       GroupSpec.encode(message.spec, writer.uint32(26).fork()).ldelim();
     }
-    if (message.createdAt !== BigInt(0)) {
+    if (message.createdAt !== undefined) {
       writer.uint32(32).int64(message.createdAt);
     }
     return writer;
@@ -339,17 +359,25 @@ export const Order = {
     return obj;
   },
   fromAmino(object: OrderAmino): Order {
-    return {
-      orderId: object?.order_id ? OrderID.fromAmino(object.order_id) : undefined,
-      state: isSet(object.state) ? order_StateFromJSON(object.state) : -1,
-      spec: object?.spec ? GroupSpec.fromAmino(object.spec) : undefined,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseOrder();
+    if (object.order_id !== undefined && object.order_id !== null) {
+      message.orderId = OrderID.fromAmino(object.order_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = order_StateFromJSON(object.state);
+    }
+    if (object.spec !== undefined && object.spec !== null) {
+      message.spec = GroupSpec.fromAmino(object.spec);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Order): OrderAmino {
     const obj: any = {};
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
-    obj.state = message.state;
+    obj.state = order_StateToJSON(message.state);
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
     obj.created_at = omitDefault(message.createdAt);
     return obj;
@@ -388,19 +416,19 @@ function createBaseOrderFilters(): OrderFilters {
 export const OrderFilters = {
   typeUrl: "/akash.market.v1beta2.OrderFilters",
   encode(message: OrderFilters, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
-    if (message.oseq !== 0) {
+    if (message.oseq !== undefined) {
       writer.uint32(32).uint32(message.oseq);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(42).string(message.state);
     }
     return writer;
@@ -491,13 +519,23 @@ export const OrderFilters = {
     return obj;
   },
   fromAmino(object: OrderFiltersAmino): OrderFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq,
-      oseq: object.oseq,
-      state: object.state
-    };
+    const message = createBaseOrderFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    if (object.oseq !== undefined && object.oseq !== null) {
+      message.oseq = object.oseq;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: OrderFilters): OrderFiltersAmino {
     const obj: any = {};

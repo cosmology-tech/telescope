@@ -11,11 +11,19 @@ export interface Params {
    */
   mintedDenom: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.Params";
+  value: Uint8Array;
+}
 export interface ParamsSDKType {
   minted_denom: string;
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
+}
+export interface LockableDurationsInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
+  value: Uint8Array;
 }
 export interface LockableDurationsInfoSDKType {
   lockable_durations: DurationSDKType[];
@@ -24,6 +32,10 @@ export interface DistrInfo {
   totalWeight: string;
   records: DistrRecord[];
 }
+export interface DistrInfoProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
+  value: Uint8Array;
+}
 export interface DistrInfoSDKType {
   total_weight: string;
   records: DistrRecordSDKType[];
@@ -31,6 +43,10 @@ export interface DistrInfoSDKType {
 export interface DistrRecord {
   gaugeId: bigint;
   weight: string;
+}
+export interface DistrRecordProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
+  value: Uint8Array;
 }
 export interface DistrRecordSDKType {
   gauge_id: bigint;
@@ -41,6 +57,10 @@ export interface PoolToGauge {
   gaugeId: bigint;
   duration: Duration;
 }
+export interface PoolToGaugeProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
+  value: Uint8Array;
+}
 export interface PoolToGaugeSDKType {
   pool_id: bigint;
   gauge_id: bigint;
@@ -48,6 +68,10 @@ export interface PoolToGaugeSDKType {
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
+}
+export interface PoolToGaugesProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
+  value: Uint8Array;
 }
 export interface PoolToGaugesSDKType {
   pool_to_gauge: PoolToGaugeSDKType[];
@@ -60,7 +84,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintedDenom !== "") {
+    if (message.mintedDenom !== undefined) {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
@@ -113,9 +137,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      mintedDenom: object.minted_denom
-    };
+    const message = createBaseParams();
+    if (object.minted_denom !== undefined && object.minted_denom !== null) {
+      message.mintedDenom = object.minted_denom;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
@@ -213,9 +239,9 @@ export const LockableDurationsInfo = {
     return obj;
   },
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
-    return {
-      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromAmino(e)) : []
-    };
+    const message = createBaseLockableDurationsInfo();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: LockableDurationsInfo): LockableDurationsInfoAmino {
     const obj: any = {};
@@ -257,7 +283,7 @@ function createBaseDistrInfo(): DistrInfo {
 export const DistrInfo = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo",
   encode(message: DistrInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalWeight !== "") {
+    if (message.totalWeight !== undefined) {
       writer.uint32(10).string(message.totalWeight);
     }
     for (const v of message.records) {
@@ -330,10 +356,12 @@ export const DistrInfo = {
     return obj;
   },
   fromAmino(object: DistrInfoAmino): DistrInfo {
-    return {
-      totalWeight: object.total_weight,
-      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromAmino(e)) : []
-    };
+    const message = createBaseDistrInfo();
+    if (object.total_weight !== undefined && object.total_weight !== null) {
+      message.totalWeight = object.total_weight;
+    }
+    message.records = object.records?.map(e => DistrRecord.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: DistrInfo): DistrInfoAmino {
     const obj: any = {};
@@ -376,10 +404,10 @@ function createBaseDistrRecord(): DistrRecord {
 export const DistrRecord = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
   encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -443,10 +471,14 @@ export const DistrRecord = {
     return obj;
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
-    return {
-      gaugeId: BigInt(object.gauge_id),
-      weight: object.weight
-    };
+    const message = createBaseDistrRecord();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.weight !== undefined && object.weight !== null) {
+      message.weight = object.weight;
+    }
+    return message;
   },
   toAmino(message: DistrRecord): DistrRecordAmino {
     const obj: any = {};
@@ -486,10 +518,10 @@ function createBasePoolToGauge(): PoolToGauge {
 export const PoolToGauge = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
   encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
@@ -569,11 +601,17 @@ export const PoolToGauge = {
     return obj;
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
-    return {
-      poolId: BigInt(object.pool_id),
-      gaugeId: BigInt(object.gauge_id),
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined
-    };
+    const message = createBasePoolToGauge();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    return message;
   },
   toAmino(message: PoolToGauge): PoolToGaugeAmino {
     const obj: any = {};
@@ -673,9 +711,9 @@ export const PoolToGauges = {
     return obj;
   },
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {
-    return {
-      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromAmino(e)) : []
-    };
+    const message = createBasePoolToGauges();
+    message.poolToGauge = object.pool_to_gauge?.map(e => PoolToGauge.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PoolToGauges): PoolToGaugesAmino {
     const obj: any = {};

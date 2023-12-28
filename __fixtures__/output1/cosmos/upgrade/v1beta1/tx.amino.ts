@@ -1,7 +1,6 @@
 import { Plan, PlanSDKType } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "../../../helpers";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
+import { Long } from "../../../helpers";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx";
 export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
@@ -10,10 +9,7 @@ export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
     authority: string;
     plan: {
       name: string;
-      time: {
-        seconds: string;
-        nanos: number;
-      };
+      time: string;
       height: string;
       info: string;
       upgraded_client_state: {
@@ -37,14 +33,14 @@ export const AminoConverter = {
       plan
     }: MsgSoftwareUpgrade): MsgSoftwareUpgradeAminoType["value"] => {
       return {
-        authority: omitDefault(authority),
+        authority,
         plan: {
-          name: omitDefault(plan.name),
+          name: plan.name,
           time: plan.time,
-          height: omitDefault(plan.height)?.toString?.(),
-          info: omitDefault(plan.info),
+          height: plan.height.toString(),
+          info: plan.info,
           upgraded_client_state: {
-            type_url: omitDefault(plan.upgradedClientState.typeUrl),
+            type_url: plan.upgradedClientState.typeUrl,
             value: plan.upgradedClientState.value
           }
         }
@@ -75,7 +71,7 @@ export const AminoConverter = {
       authority
     }: MsgCancelUpgrade): MsgCancelUpgradeAminoType["value"] => {
       return {
-        authority: omitDefault(authority)
+        authority
       };
     },
     fromAmino: ({

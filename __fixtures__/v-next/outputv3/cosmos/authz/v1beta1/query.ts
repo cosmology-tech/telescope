@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantAmino, GrantSDKType, GrantAuthorization, GrantAuthorizationAmino, GrantAuthorizationSDKType } from "./authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
@@ -10,7 +10,7 @@ export interface QueryGrantsRequest {
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
   msgTypeUrl: string;
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsRequest";
@@ -18,30 +18,26 @@ export interface QueryGrantsRequestProtoMsg {
 }
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestAmino {
-  granter: string;
-  grantee: string;
+  granter?: string;
+  grantee?: string;
   /** Optional, msg_type_url, when set, will query only grants matching given msg type. */
-  msg_type_url: string;
+  msg_type_url?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGrantsRequest";
-  value: QueryGrantsRequestAmino;
 }
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequestSDKType {
   granter: string;
   grantee: string;
   msg_type_url: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponse {
   /** authorizations is a list of grants granted for grantee by granter. */
   grants: Grant[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGrantsResponse";
@@ -50,24 +46,20 @@ export interface QueryGrantsResponseProtoMsg {
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseAmino {
   /** authorizations is a list of grants granted for grantee by granter. */
-  grants: GrantAmino[];
+  grants?: GrantAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGrantsResponse";
-  value: QueryGrantsResponseAmino;
 }
 /** QueryGrantsResponse is the response type for the Query/Authorizations RPC method. */
 export interface QueryGrantsResponseSDKType {
   grants: GrantSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequest {
   granter: string;
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryGranterGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsRequest";
@@ -75,25 +67,21 @@ export interface QueryGranterGrantsRequestProtoMsg {
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestAmino {
-  granter: string;
+  granter?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGranterGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGranterGrantsRequest";
-  value: QueryGranterGrantsRequestAmino;
 }
 /** QueryGranterGrantsRequest is the request type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsRequestSDKType {
   granter: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponse {
   /** grants is a list of grants granted by the granter. */
   grants: GrantAuthorization[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryGranterGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranterGrantsResponse";
@@ -102,24 +90,20 @@ export interface QueryGranterGrantsResponseProtoMsg {
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseAmino {
   /** grants is a list of grants granted by the granter. */
-  grants: GrantAuthorizationAmino[];
+  grants?: GrantAuthorizationAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryGranterGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGranterGrantsResponse";
-  value: QueryGranterGrantsResponseAmino;
 }
 /** QueryGranterGrantsResponse is the response type for the Query/GranterGrants RPC method. */
 export interface QueryGranterGrantsResponseSDKType {
   grants: GrantAuthorizationSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequest {
   grantee: string;
   /** pagination defines an pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryGranteeGrantsRequestProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsRequest";
@@ -127,25 +111,21 @@ export interface QueryGranteeGrantsRequestProtoMsg {
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestAmino {
-  grantee: string;
+  grantee?: string;
   /** pagination defines an pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGranteeGrantsRequestAminoMsg {
-  type: "cosmos-sdk/QueryGranteeGrantsRequest";
-  value: QueryGranteeGrantsRequestAmino;
 }
 /** QueryGranteeGrantsRequest is the request type for the Query/IssuedGrants RPC method. */
 export interface QueryGranteeGrantsRequestSDKType {
   grantee: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponse {
   /** grants is a list of grants granted to the grantee. */
   grants: GrantAuthorization[];
   /** pagination defines an pagination for the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryGranteeGrantsResponseProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.QueryGranteeGrantsResponse";
@@ -154,25 +134,21 @@ export interface QueryGranteeGrantsResponseProtoMsg {
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseAmino {
   /** grants is a list of grants granted to the grantee. */
-  grants: GrantAuthorizationAmino[];
+  grants?: GrantAuthorizationAmino[];
   /** pagination defines an pagination for the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryGranteeGrantsResponseAminoMsg {
-  type: "cosmos-sdk/QueryGranteeGrantsResponse";
-  value: QueryGranteeGrantsResponseAmino;
 }
 /** QueryGranteeGrantsResponse is the response type for the Query/GranteeGrants RPC method. */
 export interface QueryGranteeGrantsResponseSDKType {
   grants: GrantAuthorizationSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryGrantsRequest(): QueryGrantsRequest {
   return {
     granter: "",
     grantee: "",
     msgTypeUrl: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGrantsRequest = {
@@ -193,7 +169,7 @@ export const QueryGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGrantsRequest();
@@ -210,7 +186,7 @@ export const QueryGrantsRequest = {
           message.msgTypeUrl = reader.string();
           break;
         case 4:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -262,32 +238,31 @@ export const QueryGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGrantsRequestAmino): QueryGrantsRequest {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      msgTypeUrl: object.msg_type_url,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGrantsRequest();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.msg_type_url !== undefined && object.msg_type_url !== null) {
+      message.msgTypeUrl = object.msg_type_url;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGrantsRequest): QueryGrantsRequestAmino {
+  toAmino(message: QueryGrantsRequest, useInterfaces: boolean = true): QueryGrantsRequestAmino {
     const obj: any = {};
-    obj.granter = omitDefault(message.granter);
-    obj.grantee = omitDefault(message.grantee);
-    obj.msg_type_url = omitDefault(message.msgTypeUrl);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.granter = message.granter;
+    obj.grantee = message.grantee;
+    obj.msg_type_url = message.msgTypeUrl;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGrantsRequestAminoMsg): QueryGrantsRequest {
-    return QueryGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGrantsRequest): QueryGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGrantsRequest",
-      value: QueryGrantsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGrantsRequestProtoMsg): QueryGrantsRequest {
-    return QueryGrantsRequest.decode(message.value);
+  fromProtoMsg(message: QueryGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGrantsRequest {
+    return QueryGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGrantsRequest): Uint8Array {
     return QueryGrantsRequest.encode(message).finish();
@@ -302,7 +277,7 @@ export const QueryGrantsRequest = {
 function createBaseQueryGrantsResponse(): QueryGrantsResponse {
   return {
     grants: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGrantsResponse = {
@@ -317,7 +292,7 @@ export const QueryGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGrantsResponse();
@@ -325,10 +300,10 @@ export const QueryGrantsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.grants.push(Grant.decode(reader, reader.uint32()));
+          message.grants.push(Grant.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -378,32 +353,25 @@ export const QueryGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGrantsResponseAmino): QueryGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => Grant.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGrantsResponse();
+    message.grants = object.grants?.map(e => Grant.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGrantsResponse): QueryGrantsResponseAmino {
+  toAmino(message: QueryGrantsResponse, useInterfaces: boolean = true): QueryGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
-      obj.grants = message.grants.map(e => e ? Grant.toAmino(e) : undefined);
+      obj.grants = message.grants.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.grants = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGrantsResponseAminoMsg): QueryGrantsResponse {
-    return QueryGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGrantsResponse): QueryGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGrantsResponse",
-      value: QueryGrantsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGrantsResponseProtoMsg): QueryGrantsResponse {
-    return QueryGrantsResponse.decode(message.value);
+  fromProtoMsg(message: QueryGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGrantsResponse {
+    return QueryGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGrantsResponse): Uint8Array {
     return QueryGrantsResponse.encode(message).finish();
@@ -418,7 +386,7 @@ export const QueryGrantsResponse = {
 function createBaseQueryGranterGrantsRequest(): QueryGranterGrantsRequest {
   return {
     granter: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGranterGrantsRequest = {
@@ -433,7 +401,7 @@ export const QueryGranterGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGranterGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranterGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranterGrantsRequest();
@@ -444,7 +412,7 @@ export const QueryGranterGrantsRequest = {
           message.granter = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -486,28 +454,23 @@ export const QueryGranterGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGranterGrantsRequestAmino): QueryGranterGrantsRequest {
-    return {
-      granter: object.granter,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranterGrantsRequest();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAmino {
+  toAmino(message: QueryGranterGrantsRequest, useInterfaces: boolean = true): QueryGranterGrantsRequestAmino {
     const obj: any = {};
-    obj.granter = omitDefault(message.granter);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.granter = message.granter;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGranterGrantsRequestAminoMsg): QueryGranterGrantsRequest {
-    return QueryGranterGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranterGrantsRequest",
-      value: QueryGranterGrantsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg): QueryGranterGrantsRequest {
-    return QueryGranterGrantsRequest.decode(message.value);
+  fromProtoMsg(message: QueryGranterGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGranterGrantsRequest {
+    return QueryGranterGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranterGrantsRequest): Uint8Array {
     return QueryGranterGrantsRequest.encode(message).finish();
@@ -522,7 +485,7 @@ export const QueryGranterGrantsRequest = {
 function createBaseQueryGranterGrantsResponse(): QueryGranterGrantsResponse {
   return {
     grants: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGranterGrantsResponse = {
@@ -537,7 +500,7 @@ export const QueryGranterGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGranterGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranterGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranterGrantsResponse();
@@ -545,10 +508,10 @@ export const QueryGranterGrantsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.grants.push(GrantAuthorization.decode(reader, reader.uint32()));
+          message.grants.push(GrantAuthorization.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -598,32 +561,25 @@ export const QueryGranterGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGranterGrantsResponseAmino): QueryGranterGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranterGrantsResponse();
+    message.grants = object.grants?.map(e => GrantAuthorization.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAmino {
+  toAmino(message: QueryGranterGrantsResponse, useInterfaces: boolean = true): QueryGranterGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
-      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.grants = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGranterGrantsResponseAminoMsg): QueryGranterGrantsResponse {
-    return QueryGranterGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranterGrantsResponse): QueryGranterGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranterGrantsResponse",
-      value: QueryGranterGrantsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg): QueryGranterGrantsResponse {
-    return QueryGranterGrantsResponse.decode(message.value);
+  fromProtoMsg(message: QueryGranterGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGranterGrantsResponse {
+    return QueryGranterGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranterGrantsResponse): Uint8Array {
     return QueryGranterGrantsResponse.encode(message).finish();
@@ -638,7 +594,7 @@ export const QueryGranterGrantsResponse = {
 function createBaseQueryGranteeGrantsRequest(): QueryGranteeGrantsRequest {
   return {
     grantee: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGranteeGrantsRequest = {
@@ -653,7 +609,7 @@ export const QueryGranteeGrantsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGranteeGrantsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranteeGrantsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranteeGrantsRequest();
@@ -664,7 +620,7 @@ export const QueryGranteeGrantsRequest = {
           message.grantee = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -706,28 +662,23 @@ export const QueryGranteeGrantsRequest = {
     return obj;
   },
   fromAmino(object: QueryGranteeGrantsRequestAmino): QueryGranteeGrantsRequest {
-    return {
-      grantee: object.grantee,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranteeGrantsRequest();
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAmino {
+  toAmino(message: QueryGranteeGrantsRequest, useInterfaces: boolean = true): QueryGranteeGrantsRequestAmino {
     const obj: any = {};
-    obj.grantee = omitDefault(message.grantee);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.grantee = message.grantee;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGranteeGrantsRequestAminoMsg): QueryGranteeGrantsRequest {
-    return QueryGranteeGrantsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranteeGrantsRequest",
-      value: QueryGranteeGrantsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg): QueryGranteeGrantsRequest {
-    return QueryGranteeGrantsRequest.decode(message.value);
+  fromProtoMsg(message: QueryGranteeGrantsRequestProtoMsg, useInterfaces: boolean = true): QueryGranteeGrantsRequest {
+    return QueryGranteeGrantsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranteeGrantsRequest): Uint8Array {
     return QueryGranteeGrantsRequest.encode(message).finish();
@@ -742,7 +693,7 @@ export const QueryGranteeGrantsRequest = {
 function createBaseQueryGranteeGrantsResponse(): QueryGranteeGrantsResponse {
   return {
     grants: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGranteeGrantsResponse = {
@@ -757,7 +708,7 @@ export const QueryGranteeGrantsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGranteeGrantsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGranteeGrantsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGranteeGrantsResponse();
@@ -765,10 +716,10 @@ export const QueryGranteeGrantsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.grants.push(GrantAuthorization.decode(reader, reader.uint32()));
+          message.grants.push(GrantAuthorization.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -818,32 +769,25 @@ export const QueryGranteeGrantsResponse = {
     return obj;
   },
   fromAmino(object: QueryGranteeGrantsResponseAmino): QueryGranteeGrantsResponse {
-    return {
-      grants: Array.isArray(object?.grants) ? object.grants.map((e: any) => GrantAuthorization.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGranteeGrantsResponse();
+    message.grants = object.grants?.map(e => GrantAuthorization.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAmino {
+  toAmino(message: QueryGranteeGrantsResponse, useInterfaces: boolean = true): QueryGranteeGrantsResponseAmino {
     const obj: any = {};
     if (message.grants) {
-      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
+      obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.grants = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGranteeGrantsResponseAminoMsg): QueryGranteeGrantsResponse {
-    return QueryGranteeGrantsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryGranteeGrantsResponse): QueryGranteeGrantsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryGranteeGrantsResponse",
-      value: QueryGranteeGrantsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg): QueryGranteeGrantsResponse {
-    return QueryGranteeGrantsResponse.decode(message.value);
+  fromProtoMsg(message: QueryGranteeGrantsResponseProtoMsg, useInterfaces: boolean = true): QueryGranteeGrantsResponse {
+    return QueryGranteeGrantsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGranteeGrantsResponse): Uint8Array {
     return QueryGranteeGrantsResponse.encode(message).finish();

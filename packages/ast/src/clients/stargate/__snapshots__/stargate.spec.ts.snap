@@ -57,6 +57,23 @@ exports[`createStargateClient w/o defaults 1`] = `
 `;
 
 exports[`createStargateClient w/o defaults 2`] = `
+"export const getOsmosisTxRpcClient = async ({
+  rpcEndpoint,
+  signer
+}: SigningClientParams) => {
+  let txRpc = (await getRpcClient(rpcEndpoint) as TxRpc);
+  const signingClient = await getSigningOsmosisClient({
+    rpcEndpoint,
+    signer
+  });
+  txRpc.signAndBroadcast = (signerAddress: string, messages: EncodeObject[], fee: number | StdFee | "auto", memo?: string) => {
+    return (signingClient.signAndBroadcast(signerAddress, messages, fee, memo) as Promise<DeliverTxResponse>);
+  };
+  return txRpc;
+};"
+`;
+
+exports[`createStargateClient w/o defaults 3`] = `
 "export const getSigningOsmosisClientOptions = (): {
   registry: Registry;
   aminoTypes: AminoTypes;
@@ -72,14 +89,20 @@ exports[`createStargateClient w/o defaults 2`] = `
 };"
 `;
 
-exports[`createStargateClient w/o defaults 3`] = `
+exports[`createStargateClient w/o defaults 4`] = `
 {
   "AminoTypes": true,
+  "DeliverTxResponse": true,
+  "EncodeObject": true,
   "GeneratedType": true,
   "HttpEndpoint": true,
   "OfflineSigner": true,
   "Registry": true,
+  "SigningClientParams": true,
   "SigningStargateClient": true,
+  "StdFee": true,
+  "TxRpc": true,
+  "getRpcClient": true,
 }
 `;
 

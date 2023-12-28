@@ -1,6 +1,7 @@
 import { TelescopeBuilder } from "../src/builder";
 import { TelescopeOptions } from "@cosmology/types";
 import { TelescopeInput } from "../src";
+import deepmerge from "deepmerge";
 
 const outPath = __dirname + "/../../../__fixtures__/misc/output";
 
@@ -16,6 +17,12 @@ const options: TelescopeOptions = {
 
   prototypes: {
     enabled: true,
+
+    excluded: {
+      // hard exclude faulty proto files
+      hardProtos: ["google/api/expr/v1alpha1/eval1.proto"],
+    },
+
     parser: {
       keepCase: false,
     },
@@ -33,6 +40,7 @@ const options: TelescopeOptions = {
       toProto: true,
       fromProto: true,
     },
+    strictNullCheckForPrototypeMethods: true,
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
@@ -91,7 +99,7 @@ const options: TelescopeOptions = {
 
   aminoEncoding: {
     enabled: true,
-    useLegacyInlineEncoding: false
+    useLegacyInlineEncoding: false,
   },
 };
 
@@ -101,10 +109,297 @@ const input: TelescopeInput = {
   options,
 };
 
-const telescope = new TelescopeBuilder(input);
-
 describe("misc", () => {
   it("generates", async () => {
+    const telescope = new TelescopeBuilder(input);
+
+    await telescope.build();
+  });
+
+  it("generates without amino", async () => {
+    const testFolder = "/output-proto-amino/no-amino";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino, no proto", async () => {
+    const testFolder = "/output-proto-amino/no-amino-no-proto";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino but legacy", async () => {
+    const testFolder = "/output-proto-amino/no-amino-legacy";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates without amino but legacy, no proto", async () => {
+    const testFolder = "/output-proto-amino/no-amino-legacy-no-proto";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: false,
+            fromProto: false,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates, proto only", async () => {
+    const testFolder = "/output-proto-amino/proto-only";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates, proto only, legacy", async () => {
+    const testFolder = "/output-proto-amino/proto-only-legacy";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates amino, useMsgTypes, with amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-msg-with-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates amino, useMsgTypes, no amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-msg-no-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates amino, no useMsgTypes, with amino func", async () => {
+    const testFolder = "/output-proto-amino/amino-no-msg-with-func";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+          disableMsgTypes: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates with amino interface", async () => {
+    const testFolder = "/output-proto-amino/amino-interface";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        interfaces: {
+          enabled: true,
+          useGlobalDecoderRegistry: true,
+          useUnionTypes: true,
+        },
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it("generates with amino interface and proto optionality", async () => {
+    const testFolder = "/output-proto-amino/amino-interface-proto-optionality";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        interfaces: {
+          enabled: true,
+          useGlobalDecoderRegistry: true,
+          useUnionTypes: true,
+        },
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useProtoOptionality: true,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
     await telescope.build();
   });
 });

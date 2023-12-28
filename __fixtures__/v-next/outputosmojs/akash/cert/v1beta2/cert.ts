@@ -47,6 +47,10 @@ export interface CertificateID {
   owner: string;
   serial: string;
 }
+export interface CertificateIDProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.CertificateID";
+  value: Uint8Array;
+}
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
   owner: string;
@@ -57,6 +61,10 @@ export interface Certificate {
   state: Certificate_State;
   cert: Uint8Array;
   pubkey: Uint8Array;
+}
+export interface CertificateProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.Certificate";
+  value: Uint8Array;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
@@ -70,6 +78,10 @@ export interface CertificateFilter {
   serial: string;
   state: string;
 }
+export interface CertificateFilterProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.CertificateFilter";
+  value: Uint8Array;
+}
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
   owner: string;
@@ -82,6 +94,10 @@ export interface MsgCreateCertificate {
   cert: Uint8Array;
   pubkey: Uint8Array;
 }
+export interface MsgCreateCertificateProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.MsgCreateCertificate";
+  value: Uint8Array;
+}
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
   owner: string;
@@ -90,11 +106,19 @@ export interface MsgCreateCertificateSDKType {
 }
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponse {}
+export interface MsgCreateCertificateResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.MsgCreateCertificateResponse";
+  value: Uint8Array;
+}
 /** MsgCreateCertificateResponse defines the Msg/CreateCertificate response type. */
 export interface MsgCreateCertificateResponseSDKType {}
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificate {
   id: CertificateID;
+}
+export interface MsgRevokeCertificateProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificate";
+  value: Uint8Array;
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
@@ -102,6 +126,10 @@ export interface MsgRevokeCertificateSDKType {
 }
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponse {}
+export interface MsgRevokeCertificateResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.MsgRevokeCertificateResponse";
+  value: Uint8Array;
+}
 /** MsgRevokeCertificateResponse defines the Msg/RevokeCertificate response type. */
 export interface MsgRevokeCertificateResponseSDKType {}
 function createBaseCertificateID(): CertificateID {
@@ -178,10 +206,14 @@ export const CertificateID = {
     return obj;
   },
   fromAmino(object: CertificateIDAmino): CertificateID {
-    return {
-      owner: object.owner,
-      serial: object.serial
-    };
+    const message = createBaseCertificateID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.serial !== undefined && object.serial !== null) {
+      message.serial = object.serial;
+    }
+    return message;
   },
   toAmino(message: CertificateID): CertificateIDAmino {
     const obj: any = {};
@@ -298,17 +330,23 @@ export const Certificate = {
     return obj;
   },
   fromAmino(object: CertificateAmino): Certificate {
-    return {
-      state: isSet(object.state) ? certificate_StateFromJSON(object.state) : -1,
-      cert: object.cert,
-      pubkey: object.pubkey
-    };
+    const message = createBaseCertificate();
+    if (object.state !== undefined && object.state !== null) {
+      message.state = certificate_StateFromJSON(object.state);
+    }
+    if (object.cert !== undefined && object.cert !== null) {
+      message.cert = bytesFromBase64(object.cert);
+    }
+    if (object.pubkey !== undefined && object.pubkey !== null) {
+      message.pubkey = bytesFromBase64(object.pubkey);
+    }
+    return message;
   },
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.state = certificate_StateToJSON(message.state);
+    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
     return obj;
   },
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
@@ -420,11 +458,17 @@ export const CertificateFilter = {
     return obj;
   },
   fromAmino(object: CertificateFilterAmino): CertificateFilter {
-    return {
-      owner: object.owner,
-      serial: object.serial,
-      state: object.state
-    };
+    const message = createBaseCertificateFilter();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.serial !== undefined && object.serial !== null) {
+      message.serial = object.serial;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: CertificateFilter): CertificateFilterAmino {
     const obj: any = {};
@@ -542,17 +586,23 @@ export const MsgCreateCertificate = {
     return obj;
   },
   fromAmino(object: MsgCreateCertificateAmino): MsgCreateCertificate {
-    return {
-      owner: object.owner,
-      cert: object.cert,
-      pubkey: object.pubkey
-    };
+    const message = createBaseMsgCreateCertificate();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.cert !== undefined && object.cert !== null) {
+      message.cert = bytesFromBase64(object.cert);
+    }
+    if (object.pubkey !== undefined && object.pubkey !== null) {
+      message.pubkey = bytesFromBase64(object.pubkey);
+    }
+    return message;
   },
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.cert = message.cert;
-    obj.pubkey = message.pubkey;
+    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {
@@ -621,7 +671,8 @@ export const MsgCreateCertificateResponse = {
     return obj;
   },
   fromAmino(_: MsgCreateCertificateResponseAmino): MsgCreateCertificateResponse {
-    return {};
+    const message = createBaseMsgCreateCertificateResponse();
+    return message;
   },
   toAmino(_: MsgCreateCertificateResponse): MsgCreateCertificateResponseAmino {
     const obj: any = {};
@@ -710,9 +761,11 @@ export const MsgRevokeCertificate = {
     return obj;
   },
   fromAmino(object: MsgRevokeCertificateAmino): MsgRevokeCertificate {
-    return {
-      id: object?.id ? CertificateID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseMsgRevokeCertificate();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = CertificateID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
     const obj: any = {};
@@ -785,7 +838,8 @@ export const MsgRevokeCertificateResponse = {
     return obj;
   },
   fromAmino(_: MsgRevokeCertificateResponseAmino): MsgRevokeCertificateResponse {
-    return {};
+    const message = createBaseMsgRevokeCertificateResponse();
+    return message;
   },
   toAmino(_: MsgRevokeCertificateResponse): MsgRevokeCertificateResponseAmino {
     const obj: any = {};

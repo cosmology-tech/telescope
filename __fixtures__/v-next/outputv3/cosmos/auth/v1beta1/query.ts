@@ -11,7 +11,7 @@ export const protobufPackage = "cosmos.auth.v1beta1";
  */
 export interface QueryAccountsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAccountsRequestProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountsRequest";
@@ -26,17 +26,13 @@ export interface QueryAccountsRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryAccountsRequestAminoMsg {
-  type: "cosmos-sdk/QueryAccountsRequest";
-  value: QueryAccountsRequestAmino;
-}
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
  * 
  * Since: cosmos-sdk 0.43
  */
 export interface QueryAccountsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -47,7 +43,7 @@ export interface QueryAccountsResponse {
   /** accounts are the existing accounts */
   accounts: (BaseAccount | Any)[] | Any[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAccountsResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountsResponse";
@@ -63,13 +59,9 @@ export type QueryAccountsResponseEncoded = Omit<QueryAccountsResponse, "accounts
  */
 export interface QueryAccountsResponseAmino {
   /** accounts are the existing accounts */
-  accounts: AnyAmino[];
+  accounts?: AnyAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryAccountsResponseAminoMsg {
-  type: "cosmos-sdk/QueryAccountsResponse";
-  value: QueryAccountsResponseAmino;
 }
 /**
  * QueryAccountsResponse is the response type for the Query/Accounts RPC method.
@@ -78,7 +70,7 @@ export interface QueryAccountsResponseAminoMsg {
  */
 export interface QueryAccountsResponseSDKType {
   accounts: (BaseAccountSDKType | AnySDKType)[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequest {
@@ -92,11 +84,7 @@ export interface QueryAccountRequestProtoMsg {
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequestAmino {
   /** address defines the address to query for. */
-  address: string;
-}
-export interface QueryAccountRequestAminoMsg {
-  type: "cosmos-sdk/QueryAccountRequest";
-  value: QueryAccountRequestAmino;
+  address?: string;
 }
 /** QueryAccountRequest is the request type for the Query/Account RPC method. */
 export interface QueryAccountRequestSDKType {
@@ -110,10 +98,6 @@ export interface QueryModuleAccountsRequestProtoMsg {
 }
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequestAmino {}
-export interface QueryModuleAccountsRequestAminoMsg {
-  type: "cosmos-sdk/QueryModuleAccountsRequest";
-  value: QueryModuleAccountsRequestAmino;
-}
 /** QueryModuleAccountsRequest is the request type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsRequestSDKType {}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
@@ -130,10 +114,6 @@ export interface QueryParamsResponseAmino {
   /** params defines the parameters of the module. */
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
-}
 /** QueryParamsResponse is the response type for the Query/Params RPC method. */
 export interface QueryParamsResponseSDKType {
   params: ParamsSDKType;
@@ -141,7 +121,7 @@ export interface QueryParamsResponseSDKType {
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponse {
   /** account defines the account of the corresponding address. */
-  account: BaseAccount | Any | undefined;
+  account?: BaseAccount | Any | undefined;
 }
 export interface QueryAccountResponseProtoMsg {
   typeUrl: "/cosmos.auth.v1beta1.QueryAccountResponse";
@@ -155,13 +135,9 @@ export interface QueryAccountResponseAmino {
   /** account defines the account of the corresponding address. */
   account?: AnyAmino;
 }
-export interface QueryAccountResponseAminoMsg {
-  type: "cosmos-sdk/QueryAccountResponse";
-  value: QueryAccountResponseAmino;
-}
 /** QueryAccountResponse is the response type for the Query/Account RPC method. */
 export interface QueryAccountResponseSDKType {
-  account: BaseAccountSDKType | AnySDKType | undefined;
+  account?: BaseAccountSDKType | AnySDKType | undefined;
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -171,10 +147,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
@@ -190,11 +162,7 @@ export type QueryModuleAccountsResponseEncoded = Omit<QueryModuleAccountsRespons
 };
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseAmino {
-  accounts: AnyAmino[];
-}
-export interface QueryModuleAccountsResponseAminoMsg {
-  type: "cosmos-sdk/QueryModuleAccountsResponse";
-  value: QueryModuleAccountsResponseAmino;
+  accounts?: AnyAmino[];
 }
 /** QueryModuleAccountsResponse is the response type for the Query/ModuleAccounts RPC method. */
 export interface QueryModuleAccountsResponseSDKType {
@@ -208,10 +176,6 @@ export interface Bech32PrefixRequestProtoMsg {
 }
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequestAmino {}
-export interface Bech32PrefixRequestAminoMsg {
-  type: "cosmos-sdk/Bech32PrefixRequest";
-  value: Bech32PrefixRequestAmino;
-}
 /** Bech32PrefixRequest is the request type for Bech32Prefix rpc method */
 export interface Bech32PrefixRequestSDKType {}
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
@@ -224,11 +188,7 @@ export interface Bech32PrefixResponseProtoMsg {
 }
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponseAmino {
-  bech32_prefix: string;
-}
-export interface Bech32PrefixResponseAminoMsg {
-  type: "cosmos-sdk/Bech32PrefixResponse";
-  value: Bech32PrefixResponseAmino;
+  bech32_prefix?: string;
 }
 /** Bech32PrefixResponse is the response type for Bech32Prefix rpc method */
 export interface Bech32PrefixResponseSDKType {
@@ -244,11 +204,7 @@ export interface AddressBytesToStringRequestProtoMsg {
 }
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestAmino {
-  address_bytes: Uint8Array;
-}
-export interface AddressBytesToStringRequestAminoMsg {
-  type: "cosmos-sdk/AddressBytesToStringRequest";
-  value: AddressBytesToStringRequestAmino;
+  address_bytes?: string;
 }
 /** AddressBytesToStringRequest is the request type for AddressString rpc method */
 export interface AddressBytesToStringRequestSDKType {
@@ -264,11 +220,7 @@ export interface AddressBytesToStringResponseProtoMsg {
 }
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponseAmino {
-  address_string: string;
-}
-export interface AddressBytesToStringResponseAminoMsg {
-  type: "cosmos-sdk/AddressBytesToStringResponse";
-  value: AddressBytesToStringResponseAmino;
+  address_string?: string;
 }
 /** AddressBytesToStringResponse is the response type for AddressString rpc method */
 export interface AddressBytesToStringResponseSDKType {
@@ -284,11 +236,7 @@ export interface AddressStringToBytesRequestProtoMsg {
 }
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequestAmino {
-  address_string: string;
-}
-export interface AddressStringToBytesRequestAminoMsg {
-  type: "cosmos-sdk/AddressStringToBytesRequest";
-  value: AddressStringToBytesRequestAmino;
+  address_string?: string;
 }
 /** AddressStringToBytesRequest is the request type for AccountBytes rpc method */
 export interface AddressStringToBytesRequestSDKType {
@@ -304,11 +252,7 @@ export interface AddressStringToBytesResponseProtoMsg {
 }
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponseAmino {
-  address_bytes: Uint8Array;
-}
-export interface AddressStringToBytesResponseAminoMsg {
-  type: "cosmos-sdk/AddressStringToBytesResponse";
-  value: AddressStringToBytesResponseAmino;
+  address_bytes?: string;
 }
 /** AddressStringToBytesResponse is the response type for AddressBytes rpc method */
 export interface AddressStringToBytesResponseSDKType {
@@ -316,7 +260,7 @@ export interface AddressStringToBytesResponseSDKType {
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsRequest = {
@@ -328,7 +272,7 @@ export const QueryAccountsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsRequest();
@@ -336,7 +280,7 @@ export const QueryAccountsRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -373,26 +317,19 @@ export const QueryAccountsRequest = {
     return obj;
   },
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
+  toAmino(message: QueryAccountsRequest, useInterfaces: boolean = true): QueryAccountsRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
-    return QueryAccountsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAccountsRequest): QueryAccountsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAccountsRequest",
-      value: QueryAccountsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
-    return QueryAccountsRequest.decode(message.value);
+  fromProtoMsg(message: QueryAccountsRequestProtoMsg, useInterfaces: boolean = true): QueryAccountsRequest {
+    return QueryAccountsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsRequest): Uint8Array {
     return QueryAccountsRequest.encode(message).finish();
@@ -407,7 +344,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsResponse = {
@@ -422,7 +359,7 @@ export const QueryAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountsResponse();
@@ -430,10 +367,10 @@ export const QueryAccountsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push((AccountI_InterfaceDecoder(reader) as Any));
+          message.accounts.push(useInterfaces ? (AccountI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -483,32 +420,25 @@ export const QueryAccountsResponse = {
     return obj;
   },
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => AccountI_FromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsResponse();
+    message.accounts = object.accounts?.map(e => AccountI_FromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
+  toAmino(message: QueryAccountsResponse, useInterfaces: boolean = true): QueryAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any)) : undefined);
+      obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
       obj.accounts = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
-    return QueryAccountsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAccountsResponse): QueryAccountsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAccountsResponse",
-      value: QueryAccountsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
-    return QueryAccountsResponse.decode(message.value);
+  fromProtoMsg(message: QueryAccountsResponseProtoMsg, useInterfaces: boolean = true): QueryAccountsResponse {
+    return QueryAccountsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountsResponse): Uint8Array {
     return QueryAccountsResponse.encode(message).finish();
@@ -534,7 +464,7 @@ export const QueryAccountRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountRequest();
@@ -577,26 +507,19 @@ export const QueryAccountRequest = {
     return obj;
   },
   fromAmino(object: QueryAccountRequestAmino): QueryAccountRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryAccountRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
-  toAmino(message: QueryAccountRequest): QueryAccountRequestAmino {
+  toAmino(message: QueryAccountRequest, useInterfaces: boolean = true): QueryAccountRequestAmino {
     const obj: any = {};
     obj.address = omitDefault(message.address);
     return obj;
   },
-  fromAminoMsg(object: QueryAccountRequestAminoMsg): QueryAccountRequest {
-    return QueryAccountRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAccountRequest): QueryAccountRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAccountRequest",
-      value: QueryAccountRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAccountRequestProtoMsg): QueryAccountRequest {
-    return QueryAccountRequest.decode(message.value);
+  fromProtoMsg(message: QueryAccountRequestProtoMsg, useInterfaces: boolean = true): QueryAccountRequest {
+    return QueryAccountRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountRequest): Uint8Array {
     return QueryAccountRequest.encode(message).finish();
@@ -617,7 +540,7 @@ export const QueryModuleAccountsRequest = {
   encode(_: QueryModuleAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsRequest();
@@ -651,23 +574,15 @@ export const QueryModuleAccountsRequest = {
     return obj;
   },
   fromAmino(_: QueryModuleAccountsRequestAmino): QueryModuleAccountsRequest {
-    return {};
+    const message = createBaseQueryModuleAccountsRequest();
+    return message;
   },
-  toAmino(_: QueryModuleAccountsRequest): QueryModuleAccountsRequestAmino {
+  toAmino(_: QueryModuleAccountsRequest, useInterfaces: boolean = true): QueryModuleAccountsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryModuleAccountsRequestAminoMsg): QueryModuleAccountsRequest {
-    return QueryModuleAccountsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryModuleAccountsRequest): QueryModuleAccountsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryModuleAccountsRequest",
-      value: QueryModuleAccountsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryModuleAccountsRequestProtoMsg): QueryModuleAccountsRequest {
-    return QueryModuleAccountsRequest.decode(message.value);
+  fromProtoMsg(message: QueryModuleAccountsRequestProtoMsg, useInterfaces: boolean = true): QueryModuleAccountsRequest {
+    return QueryModuleAccountsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountsRequest): Uint8Array {
     return QueryModuleAccountsRequest.encode(message).finish();
@@ -693,7 +608,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -701,7 +616,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -738,26 +653,19 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsResponse",
-      value: QueryParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();
@@ -771,7 +679,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryAccountResponse(): QueryAccountResponse {
   return {
-    account: Any.fromPartial({})
+    account: undefined
   };
 }
 export const QueryAccountResponse = {
@@ -783,7 +691,7 @@ export const QueryAccountResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAccountResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAccountResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAccountResponse();
@@ -791,7 +699,7 @@ export const QueryAccountResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.account = (AccountI_InterfaceDecoder(reader) as Any);
+          message.account = useInterfaces ? (AccountI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -828,26 +736,19 @@ export const QueryAccountResponse = {
     return obj;
   },
   fromAmino(object: QueryAccountResponseAmino): QueryAccountResponse {
-    return {
-      account: object?.account ? AccountI_FromAmino(object.account) : undefined
-    };
+    const message = createBaseQueryAccountResponse();
+    if (object.account !== undefined && object.account !== null) {
+      message.account = AccountI_FromAmino(object.account);
+    }
+    return message;
   },
-  toAmino(message: QueryAccountResponse): QueryAccountResponseAmino {
+  toAmino(message: QueryAccountResponse, useInterfaces: boolean = true): QueryAccountResponseAmino {
     const obj: any = {};
-    obj.account = message.account ? AccountI_ToAmino((message.account as Any)) : undefined;
+    obj.account = message.account ? AccountI_ToAmino((message.account as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAccountResponseAminoMsg): QueryAccountResponse {
-    return QueryAccountResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryAccountResponse): QueryAccountResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryAccountResponse",
-      value: QueryAccountResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryAccountResponseProtoMsg): QueryAccountResponse {
-    return QueryAccountResponse.decode(message.value);
+  fromProtoMsg(message: QueryAccountResponseProtoMsg, useInterfaces: boolean = true): QueryAccountResponse {
+    return QueryAccountResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAccountResponse): Uint8Array {
     return QueryAccountResponse.encode(message).finish();
@@ -868,7 +769,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -902,23 +803,15 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryParamsRequest",
-      value: QueryParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -944,7 +837,7 @@ export const QueryModuleAccountsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryModuleAccountsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryModuleAccountsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryModuleAccountsResponse();
@@ -952,7 +845,7 @@ export const QueryModuleAccountsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.accounts.push((ModuleAccountI_InterfaceDecoder(reader) as Any));
+          message.accounts.push(useInterfaces ? (ModuleAccountI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -995,30 +888,21 @@ export const QueryModuleAccountsResponse = {
     return obj;
   },
   fromAmino(object: QueryModuleAccountsResponseAmino): QueryModuleAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => ModuleAccountI_FromAmino(e)) : []
-    };
+    const message = createBaseQueryModuleAccountsResponse();
+    message.accounts = object.accounts?.map(e => ModuleAccountI_FromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAmino {
+  toAmino(message: QueryModuleAccountsResponse, useInterfaces: boolean = true): QueryModuleAccountsResponseAmino {
     const obj: any = {};
     if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any)) : undefined);
+      obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
       obj.accounts = [];
     }
     return obj;
   },
-  fromAminoMsg(object: QueryModuleAccountsResponseAminoMsg): QueryModuleAccountsResponse {
-    return QueryModuleAccountsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: QueryModuleAccountsResponse): QueryModuleAccountsResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/QueryModuleAccountsResponse",
-      value: QueryModuleAccountsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: QueryModuleAccountsResponseProtoMsg): QueryModuleAccountsResponse {
-    return QueryModuleAccountsResponse.decode(message.value);
+  fromProtoMsg(message: QueryModuleAccountsResponseProtoMsg, useInterfaces: boolean = true): QueryModuleAccountsResponse {
+    return QueryModuleAccountsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryModuleAccountsResponse): Uint8Array {
     return QueryModuleAccountsResponse.encode(message).finish();
@@ -1039,7 +923,7 @@ export const Bech32PrefixRequest = {
   encode(_: Bech32PrefixRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Bech32PrefixRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Bech32PrefixRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixRequest();
@@ -1073,23 +957,15 @@ export const Bech32PrefixRequest = {
     return obj;
   },
   fromAmino(_: Bech32PrefixRequestAmino): Bech32PrefixRequest {
-    return {};
+    const message = createBaseBech32PrefixRequest();
+    return message;
   },
-  toAmino(_: Bech32PrefixRequest): Bech32PrefixRequestAmino {
+  toAmino(_: Bech32PrefixRequest, useInterfaces: boolean = true): Bech32PrefixRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: Bech32PrefixRequestAminoMsg): Bech32PrefixRequest {
-    return Bech32PrefixRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: Bech32PrefixRequest): Bech32PrefixRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/Bech32PrefixRequest",
-      value: Bech32PrefixRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Bech32PrefixRequestProtoMsg): Bech32PrefixRequest {
-    return Bech32PrefixRequest.decode(message.value);
+  fromProtoMsg(message: Bech32PrefixRequestProtoMsg, useInterfaces: boolean = true): Bech32PrefixRequest {
+    return Bech32PrefixRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Bech32PrefixRequest): Uint8Array {
     return Bech32PrefixRequest.encode(message).finish();
@@ -1115,7 +991,7 @@ export const Bech32PrefixResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Bech32PrefixResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Bech32PrefixResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBech32PrefixResponse();
@@ -1158,26 +1034,19 @@ export const Bech32PrefixResponse = {
     return obj;
   },
   fromAmino(object: Bech32PrefixResponseAmino): Bech32PrefixResponse {
-    return {
-      bech32Prefix: object.bech32_prefix
-    };
+    const message = createBaseBech32PrefixResponse();
+    if (object.bech32_prefix !== undefined && object.bech32_prefix !== null) {
+      message.bech32Prefix = object.bech32_prefix;
+    }
+    return message;
   },
-  toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseAmino {
+  toAmino(message: Bech32PrefixResponse, useInterfaces: boolean = true): Bech32PrefixResponseAmino {
     const obj: any = {};
     obj.bech32_prefix = omitDefault(message.bech32Prefix);
     return obj;
   },
-  fromAminoMsg(object: Bech32PrefixResponseAminoMsg): Bech32PrefixResponse {
-    return Bech32PrefixResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: Bech32PrefixResponse): Bech32PrefixResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/Bech32PrefixResponse",
-      value: Bech32PrefixResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: Bech32PrefixResponseProtoMsg): Bech32PrefixResponse {
-    return Bech32PrefixResponse.decode(message.value);
+  fromProtoMsg(message: Bech32PrefixResponseProtoMsg, useInterfaces: boolean = true): Bech32PrefixResponse {
+    return Bech32PrefixResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Bech32PrefixResponse): Uint8Array {
     return Bech32PrefixResponse.encode(message).finish();
@@ -1203,7 +1072,7 @@ export const AddressBytesToStringRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AddressBytesToStringRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressBytesToStringRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringRequest();
@@ -1246,26 +1115,19 @@ export const AddressBytesToStringRequest = {
     return obj;
   },
   fromAmino(object: AddressBytesToStringRequestAmino): AddressBytesToStringRequest {
-    return {
-      addressBytes: object.address_bytes
-    };
+    const message = createBaseAddressBytesToStringRequest();
+    if (object.address_bytes !== undefined && object.address_bytes !== null) {
+      message.addressBytes = bytesFromBase64(object.address_bytes);
+    }
+    return message;
   },
-  toAmino(message: AddressBytesToStringRequest): AddressBytesToStringRequestAmino {
+  toAmino(message: AddressBytesToStringRequest, useInterfaces: boolean = true): AddressBytesToStringRequestAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
-  fromAminoMsg(object: AddressBytesToStringRequestAminoMsg): AddressBytesToStringRequest {
-    return AddressBytesToStringRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AddressBytesToStringRequest): AddressBytesToStringRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/AddressBytesToStringRequest",
-      value: AddressBytesToStringRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AddressBytesToStringRequestProtoMsg): AddressBytesToStringRequest {
-    return AddressBytesToStringRequest.decode(message.value);
+  fromProtoMsg(message: AddressBytesToStringRequestProtoMsg, useInterfaces: boolean = true): AddressBytesToStringRequest {
+    return AddressBytesToStringRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressBytesToStringRequest): Uint8Array {
     return AddressBytesToStringRequest.encode(message).finish();
@@ -1291,7 +1153,7 @@ export const AddressBytesToStringResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AddressBytesToStringResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressBytesToStringResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressBytesToStringResponse();
@@ -1334,26 +1196,19 @@ export const AddressBytesToStringResponse = {
     return obj;
   },
   fromAmino(object: AddressBytesToStringResponseAmino): AddressBytesToStringResponse {
-    return {
-      addressString: object.address_string
-    };
+    const message = createBaseAddressBytesToStringResponse();
+    if (object.address_string !== undefined && object.address_string !== null) {
+      message.addressString = object.address_string;
+    }
+    return message;
   },
-  toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseAmino {
+  toAmino(message: AddressBytesToStringResponse, useInterfaces: boolean = true): AddressBytesToStringResponseAmino {
     const obj: any = {};
     obj.address_string = omitDefault(message.addressString);
     return obj;
   },
-  fromAminoMsg(object: AddressBytesToStringResponseAminoMsg): AddressBytesToStringResponse {
-    return AddressBytesToStringResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AddressBytesToStringResponse): AddressBytesToStringResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/AddressBytesToStringResponse",
-      value: AddressBytesToStringResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AddressBytesToStringResponseProtoMsg): AddressBytesToStringResponse {
-    return AddressBytesToStringResponse.decode(message.value);
+  fromProtoMsg(message: AddressBytesToStringResponseProtoMsg, useInterfaces: boolean = true): AddressBytesToStringResponse {
+    return AddressBytesToStringResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressBytesToStringResponse): Uint8Array {
     return AddressBytesToStringResponse.encode(message).finish();
@@ -1379,7 +1234,7 @@ export const AddressStringToBytesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AddressStringToBytesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressStringToBytesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesRequest();
@@ -1422,26 +1277,19 @@ export const AddressStringToBytesRequest = {
     return obj;
   },
   fromAmino(object: AddressStringToBytesRequestAmino): AddressStringToBytesRequest {
-    return {
-      addressString: object.address_string
-    };
+    const message = createBaseAddressStringToBytesRequest();
+    if (object.address_string !== undefined && object.address_string !== null) {
+      message.addressString = object.address_string;
+    }
+    return message;
   },
-  toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestAmino {
+  toAmino(message: AddressStringToBytesRequest, useInterfaces: boolean = true): AddressStringToBytesRequestAmino {
     const obj: any = {};
     obj.address_string = omitDefault(message.addressString);
     return obj;
   },
-  fromAminoMsg(object: AddressStringToBytesRequestAminoMsg): AddressStringToBytesRequest {
-    return AddressStringToBytesRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: AddressStringToBytesRequest): AddressStringToBytesRequestAminoMsg {
-    return {
-      type: "cosmos-sdk/AddressStringToBytesRequest",
-      value: AddressStringToBytesRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AddressStringToBytesRequestProtoMsg): AddressStringToBytesRequest {
-    return AddressStringToBytesRequest.decode(message.value);
+  fromProtoMsg(message: AddressStringToBytesRequestProtoMsg, useInterfaces: boolean = true): AddressStringToBytesRequest {
+    return AddressStringToBytesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressStringToBytesRequest): Uint8Array {
     return AddressStringToBytesRequest.encode(message).finish();
@@ -1467,7 +1315,7 @@ export const AddressStringToBytesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AddressStringToBytesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AddressStringToBytesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAddressStringToBytesResponse();
@@ -1510,26 +1358,19 @@ export const AddressStringToBytesResponse = {
     return obj;
   },
   fromAmino(object: AddressStringToBytesResponseAmino): AddressStringToBytesResponse {
-    return {
-      addressBytes: object.address_bytes
-    };
+    const message = createBaseAddressStringToBytesResponse();
+    if (object.address_bytes !== undefined && object.address_bytes !== null) {
+      message.addressBytes = bytesFromBase64(object.address_bytes);
+    }
+    return message;
   },
-  toAmino(message: AddressStringToBytesResponse): AddressStringToBytesResponseAmino {
+  toAmino(message: AddressStringToBytesResponse, useInterfaces: boolean = true): AddressStringToBytesResponseAmino {
     const obj: any = {};
-    obj.address_bytes = message.addressBytes;
+    obj.address_bytes = message.addressBytes ? base64FromBytes(message.addressBytes) : undefined;
     return obj;
   },
-  fromAminoMsg(object: AddressStringToBytesResponseAminoMsg): AddressStringToBytesResponse {
-    return AddressStringToBytesResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: AddressStringToBytesResponse): AddressStringToBytesResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/AddressStringToBytesResponse",
-      value: AddressStringToBytesResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: AddressStringToBytesResponseProtoMsg): AddressStringToBytesResponse {
-    return AddressStringToBytesResponse.decode(message.value);
+  fromProtoMsg(message: AddressStringToBytesResponseProtoMsg, useInterfaces: boolean = true): AddressStringToBytesResponse {
+    return AddressStringToBytesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AddressStringToBytesResponse): Uint8Array {
     return AddressStringToBytesResponse.encode(message).finish();
@@ -1543,10 +1384,10 @@ export const AddressStringToBytesResponse = {
 };
 export const AccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array): BaseAccount | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/cosmos.auth.v1beta1.BaseAccount":
-      return BaseAccount.decode(data.value);
+      return BaseAccount.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -1562,23 +1403,23 @@ export const AccountI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const AccountI_ToAmino = (content: Any) => {
+export const AccountI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.auth.v1beta1.BaseAccount":
       return {
         type: "cosmos-sdk/BaseAccount",
-        value: BaseAccount.toAmino(BaseAccount.decode(content.value))
+        value: BaseAccount.toAmino(BaseAccount.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };
 export const ModuleAccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array): ModuleAccount | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/cosmos.auth.v1beta1.ModuleAccount":
-      return ModuleAccount.decode(data.value);
+      return ModuleAccount.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -1594,14 +1435,14 @@ export const ModuleAccountI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const ModuleAccountI_ToAmino = (content: Any) => {
+export const ModuleAccountI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/cosmos.auth.v1beta1.ModuleAccount":
       return {
         type: "cosmos-sdk/ModuleAccount",
-        value: ModuleAccount.toAmino(ModuleAccount.decode(content.value))
+        value: ModuleAccount.toAmino(ModuleAccount.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };

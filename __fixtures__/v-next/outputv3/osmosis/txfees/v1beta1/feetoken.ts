@@ -22,12 +22,8 @@ export interface FeeTokenProtoMsg {
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenAmino {
-  denom: string;
-  poolID: string;
-}
-export interface FeeTokenAminoMsg {
-  type: "osmosis/txfees/fee-token";
-  value: FeeTokenAmino;
+  denom?: string;
+  poolID?: string;
 }
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -57,7 +53,7 @@ export const FeeToken = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FeeToken {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FeeToken {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFeeToken();
@@ -110,28 +106,23 @@ export const FeeToken = {
     return obj;
   },
   fromAmino(object: FeeTokenAmino): FeeToken {
-    return {
-      denom: object.denom,
-      poolID: BigInt(object.poolID)
-    };
+    const message = createBaseFeeToken();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID);
+    }
+    return message;
   },
-  toAmino(message: FeeToken): FeeTokenAmino {
+  toAmino(message: FeeToken, useInterfaces: boolean = true): FeeTokenAmino {
     const obj: any = {};
     obj.denom = omitDefault(message.denom);
     obj.poolID = omitDefault(message.poolID);
     return obj;
   },
-  fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {
-    return FeeToken.fromAmino(object.value);
-  },
-  toAminoMsg(message: FeeToken): FeeTokenAminoMsg {
-    return {
-      type: "osmosis/txfees/fee-token",
-      value: FeeToken.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: FeeTokenProtoMsg): FeeToken {
-    return FeeToken.decode(message.value);
+  fromProtoMsg(message: FeeTokenProtoMsg, useInterfaces: boolean = true): FeeToken {
+    return FeeToken.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FeeToken): Uint8Array {
     return FeeToken.encode(message).finish();

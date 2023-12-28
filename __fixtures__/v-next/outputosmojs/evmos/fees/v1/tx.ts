@@ -19,6 +19,10 @@ export interface MsgRegisterDevFeeInfo {
    */
   nonces: bigint[];
 }
+export interface MsgRegisterDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: Uint8Array;
+}
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
   contract_address: string;
@@ -31,6 +35,10 @@ export interface MsgRegisterDevFeeInfoSDKType {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+export interface MsgRegisterDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
@@ -46,6 +54,10 @@ export interface MsgCancelDevFeeInfo {
   /** deployer bech32 address */
   deployerAddress: string;
 }
+export interface MsgCancelDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: Uint8Array;
+}
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
@@ -56,6 +68,10 @@ export interface MsgCancelDevFeeInfoSDKType {
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+export interface MsgCancelDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
 /**
@@ -70,6 +86,10 @@ export interface MsgUpdateDevFeeInfo {
   /** new withdraw bech32 address for receiving the transaction fees */
   withdrawAddress: string;
 }
+export interface MsgUpdateDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: Uint8Array;
+}
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
@@ -81,6 +101,10 @@ export interface MsgUpdateDevFeeInfoSDKType {
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+export interface MsgUpdateDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: Uint8Array;
+}
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
@@ -200,12 +224,18 @@ export const MsgRegisterDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseMsgRegisterDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    message.nonces = object.nonces?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
@@ -279,7 +309,8 @@ export const MsgRegisterDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgRegisterDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
     const obj: any = {};
@@ -375,10 +406,14 @@ export const MsgCancelDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address
-    };
+    const message = createBaseMsgCancelDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    return message;
   },
   toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
     const obj: any = {};
@@ -446,7 +481,8 @@ export const MsgCancelDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgCancelDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
     const obj: any = {};
@@ -555,11 +591,17 @@ export const MsgUpdateDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
+    const message = createBaseMsgUpdateDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
   },
   toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
     const obj: any = {};
@@ -628,7 +670,8 @@ export const MsgUpdateDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgUpdateDevFeeInfoResponse();
+    return message;
   },
   toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
     const obj: any = {};

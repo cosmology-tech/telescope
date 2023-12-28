@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -265,6 +265,10 @@ export interface ManagedService {
   /** ID of the project that produces and owns this service. */
   producerProjectId: string;
 }
+export interface ManagedServiceProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ManagedService";
+  value: Uint8Array;
+}
 /**
  * The full representation of a Service that is managed by
  * Google Service Management.
@@ -285,14 +289,18 @@ export interface OperationMetadata {
   /** Percentage of completion of this operation, ranging from 0 to 100. */
   progressPercentage: number;
   /** The start time of the operation. */
-  startTime: Date;
+  startTime?: Date;
+}
+export interface OperationMetadataProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.OperationMetadata";
+  value: Uint8Array;
 }
 /** The metadata associated with a long running operation resource. */
 export interface OperationMetadataSDKType {
   resource_names: string[];
   steps: OperationMetadata_StepSDKType[];
   progress_percentage: number;
-  start_time: Date;
+  start_time?: Date;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_Step {
@@ -300,6 +308,10 @@ export interface OperationMetadata_Step {
   description: string;
   /** The status code. */
   status: OperationMetadata_Status;
+}
+export interface OperationMetadata_StepProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Step";
+  value: Uint8Array;
 }
 /** Represents the status of one operation step. */
 export interface OperationMetadata_StepSDKType {
@@ -314,6 +326,10 @@ export interface Diagnostic {
   kind: Diagnostic_Kind;
   /** Message describing the error or warning. */
   message: string;
+}
+export interface DiagnosticProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Diagnostic";
+  value: Uint8Array;
 }
 /** Represents a diagnostic message (error or warning) */
 export interface DiagnosticSDKType {
@@ -338,6 +354,10 @@ export interface ConfigSource {
    */
   files: ConfigFile[];
 }
+export interface ConfigSourceProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigSource";
+  value: Uint8Array;
+}
 /**
  * Represents a source file which is used to generate the service configuration
  * defined by `google.api.Service`.
@@ -355,6 +375,10 @@ export interface ConfigFile {
   /** The type of configuration file this represents. */
   fileType: ConfigFile_FileType;
 }
+export interface ConfigFileProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigFile";
+  value: Uint8Array;
+}
 /** Generic specification of a source configuration file */
 export interface ConfigFileSDKType {
   file_path: string;
@@ -368,6 +392,10 @@ export interface ConfigRef {
    * format: "services/{service name}/configs/{config id}".
    */
   name: string;
+}
+export interface ConfigRefProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ConfigRef";
+  value: Uint8Array;
 }
 /** Represents a service configuration with its name and id. */
 export interface ConfigRefSDKType {
@@ -388,6 +416,10 @@ export interface ChangeReport {
    * Example: visibility.rules[selector='LibraryService.CreateBook'].restriction
    */
   configChanges: ConfigChange[];
+}
+export interface ChangeReportProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.ChangeReport";
+  value: Uint8Array;
 }
 /**
  * Change report associated with a particular service configuration.
@@ -416,7 +448,7 @@ export interface Rollout {
    */
   rolloutId: string;
   /** Creation time of the rollout. Readonly. */
-  createTime: Date;
+  createTime?: Date;
   /** The user who created the Rollout. Readonly. */
   createdBy: string;
   /**
@@ -438,6 +470,10 @@ export interface Rollout {
   /** The name of the service associated with this Rollout. */
   serviceName: string;
 }
+export interface RolloutProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.Rollout";
+  value: Uint8Array;
+}
 /**
  * A rollout resource that defines how service configuration versions are pushed
  * to control plane systems. Typically, you create a new version of the
@@ -445,7 +481,7 @@ export interface Rollout {
  */
 export interface RolloutSDKType {
   rollout_id: string;
-  create_time: Date;
+  create_time?: Date;
   created_by: string;
   status: Rollout_RolloutStatus;
   traffic_percent_strategy?: Rollout_TrafficPercentStrategySDKType;
@@ -455,6 +491,10 @@ export interface RolloutSDKType {
 export interface Rollout_TrafficPercentStrategy_PercentagesEntry {
   key: string;
   value: number;
+}
+export interface Rollout_TrafficPercentStrategy_PercentagesEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface Rollout_TrafficPercentStrategy_PercentagesEntrySDKType {
   key: string;
@@ -502,6 +542,10 @@ export interface Rollout_TrafficPercentStrategy {
     [key: string]: number;
   };
 }
+export interface Rollout_TrafficPercentStrategyProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.TrafficPercentStrategy";
+  value: Uint8Array;
+}
 /**
  * Strategy that specifies how clients of Google Service Controller want to
  * send traffic to use different config versions. This is generally
@@ -544,6 +588,10 @@ export interface Rollout_TrafficPercentStrategySDKType {
  * used by the system generated rollout to delete a service.
  */
 export interface Rollout_DeleteServiceStrategy {}
+export interface Rollout_DeleteServiceStrategyProtoMsg {
+  typeUrl: "/google.api.servicemanagement.v1.DeleteServiceStrategy";
+  value: Uint8Array;
+}
 /**
  * Strategy used to delete a service. This strategy is a placeholder only
  * used by the system generated rollout to delete a service.
@@ -623,15 +671,19 @@ export const ManagedService = {
     return obj;
   },
   fromAmino(object: ManagedServiceAmino): ManagedService {
-    return {
-      serviceName: object.service_name,
-      producerProjectId: object.producer_project_id
-    };
+    const message = createBaseManagedService();
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    if (object.producer_project_id !== undefined && object.producer_project_id !== null) {
+      message.producerProjectId = object.producer_project_id;
+    }
+    return message;
   },
   toAmino(message: ManagedService): ManagedServiceAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
-    obj.producer_project_id = omitDefault(message.producerProjectId);
+    obj.service_name = message.serviceName;
+    obj.producer_project_id = message.producerProjectId;
     return obj;
   },
   fromAminoMsg(object: ManagedServiceAminoMsg): ManagedService {
@@ -655,7 +707,7 @@ function createBaseOperationMetadata(): OperationMetadata {
     resourceNames: [],
     steps: [],
     progressPercentage: 0,
-    startTime: new Date()
+    startTime: undefined
   };
 }
 export const OperationMetadata = {
@@ -766,12 +818,16 @@ export const OperationMetadata = {
     return obj;
   },
   fromAmino(object: OperationMetadataAmino): OperationMetadata {
-    return {
-      resourceNames: Array.isArray(object?.resource_names) ? object.resource_names.map((e: any) => e) : [],
-      steps: Array.isArray(object?.steps) ? object.steps.map((e: any) => OperationMetadata_Step.fromAmino(e)) : [],
-      progressPercentage: object.progress_percentage,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
-    };
+    const message = createBaseOperationMetadata();
+    message.resourceNames = object.resource_names?.map(e => e) || [];
+    message.steps = object.steps?.map(e => OperationMetadata_Step.fromAmino(e)) || [];
+    if (object.progress_percentage !== undefined && object.progress_percentage !== null) {
+      message.progressPercentage = object.progress_percentage;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    return message;
   },
   toAmino(message: OperationMetadata): OperationMetadataAmino {
     const obj: any = {};
@@ -785,8 +841,8 @@ export const OperationMetadata = {
     } else {
       obj.steps = [];
     }
-    obj.progress_percentage = omitDefault(message.progressPercentage);
-    obj.start_time = message.startTime;
+    obj.progress_percentage = message.progressPercentage;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
   fromAminoMsg(object: OperationMetadataAminoMsg): OperationMetadata {
@@ -879,15 +935,19 @@ export const OperationMetadata_Step = {
     return obj;
   },
   fromAmino(object: OperationMetadata_StepAmino): OperationMetadata_Step {
-    return {
-      description: object.description,
-      status: isSet(object.status) ? operationMetadata_StatusFromJSON(object.status) : -1
-    };
+    const message = createBaseOperationMetadata_Step();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = operationMetadata_StatusFromJSON(object.status);
+    }
+    return message;
   },
   toAmino(message: OperationMetadata_Step): OperationMetadata_StepAmino {
     const obj: any = {};
-    obj.description = omitDefault(message.description);
-    obj.status = omitDefault(message.status);
+    obj.description = message.description;
+    obj.status = operationMetadata_StatusToJSON(message.status);
     return obj;
   },
   fromAminoMsg(object: OperationMetadata_StepAminoMsg): OperationMetadata_Step {
@@ -993,17 +1053,23 @@ export const Diagnostic = {
     return obj;
   },
   fromAmino(object: DiagnosticAmino): Diagnostic {
-    return {
-      location: object.location,
-      kind: isSet(object.kind) ? diagnostic_KindFromJSON(object.kind) : -1,
-      message: object.message
-    };
+    const message = createBaseDiagnostic();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = diagnostic_KindFromJSON(object.kind);
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    return message;
   },
   toAmino(message: Diagnostic): DiagnosticAmino {
     const obj: any = {};
-    obj.location = omitDefault(message.location);
-    obj.kind = omitDefault(message.kind);
-    obj.message = omitDefault(message.message);
+    obj.location = message.location;
+    obj.kind = diagnostic_KindToJSON(message.kind);
+    obj.message = message.message;
     return obj;
   },
   fromAminoMsg(object: DiagnosticAminoMsg): Diagnostic {
@@ -1104,14 +1170,16 @@ export const ConfigSource = {
     return obj;
   },
   fromAmino(object: ConfigSourceAmino): ConfigSource {
-    return {
-      id: object.id,
-      files: Array.isArray(object?.files) ? object.files.map((e: any) => ConfigFile.fromAmino(e)) : []
-    };
+    const message = createBaseConfigSource();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    message.files = object.files?.map(e => ConfigFile.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ConfigSource): ConfigSourceAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id;
     if (message.files) {
       obj.files = message.files.map(e => e ? ConfigFile.toAmino(e) : undefined);
     } else {
@@ -1222,17 +1290,23 @@ export const ConfigFile = {
     return obj;
   },
   fromAmino(object: ConfigFileAmino): ConfigFile {
-    return {
-      filePath: object.file_path,
-      fileContents: object.file_contents,
-      fileType: isSet(object.file_type) ? configFile_FileTypeFromJSON(object.file_type) : -1
-    };
+    const message = createBaseConfigFile();
+    if (object.file_path !== undefined && object.file_path !== null) {
+      message.filePath = object.file_path;
+    }
+    if (object.file_contents !== undefined && object.file_contents !== null) {
+      message.fileContents = bytesFromBase64(object.file_contents);
+    }
+    if (object.file_type !== undefined && object.file_type !== null) {
+      message.fileType = configFile_FileTypeFromJSON(object.file_type);
+    }
+    return message;
   },
   toAmino(message: ConfigFile): ConfigFileAmino {
     const obj: any = {};
-    obj.file_path = omitDefault(message.filePath);
-    obj.file_contents = message.fileContents;
-    obj.file_type = omitDefault(message.fileType);
+    obj.file_path = message.filePath;
+    obj.file_contents = message.fileContents ? base64FromBytes(message.fileContents) : undefined;
+    obj.file_type = configFile_FileTypeToJSON(message.fileType);
     return obj;
   },
   fromAminoMsg(object: ConfigFileAminoMsg): ConfigFile {
@@ -1312,13 +1386,15 @@ export const ConfigRef = {
     return obj;
   },
   fromAmino(object: ConfigRefAmino): ConfigRef {
-    return {
-      name: object.name
-    };
+    const message = createBaseConfigRef();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    return message;
   },
   toAmino(message: ConfigRef): ConfigRefAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     return obj;
   },
   fromAminoMsg(object: ConfigRefAminoMsg): ConfigRef {
@@ -1406,9 +1482,9 @@ export const ChangeReport = {
     return obj;
   },
   fromAmino(object: ChangeReportAmino): ChangeReport {
-    return {
-      configChanges: Array.isArray(object?.config_changes) ? object.config_changes.map((e: any) => ConfigChange.fromAmino(e)) : []
-    };
+    const message = createBaseChangeReport();
+    message.configChanges = object.config_changes?.map(e => ConfigChange.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ChangeReport): ChangeReportAmino {
     const obj: any = {};
@@ -1438,7 +1514,7 @@ export const ChangeReport = {
 function createBaseRollout(): Rollout {
   return {
     rolloutId: "",
-    createTime: new Date(),
+    createTime: undefined,
     createdBy: "",
     status: 0,
     trafficPercentStrategy: undefined,
@@ -1574,25 +1650,39 @@ export const Rollout = {
     return obj;
   },
   fromAmino(object: RolloutAmino): Rollout {
-    return {
-      rolloutId: object.rollout_id,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      createdBy: object.created_by,
-      status: isSet(object.status) ? rollout_RolloutStatusFromJSON(object.status) : -1,
-      trafficPercentStrategy: object?.traffic_percent_strategy ? Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy) : undefined,
-      deleteServiceStrategy: object?.delete_service_strategy ? Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy) : undefined,
-      serviceName: object.service_name
-    };
+    const message = createBaseRollout();
+    if (object.rollout_id !== undefined && object.rollout_id !== null) {
+      message.rolloutId = object.rollout_id;
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.created_by !== undefined && object.created_by !== null) {
+      message.createdBy = object.created_by;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = rollout_RolloutStatusFromJSON(object.status);
+    }
+    if (object.traffic_percent_strategy !== undefined && object.traffic_percent_strategy !== null) {
+      message.trafficPercentStrategy = Rollout_TrafficPercentStrategy.fromAmino(object.traffic_percent_strategy);
+    }
+    if (object.delete_service_strategy !== undefined && object.delete_service_strategy !== null) {
+      message.deleteServiceStrategy = Rollout_DeleteServiceStrategy.fromAmino(object.delete_service_strategy);
+    }
+    if (object.service_name !== undefined && object.service_name !== null) {
+      message.serviceName = object.service_name;
+    }
+    return message;
   },
   toAmino(message: Rollout): RolloutAmino {
     const obj: any = {};
-    obj.rollout_id = omitDefault(message.rolloutId);
-    obj.create_time = message.createTime;
-    obj.created_by = omitDefault(message.createdBy);
-    obj.status = omitDefault(message.status);
+    obj.rollout_id = message.rolloutId;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.created_by = message.createdBy;
+    obj.status = rollout_RolloutStatusToJSON(message.status);
     obj.traffic_percent_strategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toAmino(message.trafficPercentStrategy) : undefined;
     obj.delete_service_strategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toAmino(message.deleteServiceStrategy) : undefined;
-    obj.service_name = omitDefault(message.serviceName);
+    obj.service_name = message.serviceName;
     return obj;
   },
   fromAminoMsg(object: RolloutAminoMsg): Rollout {
@@ -1684,15 +1774,19 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     return obj;
   },
   fromAmino(object: Rollout_TrafficPercentStrategy_PercentagesEntryAmino): Rollout_TrafficPercentStrategy_PercentagesEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Rollout_TrafficPercentStrategy_PercentagesEntry): Rollout_TrafficPercentStrategy_PercentagesEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
   fromAminoMsg(object: Rollout_TrafficPercentStrategy_PercentagesEntryAminoMsg): Rollout_TrafficPercentStrategy_PercentagesEntry {
@@ -1804,14 +1898,16 @@ export const Rollout_TrafficPercentStrategy = {
     return obj;
   },
   fromAmino(object: Rollout_TrafficPercentStrategyAmino): Rollout_TrafficPercentStrategy {
-    return {
-      percentages: isObject(object.percentages) ? Object.entries(object.percentages).reduce<{
-        [key: string]: double;
-      }>((acc, [key, value]) => {
+    const message = createBaseRollout_TrafficPercentStrategy();
+    message.percentages = Object.entries(object.percentages ?? {}).reduce<{
+      [key: string]: double;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = double.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: Rollout_TrafficPercentStrategy): Rollout_TrafficPercentStrategyAmino {
     const obj: any = {};
@@ -1883,7 +1979,8 @@ export const Rollout_DeleteServiceStrategy = {
     return obj;
   },
   fromAmino(_: Rollout_DeleteServiceStrategyAmino): Rollout_DeleteServiceStrategy {
-    return {};
+    const message = createBaseRollout_DeleteServiceStrategy();
+    return message;
   },
   toAmino(_: Rollout_DeleteServiceStrategy): Rollout_DeleteServiceStrategyAmino {
     const obj: any = {};

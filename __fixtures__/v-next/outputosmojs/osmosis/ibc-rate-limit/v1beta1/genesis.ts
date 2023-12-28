@@ -7,6 +7,10 @@ export interface GenesisState {
   /** params are all the parameters of the module */
   params: Params;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the ibc-rate-limit module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -72,9 +76,11 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

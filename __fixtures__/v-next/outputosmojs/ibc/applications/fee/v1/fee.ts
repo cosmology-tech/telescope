@@ -11,6 +11,10 @@ export interface Fee {
   /** the packet timeout fee */
   timeoutFee: Coin[];
 }
+export interface FeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.Fee";
+  value: Uint8Array;
+}
 /** Fee defines the ICS29 receive, acknowledgement and timeout fees */
 export interface FeeSDKType {
   recv_fee: CoinSDKType[];
@@ -26,6 +30,10 @@ export interface PacketFee {
   /** optional list of relayers permitted to receive fees */
   relayers: string[];
 }
+export interface PacketFeeProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.PacketFee";
+  value: Uint8Array;
+}
 /** PacketFee contains ICS29 relayer fees, refund address and optional list of permitted relayers */
 export interface PacketFeeSDKType {
   fee: FeeSDKType;
@@ -37,6 +45,10 @@ export interface PacketFees {
   /** list of packet fees */
   packetFees: PacketFee[];
 }
+export interface PacketFeesProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.PacketFees";
+  value: Uint8Array;
+}
 /** PacketFees contains a list of type PacketFee */
 export interface PacketFeesSDKType {
   packet_fees: PacketFeeSDKType[];
@@ -45,6 +57,10 @@ export interface PacketFeesSDKType {
 export interface IdentifiedPacketFees {
   /** list of packet fees */
   packetFees: PacketFee[];
+}
+export interface IdentifiedPacketFeesProtoMsg {
+  typeUrl: "/ibc.applications.fee.v1.IdentifiedPacketFees";
+  value: Uint8Array;
 }
 /** IdentifiedPacketFees contains a list of type PacketFee and associated PacketId */
 export interface IdentifiedPacketFeesSDKType {
@@ -161,11 +177,11 @@ export const Fee = {
     return obj;
   },
   fromAmino(object: FeeAmino): Fee {
-    return {
-      recvFee: Array.isArray(object?.recv_fee) ? object.recv_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      ackFee: Array.isArray(object?.ack_fee) ? object.ack_fee.map((e: any) => Coin.fromAmino(e)) : [],
-      timeoutFee: Array.isArray(object?.timeout_fee) ? object.timeout_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseFee();
+    message.recvFee = object.recv_fee?.map(e => Coin.fromAmino(e)) || [];
+    message.ackFee = object.ack_fee?.map(e => Coin.fromAmino(e)) || [];
+    message.timeoutFee = object.timeout_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Fee): FeeAmino {
     const obj: any = {};
@@ -303,11 +319,15 @@ export const PacketFee = {
     return obj;
   },
   fromAmino(object: PacketFeeAmino): PacketFee {
-    return {
-      fee: object?.fee ? Fee.fromAmino(object.fee) : undefined,
-      refundAddress: object.refund_address,
-      relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => e) : []
-    };
+    const message = createBasePacketFee();
+    if (object.fee !== undefined && object.fee !== null) {
+      message.fee = Fee.fromAmino(object.fee);
+    }
+    if (object.refund_address !== undefined && object.refund_address !== null) {
+      message.refundAddress = object.refund_address;
+    }
+    message.relayers = object.relayers?.map(e => e) || [];
+    return message;
   },
   toAmino(message: PacketFee): PacketFeeAmino {
     const obj: any = {};
@@ -411,9 +431,9 @@ export const PacketFees = {
     return obj;
   },
   fromAmino(object: PacketFeesAmino): PacketFees {
-    return {
-      packetFees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromAmino(e)) : []
-    };
+    const message = createBasePacketFees();
+    message.packetFees = object.packet_fees?.map(e => PacketFee.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PacketFees): PacketFeesAmino {
     const obj: any = {};
@@ -515,9 +535,9 @@ export const IdentifiedPacketFees = {
     return obj;
   },
   fromAmino(object: IdentifiedPacketFeesAmino): IdentifiedPacketFees {
-    return {
-      packetFees: Array.isArray(object?.packet_fees) ? object.packet_fees.map((e: any) => PacketFee.fromAmino(e)) : []
-    };
+    const message = createBaseIdentifiedPacketFees();
+    message.packetFees = object.packet_fees?.map(e => PacketFee.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: IdentifiedPacketFees): IdentifiedPacketFeesAmino {
     const obj: any = {};

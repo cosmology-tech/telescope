@@ -10,6 +10,10 @@ export interface GenesisState {
   /** accounts are the accounts present at genesis. */
   accounts: Any[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.auth.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -97,10 +101,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.accounts = object.accounts?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

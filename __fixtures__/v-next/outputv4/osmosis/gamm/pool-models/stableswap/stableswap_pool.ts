@@ -13,6 +13,10 @@ export interface PoolParams {
   swapFee: string;
   exitFee: string;
 }
+export interface PoolParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams";
+  value: Uint8Array;
+}
 /**
  * PoolParams defined the parameters that will be managed by the pool
  * governance in the future. This params are not managed by the chain
@@ -48,6 +52,10 @@ export interface Pool {
   /** scaling_factor_controller is the address can adjust pool scaling factors */
   scalingFactorController: string;
 }
+export interface PoolProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool";
+  value: Uint8Array;
+}
 /** Pool is the stableswap Pool struct */
 export interface PoolSDKType {
   address: string;
@@ -68,10 +76,10 @@ function createBasePoolParams(): PoolParams {
 export const PoolParams = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.PoolParams",
   encode(message: PoolParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.swapFee !== "") {
+    if (message.swapFee !== undefined) {
       writer.uint32(10).string(Decimal.fromUserInput(message.swapFee, 18).atomics);
     }
-    if (message.exitFee !== "") {
+    if (message.exitFee !== undefined) {
       writer.uint32(18).string(Decimal.fromUserInput(message.exitFee, 18).atomics);
     }
     return writer;
@@ -133,10 +141,14 @@ export const PoolParams = {
     return obj;
   },
   fromAmino(object: PoolParamsAmino): PoolParams {
-    return {
-      swapFee: object.swap_fee,
-      exitFee: object.exit_fee
-    };
+    const message = createBasePoolParams();
+    if (object.swap_fee !== undefined && object.swap_fee !== null) {
+      message.swapFee = object.swap_fee;
+    }
+    if (object.exit_fee !== undefined && object.exit_fee !== null) {
+      message.exitFee = object.exit_fee;
+    }
+    return message;
   },
   toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
@@ -181,16 +193,16 @@ function createBasePool(): Pool {
 export const Pool = {
   typeUrl: "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool",
   encode(message: Pool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.id !== BigInt(0)) {
+    if (message.id !== undefined) {
       writer.uint32(16).uint64(message.id);
     }
     if (message.poolParams !== undefined) {
       PoolParams.encode(message.poolParams, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     if (message.totalShares !== undefined) {
@@ -204,7 +216,7 @@ export const Pool = {
       writer.uint64(v);
     }
     writer.ldelim();
-    if (message.scalingFactorController !== "") {
+    if (message.scalingFactorController !== undefined) {
       writer.uint32(66).string(message.scalingFactorController);
     }
     return writer;
@@ -349,16 +361,28 @@ export const Pool = {
     return obj;
   },
   fromAmino(object: PoolAmino): Pool {
-    return {
-      address: object.address,
-      id: BigInt(object.id),
-      poolParams: object?.pool_params ? PoolParams.fromAmino(object.pool_params) : undefined,
-      futurePoolGovernor: object.future_pool_governor,
-      totalShares: object?.total_shares ? Coin.fromAmino(object.total_shares) : undefined,
-      poolLiquidity: Array.isArray(object?.pool_liquidity) ? object.pool_liquidity.map((e: any) => Coin.fromAmino(e)) : [],
-      scalingFactors: Array.isArray(object?.scaling_factors) ? object.scaling_factors.map((e: any) => BigInt(e)) : [],
-      scalingFactorController: object.scaling_factor_controller
-    };
+    const message = createBasePool();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.pool_params !== undefined && object.pool_params !== null) {
+      message.poolParams = PoolParams.fromAmino(object.pool_params);
+    }
+    if (object.future_pool_governor !== undefined && object.future_pool_governor !== null) {
+      message.futurePoolGovernor = object.future_pool_governor;
+    }
+    if (object.total_shares !== undefined && object.total_shares !== null) {
+      message.totalShares = Coin.fromAmino(object.total_shares);
+    }
+    message.poolLiquidity = object.pool_liquidity?.map(e => Coin.fromAmino(e)) || [];
+    message.scalingFactors = object.scaling_factors?.map(e => BigInt(e)) || [];
+    if (object.scaling_factor_controller !== undefined && object.scaling_factor_controller !== null) {
+      message.scalingFactorController = object.scaling_factor_controller;
+    }
+    return message;
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};

@@ -148,16 +148,33 @@ export const decode = {
             args.field.options['(cosmos_proto.accepts_interface)']
 
         ) {
+            const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+            if(isGlobalRegistry){
+              return switchAnyTypeArrayUnwrap(
+                num,
+                prop,
+                name,
+              )
+            }
+
             const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
             const interfaceFnName = getInterfaceDecoderName(interfaceName)
 
-            return switchAnyTypeArray(
+            return args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? switchAnyTypeArrayUseInterfaces(
                 num,
                 prop,
-                interfaceFnName
+                name,
+                interfaceFnName,
+            ) : switchAnyTypeArray(
+              num,
+              prop,
+              name,
             );
         }
-        return switchProtoTypeArray(num,
+        return switchProtoTypeArray(
+            args,
+            num,
             prop,
             name
         );
@@ -173,8 +190,10 @@ export const baseTypes = {
           'prototypes.typingsFormat.customTypes.useCosmosSDKDec'
         );
         const isCosmosSDKDec =
-          args.field.options?.['(gogoproto.customtype)'] ==
-          'github.com/cosmos/cosmos-sdk/types.Dec';
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
 
         let valueExpression = t.callExpression(
             t.memberExpression(
@@ -364,31 +383,45 @@ export const baseTypes = {
                         t.identifier('uint32')
                     ),
                     []
-                )
+                ),
+                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                    t.identifier('useInterfaces'),
+                ] : []),
             ]
         )
     },
 
     anyType(args: DecodeMethod) {
-        // const { propName, origName } = getFieldNames(args.field);
-        // const typeMap = args.context.store.getTypeUrlMap(args.context.ref);
-        // console.log(JSON.stringify(typeMap, null, 2));
-        // console.log(JSON.stringify(args.field, null, 2));
+        const isGlobalRegistry = args.context.options.interfaces?.enabled && args.context.options.interfaces?.useGlobalDecoderRegistry;
+
+        if(isGlobalRegistry) {
+          return t.callExpression(
+            t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("unwrapAny")),
+            [
+                t.identifier('reader')
+            ]
+          );
+        }
+
         const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
         const interfaceFnName = getInterfaceDecoderName(interfaceName)
+        const asAny = t.tsAsExpression(
+          t.callExpression(
+              t.identifier(interfaceFnName),
+              [
+                  t.identifier('reader')
+              ]
+          ),
+          t.tsTypeReference(
+              t.identifier('Any')
+          )
+        );
 
-        return t.tsAsExpression(
-            t.callExpression(
-                t.identifier(interfaceFnName),
-                [
-                    t.identifier('reader')
-                ]
-            ),
-            t.tsTypeReference(
-                t.identifier('Any')
-            )
-        )
-
+        return args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            asAny,
+            baseTypes.protoType(args)
+        ) : asAny;
     },
 
     type(args: DecodeMethod) {
@@ -610,7 +643,12 @@ export const switchOnTagTakesArray = (num: number, prop: string, expr: t.Stateme
 };
 
 //    message.tokenInMaxs.push(Coin.decode(reader, reader.uint32()));
-export const switchProtoTypeArray = (num: number, prop: string, name: string) => {
+export const switchProtoTypeArray = (
+    args: DecodeMethod,
+    num: number,
+    prop: string,
+    name: string
+) => {
     return t.switchCase(
         t.numericLiteral(num),
         [
@@ -637,7 +675,10 @@ export const switchProtoTypeArray = (num: number, prop: string, name: string) =>
                                         t.identifier('uint32')
                                     ),
                                     []
-                                )
+                                ),
+                                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                                    t.identifier('useInterfaces'),
+                                ] : []),
                             ]
                         )
                     ]
@@ -648,38 +689,102 @@ export const switchProtoTypeArray = (num: number, prop: string, name: string) =>
     )
 };
 
-export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
-    return t.switchCase(
-        t.numericLiteral(num),
-        [
-            t.expressionStatement(
-                t.callExpression(
-                    t.memberExpression(
-                        t.memberExpression(
-                            t.identifier('message'),
-                            t.identifier(prop)
-                        ),
-                        t.identifier('push')
-                    ),
-                    [
-                        t.tsAsExpression(
-                            t.callExpression(
-                                t.identifier(name),
-                                [
-                                    t.identifier('reader')
-                                ]
-                            ),
-                            t.tsTypeReference(
-                                t.identifier('Any')
-                            )
-                        )
+export const switchAnyTypeArrayUnwrap = (num: number, prop: string, name: string) => {
+  return t.switchCase(
+      t.numericLiteral(num),
+      [
+          t.expressionStatement(
+              t.callExpression(
+                  t.memberExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      t.identifier('push')
+                  ),
+                  [
+                    t.callExpression(
+                      t.memberExpression(t.identifier("GlobalDecoderRegistry"), t.identifier("unwrapAny")),
+                      [
+                          t.identifier('reader')
+                      ]
+                    )
+                  ]
+              )
+          ),
+          t.breakStatement()
+      ]
+  )
+};
 
+export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
+  return t.switchCase(
+      t.numericLiteral(num),
+      [
+          t.expressionStatement(
+              t.callExpression(
+                  t.memberExpression(
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(prop)
+                      ),
+                      t.identifier('push')
+                  ),
+                  [
+                      t.tsAsExpression(
+                          t.callExpression(
+                              t.identifier(name),
+                              [
+                                  t.identifier('reader')
+                              ]
+                          ),
+                          t.tsTypeReference(
+                              t.identifier('Any')
+                          )
+                      )
+
+                  ]
+              )
+          ),
+          t.breakStatement()
+      ]
+  )
+};
+
+export const switchAnyTypeArrayUseInterfaces = (num: number, prop: string, typeName: string, interfaceName: string) => {
+    return switchArray(num, prop,
+        t.conditionalExpression(
+            t.identifier('useInterfaces'),
+            t.tsAsExpression(
+                t.callExpression(
+                    t.identifier(interfaceName),
+                    [
+                        t.identifier('reader')
                     ]
+                ),
+                t.tsTypeReference(
+                    t.identifier('Any')
                 )
             ),
-            t.breakStatement()
-        ]
-    )
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier(typeName),
+                    t.identifier('decode')
+                ),
+                [
+                    t.identifier('reader'),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('reader'),
+                            t.identifier('uint32')
+                        ),
+                        []
+                    ),
+                    t.identifier('useInterfaces'),
+                ]
+            )
+        )
+    );
 };
 
 // if ((tag & 7) === 2) {

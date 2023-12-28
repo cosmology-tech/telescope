@@ -1,6 +1,6 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -11,6 +11,10 @@ export interface Equivocation {
   time: Date;
   power: bigint;
   consensusAddress: string;
+}
+export interface EquivocationProtoMsg {
+  typeUrl: "/cosmos.evidence.v1beta1.Equivocation";
+  value: Uint8Array;
 }
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -122,19 +126,27 @@ export const Equivocation = {
     return obj;
   },
   fromAmino(object: EquivocationAmino): Equivocation {
-    return {
-      height: BigInt(object.height),
-      time: object?.time ? Timestamp.fromAmino(object.time) : undefined,
-      power: BigInt(object.power),
-      consensusAddress: object.consensus_address
-    };
+    const message = createBaseEquivocation();
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height);
+    }
+    if (object.time !== undefined && object.time !== null) {
+      message.time = fromTimestamp(Timestamp.fromAmino(object.time));
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power);
+    }
+    if (object.consensus_address !== undefined && object.consensus_address !== null) {
+      message.consensusAddress = object.consensus_address;
+    }
+    return message;
   },
   toAmino(message: Equivocation): EquivocationAmino {
     const obj: any = {};
-    obj.height = omitDefault(message.height);
-    obj.time = message.time;
-    obj.power = omitDefault(message.power);
-    obj.consensus_address = omitDefault(message.consensusAddress);
+    obj.height = message.height ? message.height.toString() : undefined;
+    obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
+    obj.power = message.power ? message.power.toString() : undefined;
+    obj.consensus_address = message.consensusAddress;
     return obj;
   },
   fromAminoMsg(object: EquivocationAminoMsg): Equivocation {

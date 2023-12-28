@@ -17,10 +17,6 @@ export interface ModuleProtoMsg {
  * with ORM data.
  */
 export interface ModuleAmino {}
-export interface ModuleAminoMsg {
-  type: "cosmos-sdk/Module";
-  value: ModuleAmino;
-}
 /**
  * Module defines the ORM module which adds providers to the app container for
  * module-scoped DB's. In the future it may provide gRPC services for interacting
@@ -36,7 +32,7 @@ export const Module = {
   encode(_: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Module {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Module {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseModule();
@@ -70,23 +66,15 @@ export const Module = {
     return obj;
   },
   fromAmino(_: ModuleAmino): Module {
-    return {};
+    const message = createBaseModule();
+    return message;
   },
-  toAmino(_: Module): ModuleAmino {
+  toAmino(_: Module, useInterfaces: boolean = true): ModuleAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: ModuleAminoMsg): Module {
-    return Module.fromAmino(object.value);
-  },
-  toAminoMsg(message: Module): ModuleAminoMsg {
-    return {
-      type: "cosmos-sdk/Module",
-      value: Module.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ModuleProtoMsg): Module {
-    return Module.decode(message.value);
+  fromProtoMsg(message: ModuleProtoMsg, useInterfaces: boolean = true): Module {
+    return Module.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Module): Uint8Array {
     return Module.encode(message).finish();

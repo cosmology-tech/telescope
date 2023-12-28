@@ -2,7 +2,7 @@ import { MetricDescriptor, MetricDescriptorAmino, MetricDescriptorSDKType } from
 import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -48,12 +48,8 @@ export interface LogMetric_LabelExtractorsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface LogMetric_LabelExtractorsEntryAmino {
-  key: string;
-  value: string;
-}
-export interface LogMetric_LabelExtractorsEntryAminoMsg {
-  type: string;
-  value: LogMetric_LabelExtractorsEntryAmino;
+  key?: string;
+  value?: string;
 }
 export interface LogMetric_LabelExtractorsEntrySDKType {
   key: string;
@@ -128,7 +124,7 @@ export interface LogMetric {
    * `metric_descriptor`, but existing labels cannot be modified except for
    * their description.
    */
-  metricDescriptor: MetricDescriptor;
+  metricDescriptor?: MetricDescriptor;
   /**
    * Optional. A `value_extractor` is required when using a distribution
    * logs-based metric to extract the values to record from a log entry.
@@ -175,19 +171,19 @@ export interface LogMetric {
    * using a DISTRIBUTION value type and it describes the bucket boundaries
    * used to create a histogram of the extracted values.
    */
-  bucketOptions: Distribution_BucketOptions;
+  bucketOptions?: Distribution_BucketOptions;
   /**
    * Output only. The creation timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  createTime: Date;
+  createTime?: Date;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  updateTime: Date;
+  updateTime?: Date;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
@@ -224,12 +220,12 @@ export interface LogMetricAmino {
    * `"projects/my-project/metrics/nginx%2Frequests"`, this field's value is
    * `"nginx/requests"`.
    */
-  name: string;
+  name?: string;
   /**
    * Optional. A description of this metric, which is used in documentation.
    * The maximum length of the description is 8000 characters.
    */
-  description: string;
+  description?: string;
   /**
    * Required. An [advanced logs
    * filter](https://cloud.google.com/logging/docs/view/advanced_filters) which
@@ -239,12 +235,12 @@ export interface LogMetricAmino {
    * 
    * The maximum length of the filter is 20000 characters.
    */
-  filter: string;
+  filter?: string;
   /**
    * Optional. If set to True, then this metric is disabled and it does not
    * generate any points.
    */
-  disabled: boolean;
+  disabled?: boolean;
   /**
    * Optional. The metric descriptor associated with the logs-based metric.
    * If unspecified, it uses a default metric descriptor with a DELTA metric
@@ -290,7 +286,7 @@ export interface LogMetricAmino {
    * 
    * Example: `REGEXP_EXTRACT(jsonPayload.request, ".*quantity=(\d+).*")`
    */
-  value_extractor: string;
+  value_extractor?: string;
   /**
    * Optional. A map from a label key string to an extractor expression which is
    * used to extract data from a log entry field and assign as the label value.
@@ -307,7 +303,7 @@ export interface LogMetricAmino {
    * Note that there are upper bounds on the maximum number of labels and the
    * number of active time series that are allowed in a project.
    */
-  label_extractors: {
+  label_extractors?: {
     [key: string]: string;
   };
   /**
@@ -321,23 +317,19 @@ export interface LogMetricAmino {
    * 
    * This field may not be present for older metrics.
    */
-  create_time?: Date;
+  create_time?: string;
   /**
    * Output only. The last update timestamp of the metric.
    * 
    * This field may not be present for older metrics.
    */
-  update_time?: Date;
+  update_time?: string;
   /**
    * Deprecated. The API version that created or updated this metric.
    * The v2 format is used by default and cannot be changed.
    */
   /** @deprecated */
-  version: LogMetric_ApiVersion;
-}
-export interface LogMetricAminoMsg {
-  type: "/google.logging.v2.LogMetric";
-  value: LogMetricAmino;
+  version?: LogMetric_ApiVersion;
 }
 /**
  * Describes a logs-based metric. The value of the metric is the number of log
@@ -353,14 +345,14 @@ export interface LogMetricSDKType {
   description: string;
   filter: string;
   disabled: boolean;
-  metric_descriptor: MetricDescriptorSDKType;
+  metric_descriptor?: MetricDescriptorSDKType;
   value_extractor: string;
   label_extractors: {
     [key: string]: string;
   };
-  bucket_options: Distribution_BucketOptionsSDKType;
-  create_time: Date;
-  update_time: Date;
+  bucket_options?: Distribution_BucketOptionsSDKType;
+  create_time?: Date;
+  update_time?: Date;
   /** @deprecated */
   version: LogMetric_ApiVersion;
 }
@@ -397,24 +389,20 @@ export interface ListLogMetricsRequestAmino {
    * 
    *     "projects/[PROJECT_ID]"
    */
-  parent: string;
+  parent?: string;
   /**
    * Optional. If present, then retrieve the next batch of results from the
    * preceding call to this method. `pageToken` must be the value of
    * `nextPageToken` from the previous response. The values of other method
    * parameters should be identical to those in the previous call.
    */
-  page_token: string;
+  page_token?: string;
   /**
    * Optional. The maximum number of results to return from this request.
    * Non-positive values are ignored. The presence of `nextPageToken` in the
    * response indicates that more results might be available.
    */
-  page_size: number;
-}
-export interface ListLogMetricsRequestAminoMsg {
-  type: "/google.logging.v2.ListLogMetricsRequest";
-  value: ListLogMetricsRequestAmino;
+  page_size?: number;
 }
 /** The parameters to ListLogMetrics. */
 export interface ListLogMetricsRequestSDKType {
@@ -440,17 +428,13 @@ export interface ListLogMetricsResponseProtoMsg {
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseAmino {
   /** A list of logs-based metrics. */
-  metrics: LogMetricAmino[];
+  metrics?: LogMetricAmino[];
   /**
    * If there might be more results than appear in this response, then
    * `nextPageToken` is included. To get the next set of results, call this
    * method again using the value of `nextPageToken` as `pageToken`.
    */
-  next_page_token: string;
-}
-export interface ListLogMetricsResponseAminoMsg {
-  type: "/google.logging.v2.ListLogMetricsResponse";
-  value: ListLogMetricsResponseAmino;
+  next_page_token?: string;
 }
 /** Result returned from ListLogMetrics. */
 export interface ListLogMetricsResponseSDKType {
@@ -477,11 +461,7 @@ export interface GetLogMetricRequestAmino {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metric_name: string;
-}
-export interface GetLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.GetLogMetricRequest";
-  value: GetLogMetricRequestAmino;
+  metric_name?: string;
 }
 /** The parameters to GetLogMetric. */
 export interface GetLogMetricRequestSDKType {
@@ -501,7 +481,7 @@ export interface CreateLogMetricRequest {
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 export interface CreateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.CreateLogMetricRequest";
@@ -516,21 +496,17 @@ export interface CreateLogMetricRequestAmino {
    * 
    * The new metric must be provided in the request.
    */
-  parent: string;
+  parent?: string;
   /**
    * Required. The new logs-based metric, which must not have an identifier that
    * already exists.
    */
   metric?: LogMetricAmino;
 }
-export interface CreateLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.CreateLogMetricRequest";
-  value: CreateLogMetricRequestAmino;
-}
 /** The parameters to CreateLogMetric. */
 export interface CreateLogMetricRequestSDKType {
   parent: string;
-  metric: LogMetricSDKType;
+  metric?: LogMetricSDKType;
 }
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequest {
@@ -545,7 +521,7 @@ export interface UpdateLogMetricRequest {
    */
   metricName: string;
   /** Required. The updated metric. */
-  metric: LogMetric;
+  metric?: LogMetric;
 }
 export interface UpdateLogMetricRequestProtoMsg {
   typeUrl: "/google.logging.v2.UpdateLogMetricRequest";
@@ -562,18 +538,14 @@ export interface UpdateLogMetricRequestAmino {
    * `name` field must be the same as `[METRIC_ID]` If the metric
    * does not exist in `[PROJECT_ID]`, then a new metric is created.
    */
-  metric_name: string;
+  metric_name?: string;
   /** Required. The updated metric. */
   metric?: LogMetricAmino;
-}
-export interface UpdateLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.UpdateLogMetricRequest";
-  value: UpdateLogMetricRequestAmino;
 }
 /** The parameters to UpdateLogMetric. */
 export interface UpdateLogMetricRequestSDKType {
   metric_name: string;
-  metric: LogMetricSDKType;
+  metric?: LogMetricSDKType;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequest {
@@ -595,11 +567,7 @@ export interface DeleteLogMetricRequestAmino {
    * 
    *     "projects/[PROJECT_ID]/metrics/[METRIC_ID]"
    */
-  metric_name: string;
-}
-export interface DeleteLogMetricRequestAminoMsg {
-  type: "/google.logging.v2.DeleteLogMetricRequest";
-  value: DeleteLogMetricRequestAmino;
+  metric_name?: string;
 }
 /** The parameters to DeleteLogMetric. */
 export interface DeleteLogMetricRequestSDKType {
@@ -621,7 +589,7 @@ export const LogMetric_LabelExtractorsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogMetric_LabelExtractorsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric_LabelExtractorsEntry();
@@ -672,22 +640,23 @@ export const LogMetric_LabelExtractorsEntry = {
     return obj;
   },
   fromAmino(object: LogMetric_LabelExtractorsEntryAmino): LogMetric_LabelExtractorsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseLogMetric_LabelExtractorsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: LogMetric_LabelExtractorsEntry): LogMetric_LabelExtractorsEntryAmino {
+  toAmino(message: LogMetric_LabelExtractorsEntry, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key;
+    obj.value = message.value;
     return obj;
   },
-  fromAminoMsg(object: LogMetric_LabelExtractorsEntryAminoMsg): LogMetric_LabelExtractorsEntry {
-    return LogMetric_LabelExtractorsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg): LogMetric_LabelExtractorsEntry {
-    return LogMetric_LabelExtractorsEntry.decode(message.value);
+  fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntry {
+    return LogMetric_LabelExtractorsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogMetric_LabelExtractorsEntry): Uint8Array {
     return LogMetric_LabelExtractorsEntry.encode(message).finish();
@@ -699,12 +668,12 @@ function createBaseLogMetric(): LogMetric {
     description: "",
     filter: "",
     disabled: false,
-    metricDescriptor: MetricDescriptor.fromPartial({}),
+    metricDescriptor: undefined,
     valueExtractor: "",
     labelExtractors: {},
-    bucketOptions: Distribution_BucketOptions.fromPartial({}),
-    createTime: new Date(),
-    updateTime: new Date(),
+    bucketOptions: undefined,
+    createTime: undefined,
+    updateTime: undefined,
     version: 0
   };
 }
@@ -749,7 +718,7 @@ export const LogMetric = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogMetric {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogMetric {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogMetric();
@@ -769,7 +738,7 @@ export const LogMetric = {
           message.disabled = reader.bool();
           break;
         case 5:
-          message.metricDescriptor = MetricDescriptor.decode(reader, reader.uint32());
+          message.metricDescriptor = MetricDescriptor.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.valueExtractor = reader.string();
@@ -781,7 +750,7 @@ export const LogMetric = {
           }
           break;
         case 8:
-          message.bucketOptions = Distribution_BucketOptions.decode(reader, reader.uint32());
+          message.bucketOptions = Distribution_BucketOptions.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 9:
           message.createTime = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
@@ -906,50 +875,69 @@ export const LogMetric = {
     return obj;
   },
   fromAmino(object: LogMetricAmino): LogMetric {
-    return {
-      name: object.name,
-      description: object.description,
-      filter: object.filter,
-      disabled: object.disabled,
-      metricDescriptor: object?.metric_descriptor ? MetricDescriptor.fromAmino(object.metric_descriptor) : undefined,
-      valueExtractor: object.value_extractor,
-      labelExtractors: isObject(object.label_extractors) ? Object.entries(object.label_extractors).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseLogMetric();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = object.filter;
+    }
+    if (object.disabled !== undefined && object.disabled !== null) {
+      message.disabled = object.disabled;
+    }
+    if (object.metric_descriptor !== undefined && object.metric_descriptor !== null) {
+      message.metricDescriptor = MetricDescriptor.fromAmino(object.metric_descriptor);
+    }
+    if (object.value_extractor !== undefined && object.value_extractor !== null) {
+      message.valueExtractor = object.value_extractor;
+    }
+    message.labelExtractors = Object.entries(object.label_extractors ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {},
-      bucketOptions: object?.bucket_options ? Distribution_BucketOptions.fromAmino(object.bucket_options) : undefined,
-      createTime: object?.create_time ? Timestamp.fromAmino(object.create_time) : undefined,
-      updateTime: object?.update_time ? Timestamp.fromAmino(object.update_time) : undefined,
-      version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
-    };
+      }
+      return acc;
+    }, {});
+    if (object.bucket_options !== undefined && object.bucket_options !== null) {
+      message.bucketOptions = Distribution_BucketOptions.fromAmino(object.bucket_options);
+    }
+    if (object.create_time !== undefined && object.create_time !== null) {
+      message.createTime = fromTimestamp(Timestamp.fromAmino(object.create_time));
+    }
+    if (object.update_time !== undefined && object.update_time !== null) {
+      message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = logMetric_ApiVersionFromJSON(object.version);
+    }
+    return message;
   },
-  toAmino(message: LogMetric): LogMetricAmino {
+  toAmino(message: LogMetric, useInterfaces: boolean = true): LogMetricAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.description = omitDefault(message.description);
-    obj.filter = omitDefault(message.filter);
-    obj.disabled = omitDefault(message.disabled);
-    obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor) : undefined;
-    obj.value_extractor = omitDefault(message.valueExtractor);
+    obj.name = message.name;
+    obj.description = message.description;
+    obj.filter = message.filter;
+    obj.disabled = message.disabled;
+    obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor, useInterfaces) : undefined;
+    obj.value_extractor = message.valueExtractor;
     obj.label_extractors = {};
     if (message.labelExtractors) {
       Object.entries(message.labelExtractors).forEach(([k, v]) => {
         obj.label_extractors[k] = v;
       });
     }
-    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions) : undefined;
-    obj.create_time = message.createTime;
-    obj.update_time = message.updateTime;
-    obj.version = omitDefault(message.version);
+    obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions, useInterfaces) : undefined;
+    obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
+    obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
+    obj.version = logMetric_ApiVersionToJSON(message.version);
     return obj;
   },
-  fromAminoMsg(object: LogMetricAminoMsg): LogMetric {
-    return LogMetric.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogMetricProtoMsg): LogMetric {
-    return LogMetric.decode(message.value);
+  fromProtoMsg(message: LogMetricProtoMsg, useInterfaces: boolean = true): LogMetric {
+    return LogMetric.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogMetric): Uint8Array {
     return LogMetric.encode(message).finish();
@@ -982,7 +970,7 @@ export const ListLogMetricsRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListLogMetricsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogMetricsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsRequest();
@@ -1041,24 +1029,27 @@ export const ListLogMetricsRequest = {
     return obj;
   },
   fromAmino(object: ListLogMetricsRequestAmino): ListLogMetricsRequest {
-    return {
-      parent: object.parent,
-      pageToken: object.page_token,
-      pageSize: object.page_size
-    };
+    const message = createBaseListLogMetricsRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.page_token !== undefined && object.page_token !== null) {
+      message.pageToken = object.page_token;
+    }
+    if (object.page_size !== undefined && object.page_size !== null) {
+      message.pageSize = object.page_size;
+    }
+    return message;
   },
-  toAmino(message: ListLogMetricsRequest): ListLogMetricsRequestAmino {
+  toAmino(message: ListLogMetricsRequest, useInterfaces: boolean = true): ListLogMetricsRequestAmino {
     const obj: any = {};
-    obj.parent = omitDefault(message.parent);
-    obj.page_token = omitDefault(message.pageToken);
-    obj.page_size = omitDefault(message.pageSize);
+    obj.parent = message.parent;
+    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize;
     return obj;
   },
-  fromAminoMsg(object: ListLogMetricsRequestAminoMsg): ListLogMetricsRequest {
-    return ListLogMetricsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListLogMetricsRequestProtoMsg): ListLogMetricsRequest {
-    return ListLogMetricsRequest.decode(message.value);
+  fromProtoMsg(message: ListLogMetricsRequestProtoMsg, useInterfaces: boolean = true): ListLogMetricsRequest {
+    return ListLogMetricsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogMetricsRequest): Uint8Array {
     return ListLogMetricsRequest.encode(message).finish();
@@ -1087,7 +1078,7 @@ export const ListLogMetricsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListLogMetricsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListLogMetricsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListLogMetricsResponse();
@@ -1095,7 +1086,7 @@ export const ListLogMetricsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.metrics.push(LogMetric.decode(reader, reader.uint32()));
+          message.metrics.push(LogMetric.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPageToken = reader.string();
@@ -1146,26 +1137,25 @@ export const ListLogMetricsResponse = {
     return obj;
   },
   fromAmino(object: ListLogMetricsResponseAmino): ListLogMetricsResponse {
-    return {
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => LogMetric.fromAmino(e)) : [],
-      nextPageToken: object.next_page_token
-    };
+    const message = createBaseListLogMetricsResponse();
+    message.metrics = object.metrics?.map(e => LogMetric.fromAmino(e)) || [];
+    if (object.next_page_token !== undefined && object.next_page_token !== null) {
+      message.nextPageToken = object.next_page_token;
+    }
+    return message;
   },
-  toAmino(message: ListLogMetricsResponse): ListLogMetricsResponseAmino {
+  toAmino(message: ListLogMetricsResponse, useInterfaces: boolean = true): ListLogMetricsResponseAmino {
     const obj: any = {};
     if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e) : undefined);
+      obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.metrics = [];
     }
-    obj.next_page_token = omitDefault(message.nextPageToken);
+    obj.next_page_token = message.nextPageToken;
     return obj;
   },
-  fromAminoMsg(object: ListLogMetricsResponseAminoMsg): ListLogMetricsResponse {
-    return ListLogMetricsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListLogMetricsResponseProtoMsg): ListLogMetricsResponse {
-    return ListLogMetricsResponse.decode(message.value);
+  fromProtoMsg(message: ListLogMetricsResponseProtoMsg, useInterfaces: boolean = true): ListLogMetricsResponse {
+    return ListLogMetricsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListLogMetricsResponse): Uint8Array {
     return ListLogMetricsResponse.encode(message).finish();
@@ -1190,7 +1180,7 @@ export const GetLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GetLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GetLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetLogMetricRequest();
@@ -1233,20 +1223,19 @@ export const GetLogMetricRequest = {
     return obj;
   },
   fromAmino(object: GetLogMetricRequestAmino): GetLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
+    const message = createBaseGetLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    return message;
   },
-  toAmino(message: GetLogMetricRequest): GetLogMetricRequestAmino {
+  toAmino(message: GetLogMetricRequest, useInterfaces: boolean = true): GetLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = omitDefault(message.metricName);
+    obj.metric_name = message.metricName;
     return obj;
   },
-  fromAminoMsg(object: GetLogMetricRequestAminoMsg): GetLogMetricRequest {
-    return GetLogMetricRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GetLogMetricRequestProtoMsg): GetLogMetricRequest {
-    return GetLogMetricRequest.decode(message.value);
+  fromProtoMsg(message: GetLogMetricRequestProtoMsg, useInterfaces: boolean = true): GetLogMetricRequest {
+    return GetLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GetLogMetricRequest): Uint8Array {
     return GetLogMetricRequest.encode(message).finish();
@@ -1261,7 +1250,7 @@ export const GetLogMetricRequest = {
 function createBaseCreateLogMetricRequest(): CreateLogMetricRequest {
   return {
     parent: "",
-    metric: LogMetric.fromPartial({})
+    metric: undefined
   };
 }
 export const CreateLogMetricRequest = {
@@ -1275,7 +1264,7 @@ export const CreateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): CreateLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateLogMetricRequest();
@@ -1286,7 +1275,7 @@ export const CreateLogMetricRequest = {
           message.parent = reader.string();
           break;
         case 2:
-          message.metric = LogMetric.decode(reader, reader.uint32());
+          message.metric = LogMetric.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1328,22 +1317,23 @@ export const CreateLogMetricRequest = {
     return obj;
   },
   fromAmino(object: CreateLogMetricRequestAmino): CreateLogMetricRequest {
-    return {
-      parent: object.parent,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
+    const message = createBaseCreateLogMetricRequest();
+    if (object.parent !== undefined && object.parent !== null) {
+      message.parent = object.parent;
+    }
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromAmino(object.metric);
+    }
+    return message;
   },
-  toAmino(message: CreateLogMetricRequest): CreateLogMetricRequestAmino {
+  toAmino(message: CreateLogMetricRequest, useInterfaces: boolean = true): CreateLogMetricRequestAmino {
     const obj: any = {};
-    obj.parent = omitDefault(message.parent);
-    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    obj.parent = message.parent;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: CreateLogMetricRequestAminoMsg): CreateLogMetricRequest {
-    return CreateLogMetricRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: CreateLogMetricRequestProtoMsg): CreateLogMetricRequest {
-    return CreateLogMetricRequest.decode(message.value);
+  fromProtoMsg(message: CreateLogMetricRequestProtoMsg, useInterfaces: boolean = true): CreateLogMetricRequest {
+    return CreateLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: CreateLogMetricRequest): Uint8Array {
     return CreateLogMetricRequest.encode(message).finish();
@@ -1358,7 +1348,7 @@ export const CreateLogMetricRequest = {
 function createBaseUpdateLogMetricRequest(): UpdateLogMetricRequest {
   return {
     metricName: "",
-    metric: LogMetric.fromPartial({})
+    metric: undefined
   };
 }
 export const UpdateLogMetricRequest = {
@@ -1372,7 +1362,7 @@ export const UpdateLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UpdateLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateLogMetricRequest();
@@ -1383,7 +1373,7 @@ export const UpdateLogMetricRequest = {
           message.metricName = reader.string();
           break;
         case 2:
-          message.metric = LogMetric.decode(reader, reader.uint32());
+          message.metric = LogMetric.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1425,22 +1415,23 @@ export const UpdateLogMetricRequest = {
     return obj;
   },
   fromAmino(object: UpdateLogMetricRequestAmino): UpdateLogMetricRequest {
-    return {
-      metricName: object.metric_name,
-      metric: object?.metric ? LogMetric.fromAmino(object.metric) : undefined
-    };
+    const message = createBaseUpdateLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    if (object.metric !== undefined && object.metric !== null) {
+      message.metric = LogMetric.fromAmino(object.metric);
+    }
+    return message;
   },
-  toAmino(message: UpdateLogMetricRequest): UpdateLogMetricRequestAmino {
+  toAmino(message: UpdateLogMetricRequest, useInterfaces: boolean = true): UpdateLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = omitDefault(message.metricName);
-    obj.metric = message.metric ? LogMetric.toAmino(message.metric) : undefined;
+    obj.metric_name = message.metricName;
+    obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: UpdateLogMetricRequestAminoMsg): UpdateLogMetricRequest {
-    return UpdateLogMetricRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg): UpdateLogMetricRequest {
-    return UpdateLogMetricRequest.decode(message.value);
+  fromProtoMsg(message: UpdateLogMetricRequestProtoMsg, useInterfaces: boolean = true): UpdateLogMetricRequest {
+    return UpdateLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UpdateLogMetricRequest): Uint8Array {
     return UpdateLogMetricRequest.encode(message).finish();
@@ -1465,7 +1456,7 @@ export const DeleteLogMetricRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteLogMetricRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeleteLogMetricRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteLogMetricRequest();
@@ -1508,20 +1499,19 @@ export const DeleteLogMetricRequest = {
     return obj;
   },
   fromAmino(object: DeleteLogMetricRequestAmino): DeleteLogMetricRequest {
-    return {
-      metricName: object.metric_name
-    };
+    const message = createBaseDeleteLogMetricRequest();
+    if (object.metric_name !== undefined && object.metric_name !== null) {
+      message.metricName = object.metric_name;
+    }
+    return message;
   },
-  toAmino(message: DeleteLogMetricRequest): DeleteLogMetricRequestAmino {
+  toAmino(message: DeleteLogMetricRequest, useInterfaces: boolean = true): DeleteLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = omitDefault(message.metricName);
+    obj.metric_name = message.metricName;
     return obj;
   },
-  fromAminoMsg(object: DeleteLogMetricRequestAminoMsg): DeleteLogMetricRequest {
-    return DeleteLogMetricRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg): DeleteLogMetricRequest {
-    return DeleteLogMetricRequest.decode(message.value);
+  fromProtoMsg(message: DeleteLogMetricRequestProtoMsg, useInterfaces: boolean = true): DeleteLogMetricRequest {
+    return DeleteLogMetricRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeleteLogMetricRequest): Uint8Array {
     return DeleteLogMetricRequest.encode(message).finish();

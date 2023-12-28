@@ -8,9 +8,9 @@ export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
   /** The parsed expression. */
-  expr: Expr;
+  expr?: Expr;
   /** The source info derived from input that generated the parsed `expr`. */
-  sourceInfo: SourceInfo;
+  sourceInfo?: SourceInfo;
   /** The syntax version of the source, e.g. `cel1`. */
   syntaxVersion: string;
 }
@@ -71,7 +71,7 @@ export interface Expr_Select {
    * For example, in the select expression `request.auth`, the `request`
    * portion of the expression is the `operand`.
    */
-  operand: Expr;
+  operand?: Expr;
   /**
    * Required. The name of the field to select.
    * 
@@ -96,7 +96,7 @@ export interface Expr_Call {
    * The target of an method call-style expression. For example, `x` in
    * `x.f()`.
    */
-  target: Expr;
+  target?: Expr;
   /** Required. The name of the function or method being called. */
   function: string;
   /** The arguments. */
@@ -141,7 +141,7 @@ export interface Expr_CreateStruct_Entry {
   /** The key expression for a map creation statement. */
   mapKey?: Expr;
   /** Required. The value assigned to the key. */
-  value: Expr;
+  value?: Expr;
 }
 /**
  * A comprehension expression applied to a list or map.
@@ -175,30 +175,30 @@ export interface Expr_Comprehension {
   /** The name of the iteration variable. */
   iterVar: string;
   /** The range over which var iterates. */
-  iterRange: Expr;
+  iterRange?: Expr;
   /** The name of the variable used for accumulation of the result. */
   accuVar: string;
   /** The initial value of the accumulator. */
-  accuInit: Expr;
+  accuInit?: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Returns false when the result has been computed and may be used as
    * a hint to short-circuit the remainder of the comprehension.
    */
-  loopCondition: Expr;
+  loopCondition?: Expr;
   /**
    * An expression which can contain iter_var and accu_var.
    * 
    * Computes the next value of accu_var.
    */
-  loopStep: Expr;
+  loopStep?: Expr;
   /**
    * An expression which can contain accu_var.
    * 
    * Computes the result.
    */
-  result: Expr;
+  result?: Expr;
 }
 /**
  * Represents a primitive literal.
@@ -231,8 +231,8 @@ export interface Literal {
 }
 function createBaseParsedExpr(): ParsedExpr {
   return {
-    expr: Expr.fromPartial({}),
-    sourceInfo: SourceInfo.fromPartial({}),
+    expr: undefined,
+    sourceInfo: undefined,
     syntaxVersion: ""
   };
 }
@@ -456,7 +456,7 @@ export const Expr_Ident = {
 };
 function createBaseExpr_Select(): Expr_Select {
   return {
-    operand: Expr.fromPartial({}),
+    operand: undefined,
     field: "",
     testOnly: false
   };
@@ -521,7 +521,7 @@ export const Expr_Select = {
 };
 function createBaseExpr_Call(): Expr_Call {
   return {
-    target: Expr.fromPartial({}),
+    target: undefined,
     function: "",
     args: []
   };
@@ -701,7 +701,7 @@ function createBaseExpr_CreateStruct_Entry(): Expr_CreateStruct_Entry {
     id: 0,
     fieldKey: undefined,
     mapKey: undefined,
-    value: Expr.fromPartial({})
+    value: undefined
   };
 }
 export const Expr_CreateStruct_Entry = {
@@ -774,12 +774,12 @@ export const Expr_CreateStruct_Entry = {
 function createBaseExpr_Comprehension(): Expr_Comprehension {
   return {
     iterVar: "",
-    iterRange: Expr.fromPartial({}),
+    iterRange: undefined,
     accuVar: "",
-    accuInit: Expr.fromPartial({}),
-    loopCondition: Expr.fromPartial({}),
-    loopStep: Expr.fromPartial({}),
-    result: Expr.fromPartial({})
+    accuInit: undefined,
+    loopCondition: undefined,
+    loopStep: undefined,
+    result: undefined
   };
 }
 export const Expr_Comprehension = {
@@ -962,8 +962,12 @@ export const Literal = {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.int64Value !== undefined && (obj.int64Value = (message.int64Value || undefined).toString());
-    message.uint64Value !== undefined && (obj.uint64Value = (message.uint64Value || undefined).toString());
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    if (message.uint64Value !== undefined) {
+      obj.uint64Value = message.uint64Value.toString();
+    }
     message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
     message.stringValue !== undefined && (obj.stringValue = message.stringValue);
     message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);

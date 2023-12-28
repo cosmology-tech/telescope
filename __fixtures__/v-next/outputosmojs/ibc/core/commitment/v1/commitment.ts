@@ -9,6 +9,10 @@ export const protobufPackage = "ibc.core.commitment.v1";
 export interface MerkleRoot {
   hash: Uint8Array;
 }
+export interface MerkleRootProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerkleRoot";
+  value: Uint8Array;
+}
 /**
  * MerkleRoot defines a merkle root hash.
  * In the Cosmos SDK, the AppHash of a block header becomes the root.
@@ -23,6 +27,10 @@ export interface MerkleRootSDKType {
  */
 export interface MerklePrefix {
   keyPrefix: Uint8Array;
+}
+export interface MerklePrefixProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerklePrefix";
+  value: Uint8Array;
 }
 /**
  * MerklePrefix is merkle path prefixed to the key.
@@ -39,6 +47,10 @@ export interface MerklePrefixSDKType {
  */
 export interface MerklePath {
   keyPath: string[];
+}
+export interface MerklePathProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerklePath";
+  value: Uint8Array;
 }
 /**
  * MerklePath is the path used to verify commitment proofs, which can be an
@@ -57,6 +69,10 @@ export interface MerklePathSDKType {
  */
 export interface MerkleProof {
   proofs: CommitmentProof[];
+}
+export interface MerkleProofProtoMsg {
+  typeUrl: "/ibc.core.commitment.v1.MerkleProof";
+  value: Uint8Array;
 }
 /**
  * MerkleProof is a wrapper type over a chain of CommitmentProofs.
@@ -129,13 +145,15 @@ export const MerkleRoot = {
     return obj;
   },
   fromAmino(object: MerkleRootAmino): MerkleRoot {
-    return {
-      hash: object.hash
-    };
+    const message = createBaseMerkleRoot();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
   toAmino(message: MerkleRoot): MerkleRootAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
   fromAminoMsg(object: MerkleRootAminoMsg): MerkleRoot {
@@ -221,13 +239,15 @@ export const MerklePrefix = {
     return obj;
   },
   fromAmino(object: MerklePrefixAmino): MerklePrefix {
-    return {
-      keyPrefix: object.key_prefix
-    };
+    const message = createBaseMerklePrefix();
+    if (object.key_prefix !== undefined && object.key_prefix !== null) {
+      message.keyPrefix = bytesFromBase64(object.key_prefix);
+    }
+    return message;
   },
   toAmino(message: MerklePrefix): MerklePrefixAmino {
     const obj: any = {};
-    obj.key_prefix = message.keyPrefix;
+    obj.key_prefix = message.keyPrefix ? base64FromBytes(message.keyPrefix) : undefined;
     return obj;
   },
   fromAminoMsg(object: MerklePrefixAminoMsg): MerklePrefix {
@@ -321,9 +341,9 @@ export const MerklePath = {
     return obj;
   },
   fromAmino(object: MerklePathAmino): MerklePath {
-    return {
-      keyPath: Array.isArray(object?.key_path) ? object.key_path.map((e: any) => e) : []
-    };
+    const message = createBaseMerklePath();
+    message.keyPath = object.key_path?.map(e => e) || [];
+    return message;
   },
   toAmino(message: MerklePath): MerklePathAmino {
     const obj: any = {};
@@ -425,9 +445,9 @@ export const MerkleProof = {
     return obj;
   },
   fromAmino(object: MerkleProofAmino): MerkleProof {
-    return {
-      proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromAmino(e)) : []
-    };
+    const message = createBaseMerkleProof();
+    message.proofs = object.proofs?.map(e => CommitmentProof.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MerkleProof): MerkleProofAmino {
     const obj: any = {};

@@ -103,6 +103,10 @@ export interface AccountID {
   scope: string;
   xid: string;
 }
+export interface AccountIDProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.AccountID";
+  value: Uint8Array;
+}
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
   scope: string;
@@ -123,6 +127,10 @@ export interface Account {
   /** block height at which this account was last settled */
   settledAt: bigint;
 }
+export interface AccountProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.Account";
+  value: Uint8Array;
+}
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
   id: AccountIDSDKType;
@@ -141,6 +149,10 @@ export interface Payment {
   rate: Coin;
   balance: Coin;
   withdrawn: Coin;
+}
+export interface PaymentProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.Payment";
+  value: Uint8Array;
 }
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
@@ -161,10 +173,10 @@ function createBaseAccountID(): AccountID {
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta1.AccountID",
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
     return writer;
@@ -226,10 +238,14 @@ export const AccountID = {
     return obj;
   },
   fromAmino(object: AccountIDAmino): AccountID {
-    return {
-      scope: object.scope,
-      xid: object.xid
-    };
+    const message = createBaseAccountID();
+    if (object.scope !== undefined && object.scope !== null) {
+      message.scope = object.scope;
+    }
+    if (object.xid !== undefined && object.xid !== null) {
+      message.xid = object.xid;
+    }
+    return message;
   },
   toAmino(message: AccountID): AccountIDAmino {
     const obj: any = {};
@@ -275,7 +291,7 @@ export const Account = {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.state !== 0) {
@@ -287,7 +303,7 @@ export const Account = {
     if (message.transferred !== undefined) {
       Coin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (message.settledAt !== BigInt(0)) {
+    if (message.settledAt !== undefined) {
       writer.uint32(48).int64(message.settledAt);
     }
     return writer;
@@ -393,20 +409,32 @@ export const Account = {
     return obj;
   },
   fromAmino(object: AccountAmino): Account {
-    return {
-      id: object?.id ? AccountID.fromAmino(object.id) : undefined,
-      owner: object.owner,
-      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
-      transferred: object?.transferred ? Coin.fromAmino(object.transferred) : undefined,
-      settledAt: BigInt(object.settled_at)
-    };
+    const message = createBaseAccount();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromAmino(object.id);
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = account_StateFromJSON(object.state);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = Coin.fromAmino(object.transferred);
+    }
+    if (object.settled_at !== undefined && object.settled_at !== null) {
+      message.settledAt = BigInt(object.settled_at);
+    }
+    return message;
   },
   toAmino(message: Account): AccountAmino {
     const obj: any = {};
     obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
     obj.owner = message.owner;
-    obj.state = message.state;
+    obj.state = account_StateToJSON(message.state);
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : undefined;
     obj.settled_at = message.settledAt;
@@ -451,10 +479,10 @@ export const Payment = {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.paymentId !== "") {
+    if (message.paymentId !== undefined) {
       writer.uint32(18).string(message.paymentId);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     if (message.state !== 0) {
@@ -581,22 +609,36 @@ export const Payment = {
     return obj;
   },
   fromAmino(object: PaymentAmino): Payment {
-    return {
-      accountId: object?.account_id ? AccountID.fromAmino(object.account_id) : undefined,
-      paymentId: object.payment_id,
-      owner: object.owner,
-      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
-      rate: object?.rate ? Coin.fromAmino(object.rate) : undefined,
-      balance: object?.balance ? Coin.fromAmino(object.balance) : undefined,
-      withdrawn: object?.withdrawn ? Coin.fromAmino(object.withdrawn) : undefined
-    };
+    const message = createBasePayment();
+    if (object.account_id !== undefined && object.account_id !== null) {
+      message.accountId = AccountID.fromAmino(object.account_id);
+    }
+    if (object.payment_id !== undefined && object.payment_id !== null) {
+      message.paymentId = object.payment_id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = payment_StateFromJSON(object.state);
+    }
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = Coin.fromAmino(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromAmino(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromAmino(object.withdrawn);
+    }
+    return message;
   },
   toAmino(message: Payment): PaymentAmino {
     const obj: any = {};
     obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
     obj.payment_id = message.paymentId;
     obj.owner = message.owner;
-    obj.state = message.state;
+    obj.state = payment_StateToJSON(message.state);
     obj.rate = message.rate ? Coin.toAmino(message.rate) : undefined;
     obj.balance = message.balance ? Coin.toAmino(message.balance) : undefined;
     obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;

@@ -22,8 +22,8 @@ export interface FeeTokenProtoMsg {
  * The pool ID must have osmo as one of its assets.
  */
 export interface FeeTokenAmino {
-  denom: string;
-  poolID: string;
+  denom?: string;
+  poolID?: string;
 }
 export interface FeeTokenAminoMsg {
   type: "osmosis/txfees/fee-token";
@@ -110,10 +110,14 @@ export const FeeToken = {
     return obj;
   },
   fromAmino(object: FeeTokenAmino): FeeToken {
-    return {
-      denom: object.denom,
-      poolID: BigInt(object.poolID)
-    };
+    const message = createBaseFeeToken();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID);
+    }
+    return message;
   },
   toAmino(message: FeeToken): FeeTokenAmino {
     const obj: any = {};

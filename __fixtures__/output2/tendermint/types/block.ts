@@ -9,14 +9,14 @@ export interface Block {
   header: Header;
   data: Data;
   evidence: EvidenceList;
-  lastCommit: Commit;
+  lastCommit?: Commit;
 }
 function createBaseBlock(): Block {
   return {
     header: Header.fromPartial({}),
     data: Data.fromPartial({}),
     evidence: EvidenceList.fromPartial({}),
-    lastCommit: Commit.fromPartial({})
+    lastCommit: undefined
   };
 }
 export const Block = {

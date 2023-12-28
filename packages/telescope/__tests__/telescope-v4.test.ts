@@ -59,6 +59,7 @@ const options: TelescopeOptions = {
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
     allowUndefinedTypes: false,
+    allowEncodeDefaultScalars: true,
     excluded: {
       packages: [
         // 'cosmos.gov.v1',
@@ -126,6 +127,7 @@ const options: TelescopeOptions = {
   rpcClients: {
     enabled: true,
     camelCase: true,
+    extensions: true,
     scopedIsExclusive: false,
     scoped: [
       {
@@ -155,7 +157,8 @@ const options: TelescopeOptions = {
       'Service',
       'ReflectionService',
       'ABCIApplication'
-    ]
+    ],
+    useConnectComet: true
   },
 
   reactQuery: {

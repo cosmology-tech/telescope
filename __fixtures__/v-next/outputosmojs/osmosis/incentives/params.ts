@@ -9,6 +9,10 @@ export interface Params {
    */
   distrEpochIdentifier: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.incentives.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   distr_epoch_identifier: string;
@@ -74,9 +78,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      distrEpochIdentifier: object.distr_epoch_identifier
-    };
+    const message = createBaseParams();
+    if (object.distr_epoch_identifier !== undefined && object.distr_epoch_identifier !== null) {
+      message.distrEpochIdentifier = object.distr_epoch_identifier;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

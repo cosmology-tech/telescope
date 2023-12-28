@@ -6,6 +6,10 @@ export const protobufPackage = "cosmos.feegrant.v1beta1";
 export interface GenesisState {
   allowances: Grant[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisStateSDKType {
   allowances: GrantSDKType[];
@@ -79,9 +83,9 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.allowances = object.allowances?.map(e => Grant.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

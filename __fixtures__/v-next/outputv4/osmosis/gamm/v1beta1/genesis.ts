@@ -7,6 +7,10 @@ export const protobufPackage = "osmosis.gamm.v1beta1";
 export interface Params {
   poolCreationFee: Coin[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
@@ -17,6 +21,10 @@ export interface GenesisState {
   /** will be renamed to next_pool_id in an upcoming version */
   nextPoolNumber: bigint;
   params: Params;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.gamm.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
@@ -93,9 +101,9 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      poolCreationFee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.poolCreationFee = object.pool_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
@@ -141,7 +149,7 @@ export const GenesisState = {
     for (const v of message.pools) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPoolNumber !== BigInt(0)) {
+    if (message.nextPoolNumber !== undefined) {
       writer.uint32(16).uint64(message.nextPoolNumber);
     }
     if (message.params !== undefined) {
@@ -227,11 +235,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromAmino(e)) : [],
-      nextPoolNumber: BigInt(object.next_pool_number),
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    message.pools = object.pools?.map(e => Any.fromAmino(e)) || [];
+    if (object.next_pool_number !== undefined && object.next_pool_number !== null) {
+      message.nextPoolNumber = BigInt(object.next_pool_number);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

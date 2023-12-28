@@ -98,6 +98,10 @@ export interface Documentation {
    */
   overview: string;
 }
+export interface DocumentationProtoMsg {
+  typeUrl: "/google.api.Documentation";
+  value: Uint8Array;
+}
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -182,6 +186,10 @@ export interface DocumentationRule {
    */
   deprecationDescription: string;
 }
+export interface DocumentationRuleProtoMsg {
+  typeUrl: "/google.api.DocumentationRule";
+  value: Uint8Array;
+}
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
   selector: string;
@@ -220,6 +228,10 @@ export interface Page {
    * honored in the generated docset.
    */
   subpages: Page[];
+}
+export interface PageProtoMsg {
+  typeUrl: "/google.api.Page";
+  value: Uint8Array;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -372,14 +384,22 @@ export const Documentation = {
     return obj;
   },
   fromAmino(object: DocumentationAmino): Documentation {
-    return {
-      summary: object.summary,
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
-      documentationRootUrl: object.documentation_root_url,
-      serviceRootUrl: object.service_root_url,
-      overview: object.overview
-    };
+    const message = createBaseDocumentation();
+    if (object.summary !== undefined && object.summary !== null) {
+      message.summary = object.summary;
+    }
+    message.pages = object.pages?.map(e => Page.fromAmino(e)) || [];
+    message.rules = object.rules?.map(e => DocumentationRule.fromAmino(e)) || [];
+    if (object.documentation_root_url !== undefined && object.documentation_root_url !== null) {
+      message.documentationRootUrl = object.documentation_root_url;
+    }
+    if (object.service_root_url !== undefined && object.service_root_url !== null) {
+      message.serviceRootUrl = object.service_root_url;
+    }
+    if (object.overview !== undefined && object.overview !== null) {
+      message.overview = object.overview;
+    }
+    return message;
   },
   toAmino(message: Documentation): DocumentationAmino {
     const obj: any = {};
@@ -502,11 +522,17 @@ export const DocumentationRule = {
     return obj;
   },
   fromAmino(object: DocumentationRuleAmino): DocumentationRule {
-    return {
-      selector: object.selector,
-      description: object.description,
-      deprecationDescription: object.deprecation_description
-    };
+    const message = createBaseDocumentationRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.deprecation_description !== undefined && object.deprecation_description !== null) {
+      message.deprecationDescription = object.deprecation_description;
+    }
+    return message;
   },
   toAmino(message: DocumentationRule): DocumentationRuleAmino {
     const obj: any = {};
@@ -626,11 +652,15 @@ export const Page = {
     return obj;
   },
   fromAmino(object: PageAmino): Page {
-    return {
-      name: object.name,
-      content: object.content,
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
-    };
+    const message = createBasePage();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.content !== undefined && object.content !== null) {
+      message.content = object.content;
+    }
+    message.subpages = object.subpages?.map(e => Page.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Page): PageAmino {
     const obj: any = {};

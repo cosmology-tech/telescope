@@ -10,12 +10,8 @@ export interface BitArrayProtoMsg {
   value: Uint8Array;
 }
 export interface BitArrayAmino {
-  bits: string;
-  elems: string[];
-}
-export interface BitArrayAminoMsg {
-  type: "/tendermint.libs.bits.BitArray";
-  value: BitArrayAmino;
+  bits?: string;
+  elems?: string[];
 }
 export interface BitArraySDKType {
   bits: bigint;
@@ -40,7 +36,7 @@ export const BitArray = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BitArray {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BitArray {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBitArray();
@@ -108,12 +104,14 @@ export const BitArray = {
     return obj;
   },
   fromAmino(object: BitArrayAmino): BitArray {
-    return {
-      bits: BigInt(object.bits),
-      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseBitArray();
+    if (object.bits !== undefined && object.bits !== null) {
+      message.bits = BigInt(object.bits);
+    }
+    message.elems = object.elems?.map(e => BigInt(e)) || [];
+    return message;
   },
-  toAmino(message: BitArray): BitArrayAmino {
+  toAmino(message: BitArray, useInterfaces: boolean = true): BitArrayAmino {
     const obj: any = {};
     obj.bits = omitDefault(message.bits);
     if (message.elems) {
@@ -123,11 +121,8 @@ export const BitArray = {
     }
     return obj;
   },
-  fromAminoMsg(object: BitArrayAminoMsg): BitArray {
-    return BitArray.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BitArrayProtoMsg): BitArray {
-    return BitArray.decode(message.value);
+  fromProtoMsg(message: BitArrayProtoMsg, useInterfaces: boolean = true): BitArray {
+    return BitArray.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BitArray): Uint8Array {
     return BitArray.encode(message).finish();

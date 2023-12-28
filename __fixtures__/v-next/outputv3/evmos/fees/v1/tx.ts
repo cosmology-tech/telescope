@@ -26,24 +26,20 @@ export interface MsgRegisterDevFeeInfoProtoMsg {
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoAmino {
   /** contract hex address */
-  contract_address: string;
+  contract_address?: string;
   /**
    * bech32 address of message sender, must be the same as the origin EOA
    * sending the transaction which deploys the contract
    */
-  deployer_address: string;
+  deployer_address?: string;
   /** bech32 address of account receiving the transaction fees */
-  withdraw_address: string;
+  withdraw_address?: string;
   /**
    * array of nonces from the address path, where the last nonce is
    * the nonce that determines the contract's address - it can be an EOA nonce
    * or a factory contract nonce
    */
-  nonces: string[];
-}
-export interface MsgRegisterDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
-  value: MsgRegisterDevFeeInfoAmino;
+  nonces?: string[];
 }
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfoSDKType {
@@ -66,10 +62,6 @@ export interface MsgRegisterDevFeeInfoResponseProtoMsg {
  * type
  */
 export interface MsgRegisterDevFeeInfoResponseAmino {}
-export interface MsgRegisterDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
-  value: MsgRegisterDevFeeInfoResponseAmino;
-}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
@@ -95,13 +87,9 @@ export interface MsgCancelDevFeeInfoProtoMsg {
  */
 export interface MsgCancelDevFeeInfoAmino {
   /** contract hex address */
-  contract_address: string;
+  contract_address?: string;
   /** deployer bech32 address */
-  deployer_address: string;
-}
-export interface MsgCancelDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
-  value: MsgCancelDevFeeInfoAmino;
+  deployer_address?: string;
 }
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
@@ -119,10 +107,6 @@ export interface MsgCancelDevFeeInfoResponseProtoMsg {
 }
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseAmino {}
-export interface MsgCancelDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
-  value: MsgCancelDevFeeInfoResponseAmino;
-}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponseSDKType {}
 /**
@@ -147,15 +131,11 @@ export interface MsgUpdateDevFeeInfoProtoMsg {
  */
 export interface MsgUpdateDevFeeInfoAmino {
   /** contract hex address */
-  contract_address: string;
+  contract_address?: string;
   /** deployer bech32 address */
-  deployer_address: string;
+  deployer_address?: string;
   /** new withdraw bech32 address for receiving the transaction fees */
-  withdraw_address: string;
-}
-export interface MsgUpdateDevFeeInfoAminoMsg {
-  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
-  value: MsgUpdateDevFeeInfoAmino;
+  withdraw_address?: string;
 }
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
@@ -174,10 +154,6 @@ export interface MsgUpdateDevFeeInfoResponseProtoMsg {
 }
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseAmino {}
-export interface MsgUpdateDevFeeInfoResponseAminoMsg {
-  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
-  value: MsgUpdateDevFeeInfoResponseAmino;
-}
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponseSDKType {}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
@@ -207,7 +183,7 @@ export const MsgRegisterDevFeeInfo = {
     writer.ldelim();
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRegisterDevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfo();
@@ -289,14 +265,20 @@ export const MsgRegisterDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address,
-      nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseMsgRegisterDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    message.nonces = object.nonces?.map(e => BigInt(e)) || [];
+    return message;
   },
-  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+  toAmino(message: MsgRegisterDevFeeInfo, useInterfaces: boolean = true): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = omitDefault(message.contractAddress);
     obj.deployer_address = omitDefault(message.deployerAddress);
@@ -308,11 +290,8 @@ export const MsgRegisterDevFeeInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
-    return MsgRegisterDevFeeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
-    return MsgRegisterDevFeeInfo.decode(message.value);
+  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg, useInterfaces: boolean = true): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRegisterDevFeeInfo): Uint8Array {
     return MsgRegisterDevFeeInfo.encode(message).finish();
@@ -332,7 +311,7 @@ export const MsgRegisterDevFeeInfoResponse = {
   encode(_: MsgRegisterDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgRegisterDevFeeInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgRegisterDevFeeInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgRegisterDevFeeInfoResponse();
@@ -366,17 +345,15 @@ export const MsgRegisterDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgRegisterDevFeeInfoResponse();
+    return message;
   },
-  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
+  toAmino(_: MsgRegisterDevFeeInfoResponse, useInterfaces: boolean = true): MsgRegisterDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
-    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
-    return MsgRegisterDevFeeInfoResponse.decode(message.value);
+  fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg, useInterfaces: boolean = true): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgRegisterDevFeeInfoResponse): Uint8Array {
     return MsgRegisterDevFeeInfoResponse.encode(message).finish();
@@ -405,7 +382,7 @@ export const MsgCancelDevFeeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelDevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDevFeeInfo();
@@ -456,22 +433,23 @@ export const MsgCancelDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address
-    };
+    const message = createBaseMsgCancelDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    return message;
   },
-  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
+  toAmino(message: MsgCancelDevFeeInfo, useInterfaces: boolean = true): MsgCancelDevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = omitDefault(message.contractAddress);
     obj.deployer_address = omitDefault(message.deployerAddress);
     return obj;
   },
-  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
-    return MsgCancelDevFeeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
-    return MsgCancelDevFeeInfo.decode(message.value);
+  fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg, useInterfaces: boolean = true): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelDevFeeInfo): Uint8Array {
     return MsgCancelDevFeeInfo.encode(message).finish();
@@ -491,7 +469,7 @@ export const MsgCancelDevFeeInfoResponse = {
   encode(_: MsgCancelDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgCancelDevFeeInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgCancelDevFeeInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgCancelDevFeeInfoResponse();
@@ -525,17 +503,15 @@ export const MsgCancelDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgCancelDevFeeInfoResponse();
+    return message;
   },
-  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
+  toAmino(_: MsgCancelDevFeeInfoResponse, useInterfaces: boolean = true): MsgCancelDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
-    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
-    return MsgCancelDevFeeInfoResponse.decode(message.value);
+  fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg, useInterfaces: boolean = true): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgCancelDevFeeInfoResponse): Uint8Array {
     return MsgCancelDevFeeInfoResponse.encode(message).finish();
@@ -568,7 +544,7 @@ export const MsgUpdateDevFeeInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDevFeeInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateDevFeeInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDevFeeInfo();
@@ -627,24 +603,27 @@ export const MsgUpdateDevFeeInfo = {
     return obj;
   },
   fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
-    return {
-      contractAddress: object.contract_address,
-      deployerAddress: object.deployer_address,
-      withdrawAddress: object.withdraw_address
-    };
+    const message = createBaseMsgUpdateDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
   },
-  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
+  toAmino(message: MsgUpdateDevFeeInfo, useInterfaces: boolean = true): MsgUpdateDevFeeInfoAmino {
     const obj: any = {};
     obj.contract_address = omitDefault(message.contractAddress);
     obj.deployer_address = omitDefault(message.deployerAddress);
     obj.withdraw_address = omitDefault(message.withdrawAddress);
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
-    return MsgUpdateDevFeeInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
-    return MsgUpdateDevFeeInfo.decode(message.value);
+  fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg, useInterfaces: boolean = true): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateDevFeeInfo): Uint8Array {
     return MsgUpdateDevFeeInfo.encode(message).finish();
@@ -664,7 +643,7 @@ export const MsgUpdateDevFeeInfoResponse = {
   encode(_: MsgUpdateDevFeeInfoResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgUpdateDevFeeInfoResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgUpdateDevFeeInfoResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgUpdateDevFeeInfoResponse();
@@ -698,17 +677,15 @@ export const MsgUpdateDevFeeInfoResponse = {
     return obj;
   },
   fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
-    return {};
+    const message = createBaseMsgUpdateDevFeeInfoResponse();
+    return message;
   },
-  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
+  toAmino(_: MsgUpdateDevFeeInfoResponse, useInterfaces: boolean = true): MsgUpdateDevFeeInfoResponseAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
-    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
-    return MsgUpdateDevFeeInfoResponse.decode(message.value);
+  fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg, useInterfaces: boolean = true): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgUpdateDevFeeInfoResponse): Uint8Array {
     return MsgUpdateDevFeeInfoResponse.encode(message).finish();

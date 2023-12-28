@@ -1,182 +1,209 @@
-import * as t from '@babel/types';
-import { ProtoField } from '@cosmology/types';
-import { ProtoParseContext } from '../encoding';
+import * as t from "@babel/types";
+import { ProtoField } from "@cosmology/types";
+import { ProtoParseContext } from "../encoding";
 
 const BILLION = t.numericLiteral(1_000_000_000);
 BILLION.extra = { raw: "1_000_000_000", rawValue: 1000000000 };
 export { BILLION };
 
 export const cleanComment = (str) => {
-    return str.replace(/\*\//g, '*\\\/');
+  return str.replace(/\*\//g, "*\\/");
 };
 
 const ensureOneSpace = (str) => {
-    if (/^[\s\n\t]+/.test(str)) return str;
-    return ` ${str}`;
-}
+  if (/^[\s\n\t]+/.test(str)) return str;
+  return ` ${str}`;
+};
 
 export const makeCommentBlock = (comment: string): t.CommentBlock => {
-
-    if (!/[\n]+/.test(comment)) {
-        return {
-            type: 'CommentBlock',
-            value: `* ${cleanComment(comment)} `,
-            start: null,
-            end: null,
-            loc: null
-        };
-    }
-
-    let lines = comment.split('\n');
-    lines = ['*', ...lines, ' '];
-    const comments = lines.map((line, i) => {
-        if (i == 0) return line;
-        if (i == 1) return ` *${ensureOneSpace(cleanComment(line))}`;
-        if (i == (lines.length - 1)) return cleanComment(line);
-        return ` *${ensureOneSpace(cleanComment(line))}`
-    });
-
+  if (!/[\n]+/.test(comment)) {
     return {
-        type: 'CommentBlock',
-        value: comments.join('\n'),
-        start: null,
-        end: null,
-        loc: null
+      type: "CommentBlock",
+      value: `* ${cleanComment(comment)} `,
+      start: null,
+      end: null,
+      loc: null,
     };
+  }
+
+  let lines = comment.split("\n");
+  lines = ["*", ...lines, " "];
+  const comments = lines.map((line, i) => {
+    if (i == 0) return line;
+    if (i == 1) return ` *${ensureOneSpace(cleanComment(line))}`;
+    if (i == lines.length - 1) return cleanComment(line);
+    return ` *${ensureOneSpace(cleanComment(line))}`;
+  });
+
+  return {
+    type: "CommentBlock",
+    value: comments.join("\n"),
+    start: null,
+    end: null,
+    loc: null,
+  };
 };
 
 export const renderNameSafely = (name) => {
-    return name.split('_').map(str => {
-        const parts = str.split('.');
-        str = parts[parts.length - 1];
-        return str;
-    }).join('_');
+  return name
+    .split("_")
+    .map((str) => {
+      const parts = str.split(".");
+      str = parts[parts.length - 1];
+      return str;
+    })
+    .join("_");
 };
 
-export const getProtoFieldTypeName = (context: ProtoParseContext, field: ProtoField) => {
-    let name = context.getTypeName(field)
-    return renderNameSafely(name);
+export const getProtoFieldTypeName = (
+  context: ProtoParseContext,
+  field: ProtoField
+) => {
+  let name = context.getTypeName(field);
+  return renderNameSafely(name);
 };
-
 
 export const recursiveNamespace = (names, moduleBlockBody) => {
-    if (!names || !names.length) return moduleBlockBody;
-    const name = names.pop();
-    const body = [
-        t.exportNamedDeclaration(
-            t.tsModuleDeclaration(
-                t.identifier(name),
-                t.tsModuleBlock(recursiveNamespace(names, moduleBlockBody))
-            )
-        )
-    ];
-    return body;
+  if (!names || !names.length) return moduleBlockBody;
+  const name = names.pop();
+  const body = [
+    t.exportNamedDeclaration(
+      t.tsModuleDeclaration(
+        t.identifier(name),
+        t.tsModuleBlock(recursiveNamespace(names, moduleBlockBody))
+      )
+    ),
+  ];
+  return body;
 };
 
 export const bindMethod = (name: string) => {
-    return t.expressionStatement(
-        t.assignmentExpression('=', t.memberExpression(
-            t.thisExpression(),
-            t.identifier(name)
+  return t.expressionStatement(
+    t.assignmentExpression(
+      "=",
+      t.memberExpression(t.thisExpression(), t.identifier(name)),
+      t.callExpression(
+        t.memberExpression(
+          t.memberExpression(t.thisExpression(), t.identifier(name)),
+          t.identifier("bind")
         ),
-            t.callExpression(
-                t.memberExpression(
-                    t.memberExpression(
-                        t.thisExpression(),
-                        t.identifier(name)
-                    ),
-                    t.identifier('bind')
-                ),
-                [
-                    t.thisExpression()
-                ]
-            )
-        )
+        [t.thisExpression()]
+      )
     )
+  );
 };
 
 export const shorthandProperty = (prop: string) => {
-    return t.objectProperty(t.identifier(prop), t.identifier(prop), false, true);
+  return t.objectProperty(t.identifier(prop), t.identifier(prop), false, true);
 };
 
 export const importStmt = (names: string[], path: string) => {
-    return t.importDeclaration(
-        names.map(name => t.importSpecifier(t.identifier(name), t.identifier(name))),
-        t.stringLiteral(path));
+  return t.importDeclaration(
+    names.map((name) =>
+      t.importSpecifier(t.identifier(name), t.identifier(name))
+    ),
+    t.stringLiteral(path)
+  );
 };
 
 export const memberExpressionOrIdentifier = (names) => {
-    if (names.length === 1) {
-        return t.identifier(names[0])
-    }
-    if (names.length === 2) {
-        const [b, a] = names;
-        return t.memberExpression(
-            t.identifier(a),
-            t.identifier(b)
-        );
-    }
-    const [name, ...rest] = names;
+  if (names.length === 1) {
+    return t.identifier(names[0]);
+  }
+  if (names.length === 2) {
+    const [b, a] = names;
+    return t.memberExpression(t.identifier(a), t.identifier(b));
+  }
+  const [name, ...rest] = names;
 
-    return t.memberExpression(
-        memberExpressionOrIdentifier(rest),
-        t.identifier(name)
-    )
+  return t.memberExpression(
+    memberExpressionOrIdentifier(rest),
+    t.identifier(name)
+  );
 };
 
-export const memberExpressionOrIdentifierAminoCasing = (names, aminoCasingFn: Function) => {
-    if (names.length === 1) {
-        return t.identifier(aminoCasingFn(names[0]))
-    }
-    if (names.length === 2) {
-        const [b, a] = names;
-        return t.memberExpression(
-            t.identifier(aminoCasingFn(a)),
-            t.identifier(aminoCasingFn(b))
-        );
-    }
-    const [name, ...rest] = names;
-
+export const memberExpressionOrIdentifierAminoCasing = (
+  names,
+  aminoCasingFn: Function
+) => {
+  if (names.length === 1) {
+    return t.identifier(aminoCasingFn(names[0]));
+  }
+  if (names.length === 2) {
+    const [b, a] = names;
     return t.memberExpression(
-        memberExpressionOrIdentifierAminoCasing(rest, aminoCasingFn),
-        t.identifier(aminoCasingFn(name))
-    )
+      t.identifier(aminoCasingFn(a)),
+      t.identifier(aminoCasingFn(b))
+    );
+  }
+  const [name, ...rest] = names;
+
+  return t.memberExpression(
+    memberExpressionOrIdentifierAminoCasing(rest, aminoCasingFn),
+    t.identifier(aminoCasingFn(name))
+  );
 };
 
 export const memberExpressionOrIdentifierAminoCaseField = (
-    fields: ProtoField[],
-    aminoCaseFunc: Function
+  fields: ProtoField[],
+  aminoCaseFunc: Function
 ) => {
-    if (fields.length === 1) {
-        return t.identifier(aminoCaseFunc(fields[0]))
-    }
-    if (fields.length === 2) {
-        const [b, a] = fields;
-        return t.memberExpression(
-            t.identifier(aminoCaseFunc(a)),
-            t.identifier(aminoCaseFunc(b)),
-            false, true
-        );
-    }
-    const [field, ...rest] = fields;
-
+  if (fields.length === 1) {
+    return t.identifier(aminoCaseFunc(fields[0]));
+  }
+  if (fields.length === 2) {
+    const [b, a] = fields;
     return t.memberExpression(
-        memberExpressionOrIdentifierAminoCaseField(rest, aminoCaseFunc),
-        t.identifier(aminoCaseFunc(field)),
-        false, true
-    )
+      t.identifier(aminoCaseFunc(a)),
+      t.identifier(aminoCaseFunc(b)), false, true
+    );
+  }
+  const [field, ...rest] = fields;
+
+  return t.memberExpression(
+    memberExpressionOrIdentifierAminoCaseField(rest, aminoCaseFunc),
+    t.identifier(aminoCaseFunc(field)), false, true
+  );
 };
 
 export const promiseTypeAnnotation = (name) => {
-    return t.tsTypeAnnotation(
-        t.tsTypeReference(
-            t.identifier('Promise'),
-            t.tsTypeParameterInstantiation(
-                [
-                    t.tsTypeReference(t.identifier(name))
-                ]
-            )
-        )
-    );
-}
+  return t.tsTypeAnnotation(
+    t.tsTypeReference(
+      t.identifier("Promise"),
+      t.tsTypeParameterInstantiation([t.tsTypeReference(t.identifier(name))])
+    )
+  );
+};
 
+export const getAcceptedInterfacesTypes = (
+  context: ProtoParseContext,
+  lookupInterface: string
+) => {
+  return lookupInterface ? context.store._symbols.filter(
+    (s) =>
+      s.implementsType === lookupInterface && s.ref === context.ref.filename
+  ) : [];
+};
+
+export const getSdkFieldName = (fieldName: string, field: ProtoField) => {
+  return field.options?.["(telescope:orig)"] ?? fieldName;
+};
+
+export const getAminoFieldName = (
+  fieldName: string,
+  field: ProtoField,
+  interfaceName: string,
+  context: ProtoParseContext
+) => {
+  const orig = field.options?.["(telescope:orig)"] ?? fieldName;
+
+  if (
+    (interfaceName === "Any" &&
+      context.ref.proto.package === "google.protobuf" &&
+      ( orig === "type_url" || orig === "typeUrl" ))) {
+    // type_url => type for amino
+    return "type";
+  }
+
+  return orig;
+};

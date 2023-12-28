@@ -11,6 +11,10 @@ export interface TokenPairArbRoutes {
   /** Token denomination of the second asset */
   tokenOut: string;
 }
+export interface TokenPairArbRoutesProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.TokenPairArbRoutes";
+  value: Uint8Array;
+}
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutesSDKType {
   arb_routes: RouteSDKType[];
@@ -30,6 +34,10 @@ export interface Route {
    */
   stepSize: string;
 }
+export interface RouteProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.Route";
+  value: Uint8Array;
+}
 /** Route is a hot route for a given pair of tokens */
 export interface RouteSDKType {
   trades: TradeSDKType[];
@@ -43,6 +51,10 @@ export interface Trade {
   tokenIn: string;
   /** The denom of the token that is received */
   tokenOut: string;
+}
+export interface TradeProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.Trade";
+  value: Uint8Array;
 }
 /** Trade is a single trade in a route */
 export interface TradeSDKType {
@@ -64,6 +76,10 @@ export interface RouteStatistics {
   numberOfTrades: string;
   /** route is the route that was used (pool ids along the arbitrage route) */
   route: bigint[];
+}
+export interface RouteStatisticsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.RouteStatistics";
+  value: Uint8Array;
 }
 /**
  * RouteStatistics contains the number of trades the module has executed after a
@@ -88,6 +104,10 @@ export interface PoolWeights {
   balancerWeight: bigint;
   /** The weight of a concentrated pool */
   concentratedWeight: bigint;
+}
+export interface PoolWeightsProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.PoolWeights";
+  value: Uint8Array;
 }
 /**
  * PoolWeights contains the weights of all of the different pool types. This
@@ -114,6 +134,10 @@ export interface BaseDenom {
    * amount
    */
   stepSize: string;
+}
+export interface BaseDenomProtoMsg {
+  typeUrl: "/osmosis.protorev.v1beta1.BaseDenom";
+  value: Uint8Array;
 }
 /**
  * BaseDenom represents a single base denom that the module uses for its
@@ -219,11 +243,15 @@ export const TokenPairArbRoutes = {
     return obj;
   },
   fromAmino(object: TokenPairArbRoutesAmino): TokenPairArbRoutes {
-    return {
-      arbRoutes: Array.isArray(object?.arb_routes) ? object.arb_routes.map((e: any) => Route.fromAmino(e)) : [],
-      tokenIn: object.token_in,
-      tokenOut: object.token_out
-    };
+    const message = createBaseTokenPairArbRoutes();
+    message.arbRoutes = object.arb_routes?.map(e => Route.fromAmino(e)) || [];
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = object.token_in;
+    }
+    if (object.token_out !== undefined && object.token_out !== null) {
+      message.tokenOut = object.token_out;
+    }
+    return message;
   },
   toAmino(message: TokenPairArbRoutes): TokenPairArbRoutesAmino {
     const obj: any = {};
@@ -340,10 +368,12 @@ export const Route = {
     return obj;
   },
   fromAmino(object: RouteAmino): Route {
-    return {
-      trades: Array.isArray(object?.trades) ? object.trades.map((e: any) => Trade.fromAmino(e)) : [],
-      stepSize: object.step_size
-    };
+    const message = createBaseRoute();
+    message.trades = object.trades?.map(e => Trade.fromAmino(e)) || [];
+    if (object.step_size !== undefined && object.step_size !== null) {
+      message.stepSize = object.step_size;
+    }
+    return message;
   },
   toAmino(message: Route): RouteAmino {
     const obj: any = {};
@@ -464,11 +494,17 @@ export const Trade = {
     return obj;
   },
   fromAmino(object: TradeAmino): Trade {
-    return {
-      pool: BigInt(object.pool),
-      tokenIn: object.token_in,
-      tokenOut: object.token_out
-    };
+    const message = createBaseTrade();
+    if (object.pool !== undefined && object.pool !== null) {
+      message.pool = BigInt(object.pool);
+    }
+    if (object.token_in !== undefined && object.token_in !== null) {
+      message.tokenIn = object.token_in;
+    }
+    if (object.token_out !== undefined && object.token_out !== null) {
+      message.tokenOut = object.token_out;
+    }
+    return message;
   },
   toAmino(message: Trade): TradeAmino {
     const obj: any = {};
@@ -611,11 +647,13 @@ export const RouteStatistics = {
     return obj;
   },
   fromAmino(object: RouteStatisticsAmino): RouteStatistics {
-    return {
-      profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromAmino(e)) : [],
-      numberOfTrades: object.number_of_trades,
-      route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e)) : []
-    };
+    const message = createBaseRouteStatistics();
+    message.profits = object.profits?.map(e => Coin.fromAmino(e)) || [];
+    if (object.number_of_trades !== undefined && object.number_of_trades !== null) {
+      message.numberOfTrades = object.number_of_trades;
+    }
+    message.route = object.route?.map(e => BigInt(e)) || [];
+    return message;
   },
   toAmino(message: RouteStatistics): RouteStatisticsAmino {
     const obj: any = {};
@@ -741,11 +779,17 @@ export const PoolWeights = {
     return obj;
   },
   fromAmino(object: PoolWeightsAmino): PoolWeights {
-    return {
-      stableWeight: BigInt(object.stable_weight),
-      balancerWeight: BigInt(object.balancer_weight),
-      concentratedWeight: BigInt(object.concentrated_weight)
-    };
+    const message = createBasePoolWeights();
+    if (object.stable_weight !== undefined && object.stable_weight !== null) {
+      message.stableWeight = BigInt(object.stable_weight);
+    }
+    if (object.balancer_weight !== undefined && object.balancer_weight !== null) {
+      message.balancerWeight = BigInt(object.balancer_weight);
+    }
+    if (object.concentrated_weight !== undefined && object.concentrated_weight !== null) {
+      message.concentratedWeight = BigInt(object.concentrated_weight);
+    }
+    return message;
   },
   toAmino(message: PoolWeights): PoolWeightsAmino {
     const obj: any = {};
@@ -850,10 +894,14 @@ export const BaseDenom = {
     return obj;
   },
   fromAmino(object: BaseDenomAmino): BaseDenom {
-    return {
-      denom: object.denom,
-      stepSize: object.step_size
-    };
+    const message = createBaseBaseDenom();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.step_size !== undefined && object.step_size !== null) {
+      message.stepSize = object.step_size;
+    }
+    return message;
   },
   toAmino(message: BaseDenom): BaseDenomAmino {
     const obj: any = {};

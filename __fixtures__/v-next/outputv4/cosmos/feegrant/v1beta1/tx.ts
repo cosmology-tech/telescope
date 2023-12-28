@@ -12,7 +12,11 @@ export interface MsgGrantAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
   /** allowance can be any of basic, periodic, allowed fee allowance. */
-  allowance: Any;
+  allowance?: Any;
+}
+export interface MsgGrantAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance";
+  value: Uint8Array;
 }
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -21,10 +25,14 @@ export interface MsgGrantAllowance {
 export interface MsgGrantAllowanceSDKType {
   granter: string;
   grantee: string;
-  allowance: AnySDKType;
+  allowance?: AnySDKType;
 }
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponse {}
+export interface MsgGrantAllowanceResponseProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowanceResponse";
+  value: Uint8Array;
+}
 /** MsgGrantAllowanceResponse defines the Msg/GrantAllowanceResponse response type. */
 export interface MsgGrantAllowanceResponseSDKType {}
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
@@ -34,6 +42,10 @@ export interface MsgRevokeAllowance {
   /** grantee is the address of the user being granted an allowance of another user's funds. */
   grantee: string;
 }
+export interface MsgRevokeAllowanceProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance";
+  value: Uint8Array;
+}
 /** MsgRevokeAllowance removes any existing Allowance from Granter to Grantee. */
 export interface MsgRevokeAllowanceSDKType {
   granter: string;
@@ -41,22 +53,26 @@ export interface MsgRevokeAllowanceSDKType {
 }
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponse {}
+export interface MsgRevokeAllowanceResponseProtoMsg {
+  typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowanceResponse";
+  value: Uint8Array;
+}
 /** MsgRevokeAllowanceResponse defines the Msg/RevokeAllowanceResponse response type. */
 export interface MsgRevokeAllowanceResponseSDKType {}
 function createBaseMsgGrantAllowance(): MsgGrantAllowance {
   return {
     granter: "",
     grantee: "",
-    allowance: Any.fromPartial({})
+    allowance: undefined
   };
 }
 export const MsgGrantAllowance = {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgGrantAllowance",
   encode(message: MsgGrantAllowance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       writer.uint32(10).string(message.granter);
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       writer.uint32(18).string(message.grantee);
     }
     if (message.allowance !== undefined) {
@@ -132,11 +148,17 @@ export const MsgGrantAllowance = {
     return obj;
   },
   fromAmino(object: MsgGrantAllowanceAmino): MsgGrantAllowance {
-    return {
-      granter: object.granter,
-      grantee: object.grantee,
-      allowance: object?.allowance ? Any.fromAmino(object.allowance) : undefined
-    };
+    const message = createBaseMsgGrantAllowance();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    if (object.allowance !== undefined && object.allowance !== null) {
+      message.allowance = Any.fromAmino(object.allowance);
+    }
+    return message;
   },
   toAmino(message: MsgGrantAllowance): MsgGrantAllowanceAmino {
     const obj: any = {};
@@ -212,7 +234,8 @@ export const MsgGrantAllowanceResponse = {
     return obj;
   },
   fromAmino(_: MsgGrantAllowanceResponseAmino): MsgGrantAllowanceResponse {
-    return {};
+    const message = createBaseMsgGrantAllowanceResponse();
+    return message;
   },
   toAmino(_: MsgGrantAllowanceResponse): MsgGrantAllowanceResponseAmino {
     const obj: any = {};
@@ -249,10 +272,10 @@ function createBaseMsgRevokeAllowance(): MsgRevokeAllowance {
 export const MsgRevokeAllowance = {
   typeUrl: "/cosmos.feegrant.v1beta1.MsgRevokeAllowance",
   encode(message: MsgRevokeAllowance, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.granter !== "") {
+    if (message.granter !== undefined) {
       writer.uint32(10).string(message.granter);
     }
-    if (message.grantee !== "") {
+    if (message.grantee !== undefined) {
       writer.uint32(18).string(message.grantee);
     }
     return writer;
@@ -314,10 +337,14 @@ export const MsgRevokeAllowance = {
     return obj;
   },
   fromAmino(object: MsgRevokeAllowanceAmino): MsgRevokeAllowance {
-    return {
-      granter: object.granter,
-      grantee: object.grantee
-    };
+    const message = createBaseMsgRevokeAllowance();
+    if (object.granter !== undefined && object.granter !== null) {
+      message.granter = object.granter;
+    }
+    if (object.grantee !== undefined && object.grantee !== null) {
+      message.grantee = object.grantee;
+    }
+    return message;
   },
   toAmino(message: MsgRevokeAllowance): MsgRevokeAllowanceAmino {
     const obj: any = {};
@@ -392,7 +419,8 @@ export const MsgRevokeAllowanceResponse = {
     return obj;
   },
   fromAmino(_: MsgRevokeAllowanceResponseAmino): MsgRevokeAllowanceResponse {
-    return {};
+    const message = createBaseMsgRevokeAllowanceResponse();
+    return message;
   },
   toAmino(_: MsgRevokeAllowanceResponse): MsgRevokeAllowanceResponseAmino {
     const obj: any = {};

@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -57,6 +57,10 @@ export interface HttpBody {
    * for streaming APIs.
    */
   extensions: Any[];
+}
+export interface HttpBodyProtoMsg {
+  typeUrl: "/google.api.HttpBody";
+  value: Uint8Array;
 }
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -203,16 +207,20 @@ export const HttpBody = {
     return obj;
   },
   fromAmino(object: HttpBodyAmino): HttpBody {
-    return {
-      contentType: object.content_type,
-      data: object.data,
-      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseHttpBody();
+    if (object.content_type !== undefined && object.content_type !== null) {
+      message.contentType = object.content_type;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: HttpBody): HttpBodyAmino {
     const obj: any = {};
-    obj.content_type = omitDefault(message.contentType);
-    obj.data = message.data;
+    obj.content_type = message.contentType;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {

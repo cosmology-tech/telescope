@@ -142,7 +142,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  producer_destinations: Monitoring_MonitoringDestinationAmino[];
+  producer_destinations?: Monitoring_MonitoringDestinationAmino[];
   /**
    * Monitoring configurations for sending metrics to the consumer project.
    * There can be multiple consumer destinations. A monitored resource type may
@@ -151,7 +151,7 @@ export interface MonitoringAmino {
    * resource type. A monitored resource and metric pair may only be used once
    * in the Monitoring configuration.
    */
-  consumer_destinations: Monitoring_MonitoringDestinationAmino[];
+  consumer_destinations?: Monitoring_MonitoringDestinationAmino[];
 }
 export interface MonitoringAminoMsg {
   type: "/google.api.Monitoring";
@@ -244,12 +244,12 @@ export interface Monitoring_MonitoringDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Types of the metrics to report to this monitoring destination.
    * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 export interface Monitoring_MonitoringDestinationAminoMsg {
   type: "/google.api.MonitoringDestination";
@@ -347,10 +347,10 @@ export const Monitoring = {
     return obj;
   },
   fromAmino(object: MonitoringAmino): Monitoring {
-    return {
-      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : [],
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromAmino(e)) : []
-    };
+    const message = createBaseMonitoring();
+    message.producerDestinations = object.producer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    message.consumerDestinations = object.consumer_destinations?.map(e => Monitoring_MonitoringDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Monitoring): MonitoringAmino {
     const obj: any = {};
@@ -458,10 +458,12 @@ export const Monitoring_MonitoringDestination = {
     return obj;
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseMonitoring_MonitoringDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};

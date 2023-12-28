@@ -164,24 +164,24 @@ export interface DocumentationAmino {
    * A short summary of what the service does. Can only be provided by
    * plain text.
    */
-  summary: string;
+  summary?: string;
   /** The top level pages for the documentation set. */
-  pages: PageAmino[];
+  pages?: PageAmino[];
   /**
    * A list of documentation rules that apply to individual API elements.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: DocumentationRuleAmino[];
+  rules?: DocumentationRuleAmino[];
   /** The URL to the root of documentation. */
-  documentation_root_url: string;
+  documentation_root_url?: string;
   /**
    * Specifies the service root url if the default one (the service name
    * from the yaml file) is not suitable. This can be seen in any fully
    * specified service urls as well as sections that show a base that other
    * urls are relative to.
    */
-  service_root_url: string;
+  service_root_url?: string;
   /**
    * Declares a single overview page. For example:
    * <pre><code>documentation:
@@ -197,11 +197,7 @@ export interface DocumentationAmino {
    * </code></pre>
    * Note: you cannot specify both `overview` field and `pages` field.
    */
-  overview: string;
-}
-export interface DocumentationAminoMsg {
-  type: "/google.api.Documentation";
-  value: DocumentationAmino;
+  overview?: string;
 }
 /**
  * `Documentation` provides the information for describing a service.
@@ -301,18 +297,14 @@ export interface DocumentationRuleAmino {
    * wildcard will match one or more components. To specify a default for all
    * applicable elements, the whole pattern "*" is used.
    */
-  selector: string;
+  selector?: string;
   /** Description of the selected API(s). */
-  description: string;
+  description?: string;
   /**
    * Deprecation description of the selected element(s). It can be provided if
    * an element is marked as `deprecated`.
    */
-  deprecation_description: string;
-}
-export interface DocumentationRuleAminoMsg {
-  type: "/google.api.DocumentationRule";
-  value: DocumentationRuleAmino;
+  deprecation_description?: string;
 }
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRuleSDKType {
@@ -378,21 +370,17 @@ export interface PageAmino {
    * You can reference `Java` page using Markdown reference link syntax:
    * `[Java][Tutorial.Java]`.
    */
-  name: string;
+  name?: string;
   /**
    * The Markdown content of the page. You can use <code>&#40;== include {path}
    * ==&#41;</code> to include content from a Markdown file.
    */
-  content: string;
+  content?: string;
   /**
    * Subpages of this page. The order of subpages specified here will be
    * honored in the generated docset.
    */
-  subpages: PageAmino[];
-}
-export interface PageAminoMsg {
-  type: "/google.api.Page";
-  value: PageAmino;
+  subpages?: PageAmino[];
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -436,7 +424,7 @@ export const Documentation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Documentation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Documentation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentation();
@@ -447,10 +435,10 @@ export const Documentation = {
           message.summary = reader.string();
           break;
         case 5:
-          message.pages.push(Page.decode(reader, reader.uint32()));
+          message.pages.push(Page.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.rules.push(DocumentationRule.decode(reader, reader.uint32()));
+          message.rules.push(DocumentationRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
           message.documentationRootUrl = reader.string();
@@ -535,25 +523,33 @@ export const Documentation = {
     return obj;
   },
   fromAmino(object: DocumentationAmino): Documentation {
-    return {
-      summary: object.summary,
-      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromAmino(e)) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromAmino(e)) : [],
-      documentationRootUrl: object.documentation_root_url,
-      serviceRootUrl: object.service_root_url,
-      overview: object.overview
-    };
+    const message = createBaseDocumentation();
+    if (object.summary !== undefined && object.summary !== null) {
+      message.summary = object.summary;
+    }
+    message.pages = object.pages?.map(e => Page.fromAmino(e)) || [];
+    message.rules = object.rules?.map(e => DocumentationRule.fromAmino(e)) || [];
+    if (object.documentation_root_url !== undefined && object.documentation_root_url !== null) {
+      message.documentationRootUrl = object.documentation_root_url;
+    }
+    if (object.service_root_url !== undefined && object.service_root_url !== null) {
+      message.serviceRootUrl = object.service_root_url;
+    }
+    if (object.overview !== undefined && object.overview !== null) {
+      message.overview = object.overview;
+    }
+    return message;
   },
-  toAmino(message: Documentation): DocumentationAmino {
+  toAmino(message: Documentation, useInterfaces: boolean = true): DocumentationAmino {
     const obj: any = {};
     obj.summary = omitDefault(message.summary);
     if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toAmino(e) : undefined);
+      obj.pages = message.pages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pages = [];
     }
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
@@ -562,11 +558,8 @@ export const Documentation = {
     obj.overview = omitDefault(message.overview);
     return obj;
   },
-  fromAminoMsg(object: DocumentationAminoMsg): Documentation {
-    return Documentation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DocumentationProtoMsg): Documentation {
-    return Documentation.decode(message.value);
+  fromProtoMsg(message: DocumentationProtoMsg, useInterfaces: boolean = true): Documentation {
+    return Documentation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Documentation): Uint8Array {
     return Documentation.encode(message).finish();
@@ -599,7 +592,7 @@ export const DocumentationRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DocumentationRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DocumentationRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDocumentationRule();
@@ -658,24 +651,27 @@ export const DocumentationRule = {
     return obj;
   },
   fromAmino(object: DocumentationRuleAmino): DocumentationRule {
-    return {
-      selector: object.selector,
-      description: object.description,
-      deprecationDescription: object.deprecation_description
-    };
+    const message = createBaseDocumentationRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.deprecation_description !== undefined && object.deprecation_description !== null) {
+      message.deprecationDescription = object.deprecation_description;
+    }
+    return message;
   },
-  toAmino(message: DocumentationRule): DocumentationRuleAmino {
+  toAmino(message: DocumentationRule, useInterfaces: boolean = true): DocumentationRuleAmino {
     const obj: any = {};
     obj.selector = omitDefault(message.selector);
     obj.description = omitDefault(message.description);
     obj.deprecation_description = omitDefault(message.deprecationDescription);
     return obj;
   },
-  fromAminoMsg(object: DocumentationRuleAminoMsg): DocumentationRule {
-    return DocumentationRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DocumentationRuleProtoMsg): DocumentationRule {
-    return DocumentationRule.decode(message.value);
+  fromProtoMsg(message: DocumentationRuleProtoMsg, useInterfaces: boolean = true): DocumentationRule {
+    return DocumentationRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DocumentationRule): Uint8Array {
     return DocumentationRule.encode(message).finish();
@@ -708,7 +704,7 @@ export const Page = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Page {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Page {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePage();
@@ -722,7 +718,7 @@ export const Page = {
           message.content = reader.string();
           break;
         case 3:
-          message.subpages.push(Page.decode(reader, reader.uint32()));
+          message.subpages.push(Page.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -775,28 +771,29 @@ export const Page = {
     return obj;
   },
   fromAmino(object: PageAmino): Page {
-    return {
-      name: object.name,
-      content: object.content,
-      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromAmino(e)) : []
-    };
+    const message = createBasePage();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.content !== undefined && object.content !== null) {
+      message.content = object.content;
+    }
+    message.subpages = object.subpages?.map(e => Page.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Page): PageAmino {
+  toAmino(message: Page, useInterfaces: boolean = true): PageAmino {
     const obj: any = {};
     obj.name = omitDefault(message.name);
     obj.content = omitDefault(message.content);
     if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e) : undefined);
+      obj.subpages = message.subpages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.subpages = [];
     }
     return obj;
   },
-  fromAminoMsg(object: PageAminoMsg): Page {
-    return Page.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PageProtoMsg): Page {
-    return Page.decode(message.value);
+  fromProtoMsg(message: PageProtoMsg, useInterfaces: boolean = true): Page {
+    return Page.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Page): Uint8Array {
     return Page.encode(message).finish();

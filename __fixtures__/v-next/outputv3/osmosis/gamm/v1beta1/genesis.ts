@@ -7,7 +7,7 @@ import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -19,11 +19,7 @@ export interface ParamsProtoMsg {
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsAmino {
-  pool_creation_fee: CoinAmino[];
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/gamm/params";
-  value: ParamsAmino;
+  pool_creation_fee?: CoinAmino[];
 }
 /** Params holds parameters for the incentives module */
 export interface ParamsSDKType {
@@ -45,14 +41,10 @@ export type GenesisStateEncoded = Omit<GenesisState, "pools"> & {
 };
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateAmino {
-  pools: AnyAmino[];
+  pools?: AnyAmino[];
   /** will be renamed to next_pool_id in an upcoming version */
-  next_pool_number: string;
+  next_pool_number?: string;
   params?: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/gamm/genesis-state";
-  value: GenesisStateAmino;
 }
 /** GenesisState defines the gamm module's genesis state. */
 export interface GenesisStateSDKType {
@@ -74,7 +66,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -82,7 +74,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.poolCreationFee.push(Coin.decode(reader, reader.uint32()));
+          message.poolCreationFee.push(Coin.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -125,30 +117,21 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      poolCreationFee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.poolCreationFee = object.pool_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     if (message.poolCreationFee) {
-      obj.pool_creation_fee = message.poolCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
+      obj.pool_creation_fee = message.poolCreationFee.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.pool_creation_fee = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  toAminoMsg(message: Params): ParamsAminoMsg {
-    return {
-      type: "osmosis/gamm/params",
-      value: Params.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();
@@ -182,7 +165,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -190,13 +173,13 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pools.push((PoolI_InterfaceDecoder(reader) as Any));
+          message.pools.push(useInterfaces ? (PoolI_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
           message.nextPoolNumber = reader.uint64();
           break;
         case 3:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -253,34 +236,29 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => PoolI_FromAmino(e)) : [],
-      nextPoolNumber: BigInt(object.next_pool_number),
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    message.pools = object.pools?.map(e => PoolI_FromAmino(e)) || [];
+    if (object.next_pool_number !== undefined && object.next_pool_number !== null) {
+      message.nextPoolNumber = BigInt(object.next_pool_number);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.pools) {
-      obj.pools = message.pools.map(e => e ? PoolI_ToAmino((e as Any)) : undefined);
+      obj.pools = message.pools.map(e => e ? PoolI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
       obj.pools = [];
     }
-    obj.next_pool_number = omitDefault(message.nextPoolNumber);
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "osmosis/gamm/genesis-state",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -294,12 +272,12 @@ export const GenesisState = {
 };
 export const PoolI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Pool1 | Pool2 | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     case "/osmosis.gamm.v1beta1.Pool":
-      return Pool1.decode(data.value);
+      return Pool1.decode(data.value, undefined, true);
     case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
-      return Pool2.decode(data.value);
+      return Pool2.decode(data.value, undefined, true);
     default:
       return data;
   }
@@ -320,19 +298,19 @@ export const PoolI_FromAmino = (content: AnyAmino) => {
       return Any.fromAmino(content);
   }
 };
-export const PoolI_ToAmino = (content: Any) => {
+export const PoolI_ToAmino = (content: Any, useInterfaces: boolean = true) => {
   switch (content.typeUrl) {
     case "/osmosis.gamm.v1beta1.Pool":
       return {
         type: "osmosis/gamm/pool",
-        value: Pool1.toAmino(Pool1.decode(content.value))
+        value: Pool1.toAmino(Pool1.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     case "/osmosis.gamm.poolmodels.stableswap.v1beta1.Pool":
       return {
         type: "osmosis/gamm/pool",
-        value: Pool2.toAmino(Pool2.decode(content.value))
+        value: Pool2.toAmino(Pool2.decode(content.value, undefined, useInterfaces), useInterfaces)
       };
     default:
-      return Any.toAmino(content);
+      return Any.toAmino(content, useInterfaces);
   }
 };

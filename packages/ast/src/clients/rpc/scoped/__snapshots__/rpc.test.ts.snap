@@ -22,6 +22,56 @@ exports[`createScopedRpcFactory 1`] = `
 });"
 `;
 
+exports[`createScopedRpcFactoryWithComet 1`] = `
+"export const createRpcFactorizzleWithComet = async ({
+  rpcEndpoint
+}: {
+  rpcEndpoint: string | HttpEndpoint;
+}) => {
+  const tmClient = await connectComet(rpcEndpoint);
+  const client = new QueryClient(tmClient);
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
+      },
+      gov: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
+      }
+    },
+    osmosis: {
+      gamm: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createRpcQueryExtension(client)
+      }
+    }
+  };
+};"
+`;
+
+exports[`createScopedRpcFactoryWithoutTm 1`] = `
+"export const createRpcFactorizzleWithoutTM = async ({
+  rpc
+}: {
+  rpc: Rpc;
+}) => {
+  return {
+    cosmos: {
+      bank: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+      },
+      gov: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+      }
+    },
+    osmosis: {
+      gamm: {
+        v1beta1: (await import("./proto/cosmos/bank/v1beta1/query.lcd")).createClientImpl(rpc)
+      }
+    }
+  };
+};"
+`;
+
 exports[`createScopedRpcTmFactory 1`] = `
 "export const createRpcFactorizzle = async ({
   rpcEndpoint

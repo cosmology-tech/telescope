@@ -9,6 +9,10 @@ export interface GenesisDeployment {
   deployment: Deployment | undefined;
   groups: Group[];
 }
+export interface GenesisDeploymentProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GenesisDeployment";
+  value: Uint8Array;
+}
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
   deployment: DeploymentSDKType | undefined;
@@ -18,6 +22,10 @@ export interface GenesisDeploymentSDKType {
 export interface GenesisState {
   deployments: GenesisDeployment[];
   params: Params | undefined;
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -106,10 +114,12 @@ export const GenesisDeployment = {
     return obj;
   },
   fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisDeployment();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromAmino(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
     const obj: any = {};
@@ -225,10 +235,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromAmino(e)) : [],
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseGenesisState();
+    message.deployments = object.deployments?.map(e => GenesisDeployment.fromAmino(e)) || [];
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

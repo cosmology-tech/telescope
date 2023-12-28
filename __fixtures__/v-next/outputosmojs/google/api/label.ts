@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -50,6 +50,10 @@ export interface LabelDescriptor {
   valueType: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
   description: string;
+}
+export interface LabelDescriptorProtoMsg {
+  typeUrl: "/google.api.LabelDescriptor";
+  value: Uint8Array;
 }
 /** A description of a label. */
 export interface LabelDescriptorSDKType {
@@ -144,17 +148,23 @@ export const LabelDescriptor = {
     return obj;
   },
   fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
-    return {
-      key: object.key,
-      valueType: isSet(object.value_type) ? labelDescriptor_ValueTypeFromJSON(object.value_type) : -1,
-      description: object.description
-    };
+    const message = createBaseLabelDescriptor();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = labelDescriptor_ValueTypeFromJSON(object.value_type);
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: LabelDescriptor): LabelDescriptorAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value_type = omitDefault(message.valueType);
-    obj.description = omitDefault(message.description);
+    obj.key = message.key;
+    obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType);
+    obj.description = message.description;
     return obj;
   },
   fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {

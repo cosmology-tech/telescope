@@ -7,7 +7,7 @@ export const protobufPackage = "akash.deployment.v1beta2";
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorization {
-  $typeUrl?: string;
+  $typeUrl?: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
   /**
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
@@ -38,7 +38,7 @@ export interface DepositDeploymentAuthorizationAminoMsg {
  * the granter's account for a deployment.
  */
 export interface DepositDeploymentAuthorizationSDKType {
-  $typeUrl?: string;
+  $typeUrl?: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";
   spend_limit: CoinSDKType;
 }
 function createBaseDepositDeploymentAuthorization(): DepositDeploymentAuthorization {
@@ -100,9 +100,11 @@ export const DepositDeploymentAuthorization = {
     return obj;
   },
   fromAmino(object: DepositDeploymentAuthorizationAmino): DepositDeploymentAuthorization {
-    return {
-      spendLimit: object?.spend_limit ? Coin.fromAmino(object.spend_limit) : undefined
-    };
+    const message = createBaseDepositDeploymentAuthorization();
+    if (object.spend_limit !== undefined && object.spend_limit !== null) {
+      message.spendLimit = Coin.fromAmino(object.spend_limit);
+    }
+    return message;
   },
   toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
     const obj: any = {};

@@ -20,12 +20,8 @@ export interface AppProtoMsg {
  * updated in ResponseEndBlock.
  */
 export interface AppAmino {
-  protocol: string;
-  software: string;
-}
-export interface AppAminoMsg {
-  type: "/tendermint.version.App";
-  value: AppAmino;
+  protocol?: string;
+  software?: string;
 }
 /**
  * App includes the protocol and software version for the application.
@@ -55,12 +51,8 @@ export interface ConsensusProtoMsg {
  * state transition machine.
  */
 export interface ConsensusAmino {
-  block: string;
-  app: string;
-}
-export interface ConsensusAminoMsg {
-  type: "/tendermint.version.Consensus";
-  value: ConsensusAmino;
+  block?: string;
+  app?: string;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -88,7 +80,7 @@ export const App = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): App {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): App {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseApp();
@@ -141,22 +133,23 @@ export const App = {
     return obj;
   },
   fromAmino(object: AppAmino): App {
-    return {
-      protocol: BigInt(object.protocol),
-      software: object.software
-    };
+    const message = createBaseApp();
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol);
+    }
+    if (object.software !== undefined && object.software !== null) {
+      message.software = object.software;
+    }
+    return message;
   },
-  toAmino(message: App): AppAmino {
+  toAmino(message: App, useInterfaces: boolean = true): AppAmino {
     const obj: any = {};
     obj.protocol = omitDefault(message.protocol);
     obj.software = omitDefault(message.software);
     return obj;
   },
-  fromAminoMsg(object: AppAminoMsg): App {
-    return App.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AppProtoMsg): App {
-    return App.decode(message.value);
+  fromProtoMsg(message: AppProtoMsg, useInterfaces: boolean = true): App {
+    return App.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: App): Uint8Array {
     return App.encode(message).finish();
@@ -185,7 +178,7 @@ export const Consensus = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Consensus {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Consensus {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseConsensus();
@@ -240,22 +233,23 @@ export const Consensus = {
     return obj;
   },
   fromAmino(object: ConsensusAmino): Consensus {
-    return {
-      block: BigInt(object.block),
-      app: BigInt(object.app)
-    };
+    const message = createBaseConsensus();
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app);
+    }
+    return message;
   },
-  toAmino(message: Consensus): ConsensusAmino {
+  toAmino(message: Consensus, useInterfaces: boolean = true): ConsensusAmino {
     const obj: any = {};
     obj.block = omitDefault(message.block);
     obj.app = omitDefault(message.app);
     return obj;
   },
-  fromAminoMsg(object: ConsensusAminoMsg): Consensus {
-    return Consensus.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ConsensusProtoMsg): Consensus {
-    return Consensus.decode(message.value);
+  fromProtoMsg(message: ConsensusProtoMsg, useInterfaces: boolean = true): Consensus {
+    return Consensus.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Consensus): Uint8Array {
     return Consensus.encode(message).finish();

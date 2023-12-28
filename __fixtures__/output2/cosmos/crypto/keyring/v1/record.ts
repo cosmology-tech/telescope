@@ -10,7 +10,7 @@ export interface Record {
   /** name represents a name of Record */
   name: string;
   /** pub_key represents a public key in any format */
-  pubKey: Any;
+  pubKey?: Any;
   /** local stores the public information about a locally stored key */
   local?: Record_Local;
   /** ledger stores the public information about a Ledger key */
@@ -25,12 +25,12 @@ export interface Record {
  * Local item
  */
 export interface Record_Local {
-  privKey: Any;
+  privKey?: Any;
   privKeyType: string;
 }
 /** Ledger item */
 export interface Record_Ledger {
-  path: BIP44Params;
+  path?: BIP44Params;
 }
 /** Multi item */
 export interface Record_Multi {}
@@ -39,7 +39,7 @@ export interface Record_Offline {}
 function createBaseRecord(): Record {
   return {
     name: "",
-    pubKey: Any.fromPartial({}),
+    pubKey: undefined,
     local: undefined,
     ledger: undefined,
     multi: undefined,
@@ -133,7 +133,7 @@ export const Record = {
 };
 function createBaseRecord_Local(): Record_Local {
   return {
-    privKey: Any.fromPartial({}),
+    privKey: undefined,
     privKeyType: ""
   };
 }
@@ -188,7 +188,7 @@ export const Record_Local = {
 };
 function createBaseRecord_Ledger(): Record_Ledger {
   return {
-    path: BIP44Params.fromPartial({})
+    path: undefined
   };
 }
 export const Record_Ledger = {

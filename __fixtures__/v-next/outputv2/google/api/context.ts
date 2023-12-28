@@ -95,7 +95,7 @@ export interface ContextAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: ContextRuleAmino[];
+  rules?: ContextRuleAmino[];
 }
 export interface ContextAminoMsg {
   type: "/google.api.Context";
@@ -182,21 +182,21 @@ export interface ContextRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** A list of full type names of requested contexts. */
-  requested: string[];
+  requested?: string[];
   /** A list of full type names of provided contexts. */
-  provided: string[];
+  provided?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from client to backend.
    */
-  allowed_request_extensions: string[];
+  allowed_request_extensions?: string[];
   /**
    * A list of full type names or extension IDs of extensions allowed in grpc
    * side channel from backend to client.
    */
-  allowed_response_extensions: string[];
+  allowed_response_extensions?: string[];
 }
 export interface ContextRuleAminoMsg {
   type: "/google.api.ContextRule";
@@ -277,9 +277,9 @@ export const Context = {
     return obj;
   },
   fromAmino(object: ContextAmino): Context {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromAmino(e)) : []
-    };
+    const message = createBaseContext();
+    message.rules = object.rules?.map(e => ContextRule.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Context): ContextAmino {
     const obj: any = {};
@@ -442,13 +442,15 @@ export const ContextRule = {
     return obj;
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
-    return {
-      selector: object.selector,
-      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
-      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
-      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
-      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
-    };
+    const message = createBaseContextRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    message.requested = object.requested?.map(e => e) || [];
+    message.provided = object.provided?.map(e => e) || [];
+    message.allowedRequestExtensions = object.allowed_request_extensions?.map(e => e) || [];
+    message.allowedResponseExtensions = object.allowed_response_extensions?.map(e => e) || [];
+    return message;
   },
   toAmino(message: ContextRule): ContextRuleAmino {
     const obj: any = {};

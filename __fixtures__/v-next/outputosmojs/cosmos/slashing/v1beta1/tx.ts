@@ -5,12 +5,20 @@ export const protobufPackage = "cosmos.slashing.v1beta1";
 export interface MsgUnjail {
   validatorAddr: string;
 }
+export interface MsgUnjailProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail";
+  value: Uint8Array;
+}
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailSDKType {
   validator_addr: string;
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
+export interface MsgUnjailResponseProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse";
+  value: Uint8Array;
+}
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponseSDKType {}
 function createBaseMsgUnjail(): MsgUnjail {
@@ -74,9 +82,11 @@ export const MsgUnjail = {
     return obj;
   },
   fromAmino(object: MsgUnjailAmino): MsgUnjail {
-    return {
-      validatorAddr: object.validator_addr
-    };
+    const message = createBaseMsgUnjail();
+    if (object.validator_addr !== undefined && object.validator_addr !== null) {
+      message.validatorAddr = object.validator_addr;
+    }
+    return message;
   },
   toAmino(message: MsgUnjail): MsgUnjailAmino {
     const obj: any = {};
@@ -149,7 +159,8 @@ export const MsgUnjailResponse = {
     return obj;
   },
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
-    return {};
+    const message = createBaseMsgUnjailResponse();
+    return message;
   },
   toAmino(_: MsgUnjailResponse): MsgUnjailResponseAmino {
     const obj: any = {};

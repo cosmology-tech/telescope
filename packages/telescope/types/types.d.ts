@@ -10,6 +10,7 @@ export interface BundlerFile {
     package?: string;
     localname: string;
     filename: string;
+    isMsg?: boolean;
     instantExportedMethods?: ProtoServiceMethod[];
 }
 export interface ImportObj {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -29,15 +29,11 @@ export interface StoreKVPairProtoMsg {
  */
 export interface StoreKVPairAmino {
   /** the store key for the KVStore this pair originates from */
-  store_key: string;
+  store_key?: string;
   /** true indicates a delete operation, false indicates a set operation */
-  delete: boolean;
-  key: Uint8Array;
-  value: Uint8Array;
-}
-export interface StoreKVPairAminoMsg {
-  type: "cosmos-sdk/StoreKVPair";
-  value: StoreKVPairAmino;
+  delete?: boolean;
+  key?: string;
+  value?: string;
 }
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -78,7 +74,7 @@ export const StoreKVPair = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): StoreKVPair {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): StoreKVPair {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStoreKVPair();
@@ -145,32 +141,31 @@ export const StoreKVPair = {
     return obj;
   },
   fromAmino(object: StoreKVPairAmino): StoreKVPair {
-    return {
-      storeKey: object.store_key,
-      delete: object.delete,
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseStoreKVPair();
+    if (object.store_key !== undefined && object.store_key !== null) {
+      message.storeKey = object.store_key;
+    }
+    if (object.delete !== undefined && object.delete !== null) {
+      message.delete = object.delete;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
-  toAmino(message: StoreKVPair): StoreKVPairAmino {
+  toAmino(message: StoreKVPair, useInterfaces: boolean = true): StoreKVPairAmino {
     const obj: any = {};
-    obj.store_key = omitDefault(message.storeKey);
-    obj.delete = omitDefault(message.delete);
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.store_key = message.storeKey;
+    obj.delete = message.delete;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
-  fromAminoMsg(object: StoreKVPairAminoMsg): StoreKVPair {
-    return StoreKVPair.fromAmino(object.value);
-  },
-  toAminoMsg(message: StoreKVPair): StoreKVPairAminoMsg {
-    return {
-      type: "cosmos-sdk/StoreKVPair",
-      value: StoreKVPair.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: StoreKVPairProtoMsg): StoreKVPair {
-    return StoreKVPair.decode(message.value);
+  fromProtoMsg(message: StoreKVPairProtoMsg, useInterfaces: boolean = true): StoreKVPair {
+    return StoreKVPair.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: StoreKVPair): Uint8Array {
     return StoreKVPair.encode(message).finish();

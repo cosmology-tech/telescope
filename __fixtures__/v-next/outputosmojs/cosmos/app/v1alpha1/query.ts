@@ -4,16 +4,24 @@ import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
+export interface QueryConfigRequestProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest";
+  value: Uint8Array;
+}
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequestSDKType {}
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
   /** config is the current app config. */
-  config: Config;
+  config?: Config;
+}
+export interface QueryConfigResponseProtoMsg {
+  typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse";
+  value: Uint8Array;
 }
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponseSDKType {
-  config: ConfigSDKType;
+  config?: ConfigSDKType;
 }
 function createBaseQueryConfigRequest(): QueryConfigRequest {
   return {};
@@ -59,7 +67,8 @@ export const QueryConfigRequest = {
     return obj;
   },
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
-    return {};
+    const message = createBaseQueryConfigRequest();
+    return message;
   },
   toAmino(_: QueryConfigRequest): QueryConfigRequestAmino {
     const obj: any = {};
@@ -89,7 +98,7 @@ export const QueryConfigRequest = {
 };
 function createBaseQueryConfigResponse(): QueryConfigResponse {
   return {
-    config: Config.fromPartial({})
+    config: undefined
   };
 }
 export const QueryConfigResponse = {
@@ -148,9 +157,11 @@ export const QueryConfigResponse = {
     return obj;
   },
   fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
-    return {
-      config: object?.config ? Config.fromAmino(object.config) : undefined
-    };
+    const message = createBaseQueryConfigResponse();
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Config.fromAmino(object.config);
+    }
+    return message;
   },
   toAmino(message: QueryConfigResponse): QueryConfigResponseAmino {
     const obj: any = {};

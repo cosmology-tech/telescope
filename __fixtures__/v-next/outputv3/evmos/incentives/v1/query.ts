@@ -3,7 +3,7 @@ import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, G
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
@@ -11,7 +11,7 @@ export const protobufPackage = "evmos.incentives.v1";
  */
 export interface QueryIncentivesRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryIncentivesRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesRequest";
@@ -25,16 +25,12 @@ export interface QueryIncentivesRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryIncentivesRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryIncentivesRequest";
-  value: QueryIncentivesRequestAmino;
-}
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
  * method.
  */
 export interface QueryIncentivesRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
@@ -43,7 +39,7 @@ export interface QueryIncentivesRequestSDKType {
 export interface QueryIncentivesResponse {
   incentives: Incentive[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryIncentivesResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryIncentivesResponse";
@@ -54,13 +50,9 @@ export interface QueryIncentivesResponseProtoMsg {
  * method.
  */
 export interface QueryIncentivesResponseAmino {
-  incentives: IncentiveAmino[];
+  incentives?: IncentiveAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryIncentivesResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryIncentivesResponse";
-  value: QueryIncentivesResponseAmino;
 }
 /**
  * QueryIncentivesResponse is the response type for the Query/Incentives RPC
@@ -68,7 +60,7 @@ export interface QueryIncentivesResponseAminoMsg {
  */
 export interface QueryIncentivesResponseSDKType {
   incentives: IncentiveSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequest {
@@ -82,11 +74,7 @@ export interface QueryIncentiveRequestProtoMsg {
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequestAmino {
   /** contract identifier is the hex contract address of a contract */
-  contract: string;
-}
-export interface QueryIncentiveRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryIncentiveRequest";
-  value: QueryIncentiveRequestAmino;
+  contract?: string;
 }
 /** QueryIncentiveRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryIncentiveRequestSDKType {
@@ -110,10 +98,6 @@ export interface QueryIncentiveResponseProtoMsg {
 export interface QueryIncentiveResponseAmino {
   incentive?: IncentiveAmino;
 }
-export interface QueryIncentiveResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryIncentiveResponse";
-  value: QueryIncentiveResponseAmino;
-}
 /**
  * QueryIncentiveResponse is the response type for the Query/Incentive RPC
  * method.
@@ -129,7 +113,7 @@ export interface QueryGasMetersRequest {
   /** contract is the hex contract address of a incentivized smart contract */
   contract: string;
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryGasMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersRequest";
@@ -141,13 +125,9 @@ export interface QueryGasMetersRequestProtoMsg {
  */
 export interface QueryGasMetersRequestAmino {
   /** contract is the hex contract address of a incentivized smart contract */
-  contract: string;
+  contract?: string;
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
-}
-export interface QueryGasMetersRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryGasMetersRequest";
-  value: QueryGasMetersRequestAmino;
 }
 /**
  * QueryGasMetersRequest is the request type for the Query/Incentives RPC
@@ -155,7 +135,7 @@ export interface QueryGasMetersRequestAminoMsg {
  */
 export interface QueryGasMetersRequestSDKType {
   contract: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
@@ -164,7 +144,7 @@ export interface QueryGasMetersRequestSDKType {
 export interface QueryGasMetersResponse {
   gasMeters: GasMeter[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryGasMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryGasMetersResponse";
@@ -175,13 +155,9 @@ export interface QueryGasMetersResponseProtoMsg {
  * method.
  */
 export interface QueryGasMetersResponseAmino {
-  gas_meters: GasMeterAmino[];
+  gas_meters?: GasMeterAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryGasMetersResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryGasMetersResponse";
-  value: QueryGasMetersResponseAmino;
 }
 /**
  * QueryGasMetersResponse is the response type for the Query/Incentives RPC
@@ -189,7 +165,7 @@ export interface QueryGasMetersResponseAminoMsg {
  */
 export interface QueryGasMetersResponseSDKType {
   gas_meters: GasMeterSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequest {
@@ -205,13 +181,9 @@ export interface QueryGasMeterRequestProtoMsg {
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequestAmino {
   /** contract identifier is the hex contract address of a contract */
-  contract: string;
+  contract?: string;
   /** participant identifier is the hex address of a user */
-  participant: string;
-}
-export interface QueryGasMeterRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryGasMeterRequest";
-  value: QueryGasMeterRequestAmino;
+  participant?: string;
 }
 /** QueryGasMeterRequest is the request type for the Query/Incentive RPC method. */
 export interface QueryGasMeterRequestSDKType {
@@ -242,11 +214,7 @@ export interface QueryGasMeterResponseAmino {
    * QueryGasMeterResponse is the response type for the Query/Incentive RPC
    * method.
    */
-  gas_meter: string;
-}
-export interface QueryGasMeterResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryGasMeterResponse";
-  value: QueryGasMeterResponseAmino;
+  gas_meter?: string;
 }
 /**
  * QueryGasMeterResponse is the response type for the Query/Incentive RPC
@@ -261,7 +229,7 @@ export interface QueryGasMeterResponseSDKType {
  */
 export interface QueryAllocationMetersRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryAllocationMetersRequestProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersRequest";
@@ -275,16 +243,12 @@ export interface QueryAllocationMetersRequestAmino {
   /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
-export interface QueryAllocationMetersRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryAllocationMetersRequest";
-  value: QueryAllocationMetersRequestAmino;
-}
 /**
  * QueryAllocationMetersRequest is the request type for the
  * Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllocationMetersResponse is the response type for the
@@ -293,7 +257,7 @@ export interface QueryAllocationMetersRequestSDKType {
 export interface QueryAllocationMetersResponse {
   allocationMeters: DecCoin[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryAllocationMetersResponseProtoMsg {
   typeUrl: "/evmos.incentives.v1.QueryAllocationMetersResponse";
@@ -304,13 +268,9 @@ export interface QueryAllocationMetersResponseProtoMsg {
  * Query/AllocationMeters RPC method.
  */
 export interface QueryAllocationMetersResponseAmino {
-  allocation_meters: DecCoinAmino[];
+  allocation_meters?: DecCoinAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
-}
-export interface QueryAllocationMetersResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryAllocationMetersResponse";
-  value: QueryAllocationMetersResponseAmino;
 }
 /**
  * QueryAllocationMetersResponse is the response type for the
@@ -318,7 +278,7 @@ export interface QueryAllocationMetersResponseAminoMsg {
  */
 export interface QueryAllocationMetersResponseSDKType {
   allocation_meters: DecCoinSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
@@ -338,11 +298,7 @@ export interface QueryAllocationMeterRequestProtoMsg {
  */
 export interface QueryAllocationMeterRequestAmino {
   /** denom is the coin denom to query an allocation meter for. */
-  denom: string;
-}
-export interface QueryAllocationMeterRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryAllocationMeterRequest";
-  value: QueryAllocationMeterRequestAmino;
+  denom?: string;
 }
 /**
  * QueryAllocationMeterRequest is the request type for the Query/AllocationMeter
@@ -369,10 +325,6 @@ export interface QueryAllocationMeterResponseProtoMsg {
 export interface QueryAllocationMeterResponseAmino {
   allocation_meter?: DecCoinAmino;
 }
-export interface QueryAllocationMeterResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryAllocationMeterResponse";
-  value: QueryAllocationMeterResponseAmino;
-}
 /**
  * QueryAllocationMeterResponse is the response type for the
  * Query/AllocationMeter RPC method.
@@ -388,10 +340,6 @@ export interface QueryParamsRequestProtoMsg {
 }
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "/evmos.incentives.v1.QueryParamsRequest";
-  value: QueryParamsRequestAmino;
-}
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequestSDKType {}
 /**
@@ -412,10 +360,6 @@ export interface QueryParamsResponseProtoMsg {
 export interface QueryParamsResponseAmino {
   params?: ParamsAmino;
 }
-export interface QueryParamsResponseAminoMsg {
-  type: "/evmos.incentives.v1.QueryParamsResponse";
-  value: QueryParamsResponseAmino;
-}
 /**
  * QueryParamsResponse is the response type for the Query/Params RPC
  * method.
@@ -425,7 +369,7 @@ export interface QueryParamsResponseSDKType {
 }
 function createBaseQueryIncentivesRequest(): QueryIncentivesRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryIncentivesRequest = {
@@ -436,7 +380,7 @@ export const QueryIncentivesRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivesRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesRequest();
@@ -444,7 +388,7 @@ export const QueryIncentivesRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -481,20 +425,19 @@ export const QueryIncentivesRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentivesRequestAmino): QueryIncentivesRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivesRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryIncentivesRequest): QueryIncentivesRequestAmino {
+  toAmino(message: QueryIncentivesRequest, useInterfaces: boolean = true): QueryIncentivesRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryIncentivesRequestAminoMsg): QueryIncentivesRequest {
-    return QueryIncentivesRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryIncentivesRequestProtoMsg): QueryIncentivesRequest {
-    return QueryIncentivesRequest.decode(message.value);
+  fromProtoMsg(message: QueryIncentivesRequestProtoMsg, useInterfaces: boolean = true): QueryIncentivesRequest {
+    return QueryIncentivesRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivesRequest): Uint8Array {
     return QueryIncentivesRequest.encode(message).finish();
@@ -509,7 +452,7 @@ export const QueryIncentivesRequest = {
 function createBaseQueryIncentivesResponse(): QueryIncentivesResponse {
   return {
     incentives: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryIncentivesResponse = {
@@ -523,7 +466,7 @@ export const QueryIncentivesResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentivesResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentivesResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentivesResponse();
@@ -531,10 +474,10 @@ export const QueryIncentivesResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.incentives.push(Incentive.decode(reader, reader.uint32()));
+          message.incentives.push(Incentive.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -584,26 +527,25 @@ export const QueryIncentivesResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentivesResponseAmino): QueryIncentivesResponse {
-    return {
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryIncentivesResponse();
+    message.incentives = object.incentives?.map(e => Incentive.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryIncentivesResponse): QueryIncentivesResponseAmino {
+  toAmino(message: QueryIncentivesResponse, useInterfaces: boolean = true): QueryIncentivesResponseAmino {
     const obj: any = {};
     if (message.incentives) {
-      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
+      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.incentives = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryIncentivesResponseAminoMsg): QueryIncentivesResponse {
-    return QueryIncentivesResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryIncentivesResponseProtoMsg): QueryIncentivesResponse {
-    return QueryIncentivesResponse.decode(message.value);
+  fromProtoMsg(message: QueryIncentivesResponseProtoMsg, useInterfaces: boolean = true): QueryIncentivesResponse {
+    return QueryIncentivesResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentivesResponse): Uint8Array {
     return QueryIncentivesResponse.encode(message).finish();
@@ -628,7 +570,7 @@ export const QueryIncentiveRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentiveRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentiveRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveRequest();
@@ -671,20 +613,19 @@ export const QueryIncentiveRequest = {
     return obj;
   },
   fromAmino(object: QueryIncentiveRequestAmino): QueryIncentiveRequest {
-    return {
-      contract: object.contract
-    };
+    const message = createBaseQueryIncentiveRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    return message;
   },
-  toAmino(message: QueryIncentiveRequest): QueryIncentiveRequestAmino {
+  toAmino(message: QueryIncentiveRequest, useInterfaces: boolean = true): QueryIncentiveRequestAmino {
     const obj: any = {};
-    obj.contract = omitDefault(message.contract);
+    obj.contract = message.contract;
     return obj;
   },
-  fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
-    return QueryIncentiveRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryIncentiveRequestProtoMsg): QueryIncentiveRequest {
-    return QueryIncentiveRequest.decode(message.value);
+  fromProtoMsg(message: QueryIncentiveRequestProtoMsg, useInterfaces: boolean = true): QueryIncentiveRequest {
+    return QueryIncentiveRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentiveRequest): Uint8Array {
     return QueryIncentiveRequest.encode(message).finish();
@@ -709,7 +650,7 @@ export const QueryIncentiveResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryIncentiveResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryIncentiveResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryIncentiveResponse();
@@ -717,7 +658,7 @@ export const QueryIncentiveResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.incentive = Incentive.decode(reader, reader.uint32());
+          message.incentive = Incentive.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -754,20 +695,19 @@ export const QueryIncentiveResponse = {
     return obj;
   },
   fromAmino(object: QueryIncentiveResponseAmino): QueryIncentiveResponse {
-    return {
-      incentive: object?.incentive ? Incentive.fromAmino(object.incentive) : undefined
-    };
+    const message = createBaseQueryIncentiveResponse();
+    if (object.incentive !== undefined && object.incentive !== null) {
+      message.incentive = Incentive.fromAmino(object.incentive);
+    }
+    return message;
   },
-  toAmino(message: QueryIncentiveResponse): QueryIncentiveResponseAmino {
+  toAmino(message: QueryIncentiveResponse, useInterfaces: boolean = true): QueryIncentiveResponseAmino {
     const obj: any = {};
-    obj.incentive = message.incentive ? Incentive.toAmino(message.incentive) : undefined;
+    obj.incentive = message.incentive ? Incentive.toAmino(message.incentive, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryIncentiveResponseAminoMsg): QueryIncentiveResponse {
-    return QueryIncentiveResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryIncentiveResponseProtoMsg): QueryIncentiveResponse {
-    return QueryIncentiveResponse.decode(message.value);
+  fromProtoMsg(message: QueryIncentiveResponseProtoMsg, useInterfaces: boolean = true): QueryIncentiveResponse {
+    return QueryIncentiveResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryIncentiveResponse): Uint8Array {
     return QueryIncentiveResponse.encode(message).finish();
@@ -782,7 +722,7 @@ export const QueryIncentiveResponse = {
 function createBaseQueryGasMetersRequest(): QueryGasMetersRequest {
   return {
     contract: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGasMetersRequest = {
@@ -796,7 +736,7 @@ export const QueryGasMetersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMetersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMetersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersRequest();
@@ -807,7 +747,7 @@ export const QueryGasMetersRequest = {
           message.contract = reader.string();
           break;
         case 2:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -849,22 +789,23 @@ export const QueryGasMetersRequest = {
     return obj;
   },
   fromAmino(object: QueryGasMetersRequestAmino): QueryGasMetersRequest {
-    return {
-      contract: object.contract,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGasMetersRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGasMetersRequest): QueryGasMetersRequestAmino {
+  toAmino(message: QueryGasMetersRequest, useInterfaces: boolean = true): QueryGasMetersRequestAmino {
     const obj: any = {};
-    obj.contract = omitDefault(message.contract);
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.contract = message.contract;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGasMetersRequestAminoMsg): QueryGasMetersRequest {
-    return QueryGasMetersRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGasMetersRequestProtoMsg): QueryGasMetersRequest {
-    return QueryGasMetersRequest.decode(message.value);
+  fromProtoMsg(message: QueryGasMetersRequestProtoMsg, useInterfaces: boolean = true): QueryGasMetersRequest {
+    return QueryGasMetersRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMetersRequest): Uint8Array {
     return QueryGasMetersRequest.encode(message).finish();
@@ -879,7 +820,7 @@ export const QueryGasMetersRequest = {
 function createBaseQueryGasMetersResponse(): QueryGasMetersResponse {
   return {
     gasMeters: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryGasMetersResponse = {
@@ -893,7 +834,7 @@ export const QueryGasMetersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMetersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMetersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMetersResponse();
@@ -901,10 +842,10 @@ export const QueryGasMetersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.gasMeters.push(GasMeter.decode(reader, reader.uint32()));
+          message.gasMeters.push(GasMeter.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -954,26 +895,25 @@ export const QueryGasMetersResponse = {
     return obj;
   },
   fromAmino(object: QueryGasMetersResponseAmino): QueryGasMetersResponse {
-    return {
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryGasMetersResponse();
+    message.gasMeters = object.gas_meters?.map(e => GasMeter.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryGasMetersResponse): QueryGasMetersResponseAmino {
+  toAmino(message: QueryGasMetersResponse, useInterfaces: boolean = true): QueryGasMetersResponseAmino {
     const obj: any = {};
     if (message.gasMeters) {
-      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.gas_meters = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGasMetersResponseAminoMsg): QueryGasMetersResponse {
-    return QueryGasMetersResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGasMetersResponseProtoMsg): QueryGasMetersResponse {
-    return QueryGasMetersResponse.decode(message.value);
+  fromProtoMsg(message: QueryGasMetersResponseProtoMsg, useInterfaces: boolean = true): QueryGasMetersResponse {
+    return QueryGasMetersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMetersResponse): Uint8Array {
     return QueryGasMetersResponse.encode(message).finish();
@@ -1002,7 +942,7 @@ export const QueryGasMeterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMeterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMeterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterRequest();
@@ -1053,22 +993,23 @@ export const QueryGasMeterRequest = {
     return obj;
   },
   fromAmino(object: QueryGasMeterRequestAmino): QueryGasMeterRequest {
-    return {
-      contract: object.contract,
-      participant: object.participant
-    };
+    const message = createBaseQueryGasMeterRequest();
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.participant !== undefined && object.participant !== null) {
+      message.participant = object.participant;
+    }
+    return message;
   },
-  toAmino(message: QueryGasMeterRequest): QueryGasMeterRequestAmino {
+  toAmino(message: QueryGasMeterRequest, useInterfaces: boolean = true): QueryGasMeterRequestAmino {
     const obj: any = {};
-    obj.contract = omitDefault(message.contract);
-    obj.participant = omitDefault(message.participant);
+    obj.contract = message.contract;
+    obj.participant = message.participant;
     return obj;
   },
-  fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
-    return QueryGasMeterRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGasMeterRequestProtoMsg): QueryGasMeterRequest {
-    return QueryGasMeterRequest.decode(message.value);
+  fromProtoMsg(message: QueryGasMeterRequestProtoMsg, useInterfaces: boolean = true): QueryGasMeterRequest {
+    return QueryGasMeterRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMeterRequest): Uint8Array {
     return QueryGasMeterRequest.encode(message).finish();
@@ -1093,7 +1034,7 @@ export const QueryGasMeterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryGasMeterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryGasMeterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryGasMeterResponse();
@@ -1138,20 +1079,19 @@ export const QueryGasMeterResponse = {
     return obj;
   },
   fromAmino(object: QueryGasMeterResponseAmino): QueryGasMeterResponse {
-    return {
-      gasMeter: BigInt(object.gas_meter)
-    };
+    const message = createBaseQueryGasMeterResponse();
+    if (object.gas_meter !== undefined && object.gas_meter !== null) {
+      message.gasMeter = BigInt(object.gas_meter);
+    }
+    return message;
   },
-  toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
+  toAmino(message: QueryGasMeterResponse, useInterfaces: boolean = true): QueryGasMeterResponseAmino {
     const obj: any = {};
-    obj.gas_meter = omitDefault(message.gasMeter);
+    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
-    return QueryGasMeterResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryGasMeterResponseProtoMsg): QueryGasMeterResponse {
-    return QueryGasMeterResponse.decode(message.value);
+  fromProtoMsg(message: QueryGasMeterResponseProtoMsg, useInterfaces: boolean = true): QueryGasMeterResponse {
+    return QueryGasMeterResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryGasMeterResponse): Uint8Array {
     return QueryGasMeterResponse.encode(message).finish();
@@ -1165,7 +1105,7 @@ export const QueryGasMeterResponse = {
 };
 function createBaseQueryAllocationMetersRequest(): QueryAllocationMetersRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllocationMetersRequest = {
@@ -1176,7 +1116,7 @@ export const QueryAllocationMetersRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMetersRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMetersRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersRequest();
@@ -1184,7 +1124,7 @@ export const QueryAllocationMetersRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.pagination = PageRequest.decode(reader, reader.uint32());
+          message.pagination = PageRequest.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1221,20 +1161,19 @@ export const QueryAllocationMetersRequest = {
     return obj;
   },
   fromAmino(object: QueryAllocationMetersRequestAmino): QueryAllocationMetersRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllocationMetersRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAllocationMetersRequest): QueryAllocationMetersRequestAmino {
+  toAmino(message: QueryAllocationMetersRequest, useInterfaces: boolean = true): QueryAllocationMetersRequestAmino {
     const obj: any = {};
-    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAllocationMetersRequestAminoMsg): QueryAllocationMetersRequest {
-    return QueryAllocationMetersRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg): QueryAllocationMetersRequest {
-    return QueryAllocationMetersRequest.decode(message.value);
+  fromProtoMsg(message: QueryAllocationMetersRequestProtoMsg, useInterfaces: boolean = true): QueryAllocationMetersRequest {
+    return QueryAllocationMetersRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMetersRequest): Uint8Array {
     return QueryAllocationMetersRequest.encode(message).finish();
@@ -1249,7 +1188,7 @@ export const QueryAllocationMetersRequest = {
 function createBaseQueryAllocationMetersResponse(): QueryAllocationMetersResponse {
   return {
     allocationMeters: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAllocationMetersResponse = {
@@ -1263,7 +1202,7 @@ export const QueryAllocationMetersResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMetersResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMetersResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMetersResponse();
@@ -1271,10 +1210,10 @@ export const QueryAllocationMetersResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.allocationMeters.push(DecCoin.decode(reader, reader.uint32()));
+          message.allocationMeters.push(DecCoin.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.pagination = PageResponse.decode(reader, reader.uint32());
+          message.pagination = PageResponse.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1324,26 +1263,25 @@ export const QueryAllocationMetersResponse = {
     return obj;
   },
   fromAmino(object: QueryAllocationMetersResponseAmino): QueryAllocationMetersResponse {
-    return {
-      allocationMeters: Array.isArray(object?.allocation_meters) ? object.allocation_meters.map((e: any) => DecCoin.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAllocationMetersResponse();
+    message.allocationMeters = object.allocation_meters?.map(e => DecCoin.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
-  toAmino(message: QueryAllocationMetersResponse): QueryAllocationMetersResponseAmino {
+  toAmino(message: QueryAllocationMetersResponse, useInterfaces: boolean = true): QueryAllocationMetersResponseAmino {
     const obj: any = {};
     if (message.allocationMeters) {
-      obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e) : undefined);
+      obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.allocation_meters = [];
     }
-    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
+    obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAllocationMetersResponseAminoMsg): QueryAllocationMetersResponse {
-    return QueryAllocationMetersResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg): QueryAllocationMetersResponse {
-    return QueryAllocationMetersResponse.decode(message.value);
+  fromProtoMsg(message: QueryAllocationMetersResponseProtoMsg, useInterfaces: boolean = true): QueryAllocationMetersResponse {
+    return QueryAllocationMetersResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMetersResponse): Uint8Array {
     return QueryAllocationMetersResponse.encode(message).finish();
@@ -1368,7 +1306,7 @@ export const QueryAllocationMeterRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMeterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMeterRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterRequest();
@@ -1411,20 +1349,19 @@ export const QueryAllocationMeterRequest = {
     return obj;
   },
   fromAmino(object: QueryAllocationMeterRequestAmino): QueryAllocationMeterRequest {
-    return {
-      denom: object.denom
-    };
+    const message = createBaseQueryAllocationMeterRequest();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    return message;
   },
-  toAmino(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestAmino {
+  toAmino(message: QueryAllocationMeterRequest, useInterfaces: boolean = true): QueryAllocationMeterRequestAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
+    obj.denom = message.denom;
     return obj;
   },
-  fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {
-    return QueryAllocationMeterRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg): QueryAllocationMeterRequest {
-    return QueryAllocationMeterRequest.decode(message.value);
+  fromProtoMsg(message: QueryAllocationMeterRequestProtoMsg, useInterfaces: boolean = true): QueryAllocationMeterRequest {
+    return QueryAllocationMeterRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMeterRequest): Uint8Array {
     return QueryAllocationMeterRequest.encode(message).finish();
@@ -1449,7 +1386,7 @@ export const QueryAllocationMeterResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryAllocationMeterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryAllocationMeterResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryAllocationMeterResponse();
@@ -1457,7 +1394,7 @@ export const QueryAllocationMeterResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.allocationMeter = DecCoin.decode(reader, reader.uint32());
+          message.allocationMeter = DecCoin.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1494,20 +1431,19 @@ export const QueryAllocationMeterResponse = {
     return obj;
   },
   fromAmino(object: QueryAllocationMeterResponseAmino): QueryAllocationMeterResponse {
-    return {
-      allocationMeter: object?.allocation_meter ? DecCoin.fromAmino(object.allocation_meter) : undefined
-    };
+    const message = createBaseQueryAllocationMeterResponse();
+    if (object.allocation_meter !== undefined && object.allocation_meter !== null) {
+      message.allocationMeter = DecCoin.fromAmino(object.allocation_meter);
+    }
+    return message;
   },
-  toAmino(message: QueryAllocationMeterResponse): QueryAllocationMeterResponseAmino {
+  toAmino(message: QueryAllocationMeterResponse, useInterfaces: boolean = true): QueryAllocationMeterResponseAmino {
     const obj: any = {};
-    obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter) : undefined;
+    obj.allocation_meter = message.allocationMeter ? DecCoin.toAmino(message.allocationMeter, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryAllocationMeterResponseAminoMsg): QueryAllocationMeterResponse {
-    return QueryAllocationMeterResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg): QueryAllocationMeterResponse {
-    return QueryAllocationMeterResponse.decode(message.value);
+  fromProtoMsg(message: QueryAllocationMeterResponseProtoMsg, useInterfaces: boolean = true): QueryAllocationMeterResponse {
+    return QueryAllocationMeterResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryAllocationMeterResponse): Uint8Array {
     return QueryAllocationMeterResponse.encode(message).finish();
@@ -1527,7 +1463,7 @@ export const QueryParamsRequest = {
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsRequest();
@@ -1561,17 +1497,15 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
-  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+  toAmino(_: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
-    return QueryParamsRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
-    return QueryParamsRequest.decode(message.value);
+  fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsRequest): Uint8Array {
     return QueryParamsRequest.encode(message).finish();
@@ -1596,7 +1530,7 @@ export const QueryParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QueryParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QueryParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQueryParamsResponse();
@@ -1604,7 +1538,7 @@ export const QueryParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1641,20 +1575,19 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+  toAmino(message: QueryParamsResponse, useInterfaces: boolean = true): QueryParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
-    return QueryParamsResponse.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
-    return QueryParamsResponse.decode(message.value);
+  fromProtoMsg(message: QueryParamsResponseProtoMsg, useInterfaces: boolean = true): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QueryParamsResponse): Uint8Array {
     return QueryParamsResponse.encode(message).finish();

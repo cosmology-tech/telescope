@@ -58,27 +58,23 @@ export interface LogDescriptorAmino {
    * characters [A-Za-z0-9], and punctuation characters including
    * slash, underscore, hyphen, period [/_-.].
    */
-  name: string;
+  name?: string;
   /**
    * The set of labels that are available to describe a specific log entry.
    * Runtime requests that contain labels not specified here are
    * considered invalid.
    */
-  labels: LabelDescriptorAmino[];
+  labels?: LabelDescriptorAmino[];
   /**
    * A human-readable description of this log. This information appears in
    * the documentation and can contain details.
    */
-  description: string;
+  description?: string;
   /**
    * The human-readable name for this log. This information appears on
    * the user interface and should be concise.
    */
-  display_name: string;
-}
-export interface LogDescriptorAminoMsg {
-  type: "/google.api.LogDescriptor";
-  value: LogDescriptorAmino;
+  display_name?: string;
 }
 /**
  * A description of a log type. Example in YAML format:
@@ -121,7 +117,7 @@ export const LogDescriptor = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LogDescriptor {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LogDescriptor {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLogDescriptor();
@@ -132,7 +128,7 @@ export const LogDescriptor = {
           message.name = reader.string();
           break;
         case 2:
-          message.labels.push(LabelDescriptor.decode(reader, reader.uint32()));
+          message.labels.push(LabelDescriptor.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.description = reader.string();
@@ -196,18 +192,24 @@ export const LogDescriptor = {
     return obj;
   },
   fromAmino(object: LogDescriptorAmino): LogDescriptor {
-    return {
-      name: object.name,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      description: object.description,
-      displayName: object.display_name
-    };
+    const message = createBaseLogDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    return message;
   },
-  toAmino(message: LogDescriptor): LogDescriptorAmino {
+  toAmino(message: LogDescriptor, useInterfaces: boolean = true): LogDescriptorAmino {
     const obj: any = {};
     obj.name = omitDefault(message.name);
     if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.labels = [];
     }
@@ -215,11 +217,8 @@ export const LogDescriptor = {
     obj.display_name = omitDefault(message.displayName);
     return obj;
   },
-  fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {
-    return LogDescriptor.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LogDescriptorProtoMsg): LogDescriptor {
-    return LogDescriptor.decode(message.value);
+  fromProtoMsg(message: LogDescriptorProtoMsg, useInterfaces: boolean = true): LogDescriptor {
+    return LogDescriptor.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LogDescriptor): Uint8Array {
     return LogDescriptor.encode(message).finish();

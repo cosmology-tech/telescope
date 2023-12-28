@@ -3,11 +3,19 @@ import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.node.v1beta1";
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequest {}
+export interface ConfigRequestProtoMsg {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigRequest";
+  value: Uint8Array;
+}
 /** ConfigRequest defines the request structure for the Config gRPC query. */
 export interface ConfigRequestSDKType {}
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponse {
   minimumGasPrice: string;
+}
+export interface ConfigResponseProtoMsg {
+  typeUrl: "/cosmos.base.node.v1beta1.ConfigResponse";
+  value: Uint8Array;
 }
 /** ConfigResponse defines the response structure for the Config gRPC query. */
 export interface ConfigResponseSDKType {
@@ -57,7 +65,8 @@ export const ConfigRequest = {
     return obj;
   },
   fromAmino(_: ConfigRequestAmino): ConfigRequest {
-    return {};
+    const message = createBaseConfigRequest();
+    return message;
   },
   toAmino(_: ConfigRequest): ConfigRequestAmino {
     const obj: any = {};
@@ -146,9 +155,11 @@ export const ConfigResponse = {
     return obj;
   },
   fromAmino(object: ConfigResponseAmino): ConfigResponse {
-    return {
-      minimumGasPrice: object.minimum_gas_price
-    };
+    const message = createBaseConfigResponse();
+    if (object.minimum_gas_price !== undefined && object.minimum_gas_price !== null) {
+      message.minimumGasPrice = object.minimum_gas_price;
+    }
+    return message;
   },
   toAmino(message: ConfigResponse): ConfigResponseAmino {
     const obj: any = {};

@@ -5,6 +5,10 @@ export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 export interface Params {
   contractAddress: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.ibcratelimit.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface ParamsSDKType {
   contract_address: string;
@@ -17,7 +21,7 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     return writer;
@@ -70,9 +74,11 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      contractAddress: object.contract_address
-    };
+    const message = createBaseParams();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};

@@ -3,6 +3,9 @@ syntax = "proto3";
 package misc;
 
 import "google/api/expr/v1alpha1/eval.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/duration.proto";
 
 message EvalRequest {
   // Bindings for the external variables.  The types SHOULD be compatible
@@ -10,4 +13,223 @@ message EvalRequest {
   map<string, google.api.expr.v1alpha1.ExprValue> bindings = 1;
 
   map<string, google.api.expr.v1alpha1.IdRef> refs = 2;
+
+  uint32 test_num = 3;
+  string test_string = 4[(gogoproto.nullable) = false];
+  bool test_bool = 5;
+
+  // Used in v1beta1
+  reserved 6, 7, 9 to 11;
+
+  AccessConfig instantiate_permission = 8;
+
+  oneof test_oneof {
+    // [(gogoproto.nullable) = false] wouldn't work in this case
+    string id = 12[(gogoproto.nullable) = false];
+    string name = 13;
+  }
+
+  repeated string test_array = 14;
+}
+
+message AccessConfig {
+  string sender = 1;
+}
+
+// VoteOption enumerates the valid vote options for a given governance proposal.
+enum VoteOption {
+  // VOTE_OPTION_UNSPECIFIED defines a no-op vote option.
+  VOTE_OPTION_UNSPECIFIED = 0;
+  // VOTE_OPTION_YES defines a yes vote option.
+  VOTE_OPTION_YES = 1;
+  // VOTE_OPTION_ABSTAIN defines an abstain vote option.
+  VOTE_OPTION_ABSTAIN = 2;
+  // VOTE_OPTION_NO defines a no vote option.
+  VOTE_OPTION_NO = 3;
+  // VOTE_OPTION_NO_WITH_VETO defines a no with veto vote option.
+  VOTE_OPTION_NO_WITH_VETO = 4;
+}
+
+message GenericAuthorization {
+  option (cosmos_proto.implements_interface) = "Authorization";
+
+  // Msg, identified by it's type URL, to grant unrestricted permissions to execute
+  string msg = 1;
+}
+
+message AminoEncodingTest {
+  // scalar
+  string str = 1;
+  string d_o_str = 2 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  bool b = 3;
+  bool d_o_b = 4 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  int32 num = 5;
+  int32 d_o_num = 6 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // bigint
+  int64 big = 7;
+  int64 d_o_big = 8 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // protoType
+  AccessConfig proto = 9;
+  AccessConfig d_o_proto = 10 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // anyType
+  google.protobuf.Any auth = 11 [(cosmos_proto.accepts_interface) = "Authorization"];
+  google.protobuf.Any d_o_auth = 12 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (cosmos_proto.accepts_interface) = "Authorization"
+  ];
+
+  // bytes
+  bytes salt = 13;
+  bytes d_o_salt = 14 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // raw bytes
+  bytes raw = 15 [
+    (gogoproto.casttype) = "RawContractMessage"
+  ];
+  bytes d_o_raw = 16 [
+    (gogoproto.casttype) = "RawContractMessage",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // wasm bytes
+  bytes wasm = 17 [
+    (gogoproto.customname) = "WASMByteCode"
+  ];
+  bytes d_o_wasm = 18 [
+    (gogoproto.customname) = "WASMByteCode",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // enum
+  VoteOption opt = 19;
+  VoteOption d_o_opt = 20 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // duration
+  google.protobuf.Duration period = 21;
+  google.protobuf.Duration d_o_period = 22 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // timestamp
+  google.protobuf.Timestamp date = 23;
+  google.protobuf.Timestamp d_o_date = 24 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // pubkey
+  google.protobuf.Any pubkey = 25 [(cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];
+  google.protobuf.Any d_o_pubkey = 26 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"
+  ];
+
+  // array scalar
+  repeated int32 nums = 27;
+  repeated int32 d_o_nums = 28 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array bigint
+  repeated int64 bigs = 29;
+  repeated int64 d_o_bigs = 30 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array bytes
+  repeated bytes salts = 31;
+  repeated bytes d_o_salts = 32 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array raw bytes
+  repeated bytes raws = 33 [
+    (gogoproto.casttype) = "RawContractMessage"
+  ];
+  repeated bytes d_o_raws = 34 [
+    (gogoproto.casttype) = "RawContractMessage",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array wasm bytes
+  repeated bytes wasms = 35 [
+    (gogoproto.customname) = "WASMByteCode"
+  ];
+  repeated bytes d_o_wasms = 36 [
+    (gogoproto.customname) = "WASMByteCode",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array enum
+  repeated VoteOption opts = 37;
+  repeated VoteOption d_o_opts = 38 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array duration
+  repeated google.protobuf.Duration periods = 39;
+  repeated google.protobuf.Duration d_o_periods = 40 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array timestamp
+  // TODO:: need to debug
+  // repeated google.protobuf.Timestamp dates = 41;
+  // repeated google.protobuf.Timestamp d_o_dates = 42 [
+  //  (gogoproto.nullable) = false,
+  //  (amino.dont_omitempty) = true
+  // ];
+
+  // array protoType
+  repeated AccessConfig protos = 43;
+  repeated AccessConfig d_o_protos = 44 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array anyType
+  repeated google.protobuf.Any auths = 45 [(cosmos_proto.accepts_interface) = "Authorization"];
+  repeated google.protobuf.Any d_o_auths = 46 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true,
+    (cosmos_proto.accepts_interface) = "Authorization"
+  ];
 }

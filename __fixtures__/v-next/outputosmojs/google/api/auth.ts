@@ -31,6 +31,10 @@ export interface Authentication {
   /** Defines a set of authentication providers that a service supports. */
   providers: AuthProvider[];
 }
+export interface AuthenticationProtoMsg {
+  typeUrl: "/google.api.Authentication";
+  value: Uint8Array;
+}
 /**
  * `Authentication` defines the authentication configuration for API methods
  * provided by an API service.
@@ -74,7 +78,7 @@ export interface AuthenticationRule {
    */
   selector: string;
   /** The requirements for OAuth credentials. */
-  oauth: OAuthRequirements;
+  oauth?: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
@@ -82,6 +86,10 @@ export interface AuthenticationRule {
   allowWithoutCredential: boolean;
   /** Requirements for additional authentication providers. */
   requirements: AuthRequirement[];
+}
+export interface AuthenticationRuleProtoMsg {
+  typeUrl: "/google.api.AuthenticationRule";
+  value: Uint8Array;
 }
 /**
  * Authentication rules for the service.
@@ -96,7 +104,7 @@ export interface AuthenticationRule {
  */
 export interface AuthenticationRuleSDKType {
   selector: string;
-  oauth: OAuthRequirementsSDKType;
+  oauth?: OAuthRequirementsSDKType;
   allow_without_credential: boolean;
   requirements: AuthRequirementSDKType[];
 }
@@ -117,6 +125,10 @@ export interface JwtLocation {
    * value_prefix="Bearer " with a space at the end.
    */
   valuePrefix: string;
+}
+export interface JwtLocationProtoMsg {
+  typeUrl: "/google.api.JwtLocation";
+  value: Uint8Array;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -207,6 +219,10 @@ export interface AuthProvider {
    */
   jwtLocations: JwtLocation[];
 }
+export interface AuthProviderProtoMsg {
+  typeUrl: "/google.api.AuthProvider";
+  value: Uint8Array;
+}
 /**
  * Configuration for an authentication provider, including support for
  * [JSON Web Token
@@ -251,6 +267,10 @@ export interface OAuthRequirements {
    *                        https://www.googleapis.com/auth/calendar.read
    */
   canonicalScopes: string;
+}
+export interface OAuthRequirementsProtoMsg {
+  typeUrl: "/google.api.OAuthRequirements";
+  value: Uint8Array;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -308,6 +328,10 @@ export interface AuthRequirement {
    *                bookstore_web.apps.googleusercontent.com
    */
   audiences: string;
+}
+export interface AuthRequirementProtoMsg {
+  typeUrl: "/google.api.AuthRequirement";
+  value: Uint8Array;
 }
 /**
  * User-defined authentication requirements, including support for
@@ -408,10 +432,10 @@ export const Authentication = {
     return obj;
   },
   fromAmino(object: AuthenticationAmino): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromAmino(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromAmino(e)) : []
-    };
+    const message = createBaseAuthentication();
+    message.rules = object.rules?.map(e => AuthenticationRule.fromAmino(e)) || [];
+    message.providers = object.providers?.map(e => AuthProvider.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Authentication): AuthenticationAmino {
     const obj: any = {};
@@ -446,7 +470,7 @@ export const Authentication = {
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
-    oauth: OAuthRequirements.fromPartial({}),
+    oauth: undefined,
     allowWithoutCredential: false,
     requirements: []
   };
@@ -551,12 +575,18 @@ export const AuthenticationRule = {
     return obj;
   },
   fromAmino(object: AuthenticationRuleAmino): AuthenticationRule {
-    return {
-      selector: object.selector,
-      oauth: object?.oauth ? OAuthRequirements.fromAmino(object.oauth) : undefined,
-      allowWithoutCredential: object.allow_without_credential,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
-    };
+    const message = createBaseAuthenticationRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.oauth !== undefined && object.oauth !== null) {
+      message.oauth = OAuthRequirements.fromAmino(object.oauth);
+    }
+    if (object.allow_without_credential !== undefined && object.allow_without_credential !== null) {
+      message.allowWithoutCredential = object.allow_without_credential;
+    }
+    message.requirements = object.requirements?.map(e => AuthRequirement.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
     const obj: any = {};
@@ -673,11 +703,17 @@ export const JwtLocation = {
     return obj;
   },
   fromAmino(object: JwtLocationAmino): JwtLocation {
-    return {
-      header: object?.header,
-      query: object?.query,
-      valuePrefix: object.value_prefix
-    };
+    const message = createBaseJwtLocation();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = object.header;
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = object.query;
+    }
+    if (object.value_prefix !== undefined && object.value_prefix !== null) {
+      message.valuePrefix = object.value_prefix;
+    }
+    return message;
   },
   toAmino(message: JwtLocation): JwtLocationAmino {
     const obj: any = {};
@@ -836,14 +872,24 @@ export const AuthProvider = {
     return obj;
   },
   fromAmino(object: AuthProviderAmino): AuthProvider {
-    return {
-      id: object.id,
-      issuer: object.issuer,
-      jwksUri: object.jwks_uri,
-      audiences: object.audiences,
-      authorizationUrl: object.authorization_url,
-      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
-    };
+    const message = createBaseAuthProvider();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.jwks_uri !== undefined && object.jwks_uri !== null) {
+      message.jwksUri = object.jwks_uri;
+    }
+    if (object.audiences !== undefined && object.audiences !== null) {
+      message.audiences = object.audiences;
+    }
+    if (object.authorization_url !== undefined && object.authorization_url !== null) {
+      message.authorizationUrl = object.authorization_url;
+    }
+    message.jwtLocations = object.jwt_locations?.map(e => JwtLocation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: AuthProvider): AuthProviderAmino {
     const obj: any = {};
@@ -936,9 +982,11 @@ export const OAuthRequirements = {
     return obj;
   },
   fromAmino(object: OAuthRequirementsAmino): OAuthRequirements {
-    return {
-      canonicalScopes: object.canonical_scopes
-    };
+    const message = createBaseOAuthRequirements();
+    if (object.canonical_scopes !== undefined && object.canonical_scopes !== null) {
+      message.canonicalScopes = object.canonical_scopes;
+    }
+    return message;
   },
   toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
     const obj: any = {};
@@ -1035,10 +1083,14 @@ export const AuthRequirement = {
     return obj;
   },
   fromAmino(object: AuthRequirementAmino): AuthRequirement {
-    return {
-      providerId: object.provider_id,
-      audiences: object.audiences
-    };
+    const message = createBaseAuthRequirement();
+    if (object.provider_id !== undefined && object.provider_id !== null) {
+      message.providerId = object.provider_id;
+    }
+    if (object.audiences !== undefined && object.audiences !== null) {
+      message.audiences = object.audiences;
+    }
+    return message;
   },
   toAmino(message: AuthRequirement): AuthRequirementAmino {
     const obj: any = {};

@@ -14,10 +14,10 @@ export interface EventSendProtoMsg {
 }
 /** EventSend is emitted on Msg/Send */
 export interface EventSendAmino {
-  class_id: string;
-  id: string;
-  sender: string;
-  receiver: string;
+  class_id?: string;
+  id?: string;
+  sender?: string;
+  receiver?: string;
 }
 export interface EventSendAminoMsg {
   type: "cosmos-sdk/EventSend";
@@ -42,9 +42,9 @@ export interface EventMintProtoMsg {
 }
 /** EventMint is emitted on Mint */
 export interface EventMintAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 export interface EventMintAminoMsg {
   type: "cosmos-sdk/EventMint";
@@ -68,9 +68,9 @@ export interface EventBurnProtoMsg {
 }
 /** EventBurn is emitted on Burn */
 export interface EventBurnAmino {
-  class_id: string;
-  id: string;
-  owner: string;
+  class_id?: string;
+  id?: string;
+  owner?: string;
 }
 export interface EventBurnAminoMsg {
   type: "cosmos-sdk/EventBurn";
@@ -175,12 +175,20 @@ export const EventSend = {
     return obj;
   },
   fromAmino(object: EventSendAmino): EventSend {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseEventSend();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: EventSend): EventSendAmino {
     const obj: any = {};
@@ -293,11 +301,17 @@ export const EventMint = {
     return obj;
   },
   fromAmino(object: EventMintAmino): EventMint {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventMint();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventMint): EventMintAmino {
     const obj: any = {};
@@ -409,11 +423,17 @@ export const EventBurn = {
     return obj;
   },
   fromAmino(object: EventBurnAmino): EventBurn {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      owner: object.owner
-    };
+    const message = createBaseEventBurn();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    return message;
   },
   toAmino(message: EventBurn): EventBurnAmino {
     const obj: any = {};

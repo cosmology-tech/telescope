@@ -1,6 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -8,7 +8,7 @@ export const protobufPackage = "cosmos.evidence.v1beta1";
  */
 export interface MsgSubmitEvidence {
   submitter: string;
-  evidence: Any | undefined;
+  evidence?: Any | undefined;
 }
 export interface MsgSubmitEvidenceProtoMsg {
   typeUrl: "/cosmos.evidence.v1beta1.MsgSubmitEvidence";
@@ -22,12 +22,8 @@ export type MsgSubmitEvidenceEncoded = Omit<MsgSubmitEvidence, "evidence"> & {
  * Evidence of misbehavior such as equivocation or counterfactual signing.
  */
 export interface MsgSubmitEvidenceAmino {
-  submitter: string;
+  submitter?: string;
   evidence?: AnyAmino;
-}
-export interface MsgSubmitEvidenceAminoMsg {
-  type: "cosmos-sdk/MsgSubmitEvidence";
-  value: MsgSubmitEvidenceAmino;
 }
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -35,7 +31,7 @@ export interface MsgSubmitEvidenceAminoMsg {
  */
 export interface MsgSubmitEvidenceSDKType {
   submitter: string;
-  evidence: AnySDKType | undefined;
+  evidence?: AnySDKType | undefined;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponse {
@@ -49,11 +45,7 @@ export interface MsgSubmitEvidenceResponseProtoMsg {
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseAmino {
   /** hash defines the hash of the evidence. */
-  hash: Uint8Array;
-}
-export interface MsgSubmitEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/MsgSubmitEvidenceResponse";
-  value: MsgSubmitEvidenceResponseAmino;
+  hash?: string;
 }
 /** MsgSubmitEvidenceResponse defines the Msg/SubmitEvidence response type. */
 export interface MsgSubmitEvidenceResponseSDKType {
@@ -62,7 +54,7 @@ export interface MsgSubmitEvidenceResponseSDKType {
 function createBaseMsgSubmitEvidence(): MsgSubmitEvidence {
   return {
     submitter: "",
-    evidence: Any.fromPartial({})
+    evidence: undefined
   };
 }
 export const MsgSubmitEvidence = {
@@ -77,7 +69,7 @@ export const MsgSubmitEvidence = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitEvidence {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidence {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidence();
@@ -88,7 +80,7 @@ export const MsgSubmitEvidence = {
           message.submitter = reader.string();
           break;
         case 2:
-          message.evidence = (Evidence_InterfaceDecoder(reader) as Any);
+          message.evidence = useInterfaces ? (Evidence_InterfaceDecoder(reader) as Any) : Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -130,28 +122,23 @@ export const MsgSubmitEvidence = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceAmino): MsgSubmitEvidence {
-    return {
-      submitter: object.submitter,
-      evidence: object?.evidence ? Evidence_FromAmino(object.evidence) : undefined
-    };
+    const message = createBaseMsgSubmitEvidence();
+    if (object.submitter !== undefined && object.submitter !== null) {
+      message.submitter = object.submitter;
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Evidence_FromAmino(object.evidence);
+    }
+    return message;
   },
-  toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
+  toAmino(message: MsgSubmitEvidence, useInterfaces: boolean = true): MsgSubmitEvidenceAmino {
     const obj: any = {};
-    obj.submitter = omitDefault(message.submitter);
-    obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any)) : undefined;
+    obj.submitter = message.submitter;
+    obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any), useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSubmitEvidenceAminoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidence): MsgSubmitEvidenceAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidence",
-      value: MsgSubmitEvidence.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg): MsgSubmitEvidence {
-    return MsgSubmitEvidence.decode(message.value);
+  fromProtoMsg(message: MsgSubmitEvidenceProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidence {
+    return MsgSubmitEvidence.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidence): Uint8Array {
     return MsgSubmitEvidence.encode(message).finish();
@@ -177,7 +164,7 @@ export const MsgSubmitEvidenceResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): MsgSubmitEvidenceResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMsgSubmitEvidenceResponse();
@@ -220,26 +207,19 @@ export const MsgSubmitEvidenceResponse = {
     return obj;
   },
   fromAmino(object: MsgSubmitEvidenceResponseAmino): MsgSubmitEvidenceResponse {
-    return {
-      hash: object.hash
-    };
+    const message = createBaseMsgSubmitEvidenceResponse();
+    if (object.hash !== undefined && object.hash !== null) {
+      message.hash = bytesFromBase64(object.hash);
+    }
+    return message;
   },
-  toAmino(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAmino {
+  toAmino(message: MsgSubmitEvidenceResponse, useInterfaces: boolean = true): MsgSubmitEvidenceResponseAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
-  fromAminoMsg(object: MsgSubmitEvidenceResponseAminoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: MsgSubmitEvidenceResponse): MsgSubmitEvidenceResponseAminoMsg {
-    return {
-      type: "cosmos-sdk/MsgSubmitEvidenceResponse",
-      value: MsgSubmitEvidenceResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg): MsgSubmitEvidenceResponse {
-    return MsgSubmitEvidenceResponse.decode(message.value);
+  fromProtoMsg(message: MsgSubmitEvidenceResponseProtoMsg, useInterfaces: boolean = true): MsgSubmitEvidenceResponse {
+    return MsgSubmitEvidenceResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: MsgSubmitEvidenceResponse): Uint8Array {
     return MsgSubmitEvidenceResponse.encode(message).finish();
@@ -253,7 +233,7 @@ export const MsgSubmitEvidenceResponse = {
 };
 export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32());
+  const data = Any.decode(reader, reader.uint32(), true);
   switch (data.typeUrl) {
     default:
       return data;
@@ -262,6 +242,6 @@ export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any
 export const Evidence_FromAmino = (content: AnyAmino) => {
   return Any.fromAmino(content);
 };
-export const Evidence_ToAmino = (content: Any) => {
-  return Any.toAmino(content);
+export const Evidence_ToAmino = (content: Any, useInterfaces: boolean = true) => {
+  return Any.toAmino(content, useInterfaces);
 };

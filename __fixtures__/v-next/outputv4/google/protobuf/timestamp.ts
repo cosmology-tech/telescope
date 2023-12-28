@@ -100,6 +100,10 @@ export interface Timestamp {
    */
   nanos: number;
 }
+export interface TimestampProtoMsg {
+  typeUrl: "/google.protobuf.Timestamp";
+  value: Uint8Array;
+}
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -197,10 +201,10 @@ function createBaseTimestamp(): Timestamp {
 export const Timestamp = {
   typeUrl: "/google.protobuf.Timestamp",
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.seconds !== BigInt(0)) {
+    if (message.seconds !== undefined) {
       writer.uint32(8).int64(message.seconds);
     }
-    if (message.nanos !== 0) {
+    if (message.nanos !== undefined) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
@@ -267,7 +271,7 @@ export const Timestamp = {
     return fromJsonTimestamp(object);
   },
   toAmino(message: Timestamp): TimestampAmino {
-    return fromTimestamp(message).toString();
+    return fromTimestamp(message).toISOString().replace(/\.\d+Z$/, "Z");
   },
   fromAminoMsg(object: TimestampAminoMsg): Timestamp {
     return Timestamp.fromAmino(object.value);

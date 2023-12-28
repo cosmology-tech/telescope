@@ -17,6 +17,10 @@ export interface GenesisState {
    */
   missedBlocks: ValidatorMissedBlocks[];
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisStateSDKType {
   params: ParamsSDKType;
@@ -29,6 +33,10 @@ export interface SigningInfo {
   address: string;
   /** validator_signing_info represents the signing info of this validator. */
   validatorSigningInfo: ValidatorSigningInfo;
+}
+export interface SigningInfoProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.SigningInfo";
+  value: Uint8Array;
 }
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfoSDKType {
@@ -45,6 +53,10 @@ export interface ValidatorMissedBlocks {
   /** missed_blocks is an array of missed blocks by the validator. */
   missedBlocks: MissedBlock[];
 }
+export interface ValidatorMissedBlocksProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks";
+  value: Uint8Array;
+}
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding
  * address.
@@ -59,6 +71,10 @@ export interface MissedBlock {
   index: bigint;
   /** missed is the missed status. */
   missed: boolean;
+}
+export interface MissedBlockProtoMsg {
+  typeUrl: "/cosmos.slashing.v1beta1.MissedBlock";
+  value: Uint8Array;
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlockSDKType {
@@ -168,11 +184,13 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromAmino(e)) : [],
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.signingInfos = object.signing_infos?.map(e => SigningInfo.fromAmino(e)) || [];
+    message.missedBlocks = object.missed_blocks?.map(e => ValidatorMissedBlocks.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
@@ -285,10 +303,14 @@ export const SigningInfo = {
     return obj;
   },
   fromAmino(object: SigningInfoAmino): SigningInfo {
-    return {
-      address: object.address,
-      validatorSigningInfo: object?.validator_signing_info ? ValidatorSigningInfo.fromAmino(object.validator_signing_info) : undefined
-    };
+    const message = createBaseSigningInfo();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.validator_signing_info !== undefined && object.validator_signing_info !== null) {
+      message.validatorSigningInfo = ValidatorSigningInfo.fromAmino(object.validator_signing_info);
+    }
+    return message;
   },
   toAmino(message: SigningInfo): SigningInfoAmino {
     const obj: any = {};
@@ -400,10 +422,12 @@ export const ValidatorMissedBlocks = {
     return obj;
   },
   fromAmino(object: ValidatorMissedBlocksAmino): ValidatorMissedBlocks {
-    return {
-      address: object.address,
-      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromAmino(e)) : []
-    };
+    const message = createBaseValidatorMissedBlocks();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    message.missedBlocks = object.missed_blocks?.map(e => MissedBlock.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksAmino {
     const obj: any = {};
@@ -511,10 +535,14 @@ export const MissedBlock = {
     return obj;
   },
   fromAmino(object: MissedBlockAmino): MissedBlock {
-    return {
-      index: BigInt(object.index),
-      missed: object.missed
-    };
+    const message = createBaseMissedBlock();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.missed !== undefined && object.missed !== null) {
+      message.missed = object.missed;
+    }
+    return message;
   },
   toAmino(message: MissedBlock): MissedBlockAmino {
     const obj: any = {};

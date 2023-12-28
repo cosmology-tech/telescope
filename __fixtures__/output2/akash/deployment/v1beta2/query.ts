@@ -11,12 +11,12 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
   filters: DeploymentFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
@@ -39,7 +39,7 @@ export interface QueryGroupResponse {
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
     filters: DeploymentFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsRequest = {
@@ -94,7 +94,7 @@ export const QueryDeploymentsRequest = {
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   return {
     deployments: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsResponse = {

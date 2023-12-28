@@ -50,13 +50,13 @@ export interface UsageAmino {
    * "serviceusage.googleapis.com/tos/universal". Additional ToS can be
    * included based on the business needs.
    */
-  requirements: string[];
+  requirements?: string[];
   /**
    * A list of usage rules that apply to individual API methods.
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: UsageRuleAmino[];
+  rules?: UsageRuleAmino[];
   /**
    * The full resource name of a channel used for sending notifications to the
    * service producer.
@@ -67,11 +67,7 @@ export interface UsageAmino {
    * of a Cloud Pub/Sub topic that uses the Cloud Pub/Sub topic name format
    * documented in https://cloud.google.com/pubsub/docs/overview.
    */
-  producer_notification_channel: string;
-}
-export interface UsageAminoMsg {
-  type: "/google.api.Usage";
-  value: UsageAmino;
+  producer_notification_channel?: string;
 }
 /** Configuration controlling usage of a service. */
 export interface UsageSDKType {
@@ -165,23 +161,19 @@ export interface UsageRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /**
    * If true, the selected method allows unregistered calls, e.g. calls
    * that don't identify any user or application.
    */
-  allow_unregistered_calls: boolean;
+  allow_unregistered_calls?: boolean;
   /**
    * If true, the selected method should skip service control and the control
    * plane features, such as quota and billing, will not be available.
    * This flag is used by Google Cloud Endpoints to bypass checks for internal
    * methods, such as service health check methods.
    */
-  skip_service_control: boolean;
-}
-export interface UsageRuleAminoMsg {
-  type: "/google.api.UsageRule";
-  value: UsageRuleAmino;
+  skip_service_control?: boolean;
 }
 /**
  * Usage configuration rules for the service.
@@ -236,7 +228,7 @@ export const Usage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Usage {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Usage {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsage();
@@ -247,7 +239,7 @@ export const Usage = {
           message.requirements.push(reader.string());
           break;
         case 6:
-          message.rules.push(UsageRule.decode(reader, reader.uint32()));
+          message.rules.push(UsageRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 7:
           message.producerNotificationChannel = reader.string();
@@ -311,13 +303,15 @@ export const Usage = {
     return obj;
   },
   fromAmino(object: UsageAmino): Usage {
-    return {
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => e) : [],
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => UsageRule.fromAmino(e)) : [],
-      producerNotificationChannel: object.producer_notification_channel
-    };
+    const message = createBaseUsage();
+    message.requirements = object.requirements?.map(e => e) || [];
+    message.rules = object.rules?.map(e => UsageRule.fromAmino(e)) || [];
+    if (object.producer_notification_channel !== undefined && object.producer_notification_channel !== null) {
+      message.producerNotificationChannel = object.producer_notification_channel;
+    }
+    return message;
   },
-  toAmino(message: Usage): UsageAmino {
+  toAmino(message: Usage, useInterfaces: boolean = true): UsageAmino {
     const obj: any = {};
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
@@ -325,18 +319,15 @@ export const Usage = {
       obj.requirements = [];
     }
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     obj.producer_notification_channel = omitDefault(message.producerNotificationChannel);
     return obj;
   },
-  fromAminoMsg(object: UsageAminoMsg): Usage {
-    return Usage.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UsageProtoMsg): Usage {
-    return Usage.decode(message.value);
+  fromProtoMsg(message: UsageProtoMsg, useInterfaces: boolean = true): Usage {
+    return Usage.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Usage): Uint8Array {
     return Usage.encode(message).finish();
@@ -369,7 +360,7 @@ export const UsageRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): UsageRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): UsageRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUsageRule();
@@ -428,24 +419,27 @@ export const UsageRule = {
     return obj;
   },
   fromAmino(object: UsageRuleAmino): UsageRule {
-    return {
-      selector: object.selector,
-      allowUnregisteredCalls: object.allow_unregistered_calls,
-      skipServiceControl: object.skip_service_control
-    };
+    const message = createBaseUsageRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.allow_unregistered_calls !== undefined && object.allow_unregistered_calls !== null) {
+      message.allowUnregisteredCalls = object.allow_unregistered_calls;
+    }
+    if (object.skip_service_control !== undefined && object.skip_service_control !== null) {
+      message.skipServiceControl = object.skip_service_control;
+    }
+    return message;
   },
-  toAmino(message: UsageRule): UsageRuleAmino {
+  toAmino(message: UsageRule, useInterfaces: boolean = true): UsageRuleAmino {
     const obj: any = {};
     obj.selector = omitDefault(message.selector);
     obj.allow_unregistered_calls = omitDefault(message.allowUnregisteredCalls);
     obj.skip_service_control = omitDefault(message.skipServiceControl);
     return obj;
   },
-  fromAminoMsg(object: UsageRuleAminoMsg): UsageRule {
-    return UsageRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: UsageRuleProtoMsg): UsageRule {
-    return UsageRule.decode(message.value);
+  fromProtoMsg(message: UsageRuleProtoMsg, useInterfaces: boolean = true): UsageRule {
+    return UsageRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: UsageRule): Uint8Array {
     return UsageRule.encode(message).finish();

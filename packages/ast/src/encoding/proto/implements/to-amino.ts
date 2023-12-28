@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@cosmology/types';
 import { slugify } from '@cosmology/utils';
-import { identifier } from '../../../utils';
+import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 
 const firstUpper = (s: string) => s = s.charAt(0).toUpperCase() + s.slice(1);
@@ -18,16 +18,17 @@ export const createInterfaceToAmino = (
     if (interfaceName === 'cosmos.crypto.PubKey') {
         // return a helper!
         context.addUtil('decodePubkey');
+        context.addUtil('Pubkey');
         const functionName = getInterfaceToAminoName(interfaceName);
 
-        return makeFunctionWrapper(functionName, t.returnStatement(
+        return makeFunctionWrapper(context, functionName, t.returnStatement(
             t.callExpression(
                 t.identifier('decodePubkey'),
                 [
                     t.identifier('content')
                 ]
             ),
-        ));
+        ), t.tsTypeAnnotation(t.tsUnionType([t.tsTypeReference(t.identifier("Pubkey")), t.tsNullKeyword()])));
     }
 
 
@@ -40,34 +41,51 @@ export const createInterfaceToAmino = (
     );
 };
 
-const makeFunctionWrapper = (functionName: string, stmt: t.Statement) => {
-    let arrowFunction = t.arrowFunctionExpression(
-        [
-            identifier(
-                'content',
-                t.tsTypeAnnotation(
-                    t.tsTypeReference(
-                        t.identifier('Any')
-                    )
-                )
-            )
-        ],
-        t.blockStatement([
-            stmt
-        ])
-    );
-    arrowFunction.returnType = t.tsTypeAnnotation(
-        t.tsTypeReference(
-            t.identifier('AnyAmino')
-        )
-    );
+const makeFunctionWrapper = (
+    context: ProtoParseContext,
+    functionName: string,
+    stmt: t.Statement,
+    returnType?: t.TSTypeAnnotation
+) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
             'const',
             [
                 t.variableDeclarator(
                     t.identifier(functionName),
-                    arrowFunction
+                    arrowFunctionExpression(
+                        [
+                            identifier(
+                                'content',
+                                t.tsTypeAnnotation(
+                                    t.tsTypeReference(
+                                        t.identifier('Any')
+                                    )
+                                )
+                            ),
+                            ...(context.options.interfaces.enabled &&
+                              context.options.interfaces.useUseInterfacesParams
+                                ? [
+                                    t.assignmentPattern(
+                                      identifier(
+                                        "useInterfaces",
+                                        t.tsTypeAnnotation(t.tsBooleanKeyword())
+                                      ),
+                                      t.identifier(
+                                        (
+                                          context.pluginValue("interfaces.useByDefault") ?? true
+                                        ).toString()
+                                      )
+                                    ),
+                                  ]
+                                : []),
+                        ],
+                        t.blockStatement([
+                            stmt
+                        ]),
+                        returnType
+                    )
+
                 )
             ]
         )
@@ -114,9 +132,22 @@ export const createInterfaceToAminoHelper = (
                                             t.memberExpression(
                                                 t.identifier('content'),
                                                 t.identifier('value')
-                                            )
+                                            ),
+                                            t.identifier('undefined'),
+                                            ...(context.options.interfaces.enabled &&
+                                              context.options.interfaces.useUseInterfacesParams
+                                                ? [
+                                                    t.identifier('useInterfaces')
+                                                  ]
+                                                : []),
                                         ]
-                                    )
+                                    ),
+                                    ...(context.options.interfaces.enabled &&
+                                      context.options.interfaces.useUseInterfacesParams
+                                        ? [
+                                            t.identifier('useInterfaces')
+                                          ]
+                                        : []),
                                 ]
                             )
                         )
@@ -135,7 +166,10 @@ export const createInterfaceToAminoHelper = (
                     t.identifier('toAmino')
                 ),
                 [
-                    t.identifier('content')
+                  t.identifier('content'),
+                  ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                      t.identifier('useInterfaces')
+                  ] : []),
                 ]
             )
         );
@@ -158,7 +192,10 @@ export const createInterfaceToAminoHelper = (
                                     t.identifier('toAmino')
                                 ),
                                 [
-                                    t.identifier('content')
+                                    t.identifier('content'),
+                                    ...(context.options.interfaces.enabled && context.options.interfaces.useUseInterfacesParams ? [
+                                      t.identifier('useInterfaces')
+                                    ] : []),
                                 ]
                             )
                         )
@@ -168,5 +205,5 @@ export const createInterfaceToAminoHelper = (
         );
     }
 
-    return makeFunctionWrapper(functionName, ast);
+    return makeFunctionWrapper(context, functionName, ast);
 };

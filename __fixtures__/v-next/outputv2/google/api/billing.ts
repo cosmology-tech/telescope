@@ -89,7 +89,7 @@ export interface BillingAmino {
    * a different monitored resource type. A metric can be used in at most
    * one consumer destination.
    */
-  consumer_destinations: Billing_BillingDestinationAmino[];
+  consumer_destinations?: Billing_BillingDestinationAmino[];
 }
 export interface BillingAminoMsg {
   type: "/google.api.Billing";
@@ -161,12 +161,12 @@ export interface Billing_BillingDestinationAmino {
    * The monitored resource type. The type must be defined in
    * [Service.monitored_resources][google.api.Service.monitored_resources] section.
    */
-  monitored_resource: string;
+  monitored_resource?: string;
   /**
    * Names of the metrics to report to this billing destination.
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
-  metrics: string[];
+  metrics?: string[];
 }
 export interface Billing_BillingDestinationAminoMsg {
   type: "/google.api.BillingDestination";
@@ -244,9 +244,9 @@ export const Billing = {
     return obj;
   },
   fromAmino(object: BillingAmino): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseBilling();
+    message.consumerDestinations = object.consumer_destinations?.map(e => Billing_BillingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Billing): BillingAmino {
     const obj: any = {};
@@ -349,10 +349,12 @@ export const Billing_BillingDestination = {
     return obj;
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseBilling_BillingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};

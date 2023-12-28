@@ -70,8 +70,8 @@ export interface ConsensusState {
  */
 export interface Misbehaviour {
   clientId: string;
-  header1: Header;
-  header2: Header;
+  header1?: Header;
+  header2?: Header;
 }
 /**
  * Header defines the Tendermint client consensus Header.
@@ -88,10 +88,10 @@ export interface Misbehaviour {
  * trusted validator set at the TrustedHeight.
  */
 export interface Header {
-  signedHeader: SignedHeader;
-  validatorSet: ValidatorSet;
+  signedHeader?: SignedHeader;
+  validatorSet?: ValidatorSet;
   trustedHeight: Height;
-  trustedValidators: ValidatorSet;
+  trustedValidators?: ValidatorSet;
 }
 /**
  * Fraction defines the protobuf message type for tmmath.Fraction that only
@@ -322,8 +322,8 @@ export const ConsensusState = {
 function createBaseMisbehaviour(): Misbehaviour {
   return {
     clientId: "",
-    header1: Header.fromPartial({}),
-    header2: Header.fromPartial({})
+    header1: undefined,
+    header2: undefined
   };
 }
 export const Misbehaviour = {
@@ -386,10 +386,10 @@ export const Misbehaviour = {
 };
 function createBaseHeader(): Header {
   return {
-    signedHeader: SignedHeader.fromPartial({}),
-    validatorSet: ValidatorSet.fromPartial({}),
+    signedHeader: undefined,
+    validatorSet: undefined,
     trustedHeight: Height.fromPartial({}),
-    trustedValidators: ValidatorSet.fromPartial({})
+    trustedValidators: undefined
   };
 }
 export const Header = {

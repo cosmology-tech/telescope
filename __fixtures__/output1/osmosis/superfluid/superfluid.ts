@@ -110,7 +110,7 @@ export interface SuperfluidDelegationRecord {
   delegatorAddress: string;
   validatorAddress: string;
   delegationAmount: Coin;
-  equivalentStakedAmount: Coin;
+  equivalentStakedAmount?: Coin;
 }
 /**
  * SuperfluidDelegationRecord is a struct used to indicate superfluid
@@ -120,7 +120,7 @@ export interface SuperfluidDelegationRecordSDKType {
   delegator_address: string;
   validator_address: string;
   delegation_amount: CoinSDKType;
-  equivalent_staked_amount: CoinSDKType;
+  equivalent_staked_amount?: CoinSDKType;
 }
 /**
  * LockIdIntermediaryAccountConnection is a struct used to indicate the
@@ -376,7 +376,7 @@ function createBaseSuperfluidDelegationRecord(): SuperfluidDelegationRecord {
     delegatorAddress: "",
     validatorAddress: "",
     delegationAmount: Coin.fromPartial({}),
-    equivalentStakedAmount: Coin.fromPartial({})
+    equivalentStakedAmount: undefined
   };
 }
 export const SuperfluidDelegationRecord = {

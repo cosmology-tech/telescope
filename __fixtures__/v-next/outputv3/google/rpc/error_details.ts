@@ -19,7 +19,7 @@ export const protobufPackage = "google.rpc";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: Duration;
+  retryDelay?: Duration;
 }
 export interface RetryInfoProtoMsg {
   typeUrl: "/google.rpc.RetryInfo";
@@ -44,10 +44,6 @@ export interface RetryInfoAmino {
   /** Clients should wait at least this long between retrying the same request. */
   retry_delay?: DurationAmino;
 }
-export interface RetryInfoAminoMsg {
-  type: "/google.rpc.RetryInfo";
-  value: RetryInfoAmino;
-}
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
  * the recommendation here or retry when this information is missing from error
@@ -64,7 +60,7 @@ export interface RetryInfoAminoMsg {
  * reached.
  */
 export interface RetryInfoSDKType {
-  retry_delay: DurationSDKType;
+  retry_delay?: DurationSDKType;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {
@@ -80,13 +76,9 @@ export interface DebugInfoProtoMsg {
 /** Describes additional debugging info. */
 export interface DebugInfoAmino {
   /** The stack trace entries indicating where the error occurred. */
-  stack_entries: string[];
+  stack_entries?: string[];
   /** Additional debugging information provided by the server. */
-  detail: string;
-}
-export interface DebugInfoAminoMsg {
-  type: "/google.rpc.DebugInfo";
-  value: DebugInfoAmino;
+  detail?: string;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
@@ -129,11 +121,7 @@ export interface QuotaFailureProtoMsg {
  */
 export interface QuotaFailureAmino {
   /** Describes all quota violations. */
-  violations: QuotaFailure_ViolationAmino[];
-}
-export interface QuotaFailureAminoMsg {
-  type: "/google.rpc.QuotaFailure";
-  value: QuotaFailureAmino;
+  violations?: QuotaFailure_ViolationAmino[];
 }
 /**
  * Describes how a quota check failed.
@@ -187,7 +175,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example, "clientip:<ip address of client>" or "project:<Google
    * developer project id>".
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the quota check failed. Clients can use this
    * description to find more about the quota configuration in the service's
@@ -197,11 +185,7 @@ export interface QuotaFailure_ViolationAmino {
    * For example: "Service disabled" or "Daily Limit for read operations
    * exceeded".
    */
-  description: string;
-}
-export interface QuotaFailure_ViolationAminoMsg {
-  type: "/google.rpc.Violation";
-  value: QuotaFailure_ViolationAmino;
+  description?: string;
 }
 /**
  * A message type used to describe a single quota violation.  For example, a
@@ -220,12 +204,8 @@ export interface ErrorInfo_MetadataEntryProtoMsg {
   value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntryAmino {
-  key: string;
-  value: string;
-}
-export interface ErrorInfo_MetadataEntryAminoMsg {
-  type: string;
-  value: ErrorInfo_MetadataEntryAmino;
+  key?: string;
+  value?: string;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -325,7 +305,7 @@ export interface ErrorInfoAmino {
    * domain of errors. This should be at most 63 characters and match
    * /[A-Z0-9_]+/.
    */
-  reason: string;
+  reason?: string;
   /**
    * The logical grouping to which the "reason" belongs. The error domain
    * is typically the registered service name of the tool or product that
@@ -334,7 +314,7 @@ export interface ErrorInfoAmino {
    * globally unique value that identifies the infrastructure. For Google API
    * infrastructure, the error domain is "googleapis.com".
    */
-  domain: string;
+  domain?: string;
   /**
    * Additional structured details about this error.
    * 
@@ -345,13 +325,9 @@ export interface ErrorInfoAmino {
    * {"instanceLimitPerRequest": "100"}, if the client exceeds the number of
    * instances that can be created in a single (batch) request.
    */
-  metadata: {
+  metadata?: {
     [key: string]: string;
   };
-}
-export interface ErrorInfoAminoMsg {
-  type: "/google.rpc.ErrorInfo";
-  value: ErrorInfoAmino;
 }
 /**
  * Describes the cause of the error with structured details.
@@ -410,11 +386,7 @@ export interface PreconditionFailureProtoMsg {
  */
 export interface PreconditionFailureAmino {
   /** Describes all precondition violations. */
-  violations: PreconditionFailure_ViolationAmino[];
-}
-export interface PreconditionFailureAminoMsg {
-  type: "/google.rpc.PreconditionFailure";
-  value: PreconditionFailureAmino;
+  violations?: PreconditionFailure_ViolationAmino[];
 }
 /**
  * Describes what preconditions have failed.
@@ -459,24 +431,20 @@ export interface PreconditionFailure_ViolationAmino {
    * enum type to define the supported precondition violation subjects. For
    * example, "TOS" for "Terms of Service violation".
    */
-  type: string;
+  type?: string;
   /**
    * The subject, relative to the type, that failed.
    * For example, "google.com/cloud" relative to the "TOS" type would indicate
    * which terms of service is being referenced.
    */
-  subject: string;
+  subject?: string;
   /**
    * A description of how the precondition failed. Developers can use this
    * description to understand how to fix the failure.
    * 
    * For example: "Terms of service not accepted".
    */
-  description: string;
-}
-export interface PreconditionFailure_ViolationAminoMsg {
-  type: "/google.rpc.Violation";
-  value: PreconditionFailure_ViolationAmino;
+  description?: string;
 }
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
@@ -502,11 +470,7 @@ export interface BadRequestProtoMsg {
  */
 export interface BadRequestAmino {
   /** Describes all violations in a client request. */
-  field_violations: BadRequest_FieldViolationAmino[];
-}
-export interface BadRequestAminoMsg {
-  type: "/google.rpc.BadRequest";
-  value: BadRequestAmino;
+  field_violations?: BadRequest_FieldViolationAmino[];
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -537,13 +501,9 @@ export interface BadRequest_FieldViolationAmino {
    * sequence of dot-separated identifiers that identify a protocol buffer
    * field. E.g., "field_violations.field" would identify this field.
    */
-  field: string;
+  field?: string;
   /** A description of why the request element is bad. */
-  description: string;
-}
-export interface BadRequest_FieldViolationAminoMsg {
-  type: "/google.rpc.FieldViolation";
-  value: BadRequest_FieldViolationAmino;
+  description?: string;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -579,16 +539,12 @@ export interface RequestInfoAmino {
    * An opaque string that should only be interpreted by the service generating
    * it. For example, it can be used to identify requests in the service's logs.
    */
-  request_id: string;
+  request_id?: string;
   /**
    * Any data that was used to serve this request. For example, an encrypted
    * stack trace that can be sent back to the service provider for debugging.
    */
-  serving_data: string;
-}
-export interface RequestInfoAminoMsg {
-  type: "/google.rpc.RequestInfo";
-  value: RequestInfoAmino;
+  serving_data?: string;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -636,29 +592,25 @@ export interface ResourceInfoAmino {
    * "cloud storage bucket", "file", "Google calendar"; or the type URL
    * of the resource: e.g. "type.googleapis.com/google.pubsub.v1.Topic".
    */
-  resource_type: string;
+  resource_type?: string;
   /**
    * The name of the resource being accessed.  For example, a shared calendar
    * name: "example.com_4fghdhgsrgh@group.calendar.google.com", if the current
    * error is [google.rpc.Code.PERMISSION_DENIED][google.rpc.Code.PERMISSION_DENIED].
    */
-  resource_name: string;
+  resource_name?: string;
   /**
    * The owner of the resource (optional).
    * For example, "user:<owner email>" or "project:<Google developer project
    * id>".
    */
-  owner: string;
+  owner?: string;
   /**
    * Describes what error is encountered when accessing this resource.
    * For example, updating a cloud project may require the `writer` permission
    * on the developer console project.
    */
-  description: string;
-}
-export interface ResourceInfoAminoMsg {
-  type: "/google.rpc.ResourceInfo";
-  value: ResourceInfoAmino;
+  description?: string;
 }
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
@@ -691,11 +643,7 @@ export interface HelpProtoMsg {
  */
 export interface HelpAmino {
   /** URL(s) pointing to additional information on handling the current error. */
-  links: Help_LinkAmino[];
-}
-export interface HelpAminoMsg {
-  type: "/google.rpc.Help";
-  value: HelpAmino;
+  links?: Help_LinkAmino[];
 }
 /**
  * Provides links to documentation or for performing an out of band action.
@@ -721,13 +669,9 @@ export interface Help_LinkProtoMsg {
 /** Describes a URL link. */
 export interface Help_LinkAmino {
   /** Describes what the link offers. */
-  description: string;
+  description?: string;
   /** The URL of the link. */
-  url: string;
-}
-export interface Help_LinkAminoMsg {
-  type: "/google.rpc.Link";
-  value: Help_LinkAmino;
+  url?: string;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -762,13 +706,9 @@ export interface LocalizedMessageAmino {
    * http://www.rfc-editor.org/rfc/bcp/bcp47.txt.
    * Examples are: "en-US", "fr-CH", "es-MX"
    */
-  locale: string;
+  locale?: string;
   /** The localized error message in the above locale. */
-  message: string;
-}
-export interface LocalizedMessageAminoMsg {
-  type: "/google.rpc.LocalizedMessage";
-  value: LocalizedMessageAmino;
+  message?: string;
 }
 /**
  * Provides a localized error message that is safe to return to the user
@@ -780,7 +720,7 @@ export interface LocalizedMessageSDKType {
 }
 function createBaseRetryInfo(): RetryInfo {
   return {
-    retryDelay: Duration.fromPartial({})
+    retryDelay: undefined
   };
 }
 export const RetryInfo = {
@@ -791,7 +731,7 @@ export const RetryInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): RetryInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RetryInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRetryInfo();
@@ -799,7 +739,7 @@ export const RetryInfo = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.retryDelay = Duration.decode(reader, reader.uint32());
+          message.retryDelay = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -836,20 +776,19 @@ export const RetryInfo = {
     return obj;
   },
   fromAmino(object: RetryInfoAmino): RetryInfo {
-    return {
-      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
-    };
+    const message = createBaseRetryInfo();
+    if (object.retry_delay !== undefined && object.retry_delay !== null) {
+      message.retryDelay = Duration.fromAmino(object.retry_delay);
+    }
+    return message;
   },
-  toAmino(message: RetryInfo): RetryInfoAmino {
+  toAmino(message: RetryInfo, useInterfaces: boolean = true): RetryInfoAmino {
     const obj: any = {};
-    obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay) : undefined;
+    obj.retry_delay = message.retryDelay ? Duration.toAmino(message.retryDelay, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: RetryInfoAminoMsg): RetryInfo {
-    return RetryInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RetryInfoProtoMsg): RetryInfo {
-    return RetryInfo.decode(message.value);
+  fromProtoMsg(message: RetryInfoProtoMsg, useInterfaces: boolean = true): RetryInfo {
+    return RetryInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RetryInfo): Uint8Array {
     return RetryInfo.encode(message).finish();
@@ -878,7 +817,7 @@ export const DebugInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DebugInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DebugInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDebugInfo();
@@ -937,12 +876,14 @@ export const DebugInfo = {
     return obj;
   },
   fromAmino(object: DebugInfoAmino): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
-    };
+    const message = createBaseDebugInfo();
+    message.stackEntries = object.stack_entries?.map(e => e) || [];
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    return message;
   },
-  toAmino(message: DebugInfo): DebugInfoAmino {
+  toAmino(message: DebugInfo, useInterfaces: boolean = true): DebugInfoAmino {
     const obj: any = {};
     if (message.stackEntries) {
       obj.stack_entries = message.stackEntries.map(e => e);
@@ -952,11 +893,8 @@ export const DebugInfo = {
     obj.detail = omitDefault(message.detail);
     return obj;
   },
-  fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
-    return DebugInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DebugInfoProtoMsg): DebugInfo {
-    return DebugInfo.decode(message.value);
+  fromProtoMsg(message: DebugInfoProtoMsg, useInterfaces: boolean = true): DebugInfo {
+    return DebugInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DebugInfo): Uint8Array {
     return DebugInfo.encode(message).finish();
@@ -981,7 +919,7 @@ export const QuotaFailure = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuotaFailure {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaFailure {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure();
@@ -989,7 +927,7 @@ export const QuotaFailure = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.violations.push(QuotaFailure_Violation.decode(reader, reader.uint32()));
+          message.violations.push(QuotaFailure_Violation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1032,24 +970,21 @@ export const QuotaFailure = {
     return obj;
   },
   fromAmino(object: QuotaFailureAmino): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBaseQuotaFailure();
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: QuotaFailure): QuotaFailureAmino {
+  toAmino(message: QuotaFailure, useInterfaces: boolean = true): QuotaFailureAmino {
     const obj: any = {};
     if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
+      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.violations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: QuotaFailureAminoMsg): QuotaFailure {
-    return QuotaFailure.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuotaFailureProtoMsg): QuotaFailure {
-    return QuotaFailure.decode(message.value);
+  fromProtoMsg(message: QuotaFailureProtoMsg, useInterfaces: boolean = true): QuotaFailure {
+    return QuotaFailure.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaFailure): Uint8Array {
     return QuotaFailure.encode(message).finish();
@@ -1078,7 +1013,7 @@ export const QuotaFailure_Violation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): QuotaFailure_Violation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): QuotaFailure_Violation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseQuotaFailure_Violation();
@@ -1129,22 +1064,23 @@ export const QuotaFailure_Violation = {
     return obj;
   },
   fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
-    return {
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBaseQuotaFailure_Violation();
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
+  toAmino(message: QuotaFailure_Violation, useInterfaces: boolean = true): QuotaFailure_ViolationAmino {
     const obj: any = {};
     obj.subject = omitDefault(message.subject);
     obj.description = omitDefault(message.description);
     return obj;
   },
-  fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
-    return QuotaFailure_Violation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: QuotaFailure_ViolationProtoMsg): QuotaFailure_Violation {
-    return QuotaFailure_Violation.decode(message.value);
+  fromProtoMsg(message: QuotaFailure_ViolationProtoMsg, useInterfaces: boolean = true): QuotaFailure_Violation {
+    return QuotaFailure_Violation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: QuotaFailure_Violation): Uint8Array {
     return QuotaFailure_Violation.encode(message).finish();
@@ -1172,7 +1108,7 @@ export const ErrorInfo_MetadataEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ErrorInfo_MetadataEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ErrorInfo_MetadataEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo_MetadataEntry();
@@ -1223,22 +1159,23 @@ export const ErrorInfo_MetadataEntry = {
     return obj;
   },
   fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseErrorInfo_MetadataEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
+  toAmino(message: ErrorInfo_MetadataEntry, useInterfaces: boolean = true): ErrorInfo_MetadataEntryAmino {
     const obj: any = {};
     obj.key = omitDefault(message.key);
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
-    return ErrorInfo_MetadataEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg): ErrorInfo_MetadataEntry {
-    return ErrorInfo_MetadataEntry.decode(message.value);
+  fromProtoMsg(message: ErrorInfo_MetadataEntryProtoMsg, useInterfaces: boolean = true): ErrorInfo_MetadataEntry {
+    return ErrorInfo_MetadataEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ErrorInfo_MetadataEntry): Uint8Array {
     return ErrorInfo_MetadataEntry.encode(message).finish();
@@ -1268,7 +1205,7 @@ export const ErrorInfo = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ErrorInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ErrorInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseErrorInfo();
@@ -1357,18 +1294,24 @@ export const ErrorInfo = {
     return obj;
   },
   fromAmino(object: ErrorInfoAmino): ErrorInfo {
-    return {
-      reason: object.reason,
-      domain: object.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseErrorInfo();
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    if (object.domain !== undefined && object.domain !== null) {
+      message.domain = object.domain;
+    }
+    message.metadata = Object.entries(object.metadata ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
-  toAmino(message: ErrorInfo): ErrorInfoAmino {
+  toAmino(message: ErrorInfo, useInterfaces: boolean = true): ErrorInfoAmino {
     const obj: any = {};
     obj.reason = omitDefault(message.reason);
     obj.domain = omitDefault(message.domain);
@@ -1380,11 +1323,8 @@ export const ErrorInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: ErrorInfoAminoMsg): ErrorInfo {
-    return ErrorInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ErrorInfoProtoMsg): ErrorInfo {
-    return ErrorInfo.decode(message.value);
+  fromProtoMsg(message: ErrorInfoProtoMsg, useInterfaces: boolean = true): ErrorInfo {
+    return ErrorInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ErrorInfo): Uint8Array {
     return ErrorInfo.encode(message).finish();
@@ -1409,7 +1349,7 @@ export const PreconditionFailure = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PreconditionFailure {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure();
@@ -1417,7 +1357,7 @@ export const PreconditionFailure = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32()));
+          message.violations.push(PreconditionFailure_Violation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1460,24 +1400,21 @@ export const PreconditionFailure = {
     return obj;
   },
   fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBasePreconditionFailure();
+    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: PreconditionFailure): PreconditionFailureAmino {
+  toAmino(message: PreconditionFailure, useInterfaces: boolean = true): PreconditionFailureAmino {
     const obj: any = {};
     if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
+      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.violations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: PreconditionFailureAminoMsg): PreconditionFailure {
-    return PreconditionFailure.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PreconditionFailureProtoMsg): PreconditionFailure {
-    return PreconditionFailure.decode(message.value);
+  fromProtoMsg(message: PreconditionFailureProtoMsg, useInterfaces: boolean = true): PreconditionFailure {
+    return PreconditionFailure.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PreconditionFailure): Uint8Array {
     return PreconditionFailure.encode(message).finish();
@@ -1510,7 +1447,7 @@ export const PreconditionFailure_Violation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): PreconditionFailure_Violation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): PreconditionFailure_Violation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePreconditionFailure_Violation();
@@ -1569,24 +1506,27 @@ export const PreconditionFailure_Violation = {
     return obj;
   },
   fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
-    return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBasePreconditionFailure_Violation();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
+  toAmino(message: PreconditionFailure_Violation, useInterfaces: boolean = true): PreconditionFailure_ViolationAmino {
     const obj: any = {};
     obj.type = omitDefault(message.type);
     obj.subject = omitDefault(message.subject);
     obj.description = omitDefault(message.description);
     return obj;
   },
-  fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
-    return PreconditionFailure_Violation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg): PreconditionFailure_Violation {
-    return PreconditionFailure_Violation.decode(message.value);
+  fromProtoMsg(message: PreconditionFailure_ViolationProtoMsg, useInterfaces: boolean = true): PreconditionFailure_Violation {
+    return PreconditionFailure_Violation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: PreconditionFailure_Violation): Uint8Array {
     return PreconditionFailure_Violation.encode(message).finish();
@@ -1611,7 +1551,7 @@ export const BadRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BadRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BadRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest();
@@ -1619,7 +1559,7 @@ export const BadRequest = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.fieldViolations.push(BadRequest_FieldViolation.decode(reader, reader.uint32()));
+          message.fieldViolations.push(BadRequest_FieldViolation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1662,24 +1602,21 @@ export const BadRequest = {
     return obj;
   },
   fromAmino(object: BadRequestAmino): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
+    const message = createBaseBadRequest();
+    message.fieldViolations = object.field_violations?.map(e => BadRequest_FieldViolation.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: BadRequest): BadRequestAmino {
+  toAmino(message: BadRequest, useInterfaces: boolean = true): BadRequestAmino {
     const obj: any = {};
     if (message.fieldViolations) {
-      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
+      obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.field_violations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: BadRequestAminoMsg): BadRequest {
-    return BadRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BadRequestProtoMsg): BadRequest {
-    return BadRequest.decode(message.value);
+  fromProtoMsg(message: BadRequestProtoMsg, useInterfaces: boolean = true): BadRequest {
+    return BadRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BadRequest): Uint8Array {
     return BadRequest.encode(message).finish();
@@ -1708,7 +1645,7 @@ export const BadRequest_FieldViolation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): BadRequest_FieldViolation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): BadRequest_FieldViolation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseBadRequest_FieldViolation();
@@ -1759,22 +1696,23 @@ export const BadRequest_FieldViolation = {
     return obj;
   },
   fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
-    return {
-      field: object.field,
-      description: object.description
-    };
+    const message = createBaseBadRequest_FieldViolation();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
+  toAmino(message: BadRequest_FieldViolation, useInterfaces: boolean = true): BadRequest_FieldViolationAmino {
     const obj: any = {};
     obj.field = omitDefault(message.field);
     obj.description = omitDefault(message.description);
     return obj;
   },
-  fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
-    return BadRequest_FieldViolation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: BadRequest_FieldViolationProtoMsg): BadRequest_FieldViolation {
-    return BadRequest_FieldViolation.decode(message.value);
+  fromProtoMsg(message: BadRequest_FieldViolationProtoMsg, useInterfaces: boolean = true): BadRequest_FieldViolation {
+    return BadRequest_FieldViolation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: BadRequest_FieldViolation): Uint8Array {
     return BadRequest_FieldViolation.encode(message).finish();
@@ -1803,7 +1741,7 @@ export const RequestInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): RequestInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): RequestInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRequestInfo();
@@ -1854,22 +1792,23 @@ export const RequestInfo = {
     return obj;
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
-    return {
-      requestId: object.request_id,
-      servingData: object.serving_data
-    };
+    const message = createBaseRequestInfo();
+    if (object.request_id !== undefined && object.request_id !== null) {
+      message.requestId = object.request_id;
+    }
+    if (object.serving_data !== undefined && object.serving_data !== null) {
+      message.servingData = object.serving_data;
+    }
+    return message;
   },
-  toAmino(message: RequestInfo): RequestInfoAmino {
+  toAmino(message: RequestInfo, useInterfaces: boolean = true): RequestInfoAmino {
     const obj: any = {};
     obj.request_id = omitDefault(message.requestId);
     obj.serving_data = omitDefault(message.servingData);
     return obj;
   },
-  fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
-    return RequestInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: RequestInfoProtoMsg): RequestInfo {
-    return RequestInfo.decode(message.value);
+  fromProtoMsg(message: RequestInfoProtoMsg, useInterfaces: boolean = true): RequestInfo {
+    return RequestInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: RequestInfo): Uint8Array {
     return RequestInfo.encode(message).finish();
@@ -1906,7 +1845,7 @@ export const ResourceInfo = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ResourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ResourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseResourceInfo();
@@ -1973,14 +1912,22 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
-    };
+    const message = createBaseResourceInfo();
+    if (object.resource_type !== undefined && object.resource_type !== null) {
+      message.resourceType = object.resource_type;
+    }
+    if (object.resource_name !== undefined && object.resource_name !== null) {
+      message.resourceName = object.resource_name;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
-  toAmino(message: ResourceInfo): ResourceInfoAmino {
+  toAmino(message: ResourceInfo, useInterfaces: boolean = true): ResourceInfoAmino {
     const obj: any = {};
     obj.resource_type = omitDefault(message.resourceType);
     obj.resource_name = omitDefault(message.resourceName);
@@ -1988,11 +1935,8 @@ export const ResourceInfo = {
     obj.description = omitDefault(message.description);
     return obj;
   },
-  fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
-    return ResourceInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ResourceInfoProtoMsg): ResourceInfo {
-    return ResourceInfo.decode(message.value);
+  fromProtoMsg(message: ResourceInfoProtoMsg, useInterfaces: boolean = true): ResourceInfo {
+    return ResourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ResourceInfo): Uint8Array {
     return ResourceInfo.encode(message).finish();
@@ -2017,7 +1961,7 @@ export const Help = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Help {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Help {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp();
@@ -2025,7 +1969,7 @@ export const Help = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.links.push(Help_Link.decode(reader, reader.uint32()));
+          message.links.push(Help_Link.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -2068,24 +2012,21 @@ export const Help = {
     return obj;
   },
   fromAmino(object: HelpAmino): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
+    const message = createBaseHelp();
+    message.links = object.links?.map(e => Help_Link.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Help): HelpAmino {
+  toAmino(message: Help, useInterfaces: boolean = true): HelpAmino {
     const obj: any = {};
     if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
+      obj.links = message.links.map(e => e ? Help_Link.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.links = [];
     }
     return obj;
   },
-  fromAminoMsg(object: HelpAminoMsg): Help {
-    return Help.fromAmino(object.value);
-  },
-  fromProtoMsg(message: HelpProtoMsg): Help {
-    return Help.decode(message.value);
+  fromProtoMsg(message: HelpProtoMsg, useInterfaces: boolean = true): Help {
+    return Help.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Help): Uint8Array {
     return Help.encode(message).finish();
@@ -2114,7 +2055,7 @@ export const Help_Link = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Help_Link {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Help_Link {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHelp_Link();
@@ -2165,22 +2106,23 @@ export const Help_Link = {
     return obj;
   },
   fromAmino(object: Help_LinkAmino): Help_Link {
-    return {
-      description: object.description,
-      url: object.url
-    };
+    const message = createBaseHelp_Link();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    return message;
   },
-  toAmino(message: Help_Link): Help_LinkAmino {
+  toAmino(message: Help_Link, useInterfaces: boolean = true): Help_LinkAmino {
     const obj: any = {};
     obj.description = omitDefault(message.description);
     obj.url = omitDefault(message.url);
     return obj;
   },
-  fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
-    return Help_Link.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Help_LinkProtoMsg): Help_Link {
-    return Help_Link.decode(message.value);
+  fromProtoMsg(message: Help_LinkProtoMsg, useInterfaces: boolean = true): Help_Link {
+    return Help_Link.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Help_Link): Uint8Array {
     return Help_Link.encode(message).finish();
@@ -2209,7 +2151,7 @@ export const LocalizedMessage = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): LocalizedMessage {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): LocalizedMessage {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseLocalizedMessage();
@@ -2260,22 +2202,23 @@ export const LocalizedMessage = {
     return obj;
   },
   fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
-    return {
-      locale: object.locale,
-      message: object.message
-    };
+    const message = createBaseLocalizedMessage();
+    if (object.locale !== undefined && object.locale !== null) {
+      message.locale = object.locale;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    return message;
   },
-  toAmino(message: LocalizedMessage): LocalizedMessageAmino {
+  toAmino(message: LocalizedMessage, useInterfaces: boolean = true): LocalizedMessageAmino {
     const obj: any = {};
     obj.locale = omitDefault(message.locale);
     obj.message = omitDefault(message.message);
     return obj;
   },
-  fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {
-    return LocalizedMessage.fromAmino(object.value);
-  },
-  fromProtoMsg(message: LocalizedMessageProtoMsg): LocalizedMessage {
-    return LocalizedMessage.decode(message.value);
+  fromProtoMsg(message: LocalizedMessageProtoMsg, useInterfaces: boolean = true): LocalizedMessage {
+    return LocalizedMessage.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: LocalizedMessage): Uint8Array {
     return LocalizedMessage.encode(message).finish();

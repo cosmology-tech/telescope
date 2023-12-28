@@ -17,7 +17,11 @@ export interface Class {
   /** uri_hash is a hash of the document pointed by uri. Optional */
   uriHash: string;
   /** data is the app specific metadata of the NFT class. Optional */
-  data: Any;
+  data?: Any;
+}
+export interface ClassProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.Class";
+  value: Uint8Array;
 }
 /** Class defines the class of the nft type. */
 export interface ClassSDKType {
@@ -27,7 +31,7 @@ export interface ClassSDKType {
   description: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 /** NFT defines the NFT. */
 export interface NFT {
@@ -40,7 +44,11 @@ export interface NFT {
   /** uri_hash is a hash of the document pointed by uri */
   uriHash: string;
   /** data is an app specific data of the NFT. Optional */
-  data: Any;
+  data?: Any;
+}
+export interface NFTProtoMsg {
+  typeUrl: "/cosmos.nft.v1beta1.NFT";
+  value: Uint8Array;
 }
 /** NFT defines the NFT. */
 export interface NFTSDKType {
@@ -48,7 +56,7 @@ export interface NFTSDKType {
   id: string;
   uri: string;
   uri_hash: string;
-  data: AnySDKType;
+  data?: AnySDKType;
 }
 function createBaseClass(): Class {
   return {
@@ -58,7 +66,7 @@ function createBaseClass(): Class {
     description: "",
     uri: "",
     uriHash: "",
-    data: Any.fromPartial({})
+    data: undefined
   };
 }
 export const Class = {
@@ -189,15 +197,29 @@ export const Class = {
     return obj;
   },
   fromAmino(object: ClassAmino): Class {
-    return {
-      id: object.id,
-      name: object.name,
-      symbol: object.symbol,
-      description: object.description,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseClass();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.symbol !== undefined && object.symbol !== null) {
+      message.symbol = object.symbol;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: Class): ClassAmino {
     const obj: any = {};
@@ -238,7 +260,7 @@ function createBaseNFT(): NFT {
     id: "",
     uri: "",
     uriHash: "",
-    data: Any.fromPartial({})
+    data: undefined
   };
 }
 export const NFT = {
@@ -345,13 +367,23 @@ export const NFT = {
     return obj;
   },
   fromAmino(object: NFTAmino): NFT {
-    return {
-      classId: object.class_id,
-      id: object.id,
-      uri: object.uri,
-      uriHash: object.uri_hash,
-      data: object?.data ? Any.fromAmino(object.data) : undefined
-    };
+    const message = createBaseNFT();
+    if (object.class_id !== undefined && object.class_id !== null) {
+      message.classId = object.class_id;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.uri !== undefined && object.uri !== null) {
+      message.uri = object.uri;
+    }
+    if (object.uri_hash !== undefined && object.uri_hash !== null) {
+      message.uriHash = object.uri_hash;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromAmino(object.data);
+    }
+    return message;
   },
   toAmino(message: NFT): NFTAmino {
     const obj: any = {};

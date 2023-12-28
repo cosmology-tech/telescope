@@ -7,6 +7,10 @@ export interface ClientState {
   /** the latest block height */
   latestHeight: Height;
 }
+export interface ClientStateProtoMsg {
+  typeUrl: "/ibc.lightclients.localhost.v2.ClientState";
+  value: Uint8Array;
+}
 /** ClientState defines the 09-localhost client state */
 export interface ClientStateSDKType {
   latest_height: HeightSDKType;
@@ -72,9 +76,11 @@ export const ClientState = {
     return obj;
   },
   fromAmino(object: ClientStateAmino): ClientState {
-    return {
-      latestHeight: object?.latest_height ? Height.fromAmino(object.latest_height) : undefined
-    };
+    const message = createBaseClientState();
+    if (object.latest_height !== undefined && object.latest_height !== null) {
+      message.latestHeight = Height.fromAmino(object.latest_height);
+    }
+    return message;
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};

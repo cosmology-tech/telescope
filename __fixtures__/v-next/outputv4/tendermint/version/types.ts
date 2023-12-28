@@ -10,6 +10,10 @@ export interface App {
   protocol: bigint;
   software: string;
 }
+export interface AppProtoMsg {
+  typeUrl: "/tendermint.version.App";
+  value: Uint8Array;
+}
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
@@ -27,6 +31,10 @@ export interface AppSDKType {
 export interface Consensus {
   block: bigint;
   app: bigint;
+}
+export interface ConsensusProtoMsg {
+  typeUrl: "/tendermint.version.Consensus";
+  value: Uint8Array;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -46,10 +54,10 @@ function createBaseApp(): App {
 export const App = {
   typeUrl: "/tendermint.version.App",
   encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.protocol !== BigInt(0)) {
+    if (message.protocol !== undefined) {
       writer.uint32(8).uint64(message.protocol);
     }
-    if (message.software !== "") {
+    if (message.software !== undefined) {
       writer.uint32(18).string(message.software);
     }
     return writer;
@@ -113,10 +121,14 @@ export const App = {
     return obj;
   },
   fromAmino(object: AppAmino): App {
-    return {
-      protocol: BigInt(object.protocol),
-      software: object.software
-    };
+    const message = createBaseApp();
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol);
+    }
+    if (object.software !== undefined && object.software !== null) {
+      message.software = object.software;
+    }
+    return message;
   },
   toAmino(message: App): AppAmino {
     const obj: any = {};
@@ -149,10 +161,10 @@ function createBaseConsensus(): Consensus {
 export const Consensus = {
   typeUrl: "/tendermint.version.Consensus",
   encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.block !== BigInt(0)) {
+    if (message.block !== undefined) {
       writer.uint32(8).uint64(message.block);
     }
-    if (message.app !== BigInt(0)) {
+    if (message.app !== undefined) {
       writer.uint32(16).uint64(message.app);
     }
     return writer;
@@ -218,10 +230,14 @@ export const Consensus = {
     return obj;
   },
   fromAmino(object: ConsensusAmino): Consensus {
-    return {
-      block: BigInt(object.block),
-      app: BigInt(object.app)
-    };
+    const message = createBaseConsensus();
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block);
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app);
+    }
+    return message;
   },
   toAmino(message: Consensus): ConsensusAmino {
     const obj: any = {};

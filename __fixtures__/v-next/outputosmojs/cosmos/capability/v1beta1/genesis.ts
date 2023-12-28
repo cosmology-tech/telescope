@@ -9,6 +9,10 @@ export interface GenesisOwners {
   /** index_owners are the owners at the given index. */
   indexOwners: CapabilityOwners;
 }
+export interface GenesisOwnersProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisOwners";
+  value: Uint8Array;
+}
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwnersSDKType {
   index: bigint;
@@ -23,6 +27,10 @@ export interface GenesisState {
    * index key is string to allow amino marshalling.
    */
   owners: GenesisOwners[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/cosmos.capability.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the capability module's genesis state. */
 export interface GenesisStateSDKType {
@@ -103,10 +111,14 @@ export const GenesisOwners = {
     return obj;
   },
   fromAmino(object: GenesisOwnersAmino): GenesisOwners {
-    return {
-      index: BigInt(object.index),
-      indexOwners: object?.index_owners ? CapabilityOwners.fromAmino(object.index_owners) : undefined
-    };
+    const message = createBaseGenesisOwners();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.index_owners !== undefined && object.index_owners !== null) {
+      message.indexOwners = CapabilityOwners.fromAmino(object.index_owners);
+    }
+    return message;
   },
   toAmino(message: GenesisOwners): GenesisOwnersAmino {
     const obj: any = {};
@@ -218,10 +230,12 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      index: BigInt(object.index),
-      owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    message.owners = object.owners?.map(e => GenesisOwners.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

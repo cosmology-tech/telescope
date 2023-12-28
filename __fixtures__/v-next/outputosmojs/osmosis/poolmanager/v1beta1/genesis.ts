@@ -7,6 +7,10 @@ export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface Params {
   poolCreationFee: Coin[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.Params";
+  value: Uint8Array;
+}
 /** Params holds parameters for the poolmanager module */
 export interface ParamsSDKType {
   pool_creation_fee: CoinSDKType[];
@@ -19,6 +23,10 @@ export interface GenesisState {
   params: Params;
   /** pool_routes is the container of the mappings from pool id to pool type. */
   poolRoutes: ModuleRoute[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.poolmanager.v1beta1.GenesisState";
+  value: Uint8Array;
 }
 /** GenesisState defines the poolmanager module's genesis state. */
 export interface GenesisStateSDKType {
@@ -95,9 +103,9 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      poolCreationFee: Array.isArray(object?.pool_creation_fee) ? object.pool_creation_fee.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseParams();
+    message.poolCreationFee = object.pool_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
@@ -225,11 +233,15 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      nextPoolId: BigInt(object.next_pool_id),
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      poolRoutes: Array.isArray(object?.pool_routes) ? object.pool_routes.map((e: any) => ModuleRoute.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.next_pool_id !== undefined && object.next_pool_id !== null) {
+      message.nextPoolId = BigInt(object.next_pool_id);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.poolRoutes = object.pool_routes?.map(e => ModuleRoute.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

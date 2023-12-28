@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
+import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -35,11 +35,15 @@ export function nullValueToJSON(object: NullValue): string {
 }
 export interface Struct_FieldsEntry {
   key: string;
-  value: Value;
+  value?: Value;
+}
+export interface Struct_FieldsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface Struct_FieldsEntrySDKType {
   key: string;
-  value: ValueSDKType;
+  value?: ValueSDKType;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -56,6 +60,10 @@ export interface Struct {
   fields: {
     [key: string]: Value;
   };
+}
+export interface StructProtoMsg {
+  typeUrl: "/google.protobuf.Struct";
+  value: Uint8Array;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -94,6 +102,10 @@ export interface Value {
   /** Represents a repeated `Value`. */
   listValue?: ListValue;
 }
+export interface ValueProtoMsg {
+  typeUrl: "/google.protobuf.Value";
+  value: Uint8Array;
+}
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -119,6 +131,10 @@ export interface ListValue {
   /** Repeated field of dynamically typed values. */
   values: Value[];
 }
+export interface ListValueProtoMsg {
+  typeUrl: "/google.protobuf.ListValue";
+  value: Uint8Array;
+}
 /**
  * `ListValue` is a wrapper around a repeated field of values.
  * 
@@ -130,7 +146,7 @@ export interface ListValueSDKType {
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
-    value: Value.fromPartial({})
+    value: undefined
   };
 }
 export const Struct_FieldsEntry = {
@@ -200,14 +216,18 @@ export const Struct_FieldsEntry = {
     return obj;
   },
   fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? Value.fromAmino(object.value) : undefined
-    };
+    const message = createBaseStruct_FieldsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    return message;
   },
   toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
+    obj.key = message.key;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   },
@@ -320,14 +340,16 @@ export const Struct = {
     return obj;
   },
   fromAmino(object: StructAmino): Struct {
-    return {
-      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
-        [key: string]: Value;
-      }>((acc, [key, value]) => {
+    const message = createBaseStruct();
+    message.fields = Object.entries(object.fields ?? {}).reduce<{
+      [key: string]: Value;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = Value.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: Struct): StructAmino {
     const obj: any = {};
@@ -481,21 +503,33 @@ export const Value = {
     return obj;
   },
   fromAmino(object: ValueAmino): Value {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      numberValue: object?.number_value,
-      stringValue: object?.string_value,
-      boolValue: object?.bool_value,
-      structValue: object?.struct_value ? Struct.fromAmino(object.struct_value) : undefined,
-      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
-    };
+    const message = createBaseValue();
+    if (object.null_value !== undefined && object.null_value !== null) {
+      message.nullValue = nullValueFromJSON(object.null_value);
+    }
+    if (object.number_value !== undefined && object.number_value !== null) {
+      message.numberValue = object.number_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.struct_value !== undefined && object.struct_value !== null) {
+      message.structValue = Struct.fromAmino(object.struct_value);
+    }
+    if (object.list_value !== undefined && object.list_value !== null) {
+      message.listValue = ListValue.fromAmino(object.list_value);
+    }
+    return message;
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = omitDefault(message.nullValue);
-    obj.number_value = omitDefault(message.numberValue);
-    obj.string_value = omitDefault(message.stringValue);
-    obj.bool_value = omitDefault(message.boolValue);
+    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
     obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;
@@ -585,9 +619,9 @@ export const ListValue = {
     return obj;
   },
   fromAmino(object: ListValueAmino): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
-    };
+    const message = createBaseListValue();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ListValue): ListValueAmino {
     const obj: any = {};

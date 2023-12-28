@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -17,11 +17,11 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the claim module's parameters. */
 export interface ParamsAmino {
-  airdrop_start_time?: Date;
+  airdrop_start_time?: string;
   duration_until_decay?: DurationAmino;
   duration_of_decay?: DurationAmino;
   /** denom of claimable asset */
-  claim_denom: string;
+  claim_denom?: string;
 }
 export interface ParamsAminoMsg {
   type: "osmosis/claim/params";
@@ -131,19 +131,27 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      airdropStartTime: object?.airdrop_start_time ? Timestamp.fromAmino(object.airdrop_start_time) : undefined,
-      durationUntilDecay: object?.duration_until_decay ? Duration.fromAmino(object.duration_until_decay) : undefined,
-      durationOfDecay: object?.duration_of_decay ? Duration.fromAmino(object.duration_of_decay) : undefined,
-      claimDenom: object.claim_denom
-    };
+    const message = createBaseParams();
+    if (object.airdrop_start_time !== undefined && object.airdrop_start_time !== null) {
+      message.airdropStartTime = fromTimestamp(Timestamp.fromAmino(object.airdrop_start_time));
+    }
+    if (object.duration_until_decay !== undefined && object.duration_until_decay !== null) {
+      message.durationUntilDecay = Duration.fromAmino(object.duration_until_decay);
+    }
+    if (object.duration_of_decay !== undefined && object.duration_of_decay !== null) {
+      message.durationOfDecay = Duration.fromAmino(object.duration_of_decay);
+    }
+    if (object.claim_denom !== undefined && object.claim_denom !== null) {
+      message.claimDenom = object.claim_denom;
+    }
+    return message;
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.airdrop_start_time = message.airdropStartTime;
+    obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
-    obj.claim_denom = omitDefault(message.claimDenom);
+    obj.claim_denom = message.claimDenom;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

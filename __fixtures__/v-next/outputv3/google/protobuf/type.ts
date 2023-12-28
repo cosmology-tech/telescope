@@ -1,7 +1,7 @@
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "./any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -252,7 +252,7 @@ export interface Type {
   /** The protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -263,21 +263,17 @@ export interface TypeProtoMsg {
 /** A protocol buffer message type. */
 export interface TypeAmino {
   /** The fully qualified message name. */
-  name: string;
+  name?: string;
   /** The list of fields. */
-  fields: FieldAmino[];
+  fields?: FieldAmino[];
   /** The list of types appearing in `oneof` definitions in this type. */
-  oneofs: string[];
+  oneofs?: string[];
   /** The protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source context. */
   source_context?: SourceContextAmino;
   /** The source syntax. */
-  syntax: Syntax;
-}
-export interface TypeAminoMsg {
-  type: "/google.protobuf.Type";
-  value: TypeAmino;
+  syntax?: Syntax;
 }
 /** A protocol buffer message type. */
 export interface TypeSDKType {
@@ -285,7 +281,7 @@ export interface TypeSDKType {
   fields: FieldSDKType[];
   oneofs: string[];
   options: OptionSDKType[];
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
 }
 /** A single field of a message type. */
@@ -324,35 +320,31 @@ export interface FieldProtoMsg {
 /** A single field of a message type. */
 export interface FieldAmino {
   /** The field type. */
-  kind: Field_Kind;
+  kind?: Field_Kind;
   /** The field cardinality. */
-  cardinality: Field_Cardinality;
+  cardinality?: Field_Cardinality;
   /** The field number. */
-  number: number;
+  number?: number;
   /** The field name. */
-  name: string;
+  name?: string;
   /**
    * The field type URL, without the scheme, for message or enumeration
    * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
    */
-  type_url: string;
+  type_url?: string;
   /**
    * The index of the field type in `Type.oneofs`, for message or enumeration
    * types. The first type has index 1; zero means the type is not in the list.
    */
-  oneof_index: number;
+  oneof_index?: number;
   /** Whether to use alternative packed wire representation. */
-  packed: boolean;
+  packed?: boolean;
   /** The protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The field JSON name. */
-  json_name: string;
+  json_name?: string;
   /** The string value of the default value of this field. Proto2 syntax only. */
-  default_value: string;
-}
-export interface FieldAminoMsg {
-  type: "/google.protobuf.Field";
-  value: FieldAmino;
+  default_value?: string;
 }
 /** A single field of a message type. */
 export interface FieldSDKType {
@@ -376,7 +368,7 @@ export interface Enum {
   /** Protocol buffer options. */
   options: Option[];
   /** The source context. */
-  sourceContext: SourceContext;
+  sourceContext?: SourceContext;
   /** The source syntax. */
   syntax: Syntax;
 }
@@ -387,26 +379,22 @@ export interface EnumProtoMsg {
 /** Enum type definition. */
 export interface EnumAmino {
   /** Enum type name. */
-  name: string;
+  name?: string;
   /** Enum value definitions. */
-  enumvalue: EnumValueAmino[];
+  enumvalue?: EnumValueAmino[];
   /** Protocol buffer options. */
-  options: OptionAmino[];
+  options?: OptionAmino[];
   /** The source context. */
   source_context?: SourceContextAmino;
   /** The source syntax. */
-  syntax: Syntax;
-}
-export interface EnumAminoMsg {
-  type: "/google.protobuf.Enum";
-  value: EnumAmino;
+  syntax?: Syntax;
 }
 /** Enum type definition. */
 export interface EnumSDKType {
   name: string;
   enumvalue: EnumValueSDKType[];
   options: OptionSDKType[];
-  source_context: SourceContextSDKType;
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
 }
 /** Enum value definition. */
@@ -425,15 +413,11 @@ export interface EnumValueProtoMsg {
 /** Enum value definition. */
 export interface EnumValueAmino {
   /** Enum value name. */
-  name: string;
+  name?: string;
   /** Enum value number. */
-  number: number;
+  number?: number;
   /** Protocol buffer options. */
-  options: OptionAmino[];
-}
-export interface EnumValueAminoMsg {
-  type: "/google.protobuf.EnumValue";
-  value: EnumValueAmino;
+  options?: OptionAmino[];
 }
 /** Enum value definition. */
 export interface EnumValueSDKType {
@@ -459,7 +443,7 @@ export interface Option {
    * should be used. If the value is an enum, it should be stored as an int32
    * value using the google.protobuf.Int32Value type.
    */
-  value: Any;
+  value?: Any;
 }
 export interface OptionProtoMsg {
   typeUrl: "/google.protobuf.Option";
@@ -476,7 +460,7 @@ export interface OptionAmino {
    * For custom options, it should be the fully-qualified name. For example,
    * `"google.api.http"`.
    */
-  name: string;
+  name?: string;
   /**
    * The option's value packed in an Any message. If the value is a primitive,
    * the corresponding wrapper type defined in google/protobuf/wrappers.proto
@@ -485,17 +469,13 @@ export interface OptionAmino {
    */
   value?: AnyAmino;
 }
-export interface OptionAminoMsg {
-  type: "/google.protobuf.Option";
-  value: OptionAmino;
-}
 /**
  * A protocol buffer option, which can be attached to a message, field,
  * enumeration, etc.
  */
 export interface OptionSDKType {
   name: string;
-  value: AnySDKType;
+  value?: AnySDKType;
 }
 function createBaseType(): Type {
   return {
@@ -503,7 +483,7 @@ function createBaseType(): Type {
     fields: [],
     oneofs: [],
     options: [],
-    sourceContext: SourceContext.fromPartial({}),
+    sourceContext: undefined,
     syntax: 0
   };
 }
@@ -530,7 +510,7 @@ export const Type = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Type {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Type {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseType();
@@ -541,16 +521,16 @@ export const Type = {
           message.name = reader.string();
           break;
         case 2:
-          message.fields.push(Field.decode(reader, reader.uint32()));
+          message.fields.push(Field.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
           message.oneofs.push(reader.string());
           break;
         case 4:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 5:
-          message.sourceContext = SourceContext.decode(reader, reader.uint32());
+          message.sourceContext = SourceContext.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
           message.syntax = (reader.int32() as any);
@@ -639,20 +619,26 @@ export const Type = {
     return obj;
   },
   fromAmino(object: TypeAmino): Type {
-    return {
-      name: object.name,
-      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromAmino(e)) : [],
-      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseType();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.fields = object.fields?.map(e => Field.fromAmino(e)) || [];
+    message.oneofs = object.oneofs?.map(e => e) || [];
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.source_context !== undefined && object.source_context !== null) {
+      message.sourceContext = SourceContext.fromAmino(object.source_context);
+    }
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
-  toAmino(message: Type): TypeAmino {
+  toAmino(message: Type, useInterfaces: boolean = true): TypeAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.fields) {
-      obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
+      obj.fields = message.fields.map(e => e ? Field.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.fields = [];
     }
@@ -662,19 +648,16 @@ export const Type = {
       obj.oneofs = [];
     }
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
-    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = omitDefault(message.syntax);
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext, useInterfaces) : undefined;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
-  fromAminoMsg(object: TypeAminoMsg): Type {
-    return Type.fromAmino(object.value);
-  },
-  fromProtoMsg(message: TypeProtoMsg): Type {
-    return Type.decode(message.value);
+  fromProtoMsg(message: TypeProtoMsg, useInterfaces: boolean = true): Type {
+    return Type.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Type): Uint8Array {
     return Type.encode(message).finish();
@@ -735,7 +718,7 @@ export const Field = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Field {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Field {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseField();
@@ -764,7 +747,7 @@ export const Field = {
           message.packed = reader.bool();
           break;
         case 9:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 10:
           message.jsonName = reader.string();
@@ -858,42 +841,57 @@ export const Field = {
     return obj;
   },
   fromAmino(object: FieldAmino): Field {
-    return {
-      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
-      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
-      number: object.number,
-      name: object.name,
-      typeUrl: object.type_url,
-      oneofIndex: object.oneof_index,
-      packed: object.packed,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      jsonName: object.json_name,
-      defaultValue: object.default_value
-    };
+    const message = createBaseField();
+    if (object.kind !== undefined && object.kind !== null) {
+      message.kind = field_KindFromJSON(object.kind);
+    }
+    if (object.cardinality !== undefined && object.cardinality !== null) {
+      message.cardinality = field_CardinalityFromJSON(object.cardinality);
+    }
+    if (object.number !== undefined && object.number !== null) {
+      message.number = object.number;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type_url !== undefined && object.type_url !== null) {
+      message.typeUrl = object.type_url;
+    }
+    if (object.oneof_index !== undefined && object.oneof_index !== null) {
+      message.oneofIndex = object.oneof_index;
+    }
+    if (object.packed !== undefined && object.packed !== null) {
+      message.packed = object.packed;
+    }
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.json_name !== undefined && object.json_name !== null) {
+      message.jsonName = object.json_name;
+    }
+    if (object.default_value !== undefined && object.default_value !== null) {
+      message.defaultValue = object.default_value;
+    }
+    return message;
   },
-  toAmino(message: Field): FieldAmino {
+  toAmino(message: Field, useInterfaces: boolean = true): FieldAmino {
     const obj: any = {};
-    obj.kind = omitDefault(message.kind);
-    obj.cardinality = omitDefault(message.cardinality);
-    obj.number = omitDefault(message.number);
-    obj.name = omitDefault(message.name);
-    obj.type_url = omitDefault(message.typeUrl);
-    obj.oneof_index = omitDefault(message.oneofIndex);
-    obj.packed = omitDefault(message.packed);
+    obj.kind = field_KindToJSON(message.kind);
+    obj.cardinality = field_CardinalityToJSON(message.cardinality);
+    obj.number = message.number;
+    obj.name = message.name;
+    obj.type_url = message.typeUrl;
+    obj.oneof_index = message.oneofIndex;
+    obj.packed = message.packed;
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
-    obj.json_name = omitDefault(message.jsonName);
-    obj.default_value = omitDefault(message.defaultValue);
+    obj.json_name = message.jsonName;
+    obj.default_value = message.defaultValue;
     return obj;
   },
-  fromAminoMsg(object: FieldAminoMsg): Field {
-    return Field.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FieldProtoMsg): Field {
-    return Field.decode(message.value);
+  fromProtoMsg(message: FieldProtoMsg, useInterfaces: boolean = true): Field {
+    return Field.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Field): Uint8Array {
     return Field.encode(message).finish();
@@ -910,7 +908,7 @@ function createBaseEnum(): Enum {
     name: "",
     enumvalue: [],
     options: [],
-    sourceContext: SourceContext.fromPartial({}),
+    sourceContext: undefined,
     syntax: 0
   };
 }
@@ -934,7 +932,7 @@ export const Enum = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Enum {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Enum {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnum();
@@ -945,13 +943,13 @@ export const Enum = {
           message.name = reader.string();
           break;
         case 2:
-          message.enumvalue.push(EnumValue.decode(reader, reader.uint32()));
+          message.enumvalue.push(EnumValue.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.sourceContext = SourceContext.decode(reader, reader.uint32());
+          message.sourceContext = SourceContext.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.syntax = (reader.int32() as any);
@@ -1027,36 +1025,39 @@ export const Enum = {
     return obj;
   },
   fromAmino(object: EnumAmino): Enum {
-    return {
-      name: object.name,
-      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromAmino(e)) : [],
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : [],
-      sourceContext: object?.source_context ? SourceContext.fromAmino(object.source_context) : undefined,
-      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
-    };
+    const message = createBaseEnum();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.enumvalue = object.enumvalue?.map(e => EnumValue.fromAmino(e)) || [];
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    if (object.source_context !== undefined && object.source_context !== null) {
+      message.sourceContext = SourceContext.fromAmino(object.source_context);
+    }
+    if (object.syntax !== undefined && object.syntax !== null) {
+      message.syntax = syntaxFromJSON(object.syntax);
+    }
+    return message;
   },
-  toAmino(message: Enum): EnumAmino {
+  toAmino(message: Enum, useInterfaces: boolean = true): EnumAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name;
     if (message.enumvalue) {
-      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.enumvalue = [];
     }
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
-    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = omitDefault(message.syntax);
+    obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext, useInterfaces) : undefined;
+    obj.syntax = syntaxToJSON(message.syntax);
     return obj;
   },
-  fromAminoMsg(object: EnumAminoMsg): Enum {
-    return Enum.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumProtoMsg): Enum {
-    return Enum.decode(message.value);
+  fromProtoMsg(message: EnumProtoMsg, useInterfaces: boolean = true): Enum {
+    return Enum.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Enum): Uint8Array {
     return Enum.encode(message).finish();
@@ -1089,7 +1090,7 @@ export const EnumValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): EnumValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): EnumValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumValue();
@@ -1103,7 +1104,7 @@ export const EnumValue = {
           message.number = reader.int32();
           break;
         case 3:
-          message.options.push(Option.decode(reader, reader.uint32()));
+          message.options.push(Option.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1156,28 +1157,29 @@ export const EnumValue = {
     return obj;
   },
   fromAmino(object: EnumValueAmino): EnumValue {
-    return {
-      name: object.name,
-      number: object.number,
-      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromAmino(e)) : []
-    };
+    const message = createBaseEnumValue();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.number !== undefined && object.number !== null) {
+      message.number = object.number;
+    }
+    message.options = object.options?.map(e => Option.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: EnumValue): EnumValueAmino {
+  toAmino(message: EnumValue, useInterfaces: boolean = true): EnumValueAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.number = omitDefault(message.number);
+    obj.name = message.name;
+    obj.number = message.number;
     if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
+      obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.options = [];
     }
     return obj;
   },
-  fromAminoMsg(object: EnumValueAminoMsg): EnumValue {
-    return EnumValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: EnumValueProtoMsg): EnumValue {
-    return EnumValue.decode(message.value);
+  fromProtoMsg(message: EnumValueProtoMsg, useInterfaces: boolean = true): EnumValue {
+    return EnumValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: EnumValue): Uint8Array {
     return EnumValue.encode(message).finish();
@@ -1192,7 +1194,7 @@ export const EnumValue = {
 function createBaseOption(): Option {
   return {
     name: "",
-    value: Any.fromPartial({})
+    value: undefined
   };
 }
 export const Option = {
@@ -1206,7 +1208,7 @@ export const Option = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Option {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Option {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOption();
@@ -1217,7 +1219,7 @@ export const Option = {
           message.name = reader.string();
           break;
         case 2:
-          message.value = Any.decode(reader, reader.uint32());
+          message.value = Any.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -1259,22 +1261,23 @@ export const Option = {
     return obj;
   },
   fromAmino(object: OptionAmino): Option {
-    return {
-      name: object.name,
-      value: object?.value ? Any.fromAmino(object.value) : undefined
-    };
+    const message = createBaseOption();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Any.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: Option): OptionAmino {
+  toAmino(message: Option, useInterfaces: boolean = true): OptionAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.value = message.value ? Any.toAmino(message.value) : undefined;
+    obj.name = message.name;
+    obj.value = message.value ? Any.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: OptionAminoMsg): Option {
-    return Option.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OptionProtoMsg): Option {
-    return Option.decode(message.value);
+  fromProtoMsg(message: OptionProtoMsg, useInterfaces: boolean = true): Option {
+    return Option.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Option): Uint8Array {
     return Option.encode(message).finish();

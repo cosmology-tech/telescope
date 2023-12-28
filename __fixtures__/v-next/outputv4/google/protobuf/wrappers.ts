@@ -10,6 +10,10 @@ export interface DoubleValue {
   /** The double value. */
   value: number;
 }
+export interface DoubleValueProtoMsg {
+  typeUrl: "/google.protobuf.DoubleValue";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `double`.
  * 
@@ -26,6 +30,10 @@ export interface DoubleValueSDKType {
 export interface FloatValue {
   /** The float value. */
   value: number;
+}
+export interface FloatValueProtoMsg {
+  typeUrl: "/google.protobuf.FloatValue";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `float`.
@@ -44,6 +52,10 @@ export interface Int64Value {
   /** The int64 value. */
   value: bigint;
 }
+export interface Int64ValueProtoMsg {
+  typeUrl: "/google.protobuf.Int64Value";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `int64`.
  * 
@@ -60,6 +72,10 @@ export interface Int64ValueSDKType {
 export interface UInt64Value {
   /** The uint64 value. */
   value: bigint;
+}
+export interface UInt64ValueProtoMsg {
+  typeUrl: "/google.protobuf.UInt64Value";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `uint64`.
@@ -78,6 +94,10 @@ export interface Int32Value {
   /** The int32 value. */
   value: number;
 }
+export interface Int32ValueProtoMsg {
+  typeUrl: "/google.protobuf.Int32Value";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `int32`.
  * 
@@ -94,6 +114,10 @@ export interface Int32ValueSDKType {
 export interface UInt32Value {
   /** The uint32 value. */
   value: number;
+}
+export interface UInt32ValueProtoMsg {
+  typeUrl: "/google.protobuf.UInt32Value";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `uint32`.
@@ -112,6 +136,10 @@ export interface BoolValue {
   /** The bool value. */
   value: boolean;
 }
+export interface BoolValueProtoMsg {
+  typeUrl: "/google.protobuf.BoolValue";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `bool`.
  * 
@@ -128,6 +156,10 @@ export interface BoolValueSDKType {
 export interface StringValue {
   /** The string value. */
   value: string;
+}
+export interface StringValueProtoMsg {
+  typeUrl: "/google.protobuf.StringValue";
+  value: Uint8Array;
 }
 /**
  * Wrapper message for `string`.
@@ -146,6 +178,10 @@ export interface BytesValue {
   /** The bytes value. */
   value: Uint8Array;
 }
+export interface BytesValueProtoMsg {
+  typeUrl: "/google.protobuf.BytesValue";
+  value: Uint8Array;
+}
 /**
  * Wrapper message for `bytes`.
  * 
@@ -162,7 +198,7 @@ function createBaseDoubleValue(): DoubleValue {
 export const DoubleValue = {
   typeUrl: "/google.protobuf.DoubleValue",
   encode(message: DoubleValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(9).double(message.value);
     }
     return writer;
@@ -215,9 +251,11 @@ export const DoubleValue = {
     return obj;
   },
   fromAmino(object: DoubleValueAmino): DoubleValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseDoubleValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: DoubleValue): DoubleValueAmino {
     const obj: any = {};
@@ -248,7 +286,7 @@ function createBaseFloatValue(): FloatValue {
 export const FloatValue = {
   typeUrl: "/google.protobuf.FloatValue",
   encode(message: FloatValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(13).float(message.value);
     }
     return writer;
@@ -301,9 +339,11 @@ export const FloatValue = {
     return obj;
   },
   fromAmino(object: FloatValueAmino): FloatValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseFloatValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: FloatValue): FloatValueAmino {
     const obj: any = {};
@@ -334,7 +374,7 @@ function createBaseInt64Value(): Int64Value {
 export const Int64Value = {
   typeUrl: "/google.protobuf.Int64Value",
   encode(message: Int64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(8).int64(message.value);
     }
     return writer;
@@ -389,9 +429,11 @@ export const Int64Value = {
     return obj;
   },
   fromAmino(object: Int64ValueAmino): Int64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: Int64Value): Int64ValueAmino {
     const obj: any = {};
@@ -422,7 +464,7 @@ function createBaseUInt64Value(): UInt64Value {
 export const UInt64Value = {
   typeUrl: "/google.protobuf.UInt64Value",
   encode(message: UInt64Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(8).uint64(message.value);
     }
     return writer;
@@ -477,9 +519,11 @@ export const UInt64Value = {
     return obj;
   },
   fromAmino(object: UInt64ValueAmino): UInt64Value {
-    return {
-      value: BigInt(object.value)
-    };
+    const message = createBaseUInt64Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value);
+    }
+    return message;
   },
   toAmino(message: UInt64Value): UInt64ValueAmino {
     const obj: any = {};
@@ -510,7 +554,7 @@ function createBaseInt32Value(): Int32Value {
 export const Int32Value = {
   typeUrl: "/google.protobuf.Int32Value",
   encode(message: Int32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(8).int32(message.value);
     }
     return writer;
@@ -563,9 +607,11 @@ export const Int32Value = {
     return obj;
   },
   fromAmino(object: Int32ValueAmino): Int32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: Int32Value): Int32ValueAmino {
     const obj: any = {};
@@ -596,7 +642,7 @@ function createBaseUInt32Value(): UInt32Value {
 export const UInt32Value = {
   typeUrl: "/google.protobuf.UInt32Value",
   encode(message: UInt32Value, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(8).uint32(message.value);
     }
     return writer;
@@ -649,9 +695,11 @@ export const UInt32Value = {
     return obj;
   },
   fromAmino(object: UInt32ValueAmino): UInt32Value {
-    return {
-      value: object.value
-    };
+    const message = createBaseUInt32Value();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: UInt32Value): UInt32ValueAmino {
     const obj: any = {};
@@ -682,7 +730,7 @@ function createBaseBoolValue(): BoolValue {
 export const BoolValue = {
   typeUrl: "/google.protobuf.BoolValue",
   encode(message: BoolValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value === true) {
+    if (message.value !== undefined) {
       writer.uint32(8).bool(message.value);
     }
     return writer;
@@ -735,9 +783,11 @@ export const BoolValue = {
     return obj;
   },
   fromAmino(object: BoolValueAmino): BoolValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBoolValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: BoolValue): BoolValueAmino {
     const obj: any = {};
@@ -768,7 +818,7 @@ function createBaseStringValue(): StringValue {
 export const StringValue = {
   typeUrl: "/google.protobuf.StringValue",
   encode(message: StringValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(10).string(message.value);
     }
     return writer;
@@ -821,9 +871,11 @@ export const StringValue = {
     return obj;
   },
   fromAmino(object: StringValueAmino): StringValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseStringValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: StringValue): StringValueAmino {
     const obj: any = {};
@@ -907,13 +959,15 @@ export const BytesValue = {
     return obj;
   },
   fromAmino(object: BytesValueAmino): BytesValue {
-    return {
-      value: object.value
-    };
+    const message = createBaseBytesValue();
+    if (object.value !== undefined && object.value !== null) {
+      message.value = bytesFromBase64(object.value);
+    }
+    return message;
   },
   toAmino(message: BytesValue): BytesValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
   },
   fromAminoMsg(object: BytesValueAminoMsg): BytesValue {

@@ -7,6 +7,10 @@ export interface GroupID {
   dseq: bigint;
   gseq: number;
 }
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupID";
+  value: Uint8Array;
+}
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
   owner: string;
@@ -100,11 +104,17 @@ export const GroupID = {
     return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq
-    };
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
   },
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};

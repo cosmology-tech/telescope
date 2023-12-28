@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -295,7 +295,7 @@ export interface ResourceDescriptorAmino {
    * should use PascalCase (UpperCamelCase). The maximum number of
    * characters allowed for the `resource_type_kind` is 100.
    */
-  type: string;
+  type?: string;
   /**
    * Optional. The relative resource name pattern associated with this resource
    * type. The DNS prefix of the full resource name shouldn't be specified here.
@@ -317,12 +317,12 @@ export interface ResourceDescriptorAmino {
    * the same component name (e.g. "project") refers to IDs of the same
    * type of resource.
    */
-  pattern: string[];
+  pattern?: string[];
   /**
    * Optional. The field on the resource that designates the resource name
    * field. If omitted, this is assumed to be "name".
    */
-  name_field: string;
+  name_field?: string;
   /**
    * Optional. The historical or future-looking state of the resource pattern.
    * 
@@ -340,7 +340,7 @@ export interface ResourceDescriptorAmino {
    *       };
    *     }
    */
-  history: ResourceDescriptor_History;
+  history?: ResourceDescriptor_History;
   /**
    * The plural name used in the resource name and permission names, such as
    * 'projects' for the resource name of 'projects/{project}' and the permission
@@ -351,19 +351,19 @@ export interface ResourceDescriptorAmino {
    * Note: The plural form is required even for singleton resources. See
    * https://aip.dev/156
    */
-  plural: string;
+  plural?: string;
   /**
    * The same concept of the `singular` field in k8s CRD spec
    * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/
    * Such as "project" for the `resourcemanager.googleapis.com/Project` type.
    */
-  singular: string;
+  singular?: string;
   /**
    * Style flag(s) for this resource.
    * These indicate that a resource is expected to conform to a given
    * style. See the specific style flags for additional information.
    */
-  style: ResourceDescriptor_Style[];
+  style?: ResourceDescriptor_Style[];
 }
 export interface ResourceDescriptorAminoMsg {
   type: "/google.api.ResourceDescriptor";
@@ -501,7 +501,7 @@ export interface ResourceReferenceAmino {
    *       }];
    *     }
    */
-  type: string;
+  type?: string;
   /**
    * The resource type of a child collection that the annotated field
    * references. This is useful for annotating the `parent` field that
@@ -515,7 +515,7 @@ export interface ResourceReferenceAmino {
    *       };
    *     }
    */
-  child_type: string;
+  child_type?: string;
 }
 export interface ResourceReferenceAminoMsg {
   type: "/google.api.ResourceReference";
@@ -682,28 +682,38 @@ export const ResourceDescriptor = {
     return obj;
   },
   fromAmino(object: ResourceDescriptorAmino): ResourceDescriptor {
-    return {
-      type: object.type,
-      pattern: Array.isArray(object?.pattern) ? object.pattern.map((e: any) => e) : [],
-      nameField: object.name_field,
-      history: isSet(object.history) ? resourceDescriptor_HistoryFromJSON(object.history) : -1,
-      plural: object.plural,
-      singular: object.singular,
-      style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
-    };
+    const message = createBaseResourceDescriptor();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.pattern = object.pattern?.map(e => e) || [];
+    if (object.name_field !== undefined && object.name_field !== null) {
+      message.nameField = object.name_field;
+    }
+    if (object.history !== undefined && object.history !== null) {
+      message.history = resourceDescriptor_HistoryFromJSON(object.history);
+    }
+    if (object.plural !== undefined && object.plural !== null) {
+      message.plural = object.plural;
+    }
+    if (object.singular !== undefined && object.singular !== null) {
+      message.singular = object.singular;
+    }
+    message.style = object.style?.map(e => resourceDescriptor_StyleFromJSON(e)) || [];
+    return message;
   },
   toAmino(message: ResourceDescriptor): ResourceDescriptorAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
+    obj.type = message.type;
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
       obj.pattern = [];
     }
-    obj.name_field = omitDefault(message.nameField);
-    obj.history = omitDefault(message.history);
-    obj.plural = omitDefault(message.plural);
-    obj.singular = omitDefault(message.singular);
+    obj.name_field = message.nameField;
+    obj.history = resourceDescriptor_HistoryToJSON(message.history);
+    obj.plural = message.plural;
+    obj.singular = message.singular;
     if (message.style) {
       obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
     } else {
@@ -795,15 +805,19 @@ export const ResourceReference = {
     return obj;
   },
   fromAmino(object: ResourceReferenceAmino): ResourceReference {
-    return {
-      type: object.type,
-      childType: object.child_type
-    };
+    const message = createBaseResourceReference();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.child_type !== undefined && object.child_type !== null) {
+      message.childType = object.child_type;
+    }
+    return message;
   },
   toAmino(message: ResourceReference): ResourceReferenceAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
-    obj.child_type = omitDefault(message.childType);
+    obj.type = message.type;
+    obj.child_type = message.childType;
     return obj;
   },
   fromAminoMsg(object: ResourceReferenceAminoMsg): ResourceReference {

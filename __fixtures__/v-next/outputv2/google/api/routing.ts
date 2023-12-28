@@ -747,7 +747,7 @@ export interface RoutingRuleAmino {
    * determines which Parameter gets used.
    * See the examples for more details.
    */
-  routing_parameters: RoutingParameterAmino[];
+  routing_parameters?: RoutingParameterAmino[];
 }
 export interface RoutingRuleAminoMsg {
   type: "/google.api.RoutingRule";
@@ -1186,7 +1186,7 @@ export interface RoutingParameterProtoMsg {
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameterAmino {
   /** A request field to extract the header key-value pair from. */
-  field: string;
+  field?: string;
   /**
    * A pattern matching the key-value field. Optional.
    * If not specified, the whole field specified in the `field` field will be
@@ -1243,7 +1243,7 @@ export interface RoutingParameterAmino {
    * 
    * See Example 1 for more details.
    */
-  path_template: string;
+  path_template?: string;
 }
 export interface RoutingParameterAminoMsg {
   type: "/google.api.RoutingParameter";
@@ -1318,9 +1318,9 @@ export const RoutingRule = {
     return obj;
   },
   fromAmino(object: RoutingRuleAmino): RoutingRule {
-    return {
-      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromAmino(e)) : []
-    };
+    const message = createBaseRoutingRule();
+    message.routingParameters = object.routing_parameters?.map(e => RoutingParameter.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: RoutingRule): RoutingRuleAmino {
     const obj: any = {};
@@ -1415,10 +1415,14 @@ export const RoutingParameter = {
     return obj;
   },
   fromAmino(object: RoutingParameterAmino): RoutingParameter {
-    return {
-      field: object.field,
-      pathTemplate: object.path_template
-    };
+    const message = createBaseRoutingParameter();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.path_template !== undefined && object.path_template !== null) {
+      message.pathTemplate = object.path_template;
+    }
+    return message;
   },
   toAmino(message: RoutingParameter): RoutingParameterAmino {
     const obj: any = {};

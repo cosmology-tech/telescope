@@ -21,13 +21,9 @@ export interface GenesisStateAmino {
   /** module parameters */
   params?: ParamsAmino;
   /** active incentives */
-  incentives: IncentiveAmino[];
+  incentives?: IncentiveAmino[];
   /** active Gasmeters */
-  gas_meters: GasMeterAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/evmos.incentives.v1.GenesisState";
-  value: GenesisStateAmino;
+  gas_meters?: GasMeterAmino[];
 }
 /** GenesisState defines the module's genesis state. */
 export interface GenesisStateSDKType {
@@ -53,17 +49,13 @@ export interface ParamsProtoMsg {
 /** Params defines the incentives module params */
 export interface ParamsAmino {
   /** parameter to enable incentives */
-  enable_incentives: boolean;
+  enable_incentives?: boolean;
   /** maximum percentage an incentive can allocate per denomination */
-  allocation_limit: string;
+  allocation_limit?: string;
   /** identifier for the epochs module hooks */
-  incentives_epoch_identifier: string;
+  incentives_epoch_identifier?: string;
   /** scaling factor for capping rewards */
-  reward_scaler: string;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.incentives.v1.Params";
-  value: ParamsAmino;
+  reward_scaler?: string;
 }
 /** Params defines the incentives module params */
 export interface ParamsSDKType {
@@ -93,7 +85,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -101,13 +93,13 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 2:
-          message.incentives.push(Incentive.decode(reader, reader.uint32()));
+          message.incentives.push(Incentive.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 3:
-          message.gasMeters.push(GasMeter.decode(reader, reader.uint32()));
+          message.gasMeters.push(GasMeter.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -170,32 +162,31 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromAmino(e)) : [],
-      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.incentives = object.incentives?.map(e => Incentive.fromAmino(e)) || [];
+    message.gasMeters = object.gas_meters?.map(e => GasMeter.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     if (message.incentives) {
-      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
+      obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.incentives = [];
     }
     if (message.gasMeters) {
-      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.gas_meters = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();
@@ -232,7 +223,7 @@ export const Params = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Params {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Params {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParams();
@@ -299,14 +290,22 @@ export const Params = {
     return obj;
   },
   fromAmino(object: ParamsAmino): Params {
-    return {
-      enableIncentives: object.enable_incentives,
-      allocationLimit: object.allocation_limit,
-      incentivesEpochIdentifier: object.incentives_epoch_identifier,
-      rewardScaler: object.reward_scaler
-    };
+    const message = createBaseParams();
+    if (object.enable_incentives !== undefined && object.enable_incentives !== null) {
+      message.enableIncentives = object.enable_incentives;
+    }
+    if (object.allocation_limit !== undefined && object.allocation_limit !== null) {
+      message.allocationLimit = object.allocation_limit;
+    }
+    if (object.incentives_epoch_identifier !== undefined && object.incentives_epoch_identifier !== null) {
+      message.incentivesEpochIdentifier = object.incentives_epoch_identifier;
+    }
+    if (object.reward_scaler !== undefined && object.reward_scaler !== null) {
+      message.rewardScaler = object.reward_scaler;
+    }
+    return message;
   },
-  toAmino(message: Params): ParamsAmino {
+  toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.enable_incentives = omitDefault(message.enableIncentives);
     obj.allocation_limit = padDecimal(message.allocationLimit);
@@ -314,11 +313,8 @@ export const Params = {
     obj.reward_scaler = padDecimal(message.rewardScaler);
     return obj;
   },
-  fromAminoMsg(object: ParamsAminoMsg): Params {
-    return Params.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ParamsProtoMsg): Params {
-    return Params.decode(message.value);
+  fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
+    return Params.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Params): Uint8Array {
     return Params.encode(message).finish();

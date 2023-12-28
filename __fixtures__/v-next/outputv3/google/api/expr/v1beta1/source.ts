@@ -10,12 +10,8 @@ export interface SourceInfo_PositionsEntryProtoMsg {
   value: Uint8Array;
 }
 export interface SourceInfo_PositionsEntryAmino {
-  key: number;
-  value: number;
-}
-export interface SourceInfo_PositionsEntryAminoMsg {
-  type: string;
-  value: SourceInfo_PositionsEntryAmino;
+  key?: number;
+  value?: number;
 }
 export interface SourceInfo_PositionsEntrySDKType {
   key: number;
@@ -60,7 +56,7 @@ export interface SourceInfoAmino {
    * The location could be a file, UI element, or similar. For example,
    * `acme/app/AnvilPolicy.cel`.
    */
-  location: string;
+  location?: string;
   /**
    * Monotonically increasing list of character offsets where newlines appear.
    * 
@@ -68,18 +64,14 @@ export interface SourceInfoAmino {
    * `id` the `line_offsets[i] < id_positions[id] < line_offsets[i+1]`. The
    * column may be derivd from `id_positions[id] - line_offsets[i]`.
    */
-  line_offsets: number[];
+  line_offsets?: number[];
   /**
    * A map from the parse node id (e.g. `Expr.id`) to the character offset
    * within source.
    */
-  positions: {
+  positions?: {
     [key: number]: number;
   };
-}
-export interface SourceInfoAminoMsg {
-  type: "/google.api.expr.v1beta1.SourceInfo";
-  value: SourceInfoAmino;
 }
 /** Source information collected at parse time. */
 export interface SourceInfoSDKType {
@@ -113,23 +105,19 @@ export interface SourcePositionProtoMsg {
 /** A specific position in source. */
 export interface SourcePositionAmino {
   /** The soucre location name (e.g. file name). */
-  location: string;
+  location?: string;
   /** The character offset. */
-  offset: number;
+  offset?: number;
   /**
    * The 1-based index of the starting line in the source text
    * where the issue occurs, or 0 if unknown.
    */
-  line: number;
+  line?: number;
   /**
    * The 0-based index of the starting position within the line of source text
    * where the issue occurs.  Only meaningful if line is nonzer..
    */
-  column: number;
-}
-export interface SourcePositionAminoMsg {
-  type: "/google.api.expr.v1beta1.SourcePosition";
-  value: SourcePositionAmino;
+  column?: number;
 }
 /** A specific position in source. */
 export interface SourcePositionSDKType {
@@ -154,7 +142,7 @@ export const SourceInfo_PositionsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo_PositionsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo_PositionsEntry();
@@ -205,22 +193,23 @@ export const SourceInfo_PositionsEntry = {
     return obj;
   },
   fromAmino(object: SourceInfo_PositionsEntryAmino): SourceInfo_PositionsEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseSourceInfo_PositionsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
-  toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
+  toAmino(message: SourceInfo_PositionsEntry, useInterfaces: boolean = true): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
     obj.key = omitDefault(message.key);
     obj.value = omitDefault(message.value);
     return obj;
   },
-  fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg): SourceInfo_PositionsEntry {
-    return SourceInfo_PositionsEntry.decode(message.value);
+  fromProtoMsg(message: SourceInfo_PositionsEntryProtoMsg, useInterfaces: boolean = true): SourceInfo_PositionsEntry {
+    return SourceInfo_PositionsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo_PositionsEntry): Uint8Array {
     return SourceInfo_PositionsEntry.encode(message).finish();
@@ -252,7 +241,7 @@ export const SourceInfo = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourceInfo {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourceInfo {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourceInfo();
@@ -356,18 +345,22 @@ export const SourceInfo = {
     return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
-    return {
-      location: object.location,
-      lineOffsets: Array.isArray(object?.line_offsets) ? object.line_offsets.map((e: any) => e) : [],
-      positions: isObject(object.positions) ? Object.entries(object.positions).reduce<{
-        [key: number]: number;
-      }>((acc, [key, value]) => {
+    const message = createBaseSourceInfo();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    message.lineOffsets = object.line_offsets?.map(e => e) || [];
+    message.positions = Object.entries(object.positions ?? {}).reduce<{
+      [key: number]: number;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[Number(key)] = Number(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
-  toAmino(message: SourceInfo): SourceInfoAmino {
+  toAmino(message: SourceInfo, useInterfaces: boolean = true): SourceInfoAmino {
     const obj: any = {};
     obj.location = omitDefault(message.location);
     if (message.lineOffsets) {
@@ -383,11 +376,8 @@ export const SourceInfo = {
     }
     return obj;
   },
-  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
-    return SourceInfo.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
-    return SourceInfo.decode(message.value);
+  fromProtoMsg(message: SourceInfoProtoMsg, useInterfaces: boolean = true): SourceInfo {
+    return SourceInfo.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourceInfo): Uint8Array {
     return SourceInfo.encode(message).finish();
@@ -424,7 +414,7 @@ export const SourcePosition = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): SourcePosition {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): SourcePosition {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSourcePosition();
@@ -491,14 +481,22 @@ export const SourcePosition = {
     return obj;
   },
   fromAmino(object: SourcePositionAmino): SourcePosition {
-    return {
-      location: object.location,
-      offset: object.offset,
-      line: object.line,
-      column: object.column
-    };
+    const message = createBaseSourcePosition();
+    if (object.location !== undefined && object.location !== null) {
+      message.location = object.location;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    if (object.line !== undefined && object.line !== null) {
+      message.line = object.line;
+    }
+    if (object.column !== undefined && object.column !== null) {
+      message.column = object.column;
+    }
+    return message;
   },
-  toAmino(message: SourcePosition): SourcePositionAmino {
+  toAmino(message: SourcePosition, useInterfaces: boolean = true): SourcePositionAmino {
     const obj: any = {};
     obj.location = omitDefault(message.location);
     obj.offset = omitDefault(message.offset);
@@ -506,11 +504,8 @@ export const SourcePosition = {
     obj.column = omitDefault(message.column);
     return obj;
   },
-  fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {
-    return SourcePosition.fromAmino(object.value);
-  },
-  fromProtoMsg(message: SourcePositionProtoMsg): SourcePosition {
-    return SourcePosition.decode(message.value);
+  fromProtoMsg(message: SourcePositionProtoMsg, useInterfaces: boolean = true): SourcePosition {
+    return SourcePosition.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: SourcePosition): Uint8Array {
     return SourcePosition.encode(message).finish();

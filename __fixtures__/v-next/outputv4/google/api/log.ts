@@ -37,6 +37,10 @@ export interface LogDescriptor {
    */
   displayName: string;
 }
+export interface LogDescriptorProtoMsg {
+  typeUrl: "/google.api.LogDescriptor";
+  value: Uint8Array;
+}
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -64,16 +68,16 @@ function createBaseLogDescriptor(): LogDescriptor {
 export const LogDescriptor = {
   typeUrl: "/google.api.LogDescriptor",
   encode(message: LogDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.labels) {
       LabelDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(34).string(message.displayName);
     }
     return writer;
@@ -161,12 +165,18 @@ export const LogDescriptor = {
     return obj;
   },
   fromAmino(object: LogDescriptorAmino): LogDescriptor {
-    return {
-      name: object.name,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      description: object.description,
-      displayName: object.display_name
-    };
+    const message = createBaseLogDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    return message;
   },
   toAmino(message: LogDescriptor): LogDescriptorAmino {
     const obj: any = {};

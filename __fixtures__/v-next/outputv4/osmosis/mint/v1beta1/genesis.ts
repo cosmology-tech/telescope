@@ -14,6 +14,10 @@ export interface GenesisState {
    */
   reductionStartedEpoch: bigint;
 }
+export interface GenesisStateProtoMsg {
+  typeUrl: "/osmosis.mint.v1beta1.GenesisState";
+  value: Uint8Array;
+}
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisStateSDKType {
   minter: MinterSDKType;
@@ -36,7 +40,7 @@ export const GenesisState = {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(18).fork()).ldelim();
     }
-    if (message.reductionStartedEpoch !== BigInt(0)) {
+    if (message.reductionStartedEpoch !== undefined) {
       writer.uint32(24).int64(message.reductionStartedEpoch);
     }
     return writer;
@@ -113,11 +117,17 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      minter: object?.minter ? Minter.fromAmino(object.minter) : undefined,
-      params: object?.params ? Params.fromAmino(object.params) : undefined,
-      reductionStartedEpoch: BigInt(object.reduction_started_epoch)
-    };
+    const message = createBaseGenesisState();
+    if (object.minter !== undefined && object.minter !== null) {
+      message.minter = Minter.fromAmino(object.minter);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    if (object.reduction_started_epoch !== undefined && object.reduction_started_epoch !== null) {
+      message.reductionStartedEpoch = BigInt(object.reduction_started_epoch);
+    }
+    return message;
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};

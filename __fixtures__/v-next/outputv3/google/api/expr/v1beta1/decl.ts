@@ -1,6 +1,6 @@
 import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -22,19 +22,15 @@ export interface DeclProtoMsg {
 /** A declaration. */
 export interface DeclAmino {
   /** The id of the declaration. */
-  id: number;
+  id?: number;
   /** The name of the declaration. */
-  name: string;
+  name?: string;
   /** The documentation string for the declaration. */
-  doc: string;
+  doc?: string;
   /** An identifier declaration. */
   ident?: IdentDeclAmino;
   /** A function declaration. */
   function?: FunctionDeclAmino;
-}
-export interface DeclAminoMsg {
-  type: "/google.api.expr.v1beta1.Decl";
-  value: DeclAmino;
 }
 /** A declaration. */
 export interface DeclSDKType {
@@ -73,18 +69,14 @@ export interface DeclTypeProtoMsg {
  */
 export interface DeclTypeAmino {
   /** The expression id of the declared type, if applicable. */
-  id: number;
+  id?: number;
   /** The type name, e.g. 'int', 'my.type.Type' or 'T' */
-  type: string;
+  type?: string;
   /**
    * An ordered list of type parameters, e.g. `<string, int>`.
    * Only applies to a subset of types, e.g. `map`, `list`.
    */
-  type_params: DeclTypeAmino[];
-}
-export interface DeclTypeAminoMsg {
-  type: "/google.api.expr.v1beta1.DeclType";
-  value: DeclTypeAmino;
+  type_params?: DeclTypeAmino[];
 }
 /**
  * The declared type of a variable.
@@ -100,9 +92,9 @@ export interface DeclTypeSDKType {
 /** An identifier declaration. */
 export interface IdentDecl {
   /** Optional type of the identifier. */
-  type: DeclType;
+  type?: DeclType;
   /** Optional value of the identifier. */
-  value: Expr;
+  value?: Expr;
 }
 export interface IdentDeclProtoMsg {
   typeUrl: "/google.api.expr.v1beta1.IdentDecl";
@@ -115,21 +107,17 @@ export interface IdentDeclAmino {
   /** Optional value of the identifier. */
   value?: ExprAmino;
 }
-export interface IdentDeclAminoMsg {
-  type: "/google.api.expr.v1beta1.IdentDecl";
-  value: IdentDeclAmino;
-}
 /** An identifier declaration. */
 export interface IdentDeclSDKType {
-  type: DeclTypeSDKType;
-  value: ExprSDKType;
+  type?: DeclTypeSDKType;
+  value?: ExprSDKType;
 }
 /** A function declaration. */
 export interface FunctionDecl {
   /** The function arguments. */
   args: IdentDecl[];
   /** Optional declared return type. */
-  returnType: DeclType;
+  returnType?: DeclType;
   /** If the first argument of the function is the receiver. */
   receiverFunction: boolean;
 }
@@ -140,20 +128,16 @@ export interface FunctionDeclProtoMsg {
 /** A function declaration. */
 export interface FunctionDeclAmino {
   /** The function arguments. */
-  args: IdentDeclAmino[];
+  args?: IdentDeclAmino[];
   /** Optional declared return type. */
   return_type?: DeclTypeAmino;
   /** If the first argument of the function is the receiver. */
-  receiver_function: boolean;
-}
-export interface FunctionDeclAminoMsg {
-  type: "/google.api.expr.v1beta1.FunctionDecl";
-  value: FunctionDeclAmino;
+  receiver_function?: boolean;
 }
 /** A function declaration. */
 export interface FunctionDeclSDKType {
   args: IdentDeclSDKType[];
-  return_type: DeclTypeSDKType;
+  return_type?: DeclTypeSDKType;
   receiver_function: boolean;
 }
 function createBaseDecl(): Decl {
@@ -185,7 +169,7 @@ export const Decl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Decl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Decl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDecl();
@@ -202,10 +186,10 @@ export const Decl = {
           message.doc = reader.string();
           break;
         case 4:
-          message.ident = IdentDecl.decode(reader, reader.uint32());
+          message.ident = IdentDecl.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
-          message.function = FunctionDecl.decode(reader, reader.uint32());
+          message.function = FunctionDecl.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -264,28 +248,35 @@ export const Decl = {
     return obj;
   },
   fromAmino(object: DeclAmino): Decl {
-    return {
-      id: object.id,
-      name: object.name,
-      doc: object.doc,
-      ident: object?.ident ? IdentDecl.fromAmino(object.ident) : undefined,
-      function: object?.function ? FunctionDecl.fromAmino(object.function) : undefined
-    };
+    const message = createBaseDecl();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.doc !== undefined && object.doc !== null) {
+      message.doc = object.doc;
+    }
+    if (object.ident !== undefined && object.ident !== null) {
+      message.ident = IdentDecl.fromAmino(object.ident);
+    }
+    if (object.function !== undefined && object.function !== null) {
+      message.function = FunctionDecl.fromAmino(object.function);
+    }
+    return message;
   },
-  toAmino(message: Decl): DeclAmino {
+  toAmino(message: Decl, useInterfaces: boolean = true): DeclAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.name = omitDefault(message.name);
-    obj.doc = omitDefault(message.doc);
-    obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
-    obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.doc = message.doc;
+    obj.ident = message.ident ? IdentDecl.toAmino(message.ident, useInterfaces) : undefined;
+    obj.function = message.function ? FunctionDecl.toAmino(message.function, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: DeclAminoMsg): Decl {
-    return Decl.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeclProtoMsg): Decl {
-    return Decl.decode(message.value);
+  fromProtoMsg(message: DeclProtoMsg, useInterfaces: boolean = true): Decl {
+    return Decl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Decl): Uint8Array {
     return Decl.encode(message).finish();
@@ -318,7 +309,7 @@ export const DeclType = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): DeclType {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): DeclType {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeclType();
@@ -332,7 +323,7 @@ export const DeclType = {
           message.type = reader.string();
           break;
         case 4:
-          message.typeParams.push(DeclType.decode(reader, reader.uint32()));
+          message.typeParams.push(DeclType.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -385,28 +376,29 @@ export const DeclType = {
     return obj;
   },
   fromAmino(object: DeclTypeAmino): DeclType {
-    return {
-      id: object.id,
-      type: object.type,
-      typeParams: Array.isArray(object?.type_params) ? object.type_params.map((e: any) => DeclType.fromAmino(e)) : []
-    };
+    const message = createBaseDeclType();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.typeParams = object.type_params?.map(e => DeclType.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: DeclType): DeclTypeAmino {
+  toAmino(message: DeclType, useInterfaces: boolean = true): DeclTypeAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.type = omitDefault(message.type);
+    obj.id = message.id;
+    obj.type = message.type;
     if (message.typeParams) {
-      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
+      obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.type_params = [];
     }
     return obj;
   },
-  fromAminoMsg(object: DeclTypeAminoMsg): DeclType {
-    return DeclType.fromAmino(object.value);
-  },
-  fromProtoMsg(message: DeclTypeProtoMsg): DeclType {
-    return DeclType.decode(message.value);
+  fromProtoMsg(message: DeclTypeProtoMsg, useInterfaces: boolean = true): DeclType {
+    return DeclType.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: DeclType): Uint8Array {
     return DeclType.encode(message).finish();
@@ -420,8 +412,8 @@ export const DeclType = {
 };
 function createBaseIdentDecl(): IdentDecl {
   return {
-    type: DeclType.fromPartial({}),
-    value: Expr.fromPartial({})
+    type: undefined,
+    value: undefined
   };
 }
 export const IdentDecl = {
@@ -435,7 +427,7 @@ export const IdentDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): IdentDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): IdentDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIdentDecl();
@@ -443,10 +435,10 @@ export const IdentDecl = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          message.type = DeclType.decode(reader, reader.uint32());
+          message.type = DeclType.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 4:
-          message.value = Expr.decode(reader, reader.uint32());
+          message.value = Expr.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -490,22 +482,23 @@ export const IdentDecl = {
     return obj;
   },
   fromAmino(object: IdentDeclAmino): IdentDecl {
-    return {
-      type: object?.type ? DeclType.fromAmino(object.type) : undefined,
-      value: object?.value ? Expr.fromAmino(object.value) : undefined
-    };
+    const message = createBaseIdentDecl();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = DeclType.fromAmino(object.type);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Expr.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: IdentDecl): IdentDeclAmino {
+  toAmino(message: IdentDecl, useInterfaces: boolean = true): IdentDeclAmino {
     const obj: any = {};
-    obj.type = message.type ? DeclType.toAmino(message.type) : undefined;
-    obj.value = message.value ? Expr.toAmino(message.value) : undefined;
+    obj.type = message.type ? DeclType.toAmino(message.type, useInterfaces) : undefined;
+    obj.value = message.value ? Expr.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: IdentDeclAminoMsg): IdentDecl {
-    return IdentDecl.fromAmino(object.value);
-  },
-  fromProtoMsg(message: IdentDeclProtoMsg): IdentDecl {
-    return IdentDecl.decode(message.value);
+  fromProtoMsg(message: IdentDeclProtoMsg, useInterfaces: boolean = true): IdentDecl {
+    return IdentDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: IdentDecl): Uint8Array {
     return IdentDecl.encode(message).finish();
@@ -520,7 +513,7 @@ export const IdentDecl = {
 function createBaseFunctionDecl(): FunctionDecl {
   return {
     args: [],
-    returnType: DeclType.fromPartial({}),
+    returnType: undefined,
     receiverFunction: false
   };
 }
@@ -538,7 +531,7 @@ export const FunctionDecl = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): FunctionDecl {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): FunctionDecl {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFunctionDecl();
@@ -546,10 +539,10 @@ export const FunctionDecl = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.args.push(IdentDecl.decode(reader, reader.uint32()));
+          message.args.push(IdentDecl.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 2:
-          message.returnType = DeclType.decode(reader, reader.uint32());
+          message.returnType = DeclType.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 3:
           message.receiverFunction = reader.bool();
@@ -607,28 +600,29 @@ export const FunctionDecl = {
     return obj;
   },
   fromAmino(object: FunctionDeclAmino): FunctionDecl {
-    return {
-      args: Array.isArray(object?.args) ? object.args.map((e: any) => IdentDecl.fromAmino(e)) : [],
-      returnType: object?.return_type ? DeclType.fromAmino(object.return_type) : undefined,
-      receiverFunction: object.receiver_function
-    };
+    const message = createBaseFunctionDecl();
+    message.args = object.args?.map(e => IdentDecl.fromAmino(e)) || [];
+    if (object.return_type !== undefined && object.return_type !== null) {
+      message.returnType = DeclType.fromAmino(object.return_type);
+    }
+    if (object.receiver_function !== undefined && object.receiver_function !== null) {
+      message.receiverFunction = object.receiver_function;
+    }
+    return message;
   },
-  toAmino(message: FunctionDecl): FunctionDeclAmino {
+  toAmino(message: FunctionDecl, useInterfaces: boolean = true): FunctionDeclAmino {
     const obj: any = {};
     if (message.args) {
-      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
+      obj.args = message.args.map(e => e ? IdentDecl.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.args = [];
     }
-    obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
-    obj.receiver_function = omitDefault(message.receiverFunction);
+    obj.return_type = message.returnType ? DeclType.toAmino(message.returnType, useInterfaces) : undefined;
+    obj.receiver_function = message.receiverFunction;
     return obj;
   },
-  fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {
-    return FunctionDecl.fromAmino(object.value);
-  },
-  fromProtoMsg(message: FunctionDeclProtoMsg): FunctionDecl {
-    return FunctionDecl.decode(message.value);
+  fromProtoMsg(message: FunctionDeclProtoMsg, useInterfaces: boolean = true): FunctionDecl {
+    return FunctionDecl.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: FunctionDecl): Uint8Array {
     return FunctionDecl.encode(message).finish();

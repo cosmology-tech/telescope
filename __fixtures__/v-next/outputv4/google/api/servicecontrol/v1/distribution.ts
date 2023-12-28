@@ -54,6 +54,10 @@ export interface Distribution {
   /** Example points. Must be in increasing order of `value` field. */
   exemplars: Distribution_Exemplar[];
 }
+export interface DistributionProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.Distribution";
+  value: Uint8Array;
+}
 /**
  * Distribution represents a frequency distribution of double-valued sample
  * points. It contains the size of the population of sample points plus
@@ -98,6 +102,10 @@ export interface Distribution_LinearBuckets {
    */
   offset: number;
 }
+export interface Distribution_LinearBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.LinearBuckets";
+  value: Uint8Array;
+}
 /** Describing buckets with constant width. */
 export interface Distribution_LinearBucketsSDKType {
   num_finite_buckets: number;
@@ -127,6 +135,10 @@ export interface Distribution_ExponentialBuckets {
    */
   scale: number;
 }
+export interface Distribution_ExponentialBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets";
+  value: Uint8Array;
+}
 /** Describing buckets with exponentially growing width. */
 export interface Distribution_ExponentialBucketsSDKType {
   num_finite_buckets: number;
@@ -154,6 +166,10 @@ export interface Distribution_ExplicitBuckets {
    */
   bounds: number[];
 }
+export interface Distribution_ExplicitBucketsProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.ExplicitBuckets";
+  value: Uint8Array;
+}
 /** Describing buckets with arbitrary user-provided width. */
 export interface Distribution_ExplicitBucketsSDKType {
   bounds: number[];
@@ -175,19 +191,19 @@ function createBaseDistribution(): Distribution {
 export const Distribution = {
   typeUrl: "/google.api.servicecontrol.v1.Distribution",
   encode(message: Distribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.count !== BigInt(0)) {
+    if (message.count !== undefined) {
       writer.uint32(8).int64(message.count);
     }
-    if (message.mean !== 0) {
+    if (message.mean !== undefined) {
       writer.uint32(17).double(message.mean);
     }
-    if (message.minimum !== 0) {
+    if (message.minimum !== undefined) {
       writer.uint32(25).double(message.minimum);
     }
-    if (message.maximum !== 0) {
+    if (message.maximum !== undefined) {
       writer.uint32(33).double(message.maximum);
     }
-    if (message.sumOfSquaredDeviation !== 0) {
+    if (message.sumOfSquaredDeviation !== undefined) {
       writer.uint32(41).double(message.sumOfSquaredDeviation);
     }
     writer.uint32(50).fork();
@@ -369,18 +385,34 @@ export const Distribution = {
     return obj;
   },
   fromAmino(object: DistributionAmino): Distribution {
-    return {
-      count: BigInt(object.count),
-      mean: object.mean,
-      minimum: object.minimum,
-      maximum: object.maximum,
-      sumOfSquaredDeviation: object.sum_of_squared_deviation,
-      bucketCounts: Array.isArray(object?.bucket_counts) ? object.bucket_counts.map((e: any) => BigInt(e)) : [],
-      linearBuckets: object?.linear_buckets ? Distribution_LinearBuckets.fromAmino(object.linear_buckets) : undefined,
-      exponentialBuckets: object?.exponential_buckets ? Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets) : undefined,
-      explicitBuckets: object?.explicit_buckets ? Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets) : undefined,
-      exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromAmino(e)) : []
-    };
+    const message = createBaseDistribution();
+    if (object.count !== undefined && object.count !== null) {
+      message.count = BigInt(object.count);
+    }
+    if (object.mean !== undefined && object.mean !== null) {
+      message.mean = object.mean;
+    }
+    if (object.minimum !== undefined && object.minimum !== null) {
+      message.minimum = object.minimum;
+    }
+    if (object.maximum !== undefined && object.maximum !== null) {
+      message.maximum = object.maximum;
+    }
+    if (object.sum_of_squared_deviation !== undefined && object.sum_of_squared_deviation !== null) {
+      message.sumOfSquaredDeviation = object.sum_of_squared_deviation;
+    }
+    message.bucketCounts = object.bucket_counts?.map(e => BigInt(e)) || [];
+    if (object.linear_buckets !== undefined && object.linear_buckets !== null) {
+      message.linearBuckets = Distribution_LinearBuckets.fromAmino(object.linear_buckets);
+    }
+    if (object.exponential_buckets !== undefined && object.exponential_buckets !== null) {
+      message.exponentialBuckets = Distribution_ExponentialBuckets.fromAmino(object.exponential_buckets);
+    }
+    if (object.explicit_buckets !== undefined && object.explicit_buckets !== null) {
+      message.explicitBuckets = Distribution_ExplicitBuckets.fromAmino(object.explicit_buckets);
+    }
+    message.exemplars = object.exemplars?.map(e => Distribution_Exemplar.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
@@ -430,13 +462,13 @@ function createBaseDistribution_LinearBuckets(): Distribution_LinearBuckets {
 export const Distribution_LinearBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.LinearBuckets",
   encode(message: Distribution_LinearBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.width !== 0) {
+    if (message.width !== undefined) {
       writer.uint32(17).double(message.width);
     }
-    if (message.offset !== 0) {
+    if (message.offset !== undefined) {
       writer.uint32(25).double(message.offset);
     }
     return writer;
@@ -507,11 +539,17 @@ export const Distribution_LinearBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_LinearBucketsAmino): Distribution_LinearBuckets {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      width: object.width,
-      offset: object.offset
-    };
+    const message = createBaseDistribution_LinearBuckets();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.width !== undefined && object.width !== null) {
+      message.width = object.width;
+    }
+    if (object.offset !== undefined && object.offset !== null) {
+      message.offset = object.offset;
+    }
+    return message;
   },
   toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
@@ -546,13 +584,13 @@ function createBaseDistribution_ExponentialBuckets(): Distribution_ExponentialBu
 export const Distribution_ExponentialBuckets = {
   typeUrl: "/google.api.servicecontrol.v1.ExponentialBuckets",
   encode(message: Distribution_ExponentialBuckets, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.numFiniteBuckets !== 0) {
+    if (message.numFiniteBuckets !== undefined) {
       writer.uint32(8).int32(message.numFiniteBuckets);
     }
-    if (message.growthFactor !== 0) {
+    if (message.growthFactor !== undefined) {
       writer.uint32(17).double(message.growthFactor);
     }
-    if (message.scale !== 0) {
+    if (message.scale !== undefined) {
       writer.uint32(25).double(message.scale);
     }
     return writer;
@@ -623,11 +661,17 @@ export const Distribution_ExponentialBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_ExponentialBucketsAmino): Distribution_ExponentialBuckets {
-    return {
-      numFiniteBuckets: object.num_finite_buckets,
-      growthFactor: object.growth_factor,
-      scale: object.scale
-    };
+    const message = createBaseDistribution_ExponentialBuckets();
+    if (object.num_finite_buckets !== undefined && object.num_finite_buckets !== null) {
+      message.numFiniteBuckets = object.num_finite_buckets;
+    }
+    if (object.growth_factor !== undefined && object.growth_factor !== null) {
+      message.growthFactor = object.growth_factor;
+    }
+    if (object.scale !== undefined && object.scale !== null) {
+      message.scale = object.scale;
+    }
+    return message;
   },
   toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
@@ -730,9 +774,9 @@ export const Distribution_ExplicitBuckets = {
     return obj;
   },
   fromAmino(object: Distribution_ExplicitBucketsAmino): Distribution_ExplicitBuckets {
-    return {
-      bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => e) : []
-    };
+    const message = createBaseDistribution_ExplicitBuckets();
+    message.bounds = object.bounds?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Distribution_ExplicitBuckets): Distribution_ExplicitBucketsAmino {
     const obj: any = {};

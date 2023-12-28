@@ -9,7 +9,7 @@ export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
   filters: DeploymentFilters;
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsRequest";
@@ -27,12 +27,12 @@ export interface QueryDeploymentsRequestAminoMsg {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequestSDKType {
   filters: DeploymentFiltersSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryDeploymentsResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.QueryDeploymentsResponse";
@@ -40,7 +40,7 @@ export interface QueryDeploymentsResponseProtoMsg {
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseAmino {
-  deployments: QueryDeploymentResponseAmino[];
+  deployments?: QueryDeploymentResponseAmino[];
   pagination?: PageResponseAmino;
 }
 export interface QueryDeploymentsResponseAminoMsg {
@@ -50,7 +50,7 @@ export interface QueryDeploymentsResponseAminoMsg {
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponseSDKType {
   deployments: QueryDeploymentResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
@@ -85,7 +85,7 @@ export interface QueryDeploymentResponseProtoMsg {
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
   deployment?: DeploymentAmino;
-  groups: GroupAmino[];
+  groups?: GroupAmino[];
   escrow_account?: AccountAmino;
 }
 export interface QueryDeploymentResponseAminoMsg {
@@ -141,7 +141,7 @@ export interface QueryGroupResponseSDKType {
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
     filters: DeploymentFilters.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsRequest = {
@@ -210,10 +210,14 @@ export const QueryDeploymentsRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
-    return {
-      filters: object?.filters ? DeploymentFilters.fromAmino(object.filters) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsRequest();
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromAmino(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentsRequest): QueryDeploymentsRequestAmino {
     const obj: any = {};
@@ -240,7 +244,7 @@ export const QueryDeploymentsRequest = {
 function createBaseQueryDeploymentsResponse(): QueryDeploymentsResponse {
   return {
     deployments: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryDeploymentsResponse = {
@@ -315,10 +319,12 @@ export const QueryDeploymentsResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
-    return {
-      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryDeploymentsResponse();
+    message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentsResponse): QueryDeploymentsResponseAmino {
     const obj: any = {};
@@ -404,9 +410,11 @@ export const QueryDeploymentRequest = {
     return obj;
   },
   fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
-    return {
-      id: object?.id ? DeploymentID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseQueryDeploymentRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentRequest): QueryDeploymentRequestAmino {
     const obj: any = {};
@@ -521,11 +529,15 @@ export const QueryDeploymentResponse = {
     return obj;
   },
   fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
-    return {
-      deployment: object?.deployment ? Deployment.fromAmino(object.deployment) : undefined,
-      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromAmino(e)) : [],
-      escrowAccount: object?.escrow_account ? Account.fromAmino(object.escrow_account) : undefined
-    };
+    const message = createBaseQueryDeploymentResponse();
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromAmino(object.deployment);
+    }
+    message.groups = object.groups?.map(e => Group.fromAmino(e)) || [];
+    if (object.escrow_account !== undefined && object.escrow_account !== null) {
+      message.escrowAccount = Account.fromAmino(object.escrow_account);
+    }
+    return message;
   },
   toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
     const obj: any = {};
@@ -612,9 +624,11 @@ export const QueryGroupRequest = {
     return obj;
   },
   fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
-    return {
-      id: object?.id ? GroupID.fromAmino(object.id) : undefined
-    };
+    const message = createBaseQueryGroupRequest();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromAmino(object.id);
+    }
+    return message;
   },
   toAmino(message: QueryGroupRequest): QueryGroupRequestAmino {
     const obj: any = {};
@@ -695,9 +709,11 @@ export const QueryGroupResponse = {
     return obj;
   },
   fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
-    return {
-      group: object?.group ? Group.fromAmino(object.group) : undefined
-    };
+    const message = createBaseQueryGroupResponse();
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromAmino(object.group);
+    }
+    return message;
   },
   toAmino(message: QueryGroupResponse): QueryGroupResponseAmino {
     const obj: any = {};

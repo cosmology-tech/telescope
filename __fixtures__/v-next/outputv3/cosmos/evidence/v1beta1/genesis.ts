@@ -14,11 +14,7 @@ export interface GenesisStateProtoMsg {
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateAmino {
   /** evidence defines all the evidence at genesis. */
-  evidence: AnyAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+  evidence?: AnyAmino[];
 }
 /** GenesisState defines the evidence module's genesis state. */
 export interface GenesisStateSDKType {
@@ -38,7 +34,7 @@ export const GenesisState = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GenesisState {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GenesisState {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenesisState();
@@ -46,7 +42,7 @@ export const GenesisState = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.evidence.push(Any.decode(reader, reader.uint32()));
+          message.evidence.push(Any.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -89,30 +85,21 @@ export const GenesisState = {
     return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
-    return {
-      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromAmino(e)) : []
-    };
+    const message = createBaseGenesisState();
+    message.evidence = object.evidence?.map(e => Any.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: GenesisState): GenesisStateAmino {
+  toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
+      obj.evidence = message.evidence.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.evidence = [];
     }
     return obj;
   },
-  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
-    return GenesisState.fromAmino(object.value);
-  },
-  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
-    return {
-      type: "cosmos-sdk/GenesisState",
-      value: GenesisState.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
-    return GenesisState.decode(message.value);
+  fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
+    return GenesisState.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GenesisState): Uint8Array {
     return GenesisState.encode(message).finish();

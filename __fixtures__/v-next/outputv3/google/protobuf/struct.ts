@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../helpers";
+import { isSet, DeepPartial, isObject } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -36,23 +36,19 @@ export function nullValueToJSON(object: NullValue): string {
 }
 export interface Struct_FieldsEntry {
   key: string;
-  value: Value;
+  value?: Value;
 }
 export interface Struct_FieldsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
 export interface Struct_FieldsEntryAmino {
-  key: string;
+  key?: string;
   value?: ValueAmino;
-}
-export interface Struct_FieldsEntryAminoMsg {
-  type: string;
-  value: Struct_FieldsEntryAmino;
 }
 export interface Struct_FieldsEntrySDKType {
   key: string;
-  value: ValueSDKType;
+  value?: ValueSDKType;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -89,10 +85,6 @@ export interface StructAmino {
   fields?: {
     [key: string]: ValueAmino;
   };
-}
-export interface StructAminoMsg {
-  type: "/google.protobuf.Struct";
-  value: StructAmino;
 }
 /**
  * `Struct` represents a structured data value, consisting of fields
@@ -157,10 +149,6 @@ export interface ValueAmino {
   /** Represents a repeated `Value`. */
   list_value?: ListValueAmino;
 }
-export interface ValueAminoMsg {
-  type: "/google.protobuf.Value";
-  value: ValueAmino;
-}
 /**
  * `Value` represents a dynamically typed value which can be either
  * null, a number, a string, a boolean, a recursive struct value, or a
@@ -197,11 +185,7 @@ export interface ListValueProtoMsg {
  */
 export interface ListValueAmino {
   /** Repeated field of dynamically typed values. */
-  values: ValueAmino[];
-}
-export interface ListValueAminoMsg {
-  type: "/google.protobuf.ListValue";
-  value: ListValueAmino;
+  values?: ValueAmino[];
 }
 /**
  * `ListValue` is a wrapper around a repeated field of values.
@@ -214,7 +198,7 @@ export interface ListValueSDKType {
 function createBaseStruct_FieldsEntry(): Struct_FieldsEntry {
   return {
     key: "",
-    value: Value.fromPartial({})
+    value: undefined
   };
 }
 export const Struct_FieldsEntry = {
@@ -227,7 +211,7 @@ export const Struct_FieldsEntry = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Struct_FieldsEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Struct_FieldsEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct_FieldsEntry();
@@ -238,7 +222,7 @@ export const Struct_FieldsEntry = {
           message.key = reader.string();
           break;
         case 2:
-          message.value = Value.decode(reader, reader.uint32());
+          message.value = Value.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -280,22 +264,23 @@ export const Struct_FieldsEntry = {
     return obj;
   },
   fromAmino(object: Struct_FieldsEntryAmino): Struct_FieldsEntry {
-    return {
-      key: object.key,
-      value: object?.value ? Value.fromAmino(object.value) : undefined
-    };
+    const message = createBaseStruct_FieldsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromAmino(object.value);
+    }
+    return message;
   },
-  toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
+  toAmino(message: Struct_FieldsEntry, useInterfaces: boolean = true): Struct_FieldsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = message.value ? Value.toAmino(message.value) : undefined;
+    obj.key = message.key;
+    obj.value = message.value ? Value.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: Struct_FieldsEntryAminoMsg): Struct_FieldsEntry {
-    return Struct_FieldsEntry.fromAmino(object.value);
-  },
-  fromProtoMsg(message: Struct_FieldsEntryProtoMsg): Struct_FieldsEntry {
-    return Struct_FieldsEntry.decode(message.value);
+  fromProtoMsg(message: Struct_FieldsEntryProtoMsg, useInterfaces: boolean = true): Struct_FieldsEntry {
+    return Struct_FieldsEntry.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Struct_FieldsEntry): Uint8Array {
     return Struct_FieldsEntry.encode(message).finish();
@@ -317,7 +302,7 @@ export const Struct = {
     });
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Struct {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Struct {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStruct();
@@ -390,16 +375,18 @@ export const Struct = {
     return obj;
   },
   fromAmino(object: StructAmino): Struct {
-    return {
-      fields: isObject(object.fields) ? Object.entries(object.fields).reduce<{
-        [key: string]: Value;
-      }>((acc, [key, value]) => {
+    const message = createBaseStruct();
+    message.fields = Object.entries(object.fields ?? {}).reduce<{
+      [key: string]: Value;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = Value.fromAmino(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
-  toAmino(message: Struct): StructAmino {
+  toAmino(message: Struct, useInterfaces: boolean = true): StructAmino {
     const obj: any = {};
     obj.fields = {};
     if (message.fields) {
@@ -409,11 +396,8 @@ export const Struct = {
     }
     return obj;
   },
-  fromAminoMsg(object: StructAminoMsg): Struct {
-    return Struct.fromAmino(object.value);
-  },
-  fromProtoMsg(message: StructProtoMsg): Struct {
-    return Struct.decode(message.value);
+  fromProtoMsg(message: StructProtoMsg, useInterfaces: boolean = true): Struct {
+    return Struct.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Struct): Uint8Array {
     return Struct.encode(message).finish();
@@ -458,7 +442,7 @@ export const Value = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Value {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Value {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseValue();
@@ -478,10 +462,10 @@ export const Value = {
           message.boolValue = reader.bool();
           break;
         case 5:
-          message.structValue = Struct.decode(reader, reader.uint32());
+          message.structValue = Struct.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 6:
-          message.listValue = ListValue.decode(reader, reader.uint32());
+          message.listValue = ListValue.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -545,30 +529,39 @@ export const Value = {
     return obj;
   },
   fromAmino(object: ValueAmino): Value {
-    return {
-      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
-      numberValue: object?.number_value,
-      stringValue: object?.string_value,
-      boolValue: object?.bool_value,
-      structValue: object?.struct_value ? Struct.fromAmino(object.struct_value) : undefined,
-      listValue: object?.list_value ? ListValue.fromAmino(object.list_value) : undefined
-    };
+    const message = createBaseValue();
+    if (object.null_value !== undefined && object.null_value !== null) {
+      message.nullValue = nullValueFromJSON(object.null_value);
+    }
+    if (object.number_value !== undefined && object.number_value !== null) {
+      message.numberValue = object.number_value;
+    }
+    if (object.string_value !== undefined && object.string_value !== null) {
+      message.stringValue = object.string_value;
+    }
+    if (object.bool_value !== undefined && object.bool_value !== null) {
+      message.boolValue = object.bool_value;
+    }
+    if (object.struct_value !== undefined && object.struct_value !== null) {
+      message.structValue = Struct.fromAmino(object.struct_value);
+    }
+    if (object.list_value !== undefined && object.list_value !== null) {
+      message.listValue = ListValue.fromAmino(object.list_value);
+    }
+    return message;
   },
-  toAmino(message: Value): ValueAmino {
+  toAmino(message: Value, useInterfaces: boolean = true): ValueAmino {
     const obj: any = {};
-    obj.null_value = omitDefault(message.nullValue);
-    obj.number_value = omitDefault(message.numberValue);
-    obj.string_value = omitDefault(message.stringValue);
-    obj.bool_value = omitDefault(message.boolValue);
-    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
-    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
+    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.number_value = message.numberValue;
+    obj.string_value = message.stringValue;
+    obj.bool_value = message.boolValue;
+    obj.struct_value = message.structValue ? Struct.toAmino(message.structValue, useInterfaces) : undefined;
+    obj.list_value = message.listValue ? ListValue.toAmino(message.listValue, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ValueAminoMsg): Value {
-    return Value.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ValueProtoMsg): Value {
-    return Value.decode(message.value);
+  fromProtoMsg(message: ValueProtoMsg, useInterfaces: boolean = true): Value {
+    return Value.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Value): Uint8Array {
     return Value.encode(message).finish();
@@ -593,7 +586,7 @@ export const ListValue = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ListValue {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ListValue {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListValue();
@@ -601,7 +594,7 @@ export const ListValue = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.values.push(Value.decode(reader, reader.uint32()));
+          message.values.push(Value.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -644,24 +637,21 @@ export const ListValue = {
     return obj;
   },
   fromAmino(object: ListValueAmino): ListValue {
-    return {
-      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromAmino(e)) : []
-    };
+    const message = createBaseListValue();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: ListValue): ListValueAmino {
+  toAmino(message: ListValue, useInterfaces: boolean = true): ListValueAmino {
     const obj: any = {};
     if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+      obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.values = [];
     }
     return obj;
   },
-  fromAminoMsg(object: ListValueAminoMsg): ListValue {
-    return ListValue.fromAmino(object.value);
-  },
-  fromProtoMsg(message: ListValueProtoMsg): ListValue {
-    return ListValue.decode(message.value);
+  fromProtoMsg(message: ListValueProtoMsg, useInterfaces: boolean = true): ListValue {
+    return ListValue.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ListValue): Uint8Array {
     return ListValue.encode(message).finish();

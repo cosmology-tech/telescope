@@ -18,18 +18,22 @@ import {
     getMethodDesc,
     grpcWebRpcInterface,
     getGrpcWebImpl,
+    createRpcClientImpl,
 } from '@cosmology/ast';
 import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import { ProtoRoot, ProtoService } from '@cosmology/types';
-import { getQueryMethodNames } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 import { BundlerFile } from '../types';
 
 export const plugin = (
     builder: TelescopeBuilder,
     bundler: Bundler
 ) => {
+    const instantRpcBundlerFiles: {
+      [key: string]: BundlerFile[]
+    } = {};
     const reactQueryBundlerFiles = [];
     const mobxBundlerFiles = [];
 
@@ -129,7 +133,7 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key)=> proto[svcKey].methods[key]);
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns,).map((key)=> proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }
@@ -155,9 +159,56 @@ export const plugin = (
                         const svc: ProtoService = proto[svcKey];
 
                         asts.push(createRpcClientInterface(ctx.generic, svc));
+
+                        const instantOps = c.options.rpcClients?.instantOps ?? [];
+                        const useCamelCase = c.options.rpcClients?.camelCase;
+
+                        instantOps.forEach((item) => {
+                          let nameMapping = {
+                            ...swapKeyValue(item.nameMapping?.All ?? {}),
+                            ...swapKeyValue(item.nameMapping?.Query ?? {})
+                          };
+
+                          // get all query methods
+                          const patterns = item.include?.patterns;
+                          const methodKeys = getQueryMethodNames(
+                            bundlerFile.package,
+                            Object.keys(proto[svcKey].methods ?? {}),
+                            patterns,
+                            useCamelCase ? camel : String
+                          );
+
+                          if(!methodKeys || !methodKeys.length){
+                            return
+                          }
+
+                          asts.push(
+                            createRpcClientInterface(
+                              ctx.generic,
+                              svc,
+                              item.className,
+                              methodKeys,
+                              nameMapping
+                            )
+                          );
+
+                          bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
+
+                          if(!instantRpcBundlerFiles[item.className]){
+                            instantRpcBundlerFiles[item.className] = [];
+                          }
+
+                          instantRpcBundlerFiles[item.className].push({...bundlerFile});
+                        });
+
                         asts.push(createRpcClientClass(ctx.generic, svc));
                         if (c.proto.pluginValue('rpcClients.extensions')) {
                             asts.push(createRpcQueryExtension(ctx.generic, svc));
+                        } else {
+                            const env = c.proto.pluginValue('env');
+                            if(env === 'v-next'){
+                              asts.push(createRpcClientImpl(ctx.generic, svc));
+                            }
                         }
 
 
@@ -237,6 +288,11 @@ export const plugin = (
     }).filter(Boolean);
 
     bundler.addRPCQueryClients(clients);
+
+    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
+      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    })
+
     bundler.addStateManagers("reactQuery", reactQueryBundlerFiles);
     bundler.addStateManagers("mobx", mobxBundlerFiles);
 };

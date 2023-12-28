@@ -49,14 +49,14 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 /**
  * QueryClaimsRecordsRequest is the request type for the Query/ClaimsRecords RPC
  * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -66,7 +66,7 @@ export interface QueryClaimsRecordsResponse {
   /** claims defines all claims records */
   claims: ClaimsRecordAddress[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -74,7 +74,7 @@ export interface QueryClaimsRecordsResponse {
  */
 export interface QueryClaimsRecordsResponseSDKType {
   claims: ClaimsRecordAddressSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -309,7 +309,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsRequest = {
@@ -365,7 +365,7 @@ export const QueryClaimsRecordsRequest = {
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
   return {
     claims: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsResponse = {

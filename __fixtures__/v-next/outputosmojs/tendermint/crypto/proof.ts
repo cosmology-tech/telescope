@@ -1,11 +1,15 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
   index: bigint;
   leafHash: Uint8Array;
   aunts: Uint8Array[];
+}
+export interface ProofProtoMsg {
+  typeUrl: "/tendermint.crypto.Proof";
+  value: Uint8Array;
 }
 export interface ProofSDKType {
   total: bigint;
@@ -17,16 +21,24 @@ export interface ValueOp {
   /** Encoded in ProofOp.Key. */
   key: Uint8Array;
   /** To encode in ProofOp.Data */
-  proof: Proof;
+  proof?: Proof;
+}
+export interface ValueOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ValueOp";
+  value: Uint8Array;
 }
 export interface ValueOpSDKType {
   key: Uint8Array;
-  proof: ProofSDKType;
+  proof?: ProofSDKType;
 }
 export interface DominoOp {
   key: string;
   input: string;
   output: string;
+}
+export interface DominoOpProtoMsg {
+  typeUrl: "/tendermint.crypto.DominoOp";
+  value: Uint8Array;
 }
 export interface DominoOpSDKType {
   key: string;
@@ -43,6 +55,10 @@ export interface ProofOp {
   key: Uint8Array;
   data: Uint8Array;
 }
+export interface ProofOpProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOp";
+  value: Uint8Array;
+}
 /**
  * ProofOp defines an operation used for calculating Merkle root
  * The data could be arbitrary format, providing nessecary data
@@ -56,6 +72,10 @@ export interface ProofOpSDKType {
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOps {
   ops: ProofOp[];
+}
+export interface ProofOpsProtoMsg {
+  typeUrl: "/tendermint.crypto.ProofOps";
+  value: Uint8Array;
 }
 /** ProofOps is Merkle proof defined by the list of ProofOps */
 export interface ProofOpsSDKType {
@@ -169,20 +189,26 @@ export const Proof = {
     return obj;
   },
   fromAmino(object: ProofAmino): Proof {
-    return {
-      total: BigInt(object.total),
-      index: BigInt(object.index),
-      leafHash: object.leaf_hash,
-      aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => e) : []
-    };
+    const message = createBaseProof();
+    if (object.total !== undefined && object.total !== null) {
+      message.total = BigInt(object.total);
+    }
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index);
+    }
+    if (object.leaf_hash !== undefined && object.leaf_hash !== null) {
+      message.leafHash = bytesFromBase64(object.leaf_hash);
+    }
+    message.aunts = object.aunts?.map(e => bytesFromBase64(e)) || [];
+    return message;
   },
   toAmino(message: Proof): ProofAmino {
     const obj: any = {};
-    obj.total = omitDefault(message.total);
-    obj.index = omitDefault(message.index);
-    obj.leaf_hash = message.leafHash;
+    obj.total = message.total ? message.total.toString() : undefined;
+    obj.index = message.index ? message.index.toString() : undefined;
+    obj.leaf_hash = message.leafHash ? base64FromBytes(message.leafHash) : undefined;
     if (message.aunts) {
-      obj.aunts = message.aunts.map(e => e);
+      obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
       obj.aunts = [];
     }
@@ -207,7 +233,7 @@ export const Proof = {
 function createBaseValueOp(): ValueOp {
   return {
     key: new Uint8Array(),
-    proof: Proof.fromPartial({})
+    proof: undefined
   };
 }
 export const ValueOp = {
@@ -278,14 +304,18 @@ export const ValueOp = {
     return obj;
   },
   fromAmino(object: ValueOpAmino): ValueOp {
-    return {
-      key: object.key,
-      proof: object?.proof ? Proof.fromAmino(object.proof) : undefined
-    };
+    const message = createBaseValueOp();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.proof !== undefined && object.proof !== null) {
+      message.proof = Proof.fromAmino(object.proof);
+    }
+    return message;
   },
   toAmino(message: ValueOp): ValueOpAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.proof = message.proof ? Proof.toAmino(message.proof) : undefined;
     return obj;
   },
@@ -392,17 +422,23 @@ export const DominoOp = {
     return obj;
   },
   fromAmino(object: DominoOpAmino): DominoOp {
-    return {
-      key: object.key,
-      input: object.input,
-      output: object.output
-    };
+    const message = createBaseDominoOp();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.input !== undefined && object.input !== null) {
+      message.input = object.input;
+    }
+    if (object.output !== undefined && object.output !== null) {
+      message.output = object.output;
+    }
+    return message;
   },
   toAmino(message: DominoOp): DominoOpAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.input = omitDefault(message.input);
-    obj.output = omitDefault(message.output);
+    obj.key = message.key;
+    obj.input = message.input;
+    obj.output = message.output;
     return obj;
   },
   fromAminoMsg(object: DominoOpAminoMsg): DominoOp {
@@ -508,17 +544,23 @@ export const ProofOp = {
     return obj;
   },
   fromAmino(object: ProofOpAmino): ProofOp {
-    return {
-      type: object.type,
-      key: object.key,
-      data: object.data
-    };
+    const message = createBaseProofOp();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.key !== undefined && object.key !== null) {
+      message.key = bytesFromBase64(object.key);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    return message;
   },
   toAmino(message: ProofOp): ProofOpAmino {
     const obj: any = {};
-    obj.type = omitDefault(message.type);
-    obj.key = message.key;
-    obj.data = message.data;
+    obj.type = message.type;
+    obj.key = message.key ? base64FromBytes(message.key) : undefined;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
   fromAminoMsg(object: ProofOpAminoMsg): ProofOp {
@@ -606,9 +648,9 @@ export const ProofOps = {
     return obj;
   },
   fromAmino(object: ProofOpsAmino): ProofOps {
-    return {
-      ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromAmino(e)) : []
-    };
+    const message = createBaseProofOps();
+    message.ops = object.ops?.map(e => ProofOp.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: ProofOps): ProofOpsAmino {
     const obj: any = {};

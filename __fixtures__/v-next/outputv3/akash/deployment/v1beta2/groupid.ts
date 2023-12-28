@@ -13,13 +13,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner: string;
-  dseq: string;
-  gseq: number;
-}
-export interface GroupIDAminoMsg {
-  type: "/akash.deployment.v1beta2.GroupID";
-  value: GroupIDAmino;
+  owner?: string;
+  dseq?: string;
+  gseq?: number;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -48,7 +44,7 @@ export const GroupID = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): GroupID {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): GroupID {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGroupID();
@@ -109,24 +105,27 @@ export const GroupID = {
     return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      gseq: object.gseq
-    };
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
   },
-  toAmino(message: GroupID): GroupIDAmino {
+  toAmino(message: GroupID, useInterfaces: boolean = true): GroupIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
     obj.dseq = message.dseq;
     obj.gseq = message.gseq;
     return obj;
   },
-  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
-    return GroupID.fromAmino(object.value);
-  },
-  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
-    return GroupID.decode(message.value);
+  fromProtoMsg(message: GroupIDProtoMsg, useInterfaces: boolean = true): GroupID {
+    return GroupID.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: GroupID): Uint8Array {
     return GroupID.encode(message).finish();

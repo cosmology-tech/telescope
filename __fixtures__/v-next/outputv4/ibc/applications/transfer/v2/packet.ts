@@ -16,6 +16,10 @@ export interface FungibleTokenPacketData {
   /** the recipient address on the destination chain */
   receiver: string;
 }
+export interface FungibleTokenPacketDataProtoMsg {
+  typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData";
+  value: Uint8Array;
+}
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
  * See FungibleTokenPacketData spec:
@@ -38,16 +42,16 @@ function createBaseFungibleTokenPacketData(): FungibleTokenPacketData {
 export const FungibleTokenPacketData = {
   typeUrl: "/ibc.applications.transfer.v2.FungibleTokenPacketData",
   encode(message: FungibleTokenPacketData, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.amount !== "") {
+    if (message.amount !== undefined) {
       writer.uint32(18).string(message.amount);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -127,12 +131,20 @@ export const FungibleTokenPacketData = {
     return obj;
   },
   fromAmino(object: FungibleTokenPacketDataAmino): FungibleTokenPacketData {
-    return {
-      denom: object.denom,
-      amount: object.amount,
-      sender: object.sender,
-      receiver: object.receiver
-    };
+    const message = createBaseFungibleTokenPacketData();
+    if (object.denom !== undefined && object.denom !== null) {
+      message.denom = object.denom;
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    }
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.receiver !== undefined && object.receiver !== null) {
+      message.receiver = object.receiver;
+    }
+    return message;
   },
   toAmino(message: FungibleTokenPacketData): FungibleTokenPacketDataAmino {
     const obj: any = {};

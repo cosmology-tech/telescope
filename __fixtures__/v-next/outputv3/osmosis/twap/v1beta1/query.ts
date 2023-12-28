@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -16,15 +16,11 @@ export interface ArithmeticTwapRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapRequestAmino {
-  pool_id: string;
-  base_asset: string;
-  quote_asset: string;
-  start_time?: Date;
-  end_time?: Date;
-}
-export interface ArithmeticTwapRequestAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-request";
-  value: ArithmeticTwapRequestAmino;
+  pool_id?: string;
+  base_asset?: string;
+  quote_asset?: string;
+  start_time?: string;
+  end_time?: string;
 }
 export interface ArithmeticTwapRequestSDKType {
   pool_id: bigint;
@@ -41,11 +37,7 @@ export interface ArithmeticTwapResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapResponseAmino {
-  arithmetic_twap: string;
-}
-export interface ArithmeticTwapResponseAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-response";
-  value: ArithmeticTwapResponseAmino;
+  arithmetic_twap?: string;
 }
 export interface ArithmeticTwapResponseSDKType {
   arithmetic_twap: string;
@@ -61,14 +53,10 @@ export interface ArithmeticTwapToNowRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapToNowRequestAmino {
-  pool_id: string;
-  base_asset: string;
-  quote_asset: string;
-  start_time?: Date;
-}
-export interface ArithmeticTwapToNowRequestAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-to-now-request";
-  value: ArithmeticTwapToNowRequestAmino;
+  pool_id?: string;
+  base_asset?: string;
+  quote_asset?: string;
+  start_time?: string;
 }
 export interface ArithmeticTwapToNowRequestSDKType {
   pool_id: bigint;
@@ -84,11 +72,7 @@ export interface ArithmeticTwapToNowResponseProtoMsg {
   value: Uint8Array;
 }
 export interface ArithmeticTwapToNowResponseAmino {
-  arithmetic_twap: string;
-}
-export interface ArithmeticTwapToNowResponseAminoMsg {
-  type: "osmosis/twap/arithmetic-twap-to-now-response";
-  value: ArithmeticTwapToNowResponseAmino;
+  arithmetic_twap?: string;
 }
 export interface ArithmeticTwapToNowResponseSDKType {
   arithmetic_twap: string;
@@ -99,10 +83,6 @@ export interface ParamsRequestProtoMsg {
   value: Uint8Array;
 }
 export interface ParamsRequestAmino {}
-export interface ParamsRequestAminoMsg {
-  type: "osmosis/twap/params-request";
-  value: ParamsRequestAmino;
-}
 export interface ParamsRequestSDKType {}
 export interface ParamsResponse {
   params: Params;
@@ -113,10 +93,6 @@ export interface ParamsResponseProtoMsg {
 }
 export interface ParamsResponseAmino {
   params?: ParamsAmino;
-}
-export interface ParamsResponseAminoMsg {
-  type: "osmosis/twap/params-response";
-  value: ParamsResponseAmino;
 }
 export interface ParamsResponseSDKType {
   params: ParamsSDKType;
@@ -151,7 +127,7 @@ export const ArithmeticTwapRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapRequest();
@@ -228,34 +204,35 @@ export const ArithmeticTwapRequest = {
     return obj;
   },
   fromAmino(object: ArithmeticTwapRequestAmino): ArithmeticTwapRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      baseAsset: object.base_asset,
-      quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined,
-      endTime: object?.end_time ? Timestamp.fromAmino(object.end_time) : undefined
-    };
+    const message = createBaseArithmeticTwapRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.base_asset !== undefined && object.base_asset !== null) {
+      message.baseAsset = object.base_asset;
+    }
+    if (object.quote_asset !== undefined && object.quote_asset !== null) {
+      message.quoteAsset = object.quote_asset;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    return message;
   },
-  toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
+  toAmino(message: ArithmeticTwapRequest, useInterfaces: boolean = true): ArithmeticTwapRequestAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.base_asset = omitDefault(message.baseAsset);
-    obj.quote_asset = omitDefault(message.quoteAsset);
-    obj.start_time = message.startTime;
-    obj.end_time = message.endTime;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapRequestAminoMsg): ArithmeticTwapRequest {
-    return ArithmeticTwapRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapRequest): ArithmeticTwapRequestAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-request",
-      value: ArithmeticTwapRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg): ArithmeticTwapRequest {
-    return ArithmeticTwapRequest.decode(message.value);
+  fromProtoMsg(message: ArithmeticTwapRequestProtoMsg, useInterfaces: boolean = true): ArithmeticTwapRequest {
+    return ArithmeticTwapRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapRequest): Uint8Array {
     return ArithmeticTwapRequest.encode(message).finish();
@@ -281,7 +258,7 @@ export const ArithmeticTwapResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapResponse();
@@ -324,26 +301,19 @@ export const ArithmeticTwapResponse = {
     return obj;
   },
   fromAmino(object: ArithmeticTwapResponseAmino): ArithmeticTwapResponse {
-    return {
-      arithmeticTwap: object.arithmetic_twap
-    };
+    const message = createBaseArithmeticTwapResponse();
+    if (object.arithmetic_twap !== undefined && object.arithmetic_twap !== null) {
+      message.arithmeticTwap = object.arithmetic_twap;
+    }
+    return message;
   },
-  toAmino(message: ArithmeticTwapResponse): ArithmeticTwapResponseAmino {
+  toAmino(message: ArithmeticTwapResponse, useInterfaces: boolean = true): ArithmeticTwapResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = padDecimal(message.arithmeticTwap);
+    obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapResponseAminoMsg): ArithmeticTwapResponse {
-    return ArithmeticTwapResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapResponse): ArithmeticTwapResponseAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-response",
-      value: ArithmeticTwapResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg): ArithmeticTwapResponse {
-    return ArithmeticTwapResponse.decode(message.value);
+  fromProtoMsg(message: ArithmeticTwapResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapResponse {
+    return ArithmeticTwapResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapResponse): Uint8Array {
     return ArithmeticTwapResponse.encode(message).finish();
@@ -381,7 +351,7 @@ export const ArithmeticTwapToNowRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapToNowRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapToNowRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowRequest();
@@ -450,32 +420,31 @@ export const ArithmeticTwapToNowRequest = {
     return obj;
   },
   fromAmino(object: ArithmeticTwapToNowRequestAmino): ArithmeticTwapToNowRequest {
-    return {
-      poolId: BigInt(object.pool_id),
-      baseAsset: object.base_asset,
-      quoteAsset: object.quote_asset,
-      startTime: object?.start_time ? Timestamp.fromAmino(object.start_time) : undefined
-    };
+    const message = createBaseArithmeticTwapToNowRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.base_asset !== undefined && object.base_asset !== null) {
+      message.baseAsset = object.base_asset;
+    }
+    if (object.quote_asset !== undefined && object.quote_asset !== null) {
+      message.quoteAsset = object.quote_asset;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    return message;
   },
-  toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
+  toAmino(message: ArithmeticTwapToNowRequest, useInterfaces: boolean = true): ArithmeticTwapToNowRequestAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.base_asset = omitDefault(message.baseAsset);
-    obj.quote_asset = omitDefault(message.quoteAsset);
-    obj.start_time = message.startTime;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset = message.baseAsset;
+    obj.quote_asset = message.quoteAsset;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapToNowRequestAminoMsg): ArithmeticTwapToNowRequest {
-    return ArithmeticTwapToNowRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-to-now-request",
-      value: ArithmeticTwapToNowRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg): ArithmeticTwapToNowRequest {
-    return ArithmeticTwapToNowRequest.decode(message.value);
+  fromProtoMsg(message: ArithmeticTwapToNowRequestProtoMsg, useInterfaces: boolean = true): ArithmeticTwapToNowRequest {
+    return ArithmeticTwapToNowRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapToNowRequest): Uint8Array {
     return ArithmeticTwapToNowRequest.encode(message).finish();
@@ -501,7 +470,7 @@ export const ArithmeticTwapToNowResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ArithmeticTwapToNowResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ArithmeticTwapToNowResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseArithmeticTwapToNowResponse();
@@ -544,26 +513,19 @@ export const ArithmeticTwapToNowResponse = {
     return obj;
   },
   fromAmino(object: ArithmeticTwapToNowResponseAmino): ArithmeticTwapToNowResponse {
-    return {
-      arithmeticTwap: object.arithmetic_twap
-    };
+    const message = createBaseArithmeticTwapToNowResponse();
+    if (object.arithmetic_twap !== undefined && object.arithmetic_twap !== null) {
+      message.arithmeticTwap = object.arithmetic_twap;
+    }
+    return message;
   },
-  toAmino(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAmino {
+  toAmino(message: ArithmeticTwapToNowResponse, useInterfaces: boolean = true): ArithmeticTwapToNowResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = padDecimal(message.arithmeticTwap);
+    obj.arithmetic_twap = message.arithmeticTwap;
     return obj;
   },
-  fromAminoMsg(object: ArithmeticTwapToNowResponseAminoMsg): ArithmeticTwapToNowResponse {
-    return ArithmeticTwapToNowResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAminoMsg {
-    return {
-      type: "osmosis/twap/arithmetic-twap-to-now-response",
-      value: ArithmeticTwapToNowResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg): ArithmeticTwapToNowResponse {
-    return ArithmeticTwapToNowResponse.decode(message.value);
+  fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapToNowResponse {
+    return ArithmeticTwapToNowResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ArithmeticTwapToNowResponse): Uint8Array {
     return ArithmeticTwapToNowResponse.encode(message).finish();
@@ -584,7 +546,7 @@ export const ParamsRequest = {
   encode(_: ParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamsRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParamsRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsRequest();
@@ -618,23 +580,15 @@ export const ParamsRequest = {
     return obj;
   },
   fromAmino(_: ParamsRequestAmino): ParamsRequest {
-    return {};
+    const message = createBaseParamsRequest();
+    return message;
   },
-  toAmino(_: ParamsRequest): ParamsRequestAmino {
+  toAmino(_: ParamsRequest, useInterfaces: boolean = true): ParamsRequestAmino {
     const obj: any = {};
     return obj;
   },
-  fromAminoMsg(object: ParamsRequestAminoMsg): ParamsRequest {
-    return ParamsRequest.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsRequest): ParamsRequestAminoMsg {
-    return {
-      type: "osmosis/twap/params-request",
-      value: ParamsRequest.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsRequestProtoMsg): ParamsRequest {
-    return ParamsRequest.decode(message.value);
+  fromProtoMsg(message: ParamsRequestProtoMsg, useInterfaces: boolean = true): ParamsRequest {
+    return ParamsRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamsRequest): Uint8Array {
     return ParamsRequest.encode(message).finish();
@@ -660,7 +614,7 @@ export const ParamsResponse = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): ParamsResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): ParamsResponse {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseParamsResponse();
@@ -668,7 +622,7 @@ export const ParamsResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.params = Params.decode(reader, reader.uint32());
+          message.params = Params.decode(reader, reader.uint32(), useInterfaces);
           break;
         default:
           reader.skipType(tag & 7);
@@ -705,26 +659,19 @@ export const ParamsResponse = {
     return obj;
   },
   fromAmino(object: ParamsResponseAmino): ParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
-  toAmino(message: ParamsResponse): ParamsResponseAmino {
+  toAmino(message: ParamsResponse, useInterfaces: boolean = true): ParamsResponseAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },
-  fromAminoMsg(object: ParamsResponseAminoMsg): ParamsResponse {
-    return ParamsResponse.fromAmino(object.value);
-  },
-  toAminoMsg(message: ParamsResponse): ParamsResponseAminoMsg {
-    return {
-      type: "osmosis/twap/params-response",
-      value: ParamsResponse.toAmino(message)
-    };
-  },
-  fromProtoMsg(message: ParamsResponseProtoMsg): ParamsResponse {
-    return ParamsResponse.decode(message.value);
+  fromProtoMsg(message: ParamsResponseProtoMsg, useInterfaces: boolean = true): ParamsResponse {
+    return ParamsResponse.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: ParamsResponse): Uint8Array {
     return ParamsResponse.encode(message).finish();

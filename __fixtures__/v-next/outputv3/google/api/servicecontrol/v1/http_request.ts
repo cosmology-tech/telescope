@@ -1,6 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -57,7 +57,7 @@ export interface HttpRequest {
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
-  latency: Duration;
+  latency?: Duration;
   /** Whether or not a cache lookup was attempted. */
   cacheLookup: boolean;
   /**
@@ -90,79 +90,75 @@ export interface HttpRequestProtoMsg {
  */
 export interface HttpRequestAmino {
   /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
-  request_method: string;
+  request_method?: string;
   /**
    * The scheme (http, https), the host name, the path, and the query
    * portion of the URL that was requested.
    * Example: `"http://example.com/some/info?color=red"`.
    */
-  request_url: string;
+  request_url?: string;
   /**
    * The size of the HTTP request message in bytes, including the request
    * headers and the request body.
    */
-  request_size: string;
+  request_size?: string;
   /**
    * The response code indicating the status of the response.
    * Examples: 200, 404.
    */
-  status: number;
+  status?: number;
   /**
    * The size of the HTTP response message sent back to the client, in bytes,
    * including the response headers and the response body.
    */
-  response_size: string;
+  response_size?: string;
   /**
    * The user agent sent by the client. Example:
    * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
    * CLR 1.0.3705)"`.
    */
-  user_agent: string;
+  user_agent?: string;
   /**
    * The IP address (IPv4 or IPv6) of the client that issued the HTTP
    * request. Examples: `"192.168.1.1"`, `"FE80::0202:B3FF:FE1E:8329"`.
    */
-  remote_ip: string;
+  remote_ip?: string;
   /**
    * The IP address (IPv4 or IPv6) of the origin server that the request was
    * sent to.
    */
-  server_ip: string;
+  server_ip?: string;
   /**
    * The referer URL of the request, as defined in
    * [HTTP/1.1 Header Field
    * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
    */
-  referer: string;
+  referer?: string;
   /**
    * The request processing latency on the server, from the time the request was
    * received until the response was sent.
    */
   latency?: DurationAmino;
   /** Whether or not a cache lookup was attempted. */
-  cache_lookup: boolean;
+  cache_lookup?: boolean;
   /**
    * Whether or not an entity was served from cache
    * (with or without validation).
    */
-  cache_hit: boolean;
+  cache_hit?: boolean;
   /**
    * Whether or not the response was validated with the origin server before
    * being served from cache. This field is only meaningful if `cache_hit` is
    * True.
    */
-  cache_validated_with_origin_server: boolean;
+  cache_validated_with_origin_server?: boolean;
   /**
    * The number of HTTP response bytes inserted into cache. Set only when a
    * cache fill was attempted.
    */
-  cache_fill_bytes: string;
+  cache_fill_bytes?: string;
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
-  protocol: string;
-}
-export interface HttpRequestAminoMsg {
-  type: "/google.api.servicecontrol.v1.HttpRequest";
-  value: HttpRequestAmino;
+  protocol?: string;
 }
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -179,7 +175,7 @@ export interface HttpRequestSDKType {
   remote_ip: string;
   server_ip: string;
   referer: string;
-  latency: DurationSDKType;
+  latency?: DurationSDKType;
   cache_lookup: boolean;
   cache_hit: boolean;
   cache_validated_with_origin_server: boolean;
@@ -197,7 +193,7 @@ function createBaseHttpRequest(): HttpRequest {
     remoteIp: "",
     serverIp: "",
     referer: "",
-    latency: Duration.fromPartial({}),
+    latency: undefined,
     cacheLookup: false,
     cacheHit: false,
     cacheValidatedWithOriginServer: false,
@@ -255,7 +251,7 @@ export const HttpRequest = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): HttpRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): HttpRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseHttpRequest();
@@ -290,7 +286,7 @@ export const HttpRequest = {
           message.referer = reader.string();
           break;
         case 14:
-          message.latency = Duration.decode(reader, reader.uint32());
+          message.latency = Duration.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 11:
           message.cacheLookup = reader.bool();
@@ -418,48 +414,75 @@ export const HttpRequest = {
     return obj;
   },
   fromAmino(object: HttpRequestAmino): HttpRequest {
-    return {
-      requestMethod: object.request_method,
-      requestUrl: object.request_url,
-      requestSize: BigInt(object.request_size),
-      status: object.status,
-      responseSize: BigInt(object.response_size),
-      userAgent: object.user_agent,
-      remoteIp: object.remote_ip,
-      serverIp: object.server_ip,
-      referer: object.referer,
-      latency: object?.latency ? Duration.fromAmino(object.latency) : undefined,
-      cacheLookup: object.cache_lookup,
-      cacheHit: object.cache_hit,
-      cacheValidatedWithOriginServer: object.cache_validated_with_origin_server,
-      cacheFillBytes: BigInt(object.cache_fill_bytes),
-      protocol: object.protocol
-    };
+    const message = createBaseHttpRequest();
+    if (object.request_method !== undefined && object.request_method !== null) {
+      message.requestMethod = object.request_method;
+    }
+    if (object.request_url !== undefined && object.request_url !== null) {
+      message.requestUrl = object.request_url;
+    }
+    if (object.request_size !== undefined && object.request_size !== null) {
+      message.requestSize = BigInt(object.request_size);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.response_size !== undefined && object.response_size !== null) {
+      message.responseSize = BigInt(object.response_size);
+    }
+    if (object.user_agent !== undefined && object.user_agent !== null) {
+      message.userAgent = object.user_agent;
+    }
+    if (object.remote_ip !== undefined && object.remote_ip !== null) {
+      message.remoteIp = object.remote_ip;
+    }
+    if (object.server_ip !== undefined && object.server_ip !== null) {
+      message.serverIp = object.server_ip;
+    }
+    if (object.referer !== undefined && object.referer !== null) {
+      message.referer = object.referer;
+    }
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromAmino(object.latency);
+    }
+    if (object.cache_lookup !== undefined && object.cache_lookup !== null) {
+      message.cacheLookup = object.cache_lookup;
+    }
+    if (object.cache_hit !== undefined && object.cache_hit !== null) {
+      message.cacheHit = object.cache_hit;
+    }
+    if (object.cache_validated_with_origin_server !== undefined && object.cache_validated_with_origin_server !== null) {
+      message.cacheValidatedWithOriginServer = object.cache_validated_with_origin_server;
+    }
+    if (object.cache_fill_bytes !== undefined && object.cache_fill_bytes !== null) {
+      message.cacheFillBytes = BigInt(object.cache_fill_bytes);
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
   },
-  toAmino(message: HttpRequest): HttpRequestAmino {
+  toAmino(message: HttpRequest, useInterfaces: boolean = true): HttpRequestAmino {
     const obj: any = {};
-    obj.request_method = omitDefault(message.requestMethod);
-    obj.request_url = omitDefault(message.requestUrl);
-    obj.request_size = omitDefault(message.requestSize);
-    obj.status = omitDefault(message.status);
-    obj.response_size = omitDefault(message.responseSize);
-    obj.user_agent = omitDefault(message.userAgent);
-    obj.remote_ip = omitDefault(message.remoteIp);
-    obj.server_ip = omitDefault(message.serverIp);
-    obj.referer = omitDefault(message.referer);
-    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
-    obj.cache_lookup = omitDefault(message.cacheLookup);
-    obj.cache_hit = omitDefault(message.cacheHit);
-    obj.cache_validated_with_origin_server = omitDefault(message.cacheValidatedWithOriginServer);
-    obj.cache_fill_bytes = omitDefault(message.cacheFillBytes);
-    obj.protocol = omitDefault(message.protocol);
+    obj.request_method = message.requestMethod;
+    obj.request_url = message.requestUrl;
+    obj.request_size = message.requestSize ? message.requestSize.toString() : undefined;
+    obj.status = message.status;
+    obj.response_size = message.responseSize ? message.responseSize.toString() : undefined;
+    obj.user_agent = message.userAgent;
+    obj.remote_ip = message.remoteIp;
+    obj.server_ip = message.serverIp;
+    obj.referer = message.referer;
+    obj.latency = message.latency ? Duration.toAmino(message.latency, useInterfaces) : undefined;
+    obj.cache_lookup = message.cacheLookup;
+    obj.cache_hit = message.cacheHit;
+    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer;
+    obj.cache_fill_bytes = message.cacheFillBytes ? message.cacheFillBytes.toString() : undefined;
+    obj.protocol = message.protocol;
     return obj;
   },
-  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
-    return HttpRequest.fromAmino(object.value);
-  },
-  fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
-    return HttpRequest.decode(message.value);
+  fromProtoMsg(message: HttpRequestProtoMsg, useInterfaces: boolean = true): HttpRequest {
+    return HttpRequest.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: HttpRequest): Uint8Array {
     return HttpRequest.encode(message).finish();

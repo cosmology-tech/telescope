@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -61,13 +61,9 @@ export interface AuthenticationAmino {
    * 
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
-  rules: AuthenticationRuleAmino[];
+  rules?: AuthenticationRuleAmino[];
   /** Defines a set of authentication providers that a service supports. */
-  providers: AuthProviderAmino[];
-}
-export interface AuthenticationAminoMsg {
-  type: "/google.api.Authentication";
-  value: AuthenticationAmino;
+  providers?: AuthProviderAmino[];
 }
 /**
  * `Authentication` defines the authentication configuration for API methods
@@ -112,7 +108,7 @@ export interface AuthenticationRule {
    */
   selector: string;
   /** The requirements for OAuth credentials. */
-  oauth: OAuthRequirements;
+  oauth?: OAuthRequirements;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
@@ -142,20 +138,16 @@ export interface AuthenticationRuleAmino {
    * 
    * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
    */
-  selector: string;
+  selector?: string;
   /** The requirements for OAuth credentials. */
   oauth?: OAuthRequirementsAmino;
   /**
    * If true, the service accepts API keys without any other credential.
    * This flag only applies to HTTP and gRPC requests.
    */
-  allow_without_credential: boolean;
+  allow_without_credential?: boolean;
   /** Requirements for additional authentication providers. */
-  requirements: AuthRequirementAmino[];
-}
-export interface AuthenticationRuleAminoMsg {
-  type: "/google.api.AuthenticationRule";
-  value: AuthenticationRuleAmino;
+  requirements?: AuthRequirementAmino[];
 }
 /**
  * Authentication rules for the service.
@@ -170,7 +162,7 @@ export interface AuthenticationRuleAminoMsg {
  */
 export interface AuthenticationRuleSDKType {
   selector: string;
-  oauth: OAuthRequirementsSDKType;
+  oauth?: OAuthRequirementsSDKType;
   allow_without_credential: boolean;
   requirements: AuthRequirementSDKType[];
 }
@@ -212,11 +204,7 @@ export interface JwtLocationAmino {
    * For example, for "Authorization: Bearer {JWT}",
    * value_prefix="Bearer " with a space at the end.
    */
-  value_prefix: string;
-}
-export interface JwtLocationAminoMsg {
-  type: "/google.api.JwtLocation";
-  value: JwtLocationAmino;
+  value_prefix?: string;
 }
 /** Specifies a location to extract JWT from an API request. */
 export interface JwtLocationSDKType {
@@ -323,7 +311,7 @@ export interface AuthProviderAmino {
    * 
    * Example: "bookstore_auth".
    */
-  id: string;
+  id?: string;
   /**
    * Identifies the principal that issued the JWT. See
    * https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.1
@@ -332,7 +320,7 @@ export interface AuthProviderAmino {
    * Example: https://securetoken.google.com
    * Example: 1234567-compute@developer.gserviceaccount.com
    */
-  issuer: string;
+  issuer?: string;
   /**
    * URL of the provider's public key set to validate signature of the JWT. See
    * [OpenID
@@ -347,7 +335,7 @@ export interface AuthProviderAmino {
    * 
    * Example: https://www.googleapis.com/oauth2/v1/certs
    */
-  jwks_uri: string;
+  jwks_uri?: string;
   /**
    * The list of JWT
    * [audiences](https://tools.ietf.org/html/draft-ietf-oauth-json-web-token-32#section-4.1.3).
@@ -367,12 +355,12 @@ export interface AuthProviderAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
+  audiences?: string;
   /**
    * Redirect URL if JWT token is required but not present or is expired.
    * Implement authorizationUrl of securityDefinitions in OpenAPI spec.
    */
-  authorization_url: string;
+  authorization_url?: string;
   /**
    * Defines the locations to extract the JWT.
    * 
@@ -392,11 +380,7 @@ export interface AuthProviderAmino {
    *    - header: x-goog-iap-jwt-assertion
    *    - query: access_token
    */
-  jwt_locations: JwtLocationAmino[];
-}
-export interface AuthProviderAminoMsg {
-  type: "/google.api.AuthProvider";
-  value: AuthProviderAmino;
+  jwt_locations?: JwtLocationAmino[];
 }
 /**
  * Configuration for an authentication provider, including support for
@@ -477,11 +461,7 @@ export interface OAuthRequirementsAmino {
    *      canonical_scopes: https://www.googleapis.com/auth/calendar,
    *                        https://www.googleapis.com/auth/calendar.read
    */
-  canonical_scopes: string;
-}
-export interface OAuthRequirementsAminoMsg {
-  type: "/google.api.OAuthRequirements";
-  value: OAuthRequirementsAmino;
+  canonical_scopes?: string;
 }
 /**
  * OAuth scopes are a way to define data and permissions on data. For example,
@@ -557,7 +537,7 @@ export interface AuthRequirementAmino {
    * 
    *     provider_id: bookstore_auth
    */
-  provider_id: string;
+  provider_id?: string;
   /**
    * NOTE: This will be deprecated soon, once AuthProvider.audiences is
    * implemented and accepted in all the runtime components.
@@ -576,11 +556,7 @@ export interface AuthRequirementAmino {
    *     audiences: bookstore_android.apps.googleusercontent.com,
    *                bookstore_web.apps.googleusercontent.com
    */
-  audiences: string;
-}
-export interface AuthRequirementAminoMsg {
-  type: "/google.api.AuthRequirement";
-  value: AuthRequirementAmino;
+  audiences?: string;
 }
 /**
  * User-defined authentication requirements, including support for
@@ -608,7 +584,7 @@ export const Authentication = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): Authentication {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): Authentication {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthentication();
@@ -616,10 +592,10 @@ export const Authentication = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 3:
-          message.rules.push(AuthenticationRule.decode(reader, reader.uint32()));
+          message.rules.push(AuthenticationRule.decode(reader, reader.uint32(), useInterfaces));
           break;
         case 4:
-          message.providers.push(AuthProvider.decode(reader, reader.uint32()));
+          message.providers.push(AuthProvider.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -675,30 +651,27 @@ export const Authentication = {
     return obj;
   },
   fromAmino(object: AuthenticationAmino): Authentication {
-    return {
-      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => AuthenticationRule.fromAmino(e)) : [],
-      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromAmino(e)) : []
-    };
+    const message = createBaseAuthentication();
+    message.rules = object.rules?.map(e => AuthenticationRule.fromAmino(e)) || [];
+    message.providers = object.providers?.map(e => AuthProvider.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: Authentication): AuthenticationAmino {
+  toAmino(message: Authentication, useInterfaces: boolean = true): AuthenticationAmino {
     const obj: any = {};
     if (message.rules) {
-      obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e) : undefined);
+      obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.rules = [];
     }
     if (message.providers) {
-      obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e) : undefined);
+      obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.providers = [];
     }
     return obj;
   },
-  fromAminoMsg(object: AuthenticationAminoMsg): Authentication {
-    return Authentication.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthenticationProtoMsg): Authentication {
-    return Authentication.decode(message.value);
+  fromProtoMsg(message: AuthenticationProtoMsg, useInterfaces: boolean = true): Authentication {
+    return Authentication.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: Authentication): Uint8Array {
     return Authentication.encode(message).finish();
@@ -713,7 +686,7 @@ export const Authentication = {
 function createBaseAuthenticationRule(): AuthenticationRule {
   return {
     selector: "",
-    oauth: OAuthRequirements.fromPartial({}),
+    oauth: undefined,
     allowWithoutCredential: false,
     requirements: []
   };
@@ -735,7 +708,7 @@ export const AuthenticationRule = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuthenticationRule {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthenticationRule {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthenticationRule();
@@ -746,13 +719,13 @@ export const AuthenticationRule = {
           message.selector = reader.string();
           break;
         case 2:
-          message.oauth = OAuthRequirements.decode(reader, reader.uint32());
+          message.oauth = OAuthRequirements.decode(reader, reader.uint32(), useInterfaces);
           break;
         case 5:
           message.allowWithoutCredential = reader.bool();
           break;
         case 7:
-          message.requirements.push(AuthRequirement.decode(reader, reader.uint32()));
+          message.requirements.push(AuthRequirement.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -812,30 +785,33 @@ export const AuthenticationRule = {
     return obj;
   },
   fromAmino(object: AuthenticationRuleAmino): AuthenticationRule {
-    return {
-      selector: object.selector,
-      oauth: object?.oauth ? OAuthRequirements.fromAmino(object.oauth) : undefined,
-      allowWithoutCredential: object.allow_without_credential,
-      requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromAmino(e)) : []
-    };
+    const message = createBaseAuthenticationRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.oauth !== undefined && object.oauth !== null) {
+      message.oauth = OAuthRequirements.fromAmino(object.oauth);
+    }
+    if (object.allow_without_credential !== undefined && object.allow_without_credential !== null) {
+      message.allowWithoutCredential = object.allow_without_credential;
+    }
+    message.requirements = object.requirements?.map(e => AuthRequirement.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
+  toAmino(message: AuthenticationRule, useInterfaces: boolean = true): AuthenticationRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth) : undefined;
-    obj.allow_without_credential = omitDefault(message.allowWithoutCredential);
+    obj.selector = message.selector;
+    obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth, useInterfaces) : undefined;
+    obj.allow_without_credential = message.allowWithoutCredential;
     if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e) : undefined);
+      obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.requirements = [];
     }
     return obj;
   },
-  fromAminoMsg(object: AuthenticationRuleAminoMsg): AuthenticationRule {
-    return AuthenticationRule.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthenticationRuleProtoMsg): AuthenticationRule {
-    return AuthenticationRule.decode(message.value);
+  fromProtoMsg(message: AuthenticationRuleProtoMsg, useInterfaces: boolean = true): AuthenticationRule {
+    return AuthenticationRule.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthenticationRule): Uint8Array {
     return AuthenticationRule.encode(message).finish();
@@ -868,7 +844,7 @@ export const JwtLocation = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): JwtLocation {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): JwtLocation {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseJwtLocation();
@@ -927,24 +903,27 @@ export const JwtLocation = {
     return obj;
   },
   fromAmino(object: JwtLocationAmino): JwtLocation {
-    return {
-      header: object?.header,
-      query: object?.query,
-      valuePrefix: object.value_prefix
-    };
+    const message = createBaseJwtLocation();
+    if (object.header !== undefined && object.header !== null) {
+      message.header = object.header;
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = object.query;
+    }
+    if (object.value_prefix !== undefined && object.value_prefix !== null) {
+      message.valuePrefix = object.value_prefix;
+    }
+    return message;
   },
-  toAmino(message: JwtLocation): JwtLocationAmino {
+  toAmino(message: JwtLocation, useInterfaces: boolean = true): JwtLocationAmino {
     const obj: any = {};
-    obj.header = omitDefault(message.header);
-    obj.query = omitDefault(message.query);
-    obj.value_prefix = omitDefault(message.valuePrefix);
+    obj.header = message.header;
+    obj.query = message.query;
+    obj.value_prefix = message.valuePrefix;
     return obj;
   },
-  fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
-    return JwtLocation.fromAmino(object.value);
-  },
-  fromProtoMsg(message: JwtLocationProtoMsg): JwtLocation {
-    return JwtLocation.decode(message.value);
+  fromProtoMsg(message: JwtLocationProtoMsg, useInterfaces: boolean = true): JwtLocation {
+    return JwtLocation.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: JwtLocation): Uint8Array {
     return JwtLocation.encode(message).finish();
@@ -989,7 +968,7 @@ export const AuthProvider = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuthProvider {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthProvider {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthProvider();
@@ -1012,7 +991,7 @@ export const AuthProvider = {
           message.authorizationUrl = reader.string();
           break;
         case 6:
-          message.jwtLocations.push(JwtLocation.decode(reader, reader.uint32()));
+          message.jwtLocations.push(JwtLocation.decode(reader, reader.uint32(), useInterfaces));
           break;
         default:
           reader.skipType(tag & 7);
@@ -1080,34 +1059,41 @@ export const AuthProvider = {
     return obj;
   },
   fromAmino(object: AuthProviderAmino): AuthProvider {
-    return {
-      id: object.id,
-      issuer: object.issuer,
-      jwksUri: object.jwks_uri,
-      audiences: object.audiences,
-      authorizationUrl: object.authorization_url,
-      jwtLocations: Array.isArray(object?.jwt_locations) ? object.jwt_locations.map((e: any) => JwtLocation.fromAmino(e)) : []
-    };
+    const message = createBaseAuthProvider();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.issuer !== undefined && object.issuer !== null) {
+      message.issuer = object.issuer;
+    }
+    if (object.jwks_uri !== undefined && object.jwks_uri !== null) {
+      message.jwksUri = object.jwks_uri;
+    }
+    if (object.audiences !== undefined && object.audiences !== null) {
+      message.audiences = object.audiences;
+    }
+    if (object.authorization_url !== undefined && object.authorization_url !== null) {
+      message.authorizationUrl = object.authorization_url;
+    }
+    message.jwtLocations = object.jwt_locations?.map(e => JwtLocation.fromAmino(e)) || [];
+    return message;
   },
-  toAmino(message: AuthProvider): AuthProviderAmino {
+  toAmino(message: AuthProvider, useInterfaces: boolean = true): AuthProviderAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.issuer = omitDefault(message.issuer);
-    obj.jwks_uri = omitDefault(message.jwksUri);
-    obj.audiences = omitDefault(message.audiences);
-    obj.authorization_url = omitDefault(message.authorizationUrl);
+    obj.id = message.id;
+    obj.issuer = message.issuer;
+    obj.jwks_uri = message.jwksUri;
+    obj.audiences = message.audiences;
+    obj.authorization_url = message.authorizationUrl;
     if (message.jwtLocations) {
-      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e) : undefined);
+      obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e, useInterfaces) : undefined);
     } else {
       obj.jwt_locations = [];
     }
     return obj;
   },
-  fromAminoMsg(object: AuthProviderAminoMsg): AuthProvider {
-    return AuthProvider.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthProviderProtoMsg): AuthProvider {
-    return AuthProvider.decode(message.value);
+  fromProtoMsg(message: AuthProviderProtoMsg, useInterfaces: boolean = true): AuthProvider {
+    return AuthProvider.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthProvider): Uint8Array {
     return AuthProvider.encode(message).finish();
@@ -1132,7 +1118,7 @@ export const OAuthRequirements = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): OAuthRequirements {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): OAuthRequirements {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseOAuthRequirements();
@@ -1175,20 +1161,19 @@ export const OAuthRequirements = {
     return obj;
   },
   fromAmino(object: OAuthRequirementsAmino): OAuthRequirements {
-    return {
-      canonicalScopes: object.canonical_scopes
-    };
+    const message = createBaseOAuthRequirements();
+    if (object.canonical_scopes !== undefined && object.canonical_scopes !== null) {
+      message.canonicalScopes = object.canonical_scopes;
+    }
+    return message;
   },
-  toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
+  toAmino(message: OAuthRequirements, useInterfaces: boolean = true): OAuthRequirementsAmino {
     const obj: any = {};
-    obj.canonical_scopes = omitDefault(message.canonicalScopes);
+    obj.canonical_scopes = message.canonicalScopes;
     return obj;
   },
-  fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
-    return OAuthRequirements.fromAmino(object.value);
-  },
-  fromProtoMsg(message: OAuthRequirementsProtoMsg): OAuthRequirements {
-    return OAuthRequirements.decode(message.value);
+  fromProtoMsg(message: OAuthRequirementsProtoMsg, useInterfaces: boolean = true): OAuthRequirements {
+    return OAuthRequirements.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: OAuthRequirements): Uint8Array {
     return OAuthRequirements.encode(message).finish();
@@ -1217,7 +1202,7 @@ export const AuthRequirement = {
     }
     return writer;
   },
-  decode(input: BinaryReader | Uint8Array, length?: number): AuthRequirement {
+  decode(input: BinaryReader | Uint8Array, length?: number, useInterfaces: boolean = true): AuthRequirement {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAuthRequirement();
@@ -1268,22 +1253,23 @@ export const AuthRequirement = {
     return obj;
   },
   fromAmino(object: AuthRequirementAmino): AuthRequirement {
-    return {
-      providerId: object.provider_id,
-      audiences: object.audiences
-    };
+    const message = createBaseAuthRequirement();
+    if (object.provider_id !== undefined && object.provider_id !== null) {
+      message.providerId = object.provider_id;
+    }
+    if (object.audiences !== undefined && object.audiences !== null) {
+      message.audiences = object.audiences;
+    }
+    return message;
   },
-  toAmino(message: AuthRequirement): AuthRequirementAmino {
+  toAmino(message: AuthRequirement, useInterfaces: boolean = true): AuthRequirementAmino {
     const obj: any = {};
-    obj.provider_id = omitDefault(message.providerId);
-    obj.audiences = omitDefault(message.audiences);
+    obj.provider_id = message.providerId;
+    obj.audiences = message.audiences;
     return obj;
   },
-  fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {
-    return AuthRequirement.fromAmino(object.value);
-  },
-  fromProtoMsg(message: AuthRequirementProtoMsg): AuthRequirement {
-    return AuthRequirement.decode(message.value);
+  fromProtoMsg(message: AuthRequirementProtoMsg, useInterfaces: boolean = true): AuthRequirement {
+    return AuthRequirement.decode(message.value, undefined, useInterfaces);
   },
   toProto(message: AuthRequirement): Uint8Array {
     return AuthRequirement.encode(message).finish();

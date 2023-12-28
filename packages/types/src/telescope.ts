@@ -21,6 +21,10 @@ interface TelescopeOpts {
 
     interfaces?: {
         enabled?: boolean;
+        useGlobalDecoderRegistry?: boolean;
+        useUseInterfacesParams?: boolean;
+        useByDefault?: boolean,
+        useByDefaultRpc?: boolean,
         useUnionTypes?: boolean;
     },
 
@@ -36,6 +40,9 @@ interface TelescopeOpts {
             decode?: boolean;
             fromJSON?: boolean;
             toJSON?: boolean;
+            /**
+            * @deprecated The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on.
+            */
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
@@ -51,17 +58,25 @@ interface TelescopeOpts {
         fieldDefaultIsOptional?: boolean;
         useOptionalNullable?: boolean;
         allowUndefinedTypes?: boolean;
+        allowEncodeDefaultScalars?: boolean;
 
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
 
+        // add $typeUrl field to interfaces
         addTypeUrlToObjects?: boolean;
+        // add aminoType field to Decoders
         addAminoTypeToObjects?: boolean;
+        // add typeUrl field to Decoders
         addTypeUrlToDecoders?: boolean;
+
+        enableRegistryLoader?: boolean;
+        enableMessageComposer?: boolean;
 
         excluded?: {
             packages?: string[];
             protos?: string[];
+            hardProtos?: string[];
         };
         includes?: {
             packages?: string[];
@@ -83,6 +98,8 @@ interface TelescopeOpts {
 
             // temporary field to avoid breaking changes
             updatedDuration?: boolean
+
+            useTelescopeGeneratedType?: boolean
         };
     };
 
@@ -115,10 +132,13 @@ interface TelescopeOpts {
     stargateClients?: {
         enabled: boolean;
         includeCosmosDefaultTypes?: boolean;
+        addGetTxRpc?: boolean;
     };
 
     aminoEncoding?: {
         enabled: boolean;
+        useProtoOptionality?: boolean;
+        disableMsgTypes?: boolean;
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
@@ -151,6 +171,22 @@ interface TelescopeOpts {
         camelCase?: boolean;
         scopedIsExclusive?: boolean;
         bundle?: boolean;
+        serviceImplement?: {
+          [
+            key:
+              | "Msg"
+              | "Query"
+              | "Service"
+              | "ReflectionService"
+              | "ABCIApplication"
+              | string
+          ]: {
+            include?: {
+              patterns?: string[];
+            };
+            type: "Query" | "Tx" | string;
+          };
+        };
         enabledServices?: (
             'Msg' |
             'Query' |
@@ -168,6 +204,24 @@ interface TelescopeOpts {
             methodNameQuery?: string;
             methodNameTx?: string;
         }[];
+        instantOps?: {
+            className: string,
+            include: {
+              patterns?: string[];
+            },
+            nameMapping?:{
+              All: {
+                [key: string]: string;
+              };
+              Query?: {
+                [key: string]: string;
+              };
+              Msg?: {
+                [key: string]: string;
+              };
+            }
+        }[];
+        useConnectComet?: boolean;
     };
     reactQuery?: {
         enabled: boolean;
@@ -232,6 +286,8 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     interfaces: {
         enabled: true,
+        useByDefault: true,
+        useByDefaultRpc: true,
         useUnionTypes: false,
     },
 
@@ -265,6 +321,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         addTypeUrlToObjects: true,
         addAminoTypeToObjects: false,
         addTypeUrlToDecoders: true,
+
+        enableRegistryLoader: true,
+        enableMessageComposer: true,
 
         optionalQueryParams: false,
         optionalPageRequests: false,

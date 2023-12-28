@@ -90,11 +90,15 @@ exports[`osmosis/lockup/tx duration 2`] = `
     return obj;
   },
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
-    return {
-      owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgLockTokens();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
@@ -277,11 +281,15 @@ exports[`osmosis/lockup/tx string 2`] = `
     return obj;
   },
   fromAmino(object: MsgLockTokensAmino): MsgLockTokens {
-    return {
-      owner: object.owner,
-      duration: object?.duration ? Duration.fromAmino(object.duration) : undefined,
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgLockTokens();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};

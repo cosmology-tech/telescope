@@ -8,6 +8,10 @@ export interface CertificateResponse {
   certificate: Certificate;
   serial: string;
 }
+export interface CertificateResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.CertificateResponse";
+  value: Uint8Array;
+}
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseSDKType {
   certificate: CertificateSDKType;
@@ -16,22 +20,30 @@ export interface CertificateResponseSDKType {
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
   filter: CertificateFilter;
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryCertificatesRequestProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesRequest";
+  value: Uint8Array;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequestSDKType {
   filter: CertificateFilterSDKType;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
   certificates: CertificateResponse[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryCertificatesResponseProtoMsg {
+  typeUrl: "/akash.cert.v1beta2.QueryCertificatesResponse";
+  value: Uint8Array;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponseSDKType {
   certificates: CertificateResponseSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
@@ -107,10 +119,14 @@ export const CertificateResponse = {
     return obj;
   },
   fromAmino(object: CertificateResponseAmino): CertificateResponse {
-    return {
-      certificate: object?.certificate ? Certificate.fromAmino(object.certificate) : undefined,
-      serial: object.serial
-    };
+    const message = createBaseCertificateResponse();
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromAmino(object.certificate);
+    }
+    if (object.serial !== undefined && object.serial !== null) {
+      message.serial = object.serial;
+    }
+    return message;
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {
     const obj: any = {};
@@ -143,7 +159,7 @@ export const CertificateResponse = {
 function createBaseQueryCertificatesRequest(): QueryCertificatesRequest {
   return {
     filter: CertificateFilter.fromPartial({}),
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesRequest = {
@@ -214,10 +230,14 @@ export const QueryCertificatesRequest = {
     return obj;
   },
   fromAmino(object: QueryCertificatesRequestAmino): QueryCertificatesRequest {
-    return {
-      filter: object?.filter ? CertificateFilter.fromAmino(object.filter) : undefined,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryCertificatesRequest();
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = CertificateFilter.fromAmino(object.filter);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryCertificatesRequest): QueryCertificatesRequestAmino {
     const obj: any = {};
@@ -250,7 +270,7 @@ export const QueryCertificatesRequest = {
 function createBaseQueryCertificatesResponse(): QueryCertificatesResponse {
   return {
     certificates: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryCertificatesResponse = {
@@ -329,10 +349,12 @@ export const QueryCertificatesResponse = {
     return obj;
   },
   fromAmino(object: QueryCertificatesResponseAmino): QueryCertificatesResponse {
-    return {
-      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryCertificatesResponse();
+    message.certificates = object.certificates?.map(e => CertificateResponse.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryCertificatesResponse): QueryCertificatesResponseAmino {
     const obj: any = {};

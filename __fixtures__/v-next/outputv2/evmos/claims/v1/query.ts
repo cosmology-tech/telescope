@@ -46,7 +46,7 @@ export interface QueryTotalUnclaimedResponseProtoMsg {
  */
 export interface QueryTotalUnclaimedResponseAmino {
   /** coins defines the unclaimed coins */
-  coins: CoinAmino[];
+  coins?: CoinAmino[];
 }
 export interface QueryTotalUnclaimedResponseAminoMsg {
   type: "/evmos.claims.v1.QueryTotalUnclaimedResponse";
@@ -101,7 +101,7 @@ export interface QueryParamsResponseSDKType {
  */
 export interface QueryClaimsRecordsRequest {
   /** pagination defines an optional pagination for the request. */
-  pagination: PageRequest;
+  pagination?: PageRequest;
 }
 export interface QueryClaimsRecordsRequestProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsRequest";
@@ -124,7 +124,7 @@ export interface QueryClaimsRecordsRequestAminoMsg {
  * method.
  */
 export interface QueryClaimsRecordsRequestSDKType {
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryClaimsRecordsResponse is the response type for the Query/ClaimsRecords
@@ -134,7 +134,7 @@ export interface QueryClaimsRecordsResponse {
   /** claims defines all claims records */
   claims: ClaimsRecordAddress[];
   /** pagination defines the pagination in the response. */
-  pagination: PageResponse;
+  pagination?: PageResponse;
 }
 export interface QueryClaimsRecordsResponseProtoMsg {
   typeUrl: "/evmos.claims.v1.QueryClaimsRecordsResponse";
@@ -146,7 +146,7 @@ export interface QueryClaimsRecordsResponseProtoMsg {
  */
 export interface QueryClaimsRecordsResponseAmino {
   /** claims defines all claims records */
-  claims: ClaimsRecordAddressAmino[];
+  claims?: ClaimsRecordAddressAmino[];
   /** pagination defines the pagination in the response. */
   pagination?: PageResponseAmino;
 }
@@ -160,7 +160,7 @@ export interface QueryClaimsRecordsResponseAminoMsg {
  */
 export interface QueryClaimsRecordsResponseSDKType {
   claims: ClaimsRecordAddressSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryClaimsRecordRequest is the request type for the Query/ClaimsRecord RPC
@@ -180,7 +180,7 @@ export interface QueryClaimsRecordRequestProtoMsg {
  */
 export interface QueryClaimsRecordRequestAmino {
   /** address defines the user to query claims record for */
-  address: string;
+  address?: string;
 }
 export interface QueryClaimsRecordRequestAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordRequest";
@@ -213,9 +213,9 @@ export interface QueryClaimsRecordResponseProtoMsg {
  */
 export interface QueryClaimsRecordResponseAmino {
   /** total initial claimable amount for the user */
-  initial_claimable_amount: string;
+  initial_claimable_amount?: string;
   /** the claims of the user */
-  claims: ClaimAmino[];
+  claims?: ClaimAmino[];
 }
 export interface QueryClaimsRecordResponseAminoMsg {
   type: "/evmos.claims.v1.QueryClaimsRecordResponse";
@@ -271,7 +271,8 @@ export const QueryTotalUnclaimedRequest = {
     return obj;
   },
   fromAmino(_: QueryTotalUnclaimedRequestAmino): QueryTotalUnclaimedRequest {
-    return {};
+    const message = createBaseQueryTotalUnclaimedRequest();
+    return message;
   },
   toAmino(_: QueryTotalUnclaimedRequest): QueryTotalUnclaimedRequestAmino {
     const obj: any = {};
@@ -357,9 +358,9 @@ export const QueryTotalUnclaimedResponse = {
     return obj;
   },
   fromAmino(object: QueryTotalUnclaimedResponseAmino): QueryTotalUnclaimedResponse {
-    return {
-      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryTotalUnclaimedResponse();
+    message.coins = object.coins?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryTotalUnclaimedResponse): QueryTotalUnclaimedResponseAmino {
     const obj: any = {};
@@ -428,7 +429,8 @@ export const QueryParamsRequest = {
     return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
-    return {};
+    const message = createBaseQueryParamsRequest();
+    return message;
   },
   toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
@@ -508,9 +510,11 @@ export const QueryParamsResponse = {
     return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
-    return {
-      params: object?.params ? Params.fromAmino(object.params) : undefined
-    };
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
   },
   toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
     const obj: any = {};
@@ -535,7 +539,7 @@ export const QueryParamsResponse = {
 };
 function createBaseQueryClaimsRecordsRequest(): QueryClaimsRecordsRequest {
   return {
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsRequest = {
@@ -591,9 +595,11 @@ export const QueryClaimsRecordsRequest = {
     return obj;
   },
   fromAmino(object: QueryClaimsRecordsRequestAmino): QueryClaimsRecordsRequest {
-    return {
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClaimsRecordsRequest();
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClaimsRecordsRequest): QueryClaimsRecordsRequestAmino {
     const obj: any = {};
@@ -619,7 +625,7 @@ export const QueryClaimsRecordsRequest = {
 function createBaseQueryClaimsRecordsResponse(): QueryClaimsRecordsResponse {
   return {
     claims: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryClaimsRecordsResponse = {
@@ -694,10 +700,12 @@ export const QueryClaimsRecordsResponse = {
     return obj;
   },
   fromAmino(object: QueryClaimsRecordsResponseAmino): QueryClaimsRecordsResponse {
-    return {
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => ClaimsRecordAddress.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryClaimsRecordsResponse();
+    message.claims = object.claims?.map(e => ClaimsRecordAddress.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryClaimsRecordsResponse): QueryClaimsRecordsResponseAmino {
     const obj: any = {};
@@ -781,9 +789,11 @@ export const QueryClaimsRecordRequest = {
     return obj;
   },
   fromAmino(object: QueryClaimsRecordRequestAmino): QueryClaimsRecordRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryClaimsRecordRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {
     const obj: any = {};
@@ -882,10 +892,12 @@ export const QueryClaimsRecordResponse = {
     return obj;
   },
   fromAmino(object: QueryClaimsRecordResponseAmino): QueryClaimsRecordResponse {
-    return {
-      initialClaimableAmount: object.initial_claimable_amount,
-      claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromAmino(e)) : []
-    };
+    const message = createBaseQueryClaimsRecordResponse();
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.claims = object.claims?.map(e => Claim.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseAmino {
     const obj: any = {};

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -54,8 +54,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner: string;
-  dseq: string;
+  owner?: string;
+  dseq?: string;
 }
 export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentID";
@@ -80,9 +80,9 @@ export interface DeploymentProtoMsg {
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
   deployment_id?: DeploymentIDAmino;
-  state: Deployment_State;
-  version: Uint8Array;
-  created_at: string;
+  state?: Deployment_State;
+  version?: string;
+  created_at?: string;
 }
 export interface DeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.Deployment";
@@ -107,9 +107,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner: string;
-  dseq: string;
-  state: string;
+  owner?: string;
+  dseq?: string;
+  state?: string;
 }
 export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentFilters";
@@ -191,15 +191,19 @@ export const DeploymentID = {
     return obj;
   },
   fromAmino(object: DeploymentIDAmino): DeploymentID {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq)
-    };
+    const message = createBaseDeploymentID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    return message;
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
@@ -314,19 +318,27 @@ export const Deployment = {
     return obj;
   },
   fromAmino(object: DeploymentAmino): Deployment {
-    return {
-      deploymentId: object?.deployment_id ? DeploymentID.fromAmino(object.deployment_id) : undefined,
-      state: isSet(object.state) ? deployment_StateFromJSON(object.state) : -1,
-      version: object.version,
-      createdAt: BigInt(object.created_at)
-    };
+    const message = createBaseDeployment();
+    if (object.deployment_id !== undefined && object.deployment_id !== null) {
+      message.deploymentId = DeploymentID.fromAmino(object.deployment_id);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = deployment_StateFromJSON(object.state);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = bytesFromBase64(object.version);
+    }
+    if (object.created_at !== undefined && object.created_at !== null) {
+      message.createdAt = BigInt(object.created_at);
+    }
+    return message;
   },
   toAmino(message: Deployment): DeploymentAmino {
     const obj: any = {};
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = message.state;
-    obj.version = message.version;
-    obj.created_at = omitDefault(message.createdAt);
+    obj.state = deployment_StateToJSON(message.state);
+    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentAminoMsg): Deployment {
@@ -427,16 +439,22 @@ export const DeploymentFilters = {
     return obj;
   },
   fromAmino(object: DeploymentFiltersAmino): DeploymentFilters {
-    return {
-      owner: object.owner,
-      dseq: BigInt(object.dseq),
-      state: object.state
-    };
+    const message = createBaseDeploymentFilters();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    return message;
   },
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner;
-    obj.dseq = message.dseq;
+    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
     obj.state = message.state;
     return obj;
   },

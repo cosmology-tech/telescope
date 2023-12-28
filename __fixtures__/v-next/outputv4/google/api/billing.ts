@@ -44,6 +44,10 @@ export interface Billing {
    */
   consumerDestinations: Billing_BillingDestination[];
 }
+export interface BillingProtoMsg {
+  typeUrl: "/google.api.Billing";
+  value: Uint8Array;
+}
 /**
  * Billing related configuration of the service.
  * 
@@ -96,6 +100,10 @@ export interface Billing_BillingDestination {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Billing_BillingDestinationProtoMsg {
+  typeUrl: "/google.api.BillingDestination";
+  value: Uint8Array;
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -174,9 +182,9 @@ export const Billing = {
     return obj;
   },
   fromAmino(object: BillingAmino): Billing {
-    return {
-      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromAmino(e)) : []
-    };
+    const message = createBaseBilling();
+    message.consumerDestinations = object.consumer_destinations?.map(e => Billing_BillingDestination.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Billing): BillingAmino {
     const obj: any = {};
@@ -212,7 +220,7 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -285,10 +293,12 @@ export const Billing_BillingDestination = {
     return obj;
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
-    return {
-      monitoredResource: object.monitored_resource,
-      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
-    };
+    const message = createBaseBilling_BillingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
   },
   toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
     const obj: any = {};

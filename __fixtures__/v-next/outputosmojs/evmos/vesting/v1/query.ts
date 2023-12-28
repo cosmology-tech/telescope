@@ -7,6 +7,10 @@ export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
   address: string;
 }
+export interface QueryBalancesRequestProtoMsg {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
+  value: Uint8Array;
+}
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequestSDKType {
   address: string;
@@ -22,6 +26,10 @@ export interface QueryBalancesResponse {
   unvested: Coin[];
   /** current amount of vested tokens */
   vested: Coin[];
+}
+export interface QueryBalancesResponseProtoMsg {
+  typeUrl: "/evmos.vesting.v1.QueryBalancesResponse";
+  value: Uint8Array;
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
@@ -93,9 +101,11 @@ export const QueryBalancesRequest = {
     return obj;
   },
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
-    return {
-      address: object.address
-    };
+    const message = createBaseQueryBalancesRequest();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    return message;
   },
   toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {
     const obj: any = {};
@@ -229,11 +239,11 @@ export const QueryBalancesResponse = {
     return obj;
   },
   fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {
-    return {
-      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromAmino(e)) : [],
-      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromAmino(e)) : [],
-      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseQueryBalancesResponse();
+    message.locked = object.locked?.map(e => Coin.fromAmino(e)) || [];
+    message.unvested = object.unvested?.map(e => Coin.fromAmino(e)) || [];
+    message.vested = object.vested?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QueryBalancesResponse): QueryBalancesResponseAmino {
     const obj: any = {};

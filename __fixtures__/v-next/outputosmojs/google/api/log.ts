@@ -37,6 +37,10 @@ export interface LogDescriptor {
    */
   displayName: string;
 }
+export interface LogDescriptorProtoMsg {
+  typeUrl: "/google.api.LogDescriptor";
+  value: Uint8Array;
+}
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -161,12 +165,18 @@ export const LogDescriptor = {
     return obj;
   },
   fromAmino(object: LogDescriptorAmino): LogDescriptor {
-    return {
-      name: object.name,
-      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromAmino(e)) : [],
-      description: object.description,
-      displayName: object.display_name
-    };
+    const message = createBaseLogDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    return message;
   },
   toAmino(message: LogDescriptor): LogDescriptorAmino {
     const obj: any = {};

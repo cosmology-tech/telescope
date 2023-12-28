@@ -19,7 +19,11 @@ export const protobufPackage = "google.rpc";
  */
 export interface RetryInfo {
   /** Clients should wait at least this long between retrying the same request. */
-  retryDelay: Duration;
+  retryDelay?: Duration;
+}
+export interface RetryInfoProtoMsg {
+  typeUrl: "/google.rpc.RetryInfo";
+  value: Uint8Array;
 }
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -37,7 +41,7 @@ export interface RetryInfo {
  * reached.
  */
 export interface RetryInfoSDKType {
-  retry_delay: DurationSDKType;
+  retry_delay?: DurationSDKType;
 }
 /** Describes additional debugging info. */
 export interface DebugInfo {
@@ -45,6 +49,10 @@ export interface DebugInfo {
   stackEntries: string[];
   /** Additional debugging information provided by the server. */
   detail: string;
+}
+export interface DebugInfoProtoMsg {
+  typeUrl: "/google.rpc.DebugInfo";
+  value: Uint8Array;
 }
 /** Describes additional debugging info. */
 export interface DebugInfoSDKType {
@@ -67,6 +75,10 @@ export interface DebugInfoSDKType {
 export interface QuotaFailure {
   /** Describes all quota violations. */
   violations: QuotaFailure_Violation[];
+}
+export interface QuotaFailureProtoMsg {
+  typeUrl: "/google.rpc.QuotaFailure";
+  value: Uint8Array;
 }
 /**
  * Describes how a quota check failed.
@@ -106,6 +118,10 @@ export interface QuotaFailure_Violation {
    */
   description: string;
 }
+export interface QuotaFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
 /**
  * A message type used to describe a single quota violation.  For example, a
  * daily quota or a custom quota that was exceeded.
@@ -117,6 +133,10 @@ export interface QuotaFailure_ViolationSDKType {
 export interface ErrorInfo_MetadataEntry {
   key: string;
   value: string;
+}
+export interface ErrorInfo_MetadataEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
 }
 export interface ErrorInfo_MetadataEntrySDKType {
   key: string;
@@ -179,6 +199,10 @@ export interface ErrorInfo {
     [key: string]: string;
   };
 }
+export interface ErrorInfoProtoMsg {
+  typeUrl: "/google.rpc.ErrorInfo";
+  value: Uint8Array;
+}
 /**
  * Describes the cause of the error with structured details.
  * 
@@ -223,6 +247,10 @@ export interface PreconditionFailure {
   /** Describes all precondition violations. */
   violations: PreconditionFailure_Violation[];
 }
+export interface PreconditionFailureProtoMsg {
+  typeUrl: "/google.rpc.PreconditionFailure";
+  value: Uint8Array;
+}
 /**
  * Describes what preconditions have failed.
  * 
@@ -255,6 +283,10 @@ export interface PreconditionFailure_Violation {
    */
   description: string;
 }
+export interface PreconditionFailure_ViolationProtoMsg {
+  typeUrl: "/google.rpc.Violation";
+  value: Uint8Array;
+}
 /** A message type used to describe a single precondition failure. */
 export interface PreconditionFailure_ViolationSDKType {
   type: string;
@@ -268,6 +300,10 @@ export interface PreconditionFailure_ViolationSDKType {
 export interface BadRequest {
   /** Describes all violations in a client request. */
   fieldViolations: BadRequest_FieldViolation[];
+}
+export interface BadRequestProtoMsg {
+  typeUrl: "/google.rpc.BadRequest";
+  value: Uint8Array;
 }
 /**
  * Describes violations in a client request. This error type focuses on the
@@ -286,6 +322,10 @@ export interface BadRequest_FieldViolation {
   field: string;
   /** A description of why the request element is bad. */
   description: string;
+}
+export interface BadRequest_FieldViolationProtoMsg {
+  typeUrl: "/google.rpc.FieldViolation";
+  value: Uint8Array;
 }
 /** A message type used to describe a single bad request field. */
 export interface BadRequest_FieldViolationSDKType {
@@ -307,6 +347,10 @@ export interface RequestInfo {
    * stack trace that can be sent back to the service provider for debugging.
    */
   servingData: string;
+}
+export interface RequestInfoProtoMsg {
+  typeUrl: "/google.rpc.RequestInfo";
+  value: Uint8Array;
 }
 /**
  * Contains metadata about the request that clients can attach when filing a bug
@@ -343,6 +387,10 @@ export interface ResourceInfo {
    */
   description: string;
 }
+export interface ResourceInfoProtoMsg {
+  typeUrl: "/google.rpc.ResourceInfo";
+  value: Uint8Array;
+}
 /** Describes the resource that is being accessed. */
 export interface ResourceInfoSDKType {
   resource_type: string;
@@ -361,6 +409,10 @@ export interface Help {
   /** URL(s) pointing to additional information on handling the current error. */
   links: Help_Link[];
 }
+export interface HelpProtoMsg {
+  typeUrl: "/google.rpc.Help";
+  value: Uint8Array;
+}
 /**
  * Provides links to documentation or for performing an out of band action.
  * 
@@ -377,6 +429,10 @@ export interface Help_Link {
   description: string;
   /** The URL of the link. */
   url: string;
+}
+export interface Help_LinkProtoMsg {
+  typeUrl: "/google.rpc.Link";
+  value: Uint8Array;
 }
 /** Describes a URL link. */
 export interface Help_LinkSDKType {
@@ -397,6 +453,10 @@ export interface LocalizedMessage {
   /** The localized error message in the above locale. */
   message: string;
 }
+export interface LocalizedMessageProtoMsg {
+  typeUrl: "/google.rpc.LocalizedMessage";
+  value: Uint8Array;
+}
 /**
  * Provides a localized error message that is safe to return to the user
  * which can be attached to an RPC error.
@@ -407,7 +467,7 @@ export interface LocalizedMessageSDKType {
 }
 function createBaseRetryInfo(): RetryInfo {
   return {
-    retryDelay: Duration.fromPartial({})
+    retryDelay: undefined
   };
 }
 export const RetryInfo = {
@@ -468,9 +528,11 @@ export const RetryInfo = {
     return obj;
   },
   fromAmino(object: RetryInfoAmino): RetryInfo {
-    return {
-      retryDelay: object?.retry_delay ? Duration.fromAmino(object.retry_delay) : undefined
-    };
+    const message = createBaseRetryInfo();
+    if (object.retry_delay !== undefined && object.retry_delay !== null) {
+      message.retryDelay = Duration.fromAmino(object.retry_delay);
+    }
+    return message;
   },
   toAmino(message: RetryInfo): RetryInfoAmino {
     const obj: any = {};
@@ -505,7 +567,7 @@ export const DebugInfo = {
     for (const v of message.stackEntries) {
       writer.uint32(10).string(v!);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     return writer;
@@ -575,10 +637,12 @@ export const DebugInfo = {
     return obj;
   },
   fromAmino(object: DebugInfoAmino): DebugInfo {
-    return {
-      stackEntries: Array.isArray(object?.stack_entries) ? object.stack_entries.map((e: any) => e) : [],
-      detail: object.detail
-    };
+    const message = createBaseDebugInfo();
+    message.stackEntries = object.stack_entries?.map(e => e) || [];
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    return message;
   },
   toAmino(message: DebugInfo): DebugInfoAmino {
     const obj: any = {};
@@ -675,9 +739,9 @@ export const QuotaFailure = {
     return obj;
   },
   fromAmino(object: QuotaFailureAmino): QuotaFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => QuotaFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBaseQuotaFailure();
+    message.violations = object.violations?.map(e => QuotaFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: QuotaFailure): QuotaFailureAmino {
     const obj: any = {};
@@ -713,10 +777,10 @@ function createBaseQuotaFailure_Violation(): QuotaFailure_Violation {
 export const QuotaFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: QuotaFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(10).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -778,10 +842,14 @@ export const QuotaFailure_Violation = {
     return obj;
   },
   fromAmino(object: QuotaFailure_ViolationAmino): QuotaFailure_Violation {
-    return {
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBaseQuotaFailure_Violation();
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
     const obj: any = {};
@@ -813,10 +881,10 @@ function createBaseErrorInfo_MetadataEntry(): ErrorInfo_MetadataEntry {
 }
 export const ErrorInfo_MetadataEntry = {
   encode(message: ErrorInfo_MetadataEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -878,10 +946,14 @@ export const ErrorInfo_MetadataEntry = {
     return obj;
   },
   fromAmino(object: ErrorInfo_MetadataEntryAmino): ErrorInfo_MetadataEntry {
-    return {
-      key: object.key,
-      value: object.value
-    };
+    const message = createBaseErrorInfo_MetadataEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
   },
   toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
     const obj: any = {};
@@ -909,10 +981,10 @@ function createBaseErrorInfo(): ErrorInfo {
 export const ErrorInfo = {
   typeUrl: "/google.rpc.ErrorInfo",
   encode(message: ErrorInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.reason !== "") {
+    if (message.reason !== undefined) {
       writer.uint32(10).string(message.reason);
     }
-    if (message.domain !== "") {
+    if (message.domain !== undefined) {
       writer.uint32(18).string(message.domain);
     }
     Object.entries(message.metadata).forEach(([key, value]) => {
@@ -1024,16 +1096,22 @@ export const ErrorInfo = {
     return obj;
   },
   fromAmino(object: ErrorInfoAmino): ErrorInfo {
-    return {
-      reason: object.reason,
-      domain: object.domain,
-      metadata: isObject(object.metadata) ? Object.entries(object.metadata).reduce<{
-        [key: string]: string;
-      }>((acc, [key, value]) => {
+    const message = createBaseErrorInfo();
+    if (object.reason !== undefined && object.reason !== null) {
+      message.reason = object.reason;
+    }
+    if (object.domain !== undefined && object.domain !== null) {
+      message.domain = object.domain;
+    }
+    message.metadata = Object.entries(object.metadata ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
         acc[key] = String(value);
-        return acc;
-      }, {}) : {}
-    };
+      }
+      return acc;
+    }, {});
+    return message;
   },
   toAmino(message: ErrorInfo): ErrorInfoAmino {
     const obj: any = {};
@@ -1132,9 +1210,9 @@ export const PreconditionFailure = {
     return obj;
   },
   fromAmino(object: PreconditionFailureAmino): PreconditionFailure {
-    return {
-      violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromAmino(e)) : []
-    };
+    const message = createBasePreconditionFailure();
+    message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: PreconditionFailure): PreconditionFailureAmino {
     const obj: any = {};
@@ -1171,13 +1249,13 @@ function createBasePreconditionFailure_Violation(): PreconditionFailure_Violatio
 export const PreconditionFailure_Violation = {
   typeUrl: "/google.rpc.Violation",
   encode(message: PreconditionFailure_Violation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(18).string(message.subject);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -1248,11 +1326,17 @@ export const PreconditionFailure_Violation = {
     return obj;
   },
   fromAmino(object: PreconditionFailure_ViolationAmino): PreconditionFailure_Violation {
-    return {
-      type: object.type,
-      subject: object.subject,
-      description: object.description
-    };
+    const message = createBasePreconditionFailure_Violation();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
     const obj: any = {};
@@ -1346,9 +1430,9 @@ export const BadRequest = {
     return obj;
   },
   fromAmino(object: BadRequestAmino): BadRequest {
-    return {
-      fieldViolations: Array.isArray(object?.field_violations) ? object.field_violations.map((e: any) => BadRequest_FieldViolation.fromAmino(e)) : []
-    };
+    const message = createBaseBadRequest();
+    message.fieldViolations = object.field_violations?.map(e => BadRequest_FieldViolation.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: BadRequest): BadRequestAmino {
     const obj: any = {};
@@ -1384,10 +1468,10 @@ function createBaseBadRequest_FieldViolation(): BadRequest_FieldViolation {
 export const BadRequest_FieldViolation = {
   typeUrl: "/google.rpc.FieldViolation",
   encode(message: BadRequest_FieldViolation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     return writer;
@@ -1449,10 +1533,14 @@ export const BadRequest_FieldViolation = {
     return obj;
   },
   fromAmino(object: BadRequest_FieldViolationAmino): BadRequest_FieldViolation {
-    return {
-      field: object.field,
-      description: object.description
-    };
+    const message = createBaseBadRequest_FieldViolation();
+    if (object.field !== undefined && object.field !== null) {
+      message.field = object.field;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
     const obj: any = {};
@@ -1485,10 +1573,10 @@ function createBaseRequestInfo(): RequestInfo {
 export const RequestInfo = {
   typeUrl: "/google.rpc.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.requestId !== "") {
+    if (message.requestId !== undefined) {
       writer.uint32(10).string(message.requestId);
     }
-    if (message.servingData !== "") {
+    if (message.servingData !== undefined) {
       writer.uint32(18).string(message.servingData);
     }
     return writer;
@@ -1550,10 +1638,14 @@ export const RequestInfo = {
     return obj;
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
-    return {
-      requestId: object.request_id,
-      servingData: object.serving_data
-    };
+    const message = createBaseRequestInfo();
+    if (object.request_id !== undefined && object.request_id !== null) {
+      message.requestId = object.request_id;
+    }
+    if (object.serving_data !== undefined && object.serving_data !== null) {
+      message.servingData = object.serving_data;
+    }
+    return message;
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
@@ -1588,16 +1680,16 @@ function createBaseResourceInfo(): ResourceInfo {
 export const ResourceInfo = {
   typeUrl: "/google.rpc.ResourceInfo",
   encode(message: ResourceInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.resourceType !== "") {
+    if (message.resourceType !== undefined) {
       writer.uint32(10).string(message.resourceType);
     }
-    if (message.resourceName !== "") {
+    if (message.resourceName !== undefined) {
       writer.uint32(18).string(message.resourceName);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(34).string(message.description);
     }
     return writer;
@@ -1677,12 +1769,20 @@ export const ResourceInfo = {
     return obj;
   },
   fromAmino(object: ResourceInfoAmino): ResourceInfo {
-    return {
-      resourceType: object.resource_type,
-      resourceName: object.resource_name,
-      owner: object.owner,
-      description: object.description
-    };
+    const message = createBaseResourceInfo();
+    if (object.resource_type !== undefined && object.resource_type !== null) {
+      message.resourceType = object.resource_type;
+    }
+    if (object.resource_name !== undefined && object.resource_name !== null) {
+      message.resourceName = object.resource_name;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
@@ -1777,9 +1877,9 @@ export const Help = {
     return obj;
   },
   fromAmino(object: HelpAmino): Help {
-    return {
-      links: Array.isArray(object?.links) ? object.links.map((e: any) => Help_Link.fromAmino(e)) : []
-    };
+    const message = createBaseHelp();
+    message.links = object.links?.map(e => Help_Link.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: Help): HelpAmino {
     const obj: any = {};
@@ -1815,10 +1915,10 @@ function createBaseHelp_Link(): Help_Link {
 export const Help_Link = {
   typeUrl: "/google.rpc.Link",
   encode(message: Help_Link, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(10).string(message.description);
     }
-    if (message.url !== "") {
+    if (message.url !== undefined) {
       writer.uint32(18).string(message.url);
     }
     return writer;
@@ -1880,10 +1980,14 @@ export const Help_Link = {
     return obj;
   },
   fromAmino(object: Help_LinkAmino): Help_Link {
-    return {
-      description: object.description,
-      url: object.url
-    };
+    const message = createBaseHelp_Link();
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.url !== undefined && object.url !== null) {
+      message.url = object.url;
+    }
+    return message;
   },
   toAmino(message: Help_Link): Help_LinkAmino {
     const obj: any = {};
@@ -1916,10 +2020,10 @@ function createBaseLocalizedMessage(): LocalizedMessage {
 export const LocalizedMessage = {
   typeUrl: "/google.rpc.LocalizedMessage",
   encode(message: LocalizedMessage, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.locale !== "") {
+    if (message.locale !== undefined) {
       writer.uint32(10).string(message.locale);
     }
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(18).string(message.message);
     }
     return writer;
@@ -1981,10 +2085,14 @@ export const LocalizedMessage = {
     return obj;
   },
   fromAmino(object: LocalizedMessageAmino): LocalizedMessage {
-    return {
-      locale: object.locale,
-      message: object.message
-    };
+    const message = createBaseLocalizedMessage();
+    if (object.locale !== undefined && object.locale !== null) {
+      message.locale = object.locale;
+    }
+    if (object.message !== undefined && object.message !== null) {
+      message.message = object.message;
+    }
+    return message;
   },
   toAmino(message: LocalizedMessage): LocalizedMessageAmino {
     const obj: any = {};

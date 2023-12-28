@@ -107,12 +107,18 @@ exports[`MsgExecuteContract interface 2`] = `
     return obj;
   },
   fromAmino(object: MsgExecuteContractAmino): MsgExecuteContract {
-    return {
-      sender: object.sender,
-      contract: object.contract,
-      msg: toUtf8(JSON.stringify(object.msg)),
-      funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromAmino(e)) : []
-    };
+    const message = createBaseMsgExecuteContract();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.contract !== undefined && object.contract !== null) {
+      message.contract = object.contract;
+    }
+    if (object.msg !== undefined && object.msg !== null) {
+      message.msg = toUtf8(JSON.stringify(object.msg));
+    }
+    message.funds = object.funds?.map(e => Coin.fromAmino(e)) || [];
+    return message;
   },
   toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
     const obj: any = {};

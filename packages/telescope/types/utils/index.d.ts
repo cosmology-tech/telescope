@@ -13,6 +13,7 @@ export declare const UTILS: {
     base64FromBytes: string;
     bytesFromBase64: string;
     BrowserHeaders: string;
+    connectComet: string;
     Decimal: string;
     padDecimal: string;
     createProtobufRpcClient: string;
@@ -50,6 +51,13 @@ export declare const UTILS: {
     QueryClient: string;
     Registry: string;
     Rpc: string;
+    StdFee: string;
+    TxRpc: string;
+    BroadcastTxReq: string;
+    BroadcastTxRes: string;
+    DeliverTxResponse: string;
+    EncodeObject: string;
+    SigningClientParams: string;
     grpc: string;
     setPaginationParams: string;
     SigningStargateClient: string;
@@ -74,6 +82,8 @@ export declare const UTILS: {
     UnaryMethodDefinitionish: string;
     BinaryReader: string;
     BinaryWriter: string;
+    TelescopeGeneratedType: string;
+    GlobalDecoderRegistry: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

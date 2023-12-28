@@ -9,7 +9,11 @@ export interface QueryAccountsRequest {
   xid: string;
   owner: string;
   state: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryAccountsRequestProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest";
+  value: Uint8Array;
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequestSDKType {
@@ -17,17 +21,21 @@ export interface QueryAccountsRequestSDKType {
   xid: string;
   owner: string;
   state: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
   accounts: Account[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryAccountsResponseProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.QueryAccountsResponse";
+  value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponseSDKType {
   accounts: AccountSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequest {
@@ -36,7 +44,11 @@ export interface QueryPaymentsRequest {
   id: string;
   owner: string;
   state: string;
-  pagination: PageRequest;
+  pagination?: PageRequest;
+}
+export interface QueryPaymentsRequestProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest";
+  value: Uint8Array;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequestSDKType {
@@ -45,17 +57,21 @@ export interface QueryPaymentsRequestSDKType {
   id: string;
   owner: string;
   state: string;
-  pagination: PageRequestSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
   payments: FractionalPayment[];
-  pagination: PageResponse;
+  pagination?: PageResponse;
+}
+export interface QueryPaymentsResponseProtoMsg {
+  typeUrl: "/akash.escrow.v1beta2.QueryPaymentsResponse";
+  value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponseSDKType {
   payments: FractionalPaymentSDKType[];
-  pagination: PageResponseSDKType;
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
@@ -63,22 +79,22 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
     xid: "",
     owner: "",
     state: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest",
   encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(34).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -172,13 +188,23 @@ export const QueryAccountsRequest = {
     return obj;
   },
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
-    return {
-      scope: object.scope,
-      xid: object.xid,
-      owner: object.owner,
-      state: object.state,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsRequest();
+    if (object.scope !== undefined && object.scope !== null) {
+      message.scope = object.scope;
+    }
+    if (object.xid !== undefined && object.xid !== null) {
+      message.xid = object.xid;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
     const obj: any = {};
@@ -214,7 +240,7 @@ export const QueryAccountsRequest = {
 function createBaseQueryAccountsResponse(): QueryAccountsResponse {
   return {
     accounts: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryAccountsResponse = {
@@ -295,10 +321,12 @@ export const QueryAccountsResponse = {
     return obj;
   },
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
-    return {
-      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryAccountsResponse();
+    message.accounts = object.accounts?.map(e => Account.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryAccountsResponse): QueryAccountsResponseAmino {
     const obj: any = {};
@@ -339,25 +367,25 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
     id: "",
     owner: "",
     state: "",
-    pagination: PageRequest.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryPaymentsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest",
   encode(message: QueryPaymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(26).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(34).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(42).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -460,14 +488,26 @@ export const QueryPaymentsRequest = {
     return obj;
   },
   fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
-    return {
-      scope: object.scope,
-      xid: object.xid,
-      id: object.id,
-      owner: object.owner,
-      state: object.state,
-      pagination: object?.pagination ? PageRequest.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryPaymentsRequest();
+    if (object.scope !== undefined && object.scope !== null) {
+      message.scope = object.scope;
+    }
+    if (object.xid !== undefined && object.xid !== null) {
+      message.xid = object.xid;
+    }
+    if (object.id !== undefined && object.id !== null) {
+      message.id = object.id;
+    }
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.state !== undefined && object.state !== null) {
+      message.state = object.state;
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
     const obj: any = {};
@@ -504,7 +544,7 @@ export const QueryPaymentsRequest = {
 function createBaseQueryPaymentsResponse(): QueryPaymentsResponse {
   return {
     payments: [],
-    pagination: PageResponse.fromPartial({})
+    pagination: undefined
   };
 }
 export const QueryPaymentsResponse = {
@@ -585,10 +625,12 @@ export const QueryPaymentsResponse = {
     return obj;
   },
   fromAmino(object: QueryPaymentsResponseAmino): QueryPaymentsResponse {
-    return {
-      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromAmino(e)) : [],
-      pagination: object?.pagination ? PageResponse.fromAmino(object.pagination) : undefined
-    };
+    const message = createBaseQueryPaymentsResponse();
+    message.payments = object.payments?.map(e => FractionalPayment.fromAmino(e)) || [];
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromAmino(object.pagination);
+    }
+    return message;
   },
   toAmino(message: QueryPaymentsResponse): QueryPaymentsResponseAmino {
     const obj: any = {};
