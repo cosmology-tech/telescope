@@ -154,14 +154,16 @@ export const memberExpressionOrIdentifierAminoCaseField = (
         const [b, a] = fields;
         return t.memberExpression(
             t.identifier(aminoCaseFunc(a)),
-            t.identifier(aminoCaseFunc(b))
+            t.identifier(aminoCaseFunc(b)),
+            false, true
         );
     }
     const [field, ...rest] = fields;
 
     return t.memberExpression(
         memberExpressionOrIdentifierAminoCaseField(rest, aminoCaseFunc),
-        t.identifier(aminoCaseFunc(field))
+        t.identifier(aminoCaseFunc(field)),
+        false, true
     )
 };
 

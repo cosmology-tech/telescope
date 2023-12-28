@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { arrowFunctionExpression } from '../../../utils';
+import { AminoUtils, arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '@cosmology/types';
 import { protoFieldsToArray } from '../utils';
@@ -22,7 +22,7 @@ export interface ToAminoParseField {
     fieldPath: ProtoField[];
     nested: number;
     isOptional: boolean;
-};
+}
 
 export const toAminoParseField = ({
     context,
@@ -70,9 +70,6 @@ export const toAminoParseField = ({
             case 'bool':
             case 'bytes':
                 return toAmino.defaultType(args);
-
-            case 'string':
-                return toAmino.string(args);
         }
 
         switch (field.parsedType.type) {
@@ -132,8 +129,7 @@ export const toAminoParseField = ({
         }
     }
 
-    let jsonTag = field.options['(gogoproto.jsontag)'] ?? field.options['(cosmos_proto.json_tag)'];
-    const omitEmpty = jsonTag == null || jsonTag === "" || jsonTag.includes("omitempty");
+    let omitEmpty = AminoUtils.shouldOmitEmpty(field);
 
     // scalar types...
     switch (field.type) {

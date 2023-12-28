@@ -1,10 +1,9 @@
 import * as t from '@babel/types';
 import { getFieldOptionality, getOneOfs } from '..';
-import { identifier, objectMethod } from '../../../utils';
+import { AminoUtils, identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { ProtoField, ProtoType } from '@cosmology/types';
 import { arrayTypes, toAminoJSON, toAminoMessages } from './utils';
-import { pascal } from 'case';
 import { SymbolNames } from '../../types';
 import { getAminoTypeName } from '../../amino';
 
@@ -120,9 +119,7 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         }
 
 
-
-        let jsonTag = field.options?.['(gogoproto.jsontag)'] ?? field.options?.['(cosmos_proto.json_tag)'];
-        const omitEmpty = jsonTag == null || jsonTag === "" || jsonTag.includes("omitempty");
+        const omitEmpty = AminoUtils.shouldOmitEmpty(field);
 
         // default types
         switch (field.type) {
