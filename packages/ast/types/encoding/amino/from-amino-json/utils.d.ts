@@ -17,6 +17,10 @@ export declare const fromAmino: {
     typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField): t.ObjectProperty;
     scalarArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField, arrayTypeAstFunc: Function): t.ObjectProperty;
     pubkey(args: FromAminoParseField): t.ObjectProperty;
+    /**
+     *  value == null ? nullExpr : nonNullExpr
+     */
+    nullCheckCondition(value: t.Expression, nullExpr: t.Expression, nonNullExpr: t.Expression): t.ConditionalExpression;
 };
 export declare const arrayTypes: {
     long(varname: string, ctx: GenericParseContext): t.CallExpression;

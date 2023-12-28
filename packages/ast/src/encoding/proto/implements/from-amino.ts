@@ -12,28 +12,35 @@ export const getInterfaceFromAminoName = (str: string) => {
 };
 
 const makeFunctionWrapper = (functionName: string, stmt: t.Statement) => {
-    return t.exportNamedDeclaration(
-        t.functionDeclaration(
-            identifier(functionName,
+    let arrowFunction = t.arrowFunctionExpression(
+        [
+            identifier(
+                'content',
                 t.tsTypeAnnotation(
                     t.tsTypeReference(
-                        t.identifier('Any')
+                        t.identifier('AnyAmino')
                     )
                 )
-            ),
+            )
+        ],
+        t.blockStatement([
+            stmt
+        ])
+    );
+    arrowFunction.returnType = t.tsTypeAnnotation(
+        t.tsTypeReference(
+            t.identifier('Any')
+        )
+    );
+    return t.exportNamedDeclaration(
+        t.variableDeclaration(
+            'const',
             [
-                identifier(
-                    'content',
-                    t.tsTypeAnnotation(
-                        t.tsTypeReference(
-                            t.identifier('AnyAmino')
-                        )
-                    )
+                t.variableDeclarator(
+                    t.identifier(functionName),
+                    arrowFunction
                 )
-            ],
-            t.blockStatement([
-                stmt
-            ])
+            ]
         )
     );
 };
