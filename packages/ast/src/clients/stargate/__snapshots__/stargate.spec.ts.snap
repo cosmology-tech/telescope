@@ -61,7 +61,7 @@ exports[`createStargateClient w/o defaults 2`] = `
   rpcEndpoint,
   signer
 }: SigningClientParams) => {
-  let txRpc = (await getRpcClient(rpcEndpoint) as TxRpc);
+  let txRpc = (await createRpcClient(rpcEndpoint) as TxRpc);
   const signingClient = await getSigningOsmosisClient({
     rpcEndpoint,
     signer
@@ -102,7 +102,7 @@ exports[`createStargateClient w/o defaults 4`] = `
   "SigningStargateClient": true,
   "StdFee": true,
   "TxRpc": true,
-  "getRpcClient": true,
+  "createRpcClient": true,
 }
 `;
 
