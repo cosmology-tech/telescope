@@ -41,12 +41,33 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
   export const toAminoJSON = {
 
-      scalar(args: ToAminoJSONMethod) {
-        return setValue(args)
+      scalar(args: ToAminoJSONMethod, valExpr?: t.Expression) {
+        return setValue(args, valExpr)
       },
 
       string(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
+          const isCosmosSDKDec =
+              (args.field.options?.['(gogoproto.customtype)'] ==
+                  'github.com/cosmos/cosmos-sdk/types.Dec') ||
+              (args.field.options?.['(gogoproto.customtype)'] ==
+                  'cosmossdk.io/math.LegacyDec');
+
+          let valueExpr: t.Expression;
+          if (isCosmosSDKDec) {
+              args.context.addUtil('padDecimal');
+              const { propName } = getFieldNames(args.field);
+              valueExpr = t.callExpression(
+                  t.identifier('padDecimal'),
+                  [
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
+                      )
+                  ]
+              )
+          }
+
+          return toAminoJSON.scalar(args, valueExpr);
       },
       double(args: ToAminoJSONMethod) {
           return toAminoJSON.scalar(args);
