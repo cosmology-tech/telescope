@@ -196,6 +196,21 @@ describe("Authz testing", () => {
     }
   }, 200000);
 
+  // it("get address2 auths", async () => {
+  //   const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
+  //     rpcEndpoint: getRpcEndpoint(),
+  //   });
+
+  //   const authsResults = await queryClient.cosmos.authz.v1beta1.grants(QueryGrantsRequest.fromPartial({
+  //     granter: address1,
+  //     grantee: address2,
+  //     msgTypeUrl: MsgVote.typeUrl
+  //   }));
+
+  //   console.log(authsResults);
+
+  // }, 200000);
+
   // it("exec address2 send", async () => {
   //   const msgClient2 = await cosmos.ClientFactory.createRPCMsgClient({
   //     rpc: txRpc2,
