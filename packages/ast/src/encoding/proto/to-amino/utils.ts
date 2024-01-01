@@ -1,24 +1,33 @@
-  import * as t from '@babel/types';
-  import { ProtoType } from '@cosmology/types';
-  import { BILLION, TypeLong, identifier } from '../../../utils';
-  import { ProtoParseContext } from '../../context';
-  import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
-  import { getInterfaceToAminoName } from '../implements';
-  import { ToAminoJSONMethod } from './index';
+import * as t from '@babel/types';
+import { ProtoType } from '@cosmology/types';
+import { AminoUtils, BILLION, identifier, TypeLong } from '../../../utils';
+import { ProtoParseContext } from '../../context';
+import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+import { getInterfaceToAminoName } from '../implements';
+import { ToAminoJSONMethod } from './index';
 
-  const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
+const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
     const { propName, origName } = getFieldNames(args.field);
 
-    const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+      // currently the "(amino.dont_omitempty)" does not work on cosmos sdk
+      // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
+      const omitEmpty = AminoUtils.shouldOmitEmpty(args.field);
+
 
     valExpr = t.memberExpression(t.identifier("message"), t.identifier(propName));
 
-    if (dontOmitempty) {
-      valExpr = t.logicalExpression(
-        "??",
-        valExpr,
-        getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
-      );
+      if (omitEmpty) {
+          valExpr = t.conditionalExpression(t.binaryExpression(
+              "===",
+              valExpr,
+              getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+          ), t.identifier('undefined'), valExpr);
+      } else {
+          valExpr = t.logicalExpression(
+              "??",
+              valExpr,
+              getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf)
+          );
     }
 
     return t.expressionStatement(

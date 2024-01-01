@@ -1,6 +1,4 @@
 import * as t from '@babel/types';
-import { getFieldOptionality, getOneOfs } from '..';
-import { AminoUtils, identifier, objectMethod } from '../../../utils';
 import { getFieldOptionalityForAmino, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
