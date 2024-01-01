@@ -14,7 +14,7 @@ exports[`createRpcMsgExtension 1`] = `
   rpcEndpoint: string | HttpEndpoint;
   signer: OfflineSigner;
 }) => {
-  const rpc = await getSigningCosmosTxRpc({
+  const rpc = await getCosmosTxRpc({
     rpcEndpoint,
     signer
   });

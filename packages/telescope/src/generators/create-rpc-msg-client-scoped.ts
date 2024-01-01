@@ -120,7 +120,7 @@ const makeRPC = (
                 'MsgClientImpl' // make option later
             );
 
-            if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next') {
+            if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next' && ctx.proto.pluginValue('rpcClients.extensions') && ctx.proto.pluginValue('stargateClients.addGetTxRpc')) {
               const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
 
               txRpcImport = importStmt([txRpcName], './client')
