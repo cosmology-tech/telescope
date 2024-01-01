@@ -14,7 +14,7 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
       const omitEmpty = AminoUtils.shouldOmitEmpty(args.field);
 
 
-    valExpr = t.memberExpression(t.identifier("message"), t.identifier(propName));
+    valExpr = valExpr ?? t.memberExpression(t.identifier("message"), t.identifier(propName));
 
       if (omitEmpty) {
           valExpr = t.conditionalExpression(t.binaryExpression(

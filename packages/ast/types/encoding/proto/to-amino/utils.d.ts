@@ -3,7 +3,7 @@ import { ProtoType } from '@cosmology/types';
 import { ProtoParseContext } from '../../context';
 import { ToAminoJSONMethod } from './index';
 export declare const toAminoJSON: {
-    scalar(args: ToAminoJSONMethod): t.ExpressionStatement;
+    scalar(args: ToAminoJSONMethod, valExpr?: t.Expression): t.ExpressionStatement;
     string(args: ToAminoJSONMethod): t.ExpressionStatement;
     double(args: ToAminoJSONMethod): t.ExpressionStatement;
     float(args: ToAminoJSONMethod): t.ExpressionStatement;
