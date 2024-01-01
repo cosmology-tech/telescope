@@ -40,6 +40,7 @@ export const UTILS = {
   fromUtf8: '@cosmjs/encoding',
   GeneratedType: '@cosmjs/proto-signing',
   getRpcClient: '__extern__',
+  createRpcClient: '__extern__',
   getRpcEndpointKey: '__extern__',
   HttpEndpoint: '@cosmjs/tendermint-rpc',
   isObject: '__helpers__',

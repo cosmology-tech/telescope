@@ -31,3 +31,12 @@ export const getRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
     _rpcClients[key] = rpc;
     return rpc;
 }
+
+export const createRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
+  const cometClient = await connectComet(rpcEndpoint);
+  //@ts-ignore
+  const client = new QueryClient(cometClient);
+  const rpc = createProtobufRpcClient(client);
+
+  return rpc;
+}
