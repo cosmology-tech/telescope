@@ -2,12 +2,13 @@ import * as dotty from 'dotty';
 import { createEmptyProtoRef, getNestedProto } from '@cosmology/proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcFactory, createScopedGrpcWebMsgFactory } from '@cosmology/ast';
+import { createScopedRpcFactory, createScopedGrpcWebMsgFactory, createRpcMsgExtension, importStmt } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
 import { TelescopeParseContext } from '../build';
+import { pascal } from 'case';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -73,6 +74,7 @@ const makeRPC = (
         addToBundle: boolean;
         methodNameQuery?: string;
         methodNameTx?: string;
+        isAll?: boolean;
     }
 ) => {
     const dir = rpc.dir;
@@ -103,6 +105,8 @@ const makeRPC = (
     );
 
     let rpcast;
+    let msgExt: any = [];
+    let txRpcImport: any = [];
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
         // TODO no working scoped clients for grpc-gateway right now
@@ -115,6 +119,14 @@ const makeRPC = (
                 methodName,
                 'MsgClientImpl' // make option later
             );
+
+            if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next') {
+              const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
+
+              txRpcImport = importStmt([txRpcName], './client')
+
+              msgExt = createRpcMsgExtension(ctx.proto, txRpcName);
+            }
             break;
         case "grpc-web":
             ctx.proto.addUtil('grpc');
@@ -143,8 +155,10 @@ const makeRPC = (
     );
 
     const prog = []
+        .concat(txRpcImport)
         .concat(importStmts)
-        .concat(rpcast);
+        .concat(rpcast)
+        .concat(msgExt);
 
     const filename = bundler.getFilename(localname);
     bundler.writeAst(prog, filename);
@@ -212,8 +226,8 @@ const makeAllRPCBundles = (
             filename,
             packages,
             addToBundle: true,
-            methodNameTx: 'createRPCMsgClient'
+            methodNameTx: 'createRPCMsgClient',
+            isAll: true
         }
     );
-
 };

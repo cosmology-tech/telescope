@@ -86,8 +86,9 @@ describe("Authz testing", () => {
   }, 200000);
 
   it("grant address2 Send Auth", async () => {
-    const msgClient1 = await cosmos.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+    const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
+      rpcEndpoint: getRpcEndpoint(),
+      signer: wallet1
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
@@ -143,8 +144,9 @@ describe("Authz testing", () => {
   }, 200000);
 
   it("grant address2 Generic Vote Auth", async () => {
-    const msgClient1 = await cosmos.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+    const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
+      rpcEndpoint: getRpcEndpoint(),
+      signer: wallet1
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
@@ -250,8 +252,9 @@ describe("Authz testing", () => {
   // }, 200000);
 
   it("revoke address2 vote auth", async () => {
-    const msgClient1 = await cosmos.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+    const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
+      rpcEndpoint: getRpcEndpoint(),
+      signer: wallet1
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
@@ -298,8 +301,9 @@ describe("Authz testing", () => {
   }, 200000);
 
   it("revoke address2 send auth", async () => {
-    const msgClient1 = await cosmos.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+    const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
+      rpcEndpoint: getRpcEndpoint(),
+      signer: wallet1
     });
 
     const queryClient = await cosmos.ClientFactory.createRPCQueryClient({

@@ -6,6 +6,24 @@ exports[`createRpcClientImpl 1`] = `
 };"
 `;
 
+exports[`createRpcMsgExtension 1`] = `
+"export const createRPCMsgExtensions = async ({
+  rpcEndpoint,
+  signer
+}: {
+  rpcEndpoint: string | HttpEndpoint;
+  signer: OfflineSigner;
+}) => {
+  const rpc = await getSigningCosmosTxRpc({
+    rpcEndpoint,
+    signer
+  });
+  return await createRPCMsgClient({
+    rpc
+  });
+};"
+`;
+
 exports[`createRpcQueryExtension 1`] = `
 "export const createRpcQueryExtension = (base: QueryClient) => {
   const rpc = createProtobufRpcClient(base);
