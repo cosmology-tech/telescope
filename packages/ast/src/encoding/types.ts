@@ -421,7 +421,7 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (isOptional) {
-        return t.identifier('undefined');
+        return t.nullLiteral();
     }
 
     if (field.parsedType?.type === 'Enum') {
