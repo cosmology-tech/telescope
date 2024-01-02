@@ -12,6 +12,7 @@ import { useChain } from "../../src";
 import "./setup.test";
 import { MsgSend } from "../../src/codegen1/cosmos/bank/v1beta1/tx";
 import { MsgTransfer } from "../../src/codegen1/ibc/applications/transfer/v1/tx";
+import { QueryBalanceRequest } from "../../src/codegen1/cosmos/bank/v1beta1/query";
 
 describe("Token transfers", () => {
   let wallet, denom, address;
@@ -44,18 +45,13 @@ describe("Token transfers", () => {
     );
     const address2 = (await wallet2.getAccounts())[0].address;
 
-    const signingClient = await getSigningOsmosisClient({
+    const queryClient = await osmosis.ClientFactory.createRPCQueryClient({
       rpcEndpoint: getRpcEndpoint(),
-      signer: wallet,
     });
 
-    const txRpc = await getSigningOsmosisTxRpc({
+    const msgClient = await osmosis.ClientFactory.createRPCMsgExtensions({
       rpcEndpoint: getRpcEndpoint(),
-      signer: wallet,
-    });
-
-    const msgClient = await osmosis.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+      signer: wallet
     });
 
     const fee = {
@@ -87,20 +83,19 @@ describe("Token transfers", () => {
 
     assertIsDeliverTxSuccess(txResult);
 
-    const balance = await signingClient.getBalance(address2, denom);
+    const { balance } = await queryClient.cosmos.bank.v1beta1.balance(QueryBalanceRequest.fromPartial({
+      address: address2,
+      denom
+    }));
 
-    expect(balance.amount).toEqual(token.amount);
-    expect(balance.denom).toEqual(denom);
+    expect(balance?.amount).toEqual(token.amount);
+    expect(balance?.denom).toEqual(denom);
   }, 200000);
 
   it("send ibc osmo tokens to address on cosmos chain", async () => {
-    const txRpc = await getSigningOsmosisTxRpc({
+    const msgClient = await ibc.ClientFactory.createRPCMsgExtensions({
       rpcEndpoint: getRpcEndpoint(),
-      signer: wallet,
-    });
-
-    const msgClient = await ibc.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+      signer: wallet
     });
 
     const {
