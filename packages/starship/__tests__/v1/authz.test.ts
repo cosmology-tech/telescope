@@ -25,8 +25,6 @@ describe("Authz testing", () => {
   let chainInfo, getCoin, getRpcEndpoint, creditFromFaucet;
 
   // Variables used accross testcases
-  let txRpc;
-  let txRpc2;
 
   beforeAll(async () => {
     ({ chainInfo, getCoin, getRpcEndpoint, creditFromFaucet } =
@@ -43,16 +41,6 @@ describe("Authz testing", () => {
       prefix: chainInfo.chain.bech32_prefix,
     });
     address2 = (await wallet2.getAccounts())[0].address;
-
-    txRpc = await getSigningCosmosTxRpc({
-      rpcEndpoint: getRpcEndpoint(),
-      signer: wallet1,
-    });
-
-    txRpc2 = await getSigningCosmosTxRpc({
-      rpcEndpoint: getRpcEndpoint(),
-      signer: wallet2,
-    });
 
     // Transfer osmosis and ibc tokens to address, send only osmo to address
     await creditFromFaucet(address1);

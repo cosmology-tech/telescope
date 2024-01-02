@@ -38,13 +38,9 @@ describe('Staking tokens testing', () => {
     });
     address1 = (await wallet1.getAccounts())[0].address;
 
-    const txRpc = await getSigningCosmosTxRpc({
+    msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
       rpcEndpoint: getRpcEndpoint(),
-      signer: wallet1,
-    });
-
-    msgClient1 = await cosmos.ClientFactory.createRPCMsgClient({
-      rpc: txRpc,
+      signer: wallet1
     });
 
     // Create custom cosmos interchain client
