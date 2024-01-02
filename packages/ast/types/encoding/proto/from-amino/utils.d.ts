@@ -48,7 +48,7 @@ export declare const arrayTypes: {
     sint32(): t.Identifier;
     fixed32(): t.Identifier;
     sfixed32(): t.Identifier;
-    enum(args: fromAminoMethod): t.CallExpression;
+    enum(): t.Identifier;
     long(args: fromAminoMethod): t.Expression;
     int64(args: fromAminoMethod): t.Expression;
     uint64(args: fromAminoMethod): t.Expression;

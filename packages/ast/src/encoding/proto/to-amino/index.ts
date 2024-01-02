@@ -72,7 +72,7 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
                 default:
                     switch (field.parsedType.type) {
                         case 'Enum':
-                            return [...m, toAminoJSON.array(args, arrayTypes.enum(args))];
+                            return [...m, toAminoJSON.array(args, arrayTypes.enum())];
                         case 'Type':
                             return [...m, toAminoJSON.array(args, arrayTypes.type(args))];
                     }

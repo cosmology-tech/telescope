@@ -162,16 +162,7 @@ export const fromAmino = {
   },
 
   enum(args: fromAminoMethod) {
-    const { origName } = getFieldNames(args.field);
-
-    const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
-
-    return setNotUndefinedAndNotNull(
-      args,
-      t.callExpression(t.identifier(fromAminoJSONFuncName), [
-        t.memberExpression(t.identifier("object"), t.identifier(origName)),
-      ])
-    );
+      return setNotUndefinedAndNotNull(args);
   },
 
   bytes(args: fromAminoMethod) {
@@ -535,11 +526,8 @@ export const arrayTypes = {
   sfixed32() {
     return arrayTypes.identity();
   },
-  enum(args: fromAminoMethod) {
-    const fromAminoJSONFuncName = args.context.getFromEnum(args.field);
-    return t.callExpression(t.identifier(fromAminoJSONFuncName), [
-      t.identifier("e"),
-    ]);
+  enum() {
+    return arrayTypes.identity();
   },
 
   // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];

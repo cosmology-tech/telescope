@@ -55,7 +55,7 @@ export declare const arrayTypes: {
     rawBytes(args: ToAminoJSONMethod): t.CallExpression;
     wasmByteCode(args: ToAminoJSONMethod): t.CallExpression;
     bytes(args: ToAminoJSONMethod): t.CallExpression;
-    enum(args: ToAminoJSONMethod): t.CallExpression;
+    enum(): t.Identifier;
     anyType(args: ToAminoJSONMethod): t.ConditionalExpression;
     protoType(args: ToAminoJSONMethod): t.ConditionalExpression;
     type(args: ToAminoJSONMethod): t.ConditionalExpression;

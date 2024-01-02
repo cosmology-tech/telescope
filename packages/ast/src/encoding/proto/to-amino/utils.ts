@@ -274,28 +274,7 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
       },
 
       enum(args: ToAminoJSONMethod) {
-        const { propName, origName } = getFieldNames(args.field);
-        const enumFuncName = args.context.getToEnum(args.field);
-        const expr = t.callExpression(
-            t.identifier(enumFuncName),
-            [
-              t.memberExpression(
-                t.identifier('message'),
-                t.identifier(propName)
-              )
-            ]
-        );
-
-        return t.expressionStatement(
-          t.assignmentExpression(
-              '=',
-              t.memberExpression(
-                  t.identifier('obj'),
-                  t.identifier(origName)
-              ),
-              expr
-          )
-        );
+          return toAminoJSON.scalar(args);
       },
 
       bytes(args: ToAminoJSONMethod) {
@@ -774,14 +753,8 @@ export const arrayTypes = {
         t.identifier("e"),
       ]);
     },
-    enum(args: ToAminoJSONMethod) {
-        const enumFuncName = args.context.getToEnum(args.field);
-        return t.callExpression(
-            t.identifier(enumFuncName),
-            [
-                t.identifier('e')
-            ]
-        );
+    enum() {
+        return arrayTypes.scalar()
     },
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
