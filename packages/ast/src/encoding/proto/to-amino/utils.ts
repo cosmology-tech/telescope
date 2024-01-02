@@ -173,13 +173,9 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                       t.identifier(origName)
                   ),
                   t.conditionalExpression(
-                      t.binaryExpression(
-                          "===",
-                          t.memberExpression(
-                              t.identifier('message'),
-                              t.identifier(propName)
-                          ),
-                          defaultValue
+                      t.memberExpression(
+                          t.identifier('message'),
+                          t.identifier(propName)
                       ),
                       t.callExpression(
                           t.memberExpression(
