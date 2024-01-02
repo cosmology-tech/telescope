@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@cosmology/types';
+import { ProtoField, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -405,7 +405,8 @@ export const getTSTypeForProto = (
 export const getDefaultTSTypeFromProtoType = (
     context: ProtoParseContext,
     field: ProtoField,
-    isOneOf: boolean
+    isOneOf: boolean,
+    useNullForOptionals: boolean = false
 ) => {
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
@@ -421,7 +422,7 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (isOptional) {
-        return t.nullLiteral();
+        return useNullForOptionals ? t.nullLiteral() : t.identifier('undefined');
     }
 
     if (field.parsedType?.type === 'Enum') {
