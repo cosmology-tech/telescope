@@ -1,6 +1,6 @@
 import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -208,12 +208,12 @@ export const ReplacePoolIncentivesProposal = {
   },
   toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },
@@ -341,12 +341,12 @@ export const UpdatePoolIncentivesProposal = {
   },
   toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },

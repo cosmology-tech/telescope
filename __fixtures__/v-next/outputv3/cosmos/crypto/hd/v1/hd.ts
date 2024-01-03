@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.hd.v1";
 /** BIP44Params is used as path field in ledger item in Record. */
 export interface BIP44Params {
@@ -170,11 +170,11 @@ export const BIP44Params = {
   },
   toAmino(message: BIP44Params, useInterfaces: boolean = true): BIP44ParamsAmino {
     const obj: any = {};
-    obj.purpose = omitDefault(message.purpose);
-    obj.coin_type = omitDefault(message.coinType);
-    obj.account = omitDefault(message.account);
-    obj.change = omitDefault(message.change);
-    obj.address_index = omitDefault(message.addressIndex);
+    obj.purpose = message.purpose === 0 ? undefined : message.purpose;
+    obj.coin_type = message.coinType === 0 ? undefined : message.coinType;
+    obj.account = message.account === 0 ? undefined : message.account;
+    obj.change = message.change === false ? undefined : message.change;
+    obj.address_index = message.addressIndex === 0 ? undefined : message.addressIndex;
     return obj;
   },
   fromProtoMsg(message: BIP44ParamsProtoMsg, useInterfaces: boolean = true): BIP44Params {

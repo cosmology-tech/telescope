@@ -598,8 +598,8 @@ export const LogEntry_LabelsEntry = {
   },
   toAmino(message: LogEntry_LabelsEntry, useInterfaces: boolean = true): LogEntry_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: LogEntry_LabelsEntryProtoMsg, useInterfaces: boolean = true): LogEntry_LabelsEntry {
@@ -927,7 +927,7 @@ export const LogEntry = {
       message.receiveTimestamp = fromTimestamp(Timestamp.fromAmino(object.receive_timestamp));
     }
     if (object.severity !== undefined && object.severity !== null) {
-      message.severity = logSeverityFromJSON(object.severity);
+      message.severity = object.severity;
     }
     if (object.insert_id !== undefined && object.insert_id !== null) {
       message.insertId = object.insert_id;
@@ -965,15 +965,15 @@ export const LogEntry = {
   },
   toAmino(message: LogEntry, useInterfaces: boolean = true): LogEntryAmino {
     const obj: any = {};
-    obj.log_name = message.logName;
+    obj.log_name = message.logName === "" ? undefined : message.logName;
     obj.resource = message.resource ? MonitoredResource.toAmino(message.resource, useInterfaces) : undefined;
     obj.proto_payload = message.protoPayload ? Any.toAmino(message.protoPayload, useInterfaces) : undefined;
-    obj.text_payload = message.textPayload;
+    obj.text_payload = message.textPayload === null ? undefined : message.textPayload;
     obj.json_payload = message.jsonPayload ? Struct.toAmino(message.jsonPayload, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.receive_timestamp = message.receiveTimestamp ? Timestamp.toAmino(toTimestamp(message.receiveTimestamp)) : undefined;
-    obj.severity = logSeverityToJSON(message.severity);
-    obj.insert_id = message.insertId;
+    obj.severity = message.severity === 0 ? undefined : message.severity;
+    obj.insert_id = message.insertId === "" ? undefined : message.insertId;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest, useInterfaces) : undefined;
     obj.labels = {};
     if (message.labels) {
@@ -982,9 +982,9 @@ export const LogEntry = {
       });
     }
     obj.operation = message.operation ? LogEntryOperation.toAmino(message.operation, useInterfaces) : undefined;
-    obj.trace = message.trace;
-    obj.span_id = message.spanId;
-    obj.trace_sampled = message.traceSampled;
+    obj.trace = message.trace === "" ? undefined : message.trace;
+    obj.span_id = message.spanId === "" ? undefined : message.spanId;
+    obj.trace_sampled = message.traceSampled === false ? undefined : message.traceSampled;
     obj.source_location = message.sourceLocation ? LogEntrySourceLocation.toAmino(message.sourceLocation, useInterfaces) : undefined;
     obj.split = message.split ? LogSplit.toAmino(message.split, useInterfaces) : undefined;
     return obj;
@@ -1111,10 +1111,10 @@ export const LogEntryOperation = {
   },
   toAmino(message: LogEntryOperation, useInterfaces: boolean = true): LogEntryOperationAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.producer = message.producer;
-    obj.first = message.first;
-    obj.last = message.last;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.producer = message.producer === "" ? undefined : message.producer;
+    obj.first = message.first === false ? undefined : message.first;
+    obj.last = message.last === false ? undefined : message.last;
     return obj;
   },
   fromProtoMsg(message: LogEntryOperationProtoMsg, useInterfaces: boolean = true): LogEntryOperation {
@@ -1226,9 +1226,9 @@ export const LogEntrySourceLocation = {
   },
   toAmino(message: LogEntrySourceLocation, useInterfaces: boolean = true): LogEntrySourceLocationAmino {
     const obj: any = {};
-    obj.file = message.file;
+    obj.file = message.file === "" ? undefined : message.file;
     obj.line = message.line ? message.line.toString() : undefined;
-    obj.function = message.function;
+    obj.function = message.function === "" ? undefined : message.function;
     return obj;
   },
   fromProtoMsg(message: LogEntrySourceLocationProtoMsg, useInterfaces: boolean = true): LogEntrySourceLocation {
@@ -1338,9 +1338,9 @@ export const LogSplit = {
   },
   toAmino(message: LogSplit, useInterfaces: boolean = true): LogSplitAmino {
     const obj: any = {};
-    obj.uid = message.uid;
-    obj.index = message.index;
-    obj.total_splits = message.totalSplits;
+    obj.uid = message.uid === "" ? undefined : message.uid;
+    obj.index = message.index === 0 ? undefined : message.index;
+    obj.total_splits = message.totalSplits === 0 ? undefined : message.totalSplits;
     return obj;
   },
   fromProtoMsg(message: LogSplitProtoMsg, useInterfaces: boolean = true): LogSplit {

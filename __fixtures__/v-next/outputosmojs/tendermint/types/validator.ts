@@ -1,6 +1,6 @@
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -154,10 +154,10 @@ export const ValidatorSet = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.proposer = message.proposer ? Validator.toAmino(message.proposer) : undefined;
-    obj.total_voting_power = omitDefault(message.totalVotingPower);
+    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorSetAminoMsg): ValidatorSet {
@@ -295,8 +295,8 @@ export const Validator = {
     const obj: any = {};
     obj.address = message.address ? base64FromBytes(message.address) : undefined;
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = omitDefault(message.votingPower);
-    obj.proposer_priority = omitDefault(message.proposerPriority);
+    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
+    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -401,7 +401,7 @@ export const SimpleValidator = {
   toAmino(message: SimpleValidator): SimpleValidatorAmino {
     const obj: any = {};
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.voting_power = omitDefault(message.votingPower);
+    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SimpleValidatorAminoMsg): SimpleValidator {

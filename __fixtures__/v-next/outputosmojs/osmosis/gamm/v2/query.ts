@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -143,9 +143,9 @@ export const QuerySpotPriceRequest = {
   },
   toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.base_asset_denom = omitDefault(message.baseAssetDenom);
-    obj.quote_asset_denom = omitDefault(message.quoteAssetDenom);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.base_asset_denom = message.baseAssetDenom === "" ? undefined : message.baseAssetDenom;
+    obj.quote_asset_denom = message.quoteAssetDenom === "" ? undefined : message.quoteAssetDenom;
     return obj;
   },
   fromAminoMsg(object: QuerySpotPriceRequestAminoMsg): QuerySpotPriceRequest {
@@ -239,7 +239,7 @@ export const QuerySpotPriceResponse = {
   },
   toAmino(message: QuerySpotPriceResponse): QuerySpotPriceResponseAmino {
     const obj: any = {};
-    obj.spot_price = omitDefault(message.spotPrice);
+    obj.spot_price = message.spotPrice === "" ? undefined : message.spotPrice;
     return obj;
   },
   fromAminoMsg(object: QuerySpotPriceResponseAminoMsg): QuerySpotPriceResponse {

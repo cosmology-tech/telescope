@@ -117,7 +117,7 @@ export const Node = {
     if (message.children) {
       obj.children = message.children.map(e => e ? Child.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.children = [];
+      obj.children = message.children;
     }
     return obj;
   },
@@ -215,7 +215,7 @@ export const Child = {
   toAmino(message: Child, useInterfaces: boolean = true): ChildAmino {
     const obj: any = {};
     obj.index = message.index ? base64FromBytes(message.index) : undefined;
-    obj.accumulation = message.accumulation;
+    obj.accumulation = message.accumulation === "" ? undefined : message.accumulation;
     return obj;
   },
   fromProtoMsg(message: ChildProtoMsg, useInterfaces: boolean = true): Child {

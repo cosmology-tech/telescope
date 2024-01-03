@@ -382,7 +382,7 @@ export const QueryDevFeeInfosResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -464,7 +464,7 @@ export const QueryDevFeeInfoRequest = {
   },
   toAmino(message: QueryDevFeeInfoRequest, useInterfaces: boolean = true): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDevFeeInfoRequestProtoMsg, useInterfaces: boolean = true): QueryDevFeeInfoRequest {
@@ -787,7 +787,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   toAmino(message: QueryDevFeeInfosPerDeployerRequest, useInterfaces: boolean = true): QueryDevFeeInfosPerDeployerRequestAmino {
     const obj: any = {};
-    obj.deployer_address = message.deployerAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -894,7 +894,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

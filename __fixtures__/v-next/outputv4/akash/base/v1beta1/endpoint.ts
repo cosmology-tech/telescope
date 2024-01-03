@@ -110,13 +110,13 @@ export const Endpoint = {
   fromAmino(object: EndpointAmino): Endpoint {
     const message = createBaseEndpoint();
     if (object.kind !== undefined && object.kind !== null) {
-      message.kind = endpoint_KindFromJSON(object.kind);
+      message.kind = object.kind;
     }
     return message;
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
-    obj.kind = endpoint_KindToJSON(message.kind);
+    obj.kind = message.kind === 0 ? undefined : message.kind;
     return obj;
   },
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {

@@ -1,5 +1,6 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionSDKType, MsgFundCommunityPool, MsgFundCommunityPoolSDKType } from "./tx";
 export interface MsgSetWithdrawAddressAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgModifyWithdrawAddress";
@@ -39,8 +40,8 @@ export const AminoConverter = {
       withdrawAddress
     }: MsgSetWithdrawAddress): MsgSetWithdrawAddressAminoType["value"] => {
       return {
-        delegator_address: delegatorAddress,
-        withdraw_address: withdrawAddress
+        delegator_address: omitDefault(delegatorAddress),
+        withdraw_address: omitDefault(withdrawAddress)
       };
     },
     fromAmino: ({
@@ -60,8 +61,8 @@ export const AminoConverter = {
       validatorAddress
     }: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardAminoType["value"] => {
       return {
-        delegator_address: delegatorAddress,
-        validator_address: validatorAddress
+        delegator_address: omitDefault(delegatorAddress),
+        validator_address: omitDefault(validatorAddress)
       };
     },
     fromAmino: ({
@@ -80,7 +81,7 @@ export const AminoConverter = {
       validatorAddress
     }: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionAminoType["value"] => {
       return {
-        validator_address: validatorAddress
+        validator_address: omitDefault(validatorAddress)
       };
     },
     fromAmino: ({
@@ -99,10 +100,10 @@ export const AminoConverter = {
     }: MsgFundCommunityPool): MsgFundCommunityPoolAminoType["value"] => {
       return {
         amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         })),
-        depositor
+        depositor: omitDefault(depositor)
       };
     },
     fromAmino: ({
@@ -110,7 +111,7 @@ export const AminoConverter = {
       depositor
     }: MsgFundCommunityPoolAminoType["value"]): MsgFundCommunityPool => {
       return {
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),

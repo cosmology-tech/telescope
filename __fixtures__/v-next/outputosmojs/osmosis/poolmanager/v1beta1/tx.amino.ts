@@ -64,11 +64,11 @@ export const AminoConverter = {
     }: MsgSwapExactAmountInAminoType["value"]): MsgSwapExactAmountIn => {
       return {
         sender,
-        routes: routes.map(el0 => ({
-          poolId: BigInt(el0.pool_id),
+        routes: routes.map?.(el0 => ({
+          poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenOutDenom: el0.token_out_denom
         })),
-        tokenIn: {
+        tokenIn: token_in == null ? token_in : {
           denom: token_in.denom,
           amount: token_in.amount
         },
@@ -105,12 +105,12 @@ export const AminoConverter = {
     }: MsgSwapExactAmountOutAminoType["value"]): MsgSwapExactAmountOut => {
       return {
         sender,
-        routes: routes.map(el0 => ({
-          poolId: BigInt(el0.pool_id),
+        routes: routes.map?.(el0 => ({
+          poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenInDenom: el0.token_in_denom
         })),
         tokenInMaxAmount: token_in_max_amount,
-        tokenOut: {
+        tokenOut: token_out == null ? token_out : {
           denom: token_out.denom,
           amount: token_out.amount
         }

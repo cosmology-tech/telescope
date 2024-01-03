@@ -288,17 +288,17 @@ export const BaseVestingAccount = {
     if (message.originalVesting) {
       obj.original_vesting = message.originalVesting.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.original_vesting = [];
+      obj.original_vesting = message.originalVesting;
     }
     if (message.delegatedFree) {
       obj.delegated_free = message.delegatedFree.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.delegated_free = [];
+      obj.delegated_free = message.delegatedFree;
     }
     if (message.delegatedVesting) {
       obj.delegated_vesting = message.delegatedVesting.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.delegated_vesting = [];
+      obj.delegated_vesting = message.delegatedVesting;
     }
     obj.end_time = message.endTime ? message.endTime.toString() : undefined;
     return obj;
@@ -633,7 +633,7 @@ export const Period = {
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -775,7 +775,7 @@ export const PeriodicVestingAccount = {
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = message.vestingPeriods;
     }
     return obj;
   },

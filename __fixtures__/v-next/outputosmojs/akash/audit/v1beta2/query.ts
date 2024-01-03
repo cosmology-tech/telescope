@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./audit";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
@@ -179,7 +179,7 @@ export const QueryProvidersResponse = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -291,8 +291,8 @@ export const QueryProviderRequest = {
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
-    obj.owner = omitDefault(message.owner);
+    obj.auditor = message.auditor === "" ? undefined : message.auditor;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
@@ -496,7 +496,7 @@ export const QueryProviderAttributesRequest = {
   },
   toAmino(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -607,8 +607,8 @@ export const QueryProviderAuditorRequest = {
   },
   toAmino(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
-    obj.owner = omitDefault(message.owner);
+    obj.auditor = message.auditor === "" ? undefined : message.auditor;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: QueryProviderAuditorRequestAminoMsg): QueryProviderAuditorRequest {
@@ -718,7 +718,7 @@ export const QueryAuditorAttributesRequest = {
   },
   toAmino(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAmino {
     const obj: any = {};
-    obj.auditor = omitDefault(message.auditor);
+    obj.auditor = message.auditor === "" ? undefined : message.auditor;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },

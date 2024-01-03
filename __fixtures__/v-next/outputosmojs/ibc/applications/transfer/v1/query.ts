@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -172,7 +172,7 @@ export const QueryDenomTraceRequest = {
   },
   toAmino(message: QueryDenomTraceRequest): QueryDenomTraceRequestAmino {
     const obj: any = {};
-    obj.hash = omitDefault(message.hash);
+    obj.hash = message.hash === "" ? undefined : message.hash;
     return obj;
   },
   fromAminoMsg(object: QueryDenomTraceRequestAminoMsg): QueryDenomTraceRequest {
@@ -479,7 +479,7 @@ export const QueryDenomTracesResponse = {
     if (message.denomTraces) {
       obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e) : undefined);
     } else {
-      obj.denom_traces = [];
+      obj.denom_traces = message.denomTraces;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

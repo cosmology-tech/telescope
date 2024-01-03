@@ -84,7 +84,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

@@ -615,31 +615,31 @@ export const Api = {
     }
     message.mixins = object.mixins?.map(e => Mixin.fromAmino(e)) || [];
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Api, useInterfaces: boolean = true): ApiAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? Method.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.methods = [];
+      obj.methods = message.methods;
     }
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.version = message.version;
+    obj.version = message.version === "" ? undefined : message.version;
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext, useInterfaces) : undefined;
     if (message.mixins) {
       obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.mixins = [];
+      obj.mixins = message.mixins;
     }
-    obj.syntax = syntaxToJSON(message.syntax);
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromProtoMsg(message: ApiProtoMsg, useInterfaces: boolean = true): Api {
@@ -809,23 +809,23 @@ export const Method = {
     }
     message.options = object.options?.map(e => Option.fromAmino(e)) || [];
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Method, useInterfaces: boolean = true): MethodAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.request_type_url = message.requestTypeUrl;
-    obj.request_streaming = message.requestStreaming;
-    obj.response_type_url = message.responseTypeUrl;
-    obj.response_streaming = message.responseStreaming;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.request_type_url = message.requestTypeUrl === "" ? undefined : message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming === false ? undefined : message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl === "" ? undefined : message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming === false ? undefined : message.responseStreaming;
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.syntax = syntaxToJSON(message.syntax);
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromProtoMsg(message: MethodProtoMsg, useInterfaces: boolean = true): Method {
@@ -920,8 +920,8 @@ export const Mixin = {
   },
   toAmino(message: Mixin, useInterfaces: boolean = true): MixinAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.root = message.root;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.root = message.root === "" ? undefined : message.root;
     return obj;
   },
   fromProtoMsg(message: MixinProtoMsg, useInterfaces: boolean = true): Mixin {

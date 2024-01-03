@@ -404,12 +404,12 @@ export const NodeInfo = {
   toAmino(message: NodeInfo, useInterfaces: boolean = true): NodeInfoAmino {
     const obj: any = {};
     obj.protocol_version = message.protocolVersion ? ProtocolVersion.toAmino(message.protocolVersion, useInterfaces) : undefined;
-    obj.node_id = message.nodeId;
-    obj.listen_addr = message.listenAddr;
-    obj.network = message.network;
-    obj.version = message.version;
+    obj.node_id = message.nodeId === "" ? undefined : message.nodeId;
+    obj.listen_addr = message.listenAddr === "" ? undefined : message.listenAddr;
+    obj.network = message.network === "" ? undefined : message.network;
+    obj.version = message.version === "" ? undefined : message.version;
     obj.channels = message.channels ? base64FromBytes(message.channels) : undefined;
-    obj.moniker = message.moniker;
+    obj.moniker = message.moniker === "" ? undefined : message.moniker;
     obj.other = message.other ? NodeInfoOther.toAmino(message.other, useInterfaces) : undefined;
     return obj;
   },
@@ -505,8 +505,8 @@ export const NodeInfoOther = {
   },
   toAmino(message: NodeInfoOther, useInterfaces: boolean = true): NodeInfoOtherAmino {
     const obj: any = {};
-    obj.tx_index = message.txIndex;
-    obj.rpc_address = message.rpcAddress;
+    obj.tx_index = message.txIndex === "" ? undefined : message.txIndex;
+    obj.rpc_address = message.rpcAddress === "" ? undefined : message.rpcAddress;
     return obj;
   },
   fromProtoMsg(message: NodeInfoOtherProtoMsg, useInterfaces: boolean = true): NodeInfoOther {
@@ -622,11 +622,11 @@ export const PeerInfo = {
   },
   toAmino(message: PeerInfo, useInterfaces: boolean = true): PeerInfoAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = message.id === "" ? undefined : message.id;
     if (message.addressInfo) {
       obj.address_info = message.addressInfo.map(e => e ? PeerAddressInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.address_info = [];
+      obj.address_info = message.addressInfo;
     }
     obj.last_connected = message.lastConnected ? Timestamp.toAmino(toTimestamp(message.lastConnected)) : undefined;
     return obj;
@@ -753,10 +753,10 @@ export const PeerAddressInfo = {
   },
   toAmino(message: PeerAddressInfo, useInterfaces: boolean = true): PeerAddressInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.last_dial_success = message.lastDialSuccess ? Timestamp.toAmino(toTimestamp(message.lastDialSuccess)) : undefined;
     obj.last_dial_failure = message.lastDialFailure ? Timestamp.toAmino(toTimestamp(message.lastDialFailure)) : undefined;
-    obj.dial_failures = message.dialFailures;
+    obj.dial_failures = message.dialFailures === 0 ? undefined : message.dialFailures;
     return obj;
   },
   fromProtoMsg(message: PeerAddressInfoProtoMsg, useInterfaces: boolean = true): PeerAddressInfo {

@@ -1,5 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType } from "./tx";
 export interface MsgSubmitEvidenceAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitEvidence";
@@ -19,9 +20,9 @@ export const AminoConverter = {
       evidence
     }: MsgSubmitEvidence): MsgSubmitEvidenceAminoType["value"] => {
       return {
-        submitter,
+        submitter: omitDefault(submitter),
         evidence: {
-          type_url: evidence.typeUrl,
+          type_url: omitDefault(evidence.typeUrl),
           value: evidence.value
         }
       };
@@ -32,7 +33,7 @@ export const AminoConverter = {
     }: MsgSubmitEvidenceAminoType["value"]): MsgSubmitEvidence => {
       return {
         submitter,
-        evidence: {
+        evidence: evidence == null ? evidence : {
           typeUrl: evidence.type_url,
           value: evidence.value
         }

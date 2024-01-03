@@ -110,7 +110,7 @@ export const Pairs = {
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? Pair.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pairs = [];
+      obj.pairs = message.pairs;
     }
     return obj;
   },

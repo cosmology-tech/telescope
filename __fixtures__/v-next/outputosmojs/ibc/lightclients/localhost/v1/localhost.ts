@@ -1,6 +1,6 @@
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -109,7 +109,7 @@ export const ClientState = {
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = omitDefault(message.chainId);
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.height = message.height ? Height.toAmino(message.height) : {};
     return obj;
   },

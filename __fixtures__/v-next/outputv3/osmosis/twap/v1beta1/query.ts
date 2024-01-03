@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -225,8 +225,8 @@ export const ArithmeticTwapRequest = {
   toAmino(message: ArithmeticTwapRequest, useInterfaces: boolean = true): ArithmeticTwapRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.base_asset = message.baseAsset;
-    obj.quote_asset = message.quoteAsset;
+    obj.base_asset = message.baseAsset === "" ? undefined : message.baseAsset;
+    obj.quote_asset = message.quoteAsset === "" ? undefined : message.quoteAsset;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     return obj;
@@ -309,7 +309,7 @@ export const ArithmeticTwapResponse = {
   },
   toAmino(message: ArithmeticTwapResponse, useInterfaces: boolean = true): ArithmeticTwapResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = message.arithmeticTwap;
+    obj.arithmetic_twap = padDecimal(message.arithmeticTwap) === "" ? undefined : padDecimal(message.arithmeticTwap);
     return obj;
   },
   fromProtoMsg(message: ArithmeticTwapResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapResponse {
@@ -438,8 +438,8 @@ export const ArithmeticTwapToNowRequest = {
   toAmino(message: ArithmeticTwapToNowRequest, useInterfaces: boolean = true): ArithmeticTwapToNowRequestAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.base_asset = message.baseAsset;
-    obj.quote_asset = message.quoteAsset;
+    obj.base_asset = message.baseAsset === "" ? undefined : message.baseAsset;
+    obj.quote_asset = message.quoteAsset === "" ? undefined : message.quoteAsset;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },
@@ -521,7 +521,7 @@ export const ArithmeticTwapToNowResponse = {
   },
   toAmino(message: ArithmeticTwapToNowResponse, useInterfaces: boolean = true): ArithmeticTwapToNowResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = message.arithmeticTwap;
+    obj.arithmetic_twap = padDecimal(message.arithmeticTwap) === "" ? undefined : padDecimal(message.arithmeticTwap);
     return obj;
   },
   fromProtoMsg(message: ArithmeticTwapToNowResponseProtoMsg, useInterfaces: boolean = true): ArithmeticTwapToNowResponse {

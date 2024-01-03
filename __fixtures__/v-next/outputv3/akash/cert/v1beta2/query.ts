@@ -141,8 +141,8 @@ export const CertificateResponse = {
   },
   toAmino(message: CertificateResponse, useInterfaces: boolean = true): CertificateResponseAmino {
     const obj: any = {};
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
-    obj.serial = message.serial;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : Certificate.fromPartial({});
+    obj.serial = message.serial ?? "";
     return obj;
   },
   fromProtoMsg(message: CertificateResponseProtoMsg, useInterfaces: boolean = true): CertificateResponse {
@@ -348,7 +348,7 @@ export const QueryCertificatesResponse = {
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.certificates = [];
+      obj.certificates = message.certificates;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

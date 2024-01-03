@@ -288,9 +288,9 @@ export const MsgSuperfluidDelegate = {
   },
   toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
-    obj.val_addr = message.valAddr;
+    obj.val_addr = message.valAddr === "" ? undefined : message.valAddr;
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidDelegateAminoMsg): MsgSuperfluidDelegate {
@@ -428,7 +428,7 @@ export const MsgSuperfluidUndelegate = {
   },
   toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
   },
@@ -567,7 +567,7 @@ export const MsgSuperfluidUnbondLock = {
   },
   toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
     return obj;
   },
@@ -713,13 +713,13 @@ export const MsgLockAndSuperfluidDelegate = {
   },
   toAmino(message: MsgLockAndSuperfluidDelegate): MsgLockAndSuperfluidDelegateAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
-    obj.val_addr = message.valAddr;
+    obj.val_addr = message.valAddr === "" ? undefined : message.valAddr;
     return obj;
   },
   fromAminoMsg(object: MsgLockAndSuperfluidDelegateAminoMsg): MsgLockAndSuperfluidDelegate {
@@ -872,7 +872,7 @@ export const MsgUnPoolWhitelistedPool = {
   },
   toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
@@ -952,7 +952,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
     if (message.exitedLockIds) {
       obj.exited_lock_ids = message.exitedLockIds.map(e => e.toString());
     } else {
-      obj.exited_lock_ids = [];
+      obj.exited_lock_ids = message.exitedLockIds;
     }
     return obj;
   },

@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, padDecimal, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -148,8 +148,8 @@ export const Minter = {
   },
   toAmino(message: Minter, useInterfaces: boolean = true): MinterAmino {
     const obj: any = {};
-    obj.inflation = padDecimal(message.inflation);
-    obj.annual_provisions = padDecimal(message.annualProvisions);
+    obj.inflation = padDecimal(message.inflation) === "" ? undefined : padDecimal(message.inflation);
+    obj.annual_provisions = padDecimal(message.annualProvisions) === "" ? undefined : padDecimal(message.annualProvisions);
     return obj;
   },
   fromProtoMsg(message: MinterProtoMsg, useInterfaces: boolean = true): Minter {
@@ -307,12 +307,12 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.mint_denom = omitDefault(message.mintDenom);
-    obj.inflation_rate_change = padDecimal(message.inflationRateChange);
-    obj.inflation_max = padDecimal(message.inflationMax);
-    obj.inflation_min = padDecimal(message.inflationMin);
-    obj.goal_bonded = padDecimal(message.goalBonded);
-    obj.blocks_per_year = omitDefault(message.blocksPerYear);
+    obj.mint_denom = message.mintDenom === "" ? undefined : message.mintDenom;
+    obj.inflation_rate_change = padDecimal(message.inflationRateChange) === "" ? undefined : padDecimal(message.inflationRateChange);
+    obj.inflation_max = padDecimal(message.inflationMax) === "" ? undefined : padDecimal(message.inflationMax);
+    obj.inflation_min = padDecimal(message.inflationMin) === "" ? undefined : padDecimal(message.inflationMin);
+    obj.goal_bonded = padDecimal(message.goalBonded) === "" ? undefined : padDecimal(message.goalBonded);
+    obj.blocks_per_year = message.blocksPerYear ? message.blocksPerYear.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

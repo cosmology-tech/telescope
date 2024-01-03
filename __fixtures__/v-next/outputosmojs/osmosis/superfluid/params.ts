@@ -89,7 +89,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.minimum_risk_factor = padDecimal(message.minimumRiskFactor);
+    obj.minimum_risk_factor = padDecimal(message.minimumRiskFactor) === "" ? undefined : padDecimal(message.minimumRiskFactor);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

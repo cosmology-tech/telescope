@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
@@ -890,7 +890,7 @@ export const RoutingRule = {
     if (message.routingParameters) {
       obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e) : undefined);
     } else {
-      obj.routing_parameters = [];
+      obj.routing_parameters = message.routingParameters;
     }
     return obj;
   },
@@ -995,8 +995,8 @@ export const RoutingParameter = {
   },
   toAmino(message: RoutingParameter): RoutingParameterAmino {
     const obj: any = {};
-    obj.field = omitDefault(message.field);
-    obj.path_template = omitDefault(message.pathTemplate);
+    obj.field = message.field === "" ? undefined : message.field;
+    obj.path_template = message.pathTemplate === "" ? undefined : message.pathTemplate;
     return obj;
   },
   fromAminoMsg(object: RoutingParameterAminoMsg): RoutingParameter {

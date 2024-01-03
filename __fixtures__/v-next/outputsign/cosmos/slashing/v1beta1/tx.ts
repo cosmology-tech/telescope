@@ -79,7 +79,7 @@ export const MsgUnjail = {
   },
   toAmino(message: MsgUnjail): MsgUnjailAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr ?? "";
     return obj;
   },
   fromAminoMsg(object: MsgUnjailAminoMsg): MsgUnjail {

@@ -60,7 +60,7 @@ export const AminoConverter = {
       id
     }: MsgRevokeCertificateAminoType["value"]): MsgRevokeCertificate => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
           serial: id.serial
         }

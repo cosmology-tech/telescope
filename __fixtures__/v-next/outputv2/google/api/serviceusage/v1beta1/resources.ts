@@ -1179,16 +1179,16 @@ export const Service = {
       message.config = ServiceConfig.fromAmino(object.config);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     return message;
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
@@ -1434,12 +1434,12 @@ export const ServiceConfig = {
   },
   toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.title = message.title === "" ? undefined : message.title;
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {
-      obj.apis = [];
+      obj.apis = message.apis;
     }
     obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
     obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
@@ -1448,12 +1448,12 @@ export const ServiceConfig = {
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     if (message.monitoredResources) {
       obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
     } else {
-      obj.monitored_resources = [];
+      obj.monitored_resources = message.monitoredResources;
     }
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
@@ -1547,7 +1547,7 @@ export const OperationMetadata = {
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
     return obj;
   },
@@ -1718,20 +1718,20 @@ export const ConsumerQuotaMetric = {
   },
   toAmino(message: ConsumerQuotaMetric): ConsumerQuotaMetricAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.display_name = message.displayName;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.metric = message.metric === "" ? undefined : message.metric;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
     if (message.consumerQuotaLimits) {
       obj.consumer_quota_limits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
     } else {
-      obj.consumer_quota_limits = [];
+      obj.consumer_quota_limits = message.consumerQuotaLimits;
     }
     if (message.descendantConsumerQuotaLimits) {
       obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toAmino(e) : undefined);
     } else {
-      obj.descendant_consumer_quota_limits = [];
+      obj.descendant_consumer_quota_limits = message.descendantConsumerQuotaLimits;
     }
-    obj.unit = message.unit;
+    obj.unit = message.unit === "" ? undefined : message.unit;
     return obj;
   },
   fromAminoMsg(object: ConsumerQuotaMetricAminoMsg): ConsumerQuotaMetric {
@@ -1895,15 +1895,15 @@ export const ConsumerQuotaLimit = {
   },
   toAmino(message: ConsumerQuotaLimit): ConsumerQuotaLimitAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.is_precise = message.isPrecise;
-    obj.allows_admin_overrides = message.allowsAdminOverrides;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.metric = message.metric === "" ? undefined : message.metric;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.is_precise = message.isPrecise === false ? undefined : message.isPrecise;
+    obj.allows_admin_overrides = message.allowsAdminOverrides === false ? undefined : message.allowsAdminOverrides;
     if (message.quotaBuckets) {
       obj.quota_buckets = message.quotaBuckets.map(e => e ? QuotaBucket.toAmino(e) : undefined);
     } else {
-      obj.quota_buckets = [];
+      obj.quota_buckets = message.quotaBuckets;
     }
     return obj;
   },
@@ -2001,8 +2001,8 @@ export const QuotaBucket_DimensionsEntry = {
   },
   toAmino(message: QuotaBucket_DimensionsEntry): QuotaBucket_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: QuotaBucket_DimensionsEntryAminoMsg): QuotaBucket_DimensionsEntry {
@@ -2309,8 +2309,8 @@ export const QuotaOverride_DimensionsEntry = {
   },
   toAmino(message: QuotaOverride_DimensionsEntry): QuotaOverride_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: QuotaOverride_DimensionsEntryAminoMsg): QuotaOverride_DimensionsEntry {
@@ -2502,7 +2502,7 @@ export const QuotaOverride = {
   },
   toAmino(message: QuotaOverride): QuotaOverrideAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.override_value = message.overrideValue ? message.overrideValue.toString() : undefined;
     obj.dimensions = {};
     if (message.dimensions) {
@@ -2510,9 +2510,9 @@ export const QuotaOverride = {
         obj.dimensions[k] = v;
       });
     }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.admin_override_ancestor = message.adminOverrideAncestor;
+    obj.metric = message.metric === "" ? undefined : message.metric;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.admin_override_ancestor = message.adminOverrideAncestor === "" ? undefined : message.adminOverrideAncestor;
     return obj;
   },
   fromAminoMsg(object: QuotaOverrideAminoMsg): QuotaOverride {
@@ -2604,7 +2604,7 @@ export const OverrideInlineSource = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -2702,8 +2702,8 @@ export const AdminQuotaPolicy_DimensionsEntry = {
   },
   toAmino(message: AdminQuotaPolicy_DimensionsEntry): AdminQuotaPolicy_DimensionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AdminQuotaPolicy_DimensionsEntryAminoMsg): AdminQuotaPolicy_DimensionsEntry {
@@ -2895,7 +2895,7 @@ export const AdminQuotaPolicy = {
   },
   toAmino(message: AdminQuotaPolicy): AdminQuotaPolicyAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.policy_value = message.policyValue ? message.policyValue.toString() : undefined;
     obj.dimensions = {};
     if (message.dimensions) {
@@ -2903,9 +2903,9 @@ export const AdminQuotaPolicy = {
         obj.dimensions[k] = v;
       });
     }
-    obj.metric = message.metric;
-    obj.unit = message.unit;
-    obj.container = message.container;
+    obj.metric = message.metric === "" ? undefined : message.metric;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.container = message.container === "" ? undefined : message.container;
     return obj;
   },
   fromAminoMsg(object: AdminQuotaPolicyAminoMsg): AdminQuotaPolicy {
@@ -3003,8 +3003,8 @@ export const ServiceIdentity = {
   },
   toAmino(message: ServiceIdentity): ServiceIdentityAmino {
     const obj: any = {};
-    obj.email = message.email;
-    obj.unique_id = message.uniqueId;
+    obj.email = message.email === "" ? undefined : message.email;
+    obj.unique_id = message.uniqueId === "" ? undefined : message.uniqueId;
     return obj;
   },
   fromAminoMsg(object: ServiceIdentityAminoMsg): ServiceIdentity {

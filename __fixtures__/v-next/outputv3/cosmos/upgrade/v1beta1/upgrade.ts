@@ -332,10 +332,10 @@ export const Plan = {
   },
   toAmino(message: Plan, useInterfaces: boolean = true): PlanAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.info = message.info;
+    obj.info = message.info === "" ? undefined : message.info;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState, useInterfaces) : undefined;
     return obj;
   },
@@ -449,8 +449,8 @@ export const SoftwareUpgradeProposal = {
   },
   toAmino(message: SoftwareUpgradeProposal, useInterfaces: boolean = true): SoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
   },
@@ -547,8 +547,8 @@ export const CancelSoftwareUpgradeProposal = {
   },
   toAmino(message: CancelSoftwareUpgradeProposal, useInterfaces: boolean = true): CancelSoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromProtoMsg(message: CancelSoftwareUpgradeProposalProtoMsg, useInterfaces: boolean = true): CancelSoftwareUpgradeProposal {
@@ -646,7 +646,7 @@ export const ModuleVersion = {
   },
   toAmino(message: ModuleVersion, useInterfaces: boolean = true): ModuleVersionAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.version = message.version ? message.version.toString() : undefined;
     return obj;
   },

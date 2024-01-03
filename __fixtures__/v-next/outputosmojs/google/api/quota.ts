@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault, isObject } from "../../helpers";
+import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service
@@ -401,12 +401,12 @@ export const Quota = {
     if (message.limits) {
       obj.limits = message.limits.map(e => e ? QuotaLimit.toAmino(e) : undefined);
     } else {
-      obj.limits = [];
+      obj.limits = message.limits;
     }
     if (message.metricRules) {
       obj.metric_rules = message.metricRules.map(e => e ? MetricRule.toAmino(e) : undefined);
     } else {
-      obj.metric_rules = [];
+      obj.metric_rules = message.metricRules;
     }
     return obj;
   },
@@ -510,8 +510,8 @@ export const MetricRule_MetricCostsEntry = {
   },
   toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
@@ -652,7 +652,7 @@ export const MetricRule = {
   },
   toAmino(message: MetricRule): MetricRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
+    obj.selector = message.selector === "" ? undefined : message.selector;
     obj.metric_costs = {};
     if (message.metricCosts) {
       Object.entries(message.metricCosts).forEach(([k, v]) => {
@@ -761,8 +761,8 @@ export const QuotaLimit_ValuesEntry = {
   },
   toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value ? message.value.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
@@ -1031,21 +1031,21 @@ export const QuotaLimit = {
   },
   toAmino(message: QuotaLimit): QuotaLimitAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.description = omitDefault(message.description);
-    obj.default_limit = omitDefault(message.defaultLimit);
-    obj.max_limit = omitDefault(message.maxLimit);
-    obj.free_tier = omitDefault(message.freeTier);
-    obj.duration = omitDefault(message.duration);
-    obj.metric = omitDefault(message.metric);
-    obj.unit = omitDefault(message.unit);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.default_limit = message.defaultLimit ? message.defaultLimit.toString() : undefined;
+    obj.max_limit = message.maxLimit ? message.maxLimit.toString() : undefined;
+    obj.free_tier = message.freeTier ? message.freeTier.toString() : undefined;
+    obj.duration = message.duration === "" ? undefined : message.duration;
+    obj.metric = message.metric === "" ? undefined : message.metric;
+    obj.unit = message.unit === "" ? undefined : message.unit;
     obj.values = {};
     if (message.values) {
       Object.entries(message.values).forEach(([k, v]) => {
         obj.values[k] = v.toString();
       });
     }
-    obj.display_name = omitDefault(message.displayName);
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
     return obj;
   },
   fromAminoMsg(object: QuotaLimitAminoMsg): QuotaLimit {

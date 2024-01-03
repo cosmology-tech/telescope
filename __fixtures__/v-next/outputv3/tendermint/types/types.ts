@@ -537,7 +537,7 @@ export const PartSetHeader = {
   },
   toAmino(message: PartSetHeader, useInterfaces: boolean = true): PartSetHeaderAmino {
     const obj: any = {};
-    obj.total = message.total;
+    obj.total = message.total === 0 ? undefined : message.total;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },
@@ -650,7 +650,7 @@ export const Part = {
   },
   toAmino(message: Part, useInterfaces: boolean = true): PartAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = message.index === 0 ? undefined : message.index;
     obj.bytes = message.bytes ? base64FromBytes(message.bytes) : undefined;
     obj.proof = message.proof ? Proof.toAmino(message.proof, useInterfaces) : undefined;
     return obj;
@@ -1032,7 +1032,7 @@ export const Header = {
   toAmino(message: Header, useInterfaces: boolean = true): HeaderAmino {
     const obj: any = {};
     obj.version = message.version ? Consensus.toAmino(message.version, useInterfaces) : undefined;
-    obj.chain_id = message.chainId;
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId, useInterfaces) : undefined;
@@ -1133,7 +1133,7 @@ export const Data = {
     if (message.txs) {
       obj.txs = message.txs.map(e => base64FromBytes(e));
     } else {
-      obj.txs = [];
+      obj.txs = message.txs;
     }
     return obj;
   },
@@ -1296,7 +1296,7 @@ export const Vote = {
   fromAmino(object: VoteAmino): Vote {
     const message = createBaseVote();
     if (object.type !== undefined && object.type !== null) {
-      message.type = signedMsgTypeFromJSON(object.type);
+      message.type = object.type;
     }
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height);
@@ -1323,13 +1323,13 @@ export const Vote = {
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
-    obj.type = signedMsgTypeToJSON(message.type);
+    obj.type = message.type === 0 ? undefined : message.type;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
+    obj.round = message.round === 0 ? undefined : message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.validator_address = message.validatorAddress ? base64FromBytes(message.validatorAddress) : undefined;
-    obj.validator_index = message.validatorIndex;
+    obj.validator_index = message.validatorIndex === 0 ? undefined : message.validatorIndex;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     return obj;
   },
@@ -1466,12 +1466,12 @@ export const Commit = {
   toAmino(message: Commit, useInterfaces: boolean = true): CommitAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
+    obj.round = message.round === 0 ? undefined : message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? CommitSig.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.signatures = [];
+      obj.signatures = message.signatures;
     }
     return obj;
   },
@@ -1582,7 +1582,7 @@ export const CommitSig = {
   fromAmino(object: CommitSigAmino): CommitSig {
     const message = createBaseCommitSig();
     if (object.block_id_flag !== undefined && object.block_id_flag !== null) {
-      message.blockIdFlag = blockIDFlagFromJSON(object.block_id_flag);
+      message.blockIdFlag = object.block_id_flag;
     }
     if (object.validator_address !== undefined && object.validator_address !== null) {
       message.validatorAddress = bytesFromBase64(object.validator_address);
@@ -1597,7 +1597,7 @@ export const CommitSig = {
   },
   toAmino(message: CommitSig, useInterfaces: boolean = true): CommitSigAmino {
     const obj: any = {};
-    obj.block_id_flag = blockIDFlagToJSON(message.blockIdFlag);
+    obj.block_id_flag = message.blockIdFlag === 0 ? undefined : message.blockIdFlag;
     obj.validator_address = message.validatorAddress ? base64FromBytes(message.validatorAddress) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
@@ -1750,7 +1750,7 @@ export const Proposal = {
   fromAmino(object: ProposalAmino): Proposal {
     const message = createBaseProposal();
     if (object.type !== undefined && object.type !== null) {
-      message.type = signedMsgTypeFromJSON(object.type);
+      message.type = object.type;
     }
     if (object.height !== undefined && object.height !== null) {
       message.height = BigInt(object.height);
@@ -1774,10 +1774,10 @@ export const Proposal = {
   },
   toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
     const obj: any = {};
-    obj.type = signedMsgTypeToJSON(message.type);
+    obj.type = message.type === 0 ? undefined : message.type;
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.round = message.round;
-    obj.pol_round = message.polRound;
+    obj.round = message.round === 0 ? undefined : message.round;
+    obj.pol_round = message.polRound === 0 ? undefined : message.polRound;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;

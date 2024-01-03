@@ -96,7 +96,7 @@ export const GenesisState = {
     if (message.authorization) {
       obj.authorization = message.authorization.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
     } else {
-      obj.authorization = [];
+      obj.authorization = message.authorization;
     }
     return obj;
   },

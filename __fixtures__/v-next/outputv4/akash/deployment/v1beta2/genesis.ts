@@ -125,11 +125,11 @@ export const GenesisDeployment = {
   },
   toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.fromPartial({});
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     return obj;
   },
@@ -251,9 +251,9 @@ export const GenesisState = {
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e) : undefined);
     } else {
-      obj.deployments = [];
+      obj.deployments = message.deployments;
     }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : Params.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

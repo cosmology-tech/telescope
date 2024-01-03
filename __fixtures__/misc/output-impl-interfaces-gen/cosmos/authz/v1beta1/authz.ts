@@ -312,7 +312,7 @@ export const GenericAuthorization = {
   },
   toAmino(message: GenericAuthorization): GenericAuthorizationAmino {
     const obj: any = {};
-    obj.msg = message.msg;
+    obj.msg = message.msg === "" ? undefined : message.msg;
     return obj;
   },
   fromAminoMsg(object: GenericAuthorizationAminoMsg): GenericAuthorization {
@@ -482,7 +482,7 @@ export const Grant = {
       message.expiration = fromTimestamp(Timestamp.fromAmino(object.expiration));
     }
     if (object.opt !== undefined && object.opt !== null) {
-      message.opt = voteOptionFromJSON(object.opt);
+      message.opt = object.opt;
     }
     if (object.single_msg !== undefined && object.single_msg !== null) {
       message.singleMsg = Any.fromAmino(object.single_msg);
@@ -494,12 +494,12 @@ export const Grant = {
     const obj: any = {};
     obj.authorization = message.authorization ? GlobalDecoderRegistry.toAminoMsg(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
-    obj.opt = voteOptionToJSON(message.opt);
+    obj.opt = message.opt === 0 ? undefined : message.opt;
     obj.single_msg = message.singleMsg ? Any.toAmino(message.singleMsg) : undefined;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.messages = [];
+      obj.messages = message.messages;
     }
     return obj;
   },
@@ -656,8 +656,8 @@ export const GrantAuthorization = {
   },
   toAmino(message: GrantAuthorization): GrantAuthorizationAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.authorization = message.authorization ? GlobalDecoderRegistry.toAminoMsg(message.authorization) : undefined;
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
@@ -774,7 +774,7 @@ export const GrantQueueItem = {
     if (message.msgTypeUrls) {
       obj.msg_type_urls = message.msgTypeUrls.map(e => e);
     } else {
-      obj.msg_type_urls = [];
+      obj.msg_type_urls = message.msgTypeUrls;
     }
     return obj;
   },
@@ -890,7 +890,7 @@ export const Grants = {
     if (message.authorization) {
       obj.authorization = message.authorization.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
-      obj.authorization = [];
+      obj.authorization = message.authorization;
     }
     return obj;
   },

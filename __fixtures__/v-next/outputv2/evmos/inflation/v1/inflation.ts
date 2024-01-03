@@ -230,9 +230,9 @@ export const InflationDistribution = {
   },
   toAmino(message: InflationDistribution): InflationDistributionAmino {
     const obj: any = {};
-    obj.staking_rewards = padDecimal(message.stakingRewards);
-    obj.usage_incentives = padDecimal(message.usageIncentives);
-    obj.community_pool = padDecimal(message.communityPool);
+    obj.staking_rewards = padDecimal(message.stakingRewards) === "" ? undefined : padDecimal(message.stakingRewards);
+    obj.usage_incentives = padDecimal(message.usageIncentives) === "" ? undefined : padDecimal(message.usageIncentives);
+    obj.community_pool = padDecimal(message.communityPool) === "" ? undefined : padDecimal(message.communityPool);
     return obj;
   },
   fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
@@ -375,11 +375,11 @@ export const ExponentialCalculation = {
   },
   toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
     const obj: any = {};
-    obj.a = padDecimal(message.a);
-    obj.r = padDecimal(message.r);
-    obj.c = padDecimal(message.c);
-    obj.bonding_target = padDecimal(message.bondingTarget);
-    obj.max_variance = padDecimal(message.maxVariance);
+    obj.a = padDecimal(message.a) === "" ? undefined : padDecimal(message.a);
+    obj.r = padDecimal(message.r) === "" ? undefined : padDecimal(message.r);
+    obj.c = padDecimal(message.c) === "" ? undefined : padDecimal(message.c);
+    obj.bonding_target = padDecimal(message.bondingTarget) === "" ? undefined : padDecimal(message.bondingTarget);
+    obj.max_variance = padDecimal(message.maxVariance) === "" ? undefined : padDecimal(message.maxVariance);
     return obj;
   },
   fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {

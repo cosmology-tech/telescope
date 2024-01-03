@@ -190,7 +190,7 @@ export const QueryEpochsInfoResponse = {
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
     } else {
-      obj.epochs = [];
+      obj.epochs = message.epochs;
     }
     return obj;
   },
@@ -285,7 +285,7 @@ export const QueryCurrentEpochRequest = {
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = message.identifier === "" ? undefined : message.identifier;
     return obj;
   },
   fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {

@@ -193,7 +193,7 @@ export const MsgSoftwareUpgrade = {
   },
   toAmino(message: MsgSoftwareUpgrade, useInterfaces: boolean = true): MsgSoftwareUpgradeAmino {
     const obj: any = {};
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     obj.plan = message.plan ? Plan.toAmino(message.plan, useInterfaces) : undefined;
     return obj;
   },
@@ -338,7 +338,7 @@ export const MsgCancelUpgrade = {
   },
   toAmino(message: MsgCancelUpgrade, useInterfaces: boolean = true): MsgCancelUpgradeAmino {
     const obj: any = {};
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     return obj;
   },
   fromProtoMsg(message: MsgCancelUpgradeProtoMsg, useInterfaces: boolean = true): MsgCancelUpgrade {

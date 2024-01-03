@@ -343,11 +343,11 @@ export const LeaseID = {
   },
   toAmino(message: LeaseID): LeaseIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
     return obj;
   },
   fromAminoMsg(object: LeaseIDAminoMsg): LeaseID {
@@ -447,7 +447,7 @@ export const Lease = {
       message.leaseId = LeaseID.fromAmino(object.lease_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = lease_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.price !== undefined && object.price !== null) {
       message.price = DecCoin.fromAmino(object.price);
@@ -462,9 +462,9 @@ export const Lease = {
   },
   toAmino(message: Lease): LeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
-    obj.state = lease_StateToJSON(message.state);
-    obj.price = message.price ? DecCoin.toAmino(message.price) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
     return obj;
@@ -586,12 +586,12 @@ export const LeaseFilters = {
   },
   toAmino(message: LeaseFilters): LeaseFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromAminoMsg(object: LeaseFiltersAminoMsg): LeaseFilters {
@@ -656,7 +656,7 @@ export const MsgCreateLease = {
   },
   toAmino(message: MsgCreateLease): MsgCreateLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : undefined;
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
@@ -771,7 +771,7 @@ export const MsgWithdrawLease = {
   },
   toAmino(message: MsgWithdrawLease): MsgWithdrawLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : undefined;
+    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : LeaseID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
@@ -886,7 +886,7 @@ export const MsgCloseLease = {
   },
   toAmino(message: MsgCloseLease): MsgCloseLeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {

@@ -1,7 +1,7 @@
 import { Params, ParamsSDKType } from "./params";
 import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisState {
@@ -137,7 +137,7 @@ export const GenesisState = {
     if (message.factoryDenoms) {
       obj.factory_denoms = message.factoryDenoms.map(e => e ? GenesisDenom.toAmino(e) : undefined);
     } else {
-      obj.factory_denoms = [];
+      obj.factory_denoms = message.factoryDenoms;
     }
     return obj;
   },
@@ -250,7 +250,7 @@ export const GenesisDenom = {
   },
   toAmino(message: GenesisDenom): GenesisDenomAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.authority_metadata = message.authorityMetadata ? DenomAuthorityMetadata.toAmino(message.authorityMetadata) : undefined;
     return obj;
   },

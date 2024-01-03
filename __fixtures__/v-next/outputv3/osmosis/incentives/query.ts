@@ -453,7 +453,7 @@ export const ModuleToDistributeCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -810,7 +810,7 @@ export const GaugesResponse = {
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.data = [];
+      obj.data = message.data;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1002,7 +1002,7 @@ export const ActiveGaugesResponse = {
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.data = [];
+      obj.data = message.data;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1102,7 +1102,7 @@ export const ActiveGaugesPerDenomRequest = {
   },
   toAmino(message: ActiveGaugesPerDenomRequest, useInterfaces: boolean = true): ActiveGaugesPerDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1210,7 +1210,7 @@ export const ActiveGaugesPerDenomResponse = {
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.data = [];
+      obj.data = message.data;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1402,7 +1402,7 @@ export const UpcomingGaugesResponse = {
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.data = [];
+      obj.data = message.data;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1502,7 +1502,7 @@ export const UpcomingGaugesPerDenomRequest = {
   },
   toAmino(message: UpcomingGaugesPerDenomRequest, useInterfaces: boolean = true): UpcomingGaugesPerDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1610,7 +1610,7 @@ export const UpcomingGaugesPerDenomResponse = {
     if (message.upcomingGauges) {
       obj.upcoming_gauges = message.upcomingGauges.map(e => e ? Gauge.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.upcoming_gauges = [];
+      obj.upcoming_gauges = message.upcomingGauges;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1740,11 +1740,11 @@ export const RewardsEstRequest = {
   },
   toAmino(message: RewardsEstRequest, useInterfaces: boolean = true): RewardsEstRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     if (message.lockIds) {
       obj.lock_ids = message.lockIds.map(e => e.toString());
     } else {
-      obj.lock_ids = [];
+      obj.lock_ids = message.lockIds;
     }
     obj.end_epoch = message.endEpoch ? message.endEpoch.toString() : undefined;
     return obj;
@@ -1836,7 +1836,7 @@ export const RewardsEstResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1990,7 +1990,7 @@ export const QueryLockableDurationsResponse = {
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.lockable_durations = [];
+      obj.lockable_durations = message.lockableDurations;
     }
     return obj;
   },

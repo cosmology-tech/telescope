@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -154,10 +154,10 @@ export const MsgSend = {
   },
   toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
     const obj: any = {};
-    obj.class_id = omitDefault(message.classId);
-    obj.id = omitDefault(message.id);
-    obj.sender = omitDefault(message.sender);
-    obj.receiver = omitDefault(message.receiver);
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = true): MsgSend {

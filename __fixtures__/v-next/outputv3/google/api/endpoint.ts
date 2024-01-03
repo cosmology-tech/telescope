@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -245,14 +245,14 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.aliases) {
       obj.aliases = message.aliases.map(e => e);
     } else {
-      obj.aliases = [];
+      obj.aliases = message.aliases;
     }
-    obj.target = omitDefault(message.target);
-    obj.allow_cors = omitDefault(message.allowCors);
+    obj.target = message.target === "" ? undefined : message.target;
+    obj.allow_cors = message.allowCors === false ? undefined : message.allowCors;
     return obj;
   },
   fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {

@@ -164,16 +164,16 @@ export const AminoConverter = {
       relayers
     }: MsgPayPacketFeeAminoType["value"]): MsgPayPacketFee => {
       return {
-        fee: {
-          recvFee: fee.recv_fee.map(el1 => ({
+        fee: fee == null ? fee : {
+          recvFee: fee.recv_fee.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           })),
-          ackFee: fee.ack_fee.map(el1 => ({
+          ackFee: fee.ack_fee.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           })),
-          timeoutFee: fee.timeout_fee.map(el1 => ({
+          timeoutFee: fee.timeout_fee.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))
@@ -215,17 +215,17 @@ export const AminoConverter = {
       packet_fee
     }: MsgPayPacketFeeAsyncAminoType["value"]): MsgPayPacketFeeAsync => {
       return {
-        packetFee: {
-          fee: {
-            recvFee: packet_fee.fee.recv_fee.map(el2 => ({
+        packetFee: packet_fee == null ? packet_fee : {
+          fee: packet_fee.fee == null ? packet_fee.fee : {
+            recvFee: packet_fee.fee.recv_fee.map?.(el2 => ({
               denom: el2.denom,
               amount: el2.amount
             })),
-            ackFee: packet_fee.fee.ack_fee.map(el2 => ({
+            ackFee: packet_fee.fee.ack_fee.map?.(el2 => ({
               denom: el2.denom,
               amount: el2.amount
             })),
-            timeoutFee: packet_fee.fee.timeout_fee.map(el2 => ({
+            timeoutFee: packet_fee.fee.timeout_fee.map?.(el2 => ({
               denom: el2.denom,
               amount: el2.amount
             }))

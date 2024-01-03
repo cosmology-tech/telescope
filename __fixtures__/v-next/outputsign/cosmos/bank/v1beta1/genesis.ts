@@ -159,17 +159,17 @@ export const GenesisState = {
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? Balance.toAmino(e) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     if (message.supply) {
       obj.supply = message.supply.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.supply = [];
+      obj.supply = message.supply;
     }
     if (message.denomMetadata) {
       obj.denom_metadata = message.denomMetadata.map(e => e ? Metadata.toAmino(e) : undefined);
     } else {
-      obj.denom_metadata = [];
+      obj.denom_metadata = message.denomMetadata;
     }
     return obj;
   },
@@ -248,11 +248,11 @@ export const Balance = {
   },
   toAmino(message: Balance): BalanceAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },

@@ -442,7 +442,7 @@ export const QueryConnectionRequest = {
   },
   toAmino(message: QueryConnectionRequest): QueryConnectionRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     return obj;
   },
   fromAminoMsg(object: QueryConnectionRequestAminoMsg): QueryConnectionRequest {
@@ -793,7 +793,7 @@ export const QueryConnectionsResponse = {
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
     } else {
-      obj.connections = [];
+      obj.connections = message.connections;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     obj.height = message.height ? Height.toAmino(message.height) : {};
@@ -886,7 +886,7 @@ export const QueryClientConnectionsRequest = {
   },
   toAmino(message: QueryClientConnectionsRequest): QueryClientConnectionsRequestAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     return obj;
   },
   fromAminoMsg(object: QueryClientConnectionsRequestAminoMsg): QueryClientConnectionsRequest {
@@ -1017,7 +1017,7 @@ export const QueryClientConnectionsResponse = {
     if (message.connectionPaths) {
       obj.connection_paths = message.connectionPaths.map(e => e);
     } else {
-      obj.connection_paths = [];
+      obj.connection_paths = message.connectionPaths;
     }
     obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
@@ -1110,7 +1110,7 @@ export const QueryConnectionClientStateRequest = {
   },
   toAmino(message: QueryConnectionClientStateRequest): QueryConnectionClientStateRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     return obj;
   },
   fromAminoMsg(object: QueryConnectionClientStateRequestAminoMsg): QueryConnectionClientStateRequest {
@@ -1360,7 +1360,7 @@ export const QueryConnectionConsensusStateRequest = {
   },
   toAmino(message: QueryConnectionConsensusStateRequest): QueryConnectionConsensusStateRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
     obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
     return obj;
@@ -1502,7 +1502,7 @@ export const QueryConnectionConsensusStateResponse = {
   toAmino(message: QueryConnectionConsensusStateResponse): QueryConnectionConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState) : undefined;
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight) : {};
     return obj;

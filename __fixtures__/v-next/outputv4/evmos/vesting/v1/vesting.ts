@@ -189,17 +189,17 @@ export const ClawbackVestingAccount = {
   toAmino(message: ClawbackVestingAccount): ClawbackVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.funder_address = message.funderAddress;
+    obj.funder_address = message.funderAddress === "" ? undefined : message.funderAddress;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.lockup_periods = [];
+      obj.lockup_periods = message.lockupPeriods;
     }
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = message.vestingPeriods;
     }
     return obj;
   },

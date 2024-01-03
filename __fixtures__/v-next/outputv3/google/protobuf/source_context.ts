@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -98,7 +98,7 @@ export const SourceContext = {
   },
   toAmino(message: SourceContext, useInterfaces: boolean = true): SourceContextAmino {
     const obj: any = {};
-    obj.file_name = omitDefault(message.fileName);
+    obj.file_name = message.fileName === "" ? undefined : message.fileName;
     return obj;
   },
   fromProtoMsg(message: SourceContextProtoMsg, useInterfaces: boolean = true): SourceContext {

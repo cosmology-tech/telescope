@@ -5,6 +5,8 @@
 */
 
 
+import { Dec } from "@keplr-wallet/unit";
+
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -46,7 +48,7 @@ export interface AminoHeight {
   readonly revision_height?: string;
 }
 
-export function omitDefault<T extends string | number | bigint>(
+export function omitDefault<T extends string | number | bigint | boolean>(
   input: T
 ): T | undefined {
   if (typeof input === 'string') {
@@ -55,6 +57,10 @@ export function omitDefault<T extends string | number | bigint>(
 
   if (typeof input === 'number') {
     return input === 0 ? undefined : input;
+  }
+
+  if (typeof input === "boolean"){
+      return input === false ? undefined : input;
   }
 
   if (typeof input === 'bigint') {
@@ -247,4 +253,8 @@ export function fromJsonTimestamp(o: any): Timestamp {
 
 function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
+}
+
+export function padDecimal(decStr: string): string{
+  return decStr ? new Dec(decStr).toString() : decStr;
 }

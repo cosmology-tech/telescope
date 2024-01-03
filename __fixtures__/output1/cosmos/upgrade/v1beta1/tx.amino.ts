@@ -1,6 +1,6 @@
 import { Plan, PlanSDKType } from "./upgrade";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long } from "../../../helpers";
+import { omitDefault, Long } from "../../../helpers";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType } from "./tx";
 export interface MsgSoftwareUpgradeAminoType extends AminoMsg {
@@ -33,14 +33,14 @@ export const AminoConverter = {
       plan
     }: MsgSoftwareUpgrade): MsgSoftwareUpgradeAminoType["value"] => {
       return {
-        authority,
+        authority: omitDefault(authority),
         plan: {
-          name: plan.name,
+          name: omitDefault(plan.name),
           time: plan.time,
-          height: plan.height.toString(),
-          info: plan.info,
+          height: omitDefault(plan.height)?.toString?.(),
+          info: omitDefault(plan.info),
           upgraded_client_state: {
-            type_url: plan.upgradedClientState.typeUrl,
+            type_url: omitDefault(plan.upgradedClientState.typeUrl),
             value: plan.upgradedClientState.value
           }
         }
@@ -52,12 +52,12 @@ export const AminoConverter = {
     }: MsgSoftwareUpgradeAminoType["value"]): MsgSoftwareUpgrade => {
       return {
         authority,
-        plan: {
+        plan: plan == null ? plan : {
           name: plan.name,
           time: plan.time,
-          height: Long.fromString(plan.height),
+          height: plan.height == null ? plan.height : Long.fromString(plan.height),
           info: plan.info,
-          upgradedClientState: {
+          upgradedClientState: plan.upgraded_client_state == null ? plan.upgraded_client_state : {
             typeUrl: plan.upgraded_client_state.type_url,
             value: plan.upgraded_client_state.value
           }
@@ -71,7 +71,7 @@ export const AminoConverter = {
       authority
     }: MsgCancelUpgrade): MsgCancelUpgradeAminoType["value"] => {
       return {
-        authority
+        authority: omitDefault(authority)
       };
     },
     fromAmino: ({

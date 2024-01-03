@@ -186,7 +186,7 @@ export const CPU = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -290,11 +290,11 @@ export const Memory = {
   },
   toAmino(message: Memory, useInterfaces: boolean = true): MemoryAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : ResourceValue.fromPartial({});
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -398,11 +398,11 @@ export const Storage = {
   },
   toAmino(message: Storage, useInterfaces: boolean = true): StorageAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : ResourceValue.fromPartial({});
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -546,7 +546,7 @@ export const ResourceUnits = {
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     return obj;
   },

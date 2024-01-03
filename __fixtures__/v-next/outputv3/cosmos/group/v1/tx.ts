@@ -776,13 +776,13 @@ export const MsgCreateGroup = {
   },
   toAmino(message: MsgCreateGroup, useInterfaces: boolean = true): MsgCreateGroupAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     if (message.members) {
       obj.members = message.members.map(e => e ? Member.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.members = [];
+      obj.members = message.members;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgCreateGroupProtoMsg, useInterfaces: boolean = true): MsgCreateGroup {
@@ -984,12 +984,12 @@ export const MsgUpdateGroupMembers = {
   },
   toAmino(message: MsgUpdateGroupMembers, useInterfaces: boolean = true): MsgUpdateGroupMembersAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     if (message.memberUpdates) {
       obj.member_updates = message.memberUpdates.map(e => e ? Member.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.member_updates = [];
+      obj.member_updates = message.memberUpdates;
     }
     return obj;
   },
@@ -1166,9 +1166,9 @@ export const MsgUpdateGroupAdmin = {
   },
   toAmino(message: MsgUpdateGroupAdmin, useInterfaces: boolean = true): MsgUpdateGroupAdminAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.new_admin = message.newAdmin;
+    obj.new_admin = message.newAdmin === "" ? undefined : message.newAdmin;
     return obj;
   },
   fromProtoMsg(message: MsgUpdateGroupAdminProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupAdmin {
@@ -1344,9 +1344,9 @@ export const MsgUpdateGroupMetadata = {
   },
   toAmino(message: MsgUpdateGroupMetadata, useInterfaces: boolean = true): MsgUpdateGroupMetadataAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgUpdateGroupMetadataProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupMetadata {
@@ -1539,9 +1539,9 @@ export const MsgCreateGroupPolicy = {
   },
   toAmino(message: MsgCreateGroupPolicy, useInterfaces: boolean = true): MsgCreateGroupPolicyAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -1623,7 +1623,7 @@ export const MsgCreateGroupPolicyResponse = {
   },
   toAmino(message: MsgCreateGroupPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupPolicyResponseAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: MsgCreateGroupPolicyResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGroupPolicyResponse {
@@ -1734,9 +1734,9 @@ export const MsgUpdateGroupPolicyAdmin = {
   },
   toAmino(message: MsgUpdateGroupPolicyAdmin, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdminAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.address = message.address;
-    obj.new_admin = message.newAdmin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.new_admin = message.newAdmin === "" ? undefined : message.newAdmin;
     return obj;
   },
   fromProtoMsg(message: MsgUpdateGroupPolicyAdminProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyAdmin {
@@ -1900,15 +1900,15 @@ export const MsgCreateGroupWithPolicy = {
   },
   toAmino(message: MsgCreateGroupWithPolicy, useInterfaces: boolean = true): MsgCreateGroupWithPolicyAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     if (message.members) {
       obj.members = message.members.map(e => e ? Member.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.members = [];
+      obj.members = message.members;
     }
-    obj.group_metadata = message.groupMetadata;
-    obj.group_policy_metadata = message.groupPolicyMetadata;
-    obj.group_policy_as_admin = message.groupPolicyAsAdmin;
+    obj.group_metadata = message.groupMetadata === "" ? undefined : message.groupMetadata;
+    obj.group_policy_metadata = message.groupPolicyMetadata === "" ? undefined : message.groupPolicyMetadata;
+    obj.group_policy_as_admin = message.groupPolicyAsAdmin === false ? undefined : message.groupPolicyAsAdmin;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -2008,7 +2008,7 @@ export const MsgCreateGroupWithPolicyResponse = {
   toAmino(message: MsgCreateGroupWithPolicyResponse, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponseAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.group_policy_address = message.groupPolicyAddress;
+    obj.group_policy_address = message.groupPolicyAddress === "" ? undefined : message.groupPolicyAddress;
     return obj;
   },
   fromProtoMsg(message: MsgCreateGroupWithPolicyResponseProtoMsg, useInterfaces: boolean = true): MsgCreateGroupWithPolicyResponse {
@@ -2184,8 +2184,8 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
   },
   toAmino(message: MsgUpdateGroupPolicyDecisionPolicy, useInterfaces: boolean = true): MsgUpdateGroupPolicyDecisionPolicyAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.address = message.address;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -2360,9 +2360,9 @@ export const MsgUpdateGroupPolicyMetadata = {
   },
   toAmino(message: MsgUpdateGroupPolicyMetadata, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadataAmino {
     const obj: any = {};
-    obj.admin = message.admin;
-    obj.address = message.address;
-    obj.metadata = message.metadata;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgUpdateGroupPolicyMetadataProtoMsg, useInterfaces: boolean = true): MsgUpdateGroupPolicyMetadata {
@@ -2572,25 +2572,25 @@ export const MsgSubmitProposal = {
     }
     message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
     if (object.exec !== undefined && object.exec !== null) {
-      message.exec = execFromJSON(object.exec);
+      message.exec = object.exec;
     }
     return message;
   },
   toAmino(message: MsgSubmitProposal, useInterfaces: boolean = true): MsgSubmitProposalAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.proposers) {
       obj.proposers = message.proposers.map(e => e);
     } else {
-      obj.proposers = [];
+      obj.proposers = message.proposers;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.messages = [];
+      obj.messages = message.messages;
     }
-    obj.exec = execToJSON(message.exec);
+    obj.exec = message.exec === 0 ? undefined : message.exec;
     return obj;
   },
   fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = true): MsgSubmitProposal {
@@ -2772,7 +2772,7 @@ export const MsgWithdrawProposal = {
   toAmino(message: MsgWithdrawProposal, useInterfaces: boolean = true): MsgWithdrawProposalAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: MsgWithdrawProposalProtoMsg, useInterfaces: boolean = true): MsgWithdrawProposal {
@@ -2966,23 +2966,23 @@ export const MsgVote = {
       message.voter = object.voter;
     }
     if (object.option !== undefined && object.option !== null) {
-      message.option = voteOptionFromJSON(object.option);
+      message.option = object.option;
     }
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = object.metadata;
     }
     if (object.exec !== undefined && object.exec !== null) {
-      message.exec = execFromJSON(object.exec);
+      message.exec = object.exec;
     }
     return message;
   },
   toAmino(message: MsgVote, useInterfaces: boolean = true): MsgVoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = voteOptionToJSON(message.option);
-    obj.metadata = message.metadata;
-    obj.exec = execToJSON(message.exec);
+    obj.voter = message.voter === "" ? undefined : message.voter;
+    obj.option = message.option === 0 ? undefined : message.option;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
+    obj.exec = message.exec === 0 ? undefined : message.exec;
     return obj;
   },
   fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = true): MsgVote {
@@ -3144,7 +3144,7 @@ export const MsgExec = {
   toAmino(message: MsgExec, useInterfaces: boolean = true): MsgExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromProtoMsg(message: MsgExecProtoMsg, useInterfaces: boolean = true): MsgExec {
@@ -3305,7 +3305,7 @@ export const MsgLeaveGroup = {
   },
   toAmino(message: MsgLeaveGroup, useInterfaces: boolean = true): MsgLeaveGroupAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
     return obj;
   },
@@ -3397,7 +3397,7 @@ export const DecisionPolicy_InterfaceDecoder = (input: BinaryReader | Uint8Array
       return data;
   }
 };
-export const DecisionPolicy_FromAmino = (content: AnyAmino) => {
+export const DecisionPolicy_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/ThresholdDecisionPolicy":
       return Any.fromPartial({

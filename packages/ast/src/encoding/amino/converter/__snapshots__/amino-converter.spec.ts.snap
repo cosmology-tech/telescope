@@ -46,14 +46,14 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       value
     }: MsgCreateValidatorAminoType["value"]): MsgCreateValidator => {
       return {
-        description: {
+        description: description == null ? description : {
           moniker: description.moniker,
           identity: description.identity,
           website: description.website,
           securityContact: description.security_contact,
           details: description.details
         },
-        commission: {
+        commission: commission == null ? commission : {
           rate: commission.rate,
           maxRate: commission.max_rate,
           maxChangeRate: commission.max_change_rate
@@ -62,7 +62,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
         pubkey: encodePubkey(pubkey),
-        value: {
+        value: value == null ? value : {
           denom: value.denom,
           amount: value.amount
         }
@@ -97,7 +97,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       min_self_delegation
     }: MsgEditValidatorAminoType["value"]): MsgEditValidator => {
       return {
-        description: {
+        description: description == null ? description : {
           moniker: description.moniker,
           identity: description.identity,
           website: description.website,
@@ -134,7 +134,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -169,7 +169,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
         delegatorAddress: delegator_address,
         validatorSrcAddress: validator_src_address,
         validatorDstAddress: validator_dst_address,
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -200,7 +200,7 @@ exports[`cosmos/staking/v1beta1/tx AminoConverter 1`] = `
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -237,7 +237,7 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
         contractAddress: contract_address,
         deployerAddress: deployer_address,
         withdrawAddress: withdraw_address,
-        nonces: nonces.map(el0 => BigInt(el0))
+        nonces: nonces.map?.(el0 => BigInt(el0))
       };
     }
   },
@@ -318,9 +318,9 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinPoolAminoType["value"]): MsgJoinPool => {
       return {
         sender,
-        poolId: BigInt(pool_id),
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
         shareOutAmount: share_out_amount,
-        tokenInMaxs: token_in_maxs.map(el0 => ({
+        tokenInMaxs: token_in_maxs.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -353,9 +353,9 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitPoolAminoType["value"]): MsgExitPool => {
       return {
         sender,
-        poolId: BigInt(pool_id),
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
         shareInAmount: share_in_amount,
-        tokenOutMins: token_out_mins.map(el0 => ({
+        tokenOutMins: token_out_mins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -391,11 +391,11 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgSwapExactAmountInAminoType["value"]): MsgSwapExactAmountIn => {
       return {
         sender,
-        routes: routes.map(el0 => ({
-          poolId: BigInt(el0.pool_id),
+        routes: routes.map?.(el0 => ({
+          poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenOutDenom: el0.token_out_denom
         })),
-        tokenIn: {
+        tokenIn: token_in == null ? token_in : {
           denom: token_in.denom,
           amount: token_in.amount
         },
@@ -432,12 +432,12 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgSwapExactAmountOutAminoType["value"]): MsgSwapExactAmountOut => {
       return {
         sender,
-        routes: routes.map(el0 => ({
-          poolId: BigInt(el0.pool_id),
+        routes: routes.map?.(el0 => ({
+          poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenInDenom: el0.token_in_denom
         })),
         tokenInMaxAmount: token_in_max_amount,
-        tokenOut: {
+        tokenOut: token_out == null ? token_out : {
           denom: token_out.denom,
           amount: token_out.amount
         }
@@ -470,8 +470,8 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinSwapExternAmountInAminoType["value"]): MsgJoinSwapExternAmountIn => {
       return {
         sender,
-        poolId: BigInt(pool_id),
-        tokenIn: {
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
+        tokenIn: token_in == null ? token_in : {
           denom: token_in.denom,
           amount: token_in.amount
         },
@@ -505,7 +505,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinSwapShareAmountOutAminoType["value"]): MsgJoinSwapShareAmountOut => {
       return {
         sender,
-        poolId: BigInt(pool_id),
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
         tokenInDenom: token_in_denom,
         shareOutAmount: share_out_amount,
         tokenInMaxAmount: token_in_max_amount
@@ -538,7 +538,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitSwapShareAmountInAminoType["value"]): MsgExitSwapShareAmountIn => {
       return {
         sender,
-        poolId: BigInt(pool_id),
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
         tokenOutDenom: token_out_denom,
         shareInAmount: share_in_amount,
         tokenOutMinAmount: token_out_min_amount
@@ -571,8 +571,8 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitSwapExternAmountOutAminoType["value"]): MsgExitSwapExternAmountOut => {
       return {
         sender,
-        poolId: BigInt(pool_id),
-        tokenOut: {
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
+        tokenOut: token_out == null ? token_out : {
           denom: token_out.denom,
           amount: token_out.amount
         },

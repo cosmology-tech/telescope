@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
@@ -82,7 +82,7 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.contract_address = omitDefault(message.contractAddress);
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

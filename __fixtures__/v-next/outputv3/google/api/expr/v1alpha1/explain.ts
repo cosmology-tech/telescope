@@ -1,6 +1,6 @@
 import { Value, ValueAmino, ValueSDKType } from "./value";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -176,12 +176,12 @@ export const Explain = {
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.values = [];
+      obj.values = message.values;
     }
     if (message.exprSteps) {
       obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.expr_steps = [];
+      obj.expr_steps = message.exprSteps;
     }
     return obj;
   },
@@ -279,8 +279,8 @@ export const Explain_ExprStep = {
   },
   toAmino(message: Explain_ExprStep, useInterfaces: boolean = true): Explain_ExprStepAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.value_index = omitDefault(message.valueIndex);
+    obj.id = message.id ? message.id.toString() : undefined;
+    obj.value_index = message.valueIndex === 0 ? undefined : message.valueIndex;
     return obj;
   },
   fromProtoMsg(message: Explain_ExprStepProtoMsg, useInterfaces: boolean = true): Explain_ExprStep {

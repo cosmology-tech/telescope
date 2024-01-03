@@ -146,7 +146,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = true): MsgCloseGroup {
@@ -290,7 +290,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = true): MsgPauseGroup {
@@ -434,7 +434,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = true): MsgStartGroup {

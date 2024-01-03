@@ -102,12 +102,12 @@ exports[`osmosis/lockup/tx duration 2`] = `
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -177,11 +177,11 @@ exports[`osmosis/lockup/tx duration 4`] = `
     }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
-        duration: {
+        duration: duration == null ? duration : {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map(el0 => ({
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -293,12 +293,12 @@ exports[`osmosis/lockup/tx string 2`] = `
   },
   toAmino(message: MsgLockTokens): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -365,11 +365,11 @@ exports[`osmosis/lockup/tx string 4`] = `
     }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
-        duration: {
+        duration: duration == null ? duration : {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map(el0 => ({
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

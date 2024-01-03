@@ -291,7 +291,7 @@ export const QueryDeploymentsResponse = {
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toAmino(e) : undefined);
     } else {
-      obj.deployments = [];
+      obj.deployments = message.deployments;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -519,11 +519,11 @@ export const QueryDeploymentResponse = {
   },
   toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : undefined;
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.fromPartial({});
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     obj.escrow_account = message.escrowAccount ? Account.toAmino(message.escrowAccount) : undefined;
     return obj;

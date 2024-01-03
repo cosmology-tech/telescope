@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { isSet, DeepPartial, Exact, padDecimal } from "../../../helpers";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -128,9 +128,9 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
+    obj.inflation_decay_factor = padDecimal(message.inflationDecayFactor) ?? "";
+    obj.initial_inflation = padDecimal(message.initialInflation) ?? "";
+    obj.variance = padDecimal(message.variance) ?? "";
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

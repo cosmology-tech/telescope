@@ -1,5 +1,6 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../../helpers";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType } from "./tx";
 export interface MsgCreateClientAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
@@ -64,14 +65,14 @@ export const AminoConverter = {
     }: MsgCreateClient): MsgCreateClientAminoType["value"] => {
       return {
         client_state: {
-          type_url: clientState.typeUrl,
+          type_url: omitDefault(clientState.typeUrl),
           value: clientState.value
         },
         consensus_state: {
-          type_url: consensusState.typeUrl,
+          type_url: omitDefault(consensusState.typeUrl),
           value: consensusState.value
         },
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -80,11 +81,11 @@ export const AminoConverter = {
       signer
     }: MsgCreateClientAminoType["value"]): MsgCreateClient => {
       return {
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        consensusState: {
+        consensusState: consensus_state == null ? consensus_state : {
           typeUrl: consensus_state.type_url,
           value: consensus_state.value
         },
@@ -100,12 +101,12 @@ export const AminoConverter = {
       signer
     }: MsgUpdateClient): MsgUpdateClientAminoType["value"] => {
       return {
-        client_id: clientId,
+        client_id: omitDefault(clientId),
         header: {
-          type_url: header.typeUrl,
+          type_url: omitDefault(header.typeUrl),
           value: header.value
         },
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -115,7 +116,7 @@ export const AminoConverter = {
     }: MsgUpdateClientAminoType["value"]): MsgUpdateClient => {
       return {
         clientId: client_id,
-        header: {
+        header: header == null ? header : {
           typeUrl: header.type_url,
           value: header.value
         },
@@ -134,18 +135,18 @@ export const AminoConverter = {
       signer
     }: MsgUpgradeClient): MsgUpgradeClientAminoType["value"] => {
       return {
-        client_id: clientId,
+        client_id: omitDefault(clientId),
         client_state: {
-          type_url: clientState.typeUrl,
+          type_url: omitDefault(clientState.typeUrl),
           value: clientState.value
         },
         consensus_state: {
-          type_url: consensusState.typeUrl,
+          type_url: omitDefault(consensusState.typeUrl),
           value: consensusState.value
         },
         proof_upgrade_client: proofUpgradeClient,
         proof_upgrade_consensus_state: proofUpgradeConsensusState,
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -158,11 +159,11 @@ export const AminoConverter = {
     }: MsgUpgradeClientAminoType["value"]): MsgUpgradeClient => {
       return {
         clientId: client_id,
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        consensusState: {
+        consensusState: consensus_state == null ? consensus_state : {
           typeUrl: consensus_state.type_url,
           value: consensus_state.value
         },
@@ -180,12 +181,12 @@ export const AminoConverter = {
       signer
     }: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoType["value"] => {
       return {
-        client_id: clientId,
+        client_id: omitDefault(clientId),
         misbehaviour: {
-          type_url: misbehaviour.typeUrl,
+          type_url: omitDefault(misbehaviour.typeUrl),
           value: misbehaviour.value
         },
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -195,7 +196,7 @@ export const AminoConverter = {
     }: MsgSubmitMisbehaviourAminoType["value"]): MsgSubmitMisbehaviour => {
       return {
         clientId: client_id,
-        misbehaviour: {
+        misbehaviour: misbehaviour == null ? misbehaviour : {
           typeUrl: misbehaviour.type_url,
           value: misbehaviour.value
         },

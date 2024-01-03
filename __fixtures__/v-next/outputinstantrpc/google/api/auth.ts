@@ -442,12 +442,12 @@ export const Authentication = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     return obj;
   },
@@ -592,13 +592,13 @@ export const AuthenticationRule = {
   },
   toAmino(message: AuthenticationRule): AuthenticationRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = message.selector === "" ? undefined : message.selector;
     obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth) : undefined;
-    obj.allow_without_credential = message.allowWithoutCredential;
+    obj.allow_without_credential = message.allowWithoutCredential === false ? undefined : message.allowWithoutCredential;
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e) : undefined);
     } else {
-      obj.requirements = [];
+      obj.requirements = message.requirements;
     }
     return obj;
   },
@@ -719,9 +719,9 @@ export const JwtLocation = {
   },
   toAmino(message: JwtLocation): JwtLocationAmino {
     const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
+    obj.header = message.header === null ? undefined : message.header;
+    obj.query = message.query === null ? undefined : message.query;
+    obj.value_prefix = message.valuePrefix === "" ? undefined : message.valuePrefix;
     return obj;
   },
   fromAminoMsg(object: JwtLocationAminoMsg): JwtLocation {
@@ -895,15 +895,15 @@ export const AuthProvider = {
   },
   toAmino(message: AuthProvider): AuthProviderAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.jwks_uri = message.jwksUri === "" ? undefined : message.jwksUri;
+    obj.audiences = message.audiences === "" ? undefined : message.audiences;
+    obj.authorization_url = message.authorizationUrl === "" ? undefined : message.authorizationUrl;
     if (message.jwtLocations) {
       obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e) : undefined);
     } else {
-      obj.jwt_locations = [];
+      obj.jwt_locations = message.jwtLocations;
     }
     return obj;
   },
@@ -992,7 +992,7 @@ export const OAuthRequirements = {
   },
   toAmino(message: OAuthRequirements): OAuthRequirementsAmino {
     const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
+    obj.canonical_scopes = message.canonicalScopes === "" ? undefined : message.canonicalScopes;
     return obj;
   },
   fromAminoMsg(object: OAuthRequirementsAminoMsg): OAuthRequirements {
@@ -1096,8 +1096,8 @@ export const AuthRequirement = {
   },
   toAmino(message: AuthRequirement): AuthRequirementAmino {
     const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
+    obj.provider_id = message.providerId === "" ? undefined : message.providerId;
+    obj.audiences = message.audiences === "" ? undefined : message.audiences;
     return obj;
   },
   fromAminoMsg(object: AuthRequirementAminoMsg): AuthRequirement {

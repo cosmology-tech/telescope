@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
@@ -243,8 +243,8 @@ export const MsgSetWithdrawAddress = {
   },
   toAmino(message: MsgSetWithdrawAddress, useInterfaces: boolean = true): MsgSetWithdrawAddressAmino {
     const obj: any = {};
-    obj.delegator_address = omitDefault(message.delegatorAddress);
-    obj.withdraw_address = omitDefault(message.withdrawAddress);
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     return obj;
   },
   fromProtoMsg(message: MsgSetWithdrawAddressProtoMsg, useInterfaces: boolean = true): MsgSetWithdrawAddress {
@@ -403,8 +403,8 @@ export const MsgWithdrawDelegatorReward = {
   },
   toAmino(message: MsgWithdrawDelegatorReward, useInterfaces: boolean = true): MsgWithdrawDelegatorRewardAmino {
     const obj: any = {};
-    obj.delegator_address = omitDefault(message.delegatorAddress);
-    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromProtoMsg(message: MsgWithdrawDelegatorRewardProtoMsg, useInterfaces: boolean = true): MsgWithdrawDelegatorReward {
@@ -494,7 +494,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -576,7 +576,7 @@ export const MsgWithdrawValidatorCommission = {
   },
   toAmino(message: MsgWithdrawValidatorCommission, useInterfaces: boolean = true): MsgWithdrawValidatorCommissionAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromProtoMsg(message: MsgWithdrawValidatorCommissionProtoMsg, useInterfaces: boolean = true): MsgWithdrawValidatorCommission {
@@ -666,7 +666,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -772,9 +772,9 @@ export const MsgFundCommunityPool = {
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
-    obj.depositor = omitDefault(message.depositor);
+    obj.depositor = message.depositor === "" ? undefined : message.depositor;
     return obj;
   },
   fromProtoMsg(message: MsgFundCommunityPoolProtoMsg, useInterfaces: boolean = true): MsgFundCommunityPool {

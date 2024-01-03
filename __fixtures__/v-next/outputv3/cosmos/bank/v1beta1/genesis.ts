@@ -1,7 +1,7 @@
 import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSDKType } from "./bank";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
@@ -208,17 +208,17 @@ export const GenesisState = {
     if (message.balances) {
       obj.balances = message.balances.map(e => e ? Balance.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.balances = [];
+      obj.balances = message.balances;
     }
     if (message.supply) {
       obj.supply = message.supply.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.supply = [];
+      obj.supply = message.supply;
     }
     if (message.denomMetadata) {
       obj.denom_metadata = message.denomMetadata.map(e => e ? Metadata.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.denom_metadata = [];
+      obj.denom_metadata = message.denomMetadata;
     }
     return obj;
   },
@@ -321,11 +321,11 @@ export const Balance = {
   },
   toAmino(message: Balance, useInterfaces: boolean = true): BalanceAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },

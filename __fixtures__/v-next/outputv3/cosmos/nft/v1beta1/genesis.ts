@@ -1,6 +1,6 @@
 import { Class, ClassAmino, ClassSDKType, NFT, NFTAmino, NFTSDKType } from "./nft";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
@@ -141,12 +141,12 @@ export const GenesisState = {
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Entry.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -249,11 +249,11 @@ export const Entry = {
   },
   toAmino(message: Entry, useInterfaces: boolean = true): EntryAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
+    obj.owner = message.owner === "" ? undefined : message.owner;
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.nfts = [];
+      obj.nfts = message.nfts;
     }
     return obj;
   },

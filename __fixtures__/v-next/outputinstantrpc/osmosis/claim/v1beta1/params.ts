@@ -146,7 +146,7 @@ export const Params = {
     obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
-    obj.claim_denom = message.claimDenom;
+    obj.claim_denom = message.claimDenom === "" ? undefined : message.claimDenom;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

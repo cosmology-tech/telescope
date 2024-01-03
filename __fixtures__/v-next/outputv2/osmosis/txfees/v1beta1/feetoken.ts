@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -121,8 +121,8 @@ export const FeeToken = {
   },
   toAmino(message: FeeToken): FeeTokenAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
-    obj.poolID = omitDefault(message.poolID);
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {

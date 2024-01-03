@@ -328,10 +328,10 @@ export const MsgCreateBid = {
   },
   toAmino(message: MsgCreateBid, useInterfaces: boolean = true): MsgCreateBidAmino {
     const obj: any = {};
-    obj.order = message.order ? OrderID.toAmino(message.order, useInterfaces) : undefined;
-    obj.provider = message.provider;
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
+    obj.order = message.order ? OrderID.toAmino(message.order, useInterfaces) : OrderID.fromPartial({});
+    obj.provider = message.provider ?? "";
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : Coin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCreateBidProtoMsg, useInterfaces: boolean = true): MsgCreateBid {
@@ -475,7 +475,7 @@ export const MsgCloseBid = {
   },
   toAmino(message: MsgCloseBid, useInterfaces: boolean = true): MsgCloseBidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCloseBidProtoMsg, useInterfaces: boolean = true): MsgCloseBid {
@@ -679,11 +679,11 @@ export const BidID = {
   },
   toAmino(message: BidID, useInterfaces: boolean = true): BidIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
     return obj;
   },
   fromProtoMsg(message: BidIDProtoMsg, useInterfaces: boolean = true): BidID {
@@ -802,7 +802,7 @@ export const Bid = {
       message.bidId = BidID.fromAmino(object.bid_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = bid_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.price !== undefined && object.price !== null) {
       message.price = DecCoin.fromAmino(object.price);
@@ -814,9 +814,9 @@ export const Bid = {
   },
   toAmino(message: Bid, useInterfaces: boolean = true): BidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
-    obj.state = bid_StateToJSON(message.state);
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
@@ -974,12 +974,12 @@ export const BidFilters = {
   },
   toAmino(message: BidFilters, useInterfaces: boolean = true): BidFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromProtoMsg(message: BidFiltersProtoMsg, useInterfaces: boolean = true): BidFilters {

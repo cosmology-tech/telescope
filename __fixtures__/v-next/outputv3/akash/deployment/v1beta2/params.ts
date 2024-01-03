@@ -84,7 +84,7 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit, useInterfaces) : undefined;
+    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit, useInterfaces) : Coin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

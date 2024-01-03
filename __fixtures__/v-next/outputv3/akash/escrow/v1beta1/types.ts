@@ -275,8 +275,8 @@ export const AccountID = {
   },
   toAmino(message: AccountID, useInterfaces: boolean = true): AccountIDAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
+    obj.scope = message.scope ?? "";
+    obj.xid = message.xid ?? "";
     return obj;
   },
   fromProtoMsg(message: AccountIDProtoMsg, useInterfaces: boolean = true): AccountID {
@@ -424,7 +424,7 @@ export const Account = {
       message.owner = object.owner;
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = account_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.balance !== undefined && object.balance !== null) {
       message.balance = Coin.fromAmino(object.balance);
@@ -439,12 +439,12 @@ export const Account = {
   },
   toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : undefined;
-    obj.owner = message.owner;
-    obj.state = account_StateToJSON(message.state);
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : undefined;
-    obj.transferred = message.transferred ? Coin.toAmino(message.transferred, useInterfaces) : undefined;
-    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
+    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : AccountID.fromPartial({});
+    obj.owner = message.owner ?? "";
+    obj.state = message.state ?? 0;
+    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.fromPartial({});
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred, useInterfaces) : Coin.fromPartial({});
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
     return obj;
   },
   fromProtoMsg(message: AccountProtoMsg, useInterfaces: boolean = true): Account {
@@ -607,7 +607,7 @@ export const Payment = {
       message.owner = object.owner;
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = payment_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.rate !== undefined && object.rate !== null) {
       message.rate = Coin.fromAmino(object.rate);
@@ -622,13 +622,13 @@ export const Payment = {
   },
   toAmino(message: Payment, useInterfaces: boolean = true): PaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : undefined;
-    obj.payment_id = message.paymentId;
-    obj.owner = message.owner;
-    obj.state = payment_StateToJSON(message.state);
-    obj.rate = message.rate ? Coin.toAmino(message.rate, useInterfaces) : undefined;
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : undefined;
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : undefined;
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : AccountID.fromPartial({});
+    obj.payment_id = message.paymentId ?? "";
+    obj.owner = message.owner ?? "";
+    obj.state = message.state ?? 0;
+    obj.rate = message.rate ? Coin.toAmino(message.rate, useInterfaces) : Coin.fromPartial({});
+    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.fromPartial({});
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : Coin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: PaymentProtoMsg, useInterfaces: boolean = true): Payment {

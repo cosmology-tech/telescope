@@ -92,7 +92,7 @@ export const MsgUnjail = {
   },
   toAmino(message: MsgUnjail, useInterfaces: boolean = true): MsgUnjailAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr ?? "";
     return obj;
   },
   fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = true): MsgUnjail {

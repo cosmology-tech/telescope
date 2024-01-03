@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** ===================== MsgCreateConcentratedPool */
 export interface MsgCreateConcentratedPool {
@@ -185,12 +185,12 @@ export const MsgCreateConcentratedPool = {
   },
   toAmino(message: MsgCreateConcentratedPool): MsgCreateConcentratedPoolAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.denom0 = omitDefault(message.denom0);
-    obj.denom1 = omitDefault(message.denom1);
-    obj.tick_spacing = omitDefault(message.tickSpacing);
-    obj.exponent_at_price_one = omitDefault(message.exponentAtPriceOne);
-    obj.swap_fee = padDecimal(message.swapFee);
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.denom0 = message.denom0 === "" ? undefined : message.denom0;
+    obj.denom1 = message.denom1 === "" ? undefined : message.denom1;
+    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
+    obj.exponent_at_price_one = message.exponentAtPriceOne === "" ? undefined : message.exponentAtPriceOne;
+    obj.swap_fee = padDecimal(message.swapFee) === "" ? undefined : padDecimal(message.swapFee);
     return obj;
   },
   fromAminoMsg(object: MsgCreateConcentratedPoolAminoMsg): MsgCreateConcentratedPool {
@@ -284,7 +284,7 @@ export const MsgCreateConcentratedPoolResponse = {
   },
   toAmino(message: MsgCreateConcentratedPoolResponse): MsgCreateConcentratedPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateConcentratedPoolResponseAminoMsg): MsgCreateConcentratedPoolResponse {

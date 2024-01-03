@@ -1,6 +1,6 @@
 import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
@@ -140,12 +140,12 @@ export const GenesisState = {
     if (message.incentives) {
       obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
     } else {
-      obj.incentives = [];
+      obj.incentives = message.incentives;
     }
     if (message.gasMeters) {
       obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
     } else {
-      obj.gas_meters = [];
+      obj.gas_meters = message.gasMeters;
     }
     return obj;
   },
@@ -242,10 +242,10 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_incentives = message.enableIncentives;
-    obj.allocation_limit = message.allocationLimit;
-    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
-    obj.reward_scaler = message.rewardScaler;
+    obj.enable_incentives = message.enableIncentives === false ? undefined : message.enableIncentives;
+    obj.allocation_limit = padDecimal(message.allocationLimit) === "" ? undefined : padDecimal(message.allocationLimit);
+    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier === "" ? undefined : message.incentivesEpochIdentifier;
+    obj.reward_scaler = padDecimal(message.rewardScaler) === "" ? undefined : padDecimal(message.rewardScaler);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

@@ -138,14 +138,14 @@ export const GenesisState = {
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
     } else {
-      obj.orders = [];
+      obj.orders = message.orders;
     }
     if (message.leases) {
       obj.leases = message.leases.map(e => e ? Lease.toAmino(e) : undefined);
     } else {
-      obj.leases = [];
+      obj.leases = message.leases;
     }
-    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params) : Params.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

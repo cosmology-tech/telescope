@@ -110,7 +110,7 @@ export const SendAuthorization = {
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.spend_limit = [];
+      obj.spend_limit = message.spendLimit;
     }
     return obj;
   },

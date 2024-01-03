@@ -237,7 +237,7 @@ export const Proof = {
     if (message.aunts) {
       obj.aunts = message.aunts.map(e => base64FromBytes(e));
     } else {
-      obj.aunts = [];
+      obj.aunts = message.aunts;
     }
     return obj;
   },
@@ -446,9 +446,9 @@ export const DominoOp = {
   },
   toAmino(message: DominoOp, useInterfaces: boolean = true): DominoOpAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.input = message.input;
-    obj.output = message.output;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.input = message.input === "" ? undefined : message.input;
+    obj.output = message.output === "" ? undefined : message.output;
     return obj;
   },
   fromProtoMsg(message: DominoOpProtoMsg, useInterfaces: boolean = true): DominoOp {
@@ -558,7 +558,7 @@ export const ProofOp = {
   },
   toAmino(message: ProofOp, useInterfaces: boolean = true): ProofOpAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
@@ -649,7 +649,7 @@ export const ProofOps = {
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.ops = [];
+      obj.ops = message.ops;
     }
     return obj;
   },

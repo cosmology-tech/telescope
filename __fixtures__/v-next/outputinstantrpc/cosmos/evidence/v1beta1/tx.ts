@@ -122,7 +122,7 @@ export const MsgSubmitEvidence = {
   },
   toAmino(message: MsgSubmitEvidence): MsgSubmitEvidenceAmino {
     const obj: any = {};
-    obj.submitter = message.submitter;
+    obj.submitter = message.submitter === "" ? undefined : message.submitter;
     obj.evidence = message.evidence ? Any.toAmino(message.evidence) : undefined;
     return obj;
   },

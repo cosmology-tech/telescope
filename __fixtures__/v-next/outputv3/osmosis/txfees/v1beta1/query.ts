@@ -1,6 +1,6 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault, padDecimal } from "../../../helpers";
+import { DeepPartial, isSet, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
@@ -259,7 +259,7 @@ export const QueryFeeTokensResponse = {
     if (message.feeTokens) {
       obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.fee_tokens = [];
+      obj.fee_tokens = message.feeTokens;
     }
     return obj;
   },
@@ -341,7 +341,7 @@ export const QueryDenomSpotPriceRequest = {
   },
   toAmino(message: QueryDenomSpotPriceRequest, useInterfaces: boolean = true): QueryDenomSpotPriceRequestAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: QueryDenomSpotPriceRequestProtoMsg, useInterfaces: boolean = true): QueryDenomSpotPriceRequest {
@@ -439,8 +439,8 @@ export const QueryDenomSpotPriceResponse = {
   },
   toAmino(message: QueryDenomSpotPriceResponse, useInterfaces: boolean = true): QueryDenomSpotPriceResponseAmino {
     const obj: any = {};
-    obj.poolID = omitDefault(message.poolID);
-    obj.spot_price = padDecimal(message.spotPrice);
+    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
+    obj.spot_price = padDecimal(message.spotPrice) === "" ? undefined : padDecimal(message.spotPrice);
     return obj;
   },
   fromProtoMsg(message: QueryDenomSpotPriceResponseProtoMsg, useInterfaces: boolean = true): QueryDenomSpotPriceResponse {
@@ -521,7 +521,7 @@ export const QueryDenomPoolIdRequest = {
   },
   toAmino(message: QueryDenomPoolIdRequest, useInterfaces: boolean = true): QueryDenomPoolIdRequestAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: QueryDenomPoolIdRequestProtoMsg, useInterfaces: boolean = true): QueryDenomPoolIdRequest {
@@ -604,7 +604,7 @@ export const QueryDenomPoolIdResponse = {
   },
   toAmino(message: QueryDenomPoolIdResponse, useInterfaces: boolean = true): QueryDenomPoolIdResponseAmino {
     const obj: any = {};
-    obj.poolID = omitDefault(message.poolID);
+    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryDenomPoolIdResponseProtoMsg, useInterfaces: boolean = true): QueryDenomPoolIdResponse {
@@ -748,7 +748,7 @@ export const QueryBaseDenomResponse = {
   },
   toAmino(message: QueryBaseDenomResponse, useInterfaces: boolean = true): QueryBaseDenomResponseAmino {
     const obj: any = {};
-    obj.base_denom = omitDefault(message.baseDenom);
+    obj.base_denom = message.baseDenom === "" ? undefined : message.baseDenom;
     return obj;
   },
   fromProtoMsg(message: QueryBaseDenomResponseProtoMsg, useInterfaces: boolean = true): QueryBaseDenomResponse {

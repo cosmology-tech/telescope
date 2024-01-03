@@ -27,9 +27,9 @@ export const AminoConverter = {
       pubkey
     }: MsgCreateCertificate): MsgCreateCertificateAminoType["value"] => {
       return {
-        owner,
-        cert,
-        pubkey
+        owner: owner,
+        cert: cert,
+        pubkey: pubkey
       };
     },
     fromAmino: ({
@@ -60,7 +60,7 @@ export const AminoConverter = {
       id
     }: MsgRevokeCertificateAminoType["value"]): MsgRevokeCertificate => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
           serial: id.serial
         }

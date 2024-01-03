@@ -695,7 +695,7 @@ export const QueryValidatorOutstandingRewardsRequest = {
   },
   toAmino(message: QueryValidatorOutstandingRewardsRequest, useInterfaces: boolean = true): QueryValidatorOutstandingRewardsRequestAmino {
     const obj: any = {};
-    obj.validator_address = message.validatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryValidatorOutstandingRewardsRequestProtoMsg, useInterfaces: boolean = true): QueryValidatorOutstandingRewardsRequest {
@@ -859,7 +859,7 @@ export const QueryValidatorCommissionRequest = {
   },
   toAmino(message: QueryValidatorCommissionRequest, useInterfaces: boolean = true): QueryValidatorCommissionRequestAmino {
     const obj: any = {};
-    obj.validator_address = message.validatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryValidatorCommissionRequestProtoMsg, useInterfaces: boolean = true): QueryValidatorCommissionRequest {
@@ -1074,7 +1074,7 @@ export const QueryValidatorSlashesRequest = {
   },
   toAmino(message: QueryValidatorSlashesRequest, useInterfaces: boolean = true): QueryValidatorSlashesRequestAmino {
     const obj: any = {};
-    obj.validator_address = message.validatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     obj.starting_height = message.startingHeight ? message.startingHeight.toString() : undefined;
     obj.ending_height = message.endingHeight ? message.endingHeight.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
@@ -1184,7 +1184,7 @@ export const QueryValidatorSlashesResponse = {
     if (message.slashes) {
       obj.slashes = message.slashes.map(e => e ? ValidatorSlashEvent.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.slashes = [];
+      obj.slashes = message.slashes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1282,8 +1282,8 @@ export const QueryDelegationRewardsRequest = {
   },
   toAmino(message: QueryDelegationRewardsRequest, useInterfaces: boolean = true): QueryDelegationRewardsRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDelegationRewardsRequestProtoMsg, useInterfaces: boolean = true): QueryDelegationRewardsRequest {
@@ -1373,7 +1373,7 @@ export const QueryDelegationRewardsResponse = {
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rewards = [];
+      obj.rewards = message.rewards;
     }
     return obj;
   },
@@ -1455,7 +1455,7 @@ export const QueryDelegationTotalRewardsRequest = {
   },
   toAmino(message: QueryDelegationTotalRewardsRequest, useInterfaces: boolean = true): QueryDelegationTotalRewardsRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDelegationTotalRewardsRequestProtoMsg, useInterfaces: boolean = true): QueryDelegationTotalRewardsRequest {
@@ -1566,12 +1566,12 @@ export const QueryDelegationTotalRewardsResponse = {
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? DelegationDelegatorReward.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rewards = [];
+      obj.rewards = message.rewards;
     }
     if (message.total) {
       obj.total = message.total.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.total = [];
+      obj.total = message.total;
     }
     return obj;
   },
@@ -1653,7 +1653,7 @@ export const QueryDelegatorValidatorsRequest = {
   },
   toAmino(message: QueryDelegatorValidatorsRequest, useInterfaces: boolean = true): QueryDelegatorValidatorsRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDelegatorValidatorsRequestProtoMsg, useInterfaces: boolean = true): QueryDelegatorValidatorsRequest {
@@ -1743,7 +1743,7 @@ export const QueryDelegatorValidatorsResponse = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     return obj;
   },
@@ -1825,7 +1825,7 @@ export const QueryDelegatorWithdrawAddressRequest = {
   },
   toAmino(message: QueryDelegatorWithdrawAddressRequest, useInterfaces: boolean = true): QueryDelegatorWithdrawAddressRequestAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDelegatorWithdrawAddressRequestProtoMsg, useInterfaces: boolean = true): QueryDelegatorWithdrawAddressRequest {
@@ -1906,7 +1906,7 @@ export const QueryDelegatorWithdrawAddressResponse = {
   },
   toAmino(message: QueryDelegatorWithdrawAddressResponse, useInterfaces: boolean = true): QueryDelegatorWithdrawAddressResponseAmino {
     const obj: any = {};
-    obj.withdraw_address = message.withdrawAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     return obj;
   },
   fromProtoMsg(message: QueryDelegatorWithdrawAddressResponseProtoMsg, useInterfaces: boolean = true): QueryDelegatorWithdrawAddressResponse {
@@ -2059,7 +2059,7 @@ export const QueryCommunityPoolResponse = {
     if (message.pool) {
       obj.pool = message.pool.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pool = [];
+      obj.pool = message.pool;
     }
     return obj;
   },

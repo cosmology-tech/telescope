@@ -262,8 +262,8 @@ export const AccountID = {
   },
   toAmino(message: AccountID): AccountIDAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
+    obj.scope = message.scope ?? "";
+    obj.xid = message.xid ?? "";
     return obj;
   },
   fromAminoMsg(object: AccountIDAminoMsg): AccountID {
@@ -458,7 +458,7 @@ export const Account = {
       message.owner = object.owner;
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = account_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.balance !== undefined && object.balance !== null) {
       message.balance = DecCoin.fromAmino(object.balance);
@@ -479,14 +479,14 @@ export const Account = {
   },
   toAmino(message: Account): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id) : undefined;
-    obj.owner = message.owner;
-    obj.state = account_StateToJSON(message.state);
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
-    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : undefined;
-    obj.settled_at = message.settledAt ? message.settledAt.toString() : undefined;
-    obj.depositor = message.depositor;
-    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : undefined;
+    obj.id = message.id ? AccountID.toAmino(message.id) : AccountID.fromPartial({});
+    obj.owner = message.owner ?? "";
+    obj.state = message.state ?? 0;
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.fromPartial({});
+    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : DecCoin.fromPartial({});
+    obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
+    obj.depositor = message.depositor ?? "";
+    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : DecCoin.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: AccountAminoMsg): Account {
@@ -669,7 +669,7 @@ export const FractionalPayment = {
       message.owner = object.owner;
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = fractionalPayment_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.rate !== undefined && object.rate !== null) {
       message.rate = DecCoin.fromAmino(object.rate);
@@ -684,13 +684,13 @@ export const FractionalPayment = {
   },
   toAmino(message: FractionalPayment): FractionalPaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : undefined;
-    obj.payment_id = message.paymentId;
-    obj.owner = message.owner;
-    obj.state = fractionalPayment_StateToJSON(message.state);
-    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : undefined;
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : undefined;
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : undefined;
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : AccountID.fromPartial({});
+    obj.payment_id = message.paymentId ?? "";
+    obj.owner = message.owner ?? "";
+    obj.state = message.state ?? 0;
+    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : DecCoin.fromPartial({});
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.fromPartial({});
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : Coin.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {

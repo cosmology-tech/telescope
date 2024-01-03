@@ -463,7 +463,7 @@ export const WeightedVoteOption = {
   fromAmino(object: WeightedVoteOptionAmino): WeightedVoteOption {
     const message = createBaseWeightedVoteOption();
     if (object.option !== undefined && object.option !== null) {
-      message.option = voteOptionFromJSON(object.option);
+      message.option = object.option;
     }
     if (object.weight !== undefined && object.weight !== null) {
       message.weight = object.weight;
@@ -472,8 +472,8 @@ export const WeightedVoteOption = {
   },
   toAmino(message: WeightedVoteOption, useInterfaces: boolean = true): WeightedVoteOptionAmino {
     const obj: any = {};
-    obj.option = voteOptionToJSON(message.option);
-    obj.weight = message.weight;
+    obj.option = message.option === 0 ? undefined : message.option;
+    obj.weight = message.weight === "" ? undefined : message.weight;
     return obj;
   },
   fromProtoMsg(message: WeightedVoteOptionProtoMsg, useInterfaces: boolean = true): WeightedVoteOption {
@@ -593,11 +593,11 @@ export const Deposit = {
   toAmino(message: Deposit, useInterfaces: boolean = true): DepositAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.depositor = message.depositor;
+    obj.depositor = message.depositor === "" ? undefined : message.depositor;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -805,7 +805,7 @@ export const Proposal = {
     }
     message.messages = object.messages?.map(e => Any.fromAmino(e)) || [];
     if (object.status !== undefined && object.status !== null) {
-      message.status = proposalStatusFromJSON(object.status);
+      message.status = object.status;
     }
     if (object.final_tally_result !== undefined && object.final_tally_result !== null) {
       message.finalTallyResult = TallyResult.fromAmino(object.final_tally_result);
@@ -834,20 +834,20 @@ export const Proposal = {
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.messages = [];
+      obj.messages = message.messages;
     }
-    obj.status = proposalStatusToJSON(message.status);
+    obj.status = message.status === 0 ? undefined : message.status;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult, useInterfaces) : undefined;
     obj.submit_time = message.submitTime ? Timestamp.toAmino(toTimestamp(message.submitTime)) : undefined;
     obj.deposit_end_time = message.depositEndTime ? Timestamp.toAmino(toTimestamp(message.depositEndTime)) : undefined;
     if (message.totalDeposit) {
       obj.total_deposit = message.totalDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.total_deposit = [];
+      obj.total_deposit = message.totalDeposit;
     }
     obj.voting_start_time = message.votingStartTime ? Timestamp.toAmino(toTimestamp(message.votingStartTime)) : undefined;
     obj.voting_end_time = message.votingEndTime ? Timestamp.toAmino(toTimestamp(message.votingEndTime)) : undefined;
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: ProposalProtoMsg, useInterfaces: boolean = true): Proposal {
@@ -973,10 +973,10 @@ export const TallyResult = {
   },
   toAmino(message: TallyResult, useInterfaces: boolean = true): TallyResultAmino {
     const obj: any = {};
-    obj.yes_count = message.yesCount;
-    obj.abstain_count = message.abstainCount;
-    obj.no_count = message.noCount;
-    obj.no_with_veto_count = message.noWithVetoCount;
+    obj.yes_count = message.yesCount === "" ? undefined : message.yesCount;
+    obj.abstain_count = message.abstainCount === "" ? undefined : message.abstainCount;
+    obj.no_count = message.noCount === "" ? undefined : message.noCount;
+    obj.no_with_veto_count = message.noWithVetoCount === "" ? undefined : message.noWithVetoCount;
     return obj;
   },
   fromProtoMsg(message: TallyResultProtoMsg, useInterfaces: boolean = true): TallyResult {
@@ -1111,13 +1111,13 @@ export const Vote = {
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
+    obj.voter = message.voter === "" ? undefined : message.voter;
     if (message.options) {
       obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: VoteProtoMsg, useInterfaces: boolean = true): Vote {
@@ -1224,7 +1224,7 @@ export const DepositParams = {
     if (message.minDeposit) {
       obj.min_deposit = message.minDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.min_deposit = [];
+      obj.min_deposit = message.minDeposit;
     }
     obj.max_deposit_period = message.maxDepositPeriod ? Duration.toAmino(message.maxDepositPeriod, useInterfaces) : undefined;
     return obj;
@@ -1420,9 +1420,9 @@ export const TallyParams = {
   },
   toAmino(message: TallyParams, useInterfaces: boolean = true): TallyParamsAmino {
     const obj: any = {};
-    obj.quorum = message.quorum;
-    obj.threshold = message.threshold;
-    obj.veto_threshold = message.vetoThreshold;
+    obj.quorum = message.quorum === "" ? undefined : message.quorum;
+    obj.threshold = message.threshold === "" ? undefined : message.threshold;
+    obj.veto_threshold = message.vetoThreshold === "" ? undefined : message.vetoThreshold;
     return obj;
   },
   fromProtoMsg(message: TallyParamsProtoMsg, useInterfaces: boolean = true): TallyParams {

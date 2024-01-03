@@ -465,14 +465,14 @@ export const Distribution = {
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
     obj.count = message.count ? message.count.toString() : undefined;
-    obj.mean = message.mean;
-    obj.minimum = message.minimum;
-    obj.maximum = message.maximum;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    obj.mean = message.mean === 0 ? undefined : message.mean;
+    obj.minimum = message.minimum === 0 ? undefined : message.minimum;
+    obj.maximum = message.maximum === 0 ? undefined : message.maximum;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation === 0 ? undefined : message.sumOfSquaredDeviation;
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e.toString());
     } else {
-      obj.bucket_counts = [];
+      obj.bucket_counts = message.bucketCounts;
     }
     obj.linear_buckets = message.linearBuckets ? Distribution_LinearBuckets.toAmino(message.linearBuckets) : undefined;
     obj.exponential_buckets = message.exponentialBuckets ? Distribution_ExponentialBuckets.toAmino(message.exponentialBuckets) : undefined;
@@ -480,7 +480,7 @@ export const Distribution = {
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e) : undefined);
     } else {
-      obj.exemplars = [];
+      obj.exemplars = message.exemplars;
     }
     return obj;
   },
@@ -566,9 +566,9 @@ export const Distribution_LinearBuckets = {
   },
   toAmino(message: Distribution_LinearBuckets): Distribution_LinearBucketsAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
+    obj.num_finite_buckets = message.numFiniteBuckets === 0 ? undefined : message.numFiniteBuckets;
+    obj.width = message.width === 0 ? undefined : message.width;
+    obj.offset = message.offset === 0 ? undefined : message.offset;
     return obj;
   },
   fromAminoMsg(object: Distribution_LinearBucketsAminoMsg): Distribution_LinearBuckets {
@@ -653,9 +653,9 @@ export const Distribution_ExponentialBuckets = {
   },
   toAmino(message: Distribution_ExponentialBuckets): Distribution_ExponentialBucketsAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
+    obj.num_finite_buckets = message.numFiniteBuckets === 0 ? undefined : message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor === 0 ? undefined : message.growthFactor;
+    obj.scale = message.scale === 0 ? undefined : message.scale;
     return obj;
   },
   fromAminoMsg(object: Distribution_ExponentialBucketsAminoMsg): Distribution_ExponentialBuckets {
@@ -728,7 +728,7 @@ export const Distribution_ExplicitBuckets = {
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
-      obj.bounds = [];
+      obj.bounds = message.bounds;
     }
     return obj;
   },

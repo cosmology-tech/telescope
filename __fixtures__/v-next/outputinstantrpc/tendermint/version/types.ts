@@ -133,7 +133,7 @@ export const App = {
   toAmino(message: App): AppAmino {
     const obj: any = {};
     obj.protocol = message.protocol ? message.protocol.toString() : undefined;
-    obj.software = message.software;
+    obj.software = message.software === "" ? undefined : message.software;
     return obj;
   },
   fromAminoMsg(object: AppAminoMsg): App {

@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
@@ -227,7 +227,7 @@ export const QueryEpochsInfoResponse = {
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
     } else {
-      obj.epochs = [];
+      obj.epochs = message.epochs;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -317,7 +317,7 @@ export const QueryCurrentEpochRequest = {
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
-    obj.identifier = omitDefault(message.identifier);
+    obj.identifier = message.identifier === "" ? undefined : message.identifier;
     return obj;
   },
   fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
@@ -405,7 +405,7 @@ export const QueryCurrentEpochResponse = {
   },
   toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
     const obj: any = {};
-    obj.current_epoch = omitDefault(message.currentEpoch);
+    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {

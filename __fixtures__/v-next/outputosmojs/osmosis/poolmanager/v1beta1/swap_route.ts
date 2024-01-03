@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface SwapAmountInRoute {
   poolId: bigint;
@@ -110,8 +110,8 @@ export const SwapAmountInRoute = {
   },
   toAmino(message: SwapAmountInRoute): SwapAmountInRouteAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.token_out_denom = omitDefault(message.tokenOutDenom);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.token_out_denom = message.tokenOutDenom === "" ? undefined : message.tokenOutDenom;
     return obj;
   },
   fromAminoMsg(object: SwapAmountInRouteAminoMsg): SwapAmountInRoute {
@@ -221,8 +221,8 @@ export const SwapAmountOutRoute = {
   },
   toAmino(message: SwapAmountOutRoute): SwapAmountOutRouteAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
-    obj.token_in_denom = omitDefault(message.tokenInDenom);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.token_in_denom = message.tokenInDenom === "" ? undefined : message.tokenInDenom;
     return obj;
   },
   fromAminoMsg(object: SwapAmountOutRouteAminoMsg): SwapAmountOutRoute {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -160,8 +160,8 @@ export const Attribute = {
   },
   toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = true): Attribute {
@@ -271,12 +271,12 @@ export const SignedBy = {
     if (message.allOf) {
       obj.all_of = message.allOf.map(e => e);
     } else {
-      obj.all_of = [];
+      obj.all_of = message.allOf;
     }
     if (message.anyOf) {
       obj.any_of = message.anyOf.map(e => e);
     } else {
-      obj.any_of = [];
+      obj.any_of = message.anyOf;
     }
     return obj;
   },
@@ -380,11 +380,11 @@ export const PlacementRequirements = {
   },
   toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : undefined;
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : SignedBy.fromPartial({});
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },

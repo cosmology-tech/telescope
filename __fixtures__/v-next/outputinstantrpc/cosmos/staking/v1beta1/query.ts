@@ -605,7 +605,7 @@ export const QueryValidatorsRequest = {
   },
   toAmino(message: QueryValidatorsRequest): QueryValidatorsRequestAmino {
     const obj: any = {};
-    obj.status = message.status;
+    obj.status = message.status === "" ? undefined : message.status;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -727,7 +727,7 @@ export const QueryValidatorsResponse = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -823,7 +823,7 @@ export const QueryValidatorRequest = {
   },
   toAmino(message: QueryValidatorRequest): QueryValidatorRequestAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     return obj;
   },
   fromAminoMsg(object: QueryValidatorRequestAminoMsg): QueryValidatorRequest {
@@ -1031,7 +1031,7 @@ export const QueryValidatorDelegationsRequest = {
   },
   toAmino(message: QueryValidatorDelegationsRequest): QueryValidatorDelegationsRequestAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1153,7 +1153,7 @@ export const QueryValidatorDelegationsResponse = {
     if (message.delegationResponses) {
       obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
     } else {
-      obj.delegation_responses = [];
+      obj.delegation_responses = message.delegationResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1267,7 +1267,7 @@ export const QueryValidatorUnbondingDelegationsRequest = {
   },
   toAmino(message: QueryValidatorUnbondingDelegationsRequest): QueryValidatorUnbondingDelegationsRequestAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1389,7 +1389,7 @@ export const QueryValidatorUnbondingDelegationsResponse = {
     if (message.unbondingResponses) {
       obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
     } else {
-      obj.unbonding_responses = [];
+      obj.unbonding_responses = message.unbondingResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1501,8 +1501,8 @@ export const QueryDelegationRequest = {
   },
   toAmino(message: QueryDelegationRequest): QueryDelegationRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     return obj;
   },
   fromAminoMsg(object: QueryDelegationRequestAminoMsg): QueryDelegationRequest {
@@ -1708,8 +1708,8 @@ export const QueryUnbondingDelegationRequest = {
   },
   toAmino(message: QueryUnbondingDelegationRequest): QueryUnbondingDelegationRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     return obj;
   },
   fromAminoMsg(object: QueryUnbondingDelegationRequestAminoMsg): QueryUnbondingDelegationRequest {
@@ -1917,7 +1917,7 @@ export const QueryDelegatorDelegationsRequest = {
   },
   toAmino(message: QueryDelegatorDelegationsRequest): QueryDelegatorDelegationsRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2039,7 +2039,7 @@ export const QueryDelegatorDelegationsResponse = {
     if (message.delegationResponses) {
       obj.delegation_responses = message.delegationResponses.map(e => e ? DelegationResponse.toAmino(e) : undefined);
     } else {
-      obj.delegation_responses = [];
+      obj.delegation_responses = message.delegationResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2153,7 +2153,7 @@ export const QueryDelegatorUnbondingDelegationsRequest = {
   },
   toAmino(message: QueryDelegatorUnbondingDelegationsRequest): QueryDelegatorUnbondingDelegationsRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2275,7 +2275,7 @@ export const QueryDelegatorUnbondingDelegationsResponse = {
     if (message.unbondingResponses) {
       obj.unbonding_responses = message.unbondingResponses.map(e => e ? UnbondingDelegation.toAmino(e) : undefined);
     } else {
-      obj.unbonding_responses = [];
+      obj.unbonding_responses = message.unbondingResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2421,9 +2421,9 @@ export const QueryRedelegationsRequest = {
   },
   toAmino(message: QueryRedelegationsRequest): QueryRedelegationsRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.src_validator_addr = message.srcValidatorAddr;
-    obj.dst_validator_addr = message.dstValidatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
+    obj.src_validator_addr = message.srcValidatorAddr === "" ? undefined : message.srcValidatorAddr;
+    obj.dst_validator_addr = message.dstValidatorAddr === "" ? undefined : message.dstValidatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2545,7 +2545,7 @@ export const QueryRedelegationsResponse = {
     if (message.redelegationResponses) {
       obj.redelegation_responses = message.redelegationResponses.map(e => e ? RedelegationResponse.toAmino(e) : undefined);
     } else {
-      obj.redelegation_responses = [];
+      obj.redelegation_responses = message.redelegationResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2659,7 +2659,7 @@ export const QueryDelegatorValidatorsRequest = {
   },
   toAmino(message: QueryDelegatorValidatorsRequest): QueryDelegatorValidatorsRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2781,7 +2781,7 @@ export const QueryDelegatorValidatorsResponse = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2893,8 +2893,8 @@ export const QueryDelegatorValidatorRequest = {
   },
   toAmino(message: QueryDelegatorValidatorRequest): QueryDelegatorValidatorRequestAmino {
     const obj: any = {};
-    obj.delegator_addr = message.delegatorAddr;
-    obj.validator_addr = message.validatorAddr;
+    obj.delegator_addr = message.delegatorAddr === "" ? undefined : message.delegatorAddr;
+    obj.validator_addr = message.validatorAddr === "" ? undefined : message.validatorAddr;
     return obj;
   },
   fromAminoMsg(object: QueryDelegatorValidatorRequestAminoMsg): QueryDelegatorValidatorRequest {

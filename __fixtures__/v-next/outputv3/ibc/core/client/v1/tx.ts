@@ -318,7 +318,7 @@ export const MsgCreateClient = {
     const obj: any = {};
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromProtoMsg(message: MsgCreateClientProtoMsg, useInterfaces: boolean = true): MsgCreateClient {
@@ -494,9 +494,9 @@ export const MsgUpdateClient = {
   },
   toAmino(message: MsgUpdateClient, useInterfaces: boolean = true): MsgUpdateClientAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.header = message.header ? Any.toAmino(message.header, useInterfaces) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromProtoMsg(message: MsgUpdateClientProtoMsg, useInterfaces: boolean = true): MsgUpdateClient {
@@ -719,12 +719,12 @@ export const MsgUpgradeClient = {
   },
   toAmino(message: MsgUpgradeClient, useInterfaces: boolean = true): MsgUpgradeClientAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.client_state = message.clientState ? Any.toAmino(message.clientState, useInterfaces) : undefined;
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
     obj.proof_upgrade_client = message.proofUpgradeClient ? base64FromBytes(message.proofUpgradeClient) : undefined;
     obj.proof_upgrade_consensus_state = message.proofUpgradeConsensusState ? base64FromBytes(message.proofUpgradeConsensusState) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromProtoMsg(message: MsgUpgradeClientProtoMsg, useInterfaces: boolean = true): MsgUpgradeClient {
@@ -900,9 +900,9 @@ export const MsgSubmitMisbehaviour = {
   },
   toAmino(message: MsgSubmitMisbehaviour, useInterfaces: boolean = true): MsgSubmitMisbehaviourAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.misbehaviour = message.misbehaviour ? Any.toAmino(message.misbehaviour, useInterfaces) : undefined;
-    obj.signer = message.signer;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     return obj;
   },
   fromProtoMsg(message: MsgSubmitMisbehaviourProtoMsg, useInterfaces: boolean = true): MsgSubmitMisbehaviour {

@@ -1,7 +1,7 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { DenomAuthorityMetadata, DenomAuthorityMetadataAmino, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
@@ -342,7 +342,7 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
   toAmino(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequest {
@@ -506,7 +506,7 @@ export const QueryDenomsFromCreatorRequest = {
   },
   toAmino(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = true): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
-    obj.creator = omitDefault(message.creator);
+    obj.creator = message.creator === "" ? undefined : message.creator;
     return obj;
   },
   fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg, useInterfaces: boolean = true): QueryDenomsFromCreatorRequest {
@@ -596,7 +596,7 @@ export const QueryDenomsFromCreatorResponse = {
     if (message.denoms) {
       obj.denoms = message.denoms.map(e => e);
     } else {
-      obj.denoms = [];
+      obj.denoms = message.denoms;
     }
     return obj;
   },

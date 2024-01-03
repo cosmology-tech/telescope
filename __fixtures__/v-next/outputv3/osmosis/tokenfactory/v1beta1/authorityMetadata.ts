@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -96,7 +96,7 @@ export const DenomAuthorityMetadata = {
   },
   toAmino(message: DenomAuthorityMetadata, useInterfaces: boolean = true): DenomAuthorityMetadataAmino {
     const obj: any = {};
-    obj.admin = omitDefault(message.admin);
+    obj.admin = message.admin === "" ? undefined : message.admin;
     return obj;
   },
   fromProtoMsg(message: DenomAuthorityMetadataProtoMsg, useInterfaces: boolean = true): DenomAuthorityMetadata {

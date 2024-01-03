@@ -116,7 +116,7 @@ export const ClientState = {
   },
   toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = message.chainId;
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : {};
     return obj;
   },

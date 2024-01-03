@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -417,7 +417,7 @@ export const QueryDevFeeInfosResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -502,7 +502,7 @@ export const QueryDevFeeInfoRequest = {
   },
   toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
-    obj.contract_address = omitDefault(message.contractAddress);
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
     return obj;
   },
   fromAminoMsg(object: QueryDevFeeInfoRequestAminoMsg): QueryDevFeeInfoRequest {
@@ -837,7 +837,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
     const obj: any = {};
-    obj.deployer_address = omitDefault(message.deployerAddress);
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -947,7 +947,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

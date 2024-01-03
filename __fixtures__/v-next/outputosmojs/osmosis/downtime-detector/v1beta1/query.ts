@@ -109,7 +109,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   fromAmino(object: RecoveredSinceDowntimeOfLengthRequestAmino): RecoveredSinceDowntimeOfLengthRequest {
     const message = createBaseRecoveredSinceDowntimeOfLengthRequest();
     if (object.downtime !== undefined && object.downtime !== null) {
-      message.downtime = downtimeFromJSON(object.downtime);
+      message.downtime = object.downtime;
     }
     if (object.recovery !== undefined && object.recovery !== null) {
       message.recovery = Duration.fromAmino(object.recovery);
@@ -118,7 +118,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthRequest): RecoveredSinceDowntimeOfLengthRequestAmino {
     const obj: any = {};
-    obj.downtime = downtimeToJSON(message.downtime);
+    obj.downtime = message.downtime === 0 ? undefined : message.downtime;
     obj.recovery = message.recovery ? Duration.toAmino(message.recovery) : undefined;
     return obj;
   },
@@ -213,7 +213,7 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
   },
   toAmino(message: RecoveredSinceDowntimeOfLengthResponse): RecoveredSinceDowntimeOfLengthResponseAmino {
     const obj: any = {};
-    obj.succesfully_recovered = message.succesfullyRecovered;
+    obj.succesfully_recovered = message.succesfullyRecovered === false ? undefined : message.succesfullyRecovered;
     return obj;
   },
   fromAminoMsg(object: RecoveredSinceDowntimeOfLengthResponseAminoMsg): RecoveredSinceDowntimeOfLengthResponse {

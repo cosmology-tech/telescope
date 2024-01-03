@@ -2,7 +2,7 @@ import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirement
 import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../base/v1beta1/resource";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -335,7 +335,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
@@ -485,7 +485,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
@@ -635,7 +635,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
@@ -815,9 +815,9 @@ export const GroupID = {
   },
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq;
-    obj.gseq = message.gseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
     return obj;
   },
   fromAminoMsg(object: GroupIDAminoMsg): GroupID {
@@ -938,12 +938,12 @@ export const GroupSpec = {
   },
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.fromPartial({});
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
     return obj;
   },
@@ -1066,7 +1066,7 @@ export const Group = {
       message.groupId = GroupID.fromAmino(object.group_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = group_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.group_spec !== undefined && object.group_spec !== null) {
       message.groupSpec = GroupSpec.fromAmino(object.group_spec);
@@ -1078,10 +1078,10 @@ export const Group = {
   },
   toAmino(message: Group): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
-    obj.state = group_StateToJSON(message.state);
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
-    obj.created_at = omitDefault(message.createdAt);
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : GroupID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : GroupSpec.fromPartial({});
+    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {
@@ -1198,9 +1198,9 @@ export const Resource = {
   },
   toAmino(message: Resource): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? Coin.toAmino(message.price) : undefined;
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : ResourceUnits.fromPartial({});
+    obj.count = message.count ?? 0;
+    obj.price = message.price ? Coin.toAmino(message.price) : Coin.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: ResourceAminoMsg): Resource {

@@ -267,15 +267,15 @@ export const MsgCreateDeployment = {
   },
   toAmino(message: MsgCreateDeployment, useInterfaces: boolean = true): MsgCreateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.fromPartial({});
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
-    obj.depositor = message.depositor;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : Coin.fromPartial({});
+    obj.depositor = message.depositor ?? "";
     return obj;
   },
   fromProtoMsg(message: MsgCreateDeploymentProtoMsg, useInterfaces: boolean = true): MsgCreateDeployment {
@@ -451,9 +451,9 @@ export const MsgDepositDeployment = {
   },
   toAmino(message: MsgDepositDeployment, useInterfaces: boolean = true): MsgDepositDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
-    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
-    obj.depositor = message.depositor;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.fromPartial({});
+    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : Coin.fromPartial({});
+    obj.depositor = message.depositor ?? "";
     return obj;
   },
   fromProtoMsg(message: MsgDepositDeploymentProtoMsg, useInterfaces: boolean = true): MsgDepositDeployment {
@@ -612,8 +612,8 @@ export const MsgUpdateDeployment = {
   },
   toAmino(message: MsgUpdateDeployment, useInterfaces: boolean = true): MsgUpdateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.fromPartial({});
+    obj.version = message.version ? base64FromBytes(message.version) : "";
     return obj;
   },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {
@@ -757,7 +757,7 @@ export const MsgCloseDeployment = {
   },
   toAmino(message: MsgCloseDeployment, useInterfaces: boolean = true): MsgCloseDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCloseDeploymentProtoMsg, useInterfaces: boolean = true): MsgCloseDeployment {

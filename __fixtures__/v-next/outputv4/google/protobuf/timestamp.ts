@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, fromJsonTimestamp, omitDefault, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local

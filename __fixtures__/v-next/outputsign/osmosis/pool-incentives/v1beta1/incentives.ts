@@ -172,7 +172,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.minted_denom = message.mintedDenom;
+    obj.minted_denom = message.mintedDenom === "" ? undefined : message.mintedDenom;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -242,7 +242,7 @@ export const LockableDurationsInfo = {
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.lockable_durations = [];
+      obj.lockable_durations = message.lockableDurations;
     }
     return obj;
   },
@@ -321,11 +321,11 @@ export const DistrInfo = {
   },
   toAmino(message: DistrInfo): DistrInfoAmino {
     const obj: any = {};
-    obj.total_weight = message.totalWeight;
+    obj.total_weight = message.totalWeight === "" ? undefined : message.totalWeight;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },
@@ -409,7 +409,7 @@ export const DistrRecord = {
   toAmino(message: DistrRecord): DistrRecordAmino {
     const obj: any = {};
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
-    obj.weight = message.weight;
+    obj.weight = message.weight === "" ? undefined : message.weight;
     return obj;
   },
   fromAminoMsg(object: DistrRecordAminoMsg): DistrRecord {
@@ -578,7 +578,7 @@ export const PoolToGauges = {
     if (message.poolToGauge) {
       obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toAmino(e) : undefined);
     } else {
-      obj.pool_to_gauge = [];
+      obj.pool_to_gauge = message.poolToGauge;
     }
     return obj;
   },

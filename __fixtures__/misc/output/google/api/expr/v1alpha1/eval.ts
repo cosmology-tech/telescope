@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../../helpers";
+import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
   /** The ids of the expressions with unknown values. */
@@ -117,7 +117,7 @@ export const ExprValue = {
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e) : undefined);
     } else {
-      obj.exprs = [];
+      obj.exprs = message.exprs;
     }
     return obj;
   },
@@ -206,7 +206,7 @@ export const IdRef = {
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: IdRefAminoMsg): IdRef {

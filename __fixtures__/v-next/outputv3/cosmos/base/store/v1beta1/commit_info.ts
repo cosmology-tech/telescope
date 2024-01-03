@@ -177,7 +177,7 @@ export const CommitInfo = {
     if (message.storeInfos) {
       obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.store_infos = [];
+      obj.store_infos = message.storeInfos;
     }
     return obj;
   },
@@ -276,7 +276,7 @@ export const StoreInfo = {
   },
   toAmino(message: StoreInfo, useInterfaces: boolean = true): StoreInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId, useInterfaces) : undefined;
     return obj;
   },

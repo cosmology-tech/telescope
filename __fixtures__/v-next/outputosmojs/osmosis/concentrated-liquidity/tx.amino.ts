@@ -94,15 +94,15 @@ export const AminoConverter = {
       token_min_amount1
     }: MsgCreatePositionAminoType["value"]): MsgCreatePosition => {
       return {
-        poolId: BigInt(pool_id),
+        poolId: pool_id == null ? pool_id : BigInt(pool_id),
         sender,
-        lowerTick: BigInt(lower_tick),
-        upperTick: BigInt(upper_tick),
-        tokenDesired0: {
+        lowerTick: lower_tick == null ? lower_tick : BigInt(lower_tick),
+        upperTick: upper_tick == null ? upper_tick : BigInt(upper_tick),
+        tokenDesired0: token_desired0 == null ? token_desired0 : {
           denom: token_desired0.denom,
           amount: token_desired0.amount
         },
-        tokenDesired1: {
+        tokenDesired1: token_desired1 == null ? token_desired1 : {
           denom: token_desired1.denom,
           amount: token_desired1.amount
         },
@@ -130,7 +130,7 @@ export const AminoConverter = {
       liquidity_amount
     }: MsgWithdrawPositionAminoType["value"]): MsgWithdrawPosition => {
       return {
-        positionId: BigInt(position_id),
+        positionId: position_id == null ? position_id : BigInt(position_id),
         sender,
         liquidityAmount: liquidity_amount
       };
@@ -152,7 +152,7 @@ export const AminoConverter = {
       sender
     }: MsgCollectFeesAminoType["value"]): MsgCollectFees => {
       return {
-        positionIds: position_ids.map(el0 => BigInt(el0)),
+        positionIds: position_ids.map?.(el0 => BigInt(el0)),
         sender
       };
     }
@@ -173,7 +173,7 @@ export const AminoConverter = {
       sender
     }: MsgCollectIncentivesAminoType["value"]): MsgCollectIncentives => {
       return {
-        positionIds: position_ids.map(el0 => BigInt(el0)),
+        positionIds: position_ids.map?.(el0 => BigInt(el0)),
         sender
       };
     }
@@ -194,7 +194,7 @@ export const AminoConverter = {
       sender
     }: MsgFungifyChargedPositionsAminoType["value"]): MsgFungifyChargedPositions => {
       return {
-        positionIds: position_ids.map(el0 => BigInt(el0)),
+        positionIds: position_ids.map?.(el0 => BigInt(el0)),
         sender
       };
     }

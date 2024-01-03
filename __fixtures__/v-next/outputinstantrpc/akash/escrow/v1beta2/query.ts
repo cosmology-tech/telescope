@@ -208,10 +208,10 @@ export const QueryAccountsRequest = {
   },
   toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
-    obj.owner = message.owner;
-    obj.state = message.state;
+    obj.scope = message.scope === "" ? undefined : message.scope;
+    obj.xid = message.xid === "" ? undefined : message.xid;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.state = message.state === "" ? undefined : message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -333,7 +333,7 @@ export const QueryAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -511,11 +511,11 @@ export const QueryPaymentsRequest = {
   },
   toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
     const obj: any = {};
-    obj.scope = message.scope;
-    obj.xid = message.xid;
-    obj.id = message.id;
-    obj.owner = message.owner;
-    obj.state = message.state;
+    obj.scope = message.scope === "" ? undefined : message.scope;
+    obj.xid = message.xid === "" ? undefined : message.xid;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.state = message.state === "" ? undefined : message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -637,7 +637,7 @@ export const QueryPaymentsResponse = {
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e) : undefined);
     } else {
-      obj.payments = [];
+      obj.payments = message.payments;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

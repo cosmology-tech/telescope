@@ -337,15 +337,15 @@ export const MsgSubmitProposal = {
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? ProposalContentI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
-      obj.messages = [];
+      obj.messages = message.messages;
     }
     if (message.initialDeposit) {
       obj.initial_deposit = message.initialDeposit.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.initial_deposit = [];
+      obj.initial_deposit = message.initialDeposit;
     }
-    obj.proposer = message.proposer;
-    obj.metadata = message.metadata;
+    obj.proposer = message.proposer === "" ? undefined : message.proposer;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgSubmitProposalProtoMsg, useInterfaces: boolean = true): MsgSubmitProposal {
@@ -527,7 +527,7 @@ export const MsgExecLegacyContent = {
   toAmino(message: MsgExecLegacyContent, useInterfaces: boolean = true): MsgExecLegacyContentAmino {
     const obj: any = {};
     obj.content = message.content ? ProposalContentI_ToAmino((message.content as Any), useInterfaces) : undefined;
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     return obj;
   },
   fromProtoMsg(message: MsgExecLegacyContentProtoMsg, useInterfaces: boolean = true): MsgExecLegacyContent {
@@ -709,7 +709,7 @@ export const MsgVote = {
       message.voter = object.voter;
     }
     if (object.option !== undefined && object.option !== null) {
-      message.option = voteOptionFromJSON(object.option);
+      message.option = object.option;
     }
     if (object.metadata !== undefined && object.metadata !== null) {
       message.metadata = object.metadata;
@@ -718,10 +718,10 @@ export const MsgVote = {
   },
   toAmino(message: MsgVote, useInterfaces: boolean = true): MsgVoteAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
-    obj.option = voteOptionToJSON(message.option);
-    obj.metadata = message.metadata;
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : "0";
+    obj.voter = message.voter === "" ? undefined : message.voter;
+    obj.option = message.option === 0 ? undefined : message.option;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgVoteProtoMsg, useInterfaces: boolean = true): MsgVote {
@@ -918,14 +918,14 @@ export const MsgVoteWeighted = {
   },
   toAmino(message: MsgVoteWeighted, useInterfaces: boolean = true): MsgVoteWeightedAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : "0";
+    obj.voter = message.voter === "" ? undefined : message.voter;
     if (message.options) {
       obj.options = message.options.map(e => e ? WeightedVoteOption.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.metadata = message.metadata;
+    obj.metadata = message.metadata === "" ? undefined : message.metadata;
     return obj;
   },
   fromProtoMsg(message: MsgVoteWeightedProtoMsg, useInterfaces: boolean = true): MsgVoteWeighted {
@@ -1107,12 +1107,12 @@ export const MsgDeposit = {
   },
   toAmino(message: MsgDeposit, useInterfaces: boolean = true): MsgDepositAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.depositor = message.depositor;
+    obj.proposal_id = message.proposalId ? message.proposalId.toString() : "0";
+    obj.depositor = message.depositor === "" ? undefined : message.depositor;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -1220,7 +1220,7 @@ export const ProposalContentI_InterfaceDecoder = (input: BinaryReader | Uint8Arr
       return data;
   }
 };
-export const ProposalContentI_FromAmino = (content: AnyAmino) => {
+export const ProposalContentI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/v1/TextProposal":
       return Any.fromPartial({

@@ -92,7 +92,7 @@ export const Params = {
     if (message.denomCreationFee) {
       obj.denom_creation_fee = message.denomCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.denom_creation_fee = [];
+      obj.denom_creation_fee = message.denomCreationFee;
     }
     return obj;
   },

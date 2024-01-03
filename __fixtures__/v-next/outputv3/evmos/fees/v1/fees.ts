@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -138,9 +138,9 @@ export const DevFeeInfo = {
   },
   toAmino(message: DevFeeInfo, useInterfaces: boolean = true): DevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = omitDefault(message.contractAddress);
-    obj.deployer_address = omitDefault(message.deployerAddress);
-    obj.withdraw_address = omitDefault(message.withdrawAddress);
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     return obj;
   },
   fromProtoMsg(message: DevFeeInfoProtoMsg, useInterfaces: boolean = true): DevFeeInfo {

@@ -1,6 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -181,10 +181,10 @@ export const BaseAccount = {
   },
   toAmino(message: BaseAccount): BaseAccountAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
-    obj.account_number = omitDefault(message.accountNumber);
-    obj.sequence = omitDefault(message.sequence);
+    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BaseAccountAminoMsg): BaseAccount {
@@ -317,11 +317,11 @@ export const ModuleAccount = {
   toAmino(message: ModuleAccount): ModuleAccountAmino {
     const obj: any = {};
     obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.name = omitDefault(message.name);
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.permissions) {
       obj.permissions = message.permissions.map(e => e);
     } else {
-      obj.permissions = [];
+      obj.permissions = message.permissions;
     }
     return obj;
   },
@@ -480,11 +480,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.max_memo_characters = omitDefault(message.maxMemoCharacters);
-    obj.tx_sig_limit = omitDefault(message.txSigLimit);
-    obj.tx_size_cost_per_byte = omitDefault(message.txSizeCostPerByte);
-    obj.sig_verify_cost_ed25519 = omitDefault(message.sigVerifyCostEd25519);
-    obj.sig_verify_cost_secp256k1 = omitDefault(message.sigVerifyCostSecp256k1);
+    obj.max_memo_characters = message.maxMemoCharacters ? message.maxMemoCharacters.toString() : undefined;
+    obj.tx_sig_limit = message.txSigLimit ? message.txSigLimit.toString() : undefined;
+    obj.tx_size_cost_per_byte = message.txSizeCostPerByte ? message.txSizeCostPerByte.toString() : undefined;
+    obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519 ? message.sigVerifyCostEd25519.toString() : undefined;
+    obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1 ? message.sigVerifyCostSecp256k1.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

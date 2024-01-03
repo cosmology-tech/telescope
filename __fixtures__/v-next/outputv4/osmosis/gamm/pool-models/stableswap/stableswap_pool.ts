@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, padDecimal, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -152,8 +152,8 @@ export const PoolParams = {
   },
   toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
-    obj.swap_fee = padDecimal(message.swapFee);
-    obj.exit_fee = padDecimal(message.exitFee);
+    obj.swap_fee = padDecimal(message.swapFee) === "" ? undefined : padDecimal(message.swapFee);
+    obj.exit_fee = padDecimal(message.exitFee) === "" ? undefined : padDecimal(message.exitFee);
     return obj;
   },
   fromAminoMsg(object: PoolParamsAminoMsg): PoolParams {
@@ -386,22 +386,22 @@ export const Pool = {
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.id = omitDefault(message.id);
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.id = message.id ? message.id.toString() : undefined;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
-    obj.future_pool_governor = omitDefault(message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
     if (message.poolLiquidity) {
       obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.pool_liquidity = [];
+      obj.pool_liquidity = message.poolLiquidity;
     }
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {
-      obj.scaling_factors = [];
+      obj.scaling_factors = message.scalingFactors;
     }
-    obj.scaling_factor_controller = omitDefault(message.scalingFactorController);
+    obj.scaling_factor_controller = message.scalingFactorController === "" ? undefined : message.scalingFactorController;
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

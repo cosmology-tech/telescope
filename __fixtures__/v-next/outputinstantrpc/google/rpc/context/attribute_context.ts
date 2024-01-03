@@ -788,7 +788,7 @@ export const AttributeContext = {
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.extensions = [];
+      obj.extensions = message.extensions;
     }
     return obj;
   },
@@ -892,8 +892,8 @@ export const AttributeContext_Peer_LabelsEntry = {
   },
   toAmino(message: AttributeContext_Peer_LabelsEntry): AttributeContext_Peer_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Peer_LabelsEntryAminoMsg): AttributeContext_Peer_LabelsEntry {
@@ -1084,7 +1084,7 @@ export const AttributeContext_Peer = {
   },
   toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
     const obj: any = {};
-    obj.ip = message.ip;
+    obj.ip = message.ip === "" ? undefined : message.ip;
     obj.port = message.port ? message.port.toString() : undefined;
     obj.labels = {};
     if (message.labels) {
@@ -1092,8 +1092,8 @@ export const AttributeContext_Peer = {
         obj.labels[k] = v;
       });
     }
-    obj.principal = message.principal;
-    obj.region_code = message.regionCode;
+    obj.principal = message.principal === "" ? undefined : message.principal;
+    obj.region_code = message.regionCode === "" ? undefined : message.regionCode;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_PeerAminoMsg): AttributeContext_Peer {
@@ -1229,10 +1229,10 @@ export const AttributeContext_Api = {
   },
   toAmino(message: AttributeContext_Api): AttributeContext_ApiAmino {
     const obj: any = {};
-    obj.service = message.service;
-    obj.operation = message.operation;
-    obj.protocol = message.protocol;
-    obj.version = message.version;
+    obj.service = message.service === "" ? undefined : message.service;
+    obj.operation = message.operation === "" ? undefined : message.operation;
+    obj.protocol = message.protocol === "" ? undefined : message.protocol;
+    obj.version = message.version === "" ? undefined : message.version;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ApiAminoMsg): AttributeContext_Api {
@@ -1398,18 +1398,18 @@ export const AttributeContext_Auth = {
   },
   toAmino(message: AttributeContext_Auth): AttributeContext_AuthAmino {
     const obj: any = {};
-    obj.principal = message.principal;
+    obj.principal = message.principal === "" ? undefined : message.principal;
     if (message.audiences) {
       obj.audiences = message.audiences.map(e => e);
     } else {
-      obj.audiences = [];
+      obj.audiences = message.audiences;
     }
-    obj.presenter = message.presenter;
+    obj.presenter = message.presenter === "" ? undefined : message.presenter;
     obj.claims = message.claims ? Struct.toAmino(message.claims) : undefined;
     if (message.accessLevels) {
       obj.access_levels = message.accessLevels.map(e => e);
     } else {
-      obj.access_levels = [];
+      obj.access_levels = message.accessLevels;
     }
     return obj;
   },
@@ -1513,8 +1513,8 @@ export const AttributeContext_Request_HeadersEntry = {
   },
   toAmino(message: AttributeContext_Request_HeadersEntry): AttributeContext_Request_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Request_HeadersEntryAminoMsg): AttributeContext_Request_HeadersEntry {
@@ -1819,22 +1819,22 @@ export const AttributeContext_Request = {
   },
   toAmino(message: AttributeContext_Request): AttributeContext_RequestAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.method = message.method;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.method = message.method === "" ? undefined : message.method;
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {
         obj.headers[k] = v;
       });
     }
-    obj.path = message.path;
-    obj.host = message.host;
-    obj.scheme = message.scheme;
-    obj.query = message.query;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.host = message.host === "" ? undefined : message.host;
+    obj.scheme = message.scheme === "" ? undefined : message.scheme;
+    obj.query = message.query === "" ? undefined : message.query;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.size = message.size ? message.size.toString() : undefined;
-    obj.protocol = message.protocol;
-    obj.reason = message.reason;
+    obj.protocol = message.protocol === "" ? undefined : message.protocol;
+    obj.reason = message.reason === "" ? undefined : message.reason;
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
     return obj;
   },
@@ -1938,8 +1938,8 @@ export const AttributeContext_Response_HeadersEntry = {
   },
   toAmino(message: AttributeContext_Response_HeadersEntry): AttributeContext_Response_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Response_HeadersEntryAminoMsg): AttributeContext_Response_HeadersEntry {
@@ -2246,8 +2246,8 @@ export const AttributeContext_Resource_LabelsEntry = {
   },
   toAmino(message: AttributeContext_Resource_LabelsEntry): AttributeContext_Resource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_LabelsEntryAminoMsg): AttributeContext_Resource_LabelsEntry {
@@ -2344,8 +2344,8 @@ export const AttributeContext_Resource_AnnotationsEntry = {
   },
   toAmino(message: AttributeContext_Resource_AnnotationsEntry): AttributeContext_Resource_AnnotationsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_Resource_AnnotationsEntryAminoMsg): AttributeContext_Resource_AnnotationsEntry {
@@ -2689,28 +2689,28 @@ export const AttributeContext_Resource = {
   },
   toAmino(message: AttributeContext_Resource): AttributeContext_ResourceAmino {
     const obj: any = {};
-    obj.service = message.service;
-    obj.name = message.name;
-    obj.type = message.type;
+    obj.service = message.service === "" ? undefined : message.service;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
         obj.labels[k] = v;
       });
     }
-    obj.uid = message.uid;
+    obj.uid = message.uid === "" ? undefined : message.uid;
     obj.annotations = {};
     if (message.annotations) {
       Object.entries(message.annotations).forEach(([k, v]) => {
         obj.annotations[k] = v;
       });
     }
-    obj.display_name = message.displayName;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     obj.delete_time = message.deleteTime ? Timestamp.toAmino(toTimestamp(message.deleteTime)) : undefined;
-    obj.etag = message.etag;
-    obj.location = message.location;
+    obj.etag = message.etag === "" ? undefined : message.etag;
+    obj.location = message.location === "" ? undefined : message.location;
     return obj;
   },
   fromAminoMsg(object: AttributeContext_ResourceAminoMsg): AttributeContext_Resource {

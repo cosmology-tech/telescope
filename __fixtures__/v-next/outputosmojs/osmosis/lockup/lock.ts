@@ -312,13 +312,13 @@ export const PeriodLock = {
   toAmino(message: PeriodLock): PeriodLockAmino {
     const obj: any = {};
     obj.ID = message.ID ? message.ID.toString() : undefined;
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -446,7 +446,7 @@ export const QueryCondition = {
   fromAmino(object: QueryConditionAmino): QueryCondition {
     const message = createBaseQueryCondition();
     if (object.lock_query_type !== undefined && object.lock_query_type !== null) {
-      message.lockQueryType = lockQueryTypeFromJSON(object.lock_query_type);
+      message.lockQueryType = object.lock_query_type;
     }
     if (object.denom !== undefined && object.denom !== null) {
       message.denom = object.denom;
@@ -461,8 +461,8 @@ export const QueryCondition = {
   },
   toAmino(message: QueryCondition): QueryConditionAmino {
     const obj: any = {};
-    obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType);
-    obj.denom = message.denom;
+    obj.lock_query_type = message.lockQueryType === 0 ? undefined : message.lockQueryType;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
@@ -607,7 +607,7 @@ export const SyntheticLock = {
   toAmino(message: SyntheticLock): SyntheticLockAmino {
     const obj: any = {};
     obj.underlying_lock_id = message.underlyingLockId ? message.underlyingLockId.toString() : undefined;
-    obj.synth_denom = message.synthDenom;
+    obj.synth_denom = message.synthDenom === "" ? undefined : message.synthDenom;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;

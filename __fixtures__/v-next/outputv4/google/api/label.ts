@@ -153,7 +153,7 @@ export const LabelDescriptor = {
       message.key = object.key;
     }
     if (object.value_type !== undefined && object.value_type !== null) {
-      message.valueType = labelDescriptor_ValueTypeFromJSON(object.value_type);
+      message.valueType = object.value_type;
     }
     if (object.description !== undefined && object.description !== null) {
       message.description = object.description;
@@ -162,9 +162,9 @@ export const LabelDescriptor = {
   },
   toAmino(message: LabelDescriptor): LabelDescriptorAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType);
-    obj.description = message.description;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value_type = message.valueType === 0 ? undefined : message.valueType;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {

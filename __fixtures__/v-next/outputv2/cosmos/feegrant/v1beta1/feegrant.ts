@@ -281,7 +281,7 @@ export const BasicAllowance = {
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.spend_limit = [];
+      obj.spend_limit = message.spendLimit;
     }
     obj.expiration = message.expiration ? Timestamp.toAmino(toTimestamp(message.expiration)) : undefined;
     return obj;
@@ -455,12 +455,12 @@ export const PeriodicAllowance = {
     if (message.periodSpendLimit) {
       obj.period_spend_limit = message.periodSpendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.period_spend_limit = [];
+      obj.period_spend_limit = message.periodSpendLimit;
     }
     if (message.periodCanSpend) {
       obj.period_can_spend = message.periodCanSpend.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.period_can_spend = [];
+      obj.period_can_spend = message.periodCanSpend;
     }
     obj.period_reset = message.periodReset ? Timestamp.toAmino(toTimestamp(message.periodReset)) : undefined;
     return obj;
@@ -580,7 +580,7 @@ export const AllowedMsgAllowance = {
     if (message.allowedMessages) {
       obj.allowed_messages = message.allowedMessages.map(e => e);
     } else {
-      obj.allowed_messages = [];
+      obj.allowed_messages = message.allowedMessages;
     }
     return obj;
   },
@@ -703,8 +703,8 @@ export const Grant = {
   },
   toAmino(message: Grant): GrantAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any)) : undefined;
     return obj;
   },
@@ -744,7 +744,7 @@ export const FeeAllowanceI_InterfaceDecoder = (input: BinaryReader | Uint8Array)
       return data;
   }
 };
-export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
+export const FeeAllowanceI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/BasicAllowance":
       return Any.fromPartial({

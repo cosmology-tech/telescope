@@ -161,14 +161,14 @@ export const MsgCreateBalancerPool = {
   },
   toAmino(message: MsgCreateBalancerPool, useInterfaces: boolean = true): MsgCreateBalancerPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pool_assets = [];
+      obj.pool_assets = message.poolAssets;
     }
-    obj.future_pool_governor = message.futurePoolGovernor;
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     return obj;
   },
   fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg, useInterfaces: boolean = true): MsgCreateBalancerPool {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -130,8 +130,8 @@ export const App = {
   },
   toAmino(message: App): AppAmino {
     const obj: any = {};
-    obj.protocol = omitDefault(message.protocol);
-    obj.software = omitDefault(message.software);
+    obj.protocol = message.protocol ? message.protocol.toString() : undefined;
+    obj.software = message.software === "" ? undefined : message.software;
     return obj;
   },
   fromAminoMsg(object: AppAminoMsg): App {
@@ -235,8 +235,8 @@ export const Consensus = {
   },
   toAmino(message: Consensus): ConsensusAmino {
     const obj: any = {};
-    obj.block = omitDefault(message.block);
-    obj.app = omitDefault(message.app);
+    obj.block = message.block ? message.block.toString() : undefined;
+    obj.app = message.app ? message.app.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ConsensusAminoMsg): Consensus {

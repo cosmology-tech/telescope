@@ -187,7 +187,7 @@ export const BaseAccount = {
   },
   toAmino(message: BaseAccount): BaseAccountAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
     obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
@@ -325,11 +325,11 @@ export const ModuleAccount = {
   toAmino(message: ModuleAccount): ModuleAccountAmino {
     const obj: any = {};
     obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.permissions) {
       obj.permissions = message.permissions.map(e => e);
     } else {
-      obj.permissions = [];
+      obj.permissions = message.permissions;
     }
     return obj;
   },

@@ -247,7 +247,7 @@ export const GenesisState = {
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
@@ -241,7 +241,7 @@ export const Visibility = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     return obj;
   },
@@ -337,8 +337,8 @@ export const VisibilityRule = {
   },
   toAmino(message: VisibilityRule, useInterfaces: boolean = true): VisibilityRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.restriction = omitDefault(message.restriction);
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.restriction = message.restriction === "" ? undefined : message.restriction;
     return obj;
   },
   fromProtoMsg(message: VisibilityRuleProtoMsg, useInterfaces: boolean = true): VisibilityRule {

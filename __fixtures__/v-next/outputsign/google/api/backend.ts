@@ -359,7 +359,7 @@ export const Backend = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     return obj;
   },
@@ -496,7 +496,7 @@ export const BackendRule = {
       message.operationDeadline = object.operation_deadline;
     }
     if (object.path_translation !== undefined && object.path_translation !== null) {
-      message.pathTranslation = backendRule_PathTranslationFromJSON(object.path_translation);
+      message.pathTranslation = object.path_translation;
     }
     if (object.jwt_audience !== undefined && object.jwt_audience !== null) {
       message.jwtAudience = object.jwt_audience;
@@ -511,15 +511,15 @@ export const BackendRule = {
   },
   toAmino(message: BackendRule): BackendRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.address = message.address;
-    obj.deadline = message.deadline;
-    obj.min_deadline = message.minDeadline;
-    obj.operation_deadline = message.operationDeadline;
-    obj.path_translation = backendRule_PathTranslationToJSON(message.pathTranslation);
-    obj.jwt_audience = message.jwtAudience;
-    obj.disable_auth = message.disableAuth;
-    obj.protocol = message.protocol;
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.deadline = message.deadline === 0 ? undefined : message.deadline;
+    obj.min_deadline = message.minDeadline === 0 ? undefined : message.minDeadline;
+    obj.operation_deadline = message.operationDeadline === 0 ? undefined : message.operationDeadline;
+    obj.path_translation = message.pathTranslation === 0 ? undefined : message.pathTranslation;
+    obj.jwt_audience = message.jwtAudience === null ? undefined : message.jwtAudience;
+    obj.disable_auth = message.disableAuth === null ? undefined : message.disableAuth;
+    obj.protocol = message.protocol === "" ? undefined : message.protocol;
     return obj;
   },
   fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {

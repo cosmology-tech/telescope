@@ -246,15 +246,15 @@ export const MsgCreateVestingAccount = {
   },
   toAmino(message: MsgCreateVestingAccount): MsgCreateVestingAccountAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
+    obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     obj.end_time = message.endTime ? message.endTime.toString() : undefined;
-    obj.delayed = message.delayed;
+    obj.delayed = message.delayed === false ? undefined : message.delayed;
     return obj;
   },
   fromAminoMsg(object: MsgCreateVestingAccountAminoMsg): MsgCreateVestingAccount {
@@ -460,12 +460,12 @@ export const MsgCreatePermanentLockedAccount = {
   },
   toAmino(message: MsgCreatePermanentLockedAccount): MsgCreatePermanentLockedAccountAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
+    obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -690,13 +690,13 @@ export const MsgCreatePeriodicVestingAccount = {
   },
   toAmino(message: MsgCreatePeriodicVestingAccount): MsgCreatePeriodicVestingAccountAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
+    obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
     obj.start_time = message.startTime ? message.startTime.toString() : undefined;
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = message.vestingPeriods;
     }
     return obj;
   },

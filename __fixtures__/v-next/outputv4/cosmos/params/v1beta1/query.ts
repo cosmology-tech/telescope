@@ -1,6 +1,6 @@
 import { ParamChange, ParamChangeSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -168,8 +168,8 @@ export const QueryParamsRequest = {
   },
   toAmino(message: QueryParamsRequest): QueryParamsRequestAmino {
     const obj: any = {};
-    obj.subspace = omitDefault(message.subspace);
-    obj.key = omitDefault(message.key);
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
+    obj.key = message.key === "" ? undefined : message.key;
     return obj;
   },
   fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
@@ -442,7 +442,7 @@ export const QuerySubspacesResponse = {
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map(e => e ? Subspace.toAmino(e) : undefined);
     } else {
-      obj.subspaces = [];
+      obj.subspaces = message.subspaces;
     }
     return obj;
   },
@@ -559,11 +559,11 @@ export const Subspace = {
   },
   toAmino(message: Subspace): SubspaceAmino {
     const obj: any = {};
-    obj.subspace = omitDefault(message.subspace);
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },

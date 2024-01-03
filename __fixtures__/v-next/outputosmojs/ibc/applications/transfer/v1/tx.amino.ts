@@ -58,7 +58,7 @@ export const AminoConverter = {
       return {
         sourcePort: source_port,
         sourceChannel: source_channel,
-        token: {
+        token: token == null ? token : {
           denom: token.denom,
           amount: token.amount
         },
@@ -68,7 +68,7 @@ export const AminoConverter = {
           revisionHeight: BigInt(timeout_height.revision_height || "0"),
           revisionNumber: BigInt(timeout_height.revision_number || "0")
         } : undefined,
-        timeoutTimestamp: BigInt(timeout_timestamp)
+        timeoutTimestamp: timeout_timestamp == null ? timeout_timestamp : BigInt(timeout_timestamp)
       };
     }
   }

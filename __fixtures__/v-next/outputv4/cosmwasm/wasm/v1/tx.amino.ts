@@ -89,9 +89,9 @@ export const AminoConverter = {
     }: MsgStoreCodeAminoType["value"]): MsgStoreCode => {
       return {
         sender,
-        wasmByteCode: fromBase64(wasm_byte_code),
-        instantiatePermission: {
-          permission: accessTypeFromJSON(instantiate_permission.permission),
+        wasmByteCode: wasm_byte_code == null ? wasm_byte_code : fromBase64(wasm_byte_code),
+        instantiatePermission: instantiate_permission == null ? instantiate_permission : {
+          permission: instantiate_permission.permission == null ? instantiate_permission.permission : accessTypeFromJSON(instantiate_permission.permission),
           address: instantiate_permission.address
         }
       };
@@ -130,10 +130,10 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        codeId: BigInt(code_id),
+        codeId: code_id == null ? code_id : BigInt(code_id),
         label,
-        msg: toUtf8(JSON.stringify(msg)),
-        funds: funds.map(el0 => ({
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        funds: funds.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -167,8 +167,8 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        msg: toUtf8(JSON.stringify(msg)),
-        funds: funds.map(el0 => ({
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        funds: funds.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -199,8 +199,8 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        codeId: BigInt(code_id),
-        msg: toUtf8(JSON.stringify(msg))
+        codeId: code_id == null ? code_id : BigInt(code_id),
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg))
       };
     }
   },

@@ -1,6 +1,6 @@
 import { IdentifiedConnection, IdentifiedConnectionAmino, IdentifiedConnectionSDKType, ConnectionPaths, ConnectionPathsAmino, ConnectionPathsSDKType, Params, ParamsAmino, ParamsSDKType } from "./connection";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.core.connection.v1";
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisState {
@@ -162,14 +162,14 @@ export const GenesisState = {
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e) : undefined);
     } else {
-      obj.connections = [];
+      obj.connections = message.connections;
     }
     if (message.clientConnectionPaths) {
       obj.client_connection_paths = message.clientConnectionPaths.map(e => e ? ConnectionPaths.toAmino(e) : undefined);
     } else {
-      obj.client_connection_paths = [];
+      obj.client_connection_paths = message.clientConnectionPaths;
     }
-    obj.next_connection_sequence = omitDefault(message.nextConnectionSequence);
+    obj.next_connection_sequence = message.nextConnectionSequence ? message.nextConnectionSequence.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

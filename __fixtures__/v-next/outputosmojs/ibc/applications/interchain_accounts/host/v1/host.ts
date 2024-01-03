@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../../helpers";
+import { isSet, DeepPartial } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
 /**
  * Params defines the set of on-chain interchain accounts parameters.
@@ -114,11 +114,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.host_enabled = omitDefault(message.hostEnabled);
+    obj.host_enabled = message.hostEnabled === false ? undefined : message.hostEnabled;
     if (message.allowMessages) {
       obj.allow_messages = message.allowMessages.map(e => e);
     } else {
-      obj.allow_messages = [];
+      obj.allow_messages = message.allowMessages;
     }
     return obj;
   },

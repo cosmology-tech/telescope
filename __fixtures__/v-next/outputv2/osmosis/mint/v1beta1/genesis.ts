@@ -1,6 +1,6 @@
 import { Minter, MinterAmino, MinterSDKType, Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
@@ -143,7 +143,7 @@ export const GenesisState = {
     const obj: any = {};
     obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.reduction_started_epoch = omitDefault(message.reductionStartedEpoch);
+    obj.reduction_started_epoch = message.reductionStartedEpoch ? message.reductionStartedEpoch.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

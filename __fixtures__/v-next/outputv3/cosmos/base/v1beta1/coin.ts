@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.base.v1beta1";
 /**
  * Coin defines a token with a denomination and an amount.
@@ -181,8 +181,8 @@ export const Coin = {
   },
   toAmino(message: Coin, useInterfaces: boolean = true): CoinAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
-    obj.amount = omitDefault(message.amount);
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromProtoMsg(message: CoinProtoMsg, useInterfaces: boolean = true): Coin {
@@ -278,8 +278,8 @@ export const DecCoin = {
   },
   toAmino(message: DecCoin, useInterfaces: boolean = true): DecCoinAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
-    obj.amount = omitDefault(message.amount);
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromProtoMsg(message: DecCoinProtoMsg, useInterfaces: boolean = true): DecCoin {
@@ -360,7 +360,7 @@ export const IntProto = {
   },
   toAmino(message: IntProto, useInterfaces: boolean = true): IntProtoAmino {
     const obj: any = {};
-    obj.int = omitDefault(message.int);
+    obj.int = message.int === "" ? undefined : message.int;
     return obj;
   },
   fromProtoMsg(message: IntProtoProtoMsg, useInterfaces: boolean = true): IntProto {
@@ -441,7 +441,7 @@ export const DecProto = {
   },
   toAmino(message: DecProto, useInterfaces: boolean = true): DecProtoAmino {
     const obj: any = {};
-    obj.dec = omitDefault(message.dec);
+    obj.dec = message.dec === "" ? undefined : message.dec;
     return obj;
   },
   fromProtoMsg(message: DecProtoProtoMsg, useInterfaces: boolean = true): DecProto {

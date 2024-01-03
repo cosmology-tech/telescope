@@ -1,6 +1,6 @@
 import { FileDescriptorProto, FileDescriptorProtoAmino, FileDescriptorProtoSDKType } from "../descriptor";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -398,10 +398,10 @@ export const Version = {
   },
   toAmino(message: Version): VersionAmino {
     const obj: any = {};
-    obj.major = omitDefault(message.major);
-    obj.minor = omitDefault(message.minor);
-    obj.patch = omitDefault(message.patch);
-    obj.suffix = omitDefault(message.suffix);
+    obj.major = message.major === 0 ? undefined : message.major;
+    obj.minor = message.minor === 0 ? undefined : message.minor;
+    obj.patch = message.patch === 0 ? undefined : message.patch;
+    obj.suffix = message.suffix === "" ? undefined : message.suffix;
     return obj;
   },
   fromAminoMsg(object: VersionAminoMsg): Version {
@@ -546,13 +546,13 @@ export const CodeGeneratorRequest = {
     if (message.fileToGenerate) {
       obj.file_to_generate = message.fileToGenerate.map(e => e);
     } else {
-      obj.file_to_generate = [];
+      obj.file_to_generate = message.fileToGenerate;
     }
-    obj.parameter = omitDefault(message.parameter);
+    obj.parameter = message.parameter === "" ? undefined : message.parameter;
     if (message.protoFile) {
       obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e) : undefined);
     } else {
-      obj.proto_file = [];
+      obj.proto_file = message.protoFile;
     }
     obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion) : undefined;
     return obj;
@@ -658,11 +658,11 @@ export const CodeGeneratorResponse = {
   },
   toAmino(message: CodeGeneratorResponse): CodeGeneratorResponseAmino {
     const obj: any = {};
-    obj.error = omitDefault(message.error);
+    obj.error = message.error === "" ? undefined : message.error;
     if (message.file) {
       obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e) : undefined);
     } else {
-      obj.file = [];
+      obj.file = message.file;
     }
     return obj;
   },
@@ -776,9 +776,9 @@ export const CodeGeneratorResponse_File = {
   },
   toAmino(message: CodeGeneratorResponse_File): CodeGeneratorResponse_FileAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.insertion_point = omitDefault(message.insertionPoint);
-    obj.content = omitDefault(message.content);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.insertion_point = message.insertionPoint === "" ? undefined : message.insertionPoint;
+    obj.content = message.content === "" ? undefined : message.content;
     return obj;
   },
   fromAminoMsg(object: CodeGeneratorResponse_FileAminoMsg): CodeGeneratorResponse_File {

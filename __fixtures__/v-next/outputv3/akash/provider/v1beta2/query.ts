@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
@@ -242,7 +242,7 @@ export const QueryProvidersResponse = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -324,7 +324,7 @@ export const QueryProviderRequest = {
   },
   toAmino(message: QueryProviderRequest, useInterfaces: boolean = true): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.owner = omitDefault(message.owner);
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: QueryProviderRequestProtoMsg, useInterfaces: boolean = true): QueryProviderRequest {

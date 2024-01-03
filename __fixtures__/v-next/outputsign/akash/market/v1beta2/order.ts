@@ -220,10 +220,10 @@ export const OrderID = {
   },
   toAmino(message: OrderID): OrderIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
     return obj;
   },
   fromAminoMsg(object: OrderIDAminoMsg): OrderID {
@@ -313,7 +313,7 @@ export const Order = {
       message.orderId = OrderID.fromAmino(object.order_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = order_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.spec !== undefined && object.spec !== null) {
       message.spec = GroupSpec.fromAmino(object.spec);
@@ -325,9 +325,9 @@ export const Order = {
   },
   toAmino(message: Order): OrderAmino {
     const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
-    obj.state = order_StateToJSON(message.state);
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : OrderID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : GroupSpec.fromPartial({});
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
@@ -437,11 +437,11 @@ export const OrderFilters = {
   },
   toAmino(message: OrderFilters): OrderFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.state = message.state ?? "";
     return obj;
   },
   fromAminoMsg(object: OrderFiltersAminoMsg): OrderFilters {

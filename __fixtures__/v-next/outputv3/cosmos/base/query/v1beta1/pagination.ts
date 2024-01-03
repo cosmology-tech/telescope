@@ -296,8 +296,8 @@ export const PageRequest = {
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.offset = message.offset ? message.offset.toString() : undefined;
     obj.limit = message.limit ? message.limit.toString() : undefined;
-    obj.count_total = message.countTotal;
-    obj.reverse = message.reverse;
+    obj.count_total = message.countTotal === false ? undefined : message.countTotal;
+    obj.reverse = message.reverse === false ? undefined : message.reverse;
     return obj;
   },
   fromProtoMsg(message: PageRequestProtoMsg, useInterfaces: boolean = true): PageRequest {

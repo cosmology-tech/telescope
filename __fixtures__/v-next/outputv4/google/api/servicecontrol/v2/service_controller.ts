@@ -1,7 +1,7 @@
 import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/attribute_context";
 import { Status, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, isObject } from "../../../../helpers";
+import { isSet, DeepPartial, isObject } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -305,15 +305,15 @@ export const CheckRequest = {
   },
   toAmino(message: CheckRequest): CheckRequestAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
-    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes) : undefined;
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
-    obj.flags = omitDefault(message.flags);
+    obj.flags = message.flags === "" ? undefined : message.flags;
     return obj;
   },
   fromAminoMsg(object: CheckRequestAminoMsg): CheckRequest {
@@ -465,11 +465,11 @@ export const ResourceInfo = {
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.type = omitDefault(message.type);
-    obj.permission = omitDefault(message.permission);
-    obj.container = omitDefault(message.container);
-    obj.location = omitDefault(message.location);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.permission = message.permission === "" ? undefined : message.permission;
+    obj.container = message.container === "" ? undefined : message.container;
+    obj.location = message.location === "" ? undefined : message.location;
     return obj;
   },
   fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
@@ -572,8 +572,8 @@ export const CheckResponse_HeadersEntry = {
   },
   toAmino(message: CheckResponse_HeadersEntry): CheckResponse_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: CheckResponse_HeadersEntryAminoMsg): CheckResponse_HeadersEntry {
@@ -848,12 +848,12 @@ export const ReportRequest = {
   },
   toAmino(message: ReportRequest): ReportRequestAmino {
     const obj: any = {};
-    obj.service_name = omitDefault(message.serviceName);
-    obj.service_config_id = omitDefault(message.serviceConfigId);
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e) : undefined);
     } else {
-      obj.operations = [];
+      obj.operations = message.operations;
     }
     return obj;
   },

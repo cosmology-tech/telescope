@@ -701,19 +701,19 @@ export const Distribution = {
   toAmino(message: Distribution, useInterfaces: boolean = true): DistributionAmino {
     const obj: any = {};
     obj.count = message.count ? message.count.toString() : undefined;
-    obj.mean = message.mean;
-    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation;
+    obj.mean = message.mean === 0 ? undefined : message.mean;
+    obj.sum_of_squared_deviation = message.sumOfSquaredDeviation === 0 ? undefined : message.sumOfSquaredDeviation;
     obj.range = message.range ? Distribution_Range.toAmino(message.range, useInterfaces) : undefined;
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions, useInterfaces) : undefined;
     if (message.bucketCounts) {
       obj.bucket_counts = message.bucketCounts.map(e => e.toString());
     } else {
-      obj.bucket_counts = [];
+      obj.bucket_counts = message.bucketCounts;
     }
     if (message.exemplars) {
       obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.exemplars = [];
+      obj.exemplars = message.exemplars;
     }
     return obj;
   },
@@ -809,8 +809,8 @@ export const Distribution_Range = {
   },
   toAmino(message: Distribution_Range, useInterfaces: boolean = true): Distribution_RangeAmino {
     const obj: any = {};
-    obj.min = message.min;
-    obj.max = message.max;
+    obj.min = message.min === 0 ? undefined : message.min;
+    obj.max = message.max === 0 ? undefined : message.max;
     return obj;
   },
   fromProtoMsg(message: Distribution_RangeProtoMsg, useInterfaces: boolean = true): Distribution_Range {
@@ -1038,9 +1038,9 @@ export const Distribution_BucketOptions_Linear = {
   },
   toAmino(message: Distribution_BucketOptions_Linear, useInterfaces: boolean = true): Distribution_BucketOptions_LinearAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.width = message.width;
-    obj.offset = message.offset;
+    obj.num_finite_buckets = message.numFiniteBuckets === 0 ? undefined : message.numFiniteBuckets;
+    obj.width = message.width === 0 ? undefined : message.width;
+    obj.offset = message.offset === 0 ? undefined : message.offset;
     return obj;
   },
   fromProtoMsg(message: Distribution_BucketOptions_LinearProtoMsg, useInterfaces: boolean = true): Distribution_BucketOptions_Linear {
@@ -1150,9 +1150,9 @@ export const Distribution_BucketOptions_Exponential = {
   },
   toAmino(message: Distribution_BucketOptions_Exponential, useInterfaces: boolean = true): Distribution_BucketOptions_ExponentialAmino {
     const obj: any = {};
-    obj.num_finite_buckets = message.numFiniteBuckets;
-    obj.growth_factor = message.growthFactor;
-    obj.scale = message.scale;
+    obj.num_finite_buckets = message.numFiniteBuckets === 0 ? undefined : message.numFiniteBuckets;
+    obj.growth_factor = message.growthFactor === 0 ? undefined : message.growthFactor;
+    obj.scale = message.scale === 0 ? undefined : message.scale;
     return obj;
   },
   fromProtoMsg(message: Distribution_BucketOptions_ExponentialProtoMsg, useInterfaces: boolean = true): Distribution_BucketOptions_Exponential {
@@ -1250,7 +1250,7 @@ export const Distribution_BucketOptions_Explicit = {
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
     } else {
-      obj.bounds = [];
+      obj.bounds = message.bounds;
     }
     return obj;
   },
@@ -1367,12 +1367,12 @@ export const Distribution_Exemplar = {
   },
   toAmino(message: Distribution_Exemplar, useInterfaces: boolean = true): Distribution_ExemplarAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     if (message.attachments) {
       obj.attachments = message.attachments.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attachments = [];
+      obj.attachments = message.attachments;
     }
     return obj;
   },

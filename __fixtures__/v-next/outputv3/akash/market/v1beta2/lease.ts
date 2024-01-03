@@ -343,11 +343,11 @@ export const LeaseID = {
   },
   toAmino(message: LeaseID, useInterfaces: boolean = true): LeaseIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
     return obj;
   },
   fromProtoMsg(message: LeaseIDProtoMsg, useInterfaces: boolean = true): LeaseID {
@@ -480,7 +480,7 @@ export const Lease = {
       message.leaseId = LeaseID.fromAmino(object.lease_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = lease_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.price !== undefined && object.price !== null) {
       message.price = DecCoin.fromAmino(object.price);
@@ -495,9 +495,9 @@ export const Lease = {
   },
   toAmino(message: Lease, useInterfaces: boolean = true): LeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : undefined;
-    obj.state = lease_StateToJSON(message.state);
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
     return obj;
@@ -656,12 +656,12 @@ export const LeaseFilters = {
   },
   toAmino(message: LeaseFilters, useInterfaces: boolean = true): LeaseFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.provider = message.provider;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.provider = message.provider ?? "";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromProtoMsg(message: LeaseFiltersProtoMsg, useInterfaces: boolean = true): LeaseFilters {
@@ -743,7 +743,7 @@ export const MsgCreateLease = {
   },
   toAmino(message: MsgCreateLease, useInterfaces: boolean = true): MsgCreateLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : undefined;
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCreateLeaseProtoMsg, useInterfaces: boolean = true): MsgCreateLease {
@@ -887,7 +887,7 @@ export const MsgWithdrawLease = {
   },
   toAmino(message: MsgWithdrawLease, useInterfaces: boolean = true): MsgWithdrawLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId, useInterfaces) : undefined;
+    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId, useInterfaces) : LeaseID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgWithdrawLeaseProtoMsg, useInterfaces: boolean = true): MsgWithdrawLease {
@@ -1031,7 +1031,7 @@ export const MsgCloseLease = {
   },
   toAmino(message: MsgCloseLease, useInterfaces: boolean = true): MsgCloseLeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : undefined;
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCloseLeaseProtoMsg, useInterfaces: boolean = true): MsgCloseLease {

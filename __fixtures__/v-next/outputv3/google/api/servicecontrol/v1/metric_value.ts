@@ -221,8 +221,8 @@ export const MetricValue_LabelsEntry = {
   },
   toAmino(message: MetricValue_LabelsEntry, useInterfaces: boolean = true): MetricValue_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: MetricValue_LabelsEntryProtoMsg, useInterfaces: boolean = true): MetricValue_LabelsEntry {
@@ -453,10 +453,10 @@ export const MetricValue = {
     }
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
-    obj.bool_value = message.boolValue;
+    obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.double_value = message.doubleValue === null ? undefined : message.doubleValue;
+    obj.string_value = message.stringValue === null ? undefined : message.stringValue;
     obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue, useInterfaces) : undefined;
     return obj;
   },
@@ -558,11 +558,11 @@ export const MetricValueSet = {
   },
   toAmino(message: MetricValueSet, useInterfaces: boolean = true): MetricValueSetAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = message.metricName === "" ? undefined : message.metricName;
     if (message.metricValues) {
       obj.metric_values = message.metricValues.map(e => e ? MetricValue.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.metric_values = [];
+      obj.metric_values = message.metricValues;
     }
     return obj;
   },

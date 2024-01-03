@@ -221,8 +221,8 @@ export const ProviderInfo = {
   },
   toAmino(message: ProviderInfo, useInterfaces: boolean = true): ProviderInfoAmino {
     const obj: any = {};
-    obj.email = message.email;
-    obj.website = message.website;
+    obj.email = message.email ?? "";
+    obj.website = message.website ?? "";
     return obj;
   },
   fromProtoMsg(message: ProviderInfoProtoMsg, useInterfaces: boolean = true): ProviderInfo {
@@ -355,14 +355,14 @@ export const MsgCreateProvider = {
   },
   toAmino(message: MsgCreateProvider, useInterfaces: boolean = true): MsgCreateProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCreateProviderProtoMsg, useInterfaces: boolean = true): MsgCreateProvider {
@@ -557,14 +557,14 @@ export const MsgUpdateProvider = {
   },
   toAmino(message: MsgUpdateProvider, useInterfaces: boolean = true): MsgUpdateProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgUpdateProviderProtoMsg, useInterfaces: boolean = true): MsgUpdateProvider {
@@ -706,7 +706,7 @@ export const MsgDeleteProvider = {
   },
   toAmino(message: MsgDeleteProvider, useInterfaces: boolean = true): MsgDeleteProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner ?? "";
     return obj;
   },
   fromProtoMsg(message: MsgDeleteProviderProtoMsg, useInterfaces: boolean = true): MsgDeleteProvider {
@@ -901,14 +901,14 @@ export const Provider = {
   },
   toAmino(message: Provider, useInterfaces: boolean = true): ProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: ProviderProtoMsg, useInterfaces: boolean = true): Provider {

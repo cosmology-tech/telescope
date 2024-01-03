@@ -3,7 +3,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -332,7 +332,7 @@ export const QueryTotalUnclaimedResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -665,7 +665,7 @@ export const QueryClaimsRecordsResponse = {
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.claims = [];
+      obj.claims = message.claims;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -747,7 +747,7 @@ export const QueryClaimsRecordRequest = {
   },
   toAmino(message: QueryClaimsRecordRequest, useInterfaces: boolean = true): QueryClaimsRecordRequestAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: QueryClaimsRecordRequestProtoMsg, useInterfaces: boolean = true): QueryClaimsRecordRequest {
@@ -848,11 +848,11 @@ export const QueryClaimsRecordResponse = {
   },
   toAmino(message: QueryClaimsRecordResponse, useInterfaces: boolean = true): QueryClaimsRecordResponseAmino {
     const obj: any = {};
-    obj.initial_claimable_amount = omitDefault(message.initialClaimableAmount);
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? Claim.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.claims = [];
+      obj.claims = message.claims;
     }
     return obj;
   },

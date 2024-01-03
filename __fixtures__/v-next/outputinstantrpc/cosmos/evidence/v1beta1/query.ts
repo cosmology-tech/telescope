@@ -452,7 +452,7 @@ export const QueryAllEvidenceResponse = {
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.evidence = [];
+      obj.evidence = message.evidence;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

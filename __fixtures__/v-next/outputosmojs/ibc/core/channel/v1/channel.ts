@@ -425,10 +425,10 @@ export const Channel = {
   fromAmino(object: ChannelAmino): Channel {
     const message = createBaseChannel();
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.ordering !== undefined && object.ordering !== null) {
-      message.ordering = orderFromJSON(object.ordering);
+      message.ordering = object.ordering;
     }
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromAmino(object.counterparty);
@@ -441,15 +441,15 @@ export const Channel = {
   },
   toAmino(message: Channel): ChannelAmino {
     const obj: any = {};
-    obj.state = stateToJSON(message.state);
-    obj.ordering = orderToJSON(message.ordering);
+    obj.state = message.state === 0 ? undefined : message.state;
+    obj.ordering = message.ordering === 0 ? undefined : message.ordering;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
-      obj.connection_hops = [];
+      obj.connection_hops = message.connectionHops;
     }
-    obj.version = message.version;
+    obj.version = message.version === "" ? undefined : message.version;
     return obj;
   },
   fromAminoMsg(object: ChannelAminoMsg): Channel {
@@ -623,10 +623,10 @@ export const IdentifiedChannel = {
   fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.ordering !== undefined && object.ordering !== null) {
-      message.ordering = orderFromJSON(object.ordering);
+      message.ordering = object.ordering;
     }
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromAmino(object.counterparty);
@@ -645,17 +645,17 @@ export const IdentifiedChannel = {
   },
   toAmino(message: IdentifiedChannel): IdentifiedChannelAmino {
     const obj: any = {};
-    obj.state = stateToJSON(message.state);
-    obj.ordering = orderToJSON(message.ordering);
+    obj.state = message.state === 0 ? undefined : message.state;
+    obj.ordering = message.ordering === 0 ? undefined : message.ordering;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     if (message.connectionHops) {
       obj.connection_hops = message.connectionHops.map(e => e);
     } else {
-      obj.connection_hops = [];
+      obj.connection_hops = message.connectionHops;
     }
-    obj.version = message.version;
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
     return obj;
   },
   fromAminoMsg(object: IdentifiedChannelAminoMsg): IdentifiedChannel {
@@ -765,8 +765,8 @@ export const Counterparty = {
   },
   toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
     return obj;
   },
   fromAminoMsg(object: CounterpartyAminoMsg): Counterparty {
@@ -973,10 +973,10 @@ export const Packet = {
   toAmino(message: Packet): PacketAmino {
     const obj: any = {};
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.source_port = message.sourcePort;
-    obj.source_channel = message.sourceChannel;
-    obj.destination_port = message.destinationPort;
-    obj.destination_channel = message.destinationChannel;
+    obj.source_port = message.sourcePort === "" ? undefined : message.sourcePort;
+    obj.source_channel = message.sourceChannel === "" ? undefined : message.sourceChannel;
+    obj.destination_port = message.destinationPort === "" ? undefined : message.destinationPort;
+    obj.destination_channel = message.destinationChannel === "" ? undefined : message.destinationChannel;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
     obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
@@ -1121,8 +1121,8 @@ export const PacketState = {
   },
   toAmino(message: PacketState): PacketStateAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
@@ -1235,7 +1235,7 @@ export const Acknowledgement = {
   toAmino(message: Acknowledgement): AcknowledgementAmino {
     const obj: any = {};
     obj.result = message.result ? base64FromBytes(message.result) : undefined;
-    obj.error = message.error;
+    obj.error = message.error === null ? undefined : message.error;
     return obj;
   },
   fromAminoMsg(object: AcknowledgementAminoMsg): Acknowledgement {

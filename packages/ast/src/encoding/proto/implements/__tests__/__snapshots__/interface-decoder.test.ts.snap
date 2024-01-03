@@ -113,7 +113,7 @@ exports[`PoolI objects 1`] = `
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? PoolI_ToAmino((e as Any)) : undefined);
     } else {
-      obj.pools = [];
+      obj.pools = message.pools;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

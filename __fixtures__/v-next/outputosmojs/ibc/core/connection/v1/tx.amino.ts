@@ -119,18 +119,18 @@ export const AminoConverter = {
     }: MsgConnectionOpenInitAminoType["value"]): MsgConnectionOpenInit => {
       return {
         clientId: client_id,
-        counterparty: {
+        counterparty: counterparty == null ? counterparty : {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: {
+          prefix: counterparty.prefix == null ? counterparty.prefix : {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        version: {
+        version: version == null ? version : {
           identifier: version.identifier,
           features: version.features
         },
-        delayPeriod: BigInt(delay_period),
+        delayPeriod: delay_period == null ? delay_period : BigInt(delay_period),
         signer
       };
     }
@@ -201,19 +201,19 @@ export const AminoConverter = {
       return {
         clientId: client_id,
         previousConnectionId: previous_connection_id,
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        counterparty: {
+        counterparty: counterparty == null ? counterparty : {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: {
+          prefix: counterparty.prefix == null ? counterparty.prefix : {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        delayPeriod: BigInt(delay_period),
-        counterpartyVersions: counterparty_versions.map(el0 => ({
+        delayPeriod: delay_period == null ? delay_period : BigInt(delay_period),
+        counterpartyVersions: counterparty_versions.map?.(el0 => ({
           identifier: el0.identifier,
           features: el0.features
         })),
@@ -286,11 +286,11 @@ export const AminoConverter = {
       return {
         connectionId: connection_id,
         counterpartyConnectionId: counterparty_connection_id,
-        version: {
+        version: version == null ? version : {
           identifier: version.identifier,
           features: version.features
         },
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },

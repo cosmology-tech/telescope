@@ -295,7 +295,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = true): MsgCloseGroup {
@@ -439,7 +439,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = true): MsgPauseGroup {
@@ -583,7 +583,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = true): MsgStartGroup {
@@ -757,9 +757,9 @@ export const GroupID = {
   },
   toAmino(message: GroupID, useInterfaces: boolean = true): GroupIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
     return obj;
   },
   fromProtoMsg(message: GroupIDProtoMsg, useInterfaces: boolean = true): GroupID {
@@ -877,12 +877,12 @@ export const GroupSpec = {
   },
   toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : undefined;
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : PlacementRequirements.fromPartial({});
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
     return obj;
   },
@@ -1002,7 +1002,7 @@ export const Group = {
       message.groupId = GroupID.fromAmino(object.group_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = group_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.group_spec !== undefined && object.group_spec !== null) {
       message.groupSpec = GroupSpec.fromAmino(object.group_spec);
@@ -1014,9 +1014,9 @@ export const Group = {
   },
   toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
-    obj.state = group_StateToJSON(message.state);
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : undefined;
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : GroupID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : GroupSpec.fromPartial({});
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
@@ -1131,9 +1131,9 @@ export const Resource = {
   },
   toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? Coin.toAmino(message.price, useInterfaces) : undefined;
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : ResourceUnits.fromPartial({});
+    obj.count = message.count ?? 0;
+    obj.price = message.price ? Coin.toAmino(message.price, useInterfaces) : Coin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {

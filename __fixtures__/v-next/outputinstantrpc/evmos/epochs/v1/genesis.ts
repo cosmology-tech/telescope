@@ -208,12 +208,12 @@ export const EpochInfo = {
   },
   toAmino(message: EpochInfo): EpochInfoAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = message.identifier === "" ? undefined : message.identifier;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
     obj.current_epoch_start_time = message.currentEpochStartTime ? Timestamp.toAmino(toTimestamp(message.currentEpochStartTime)) : undefined;
-    obj.epoch_counting_started = message.epochCountingStarted;
+    obj.epoch_counting_started = message.epochCountingStarted === false ? undefined : message.epochCountingStarted;
     obj.current_epoch_start_height = message.currentEpochStartHeight ? message.currentEpochStartHeight.toString() : undefined;
     return obj;
   },
@@ -311,7 +311,7 @@ export const GenesisState = {
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
     } else {
-      obj.epochs = [];
+      obj.epochs = message.epochs;
     }
     return obj;
   },

@@ -202,8 +202,8 @@ export const DeploymentID = {
   },
   toAmino(message: DeploymentID): DeploymentIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
     return obj;
   },
   fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
@@ -323,7 +323,7 @@ export const Deployment = {
       message.deploymentId = DeploymentID.fromAmino(object.deployment_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = deployment_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.version !== undefined && object.version !== null) {
       message.version = bytesFromBase64(object.version);
@@ -335,9 +335,9 @@ export const Deployment = {
   },
   toAmino(message: Deployment): DeploymentAmino {
     const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : undefined;
-    obj.state = deployment_StateToJSON(message.state);
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : DeploymentID.fromPartial({});
+    obj.state = message.state ?? 0;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;
   },
@@ -453,9 +453,9 @@ export const DeploymentFilters = {
   },
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromAminoMsg(object: DeploymentFiltersAminoMsg): DeploymentFilters {

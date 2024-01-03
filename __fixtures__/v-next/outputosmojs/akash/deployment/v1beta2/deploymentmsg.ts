@@ -239,15 +239,15 @@ export const MsgCreateDeployment = {
   },
   toAmino(message: MsgCreateDeployment): MsgCreateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : DeploymentID.fromPartial({});
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : undefined;
-    obj.depositor = message.depositor;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : Coin.fromPartial({});
+    obj.depositor = message.depositor ?? "";
     return obj;
   },
   fromAminoMsg(object: MsgCreateDeploymentAminoMsg): MsgCreateDeployment {
@@ -446,9 +446,9 @@ export const MsgDepositDeployment = {
   },
   toAmino(message: MsgDepositDeployment): MsgDepositDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
-    obj.depositor = message.depositor;
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : DeploymentID.fromPartial({});
+    obj.amount = message.amount ? Coin.toAmino(message.amount) : Coin.fromPartial({});
+    obj.depositor = message.depositor ?? "";
     return obj;
   },
   fromAminoMsg(object: MsgDepositDeploymentAminoMsg): MsgDepositDeployment {
@@ -631,8 +631,8 @@ export const MsgUpdateDeployment = {
   },
   toAmino(message: MsgUpdateDeployment): MsgUpdateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : DeploymentID.fromPartial({});
+    obj.version = message.version ? base64FromBytes(message.version) : "";
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDeploymentAminoMsg): MsgUpdateDeployment {
@@ -799,7 +799,7 @@ export const MsgCloseDeployment = {
   },
   toAmino(message: MsgCloseDeployment): MsgCloseDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id) : DeploymentID.fromPartial({});
     return obj;
   },
   fromAminoMsg(object: MsgCloseDeploymentAminoMsg): MsgCloseDeployment {

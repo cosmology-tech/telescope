@@ -489,7 +489,7 @@ export const LightClientAttackEvidence = {
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.byzantine_validators = [];
+      obj.byzantine_validators = message.byzantineValidators;
     }
     obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -589,7 +589,7 @@ export const EvidenceList = {
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Evidence.toAmino(e) : undefined);
     } else {
-      obj.evidence = [];
+      obj.evidence = message.evidence;
     }
     return obj;
   },

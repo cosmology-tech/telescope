@@ -365,16 +365,16 @@ export const Service = {
       message.config = ServiceConfig.fromAmino(object.config);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     return message;
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.config = message.config ? ServiceConfig.toAmino(message.config) : undefined;
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     return obj;
   },
   fromAminoMsg(object: ServiceAminoMsg): Service {
@@ -620,12 +620,12 @@ export const ServiceConfig = {
   },
   toAmino(message: ServiceConfig): ServiceConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.title = message.title === "" ? undefined : message.title;
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {
-      obj.apis = [];
+      obj.apis = message.apis;
     }
     obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
     obj.quota = message.quota ? Quota.toAmino(message.quota) : undefined;
@@ -634,12 +634,12 @@ export const ServiceConfig = {
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     if (message.monitoredResources) {
       obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
     } else {
-      obj.monitored_resources = [];
+      obj.monitored_resources = message.monitoredResources;
     }
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring) : undefined;
     return obj;
@@ -733,7 +733,7 @@ export const OperationMetadata = {
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
     return obj;
   },

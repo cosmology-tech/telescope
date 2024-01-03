@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -756,9 +756,9 @@ export const Http = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
-    obj.fully_decode_reserved_expansion = omitDefault(message.fullyDecodeReservedExpansion);
+    obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion === false ? undefined : message.fullyDecodeReservedExpansion;
     return obj;
   },
   fromAminoMsg(object: HttpAminoMsg): Http {
@@ -998,19 +998,19 @@ export const HttpRule = {
   },
   toAmino(message: HttpRule): HttpRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.get = omitDefault(message.get);
-    obj.put = omitDefault(message.put);
-    obj.post = omitDefault(message.post);
-    obj.delete = omitDefault(message.delete);
-    obj.patch = omitDefault(message.patch);
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.get = message.get === null ? undefined : message.get;
+    obj.put = message.put === null ? undefined : message.put;
+    obj.post = message.post === null ? undefined : message.post;
+    obj.delete = message.delete === null ? undefined : message.delete;
+    obj.patch = message.patch === null ? undefined : message.patch;
     obj.custom = message.custom ? CustomHttpPattern.toAmino(message.custom) : undefined;
-    obj.body = omitDefault(message.body);
-    obj.response_body = omitDefault(message.responseBody);
+    obj.body = message.body === "" ? undefined : message.body;
+    obj.response_body = message.responseBody === "" ? undefined : message.responseBody;
     if (message.additionalBindings) {
       obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toAmino(e) : undefined);
     } else {
-      obj.additional_bindings = [];
+      obj.additional_bindings = message.additionalBindings;
     }
     return obj;
   },
@@ -1115,8 +1115,8 @@ export const CustomHttpPattern = {
   },
   toAmino(message: CustomHttpPattern): CustomHttpPatternAmino {
     const obj: any = {};
-    obj.kind = omitDefault(message.kind);
-    obj.path = omitDefault(message.path);
+    obj.kind = message.kind === "" ? undefined : message.kind;
+    obj.path = message.path === "" ? undefined : message.path;
     return obj;
   },
   fromAminoMsg(object: CustomHttpPatternAminoMsg): CustomHttpPattern {

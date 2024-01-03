@@ -94,20 +94,20 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenInit): MsgConnectionOpenInitAminoType["value"] => {
       return {
-        client_id: clientId,
+        client_id: omitDefault(clientId),
         counterparty: {
-          client_id: counterparty.clientId,
-          connection_id: counterparty.connectionId,
+          client_id: omitDefault(counterparty.clientId),
+          connection_id: omitDefault(counterparty.connectionId),
           prefix: {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
         version: {
-          identifier: version.identifier,
+          identifier: omitDefault(version.identifier),
           features: version.features
         },
-        delay_period: delayPeriod.toString(),
-        signer
+        delay_period: omitDefault(delayPeriod)?.toString?.(),
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -119,18 +119,18 @@ export const AminoConverter = {
     }: MsgConnectionOpenInitAminoType["value"]): MsgConnectionOpenInit => {
       return {
         clientId: client_id,
-        counterparty: {
+        counterparty: counterparty == null ? counterparty : {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: {
+          prefix: counterparty.prefix == null ? counterparty.prefix : {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        version: {
+        version: version == null ? version : {
           identifier: version.identifier,
           features: version.features
         },
-        delayPeriod: BigInt(delay_period),
+        delayPeriod: delay_period == null ? delay_period : BigInt(delay_period),
         signer
       };
     }
@@ -152,22 +152,22 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenTry): MsgConnectionOpenTryAminoType["value"] => {
       return {
-        client_id: clientId,
-        previous_connection_id: previousConnectionId,
+        client_id: omitDefault(clientId),
+        previous_connection_id: omitDefault(previousConnectionId),
         client_state: {
-          type_url: clientState.typeUrl,
+          type_url: omitDefault(clientState.typeUrl),
           value: clientState.value
         },
         counterparty: {
-          client_id: counterparty.clientId,
-          connection_id: counterparty.connectionId,
+          client_id: omitDefault(counterparty.clientId),
+          connection_id: omitDefault(counterparty.connectionId),
           prefix: {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
-        delay_period: delayPeriod.toString(),
+        delay_period: omitDefault(delayPeriod)?.toString?.(),
         counterparty_versions: counterpartyVersions.map(el0 => ({
-          identifier: el0.identifier,
+          identifier: omitDefault(el0.identifier),
           features: el0.features
         })),
         proof_height: proofHeight ? {
@@ -181,7 +181,7 @@ export const AminoConverter = {
           revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
         } : {},
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -201,19 +201,19 @@ export const AminoConverter = {
       return {
         clientId: client_id,
         previousConnectionId: previous_connection_id,
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        counterparty: {
+        counterparty: counterparty == null ? counterparty : {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: {
+          prefix: counterparty.prefix == null ? counterparty.prefix : {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        delayPeriod: BigInt(delay_period),
-        counterpartyVersions: counterparty_versions.map(el0 => ({
+        delayPeriod: delay_period == null ? delay_period : BigInt(delay_period),
+        counterpartyVersions: counterparty_versions.map?.(el0 => ({
           identifier: el0.identifier,
           features: el0.features
         })),
@@ -247,14 +247,14 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenAck): MsgConnectionOpenAckAminoType["value"] => {
       return {
-        connection_id: connectionId,
-        counterparty_connection_id: counterpartyConnectionId,
+        connection_id: omitDefault(connectionId),
+        counterparty_connection_id: omitDefault(counterpartyConnectionId),
         version: {
-          identifier: version.identifier,
+          identifier: omitDefault(version.identifier),
           features: version.features
         },
         client_state: {
-          type_url: clientState.typeUrl,
+          type_url: omitDefault(clientState.typeUrl),
           value: clientState.value
         },
         proof_height: proofHeight ? {
@@ -268,7 +268,7 @@ export const AminoConverter = {
           revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
         } : {},
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({
@@ -286,11 +286,11 @@ export const AminoConverter = {
       return {
         connectionId: connection_id,
         counterpartyConnectionId: counterparty_connection_id,
-        version: {
+        version: version == null ? version : {
           identifier: version.identifier,
           features: version.features
         },
-        clientState: {
+        clientState: client_state == null ? client_state : {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
@@ -318,13 +318,13 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAminoType["value"] => {
       return {
-        connection_id: connectionId,
+        connection_id: omitDefault(connectionId),
         proof_ack: proofAck,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        signer
+        signer: omitDefault(signer)
       };
     },
     fromAmino: ({

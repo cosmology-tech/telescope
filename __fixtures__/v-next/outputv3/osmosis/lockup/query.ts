@@ -600,7 +600,7 @@ export const ModuleBalanceResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -754,7 +754,7 @@ export const ModuleLockedAmountResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -836,7 +836,7 @@ export const AccountUnlockableCoinsRequest = {
   },
   toAmino(message: AccountUnlockableCoinsRequest, useInterfaces: boolean = true): AccountUnlockableCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: AccountUnlockableCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountUnlockableCoinsRequest {
@@ -926,7 +926,7 @@ export const AccountUnlockableCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1008,7 +1008,7 @@ export const AccountUnlockingCoinsRequest = {
   },
   toAmino(message: AccountUnlockingCoinsRequest, useInterfaces: boolean = true): AccountUnlockingCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: AccountUnlockingCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountUnlockingCoinsRequest {
@@ -1098,7 +1098,7 @@ export const AccountUnlockingCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1180,7 +1180,7 @@ export const AccountLockedCoinsRequest = {
   },
   toAmino(message: AccountLockedCoinsRequest, useInterfaces: boolean = true): AccountLockedCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: AccountLockedCoinsRequestProtoMsg, useInterfaces: boolean = true): AccountLockedCoinsRequest {
@@ -1270,7 +1270,7 @@ export const AccountLockedCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1367,7 +1367,7 @@ export const AccountLockedPastTimeRequest = {
   },
   toAmino(message: AccountLockedPastTimeRequest, useInterfaces: boolean = true): AccountLockedPastTimeRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1458,7 +1458,7 @@ export const AccountLockedPastTimeResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1555,7 +1555,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1646,7 +1646,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1743,7 +1743,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest, useInterfaces: boolean = true): AccountUnlockedBeforeTimeRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1834,7 +1834,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1946,9 +1946,9 @@ export const AccountLockedPastTimeDenomRequest = {
   },
   toAmino(message: AccountLockedPastTimeDenomRequest, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: AccountLockedPastTimeDenomRequestProtoMsg, useInterfaces: boolean = true): AccountLockedPastTimeDenomRequest {
@@ -2038,7 +2038,7 @@ export const AccountLockedPastTimeDenomResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -2137,7 +2137,7 @@ export const LockedDenomRequest = {
   },
   toAmino(message: LockedDenomRequest, useInterfaces: boolean = true): LockedDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -2219,7 +2219,7 @@ export const LockedDenomResponse = {
   },
   toAmino(message: LockedDenomResponse, useInterfaces: boolean = true): LockedDenomResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromProtoMsg(message: LockedDenomResponseProtoMsg, useInterfaces: boolean = true): LockedDenomResponse {
@@ -2558,7 +2558,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     if (message.syntheticLocks) {
       obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.synthetic_locks = [];
+      obj.synthetic_locks = message.syntheticLocks;
     }
     return obj;
   },
@@ -2657,7 +2657,7 @@ export const AccountLockedLongerDurationRequest = {
   },
   toAmino(message: AccountLockedLongerDurationRequest, useInterfaces: boolean = true): AccountLockedLongerDurationRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -2748,7 +2748,7 @@ export const AccountLockedLongerDurationResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -2847,7 +2847,7 @@ export const AccountLockedDurationRequest = {
   },
   toAmino(message: AccountLockedDurationRequest, useInterfaces: boolean = true): AccountLockedDurationRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -2938,7 +2938,7 @@ export const AccountLockedDurationResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -3037,7 +3037,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   },
   toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, useInterfaces: boolean = true): AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -3128,7 +3128,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -3242,9 +3242,9 @@ export const AccountLockedLongerDurationDenomRequest = {
   },
   toAmino(message: AccountLockedLongerDurationDenomRequest, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: AccountLockedLongerDurationDenomRequestProtoMsg, useInterfaces: boolean = true): AccountLockedLongerDurationDenomRequest {
@@ -3334,7 +3334,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },

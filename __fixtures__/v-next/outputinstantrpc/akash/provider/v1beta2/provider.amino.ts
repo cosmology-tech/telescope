@@ -1,6 +1,7 @@
 /* eslint-disable */
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { ProviderInfo, ProviderInfoSDKType, MsgCreateProvider, MsgCreateProviderSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType } from "./provider";
 export interface MsgCreateProviderAminoType extends AminoMsg {
   type: "akash/provider/v1beta2/testonly-create-provider";
@@ -48,11 +49,11 @@ export const AminoConverter = {
       info
     }: MsgCreateProvider): MsgCreateProviderAminoType["value"] => {
       return {
-        owner,
+        owner: owner,
         host_uri: hostUri,
         attributes: attributes.map(el0 => ({
-          key: el0.key,
-          value: el0.value
+          key: omitDefault(el0.key),
+          value: omitDefault(el0.value)
         })),
         info: {
           email: info.email,
@@ -69,11 +70,11 @@ export const AminoConverter = {
       return {
         owner,
         hostUri: host_uri,
-        attributes: attributes.map(el0 => ({
+        attributes: attributes.map?.(el0 => ({
           key: el0.key,
           value: el0.value
         })),
-        info: {
+        info: info == null ? info : {
           email: info.email,
           website: info.website
         }
@@ -89,11 +90,11 @@ export const AminoConverter = {
       info
     }: MsgUpdateProvider): MsgUpdateProviderAminoType["value"] => {
       return {
-        owner,
+        owner: owner,
         host_uri: hostUri,
         attributes: attributes.map(el0 => ({
-          key: el0.key,
-          value: el0.value
+          key: omitDefault(el0.key),
+          value: omitDefault(el0.value)
         })),
         info: {
           email: info.email,
@@ -110,11 +111,11 @@ export const AminoConverter = {
       return {
         owner,
         hostUri: host_uri,
-        attributes: attributes.map(el0 => ({
+        attributes: attributes.map?.(el0 => ({
           key: el0.key,
           value: el0.value
         })),
-        info: {
+        info: info == null ? info : {
           email: info.email,
           website: info.website
         }
@@ -127,7 +128,7 @@ export const AminoConverter = {
       owner
     }: MsgDeleteProvider): MsgDeleteProviderAminoType["value"] => {
       return {
-        owner
+        owner: owner
       };
     },
     fromAmino: ({

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
@@ -155,12 +155,12 @@ export const ParameterChangeProposal = {
   },
   toAmino(message: ParameterChangeProposal, useInterfaces: boolean = true): ParameterChangeProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.changes) {
       obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.changes = [];
+      obj.changes = message.changes;
     }
     return obj;
   },
@@ -272,9 +272,9 @@ export const ParamChange = {
   },
   toAmino(message: ParamChange, useInterfaces: boolean = true): ParamChangeAmino {
     const obj: any = {};
-    obj.subspace = omitDefault(message.subspace);
-    obj.key = omitDefault(message.key);
-    obj.value = omitDefault(message.value);
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: ParamChangeProtoMsg, useInterfaces: boolean = true): ParamChange {

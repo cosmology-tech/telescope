@@ -298,7 +298,7 @@ export const SignatureDescriptors = {
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.signatures = [];
+      obj.signatures = message.signatures;
     }
     return obj;
   },
@@ -606,7 +606,7 @@ export const SignatureDescriptor_Data_Single = {
   fromAmino(object: SignatureDescriptor_Data_SingleAmino): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
     if (object.mode !== undefined && object.mode !== null) {
-      message.mode = signModeFromJSON(object.mode);
+      message.mode = object.mode;
     }
     if (object.signature !== undefined && object.signature !== null) {
       message.signature = bytesFromBase64(object.signature);
@@ -615,7 +615,7 @@ export const SignatureDescriptor_Data_Single = {
   },
   toAmino(message: SignatureDescriptor_Data_Single, useInterfaces: boolean = true): SignatureDescriptor_Data_SingleAmino {
     const obj: any = {};
-    obj.mode = signModeToJSON(message.mode);
+    obj.mode = message.mode === 0 ? undefined : message.mode;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     return obj;
   },
@@ -724,7 +724,7 @@ export const SignatureDescriptor_Data_Multi = {
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.signatures = [];
+      obj.signatures = message.signatures;
     }
     return obj;
   },

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -316,14 +316,14 @@ export const Usage = {
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
     } else {
-      obj.requirements = [];
+      obj.requirements = message.requirements;
     }
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? UsageRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
-    obj.producer_notification_channel = omitDefault(message.producerNotificationChannel);
+    obj.producer_notification_channel = message.producerNotificationChannel === "" ? undefined : message.producerNotificationChannel;
     return obj;
   },
   fromProtoMsg(message: UsageProtoMsg, useInterfaces: boolean = true): Usage {
@@ -433,9 +433,9 @@ export const UsageRule = {
   },
   toAmino(message: UsageRule, useInterfaces: boolean = true): UsageRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
-    obj.allow_unregistered_calls = omitDefault(message.allowUnregisteredCalls);
-    obj.skip_service_control = omitDefault(message.skipServiceControl);
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.allow_unregistered_calls = message.allowUnregisteredCalls === false ? undefined : message.allowUnregisteredCalls;
+    obj.skip_service_control = message.skipServiceControl === false ? undefined : message.skipServiceControl;
     return obj;
   },
   fromProtoMsg(message: UsageRuleProtoMsg, useInterfaces: boolean = true): UsageRule {

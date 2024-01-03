@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -110,7 +110,7 @@ export const Params = {
     if (message.poolCreationFee) {
       obj.pool_creation_fee = message.poolCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.pool_creation_fee = [];
+      obj.pool_creation_fee = message.poolCreationFee;
     }
     return obj;
   },
@@ -250,9 +250,9 @@ export const GenesisState = {
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.pools = [];
+      obj.pools = message.pools;
     }
-    obj.next_pool_number = omitDefault(message.nextPoolNumber);
+    obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

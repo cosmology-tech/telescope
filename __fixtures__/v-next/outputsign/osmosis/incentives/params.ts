@@ -73,7 +73,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.distr_epoch_identifier = message.distrEpochIdentifier;
+    obj.distr_epoch_identifier = message.distrEpochIdentifier === "" ? undefined : message.distrEpochIdentifier;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

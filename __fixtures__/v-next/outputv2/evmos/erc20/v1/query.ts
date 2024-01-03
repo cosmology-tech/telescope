@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -344,7 +344,7 @@ export const QueryTokenPairsResponse = {
     if (message.tokenPairs) {
       obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
     } else {
-      obj.token_pairs = [];
+      obj.token_pairs = message.tokenPairs;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -429,7 +429,7 @@ export const QueryTokenPairRequest = {
   },
   toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {
     const obj: any = {};
-    obj.token = omitDefault(message.token);
+    obj.token = message.token === "" ? undefined : message.token;
     return obj;
   },
   fromAminoMsg(object: QueryTokenPairRequestAminoMsg): QueryTokenPairRequest {

@@ -31,19 +31,19 @@ export const AminoConverter = {
       timeoutTimestamp
     }: MsgTransfer): MsgTransferAminoType["value"] => {
       return {
-        source_port: sourcePort,
-        source_channel: sourceChannel,
+        source_port: omitDefault(sourcePort),
+        source_channel: omitDefault(sourceChannel),
         token: {
           denom: token.denom,
           amount: token.amount
         },
-        sender,
-        receiver,
+        sender: omitDefault(sender),
+        receiver: omitDefault(receiver),
         timeout_height: timeoutHeight ? {
           revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()
         } : {},
-        timeout_timestamp: timeoutTimestamp.toString()
+        timeout_timestamp: omitDefault(timeoutTimestamp)?.toString?.()
       };
     },
     fromAmino: ({
@@ -58,7 +58,7 @@ export const AminoConverter = {
       return {
         sourcePort: source_port,
         sourceChannel: source_channel,
-        token: {
+        token: token == null ? token : {
           denom: token.denom,
           amount: token.amount
         },
@@ -68,7 +68,7 @@ export const AminoConverter = {
           revisionHeight: BigInt(timeout_height.revision_height || "0"),
           revisionNumber: BigInt(timeout_height.revision_number || "0")
         } : undefined,
-        timeoutTimestamp: BigInt(timeout_timestamp)
+        timeoutTimestamp: timeout_timestamp == null ? timeout_timestamp : BigInt(timeout_timestamp)
       };
     }
   }

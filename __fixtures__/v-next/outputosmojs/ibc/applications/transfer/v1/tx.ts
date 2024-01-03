@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -221,13 +221,13 @@ export const MsgTransfer = {
   },
   toAmino(message: MsgTransfer): MsgTransferAmino {
     const obj: any = {};
-    obj.source_port = omitDefault(message.sourcePort);
-    obj.source_channel = omitDefault(message.sourceChannel);
+    obj.source_port = message.sourcePort === "" ? undefined : message.sourcePort;
+    obj.source_channel = message.sourceChannel === "" ? undefined : message.sourceChannel;
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
-    obj.sender = omitDefault(message.sender);
-    obj.receiver = omitDefault(message.receiver);
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
-    obj.timeout_timestamp = omitDefault(message.timeoutTimestamp);
+    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {

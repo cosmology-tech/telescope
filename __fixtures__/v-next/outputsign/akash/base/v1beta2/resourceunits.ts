@@ -123,12 +123,12 @@ export const ResourceUnits = {
     if (message.storage) {
       obj.storage = message.storage.map(e => e ? Storage.toAmino(e) : undefined);
     } else {
-      obj.storage = [];
+      obj.storage = message.storage;
     }
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     return obj;
   },

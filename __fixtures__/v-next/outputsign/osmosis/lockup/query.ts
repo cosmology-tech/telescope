@@ -700,7 +700,7 @@ export const ModuleBalanceResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -827,7 +827,7 @@ export const ModuleLockedAmountResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -897,7 +897,7 @@ export const AccountUnlockableCoinsRequest = {
   },
   toAmino(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: AccountUnlockableCoinsRequestAminoMsg): AccountUnlockableCoinsRequest {
@@ -967,7 +967,7 @@ export const AccountUnlockableCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1037,7 +1037,7 @@ export const AccountUnlockingCoinsRequest = {
   },
   toAmino(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: AccountUnlockingCoinsRequestAminoMsg): AccountUnlockingCoinsRequest {
@@ -1107,7 +1107,7 @@ export const AccountUnlockingCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1177,7 +1177,7 @@ export const AccountLockedCoinsRequest = {
   },
   toAmino(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: AccountLockedCoinsRequestAminoMsg): AccountLockedCoinsRequest {
@@ -1247,7 +1247,7 @@ export const AccountLockedCoinsResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1328,7 +1328,7 @@ export const AccountLockedPastTimeRequest = {
   },
   toAmino(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1399,7 +1399,7 @@ export const AccountLockedPastTimeResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1480,7 +1480,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   },
   toAmino(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1551,7 +1551,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1632,7 +1632,7 @@ export const AccountUnlockedBeforeTimeRequest = {
   },
   toAmino(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     return obj;
   },
@@ -1703,7 +1703,7 @@ export const AccountUnlockedBeforeTimeResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1795,9 +1795,9 @@ export const AccountLockedPastTimeDenomRequest = {
   },
   toAmino(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: AccountLockedPastTimeDenomRequestAminoMsg): AccountLockedPastTimeDenomRequest {
@@ -1867,7 +1867,7 @@ export const AccountLockedPastTimeDenomResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -1950,7 +1950,7 @@ export const LockedDenomRequest = {
   },
   toAmino(message: LockedDenomRequest): LockedDenomRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -2020,7 +2020,7 @@ export const LockedDenomResponse = {
   },
   toAmino(message: LockedDenomResponse): LockedDenomResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: LockedDenomResponseAminoMsg): LockedDenomResponse {
@@ -2303,7 +2303,7 @@ export const SyntheticLockupsByLockupIDResponse = {
     if (message.syntheticLocks) {
       obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
     } else {
-      obj.synthetic_locks = [];
+      obj.synthetic_locks = message.syntheticLocks;
     }
     return obj;
   },
@@ -2386,7 +2386,7 @@ export const AccountLockedLongerDurationRequest = {
   },
   toAmino(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -2457,7 +2457,7 @@ export const AccountLockedLongerDurationResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -2540,7 +2540,7 @@ export const AccountLockedDurationRequest = {
   },
   toAmino(message: AccountLockedDurationRequest): AccountLockedDurationRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -2611,7 +2611,7 @@ export const AccountLockedDurationResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -2694,7 +2694,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   },
   toAmino(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -2765,7 +2765,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },
@@ -2859,9 +2859,9 @@ export const AccountLockedLongerDurationDenomRequest = {
   },
   toAmino(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: AccountLockedLongerDurationDenomRequestAminoMsg): AccountLockedLongerDurationDenomRequest {
@@ -2931,7 +2931,7 @@ export const AccountLockedLongerDurationDenomResponse = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     return obj;
   },

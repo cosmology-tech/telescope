@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 /**
@@ -250,14 +250,14 @@ export const SuperfluidAsset = {
       message.denom = object.denom;
     }
     if (object.asset_type !== undefined && object.asset_type !== null) {
-      message.assetType = superfluidAssetTypeFromJSON(object.asset_type);
+      message.assetType = object.asset_type;
     }
     return message;
   },
   toAmino(message: SuperfluidAsset): SuperfluidAssetAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.asset_type = superfluidAssetTypeToJSON(message.assetType);
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.asset_type = message.assetType === 0 ? undefined : message.assetType;
     return obj;
   },
   fromAminoMsg(object: SuperfluidAssetAminoMsg): SuperfluidAsset {
@@ -385,8 +385,8 @@ export const SuperfluidIntermediaryAccount = {
   },
   toAmino(message: SuperfluidIntermediaryAccount): SuperfluidIntermediaryAccountAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.val_addr = message.valAddr;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.val_addr = message.valAddr === "" ? undefined : message.valAddr;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     return obj;
   },
@@ -516,8 +516,8 @@ export const OsmoEquivalentMultiplierRecord = {
   toAmino(message: OsmoEquivalentMultiplierRecord): OsmoEquivalentMultiplierRecordAmino {
     const obj: any = {};
     obj.epoch_number = message.epochNumber ? message.epochNumber.toString() : undefined;
-    obj.denom = message.denom;
-    obj.multiplier = message.multiplier;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.multiplier = padDecimal(message.multiplier) === "" ? undefined : padDecimal(message.multiplier);
     return obj;
   },
   fromAminoMsg(object: OsmoEquivalentMultiplierRecordAminoMsg): OsmoEquivalentMultiplierRecord {
@@ -663,8 +663,8 @@ export const SuperfluidDelegationRecord = {
   },
   toAmino(message: SuperfluidDelegationRecord): SuperfluidDelegationRecordAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     obj.delegation_amount = message.delegationAmount ? Coin.toAmino(message.delegationAmount) : undefined;
     obj.equivalent_staked_amount = message.equivalentStakedAmount ? Coin.toAmino(message.equivalentStakedAmount) : undefined;
     return obj;
@@ -779,7 +779,7 @@ export const LockIdIntermediaryAccountConnection = {
   toAmino(message: LockIdIntermediaryAccountConnection): LockIdIntermediaryAccountConnectionAmino {
     const obj: any = {};
     obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
-    obj.intermediary_account = message.intermediaryAccount;
+    obj.intermediary_account = message.intermediaryAccount === "" ? undefined : message.intermediaryAccount;
     return obj;
   },
   fromAminoMsg(object: LockIdIntermediaryAccountConnectionAminoMsg): LockIdIntermediaryAccountConnection {
@@ -891,7 +891,7 @@ export const UnpoolWhitelistedPools = {
     if (message.ids) {
       obj.ids = message.ids.map(e => e.toString());
     } else {
-      obj.ids = [];
+      obj.ids = message.ids;
     }
     return obj;
   },

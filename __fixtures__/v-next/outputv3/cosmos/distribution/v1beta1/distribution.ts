@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, padDecimal, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /** Params defines the set of params for the distribution module. */
 export interface Params {
@@ -488,10 +488,10 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.community_tax = padDecimal(message.communityTax);
-    obj.base_proposer_reward = padDecimal(message.baseProposerReward);
-    obj.bonus_proposer_reward = padDecimal(message.bonusProposerReward);
-    obj.withdraw_addr_enabled = omitDefault(message.withdrawAddrEnabled);
+    obj.community_tax = padDecimal(message.communityTax) === "" ? undefined : padDecimal(message.communityTax);
+    obj.base_proposer_reward = padDecimal(message.baseProposerReward) === "" ? undefined : padDecimal(message.baseProposerReward);
+    obj.bonus_proposer_reward = padDecimal(message.bonusProposerReward) === "" ? undefined : padDecimal(message.bonusProposerReward);
+    obj.withdraw_addr_enabled = message.withdrawAddrEnabled === false ? undefined : message.withdrawAddrEnabled;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
@@ -596,9 +596,9 @@ export const ValidatorHistoricalRewards = {
     if (message.cumulativeRewardRatio) {
       obj.cumulative_reward_ratio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.cumulative_reward_ratio = [];
+      obj.cumulative_reward_ratio = message.cumulativeRewardRatio;
     }
-    obj.reference_count = omitDefault(message.referenceCount);
+    obj.reference_count = message.referenceCount === 0 ? undefined : message.referenceCount;
     return obj;
   },
   fromProtoMsg(message: ValidatorHistoricalRewardsProtoMsg, useInterfaces: boolean = true): ValidatorHistoricalRewards {
@@ -705,9 +705,9 @@ export const ValidatorCurrentRewards = {
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rewards = [];
+      obj.rewards = message.rewards;
     }
-    obj.period = omitDefault(message.period);
+    obj.period = message.period ? message.period.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewards {
@@ -797,7 +797,7 @@ export const ValidatorAccumulatedCommission = {
     if (message.commission) {
       obj.commission = message.commission.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.commission = [];
+      obj.commission = message.commission;
     }
     return obj;
   },
@@ -888,7 +888,7 @@ export const ValidatorOutstandingRewards = {
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rewards = [];
+      obj.rewards = message.rewards;
     }
     return obj;
   },
@@ -987,8 +987,8 @@ export const ValidatorSlashEvent = {
   },
   toAmino(message: ValidatorSlashEvent, useInterfaces: boolean = true): ValidatorSlashEventAmino {
     const obj: any = {};
-    obj.validator_period = omitDefault(message.validatorPeriod);
-    obj.fraction = padDecimal(message.fraction);
+    obj.validator_period = message.validatorPeriod ? message.validatorPeriod.toString() : undefined;
+    obj.fraction = padDecimal(message.fraction) === "" ? undefined : padDecimal(message.fraction);
     return obj;
   },
   fromProtoMsg(message: ValidatorSlashEventProtoMsg, useInterfaces: boolean = true): ValidatorSlashEvent {
@@ -1078,7 +1078,7 @@ export const ValidatorSlashEvents = {
     if (message.validatorSlashEvents) {
       obj.validator_slash_events = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.validator_slash_events = [];
+      obj.validator_slash_events = message.validatorSlashEvents;
     }
     return obj;
   },
@@ -1169,7 +1169,7 @@ export const FeePool = {
     if (message.communityPool) {
       obj.community_pool = message.communityPool.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.community_pool = [];
+      obj.community_pool = message.communityPool;
     }
     return obj;
   },
@@ -1302,13 +1302,13 @@ export const CommunityPoolSpendProposal = {
   },
   toAmino(message: CommunityPoolSpendProposal, useInterfaces: boolean = true): CommunityPoolSpendProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.recipient = omitDefault(message.recipient);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -1424,9 +1424,9 @@ export const DelegatorStartingInfo = {
   },
   toAmino(message: DelegatorStartingInfo, useInterfaces: boolean = true): DelegatorStartingInfoAmino {
     const obj: any = {};
-    obj.previous_period = omitDefault(message.previousPeriod);
-    obj.stake = padDecimal(message.stake);
-    obj.height = message.height;
+    obj.previous_period = message.previousPeriod ? message.previousPeriod.toString() : undefined;
+    obj.stake = padDecimal(message.stake) === "" ? undefined : padDecimal(message.stake);
+    obj.height = message.height ? message.height.toString() : "0";
     return obj;
   },
   fromProtoMsg(message: DelegatorStartingInfoProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfo {
@@ -1528,11 +1528,11 @@ export const DelegationDelegatorReward = {
   },
   toAmino(message: DelegationDelegatorReward, useInterfaces: boolean = true): DelegationDelegatorRewardAmino {
     const obj: any = {};
-    obj.validator_address = omitDefault(message.validatorAddress);
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     if (message.reward) {
       obj.reward = message.reward.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.reward = [];
+      obj.reward = message.reward;
     }
     return obj;
   },
@@ -1674,11 +1674,11 @@ export const CommunityPoolSpendProposalWithDeposit = {
   },
   toAmino(message: CommunityPoolSpendProposalWithDeposit, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDepositAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
-    obj.recipient = omitDefault(message.recipient);
-    obj.amount = omitDefault(message.amount);
-    obj.deposit = omitDefault(message.deposit);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.recipient = message.recipient === "" ? undefined : message.recipient;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.deposit = message.deposit === "" ? undefined : message.deposit;
     return obj;
   },
   fromProtoMsg(message: CommunityPoolSpendProposalWithDepositProtoMsg, useInterfaces: boolean = true): CommunityPoolSpendProposalWithDeposit {

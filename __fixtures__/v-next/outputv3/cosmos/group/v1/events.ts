@@ -405,7 +405,7 @@ export const EventCreateGroupPolicy = {
   },
   toAmino(message: EventCreateGroupPolicy, useInterfaces: boolean = true): EventCreateGroupPolicyAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: EventCreateGroupPolicyProtoMsg, useInterfaces: boolean = true): EventCreateGroupPolicy {
@@ -486,7 +486,7 @@ export const EventUpdateGroupPolicy = {
   },
   toAmino(message: EventUpdateGroupPolicy, useInterfaces: boolean = true): EventUpdateGroupPolicyAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: EventUpdateGroupPolicyProtoMsg, useInterfaces: boolean = true): EventUpdateGroupPolicy {
@@ -827,14 +827,14 @@ export const EventExec = {
       message.proposalId = BigInt(object.proposal_id);
     }
     if (object.result !== undefined && object.result !== null) {
-      message.result = proposalExecutorResultFromJSON(object.result);
+      message.result = object.result;
     }
     return message;
   },
   toAmino(message: EventExec, useInterfaces: boolean = true): EventExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.result = proposalExecutorResultToJSON(message.result);
+    obj.result = message.result === 0 ? undefined : message.result;
     return obj;
   },
   fromProtoMsg(message: EventExecProtoMsg, useInterfaces: boolean = true): EventExec {
@@ -933,7 +933,7 @@ export const EventLeaveGroup = {
   toAmino(message: EventLeaveGroup, useInterfaces: boolean = true): EventLeaveGroupAmino {
     const obj: any = {};
     obj.group_id = message.groupId ? message.groupId.toString() : undefined;
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: EventLeaveGroupProtoMsg, useInterfaces: boolean = true): EventLeaveGroup {

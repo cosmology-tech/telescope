@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../../helpers";
+import { isSet, DeepPartial } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.controller.v1";
 /**
  * Params defines the set of on-chain interchain accounts parameters.
@@ -89,7 +89,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.controller_enabled = omitDefault(message.controllerEnabled);
+    obj.controller_enabled = message.controllerEnabled === false ? undefined : message.controllerEnabled;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

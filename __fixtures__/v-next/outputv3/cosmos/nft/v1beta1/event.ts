@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -180,10 +180,10 @@ export const EventSend = {
   },
   toAmino(message: EventSend, useInterfaces: boolean = true): EventSendAmino {
     const obj: any = {};
-    obj.class_id = omitDefault(message.classId);
-    obj.id = omitDefault(message.id);
-    obj.sender = omitDefault(message.sender);
-    obj.receiver = omitDefault(message.receiver);
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromProtoMsg(message: EventSendProtoMsg, useInterfaces: boolean = true): EventSend {
@@ -294,9 +294,9 @@ export const EventMint = {
   },
   toAmino(message: EventMint, useInterfaces: boolean = true): EventMintAmino {
     const obj: any = {};
-    obj.class_id = omitDefault(message.classId);
-    obj.id = omitDefault(message.id);
-    obj.owner = omitDefault(message.owner);
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: EventMintProtoMsg, useInterfaces: boolean = true): EventMint {
@@ -407,9 +407,9 @@ export const EventBurn = {
   },
   toAmino(message: EventBurn, useInterfaces: boolean = true): EventBurnAmino {
     const obj: any = {};
-    obj.class_id = omitDefault(message.classId);
-    obj.id = omitDefault(message.id);
-    obj.owner = omitDefault(message.owner);
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: EventBurnProtoMsg, useInterfaces: boolean = true): EventBurn {

@@ -123,9 +123,9 @@ export const Resource = {
   },
   toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : undefined;
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : ResourceUnits.fromPartial({});
+    obj.count = message.count ?? 0;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {

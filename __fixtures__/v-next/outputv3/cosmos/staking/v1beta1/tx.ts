@@ -3,7 +3,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal, toTimestamp, fromTimestamp } from "../../../helpers";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 import { Decimal } from "@cosmjs/math";
 import { Pubkey } from "@cosmjs/amino";
@@ -405,9 +405,9 @@ export const MsgCreateValidator = {
     const obj: any = {};
     obj.description = message.description ? Description.toAmino(message.description, useInterfaces) : undefined;
     obj.commission = message.commission ? CommissionRates.toAmino(message.commission, useInterfaces) : undefined;
-    obj.min_self_delegation = message.minSelfDelegation;
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.min_self_delegation = message.minSelfDelegation === "" ? undefined : message.minSelfDelegation;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
     obj.value = message.value ? Coin.toAmino(message.value, useInterfaces) : undefined;
     return obj;
@@ -601,9 +601,9 @@ export const MsgEditValidator = {
   toAmino(message: MsgEditValidator, useInterfaces: boolean = true): MsgEditValidatorAmino {
     const obj: any = {};
     obj.description = message.description ? Description.toAmino(message.description, useInterfaces) : undefined;
-    obj.validator_address = message.validatorAddress;
-    obj.commission_rate = message.commissionRate;
-    obj.min_self_delegation = message.minSelfDelegation;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
+    obj.commission_rate = padDecimal(message.commissionRate) === "" ? undefined : padDecimal(message.commissionRate);
+    obj.min_self_delegation = message.minSelfDelegation === "" ? undefined : message.minSelfDelegation;
     return obj;
   },
   fromProtoMsg(message: MsgEditValidatorProtoMsg, useInterfaces: boolean = true): MsgEditValidator {
@@ -779,8 +779,8 @@ export const MsgDelegate = {
   },
   toAmino(message: MsgDelegate, useInterfaces: boolean = true): MsgDelegateAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     return obj;
   },
@@ -972,9 +972,9 @@ export const MsgBeginRedelegate = {
   },
   toAmino(message: MsgBeginRedelegate, useInterfaces: boolean = true): MsgBeginRedelegateAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_src_address = message.validatorSrcAddress === "" ? undefined : message.validatorSrcAddress;
+    obj.validator_dst_address = message.validatorDstAddress === "" ? undefined : message.validatorDstAddress;
     obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     return obj;
   },
@@ -1169,8 +1169,8 @@ export const MsgUndelegate = {
   },
   toAmino(message: MsgUndelegate, useInterfaces: boolean = true): MsgUndelegateAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
     return obj;
   },
@@ -1276,7 +1276,7 @@ export const Cosmos_cryptoPubKey_InterfaceDecoder = (input: BinaryReader | Uint8
       return data;
   }
 };
-export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino) => {
+export const Cosmos_cryptoPubKey_FromAmino = (content: AnyAmino): Any => {
   return encodePubkey(content);
 };
 export const Cosmos_cryptoPubKey_ToAmino = (content: Any, useInterfaces: boolean = true): Pubkey | null => {

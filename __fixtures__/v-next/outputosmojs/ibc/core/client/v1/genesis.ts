@@ -1,6 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -241,21 +241,21 @@ export const GenesisState = {
     if (message.clients) {
       obj.clients = message.clients.map(e => e ? IdentifiedClientState.toAmino(e) : undefined);
     } else {
-      obj.clients = [];
+      obj.clients = message.clients;
     }
     if (message.clientsConsensus) {
       obj.clients_consensus = message.clientsConsensus.map(e => e ? ClientConsensusStates.toAmino(e) : undefined);
     } else {
-      obj.clients_consensus = [];
+      obj.clients_consensus = message.clientsConsensus;
     }
     if (message.clientsMetadata) {
       obj.clients_metadata = message.clientsMetadata.map(e => e ? IdentifiedGenesisMetadata.toAmino(e) : undefined);
     } else {
-      obj.clients_metadata = [];
+      obj.clients_metadata = message.clientsMetadata;
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.create_localhost = omitDefault(message.createLocalhost);
-    obj.next_client_sequence = omitDefault(message.nextClientSequence);
+    obj.create_localhost = message.createLocalhost === false ? undefined : message.createLocalhost;
+    obj.next_client_sequence = message.nextClientSequence ? message.nextClientSequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -482,11 +482,11 @@ export const IdentifiedGenesisMetadata = {
   },
   toAmino(message: IdentifiedGenesisMetadata): IdentifiedGenesisMetadataAmino {
     const obj: any = {};
-    obj.client_id = omitDefault(message.clientId);
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     if (message.clientMetadata) {
       obj.client_metadata = message.clientMetadata.map(e => e ? GenesisMetadata.toAmino(e) : undefined);
     } else {
-      obj.client_metadata = [];
+      obj.client_metadata = message.clientMetadata;
     }
     return obj;
   },

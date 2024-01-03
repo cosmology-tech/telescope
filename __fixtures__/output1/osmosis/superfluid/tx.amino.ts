@@ -64,7 +64,7 @@ export const AminoConverter = {
     }: MsgSuperfluidDelegateAminoType["value"]): MsgSuperfluidDelegate => {
       return {
         sender,
-        lockId: Long.fromString(lock_id),
+        lockId: lock_id == null ? lock_id : Long.fromString(lock_id),
         valAddr: val_addr
       };
     }
@@ -86,7 +86,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUndelegateAminoType["value"]): MsgSuperfluidUndelegate => {
       return {
         sender,
-        lockId: Long.fromString(lock_id)
+        lockId: lock_id == null ? lock_id : Long.fromString(lock_id)
       };
     }
   },
@@ -107,7 +107,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUnbondLockAminoType["value"]): MsgSuperfluidUnbondLock => {
       return {
         sender,
-        lockId: Long.fromString(lock_id)
+        lockId: lock_id == null ? lock_id : Long.fromString(lock_id)
       };
     }
   },
@@ -134,7 +134,7 @@ export const AminoConverter = {
     }: MsgLockAndSuperfluidDelegateAminoType["value"]): MsgLockAndSuperfluidDelegate => {
       return {
         sender,
-        coins: coins.map(el0 => ({
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
@@ -159,7 +159,7 @@ export const AminoConverter = {
     }: MsgUnPoolWhitelistedPoolAminoType["value"]): MsgUnPoolWhitelistedPool => {
       return {
         sender,
-        poolId: Long.fromString(pool_id)
+        poolId: pool_id == null ? pool_id : Long.fromString(pool_id)
       };
     }
   }

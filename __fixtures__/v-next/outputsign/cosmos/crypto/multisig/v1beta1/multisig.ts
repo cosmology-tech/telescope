@@ -116,7 +116,7 @@ export const MultiSignature = {
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => base64FromBytes(e));
     } else {
-      obj.signatures = [];
+      obj.signatures = message.signatures;
     }
     return obj;
   },
@@ -197,7 +197,7 @@ export const CompactBitArray = {
   },
   toAmino(message: CompactBitArray): CompactBitArrayAmino {
     const obj: any = {};
-    obj.extra_bits_stored = message.extraBitsStored;
+    obj.extra_bits_stored = message.extraBitsStored === 0 ? undefined : message.extraBitsStored;
     obj.elems = message.elems ? base64FromBytes(message.elems) : undefined;
     return obj;
   },

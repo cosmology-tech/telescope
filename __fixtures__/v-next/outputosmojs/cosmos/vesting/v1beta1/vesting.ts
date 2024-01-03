@@ -1,7 +1,7 @@
 import { BaseAccount, BaseAccountSDKType } from "../../auth/v1beta1/auth";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
@@ -284,19 +284,19 @@ export const BaseVestingAccount = {
     if (message.originalVesting) {
       obj.original_vesting = message.originalVesting.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.original_vesting = [];
+      obj.original_vesting = message.originalVesting;
     }
     if (message.delegatedFree) {
       obj.delegated_free = message.delegatedFree.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.delegated_free = [];
+      obj.delegated_free = message.delegatedFree;
     }
     if (message.delegatedVesting) {
       obj.delegated_vesting = message.delegatedVesting.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.delegated_vesting = [];
+      obj.delegated_vesting = message.delegatedVesting;
     }
-    obj.end_time = omitDefault(message.endTime);
+    obj.end_time = message.endTime ? message.endTime.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BaseVestingAccountAminoMsg): BaseVestingAccount {
@@ -407,7 +407,7 @@ export const ContinuousVestingAccount = {
   toAmino(message: ContinuousVestingAccount): ContinuousVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.start_time = omitDefault(message.startTime);
+    obj.start_time = message.startTime ? message.startTime.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ContinuousVestingAccountAminoMsg): ContinuousVestingAccount {
@@ -617,11 +617,11 @@ export const Period = {
   },
   toAmino(message: Period): PeriodAmino {
     const obj: any = {};
-    obj.length = omitDefault(message.length);
+    obj.length = message.length ? message.length.toString() : undefined;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -755,11 +755,11 @@ export const PeriodicVestingAccount = {
   toAmino(message: PeriodicVestingAccount): PeriodicVestingAccountAmino {
     const obj: any = {};
     obj.base_vesting_account = message.baseVestingAccount ? BaseVestingAccount.toAmino(message.baseVestingAccount) : undefined;
-    obj.start_time = omitDefault(message.startTime);
+    obj.start_time = message.startTime ? message.startTime.toString() : undefined;
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = message.vestingPeriods;
     }
     return obj;
   },

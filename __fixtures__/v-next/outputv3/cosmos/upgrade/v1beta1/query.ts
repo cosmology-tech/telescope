@@ -1,6 +1,6 @@
 import { Plan, PlanAmino, PlanSDKType, ModuleVersion, ModuleVersionAmino, ModuleVersionSDKType } from "./upgrade";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
@@ -503,7 +503,7 @@ export const QueryAppliedPlanRequest = {
   },
   toAmino(message: QueryAppliedPlanRequest, useInterfaces: boolean = true): QueryAppliedPlanRequestAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: QueryAppliedPlanRequestProtoMsg, useInterfaces: boolean = true): QueryAppliedPlanRequest {
@@ -586,7 +586,7 @@ export const QueryAppliedPlanResponse = {
   },
   toAmino(message: QueryAppliedPlanResponse, useInterfaces: boolean = true): QueryAppliedPlanResponseAmino {
     const obj: any = {};
-    obj.height = omitDefault(message.height);
+    obj.height = message.height ? message.height.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg, useInterfaces: boolean = true): QueryAppliedPlanResponse {
@@ -669,7 +669,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   toAmino(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
-    obj.last_height = omitDefault(message.lastHeight);
+    obj.last_height = message.lastHeight ? message.lastHeight.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequest {
@@ -831,7 +831,7 @@ export const QueryModuleVersionsRequest = {
   },
   toAmino(message: QueryModuleVersionsRequest, useInterfaces: boolean = true): QueryModuleVersionsRequestAmino {
     const obj: any = {};
-    obj.module_name = omitDefault(message.moduleName);
+    obj.module_name = message.moduleName === "" ? undefined : message.moduleName;
     return obj;
   },
   fromProtoMsg(message: QueryModuleVersionsRequestProtoMsg, useInterfaces: boolean = true): QueryModuleVersionsRequest {
@@ -921,7 +921,7 @@ export const QueryModuleVersionsResponse = {
     if (message.moduleVersions) {
       obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.module_versions = [];
+      obj.module_versions = message.moduleVersions;
     }
     return obj;
   },
@@ -1066,7 +1066,7 @@ export const QueryAuthorityResponse = {
   },
   toAmino(message: QueryAuthorityResponse, useInterfaces: boolean = true): QueryAuthorityResponseAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: QueryAuthorityResponseProtoMsg, useInterfaces: boolean = true): QueryAuthorityResponse {

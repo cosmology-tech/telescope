@@ -2,7 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountProtoMsg, BaseAccountSDKType, ModuleAccount, ModuleAccountProtoMsg, ModuleAccountSDKType } from "./auth";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -432,7 +432,7 @@ export const QueryAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? AccountI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -515,7 +515,7 @@ export const QueryAccountRequest = {
   },
   toAmino(message: QueryAccountRequest, useInterfaces: boolean = true): QueryAccountRequestAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: QueryAccountRequestProtoMsg, useInterfaces: boolean = true): QueryAccountRequest {
@@ -897,7 +897,7 @@ export const QueryModuleAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? ModuleAccountI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     return obj;
   },
@@ -1042,7 +1042,7 @@ export const Bech32PrefixResponse = {
   },
   toAmino(message: Bech32PrefixResponse, useInterfaces: boolean = true): Bech32PrefixResponseAmino {
     const obj: any = {};
-    obj.bech32_prefix = omitDefault(message.bech32Prefix);
+    obj.bech32_prefix = message.bech32Prefix === "" ? undefined : message.bech32Prefix;
     return obj;
   },
   fromProtoMsg(message: Bech32PrefixResponseProtoMsg, useInterfaces: boolean = true): Bech32PrefixResponse {
@@ -1204,7 +1204,7 @@ export const AddressBytesToStringResponse = {
   },
   toAmino(message: AddressBytesToStringResponse, useInterfaces: boolean = true): AddressBytesToStringResponseAmino {
     const obj: any = {};
-    obj.address_string = omitDefault(message.addressString);
+    obj.address_string = message.addressString === "" ? undefined : message.addressString;
     return obj;
   },
   fromProtoMsg(message: AddressBytesToStringResponseProtoMsg, useInterfaces: boolean = true): AddressBytesToStringResponse {
@@ -1285,7 +1285,7 @@ export const AddressStringToBytesRequest = {
   },
   toAmino(message: AddressStringToBytesRequest, useInterfaces: boolean = true): AddressStringToBytesRequestAmino {
     const obj: any = {};
-    obj.address_string = omitDefault(message.addressString);
+    obj.address_string = message.addressString === "" ? undefined : message.addressString;
     return obj;
   },
   fromProtoMsg(message: AddressStringToBytesRequestProtoMsg, useInterfaces: boolean = true): AddressStringToBytesRequest {
@@ -1392,7 +1392,7 @@ export const AccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Bas
       return data;
   }
 };
-export const AccountI_FromAmino = (content: AnyAmino) => {
+export const AccountI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/BaseAccount":
       return Any.fromPartial({
@@ -1424,7 +1424,7 @@ export const ModuleAccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array
       return data;
   }
 };
-export const ModuleAccountI_FromAmino = (content: AnyAmino) => {
+export const ModuleAccountI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/ModuleAccount":
       return Any.fromPartial({

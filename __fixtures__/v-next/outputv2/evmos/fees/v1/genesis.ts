@@ -1,6 +1,6 @@
 import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault, padDecimal } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
@@ -181,7 +181,7 @@ export const GenesisState = {
     if (message.devFeeInfos) {
       obj.dev_fee_infos = message.devFeeInfos.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
     } else {
-      obj.dev_fee_infos = [];
+      obj.dev_fee_infos = message.devFeeInfos;
     }
     return obj;
   },
@@ -327,11 +327,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_fees = omitDefault(message.enableFees);
-    obj.developer_shares = padDecimal(message.developerShares);
-    obj.validator_shares = padDecimal(message.validatorShares);
-    obj.addr_derivation_cost_create = omitDefault(message.addrDerivationCostCreate);
-    obj.min_gas_price = padDecimal(message.minGasPrice);
+    obj.enable_fees = message.enableFees === false ? undefined : message.enableFees;
+    obj.developer_shares = padDecimal(message.developerShares) === "" ? undefined : padDecimal(message.developerShares);
+    obj.validator_shares = padDecimal(message.validatorShares) === "" ? undefined : padDecimal(message.validatorShares);
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate ? message.addrDerivationCostCreate.toString() : undefined;
+    obj.min_gas_price = padDecimal(message.minGasPrice) === "" ? undefined : padDecimal(message.minGasPrice);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

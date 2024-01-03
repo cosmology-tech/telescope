@@ -133,7 +133,7 @@ export const MsgSubmitEvidence = {
   },
   toAmino(message: MsgSubmitEvidence, useInterfaces: boolean = true): MsgSubmitEvidenceAmino {
     const obj: any = {};
-    obj.submitter = message.submitter;
+    obj.submitter = message.submitter === "" ? undefined : message.submitter;
     obj.evidence = message.evidence ? Evidence_ToAmino((message.evidence as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -239,7 +239,7 @@ export const Evidence_InterfaceDecoder = (input: BinaryReader | Uint8Array): Any
       return data;
   }
 };
-export const Evidence_FromAmino = (content: AnyAmino) => {
+export const Evidence_FromAmino = (content: AnyAmino): Any => {
   return Any.fromAmino(content);
 };
 export const Evidence_ToAmino = (content: Any, useInterfaces: boolean = true) => {

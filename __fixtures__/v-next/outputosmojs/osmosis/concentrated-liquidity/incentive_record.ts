@@ -1,7 +1,7 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, padDecimal } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -208,8 +208,8 @@ export const IncentiveRecord = {
   toAmino(message: IncentiveRecord): IncentiveRecordAmino {
     const obj: any = {};
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.incentive_denom = message.incentiveDenom;
-    obj.incentive_creator_addr = message.incentiveCreatorAddr;
+    obj.incentive_denom = message.incentiveDenom === "" ? undefined : message.incentiveDenom;
+    obj.incentive_creator_addr = message.incentiveCreatorAddr === "" ? undefined : message.incentiveCreatorAddr;
     obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toAmino(message.incentiveRecordBody) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
@@ -337,8 +337,8 @@ export const IncentiveRecordBody = {
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
     const obj: any = {};
-    obj.remaining_amount = message.remainingAmount;
-    obj.emission_rate = message.emissionRate;
+    obj.remaining_amount = padDecimal(message.remainingAmount) === "" ? undefined : padDecimal(message.remainingAmount);
+    obj.emission_rate = padDecimal(message.emissionRate) === "" ? undefined : padDecimal(message.emissionRate);
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },

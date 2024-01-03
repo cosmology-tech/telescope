@@ -260,7 +260,7 @@ export const Record = {
   },
   toAmino(message: Record, useInterfaces: boolean = true): RecordAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey, useInterfaces) : undefined;
     obj.local = message.local ? Record_Local.toAmino(message.local, useInterfaces) : undefined;
     obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger, useInterfaces) : undefined;
@@ -364,7 +364,7 @@ export const Record_Local = {
   toAmino(message: Record_Local, useInterfaces: boolean = true): Record_LocalAmino {
     const obj: any = {};
     obj.priv_key = message.privKey ? Any.toAmino(message.privKey, useInterfaces) : undefined;
-    obj.priv_key_type = message.privKeyType;
+    obj.priv_key_type = message.privKeyType === "" ? undefined : message.privKeyType;
     return obj;
   },
   fromProtoMsg(message: Record_LocalProtoMsg, useInterfaces: boolean = true): Record_Local {

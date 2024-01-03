@@ -278,13 +278,13 @@ export const Incentive = {
   },
   toAmino(message: Incentive, useInterfaces: boolean = true): IncentiveAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.allocations = [];
+      obj.allocations = message.allocations;
     }
-    obj.epochs = message.epochs;
+    obj.epochs = message.epochs === 0 ? undefined : message.epochs;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
     return obj;
@@ -398,8 +398,8 @@ export const GasMeter = {
   },
   toAmino(message: GasMeter, useInterfaces: boolean = true): GasMeterAmino {
     const obj: any = {};
-    obj.contract = message.contract;
-    obj.participant = message.participant;
+    obj.contract = message.contract === "" ? undefined : message.contract;
+    obj.participant = message.participant === "" ? undefined : message.participant;
     obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
     return obj;
   },
@@ -547,15 +547,15 @@ export const RegisterIncentiveProposal = {
   },
   toAmino(message: RegisterIncentiveProposal, useInterfaces: boolean = true): RegisterIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.allocations = [];
+      obj.allocations = message.allocations;
     }
-    obj.epochs = message.epochs;
+    obj.epochs = message.epochs === 0 ? undefined : message.epochs;
     return obj;
   },
   fromProtoMsg(message: RegisterIncentiveProposalProtoMsg, useInterfaces: boolean = true): RegisterIncentiveProposal {
@@ -665,9 +665,9 @@ export const CancelIncentiveProposal = {
   },
   toAmino(message: CancelIncentiveProposal, useInterfaces: boolean = true): CancelIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     return obj;
   },
   fromProtoMsg(message: CancelIncentiveProposalProtoMsg, useInterfaces: boolean = true): CancelIncentiveProposal {

@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: bigint;
@@ -113,11 +113,11 @@ export const BitArray = {
   },
   toAmino(message: BitArray): BitArrayAmino {
     const obj: any = {};
-    obj.bits = omitDefault(message.bits);
+    obj.bits = message.bits ? message.bits.toString() : undefined;
     if (message.elems) {
       obj.elems = message.elems.map(e => e.toString());
     } else {
-      obj.elems = [];
+      obj.elems = message.elems;
     }
     return obj;
   },

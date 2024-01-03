@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v2";
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -160,10 +160,10 @@ export const FungibleTokenPacketData = {
   },
   toAmino(message: FungibleTokenPacketData): FungibleTokenPacketDataAmino {
     const obj: any = {};
-    obj.denom = omitDefault(message.denom);
-    obj.amount = omitDefault(message.amount);
-    obj.sender = omitDefault(message.sender);
-    obj.receiver = omitDefault(message.receiver);
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromAminoMsg(object: FungibleTokenPacketDataAminoMsg): FungibleTokenPacketData {

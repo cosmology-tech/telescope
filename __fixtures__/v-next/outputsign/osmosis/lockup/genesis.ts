@@ -96,12 +96,12 @@ export const GenesisState = {
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {
-      obj.locks = [];
+      obj.locks = message.locks;
     }
     if (message.syntheticLocks) {
       obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toAmino(e) : undefined);
     } else {
-      obj.synthetic_locks = [];
+      obj.synthetic_locks = message.syntheticLocks;
     }
     return obj;
   },

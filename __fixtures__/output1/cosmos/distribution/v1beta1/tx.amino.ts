@@ -111,7 +111,7 @@ export const AminoConverter = {
       depositor
     }: MsgFundCommunityPoolAminoType["value"]): MsgFundCommunityPool => {
       return {
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),

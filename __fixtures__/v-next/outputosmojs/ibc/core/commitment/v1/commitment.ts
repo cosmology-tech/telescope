@@ -350,7 +350,7 @@ export const MerklePath = {
     if (message.keyPath) {
       obj.key_path = message.keyPath.map(e => e);
     } else {
-      obj.key_path = [];
+      obj.key_path = message.keyPath;
     }
     return obj;
   },
@@ -454,7 +454,7 @@ export const MerkleProof = {
     if (message.proofs) {
       obj.proofs = message.proofs.map(e => e ? CommitmentProof.toAmino(e) : undefined);
     } else {
-      obj.proofs = [];
+      obj.proofs = message.proofs;
     }
     return obj;
   },

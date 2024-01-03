@@ -1,6 +1,7 @@
 //@ts-nocheck
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType, SmoothWeightChangeParams, SmoothWeightChangeParamsSDKType } from "../balancerPool";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault, padDecimal } from "../../../../../helpers";
 import { Duration, DurationSDKType } from "../../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../../cosmos/base/v1beta1/coin";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType } from "./tx";
@@ -53,10 +54,10 @@ export const AminoConverter = {
       futurePoolGovernor
     }: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoType["value"] => {
       return {
-        sender,
+        sender: omitDefault(sender),
         pool_params: {
-          swap_fee: poolParams.swapFee,
-          exit_fee: poolParams.exitFee,
+          swap_fee: padDecimal(poolParams.swapFee),
+          exit_fee: padDecimal(poolParams.exitFee),
           smooth_weight_change_params: {
             start_time: poolParams.smoothWeightChangeParams.startTime,
             duration: (poolParams.smoothWeightChangeParams.duration * 1_000_000_000).toString(),
@@ -65,14 +66,14 @@ export const AminoConverter = {
                 denom: el0.token.denom,
                 amount: el0.token.amount
               },
-              weight: el0.weight
+              weight: omitDefault(el0.weight)
             })),
             target_pool_weights: poolParams.smoothWeightChangeParams.targetPoolWeights.map(el0 => ({
               token: {
                 denom: el0.token.denom,
                 amount: el0.token.amount
               },
-              weight: el0.weight
+              weight: omitDefault(el0.weight)
             }))
           }
         },
@@ -81,9 +82,9 @@ export const AminoConverter = {
             denom: el0.token.denom,
             amount: el0.token.amount
           },
-          weight: el0.weight
+          weight: omitDefault(el0.weight)
         })),
-        future_pool_governor: futurePoolGovernor
+        future_pool_governor: omitDefault(futurePoolGovernor)
       };
     },
     fromAmino: ({
@@ -94,24 +95,24 @@ export const AminoConverter = {
     }: MsgCreateBalancerPoolAminoType["value"]): MsgCreateBalancerPool => {
       return {
         sender,
-        poolParams: {
+        poolParams: pool_params == null ? pool_params : {
           swapFee: pool_params.swap_fee,
           exitFee: pool_params.exit_fee,
-          smoothWeightChangeParams: {
+          smoothWeightChangeParams: pool_params.smooth_weight_change_params == null ? pool_params.smooth_weight_change_params : {
             startTime: pool_params.smooth_weight_change_params.start_time,
-            duration: {
+            duration: pool_params.smooth_weight_change_params.duration == null ? pool_params.smooth_weight_change_params.duration : {
               seconds: BigInt(Math.floor(parseInt(pool_params.smooth_weight_change_params.duration) / 1_000_000_000)),
               nanos: parseInt(pool_params.smooth_weight_change_params.duration) % 1_000_000_000
             },
-            initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map(el2 => ({
-              token: {
+            initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map?.(el2 => ({
+              token: el2.token == null ? el2.token : {
                 denom: el2.token.denom,
                 amount: el2.token.amount
               },
               weight: el2.weight
             })),
-            targetPoolWeights: pool_params.smooth_weight_change_params.target_pool_weights.map(el2 => ({
-              token: {
+            targetPoolWeights: pool_params.smooth_weight_change_params.target_pool_weights.map?.(el2 => ({
+              token: el2.token == null ? el2.token : {
                 denom: el2.token.denom,
                 amount: el2.token.amount
               },
@@ -119,8 +120,8 @@ export const AminoConverter = {
             }))
           }
         },
-        poolAssets: pool_assets.map(el0 => ({
-          token: {
+        poolAssets: pool_assets.map?.(el0 => ({
+          token: el0.token == null ? el0.token : {
             denom: el0.token.denom,
             amount: el0.token.amount
           },

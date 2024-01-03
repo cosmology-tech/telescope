@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -146,7 +146,7 @@ export const Capability = {
   },
   toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
-    obj.index = omitDefault(message.index);
+    obj.index = message.index ? message.index.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = true): Capability {
@@ -242,8 +242,8 @@ export const Owner = {
   },
   toAmino(message: Owner, useInterfaces: boolean = true): OwnerAmino {
     const obj: any = {};
-    obj.module = omitDefault(message.module);
-    obj.name = omitDefault(message.name);
+    obj.module = message.module === "" ? undefined : message.module;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = true): Owner {
@@ -333,7 +333,7 @@ export const CapabilityOwners = {
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },

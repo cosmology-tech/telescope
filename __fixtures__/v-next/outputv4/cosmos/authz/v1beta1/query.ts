@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** QueryGrantsRequest is the request type for the Query/Grants RPC method. */
 export interface QueryGrantsRequest {
@@ -220,9 +220,9 @@ export const QueryGrantsRequest = {
   },
   toAmino(message: QueryGrantsRequest): QueryGrantsRequestAmino {
     const obj: any = {};
-    obj.granter = omitDefault(message.granter);
-    obj.grantee = omitDefault(message.grantee);
-    obj.msg_type_url = omitDefault(message.msgTypeUrl);
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
+    obj.msg_type_url = message.msgTypeUrl === "" ? undefined : message.msgTypeUrl;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -344,7 +344,7 @@ export const QueryGrantsResponse = {
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? Grant.toAmino(e) : undefined);
     } else {
-      obj.grants = [];
+      obj.grants = message.grants;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -458,7 +458,7 @@ export const QueryGranterGrantsRequest = {
   },
   toAmino(message: QueryGranterGrantsRequest): QueryGranterGrantsRequestAmino {
     const obj: any = {};
-    obj.granter = omitDefault(message.granter);
+    obj.granter = message.granter === "" ? undefined : message.granter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -580,7 +580,7 @@ export const QueryGranterGrantsResponse = {
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
     } else {
-      obj.grants = [];
+      obj.grants = message.grants;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -694,7 +694,7 @@ export const QueryGranteeGrantsRequest = {
   },
   toAmino(message: QueryGranteeGrantsRequest): QueryGranteeGrantsRequestAmino {
     const obj: any = {};
-    obj.grantee = omitDefault(message.grantee);
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -816,7 +816,7 @@ export const QueryGranteeGrantsResponse = {
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? GrantAuthorization.toAmino(e) : undefined);
     } else {
-      obj.grants = [];
+      obj.grants = message.grants;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

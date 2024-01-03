@@ -323,8 +323,8 @@ export const Snapshot = {
   toAmino(message: Snapshot, useInterfaces: boolean = true): SnapshotAmino {
     const obj: any = {};
     obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunks = message.chunks;
+    obj.format = message.format === 0 ? undefined : message.format;
+    obj.chunks = message.chunks === 0 ? undefined : message.chunks;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
@@ -416,7 +416,7 @@ export const Metadata = {
     if (message.chunkHashes) {
       obj.chunk_hashes = message.chunkHashes.map(e => base64FromBytes(e));
     } else {
-      obj.chunk_hashes = [];
+      obj.chunk_hashes = message.chunkHashes;
     }
     return obj;
   },
@@ -671,7 +671,7 @@ export const SnapshotStoreItem = {
   },
   toAmino(message: SnapshotStoreItem, useInterfaces: boolean = true): SnapshotStoreItemAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: SnapshotStoreItemProtoMsg, useInterfaces: boolean = true): SnapshotStoreItem {
@@ -802,7 +802,7 @@ export const SnapshotIAVLItem = {
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.version = message.version ? message.version.toString() : undefined;
-    obj.height = message.height;
+    obj.height = message.height === 0 ? undefined : message.height;
     return obj;
   },
   fromProtoMsg(message: SnapshotIAVLItemProtoMsg, useInterfaces: boolean = true): SnapshotIAVLItem {
@@ -898,8 +898,8 @@ export const SnapshotExtensionMeta = {
   },
   toAmino(message: SnapshotExtensionMeta, useInterfaces: boolean = true): SnapshotExtensionMetaAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.format = message.format;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.format = message.format === 0 ? undefined : message.format;
     return obj;
   },
   fromProtoMsg(message: SnapshotExtensionMetaProtoMsg, useInterfaces: boolean = true): SnapshotExtensionMeta {
@@ -1167,7 +1167,7 @@ export const SnapshotSchema = {
     if (message.keys) {
       obj.keys = message.keys.map(e => base64FromBytes(e));
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },

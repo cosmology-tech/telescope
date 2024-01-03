@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v2alpha1";
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
@@ -694,11 +694,11 @@ export const TxDescriptor = {
   },
   toAmino(message: TxDescriptor): TxDescriptorAmino {
     const obj: any = {};
-    obj.fullname = omitDefault(message.fullname);
+    obj.fullname = message.fullname === "" ? undefined : message.fullname;
     if (message.msgs) {
       obj.msgs = message.msgs.map(e => e ? MsgDescriptor.toAmino(e) : undefined);
     } else {
-      obj.msgs = [];
+      obj.msgs = message.msgs;
     }
     return obj;
   },
@@ -802,7 +802,7 @@ export const AuthnDescriptor = {
     if (message.signModes) {
       obj.sign_modes = message.signModes.map(e => e ? SigningModeDescriptor.toAmino(e) : undefined);
     } else {
-      obj.sign_modes = [];
+      obj.sign_modes = message.signModes;
     }
     return obj;
   },
@@ -929,9 +929,9 @@ export const SigningModeDescriptor = {
   },
   toAmino(message: SigningModeDescriptor): SigningModeDescriptorAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.number = omitDefault(message.number);
-    obj.authn_info_provider_method_fullname = omitDefault(message.authnInfoProviderMethodFullname);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.number = message.number === 0 ? undefined : message.number;
+    obj.authn_info_provider_method_fullname = message.authnInfoProviderMethodFullname === "" ? undefined : message.authnInfoProviderMethodFullname;
     return obj;
   },
   fromAminoMsg(object: SigningModeDescriptorAminoMsg): SigningModeDescriptor {
@@ -1025,7 +1025,7 @@ export const ChainDescriptor = {
   },
   toAmino(message: ChainDescriptor): ChainDescriptorAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id === "" ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: ChainDescriptorAminoMsg): ChainDescriptor {
@@ -1128,7 +1128,7 @@ export const CodecDescriptor = {
     if (message.interfaces) {
       obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toAmino(e) : undefined);
     } else {
-      obj.interfaces = [];
+      obj.interfaces = message.interfaces;
     }
     return obj;
   },
@@ -1267,16 +1267,16 @@ export const InterfaceDescriptor = {
   },
   toAmino(message: InterfaceDescriptor): InterfaceDescriptorAmino {
     const obj: any = {};
-    obj.fullname = omitDefault(message.fullname);
+    obj.fullname = message.fullname === "" ? undefined : message.fullname;
     if (message.interfaceAcceptingMessages) {
       obj.interface_accepting_messages = message.interfaceAcceptingMessages.map(e => e ? InterfaceAcceptingMessageDescriptor.toAmino(e) : undefined);
     } else {
-      obj.interface_accepting_messages = [];
+      obj.interface_accepting_messages = message.interfaceAcceptingMessages;
     }
     if (message.interfaceImplementers) {
       obj.interface_implementers = message.interfaceImplementers.map(e => e ? InterfaceImplementerDescriptor.toAmino(e) : undefined);
     } else {
-      obj.interface_implementers = [];
+      obj.interface_implementers = message.interfaceImplementers;
     }
     return obj;
   },
@@ -1387,8 +1387,8 @@ export const InterfaceImplementerDescriptor = {
   },
   toAmino(message: InterfaceImplementerDescriptor): InterfaceImplementerDescriptorAmino {
     const obj: any = {};
-    obj.fullname = omitDefault(message.fullname);
-    obj.type_url = omitDefault(message.typeUrl);
+    obj.fullname = message.fullname === "" ? undefined : message.fullname;
+    obj.type_url = message.typeUrl === "" ? undefined : message.typeUrl;
     return obj;
   },
   fromAminoMsg(object: InterfaceImplementerDescriptorAminoMsg): InterfaceImplementerDescriptor {
@@ -1504,11 +1504,11 @@ export const InterfaceAcceptingMessageDescriptor = {
   },
   toAmino(message: InterfaceAcceptingMessageDescriptor): InterfaceAcceptingMessageDescriptorAmino {
     const obj: any = {};
-    obj.fullname = omitDefault(message.fullname);
+    obj.fullname = message.fullname === "" ? undefined : message.fullname;
     if (message.fieldDescriptorNames) {
       obj.field_descriptor_names = message.fieldDescriptorNames.map(e => e);
     } else {
-      obj.field_descriptor_names = [];
+      obj.field_descriptor_names = message.fieldDescriptorNames;
     }
     return obj;
   },
@@ -1603,7 +1603,7 @@ export const ConfigurationDescriptor = {
   },
   toAmino(message: ConfigurationDescriptor): ConfigurationDescriptorAmino {
     const obj: any = {};
-    obj.bech32_account_address_prefix = omitDefault(message.bech32AccountAddressPrefix);
+    obj.bech32_account_address_prefix = message.bech32AccountAddressPrefix === "" ? undefined : message.bech32AccountAddressPrefix;
     return obj;
   },
   fromAminoMsg(object: ConfigurationDescriptorAminoMsg): ConfigurationDescriptor {
@@ -1697,7 +1697,7 @@ export const MsgDescriptor = {
   },
   toAmino(message: MsgDescriptor): MsgDescriptorAmino {
     const obj: any = {};
-    obj.msg_type_url = omitDefault(message.msgTypeUrl);
+    obj.msg_type_url = message.msgTypeUrl === "" ? undefined : message.msgTypeUrl;
     return obj;
   },
   fromAminoMsg(object: MsgDescriptorAminoMsg): MsgDescriptor {
@@ -2820,7 +2820,7 @@ export const QueryServicesDescriptor = {
     if (message.queryServices) {
       obj.query_services = message.queryServices.map(e => e ? QueryServiceDescriptor.toAmino(e) : undefined);
     } else {
-      obj.query_services = [];
+      obj.query_services = message.queryServices;
     }
     return obj;
   },
@@ -2953,12 +2953,12 @@ export const QueryServiceDescriptor = {
   },
   toAmino(message: QueryServiceDescriptor): QueryServiceDescriptorAmino {
     const obj: any = {};
-    obj.fullname = omitDefault(message.fullname);
-    obj.is_module = omitDefault(message.isModule);
+    obj.fullname = message.fullname === "" ? undefined : message.fullname;
+    obj.is_module = message.isModule === false ? undefined : message.isModule;
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? QueryMethodDescriptor.toAmino(e) : undefined);
     } else {
-      obj.methods = [];
+      obj.methods = message.methods;
     }
     return obj;
   },
@@ -3069,8 +3069,8 @@ export const QueryMethodDescriptor = {
   },
   toAmino(message: QueryMethodDescriptor): QueryMethodDescriptorAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.full_query_path = omitDefault(message.fullQueryPath);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.full_query_path = message.fullQueryPath === "" ? undefined : message.fullQueryPath;
     return obj;
   },
   fromAminoMsg(object: QueryMethodDescriptorAminoMsg): QueryMethodDescriptor {

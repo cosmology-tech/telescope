@@ -255,12 +255,12 @@ export const Gauge = {
   toAmino(message: Gauge): GaugeAmino {
     const obj: any = {};
     obj.id = message.id ? message.id.toString() : undefined;
-    obj.is_perpetual = message.isPerpetual;
+    obj.is_perpetual = message.isPerpetual === false ? undefined : message.isPerpetual;
     obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
@@ -268,7 +268,7 @@ export const Gauge = {
     if (message.distributedCoins) {
       obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.distributed_coins = [];
+      obj.distributed_coins = message.distributedCoins;
     }
     return obj;
   },
@@ -339,7 +339,7 @@ export const LockableDurationsInfo = {
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.lockable_durations = [];
+      obj.lockable_durations = message.lockableDurations;
     }
     return obj;
   },

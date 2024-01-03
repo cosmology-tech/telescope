@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgSend, MsgSendSDKType, MsgMultiSend, MsgMultiSendSDKType } from "./tx";
 export interface MsgSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSend";
@@ -41,11 +42,11 @@ export const AminoConverter = {
       amount
     }: MsgSend): MsgSendAminoType["value"] => {
       return {
-        from_address: fromAddress,
-        to_address: toAddress,
+        from_address: omitDefault(fromAddress),
+        to_address: omitDefault(toAddress),
         amount: amount.map(el0 => ({
-          denom: el0.denom,
-          amount: el0.amount
+          denom: omitDefault(el0.denom),
+          amount: omitDefault(el0.amount)
         }))
       };
     },
@@ -57,7 +58,7 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -72,17 +73,17 @@ export const AminoConverter = {
     }: MsgMultiSend): MsgMultiSendAminoType["value"] => {
       return {
         inputs: inputs.map(el0 => ({
-          address: el0.address,
+          address: omitDefault(el0.address),
           coins: el0.coins.map(el1 => ({
-            denom: el1.denom,
-            amount: el1.amount
+            denom: omitDefault(el1.denom),
+            amount: omitDefault(el1.amount)
           }))
         })),
         outputs: outputs.map(el0 => ({
-          address: el0.address,
+          address: omitDefault(el0.address),
           coins: el0.coins.map(el1 => ({
-            denom: el1.denom,
-            amount: el1.amount
+            denom: omitDefault(el1.denom),
+            amount: omitDefault(el1.amount)
           }))
         }))
       };
@@ -92,16 +93,16 @@ export const AminoConverter = {
       outputs
     }: MsgMultiSendAminoType["value"]): MsgMultiSend => {
       return {
-        inputs: inputs.map(el0 => ({
+        inputs: inputs.map?.(el0 => ({
           address: el0.address,
-          coins: el0.coins.map(el1 => ({
+          coins: el0.coins.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))
         })),
-        outputs: outputs.map(el0 => ({
+        outputs: outputs.map?.(el0 => ({
           address: el0.address,
-          coins: el0.coins.map(el1 => ({
+          coins: el0.coins.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))

@@ -122,13 +122,13 @@ exports[`MsgExecuteContract interface 2`] = `
   },
   toAmino(message: MsgExecuteContract): MsgExecuteContractAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
-    obj.contract = omitDefault(message.contract);
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.funds = [];
+      obj.funds = message.funds;
     }
     return obj;
   },

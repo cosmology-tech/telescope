@@ -89,7 +89,7 @@ export const BitArray = {
     if (message.elems) {
       obj.elems = message.elems.map(e => e.toString());
     } else {
-      obj.elems = [];
+      obj.elems = message.elems;
     }
     return obj;
   },

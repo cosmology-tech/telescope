@@ -115,12 +115,12 @@ export const GenesisState = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? Payment.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.payments = [];
+      obj.payments = message.payments;
     }
     return obj;
   },

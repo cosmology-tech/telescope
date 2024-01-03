@@ -279,13 +279,13 @@ export const MsgCreateGauge = {
   },
   toAmino(message: MsgCreateGauge): MsgCreateGaugeAmino {
     const obj: any = {};
-    obj.is_perpetual = message.isPerpetual;
-    obj.owner = message.owner;
+    obj.is_perpetual = message.isPerpetual === false ? undefined : message.isPerpetual;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.num_epochs_paid_over = message.numEpochsPaidOver ? message.numEpochsPaidOver.toString() : undefined;
@@ -488,12 +488,12 @@ export const MsgAddToGauge = {
   },
   toAmino(message: MsgAddToGauge): MsgAddToGaugeAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.rewards = [];
+      obj.rewards = message.rewards;
     }
     return obj;
   },

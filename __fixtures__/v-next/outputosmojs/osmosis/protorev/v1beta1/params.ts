@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** Params defines the parameters for the module. */
 export interface Params {
@@ -102,8 +102,8 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enabled = omitDefault(message.enabled);
-    obj.admin = omitDefault(message.admin);
+    obj.enabled = message.enabled === false ? undefined : message.enabled;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

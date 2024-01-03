@@ -1,6 +1,6 @@
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
@@ -198,12 +198,12 @@ export const GenesisState = {
     if (message.signingInfos) {
       obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e) : undefined);
     } else {
-      obj.signing_infos = [];
+      obj.signing_infos = message.signingInfos;
     }
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e) : undefined);
     } else {
-      obj.missed_blocks = [];
+      obj.missed_blocks = message.missedBlocks;
     }
     return obj;
   },
@@ -314,7 +314,7 @@ export const SigningInfo = {
   },
   toAmino(message: SigningInfo): SigningInfoAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined;
     return obj;
   },
@@ -431,11 +431,11 @@ export const ValidatorMissedBlocks = {
   },
   toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e) : undefined);
     } else {
-      obj.missed_blocks = [];
+      obj.missed_blocks = message.missedBlocks;
     }
     return obj;
   },
@@ -546,8 +546,8 @@ export const MissedBlock = {
   },
   toAmino(message: MissedBlock): MissedBlockAmino {
     const obj: any = {};
-    obj.index = omitDefault(message.index);
-    obj.missed = omitDefault(message.missed);
+    obj.index = message.index ? message.index.toString() : undefined;
+    obj.missed = message.missed === false ? undefined : message.missed;
     return obj;
   },
   fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {

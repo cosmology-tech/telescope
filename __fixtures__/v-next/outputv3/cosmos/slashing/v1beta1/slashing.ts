@@ -247,11 +247,11 @@ export const ValidatorSigningInfo = {
   },
   toAmino(message: ValidatorSigningInfo, useInterfaces: boolean = true): ValidatorSigningInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.start_height = message.startHeight ? message.startHeight.toString() : undefined;
     obj.index_offset = message.indexOffset ? message.indexOffset.toString() : undefined;
     obj.jailed_until = message.jailedUntil ? Timestamp.toAmino(toTimestamp(message.jailedUntil)) : undefined;
-    obj.tombstoned = message.tombstoned;
+    obj.tombstoned = message.tombstoned === false ? undefined : message.tombstoned;
     obj.missed_blocks_counter = message.missedBlocksCounter ? message.missedBlocksCounter.toString() : undefined;
     return obj;
   },

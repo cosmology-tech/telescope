@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** Allocation defines the spend limit for a particular port and channel */
 export interface Allocation {
@@ -172,17 +172,17 @@ export const Allocation = {
   },
   toAmino(message: Allocation): AllocationAmino {
     const obj: any = {};
-    obj.source_port = omitDefault(message.sourcePort);
-    obj.source_channel = omitDefault(message.sourceChannel);
+    obj.source_port = message.sourcePort === "" ? undefined : message.sourcePort;
+    obj.source_channel = message.sourceChannel === "" ? undefined : message.sourceChannel;
     if (message.spendLimit) {
       obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.spend_limit = [];
+      obj.spend_limit = message.spendLimit;
     }
     if (message.allowList) {
       obj.allow_list = message.allowList.map(e => e);
     } else {
-      obj.allow_list = [];
+      obj.allow_list = message.allowList;
     }
     return obj;
   },
@@ -286,7 +286,7 @@ export const TransferAuthorization = {
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? Allocation.toAmino(e) : undefined);
     } else {
-      obj.allocations = [];
+      obj.allocations = message.allocations;
     }
     return obj;
   },

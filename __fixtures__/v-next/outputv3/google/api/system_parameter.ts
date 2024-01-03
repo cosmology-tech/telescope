@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * ### System parameter configuration
@@ -279,7 +279,7 @@ export const SystemParameters = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? SystemParameterRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     return obj;
   },
@@ -381,11 +381,11 @@ export const SystemParameterRule = {
   },
   toAmino(message: SystemParameterRule, useInterfaces: boolean = true): SystemParameterRuleAmino {
     const obj: any = {};
-    obj.selector = omitDefault(message.selector);
+    obj.selector = message.selector === "" ? undefined : message.selector;
     if (message.parameters) {
       obj.parameters = message.parameters.map(e => e ? SystemParameter.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.parameters = [];
+      obj.parameters = message.parameters;
     }
     return obj;
   },
@@ -496,9 +496,9 @@ export const SystemParameter = {
   },
   toAmino(message: SystemParameter, useInterfaces: boolean = true): SystemParameterAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
-    obj.http_header = omitDefault(message.httpHeader);
-    obj.url_query_parameter = omitDefault(message.urlQueryParameter);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.http_header = message.httpHeader === "" ? undefined : message.httpHeader;
+    obj.url_query_parameter = message.urlQueryParameter === "" ? undefined : message.urlQueryParameter;
     return obj;
   },
   fromProtoMsg(message: SystemParameterProtoMsg, useInterfaces: boolean = true): SystemParameter {

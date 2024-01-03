@@ -353,16 +353,16 @@ export const Service = {
       message.config = ServiceConfig.fromAmino(object.config);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     return message;
   },
   toAmino(message: Service, useInterfaces: boolean = true): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.parent = message.parent;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.config = message.config ? ServiceConfig.toAmino(message.config, useInterfaces) : undefined;
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     return obj;
   },
   fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = true): Service {
@@ -605,12 +605,12 @@ export const ServiceConfig = {
   },
   toAmino(message: ServiceConfig, useInterfaces: boolean = true): ServiceConfigAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.title = message.title === "" ? undefined : message.title;
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.apis = [];
+      obj.apis = message.apis;
     }
     obj.documentation = message.documentation ? Documentation.toAmino(message.documentation, useInterfaces) : undefined;
     obj.quota = message.quota ? Quota.toAmino(message.quota, useInterfaces) : undefined;
@@ -619,12 +619,12 @@ export const ServiceConfig = {
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     if (message.monitoredResources) {
       obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.monitored_resources = [];
+      obj.monitored_resources = message.monitoredResources;
     }
     obj.monitoring = message.monitoring ? Monitoring.toAmino(message.monitoring, useInterfaces) : undefined;
     return obj;
@@ -715,7 +715,7 @@ export const OperationMetadata = {
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
     return obj;
   },

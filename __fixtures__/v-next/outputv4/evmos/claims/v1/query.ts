@@ -3,7 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed
@@ -287,7 +287,7 @@ export const QueryTotalUnclaimedResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -651,7 +651,7 @@ export const QueryClaimsRecordsResponse = {
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
     } else {
-      obj.claims = [];
+      obj.claims = message.claims;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -741,7 +741,7 @@ export const QueryClaimsRecordRequest = {
   },
   toAmino(message: QueryClaimsRecordRequest): QueryClaimsRecordRequestAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryClaimsRecordRequestAminoMsg): QueryClaimsRecordRequest {
@@ -851,11 +851,11 @@ export const QueryClaimsRecordResponse = {
   },
   toAmino(message: QueryClaimsRecordResponse): QueryClaimsRecordResponseAmino {
     const obj: any = {};
-    obj.initial_claimable_amount = omitDefault(message.initialClaimableAmount);
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? Claim.toAmino(e) : undefined);
     } else {
-      obj.claims = [];
+      obj.claims = message.claims;
     }
     return obj;
   },

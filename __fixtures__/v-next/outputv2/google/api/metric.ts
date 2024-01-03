@@ -825,10 +825,10 @@ export const MetricDescriptor = {
     }
     message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
     if (object.metric_kind !== undefined && object.metric_kind !== null) {
-      message.metricKind = metricDescriptor_MetricKindFromJSON(object.metric_kind);
+      message.metricKind = object.metric_kind;
     }
     if (object.value_type !== undefined && object.value_type !== null) {
-      message.valueType = metricDescriptor_ValueTypeFromJSON(object.value_type);
+      message.valueType = object.value_type;
     }
     if (object.unit !== undefined && object.unit !== null) {
       message.unit = object.unit;
@@ -843,31 +843,31 @@ export const MetricDescriptor = {
       message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata);
     }
     if (object.launch_stage !== undefined && object.launch_stage !== null) {
-      message.launchStage = launchStageFromJSON(object.launch_stage);
+      message.launchStage = object.launch_stage;
     }
     message.monitoredResourceTypes = object.monitored_resource_types?.map(e => e) || [];
     return message;
   },
   toAmino(message: MetricDescriptor): MetricDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
-      obj.labels = [];
+      obj.labels = message.labels;
     }
-    obj.metric_kind = metricDescriptor_MetricKindToJSON(message.metricKind);
-    obj.value_type = metricDescriptor_ValueTypeToJSON(message.valueType);
-    obj.unit = message.unit;
-    obj.description = message.description;
-    obj.display_name = message.displayName;
+    obj.metric_kind = message.metricKind === 0 ? undefined : message.metricKind;
+    obj.value_type = message.valueType === 0 ? undefined : message.valueType;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
     obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata) : undefined;
-    obj.launch_stage = launchStageToJSON(message.launchStage);
+    obj.launch_stage = message.launchStage === 0 ? undefined : message.launchStage;
     if (message.monitoredResourceTypes) {
       obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
     } else {
-      obj.monitored_resource_types = [];
+      obj.monitored_resource_types = message.monitoredResourceTypes;
     }
     return obj;
   },
@@ -973,7 +973,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     if (object.launch_stage !== undefined && object.launch_stage !== null) {
-      message.launchStage = launchStageFromJSON(object.launch_stage);
+      message.launchStage = object.launch_stage;
     }
     if (object.sample_period !== undefined && object.sample_period !== null) {
       message.samplePeriod = Duration.fromAmino(object.sample_period);
@@ -985,7 +985,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
   },
   toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
     const obj: any = {};
-    obj.launch_stage = launchStageToJSON(message.launchStage);
+    obj.launch_stage = message.launchStage === 0 ? undefined : message.launchStage;
     obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
     obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
     return obj;
@@ -1084,8 +1084,8 @@ export const Metric_LabelsEntry = {
   },
   toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
@@ -1215,7 +1215,7 @@ export const Metric = {
   },
   toAmino(message: Metric): MetricAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {

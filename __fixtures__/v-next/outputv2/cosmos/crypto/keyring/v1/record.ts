@@ -1,7 +1,7 @@
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BIP44Params, BIP44ParamsAmino, BIP44ParamsSDKType } from "../../hd/v1/hd";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
@@ -280,7 +280,7 @@ export const Record = {
   },
   toAmino(message: Record): RecordAmino {
     const obj: any = {};
-    obj.name = omitDefault(message.name);
+    obj.name = message.name === "" ? undefined : message.name;
     obj.pub_key = message.pubKey ? Any.toAmino(message.pubKey) : undefined;
     obj.local = message.local ? Record_Local.toAmino(message.local) : undefined;
     obj.ledger = message.ledger ? Record_Ledger.toAmino(message.ledger) : undefined;
@@ -393,7 +393,7 @@ export const Record_Local = {
   toAmino(message: Record_Local): Record_LocalAmino {
     const obj: any = {};
     obj.priv_key = message.privKey ? Any.toAmino(message.privKey) : undefined;
-    obj.priv_key_type = omitDefault(message.privKeyType);
+    obj.priv_key_type = message.privKeyType === "" ? undefined : message.privKeyType;
     return obj;
   },
   fromAminoMsg(object: Record_LocalAminoMsg): Record_Local {

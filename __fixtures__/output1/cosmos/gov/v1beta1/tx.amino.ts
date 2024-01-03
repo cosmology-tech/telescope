@@ -74,11 +74,11 @@ export const AminoConverter = {
       proposer
     }: MsgSubmitProposalAminoType["value"]): MsgSubmitProposal => {
       return {
-        content: {
+        content: content == null ? content : {
           typeUrl: content.type_url,
           value: content.value
         },
-        initialDeposit: initial_deposit.map(el0 => ({
+        initialDeposit: initial_deposit.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
@@ -105,9 +105,9 @@ export const AminoConverter = {
       option
     }: MsgVoteAminoType["value"]): MsgVote => {
       return {
-        proposalId: Long.fromString(proposal_id),
+        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
         voter,
-        option: voteOptionFromJSON(option)
+        option: option == null ? option : voteOptionFromJSON(option)
       };
     }
   },
@@ -133,10 +133,10 @@ export const AminoConverter = {
       options
     }: MsgVoteWeightedAminoType["value"]): MsgVoteWeighted => {
       return {
-        proposalId: Long.fromString(proposal_id),
+        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
         voter,
-        options: options.map(el0 => ({
-          option: voteOptionFromJSON(el0.option),
+        options: options.map?.(el0 => ({
+          option: el0.option == null ? el0.option : voteOptionFromJSON(el0.option),
           weight: el0.weight
         }))
       };
@@ -164,9 +164,9 @@ export const AminoConverter = {
       amount
     }: MsgDepositAminoType["value"]): MsgDeposit => {
       return {
-        proposalId: Long.fromString(proposal_id),
+        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
         depositor,
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

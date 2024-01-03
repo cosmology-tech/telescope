@@ -306,7 +306,7 @@ export const QueryGaugeIdsResponse = {
     if (message.gaugeIdsWithDuration) {
       obj.gauge_ids_with_duration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(e) : undefined);
     } else {
-      obj.gauge_ids_with_duration = [];
+      obj.gauge_ids_with_duration = message.gaugeIdsWithDuration;
     }
     return obj;
   },
@@ -439,7 +439,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     const obj: any = {};
     obj.gauge_id = message.gaugeId ? message.gaugeId.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
-    obj.gauge_incentive_percentage = message.gaugeIncentivePercentage;
+    obj.gauge_incentive_percentage = message.gaugeIncentivePercentage === "" ? undefined : message.gaugeIncentivePercentage;
     return obj;
   },
   fromAminoMsg(object: QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg): QueryGaugeIdsResponse_GaugeIdWithDuration {
@@ -956,7 +956,7 @@ export const QueryLockableDurationsResponse = {
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.lockable_durations = [];
+      obj.lockable_durations = message.lockableDurations;
     }
     return obj;
   },
@@ -1268,7 +1268,7 @@ export const QueryIncentivizedPoolsResponse = {
     if (message.incentivizedPools) {
       obj.incentivized_pools = message.incentivizedPools.map(e => e ? IncentivizedPool.toAmino(e) : undefined);
     } else {
-      obj.incentivized_pools = [];
+      obj.incentivized_pools = message.incentivizedPools;
     }
     return obj;
   },
@@ -1446,7 +1446,7 @@ export const QueryExternalIncentiveGaugesResponse = {
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
     } else {
-      obj.data = [];
+      obj.data = message.data;
     }
     return obj;
   },

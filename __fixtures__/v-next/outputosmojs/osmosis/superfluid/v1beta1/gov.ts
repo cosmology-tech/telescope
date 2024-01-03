@@ -1,6 +1,6 @@
 import { SuperfluidAsset, SuperfluidAssetSDKType } from "../superfluid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -177,12 +177,12 @@ export const SetSuperfluidAssetsProposal = {
   },
   toAmino(message: SetSuperfluidAssetsProposal): SetSuperfluidAssetsProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.assets) {
       obj.assets = message.assets.map(e => e ? SuperfluidAsset.toAmino(e) : undefined);
     } else {
-      obj.assets = [];
+      obj.assets = message.assets;
     }
     return obj;
   },
@@ -315,12 +315,12 @@ export const RemoveSuperfluidAssetsProposal = {
   },
   toAmino(message: RemoveSuperfluidAssetsProposal): RemoveSuperfluidAssetsProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.superfluidAssetDenoms) {
       obj.superfluid_asset_denoms = message.superfluidAssetDenoms.map(e => e);
     } else {
-      obj.superfluid_asset_denoms = [];
+      obj.superfluid_asset_denoms = message.superfluidAssetDenoms;
     }
     return obj;
   },
@@ -478,14 +478,14 @@ export const UpdateUnpoolWhiteListProposal = {
   },
   toAmino(message: UpdateUnpoolWhiteListProposal): UpdateUnpoolWhiteListProposalAmino {
     const obj: any = {};
-    obj.title = omitDefault(message.title);
-    obj.description = omitDefault(message.description);
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.ids) {
       obj.ids = message.ids.map(e => e.toString());
     } else {
-      obj.ids = [];
+      obj.ids = message.ids;
     }
-    obj.is_overwrite = omitDefault(message.isOverwrite);
+    obj.is_overwrite = message.isOverwrite === false ? undefined : message.isOverwrite;
     return obj;
   },
   fromAminoMsg(object: UpdateUnpoolWhiteListProposalAminoMsg): UpdateUnpoolWhiteListProposal {

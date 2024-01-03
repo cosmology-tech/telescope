@@ -243,8 +243,8 @@ export const CertificateID = {
   },
   toAmino(message: CertificateID, useInterfaces: boolean = true): CertificateIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.serial = message.serial;
+    obj.owner = message.owner ?? "";
+    obj.serial = message.serial ?? "";
     return obj;
   },
   fromProtoMsg(message: CertificateIDProtoMsg, useInterfaces: boolean = true): CertificateID {
@@ -342,7 +342,7 @@ export const Certificate = {
   fromAmino(object: CertificateAmino): Certificate {
     const message = createBaseCertificate();
     if (object.state !== undefined && object.state !== null) {
-      message.state = certificate_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.cert !== undefined && object.cert !== null) {
       message.cert = bytesFromBase64(object.cert);
@@ -354,9 +354,9 @@ export const Certificate = {
   },
   toAmino(message: Certificate, useInterfaces: boolean = true): CertificateAmino {
     const obj: any = {};
-    obj.state = certificate_StateToJSON(message.state);
-    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
-    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
+    obj.state = message.state ?? 0;
+    obj.cert = message.cert ? base64FromBytes(message.cert) : "";
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : "";
     return obj;
   },
   fromProtoMsg(message: CertificateProtoMsg, useInterfaces: boolean = true): Certificate {
@@ -466,9 +466,9 @@ export const CertificateFilter = {
   },
   toAmino(message: CertificateFilter, useInterfaces: boolean = true): CertificateFilterAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.serial = message.serial;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.serial = message.serial ?? "";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromProtoMsg(message: CertificateFilterProtoMsg, useInterfaces: boolean = true): CertificateFilter {
@@ -578,9 +578,9 @@ export const MsgCreateCertificate = {
   },
   toAmino(message: MsgCreateCertificate, useInterfaces: boolean = true): MsgCreateCertificateAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
-    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
+    obj.owner = message.owner ?? "";
+    obj.cert = message.cert ? base64FromBytes(message.cert) : "";
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : "";
     return obj;
   },
   fromProtoMsg(message: MsgCreateCertificateProtoMsg, useInterfaces: boolean = true): MsgCreateCertificate {
@@ -724,7 +724,7 @@ export const MsgRevokeCertificate = {
   },
   toAmino(message: MsgRevokeCertificate, useInterfaces: boolean = true): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? CertificateID.toAmino(message.id, useInterfaces) : CertificateID.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: MsgRevokeCertificateProtoMsg, useInterfaces: boolean = true): MsgRevokeCertificate {

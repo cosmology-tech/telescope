@@ -126,7 +126,7 @@ export const Params = {
     if (message.poolCreationFee) {
       obj.pool_creation_fee = message.poolCreationFee.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pool_creation_fee = [];
+      obj.pool_creation_fee = message.poolCreationFee;
     }
     return obj;
   },
@@ -251,7 +251,7 @@ export const GenesisState = {
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? PoolI_ToAmino((e as Any), useInterfaces) : undefined);
     } else {
-      obj.pools = [];
+      obj.pools = message.pools;
     }
     obj.next_pool_number = message.nextPoolNumber ? message.nextPoolNumber.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
@@ -282,7 +282,7 @@ export const PoolI_InterfaceDecoder = (input: BinaryReader | Uint8Array): Pool1 
       return data;
   }
 };
-export const PoolI_FromAmino = (content: AnyAmino) => {
+export const PoolI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "osmosis/gamm/pool":
       return Any.fromPartial({

@@ -1,6 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "tendermint.types";
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -479,9 +479,9 @@ export const BlockParams = {
   },
   toAmino(message: BlockParams): BlockParamsAmino {
     const obj: any = {};
-    obj.max_bytes = omitDefault(message.maxBytes);
-    obj.max_gas = omitDefault(message.maxGas);
-    obj.time_iota_ms = omitDefault(message.timeIotaMs);
+    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
+    obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
+    obj.time_iota_ms = message.timeIotaMs ? message.timeIotaMs.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BlockParamsAminoMsg): BlockParams {
@@ -600,9 +600,9 @@ export const EvidenceParams = {
   },
   toAmino(message: EvidenceParams): EvidenceParamsAmino {
     const obj: any = {};
-    obj.max_age_num_blocks = omitDefault(message.maxAgeNumBlocks);
+    obj.max_age_num_blocks = message.maxAgeNumBlocks ? message.maxAgeNumBlocks.toString() : undefined;
     obj.max_age_duration = message.maxAgeDuration ? Duration.toAmino(message.maxAgeDuration) : undefined;
-    obj.max_bytes = omitDefault(message.maxBytes);
+    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EvidenceParamsAminoMsg): EvidenceParams {
@@ -694,7 +694,7 @@ export const ValidatorParams = {
     if (message.pubKeyTypes) {
       obj.pub_key_types = message.pubKeyTypes.map(e => e);
     } else {
-      obj.pub_key_types = [];
+      obj.pub_key_types = message.pubKeyTypes;
     }
     return obj;
   },
@@ -780,7 +780,7 @@ export const VersionParams = {
   },
   toAmino(message: VersionParams): VersionParamsAmino {
     const obj: any = {};
-    obj.app_version = omitDefault(message.appVersion);
+    obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: VersionParamsAminoMsg): VersionParams {
@@ -882,8 +882,8 @@ export const HashedParams = {
   },
   toAmino(message: HashedParams): HashedParamsAmino {
     const obj: any = {};
-    obj.block_max_bytes = omitDefault(message.blockMaxBytes);
-    obj.block_max_gas = omitDefault(message.blockMaxGas);
+    obj.block_max_bytes = message.blockMaxBytes ? message.blockMaxBytes.toString() : undefined;
+    obj.block_max_gas = message.blockMaxGas ? message.blockMaxGas.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: HashedParamsAminoMsg): HashedParams {

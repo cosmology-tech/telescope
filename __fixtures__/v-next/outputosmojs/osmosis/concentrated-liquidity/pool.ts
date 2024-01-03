@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface Pool {
   /** pool's address holding all liquidity tokens. */
@@ -292,17 +292,17 @@ export const Pool = {
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.incentives_address = message.incentivesAddress;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.incentives_address = message.incentivesAddress === "" ? undefined : message.incentivesAddress;
     obj.id = message.id ? message.id.toString() : undefined;
-    obj.current_tick_liquidity = message.currentTickLiquidity;
-    obj.token0 = message.token0;
-    obj.token1 = message.token1;
-    obj.current_sqrt_price = message.currentSqrtPrice;
-    obj.current_tick = message.currentTick;
+    obj.current_tick_liquidity = padDecimal(message.currentTickLiquidity) === "" ? undefined : padDecimal(message.currentTickLiquidity);
+    obj.token0 = message.token0 === "" ? undefined : message.token0;
+    obj.token1 = message.token1 === "" ? undefined : message.token1;
+    obj.current_sqrt_price = padDecimal(message.currentSqrtPrice) === "" ? undefined : padDecimal(message.currentSqrtPrice);
+    obj.current_tick = message.currentTick === "" ? undefined : message.currentTick;
     obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
-    obj.exponent_at_price_one = message.exponentAtPriceOne;
-    obj.swap_fee = message.swapFee;
+    obj.exponent_at_price_one = message.exponentAtPriceOne === "" ? undefined : message.exponentAtPriceOne;
+    obj.swap_fee = padDecimal(message.swapFee) === "" ? undefined : padDecimal(message.swapFee);
     obj.last_liquidity_update = message.lastLiquidityUpdate ? Timestamp.toAmino(toTimestamp(message.lastLiquidityUpdate)) : undefined;
     return obj;
   },

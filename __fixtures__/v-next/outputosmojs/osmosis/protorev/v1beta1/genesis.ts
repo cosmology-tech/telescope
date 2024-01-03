@@ -2,7 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, BaseDenom, BaseDenomSDKType, PoolWeights, PoolWeightsSDKType } from "./protorev";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisState {
@@ -310,25 +310,25 @@ export const GenesisState = {
     if (message.tokenPairArbRoutes) {
       obj.token_pair_arb_routes = message.tokenPairArbRoutes.map(e => e ? TokenPairArbRoutes.toAmino(e) : undefined);
     } else {
-      obj.token_pair_arb_routes = [];
+      obj.token_pair_arb_routes = message.tokenPairArbRoutes;
     }
     if (message.baseDenoms) {
       obj.base_denoms = message.baseDenoms.map(e => e ? BaseDenom.toAmino(e) : undefined);
     } else {
-      obj.base_denoms = [];
+      obj.base_denoms = message.baseDenoms;
     }
     obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
-    obj.days_since_module_genesis = omitDefault(message.daysSinceModuleGenesis);
+    obj.days_since_module_genesis = message.daysSinceModuleGenesis ? message.daysSinceModuleGenesis.toString() : undefined;
     if (message.developerFees) {
       obj.developer_fees = message.developerFees.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.developer_fees = [];
+      obj.developer_fees = message.developerFees;
     }
-    obj.latest_block_height = omitDefault(message.latestBlockHeight);
-    obj.developer_address = omitDefault(message.developerAddress);
-    obj.max_pool_points_per_block = omitDefault(message.maxPoolPointsPerBlock);
-    obj.max_pool_points_per_tx = omitDefault(message.maxPoolPointsPerTx);
-    obj.point_count_for_block = omitDefault(message.pointCountForBlock);
+    obj.latest_block_height = message.latestBlockHeight ? message.latestBlockHeight.toString() : undefined;
+    obj.developer_address = message.developerAddress === "" ? undefined : message.developerAddress;
+    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock ? message.maxPoolPointsPerBlock.toString() : undefined;
+    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx ? message.maxPoolPointsPerTx.toString() : undefined;
+    obj.point_count_for_block = message.pointCountForBlock ? message.pointCountForBlock.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

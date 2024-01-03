@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}
@@ -391,7 +391,7 @@ export const QuerySigningInfoRequest = {
   },
   toAmino(message: QuerySigningInfoRequest): QuerySigningInfoRequestAmino {
     const obj: any = {};
-    obj.cons_address = omitDefault(message.consAddress);
+    obj.cons_address = message.consAddress === "" ? undefined : message.consAddress;
     return obj;
   },
   fromAminoMsg(object: QuerySigningInfoRequestAminoMsg): QuerySigningInfoRequest {
@@ -691,7 +691,7 @@ export const QuerySigningInfosResponse = {
     if (message.info) {
       obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e) : undefined);
     } else {
-      obj.info = [];
+      obj.info = message.info;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

@@ -1102,9 +1102,9 @@ export const Http = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? HttpRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
-    obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion;
+    obj.fully_decode_reserved_expansion = message.fullyDecodeReservedExpansion === false ? undefined : message.fullyDecodeReservedExpansion;
     return obj;
   },
   fromProtoMsg(message: HttpProtoMsg, useInterfaces: boolean = true): Http {
@@ -1327,19 +1327,19 @@ export const HttpRule = {
   },
   toAmino(message: HttpRule, useInterfaces: boolean = true): HttpRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.get = message.get;
-    obj.put = message.put;
-    obj.post = message.post;
-    obj.delete = message.delete;
-    obj.patch = message.patch;
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.get = message.get === null ? undefined : message.get;
+    obj.put = message.put === null ? undefined : message.put;
+    obj.post = message.post === null ? undefined : message.post;
+    obj.delete = message.delete === null ? undefined : message.delete;
+    obj.patch = message.patch === null ? undefined : message.patch;
     obj.custom = message.custom ? CustomHttpPattern.toAmino(message.custom, useInterfaces) : undefined;
-    obj.body = message.body;
-    obj.response_body = message.responseBody;
+    obj.body = message.body === "" ? undefined : message.body;
+    obj.response_body = message.responseBody === "" ? undefined : message.responseBody;
     if (message.additionalBindings) {
       obj.additional_bindings = message.additionalBindings.map(e => e ? HttpRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.additional_bindings = [];
+      obj.additional_bindings = message.additionalBindings;
     }
     return obj;
   },
@@ -1435,8 +1435,8 @@ export const CustomHttpPattern = {
   },
   toAmino(message: CustomHttpPattern, useInterfaces: boolean = true): CustomHttpPatternAmino {
     const obj: any = {};
-    obj.kind = message.kind;
-    obj.path = message.path;
+    obj.kind = message.kind === "" ? undefined : message.kind;
+    obj.path = message.path === "" ? undefined : message.path;
     return obj;
   },
   fromProtoMsg(message: CustomHttpPatternProtoMsg, useInterfaces: boolean = true): CustomHttpPattern {

@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -242,10 +242,10 @@ export const QueryAccountsRequest = {
   },
   toAmino(message: QueryAccountsRequest): QueryAccountsRequestAmino {
     const obj: any = {};
-    obj.scope = omitDefault(message.scope);
-    obj.xid = omitDefault(message.xid);
-    obj.owner = omitDefault(message.owner);
-    obj.state = omitDefault(message.state);
+    obj.scope = message.scope === "" ? undefined : message.scope;
+    obj.xid = message.xid === "" ? undefined : message.xid;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.state = message.state === "" ? undefined : message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -355,7 +355,7 @@ export const QueryAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -517,11 +517,11 @@ export const QueryPaymentsRequest = {
   },
   toAmino(message: QueryPaymentsRequest): QueryPaymentsRequestAmino {
     const obj: any = {};
-    obj.scope = omitDefault(message.scope);
-    obj.xid = omitDefault(message.xid);
-    obj.id = omitDefault(message.id);
-    obj.owner = omitDefault(message.owner);
-    obj.state = omitDefault(message.state);
+    obj.scope = message.scope === "" ? undefined : message.scope;
+    obj.xid = message.xid === "" ? undefined : message.xid;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.state = message.state === "" ? undefined : message.state;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -631,7 +631,7 @@ export const QueryPaymentsResponse = {
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? Payment.toAmino(e) : undefined);
     } else {
-      obj.payments = [];
+      obj.payments = message.payments;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

@@ -47,7 +47,7 @@ export const AminoConverter = {
       return {
         owner,
         auditor,
-        attributes: attributes.map(el0 => ({
+        attributes: attributes.map?.(el0 => ({
           key: el0.key,
           value: el0.value
         }))

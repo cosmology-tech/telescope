@@ -365,7 +365,7 @@ export const QueryDevFeeInfosResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -430,7 +430,7 @@ export const QueryDevFeeInfoRequest = {
   },
   toAmino(message: QueryDevFeeInfoRequest): QueryDevFeeInfoRequestAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
     return obj;
   },
   fromAminoMsg(object: QueryDevFeeInfoRequestAminoMsg): QueryDevFeeInfoRequest {
@@ -686,7 +686,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
   },
   toAmino(message: QueryDevFeeInfosPerDeployerRequest): QueryDevFeeInfosPerDeployerRequestAmino {
     const obj: any = {};
-    obj.deployer_address = message.deployerAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -764,7 +764,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
     } else {
-      obj.fees = [];
+      obj.fees = message.fees;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

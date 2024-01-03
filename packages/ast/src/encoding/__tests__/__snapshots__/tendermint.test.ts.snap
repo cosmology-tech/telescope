@@ -258,7 +258,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = omitDefault(message.chainId);
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
@@ -268,15 +268,15 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 2`] = `
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e) : undefined);
     } else {
-      obj.proof_specs = [];
+      obj.proof_specs = message.proofSpecs;
     }
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
-      obj.upgrade_path = [];
+      obj.upgrade_path = message.upgradePath;
     }
-    obj.allow_update_after_expiry = omitDefault(message.allowUpdateAfterExpiry);
-    obj.allow_update_after_misbehaviour = omitDefault(message.allowUpdateAfterMisbehaviour);
+    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry === false ? undefined : message.allowUpdateAfterExpiry;
+    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour === false ? undefined : message.allowUpdateAfterMisbehaviour;
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -425,19 +425,19 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
     }: ClientStateAminoType["value"]): ClientState => {
       return {
         chainId: chain_id,
-        trustLevel: {
-          numerator: BigInt(trust_level.numerator),
-          denominator: BigInt(trust_level.denominator)
+        trustLevel: trust_level == null ? trust_level : {
+          numerator: trust_level.numerator == null ? trust_level.numerator : BigInt(trust_level.numerator),
+          denominator: trust_level.denominator == null ? trust_level.denominator : BigInt(trust_level.denominator)
         },
-        trustingPeriod: {
+        trustingPeriod: trusting_period == null ? trusting_period : {
           seconds: BigInt(Math.floor(parseInt(trusting_period) / 1_000_000_000)),
           nanos: parseInt(trusting_period) % 1_000_000_000
         },
-        unbondingPeriod: {
+        unbondingPeriod: unbonding_period == null ? unbonding_period : {
           seconds: BigInt(Math.floor(parseInt(unbonding_period) / 1_000_000_000)),
           nanos: parseInt(unbonding_period) % 1_000_000_000
         },
-        maxClockDrift: {
+        maxClockDrift: max_clock_drift == null ? max_clock_drift : {
           seconds: BigInt(Math.floor(parseInt(max_clock_drift) / 1_000_000_000)),
           nanos: parseInt(max_clock_drift) % 1_000_000_000
         },
@@ -449,21 +449,21 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           revisionHeight: BigInt(latest_height.revision_height || "0"),
           revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
-        proofSpecs: proof_specs.map(el0 => ({
-          leafSpec: {
-            hash: hashOpFromJSON(el0.leaf_spec.hash),
-            prehashKey: hashOpFromJSON(el0.leaf_spec.prehash_key),
-            prehashValue: hashOpFromJSON(el0.leaf_spec.prehash_value),
-            length: lengthOpFromJSON(el0.leaf_spec.length),
+        proofSpecs: proof_specs.map?.(el0 => ({
+          leafSpec: el0.leaf_spec == null ? el0.leaf_spec : {
+            hash: el0.leaf_spec.hash == null ? el0.leaf_spec.hash : hashOpFromJSON(el0.leaf_spec.hash),
+            prehashKey: el0.leaf_spec.prehash_key == null ? el0.leaf_spec.prehash_key : hashOpFromJSON(el0.leaf_spec.prehash_key),
+            prehashValue: el0.leaf_spec.prehash_value == null ? el0.leaf_spec.prehash_value : hashOpFromJSON(el0.leaf_spec.prehash_value),
+            length: el0.leaf_spec.length == null ? el0.leaf_spec.length : lengthOpFromJSON(el0.leaf_spec.length),
             prefix: el0.leaf_spec.prefix
           },
-          innerSpec: {
+          innerSpec: el0.inner_spec == null ? el0.inner_spec : {
             childOrder: el0.inner_spec.child_order,
             childSize: el0.inner_spec.child_size,
             minPrefixLength: el0.inner_spec.min_prefix_length,
             maxPrefixLength: el0.inner_spec.max_prefix_length,
             emptyChild: el0.inner_spec.empty_child,
-            hash: hashOpFromJSON(el0.inner_spec.hash)
+            hash: el0.inner_spec.hash == null ? el0.inner_spec.hash : hashOpFromJSON(el0.inner_spec.hash)
           },
           maxDepth: el0.max_depth,
           minDepth: el0.min_depth
@@ -735,7 +735,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = omitDefault(message.chainId);
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod) : undefined;
@@ -745,15 +745,15 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 2`] = `
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e) : undefined);
     } else {
-      obj.proof_specs = [];
+      obj.proof_specs = message.proofSpecs;
     }
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
-      obj.upgrade_path = [];
+      obj.upgrade_path = message.upgradePath;
     }
-    obj.allow_update_after_expiry = omitDefault(message.allowUpdateAfterExpiry);
-    obj.allow_update_after_misbehaviour = omitDefault(message.allowUpdateAfterMisbehaviour);
+    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry === false ? undefined : message.allowUpdateAfterExpiry;
+    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour === false ? undefined : message.allowUpdateAfterMisbehaviour;
     return obj;
   },
   fromAminoMsg(object: ClientStateAminoMsg): ClientState {
@@ -893,19 +893,19 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
     }: ClientStateAminoType["value"]): ClientState => {
       return {
         chainId: chain_id,
-        trustLevel: {
-          numerator: BigInt(trust_level.numerator),
-          denominator: BigInt(trust_level.denominator)
+        trustLevel: trust_level == null ? trust_level : {
+          numerator: trust_level.numerator == null ? trust_level.numerator : BigInt(trust_level.numerator),
+          denominator: trust_level.denominator == null ? trust_level.denominator : BigInt(trust_level.denominator)
         },
-        trustingPeriod: {
+        trustingPeriod: trusting_period == null ? trusting_period : {
           seconds: BigInt(Math.floor(parseInt(trusting_period) / 1_000_000_000)),
           nanos: parseInt(trusting_period) % 1_000_000_000
         },
-        unbondingPeriod: {
+        unbondingPeriod: unbonding_period == null ? unbonding_period : {
           seconds: BigInt(Math.floor(parseInt(unbonding_period) / 1_000_000_000)),
           nanos: parseInt(unbonding_period) % 1_000_000_000
         },
-        maxClockDrift: {
+        maxClockDrift: max_clock_drift == null ? max_clock_drift : {
           seconds: BigInt(Math.floor(parseInt(max_clock_drift) / 1_000_000_000)),
           nanos: parseInt(max_clock_drift) % 1_000_000_000
         },
@@ -917,21 +917,21 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
           revisionHeight: BigInt(latest_height.revision_height || "0"),
           revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
-        proofSpecs: proof_specs.map(el0 => ({
-          leafSpec: {
-            hash: hashOpFromJSON(el0.leaf_spec.hash),
-            prehashKey: hashOpFromJSON(el0.leaf_spec.prehash_key),
-            prehashValue: hashOpFromJSON(el0.leaf_spec.prehash_value),
-            length: lengthOpFromJSON(el0.leaf_spec.length),
+        proofSpecs: proof_specs.map?.(el0 => ({
+          leafSpec: el0.leaf_spec == null ? el0.leaf_spec : {
+            hash: el0.leaf_spec.hash == null ? el0.leaf_spec.hash : hashOpFromJSON(el0.leaf_spec.hash),
+            prehashKey: el0.leaf_spec.prehash_key == null ? el0.leaf_spec.prehash_key : hashOpFromJSON(el0.leaf_spec.prehash_key),
+            prehashValue: el0.leaf_spec.prehash_value == null ? el0.leaf_spec.prehash_value : hashOpFromJSON(el0.leaf_spec.prehash_value),
+            length: el0.leaf_spec.length == null ? el0.leaf_spec.length : lengthOpFromJSON(el0.leaf_spec.length),
             prefix: el0.leaf_spec.prefix
           },
-          innerSpec: {
+          innerSpec: el0.inner_spec == null ? el0.inner_spec : {
             childOrder: el0.inner_spec.child_order,
             childSize: el0.inner_spec.child_size,
             minPrefixLength: el0.inner_spec.min_prefix_length,
             maxPrefixLength: el0.inner_spec.max_prefix_length,
             emptyChild: el0.inner_spec.empty_child,
-            hash: hashOpFromJSON(el0.inner_spec.hash)
+            hash: el0.inner_spec.hash == null ? el0.inner_spec.hash : hashOpFromJSON(el0.inner_spec.hash)
           },
           maxDepth: el0.max_depth,
           minDepth: el0.min_depth

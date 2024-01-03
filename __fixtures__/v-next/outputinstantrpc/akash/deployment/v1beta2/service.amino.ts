@@ -4,6 +4,7 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
@@ -157,7 +158,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString()
+          dseq: id.dseq?.toString?.()
         },
         groups: groups.map(el0 => ({
           name: el0.name,
@@ -167,8 +168,8 @@ export const AminoConverter = {
               any_of: el0.requirements.signedBy.anyOf
             },
             attributes: el0.requirements.attributes.map(el1 => ({
-              key: el1.key,
-              value: el1.value
+              key: omitDefault(el1.key),
+              value: omitDefault(el1.value)
             }))
           },
           resources: el0.resources.map(el1 => ({
@@ -178,8 +179,8 @@ export const AminoConverter = {
                   val: el1.resources.cpu.units.val
                 },
                 attributes: el1.resources.cpu.attributes.map(el2 => ({
-                  key: el2.key,
-                  value: el2.value
+                  key: omitDefault(el2.key),
+                  value: omitDefault(el2.value)
                 }))
               },
               memory: {
@@ -187,8 +188,8 @@ export const AminoConverter = {
                   val: el1.resources.memory.quantity.val
                 },
                 attributes: el1.resources.memory.attributes.map(el2 => ({
-                  key: el2.key,
-                  value: el2.value
+                  key: omitDefault(el2.key),
+                  value: omitDefault(el2.value)
                 }))
               },
               storage: el1.resources.storage.map(el2 => ({
@@ -197,8 +198,8 @@ export const AminoConverter = {
                   val: el2.quantity.val
                 },
                 attributes: el2.attributes.map(el3 => ({
-                  key: el3.key,
-                  value: el3.value
+                  key: omitDefault(el3.key),
+                  value: omitDefault(el3.value)
                 }))
               })),
               endpoints: el1.resources.endpoints.map(el2 => ({
@@ -208,17 +209,17 @@ export const AminoConverter = {
             },
             count: el1.count,
             price: {
-              denom: el1.price.denom,
-              amount: el1.price.amount
+              denom: omitDefault(el1.price.denom),
+              amount: omitDefault(el1.price.amount)
             }
           }))
         })),
-        version,
+        version: version,
         deposit: {
           denom: deposit.denom,
           amount: deposit.amount
         },
-        depositor
+        depositor: depositor
       };
     },
     fromAmino: ({
@@ -229,66 +230,66 @@ export const AminoConverter = {
       depositor
     }: MsgCreateDeploymentAminoType["value"]): MsgCreateDeployment => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq)
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq)
         },
-        groups: groups.map(el0 => ({
+        groups: groups.map?.(el0 => ({
           name: el0.name,
-          requirements: {
-            signedBy: {
+          requirements: el0.requirements == null ? el0.requirements : {
+            signedBy: el0.requirements.signed_by == null ? el0.requirements.signed_by : {
               allOf: el0.requirements.signed_by.all_of,
               anyOf: el0.requirements.signed_by.any_of
             },
-            attributes: el0.requirements.attributes.map(el2 => ({
+            attributes: el0.requirements.attributes.map?.(el2 => ({
               key: el2.key,
               value: el2.value
             }))
           },
-          resources: el0.resources.map(el1 => ({
-            resources: {
-              cpu: {
-                units: {
+          resources: el0.resources.map?.(el1 => ({
+            resources: el1.resources == null ? el1.resources : {
+              cpu: el1.resources.cpu == null ? el1.resources.cpu : {
+                units: el1.resources.cpu.units == null ? el1.resources.cpu.units : {
                   val: el1.resources.cpu.units.val
                 },
-                attributes: el1.resources.cpu.attributes.map(el4 => ({
+                attributes: el1.resources.cpu.attributes.map?.(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
               },
-              memory: {
-                quantity: {
+              memory: el1.resources.memory == null ? el1.resources.memory : {
+                quantity: el1.resources.memory.quantity == null ? el1.resources.memory.quantity : {
                   val: el1.resources.memory.quantity.val
                 },
-                attributes: el1.resources.memory.attributes.map(el4 => ({
+                attributes: el1.resources.memory.attributes.map?.(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
               },
-              storage: el1.resources.storage.map(el3 => ({
+              storage: el1.resources.storage.map?.(el3 => ({
                 name: el3.name,
-                quantity: {
+                quantity: el3.quantity == null ? el3.quantity : {
                   val: el3.quantity.val
                 },
-                attributes: el3.attributes.map(el4 => ({
+                attributes: el3.attributes.map?.(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
               })),
-              endpoints: el1.resources.endpoints.map(el3 => ({
-                kind: endpoint_KindFromJSON(el3.kind),
+              endpoints: el1.resources.endpoints.map?.(el3 => ({
+                kind: el3.kind == null ? el3.kind : endpoint_KindFromJSON(el3.kind),
                 sequenceNumber: el3.sequence_number
               }))
             },
             count: el1.count,
-            price: {
+            price: el1.price == null ? el1.price : {
               denom: el1.price.denom,
               amount: el1.price.amount
             }
           }))
         })),
         version,
-        deposit: {
+        deposit: deposit == null ? deposit : {
           denom: deposit.denom,
           amount: deposit.amount
         },
@@ -306,13 +307,13 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString()
+          dseq: id.dseq?.toString?.()
         },
         amount: {
           denom: amount.denom,
           amount: amount.amount
         },
-        depositor
+        depositor: depositor
       };
     },
     fromAmino: ({
@@ -321,11 +322,11 @@ export const AminoConverter = {
       depositor
     }: MsgDepositDeploymentAminoType["value"]): MsgDepositDeployment => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq)
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq)
         },
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         },
@@ -342,9 +343,9 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString()
+          dseq: id.dseq?.toString?.()
         },
-        version
+        version: version
       };
     },
     fromAmino: ({
@@ -352,9 +353,9 @@ export const AminoConverter = {
       version
     }: MsgUpdateDeploymentAminoType["value"]): MsgUpdateDeployment => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq)
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq)
         },
         version
       };
@@ -368,7 +369,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString()
+          dseq: id.dseq?.toString?.()
         }
       };
     },
@@ -376,9 +377,9 @@ export const AminoConverter = {
       id
     }: MsgCloseDeploymentAminoType["value"]): MsgCloseDeployment => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq)
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq)
         }
       };
     }
@@ -391,7 +392,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString(),
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };
@@ -400,9 +401,9 @@ export const AminoConverter = {
       id
     }: MsgCloseGroupAminoType["value"]): MsgCloseGroup => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq),
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -416,7 +417,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString(),
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };
@@ -425,9 +426,9 @@ export const AminoConverter = {
       id
     }: MsgPauseGroupAminoType["value"]): MsgPauseGroup => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq),
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq),
           gseq: id.gseq
         }
       };
@@ -441,7 +442,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq.toString(),
+          dseq: id.dseq?.toString?.(),
           gseq: id.gseq
         }
       };
@@ -450,9 +451,9 @@ export const AminoConverter = {
       id
     }: MsgStartGroupAminoType["value"]): MsgStartGroup => {
       return {
-        id: {
+        id: id == null ? id : {
           owner: id.owner,
-          dseq: BigInt(id.dseq),
+          dseq: id.dseq == null ? id.dseq : BigInt(id.dseq),
           gseq: id.gseq
         }
       };

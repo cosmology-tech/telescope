@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -169,8 +169,8 @@ export const DenomTrace = {
   },
   toAmino(message: DenomTrace, useInterfaces: boolean = true): DenomTraceAmino {
     const obj: any = {};
-    obj.path = omitDefault(message.path);
-    obj.base_denom = omitDefault(message.baseDenom);
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.base_denom = message.baseDenom === "" ? undefined : message.baseDenom;
     return obj;
   },
   fromProtoMsg(message: DenomTraceProtoMsg, useInterfaces: boolean = true): DenomTrace {
@@ -266,8 +266,8 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.send_enabled = omitDefault(message.sendEnabled);
-    obj.receive_enabled = omitDefault(message.receiveEnabled);
+    obj.send_enabled = message.sendEnabled === false ? undefined : message.sendEnabled;
+    obj.receive_enabled = message.receiveEnabled === false ? undefined : message.receiveEnabled;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

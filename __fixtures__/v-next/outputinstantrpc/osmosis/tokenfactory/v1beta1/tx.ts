@@ -263,8 +263,8 @@ export const MsgCreateDenom = {
   },
   toAmino(message: MsgCreateDenom): MsgCreateDenomAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.subdenom = message.subdenom;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.subdenom = message.subdenom === "" ? undefined : message.subdenom;
     return obj;
   },
   fromAminoMsg(object: MsgCreateDenomAminoMsg): MsgCreateDenom {
@@ -358,7 +358,7 @@ export const MsgCreateDenomResponse = {
   },
   toAmino(message: MsgCreateDenomResponse): MsgCreateDenomResponseAmino {
     const obj: any = {};
-    obj.new_token_denom = message.newTokenDenom;
+    obj.new_token_denom = message.newTokenDenom === "" ? undefined : message.newTokenDenom;
     return obj;
   },
   fromAminoMsg(object: MsgCreateDenomResponseAminoMsg): MsgCreateDenomResponse {
@@ -470,7 +470,7 @@ export const MsgMint = {
   },
   toAmino(message: MsgMint): MsgMintAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
@@ -657,7 +657,7 @@ export const MsgBurn = {
   },
   toAmino(message: MsgBurn): MsgBurnAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.amount = message.amount ? Coin.toAmino(message.amount) : undefined;
     return obj;
   },
@@ -858,9 +858,9 @@ export const MsgChangeAdmin = {
   },
   toAmino(message: MsgChangeAdmin): MsgChangeAdminAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.denom = message.denom;
-    obj.new_admin = message.newAdmin;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.new_admin = message.newAdmin === "" ? undefined : message.newAdmin;
     return obj;
   },
   fromAminoMsg(object: MsgChangeAdminAminoMsg): MsgChangeAdmin {
@@ -1046,7 +1046,7 @@ export const MsgSetDenomMetadata = {
   },
   toAmino(message: MsgSetDenomMetadata): MsgSetDenomMetadataAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata) : undefined;
     return obj;
   },

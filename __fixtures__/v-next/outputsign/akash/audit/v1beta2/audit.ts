@@ -241,12 +241,12 @@ export const Provider = {
   },
   toAmino(message: Provider): ProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -330,12 +330,12 @@ export const AuditedAttributes = {
   },
   toAmino(message: AuditedAttributes): AuditedAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -400,7 +400,7 @@ export const AttributesResponse = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -474,12 +474,12 @@ export const AttributesFilters = {
     if (message.auditors) {
       obj.auditors = message.auditors.map(e => e);
     } else {
-      obj.auditors = [];
+      obj.auditors = message.auditors;
     }
     if (message.owners) {
       obj.owners = message.owners.map(e => e);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },
@@ -563,12 +563,12 @@ export const MsgSignProviderAttributes = {
   },
   toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -702,12 +702,12 @@ export const MsgDeleteProviderAttributes = {
   },
   toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },

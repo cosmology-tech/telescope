@@ -104,7 +104,7 @@ export const DepositDeploymentAuthorization = {
   },
   toAmino(message: DepositDeploymentAuthorization, useInterfaces: boolean = true): DepositDeploymentAuthorizationAmino {
     const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : undefined;
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : Coin.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg, useInterfaces: boolean = true): DepositDeploymentAuthorization {

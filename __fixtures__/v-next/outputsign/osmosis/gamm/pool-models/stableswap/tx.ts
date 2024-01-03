@@ -210,20 +210,20 @@ export const MsgCreateStableswapPool = {
   },
   toAmino(message: MsgCreateStableswapPool): MsgCreateStableswapPoolAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     if (message.initialPoolLiquidity) {
       obj.initial_pool_liquidity = message.initialPoolLiquidity.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.initial_pool_liquidity = [];
+      obj.initial_pool_liquidity = message.initialPoolLiquidity;
     }
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {
-      obj.scaling_factors = [];
+      obj.scaling_factors = message.scalingFactors;
     }
-    obj.future_pool_governor = message.futurePoolGovernor;
-    obj.scaling_factor_controller = message.scalingFactorController;
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
+    obj.scaling_factor_controller = message.scalingFactorController === "" ? undefined : message.scalingFactorController;
     return obj;
   },
   fromAminoMsg(object: MsgCreateStableswapPoolAminoMsg): MsgCreateStableswapPool {
@@ -394,12 +394,12 @@ export const MsgStableSwapAdjustScalingFactors = {
   },
   toAmino(message: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {
-      obj.scaling_factors = [];
+      obj.scaling_factors = message.scalingFactors;
     }
     return obj;
   },

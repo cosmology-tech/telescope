@@ -256,19 +256,19 @@ export const MsgInstantiateContract2 = {
   toAmino(message: MsgInstantiateContract2): MsgInstantiateContract2Amino {
     const obj: any = {};
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.label = message.label;
+    obj.label = message.label === "" ? undefined : message.label;
     if (message.funds) {
       obj.funds = message.funds.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.funds = [];
+      obj.funds = message.funds;
     }
     obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
-    obj.fix_msg = message.fixMsg;
-    obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg ?? false;
+    obj.fix_msg = message.fixMsg === false ? undefined : message.fixMsg;
+    obj.dont_omitempty_fix_msg = message.dontOmitemptyFixMsg === false ? undefined : message.dontOmitemptyFixMsg;
     if (message.aListOfBytes) {
       obj.a_list_of_bytes = message.aListOfBytes.map(e => base64FromBytes(e));
     } else {
-      obj.a_list_of_bytes = [];
+      obj.a_list_of_bytes = message.aListOfBytes;
     }
     return obj;
   },

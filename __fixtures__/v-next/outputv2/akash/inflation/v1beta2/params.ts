@@ -140,9 +140,9 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.inflation_decay_factor = padDecimal(message.inflationDecayFactor);
-    obj.initial_inflation = padDecimal(message.initialInflation);
-    obj.variance = padDecimal(message.variance);
+    obj.inflation_decay_factor = padDecimal(message.inflationDecayFactor) ?? "";
+    obj.initial_inflation = padDecimal(message.initialInflation) ?? "";
+    obj.variance = padDecimal(message.variance) ?? "";
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

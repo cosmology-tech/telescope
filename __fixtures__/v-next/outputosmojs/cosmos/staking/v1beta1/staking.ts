@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, padDecimal, toTimestamp, fromTimestamp } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -622,7 +622,7 @@ export const HistoricalInfo = {
     if (message.valset) {
       obj.valset = message.valset.map(e => e ? Validator.toAmino(e) : undefined);
     } else {
-      obj.valset = [];
+      obj.valset = message.valset;
     }
     return obj;
   },
@@ -749,9 +749,9 @@ export const CommissionRates = {
   },
   toAmino(message: CommissionRates): CommissionRatesAmino {
     const obj: any = {};
-    obj.rate = message.rate;
-    obj.max_rate = message.maxRate;
-    obj.max_change_rate = message.maxChangeRate;
+    obj.rate = padDecimal(message.rate) === "" ? undefined : padDecimal(message.rate);
+    obj.max_rate = padDecimal(message.maxRate) === "" ? undefined : padDecimal(message.maxRate);
+    obj.max_change_rate = padDecimal(message.maxChangeRate) === "" ? undefined : padDecimal(message.maxChangeRate);
     return obj;
   },
   fromAminoMsg(object: CommissionRatesAminoMsg): CommissionRates {
@@ -1020,11 +1020,11 @@ export const Description = {
   },
   toAmino(message: Description): DescriptionAmino {
     const obj: any = {};
-    obj.moniker = message.moniker;
-    obj.identity = message.identity;
-    obj.website = message.website;
-    obj.security_contact = message.securityContact;
-    obj.details = message.details;
+    obj.moniker = message.moniker === "" ? undefined : message.moniker;
+    obj.identity = message.identity === "" ? undefined : message.identity;
+    obj.website = message.website === "" ? undefined : message.website;
+    obj.security_contact = message.securityContact === "" ? undefined : message.securityContact;
+    obj.details = message.details === "" ? undefined : message.details;
     return obj;
   },
   fromAminoMsg(object: DescriptionAminoMsg): Description {
@@ -1251,7 +1251,7 @@ export const Validator = {
       message.jailed = object.jailed;
     }
     if (object.status !== undefined && object.status !== null) {
-      message.status = bondStatusFromJSON(object.status);
+      message.status = object.status;
     }
     if (object.tokens !== undefined && object.tokens !== null) {
       message.tokens = object.tokens;
@@ -1278,17 +1278,17 @@ export const Validator = {
   },
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
-    obj.operator_address = message.operatorAddress;
+    obj.operator_address = message.operatorAddress === "" ? undefined : message.operatorAddress;
     obj.consensus_pubkey = message.consensusPubkey ? decodePubkey(message.consensusPubkey) : undefined;
-    obj.jailed = message.jailed;
-    obj.status = bondStatusToJSON(message.status);
-    obj.tokens = message.tokens;
-    obj.delegator_shares = message.delegatorShares;
+    obj.jailed = message.jailed === false ? undefined : message.jailed;
+    obj.status = message.status === 0 ? undefined : message.status;
+    obj.tokens = message.tokens === "" ? undefined : message.tokens;
+    obj.delegator_shares = padDecimal(message.delegatorShares) === "" ? undefined : padDecimal(message.delegatorShares);
     obj.description = message.description ? Description.toAmino(message.description) : undefined;
     obj.unbonding_height = message.unbondingHeight ? message.unbondingHeight.toString() : undefined;
     obj.unbonding_time = message.unbondingTime ? Timestamp.toAmino(toTimestamp(message.unbondingTime)) : undefined;
     obj.commission = message.commission ? Commission.toAmino(message.commission) : undefined;
-    obj.min_self_delegation = message.minSelfDelegation;
+    obj.min_self_delegation = message.minSelfDelegation === "" ? undefined : message.minSelfDelegation;
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -1391,7 +1391,7 @@ export const ValAddresses = {
     if (message.addresses) {
       obj.addresses = message.addresses.map(e => e);
     } else {
-      obj.addresses = [];
+      obj.addresses = message.addresses;
     }
     return obj;
   },
@@ -1502,8 +1502,8 @@ export const DVPair = {
   },
   toAmino(message: DVPair): DVPairAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     return obj;
   },
   fromAminoMsg(object: DVPairAminoMsg): DVPair {
@@ -1606,7 +1606,7 @@ export const DVPairs = {
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? DVPair.toAmino(e) : undefined);
     } else {
-      obj.pairs = [];
+      obj.pairs = message.pairs;
     }
     return obj;
   },
@@ -1733,9 +1733,9 @@ export const DVVTriplet = {
   },
   toAmino(message: DVVTriplet): DVVTripletAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_src_address = message.validatorSrcAddress === "" ? undefined : message.validatorSrcAddress;
+    obj.validator_dst_address = message.validatorDstAddress === "" ? undefined : message.validatorDstAddress;
     return obj;
   },
   fromAminoMsg(object: DVVTripletAminoMsg): DVVTriplet {
@@ -1838,7 +1838,7 @@ export const DVVTriplets = {
     if (message.triplets) {
       obj.triplets = message.triplets.map(e => e ? DVVTriplet.toAmino(e) : undefined);
     } else {
-      obj.triplets = [];
+      obj.triplets = message.triplets;
     }
     return obj;
   },
@@ -1965,9 +1965,9 @@ export const Delegation = {
   },
   toAmino(message: Delegation): DelegationAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
-    obj.shares = message.shares;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
+    obj.shares = padDecimal(message.shares) === "" ? undefined : padDecimal(message.shares);
     return obj;
   },
   fromAminoMsg(object: DelegationAminoMsg): Delegation {
@@ -2099,12 +2099,12 @@ export const UnbondingDelegation = {
   },
   toAmino(message: UnbondingDelegation): UnbondingDelegationAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_address = message.validatorAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toAmino(e) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -2249,8 +2249,8 @@ export const UnbondingDelegationEntry = {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
     obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
-    obj.initial_balance = message.initialBalance;
-    obj.balance = message.balance;
+    obj.initial_balance = message.initialBalance === "" ? undefined : message.initialBalance;
+    obj.balance = message.balance === "" ? undefined : message.balance;
     return obj;
   },
   fromAminoMsg(object: UnbondingDelegationEntryAminoMsg): UnbondingDelegationEntry {
@@ -2394,8 +2394,8 @@ export const RedelegationEntry = {
     const obj: any = {};
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
     obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
-    obj.initial_balance = message.initialBalance;
-    obj.shares_dst = message.sharesDst;
+    obj.initial_balance = message.initialBalance === "" ? undefined : message.initialBalance;
+    obj.shares_dst = padDecimal(message.sharesDst) === "" ? undefined : padDecimal(message.sharesDst);
     return obj;
   },
   fromAminoMsg(object: RedelegationEntryAminoMsg): RedelegationEntry {
@@ -2543,13 +2543,13 @@ export const Redelegation = {
   },
   toAmino(message: Redelegation): RedelegationAmino {
     const obj: any = {};
-    obj.delegator_address = message.delegatorAddress;
-    obj.validator_src_address = message.validatorSrcAddress;
-    obj.validator_dst_address = message.validatorDstAddress;
+    obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
+    obj.validator_src_address = message.validatorSrcAddress === "" ? undefined : message.validatorSrcAddress;
+    obj.validator_dst_address = message.validatorDstAddress === "" ? undefined : message.validatorDstAddress;
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? RedelegationEntry.toAmino(e) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -2725,11 +2725,11 @@ export const Params = {
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
     obj.unbonding_time = message.unbondingTime ? Duration.toAmino(message.unbondingTime) : undefined;
-    obj.max_validators = message.maxValidators;
-    obj.max_entries = message.maxEntries;
-    obj.historical_entries = message.historicalEntries;
-    obj.bond_denom = message.bondDenom;
-    obj.min_commission_rate = message.minCommissionRate;
+    obj.max_validators = message.maxValidators === 0 ? undefined : message.maxValidators;
+    obj.max_entries = message.maxEntries === 0 ? undefined : message.maxEntries;
+    obj.historical_entries = message.historicalEntries === 0 ? undefined : message.historicalEntries;
+    obj.bond_denom = message.bondDenom === "" ? undefined : message.bondDenom;
+    obj.min_commission_rate = padDecimal(message.minCommissionRate) === "" ? undefined : padDecimal(message.minCommissionRate);
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {
@@ -2951,7 +2951,7 @@ export const RedelegationEntryResponse = {
   toAmino(message: RedelegationEntryResponse): RedelegationEntryResponseAmino {
     const obj: any = {};
     obj.redelegation_entry = message.redelegationEntry ? RedelegationEntry.toAmino(message.redelegationEntry) : undefined;
-    obj.balance = message.balance;
+    obj.balance = message.balance === "" ? undefined : message.balance;
     return obj;
   },
   fromAminoMsg(object: RedelegationEntryResponseAminoMsg): RedelegationEntryResponse {
@@ -3071,7 +3071,7 @@ export const RedelegationResponse = {
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toAmino(e) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -3182,8 +3182,8 @@ export const Pool = {
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.not_bonded_tokens = message.notBondedTokens;
-    obj.bonded_tokens = message.bondedTokens;
+    obj.not_bonded_tokens = message.notBondedTokens ?? "";
+    obj.bonded_tokens = message.bondedTokens ?? "";
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

@@ -1,7 +1,7 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { TwapRecord, TwapRecordSDKType } from "./twap_record";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
@@ -120,7 +120,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.prune_epoch_identifier = omitDefault(message.pruneEpochIdentifier);
+    obj.prune_epoch_identifier = message.pruneEpochIdentifier === "" ? undefined : message.pruneEpochIdentifier;
     obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined;
     return obj;
   },
@@ -242,7 +242,7 @@ export const GenesisState = {
     if (message.twaps) {
       obj.twaps = message.twaps.map(e => e ? TwapRecord.toAmino(e) : undefined);
     } else {
-      obj.twaps = [];
+      obj.twaps = message.twaps;
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;

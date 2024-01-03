@@ -327,7 +327,7 @@ export const QueryModuleAccountBalanceResponse = {
     if (message.moduleAccountBalance) {
       obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.moduleAccountBalance = [];
+      obj.moduleAccountBalance = message.moduleAccountBalance;
     }
     return obj;
   },
@@ -582,7 +582,7 @@ export const QueryClaimRecordRequest = {
   },
   toAmino(message: QueryClaimRecordRequest): QueryClaimRecordRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryClaimRecordRequestAminoMsg): QueryClaimRecordRequest {
@@ -773,14 +773,14 @@ export const QueryClaimableForActionRequest = {
       message.address = object.address;
     }
     if (object.action !== undefined && object.action !== null) {
-      message.action = actionFromJSON(object.action);
+      message.action = object.action;
     }
     return message;
   },
   toAmino(message: QueryClaimableForActionRequest): QueryClaimableForActionRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.action = actionToJSON(message.action);
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.action = message.action === 0 ? undefined : message.action;
     return obj;
   },
   fromAminoMsg(object: QueryClaimableForActionRequestAminoMsg): QueryClaimableForActionRequest {
@@ -879,7 +879,7 @@ export const QueryClaimableForActionResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -970,7 +970,7 @@ export const QueryTotalClaimableRequest = {
   },
   toAmino(message: QueryTotalClaimableRequest): QueryTotalClaimableRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryTotalClaimableRequestAminoMsg): QueryTotalClaimableRequest {
@@ -1069,7 +1069,7 @@ export const QueryTotalClaimableResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },

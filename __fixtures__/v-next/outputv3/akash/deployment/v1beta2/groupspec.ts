@@ -127,12 +127,12 @@ export const GroupSpec = {
   },
   toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : undefined;
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : PlacementRequirements.fromPartial({});
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
     return obj;
   },

@@ -1,6 +1,6 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../../helpers";
+import { isSet, DeepPartial } from "../../../../../helpers";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -155,14 +155,14 @@ export const MsgCreateBalancerPool = {
   },
   toAmino(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAmino {
     const obj: any = {};
-    obj.sender = omitDefault(message.sender);
+    obj.sender = message.sender === "" ? undefined : message.sender;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
-      obj.pool_assets = [];
+      obj.pool_assets = message.poolAssets;
     }
-    obj.future_pool_governor = omitDefault(message.futurePoolGovernor);
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBalancerPoolAminoMsg): MsgCreateBalancerPool {
@@ -256,7 +256,7 @@ export const MsgCreateBalancerPoolResponse = {
   },
   toAmino(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = omitDefault(message.poolId);
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateBalancerPoolResponseAminoMsg): MsgCreateBalancerPoolResponse {

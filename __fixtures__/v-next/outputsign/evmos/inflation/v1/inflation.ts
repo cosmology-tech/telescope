@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, padDecimal } from "../../../helpers";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -202,9 +202,9 @@ export const InflationDistribution = {
   },
   toAmino(message: InflationDistribution): InflationDistributionAmino {
     const obj: any = {};
-    obj.staking_rewards = message.stakingRewards;
-    obj.usage_incentives = message.usageIncentives;
-    obj.community_pool = message.communityPool;
+    obj.staking_rewards = padDecimal(message.stakingRewards) === "" ? undefined : padDecimal(message.stakingRewards);
+    obj.usage_incentives = padDecimal(message.usageIncentives) === "" ? undefined : padDecimal(message.usageIncentives);
+    obj.community_pool = padDecimal(message.communityPool) === "" ? undefined : padDecimal(message.communityPool);
     return obj;
   },
   fromAminoMsg(object: InflationDistributionAminoMsg): InflationDistribution {
@@ -311,11 +311,11 @@ export const ExponentialCalculation = {
   },
   toAmino(message: ExponentialCalculation): ExponentialCalculationAmino {
     const obj: any = {};
-    obj.a = message.a;
-    obj.r = message.r;
-    obj.c = message.c;
-    obj.bonding_target = message.bondingTarget;
-    obj.max_variance = message.maxVariance;
+    obj.a = padDecimal(message.a) === "" ? undefined : padDecimal(message.a);
+    obj.r = padDecimal(message.r) === "" ? undefined : padDecimal(message.r);
+    obj.c = padDecimal(message.c) === "" ? undefined : padDecimal(message.c);
+    obj.bonding_target = padDecimal(message.bondingTarget) === "" ? undefined : padDecimal(message.bondingTarget);
+    obj.max_variance = padDecimal(message.maxVariance) === "" ? undefined : padDecimal(message.maxVariance);
     return obj;
   },
   fromAminoMsg(object: ExponentialCalculationAminoMsg): ExponentialCalculation {

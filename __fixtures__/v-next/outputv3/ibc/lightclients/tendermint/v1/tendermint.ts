@@ -509,7 +509,7 @@ export const ClientState = {
   },
   toAmino(message: ClientState, useInterfaces: boolean = true): ClientStateAmino {
     const obj: any = {};
-    obj.chain_id = message.chainId;
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.trust_level = message.trustLevel ? Fraction.toAmino(message.trustLevel, useInterfaces) : undefined;
     obj.trusting_period = message.trustingPeriod ? Duration.toAmino(message.trustingPeriod, useInterfaces) : undefined;
     obj.unbonding_period = message.unbondingPeriod ? Duration.toAmino(message.unbondingPeriod, useInterfaces) : undefined;
@@ -519,15 +519,15 @@ export const ClientState = {
     if (message.proofSpecs) {
       obj.proof_specs = message.proofSpecs.map(e => e ? ProofSpec.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.proof_specs = [];
+      obj.proof_specs = message.proofSpecs;
     }
     if (message.upgradePath) {
       obj.upgrade_path = message.upgradePath.map(e => e);
     } else {
-      obj.upgrade_path = [];
+      obj.upgrade_path = message.upgradePath;
     }
-    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry;
-    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour;
+    obj.allow_update_after_expiry = message.allowUpdateAfterExpiry === false ? undefined : message.allowUpdateAfterExpiry;
+    obj.allow_update_after_misbehaviour = message.allowUpdateAfterMisbehaviour === false ? undefined : message.allowUpdateAfterMisbehaviour;
     return obj;
   },
   fromProtoMsg(message: ClientStateProtoMsg, useInterfaces: boolean = true): ClientState {
@@ -757,7 +757,7 @@ export const Misbehaviour = {
   },
   toAmino(message: Misbehaviour, useInterfaces: boolean = true): MisbehaviourAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.header_1 = message.header1 ? Header.toAmino(message.header1, useInterfaces) : undefined;
     obj.header_2 = message.header2 ? Header.toAmino(message.header2, useInterfaces) : undefined;
     return obj;

@@ -238,9 +238,9 @@ export const TableDescriptor = {
     if (message.index) {
       obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e) : undefined);
     } else {
-      obj.index = [];
+      obj.index = message.index;
     }
-    obj.id = message.id;
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: TableDescriptorAminoMsg): TableDescriptor {
@@ -350,8 +350,8 @@ export const PrimaryKeyDescriptor = {
   },
   toAmino(message: PrimaryKeyDescriptor): PrimaryKeyDescriptorAmino {
     const obj: any = {};
-    obj.fields = message.fields;
-    obj.auto_increment = message.autoIncrement;
+    obj.fields = message.fields === "" ? undefined : message.fields;
+    obj.auto_increment = message.autoIncrement === false ? undefined : message.autoIncrement;
     return obj;
   },
   fromAminoMsg(object: PrimaryKeyDescriptorAminoMsg): PrimaryKeyDescriptor {
@@ -477,9 +477,9 @@ export const SecondaryIndexDescriptor = {
   },
   toAmino(message: SecondaryIndexDescriptor): SecondaryIndexDescriptorAmino {
     const obj: any = {};
-    obj.fields = message.fields;
-    obj.id = message.id;
-    obj.unique = message.unique;
+    obj.fields = message.fields === "" ? undefined : message.fields;
+    obj.id = message.id === 0 ? undefined : message.id;
+    obj.unique = message.unique === false ? undefined : message.unique;
     return obj;
   },
   fromAminoMsg(object: SecondaryIndexDescriptorAminoMsg): SecondaryIndexDescriptor {
@@ -573,7 +573,7 @@ export const SingletonDescriptor = {
   },
   toAmino(message: SingletonDescriptor): SingletonDescriptorAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: SingletonDescriptorAminoMsg): SingletonDescriptor {

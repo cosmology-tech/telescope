@@ -249,20 +249,20 @@ export const MsgCreateClawbackVestingAccount = {
   },
   toAmino(message: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
+    obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     if (message.lockupPeriods) {
       obj.lockup_periods = message.lockupPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.lockup_periods = [];
+      obj.lockup_periods = message.lockupPeriods;
     }
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {
-      obj.vesting_periods = [];
+      obj.vesting_periods = message.vestingPeriods;
     }
-    obj.merge = message.merge;
+    obj.merge = message.merge === false ? undefined : message.merge;
     return obj;
   },
   fromAminoMsg(object: MsgCreateClawbackVestingAccountAminoMsg): MsgCreateClawbackVestingAccount {
@@ -397,9 +397,9 @@ export const MsgClawback = {
   },
   toAmino(message: MsgClawback): MsgClawbackAmino {
     const obj: any = {};
-    obj.funder_address = message.funderAddress;
-    obj.account_address = message.accountAddress;
-    obj.dest_address = message.destAddress;
+    obj.funder_address = message.funderAddress === "" ? undefined : message.funderAddress;
+    obj.account_address = message.accountAddress === "" ? undefined : message.accountAddress;
+    obj.dest_address = message.destAddress === "" ? undefined : message.destAddress;
     return obj;
   },
   fromAminoMsg(object: MsgClawbackAminoMsg): MsgClawback {

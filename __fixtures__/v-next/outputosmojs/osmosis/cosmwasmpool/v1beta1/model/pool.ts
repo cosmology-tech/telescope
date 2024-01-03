@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 export interface CosmWasmPool {
   poolAddress: string;
@@ -134,10 +134,10 @@ export const CosmWasmPool = {
   },
   toAmino(message: CosmWasmPool): CosmWasmPoolAmino {
     const obj: any = {};
-    obj.pool_address = omitDefault(message.poolAddress);
-    obj.contract_address = omitDefault(message.contractAddress);
-    obj.pool_id = omitDefault(message.poolId);
-    obj.code_id = omitDefault(message.codeId);
+    obj.pool_address = message.poolAddress === "" ? undefined : message.poolAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CosmWasmPoolAminoMsg): CosmWasmPool {

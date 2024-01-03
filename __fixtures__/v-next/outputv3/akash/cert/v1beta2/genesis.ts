@@ -118,8 +118,8 @@ export const GenesisCertificate = {
   },
   toAmino(message: GenesisCertificate, useInterfaces: boolean = true): GenesisCertificateAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
+    obj.owner = message.owner ?? "";
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : Certificate.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: GenesisCertificateProtoMsg, useInterfaces: boolean = true): GenesisCertificate {
@@ -208,7 +208,7 @@ export const GenesisState = {
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.certificates = [];
+      obj.certificates = message.certificates;
     }
     return obj;
   },

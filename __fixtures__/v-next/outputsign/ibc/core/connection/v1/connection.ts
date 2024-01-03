@@ -427,7 +427,7 @@ export const ConnectionEnd = {
     }
     message.versions = object.versions?.map(e => Version.fromAmino(e)) || [];
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromAmino(object.counterparty);
@@ -439,13 +439,13 @@ export const ConnectionEnd = {
   },
   toAmino(message: ConnectionEnd): ConnectionEndAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
-      obj.versions = [];
+      obj.versions = message.versions;
     }
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
@@ -561,7 +561,7 @@ export const IdentifiedConnection = {
     }
     message.versions = object.versions?.map(e => Version.fromAmino(e)) || [];
     if (object.state !== undefined && object.state !== null) {
-      message.state = stateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromAmino(object.counterparty);
@@ -573,14 +573,14 @@ export const IdentifiedConnection = {
   },
   toAmino(message: IdentifiedConnection): IdentifiedConnectionAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.client_id = message.clientId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     if (message.versions) {
       obj.versions = message.versions.map(e => e ? Version.toAmino(e) : undefined);
     } else {
-      obj.versions = [];
+      obj.versions = message.versions;
     }
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.delay_period = message.delayPeriod ? message.delayPeriod.toString() : undefined;
     return obj;
@@ -675,8 +675,8 @@ export const Counterparty = {
   },
   toAmino(message: Counterparty): CounterpartyAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
-    obj.connection_id = message.connectionId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     obj.prefix = message.prefix ? MerklePrefix.toAmino(message.prefix) : undefined;
     return obj;
   },
@@ -747,7 +747,7 @@ export const ClientPaths = {
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
-      obj.paths = [];
+      obj.paths = message.paths;
     }
     return obj;
   },
@@ -826,11 +826,11 @@ export const ConnectionPaths = {
   },
   toAmino(message: ConnectionPaths): ConnectionPathsAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
-      obj.paths = [];
+      obj.paths = message.paths;
     }
     return obj;
   },
@@ -909,11 +909,11 @@ export const Version = {
   },
   toAmino(message: Version): VersionAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = message.identifier === "" ? undefined : message.identifier;
     if (message.features) {
       obj.features = message.features.map(e => e);
     } else {
-      obj.features = [];
+      obj.features = message.features;
     }
     return obj;
   },

@@ -266,29 +266,29 @@ export const GenesisState = {
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     if (message.groupMembers) {
       obj.group_members = message.groupMembers.map(e => e ? GroupMember.toAmino(e) : undefined);
     } else {
-      obj.group_members = [];
+      obj.group_members = message.groupMembers;
     }
     obj.group_policy_seq = message.groupPolicySeq ? message.groupPolicySeq.toString() : undefined;
     if (message.groupPolicies) {
       obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
-      obj.group_policies = [];
+      obj.group_policies = message.groupPolicies;
     }
     obj.proposal_seq = message.proposalSeq ? message.proposalSeq.toString() : undefined;
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
     } else {
-      obj.proposals = [];
+      obj.proposals = message.proposals;
     }
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
-      obj.votes = [];
+      obj.votes = message.votes;
     }
     return obj;
   },

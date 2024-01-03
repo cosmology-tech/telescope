@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -101,7 +101,7 @@ export const Control = {
   },
   toAmino(message: Control, useInterfaces: boolean = true): ControlAmino {
     const obj: any = {};
-    obj.environment = omitDefault(message.environment);
+    obj.environment = message.environment === "" ? undefined : message.environment;
     return obj;
   },
   fromProtoMsg(message: ControlProtoMsg, useInterfaces: boolean = true): Control {

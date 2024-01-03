@@ -542,7 +542,7 @@ export const GetTxsEventRequest = {
       message.pagination = PageRequest.fromAmino(object.pagination);
     }
     if (object.order_by !== undefined && object.order_by !== null) {
-      message.orderBy = orderByFromJSON(object.order_by);
+      message.orderBy = object.order_by;
     }
     return message;
   },
@@ -551,10 +551,10 @@ export const GetTxsEventRequest = {
     if (message.events) {
       obj.events = message.events.map(e => e);
     } else {
-      obj.events = [];
+      obj.events = message.events;
     }
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
-    obj.order_by = orderByToJSON(message.orderBy);
+    obj.order_by = message.orderBy === 0 ? undefined : message.orderBy;
     return obj;
   },
   fromProtoMsg(message: GetTxsEventRequestProtoMsg, useInterfaces: boolean = true): GetTxsEventRequest {
@@ -682,12 +682,12 @@ export const GetTxsEventResponse = {
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.txs = [];
+      obj.txs = message.txs;
     }
     if (message.txResponses) {
       obj.tx_responses = message.txResponses.map(e => e ? TxResponse.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.tx_responses = [];
+      obj.tx_responses = message.txResponses;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -779,14 +779,14 @@ export const BroadcastTxRequest = {
       message.txBytes = bytesFromBase64(object.tx_bytes);
     }
     if (object.mode !== undefined && object.mode !== null) {
-      message.mode = broadcastModeFromJSON(object.mode);
+      message.mode = object.mode;
     }
     return message;
   },
   toAmino(message: BroadcastTxRequest, useInterfaces: boolean = true): BroadcastTxRequestAmino {
     const obj: any = {};
     obj.tx_bytes = message.txBytes ? base64FromBytes(message.txBytes) : undefined;
-    obj.mode = broadcastModeToJSON(message.mode);
+    obj.mode = message.mode === 0 ? undefined : message.mode;
     return obj;
   },
   fromProtoMsg(message: BroadcastTxRequestProtoMsg, useInterfaces: boolean = true): BroadcastTxRequest {
@@ -1150,7 +1150,7 @@ export const GetTxRequest = {
   },
   toAmino(message: GetTxRequest, useInterfaces: boolean = true): GetTxRequestAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash === "" ? undefined : message.hash;
     return obj;
   },
   fromProtoMsg(message: GetTxRequestProtoMsg, useInterfaces: boolean = true): GetTxRequest {
@@ -1493,7 +1493,7 @@ export const GetBlockWithTxsResponse = {
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.txs = [];
+      obj.txs = message.txs;
     }
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.block = message.block ? Block.toAmino(message.block, useInterfaces) : undefined;

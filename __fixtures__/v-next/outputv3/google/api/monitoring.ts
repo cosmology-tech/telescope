@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, omitDefault } from "../../helpers";
+import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Monitoring configuration of the service.
@@ -349,12 +349,12 @@ export const Monitoring = {
     if (message.producerDestinations) {
       obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.producer_destinations = [];
+      obj.producer_destinations = message.producerDestinations;
     }
     if (message.consumerDestinations) {
       obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.consumer_destinations = [];
+      obj.consumer_destinations = message.consumerDestinations;
     }
     return obj;
   },
@@ -456,11 +456,11 @@ export const Monitoring_MonitoringDestination = {
   },
   toAmino(message: Monitoring_MonitoringDestination, useInterfaces: boolean = true): Monitoring_MonitoringDestinationAmino {
     const obj: any = {};
-    obj.monitored_resource = omitDefault(message.monitoredResource);
+    obj.monitored_resource = message.monitoredResource === "" ? undefined : message.monitoredResource;
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e);
     } else {
-      obj.metrics = [];
+      obj.metrics = message.metrics;
     }
     return obj;
   },

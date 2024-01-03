@@ -1,6 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType, Validator, ValidatorAmino, ValidatorSDKType, Delegation, DelegationAmino, DelegationSDKType, UnbondingDelegation, UnbondingDelegationAmino, UnbondingDelegationSDKType, Redelegation, RedelegationAmino, RedelegationSDKType } from "./staking";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -295,29 +295,29 @@ export const GenesisState = {
     if (message.lastValidatorPowers) {
       obj.last_validator_powers = message.lastValidatorPowers.map(e => e ? LastValidatorPower.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.last_validator_powers = [];
+      obj.last_validator_powers = message.lastValidatorPowers;
     }
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     if (message.delegations) {
       obj.delegations = message.delegations.map(e => e ? Delegation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.delegations = [];
+      obj.delegations = message.delegations;
     }
     if (message.unbondingDelegations) {
       obj.unbonding_delegations = message.unbondingDelegations.map(e => e ? UnbondingDelegation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.unbonding_delegations = [];
+      obj.unbonding_delegations = message.unbondingDelegations;
     }
     if (message.redelegations) {
       obj.redelegations = message.redelegations.map(e => e ? Redelegation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.redelegations = [];
+      obj.redelegations = message.redelegations;
     }
-    obj.exported = omitDefault(message.exported);
+    obj.exported = message.exported === false ? undefined : message.exported;
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {
@@ -415,8 +415,8 @@ export const LastValidatorPower = {
   },
   toAmino(message: LastValidatorPower, useInterfaces: boolean = true): LastValidatorPowerAmino {
     const obj: any = {};
-    obj.address = omitDefault(message.address);
-    obj.power = omitDefault(message.power);
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.power = message.power ? message.power.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: LastValidatorPowerProtoMsg, useInterfaces: boolean = true): LastValidatorPower {

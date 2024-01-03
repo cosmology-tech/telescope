@@ -137,14 +137,14 @@ export const GenesisState = {
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.orders = [];
+      obj.orders = message.orders;
     }
     if (message.leases) {
       obj.leases = message.leases.map(e => e ? Lease.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.leases = [];
+      obj.leases = message.leases;
     }
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.fromPartial({});
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

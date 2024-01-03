@@ -158,17 +158,17 @@ export const TickInfo = {
   },
   toAmino(message: TickInfo): TickInfoAmino {
     const obj: any = {};
-    obj.liquidity_gross = padDecimal(message.liquidityGross);
-    obj.liquidity_net = padDecimal(message.liquidityNet);
+    obj.liquidity_gross = padDecimal(message.liquidityGross) === "" ? undefined : padDecimal(message.liquidityGross);
+    obj.liquidity_net = padDecimal(message.liquidityNet) === "" ? undefined : padDecimal(message.liquidityNet);
     if (message.feeGrowthOutside) {
       obj.fee_growth_outside = message.feeGrowthOutside.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
-      obj.fee_growth_outside = [];
+      obj.fee_growth_outside = message.feeGrowthOutside;
     }
     if (message.uptimeTrackers) {
       obj.uptime_trackers = message.uptimeTrackers.map(e => e ? UptimeTracker.toAmino(e) : undefined);
     } else {
-      obj.uptime_trackers = [];
+      obj.uptime_trackers = message.uptimeTrackers;
     }
     return obj;
   },
@@ -272,7 +272,7 @@ export const UptimeTracker = {
     if (message.uptimeGrowthOutside) {
       obj.uptime_growth_outside = message.uptimeGrowthOutside.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
-      obj.uptime_growth_outside = [];
+      obj.uptime_growth_outside = message.uptimeGrowthOutside;
     }
     return obj;
   },

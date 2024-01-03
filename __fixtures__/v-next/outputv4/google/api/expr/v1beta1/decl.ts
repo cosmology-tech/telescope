@@ -1,6 +1,6 @@
 import { Expr, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -231,9 +231,9 @@ export const Decl = {
   },
   toAmino(message: Decl): DeclAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.name = omitDefault(message.name);
-    obj.doc = omitDefault(message.doc);
+    obj.id = message.id === 0 ? undefined : message.id;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.doc = message.doc === "" ? undefined : message.doc;
     obj.ident = message.ident ? IdentDecl.toAmino(message.ident) : undefined;
     obj.function = message.function ? FunctionDecl.toAmino(message.function) : undefined;
     return obj;
@@ -361,12 +361,12 @@ export const DeclType = {
   },
   toAmino(message: DeclType): DeclTypeAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
-    obj.type = omitDefault(message.type);
+    obj.id = message.id === 0 ? undefined : message.id;
+    obj.type = message.type === "" ? undefined : message.type;
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e ? DeclType.toAmino(e) : undefined);
     } else {
-      obj.type_params = [];
+      obj.type_params = message.typeParams;
     }
     return obj;
   },
@@ -607,10 +607,10 @@ export const FunctionDecl = {
     if (message.args) {
       obj.args = message.args.map(e => e ? IdentDecl.toAmino(e) : undefined);
     } else {
-      obj.args = [];
+      obj.args = message.args;
     }
     obj.return_type = message.returnType ? DeclType.toAmino(message.returnType) : undefined;
-    obj.receiver_function = omitDefault(message.receiverFunction);
+    obj.receiver_function = message.receiverFunction === false ? undefined : message.receiverFunction;
     return obj;
   },
   fromAminoMsg(object: FunctionDeclAminoMsg): FunctionDecl {

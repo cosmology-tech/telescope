@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, omitDefault } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -319,9 +319,9 @@ export const TableDescriptor = {
     if (message.index) {
       obj.index = message.index.map(e => e ? SecondaryIndexDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.index = [];
+      obj.index = message.index;
     }
-    obj.id = omitDefault(message.id);
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromProtoMsg(message: TableDescriptorProtoMsg, useInterfaces: boolean = true): TableDescriptor {
@@ -417,8 +417,8 @@ export const PrimaryKeyDescriptor = {
   },
   toAmino(message: PrimaryKeyDescriptor, useInterfaces: boolean = true): PrimaryKeyDescriptorAmino {
     const obj: any = {};
-    obj.fields = omitDefault(message.fields);
-    obj.auto_increment = omitDefault(message.autoIncrement);
+    obj.fields = message.fields === "" ? undefined : message.fields;
+    obj.auto_increment = message.autoIncrement === false ? undefined : message.autoIncrement;
     return obj;
   },
   fromProtoMsg(message: PrimaryKeyDescriptorProtoMsg, useInterfaces: boolean = true): PrimaryKeyDescriptor {
@@ -529,9 +529,9 @@ export const SecondaryIndexDescriptor = {
   },
   toAmino(message: SecondaryIndexDescriptor, useInterfaces: boolean = true): SecondaryIndexDescriptorAmino {
     const obj: any = {};
-    obj.fields = omitDefault(message.fields);
-    obj.id = omitDefault(message.id);
-    obj.unique = omitDefault(message.unique);
+    obj.fields = message.fields === "" ? undefined : message.fields;
+    obj.id = message.id === 0 ? undefined : message.id;
+    obj.unique = message.unique === false ? undefined : message.unique;
     return obj;
   },
   fromProtoMsg(message: SecondaryIndexDescriptorProtoMsg, useInterfaces: boolean = true): SecondaryIndexDescriptor {
@@ -612,7 +612,7 @@ export const SingletonDescriptor = {
   },
   toAmino(message: SingletonDescriptor, useInterfaces: boolean = true): SingletonDescriptorAmino {
     const obj: any = {};
-    obj.id = omitDefault(message.id);
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromProtoMsg(message: SingletonDescriptorProtoMsg, useInterfaces: boolean = true): SingletonDescriptor {

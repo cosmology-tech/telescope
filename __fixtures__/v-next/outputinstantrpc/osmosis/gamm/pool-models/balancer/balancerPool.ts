@@ -2,7 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timesta
 import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal } from "../../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -296,12 +296,12 @@ export const SmoothWeightChangeParams = {
     if (message.initialPoolWeights) {
       obj.initial_pool_weights = message.initialPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
-      obj.initial_pool_weights = [];
+      obj.initial_pool_weights = message.initialPoolWeights;
     }
     if (message.targetPoolWeights) {
       obj.target_pool_weights = message.targetPoolWeights.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
-      obj.target_pool_weights = [];
+      obj.target_pool_weights = message.targetPoolWeights;
     }
     return obj;
   },
@@ -430,8 +430,8 @@ export const PoolParams = {
   },
   toAmino(message: PoolParams): PoolParamsAmino {
     const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
+    obj.swap_fee = padDecimal(message.swapFee) === "" ? undefined : padDecimal(message.swapFee);
+    obj.exit_fee = padDecimal(message.exitFee) === "" ? undefined : padDecimal(message.exitFee);
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams) : undefined;
     return obj;
   },
@@ -545,7 +545,7 @@ export const PoolAsset = {
   toAmino(message: PoolAsset): PoolAssetAmino {
     const obj: any = {};
     obj.token = message.token ? Coin.toAmino(message.token) : undefined;
-    obj.weight = message.weight;
+    obj.weight = message.weight === "" ? undefined : message.weight;
     return obj;
   },
   fromAminoMsg(object: PoolAssetAminoMsg): PoolAsset {
@@ -747,17 +747,17 @@ export const Pool = {
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.id = message.id ? message.id.toString() : undefined;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
-    obj.future_pool_governor = message.futurePoolGovernor;
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;
     if (message.poolAssets) {
       obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
     } else {
-      obj.pool_assets = [];
+      obj.pool_assets = message.poolAssets;
     }
-    obj.total_weight = message.totalWeight;
+    obj.total_weight = message.totalWeight === "" ? undefined : message.totalWeight;
     return obj;
   },
   fromAminoMsg(object: PoolAminoMsg): Pool {

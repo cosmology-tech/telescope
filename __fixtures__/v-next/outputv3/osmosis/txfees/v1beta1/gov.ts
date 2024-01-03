@@ -142,8 +142,8 @@ export const UpdateFeeTokenProposal = {
   },
   toAmino(message: UpdateFeeTokenProposal, useInterfaces: boolean = true): UpdateFeeTokenProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.feetoken = message.feetoken ? FeeToken.toAmino(message.feetoken, useInterfaces) : undefined;
     return obj;
   },

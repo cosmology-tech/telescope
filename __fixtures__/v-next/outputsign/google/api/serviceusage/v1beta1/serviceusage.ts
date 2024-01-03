@@ -1,4 +1,4 @@
-import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideAmino, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceAmino, OverrideInlineSourceSDKType, Service, ServiceAmino, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricAmino, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicyAmino, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentityAmino, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideAmino, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceAmino, OverrideInlineSourceSDKType, Service, ServiceAmino, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricAmino, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicyAmino, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentityAmino, ServiceIdentitySDKType } from "./resources";
 import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../../protobuf/field_mask";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial } from "../../../../helpers";
@@ -1609,7 +1609,7 @@ export const EnableServiceRequest = {
   },
   toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
@@ -1672,7 +1672,7 @@ export const DisableServiceRequest = {
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
@@ -1735,7 +1735,7 @@ export const GetServiceRequest = {
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
@@ -1831,10 +1831,10 @@ export const ListServicesRequest = {
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     return obj;
   },
   fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
@@ -1909,9 +1909,9 @@ export const ListServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
@@ -1983,11 +1983,11 @@ export const BatchEnableServicesRequest = {
   },
   toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
     } else {
-      obj.service_ids = [];
+      obj.service_ids = message.serviceIds;
     }
     return obj;
   },
@@ -2078,16 +2078,16 @@ export const ListConsumerQuotaMetricsRequest = {
       message.pageToken = object.page_token;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.view = quotaViewToJSON(message.view);
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
@@ -2162,9 +2162,9 @@ export const ListConsumerQuotaMetricsResponse = {
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e) : undefined);
     } else {
-      obj.metrics = [];
+      obj.metrics = message.metrics;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListConsumerQuotaMetricsResponseAminoMsg): ListConsumerQuotaMetricsResponse {
@@ -2232,14 +2232,14 @@ export const GetConsumerQuotaMetricRequest = {
       message.name = object.name;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
@@ -2307,14 +2307,14 @@ export const GetConsumerQuotaLimitRequest = {
       message.name = object.name;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
@@ -2414,18 +2414,18 @@ export const CreateAdminOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2539,19 +2539,19 @@ export const UpdateAdminOverrideRequest = {
     if (object.update_mask !== undefined && object.update_mask !== null) {
       message.updateMask = FieldMask.fromAmino(object.update_mask);
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2639,17 +2639,17 @@ export const DeleteAdminOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2735,9 +2735,9 @@ export const ListAdminOverridesRequest = {
   },
   toAmino(message: ListAdminOverridesRequest): ListAdminOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromAminoMsg(object: ListAdminOverridesRequestAminoMsg): ListAdminOverridesRequest {
@@ -2812,9 +2812,9 @@ export const ListAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListAdminOverridesResponseAminoMsg): ListAdminOverridesResponse {
@@ -2878,7 +2878,7 @@ export const BatchCreateAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -2979,18 +2979,18 @@ export const ImportAdminOverridesRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3055,7 +3055,7 @@ export const ImportAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -3206,18 +3206,18 @@ export const CreateConsumerOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3331,19 +3331,19 @@ export const UpdateConsumerOverrideRequest = {
     if (object.update_mask !== undefined && object.update_mask !== null) {
       message.updateMask = FieldMask.fromAmino(object.update_mask);
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3431,17 +3431,17 @@ export const DeleteConsumerOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3527,9 +3527,9 @@ export const ListConsumerOverridesRequest = {
   },
   toAmino(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromAminoMsg(object: ListConsumerOverridesRequestAminoMsg): ListConsumerOverridesRequest {
@@ -3604,9 +3604,9 @@ export const ListConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListConsumerOverridesResponseAminoMsg): ListConsumerOverridesResponse {
@@ -3670,7 +3670,7 @@ export const BatchCreateConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -3771,18 +3771,18 @@ export const ImportConsumerOverridesRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3847,7 +3847,7 @@ export const ImportConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -3962,7 +3962,7 @@ export const ImportAdminQuotaPoliciesResponse = {
     if (message.policies) {
       obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e) : undefined);
     } else {
-      obj.policies = [];
+      obj.policies = message.policies;
     }
     return obj;
   },
@@ -4226,7 +4226,7 @@ export const GenerateServiceIdentityRequest = {
   },
   toAmino(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     return obj;
   },
   fromAminoMsg(object: GenerateServiceIdentityRequestAminoMsg): GenerateServiceIdentityRequest {
@@ -4296,14 +4296,14 @@ export const GetServiceIdentityResponse = {
       message.identity = ServiceIdentity.fromAmino(object.identity);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
+      message.state = object.state;
     }
     return message;
   },
   toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
-    obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state);
+    obj.state = message.state === 0 ? undefined : message.state;
     return obj;
   },
   fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {

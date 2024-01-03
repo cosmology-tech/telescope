@@ -2,7 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, omitDefault, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -398,7 +398,7 @@ export const QueryClientStateRequest = {
   },
   toAmino(message: QueryClientStateRequest): QueryClientStateRequestAmino {
     const obj: any = {};
-    obj.client_id = omitDefault(message.clientId);
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     return obj;
   },
   fromAminoMsg(object: QueryClientStateRequestAminoMsg): QueryClientStateRequest {
@@ -739,7 +739,7 @@ export const QueryClientStatesResponse = {
     if (message.clientStates) {
       obj.client_states = message.clientStates.map(e => e ? IdentifiedClientState.toAmino(e) : undefined);
     } else {
-      obj.client_states = [];
+      obj.client_states = message.clientStates;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -883,10 +883,10 @@ export const QueryConsensusStateRequest = {
   },
   toAmino(message: QueryConsensusStateRequest): QueryConsensusStateRequestAmino {
     const obj: any = {};
-    obj.client_id = omitDefault(message.clientId);
-    obj.revision_number = omitDefault(message.revisionNumber);
-    obj.revision_height = omitDefault(message.revisionHeight);
-    obj.latest_height = omitDefault(message.latestHeight);
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
+    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.latest_height = message.latestHeight === false ? undefined : message.latestHeight;
     return obj;
   },
   fromAminoMsg(object: QueryConsensusStateRequestAminoMsg): QueryConsensusStateRequest {
@@ -1124,7 +1124,7 @@ export const QueryConsensusStatesRequest = {
   },
   toAmino(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestAmino {
     const obj: any = {};
-    obj.client_id = omitDefault(message.clientId);
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1244,7 +1244,7 @@ export const QueryConsensusStatesResponse = {
     if (message.consensusStates) {
       obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toAmino(e) : undefined);
     } else {
-      obj.consensus_states = [];
+      obj.consensus_states = message.consensusStates;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1340,7 +1340,7 @@ export const QueryClientStatusRequest = {
   },
   toAmino(message: QueryClientStatusRequest): QueryClientStatusRequestAmino {
     const obj: any = {};
-    obj.client_id = omitDefault(message.clientId);
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     return obj;
   },
   fromAminoMsg(object: QueryClientStatusRequestAminoMsg): QueryClientStatusRequest {
@@ -1434,7 +1434,7 @@ export const QueryClientStatusResponse = {
   },
   toAmino(message: QueryClientStatusResponse): QueryClientStatusResponseAmino {
     const obj: any = {};
-    obj.status = omitDefault(message.status);
+    obj.status = message.status === "" ? undefined : message.status;
     return obj;
   },
   fromAminoMsg(object: QueryClientStatusResponseAminoMsg): QueryClientStatusResponse {

@@ -129,8 +129,8 @@ export const StoreKVPair = {
   },
   toAmino(message: StoreKVPair): StoreKVPairAmino {
     const obj: any = {};
-    obj.store_key = message.storeKey;
-    obj.delete = message.delete;
+    obj.store_key = message.storeKey === "" ? undefined : message.storeKey;
+    obj.delete = message.delete === false ? undefined : message.delete;
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.value = message.value ? base64FromBytes(message.value) : undefined;
     return obj;
