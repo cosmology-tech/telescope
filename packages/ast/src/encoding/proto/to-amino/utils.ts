@@ -669,7 +669,10 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                             t.identifier('obj'),
                             t.identifier(origName)
                         ),
-                        t.nullLiteral()
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(propName)
+                        )
                     )
                 )
             ])
