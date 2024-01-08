@@ -37,9 +37,13 @@ describe('PoolI', () => {
     const queryRef = store.findProto('osmosis/gamm/v1beta1/query.proto');
     const queryContext = new ProtoParseContext(queryRef, store, store.options);
     it('getMapFromTypeUrlMap', () => {
+        queryContext.options.interfaces!.useUseInterfacesParams = false
+
         expectCode(createInterfaceDecoder(queryContext, queryRef, 'PoolI'));
     });
     it('PoolI', () => {
+        queryContext.options.interfaces!.useUseInterfacesParams = true
+
         expectCode(createInterfaceDecoderHelper(
             queryContext,
             'PoolI_InterfaceDecoder',
@@ -47,6 +51,8 @@ describe('PoolI', () => {
         ));
     });
     it('objects', () => {
+        queryContext.options.interfaces!.useUseInterfacesParams = false
+
         expectCode(createObjectWithMethods(
             queryContext,
             'QueryPoolsResponse',

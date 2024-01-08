@@ -46,6 +46,8 @@ export const createInterfaceDecoderHelper = (
   functionName: string,
   typeRefs: TraverseTypeUrlRef[]
 ) => {
+  let useUseInterfacesParams = context.pluginValue("interfaces.useUseInterfacesParams");
+
   BinaryCoder.addUtil(context);
 
   // MARKED AS NOT DRY
@@ -57,19 +59,40 @@ export const createInterfaceDecoderHelper = (
   const returnTypes: string[] = allTypes.map((type) => type.importAs);
   const decodeMessages: string[] = allTypes.map((type) => type.typeUrl);
   const switches = returnTypes.map((returnType, i) => {
+    let params: t.Expression[] = [
+      t.memberExpression(t.identifier('data'), t.identifier('value')),
+    ];
+
+
+    if(useUseInterfacesParams){
+      params.push(t.identifier('undefined'));
+      params.push(t.booleanLiteral(true));
+    }
+
     return t.switchCase(t.stringLiteral(decodeMessages[i]), [
       t.returnStatement(
         t.callExpression(
           t.memberExpression(t.identifier(returnType), t.identifier('decode')),
-          [
-            t.memberExpression(t.identifier('data'), t.identifier('value')),
-            t.identifier('undefined'),
-            t.booleanLiteral(true)
-          ]
+          params
         )
       )
     ]);
   });
+
+  let decodeParams: t.Expression[] = [
+    t.identifier('reader'),
+    t.callExpression(
+      t.memberExpression(
+        t.identifier('reader'),
+        t.identifier('uint32') // NOTE is it always uint32?
+      ),
+      []
+    )
+  ];
+
+  if(useUseInterfacesParams){
+    decodeParams.push(t.booleanLiteral(true));
+  }
 
   return t.exportNamedDeclaration(
     t.variableDeclaration('const', [
@@ -117,17 +140,7 @@ export const createInterfaceDecoderHelper = (
                     t.identifier('Any'),
                     t.identifier('decode')
                   ),
-                  [
-                    t.identifier('reader'),
-                    t.callExpression(
-                      t.memberExpression(
-                        t.identifier('reader'),
-                        t.identifier('uint32') // NOTE is it always uint32?
-                      ),
-                      []
-                    ),
-                    t.booleanLiteral(true)
-                  ]
+                  decodeParams
                 )
               )
             ]),
