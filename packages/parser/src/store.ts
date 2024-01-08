@@ -211,7 +211,7 @@ export class ProtoStore implements IProtoStore {
     traverseAll(): void {
         if (this._traversed) return;
 
-        let actualFiles = new Set();
+        let actualFiles = new Set<string>();
         let resolver = new ProtoResolver(this.getDeps());
 
         this.protos = this.getProtos().map((ref: ProtoRef) => {
@@ -244,7 +244,7 @@ export class ProtoStore implements IProtoStore {
                 traversed: traverse(this, ref)
             };
         }).filter(Boolean);
-        this._symbols = parseFullyTraversedProtoImports(this);
+        this._symbols = parseFullyTraversedProtoImports(this, actualFiles);
 
         // process import names
         this.protos = this.protos.map((ref: ProtoRef) => {
