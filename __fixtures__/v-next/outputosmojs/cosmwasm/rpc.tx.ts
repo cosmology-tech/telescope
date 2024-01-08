@@ -1,7 +1,4 @@
-import { getSigningCosmwasmTxRpc } from "./client";
 import { Rpc } from "../helpers";
-import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import { OfflineSigner } from "@cosmjs/proto-signing";
 export const createRPCMsgClient = async ({
   rpc
 }: {
@@ -55,18 +52,3 @@ export const createRPCMsgClient = async ({
     }
   }
 });
-export const createRPCMsgExtensions = async ({
-  rpcEndpoint,
-  signer
-}: {
-  rpcEndpoint: string | HttpEndpoint;
-  signer: OfflineSigner;
-}) => {
-  const rpc = await getSigningCosmwasmTxRpc({
-    rpcEndpoint,
-    signer
-  });
-  return await createRPCMsgClient({
-    rpc
-  });
-};
