@@ -16,6 +16,6 @@ export declare class TraverseContext implements TraverseContext {
     addExport(symbolName: string): void;
 }
 export declare const symbolsToImportNames: (ref: ProtoRef, symbols: TraversalSymbol[]) => TraverseImportNames;
-export declare const parseFullyTraversedProtoImports: (store: ProtoStore) => TraversalSymbol[];
+export declare const parseFullyTraversedProtoImports: (store: ProtoStore, actualFiles?: Set<string>) => TraversalSymbol[];
 export declare const traverse: (store: ProtoStore, ref: ProtoRef) => TraversedProtoRoot;
 export declare const recursiveTraversal: (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext, traversal: string[], isNested: boolean) => any;
