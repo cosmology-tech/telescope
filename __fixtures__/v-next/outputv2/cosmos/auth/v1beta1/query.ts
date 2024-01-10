@@ -1566,10 +1566,10 @@ export const AddressStringToBytesResponse = {
 };
 export const AccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array): BaseAccount | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32(), true);
+  const data = Any.decode(reader, reader.uint32());
   switch (data.typeUrl) {
     case "/cosmos.auth.v1beta1.BaseAccount":
-      return BaseAccount.decode(data.value, undefined, true);
+      return BaseAccount.decode(data.value);
     default:
       return data;
   }
@@ -1598,10 +1598,10 @@ export const AccountI_ToAmino = (content: Any) => {
 };
 export const ModuleAccountI_InterfaceDecoder = (input: BinaryReader | Uint8Array): ModuleAccount | Any => {
   const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-  const data = Any.decode(reader, reader.uint32(), true);
+  const data = Any.decode(reader, reader.uint32());
   switch (data.typeUrl) {
     case "/cosmos.auth.v1beta1.ModuleAccount":
-      return ModuleAccount.decode(data.value, undefined, true);
+      return ModuleAccount.decode(data.value);
     default:
       return data;
   }

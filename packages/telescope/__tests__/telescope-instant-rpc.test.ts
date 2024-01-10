@@ -130,6 +130,7 @@ const options: TelescopeOptions = {
     extensions: false,
     camelCase: true,
     scopedIsExclusive: false,
+    useConnectComet: true,
     scoped: [
       {
         dir: "cosmos",

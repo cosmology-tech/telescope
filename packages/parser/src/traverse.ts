@@ -80,7 +80,8 @@ export const symbolsToImportNames = (
 };
 
 export const parseFullyTraversedProtoImports = (
-    store: ProtoStore
+    store: ProtoStore,
+    actualFiles?: Set<string>
 ): TraversalSymbol[] => {
     const protos = store.getProtos();
     const records: TraverseRecord[] = [];
@@ -91,6 +92,10 @@ export const parseFullyTraversedProtoImports = (
     protos.forEach(ref => {
         const enabled = getPluginValue('interfaces.enabled', ref.proto.package, store.options);
         if (!enabled) return;
+
+        if (actualFiles && !actualFiles.has(ref.filename)) {
+          return;
+        }
 
         //
         const implementsInterface = ref.traversed?.implementsInterface ?? {};
@@ -106,6 +111,10 @@ export const parseFullyTraversedProtoImports = (
     });
 
     protos.forEach(ref => {
+        if (actualFiles && !actualFiles.has(ref.filename)) {
+          return;
+        }
+
         const localSymbols: TraverseLocalSymbol[] = [];
 
         const hasConflict = (

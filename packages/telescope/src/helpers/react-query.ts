@@ -8,7 +8,11 @@ import {
 } from '@tanstack/react-query';
 
 import { HttpEndpoint, ProtobufRpcClient } from '@cosmjs/stargate';
-import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
+${
+  options.rpcClients.useConnectComet
+    ? "import { CometClient, connectComet, Tendermint34Client, Tendermint37Client } from '@cosmjs/tendermint-rpc';"
+    : "import { Tendermint34Client } from '@cosmjs/tendermint-rpc';"
+}
 
 export interface ReactQueryParams<TResponse, TData = TResponse> {
     options?: UseQueryOptions<TResponse, Error, TData>;
@@ -57,7 +61,11 @@ export const useRpcClient = <TData = ProtobufRpcClient>({
     }, options);
 };
 
-interface UseTendermintClient extends ReactQueryParams<Tendermint34Client> {
+${
+  options.rpcClients.useConnectComet
+    ? "interface UseTendermintClient extends ReactQueryParams<Tendermint34Client | Tendermint37Client | CometClient> {"
+    : "interface UseTendermintClient extends ReactQueryParams<Tendermint34Client> {"
+}
     rpcEndpoint: string | HttpEndpoint;
 }
 
@@ -68,9 +76,17 @@ export const useTendermintClient = ({
     rpcEndpoint,
     options,
 }: UseTendermintClient) => {
-    const { data: client } = useQuery<Tendermint34Client, Error, Tendermint34Client>(
+${
+  options.rpcClients.useConnectComet
+    ? "    const { data: client } = useQuery<Tendermint34Client | Tendermint37Client | CometClient, Error, Tendermint34Client | Tendermint37Client | CometClient>("
+    : "    const { data: client } = useQuery<Tendermint34Client, Error, Tendermint34Client>("
+}
         ['client', 'tendermint', rpcEndpoint],
-        () => Tendermint34Client.connect(rpcEndpoint),
+        () => ${
+          options.rpcClients.useConnectComet
+            ? "connectComet(rpcEndpoint)"
+            : "Tendermint34Client.connect(rpcEndpoint)"
+        },
         {
             // allow overriding
             onError: (e) => {

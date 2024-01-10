@@ -1,7 +1,7 @@
 import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import { getRpcClient } from "../extern";
+import { createRpcClient } from "../extern";
 import { DeliverTxResponse, EncodeObject, StdFee, TxRpc, SigningClientParams } from "../types";
 import * as ibcApplicationsTransferV1TxRegistry from "./applications/transfer/v1/tx.registry";
 import * as ibcCoreChannelV1TxRegistry from "./core/channel/v1/tx.registry";
@@ -60,7 +60,7 @@ export const getSigningIbcTxRpc = async ({
   rpcEndpoint,
   signer
 }: SigningClientParams) => {
-  let txRpc = (await getRpcClient(rpcEndpoint) as TxRpc);
+  let txRpc = (await createRpcClient(rpcEndpoint) as TxRpc);
   const signingClient = await getSigningIbcClient({
     rpcEndpoint,
     signer

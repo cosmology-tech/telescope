@@ -398,7 +398,7 @@ export const createGetTxRpc = (
   name: string,
   clientName: string
 ) => {
-  ctx.addUtil("getRpcClient");
+  ctx.addUtil("createRpcClient");
   ctx.addUtil("DeliverTxResponse");
   ctx.addUtil("EncodeObject");
   ctx.addUtil("StdFee");
@@ -458,7 +458,7 @@ export const createGetTxRpc = (
                   t.identifier("txRpc"),
                   t.tSAsExpression(
                     t.awaitExpression(
-                      t.callExpression(t.identifier("getRpcClient"), [
+                      t.callExpression(t.identifier("createRpcClient"), [
                         t.identifier("rpcEndpoint"),
                       ])
                     ),

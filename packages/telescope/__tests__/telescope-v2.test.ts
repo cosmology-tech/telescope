@@ -72,6 +72,9 @@ const options: TelescopeOptions = {
     useOptionalNullable: true,
     allowUndefinedTypes: false,
     excluded: {
+      packages: [
+        'osmosis.superfluid.v1beta1'
+      ],
       protos: [
         'cosmos/authz/v1beta1/event.proto'
       ]

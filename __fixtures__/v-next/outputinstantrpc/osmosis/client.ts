@@ -1,7 +1,7 @@
 import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import { getRpcClient } from "../extern";
+import { createRpcClient } from "../extern";
 import { DeliverTxResponse, EncodeObject, StdFee, TxRpc, SigningClientParams } from "../types";
 import * as osmosisGammPoolmodelsBalancerTxTxRegistry from "./gamm/pool-models/balancer/tx/tx.registry";
 import * as osmosisGammPoolmodelsStableswapTxRegistry from "./gamm/pool-models/stableswap/tx.registry";
@@ -69,7 +69,7 @@ export const getSigningOsmosisTxRpc = async ({
   rpcEndpoint,
   signer
 }: SigningClientParams) => {
-  let txRpc = (await getRpcClient(rpcEndpoint) as TxRpc);
+  let txRpc = (await createRpcClient(rpcEndpoint) as TxRpc);
   const signingClient = await getSigningOsmosisClient({
     rpcEndpoint,
     signer

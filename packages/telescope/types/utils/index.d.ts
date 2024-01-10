@@ -39,6 +39,7 @@ export declare const UTILS: {
     fromUtf8: string;
     GeneratedType: string;
     getRpcClient: string;
+    createRpcClient: string;
     getRpcEndpointKey: string;
     HttpEndpoint: string;
     isObject: string;
