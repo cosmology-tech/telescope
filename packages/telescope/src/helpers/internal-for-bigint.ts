@@ -1,8 +1,9 @@
 import { TelescopeOptions } from "@cosmology/types";
 
 export const getHelperForBigint = (options: TelescopeOptions) => {
-  return `import { Dec } from "@keplr-wallet/unit";
+  return `${options.aminoEncoding.useCosmosSDKDec ? `import { Dec } from "@keplr-wallet/unit";
 
+  `: ""}
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -247,12 +248,12 @@ function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
 }
 ${
-  options.aminoEncoding.useCosmosSDKDec ||
-  `
-  export function padDecimal(decStr: string): string{
-    return decStr ? new Dec(decStr).toString() : decStr;
-  }
+  options.aminoEncoding.useCosmosSDKDec ?
 `
+export function padDecimal(decStr: string): string{
+  return decStr ? new Dec(decStr).toString() : decStr;
+}
+` : ""
 }
 `;
 };
