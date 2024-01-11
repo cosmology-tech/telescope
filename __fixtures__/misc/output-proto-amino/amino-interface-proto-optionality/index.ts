@@ -7,6 +7,7 @@
 export * from "./gogoproto/bundle";
 export * from "./google/bundle";
 export * from "./misc/bundle";
+export * from "./misc/client";
 export * from "./extern";
 export * from "./react-query";
 export * from "./mobx";

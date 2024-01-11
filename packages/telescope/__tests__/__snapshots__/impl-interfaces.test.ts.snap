@@ -45,7 +45,7 @@ exports[`implements interface works toAmino for interface 1`] = `
       "value": Uint8Array [],
     },
   ],
-  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "opt": undefined,
   "single_msg": {
     "type": "",
     "value": Uint8Array [],
@@ -73,7 +73,7 @@ exports[`implements interface works toAmino for interface with Any 1`] = `
       "value": Uint8Array [],
     },
   ],
-  "opt": "VOTE_OPTION_UNSPECIFIED",
+  "opt": undefined,
   "single_msg": {
     "type": "",
     "value": Uint8Array [],

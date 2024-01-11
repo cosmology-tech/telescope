@@ -166,6 +166,31 @@ describe("misc", () => {
     await telescope.build();
   });
 
+  it("generates amino legacy", async () => {
+    const testFolder = "/output-proto-amino/amino-legacy";
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + "/../../../__fixtures__/misc" + testFolder,
+      protoDirs: [__dirname + "/../../../__fixtures__/misc/proto"],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: true,
+            fromAmino: true,
+            toProto: true,
+            fromProto: true,
+          },
+        },
+        aminoEncoding: {
+          enabled: true,
+          useLegacyInlineEncoding: true,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
   it("generates without amino but legacy", async () => {
     const testFolder = "/output-proto-amino/no-amino-legacy";
 

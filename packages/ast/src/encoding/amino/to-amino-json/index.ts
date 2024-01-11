@@ -73,6 +73,8 @@ export const toAminoParseField = ({
         }
 
         switch (field.parsedType.type) {
+            case 'Enum':
+                return toAmino.defaultType(args);
             case 'Type':
                 return toAmino.typeArray(args);
         }
