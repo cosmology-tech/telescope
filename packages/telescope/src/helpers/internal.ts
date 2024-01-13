@@ -1,5 +1,6 @@
 export const internal = `import * as _m0 from "protobufjs/minimal";
 import Long from 'long';
+import { Dec } from "@keplr-wallet/unit";
 
 // @ts-ignore
 if (_m0.util.Long !== Long) {
@@ -59,7 +60,7 @@ export function omitDefault<T extends string | number | Long>(input: T): T | und
     }
 
     if (Long.isLong(input)) {
-        return input.isZero() ? undefined : input;
+        return (input as Long).isZero() ? undefined : input;
     }
 
     throw new Error(\`Got unsupported type \${typeof input}\`);
@@ -226,5 +227,9 @@ export function fromJsonTimestamp(o: any): Timestamp {
 
 function numberToLong(number: number) {
     return Long.fromNumber(number);
+}
+
+export function padDecimal(decStr: string): string{
+  return decStr ? new Dec(decStr).toString() : decStr;
 }
 `;

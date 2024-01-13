@@ -1,4 +1,6 @@
 export const internalForBigInt = `
+import { Dec } from "@keplr-wallet/unit";
+
 declare var self: any | undefined;
 declare var window: any | undefined;
 declare var global: any | undefined;
@@ -241,5 +243,9 @@ export function fromJsonTimestamp(o: any): Timestamp {
 
 function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
+}
+
+export function padDecimal(decStr: string): string{
+  return decStr ? new Dec(decStr).toString() : decStr;
 }
 `;
