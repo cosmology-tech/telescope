@@ -23,7 +23,7 @@ export const toAmino = {
 
     string(args: ToAminoParseField)
     {
-        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.useCosmosSDKDec');
+        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
 
         if(useCosmosSDKDec){
           const isCosmosSDKDec =

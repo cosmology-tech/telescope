@@ -38,7 +38,7 @@
 
       string(args: ToAminoJSONMethod) {
         let valueExpr: t.Expression;
-        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.useCosmosSDKDec');
+        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
 
         if(useCosmosSDKDec){
           const isCosmosSDKDec =

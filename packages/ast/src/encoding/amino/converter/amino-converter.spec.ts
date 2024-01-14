@@ -44,7 +44,7 @@ describe('cosmos/staking/v1beta1/tx', () => {
     it('AminoConverter useCosmosSDKDec', () => {
       context.options.aminoEncoding!.casingFn = snake;
       context.options.aminoEncoding!.useLegacyInlineEncoding = true;
-      context.options.aminoEncoding!.useCosmosSDKDec = true;
+      context.options.aminoEncoding!.customTypes!.useCosmosSDKDec = true;
 
       expectCode(createAminoConverter({
           context,
