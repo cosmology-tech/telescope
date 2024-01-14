@@ -137,6 +137,7 @@ interface TelescopeOpts {
 
     aminoEncoding?: {
         enabled: boolean;
+        useCosmosSDKDec?: boolean;
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;

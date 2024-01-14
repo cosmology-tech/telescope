@@ -15,6 +15,7 @@ export declare const UTILS: {
     BrowserHeaders: string;
     connectComet: string;
     Decimal: string;
+    padDecimal: string;
     createProtobufRpcClient: string;
     Pubkey: string;
     decodeBech32Pubkey: string;

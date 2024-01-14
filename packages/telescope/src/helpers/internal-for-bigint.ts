@@ -1,5 +1,7 @@
-export const internalForBigInt = `
-import { Dec } from "@keplr-wallet/unit";
+import { TelescopeOptions } from "@cosmology/types";
+
+export const getHelperForBigint = (options: TelescopeOptions) => {
+  return `import { Dec } from "@keplr-wallet/unit";
 
 declare var self: any | undefined;
 declare var window: any | undefined;
@@ -244,8 +246,13 @@ export function fromJsonTimestamp(o: any): Timestamp {
 function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
 }
-
-export function padDecimal(decStr: string): string{
-  return decStr ? new Dec(decStr).toString() : decStr;
+${
+  options.aminoEncoding.useCosmosSDKDec ||
+  `
+  export function padDecimal(decStr: string): string{
+    return decStr ? new Dec(decStr).toString() : decStr;
+  }
+`
 }
 `;
+};
