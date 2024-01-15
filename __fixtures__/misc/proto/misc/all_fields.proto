@@ -182,6 +182,22 @@ message EncodingTestForDontOmit {
     (amino.dont_omitempty) = true,
     (cosmos_proto.accepts_interface) = "Authorization"
   ];
+
+  // dec
+  string dec = 47 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  string d_o_dec = 48 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+
+  // array dec
+  repeated string decs = 49 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  repeated string d_o_decs = 50 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
 }
 
 message EncodingTestForOmit {
@@ -358,5 +374,21 @@ message EncodingTestForOmit {
     (cosmos_proto.accepts_interface) = "Authorization",
     (gogoproto.nullable) = false,
     (gogoproto.jsontag)  = "o_auths,omitempty"
+  ];
+
+  // dec
+  string dec = 47 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  string o_dec = 48 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false,
+    (gogoproto.jsontag)  = "o_dec,omitempty"
+  ];
+
+  // array dec
+  repeated string decs = 49 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  repeated string o_decs = 50 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.nullable) = false,
+    (gogoproto.jsontag)  = "o_decs,omitempty"
   ];
 }
