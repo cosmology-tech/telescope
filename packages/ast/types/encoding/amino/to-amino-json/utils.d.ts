@@ -4,6 +4,7 @@ export declare const toAmino: {
     defaultType(args: ToAminoParseField): t.ObjectProperty;
     long(args: ToAminoParseField): t.ObjectProperty;
     string(args: ToAminoParseField): t.ObjectProperty;
+    stringArray(args: ToAminoParseField): t.ObjectProperty;
     rawBytes(args: ToAminoParseField): t.ObjectProperty;
     wasmByteCode(args: ToAminoParseField): t.ObjectProperty;
     duration(args: ToAminoParseField): t.ObjectProperty;
@@ -19,4 +20,5 @@ export declare const toAmino: {
 };
 export declare const arrayTypes: {
     long(varname: string): t.CallExpression;
+    stringDec(varname: string, args: ToAminoParseField): t.CallExpression;
 };

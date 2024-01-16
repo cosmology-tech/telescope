@@ -248,3 +248,4 @@ export function fromJsonTimestamp(o: any): Timestamp {
 function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
 }
+

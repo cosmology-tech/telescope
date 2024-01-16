@@ -1,0 +1,25 @@
+// Since: cosmos-sdk 0.43
+syntax = "proto3";
+package misc;
+
+import "gogoproto/gogo.proto";
+import "google/protobuf/any.proto";
+import "misc/all_fields.proto";
+
+option go_package                      = "github.com/misc/amino/fields/test";
+option (gogoproto.goproto_getters_all) = false;
+
+service Msg {
+  // test tx
+  rpc SendMsg(InputMsg) returns (MsgResponse);
+}
+
+// MsgGrant is a request type for Grant method. It declares authorization to the grantee
+// on behalf of the granter with the provided expiration time.
+message InputMsg {
+  misc.EncodingTestForDontOmit d_o_tests = 1 [(gogoproto.nullable) = false];
+  misc.EncodingTestForOmit o_tests = 2 [(gogoproto.nullable) = false];
+}
+
+// MsgGrantResponse defines the Msg/MsgGrant response type.
+message MsgResponse {}

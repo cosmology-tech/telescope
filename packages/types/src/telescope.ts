@@ -137,6 +137,9 @@ interface TelescopeOpts {
 
     aminoEncoding?: {
         enabled: boolean;
+        customTypes?: {
+          useCosmosSDKDec?: boolean;
+        },
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -366,6 +369,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
     aminoEncoding: {
         enabled: true,
+        customTypes: {
+          useCosmosSDKDec: false
+        },
         casingFn: snake,
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS

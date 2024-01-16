@@ -32,7 +32,8 @@
     "@cosmjs/amino": "^0.32.0",
     "@cosmjs/proto-signing": "^0.32.0",
     "@cosmjs/stargate": "^0.32.0",
-    "@cosmjs/tendermint-rpc": "^0.32.0"
+    "@cosmjs/tendermint-rpc": "^0.32.0",
+    "@keplr-wallet/unit": "^0.12.53"
   },
   "workspaces": [
     "packages/*"

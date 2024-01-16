@@ -51,7 +51,7 @@ export const toAminoParseField = ({
     if (field.rule === 'repeated') {
         switch (field.type) {
             case 'string':
-                return toAmino.string(args);
+                return toAmino.stringArray(args);
 
             case 'int64':
             case 'sint64':
@@ -76,6 +76,8 @@ export const toAminoParseField = ({
         }
 
         switch (field.parsedType.type) {
+            case 'Enum':
+                return toAmino.defaultType(args);
             case 'Type':
                 return toAmino.typeArray(args);
         }

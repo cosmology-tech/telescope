@@ -156,6 +156,17 @@ describe('cosmos/staking/v1beta1', () => {
           'Delegation', getNestedProto(res).Delegation
       ))
   })
+
+  it('Delegation useCosmosSDKDec', () => {
+    const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
+    context.options.aminoEncoding!.useLegacyInlineEncoding = true;
+    context.options.prototypes!.typingsFormat!.customTypes!.useCosmosSDKDec = true;
+    context.options.aminoEncoding!.customTypes!.useCosmosSDKDec = true;
+    expectCode(createObjectWithMethods(
+        context,
+        'Delegation', getNestedProto(res).Delegation
+    ))
+  })
 });
 
 describe('google/api/expr/v1alpha1/checked', () => {
