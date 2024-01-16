@@ -87,6 +87,7 @@ export interface MsgData {
 export interface Attribute {
   key: string;
   value: string;
+  index: boolean;
 }
 export interface Event {
   type: string;
