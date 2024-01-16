@@ -1,5 +1,4 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSend, MsgSendSDKType } from "./tx";
 export interface MsgSendAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgNFTSend";
@@ -20,10 +19,10 @@ export const AminoConverter = {
       receiver
     }: MsgSend): MsgSendAminoType["value"] => {
       return {
-        class_id: omitDefault(classId),
-        id: omitDefault(id),
-        sender: omitDefault(sender),
-        receiver: omitDefault(receiver)
+        class_id: classId,
+        id,
+        sender,
+        receiver
       };
     },
     fromAmino: ({

@@ -1,5 +1,5 @@
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "../../../helpers";
+import { Long } from "../../../helpers";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType } from "./tx";
 export interface MsgRegisterDevFeeInfoAminoType extends AminoMsg {
   type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
@@ -35,9 +35,9 @@ export const AminoConverter = {
       nonces
     }: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAminoType["value"] => {
       return {
-        contract_address: omitDefault(contractAddress),
-        deployer_address: omitDefault(deployerAddress),
-        withdraw_address: omitDefault(withdrawAddress),
+        contract_address: contractAddress,
+        deployer_address: deployerAddress,
+        withdraw_address: withdrawAddress,
         nonces: nonces.map(el0 => el0.toString())
       };
     },
@@ -62,8 +62,8 @@ export const AminoConverter = {
       deployerAddress
     }: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAminoType["value"] => {
       return {
-        contract_address: omitDefault(contractAddress),
-        deployer_address: omitDefault(deployerAddress)
+        contract_address: contractAddress,
+        deployer_address: deployerAddress
       };
     },
     fromAmino: ({
@@ -84,9 +84,9 @@ export const AminoConverter = {
       withdrawAddress
     }: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAminoType["value"] => {
       return {
-        contract_address: omitDefault(contractAddress),
-        deployer_address: omitDefault(deployerAddress),
-        withdraw_address: omitDefault(withdrawAddress)
+        contract_address: contractAddress,
+        deployer_address: deployerAddress,
+        withdraw_address: withdrawAddress
       };
     },
     fromAmino: ({

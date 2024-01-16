@@ -36,7 +36,7 @@ export declare const toAminoJSON: {
 };
 export declare const arrayTypes: {
     scalar(): t.Identifier;
-    string(): t.Identifier;
+    string(args: ToAminoJSONMethod): t.Identifier | t.CallExpression;
     double(): t.Identifier;
     float(): t.Identifier;
     bool(): t.Identifier;

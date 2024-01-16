@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, padDecimal } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "osmosis.accum.v1beta1";
 export interface AccumulatorContent {
   accumValue: DecCoin[];
@@ -133,7 +133,7 @@ export const AccumulatorContent = {
     } else {
       obj.accum_value = message.accumValue;
     }
-    obj.total_shares = padDecimal(message.totalShares) === "" ? undefined : padDecimal(message.totalShares);
+    obj.total_shares = message.totalShares === "" ? undefined : message.totalShares;
     return obj;
   },
   fromAminoMsg(object: AccumulatorContentAminoMsg): AccumulatorContent {
@@ -360,7 +360,7 @@ export const Record = {
   },
   toAmino(message: Record): RecordAmino {
     const obj: any = {};
-    obj.num_shares = padDecimal(message.numShares) === "" ? undefined : padDecimal(message.numShares);
+    obj.num_shares = message.numShares === "" ? undefined : message.numShares;
     if (message.initAccumValue) {
       obj.init_accum_value = message.initAccumValue.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {

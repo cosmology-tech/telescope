@@ -32,9 +32,9 @@ export const AminoConverter = {
       version
     }: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        connection_id: omitDefault(connectionId),
-        version: omitDefault(version)
+        owner,
+        connection_id: connectionId,
+        version
       };
     },
     fromAmino: ({
@@ -58,12 +58,12 @@ export const AminoConverter = {
       relativeTimeout
     }: MsgSendTx): MsgSendTxAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
-        connection_id: omitDefault(connectionId),
+        owner,
+        connection_id: connectionId,
         packet_data: {
           type: packetData.type,
           data: packetData.data,
-          memo: omitDefault(packetData.memo)
+          memo: packetData.memo
         },
         relative_timeout: omitDefault(relativeTimeout)?.toString?.()
       };

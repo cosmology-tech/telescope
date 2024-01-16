@@ -1,7 +1,6 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgGrant, MsgGrantSDKType, MsgExec, MsgExecSDKType, MsgRevoke, MsgRevokeSDKType } from "./tx";
 export interface MsgGrantAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrant";
@@ -44,11 +43,11 @@ export const AminoConverter = {
       grant
     }: MsgGrant): MsgGrantAminoType["value"] => {
       return {
-        granter: omitDefault(granter),
-        grantee: omitDefault(grantee),
+        granter,
+        grantee,
         grant: {
           authorization: {
-            type_url: omitDefault(grant.authorization.typeUrl),
+            type_url: grant.authorization.typeUrl,
             value: grant.authorization.value
           },
           expiration: grant.expiration
@@ -80,9 +79,9 @@ export const AminoConverter = {
       msgs
     }: MsgExec): MsgExecAminoType["value"] => {
       return {
-        grantee: omitDefault(grantee),
+        grantee,
         msgs: msgs.map(el0 => ({
-          type_url: omitDefault(el0.typeUrl),
+          type_url: el0.typeUrl,
           value: el0.value
         }))
       };
@@ -108,9 +107,9 @@ export const AminoConverter = {
       msgTypeUrl
     }: MsgRevoke): MsgRevokeAminoType["value"] => {
       return {
-        granter: omitDefault(granter),
-        grantee: omitDefault(grantee),
-        msg_type_url: omitDefault(msgTypeUrl)
+        granter,
+        grantee,
+        msg_type_url: msgTypeUrl
       };
     },
     fromAmino: ({

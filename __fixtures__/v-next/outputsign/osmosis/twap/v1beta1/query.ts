@@ -1,7 +1,7 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, DeepPartial, padDecimal } from "../../../helpers";
+import { toTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -284,7 +284,7 @@ export const ArithmeticTwapResponse = {
   },
   toAmino(message: ArithmeticTwapResponse): ArithmeticTwapResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = padDecimal(message.arithmeticTwap) === "" ? undefined : padDecimal(message.arithmeticTwap);
+    obj.arithmetic_twap = message.arithmeticTwap === "" ? undefined : message.arithmeticTwap;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapResponseAminoMsg): ArithmeticTwapResponse {
@@ -460,7 +460,7 @@ export const ArithmeticTwapToNowResponse = {
   },
   toAmino(message: ArithmeticTwapToNowResponse): ArithmeticTwapToNowResponseAmino {
     const obj: any = {};
-    obj.arithmetic_twap = padDecimal(message.arithmeticTwap) === "" ? undefined : padDecimal(message.arithmeticTwap);
+    obj.arithmetic_twap = message.arithmeticTwap === "" ? undefined : message.arithmeticTwap;
     return obj;
   },
   fromAminoMsg(object: ArithmeticTwapToNowResponseAminoMsg): ArithmeticTwapToNowResponse {

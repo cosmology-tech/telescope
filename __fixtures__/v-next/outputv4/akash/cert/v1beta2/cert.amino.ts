@@ -27,7 +27,7 @@ export const AminoConverter = {
       pubkey
     }: MsgCreateCertificate): MsgCreateCertificateAminoType["value"] => {
       return {
-        owner: owner,
+        owner,
         cert: cert,
         pubkey: pubkey
       };

@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, externalComet, internal, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, internalForBigInt, varint, utf8, binary, types, registryHelper } from '../helpers';
+import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, binary, types, registryHelper } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -26,7 +26,7 @@ const write = (
 export const plugin = (
   builder: TelescopeBuilder
 ) => {
-  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? internalForBigInt : internal);
+  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? getHelperForBigint(builder.options) : getHelper(builder.options));
 
   // should be exported
   if (builder.options.stargateClients.addGetTxRpc || builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {

@@ -1,6 +1,6 @@
-import { AminoEncodingTestForDontOmit, AminoEncodingTestForDontOmitSDKType, AminoEncodingTestForOmit, AminoEncodingTestForOmitSDKType } from "./amino_fields";
+import { EncodingTestForDontOmit, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitSDKType } from "./all_fields";
 import { AminoMsg, Pubkey } from "@cosmjs/amino";
-import { omitDefault } from "../helpers";
+import { omitDefault, padDecimal } from "../helpers";
 import { fromUtf8, toBase64, toUtf8, fromBase64 } from "@cosmjs/encoding";
 import { decodePubkey, encodePubkey } from "@cosmjs/proto-signing";
 import { AccessConfig, AccessConfigSDKType, voteOptionFromJSON } from "./eval_request";
@@ -87,6 +87,10 @@ export interface InputMsgAminoType extends AminoMsg {
         type_url: string;
         value: Uint8Array;
       }[];
+      dec: string;
+      d_o_dec: string;
+      decs: string[];
+      d_o_decs: string[];
     };
     o_tests: {
       str: string;
@@ -165,6 +169,10 @@ export interface InputMsgAminoType extends AminoMsg {
         type_url: string;
         value: Uint8Array;
       }[];
+      dec: string;
+      o_dec: string;
+      decs: string[];
+      o_decs: string[];
     };
   };
 }
@@ -177,8 +185,8 @@ export const AminoConverter = {
     }: InputMsg): InputMsgAminoType["value"] => {
       return {
         d_o_tests: {
-          str: omitDefault(dOTests.str),
-          d_o_str: omitDefault(dOTests.dOStr),
+          str: dOTests.str,
+          d_o_str: dOTests.dOStr,
           b: omitDefault(dOTests.b),
           d_o_b: omitDefault(dOTests.dOB),
           num: omitDefault(dOTests.num),
@@ -186,17 +194,17 @@ export const AminoConverter = {
           big: omitDefault(dOTests.big)?.toString?.(),
           d_o_big: omitDefault(dOTests.dOBig)?.toString?.(),
           proto: {
-            sender: omitDefault(dOTests.proto.sender)
+            sender: dOTests.proto.sender
           },
           d_o_proto: {
-            sender: omitDefault(dOTests.dOProto.sender)
+            sender: dOTests.dOProto.sender
           },
           auth: {
-            type_url: omitDefault(dOTests.auth.typeUrl),
+            type_url: dOTests.auth.typeUrl,
             value: dOTests.auth.value
           },
           d_o_auth: {
-            type_url: omitDefault(dOTests.dOAuth.typeUrl),
+            type_url: dOTests.dOAuth.typeUrl,
             value: dOTests.dOAuth.value
           },
           salt: dOTests.salt,
@@ -234,23 +242,27 @@ export const AminoConverter = {
             nanos: omitDefault(el0.nanos)
           })),
           protos: dOTests.protos.map(el0 => ({
-            sender: omitDefault(el0.sender)
+            sender: el0.sender
           })),
           d_o_protos: dOTests.dOProtos.map(el0 => ({
-            sender: omitDefault(el0.sender)
+            sender: el0.sender
           })),
           auths: dOTests.auths.map(el0 => ({
-            type_url: omitDefault(el0.typeUrl),
+            type_url: el0.typeUrl,
             value: el0.value
           })),
           d_o_auths: dOTests.dOAuths.map(el0 => ({
-            type_url: omitDefault(el0.typeUrl),
+            type_url: el0.typeUrl,
             value: el0.value
-          }))
+          })),
+          dec: padDecimal(dOTests.dec),
+          d_o_dec: padDecimal(dOTests.dODec),
+          decs: dOTests.decs.map(el0 => padDecimal(el0)),
+          d_o_decs: dOTests.dODecs.map(el0 => padDecimal(el0))
         },
         o_tests: {
-          str: omitDefault(oTests.str),
-          o_str: omitDefault(oTests.oStr),
+          str: oTests.str,
+          o_str: oTests.oStr,
           b: omitDefault(oTests.b),
           o_b: omitDefault(oTests.oB),
           num: omitDefault(oTests.num),
@@ -258,17 +270,17 @@ export const AminoConverter = {
           big: omitDefault(oTests.big)?.toString?.(),
           o_big: omitDefault(oTests.oBig)?.toString?.(),
           proto: {
-            sender: omitDefault(oTests.proto.sender)
+            sender: oTests.proto.sender
           },
           o_proto: {
-            sender: omitDefault(oTests.oProto.sender)
+            sender: oTests.oProto.sender
           },
           auth: {
-            type_url: omitDefault(oTests.auth.typeUrl),
+            type_url: oTests.auth.typeUrl,
             value: oTests.auth.value
           },
           o_auth: {
-            type_url: omitDefault(oTests.oAuth.typeUrl),
+            type_url: oTests.oAuth.typeUrl,
             value: oTests.oAuth.value
           },
           salt: oTests.salt,
@@ -306,19 +318,23 @@ export const AminoConverter = {
             nanos: omitDefault(el0.nanos)
           })),
           protos: oTests.protos.map(el0 => ({
-            sender: omitDefault(el0.sender)
+            sender: el0.sender
           })),
           o_protos: oTests.oProtos.map(el0 => ({
-            sender: omitDefault(el0.sender)
+            sender: el0.sender
           })),
           auths: oTests.auths.map(el0 => ({
-            type_url: omitDefault(el0.typeUrl),
+            type_url: el0.typeUrl,
             value: el0.value
           })),
           o_auths: oTests.oAuths.map(el0 => ({
-            type_url: omitDefault(el0.typeUrl),
+            type_url: el0.typeUrl,
             value: el0.value
-          }))
+          })),
+          dec: padDecimal(oTests.dec),
+          o_dec: padDecimal(oTests.oDec),
+          decs: oTests.decs.map(el0 => padDecimal(el0)),
+          o_decs: oTests.oDecs.map(el0 => padDecimal(el0))
         }
       };
     },
@@ -403,7 +419,11 @@ export const AminoConverter = {
           dOAuths: d_o_tests.d_o_auths.map?.(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
-          }))
+          })),
+          dec: d_o_tests.dec,
+          dODec: d_o_tests.d_o_dec,
+          decs: d_o_tests.decs,
+          dODecs: d_o_tests.d_o_decs
         },
         oTests: o_tests == null ? o_tests : {
           str: o_tests.str,
@@ -481,7 +501,11 @@ export const AminoConverter = {
           oAuths: o_tests.o_auths.map?.(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
-          }))
+          })),
+          dec: o_tests.dec,
+          oDec: o_tests.o_dec,
+          decs: o_tests.decs,
+          oDecs: o_tests.o_decs
         }
       };
     }

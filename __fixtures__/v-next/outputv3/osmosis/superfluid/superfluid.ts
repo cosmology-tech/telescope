@@ -1,6 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, padDecimal } from "../../helpers";
+import { isSet, DeepPartial } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.superfluid";
 /**
@@ -541,7 +541,7 @@ export const OsmoEquivalentMultiplierRecord = {
     const obj: any = {};
     obj.epoch_number = message.epochNumber ? message.epochNumber.toString() : undefined;
     obj.denom = message.denom === "" ? undefined : message.denom;
-    obj.multiplier = padDecimal(message.multiplier) === "" ? undefined : padDecimal(message.multiplier);
+    obj.multiplier = message.multiplier === "" ? undefined : message.multiplier;
     return obj;
   },
   fromProtoMsg(message: OsmoEquivalentMultiplierRecordProtoMsg, useInterfaces: boolean = true): OsmoEquivalentMultiplierRecord {

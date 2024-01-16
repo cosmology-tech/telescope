@@ -1,6 +1,6 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal } from "../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
@@ -315,10 +315,10 @@ export const TwapRecord = {
     obj.asset1_denom = message.asset1Denom === "" ? undefined : message.asset1Denom;
     obj.height = message.height ? message.height.toString() : "0";
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.p0_last_spot_price = padDecimal(message.p0LastSpotPrice) === "" ? undefined : padDecimal(message.p0LastSpotPrice);
-    obj.p1_last_spot_price = padDecimal(message.p1LastSpotPrice) === "" ? undefined : padDecimal(message.p1LastSpotPrice);
-    obj.p0_arithmetic_twap_accumulator = padDecimal(message.p0ArithmeticTwapAccumulator) === "" ? undefined : padDecimal(message.p0ArithmeticTwapAccumulator);
-    obj.p1_arithmetic_twap_accumulator = padDecimal(message.p1ArithmeticTwapAccumulator) === "" ? undefined : padDecimal(message.p1ArithmeticTwapAccumulator);
+    obj.p0_last_spot_price = message.p0LastSpotPrice === "" ? undefined : message.p0LastSpotPrice;
+    obj.p1_last_spot_price = message.p1LastSpotPrice === "" ? undefined : message.p1LastSpotPrice;
+    obj.p0_arithmetic_twap_accumulator = message.p0ArithmeticTwapAccumulator === "" ? undefined : message.p0ArithmeticTwapAccumulator;
+    obj.p1_arithmetic_twap_accumulator = message.p1ArithmeticTwapAccumulator === "" ? undefined : message.p1ArithmeticTwapAccumulator;
     obj.last_error_time = message.lastErrorTime ? Timestamp.toAmino(toTimestamp(message.lastErrorTime)) : undefined;
     return obj;
   },

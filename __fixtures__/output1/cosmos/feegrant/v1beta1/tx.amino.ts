@@ -1,6 +1,5 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgGrantAllowance, MsgGrantAllowanceSDKType, MsgRevokeAllowance, MsgRevokeAllowanceSDKType } from "./tx";
 export interface MsgGrantAllowanceAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgGrantAllowance";
@@ -29,10 +28,10 @@ export const AminoConverter = {
       allowance
     }: MsgGrantAllowance): MsgGrantAllowanceAminoType["value"] => {
       return {
-        granter: omitDefault(granter),
-        grantee: omitDefault(grantee),
+        granter,
+        grantee,
         allowance: {
-          type_url: omitDefault(allowance.typeUrl),
+          type_url: allowance.typeUrl,
           value: allowance.value
         }
       };
@@ -59,8 +58,8 @@ export const AminoConverter = {
       grantee
     }: MsgRevokeAllowance): MsgRevokeAllowanceAminoType["value"] => {
       return {
-        granter: omitDefault(granter),
-        grantee: omitDefault(grantee)
+        granter,
+        grantee
       };
     },
     fromAmino: ({

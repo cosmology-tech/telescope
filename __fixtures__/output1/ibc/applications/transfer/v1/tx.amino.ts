@@ -1,7 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault, Long } from "../../../../helpers";
+import { AminoHeight, Long, omitDefault } from "../../../../helpers";
 import { MsgTransfer, MsgTransferSDKType } from "./tx";
 export interface MsgTransferAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgTransfer";
@@ -31,14 +31,14 @@ export const AminoConverter = {
       timeoutTimestamp
     }: MsgTransfer): MsgTransferAminoType["value"] => {
       return {
-        source_port: omitDefault(sourcePort),
-        source_channel: omitDefault(sourceChannel),
+        source_port: sourcePort,
+        source_channel: sourceChannel,
         token: {
           denom: token.denom,
           amount: Long.fromValue(token.amount).toString()
         },
-        sender: omitDefault(sender),
-        receiver: omitDefault(receiver),
+        sender,
+        receiver,
         timeout_height: timeoutHeight ? {
           revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()

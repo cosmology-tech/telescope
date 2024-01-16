@@ -1,7 +1,6 @@
 /* eslint-disable */
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType } from "./audit";
 export interface MsgSignProviderAttributesAminoType extends AminoMsg {
   type: "akash/audit/testonly-sign-provider-attributes";
@@ -31,11 +30,11 @@ export const AminoConverter = {
       attributes
     }: MsgSignProviderAttributes): MsgSignProviderAttributesAminoType["value"] => {
       return {
-        owner: owner,
-        auditor: auditor,
+        owner,
+        auditor,
         attributes: attributes.map(el0 => ({
-          key: omitDefault(el0.key),
-          value: omitDefault(el0.value)
+          key: el0.key,
+          value: el0.value
         }))
       };
     },
@@ -62,9 +61,9 @@ export const AminoConverter = {
       keys
     }: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAminoType["value"] => {
       return {
-        owner: owner,
-        auditor: auditor,
-        keys: keys
+        owner,
+        auditor,
+        keys
       };
     },
     fromAmino: ({

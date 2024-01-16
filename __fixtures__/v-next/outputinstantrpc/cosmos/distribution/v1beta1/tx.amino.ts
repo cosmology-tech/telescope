@@ -1,6 +1,5 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionSDKType, MsgFundCommunityPool, MsgFundCommunityPoolSDKType } from "./tx";
 export interface MsgSetWithdrawAddressAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgModifyWithdrawAddress";
@@ -40,8 +39,8 @@ export const AminoConverter = {
       withdrawAddress
     }: MsgSetWithdrawAddress): MsgSetWithdrawAddressAminoType["value"] => {
       return {
-        delegator_address: omitDefault(delegatorAddress),
-        withdraw_address: omitDefault(withdrawAddress)
+        delegator_address: delegatorAddress,
+        withdraw_address: withdrawAddress
       };
     },
     fromAmino: ({
@@ -61,8 +60,8 @@ export const AminoConverter = {
       validatorAddress
     }: MsgWithdrawDelegatorReward): MsgWithdrawDelegatorRewardAminoType["value"] => {
       return {
-        delegator_address: omitDefault(delegatorAddress),
-        validator_address: omitDefault(validatorAddress)
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress
       };
     },
     fromAmino: ({
@@ -81,7 +80,7 @@ export const AminoConverter = {
       validatorAddress
     }: MsgWithdrawValidatorCommission): MsgWithdrawValidatorCommissionAminoType["value"] => {
       return {
-        validator_address: omitDefault(validatorAddress)
+        validator_address: validatorAddress
       };
     },
     fromAmino: ({
@@ -100,10 +99,10 @@ export const AminoConverter = {
     }: MsgFundCommunityPool): MsgFundCommunityPoolAminoType["value"] => {
       return {
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
-        depositor: omitDefault(depositor)
+        depositor
       };
     },
     fromAmino: ({

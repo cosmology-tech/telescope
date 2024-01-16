@@ -2,7 +2,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "../../../helpers";
+import { Long, omitDefault } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
 export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -67,8 +67,8 @@ export const AminoConverter = {
       subdenom
     }: MsgCreateDenom): MsgCreateDenomAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
-        subdenom: omitDefault(subdenom)
+        sender,
+        subdenom
       };
     },
     fromAmino: ({
@@ -88,7 +88,7 @@ export const AminoConverter = {
       amount
     }: MsgMint): MsgMintAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
+        sender,
         amount: {
           denom: amount.denom,
           amount: Long.fromValue(amount.amount).toString()
@@ -115,7 +115,7 @@ export const AminoConverter = {
       amount
     }: MsgBurn): MsgBurnAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
+        sender,
         amount: {
           denom: amount.denom,
           amount: Long.fromValue(amount.amount).toString()
@@ -143,9 +143,9 @@ export const AminoConverter = {
       newAdmin
     }: MsgChangeAdmin): MsgChangeAdminAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
-        denom: omitDefault(denom),
-        new_admin: omitDefault(newAdmin)
+        sender,
+        denom,
+        new_admin: newAdmin
       };
     },
     fromAmino: ({
@@ -167,20 +167,20 @@ export const AminoConverter = {
       metadata
     }: MsgSetDenomMetadata): MsgSetDenomMetadataAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
+        sender,
         metadata: {
-          description: omitDefault(metadata.description),
+          description: metadata.description,
           denom_units: metadata.denomUnits.map(el0 => ({
-            denom: omitDefault(el0.denom),
+            denom: el0.denom,
             exponent: omitDefault(el0.exponent),
             aliases: el0.aliases
           })),
-          base: omitDefault(metadata.base),
-          display: omitDefault(metadata.display),
-          name: omitDefault(metadata.name),
-          symbol: omitDefault(metadata.symbol),
-          uri: omitDefault(metadata.uri),
-          uri_hash: omitDefault(metadata.uriHash)
+          base: metadata.base,
+          display: metadata.display,
+          name: metadata.name,
+          symbol: metadata.symbol,
+          uri: metadata.uri,
+          uri_hash: metadata.uriHash
         }
       };
     },

@@ -11,12 +11,12 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
       funds
     }: MsgExecuteContract): MsgExecuteContractAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
-        contract: omitDefault(contract),
+        sender,
+        contract,
         msg: JSON.parse(fromUtf8(msg)),
         funds: funds.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -53,14 +53,14 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       funds
     }: MsgInstantiateContract): MsgInstantiateContractAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
-        admin: omitDefault(admin),
+        sender,
+        admin,
         code_id: omitDefault(codeId)?.toString?.(),
-        label: omitDefault(label),
+        label,
         msg: JSON.parse(fromUtf8(msg)),
         funds: funds.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -99,8 +99,8 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       msg
     }: MsgMigrateContract): MsgMigrateContractAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
-        contract: omitDefault(contract),
+        sender,
+        contract,
         code_id: omitDefault(codeId)?.toString?.(),
         msg: JSON.parse(fromUtf8(msg))
       };
@@ -132,11 +132,11 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
       instantiatePermission
     }: MsgStoreCode): MsgStoreCodeAminoType["value"] => {
       return {
-        sender: omitDefault(sender),
+        sender,
         wasm_byte_code: toBase64(wasmByteCode),
         instantiate_permission: {
           permission: instantiatePermission.permission,
-          address: omitDefault(instantiatePermission.address)
+          address: instantiatePermission.address
         }
       };
     },

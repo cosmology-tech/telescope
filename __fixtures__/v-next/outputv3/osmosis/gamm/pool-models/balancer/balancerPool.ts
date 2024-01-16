@@ -2,7 +2,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../../google/
 import { Duration, DurationAmino, DurationSDKType } from "../../../../google/protobuf/duration";
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial, padDecimal } from "../../../../helpers";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -500,8 +500,8 @@ export const PoolParams = {
   },
   toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
     const obj: any = {};
-    obj.swap_fee = padDecimal(message.swapFee) === "" ? undefined : padDecimal(message.swapFee);
-    obj.exit_fee = padDecimal(message.exitFee) === "" ? undefined : padDecimal(message.exitFee);
+    obj.swap_fee = message.swapFee === "" ? undefined : message.swapFee;
+    obj.exit_fee = message.exitFee === "" ? undefined : message.exitFee;
     obj.smooth_weight_change_params = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toAmino(message.smoothWeightChangeParams, useInterfaces) : undefined;
     return obj;
   },

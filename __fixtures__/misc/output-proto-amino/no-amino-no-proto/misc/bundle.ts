@@ -1,14 +1,16 @@
-import * as _30 from "./amino_fields";
-import * as _31 from "./eval_request";
-import * as _32 from "./tx";
-import * as _33 from "./tx.rpc.msg";
-import * as _34 from "./rpc.tx";
+import * as _32 from "./all_fields";
+import * as _33 from "./amino_fields";
+import * as _34 from "./eval_request";
+import * as _35 from "./tx";
+import * as _36 from "./tx.rpc.msg";
+import * as _37 from "./rpc.tx";
 export const misc = {
-  ..._30,
-  ..._31,
   ..._32,
   ..._33,
+  ..._34,
+  ..._35,
+  ..._36,
   ClientFactory: {
-    ..._34
+    ..._37
   }
 };

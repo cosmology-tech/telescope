@@ -46,13 +46,16 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
       },
 
       string(args: ToAminoJSONMethod) {
+        let valueExpr: t.Expression;
+        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+
+        if(useCosmosSDKDec){
           const isCosmosSDKDec =
               (args.field.options?.['(gogoproto.customtype)'] ==
                   'github.com/cosmos/cosmos-sdk/types.Dec') ||
               (args.field.options?.['(gogoproto.customtype)'] ==
                   'cosmossdk.io/math.LegacyDec');
 
-          let valueExpr: t.Expression;
           if (isCosmosSDKDec) {
               args.context.addUtil('padDecimal');
               const { propName } = getFieldNames(args.field);
@@ -66,8 +69,9 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                   ]
               )
           }
+        }
 
-          return toAminoJSON.scalar(args, valueExpr);
+        return setValue(args, valueExpr);
       },
       double(args: ToAminoJSONMethod) {
           return toAminoJSON.scalar(args);
@@ -685,8 +689,29 @@ export const arrayTypes = {
     scalar() {
         return t.identifier('e');
     },
-    string() {
-        return arrayTypes.scalar();
+    string(args: ToAminoJSONMethod) {
+      const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+
+      if(useCosmosSDKDec){
+        const isCosmosSDKDec =
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
+
+        if (isCosmosSDKDec) {
+            args.context.addUtil('padDecimal');
+            const { propName } = getFieldNames(args.field);
+            return t.callExpression(
+                t.identifier('padDecimal'),
+                [
+                  t.identifier('e')
+                ]
+            )
+        }
+      }
+
+      return arrayTypes.scalar();
     },
     double() {
         return arrayTypes.scalar();

@@ -4,7 +4,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, padDecimal, toTimestamp, fromTimestamp } from "../../../helpers";
+import { DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -977,9 +977,9 @@ export const CommissionRates = {
   },
   toAmino(message: CommissionRates): CommissionRatesAmino {
     const obj: any = {};
-    obj.rate = padDecimal(message.rate) === "" ? undefined : padDecimal(message.rate);
-    obj.max_rate = padDecimal(message.maxRate) === "" ? undefined : padDecimal(message.maxRate);
-    obj.max_change_rate = padDecimal(message.maxChangeRate) === "" ? undefined : padDecimal(message.maxChangeRate);
+    obj.rate = message.rate === "" ? undefined : message.rate;
+    obj.max_rate = message.maxRate === "" ? undefined : message.maxRate;
+    obj.max_change_rate = message.maxChangeRate === "" ? undefined : message.maxChangeRate;
     return obj;
   },
   fromAminoMsg(object: CommissionRatesAminoMsg): CommissionRates {
@@ -1371,7 +1371,7 @@ export const Validator = {
     obj.jailed = message.jailed === false ? undefined : message.jailed;
     obj.status = message.status === 0 ? undefined : message.status;
     obj.tokens = message.tokens === "" ? undefined : message.tokens;
-    obj.delegator_shares = padDecimal(message.delegatorShares) === "" ? undefined : padDecimal(message.delegatorShares);
+    obj.delegator_shares = message.delegatorShares === "" ? undefined : message.delegatorShares;
     obj.description = message.description ? Description.toAmino(message.description) : undefined;
     obj.unbonding_height = message.unbondingHeight ? message.unbondingHeight.toString() : undefined;
     obj.unbonding_time = message.unbondingTime ? Timestamp.toAmino(toTimestamp(message.unbondingTime)) : undefined;
@@ -1856,7 +1856,7 @@ export const Delegation = {
     const obj: any = {};
     obj.delegator_address = message.delegatorAddress === "" ? undefined : message.delegatorAddress;
     obj.validator_address = message.validatorAddress === "" ? undefined : message.validatorAddress;
-    obj.shares = padDecimal(message.shares) === "" ? undefined : padDecimal(message.shares);
+    obj.shares = message.shares === "" ? undefined : message.shares;
     return obj;
   },
   fromAminoMsg(object: DelegationAminoMsg): Delegation {
@@ -2165,7 +2165,7 @@ export const RedelegationEntry = {
     obj.creation_height = message.creationHeight ? message.creationHeight.toString() : undefined;
     obj.completion_time = message.completionTime ? Timestamp.toAmino(toTimestamp(message.completionTime)) : undefined;
     obj.initial_balance = message.initialBalance === "" ? undefined : message.initialBalance;
-    obj.shares_dst = padDecimal(message.sharesDst) === "" ? undefined : padDecimal(message.sharesDst);
+    obj.shares_dst = message.sharesDst === "" ? undefined : message.sharesDst;
     return obj;
   },
   fromAminoMsg(object: RedelegationEntryAminoMsg): RedelegationEntry {
@@ -2403,7 +2403,7 @@ export const Params = {
     obj.max_entries = message.maxEntries === 0 ? undefined : message.maxEntries;
     obj.historical_entries = message.historicalEntries === 0 ? undefined : message.historicalEntries;
     obj.bond_denom = message.bondDenom === "" ? undefined : message.bondDenom;
-    obj.min_commission_rate = padDecimal(message.minCommissionRate) === "" ? undefined : padDecimal(message.minCommissionRate);
+    obj.min_commission_rate = message.minCommissionRate === "" ? undefined : message.minCommissionRate;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

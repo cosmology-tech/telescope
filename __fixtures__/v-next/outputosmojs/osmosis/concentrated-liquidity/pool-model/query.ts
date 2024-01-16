@@ -4,7 +4,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "../params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, padDecimal } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** =============================== UserPositions */
@@ -1069,7 +1069,7 @@ export const TickLiquidityNet = {
   },
   toAmino(message: TickLiquidityNet): TickLiquidityNetAmino {
     const obj: any = {};
-    obj.liquidity_net = padDecimal(message.liquidityNet) === "" ? undefined : padDecimal(message.liquidityNet);
+    obj.liquidity_net = message.liquidityNet === "" ? undefined : message.liquidityNet;
     obj.tick_index = message.tickIndex === "" ? undefined : message.tickIndex;
     return obj;
   },
@@ -1196,7 +1196,7 @@ export const LiquidityDepthWithRange = {
   },
   toAmino(message: LiquidityDepthWithRange): LiquidityDepthWithRangeAmino {
     const obj: any = {};
-    obj.liquidity_amount = padDecimal(message.liquidityAmount) === "" ? undefined : padDecimal(message.liquidityAmount);
+    obj.liquidity_amount = message.liquidityAmount === "" ? undefined : message.liquidityAmount;
     obj.lower_tick = message.lowerTick === "" ? undefined : message.lowerTick;
     obj.upper_tick = message.upperTick === "" ? undefined : message.upperTick;
     return obj;
@@ -1481,7 +1481,7 @@ export const QueryLiquidityNetInDirectionResponse = {
       obj.liquidity_depths = message.liquidityDepths;
     }
     obj.current_tick = message.currentTick ? message.currentTick.toString() : undefined;
-    obj.current_liquidity = padDecimal(message.currentLiquidity) === "" ? undefined : padDecimal(message.currentLiquidity);
+    obj.current_liquidity = message.currentLiquidity === "" ? undefined : message.currentLiquidity;
     return obj;
   },
   fromAminoMsg(object: QueryLiquidityNetInDirectionResponseAminoMsg): QueryLiquidityNetInDirectionResponse {

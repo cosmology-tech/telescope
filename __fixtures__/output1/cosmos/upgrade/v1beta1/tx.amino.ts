@@ -33,14 +33,14 @@ export const AminoConverter = {
       plan
     }: MsgSoftwareUpgrade): MsgSoftwareUpgradeAminoType["value"] => {
       return {
-        authority: omitDefault(authority),
+        authority,
         plan: {
-          name: omitDefault(plan.name),
+          name: plan.name,
           time: plan.time,
           height: omitDefault(plan.height)?.toString?.(),
-          info: omitDefault(plan.info),
+          info: plan.info,
           upgraded_client_state: {
-            type_url: omitDefault(plan.upgradedClientState.typeUrl),
+            type_url: plan.upgradedClientState.typeUrl,
             value: plan.upgradedClientState.value
           }
         }
@@ -71,7 +71,7 @@ export const AminoConverter = {
       authority
     }: MsgCancelUpgrade): MsgCancelUpgradeAminoType["value"] => {
       return {
-        authority: omitDefault(authority)
+        authority
       };
     },
     fromAmino: ({

@@ -162,11 +162,11 @@ exports[`osmosis/lockup/tx duration 4`] = `
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -350,11 +350,11 @@ exports[`osmosis/lockup/tx string 4`] = `
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

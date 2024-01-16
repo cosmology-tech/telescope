@@ -4,7 +4,7 @@ package misc;
 
 import "gogoproto/gogo.proto";
 import "google/protobuf/any.proto";
-import "misc/amino_fields.proto";
+import "misc/all_fields.proto";
 
 option go_package                      = "github.com/misc/amino/fields/test";
 option (gogoproto.goproto_getters_all) = false;
@@ -17,8 +17,8 @@ service Msg {
 // MsgGrant is a request type for Grant method. It declares authorization to the grantee
 // on behalf of the granter with the provided expiration time.
 message InputMsg {
-  misc.AminoEncodingTestForDontOmit d_o_tests = 1 [(gogoproto.nullable) = false];
-  misc.AminoEncodingTestForOmit o_tests = 2 [(gogoproto.nullable) = false];
+  misc.EncodingTestForDontOmit d_o_tests = 1 [(gogoproto.nullable) = false];
+  misc.EncodingTestForOmit o_tests = 2 [(gogoproto.nullable) = false];
 }
 
 // MsgGrantResponse defines the Msg/MsgGrant response type.

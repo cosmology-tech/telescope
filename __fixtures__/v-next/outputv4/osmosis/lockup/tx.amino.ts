@@ -67,11 +67,11 @@ export const AminoConverter = {
       coins
     }: MsgLockTokens): MsgLockTokensAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         duration: (duration * 1_000_000_000).toString(),
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -99,7 +99,7 @@ export const AminoConverter = {
       owner
     }: MsgBeginUnlockingAll): MsgBeginUnlockingAllAminoType["value"] => {
       return {
-        owner: omitDefault(owner)
+        owner
       };
     },
     fromAmino: ({
@@ -118,11 +118,11 @@ export const AminoConverter = {
       coins
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         ID: omitDefault(ID)?.toString?.(),
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -149,7 +149,7 @@ export const AminoConverter = {
       duration
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         ID: omitDefault(ID)?.toString?.(),
         duration: (duration * 1_000_000_000).toString()
       };
@@ -177,11 +177,11 @@ export const AminoConverter = {
       coins
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         ID: omitDefault(ID)?.toString?.(),
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

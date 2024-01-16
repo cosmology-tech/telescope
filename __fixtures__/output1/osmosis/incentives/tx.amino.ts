@@ -52,16 +52,16 @@ export const AminoConverter = {
     }: MsgCreateGauge): MsgCreateGaugeAminoType["value"] => {
       return {
         is_perpetual: omitDefault(isPerpetual),
-        owner: omitDefault(owner),
+        owner,
         distribute_to: {
           lock_query_type: distributeTo.lockQueryType,
-          denom: omitDefault(distributeTo.denom),
+          denom: distributeTo.denom,
           duration: (distributeTo.duration * 1_000_000_000).toString(),
           timestamp: distributeTo.timestamp
         },
         coins: coins.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
         start_time: startTime,
         num_epochs_paid_over: omitDefault(numEpochsPaidOver)?.toString?.()
@@ -104,11 +104,11 @@ export const AminoConverter = {
       rewards
     }: MsgAddToGauge): MsgAddToGaugeAminoType["value"] => {
       return {
-        owner: omitDefault(owner),
+        owner,
         gauge_id: omitDefault(gaugeId)?.toString?.(),
         rewards: rewards.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

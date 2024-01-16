@@ -1,7 +1,7 @@
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, padDecimal } from "../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -337,8 +337,8 @@ export const IncentiveRecordBody = {
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
     const obj: any = {};
-    obj.remaining_amount = padDecimal(message.remainingAmount) === "" ? undefined : padDecimal(message.remainingAmount);
-    obj.emission_rate = padDecimal(message.emissionRate) === "" ? undefined : padDecimal(message.emissionRate);
+    obj.remaining_amount = message.remainingAmount === "" ? undefined : message.remainingAmount;
+    obj.emission_rate = message.emissionRate === "" ? undefined : message.emissionRate;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },

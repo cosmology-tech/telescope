@@ -31,14 +31,14 @@ export const AminoConverter = {
       timeoutTimestamp
     }: MsgTransfer): MsgTransferAminoType["value"] => {
       return {
-        source_port: omitDefault(sourcePort),
-        source_channel: omitDefault(sourceChannel),
+        source_port: sourcePort,
+        source_channel: sourceChannel,
         token: {
           denom: token.denom,
           amount: token.amount
         },
-        sender: omitDefault(sender),
-        receiver: omitDefault(receiver),
+        sender,
+        receiver,
         timeout_height: timeoutHeight ? {
           revision_height: omitDefault(timeoutHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(timeoutHeight.revisionNumber)?.toString()

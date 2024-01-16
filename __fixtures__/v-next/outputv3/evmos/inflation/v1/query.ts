@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, padDecimal } from "../../../helpers";
+import { DeepPartial, isSet } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
 /** QueryPeriodRequest is the request type for the Query/Period RPC method. */
@@ -946,7 +946,7 @@ export const QueryInflationRateResponse = {
   },
   toAmino(message: QueryInflationRateResponse, useInterfaces: boolean = true): QueryInflationRateResponseAmino {
     const obj: any = {};
-    obj.inflation_rate = padDecimal(message.inflationRate) === "" ? undefined : padDecimal(message.inflationRate);
+    obj.inflation_rate = message.inflationRate === "" ? undefined : message.inflationRate;
     return obj;
   },
   fromProtoMsg(message: QueryInflationRateResponseProtoMsg, useInterfaces: boolean = true): QueryInflationRateResponse {

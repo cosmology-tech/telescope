@@ -4,7 +4,7 @@ import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "../../../helpers";
+import { Long } from "../../../helpers";
 import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { Resource, ResourceSDKType } from "./resource";
 import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
@@ -168,8 +168,8 @@ export const AminoConverter = {
               any_of: el0.requirements.signedBy.anyOf
             },
             attributes: el0.requirements.attributes.map(el1 => ({
-              key: omitDefault(el1.key),
-              value: omitDefault(el1.value)
+              key: el1.key,
+              value: el1.value
             }))
           },
           resources: el0.resources.map(el1 => ({
@@ -179,8 +179,8 @@ export const AminoConverter = {
                   val: el1.resources.cpu.units.val
                 },
                 attributes: el1.resources.cpu.attributes.map(el2 => ({
-                  key: omitDefault(el2.key),
-                  value: omitDefault(el2.value)
+                  key: el2.key,
+                  value: el2.value
                 }))
               },
               memory: {
@@ -188,8 +188,8 @@ export const AminoConverter = {
                   val: el1.resources.memory.quantity.val
                 },
                 attributes: el1.resources.memory.attributes.map(el2 => ({
-                  key: omitDefault(el2.key),
-                  value: omitDefault(el2.value)
+                  key: el2.key,
+                  value: el2.value
                 }))
               },
               storage: el1.resources.storage.map(el2 => ({
@@ -198,8 +198,8 @@ export const AminoConverter = {
                   val: el2.quantity.val
                 },
                 attributes: el2.attributes.map(el3 => ({
-                  key: omitDefault(el3.key),
-                  value: omitDefault(el3.value)
+                  key: el3.key,
+                  value: el3.value
                 }))
               })),
               endpoints: el1.resources.endpoints.map(el2 => ({
@@ -209,8 +209,8 @@ export const AminoConverter = {
             },
             count: el1.count,
             price: {
-              denom: omitDefault(el1.price.denom),
-              amount: omitDefault(el1.price.amount)
+              denom: el1.price.denom,
+              amount: el1.price.amount
             }
           }))
         })),
@@ -219,7 +219,7 @@ export const AminoConverter = {
           denom: deposit.denom,
           amount: Long.fromValue(deposit.amount).toString()
         },
-        depositor: depositor
+        depositor
       };
     },
     fromAmino: ({
@@ -313,7 +313,7 @@ export const AminoConverter = {
           denom: amount.denom,
           amount: Long.fromValue(amount.amount).toString()
         },
-        depositor: depositor
+        depositor
       };
     },
     fromAmino: ({

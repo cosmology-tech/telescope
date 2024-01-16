@@ -1,4 +1,4 @@
-import { AminoEncodingTestForDontOmit, AminoEncodingTestForDontOmitAmino, AminoEncodingTestForDontOmitSDKType, AminoEncodingTestForOmit, AminoEncodingTestForOmitAmino, AminoEncodingTestForOmitSDKType } from "./amino_fields";
+import { EncodingTestForDontOmit, EncodingTestForDontOmitAmino, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitAmino, EncodingTestForOmitSDKType } from "./all_fields";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
 import { GlobalDecoderRegistry } from "../registry";
@@ -8,8 +8,8 @@ export const protobufPackage = "misc";
  * on behalf of the granter with the provided expiration time.
  */
 export interface InputMsg {
-  dOTests: AminoEncodingTestForDontOmit;
-  oTests: AminoEncodingTestForOmit;
+  dOTests: EncodingTestForDontOmit;
+  oTests: EncodingTestForOmit;
 }
 export interface InputMsgProtoMsg {
   typeUrl: "/misc.InputMsg";
@@ -20,8 +20,8 @@ export interface InputMsgProtoMsg {
  * on behalf of the granter with the provided expiration time.
  */
 export interface InputMsgAmino {
-  d_o_tests: AminoEncodingTestForDontOmitAmino;
-  o_tests: AminoEncodingTestForOmitAmino;
+  d_o_tests: EncodingTestForDontOmitAmino;
+  o_tests: EncodingTestForOmitAmino;
 }
 export interface InputMsgAminoMsg {
   type: "/misc.InputMsg";
@@ -32,8 +32,8 @@ export interface InputMsgAminoMsg {
  * on behalf of the granter with the provided expiration time.
  */
 export interface InputMsgSDKType {
-  d_o_tests: AminoEncodingTestForDontOmitSDKType;
-  o_tests: AminoEncodingTestForOmitSDKType;
+  d_o_tests: EncodingTestForDontOmitSDKType;
+  o_tests: EncodingTestForOmitSDKType;
 }
 /** MsgGrantResponse defines the Msg/MsgGrant response type. */
 export interface MsgResponse {}
@@ -51,27 +51,27 @@ export interface MsgResponseAminoMsg {
 export interface MsgResponseSDKType {}
 function createBaseInputMsg(): InputMsg {
   return {
-    dOTests: AminoEncodingTestForDontOmit.fromPartial({}),
-    oTests: AminoEncodingTestForOmit.fromPartial({})
+    dOTests: EncodingTestForDontOmit.fromPartial({}),
+    oTests: EncodingTestForOmit.fromPartial({})
   };
 }
 export const InputMsg = {
   typeUrl: "/misc.InputMsg",
   is(o: any): o is InputMsg {
-    return o && (o.$typeUrl === InputMsg.typeUrl || AminoEncodingTestForDontOmit.is(o.dOTests) && AminoEncodingTestForOmit.is(o.oTests));
+    return o && (o.$typeUrl === InputMsg.typeUrl || EncodingTestForDontOmit.is(o.dOTests) && EncodingTestForOmit.is(o.oTests));
   },
   isSDK(o: any): o is InputMsgSDKType {
-    return o && (o.$typeUrl === InputMsg.typeUrl || AminoEncodingTestForDontOmit.isSDK(o.d_o_tests) && AminoEncodingTestForOmit.isSDK(o.o_tests));
+    return o && (o.$typeUrl === InputMsg.typeUrl || EncodingTestForDontOmit.isSDK(o.d_o_tests) && EncodingTestForOmit.isSDK(o.o_tests));
   },
   isAmino(o: any): o is InputMsgAmino {
-    return o && (o.$typeUrl === InputMsg.typeUrl || AminoEncodingTestForDontOmit.isAmino(o.d_o_tests) && AminoEncodingTestForOmit.isAmino(o.o_tests));
+    return o && (o.$typeUrl === InputMsg.typeUrl || EncodingTestForDontOmit.isAmino(o.d_o_tests) && EncodingTestForOmit.isAmino(o.o_tests));
   },
   encode(message: InputMsg, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.dOTests !== undefined) {
-      AminoEncodingTestForDontOmit.encode(message.dOTests, writer.uint32(10).fork()).ldelim();
+      EncodingTestForDontOmit.encode(message.dOTests, writer.uint32(10).fork()).ldelim();
     }
     if (message.oTests !== undefined) {
-      AminoEncodingTestForOmit.encode(message.oTests, writer.uint32(18).fork()).ldelim();
+      EncodingTestForOmit.encode(message.oTests, writer.uint32(18).fork()).ldelim();
     }
     return writer;
   },
@@ -83,10 +83,10 @@ export const InputMsg = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.dOTests = AminoEncodingTestForDontOmit.decode(reader, reader.uint32());
+          message.dOTests = EncodingTestForDontOmit.decode(reader, reader.uint32());
           break;
         case 2:
-          message.oTests = AminoEncodingTestForOmit.decode(reader, reader.uint32());
+          message.oTests = EncodingTestForOmit.decode(reader, reader.uint32());
           break;
         default:
           reader.skipType(tag & 7);
@@ -97,58 +97,58 @@ export const InputMsg = {
   },
   fromJSON(object: any): InputMsg {
     const obj = createBaseInputMsg();
-    if (isSet(object.dOTests)) obj.dOTests = AminoEncodingTestForDontOmit.fromJSON(object.dOTests);
-    if (isSet(object.oTests)) obj.oTests = AminoEncodingTestForOmit.fromJSON(object.oTests);
+    if (isSet(object.dOTests)) obj.dOTests = EncodingTestForDontOmit.fromJSON(object.dOTests);
+    if (isSet(object.oTests)) obj.oTests = EncodingTestForOmit.fromJSON(object.oTests);
     return obj;
   },
   toJSON(message: InputMsg): unknown {
     const obj: any = {};
-    message.dOTests !== undefined && (obj.dOTests = message.dOTests ? AminoEncodingTestForDontOmit.toJSON(message.dOTests) : undefined);
-    message.oTests !== undefined && (obj.oTests = message.oTests ? AminoEncodingTestForOmit.toJSON(message.oTests) : undefined);
+    message.dOTests !== undefined && (obj.dOTests = message.dOTests ? EncodingTestForDontOmit.toJSON(message.dOTests) : undefined);
+    message.oTests !== undefined && (obj.oTests = message.oTests ? EncodingTestForOmit.toJSON(message.oTests) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<InputMsg>): InputMsg {
     const message = createBaseInputMsg();
     if (object.dOTests !== undefined && object.dOTests !== null) {
-      message.dOTests = AminoEncodingTestForDontOmit.fromPartial(object.dOTests);
+      message.dOTests = EncodingTestForDontOmit.fromPartial(object.dOTests);
     }
     if (object.oTests !== undefined && object.oTests !== null) {
-      message.oTests = AminoEncodingTestForOmit.fromPartial(object.oTests);
+      message.oTests = EncodingTestForOmit.fromPartial(object.oTests);
     }
     return message;
   },
   fromSDK(object: InputMsgSDKType): InputMsg {
     return {
-      dOTests: object.d_o_tests ? AminoEncodingTestForDontOmit.fromSDK(object.d_o_tests) : undefined,
-      oTests: object.o_tests ? AminoEncodingTestForOmit.fromSDK(object.o_tests) : undefined
+      dOTests: object.d_o_tests ? EncodingTestForDontOmit.fromSDK(object.d_o_tests) : undefined,
+      oTests: object.o_tests ? EncodingTestForOmit.fromSDK(object.o_tests) : undefined
     };
   },
   fromSDKJSON(object: any): InputMsgSDKType {
     return {
-      d_o_tests: isSet(object.d_o_tests) ? AminoEncodingTestForDontOmit.fromSDKJSON(object.d_o_tests) : undefined,
-      o_tests: isSet(object.o_tests) ? AminoEncodingTestForOmit.fromSDKJSON(object.o_tests) : undefined
+      d_o_tests: isSet(object.d_o_tests) ? EncodingTestForDontOmit.fromSDKJSON(object.d_o_tests) : undefined,
+      o_tests: isSet(object.o_tests) ? EncodingTestForOmit.fromSDKJSON(object.o_tests) : undefined
     };
   },
   toSDK(message: InputMsg): InputMsgSDKType {
     const obj: any = {};
-    message.dOTests !== undefined && (obj.d_o_tests = message.dOTests ? AminoEncodingTestForDontOmit.toSDK(message.dOTests) : undefined);
-    message.oTests !== undefined && (obj.o_tests = message.oTests ? AminoEncodingTestForOmit.toSDK(message.oTests) : undefined);
+    message.dOTests !== undefined && (obj.d_o_tests = message.dOTests ? EncodingTestForDontOmit.toSDK(message.dOTests) : undefined);
+    message.oTests !== undefined && (obj.o_tests = message.oTests ? EncodingTestForOmit.toSDK(message.oTests) : undefined);
     return obj;
   },
   fromAmino(object: InputMsgAmino): InputMsg {
     const message = createBaseInputMsg();
     if (object.d_o_tests !== undefined && object.d_o_tests !== null) {
-      message.dOTests = AminoEncodingTestForDontOmit.fromAmino(object.d_o_tests);
+      message.dOTests = EncodingTestForDontOmit.fromAmino(object.d_o_tests);
     }
     if (object.o_tests !== undefined && object.o_tests !== null) {
-      message.oTests = AminoEncodingTestForOmit.fromAmino(object.o_tests);
+      message.oTests = EncodingTestForOmit.fromAmino(object.o_tests);
     }
     return message;
   },
   toAmino(message: InputMsg): InputMsgAmino {
     const obj: any = {};
-    obj.d_o_tests = message.dOTests ? AminoEncodingTestForDontOmit.toAmino(message.dOTests) : undefined;
-    obj.o_tests = message.oTests ? AminoEncodingTestForOmit.toAmino(message.oTests) : undefined;
+    obj.d_o_tests = message.dOTests ? EncodingTestForDontOmit.toAmino(message.dOTests) : undefined;
+    obj.o_tests = message.oTests ? EncodingTestForOmit.toAmino(message.oTests) : undefined;
     return obj;
   },
   fromAminoMsg(object: InputMsgAminoMsg): InputMsg {

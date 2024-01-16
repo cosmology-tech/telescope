@@ -1,6 +1,5 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../../helpers";
 import { MsgCreateClient, MsgCreateClientSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType } from "./tx";
 export interface MsgCreateClientAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateClient";
@@ -65,14 +64,14 @@ export const AminoConverter = {
     }: MsgCreateClient): MsgCreateClientAminoType["value"] => {
       return {
         client_state: {
-          type_url: omitDefault(clientState.typeUrl),
+          type_url: clientState.typeUrl,
           value: clientState.value
         },
         consensus_state: {
-          type_url: omitDefault(consensusState.typeUrl),
+          type_url: consensusState.typeUrl,
           value: consensusState.value
         },
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -101,12 +100,12 @@ export const AminoConverter = {
       signer
     }: MsgUpdateClient): MsgUpdateClientAminoType["value"] => {
       return {
-        client_id: omitDefault(clientId),
+        client_id: clientId,
         header: {
-          type_url: omitDefault(header.typeUrl),
+          type_url: header.typeUrl,
           value: header.value
         },
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -135,18 +134,18 @@ export const AminoConverter = {
       signer
     }: MsgUpgradeClient): MsgUpgradeClientAminoType["value"] => {
       return {
-        client_id: omitDefault(clientId),
+        client_id: clientId,
         client_state: {
-          type_url: omitDefault(clientState.typeUrl),
+          type_url: clientState.typeUrl,
           value: clientState.value
         },
         consensus_state: {
-          type_url: omitDefault(consensusState.typeUrl),
+          type_url: consensusState.typeUrl,
           value: consensusState.value
         },
         proof_upgrade_client: proofUpgradeClient,
         proof_upgrade_consensus_state: proofUpgradeConsensusState,
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -181,12 +180,12 @@ export const AminoConverter = {
       signer
     }: MsgSubmitMisbehaviour): MsgSubmitMisbehaviourAminoType["value"] => {
       return {
-        client_id: omitDefault(clientId),
+        client_id: clientId,
         misbehaviour: {
-          type_url: omitDefault(misbehaviour.typeUrl),
+          type_url: misbehaviour.typeUrl,
           value: misbehaviour.value
         },
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({

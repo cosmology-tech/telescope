@@ -2,7 +2,6 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgExecLegacyContent, MsgExecLegacyContentSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
 export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/v1/MsgSubmitProposal";
@@ -72,15 +71,15 @@ export const AminoConverter = {
     }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         messages: messages.map(el0 => ({
-          type_url: omitDefault(el0.typeUrl),
+          type_url: el0.typeUrl,
           value: el0.value
         })),
         initial_deposit: initialDeposit.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
-        proposer: omitDefault(proposer),
-        metadata: omitDefault(metadata)
+        proposer,
+        metadata
       };
     },
     fromAmino: ({
@@ -111,10 +110,10 @@ export const AminoConverter = {
     }: MsgExecLegacyContent): MsgExecLegacyContentAminoType["value"] => {
       return {
         content: {
-          type_url: omitDefault(content.typeUrl),
+          type_url: content.typeUrl,
           value: content.value
         },
-        authority: omitDefault(authority)
+        authority
       };
     },
     fromAmino: ({
@@ -140,9 +139,9 @@ export const AminoConverter = {
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         option: option,
-        metadata: omitDefault(metadata)
+        metadata
       };
     },
     fromAmino: ({
@@ -169,12 +168,12 @@ export const AminoConverter = {
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         options: options.map(el0 => ({
           option: el0.option,
-          weight: omitDefault(el0.weight)
+          weight: el0.weight
         })),
-        metadata: omitDefault(metadata)
+        metadata
       };
     },
     fromAmino: ({
@@ -203,10 +202,10 @@ export const AminoConverter = {
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        depositor: omitDefault(depositor),
+        depositor,
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

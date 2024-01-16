@@ -2,7 +2,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON } from "./gov";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, padDecimal } from "../../../helpers";
+import { omitDefault } from "../../../helpers";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgVote, MsgVoteSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgDeposit, MsgDepositSDKType } from "./tx";
 export interface MsgSubmitProposalAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgSubmitProposal";
@@ -58,14 +58,14 @@ export const AminoConverter = {
     }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         content: {
-          type_url: omitDefault(content.typeUrl),
+          type_url: content.typeUrl,
           value: content.value
         },
         initial_deposit: initialDeposit.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
-        proposer: omitDefault(proposer)
+        proposer
       };
     },
     fromAmino: ({
@@ -95,7 +95,7 @@ export const AminoConverter = {
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: omitDefault(proposalId)?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         option: option
       };
     },
@@ -120,10 +120,10 @@ export const AminoConverter = {
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         options: options.map(el0 => ({
           option: el0.option,
-          weight: padDecimal(el0.weight)
+          weight: el0.weight
         }))
       };
     },
@@ -151,10 +151,10 @@ export const AminoConverter = {
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        depositor: omitDefault(depositor),
+        depositor,
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

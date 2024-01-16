@@ -370,7 +370,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
       allowUpdateAfterMisbehaviour
     }: ClientState): ClientStateAminoType["value"] => {
       return {
-        chain_id: omitDefault(chainId),
+        chain_id: chainId,
         trust_level: {
           numerator: omitDefault(trustLevel.numerator)?.toString?.(),
           denominator: omitDefault(trustLevel.denominator)?.toString?.()
@@ -838,7 +838,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
       allowUpdateAfterMisbehaviour
     }: ClientState): ClientStateAminoType["value"] => {
       return {
-        chain_id: omitDefault(chainId),
+        chain_id: chainId,
         trust_level: {
           numerator: omitDefault(trustLevel.numerator)?.toString?.(),
           denominator: omitDefault(trustLevel.denominator)?.toString?.()

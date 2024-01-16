@@ -71,18 +71,18 @@ export const AminoConverter = {
       hotRoutes
     }: MsgSetHotRoutes): MsgSetHotRoutesAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
+        admin,
         hot_routes: hotRoutes.map(el0 => ({
           arb_routes: el0.arbRoutes.map(el1 => ({
             trades: el1.trades.map(el2 => ({
               pool: omitDefault(el2.pool)?.toString?.(),
-              token_in: omitDefault(el2.tokenIn),
-              token_out: omitDefault(el2.tokenOut)
+              token_in: el2.tokenIn,
+              token_out: el2.tokenOut
             })),
-            step_size: omitDefault(el1.stepSize)
+            step_size: el1.stepSize
           })),
-          token_in: omitDefault(el0.tokenIn),
-          token_out: omitDefault(el0.tokenOut)
+          token_in: el0.tokenIn,
+          token_out: el0.tokenOut
         }))
       };
     },
@@ -114,8 +114,8 @@ export const AminoConverter = {
       developerAccount
     }: MsgSetDeveloperAccount): MsgSetDeveloperAccountAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
-        developer_account: omitDefault(developerAccount)
+        admin,
+        developer_account: developerAccount
       };
     },
     fromAmino: ({
@@ -135,7 +135,7 @@ export const AminoConverter = {
       maxPoolPointsPerTx
     }: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
+        admin,
         max_pool_points_per_tx: omitDefault(maxPoolPointsPerTx)?.toString?.()
       };
     },
@@ -156,7 +156,7 @@ export const AminoConverter = {
       maxPoolPointsPerBlock
     }: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
+        admin,
         max_pool_points_per_block: omitDefault(maxPoolPointsPerBlock)?.toString?.()
       };
     },
@@ -177,7 +177,7 @@ export const AminoConverter = {
       poolWeights
     }: MsgSetPoolWeights): MsgSetPoolWeightsAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
+        admin,
         pool_weights: {
           stable_weight: omitDefault(poolWeights.stableWeight)?.toString?.(),
           balancer_weight: omitDefault(poolWeights.balancerWeight)?.toString?.(),
@@ -206,10 +206,10 @@ export const AminoConverter = {
       baseDenoms
     }: MsgSetBaseDenoms): MsgSetBaseDenomsAminoType["value"] => {
       return {
-        admin: omitDefault(admin),
+        admin,
         base_denoms: baseDenoms.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          step_size: omitDefault(el0.stepSize)
+          denom: el0.denom,
+          step_size: el0.stepSize
         }))
       };
     },

@@ -4,7 +4,6 @@ import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCloseBid, MsgCloseBidSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCloseLease, MsgCloseLeaseSDKType } from "./lease";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 export interface MsgCreateBidAminoType extends AminoMsg {
   type: "akash/market/v1beta2/testonly-create-bid";
   value: {
@@ -89,10 +88,10 @@ export const AminoConverter = {
           gseq: order.gseq,
           oseq: order.oseq
         },
-        provider: provider,
+        provider,
         price: {
-          denom: omitDefault(price.denom),
-          amount: omitDefault(price.amount)
+          denom: price.denom,
+          amount: price.amount
         },
         deposit: {
           denom: deposit.denom,

@@ -11,14 +11,14 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
     }: MsgSubmitProposal): MsgSubmitProposalAminoType["value"] => {
       return {
         content: {
-          type_url: omitDefault(content.typeUrl),
+          type_url: content.typeUrl,
           value: content.value
         },
         initial_deposit: initialDeposit.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
-        proposer: omitDefault(proposer)
+        proposer
       };
     },
     fromAmino: ({
@@ -48,7 +48,7 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
         proposal_id: omitDefault(proposalId)?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         option: option
       };
     },
@@ -73,10 +73,10 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        voter: omitDefault(voter),
+        voter,
         options: options.map(el0 => ({
           option: el0.option,
-          weight: padDecimal(el0.weight)
+          weight: el0.weight
         }))
       };
     },
@@ -104,10 +104,10 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
         proposal_id: proposalId?.toString?.(),
-        depositor: omitDefault(depositor),
+        depositor,
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },

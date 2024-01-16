@@ -1,7 +1,7 @@
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial, padDecimal } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /** Params defines the set of params for the distribution module. */
 export interface Params {
@@ -386,9 +386,9 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.community_tax = padDecimal(message.communityTax) === "" ? undefined : padDecimal(message.communityTax);
-    obj.base_proposer_reward = padDecimal(message.baseProposerReward) === "" ? undefined : padDecimal(message.baseProposerReward);
-    obj.bonus_proposer_reward = padDecimal(message.bonusProposerReward) === "" ? undefined : padDecimal(message.bonusProposerReward);
+    obj.community_tax = message.communityTax === "" ? undefined : message.communityTax;
+    obj.base_proposer_reward = message.baseProposerReward === "" ? undefined : message.baseProposerReward;
+    obj.bonus_proposer_reward = message.bonusProposerReward === "" ? undefined : message.bonusProposerReward;
     obj.withdraw_addr_enabled = message.withdrawAddrEnabled === false ? undefined : message.withdrawAddrEnabled;
     return obj;
   },
@@ -950,7 +950,7 @@ export const ValidatorSlashEvent = {
   toAmino(message: ValidatorSlashEvent): ValidatorSlashEventAmino {
     const obj: any = {};
     obj.validator_period = message.validatorPeriod ? message.validatorPeriod.toString() : undefined;
-    obj.fraction = padDecimal(message.fraction) === "" ? undefined : padDecimal(message.fraction);
+    obj.fraction = message.fraction === "" ? undefined : message.fraction;
     return obj;
   },
   fromAminoMsg(object: ValidatorSlashEventAminoMsg): ValidatorSlashEvent {
@@ -1440,7 +1440,7 @@ export const DelegatorStartingInfo = {
   toAmino(message: DelegatorStartingInfo): DelegatorStartingInfoAmino {
     const obj: any = {};
     obj.previous_period = message.previousPeriod ? message.previousPeriod.toString() : undefined;
-    obj.stake = padDecimal(message.stake) === "" ? undefined : padDecimal(message.stake);
+    obj.stake = message.stake === "" ? undefined : message.stake;
     obj.height = message.height ? message.height.toString() : "0";
     return obj;
   },

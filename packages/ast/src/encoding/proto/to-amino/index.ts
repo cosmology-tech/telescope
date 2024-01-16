@@ -40,7 +40,7 @@ export const toAminoJSONMethodFields = (context: ProtoParseContext, name: string
         if (field.rule === 'repeated') {
             switch (field.type) {
                 case 'string':
-                    return [...m, toAminoJSON.array(args, arrayTypes.string())];
+                    return [...m, toAminoJSON.array(args, arrayTypes.string(args))];
                 case 'bytes':
                     return [...m, toAminoJSON.array(args, arrayTypes.bytes(args))];
                 case 'bool':

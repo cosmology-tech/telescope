@@ -3,7 +3,6 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { AminoMsg, Pubkey } from "@cosmjs/amino";
-import { omitDefault, padDecimal } from "../../../helpers";
 import { decodePubkey, encodePubkey } from "@cosmjs/proto-signing";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgDelegate, MsgDelegateSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgUndelegate, MsgUndelegateSDKType } from "./tx";
 export interface MsgCreateValidatorAminoType extends AminoMsg {
@@ -94,20 +93,20 @@ export const AminoConverter = {
     }: MsgCreateValidator): MsgCreateValidatorAminoType["value"] => {
       return {
         description: {
-          moniker: omitDefault(description.moniker),
-          identity: omitDefault(description.identity),
-          website: omitDefault(description.website),
-          security_contact: omitDefault(description.securityContact),
-          details: omitDefault(description.details)
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          security_contact: description.securityContact,
+          details: description.details
         },
         commission: {
-          rate: padDecimal(commission.rate),
-          max_rate: padDecimal(commission.maxRate),
-          max_change_rate: padDecimal(commission.maxChangeRate)
+          rate: commission.rate,
+          max_rate: commission.maxRate,
+          max_change_rate: commission.maxChangeRate
         },
-        min_self_delegation: omitDefault(minSelfDelegation),
-        delegator_address: omitDefault(delegatorAddress),
-        validator_address: omitDefault(validatorAddress),
+        min_self_delegation: minSelfDelegation,
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
         pubkey: decodePubkey(pubkey)!,
         value: {
           denom: value.denom,
@@ -158,15 +157,15 @@ export const AminoConverter = {
     }: MsgEditValidator): MsgEditValidatorAminoType["value"] => {
       return {
         description: {
-          moniker: omitDefault(description.moniker),
-          identity: omitDefault(description.identity),
-          website: omitDefault(description.website),
-          security_contact: omitDefault(description.securityContact),
-          details: omitDefault(description.details)
+          moniker: description.moniker,
+          identity: description.identity,
+          website: description.website,
+          security_contact: description.securityContact,
+          details: description.details
         },
-        validator_address: omitDefault(validatorAddress),
-        commission_rate: padDecimal(commissionRate),
-        min_self_delegation: omitDefault(minSelfDelegation)
+        validator_address: validatorAddress,
+        commission_rate: commissionRate,
+        min_self_delegation: minSelfDelegation
       };
     },
     fromAmino: ({
@@ -197,8 +196,8 @@ export const AminoConverter = {
       amount
     }: MsgDelegate): MsgDelegateAminoType["value"] => {
       return {
-        delegator_address: omitDefault(delegatorAddress),
-        validator_address: omitDefault(validatorAddress),
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
         amount: {
           denom: amount.denom,
           amount: amount.amount
@@ -229,9 +228,9 @@ export const AminoConverter = {
       amount
     }: MsgBeginRedelegate): MsgBeginRedelegateAminoType["value"] => {
       return {
-        delegator_address: omitDefault(delegatorAddress),
-        validator_src_address: omitDefault(validatorSrcAddress),
-        validator_dst_address: omitDefault(validatorDstAddress),
+        delegator_address: delegatorAddress,
+        validator_src_address: validatorSrcAddress,
+        validator_dst_address: validatorDstAddress,
         amount: {
           denom: amount.denom,
           amount: amount.amount
@@ -263,8 +262,8 @@ export const AminoConverter = {
       amount
     }: MsgUndelegate): MsgUndelegateAminoType["value"] => {
       return {
-        delegator_address: omitDefault(delegatorAddress),
-        validator_address: omitDefault(validatorAddress),
+        delegator_address: delegatorAddress,
+        validator_address: validatorAddress,
         amount: {
           denom: amount.denom,
           amount: amount.amount

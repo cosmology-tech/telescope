@@ -9,13 +9,13 @@ exports[`cosmology/example/c AminoConverter 1`] = `
       awesome
     }: MsgTypePackageC): MsgTypePackageCAminoType["value"] => {
       return {
-        address: omitDefault(address),
+        address,
         awesome: {
-          address: omitDefault(awesome.address),
+          address: awesome.address,
           myYolo0: awesome.myYolo0,
           anotherField: {
             myType: {
-              address: omitDefault(awesome.anotherField.myType.address),
+              address: awesome.anotherField.myType.address,
               someCoolField: awesome.anotherField.myType.someCoolField,
               otherField: awesome.anotherField.myType.otherField
             }

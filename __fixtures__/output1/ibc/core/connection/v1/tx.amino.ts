@@ -94,20 +94,20 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenInit): MsgConnectionOpenInitAminoType["value"] => {
       return {
-        client_id: omitDefault(clientId),
+        client_id: clientId,
         counterparty: {
-          client_id: omitDefault(counterparty.clientId),
-          connection_id: omitDefault(counterparty.connectionId),
+          client_id: counterparty.clientId,
+          connection_id: counterparty.connectionId,
           prefix: {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
         version: {
-          identifier: omitDefault(version.identifier),
+          identifier: version.identifier,
           features: version.features
         },
         delay_period: omitDefault(delayPeriod)?.toString?.(),
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -152,22 +152,22 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenTry): MsgConnectionOpenTryAminoType["value"] => {
       return {
-        client_id: omitDefault(clientId),
-        previous_connection_id: omitDefault(previousConnectionId),
+        client_id: clientId,
+        previous_connection_id: previousConnectionId,
         client_state: {
-          type_url: omitDefault(clientState.typeUrl),
+          type_url: clientState.typeUrl,
           value: clientState.value
         },
         counterparty: {
-          client_id: omitDefault(counterparty.clientId),
-          connection_id: omitDefault(counterparty.connectionId),
+          client_id: counterparty.clientId,
+          connection_id: counterparty.connectionId,
           prefix: {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
         delay_period: omitDefault(delayPeriod)?.toString?.(),
         counterparty_versions: counterpartyVersions.map(el0 => ({
-          identifier: omitDefault(el0.identifier),
+          identifier: el0.identifier,
           features: el0.features
         })),
         proof_height: proofHeight ? {
@@ -181,7 +181,7 @@ export const AminoConverter = {
           revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
         } : {},
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -247,14 +247,14 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenAck): MsgConnectionOpenAckAminoType["value"] => {
       return {
-        connection_id: omitDefault(connectionId),
-        counterparty_connection_id: omitDefault(counterpartyConnectionId),
+        connection_id: connectionId,
+        counterparty_connection_id: counterpartyConnectionId,
         version: {
-          identifier: omitDefault(version.identifier),
+          identifier: version.identifier,
           features: version.features
         },
         client_state: {
-          type_url: omitDefault(clientState.typeUrl),
+          type_url: clientState.typeUrl,
           value: clientState.value
         },
         proof_height: proofHeight ? {
@@ -268,7 +268,7 @@ export const AminoConverter = {
           revision_height: omitDefault(consensusHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(consensusHeight.revisionNumber)?.toString()
         } : {},
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({
@@ -318,13 +318,13 @@ export const AminoConverter = {
       signer
     }: MsgConnectionOpenConfirm): MsgConnectionOpenConfirmAminoType["value"] => {
       return {
-        connection_id: omitDefault(connectionId),
+        connection_id: connectionId,
         proof_ack: proofAck,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        signer: omitDefault(signer)
+        signer
       };
     },
     fromAmino: ({

@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { BILLION, memberExpressionOrIdentifier, TypeLong } from "../../../utils";
+import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } from "../../../utils";
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getFieldOptionality, getOneOfs } from '../../proto';
@@ -29,8 +29,40 @@ export const toAmino = {
         )
     },
 
-    string(args: ToAminoParseField, omitEmpty?: boolean)
-    {
+    string(args: ToAminoParseField, omitEmpty?: boolean) {
+        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+
+        if(useCosmosSDKDec){
+          const isCosmosSDKDec =
+              (args.field.options?.['(gogoproto.customtype)'] ==
+                  'github.com/cosmos/cosmos-sdk/types.Dec') ||
+              (args.field.options?.['(gogoproto.customtype)'] ==
+                  'cosmossdk.io/math.LegacyDec');
+
+          if (isCosmosSDKDec) {
+              args.context.addUtil('padDecimal');
+              return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)),
+                  t.callExpression(
+                      t.identifier('padDecimal'),
+                      [
+                          memberExpressionOrIdentifier(args.scope)
+                      ]
+                  )
+              )
+          }
+        }
+
+        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+          return shorthandProperty(args.field.name);
+        }
+
+        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
+    },
+
+    stringArray(args: ToAminoParseField) {
+      const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+
+      if(useCosmosSDKDec){
         const isCosmosSDKDec =
             (args.field.options?.['(gogoproto.customtype)'] ==
                 'github.com/cosmos/cosmos-sdk/types.Dec') ||
@@ -38,33 +70,15 @@ export const toAmino = {
                 'cosmossdk.io/math.LegacyDec');
 
         if (isCosmosSDKDec) {
-            args.context.addUtil('padDecimal');
-            return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)),
-                t.callExpression(
-                    t.identifier('padDecimal'),
-                    [
-                        memberExpressionOrIdentifier(args.scope)
-                    ]
-                )
-            )
+          return toAmino.scalarArray(args, arrayTypes.stringDec)
         }
+      }
 
-        let valueExpr = omitEmpty ?
-            this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
-            memberExpressionOrIdentifier(args.scope);
+      if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+        return shorthandProperty(args.field.name);
+      }
 
-        return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), valueExpr)
-    },
-
-    omitDefaultMemberExpressionOrIdentifier(args: ToAminoParseField, names)
-    {
-        args.context.addUtil('omitDefault');
-        return t.callExpression(
-            t.identifier('omitDefault'),
-            [
-                memberExpressionOrIdentifier(names)
-            ]
-        );
+      return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
     rawBytes(args: ToAminoParseField) {
@@ -376,7 +390,7 @@ export const toAmino = {
                     [
                         t.identifier(variable)
                     ],
-                    arrayTypeAstFunc(variable)
+                    arrayTypeAstFunc(variable, { context, field, currentProtoPath, scope, nested, isOptional })
                 )
             ]
         );
@@ -401,7 +415,16 @@ export const toAmino = {
             ),
         )
 
-    }
+    },
+    omitDefaultMemberExpressionOrIdentifier(args: ToAminoParseField, names) {
+        args.context.addUtil('omitDefault');
+        return t.callExpression(
+            t.identifier('omitDefault'),
+            [
+                memberExpressionOrIdentifier(names)
+            ]
+        );
+    },
 };
 
 export const arrayTypes = {
@@ -410,5 +433,15 @@ export const arrayTypes = {
             t.memberExpression(memberExpressionOrIdentifier([varname]), t.identifier('toString')),
             []
         )
+    },
+
+    stringDec(varname: string, args: ToAminoParseField) {
+      args.context.addUtil('padDecimal');
+      return t.callExpression(
+        t.identifier('padDecimal'),
+        [
+            memberExpressionOrIdentifier([varname])
+        ]
+      )
     }
 }

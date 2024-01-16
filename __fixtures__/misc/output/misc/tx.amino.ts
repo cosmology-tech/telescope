@@ -1,4 +1,4 @@
-import { AminoEncodingTestForDontOmit, AminoEncodingTestForDontOmitSDKType, AminoEncodingTestForOmit, AminoEncodingTestForOmitSDKType } from "./amino_fields";
+import { EncodingTestForDontOmit, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitSDKType } from "./all_fields";
 import { InputMsg, InputMsgSDKType } from "./tx";
 export const AminoConverter = {
   "/misc.InputMsg": {

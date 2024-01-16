@@ -53,11 +53,11 @@ export const AminoConverter = {
       delayed
     }: MsgCreateVestingAccount): MsgCreateVestingAccountAminoType["value"] => {
       return {
-        from_address: omitDefault(fromAddress),
-        to_address: omitDefault(toAddress),
+        from_address: fromAddress,
+        to_address: toAddress,
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         })),
         end_time: omitDefault(endTime)?.toString?.(),
         delayed: omitDefault(delayed)
@@ -90,11 +90,11 @@ export const AminoConverter = {
       amount
     }: MsgCreatePermanentLockedAccount): MsgCreatePermanentLockedAccountAminoType["value"] => {
       return {
-        from_address: omitDefault(fromAddress),
-        to_address: omitDefault(toAddress),
+        from_address: fromAddress,
+        to_address: toAddress,
         amount: amount.map(el0 => ({
-          denom: omitDefault(el0.denom),
-          amount: omitDefault(el0.amount)
+          denom: el0.denom,
+          amount: el0.amount
         }))
       };
     },
@@ -122,14 +122,14 @@ export const AminoConverter = {
       vestingPeriods
     }: MsgCreatePeriodicVestingAccount): MsgCreatePeriodicVestingAccountAminoType["value"] => {
       return {
-        from_address: omitDefault(fromAddress),
-        to_address: omitDefault(toAddress),
+        from_address: fromAddress,
+        to_address: toAddress,
         start_time: omitDefault(startTime)?.toString?.(),
         vesting_periods: vestingPeriods.map(el0 => ({
           length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
-            denom: omitDefault(el1.denom),
-            amount: omitDefault(el1.amount)
+            denom: el1.denom,
+            amount: el1.amount
           }))
         }))
       };

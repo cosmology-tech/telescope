@@ -47,21 +47,21 @@ export const AminoConverter = {
       merge
     }: MsgCreateClawbackVestingAccount): MsgCreateClawbackVestingAccountAminoType["value"] => {
       return {
-        from_address: omitDefault(fromAddress),
-        to_address: omitDefault(toAddress),
+        from_address: fromAddress,
+        to_address: toAddress,
         start_time: startTime,
         lockup_periods: lockupPeriods.map(el0 => ({
           length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
-            denom: omitDefault(el1.denom),
-            amount: omitDefault(el1.amount)
+            denom: el1.denom,
+            amount: el1.amount
           }))
         })),
         vesting_periods: vestingPeriods.map(el0 => ({
           length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
-            denom: omitDefault(el1.denom),
-            amount: omitDefault(el1.amount)
+            denom: el1.denom,
+            amount: el1.amount
           }))
         })),
         merge: omitDefault(merge)
@@ -105,9 +105,9 @@ export const AminoConverter = {
       destAddress
     }: MsgClawback): MsgClawbackAminoType["value"] => {
       return {
-        funder_address: omitDefault(funderAddress),
-        account_address: omitDefault(accountAddress),
-        dest_address: omitDefault(destAddress)
+        funder_address: funderAddress,
+        account_address: accountAddress,
+        dest_address: destAddress
       };
     },
     fromAmino: ({

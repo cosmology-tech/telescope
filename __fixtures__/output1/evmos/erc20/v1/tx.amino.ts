@@ -1,6 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long, omitDefault } from "../../../helpers";
+import { Long } from "../../../helpers";
 import { MsgConvertCoin, MsgConvertCoinSDKType, MsgConvertERC20, MsgConvertERC20SDKType } from "./tx";
 export interface MsgConvertCoinAminoType extends AminoMsg {
   type: "/evmos.erc20.v1.MsgConvertCoin";
@@ -35,8 +35,8 @@ export const AminoConverter = {
           denom: coin.denom,
           amount: Long.fromValue(coin.amount).toString()
         },
-        receiver: omitDefault(receiver),
-        sender: omitDefault(sender)
+        receiver,
+        sender
       };
     },
     fromAmino: ({
@@ -63,10 +63,10 @@ export const AminoConverter = {
       sender
     }: MsgConvertERC20): MsgConvertERC20AminoType["value"] => {
       return {
-        contract_address: omitDefault(contractAddress),
-        amount: omitDefault(amount),
-        receiver: omitDefault(receiver),
-        sender: omitDefault(sender)
+        contract_address: contractAddress,
+        amount,
+        receiver,
+        sender
       };
     },
     fromAmino: ({
