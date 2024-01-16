@@ -2,6 +2,7 @@ import { EncodingTestForDontOmit, EncodingTestForDontOmitSDKType, EncodingTestFo
 import { AminoMsg, Pubkey } from "@cosmjs/amino";
 import { fromUtf8, toBase64, toUtf8, fromBase64 } from "@cosmjs/encoding";
 import { decodePubkey, encodePubkey } from "@cosmjs/proto-signing";
+import { padDecimal } from "../helpers";
 import { AccessConfig, AccessConfigSDKType, voteOptionFromJSON } from "./eval_request";
 import { Any, AnySDKType } from "../google/protobuf/any";
 import { Duration, DurationSDKType } from "../google/protobuf/duration";
@@ -86,6 +87,10 @@ export interface InputMsgAminoType extends AminoMsg {
         type_url: string;
         value: Uint8Array;
       }[];
+      dec: string;
+      d_o_dec: string;
+      decs: string[];
+      d_o_decs: string[];
     };
     o_tests: {
       str: string;
@@ -164,6 +169,10 @@ export interface InputMsgAminoType extends AminoMsg {
         type_url: string;
         value: Uint8Array;
       }[];
+      dec: string;
+      o_dec: string;
+      decs: string[];
+      o_decs: string[];
     };
   };
 }
@@ -245,7 +254,11 @@ export const AminoConverter = {
           d_o_auths: dOTests.dOAuths.map(el0 => ({
             type_url: el0.typeUrl,
             value: el0.value
-          }))
+          })),
+          dec: padDecimal(dOTests.dec),
+          d_o_dec: padDecimal(dOTests.dODec),
+          decs: dOTests.decs.map(el0 => padDecimal(el0)),
+          d_o_decs: dOTests.dODecs.map(el0 => padDecimal(el0))
         },
         o_tests: {
           str: oTests.str,
@@ -317,7 +330,11 @@ export const AminoConverter = {
           o_auths: oTests.oAuths.map(el0 => ({
             type_url: el0.typeUrl,
             value: el0.value
-          }))
+          })),
+          dec: padDecimal(oTests.dec),
+          o_dec: padDecimal(oTests.oDec),
+          decs: oTests.decs.map(el0 => padDecimal(el0)),
+          o_decs: oTests.oDecs.map(el0 => padDecimal(el0))
         }
       };
     },
@@ -402,7 +419,11 @@ export const AminoConverter = {
           dOAuths: d_o_tests.d_o_auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
-          }))
+          })),
+          dec: d_o_tests.dec,
+          dODec: d_o_tests.d_o_dec,
+          decs: d_o_tests.decs,
+          dODecs: d_o_tests.d_o_decs
         },
         oTests: {
           str: o_tests.str,
@@ -480,7 +501,11 @@ export const AminoConverter = {
           oAuths: o_tests.o_auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
-          }))
+          })),
+          dec: o_tests.dec,
+          oDec: o_tests.o_dec,
+          decs: o_tests.decs,
+          oDecs: o_tests.o_decs
         }
       };
     }

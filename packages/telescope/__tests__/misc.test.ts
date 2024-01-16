@@ -184,6 +184,9 @@ describe("misc", () => {
         aminoEncoding: {
           enabled: true,
           useLegacyInlineEncoding: true,
+          customTypes: {
+            useCosmosSDKDec: true,
+          },
         },
       }),
     });

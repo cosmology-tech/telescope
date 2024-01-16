@@ -4,6 +4,7 @@ import { Duration, DurationAmino, DurationSDKType } from "../google/protobuf/dur
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/timestamp";
 import { isSet, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
 import { BinaryReader, BinaryWriter } from "../binary";
+import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 import { GlobalDecoderRegistry } from "../registry";
@@ -73,6 +74,12 @@ export interface EncodingTestForDontOmit {
   /** array anyType */
   auths: (GenericAuthorization | Any)[] | Any[];
   dOAuths: (GenericAuthorization | Any)[] | Any[];
+  /** dec */
+  dec: string;
+  dODec: string;
+  /** array dec */
+  decs: string[];
+  dODecs: string[];
 }
 export interface EncodingTestForDontOmitProtoMsg {
   typeUrl: "/misc.EncodingTestForDontOmit";
@@ -151,6 +158,12 @@ export interface EncodingTestForDontOmitAmino {
   /** array anyType */
   auths: AnyAmino[];
   d_o_auths: AnyAmino[];
+  /** dec */
+  dec: string;
+  d_o_dec: string;
+  /** array dec */
+  decs: string[];
+  d_o_decs: string[];
 }
 export interface EncodingTestForDontOmitAminoMsg {
   type: "/misc.EncodingTestForDontOmit";
@@ -201,6 +214,10 @@ export interface EncodingTestForDontOmitSDKType {
   d_o_protos: AccessConfigSDKType[];
   auths: (GenericAuthorizationSDKType | AnySDKType)[];
   d_o_auths: (GenericAuthorizationSDKType | AnySDKType)[];
+  dec: string;
+  d_o_dec: string;
+  decs: string[];
+  d_o_decs: string[];
 }
 export interface EncodingTestForOmit {
   /** scalar */
@@ -267,6 +284,12 @@ export interface EncodingTestForOmit {
   /** array anyType */
   auths: (GenericAuthorization | Any)[] | Any[];
   oAuths: (GenericAuthorization | Any)[] | Any[];
+  /** dec */
+  dec: string;
+  oDec: string;
+  /** array dec */
+  decs: string[];
+  oDecs: string[];
 }
 export interface EncodingTestForOmitProtoMsg {
   typeUrl: "/misc.EncodingTestForOmit";
@@ -345,6 +368,12 @@ export interface EncodingTestForOmitAmino {
   /** array anyType */
   auths: AnyAmino[];
   o_auths: AnyAmino[];
+  /** dec */
+  dec: string;
+  o_dec: string;
+  /** array dec */
+  decs: string[];
+  o_decs: string[];
 }
 export interface EncodingTestForOmitAminoMsg {
   type: "/misc.EncodingTestForOmit";
@@ -395,6 +424,10 @@ export interface EncodingTestForOmitSDKType {
   o_protos: AccessConfigSDKType[];
   auths: (GenericAuthorizationSDKType | AnySDKType)[];
   o_auths: (GenericAuthorizationSDKType | AnySDKType)[];
+  dec: string;
+  o_dec: string;
+  decs: string[];
+  o_decs: string[];
 }
 function createBaseEncodingTestForDontOmit(): EncodingTestForDontOmit {
   return {
@@ -441,19 +474,23 @@ function createBaseEncodingTestForDontOmit(): EncodingTestForDontOmit {
     protos: [],
     dOProtos: [],
     auths: [],
-    dOAuths: []
+    dOAuths: [],
+    dec: "",
+    dODec: "",
+    decs: [],
+    dODecs: []
   };
 }
 export const EncodingTestForDontOmit = {
   typeUrl: "/misc.EncodingTestForDontOmit",
   is(o: any): o is EncodingTestForDontOmit {
-    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.dOStr === "string" && typeof o.b === "boolean" && typeof o.dOB === "boolean" && typeof o.num === "number" && typeof o.dONum === "number" && typeof o.big === "bigint" && typeof o.dOBig === "bigint" && AccessConfig.is(o.dOProto) && (GenericAuthorization.is(o.dOAuth) || Any.is(o.dOAuth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.dOSalt instanceof Uint8Array || typeof o.dOSalt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.dORaw instanceof Uint8Array || typeof o.dORaw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.dOWasm instanceof Uint8Array || typeof o.dOWasm === "string") && isSet(o.opt) && isSet(o.dOOpt) && Duration.is(o.dOPeriod) && Timestamp.is(o.dODate) && Any.is(o.dOPubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.dONums) && (!o.dONums.length || typeof o.dONums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.dOBigs) && (!o.dOBigs.length || typeof o.dOBigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.dOSalts) && (!o.dOSalts.length || o.dOSalts[0] instanceof Uint8Array || typeof o.dOSalts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.dORaws) && (!o.dORaws.length || o.dORaws[0] instanceof Uint8Array || typeof o.dORaws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.dOWasms) && (!o.dOWasms.length || o.dOWasms[0] instanceof Uint8Array || typeof o.dOWasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.dOOpts) && Array.isArray(o.periods) && (!o.periods.length || Duration.is(o.periods[0])) && Array.isArray(o.dOPeriods) && (!o.dOPeriods.length || Duration.is(o.dOPeriods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.is(o.protos[0])) && Array.isArray(o.dOProtos) && (!o.dOProtos.length || AccessConfig.is(o.dOProtos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.is(o.auths[0]) || Any.is(o.auths[0])) && Array.isArray(o.dOAuths) && (!o.dOAuths.length || GenericAuthorization.is(o.dOAuths[0]) || Any.is(o.dOAuths[0])));
+    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.dOStr === "string" && typeof o.b === "boolean" && typeof o.dOB === "boolean" && typeof o.num === "number" && typeof o.dONum === "number" && typeof o.big === "bigint" && typeof o.dOBig === "bigint" && AccessConfig.is(o.dOProto) && (GenericAuthorization.is(o.dOAuth) || Any.is(o.dOAuth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.dOSalt instanceof Uint8Array || typeof o.dOSalt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.dORaw instanceof Uint8Array || typeof o.dORaw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.dOWasm instanceof Uint8Array || typeof o.dOWasm === "string") && isSet(o.opt) && isSet(o.dOOpt) && Duration.is(o.dOPeriod) && Timestamp.is(o.dODate) && Any.is(o.dOPubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.dONums) && (!o.dONums.length || typeof o.dONums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.dOBigs) && (!o.dOBigs.length || typeof o.dOBigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.dOSalts) && (!o.dOSalts.length || o.dOSalts[0] instanceof Uint8Array || typeof o.dOSalts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.dORaws) && (!o.dORaws.length || o.dORaws[0] instanceof Uint8Array || typeof o.dORaws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.dOWasms) && (!o.dOWasms.length || o.dOWasms[0] instanceof Uint8Array || typeof o.dOWasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.dOOpts) && Array.isArray(o.periods) && (!o.periods.length || Duration.is(o.periods[0])) && Array.isArray(o.dOPeriods) && (!o.dOPeriods.length || Duration.is(o.dOPeriods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.is(o.protos[0])) && Array.isArray(o.dOProtos) && (!o.dOProtos.length || AccessConfig.is(o.dOProtos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.is(o.auths[0]) || Any.is(o.auths[0])) && Array.isArray(o.dOAuths) && (!o.dOAuths.length || GenericAuthorization.is(o.dOAuths[0]) || Any.is(o.dOAuths[0])) && typeof o.dec === "string" && typeof o.dODec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.dODecs) && (!o.dODecs.length || typeof o.dODecs[0] === "string"));
   },
   isSDK(o: any): o is EncodingTestForDontOmitSDKType {
-    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.d_o_str === "string" && typeof o.b === "boolean" && typeof o.d_o_b === "boolean" && typeof o.num === "number" && typeof o.d_o_num === "number" && typeof o.big === "bigint" && typeof o.d_o_big === "bigint" && AccessConfig.isSDK(o.d_o_proto) && (GenericAuthorization.isSDK(o.d_o_auth) || Any.isSDK(o.d_o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.d_o_salt instanceof Uint8Array || typeof o.d_o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.d_o_raw instanceof Uint8Array || typeof o.d_o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.d_o_wasm instanceof Uint8Array || typeof o.d_o_wasm === "string") && isSet(o.opt) && isSet(o.d_o_opt) && Duration.isSDK(o.d_o_period) && Timestamp.isSDK(o.d_o_date) && Any.isSDK(o.d_o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.d_o_nums) && (!o.d_o_nums.length || typeof o.d_o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.d_o_bigs) && (!o.d_o_bigs.length || typeof o.d_o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.d_o_salts) && (!o.d_o_salts.length || o.d_o_salts[0] instanceof Uint8Array || typeof o.d_o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.d_o_raws) && (!o.d_o_raws.length || o.d_o_raws[0] instanceof Uint8Array || typeof o.d_o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.d_o_wasms) && (!o.d_o_wasms.length || o.d_o_wasms[0] instanceof Uint8Array || typeof o.d_o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.d_o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isSDK(o.periods[0])) && Array.isArray(o.d_o_periods) && (!o.d_o_periods.length || Duration.isSDK(o.d_o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isSDK(o.protos[0])) && Array.isArray(o.d_o_protos) && (!o.d_o_protos.length || AccessConfig.isSDK(o.d_o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isSDK(o.auths[0]) || Any.isSDK(o.auths[0])) && Array.isArray(o.d_o_auths) && (!o.d_o_auths.length || GenericAuthorization.isSDK(o.d_o_auths[0]) || Any.isSDK(o.d_o_auths[0])));
+    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.d_o_str === "string" && typeof o.b === "boolean" && typeof o.d_o_b === "boolean" && typeof o.num === "number" && typeof o.d_o_num === "number" && typeof o.big === "bigint" && typeof o.d_o_big === "bigint" && AccessConfig.isSDK(o.d_o_proto) && (GenericAuthorization.isSDK(o.d_o_auth) || Any.isSDK(o.d_o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.d_o_salt instanceof Uint8Array || typeof o.d_o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.d_o_raw instanceof Uint8Array || typeof o.d_o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.d_o_wasm instanceof Uint8Array || typeof o.d_o_wasm === "string") && isSet(o.opt) && isSet(o.d_o_opt) && Duration.isSDK(o.d_o_period) && Timestamp.isSDK(o.d_o_date) && Any.isSDK(o.d_o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.d_o_nums) && (!o.d_o_nums.length || typeof o.d_o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.d_o_bigs) && (!o.d_o_bigs.length || typeof o.d_o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.d_o_salts) && (!o.d_o_salts.length || o.d_o_salts[0] instanceof Uint8Array || typeof o.d_o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.d_o_raws) && (!o.d_o_raws.length || o.d_o_raws[0] instanceof Uint8Array || typeof o.d_o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.d_o_wasms) && (!o.d_o_wasms.length || o.d_o_wasms[0] instanceof Uint8Array || typeof o.d_o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.d_o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isSDK(o.periods[0])) && Array.isArray(o.d_o_periods) && (!o.d_o_periods.length || Duration.isSDK(o.d_o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isSDK(o.protos[0])) && Array.isArray(o.d_o_protos) && (!o.d_o_protos.length || AccessConfig.isSDK(o.d_o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isSDK(o.auths[0]) || Any.isSDK(o.auths[0])) && Array.isArray(o.d_o_auths) && (!o.d_o_auths.length || GenericAuthorization.isSDK(o.d_o_auths[0]) || Any.isSDK(o.d_o_auths[0])) && typeof o.dec === "string" && typeof o.d_o_dec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.d_o_decs) && (!o.d_o_decs.length || typeof o.d_o_decs[0] === "string"));
   },
   isAmino(o: any): o is EncodingTestForDontOmitAmino {
-    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.d_o_str === "string" && typeof o.b === "boolean" && typeof o.d_o_b === "boolean" && typeof o.num === "number" && typeof o.d_o_num === "number" && typeof o.big === "bigint" && typeof o.d_o_big === "bigint" && AccessConfig.isAmino(o.d_o_proto) && (GenericAuthorization.isAmino(o.d_o_auth) || Any.isAmino(o.d_o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.d_o_salt instanceof Uint8Array || typeof o.d_o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.d_o_raw instanceof Uint8Array || typeof o.d_o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.d_o_wasm instanceof Uint8Array || typeof o.d_o_wasm === "string") && isSet(o.opt) && isSet(o.d_o_opt) && Duration.isAmino(o.d_o_period) && Timestamp.isAmino(o.d_o_date) && Any.isAmino(o.d_o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.d_o_nums) && (!o.d_o_nums.length || typeof o.d_o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.d_o_bigs) && (!o.d_o_bigs.length || typeof o.d_o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.d_o_salts) && (!o.d_o_salts.length || o.d_o_salts[0] instanceof Uint8Array || typeof o.d_o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.d_o_raws) && (!o.d_o_raws.length || o.d_o_raws[0] instanceof Uint8Array || typeof o.d_o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.d_o_wasms) && (!o.d_o_wasms.length || o.d_o_wasms[0] instanceof Uint8Array || typeof o.d_o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.d_o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isAmino(o.periods[0])) && Array.isArray(o.d_o_periods) && (!o.d_o_periods.length || Duration.isAmino(o.d_o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isAmino(o.protos[0])) && Array.isArray(o.d_o_protos) && (!o.d_o_protos.length || AccessConfig.isAmino(o.d_o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isAmino(o.auths[0]) || Any.isAmino(o.auths[0])) && Array.isArray(o.d_o_auths) && (!o.d_o_auths.length || GenericAuthorization.isAmino(o.d_o_auths[0]) || Any.isAmino(o.d_o_auths[0])));
+    return o && (o.$typeUrl === EncodingTestForDontOmit.typeUrl || typeof o.str === "string" && typeof o.d_o_str === "string" && typeof o.b === "boolean" && typeof o.d_o_b === "boolean" && typeof o.num === "number" && typeof o.d_o_num === "number" && typeof o.big === "bigint" && typeof o.d_o_big === "bigint" && AccessConfig.isAmino(o.d_o_proto) && (GenericAuthorization.isAmino(o.d_o_auth) || Any.isAmino(o.d_o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.d_o_salt instanceof Uint8Array || typeof o.d_o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.d_o_raw instanceof Uint8Array || typeof o.d_o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.d_o_wasm instanceof Uint8Array || typeof o.d_o_wasm === "string") && isSet(o.opt) && isSet(o.d_o_opt) && Duration.isAmino(o.d_o_period) && Timestamp.isAmino(o.d_o_date) && Any.isAmino(o.d_o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.d_o_nums) && (!o.d_o_nums.length || typeof o.d_o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.d_o_bigs) && (!o.d_o_bigs.length || typeof o.d_o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.d_o_salts) && (!o.d_o_salts.length || o.d_o_salts[0] instanceof Uint8Array || typeof o.d_o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.d_o_raws) && (!o.d_o_raws.length || o.d_o_raws[0] instanceof Uint8Array || typeof o.d_o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.d_o_wasms) && (!o.d_o_wasms.length || o.d_o_wasms[0] instanceof Uint8Array || typeof o.d_o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.d_o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isAmino(o.periods[0])) && Array.isArray(o.d_o_periods) && (!o.d_o_periods.length || Duration.isAmino(o.d_o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isAmino(o.protos[0])) && Array.isArray(o.d_o_protos) && (!o.d_o_protos.length || AccessConfig.isAmino(o.d_o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isAmino(o.auths[0]) || Any.isAmino(o.auths[0])) && Array.isArray(o.d_o_auths) && (!o.d_o_auths.length || GenericAuthorization.isAmino(o.d_o_auths[0]) || Any.isAmino(o.d_o_auths[0])) && typeof o.dec === "string" && typeof o.d_o_dec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.d_o_decs) && (!o.d_o_decs.length || typeof o.d_o_decs[0] === "string"));
   },
   encode(message: EncodingTestForDontOmit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.str !== "") {
@@ -599,6 +636,18 @@ export const EncodingTestForDontOmit = {
     }
     for (const v of message.dOAuths) {
       Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(370).fork()).ldelim();
+    }
+    if (message.dec !== "") {
+      writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
+    }
+    if (message.dODec !== "") {
+      writer.uint32(386).string(Decimal.fromUserInput(message.dODec, 18).atomics);
+    }
+    for (const v of message.decs) {
+      writer.uint32(394).string(Decimal.fromUserInput(v!, 18).atomics);
+    }
+    for (const v of message.dODecs) {
+      writer.uint32(402).string(Decimal.fromUserInput(v!, 18).atomics);
     }
     return writer;
   },
@@ -783,6 +832,18 @@ export const EncodingTestForDontOmit = {
         case 46:
           message.dOAuths.push(GlobalDecoderRegistry.unwrapAny(reader));
           break;
+        case 47:
+          message.dec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 48:
+          message.dODec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 49:
+          message.decs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
+        case 50:
+          message.dODecs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -836,6 +897,10 @@ export const EncodingTestForDontOmit = {
     if (Array.isArray(object?.dOProtos)) obj.dOProtos = object.dOProtos.map((e: any) => AccessConfig.fromJSON(e));
     if (Array.isArray(object?.auths)) obj.auths = object.auths.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     if (Array.isArray(object?.dOAuths)) obj.dOAuths = object.dOAuths.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
+    if (isSet(object.dec)) obj.dec = String(object.dec);
+    if (isSet(object.dODec)) obj.dODec = String(object.dODec);
+    if (Array.isArray(object?.decs)) obj.decs = object.decs.map((e: any) => String(e));
+    if (Array.isArray(object?.dODecs)) obj.dODecs = object.dODecs.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: EncodingTestForDontOmit): unknown {
@@ -956,6 +1021,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.dOAuths = [];
     }
+    message.dec !== undefined && (obj.dec = message.dec);
+    message.dODec !== undefined && (obj.dODec = message.dODec);
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.dODecs = message.dODecs.map(e => e);
+    } else {
+      obj.dODecs = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EncodingTestForDontOmit>): EncodingTestForDontOmit {
@@ -1024,6 +1101,10 @@ export const EncodingTestForDontOmit = {
     message.dOProtos = object.dOProtos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.auths = object.auths?.map(e => (Any.fromPartial(e) as any)) || [];
     message.dOAuths = object.dOAuths?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.dec = object.dec ?? "";
+    message.dODec = object.dODec ?? "";
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.dODecs?.map(e => e) || [];
     return message;
   },
   fromSDK(object: EncodingTestForDontOmitSDKType): EncodingTestForDontOmit {
@@ -1071,7 +1152,11 @@ export const EncodingTestForDontOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       dOProtos: Array.isArray(object?.d_o_protos) ? object.d_o_protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
-      dOAuths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : []
+      dOAuths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
+      dec: object?.dec,
+      dODec: object?.d_o_dec,
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => e) : [],
+      dODecs: Array.isArray(object?.d_o_decs) ? object.d_o_decs.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): EncodingTestForDontOmitSDKType {
@@ -1119,7 +1204,11 @@ export const EncodingTestForDontOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       d_o_protos: Array.isArray(object?.d_o_protos) ? object.d_o_protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
-      d_o_auths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : []
+      d_o_auths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
+      dec: isSet(object.dec) ? String(object.dec) : "",
+      d_o_dec: isSet(object.d_o_dec) ? String(object.d_o_dec) : "",
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => String(e)) : [],
+      d_o_decs: Array.isArray(object?.d_o_decs) ? object.d_o_decs.map((e: any) => String(e)) : []
     };
   },
   toSDK(message: EncodingTestForDontOmit): EncodingTestForDontOmitSDKType {
@@ -1240,6 +1329,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.d_o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.d_o_dec = message.dODec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.d_o_decs = message.dODecs.map(e => e);
+    } else {
+      obj.d_o_decs = [];
+    }
     return obj;
   },
   fromAmino(object: EncodingTestForDontOmitAmino): EncodingTestForDontOmit {
@@ -1340,6 +1441,14 @@ export const EncodingTestForDontOmit = {
     message.dOProtos = object.d_o_protos?.map(e => AccessConfig.fromAmino(e)) || [];
     message.auths = object.auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     message.dOAuths = object.d_o_auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    if (object.d_o_dec !== undefined && object.d_o_dec !== null) {
+      message.dODec = object.d_o_dec;
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.d_o_decs?.map(e => e) || [];
     return message;
   },
   toAmino(message: EncodingTestForDontOmit): EncodingTestForDontOmitAmino {
@@ -1463,6 +1572,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.d_o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.d_o_dec = message.dODec ?? "";
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.d_o_decs = message.dODecs.map(e => e);
+    } else {
+      obj.d_o_decs = [];
+    }
     return obj;
   },
   fromAminoMsg(object: EncodingTestForDontOmitAminoMsg): EncodingTestForDontOmit {
@@ -1527,19 +1648,23 @@ function createBaseEncodingTestForOmit(): EncodingTestForOmit {
     protos: [],
     oProtos: [],
     auths: [],
-    oAuths: []
+    oAuths: [],
+    dec: "",
+    oDec: "",
+    decs: [],
+    oDecs: []
   };
 }
 export const EncodingTestForOmit = {
   typeUrl: "/misc.EncodingTestForOmit",
   is(o: any): o is EncodingTestForOmit {
-    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.oStr === "string" && typeof o.b === "boolean" && typeof o.oB === "boolean" && typeof o.num === "number" && typeof o.oNum === "number" && typeof o.big === "bigint" && typeof o.oBig === "bigint" && AccessConfig.is(o.oProto) && (GenericAuthorization.is(o.oAuth) || Any.is(o.oAuth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.oSalt instanceof Uint8Array || typeof o.oSalt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.oRaw instanceof Uint8Array || typeof o.oRaw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.oWasm instanceof Uint8Array || typeof o.oWasm === "string") && isSet(o.opt) && isSet(o.oOpt) && Duration.is(o.oPeriod) && Timestamp.is(o.oDate) && Any.is(o.oPubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.oNums) && (!o.oNums.length || typeof o.oNums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.oBigs) && (!o.oBigs.length || typeof o.oBigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.oSalts) && (!o.oSalts.length || o.oSalts[0] instanceof Uint8Array || typeof o.oSalts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.oRaws) && (!o.oRaws.length || o.oRaws[0] instanceof Uint8Array || typeof o.oRaws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.oWasms) && (!o.oWasms.length || o.oWasms[0] instanceof Uint8Array || typeof o.oWasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.oOpts) && Array.isArray(o.periods) && (!o.periods.length || Duration.is(o.periods[0])) && Array.isArray(o.oPeriods) && (!o.oPeriods.length || Duration.is(o.oPeriods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.is(o.protos[0])) && Array.isArray(o.oProtos) && (!o.oProtos.length || AccessConfig.is(o.oProtos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.is(o.auths[0]) || Any.is(o.auths[0])) && Array.isArray(o.oAuths) && (!o.oAuths.length || GenericAuthorization.is(o.oAuths[0]) || Any.is(o.oAuths[0])));
+    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.oStr === "string" && typeof o.b === "boolean" && typeof o.oB === "boolean" && typeof o.num === "number" && typeof o.oNum === "number" && typeof o.big === "bigint" && typeof o.oBig === "bigint" && AccessConfig.is(o.oProto) && (GenericAuthorization.is(o.oAuth) || Any.is(o.oAuth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.oSalt instanceof Uint8Array || typeof o.oSalt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.oRaw instanceof Uint8Array || typeof o.oRaw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.oWasm instanceof Uint8Array || typeof o.oWasm === "string") && isSet(o.opt) && isSet(o.oOpt) && Duration.is(o.oPeriod) && Timestamp.is(o.oDate) && Any.is(o.oPubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.oNums) && (!o.oNums.length || typeof o.oNums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.oBigs) && (!o.oBigs.length || typeof o.oBigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.oSalts) && (!o.oSalts.length || o.oSalts[0] instanceof Uint8Array || typeof o.oSalts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.oRaws) && (!o.oRaws.length || o.oRaws[0] instanceof Uint8Array || typeof o.oRaws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.oWasms) && (!o.oWasms.length || o.oWasms[0] instanceof Uint8Array || typeof o.oWasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.oOpts) && Array.isArray(o.periods) && (!o.periods.length || Duration.is(o.periods[0])) && Array.isArray(o.oPeriods) && (!o.oPeriods.length || Duration.is(o.oPeriods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.is(o.protos[0])) && Array.isArray(o.oProtos) && (!o.oProtos.length || AccessConfig.is(o.oProtos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.is(o.auths[0]) || Any.is(o.auths[0])) && Array.isArray(o.oAuths) && (!o.oAuths.length || GenericAuthorization.is(o.oAuths[0]) || Any.is(o.oAuths[0])) && typeof o.dec === "string" && typeof o.oDec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.oDecs) && (!o.oDecs.length || typeof o.oDecs[0] === "string"));
   },
   isSDK(o: any): o is EncodingTestForOmitSDKType {
-    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.o_str === "string" && typeof o.b === "boolean" && typeof o.o_b === "boolean" && typeof o.num === "number" && typeof o.o_num === "number" && typeof o.big === "bigint" && typeof o.o_big === "bigint" && AccessConfig.isSDK(o.o_proto) && (GenericAuthorization.isSDK(o.o_auth) || Any.isSDK(o.o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.o_salt instanceof Uint8Array || typeof o.o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.o_raw instanceof Uint8Array || typeof o.o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.o_wasm instanceof Uint8Array || typeof o.o_wasm === "string") && isSet(o.opt) && isSet(o.o_opt) && Duration.isSDK(o.o_period) && Timestamp.isSDK(o.o_date) && Any.isSDK(o.o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.o_nums) && (!o.o_nums.length || typeof o.o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.o_bigs) && (!o.o_bigs.length || typeof o.o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.o_salts) && (!o.o_salts.length || o.o_salts[0] instanceof Uint8Array || typeof o.o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.o_raws) && (!o.o_raws.length || o.o_raws[0] instanceof Uint8Array || typeof o.o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.o_wasms) && (!o.o_wasms.length || o.o_wasms[0] instanceof Uint8Array || typeof o.o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isSDK(o.periods[0])) && Array.isArray(o.o_periods) && (!o.o_periods.length || Duration.isSDK(o.o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isSDK(o.protos[0])) && Array.isArray(o.o_protos) && (!o.o_protos.length || AccessConfig.isSDK(o.o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isSDK(o.auths[0]) || Any.isSDK(o.auths[0])) && Array.isArray(o.o_auths) && (!o.o_auths.length || GenericAuthorization.isSDK(o.o_auths[0]) || Any.isSDK(o.o_auths[0])));
+    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.o_str === "string" && typeof o.b === "boolean" && typeof o.o_b === "boolean" && typeof o.num === "number" && typeof o.o_num === "number" && typeof o.big === "bigint" && typeof o.o_big === "bigint" && AccessConfig.isSDK(o.o_proto) && (GenericAuthorization.isSDK(o.o_auth) || Any.isSDK(o.o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.o_salt instanceof Uint8Array || typeof o.o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.o_raw instanceof Uint8Array || typeof o.o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.o_wasm instanceof Uint8Array || typeof o.o_wasm === "string") && isSet(o.opt) && isSet(o.o_opt) && Duration.isSDK(o.o_period) && Timestamp.isSDK(o.o_date) && Any.isSDK(o.o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.o_nums) && (!o.o_nums.length || typeof o.o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.o_bigs) && (!o.o_bigs.length || typeof o.o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.o_salts) && (!o.o_salts.length || o.o_salts[0] instanceof Uint8Array || typeof o.o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.o_raws) && (!o.o_raws.length || o.o_raws[0] instanceof Uint8Array || typeof o.o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.o_wasms) && (!o.o_wasms.length || o.o_wasms[0] instanceof Uint8Array || typeof o.o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isSDK(o.periods[0])) && Array.isArray(o.o_periods) && (!o.o_periods.length || Duration.isSDK(o.o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isSDK(o.protos[0])) && Array.isArray(o.o_protos) && (!o.o_protos.length || AccessConfig.isSDK(o.o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isSDK(o.auths[0]) || Any.isSDK(o.auths[0])) && Array.isArray(o.o_auths) && (!o.o_auths.length || GenericAuthorization.isSDK(o.o_auths[0]) || Any.isSDK(o.o_auths[0])) && typeof o.dec === "string" && typeof o.o_dec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.o_decs) && (!o.o_decs.length || typeof o.o_decs[0] === "string"));
   },
   isAmino(o: any): o is EncodingTestForOmitAmino {
-    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.o_str === "string" && typeof o.b === "boolean" && typeof o.o_b === "boolean" && typeof o.num === "number" && typeof o.o_num === "number" && typeof o.big === "bigint" && typeof o.o_big === "bigint" && AccessConfig.isAmino(o.o_proto) && (GenericAuthorization.isAmino(o.o_auth) || Any.isAmino(o.o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.o_salt instanceof Uint8Array || typeof o.o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.o_raw instanceof Uint8Array || typeof o.o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.o_wasm instanceof Uint8Array || typeof o.o_wasm === "string") && isSet(o.opt) && isSet(o.o_opt) && Duration.isAmino(o.o_period) && Timestamp.isAmino(o.o_date) && Any.isAmino(o.o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.o_nums) && (!o.o_nums.length || typeof o.o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.o_bigs) && (!o.o_bigs.length || typeof o.o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.o_salts) && (!o.o_salts.length || o.o_salts[0] instanceof Uint8Array || typeof o.o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.o_raws) && (!o.o_raws.length || o.o_raws[0] instanceof Uint8Array || typeof o.o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.o_wasms) && (!o.o_wasms.length || o.o_wasms[0] instanceof Uint8Array || typeof o.o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isAmino(o.periods[0])) && Array.isArray(o.o_periods) && (!o.o_periods.length || Duration.isAmino(o.o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isAmino(o.protos[0])) && Array.isArray(o.o_protos) && (!o.o_protos.length || AccessConfig.isAmino(o.o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isAmino(o.auths[0]) || Any.isAmino(o.auths[0])) && Array.isArray(o.o_auths) && (!o.o_auths.length || GenericAuthorization.isAmino(o.o_auths[0]) || Any.isAmino(o.o_auths[0])));
+    return o && (o.$typeUrl === EncodingTestForOmit.typeUrl || typeof o.str === "string" && typeof o.o_str === "string" && typeof o.b === "boolean" && typeof o.o_b === "boolean" && typeof o.num === "number" && typeof o.o_num === "number" && typeof o.big === "bigint" && typeof o.o_big === "bigint" && AccessConfig.isAmino(o.o_proto) && (GenericAuthorization.isAmino(o.o_auth) || Any.isAmino(o.o_auth)) && (o.salt instanceof Uint8Array || typeof o.salt === "string") && (o.o_salt instanceof Uint8Array || typeof o.o_salt === "string") && (o.raw instanceof Uint8Array || typeof o.raw === "string") && (o.o_raw instanceof Uint8Array || typeof o.o_raw === "string") && (o.wasm instanceof Uint8Array || typeof o.wasm === "string") && (o.o_wasm instanceof Uint8Array || typeof o.o_wasm === "string") && isSet(o.opt) && isSet(o.o_opt) && Duration.isAmino(o.o_period) && Timestamp.isAmino(o.o_date) && Any.isAmino(o.o_pubkey) && Array.isArray(o.nums) && (!o.nums.length || typeof o.nums[0] === "number") && Array.isArray(o.o_nums) && (!o.o_nums.length || typeof o.o_nums[0] === "number") && Array.isArray(o.bigs) && (!o.bigs.length || typeof o.bigs[0] === "bigint") && Array.isArray(o.o_bigs) && (!o.o_bigs.length || typeof o.o_bigs[0] === "bigint") && Array.isArray(o.salts) && (!o.salts.length || o.salts[0] instanceof Uint8Array || typeof o.salts[0] === "string") && Array.isArray(o.o_salts) && (!o.o_salts.length || o.o_salts[0] instanceof Uint8Array || typeof o.o_salts[0] === "string") && Array.isArray(o.raws) && (!o.raws.length || o.raws[0] instanceof Uint8Array || typeof o.raws[0] === "string") && Array.isArray(o.o_raws) && (!o.o_raws.length || o.o_raws[0] instanceof Uint8Array || typeof o.o_raws[0] === "string") && Array.isArray(o.wasms) && (!o.wasms.length || o.wasms[0] instanceof Uint8Array || typeof o.wasms[0] === "string") && Array.isArray(o.o_wasms) && (!o.o_wasms.length || o.o_wasms[0] instanceof Uint8Array || typeof o.o_wasms[0] === "string") && Array.isArray(o.opts) && Array.isArray(o.o_opts) && Array.isArray(o.periods) && (!o.periods.length || Duration.isAmino(o.periods[0])) && Array.isArray(o.o_periods) && (!o.o_periods.length || Duration.isAmino(o.o_periods[0])) && Array.isArray(o.protos) && (!o.protos.length || AccessConfig.isAmino(o.protos[0])) && Array.isArray(o.o_protos) && (!o.o_protos.length || AccessConfig.isAmino(o.o_protos[0])) && Array.isArray(o.auths) && (!o.auths.length || GenericAuthorization.isAmino(o.auths[0]) || Any.isAmino(o.auths[0])) && Array.isArray(o.o_auths) && (!o.o_auths.length || GenericAuthorization.isAmino(o.o_auths[0]) || Any.isAmino(o.o_auths[0])) && typeof o.dec === "string" && typeof o.o_dec === "string" && Array.isArray(o.decs) && (!o.decs.length || typeof o.decs[0] === "string") && Array.isArray(o.o_decs) && (!o.o_decs.length || typeof o.o_decs[0] === "string"));
   },
   encode(message: EncodingTestForOmit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.str !== "") {
@@ -1685,6 +1810,18 @@ export const EncodingTestForOmit = {
     }
     for (const v of message.oAuths) {
       Any.encode(GlobalDecoderRegistry.wrapAny(v!), writer.uint32(370).fork()).ldelim();
+    }
+    if (message.dec !== "") {
+      writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
+    }
+    if (message.oDec !== "") {
+      writer.uint32(386).string(Decimal.fromUserInput(message.oDec, 18).atomics);
+    }
+    for (const v of message.decs) {
+      writer.uint32(394).string(Decimal.fromUserInput(v!, 18).atomics);
+    }
+    for (const v of message.oDecs) {
+      writer.uint32(402).string(Decimal.fromUserInput(v!, 18).atomics);
     }
     return writer;
   },
@@ -1869,6 +2006,18 @@ export const EncodingTestForOmit = {
         case 46:
           message.oAuths.push(GlobalDecoderRegistry.unwrapAny(reader));
           break;
+        case 47:
+          message.dec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 48:
+          message.oDec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 49:
+          message.decs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
+        case 50:
+          message.oDecs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1922,6 +2071,10 @@ export const EncodingTestForOmit = {
     if (Array.isArray(object?.oProtos)) obj.oProtos = object.oProtos.map((e: any) => AccessConfig.fromJSON(e));
     if (Array.isArray(object?.auths)) obj.auths = object.auths.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     if (Array.isArray(object?.oAuths)) obj.oAuths = object.oAuths.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
+    if (isSet(object.dec)) obj.dec = String(object.dec);
+    if (isSet(object.oDec)) obj.oDec = String(object.oDec);
+    if (Array.isArray(object?.decs)) obj.decs = object.decs.map((e: any) => String(e));
+    if (Array.isArray(object?.oDecs)) obj.oDecs = object.oDecs.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: EncodingTestForOmit): unknown {
@@ -2042,6 +2195,18 @@ export const EncodingTestForOmit = {
     } else {
       obj.oAuths = [];
     }
+    message.dec !== undefined && (obj.dec = message.dec);
+    message.oDec !== undefined && (obj.oDec = message.oDec);
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.oDecs = message.oDecs.map(e => e);
+    } else {
+      obj.oDecs = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EncodingTestForOmit>): EncodingTestForOmit {
@@ -2110,6 +2275,10 @@ export const EncodingTestForOmit = {
     message.oProtos = object.oProtos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.auths = object.auths?.map(e => (Any.fromPartial(e) as any)) || [];
     message.oAuths = object.oAuths?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.dec = object.dec ?? "";
+    message.oDec = object.oDec ?? "";
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.oDecs?.map(e => e) || [];
     return message;
   },
   fromSDK(object: EncodingTestForOmitSDKType): EncodingTestForOmit {
@@ -2157,7 +2326,11 @@ export const EncodingTestForOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       oProtos: Array.isArray(object?.o_protos) ? object.o_protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
-      oAuths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : []
+      oAuths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => GlobalDecoderRegistry.fromSDK(e)) : [],
+      dec: object?.dec,
+      oDec: object?.o_dec,
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => e) : [],
+      oDecs: Array.isArray(object?.o_decs) ? object.o_decs.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): EncodingTestForOmitSDKType {
@@ -2205,7 +2378,11 @@ export const EncodingTestForOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       o_protos: Array.isArray(object?.o_protos) ? object.o_protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
-      o_auths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : []
+      o_auths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => GlobalDecoderRegistry.fromSDKJSON(e)) : [],
+      dec: isSet(object.dec) ? String(object.dec) : "",
+      o_dec: isSet(object.o_dec) ? String(object.o_dec) : "",
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => String(e)) : [],
+      o_decs: Array.isArray(object?.o_decs) ? object.o_decs.map((e: any) => String(e)) : []
     };
   },
   toSDK(message: EncodingTestForOmit): EncodingTestForOmitSDKType {
@@ -2326,6 +2503,18 @@ export const EncodingTestForOmit = {
     } else {
       obj.o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.o_dec = message.oDec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.o_decs = message.oDecs.map(e => e);
+    } else {
+      obj.o_decs = [];
+    }
     return obj;
   },
   fromAmino(object: EncodingTestForOmitAmino): EncodingTestForOmit {
@@ -2426,6 +2615,14 @@ export const EncodingTestForOmit = {
     message.oProtos = object.o_protos?.map(e => AccessConfig.fromAmino(e)) || [];
     message.auths = object.auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
     message.oAuths = object.o_auths?.map(e => GlobalDecoderRegistry.fromAminoMsg(e)) || [];
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    if (object.o_dec !== undefined && object.o_dec !== null) {
+      message.oDec = object.o_dec;
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.o_decs?.map(e => e) || [];
     return message;
   },
   toAmino(message: EncodingTestForOmit): EncodingTestForOmitAmino {
@@ -2545,6 +2742,18 @@ export const EncodingTestForOmit = {
       obj.o_auths = message.oAuths.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
       obj.o_auths = [];
+    }
+    obj.dec = message.dec;
+    obj.o_dec = message.oDec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.o_decs = message.oDecs.map(e => e);
+    } else {
+      obj.o_decs = [];
     }
     return obj;
   },

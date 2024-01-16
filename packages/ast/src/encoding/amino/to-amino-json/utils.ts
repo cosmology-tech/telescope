@@ -21,8 +21,7 @@ export const toAmino = {
         )
     },
 
-    string(args: ToAminoParseField)
-    {
+    string(args: ToAminoParseField) {
         const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
 
         if(useCosmosSDKDec){
@@ -50,6 +49,28 @@ export const toAmino = {
         }
 
         return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
+    },
+
+    stringArray(args: ToAminoParseField) {
+      const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+
+      if(useCosmosSDKDec){
+        const isCosmosSDKDec =
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'github.com/cosmos/cosmos-sdk/types.Dec') ||
+            (args.field.options?.['(gogoproto.customtype)'] ==
+                'cosmossdk.io/math.LegacyDec');
+
+        if (isCosmosSDKDec) {
+          return toAmino.scalarArray(args, arrayTypes.stringDec)
+        }
+      }
+
+      if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+        return shorthandProperty(args.field.name);
+      }
+
+      return t.objectProperty(t.identifier(args.context.aminoCaseField(args.field)), memberExpressionOrIdentifier(args.scope))
     },
 
     rawBytes(args: ToAminoParseField) {
@@ -361,7 +382,7 @@ export const toAmino = {
                     [
                         t.identifier(variable)
                     ],
-                    arrayTypeAstFunc(variable)
+                    arrayTypeAstFunc(variable, { context, field, currentProtoPath, scope, nested, isOptional })
                 )
             ]
         );
@@ -395,5 +416,15 @@ export const arrayTypes = {
             t.memberExpression(memberExpressionOrIdentifier([varname]), t.identifier('toString')),
             []
         )
+    },
+
+    stringDec(varname: string, args: ToAminoParseField) {
+      args.context.addUtil('padDecimal');
+      return t.callExpression(
+        t.identifier('padDecimal'),
+        [
+            memberExpressionOrIdentifier([varname])
+        ]
+      )
     }
 }

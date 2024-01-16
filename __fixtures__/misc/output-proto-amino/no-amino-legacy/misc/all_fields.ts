@@ -4,6 +4,7 @@ import { Duration, DurationSDKType } from "../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
+import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 export const protobufPackage = "misc";
@@ -72,6 +73,12 @@ export interface EncodingTestForDontOmit {
   /** array anyType */
   auths: Any[];
   dOAuths: Any[];
+  /** dec */
+  dec: string;
+  dODec: string;
+  /** array dec */
+  decs: string[];
+  dODecs: string[];
 }
 export interface EncodingTestForDontOmitProtoMsg {
   typeUrl: "/misc.EncodingTestForDontOmit";
@@ -122,6 +129,10 @@ export interface EncodingTestForDontOmitSDKType {
   d_o_protos: AccessConfigSDKType[];
   auths: AnySDKType[];
   d_o_auths: AnySDKType[];
+  dec: string;
+  d_o_dec: string;
+  decs: string[];
+  d_o_decs: string[];
 }
 export interface EncodingTestForOmit {
   /** scalar */
@@ -188,6 +199,12 @@ export interface EncodingTestForOmit {
   /** array anyType */
   auths: Any[];
   oAuths: Any[];
+  /** dec */
+  dec: string;
+  oDec: string;
+  /** array dec */
+  decs: string[];
+  oDecs: string[];
 }
 export interface EncodingTestForOmitProtoMsg {
   typeUrl: "/misc.EncodingTestForOmit";
@@ -238,6 +255,10 @@ export interface EncodingTestForOmitSDKType {
   o_protos: AccessConfigSDKType[];
   auths: AnySDKType[];
   o_auths: AnySDKType[];
+  dec: string;
+  o_dec: string;
+  decs: string[];
+  o_decs: string[];
 }
 function createBaseEncodingTestForDontOmit(): EncodingTestForDontOmit {
   return {
@@ -284,7 +305,11 @@ function createBaseEncodingTestForDontOmit(): EncodingTestForDontOmit {
     protos: [],
     dOProtos: [],
     auths: [],
-    dOAuths: []
+    dOAuths: [],
+    dec: "",
+    dODec: "",
+    decs: [],
+    dODecs: []
   };
 }
 export const EncodingTestForDontOmit = {
@@ -433,6 +458,18 @@ export const EncodingTestForDontOmit = {
     }
     for (const v of message.dOAuths) {
       Any.encode(v!, writer.uint32(370).fork()).ldelim();
+    }
+    if (message.dec !== "") {
+      writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
+    }
+    if (message.dODec !== "") {
+      writer.uint32(386).string(Decimal.fromUserInput(message.dODec, 18).atomics);
+    }
+    for (const v of message.decs) {
+      writer.uint32(394).string(Decimal.fromUserInput(v!, 18).atomics);
+    }
+    for (const v of message.dODecs) {
+      writer.uint32(402).string(Decimal.fromUserInput(v!, 18).atomics);
     }
     return writer;
   },
@@ -617,6 +654,18 @@ export const EncodingTestForDontOmit = {
         case 46:
           message.dOAuths.push(Any.decode(reader, reader.uint32()));
           break;
+        case 47:
+          message.dec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 48:
+          message.dODec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 49:
+          message.decs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
+        case 50:
+          message.dODecs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -670,6 +719,10 @@ export const EncodingTestForDontOmit = {
     if (Array.isArray(object?.dOProtos)) obj.dOProtos = object.dOProtos.map((e: any) => AccessConfig.fromJSON(e));
     if (Array.isArray(object?.auths)) obj.auths = object.auths.map((e: any) => Any.fromJSON(e));
     if (Array.isArray(object?.dOAuths)) obj.dOAuths = object.dOAuths.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.dec)) obj.dec = String(object.dec);
+    if (isSet(object.dODec)) obj.dODec = String(object.dODec);
+    if (Array.isArray(object?.decs)) obj.decs = object.decs.map((e: any) => String(e));
+    if (Array.isArray(object?.dODecs)) obj.dODecs = object.dODecs.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: EncodingTestForDontOmit): unknown {
@@ -790,6 +843,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.dOAuths = [];
     }
+    message.dec !== undefined && (obj.dec = message.dec);
+    message.dODec !== undefined && (obj.dODec = message.dODec);
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.dODecs = message.dODecs.map(e => e);
+    } else {
+      obj.dODecs = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EncodingTestForDontOmit>): EncodingTestForDontOmit {
@@ -858,6 +923,10 @@ export const EncodingTestForDontOmit = {
     message.dOProtos = object.dOProtos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.auths = object.auths?.map(e => Any.fromPartial(e)) || [];
     message.dOAuths = object.dOAuths?.map(e => Any.fromPartial(e)) || [];
+    message.dec = object.dec ?? "";
+    message.dODec = object.dODec ?? "";
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.dODecs?.map(e => e) || [];
     return message;
   },
   fromSDK(object: EncodingTestForDontOmitSDKType): EncodingTestForDontOmit {
@@ -905,7 +974,11 @@ export const EncodingTestForDontOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       dOProtos: Array.isArray(object?.d_o_protos) ? object.d_o_protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => Any.fromSDK(e)) : [],
-      dOAuths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => Any.fromSDK(e)) : []
+      dOAuths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => Any.fromSDK(e)) : [],
+      dec: object?.dec,
+      dODec: object?.d_o_dec,
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => e) : [],
+      dODecs: Array.isArray(object?.d_o_decs) ? object.d_o_decs.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): EncodingTestForDontOmitSDKType {
@@ -953,7 +1026,11 @@ export const EncodingTestForDontOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       d_o_protos: Array.isArray(object?.d_o_protos) ? object.d_o_protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => Any.fromSDKJSON(e)) : [],
-      d_o_auths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => Any.fromSDKJSON(e)) : []
+      d_o_auths: Array.isArray(object?.d_o_auths) ? object.d_o_auths.map((e: any) => Any.fromSDKJSON(e)) : [],
+      dec: isSet(object.dec) ? String(object.dec) : "",
+      d_o_dec: isSet(object.d_o_dec) ? String(object.d_o_dec) : "",
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => String(e)) : [],
+      d_o_decs: Array.isArray(object?.d_o_decs) ? object.d_o_decs.map((e: any) => String(e)) : []
     };
   },
   toSDK(message: EncodingTestForDontOmit): EncodingTestForDontOmitSDKType {
@@ -1074,6 +1151,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.d_o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.d_o_dec = message.dODec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.d_o_decs = message.dODecs.map(e => e);
+    } else {
+      obj.d_o_decs = [];
+    }
     return obj;
   },
   fromAmino(object: EncodingTestForDontOmitAmino): EncodingTestForDontOmit {
@@ -1174,6 +1263,14 @@ export const EncodingTestForDontOmit = {
     message.dOProtos = object.d_o_protos?.map(e => AccessConfig.fromAmino(e)) || [];
     message.auths = object.auths?.map(e => Any.fromAmino(e)) || [];
     message.dOAuths = object.d_o_auths?.map(e => Any.fromAmino(e)) || [];
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    if (object.d_o_dec !== undefined && object.d_o_dec !== null) {
+      message.dODec = object.d_o_dec;
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.d_o_decs?.map(e => e) || [];
     return message;
   },
   toAmino(message: EncodingTestForDontOmit): EncodingTestForDontOmitAmino {
@@ -1294,6 +1391,18 @@ export const EncodingTestForDontOmit = {
     } else {
       obj.d_o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.d_o_dec = message.dODec ?? "";
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.dODecs) {
+      obj.d_o_decs = message.dODecs.map(e => e);
+    } else {
+      obj.d_o_decs = [];
+    }
     return obj;
   },
   fromAminoMsg(object: EncodingTestForDontOmitAminoMsg): EncodingTestForDontOmit {
@@ -1357,7 +1466,11 @@ function createBaseEncodingTestForOmit(): EncodingTestForOmit {
     protos: [],
     oProtos: [],
     auths: [],
-    oAuths: []
+    oAuths: [],
+    dec: "",
+    oDec: "",
+    decs: [],
+    oDecs: []
   };
 }
 export const EncodingTestForOmit = {
@@ -1506,6 +1619,18 @@ export const EncodingTestForOmit = {
     }
     for (const v of message.oAuths) {
       Any.encode(v!, writer.uint32(370).fork()).ldelim();
+    }
+    if (message.dec !== "") {
+      writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
+    }
+    if (message.oDec !== "") {
+      writer.uint32(386).string(Decimal.fromUserInput(message.oDec, 18).atomics);
+    }
+    for (const v of message.decs) {
+      writer.uint32(394).string(Decimal.fromUserInput(v!, 18).atomics);
+    }
+    for (const v of message.oDecs) {
+      writer.uint32(402).string(Decimal.fromUserInput(v!, 18).atomics);
     }
     return writer;
   },
@@ -1690,6 +1815,18 @@ export const EncodingTestForOmit = {
         case 46:
           message.oAuths.push(Any.decode(reader, reader.uint32()));
           break;
+        case 47:
+          message.dec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 48:
+          message.oDec = Decimal.fromAtomics(reader.string(), 18).toString();
+          break;
+        case 49:
+          message.decs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
+        case 50:
+          message.oDecs.push(Decimal.fromAtomics(reader.string(), 18).toString());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -1743,6 +1880,10 @@ export const EncodingTestForOmit = {
     if (Array.isArray(object?.oProtos)) obj.oProtos = object.oProtos.map((e: any) => AccessConfig.fromJSON(e));
     if (Array.isArray(object?.auths)) obj.auths = object.auths.map((e: any) => Any.fromJSON(e));
     if (Array.isArray(object?.oAuths)) obj.oAuths = object.oAuths.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.dec)) obj.dec = String(object.dec);
+    if (isSet(object.oDec)) obj.oDec = String(object.oDec);
+    if (Array.isArray(object?.decs)) obj.decs = object.decs.map((e: any) => String(e));
+    if (Array.isArray(object?.oDecs)) obj.oDecs = object.oDecs.map((e: any) => String(e));
     return obj;
   },
   toJSON(message: EncodingTestForOmit): unknown {
@@ -1863,6 +2004,18 @@ export const EncodingTestForOmit = {
     } else {
       obj.oAuths = [];
     }
+    message.dec !== undefined && (obj.dec = message.dec);
+    message.oDec !== undefined && (obj.oDec = message.oDec);
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.oDecs = message.oDecs.map(e => e);
+    } else {
+      obj.oDecs = [];
+    }
     return obj;
   },
   fromPartial(object: DeepPartial<EncodingTestForOmit>): EncodingTestForOmit {
@@ -1931,6 +2084,10 @@ export const EncodingTestForOmit = {
     message.oProtos = object.oProtos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.auths = object.auths?.map(e => Any.fromPartial(e)) || [];
     message.oAuths = object.oAuths?.map(e => Any.fromPartial(e)) || [];
+    message.dec = object.dec ?? "";
+    message.oDec = object.oDec ?? "";
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.oDecs?.map(e => e) || [];
     return message;
   },
   fromSDK(object: EncodingTestForOmitSDKType): EncodingTestForOmit {
@@ -1978,7 +2135,11 @@ export const EncodingTestForOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       oProtos: Array.isArray(object?.o_protos) ? object.o_protos.map((e: any) => AccessConfig.fromSDK(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => Any.fromSDK(e)) : [],
-      oAuths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => Any.fromSDK(e)) : []
+      oAuths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => Any.fromSDK(e)) : [],
+      dec: object?.dec,
+      oDec: object?.o_dec,
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => e) : [],
+      oDecs: Array.isArray(object?.o_decs) ? object.o_decs.map((e: any) => e) : []
     };
   },
   fromSDKJSON(object: any): EncodingTestForOmitSDKType {
@@ -2026,7 +2187,11 @@ export const EncodingTestForOmit = {
       protos: Array.isArray(object?.protos) ? object.protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       o_protos: Array.isArray(object?.o_protos) ? object.o_protos.map((e: any) => AccessConfig.fromSDKJSON(e)) : [],
       auths: Array.isArray(object?.auths) ? object.auths.map((e: any) => Any.fromSDKJSON(e)) : [],
-      o_auths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => Any.fromSDKJSON(e)) : []
+      o_auths: Array.isArray(object?.o_auths) ? object.o_auths.map((e: any) => Any.fromSDKJSON(e)) : [],
+      dec: isSet(object.dec) ? String(object.dec) : "",
+      o_dec: isSet(object.o_dec) ? String(object.o_dec) : "",
+      decs: Array.isArray(object?.decs) ? object.decs.map((e: any) => String(e)) : [],
+      o_decs: Array.isArray(object?.o_decs) ? object.o_decs.map((e: any) => String(e)) : []
     };
   },
   toSDK(message: EncodingTestForOmit): EncodingTestForOmitSDKType {
@@ -2147,6 +2312,18 @@ export const EncodingTestForOmit = {
     } else {
       obj.o_auths = [];
     }
+    obj.dec = message.dec;
+    obj.o_dec = message.oDec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.o_decs = message.oDecs.map(e => e);
+    } else {
+      obj.o_decs = [];
+    }
     return obj;
   },
   fromAmino(object: EncodingTestForOmitAmino): EncodingTestForOmit {
@@ -2247,6 +2424,14 @@ export const EncodingTestForOmit = {
     message.oProtos = object.o_protos?.map(e => AccessConfig.fromAmino(e)) || [];
     message.auths = object.auths?.map(e => Any.fromAmino(e)) || [];
     message.oAuths = object.o_auths?.map(e => Any.fromAmino(e)) || [];
+    if (object.dec !== undefined && object.dec !== null) {
+      message.dec = object.dec;
+    }
+    if (object.o_dec !== undefined && object.o_dec !== null) {
+      message.oDec = object.o_dec;
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.o_decs?.map(e => e) || [];
     return message;
   },
   toAmino(message: EncodingTestForOmit): EncodingTestForOmitAmino {
@@ -2366,6 +2551,18 @@ export const EncodingTestForOmit = {
       obj.o_auths = message.oAuths.map(e => e ? Any.toAmino(e) : undefined);
     } else {
       obj.o_auths = [];
+    }
+    obj.dec = message.dec;
+    obj.o_dec = message.oDec;
+    if (message.decs) {
+      obj.decs = message.decs.map(e => e);
+    } else {
+      obj.decs = [];
+    }
+    if (message.oDecs) {
+      obj.o_decs = message.oDecs.map(e => e);
+    } else {
+      obj.o_decs = [];
     }
     return obj;
   },
