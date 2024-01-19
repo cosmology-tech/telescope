@@ -47,7 +47,7 @@ message Dog {
         filename: 'cosmology/example/cat.proto',
         content: `
 syntax = "proto3";
-package cosmology.tech;
+package cosmology.zone;
 option go_package = "github.com/cosmology-tech/go";
 
 message Cat {
@@ -63,7 +63,7 @@ message Cat {
         filename: 'cosmology/example/animal.proto',
         content: `
 syntax = "proto3";
-package cosmology.tech;
+package cosmology.zone;
 import "google/protobuf/any.proto";
 import "cosmology/example/dog1.proto";
 import "cosmology/example/dog2.proto";
