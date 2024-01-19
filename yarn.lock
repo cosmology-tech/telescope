@@ -2144,6 +2144,13 @@
     axios "^0.27.2"
     long "^4.0.0"
 
+"@keplr-wallet/types@0.12.62":
+  version "0.12.62"
+  resolved "https://registry.npmjs.org/@keplr-wallet/types/-/types-0.12.62.tgz#46ece9a5f0c3514c4613941cd0796d508f058858"
+  integrity sha512-IM6Z5wxYyHUIOiFx3Jc48JmFfYMJTLvFqBpKlsYv+Zozpp99R+qSySzj3BOSi1wUmW3VoIKHLaGFGjIu4iDCzw==
+  dependencies:
+    long "^4.0.0"
+
 "@keplr-wallet/unit@0.11.22":
   version "0.11.22"
   resolved "https://registry.npmjs.org/@keplr-wallet/unit/-/unit-0.11.22.tgz#c2a2f51f880cf8a0685560cc02e09a12006c529d"
@@ -2159,6 +2166,15 @@
   integrity sha512-eOK5UfhmTtRvdx6+umqnEROVubzfnfJg85NL00HQFrmxuhBbmqcddzPyXDCdffmCMWdv/bpocd+YfIYTuaY4EA==
   dependencies:
     "@keplr-wallet/types" "0.11.56"
+    big-integer "^1.6.48"
+    utility-types "^3.10.0"
+
+"@keplr-wallet/unit@^0.12.53":
+  version "0.12.62"
+  resolved "https://registry.npmjs.org/@keplr-wallet/unit/-/unit-0.12.62.tgz#f2d6761f443ac2b189d370de7d2791b49ca41beb"
+  integrity sha512-2cCFkilVREb86sr/EMqcLrv4JfxgEW0fpY+DqzGsIwzZ8f/lmOgMhLlUWkbBUqRLD43iZQFiOMpl1X9KgAwpjg==
+  dependencies:
+    "@keplr-wallet/types" "0.12.62"
     big-integer "^1.6.48"
     utility-types "^3.10.0"
 
