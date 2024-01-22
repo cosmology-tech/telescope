@@ -116,7 +116,7 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.kind = endpoint_KindToJSON(message.kind);
+    obj.kind = message.kind;
     return obj;
   },
   fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {

@@ -2183,7 +2183,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};
-    obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason);
+    obj.reason = message.reason;
     obj.suppressed_count = message.suppressedCount;
     return obj;
   },

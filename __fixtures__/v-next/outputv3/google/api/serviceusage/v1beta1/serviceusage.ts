@@ -2113,7 +2113,7 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequest {
@@ -2315,7 +2315,7 @@ export const GetConsumerQuotaMetricRequest = {
   toAmino(message: GetConsumerQuotaMetricRequest, useInterfaces: boolean = true): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaMetricRequest {
@@ -2411,7 +2411,7 @@ export const GetConsumerQuotaLimitRequest = {
   toAmino(message: GetConsumerQuotaLimitRequest, useInterfaces: boolean = true): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaLimitRequest {
@@ -2557,7 +2557,7 @@ export const CreateAdminOverrideRequest = {
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -2724,7 +2724,7 @@ export const UpdateAdminOverrideRequest = {
     obj.force = message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -2855,7 +2855,7 @@ export const DeleteAdminOverrideRequest = {
     obj.name = message.name;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3312,7 +3312,7 @@ export const ImportAdminOverridesRequest = {
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3613,7 +3613,7 @@ export const CreateConsumerOverrideRequest = {
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3780,7 +3780,7 @@ export const UpdateConsumerOverrideRequest = {
     obj.force = message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3911,7 +3911,7 @@ export const DeleteConsumerOverrideRequest = {
     obj.name = message.name;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -4368,7 +4368,7 @@ export const ImportConsumerOverridesRequest = {
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -5039,7 +5039,7 @@ export const GetServiceIdentityResponse = {
   toAmino(message: GetServiceIdentityResponse, useInterfaces: boolean = true): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity, useInterfaces) : undefined;
-    obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state);
+    obj.state = message.state;
     return obj;
   },
   fromProtoMsg(message: GetServiceIdentityResponseProtoMsg, useInterfaces: boolean = true): GetServiceIdentityResponse {

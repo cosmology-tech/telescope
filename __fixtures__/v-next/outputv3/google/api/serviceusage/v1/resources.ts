@@ -362,7 +362,7 @@ export const Service = {
     obj.name = message.name;
     obj.parent = message.parent;
     obj.config = message.config ? ServiceConfig.toAmino(message.config, useInterfaces) : undefined;
-    obj.state = stateToJSON(message.state);
+    obj.state = message.state;
     return obj;
   },
   fromProtoMsg(message: ServiceProtoMsg, useInterfaces: boolean = true): Service {

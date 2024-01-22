@@ -2624,7 +2624,7 @@ export const RequestCheckTx = {
   toAmino(message: RequestCheckTx): RequestCheckTxAmino {
     const obj: any = {};
     obj.tx = message.tx ? base64FromBytes(message.tx) : undefined;
-    obj.type = checkTxTypeToJSON(message.type);
+    obj.type = message.type;
     return obj;
   },
   fromAminoMsg(object: RequestCheckTxAminoMsg): RequestCheckTx {
@@ -5376,7 +5376,7 @@ export const ResponseOfferSnapshot = {
   },
   toAmino(message: ResponseOfferSnapshot): ResponseOfferSnapshotAmino {
     const obj: any = {};
-    obj.result = responseOfferSnapshot_ResultToJSON(message.result);
+    obj.result = message.result;
     return obj;
   },
   fromAminoMsg(object: ResponseOfferSnapshotAminoMsg): ResponseOfferSnapshot {
@@ -5593,7 +5593,7 @@ export const ResponseApplySnapshotChunk = {
   },
   toAmino(message: ResponseApplySnapshotChunk): ResponseApplySnapshotChunkAmino {
     const obj: any = {};
-    obj.result = responseApplySnapshotChunk_ResultToJSON(message.result);
+    obj.result = message.result;
     if (message.refetchChunks) {
       obj.refetch_chunks = message.refetchChunks.map(e => e);
     } else {
@@ -6767,7 +6767,7 @@ export const Evidence = {
   },
   toAmino(message: Evidence): EvidenceAmino {
     const obj: any = {};
-    obj.type = evidenceTypeToJSON(message.type);
+    obj.type = message.type;
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;

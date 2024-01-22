@@ -767,7 +767,7 @@ export const DisableServiceRequest = {
     const obj: any = {};
     obj.name = message.name;
     obj.disable_dependent_services = message.disableDependentServices;
-    obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage);
+    obj.check_if_service_has_usage = message.checkIfServiceHasUsage;
     return obj;
   },
   fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {

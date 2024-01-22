@@ -552,7 +552,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
     const obj: any = {};
     obj.address = message.address;
     obj.sign_doc = message.signDoc ? SignDocDirectAux.toAmino(message.signDoc) : undefined;
-    obj.mode = signModeToJSON(message.mode);
+    obj.mode = message.mode;
     obj.sig = message.sig ? base64FromBytes(message.sig) : undefined;
     return obj;
   },
@@ -1732,10 +1732,10 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn) : undefined;
-    obj.null = nullValueToJSON(message.null);
-    obj.primitive = type_PrimitiveTypeToJSON(message.primitive);
-    obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper);
-    obj.well_known = type_WellKnownTypeToJSON(message.wellKnown);
+    obj.null = message.null;
+    obj.primitive = message.primitive;
+    obj.wrapper = message.wrapper;
+    obj.well_known = message.wellKnown;
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function) : undefined;
@@ -2263,7 +2263,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
   },
   toAmino(message: Constant): ConstantAmino {
     const obj: any = {};
-    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.null_value = message.nullValue;
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
@@ -3051,7 +3051,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
     const obj: any = {};
     obj.name = message.name;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.severity = logSeverityToJSON(message.severity);
+    obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;
     obj.insert_id = message.insertId;
@@ -3309,7 +3309,7 @@ exports[`ibc/core/port/v1/query 1`] = `
     const obj: any = {};
     obj.port_id = message.portId;
     obj.connection_id = message.connectionId;
-    obj.ordering = orderToJSON(message.ordering);
+    obj.ordering = message.ordering;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
     obj.proposed_version = message.proposedVersion;
     return obj;
@@ -3412,11 +3412,6 @@ exports[`ibc/core/port/v1/query 2`] = `
     "importedAs": "Counterparty",
     "name": "Counterparty",
     "type": "typeImport",
-  },
-  {
-    "import": "ibc/core/channel/v1/channel.proto",
-    "name": "orderToJSON",
-    "type": "toJSONEnum",
   },
   {
     "import": "ibc/core/channel/v1/channel.proto",

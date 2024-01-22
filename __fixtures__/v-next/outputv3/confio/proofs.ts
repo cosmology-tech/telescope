@@ -1218,10 +1218,10 @@ export const LeafOp = {
   },
   toAmino(message: LeafOp, useInterfaces: boolean = true): LeafOpAmino {
     const obj: any = {};
-    obj.hash = hashOpToJSON(message.hash);
-    obj.prehash_key = hashOpToJSON(message.prehashKey);
-    obj.prehash_value = hashOpToJSON(message.prehashValue);
-    obj.length = lengthOpToJSON(message.length);
+    obj.hash = message.hash;
+    obj.prehash_key = message.prehashKey;
+    obj.prehash_value = message.prehashValue;
+    obj.length = message.length;
     obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     return obj;
   },
@@ -1332,7 +1332,7 @@ export const InnerOp = {
   },
   toAmino(message: InnerOp, useInterfaces: boolean = true): InnerOpAmino {
     const obj: any = {};
-    obj.hash = hashOpToJSON(message.hash);
+    obj.hash = message.hash;
     obj.prefix = message.prefix ? base64FromBytes(message.prefix) : undefined;
     obj.suffix = message.suffix ? base64FromBytes(message.suffix) : undefined;
     return obj;
@@ -1645,7 +1645,7 @@ export const InnerSpec = {
     obj.min_prefix_length = message.minPrefixLength;
     obj.max_prefix_length = message.maxPrefixLength;
     obj.empty_child = message.emptyChild ? base64FromBytes(message.emptyChild) : undefined;
-    obj.hash = hashOpToJSON(message.hash);
+    obj.hash = message.hash;
     return obj;
   },
   fromProtoMsg(message: InnerSpecProtoMsg, useInterfaces: boolean = true): InnerSpec {

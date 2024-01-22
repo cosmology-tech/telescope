@@ -1334,7 +1334,7 @@ export const SignatureAndData = {
   toAmino(message: SignatureAndData): SignatureAndDataAmino {
     const obj: any = {};
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
-    obj.data_type = dataTypeToJSON(message.dataType);
+    obj.data_type = message.dataType;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     return obj;
@@ -1601,7 +1601,7 @@ export const SignBytes = {
     obj.sequence = message.sequence ? message.sequence.toString() : undefined;
     obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
     obj.diversifier = message.diversifier;
-    obj.data_type = dataTypeToJSON(message.dataType);
+    obj.data_type = message.dataType;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },

@@ -166,7 +166,7 @@ export const LabelDescriptor = {
   toAmino(message: LabelDescriptor, useInterfaces: boolean = true): LabelDescriptorAmino {
     const obj: any = {};
     obj.key = message.key;
-    obj.value_type = labelDescriptor_ValueTypeToJSON(message.valueType);
+    obj.value_type = message.valueType;
     obj.description = message.description;
     return obj;
   },

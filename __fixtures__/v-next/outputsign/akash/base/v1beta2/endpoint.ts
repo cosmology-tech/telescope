@@ -121,7 +121,7 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
-    obj.kind = endpoint_KindToJSON(message.kind);
+    obj.kind = message.kind;
     obj.sequence_number = message.sequenceNumber;
     return obj;
   },

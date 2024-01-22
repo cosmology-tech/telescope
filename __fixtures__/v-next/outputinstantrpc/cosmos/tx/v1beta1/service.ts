@@ -450,7 +450,7 @@ export const GetTxsEventRequest = {
       obj.events = [];
     }
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.order_by = orderByToJSON(message.orderBy);
+    obj.order_by = message.orderBy;
     return obj;
   },
   fromAminoMsg(object: GetTxsEventRequestAminoMsg): GetTxsEventRequest {
@@ -711,7 +711,7 @@ export const BroadcastTxRequest = {
   toAmino(message: BroadcastTxRequest): BroadcastTxRequestAmino {
     const obj: any = {};
     obj.tx_bytes = message.txBytes ? base64FromBytes(message.txBytes) : undefined;
-    obj.mode = broadcastModeToJSON(message.mode);
+    obj.mode = message.mode;
     return obj;
   },
   fromAminoMsg(object: BroadcastTxRequestAminoMsg): BroadcastTxRequest {

@@ -678,7 +678,7 @@ export const AssetTypeResponse = {
   },
   toAmino(message: AssetTypeResponse): AssetTypeResponseAmino {
     const obj: any = {};
-    obj.asset_type = superfluidAssetTypeToJSON(message.assetType);
+    obj.asset_type = message.assetType;
     return obj;
   },
   fromAminoMsg(object: AssetTypeResponseAminoMsg): AssetTypeResponse {

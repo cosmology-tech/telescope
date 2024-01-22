@@ -1445,8 +1445,8 @@ export const EncodingTestForDontOmit = {
     obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : {};
     obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
     obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : "";
-    obj.opt = voteOptionToJSON(message.opt);
-    obj.d_o_opt = voteOptionToJSON(message.dOOpt);
+    obj.opt = message.opt;
+    obj.d_o_opt = message.dOOpt ?? 0;
     obj.period = message.period ? Duration.toAmino(message.period) : undefined;
     obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : Duration.fromPartial({});
     obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
@@ -1504,12 +1504,12 @@ export const EncodingTestForDontOmit = {
       obj.d_o_wasms = [];
     }
     if (message.opts) {
-      obj.opts = message.opts.map(e => voteOptionToJSON(e));
+      obj.opts = message.opts.map(e => e);
     } else {
       obj.opts = [];
     }
     if (message.dOOpts) {
-      obj.d_o_opts = message.dOOpts.map(e => voteOptionToJSON(e));
+      obj.d_o_opts = message.dOOpts.map(e => e);
     } else {
       obj.d_o_opts = [];
     }
@@ -2606,8 +2606,8 @@ export const EncodingTestForOmit = {
     obj.o_raw = message.oRaw ? JSON.parse(fromUtf8(message.oRaw)) : undefined;
     obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
     obj.o_wasm = message.oWasm ? toBase64(message.oWasm) : undefined;
-    obj.opt = voteOptionToJSON(message.opt);
-    obj.o_opt = voteOptionToJSON(message.oOpt);
+    obj.opt = message.opt;
+    obj.o_opt = message.oOpt;
     obj.period = message.period ? Duration.toAmino(message.period) : undefined;
     obj.o_period = message.oPeriod ? Duration.toAmino(message.oPeriod) : undefined;
     obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
@@ -2665,12 +2665,12 @@ export const EncodingTestForOmit = {
       obj.o_wasms = [];
     }
     if (message.opts) {
-      obj.opts = message.opts.map(e => voteOptionToJSON(e));
+      obj.opts = message.opts.map(e => e);
     } else {
       obj.opts = [];
     }
     if (message.oOpts) {
-      obj.o_opts = message.oOpts.map(e => voteOptionToJSON(e));
+      obj.o_opts = message.oOpts.map(e => e);
     } else {
       obj.o_opts = [];
     }

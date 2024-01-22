@@ -1,4 +1,4 @@
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
+import { NullValue, NullValueSDKType, nullValueFromJSON } from "../../../protobuf/struct";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
@@ -420,7 +420,7 @@ export const Value = {
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.null_value = message.nullValue;
     obj.bool_value = message.boolValue;
     obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
     obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;

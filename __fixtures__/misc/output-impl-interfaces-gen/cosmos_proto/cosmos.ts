@@ -419,7 +419,7 @@ export const ScalarDescriptor = {
     obj.name = message.name;
     obj.description = message.description;
     if (message.fieldType) {
-      obj.field_type = message.fieldType.map(e => scalarTypeToJSON(e));
+      obj.field_type = message.fieldType.map(e => e);
     } else {
       obj.field_type = [];
     }

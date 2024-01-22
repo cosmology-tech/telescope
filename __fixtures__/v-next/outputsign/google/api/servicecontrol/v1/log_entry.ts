@@ -1,5 +1,5 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../../../logging/type/log_severity";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON } from "../../../logging/type/log_severity";
 import { HttpRequest, HttpRequestAmino, HttpRequestSDKType } from "./http_request";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
@@ -571,7 +571,7 @@ export const LogEntry = {
     const obj: any = {};
     obj.name = message.name;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
-    obj.severity = logSeverityToJSON(message.severity);
+    obj.severity = message.severity;
     obj.http_request = message.httpRequest ? HttpRequest.toAmino(message.httpRequest) : undefined;
     obj.trace = message.trace;
     obj.insert_id = message.insertId;

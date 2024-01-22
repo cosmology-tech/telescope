@@ -1268,7 +1268,7 @@ export const Vote = {
   },
   toAmino(message: Vote): VoteAmino {
     const obj: any = {};
-    obj.type = signedMsgTypeToJSON(message.type);
+    obj.type = message.type;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.round = message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId) : undefined;
@@ -1560,7 +1560,7 @@ export const CommitSig = {
   },
   toAmino(message: CommitSig): CommitSigAmino {
     const obj: any = {};
-    obj.block_id_flag = blockIDFlagToJSON(message.blockIdFlag);
+    obj.block_id_flag = message.blockIdFlag;
     obj.validator_address = message.validatorAddress ? base64FromBytes(message.validatorAddress) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
@@ -1747,7 +1747,7 @@ export const Proposal = {
   },
   toAmino(message: Proposal): ProposalAmino {
     const obj: any = {};
-    obj.type = signedMsgTypeToJSON(message.type);
+    obj.type = message.type;
     obj.height = message.height ? message.height.toString() : undefined;
     obj.round = message.round;
     obj.pol_round = message.polRound;

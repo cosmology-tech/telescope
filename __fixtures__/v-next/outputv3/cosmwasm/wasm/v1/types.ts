@@ -408,7 +408,7 @@ export const AccessTypeParam = {
   },
   toAmino(message: AccessTypeParam, useInterfaces: boolean = true): AccessTypeParamAmino {
     const obj: any = {};
-    obj.value = accessTypeToJSON(message.value);
+    obj.value = message.value;
     return obj;
   },
   fromProtoMsg(message: AccessTypeParamProtoMsg, useInterfaces: boolean = true): AccessTypeParam {
@@ -504,7 +504,7 @@ export const AccessConfig = {
   },
   toAmino(message: AccessConfig, useInterfaces: boolean = true): AccessConfigAmino {
     const obj: any = {};
-    obj.permission = accessTypeToJSON(message.permission);
+    obj.permission = message.permission;
     obj.address = message.address;
     return obj;
   },
@@ -621,7 +621,7 @@ export const Params = {
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess, useInterfaces) : undefined;
-    obj.instantiate_default_permission = accessTypeToJSON(message.instantiateDefaultPermission);
+    obj.instantiate_default_permission = message.instantiateDefaultPermission;
     obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
     return obj;
   },
@@ -1050,7 +1050,7 @@ export const ContractCodeHistoryEntry = {
   },
   toAmino(message: ContractCodeHistoryEntry, useInterfaces: boolean = true): ContractCodeHistoryEntryAmino {
     const obj: any = {};
-    obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation);
+    obj.operation = message.operation;
     obj.code_id = message.codeId ? message.codeId.toString() : undefined;
     obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated, useInterfaces) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;

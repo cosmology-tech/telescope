@@ -1281,7 +1281,7 @@ export const IssueDetails = {
   },
   toAmino(message: IssueDetails, useInterfaces: boolean = true): IssueDetailsAmino {
     const obj: any = {};
-    obj.severity = issueDetails_SeverityToJSON(message.severity);
+    obj.severity = message.severity;
     obj.position = message.position ? SourcePosition.toAmino(message.position, useInterfaces) : undefined;
     obj.id = message.id ? message.id.toString() : undefined;
     return obj;

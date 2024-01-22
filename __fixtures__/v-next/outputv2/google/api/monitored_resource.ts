@@ -486,7 +486,7 @@ export const MonitoredResourceDescriptor = {
     } else {
       obj.labels = [];
     }
-    obj.launch_stage = launchStageToJSON(message.launchStage);
+    obj.launch_stage = message.launchStage;
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {

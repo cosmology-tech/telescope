@@ -639,7 +639,7 @@ export const Api = {
     } else {
       obj.mixins = [];
     }
-    obj.syntax = syntaxToJSON(message.syntax);
+    obj.syntax = message.syntax;
     return obj;
   },
   fromProtoMsg(message: ApiProtoMsg, useInterfaces: boolean = true): Api {
@@ -825,7 +825,7 @@ export const Method = {
     } else {
       obj.options = [];
     }
-    obj.syntax = syntaxToJSON(message.syntax);
+    obj.syntax = message.syntax;
     return obj;
   },
   fromProtoMsg(message: MethodProtoMsg, useInterfaces: boolean = true): Method {

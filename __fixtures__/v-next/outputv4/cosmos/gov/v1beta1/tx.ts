@@ -467,7 +467,7 @@ export const MsgVote = {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
     obj.voter = message.voter;
-    obj.option = voteOptionToJSON(message.option);
+    obj.option = message.option;
     return obj;
   },
   fromAminoMsg(object: MsgVoteAminoMsg): MsgVote {

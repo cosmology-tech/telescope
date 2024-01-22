@@ -528,7 +528,7 @@ export const QueryCondition = {
   },
   toAmino(message: QueryCondition, useInterfaces: boolean = true): QueryConditionAmino {
     const obj: any = {};
-    obj.lock_query_type = lockQueryTypeToJSON(message.lockQueryType);
+    obj.lock_query_type = message.lockQueryType;
     obj.denom = message.denom;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;

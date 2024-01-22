@@ -564,7 +564,7 @@ export const QueryProposalsRequest = {
   },
   toAmino(message: QueryProposalsRequest): QueryProposalsRequestAmino {
     const obj: any = {};
-    obj.proposal_status = proposalStatusToJSON(message.proposalStatus);
+    obj.proposal_status = message.proposalStatus;
     obj.voter = message.voter;
     obj.depositor = message.depositor;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;

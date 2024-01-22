@@ -3529,8 +3529,8 @@ export const FieldDescriptorProto = {
     const obj: any = {};
     obj.name = message.name;
     obj.number = message.number;
-    obj.label = fieldDescriptorProto_LabelToJSON(message.label);
-    obj.type = fieldDescriptorProto_TypeToJSON(message.type);
+    obj.label = message.label;
+    obj.type = message.type;
     obj.type_name = message.typeName;
     obj.extendee = message.extendee;
     obj.default_value = message.defaultValue;
@@ -4788,7 +4788,7 @@ export const FileOptions = {
     obj.java_multiple_files = message.javaMultipleFiles;
     obj.java_generate_equals_and_hash = message.javaGenerateEqualsAndHash;
     obj.java_string_check_utf8 = message.javaStringCheckUtf8;
-    obj.optimize_for = fileOptions_OptimizeModeToJSON(message.optimizeFor);
+    obj.optimize_for = message.optimizeFor;
     obj.go_package = message.goPackage;
     obj.cc_generic_services = message.ccGenericServices;
     obj.java_generic_services = message.javaGenericServices;
@@ -5163,9 +5163,9 @@ export const FieldOptions = {
   },
   toAmino(message: FieldOptions): FieldOptionsAmino {
     const obj: any = {};
-    obj.ctype = fieldOptions_CTypeToJSON(message.ctype);
+    obj.ctype = message.ctype;
     obj.packed = message.packed;
-    obj.jstype = fieldOptions_JSTypeToJSON(message.jstype);
+    obj.jstype = message.jstype;
     obj.lazy = message.lazy;
     obj.deprecated = message.deprecated;
     obj.weak = message.weak;
@@ -5760,7 +5760,7 @@ export const MethodOptions = {
   toAmino(message: MethodOptions): MethodOptionsAmino {
     const obj: any = {};
     obj.deprecated = message.deprecated;
-    obj.idempotency_level = methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel);
+    obj.idempotency_level = message.idempotencyLevel;
     if (message.uninterpretedOption) {
       obj.uninterpreted_option = message.uninterpretedOption.map(e => e ? UninterpretedOption.toAmino(e) : undefined);
     } else {
