@@ -30,8 +30,8 @@ export interface TelescopeGeneratedCodec<
   encode: (message: T, writer?: IBinaryWriter | any) => IBinaryWriter | any;
   decode: (input: IBinaryReader | Uint8Array | any, length?: number) => T;
   fromPartial: (object: any) => T | any;
-  fromJSON: (object: any) => T | any;
-  toJSON: (message: T | any) => any;
+  fromJSON?: (object: any) => T | any;
+  toJSON?: (message: T | any) => any;
   fromSDK?: (sdk: SDK) => T;
   fromSDKJSON?: (object: any) => SDK;
   toSDK?: (message: T) => SDK;
