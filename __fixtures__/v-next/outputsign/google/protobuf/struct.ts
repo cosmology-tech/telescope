@@ -470,7 +470,7 @@ export const Value = {
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = nullValueToJSON(message.nullValue);
+    obj.null_value = message.nullValue;
     obj.number_value = message.numberValue;
     obj.string_value = message.stringValue;
     obj.bool_value = message.boolValue;

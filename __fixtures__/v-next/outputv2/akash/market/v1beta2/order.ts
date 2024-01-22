@@ -390,7 +390,7 @@ export const Order = {
   toAmino(message: Order): OrderAmino {
     const obj: any = {};
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : undefined;
-    obj.state = order_StateToJSON(message.state);
+    obj.state = message.state;
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : undefined;
     obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
     return obj;

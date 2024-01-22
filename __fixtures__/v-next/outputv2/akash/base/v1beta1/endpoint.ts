@@ -120,7 +120,7 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
-    obj.kind = endpoint_KindToJSON(message.kind);
+    obj.kind = message.kind;
     return obj;
   },
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {

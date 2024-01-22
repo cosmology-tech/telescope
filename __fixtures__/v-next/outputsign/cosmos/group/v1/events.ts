@@ -1,4 +1,4 @@
-import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
+import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.group.v1";
@@ -761,7 +761,7 @@ export const EventExec = {
   toAmino(message: EventExec): EventExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.result = proposalExecutorResultToJSON(message.result);
+    obj.result = message.result;
     return obj;
   },
   fromAminoMsg(object: EventExecAminoMsg): EventExec {

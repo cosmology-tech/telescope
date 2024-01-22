@@ -747,7 +747,7 @@ export const AssetTypeResponse = {
   },
   toAmino(message: AssetTypeResponse, useInterfaces: boolean = true): AssetTypeResponseAmino {
     const obj: any = {};
-    obj.asset_type = superfluidAssetTypeToJSON(message.assetType);
+    obj.asset_type = message.assetType;
     return obj;
   },
   fromProtoMsg(message: AssetTypeResponseProtoMsg, useInterfaces: boolean = true): AssetTypeResponse {

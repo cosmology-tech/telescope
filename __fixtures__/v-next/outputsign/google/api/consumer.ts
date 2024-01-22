@@ -327,7 +327,7 @@ export const Property = {
   toAmino(message: Property): PropertyAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.type = property_PropertyTypeToJSON(message.type);
+    obj.type = message.type;
     obj.description = message.description;
     return obj;
   },

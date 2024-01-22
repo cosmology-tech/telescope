@@ -504,7 +504,7 @@ export const WeightedVoteOption = {
   },
   toAmino(message: WeightedVoteOption): WeightedVoteOptionAmino {
     const obj: any = {};
-    obj.option = voteOptionToJSON(message.option);
+    obj.option = message.option;
     obj.weight = message.weight;
     return obj;
   },
@@ -886,7 +886,7 @@ export const Proposal = {
     } else {
       obj.messages = [];
     }
-    obj.status = proposalStatusToJSON(message.status);
+    obj.status = message.status;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult) : undefined;
     obj.submit_time = message.submitTime ? Timestamp.toAmino(toTimestamp(message.submitTime)) : undefined;
     obj.deposit_end_time = message.depositEndTime ? Timestamp.toAmino(toTimestamp(message.depositEndTime)) : undefined;

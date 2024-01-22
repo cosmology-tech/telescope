@@ -923,7 +923,7 @@ export const CheckResponse_ConsumerInfo = {
   toAmino(message: CheckResponse_ConsumerInfo, useInterfaces: boolean = true): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
     obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
-    obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type);
+    obj.type = message.type;
     obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
     return obj;
   },

@@ -338,7 +338,7 @@ export const CheckError = {
   },
   toAmino(message: CheckError): CheckErrorAmino {
     const obj: any = {};
-    obj.code = checkError_CodeToJSON(message.code);
+    obj.code = message.code;
     obj.subject = message.subject;
     obj.detail = message.detail;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;

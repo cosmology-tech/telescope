@@ -537,11 +537,11 @@ export const ResourceDescriptor = {
       obj.pattern = [];
     }
     obj.name_field = message.nameField;
-    obj.history = resourceDescriptor_HistoryToJSON(message.history);
+    obj.history = message.history;
     obj.plural = message.plural;
     obj.singular = message.singular;
     if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
+      obj.style = message.style.map(e => e);
     } else {
       obj.style = [];
     }

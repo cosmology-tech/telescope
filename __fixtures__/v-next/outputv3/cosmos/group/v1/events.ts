@@ -834,7 +834,7 @@ export const EventExec = {
   toAmino(message: EventExec, useInterfaces: boolean = true): EventExecAmino {
     const obj: any = {};
     obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.result = proposalExecutorResultToJSON(message.result);
+    obj.result = message.result;
     return obj;
   },
   fromProtoMsg(message: EventExecProtoMsg, useInterfaces: boolean = true): EventExec {

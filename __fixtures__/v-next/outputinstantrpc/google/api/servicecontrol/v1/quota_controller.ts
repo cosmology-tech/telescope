@@ -784,7 +784,7 @@ export const QuotaOperation = {
     } else {
       obj.quota_metrics = [];
     }
-    obj.quota_mode = quotaOperation_QuotaModeToJSON(message.quotaMode);
+    obj.quota_mode = message.quotaMode;
     return obj;
   },
   fromAminoMsg(object: QuotaOperationAminoMsg): QuotaOperation {
@@ -1081,7 +1081,7 @@ export const QuotaError = {
   },
   toAmino(message: QuotaError): QuotaErrorAmino {
     const obj: any = {};
-    obj.code = quotaError_CodeToJSON(message.code);
+    obj.code = message.code;
     obj.subject = message.subject;
     obj.description = message.description;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;

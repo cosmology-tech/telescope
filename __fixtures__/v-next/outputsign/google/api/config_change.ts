@@ -289,7 +289,7 @@ export const ConfigChange = {
     obj.element = message.element;
     obj.old_value = message.oldValue;
     obj.new_value = message.newValue;
-    obj.change_type = changeTypeToJSON(message.changeType);
+    obj.change_type = message.changeType;
     if (message.advices) {
       obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
     } else {

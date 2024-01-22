@@ -1,4 +1,4 @@
-import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideAmino, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceAmino, OverrideInlineSourceSDKType, Service, ServiceAmino, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricAmino, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicyAmino, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentityAmino, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideAmino, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceAmino, OverrideInlineSourceSDKType, Service, ServiceAmino, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricAmino, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicyAmino, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentityAmino, ServiceIdentitySDKType, quotaViewFromJSON, quotaSafetyCheckFromJSON } from "./resources";
 import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../../protobuf/field_mask";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial } from "../../../../helpers";
@@ -2087,7 +2087,7 @@ export const ListConsumerQuotaMetricsRequest = {
     obj.parent = message.parent;
     obj.page_size = message.pageSize;
     obj.page_token = message.pageToken;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromAminoMsg(object: ListConsumerQuotaMetricsRequestAminoMsg): ListConsumerQuotaMetricsRequest {
@@ -2239,7 +2239,7 @@ export const GetConsumerQuotaMetricRequest = {
   toAmino(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaMetricRequestAminoMsg): GetConsumerQuotaMetricRequest {
@@ -2314,7 +2314,7 @@ export const GetConsumerQuotaLimitRequest = {
   toAmino(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
     obj.name = message.name;
-    obj.view = quotaViewToJSON(message.view);
+    obj.view = message.view;
     return obj;
   },
   fromAminoMsg(object: GetConsumerQuotaLimitRequestAminoMsg): GetConsumerQuotaLimitRequest {
@@ -2423,7 +2423,7 @@ export const CreateAdminOverrideRequest = {
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -2549,7 +2549,7 @@ export const UpdateAdminOverrideRequest = {
     obj.force = message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -2647,7 +2647,7 @@ export const DeleteAdminOverrideRequest = {
     obj.name = message.name;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -2988,7 +2988,7 @@ export const ImportAdminOverridesRequest = {
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3215,7 +3215,7 @@ export const CreateConsumerOverrideRequest = {
     obj.override = message.override ? QuotaOverride.toAmino(message.override) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3341,7 +3341,7 @@ export const UpdateConsumerOverrideRequest = {
     obj.force = message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask) : undefined;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3439,7 +3439,7 @@ export const DeleteConsumerOverrideRequest = {
     obj.name = message.name;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -3780,7 +3780,7 @@ export const ImportConsumerOverridesRequest = {
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource) : undefined;
     obj.force = message.force;
     if (message.forceOnly) {
-      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+      obj.force_only = message.forceOnly.map(e => e);
     } else {
       obj.force_only = [];
     }
@@ -4303,7 +4303,7 @@ export const GetServiceIdentityResponse = {
   toAmino(message: GetServiceIdentityResponse): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity) : undefined;
-    obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state);
+    obj.state = message.state;
     return obj;
   },
   fromAminoMsg(object: GetServiceIdentityResponseAminoMsg): GetServiceIdentityResponse {
