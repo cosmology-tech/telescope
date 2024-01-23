@@ -427,7 +427,7 @@ export const MsgExec = {
           message.grantee = reader.string();
           break;
         case 2:
-          message.msgs.push((Any(reader) as Any));
+          message.msgs.push((Any.decode(reader, reader.uint32()) as Any));
           break;
         default:
           reader.skipType(tag & 7);

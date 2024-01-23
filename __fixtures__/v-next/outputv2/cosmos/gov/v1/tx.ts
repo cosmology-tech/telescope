@@ -285,7 +285,7 @@ export const MsgSubmitProposal = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.messages.push((Any(reader) as Any));
+          message.messages.push((Any.decode(reader, reader.uint32()) as Any));
           break;
         case 2:
           message.initialDeposit.push(Coin.decode(reader, reader.uint32()));

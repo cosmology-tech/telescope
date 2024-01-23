@@ -120,11 +120,20 @@ export const createProtoType = (
             ))
     ) {
       const typeUrl = getTypeUrlWithPkgAndName(context.ref.proto.package, name);
-        fields.push(tsPropertySignature(
-            t.identifier('$typeUrl'),
-            t.tsTypeAnnotation(t.tsLiteralType(t.stringLiteral(typeUrl))),
-            true
-        ));
+
+      const typeAnnotation = (
+        context.ref.proto.package === 'google.protobuf'
+        && name === 'Any'
+      ) ? t.tsTypeAnnotation(t.tsUnionType([
+        t.tsLiteralType(t.stringLiteral(typeUrl)),
+        t.tsStringKeyword()
+      ])) : t.tsTypeAnnotation(t.tsLiteralType(t.stringLiteral(typeUrl)))
+
+      fields.push(tsPropertySignature(
+          t.identifier('$typeUrl'),
+          typeAnnotation,
+          true
+      ));
     }
 
     [].push.apply(fields, Object.keys(proto.fields).reduce((m, fieldName) => {
