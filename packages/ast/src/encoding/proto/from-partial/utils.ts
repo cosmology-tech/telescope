@@ -596,16 +596,10 @@ export const arrayTypes = {
     // message.tokenInMaxs = object.tokenInMaxs?.map(e => Coin.fromPartial(e)) || [];
     type(args: FromPartialMethod) {
         let name = args.context.getTypeName(args.field);
-
-        const callExpr = t.callExpression(
-          t.memberExpression(
-              t.identifier(name),
-              t.identifier('fromPartial')
-          ),
-          [
-              t.identifier('e')
-          ]
-        );
+        let callee = t.memberExpression(
+          t.identifier(name),
+          t.identifier('fromPartial')
+        )
 
         if (
           !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
@@ -616,12 +610,24 @@ export const arrayTypes = {
         ) {
           name = 'GlobalDecoderRegistry';
 
-          return t.tsAsExpression(
-            callExpr,
-            t.tsAnyKeyword()
+          callee = t.memberExpression(
+            t.identifier(name),
+            t.identifier('fromPartial')
           )
+
+          return t.tsAsExpression(t.callExpression(
+            callee,
+            [
+                t.identifier('e')
+            ]
+          ), t.tsAnyKeyword())
         }
 
-        return callExpr;
+        return t.callExpression(
+          callee,
+          [
+              t.identifier('e')
+          ]
+        );
     }
 }

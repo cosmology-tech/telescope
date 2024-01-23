@@ -858,7 +858,7 @@ export const Grants = {
   },
   fromPartial(object: DeepPartial<Grants>): Grants {
     const message = createBaseGrants();
-    message.authorization = object.authorization?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.authorization = object.authorization?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     return message;
   },
   fromSDK(object: GrantsSDKType): Grants {
