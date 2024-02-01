@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoType, ProtoField } from '@subql/x-cosmology-types';
 import { protoFieldsToArray } from '../utils';
 import { arrayTypes, toAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';

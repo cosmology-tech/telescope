@@ -14,7 +14,7 @@ import {
     TraverseLocalSymbol,
     TraverseImportNames,
     TraversalSymbol
-} from '@cosmology/types';
+} from '@subql/x-cosmology-types';
 import {
     getPluginValue
 } from '@cosmology/ast';

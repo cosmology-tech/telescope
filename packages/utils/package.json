@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology/utils",
+  "name": "@subql/x-cosmology-utils",
   "version": "1.4.2",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -74,7 +74,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@cosmology/types": "^1.4.2",
+    "@subql/x-cosmology-types": "^1.4.2",
     "dotty": "0.1.2"
   }
 }

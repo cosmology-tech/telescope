@@ -1,5 +1,5 @@
-import { getNestedProto } from '@cosmology/utils';
-import { InterfaceTypeUrlMap } from '@cosmology/types';
+import { getNestedProto } from '@subql/x-cosmology-utils';
+import { InterfaceTypeUrlMap } from '@subql/x-cosmology-types';
 import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createObjectWithMethods } from '../../../object';

@@ -3,7 +3,7 @@ import { BILLION, memberExpressionOrIdentifier, shorthandProperty, TypeLong } fr
 import { protoFieldsToArray } from '../utils';
 import { ToAminoParseField, toAminoParseField } from './index'
 import { getFieldOptionality, getOneOfs } from '../../proto';
-import { ProtoField } from '@cosmology/types';
+import { ProtoField } from '@subql/x-cosmology-types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField) {

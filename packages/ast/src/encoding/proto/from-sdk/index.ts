@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoType, ProtoField } from '@subql/x-cosmology-types';
 import { pascal } from 'case';
 import { getFieldOptionality, getFieldOptionalityForDefaults, getOneOfs } from '..';
 import { identifier, objectMethod } from '../../../utils';

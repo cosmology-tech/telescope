@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService } from '@cosmology/types';
+import { ProtoService } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../encoding';
 /**
  * Entry for building stores.

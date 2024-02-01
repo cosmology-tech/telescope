@@ -1,5 +1,5 @@
   import * as t from '@babel/types';
-  import { ProtoType } from '@cosmology/types';
+  import { ProtoType } from '@subql/x-cosmology-types';
   import { BILLION, TypeLong, identifier } from '../../../utils';
   import { ProtoParseContext } from '../../context';
   import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';

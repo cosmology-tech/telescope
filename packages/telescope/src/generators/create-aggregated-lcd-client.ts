@@ -1,10 +1,10 @@
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';
-import { getNestedProto, isRefIncluded, isRefExcluded } from '@cosmology/proto-parser';
+import { getNestedProto, isRefIncluded, isRefExcluded } from '@subql/x-cosmology-proto-parser';
 import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createAggregatedLCDClient } from '@cosmology/ast';
-import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@cosmology/types';
+import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@subql/x-cosmology-types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { fixlocalpaths } from '../utils';

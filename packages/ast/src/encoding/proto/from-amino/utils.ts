@@ -3,9 +3,9 @@ import { fromAminoMethod } from "./index";
 import { identifier, callExpression, TypeLong, BILLION } from "../../../utils";
 import { getFieldsTypeName, getInterfaceFromAminoName } from "..";
 import { getDefaultTSTypeFromProtoType, getFieldNames } from "../../types";
-import { ProtoType } from "@cosmology/types";
+import { ProtoType } from "@subql/x-cosmology-types";
 import { ProtoParseContext } from "../../context";
-import { camel } from "@cosmology/utils";
+import { camel } from "@subql/x-cosmology-utils";
 
 const setNotUndefinedAndNotNull = (
   args: fromAminoMethod,

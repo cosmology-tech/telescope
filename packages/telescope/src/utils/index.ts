@@ -1,7 +1,7 @@
-import { ProtoRoot, ProtoRef } from '@cosmology/types';
+import { ProtoRoot, ProtoRef } from '@subql/x-cosmology-types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
-import { convertIfWinPath, ToUnixPath } from '@cosmology/utils';
+import { convertIfWinPath, ToUnixPath } from '@subql/x-cosmology-utils';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
   if (ref.traversed) return ref.traversed;

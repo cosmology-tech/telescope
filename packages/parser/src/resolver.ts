@@ -1,4 +1,4 @@
-import { ProtoDep } from '@cosmology/types';
+import { ProtoDep } from '@subql/x-cosmology-types';
 
 function depResolve(deps: ProtoDep[], protofile: string, resolved: string[], unresolved: string[]) {
     unresolved.push(protofile);

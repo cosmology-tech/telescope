@@ -2,7 +2,7 @@ export {
   getNestedProto,
   getNestedProtoGeneric,
   getNested,
-} from "@cosmology/utils";
+} from "@subql/x-cosmology-utils";
 
 export * from "./store";
 export * from "./resolver";

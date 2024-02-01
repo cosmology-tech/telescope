@@ -1,7 +1,7 @@
 import { ProtoStore } from './store';
-import { ProtoRef } from '@cosmology/types';
-import { Lookup } from '@cosmology/types';
-export type { Lookup } from '@cosmology/types';
+import { ProtoRef } from '@subql/x-cosmology-types';
+import { Lookup } from '@subql/x-cosmology-types';
+export type { Lookup } from '@subql/x-cosmology-types';
 export declare const recursiveLookup: (proto: any, name: string, scope?: string[], allowNested?: boolean) => any;
 export declare const importLookup: (store: ProtoStore, ref: ProtoRef, name: string) => {
     name: string;

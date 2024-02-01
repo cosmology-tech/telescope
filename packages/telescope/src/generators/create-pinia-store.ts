@@ -7,7 +7,7 @@ import {
   getImportStatements
 } from '../imports';
 import { parse } from '../parse';
-import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
+import { getNestedProto, isRefIncluded } from '@subql/x-cosmology-proto-parser';
 
 import { createPiniaStore } from '@cosmology/ast';
 

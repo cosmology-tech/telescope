@@ -1,4 +1,4 @@
-export { getNestedProto, getNestedProtoGeneric, getNested, } from "@cosmology/utils";
+export { getNestedProto, getNestedProtoGeneric, getNested, } from "@subql/x-cosmology-utils";
 export * from "./store";
 export * from "./resolver";
 export * from "./utils";

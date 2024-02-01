@@ -2,7 +2,7 @@ import * as t from '@babel/types';
 import { FromSDKJSONMethod } from './index';
 import { callExpression, identifier, TypeLong } from '../../../utils';
 import { getDefaultTSTypeFromProtoType } from '../../types';
-import { ProtoField } from '@cosmology/types';
+import { ProtoField } from '@subql/x-cosmology-types';
 import { getFieldNames } from '../../types';
 
 export const fromSDKJSON = {

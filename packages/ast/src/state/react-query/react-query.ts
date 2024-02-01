@@ -1,9 +1,9 @@
 
 import * as t from '@babel/types';
 import { arrowFunctionExpression, callExpression, identifier, makeCommentBlock, makeCommentLineWithBlocks, objectMethod, objectPattern, objectProperty, tsPropertySignature, tsTypeParameterDeclaration } from '../../utils';
-import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
+import { ProtoService, ProtoServiceMethod } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../encoding';
-import { camel, makeUseHookName, makeUseHookTypeName, makeHookKeyName } from '@cosmology/utils';
+import { camel, makeUseHookName, makeUseHookTypeName, makeHookKeyName } from '@subql/x-cosmology-utils';
 import { createClientMap } from './weak-map';
 
 /**

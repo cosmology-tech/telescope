@@ -1,6 +1,6 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@cosmology/types';
-import { IProtoStore } from '@cosmology/types';
-import { isRefExcluded, getObjectName } from '@cosmology/utils';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@subql/x-cosmology-types';
+import { IProtoStore } from '@subql/x-cosmology-types';
+import { isRefExcluded, getObjectName } from '@subql/x-cosmology-utils';
 import { getEnumFromJsonName, getEnumToJsonName, getFieldsTypeName } from './proto';
 import { getPluginValue } from '../plugins';
 import { TelescopeBaseTypes } from './types';

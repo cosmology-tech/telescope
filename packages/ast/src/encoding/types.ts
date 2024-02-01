@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@cosmology/types';
+import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@subql/x-cosmology-types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';

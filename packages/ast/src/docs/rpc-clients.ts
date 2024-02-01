@@ -1,9 +1,9 @@
 import { identifier, makeCommentBlock, memberExpressionOrIdentifier } from "../utils";
 import generate from '@babel/generator';
 import * as t from '@babel/types';
-import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@cosmology/types";
-import { camel } from "@cosmology/utils";
-import { getNestedProto } from "@cosmology/utils";
+import { ProtoRef, ProtoService, ProtoServiceMethod, ServiceMutation } from "@subql/x-cosmology-types";
+import { camel } from "@subql/x-cosmology-utils";
+import { getNestedProto } from "@subql/x-cosmology-utils";
 import { ProtoParseContext } from "../encoding";
 
 interface DocumentRpcClient {

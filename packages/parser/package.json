@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology/proto-parser",
+  "name": "@subql/x-cosmology-proto-parser",
   "version": "1.4.4",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -74,8 +74,8 @@
   },
   "dependencies": {
     "@cosmology/protobufjs": "6.11.6",
-    "@cosmology/types": "^1.4.2",
-    "@cosmology/utils": "^1.4.2",
+    "@subql/x-cosmology-types": "^1.4.2",
+    "@subql/x-cosmology-utils": "^1.4.2",
     "dotty": "0.1.2",
     "glob": "8.0.3",
     "minimatch": "5.1.0",

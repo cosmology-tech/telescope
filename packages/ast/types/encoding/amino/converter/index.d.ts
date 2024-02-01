@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoRoot } from '@cosmology/types';
+import { ProtoType, ProtoRoot } from '@subql/x-cosmology-types';
 import { AminoParseContext } from '../../context';
 interface AminoConverterItemParams {
     root: ProtoRoot;

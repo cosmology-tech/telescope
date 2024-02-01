@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { GenericParseContext, SymbolNames, TelescopeBaseTypes, importStmt } from '@cosmology/ast';
-import { ServiceMutation } from '@cosmology/types';
+import { ServiceMutation } from '@subql/x-cosmology-types';
 
 import { DerivedImportObj, ImportHash, ImportObj } from './types';
 import { UTILS, getRelativePath, UTIL_HELPERS } from './utils';

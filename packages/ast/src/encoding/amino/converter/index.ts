@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoRoot } from '@cosmology/types';
+import { ProtoType, ProtoRoot } from '@subql/x-cosmology-types';
 import { toAminoJsonMethod } from '../to-amino-json';
 import { fromAminoJsonMethod } from '../from-amino-json';
 import { getTypeUrl, getAminoTypeName } from '../utils';

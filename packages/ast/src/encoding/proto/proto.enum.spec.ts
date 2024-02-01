@@ -4,9 +4,9 @@ import {
   createProtoEnumToJSON,
 } from "./enums";
 import struct from "../../../../../__fixtures__/proto-json/google/protobuf/struct.json";
-import { getNestedProto } from "@cosmology/utils";
+import { getNestedProto } from "@subql/x-cosmology-utils";
 import { ProtoParseContext } from "@cosmology/ast";
-import { ProtoRoot } from "@cosmology/types";
+import { ProtoRoot } from "@subql/x-cosmology-types";
 import {
   expectCode,
   getTestProtoStore,
