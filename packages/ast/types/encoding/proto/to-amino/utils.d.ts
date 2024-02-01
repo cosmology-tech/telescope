@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@cosmology/types';
+import { ProtoType } from '@subql/x-cosmology-types';
 import { ProtoParseContext } from '../../context';
 import { ToAminoJSONMethod } from './index';
 export declare const toAminoJSON: {

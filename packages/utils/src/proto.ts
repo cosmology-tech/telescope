@@ -1,7 +1,7 @@
 import { camel, variableSlug } from ".";
 import { pascal, snake } from "case";
 import minimatch from "minimatch";
-import { ProtoRef, ProtoRoot } from "@cosmology/types";
+import { ProtoRef, ProtoRoot } from "@subql/x-cosmology-types";
 import dotty from "dotty";
 
 export const getNestedProto = (root: ProtoRoot) => {

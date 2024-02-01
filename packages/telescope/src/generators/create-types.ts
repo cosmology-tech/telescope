@@ -6,10 +6,10 @@ import { parse } from '../parse';
 import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { mkdirp } from 'mkdirp';
-import { getNestedProto, isRefExcluded } from '@cosmology/proto-parser';
+import { getNestedProto, isRefExcluded } from '@subql/x-cosmology-proto-parser';
 import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
 import { BundlerFile } from 'src/types';
-import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@subql/x-cosmology-utils';
 
 export const plugin = (
     builder: TelescopeBuilder,

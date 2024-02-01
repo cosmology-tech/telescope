@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology/ast",
+  "name": "@subql/x-cosmology-ast",
   "version": "1.4.8",
   "description": "Cosmos TypeScript AST generation",
   "author": "Dan Lynch <pyramation@gmail.com>",
@@ -61,7 +61,7 @@
     "url": "https://github.com/cosmology-tech/telescope/issues"
   },
   "devDependencies": {
-    "@cosmology/proto-parser": "^1.4.4",
+    "@subql/x-cosmology-proto-parser": "^1.4.4",
     "@types/jest": "^29.5.0",
     "ast-stringify": "0.1.0",
     "cross-env": "^7.0.2",
@@ -83,8 +83,8 @@
   "dependencies": {
     "@babel/parser": "^7.23.6",
     "@babel/types": "7.23.6",
-    "@cosmology/types": "^1.4.2",
-    "@cosmology/utils": "^1.4.2",
+    "@subql/x-cosmology-types": "^1.4.2",
+    "@subql/x-cosmology-utils": "^1.4.2",
     "case": "1.6.3",
     "dotty": "0.1.2"
   }

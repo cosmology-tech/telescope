@@ -1,9 +1,9 @@
 import { Service, Type, Enum, Root, Namespace } from '@cosmology/protobufjs';
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@cosmology/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot, ProtoType } from '@subql/x-cosmology-types';
 import { ProtoStore } from './store';
-import { getTypeUrl, getAminoTypeNameByRef, getTypeNameFromFieldName } from '@cosmology/utils';
+import { getTypeUrl, getAminoTypeNameByRef, getTypeNameFromFieldName } from '@subql/x-cosmology-utils';
 import { getNestedProto } from '.';
-export { isRefExcluded, isRefIncluded, getObjectName } from '@cosmology/utils'
+export { isRefExcluded, isRefIncluded, getObjectName } from '@subql/x-cosmology-utils'
 
 // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
 // NOTE: sometimes you need to pass in `.Dummy` for the first call,

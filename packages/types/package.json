@@ -1,5 +1,5 @@
 {
-  "name": "@cosmology/types",
+  "name": "@subql/x-cosmology-types",
   "version": "1.4.2",
   "description": "Telescope types",
   "author": "Dan Lynch <pyramation@gmail.com>",

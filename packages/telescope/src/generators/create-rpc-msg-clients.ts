@@ -1,10 +1,10 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
 import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl, createRpcClientImpl } from '@cosmology/ast';
-import { getNestedProto } from '@cosmology/proto-parser';
+import { getNestedProto } from '@subql/x-cosmology-proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getQueryMethodNames, swapKeyValue } from '@subql/x-cosmology-utils';
 import { BundlerFile } from 'src/types';
 
 export const plugin = (

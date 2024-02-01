@@ -1,5 +1,5 @@
-import { ProtoType } from '@cosmology/types';
-export { getTypeUrlWithPkgAndName, getTypeUrl, getAminoTypeName } from '@cosmology/utils';
+import { ProtoType } from '@subql/x-cosmology-types';
+export { getTypeUrlWithPkgAndName, getTypeUrl, getAminoTypeName } from '@subql/x-cosmology-utils';
 export declare const arrayTypeNDim: (body: any, n: any) => any;
 export declare const protoFieldsToArray: (proto: ProtoType) => {
     type?: string;

@@ -1,4 +1,4 @@
-import { TelescopeOptions } from "@cosmology/types";
+import { TelescopeOptions } from "@subql/x-cosmology-types";
 
 export const getReactQueryHelper = (options: TelescopeOptions) => {
   return `import { getRpcClient } from './extern'

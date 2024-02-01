@@ -2,11 +2,11 @@ import { sync as glob } from 'glob';
 import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@cosmology/types';
+import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@subql/x-cosmology-types';
 import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
-import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol, IProtoStore } from '@cosmology/types';
+import { defaultTelescopeOptions, TelescopeLogLevel, TraversalSymbol, IProtoStore } from '@subql/x-cosmology-types';
 
 import google_any from './native/any';
 import google_descriptor from './native/descriptor';
@@ -17,7 +17,7 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
-import { ToUnixPath, ToWindowsPath, convertIfWinPath } from '@cosmology/utils';
+import { ToUnixPath, ToWindowsPath, convertIfWinPath } from '@subql/x-cosmology-utils';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],

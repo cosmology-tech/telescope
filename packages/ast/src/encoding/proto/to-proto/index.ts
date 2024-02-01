@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { identifier, objectMethod } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { ProtoType } from '@cosmology/types';
+import { ProtoType } from '@subql/x-cosmology-types';
 import { SymbolNames } from '../../types';
 import { getTypeUrl } from '../../amino';
 

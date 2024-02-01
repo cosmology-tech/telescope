@@ -1,9 +1,9 @@
 import {
     createAggregatedLCDClient,
 } from '../class';
-import { traverse } from '@cosmology/proto-parser'
-import { getNestedProto } from '@cosmology/utils'
-import { defaultTelescopeOptions, ProtoRef, ProtoService } from '@cosmology/types';
+import { traverse } from '@subql/x-cosmology-proto-parser'
+import { getNestedProto } from '@subql/x-cosmology-utils'
+import { defaultTelescopeOptions, ProtoRef, ProtoService } from '@subql/x-cosmology-types';
 import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
 import { getTestProtoStore } from '../../../../test-utils';

@@ -4,7 +4,7 @@ import {
   TelescopeOption,
   ProtoRef,
   ImportUsage,
-} from "@cosmology/types";
+} from "@subql/x-cosmology-types";
 import * as dotty from "dotty";
 import os from 'os';
 

@@ -8,7 +8,7 @@ import {
 import { FromAminoParseField, fromAminoParseField } from './index'
 import { protoFieldsToArray } from '../utils';
 import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@cosmology/types';
+import { ProtoField } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../context';
 
 export const fromAmino = {

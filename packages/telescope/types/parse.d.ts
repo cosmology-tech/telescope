@@ -1,4 +1,4 @@
-import { ProtoRef } from '@cosmology/types';
+import { ProtoRef } from '@subql/x-cosmology-types';
 import { TelescopeParseContext } from './build';
 export declare const parse: (context: TelescopeParseContext) => void;
 export declare const getParsedObjectName: (ref: ProtoRef, obj: any, scope: string[]) => string;

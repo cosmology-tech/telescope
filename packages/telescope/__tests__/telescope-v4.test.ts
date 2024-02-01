@@ -1,5 +1,5 @@
 import { TelescopeBuilder } from '../src/builder';
-import { TelescopeOptions } from '@cosmology/types';
+import { TelescopeOptions } from '@subql/x-cosmology-types';
 import {
   bundleBaseRegistries,
   bundleRegistries,

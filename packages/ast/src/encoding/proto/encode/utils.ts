@@ -4,7 +4,7 @@ import { getTagNumber } from '../types';
 import { getKeyTypeEntryName } from '..';
 import { ProtoParseContext } from '../../context';
 import { getDefaultTSTypeFromProtoType } from '../../types';
-import { ProtoField } from '@cosmology/types';
+import { ProtoField } from '@subql/x-cosmology-types';
 import { TypeLong } from '../../../utils';
 
 const notUndefined = (prop: string): t.Expression => {

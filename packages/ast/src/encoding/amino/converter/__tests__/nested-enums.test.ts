@@ -1,6 +1,6 @@
 import { createAminoConverter } from '../index';
-import { ProtoStore, parseProto } from '@cosmology/proto-parser'
-import { camel } from '@cosmology/utils';
+import { ProtoStore, parseProto } from '@subql/x-cosmology-proto-parser'
+import { camel } from '@subql/x-cosmology-utils';
 import { prepareContext, expectCode } from '../../../../../test-utils/';
 
 const store = new ProtoStore();

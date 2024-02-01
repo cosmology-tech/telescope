@@ -1,4 +1,4 @@
-import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
+import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@subql/x-cosmology-types";
 /**
  * swap the key and value of the input object
  * @param input obj needs to swap

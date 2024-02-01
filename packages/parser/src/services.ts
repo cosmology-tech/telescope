@@ -1,4 +1,4 @@
-import { ProtoField } from '@cosmology/types';
+import { ProtoField } from '@subql/x-cosmology-types';
 
 interface ServiceOptions {
     "(google.api.http).get"?: string;

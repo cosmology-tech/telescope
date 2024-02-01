@@ -1,4 +1,4 @@
-import { InterfaceTypeUrlMap } from '@cosmology/types';
+import { InterfaceTypeUrlMap } from '@subql/x-cosmology-types';
 import { expectCode, printCode, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createInterfaceToAmino, createInterfaceToAminoHelper } from '../to-amino';

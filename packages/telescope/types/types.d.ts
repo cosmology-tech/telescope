@@ -1,4 +1,4 @@
-import { ProtoServiceMethod, TelescopeOptions } from '@cosmology/types';
+import { ProtoServiceMethod, TelescopeOptions } from '@subql/x-cosmology-types';
 export interface Bundle {
     bundleVariables: {};
     bundleFile: string;

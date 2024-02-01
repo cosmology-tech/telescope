@@ -1,9 +1,9 @@
 import * as dotty from 'dotty';
-import { createEmptyProtoRef, getNestedProto } from '@cosmology/proto-parser';
+import { createEmptyProtoRef, getNestedProto } from '@subql/x-cosmology-proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 import { createScopedRpcFactory, createScopedGrpcWebMsgFactory, createRpcMsgExtension, importStmt } from '@cosmology/ast';
-import { ProtoRef } from '@cosmology/types';
+import { ProtoRef } from '@subql/x-cosmology-types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';
 import { aggregateImports, getDepsFromQueries, getImportStatements } from '../imports';

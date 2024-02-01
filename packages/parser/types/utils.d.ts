@@ -1,6 +1,6 @@
-import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@cosmology/types';
+import { InterfaceTypeUrlMap, ProtoRef, ProtoRoot } from '@subql/x-cosmology-types';
 import { ProtoStore } from './store';
-export { isRefExcluded, isRefIncluded, getObjectName } from '@cosmology/utils';
+export { isRefExcluded, isRefIncluded, getObjectName } from '@subql/x-cosmology-utils';
 export declare const lookupSymbolScopes: (name: string, relativeTo: string, list?: string[]) => any;
 export declare const createTypeUrlTypeMap: (store: ProtoStore, fromRef: ProtoRef) => InterfaceTypeUrlMap;
 export declare const getPackageAndNestedFromStr: (type: string, pkg: string) => {

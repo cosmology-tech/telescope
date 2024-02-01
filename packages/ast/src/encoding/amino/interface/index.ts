@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField, ProtoType } from '@cosmology/types';
+import { ProtoField, ProtoType } from '@subql/x-cosmology-types';
 import { AminoParseContext } from '../../context';
 import { getTypeUrl, protoFieldsToArray, getAminoTypeName } from '../utils';
 import { aminoInterface } from './utils';

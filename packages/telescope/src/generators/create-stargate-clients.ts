@@ -10,9 +10,9 @@ import {
     createStargateClientAminoRegistry,
     createGetTxRpc
 } from '@cosmology/ast';
-import { ProtoRef } from '@cosmology/types';
+import { ProtoRef } from '@subql/x-cosmology-types';
 import { camel, pascal } from 'case';
-import { variableSlug } from '@cosmology/utils';
+import { variableSlug } from '@subql/x-cosmology-utils';
 import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (

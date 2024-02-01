@@ -1,2 +1,2 @@
-import { TelescopeOptions } from "@cosmology/types";
+import { TelescopeOptions } from "@subql/x-cosmology-types";
 export declare const getReactQueryHelper: (options: TelescopeOptions) => string;
