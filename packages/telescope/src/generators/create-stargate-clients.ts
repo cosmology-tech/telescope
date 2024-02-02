@@ -9,7 +9,7 @@ import {
     createStargateClientProtoRegistry,
     createStargateClientAminoRegistry,
     createGetTxRpc
-} from '@cosmology/ast';
+} from '@subql/x-cosmology-ast';
 import { ProtoRef } from '@subql/x-cosmology-types';
 import { camel, pascal } from 'case';
 import { variableSlug } from '@subql/x-cosmology-utils';

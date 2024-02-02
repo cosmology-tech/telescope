@@ -5,7 +5,7 @@ import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
 import {
     createLCDClient,
-} from '@cosmology/ast';
+} from '@subql/x-cosmology-ast';
 import { ALLOWED_RPC_SERVICES } from '@subql/x-cosmology-types';
 
 export const plugin = (

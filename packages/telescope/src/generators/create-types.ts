@@ -7,7 +7,7 @@ import { writeFileSync } from 'fs';
 import { dirname } from 'path';
 import { mkdirp } from 'mkdirp';
 import { getNestedProto, isRefExcluded } from '@subql/x-cosmology-proto-parser';
-import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@cosmology/ast';
+import { createRpcClientClass, createRpcClientImpl, createRpcClientInterface, createRpcQueryExtension } from '@subql/x-cosmology-ast';
 import { BundlerFile } from 'src/types';
 import { camel, getQueryMethodNames, swapKeyValue } from '@subql/x-cosmology-utils';
 

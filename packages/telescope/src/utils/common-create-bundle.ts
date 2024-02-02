@@ -1,7 +1,7 @@
 import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { GenericParseContext } from '@cosmology/ast';
+import { GenericParseContext } from '@subql/x-cosmology-ast';
 import { ProtoRef } from '@subql/x-cosmology-types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';

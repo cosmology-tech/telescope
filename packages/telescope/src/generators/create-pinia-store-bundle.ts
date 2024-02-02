@@ -7,7 +7,7 @@ import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { commonBundlePlugin, fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
-import { createPiniaStoreFactory } from '@cosmology/ast';
+import { createPiniaStoreFactory } from '@subql/x-cosmology-ast';
 
 export const plugin = (builder: TelescopeBuilder) => {
   // if not enabled, exit

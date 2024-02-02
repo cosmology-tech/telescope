@@ -19,7 +19,7 @@ import {
     grpcWebRpcInterface,
     getGrpcWebImpl,
     createRpcClientImpl,
-} from '@cosmology/ast';
+} from '@subql/x-cosmology-ast';
 import { getNestedProto, isRefIncluded } from '@subql/x-cosmology-proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';

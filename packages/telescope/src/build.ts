@@ -29,7 +29,7 @@ import {
     createInterfaceFromAmino,
     createInterfaceToAmino,
     createRegisterAminoProtoMapping,
-} from '@cosmology/ast';
+} from '@subql/x-cosmology-ast';
 import { ServiceMutation, ServiceQuery } from '@subql/x-cosmology-types';
 
 export const getMutations = (mutations: ServiceMutation[]) => {

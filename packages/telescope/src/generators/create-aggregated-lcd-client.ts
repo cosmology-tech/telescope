@@ -3,7 +3,7 @@ import { getNestedProto, isRefIncluded, isRefExcluded } from '@subql/x-cosmology
 import { parse } from '../parse';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createAggregatedLCDClient } from '@cosmology/ast';
+import { createAggregatedLCDClient } from '@subql/x-cosmology-ast';
 import { ALLOWED_RPC_SERVICES, ProtoRef, ProtoService } from '@subql/x-cosmology-types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';

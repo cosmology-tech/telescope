@@ -1,5 +1,5 @@
 import { getNestedProto } from '@subql/x-cosmology-utils';
-import { ProtoParseContext } from '@cosmology/ast';
+import { ProtoParseContext } from '@subql/x-cosmology-ast';
 import { expectCode, getTestProtoStore } from '../../../test-utils';
 import { createObjectWithMethods } from '../object';
 

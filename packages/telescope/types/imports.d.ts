@@ -1,4 +1,4 @@
-import { GenericParseContext } from '@cosmology/ast';
+import { GenericParseContext } from '@subql/x-cosmology-ast';
 import { ServiceMutation } from '@subql/x-cosmology-types';
 import { ImportHash, ImportObj } from './types';
 import { TelescopeParseContext } from './build';
