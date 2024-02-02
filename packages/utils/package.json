@@ -1,6 +1,6 @@
 {
   "name": "@subql/x-cosmology-utils",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
