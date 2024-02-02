@@ -1,5 +1,5 @@
 import { ProtoStore, isRefExcluded, createEmptyProtoRef } from '@subql/x-cosmology-proto-parser';
-import { importNamespace } from '@cosmology/ast';
+import { importNamespace } from '@subql/x-cosmology-ast';
 import * as dotty from 'dotty';
 import { TelescopeBuilder } from './index';
 import { join, relative, dirname } from 'path';

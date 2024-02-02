@@ -2,7 +2,7 @@ import * as dotty from 'dotty';
 import { getNestedProto, isRefIncluded, createEmptyProtoRef } from '@subql/x-cosmology-proto-parser';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
-import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@cosmology/ast';
+import { createScopedRpcTmFactory, createScopedGrpcWebFactory, createScopedGrpcGatewayFactory } from '@subql/x-cosmology-ast';
 import { ProtoRef } from '@subql/x-cosmology-types';
 import { fixlocalpaths, getRelativePath } from '../utils';
 import { Bundler } from '../bundler';

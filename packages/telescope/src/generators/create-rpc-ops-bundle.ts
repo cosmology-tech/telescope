@@ -4,7 +4,7 @@ import { TelescopeBuilder } from "../builder";
 import {
   createInstantRpcInterface,
   createInstantRpcClass,
-} from "@cosmology/ast";
+} from "@subql/x-cosmology-ast";
 import { ImportUsage, ProtoRef } from "@subql/x-cosmology-types";
 import { TelescopeParseContext } from "../build";
 import { writeAstToFile } from "../utils/files";

@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { bundlePackages, getPackagesBundled } from '../src/bundle'
 import generate from '@babel/generator';
-import { recursiveModuleBundle } from '@cosmology/ast';
+import { recursiveModuleBundle } from '@subql/x-cosmology-ast';
 import { getTestProtoStore } from '../test-utils';
 
 const store = getTestProtoStore();
