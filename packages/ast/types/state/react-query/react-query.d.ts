@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService } from '@cosmology/types';
+import { ProtoService } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../encoding';
 /**
  * Create an ASTs for a function creating hooks
@@ -147,7 +147,15 @@ export declare const createRpcQueryHookClientMap: (context: GenericParseContext,
                         callee: {
                             type: string;
                             object: {
-                                type: string;
+                                type: string; /**
+                                 * Create an AST of a specific query interface of react-query
+                                 * eg: __fixtures__/output1/akash/audit/v1beta2/query.rpc.Query.ts:
+                                 * export interface UseAllProvidersAttributesQuery<TData> extends ReactQueryParams...
+                                 * @param {Object=} context - context of generating the file
+                                 * @param {string} name - name of the hook
+                                 * @param {Object=} svc - method details
+                                 * @returns {ParseResult} created AST
+                                 */
                                 name: string;
                             };
                             computed: boolean;

@@ -1,6 +1,6 @@
 import { identifier } from '../../../../../utils';
 import * as t from '@babel/types'
-import { ProtoService } from '@cosmology/types';
+import { ProtoService } from '@subql/x-cosmology-types';
 
 // second params for grpc-web method
 export const metadata = identifier(

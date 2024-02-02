@@ -19,12 +19,12 @@ import {
     grpcWebRpcInterface,
     getGrpcWebImpl,
     createRpcClientImpl,
-} from '@cosmology/ast';
-import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
+} from '@subql/x-cosmology-ast';
+import { getNestedProto, isRefIncluded } from '@subql/x-cosmology-proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { ProtoRoot, ProtoService } from '@cosmology/types';
-import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { ProtoRoot, ProtoService } from '@subql/x-cosmology-types';
+import { camel, getQueryMethodNames, swapKeyValue } from '@subql/x-cosmology-utils';
 import { BundlerFile } from '../types';
 
 export const plugin = (

@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoRef, ProtoService, ProtoServiceMethod } from "@cosmology/types";
+import { ProtoRef, ProtoService, ProtoServiceMethod } from "@subql/x-cosmology-types";
 import { ProtoParseContext } from "../encoding";
 interface DocumentRpcClient {
     service: DocumentService;

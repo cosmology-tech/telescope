@@ -1,5 +1,5 @@
-import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@cosmology/types';
-import { IProtoStore } from '@cosmology/types';
+import { TelescopeOptions, ProtoField, ProtoRef, TraversalSymbol, IParseContext, ImportUsage } from '@subql/x-cosmology-types';
+import { IProtoStore } from '@subql/x-cosmology-types';
 import { TelescopeBaseTypes } from './types';
 interface DerivativeImport {
     type: TelescopeBaseTypes;
@@ -20,7 +20,7 @@ export declare class GenericParseContext implements IParseContext {
     addImportDerivative(imp: DerivativeImport): void;
     getTypeNameFromFieldName(name: string, importSrc: string): string;
     getTypeName(field: ProtoField): string;
-    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@cosmology/types").Lookup;
+    lookupTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): import("@subql/x-cosmology-types").Lookup;
     getTypeFromCurrentPath(field: ProtoField, currentProtoPath: string): any;
 }
 export declare class AminoParseContext extends GenericParseContext implements IParseContext {

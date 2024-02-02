@@ -1,4 +1,4 @@
-import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
+import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@subql/x-cosmology-types";
 /**
  * swap the key and value of the input object
  * @param input obj needs to swap
@@ -11,6 +11,9 @@ export declare const swapKeyValue: (input: {
 };
 export declare const getPluginValue: (optionName: TelescopeOption | string, currentPkg: string, options: TelescopeOptions) => any;
 export declare const getTypeNameFromFieldName: (name: string, importSrc: string, ref: ProtoRef) => string;
+export declare const convertIfWinPath: (reg: RegExp, replaceValue: string, path: string) => string;
+export declare const ToUnixPath: RegExp;
+export declare const ToWindowsPath: RegExp;
 export declare const buildImports: (imports: ImportUsage[]) => {
     type: string;
     importKind: string;

@@ -14,10 +14,10 @@ import {
     TraverseLocalSymbol,
     TraverseImportNames,
     TraversalSymbol
-} from '@cosmology/types';
+} from '@subql/x-cosmology-types';
 import {
     getPluginValue
-} from '@cosmology/ast';
+} from '@subql/x-cosmology-ast';
 
 import { Service, Type, Field, Enum, Root, Namespace } from '@cosmology/protobufjs';
 import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup } from './lookup';

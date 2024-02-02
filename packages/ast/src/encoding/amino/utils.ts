@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@cosmology/types';
+import { ProtoType } from '@subql/x-cosmology-types';
 
-export { getTypeUrlWithPkgAndName, getTypeUrl, getAminoTypeName } from '@cosmology/utils'
+export { getTypeUrlWithPkgAndName, getTypeUrl, getAminoTypeName } from '@subql/x-cosmology-utils'
 
 export const arrayTypeNDim = (body, n) => {
     if (!n || n <= 1) return t.tsArrayType(body);

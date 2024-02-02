@@ -1,7 +1,7 @@
 import { GenericParseContext } from '../../../../encoding';
-import { ProtoService, ProtoServiceMethod } from '@cosmology/types';
+import { ProtoService, ProtoServiceMethod } from '@subql/x-cosmology-types';
 import { arrowFunctionExpression, classDeclaration, classMethod, classProperty, commentBlock, commentLine, identifier, tsMethodSignature } from '../../../../utils';
-import { camel } from '@cosmology/utils';
+import { camel } from '@subql/x-cosmology-utils';
 import { returnReponseType, optionalBool, processRpcComment } from '../utils/rpc';
 import { headersInit, initRequest, getInitReqProperties } from './utils';
 import * as t from '@babel/types'

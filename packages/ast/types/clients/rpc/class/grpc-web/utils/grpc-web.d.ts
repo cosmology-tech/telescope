@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService } from '@cosmology/types';
+import { ProtoService } from '@subql/x-cosmology-types';
 export declare const metadata: t.Identifier;
 export declare const bindThis: (name: string) => t.ExpressionStatement;
 export declare const makeComment: (comment: string) => {

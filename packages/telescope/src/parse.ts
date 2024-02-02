@@ -1,6 +1,6 @@
-import { ProtoRef, ProtoType, ServiceInfo, ALLOWED_RPC_SERVICES } from '@cosmology/types'
-import { getObjectName } from '@cosmology/proto-parser';
-import { getKeyTypeEntryName } from '@cosmology/ast';
+import { ProtoRef, ProtoType, ServiceInfo, ALLOWED_RPC_SERVICES } from '@subql/x-cosmology-types'
+import { getObjectName } from '@subql/x-cosmology-proto-parser';
+import { getKeyTypeEntryName } from '@subql/x-cosmology-ast';
 import { getRoot } from './utils';
 import { TelescopeParseContext } from './build';
 

@@ -1,4 +1,4 @@
-import { TelescopeOptions } from "@cosmology/types";
+import { TelescopeOptions } from "@subql/x-cosmology-types";
 
 export const getHelperForBigint = (options: TelescopeOptions) => {
   return `${options.aminoEncoding?.customTypes?.useCosmosSDKDec ? `import { Dec } from "@keplr-wallet/unit";

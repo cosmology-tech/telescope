@@ -6,5 +6,6 @@ coverage
 packages/**/build
 packages/**/main
 packages/**/module
+.idea
 launch.json
 .vscode/settings.json

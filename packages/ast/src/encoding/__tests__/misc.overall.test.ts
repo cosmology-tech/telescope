@@ -1,4 +1,4 @@
-import { getNestedProto } from "@cosmology/utils";
+import { getNestedProto } from "@subql/x-cosmology-utils";
 import {
   defaultTelescopeOptions,
   expectCode,

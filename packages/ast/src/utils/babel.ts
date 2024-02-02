@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { makeCommentBlock } from './utils';
 
-// TODO move to @cosmology/utils package
+// TODO move to @subql/x-cosmology-utils package
 
 export const commentBlock = (value: string): t.CommentBlock => {
     return {

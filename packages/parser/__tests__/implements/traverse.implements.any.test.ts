@@ -1,4 +1,4 @@
-import { ProtoRef, ProtoRoot } from '@cosmology/types';
+import { ProtoRef, ProtoRoot } from '@subql/x-cosmology-types';
 import { parseFullyTraversedProtoImports, parseProto, ProtoStore } from '../../src';
 import google_any from '../../src/native/any';
 const getStore = () => {

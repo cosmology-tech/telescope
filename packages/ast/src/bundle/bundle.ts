@@ -1,6 +1,6 @@
 import { extname } from 'path';
 import * as t from '@babel/types';
-import { TelescopeOptions } from '@cosmology/types';
+import { TelescopeOptions } from '@subql/x-cosmology-types';
 
 export const recursiveModuleBundle = (
     options: TelescopeOptions,

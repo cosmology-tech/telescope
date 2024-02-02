@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType } from '@cosmology/types';
+import { ProtoType } from '@subql/x-cosmology-types';
 import { fromPartialMethod } from './proto/from-partial';
 import { decodeMethod } from './proto/decode';
 import { encodeMethod } from './proto/encode';
@@ -13,7 +13,7 @@ import { ProtoParseContext } from './context';
 import { createAminoTypeProperty, createTypeUrlProperty, fromProtoMsgMethod, fromSDKJSONMethod, toProtoMethod, toProtoMsgMethod } from './proto';
 import { isMethod } from './proto/is';
 import { getAminoFieldName, getSdkFieldName } from '../utils';
-import { getAminoTypeName, getTypeUrl } from '@cosmology/utils';
+import { getAminoTypeName, getTypeUrl } from '@subql/x-cosmology-utils';
 
 export const createObjectWithMethods = (
     context: ProtoParseContext,

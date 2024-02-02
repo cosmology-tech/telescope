@@ -1,6 +1,6 @@
 import { createProtoType, createCreateProtoType } from './interface';
 
-import { getNestedProto } from '@cosmology/utils'
+import { getNestedProto } from '@subql/x-cosmology-utils'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 

@@ -1,6 +1,6 @@
 import * as t from "@babel/types";
 import { ProtoParseContext } from "../../context";
-import { ProtoField, ProtoType } from "@cosmology/types";
+import { ProtoField, ProtoType } from "@subql/x-cosmology-types";
 import { type } from "case";
 export declare const createInstanceOfTypeComparison: (args: {
     context: ProtoParseContext;

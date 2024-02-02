@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
-import { InterfaceTypeUrlMap, ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@cosmology/types';
-import { slugify } from '@cosmology/utils';
+import { InterfaceTypeUrlMap, ProtoRef, TraverseTypeUrlRef, TypeUrlRef } from '@subql/x-cosmology-types';
+import { slugify } from '@subql/x-cosmology-utils';
 import { identifier } from '../../../utils';
 import { ProtoParseContext } from "../../context";
 

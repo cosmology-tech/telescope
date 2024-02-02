@@ -1,4 +1,4 @@
-import { ProtoRef, ProtoRoot } from "@cosmology/types";
+import { ProtoRef, ProtoRoot } from "@subql/x-cosmology-types";
 export declare const getNestedProto: (root: ProtoRoot) => any;
 export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
 export declare const getNested: (root: ProtoRoot, path: string[]) => any;

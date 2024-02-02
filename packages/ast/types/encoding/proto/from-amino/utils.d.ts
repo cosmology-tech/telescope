@@ -1,6 +1,6 @@
 import * as t from "@babel/types";
 import { fromAminoMethod } from "./index";
-import { ProtoType } from "@cosmology/types";
+import { ProtoType } from "@subql/x-cosmology-types";
 import { ProtoParseContext } from "../../context";
 export declare const fromAmino: {
     string(args: fromAminoMethod): t.Statement;

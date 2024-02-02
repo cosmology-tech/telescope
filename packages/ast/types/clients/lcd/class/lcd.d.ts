@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService, ProtoServiceMethodInfo } from '@cosmology/types';
+import { ProtoService, ProtoServiceMethodInfo } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../../encoding';
 export declare const getUrlTemplateString: (url: string) => {
     strs: any[];

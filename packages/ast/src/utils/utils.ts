@@ -1,5 +1,5 @@
 import * as t from "@babel/types";
-import { ProtoField } from "@cosmology/types";
+import { ProtoField } from "@subql/x-cosmology-types";
 import { ProtoParseContext } from "../encoding";
 
 const BILLION = t.numericLiteral(1_000_000_000);

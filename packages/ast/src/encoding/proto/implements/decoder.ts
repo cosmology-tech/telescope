@@ -4,8 +4,8 @@ import {
   ProtoRef,
   TraverseTypeUrlRef,
   TypeUrlRef
-} from '@cosmology/types';
-import { slugify } from '@cosmology/utils';
+} from '@subql/x-cosmology-types';
+import { slugify } from '@subql/x-cosmology-utils';
 import { arrowFunctionExpression, identifier } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { BinaryCoder } from '../../../utils/binary-coder-expression';

@@ -7,7 +7,7 @@ import {
   ProtoRef,
   TelescopeOptions,
   IParseContext,
-} from "@cosmology/types";
+} from "@subql/x-cosmology-types";
 import { kebab } from "case";
 
 export const getTypeUrlWithPkgAndName = (pkg: string, name: string) => {

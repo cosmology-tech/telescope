@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@cosmology/types';
+import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@subql/x-cosmology-types';
 import { GenericParseContext } from '../../../encoding';
 import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 

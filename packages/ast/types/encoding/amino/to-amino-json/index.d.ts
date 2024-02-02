@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { AminoParseContext } from '../../context';
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoType, ProtoField } from '@subql/x-cosmology-types';
 export interface ToAminoParseField {
     context: AminoParseContext;
     field: ProtoField;

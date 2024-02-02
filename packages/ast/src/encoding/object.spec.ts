@@ -1,6 +1,6 @@
 import { createObjectWithMethods } from './object';
-import { traverse } from '@cosmology/proto-parser'
-import { getNestedProto } from '@cosmology/utils';
+import { traverse } from '@subql/x-cosmology-proto-parser'
+import { getNestedProto } from '@subql/x-cosmology-utils';
 import { ProtoParseContext } from './context';
 import { createProtoType } from './proto';
 import { getTestProtoStore, expectCode, defaultTelescopeOptions, printCode } from '../../test-utils';

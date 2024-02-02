@@ -4,9 +4,9 @@ import gamm from '../../../../../__fixtures__/proto-json/osmosis/gamm/v1beta1/tx
 import types from '../../../../../__fixtures__/proto-json/tendermint/abci/types.json';
 import types_tendermint from '../../../../../__fixtures__/proto-json/tendermint/types/types.json'
 
-import { traverse } from '@cosmology/proto-parser'
-import { getNestedProto } from '@cosmology/utils'
-import { defaultTelescopeOptions } from '@cosmology/types'
+import { traverse } from '@subql/x-cosmology-proto-parser'
+import { getNestedProto } from '@subql/x-cosmology-utils'
+import { defaultTelescopeOptions } from '@subql/x-cosmology-types'
 import { ProtoParseContext } from '../context';
 import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
 import deepmerge from 'deepmerge';

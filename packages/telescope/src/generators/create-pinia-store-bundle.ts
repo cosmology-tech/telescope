@@ -2,12 +2,12 @@ import { aggregateImports, getImportStatements } from '../imports';
 import { join } from 'path';
 import { TelescopeBuilder } from '../builder';
 
-import { ProtoRef } from '@cosmology/types';
+import { ProtoRef } from '@subql/x-cosmology-types';
 import { TelescopeParseContext } from '../build';
 import { writeAstToFile } from '../utils/files';
 import { commonBundlePlugin, fixlocalpaths } from '../utils';
 import * as dotty from 'dotty';
-import { createPiniaStoreFactory } from '@cosmology/ast';
+import { createPiniaStoreFactory } from '@subql/x-cosmology-ast';
 
 export const plugin = (builder: TelescopeBuilder) => {
   // if not enabled, exit

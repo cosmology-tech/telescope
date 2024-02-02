@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField, ProtoEnum } from '@cosmology/types';
+import { ProtoType, ProtoField, ProtoEnum } from '@subql/x-cosmology-types';
 import { identifier, tsPropertySignature, makeCommentBlock } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 

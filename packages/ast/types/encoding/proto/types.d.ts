@@ -1,4 +1,4 @@
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoType, ProtoField } from '@subql/x-cosmology-types';
 import { AminoParseContext, ProtoParseContext } from '../context';
 export declare const SCALAR_TYPES: string[];
 export declare const GOOGLE_TYPES: string[];

@@ -1,6 +1,6 @@
-import { ProtoStore } from '@cosmology/proto-parser';
+import { ProtoStore } from '@subql/x-cosmology-proto-parser';
 import { TelescopeParseContext } from './build';
-import { TelescopeOptions, defaultTelescopeOptions } from '@cosmology/types';
+import { TelescopeOptions, defaultTelescopeOptions } from '@subql/x-cosmology-types';
 import { bundlePackages } from './bundle';
 import { BundlerFile, TelescopeInput } from './types';
 import { Bundler } from './bundler';

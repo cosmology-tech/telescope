@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 import { makeCommentLineWithBlocks, objectPattern, objectProperty } from '.';
-import { variableSlug } from '@cosmology/utils';
+import { variableSlug } from '@subql/x-cosmology-utils';
 
 const DEFAULT_RPC_PARAM_NAME = 'rpc';
 
