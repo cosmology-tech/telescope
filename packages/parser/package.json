@@ -1,6 +1,6 @@
 {
   "name": "@subql/x-cosmology-proto-parser",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/parser#readme",
