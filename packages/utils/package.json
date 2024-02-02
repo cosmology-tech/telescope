@@ -1,6 +1,6 @@
 {
   "name": "@subql/x-cosmology-utils",
-  "version": "1.4.3",
+  "version": "1.4.4",
   "description": "Telescope utils",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/utils#readme",
@@ -74,7 +74,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@subql/x-cosmology-types": "^1.4.2",
+    "@subql/x-cosmology-types": "^1.4.4",
     "dotty": "0.1.2"
   }
 }
