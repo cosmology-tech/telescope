@@ -8,6 +8,9 @@ HELM_VERSION = v0.1.47
 ###                              All commands                               ###
 ###############################################################################
 
+.PHONY: setup
+setup: check
+
 .PHONY: test
 test:
 	yarn run e2e:test
@@ -21,10 +24,6 @@ clean: stop clean-kind
 ###############################################################################
 ###                              Helm commands                              ###
 ###############################################################################
-
-.PHONY: setup-deps
-setup-deps:
-	bash $(CURDIR)/scripts/dev-setup.sh
 
 .PHONY: install
 install:
