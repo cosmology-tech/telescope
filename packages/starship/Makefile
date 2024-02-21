@@ -2,7 +2,7 @@ HELM_NAME = telescope-starship
 HELM_FILE = configs/config.yaml
 HELM_REPO = starship
 HELM_CHART = devnet
-HELM_VERSION = v0.1.38
+HELM_VERSION = v0.1.47
 
 ###############################################################################
 ###                              All commands                               ###
@@ -33,13 +33,11 @@ setup-helm:
 
 .PHONY: install
 install:
-	@echo "Installing the helm chart. This is going to take a while....."
-	@echo "You can check the status with \"kubectl get pods\", run in another terminal please"
-	helm install -f $(HELM_FILE) $(HELM_NAME) $(HELM_REPO)/$(HELM_CHART) --version $(HELM_VERSION)
+	bash $(CURDIR)/scripts/install.sh --config $(HELM_FILE) --version $(HELM_VERSION) --name $(HELM_NAME)
 
 .PHONY: debug
 debug:
-	helm install --dry-run --debug -f $(HELM_FILE) $(HELM_NAME) $(HELM_REPO)/$(HELM_CHART)
+	bash $(CURDIR)/scripts/install.sh --config $(HELM_FILE) --version $(HELM_VERSION) --name $(HELM_NAME) --dry-run
 
 .PHONY: delete
 delete:
