@@ -8,9 +8,6 @@ HELM_VERSION = v0.1.47
 ###                              All commands                               ###
 ###############################################################################
 
-.PHONY: setup
-setup: check setup-helm
-
 .PHONY: test
 test:
 	yarn run e2e:test
@@ -25,11 +22,9 @@ clean: stop clean-kind
 ###                              Helm commands                              ###
 ###############################################################################
 
-.PHONY: setup-helm
-setup-helm:
-	helm repo add $(HELM_REPO) https://cosmology-tech.github.io/starship/
-	helm repo update
-	helm search repo $(HELM_REPO)/$(HELM_CHART) --version $(HELM_VERSION)
+.PHONY: setup-deps
+setup-deps:
+	bash $(CURDIR)/scripts/dev-setup.sh
 
 .PHONY: install
 install:
