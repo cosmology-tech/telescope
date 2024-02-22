@@ -2,7 +2,7 @@ import { generateMnemonic } from "@confio/relayer/build/lib/helpers";
 import { assertIsDeliverTxSuccess } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 
-import { cosmos, getSigningCosmosTxRpc } from "../../src/codegen1";
+import { cosmos, getSigningCosmosClient, getSigningCosmosTxRpc } from "../../src/codegen1";
 import { useChain } from "../../src";
 import "./setup.test";
 import {
@@ -273,7 +273,7 @@ describe("Authz testing", () => {
   // }, 200000);
 
   // it("exec address2 send", async () => {
-  //   const msgClient2 = await cosmos.ClientFactory.createRPCMsgExtensions({
+  //   const signingClient2 = await getSigningCosmosClient({
   //     rpcEndpoint: getRpcEndpoint(),
   //     signer: wallet2,
   //   });
@@ -310,11 +310,10 @@ describe("Authz testing", () => {
   //     ],
   //   });
 
-  //   const result = await msgClient2.cosmos.authz.v1beta1.exec(
-  //     address2,
-  //     msg,
-  //     fee
-  //   );
+  //   const result = await signingClient2.signAndBroadcast!(address2, [{
+  //     typeUrl: MsgExec.typeUrl,
+  //     value: msg
+  //   }], fee, "test sign exec");
 
   //   assertIsDeliverTxSuccess(result);
 
@@ -323,7 +322,7 @@ describe("Authz testing", () => {
   //     denom,
   //   });
 
-  //   console.log(balance)
+  //   console.log(balance);
 
   //   // expect(balance?.amount).toEqual("10000000000");
   // }, 200000);
