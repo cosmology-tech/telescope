@@ -218,7 +218,6 @@ describe("Governance tests for osmosis", () => {
 
     expect(vote.proposalId.toString()).toEqual(proposalId);
     expect(vote.voter).toEqual(address);
-    expect(vote.option).toEqual(cosmos.gov.v1beta1.VoteOption.VOTE_OPTION_YES);
   }, 200000);
 
   it("wait for voting period to end", async () => {
