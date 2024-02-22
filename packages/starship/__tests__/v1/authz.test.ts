@@ -273,8 +273,9 @@ describe("Authz testing", () => {
   // }, 200000);
 
   // it("exec address2 send", async () => {
-  //   const msgClient2 = await cosmos.ClientFactory.createRPCMsgClient({
-  //     rpc: txRpc2,
+  //   const msgClient2 = await cosmos.ClientFactory.createRPCMsgExtensions({
+  //     rpcEndpoint: getRpcEndpoint(),
+  //     signer: wallet2,
   //   });
 
   //   const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
