@@ -40,6 +40,6 @@ jobs:
         with:
           values: packages/starship/configs/local-config.yaml
           port-forward: true
-          version: 0.1.38
+          version: 0.1.48-rc12
       - name: e2e
         run: cd ./packages/starship && yarn run e2e:test

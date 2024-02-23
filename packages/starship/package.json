@@ -26,7 +26,7 @@
     "e2e:kind": "make setup-kind",
     "e2e:start": "make install",
     "e2e:port": "make port-forward",
-    "e2e:test": "jest --testPathPattern=starship/ --verbose --bail",
+    "e2e:test": "jest --testPathPattern=starship/ --verbose",
     "e2e:debug": "jest --testPathPattern=starship/ --runInBand --verbose --bail",
     "e2e:stop": "make stop",
     "e2e:clean": "make stop clean"
