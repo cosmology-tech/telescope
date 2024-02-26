@@ -17,7 +17,7 @@ export class GlobalDecoderRegistry {
     [key: string]: string;
   } = {};
 
-  static registerAminoProtoMapping(aminoType: string, typeUrl) {
+  static registerAminoProtoMapping(aminoType: string, typeUrl: string) {
     GlobalDecoderRegistry.aminoProtoMapping[aminoType] = typeUrl;
   }
 
@@ -163,7 +163,7 @@ export class GlobalDecoderRegistry {
   }
   static toAmino<T = unknown, Amino = unknown>(object: T): Amino {
     let data: any;
-    let decoder;
+    let decoder: TelescopeGeneratedCodec<any, any, any>;
     if (Any.is(object)) {
       data = GlobalDecoderRegistry.unwrapAny(object);
 
@@ -181,7 +181,7 @@ export class GlobalDecoderRegistry {
   }
   static toAminoMsg<T = unknown, Amino = unknown>(object: T): AnyAmino {
     let data: any;
-    let decoder;
+    let decoder: TelescopeGeneratedCodec<any, any, any>;
     if (Any.is(object)) {
       data = GlobalDecoderRegistry.unwrapAny(object);
 

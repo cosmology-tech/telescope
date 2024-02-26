@@ -718,37 +718,35 @@ export const switchAnyTypeArrayUnwrap = (num: number, prop: string, name: string
 };
 
 export const switchAnyTypeArray = (num: number, prop: string, name: string) => {
-  return t.switchCase(
-      t.numericLiteral(num),
-      [
-          t.expressionStatement(
-              t.callExpression(
+  return t.switchCase(t.numericLiteral(num), [
+    t.expressionStatement(
+      t.callExpression(
+        t.memberExpression(
+          t.memberExpression(t.identifier("message"), t.identifier(prop)),
+          t.identifier("push")
+        ),
+        [
+          t.tsAsExpression(
+            t.callExpression(
+              t.memberExpression(t.identifier(name), t.identifier("decode")),
+              [
+                t.identifier("reader"),
+                t.callExpression(
                   t.memberExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(prop)
-                      ),
-                      t.identifier('push')
+                    t.identifier("reader"),
+                    t.identifier("uint32")
                   ),
-                  [
-                      t.tsAsExpression(
-                          t.callExpression(
-                              t.identifier(name),
-                              [
-                                  t.identifier('reader')
-                              ]
-                          ),
-                          t.tsTypeReference(
-                              t.identifier('Any')
-                          )
-                      )
-
-                  ]
-              )
+                  []
+                )
+              ]
+            ),
+            t.tsTypeReference(t.identifier("Any"))
           ),
-          t.breakStatement()
-      ]
-  )
+        ]
+      )
+    ),
+    t.breakStatement(),
+  ]);
 };
 
 export const switchAnyTypeArrayUseInterfaces = (num: number, prop: string, typeName: string, interfaceName: string) => {

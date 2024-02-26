@@ -2,7 +2,7 @@ import { generateMnemonic } from "@confio/relayer/build/lib/helpers";
 import { assertIsDeliverTxSuccess } from "@cosmjs/stargate";
 import { DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 
-import { cosmos, getSigningCosmosTxRpc } from "../../src/codegen1";
+import { cosmos, getSigningCosmosClient, getSigningCosmosTxRpc } from "../../src/codegen1";
 import { useChain } from "../../src";
 import "./setup.test";
 import {
@@ -19,11 +19,14 @@ import { MsgVote } from "../../src/codegen1/cosmos/gov/v1beta1/tx";
 import { QueryGrantsRequest } from "../../src/codegen1/cosmos/authz/v1beta1/query";
 import { MsgSend } from "../../src/codegen1/cosmos/bank/v1beta1/tx";
 
+const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
+
 describe("Authz testing", () => {
   let wallet1, address1, denom;
   let wallet2, address2;
   let wallet3, address3;
   let chainInfo, getCoin, getRpcEndpoint, creditFromFaucet;
+  let expiration;
 
   // Variables used accross testcases
 
@@ -52,6 +55,11 @@ describe("Authz testing", () => {
     await creditFromFaucet(address1);
     await creditFromFaucet(address2);
     await creditFromFaucet(address3);
+
+    expiration = new Date();
+    expiration.setDate(expiration.getDate() + 1);
+
+    console.log(`address1: ${address1}, address2: ${address2}, address3: ${address3}, expiration: ${expiration}`)
   }, 200000);
 
   it("check address1 has tokens", async () => {
@@ -125,6 +133,7 @@ describe("Authz testing", () => {
             },
           ],
         }),
+        expiration: expiration,
       }),
     });
 
@@ -178,6 +187,7 @@ describe("Authz testing", () => {
         authorization: GenericAuthorization.fromPartial({
           msg: MsgSend.typeUrl,
         }),
+        expiration: expiration,
       }),
     });
 
@@ -231,6 +241,7 @@ describe("Authz testing", () => {
         authorization: GenericAuthorization.fromPartial({
           msg: MsgVote.typeUrl,
         }),
+        expiration: expiration,
       }),
     });
 
@@ -257,75 +268,79 @@ describe("Authz testing", () => {
     }
   }, 200000);
 
-  // it("get address2 auths", async () => {
-  //   const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-  //     rpcEndpoint: getRpcEndpoint(),
-  //   });
+  it("get address2 auths", async () => {
+    await sleep(1000)
+    const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
+      rpcEndpoint: getRpcEndpoint(),
+    });
 
-  //   const authsResults = await queryClient.cosmos.authz.v1beta1.grants(QueryGrantsRequest.fromPartial({
-  //     granter: address1,
-  //     grantee: address2,
-  //     msgTypeUrl: MsgVote.typeUrl
-  //   }));
+    console.log(`granter: ${address1}, grantee: ${address2}, msg: ${MsgVote.typeUrl}`)
+    await sleep(1000)
+    const authsResults = await queryClient.cosmos.authz.v1beta1.grants(QueryGrantsRequest.fromPartial({
+      granter: address1,
+      grantee: address2,
+      msgTypeUrl: MsgVote.typeUrl
+    }));
 
-  //   console.log(authsResults);
+    console.log(authsResults);
 
-  // }, 200000);
+  }, 2000000);
 
-  // it("exec address2 send", async () => {
-  //   const msgClient2 = await cosmos.ClientFactory.createRPCMsgClient({
-  //     rpc: txRpc2,
-  //   });
+  it("exec address2 send", async () => {
+    const msgClient2 = await cosmos.ClientFactory.createRPCMsgExtensions({
+      rpcEndpoint: getRpcEndpoint(),
+      signer: wallet2,
+    });
 
-  //   const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
-  //     rpcEndpoint: getRpcEndpoint(),
-  //   });
+    const queryClient = await cosmos.ClientFactory.createRPCQueryClient({
+      rpcEndpoint: getRpcEndpoint(),
+    });
 
-  //   const fee = {
-  //     amount: [
-  //       {
-  //         denom,
-  //         amount: "100000",
-  //       },
-  //     ],
-  //     gas: "550000",
-  //   };
+    const fee = {
+      amount: [
+        {
+          denom,
+          amount: "100000",
+        },
+      ],
+      gas: "550000",
+    };
 
-  //   const msg = MsgExec.fromPartial({
-  //     grantee: address2,
-  //     msgs: [
-  //       MsgSend.toProtoMsg(
-  //         MsgSend.fromPartial({
-  //           fromAddress: address1,
-  //           toAddress: address2,
-  //           amount: [
-  //             {
-  //               denom,
-  //               amount: "90000",
-  //             },
-  //           ],
-  //         })
-  //       ),
-  //     ],
-  //   });
+    const msg = MsgExec.fromPartial({
+      grantee: address2,
+      msgs: [
+        MsgSend.toProtoMsg(
+          MsgSend.fromPartial({
+            fromAddress: address1,
+            toAddress: address2,
+            amount: [
+              {
+                denom,
+                amount: "90000",
+              },
+            ],
+          })
+        ),
+      ],
+    });
 
-  //   const result = await msgClient2.cosmos.authz.v1beta1.exec(
-  //     address2,
-  //     msg,
-  //     fee
-  //   );
+    const result = await msgClient2.cosmos.authz.v1beta1.exec(
+      address2,
+      msg,
+      fee
+    );
 
-  //   assertIsDeliverTxSuccess(result);
+    assertIsDeliverTxSuccess(result);
 
-  //   const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
-  //     address: address2,
-  //     denom,
-  //   });
+    const { balance } = await queryClient.cosmos.bank.v1beta1.balance({
+      address: address2,
+      denom,
+    });
 
-  //   console.log(balance)
+    console.log(balance)
 
-  //   // expect(balance?.amount).toEqual("10000000000");
-  // }, 200000);
+    expect(balance?.amount).toEqual("9999990000"); // not 10000000000, due to fees deduction
+  }, 2000000);
 
   it("revoke address2 vote auth", async () => {
     const msgClient1 = await cosmos.ClientFactory.createRPCMsgExtensions({
@@ -372,7 +387,7 @@ describe("Authz testing", () => {
     expect(SendAuthorization.is(auth)).toBeTruthy();
 
     if (SendAuthorization.is(auth)) {
-      expect(auth.spendLimit[0].amount).toBe("1000000");
+      expect(auth.spendLimit[0].amount).toBe("910000"); // not 1000000 due to fees
     }
   }, 200000);
 

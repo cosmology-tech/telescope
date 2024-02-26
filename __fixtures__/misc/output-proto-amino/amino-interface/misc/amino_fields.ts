@@ -1022,8 +1022,8 @@ export const AminoEncodingTestForDontOmit = {
     message.dOPeriods = object.dOPeriods?.map(e => Duration.fromPartial(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.dOProtos = object.dOProtos?.map(e => AccessConfig.fromPartial(e)) || [];
-    message.auths = object.auths?.map(e => (Any.fromPartial(e) as any)) || [];
-    message.dOAuths = object.dOAuths?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.auths = object.auths?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
+    message.dOAuths = object.dOAuths?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     return message;
   },
   fromSDK(object: AminoEncodingTestForDontOmitSDKType): AminoEncodingTestForDontOmit {
@@ -2105,8 +2105,8 @@ export const AminoEncodingTestForOmit = {
     message.oPeriods = object.oPeriods?.map(e => Duration.fromPartial(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromPartial(e)) || [];
     message.oProtos = object.oProtos?.map(e => AccessConfig.fromPartial(e)) || [];
-    message.auths = object.auths?.map(e => (Any.fromPartial(e) as any)) || [];
-    message.oAuths = object.oAuths?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.auths = object.auths?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
+    message.oAuths = object.oAuths?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     return message;
   },
   fromSDK(object: AminoEncodingTestForOmitSDKType): AminoEncodingTestForOmit {

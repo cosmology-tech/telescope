@@ -499,7 +499,7 @@ export const MsgExec = {
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
     const message = createBaseMsgExec();
     message.grantee = object.grantee ?? "";
-    message.msgs = object.msgs?.map(e => (Any.fromPartial(e) as any)) || [];
+    message.msgs = object.msgs?.map(e => (GlobalDecoderRegistry.fromPartial(e) as any)) || [];
     return message;
   },
   fromSDK(object: MsgExecSDKType): MsgExec {

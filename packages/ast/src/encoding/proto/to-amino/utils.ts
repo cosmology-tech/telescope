@@ -284,7 +284,7 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
       },
 
       enum(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
+        return toAminoJSON.scalar(args);
       },
 
       bytes(args: ToAminoJSONMethod) {
@@ -793,7 +793,7 @@ export const arrayTypes = {
       ]);
     },
     enum() {
-        return arrayTypes.scalar()
+      return arrayTypes.scalar();
     },
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
