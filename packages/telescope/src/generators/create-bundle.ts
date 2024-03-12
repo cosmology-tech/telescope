@@ -3,6 +3,7 @@ import { TelescopeBuilder } from '../builder';
 import {
     recursiveModuleBundle
 } from '@cosmology/ast';
+import { restoreJsExtension } from 'src/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -12,6 +13,8 @@ export const plugin = (
     if (!builder.options.bundle.enabled) {
         return;
     }
+
+    restoreJsExtension(bundler.bundle.importPaths);
 
     // [x] bundle
     const body = recursiveModuleBundle(builder.options, bundler.bundle.bundleVariables);
