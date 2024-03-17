@@ -399,7 +399,7 @@ export interface CodeInfoResponseProtoMsg {
 }
 /** CodeInfoResponse contains code meta data from CodeInfo */
 export interface CodeInfoResponseAmino {
-  code_id?: string;
+  code_id: string;
   creator?: string;
   data_hash?: string;
 }
@@ -421,7 +421,7 @@ export interface QueryCodeResponseProtoMsg {
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseAmino {
   code_info?: CodeInfoResponseAmino;
-  data?: string;
+  data: string;
 }
 /** QueryCodeResponse is the response type for the Query/Code RPC method */
 export interface QueryCodeResponseSDKType {
@@ -996,7 +996,7 @@ export const QueryContractsByCodeRequest = {
   },
   toAmino(message: QueryContractsByCodeRequest, useInterfaces: boolean = true): QueryContractsByCodeRequestAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1753,7 +1753,7 @@ export const QueryCodeRequest = {
   },
   toAmino(message: QueryCodeRequest, useInterfaces: boolean = true): QueryCodeRequestAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryCodeRequestProtoMsg, useInterfaces: boolean = true): QueryCodeRequest {

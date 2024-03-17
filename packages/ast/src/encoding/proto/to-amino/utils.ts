@@ -2,17 +2,15 @@ import * as t from '@babel/types';
 import { ProtoType } from '@cosmology/types';
 import { AminoUtils, BILLION, identifier, TypeLong } from '../../../utils';
 import { ProtoParseContext } from '../../context';
-import { getDefaultTSTypeFromProtoType, getFieldNames } from '../../types';
+import { getDefaultTSTypeFromProtoType, getFieldNames, getDefaultTSTypeFromAminoTypeDefault } from '../../types';
 import { getInterfaceToAminoName } from '../implements';
 import { ToAminoJSONMethod } from './index';
+import { shouldOmitEmpty } from '@cosmology/utils';
 
 const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
     const { propName, origName } = getFieldNames(args.field);
 
-      // currently the "(amino.dont_omitempty)" does not work on cosmos sdk
-      // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-      const omitEmpty = AminoUtils.shouldOmitEmpty(args.field);
-
+    const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
     valExpr = valExpr ?? t.memberExpression(t.identifier("message"), t.identifier(propName));
 
@@ -105,39 +103,39 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
           return toAminoJSON.scalar(args);
       },
 
+      // obj.big = message.big ? message.big.toString() : "0";
+      // obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
       long(args: ToAminoJSONMethod) {
-          const { propName, origName } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const omitEmpty = AminoUtils.shouldOmitEmpty(args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
+        const nullTest = omitEmpty
+            ? TypeLong.getLongNotZero(propName, args.context)
+            : t.memberExpression(
+                  t.identifier("message"),
+                  t.identifier(propName)
+              );
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      t.callExpression(
-                          t.memberExpression(
-                              t.memberExpression(
-                                  t.identifier('message'),
-                                  t.identifier(propName)
-                              ),
-                              t.identifier('toString')
-                          ),
-                          []
-                      ),
-                      omitEmpty ? t.identifier('undefined') : t.stringLiteral("0")
-                  )
-              )
-          );
-
+        return t.expressionStatement(
+            t.assignmentExpression(
+                "=",
+                t.memberExpression(t.identifier("obj"), t.identifier(origName)),
+                t.conditionalExpression(
+                    nullTest,
+                    t.callExpression(
+                        t.memberExpression(
+                            t.memberExpression(
+                                t.identifier("message"),
+                                t.identifier(propName)
+                            ),
+                            t.identifier("toString")
+                        ),
+                        []
+                    ),
+                    omitEmpty ? t.identifier("undefined") : t.stringLiteral("0")
+                )
+            )
+        );
       },
       int64(args: ToAminoJSONMethod) {
           return toAminoJSON.long(args);
@@ -155,17 +153,17 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
           return toAminoJSON.long(args);
       },
 
+      // obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
+      // obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
       protoType(args: ToAminoJSONMethod) {
           const { propName, origName } = getFieldNames(args.field);
           const name = args.context.getTypeName(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
+          const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue = getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true);
-          let emptyValue: t.Expression = dontOmitempty ? defaultValue : t.identifier('undefined');
+          let defaultValue: t.Expression = omitEmpty ?  t.identifier('undefined') : getDefaultTSTypeFromAminoTypeDefault(args.context, args.field);
+
           if (args.field.type === 'ibc.core.client.v1.Height') {
-              emptyValue = t.objectExpression([])
               defaultValue = t.objectExpression([])
           }
 
@@ -196,7 +194,7 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                               ] : []),
                           ]
                       ),
-                      emptyValue
+                      defaultValue
                   )
               )
           );
@@ -209,11 +207,9 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
           args.context.getTypeName(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
+          const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-
-          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([
+          let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([
             t.objectProperty(t.identifier("type"), t.stringLiteral("")),
             t.objectProperty(t.identifier("value"), t.objectExpression([])),
           ]) : t.identifier('undefined');
@@ -291,10 +287,10 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
           args.context.addUtil('base64FromBytes');
           const { propName, origName } = getFieldNames(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
 
-          let defaultValue: t.Expression = dontOmitempty ? t.stringLiteral("") : t.identifier('undefined');
+          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+
+          let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
 
           const expr = t.callExpression(
             t.identifier('base64FromBytes'),
@@ -346,10 +342,10 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
           const { propName, origName } = getFieldNames(args.field);
           args.context.addUtil('toTimestamp');
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
 
-          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
+          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+
+          let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
 
           return t.expressionStatement(
               t.assignmentExpression(
@@ -391,10 +387,9 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
           const { propName, origName } = getFieldNames(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
+          const omitEmpty = shouldOmitEmpty(args.context,args.field);
 
-          let defaultValue: t.Expression = dontOmitempty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
+          let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
 
           return t.expressionStatement(
               t.assignmentExpression(
@@ -430,10 +425,10 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
           const { propName, origName } = getFieldNames(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
 
-          let defaultValue: t.Expression = dontOmitempty ? t.objectExpression([]) : t.identifier('undefined');
+          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+
+          let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([]) : t.identifier('undefined');
 
           return t.expressionStatement(
               t.assignmentExpression(
@@ -477,10 +472,10 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
           const { propName, origName } = getFieldNames(args.field);
 
-          // const dontOmitempty = args.field.options["(amino.dont_omitempty)"];
-          const dontOmitempty = !AminoUtils.shouldOmitEmpty(args.field);
 
-          let defaultValue: t.Expression = dontOmitempty ? t.stringLiteral("") : t.identifier('undefined');
+          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+
+          let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
 
           return t.expressionStatement(
               t.assignmentExpression(

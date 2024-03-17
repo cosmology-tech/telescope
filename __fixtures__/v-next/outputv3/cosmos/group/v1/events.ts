@@ -241,7 +241,7 @@ export const EventCreateGroup = {
   },
   toAmino(message: EventCreateGroup, useInterfaces: boolean = true): EventCreateGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EventCreateGroupProtoMsg, useInterfaces: boolean = true): EventCreateGroup {
@@ -324,7 +324,7 @@ export const EventUpdateGroup = {
   },
   toAmino(message: EventUpdateGroup, useInterfaces: boolean = true): EventUpdateGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EventUpdateGroupProtoMsg, useInterfaces: boolean = true): EventUpdateGroup {
@@ -569,7 +569,7 @@ export const EventSubmitProposal = {
   },
   toAmino(message: EventSubmitProposal, useInterfaces: boolean = true): EventSubmitProposalAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EventSubmitProposalProtoMsg, useInterfaces: boolean = true): EventSubmitProposal {
@@ -652,7 +652,7 @@ export const EventWithdrawProposal = {
   },
   toAmino(message: EventWithdrawProposal, useInterfaces: boolean = true): EventWithdrawProposalAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EventWithdrawProposalProtoMsg, useInterfaces: boolean = true): EventWithdrawProposal {
@@ -735,7 +735,7 @@ export const EventVote = {
   },
   toAmino(message: EventVote, useInterfaces: boolean = true): EventVoteAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EventVoteProtoMsg, useInterfaces: boolean = true): EventVote {
@@ -833,7 +833,7 @@ export const EventExec = {
   },
   toAmino(message: EventExec, useInterfaces: boolean = true): EventExecAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     obj.result = message.result === 0 ? undefined : message.result;
     return obj;
   },
@@ -932,7 +932,7 @@ export const EventLeaveGroup = {
   },
   toAmino(message: EventLeaveGroup, useInterfaces: boolean = true): EventLeaveGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },

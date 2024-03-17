@@ -287,10 +287,10 @@ export const MsgCreateBid = {
   },
   toAmino(message: MsgCreateBid): MsgCreateBidAmino {
     const obj: any = {};
-    obj.order = message.order ? OrderID.toAmino(message.order) : OrderID.fromPartial({});
+    obj.order = message.order ? OrderID.toAmino(message.order) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.provider = message.provider ?? "";
-    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : Coin.fromPartial({});
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateBidAminoMsg): MsgCreateBid {
@@ -457,7 +457,7 @@ export const MsgCloseBid = {
   },
   toAmino(message: MsgCloseBid): MsgCloseBidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.toAmino(BidID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCloseBidAminoMsg): MsgCloseBid {
@@ -834,10 +834,10 @@ export const Bid = {
   },
   toAmino(message: Bid): BidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.toAmino(BidID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BidAminoMsg): Bid {

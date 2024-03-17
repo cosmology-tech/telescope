@@ -1033,7 +1033,7 @@ export const Header = {
     const obj: any = {};
     obj.version = message.version ? Consensus.toAmino(message.version, useInterfaces) : undefined;
     obj.chain_id = message.chainId === "" ? undefined : message.chainId;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
     obj.last_block_id = message.lastBlockId ? BlockID.toAmino(message.lastBlockId, useInterfaces) : undefined;
     obj.last_commit_hash = message.lastCommitHash ? base64FromBytes(message.lastCommitHash) : undefined;
@@ -1324,7 +1324,7 @@ export const Vote = {
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
     obj.type = message.type === 0 ? undefined : message.type;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.round = message.round === 0 ? undefined : message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
@@ -1465,7 +1465,7 @@ export const Commit = {
   },
   toAmino(message: Commit, useInterfaces: boolean = true): CommitAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.round = message.round === 0 ? undefined : message.round;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
     if (message.signatures) {
@@ -1775,7 +1775,7 @@ export const Proposal = {
   toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
     const obj: any = {};
     obj.type = message.type === 0 ? undefined : message.type;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.round = message.round === 0 ? undefined : message.round;
     obj.pol_round = message.polRound === 0 ? undefined : message.polRound;
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
@@ -2114,9 +2114,9 @@ export const BlockMeta = {
   toAmino(message: BlockMeta, useInterfaces: boolean = true): BlockMetaAmino {
     const obj: any = {};
     obj.block_id = message.blockId ? BlockID.toAmino(message.blockId, useInterfaces) : undefined;
-    obj.block_size = message.blockSize ? message.blockSize.toString() : undefined;
+    obj.block_size = message.blockSize !== BigInt(0) ? message.blockSize.toString() : undefined;
     obj.header = message.header ? Header.toAmino(message.header, useInterfaces) : undefined;
-    obj.num_txs = message.numTxs ? message.numTxs.toString() : undefined;
+    obj.num_txs = message.numTxs !== BigInt(0) ? message.numTxs.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: BlockMetaProtoMsg, useInterfaces: boolean = true): BlockMeta {

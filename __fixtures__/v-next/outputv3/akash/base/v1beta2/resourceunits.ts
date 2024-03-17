@@ -25,7 +25,7 @@ export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
   storage?: StorageAmino[];
-  endpoints?: EndpointAmino[];
+  endpoints: EndpointAmino[];
 }
 /**
  * ResourceUnits describes all available resources types for deployment/node etc

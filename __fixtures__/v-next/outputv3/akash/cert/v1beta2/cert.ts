@@ -54,8 +54,8 @@ export interface CertificateIDProtoMsg {
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDAmino {
-  owner?: string;
-  serial?: string;
+  owner: string;
+  serial: string;
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDSDKType {
@@ -74,9 +74,9 @@ export interface CertificateProtoMsg {
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateAmino {
-  state?: Certificate_State;
-  cert?: string;
-  pubkey?: string;
+  state: Certificate_State;
+  cert: string;
+  pubkey: string;
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateSDKType {
@@ -96,9 +96,9 @@ export interface CertificateFilterProtoMsg {
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterAmino {
-  owner?: string;
-  serial?: string;
-  state?: string;
+  owner: string;
+  serial: string;
+  state: string;
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterSDKType {
@@ -118,9 +118,9 @@ export interface MsgCreateCertificateProtoMsg {
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateAmino {
-  owner?: string;
-  cert?: string;
-  pubkey?: string;
+  owner: string;
+  cert: string;
+  pubkey: string;
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateSDKType {
@@ -148,7 +148,7 @@ export interface MsgRevokeCertificateProtoMsg {
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateAmino {
-  id?: CertificateIDAmino;
+  id: CertificateIDAmino;
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateSDKType {
@@ -724,7 +724,7 @@ export const MsgRevokeCertificate = {
   },
   toAmino(message: MsgRevokeCertificate, useInterfaces: boolean = true): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id, useInterfaces) : CertificateID.fromPartial({});
+    obj.id = message.id ? CertificateID.toAmino(message.id, useInterfaces) : CertificateID.toAmino(CertificateID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgRevokeCertificateProtoMsg, useInterfaces: boolean = true): MsgRevokeCertificate {

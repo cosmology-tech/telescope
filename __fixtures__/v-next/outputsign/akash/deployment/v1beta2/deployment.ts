@@ -54,8 +54,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner?: string;
-  dseq?: string;
+  owner: string;
+  dseq: string;
 }
 export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentID";
@@ -79,9 +79,9 @@ export interface DeploymentProtoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
-  deployment_id?: DeploymentIDAmino;
-  state?: Deployment_State;
-  version?: string;
+  deployment_id: DeploymentIDAmino;
+  state: Deployment_State;
+  version: string;
   created_at?: string;
 }
 export interface DeploymentAminoMsg {
@@ -107,9 +107,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  state: string;
 }
 export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta2.DeploymentFilters";
@@ -279,10 +279,10 @@ export const Deployment = {
   },
   toAmino(message: Deployment): DeploymentAmino {
     const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : DeploymentID.fromPartial({});
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.version = message.version ? base64FromBytes(message.version) : "";
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentAminoMsg): Deployment {

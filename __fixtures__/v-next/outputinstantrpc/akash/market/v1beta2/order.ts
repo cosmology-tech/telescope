@@ -376,10 +376,10 @@ export const Order = {
   },
   toAmino(message: Order): OrderAmino {
     const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : OrderID.fromPartial({});
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : GroupSpec.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: OrderAminoMsg): Order {

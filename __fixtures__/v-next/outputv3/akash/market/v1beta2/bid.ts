@@ -72,10 +72,10 @@ export interface MsgCreateBidProtoMsg {
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
-  order?: OrderIDAmino;
-  provider?: string;
-  price?: DecCoinAmino;
-  deposit?: CoinAmino;
+  order: OrderIDAmino;
+  provider: string;
+  price: DecCoinAmino;
+  deposit: CoinAmino;
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidSDKType {
@@ -104,7 +104,7 @@ export interface MsgCloseBidProtoMsg {
 }
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidAmino {
-  bid_id?: BidIDAmino;
+  bid_id: BidIDAmino;
 }
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidSDKType {
@@ -140,11 +140,11 @@ export interface BidIDProtoMsg {
  * A successful bid becomes a Lease(ID).
  */
 export interface BidIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
 }
 /**
  * BidID stores owner and all other seq numbers
@@ -170,9 +170,9 @@ export interface BidProtoMsg {
 }
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
-  bid_id?: BidIDAmino;
-  state?: Bid_State;
-  price?: DecCoinAmino;
+  bid_id: BidIDAmino;
+  state: Bid_State;
+  price: DecCoinAmino;
   created_at?: string;
 }
 /** Bid stores BidID, state of bid and price */
@@ -197,12 +197,12 @@ export interface BidFiltersProtoMsg {
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersSDKType {
@@ -328,10 +328,10 @@ export const MsgCreateBid = {
   },
   toAmino(message: MsgCreateBid, useInterfaces: boolean = true): MsgCreateBidAmino {
     const obj: any = {};
-    obj.order = message.order ? OrderID.toAmino(message.order, useInterfaces) : OrderID.fromPartial({});
+    obj.order = message.order ? OrderID.toAmino(message.order, useInterfaces) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.provider = message.provider ?? "";
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : Coin.fromPartial({});
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCreateBidProtoMsg, useInterfaces: boolean = true): MsgCreateBid {
@@ -475,7 +475,7 @@ export const MsgCloseBid = {
   },
   toAmino(message: MsgCloseBid, useInterfaces: boolean = true): MsgCloseBidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.toAmino(BidID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCloseBidProtoMsg, useInterfaces: boolean = true): MsgCloseBid {
@@ -814,10 +814,10 @@ export const Bid = {
   },
   toAmino(message: Bid, useInterfaces: boolean = true): BidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.toAmino(BidID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: BidProtoMsg, useInterfaces: boolean = true): Bid {

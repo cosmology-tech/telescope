@@ -2302,7 +2302,7 @@ export const LockedRequest = {
   },
   toAmino(message: LockedRequest, useInterfaces: boolean = true): LockedRequestAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: LockedRequestProtoMsg, useInterfaces: boolean = true): LockedRequest {
@@ -2468,7 +2468,7 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
   toAmino(message: SyntheticLockupsByLockupIDRequest, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequestAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: SyntheticLockupsByLockupIDRequestProtoMsg, useInterfaces: boolean = true): SyntheticLockupsByLockupIDRequest {

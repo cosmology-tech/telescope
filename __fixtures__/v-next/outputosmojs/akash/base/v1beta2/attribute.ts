@@ -390,7 +390,7 @@ export const PlacementRequirements = {
   },
   toAmino(message: PlacementRequirements): PlacementRequirementsAmino {
     const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : SignedBy.fromPartial({});
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy) : SignedBy.toAmino(SignedBy.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {

@@ -127,7 +127,7 @@ export const GroupSpec = {
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
     obj.name = message.name ?? "";
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.fromPartial({});
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.toAmino(PlacementRequirements.fromPartial({}));
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {

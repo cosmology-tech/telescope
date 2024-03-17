@@ -608,7 +608,7 @@ export const Params = {
     obj.mint_denom = message.mintDenom === "" ? undefined : message.mintDenom;
     obj.genesis_epoch_provisions = message.genesisEpochProvisions === "" ? undefined : message.genesisEpochProvisions;
     obj.epoch_identifier = message.epochIdentifier === "" ? undefined : message.epochIdentifier;
-    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs ? message.reductionPeriodInEpochs.toString() : undefined;
+    obj.reduction_period_in_epochs = message.reductionPeriodInEpochs !== BigInt(0) ? message.reductionPeriodInEpochs.toString() : undefined;
     obj.reduction_factor = message.reductionFactor === "" ? undefined : message.reductionFactor;
     obj.distribution_proportions = message.distributionProportions ? DistributionProportions.toAmino(message.distributionProportions) : undefined;
     if (message.weightedDeveloperRewardsReceivers) {
@@ -616,7 +616,7 @@ export const Params = {
     } else {
       obj.weighted_developer_rewards_receivers = message.weightedDeveloperRewardsReceivers;
     }
-    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
+    obj.minting_rewards_distribution_start_epoch = message.mintingRewardsDistributionStartEpoch !== BigInt(0) ? message.mintingRewardsDistributionStartEpoch.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

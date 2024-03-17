@@ -44,9 +44,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of?: string[];
+  all_of: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of?: string[];
+  any_of: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -72,9 +72,9 @@ export interface PlacementRequirementsProtoMsg {
 /** PlacementRequirements */
 export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
-  signed_by?: SignedByAmino;
+  signed_by: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes?: AttributeAmino[];
+  attributes: AttributeAmino[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
@@ -380,7 +380,7 @@ export const PlacementRequirements = {
   },
   toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : SignedBy.fromPartial({});
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : SignedBy.toAmino(SignedBy.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {

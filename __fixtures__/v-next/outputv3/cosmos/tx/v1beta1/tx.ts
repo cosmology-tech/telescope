@@ -1071,7 +1071,7 @@ export const SignDoc = {
     obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
     obj.auth_info_bytes = message.authInfoBytes ? base64FromBytes(message.authInfoBytes) : undefined;
     obj.chain_id = message.chainId === "" ? undefined : message.chainId;
-    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
+    obj.account_number = message.accountNumber !== BigInt(0) ? message.accountNumber.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: SignDocProtoMsg, useInterfaces: boolean = true): SignDoc {
@@ -1238,8 +1238,8 @@ export const SignDocDirectAux = {
     obj.body_bytes = message.bodyBytes ? base64FromBytes(message.bodyBytes) : undefined;
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.chain_id = message.chainId === "" ? undefined : message.chainId;
-    obj.account_number = message.accountNumber ? message.accountNumber.toString() : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.account_number = message.accountNumber !== BigInt(0) ? message.accountNumber.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
     obj.tip = message.tip ? Tip.toAmino(message.tip, useInterfaces) : undefined;
     return obj;
   },
@@ -1407,7 +1407,7 @@ export const TxBody = {
       obj.messages = message.messages;
     }
     obj.memo = message.memo === "" ? undefined : message.memo;
-    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_height = message.timeoutHeight !== BigInt(0) ? message.timeoutHeight.toString() : undefined;
     if (message.extensionOptions) {
       obj.extension_options = message.extensionOptions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
@@ -1663,7 +1663,7 @@ export const SignerInfo = {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey, useInterfaces) : undefined;
     obj.mode_info = message.modeInfo ? ModeInfo.toAmino(message.modeInfo, useInterfaces) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: SignerInfoProtoMsg, useInterfaces: boolean = true): SignerInfo {
@@ -2093,7 +2093,7 @@ export const Fee = {
     } else {
       obj.amount = message.amount;
     }
-    obj.gas_limit = message.gasLimit ? message.gasLimit.toString() : undefined;
+    obj.gas_limit = message.gasLimit !== BigInt(0) ? message.gasLimit.toString() : undefined;
     obj.payer = message.payer === "" ? undefined : message.payer;
     obj.granter = message.granter === "" ? undefined : message.granter;
     return obj;

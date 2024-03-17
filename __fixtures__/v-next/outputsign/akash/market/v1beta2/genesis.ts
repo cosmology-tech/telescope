@@ -16,9 +16,9 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateAmino {
-  orders?: OrderAmino[];
-  leases?: LeaseAmino[];
-  params?: ParamsAmino;
+  orders: OrderAmino[];
+  leases: LeaseAmino[];
+  params: ParamsAmino;
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.market.v1beta2.GenesisState";
@@ -104,7 +104,7 @@ export const GenesisState = {
     } else {
       obj.leases = message.leases;
     }
-    obj.params = message.params ? Params.toAmino(message.params) : Params.fromPartial({});
+    obj.params = message.params ? Params.toAmino(message.params) : Params.toAmino(Params.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

@@ -15,8 +15,8 @@ export interface GenesisDeploymentProtoMsg {
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentAmino {
-  deployment?: DeploymentAmino;
-  groups?: GroupAmino[];
+  deployment: DeploymentAmino;
+  groups: GroupAmino[];
 }
 export interface GenesisDeploymentAminoMsg {
   type: "/akash.deployment.v1beta2.GenesisDeployment";
@@ -38,8 +38,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {
-  deployments?: GenesisDeploymentAmino[];
-  params?: ParamsAmino;
+  deployments: GenesisDeploymentAmino[];
+  params: ParamsAmino;
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.deployment.v1beta2.GenesisState";
@@ -137,7 +137,7 @@ export const GenesisDeployment = {
   },
   toAmino(message: GenesisDeployment): GenesisDeploymentAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.fromPartial({});
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.toAmino(Deployment.fromPartial({}));
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
     } else {
@@ -253,7 +253,7 @@ export const GenesisState = {
     } else {
       obj.deployments = message.deployments;
     }
-    obj.params = message.params ? Params.toAmino(message.params) : Params.fromPartial({});
+    obj.params = message.params ? Params.toAmino(message.params) : Params.toAmino(Params.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

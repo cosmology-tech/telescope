@@ -188,11 +188,11 @@ export const AminoConverter = {
           str: dOTests.str,
           d_o_str: dOTests.dOStr,
           b: omitDefault(dOTests.b),
-          d_o_b: omitDefault(dOTests.dOB),
+          d_o_b: dOTests.dOB,
           num: omitDefault(dOTests.num),
-          d_o_num: omitDefault(dOTests.dONum),
+          d_o_num: dOTests.dONum,
           big: omitDefault(dOTests.big)?.toString?.(),
-          d_o_big: omitDefault(dOTests.dOBig)?.toString?.(),
+          d_o_big: dOTests.dOBig?.toString?.(),
           proto: {
             sender: dOTests.proto.sender
           },
@@ -263,11 +263,11 @@ export const AminoConverter = {
         o_tests: {
           str: oTests.str,
           o_str: oTests.oStr,
-          b: omitDefault(oTests.b),
+          b: oTests.b,
           o_b: omitDefault(oTests.oB),
-          num: omitDefault(oTests.num),
+          num: oTests.num,
           o_num: omitDefault(oTests.oNum),
-          big: omitDefault(oTests.big)?.toString?.(),
+          big: oTests.big?.toString?.(),
           o_big: omitDefault(oTests.oBig)?.toString?.(),
           proto: {
             sender: oTests.proto.sender

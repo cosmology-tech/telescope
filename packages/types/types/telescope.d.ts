@@ -115,7 +115,7 @@ interface TelescopeOpts {
         customTypes?: {
             useCosmosSDKDec?: boolean;
         };
-        omitEmptyTags: ("omitempty" | "dont_omitempty")[];
+        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;

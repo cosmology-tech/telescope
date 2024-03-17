@@ -114,7 +114,7 @@ export const GenesisCertificate = {
   toAmino(message: GenesisCertificate): GenesisCertificateAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.fromPartial({});
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.toAmino(Certificate.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: GenesisCertificateAminoMsg): GenesisCertificate {

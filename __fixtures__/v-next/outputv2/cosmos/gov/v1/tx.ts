@@ -138,7 +138,7 @@ export interface MsgVoteProtoMsg {
 }
 /** MsgVote defines a message to cast a vote. */
 export interface MsgVoteAmino {
-  proposal_id?: string;
+  proposal_id: string;
   voter?: string;
   option?: VoteOption;
   metadata?: string;
@@ -181,7 +181,7 @@ export interface MsgVoteWeightedProtoMsg {
 }
 /** MsgVoteWeighted defines a message to cast a vote. */
 export interface MsgVoteWeightedAmino {
-  proposal_id?: string;
+  proposal_id: string;
   voter?: string;
   options?: WeightedVoteOptionAmino[];
   metadata?: string;
@@ -223,7 +223,7 @@ export interface MsgDepositProtoMsg {
 }
 /** MsgDeposit defines a message to submit a deposit to an existing proposal. */
 export interface MsgDepositAmino {
-  proposal_id?: string;
+  proposal_id: string;
   depositor?: string;
   amount?: CoinAmino[];
 }
@@ -476,7 +476,7 @@ export const MsgSubmitProposalResponse = {
   },
   toAmino(message: MsgSubmitProposalResponse): MsgSubmitProposalResponseAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSubmitProposalResponseAminoMsg): MsgSubmitProposalResponse {

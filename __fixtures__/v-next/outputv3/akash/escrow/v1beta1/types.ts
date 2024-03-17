@@ -111,8 +111,8 @@ export interface AccountIDProtoMsg {
 }
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
-  scope?: string;
-  xid?: string;
+  scope: string;
+  xid: string;
 }
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
@@ -141,17 +141,17 @@ export interface AccountProtoMsg {
 /** Account stores state for an escrow account */
 export interface AccountAmino {
   /** unique identifier for this escrow account */
-  id?: AccountIDAmino;
+  id: AccountIDAmino;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner?: string;
+  owner: string;
   /** current state of this escrow account */
-  state?: Account_State;
+  state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: CoinAmino;
+  balance: CoinAmino;
   /** total coins spent by this account */
-  transferred?: CoinAmino;
+  transferred: CoinAmino;
   /** block height at which this account was last settled */
-  settled_at?: string;
+  settled_at: string;
 }
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
@@ -178,13 +178,13 @@ export interface PaymentProtoMsg {
 }
 /** Payment stores state for a payment */
 export interface PaymentAmino {
-  account_id?: AccountIDAmino;
-  payment_id?: string;
-  owner?: string;
-  state?: Payment_State;
-  rate?: CoinAmino;
-  balance?: CoinAmino;
-  withdrawn?: CoinAmino;
+  account_id: AccountIDAmino;
+  payment_id: string;
+  owner: string;
+  state: Payment_State;
+  rate: CoinAmino;
+  balance: CoinAmino;
+  withdrawn: CoinAmino;
 }
 /** Payment stores state for a payment */
 export interface PaymentSDKType {
@@ -439,11 +439,11 @@ export const Account = {
   },
   toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : AccountID.fromPartial({});
+    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.fromPartial({});
-    obj.transferred = message.transferred ? Coin.toAmino(message.transferred, useInterfaces) : Coin.fromPartial({});
+    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
     return obj;
   },
@@ -622,13 +622,13 @@ export const Payment = {
   },
   toAmino(message: Payment, useInterfaces: boolean = true): PaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : AccountID.fromPartial({});
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.payment_id = message.paymentId ?? "";
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.rate = message.rate ? Coin.toAmino(message.rate, useInterfaces) : Coin.fromPartial({});
-    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.fromPartial({});
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : Coin.fromPartial({});
+    obj.rate = message.rate ? Coin.toAmino(message.rate, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
+    obj.balance = message.balance ? Coin.toAmino(message.balance, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: PaymentProtoMsg, useInterfaces: boolean = true): Payment {

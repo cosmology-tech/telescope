@@ -324,7 +324,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
     obj.data = message.data ? SignatureDescriptor_Data.toAmino(message.data) : undefined;
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignatureDescriptorAminoMsg): SignatureDescriptor {
@@ -2265,8 +2265,8 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
     const obj: any = {};
     obj.null_value = message.nullValue === null ? undefined : message.nullValue;
     obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
+    obj.int64_value = message.int64Value !== BigInt(0) ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value !== BigInt(0) ? message.uint64Value.toString() : undefined;
     obj.double_value = message.doubleValue === null ? undefined : message.doubleValue;
     obj.string_value = message.stringValue === null ? undefined : message.stringValue;
     obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
@@ -3717,26 +3717,8 @@ exports[`ibc/core/types/v1/genesis name collisions 3`] = `
     "type": "typeImport",
   },
   {
-    "import": "ibc/core/client/v1/genesis.proto",
-    "importedAs": "GenesisState1",
-    "name": "GenesisState",
-    "type": "typeImport",
-  },
-  {
     "import": "ibc/core/connection/v1/genesis.proto",
     "importedAs": "GenesisState2",
-    "name": "GenesisState",
-    "type": "typeImport",
-  },
-  {
-    "import": "ibc/core/connection/v1/genesis.proto",
-    "importedAs": "GenesisState2",
-    "name": "GenesisState",
-    "type": "typeImport",
-  },
-  {
-    "import": "ibc/core/channel/v1/genesis.proto",
-    "importedAs": "GenesisState3",
     "name": "GenesisState",
     "type": "typeImport",
   },
@@ -3970,7 +3952,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
   toAmino(message: MsgJoinPool): MsgJoinPoolAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     obj.share_out_amount = message.shareOutAmount === "" ? undefined : message.shareOutAmount;
     if (message.tokenInMaxs) {
       obj.token_in_maxs = message.tokenInMaxs.map(e => e ? Coin.toAmino(e) : undefined);

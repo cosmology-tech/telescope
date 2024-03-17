@@ -25,7 +25,7 @@ export interface ResourceUnitsAmino {
   cpu?: CPUAmino;
   memory?: MemoryAmino;
   storage?: StorageAmino[];
-  endpoints?: EndpointAmino[];
+  endpoints: EndpointAmino[];
 }
 export interface ResourceUnitsAminoMsg {
   type: "/akash.base.v1beta2.ResourceUnits";

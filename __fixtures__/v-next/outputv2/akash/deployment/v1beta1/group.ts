@@ -70,7 +70,7 @@ export interface MsgCloseGroupProtoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 export interface MsgCloseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseGroup";
@@ -104,7 +104,7 @@ export interface MsgPauseGroupProtoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 export interface MsgPauseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgPauseGroup";
@@ -138,7 +138,7 @@ export interface MsgStartGroupProtoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 export interface MsgStartGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgStartGroup";
@@ -174,9 +174,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
 }
 export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta1.GroupID";
@@ -200,9 +200,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name?: string;
-  requirements?: PlacementRequirementsAmino;
-  resources?: ResourceAmino[];
+  name: string;
+  requirements: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
 }
 export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta1.GroupSpec";
@@ -227,9 +227,9 @@ export interface GroupProtoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
-  group_id?: GroupIDAmino;
-  state?: Group_State;
-  group_spec?: GroupSpecAmino;
+  group_id: GroupIDAmino;
+  state: Group_State;
+  group_spec: GroupSpecAmino;
   created_at?: string;
 }
 export interface GroupAminoMsg {
@@ -255,9 +255,9 @@ export interface ResourceProtoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
-  resources?: ResourceUnitsAmino;
-  count?: number;
-  price?: CoinAmino;
+  resources: ResourceUnitsAmino;
+  count: number;
+  price: CoinAmino;
 }
 export interface ResourceAminoMsg {
   type: "/akash.deployment.v1beta1.Resource";
@@ -335,7 +335,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
@@ -485,7 +485,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
@@ -635,7 +635,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.fromPartial({});
+    obj.id = message.id ? GroupID.toAmino(message.id) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
@@ -939,7 +939,7 @@ export const GroupSpec = {
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
     obj.name = message.name ?? "";
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.fromPartial({});
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.toAmino(PlacementRequirements.fromPartial({}));
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
@@ -1078,10 +1078,10 @@ export const Group = {
   },
   toAmino(message: Group): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : GroupID.fromPartial({});
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : GroupID.toAmino(GroupID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : GroupSpec.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {
@@ -1198,9 +1198,9 @@ export const Resource = {
   },
   toAmino(message: Resource): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : ResourceUnits.fromPartial({});
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : ResourceUnits.toAmino(ResourceUnits.fromPartial({}));
     obj.count = message.count ?? 0;
-    obj.price = message.price ? Coin.toAmino(message.price) : Coin.fromPartial({});
+    obj.price = message.price ? Coin.toAmino(message.price) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: ResourceAminoMsg): Resource {

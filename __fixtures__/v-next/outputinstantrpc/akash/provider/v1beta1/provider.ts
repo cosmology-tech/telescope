@@ -349,7 +349,7 @@ export const MsgCreateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
@@ -580,7 +580,7 @@ export const MsgUpdateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
@@ -979,7 +979,7 @@ export const Provider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: ProviderAminoMsg): Provider {

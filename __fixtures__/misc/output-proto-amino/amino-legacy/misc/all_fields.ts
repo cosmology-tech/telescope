@@ -1276,31 +1276,31 @@ export const EncodingTestForDontOmit = {
   toAmino(message: EncodingTestForDontOmit): EncodingTestForDontOmitAmino {
     const obj: any = {};
     obj.str = message.str === "" ? undefined : message.str;
-    obj.d_o_str = message.dOStr === "" ? undefined : message.dOStr;
+    obj.d_o_str = message.dOStr ?? "";
     obj.b = message.b === false ? undefined : message.b;
-    obj.d_o_b = message.dOB === false ? undefined : message.dOB;
+    obj.d_o_b = message.dOB ?? false;
     obj.num = message.num === 0 ? undefined : message.num;
-    obj.d_o_num = message.dONum === 0 ? undefined : message.dONum;
-    obj.big = message.big ? message.big.toString() : undefined;
-    obj.d_o_big = message.dOBig ? message.dOBig.toString() : undefined;
+    obj.d_o_num = message.dONum ?? 0;
+    obj.big = message.big !== BigInt(0) ? message.big.toString() : undefined;
+    obj.d_o_big = message.dOBig ? message.dOBig.toString() : "0";
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
-    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : undefined;
+    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
-    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : undefined;
+    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : Any.toAmino(Any.fromPartial({}));
     obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
-    obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : undefined;
+    obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : "";
     obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
-    obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : undefined;
+    obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : {};
     obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
-    obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : undefined;
+    obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : "";
     obj.opt = message.opt === 0 ? undefined : message.opt;
-    obj.d_o_opt = message.dOOpt === 0 ? undefined : message.dOOpt;
+    obj.d_o_opt = message.dOOpt ?? 0;
     obj.period = message.period ? Duration.toAmino(message.period) : undefined;
-    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : undefined;
+    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : Duration.toAmino(Duration.fromPartial({}));
     obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
-    obj.d_o_date = message.dODate ? Timestamp.toAmino(toTimestamp(message.dODate)) : undefined;
+    obj.d_o_date = message.dODate ? Timestamp.toAmino(toTimestamp(message.dODate)) : new Date();
     obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
-    obj.d_o_pubkey = message.dOPubkey ? decodePubkey(message.dOPubkey) : undefined;
+    obj.d_o_pubkey = message.dOPubkey ? decodePubkey(message.dOPubkey) : Any.fromPartial({});
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
     } else {
@@ -1392,7 +1392,7 @@ export const EncodingTestForDontOmit = {
       obj.d_o_auths = message.dOAuths;
     }
     obj.dec = padDecimal(message.dec) === "" ? undefined : padDecimal(message.dec);
-    obj.d_o_dec = padDecimal(message.dODec) === "" ? undefined : padDecimal(message.dODec);
+    obj.d_o_dec = padDecimal(message.dODec) ?? "";
     if (message.decs) {
       obj.decs = message.decs.map(e => padDecimal(e));
     } else {
@@ -2436,31 +2436,31 @@ export const EncodingTestForOmit = {
   },
   toAmino(message: EncodingTestForOmit): EncodingTestForOmitAmino {
     const obj: any = {};
-    obj.str = message.str === "" ? undefined : message.str;
+    obj.str = message.str ?? "";
     obj.o_str = message.oStr === "" ? undefined : message.oStr;
-    obj.b = message.b === false ? undefined : message.b;
+    obj.b = message.b ?? false;
     obj.o_b = message.oB === false ? undefined : message.oB;
-    obj.num = message.num === 0 ? undefined : message.num;
+    obj.num = message.num ?? 0;
     obj.o_num = message.oNum === 0 ? undefined : message.oNum;
-    obj.big = message.big ? message.big.toString() : undefined;
-    obj.o_big = message.oBig ? message.oBig.toString() : undefined;
-    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
+    obj.big = message.big ? message.big.toString() : "0";
+    obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
+    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
-    obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
+    obj.auth = message.auth ? Any.toAmino(message.auth) : Any.toAmino(Any.fromPartial({}));
     obj.o_auth = message.oAuth ? Any.toAmino(message.oAuth) : undefined;
-    obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
+    obj.salt = message.salt ? base64FromBytes(message.salt) : "";
     obj.o_salt = message.oSalt ? base64FromBytes(message.oSalt) : undefined;
-    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
+    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : {};
     obj.o_raw = message.oRaw ? JSON.parse(fromUtf8(message.oRaw)) : undefined;
-    obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
+    obj.wasm = message.wasm ? toBase64(message.wasm) : "";
     obj.o_wasm = message.oWasm ? toBase64(message.oWasm) : undefined;
-    obj.opt = message.opt === 0 ? undefined : message.opt;
+    obj.opt = message.opt ?? 0;
     obj.o_opt = message.oOpt === 0 ? undefined : message.oOpt;
-    obj.period = message.period ? Duration.toAmino(message.period) : undefined;
+    obj.period = message.period ? Duration.toAmino(message.period) : Duration.toAmino(Duration.fromPartial({}));
     obj.o_period = message.oPeriod ? Duration.toAmino(message.oPeriod) : undefined;
-    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
+    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : null;
     obj.o_date = message.oDate ? Timestamp.toAmino(toTimestamp(message.oDate)) : undefined;
-    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
+    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : null;
     obj.o_pubkey = message.oPubkey ? decodePubkey(message.oPubkey) : undefined;
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
@@ -2552,7 +2552,7 @@ export const EncodingTestForOmit = {
     } else {
       obj.o_auths = message.oAuths;
     }
-    obj.dec = padDecimal(message.dec) === "" ? undefined : padDecimal(message.dec);
+    obj.dec = padDecimal(message.dec) ?? "";
     obj.o_dec = padDecimal(message.oDec) === "" ? undefined : padDecimal(message.oDec);
     if (message.decs) {
       obj.decs = message.decs.map(e => padDecimal(e));

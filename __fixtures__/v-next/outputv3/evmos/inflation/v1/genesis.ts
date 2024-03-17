@@ -206,10 +206,10 @@ export const GenesisState = {
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
-    obj.period = message.period ? message.period.toString() : undefined;
+    obj.period = message.period !== BigInt(0) ? message.period.toString() : undefined;
     obj.epoch_identifier = message.epochIdentifier === "" ? undefined : message.epochIdentifier;
-    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
-    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
+    obj.epochs_per_period = message.epochsPerPeriod !== BigInt(0) ? message.epochsPerPeriod.toString() : undefined;
+    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? message.skippedEpochs.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

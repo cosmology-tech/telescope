@@ -118,7 +118,7 @@ export const FeeToken = {
   toAmino(message: FeeToken, useInterfaces: boolean = true): FeeTokenAmino {
     const obj: any = {};
     obj.denom = message.denom === "" ? undefined : message.denom;
-    obj.poolID = message.poolID ? message.poolID.toString() : undefined;
+    obj.poolID = message.poolID !== BigInt(0) ? message.poolID.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: FeeTokenProtoMsg, useInterfaces: boolean = true): FeeToken {

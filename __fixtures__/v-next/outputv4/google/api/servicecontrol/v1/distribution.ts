@@ -416,7 +416,7 @@ export const Distribution = {
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
-    obj.count = message.count ? message.count.toString() : undefined;
+    obj.count = message.count !== BigInt(0) ? message.count.toString() : undefined;
     obj.mean = message.mean === 0 ? undefined : message.mean;
     obj.minimum = message.minimum === 0 ? undefined : message.minimum;
     obj.maximum = message.maximum === 0 ? undefined : message.maximum;

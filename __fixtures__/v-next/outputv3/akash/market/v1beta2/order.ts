@@ -64,10 +64,10 @@ export interface OrderIDProtoMsg {
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
@@ -89,9 +89,9 @@ export interface OrderProtoMsg {
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderAmino {
-  order_id?: OrderIDAmino;
-  state?: Order_State;
-  spec?: GroupSpecAmino;
+  order_id: OrderIDAmino;
+  state: Order_State;
+  spec: GroupSpecAmino;
   created_at?: string;
 }
 /** Order stores orderID, state of order and other details */
@@ -115,11 +115,11 @@ export interface OrderFiltersProtoMsg {
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  state: string;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -374,10 +374,10 @@ export const Order = {
   },
   toAmino(message: Order, useInterfaces: boolean = true): OrderAmino {
     const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : OrderID.fromPartial({});
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : GroupSpec.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: OrderProtoMsg, useInterfaces: boolean = true): Order {

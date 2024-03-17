@@ -284,74 +284,74 @@ export interface EncodingTestForOmitProtoMsg {
 }
 export interface EncodingTestForOmitAmino {
   /** scalar */
-  str?: string;
+  str: string;
   o_str?: string;
-  b?: boolean;
+  b: boolean;
   o_b?: boolean;
-  num?: number;
+  num: number;
   o_num?: number;
   /** bigint */
-  big?: string;
+  big: string;
   o_big?: string;
   /** protoType */
-  proto?: AccessConfigAmino;
+  proto: AccessConfigAmino;
   o_proto?: AccessConfigAmino;
   /** anyType */
-  auth?: AnyAmino;
+  auth: AnyAmino;
   o_auth?: AnyAmino;
   /** bytes */
-  salt?: string;
+  salt: string;
   o_salt?: string;
   /** raw bytes */
-  raw?: any;
+  raw: any;
   o_raw?: any;
   /** wasm bytes */
-  wasm?: string;
+  wasm: string;
   o_wasm?: string;
   /** enum */
-  opt?: VoteOption;
+  opt: VoteOption;
   o_opt?: VoteOption;
   /** duration */
-  period?: DurationAmino;
+  period: DurationAmino;
   o_period?: DurationAmino;
   /** timestamp */
-  date?: string;
+  date: string;
   o_date?: string;
   /** pubkey */
-  pubkey?: AnyAmino;
+  pubkey: AnyAmino;
   o_pubkey?: AnyAmino;
   /** array scalar */
-  nums?: number[];
+  nums: number[];
   o_nums?: number[];
   /** array bigint */
-  bigs?: string[];
+  bigs: string[];
   o_bigs?: string[];
   /** array bytes */
-  salts?: string[];
+  salts: string[];
   o_salts?: string[];
   /** array raw bytes */
-  raws?: any[];
+  raws: any[];
   o_raws?: any[];
   /** array wasm bytes */
-  wasms?: string[];
+  wasms: string[];
   o_wasms?: string[];
   /** array enum */
-  opts?: VoteOption[];
+  opts: VoteOption[];
   o_opts?: VoteOption[];
   /** array duration */
-  periods?: DurationAmino[];
+  periods: DurationAmino[];
   o_periods?: DurationAmino[];
   /** array protoType */
-  protos?: AccessConfigAmino[];
+  protos: AccessConfigAmino[];
   o_protos?: AccessConfigAmino[];
   /** array anyType */
-  auths?: AnyAmino[];
+  auths: AnyAmino[];
   o_auths?: AnyAmino[];
   /** dec */
-  dec?: string;
+  dec: string;
   o_dec?: string;
   /** array dec */
-  decs?: string[];
+  decs: string[];
   o_decs?: string[];
 }
 export interface EncodingTestForOmitSDKType {
@@ -1420,31 +1420,31 @@ export const EncodingTestForDontOmit = {
   toAmino(message: EncodingTestForDontOmit): EncodingTestForDontOmitAmino {
     const obj: any = {};
     obj.str = message.str === "" ? undefined : message.str;
-    obj.d_o_str = message.dOStr === "" ? undefined : message.dOStr;
+    obj.d_o_str = message.dOStr ?? "";
     obj.b = message.b === false ? undefined : message.b;
-    obj.d_o_b = message.dOB === false ? undefined : message.dOB;
+    obj.d_o_b = message.dOB ?? false;
     obj.num = message.num === 0 ? undefined : message.num;
-    obj.d_o_num = message.dONum === 0 ? undefined : message.dONum;
-    obj.big = message.big ? message.big.toString() : undefined;
-    obj.d_o_big = message.dOBig ? message.dOBig.toString() : undefined;
+    obj.d_o_num = message.dONum ?? 0;
+    obj.big = message.big !== BigInt(0) ? message.big.toString() : undefined;
+    obj.d_o_big = message.dOBig ? message.dOBig.toString() : "0";
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
-    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : undefined;
+    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
-    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : undefined;
+    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : Any.toAmino(Any.fromPartial({}));
     obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
-    obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : undefined;
+    obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : "";
     obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
-    obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : undefined;
+    obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : {};
     obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
-    obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : undefined;
+    obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : "";
     obj.opt = message.opt === 0 ? undefined : message.opt;
-    obj.d_o_opt = message.dOOpt === 0 ? undefined : message.dOOpt;
+    obj.d_o_opt = message.dOOpt ?? 0;
     obj.period = message.period ? Duration.toAmino(message.period) : undefined;
-    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : undefined;
+    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : Duration.toAmino(Duration.fromPartial({}));
     obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
-    obj.d_o_date = message.dODate ? Timestamp.toAmino(toTimestamp(message.dODate)) : undefined;
+    obj.d_o_date = message.dODate ? Timestamp.toAmino(toTimestamp(message.dODate)) : new Date();
     obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
-    obj.d_o_pubkey = message.dOPubkey ? decodePubkey(message.dOPubkey) : undefined;
+    obj.d_o_pubkey = message.dOPubkey ? decodePubkey(message.dOPubkey) : Any.fromPartial({});
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
     } else {
@@ -1536,7 +1536,7 @@ export const EncodingTestForDontOmit = {
       obj.d_o_auths = message.dOAuths;
     }
     obj.dec = message.dec === "" ? undefined : message.dec;
-    obj.d_o_dec = message.dODec === "" ? undefined : message.dODec;
+    obj.d_o_dec = message.dODec ?? "";
     if (message.decs) {
       obj.decs = message.decs.map(e => e);
     } else {
@@ -2577,31 +2577,31 @@ export const EncodingTestForOmit = {
   },
   toAmino(message: EncodingTestForOmit): EncodingTestForOmitAmino {
     const obj: any = {};
-    obj.str = message.str === "" ? undefined : message.str;
+    obj.str = message.str ?? "";
     obj.o_str = message.oStr === "" ? undefined : message.oStr;
-    obj.b = message.b === false ? undefined : message.b;
+    obj.b = message.b ?? false;
     obj.o_b = message.oB === false ? undefined : message.oB;
-    obj.num = message.num === 0 ? undefined : message.num;
+    obj.num = message.num ?? 0;
     obj.o_num = message.oNum === 0 ? undefined : message.oNum;
-    obj.big = message.big ? message.big.toString() : undefined;
-    obj.o_big = message.oBig ? message.oBig.toString() : undefined;
-    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
+    obj.big = message.big ? message.big.toString() : "0";
+    obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
+    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
-    obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
+    obj.auth = message.auth ? Any.toAmino(message.auth) : Any.toAmino(Any.fromPartial({}));
     obj.o_auth = message.oAuth ? Any.toAmino(message.oAuth) : undefined;
-    obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
+    obj.salt = message.salt ? base64FromBytes(message.salt) : "";
     obj.o_salt = message.oSalt ? base64FromBytes(message.oSalt) : undefined;
-    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
+    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : {};
     obj.o_raw = message.oRaw ? JSON.parse(fromUtf8(message.oRaw)) : undefined;
-    obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
+    obj.wasm = message.wasm ? toBase64(message.wasm) : "";
     obj.o_wasm = message.oWasm ? toBase64(message.oWasm) : undefined;
-    obj.opt = message.opt === 0 ? undefined : message.opt;
+    obj.opt = message.opt ?? 0;
     obj.o_opt = message.oOpt === 0 ? undefined : message.oOpt;
-    obj.period = message.period ? Duration.toAmino(message.period) : undefined;
+    obj.period = message.period ? Duration.toAmino(message.period) : Duration.toAmino(Duration.fromPartial({}));
     obj.o_period = message.oPeriod ? Duration.toAmino(message.oPeriod) : undefined;
-    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
+    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : null;
     obj.o_date = message.oDate ? Timestamp.toAmino(toTimestamp(message.oDate)) : undefined;
-    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
+    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : null;
     obj.o_pubkey = message.oPubkey ? decodePubkey(message.oPubkey) : undefined;
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
@@ -2693,7 +2693,7 @@ export const EncodingTestForOmit = {
     } else {
       obj.o_auths = message.oAuths;
     }
-    obj.dec = message.dec === "" ? undefined : message.dec;
+    obj.dec = message.dec ?? "";
     obj.o_dec = message.oDec === "" ? undefined : message.oDec;
     if (message.decs) {
       obj.decs = message.decs.map(e => e);

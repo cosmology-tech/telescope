@@ -972,7 +972,7 @@ export const QueryGasMeterResponse = {
   },
   toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
     const obj: any = {};
-    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
+    obj.gas_meter = message.gasMeter !== BigInt(0) ? message.gasMeter.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {

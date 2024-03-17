@@ -1,16 +1,14 @@
-import * as _58 from "./all_fields";
-import * as _59 from "./amino_fields";
-import * as _60 from "./eval_request";
-import * as _61 from "./tx";
-import * as _62 from "./tx.rpc.msg";
-import * as _63 from "./rpc.tx";
+import * as _54 from "./all_fields";
+import * as _55 from "./eval_request";
+import * as _56 from "./tx";
+import * as _57 from "./tx.rpc.msg";
+import * as _58 from "./rpc.tx";
 export const misc = {
-  ..._58,
-  ..._59,
-  ..._60,
-  ..._61,
-  ..._62,
+  ..._54,
+  ..._55,
+  ..._56,
+  ..._57,
   ClientFactory: {
-    ..._63
+    ..._58
   }
 };

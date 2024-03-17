@@ -55,7 +55,7 @@ export interface EndpointProtoMsg {
 /** Endpoint describes a publicly accessible IP service */
 export interface EndpointAmino {
   kind?: Endpoint_Kind;
-  sequence_number?: number;
+  sequence_number: number;
 }
 export interface EndpointAminoMsg {
   type: "/akash.base.v1beta2.Endpoint";

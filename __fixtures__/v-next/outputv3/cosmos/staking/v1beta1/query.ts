@@ -2999,7 +2999,7 @@ export const QueryHistoricalInfoRequest = {
   },
   toAmino(message: QueryHistoricalInfoRequest, useInterfaces: boolean = true): QueryHistoricalInfoRequestAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryHistoricalInfoRequestProtoMsg, useInterfaces: boolean = true): QueryHistoricalInfoRequest {

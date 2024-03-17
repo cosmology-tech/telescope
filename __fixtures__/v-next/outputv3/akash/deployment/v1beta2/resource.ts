@@ -15,9 +15,9 @@ export interface ResourceProtoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
-  resources?: ResourceUnitsAmino;
-  count?: number;
-  price?: DecCoinAmino;
+  resources: ResourceUnitsAmino;
+  count: number;
+  price: DecCoinAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -123,9 +123,9 @@ export const Resource = {
   },
   toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : ResourceUnits.fromPartial({});
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : ResourceUnits.toAmino(ResourceUnits.fromPartial({}));
     obj.count = message.count ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {

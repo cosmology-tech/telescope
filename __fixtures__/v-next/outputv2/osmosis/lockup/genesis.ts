@@ -137,7 +137,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.last_lock_id = message.lastLockId ? message.lastLockId.toString() : undefined;
+    obj.last_lock_id = message.lastLockId !== BigInt(0) ? message.lastLockId.toString() : undefined;
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toAmino(e) : undefined);
     } else {

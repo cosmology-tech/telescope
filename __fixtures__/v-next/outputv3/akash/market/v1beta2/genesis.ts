@@ -16,9 +16,9 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateAmino {
-  orders?: OrderAmino[];
-  leases?: LeaseAmino[];
-  params?: ParamsAmino;
+  orders: OrderAmino[];
+  leases: LeaseAmino[];
+  params: ParamsAmino;
 }
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisStateSDKType {
@@ -144,7 +144,7 @@ export const GenesisState = {
     } else {
       obj.leases = message.leases;
     }
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.fromPartial({});
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.toAmino(Params.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

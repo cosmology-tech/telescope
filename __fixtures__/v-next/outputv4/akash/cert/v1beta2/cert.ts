@@ -772,7 +772,7 @@ export const MsgRevokeCertificate = {
   },
   toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id) : CertificateID.fromPartial({});
+    obj.id = message.id ? CertificateID.toAmino(message.id) : CertificateID.toAmino(CertificateID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgRevokeCertificateAminoMsg): MsgRevokeCertificate {

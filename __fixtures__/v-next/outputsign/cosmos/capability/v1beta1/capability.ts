@@ -137,7 +137,7 @@ export const Capability = {
   },
   toAmino(message: Capability): CapabilityAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CapabilityAminoMsg): Capability {

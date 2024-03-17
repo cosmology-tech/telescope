@@ -84,8 +84,8 @@ export interface QueryDeploymentResponseProtoMsg {
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
-  deployment?: DeploymentAmino;
-  groups?: GroupAmino[];
+  deployment: DeploymentAmino;
+  groups: GroupAmino[];
   escrow_account?: AccountAmino;
 }
 export interface QueryDeploymentResponseAminoMsg {
@@ -541,7 +541,7 @@ export const QueryDeploymentResponse = {
   },
   toAmino(message: QueryDeploymentResponse): QueryDeploymentResponseAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.fromPartial({});
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment) : Deployment.toAmino(Deployment.fromPartial({}));
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? Group.toAmino(e) : undefined);
     } else {

@@ -72,10 +72,10 @@ export interface MsgCreateBidProtoMsg {
 }
 /** MsgCreateBid defines an SDK message for creating Bid */
 export interface MsgCreateBidAmino {
-  order?: OrderIDAmino;
-  provider?: string;
-  price?: DecCoinAmino;
-  deposit?: CoinAmino;
+  order: OrderIDAmino;
+  provider: string;
+  price: DecCoinAmino;
+  deposit: CoinAmino;
 }
 export interface MsgCreateBidAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateBid";
@@ -112,7 +112,7 @@ export interface MsgCloseBidProtoMsg {
 }
 /** MsgCloseBid defines an SDK message for closing bid */
 export interface MsgCloseBidAmino {
-  bid_id?: BidIDAmino;
+  bid_id: BidIDAmino;
 }
 export interface MsgCloseBidAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseBid";
@@ -156,11 +156,11 @@ export interface BidIDProtoMsg {
  * A successful bid becomes a Lease(ID).
  */
 export interface BidIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
 }
 export interface BidIDAminoMsg {
   type: "/akash.market.v1beta2.BidID";
@@ -190,9 +190,9 @@ export interface BidProtoMsg {
 }
 /** Bid stores BidID, state of bid and price */
 export interface BidAmino {
-  bid_id?: BidIDAmino;
-  state?: Bid_State;
-  price?: DecCoinAmino;
+  bid_id: BidIDAmino;
+  state: Bid_State;
+  price: DecCoinAmino;
   created_at?: string;
 }
 export interface BidAminoMsg {
@@ -221,12 +221,12 @@ export interface BidFiltersProtoMsg {
 }
 /** BidFilters defines flags for bid list filter */
 export interface BidFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
 }
 export interface BidFiltersAminoMsg {
   type: "/akash.market.v1beta2.BidFilters";
@@ -356,10 +356,10 @@ export const MsgCreateBid = {
   },
   toAmino(message: MsgCreateBid): MsgCreateBidAmino {
     const obj: any = {};
-    obj.order = message.order ? OrderID.toAmino(message.order) : OrderID.fromPartial({});
+    obj.order = message.order ? OrderID.toAmino(message.order) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.provider = message.provider ?? "";
-    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : Coin.fromPartial({});
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateBidAminoMsg): MsgCreateBid {
@@ -509,7 +509,7 @@ export const MsgCloseBid = {
   },
   toAmino(message: MsgCloseBid): MsgCloseBidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.toAmino(BidID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCloseBidAminoMsg): MsgCloseBid {
@@ -857,10 +857,10 @@ export const Bid = {
   },
   toAmino(message: Bid): BidAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.toAmino(BidID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BidAminoMsg): Bid {

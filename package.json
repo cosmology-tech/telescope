@@ -11,6 +11,7 @@
     "ast:fixture": "lerna run test:ast --parallel --scope \"@cosmology/ast\"",
     "ast:watch": "lerna run test:watch --parallel --scope \"@cosmology/ast\"",
     "regen": "lerna run test --parallel --scope \"@cosmology/telescope\"",
+    "resnap": "lerna run test:update --parallel --scope \"@cosmology/ast\"",
     "buidl:clean": "lerna run buidl:clean",
     "buidl:ast": "lerna run buidl --parallel --scope \"@cosmology/ast\"",
     "buidl:parser": "lerna run buidl --parallel --scope \"@cosmology/proto-parser\"",

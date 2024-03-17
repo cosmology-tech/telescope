@@ -27,7 +27,7 @@ export interface DepositDeploymentAuthorizationAmino {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spend_limit?: CoinAmino;
+  spend_limit: CoinAmino;
 }
 export interface DepositDeploymentAuthorizationAminoMsg {
   type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";
@@ -120,7 +120,7 @@ export const DepositDeploymentAuthorization = {
   },
   toAmino(message: DepositDeploymentAuthorization): DepositDeploymentAuthorizationAmino {
     const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : Coin.fromPartial({});
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: DepositDeploymentAuthorizationAminoMsg): DepositDeploymentAuthorization {

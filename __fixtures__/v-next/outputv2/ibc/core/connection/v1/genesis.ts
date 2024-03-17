@@ -169,7 +169,7 @@ export const GenesisState = {
     } else {
       obj.client_connection_paths = message.clientConnectionPaths;
     }
-    obj.next_connection_sequence = message.nextConnectionSequence ? message.nextConnectionSequence.toString() : undefined;
+    obj.next_connection_sequence = message.nextConnectionSequence !== BigInt(0) ? message.nextConnectionSequence.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

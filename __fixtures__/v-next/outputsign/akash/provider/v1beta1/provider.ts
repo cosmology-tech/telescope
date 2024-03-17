@@ -13,8 +13,8 @@ export interface ProviderInfoProtoMsg {
 }
 /** ProviderInfo */
 export interface ProviderInfoAmino {
-  email?: string;
-  website?: string;
+  email: string;
+  website: string;
 }
 export interface ProviderInfoAminoMsg {
   type: "/akash.provider.v1beta1.ProviderInfo";
@@ -38,10 +38,10 @@ export interface MsgCreateProviderProtoMsg {
 }
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 export interface MsgCreateProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgCreateProvider";
@@ -81,10 +81,10 @@ export interface MsgUpdateProviderProtoMsg {
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 export interface MsgUpdateProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgUpdateProvider";
@@ -121,7 +121,7 @@ export interface MsgDeleteProviderProtoMsg {
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderAmino {
-  owner?: string;
+  owner: string;
 }
 export interface MsgDeleteProviderAminoMsg {
   type: "/akash.provider.v1beta1.MsgDeleteProvider";
@@ -158,10 +158,10 @@ export interface ProviderProtoMsg {
 }
 /** Provider stores owner and host details */
 export interface ProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 export interface ProviderAminoMsg {
   type: "/akash.provider.v1beta1.Provider";
@@ -333,7 +333,7 @@ export const MsgCreateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
@@ -486,7 +486,7 @@ export const MsgUpdateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
@@ -752,7 +752,7 @@ export const Provider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: ProviderAminoMsg): Provider {

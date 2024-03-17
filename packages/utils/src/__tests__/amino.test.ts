@@ -136,6 +136,16 @@ describe("shouldOmitEmpty", () => {
         },
         result: false,
       },
+      {
+        name: "omitEmptyTags: omitempty, if options is null, then true. And amino.dont_omitempty will be ignored.",
+        pluginValue: ["omitempty"],
+        options: {
+          "(gogoproto.jsontag)": "attributes",
+          "(cosmos_proto.json_tag)": "attributes",
+          "(amino.dont_omitempty)": false,
+        },
+        result: false,
+      },
 
       // aminoEncoding.omitEmptyTags includes "dont_omitempty" only
       // if amino.dont_omitempty is true, then false, otherwise true.

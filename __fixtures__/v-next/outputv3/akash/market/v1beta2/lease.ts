@@ -66,11 +66,11 @@ export interface LeaseIDProtoMsg {
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDSDKType {
@@ -94,9 +94,9 @@ export interface LeaseProtoMsg {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseAmino {
-  lease_id?: LeaseIDAmino;
-  state?: Lease_State;
-  price?: DecCoinAmino;
+  lease_id: LeaseIDAmino;
+  state: Lease_State;
+  price: DecCoinAmino;
   created_at?: string;
   closed_on?: string;
 }
@@ -123,12 +123,12 @@ export interface LeaseFiltersProtoMsg {
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersSDKType {
@@ -149,7 +149,7 @@ export interface MsgCreateLeaseProtoMsg {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseAmino {
-  bid_id?: BidIDAmino;
+  bid_id: BidIDAmino;
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseSDKType {
@@ -175,7 +175,7 @@ export interface MsgWithdrawLeaseProtoMsg {
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseAmino {
-  bid_id?: LeaseIDAmino;
+  bid_id: LeaseIDAmino;
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseSDKType {
@@ -201,7 +201,7 @@ export interface MsgCloseLeaseProtoMsg {
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseAmino {
-  lease_id?: LeaseIDAmino;
+  lease_id: LeaseIDAmino;
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseSDKType {
@@ -495,11 +495,11 @@ export const Lease = {
   },
   toAmino(message: Lease, useInterfaces: boolean = true): LeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.fromPartial({});
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.toAmino(LeaseID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
+    obj.closed_on = message.closedOn !== BigInt(0) ? message.closedOn.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: LeaseProtoMsg, useInterfaces: boolean = true): Lease {
@@ -743,7 +743,7 @@ export const MsgCreateLease = {
   },
   toAmino(message: MsgCreateLease, useInterfaces: boolean = true): MsgCreateLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.toAmino(BidID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCreateLeaseProtoMsg, useInterfaces: boolean = true): MsgCreateLease {
@@ -887,7 +887,7 @@ export const MsgWithdrawLease = {
   },
   toAmino(message: MsgWithdrawLease, useInterfaces: boolean = true): MsgWithdrawLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId, useInterfaces) : LeaseID.fromPartial({});
+    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId, useInterfaces) : LeaseID.toAmino(LeaseID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgWithdrawLeaseProtoMsg, useInterfaces: boolean = true): MsgWithdrawLease {
@@ -1031,7 +1031,7 @@ export const MsgCloseLease = {
   },
   toAmino(message: MsgCloseLease, useInterfaces: boolean = true): MsgCloseLeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.fromPartial({});
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId, useInterfaces) : LeaseID.toAmino(LeaseID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCloseLeaseProtoMsg, useInterfaces: boolean = true): MsgCloseLease {

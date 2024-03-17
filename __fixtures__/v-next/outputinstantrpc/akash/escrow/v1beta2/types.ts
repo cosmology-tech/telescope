@@ -479,14 +479,14 @@ export const Account = {
   },
   toAmino(message: Account): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id) : AccountID.fromPartial({});
+    obj.id = message.id ? AccountID.toAmino(message.id) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.fromPartial({});
-    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : DecCoin.fromPartial({});
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : DecCoin.toAmino(DecCoin.fromPartial({}));
     obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
     obj.depositor = message.depositor ?? "";
-    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : DecCoin.fromPartial({});
+    obj.funds = message.funds ? DecCoin.toAmino(message.funds) : DecCoin.toAmino(DecCoin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: AccountAminoMsg): Account {
@@ -684,13 +684,13 @@ export const FractionalPayment = {
   },
   toAmino(message: FractionalPayment): FractionalPaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : AccountID.fromPartial({});
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.payment_id = message.paymentId ?? "";
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : DecCoin.fromPartial({});
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.fromPartial({});
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : Coin.fromPartial({});
+    obj.rate = message.rate ? DecCoin.toAmino(message.rate) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: FractionalPaymentAminoMsg): FractionalPayment {

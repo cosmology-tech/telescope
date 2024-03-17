@@ -521,6 +521,26 @@ export const getDefaultTSTypeFromProtoType = (
     };
 };
 
+export const getDefaultTSTypeFromAminoTypeDefault = (
+  context: ProtoParseContext,
+  field: ProtoField
+) => {
+  const typeName = getProtoFieldTypeName(context, field);
+
+  return t.callExpression(
+      t.memberExpression(t.identifier(typeName), t.identifier("toAmino")),
+      [
+          t.callExpression(
+              t.memberExpression(
+                  t.identifier(getProtoFieldTypeName(context, field)),
+                  t.identifier("fromPartial")
+              ),
+              [t.objectExpression([])]
+          ),
+      ]
+  );
+};
+
 function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: ProtoField) {
   return t.callExpression(
       t.memberExpression(
@@ -530,3 +550,4 @@ function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: 
       [t.objectExpression([])]
   )
 }
+

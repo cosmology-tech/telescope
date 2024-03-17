@@ -27,7 +27,7 @@ export interface DepositDeploymentAuthorizationAmino {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spend_limit?: CoinAmino;
+  spend_limit: CoinAmino;
 }
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -104,7 +104,7 @@ export const DepositDeploymentAuthorization = {
   },
   toAmino(message: DepositDeploymentAuthorization, useInterfaces: boolean = true): DepositDeploymentAuthorizationAmino {
     const obj: any = {};
-    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : Coin.fromPartial({});
+    obj.spend_limit = message.spendLimit ? Coin.toAmino(message.spendLimit, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: DepositDeploymentAuthorizationProtoMsg, useInterfaces: boolean = true): DepositDeploymentAuthorization {

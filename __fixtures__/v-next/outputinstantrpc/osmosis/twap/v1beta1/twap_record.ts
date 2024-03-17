@@ -282,7 +282,7 @@ export const TwapRecord = {
   },
   toAmino(message: TwapRecord): TwapRecordAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     obj.asset0_denom = message.asset0Denom === "" ? undefined : message.asset0Denom;
     obj.asset1_denom = message.asset1Denom === "" ? undefined : message.asset1Denom;
     obj.height = message.height ? message.height.toString() : "0";

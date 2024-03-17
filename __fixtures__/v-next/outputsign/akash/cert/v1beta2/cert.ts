@@ -54,8 +54,8 @@ export interface CertificateIDProtoMsg {
 }
 /** CertificateID stores owner and sequence number */
 export interface CertificateIDAmino {
-  owner?: string;
-  serial?: string;
+  owner: string;
+  serial: string;
 }
 export interface CertificateIDAminoMsg {
   type: "/akash.cert.v1beta2.CertificateID";
@@ -78,9 +78,9 @@ export interface CertificateProtoMsg {
 }
 /** Certificate stores state, certificate and it's public key */
 export interface CertificateAmino {
-  state?: Certificate_State;
-  cert?: string;
-  pubkey?: string;
+  state: Certificate_State;
+  cert: string;
+  pubkey: string;
 }
 export interface CertificateAminoMsg {
   type: "/akash.cert.v1beta2.Certificate";
@@ -104,9 +104,9 @@ export interface CertificateFilterProtoMsg {
 }
 /** CertificateFilter defines filters used to filter certificates */
 export interface CertificateFilterAmino {
-  owner?: string;
-  serial?: string;
-  state?: string;
+  owner: string;
+  serial: string;
+  state: string;
 }
 export interface CertificateFilterAminoMsg {
   type: "/akash.cert.v1beta2.CertificateFilter";
@@ -130,9 +130,9 @@ export interface MsgCreateCertificateProtoMsg {
 }
 /** MsgCreateCertificate defines an SDK message for creating certificate */
 export interface MsgCreateCertificateAmino {
-  owner?: string;
-  cert?: string;
-  pubkey?: string;
+  owner: string;
+  cert: string;
+  pubkey: string;
 }
 export interface MsgCreateCertificateAminoMsg {
   type: "/akash.cert.v1beta2.MsgCreateCertificate";
@@ -168,7 +168,7 @@ export interface MsgRevokeCertificateProtoMsg {
 }
 /** MsgRevokeCertificate defines an SDK message for revoking certificate */
 export interface MsgRevokeCertificateAmino {
-  id?: CertificateIDAmino;
+  id: CertificateIDAmino;
 }
 export interface MsgRevokeCertificateAminoMsg {
   type: "/akash.cert.v1beta2.MsgRevokeCertificate";
@@ -624,7 +624,7 @@ export const MsgRevokeCertificate = {
   },
   toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id) : CertificateID.fromPartial({});
+    obj.id = message.id ? CertificateID.toAmino(message.id) : CertificateID.toAmino(CertificateID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgRevokeCertificateAminoMsg): MsgRevokeCertificate {

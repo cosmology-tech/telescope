@@ -508,7 +508,7 @@ export const Trade = {
   },
   toAmino(message: Trade): TradeAmino {
     const obj: any = {};
-    obj.pool = message.pool ? message.pool.toString() : undefined;
+    obj.pool = message.pool !== BigInt(0) ? message.pool.toString() : undefined;
     obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
     obj.token_out = message.tokenOut === "" ? undefined : message.tokenOut;
     return obj;
@@ -793,9 +793,9 @@ export const PoolWeights = {
   },
   toAmino(message: PoolWeights): PoolWeightsAmino {
     const obj: any = {};
-    obj.stable_weight = message.stableWeight ? message.stableWeight.toString() : undefined;
-    obj.balancer_weight = message.balancerWeight ? message.balancerWeight.toString() : undefined;
-    obj.concentrated_weight = message.concentratedWeight ? message.concentratedWeight.toString() : undefined;
+    obj.stable_weight = message.stableWeight !== BigInt(0) ? message.stableWeight.toString() : undefined;
+    obj.balancer_weight = message.balancerWeight !== BigInt(0) ? message.balancerWeight.toString() : undefined;
+    obj.concentrated_weight = message.concentratedWeight !== BigInt(0) ? message.concentratedWeight.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolWeightsAminoMsg): PoolWeights {

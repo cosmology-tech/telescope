@@ -13,9 +13,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
 }
 export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta2.GroupID";

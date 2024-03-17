@@ -146,7 +146,7 @@ export const Capability = {
   },
   toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = true): Capability {

@@ -135,7 +135,7 @@ export const QuerySpotPriceRequest = {
   },
   toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     obj.base_asset_denom = message.baseAssetDenom === "" ? undefined : message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom === "" ? undefined : message.quoteAssetDenom;
     return obj;

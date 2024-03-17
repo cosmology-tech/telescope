@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {
-  params?: ParamsAmino;
+  params: ParamsAmino;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -84,7 +84,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.fromPartial({});
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.toAmino(Params.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

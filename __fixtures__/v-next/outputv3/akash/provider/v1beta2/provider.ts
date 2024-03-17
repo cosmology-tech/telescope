@@ -13,8 +13,8 @@ export interface ProviderInfoProtoMsg {
 }
 /** ProviderInfo */
 export interface ProviderInfoAmino {
-  email?: string;
-  website?: string;
+  email: string;
+  website: string;
 }
 /** ProviderInfo */
 export interface ProviderInfoSDKType {
@@ -34,10 +34,10 @@ export interface MsgCreateProviderProtoMsg {
 }
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 /** MsgCreateProvider defines an SDK message for creating a provider */
 export interface MsgCreateProviderSDKType {
@@ -69,10 +69,10 @@ export interface MsgUpdateProviderProtoMsg {
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 /** MsgUpdateProvider defines an SDK message for updating a provider */
 export interface MsgUpdateProviderSDKType {
@@ -101,7 +101,7 @@ export interface MsgDeleteProviderProtoMsg {
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderAmino {
-  owner?: string;
+  owner: string;
 }
 /** MsgDeleteProvider defines an SDK message for deleting a provider */
 export interface MsgDeleteProviderSDKType {
@@ -130,10 +130,10 @@ export interface ProviderProtoMsg {
 }
 /** Provider stores owner and host details */
 export interface ProviderAmino {
-  owner?: string;
-  host_uri?: string;
-  attributes?: AttributeAmino[];
-  info?: ProviderInfoAmino;
+  owner: string;
+  host_uri: string;
+  attributes: AttributeAmino[];
+  info: ProviderInfoAmino;
 }
 /** Provider stores owner and host details */
 export interface ProviderSDKType {
@@ -362,7 +362,7 @@ export const MsgCreateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCreateProviderProtoMsg, useInterfaces: boolean = true): MsgCreateProvider {
@@ -564,7 +564,7 @@ export const MsgUpdateProvider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgUpdateProviderProtoMsg, useInterfaces: boolean = true): MsgUpdateProvider {
@@ -908,7 +908,7 @@ export const Provider = {
     } else {
       obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.fromPartial({});
+    obj.info = message.info ? ProviderInfo.toAmino(message.info, useInterfaces) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: ProviderProtoMsg, useInterfaces: boolean = true): Provider {

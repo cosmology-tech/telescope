@@ -14,8 +14,8 @@ export interface CertificateResponseProtoMsg {
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponseAmino {
-  certificate?: CertificateAmino;
-  serial?: string;
+  certificate: CertificateAmino;
+  serial: string;
 }
 export interface CertificateResponseAminoMsg {
   type: "/akash.cert.v1beta2.CertificateResponse";
@@ -153,7 +153,7 @@ export const CertificateResponse = {
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {
     const obj: any = {};
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.fromPartial({});
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.toAmino(Certificate.fromPartial({}));
     obj.serial = message.serial ?? "";
     return obj;
   },

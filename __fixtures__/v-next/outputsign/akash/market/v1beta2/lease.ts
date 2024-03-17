@@ -66,11 +66,11 @@ export interface LeaseIDProtoMsg {
 }
 /** LeaseID stores bid details of lease */
 export interface LeaseIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
 }
 export interface LeaseIDAminoMsg {
   type: "/akash.market.v1beta2.LeaseID";
@@ -98,9 +98,9 @@ export interface LeaseProtoMsg {
 }
 /** Lease stores LeaseID, state of lease and price */
 export interface LeaseAmino {
-  lease_id?: LeaseIDAmino;
-  state?: Lease_State;
-  price?: DecCoinAmino;
+  lease_id: LeaseIDAmino;
+  state: Lease_State;
+  price: DecCoinAmino;
   created_at?: string;
   closed_on?: string;
 }
@@ -131,12 +131,12 @@ export interface LeaseFiltersProtoMsg {
 }
 /** LeaseFilters defines flags for lease list filter */
 export interface LeaseFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  provider?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  provider: string;
+  state: string;
 }
 export interface LeaseFiltersAminoMsg {
   type: "/akash.market.v1beta2.LeaseFilters";
@@ -161,7 +161,7 @@ export interface MsgCreateLeaseProtoMsg {
 }
 /** MsgCreateLease is sent to create a lease */
 export interface MsgCreateLeaseAmino {
-  bid_id?: BidIDAmino;
+  bid_id: BidIDAmino;
 }
 export interface MsgCreateLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgCreateLease";
@@ -195,7 +195,7 @@ export interface MsgWithdrawLeaseProtoMsg {
 }
 /** MsgWithdrawLease defines an SDK message for closing bid */
 export interface MsgWithdrawLeaseAmino {
-  bid_id?: LeaseIDAmino;
+  bid_id: LeaseIDAmino;
 }
 export interface MsgWithdrawLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgWithdrawLease";
@@ -229,7 +229,7 @@ export interface MsgCloseLeaseProtoMsg {
 }
 /** MsgCloseLease defines an SDK message for closing order */
 export interface MsgCloseLeaseAmino {
-  lease_id?: LeaseIDAmino;
+  lease_id: LeaseIDAmino;
 }
 export interface MsgCloseLeaseAminoMsg {
   type: "/akash.market.v1beta2.MsgCloseLease";
@@ -462,11 +462,11 @@ export const Lease = {
   },
   toAmino(message: Lease): LeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.fromPartial({});
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.toAmino(LeaseID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
-    obj.closed_on = message.closedOn ? message.closedOn.toString() : undefined;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
+    obj.closed_on = message.closedOn !== BigInt(0) ? message.closedOn.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: LeaseAminoMsg): Lease {
@@ -656,7 +656,7 @@ export const MsgCreateLease = {
   },
   toAmino(message: MsgCreateLease): MsgCreateLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.fromPartial({});
+    obj.bid_id = message.bidId ? BidID.toAmino(message.bidId) : BidID.toAmino(BidID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateLeaseAminoMsg): MsgCreateLease {
@@ -771,7 +771,7 @@ export const MsgWithdrawLease = {
   },
   toAmino(message: MsgWithdrawLease): MsgWithdrawLeaseAmino {
     const obj: any = {};
-    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : LeaseID.fromPartial({});
+    obj.bid_id = message.bidId ? LeaseID.toAmino(message.bidId) : LeaseID.toAmino(LeaseID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawLeaseAminoMsg): MsgWithdrawLease {
@@ -886,7 +886,7 @@ export const MsgCloseLease = {
   },
   toAmino(message: MsgCloseLease): MsgCloseLeaseAmino {
     const obj: any = {};
-    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.fromPartial({});
+    obj.lease_id = message.leaseId ? LeaseID.toAmino(message.leaseId) : LeaseID.toAmino(LeaseID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCloseLeaseAminoMsg): MsgCloseLease {

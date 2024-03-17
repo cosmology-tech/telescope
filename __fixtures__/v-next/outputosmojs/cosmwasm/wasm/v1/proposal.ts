@@ -600,7 +600,7 @@ export const InstantiateContractProposal = {
     obj.description = message.description === "" ? undefined : message.description;
     obj.run_as = message.runAs === "" ? undefined : message.runAs;
     obj.admin = message.admin === "" ? undefined : message.admin;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     obj.label = message.label === "" ? undefined : message.label;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     if (message.funds) {
@@ -768,7 +768,7 @@ export const MigrateContractProposal = {
     obj.title = message.title === "" ? undefined : message.title;
     obj.description = message.description === "" ? undefined : message.description;
     obj.contract = message.contract === "" ? undefined : message.contract;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
   },

@@ -111,8 +111,8 @@ export interface AccountIDProtoMsg {
 }
 /** AccountID is the account identifier */
 export interface AccountIDAmino {
-  scope?: string;
-  xid?: string;
+  scope: string;
+  xid: string;
 }
 /** AccountID is the account identifier */
 export interface AccountIDSDKType {
@@ -152,28 +152,28 @@ export interface AccountProtoMsg {
 /** Account stores state for an escrow account */
 export interface AccountAmino {
   /** unique identifier for this escrow account */
-  id?: AccountIDAmino;
+  id: AccountIDAmino;
   /** bech32 encoded account address of the owner of this escrow account */
-  owner?: string;
+  owner: string;
   /** current state of this escrow account */
-  state?: Account_State;
+  state: Account_State;
   /** unspent coins received from the owner's wallet */
-  balance?: DecCoinAmino;
+  balance: DecCoinAmino;
   /** total coins spent by this account */
-  transferred?: DecCoinAmino;
+  transferred: DecCoinAmino;
   /** block height at which this account was last settled */
-  settled_at?: string;
+  settled_at: string;
   /**
    * bech32 encoded account address of the depositor.
    * If depositor is same as the owner, then any incoming coins are added to the Balance.
    * If depositor isn't same as the owner, then any incoming coins are added to the Funds.
    */
-  depositor?: string;
+  depositor: string;
   /**
    * Funds are unspent coins received from the (non-Owner) Depositor's wallet.
    * If there are any funds, they should be spent before spending the Balance.
    */
-  funds?: DecCoinAmino;
+  funds: DecCoinAmino;
 }
 /** Account stores state for an escrow account */
 export interface AccountSDKType {
@@ -202,13 +202,13 @@ export interface FractionalPaymentProtoMsg {
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentAmino {
-  account_id?: AccountIDAmino;
-  payment_id?: string;
-  owner?: string;
-  state?: FractionalPayment_State;
-  rate?: DecCoinAmino;
-  balance?: DecCoinAmino;
-  withdrawn?: CoinAmino;
+  account_id: AccountIDAmino;
+  payment_id: string;
+  owner: string;
+  state: FractionalPayment_State;
+  rate: DecCoinAmino;
+  balance: DecCoinAmino;
+  withdrawn: CoinAmino;
 }
 /** Payment stores state for a payment */
 export interface FractionalPaymentSDKType {
@@ -495,14 +495,14 @@ export const Account = {
   },
   toAmino(message: Account, useInterfaces: boolean = true): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : AccountID.fromPartial({});
+    obj.id = message.id ? AccountID.toAmino(message.id, useInterfaces) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : DecCoin.fromPartial({});
-    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred, useInterfaces) : DecCoin.fromPartial({});
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
     obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
     obj.depositor = message.depositor ?? "";
-    obj.funds = message.funds ? DecCoin.toAmino(message.funds, useInterfaces) : DecCoin.fromPartial({});
+    obj.funds = message.funds ? DecCoin.toAmino(message.funds, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: AccountProtoMsg, useInterfaces: boolean = true): Account {
@@ -680,13 +680,13 @@ export const FractionalPayment = {
   },
   toAmino(message: FractionalPayment, useInterfaces: boolean = true): FractionalPaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : AccountID.fromPartial({});
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId, useInterfaces) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.payment_id = message.paymentId ?? "";
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.rate = message.rate ? DecCoin.toAmino(message.rate, useInterfaces) : DecCoin.fromPartial({});
-    obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : DecCoin.fromPartial({});
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : Coin.fromPartial({});
+    obj.rate = message.rate ? DecCoin.toAmino(message.rate, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.balance = message.balance ? DecCoin.toAmino(message.balance, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: FractionalPaymentProtoMsg, useInterfaces: boolean = true): FractionalPayment {

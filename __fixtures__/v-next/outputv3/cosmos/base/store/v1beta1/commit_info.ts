@@ -173,7 +173,7 @@ export const CommitInfo = {
   },
   toAmino(message: CommitInfo, useInterfaces: boolean = true): CommitInfoAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
     if (message.storeInfos) {
       obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e, useInterfaces) : undefined);
     } else {
@@ -375,7 +375,7 @@ export const CommitID = {
   },
   toAmino(message: CommitID, useInterfaces: boolean = true): CommitIDAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },

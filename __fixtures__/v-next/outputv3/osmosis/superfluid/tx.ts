@@ -278,7 +278,7 @@ export const MsgSuperfluidDelegate = {
   toAmino(message: MsgSuperfluidDelegate, useInterfaces: boolean = true): MsgSuperfluidDelegateAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
     obj.val_addr = message.valAddr === "" ? undefined : message.valAddr;
     return obj;
   },
@@ -441,7 +441,7 @@ export const MsgSuperfluidUndelegate = {
   toAmino(message: MsgSuperfluidUndelegate, useInterfaces: boolean = true): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgSuperfluidUndelegateProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUndelegate {
@@ -603,7 +603,7 @@ export const MsgSuperfluidUnbondLock = {
   toAmino(message: MsgSuperfluidUnbondLock, useInterfaces: boolean = true): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgSuperfluidUnbondLockProtoMsg, useInterfaces: boolean = true): MsgSuperfluidUnbondLock {
@@ -872,7 +872,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgLockAndSuperfluidDelegateResponseProtoMsg, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponse {
@@ -971,7 +971,7 @@ export const MsgUnPoolWhitelistedPool = {
   toAmino(message: MsgUnPoolWhitelistedPool, useInterfaces: boolean = true): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgUnPoolWhitelistedPoolProtoMsg, useInterfaces: boolean = true): MsgUnPoolWhitelistedPool {

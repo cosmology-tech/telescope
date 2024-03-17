@@ -586,7 +586,7 @@ export const QueryAppliedPlanResponse = {
   },
   toAmino(message: QueryAppliedPlanResponse, useInterfaces: boolean = true): QueryAppliedPlanResponseAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryAppliedPlanResponseProtoMsg, useInterfaces: boolean = true): QueryAppliedPlanResponse {
@@ -669,7 +669,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   toAmino(message: QueryUpgradedConsensusStateRequest, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
-    obj.last_height = message.lastHeight ? message.lastHeight.toString() : undefined;
+    obj.last_height = message.lastHeight !== BigInt(0) ? message.lastHeight.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryUpgradedConsensusStateRequestProtoMsg, useInterfaces: boolean = true): QueryUpgradedConsensusStateRequest {

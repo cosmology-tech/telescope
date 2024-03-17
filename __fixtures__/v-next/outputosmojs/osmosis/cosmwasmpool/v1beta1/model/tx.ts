@@ -130,7 +130,7 @@ export const MsgCreateCosmWasmPool = {
   },
   toAmino(message: MsgCreateCosmWasmPool): MsgCreateCosmWasmPoolAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     obj.instantiate_msg = message.instantiateMsg ? base64FromBytes(message.instantiateMsg) : undefined;
     obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
@@ -226,7 +226,7 @@ export const MsgCreateCosmWasmPoolResponse = {
   },
   toAmino(message: MsgCreateCosmWasmPoolResponse): MsgCreateCosmWasmPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgCreateCosmWasmPoolResponseAminoMsg): MsgCreateCosmWasmPoolResponse {

@@ -3,8 +3,8 @@ syntax = "proto3";
 package misc;
 
 import "google/protobuf/any.proto";
-import "google/protobuf/timestamp.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 import "misc/eval_request.proto";
 
 message EncodingTestForDontOmit {
@@ -57,9 +57,7 @@ message EncodingTestForDontOmit {
   ];
 
   // raw bytes
-  bytes raw = 15 [
-    (gogoproto.casttype) = "RawContractMessage"
-  ];
+  bytes raw = 15 [(gogoproto.casttype) = "RawContractMessage"];
   bytes d_o_raw = 16 [
     (gogoproto.casttype) = "RawContractMessage",
     (gogoproto.nullable) = false,
@@ -67,9 +65,7 @@ message EncodingTestForDontOmit {
   ];
 
   // wasm bytes
-  bytes wasm = 17 [
-    (gogoproto.customname) = "WASMByteCode"
-  ];
+  bytes wasm = 17 [(gogoproto.customname) = "WASMByteCode"];
   bytes d_o_wasm = 18 [
     (gogoproto.customname) = "WASMByteCode",
     (gogoproto.nullable) = false,
@@ -127,9 +123,7 @@ message EncodingTestForDontOmit {
   ];
 
   // array raw bytes
-  repeated bytes raws = 33 [
-    (gogoproto.casttype) = "RawContractMessage"
-  ];
+  repeated bytes raws = 33 [(gogoproto.casttype) = "RawContractMessage"];
   repeated bytes d_o_raws = 34 [
     (gogoproto.casttype) = "RawContractMessage",
     (gogoproto.nullable) = false,
@@ -137,9 +131,7 @@ message EncodingTestForDontOmit {
   ];
 
   // array wasm bytes
-  repeated bytes wasms = 35 [
-    (gogoproto.customname) = "WASMByteCode"
-  ];
+  repeated bytes wasms = 35 [(gogoproto.customname) = "WASMByteCode"];
   repeated bytes d_o_wasms = 36 [
     (gogoproto.customname) = "WASMByteCode",
     (gogoproto.nullable) = false,
@@ -202,155 +194,165 @@ message EncodingTestForDontOmit {
 
 message EncodingTestForOmit {
   // scalar
-  string str = 1;
+  string str = 1 [(gogoproto.jsontag) = "str"];
   string o_str = 2 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_str,omitempty"
+    (gogoproto.jsontag) = "o_str,omitempty"
   ];
 
-  bool b = 3;
+  bool b = 3 [(gogoproto.jsontag) = "b"];
   bool o_b = 4 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_b,omitempty"
+    (gogoproto.jsontag) = "o_b,omitempty"
   ];
 
-  int32 num = 5;
+  int32 num = 5 [(gogoproto.jsontag) = "num"];
   int32 o_num = 6 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_num,omitempty"
+    (gogoproto.jsontag) = "o_num,omitempty"
   ];
 
   // bigint
-  int64 big = 7;
+  int64 big = 7 [(gogoproto.jsontag) = "big"];
   int64 o_big = 8 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_big,omitempty"
+    (gogoproto.jsontag) = "o_big,omitempty"
   ];
 
   // protoType
-  AccessConfig proto = 9;
+  AccessConfig proto = 9 [(gogoproto.jsontag) = "proto"];
   AccessConfig o_proto = 10 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_proto,omitempty"
+    (gogoproto.jsontag) = "o_proto,omitempty"
   ];
 
   // anyType
-  google.protobuf.Any auth = 11 [(cosmos_proto.accepts_interface) = "Authorization"];
+  google.protobuf.Any auth = 11 [
+    (cosmos_proto.accepts_interface) = "Authorization",
+    (gogoproto.jsontag) = "auth"
+  ];
   google.protobuf.Any o_auth = 12 [
     (cosmos_proto.accepts_interface) = "Authorization",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_auth,omitempty"
+    (gogoproto.jsontag) = "o_auth,omitempty"
   ];
 
   // bytes
-  bytes salt = 13;
+  bytes salt = 13 [(gogoproto.jsontag) = "salt"];
   bytes o_salt = 14 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_salt,omitempty"
+    (gogoproto.jsontag) = "o_salt,omitempty"
   ];
 
   // raw bytes
   bytes raw = 15 [
-    (gogoproto.casttype) = "RawContractMessage"
+    (gogoproto.casttype) = "RawContractMessage",
+    (gogoproto.jsontag) = "raw"
   ];
   bytes o_raw = 16 [
     (gogoproto.casttype) = "RawContractMessage",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_raw,omitempty"
+    (gogoproto.jsontag) = "o_raw,omitempty"
   ];
 
   // wasm bytes
   bytes wasm = 17 [
-    (gogoproto.customname) = "WASMByteCode"
+    (gogoproto.customname) = "WASMByteCode",
+    (gogoproto.jsontag) = "wasm"
   ];
   bytes o_wasm = 18 [
     (gogoproto.customname) = "WASMByteCode",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_wasm,omitempty"
+    (gogoproto.jsontag) = "o_wasm,omitempty"
   ];
 
   // enum
-  VoteOption opt = 19;
+  VoteOption opt = 19 [(gogoproto.jsontag) = "opt"];
   VoteOption o_opt = 20 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_opt,omitempty"
+    (gogoproto.jsontag) = "o_opt,omitempty"
   ];
 
   // duration
-  google.protobuf.Duration period = 21;
+  google.protobuf.Duration period = 21 [(gogoproto.jsontag) = "period"];
   google.protobuf.Duration o_period = 22 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_period,omitempty"
+    (gogoproto.jsontag) = "o_period,omitempty"
   ];
 
   // timestamp
-  google.protobuf.Timestamp date = 23;
+  google.protobuf.Timestamp date = 23 [(gogoproto.jsontag) = "date"];
   google.protobuf.Timestamp o_date = 24 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_date,omitempty"
+    (gogoproto.jsontag) = "o_date,omitempty"
   ];
 
   // pubkey
-  google.protobuf.Any pubkey = 25 [(cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey"];
+  google.protobuf.Any pubkey = 25 [
+    (cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey",
+    (gogoproto.jsontag) = "pubkey"
+  ];
   google.protobuf.Any o_pubkey = 26 [
     (cosmos_proto.accepts_interface) = "cosmos.crypto.PubKey",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_pubkey,omitempty"
+    (gogoproto.jsontag) = "o_pubkey,omitempty"
   ];
 
   // array scalar
-  repeated int32 nums = 27;
+  repeated int32 nums = 27 [(gogoproto.jsontag) = "nums"];
   repeated int32 o_nums = 28 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_nums,omitempty"
+    (gogoproto.jsontag) = "o_nums,omitempty"
   ];
 
   // array bigint
-  repeated int64 bigs = 29;
+  repeated int64 bigs = 29 [(gogoproto.jsontag) = "bigs"];
   repeated int64 o_bigs = 30 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_bigs,omitempty"
+    (gogoproto.jsontag) = "o_bigs,omitempty"
   ];
 
   // array bytes
-  repeated bytes salts = 31;
+  repeated bytes salts = 31 [(gogoproto.jsontag) = "salts"];
   repeated bytes o_salts = 32 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_salts,omitempty"
+    (gogoproto.jsontag) = "o_salts,omitempty"
   ];
 
   // array raw bytes
   repeated bytes raws = 33 [
-    (gogoproto.casttype) = "RawContractMessage"
+    (gogoproto.casttype) = "RawContractMessage",
+    (gogoproto.jsontag) = "raws"
   ];
   repeated bytes o_raws = 34 [
     (gogoproto.casttype) = "RawContractMessage",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_raws,omitempty"
+    (gogoproto.jsontag) = "o_raws,omitempty"
   ];
 
   // array wasm bytes
   repeated bytes wasms = 35 [
-    (gogoproto.customname) = "WASMByteCode"
+    (gogoproto.customname) = "WASMByteCode",
+    (gogoproto.jsontag) = "wasms"
   ];
   repeated bytes o_wasms = 36 [
     (gogoproto.customname) = "WASMByteCode",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_wasms,omitempty"
+    (gogoproto.jsontag) = "o_wasms,omitempty"
   ];
 
   // array enum
-  repeated VoteOption opts = 37;
+  repeated VoteOption opts = 37 [(gogoproto.jsontag) = "opts"];
   repeated VoteOption o_opts = 38 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_opts,omitempty"
+    (gogoproto.jsontag) = "o_opts,omitempty"
   ];
 
   // array duration
-  repeated google.protobuf.Duration periods = 39;
+  repeated google.protobuf.Duration periods = 39 [(gogoproto.jsontag) = "periods"];
   repeated google.protobuf.Duration o_periods = 40 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_periods,omitempty"
+    (gogoproto.jsontag) = "o_periods,omitempty"
   ];
 
   // array timestamp
@@ -362,33 +364,42 @@ message EncodingTestForOmit {
   // ];
 
   // array protoType
-  repeated AccessConfig protos = 43;
+  repeated AccessConfig protos = 43 [(gogoproto.jsontag) = "protos"];
   repeated AccessConfig o_protos = 44 [
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_protos,omitempty"
+    (gogoproto.jsontag) = "o_protos,omitempty"
   ];
 
   // array anyType
-  repeated google.protobuf.Any auths = 45 [(cosmos_proto.accepts_interface) = "Authorization"];
+  repeated google.protobuf.Any auths = 45 [
+    (cosmos_proto.accepts_interface) = "Authorization",
+    (gogoproto.jsontag) = "auths"
+  ];
   repeated google.protobuf.Any o_auths = 46 [
     (cosmos_proto.accepts_interface) = "Authorization",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_auths,omitempty"
+    (gogoproto.jsontag) = "o_auths,omitempty"
   ];
 
   // dec
-  string dec = 47 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  string dec = 47 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.jsontag) = "dec"
+  ];
   string o_dec = 48 [
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_dec,omitempty"
+    (gogoproto.jsontag) = "o_dec,omitempty"
   ];
 
   // array dec
-  repeated string decs = 49 [(gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec"];
+  repeated string decs = 49 [
+    (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
+    (gogoproto.jsontag) = "decs"
+  ];
   repeated string o_decs = 50 [
     (gogoproto.customtype) = "github.com/cosmos/cosmos-sdk/types.Dec",
     (gogoproto.nullable) = false,
-    (gogoproto.jsontag)  = "o_decs,omitempty"
+    (gogoproto.jsontag) = "o_decs,omitempty"
   ];
 }

@@ -432,11 +432,11 @@ export const Account = {
   },
   toAmino(message: Account): AccountAmino {
     const obj: any = {};
-    obj.id = message.id ? AccountID.toAmino(message.id) : AccountID.fromPartial({});
+    obj.id = message.id ? AccountID.toAmino(message.id) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.balance = message.balance ? Coin.toAmino(message.balance) : Coin.fromPartial({});
-    obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : Coin.fromPartial({});
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : Coin.toAmino(Coin.fromPartial({}));
+    obj.transferred = message.transferred ? Coin.toAmino(message.transferred) : Coin.toAmino(Coin.fromPartial({}));
     obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
     return obj;
   },
@@ -635,13 +635,13 @@ export const Payment = {
   },
   toAmino(message: Payment): PaymentAmino {
     const obj: any = {};
-    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : AccountID.fromPartial({});
+    obj.account_id = message.accountId ? AccountID.toAmino(message.accountId) : AccountID.toAmino(AccountID.fromPartial({}));
     obj.payment_id = message.paymentId ?? "";
     obj.owner = message.owner ?? "";
     obj.state = message.state ?? 0;
-    obj.rate = message.rate ? Coin.toAmino(message.rate) : Coin.fromPartial({});
-    obj.balance = message.balance ? Coin.toAmino(message.balance) : Coin.fromPartial({});
-    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : Coin.fromPartial({});
+    obj.rate = message.rate ? Coin.toAmino(message.rate) : Coin.toAmino(Coin.fromPartial({}));
+    obj.balance = message.balance ? Coin.toAmino(message.balance) : Coin.toAmino(Coin.fromPartial({}));
+    obj.withdrawn = message.withdrawn ? Coin.toAmino(message.withdrawn) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: PaymentAminoMsg): Payment {

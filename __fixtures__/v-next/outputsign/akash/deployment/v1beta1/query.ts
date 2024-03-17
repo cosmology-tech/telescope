@@ -85,8 +85,8 @@ export interface QueryDeploymentResponseProtoMsg {
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponseAmino {
-  deployment?: DeploymentAmino | undefined;
-  groups?: GroupAmino[];
+  deployment: DeploymentAmino | undefined;
+  groups: GroupAmino[];
   escrow_account?: AccountAmino | undefined;
 }
 export interface QueryDeploymentResponseAminoMsg {

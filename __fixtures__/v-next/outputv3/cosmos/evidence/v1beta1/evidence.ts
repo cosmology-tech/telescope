@@ -150,9 +150,9 @@ export const Equivocation = {
   },
   toAmino(message: Equivocation, useInterfaces: boolean = true): EquivocationAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = message.power !== BigInt(0) ? message.power.toString() : undefined;
     obj.consensus_address = message.consensusAddress === "" ? undefined : message.consensusAddress;
     return obj;
   },

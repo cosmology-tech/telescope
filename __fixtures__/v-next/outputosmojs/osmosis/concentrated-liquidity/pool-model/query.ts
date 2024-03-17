@@ -285,7 +285,7 @@ export const QueryUserPositionsRequest = {
   toAmino(message: QueryUserPositionsRequest): QueryUserPositionsRequestAmino {
     const obj: any = {};
     obj.address = message.address === "" ? undefined : message.address;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryUserPositionsRequestAminoMsg): QueryUserPositionsRequest {
@@ -483,7 +483,7 @@ export const QueryPositionByIdRequest = {
   },
   toAmino(message: QueryPositionByIdRequest): QueryPositionByIdRequestAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.position_id = message.positionId !== BigInt(0) ? message.positionId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPositionByIdRequestAminoMsg): QueryPositionByIdRequest {
@@ -1340,7 +1340,7 @@ export const QueryLiquidityNetInDirectionRequest = {
   },
   toAmino(message: QueryLiquidityNetInDirectionRequest): QueryLiquidityNetInDirectionRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
     obj.start_tick = message.startTick === null ? undefined : message.startTick;
     obj.bound_tick = message.boundTick === null ? undefined : message.boundTick;
@@ -1480,7 +1480,7 @@ export const QueryLiquidityNetInDirectionResponse = {
     } else {
       obj.liquidity_depths = message.liquidityDepths;
     }
-    obj.current_tick = message.currentTick ? message.currentTick.toString() : undefined;
+    obj.current_tick = message.currentTick !== BigInt(0) ? message.currentTick.toString() : undefined;
     obj.current_liquidity = message.currentLiquidity === "" ? undefined : message.currentLiquidity;
     return obj;
   },
@@ -1575,7 +1575,7 @@ export const QueryTotalLiquidityForRangeRequest = {
   },
   toAmino(message: QueryTotalLiquidityForRangeRequest): QueryTotalLiquidityForRangeRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTotalLiquidityForRangeRequestAminoMsg): QueryTotalLiquidityForRangeRequest {
@@ -1773,7 +1773,7 @@ export const QueryClaimableFeesRequest = {
   },
   toAmino(message: QueryClaimableFeesRequest): QueryClaimableFeesRequestAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
+    obj.position_id = message.positionId !== BigInt(0) ? message.positionId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryClaimableFeesRequestAminoMsg): QueryClaimableFeesRequest {

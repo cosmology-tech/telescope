@@ -414,7 +414,7 @@ export const QueryBalanceResponse = {
   },
   toAmino(message: QueryBalanceResponse, useInterfaces: boolean = true): QueryBalanceResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryBalanceResponseProtoMsg, useInterfaces: boolean = true): QueryBalanceResponse {
@@ -756,7 +756,7 @@ export const QuerySupplyResponse = {
   },
   toAmino(message: QuerySupplyResponse, useInterfaces: boolean = true): QuerySupplyResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QuerySupplyResponseProtoMsg, useInterfaces: boolean = true): QuerySupplyResponse {

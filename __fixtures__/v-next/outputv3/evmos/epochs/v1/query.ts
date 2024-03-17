@@ -394,7 +394,7 @@ export const QueryCurrentEpochResponse = {
   },
   toAmino(message: QueryCurrentEpochResponse, useInterfaces: boolean = true): QueryCurrentEpochResponseAmino {
     const obj: any = {};
-    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    obj.current_epoch = message.currentEpoch !== BigInt(0) ? message.currentEpoch.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryCurrentEpochResponseProtoMsg, useInterfaces: boolean = true): QueryCurrentEpochResponse {

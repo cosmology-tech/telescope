@@ -406,7 +406,7 @@ export const LastValidatorPower = {
   toAmino(message: LastValidatorPower): LastValidatorPowerAmino {
     const obj: any = {};
     obj.address = message.address === "" ? undefined : message.address;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = message.power !== BigInt(0) ? message.power.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: LastValidatorPowerAminoMsg): LastValidatorPower {

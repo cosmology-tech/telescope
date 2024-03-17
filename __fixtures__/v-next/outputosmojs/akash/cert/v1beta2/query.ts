@@ -130,7 +130,7 @@ export const CertificateResponse = {
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {
     const obj: any = {};
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.fromPartial({});
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.toAmino(Certificate.fromPartial({}));
     obj.serial = message.serial ?? "";
     return obj;
   },

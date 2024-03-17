@@ -166,8 +166,8 @@ export const MsgIBCSend = {
   toAmino(message: MsgIBCSend): MsgIBCSendAmino {
     const obj: any = {};
     obj.channel = message.channel === "" ? undefined : message.channel;
-    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
-    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.timeout_height = message.timeoutHeight !== BigInt(0) ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp !== BigInt(0) ? message.timeoutTimestamp.toString() : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },

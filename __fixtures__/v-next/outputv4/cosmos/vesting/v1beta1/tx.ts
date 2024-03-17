@@ -253,7 +253,7 @@ export const MsgCreateVestingAccount = {
     } else {
       obj.amount = message.amount;
     }
-    obj.end_time = message.endTime ? message.endTime.toString() : undefined;
+    obj.end_time = message.endTime !== BigInt(0) ? message.endTime.toString() : undefined;
     obj.delayed = message.delayed === false ? undefined : message.delayed;
     return obj;
   },
@@ -692,7 +692,7 @@ export const MsgCreatePeriodicVestingAccount = {
     const obj: any = {};
     obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
     obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
-    obj.start_time = message.startTime ? message.startTime.toString() : undefined;
+    obj.start_time = message.startTime !== BigInt(0) ? message.startTime.toString() : undefined;
     if (message.vestingPeriods) {
       obj.vesting_periods = message.vestingPeriods.map(e => e ? Period.toAmino(e) : undefined);
     } else {

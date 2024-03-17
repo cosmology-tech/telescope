@@ -282,7 +282,7 @@ export const Memory = {
   },
   toAmino(message: Memory): MemoryAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.fromPartial({});
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
@@ -403,7 +403,7 @@ export const Storage = {
   },
   toAmino(message: Storage): StorageAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.fromPartial({});
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {

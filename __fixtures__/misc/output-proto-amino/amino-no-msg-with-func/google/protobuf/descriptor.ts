@@ -5794,8 +5794,8 @@ export const UninterpretedOption = {
       obj.name = message.name;
     }
     obj.identifier_value = message.identifierValue === "" ? undefined : message.identifierValue;
-    obj.positive_int_value = message.positiveIntValue ? message.positiveIntValue.toString() : undefined;
-    obj.negative_int_value = message.negativeIntValue ? message.negativeIntValue.toString() : undefined;
+    obj.positive_int_value = message.positiveIntValue !== BigInt(0) ? message.positiveIntValue.toString() : undefined;
+    obj.negative_int_value = message.negativeIntValue !== BigInt(0) ? message.negativeIntValue.toString() : undefined;
     obj.double_value = message.doubleValue === 0 ? undefined : message.doubleValue;
     obj.string_value = message.stringValue ? base64FromBytes(message.stringValue) : undefined;
     obj.aggregate_value = message.aggregateValue === "" ? undefined : message.aggregateValue;

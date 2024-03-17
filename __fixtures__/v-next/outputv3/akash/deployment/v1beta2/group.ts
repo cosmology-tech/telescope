@@ -72,9 +72,9 @@ export interface GroupProtoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
-  group_id?: GroupIDAmino;
-  state?: Group_State;
-  group_spec?: GroupSpecAmino;
+  group_id: GroupIDAmino;
+  state: Group_State;
+  group_spec: GroupSpecAmino;
   created_at?: string;
 }
 /** Group stores group id, state and specifications of group */
@@ -199,10 +199,10 @@ export const Group = {
   },
   toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : GroupID.fromPartial({});
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     obj.state = message.state ?? 0;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : GroupSpec.fromPartial({});
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: GroupProtoMsg, useInterfaces: boolean = true): Group {

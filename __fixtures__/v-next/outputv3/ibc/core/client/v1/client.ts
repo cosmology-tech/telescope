@@ -932,8 +932,8 @@ export const Height = {
   },
   toAmino(message: Height, useInterfaces: boolean = true): HeightAmino {
     const obj: any = {};
-    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.revision_number = message.revisionNumber !== BigInt(0) ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight !== BigInt(0) ? message.revisionHeight.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: HeightProtoMsg, useInterfaces: boolean = true): Height {

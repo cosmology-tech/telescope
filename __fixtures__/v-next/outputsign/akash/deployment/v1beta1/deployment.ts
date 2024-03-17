@@ -61,10 +61,10 @@ export interface MsgCreateDeploymentProtoMsg {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
-  id?: DeploymentIDAmino | undefined;
-  groups?: GroupSpecAmino[];
-  version?: string;
-  deposit?: CoinAmino | undefined;
+  id: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: string;
+  deposit: CoinAmino | undefined;
 }
 export interface MsgCreateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCreateDeployment";
@@ -102,8 +102,8 @@ export interface MsgDepositDeploymentProtoMsg {
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentAmino {
-  id?: DeploymentIDAmino | undefined;
-  amount?: CoinAmino | undefined;
+  id: DeploymentIDAmino | undefined;
+  amount: CoinAmino | undefined;
 }
 export interface MsgDepositDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgDepositDeployment";
@@ -140,9 +140,9 @@ export interface MsgUpdateDeploymentProtoMsg {
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
-  id?: DeploymentIDAmino | undefined;
-  groups?: GroupSpecAmino[];
-  version?: string;
+  id: DeploymentIDAmino | undefined;
+  groups: GroupSpecAmino[];
+  version: string;
 }
 export interface MsgUpdateDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgUpdateDeployment";
@@ -178,7 +178,7 @@ export interface MsgCloseDeploymentProtoMsg {
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentAmino {
-  id?: DeploymentIDAmino | undefined;
+  id: DeploymentIDAmino | undefined;
 }
 export interface MsgCloseDeploymentAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseDeployment";
@@ -213,8 +213,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner?: string;
-  dseq?: string;
+  owner: string;
+  dseq: string;
 }
 export interface DeploymentIDAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentID";
@@ -238,9 +238,9 @@ export interface DeploymentProtoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
-  deployment_id?: DeploymentIDAmino | undefined;
-  state?: Deployment_State;
-  version?: string;
+  deployment_id: DeploymentIDAmino | undefined;
+  state: Deployment_State;
+  version: string;
   created_at?: string;
 }
 export interface DeploymentAminoMsg {
@@ -266,9 +266,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  state: string;
 }
 export interface DeploymentFiltersAminoMsg {
   type: "/akash.deployment.v1beta1.DeploymentFilters";
