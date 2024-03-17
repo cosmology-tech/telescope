@@ -22,9 +22,9 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     }: MsgDoFunThingAminoType["value"]): MsgDoFunThing => {
       return {
         address,
-        awesome: awesome == null ? awesome : {
+        awesome: {
           address: awesome.address,
-          myYolo0: awesome.myYolo0 == null ? awesome.myYolo0 : myAwesomeType_FancyEnumTypeFromJSON(awesome.myYolo0)
+          myYolo0: myAwesomeType_FancyEnumTypeFromJSON(awesome.myYolo0)
         }
       };
     }

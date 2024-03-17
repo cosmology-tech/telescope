@@ -95,7 +95,7 @@ export const AminoConverter = {
         hotRoutes: hot_routes.map(el0 => ({
           arbRoutes: el0.arb_routes.map(el1 => ({
             trades: el1.trades.map(el2 => ({
-              pool: el2.pool == null ? el2.pool : BigInt(el2.pool),
+              pool: BigInt(el2.pool),
               tokenIn: el2.token_in,
               tokenOut: el2.token_out
             })),
@@ -145,7 +145,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerTxAminoType["value"]): MsgSetMaxPoolPointsPerTx => {
       return {
         admin,
-        maxPoolPointsPerTx: max_pool_points_per_tx == null ? max_pool_points_per_tx : BigInt(max_pool_points_per_tx)
+        maxPoolPointsPerTx: BigInt(max_pool_points_per_tx)
       };
     }
   },
@@ -166,7 +166,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerBlockAminoType["value"]): MsgSetMaxPoolPointsPerBlock => {
       return {
         admin,
-        maxPoolPointsPerBlock: max_pool_points_per_block == null ? max_pool_points_per_block : BigInt(max_pool_points_per_block)
+        maxPoolPointsPerBlock: BigInt(max_pool_points_per_block)
       };
     }
   },
@@ -191,10 +191,10 @@ export const AminoConverter = {
     }: MsgSetPoolWeightsAminoType["value"]): MsgSetPoolWeights => {
       return {
         admin,
-        poolWeights: pool_weights == null ? pool_weights : {
-          stableWeight: pool_weights.stable_weight == null ? pool_weights.stable_weight : BigInt(pool_weights.stable_weight),
-          balancerWeight: pool_weights.balancer_weight == null ? pool_weights.balancer_weight : BigInt(pool_weights.balancer_weight),
-          concentratedWeight: pool_weights.concentrated_weight == null ? pool_weights.concentrated_weight : BigInt(pool_weights.concentrated_weight)
+        poolWeights: {
+          stableWeight: BigInt(pool_weights.stable_weight),
+          balancerWeight: BigInt(pool_weights.balancer_weight),
+          concentratedWeight: BigInt(pool_weights.concentrated_weight)
         }
       };
     }

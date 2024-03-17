@@ -20,7 +20,7 @@ export declare const fromAmino: {
     /**
      *  value == null ? nullExpr : nonNullExpr
      */
-    nullCheckCondition(value: t.Expression, nullExpr: t.Expression, nonNullExpr: t.Expression): t.ConditionalExpression;
+    nullCheckCondition(value: t.Expression, nullExpr: t.Expression, nonNullExpr: t.Expression, useNullHandling?: boolean): t.Expression;
 };
 export declare const arrayTypes: {
     long(varname: string, ctx: GenericParseContext): t.CallExpression;

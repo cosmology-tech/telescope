@@ -163,7 +163,7 @@ export const AminoConverter = {
       relayers
     }: MsgPayPacketFeeAminoType["value"]): MsgPayPacketFee => {
       return {
-        fee: fee == null ? fee : {
+        fee: {
           recvFee: fee.recv_fee.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
@@ -214,8 +214,8 @@ export const AminoConverter = {
       packet_fee
     }: MsgPayPacketFeeAsyncAminoType["value"]): MsgPayPacketFeeAsync => {
       return {
-        packetFee: packet_fee == null ? packet_fee : {
-          fee: packet_fee.fee == null ? packet_fee.fee : {
+        packetFee: {
+          fee: {
             recvFee: packet_fee.fee.recv_fee.map(el2 => ({
               denom: el2.denom,
               amount: el2.amount

@@ -64,7 +64,7 @@ export const AminoConverter = {
     }: MsgSuperfluidDelegateAminoType["value"]): MsgSuperfluidDelegate => {
       return {
         sender,
-        lockId: lock_id == null ? lock_id : BigInt(lock_id),
+        lockId: BigInt(lock_id),
         valAddr: val_addr
       };
     }
@@ -86,7 +86,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUndelegateAminoType["value"]): MsgSuperfluidUndelegate => {
       return {
         sender,
-        lockId: lock_id == null ? lock_id : BigInt(lock_id)
+        lockId: BigInt(lock_id)
       };
     }
   },
@@ -107,7 +107,7 @@ export const AminoConverter = {
     }: MsgSuperfluidUnbondLockAminoType["value"]): MsgSuperfluidUnbondLock => {
       return {
         sender,
-        lockId: lock_id == null ? lock_id : BigInt(lock_id)
+        lockId: BigInt(lock_id)
       };
     }
   },
@@ -159,7 +159,7 @@ export const AminoConverter = {
     }: MsgUnPoolWhitelistedPoolAminoType["value"]): MsgUnPoolWhitelistedPool => {
       return {
         sender,
-        poolId: pool_id == null ? pool_id : BigInt(pool_id)
+        poolId: BigInt(pool_id)
       };
     }
   }

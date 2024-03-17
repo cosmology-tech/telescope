@@ -122,7 +122,7 @@ export const AminoConverter = {
       authority
     }: MsgExecLegacyContentAminoType["value"]): MsgExecLegacyContent => {
       return {
-        content: content == null ? content : {
+        content: {
           typeUrl: content.type_url,
           value: content.value
         },
@@ -152,9 +152,9 @@ export const AminoConverter = {
       metadata
     }: MsgVoteAminoType["value"]): MsgVote => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         voter,
-        option: option == null ? option : voteOptionFromJSON(option),
+        option: voteOptionFromJSON(option),
         metadata
       };
     }
@@ -184,10 +184,10 @@ export const AminoConverter = {
       metadata
     }: MsgVoteWeightedAminoType["value"]): MsgVoteWeighted => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         voter,
         options: options.map(el0 => ({
-          option: el0.option == null ? el0.option : voteOptionFromJSON(el0.option),
+          option: voteOptionFromJSON(el0.option),
           weight: el0.weight
         })),
         metadata
@@ -216,7 +216,7 @@ export const AminoConverter = {
       amount
     }: MsgDepositAminoType["value"]): MsgDeposit => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         depositor,
         amount: amount.map(el0 => ({
           denom: el0.denom,

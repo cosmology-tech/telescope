@@ -187,10 +187,10 @@ export const AminoConverter = {
     }: MsgChannelOpenInitAminoType["value"]): MsgChannelOpenInit => {
       return {
         portId: port_id,
-        channel: channel == null ? channel : {
-          state: channel.state == null ? channel.state : stateFromJSON(channel.state),
-          ordering: channel.ordering == null ? channel.ordering : orderFromJSON(channel.ordering),
-          counterparty: channel.counterparty == null ? channel.counterparty : {
+        channel: {
+          state: stateFromJSON(channel.state),
+          ordering: orderFromJSON(channel.ordering),
+          counterparty: {
             portId: channel.counterparty.port_id,
             channelId: channel.counterparty.channel_id
           },
@@ -246,10 +246,10 @@ export const AminoConverter = {
       return {
         portId: port_id,
         previousChannelId: previous_channel_id,
-        channel: channel == null ? channel : {
-          state: channel.state == null ? channel.state : stateFromJSON(channel.state),
-          ordering: channel.ordering == null ? channel.ordering : orderFromJSON(channel.ordering),
-          counterparty: channel.counterparty == null ? channel.counterparty : {
+        channel: {
+          state: stateFromJSON(channel.state),
+          ordering: orderFromJSON(channel.ordering),
+          counterparty: {
             portId: channel.counterparty.port_id,
             channelId: channel.counterparty.channel_id
           },
@@ -453,8 +453,8 @@ export const AminoConverter = {
       signer
     }: MsgRecvPacketAminoType["value"]): MsgRecvPacket => {
       return {
-        packet: packet == null ? packet : {
-          sequence: packet.sequence == null ? packet.sequence : Long.fromString(packet.sequence),
+        packet: {
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -464,7 +464,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp == null ? packet.timeout_timestamp : Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofCommitment: proof_commitment,
         proofHeight: proof_height ? {
@@ -515,8 +515,8 @@ export const AminoConverter = {
       signer
     }: MsgTimeoutAminoType["value"]): MsgTimeout => {
       return {
-        packet: packet == null ? packet : {
-          sequence: packet.sequence == null ? packet.sequence : Long.fromString(packet.sequence),
+        packet: {
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -526,14 +526,14 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp == null ? packet.timeout_timestamp : Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofHeight: proof_height ? {
           revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
           revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: next_sequence_recv == null ? next_sequence_recv : Long.fromString(next_sequence_recv),
+        nextSequenceRecv: Long.fromString(next_sequence_recv),
         signer
       };
     }
@@ -581,8 +581,8 @@ export const AminoConverter = {
       signer
     }: MsgTimeoutOnCloseAminoType["value"]): MsgTimeoutOnClose => {
       return {
-        packet: packet == null ? packet : {
-          sequence: packet.sequence == null ? packet.sequence : Long.fromString(packet.sequence),
+        packet: {
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -592,7 +592,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp == null ? packet.timeout_timestamp : Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         proofUnreceived: proof_unreceived,
         proofClose: proof_close,
@@ -600,7 +600,7 @@ export const AminoConverter = {
           revisionHeight: Long.fromString(proof_height.revision_height || "0", true),
           revisionNumber: Long.fromString(proof_height.revision_number || "0", true)
         } : undefined,
-        nextSequenceRecv: next_sequence_recv == null ? next_sequence_recv : Long.fromString(next_sequence_recv),
+        nextSequenceRecv: Long.fromString(next_sequence_recv),
         signer
       };
     }
@@ -645,8 +645,8 @@ export const AminoConverter = {
       signer
     }: MsgAcknowledgementAminoType["value"]): MsgAcknowledgement => {
       return {
-        packet: packet == null ? packet : {
-          sequence: packet.sequence == null ? packet.sequence : Long.fromString(packet.sequence),
+        packet: {
+          sequence: Long.fromString(packet.sequence),
           sourcePort: packet.source_port,
           sourceChannel: packet.source_channel,
           destinationPort: packet.destination_port,
@@ -656,7 +656,7 @@ export const AminoConverter = {
             revisionHeight: Long.fromString(packet.timeout_height.revision_height || "0", true),
             revisionNumber: Long.fromString(packet.timeout_height.revision_number || "0", true)
           } : undefined,
-          timeoutTimestamp: packet.timeout_timestamp == null ? packet.timeout_timestamp : Long.fromString(packet.timeout_timestamp)
+          timeoutTimestamp: Long.fromString(packet.timeout_timestamp)
         },
         acknowledgement,
         proofAcked: proof_acked,

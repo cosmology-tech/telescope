@@ -77,12 +77,12 @@ export const AminoConverter = {
       return {
         owner,
         connectionId: connection_id,
-        packetData: packet_data == null ? packet_data : {
-          type: packet_data.type == null ? packet_data.type : typeFromJSON(packet_data.type),
+        packetData: {
+          type: typeFromJSON(packet_data.type),
           data: packet_data.data,
           memo: packet_data.memo
         },
-        relativeTimeout: relative_timeout == null ? relative_timeout : BigInt(relative_timeout)
+        relativeTimeout: BigInt(relative_timeout)
       };
     }
   }

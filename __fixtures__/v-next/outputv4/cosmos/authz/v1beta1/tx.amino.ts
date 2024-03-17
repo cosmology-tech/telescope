@@ -62,8 +62,8 @@ export const AminoConverter = {
       return {
         granter,
         grantee,
-        grant: grant == null ? grant : {
-          authorization: grant.authorization == null ? grant.authorization : {
+        grant: {
+          authorization: {
             typeUrl: grant.authorization.type_url,
             value: grant.authorization.value
           },

@@ -52,12 +52,12 @@ export const AminoConverter = {
     }: MsgSoftwareUpgradeAminoType["value"]): MsgSoftwareUpgrade => {
       return {
         authority,
-        plan: plan == null ? plan : {
+        plan: {
           name: plan.name,
           time: plan.time,
-          height: plan.height == null ? plan.height : BigInt(plan.height),
+          height: BigInt(plan.height),
           info: plan.info,
-          upgradedClientState: plan.upgraded_client_state == null ? plan.upgraded_client_state : {
+          upgradedClientState: {
             typeUrl: plan.upgraded_client_state.type_url,
             value: plan.upgraded_client_state.value
           }

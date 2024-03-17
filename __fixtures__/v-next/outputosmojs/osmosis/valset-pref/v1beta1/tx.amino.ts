@@ -105,7 +105,7 @@ export const AminoConverter = {
     }: MsgDelegateToValidatorSetAminoType["value"]): MsgDelegateToValidatorSet => {
       return {
         delegator,
-        coin: coin == null ? coin : {
+        coin: {
           denom: coin.denom,
           amount: coin.amount
         }
@@ -132,7 +132,7 @@ export const AminoConverter = {
     }: MsgUndelegateFromValidatorSetAminoType["value"]): MsgUndelegateFromValidatorSet => {
       return {
         delegator,
-        coin: coin == null ? coin : {
+        coin: {
           denom: coin.denom,
           amount: coin.amount
         }
@@ -200,7 +200,7 @@ export const AminoConverter = {
     }: MsgDelegateBondedTokensAminoType["value"]): MsgDelegateBondedTokens => {
       return {
         delegator,
-        lockID: lockID == null ? lockID : BigInt(lockID)
+        lockID: BigInt(lockID)
       };
     }
   }

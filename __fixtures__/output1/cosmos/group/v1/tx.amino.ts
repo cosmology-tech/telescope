@@ -208,7 +208,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupMembersAminoType["value"]): MsgUpdateGroupMembers => {
       return {
         admin,
-        groupId: group_id == null ? group_id : Long.fromString(group_id),
+        groupId: Long.fromString(group_id),
         memberUpdates: member_updates.map(el0 => ({
           address: el0.address,
           weight: el0.weight,
@@ -238,7 +238,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupAdminAminoType["value"]): MsgUpdateGroupAdmin => {
       return {
         admin,
-        groupId: group_id == null ? group_id : Long.fromString(group_id),
+        groupId: Long.fromString(group_id),
         newAdmin: new_admin
       };
     }
@@ -263,7 +263,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupMetadataAminoType["value"]): MsgUpdateGroupMetadata => {
       return {
         admin,
-        groupId: group_id == null ? group_id : Long.fromString(group_id),
+        groupId: Long.fromString(group_id),
         metadata
       };
     }
@@ -294,9 +294,9 @@ export const AminoConverter = {
     }: MsgCreateGroupPolicyAminoType["value"]): MsgCreateGroupPolicy => {
       return {
         admin,
-        groupId: group_id == null ? group_id : Long.fromString(group_id),
+        groupId: Long.fromString(group_id),
         metadata,
-        decisionPolicy: decision_policy == null ? decision_policy : {
+        decisionPolicy: {
           typeUrl: decision_policy.type_url,
           value: decision_policy.value
         }
@@ -349,7 +349,7 @@ export const AminoConverter = {
         groupMetadata: group_metadata,
         groupPolicyMetadata: group_policy_metadata,
         groupPolicyAsAdmin: group_policy_as_admin,
-        decisionPolicy: decision_policy == null ? decision_policy : {
+        decisionPolicy: {
           typeUrl: decision_policy.type_url,
           value: decision_policy.value
         }
@@ -405,7 +405,7 @@ export const AminoConverter = {
       return {
         admin,
         address,
-        decisionPolicy: decision_policy == null ? decision_policy : {
+        decisionPolicy: {
           typeUrl: decision_policy.type_url,
           value: decision_policy.value
         }
@@ -472,7 +472,7 @@ export const AminoConverter = {
           typeUrl: el0.type_url,
           value: el0.value
         })),
-        exec: exec == null ? exec : execFromJSON(exec)
+        exec: execFromJSON(exec)
       };
     }
   },
@@ -492,7 +492,7 @@ export const AminoConverter = {
       address
     }: MsgWithdrawProposalAminoType["value"]): MsgWithdrawProposal => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         address
       };
     }
@@ -522,11 +522,11 @@ export const AminoConverter = {
       exec
     }: MsgVoteAminoType["value"]): MsgVote => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         voter,
-        option: option == null ? option : voteOptionFromJSON(option),
+        option: voteOptionFromJSON(option),
         metadata,
-        exec: exec == null ? exec : execFromJSON(exec)
+        exec: execFromJSON(exec)
       };
     }
   },
@@ -546,7 +546,7 @@ export const AminoConverter = {
       signer
     }: MsgExecAminoType["value"]): MsgExec => {
       return {
-        proposalId: proposal_id == null ? proposal_id : Long.fromString(proposal_id),
+        proposalId: Long.fromString(proposal_id),
         signer
       };
     }
@@ -568,7 +568,7 @@ export const AminoConverter = {
     }: MsgLeaveGroupAminoType["value"]): MsgLeaveGroup => {
       return {
         address,
-        groupId: group_id == null ? group_id : Long.fromString(group_id)
+        groupId: Long.fromString(group_id)
       };
     }
   }

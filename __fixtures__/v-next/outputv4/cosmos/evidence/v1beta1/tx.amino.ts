@@ -32,7 +32,7 @@ export const AminoConverter = {
     }: MsgSubmitEvidenceAminoType["value"]): MsgSubmitEvidence => {
       return {
         submitter,
-        evidence: evidence == null ? evidence : {
+        evidence: {
           typeUrl: evidence.type_url,
           value: evidence.value
         }

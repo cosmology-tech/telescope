@@ -73,7 +73,7 @@ export const AminoConverter = {
           key: el0.key,
           value: el0.value
         })),
-        info: info == null ? info : {
+        info: {
           email: info.email,
           website: info.website
         }
@@ -114,7 +114,7 @@ export const AminoConverter = {
           key: el0.key,
           value: el0.value
         })),
-        info: info == null ? info : {
+        info: {
           email: info.email,
           website: info.website
         }

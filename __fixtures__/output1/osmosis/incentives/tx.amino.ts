@@ -78,10 +78,10 @@ export const AminoConverter = {
       return {
         isPerpetual: is_perpetual,
         owner,
-        distributeTo: distribute_to == null ? distribute_to : {
-          lockQueryType: distribute_to.lock_query_type == null ? distribute_to.lock_query_type : lockQueryTypeFromJSON(distribute_to.lock_query_type),
+        distributeTo: {
+          lockQueryType: lockQueryTypeFromJSON(distribute_to.lock_query_type),
           denom: distribute_to.denom,
-          duration: distribute_to.duration == null ? distribute_to.duration : {
+          duration: {
             seconds: Long.fromNumber(Math.floor(parseInt(distribute_to.duration) / 1_000_000_000)),
             nanos: parseInt(distribute_to.duration) % 1_000_000_000
           },
@@ -92,7 +92,7 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         startTime: start_time,
-        numEpochsPaidOver: num_epochs_paid_over == null ? num_epochs_paid_over : Long.fromString(num_epochs_paid_over)
+        numEpochsPaidOver: Long.fromString(num_epochs_paid_over)
       };
     }
   },
@@ -119,7 +119,7 @@ export const AminoConverter = {
     }: MsgAddToGaugeAminoType["value"]): MsgAddToGauge => {
       return {
         owner,
-        gaugeId: gauge_id == null ? gauge_id : Long.fromString(gauge_id),
+        gaugeId: Long.fromString(gauge_id),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

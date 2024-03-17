@@ -230,14 +230,14 @@ export const AminoConverter = {
       depositor
     }: MsgCreateDeploymentAminoType["value"]): MsgCreateDeployment => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq)
+          dseq: Long.fromString(id.dseq)
         },
         groups: groups.map(el0 => ({
           name: el0.name,
-          requirements: el0.requirements == null ? el0.requirements : {
-            signedBy: el0.requirements.signed_by == null ? el0.requirements.signed_by : {
+          requirements: {
+            signedBy: {
               allOf: el0.requirements.signed_by.all_of,
               anyOf: el0.requirements.signed_by.any_of
             },
@@ -247,9 +247,9 @@ export const AminoConverter = {
             }))
           },
           resources: el0.resources.map(el1 => ({
-            resources: el1.resources == null ? el1.resources : {
-              cpu: el1.resources.cpu == null ? el1.resources.cpu : {
-                units: el1.resources.cpu.units == null ? el1.resources.cpu.units : {
+            resources: {
+              cpu: {
+                units: {
                   val: el1.resources.cpu.units.val
                 },
                 attributes: el1.resources.cpu.attributes.map(el4 => ({
@@ -257,8 +257,8 @@ export const AminoConverter = {
                   value: el4.value
                 }))
               },
-              memory: el1.resources.memory == null ? el1.resources.memory : {
-                quantity: el1.resources.memory.quantity == null ? el1.resources.memory.quantity : {
+              memory: {
+                quantity: {
                   val: el1.resources.memory.quantity.val
                 },
                 attributes: el1.resources.memory.attributes.map(el4 => ({
@@ -268,7 +268,7 @@ export const AminoConverter = {
               },
               storage: el1.resources.storage.map(el3 => ({
                 name: el3.name,
-                quantity: el3.quantity == null ? el3.quantity : {
+                quantity: {
                   val: el3.quantity.val
                 },
                 attributes: el3.attributes.map(el4 => ({
@@ -277,19 +277,19 @@ export const AminoConverter = {
                 }))
               })),
               endpoints: el1.resources.endpoints.map(el3 => ({
-                kind: el3.kind == null ? el3.kind : endpoint_KindFromJSON(el3.kind),
+                kind: endpoint_KindFromJSON(el3.kind),
                 sequenceNumber: el3.sequence_number
               }))
             },
             count: el1.count,
-            price: el1.price == null ? el1.price : {
+            price: {
               denom: el1.price.denom,
               amount: el1.price.amount
             }
           }))
         })),
         version,
-        deposit: deposit == null ? deposit : {
+        deposit: {
           denom: deposit.denom,
           amount: deposit.amount
         },
@@ -322,11 +322,11 @@ export const AminoConverter = {
       depositor
     }: MsgDepositDeploymentAminoType["value"]): MsgDepositDeployment => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq)
+          dseq: Long.fromString(id.dseq)
         },
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         },
@@ -353,9 +353,9 @@ export const AminoConverter = {
       version
     }: MsgUpdateDeploymentAminoType["value"]): MsgUpdateDeployment => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq)
+          dseq: Long.fromString(id.dseq)
         },
         version
       };
@@ -377,9 +377,9 @@ export const AminoConverter = {
       id
     }: MsgCloseDeploymentAminoType["value"]): MsgCloseDeployment => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq)
+          dseq: Long.fromString(id.dseq)
         }
       };
     }
@@ -401,9 +401,9 @@ export const AminoConverter = {
       id
     }: MsgCloseGroupAminoType["value"]): MsgCloseGroup => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq),
+          dseq: Long.fromString(id.dseq),
           gseq: id.gseq
         }
       };
@@ -426,9 +426,9 @@ export const AminoConverter = {
       id
     }: MsgPauseGroupAminoType["value"]): MsgPauseGroup => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq),
+          dseq: Long.fromString(id.dseq),
           gseq: id.gseq
         }
       };
@@ -451,9 +451,9 @@ export const AminoConverter = {
       id
     }: MsgStartGroupAminoType["value"]): MsgStartGroup => {
       return {
-        id: id == null ? id : {
+        id: {
           owner: id.owner,
-          dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq),
+          dseq: Long.fromString(id.dseq),
           gseq: id.gseq
         }
       };

@@ -125,14 +125,14 @@ export const AminoConverter = {
       value
     }: MsgCreateValidatorAminoType["value"]): MsgCreateValidator => {
       return {
-        description: description == null ? description : {
+        description: {
           moniker: description.moniker,
           identity: description.identity,
           website: description.website,
           securityContact: description.security_contact,
           details: description.details
         },
-        commission: commission == null ? commission : {
+        commission: {
           rate: commission.rate,
           maxRate: commission.max_rate,
           maxChangeRate: commission.max_change_rate
@@ -141,7 +141,7 @@ export const AminoConverter = {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
         pubkey: encodePubkey(pubkey),
-        value: value == null ? value : {
+        value: {
           denom: value.denom,
           amount: value.amount
         }
@@ -176,7 +176,7 @@ export const AminoConverter = {
       min_self_delegation
     }: MsgEditValidatorAminoType["value"]): MsgEditValidator => {
       return {
-        description: description == null ? description : {
+        description: {
           moniker: description.moniker,
           identity: description.identity,
           website: description.website,
@@ -213,7 +213,7 @@ export const AminoConverter = {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -248,7 +248,7 @@ export const AminoConverter = {
         delegatorAddress: delegator_address,
         validatorSrcAddress: validator_src_address,
         validatorDstAddress: validator_dst_address,
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -279,7 +279,7 @@ export const AminoConverter = {
       return {
         delegatorAddress: delegator_address,
         validatorAddress: validator_address,
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         }

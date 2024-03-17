@@ -30,17 +30,17 @@ exports[`cosmology/example/c AminoConverter 1`] = `
     }: MsgTypePackageCAminoType["value"]): MsgTypePackageC => {
       return {
         address,
-        awesome: awesome == null ? awesome : {
+        awesome: {
           address: awesome.address,
-          myYolo0: awesome.myYolo0 == null ? awesome.myYolo0 : msgTypePackageB_EnumTypePackageBFromJSON(awesome.myYolo0),
-          anotherField: awesome.anotherField == null ? awesome.anotherField : {
-            myType: awesome.anotherField.myType == null ? awesome.anotherField.myType : {
+          myYolo0: msgTypePackageB_EnumTypePackageBFromJSON(awesome.myYolo0),
+          anotherField: {
+            myType: {
               address: awesome.anotherField.myType.address,
-              someCoolField: awesome.anotherField.myType.someCoolField == null ? awesome.anotherField.myType.someCoolField : msgTypePackageA_EnumPackageAFromJSON(awesome.anotherField.myType.someCoolField),
-              otherField: awesome.anotherField.myType.otherField == null ? awesome.anotherField.myType.otherField : msgTypePackageA_EnumDuplicateNameFromJSON(awesome.anotherField.myType.otherField)
+              someCoolField: msgTypePackageA_EnumPackageAFromJSON(awesome.anotherField.myType.someCoolField),
+              otherField: msgTypePackageA_EnumDuplicateNameFromJSON(awesome.anotherField.myType.otherField)
             }
           },
-          otherField: awesome.otherField == null ? awesome.otherField : msgTypePackageB_EnumDuplicateNameFromJSON(awesome.otherField)
+          otherField: msgTypePackageB_EnumDuplicateNameFromJSON(awesome.otherField)
         }
       };
     }

@@ -44,7 +44,7 @@ export const AminoConverter = {
       sender
     }: MsgConvertCoinAminoType["value"]): MsgConvertCoin => {
       return {
-        coin: coin == null ? coin : {
+        coin: {
           denom: coin.denom,
           amount: coin.amount
         },

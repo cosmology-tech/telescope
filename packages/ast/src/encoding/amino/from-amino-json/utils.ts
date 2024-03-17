@@ -75,7 +75,7 @@ export const fromAmino = {
         ]);
         return t.objectProperty(
             t.identifier(args.field.name),
-            this.nullCheckCondition(prop, prop, value)
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
@@ -92,7 +92,7 @@ export const fromAmino = {
         let value = t.callExpression(t.identifier("fromBase64"), [prop]);
         return t.objectProperty(
             t.identifier(args.field.name),
-            this.nullCheckCondition(prop, prop, value)
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
@@ -111,7 +111,8 @@ export const fromAmino = {
             this.nullCheckCondition(
                 prop,
                 prop,
-                t.callExpression(TypeLong.getFromString(args.context), [prop])
+                t.callExpression(TypeLong.getFromString(args.context), [prop]),
+                useNullHandling
             )
         );
     },
@@ -171,7 +172,7 @@ export const fromAmino = {
         ]);
         return t.objectProperty(
             t.identifier(args.field.name),
-            this.nullCheckCondition(property, property, value)
+            this.nullCheckCondition(property, property, value, useNullHandling)
         );
     },
 
@@ -272,7 +273,7 @@ export const fromAmino = {
         const value = t.callExpression(t.identifier(enumFunction), [prop]);
         return t.objectProperty(
             t.identifier(field.name),
-            this.nullCheckCondition(prop, prop, value)
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
@@ -351,7 +352,7 @@ export const fromAmino = {
 
         return t.objectProperty(
             t.identifier(field.name),
-            this.nullCheckCondition(prop, prop, t.objectExpression(properties))
+            this.nullCheckCondition(prop, prop, t.objectExpression(properties), useNullHandling)
         );
     },
 
@@ -370,7 +371,7 @@ export const fromAmino = {
         );
         return t.objectProperty(
             t.identifier(args.field.name),
-            this.nullCheckCondition(prop, prop, value)
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
@@ -498,13 +499,14 @@ export const fromAmino = {
     nullCheckCondition(
         value: t.Expression,
         nullExpr: t.Expression,
-        nonNullExpr: t.Expression
+        nonNullExpr: t.Expression,
+        useNullHandling: boolean = false
     ) {
-        return t.conditionalExpression(
+        return useNullHandling ? t.conditionalExpression(
             t.binaryExpression("==", value, t.nullLiteral()),
             nullExpr,
             nonNullExpr
-        );
+        ) : nonNullExpr;
     },
 };
 

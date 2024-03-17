@@ -80,11 +80,11 @@ export const AminoConverter = {
       signer
     }: MsgCreateClientAminoType["value"]): MsgCreateClient => {
       return {
-        clientState: client_state == null ? client_state : {
+        clientState: {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        consensusState: consensus_state == null ? consensus_state : {
+        consensusState: {
           typeUrl: consensus_state.type_url,
           value: consensus_state.value
         },
@@ -115,7 +115,7 @@ export const AminoConverter = {
     }: MsgUpdateClientAminoType["value"]): MsgUpdateClient => {
       return {
         clientId: client_id,
-        header: header == null ? header : {
+        header: {
           typeUrl: header.type_url,
           value: header.value
         },
@@ -158,11 +158,11 @@ export const AminoConverter = {
     }: MsgUpgradeClientAminoType["value"]): MsgUpgradeClient => {
       return {
         clientId: client_id,
-        clientState: client_state == null ? client_state : {
+        clientState: {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        consensusState: consensus_state == null ? consensus_state : {
+        consensusState: {
           typeUrl: consensus_state.type_url,
           value: consensus_state.value
         },
@@ -195,7 +195,7 @@ export const AminoConverter = {
     }: MsgSubmitMisbehaviourAminoType["value"]): MsgSubmitMisbehaviour => {
       return {
         clientId: client_id,
-        misbehaviour: misbehaviour == null ? misbehaviour : {
+        misbehaviour: {
           typeUrl: misbehaviour.type_url,
           value: misbehaviour.value
         },

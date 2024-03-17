@@ -343,42 +343,42 @@ export const AminoConverter = {
       o_tests
     }: InputMsgAminoType["value"]): InputMsg => {
       return {
-        dOTests: d_o_tests == null ? d_o_tests : {
+        dOTests: {
           str: d_o_tests.str,
           dOStr: d_o_tests.d_o_str,
           b: d_o_tests.b,
           dOB: d_o_tests.d_o_b,
           num: d_o_tests.num,
           dONum: d_o_tests.d_o_num,
-          big: d_o_tests.big == null ? d_o_tests.big : BigInt(d_o_tests.big),
-          dOBig: d_o_tests.d_o_big == null ? d_o_tests.d_o_big : BigInt(d_o_tests.d_o_big),
-          proto: d_o_tests.proto == null ? d_o_tests.proto : {
+          big: BigInt(d_o_tests.big),
+          dOBig: BigInt(d_o_tests.d_o_big),
+          proto: {
             sender: d_o_tests.proto.sender
           },
-          dOProto: d_o_tests.d_o_proto == null ? d_o_tests.d_o_proto : {
+          dOProto: {
             sender: d_o_tests.d_o_proto.sender
           },
-          auth: d_o_tests.auth == null ? d_o_tests.auth : {
+          auth: {
             typeUrl: d_o_tests.auth.type_url,
             value: d_o_tests.auth.value
           },
-          dOAuth: d_o_tests.d_o_auth == null ? d_o_tests.d_o_auth : {
+          dOAuth: {
             typeUrl: d_o_tests.d_o_auth.type_url,
             value: d_o_tests.d_o_auth.value
           },
           salt: d_o_tests.salt,
           dOSalt: d_o_tests.d_o_salt,
-          raw: d_o_tests.raw == null ? d_o_tests.raw : toUtf8(JSON.stringify(d_o_tests.raw)),
-          dORaw: d_o_tests.d_o_raw == null ? d_o_tests.d_o_raw : toUtf8(JSON.stringify(d_o_tests.d_o_raw)),
-          wasm: d_o_tests.wasm == null ? d_o_tests.wasm : fromBase64(d_o_tests.wasm),
-          dOWasm: d_o_tests.d_o_wasm == null ? d_o_tests.d_o_wasm : fromBase64(d_o_tests.d_o_wasm),
-          opt: d_o_tests.opt == null ? d_o_tests.opt : voteOptionFromJSON(d_o_tests.opt),
-          dOOpt: d_o_tests.d_o_opt == null ? d_o_tests.d_o_opt : voteOptionFromJSON(d_o_tests.d_o_opt),
-          period: d_o_tests.period == null ? d_o_tests.period : {
+          raw: toUtf8(JSON.stringify(d_o_tests.raw)),
+          dORaw: toUtf8(JSON.stringify(d_o_tests.d_o_raw)),
+          wasm: fromBase64(d_o_tests.wasm),
+          dOWasm: fromBase64(d_o_tests.d_o_wasm),
+          opt: voteOptionFromJSON(d_o_tests.opt),
+          dOOpt: voteOptionFromJSON(d_o_tests.d_o_opt),
+          period: {
             seconds: BigInt(Math.floor(parseInt(d_o_tests.period) / 1_000_000_000)),
             nanos: parseInt(d_o_tests.period) % 1_000_000_000
           },
-          dOPeriod: d_o_tests.d_o_period == null ? d_o_tests.d_o_period : {
+          dOPeriod: {
             seconds: BigInt(Math.floor(parseInt(d_o_tests.d_o_period) / 1_000_000_000)),
             nanos: parseInt(d_o_tests.d_o_period) % 1_000_000_000
           },
@@ -399,11 +399,11 @@ export const AminoConverter = {
           opts: d_o_tests.opts.map(el => voteOptionFromJSON(el)),
           dOOpts: d_o_tests.d_o_opts.map(el => voteOptionFromJSON(el)),
           periods: d_o_tests.periods.map(el1 => ({
-            seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
+            seconds: BigInt(el1.seconds),
             nanos: el1.nanos
           })),
           dOPeriods: d_o_tests.d_o_periods.map(el1 => ({
-            seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
+            seconds: BigInt(el1.seconds),
             nanos: el1.nanos
           })),
           protos: d_o_tests.protos.map(el1 => ({
@@ -425,42 +425,42 @@ export const AminoConverter = {
           decs: d_o_tests.decs,
           dODecs: d_o_tests.d_o_decs
         },
-        oTests: o_tests == null ? o_tests : {
+        oTests: {
           str: o_tests.str,
           oStr: o_tests.o_str,
           b: o_tests.b,
           oB: o_tests.o_b,
           num: o_tests.num,
           oNum: o_tests.o_num,
-          big: o_tests.big == null ? o_tests.big : BigInt(o_tests.big),
-          oBig: o_tests.o_big == null ? o_tests.o_big : BigInt(o_tests.o_big),
-          proto: o_tests.proto == null ? o_tests.proto : {
+          big: BigInt(o_tests.big),
+          oBig: BigInt(o_tests.o_big),
+          proto: {
             sender: o_tests.proto.sender
           },
-          oProto: o_tests.o_proto == null ? o_tests.o_proto : {
+          oProto: {
             sender: o_tests.o_proto.sender
           },
-          auth: o_tests.auth == null ? o_tests.auth : {
+          auth: {
             typeUrl: o_tests.auth.type_url,
             value: o_tests.auth.value
           },
-          oAuth: o_tests.o_auth == null ? o_tests.o_auth : {
+          oAuth: {
             typeUrl: o_tests.o_auth.type_url,
             value: o_tests.o_auth.value
           },
           salt: o_tests.salt,
           oSalt: o_tests.o_salt,
-          raw: o_tests.raw == null ? o_tests.raw : toUtf8(JSON.stringify(o_tests.raw)),
-          oRaw: o_tests.o_raw == null ? o_tests.o_raw : toUtf8(JSON.stringify(o_tests.o_raw)),
-          wasm: o_tests.wasm == null ? o_tests.wasm : fromBase64(o_tests.wasm),
-          oWasm: o_tests.o_wasm == null ? o_tests.o_wasm : fromBase64(o_tests.o_wasm),
-          opt: o_tests.opt == null ? o_tests.opt : voteOptionFromJSON(o_tests.opt),
-          oOpt: o_tests.o_opt == null ? o_tests.o_opt : voteOptionFromJSON(o_tests.o_opt),
-          period: o_tests.period == null ? o_tests.period : {
+          raw: toUtf8(JSON.stringify(o_tests.raw)),
+          oRaw: toUtf8(JSON.stringify(o_tests.o_raw)),
+          wasm: fromBase64(o_tests.wasm),
+          oWasm: fromBase64(o_tests.o_wasm),
+          opt: voteOptionFromJSON(o_tests.opt),
+          oOpt: voteOptionFromJSON(o_tests.o_opt),
+          period: {
             seconds: BigInt(Math.floor(parseInt(o_tests.period) / 1_000_000_000)),
             nanos: parseInt(o_tests.period) % 1_000_000_000
           },
-          oPeriod: o_tests.o_period == null ? o_tests.o_period : {
+          oPeriod: {
             seconds: BigInt(Math.floor(parseInt(o_tests.o_period) / 1_000_000_000)),
             nanos: parseInt(o_tests.o_period) % 1_000_000_000
           },
@@ -481,11 +481,11 @@ export const AminoConverter = {
           opts: o_tests.opts.map(el => voteOptionFromJSON(el)),
           oOpts: o_tests.o_opts.map(el => voteOptionFromJSON(el)),
           periods: o_tests.periods.map(el1 => ({
-            seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
+            seconds: BigInt(el1.seconds),
             nanos: el1.nanos
           })),
           oPeriods: o_tests.o_periods.map(el1 => ({
-            seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
+            seconds: BigInt(el1.seconds),
             nanos: el1.nanos
           })),
           protos: o_tests.protos.map(el1 => ({

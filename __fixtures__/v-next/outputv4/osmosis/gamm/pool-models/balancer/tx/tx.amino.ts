@@ -94,24 +94,24 @@ export const AminoConverter = {
     }: MsgCreateBalancerPoolAminoType["value"]): MsgCreateBalancerPool => {
       return {
         sender,
-        poolParams: pool_params == null ? pool_params : {
+        poolParams: {
           swapFee: pool_params.swap_fee,
           exitFee: pool_params.exit_fee,
-          smoothWeightChangeParams: pool_params.smooth_weight_change_params == null ? pool_params.smooth_weight_change_params : {
+          smoothWeightChangeParams: {
             startTime: pool_params.smooth_weight_change_params.start_time,
-            duration: pool_params.smooth_weight_change_params.duration == null ? pool_params.smooth_weight_change_params.duration : {
+            duration: {
               seconds: BigInt(Math.floor(parseInt(pool_params.smooth_weight_change_params.duration) / 1_000_000_000)),
               nanos: parseInt(pool_params.smooth_weight_change_params.duration) % 1_000_000_000
             },
             initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map(el2 => ({
-              token: el2.token == null ? el2.token : {
+              token: {
                 denom: el2.token.denom,
                 amount: el2.token.amount
               },
               weight: el2.weight
             })),
             targetPoolWeights: pool_params.smooth_weight_change_params.target_pool_weights.map(el2 => ({
-              token: el2.token == null ? el2.token : {
+              token: {
                 denom: el2.token.denom,
                 amount: el2.token.amount
               },
@@ -120,7 +120,7 @@ export const AminoConverter = {
           }
         },
         poolAssets: pool_assets.map(el0 => ({
-          token: el0.token == null ? el0.token : {
+          token: {
             denom: el0.token.denom,
             amount: el0.token.amount
           },

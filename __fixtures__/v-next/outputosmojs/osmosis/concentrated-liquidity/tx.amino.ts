@@ -94,15 +94,15 @@ export const AminoConverter = {
       token_min_amount1
     }: MsgCreatePositionAminoType["value"]): MsgCreatePosition => {
       return {
-        poolId: pool_id == null ? pool_id : BigInt(pool_id),
+        poolId: BigInt(pool_id),
         sender,
-        lowerTick: lower_tick == null ? lower_tick : BigInt(lower_tick),
-        upperTick: upper_tick == null ? upper_tick : BigInt(upper_tick),
-        tokenDesired0: token_desired0 == null ? token_desired0 : {
+        lowerTick: BigInt(lower_tick),
+        upperTick: BigInt(upper_tick),
+        tokenDesired0: {
           denom: token_desired0.denom,
           amount: token_desired0.amount
         },
-        tokenDesired1: token_desired1 == null ? token_desired1 : {
+        tokenDesired1: {
           denom: token_desired1.denom,
           amount: token_desired1.amount
         },
@@ -130,7 +130,7 @@ export const AminoConverter = {
       liquidity_amount
     }: MsgWithdrawPositionAminoType["value"]): MsgWithdrawPosition => {
       return {
-        positionId: position_id == null ? position_id : BigInt(position_id),
+        positionId: BigInt(position_id),
         sender,
         liquidityAmount: liquidity_amount
       };

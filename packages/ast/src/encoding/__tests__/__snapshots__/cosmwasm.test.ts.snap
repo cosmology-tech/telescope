@@ -29,7 +29,7 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
       return {
         sender,
         contract,
-        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        msg: toUtf8(JSON.stringify(msg)),
         funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -75,9 +75,9 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       return {
         sender,
         admin,
-        codeId: code_id == null ? code_id : BigInt(code_id),
+        codeId: BigInt(code_id),
         label,
-        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        msg: toUtf8(JSON.stringify(msg)),
         funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -114,8 +114,8 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       return {
         sender,
         contract,
-        codeId: code_id == null ? code_id : BigInt(code_id),
-        msg: msg == null ? msg : toUtf8(JSON.stringify(msg))
+        codeId: BigInt(code_id),
+        msg: toUtf8(JSON.stringify(msg))
       };
     }
   }
@@ -147,9 +147,9 @@ exports[`cosmwasm/wasm/v1/tx MsgStoreCode 1`] = `
     }: MsgStoreCodeAminoType["value"]): MsgStoreCode => {
       return {
         sender,
-        wasmByteCode: wasm_byte_code == null ? wasm_byte_code : fromBase64(wasm_byte_code),
-        instantiatePermission: instantiate_permission == null ? instantiate_permission : {
-          permission: instantiate_permission.permission == null ? instantiate_permission.permission : accessTypeFromJSON(instantiate_permission.permission),
+        wasmByteCode: fromBase64(wasm_byte_code),
+        instantiatePermission: {
+          permission: accessTypeFromJSON(instantiate_permission.permission),
           address: instantiate_permission.address
         }
       };

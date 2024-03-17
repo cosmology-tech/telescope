@@ -119,18 +119,18 @@ export const AminoConverter = {
     }: MsgConnectionOpenInitAminoType["value"]): MsgConnectionOpenInit => {
       return {
         clientId: client_id,
-        counterparty: counterparty == null ? counterparty : {
+        counterparty: {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: counterparty.prefix == null ? counterparty.prefix : {
+          prefix: {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        version: version == null ? version : {
+        version: {
           identifier: version.identifier,
           features: version.features
         },
-        delayPeriod: delay_period == null ? delay_period : Long.fromString(delay_period),
+        delayPeriod: Long.fromString(delay_period),
         signer
       };
     }
@@ -201,18 +201,18 @@ export const AminoConverter = {
       return {
         clientId: client_id,
         previousConnectionId: previous_connection_id,
-        clientState: client_state == null ? client_state : {
+        clientState: {
           typeUrl: client_state.type_url,
           value: client_state.value
         },
-        counterparty: counterparty == null ? counterparty : {
+        counterparty: {
           clientId: counterparty.client_id,
           connectionId: counterparty.connection_id,
-          prefix: counterparty.prefix == null ? counterparty.prefix : {
+          prefix: {
             keyPrefix: counterparty.prefix.key_prefix
           }
         },
-        delayPeriod: delay_period == null ? delay_period : Long.fromString(delay_period),
+        delayPeriod: Long.fromString(delay_period),
         counterpartyVersions: counterparty_versions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features
@@ -286,11 +286,11 @@ export const AminoConverter = {
       return {
         connectionId: connection_id,
         counterpartyConnectionId: counterparty_connection_id,
-        version: version == null ? version : {
+        version: {
           identifier: version.identifier,
           features: version.features
         },
-        clientState: client_state == null ? client_state : {
+        clientState: {
           typeUrl: client_state.type_url,
           value: client_state.value
         },

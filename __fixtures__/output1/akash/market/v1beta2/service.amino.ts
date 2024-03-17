@@ -107,18 +107,18 @@ export const AminoConverter = {
       deposit
     }: MsgCreateBidAminoType["value"]): MsgCreateBid => {
       return {
-        order: order == null ? order : {
+        order: {
           owner: order.owner,
-          dseq: order.dseq == null ? order.dseq : Long.fromString(order.dseq),
+          dseq: Long.fromString(order.dseq),
           gseq: order.gseq,
           oseq: order.oseq
         },
         provider,
-        price: price == null ? price : {
+        price: {
           denom: price.denom,
           amount: price.amount
         },
-        deposit: deposit == null ? deposit : {
+        deposit: {
           denom: deposit.denom,
           amount: deposit.amount
         }
@@ -144,9 +144,9 @@ export const AminoConverter = {
       bid_id
     }: MsgCloseBidAminoType["value"]): MsgCloseBid => {
       return {
-        bidId: bid_id == null ? bid_id : {
+        bidId: {
           owner: bid_id.owner,
-          dseq: bid_id.dseq == null ? bid_id.dseq : Long.fromString(bid_id.dseq),
+          dseq: Long.fromString(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -173,9 +173,9 @@ export const AminoConverter = {
       bid_id
     }: MsgWithdrawLeaseAminoType["value"]): MsgWithdrawLease => {
       return {
-        bidId: bid_id == null ? bid_id : {
+        bidId: {
           owner: bid_id.owner,
-          dseq: bid_id.dseq == null ? bid_id.dseq : Long.fromString(bid_id.dseq),
+          dseq: Long.fromString(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -202,9 +202,9 @@ export const AminoConverter = {
       bid_id
     }: MsgCreateLeaseAminoType["value"]): MsgCreateLease => {
       return {
-        bidId: bid_id == null ? bid_id : {
+        bidId: {
           owner: bid_id.owner,
-          dseq: bid_id.dseq == null ? bid_id.dseq : Long.fromString(bid_id.dseq),
+          dseq: Long.fromString(bid_id.dseq),
           gseq: bid_id.gseq,
           oseq: bid_id.oseq,
           provider: bid_id.provider
@@ -231,9 +231,9 @@ export const AminoConverter = {
       lease_id
     }: MsgCloseLeaseAminoType["value"]): MsgCloseLease => {
       return {
-        leaseId: lease_id == null ? lease_id : {
+        leaseId: {
           owner: lease_id.owner,
-          dseq: lease_id.dseq == null ? lease_id.dseq : Long.fromString(lease_id.dseq),
+          dseq: Long.fromString(lease_id.dseq),
           gseq: lease_id.gseq,
           oseq: lease_id.oseq,
           provider: lease_id.provider

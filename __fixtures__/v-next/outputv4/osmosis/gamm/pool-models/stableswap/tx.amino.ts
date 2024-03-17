@@ -65,7 +65,7 @@ export const AminoConverter = {
     }: MsgCreateStableswapPoolAminoType["value"]): MsgCreateStableswapPool => {
       return {
         sender,
-        poolParams: pool_params == null ? pool_params : {
+        poolParams: {
           swapFee: pool_params.swap_fee,
           exitFee: pool_params.exit_fee
         },
@@ -99,7 +99,7 @@ export const AminoConverter = {
     }: MsgStableSwapAdjustScalingFactorsAminoType["value"]): MsgStableSwapAdjustScalingFactors => {
       return {
         sender,
-        poolId: pool_id == null ? pool_id : BigInt(pool_id),
+        poolId: BigInt(pool_id),
         scalingFactors: scaling_factors.map(el0 => BigInt(el0))
       };
     }

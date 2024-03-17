@@ -44,7 +44,7 @@ export const AminoConverter = {
       return {
         granter,
         grantee,
-        allowance: allowance == null ? allowance : {
+        allowance: {
           typeUrl: allowance.type_url,
           value: allowance.value
         }

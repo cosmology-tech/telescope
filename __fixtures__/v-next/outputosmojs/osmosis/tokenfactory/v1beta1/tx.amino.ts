@@ -101,7 +101,7 @@ export const AminoConverter = {
     }: MsgMintAminoType["value"]): MsgMint => {
       return {
         sender,
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -128,7 +128,7 @@ export const AminoConverter = {
     }: MsgBurnAminoType["value"]): MsgBurn => {
       return {
         sender,
-        amount: amount == null ? amount : {
+        amount: {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -190,7 +190,7 @@ export const AminoConverter = {
     }: MsgSetDenomMetadataAminoType["value"]): MsgSetDenomMetadata => {
       return {
         sender,
-        metadata: metadata == null ? metadata : {
+        metadata: {
           description: metadata.description,
           denomUnits: metadata.denom_units.map(el1 => ({
             denom: el1.denom,

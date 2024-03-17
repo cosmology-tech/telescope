@@ -82,7 +82,7 @@ export const AminoConverter = {
     }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
-        duration: duration == null ? duration : {
+        duration: {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
@@ -133,7 +133,7 @@ export const AminoConverter = {
     }: MsgBeginUnlockingAminoType["value"]): MsgBeginUnlocking => {
       return {
         owner,
-        ID: ID == null ? ID : BigInt(ID),
+        ID: BigInt(ID),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -161,8 +161,8 @@ export const AminoConverter = {
     }: MsgExtendLockupAminoType["value"]): MsgExtendLockup => {
       return {
         owner,
-        ID: ID == null ? ID : BigInt(ID),
-        duration: duration == null ? duration : {
+        ID: BigInt(ID),
+        duration: {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         }
@@ -192,7 +192,7 @@ export const AminoConverter = {
     }: MsgForceUnlockAminoType["value"]): MsgForceUnlock => {
       return {
         owner,
-        ID: ID == null ? ID : BigInt(ID),
+        ID: BigInt(ID),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
