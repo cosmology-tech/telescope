@@ -447,7 +447,7 @@ exports[`evmos/fees/v1/tx AminoConverter 1`] = `
         contractAddress: contract_address,
         deployerAddress: deployer_address,
         withdrawAddress: withdraw_address,
-        nonces: nonces.map?.(el0 => BigInt(el0))
+        nonces: nonces.map(el0 => BigInt(el0))
       };
     }
   },
@@ -530,7 +530,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         sender,
         poolId: pool_id == null ? pool_id : BigInt(pool_id),
         shareOutAmount: share_out_amount,
-        tokenInMaxs: token_in_maxs.map?.(el0 => ({
+        tokenInMaxs: token_in_maxs.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -565,7 +565,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
         sender,
         poolId: pool_id == null ? pool_id : BigInt(pool_id),
         shareInAmount: share_in_amount,
-        tokenOutMins: token_out_mins.map?.(el0 => ({
+        tokenOutMins: token_out_mins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -601,7 +601,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgSwapExactAmountInAminoType["value"]): MsgSwapExactAmountIn => {
       return {
         sender,
-        routes: routes.map?.(el0 => ({
+        routes: routes.map(el0 => ({
           poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenOutDenom: el0.token_out_denom
         })),
@@ -642,7 +642,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgSwapExactAmountOutAminoType["value"]): MsgSwapExactAmountOut => {
       return {
         sender,
-        routes: routes.map?.(el0 => ({
+        routes: routes.map(el0 => ({
           poolId: el0.pool_id == null ? el0.pool_id : BigInt(el0.pool_id),
           tokenInDenom: el0.token_in_denom
         })),

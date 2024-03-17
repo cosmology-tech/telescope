@@ -30,7 +30,7 @@ exports[`cosmwasm/wasm/v1/tx MsgExecuteContract 1`] = `
         sender,
         contract,
         msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
-        funds: funds.map?.(el0 => ({
+        funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -78,7 +78,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
         codeId: code_id == null ? code_id : BigInt(code_id),
         label,
         msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
-        funds: funds.map?.(el0 => ({
+        funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

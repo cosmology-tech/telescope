@@ -78,7 +78,7 @@ export const AminoConverter = {
     }: MsgSetValidatorSetPreferenceAminoType["value"]): MsgSetValidatorSetPreference => {
       return {
         delegator,
-        preferences: preferences.map?.(el0 => ({
+        preferences: preferences.map(el0 => ({
           valOperAddress: el0.val_oper_address,
           weight: el0.weight
         }))
@@ -159,7 +159,7 @@ export const AminoConverter = {
     }: MsgRedelegateValidatorSetAminoType["value"]): MsgRedelegateValidatorSet => {
       return {
         delegator,
-        preferences: preferences.map?.(el0 => ({
+        preferences: preferences.map(el0 => ({
           valOperAddress: el0.val_oper_address,
           weight: el0.weight
         }))

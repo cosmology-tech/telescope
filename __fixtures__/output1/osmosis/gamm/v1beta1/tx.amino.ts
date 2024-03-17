@@ -130,7 +130,7 @@ export const AminoConverter = {
         sender,
         poolId: pool_id == null ? pool_id : Long.fromString(pool_id),
         shareOutAmount: share_out_amount,
-        tokenInMaxs: token_in_maxs.map?.(el0 => ({
+        tokenInMaxs: token_in_maxs.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -165,7 +165,7 @@ export const AminoConverter = {
         sender,
         poolId: pool_id == null ? pool_id : Long.fromString(pool_id),
         shareInAmount: share_in_amount,
-        tokenOutMins: token_out_mins.map?.(el0 => ({
+        tokenOutMins: token_out_mins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -201,7 +201,7 @@ export const AminoConverter = {
     }: MsgSwapExactAmountInAminoType["value"]): MsgSwapExactAmountIn => {
       return {
         sender,
-        routes: routes.map?.(el0 => ({
+        routes: routes.map(el0 => ({
           poolId: el0.pool_id == null ? el0.pool_id : Long.fromString(el0.pool_id),
           tokenOutDenom: el0.token_out_denom
         })),
@@ -242,7 +242,7 @@ export const AminoConverter = {
     }: MsgSwapExactAmountOutAminoType["value"]): MsgSwapExactAmountOut => {
       return {
         sender,
-        routes: routes.map?.(el0 => ({
+        routes: routes.map(el0 => ({
           poolId: el0.pool_id == null ? el0.pool_id : Long.fromString(el0.pool_id),
           tokenInDenom: el0.token_in_denom
         })),

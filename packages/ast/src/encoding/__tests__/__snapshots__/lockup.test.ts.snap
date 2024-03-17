@@ -181,7 +181,7 @@ exports[`osmosis/lockup/tx duration 4`] = `
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -369,7 +369,7 @@ exports[`osmosis/lockup/tx string 4`] = `
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

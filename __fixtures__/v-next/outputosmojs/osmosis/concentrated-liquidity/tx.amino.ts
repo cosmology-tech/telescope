@@ -152,7 +152,7 @@ export const AminoConverter = {
       sender
     }: MsgCollectFeesAminoType["value"]): MsgCollectFees => {
       return {
-        positionIds: position_ids.map?.(el0 => BigInt(el0)),
+        positionIds: position_ids.map(el0 => BigInt(el0)),
         sender
       };
     }
@@ -173,7 +173,7 @@ export const AminoConverter = {
       sender
     }: MsgCollectIncentivesAminoType["value"]): MsgCollectIncentives => {
       return {
-        positionIds: position_ids.map?.(el0 => BigInt(el0)),
+        positionIds: position_ids.map(el0 => BigInt(el0)),
         sender
       };
     }
@@ -194,7 +194,7 @@ export const AminoConverter = {
       sender
     }: MsgFungifyChargedPositionsAminoType["value"]): MsgFungifyChargedPositions => {
       return {
-        positionIds: position_ids.map?.(el0 => BigInt(el0)),
+        positionIds: position_ids.map(el0 => BigInt(el0)),
         sender
       };
     }

@@ -173,7 +173,7 @@ export const AminoConverter = {
     }: MsgCreateGroupAminoType["value"]): MsgCreateGroup => {
       return {
         admin,
-        members: members.map?.(el0 => ({
+        members: members.map(el0 => ({
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
@@ -209,7 +209,7 @@ export const AminoConverter = {
       return {
         admin,
         groupId: group_id == null ? group_id : BigInt(group_id),
-        memberUpdates: member_updates.map?.(el0 => ({
+        memberUpdates: member_updates.map(el0 => ({
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
@@ -340,7 +340,7 @@ export const AminoConverter = {
     }: MsgCreateGroupWithPolicyAminoType["value"]): MsgCreateGroupWithPolicy => {
       return {
         admin,
-        members: members.map?.(el0 => ({
+        members: members.map(el0 => ({
           address: el0.address,
           weight: el0.weight,
           metadata: el0.metadata,
@@ -468,7 +468,7 @@ export const AminoConverter = {
         address,
         proposers,
         metadata,
-        messages: messages.map?.(el0 => ({
+        messages: messages.map(el0 => ({
           typeUrl: el0.type_url,
           value: el0.value
         })),

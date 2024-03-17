@@ -449,7 +449,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           revisionHeight: BigInt(latest_height.revision_height || "0"),
           revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
-        proofSpecs: proof_specs.map?.(el0 => ({
+        proofSpecs: proof_specs.map(el0 => ({
           leafSpec: el0.leaf_spec == null ? el0.leaf_spec : {
             hash: el0.leaf_spec.hash == null ? el0.leaf_spec.hash : hashOpFromJSON(el0.leaf_spec.hash),
             prehashKey: el0.leaf_spec.prehash_key == null ? el0.leaf_spec.prehash_key : hashOpFromJSON(el0.leaf_spec.prehash_key),
@@ -917,7 +917,7 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
           revisionHeight: BigInt(latest_height.revision_height || "0"),
           revisionNumber: BigInt(latest_height.revision_number || "0")
         } : undefined,
-        proofSpecs: proof_specs.map?.(el0 => ({
+        proofSpecs: proof_specs.map(el0 => ({
           leafSpec: el0.leaf_spec == null ? el0.leaf_spec : {
             hash: el0.leaf_spec.hash == null ? el0.leaf_spec.hash : hashOpFromJSON(el0.leaf_spec.hash),
             prehashKey: el0.leaf_spec.prehash_key == null ? el0.leaf_spec.prehash_key : hashOpFromJSON(el0.leaf_spec.prehash_key),

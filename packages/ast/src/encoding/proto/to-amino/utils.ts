@@ -1,6 +1,6 @@
 import * as t from '@babel/types';
 import { ProtoType } from '@cosmology/types';
-import { AminoUtils, BILLION, identifier, TypeLong } from '../../../utils';
+import { BILLION, identifier, TypeLong } from '../../../utils';
 import { ProtoParseContext } from '../../context';
 import { getDefaultTSTypeFromProtoType, getFieldNames, getDefaultTSTypeFromAminoTypeDefault } from '../../types';
 import { getInterfaceToAminoName } from '../implements';

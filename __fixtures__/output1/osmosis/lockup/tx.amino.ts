@@ -86,7 +86,7 @@ export const AminoConverter = {
           seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -134,7 +134,7 @@ export const AminoConverter = {
       return {
         owner,
         ID: ID == null ? ID : Long.fromString(ID),
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -193,7 +193,7 @@ export const AminoConverter = {
       return {
         owner,
         ID: ID == null ? ID : Long.fromString(ID),
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

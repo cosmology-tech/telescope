@@ -153,6 +153,9 @@ interface TelescopeOpts {
         * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
         */
         useLegacyInlineEncoding?: boolean;
+        legacy?: {
+          useNullHandling: boolean;
+        }
     };
 
     lcdClients?: {

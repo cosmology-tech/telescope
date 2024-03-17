@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { AminoUtils, arrowFunctionExpression } from '../../../utils';
+import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { ProtoType, ProtoField } from '@cosmology/types';
 import { protoFieldsToArray } from '../utils';

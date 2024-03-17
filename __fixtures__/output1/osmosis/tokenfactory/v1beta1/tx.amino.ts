@@ -192,7 +192,7 @@ export const AminoConverter = {
         sender,
         metadata: metadata == null ? metadata : {
           description: metadata.description,
-          denomUnits: metadata.denom_units.map?.(el1 => ({
+          denomUnits: metadata.denom_units.map(el1 => ({
             denom: el1.denom,
             exponent: el1.exponent,
             aliases: el1.aliases

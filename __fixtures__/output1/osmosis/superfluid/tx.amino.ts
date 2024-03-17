@@ -134,7 +134,7 @@ export const AminoConverter = {
     }: MsgLockAndSuperfluidDelegateAminoType["value"]): MsgLockAndSuperfluidDelegate => {
       return {
         sender,
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),

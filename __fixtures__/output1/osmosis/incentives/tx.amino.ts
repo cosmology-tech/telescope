@@ -87,7 +87,7 @@ export const AminoConverter = {
           },
           timestamp: distribute_to.timestamp
         },
-        coins: coins.map?.(el0 => ({
+        coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
@@ -120,7 +120,7 @@ export const AminoConverter = {
       return {
         owner,
         gaugeId: gauge_id == null ? gauge_id : Long.fromString(gauge_id),
-        rewards: rewards.map?.(el0 => ({
+        rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

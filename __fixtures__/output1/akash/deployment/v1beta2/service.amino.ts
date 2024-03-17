@@ -234,25 +234,25 @@ export const AminoConverter = {
           owner: id.owner,
           dseq: id.dseq == null ? id.dseq : Long.fromString(id.dseq)
         },
-        groups: groups.map?.(el0 => ({
+        groups: groups.map(el0 => ({
           name: el0.name,
           requirements: el0.requirements == null ? el0.requirements : {
             signedBy: el0.requirements.signed_by == null ? el0.requirements.signed_by : {
               allOf: el0.requirements.signed_by.all_of,
               anyOf: el0.requirements.signed_by.any_of
             },
-            attributes: el0.requirements.attributes.map?.(el2 => ({
+            attributes: el0.requirements.attributes.map(el2 => ({
               key: el2.key,
               value: el2.value
             }))
           },
-          resources: el0.resources.map?.(el1 => ({
+          resources: el0.resources.map(el1 => ({
             resources: el1.resources == null ? el1.resources : {
               cpu: el1.resources.cpu == null ? el1.resources.cpu : {
                 units: el1.resources.cpu.units == null ? el1.resources.cpu.units : {
                   val: el1.resources.cpu.units.val
                 },
-                attributes: el1.resources.cpu.attributes.map?.(el4 => ({
+                attributes: el1.resources.cpu.attributes.map(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
@@ -261,22 +261,22 @@ export const AminoConverter = {
                 quantity: el1.resources.memory.quantity == null ? el1.resources.memory.quantity : {
                   val: el1.resources.memory.quantity.val
                 },
-                attributes: el1.resources.memory.attributes.map?.(el4 => ({
+                attributes: el1.resources.memory.attributes.map(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
               },
-              storage: el1.resources.storage.map?.(el3 => ({
+              storage: el1.resources.storage.map(el3 => ({
                 name: el3.name,
                 quantity: el3.quantity == null ? el3.quantity : {
                   val: el3.quantity.val
                 },
-                attributes: el3.attributes.map?.(el4 => ({
+                attributes: el3.attributes.map(el4 => ({
                   key: el4.key,
                   value: el4.value
                 }))
               })),
-              endpoints: el1.resources.endpoints.map?.(el3 => ({
+              endpoints: el1.resources.endpoints.map(el3 => ({
                 kind: el3.kind == null ? el3.kind : endpoint_KindFromJSON(el3.kind),
                 sequenceNumber: el3.sequence_number
               }))

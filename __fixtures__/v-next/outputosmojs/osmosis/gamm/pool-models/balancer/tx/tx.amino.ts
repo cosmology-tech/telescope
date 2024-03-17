@@ -103,14 +103,14 @@ export const AminoConverter = {
               seconds: BigInt(Math.floor(parseInt(pool_params.smooth_weight_change_params.duration) / 1_000_000_000)),
               nanos: parseInt(pool_params.smooth_weight_change_params.duration) % 1_000_000_000
             },
-            initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map?.(el2 => ({
+            initialPoolWeights: pool_params.smooth_weight_change_params.initial_pool_weights.map(el2 => ({
               token: el2.token == null ? el2.token : {
                 denom: el2.token.denom,
                 amount: el2.token.amount
               },
               weight: el2.weight
             })),
-            targetPoolWeights: pool_params.smooth_weight_change_params.target_pool_weights.map?.(el2 => ({
+            targetPoolWeights: pool_params.smooth_weight_change_params.target_pool_weights.map(el2 => ({
               token: el2.token == null ? el2.token : {
                 denom: el2.token.denom,
                 amount: el2.token.amount
@@ -119,7 +119,7 @@ export const AminoConverter = {
             }))
           }
         },
-        poolAssets: pool_assets.map?.(el0 => ({
+        poolAssets: pool_assets.map(el0 => ({
           token: el0.token == null ? el0.token : {
             denom: el0.token.denom,
             amount: el0.token.amount

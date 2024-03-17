@@ -73,7 +73,7 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        amount: amount.map?.(el0 => ({
+        amount: amount.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
@@ -106,7 +106,7 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        amount: amount.map?.(el0 => ({
+        amount: amount.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -144,9 +144,9 @@ export const AminoConverter = {
         fromAddress: from_address,
         toAddress: to_address,
         startTime: start_time == null ? start_time : BigInt(start_time),
-        vestingPeriods: vesting_periods.map?.(el0 => ({
+        vestingPeriods: vesting_periods.map(el0 => ({
           length: el0.length == null ? el0.length : BigInt(el0.length),
-          amount: el0.amount.map?.(el1 => ({
+          amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))

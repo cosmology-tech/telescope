@@ -92,7 +92,7 @@ export const AminoConverter = {
     }: MsgExecAminoType["value"]): MsgExec => {
       return {
         grantee,
-        msgs: msgs.map?.(el0 => ({
+        msgs: msgs.map(el0 => ({
           typeUrl: el0.type_url,
           value: el0.value
         }))

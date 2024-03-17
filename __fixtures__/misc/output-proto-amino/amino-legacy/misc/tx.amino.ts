@@ -388,35 +388,35 @@ export const AminoConverter = {
           dOPubkey: encodePubkey(pubkey),
           nums: d_o_tests.nums,
           dONums: d_o_tests.d_o_nums,
-          bigs: d_o_tests.bigs.map?.(el1 => BigInt(el1)),
-          dOBigs: d_o_tests.d_o_bigs.map?.(el1 => BigInt(el1)),
+          bigs: d_o_tests.bigs.map(el1 => BigInt(el1)),
+          dOBigs: d_o_tests.d_o_bigs.map(el1 => BigInt(el1)),
           salts: d_o_tests.salts,
           dOSalts: d_o_tests.d_o_salts,
           raws: d_o_tests.raws,
           dORaws: d_o_tests.d_o_raws,
           wasms: d_o_tests.wasms,
           dOWasms: d_o_tests.d_o_wasms,
-          opts: d_o_tests.opts.map?.(el => voteOptionFromJSON(el)),
-          dOOpts: d_o_tests.d_o_opts.map?.(el => voteOptionFromJSON(el)),
-          periods: d_o_tests.periods.map?.(el1 => ({
+          opts: d_o_tests.opts.map(el => voteOptionFromJSON(el)),
+          dOOpts: d_o_tests.d_o_opts.map(el => voteOptionFromJSON(el)),
+          periods: d_o_tests.periods.map(el1 => ({
             seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
             nanos: el1.nanos
           })),
-          dOPeriods: d_o_tests.d_o_periods.map?.(el1 => ({
+          dOPeriods: d_o_tests.d_o_periods.map(el1 => ({
             seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
             nanos: el1.nanos
           })),
-          protos: d_o_tests.protos.map?.(el1 => ({
+          protos: d_o_tests.protos.map(el1 => ({
             sender: el1.sender
           })),
-          dOProtos: d_o_tests.d_o_protos.map?.(el1 => ({
+          dOProtos: d_o_tests.d_o_protos.map(el1 => ({
             sender: el1.sender
           })),
-          auths: d_o_tests.auths.map?.(el1 => ({
+          auths: d_o_tests.auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
           })),
-          dOAuths: d_o_tests.d_o_auths.map?.(el1 => ({
+          dOAuths: d_o_tests.d_o_auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
           })),
@@ -470,35 +470,35 @@ export const AminoConverter = {
           oPubkey: encodePubkey(pubkey),
           nums: o_tests.nums,
           oNums: o_tests.o_nums,
-          bigs: o_tests.bigs.map?.(el1 => BigInt(el1)),
-          oBigs: o_tests.o_bigs.map?.(el1 => BigInt(el1)),
+          bigs: o_tests.bigs.map(el1 => BigInt(el1)),
+          oBigs: o_tests.o_bigs.map(el1 => BigInt(el1)),
           salts: o_tests.salts,
           oSalts: o_tests.o_salts,
           raws: o_tests.raws,
           oRaws: o_tests.o_raws,
           wasms: o_tests.wasms,
           oWasms: o_tests.o_wasms,
-          opts: o_tests.opts.map?.(el => voteOptionFromJSON(el)),
-          oOpts: o_tests.o_opts.map?.(el => voteOptionFromJSON(el)),
-          periods: o_tests.periods.map?.(el1 => ({
+          opts: o_tests.opts.map(el => voteOptionFromJSON(el)),
+          oOpts: o_tests.o_opts.map(el => voteOptionFromJSON(el)),
+          periods: o_tests.periods.map(el1 => ({
             seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
             nanos: el1.nanos
           })),
-          oPeriods: o_tests.o_periods.map?.(el1 => ({
+          oPeriods: o_tests.o_periods.map(el1 => ({
             seconds: el1.seconds == null ? el1.seconds : BigInt(el1.seconds),
             nanos: el1.nanos
           })),
-          protos: o_tests.protos.map?.(el1 => ({
+          protos: o_tests.protos.map(el1 => ({
             sender: el1.sender
           })),
-          oProtos: o_tests.o_protos.map?.(el1 => ({
+          oProtos: o_tests.o_protos.map(el1 => ({
             sender: el1.sender
           })),
-          auths: o_tests.auths.map?.(el1 => ({
+          auths: o_tests.auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
           })),
-          oAuths: o_tests.o_auths.map?.(el1 => ({
+          oAuths: o_tests.o_auths.map(el1 => ({
             typeUrl: el1.type_url,
             value: el1.value
           })),

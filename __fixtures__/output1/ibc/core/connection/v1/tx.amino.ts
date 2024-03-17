@@ -213,7 +213,7 @@ export const AminoConverter = {
           }
         },
         delayPeriod: delay_period == null ? delay_period : Long.fromString(delay_period),
-        counterpartyVersions: counterparty_versions.map?.(el0 => ({
+        counterpartyVersions: counterparty_versions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features
         })),

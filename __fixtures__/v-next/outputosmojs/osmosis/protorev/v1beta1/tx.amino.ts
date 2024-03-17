@@ -92,9 +92,9 @@ export const AminoConverter = {
     }: MsgSetHotRoutesAminoType["value"]): MsgSetHotRoutes => {
       return {
         admin,
-        hotRoutes: hot_routes.map?.(el0 => ({
-          arbRoutes: el0.arb_routes.map?.(el1 => ({
-            trades: el1.trades.map?.(el2 => ({
+        hotRoutes: hot_routes.map(el0 => ({
+          arbRoutes: el0.arb_routes.map(el1 => ({
+            trades: el1.trades.map(el2 => ({
               pool: el2.pool == null ? el2.pool : BigInt(el2.pool),
               tokenIn: el2.token_in,
               tokenOut: el2.token_out
@@ -219,7 +219,7 @@ export const AminoConverter = {
     }: MsgSetBaseDenomsAminoType["value"]): MsgSetBaseDenoms => {
       return {
         admin,
-        baseDenoms: base_denoms.map?.(el0 => ({
+        baseDenoms: base_denoms.map(el0 => ({
           denom: el0.denom,
           stepSize: el0.step_size
         }))

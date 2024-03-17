@@ -133,7 +133,7 @@ export const AminoConverter = {
         codeId: code_id == null ? code_id : BigInt(code_id),
         label,
         msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
-        funds: funds.map?.(el0 => ({
+        funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -168,7 +168,7 @@ export const AminoConverter = {
         sender,
         contract,
         msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
-        funds: funds.map?.(el0 => ({
+        funds: funds.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
