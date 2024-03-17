@@ -191,8 +191,8 @@ export const AminoConverter = {
           d_o_b: dOTests.dOB,
           num: dOTests.num,
           d_o_num: dOTests.dONum,
-          big: dOTests.big?.toString?.(),
-          d_o_big: dOTests.dOBig?.toString?.(),
+          big: dOTests.big.toString(),
+          d_o_big: dOTests.dOBig.toString(),
           proto: {
             sender: dOTests.proto.sender
           },
@@ -234,11 +234,11 @@ export const AminoConverter = {
           opts: dOTests.opts,
           d_o_opts: dOTests.dOOpts,
           periods: dOTests.periods.map(el0 => ({
-            seconds: el0.seconds?.toString?.(),
+            seconds: el0.seconds.toString(),
             nanos: el0.nanos
           })),
           d_o_periods: dOTests.dOPeriods.map(el0 => ({
-            seconds: el0.seconds?.toString?.(),
+            seconds: el0.seconds.toString(),
             nanos: el0.nanos
           })),
           protos: dOTests.protos.map(el0 => ({
@@ -267,8 +267,8 @@ export const AminoConverter = {
           o_b: oTests.oB,
           num: oTests.num,
           o_num: oTests.oNum,
-          big: oTests.big?.toString?.(),
-          o_big: oTests.oBig?.toString?.(),
+          big: oTests.big.toString(),
+          o_big: oTests.oBig.toString(),
           proto: {
             sender: oTests.proto.sender
           },
@@ -310,11 +310,11 @@ export const AminoConverter = {
           opts: oTests.opts,
           o_opts: oTests.oOpts,
           periods: oTests.periods.map(el0 => ({
-            seconds: el0.seconds?.toString?.(),
+            seconds: el0.seconds.toString(),
             nanos: el0.nanos
           })),
           o_periods: oTests.oPeriods.map(el0 => ({
-            seconds: el0.seconds?.toString?.(),
+            seconds: el0.seconds.toString(),
             nanos: el0.nanos
           })),
           protos: oTests.protos.map(el0 => ({

@@ -85,7 +85,7 @@ export const AminoConverter = {
       return {
         order: {
           owner: order.owner,
-          dseq: order.dseq?.toString?.(),
+          dseq: order.dseq.toString(),
           gseq: order.gseq,
           oseq: order.oseq
         },
@@ -133,7 +133,7 @@ export const AminoConverter = {
       return {
         bid_id: {
           owner: bidId.owner,
-          dseq: bidId.dseq?.toString?.(),
+          dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
           provider: bidId.provider
@@ -162,7 +162,7 @@ export const AminoConverter = {
       return {
         bid_id: {
           owner: bidId.owner,
-          dseq: bidId.dseq?.toString?.(),
+          dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
           provider: bidId.provider
@@ -191,7 +191,7 @@ export const AminoConverter = {
       return {
         bid_id: {
           owner: bidId.owner,
-          dseq: bidId.dseq?.toString?.(),
+          dseq: bidId.dseq.toString(),
           gseq: bidId.gseq,
           oseq: bidId.oseq,
           provider: bidId.provider
@@ -220,7 +220,7 @@ export const AminoConverter = {
       return {
         lease_id: {
           owner: leaseId.owner,
-          dseq: leaseId.dseq?.toString?.(),
+          dseq: leaseId.dseq.toString(),
           gseq: leaseId.gseq,
           oseq: leaseId.oseq,
           provider: leaseId.provider

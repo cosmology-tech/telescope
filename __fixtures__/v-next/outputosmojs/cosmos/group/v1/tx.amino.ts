@@ -191,7 +191,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupMembers): MsgUpdateGroupMembersAminoType["value"] => {
       return {
         admin,
-        group_id: groupId?.toString?.(),
+        group_id: groupId.toString(),
         member_updates: memberUpdates.map(el0 => ({
           address: el0.address,
           weight: el0.weight,
@@ -226,7 +226,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupAdmin): MsgUpdateGroupAdminAminoType["value"] => {
       return {
         admin,
-        group_id: groupId?.toString?.(),
+        group_id: groupId.toString(),
         new_admin: newAdmin
       };
     },
@@ -251,7 +251,7 @@ export const AminoConverter = {
     }: MsgUpdateGroupMetadata): MsgUpdateGroupMetadataAminoType["value"] => {
       return {
         admin,
-        group_id: groupId?.toString?.(),
+        group_id: groupId.toString(),
         metadata
       };
     },
@@ -277,7 +277,7 @@ export const AminoConverter = {
     }: MsgCreateGroupPolicy): MsgCreateGroupPolicyAminoType["value"] => {
       return {
         admin,
-        group_id: groupId?.toString?.(),
+        group_id: groupId.toString(),
         metadata,
         decision_policy: {
           type_url: decisionPolicy.typeUrl,
@@ -482,7 +482,7 @@ export const AminoConverter = {
       address
     }: MsgWithdrawProposal): MsgWithdrawProposalAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         address
       };
     },
@@ -506,7 +506,7 @@ export const AminoConverter = {
       exec
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         voter,
         option,
         metadata,
@@ -536,7 +536,7 @@ export const AminoConverter = {
       signer
     }: MsgExec): MsgExecAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         signer
       };
     },
@@ -558,7 +558,7 @@ export const AminoConverter = {
     }: MsgLeaveGroup): MsgLeaveGroupAminoType["value"] => {
       return {
         address,
-        group_id: groupId?.toString?.()
+        group_id: groupId.toString()
       };
     },
     fromAmino: ({

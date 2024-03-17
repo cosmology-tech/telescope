@@ -190,7 +190,7 @@ export const AminoConverter = {
     }: MsgDelegateBondedTokens): MsgDelegateBondedTokensAminoType["value"] => {
       return {
         delegator,
-        lockID: lockID?.toString?.()
+        lockID: lockID.toString()
       };
     },
     fromAmino: ({

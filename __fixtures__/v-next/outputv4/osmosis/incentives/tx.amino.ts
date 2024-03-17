@@ -63,7 +63,7 @@ export const AminoConverter = {
           amount: el0.amount
         })),
         start_time: startTime,
-        num_epochs_paid_over: numEpochsPaidOver?.toString?.()
+        num_epochs_paid_over: numEpochsPaidOver.toString()
       };
     },
     fromAmino: ({
@@ -104,7 +104,7 @@ export const AminoConverter = {
     }: MsgAddToGauge): MsgAddToGaugeAminoType["value"] => {
       return {
         owner,
-        gauge_id: gaugeId?.toString?.(),
+        gauge_id: gaugeId.toString(),
         rewards: rewards.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

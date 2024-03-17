@@ -157,7 +157,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.()
+          dseq: id.dseq.toString()
         },
         groups: groups.map(el0 => ({
           name: el0.name,
@@ -306,7 +306,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.()
+          dseq: id.dseq.toString()
         },
         amount: {
           denom: amount.denom,
@@ -342,7 +342,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.()
+          dseq: id.dseq.toString()
         },
         version
       };
@@ -368,7 +368,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.()
+          dseq: id.dseq.toString()
         }
       };
     },
@@ -391,7 +391,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.(),
+          dseq: id.dseq.toString(),
           gseq: id.gseq
         }
       };
@@ -416,7 +416,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.(),
+          dseq: id.dseq.toString(),
           gseq: id.gseq
         }
       };
@@ -441,7 +441,7 @@ export const AminoConverter = {
       return {
         id: {
           owner: id.owner,
-          dseq: id.dseq?.toString?.(),
+          dseq: id.dseq.toString(),
           gseq: id.gseq
         }
       };

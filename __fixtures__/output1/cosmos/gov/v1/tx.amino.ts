@@ -139,7 +139,7 @@ export const AminoConverter = {
       metadata
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         voter,
         option,
         metadata
@@ -168,7 +168,7 @@ export const AminoConverter = {
       metadata
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         voter,
         options: options.map(el0 => ({
           option: el0.option,
@@ -202,7 +202,7 @@ export const AminoConverter = {
       amount
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         depositor,
         amount: amount.map(el0 => ({
           denom: el0.denom,

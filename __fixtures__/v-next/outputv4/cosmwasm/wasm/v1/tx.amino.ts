@@ -109,7 +109,7 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        code_id: codeId?.toString?.(),
+        code_id: codeId.toString(),
         label,
         msg: JSON.parse(fromUtf8(msg)),
         funds: funds.map(el0 => ({
@@ -185,7 +185,7 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        code_id: codeId?.toString?.(),
+        code_id: codeId.toString(),
         msg: JSON.parse(fromUtf8(msg))
       };
     },

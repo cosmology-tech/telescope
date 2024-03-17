@@ -119,7 +119,7 @@ export const AminoConverter = {
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
         owner,
-        ID: ID?.toString?.(),
+        ID: ID.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -150,7 +150,7 @@ export const AminoConverter = {
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
         owner,
-        ID: ID?.toString?.(),
+        ID: ID.toString(),
         duration: (duration * 1_000_000_000).toString()
       };
     },
@@ -178,7 +178,7 @@ export const AminoConverter = {
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
         owner,
-        ID: ID?.toString?.(),
+        ID: ID.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

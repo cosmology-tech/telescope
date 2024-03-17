@@ -87,7 +87,7 @@ export const AminoConverter = {
     }: MsgStableSwapAdjustScalingFactors): MsgStableSwapAdjustScalingFactorsAminoType["value"] => {
       return {
         sender,
-        pool_id: poolId?.toString?.(),
+        pool_id: poolId.toString(),
         scaling_factors: scalingFactors.map(el0 => el0.toString())
       };
     },
