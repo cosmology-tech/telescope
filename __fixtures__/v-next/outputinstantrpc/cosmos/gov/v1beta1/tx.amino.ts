@@ -96,7 +96,7 @@ export const AminoConverter = {
       return {
         proposal_id: omitDefault(proposalId)?.toString?.(),
         voter,
-        option: option
+        option
       };
     },
     fromAmino: ({

@@ -1,7 +1,6 @@
 //@ts-nocheck
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType, Route, RouteSDKType, Trade, TradeSDKType } from "./protorev";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSetHotRoutes, MsgSetHotRoutesSDKType, MsgSetDeveloperAccount, MsgSetDeveloperAccountSDKType, MsgSetMaxPoolPointsPerTx, MsgSetMaxPoolPointsPerTxSDKType, MsgSetMaxPoolPointsPerBlock, MsgSetMaxPoolPointsPerBlockSDKType, MsgSetPoolWeights, MsgSetPoolWeightsSDKType, MsgSetBaseDenoms, MsgSetBaseDenomsSDKType } from "./tx";
 export interface MsgSetHotRoutesAminoType extends AminoMsg {
   type: "osmosis/MsgSetHotRoutes";
@@ -75,7 +74,7 @@ export const AminoConverter = {
         hot_routes: hotRoutes.map(el0 => ({
           arb_routes: el0.arbRoutes.map(el1 => ({
             trades: el1.trades.map(el2 => ({
-              pool: omitDefault(el2.pool)?.toString?.(),
+              pool: el2.pool?.toString?.(),
               token_in: el2.tokenIn,
               token_out: el2.tokenOut
             })),
@@ -136,7 +135,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAminoType["value"] => {
       return {
         admin,
-        max_pool_points_per_tx: omitDefault(maxPoolPointsPerTx)?.toString?.()
+        max_pool_points_per_tx: maxPoolPointsPerTx?.toString?.()
       };
     },
     fromAmino: ({
@@ -157,7 +156,7 @@ export const AminoConverter = {
     }: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAminoType["value"] => {
       return {
         admin,
-        max_pool_points_per_block: omitDefault(maxPoolPointsPerBlock)?.toString?.()
+        max_pool_points_per_block: maxPoolPointsPerBlock?.toString?.()
       };
     },
     fromAmino: ({
@@ -179,9 +178,9 @@ export const AminoConverter = {
       return {
         admin,
         pool_weights: {
-          stable_weight: omitDefault(poolWeights.stableWeight)?.toString?.(),
-          balancer_weight: omitDefault(poolWeights.balancerWeight)?.toString?.(),
-          concentrated_weight: omitDefault(poolWeights.concentratedWeight)?.toString?.()
+          stable_weight: poolWeights.stableWeight?.toString?.(),
+          balancer_weight: poolWeights.balancerWeight?.toString?.(),
+          concentrated_weight: poolWeights.concentratedWeight?.toString?.()
         }
       };
     },

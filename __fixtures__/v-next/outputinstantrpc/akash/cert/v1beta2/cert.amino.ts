@@ -28,8 +28,8 @@ export const AminoConverter = {
     }: MsgCreateCertificate): MsgCreateCertificateAminoType["value"] => {
       return {
         owner,
-        cert: cert,
-        pubkey: pubkey
+        cert,
+        pubkey
       };
     },
     fromAmino: ({

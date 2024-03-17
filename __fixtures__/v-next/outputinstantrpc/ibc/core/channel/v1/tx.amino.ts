@@ -628,7 +628,7 @@ export const AminoConverter = {
           } : {},
           timeout_timestamp: omitDefault(packet.timeoutTimestamp)?.toString?.()
         },
-        acknowledgement: acknowledgement,
+        acknowledgement,
         proof_acked: proofAcked,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),

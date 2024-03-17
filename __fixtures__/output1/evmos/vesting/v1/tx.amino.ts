@@ -1,7 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Period, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault, Long } from "../../../helpers";
+import { Long } from "../../../helpers";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { MsgCreateClawbackVestingAccount, MsgCreateClawbackVestingAccountSDKType, MsgClawback, MsgClawbackSDKType } from "./tx";
 export interface MsgCreateClawbackVestingAccountAminoType extends AminoMsg {
@@ -51,20 +51,20 @@ export const AminoConverter = {
         to_address: toAddress,
         start_time: startTime,
         lockup_periods: lockupPeriods.map(el0 => ({
-          length: omitDefault(el0.length)?.toString?.(),
+          length: el0.length?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))
         })),
         vesting_periods: vestingPeriods.map(el0 => ({
-          length: omitDefault(el0.length)?.toString?.(),
+          length: el0.length?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))
         })),
-        merge: omitDefault(merge)
+        merge
       };
     },
     fromAmino: ({

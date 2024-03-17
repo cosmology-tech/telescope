@@ -2,7 +2,6 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSetValidatorSetPreference, MsgSetValidatorSetPreferenceSDKType, MsgDelegateToValidatorSet, MsgDelegateToValidatorSetSDKType, MsgUndelegateFromValidatorSet, MsgUndelegateFromValidatorSetSDKType, MsgRedelegateValidatorSet, MsgRedelegateValidatorSetSDKType, MsgWithdrawDelegationRewards, MsgWithdrawDelegationRewardsSDKType, MsgDelegateBondedTokens, MsgDelegateBondedTokensSDKType } from "./tx";
 export interface MsgSetValidatorSetPreferenceAminoType extends AminoMsg {
   type: "osmosis/valset-pref/MsgSetValidatorSetPreference";
@@ -191,7 +190,7 @@ export const AminoConverter = {
     }: MsgDelegateBondedTokens): MsgDelegateBondedTokensAminoType["value"] => {
       return {
         delegator,
-        lockID: omitDefault(lockID)?.toString?.()
+        lockID: lockID?.toString?.()
       };
     },
     fromAmino: ({

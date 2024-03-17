@@ -1,8 +1,8 @@
 import { EncodingTestForDontOmit, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitSDKType } from "./all_fields";
 import { AminoMsg, Pubkey } from "@cosmjs/amino";
-import { omitDefault, padDecimal } from "../helpers";
 import { fromUtf8, toBase64, toUtf8, fromBase64 } from "@cosmjs/encoding";
 import { decodePubkey, encodePubkey } from "@cosmjs/proto-signing";
+import { padDecimal } from "../helpers";
 import { AccessConfig, AccessConfigSDKType, voteOptionFromJSON } from "./eval_request";
 import { Any, AnySDKType } from "../google/protobuf/any";
 import { Duration, DurationSDKType } from "../google/protobuf/duration";
@@ -187,11 +187,11 @@ export const AminoConverter = {
         d_o_tests: {
           str: dOTests.str,
           d_o_str: dOTests.dOStr,
-          b: omitDefault(dOTests.b),
+          b: dOTests.b,
           d_o_b: dOTests.dOB,
-          num: omitDefault(dOTests.num),
+          num: dOTests.num,
           d_o_num: dOTests.dONum,
-          big: omitDefault(dOTests.big)?.toString?.(),
+          big: dOTests.big?.toString?.(),
           d_o_big: dOTests.dOBig?.toString?.(),
           proto: {
             sender: dOTests.proto.sender
@@ -234,12 +234,12 @@ export const AminoConverter = {
           opts: dOTests.opts,
           d_o_opts: dOTests.dOOpts,
           periods: dOTests.periods.map(el0 => ({
-            seconds: omitDefault(el0.seconds)?.toString?.(),
-            nanos: omitDefault(el0.nanos)
+            seconds: el0.seconds?.toString?.(),
+            nanos: el0.nanos
           })),
           d_o_periods: dOTests.dOPeriods.map(el0 => ({
-            seconds: omitDefault(el0.seconds)?.toString?.(),
-            nanos: omitDefault(el0.nanos)
+            seconds: el0.seconds?.toString?.(),
+            nanos: el0.nanos
           })),
           protos: dOTests.protos.map(el0 => ({
             sender: el0.sender
@@ -264,11 +264,11 @@ export const AminoConverter = {
           str: oTests.str,
           o_str: oTests.oStr,
           b: oTests.b,
-          o_b: omitDefault(oTests.oB),
+          o_b: oTests.oB,
           num: oTests.num,
-          o_num: omitDefault(oTests.oNum),
+          o_num: oTests.oNum,
           big: oTests.big?.toString?.(),
-          o_big: omitDefault(oTests.oBig)?.toString?.(),
+          o_big: oTests.oBig?.toString?.(),
           proto: {
             sender: oTests.proto.sender
           },
@@ -310,12 +310,12 @@ export const AminoConverter = {
           opts: oTests.opts,
           o_opts: oTests.oOpts,
           periods: oTests.periods.map(el0 => ({
-            seconds: omitDefault(el0.seconds)?.toString?.(),
-            nanos: omitDefault(el0.nanos)
+            seconds: el0.seconds?.toString?.(),
+            nanos: el0.nanos
           })),
           o_periods: oTests.oPeriods.map(el0 => ({
-            seconds: omitDefault(el0.seconds)?.toString?.(),
-            nanos: omitDefault(el0.nanos)
+            seconds: el0.seconds?.toString?.(),
+            nanos: el0.nanos
           })),
           protos: oTests.protos.map(el0 => ({
             sender: el0.sender

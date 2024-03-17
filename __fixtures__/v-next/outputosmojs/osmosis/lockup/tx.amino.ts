@@ -3,7 +3,6 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
 export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
@@ -119,7 +118,7 @@ export const AminoConverter = {
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
         owner,
-        ID: omitDefault(ID)?.toString?.(),
+        ID: ID?.toString?.(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -150,7 +149,7 @@ export const AminoConverter = {
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
         owner,
-        ID: omitDefault(ID)?.toString?.(),
+        ID: ID?.toString?.(),
         duration: (duration * 1_000_000_000).toString()
       };
     },
@@ -178,7 +177,7 @@ export const AminoConverter = {
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
         owner,
-        ID: omitDefault(ID)?.toString?.(),
+        ID: ID?.toString?.(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

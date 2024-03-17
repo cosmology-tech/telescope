@@ -2,7 +2,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { AminoMsg } from "@cosmjs/amino";
-import { Long, omitDefault } from "../../../helpers";
+import { Long } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
 export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -172,7 +172,7 @@ export const AminoConverter = {
           description: metadata.description,
           denom_units: metadata.denomUnits.map(el0 => ({
             denom: el0.denom,
-            exponent: omitDefault(el0.exponent),
+            exponent: el0.exponent,
             aliases: el0.aliases
           })),
           base: metadata.base,

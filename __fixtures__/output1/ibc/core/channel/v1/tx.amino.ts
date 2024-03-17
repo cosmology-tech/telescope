@@ -426,7 +426,7 @@ export const AminoConverter = {
     }: MsgRecvPacket): MsgRecvPacketAminoType["value"] => {
       return {
         packet: {
-          sequence: omitDefault(packet.sequence)?.toString?.(),
+          sequence: packet.sequence?.toString?.(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -436,7 +436,7 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: omitDefault(packet.timeoutTimestamp)?.toString?.()
+          timeout_timestamp: packet.timeoutTimestamp?.toString?.()
         },
         proof_commitment: proofCommitment,
         proof_height: proofHeight ? {
@@ -486,7 +486,7 @@ export const AminoConverter = {
     }: MsgTimeout): MsgTimeoutAminoType["value"] => {
       return {
         packet: {
-          sequence: omitDefault(packet.sequence)?.toString?.(),
+          sequence: packet.sequence?.toString?.(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -496,14 +496,14 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: omitDefault(packet.timeoutTimestamp)?.toString?.()
+          timeout_timestamp: packet.timeoutTimestamp?.toString?.()
         },
         proof_unreceived: proofUnreceived,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        next_sequence_recv: omitDefault(nextSequenceRecv)?.toString?.(),
+        next_sequence_recv: nextSequenceRecv?.toString?.(),
         signer
       };
     },
@@ -550,7 +550,7 @@ export const AminoConverter = {
     }: MsgTimeoutOnClose): MsgTimeoutOnCloseAminoType["value"] => {
       return {
         packet: {
-          sequence: omitDefault(packet.sequence)?.toString?.(),
+          sequence: packet.sequence?.toString?.(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -560,7 +560,7 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: omitDefault(packet.timeoutTimestamp)?.toString?.()
+          timeout_timestamp: packet.timeoutTimestamp?.toString?.()
         },
         proof_unreceived: proofUnreceived,
         proof_close: proofClose,
@@ -568,7 +568,7 @@ export const AminoConverter = {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),
           revision_number: omitDefault(proofHeight.revisionNumber)?.toString()
         } : {},
-        next_sequence_recv: omitDefault(nextSequenceRecv)?.toString?.(),
+        next_sequence_recv: nextSequenceRecv?.toString?.(),
         signer
       };
     },
@@ -616,7 +616,7 @@ export const AminoConverter = {
     }: MsgAcknowledgement): MsgAcknowledgementAminoType["value"] => {
       return {
         packet: {
-          sequence: omitDefault(packet.sequence)?.toString?.(),
+          sequence: packet.sequence?.toString?.(),
           source_port: packet.sourcePort,
           source_channel: packet.sourceChannel,
           destination_port: packet.destinationPort,
@@ -626,9 +626,9 @@ export const AminoConverter = {
             revision_height: omitDefault(packet.timeoutHeight.revisionHeight)?.toString(),
             revision_number: omitDefault(packet.timeoutHeight.revisionNumber)?.toString()
           } : {},
-          timeout_timestamp: omitDefault(packet.timeoutTimestamp)?.toString?.()
+          timeout_timestamp: packet.timeoutTimestamp?.toString?.()
         },
-        acknowledgement: acknowledgement,
+        acknowledgement,
         proof_acked: proofAcked,
         proof_height: proofHeight ? {
           revision_height: omitDefault(proofHeight.revisionHeight)?.toString(),

@@ -78,7 +78,8 @@
     "ts-jest": "^29.1.0",
     "ts-node": "10.9.1",
     "ts-node-dev": "2.0.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@keplr-wallet/unit": "^0.12.53"
   },
   "dependencies": {
     "@babel/generator": "^7.23.6",
@@ -103,7 +104,6 @@
     "minimist": "1.2.8",
     "mkdirp": "3.0.0",
     "parse-package-name": "1.0.0",
-    "rimraf": "5.0.0",
-    "@keplr-wallet/unit": "^0.12.53"
+    "rimraf": "5.0.0"
   }
 }

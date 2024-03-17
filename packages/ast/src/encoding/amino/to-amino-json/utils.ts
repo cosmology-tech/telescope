@@ -7,10 +7,13 @@ import { ProtoField } from '@cosmology/types';
 
 export const toAmino = {
     defaultType(args: ToAminoParseField, omitEmpty?: boolean) {
-        // if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
-        //     return shorthandProperty(args.field.name);
-        // }
-        let valueExpr = omitEmpty ?
+        const useOmitEmpty = !!args.context.pluginValue('aminoEncoding.legacy.useOmitEmpty');
+
+        if (!(useOmitEmpty && omitEmpty) && args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+            return shorthandProperty(args.field.name);
+        }
+
+        let valueExpr = useOmitEmpty && omitEmpty ?
             this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
             memberExpressionOrIdentifier(args.scope);
 
@@ -18,7 +21,8 @@ export const toAmino = {
     },
 
     long(args: ToAminoParseField, omitEmpty?: boolean) {
-        let valueExpr = omitEmpty ?
+        const useOmitEmpty = !!args.context.pluginValue('aminoEncoding.legacy.useOmitEmpty');
+        let valueExpr = useOmitEmpty && omitEmpty ?
             this.omitDefaultMemberExpressionOrIdentifier(args, args.scope) :
             memberExpressionOrIdentifier(args.scope);
 

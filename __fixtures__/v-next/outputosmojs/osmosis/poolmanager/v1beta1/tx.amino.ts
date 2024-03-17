@@ -2,7 +2,6 @@
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./swap_route";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
-import { omitDefault } from "../../../helpers";
 import { MsgSwapExactAmountIn, MsgSwapExactAmountInSDKType, MsgSwapExactAmountOut, MsgSwapExactAmountOutSDKType } from "./tx";
 export interface MsgSwapExactAmountInAminoType extends AminoMsg {
   type: "osmosis/poolmanager/swap-exact-amount-in";
@@ -46,7 +45,7 @@ export const AminoConverter = {
       return {
         sender,
         routes: routes.map(el0 => ({
-          pool_id: omitDefault(el0.poolId)?.toString?.(),
+          pool_id: el0.poolId?.toString?.(),
           token_out_denom: el0.tokenOutDenom
         })),
         token_in: {
@@ -87,7 +86,7 @@ export const AminoConverter = {
       return {
         sender,
         routes: routes.map(el0 => ({
-          pool_id: omitDefault(el0.poolId)?.toString?.(),
+          pool_id: el0.poolId?.toString?.(),
           token_in_denom: el0.tokenInDenom
         })),
         token_in_max_amount: tokenInMaxAmount,

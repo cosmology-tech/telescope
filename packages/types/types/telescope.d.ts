@@ -126,7 +126,8 @@ interface TelescopeOpts {
         */
         useLegacyInlineEncoding?: boolean;
         legacy?: {
-            useNullHandling: boolean;
+            useNullHandling?: boolean;
+            useOmitEmpty?: boolean;
         };
     };
     lcdClients?: {

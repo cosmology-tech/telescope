@@ -2,7 +2,7 @@ import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./co
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { AminoMsg } from "@cosmjs/amino";
-import { AminoHeight, omitDefault, Long } from "../../../../helpers";
+import { AminoHeight, Long, omitDefault } from "../../../../helpers";
 import { MerklePrefix, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType } from "./tx";
 export interface MsgConnectionOpenInitAminoType extends AminoMsg {
@@ -106,7 +106,7 @@ export const AminoConverter = {
           identifier: version.identifier,
           features: version.features
         },
-        delay_period: omitDefault(delayPeriod)?.toString?.(),
+        delay_period: delayPeriod?.toString?.(),
         signer
       };
     },
@@ -165,7 +165,7 @@ export const AminoConverter = {
             key_prefix: counterparty.prefix.keyPrefix
           }
         },
-        delay_period: omitDefault(delayPeriod)?.toString?.(),
+        delay_period: delayPeriod?.toString?.(),
         counterparty_versions: counterpartyVersions.map(el0 => ({
           identifier: el0.identifier,
           features: el0.features

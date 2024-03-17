@@ -141,7 +141,7 @@ export const AminoConverter = {
       return {
         proposal_id: proposalId?.toString?.(),
         voter,
-        option: option,
+        option,
         metadata
       };
     },

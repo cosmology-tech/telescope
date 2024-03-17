@@ -213,7 +213,7 @@ export const AminoConverter = {
             }
           }))
         })),
-        version: version,
+        version,
         deposit: {
           denom: deposit.denom,
           amount: deposit.amount
@@ -344,7 +344,7 @@ export const AminoConverter = {
           owner: id.owner,
           dseq: id.dseq?.toString?.()
         },
-        version: version
+        version
       };
     },
     fromAmino: ({

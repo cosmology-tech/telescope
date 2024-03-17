@@ -454,7 +454,7 @@ export const AminoConverter = {
           type_url: el0.typeUrl,
           value: el0.value
         })),
-        exec: exec
+        exec
       };
     },
     fromAmino: ({
@@ -509,9 +509,9 @@ export const AminoConverter = {
       return {
         proposal_id: omitDefault(proposalId)?.toString?.(),
         voter,
-        option: option,
+        option,
         metadata,
-        exec: exec
+        exec
       };
     },
     fromAmino: ({
