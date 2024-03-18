@@ -14,6 +14,7 @@ import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
 import { variableSlug } from '@cosmology/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
+import { restoreJsExtension } from 'src/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -93,7 +94,10 @@ export const plugin = (
 
     const imports = buildAllImportsFromGenericContext(ctx, clientFile);
 
-    let cProg = [...imports, ...registryImports, ...converterImports]
+    const importDecls = [...imports, ...registryImports, ...converterImports];
+    restoreJsExtension(importDecls);
+
+    let cProg = importDecls
       .concat(aminos)
       .concat(protos)
       .concat(clientOptions)
