@@ -10,7 +10,7 @@ exports[`cosmology/example/msg AminoConverter 1`] = `
     }: MsgDoFunThing): MsgDoFunThingAminoType["value"] => {
       return {
         address,
-        myEnumField: myEnumField
+        myEnumField
       };
     },
     fromAmino: ({

@@ -144,7 +144,7 @@ exports[`cosmos/authz/v1beta1/authz date 4`] = `
           type_url: authorization.typeUrl,
           value: authorization.value
         },
-        expiration: expiration
+        expiration
       };
     },
     fromAmino: ({
@@ -307,7 +307,7 @@ exports[`cosmos/authz/v1beta1/authz timestamp 4`] = `
           type_url: authorization.typeUrl,
           value: authorization.value
         },
-        expiration: expiration
+        expiration
       };
     },
     fromAmino: ({

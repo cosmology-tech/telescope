@@ -372,8 +372,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
       return {
         chain_id: chainId,
         trust_level: {
-          numerator: omitDefault(trustLevel.numerator)?.toString?.(),
-          denominator: omitDefault(trustLevel.denominator)?.toString?.()
+          numerator: trustLevel.numerator.toString(),
+          denominator: trustLevel.denominator.toString()
         },
         trusting_period: (trustingPeriod * 1_000_000_000).toString(),
         unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
@@ -396,18 +396,18 @@ exports[`ibc/lightclients/tendermint/v1/tendermint duration 4`] = `
           },
           inner_spec: {
             child_order: el0.innerSpec.childOrder,
-            child_size: omitDefault(el0.innerSpec.childSize),
-            min_prefix_length: omitDefault(el0.innerSpec.minPrefixLength),
-            max_prefix_length: omitDefault(el0.innerSpec.maxPrefixLength),
+            child_size: el0.innerSpec.childSize,
+            min_prefix_length: el0.innerSpec.minPrefixLength,
+            max_prefix_length: el0.innerSpec.maxPrefixLength,
             empty_child: el0.innerSpec.emptyChild,
             hash: el0.innerSpec.hash
           },
-          max_depth: omitDefault(el0.maxDepth),
-          min_depth: omitDefault(el0.minDepth)
+          max_depth: el0.maxDepth,
+          min_depth: el0.minDepth
         })),
         upgrade_path: upgradePath,
-        allow_update_after_expiry: omitDefault(allowUpdateAfterExpiry),
-        allow_update_after_misbehaviour: omitDefault(allowUpdateAfterMisbehaviour)
+        allow_update_after_expiry: allowUpdateAfterExpiry,
+        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
       };
     },
     fromAmino: ({
@@ -840,8 +840,8 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
       return {
         chain_id: chainId,
         trust_level: {
-          numerator: omitDefault(trustLevel.numerator)?.toString?.(),
-          denominator: omitDefault(trustLevel.denominator)?.toString?.()
+          numerator: trustLevel.numerator.toString(),
+          denominator: trustLevel.denominator.toString()
         },
         trusting_period: (trustingPeriod * 1_000_000_000).toString(),
         unbonding_period: (unbondingPeriod * 1_000_000_000).toString(),
@@ -864,18 +864,18 @@ exports[`ibc/lightclients/tendermint/v1/tendermint string 4`] = `
           },
           inner_spec: {
             child_order: el0.innerSpec.childOrder,
-            child_size: omitDefault(el0.innerSpec.childSize),
-            min_prefix_length: omitDefault(el0.innerSpec.minPrefixLength),
-            max_prefix_length: omitDefault(el0.innerSpec.maxPrefixLength),
+            child_size: el0.innerSpec.childSize,
+            min_prefix_length: el0.innerSpec.minPrefixLength,
+            max_prefix_length: el0.innerSpec.maxPrefixLength,
             empty_child: el0.innerSpec.emptyChild,
             hash: el0.innerSpec.hash
           },
-          max_depth: omitDefault(el0.maxDepth),
-          min_depth: omitDefault(el0.minDepth)
+          max_depth: el0.maxDepth,
+          min_depth: el0.minDepth
         })),
         upgrade_path: upgradePath,
-        allow_update_after_expiry: omitDefault(allowUpdateAfterExpiry),
-        allow_update_after_misbehaviour: omitDefault(allowUpdateAfterMisbehaviour)
+        allow_update_after_expiry: allowUpdateAfterExpiry,
+        allow_update_after_misbehaviour: allowUpdateAfterMisbehaviour
       };
     },
     fromAmino: ({

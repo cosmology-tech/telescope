@@ -512,7 +512,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinPool): MsgJoinPoolAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         share_out_amount: shareOutAmount,
         token_in_maxs: tokenInMaxs.map(el0 => ({
           denom: el0.denom,
@@ -547,7 +547,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitPool): MsgExitPoolAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         share_in_amount: shareInAmount,
         token_out_mins: tokenOutMins.map(el0 => ({
           denom: el0.denom,
@@ -583,7 +583,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       return {
         sender,
         routes: routes.map(el0 => ({
-          pool_id: omitDefault(el0.poolId)?.toString?.(),
+          pool_id: el0.poolId.toString(),
           token_out_denom: el0.tokenOutDenom
         })),
         token_in: {
@@ -624,7 +624,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
       return {
         sender,
         routes: routes.map(el0 => ({
-          pool_id: omitDefault(el0.poolId)?.toString?.(),
+          pool_id: el0.poolId.toString(),
           token_in_denom: el0.tokenInDenom
         })),
         token_in_max_amount: tokenInMaxAmount,
@@ -664,7 +664,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinSwapExternAmountIn): MsgJoinSwapExternAmountInAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         token_in: {
           denom: tokenIn.denom,
           amount: tokenIn.amount
@@ -700,7 +700,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgJoinSwapShareAmountOut): MsgJoinSwapShareAmountOutAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         token_in_denom: tokenInDenom,
         share_out_amount: shareOutAmount,
         token_in_max_amount: tokenInMaxAmount
@@ -733,7 +733,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitSwapShareAmountIn): MsgExitSwapShareAmountInAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         token_out_denom: tokenOutDenom,
         share_in_amount: shareInAmount,
         token_out_min_amount: tokenOutMinAmount
@@ -765,7 +765,7 @@ exports[`osmosis/gamm/v1beta1/tx AminoConverter 1`] = `
     }: MsgExitSwapExternAmountOut): MsgExitSwapExternAmountOutAminoType["value"] => {
       return {
         sender,
-        pool_id: omitDefault(poolId)?.toString?.(),
+        pool_id: poolId.toString(),
         token_out: {
           denom: tokenOut.denom,
           amount: tokenOut.amount

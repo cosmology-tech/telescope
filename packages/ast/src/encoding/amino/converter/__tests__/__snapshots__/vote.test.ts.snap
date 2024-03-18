@@ -47,9 +47,9 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
       option
     }: MsgVote): MsgVoteAminoType["value"] => {
       return {
-        proposal_id: omitDefault(proposalId)?.toString?.(),
+        proposal_id: proposalId.toString(),
         voter,
-        option: option
+        option
       };
     },
     fromAmino: ({
@@ -72,7 +72,7 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
       options
     }: MsgVoteWeighted): MsgVoteWeightedAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         voter,
         options: options.map(el0 => ({
           option: el0.option,
@@ -103,7 +103,7 @@ exports[`cosmos/gov/v1beta1/tx AminoConverter 1`] = `
       amount
     }: MsgDeposit): MsgDepositAminoType["value"] => {
       return {
-        proposal_id: proposalId?.toString?.(),
+        proposal_id: proposalId.toString(),
         depositor,
         amount: amount.map(el0 => ({
           denom: el0.denom,

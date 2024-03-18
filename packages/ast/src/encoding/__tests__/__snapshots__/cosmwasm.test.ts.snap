@@ -55,7 +55,7 @@ exports[`cosmwasm/wasm/v1/tx MsgInstantiateContract 1`] = `
       return {
         sender,
         admin,
-        code_id: omitDefault(codeId)?.toString?.(),
+        code_id: codeId.toString(),
         label,
         msg: JSON.parse(fromUtf8(msg)),
         funds: funds.map(el0 => ({
@@ -101,7 +101,7 @@ exports[`cosmwasm/wasm/v1/tx MsgMigrateContract 1`] = `
       return {
         sender,
         contract,
-        code_id: omitDefault(codeId)?.toString?.(),
+        code_id: codeId.toString(),
         msg: JSON.parse(fromUtf8(msg))
       };
     },
