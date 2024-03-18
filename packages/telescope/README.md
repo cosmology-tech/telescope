@@ -262,12 +262,15 @@ telescope({
 | option                         | description                                                     | defaults   |
 | ------------------------------ | --------------------------------------------------------------  | ---------- |
 | `aminoEncoding.enabled`        | generate amino types and amino converters                       | `true`     |
+| `aminoEncoding.omitEmptyTags`        |     An array of strings that determines whether a field should be omitted when serialized to JSON. If the array includes "omitempty", any field with the "omitempty" option in either gogoproto.jsontag or cosmos_proto.json_tag will be omitted. If the array includes "dont_omitempty", the field will be omitted or not based on the value of "(amino.dont_omitempty)": if it's null or false, the field will be omitted; if it's true, the field will not be omitted.                  | `["omitempty", "dont_omitempty"]`     |
 | `aminoEncoding.disableMsgTypes`        | disable generating AminoMsg types                | `false`     |
 | `aminoEncoding.casingFn`       | set the amino-casing function for a project                     | `snake()`  |
 | `aminoEncoding.exceptions`     | set specific aminoType name exceptions                          | see code   |
 | `aminoEncoding.typeUrlToAmino` | create functions for aminoType name exceptions                  | `undefined`|
 | `aminoEncoding.useLegacyInlineEncoding` | @deprecated. To use legacy inline encoding instead of using v2 recursive encoding                  | `false`|
 | `aminoEncoding.useRecursiveV2encoding` | this's been removed. See useLegacyInlineEncoding instead.                  |  |
+| `aminoEncoding.legacy.useNullHandling` |    handle null case when generating legacy amino converters(those in tx.amino.ts)               |  |
+| `aminoEncoding.legacy.useOmitEmpty` |    handle omit empty or not when generating legacy amino converters(those in tx.amino.ts)               |  |
 
 ### Implemented Interface Options
 
