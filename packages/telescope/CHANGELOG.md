@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.13](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.12...@cosmology/telescope@1.4.13) (2024-03-18)
+
+### Bug Fixes
+
+- optional field default value ([1590b18](https://github.com/cosmology-tech/telescope/commit/1590b18a6d81fc2e767869ed366f6d0deaabad02))
+
+### Features
+
+- add emit default and fix timestamp ([1c4296c](https://github.com/cosmology-tech/telescope/commit/1c4296c5eb5cb48b42b6c9ba7523f8faa8a8bcbe))
+- fix omit empty handling ([3a8e76b](https://github.com/cosmology-tech/telescope/commit/3a8e76ba6a402cec7a64e4ec98e58133acf19f09))
+- partially add support for amino ([f9ae22c](https://github.com/cosmology-tech/telescope/commit/f9ae22c86665590b8caa6b3918738a903592c29b))
+- re-run tests and update snapshots ([ced5e43](https://github.com/cosmology-tech/telescope/commit/ced5e4313ff29a7e268dd0aee7aa2f492ac176a3))
+
 ## [1.4.12](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.11...@cosmology/telescope@1.4.12) (2024-01-23)
 
 **Note:** Version bump only for package @cosmology/telescope

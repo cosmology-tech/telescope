@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.4.8...@cosmology/ast@1.4.9) (2024-03-18)
+
+### Bug Fixes
+
+- amino enum handling ([0afc37b](https://github.com/cosmology-tech/telescope/commit/0afc37b63a75cbb626602db2089de16325a300b1))
+- amino from-amino null handling ([9595e4b](https://github.com/cosmology-tech/telescope/commit/9595e4bc75f58076584a86dcc299205aa4fae3b8))
+- amino omit empty ([d38a5c8](https://github.com/cosmology-tech/telescope/commit/d38a5c81e014238461847bb95ca90477f4727170))
+- array fields ([45a6160](https://github.com/cosmology-tech/telescope/commit/45a61606446381215666e5bb19a290a5d793c7c3))
+- decimal handling in amino ([36f37c3](https://github.com/cosmology-tech/telescope/commit/36f37c3fe9f2e5d1428d48d6ffc08f2487ad837c))
+- object empty check ([f7206f0](https://github.com/cosmology-tech/telescope/commit/f7206f07d87a6da646435cf3244dfd8e731fa8d8))
+- optional field default value ([1590b18](https://github.com/cosmology-tech/telescope/commit/1590b18a6d81fc2e767869ed366f6d0deaabad02))
+- optional field default value ([efc0dc7](https://github.com/cosmology-tech/telescope/commit/efc0dc738e4df5fed65e8317acdaecef3906b746))
+- pubkey from amino functions ([fdcae94](https://github.com/cosmology-tech/telescope/commit/fdcae94742e2a82a76fb0206b2357efc7a24a8c7))
+
+### Features
+
+- add emit default and fix timestamp ([1c4296c](https://github.com/cosmology-tech/telescope/commit/1c4296c5eb5cb48b42b6c9ba7523f8faa8a8bcbe))
+- add return type to arrow-functions ([94608ed](https://github.com/cosmology-tech/telescope/commit/94608ed3024776b1e9d3a44839218572f32887a7))
+- fix omit empty handling ([3a8e76b](https://github.com/cosmology-tech/telescope/commit/3a8e76ba6a402cec7a64e4ec98e58133acf19f09))
+- handle decimal paddings ([331f35d](https://github.com/cosmology-tech/telescope/commit/331f35d8fea0fcdb2c0fea243c923ec60faf3d27))
+- partially add support for amino ([f9ae22c](https://github.com/cosmology-tech/telescope/commit/f9ae22c86665590b8caa6b3918738a903592c29b))
+- re-run tests and update snapshots ([ced5e43](https://github.com/cosmology-tech/telescope/commit/ced5e4313ff29a7e268dd0aee7aa2f492ac176a3))
+
 ## [1.4.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.4.7...@cosmology/ast@1.4.8) (2024-01-23)
 
 **Note:** Version bump only for package @cosmology/ast
