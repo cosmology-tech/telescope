@@ -110,8 +110,8 @@ export const SwapAmountInRoute = {
   },
   toAmino(message: SwapAmountInRoute): SwapAmountInRouteAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.token_out_denom = message.tokenOutDenom;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.token_out_denom = message.tokenOutDenom === "" ? undefined : message.tokenOutDenom;
     return obj;
   },
   fromAminoMsg(object: SwapAmountInRouteAminoMsg): SwapAmountInRoute {
@@ -221,8 +221,8 @@ export const SwapAmountOutRoute = {
   },
   toAmino(message: SwapAmountOutRoute): SwapAmountOutRouteAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.token_in_denom = message.tokenInDenom;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.token_in_denom = message.tokenInDenom === "" ? undefined : message.tokenInDenom;
     return obj;
   },
   fromAminoMsg(object: SwapAmountOutRouteAminoMsg): SwapAmountOutRoute {

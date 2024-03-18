@@ -349,7 +349,7 @@ export const QuerySigningInfoRequest = {
   },
   toAmino(message: QuerySigningInfoRequest, useInterfaces: boolean = true): QuerySigningInfoRequestAmino {
     const obj: any = {};
-    obj.cons_address = message.consAddress;
+    obj.cons_address = message.consAddress === "" ? undefined : message.consAddress;
     return obj;
   },
   fromProtoMsg(message: QuerySigningInfoRequestProtoMsg, useInterfaces: boolean = true): QuerySigningInfoRequest {
@@ -622,7 +622,7 @@ export const QuerySigningInfosResponse = {
     if (message.info) {
       obj.info = message.info.map(e => e ? ValidatorSigningInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.info = [];
+      obj.info = message.info;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

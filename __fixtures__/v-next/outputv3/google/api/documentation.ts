@@ -542,20 +542,20 @@ export const Documentation = {
   },
   toAmino(message: Documentation, useInterfaces: boolean = true): DocumentationAmino {
     const obj: any = {};
-    obj.summary = message.summary;
+    obj.summary = message.summary === "" ? undefined : message.summary;
     if (message.pages) {
       obj.pages = message.pages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pages = [];
+      obj.pages = message.pages;
     }
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? DocumentationRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
-    obj.documentation_root_url = message.documentationRootUrl;
-    obj.service_root_url = message.serviceRootUrl;
-    obj.overview = message.overview;
+    obj.documentation_root_url = message.documentationRootUrl === "" ? undefined : message.documentationRootUrl;
+    obj.service_root_url = message.serviceRootUrl === "" ? undefined : message.serviceRootUrl;
+    obj.overview = message.overview === "" ? undefined : message.overview;
     return obj;
   },
   fromProtoMsg(message: DocumentationProtoMsg, useInterfaces: boolean = true): Documentation {
@@ -665,9 +665,9 @@ export const DocumentationRule = {
   },
   toAmino(message: DocumentationRule, useInterfaces: boolean = true): DocumentationRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.description = message.description;
-    obj.deprecation_description = message.deprecationDescription;
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.deprecation_description = message.deprecationDescription === "" ? undefined : message.deprecationDescription;
     return obj;
   },
   fromProtoMsg(message: DocumentationRuleProtoMsg, useInterfaces: boolean = true): DocumentationRule {
@@ -783,12 +783,12 @@ export const Page = {
   },
   toAmino(message: Page, useInterfaces: boolean = true): PageAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.content = message.content;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.content = message.content === "" ? undefined : message.content;
     if (message.subpages) {
       obj.subpages = message.subpages.map(e => e ? Page.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.subpages = [];
+      obj.subpages = message.subpages;
     }
     return obj;
   },

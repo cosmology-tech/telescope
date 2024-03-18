@@ -258,7 +258,7 @@ export const Context = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? ContextRule.toAmino(e) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     return obj;
   },
@@ -358,26 +358,26 @@ export const ContextRule = {
   },
   toAmino(message: ContextRule): ContextRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = message.selector === "" ? undefined : message.selector;
     if (message.requested) {
       obj.requested = message.requested.map(e => e);
     } else {
-      obj.requested = [];
+      obj.requested = message.requested;
     }
     if (message.provided) {
       obj.provided = message.provided.map(e => e);
     } else {
-      obj.provided = [];
+      obj.provided = message.provided;
     }
     if (message.allowedRequestExtensions) {
       obj.allowed_request_extensions = message.allowedRequestExtensions.map(e => e);
     } else {
-      obj.allowed_request_extensions = [];
+      obj.allowed_request_extensions = message.allowedRequestExtensions;
     }
     if (message.allowedResponseExtensions) {
       obj.allowed_response_extensions = message.allowedResponseExtensions.map(e => e);
     } else {
-      obj.allowed_response_extensions = [];
+      obj.allowed_response_extensions = message.allowedResponseExtensions;
     }
     return obj;
   },

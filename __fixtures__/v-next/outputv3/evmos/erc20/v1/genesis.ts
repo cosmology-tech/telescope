@@ -147,7 +147,7 @@ export const GenesisState = {
     if (message.tokenPairs) {
       obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.token_pairs = [];
+      obj.token_pairs = message.tokenPairs;
     }
     return obj;
   },
@@ -243,8 +243,8 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.enable_erc20 = message.enableErc20;
-    obj.enable_evm_hook = message.enableEvmHook;
+    obj.enable_erc20 = message.enableErc20 === false ? undefined : message.enableErc20;
+    obj.enable_evm_hook = message.enableEvmHook === false ? undefined : message.enableEvmHook;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

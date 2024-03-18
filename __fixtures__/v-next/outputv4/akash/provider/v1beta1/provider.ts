@@ -191,8 +191,8 @@ export const ProviderInfo = {
   },
   toAmino(message: ProviderInfo): ProviderInfoAmino {
     const obj: any = {};
-    obj.email = message.email;
-    obj.website = message.website;
+    obj.email = message.email ?? "";
+    obj.website = message.website ?? "";
     return obj;
   },
   fromAminoMsg(object: ProviderInfoAminoMsg): ProviderInfo {
@@ -342,14 +342,14 @@ export const MsgCreateProvider = {
   },
   toAmino(message: MsgCreateProvider): MsgCreateProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgCreateProviderAminoMsg): MsgCreateProvider {
@@ -573,14 +573,14 @@ export const MsgUpdateProvider = {
   },
   toAmino(message: MsgUpdateProvider): MsgUpdateProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgUpdateProviderAminoMsg): MsgUpdateProvider {
@@ -748,7 +748,7 @@ export const MsgDeleteProvider = {
   },
   toAmino(message: MsgDeleteProvider): MsgDeleteProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner ?? "";
     return obj;
   },
   fromAminoMsg(object: MsgDeleteProviderAminoMsg): MsgDeleteProvider {
@@ -972,14 +972,14 @@ export const Provider = {
   },
   toAmino(message: Provider): ProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.host_uri = message.hostUri;
+    obj.owner = message.owner ?? "";
+    obj.host_uri = message.hostUri ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
-    obj.info = message.info ? ProviderInfo.toAmino(message.info) : undefined;
+    obj.info = message.info ? ProviderInfo.toAmino(message.info) : ProviderInfo.toAmino(ProviderInfo.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: ProviderAminoMsg): Provider {

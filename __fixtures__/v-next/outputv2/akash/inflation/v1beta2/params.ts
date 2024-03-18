@@ -24,17 +24,17 @@ export interface ParamsProtoMsg {
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
   /** InflationDecayFactor is the number of years it takes inflation to halve. */
-  inflation_decay_factor?: string;
+  inflation_decay_factor: string;
   /**
    * InitialInflation is the rate at which inflation starts at genesis.
    * It is a decimal value in the range [0.0, 100.0].
    */
-  initial_inflation?: string;
+  initial_inflation: string;
   /**
    * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
    * It is a decimal value in the range [0.0, 1.0].
    */
-  variance?: string;
+  variance: string;
 }
 export interface ParamsAminoMsg {
   type: "/akash.inflation.v1beta2.Params";
@@ -140,9 +140,9 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
+    obj.inflation_decay_factor = message.inflationDecayFactor ?? "";
+    obj.initial_inflation = message.initialInflation ?? "";
+    obj.variance = message.variance ?? "";
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

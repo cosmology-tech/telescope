@@ -92,7 +92,7 @@ export const GenesisState = {
     if (message.genTxs) {
       obj.gen_txs = message.genTxs.map(e => base64FromBytes(e));
     } else {
-      obj.gen_txs = [];
+      obj.gen_txs = message.genTxs;
     }
     return obj;
   },

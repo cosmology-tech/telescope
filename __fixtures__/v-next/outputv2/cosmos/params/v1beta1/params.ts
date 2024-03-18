@@ -163,12 +163,12 @@ export const ParameterChangeProposal = {
   },
   toAmino(message: ParameterChangeProposal): ParameterChangeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.changes) {
       obj.changes = message.changes.map(e => e ? ParamChange.toAmino(e) : undefined);
     } else {
-      obj.changes = [];
+      obj.changes = message.changes;
     }
     return obj;
   },
@@ -289,9 +289,9 @@ export const ParamChange = {
   },
   toAmino(message: ParamChange): ParamChangeAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: ParamChangeAminoMsg): ParamChange {

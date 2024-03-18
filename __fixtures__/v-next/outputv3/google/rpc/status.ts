@@ -168,12 +168,12 @@ export const Status = {
   },
   toAmino(message: Status, useInterfaces: boolean = true): StatusAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.message = message.message;
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.message = message.message === "" ? undefined : message.message;
     if (message.details) {
       obj.details = message.details.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.details = [];
+      obj.details = message.details;
     }
     return obj;
   },

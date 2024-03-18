@@ -154,10 +154,10 @@ export const MsgSend = {
   },
   toAmino(message: MsgSend, useInterfaces: boolean = true): MsgSendAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     return obj;
   },
   fromProtoMsg(message: MsgSendProtoMsg, useInterfaces: boolean = true): MsgSend {

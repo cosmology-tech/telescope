@@ -45,7 +45,7 @@ export interface AminoHeight {
   readonly revision_height?: string;
 }
 
-export function omitDefault<T extends string | number | bigint>(
+export function omitDefault<T extends string | number | bigint | boolean>(
   input: T
 ): T | undefined {
   if (typeof input === 'string') {
@@ -54,6 +54,10 @@ export function omitDefault<T extends string | number | bigint>(
 
   if (typeof input === 'number') {
     return input === 0 ? undefined : input;
+  }
+
+  if (typeof input === "boolean"){
+      return input === false ? undefined : input;
   }
 
   if (typeof input === 'bigint') {

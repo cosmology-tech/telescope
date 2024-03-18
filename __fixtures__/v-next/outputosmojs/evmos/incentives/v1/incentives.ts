@@ -236,15 +236,15 @@ export const Incentive = {
   },
   toAmino(message: Incentive): IncentiveAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
-      obj.allocations = [];
+      obj.allocations = message.allocations;
     }
-    obj.epochs = message.epochs;
+    obj.epochs = message.epochs === 0 ? undefined : message.epochs;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
-    obj.total_gas = message.totalGas ? message.totalGas.toString() : undefined;
+    obj.total_gas = message.totalGas !== BigInt(0) ? message.totalGas.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: IncentiveAminoMsg): Incentive {
@@ -364,9 +364,9 @@ export const GasMeter = {
   },
   toAmino(message: GasMeter): GasMeterAmino {
     const obj: any = {};
-    obj.contract = message.contract;
-    obj.participant = message.participant;
-    obj.cumulative_gas = message.cumulativeGas ? message.cumulativeGas.toString() : undefined;
+    obj.contract = message.contract === "" ? undefined : message.contract;
+    obj.participant = message.participant === "" ? undefined : message.participant;
+    obj.cumulative_gas = message.cumulativeGas !== BigInt(0) ? message.cumulativeGas.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GasMeterAminoMsg): GasMeter {
@@ -524,15 +524,15 @@ export const RegisterIncentiveProposal = {
   },
   toAmino(message: RegisterIncentiveProposal): RegisterIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
-      obj.allocations = [];
+      obj.allocations = message.allocations;
     }
-    obj.epochs = message.epochs;
+    obj.epochs = message.epochs === 0 ? undefined : message.epochs;
     return obj;
   },
   fromAminoMsg(object: RegisterIncentiveProposalAminoMsg): RegisterIncentiveProposal {
@@ -652,9 +652,9 @@ export const CancelIncentiveProposal = {
   },
   toAmino(message: CancelIncentiveProposal): CancelIncentiveProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.contract = message.contract;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     return obj;
   },
   fromAminoMsg(object: CancelIncentiveProposalAminoMsg): CancelIncentiveProposal {

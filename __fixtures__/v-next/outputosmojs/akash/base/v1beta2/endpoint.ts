@@ -132,7 +132,7 @@ export const Endpoint = {
   fromAmino(object: EndpointAmino): Endpoint {
     const message = createBaseEndpoint();
     if (object.kind !== undefined && object.kind !== null) {
-      message.kind = endpoint_KindFromJSON(object.kind);
+      message.kind = object.kind;
     }
     if (object.sequence_number !== undefined && object.sequence_number !== null) {
       message.sequenceNumber = object.sequence_number;
@@ -141,8 +141,8 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint): EndpointAmino {
     const obj: any = {};
-    obj.kind = message.kind;
-    obj.sequence_number = message.sequenceNumber;
+    obj.kind = message.kind === 0 ? undefined : message.kind;
+    obj.sequence_number = message.sequenceNumber ?? 0;
     return obj;
   },
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {

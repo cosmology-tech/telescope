@@ -442,7 +442,7 @@ export const QueryIncentivesResponse = {
     if (message.incentives) {
       obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e) : undefined);
     } else {
-      obj.incentives = [];
+      obj.incentives = message.incentives;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -532,7 +532,7 @@ export const QueryIncentiveRequest = {
   },
   toAmino(message: QueryIncentiveRequest): QueryIncentiveRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     return obj;
   },
   fromAminoMsg(object: QueryIncentiveRequestAminoMsg): QueryIncentiveRequest {
@@ -724,7 +724,7 @@ export const QueryGasMetersRequest = {
   },
   toAmino(message: QueryGasMetersRequest): QueryGasMetersRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -838,7 +838,7 @@ export const QueryGasMetersResponse = {
     if (message.gasMeters) {
       obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e) : undefined);
     } else {
-      obj.gas_meters = [];
+      obj.gas_meters = message.gasMeters;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -944,8 +944,8 @@ export const QueryGasMeterRequest = {
   },
   toAmino(message: QueryGasMeterRequest): QueryGasMeterRequestAmino {
     const obj: any = {};
-    obj.contract = message.contract;
-    obj.participant = message.participant;
+    obj.contract = message.contract === "" ? undefined : message.contract;
+    obj.participant = message.participant === "" ? undefined : message.participant;
     return obj;
   },
   fromAminoMsg(object: QueryGasMeterRequestAminoMsg): QueryGasMeterRequest {
@@ -1033,7 +1033,7 @@ export const QueryGasMeterResponse = {
   },
   toAmino(message: QueryGasMeterResponse): QueryGasMeterResponseAmino {
     const obj: any = {};
-    obj.gas_meter = message.gasMeter ? message.gasMeter.toString() : undefined;
+    obj.gas_meter = message.gasMeter !== BigInt(0) ? message.gasMeter.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGasMeterResponseAminoMsg): QueryGasMeterResponse {
@@ -1234,7 +1234,7 @@ export const QueryAllocationMetersResponse = {
     if (message.allocationMeters) {
       obj.allocation_meters = message.allocationMeters.map(e => e ? DecCoin.toAmino(e) : undefined);
     } else {
-      obj.allocation_meters = [];
+      obj.allocation_meters = message.allocationMeters;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1324,7 +1324,7 @@ export const QueryAllocationMeterRequest = {
   },
   toAmino(message: QueryAllocationMeterRequest): QueryAllocationMeterRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromAminoMsg(object: QueryAllocationMeterRequestAminoMsg): QueryAllocationMeterRequest {

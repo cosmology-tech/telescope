@@ -195,8 +195,8 @@ export const QueryParamsRequest = {
   },
   toAmino(message: QueryParamsRequest, useInterfaces: boolean = true): QueryParamsRequestAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
-    obj.key = message.key;
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
+    obj.key = message.key === "" ? undefined : message.key;
     return obj;
   },
   fromProtoMsg(message: QueryParamsRequestProtoMsg, useInterfaces: boolean = true): QueryParamsRequest {
@@ -432,7 +432,7 @@ export const QuerySubspacesResponse = {
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map(e => e ? Subspace.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.subspaces = [];
+      obj.subspaces = message.subspaces;
     }
     return obj;
   },
@@ -535,11 +535,11 @@ export const Subspace = {
   },
   toAmino(message: Subspace, useInterfaces: boolean = true): SubspaceAmino {
     const obj: any = {};
-    obj.subspace = message.subspace;
+    obj.subspace = message.subspace === "" ? undefined : message.subspace;
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },

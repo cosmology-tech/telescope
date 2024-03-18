@@ -12,7 +12,7 @@ export interface MsgCloseGroupProtoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
@@ -38,7 +38,7 @@ export interface MsgPauseGroupProtoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -64,7 +64,7 @@ export interface MsgStartGroupProtoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -146,7 +146,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = true): MsgCloseGroup {
@@ -290,7 +290,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = true): MsgPauseGroup {
@@ -434,7 +434,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = true): MsgStartGroup {

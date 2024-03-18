@@ -348,10 +348,10 @@ export const Plan = {
   },
   toAmino(message: Plan): PlanAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.info = message.info;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.info = message.info === "" ? undefined : message.info;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState) : undefined;
     return obj;
   },
@@ -474,8 +474,8 @@ export const SoftwareUpgradeProposal = {
   },
   toAmino(message: SoftwareUpgradeProposal): SoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
     return obj;
   },
@@ -581,8 +581,8 @@ export const CancelSoftwareUpgradeProposal = {
   },
   toAmino(message: CancelSoftwareUpgradeProposal): CancelSoftwareUpgradeProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: CancelSoftwareUpgradeProposalAminoMsg): CancelSoftwareUpgradeProposal {
@@ -689,8 +689,8 @@ export const ModuleVersion = {
   },
   toAmino(message: ModuleVersion): ModuleVersionAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleVersionAminoMsg): ModuleVersion {

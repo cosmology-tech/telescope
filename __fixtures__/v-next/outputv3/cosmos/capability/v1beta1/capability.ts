@@ -146,7 +146,7 @@ export const Capability = {
   },
   toAmino(message: Capability, useInterfaces: boolean = true): CapabilityAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CapabilityProtoMsg, useInterfaces: boolean = true): Capability {
@@ -242,8 +242,8 @@ export const Owner = {
   },
   toAmino(message: Owner, useInterfaces: boolean = true): OwnerAmino {
     const obj: any = {};
-    obj.module = message.module;
-    obj.name = message.name;
+    obj.module = message.module === "" ? undefined : message.module;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: OwnerProtoMsg, useInterfaces: boolean = true): Owner {
@@ -333,7 +333,7 @@ export const CapabilityOwners = {
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },

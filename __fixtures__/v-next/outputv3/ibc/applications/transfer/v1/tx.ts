@@ -246,13 +246,13 @@ export const MsgTransfer = {
   },
   toAmino(message: MsgTransfer, useInterfaces: boolean = true): MsgTransferAmino {
     const obj: any = {};
-    obj.source_port = message.sourcePort;
-    obj.source_channel = message.sourceChannel;
+    obj.source_port = message.sourcePort === "" ? undefined : message.sourcePort;
+    obj.source_channel = message.sourceChannel === "" ? undefined : message.sourceChannel;
     obj.token = message.token ? Coin.toAmino(message.token, useInterfaces) : undefined;
-    obj.sender = message.sender;
-    obj.receiver = message.receiver;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight, useInterfaces) : {};
-    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp !== BigInt(0) ? message.timeoutTimestamp.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgTransferProtoMsg, useInterfaces: boolean = true): MsgTransfer {

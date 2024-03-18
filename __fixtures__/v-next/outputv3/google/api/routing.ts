@@ -1319,7 +1319,7 @@ export const RoutingRule = {
     if (message.routingParameters) {
       obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.routing_parameters = [];
+      obj.routing_parameters = message.routingParameters;
     }
     return obj;
   },
@@ -1415,8 +1415,8 @@ export const RoutingParameter = {
   },
   toAmino(message: RoutingParameter, useInterfaces: boolean = true): RoutingParameterAmino {
     const obj: any = {};
-    obj.field = message.field;
-    obj.path_template = message.pathTemplate;
+    obj.field = message.field === "" ? undefined : message.field;
+    obj.path_template = message.pathTemplate === "" ? undefined : message.pathTemplate;
     return obj;
   },
   fromProtoMsg(message: RoutingParameterProtoMsg, useInterfaces: boolean = true): RoutingParameter {

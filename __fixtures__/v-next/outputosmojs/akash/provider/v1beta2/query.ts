@@ -241,7 +241,7 @@ export const QueryProvidersResponse = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -337,7 +337,7 @@ export const QueryProviderRequest = {
   },
   toAmino(message: QueryProviderRequest): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {

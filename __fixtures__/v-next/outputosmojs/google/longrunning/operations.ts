@@ -344,9 +344,9 @@ export const Operation = {
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.metadata = message.metadata ? Any.toAmino(message.metadata) : undefined;
-    obj.done = message.done;
+    obj.done = message.done === false ? undefined : message.done;
     obj.error = message.error ? Status.toAmino(message.error) : undefined;
     obj.response = message.response ? Any.toAmino(message.response) : undefined;
     return obj;
@@ -436,7 +436,7 @@ export const GetOperationRequest = {
   },
   toAmino(message: GetOperationRequest): GetOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: GetOperationRequestAminoMsg): GetOperationRequest {
@@ -572,10 +572,10 @@ export const ListOperationsRequest = {
   },
   toAmino(message: ListOperationsRequest): ListOperationsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromAminoMsg(object: ListOperationsRequestAminoMsg): ListOperationsRequest {
@@ -688,9 +688,9 @@ export const ListOperationsResponse = {
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toAmino(e) : undefined);
     } else {
-      obj.operations = [];
+      obj.operations = message.operations;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListOperationsResponseAminoMsg): ListOperationsResponse {
@@ -778,7 +778,7 @@ export const CancelOperationRequest = {
   },
   toAmino(message: CancelOperationRequest): CancelOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: CancelOperationRequestAminoMsg): CancelOperationRequest {
@@ -866,7 +866,7 @@ export const DeleteOperationRequest = {
   },
   toAmino(message: DeleteOperationRequest): DeleteOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: DeleteOperationRequestAminoMsg): DeleteOperationRequest {
@@ -970,7 +970,7 @@ export const WaitOperationRequest = {
   },
   toAmino(message: WaitOperationRequest): WaitOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout) : undefined;
     return obj;
   },
@@ -1075,8 +1075,8 @@ export const OperationInfo = {
   },
   toAmino(message: OperationInfo): OperationInfoAmino {
     const obj: any = {};
-    obj.response_type = message.responseType;
-    obj.metadata_type = message.metadataType;
+    obj.response_type = message.responseType === "" ? undefined : message.responseType;
+    obj.metadata_type = message.metadataType === "" ? undefined : message.metadataType;
     return obj;
   },
   fromAminoMsg(object: OperationInfoAminoMsg): OperationInfo {

@@ -268,12 +268,12 @@ export const HttpBody = {
   },
   toAmino(message: HttpBody, useInterfaces: boolean = true): HttpBodyAmino {
     const obj: any = {};
-    obj.content_type = message.contentType;
+    obj.content_type = message.contentType === "" ? undefined : message.contentType;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.extensions = [];
+      obj.extensions = message.extensions;
     }
     return obj;
   },

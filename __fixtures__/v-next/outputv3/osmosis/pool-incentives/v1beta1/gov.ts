@@ -200,12 +200,12 @@ export const ReplacePoolIncentivesProposal = {
   },
   toAmino(message: ReplacePoolIncentivesProposal, useInterfaces: boolean = true): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },
@@ -324,12 +324,12 @@ export const UpdatePoolIncentivesProposal = {
   },
   toAmino(message: UpdatePoolIncentivesProposal, useInterfaces: boolean = true): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },

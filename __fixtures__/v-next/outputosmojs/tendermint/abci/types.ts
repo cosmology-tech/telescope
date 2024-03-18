@@ -1312,7 +1312,7 @@ export const RequestEcho = {
   },
   toAmino(message: RequestEcho): RequestEchoAmino {
     const obj: any = {};
-    obj.message = message.message;
+    obj.message = message.message === "" ? undefined : message.message;
     return obj;
   },
   fromAminoMsg(object: RequestEchoAminoMsg): RequestEcho {
@@ -1499,9 +1499,9 @@ export const RequestInfo = {
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
-    obj.version = message.version;
-    obj.block_version = message.blockVersion ? message.blockVersion.toString() : undefined;
-    obj.p2p_version = message.p2pVersion ? message.p2pVersion.toString() : undefined;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.block_version = message.blockVersion !== BigInt(0) ? message.blockVersion.toString() : undefined;
+    obj.p2p_version = message.p2pVersion !== BigInt(0) ? message.p2pVersion.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
@@ -1605,8 +1605,8 @@ export const RequestSetOption = {
   },
   toAmino(message: RequestSetOption): RequestSetOptionAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: RequestSetOptionAminoMsg): RequestSetOption {
@@ -1781,15 +1781,15 @@ export const RequestInitChain = {
   toAmino(message: RequestInitChain): RequestInitChainAmino {
     const obj: any = {};
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.chain_id = message.chainId;
+    obj.chain_id = message.chainId === "" ? undefined : message.chainId;
     obj.consensus_params = message.consensusParams ? ConsensusParams.toAmino(message.consensusParams) : undefined;
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.app_state_bytes = message.appStateBytes ? base64FromBytes(message.appStateBytes) : undefined;
-    obj.initial_height = message.initialHeight ? message.initialHeight.toString() : undefined;
+    obj.initial_height = message.initialHeight !== BigInt(0) ? message.initialHeight.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: RequestInitChainAminoMsg): RequestInitChain {
@@ -1926,9 +1926,9 @@ export const RequestQuery = {
   toAmino(message: RequestQuery): RequestQueryAmino {
     const obj: any = {};
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
-    obj.path = message.path;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.prove = message.prove;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.prove = message.prove === false ? undefined : message.prove;
     return obj;
   },
   fromAminoMsg(object: RequestQueryAminoMsg): RequestQuery {
@@ -2076,7 +2076,7 @@ export const RequestBeginBlock = {
     if (message.byzantineValidators) {
       obj.byzantine_validators = message.byzantineValidators.map(e => e ? Evidence.toAmino(e) : undefined);
     } else {
-      obj.byzantine_validators = [];
+      obj.byzantine_validators = message.byzantineValidators;
     }
     return obj;
   },
@@ -2175,14 +2175,14 @@ export const RequestCheckTx = {
       message.tx = bytesFromBase64(object.tx);
     }
     if (object.type !== undefined && object.type !== null) {
-      message.type = checkTxTypeFromJSON(object.type);
+      message.type = object.type;
     }
     return message;
   },
   toAmino(message: RequestCheckTx): RequestCheckTxAmino {
     const obj: any = {};
     obj.tx = message.tx ? base64FromBytes(message.tx) : undefined;
-    obj.type = message.type;
+    obj.type = message.type === 0 ? undefined : message.type;
     return obj;
   },
   fromAminoMsg(object: RequestCheckTxAminoMsg): RequestCheckTx {
@@ -2358,7 +2358,7 @@ export const RequestEndBlock = {
   },
   toAmino(message: RequestEndBlock): RequestEndBlockAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: RequestEndBlockAminoMsg): RequestEndBlock {
@@ -2717,9 +2717,9 @@ export const RequestLoadSnapshotChunk = {
   },
   toAmino(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunk = message.chunk;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.format = message.format === 0 ? undefined : message.format;
+    obj.chunk = message.chunk === 0 ? undefined : message.chunk;
     return obj;
   },
   fromAminoMsg(object: RequestLoadSnapshotChunkAminoMsg): RequestLoadSnapshotChunk {
@@ -2839,9 +2839,9 @@ export const RequestApplySnapshotChunk = {
   },
   toAmino(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkAmino {
     const obj: any = {};
-    obj.index = message.index;
+    obj.index = message.index === 0 ? undefined : message.index;
     obj.chunk = message.chunk ? base64FromBytes(message.chunk) : undefined;
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: RequestApplySnapshotChunkAminoMsg): RequestApplySnapshotChunk {
@@ -3272,7 +3272,7 @@ export const ResponseException = {
   },
   toAmino(message: ResponseException): ResponseExceptionAmino {
     const obj: any = {};
-    obj.error = message.error;
+    obj.error = message.error === "" ? undefined : message.error;
     return obj;
   },
   fromAminoMsg(object: ResponseExceptionAminoMsg): ResponseException {
@@ -3360,7 +3360,7 @@ export const ResponseEcho = {
   },
   toAmino(message: ResponseEcho): ResponseEchoAmino {
     const obj: any = {};
-    obj.message = message.message;
+    obj.message = message.message === "" ? undefined : message.message;
     return obj;
   },
   fromAminoMsg(object: ResponseEchoAminoMsg): ResponseEcho {
@@ -3579,10 +3579,10 @@ export const ResponseInfo = {
   },
   toAmino(message: ResponseInfo): ResponseInfoAmino {
     const obj: any = {};
-    obj.data = message.data;
-    obj.version = message.version;
-    obj.app_version = message.appVersion ? message.appVersion.toString() : undefined;
-    obj.last_block_height = message.lastBlockHeight ? message.lastBlockHeight.toString() : undefined;
+    obj.data = message.data === "" ? undefined : message.data;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.app_version = message.appVersion !== BigInt(0) ? message.appVersion.toString() : undefined;
+    obj.last_block_height = message.lastBlockHeight !== BigInt(0) ? message.lastBlockHeight.toString() : undefined;
     obj.last_block_app_hash = message.lastBlockAppHash ? base64FromBytes(message.lastBlockAppHash) : undefined;
     return obj;
   },
@@ -3703,9 +3703,9 @@ export const ResponseSetOption = {
   },
   toAmino(message: ResponseSetOption): ResponseSetOptionAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.log = message.log;
-    obj.info = message.info;
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.log = message.log === "" ? undefined : message.log;
+    obj.info = message.info === "" ? undefined : message.info;
     return obj;
   },
   fromAminoMsg(object: ResponseSetOptionAminoMsg): ResponseSetOption {
@@ -3835,7 +3835,7 @@ export const ResponseInitChain = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.app_hash = message.appHash ? base64FromBytes(message.appHash) : undefined;
     return obj;
@@ -4053,15 +4053,15 @@ export const ResponseQuery = {
   },
   toAmino(message: ResponseQuery): ResponseQueryAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.log = message.log === "" ? undefined : message.log;
+    obj.info = message.info === "" ? undefined : message.info;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.value = message.value ? base64FromBytes(message.value) : undefined;
     obj.proof_ops = message.proofOps ? ProofOps.toAmino(message.proofOps) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.codespace = message.codespace;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.codespace = message.codespace === "" ? undefined : message.codespace;
     return obj;
   },
   fromAminoMsg(object: ResponseQueryAminoMsg): ResponseQuery {
@@ -4158,7 +4158,7 @@ export const ResponseBeginBlock = {
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
-      obj.events = [];
+      obj.events = message.events;
     }
     return obj;
   },
@@ -4365,18 +4365,18 @@ export const ResponseCheckTx = {
   },
   toAmino(message: ResponseCheckTx): ResponseCheckTxAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = message.code === 0 ? undefined : message.code;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.log = message.log === "" ? undefined : message.log;
+    obj.info = message.info === "" ? undefined : message.info;
+    obj.gas_wanted = message.gasWanted !== BigInt(0) ? message.gasWanted.toString() : undefined;
+    obj.gas_used = message.gasUsed !== BigInt(0) ? message.gasUsed.toString() : undefined;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
-      obj.events = [];
+      obj.events = message.events;
     }
-    obj.codespace = message.codespace;
+    obj.codespace = message.codespace === "" ? undefined : message.codespace;
     return obj;
   },
   fromAminoMsg(object: ResponseCheckTxAminoMsg): ResponseCheckTx {
@@ -4582,18 +4582,18 @@ export const ResponseDeliverTx = {
   },
   toAmino(message: ResponseDeliverTx): ResponseDeliverTxAmino {
     const obj: any = {};
-    obj.code = message.code;
+    obj.code = message.code === 0 ? undefined : message.code;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
-    obj.log = message.log;
-    obj.info = message.info;
-    obj.gas_wanted = message.gasWanted ? message.gasWanted.toString() : undefined;
-    obj.gas_used = message.gasUsed ? message.gasUsed.toString() : undefined;
+    obj.log = message.log === "" ? undefined : message.log;
+    obj.info = message.info === "" ? undefined : message.info;
+    obj.gas_wanted = message.gasWanted !== BigInt(0) ? message.gasWanted.toString() : undefined;
+    obj.gas_used = message.gasUsed !== BigInt(0) ? message.gasUsed.toString() : undefined;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
-      obj.events = [];
+      obj.events = message.events;
     }
-    obj.codespace = message.codespace;
+    obj.codespace = message.codespace === "" ? undefined : message.codespace;
     return obj;
   },
   fromAminoMsg(object: ResponseDeliverTxAminoMsg): ResponseDeliverTx {
@@ -4728,13 +4728,13 @@ export const ResponseEndBlock = {
     if (message.validatorUpdates) {
       obj.validator_updates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toAmino(e) : undefined);
     } else {
-      obj.validator_updates = [];
+      obj.validator_updates = message.validatorUpdates;
     }
     obj.consensus_param_updates = message.consensusParamUpdates ? ConsensusParams.toAmino(message.consensusParamUpdates) : undefined;
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toAmino(e) : undefined);
     } else {
-      obj.events = [];
+      obj.events = message.events;
     }
     return obj;
   },
@@ -4840,7 +4840,7 @@ export const ResponseCommit = {
   toAmino(message: ResponseCommit): ResponseCommitAmino {
     const obj: any = {};
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
-    obj.retain_height = message.retainHeight ? message.retainHeight.toString() : undefined;
+    obj.retain_height = message.retainHeight !== BigInt(0) ? message.retainHeight.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ResponseCommitAminoMsg): ResponseCommit {
@@ -4937,7 +4937,7 @@ export const ResponseListSnapshots = {
     if (message.snapshots) {
       obj.snapshots = message.snapshots.map(e => e ? Snapshot.toAmino(e) : undefined);
     } else {
-      obj.snapshots = [];
+      obj.snapshots = message.snapshots;
     }
     return obj;
   },
@@ -5020,13 +5020,13 @@ export const ResponseOfferSnapshot = {
   fromAmino(object: ResponseOfferSnapshotAmino): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
     if (object.result !== undefined && object.result !== null) {
-      message.result = responseOfferSnapshot_ResultFromJSON(object.result);
+      message.result = object.result;
     }
     return message;
   },
   toAmino(message: ResponseOfferSnapshot): ResponseOfferSnapshotAmino {
     const obj: any = {};
-    obj.result = message.result;
+    obj.result = message.result === 0 ? undefined : message.result;
     return obj;
   },
   fromAminoMsg(object: ResponseOfferSnapshotAminoMsg): ResponseOfferSnapshot {
@@ -5247,7 +5247,7 @@ export const ResponseApplySnapshotChunk = {
   fromAmino(object: ResponseApplySnapshotChunkAmino): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
     if (object.result !== undefined && object.result !== null) {
-      message.result = responseApplySnapshotChunk_ResultFromJSON(object.result);
+      message.result = object.result;
     }
     message.refetchChunks = object.refetch_chunks?.map(e => e) || [];
     message.rejectSenders = object.reject_senders?.map(e => e) || [];
@@ -5255,16 +5255,16 @@ export const ResponseApplySnapshotChunk = {
   },
   toAmino(message: ResponseApplySnapshotChunk): ResponseApplySnapshotChunkAmino {
     const obj: any = {};
-    obj.result = message.result;
+    obj.result = message.result === 0 ? undefined : message.result;
     if (message.refetchChunks) {
       obj.refetch_chunks = message.refetchChunks.map(e => e);
     } else {
-      obj.refetch_chunks = [];
+      obj.refetch_chunks = message.refetchChunks;
     }
     if (message.rejectSenders) {
       obj.reject_senders = message.rejectSenders.map(e => e);
     } else {
-      obj.reject_senders = [];
+      obj.reject_senders = message.rejectSenders;
     }
     return obj;
   },
@@ -5508,8 +5508,8 @@ export const BlockParams = {
   },
   toAmino(message: BlockParams): BlockParamsAmino {
     const obj: any = {};
-    obj.max_bytes = message.maxBytes ? message.maxBytes.toString() : undefined;
-    obj.max_gas = message.maxGas ? message.maxGas.toString() : undefined;
+    obj.max_bytes = message.maxBytes !== BigInt(0) ? message.maxBytes.toString() : undefined;
+    obj.max_gas = message.maxGas !== BigInt(0) ? message.maxGas.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: BlockParamsAminoMsg): BlockParams {
@@ -5619,11 +5619,11 @@ export const LastCommitInfo = {
   },
   toAmino(message: LastCommitInfo): LastCommitInfoAmino {
     const obj: any = {};
-    obj.round = message.round;
+    obj.round = message.round === 0 ? undefined : message.round;
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? VoteInfo.toAmino(e) : undefined);
     } else {
-      obj.votes = [];
+      obj.votes = message.votes;
     }
     return obj;
   },
@@ -5734,11 +5734,11 @@ export const Event = {
   },
   toAmino(message: Event): EventAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? EventAttribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -5861,7 +5861,7 @@ export const EventAttribute = {
     const obj: any = {};
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.value = message.value ? base64FromBytes(message.value) : undefined;
-    obj.index = message.index;
+    obj.index = message.index === false ? undefined : message.index;
     return obj;
   },
   fromAminoMsg(object: EventAttributeAminoMsg): EventAttribute {
@@ -5997,8 +5997,8 @@ export const TxResult = {
   },
   toAmino(message: TxResult): TxResultAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.index = message.index;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.index = message.index === 0 ? undefined : message.index;
     obj.tx = message.tx ? base64FromBytes(message.tx) : undefined;
     obj.result = message.result ? ResponseDeliverTx.toAmino(message.result) : undefined;
     return obj;
@@ -6105,7 +6105,7 @@ export const Validator = {
   toAmino(message: Validator): ValidatorAmino {
     const obj: any = {};
     obj.address = message.address ? base64FromBytes(message.address) : undefined;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = message.power !== BigInt(0) ? message.power.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorAminoMsg): Validator {
@@ -6210,7 +6210,7 @@ export const ValidatorUpdate = {
   toAmino(message: ValidatorUpdate): ValidatorUpdateAmino {
     const obj: any = {};
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey) : undefined;
-    obj.power = message.power ? message.power.toString() : undefined;
+    obj.power = message.power !== BigInt(0) ? message.power.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ValidatorUpdateAminoMsg): ValidatorUpdate {
@@ -6315,7 +6315,7 @@ export const VoteInfo = {
   toAmino(message: VoteInfo): VoteInfoAmino {
     const obj: any = {};
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    obj.signed_last_block = message.signedLastBlock;
+    obj.signed_last_block = message.signedLastBlock === false ? undefined : message.signedLastBlock;
     return obj;
   },
   fromAminoMsg(object: VoteInfoAminoMsg): VoteInfo {
@@ -6449,7 +6449,7 @@ export const Evidence = {
   fromAmino(object: EvidenceAmino): Evidence {
     const message = createBaseEvidence();
     if (object.type !== undefined && object.type !== null) {
-      message.type = evidenceTypeFromJSON(object.type);
+      message.type = object.type;
     }
     if (object.validator !== undefined && object.validator !== null) {
       message.validator = Validator.fromAmino(object.validator);
@@ -6467,11 +6467,11 @@ export const Evidence = {
   },
   toAmino(message: Evidence): EvidenceAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === 0 ? undefined : message.type;
     obj.validator = message.validator ? Validator.toAmino(message.validator) : undefined;
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.total_voting_power = message.totalVotingPower !== BigInt(0) ? message.totalVotingPower.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: EvidenceAminoMsg): Evidence {
@@ -6623,9 +6623,9 @@ export const Snapshot = {
   },
   toAmino(message: Snapshot): SnapshotAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
-    obj.format = message.format;
-    obj.chunks = message.chunks;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.format = message.format === 0 ? undefined : message.format;
+    obj.chunks = message.chunks === 0 ? undefined : message.chunks;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     obj.metadata = message.metadata ? base64FromBytes(message.metadata) : undefined;
     return obj;

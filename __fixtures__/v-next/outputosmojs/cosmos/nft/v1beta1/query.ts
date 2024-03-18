@@ -271,8 +271,8 @@ export const QueryBalanceRequest = {
   },
   toAmino(message: QueryBalanceRequest): QueryBalanceRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: QueryBalanceRequestAminoMsg): QueryBalanceRequest {
@@ -366,7 +366,7 @@ export const QueryBalanceResponse = {
   },
   toAmino(message: QueryBalanceResponse): QueryBalanceResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryBalanceResponseAminoMsg): QueryBalanceResponse {
@@ -476,8 +476,8 @@ export const QueryOwnerRequest = {
   },
   toAmino(message: QueryOwnerRequest): QueryOwnerRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: QueryOwnerRequestAminoMsg): QueryOwnerRequest {
@@ -571,7 +571,7 @@ export const QueryOwnerResponse = {
   },
   toAmino(message: QueryOwnerResponse): QueryOwnerResponseAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromAminoMsg(object: QueryOwnerResponseAminoMsg): QueryOwnerResponse {
@@ -665,7 +665,7 @@ export const QuerySupplyRequest = {
   },
   toAmino(message: QuerySupplyRequest): QuerySupplyRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromAminoMsg(object: QuerySupplyRequestAminoMsg): QuerySupplyRequest {
@@ -759,7 +759,7 @@ export const QuerySupplyResponse = {
   },
   toAmino(message: QuerySupplyResponse): QuerySupplyResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuerySupplyResponseAminoMsg): QuerySupplyResponse {
@@ -885,8 +885,8 @@ export const QueryNFTsRequest = {
   },
   toAmino(message: QueryNFTsRequest): QueryNFTsRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1006,7 +1006,7 @@ export const QueryNFTsResponse = {
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e) : undefined);
     } else {
-      obj.nfts = [];
+      obj.nfts = message.nfts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1118,8 +1118,8 @@ export const QueryNFTRequest = {
   },
   toAmino(message: QueryNFTRequest): QueryNFTRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: QueryNFTRequestAminoMsg): QueryNFTRequest {
@@ -1307,7 +1307,7 @@ export const QueryClassRequest = {
   },
   toAmino(message: QueryClassRequest): QueryClassRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromAminoMsg(object: QueryClassRequestAminoMsg): QueryClassRequest {
@@ -1614,7 +1614,7 @@ export const QueryClassesResponse = {
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toAmino(e) : undefined);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

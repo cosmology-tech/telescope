@@ -70,7 +70,7 @@ export interface MsgCloseGroupProtoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupSDKType {
@@ -96,7 +96,7 @@ export interface MsgPauseGroupProtoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupSDKType {
@@ -122,7 +122,7 @@ export interface MsgStartGroupProtoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupAmino {
-  id?: GroupIDAmino;
+  id: GroupIDAmino;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupSDKType {
@@ -150,9 +150,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -172,9 +172,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name?: string;
-  requirements?: PlacementRequirementsAmino;
-  resources?: ResourceAmino[];
+  name: string;
+  requirements: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecSDKType {
@@ -195,9 +195,9 @@ export interface GroupProtoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
-  group_id?: GroupIDAmino;
-  state?: Group_State;
-  group_spec?: GroupSpecAmino;
+  group_id: GroupIDAmino;
+  state: Group_State;
+  group_spec: GroupSpecAmino;
   created_at?: string;
 }
 /** Group stores group id, state and specifications of group */
@@ -219,9 +219,9 @@ export interface ResourceProtoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
-  resources?: ResourceUnitsAmino;
-  count?: number;
-  price?: CoinAmino;
+  resources: ResourceUnitsAmino;
+  count: number;
+  price: CoinAmino;
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceSDKType {
@@ -295,7 +295,7 @@ export const MsgCloseGroup = {
   },
   toAmino(message: MsgCloseGroup, useInterfaces: boolean = true): MsgCloseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCloseGroupProtoMsg, useInterfaces: boolean = true): MsgCloseGroup {
@@ -439,7 +439,7 @@ export const MsgPauseGroup = {
   },
   toAmino(message: MsgPauseGroup, useInterfaces: boolean = true): MsgPauseGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgPauseGroupProtoMsg, useInterfaces: boolean = true): MsgPauseGroup {
@@ -583,7 +583,7 @@ export const MsgStartGroup = {
   },
   toAmino(message: MsgStartGroup, useInterfaces: boolean = true): MsgStartGroupAmino {
     const obj: any = {};
-    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? GroupID.toAmino(message.id, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgStartGroupProtoMsg, useInterfaces: boolean = true): MsgStartGroup {
@@ -757,9 +757,9 @@ export const GroupID = {
   },
   toAmino(message: GroupID, useInterfaces: boolean = true): GroupIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
     return obj;
   },
   fromProtoMsg(message: GroupIDProtoMsg, useInterfaces: boolean = true): GroupID {
@@ -877,12 +877,12 @@ export const GroupSpec = {
   },
   toAmino(message: GroupSpec, useInterfaces: boolean = true): GroupSpecAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : undefined;
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements, useInterfaces) : PlacementRequirements.toAmino(PlacementRequirements.fromPartial({}));
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
     return obj;
   },
@@ -1002,7 +1002,7 @@ export const Group = {
       message.groupId = GroupID.fromAmino(object.group_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = group_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.group_spec !== undefined && object.group_spec !== null) {
       message.groupSpec = GroupSpec.fromAmino(object.group_spec);
@@ -1014,10 +1014,10 @@ export const Group = {
   },
   toAmino(message: Group, useInterfaces: boolean = true): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : undefined;
-    obj.state = message.state;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId, useInterfaces) : GroupID.toAmino(GroupID.fromPartial({}));
+    obj.state = message.state ?? 0;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec, useInterfaces) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: GroupProtoMsg, useInterfaces: boolean = true): Group {
@@ -1131,9 +1131,9 @@ export const Resource = {
   },
   toAmino(message: Resource, useInterfaces: boolean = true): ResourceAmino {
     const obj: any = {};
-    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : undefined;
-    obj.count = message.count;
-    obj.price = message.price ? Coin.toAmino(message.price, useInterfaces) : undefined;
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources, useInterfaces) : ResourceUnits.toAmino(ResourceUnits.fromPartial({}));
+    obj.count = message.count ?? 0;
+    obj.price = message.price ? Coin.toAmino(message.price, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: ResourceProtoMsg, useInterfaces: boolean = true): Resource {

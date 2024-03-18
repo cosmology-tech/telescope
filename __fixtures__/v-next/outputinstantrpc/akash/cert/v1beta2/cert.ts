@@ -217,8 +217,8 @@ export const CertificateID = {
   },
   toAmino(message: CertificateID): CertificateIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.serial = message.serial;
+    obj.owner = message.owner ?? "";
+    obj.serial = message.serial ?? "";
     return obj;
   },
   fromAminoMsg(object: CertificateIDAminoMsg): CertificateID {
@@ -332,7 +332,7 @@ export const Certificate = {
   fromAmino(object: CertificateAmino): Certificate {
     const message = createBaseCertificate();
     if (object.state !== undefined && object.state !== null) {
-      message.state = certificate_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.cert !== undefined && object.cert !== null) {
       message.cert = bytesFromBase64(object.cert);
@@ -344,9 +344,9 @@ export const Certificate = {
   },
   toAmino(message: Certificate): CertificateAmino {
     const obj: any = {};
-    obj.state = message.state;
-    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
-    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
+    obj.state = message.state ?? 0;
+    obj.cert = message.cert ? base64FromBytes(message.cert) : "";
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : "";
     return obj;
   },
   fromAminoMsg(object: CertificateAminoMsg): Certificate {
@@ -472,9 +472,9 @@ export const CertificateFilter = {
   },
   toAmino(message: CertificateFilter): CertificateFilterAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.serial = message.serial;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.serial = message.serial ?? "";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromAminoMsg(object: CertificateFilterAminoMsg): CertificateFilter {
@@ -600,9 +600,9 @@ export const MsgCreateCertificate = {
   },
   toAmino(message: MsgCreateCertificate): MsgCreateCertificateAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.cert = message.cert ? base64FromBytes(message.cert) : undefined;
-    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : undefined;
+    obj.owner = message.owner ?? "";
+    obj.cert = message.cert ? base64FromBytes(message.cert) : "";
+    obj.pubkey = message.pubkey ? base64FromBytes(message.pubkey) : "";
     return obj;
   },
   fromAminoMsg(object: MsgCreateCertificateAminoMsg): MsgCreateCertificate {
@@ -772,7 +772,7 @@ export const MsgRevokeCertificate = {
   },
   toAmino(message: MsgRevokeCertificate): MsgRevokeCertificateAmino {
     const obj: any = {};
-    obj.id = message.id ? CertificateID.toAmino(message.id) : undefined;
+    obj.id = message.id ? CertificateID.toAmino(message.id) : CertificateID.toAmino(CertificateID.fromPartial({}));
     return obj;
   },
   fromAminoMsg(object: MsgRevokeCertificateAminoMsg): MsgRevokeCertificate {

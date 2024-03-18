@@ -204,12 +204,12 @@ export const GenesisState = {
     if (message.signingInfos) {
       obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toAmino(e) : undefined);
     } else {
-      obj.signing_infos = [];
+      obj.signing_infos = message.signingInfos;
     }
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toAmino(e) : undefined);
     } else {
-      obj.missed_blocks = [];
+      obj.missed_blocks = message.missedBlocks;
     }
     return obj;
   },
@@ -292,7 +292,7 @@ export const SigningInfo = {
   },
   toAmino(message: SigningInfo): SigningInfoAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toAmino(message.validatorSigningInfo) : undefined;
     return obj;
   },
@@ -371,11 +371,11 @@ export const ValidatorMissedBlocks = {
   },
   toAmino(message: ValidatorMissedBlocks): ValidatorMissedBlocksAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     if (message.missedBlocks) {
       obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toAmino(e) : undefined);
     } else {
-      obj.missed_blocks = [];
+      obj.missed_blocks = message.missedBlocks;
     }
     return obj;
   },
@@ -458,8 +458,8 @@ export const MissedBlock = {
   },
   toAmino(message: MissedBlock): MissedBlockAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
-    obj.missed = message.missed;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
+    obj.missed = message.missed === false ? undefined : message.missed;
     return obj;
   },
   fromAminoMsg(object: MissedBlockAminoMsg): MissedBlock {

@@ -227,7 +227,7 @@ export const QueryEpochsInfoResponse = {
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toAmino(e) : undefined);
     } else {
-      obj.epochs = [];
+      obj.epochs = message.epochs;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -317,7 +317,7 @@ export const QueryCurrentEpochRequest = {
   },
   toAmino(message: QueryCurrentEpochRequest): QueryCurrentEpochRequestAmino {
     const obj: any = {};
-    obj.identifier = message.identifier;
+    obj.identifier = message.identifier === "" ? undefined : message.identifier;
     return obj;
   },
   fromAminoMsg(object: QueryCurrentEpochRequestAminoMsg): QueryCurrentEpochRequest {
@@ -405,7 +405,7 @@ export const QueryCurrentEpochResponse = {
   },
   toAmino(message: QueryCurrentEpochResponse): QueryCurrentEpochResponseAmino {
     const obj: any = {};
-    obj.current_epoch = message.currentEpoch ? message.currentEpoch.toString() : undefined;
+    obj.current_epoch = message.currentEpoch !== BigInt(0) ? message.currentEpoch.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryCurrentEpochResponseAminoMsg): QueryCurrentEpochResponse {

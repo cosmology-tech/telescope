@@ -219,7 +219,7 @@ export const StakeAuthorization = {
       message.denyList = StakeAuthorization_Validators.fromAmino(object.deny_list);
     }
     if (object.authorization_type !== undefined && object.authorization_type !== null) {
-      message.authorizationType = authorizationTypeFromJSON(object.authorization_type);
+      message.authorizationType = object.authorization_type;
     }
     return message;
   },
@@ -228,7 +228,7 @@ export const StakeAuthorization = {
     obj.max_tokens = message.maxTokens ? Coin.toAmino(message.maxTokens) : undefined;
     obj.allow_list = message.allowList ? StakeAuthorization_Validators.toAmino(message.allowList) : undefined;
     obj.deny_list = message.denyList ? StakeAuthorization_Validators.toAmino(message.denyList) : undefined;
-    obj.authorization_type = message.authorizationType;
+    obj.authorization_type = message.authorizationType === 0 ? undefined : message.authorizationType;
     return obj;
   },
   fromAminoMsg(object: StakeAuthorizationAminoMsg): StakeAuthorization {
@@ -331,7 +331,7 @@ export const StakeAuthorization_Validators = {
     if (message.address) {
       obj.address = message.address.map(e => e);
     } else {
-      obj.address = [];
+      obj.address = message.address;
     }
     return obj;
   },

@@ -89,7 +89,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.minimum_risk_factor = message.minimumRiskFactor;
+    obj.minimum_risk_factor = message.minimumRiskFactor === "" ? undefined : message.minimumRiskFactor;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

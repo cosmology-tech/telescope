@@ -234,6 +234,10 @@ const options: TelescopeOptions = {
 
   aminoEncoding: {
     enabled: true,
+    legacy: {
+      useNullHandling: true,
+      useOmitEmpty: true
+    },
     exceptions: {
       "/akash.audit.v1beta2.MsgSignProviderAttributes": {
         aminoType: "mymessage-testonly",

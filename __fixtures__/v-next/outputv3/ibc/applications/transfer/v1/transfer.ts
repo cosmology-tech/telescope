@@ -169,8 +169,8 @@ export const DenomTrace = {
   },
   toAmino(message: DenomTrace, useInterfaces: boolean = true): DenomTraceAmino {
     const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.base_denom = message.baseDenom === "" ? undefined : message.baseDenom;
     return obj;
   },
   fromProtoMsg(message: DenomTraceProtoMsg, useInterfaces: boolean = true): DenomTrace {
@@ -266,8 +266,8 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
+    obj.send_enabled = message.sendEnabled === false ? undefined : message.sendEnabled;
+    obj.receive_enabled = message.receiveEnabled === false ? undefined : message.receiveEnabled;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

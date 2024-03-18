@@ -372,14 +372,14 @@ export const MsgCreatePosition = {
   },
   toAmino(message: MsgCreatePosition): MsgCreatePositionAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.sender = message.sender;
-    obj.lower_tick = message.lowerTick ? message.lowerTick.toString() : undefined;
-    obj.upper_tick = message.upperTick ? message.upperTick.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.lower_tick = message.lowerTick !== BigInt(0) ? message.lowerTick.toString() : undefined;
+    obj.upper_tick = message.upperTick !== BigInt(0) ? message.upperTick.toString() : undefined;
     obj.token_desired0 = message.tokenDesired0 ? Coin.toAmino(message.tokenDesired0) : undefined;
     obj.token_desired1 = message.tokenDesired1 ? Coin.toAmino(message.tokenDesired1) : undefined;
-    obj.token_min_amount0 = message.tokenMinAmount0;
-    obj.token_min_amount1 = message.tokenMinAmount1;
+    obj.token_min_amount0 = message.tokenMinAmount0 === "" ? undefined : message.tokenMinAmount0;
+    obj.token_min_amount1 = message.tokenMinAmount1 === "" ? undefined : message.tokenMinAmount1;
     return obj;
   },
   fromAminoMsg(object: MsgCreatePositionAminoMsg): MsgCreatePosition {
@@ -537,11 +537,11 @@ export const MsgCreatePositionResponse = {
   },
   toAmino(message: MsgCreatePositionResponse): MsgCreatePositionResponseAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
-    obj.amount0 = message.amount0;
-    obj.amount1 = message.amount1;
+    obj.position_id = message.positionId !== BigInt(0) ? message.positionId.toString() : undefined;
+    obj.amount0 = message.amount0 === "" ? undefined : message.amount0;
+    obj.amount1 = message.amount1 === "" ? undefined : message.amount1;
     obj.join_time = message.joinTime ? Timestamp.toAmino(toTimestamp(message.joinTime)) : undefined;
-    obj.liquidity_created = message.liquidityCreated;
+    obj.liquidity_created = message.liquidityCreated === "" ? undefined : message.liquidityCreated;
     return obj;
   },
   fromAminoMsg(object: MsgCreatePositionResponseAminoMsg): MsgCreatePositionResponse {
@@ -667,9 +667,9 @@ export const MsgWithdrawPosition = {
   },
   toAmino(message: MsgWithdrawPosition): MsgWithdrawPositionAmino {
     const obj: any = {};
-    obj.position_id = message.positionId ? message.positionId.toString() : undefined;
-    obj.sender = message.sender;
-    obj.liquidity_amount = message.liquidityAmount;
+    obj.position_id = message.positionId !== BigInt(0) ? message.positionId.toString() : undefined;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.liquidity_amount = message.liquidityAmount === "" ? undefined : message.liquidityAmount;
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawPositionAminoMsg): MsgWithdrawPosition {
@@ -779,8 +779,8 @@ export const MsgWithdrawPositionResponse = {
   },
   toAmino(message: MsgWithdrawPositionResponse): MsgWithdrawPositionResponseAmino {
     const obj: any = {};
-    obj.amount0 = message.amount0;
-    obj.amount1 = message.amount1;
+    obj.amount0 = message.amount0 === "" ? undefined : message.amount0;
+    obj.amount1 = message.amount1 === "" ? undefined : message.amount1;
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawPositionResponseAminoMsg): MsgWithdrawPositionResponse {
@@ -908,9 +908,9 @@ export const MsgCollectFees = {
     if (message.positionIds) {
       obj.position_ids = message.positionIds.map(e => e.toString());
     } else {
-      obj.position_ids = [];
+      obj.position_ids = message.positionIds;
     }
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: MsgCollectFeesAminoMsg): MsgCollectFees {
@@ -1013,7 +1013,7 @@ export const MsgCollectFeesResponse = {
     if (message.collectedFees) {
       obj.collected_fees = message.collectedFees.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.collected_fees = [];
+      obj.collected_fees = message.collectedFees;
     }
     return obj;
   },
@@ -1142,9 +1142,9 @@ export const MsgCollectIncentives = {
     if (message.positionIds) {
       obj.position_ids = message.positionIds.map(e => e.toString());
     } else {
-      obj.position_ids = [];
+      obj.position_ids = message.positionIds;
     }
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: MsgCollectIncentivesAminoMsg): MsgCollectIncentives {
@@ -1247,7 +1247,7 @@ export const MsgCollectIncentivesResponse = {
     if (message.collectedIncentives) {
       obj.collected_incentives = message.collectedIncentives.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.collected_incentives = [];
+      obj.collected_incentives = message.collectedIncentives;
     }
     return obj;
   },
@@ -1438,11 +1438,11 @@ export const MsgCreateIncentive = {
   },
   toAmino(message: MsgCreateIncentive): MsgCreateIncentiveAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.sender = message.sender;
-    obj.incentive_denom = message.incentiveDenom;
-    obj.incentive_amount = message.incentiveAmount;
-    obj.emission_rate = message.emissionRate;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.incentive_denom = message.incentiveDenom === "" ? undefined : message.incentiveDenom;
+    obj.incentive_amount = message.incentiveAmount === "" ? undefined : message.incentiveAmount;
+    obj.emission_rate = message.emissionRate === "" ? undefined : message.emissionRate;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
@@ -1602,9 +1602,9 @@ export const MsgCreateIncentiveResponse = {
   },
   toAmino(message: MsgCreateIncentiveResponse): MsgCreateIncentiveResponseAmino {
     const obj: any = {};
-    obj.incentive_denom = message.incentiveDenom;
-    obj.incentive_amount = message.incentiveAmount;
-    obj.emission_rate = message.emissionRate;
+    obj.incentive_denom = message.incentiveDenom === "" ? undefined : message.incentiveDenom;
+    obj.incentive_amount = message.incentiveAmount === "" ? undefined : message.incentiveAmount;
+    obj.emission_rate = message.emissionRate === "" ? undefined : message.emissionRate;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
@@ -1734,9 +1734,9 @@ export const MsgFungifyChargedPositions = {
     if (message.positionIds) {
       obj.position_ids = message.positionIds.map(e => e.toString());
     } else {
-      obj.position_ids = [];
+      obj.position_ids = message.positionIds;
     }
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: MsgFungifyChargedPositionsAminoMsg): MsgFungifyChargedPositions {
@@ -1830,7 +1830,7 @@ export const MsgFungifyChargedPositionsResponse = {
   },
   toAmino(message: MsgFungifyChargedPositionsResponse): MsgFungifyChargedPositionsResponseAmino {
     const obj: any = {};
-    obj.new_position_id = message.newPositionId ? message.newPositionId.toString() : undefined;
+    obj.new_position_id = message.newPositionId !== BigInt(0) ? message.newPositionId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgFungifyChargedPositionsResponseAminoMsg): MsgFungifyChargedPositionsResponse {

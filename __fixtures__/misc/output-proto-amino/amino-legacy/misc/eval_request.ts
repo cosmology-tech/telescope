@@ -227,7 +227,7 @@ export const EvalRequest_BindingsEntry = {
   },
   toAmino(message: EvalRequest_BindingsEntry): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key === "" ? undefined : message.key;
     obj.value = message.value ? ExprValue.toAmino(message.value) : undefined;
     return obj;
   },
@@ -327,7 +327,7 @@ export const EvalRequest_RefsEntry = {
   },
   toAmino(message: EvalRequest_RefsEntry): EvalRequest_RefsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key === "" ? undefined : message.key;
     obj.value = message.value ? IdRef.toAmino(message.value) : undefined;
     return obj;
   },
@@ -644,16 +644,16 @@ export const EvalRequest = {
         obj.refs[k] = IdRef.toAmino(v);
       });
     }
-    obj.test_num = message.testNum;
-    obj.test_string = message.testString;
-    obj.test_bool = message.testBool;
+    obj.test_num = message.testNum === 0 ? undefined : message.testNum;
+    obj.test_string = message.testString === "" ? undefined : message.testString;
+    obj.test_bool = message.testBool === false ? undefined : message.testBool;
     obj.instantiate_permission = message.instantiatePermission ? AccessConfig.toAmino(message.instantiatePermission) : undefined;
-    obj.id = message.id;
-    obj.name = message.name;
+    obj.id = message.id === null ? undefined : message.id;
+    obj.name = message.name === null ? undefined : message.name;
     if (message.testArray) {
       obj.test_array = message.testArray.map(e => e);
     } else {
-      obj.test_array = [];
+      obj.test_array = message.testArray;
     }
     return obj;
   },
@@ -742,7 +742,7 @@ export const AccessConfig = {
   },
   toAmino(message: AccessConfig): AccessConfigAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: AccessConfigAminoMsg): AccessConfig {
@@ -830,7 +830,7 @@ export const GenericAuthorization = {
   },
   toAmino(message: GenericAuthorization): GenericAuthorizationAmino {
     const obj: any = {};
-    obj.msg = message.msg;
+    obj.msg = message.msg === "" ? undefined : message.msg;
     return obj;
   },
   fromAminoMsg(object: GenericAuthorizationAminoMsg): GenericAuthorization {

@@ -110,13 +110,13 @@ export const Endpoint = {
   fromAmino(object: EndpointAmino): Endpoint {
     const message = createBaseEndpoint();
     if (object.kind !== undefined && object.kind !== null) {
-      message.kind = endpoint_KindFromJSON(object.kind);
+      message.kind = object.kind;
     }
     return message;
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.kind = message.kind;
+    obj.kind = message.kind === 0 ? undefined : message.kind;
     return obj;
   },
   fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {

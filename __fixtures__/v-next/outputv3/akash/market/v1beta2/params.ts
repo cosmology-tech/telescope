@@ -13,8 +13,8 @@ export interface ParamsProtoMsg {
 }
 /** Params is the params for the x/market module */
 export interface ParamsAmino {
-  bid_min_deposit?: CoinAmino;
-  order_max_bids?: number;
+  bid_min_deposit: CoinAmino;
+  order_max_bids: number;
 }
 /** Params is the params for the x/market module */
 export interface ParamsSDKType {
@@ -102,8 +102,8 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit, useInterfaces) : undefined;
-    obj.order_max_bids = message.orderMaxBids;
+    obj.bid_min_deposit = message.bidMinDeposit ? Coin.toAmino(message.bidMinDeposit, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
+    obj.order_max_bids = message.orderMaxBids ?? 0;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

@@ -87,6 +87,7 @@ interface TelescopeOpts {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
             },
+
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
@@ -140,6 +141,7 @@ interface TelescopeOpts {
         customTypes?: {
           useCosmosSDKDec?: boolean;
         },
+        omitEmptyTags?: ( "omitempty" | "dont_omitempty" )[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -151,6 +153,10 @@ interface TelescopeOpts {
         * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
         */
         useLegacyInlineEncoding?: boolean;
+        legacy?: {
+          useNullHandling?: boolean;
+          useOmitEmpty?: boolean;
+        }
     };
 
     lcdClients?: {
@@ -372,6 +378,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
         customTypes: {
           useCosmosSDKDec: false
         },
+        omitEmptyTags: ["omitempty", "dont_omitempty"],
         casingFn: snake,
         exceptions: {
             ...DEFAULT_AMINO_EXCEPTIONS

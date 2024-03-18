@@ -222,9 +222,9 @@ export const InflationDistribution = {
   },
   toAmino(message: InflationDistribution, useInterfaces: boolean = true): InflationDistributionAmino {
     const obj: any = {};
-    obj.staking_rewards = message.stakingRewards;
-    obj.usage_incentives = message.usageIncentives;
-    obj.community_pool = message.communityPool;
+    obj.staking_rewards = message.stakingRewards === "" ? undefined : message.stakingRewards;
+    obj.usage_incentives = message.usageIncentives === "" ? undefined : message.usageIncentives;
+    obj.community_pool = message.communityPool === "" ? undefined : message.communityPool;
     return obj;
   },
   fromProtoMsg(message: InflationDistributionProtoMsg, useInterfaces: boolean = true): InflationDistribution {
@@ -364,11 +364,11 @@ export const ExponentialCalculation = {
   },
   toAmino(message: ExponentialCalculation, useInterfaces: boolean = true): ExponentialCalculationAmino {
     const obj: any = {};
-    obj.a = message.a;
-    obj.r = message.r;
-    obj.c = message.c;
-    obj.bonding_target = message.bondingTarget;
-    obj.max_variance = message.maxVariance;
+    obj.a = message.a === "" ? undefined : message.a;
+    obj.r = message.r === "" ? undefined : message.r;
+    obj.c = message.c === "" ? undefined : message.c;
+    obj.bonding_target = message.bondingTarget === "" ? undefined : message.bondingTarget;
+    obj.max_variance = message.maxVariance === "" ? undefined : message.maxVariance;
     return obj;
   },
   fromProtoMsg(message: ExponentialCalculationProtoMsg, useInterfaces: boolean = true): ExponentialCalculation {

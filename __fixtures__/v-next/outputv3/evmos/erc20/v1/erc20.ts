@@ -306,16 +306,16 @@ export const TokenPair = {
       message.enabled = object.enabled;
     }
     if (object.contract_owner !== undefined && object.contract_owner !== null) {
-      message.contractOwner = ownerFromJSON(object.contract_owner);
+      message.contractOwner = object.contract_owner;
     }
     return message;
   },
   toAmino(message: TokenPair, useInterfaces: boolean = true): TokenPairAmino {
     const obj: any = {};
-    obj.erc20_address = message.erc20Address;
-    obj.denom = message.denom;
-    obj.enabled = message.enabled;
-    obj.contract_owner = message.contractOwner;
+    obj.erc20_address = message.erc20Address === "" ? undefined : message.erc20Address;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.enabled = message.enabled === false ? undefined : message.enabled;
+    obj.contract_owner = message.contractOwner === 0 ? undefined : message.contractOwner;
     return obj;
   },
   fromProtoMsg(message: TokenPairProtoMsg, useInterfaces: boolean = true): TokenPair {
@@ -427,8 +427,8 @@ export const RegisterCoinProposal = {
   },
   toAmino(message: RegisterCoinProposal, useInterfaces: boolean = true): RegisterCoinProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.metadata = message.metadata ? Metadata.toAmino(message.metadata, useInterfaces) : undefined;
     return obj;
   },
@@ -539,9 +539,9 @@ export const RegisterERC20Proposal = {
   },
   toAmino(message: RegisterERC20Proposal, useInterfaces: boolean = true): RegisterERC20ProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.erc20address = message.erc20address;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.erc20address = message.erc20address === "" ? undefined : message.erc20address;
     return obj;
   },
   fromProtoMsg(message: RegisterERC20ProposalProtoMsg, useInterfaces: boolean = true): RegisterERC20Proposal {
@@ -651,9 +651,9 @@ export const ToggleTokenConversionProposal = {
   },
   toAmino(message: ToggleTokenConversionProposal, useInterfaces: boolean = true): ToggleTokenConversionProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
-    obj.token = message.token;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.token = message.token === "" ? undefined : message.token;
     return obj;
   },
   fromProtoMsg(message: ToggleTokenConversionProposalProtoMsg, useInterfaces: boolean = true): ToggleTokenConversionProposal {

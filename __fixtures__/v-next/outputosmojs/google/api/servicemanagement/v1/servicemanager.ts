@@ -562,10 +562,10 @@ export const ListServicesRequest = {
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
     const obj: any = {};
-    obj.producer_project_id = message.producerProjectId;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.consumer_id = message.consumerId;
+    obj.producer_project_id = message.producerProjectId === "" ? undefined : message.producerProjectId;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.consumer_id = message.consumerId === "" ? undefined : message.consumerId;
     return obj;
   },
   fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
@@ -678,9 +678,9 @@ export const ListServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? ManagedService.toAmino(e) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
@@ -768,7 +768,7 @@ export const GetServiceRequest = {
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     return obj;
   },
   fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
@@ -944,7 +944,7 @@ export const DeleteServiceRequest = {
   },
   toAmino(message: DeleteServiceRequest): DeleteServiceRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     return obj;
   },
   fromAminoMsg(object: DeleteServiceRequestAminoMsg): DeleteServiceRequest {
@@ -1032,7 +1032,7 @@ export const UndeleteServiceRequest = {
   },
   toAmino(message: UndeleteServiceRequest): UndeleteServiceRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     return obj;
   },
   fromAminoMsg(object: UndeleteServiceRequestAminoMsg): UndeleteServiceRequest {
@@ -1234,15 +1234,15 @@ export const GetServiceConfigRequest = {
       message.configId = object.config_id;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: GetServiceConfigRequest): GetServiceConfigRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.config_id = message.configId;
-    obj.view = message.view;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.config_id = message.configId === "" ? undefined : message.configId;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromAminoMsg(object: GetServiceConfigRequestAminoMsg): GetServiceConfigRequest {
@@ -1362,9 +1362,9 @@ export const ListServiceConfigsRequest = {
   },
   toAmino(message: ListServiceConfigsRequest): ListServiceConfigsRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromAminoMsg(object: ListServiceConfigsRequestAminoMsg): ListServiceConfigsRequest {
@@ -1477,9 +1477,9 @@ export const ListServiceConfigsResponse = {
     if (message.serviceConfigs) {
       obj.service_configs = message.serviceConfigs.map(e => e ? Service.toAmino(e) : undefined);
     } else {
-      obj.service_configs = [];
+      obj.service_configs = message.serviceConfigs;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListServiceConfigsResponseAminoMsg): ListServiceConfigsResponse {
@@ -1583,7 +1583,7 @@ export const CreateServiceConfigRequest = {
   },
   toAmino(message: CreateServiceConfigRequest): CreateServiceConfigRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     obj.service_config = message.serviceConfig ? Service.toAmino(message.serviceConfig) : undefined;
     return obj;
   },
@@ -1704,9 +1704,9 @@ export const SubmitConfigSourceRequest = {
   },
   toAmino(message: SubmitConfigSourceRequest): SubmitConfigSourceRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     obj.config_source = message.configSource ? ConfigSource.toAmino(message.configSource) : undefined;
-    obj.validate_only = message.validateOnly;
+    obj.validate_only = message.validateOnly === false ? undefined : message.validateOnly;
     return obj;
   },
   fromAminoMsg(object: SubmitConfigSourceRequestAminoMsg): SubmitConfigSourceRequest {
@@ -1898,7 +1898,7 @@ export const CreateServiceRolloutRequest = {
   },
   toAmino(message: CreateServiceRolloutRequest): CreateServiceRolloutRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     obj.rollout = message.rollout ? Rollout.toAmino(message.rollout) : undefined;
     return obj;
   },
@@ -2035,10 +2035,10 @@ export const ListServiceRolloutsRequest = {
   },
   toAmino(message: ListServiceRolloutsRequest): ListServiceRolloutsRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
-    obj.filter = message.filter;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     return obj;
   },
   fromAminoMsg(object: ListServiceRolloutsRequestAminoMsg): ListServiceRolloutsRequest {
@@ -2151,9 +2151,9 @@ export const ListServiceRolloutsResponse = {
     if (message.rollouts) {
       obj.rollouts = message.rollouts.map(e => e ? Rollout.toAmino(e) : undefined);
     } else {
-      obj.rollouts = [];
+      obj.rollouts = message.rollouts;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListServiceRolloutsResponseAminoMsg): ListServiceRolloutsResponse {
@@ -2257,8 +2257,8 @@ export const GetServiceRolloutRequest = {
   },
   toAmino(message: GetServiceRolloutRequest): GetServiceRolloutRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.rollout_id = message.rolloutId;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.rollout_id = message.rolloutId === "" ? undefined : message.rolloutId;
     return obj;
   },
   fromAminoMsg(object: GetServiceRolloutRequestAminoMsg): GetServiceRolloutRequest {
@@ -2511,17 +2511,17 @@ export const GenerateConfigReportResponse = {
   },
   toAmino(message: GenerateConfigReportResponse): GenerateConfigReportResponseAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.id = message.id;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.id = message.id === "" ? undefined : message.id;
     if (message.changeReports) {
       obj.change_reports = message.changeReports.map(e => e ? ChangeReport.toAmino(e) : undefined);
     } else {
-      obj.change_reports = [];
+      obj.change_reports = message.changeReports;
     }
     if (message.diagnostics) {
       obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toAmino(e) : undefined);
     } else {
-      obj.diagnostics = [];
+      obj.diagnostics = message.diagnostics;
     }
     return obj;
   },

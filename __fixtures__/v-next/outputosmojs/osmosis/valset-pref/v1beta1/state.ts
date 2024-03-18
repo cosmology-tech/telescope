@@ -141,8 +141,8 @@ export const ValidatorPreference = {
   },
   toAmino(message: ValidatorPreference): ValidatorPreferenceAmino {
     const obj: any = {};
-    obj.val_oper_address = message.valOperAddress;
-    obj.weight = message.weight;
+    obj.val_oper_address = message.valOperAddress === "" ? undefined : message.valOperAddress;
+    obj.weight = message.weight === "" ? undefined : message.weight;
     return obj;
   },
   fromAminoMsg(object: ValidatorPreferenceAminoMsg): ValidatorPreference {
@@ -245,7 +245,7 @@ export const ValidatorSetPreferences = {
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
     } else {
-      obj.preferences = [];
+      obj.preferences = message.preferences;
     }
     return obj;
   },

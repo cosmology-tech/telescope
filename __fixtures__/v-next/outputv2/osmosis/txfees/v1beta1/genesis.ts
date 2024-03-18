@@ -111,11 +111,11 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.basedenom = message.basedenom;
+    obj.basedenom = message.basedenom === "" ? undefined : message.basedenom;
     if (message.feetokens) {
       obj.feetokens = message.feetokens.map(e => e ? FeeToken.toAmino(e) : undefined);
     } else {
-      obj.feetokens = [];
+      obj.feetokens = message.feetokens;
     }
     return obj;
   },

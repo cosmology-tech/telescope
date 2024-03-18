@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisStateAmino {
-  providers?: ProviderAmino[];
+  providers: ProviderAmino[];
 }
 export interface GenesisStateAminoMsg {
   type: "/akash.provider.v1beta2.GenesisState";
@@ -95,7 +95,7 @@ export const GenesisState = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     return obj;
   },

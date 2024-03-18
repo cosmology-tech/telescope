@@ -182,9 +182,9 @@ export const MsgIBCSend = {
   },
   toAmino(message: MsgIBCSend, useInterfaces: boolean = true): MsgIBCSendAmino {
     const obj: any = {};
-    obj.channel = message.channel;
-    obj.timeout_height = message.timeoutHeight ? message.timeoutHeight.toString() : undefined;
-    obj.timeout_timestamp = message.timeoutTimestamp ? message.timeoutTimestamp.toString() : undefined;
+    obj.channel = message.channel === "" ? undefined : message.channel;
+    obj.timeout_height = message.timeoutHeight !== BigInt(0) ? message.timeoutHeight.toString() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp !== BigInt(0) ? message.timeoutTimestamp.toString() : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
   },
@@ -266,7 +266,7 @@ export const MsgIBCCloseChannel = {
   },
   toAmino(message: MsgIBCCloseChannel, useInterfaces: boolean = true): MsgIBCCloseChannelAmino {
     const obj: any = {};
-    obj.channel = message.channel;
+    obj.channel = message.channel === "" ? undefined : message.channel;
     return obj;
   },
   fromProtoMsg(message: MsgIBCCloseChannelProtoMsg, useInterfaces: boolean = true): MsgIBCCloseChannel {

@@ -212,8 +212,8 @@ export const QueryAllowanceRequest = {
   },
   toAmino(message: QueryAllowanceRequest, useInterfaces: boolean = true): QueryAllowanceRequestAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     return obj;
   },
   fromProtoMsg(message: QueryAllowanceRequestProtoMsg, useInterfaces: boolean = true): QueryAllowanceRequest {
@@ -394,7 +394,7 @@ export const QueryAllowancesRequest = {
   },
   toAmino(message: QueryAllowancesRequest, useInterfaces: boolean = true): QueryAllowancesRequestAmino {
     const obj: any = {};
-    obj.grantee = message.grantee;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -502,7 +502,7 @@ export const QueryAllowancesResponse = {
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.allowances = [];
+      obj.allowances = message.allowances;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -602,7 +602,7 @@ export const QueryAllowancesByGranterRequest = {
   },
   toAmino(message: QueryAllowancesByGranterRequest, useInterfaces: boolean = true): QueryAllowancesByGranterRequestAmino {
     const obj: any = {};
-    obj.granter = message.granter;
+    obj.granter = message.granter === "" ? undefined : message.granter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -710,7 +710,7 @@ export const QueryAllowancesByGranterResponse = {
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.allowances = [];
+      obj.allowances = message.allowances;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

@@ -142,9 +142,9 @@ export const DevFeeInfo = {
   },
   toAmino(message: DevFeeInfo): DevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     return obj;
   },
   fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {

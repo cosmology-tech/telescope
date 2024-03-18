@@ -186,7 +186,7 @@ export const QueryAppVersionRequest = {
       message.connectionId = object.connection_id;
     }
     if (object.ordering !== undefined && object.ordering !== null) {
-      message.ordering = orderFromJSON(object.ordering);
+      message.ordering = object.ordering;
     }
     if (object.counterparty !== undefined && object.counterparty !== null) {
       message.counterparty = Counterparty.fromAmino(object.counterparty);
@@ -198,11 +198,11 @@ export const QueryAppVersionRequest = {
   },
   toAmino(message: QueryAppVersionRequest): QueryAppVersionRequestAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.connection_id = message.connectionId;
-    obj.ordering = message.ordering;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.ordering = message.ordering === 0 ? undefined : message.ordering;
     obj.counterparty = message.counterparty ? Counterparty.toAmino(message.counterparty) : undefined;
-    obj.proposed_version = message.proposedVersion;
+    obj.proposed_version = message.proposedVersion === "" ? undefined : message.proposedVersion;
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionRequestAminoMsg): QueryAppVersionRequest {
@@ -307,8 +307,8 @@ export const QueryAppVersionResponse = {
   },
   toAmino(message: QueryAppVersionResponse): QueryAppVersionResponseAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.version = message.version;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.version = message.version === "" ? undefined : message.version;
     return obj;
   },
   fromAminoMsg(object: QueryAppVersionResponseAminoMsg): QueryAppVersionResponse {

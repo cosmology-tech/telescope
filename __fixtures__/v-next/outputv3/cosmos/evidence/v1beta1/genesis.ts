@@ -94,7 +94,7 @@ export const GenesisState = {
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.evidence = [];
+      obj.evidence = message.evidence;
     }
     return obj;
   },

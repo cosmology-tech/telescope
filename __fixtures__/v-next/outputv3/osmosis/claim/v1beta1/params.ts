@@ -147,7 +147,7 @@ export const Params = {
     obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay, useInterfaces) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay, useInterfaces) : undefined;
-    obj.claim_denom = message.claimDenom;
+    obj.claim_denom = message.claimDenom === "" ? undefined : message.claimDenom;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

@@ -195,8 +195,8 @@ export const MsgConvertCoin = {
   toAmino(message: MsgConvertCoin, useInterfaces: boolean = true): MsgConvertCoinAmino {
     const obj: any = {};
     obj.coin = message.coin ? Coin.toAmino(message.coin, useInterfaces) : undefined;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromProtoMsg(message: MsgConvertCoinProtoMsg, useInterfaces: boolean = true): MsgConvertCoin {
@@ -383,10 +383,10 @@ export const MsgConvertERC20 = {
   },
   toAmino(message: MsgConvertERC20, useInterfaces: boolean = true): MsgConvertERC20Amino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromProtoMsg(message: MsgConvertERC20ProtoMsg, useInterfaces: boolean = true): MsgConvertERC20 {

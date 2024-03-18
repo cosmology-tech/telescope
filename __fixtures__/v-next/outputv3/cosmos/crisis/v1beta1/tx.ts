@@ -128,9 +128,9 @@ export const MsgVerifyInvariant = {
   },
   toAmino(message: MsgVerifyInvariant, useInterfaces: boolean = true): MsgVerifyInvariantAmino {
     const obj: any = {};
-    obj.sender = message.sender;
-    obj.invariant_module_name = message.invariantModuleName;
-    obj.invariant_route = message.invariantRoute;
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.invariant_module_name = message.invariantModuleName === "" ? undefined : message.invariantModuleName;
+    obj.invariant_route = message.invariantRoute === "" ? undefined : message.invariantRoute;
     return obj;
   },
   fromProtoMsg(message: MsgVerifyInvariantProtoMsg, useInterfaces: boolean = true): MsgVerifyInvariant {

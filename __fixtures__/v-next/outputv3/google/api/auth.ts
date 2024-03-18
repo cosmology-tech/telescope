@@ -661,12 +661,12 @@ export const Authentication = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? AuthProvider.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     return obj;
   },
@@ -800,13 +800,13 @@ export const AuthenticationRule = {
   },
   toAmino(message: AuthenticationRule, useInterfaces: boolean = true): AuthenticationRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
+    obj.selector = message.selector === "" ? undefined : message.selector;
     obj.oauth = message.oauth ? OAuthRequirements.toAmino(message.oauth, useInterfaces) : undefined;
-    obj.allow_without_credential = message.allowWithoutCredential;
+    obj.allow_without_credential = message.allowWithoutCredential === false ? undefined : message.allowWithoutCredential;
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e ? AuthRequirement.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.requirements = [];
+      obj.requirements = message.requirements;
     }
     return obj;
   },
@@ -917,9 +917,9 @@ export const JwtLocation = {
   },
   toAmino(message: JwtLocation, useInterfaces: boolean = true): JwtLocationAmino {
     const obj: any = {};
-    obj.header = message.header;
-    obj.query = message.query;
-    obj.value_prefix = message.valuePrefix;
+    obj.header = message.header === null ? undefined : message.header;
+    obj.query = message.query === null ? undefined : message.query;
+    obj.value_prefix = message.valuePrefix === "" ? undefined : message.valuePrefix;
     return obj;
   },
   fromProtoMsg(message: JwtLocationProtoMsg, useInterfaces: boolean = true): JwtLocation {
@@ -1080,15 +1080,15 @@ export const AuthProvider = {
   },
   toAmino(message: AuthProvider, useInterfaces: boolean = true): AuthProviderAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.issuer = message.issuer;
-    obj.jwks_uri = message.jwksUri;
-    obj.audiences = message.audiences;
-    obj.authorization_url = message.authorizationUrl;
+    obj.id = message.id === "" ? undefined : message.id;
+    obj.issuer = message.issuer === "" ? undefined : message.issuer;
+    obj.jwks_uri = message.jwksUri === "" ? undefined : message.jwksUri;
+    obj.audiences = message.audiences === "" ? undefined : message.audiences;
+    obj.authorization_url = message.authorizationUrl === "" ? undefined : message.authorizationUrl;
     if (message.jwtLocations) {
       obj.jwt_locations = message.jwtLocations.map(e => e ? JwtLocation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.jwt_locations = [];
+      obj.jwt_locations = message.jwtLocations;
     }
     return obj;
   },
@@ -1169,7 +1169,7 @@ export const OAuthRequirements = {
   },
   toAmino(message: OAuthRequirements, useInterfaces: boolean = true): OAuthRequirementsAmino {
     const obj: any = {};
-    obj.canonical_scopes = message.canonicalScopes;
+    obj.canonical_scopes = message.canonicalScopes === "" ? undefined : message.canonicalScopes;
     return obj;
   },
   fromProtoMsg(message: OAuthRequirementsProtoMsg, useInterfaces: boolean = true): OAuthRequirements {
@@ -1264,8 +1264,8 @@ export const AuthRequirement = {
   },
   toAmino(message: AuthRequirement, useInterfaces: boolean = true): AuthRequirementAmino {
     const obj: any = {};
-    obj.provider_id = message.providerId;
-    obj.audiences = message.audiences;
+    obj.provider_id = message.providerId === "" ? undefined : message.providerId;
+    obj.audiences = message.audiences === "" ? undefined : message.audiences;
     return obj;
   },
   fromProtoMsg(message: AuthRequirementProtoMsg, useInterfaces: boolean = true): AuthRequirement {

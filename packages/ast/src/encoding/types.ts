@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { TraversalSymbol, ProtoField, TelescopeLogLevel } from '@cosmology/types';
+import { ProtoField, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -405,7 +405,8 @@ export const getTSTypeForProto = (
 export const getDefaultTSTypeFromProtoType = (
     context: ProtoParseContext,
     field: ProtoField,
-    isOneOf: boolean
+    isOneOf: boolean,
+    useNullForOptionals: boolean = false
 ) => {
 
     const isOptional = getFieldOptionalityForDefaults(context, field, isOneOf);
@@ -421,7 +422,7 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (isOptional) {
-        return t.identifier('undefined');
+        return useNullForOptionals ? t.nullLiteral() : t.identifier('undefined');
     }
 
     if (field.parsedType?.type === 'Enum') {
@@ -520,6 +521,26 @@ export const getDefaultTSTypeFromProtoType = (
     };
 };
 
+export const getDefaultTSTypeFromAminoTypeDefault = (
+  context: ProtoParseContext,
+  field: ProtoField
+) => {
+  const typeName = getProtoFieldTypeName(context, field);
+
+  return t.callExpression(
+      t.memberExpression(t.identifier(typeName), t.identifier("toAmino")),
+      [
+          t.callExpression(
+              t.memberExpression(
+                  t.identifier(getProtoFieldTypeName(context, field)),
+                  t.identifier("fromPartial")
+              ),
+              [t.objectExpression([])]
+          ),
+      ]
+  );
+};
+
 function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: ProtoField) {
   return t.callExpression(
       t.memberExpression(
@@ -529,3 +550,4 @@ function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: 
       [t.objectExpression([])]
   )
 }
+

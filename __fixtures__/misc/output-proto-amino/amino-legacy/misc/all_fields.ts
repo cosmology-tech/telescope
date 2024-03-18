@@ -1222,10 +1222,10 @@ export const EncodingTestForDontOmit = {
       message.dOWasm = fromBase64(object.d_o_wasm);
     }
     if (object.opt !== undefined && object.opt !== null) {
-      message.opt = voteOptionFromJSON(object.opt);
+      message.opt = object.opt;
     }
     if (object.d_o_opt !== undefined && object.d_o_opt !== null) {
-      message.dOOpt = voteOptionFromJSON(object.d_o_opt);
+      message.dOOpt = object.d_o_opt;
     }
     if (object.period !== undefined && object.period !== null) {
       message.period = Duration.fromAmino(object.period);
@@ -1255,8 +1255,8 @@ export const EncodingTestForDontOmit = {
     message.dORaws = object.d_o_raws?.map(e => toUtf8(JSON.stringify(e))) || [];
     message.wasms = object.wasms?.map(e => fromBase64(e)) || [];
     message.dOWasms = object.d_o_wasms?.map(e => fromBase64(e)) || [];
-    message.opts = object.opts?.map(e => voteOptionFromJSON(e)) || [];
-    message.dOOpts = object.d_o_opts?.map(e => voteOptionFromJSON(e)) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.dOOpts = object.d_o_opts?.map(e => e) || [];
     message.periods = object.periods?.map(e => Duration.fromAmino(e)) || [];
     message.dOPeriods = object.d_o_periods?.map(e => Duration.fromAmino(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromAmino(e)) || [];
@@ -1275,28 +1275,28 @@ export const EncodingTestForDontOmit = {
   },
   toAmino(message: EncodingTestForDontOmit): EncodingTestForDontOmitAmino {
     const obj: any = {};
-    obj.str = message.str;
+    obj.str = message.str === "" ? undefined : message.str;
     obj.d_o_str = message.dOStr ?? "";
-    obj.b = message.b;
+    obj.b = message.b === false ? undefined : message.b;
     obj.d_o_b = message.dOB ?? false;
-    obj.num = message.num;
+    obj.num = message.num === 0 ? undefined : message.num;
     obj.d_o_num = message.dONum ?? 0;
-    obj.big = message.big ? message.big.toString() : undefined;
+    obj.big = message.big !== BigInt(0) ? message.big.toString() : undefined;
     obj.d_o_big = message.dOBig ? message.dOBig.toString() : "0";
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
-    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.fromPartial({});
+    obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
-    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : Any.fromPartial({});
+    obj.d_o_auth = message.dOAuth ? Any.toAmino(message.dOAuth) : Any.toAmino(Any.fromPartial({}));
     obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
     obj.d_o_salt = message.dOSalt ? base64FromBytes(message.dOSalt) : "";
     obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
     obj.d_o_raw = message.dORaw ? JSON.parse(fromUtf8(message.dORaw)) : {};
     obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
     obj.d_o_wasm = message.dOWasm ? toBase64(message.dOWasm) : "";
-    obj.opt = message.opt;
+    obj.opt = message.opt === 0 ? undefined : message.opt;
     obj.d_o_opt = message.dOOpt ?? 0;
     obj.period = message.period ? Duration.toAmino(message.period) : undefined;
-    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : Duration.fromPartial({});
+    obj.d_o_period = message.dOPeriod ? Duration.toAmino(message.dOPeriod) : Duration.toAmino(Duration.fromPartial({}));
     obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
     obj.d_o_date = message.dODate ? Timestamp.toAmino(toTimestamp(message.dODate)) : new Date();
     obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
@@ -1304,104 +1304,104 @@ export const EncodingTestForDontOmit = {
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
     } else {
-      obj.nums = [];
+      obj.nums = message.nums;
     }
     if (message.dONums) {
       obj.d_o_nums = message.dONums.map(e => e);
     } else {
-      obj.d_o_nums = [];
+      obj.d_o_nums = message.dONums;
     }
     if (message.bigs) {
       obj.bigs = message.bigs.map(e => e.toString());
     } else {
-      obj.bigs = [];
+      obj.bigs = message.bigs;
     }
     if (message.dOBigs) {
       obj.d_o_bigs = message.dOBigs.map(e => e.toString());
     } else {
-      obj.d_o_bigs = [];
+      obj.d_o_bigs = message.dOBigs;
     }
     if (message.salts) {
       obj.salts = message.salts.map(e => base64FromBytes(e));
     } else {
-      obj.salts = [];
+      obj.salts = message.salts;
     }
     if (message.dOSalts) {
       obj.d_o_salts = message.dOSalts.map(e => base64FromBytes(e));
     } else {
-      obj.d_o_salts = [];
+      obj.d_o_salts = message.dOSalts;
     }
     if (message.raws) {
       obj.raws = message.raws.map(e => JSON.parse(fromUtf8(e)));
     } else {
-      obj.raws = [];
+      obj.raws = message.raws;
     }
     if (message.dORaws) {
       obj.d_o_raws = message.dORaws.map(e => JSON.parse(fromUtf8(e)));
     } else {
-      obj.d_o_raws = [];
+      obj.d_o_raws = message.dORaws;
     }
     if (message.wasms) {
       obj.wasms = message.wasms.map(e => toBase64(e));
     } else {
-      obj.wasms = [];
+      obj.wasms = message.wasms;
     }
     if (message.dOWasms) {
       obj.d_o_wasms = message.dOWasms.map(e => toBase64(e));
     } else {
-      obj.d_o_wasms = [];
+      obj.d_o_wasms = message.dOWasms;
     }
     if (message.opts) {
       obj.opts = message.opts.map(e => e);
     } else {
-      obj.opts = [];
+      obj.opts = message.opts;
     }
     if (message.dOOpts) {
       obj.d_o_opts = message.dOOpts.map(e => e);
     } else {
-      obj.d_o_opts = [];
+      obj.d_o_opts = message.dOOpts;
     }
     if (message.periods) {
       obj.periods = message.periods.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.periods = [];
+      obj.periods = message.periods;
     }
     if (message.dOPeriods) {
       obj.d_o_periods = message.dOPeriods.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.d_o_periods = [];
+      obj.d_o_periods = message.dOPeriods;
     }
     if (message.protos) {
       obj.protos = message.protos.map(e => e ? AccessConfig.toAmino(e) : undefined);
     } else {
-      obj.protos = [];
+      obj.protos = message.protos;
     }
     if (message.dOProtos) {
       obj.d_o_protos = message.dOProtos.map(e => e ? AccessConfig.toAmino(e) : undefined);
     } else {
-      obj.d_o_protos = [];
+      obj.d_o_protos = message.dOProtos;
     }
     if (message.auths) {
       obj.auths = message.auths.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.auths = [];
+      obj.auths = message.auths;
     }
     if (message.dOAuths) {
       obj.d_o_auths = message.dOAuths.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.d_o_auths = [];
+      obj.d_o_auths = message.dOAuths;
     }
-    obj.dec = padDecimal(message.dec);
+    obj.dec = padDecimal(message.dec) === "" ? undefined : padDecimal(message.dec);
     obj.d_o_dec = padDecimal(message.dODec) ?? "";
     if (message.decs) {
       obj.decs = message.decs.map(e => padDecimal(e));
     } else {
-      obj.decs = [];
+      obj.decs = message.decs;
     }
     if (message.dODecs) {
       obj.d_o_decs = message.dODecs.map(e => padDecimal(e));
     } else {
-      obj.d_o_decs = [];
+      obj.d_o_decs = message.dODecs;
     }
     return obj;
   },
@@ -2383,10 +2383,10 @@ export const EncodingTestForOmit = {
       message.oWasm = fromBase64(object.o_wasm);
     }
     if (object.opt !== undefined && object.opt !== null) {
-      message.opt = voteOptionFromJSON(object.opt);
+      message.opt = object.opt;
     }
     if (object.o_opt !== undefined && object.o_opt !== null) {
-      message.oOpt = voteOptionFromJSON(object.o_opt);
+      message.oOpt = object.o_opt;
     }
     if (object.period !== undefined && object.period !== null) {
       message.period = Duration.fromAmino(object.period);
@@ -2416,8 +2416,8 @@ export const EncodingTestForOmit = {
     message.oRaws = object.o_raws?.map(e => toUtf8(JSON.stringify(e))) || [];
     message.wasms = object.wasms?.map(e => fromBase64(e)) || [];
     message.oWasms = object.o_wasms?.map(e => fromBase64(e)) || [];
-    message.opts = object.opts?.map(e => voteOptionFromJSON(e)) || [];
-    message.oOpts = object.o_opts?.map(e => voteOptionFromJSON(e)) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.oOpts = object.o_opts?.map(e => e) || [];
     message.periods = object.periods?.map(e => Duration.fromAmino(e)) || [];
     message.oPeriods = object.o_periods?.map(e => Duration.fromAmino(e)) || [];
     message.protos = object.protos?.map(e => AccessConfig.fromAmino(e)) || [];
@@ -2436,133 +2436,133 @@ export const EncodingTestForOmit = {
   },
   toAmino(message: EncodingTestForOmit): EncodingTestForOmitAmino {
     const obj: any = {};
-    obj.str = message.str;
-    obj.o_str = message.oStr;
-    obj.b = message.b;
-    obj.o_b = message.oB;
-    obj.num = message.num;
-    obj.o_num = message.oNum;
-    obj.big = message.big ? message.big.toString() : undefined;
-    obj.o_big = message.oBig ? message.oBig.toString() : undefined;
-    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
+    obj.str = message.str ?? "";
+    obj.o_str = message.oStr === "" ? undefined : message.oStr;
+    obj.b = message.b ?? false;
+    obj.o_b = message.oB === false ? undefined : message.oB;
+    obj.num = message.num ?? 0;
+    obj.o_num = message.oNum === 0 ? undefined : message.oNum;
+    obj.big = message.big ? message.big.toString() : "0";
+    obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
+    obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
-    obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
+    obj.auth = message.auth ? Any.toAmino(message.auth) : Any.toAmino(Any.fromPartial({}));
     obj.o_auth = message.oAuth ? Any.toAmino(message.oAuth) : undefined;
-    obj.salt = message.salt ? base64FromBytes(message.salt) : undefined;
+    obj.salt = message.salt ? base64FromBytes(message.salt) : "";
     obj.o_salt = message.oSalt ? base64FromBytes(message.oSalt) : undefined;
-    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : undefined;
+    obj.raw = message.raw ? JSON.parse(fromUtf8(message.raw)) : {};
     obj.o_raw = message.oRaw ? JSON.parse(fromUtf8(message.oRaw)) : undefined;
-    obj.wasm = message.wasm ? toBase64(message.wasm) : undefined;
+    obj.wasm = message.wasm ? toBase64(message.wasm) : "";
     obj.o_wasm = message.oWasm ? toBase64(message.oWasm) : undefined;
-    obj.opt = message.opt;
-    obj.o_opt = message.oOpt;
-    obj.period = message.period ? Duration.toAmino(message.period) : undefined;
+    obj.opt = message.opt ?? 0;
+    obj.o_opt = message.oOpt === 0 ? undefined : message.oOpt;
+    obj.period = message.period ? Duration.toAmino(message.period) : Duration.toAmino(Duration.fromPartial({}));
     obj.o_period = message.oPeriod ? Duration.toAmino(message.oPeriod) : undefined;
-    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : undefined;
+    obj.date = message.date ? Timestamp.toAmino(toTimestamp(message.date)) : null;
     obj.o_date = message.oDate ? Timestamp.toAmino(toTimestamp(message.oDate)) : undefined;
-    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : undefined;
+    obj.pubkey = message.pubkey ? decodePubkey(message.pubkey) : null;
     obj.o_pubkey = message.oPubkey ? decodePubkey(message.oPubkey) : undefined;
     if (message.nums) {
       obj.nums = message.nums.map(e => e);
     } else {
-      obj.nums = [];
+      obj.nums = message.nums;
     }
     if (message.oNums) {
       obj.o_nums = message.oNums.map(e => e);
     } else {
-      obj.o_nums = [];
+      obj.o_nums = message.oNums;
     }
     if (message.bigs) {
       obj.bigs = message.bigs.map(e => e.toString());
     } else {
-      obj.bigs = [];
+      obj.bigs = message.bigs;
     }
     if (message.oBigs) {
       obj.o_bigs = message.oBigs.map(e => e.toString());
     } else {
-      obj.o_bigs = [];
+      obj.o_bigs = message.oBigs;
     }
     if (message.salts) {
       obj.salts = message.salts.map(e => base64FromBytes(e));
     } else {
-      obj.salts = [];
+      obj.salts = message.salts;
     }
     if (message.oSalts) {
       obj.o_salts = message.oSalts.map(e => base64FromBytes(e));
     } else {
-      obj.o_salts = [];
+      obj.o_salts = message.oSalts;
     }
     if (message.raws) {
       obj.raws = message.raws.map(e => JSON.parse(fromUtf8(e)));
     } else {
-      obj.raws = [];
+      obj.raws = message.raws;
     }
     if (message.oRaws) {
       obj.o_raws = message.oRaws.map(e => JSON.parse(fromUtf8(e)));
     } else {
-      obj.o_raws = [];
+      obj.o_raws = message.oRaws;
     }
     if (message.wasms) {
       obj.wasms = message.wasms.map(e => toBase64(e));
     } else {
-      obj.wasms = [];
+      obj.wasms = message.wasms;
     }
     if (message.oWasms) {
       obj.o_wasms = message.oWasms.map(e => toBase64(e));
     } else {
-      obj.o_wasms = [];
+      obj.o_wasms = message.oWasms;
     }
     if (message.opts) {
       obj.opts = message.opts.map(e => e);
     } else {
-      obj.opts = [];
+      obj.opts = message.opts;
     }
     if (message.oOpts) {
       obj.o_opts = message.oOpts.map(e => e);
     } else {
-      obj.o_opts = [];
+      obj.o_opts = message.oOpts;
     }
     if (message.periods) {
       obj.periods = message.periods.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.periods = [];
+      obj.periods = message.periods;
     }
     if (message.oPeriods) {
       obj.o_periods = message.oPeriods.map(e => e ? Duration.toAmino(e) : undefined);
     } else {
-      obj.o_periods = [];
+      obj.o_periods = message.oPeriods;
     }
     if (message.protos) {
       obj.protos = message.protos.map(e => e ? AccessConfig.toAmino(e) : undefined);
     } else {
-      obj.protos = [];
+      obj.protos = message.protos;
     }
     if (message.oProtos) {
       obj.o_protos = message.oProtos.map(e => e ? AccessConfig.toAmino(e) : undefined);
     } else {
-      obj.o_protos = [];
+      obj.o_protos = message.oProtos;
     }
     if (message.auths) {
       obj.auths = message.auths.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.auths = [];
+      obj.auths = message.auths;
     }
     if (message.oAuths) {
       obj.o_auths = message.oAuths.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.o_auths = [];
+      obj.o_auths = message.oAuths;
     }
-    obj.dec = padDecimal(message.dec);
-    obj.o_dec = padDecimal(message.oDec);
+    obj.dec = padDecimal(message.dec) ?? "";
+    obj.o_dec = padDecimal(message.oDec) === "" ? undefined : padDecimal(message.oDec);
     if (message.decs) {
       obj.decs = message.decs.map(e => padDecimal(e));
     } else {
-      obj.decs = [];
+      obj.decs = message.decs;
     }
     if (message.oDecs) {
       obj.o_decs = message.oDecs.map(e => padDecimal(e));
     } else {
-      obj.o_decs = [];
+      obj.o_decs = message.oDecs;
     }
     return obj;
   },

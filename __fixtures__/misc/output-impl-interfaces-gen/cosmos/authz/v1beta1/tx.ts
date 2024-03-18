@@ -288,8 +288,8 @@ export const MsgGrant = {
   },
   toAmino(message: MsgGrant): MsgGrantAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.grant = message.grant ? Grant.toAmino(message.grant) : undefined;
     return obj;
   },
@@ -405,7 +405,7 @@ export const MsgExecResponse = {
     if (message.results) {
       obj.results = message.results.map(e => base64FromBytes(e));
     } else {
-      obj.results = [];
+      obj.results = message.results;
     }
     return obj;
   },
@@ -534,11 +534,11 @@ export const MsgExec = {
   },
   toAmino(message: MsgExec): MsgExecAmino {
     const obj: any = {};
-    obj.grantee = message.grantee;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     if (message.msgs) {
       obj.msgs = message.msgs.map(e => e ? GlobalDecoderRegistry.toAminoMsg(e) : undefined);
     } else {
-      obj.msgs = [];
+      obj.msgs = message.msgs;
     }
     return obj;
   },
@@ -763,9 +763,9 @@ export const MsgRevoke = {
   },
   toAmino(message: MsgRevoke): MsgRevokeAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
-    obj.msg_type_url = message.msgTypeUrl;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
+    obj.msg_type_url = message.msgTypeUrl === "" ? undefined : message.msgTypeUrl;
     return obj;
   },
   fromAminoMsg(object: MsgRevokeAminoMsg): MsgRevoke {

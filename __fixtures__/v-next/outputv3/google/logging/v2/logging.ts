@@ -955,7 +955,7 @@ export const DeleteLogRequest = {
   },
   toAmino(message: DeleteLogRequest, useInterfaces: boolean = true): DeleteLogRequestAmino {
     const obj: any = {};
-    obj.log_name = message.logName;
+    obj.log_name = message.logName === "" ? undefined : message.logName;
     return obj;
   },
   fromProtoMsg(message: DeleteLogRequestProtoMsg, useInterfaces: boolean = true): DeleteLogRequest {
@@ -1049,8 +1049,8 @@ export const WriteLogEntriesRequest_LabelsEntry = {
   },
   toAmino(message: WriteLogEntriesRequest_LabelsEntry, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: WriteLogEntriesRequest_LabelsEntryProtoMsg, useInterfaces: boolean = true): WriteLogEntriesRequest_LabelsEntry {
@@ -1245,7 +1245,7 @@ export const WriteLogEntriesRequest = {
   },
   toAmino(message: WriteLogEntriesRequest, useInterfaces: boolean = true): WriteLogEntriesRequestAmino {
     const obj: any = {};
-    obj.log_name = message.logName;
+    obj.log_name = message.logName === "" ? undefined : message.logName;
     obj.resource = message.resource ? MonitoredResource.toAmino(message.resource, useInterfaces) : undefined;
     obj.labels = {};
     if (message.labels) {
@@ -1256,10 +1256,10 @@ export const WriteLogEntriesRequest = {
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
-    obj.partial_success = message.partialSuccess;
-    obj.dry_run = message.dryRun;
+    obj.partial_success = message.partialSuccess === false ? undefined : message.partialSuccess;
+    obj.dry_run = message.dryRun === false ? undefined : message.dryRun;
     return obj;
   },
   fromProtoMsg(message: WriteLogEntriesRequestProtoMsg, useInterfaces: boolean = true): WriteLogEntriesRequest {
@@ -1417,7 +1417,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
   },
   toAmino(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry, useInterfaces: boolean = true): WriteLogEntriesPartialErrors_LogEntryErrorsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key === 0 ? undefined : message.key;
     obj.value = message.value ? Status.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
@@ -1684,12 +1684,12 @@ export const ListLogEntriesRequest = {
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
-    obj.filter = message.filter;
-    obj.order_by = message.orderBy;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.order_by = message.orderBy === "" ? undefined : message.orderBy;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromProtoMsg(message: ListLogEntriesRequestProtoMsg, useInterfaces: boolean = true): ListLogEntriesRequest {
@@ -1793,9 +1793,9 @@ export const ListLogEntriesResponse = {
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListLogEntriesResponseProtoMsg, useInterfaces: boolean = true): ListLogEntriesResponse {
@@ -1890,8 +1890,8 @@ export const ListMonitoredResourceDescriptorsRequest = {
   },
   toAmino(message: ListMonitoredResourceDescriptorsRequest, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequestAmino {
     const obj: any = {};
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromProtoMsg(message: ListMonitoredResourceDescriptorsRequestProtoMsg, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsRequest {
@@ -1995,9 +1995,9 @@ export const ListMonitoredResourceDescriptorsResponse = {
     if (message.resourceDescriptors) {
       obj.resource_descriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.resource_descriptors = [];
+      obj.resource_descriptors = message.resourceDescriptors;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListMonitoredResourceDescriptorsResponseProtoMsg, useInterfaces: boolean = true): ListMonitoredResourceDescriptorsResponse {
@@ -2128,13 +2128,13 @@ export const ListLogsRequest = {
   },
   toAmino(message: ListLogsRequest, useInterfaces: boolean = true): ListLogsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
     return obj;
   },
@@ -2239,9 +2239,9 @@ export const ListLogsResponse = {
     if (message.logNames) {
       obj.log_names = message.logNames.map(e => e);
     } else {
-      obj.log_names = [];
+      obj.log_names = message.logNames;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListLogsResponseProtoMsg, useInterfaces: boolean = true): ListLogsResponse {
@@ -2362,9 +2362,9 @@ export const TailLogEntriesRequest = {
     if (message.resourceNames) {
       obj.resource_names = message.resourceNames.map(e => e);
     } else {
-      obj.resource_names = [];
+      obj.resource_names = message.resourceNames;
     }
-    obj.filter = message.filter;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     obj.buffer_window = message.bufferWindow ? Duration.toAmino(message.bufferWindow, useInterfaces) : undefined;
     return obj;
   },
@@ -2475,12 +2475,12 @@ export const TailLogEntriesResponse = {
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     if (message.suppressionInfo) {
       obj.suppression_info = message.suppressionInfo.map(e => e ? TailLogEntriesResponse_SuppressionInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.suppression_info = [];
+      obj.suppression_info = message.suppressionInfo;
     }
     return obj;
   },
@@ -2567,7 +2567,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   fromAmino(object: TailLogEntriesResponse_SuppressionInfoAmino): TailLogEntriesResponse_SuppressionInfo {
     const message = createBaseTailLogEntriesResponse_SuppressionInfo();
     if (object.reason !== undefined && object.reason !== null) {
-      message.reason = tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason);
+      message.reason = object.reason;
     }
     if (object.suppressed_count !== undefined && object.suppressed_count !== null) {
       message.suppressedCount = object.suppressed_count;
@@ -2576,8 +2576,8 @@ export const TailLogEntriesResponse_SuppressionInfo = {
   },
   toAmino(message: TailLogEntriesResponse_SuppressionInfo, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfoAmino {
     const obj: any = {};
-    obj.reason = message.reason;
-    obj.suppressed_count = message.suppressedCount;
+    obj.reason = message.reason === 0 ? undefined : message.reason;
+    obj.suppressed_count = message.suppressedCount === 0 ? undefined : message.suppressedCount;
     return obj;
   },
   fromProtoMsg(message: TailLogEntriesResponse_SuppressionInfoProtoMsg, useInterfaces: boolean = true): TailLogEntriesResponse_SuppressionInfo {

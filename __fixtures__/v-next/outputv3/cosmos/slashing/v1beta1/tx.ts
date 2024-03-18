@@ -11,7 +11,7 @@ export interface MsgUnjailProtoMsg {
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailAmino {
-  validator_addr?: string;
+  validator_addr: string;
 }
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjailSDKType {
@@ -92,7 +92,7 @@ export const MsgUnjail = {
   },
   toAmino(message: MsgUnjail, useInterfaces: boolean = true): MsgUnjailAmino {
     const obj: any = {};
-    obj.validator_addr = message.validatorAddr;
+    obj.validator_addr = message.validatorAddr ?? "";
     return obj;
   },
   fromProtoMsg(message: MsgUnjailProtoMsg, useInterfaces: boolean = true): MsgUnjail {

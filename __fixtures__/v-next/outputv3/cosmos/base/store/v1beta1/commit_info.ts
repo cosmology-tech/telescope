@@ -173,11 +173,11 @@ export const CommitInfo = {
   },
   toAmino(message: CommitInfo, useInterfaces: boolean = true): CommitInfoAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
     if (message.storeInfos) {
       obj.store_infos = message.storeInfos.map(e => e ? StoreInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.store_infos = [];
+      obj.store_infos = message.storeInfos;
     }
     return obj;
   },
@@ -276,7 +276,7 @@ export const StoreInfo = {
   },
   toAmino(message: StoreInfo, useInterfaces: boolean = true): StoreInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.commit_id = message.commitId ? CommitID.toAmino(message.commitId, useInterfaces) : undefined;
     return obj;
   },
@@ -375,7 +375,7 @@ export const CommitID = {
   },
   toAmino(message: CommitID, useInterfaces: boolean = true): CommitIDAmino {
     const obj: any = {};
-    obj.version = message.version ? message.version.toString() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
     return obj;
   },

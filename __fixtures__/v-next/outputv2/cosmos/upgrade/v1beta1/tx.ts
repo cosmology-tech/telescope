@@ -209,7 +209,7 @@ export const MsgSoftwareUpgrade = {
   },
   toAmino(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeAmino {
     const obj: any = {};
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     obj.plan = message.plan ? Plan.toAmino(message.plan) : undefined;
     return obj;
   },
@@ -372,7 +372,7 @@ export const MsgCancelUpgrade = {
   },
   toAmino(message: MsgCancelUpgrade): MsgCancelUpgradeAmino {
     const obj: any = {};
-    obj.authority = message.authority;
+    obj.authority = message.authority === "" ? undefined : message.authority;
     return obj;
   },
   fromAminoMsg(object: MsgCancelUpgradeAminoMsg): MsgCancelUpgrade {

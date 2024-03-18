@@ -44,9 +44,9 @@ export interface SignedByProtoMsg {
  */
 export interface SignedByAmino {
   /** all_of all keys in this list must have signed attributes */
-  all_of?: string[];
+  all_of: string[];
   /** any_of at least of of the keys from the list must have signed attributes */
-  any_of?: string[];
+  any_of: string[];
 }
 /**
  * SignedBy represents validation accounts that tenant expects signatures for provider attributes
@@ -72,9 +72,9 @@ export interface PlacementRequirementsProtoMsg {
 /** PlacementRequirements */
 export interface PlacementRequirementsAmino {
   /** SignedBy list of keys that tenants expect to have signatures from */
-  signed_by?: SignedByAmino;
+  signed_by: SignedByAmino;
   /** Attribute list of attributes tenant expects from the provider */
-  attributes?: AttributeAmino[];
+  attributes: AttributeAmino[];
 }
 /** PlacementRequirements */
 export interface PlacementRequirementsSDKType {
@@ -160,8 +160,8 @@ export const Attribute = {
   },
   toAmino(message: Attribute, useInterfaces: boolean = true): AttributeAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: AttributeProtoMsg, useInterfaces: boolean = true): Attribute {
@@ -271,12 +271,12 @@ export const SignedBy = {
     if (message.allOf) {
       obj.all_of = message.allOf.map(e => e);
     } else {
-      obj.all_of = [];
+      obj.all_of = message.allOf;
     }
     if (message.anyOf) {
       obj.any_of = message.anyOf.map(e => e);
     } else {
-      obj.any_of = [];
+      obj.any_of = message.anyOf;
     }
     return obj;
   },
@@ -380,11 +380,11 @@ export const PlacementRequirements = {
   },
   toAmino(message: PlacementRequirements, useInterfaces: boolean = true): PlacementRequirementsAmino {
     const obj: any = {};
-    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : undefined;
+    obj.signed_by = message.signedBy ? SignedBy.toAmino(message.signedBy, useInterfaces) : SignedBy.toAmino(SignedBy.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },

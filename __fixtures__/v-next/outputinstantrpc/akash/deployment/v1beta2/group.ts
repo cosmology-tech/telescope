@@ -187,7 +187,7 @@ export const Group = {
       message.groupId = GroupID.fromAmino(object.group_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = group_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.group_spec !== undefined && object.group_spec !== null) {
       message.groupSpec = GroupSpec.fromAmino(object.group_spec);
@@ -199,10 +199,10 @@ export const Group = {
   },
   toAmino(message: Group): GroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : undefined;
-    obj.state = message.state;
-    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : GroupID.toAmino(GroupID.fromPartial({}));
+    obj.state = message.state ?? 0;
+    obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {

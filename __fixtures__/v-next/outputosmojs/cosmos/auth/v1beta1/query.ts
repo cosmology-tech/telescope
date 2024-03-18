@@ -372,7 +372,7 @@ export const QueryAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -468,7 +468,7 @@ export const QueryAccountRequest = {
   },
   toAmino(message: QueryAccountRequest): QueryAccountRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryAccountRequestAminoMsg): QueryAccountRequest {
@@ -905,7 +905,7 @@ export const QueryModuleAccountsResponse = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     return obj;
   },
@@ -1073,7 +1073,7 @@ export const Bech32PrefixResponse = {
   },
   toAmino(message: Bech32PrefixResponse): Bech32PrefixResponseAmino {
     const obj: any = {};
-    obj.bech32_prefix = message.bech32Prefix;
+    obj.bech32_prefix = message.bech32Prefix === "" ? undefined : message.bech32Prefix;
     return obj;
   },
   fromAminoMsg(object: Bech32PrefixResponseAminoMsg): Bech32PrefixResponse {
@@ -1261,7 +1261,7 @@ export const AddressBytesToStringResponse = {
   },
   toAmino(message: AddressBytesToStringResponse): AddressBytesToStringResponseAmino {
     const obj: any = {};
-    obj.address_string = message.addressString;
+    obj.address_string = message.addressString === "" ? undefined : message.addressString;
     return obj;
   },
   fromAminoMsg(object: AddressBytesToStringResponseAminoMsg): AddressBytesToStringResponse {
@@ -1355,7 +1355,7 @@ export const AddressStringToBytesRequest = {
   },
   toAmino(message: AddressStringToBytesRequest): AddressStringToBytesRequestAmino {
     const obj: any = {};
-    obj.address_string = message.addressString;
+    obj.address_string = message.addressString === "" ? undefined : message.addressString;
     return obj;
   },
   fromAminoMsg(object: AddressStringToBytesRequestAminoMsg): AddressStringToBytesRequest {

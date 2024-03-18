@@ -167,9 +167,9 @@ export const MsgRegisterInterchainAccount = {
   },
   toAmino(message: MsgRegisterInterchainAccount): MsgRegisterInterchainAccountAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
-    obj.version = message.version;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.version = message.version === "" ? undefined : message.version;
     return obj;
   },
   fromAminoMsg(object: MsgRegisterInterchainAccountAminoMsg): MsgRegisterInterchainAccount {
@@ -279,8 +279,8 @@ export const MsgRegisterInterchainAccountResponse = {
   },
   toAmino(message: MsgRegisterInterchainAccountResponse): MsgRegisterInterchainAccountResponseAmino {
     const obj: any = {};
-    obj.channel_id = message.channelId;
-    obj.port_id = message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
     return obj;
   },
   fromAminoMsg(object: MsgRegisterInterchainAccountResponseAminoMsg): MsgRegisterInterchainAccountResponse {
@@ -422,10 +422,10 @@ export const MsgSendTx = {
   },
   toAmino(message: MsgSendTx): MsgSendTxAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.connection_id = message.connectionId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     obj.packet_data = message.packetData ? InterchainAccountPacketData.toAmino(message.packetData) : undefined;
-    obj.relative_timeout = message.relativeTimeout ? message.relativeTimeout.toString() : undefined;
+    obj.relative_timeout = message.relativeTimeout !== BigInt(0) ? message.relativeTimeout.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSendTxAminoMsg): MsgSendTx {
@@ -519,7 +519,7 @@ export const MsgSendTxResponse = {
   },
   toAmino(message: MsgSendTxResponse): MsgSendTxResponseAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSendTxResponseAminoMsg): MsgSendTxResponse {

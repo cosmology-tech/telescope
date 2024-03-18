@@ -217,7 +217,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_recovery = message.enableRecovery;
+    obj.enable_recovery = message.enableRecovery === false ? undefined : message.enableRecovery;
     obj.packet_timeout_duration = message.packetTimeoutDuration ? Duration.toAmino(message.packetTimeoutDuration) : undefined;
     return obj;
   },

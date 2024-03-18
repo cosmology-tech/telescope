@@ -170,8 +170,8 @@ export const MsgConvertCoin = {
   toAmino(message: MsgConvertCoin): MsgConvertCoinAmino {
     const obj: any = {};
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: MsgConvertCoinAminoMsg): MsgConvertCoin {
@@ -374,10 +374,10 @@ export const MsgConvertERC20 = {
   },
   toAmino(message: MsgConvertERC20): MsgConvertERC20Amino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.amount = message.amount;
-    obj.receiver = message.receiver;
-    obj.sender = message.sender;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.amount = message.amount === "" ? undefined : message.amount;
+    obj.receiver = message.receiver === "" ? undefined : message.receiver;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     return obj;
   },
   fromAminoMsg(object: MsgConvertERC20AminoMsg): MsgConvertERC20 {

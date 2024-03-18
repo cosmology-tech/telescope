@@ -899,9 +899,9 @@ export const DebugInfo = {
     if (message.stackEntries) {
       obj.stack_entries = message.stackEntries.map(e => e);
     } else {
-      obj.stack_entries = [];
+      obj.stack_entries = message.stackEntries;
     }
-    obj.detail = message.detail;
+    obj.detail = message.detail === "" ? undefined : message.detail;
     return obj;
   },
   fromAminoMsg(object: DebugInfoAminoMsg): DebugInfo {
@@ -965,7 +965,7 @@ export const QuotaFailure = {
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toAmino(e) : undefined);
     } else {
-      obj.violations = [];
+      obj.violations = message.violations;
     }
     return obj;
   },
@@ -1040,8 +1040,8 @@ export const QuotaFailure_Violation = {
   },
   toAmino(message: QuotaFailure_Violation): QuotaFailure_ViolationAmino {
     const obj: any = {};
-    obj.subject = message.subject;
-    obj.description = message.description;
+    obj.subject = message.subject === "" ? undefined : message.subject;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: QuotaFailure_ViolationAminoMsg): QuotaFailure_Violation {
@@ -1114,8 +1114,8 @@ export const ErrorInfo_MetadataEntry = {
   },
   toAmino(message: ErrorInfo_MetadataEntry): ErrorInfo_MetadataEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: ErrorInfo_MetadataEntryAminoMsg): ErrorInfo_MetadataEntry {
@@ -1212,8 +1212,8 @@ export const ErrorInfo = {
   },
   toAmino(message: ErrorInfo): ErrorInfoAmino {
     const obj: any = {};
-    obj.reason = message.reason;
-    obj.domain = message.domain;
+    obj.reason = message.reason === "" ? undefined : message.reason;
+    obj.domain = message.domain === "" ? undefined : message.domain;
     obj.metadata = {};
     if (message.metadata) {
       Object.entries(message.metadata).forEach(([k, v]) => {
@@ -1283,7 +1283,7 @@ export const PreconditionFailure = {
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toAmino(e) : undefined);
     } else {
-      obj.violations = [];
+      obj.violations = message.violations;
     }
     return obj;
   },
@@ -1369,9 +1369,9 @@ export const PreconditionFailure_Violation = {
   },
   toAmino(message: PreconditionFailure_Violation): PreconditionFailure_ViolationAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.subject = message.subject;
-    obj.description = message.description;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.subject = message.subject === "" ? undefined : message.subject;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: PreconditionFailure_ViolationAminoMsg): PreconditionFailure_Violation {
@@ -1435,7 +1435,7 @@ export const BadRequest = {
     if (message.fieldViolations) {
       obj.field_violations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toAmino(e) : undefined);
     } else {
-      obj.field_violations = [];
+      obj.field_violations = message.fieldViolations;
     }
     return obj;
   },
@@ -1510,8 +1510,8 @@ export const BadRequest_FieldViolation = {
   },
   toAmino(message: BadRequest_FieldViolation): BadRequest_FieldViolationAmino {
     const obj: any = {};
-    obj.field = message.field;
-    obj.description = message.description;
+    obj.field = message.field === "" ? undefined : message.field;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: BadRequest_FieldViolationAminoMsg): BadRequest_FieldViolation {
@@ -1585,8 +1585,8 @@ export const RequestInfo = {
   },
   toAmino(message: RequestInfo): RequestInfoAmino {
     const obj: any = {};
-    obj.request_id = message.requestId;
-    obj.serving_data = message.servingData;
+    obj.request_id = message.requestId === "" ? undefined : message.requestId;
+    obj.serving_data = message.servingData === "" ? undefined : message.servingData;
     return obj;
   },
   fromAminoMsg(object: RequestInfoAminoMsg): RequestInfo {
@@ -1682,10 +1682,10 @@ export const ResourceInfo = {
   },
   toAmino(message: ResourceInfo): ResourceInfoAmino {
     const obj: any = {};
-    obj.resource_type = message.resourceType;
-    obj.resource_name = message.resourceName;
-    obj.owner = message.owner;
-    obj.description = message.description;
+    obj.resource_type = message.resourceType === "" ? undefined : message.resourceType;
+    obj.resource_name = message.resourceName === "" ? undefined : message.resourceName;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: ResourceInfoAminoMsg): ResourceInfo {
@@ -1749,7 +1749,7 @@ export const Help = {
     if (message.links) {
       obj.links = message.links.map(e => e ? Help_Link.toAmino(e) : undefined);
     } else {
-      obj.links = [];
+      obj.links = message.links;
     }
     return obj;
   },
@@ -1824,8 +1824,8 @@ export const Help_Link = {
   },
   toAmino(message: Help_Link): Help_LinkAmino {
     const obj: any = {};
-    obj.description = message.description;
-    obj.url = message.url;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.url = message.url === "" ? undefined : message.url;
     return obj;
   },
   fromAminoMsg(object: Help_LinkAminoMsg): Help_Link {
@@ -1899,8 +1899,8 @@ export const LocalizedMessage = {
   },
   toAmino(message: LocalizedMessage): LocalizedMessageAmino {
     const obj: any = {};
-    obj.locale = message.locale;
-    obj.message = message.message;
+    obj.locale = message.locale === "" ? undefined : message.locale;
+    obj.message = message.message === "" ? undefined : message.message;
     return obj;
   },
   fromAminoMsg(object: LocalizedMessageAminoMsg): LocalizedMessage {

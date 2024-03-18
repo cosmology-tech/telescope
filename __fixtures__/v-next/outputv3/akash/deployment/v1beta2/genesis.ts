@@ -15,8 +15,8 @@ export interface GenesisDeploymentProtoMsg {
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentAmino {
-  deployment?: DeploymentAmino;
-  groups?: GroupAmino[];
+  deployment: DeploymentAmino;
+  groups: GroupAmino[];
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeploymentSDKType {
@@ -34,8 +34,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateAmino {
-  deployments?: GenesisDeploymentAmino[];
-  params?: ParamsAmino;
+  deployments: GenesisDeploymentAmino[];
+  params: ParamsAmino;
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisStateSDKType {
@@ -129,11 +129,11 @@ export const GenesisDeployment = {
   },
   toAmino(message: GenesisDeployment, useInterfaces: boolean = true): GenesisDeploymentAmino {
     const obj: any = {};
-    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : undefined;
+    obj.deployment = message.deployment ? Deployment.toAmino(message.deployment, useInterfaces) : Deployment.toAmino(Deployment.fromPartial({}));
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? Group.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     return obj;
   },
@@ -240,9 +240,9 @@ export const GenesisState = {
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.deployments = [];
+      obj.deployments = message.deployments;
     }
-    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
+    obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : Params.toAmino(Params.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: GenesisStateProtoMsg, useInterfaces: boolean = true): GenesisState {

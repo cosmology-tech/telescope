@@ -70,7 +70,7 @@ export interface MsgCloseGroupProtoMsg {
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroupAmino {
-  id?: GroupIDAmino | undefined;
+  id: GroupIDAmino | undefined;
 }
 export interface MsgCloseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgCloseGroup";
@@ -104,7 +104,7 @@ export interface MsgPauseGroupProtoMsg {
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroupAmino {
-  id?: GroupIDAmino | undefined;
+  id: GroupIDAmino | undefined;
 }
 export interface MsgPauseGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgPauseGroup";
@@ -138,7 +138,7 @@ export interface MsgStartGroupProtoMsg {
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroupAmino {
-  id?: GroupIDAmino | undefined;
+  id: GroupIDAmino | undefined;
 }
 export interface MsgStartGroupAminoMsg {
   type: "/akash.deployment.v1beta1.MsgStartGroup";
@@ -174,9 +174,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
 }
 export interface GroupIDAminoMsg {
   type: "/akash.deployment.v1beta1.GroupID";
@@ -200,9 +200,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name?: string;
-  requirements?: PlacementRequirementsAmino | undefined;
-  resources?: ResourceAmino[];
+  name: string;
+  requirements: PlacementRequirementsAmino | undefined;
+  resources: ResourceAmino[];
 }
 export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta1.GroupSpec";
@@ -227,9 +227,9 @@ export interface GroupProtoMsg {
 }
 /** Group stores group id, state and specifications of group */
 export interface GroupAmino {
-  group_id?: GroupIDAmino | undefined;
-  state?: Group_State;
-  group_spec?: GroupSpecAmino | undefined;
+  group_id: GroupIDAmino | undefined;
+  state: Group_State;
+  group_spec: GroupSpecAmino | undefined;
   created_at?: string;
 }
 export interface GroupAminoMsg {
@@ -255,9 +255,9 @@ export interface ResourceProtoMsg {
 }
 /** Resource stores unit, total count and price of resource */
 export interface ResourceAmino {
-  resources?: ResourceUnitsAmino | undefined;
-  count?: number;
-  price?: CoinAmino | undefined;
+  resources: ResourceUnitsAmino | undefined;
+  count: number;
+  price: CoinAmino | undefined;
 }
 export interface ResourceAminoMsg {
   type: "/akash.deployment.v1beta1.Resource";

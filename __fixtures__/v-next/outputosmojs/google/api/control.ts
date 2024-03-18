@@ -94,7 +94,7 @@ export const Control = {
   },
   toAmino(message: Control): ControlAmino {
     const obj: any = {};
-    obj.environment = message.environment;
+    obj.environment = message.environment === "" ? undefined : message.environment;
     return obj;
   },
   fromAminoMsg(object: ControlAminoMsg): Control {

@@ -249,7 +249,7 @@ export const Visibility = {
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? VisibilityRule.toAmino(e) : undefined);
     } else {
-      obj.rules = [];
+      obj.rules = message.rules;
     }
     return obj;
   },
@@ -348,8 +348,8 @@ export const VisibilityRule = {
   },
   toAmino(message: VisibilityRule): VisibilityRuleAmino {
     const obj: any = {};
-    obj.selector = message.selector;
-    obj.restriction = message.restriction;
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.restriction = message.restriction === "" ? undefined : message.restriction;
     return obj;
   },
   fromAminoMsg(object: VisibilityRuleAminoMsg): VisibilityRule {

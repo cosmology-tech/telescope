@@ -222,7 +222,7 @@ export const ProjectProperties = {
     if (message.properties) {
       obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
     } else {
-      obj.properties = [];
+      obj.properties = message.properties;
     }
     return obj;
   },
@@ -334,7 +334,7 @@ export const Property = {
       message.name = object.name;
     }
     if (object.type !== undefined && object.type !== null) {
-      message.type = property_PropertyTypeFromJSON(object.type);
+      message.type = object.type;
     }
     if (object.description !== undefined && object.description !== null) {
       message.description = object.description;
@@ -343,9 +343,9 @@ export const Property = {
   },
   toAmino(message: Property): PropertyAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.description = message.description;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === 0 ? undefined : message.type;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: PropertyAminoMsg): Property {

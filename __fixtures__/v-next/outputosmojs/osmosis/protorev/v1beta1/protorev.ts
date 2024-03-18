@@ -258,10 +258,10 @@ export const TokenPairArbRoutes = {
     if (message.arbRoutes) {
       obj.arb_routes = message.arbRoutes.map(e => e ? Route.toAmino(e) : undefined);
     } else {
-      obj.arb_routes = [];
+      obj.arb_routes = message.arbRoutes;
     }
-    obj.token_in = message.tokenIn;
-    obj.token_out = message.tokenOut;
+    obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
+    obj.token_out = message.tokenOut === "" ? undefined : message.tokenOut;
     return obj;
   },
   fromAminoMsg(object: TokenPairArbRoutesAminoMsg): TokenPairArbRoutes {
@@ -380,9 +380,9 @@ export const Route = {
     if (message.trades) {
       obj.trades = message.trades.map(e => e ? Trade.toAmino(e) : undefined);
     } else {
-      obj.trades = [];
+      obj.trades = message.trades;
     }
-    obj.step_size = message.stepSize;
+    obj.step_size = message.stepSize === "" ? undefined : message.stepSize;
     return obj;
   },
   fromAminoMsg(object: RouteAminoMsg): Route {
@@ -508,9 +508,9 @@ export const Trade = {
   },
   toAmino(message: Trade): TradeAmino {
     const obj: any = {};
-    obj.pool = message.pool ? message.pool.toString() : undefined;
-    obj.token_in = message.tokenIn;
-    obj.token_out = message.tokenOut;
+    obj.pool = message.pool !== BigInt(0) ? message.pool.toString() : undefined;
+    obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
+    obj.token_out = message.tokenOut === "" ? undefined : message.tokenOut;
     return obj;
   },
   fromAminoMsg(object: TradeAminoMsg): Trade {
@@ -660,13 +660,13 @@ export const RouteStatistics = {
     if (message.profits) {
       obj.profits = message.profits.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.profits = [];
+      obj.profits = message.profits;
     }
-    obj.number_of_trades = message.numberOfTrades;
+    obj.number_of_trades = message.numberOfTrades === "" ? undefined : message.numberOfTrades;
     if (message.route) {
       obj.route = message.route.map(e => e.toString());
     } else {
-      obj.route = [];
+      obj.route = message.route;
     }
     return obj;
   },
@@ -793,9 +793,9 @@ export const PoolWeights = {
   },
   toAmino(message: PoolWeights): PoolWeightsAmino {
     const obj: any = {};
-    obj.stable_weight = message.stableWeight ? message.stableWeight.toString() : undefined;
-    obj.balancer_weight = message.balancerWeight ? message.balancerWeight.toString() : undefined;
-    obj.concentrated_weight = message.concentratedWeight ? message.concentratedWeight.toString() : undefined;
+    obj.stable_weight = message.stableWeight !== BigInt(0) ? message.stableWeight.toString() : undefined;
+    obj.balancer_weight = message.balancerWeight !== BigInt(0) ? message.balancerWeight.toString() : undefined;
+    obj.concentrated_weight = message.concentratedWeight !== BigInt(0) ? message.concentratedWeight.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolWeightsAminoMsg): PoolWeights {
@@ -905,8 +905,8 @@ export const BaseDenom = {
   },
   toAmino(message: BaseDenom): BaseDenomAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.step_size = message.stepSize;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.step_size = message.stepSize === "" ? undefined : message.stepSize;
     return obj;
   },
   fromAminoMsg(object: BaseDenomAminoMsg): BaseDenom {

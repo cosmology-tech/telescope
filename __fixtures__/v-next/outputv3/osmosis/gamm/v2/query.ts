@@ -156,9 +156,9 @@ export const QuerySpotPriceRequest = {
   },
   toAmino(message: QuerySpotPriceRequest, useInterfaces: boolean = true): QuerySpotPriceRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.base_asset_denom = message.baseAssetDenom;
-    obj.quote_asset_denom = message.quoteAssetDenom;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.base_asset_denom = message.baseAssetDenom === "" ? undefined : message.baseAssetDenom;
+    obj.quote_asset_denom = message.quoteAssetDenom === "" ? undefined : message.quoteAssetDenom;
     return obj;
   },
   fromProtoMsg(message: QuerySpotPriceRequestProtoMsg, useInterfaces: boolean = true): QuerySpotPriceRequest {
@@ -239,7 +239,7 @@ export const QuerySpotPriceResponse = {
   },
   toAmino(message: QuerySpotPriceResponse, useInterfaces: boolean = true): QuerySpotPriceResponseAmino {
     const obj: any = {};
-    obj.spot_price = message.spotPrice;
+    obj.spot_price = message.spotPrice === "" ? undefined : message.spotPrice;
     return obj;
   },
   fromProtoMsg(message: QuerySpotPriceResponseProtoMsg, useInterfaces: boolean = true): QuerySpotPriceResponse {

@@ -2,6 +2,7 @@ import { AccessConfig, AccessConfigSDKType, accessTypeFromJSON } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { AminoMsg } from "@cosmjs/amino";
 import { toBase64, fromBase64, fromUtf8, toUtf8 } from "@cosmjs/encoding";
+import { omitDefault } from "../../../helpers";
 import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType, MsgMigrateContract, MsgMigrateContractSDKType, MsgUpdateAdmin, MsgUpdateAdminSDKType, MsgClearAdmin, MsgClearAdminSDKType } from "./tx";
 export interface MsgStoreCodeAminoType extends AminoMsg {
   type: "wasm/MsgStoreCode";
@@ -88,9 +89,9 @@ export const AminoConverter = {
     }: MsgStoreCodeAminoType["value"]): MsgStoreCode => {
       return {
         sender,
-        wasmByteCode: fromBase64(wasm_byte_code),
-        instantiatePermission: {
-          permission: accessTypeFromJSON(instantiate_permission.permission),
+        wasmByteCode: wasm_byte_code == null ? wasm_byte_code : fromBase64(wasm_byte_code),
+        instantiatePermission: instantiate_permission == null ? instantiate_permission : {
+          permission: instantiate_permission.permission == null ? instantiate_permission.permission : accessTypeFromJSON(instantiate_permission.permission),
           address: instantiate_permission.address
         }
       };
@@ -109,7 +110,7 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        code_id: codeId.toString(),
+        code_id: omitDefault(codeId)?.toString?.(),
         label,
         msg: JSON.parse(fromUtf8(msg)),
         funds: funds.map(el0 => ({
@@ -129,10 +130,10 @@ export const AminoConverter = {
       return {
         sender,
         admin,
-        codeId: BigInt(code_id),
+        codeId: code_id == null ? code_id : BigInt(code_id),
         label,
-        msg: toUtf8(JSON.stringify(msg)),
-        funds: funds.map(el0 => ({
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        funds: funds.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -166,8 +167,8 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        msg: toUtf8(JSON.stringify(msg)),
-        funds: funds.map(el0 => ({
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg)),
+        funds: funds.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -185,7 +186,7 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        code_id: codeId.toString(),
+        code_id: omitDefault(codeId)?.toString?.(),
         msg: JSON.parse(fromUtf8(msg))
       };
     },
@@ -198,8 +199,8 @@ export const AminoConverter = {
       return {
         sender,
         contract,
-        codeId: BigInt(code_id),
-        msg: toUtf8(JSON.stringify(msg))
+        codeId: code_id == null ? code_id : BigInt(code_id),
+        msg: msg == null ? msg : toUtf8(JSON.stringify(msg))
       };
     }
   },

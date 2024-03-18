@@ -304,13 +304,13 @@ export const MsgRegisterDevFeeInfo = {
   },
   toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     if (message.nonces) {
       obj.nonces = message.nonces.map(e => e.toString());
     } else {
-      obj.nonces = [];
+      obj.nonces = message.nonces;
     }
     return obj;
   },
@@ -474,8 +474,8 @@ export const MsgCancelDevFeeInfo = {
   },
   toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
     return obj;
   },
   fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
@@ -653,9 +653,9 @@ export const MsgUpdateDevFeeInfo = {
   },
   toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
     const obj: any = {};
-    obj.contract_address = message.contractAddress;
-    obj.deployer_address = message.deployerAddress;
-    obj.withdraw_address = message.withdrawAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
     return obj;
   },
   fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {

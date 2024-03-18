@@ -127,11 +127,11 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
     if (message.denomTraces) {
       obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.denom_traces = [];
+      obj.denom_traces = message.denomTraces;
     }
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;

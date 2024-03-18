@@ -128,9 +128,9 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.inflation_decay_factor = message.inflationDecayFactor;
-    obj.initial_inflation = message.initialInflation;
-    obj.variance = message.variance;
+    obj.inflation_decay_factor = message.inflationDecayFactor ?? "";
+    obj.initial_inflation = message.initialInflation ?? "";
+    obj.variance = message.variance ?? "";
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

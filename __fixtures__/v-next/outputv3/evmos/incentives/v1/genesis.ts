@@ -176,12 +176,12 @@ export const GenesisState = {
     if (message.incentives) {
       obj.incentives = message.incentives.map(e => e ? Incentive.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.incentives = [];
+      obj.incentives = message.incentives;
     }
     if (message.gasMeters) {
       obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.gas_meters = [];
+      obj.gas_meters = message.gasMeters;
     }
     return obj;
   },
@@ -307,10 +307,10 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.enable_incentives = message.enableIncentives;
-    obj.allocation_limit = message.allocationLimit;
-    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
-    obj.reward_scaler = message.rewardScaler;
+    obj.enable_incentives = message.enableIncentives === false ? undefined : message.enableIncentives;
+    obj.allocation_limit = message.allocationLimit === "" ? undefined : message.allocationLimit;
+    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier === "" ? undefined : message.incentivesEpochIdentifier;
+    obj.reward_scaler = message.rewardScaler === "" ? undefined : message.rewardScaler;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

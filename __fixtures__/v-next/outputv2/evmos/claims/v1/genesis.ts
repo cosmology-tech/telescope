@@ -180,7 +180,7 @@ export const GenesisState = {
     if (message.claimsRecords) {
       obj.claims_records = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toAmino(e) : undefined);
     } else {
-      obj.claims_records = [];
+      obj.claims_records = message.claimsRecords;
     }
     return obj;
   },
@@ -370,20 +370,20 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.enable_claims = message.enableClaims;
+    obj.enable_claims = message.enableClaims === false ? undefined : message.enableClaims;
     obj.airdrop_start_time = message.airdropStartTime ? Timestamp.toAmino(toTimestamp(message.airdropStartTime)) : undefined;
     obj.duration_until_decay = message.durationUntilDecay ? Duration.toAmino(message.durationUntilDecay) : undefined;
     obj.duration_of_decay = message.durationOfDecay ? Duration.toAmino(message.durationOfDecay) : undefined;
-    obj.claims_denom = message.claimsDenom;
+    obj.claims_denom = message.claimsDenom === "" ? undefined : message.claimsDenom;
     if (message.authorizedChannels) {
       obj.authorized_channels = message.authorizedChannels.map(e => e);
     } else {
-      obj.authorized_channels = [];
+      obj.authorized_channels = message.authorizedChannels;
     }
     if (message.evmChannels) {
       obj.evm_channels = message.evmChannels.map(e => e);
     } else {
-      obj.evm_channels = [];
+      obj.evm_channels = message.evmChannels;
     }
     return obj;
   },

@@ -80,7 +80,7 @@ export const fromAminoMethodFields = (
         default:
           switch (field.parsedType.type) {
             case "Enum":
-              return fromAminoJSON.array(args, arrayTypes.enum(args));
+              return fromAminoJSON.array(args, arrayTypes.enum());
             case "Type":
               return fromAminoJSON.array(args, arrayTypes.type(args));
           }

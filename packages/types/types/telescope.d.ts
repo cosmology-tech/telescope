@@ -115,6 +115,7 @@ interface TelescopeOpts {
         customTypes?: {
             useCosmosSDKDec?: boolean;
         };
+        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -124,6 +125,10 @@ interface TelescopeOpts {
         * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
         */
         useLegacyInlineEncoding?: boolean;
+        legacy?: {
+            useNullHandling?: boolean;
+            useOmitEmpty?: boolean;
+        };
     };
     lcdClients?: {
         enabled: boolean;

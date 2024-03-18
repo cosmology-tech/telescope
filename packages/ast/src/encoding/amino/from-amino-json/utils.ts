@@ -1,90 +1,130 @@
-import * as t from '@babel/types';
+import * as t from "@babel/types";
 import {
     BILLION,
     memberExpressionOrIdentifierAminoCaseField,
     shorthandProperty,
-    TypeLong
-} from '../../../utils';
-import { FromAminoParseField, fromAminoParseField } from './index'
-import { protoFieldsToArray } from '../utils';
-import { getOneOfs, getFieldOptionality } from '../../proto';
-import { ProtoField } from '@cosmology/types';
-import { GenericParseContext } from '../../context';
+    TypeLong,
+} from "../../../utils";
+import { FromAminoParseField, fromAminoParseField } from "./index";
+import { protoFieldsToArray } from "../utils";
+import { getFieldOptionality, getOneOfs } from "../../proto";
+import { ProtoField } from "@cosmology/types";
+import { GenericParseContext } from "../../context";
 
 export const fromAmino = {
     defaultType(args: FromAminoParseField) {
-        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+        if (
+            args.field.name === args.context.aminoCaseField(args.field) &&
+            args.scope.length === 1
+        ) {
             return shorthandProperty(args.field.name);
         }
+
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+
         return t.objectProperty(
             t.identifier(args.field.name),
-            memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
+            memberExpressionOrIdentifierAminoCaseField(
+                args.fieldPath,
+                args.context.aminoCaseField,
+                useNullHandling
+            )
         );
     },
 
     string(args: FromAminoParseField) {
-
-        if (args.field.name === args.context.aminoCaseField(args.field) && args.scope.length === 1) {
+        if (
+            args.field.name === args.context.aminoCaseField(args.field) &&
+            args.scope.length === 1
+        ) {
             return shorthandProperty(args.field.name);
         }
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
         return t.objectProperty(
             t.identifier(args.field.name),
-            memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
+            memberExpressionOrIdentifierAminoCaseField(
+                args.fieldPath,
+                args.context.aminoCaseField,
+                useNullHandling
+            )
         );
     },
 
     rawBytes(args: FromAminoParseField) {
-        args.context.addUtil('toUtf8');
+        args.context.addUtil("toUtf8");
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+        let prop = memberExpressionOrIdentifierAminoCaseField(
+            args.fieldPath,
+            args.context.aminoCaseField,
+            useNullHandling
+        );
+        let value = t.callExpression(t.identifier("toUtf8"), [
+            t.callExpression(
+                t.memberExpression(
+                    t.identifier("JSON"),
+                    t.identifier("stringify")
+                ),
+                [prop]
+            ),
+        ]);
         return t.objectProperty(
             t.identifier(args.field.name),
-            t.callExpression(
-                t.identifier('toUtf8'),
-                [
-                    t.callExpression(
-                        t.memberExpression(
-                            t.identifier('JSON'),
-                            t.identifier('stringify')
-                        ),
-                        [
-                            memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                        ]
-                    )
-                ]
-            )
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
     wasmByteCode(args: FromAminoParseField) {
-        args.context.addUtil('fromBase64');
+        args.context.addUtil("fromBase64");
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+        let prop = memberExpressionOrIdentifierAminoCaseField(
+            args.fieldPath,
+            args.context.aminoCaseField,
+            useNullHandling
+        );
+        let value = t.callExpression(t.identifier("fromBase64"), [prop]);
         return t.objectProperty(
             t.identifier(args.field.name),
-            t.callExpression(
-                t.identifier('fromBase64'),
-                [
-                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                ]
-            )
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
         );
     },
 
     long(args: FromAminoParseField) {
         TypeLong.addUtil(args.context);
-
-        return t.objectProperty(t.identifier(args.field.name),
-            t.callExpression(
-                TypeLong.getFromString(args.context),
-                [
-                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                ]
-            ));
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+        const prop = memberExpressionOrIdentifierAminoCaseField(
+            args.fieldPath,
+            args.context.aminoCaseField,
+            useNullHandling
+        );
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            this.nullCheckCondition(
+                prop,
+                prop,
+                t.callExpression(TypeLong.getFromString(args.context), [prop]),
+                useNullHandling
+            )
+        );
     },
 
     duration(args: FromAminoParseField) {
-        const durationFormat = args.context.pluginValue('prototypes.typingsFormat.duration');
+        const durationFormat = args.context.pluginValue(
+            "prototypes.typingsFormat.duration"
+        );
         switch (durationFormat) {
-            case 'duration':
+            case "duration":
             // TODO duration amino type
-            case 'string':
+            case "string":
             default:
                 return fromAmino.durationString(args);
         }
@@ -92,139 +132,203 @@ export const fromAmino = {
 
     durationString(args: FromAminoParseField) {
         TypeLong.addUtil(args.context);
-
-        const value = t.objectExpression(
-            [
-                t.objectProperty(t.identifier('seconds'), t.callExpression(
-                    TypeLong.getFromNumber(args.context), [
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+        let property = memberExpressionOrIdentifierAminoCaseField(
+            args.fieldPath,
+            args.context.aminoCaseField,
+            useNullHandling
+        );
+        const value = t.objectExpression([
+            t.objectProperty(
+                t.identifier("seconds"),
+                t.callExpression(TypeLong.getFromNumber(args.context), [
                     t.callExpression(
                         t.memberExpression(
-                            t.identifier('Math'),
-                            t.identifier('floor')
+                            t.identifier("Math"),
+                            t.identifier("floor")
                         ),
                         [
-                            t.binaryExpression('/',
-                                t.callExpression(
-                                    t.identifier('parseInt'),
-                                    [
-                                        memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                                    ]
-                                ),
+                            t.binaryExpression(
+                                "/",
+                                t.callExpression(t.identifier("parseInt"), [
+                                    property,
+                                ]),
                                 BILLION
-                            )
+                            ),
                         ]
-                    )
-                ]
-                )),
-                t.objectProperty(
-                    t.identifier('nanos'),
-                    t.binaryExpression('%',
-                        t.callExpression(
-                            t.identifier('parseInt'),
-                            [
-                                memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                            ]
-                        ),
-                        BILLION
-                    )
+                    ),
+                ])
+            ),
+            t.objectProperty(
+                t.identifier("nanos"),
+                t.binaryExpression(
+                    "%",
+                    t.callExpression(t.identifier("parseInt"), [property]),
+                    BILLION
                 )
-            ]
+            ),
+        ]);
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            this.nullCheckCondition(property, property, value, useNullHandling)
         );
-        return t.objectProperty(t.identifier(args.field.name), value);
     },
 
     height(args: FromAminoParseField) {
         TypeLong.addUtil(args.context);
         const longType = TypeLong.getType(args.context);
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
 
         let revisionHeightArgs: t.Expression[] = [
             t.logicalExpression(
-                '||',
+                "||",
                 t.memberExpression(
-                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                    t.identifier(args.context.aminoCasingFn('revision_height'))
+                    memberExpressionOrIdentifierAminoCaseField(
+                        args.fieldPath,
+                        args.context.aminoCaseField,
+                        useNullHandling
+                    ),
+                    t.identifier(args.context.aminoCasingFn("revision_height")),
+                    false,
+                    true
                 ),
-                t.stringLiteral('0')
-            )
+                t.stringLiteral("0")
+            ),
         ];
 
         let revisionNumberArgs: t.Expression[] = [
             t.logicalExpression(
-                '||',
+                "||",
                 t.memberExpression(
-                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
-                    t.identifier(args.context.aminoCasingFn('revision_number'))
+                    memberExpressionOrIdentifierAminoCaseField(
+                        args.fieldPath,
+                        args.context.aminoCaseField,
+                        useNullHandling
+                    ),
+                    t.identifier(args.context.aminoCasingFn("revision_number")),
+                    false,
+                    true
                 ),
-                t.stringLiteral('0')
-            )
+                t.stringLiteral("0")
+            ),
         ];
 
-        if (longType == 'Long') {
-            revisionHeightArgs.push(t.booleanLiteral(true))
-            revisionNumberArgs.push(t.booleanLiteral(true))
+        if (longType == "Long") {
+            revisionHeightArgs.push(t.booleanLiteral(true));
+            revisionNumberArgs.push(t.booleanLiteral(true));
         }
 
         return t.objectProperty(
             t.identifier(args.field.name),
             t.conditionalExpression(
-                memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField),
+                memberExpressionOrIdentifierAminoCaseField(
+                    args.fieldPath,
+                    args.context.aminoCaseField,
+                    useNullHandling
+                ),
                 t.objectExpression([
-                    t.objectProperty(t.identifier('revisionHeight'),
+                    t.objectProperty(
+                        t.identifier("revisionHeight"),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
                             revisionHeightArgs
                         )
                     ),
-                    t.objectProperty(t.identifier('revisionNumber'),
+                    t.objectProperty(
+                        t.identifier("revisionNumber"),
                         t.callExpression(
                             TypeLong.getFromString(args.context),
                             revisionNumberArgs
                         )
-                    )
+                    ),
                 ]),
-                t.identifier('undefined')
+                t.identifier("undefined")
             )
-        )
+        );
     },
 
-    enum({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
-        const enumFunction = context.lookupEnumFromJson(field, currentProtoPath);
-        const value = t.callExpression(
-            t.identifier(enumFunction), [
-            memberExpressionOrIdentifierAminoCaseField(fieldPath, context.aminoCaseField)
-        ]);
-        return t.objectProperty(t.identifier(field.name), value);
+    enum({
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        fieldPath,
+        nested,
+        isOptional,
+    }: FromAminoParseField) {
+        const enumFunction = context.lookupEnumFromJson(
+            field,
+            currentProtoPath
+        );
+        const useNullHandling = !!context.pluginValue('aminoEncoding.legacy.useNullHandling');
+        let prop = memberExpressionOrIdentifierAminoCaseField(
+            fieldPath,
+            context.aminoCaseField,
+            useNullHandling
+        );
+        const value = t.callExpression(t.identifier(enumFunction), [prop]);
+        return t.objectProperty(
+            t.identifier(field.name),
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
+        );
     },
 
-    enumArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
-        const enumFunction = context.lookupEnumFromJson(field, currentProtoPath);
-        const value = t.callExpression(
+    enumArray({
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        fieldPath,
+        nested,
+        isOptional,
+    }: FromAminoParseField) {
+        const useNullHandling = !!context.pluginValue('aminoEncoding.legacy.useNullHandling');
+        const enumFunction = context.lookupEnumFromJson(
+            field,
+            currentProtoPath
+        );
+        const callExpression = useNullHandling ? t.optionalCallExpression : t.callExpression;
+        const value = callExpression(
             t.memberExpression(
-                memberExpressionOrIdentifierAminoCaseField(fieldPath, context.aminoCaseField),
-                t.identifier('map')
+                memberExpressionOrIdentifierAminoCaseField(
+                    fieldPath,
+                    context.aminoCaseField,
+                    useNullHandling
+                ),
+                t.identifier("map"),
+                false,
+                true
             ),
             [
                 t.arrowFunctionExpression(
-                    [
-                        t.identifier('el')
-                    ],
-                    t.callExpression(
-                        t.identifier(enumFunction),
-                        [
-                            t.identifier('el')
-                        ]
-                    )
-                )
-            ]
+                    [t.identifier("el")],
+                    t.callExpression(t.identifier(enumFunction), [
+                        t.identifier("el"),
+                    ])
+                ),
+            ],
+            true
         );
         return t.objectProperty(t.identifier(field.name), value);
     },
 
-    type({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
+    type({
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        fieldPath,
+        nested,
+        isOptional,
+    }: FromAminoParseField) {
         const parentField = field;
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
-        const properties = protoFieldsToArray(Type).map(field => {
+        const properties = protoFieldsToArray(Type).map((field) => {
             const isOneOf = oneOfs.includes(field.name);
             const isOptional = getFieldOptionality(context, field, isOneOf);
 
@@ -236,46 +340,66 @@ export const fromAmino = {
                 scope: [...scope],
                 fieldPath: [...fieldPath],
                 nested: nested + 1,
-                isOptional // TODO how to handle nested optionality?
-            })
+                isOptional, // TODO how to handle nested optionality?
+            });
         });
-        return t.objectProperty(t.identifier(field.name),
-            t.objectExpression(
-                properties
-            )
+        const useNullHandling = !!context.pluginValue('aminoEncoding.legacy.useNullHandling');
+        let prop = memberExpressionOrIdentifierAminoCaseField(
+            fieldPath,
+            context.aminoCaseField,
+            useNullHandling
+        );
+
+        return t.objectProperty(
+            t.identifier(field.name),
+            this.nullCheckCondition(prop, prop, t.objectExpression(properties), useNullHandling)
         );
     },
 
     arrayFrom(args: FromAminoParseField) {
-        return t.objectProperty(t.identifier(args.field.name),
-            t.callExpression(
-                t.memberExpression(
-                    t.identifier('Array'),
-                    t.identifier('from')
-                ),
-                [
-                    memberExpressionOrIdentifierAminoCaseField(args.fieldPath, args.context.aminoCaseField)
-                ]
-            ));
+        const useNullHandling = !!args.context.pluginValue(
+            "aminoEncoding.legacy.useNullHandling"
+        );
+        let prop = memberExpressionOrIdentifierAminoCaseField(
+            args.fieldPath,
+            args.context.aminoCaseField,
+            useNullHandling
+        );
+        let value = t.callExpression(
+            t.memberExpression(t.identifier("Array"), t.identifier("from")),
+            [prop]
+        );
+        return t.objectProperty(
+            t.identifier(args.field.name),
+            this.nullCheckCondition(prop, prop, value, useNullHandling)
+        );
     },
 
-    typeArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField) {
+    typeArray({
+        context,
+        field,
+        currentProtoPath,
+        scope,
+        fieldPath,
+        nested,
+        isOptional,
+    }: FromAminoParseField) {
         //////
-        const variable = 'el' + nested;
+        const variable = "el" + nested;
         const f = JSON.parse(JSON.stringify(field)); // clone
         const varProto: ProtoField = {
-            ...f
+            ...f,
         };
         varProto.name = variable;
-        varProto.options['(telescope:orig)'] = variable;
-        varProto.options['(telescope:name)'] = variable;
-        varProto.options['(telescope:camel)'] = variable;
+        varProto.options["(telescope:orig)"] = variable;
+        varProto.options["(telescope:name)"] = variable;
+        varProto.options["(telescope:camel)"] = variable;
         //////
 
         const parentField = field;
         const Type = context.getTypeFromCurrentPath(field, currentProtoPath);
         const oneOfs = getOneOfs(Type);
-        const properties = protoFieldsToArray(Type).map(field => {
+        const properties = protoFieldsToArray(Type).map((field) => {
             const isOneOf = oneOfs.includes(field.name);
             const isOptional = getFieldOptionality(context, field, isOneOf);
 
@@ -288,81 +412,110 @@ export const fromAmino = {
                 scope: [variable],
                 fieldPath: [varProto],
                 nested: nested + 1,
-                isOptional // TODO how to handle nested optionality?
-            })
+                isOptional, // TODO how to handle nested optionality?
+            });
         });
+        const useNullHandling = !!context.pluginValue('aminoEncoding.legacy.useNullHandling');
 
-        const expr = t.callExpression(
+        const callExpression = useNullHandling ? t.optionalCallExpression : t.callExpression;
+
+        const expr = callExpression(
             t.memberExpression(
-                memberExpressionOrIdentifierAminoCaseField(fieldPath, context.aminoCaseField),
-                t.identifier('map')
+                memberExpressionOrIdentifierAminoCaseField(
+                    fieldPath,
+                    context.aminoCaseField,
+                    useNullHandling
+                ),
+                t.identifier("map"),
+                false,
+                true
             ),
             [
                 t.arrowFunctionExpression(
-                    [
-                        t.identifier(variable)
-                    ],
-                    t.objectExpression(
-                        properties
-                    )
-                )
-            ]
+                    [t.identifier(variable)],
+                    t.objectExpression(properties)
+                ),
+            ],
+            true
         );
 
-        return t.objectProperty(t.identifier(field.name),
-            expr
-        );
+        return t.objectProperty(t.identifier(field.name), expr);
     },
 
+    scalarArray(
+        {
+            context,
+            field,
+            currentProtoPath,
+            scope,
+            fieldPath,
+            nested,
+            isOptional,
+        }: FromAminoParseField,
+        arrayTypeAstFunc: Function
+    ) {
+        const variable = "el" + nested;
+        const useNullHandling = !!context.pluginValue('aminoEncoding.legacy.useNullHandling');
 
-    scalarArray({ context, field, currentProtoPath, scope, fieldPath, nested, isOptional }: FromAminoParseField, arrayTypeAstFunc: Function) {
-        const variable = 'el' + nested;
+        const callExpression = useNullHandling ? t.optionalCallExpression : t.callExpression;
 
-        const expr = t.callExpression(
+        const expr = callExpression(
             t.memberExpression(
-                memberExpressionOrIdentifierAminoCaseField(fieldPath, context.aminoCaseField),
-                t.identifier('map')
+                memberExpressionOrIdentifierAminoCaseField(
+                    fieldPath,
+                    context.aminoCaseField,
+                    useNullHandling
+                ),
+                t.identifier("map"),
+                false,
+                true
             ),
             [
                 t.arrowFunctionExpression(
-                    [
-                        t.identifier(variable)
-                    ],
+                    [t.identifier(variable)],
                     arrayTypeAstFunc(variable, context)
-                )
-            ]
+                ),
+            ],
+            true
         );
 
-        return t.objectProperty(t.identifier(field.name),
-            expr
-        );
+        return t.objectProperty(t.identifier(field.name), expr);
     },
 
     pubkey(args: FromAminoParseField) {
-        args.context.addUtil('encodePubkey');
+        args.context.addUtil("encodePubkey");
 
         return t.objectProperty(
             t.identifier(args.field.name),
-            t.callExpression(
-                t.identifier('encodePubkey'),
-                [
-                  t.identifier('pubkey')
-                ]
-            )
-        )
-    }
-};
+            t.callExpression(t.identifier("encodePubkey"), [
+                t.identifier("pubkey"),
+            ])
+        );
+    },
 
+    /**
+     *  value == null ? nullExpr : nonNullExpr
+     */
+    nullCheckCondition(
+        value: t.Expression,
+        nullExpr: t.Expression,
+        nonNullExpr: t.Expression,
+        useNullHandling: boolean = false
+    ) {
+        return useNullHandling ? t.conditionalExpression(
+            t.binaryExpression("==", value, t.nullLiteral()),
+            nullExpr,
+            nonNullExpr
+        ) : nonNullExpr;
+    },
+};
 
 export const arrayTypes = {
     long(varname: string, ctx: GenericParseContext) {
         TypeLong.addUtil(ctx);
 
-        return t.callExpression(
-            TypeLong.getFromString(ctx),
-            [
-                t.identifier(varname)
-            ]
-        )
-    }
-}
+        return t.callExpression(TypeLong.getFromString(ctx), [
+            t.identifier(varname),
+        ]);
+    },
+};

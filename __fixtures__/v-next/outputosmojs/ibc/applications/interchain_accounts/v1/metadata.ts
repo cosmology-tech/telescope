@@ -187,12 +187,12 @@ export const Metadata = {
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.version = message.version;
-    obj.controller_connection_id = message.controllerConnectionId;
-    obj.host_connection_id = message.hostConnectionId;
-    obj.address = message.address;
-    obj.encoding = message.encoding;
-    obj.tx_type = message.txType;
+    obj.version = message.version === "" ? undefined : message.version;
+    obj.controller_connection_id = message.controllerConnectionId === "" ? undefined : message.controllerConnectionId;
+    obj.host_connection_id = message.hostConnectionId === "" ? undefined : message.hostConnectionId;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.encoding = message.encoding === "" ? undefined : message.encoding;
+    obj.tx_type = message.txType === "" ? undefined : message.txType;
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

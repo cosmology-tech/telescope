@@ -355,7 +355,7 @@ export const CheckError = {
   fromAmino(object: CheckErrorAmino): CheckError {
     const message = createBaseCheckError();
     if (object.code !== undefined && object.code !== null) {
-      message.code = checkError_CodeFromJSON(object.code);
+      message.code = object.code;
     }
     if (object.subject !== undefined && object.subject !== null) {
       message.subject = object.subject;
@@ -370,9 +370,9 @@ export const CheckError = {
   },
   toAmino(message: CheckError): CheckErrorAmino {
     const obj: any = {};
-    obj.code = message.code;
-    obj.subject = message.subject;
-    obj.detail = message.detail;
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.subject = message.subject === "" ? undefined : message.subject;
+    obj.detail = message.detail === "" ? undefined : message.detail;
     obj.status = message.status ? Status.toAmino(message.status) : undefined;
     return obj;
   },

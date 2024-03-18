@@ -89,7 +89,7 @@ export const GenesisState = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     return obj;
   },

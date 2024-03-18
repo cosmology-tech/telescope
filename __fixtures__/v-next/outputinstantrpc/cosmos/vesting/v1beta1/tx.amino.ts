@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Period, PeriodSDKType } from "./vesting";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgCreateVestingAccount, MsgCreateVestingAccountSDKType, MsgCreatePermanentLockedAccount, MsgCreatePermanentLockedAccountSDKType, MsgCreatePeriodicVestingAccount, MsgCreatePeriodicVestingAccountSDKType } from "./tx";
 export interface MsgCreateVestingAccountAminoType extends AminoMsg {
   type: "cosmos-sdk/MsgCreateVestingAccount";
@@ -58,8 +59,8 @@ export const AminoConverter = {
           denom: el0.denom,
           amount: el0.amount
         })),
-        end_time: endTime.toString(),
-        delayed
+        end_time: omitDefault(endTime)?.toString?.(),
+        delayed: omitDefault(delayed)
       };
     },
     fromAmino: ({
@@ -72,11 +73,11 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         })),
-        endTime: BigInt(end_time),
+        endTime: end_time == null ? end_time : BigInt(end_time),
         delayed
       };
     }
@@ -105,7 +106,7 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        amount: amount.map(el0 => ({
+        amount: amount.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -123,9 +124,9 @@ export const AminoConverter = {
       return {
         from_address: fromAddress,
         to_address: toAddress,
-        start_time: startTime.toString(),
+        start_time: omitDefault(startTime)?.toString?.(),
         vesting_periods: vestingPeriods.map(el0 => ({
-          length: el0.length.toString(),
+          length: omitDefault(el0.length)?.toString?.(),
           amount: el0.amount.map(el1 => ({
             denom: el1.denom,
             amount: el1.amount
@@ -142,10 +143,10 @@ export const AminoConverter = {
       return {
         fromAddress: from_address,
         toAddress: to_address,
-        startTime: BigInt(start_time),
-        vestingPeriods: vesting_periods.map(el0 => ({
-          length: BigInt(el0.length),
-          amount: el0.amount.map(el1 => ({
+        startTime: start_time == null ? start_time : BigInt(start_time),
+        vestingPeriods: vesting_periods.map?.(el0 => ({
+          length: el0.length == null ? el0.length : BigInt(el0.length),
+          amount: el0.amount.map?.(el1 => ({
             denom: el1.denom,
             amount: el1.amount
           }))

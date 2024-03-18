@@ -278,7 +278,7 @@ export const QueryModuleAccountBalanceResponse = {
     if (message.moduleAccountBalance) {
       obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.moduleAccountBalance = [];
+      obj.moduleAccountBalance = message.moduleAccountBalance;
     }
     return obj;
   },
@@ -506,7 +506,7 @@ export const QueryClaimRecordRequest = {
   },
   toAmino(message: QueryClaimRecordRequest, useInterfaces: boolean = true): QueryClaimRecordRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: QueryClaimRecordRequestProtoMsg, useInterfaces: boolean = true): QueryClaimRecordRequest {
@@ -679,14 +679,14 @@ export const QueryClaimableForActionRequest = {
       message.address = object.address;
     }
     if (object.action !== undefined && object.action !== null) {
-      message.action = actionFromJSON(object.action);
+      message.action = object.action;
     }
     return message;
   },
   toAmino(message: QueryClaimableForActionRequest, useInterfaces: boolean = true): QueryClaimableForActionRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.action = message.action;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.action = message.action === 0 ? undefined : message.action;
     return obj;
   },
   fromProtoMsg(message: QueryClaimableForActionRequestProtoMsg, useInterfaces: boolean = true): QueryClaimableForActionRequest {
@@ -776,7 +776,7 @@ export const QueryClaimableForActionResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -858,7 +858,7 @@ export const QueryTotalClaimableRequest = {
   },
   toAmino(message: QueryTotalClaimableRequest, useInterfaces: boolean = true): QueryTotalClaimableRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: QueryTotalClaimableRequestProtoMsg, useInterfaces: boolean = true): QueryTotalClaimableRequest {
@@ -948,7 +948,7 @@ export const QueryTotalClaimableResponse = {
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },

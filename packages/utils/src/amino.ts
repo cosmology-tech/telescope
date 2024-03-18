@@ -7,6 +7,7 @@ import {
   ProtoRef,
   TelescopeOptions,
   IParseContext,
+  ProtoField,
 } from "@cosmology/types";
 import { kebab } from "case";
 
@@ -123,4 +124,44 @@ export const getAminoTypeNameByRef = (
       return typeUrl;
     }
   }
+};
+
+/**
+ * Determines whether a field should be omitted when serializing to JSON based on its JSON tag options.
+ *
+ * @param ctx - The parse context.
+ * @param field - The field to check.
+ * @returns A boolean indicating whether the field should be omitted.
+ */
+export const shouldOmitEmpty = (
+  ctx: IParseContext,
+  field: ProtoField
+): boolean => {
+  const omitEmptyTags = ctx.pluginValue("aminoEncoding.omitEmptyTags") ?? [];
+
+  if (omitEmptyTags.includes("omitempty")) {
+    // omitempty
+    // if any of gogoproto.jsontag or cosmos_proto.json_tag has omitempty, it should be omitted
+    let gogoJsonTag = field.options?.["(gogoproto.jsontag)"];
+    let cosmosJsonTag = field.options?.["(cosmos_proto.json_tag)"];
+
+    if (gogoJsonTag || cosmosJsonTag) {
+      return (
+        !!gogoJsonTag?.split(",").includes("omitempty") ||
+        !!cosmosJsonTag?.split(",").includes("omitempty")
+      );
+    }
+  }
+
+  if (omitEmptyTags.includes("dont_omitempty")) {
+    // dont_omitempty
+    //    null: should omit
+    //    true: should not omit
+    //    false: should omit
+    const dontOmitempty = !!field?.options?.["(amino.dont_omitempty)"];
+
+    return !dontOmitempty;
+  }
+
+  return true;
 };

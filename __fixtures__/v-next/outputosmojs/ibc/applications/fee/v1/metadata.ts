@@ -108,8 +108,8 @@ export const Metadata = {
   },
   toAmino(message: Metadata): MetadataAmino {
     const obj: any = {};
-    obj.fee_version = message.feeVersion;
-    obj.app_version = message.appVersion;
+    obj.fee_version = message.feeVersion === "" ? undefined : message.feeVersion;
+    obj.app_version = message.appVersion === "" ? undefined : message.appVersion;
     return obj;
   },
   fromAminoMsg(object: MetadataAminoMsg): Metadata {

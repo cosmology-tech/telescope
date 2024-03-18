@@ -195,8 +195,8 @@ export const FullTick = {
   },
   toAmino(message: FullTick): FullTickAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.tick_index = message.tickIndex ? message.tickIndex.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.tick_index = message.tickIndex !== BigInt(0) ? message.tickIndex.toString() : undefined;
     obj.info = message.info ? TickInfo.toAmino(message.info) : undefined;
     return obj;
   },
@@ -377,18 +377,18 @@ export const PoolData = {
     if (message.ticks) {
       obj.ticks = message.ticks.map(e => e ? FullTick.toAmino(e) : undefined);
     } else {
-      obj.ticks = [];
+      obj.ticks = message.ticks;
     }
     obj.fee_accumulator = message.feeAccumulator ? AccumObject.toAmino(message.feeAccumulator) : undefined;
     if (message.incentivesAccumulators) {
       obj.incentives_accumulators = message.incentivesAccumulators.map(e => e ? AccumObject.toAmino(e) : undefined);
     } else {
-      obj.incentives_accumulators = [];
+      obj.incentives_accumulators = message.incentivesAccumulators;
     }
     if (message.incentiveRecords) {
       obj.incentive_records = message.incentiveRecords.map(e => e ? IncentiveRecord.toAmino(e) : undefined);
     } else {
-      obj.incentive_records = [];
+      obj.incentive_records = message.incentiveRecords;
     }
     return obj;
   },
@@ -547,14 +547,14 @@ export const GenesisState = {
     if (message.poolData) {
       obj.pool_data = message.poolData.map(e => e ? PoolData.toAmino(e) : undefined);
     } else {
-      obj.pool_data = [];
+      obj.pool_data = message.poolData;
     }
     if (message.positions) {
       obj.positions = message.positions.map(e => e ? Position.toAmino(e) : undefined);
     } else {
-      obj.positions = [];
+      obj.positions = message.positions;
     }
-    obj.next_position_id = message.nextPositionId ? message.nextPositionId.toString() : undefined;
+    obj.next_position_id = message.nextPositionId !== BigInt(0) ? message.nextPositionId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -664,7 +664,7 @@ export const AccumObject = {
   },
   toAmino(message: AccumObject): AccumObjectAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.accum_content = message.accumContent ? AccumulatorContent.toAmino(message.accumContent) : undefined;
     return obj;
   },

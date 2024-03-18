@@ -173,7 +173,7 @@ export const GenesisState = {
     if (message.devFeeInfos) {
       obj.dev_fee_infos = message.devFeeInfos.map(e => e ? DevFeeInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.dev_fee_infos = [];
+      obj.dev_fee_infos = message.devFeeInfos;
     }
     return obj;
   },
@@ -316,11 +316,11 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.enable_fees = message.enableFees;
-    obj.developer_shares = message.developerShares;
-    obj.validator_shares = message.validatorShares;
-    obj.addr_derivation_cost_create = message.addrDerivationCostCreate ? message.addrDerivationCostCreate.toString() : undefined;
-    obj.min_gas_price = message.minGasPrice;
+    obj.enable_fees = message.enableFees === false ? undefined : message.enableFees;
+    obj.developer_shares = message.developerShares === "" ? undefined : message.developerShares;
+    obj.validator_shares = message.validatorShares === "" ? undefined : message.validatorShares;
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate !== BigInt(0) ? message.addrDerivationCostCreate.toString() : undefined;
+    obj.min_gas_price = message.minGasPrice === "" ? undefined : message.minGasPrice;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {

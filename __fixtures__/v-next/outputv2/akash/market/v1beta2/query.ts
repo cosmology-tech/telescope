@@ -463,7 +463,7 @@ export const QueryOrdersResponse = {
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toAmino(e) : undefined);
     } else {
-      obj.orders = [];
+      obj.orders = message.orders;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -847,7 +847,7 @@ export const QueryBidsResponse = {
     if (message.bids) {
       obj.bids = message.bids.map(e => e ? QueryBidResponse.toAmino(e) : undefined);
     } else {
-      obj.bids = [];
+      obj.bids = message.bids;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1249,7 +1249,7 @@ export const QueryLeasesResponse = {
     if (message.leases) {
       obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toAmino(e) : undefined);
     } else {
-      obj.leases = [];
+      obj.leases = message.leases;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

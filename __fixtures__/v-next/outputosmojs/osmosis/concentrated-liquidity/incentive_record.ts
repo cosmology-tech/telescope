@@ -207,9 +207,9 @@ export const IncentiveRecord = {
   },
   toAmino(message: IncentiveRecord): IncentiveRecordAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.incentive_denom = message.incentiveDenom;
-    obj.incentive_creator_addr = message.incentiveCreatorAddr;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.incentive_denom = message.incentiveDenom === "" ? undefined : message.incentiveDenom;
+    obj.incentive_creator_addr = message.incentiveCreatorAddr === "" ? undefined : message.incentiveCreatorAddr;
     obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toAmino(message.incentiveRecordBody) : undefined;
     obj.min_uptime = message.minUptime ? Duration.toAmino(message.minUptime) : undefined;
     return obj;
@@ -337,8 +337,8 @@ export const IncentiveRecordBody = {
   },
   toAmino(message: IncentiveRecordBody): IncentiveRecordBodyAmino {
     const obj: any = {};
-    obj.remaining_amount = message.remainingAmount;
-    obj.emission_rate = message.emissionRate;
+    obj.remaining_amount = message.remainingAmount === "" ? undefined : message.remainingAmount;
+    obj.emission_rate = message.emissionRate === "" ? undefined : message.emissionRate;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     return obj;
   },

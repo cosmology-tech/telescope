@@ -250,11 +250,11 @@ export const MsgSetValidatorSetPreference = {
   },
   toAmino(message: MsgSetValidatorSetPreference): MsgSetValidatorSetPreferenceAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
     } else {
-      obj.preferences = [];
+      obj.preferences = message.preferences;
     }
     return obj;
   },
@@ -438,7 +438,7 @@ export const MsgDelegateToValidatorSet = {
   },
   toAmino(message: MsgDelegateToValidatorSet): MsgDelegateToValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
     return obj;
   },
@@ -622,7 +622,7 @@ export const MsgUndelegateFromValidatorSet = {
   },
   toAmino(message: MsgUndelegateFromValidatorSet): MsgUndelegateFromValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
     obj.coin = message.coin ? Coin.toAmino(message.coin) : undefined;
     return obj;
   },
@@ -812,11 +812,11 @@ export const MsgRedelegateValidatorSet = {
   },
   toAmino(message: MsgRedelegateValidatorSet): MsgRedelegateValidatorSetAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toAmino(e) : undefined);
     } else {
-      obj.preferences = [];
+      obj.preferences = message.preferences;
     }
     return obj;
   },
@@ -984,7 +984,7 @@ export const MsgWithdrawDelegationRewards = {
   },
   toAmino(message: MsgWithdrawDelegationRewards): MsgWithdrawDelegationRewardsAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
     return obj;
   },
   fromAminoMsg(object: MsgWithdrawDelegationRewardsAminoMsg): MsgWithdrawDelegationRewards {
@@ -1167,8 +1167,8 @@ export const MsgDelegateBondedTokens = {
   },
   toAmino(message: MsgDelegateBondedTokens): MsgDelegateBondedTokensAmino {
     const obj: any = {};
-    obj.delegator = message.delegator;
-    obj.lockID = message.lockID ? message.lockID.toString() : undefined;
+    obj.delegator = message.delegator === "" ? undefined : message.delegator;
+    obj.lockID = message.lockID !== BigInt(0) ? message.lockID.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgDelegateBondedTokensAminoMsg): MsgDelegateBondedTokens {

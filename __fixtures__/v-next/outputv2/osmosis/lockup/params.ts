@@ -92,7 +92,7 @@ export const Params = {
     if (message.forceUnlockAllowedAddresses) {
       obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
     } else {
-      obj.force_unlock_allowed_addresses = [];
+      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses;
     }
     return obj;
   },

@@ -210,22 +210,22 @@ export const GenesisState = {
     if (message.superfluidAssets) {
       obj.superfluid_assets = message.superfluidAssets.map(e => e ? SuperfluidAsset.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.superfluid_assets = [];
+      obj.superfluid_assets = message.superfluidAssets;
     }
     if (message.osmoEquivalentMultipliers) {
       obj.osmo_equivalent_multipliers = message.osmoEquivalentMultipliers.map(e => e ? OsmoEquivalentMultiplierRecord.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.osmo_equivalent_multipliers = [];
+      obj.osmo_equivalent_multipliers = message.osmoEquivalentMultipliers;
     }
     if (message.intermediaryAccounts) {
       obj.intermediary_accounts = message.intermediaryAccounts.map(e => e ? SuperfluidIntermediaryAccount.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.intermediary_accounts = [];
+      obj.intermediary_accounts = message.intermediaryAccounts;
     }
     if (message.intemediaryAccountConnections) {
       obj.intemediary_account_connections = message.intemediaryAccountConnections.map(e => e ? LockIdIntermediaryAccountConnection.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.intemediary_account_connections = [];
+      obj.intemediary_account_connections = message.intemediaryAccountConnections;
     }
     return obj;
   },

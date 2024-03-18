@@ -276,12 +276,12 @@ export const Logging = {
     if (message.producerDestinations) {
       obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.producer_destinations = [];
+      obj.producer_destinations = message.producerDestinations;
     }
     if (message.consumerDestinations) {
       obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.consumer_destinations = [];
+      obj.consumer_destinations = message.consumerDestinations;
     }
     return obj;
   },
@@ -383,11 +383,11 @@ export const Logging_LoggingDestination = {
   },
   toAmino(message: Logging_LoggingDestination, useInterfaces: boolean = true): Logging_LoggingDestinationAmino {
     const obj: any = {};
-    obj.monitored_resource = message.monitoredResource;
+    obj.monitored_resource = message.monitoredResource === "" ? undefined : message.monitoredResource;
     if (message.logs) {
       obj.logs = message.logs.map(e => e);
     } else {
-      obj.logs = [];
+      obj.logs = message.logs;
     }
     return obj;
   },

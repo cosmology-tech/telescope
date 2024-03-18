@@ -152,8 +152,8 @@ export const DenomTrace = {
   },
   toAmino(message: DenomTrace): DenomTraceAmino {
     const obj: any = {};
-    obj.path = message.path;
-    obj.base_denom = message.baseDenom;
+    obj.path = message.path === "" ? undefined : message.path;
+    obj.base_denom = message.baseDenom === "" ? undefined : message.baseDenom;
     return obj;
   },
   fromAminoMsg(object: DenomTraceAminoMsg): DenomTrace {
@@ -233,8 +233,8 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.send_enabled = message.sendEnabled;
-    obj.receive_enabled = message.receiveEnabled;
+    obj.send_enabled = message.sendEnabled === false ? undefined : message.sendEnabled;
+    obj.receive_enabled = message.receiveEnabled === false ? undefined : message.receiveEnabled;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

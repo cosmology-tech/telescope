@@ -273,21 +273,21 @@ export const ConfigChange = {
       message.newValue = object.new_value;
     }
     if (object.change_type !== undefined && object.change_type !== null) {
-      message.changeType = changeTypeFromJSON(object.change_type);
+      message.changeType = object.change_type;
     }
     message.advices = object.advices?.map(e => Advice.fromAmino(e)) || [];
     return message;
   },
   toAmino(message: ConfigChange): ConfigChangeAmino {
     const obj: any = {};
-    obj.element = message.element;
-    obj.old_value = message.oldValue;
-    obj.new_value = message.newValue;
-    obj.change_type = message.changeType;
+    obj.element = message.element === "" ? undefined : message.element;
+    obj.old_value = message.oldValue === "" ? undefined : message.oldValue;
+    obj.new_value = message.newValue === "" ? undefined : message.newValue;
+    obj.change_type = message.changeType === 0 ? undefined : message.changeType;
     if (message.advices) {
       obj.advices = message.advices.map(e => e ? Advice.toAmino(e) : undefined);
     } else {
-      obj.advices = [];
+      obj.advices = message.advices;
     }
     return obj;
   },
@@ -376,7 +376,7 @@ export const Advice = {
   },
   toAmino(message: Advice): AdviceAmino {
     const obj: any = {};
-    obj.description = message.description;
+    obj.description = message.description === "" ? undefined : message.description;
     return obj;
   },
   fromAminoMsg(object: AdviceAminoMsg): Advice {

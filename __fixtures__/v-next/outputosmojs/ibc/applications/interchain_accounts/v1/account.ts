@@ -102,7 +102,7 @@ export const InterchainAccount = {
   toAmino(message: InterchainAccount): InterchainAccountAmino {
     const obj: any = {};
     obj.base_account = message.baseAccount ? BaseAccount.toAmino(message.baseAccount) : undefined;
-    obj.account_owner = message.accountOwner;
+    obj.account_owner = message.accountOwner === "" ? undefined : message.accountOwner;
     return obj;
   },
   fromAminoMsg(object: InterchainAccountAminoMsg): InterchainAccount {

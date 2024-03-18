@@ -650,30 +650,30 @@ export const Type = {
       message.sourceContext = SourceContext.fromAmino(object.source_context);
     }
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Type): TypeAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.fields) {
       obj.fields = message.fields.map(e => e ? Field.toAmino(e) : undefined);
     } else {
-      obj.fields = [];
+      obj.fields = message.fields;
     }
     if (message.oneofs) {
       obj.oneofs = message.oneofs.map(e => e);
     } else {
-      obj.oneofs = [];
+      obj.oneofs = message.oneofs;
     }
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromAminoMsg(object: TypeAminoMsg): Type {
@@ -866,10 +866,10 @@ export const Field = {
   fromAmino(object: FieldAmino): Field {
     const message = createBaseField();
     if (object.kind !== undefined && object.kind !== null) {
-      message.kind = field_KindFromJSON(object.kind);
+      message.kind = object.kind;
     }
     if (object.cardinality !== undefined && object.cardinality !== null) {
-      message.cardinality = field_CardinalityFromJSON(object.cardinality);
+      message.cardinality = object.cardinality;
     }
     if (object.number !== undefined && object.number !== null) {
       message.number = object.number;
@@ -897,20 +897,20 @@ export const Field = {
   },
   toAmino(message: Field): FieldAmino {
     const obj: any = {};
-    obj.kind = message.kind;
-    obj.cardinality = message.cardinality;
-    obj.number = message.number;
-    obj.name = message.name;
-    obj.type_url = message.typeUrl;
-    obj.oneof_index = message.oneofIndex;
-    obj.packed = message.packed;
+    obj.kind = message.kind === 0 ? undefined : message.kind;
+    obj.cardinality = message.cardinality === 0 ? undefined : message.cardinality;
+    obj.number = message.number === 0 ? undefined : message.number;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type_url = message.typeUrl === "" ? undefined : message.typeUrl;
+    obj.oneof_index = message.oneofIndex === 0 ? undefined : message.oneofIndex;
+    obj.packed = message.packed === false ? undefined : message.packed;
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.json_name = message.jsonName;
-    obj.default_value = message.defaultValue;
+    obj.json_name = message.jsonName === "" ? undefined : message.jsonName;
+    obj.default_value = message.defaultValue === "" ? undefined : message.defaultValue;
     return obj;
   },
   fromAminoMsg(object: FieldAminoMsg): Field {
@@ -1061,25 +1061,25 @@ export const Enum = {
       message.sourceContext = SourceContext.fromAmino(object.source_context);
     }
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Enum): EnumAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.enumvalue) {
       obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toAmino(e) : undefined);
     } else {
-      obj.enumvalue = [];
+      obj.enumvalue = message.enumvalue;
     }
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
-    obj.syntax = message.syntax;
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromAminoMsg(object: EnumAminoMsg): Enum {
@@ -1198,12 +1198,12 @@ export const EnumValue = {
   },
   toAmino(message: EnumValue): EnumValueAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.number = message.number;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.number = message.number === 0 ? undefined : message.number;
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
     return obj;
   },
@@ -1304,7 +1304,7 @@ export const Option = {
   },
   toAmino(message: Option): OptionAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.value = message.value ? Any.toAmino(message.value) : undefined;
     return obj;
   },

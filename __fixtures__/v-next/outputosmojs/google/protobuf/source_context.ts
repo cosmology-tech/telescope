@@ -92,7 +92,7 @@ export const SourceContext = {
   },
   toAmino(message: SourceContext): SourceContextAmino {
     const obj: any = {};
-    obj.file_name = message.fileName;
+    obj.file_name = message.fileName === "" ? undefined : message.fileName;
     return obj;
   },
   fromAminoMsg(object: SourceContextAminoMsg): SourceContext {

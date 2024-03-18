@@ -692,7 +692,7 @@ export const FieldMask = {
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
     } else {
-      obj.paths = [];
+      obj.paths = message.paths;
     }
     return obj;
   },

@@ -12,7 +12,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisStateAmino {
-  attributes?: AuditedAttributesAmino[];
+  attributes: AuditedAttributesAmino[];
 }
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisStateSDKType {
@@ -91,7 +91,7 @@ export const GenesisState = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },

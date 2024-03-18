@@ -130,8 +130,8 @@ export const CertificateResponse = {
   },
   toAmino(message: CertificateResponse): CertificateResponseAmino {
     const obj: any = {};
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : undefined;
-    obj.serial = message.serial;
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate) : Certificate.toAmino(Certificate.fromPartial({}));
+    obj.serial = message.serial ?? "";
     return obj;
   },
   fromAminoMsg(object: CertificateResponseAminoMsg): CertificateResponse {
@@ -361,7 +361,7 @@ export const QueryCertificatesResponse = {
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? CertificateResponse.toAmino(e) : undefined);
     } else {
-      obj.certificates = [];
+      obj.certificates = message.certificates;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;

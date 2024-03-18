@@ -292,17 +292,17 @@ export const Pool = {
   },
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.incentives_address = message.incentivesAddress;
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.current_tick_liquidity = message.currentTickLiquidity;
-    obj.token0 = message.token0;
-    obj.token1 = message.token1;
-    obj.current_sqrt_price = message.currentSqrtPrice;
-    obj.current_tick = message.currentTick;
-    obj.tick_spacing = message.tickSpacing ? message.tickSpacing.toString() : undefined;
-    obj.exponent_at_price_one = message.exponentAtPriceOne;
-    obj.swap_fee = message.swapFee;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.incentives_address = message.incentivesAddress === "" ? undefined : message.incentivesAddress;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.current_tick_liquidity = message.currentTickLiquidity === "" ? undefined : message.currentTickLiquidity;
+    obj.token0 = message.token0 === "" ? undefined : message.token0;
+    obj.token1 = message.token1 === "" ? undefined : message.token1;
+    obj.current_sqrt_price = message.currentSqrtPrice === "" ? undefined : message.currentSqrtPrice;
+    obj.current_tick = message.currentTick === "" ? undefined : message.currentTick;
+    obj.tick_spacing = message.tickSpacing !== BigInt(0) ? message.tickSpacing.toString() : undefined;
+    obj.exponent_at_price_one = message.exponentAtPriceOne === "" ? undefined : message.exponentAtPriceOne;
+    obj.swap_fee = message.swapFee === "" ? undefined : message.swapFee;
     obj.last_liquidity_update = message.lastLiquidityUpdate ? Timestamp.toAmino(toTimestamp(message.lastLiquidityUpdate)) : undefined;
     return obj;
   },

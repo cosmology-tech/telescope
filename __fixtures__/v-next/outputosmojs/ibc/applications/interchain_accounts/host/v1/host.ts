@@ -114,11 +114,11 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.host_enabled = message.hostEnabled;
+    obj.host_enabled = message.hostEnabled === false ? undefined : message.hostEnabled;
     if (message.allowMessages) {
       obj.allow_messages = message.allowMessages.map(e => e);
     } else {
-      obj.allow_messages = [];
+      obj.allow_messages = message.allowMessages;
     }
     return obj;
   },

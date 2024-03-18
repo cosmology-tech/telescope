@@ -651,8 +651,8 @@ export const LogMetric_LabelExtractorsEntry = {
   },
   toAmino(message: LogMetric_LabelExtractorsEntry, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: LogMetric_LabelExtractorsEntryProtoMsg, useInterfaces: boolean = true): LogMetric_LabelExtractorsEntry {
@@ -912,18 +912,18 @@ export const LogMetric = {
       message.updateTime = fromTimestamp(Timestamp.fromAmino(object.update_time));
     }
     if (object.version !== undefined && object.version !== null) {
-      message.version = logMetric_ApiVersionFromJSON(object.version);
+      message.version = object.version;
     }
     return message;
   },
   toAmino(message: LogMetric, useInterfaces: boolean = true): LogMetricAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.disabled = message.disabled === false ? undefined : message.disabled;
     obj.metric_descriptor = message.metricDescriptor ? MetricDescriptor.toAmino(message.metricDescriptor, useInterfaces) : undefined;
-    obj.value_extractor = message.valueExtractor;
+    obj.value_extractor = message.valueExtractor === "" ? undefined : message.valueExtractor;
     obj.label_extractors = {};
     if (message.labelExtractors) {
       Object.entries(message.labelExtractors).forEach(([k, v]) => {
@@ -933,7 +933,7 @@ export const LogMetric = {
     obj.bucket_options = message.bucketOptions ? Distribution_BucketOptions.toAmino(message.bucketOptions, useInterfaces) : undefined;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
-    obj.version = message.version;
+    obj.version = message.version === 0 ? undefined : message.version;
     return obj;
   },
   fromProtoMsg(message: LogMetricProtoMsg, useInterfaces: boolean = true): LogMetric {
@@ -1043,9 +1043,9 @@ export const ListLogMetricsRequest = {
   },
   toAmino(message: ListLogMetricsRequest, useInterfaces: boolean = true): ListLogMetricsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromProtoMsg(message: ListLogMetricsRequestProtoMsg, useInterfaces: boolean = true): ListLogMetricsRequest {
@@ -1149,9 +1149,9 @@ export const ListLogMetricsResponse = {
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? LogMetric.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.metrics = [];
+      obj.metrics = message.metrics;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListLogMetricsResponseProtoMsg, useInterfaces: boolean = true): ListLogMetricsResponse {
@@ -1231,7 +1231,7 @@ export const GetLogMetricRequest = {
   },
   toAmino(message: GetLogMetricRequest, useInterfaces: boolean = true): GetLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = message.metricName === "" ? undefined : message.metricName;
     return obj;
   },
   fromProtoMsg(message: GetLogMetricRequestProtoMsg, useInterfaces: boolean = true): GetLogMetricRequest {
@@ -1328,7 +1328,7 @@ export const CreateLogMetricRequest = {
   },
   toAmino(message: CreateLogMetricRequest, useInterfaces: boolean = true): CreateLogMetricRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
@@ -1426,7 +1426,7 @@ export const UpdateLogMetricRequest = {
   },
   toAmino(message: UpdateLogMetricRequest, useInterfaces: boolean = true): UpdateLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = message.metricName === "" ? undefined : message.metricName;
     obj.metric = message.metric ? LogMetric.toAmino(message.metric, useInterfaces) : undefined;
     return obj;
   },
@@ -1507,7 +1507,7 @@ export const DeleteLogMetricRequest = {
   },
   toAmino(message: DeleteLogMetricRequest, useInterfaces: boolean = true): DeleteLogMetricRequestAmino {
     const obj: any = {};
-    obj.metric_name = message.metricName;
+    obj.metric_name = message.metricName === "" ? undefined : message.metricName;
     return obj;
   },
   fromProtoMsg(message: DeleteLogMetricRequestProtoMsg, useInterfaces: boolean = true): DeleteLogMetricRequest {

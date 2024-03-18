@@ -1,6 +1,7 @@
 import { ProtoType, ProtoField } from '@cosmology/types';
 import { pascal } from 'case';
 import { AminoParseContext, ProtoParseContext } from '../context';
+import { shouldOmitEmpty } from '@cosmology/utils';
 
 export const SCALAR_TYPES = [
     'string',
@@ -193,9 +194,7 @@ export const getFieldOptionalityForAmino = (
     return true;
   }
 
-  const dontOmitempty = !!field?.options?.['(amino.dont_omitempty)'];
-
-  return !dontOmitempty;
+  return shouldOmitEmpty(context, field)
 };
 
 export const isScalarField = (

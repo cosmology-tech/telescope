@@ -90,11 +90,11 @@ export const LegacyAminoPubKey = {
   },
   toAmino(message: LegacyAminoPubKey): LegacyAminoPubKeyAmino {
     const obj: any = {};
-    obj.threshold = message.threshold;
+    obj.threshold = message.threshold === 0 ? undefined : message.threshold;
     if (message.publicKeys) {
       obj.public_keys = message.publicKeys.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.public_keys = [];
+      obj.public_keys = message.publicKeys;
     }
     return obj;
   },

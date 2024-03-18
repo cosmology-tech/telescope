@@ -513,7 +513,7 @@ export const ParsedExpr = {
     const obj: any = {};
     obj.expr = message.expr ? Expr.toAmino(message.expr) : undefined;
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo) : undefined;
-    obj.syntax_version = message.syntaxVersion;
+    obj.syntax_version = message.syntaxVersion === "" ? undefined : message.syntaxVersion;
     return obj;
   },
   fromAminoMsg(object: ParsedExprAminoMsg): ParsedExpr {
@@ -727,7 +727,7 @@ export const Expr = {
   },
   toAmino(message: Expr): ExprAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = message.id === 0 ? undefined : message.id;
     obj.literal_expr = message.literalExpr ? Literal.toAmino(message.literalExpr) : undefined;
     obj.ident_expr = message.identExpr ? Expr_Ident.toAmino(message.identExpr) : undefined;
     obj.select_expr = message.selectExpr ? Expr_Select.toAmino(message.selectExpr) : undefined;
@@ -822,7 +822,7 @@ export const Expr_Ident = {
   },
   toAmino(message: Expr_Ident): Expr_IdentAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: Expr_IdentAminoMsg): Expr_Ident {
@@ -945,8 +945,8 @@ export const Expr_Select = {
   toAmino(message: Expr_Select): Expr_SelectAmino {
     const obj: any = {};
     obj.operand = message.operand ? Expr.toAmino(message.operand) : undefined;
-    obj.field = message.field;
-    obj.test_only = message.testOnly;
+    obj.field = message.field === "" ? undefined : message.field;
+    obj.test_only = message.testOnly === false ? undefined : message.testOnly;
     return obj;
   },
   fromAminoMsg(object: Expr_SelectAminoMsg): Expr_Select {
@@ -1075,11 +1075,11 @@ export const Expr_Call = {
   toAmino(message: Expr_Call): Expr_CallAmino {
     const obj: any = {};
     obj.target = message.target ? Expr.toAmino(message.target) : undefined;
-    obj.function = message.function;
+    obj.function = message.function === "" ? undefined : message.function;
     if (message.args) {
       obj.args = message.args.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
-      obj.args = [];
+      obj.args = message.args;
     }
     return obj;
   },
@@ -1177,7 +1177,7 @@ export const Expr_CreateList = {
     if (message.elements) {
       obj.elements = message.elements.map(e => e ? Expr.toAmino(e) : undefined);
     } else {
-      obj.elements = [];
+      obj.elements = message.elements;
     }
     return obj;
   },
@@ -1288,11 +1288,11 @@ export const Expr_CreateStruct = {
   },
   toAmino(message: Expr_CreateStruct): Expr_CreateStructAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toAmino(e) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },
@@ -1433,8 +1433,8 @@ export const Expr_CreateStruct_Entry = {
   },
   toAmino(message: Expr_CreateStruct_Entry): Expr_CreateStruct_EntryAmino {
     const obj: any = {};
-    obj.id = message.id;
-    obj.field_key = message.fieldKey;
+    obj.id = message.id === 0 ? undefined : message.id;
+    obj.field_key = message.fieldKey === null ? undefined : message.fieldKey;
     obj.map_key = message.mapKey ? Expr.toAmino(message.mapKey) : undefined;
     obj.value = message.value ? Expr.toAmino(message.value) : undefined;
     return obj;
@@ -1630,9 +1630,9 @@ export const Expr_Comprehension = {
   },
   toAmino(message: Expr_Comprehension): Expr_ComprehensionAmino {
     const obj: any = {};
-    obj.iter_var = message.iterVar;
+    obj.iter_var = message.iterVar === "" ? undefined : message.iterVar;
     obj.iter_range = message.iterRange ? Expr.toAmino(message.iterRange) : undefined;
-    obj.accu_var = message.accuVar;
+    obj.accu_var = message.accuVar === "" ? undefined : message.accuVar;
     obj.accu_init = message.accuInit ? Expr.toAmino(message.accuInit) : undefined;
     obj.loop_condition = message.loopCondition ? Expr.toAmino(message.loopCondition) : undefined;
     obj.loop_step = message.loopStep ? Expr.toAmino(message.loopStep) : undefined;
@@ -1804,7 +1804,7 @@ export const Literal = {
   fromAmino(object: LiteralAmino): Literal {
     const message = createBaseLiteral();
     if (object.null_value !== undefined && object.null_value !== null) {
-      message.nullValue = nullValueFromJSON(object.null_value);
+      message.nullValue = object.null_value;
     }
     if (object.bool_value !== undefined && object.bool_value !== null) {
       message.boolValue = object.bool_value;
@@ -1828,12 +1828,12 @@ export const Literal = {
   },
   toAmino(message: Literal): LiteralAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = message.nullValue === null ? undefined : message.nullValue;
+    obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
+    obj.int64_value = message.int64Value !== BigInt(0) ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value !== BigInt(0) ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue === null ? undefined : message.doubleValue;
+    obj.string_value = message.stringValue === null ? undefined : message.stringValue;
     obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     return obj;
   },

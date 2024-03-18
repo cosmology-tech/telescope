@@ -928,7 +928,7 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
   toAmino(message: CheckedExpr_ReferenceMapEntry, useInterfaces: boolean = true): CheckedExpr_ReferenceMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
     obj.value = message.value ? Reference.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
@@ -1021,7 +1021,7 @@ export const CheckedExpr_TypeMapEntry = {
   },
   toAmino(message: CheckedExpr_TypeMapEntry, useInterfaces: boolean = true): CheckedExpr_TypeMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
     obj.value = message.value ? Type.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
@@ -1249,7 +1249,7 @@ export const CheckedExpr = {
       });
     }
     obj.source_info = message.sourceInfo ? SourceInfo.toAmino(message.sourceInfo, useInterfaces) : undefined;
-    obj.expr_version = message.exprVersion;
+    obj.expr_version = message.exprVersion === "" ? undefined : message.exprVersion;
     obj.expr = message.expr ? Expr.toAmino(message.expr, useInterfaces) : undefined;
     return obj;
   },
@@ -1485,16 +1485,16 @@ export const Type = {
       message.dyn = Empty.fromAmino(object.dyn);
     }
     if (object.null !== undefined && object.null !== null) {
-      message.null = nullValueFromJSON(object.null);
+      message.null = object.null;
     }
     if (object.primitive !== undefined && object.primitive !== null) {
-      message.primitive = type_PrimitiveTypeFromJSON(object.primitive);
+      message.primitive = object.primitive;
     }
     if (object.wrapper !== undefined && object.wrapper !== null) {
-      message.wrapper = type_PrimitiveTypeFromJSON(object.wrapper);
+      message.wrapper = object.wrapper;
     }
     if (object.well_known !== undefined && object.well_known !== null) {
-      message.wellKnown = type_WellKnownTypeFromJSON(object.well_known);
+      message.wellKnown = object.well_known;
     }
     if (object.list_type !== undefined && object.list_type !== null) {
       message.listType = Type_ListType.fromAmino(object.list_type);
@@ -1525,15 +1525,15 @@ export const Type = {
   toAmino(message: Type, useInterfaces: boolean = true): TypeAmino {
     const obj: any = {};
     obj.dyn = message.dyn ? Empty.toAmino(message.dyn, useInterfaces) : undefined;
-    obj.null = message.null;
-    obj.primitive = message.primitive;
-    obj.wrapper = message.wrapper;
-    obj.well_known = message.wellKnown;
+    obj.null = message.null === null ? undefined : message.null;
+    obj.primitive = message.primitive === null ? undefined : message.primitive;
+    obj.wrapper = message.wrapper === null ? undefined : message.wrapper;
+    obj.well_known = message.wellKnown === null ? undefined : message.wellKnown;
     obj.list_type = message.listType ? Type_ListType.toAmino(message.listType, useInterfaces) : undefined;
     obj.map_type = message.mapType ? Type_MapType.toAmino(message.mapType, useInterfaces) : undefined;
     obj.function = message.function ? Type_FunctionType.toAmino(message.function, useInterfaces) : undefined;
-    obj.message_type = message.messageType;
-    obj.type_param = message.typeParam;
+    obj.message_type = message.messageType === null ? undefined : message.messageType;
+    obj.type_param = message.typeParam === null ? undefined : message.typeParam;
     obj.type = message.type ? Type.toAmino(message.type, useInterfaces) : undefined;
     obj.error = message.error ? Empty.toAmino(message.error, useInterfaces) : undefined;
     obj.abstract_type = message.abstractType ? Type_AbstractType.toAmino(message.abstractType, useInterfaces) : undefined;
@@ -1825,7 +1825,7 @@ export const Type_FunctionType = {
     if (message.argTypes) {
       obj.arg_types = message.argTypes.map(e => e ? Type.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.arg_types = [];
+      obj.arg_types = message.argTypes;
     }
     return obj;
   },
@@ -1927,11 +1927,11 @@ export const Type_AbstractType = {
   },
   toAmino(message: Type_AbstractType, useInterfaces: boolean = true): Type_AbstractTypeAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.parameterTypes) {
       obj.parameter_types = message.parameterTypes.map(e => e ? Type.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.parameter_types = [];
+      obj.parameter_types = message.parameterTypes;
     }
     return obj;
   },
@@ -2046,7 +2046,7 @@ export const Decl = {
   },
   toAmino(message: Decl, useInterfaces: boolean = true): DeclAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.ident = message.ident ? Decl_IdentDecl.toAmino(message.ident, useInterfaces) : undefined;
     obj.function = message.function ? Decl_FunctionDecl.toAmino(message.function, useInterfaces) : undefined;
     return obj;
@@ -2164,7 +2164,7 @@ export const Decl_IdentDecl = {
     const obj: any = {};
     obj.type = message.type ? Type.toAmino(message.type, useInterfaces) : undefined;
     obj.value = message.value ? Constant.toAmino(message.value, useInterfaces) : undefined;
-    obj.doc = message.doc;
+    obj.doc = message.doc === "" ? undefined : message.doc;
     return obj;
   },
   fromProtoMsg(message: Decl_IdentDeclProtoMsg, useInterfaces: boolean = true): Decl_IdentDecl {
@@ -2253,7 +2253,7 @@ export const Decl_FunctionDecl = {
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overloads = [];
+      obj.overloads = message.overloads;
     }
     return obj;
   },
@@ -2423,20 +2423,20 @@ export const Decl_FunctionDecl_Overload = {
   },
   toAmino(message: Decl_FunctionDecl_Overload, useInterfaces: boolean = true): Decl_FunctionDecl_OverloadAmino {
     const obj: any = {};
-    obj.overload_id = message.overloadId;
+    obj.overload_id = message.overloadId === "" ? undefined : message.overloadId;
     if (message.params) {
       obj.params = message.params.map(e => e ? Type.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.params = [];
+      obj.params = message.params;
     }
     if (message.typeParams) {
       obj.type_params = message.typeParams.map(e => e);
     } else {
-      obj.type_params = [];
+      obj.type_params = message.typeParams;
     }
     obj.result_type = message.resultType ? Type.toAmino(message.resultType, useInterfaces) : undefined;
-    obj.is_instance_function = message.isInstanceFunction;
-    obj.doc = message.doc;
+    obj.is_instance_function = message.isInstanceFunction === false ? undefined : message.isInstanceFunction;
+    obj.doc = message.doc === "" ? undefined : message.doc;
     return obj;
   },
   fromProtoMsg(message: Decl_FunctionDecl_OverloadProtoMsg, useInterfaces: boolean = true): Decl_FunctionDecl_Overload {
@@ -2554,11 +2554,11 @@ export const Reference = {
   },
   toAmino(message: Reference, useInterfaces: boolean = true): ReferenceAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.overloadId) {
       obj.overload_id = message.overloadId.map(e => e);
     } else {
-      obj.overload_id = [];
+      obj.overload_id = message.overloadId;
     }
     obj.value = message.value ? Constant.toAmino(message.value, useInterfaces) : undefined;
     return obj;

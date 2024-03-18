@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoType, ProtoField } from '@cosmology/types';
+import { ProtoField, ProtoType } from '@cosmology/types';
 import { arrowFunctionExpression } from '../../../utils';
 import { AminoParseContext } from '../../context';
 import { protoFieldsToArray } from '../utils';
@@ -18,7 +18,7 @@ export interface FromAminoParseField {
     fieldPath: ProtoField[];
     nested: number;
     isOptional: boolean;
-};
+}
 
 export const fromAminoParseField = ({
     context,
@@ -146,6 +146,7 @@ export const fromAminoParseField = ({
         case 'fixed32':
         case 'sfixed32':
         case 'bool':
+            return fromAmino.defaultType(args)
         case 'bytes':
             return fromAmino.defaultType(args)
 

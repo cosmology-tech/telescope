@@ -93,7 +93,7 @@ export const SourceInfo = {
     if (message.sourceFiles) {
       obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.source_files = [];
+      obj.source_files = message.sourceFiles;
     }
     return obj;
   },

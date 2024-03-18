@@ -166,10 +166,10 @@ export const ValidatorSet = {
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.validators = [];
+      obj.validators = message.validators;
     }
     obj.proposer = message.proposer ? Validator.toAmino(message.proposer, useInterfaces) : undefined;
-    obj.total_voting_power = message.totalVotingPower ? message.totalVotingPower.toString() : undefined;
+    obj.total_voting_power = message.totalVotingPower !== BigInt(0) ? message.totalVotingPower.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ValidatorSetProtoMsg, useInterfaces: boolean = true): ValidatorSet {
@@ -302,8 +302,8 @@ export const Validator = {
     const obj: any = {};
     obj.address = message.address ? base64FromBytes(message.address) : undefined;
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey, useInterfaces) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
-    obj.proposer_priority = message.proposerPriority ? message.proposerPriority.toString() : undefined;
+    obj.voting_power = message.votingPower !== BigInt(0) ? message.votingPower.toString() : undefined;
+    obj.proposer_priority = message.proposerPriority !== BigInt(0) ? message.proposerPriority.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ValidatorProtoMsg, useInterfaces: boolean = true): Validator {
@@ -403,7 +403,7 @@ export const SimpleValidator = {
   toAmino(message: SimpleValidator, useInterfaces: boolean = true): SimpleValidatorAmino {
     const obj: any = {};
     obj.pub_key = message.pubKey ? PublicKey.toAmino(message.pubKey, useInterfaces) : undefined;
-    obj.voting_power = message.votingPower ? message.votingPower.toString() : undefined;
+    obj.voting_power = message.votingPower !== BigInt(0) ? message.votingPower.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: SimpleValidatorProtoMsg, useInterfaces: boolean = true): SimpleValidator {

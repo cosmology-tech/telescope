@@ -14,9 +14,9 @@ export interface ProviderProtoMsg {
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderAmino {
-  owner?: string;
-  auditor?: string;
-  attributes?: AttributeAmino[];
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
 }
 /** Provider stores owner auditor and attributes details */
 export interface ProviderSDKType {
@@ -36,9 +36,9 @@ export interface AuditedAttributesProtoMsg {
 }
 /** Attributes */
 export interface AuditedAttributesAmino {
-  owner?: string;
-  auditor?: string;
-  attributes?: AttributeAmino[];
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
 }
 /** Attributes */
 export interface AuditedAttributesSDKType {
@@ -56,7 +56,7 @@ export interface AttributesResponseProtoMsg {
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseAmino {
-  attributes?: AuditedAttributesAmino[];
+  attributes: AuditedAttributesAmino[];
 }
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponseSDKType {
@@ -73,8 +73,8 @@ export interface AttributesFiltersProtoMsg {
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersAmino {
-  auditors?: string[];
-  owners?: string[];
+  auditors: string[];
+  owners: string[];
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFiltersSDKType {
@@ -93,9 +93,9 @@ export interface MsgSignProviderAttributesProtoMsg {
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesAmino {
-  owner?: string;
-  auditor?: string;
-  attributes?: AttributeAmino[];
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributesSDKType {
@@ -125,9 +125,9 @@ export interface MsgDeleteProviderAttributesProtoMsg {
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesAmino {
-  owner?: string;
-  auditor?: string;
-  keys?: string[];
+  owner: string;
+  auditor: string;
+  keys: string[];
 }
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributesSDKType {
@@ -245,12 +245,12 @@ export const Provider = {
   },
   toAmino(message: Provider, useInterfaces: boolean = true): ProviderAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -367,12 +367,12 @@ export const AuditedAttributes = {
   },
   toAmino(message: AuditedAttributes, useInterfaces: boolean = true): AuditedAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -462,7 +462,7 @@ export const AttributesResponse = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -573,12 +573,12 @@ export const AttributesFilters = {
     if (message.auditors) {
       obj.auditors = message.auditors.map(e => e);
     } else {
-      obj.auditors = [];
+      obj.auditors = message.auditors;
     }
     if (message.owners) {
       obj.owners = message.owners.map(e => e);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },
@@ -695,12 +695,12 @@ export const MsgSignProviderAttributes = {
   },
   toAmino(message: MsgSignProviderAttributes, useInterfaces: boolean = true): MsgSignProviderAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -879,12 +879,12 @@ export const MsgDeleteProviderAttributes = {
   },
   toAmino(message: MsgDeleteProviderAttributes, useInterfaces: boolean = true): MsgDeleteProviderAttributesAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.auditor = message.auditor;
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },

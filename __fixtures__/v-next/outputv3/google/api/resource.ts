@@ -683,7 +683,7 @@ export const ResourceDescriptor = {
       message.nameField = object.name_field;
     }
     if (object.history !== undefined && object.history !== null) {
-      message.history = resourceDescriptor_HistoryFromJSON(object.history);
+      message.history = object.history;
     }
     if (object.plural !== undefined && object.plural !== null) {
       message.plural = object.plural;
@@ -691,25 +691,25 @@ export const ResourceDescriptor = {
     if (object.singular !== undefined && object.singular !== null) {
       message.singular = object.singular;
     }
-    message.style = object.style?.map(e => resourceDescriptor_StyleFromJSON(e)) || [];
+    message.style = object.style?.map(e => e) || [];
     return message;
   },
   toAmino(message: ResourceDescriptor, useInterfaces: boolean = true): ResourceDescriptorAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     if (message.pattern) {
       obj.pattern = message.pattern.map(e => e);
     } else {
-      obj.pattern = [];
+      obj.pattern = message.pattern;
     }
-    obj.name_field = message.nameField;
-    obj.history = message.history;
-    obj.plural = message.plural;
-    obj.singular = message.singular;
+    obj.name_field = message.nameField === "" ? undefined : message.nameField;
+    obj.history = message.history === 0 ? undefined : message.history;
+    obj.plural = message.plural === "" ? undefined : message.plural;
+    obj.singular = message.singular === "" ? undefined : message.singular;
     if (message.style) {
       obj.style = message.style.map(e => e);
     } else {
-      obj.style = [];
+      obj.style = message.style;
     }
     return obj;
   },
@@ -805,8 +805,8 @@ export const ResourceReference = {
   },
   toAmino(message: ResourceReference, useInterfaces: boolean = true): ResourceReferenceAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.child_type = message.childType;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.child_type = message.childType === "" ? undefined : message.childType;
     return obj;
   },
   fromProtoMsg(message: ResourceReferenceProtoMsg, useInterfaces: boolean = true): ResourceReference {

@@ -348,22 +348,22 @@ export const MonitoredResourceDescriptor = {
     }
     message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
     if (object.launch_stage !== undefined && object.launch_stage !== null) {
-      message.launchStage = launchStageFromJSON(object.launch_stage);
+      message.launchStage = object.launch_stage;
     }
     return message;
   },
   toAmino(message: MonitoredResourceDescriptor): MonitoredResourceDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.display_name = message.displayName;
-    obj.description = message.description;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
-      obj.labels = [];
+      obj.labels = message.labels;
     }
-    obj.launch_stage = message.launchStage;
+    obj.launch_stage = message.launchStage === 0 ? undefined : message.launchStage;
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceDescriptorAminoMsg): MonitoredResourceDescriptor {
@@ -466,8 +466,8 @@ export const MonitoredResource_LabelsEntry = {
   },
   toAmino(message: MonitoredResource_LabelsEntry): MonitoredResource_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: MonitoredResource_LabelsEntryAminoMsg): MonitoredResource_LabelsEntry {
@@ -608,7 +608,7 @@ export const MonitoredResource = {
   },
   toAmino(message: MonitoredResource): MonitoredResourceAmino {
     const obj: any = {};
-    obj.type = message.type;
+    obj.type = message.type === "" ? undefined : message.type;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -717,8 +717,8 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
   },
   toAmino(message: MonitoredResourceMetadata_UserLabelsEntry): MonitoredResourceMetadata_UserLabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: MonitoredResourceMetadata_UserLabelsEntryAminoMsg): MonitoredResourceMetadata_UserLabelsEntry {

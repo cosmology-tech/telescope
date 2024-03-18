@@ -330,8 +330,8 @@ export const QueryBalanceRequest = {
   },
   toAmino(message: QueryBalanceRequest, useInterfaces: boolean = true): QueryBalanceRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: QueryBalanceRequestProtoMsg, useInterfaces: boolean = true): QueryBalanceRequest {
@@ -414,7 +414,7 @@ export const QueryBalanceResponse = {
   },
   toAmino(message: QueryBalanceResponse, useInterfaces: boolean = true): QueryBalanceResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryBalanceResponseProtoMsg, useInterfaces: boolean = true): QueryBalanceResponse {
@@ -510,8 +510,8 @@ export const QueryOwnerRequest = {
   },
   toAmino(message: QueryOwnerRequest, useInterfaces: boolean = true): QueryOwnerRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
     return obj;
   },
   fromProtoMsg(message: QueryOwnerRequestProtoMsg, useInterfaces: boolean = true): QueryOwnerRequest {
@@ -592,7 +592,7 @@ export const QueryOwnerResponse = {
   },
   toAmino(message: QueryOwnerResponse, useInterfaces: boolean = true): QueryOwnerResponseAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: QueryOwnerResponseProtoMsg, useInterfaces: boolean = true): QueryOwnerResponse {
@@ -673,7 +673,7 @@ export const QuerySupplyRequest = {
   },
   toAmino(message: QuerySupplyRequest, useInterfaces: boolean = true): QuerySupplyRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromProtoMsg(message: QuerySupplyRequestProtoMsg, useInterfaces: boolean = true): QuerySupplyRequest {
@@ -756,7 +756,7 @@ export const QuerySupplyResponse = {
   },
   toAmino(message: QuerySupplyResponse, useInterfaces: boolean = true): QuerySupplyResponseAmino {
     const obj: any = {};
-    obj.amount = message.amount ? message.amount.toString() : undefined;
+    obj.amount = message.amount !== BigInt(0) ? message.amount.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QuerySupplyResponseProtoMsg, useInterfaces: boolean = true): QuerySupplyResponse {
@@ -869,8 +869,8 @@ export const QueryNFTsRequest = {
   },
   toAmino(message: QueryNFTsRequest, useInterfaces: boolean = true): QueryNFTsRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.owner = message.owner;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -978,7 +978,7 @@ export const QueryNFTsResponse = {
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.nfts = [];
+      obj.nfts = message.nfts;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -1076,8 +1076,8 @@ export const QueryNFTRequest = {
   },
   toAmino(message: QueryNFTRequest, useInterfaces: boolean = true): QueryNFTRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
-    obj.id = message.id;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
+    obj.id = message.id === "" ? undefined : message.id;
     return obj;
   },
   fromProtoMsg(message: QueryNFTRequestProtoMsg, useInterfaces: boolean = true): QueryNFTRequest {
@@ -1241,7 +1241,7 @@ export const QueryClassRequest = {
   },
   toAmino(message: QueryClassRequest, useInterfaces: boolean = true): QueryClassRequestAmino {
     const obj: any = {};
-    obj.class_id = message.classId;
+    obj.class_id = message.classId === "" ? undefined : message.classId;
     return obj;
   },
   fromProtoMsg(message: QueryClassRequestProtoMsg, useInterfaces: boolean = true): QueryClassRequest {
@@ -1514,7 +1514,7 @@ export const QueryClassesResponse = {
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.classes = [];
+      obj.classes = message.classes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

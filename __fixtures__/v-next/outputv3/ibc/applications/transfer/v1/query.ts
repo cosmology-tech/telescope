@@ -209,7 +209,7 @@ export const QueryDenomTraceRequest = {
   },
   toAmino(message: QueryDenomTraceRequest, useInterfaces: boolean = true): QueryDenomTraceRequestAmino {
     const obj: any = {};
-    obj.hash = message.hash;
+    obj.hash = message.hash === "" ? undefined : message.hash;
     return obj;
   },
   fromProtoMsg(message: QueryDenomTraceRequestProtoMsg, useInterfaces: boolean = true): QueryDenomTraceRequest {
@@ -482,7 +482,7 @@ export const QueryDenomTracesResponse = {
     if (message.denomTraces) {
       obj.denom_traces = message.denomTraces.map(e => e ? DenomTrace.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.denom_traces = [];
+      obj.denom_traces = message.denomTraces;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;

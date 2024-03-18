@@ -242,7 +242,7 @@ export const QueryProvidersResponse = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
@@ -324,7 +324,7 @@ export const QueryProviderRequest = {
   },
   toAmino(message: QueryProviderRequest, useInterfaces: boolean = true): QueryProviderRequestAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: QueryProviderRequestProtoMsg, useInterfaces: boolean = true): QueryProviderRequest {

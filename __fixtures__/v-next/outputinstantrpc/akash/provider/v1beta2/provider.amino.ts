@@ -69,11 +69,11 @@ export const AminoConverter = {
       return {
         owner,
         hostUri: host_uri,
-        attributes: attributes.map(el0 => ({
+        attributes: attributes.map?.(el0 => ({
           key: el0.key,
           value: el0.value
         })),
-        info: {
+        info: info == null ? info : {
           email: info.email,
           website: info.website
         }
@@ -110,11 +110,11 @@ export const AminoConverter = {
       return {
         owner,
         hostUri: host_uri,
-        attributes: attributes.map(el0 => ({
+        attributes: attributes.map?.(el0 => ({
           key: el0.key,
           value: el0.value
         })),
-        info: {
+        info: info == null ? info : {
           email: info.email,
           website: info.website
         }

@@ -12,7 +12,7 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
-  deployment_min_deposit?: CoinAmino | undefined;
+  deployment_min_deposit: CoinAmino | undefined;
 }
 export interface ParamsAminoMsg {
   type: "/akash.deployment.v1beta1.Params";

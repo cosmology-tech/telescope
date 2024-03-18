@@ -101,7 +101,7 @@ export const Control = {
   },
   toAmino(message: Control, useInterfaces: boolean = true): ControlAmino {
     const obj: any = {};
-    obj.environment = message.environment;
+    obj.environment = message.environment === "" ? undefined : message.environment;
     return obj;
   },
   fromProtoMsg(message: ControlProtoMsg, useInterfaces: boolean = true): Control {

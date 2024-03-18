@@ -236,7 +236,7 @@ export const Claim = {
   fromAmino(object: ClaimAmino): Claim {
     const message = createBaseClaim();
     if (object.action !== undefined && object.action !== null) {
-      message.action = actionFromJSON(object.action);
+      message.action = object.action;
     }
     if (object.completed !== undefined && object.completed !== null) {
       message.completed = object.completed;
@@ -248,9 +248,9 @@ export const Claim = {
   },
   toAmino(message: Claim, useInterfaces: boolean = true): ClaimAmino {
     const obj: any = {};
-    obj.action = message.action;
-    obj.completed = message.completed;
-    obj.claimable_amount = message.claimableAmount;
+    obj.action = message.action === 0 ? undefined : message.action;
+    obj.completed = message.completed === false ? undefined : message.completed;
+    obj.claimable_amount = message.claimableAmount === "" ? undefined : message.claimableAmount;
     return obj;
   },
   fromProtoMsg(message: ClaimProtoMsg, useInterfaces: boolean = true): Claim {
@@ -375,12 +375,12 @@ export const ClaimsRecordAddress = {
   },
   toAmino(message: ClaimsRecordAddress, useInterfaces: boolean = true): ClaimsRecordAddressAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.initial_claimable_amount = message.initialClaimableAmount;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);
     } else {
-      obj.actions_completed = [];
+      obj.actions_completed = message.actionsCompleted;
     }
     return obj;
   },
@@ -491,11 +491,11 @@ export const ClaimsRecord = {
   },
   toAmino(message: ClaimsRecord, useInterfaces: boolean = true): ClaimsRecordAmino {
     const obj: any = {};
-    obj.initial_claimable_amount = message.initialClaimableAmount;
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
     if (message.actionsCompleted) {
       obj.actions_completed = message.actionsCompleted.map(e => e);
     } else {
-      obj.actions_completed = [];
+      obj.actions_completed = message.actionsCompleted;
     }
     return obj;
   },

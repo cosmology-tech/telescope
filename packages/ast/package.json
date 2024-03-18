@@ -32,6 +32,7 @@
     "test": "jest",
     "test:ast": "cross-env NODE_ENV=development babel-node scripts/test-ast.js",
     "test:watch": "jest --watch",
+    "test:update": "jest --watch -u",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
   "jest": {

@@ -156,7 +156,7 @@ export const GenesisState = {
     if (message.lockableDurations) {
       obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.lockable_durations = [];
+      obj.lockable_durations = message.lockableDurations;
     }
     obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo, useInterfaces) : undefined;
     obj.pool_to_gauges = message.poolToGauges ? PoolToGauges.toAmino(message.poolToGauges, useInterfaces) : undefined;

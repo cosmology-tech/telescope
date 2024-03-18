@@ -158,14 +158,14 @@ export const GenesisState = {
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.connections = [];
+      obj.connections = message.connections;
     }
     if (message.clientConnectionPaths) {
       obj.client_connection_paths = message.clientConnectionPaths.map(e => e ? ConnectionPaths.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.client_connection_paths = [];
+      obj.client_connection_paths = message.clientConnectionPaths;
     }
-    obj.next_connection_sequence = message.nextConnectionSequence ? message.nextConnectionSequence.toString() : undefined;
+    obj.next_connection_sequence = message.nextConnectionSequence !== BigInt(0) ? message.nextConnectionSequence.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params, useInterfaces) : undefined;
     return obj;
   },

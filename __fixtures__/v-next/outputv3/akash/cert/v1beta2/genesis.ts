@@ -13,8 +13,8 @@ export interface GenesisCertificateProtoMsg {
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateAmino {
-  owner?: string;
-  certificate?: CertificateAmino;
+  owner: string;
+  certificate: CertificateAmino;
 }
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificateSDKType {
@@ -31,7 +31,7 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateAmino {
-  certificates?: GenesisCertificateAmino[];
+  certificates: GenesisCertificateAmino[];
 }
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisStateSDKType {
@@ -118,8 +118,8 @@ export const GenesisCertificate = {
   },
   toAmino(message: GenesisCertificate, useInterfaces: boolean = true): GenesisCertificateAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : undefined;
+    obj.owner = message.owner ?? "";
+    obj.certificate = message.certificate ? Certificate.toAmino(message.certificate, useInterfaces) : Certificate.toAmino(Certificate.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: GenesisCertificateProtoMsg, useInterfaces: boolean = true): GenesisCertificate {
@@ -208,7 +208,7 @@ export const GenesisState = {
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.certificates = [];
+      obj.certificates = message.certificates;
     }
     return obj;
   },

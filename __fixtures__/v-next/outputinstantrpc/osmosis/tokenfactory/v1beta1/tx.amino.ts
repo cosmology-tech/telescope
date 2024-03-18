@@ -2,6 +2,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType, DenomUnit, DenomUnitSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../../helpers";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgMint, MsgMintSDKType, MsgBurn, MsgBurnSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType } from "./tx";
 export interface MsgCreateDenomAminoType extends AminoMsg {
   type: "osmosis/tokenfactory/create-denom";
@@ -100,7 +101,7 @@ export const AminoConverter = {
     }: MsgMintAminoType["value"]): MsgMint => {
       return {
         sender,
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -127,7 +128,7 @@ export const AminoConverter = {
     }: MsgBurnAminoType["value"]): MsgBurn => {
       return {
         sender,
-        amount: {
+        amount: amount == null ? amount : {
           denom: amount.denom,
           amount: amount.amount
         }
@@ -171,7 +172,7 @@ export const AminoConverter = {
           description: metadata.description,
           denom_units: metadata.denomUnits.map(el0 => ({
             denom: el0.denom,
-            exponent: el0.exponent,
+            exponent: omitDefault(el0.exponent),
             aliases: el0.aliases
           })),
           base: metadata.base,
@@ -189,9 +190,9 @@ export const AminoConverter = {
     }: MsgSetDenomMetadataAminoType["value"]): MsgSetDenomMetadata => {
       return {
         sender,
-        metadata: {
+        metadata: metadata == null ? metadata : {
           description: metadata.description,
-          denomUnits: metadata.denom_units.map(el1 => ({
+          denomUnits: metadata.denom_units.map?.(el1 => ({
             denom: el1.denom,
             exponent: el1.exponent,
             aliases: el1.aliases

@@ -434,10 +434,10 @@ export const ParseRequest = {
   },
   toAmino(message: ParseRequest, useInterfaces: boolean = true): ParseRequestAmino {
     const obj: any = {};
-    obj.cel_source = message.celSource;
-    obj.syntax_version = message.syntaxVersion;
-    obj.source_location = message.sourceLocation;
-    obj.disable_macros = message.disableMacros;
+    obj.cel_source = message.celSource === "" ? undefined : message.celSource;
+    obj.syntax_version = message.syntaxVersion === "" ? undefined : message.syntaxVersion;
+    obj.source_location = message.sourceLocation === "" ? undefined : message.sourceLocation;
+    obj.disable_macros = message.disableMacros === false ? undefined : message.disableMacros;
     return obj;
   },
   fromProtoMsg(message: ParseRequestProtoMsg, useInterfaces: boolean = true): ParseRequest {
@@ -544,7 +544,7 @@ export const ParseResponse = {
     if (message.issues) {
       obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.issues = [];
+      obj.issues = message.issues;
     }
     return obj;
   },
@@ -682,10 +682,10 @@ export const CheckRequest = {
     if (message.typeEnv) {
       obj.type_env = message.typeEnv.map(e => e ? Decl.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.type_env = [];
+      obj.type_env = message.typeEnv;
     }
-    obj.container = message.container;
-    obj.no_std_env = message.noStdEnv;
+    obj.container = message.container === "" ? undefined : message.container;
+    obj.no_std_env = message.noStdEnv === false ? undefined : message.noStdEnv;
     return obj;
   },
   fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
@@ -792,7 +792,7 @@ export const CheckResponse = {
     if (message.issues) {
       obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.issues = [];
+      obj.issues = message.issues;
     }
     return obj;
   },
@@ -889,7 +889,7 @@ export const EvalRequest_BindingsEntry = {
   },
   toAmino(message: EvalRequest_BindingsEntry, useInterfaces: boolean = true): EvalRequest_BindingsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key === "" ? undefined : message.key;
     obj.value = message.value ? ExprValue.toAmino(message.value, useInterfaces) : undefined;
     return obj;
   },
@@ -1059,7 +1059,7 @@ export const EvalRequest = {
         obj.bindings[k] = ExprValue.toAmino(v);
       });
     }
-    obj.container = message.container;
+    obj.container = message.container === "" ? undefined : message.container;
     return obj;
   },
   fromProtoMsg(message: EvalRequestProtoMsg, useInterfaces: boolean = true): EvalRequest {
@@ -1166,7 +1166,7 @@ export const EvalResponse = {
     if (message.issues) {
       obj.issues = message.issues.map(e => e ? Status.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.issues = [];
+      obj.issues = message.issues;
     }
     return obj;
   },
@@ -1269,7 +1269,7 @@ export const IssueDetails = {
   fromAmino(object: IssueDetailsAmino): IssueDetails {
     const message = createBaseIssueDetails();
     if (object.severity !== undefined && object.severity !== null) {
-      message.severity = issueDetails_SeverityFromJSON(object.severity);
+      message.severity = object.severity;
     }
     if (object.position !== undefined && object.position !== null) {
       message.position = SourcePosition.fromAmino(object.position);
@@ -1281,9 +1281,9 @@ export const IssueDetails = {
   },
   toAmino(message: IssueDetails, useInterfaces: boolean = true): IssueDetailsAmino {
     const obj: any = {};
-    obj.severity = message.severity;
+    obj.severity = message.severity === 0 ? undefined : message.severity;
     obj.position = message.position ? SourcePosition.toAmino(message.position, useInterfaces) : undefined;
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: IssueDetailsProtoMsg, useInterfaces: boolean = true): IssueDetails {

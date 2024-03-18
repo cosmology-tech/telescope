@@ -129,12 +129,12 @@ export const Params = {
     if (message.authorizedTickSpacing) {
       obj.authorized_tick_spacing = message.authorizedTickSpacing.map(e => e.toString());
     } else {
-      obj.authorized_tick_spacing = [];
+      obj.authorized_tick_spacing = message.authorizedTickSpacing;
     }
     if (message.authorizedSwapFees) {
       obj.authorized_swap_fees = message.authorizedSwapFees.map(e => e);
     } else {
-      obj.authorized_swap_fees = [];
+      obj.authorized_swap_fees = message.authorizedSwapFees;
     }
     return obj;
   },

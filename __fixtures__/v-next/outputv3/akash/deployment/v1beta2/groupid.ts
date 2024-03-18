@@ -13,9 +13,9 @@ export interface GroupIDProtoMsg {
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupIDSDKType {
@@ -119,9 +119,9 @@ export const GroupID = {
   },
   toAmino(message: GroupID, useInterfaces: boolean = true): GroupIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
     return obj;
   },
   fromProtoMsg(message: GroupIDProtoMsg, useInterfaces: boolean = true): GroupID {

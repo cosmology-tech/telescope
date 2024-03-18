@@ -181,12 +181,12 @@ export const MsgSend = {
   },
   toAmino(message: MsgSend): MsgSendAmino {
     const obj: any = {};
-    obj.from_address = message.fromAddress;
-    obj.to_address = message.toAddress;
+    obj.from_address = message.fromAddress === "" ? undefined : message.fromAddress;
+    obj.to_address = message.toAddress === "" ? undefined : message.toAddress;
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amount = [];
+      obj.amount = message.amount;
     }
     return obj;
   },
@@ -379,12 +379,12 @@ export const MsgMultiSend = {
     if (message.inputs) {
       obj.inputs = message.inputs.map(e => e ? Input.toAmino(e) : undefined);
     } else {
-      obj.inputs = [];
+      obj.inputs = message.inputs;
     }
     if (message.outputs) {
       obj.outputs = message.outputs.map(e => e ? Output.toAmino(e) : undefined);
     } else {
-      obj.outputs = [];
+      obj.outputs = message.outputs;
     }
     return obj;
   },

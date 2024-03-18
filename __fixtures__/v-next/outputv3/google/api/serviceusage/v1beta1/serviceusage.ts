@@ -1485,7 +1485,7 @@ export const EnableServiceRequest = {
   },
   toAmino(message: EnableServiceRequest, useInterfaces: boolean = true): EnableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: EnableServiceRequestProtoMsg, useInterfaces: boolean = true): EnableServiceRequest {
@@ -1565,7 +1565,7 @@ export const DisableServiceRequest = {
   },
   toAmino(message: DisableServiceRequest, useInterfaces: boolean = true): DisableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: DisableServiceRequestProtoMsg, useInterfaces: boolean = true): DisableServiceRequest {
@@ -1645,7 +1645,7 @@ export const GetServiceRequest = {
   },
   toAmino(message: GetServiceRequest, useInterfaces: boolean = true): GetServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetServiceRequestProtoMsg, useInterfaces: boolean = true): GetServiceRequest {
@@ -1770,10 +1770,10 @@ export const ListServicesRequest = {
   },
   toAmino(message: ListServicesRequest, useInterfaces: boolean = true): ListServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     return obj;
   },
   fromProtoMsg(message: ListServicesRequestProtoMsg, useInterfaces: boolean = true): ListServicesRequest {
@@ -1877,9 +1877,9 @@ export const ListServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListServicesResponseProtoMsg, useInterfaces: boolean = true): ListServicesResponse {
@@ -1980,11 +1980,11 @@ export const BatchEnableServicesRequest = {
   },
   toAmino(message: BatchEnableServicesRequest, useInterfaces: boolean = true): BatchEnableServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
     } else {
-      obj.service_ids = [];
+      obj.service_ids = message.serviceIds;
     }
     return obj;
   },
@@ -2104,16 +2104,16 @@ export const ListConsumerQuotaMetricsRequest = {
       message.pageToken = object.page_token;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: ListConsumerQuotaMetricsRequest, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.view = message.view;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromProtoMsg(message: ListConsumerQuotaMetricsRequestProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsRequest {
@@ -2217,9 +2217,9 @@ export const ListConsumerQuotaMetricsResponse = {
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.metrics = [];
+      obj.metrics = message.metrics;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListConsumerQuotaMetricsResponseProtoMsg, useInterfaces: boolean = true): ListConsumerQuotaMetricsResponse {
@@ -2308,14 +2308,14 @@ export const GetConsumerQuotaMetricRequest = {
       message.name = object.name;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: GetConsumerQuotaMetricRequest, useInterfaces: boolean = true): GetConsumerQuotaMetricRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.view = message.view;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaMetricRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaMetricRequest {
@@ -2404,14 +2404,14 @@ export const GetConsumerQuotaLimitRequest = {
       message.name = object.name;
     }
     if (object.view !== undefined && object.view !== null) {
-      message.view = quotaViewFromJSON(object.view);
+      message.view = object.view;
     }
     return message;
   },
   toAmino(message: GetConsumerQuotaLimitRequest, useInterfaces: boolean = true): GetConsumerQuotaLimitRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.view = message.view;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.view = message.view === 0 ? undefined : message.view;
     return obj;
   },
   fromProtoMsg(message: GetConsumerQuotaLimitRequestProtoMsg, useInterfaces: boolean = true): GetConsumerQuotaLimitRequest {
@@ -2548,18 +2548,18 @@ export const CreateAdminOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: CreateAdminOverrideRequest, useInterfaces: boolean = true): CreateAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2714,19 +2714,19 @@ export const UpdateAdminOverrideRequest = {
     if (object.update_mask !== undefined && object.update_mask !== null) {
       message.updateMask = FieldMask.fromAmino(object.update_mask);
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: UpdateAdminOverrideRequest, useInterfaces: boolean = true): UpdateAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2847,17 +2847,17 @@ export const DeleteAdminOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: DeleteAdminOverrideRequest, useInterfaces: boolean = true): DeleteAdminOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -2968,9 +2968,9 @@ export const ListAdminOverridesRequest = {
   },
   toAmino(message: ListAdminOverridesRequest, useInterfaces: boolean = true): ListAdminOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromProtoMsg(message: ListAdminOverridesRequestProtoMsg, useInterfaces: boolean = true): ListAdminOverridesRequest {
@@ -3074,9 +3074,9 @@ export const ListAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListAdminOverridesResponseProtoMsg, useInterfaces: boolean = true): ListAdminOverridesResponse {
@@ -3165,7 +3165,7 @@ export const BatchCreateAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -3303,18 +3303,18 @@ export const ImportAdminOverridesRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: ImportAdminOverridesRequest, useInterfaces: boolean = true): ImportAdminOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3404,7 +3404,7 @@ export const ImportAdminOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -3604,18 +3604,18 @@ export const CreateConsumerOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: CreateConsumerOverrideRequest, useInterfaces: boolean = true): CreateConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3770,19 +3770,19 @@ export const UpdateConsumerOverrideRequest = {
     if (object.update_mask !== undefined && object.update_mask !== null) {
       message.updateMask = FieldMask.fromAmino(object.update_mask);
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: UpdateConsumerOverrideRequest, useInterfaces: boolean = true): UpdateConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.override = message.override ? QuotaOverride.toAmino(message.override, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -3903,17 +3903,17 @@ export const DeleteConsumerOverrideRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: DeleteConsumerOverrideRequest, useInterfaces: boolean = true): DeleteConsumerOverrideRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.force = message.force;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -4024,9 +4024,9 @@ export const ListConsumerOverridesRequest = {
   },
   toAmino(message: ListConsumerOverridesRequest, useInterfaces: boolean = true): ListConsumerOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromProtoMsg(message: ListConsumerOverridesRequestProtoMsg, useInterfaces: boolean = true): ListConsumerOverridesRequest {
@@ -4130,9 +4130,9 @@ export const ListConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListConsumerOverridesResponseProtoMsg, useInterfaces: boolean = true): ListConsumerOverridesResponse {
@@ -4221,7 +4221,7 @@ export const BatchCreateConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -4359,18 +4359,18 @@ export const ImportConsumerOverridesRequest = {
     if (object.force !== undefined && object.force !== null) {
       message.force = object.force;
     }
-    message.forceOnly = object.force_only?.map(e => quotaSafetyCheckFromJSON(e)) || [];
+    message.forceOnly = object.force_only?.map(e => e) || [];
     return message;
   },
   toAmino(message: ImportConsumerOverridesRequest, useInterfaces: boolean = true): ImportConsumerOverridesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.inline_source = message.inlineSource ? OverrideInlineSource.toAmino(message.inlineSource, useInterfaces) : undefined;
-    obj.force = message.force;
+    obj.force = message.force === false ? undefined : message.force;
     if (message.forceOnly) {
       obj.force_only = message.forceOnly.map(e => e);
     } else {
-      obj.force_only = [];
+      obj.force_only = message.forceOnly;
     }
     return obj;
   },
@@ -4460,7 +4460,7 @@ export const ImportConsumerOverridesResponse = {
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.overrides = [];
+      obj.overrides = message.overrides;
     }
     return obj;
   },
@@ -4612,7 +4612,7 @@ export const ImportAdminQuotaPoliciesResponse = {
     if (message.policies) {
       obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.policies = [];
+      obj.policies = message.policies;
     }
     return obj;
   },
@@ -4941,7 +4941,7 @@ export const GenerateServiceIdentityRequest = {
   },
   toAmino(message: GenerateServiceIdentityRequest, useInterfaces: boolean = true): GenerateServiceIdentityRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     return obj;
   },
   fromProtoMsg(message: GenerateServiceIdentityRequestProtoMsg, useInterfaces: boolean = true): GenerateServiceIdentityRequest {
@@ -5032,14 +5032,14 @@ export const GetServiceIdentityResponse = {
       message.identity = ServiceIdentity.fromAmino(object.identity);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
+      message.state = object.state;
     }
     return message;
   },
   toAmino(message: GetServiceIdentityResponse, useInterfaces: boolean = true): GetServiceIdentityResponseAmino {
     const obj: any = {};
     obj.identity = message.identity ? ServiceIdentity.toAmino(message.identity, useInterfaces) : undefined;
-    obj.state = message.state;
+    obj.state = message.state === 0 ? undefined : message.state;
     return obj;
   },
   fromProtoMsg(message: GetServiceIdentityResponseProtoMsg, useInterfaces: boolean = true): GetServiceIdentityResponse {

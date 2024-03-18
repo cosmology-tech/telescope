@@ -98,7 +98,7 @@ export const SourceContext = {
   },
   toAmino(message: SourceContext, useInterfaces: boolean = true): SourceContextAmino {
     const obj: any = {};
-    obj.file_name = message.fileName;
+    obj.file_name = message.fileName === "" ? undefined : message.fileName;
     return obj;
   },
   fromProtoMsg(message: SourceContextProtoMsg, useInterfaces: boolean = true): SourceContext {

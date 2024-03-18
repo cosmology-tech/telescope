@@ -60,10 +60,10 @@ export interface MsgCreateDeploymentProtoMsg {
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentAmino {
-  id?: DeploymentIDAmino;
-  groups?: GroupSpecAmino[];
-  version?: string;
-  deposit?: CoinAmino;
+  id: DeploymentIDAmino;
+  groups: GroupSpecAmino[];
+  version: string;
+  deposit: CoinAmino;
 }
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeploymentSDKType {
@@ -93,8 +93,8 @@ export interface MsgDepositDeploymentProtoMsg {
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentAmino {
-  id?: DeploymentIDAmino;
-  amount?: CoinAmino;
+  id: DeploymentIDAmino;
+  amount: CoinAmino;
 }
 /** MsgDepositDeployment deposits more funds into the deposit account */
 export interface MsgDepositDeploymentSDKType {
@@ -123,9 +123,9 @@ export interface MsgUpdateDeploymentProtoMsg {
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentAmino {
-  id?: DeploymentIDAmino;
-  groups?: GroupSpecAmino[];
-  version?: string;
+  id: DeploymentIDAmino;
+  groups: GroupSpecAmino[];
+  version: string;
 }
 /** MsgUpdateDeployment defines an SDK message for updating deployment */
 export interface MsgUpdateDeploymentSDKType {
@@ -153,7 +153,7 @@ export interface MsgCloseDeploymentProtoMsg {
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentAmino {
-  id?: DeploymentIDAmino;
+  id: DeploymentIDAmino;
 }
 /** MsgCloseDeployment defines an SDK message for closing deployment */
 export interface MsgCloseDeploymentSDKType {
@@ -180,8 +180,8 @@ export interface DeploymentIDProtoMsg {
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDAmino {
-  owner?: string;
-  dseq?: string;
+  owner: string;
+  dseq: string;
 }
 /** DeploymentID stores owner and sequence number */
 export interface DeploymentIDSDKType {
@@ -201,9 +201,9 @@ export interface DeploymentProtoMsg {
 }
 /** Deployment stores deploymentID, state and version details */
 export interface DeploymentAmino {
-  deployment_id?: DeploymentIDAmino;
-  state?: Deployment_State;
-  version?: string;
+  deployment_id: DeploymentIDAmino;
+  state: Deployment_State;
+  version: string;
   created_at?: string;
 }
 /** Deployment stores deploymentID, state and version details */
@@ -225,9 +225,9 @@ export interface DeploymentFiltersProtoMsg {
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  state?: string;
+  owner: string;
+  dseq: string;
+  state: string;
 }
 /** DeploymentFilters defines filters used to filter deployments */
 export interface DeploymentFiltersSDKType {
@@ -354,14 +354,14 @@ export const MsgCreateDeployment = {
   },
   toAmino(message: MsgCreateDeployment, useInterfaces: boolean = true): MsgCreateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
-    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : undefined;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
+    obj.deposit = message.deposit ? Coin.toAmino(message.deposit, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCreateDeploymentProtoMsg, useInterfaces: boolean = true): MsgCreateDeployment {
@@ -522,8 +522,8 @@ export const MsgDepositDeployment = {
   },
   toAmino(message: MsgDepositDeployment, useInterfaces: boolean = true): MsgDepositDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
-    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
+    obj.amount = message.amount ? Coin.toAmino(message.amount, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgDepositDeploymentProtoMsg, useInterfaces: boolean = true): MsgDepositDeployment {
@@ -703,13 +703,13 @@ export const MsgUpdateDeployment = {
   },
   toAmino(message: MsgUpdateDeployment, useInterfaces: boolean = true): MsgUpdateDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupSpec.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
     return obj;
   },
   fromProtoMsg(message: MsgUpdateDeploymentProtoMsg, useInterfaces: boolean = true): MsgUpdateDeployment {
@@ -853,7 +853,7 @@ export const MsgCloseDeployment = {
   },
   toAmino(message: MsgCloseDeployment, useInterfaces: boolean = true): MsgCloseDeploymentAmino {
     const obj: any = {};
-    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : undefined;
+    obj.id = message.id ? DeploymentID.toAmino(message.id, useInterfaces) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: MsgCloseDeploymentProtoMsg, useInterfaces: boolean = true): MsgCloseDeployment {
@@ -1012,8 +1012,8 @@ export const DeploymentID = {
   },
   toAmino(message: DeploymentID, useInterfaces: boolean = true): DeploymentIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
     return obj;
   },
   fromProtoMsg(message: DeploymentIDProtoMsg, useInterfaces: boolean = true): DeploymentID {
@@ -1130,7 +1130,7 @@ export const Deployment = {
       message.deploymentId = DeploymentID.fromAmino(object.deployment_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = deployment_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.version !== undefined && object.version !== null) {
       message.version = bytesFromBase64(object.version);
@@ -1142,10 +1142,10 @@ export const Deployment = {
   },
   toAmino(message: Deployment, useInterfaces: boolean = true): DeploymentAmino {
     const obj: any = {};
-    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId, useInterfaces) : undefined;
-    obj.state = message.state;
-    obj.version = message.version ? base64FromBytes(message.version) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId, useInterfaces) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
+    obj.state = message.state ?? 0;
+    obj.version = message.version ? base64FromBytes(message.version) : "";
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: DeploymentProtoMsg, useInterfaces: boolean = true): Deployment {
@@ -1257,9 +1257,9 @@ export const DeploymentFilters = {
   },
   toAmino(message: DeploymentFilters, useInterfaces: boolean = true): DeploymentFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.state = message.state ?? "";
     return obj;
   },
   fromProtoMsg(message: DeploymentFiltersProtoMsg, useInterfaces: boolean = true): DeploymentFilters {

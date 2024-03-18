@@ -247,10 +247,10 @@ export const MsgRegisterPayee = {
   },
   toAmino(message: MsgRegisterPayee): MsgRegisterPayeeAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.payee = message.payee;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
+    obj.relayer = message.relayer === "" ? undefined : message.relayer;
+    obj.payee = message.payee === "" ? undefined : message.payee;
     return obj;
   },
   fromAminoMsg(object: MsgRegisterPayeeAminoMsg): MsgRegisterPayee {
@@ -465,10 +465,10 @@ export const MsgRegisterCounterpartyPayee = {
   },
   toAmino(message: MsgRegisterCounterpartyPayee): MsgRegisterCounterpartyPayeeAmino {
     const obj: any = {};
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.relayer = message.relayer;
-    obj.counterparty_payee = message.counterpartyPayee;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
+    obj.relayer = message.relayer === "" ? undefined : message.relayer;
+    obj.counterparty_payee = message.counterpartyPayee === "" ? undefined : message.counterpartyPayee;
     return obj;
   },
   fromAminoMsg(object: MsgRegisterCounterpartyPayeeAminoMsg): MsgRegisterCounterpartyPayee {
@@ -706,13 +706,13 @@ export const MsgPayPacketFee = {
   toAmino(message: MsgPayPacketFee): MsgPayPacketFeeAmino {
     const obj: any = {};
     obj.fee = message.fee ? Fee.toAmino(message.fee) : undefined;
-    obj.source_port_id = message.sourcePortId;
-    obj.source_channel_id = message.sourceChannelId;
-    obj.signer = message.signer;
+    obj.source_port_id = message.sourcePortId === "" ? undefined : message.sourcePortId;
+    obj.source_channel_id = message.sourceChannelId === "" ? undefined : message.sourceChannelId;
+    obj.signer = message.signer === "" ? undefined : message.signer;
     if (message.relayers) {
       obj.relayers = message.relayers.map(e => e);
     } else {
-      obj.relayers = [];
+      obj.relayers = message.relayers;
     }
     return obj;
   },

@@ -216,8 +216,8 @@ export const SourceInfo_PositionsEntry = {
   },
   toAmino(message: SourceInfo_PositionsEntry): SourceInfo_PositionsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === 0 ? undefined : message.key;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: SourceInfo_PositionsEntryAminoMsg): SourceInfo_PositionsEntry {
@@ -377,11 +377,11 @@ export const SourceInfo = {
   },
   toAmino(message: SourceInfo): SourceInfoAmino {
     const obj: any = {};
-    obj.location = message.location;
+    obj.location = message.location === "" ? undefined : message.location;
     if (message.lineOffsets) {
       obj.line_offsets = message.lineOffsets.map(e => e);
     } else {
-      obj.line_offsets = [];
+      obj.line_offsets = message.lineOffsets;
     }
     obj.positions = {};
     if (message.positions) {
@@ -516,10 +516,10 @@ export const SourcePosition = {
   },
   toAmino(message: SourcePosition): SourcePositionAmino {
     const obj: any = {};
-    obj.location = message.location;
-    obj.offset = message.offset;
-    obj.line = message.line;
-    obj.column = message.column;
+    obj.location = message.location === "" ? undefined : message.location;
+    obj.offset = message.offset === 0 ? undefined : message.offset;
+    obj.line = message.line === 0 ? undefined : message.line;
+    obj.column = message.column === 0 ? undefined : message.column;
     return obj;
   },
   fromAminoMsg(object: SourcePositionAminoMsg): SourcePosition {

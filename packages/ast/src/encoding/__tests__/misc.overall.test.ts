@@ -29,7 +29,8 @@ cases(
     context.options.interfaces!.enabled = true;
     context.options.interfaces!.useGlobalDecoderRegistry = true;
     context.options.aminoEncoding = {
-      enabled: true
+      enabled: true,
+      omitEmptyTags: ["omitempty" , "dont_omitempty"]
     }
 
     expectCode(

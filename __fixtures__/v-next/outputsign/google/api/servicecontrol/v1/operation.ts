@@ -308,8 +308,8 @@ export const Operation_LabelsEntry = {
   },
   toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
@@ -470,16 +470,16 @@ export const Operation = {
     message.metricValueSets = object.metric_value_sets?.map(e => MetricValueSet.fromAmino(e)) || [];
     message.logEntries = object.log_entries?.map(e => LogEntry.fromAmino(e)) || [];
     if (object.importance !== undefined && object.importance !== null) {
-      message.importance = operation_ImportanceFromJSON(object.importance);
+      message.importance = object.importance;
     }
     message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
     return message;
   },
   toAmino(message: Operation): OperationAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
-    obj.operation_name = message.operationName;
-    obj.consumer_id = message.consumerId;
+    obj.operation_id = message.operationId === "" ? undefined : message.operationId;
+    obj.operation_name = message.operationName === "" ? undefined : message.operationName;
+    obj.consumer_id = message.consumerId === "" ? undefined : message.consumerId;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.labels = {};
@@ -491,18 +491,18 @@ export const Operation = {
     if (message.metricValueSets) {
       obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
     } else {
-      obj.metric_value_sets = [];
+      obj.metric_value_sets = message.metricValueSets;
     }
     if (message.logEntries) {
       obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
     } else {
-      obj.log_entries = [];
+      obj.log_entries = message.logEntries;
     }
-    obj.importance = message.importance;
+    obj.importance = message.importance === 0 ? undefined : message.importance;
     if (message.extensions) {
       obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
     } else {
-      obj.extensions = [];
+      obj.extensions = message.extensions;
     }
     return obj;
   },

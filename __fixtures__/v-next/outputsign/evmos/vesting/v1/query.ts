@@ -109,7 +109,7 @@ export const QueryBalancesRequest = {
   },
   toAmino(message: QueryBalancesRequest): QueryBalancesRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryBalancesRequestAminoMsg): QueryBalancesRequest {
@@ -191,17 +191,17 @@ export const QueryBalancesResponse = {
     if (message.locked) {
       obj.locked = message.locked.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.locked = [];
+      obj.locked = message.locked;
     }
     if (message.unvested) {
       obj.unvested = message.unvested.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.unvested = [];
+      obj.unvested = message.unvested;
     }
     if (message.vested) {
       obj.vested = message.vested.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.vested = [];
+      obj.vested = message.vested;
     }
     return obj;
   },

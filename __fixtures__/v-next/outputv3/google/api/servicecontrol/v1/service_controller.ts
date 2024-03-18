@@ -542,9 +542,9 @@ export const CheckRequest = {
   },
   toAmino(message: CheckRequest, useInterfaces: boolean = true): CheckRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     obj.operation = message.operation ? Operation.toAmino(message.operation, useInterfaces) : undefined;
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     return obj;
   },
   fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
@@ -692,14 +692,14 @@ export const CheckResponse = {
   },
   toAmino(message: CheckResponse, useInterfaces: boolean = true): CheckResponseAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
+    obj.operation_id = message.operationId === "" ? undefined : message.operationId;
     if (message.checkErrors) {
       obj.check_errors = message.checkErrors.map(e => e ? CheckError.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.check_errors = [];
+      obj.check_errors = message.checkErrors;
     }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId === "" ? undefined : message.serviceRolloutId;
     obj.check_info = message.checkInfo ? CheckResponse_CheckInfo.toAmino(message.checkInfo, useInterfaces) : undefined;
     return obj;
   },
@@ -806,7 +806,7 @@ export const CheckResponse_CheckInfo = {
     if (message.unusedArguments) {
       obj.unused_arguments = message.unusedArguments.map(e => e);
     } else {
-      obj.unused_arguments = [];
+      obj.unused_arguments = message.unusedArguments;
     }
     obj.consumer_info = message.consumerInfo ? CheckResponse_ConsumerInfo.toAmino(message.consumerInfo, useInterfaces) : undefined;
     return obj;
@@ -913,7 +913,7 @@ export const CheckResponse_ConsumerInfo = {
       message.projectNumber = BigInt(object.project_number);
     }
     if (object.type !== undefined && object.type !== null) {
-      message.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
+      message.type = object.type;
     }
     if (object.consumer_number !== undefined && object.consumer_number !== null) {
       message.consumerNumber = BigInt(object.consumer_number);
@@ -922,9 +922,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   toAmino(message: CheckResponse_ConsumerInfo, useInterfaces: boolean = true): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
-    obj.project_number = message.projectNumber ? message.projectNumber.toString() : undefined;
-    obj.type = message.type;
-    obj.consumer_number = message.consumerNumber ? message.consumerNumber.toString() : undefined;
+    obj.project_number = message.projectNumber !== BigInt(0) ? message.projectNumber.toString() : undefined;
+    obj.type = message.type === 0 ? undefined : message.type;
+    obj.consumer_number = message.consumerNumber !== BigInt(0) ? message.consumerNumber.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CheckResponse_ConsumerInfoProtoMsg, useInterfaces: boolean = true): CheckResponse_ConsumerInfo {
@@ -1040,13 +1040,13 @@ export const ReportRequest = {
   },
   toAmino(message: ReportRequest, useInterfaces: boolean = true): ReportRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.operations = [];
+      obj.operations = message.operations;
     }
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     return obj;
   },
   fromProtoMsg(message: ReportRequestProtoMsg, useInterfaces: boolean = true): ReportRequest {
@@ -1165,10 +1165,10 @@ export const ReportResponse = {
     if (message.reportErrors) {
       obj.report_errors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.report_errors = [];
+      obj.report_errors = message.reportErrors;
     }
-    obj.service_config_id = message.serviceConfigId;
-    obj.service_rollout_id = message.serviceRolloutId;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
+    obj.service_rollout_id = message.serviceRolloutId === "" ? undefined : message.serviceRolloutId;
     return obj;
   },
   fromProtoMsg(message: ReportResponseProtoMsg, useInterfaces: boolean = true): ReportResponse {
@@ -1265,7 +1265,7 @@ export const ReportResponse_ReportError = {
   },
   toAmino(message: ReportResponse_ReportError, useInterfaces: boolean = true): ReportResponse_ReportErrorAmino {
     const obj: any = {};
-    obj.operation_id = message.operationId;
+    obj.operation_id = message.operationId === "" ? undefined : message.operationId;
     obj.status = message.status ? Status.toAmino(message.status, useInterfaces) : undefined;
     return obj;
   },

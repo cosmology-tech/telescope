@@ -33,7 +33,7 @@ export interface MemoryProtoMsg {
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
-  quantity?: ResourceValueAmino;
+  quantity: ResourceValueAmino;
   attributes?: AttributeAmino[];
 }
 /** Memory stores resource quantity and memory attributes */
@@ -53,8 +53,8 @@ export interface StorageProtoMsg {
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageAmino {
-  name?: string;
-  quantity?: ResourceValueAmino;
+  name: string;
+  quantity: ResourceValueAmino;
   attributes?: AttributeAmino[];
 }
 /** Storage stores resource quantity and storage attributes */
@@ -154,7 +154,7 @@ export const CPU = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -258,11 +258,11 @@ export const Memory = {
   },
   toAmino(message: Memory, useInterfaces: boolean = true): MemoryAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -381,12 +381,12 @@ export const Storage = {
   },
   toAmino(message: Storage, useInterfaces: boolean = true): StorageAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : undefined;
+    obj.name = message.name ?? "";
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity, useInterfaces) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },

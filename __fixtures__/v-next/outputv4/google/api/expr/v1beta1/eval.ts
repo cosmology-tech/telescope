@@ -264,12 +264,12 @@ export const EvalState = {
     if (message.values) {
       obj.values = message.values.map(e => e ? ExprValue.toAmino(e) : undefined);
     } else {
-      obj.values = [];
+      obj.values = message.values;
     }
     if (message.results) {
       obj.results = message.results.map(e => e ? EvalState_Result.toAmino(e) : undefined);
     } else {
-      obj.results = [];
+      obj.results = message.results;
     }
     return obj;
   },
@@ -377,7 +377,7 @@ export const EvalState_Result = {
   toAmino(message: EvalState_Result): EvalState_ResultAmino {
     const obj: any = {};
     obj.expr = message.expr ? IdRef.toAmino(message.expr) : undefined;
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromAminoMsg(object: EvalState_ResultAminoMsg): EvalState_Result {
@@ -602,7 +602,7 @@ export const ErrorSet = {
     if (message.errors) {
       obj.errors = message.errors.map(e => e ? Status.toAmino(e) : undefined);
     } else {
-      obj.errors = [];
+      obj.errors = message.errors;
     }
     return obj;
   },
@@ -700,7 +700,7 @@ export const UnknownSet = {
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => e ? IdRef.toAmino(e) : undefined);
     } else {
-      obj.exprs = [];
+      obj.exprs = message.exprs;
     }
     return obj;
   },
@@ -789,7 +789,7 @@ export const IdRef = {
   },
   toAmino(message: IdRef): IdRefAmino {
     const obj: any = {};
-    obj.id = message.id;
+    obj.id = message.id === 0 ? undefined : message.id;
     return obj;
   },
   fromAminoMsg(object: IdRefAminoMsg): IdRef {

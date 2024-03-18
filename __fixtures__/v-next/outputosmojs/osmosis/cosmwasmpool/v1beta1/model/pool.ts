@@ -134,10 +134,10 @@ export const CosmWasmPool = {
   },
   toAmino(message: CosmWasmPool): CosmWasmPoolAmino {
     const obj: any = {};
-    obj.pool_address = message.poolAddress;
-    obj.contract_address = message.contractAddress;
-    obj.pool_id = message.poolId ? message.poolId.toString() : undefined;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.pool_address = message.poolAddress === "" ? undefined : message.poolAddress;
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CosmWasmPoolAminoMsg): CosmWasmPool {

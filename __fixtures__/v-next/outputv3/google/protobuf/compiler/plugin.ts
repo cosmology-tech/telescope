@@ -382,10 +382,10 @@ export const Version = {
   },
   toAmino(message: Version, useInterfaces: boolean = true): VersionAmino {
     const obj: any = {};
-    obj.major = message.major;
-    obj.minor = message.minor;
-    obj.patch = message.patch;
-    obj.suffix = message.suffix;
+    obj.major = message.major === 0 ? undefined : message.major;
+    obj.minor = message.minor === 0 ? undefined : message.minor;
+    obj.patch = message.patch === 0 ? undefined : message.patch;
+    obj.suffix = message.suffix === "" ? undefined : message.suffix;
     return obj;
   },
   fromProtoMsg(message: VersionProtoMsg, useInterfaces: boolean = true): Version {
@@ -527,13 +527,13 @@ export const CodeGeneratorRequest = {
     if (message.fileToGenerate) {
       obj.file_to_generate = message.fileToGenerate.map(e => e);
     } else {
-      obj.file_to_generate = [];
+      obj.file_to_generate = message.fileToGenerate;
     }
-    obj.parameter = message.parameter;
+    obj.parameter = message.parameter === "" ? undefined : message.parameter;
     if (message.protoFile) {
       obj.proto_file = message.protoFile.map(e => e ? FileDescriptorProto.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.proto_file = [];
+      obj.proto_file = message.protoFile;
     }
     obj.compiler_version = message.compilerVersion ? Version.toAmino(message.compilerVersion, useInterfaces) : undefined;
     return obj;
@@ -636,11 +636,11 @@ export const CodeGeneratorResponse = {
   },
   toAmino(message: CodeGeneratorResponse, useInterfaces: boolean = true): CodeGeneratorResponseAmino {
     const obj: any = {};
-    obj.error = message.error;
+    obj.error = message.error === "" ? undefined : message.error;
     if (message.file) {
       obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.file = [];
+      obj.file = message.file;
     }
     return obj;
   },
@@ -751,9 +751,9 @@ export const CodeGeneratorResponse_File = {
   },
   toAmino(message: CodeGeneratorResponse_File, useInterfaces: boolean = true): CodeGeneratorResponse_FileAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.insertion_point = message.insertionPoint;
-    obj.content = message.content;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.insertion_point = message.insertionPoint === "" ? undefined : message.insertionPoint;
+    obj.content = message.content === "" ? undefined : message.content;
     return obj;
   },
   fromProtoMsg(message: CodeGeneratorResponse_FileProtoMsg, useInterfaces: boolean = true): CodeGeneratorResponse_File {

@@ -429,7 +429,7 @@ export const Value = {
   fromAmino(object: ValueAmino): Value {
     const message = createBaseValue();
     if (object.null_value !== undefined && object.null_value !== null) {
-      message.nullValue = nullValueFromJSON(object.null_value);
+      message.nullValue = object.null_value;
     }
     if (object.bool_value !== undefined && object.bool_value !== null) {
       message.boolValue = object.bool_value;
@@ -468,18 +468,18 @@ export const Value = {
   },
   toAmino(message: Value, useInterfaces: boolean = true): ValueAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.bool_value = message.boolValue;
-    obj.int64_value = message.int64Value ? message.int64Value.toString() : undefined;
-    obj.uint64_value = message.uint64Value ? message.uint64Value.toString() : undefined;
-    obj.double_value = message.doubleValue;
-    obj.string_value = message.stringValue;
+    obj.null_value = message.nullValue === null ? undefined : message.nullValue;
+    obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
+    obj.int64_value = message.int64Value !== BigInt(0) ? message.int64Value.toString() : undefined;
+    obj.uint64_value = message.uint64Value !== BigInt(0) ? message.uint64Value.toString() : undefined;
+    obj.double_value = message.doubleValue === null ? undefined : message.doubleValue;
+    obj.string_value = message.stringValue === null ? undefined : message.stringValue;
     obj.bytes_value = message.bytesValue ? base64FromBytes(message.bytesValue) : undefined;
     obj.enum_value = message.enumValue ? EnumValue.toAmino(message.enumValue, useInterfaces) : undefined;
     obj.object_value = message.objectValue ? Any.toAmino(message.objectValue, useInterfaces) : undefined;
     obj.map_value = message.mapValue ? MapValue.toAmino(message.mapValue, useInterfaces) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue, useInterfaces) : undefined;
-    obj.type_value = message.typeValue;
+    obj.type_value = message.typeValue === null ? undefined : message.typeValue;
     return obj;
   },
   fromProtoMsg(message: ValueProtoMsg, useInterfaces: boolean = true): Value {
@@ -574,8 +574,8 @@ export const EnumValue = {
   },
   toAmino(message: EnumValue, useInterfaces: boolean = true): EnumValueAmino {
     const obj: any = {};
-    obj.type = message.type;
-    obj.value = message.value;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: EnumValueProtoMsg, useInterfaces: boolean = true): EnumValue {
@@ -664,7 +664,7 @@ export const ListValue = {
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.values = [];
+      obj.values = message.values;
     }
     return obj;
   },
@@ -754,7 +754,7 @@ export const MapValue = {
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.entries = [];
+      obj.entries = message.entries;
     }
     return obj;
   },

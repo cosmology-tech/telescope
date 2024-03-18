@@ -1,4 +1,4 @@
-import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON } from "./type";
+import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxSDKType } from "./type";
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial } from "../../helpers";
@@ -559,31 +559,31 @@ export const Api = {
     }
     message.mixins = object.mixins?.map(e => Mixin.fromAmino(e)) || [];
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Api): ApiAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.methods) {
       obj.methods = message.methods.map(e => e ? Method.toAmino(e) : undefined);
     } else {
-      obj.methods = [];
+      obj.methods = message.methods;
     }
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.version = message.version;
+    obj.version = message.version === "" ? undefined : message.version;
     obj.source_context = message.sourceContext ? SourceContext.toAmino(message.sourceContext) : undefined;
     if (message.mixins) {
       obj.mixins = message.mixins.map(e => e ? Mixin.toAmino(e) : undefined);
     } else {
-      obj.mixins = [];
+      obj.mixins = message.mixins;
     }
-    obj.syntax = message.syntax;
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromAminoMsg(object: ApiAminoMsg): Api {
@@ -704,23 +704,23 @@ export const Method = {
     }
     message.options = object.options?.map(e => Option.fromAmino(e)) || [];
     if (object.syntax !== undefined && object.syntax !== null) {
-      message.syntax = syntaxFromJSON(object.syntax);
+      message.syntax = object.syntax;
     }
     return message;
   },
   toAmino(message: Method): MethodAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.request_type_url = message.requestTypeUrl;
-    obj.request_streaming = message.requestStreaming;
-    obj.response_type_url = message.responseTypeUrl;
-    obj.response_streaming = message.responseStreaming;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.request_type_url = message.requestTypeUrl === "" ? undefined : message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming === false ? undefined : message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl === "" ? undefined : message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming === false ? undefined : message.responseStreaming;
     if (message.options) {
       obj.options = message.options.map(e => e ? Option.toAmino(e) : undefined);
     } else {
-      obj.options = [];
+      obj.options = message.options;
     }
-    obj.syntax = message.syntax;
+    obj.syntax = message.syntax === 0 ? undefined : message.syntax;
     return obj;
   },
   fromAminoMsg(object: MethodAminoMsg): Method {
@@ -794,8 +794,8 @@ export const Mixin = {
   },
   toAmino(message: Mixin): MixinAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.root = message.root;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.root = message.root === "" ? undefined : message.root;
     return obj;
   },
   fromAminoMsg(object: MixinAminoMsg): Mixin {

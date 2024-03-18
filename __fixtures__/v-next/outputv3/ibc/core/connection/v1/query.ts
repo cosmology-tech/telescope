@@ -402,7 +402,7 @@ export const QueryConnectionRequest = {
   },
   toAmino(message: QueryConnectionRequest, useInterfaces: boolean = true): QueryConnectionRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     return obj;
   },
   fromProtoMsg(message: QueryConnectionRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionRequest {
@@ -726,7 +726,7 @@ export const QueryConnectionsResponse = {
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.connections = [];
+      obj.connections = message.connections;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination, useInterfaces) : undefined;
     obj.height = message.height ? Height.toAmino(message.height, useInterfaces) : {};
@@ -810,7 +810,7 @@ export const QueryClientConnectionsRequest = {
   },
   toAmino(message: QueryClientConnectionsRequest, useInterfaces: boolean = true): QueryClientConnectionsRequestAmino {
     const obj: any = {};
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     return obj;
   },
   fromProtoMsg(message: QueryClientConnectionsRequestProtoMsg, useInterfaces: boolean = true): QueryClientConnectionsRequest {
@@ -932,7 +932,7 @@ export const QueryClientConnectionsResponse = {
     if (message.connectionPaths) {
       obj.connection_paths = message.connectionPaths.map(e => e);
     } else {
-      obj.connection_paths = [];
+      obj.connection_paths = message.connectionPaths;
     }
     obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
@@ -1016,7 +1016,7 @@ export const QueryConnectionClientStateRequest = {
   },
   toAmino(message: QueryConnectionClientStateRequest, useInterfaces: boolean = true): QueryConnectionClientStateRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
     return obj;
   },
   fromProtoMsg(message: QueryConnectionClientStateRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionClientStateRequest {
@@ -1248,9 +1248,9 @@ export const QueryConnectionConsensusStateRequest = {
   },
   toAmino(message: QueryConnectionConsensusStateRequest, useInterfaces: boolean = true): QueryConnectionConsensusStateRequestAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.revision_number = message.revisionNumber ? message.revisionNumber.toString() : undefined;
-    obj.revision_height = message.revisionHeight ? message.revisionHeight.toString() : undefined;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.revision_number = message.revisionNumber !== BigInt(0) ? message.revisionNumber.toString() : undefined;
+    obj.revision_height = message.revisionHeight !== BigInt(0) ? message.revisionHeight.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryConnectionConsensusStateRequestProtoMsg, useInterfaces: boolean = true): QueryConnectionConsensusStateRequest {
@@ -1381,7 +1381,7 @@ export const QueryConnectionConsensusStateResponse = {
   toAmino(message: QueryConnectionConsensusStateResponse, useInterfaces: boolean = true): QueryConnectionConsensusStateResponseAmino {
     const obj: any = {};
     obj.consensus_state = message.consensusState ? Any.toAmino(message.consensusState, useInterfaces) : undefined;
-    obj.client_id = message.clientId;
+    obj.client_id = message.clientId === "" ? undefined : message.clientId;
     obj.proof = message.proof ? base64FromBytes(message.proof) : undefined;
     obj.proof_height = message.proofHeight ? Height.toAmino(message.proofHeight, useInterfaces) : {};
     return obj;

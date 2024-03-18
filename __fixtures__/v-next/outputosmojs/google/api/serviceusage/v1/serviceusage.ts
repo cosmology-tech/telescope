@@ -414,7 +414,7 @@ export const EnableServiceRequest = {
   },
   toAmino(message: EnableServiceRequest): EnableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: EnableServiceRequestAminoMsg): EnableServiceRequest {
@@ -616,15 +616,15 @@ export const DisableServiceRequest = {
       message.disableDependentServices = object.disable_dependent_services;
     }
     if (object.check_if_service_has_usage !== undefined && object.check_if_service_has_usage !== null) {
-      message.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage);
+      message.checkIfServiceHasUsage = object.check_if_service_has_usage;
     }
     return message;
   },
   toAmino(message: DisableServiceRequest): DisableServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.disable_dependent_services = message.disableDependentServices;
-    obj.check_if_service_has_usage = message.checkIfServiceHasUsage;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.disable_dependent_services = message.disableDependentServices === false ? undefined : message.disableDependentServices;
+    obj.check_if_service_has_usage = message.checkIfServiceHasUsage === 0 ? undefined : message.checkIfServiceHasUsage;
     return obj;
   },
   fromAminoMsg(object: DisableServiceRequestAminoMsg): DisableServiceRequest {
@@ -800,7 +800,7 @@ export const GetServiceRequest = {
   },
   toAmino(message: GetServiceRequest): GetServiceRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: GetServiceRequestAminoMsg): GetServiceRequest {
@@ -936,10 +936,10 @@ export const ListServicesRequest = {
   },
   toAmino(message: ListServicesRequest): ListServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
-    obj.filter = message.filter;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     return obj;
   },
   fromAminoMsg(object: ListServicesRequestAminoMsg): ListServicesRequest {
@@ -1052,9 +1052,9 @@ export const ListServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromAminoMsg(object: ListServicesResponseAminoMsg): ListServicesResponse {
@@ -1164,11 +1164,11 @@ export const BatchEnableServicesRequest = {
   },
   toAmino(message: BatchEnableServicesRequest): BatchEnableServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     if (message.serviceIds) {
       obj.service_ids = message.serviceIds.map(e => e);
     } else {
-      obj.service_ids = [];
+      obj.service_ids = message.serviceIds;
     }
     return obj;
   },
@@ -1288,12 +1288,12 @@ export const BatchEnableServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
     if (message.failures) {
       obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toAmino(e) : undefined);
     } else {
-      obj.failures = [];
+      obj.failures = message.failures;
     }
     return obj;
   },
@@ -1398,8 +1398,8 @@ export const BatchEnableServicesResponse_EnableFailure = {
   },
   toAmino(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureAmino {
     const obj: any = {};
-    obj.service_id = message.serviceId;
-    obj.error_message = message.errorMessage;
+    obj.service_id = message.serviceId === "" ? undefined : message.serviceId;
+    obj.error_message = message.errorMessage === "" ? undefined : message.errorMessage;
     return obj;
   },
   fromAminoMsg(object: BatchEnableServicesResponse_EnableFailureAminoMsg): BatchEnableServicesResponse_EnableFailure {
@@ -1509,11 +1509,11 @@ export const BatchGetServicesRequest = {
   },
   toAmino(message: BatchGetServicesRequest): BatchGetServicesRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     if (message.names) {
       obj.names = message.names.map(e => e);
     } else {
-      obj.names = [];
+      obj.names = message.names;
     }
     return obj;
   },
@@ -1611,7 +1611,7 @@ export const BatchGetServicesResponse = {
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toAmino(e) : undefined);
     } else {
-      obj.services = [];
+      obj.services = message.services;
     }
     return obj;
   },

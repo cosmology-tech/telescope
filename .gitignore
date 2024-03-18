@@ -8,3 +8,4 @@ packages/**/main
 packages/**/module
 launch.json
 .vscode/settings.json
+.idea/

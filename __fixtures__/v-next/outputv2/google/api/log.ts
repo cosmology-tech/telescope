@@ -211,14 +211,14 @@ export const LogDescriptor = {
   },
   toAmino(message: LogDescriptor): LogDescriptorAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.labels) {
       obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
     } else {
-      obj.labels = [];
+      obj.labels = message.labels;
     }
-    obj.description = message.description;
-    obj.display_name = message.displayName;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
     return obj;
   },
   fromAminoMsg(object: LogDescriptorAminoMsg): LogDescriptor {

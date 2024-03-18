@@ -110,7 +110,7 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.prune_epoch_identifier = message.pruneEpochIdentifier;
+    obj.prune_epoch_identifier = message.pruneEpochIdentifier === "" ? undefined : message.pruneEpochIdentifier;
     obj.record_history_keep_period = message.recordHistoryKeepPeriod ? Duration.toAmino(message.recordHistoryKeepPeriod) : undefined;
     return obj;
   },
@@ -194,7 +194,7 @@ export const GenesisState = {
     if (message.twaps) {
       obj.twaps = message.twaps.map(e => e ? TwapRecord.toAmino(e) : undefined);
     } else {
-      obj.twaps = [];
+      obj.twaps = message.twaps;
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;

@@ -440,7 +440,7 @@ export const QueryAppliedPlanRequest = {
   },
   toAmino(message: QueryAppliedPlanRequest): QueryAppliedPlanRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: QueryAppliedPlanRequestAminoMsg): QueryAppliedPlanRequest {
@@ -534,7 +534,7 @@ export const QueryAppliedPlanResponse = {
   },
   toAmino(message: QueryAppliedPlanResponse): QueryAppliedPlanResponseAmino {
     const obj: any = {};
-    obj.height = message.height ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryAppliedPlanResponseAminoMsg): QueryAppliedPlanResponse {
@@ -628,7 +628,7 @@ export const QueryUpgradedConsensusStateRequest = {
   },
   toAmino(message: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestAmino {
     const obj: any = {};
-    obj.last_height = message.lastHeight ? message.lastHeight.toString() : undefined;
+    obj.last_height = message.lastHeight !== BigInt(0) ? message.lastHeight.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryUpgradedConsensusStateRequestAminoMsg): QueryUpgradedConsensusStateRequest {
@@ -816,7 +816,7 @@ export const QueryModuleVersionsRequest = {
   },
   toAmino(message: QueryModuleVersionsRequest): QueryModuleVersionsRequestAmino {
     const obj: any = {};
-    obj.module_name = message.moduleName;
+    obj.module_name = message.moduleName === "" ? undefined : message.moduleName;
     return obj;
   },
   fromAminoMsg(object: QueryModuleVersionsRequestAminoMsg): QueryModuleVersionsRequest {
@@ -919,7 +919,7 @@ export const QueryModuleVersionsResponse = {
     if (message.moduleVersions) {
       obj.module_versions = message.moduleVersions.map(e => e ? ModuleVersion.toAmino(e) : undefined);
     } else {
-      obj.module_versions = [];
+      obj.module_versions = message.moduleVersions;
     }
     return obj;
   },
@@ -1087,7 +1087,7 @@ export const QueryAuthorityResponse = {
   },
   toAmino(message: QueryAuthorityResponse): QueryAuthorityResponseAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryAuthorityResponseAminoMsg): QueryAuthorityResponse {

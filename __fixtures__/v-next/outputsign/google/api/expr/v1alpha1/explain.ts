@@ -144,12 +144,12 @@ export const Explain = {
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
-      obj.values = [];
+      obj.values = message.values;
     }
     if (message.exprSteps) {
       obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
     } else {
-      obj.expr_steps = [];
+      obj.expr_steps = message.exprSteps;
     }
     return obj;
   },
@@ -226,8 +226,8 @@ export const Explain_ExprStep = {
   },
   toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
     const obj: any = {};
-    obj.id = message.id ? message.id.toString() : undefined;
-    obj.value_index = message.valueIndex;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.value_index = message.valueIndex === 0 ? undefined : message.valueIndex;
     return obj;
   },
   fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {

@@ -26,7 +26,7 @@ export interface DepositDeploymentAuthorizationAmino {
    * SpendLimit is the amount the grantee is authorized to spend from the granter's account for
    * the purpose of deployment.
    */
-  spend_limit?: CoinAmino | undefined;
+  spend_limit: CoinAmino | undefined;
 }
 export interface DepositDeploymentAuthorizationAminoMsg {
   type: "/akash.deployment.v1beta1.DepositDeploymentAuthorization";

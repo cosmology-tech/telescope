@@ -183,10 +183,10 @@ export const GenesisState = {
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.period = message.period ? message.period.toString() : undefined;
-    obj.epoch_identifier = message.epochIdentifier;
-    obj.epochs_per_period = message.epochsPerPeriod ? message.epochsPerPeriod.toString() : undefined;
-    obj.skipped_epochs = message.skippedEpochs ? message.skippedEpochs.toString() : undefined;
+    obj.period = message.period !== BigInt(0) ? message.period.toString() : undefined;
+    obj.epoch_identifier = message.epochIdentifier === "" ? undefined : message.epochIdentifier;
+    obj.epochs_per_period = message.epochsPerPeriod !== BigInt(0) ? message.epochsPerPeriod.toString() : undefined;
+    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? message.skippedEpochs.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -322,10 +322,10 @@ export const Params = {
   },
   toAmino(message: Params): ParamsAmino {
     const obj: any = {};
-    obj.mint_denom = message.mintDenom;
+    obj.mint_denom = message.mintDenom === "" ? undefined : message.mintDenom;
     obj.exponential_calculation = message.exponentialCalculation ? ExponentialCalculation.toAmino(message.exponentialCalculation) : undefined;
     obj.inflation_distribution = message.inflationDistribution ? InflationDistribution.toAmino(message.inflationDistribution) : undefined;
-    obj.enable_inflation = message.enableInflation;
+    obj.enable_inflation = message.enableInflation === false ? undefined : message.enableInflation;
     return obj;
   },
   fromAminoMsg(object: ParamsAminoMsg): Params {

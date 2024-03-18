@@ -5,6 +5,7 @@ import { ProtoType, ProtoField } from '@cosmology/types';
 import { protoFieldsToArray } from '../utils';
 import { arrayTypes, toAmino } from './utils';
 import { getFieldOptionality, getOneOfs } from '../../proto';
+import { shouldOmitEmpty } from '@cosmology/utils';
 
 const needsImplementation = (name: string, field: ProtoField) => {
     throw new Error(`need to implement toAmino (${field.type} rules[${field.rule}] name[${name}])`);
@@ -22,7 +23,7 @@ export interface ToAminoParseField {
     fieldPath: ProtoField[];
     nested: number;
     isOptional: boolean;
-};
+}
 
 export const toAminoParseField = ({
     context,
@@ -70,9 +71,6 @@ export const toAminoParseField = ({
             case 'bool':
             case 'bytes':
                 return toAmino.defaultType(args);
-
-            case 'string':
-                return toAmino.string(args);
         }
 
         switch (field.parsedType.type) {
@@ -134,16 +132,18 @@ export const toAminoParseField = ({
         }
     }
 
+    let omitEmpty = shouldOmitEmpty(args.context, field);
+
     // scalar types...
     switch (field.type) {
         case 'string':
-            return toAmino.string(args);
+            return toAmino.string(args, omitEmpty);
         case 'int64':
         case 'sint64':
         case 'uint64':
         case 'fixed64':
         case 'sfixed64':
-            return toAmino.long(args);
+            return toAmino.long(args, omitEmpty);
         case 'double':
         case 'float':
         case 'int32':
@@ -152,8 +152,9 @@ export const toAminoParseField = ({
         case 'fixed32':
         case 'sfixed32':
         case 'bool':
+            return toAmino.defaultType(args, omitEmpty)
         case 'bytes':
-            return toAmino.defaultType(args)
+            return toAmino.defaultType(args, false)
 
         default:
             warningDefaultImplementation(field.name, field);

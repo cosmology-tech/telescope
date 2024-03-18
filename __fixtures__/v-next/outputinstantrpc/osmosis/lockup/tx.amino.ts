@@ -3,6 +3,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType } from "./lock";
 import { AminoMsg } from "@cosmjs/amino";
+import { omitDefault } from "../../helpers";
 import { MsgLockTokens, MsgLockTokensSDKType, MsgBeginUnlockingAll, MsgBeginUnlockingAllSDKType, MsgBeginUnlocking, MsgBeginUnlockingSDKType, MsgExtendLockup, MsgExtendLockupSDKType, MsgForceUnlock, MsgForceUnlockSDKType } from "./tx";
 export interface MsgLockTokensAminoType extends AminoMsg {
   type: "osmosis/lockup/lock-tokens";
@@ -81,11 +82,11 @@ export const AminoConverter = {
     }: MsgLockTokensAminoType["value"]): MsgLockTokens => {
       return {
         owner,
-        duration: {
+        duration: duration == null ? duration : {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         },
-        coins: coins.map(el0 => ({
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -118,7 +119,7 @@ export const AminoConverter = {
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: omitDefault(ID)?.toString?.(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -132,8 +133,8 @@ export const AminoConverter = {
     }: MsgBeginUnlockingAminoType["value"]): MsgBeginUnlocking => {
       return {
         owner,
-        ID: BigInt(ID),
-        coins: coins.map(el0 => ({
+        ID: ID == null ? ID : BigInt(ID),
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))
@@ -149,7 +150,7 @@ export const AminoConverter = {
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: omitDefault(ID)?.toString?.(),
         duration: (duration * 1_000_000_000).toString()
       };
     },
@@ -160,8 +161,8 @@ export const AminoConverter = {
     }: MsgExtendLockupAminoType["value"]): MsgExtendLockup => {
       return {
         owner,
-        ID: BigInt(ID),
-        duration: {
+        ID: ID == null ? ID : BigInt(ID),
+        duration: duration == null ? duration : {
           seconds: BigInt(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
         }
@@ -177,7 +178,7 @@ export const AminoConverter = {
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: omitDefault(ID)?.toString?.(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -191,8 +192,8 @@ export const AminoConverter = {
     }: MsgForceUnlockAminoType["value"]): MsgForceUnlock => {
       return {
         owner,
-        ID: BigInt(ID),
-        coins: coins.map(el0 => ({
+        ID: ID == null ? ID : BigInt(ID),
+        coins: coins.map?.(el0 => ({
           denom: el0.denom,
           amount: el0.amount
         }))

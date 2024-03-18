@@ -182,14 +182,14 @@ export const MsgSwapExactAmountIn = {
   },
   toAmino(message: MsgSwapExactAmountIn): MsgSwapExactAmountInAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
     } else {
-      obj.routes = [];
+      obj.routes = message.routes;
     }
     obj.token_in = message.tokenIn ? Coin.toAmino(message.tokenIn) : undefined;
-    obj.token_out_min_amount = message.tokenOutMinAmount;
+    obj.token_out_min_amount = message.tokenOutMinAmount === "" ? undefined : message.tokenOutMinAmount;
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountInAminoMsg): MsgSwapExactAmountIn {
@@ -283,7 +283,7 @@ export const MsgSwapExactAmountInResponse = {
   },
   toAmino(message: MsgSwapExactAmountInResponse): MsgSwapExactAmountInResponseAmino {
     const obj: any = {};
-    obj.token_out_amount = message.tokenOutAmount;
+    obj.token_out_amount = message.tokenOutAmount === "" ? undefined : message.tokenOutAmount;
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountInResponseAminoMsg): MsgSwapExactAmountInResponse {
@@ -431,13 +431,13 @@ export const MsgSwapExactAmountOut = {
   },
   toAmino(message: MsgSwapExactAmountOut): MsgSwapExactAmountOutAmino {
     const obj: any = {};
-    obj.sender = message.sender;
+    obj.sender = message.sender === "" ? undefined : message.sender;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
     } else {
-      obj.routes = [];
+      obj.routes = message.routes;
     }
-    obj.token_in_max_amount = message.tokenInMaxAmount;
+    obj.token_in_max_amount = message.tokenInMaxAmount === "" ? undefined : message.tokenInMaxAmount;
     obj.token_out = message.tokenOut ? Coin.toAmino(message.tokenOut) : undefined;
     return obj;
   },
@@ -532,7 +532,7 @@ export const MsgSwapExactAmountOutResponse = {
   },
   toAmino(message: MsgSwapExactAmountOutResponse): MsgSwapExactAmountOutResponseAmino {
     const obj: any = {};
-    obj.token_in_amount = message.tokenInAmount;
+    obj.token_in_amount = message.tokenInAmount === "" ? undefined : message.tokenInAmount;
     return obj;
   },
   fromAminoMsg(object: MsgSwapExactAmountOutResponseAminoMsg): MsgSwapExactAmountOutResponse {

@@ -13,8 +13,8 @@ export interface GenesisStateProtoMsg {
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateAmino {
-  accounts?: AccountAmino[];
-  payments?: FractionalPaymentAmino[];
+  accounts: AccountAmino[];
+  payments: FractionalPaymentAmino[];
 }
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisStateSDKType {
@@ -115,12 +115,12 @@ export const GenesisState = {
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.accounts = [];
+      obj.accounts = message.accounts;
     }
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? FractionalPayment.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.payments = [];
+      obj.payments = message.payments;
     }
     return obj;
   },

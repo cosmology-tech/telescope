@@ -227,7 +227,7 @@ export const Struct_FieldsEntry = {
   },
   toAmino(message: Struct_FieldsEntry): Struct_FieldsEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
+    obj.key = message.key === "" ? undefined : message.key;
     obj.value = message.value ? Value.toAmino(message.value) : undefined;
     return obj;
   },
@@ -505,7 +505,7 @@ export const Value = {
   fromAmino(object: ValueAmino): Value {
     const message = createBaseValue();
     if (object.null_value !== undefined && object.null_value !== null) {
-      message.nullValue = nullValueFromJSON(object.null_value);
+      message.nullValue = object.null_value;
     }
     if (object.number_value !== undefined && object.number_value !== null) {
       message.numberValue = object.number_value;
@@ -526,10 +526,10 @@ export const Value = {
   },
   toAmino(message: Value): ValueAmino {
     const obj: any = {};
-    obj.null_value = message.nullValue;
-    obj.number_value = message.numberValue;
-    obj.string_value = message.stringValue;
-    obj.bool_value = message.boolValue;
+    obj.null_value = message.nullValue === null ? undefined : message.nullValue;
+    obj.number_value = message.numberValue === null ? undefined : message.numberValue;
+    obj.string_value = message.stringValue === null ? undefined : message.stringValue;
+    obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
     obj.struct_value = message.structValue ? Struct.toAmino(message.structValue) : undefined;
     obj.list_value = message.listValue ? ListValue.toAmino(message.listValue) : undefined;
     return obj;
@@ -628,7 +628,7 @@ export const ListValue = {
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
     } else {
-      obj.values = [];
+      obj.values = message.values;
     }
     return obj;
   },

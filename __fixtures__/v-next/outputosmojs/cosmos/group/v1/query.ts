@@ -461,7 +461,7 @@ export const QueryGroupInfoRequest = {
   },
   toAmino(message: QueryGroupInfoRequest): QueryGroupInfoRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryGroupInfoRequestAminoMsg): QueryGroupInfoRequest {
@@ -649,7 +649,7 @@ export const QueryGroupPolicyInfoRequest = {
   },
   toAmino(message: QueryGroupPolicyInfoRequest): QueryGroupPolicyInfoRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromAminoMsg(object: QueryGroupPolicyInfoRequestAminoMsg): QueryGroupPolicyInfoRequest {
@@ -853,7 +853,7 @@ export const QueryGroupMembersRequest = {
   },
   toAmino(message: QueryGroupMembersRequest): QueryGroupMembersRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -973,7 +973,7 @@ export const QueryGroupMembersResponse = {
     if (message.members) {
       obj.members = message.members.map(e => e ? GroupMember.toAmino(e) : undefined);
     } else {
-      obj.members = [];
+      obj.members = message.members;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1085,7 +1085,7 @@ export const QueryGroupsByAdminRequest = {
   },
   toAmino(message: QueryGroupsByAdminRequest): QueryGroupsByAdminRequestAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1205,7 +1205,7 @@ export const QueryGroupsByAdminResponse = {
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1317,7 +1317,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
   toAmino(message: QueryGroupPoliciesByGroupRequest): QueryGroupPoliciesByGroupRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1437,7 +1437,7 @@ export const QueryGroupPoliciesByGroupResponse = {
     if (message.groupPolicies) {
       obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
-      obj.group_policies = [];
+      obj.group_policies = message.groupPolicies;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1549,7 +1549,7 @@ export const QueryGroupPoliciesByAdminRequest = {
   },
   toAmino(message: QueryGroupPoliciesByAdminRequest): QueryGroupPoliciesByAdminRequestAmino {
     const obj: any = {};
-    obj.admin = message.admin;
+    obj.admin = message.admin === "" ? undefined : message.admin;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -1669,7 +1669,7 @@ export const QueryGroupPoliciesByAdminResponse = {
     if (message.groupPolicies) {
       obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toAmino(e) : undefined);
     } else {
-      obj.group_policies = [];
+      obj.group_policies = message.groupPolicies;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -1765,7 +1765,7 @@ export const QueryProposalRequest = {
   },
   toAmino(message: QueryProposalRequest): QueryProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryProposalRequestAminoMsg): QueryProposalRequest {
@@ -1969,7 +1969,7 @@ export const QueryProposalsByGroupPolicyRequest = {
   },
   toAmino(message: QueryProposalsByGroupPolicyRequest): QueryProposalsByGroupPolicyRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2089,7 +2089,7 @@ export const QueryProposalsByGroupPolicyResponse = {
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toAmino(e) : undefined);
     } else {
-      obj.proposals = [];
+      obj.proposals = message.proposals;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2201,8 +2201,8 @@ export const QueryVoteByProposalVoterRequest = {
   },
   toAmino(message: QueryVoteByProposalVoterRequest): QueryVoteByProposalVoterRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
-    obj.voter = message.voter;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.voter = message.voter === "" ? undefined : message.voter;
     return obj;
   },
   fromAminoMsg(object: QueryVoteByProposalVoterRequestAminoMsg): QueryVoteByProposalVoterRequest {
@@ -2406,7 +2406,7 @@ export const QueryVotesByProposalRequest = {
   },
   toAmino(message: QueryVotesByProposalRequest): QueryVotesByProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2526,7 +2526,7 @@ export const QueryVotesByProposalResponse = {
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
-      obj.votes = [];
+      obj.votes = message.votes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2638,7 +2638,7 @@ export const QueryVotesByVoterRequest = {
   },
   toAmino(message: QueryVotesByVoterRequest): QueryVotesByVoterRequestAmino {
     const obj: any = {};
-    obj.voter = message.voter;
+    obj.voter = message.voter === "" ? undefined : message.voter;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2758,7 +2758,7 @@ export const QueryVotesByVoterResponse = {
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toAmino(e) : undefined);
     } else {
-      obj.votes = [];
+      obj.votes = message.votes;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -2870,7 +2870,7 @@ export const QueryGroupsByMemberRequest = {
   },
   toAmino(message: QueryGroupsByMemberRequest): QueryGroupsByMemberRequestAmino {
     const obj: any = {};
-    obj.address = message.address;
+    obj.address = message.address === "" ? undefined : message.address;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     return obj;
   },
@@ -2990,7 +2990,7 @@ export const QueryGroupsByMemberResponse = {
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toAmino(e) : undefined);
     } else {
-      obj.groups = [];
+      obj.groups = message.groups;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -3086,7 +3086,7 @@ export const QueryTallyResultRequest = {
   },
   toAmino(message: QueryTallyResultRequest): QueryTallyResultRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTallyResultRequestAminoMsg): QueryTallyResultRequest {

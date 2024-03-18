@@ -459,9 +459,9 @@ export const Operation = {
   },
   toAmino(message: Operation, useInterfaces: boolean = true): OperationAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.metadata = message.metadata ? Any.toAmino(message.metadata, useInterfaces) : undefined;
-    obj.done = message.done;
+    obj.done = message.done === false ? undefined : message.done;
     obj.error = message.error ? Status.toAmino(message.error, useInterfaces) : undefined;
     obj.response = message.response ? Any.toAmino(message.response, useInterfaces) : undefined;
     return obj;
@@ -543,7 +543,7 @@ export const GetOperationRequest = {
   },
   toAmino(message: GetOperationRequest, useInterfaces: boolean = true): GetOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetOperationRequestProtoMsg, useInterfaces: boolean = true): GetOperationRequest {
@@ -668,10 +668,10 @@ export const ListOperationsRequest = {
   },
   toAmino(message: ListOperationsRequest, useInterfaces: boolean = true): ListOperationsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.page_size = message.pageSize;
-    obj.page_token = message.pageToken;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
     return obj;
   },
   fromProtoMsg(message: ListOperationsRequestProtoMsg, useInterfaces: boolean = true): ListOperationsRequest {
@@ -775,9 +775,9 @@ export const ListOperationsResponse = {
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.operations = [];
+      obj.operations = message.operations;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListOperationsResponseProtoMsg, useInterfaces: boolean = true): ListOperationsResponse {
@@ -857,7 +857,7 @@ export const CancelOperationRequest = {
   },
   toAmino(message: CancelOperationRequest, useInterfaces: boolean = true): CancelOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: CancelOperationRequestProtoMsg, useInterfaces: boolean = true): CancelOperationRequest {
@@ -937,7 +937,7 @@ export const DeleteOperationRequest = {
   },
   toAmino(message: DeleteOperationRequest, useInterfaces: boolean = true): DeleteOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: DeleteOperationRequestProtoMsg, useInterfaces: boolean = true): DeleteOperationRequest {
@@ -1034,7 +1034,7 @@ export const WaitOperationRequest = {
   },
   toAmino(message: WaitOperationRequest, useInterfaces: boolean = true): WaitOperationRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.timeout = message.timeout ? Duration.toAmino(message.timeout, useInterfaces) : undefined;
     return obj;
   },
@@ -1130,8 +1130,8 @@ export const OperationInfo = {
   },
   toAmino(message: OperationInfo, useInterfaces: boolean = true): OperationInfoAmino {
     const obj: any = {};
-    obj.response_type = message.responseType;
-    obj.metadata_type = message.metadataType;
+    obj.response_type = message.responseType === "" ? undefined : message.responseType;
+    obj.metadata_type = message.metadataType === "" ? undefined : message.metadataType;
     return obj;
   },
   fromProtoMsg(message: OperationInfoProtoMsg, useInterfaces: boolean = true): OperationInfo {

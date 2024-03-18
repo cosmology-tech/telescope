@@ -138,7 +138,7 @@ export const GenesisOwners = {
   },
   toAmino(message: GenesisOwners, useInterfaces: boolean = true): GenesisOwnersAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     obj.index_owners = message.indexOwners ? CapabilityOwners.toAmino(message.indexOwners, useInterfaces) : undefined;
     return obj;
   },
@@ -243,11 +243,11 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState, useInterfaces: boolean = true): GenesisStateAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? GenesisOwners.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },

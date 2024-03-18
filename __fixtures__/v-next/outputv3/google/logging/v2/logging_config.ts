@@ -3059,7 +3059,7 @@ export const LogBucket = {
       message.locked = object.locked;
     }
     if (object.lifecycle_state !== undefined && object.lifecycle_state !== null) {
-      message.lifecycleState = lifecycleStateFromJSON(object.lifecycle_state);
+      message.lifecycleState = object.lifecycle_state;
     }
     message.restrictedFields = object.restricted_fields?.map(e => e) || [];
     if (object.cmek_settings !== undefined && object.cmek_settings !== null) {
@@ -3069,17 +3069,17 @@ export const LogBucket = {
   },
   toAmino(message: LogBucket, useInterfaces: boolean = true): LogBucketAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
-    obj.retention_days = message.retentionDays;
-    obj.locked = message.locked;
-    obj.lifecycle_state = message.lifecycleState;
+    obj.retention_days = message.retentionDays === 0 ? undefined : message.retentionDays;
+    obj.locked = message.locked === false ? undefined : message.locked;
+    obj.lifecycle_state = message.lifecycleState === 0 ? undefined : message.lifecycleState;
     if (message.restrictedFields) {
       obj.restricted_fields = message.restrictedFields.map(e => e);
     } else {
-      obj.restricted_fields = [];
+      obj.restricted_fields = message.restrictedFields;
     }
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings, useInterfaces) : undefined;
     return obj;
@@ -3221,11 +3221,11 @@ export const LogView = {
   },
   toAmino(message: LogView, useInterfaces: boolean = true): LogViewAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
-    obj.filter = message.filter;
+    obj.filter = message.filter === "" ? undefined : message.filter;
     return obj;
   },
   fromProtoMsg(message: LogViewProtoMsg, useInterfaces: boolean = true): LogView {
@@ -3457,7 +3457,7 @@ export const LogSink = {
     }
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromAmino(e)) || [];
     if (object.output_version_format !== undefined && object.output_version_format !== null) {
-      message.outputVersionFormat = logSink_VersionFormatFromJSON(object.output_version_format);
+      message.outputVersionFormat = object.output_version_format;
     }
     if (object.writer_identity !== undefined && object.writer_identity !== null) {
       message.writerIdentity = object.writer_identity;
@@ -3478,19 +3478,19 @@ export const LogSink = {
   },
   toAmino(message: LogSink, useInterfaces: boolean = true): LogSinkAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.destination = message.destination;
-    obj.filter = message.filter;
-    obj.description = message.description;
-    obj.disabled = message.disabled;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.destination = message.destination === "" ? undefined : message.destination;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.disabled = message.disabled === false ? undefined : message.disabled;
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.exclusions = [];
+      obj.exclusions = message.exclusions;
     }
-    obj.output_version_format = message.outputVersionFormat;
-    obj.writer_identity = message.writerIdentity;
-    obj.include_children = message.includeChildren;
+    obj.output_version_format = message.outputVersionFormat === 0 ? undefined : message.outputVersionFormat;
+    obj.writer_identity = message.writerIdentity === "" ? undefined : message.writerIdentity;
+    obj.include_children = message.includeChildren === false ? undefined : message.includeChildren;
     obj.bigquery_options = message.bigqueryOptions ? BigQueryOptions.toAmino(message.bigqueryOptions, useInterfaces) : undefined;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
@@ -3588,8 +3588,8 @@ export const BigQueryOptions = {
   },
   toAmino(message: BigQueryOptions, useInterfaces: boolean = true): BigQueryOptionsAmino {
     const obj: any = {};
-    obj.use_partitioned_tables = message.usePartitionedTables;
-    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning;
+    obj.use_partitioned_tables = message.usePartitionedTables === false ? undefined : message.usePartitionedTables;
+    obj.uses_timestamp_column_partitioning = message.usesTimestampColumnPartitioning === false ? undefined : message.usesTimestampColumnPartitioning;
     return obj;
   },
   fromProtoMsg(message: BigQueryOptionsProtoMsg, useInterfaces: boolean = true): BigQueryOptions {
@@ -3699,9 +3699,9 @@ export const ListBucketsRequest = {
   },
   toAmino(message: ListBucketsRequest, useInterfaces: boolean = true): ListBucketsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromProtoMsg(message: ListBucketsRequestProtoMsg, useInterfaces: boolean = true): ListBucketsRequest {
@@ -3805,9 +3805,9 @@ export const ListBucketsResponse = {
     if (message.buckets) {
       obj.buckets = message.buckets.map(e => e ? LogBucket.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.buckets = [];
+      obj.buckets = message.buckets;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListBucketsResponseProtoMsg, useInterfaces: boolean = true): ListBucketsResponse {
@@ -3919,8 +3919,8 @@ export const CreateBucketRequest = {
   },
   toAmino(message: CreateBucketRequest, useInterfaces: boolean = true): CreateBucketRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.bucket_id = message.bucketId;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.bucket_id = message.bucketId === "" ? undefined : message.bucketId;
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket, useInterfaces) : undefined;
     return obj;
   },
@@ -4035,7 +4035,7 @@ export const UpdateBucketRequest = {
   },
   toAmino(message: UpdateBucketRequest, useInterfaces: boolean = true): UpdateBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.bucket = message.bucket ? LogBucket.toAmino(message.bucket, useInterfaces) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
@@ -4117,7 +4117,7 @@ export const GetBucketRequest = {
   },
   toAmino(message: GetBucketRequest, useInterfaces: boolean = true): GetBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetBucketRequestProtoMsg, useInterfaces: boolean = true): GetBucketRequest {
@@ -4197,7 +4197,7 @@ export const DeleteBucketRequest = {
   },
   toAmino(message: DeleteBucketRequest, useInterfaces: boolean = true): DeleteBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: DeleteBucketRequestProtoMsg, useInterfaces: boolean = true): DeleteBucketRequest {
@@ -4277,7 +4277,7 @@ export const UndeleteBucketRequest = {
   },
   toAmino(message: UndeleteBucketRequest, useInterfaces: boolean = true): UndeleteBucketRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: UndeleteBucketRequestProtoMsg, useInterfaces: boolean = true): UndeleteBucketRequest {
@@ -4387,9 +4387,9 @@ export const ListViewsRequest = {
   },
   toAmino(message: ListViewsRequest, useInterfaces: boolean = true): ListViewsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromProtoMsg(message: ListViewsRequestProtoMsg, useInterfaces: boolean = true): ListViewsRequest {
@@ -4493,9 +4493,9 @@ export const ListViewsResponse = {
     if (message.views) {
       obj.views = message.views.map(e => e ? LogView.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.views = [];
+      obj.views = message.views;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListViewsResponseProtoMsg, useInterfaces: boolean = true): ListViewsResponse {
@@ -4607,8 +4607,8 @@ export const CreateViewRequest = {
   },
   toAmino(message: CreateViewRequest, useInterfaces: boolean = true): CreateViewRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.view_id = message.viewId;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.view_id = message.viewId === "" ? undefined : message.viewId;
     obj.view = message.view ? LogView.toAmino(message.view, useInterfaces) : undefined;
     return obj;
   },
@@ -4723,7 +4723,7 @@ export const UpdateViewRequest = {
   },
   toAmino(message: UpdateViewRequest, useInterfaces: boolean = true): UpdateViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.view = message.view ? LogView.toAmino(message.view, useInterfaces) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
@@ -4805,7 +4805,7 @@ export const GetViewRequest = {
   },
   toAmino(message: GetViewRequest, useInterfaces: boolean = true): GetViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetViewRequestProtoMsg, useInterfaces: boolean = true): GetViewRequest {
@@ -4885,7 +4885,7 @@ export const DeleteViewRequest = {
   },
   toAmino(message: DeleteViewRequest, useInterfaces: boolean = true): DeleteViewRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: DeleteViewRequestProtoMsg, useInterfaces: boolean = true): DeleteViewRequest {
@@ -4995,9 +4995,9 @@ export const ListSinksRequest = {
   },
   toAmino(message: ListSinksRequest, useInterfaces: boolean = true): ListSinksRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromProtoMsg(message: ListSinksRequestProtoMsg, useInterfaces: boolean = true): ListSinksRequest {
@@ -5101,9 +5101,9 @@ export const ListSinksResponse = {
     if (message.sinks) {
       obj.sinks = message.sinks.map(e => e ? LogSink.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.sinks = [];
+      obj.sinks = message.sinks;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListSinksResponseProtoMsg, useInterfaces: boolean = true): ListSinksResponse {
@@ -5183,7 +5183,7 @@ export const GetSinkRequest = {
   },
   toAmino(message: GetSinkRequest, useInterfaces: boolean = true): GetSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = message.sinkName === "" ? undefined : message.sinkName;
     return obj;
   },
   fromProtoMsg(message: GetSinkRequestProtoMsg, useInterfaces: boolean = true): GetSinkRequest {
@@ -5295,9 +5295,9 @@ export const CreateSinkRequest = {
   },
   toAmino(message: CreateSinkRequest, useInterfaces: boolean = true): CreateSinkRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.sink = message.sink ? LogSink.toAmino(message.sink, useInterfaces) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    obj.unique_writer_identity = message.uniqueWriterIdentity === false ? undefined : message.uniqueWriterIdentity;
     return obj;
   },
   fromProtoMsg(message: CreateSinkRequestProtoMsg, useInterfaces: boolean = true): CreateSinkRequest {
@@ -5426,9 +5426,9 @@ export const UpdateSinkRequest = {
   },
   toAmino(message: UpdateSinkRequest, useInterfaces: boolean = true): UpdateSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = message.sinkName === "" ? undefined : message.sinkName;
     obj.sink = message.sink ? LogSink.toAmino(message.sink, useInterfaces) : undefined;
-    obj.unique_writer_identity = message.uniqueWriterIdentity;
+    obj.unique_writer_identity = message.uniqueWriterIdentity === false ? undefined : message.uniqueWriterIdentity;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
   },
@@ -5509,7 +5509,7 @@ export const DeleteSinkRequest = {
   },
   toAmino(message: DeleteSinkRequest, useInterfaces: boolean = true): DeleteSinkRequestAmino {
     const obj: any = {};
-    obj.sink_name = message.sinkName;
+    obj.sink_name = message.sinkName === "" ? undefined : message.sinkName;
     return obj;
   },
   fromProtoMsg(message: DeleteSinkRequestProtoMsg, useInterfaces: boolean = true): DeleteSinkRequest {
@@ -5664,10 +5664,10 @@ export const LogExclusion = {
   },
   toAmino(message: LogExclusion, useInterfaces: boolean = true): LogExclusionAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.description = message.description;
-    obj.filter = message.filter;
-    obj.disabled = message.disabled;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.disabled = message.disabled === false ? undefined : message.disabled;
     obj.create_time = message.createTime ? Timestamp.toAmino(toTimestamp(message.createTime)) : undefined;
     obj.update_time = message.updateTime ? Timestamp.toAmino(toTimestamp(message.updateTime)) : undefined;
     return obj;
@@ -5779,9 +5779,9 @@ export const ListExclusionsRequest = {
   },
   toAmino(message: ListExclusionsRequest, useInterfaces: boolean = true): ListExclusionsRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
-    obj.page_token = message.pageToken;
-    obj.page_size = message.pageSize;
+    obj.parent = message.parent === "" ? undefined : message.parent;
+    obj.page_token = message.pageToken === "" ? undefined : message.pageToken;
+    obj.page_size = message.pageSize === 0 ? undefined : message.pageSize;
     return obj;
   },
   fromProtoMsg(message: ListExclusionsRequestProtoMsg, useInterfaces: boolean = true): ListExclusionsRequest {
@@ -5885,9 +5885,9 @@ export const ListExclusionsResponse = {
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.exclusions = [];
+      obj.exclusions = message.exclusions;
     }
-    obj.next_page_token = message.nextPageToken;
+    obj.next_page_token = message.nextPageToken === "" ? undefined : message.nextPageToken;
     return obj;
   },
   fromProtoMsg(message: ListExclusionsResponseProtoMsg, useInterfaces: boolean = true): ListExclusionsResponse {
@@ -5967,7 +5967,7 @@ export const GetExclusionRequest = {
   },
   toAmino(message: GetExclusionRequest, useInterfaces: boolean = true): GetExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetExclusionRequestProtoMsg, useInterfaces: boolean = true): GetExclusionRequest {
@@ -6064,7 +6064,7 @@ export const CreateExclusionRequest = {
   },
   toAmino(message: CreateExclusionRequest, useInterfaces: boolean = true): CreateExclusionRequestAmino {
     const obj: any = {};
-    obj.parent = message.parent;
+    obj.parent = message.parent === "" ? undefined : message.parent;
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion, useInterfaces) : undefined;
     return obj;
   },
@@ -6179,7 +6179,7 @@ export const UpdateExclusionRequest = {
   },
   toAmino(message: UpdateExclusionRequest, useInterfaces: boolean = true): UpdateExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.exclusion = message.exclusion ? LogExclusion.toAmino(message.exclusion, useInterfaces) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
@@ -6261,7 +6261,7 @@ export const DeleteExclusionRequest = {
   },
   toAmino(message: DeleteExclusionRequest, useInterfaces: boolean = true): DeleteExclusionRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: DeleteExclusionRequestProtoMsg, useInterfaces: boolean = true): DeleteExclusionRequest {
@@ -6341,7 +6341,7 @@ export const GetCmekSettingsRequest = {
   },
   toAmino(message: GetCmekSettingsRequest, useInterfaces: boolean = true): GetCmekSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetCmekSettingsRequestProtoMsg, useInterfaces: boolean = true): GetCmekSettingsRequest {
@@ -6455,7 +6455,7 @@ export const UpdateCmekSettingsRequest = {
   },
   toAmino(message: UpdateCmekSettingsRequest, useInterfaces: boolean = true): UpdateCmekSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.cmek_settings = message.cmekSettings ? CmekSettings.toAmino(message.cmekSettings, useInterfaces) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
@@ -6567,9 +6567,9 @@ export const CmekSettings = {
   },
   toAmino(message: CmekSettings, useInterfaces: boolean = true): CmekSettingsAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.service_account_id = message.serviceAccountId;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.kms_key_name = message.kmsKeyName === "" ? undefined : message.kmsKeyName;
+    obj.service_account_id = message.serviceAccountId === "" ? undefined : message.serviceAccountId;
     return obj;
   },
   fromProtoMsg(message: CmekSettingsProtoMsg, useInterfaces: boolean = true): CmekSettings {
@@ -6649,7 +6649,7 @@ export const GetSettingsRequest = {
   },
   toAmino(message: GetSettingsRequest, useInterfaces: boolean = true): GetSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromProtoMsg(message: GetSettingsRequestProtoMsg, useInterfaces: boolean = true): GetSettingsRequest {
@@ -6763,7 +6763,7 @@ export const UpdateSettingsRequest = {
   },
   toAmino(message: UpdateSettingsRequest, useInterfaces: boolean = true): UpdateSettingsRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     obj.settings = message.settings ? Settings.toAmino(message.settings, useInterfaces) : undefined;
     obj.update_mask = message.updateMask ? FieldMask.toAmino(message.updateMask, useInterfaces) : undefined;
     return obj;
@@ -6905,11 +6905,11 @@ export const Settings = {
   },
   toAmino(message: Settings, useInterfaces: boolean = true): SettingsAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.kms_key_name = message.kmsKeyName;
-    obj.kms_service_account_id = message.kmsServiceAccountId;
-    obj.storage_location = message.storageLocation;
-    obj.disable_default_sink = message.disableDefaultSink;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.kms_key_name = message.kmsKeyName === "" ? undefined : message.kmsKeyName;
+    obj.kms_service_account_id = message.kmsServiceAccountId === "" ? undefined : message.kmsServiceAccountId;
+    obj.storage_location = message.storageLocation === "" ? undefined : message.storageLocation;
+    obj.disable_default_sink = message.disableDefaultSink === false ? undefined : message.disableDefaultSink;
     return obj;
   },
   fromProtoMsg(message: SettingsProtoMsg, useInterfaces: boolean = true): Settings {
@@ -7019,9 +7019,9 @@ export const CopyLogEntriesRequest = {
   },
   toAmino(message: CopyLogEntriesRequest, useInterfaces: boolean = true): CopyLogEntriesRequestAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.filter = message.filter;
-    obj.destination = message.destination;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.filter = message.filter === "" ? undefined : message.filter;
+    obj.destination = message.destination === "" ? undefined : message.destination;
     return obj;
   },
   fromProtoMsg(message: CopyLogEntriesRequestProtoMsg, useInterfaces: boolean = true): CopyLogEntriesRequest {
@@ -7175,7 +7175,7 @@ export const CopyLogEntriesMetadata = {
       message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = operationStateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.cancellation_requested !== undefined && object.cancellation_requested !== null) {
       message.cancellationRequested = object.cancellation_requested;
@@ -7195,11 +7195,11 @@ export const CopyLogEntriesMetadata = {
     const obj: any = {};
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
-    obj.state = message.state;
-    obj.cancellation_requested = message.cancellationRequested;
+    obj.state = message.state === 0 ? undefined : message.state;
+    obj.cancellation_requested = message.cancellationRequested === false ? undefined : message.cancellationRequested;
     obj.request = message.request ? CopyLogEntriesRequest.toAmino(message.request, useInterfaces) : undefined;
-    obj.progress = message.progress;
-    obj.writer_identity = message.writerIdentity;
+    obj.progress = message.progress === 0 ? undefined : message.progress;
+    obj.writer_identity = message.writerIdentity === "" ? undefined : message.writerIdentity;
     return obj;
   },
   fromProtoMsg(message: CopyLogEntriesMetadataProtoMsg, useInterfaces: boolean = true): CopyLogEntriesMetadata {
@@ -7281,7 +7281,7 @@ export const CopyLogEntriesResponse = {
   },
   toAmino(message: CopyLogEntriesResponse, useInterfaces: boolean = true): CopyLogEntriesResponseAmino {
     const obj: any = {};
-    obj.log_entries_copied_count = message.logEntriesCopiedCount ? message.logEntriesCopiedCount.toString() : undefined;
+    obj.log_entries_copied_count = message.logEntriesCopiedCount !== BigInt(0) ? message.logEntriesCopiedCount.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CopyLogEntriesResponseProtoMsg, useInterfaces: boolean = true): CopyLogEntriesResponse {

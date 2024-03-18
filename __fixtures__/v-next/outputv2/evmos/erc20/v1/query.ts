@@ -344,7 +344,7 @@ export const QueryTokenPairsResponse = {
     if (message.tokenPairs) {
       obj.token_pairs = message.tokenPairs.map(e => e ? TokenPair.toAmino(e) : undefined);
     } else {
-      obj.token_pairs = [];
+      obj.token_pairs = message.tokenPairs;
     }
     obj.pagination = message.pagination ? PageResponse.toAmino(message.pagination) : undefined;
     return obj;
@@ -429,7 +429,7 @@ export const QueryTokenPairRequest = {
   },
   toAmino(message: QueryTokenPairRequest): QueryTokenPairRequestAmino {
     const obj: any = {};
-    obj.token = message.token;
+    obj.token = message.token === "" ? undefined : message.token;
     return obj;
   },
   fromAminoMsg(object: QueryTokenPairRequestAminoMsg): QueryTokenPairRequest {

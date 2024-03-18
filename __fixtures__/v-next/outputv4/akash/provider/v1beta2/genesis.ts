@@ -92,7 +92,7 @@ export const GenesisState = {
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toAmino(e) : undefined);
     } else {
-      obj.providers = [];
+      obj.providers = message.providers;
     }
     return obj;
   },

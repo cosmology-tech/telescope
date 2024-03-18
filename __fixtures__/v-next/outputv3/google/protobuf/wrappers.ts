@@ -335,7 +335,7 @@ export const DoubleValue = {
   },
   toAmino(message: DoubleValue, useInterfaces: boolean = true): DoubleValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: DoubleValueProtoMsg, useInterfaces: boolean = true): DoubleValue {
@@ -415,7 +415,7 @@ export const FloatValue = {
   },
   toAmino(message: FloatValue, useInterfaces: boolean = true): FloatValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: FloatValueProtoMsg, useInterfaces: boolean = true): FloatValue {
@@ -497,7 +497,7 @@ export const Int64Value = {
   },
   toAmino(message: Int64Value, useInterfaces: boolean = true): Int64ValueAmino {
     const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: Int64ValueProtoMsg, useInterfaces: boolean = true): Int64Value {
@@ -579,7 +579,7 @@ export const UInt64Value = {
   },
   toAmino(message: UInt64Value, useInterfaces: boolean = true): UInt64ValueAmino {
     const obj: any = {};
-    obj.value = message.value ? message.value.toString() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: UInt64ValueProtoMsg, useInterfaces: boolean = true): UInt64Value {
@@ -659,7 +659,7 @@ export const Int32Value = {
   },
   toAmino(message: Int32Value, useInterfaces: boolean = true): Int32ValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: Int32ValueProtoMsg, useInterfaces: boolean = true): Int32Value {
@@ -739,7 +739,7 @@ export const UInt32Value = {
   },
   toAmino(message: UInt32Value, useInterfaces: boolean = true): UInt32ValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: UInt32ValueProtoMsg, useInterfaces: boolean = true): UInt32Value {
@@ -819,7 +819,7 @@ export const BoolValue = {
   },
   toAmino(message: BoolValue, useInterfaces: boolean = true): BoolValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === false ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: BoolValueProtoMsg, useInterfaces: boolean = true): BoolValue {
@@ -899,7 +899,7 @@ export const StringValue = {
   },
   toAmino(message: StringValue, useInterfaces: boolean = true): StringValueAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: StringValueProtoMsg, useInterfaces: boolean = true): StringValue {

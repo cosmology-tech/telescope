@@ -245,14 +245,14 @@ export const Endpoint = {
   },
   toAmino(message: Endpoint, useInterfaces: boolean = true): EndpointAmino {
     const obj: any = {};
-    obj.name = message.name;
+    obj.name = message.name === "" ? undefined : message.name;
     if (message.aliases) {
       obj.aliases = message.aliases.map(e => e);
     } else {
-      obj.aliases = [];
+      obj.aliases = message.aliases;
     }
-    obj.target = message.target;
-    obj.allow_cors = message.allowCors;
+    obj.target = message.target === "" ? undefined : message.target;
+    obj.allow_cors = message.allowCors === false ? undefined : message.allowCors;
     return obj;
   },
   fromProtoMsg(message: EndpointProtoMsg, useInterfaces: boolean = true): Endpoint {

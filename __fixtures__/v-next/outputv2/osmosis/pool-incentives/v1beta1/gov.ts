@@ -208,12 +208,12 @@ export const ReplacePoolIncentivesProposal = {
   },
   toAmino(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },
@@ -341,12 +341,12 @@ export const UpdatePoolIncentivesProposal = {
   },
   toAmino(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalAmino {
     const obj: any = {};
-    obj.title = message.title;
-    obj.description = message.description;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.description = message.description === "" ? undefined : message.description;
     if (message.records) {
       obj.records = message.records.map(e => e ? DistrRecord.toAmino(e) : undefined);
     } else {
-      obj.records = [];
+      obj.records = message.records;
     }
     return obj;
   },

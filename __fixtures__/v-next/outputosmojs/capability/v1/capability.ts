@@ -126,7 +126,7 @@ export const Capability = {
   },
   toAmino(message: Capability): CapabilityAmino {
     const obj: any = {};
-    obj.index = message.index ? message.index.toString() : undefined;
+    obj.index = message.index !== BigInt(0) ? message.index.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CapabilityAminoMsg): Capability {
@@ -230,8 +230,8 @@ export const Owner = {
   },
   toAmino(message: Owner): OwnerAmino {
     const obj: any = {};
-    obj.module = message.module;
-    obj.name = message.name;
+    obj.module = message.module === "" ? undefined : message.module;
+    obj.name = message.name === "" ? undefined : message.name;
     return obj;
   },
   fromAminoMsg(object: OwnerAminoMsg): Owner {
@@ -328,7 +328,7 @@ export const CapabilityOwners = {
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toAmino(e) : undefined);
     } else {
-      obj.owners = [];
+      obj.owners = message.owners;
     }
     return obj;
   },

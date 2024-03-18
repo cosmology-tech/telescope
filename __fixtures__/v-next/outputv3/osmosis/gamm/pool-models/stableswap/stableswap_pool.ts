@@ -184,8 +184,8 @@ export const PoolParams = {
   },
   toAmino(message: PoolParams, useInterfaces: boolean = true): PoolParamsAmino {
     const obj: any = {};
-    obj.swap_fee = message.swapFee;
-    obj.exit_fee = message.exitFee;
+    obj.swap_fee = message.swapFee === "" ? undefined : message.swapFee;
+    obj.exit_fee = message.exitFee === "" ? undefined : message.exitFee;
     return obj;
   },
   fromProtoMsg(message: PoolParamsProtoMsg, useInterfaces: boolean = true): PoolParams {
@@ -399,22 +399,22 @@ export const Pool = {
   },
   toAmino(message: Pool, useInterfaces: boolean = true): PoolAmino {
     const obj: any = {};
-    obj.address = message.address;
-    obj.id = message.id ? message.id.toString() : undefined;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams, useInterfaces) : undefined;
-    obj.future_pool_governor = message.futurePoolGovernor;
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares, useInterfaces) : undefined;
     if (message.poolLiquidity) {
       obj.pool_liquidity = message.poolLiquidity.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.pool_liquidity = [];
+      obj.pool_liquidity = message.poolLiquidity;
     }
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {
-      obj.scaling_factors = [];
+      obj.scaling_factors = message.scalingFactors;
     }
-    obj.scaling_factor_controller = message.scalingFactorController;
+    obj.scaling_factor_controller = message.scalingFactorController === "" ? undefined : message.scalingFactorController;
     return obj;
   },
   fromProtoMsg(message: PoolProtoMsg, useInterfaces: boolean = true): Pool {

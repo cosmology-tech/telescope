@@ -15,9 +15,9 @@ export interface GroupSpecProtoMsg {
 }
 /** GroupSpec stores group specifications */
 export interface GroupSpecAmino {
-  name?: string;
-  requirements?: PlacementRequirementsAmino;
-  resources?: ResourceAmino[];
+  name: string;
+  requirements: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
 }
 export interface GroupSpecAminoMsg {
   type: "/akash.deployment.v1beta2.GroupSpec";
@@ -95,12 +95,12 @@ export const GroupSpec = {
   },
   toAmino(message: GroupSpec): GroupSpecAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : undefined;
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.toAmino(PlacementRequirements.fromPartial({}));
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
     return obj;
   },

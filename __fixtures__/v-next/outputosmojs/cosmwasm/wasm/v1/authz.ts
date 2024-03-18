@@ -272,7 +272,7 @@ export const ContractExecutionAuthorization = {
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? ContractGrant.toAmino(e) : undefined);
     } else {
-      obj.grants = [];
+      obj.grants = message.grants;
     }
     return obj;
   },
@@ -376,7 +376,7 @@ export const ContractMigrationAuthorization = {
     if (message.grants) {
       obj.grants = message.grants.map(e => e ? ContractGrant.toAmino(e) : undefined);
     } else {
-      obj.grants = [];
+      obj.grants = message.grants;
     }
     return obj;
   },
@@ -503,7 +503,7 @@ export const ContractGrant = {
   },
   toAmino(message: ContractGrant): ContractGrantAmino {
     const obj: any = {};
-    obj.contract = message.contract;
+    obj.contract = message.contract === "" ? undefined : message.contract;
     obj.limit = message.limit ? Any.toAmino(message.limit) : undefined;
     obj.filter = message.filter ? Any.toAmino(message.filter) : undefined;
     return obj;
@@ -599,7 +599,7 @@ export const MaxCallsLimit = {
   },
   toAmino(message: MaxCallsLimit): MaxCallsLimitAmino {
     const obj: any = {};
-    obj.remaining = message.remaining ? message.remaining.toString() : undefined;
+    obj.remaining = message.remaining !== BigInt(0) ? message.remaining.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MaxCallsLimitAminoMsg): MaxCallsLimit {
@@ -702,7 +702,7 @@ export const MaxFundsLimit = {
     if (message.amounts) {
       obj.amounts = message.amounts.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amounts = [];
+      obj.amounts = message.amounts;
     }
     return obj;
   },
@@ -819,11 +819,11 @@ export const CombinedLimit = {
   },
   toAmino(message: CombinedLimit): CombinedLimitAmino {
     const obj: any = {};
-    obj.calls_remaining = message.callsRemaining ? message.callsRemaining.toString() : undefined;
+    obj.calls_remaining = message.callsRemaining !== BigInt(0) ? message.callsRemaining.toString() : undefined;
     if (message.amounts) {
       obj.amounts = message.amounts.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
-      obj.amounts = [];
+      obj.amounts = message.amounts;
     }
     return obj;
   },
@@ -1000,7 +1000,7 @@ export const AcceptedMessageKeysFilter = {
     if (message.keys) {
       obj.keys = message.keys.map(e => e);
     } else {
-      obj.keys = [];
+      obj.keys = message.keys;
     }
     return obj;
   },
@@ -1104,7 +1104,7 @@ export const AcceptedMessagesFilter = {
     if (message.messages) {
       obj.messages = message.messages.map(e => JSON.parse(fromUtf8(e)));
     } else {
-      obj.messages = [];
+      obj.messages = message.messages;
     }
     return obj;
   },

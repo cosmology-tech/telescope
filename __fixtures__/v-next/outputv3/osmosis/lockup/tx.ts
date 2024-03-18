@@ -297,12 +297,12 @@ export const MsgLockTokens = {
   },
   toAmino(message: MsgLockTokens, useInterfaces: boolean = true): MsgLockTokensAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -386,7 +386,7 @@ export const MsgLockTokensResponse = {
   },
   toAmino(message: MsgLockTokensResponse, useInterfaces: boolean = true): MsgLockTokensResponseAmino {
     const obj: any = {};
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgLockTokensResponseProtoMsg, useInterfaces: boolean = true): MsgLockTokensResponse {
@@ -467,7 +467,7 @@ export const MsgBeginUnlockingAll = {
   },
   toAmino(message: MsgBeginUnlockingAll, useInterfaces: boolean = true): MsgBeginUnlockingAllAmino {
     const obj: any = {};
-    obj.owner = message.owner;
+    obj.owner = message.owner === "" ? undefined : message.owner;
     return obj;
   },
   fromProtoMsg(message: MsgBeginUnlockingAllProtoMsg, useInterfaces: boolean = true): MsgBeginUnlockingAll {
@@ -557,7 +557,7 @@ export const MsgBeginUnlockingAllResponse = {
     if (message.unlocks) {
       obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.unlocks = [];
+      obj.unlocks = message.unlocks;
     }
     return obj;
   },
@@ -677,12 +677,12 @@ export const MsgBeginUnlocking = {
   },
   toAmino(message: MsgBeginUnlocking, useInterfaces: boolean = true): MsgBeginUnlockingAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -764,7 +764,7 @@ export const MsgBeginUnlockingResponse = {
   },
   toAmino(message: MsgBeginUnlockingResponse, useInterfaces: boolean = true): MsgBeginUnlockingResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = message.success === false ? undefined : message.success;
     return obj;
   },
   fromProtoMsg(message: MsgBeginUnlockingResponseProtoMsg, useInterfaces: boolean = true): MsgBeginUnlockingResponse {
@@ -879,8 +879,8 @@ export const MsgExtendLockup = {
   },
   toAmino(message: MsgExtendLockup, useInterfaces: boolean = true): MsgExtendLockupAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -962,7 +962,7 @@ export const MsgExtendLockupResponse = {
   },
   toAmino(message: MsgExtendLockupResponse, useInterfaces: boolean = true): MsgExtendLockupResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = message.success === false ? undefined : message.success;
     return obj;
   },
   fromProtoMsg(message: MsgExtendLockupResponseProtoMsg, useInterfaces: boolean = true): MsgExtendLockupResponse {
@@ -1081,12 +1081,12 @@ export const MsgForceUnlock = {
   },
   toAmino(message: MsgForceUnlock, useInterfaces: boolean = true): MsgForceUnlockAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.ID = message.ID ? message.ID.toString() : undefined;
+    obj.owner = message.owner === "" ? undefined : message.owner;
+    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.coins = [];
+      obj.coins = message.coins;
     }
     return obj;
   },
@@ -1168,7 +1168,7 @@ export const MsgForceUnlockResponse = {
   },
   toAmino(message: MsgForceUnlockResponse, useInterfaces: boolean = true): MsgForceUnlockResponseAmino {
     const obj: any = {};
-    obj.success = message.success;
+    obj.success = message.success === false ? undefined : message.success;
     return obj;
   },
   fromProtoMsg(message: MsgForceUnlockResponseProtoMsg, useInterfaces: boolean = true): MsgForceUnlockResponse {

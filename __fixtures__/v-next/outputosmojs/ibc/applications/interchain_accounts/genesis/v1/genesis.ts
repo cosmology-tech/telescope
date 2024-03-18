@@ -344,17 +344,17 @@ export const ControllerGenesisState = {
     if (message.activeChannels) {
       obj.active_channels = message.activeChannels.map(e => e ? ActiveChannel.toAmino(e) : undefined);
     } else {
-      obj.active_channels = [];
+      obj.active_channels = message.activeChannels;
     }
     if (message.interchainAccounts) {
       obj.interchain_accounts = message.interchainAccounts.map(e => e ? RegisteredInterchainAccount.toAmino(e) : undefined);
     } else {
-      obj.interchain_accounts = [];
+      obj.interchain_accounts = message.interchainAccounts;
     }
     if (message.ports) {
       obj.ports = message.ports.map(e => e);
     } else {
-      obj.ports = [];
+      obj.ports = message.ports;
     }
     obj.params = message.params ? Params1.toAmino(message.params) : undefined;
     return obj;
@@ -513,14 +513,14 @@ export const HostGenesisState = {
     if (message.activeChannels) {
       obj.active_channels = message.activeChannels.map(e => e ? ActiveChannel.toAmino(e) : undefined);
     } else {
-      obj.active_channels = [];
+      obj.active_channels = message.activeChannels;
     }
     if (message.interchainAccounts) {
       obj.interchain_accounts = message.interchainAccounts.map(e => e ? RegisteredInterchainAccount.toAmino(e) : undefined);
     } else {
-      obj.interchain_accounts = [];
+      obj.interchain_accounts = message.interchainAccounts;
     }
-    obj.port = message.port;
+    obj.port = message.port === "" ? undefined : message.port;
     obj.params = message.params ? Params2.toAmino(message.params) : undefined;
     return obj;
   },
@@ -663,10 +663,10 @@ export const ActiveChannel = {
   },
   toAmino(message: ActiveChannel): ActiveChannelAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.port_id = message.portId;
-    obj.channel_id = message.channelId;
-    obj.is_middleware_enabled = message.isMiddlewareEnabled;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.channel_id = message.channelId === "" ? undefined : message.channelId;
+    obj.is_middleware_enabled = message.isMiddlewareEnabled === false ? undefined : message.isMiddlewareEnabled;
     return obj;
   },
   fromAminoMsg(object: ActiveChannelAminoMsg): ActiveChannel {
@@ -792,9 +792,9 @@ export const RegisteredInterchainAccount = {
   },
   toAmino(message: RegisteredInterchainAccount): RegisteredInterchainAccountAmino {
     const obj: any = {};
-    obj.connection_id = message.connectionId;
-    obj.port_id = message.portId;
-    obj.account_address = message.accountAddress;
+    obj.connection_id = message.connectionId === "" ? undefined : message.connectionId;
+    obj.port_id = message.portId === "" ? undefined : message.portId;
+    obj.account_address = message.accountAddress === "" ? undefined : message.accountAddress;
     return obj;
   },
   fromAminoMsg(object: RegisteredInterchainAccountAminoMsg): RegisteredInterchainAccount {

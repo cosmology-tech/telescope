@@ -282,8 +282,8 @@ export const ClientState = {
   },
   toAmino(message: ClientState): ClientStateAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.is_frozen = message.isFrozen;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
+    obj.is_frozen = message.isFrozen === false ? undefined : message.isFrozen;
     obj.consensus_state = message.consensusState ? ConsensusState.toAmino(message.consensusState) : undefined;
     return obj;
   },
@@ -411,8 +411,8 @@ export const ConsensusState = {
   toAmino(message: ConsensusState): ConsensusStateAmino {
     const obj: any = {};
     obj.public_key = message.publicKey ? Any.toAmino(message.publicKey) : undefined;
-    obj.diversifier = message.diversifier;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.diversifier = message.diversifier === "" ? undefined : message.diversifier;
+    obj.timestamp = message.timestamp !== BigInt(0) ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ConsensusStateAminoMsg): ConsensusState {
@@ -554,10 +554,10 @@ export const Header = {
   },
   toAmino(message: Header): HeaderAmino {
     const obj: any = {};
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.timestamp = message.timestamp !== BigInt(0) ? message.timestamp.toString() : undefined;
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.new_public_key = message.newPublicKey ? Any.toAmino(message.newPublicKey) : undefined;
-    obj.new_diversifier = message.newDiversifier;
+    obj.new_diversifier = message.newDiversifier === "" ? undefined : message.newDiversifier;
     return obj;
   },
   fromAminoMsg(object: HeaderAminoMsg): Header {
@@ -683,7 +683,7 @@ export const Misbehaviour = {
   },
   toAmino(message: Misbehaviour): MisbehaviourAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
     obj.signature_one = message.signatureOne ? SignatureAndData.toAmino(message.signatureOne) : undefined;
     obj.signature_two = message.signatureTwo ? SignatureAndData.toAmino(message.signatureTwo) : undefined;
     return obj;
@@ -830,7 +830,7 @@ export const SignatureAndData = {
     obj.signature = message.signature ? base64FromBytes(message.signature) : undefined;
     obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.timestamp = message.timestamp !== BigInt(0) ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SignatureAndDataAminoMsg): SignatureAndData {
@@ -941,7 +941,7 @@ export const TimestampedSignatureData = {
   toAmino(message: TimestampedSignatureData): TimestampedSignatureDataAmino {
     const obj: any = {};
     obj.signature_data = message.signatureData ? base64FromBytes(message.signatureData) : undefined;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
+    obj.timestamp = message.timestamp !== BigInt(0) ? message.timestamp.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: TimestampedSignatureDataAminoMsg): TimestampedSignatureData {
@@ -1099,9 +1099,9 @@ export const SignBytes = {
   },
   toAmino(message: SignBytes): SignBytesAmino {
     const obj: any = {};
-    obj.sequence = message.sequence ? message.sequence.toString() : undefined;
-    obj.timestamp = message.timestamp ? message.timestamp.toString() : undefined;
-    obj.diversifier = message.diversifier;
+    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
+    obj.timestamp = message.timestamp !== BigInt(0) ? message.timestamp.toString() : undefined;
+    obj.diversifier = message.diversifier === "" ? undefined : message.diversifier;
     obj.path = message.path ? base64FromBytes(message.path) : undefined;
     obj.data = message.data ? base64FromBytes(message.data) : undefined;
     return obj;
@@ -1214,7 +1214,7 @@ export const HeaderData = {
   toAmino(message: HeaderData): HeaderDataAmino {
     const obj: any = {};
     obj.new_pub_key = message.newPubKey ? Any.toAmino(message.newPubKey) : undefined;
-    obj.new_diversifier = message.newDiversifier;
+    obj.new_diversifier = message.newDiversifier === "" ? undefined : message.newDiversifier;
     return obj;
   },
   fromAminoMsg(object: HeaderDataAminoMsg): HeaderData {

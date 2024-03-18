@@ -819,24 +819,24 @@ export const Service = {
   },
   toAmino(message: Service): ServiceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.title = message.title;
-    obj.producer_project_id = message.producerProjectId;
-    obj.id = message.id;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.title = message.title === "" ? undefined : message.title;
+    obj.producer_project_id = message.producerProjectId === "" ? undefined : message.producerProjectId;
+    obj.id = message.id === "" ? undefined : message.id;
     if (message.apis) {
       obj.apis = message.apis.map(e => e ? Api.toAmino(e) : undefined);
     } else {
-      obj.apis = [];
+      obj.apis = message.apis;
     }
     if (message.types) {
       obj.types = message.types.map(e => e ? Type.toAmino(e) : undefined);
     } else {
-      obj.types = [];
+      obj.types = message.types;
     }
     if (message.enums) {
       obj.enums = message.enums.map(e => e ? Enum.toAmino(e) : undefined);
     } else {
-      obj.enums = [];
+      obj.enums = message.enums;
     }
     obj.documentation = message.documentation ? Documentation.toAmino(message.documentation) : undefined;
     obj.backend = message.backend ? Backend.toAmino(message.backend) : undefined;
@@ -848,23 +848,23 @@ export const Service = {
     if (message.endpoints) {
       obj.endpoints = message.endpoints.map(e => e ? Endpoint.toAmino(e) : undefined);
     } else {
-      obj.endpoints = [];
+      obj.endpoints = message.endpoints;
     }
     obj.control = message.control ? Control.toAmino(message.control) : undefined;
     if (message.logs) {
       obj.logs = message.logs.map(e => e ? LogDescriptor.toAmino(e) : undefined);
     } else {
-      obj.logs = [];
+      obj.logs = message.logs;
     }
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toAmino(e) : undefined);
     } else {
-      obj.metrics = [];
+      obj.metrics = message.metrics;
     }
     if (message.monitoredResources) {
       obj.monitored_resources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toAmino(e) : undefined);
     } else {
-      obj.monitored_resources = [];
+      obj.monitored_resources = message.monitoredResources;
     }
     obj.billing = message.billing ? Billing.toAmino(message.billing) : undefined;
     obj.logging = message.logging ? Logging.toAmino(message.logging) : undefined;

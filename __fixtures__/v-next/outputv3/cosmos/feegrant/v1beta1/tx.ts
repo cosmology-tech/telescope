@@ -183,8 +183,8 @@ export const MsgGrantAllowance = {
   },
   toAmino(message: MsgGrantAllowance, useInterfaces: boolean = true): MsgGrantAllowanceAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     obj.allowance = message.allowance ? FeeAllowanceI_ToAmino((message.allowance as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -344,8 +344,8 @@ export const MsgRevokeAllowance = {
   },
   toAmino(message: MsgRevokeAllowance, useInterfaces: boolean = true): MsgRevokeAllowanceAmino {
     const obj: any = {};
-    obj.granter = message.granter;
-    obj.grantee = message.grantee;
+    obj.granter = message.granter === "" ? undefined : message.granter;
+    obj.grantee = message.grantee === "" ? undefined : message.grantee;
     return obj;
   },
   fromProtoMsg(message: MsgRevokeAllowanceProtoMsg, useInterfaces: boolean = true): MsgRevokeAllowance {
@@ -438,7 +438,7 @@ export const FeeAllowanceI_InterfaceDecoder = (input: BinaryReader | Uint8Array)
       return data;
   }
 };
-export const FeeAllowanceI_FromAmino = (content: AnyAmino) => {
+export const FeeAllowanceI_FromAmino = (content: AnyAmino): Any => {
   switch (content.type) {
     case "cosmos-sdk/BasicAllowance":
       return Any.fromPartial({

@@ -269,16 +269,16 @@ export const ModuleDescriptor = {
   },
   toAmino(message: ModuleDescriptor): ModuleDescriptorAmino {
     const obj: any = {};
-    obj.go_import = message.goImport;
+    obj.go_import = message.goImport === "" ? undefined : message.goImport;
     if (message.usePackage) {
       obj.use_package = message.usePackage.map(e => e ? PackageReference.toAmino(e) : undefined);
     } else {
-      obj.use_package = [];
+      obj.use_package = message.usePackage;
     }
     if (message.canMigrateFrom) {
       obj.can_migrate_from = message.canMigrateFrom.map(e => e ? MigrateFromInfo.toAmino(e) : undefined);
     } else {
-      obj.can_migrate_from = [];
+      obj.can_migrate_from = message.canMigrateFrom;
     }
     return obj;
   },
@@ -359,8 +359,8 @@ export const PackageReference = {
   },
   toAmino(message: PackageReference): PackageReferenceAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.revision = message.revision;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.revision = message.revision === 0 ? undefined : message.revision;
     return obj;
   },
   fromAminoMsg(object: PackageReferenceAminoMsg): PackageReference {
@@ -429,7 +429,7 @@ export const MigrateFromInfo = {
   },
   toAmino(message: MigrateFromInfo): MigrateFromInfoAmino {
     const obj: any = {};
-    obj.module = message.module;
+    obj.module = message.module === "" ? undefined : message.module;
     return obj;
   },
   fromAminoMsg(object: MigrateFromInfoAminoMsg): MigrateFromInfo {

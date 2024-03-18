@@ -158,8 +158,8 @@ export const Coin = {
   },
   toAmino(message: Coin): CoinAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: CoinAminoMsg): Coin {
@@ -269,8 +269,8 @@ export const DecCoin = {
   },
   toAmino(message: DecCoin): DecCoinAmino {
     const obj: any = {};
-    obj.denom = message.denom;
-    obj.amount = message.amount;
+    obj.denom = message.denom === "" ? undefined : message.denom;
+    obj.amount = message.amount === "" ? undefined : message.amount;
     return obj;
   },
   fromAminoMsg(object: DecCoinAminoMsg): DecCoin {
@@ -364,7 +364,7 @@ export const IntProto = {
   },
   toAmino(message: IntProto): IntProtoAmino {
     const obj: any = {};
-    obj.int = message.int;
+    obj.int = message.int === "" ? undefined : message.int;
     return obj;
   },
   fromAminoMsg(object: IntProtoAminoMsg): IntProto {
@@ -458,7 +458,7 @@ export const DecProto = {
   },
   toAmino(message: DecProto): DecProtoAmino {
     const obj: any = {};
-    obj.dec = message.dec;
+    obj.dec = message.dec === "" ? undefined : message.dec;
     return obj;
   },
   fromAminoMsg(object: DecProtoAminoMsg): DecProto {

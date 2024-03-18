@@ -37,7 +37,7 @@ export interface MemoryProtoMsg {
 }
 /** Memory stores resource quantity and memory attributes */
 export interface MemoryAmino {
-  quantity?: ResourceValueAmino;
+  quantity: ResourceValueAmino;
   attributes?: AttributeAmino[];
 }
 export interface MemoryAminoMsg {
@@ -61,8 +61,8 @@ export interface StorageProtoMsg {
 }
 /** Storage stores resource quantity and storage attributes */
 export interface StorageAmino {
-  name?: string;
-  quantity?: ResourceValueAmino;
+  name: string;
+  quantity: ResourceValueAmino;
   attributes?: AttributeAmino[];
 }
 export interface StorageAminoMsg {
@@ -134,7 +134,7 @@ export const CPU = {
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -209,11 +209,11 @@ export const Memory = {
   },
   toAmino(message: Memory): MemoryAmino {
     const obj: any = {};
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },
@@ -299,12 +299,12 @@ export const Storage = {
   },
   toAmino(message: Storage): StorageAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : undefined;
+    obj.name = message.name ?? "";
+    obj.quantity = message.quantity ? ResourceValue.toAmino(message.quantity) : ResourceValue.toAmino(ResourceValue.fromPartial({}));
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
     } else {
-      obj.attributes = [];
+      obj.attributes = message.attributes;
     }
     return obj;
   },

@@ -64,10 +64,10 @@ export interface OrderIDProtoMsg {
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
 }
 /** OrderID stores owner and all other seq numbers */
 export interface OrderIDSDKType {
@@ -89,9 +89,9 @@ export interface OrderProtoMsg {
 }
 /** Order stores orderID, state of order and other details */
 export interface OrderAmino {
-  order_id?: OrderIDAmino;
-  state?: Order_State;
-  spec?: GroupSpecAmino;
+  order_id: OrderIDAmino;
+  state: Order_State;
+  spec: GroupSpecAmino;
   created_at?: string;
 }
 /** Order stores orderID, state of order and other details */
@@ -115,11 +115,11 @@ export interface OrderFiltersProtoMsg {
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersAmino {
-  owner?: string;
-  dseq?: string;
-  gseq?: number;
-  oseq?: number;
-  state?: string;
+  owner: string;
+  dseq: string;
+  gseq: number;
+  oseq: number;
+  state: string;
 }
 /** OrderFilters defines flags for order list filter */
 export interface OrderFiltersSDKType {
@@ -240,10 +240,10 @@ export const OrderID = {
   },
   toAmino(message: OrderID, useInterfaces: boolean = true): OrderIDAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
     return obj;
   },
   fromProtoMsg(message: OrderIDProtoMsg, useInterfaces: boolean = true): OrderID {
@@ -362,7 +362,7 @@ export const Order = {
       message.orderId = OrderID.fromAmino(object.order_id);
     }
     if (object.state !== undefined && object.state !== null) {
-      message.state = order_StateFromJSON(object.state);
+      message.state = object.state;
     }
     if (object.spec !== undefined && object.spec !== null) {
       message.spec = GroupSpec.fromAmino(object.spec);
@@ -374,10 +374,10 @@ export const Order = {
   },
   toAmino(message: Order, useInterfaces: boolean = true): OrderAmino {
     const obj: any = {};
-    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : undefined;
-    obj.state = message.state;
-    obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : undefined;
-    obj.created_at = message.createdAt ? message.createdAt.toString() : undefined;
+    obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : OrderID.toAmino(OrderID.fromPartial({}));
+    obj.state = message.state ?? 0;
+    obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: OrderProtoMsg, useInterfaces: boolean = true): Order {
@@ -519,11 +519,11 @@ export const OrderFilters = {
   },
   toAmino(message: OrderFilters, useInterfaces: boolean = true): OrderFiltersAmino {
     const obj: any = {};
-    obj.owner = message.owner;
-    obj.dseq = message.dseq ? message.dseq.toString() : undefined;
-    obj.gseq = message.gseq;
-    obj.oseq = message.oseq;
-    obj.state = message.state;
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    obj.oseq = message.oseq ?? 0;
+    obj.state = message.state ?? "";
     return obj;
   },
   fromProtoMsg(message: OrderFiltersProtoMsg, useInterfaces: boolean = true): OrderFilters {

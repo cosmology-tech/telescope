@@ -395,15 +395,15 @@ export const CheckRequest = {
   },
   toAmino(message: CheckRequest, useInterfaces: boolean = true): CheckRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     obj.attributes = message.attributes ? AttributeContext.toAmino(message.attributes, useInterfaces) : undefined;
     if (message.resources) {
       obj.resources = message.resources.map(e => e ? ResourceInfo.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.resources = [];
+      obj.resources = message.resources;
     }
-    obj.flags = message.flags;
+    obj.flags = message.flags === "" ? undefined : message.flags;
     return obj;
   },
   fromProtoMsg(message: CheckRequestProtoMsg, useInterfaces: boolean = true): CheckRequest {
@@ -543,11 +543,11 @@ export const ResourceInfo = {
   },
   toAmino(message: ResourceInfo, useInterfaces: boolean = true): ResourceInfoAmino {
     const obj: any = {};
-    obj.name = message.name;
-    obj.type = message.type;
-    obj.permission = message.permission;
-    obj.container = message.container;
-    obj.location = message.location;
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.permission = message.permission === "" ? undefined : message.permission;
+    obj.container = message.container === "" ? undefined : message.container;
+    obj.location = message.location === "" ? undefined : message.location;
     return obj;
   },
   fromProtoMsg(message: ResourceInfoProtoMsg, useInterfaces: boolean = true): ResourceInfo {
@@ -641,8 +641,8 @@ export const CheckResponse_HeadersEntry = {
   },
   toAmino(message: CheckResponse_HeadersEntry, useInterfaces: boolean = true): CheckResponse_HeadersEntryAmino {
     const obj: any = {};
-    obj.key = message.key;
-    obj.value = message.value;
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: CheckResponse_HeadersEntryProtoMsg, useInterfaces: boolean = true): CheckResponse_HeadersEntry {
@@ -893,12 +893,12 @@ export const ReportRequest = {
   },
   toAmino(message: ReportRequest, useInterfaces: boolean = true): ReportRequestAmino {
     const obj: any = {};
-    obj.service_name = message.serviceName;
-    obj.service_config_id = message.serviceConfigId;
+    obj.service_name = message.serviceName === "" ? undefined : message.serviceName;
+    obj.service_config_id = message.serviceConfigId === "" ? undefined : message.serviceConfigId;
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? AttributeContext.toAmino(e, useInterfaces) : undefined);
     } else {
-      obj.operations = [];
+      obj.operations = message.operations;
     }
     return obj;
   },

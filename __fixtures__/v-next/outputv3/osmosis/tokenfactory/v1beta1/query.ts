@@ -342,7 +342,7 @@ export const QueryDenomAuthorityMetadataRequest = {
   },
   toAmino(message: QueryDenomAuthorityMetadataRequest, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequestAmino {
     const obj: any = {};
-    obj.denom = message.denom;
+    obj.denom = message.denom === "" ? undefined : message.denom;
     return obj;
   },
   fromProtoMsg(message: QueryDenomAuthorityMetadataRequestProtoMsg, useInterfaces: boolean = true): QueryDenomAuthorityMetadataRequest {
@@ -506,7 +506,7 @@ export const QueryDenomsFromCreatorRequest = {
   },
   toAmino(message: QueryDenomsFromCreatorRequest, useInterfaces: boolean = true): QueryDenomsFromCreatorRequestAmino {
     const obj: any = {};
-    obj.creator = message.creator;
+    obj.creator = message.creator === "" ? undefined : message.creator;
     return obj;
   },
   fromProtoMsg(message: QueryDenomsFromCreatorRequestProtoMsg, useInterfaces: boolean = true): QueryDenomsFromCreatorRequest {
@@ -596,7 +596,7 @@ export const QueryDenomsFromCreatorResponse = {
     if (message.denoms) {
       obj.denoms = message.denoms.map(e => e);
     } else {
-      obj.denoms = [];
+      obj.denoms = message.denoms;
     }
     return obj;
   },

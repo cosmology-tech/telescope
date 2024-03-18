@@ -402,13 +402,13 @@ export const AccessTypeParam = {
   fromAmino(object: AccessTypeParamAmino): AccessTypeParam {
     const message = createBaseAccessTypeParam();
     if (object.value !== undefined && object.value !== null) {
-      message.value = accessTypeFromJSON(object.value);
+      message.value = object.value;
     }
     return message;
   },
   toAmino(message: AccessTypeParam, useInterfaces: boolean = true): AccessTypeParamAmino {
     const obj: any = {};
-    obj.value = message.value;
+    obj.value = message.value === 0 ? undefined : message.value;
     return obj;
   },
   fromProtoMsg(message: AccessTypeParamProtoMsg, useInterfaces: boolean = true): AccessTypeParam {
@@ -495,7 +495,7 @@ export const AccessConfig = {
   fromAmino(object: AccessConfigAmino): AccessConfig {
     const message = createBaseAccessConfig();
     if (object.permission !== undefined && object.permission !== null) {
-      message.permission = accessTypeFromJSON(object.permission);
+      message.permission = object.permission;
     }
     if (object.address !== undefined && object.address !== null) {
       message.address = object.address;
@@ -504,8 +504,8 @@ export const AccessConfig = {
   },
   toAmino(message: AccessConfig, useInterfaces: boolean = true): AccessConfigAmino {
     const obj: any = {};
-    obj.permission = message.permission;
-    obj.address = message.address;
+    obj.permission = message.permission === 0 ? undefined : message.permission;
+    obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
   fromProtoMsg(message: AccessConfigProtoMsg, useInterfaces: boolean = true): AccessConfig {
@@ -611,7 +611,7 @@ export const Params = {
       message.codeUploadAccess = AccessConfig.fromAmino(object.code_upload_access);
     }
     if (object.instantiate_default_permission !== undefined && object.instantiate_default_permission !== null) {
-      message.instantiateDefaultPermission = accessTypeFromJSON(object.instantiate_default_permission);
+      message.instantiateDefaultPermission = object.instantiate_default_permission;
     }
     if (object.max_wasm_code_size !== undefined && object.max_wasm_code_size !== null) {
       message.maxWasmCodeSize = BigInt(object.max_wasm_code_size);
@@ -621,8 +621,8 @@ export const Params = {
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
     obj.code_upload_access = message.codeUploadAccess ? AccessConfig.toAmino(message.codeUploadAccess, useInterfaces) : undefined;
-    obj.instantiate_default_permission = message.instantiateDefaultPermission;
-    obj.max_wasm_code_size = message.maxWasmCodeSize ? message.maxWasmCodeSize.toString() : undefined;
+    obj.instantiate_default_permission = message.instantiateDefaultPermission === 0 ? undefined : message.instantiateDefaultPermission;
+    obj.max_wasm_code_size = message.maxWasmCodeSize !== BigInt(0) ? message.maxWasmCodeSize.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
@@ -736,7 +736,7 @@ export const CodeInfo = {
   toAmino(message: CodeInfo, useInterfaces: boolean = true): CodeInfoAmino {
     const obj: any = {};
     obj.code_hash = message.codeHash ? base64FromBytes(message.codeHash) : undefined;
-    obj.creator = message.creator;
+    obj.creator = message.creator === "" ? undefined : message.creator;
     obj.instantiate_config = message.instantiateConfig ? AccessConfig.toAmino(message.instantiateConfig, useInterfaces) : undefined;
     return obj;
   },
@@ -914,12 +914,12 @@ export const ContractInfo = {
   },
   toAmino(message: ContractInfo, useInterfaces: boolean = true): ContractInfoAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
-    obj.creator = message.creator;
-    obj.admin = message.admin;
-    obj.label = message.label;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
+    obj.creator = message.creator === "" ? undefined : message.creator;
+    obj.admin = message.admin === "" ? undefined : message.admin;
+    obj.label = message.label === "" ? undefined : message.label;
     obj.created = message.created ? AbsoluteTxPosition.toAmino(message.created, useInterfaces) : undefined;
-    obj.ibc_port_id = message.ibcPortId;
+    obj.ibc_port_id = message.ibcPortId === "" ? undefined : message.ibcPortId;
     obj.extension = message.extension ? ContractInfoExtension_ToAmino((message.extension as Any), useInterfaces) : undefined;
     return obj;
   },
@@ -1035,7 +1035,7 @@ export const ContractCodeHistoryEntry = {
   fromAmino(object: ContractCodeHistoryEntryAmino): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     if (object.operation !== undefined && object.operation !== null) {
-      message.operation = contractCodeHistoryOperationTypeFromJSON(object.operation);
+      message.operation = object.operation;
     }
     if (object.code_id !== undefined && object.code_id !== null) {
       message.codeId = BigInt(object.code_id);
@@ -1050,8 +1050,8 @@ export const ContractCodeHistoryEntry = {
   },
   toAmino(message: ContractCodeHistoryEntry, useInterfaces: boolean = true): ContractCodeHistoryEntryAmino {
     const obj: any = {};
-    obj.operation = message.operation;
-    obj.code_id = message.codeId ? message.codeId.toString() : undefined;
+    obj.operation = message.operation === 0 ? undefined : message.operation;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
     obj.updated = message.updated ? AbsoluteTxPosition.toAmino(message.updated, useInterfaces) : undefined;
     obj.msg = message.msg ? JSON.parse(fromUtf8(message.msg)) : undefined;
     return obj;
@@ -1153,8 +1153,8 @@ export const AbsoluteTxPosition = {
   },
   toAmino(message: AbsoluteTxPosition, useInterfaces: boolean = true): AbsoluteTxPositionAmino {
     const obj: any = {};
-    obj.block_height = message.blockHeight ? message.blockHeight.toString() : undefined;
-    obj.tx_index = message.txIndex ? message.txIndex.toString() : undefined;
+    obj.block_height = message.blockHeight !== BigInt(0) ? message.blockHeight.toString() : undefined;
+    obj.tx_index = message.txIndex !== BigInt(0) ? message.txIndex.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: AbsoluteTxPositionProtoMsg, useInterfaces: boolean = true): AbsoluteTxPosition {
@@ -1275,7 +1275,7 @@ export const ContractInfoExtension_InterfaceDecoder = (input: BinaryReader | Uin
       return data;
   }
 };
-export const ContractInfoExtension_FromAmino = (content: AnyAmino) => {
+export const ContractInfoExtension_FromAmino = (content: AnyAmino): Any => {
   return Any.fromAmino(content);
 };
 export const ContractInfoExtension_ToAmino = (content: Any, useInterfaces: boolean = true) => {

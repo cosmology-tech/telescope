@@ -12,7 +12,7 @@ export interface ParamsProtoMsg {
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsAmino {
-  deployment_min_deposit?: CoinAmino;
+  deployment_min_deposit: CoinAmino;
 }
 /** Params defines the parameters for the x/deployment package */
 export interface ParamsSDKType {
@@ -84,7 +84,7 @@ export const Params = {
   },
   toAmino(message: Params, useInterfaces: boolean = true): ParamsAmino {
     const obj: any = {};
-    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit, useInterfaces) : undefined;
+    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit, useInterfaces) : Coin.toAmino(Coin.fromPartial({}));
     return obj;
   },
   fromProtoMsg(message: ParamsProtoMsg, useInterfaces: boolean = true): Params {
