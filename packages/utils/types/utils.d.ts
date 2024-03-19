@@ -1,4 +1,5 @@
 import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
+import { ImportDeclaration } from "@babel/types";
 /**
  * swap the key and value of the input object
  * @param input obj needs to swap
@@ -34,3 +35,7 @@ export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Servi
         type: "Query" | "Tx" | string;
     };
 }) => string;
+/**
+ * Add extension to relative imports for compatibility with ESM
+ */
+export declare const restoreJsExtension: (importDeclarations: ImportDeclaration[], ext?: string) => void;

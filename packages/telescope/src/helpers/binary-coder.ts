@@ -1,4 +1,7 @@
-export const binary = `
+import { TelescopeOptions } from "@cosmology/types";
+
+export const getHelperForBinary = (options: TelescopeOptions) => {
+  return `
 // Copyright (c) 2016, Daniel Wirtz  All rights reserved.
 
 // Redistribution and use in source and binary forms, with or without
@@ -33,7 +36,7 @@ export const binary = `
 // standalone and requires a support library to be linked with it. This
 // support library is itself covered by the above license.
 
-import { utf8Length, utf8Read, utf8Write } from "./utf8.js";
+import { utf8Length, utf8Read, utf8Write } from "./utf8${options.restoreImportExtension ?? ""}";
 import {
   int64ToString,
   readInt32,
@@ -49,7 +52,7 @@ import {
   writeByte,
   zzDecode,
   zzEncode,
-} from "./varint.js";
+} from "./varint${options.restoreImportExtension ?? ""}";
 
 export enum WireType {
   Varint = 0,
@@ -527,3 +530,4 @@ function indexOutOfRange(reader: BinaryReader, writeLength?: number) {
   );
 }
 `;
+};

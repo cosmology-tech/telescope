@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, binary, types, registryHelper } from '../helpers';
+import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, types, registryHelper, getHelperForBinary } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -68,7 +68,7 @@ export const plugin = (
     write(builder, "utf8.ts", utf8);
 
     builder.files.push("binary.ts");
-    write(builder, "binary.ts", binary);
+    write(builder, "binary.ts", getHelperForBinary(builder.options));
   }
 
   if (builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType || builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {

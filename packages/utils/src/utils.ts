@@ -6,6 +6,7 @@ import {
   ImportUsage,
 } from "@cosmology/types";
 import * as dotty from "dotty";
+import { ImportDeclaration } from "@babel/types";
 
 /**
  * swap the key and value of the input object
@@ -158,4 +159,26 @@ export const getServiceImplement = (
   }
 
   return undefined;
+};
+
+/**
+ * Add extension to relative imports for compatibility with ESM
+ */
+export const restoreJsExtension = (
+  importDeclarations: ImportDeclaration[],
+  ext?: string
+) => {
+  if (!ext) {
+    return;
+  }
+
+  // for (const stmt of importDeclarations) {
+  //   if (
+  //     stmt.source.value.startsWith(".") &&
+  //     !stmt.source.value.endsWith(".js") &&
+  //     !stmt.source.value.endsWith(ext)
+  //   ) {
+  //     stmt.source.value += ext;
+  //   }
+  // }
 };

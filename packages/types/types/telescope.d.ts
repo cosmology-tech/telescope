@@ -13,6 +13,7 @@ interface TelescopeOpts {
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
     includeExternalHelpers?: boolean;
+    restoreImportExtension?: string;
     logLevel?: TelescopeLogLevel;
     interfaces?: {
         enabled?: boolean;
