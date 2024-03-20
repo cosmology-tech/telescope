@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.13...@cosmology/telescope@1.5.0) (2024-03-20)
+
+### Features
+
+- ESM compatibility ([7901482](https://github.com/cosmology-tech/telescope/commit/79014823e2424594d4d4544b27000905e696a3f0))
+
 ## [1.4.13](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.4.12...@cosmology/telescope@1.4.13) (2024-03-18)
 
 ### Bug Fixes
