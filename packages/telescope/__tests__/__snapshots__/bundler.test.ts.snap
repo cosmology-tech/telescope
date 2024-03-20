@@ -1108,3 +1108,138 @@ export namespace tendermint {
   },
 }
 `;
+
+exports[`get import statements 1`] = `
+[
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "func",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "./query.lcd",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+]
+`;
+
+exports[`get import statements with ext 1`] = `
+[
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "func",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "./query.lcd.mjs",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+]
+`;
+
+exports[`get import statements with ext without . 1`] = `
+[
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "func",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "defineStore",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+  {
+    "source": {
+      "type": "StringLiteral",
+      "value": "./query.lcd.mjs",
+    },
+    "specifiers": [
+      {
+        "imported": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "local": {
+          "name": "LCDQueryClient",
+          "type": "Identifier",
+        },
+        "type": "ImportSpecifier",
+      },
+    ],
+    "type": "ImportDeclaration",
+  },
+]
+`;

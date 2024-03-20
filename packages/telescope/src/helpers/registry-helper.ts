@@ -1,6 +1,9 @@
-export const registryHelper = `import { BinaryReader } from "./binary";
-import { Any, AnyAmino } from "./google/protobuf/any";
-import { IProtoType, TelescopeGeneratedCodec } from "./types";
+import { TelescopeOptions } from "@cosmology/types";
+
+export const getRegistryHelper = (options: TelescopeOptions) => {
+  return `import { BinaryReader } from "./binary${options.restoreImportExtension ?? ""}";
+import { Any, AnyAmino } from "./google/protobuf/any${options.restoreImportExtension ?? ""}";
+import { IProtoType, TelescopeGeneratedCodec } from "./types${options.restoreImportExtension ?? ""}";
 
 export class GlobalDecoderRegistry {
   static registry: {
@@ -211,3 +214,4 @@ function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(
 
 GlobalDecoderRegistry.register(Any.typeUrl, Any);
 `;
+};

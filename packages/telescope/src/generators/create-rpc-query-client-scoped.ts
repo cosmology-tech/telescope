@@ -150,7 +150,8 @@ const makeRPC = (
 
     const importStmts = getImportStatements(
         localname,
-        [...fixlocalpaths(imports)]
+        [...fixlocalpaths(imports)],
+        builder.options
     );
 
     const prog = []

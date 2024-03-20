@@ -93,7 +93,8 @@ export const plugin = (
     const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
     const importStmts = getImportStatements(
         localname,
-        imports
+        imports,
+        builder.options
     );
 
     // construct the AST

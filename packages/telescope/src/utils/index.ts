@@ -1,6 +1,7 @@
 import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
+import { restoreExtension } from '@cosmology/utils';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
   if (ref.traversed) return ref.traversed;
@@ -113,11 +114,11 @@ export const fixlocalpaths = (imports: ImportObj[]) => {
 };
 
 
-export const getRelativePath = (f1: string, f2: string) => {
+export const getRelativePath = (f1: string, f2: string, ext?: string) => {
   const rel = relative(dirname(f1), f2);
   let importPath = rel.replace(extname(rel), '');
   if (!/^\./.test(importPath)) importPath = `./${importPath}`;
-  return `${importPath}.js`;
+  return restoreExtension(importPath, ext) ;
 }
 
 export * from './common-create-bundle';

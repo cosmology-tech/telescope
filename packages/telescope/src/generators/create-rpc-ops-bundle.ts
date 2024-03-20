@@ -66,7 +66,7 @@ export const plugin = (builder: TelescopeBuilder) => {
 
   // generate imports added by context.addUtil
   const imports = fixlocalpaths(aggregateImports(context, {}, localname));
-  const importStmts = getImportStatements(localname, imports);
+  const importStmts = getImportStatements(localname, imports, builder.options);
 
   // construct the AST
   const prog = [].concat(importStmts).concat(buildImports(pkgImports)).concat(ast);

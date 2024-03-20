@@ -4,8 +4,8 @@
 * and run the transpile command or yarn proto command to regenerate this bundle.
 */
 
-import { IBinaryReader, IBinaryWriter } from "./binary";
-import { Any } from "./google/protobuf/any";
+import { IBinaryReader, IBinaryWriter } from "./binary.js";
+import { Any } from "./google/protobuf/any.js";
 import { OfflineSigner } from "@cosmjs/proto-signing";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
 

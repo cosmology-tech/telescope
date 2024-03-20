@@ -110,6 +110,7 @@ describe("implements interface gen", () => {
         __dirname + "/../../../__fixtures__/misc/proto-impl-interfaces",
       ],
       options: deepmerge(options, {
+        restoreImportExtension: ".js",
         interfaces: {
           enabled: true,
           useGlobalDecoderRegistry: true,

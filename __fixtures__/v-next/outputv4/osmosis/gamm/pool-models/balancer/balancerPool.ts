@@ -1,8 +1,8 @@
-import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../../google/protobuf/duration";
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
+import { Timestamp, TimestampSDKType } from "../../../../google/protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../../../google/protobuf/duration.js";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers.js";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**

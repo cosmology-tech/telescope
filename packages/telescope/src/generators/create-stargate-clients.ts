@@ -12,9 +12,8 @@ import {
 } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
-import { variableSlug } from '@cosmology/utils';
+import { duplicateImportPathsWithExt, variableSlug } from '@cosmology/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
-import { restoreJsExtension } from '@cosmology/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -94,8 +93,9 @@ export const plugin = (
 
     const imports = buildAllImportsFromGenericContext(ctx, clientFile);
 
-    const importDecls = [...imports, ...registryImports, ...converterImports];
-    restoreJsExtension(importDecls, builder.options.restoreImportExtension);
+    let importDecls = [...imports, ...registryImports, ...converterImports];
+
+    importDecls = duplicateImportPathsWithExt(importDecls, builder.options.restoreImportExtension);
 
     let cProg = importDecls
       .concat(aminos)
@@ -106,7 +106,6 @@ export const plugin = (
     if (getTxRpc) {
       cProg = cProg.concat(getTxRpc);
     }
-
 
     const clientOutFile = join(builder.outPath, clientFile);
     bundler.writeAst(cProg, clientOutFile);

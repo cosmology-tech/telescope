@@ -1,8 +1,8 @@
-import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers.js";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can

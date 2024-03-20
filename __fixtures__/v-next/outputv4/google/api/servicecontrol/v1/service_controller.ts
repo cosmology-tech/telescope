@@ -1,8 +1,8 @@
-import { Operation, OperationSDKType } from "./operation";
-import { CheckError, CheckErrorSDKType } from "./check_error";
-import { Status, StatusSDKType } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { Operation, OperationSDKType } from "./operation.js";
+import { CheckError, CheckErrorSDKType } from "./check_error.js";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in

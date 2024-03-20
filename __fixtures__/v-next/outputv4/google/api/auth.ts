@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * `Authentication` defines the authentication configuration for API methods

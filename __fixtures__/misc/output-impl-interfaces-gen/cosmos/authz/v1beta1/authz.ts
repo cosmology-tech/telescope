@@ -1,10 +1,10 @@
-import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
-import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { DepositDeploymentAuthorization, DepositDeploymentAuthorizationProtoMsg, DepositDeploymentAuthorizationSDKType } from "../../../akash/deployment/v1beta1/authz";
-import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType } from "../../bank/v1beta1/authz";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { GlobalDecoderRegistry } from "../../../registry";
+import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any.js";
+import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { DepositDeploymentAuthorization, DepositDeploymentAuthorizationProtoMsg, DepositDeploymentAuthorizationSDKType } from "../../../akash/deployment/v1beta1/authz.js";
+import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType } from "../../bank/v1beta1/authz.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers.js";
+import { GlobalDecoderRegistry } from "../../../registry.js";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {

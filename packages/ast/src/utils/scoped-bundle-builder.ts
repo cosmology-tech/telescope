@@ -1,7 +1,7 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../encoding';
 import { makeCommentLineWithBlocks, objectPattern, objectProperty } from '.';
-import { variableSlug } from '@cosmology/utils';
+import { restoreExtension, variableSlug } from '@cosmology/utils';
 
 const DEFAULT_RPC_PARAM_NAME = 'rpc';
 
@@ -197,7 +197,7 @@ export const buildExportCreators = (
       ],
       source: {
         type: 'StringLiteral',
-        value: hookport.path
+        value: restoreExtension(hookport.path, context.options.restoreImportExtension)
       }
     };
   });

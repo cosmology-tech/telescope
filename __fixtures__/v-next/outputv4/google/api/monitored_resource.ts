@@ -1,8 +1,8 @@
-import { LabelDescriptor, LabelDescriptorSDKType } from "./label";
-import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage";
-import { Struct, StructSDKType } from "../protobuf/struct";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
+import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON } from "./launch_stage.js";
+import { Struct, StructSDKType } from "../protobuf/struct.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a

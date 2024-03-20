@@ -1,20 +1,20 @@
 import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { defaultRegistryTypes, AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import * as akashAuditV1beta1AuditRegistry from "./audit/v1beta1/audit.registry";
-import * as akashAuditV1beta2AuditRegistry from "./audit/v1beta2/audit.registry";
-import * as akashCertV1beta2CertRegistry from "./cert/v1beta2/cert.registry";
-import * as akashDeploymentV1beta2ServiceRegistry from "./deployment/v1beta2/service.registry";
-import * as akashMarketV1beta2ServiceRegistry from "./market/v1beta2/service.registry";
-import * as akashProviderV1beta1ProviderRegistry from "./provider/v1beta1/provider.registry";
-import * as akashProviderV1beta2ProviderRegistry from "./provider/v1beta2/provider.registry";
-import * as akashAuditV1beta1AuditAmino from "./audit/v1beta1/audit.amino";
-import * as akashAuditV1beta2AuditAmino from "./audit/v1beta2/audit.amino";
-import * as akashCertV1beta2CertAmino from "./cert/v1beta2/cert.amino";
-import * as akashDeploymentV1beta2ServiceAmino from "./deployment/v1beta2/service.amino";
-import * as akashMarketV1beta2ServiceAmino from "./market/v1beta2/service.amino";
-import * as akashProviderV1beta1ProviderAmino from "./provider/v1beta1/provider.amino";
-import * as akashProviderV1beta2ProviderAmino from "./provider/v1beta2/provider.amino";
+import * as akashAuditV1beta1AuditRegistry from "./audit/v1beta1/audit.registry.js";
+import * as akashAuditV1beta2AuditRegistry from "./audit/v1beta2/audit.registry.js";
+import * as akashCertV1beta2CertRegistry from "./cert/v1beta2/cert.registry.js";
+import * as akashDeploymentV1beta2ServiceRegistry from "./deployment/v1beta2/service.registry.js";
+import * as akashMarketV1beta2ServiceRegistry from "./market/v1beta2/service.registry.js";
+import * as akashProviderV1beta1ProviderRegistry from "./provider/v1beta1/provider.registry.js";
+import * as akashProviderV1beta2ProviderRegistry from "./provider/v1beta2/provider.registry.js";
+import * as akashAuditV1beta1AuditAmino from "./audit/v1beta1/audit.amino.js";
+import * as akashAuditV1beta2AuditAmino from "./audit/v1beta2/audit.amino.js";
+import * as akashCertV1beta2CertAmino from "./cert/v1beta2/cert.amino.js";
+import * as akashDeploymentV1beta2ServiceAmino from "./deployment/v1beta2/service.amino.js";
+import * as akashMarketV1beta2ServiceAmino from "./market/v1beta2/service.amino.js";
+import * as akashProviderV1beta1ProviderAmino from "./provider/v1beta1/provider.amino.js";
+import * as akashProviderV1beta2ProviderAmino from "./provider/v1beta2/provider.amino.js";
 export const akashAminoConverters = {
   ...akashAuditV1beta1AuditAmino.AminoConverter,
   ...akashAuditV1beta2AuditAmino.AminoConverter,

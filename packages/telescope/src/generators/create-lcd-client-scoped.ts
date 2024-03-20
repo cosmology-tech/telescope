@@ -116,7 +116,8 @@ const makeLCD = (
 
     const importStmts = getImportStatements(
         localname,
-        [...fixlocalpaths(imports)]
+        [...fixlocalpaths(imports)],
+        builder.options
     );
 
     const prog = []

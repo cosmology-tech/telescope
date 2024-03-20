@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool

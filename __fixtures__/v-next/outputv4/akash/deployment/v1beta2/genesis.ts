@@ -1,8 +1,8 @@
-import { Deployment, DeploymentSDKType } from "./deployment";
-import { Group, GroupSDKType } from "./group";
-import { Params, ParamsSDKType } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Deployment, DeploymentSDKType } from "./deployment.js";
+import { Group, GroupSDKType } from "./group.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {

@@ -4,9 +4,9 @@
 * and run the transpile command or yarn proto command to regenerate this bundle.
 */
 
-import { BinaryReader } from "./binary";
-import { Any, AnyAmino } from "./google/protobuf/any";
-import { IProtoType, TelescopeGeneratedCodec } from "./types";
+import { BinaryReader } from "./binary.js";
+import { Any, AnyAmino } from "./google/protobuf/any.js";
+import { IProtoType, TelescopeGeneratedCodec } from "./types.js";
 
 export class GlobalDecoderRegistry {
   static registry: {

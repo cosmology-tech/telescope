@@ -23,7 +23,7 @@ export const plugin = (
     const indexOutFile = join(builder.outPath, indexFile);
     const stmts = builder.files.map(
         file => t.exportAllDeclaration(
-            t.stringLiteral(getRelativePath(indexFile, file))
+            t.stringLiteral(getRelativePath(indexFile, file, builder.options.restoreImportExtension))
         )
     );
     const finalAst = t.program(stmts);

@@ -1,6 +1,6 @@
-import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {

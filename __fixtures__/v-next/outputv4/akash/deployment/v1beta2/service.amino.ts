@@ -1,17 +1,17 @@
 /* eslint-disable */
-import { DeploymentID, DeploymentIDSDKType } from "./deployment";
-import { GroupSpec, GroupSpecSDKType } from "./groupspec";
-import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { GroupID, GroupIDSDKType } from "./groupid";
+import { DeploymentID, DeploymentIDSDKType } from "./deployment.js";
+import { GroupSpec, GroupSpecSDKType } from "./groupspec.js";
+import { Coin, CoinSDKType, DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { GroupID, GroupIDSDKType } from "./groupid.js";
 import { AminoMsg } from "@cosmjs/amino";
-import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceSDKType } from "./resource";
-import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits";
-import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "../../base/v1beta2/resource";
-import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta2/resourcevalue";
-import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint";
-import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deploymentmsg";
-import { MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./groupmsg";
+import { PlacementRequirements, PlacementRequirementsSDKType, SignedBy, SignedBySDKType, Attribute, AttributeSDKType } from "../../base/v1beta2/attribute.js";
+import { Resource, ResourceSDKType } from "./resource.js";
+import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resourceunits.js";
+import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from "../../base/v1beta2/resource.js";
+import { ResourceValue, ResourceValueSDKType } from "../../base/v1beta2/resourcevalue.js";
+import { Endpoint, EndpointSDKType, endpoint_KindFromJSON } from "../../base/v1beta2/endpoint.js";
+import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType } from "./deploymentmsg.js";
+import { MsgCloseGroup, MsgCloseGroupSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgStartGroup, MsgStartGroupSDKType } from "./groupmsg.js";
 export interface MsgCreateDeploymentAminoType extends AminoMsg {
   type: "akash/deployment/v1beta2/testonly-create-deployment";
   value: {

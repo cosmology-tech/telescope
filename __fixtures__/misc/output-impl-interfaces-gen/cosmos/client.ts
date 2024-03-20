@@ -1,8 +1,8 @@
 import { GeneratedType, Registry, OfflineSigner } from "@cosmjs/proto-signing";
 import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
-import * as cosmosAuthzV1beta1TxRegistry from "./authz/v1beta1/tx.registry";
-import * as cosmosAuthzV1beta1TxAmino from "./authz/v1beta1/tx.amino";
+import * as cosmosAuthzV1beta1TxRegistry from "./authz/v1beta1/tx.registry.js";
+import * as cosmosAuthzV1beta1TxAmino from "./authz/v1beta1/tx.amino.js";
 export const cosmosAminoConverters = {
   ...cosmosAuthzV1beta1TxAmino.AminoConverter
 };

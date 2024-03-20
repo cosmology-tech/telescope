@@ -1,7 +1,7 @@
-import { Value, ValueSDKType } from "./value";
-import { Status, StatusSDKType } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { Value, ValueSDKType } from "./value.js";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { DeepPartial, isSet } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.

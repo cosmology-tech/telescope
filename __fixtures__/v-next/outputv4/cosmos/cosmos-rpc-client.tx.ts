@@ -1,4 +1,4 @@
-import { Rpc } from "../helpers";
+import { Rpc } from "../helpers.js";
 export const createCosmicRPCTxClient = async ({
   rpc
 }: {

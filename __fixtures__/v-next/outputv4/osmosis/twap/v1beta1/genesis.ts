@@ -1,7 +1,7 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { TwapRecord, TwapRecordSDKType } from "./twap_record";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { TwapRecord, TwapRecordSDKType } from "./twap_record.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {

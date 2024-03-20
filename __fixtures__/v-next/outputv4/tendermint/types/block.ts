@@ -1,7 +1,7 @@
-import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types";
-import { EvidenceList, EvidenceListSDKType } from "./evidence";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types.js";
+import { EvidenceList, EvidenceListSDKType } from "./evidence.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
 export const protobufPackage = "tendermint.types";
 export interface Block {
   header: Header;

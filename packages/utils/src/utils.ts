@@ -5,8 +5,8 @@ import {
   ProtoRef,
   ImportUsage,
 } from "@cosmology/types";
-import * as dotty from "dotty";
 import { ImportDeclaration } from "@babel/types";
+import * as dotty from "dotty";
 
 /**
  * swap the key and value of the input object
@@ -162,23 +162,44 @@ export const getServiceImplement = (
 };
 
 /**
- * Add extension to relative imports for compatibility with ESM
+ * Add extension to path
  */
-export const restoreJsExtension = (
-  importDeclarations: ImportDeclaration[],
-  ext?: string
-) => {
+export const restoreExtension = (path: string, ext?: string) => {
   if (!ext) {
-    return;
+    return path;
   }
 
-  // for (const stmt of importDeclarations) {
-  //   if (
-  //     stmt.source.value.startsWith(".") &&
-  //     !stmt.source.value.endsWith(".js") &&
-  //     !stmt.source.value.endsWith(ext)
-  //   ) {
-  //     stmt.source.value += ext;
-  //   }
-  // }
+  const fixedExt = ext.startsWith(".") ? ext : `.${ext}`;
+
+  if (
+    path.startsWith(".") &&
+    !path.endsWith(".js") &&
+    !path.endsWith(fixedExt)
+  ) {
+    return `${path}${fixedExt}`;
+  }
+
+  return path;
+};
+
+/**
+ * To duplicate the import paths with the extension.
+ * @param paths ImportDeclarations
+ * @param ext extension
+ * @returns duplicated import paths with the extension
+ */
+export const duplicateImportPathsWithExt = (paths: ImportDeclaration[], ext?: string) => {
+  if(!ext){
+    return paths;
+  }
+
+  return paths.map(path => {
+    return {
+      ...path,
+      source: {
+        ...path.source,
+        value: restoreExtension(path.source.value, ext)
+      }
+    }
+  })
 };

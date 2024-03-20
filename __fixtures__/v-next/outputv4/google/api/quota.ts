@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, isObject } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { DeepPartial, isSet, isObject } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * Quota configuration helps to achieve fairness and budgeting in service

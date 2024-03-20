@@ -36,6 +36,13 @@ export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Servi
     };
 }) => string;
 /**
- * Add extension to relative imports for compatibility with ESM
+ * Add extension to path
  */
-export declare const restoreJsExtension: (importDeclarations: ImportDeclaration[], ext?: string) => void;
+export declare const restoreExtension: (path: string, ext?: string) => string;
+/**
+ * To duplicate the import paths with the extension.
+ * @param paths ImportDeclarations
+ * @param ext extension
+ * @returns duplicated import paths with the extension
+ */
+export declare const duplicateImportPathsWithExt: (paths: ImportDeclaration[], ext?: string) => ImportDeclaration[];

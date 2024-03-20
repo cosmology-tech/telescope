@@ -1,6 +1,6 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.audit.v1beta1";
 /** Provider stores owner auditor and attributes details */
 export interface Provider {

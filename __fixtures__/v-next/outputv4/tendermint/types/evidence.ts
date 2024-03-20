@@ -1,8 +1,8 @@
-import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types";
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { Validator, ValidatorSDKType } from "./validator";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { Vote, VoteSDKType, LightBlock, LightBlockSDKType } from "./types.js";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
+import { Validator, ValidatorSDKType } from "./validator.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers.js";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;

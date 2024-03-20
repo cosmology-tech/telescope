@@ -1,6 +1,6 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.provider.v1beta2";
 /** ProviderInfo */
 export interface ProviderInfo {
