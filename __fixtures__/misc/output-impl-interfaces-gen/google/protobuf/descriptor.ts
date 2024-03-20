@@ -1,6 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers.js";
-import { GlobalDecoderRegistry } from "../../registry.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**

@@ -1,6 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../binary.js";
-import { isSet, DeepPartial } from "../helpers.js";
-import { GlobalDecoderRegistry } from "../registry.js";
+import { BinaryReader, BinaryWriter } from "../binary";
+import { isSet, DeepPartial } from "../helpers";
+import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,

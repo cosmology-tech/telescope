@@ -39,7 +39,7 @@
 // standalone and requires a support library to be linked with it. This
 // support library is itself covered by the above license.
 
-import { utf8Length, utf8Read, utf8Write } from "./utf8.js";
+import { utf8Length, utf8Read, utf8Write } from "./utf8";
 import {
   int64ToString,
   readInt32,
@@ -55,7 +55,7 @@ import {
   writeByte,
   zzDecode,
   zzEncode,
-} from "./varint.js";
+} from "./varint";
 
 export enum WireType {
   Varint = 0,

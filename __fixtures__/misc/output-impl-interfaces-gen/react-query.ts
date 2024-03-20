@@ -4,7 +4,7 @@
 * and run the transpile command or yarn proto command to regenerate this bundle.
 */
 
-import { getRpcClient } from './extern.js'
+import { getRpcClient } from './extern'
 import {
     useQuery,
     UseQueryOptions,

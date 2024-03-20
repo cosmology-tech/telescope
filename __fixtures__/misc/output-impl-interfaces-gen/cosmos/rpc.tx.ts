@@ -1,4 +1,4 @@
-import { Rpc } from "../helpers.js";
+import { Rpc } from "../helpers";
 export const createRPCMsgClient = async ({
   rpc
 }: {

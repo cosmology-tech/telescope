@@ -1,6 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../binary.js";
-import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers.js";
-import { GlobalDecoderRegistry } from "../../registry.js";
+import { BinaryReader, BinaryWriter } from "../../binary";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local

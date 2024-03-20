@@ -1,12 +1,12 @@
-import * as _2 from "./authz/v1beta1/authz.js";
-import * as _3 from "./authz/v1beta1/tx.js";
-import * as _4 from "./bank/v1beta1/authz.js";
-import * as _5 from "./bank/v1beta1/tx.js";
-import * as _6 from "./base/v1beta1/coin.js";
-import * as _11 from "./authz/v1beta1/tx.amino.js";
-import * as _12 from "./authz/v1beta1/tx.registry.js";
-import * as _13 from "./authz/v1beta1/tx.rpc.msg.js";
-import * as _14 from "./rpc.tx.js";
+import * as _2 from "./authz/v1beta1/authz";
+import * as _3 from "./authz/v1beta1/tx";
+import * as _4 from "./bank/v1beta1/authz";
+import * as _5 from "./bank/v1beta1/tx";
+import * as _6 from "./base/v1beta1/coin";
+import * as _11 from "./authz/v1beta1/tx.amino";
+import * as _12 from "./authz/v1beta1/tx.registry";
+import * as _13 from "./authz/v1beta1/tx.rpc.msg";
+import * as _14 from "./rpc.tx";
 export namespace cosmos {
   export namespace authz {
     export const v1beta1 = {
