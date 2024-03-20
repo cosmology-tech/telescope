@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers.js";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.

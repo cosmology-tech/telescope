@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
-import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
+import { ConfigChange, ConfigChangeSDKType } from "../../config_change.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers.js";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {

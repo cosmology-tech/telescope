@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {

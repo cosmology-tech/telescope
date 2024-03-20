@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "cosmos.base.reflection.v2alpha1";
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {

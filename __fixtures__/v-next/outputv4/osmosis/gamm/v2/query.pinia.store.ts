@@ -1,8 +1,8 @@
 import { LCDClient } from "@cosmology/lcd";
-import { useEndpoint } from "../../../pinia-endpoint";
-import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
+import { useEndpoint } from "../../../pinia-endpoint.js";
+import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query.js";
 import { defineStore } from "pinia";
-import { LCDQueryClient } from "./query.lcd";
+import { LCDQueryClient } from "./query.lcd.js";
 export const usePiniaStore = defineStore('osmosis/gamm/v2/query.proto', {
   state: () => {
     return {

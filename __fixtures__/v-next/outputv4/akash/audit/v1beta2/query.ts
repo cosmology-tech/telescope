@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderSDKType } from "./audit";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Provider, ProviderSDKType } from "./audit.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {

@@ -1,8 +1,8 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./params";
-import { ClaimRecord, ClaimRecordSDKType } from "./claim";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { ClaimRecord, ClaimRecordSDKType } from "./claim.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {

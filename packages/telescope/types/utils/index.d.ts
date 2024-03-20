@@ -93,5 +93,5 @@ export declare const fixlocalpaths: (imports: ImportObj[]) => {
     name: string;
     importAs?: string;
 }[];
-export declare const getRelativePath: (f1: string, f2: string) => string;
+export declare const getRelativePath: (f1: string, f2: string, ext?: string) => string;
 export * from './common-create-bundle';

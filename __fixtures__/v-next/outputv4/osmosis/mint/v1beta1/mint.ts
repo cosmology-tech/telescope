@@ -1,6 +1,6 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { Decimal } from "@cosmjs/math";
-import { isSet, DeepPartial } from "../../../helpers";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {

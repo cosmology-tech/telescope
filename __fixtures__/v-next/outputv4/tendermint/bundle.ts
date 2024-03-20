@@ -1,17 +1,17 @@
-import * as _305 from "./abci/types";
-import * as _306 from "./crypto/keys";
-import * as _307 from "./crypto/proof";
-import * as _308 from "./libs/bits/types";
-import * as _309 from "./p2p/types";
-import * as _310 from "./types/block";
-import * as _311 from "./types/evidence";
-import * as _312 from "./types/params";
-import * as _313 from "./types/types";
-import * as _314 from "./types/validator";
-import * as _315 from "./version/types";
-import * as _535 from "./abci/types.rpc.ABCIApplication";
-import * as _560 from "./lcd";
-import * as _561 from "./rpc.query";
+import * as _305 from "./abci/types.js";
+import * as _306 from "./crypto/keys.js";
+import * as _307 from "./crypto/proof.js";
+import * as _308 from "./libs/bits/types.js";
+import * as _309 from "./p2p/types.js";
+import * as _310 from "./types/block.js";
+import * as _311 from "./types/evidence.js";
+import * as _312 from "./types/params.js";
+import * as _313 from "./types/types.js";
+import * as _314 from "./types/validator.js";
+import * as _315 from "./version/types.js";
+import * as _535 from "./abci/types.rpc.ABCIApplication.js";
+import * as _560 from "./lcd.js";
+import * as _561 from "./rpc.query.js";
 export namespace tendermint {
   export const abci = {
     ..._305,

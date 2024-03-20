@@ -1,5 +1,8 @@
-export const types = `import { IBinaryReader, IBinaryWriter } from "./binary";
-import { Any } from "./google/protobuf/any";
+import { TelescopeOptions } from "@cosmology/types";
+
+export const getTypesHelper = (options: TelescopeOptions) => {
+  return `import { IBinaryReader, IBinaryWriter } from "./binary${options.restoreImportExtension ?? ""}";
+import { Any } from "./google/protobuf/any${options.restoreImportExtension ?? ""}";
 import { OfflineSigner } from "@cosmjs/proto-signing";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
 
@@ -148,3 +151,4 @@ export interface SigningClientParams {
   signer: OfflineSigner;
 }
 `;
+};

@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {

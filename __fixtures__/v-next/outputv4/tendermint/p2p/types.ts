@@ -1,6 +1,6 @@
-import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers.js";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;

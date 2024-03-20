@@ -104,7 +104,8 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
           name: 'LCDQueryClient',
           path: './query.lcd'
         }
-      ]);
+      ],
+      builder.options);
 
       const prog = []
         .concat([...imports, ...piniaImport])

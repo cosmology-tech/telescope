@@ -1,8 +1,8 @@
-import { Params, ParamsSDKType } from "./genesis";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
+import { Params, ParamsSDKType } from "./genesis.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query.js";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Params retrieves the total set of recovery parameters. */

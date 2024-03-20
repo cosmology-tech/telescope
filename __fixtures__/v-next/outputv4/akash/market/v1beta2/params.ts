@@ -1,6 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {

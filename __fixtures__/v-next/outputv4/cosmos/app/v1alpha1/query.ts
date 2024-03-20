@@ -1,6 +1,6 @@
-import { Config, ConfigSDKType } from "./config";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { Config, ConfigSDKType } from "./config.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}

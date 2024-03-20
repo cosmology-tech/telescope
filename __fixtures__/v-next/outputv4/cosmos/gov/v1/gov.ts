@@ -1,9 +1,9 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers.js";
 export const protobufPackage = "cosmos.gov.v1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {

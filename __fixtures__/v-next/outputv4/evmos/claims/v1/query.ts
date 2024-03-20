@@ -1,9 +1,9 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Params, ParamsSDKType } from "./genesis";
-import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { Params, ParamsSDKType } from "./genesis.js";
+import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "evmos.claims.v1";
 /**
  * QueryTotalUnclaimedRequest is the request type for the Query/TotalUnclaimed

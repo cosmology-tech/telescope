@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {

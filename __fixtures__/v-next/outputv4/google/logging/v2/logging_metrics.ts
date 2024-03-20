@@ -1,8 +1,8 @@
-import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
-import { Distribution_BucketOptions } from "../../api/distribution";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric.js";
+import { Distribution_BucketOptions } from "../../api/distribution.js";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers.js";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {

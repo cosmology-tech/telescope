@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { TokenPair, TokenPairSDKType } from "./erc20";
-import { Params, ParamsSDKType } from "./genesis";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { TokenPair, TokenPairSDKType } from "./erc20.js";
+import { Params, ParamsSDKType } from "./genesis.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC

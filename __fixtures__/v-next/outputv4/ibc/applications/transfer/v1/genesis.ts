@@ -1,6 +1,6 @@
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisState {

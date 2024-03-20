@@ -1,6 +1,6 @@
-import { Value, ValueSDKType } from "./value";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { Value, ValueSDKType } from "./value.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { DeepPartial, isSet } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.

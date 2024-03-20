@@ -1,7 +1,7 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
-import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
+import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx.js";
 /** Msg defines the evidence Msg service. */
 export interface Msg {
   /**

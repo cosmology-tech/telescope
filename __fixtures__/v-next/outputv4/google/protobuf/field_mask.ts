@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { DeepPartial } from "../../helpers.js";
 export const protobufPackage = "google.protobuf";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:

@@ -1,6 +1,6 @@
-import { Params, ParamsSDKType } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Params, ParamsSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {

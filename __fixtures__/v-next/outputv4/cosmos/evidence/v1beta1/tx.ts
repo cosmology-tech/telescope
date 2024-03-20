@@ -1,6 +1,6 @@
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary

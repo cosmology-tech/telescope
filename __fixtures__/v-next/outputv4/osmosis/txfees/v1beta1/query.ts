@@ -1,6 +1,6 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}

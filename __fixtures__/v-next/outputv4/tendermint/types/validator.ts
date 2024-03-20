@@ -1,6 +1,6 @@
-import { PublicKey, PublicKeySDKType } from "../crypto/keys";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { PublicKey, PublicKeySDKType } from "../crypto/keys.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers.js";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];

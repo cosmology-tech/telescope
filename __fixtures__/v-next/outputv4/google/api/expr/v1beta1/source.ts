@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;

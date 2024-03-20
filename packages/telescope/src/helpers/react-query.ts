@@ -1,7 +1,7 @@
 import { TelescopeOptions } from "@cosmology/types";
 
 export const getReactQueryHelper = (options: TelescopeOptions) => {
-  return `import { getRpcClient } from './extern'
+  return `import { getRpcClient } from './extern${options.restoreImportExtension ?? ""}'
 import {
     useQuery,
     UseQueryOptions,

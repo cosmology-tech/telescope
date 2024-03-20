@@ -1,8 +1,8 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { Params, ParamsSDKType } from "./genesis";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { DevFeeInfo, DevFeeInfoSDKType } from "./fees.js";
+import { Params, ParamsSDKType } from "./genesis.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC

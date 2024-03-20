@@ -119,7 +119,8 @@ export const plugin = (
 
     const importStmts = getImportStatements(
         localname,
-        [...importsForAggregator, ...progImports]
+        [...importsForAggregator, ...progImports],
+        builder.options
     );
 
     const prog = []

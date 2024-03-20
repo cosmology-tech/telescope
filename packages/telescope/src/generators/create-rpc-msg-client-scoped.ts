@@ -123,7 +123,7 @@ const makeRPC = (
             if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next' && ctx.proto.pluginValue('rpcClients.extensions') && ctx.proto.pluginValue('stargateClients.addGetTxRpc')) {
               const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
 
-              txRpcImport = importStmt([txRpcName], './client')
+              txRpcImport = importStmt([txRpcName], `./client${ctx.options.restoreImportExtension ?? ""}`)
 
               msgExt = createRpcMsgExtension(ctx.proto, txRpcName);
             }
@@ -151,7 +151,8 @@ const makeRPC = (
 
     const importStmts = getImportStatements(
         localname,
-        [...fixlocalpaths(imports)]
+        [...fixlocalpaths(imports)],
+        builder.options
     );
 
     const prog = []

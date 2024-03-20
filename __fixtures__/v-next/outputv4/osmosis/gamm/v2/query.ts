@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice

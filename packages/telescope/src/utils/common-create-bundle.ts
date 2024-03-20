@@ -49,7 +49,7 @@ export const commonBundlePlugin = (
 
   // generate imports added by context.addUtil
   const imports = fixlocalpaths(aggregateImports(pCtx, {}, localname));
-  const importStmts = getImportStatements(localname, imports);
+  const importStmts = getImportStatements(localname, imports, builder.options);
 
   // construct the AST
   const prog = [].concat(importStmts).concat(ast);

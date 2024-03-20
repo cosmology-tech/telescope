@@ -1,11 +1,11 @@
-import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource";
-import { Any, AnySDKType } from "../../protobuf/any";
-import { Struct, StructSDKType } from "../../protobuf/struct";
-import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
-import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity";
-import { HttpRequest, HttpRequestSDKType } from "../type/http_request";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
+import { MonitoredResource, MonitoredResourceSDKType } from "../../api/monitored_resource.js";
+import { Any, AnySDKType } from "../../protobuf/any.js";
+import { Struct, StructSDKType } from "../../protobuf/struct.js";
+import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
+import { LogSeverity, LogSeveritySDKType, logSeverityFromJSON, logSeverityToJSON } from "../type/log_severity.js";
+import { HttpRequest, HttpRequestSDKType } from "../type/http_request.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers.js";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;

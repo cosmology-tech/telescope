@@ -1,7 +1,7 @@
-import { Params, ParamsSDKType } from "./auth";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Params, ParamsSDKType } from "./auth.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisState {

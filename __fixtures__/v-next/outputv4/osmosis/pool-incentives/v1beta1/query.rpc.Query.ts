@@ -1,10 +1,10 @@
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
-import { Gauge, GaugeSDKType } from "../../incentives/gauge";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives.js";
+import { Gauge, GaugeSDKType } from "../../incentives/gauge.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
+import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query.js";
 export interface Query {
   /** GaugeIds takes the pool id and returns the matching gauge ids and durations */
   gaugeIds(request: QueryGaugeIdsRequest): Promise<QueryGaugeIdsResponse>;

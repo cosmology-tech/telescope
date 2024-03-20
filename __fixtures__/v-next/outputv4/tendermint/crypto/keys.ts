@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers.js";
 export const protobufPackage = "tendermint.crypto";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {

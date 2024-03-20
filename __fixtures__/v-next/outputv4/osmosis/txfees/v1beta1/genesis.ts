@@ -1,6 +1,6 @@
-import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {

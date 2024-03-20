@@ -1,6 +1,6 @@
-import { Height, HeightSDKType } from "../../../core/client/v1/client";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { Height, HeightSDKType } from "../../../core/client/v1/client.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)

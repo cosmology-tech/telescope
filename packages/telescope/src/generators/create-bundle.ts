@@ -3,6 +3,7 @@ import { TelescopeBuilder } from '../builder';
 import {
     recursiveModuleBundle
 } from '@cosmology/ast';
+import { duplicateImportPathsWithExt } from '@cosmology/utils';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -13,10 +14,12 @@ export const plugin = (
         return;
     }
 
+    const importPaths = duplicateImportPathsWithExt(bundler.bundle.importPaths, builder.options.restoreImportExtension);
+
     // [x] bundle
     const body = recursiveModuleBundle(builder.options, bundler.bundle.bundleVariables);
     const prog = []
-        .concat(bundler.bundle.importPaths)
+        .concat(importPaths)
         .concat(body);
 
     const localname = bundler.bundle.bundleFile;

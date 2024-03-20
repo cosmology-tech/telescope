@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {

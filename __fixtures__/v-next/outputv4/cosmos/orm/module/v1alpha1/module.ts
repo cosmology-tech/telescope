@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "cosmos.orm.module.v1alpha1";
 /**
  * Module defines the ORM module which adds providers to the app container for

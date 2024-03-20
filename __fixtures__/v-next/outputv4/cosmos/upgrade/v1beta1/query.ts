@@ -1,6 +1,6 @@
-import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC

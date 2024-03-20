@@ -1,13 +1,13 @@
-import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
+import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from "@cosmjs/stargate";
-import { ReactQueryParams } from "../../../react-query";
+import { ReactQueryParams } from "../../../react-query.js";
 import { useQuery } from "@tanstack/react-query";
-import { QueryStore, MobxResponse } from "../../../mobx";
+import { QueryStore, MobxResponse } from "../../../mobx.js";
 import { makeObservable, override } from "mobx";
-import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
+import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query.js";
 /** Query defines the gRPC querier service */
 export interface Query {
   /** Certificates queries certificates */

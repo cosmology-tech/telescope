@@ -1,7 +1,7 @@
-import { Grant, GrantSDKType } from "./authz";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Grant, GrantSDKType } from "./authz.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee

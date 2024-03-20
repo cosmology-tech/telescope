@@ -1,7 +1,7 @@
-import { Any, AnySDKType } from "../../../../google/protobuf/any";
-import { BIP44Params, BIP44ParamsSDKType } from "../../hd/v1/hd";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { Any, AnySDKType } from "../../../../google/protobuf/any.js";
+import { BIP44Params, BIP44ParamsSDKType } from "../../hd/v1/hd.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {

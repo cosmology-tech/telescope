@@ -1,6 +1,6 @@
-import { EpochInfo, EpochInfoSDKType } from "./genesis";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { EpochInfo, EpochInfoSDKType } from "./genesis.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoRequestProtoMsg {

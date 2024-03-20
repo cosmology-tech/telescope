@@ -1,7 +1,7 @@
-import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;

@@ -1,11 +1,11 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination";
-import { Params, ParamsSDKType } from "./params";
-import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid";
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
-import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet } from "../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../cosmos/base/query/v1beta1/pagination.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidDelegationRecord, SuperfluidDelegationRecordSDKType, superfluidAssetTypeFromJSON, superfluidAssetTypeToJSON } from "./superfluid.js";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
+import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock.js";
+import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { DeepPartial, isSet } from "../../helpers.js";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {

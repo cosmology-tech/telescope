@@ -1,6 +1,6 @@
-import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;

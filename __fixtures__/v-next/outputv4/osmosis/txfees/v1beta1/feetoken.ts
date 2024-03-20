@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.

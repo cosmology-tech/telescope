@@ -1,5 +1,5 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the

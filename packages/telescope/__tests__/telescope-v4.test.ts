@@ -20,6 +20,7 @@ const options: TelescopeOptions = {
   env: 'v-next',
   removeUnusedImports: false,
   classesUseArrowFunctions: false,
+  restoreImportExtension: ".js",
 
   tsDisable: {
     disableAll: false,

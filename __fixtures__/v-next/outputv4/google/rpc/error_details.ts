@@ -1,6 +1,6 @@
-import { Duration, DurationSDKType } from "../protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial, isObject } from "../../helpers";
+import { Duration, DurationSDKType } from "../protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../helpers.js";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore

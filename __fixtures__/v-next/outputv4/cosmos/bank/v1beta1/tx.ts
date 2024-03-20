@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
+import { Input, InputSDKType, Output, OutputSDKType } from "./bank.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {

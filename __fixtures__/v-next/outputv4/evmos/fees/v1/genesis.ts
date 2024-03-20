@@ -1,6 +1,6 @@
-import { DevFeeInfo, DevFeeInfoSDKType } from "./fees";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { DevFeeInfo, DevFeeInfoSDKType } from "./fees.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */

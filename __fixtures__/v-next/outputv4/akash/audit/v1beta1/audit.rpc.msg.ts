@@ -1,7 +1,7 @@
-import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
-import { Rpc } from "../../../helpers";
-import { BinaryReader } from "../../../binary";
-import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
+import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute.js";
+import { Rpc } from "../../../helpers.js";
+import { BinaryReader } from "../../../binary.js";
+import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit.js";
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */

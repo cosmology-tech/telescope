@@ -1,10 +1,10 @@
-import { Tx, TxSDKType } from "./tx";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci";
-import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
-import { Block, BlockSDKType } from "../../../tendermint/types/block";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { Tx, TxSDKType } from "./tx.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination.js";
+import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci.js";
+import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types.js";
+import { Block, BlockSDKType } from "../../../tendermint/types/block.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** OrderBy defines the sorting order */
 export enum OrderBy {

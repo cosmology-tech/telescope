@@ -1,6 +1,6 @@
-import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial } from "../../../helpers";
+import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {

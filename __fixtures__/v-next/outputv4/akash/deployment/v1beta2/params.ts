@@ -1,6 +1,6 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {

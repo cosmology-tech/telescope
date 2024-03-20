@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial } from "../../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination.js";
+import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC

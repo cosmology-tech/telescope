@@ -1,7 +1,7 @@
-import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute";
-import { Resource, ResourceSDKType } from "./resource";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute.js";
+import { Resource, ResourceSDKType } from "./resource.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {

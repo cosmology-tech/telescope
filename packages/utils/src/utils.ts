@@ -5,6 +5,7 @@ import {
   ProtoRef,
   ImportUsage,
 } from "@cosmology/types";
+import { ImportDeclaration } from "@babel/types";
 import * as dotty from "dotty";
 
 /**
@@ -158,4 +159,47 @@ export const getServiceImplement = (
   }
 
   return undefined;
+};
+
+/**
+ * Add extension to path
+ */
+export const restoreExtension = (path: string, ext?: string) => {
+  if (!ext) {
+    return path;
+  }
+
+  const fixedExt = ext.startsWith(".") ? ext : `.${ext}`;
+
+  if (
+    path.startsWith(".") &&
+    !path.endsWith(".js") &&
+    !path.endsWith(fixedExt)
+  ) {
+    return `${path}${fixedExt}`;
+  }
+
+  return path;
+};
+
+/**
+ * To duplicate the import paths with the extension.
+ * @param paths ImportDeclarations
+ * @param ext extension
+ * @returns duplicated import paths with the extension
+ */
+export const duplicateImportPathsWithExt = (paths: ImportDeclaration[], ext?: string) => {
+  if(!ext){
+    return paths;
+  }
+
+  return paths.map(path => {
+    return {
+      ...path,
+      source: {
+        ...path.source,
+        value: restoreExtension(path.source.value, ext)
+      }
+    }
+  })
 };

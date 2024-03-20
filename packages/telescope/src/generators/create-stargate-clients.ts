@@ -12,7 +12,7 @@ import {
 } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
-import { variableSlug } from '@cosmology/utils';
+import { duplicateImportPathsWithExt, variableSlug } from '@cosmology/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (
@@ -93,7 +93,11 @@ export const plugin = (
 
     const imports = buildAllImportsFromGenericContext(ctx, clientFile);
 
-    let cProg = [...imports, ...registryImports, ...converterImports]
+    let importDecls = [...imports, ...registryImports, ...converterImports];
+
+    importDecls = duplicateImportPathsWithExt(importDecls, builder.options.restoreImportExtension);
+
+    let cProg = importDecls
       .concat(aminos)
       .concat(protos)
       .concat(clientOptions)
@@ -102,7 +106,6 @@ export const plugin = (
     if (getTxRpc) {
       cProg = cProg.concat(getTxRpc);
     }
-
 
     const clientOutFile = join(builder.outPath, clientFile);
     bundler.writeAst(cProg, clientOutFile);

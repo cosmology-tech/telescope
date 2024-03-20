@@ -1,9 +1,9 @@
-import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment";
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
-import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, Exact, Rpc } from "../../../helpers";
+import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group.js";
+import { Account, AccountSDKType } from "../../escrow/v1beta1/types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, Exact, Rpc } from "../../../helpers.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */

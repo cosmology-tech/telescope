@@ -1,7 +1,7 @@
-import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
-import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination.js";
+import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
 export interface QueryParamsRequest {}

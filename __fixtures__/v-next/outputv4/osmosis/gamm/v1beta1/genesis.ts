@@ -1,7 +1,7 @@
-import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, isSet } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
 export interface Params {

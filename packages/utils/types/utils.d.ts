@@ -1,4 +1,5 @@
 import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
+import { ImportDeclaration } from "@babel/types";
 /**
  * swap the key and value of the input object
  * @param input obj needs to swap
@@ -34,3 +35,14 @@ export declare const getServiceImplement: (serviceName: "Msg" | "Query" | "Servi
         type: "Query" | "Tx" | string;
     };
 }) => string;
+/**
+ * Add extension to path
+ */
+export declare const restoreExtension: (path: string, ext?: string) => string;
+/**
+ * To duplicate the import paths with the extension.
+ * @param paths ImportDeclarations
+ * @param ext extension
+ * @returns duplicated import paths with the extension
+ */
+export declare const duplicateImportPathsWithExt: (paths: ImportDeclaration[], ext?: string) => ImportDeclaration[];

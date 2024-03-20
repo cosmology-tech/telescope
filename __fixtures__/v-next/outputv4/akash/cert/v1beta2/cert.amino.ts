@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { AminoMsg } from "@cosmjs/amino";
-import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert";
+import { CertificateID, CertificateIDSDKType, MsgCreateCertificate, MsgCreateCertificateSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType } from "./cert.js";
 export interface MsgCreateCertificateAminoType extends AminoMsg {
   type: "akash/cert/v1beta2/testonly-create-certificate";
   value: {

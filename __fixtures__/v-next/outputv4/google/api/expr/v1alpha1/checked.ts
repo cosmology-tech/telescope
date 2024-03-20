@@ -1,8 +1,8 @@
-import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax";
-import { Empty, EmptySDKType } from "../../../protobuf/empty";
-import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { SourceInfo, SourceInfoSDKType, Expr, ExprSDKType, Constant, ConstantSDKType } from "./syntax.js";
+import { Empty, EmptySDKType } from "../../../protobuf/empty.js";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
