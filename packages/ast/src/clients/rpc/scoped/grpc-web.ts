@@ -2,6 +2,7 @@ import * as t from '@babel/types';
 import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
 import { rpcFuncArguments, rpcClassArguments, rpcRecursiveObjectProps } from './rpc';
+import { restoreExtension } from '@cosmology/utils';
 
 export const grpcWebClientScaffold = (): t.Statement[] => {
     return [
@@ -193,7 +194,7 @@ export const grpcWebClientScaffold = (): t.Statement[] => {
                         )
                     ]
                 )
-            )     
+            )
         ),
     ];
 };
@@ -207,7 +208,7 @@ export const grpcFuncArguments = (): t.ObjectPattern[] => {
                 false,
                 true
             )
-        ], 
+        ],
         t.tsTypeAnnotation(
             t.tsTypeLiteral(
                 [
@@ -219,14 +220,17 @@ export const grpcFuncArguments = (): t.ObjectPattern[] => {
                     )
                 ]
             )
-            )                       
+            )
         )
     ];
 };
 
 export const grpcWebNewAwaitImport = (
     path: string,
-    className: string
+    className: string,
+    options?: {
+      restoreImportExtension?: string;
+    }
 ) => {
     return t.newExpression(
         t.memberExpression(
@@ -235,7 +239,7 @@ export const grpcWebNewAwaitImport = (
                     t.import(),
                     [
                         t.stringLiteral(
-                            path
+                            restoreExtension(path, options?.restoreImportExtension)
                         )
                     ]
                 )
@@ -251,7 +255,10 @@ export const grpcWebNewAwaitImport = (
 
 export const grpcNestedImportObject = (
     obj: object,
-    className: string
+    className: string,
+    options?: {
+      restoreImportExtension?: string;
+    }
 ) => {
 
     //make className dynamic based on object
@@ -272,7 +279,7 @@ export const grpcNestedImportObject = (
             default:
               console.log("grpc service error!! This should not happend. Undefined service type");
           }
-        return grpcWebNewAwaitImport(obj, className);
+        return grpcWebNewAwaitImport(obj, className, options);
     }
 
     const keys = Object.keys(obj);
@@ -280,7 +287,7 @@ export const grpcNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            grpcNestedImportObject(obj[name], className)
+            grpcNestedImportObject(obj[name], className, options)
         )
     }))
 };
@@ -308,7 +315,8 @@ export const createScopedGrpcWebFactory = (
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
-                                    'QueryClientImpl'
+                                    'QueryClientImpl',
+                                    context.options
                                 )
                             ))
                         ),
@@ -323,7 +331,10 @@ export const createScopedGrpcWebFactory = (
 export const createScopedGrpcWebMsgFactory = (
     obj: object,
     identifier: string,
-    className: string
+    className: string,
+    options?: {
+      restoreImportExtension?: string;
+    }
 ) => {
     return t.exportNamedDeclaration(
         t.variableDeclaration(
@@ -339,7 +350,8 @@ export const createScopedGrpcWebMsgFactory = (
                             t.returnStatement(
                                 grpcNestedImportObject(
                                     obj,
-                                    className
+                                    className,
+                                    options
                                 )
                             ))
                         ),

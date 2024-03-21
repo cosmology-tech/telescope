@@ -1,31 +1,45 @@
-import * as t from '@babel/types';
-import { GenericParseContext } from '../../encoding';
-import { objectPattern } from '../../utils';
-import { variableSlug } from '@cosmology/utils';
-import { buildExportCreators } from '../../utils';
+import * as t from "@babel/types";
+import { GenericParseContext } from "../../encoding";
+import { objectPattern } from "../../utils";
+import { restoreExtension, variableSlug } from "@cosmology/utils";
+import { buildExportCreators } from "../../utils";
 
 export const rpcHookFuncArguments = (): t.ObjectPattern[] => {
-  return [
-    objectPattern(
-      [t.objectProperty(t.identifier('rpc'), t.identifier('rpc'), false, true)],
-      t.tsTypeAnnotation(
-        t.tsTypeLiteral([
-          t.tsPropertySignature(
-            t.identifier('rpc'),
-            t.tsTypeAnnotation(t.tsTypeReference(t.identifier('Rpc')))
-          )
-        ])
-      )
-    )
-  ];
+    return [
+        objectPattern(
+            [
+                t.objectProperty(
+                    t.identifier("rpc"),
+                    t.identifier("rpc"),
+                    false,
+                    true
+                ),
+            ],
+            t.tsTypeAnnotation(
+                t.tsTypeLiteral([
+                    t.tsPropertySignature(
+                        t.identifier("rpc"),
+                        t.tsTypeAnnotation(
+                            t.tsTypeReference(t.identifier("Rpc"))
+                        )
+                    ),
+                ])
+            )
+        ),
+    ];
 };
 
 export const rpcHookClassArguments = (): t.ObjectExpression[] => {
-  return [
-    t.objectExpression([
-      t.objectProperty(t.identifier('rpc'), t.identifier('rpc'), false, true)
-    ])
-  ];
+    return [
+        t.objectExpression([
+            t.objectProperty(
+                t.identifier("rpc"),
+                t.identifier("rpc"),
+                false,
+                true
+            ),
+        ]),
+    ];
 };
 
 /**
@@ -38,37 +52,45 @@ export const rpcHookClassArguments = (): t.ObjectExpression[] => {
  * @returns {ParseResult} created AST
  */
 export const rpcHookNewTmRequire = (
-  imports: HookImport[],
-  path: string,
-  methodName: string
+    imports: HookImport[],
+    path: string,
+    methodName: string,
+    options?: {
+        restoreImportExtension?: string;
+    }
 ) => {
-  imports.push({
-    as: variableSlug(path),
-    path
-  });
+    const editedPath = restoreExtension(
+        variableSlug(path),
+        options?.restoreImportExtension
+    );
 
-  return t.callExpression(
-    t.memberExpression(
-      t.identifier(variableSlug(path)),
-      t.identifier(methodName)
-    ),
-    [t.identifier('rpc')]
-  );
+    imports.push({
+        as: editedPath,
+        path,
+    });
+
+    return t.callExpression(
+        t.memberExpression(
+            t.identifier(editedPath),
+            t.identifier(methodName)
+        ),
+        [t.identifier("rpc")]
+    );
 };
 
 export const rpcHookRecursiveObjectProps = (names: string[], leaf?: any) => {
-  const [name, ...rest] = names;
+    const [name, ...rest] = names;
 
-  let baseComponent;
-  if (names.length === 1) {
-    baseComponent = leaf ? leaf : t.identifier(name);
-  } else {
-    baseComponent = rpcHookRecursiveObjectProps(rest, leaf);
-  }
+    let baseComponent;
+    if (names.length === 1) {
+        baseComponent = leaf ? leaf : t.identifier(name);
+    } else {
+        baseComponent = rpcHookRecursiveObjectProps(rest, leaf);
+    }
 
-  return t.objectExpression([
-    t.objectProperty(t.identifier(name), baseComponent)
-  ]);
+    return t.objectExpression([
+        t.objectProperty(t.identifier(name), baseComponent),
+    ]);
 };
 
 /**
@@ -81,31 +103,39 @@ export const rpcHookRecursiveObjectProps = (names: string[], leaf?: any) => {
  * @returns {ParseResult} created AST
  */
 export const rpcHookTmNestedImportObject = (
-  imports: HookImport[],
-  obj: object,
-  methodName: string
+    imports: HookImport[],
+    obj: object,
+    methodName: string,
+    options?: {
+        restoreImportExtension?: string;
+    }
 ) => {
-  //if obj is a path, end recursion and get the mapping.
-  if (typeof obj === 'string') {
-    return rpcHookNewTmRequire(imports, obj, methodName);
-  }
+    //if obj is a path, end recursion and get the mapping.
+    if (typeof obj === "string") {
+        return rpcHookNewTmRequire(imports, obj, methodName);
+    }
 
-  const keys = Object.keys(obj);
+    const keys = Object.keys(obj);
 
-  // get hooks for keys of the obj.
-  return t.objectExpression(
-    keys.map((name) => {
-      return t.objectProperty(
-        t.identifier(name),
-        rpcHookTmNestedImportObject(imports, obj[name], methodName)
-      );
-    })
-  );
+    // get hooks for keys of the obj.
+    return t.objectExpression(
+        keys.map((name) => {
+            return t.objectProperty(
+                t.identifier(name),
+                rpcHookTmNestedImportObject(
+                    imports,
+                    obj[name],
+                    methodName,
+                    options
+                )
+            );
+        })
+    );
 };
 
 interface HookImport {
-  as: string;
-  path: string;
+    as: string;
+    path: string;
 }
 
 /**
@@ -119,16 +149,23 @@ interface HookImport {
  * @returns {ParseResult} created AST
  */
 export const createScopedRpcHookFactory = (
-  context: GenericParseContext,
-  obj: object,
-  identifier: string,
-  instantHooksMapping?: {
-    [key: string]: {
-      useHookName: string,
-      importedVarName: string,
-      comment?: string
+    context: GenericParseContext,
+    obj: object,
+    identifier: string,
+    instantHooksMapping?: {
+        [key: string]: {
+            useHookName: string;
+            importedVarName: string;
+            comment?: string;
+        };
     }
-  }
 ) => {
-  return buildExportCreators(context, obj, identifier, ['ProtobufRpcClient'], undefined, instantHooksMapping);
+    return buildExportCreators(
+        context,
+        obj,
+        identifier,
+        ["ProtobufRpcClient"],
+        undefined,
+        instantHooksMapping
+    );
 };

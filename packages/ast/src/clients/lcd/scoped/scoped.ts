@@ -1,6 +1,7 @@
 import * as t from '@babel/types';
 import { GenericParseContext } from '../../../encoding';
 import { objectPattern } from '../../../utils';
+import { restoreExtension } from '@cosmology/utils';
 
 export const lcdArguments = (): t.ObjectProperty[] => {
     return [
@@ -49,7 +50,10 @@ export const lcdClassArguments = (): t.ObjectExpression[] => {
 export const lcdNewAwaitImport = (
     path: string,
     className: string,
-    _arguments: t.ObjectExpression[]
+    _arguments: t.ObjectExpression[],
+    options?: {
+      restoreImportExtension?: string;
+    }
 ) => {
     return t.newExpression(
         t.memberExpression(
@@ -58,7 +62,7 @@ export const lcdNewAwaitImport = (
                     t.import(),
                     [
                         t.stringLiteral(
-                            path
+                            restoreExtension(path, options?.restoreImportExtension)
                         )
                     ]
                 )
@@ -94,7 +98,10 @@ export const lcdRecursiveObjectProps = (
 export const lcdNestedImportObject = (
     obj: object,
     className: string,
-    _arguments: t.ObjectExpression[]
+    _arguments: t.ObjectExpression[],
+    options?: {
+      restoreImportExtension?: string;
+    }
 ) => {
 
     if (typeof obj === 'string') {
@@ -106,7 +113,7 @@ export const lcdNestedImportObject = (
     return t.objectExpression(keys.map(name => {
         return t.objectProperty(
             t.identifier(name),
-            lcdNestedImportObject(obj[name], className, _arguments)
+            lcdNestedImportObject(obj[name], className, _arguments, options)
         )
     }))
 };
@@ -159,15 +166,11 @@ export const createScopedLCDFactory = (
                                 lcdNestedImportObject(
                                     obj,
                                     className,
-                                    lcdClassArguments()
+                                    lcdClassArguments(),
+                                    context.options
                                 )
                             ),
                         ]),
-                        // lcdNestedImportObject(
-                        //     obj,
-                        //     className,
-                        //     lcdClassArguments()
-                        // ),
                         true
                     )
                 )
