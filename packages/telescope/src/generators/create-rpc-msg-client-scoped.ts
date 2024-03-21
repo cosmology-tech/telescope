@@ -117,7 +117,8 @@ const makeRPC = (
             rpcast = createScopedRpcFactory(
                 obj,
                 methodName,
-                'MsgClientImpl' // make option later
+                'MsgClientImpl', // make option later,
+                ctx.options
             );
 
             if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next' && ctx.proto.pluginValue('rpcClients.extensions') && ctx.proto.pluginValue('stargateClients.addGetTxRpc')) {
@@ -135,7 +136,8 @@ const makeRPC = (
             rpcast = createScopedGrpcWebMsgFactory(
                 obj,
                 methodName,
-                'MsgClientImpl' // make option later
+                'MsgClientImpl', // make option later,
+                ctx.options
             );
             break;
         default:

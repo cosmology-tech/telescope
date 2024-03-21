@@ -6,10 +6,10 @@ export const createCosmicRPCTxClient = async ({
 }) => ({
   cosmos: {
     bank: {
-      v1beta1: new (await import("./bank/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1beta1: new (await import("./bank/v1beta1/tx.rpc.msg.js")).MsgClientImpl(rpc)
     },
     gov: {
-      v1beta1: new (await import("./gov/v1beta1/tx.rpc.msg")).MsgClientImpl(rpc)
+      v1beta1: new (await import("./gov/v1beta1/tx.rpc.msg.js")).MsgClientImpl(rpc)
     }
   }
 });

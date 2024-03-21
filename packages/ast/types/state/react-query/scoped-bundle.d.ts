@@ -1,5 +1,5 @@
-import * as t from '@babel/types';
-import { GenericParseContext } from '../../encoding';
+import * as t from "@babel/types";
+import { GenericParseContext } from "../../encoding";
 export declare const rpcHookFuncArguments: () => t.ObjectPattern[];
 export declare const rpcHookClassArguments: () => t.ObjectExpression[];
 /**
@@ -11,7 +11,9 @@ export declare const rpcHookClassArguments: () => t.ObjectExpression[];
  * @param {string} methodName - hook method name of packages
  * @returns {ParseResult} created AST
  */
-export declare const rpcHookNewTmRequire: (imports: HookImport[], path: string, methodName: string) => t.CallExpression;
+export declare const rpcHookNewTmRequire: (imports: HookImport[], path: string, methodName: string, options?: {
+    restoreImportExtension?: string;
+}) => t.CallExpression;
 export declare const rpcHookRecursiveObjectProps: (names: string[], leaf?: any) => t.ObjectExpression;
 /**
  * Create an ASTs for hooks of packages recursively, and get imports of packages.
@@ -22,7 +24,9 @@ export declare const rpcHookRecursiveObjectProps: (names: string[], leaf?: any) 
  * @param {string} methodName - hook method name of packages
  * @returns {ParseResult} created AST
  */
-export declare const rpcHookTmNestedImportObject: (imports: HookImport[], obj: object, methodName: string) => any;
+export declare const rpcHookTmNestedImportObject: (imports: HookImport[], obj: object, methodName: string, options?: {
+    restoreImportExtension?: string;
+}) => any;
 interface HookImport {
     as: string;
     path: string;

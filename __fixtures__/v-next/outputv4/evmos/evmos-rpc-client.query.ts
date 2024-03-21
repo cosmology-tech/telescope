@@ -11,15 +11,15 @@ export const createEvmosRPCQueryClient = async ({
   return {
     cosmos: {
       bank: {
-        v1beta1: (await import("../cosmos/bank/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/bank/v1beta1/query.rpc.Query.js")).createRpcQueryExtension(client)
       },
       gov: {
-        v1beta1: (await import("../cosmos/gov/v1beta1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1beta1: (await import("../cosmos/gov/v1beta1/query.rpc.Query.js")).createRpcQueryExtension(client)
       }
     },
     evmos: {
       erc20: {
-        v1: (await import("./erc20/v1/query.rpc.Query")).createRpcQueryExtension(client)
+        v1: (await import("./erc20/v1/query.rpc.Query.js")).createRpcQueryExtension(client)
       }
     }
   };
