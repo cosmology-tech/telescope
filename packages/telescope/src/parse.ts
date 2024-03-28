@@ -148,7 +148,7 @@ export const parseService = (
             }
             const lookupResponse = context.store.get(context.ref, value.responseType);
             if (!lookupResponse) {
-                console.warn(`cannot find ${value.requestType}`);
+                console.warn(`cannot find ${value.responseType}`);
                 throw new Error('undefined symbol for service.');
             }
             const serviceInfo: ServiceInfo = {
