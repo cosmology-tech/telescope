@@ -162,7 +162,7 @@ telescope transpile --protoDirs ../../__fixtures__/chain1 --config .telescope.js
 telescope transpile --config .telescope.json --config .telescope-ext.json
 ```
 
-```json
+```js
 //.telescope.json
 {
   "protoDirs": [
@@ -236,8 +236,8 @@ telescope({
       },
       akash: {
         stargateClients: {
-            enabled: true;
-            includeCosmosDefaultTypes: false;
+            enabled: true,
+            includeCosmosDefaultTypes: false
         },
         prototypes: {
           typingsFormat: {
@@ -247,9 +247,9 @@ telescope({
       }
     }
   }
-}).then(()=>{
+}).then(() => {
   console.log('✨ all done!');
-}).catch(e=>{
+}).catch(e => {
   console.error(e);
   process.exit(1);
 })
@@ -561,12 +561,12 @@ WARNING: NOT RECOMMENDED TO USE PLAIN-TEXT MNEMONICS. Please take care of your s
 import { chains } from 'chain-registry';
 
 const mnemonic =
-  'unfold client turtle either pilot stock floor glow toward bullet car science';
-  const chain = chains.find(({ chain_name }) => chain_name === 'osmosis');
-  const signer = await getOfflineSigner({
+    'unfold client turtle either pilot stock floor glow toward bullet car science';
+const chain = chains.find(({ chain_name }) => chain_name === 'osmosis');
+const signer = await getOfflineSigner({
     mnemonic,
     chain
-  });
+});
 ```
 
 ## Broadcasting messages
@@ -780,33 +780,30 @@ const main = async () => {
 Below will be an example of scaffold a `grant` Proto Msg for grpc-web and grpc-gateway and then broadcast it.
 
 ```js
-  const { grant } = cosmos.authz.v1beta1.MessageComposer.withTypeUrl;
-  const msg = grant({
-      granter: 'granter_address',
-      grantee: 'grantee_address',
-      grant: {
+const { grant } = cosmos.authz.v1beta1.MessageComposer.withTypeUrl;
+const msg = grant({
+    granter: 'granter_address',
+    grantee: 'grantee_address',
+    grant: {
         authorization: StakeAuthorization.toProtoMsg({
-          maxTokens: {
-                  denom: 'uosmo',
-                  amount: '100000000'
-                },
-                authorizationType: AuthorizationType.AUTHORIZATION_TYPE_DELEGATE
-              }),
-            expiration: new Date(Date.now() + 60 * 60 * 24 * 7)
-  }})
+        maxTokens: {
+            denom: 'uosmo',
+            amount: '100000000'
+        },
+        authorizationType: AuthorizationType.AUTHORIZATION_TYPE_DELEGATE
+    }),
+    expiration: new Date(Date.now() + 60 * 60 * 24 * 7)
+}})
 
-    const signed_tx = await signClient.sign('granter_address', [msg], fee, 'telescope: grant', signerData);
-    const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
+const signed_tx = await signClient.sign('granter_address', [msg], fee, 'telescope: grant', signerData);
+const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
 
-    const res = await client.cosmos.tx.v1beta1.broadcastTx(
-      {
-        txBytes: txRawBytes,
-        mode: BroadcastMode.BROADCAST_MODE_BLOCK
-      }
-    )
+const res = await client.cosmos.tx.v1beta1.broadcastTx({
+    txBytes: txRawBytes,
+    mode: BroadcastMode.BROADCAST_MODE_BLOCK
+})
 
-    console.log(res);
-
+console.log(res);
 ```
 
 ## RPC Client Classes
@@ -850,7 +847,8 @@ main().then(() => {
 Using instantOps option to expose instant RPC methods.
 
 For example, for this config:
-```json
+```js
+{
     instantOps: [
       {
         className: "OsmosisClaim",
@@ -883,6 +881,7 @@ For example, for this config:
         },
       },
     ],
+}
 ```
 
 There'll be an extra file generated in the root folder called service-ops.ts:
@@ -1080,4 +1079,3 @@ Thanks to these engineers, teams and projects for inspiring Telescope:
 AS DESCRIBED IN THE TELESCOPE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
 
 No developer or entity involved in creating Telescope will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the Telescope code or Telescope CLI, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
-
