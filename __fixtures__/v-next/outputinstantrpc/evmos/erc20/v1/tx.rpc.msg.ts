@@ -8,12 +8,12 @@ export interface Msg {
    * ConvertCoin mints a ERC20 representation of the native Cosmos coin denom
    * that is registered on the token mapping.
    */
-  convertCoin(signerAddress: string, message: MsgConvertCoin, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  convertCoin(signerAddress: string, message: MsgConvertCoin, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /**
    * ConvertERC20 mints a native Cosmos coin representation of the ERC20 token
    * contract that is registered on the token mapping.
    */
-  convertERC20(signerAddress: string, message: MsgConvertERC20, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  convertERC20(signerAddress: string, message: MsgConvertERC20, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

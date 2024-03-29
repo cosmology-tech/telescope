@@ -9,9 +9,9 @@ export interface Msg {
    * CreateClawbackVestingAccount creats a vesting account that is subject to
    * clawback and the configuration of vesting and lockup schedules.
    */
-  createClawbackVestingAccount(signerAddress: string, message: MsgCreateClawbackVestingAccount, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createClawbackVestingAccount(signerAddress: string, message: MsgCreateClawbackVestingAccount, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** Clawback removes the unvested tokens from a ClawbackVestingAccount. */
-  clawback(signerAddress: string, message: MsgClawback, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  clawback(signerAddress: string, message: MsgClawback, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

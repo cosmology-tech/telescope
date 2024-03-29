@@ -9,14 +9,14 @@ export interface Msg {
    * 
    * Since: cosmos-sdk 0.46
    */
-  softwareUpgrade(signerAddress: string, message: MsgSoftwareUpgrade, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  softwareUpgrade(signerAddress: string, message: MsgSoftwareUpgrade, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /**
    * CancelUpgrade is a governance operation for cancelling a previously
    * approvid software upgrade.
    * 
    * Since: cosmos-sdk 0.46
    */
-  cancelUpgrade(signerAddress: string, message: MsgCancelUpgrade, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  cancelUpgrade(signerAddress: string, message: MsgCancelUpgrade, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

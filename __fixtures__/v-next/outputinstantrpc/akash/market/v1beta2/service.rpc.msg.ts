@@ -7,15 +7,15 @@ import { BinaryReader } from "../../../binary";
 /** Msg defines the market Msg service */
 export interface Msg {
   /** CreateBid defines a method to create a bid given proper inputs. */
-  createBid(signerAddress: string, message: MsgCreateBid, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createBid(signerAddress: string, message: MsgCreateBid, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** CloseBid defines a method to close a bid given proper inputs. */
-  closeBid(signerAddress: string, message: MsgCloseBid, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  closeBid(signerAddress: string, message: MsgCloseBid, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** WithdrawLease withdraws accrued funds from the lease payment */
-  withdrawLease(signerAddress: string, message: MsgWithdrawLease, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  withdrawLease(signerAddress: string, message: MsgWithdrawLease, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** CreateLease creates a new lease */
-  createLease(signerAddress: string, message: MsgCreateLease, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createLease(signerAddress: string, message: MsgCreateLease, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** CloseLease defines a method to close an order given proper inputs. */
-  closeLease(signerAddress: string, message: MsgCloseLease, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  closeLease(signerAddress: string, message: MsgCloseLease, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

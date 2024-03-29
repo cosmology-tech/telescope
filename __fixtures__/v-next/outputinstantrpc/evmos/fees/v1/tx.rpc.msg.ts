@@ -7,14 +7,14 @@ export interface Msg {
    * RegisterDevFeeInfo is used by a deployer to register a new contract for
    * receiving transaction fees
    */
-  registerDevFeeInfo(signerAddress: string, message: MsgRegisterDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  registerDevFeeInfo(signerAddress: string, message: MsgRegisterDevFeeInfo, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /**
    * CancelDevFeeInfo is used by a deployer to cancel a registered contract
    * and stop receiving transaction fees
    */
-  cancelDevFeeInfo(signerAddress: string, message: MsgCancelDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  cancelDevFeeInfo(signerAddress: string, message: MsgCancelDevFeeInfo, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** UpdateDevFeeInfo is used by a deployer to update the withdraw address */
-  updateDevFeeInfo(signerAddress: string, message: MsgUpdateDevFeeInfo, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  updateDevFeeInfo(signerAddress: string, message: MsgUpdateDevFeeInfo, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

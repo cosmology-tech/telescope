@@ -5,8 +5,8 @@ import { DeliverTxResponse, StdFee, TxRpc } from "../../types";
 import { BinaryReader } from "../../binary";
 import { MsgCreateGauge, MsgCreateGaugeSDKType, MsgCreateGaugeResponse, MsgCreateGaugeResponseSDKType, MsgAddToGauge, MsgAddToGaugeSDKType, MsgAddToGaugeResponse, MsgAddToGaugeResponseSDKType } from "./tx";
 export interface Msg {
-  createGauge(signerAddress: string, message: MsgCreateGauge, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
-  addToGauge(signerAddress: string, message: MsgAddToGauge, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createGauge(signerAddress: string, message: MsgCreateGauge, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
+  addToGauge(signerAddress: string, message: MsgAddToGauge, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
