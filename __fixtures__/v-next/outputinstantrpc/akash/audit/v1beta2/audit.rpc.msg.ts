@@ -5,9 +5,9 @@ import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignPro
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** SignProviderAttributes defines a method that signs provider attributes */
-  signProviderAttributes(signerAddress: string, message: MsgSignProviderAttributes, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  signProviderAttributes(signerAddress: string, message: MsgSignProviderAttributes, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** DeleteProviderAttributes defines a method that deletes provider attributes */
-  deleteProviderAttributes(signerAddress: string, message: MsgDeleteProviderAttributes, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  deleteProviderAttributes(signerAddress: string, message: MsgDeleteProviderAttributes, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

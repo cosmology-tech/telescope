@@ -1388,19 +1388,19 @@ export const DeploymentFilters = {
 /** Msg defines the deployment Msg service. */
 export interface Msg {
   /** CreateDeployment defines a method to create new deployment given proper inputs. */
-  createDeployment(signerAddress: string, message: MsgCreateDeployment, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createDeployment(signerAddress: string, message: MsgCreateDeployment, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** DepositDeployment deposits more funds into the deployment account */
-  depositDeployment(signerAddress: string, message: MsgDepositDeployment, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  depositDeployment(signerAddress: string, message: MsgDepositDeployment, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** UpdateDeployment defines a method to update a deployment given proper inputs. */
-  updateDeployment(signerAddress: string, message: MsgUpdateDeployment, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  updateDeployment(signerAddress: string, message: MsgUpdateDeployment, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** CloseDeployment defines a method to close a deployment given proper inputs. */
-  closeDeployment(signerAddress: string, message: MsgCloseDeployment, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  closeDeployment(signerAddress: string, message: MsgCloseDeployment, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** CloseGroup defines a method to close a group of a deployment given proper inputs. */
-  closeGroup(signerAddress: string, message: MsgCloseGroup, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  closeGroup(signerAddress: string, message: MsgCloseGroup, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** PauseGroup defines a method to close a group of a deployment given proper inputs. */
-  pauseGroup(signerAddress: string, message: MsgPauseGroup, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  pauseGroup(signerAddress: string, message: MsgPauseGroup, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** StartGroup defines a method to close a group of a deployment given proper inputs. */
-  startGroup(signerAddress: string, message: MsgStartGroup, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  startGroup(signerAddress: string, message: MsgStartGroup, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

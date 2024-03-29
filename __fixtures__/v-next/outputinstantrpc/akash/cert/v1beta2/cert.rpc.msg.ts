@@ -4,9 +4,9 @@ import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificate
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateCertificate defines a method to create new certificate given proper inputs. */
-  createCertificate(signerAddress: string, message: MsgCreateCertificate, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createCertificate(signerAddress: string, message: MsgCreateCertificate, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** RevokeCertificate defines a method to revoke the certificate */
-  revokeCertificate(signerAddress: string, message: MsgRevokeCertificate, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  revokeCertificate(signerAddress: string, message: MsgRevokeCertificate, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;

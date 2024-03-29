@@ -71,7 +71,7 @@ const rpcTxMethodDefinition = (
         ])
       )
     ),
-    identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword())),
+    identifier("memo", t.tsTypeAnnotation(t.tsStringKeyword()), true),
   ];
 
   return tsMethodSignature(

@@ -43,7 +43,7 @@ export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
   send(request: MsgSend): Promise<MsgSendResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }"
 `;
 
@@ -74,9 +74,9 @@ exports[`RPC Msg implement Client 1`] = `
 "/** Msg defines the bank Msg service. */
 export interface Msg {
   /** Send defines a method for sending coins from one account to another account. */
-  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  send(signerAddress: string, message: MsgSend, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** MultiSend defines a method for sending coins from some accounts to other accounts. */
-  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  multiSend(signerAddress: string, message: MsgMultiSend, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }"
 `;
 

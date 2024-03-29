@@ -5,11 +5,11 @@ import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse,
 /** Msg defines the provider Msg service */
 export interface Msg {
   /** CreateProvider defines a method that creates a provider given the proper inputs */
-  createProvider(signerAddress: string, message: MsgCreateProvider, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  createProvider(signerAddress: string, message: MsgCreateProvider, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** UpdateProvider defines a method that updates a provider given the proper inputs */
-  updateProvider(signerAddress: string, message: MsgUpdateProvider, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  updateProvider(signerAddress: string, message: MsgUpdateProvider, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** DeleteProvider defines a method that deletes a provider given the proper inputs */
-  deleteProvider(signerAddress: string, message: MsgDeleteProvider, fee: number | StdFee | "auto", memo: string): Promise<DeliverTxResponse>;
+  deleteProvider(signerAddress: string, message: MsgDeleteProvider, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 export class MsgClientImpl implements Msg {
   private readonly rpc: TxRpc;
