@@ -231,4 +231,5 @@ export interface IProtoStore {
   getTypeUrlMap(ref: ProtoRef);
   setEnumValues(pkg: string, name: string, values: number[]): void;
   isEnumValueExisting(pkg: string, name: string, value: number): boolean;
+  getExistingSmallestValue(pkg: string, name: string, value: number): number;
 }

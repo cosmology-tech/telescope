@@ -556,8 +556,7 @@ function getPreferredEnumDefault(context: ProtoParseContext, field: ProtoField) 
   if (context.ref.proto?.syntax === 'proto2') {
       if(autoFixUndefinedEnumDefault){
         const typeName = getProtoFieldTypeName(context, field);
-        const isExisting = context.isEnumValueExisting(getPackage(field), typeName, 1);
-        return isExisting ? 1 : 0;
+        return context.getExistingSmallestValue(getPackage(field), typeName, 1)
       } else {
         return 1;
       }
@@ -565,8 +564,7 @@ function getPreferredEnumDefault(context: ProtoParseContext, field: ProtoField) 
 
   if(autoFixUndefinedEnumDefault){
     const typeName = getProtoFieldTypeName(context, field);
-    const isExisting = context.isEnumValueExisting(getPackage(field), typeName, 0);
-    return isExisting ? 0 : -1;
+    return context.getExistingSmallestValue(getPackage(field), typeName, 0)
   } else {
     return 0;
   }

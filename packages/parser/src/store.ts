@@ -343,4 +343,12 @@ export class ProtoStore implements IProtoStore {
     isEnumValueExisting(pkg: string, name: string, value: number) {
         return Boolean(this._enumValueMapping[`${pkg}.${name}`]?.has(value));
     }
+
+    getExistingSmallestValue(pkg: string, name: string, value: number) {
+        if(!this.isEnumValueExisting(pkg, name, value)){
+            return Math.min(...Array.from(this._enumValueMapping[`${pkg}.${name}`] ?? []));
+        } else {
+            return value;
+        }
+    }
 }

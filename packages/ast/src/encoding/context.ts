@@ -216,6 +216,10 @@ export class ProtoParseContext extends GenericParseContext implements IParseCont
         return this.store.isEnumValueExisting(pkg, name, value);
     }
 
+    getExistingSmallestValue(pkg: string, name: string, value: number) {
+        return this.store.getExistingSmallestValue(pkg, name, value);
+    }
+
     getToEnum(field: ProtoField) {
         const name = getEnumToJsonName(getFieldsTypeName(field));
         this.addImport({
