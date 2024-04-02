@@ -426,11 +426,9 @@ export const getDefaultTSTypeFromProtoType = (
     }
 
     if (field.parsedType?.type === 'Enum') {
-        // @ts-ignore
-        if (context.ref.proto?.syntax === 'proto2') {
-            return t.numericLiteral(1);
-        }
-        return t.numericLiteral(0);
+        const enumDefault = getPreferredEnumDefault(context, field);
+
+        return t.numericLiteral(enumDefault);
     }
 
     switch (field.type) {
@@ -551,3 +549,30 @@ function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: 
   )
 }
 
+function getPreferredEnumDefault(context: ProtoParseContext, field: ProtoField) {
+  const autoFixUndefinedEnumDefault = context.pluginValue('prototypes.typingsFormat.autoFixUndefinedEnumDefault')
+
+  // @ts-ignore
+  if (context.ref.proto?.syntax === 'proto2') {
+      if(autoFixUndefinedEnumDefault){
+        const typeName = getProtoFieldTypeName(context, field);
+        const isExisting = context.isEnumValueExisting(getPackage(field), typeName, 1);
+        return isExisting ? 1 : 0;
+      } else {
+        return 1;
+      }
+  }
+
+  if(autoFixUndefinedEnumDefault){
+    const typeName = getProtoFieldTypeName(context, field);
+    const isExisting = context.isEnumValueExisting(getPackage(field), typeName, 0);
+    return isExisting ? 0 : -1;
+  } else {
+    return 0;
+  }
+}
+
+function getPackage(field: ProtoField){
+  const pkgs = field.scope?.flat();
+  return pkgs ? pkgs[0] : '';
+}

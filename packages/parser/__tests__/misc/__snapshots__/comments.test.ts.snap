@@ -347,6 +347,7 @@ exports[`google/rpc/code 1`] = `
  HTTP Mapping: 500 Internal Server Error",
                 },
                 "name": "Code",
+                "package": "google.rpc",
                 "type": "Enum",
                 "values": {
                   "ABORTED": 10,

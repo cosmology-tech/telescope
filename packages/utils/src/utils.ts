@@ -4,6 +4,7 @@ import {
   TelescopeOption,
   ProtoRef,
   ImportUsage,
+  ProtoEnum,
 } from "@cosmology/types";
 import { ImportDeclaration } from "@babel/types";
 import * as dotty from "dotty";
@@ -63,24 +64,6 @@ export const getPluginValue = (
     value = defaultValue;
   }
   return value;
-};
-
-export const getTypeNameFromFieldName = (
-  name: string,
-  importSrc: string,
-  ref: ProtoRef
-) => {
-  let importedAs = name;
-  const names = ref.traversed?.importNames;
-  if (
-    names &&
-    names.hasOwnProperty(importSrc) &&
-    names[importSrc].hasOwnProperty(name)
-  ) {
-    importedAs = names[importSrc][name];
-  }
-
-  return importedAs;
 };
 
 export const buildImports = (imports: ImportUsage[]) => {
@@ -203,3 +186,37 @@ export const duplicateImportPathsWithExt = (paths: ImportDeclaration[], ext?: st
     }
   })
 };
+
+export const getEnumValues = (proto: ProtoEnum) => {
+  const enums = Object.keys(proto.values).map(key => {
+      const e = {
+          name: key,
+          comment: null,
+          value: null
+      };
+      e.value = proto.values[key];
+      if (proto.comments[key]) {
+          e.comment = proto.comments[key];
+      }
+      return e;
+  });
+  return enums;
+}
+
+/**
+ * get the type name by enum object while traversing the nested enum
+ * @param field
+ * @param pkg name space
+ * @param traversal traversed name spaces and nested enum names
+ * @param isNested whether the enum is nested
+ * @returns
+ */
+export const getTypeNameByEnumObj = (field: any, pkg: string, traversal: string[], isNested: boolean) => {
+  return !isNested ? field.name : excludePackageFromTraversal(pkg, traversal);
+}
+
+function excludePackageFromTraversal(pkg: string, traversal: string[]) {
+  const connectedPkg = pkg.split('.').join('_') + '_';
+
+  return traversal.join('_').replace(connectedPkg, '');
+}

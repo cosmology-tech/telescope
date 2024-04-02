@@ -1,7 +1,7 @@
 import { camel, variableSlug } from ".";
 import { pascal, snake } from "case";
 import minimatch from "minimatch";
-import { ProtoRef, ProtoRoot } from "@cosmology/types";
+import { ProtoField, ProtoRef, ProtoRoot } from "@cosmology/types";
 import dotty from "dotty";
 
 export const getNestedProto = (root: ProtoRoot) => {
@@ -190,3 +190,17 @@ export const getObjectName = (name: string, scope: string[] = []) => {
     const [_pkg, ...scopes] = scope;
     return [...scopes, name].join('_')
 };
+
+export const getTypeNameFromFieldName = (name: string, importSrc: string, ref: ProtoRef) => {
+  let importedAs = name;
+  const names = ref.traversed?.importNames;
+  if (names
+      && names.hasOwnProperty(importSrc)
+      && names[importSrc].hasOwnProperty(name)
+  ) {
+
+      importedAs = names[importSrc][name];
+  }
+
+  return importedAs;
+}

@@ -19,6 +19,7 @@ export interface ImportUsage {
 export interface ProtoEnum {
     type?: 'Enum';
     name?: string;
+    package?: string; // added by parser
     values: { [key: string]: number };
     comment?: string;
     comments?: { [key: string]: string };
@@ -228,4 +229,6 @@ export interface IProtoStore {
   findProto(filename): ProtoRef;
   get(from: ProtoRef, name: string): Lookup;
   getTypeUrlMap(ref: ProtoRef);
+  setEnumValues(pkg: string, name: string, values: number[]): void;
+  isEnumValueExisting(pkg: string, name: string, value: number): boolean;
 }

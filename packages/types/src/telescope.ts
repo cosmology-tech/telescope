@@ -96,6 +96,7 @@ interface TelescopeOpts {
             duration?: 'duration' | 'string',
 
             setDefaultEnumToUnrecognized?: boolean;
+            autoFixUndefinedEnumDefault?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
 
             // temporary field to avoid breaking changes
@@ -350,6 +351,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             updatedDuration: false,
 
             setDefaultEnumToUnrecognized: true,
+            autoFixUndefinedEnumDefault: false,
         },
     },
 

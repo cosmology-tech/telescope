@@ -61,6 +61,8 @@ export class ProtoStore implements IProtoStore {
     _traversed: boolean = false;
     _symbols: TraversalSymbol[] = [];
 
+    _enumValueMapping: Record<string, Set<number>> = {};
+
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
         this.options = options;
@@ -334,4 +336,11 @@ export class ProtoStore implements IProtoStore {
         return packages;
     }
 
+    setEnumValues(pkg: string, name: string, values: number[]) {
+        this._enumValueMapping[`${pkg}.${name}`] = new Set(values);
+    }
+
+    isEnumValueExisting(pkg: string, name: string, value: number) {
+        return Boolean(this._enumValueMapping[`${pkg}.${name}`]?.has(value));
+    }
 }
