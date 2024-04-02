@@ -3,6 +3,7 @@ import { getObjectName } from '@cosmology/proto-parser';
 import { getKeyTypeEntryName } from '@cosmology/ast';
 import { getRoot } from './utils';
 import { TelescopeParseContext } from './build';
+import { getEnumValues } from '@cosmology/utils';
 
 export const parse = (
     context: TelescopeParseContext,
@@ -115,11 +116,16 @@ export const parseEnum = (
     isNested: boolean = false
 ) => {
     let name = obj.name;
+    let enumObj = {
+      ...obj,
+      package: context.ref.proto.package
+    };
     // parse nested names
     if (isNested) {
-        name = getParsedObjectName(context.ref, obj, scope);
+        name = getParsedObjectName(context.ref, enumObj, scope);
     }
-    context.addType(name, obj, isNested);
+    context.addType(name, enumObj, isNested);
+
 };
 
 export const parseService = (

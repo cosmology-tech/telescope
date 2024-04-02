@@ -16,6 +16,7 @@ export interface ImportUsage {
 export interface ProtoEnum {
     type?: 'Enum';
     name?: string;
+    package?: string;
     values: {
         [key: string]: number;
     };
@@ -189,4 +190,7 @@ export interface IProtoStore {
     findProto(filename: any): ProtoRef;
     get(from: ProtoRef, name: string): Lookup;
     getTypeUrlMap(ref: ProtoRef): any;
+    setEnumValues(pkg: string, name: string, values: number[]): void;
+    isEnumValueExisting(pkg: string, name: string, value: number): boolean;
+    getExistingSmallestValue(pkg: string, name: string, value: number): number;
 }

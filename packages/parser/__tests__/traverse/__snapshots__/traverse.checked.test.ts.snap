@@ -1082,6 +1082,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
  Proto-based unsigned integer values are widened to uint64.",
                             },
                             "name": "PrimitiveType",
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Enum",
                             "values": {
                               "BOOL": 1,
@@ -1106,6 +1107,7 @@ exports[`google/api/expr/v1alpha1/checked 1`] = `
                               "WELL_KNOWN_TYPE_UNSPECIFIED": "Unspecified type.",
                             },
                             "name": "WellKnownType",
+                            "package": "google.api.expr.v1alpha1",
                             "type": "Enum",
                             "values": {
                               "ANY": 1,

@@ -1,4 +1,4 @@
-import { TelescopeOptions, TelescopeOption, ProtoRef, ImportUsage } from "@cosmology/types";
+import { TelescopeOptions, TelescopeOption, ImportUsage, ProtoEnum } from "@cosmology/types";
 import { ImportDeclaration } from "@babel/types";
 /**
  * swap the key and value of the input object
@@ -11,7 +11,6 @@ export declare const swapKeyValue: (input: {
     [key: string]: string;
 };
 export declare const getPluginValue: (optionName: TelescopeOption | string, currentPkg: string, options: TelescopeOptions) => any;
-export declare const getTypeNameFromFieldName: (name: string, importSrc: string, ref: ProtoRef) => string;
 export declare const buildImports: (imports: ImportUsage[]) => {
     type: string;
     importKind: string;
@@ -46,3 +45,17 @@ export declare const restoreExtension: (path: string, ext?: string) => string;
  * @returns duplicated import paths with the extension
  */
 export declare const duplicateImportPathsWithExt: (paths: ImportDeclaration[], ext?: string) => ImportDeclaration[];
+export declare const getEnumValues: (proto: ProtoEnum) => {
+    name: string;
+    comment: any;
+    value: any;
+}[];
+/**
+ * get the type name by enum object while traversing the nested enum
+ * @param field
+ * @param pkg name space
+ * @param traversal traversed name spaces and nested enum names
+ * @param isNested whether the enum is nested
+ * @returns
+ */
+export declare const getTypeNameByEnumObj: (field: any, pkg: string, traversal: string[], isNested: boolean) => any;

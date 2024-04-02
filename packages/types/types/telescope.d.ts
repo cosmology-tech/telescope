@@ -80,6 +80,7 @@ interface TelescopeOpts {
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
             setDefaultEnumToUnrecognized?: boolean;
+            autoFixUndefinedEnumDefault?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
             updatedDuration?: boolean;
             useTelescopeGeneratedType?: boolean;

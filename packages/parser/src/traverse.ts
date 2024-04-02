@@ -24,6 +24,7 @@ import { importLookup, lookup, lookupAny, lookupNested, protoScopeImportLookup }
 import { parseService } from './services';
 import { ProtoStore } from './store';
 import { instanceType, lookupSymbolScopes, SCALAR_TYPES } from './utils';
+import { getEnumValues, getTypeNameByEnumObj } from '@cosmology/utils';
 
 export interface TraverseContext {
     imports: TraverseImport;
@@ -477,12 +478,19 @@ const traverseType = (
     return traversed as ProtoType;
 };
 
-const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext,) => {
-    return {
-        type: 'Enum',
-        name: obj.name,
-        ...obj.toJSON({ keepComments: true })
-    }
+const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext, traversal: string[], isNested: boolean) => {
+    const enumObj = {
+      type: 'Enum',
+      name: obj.name,
+      package: ref.proto.package,
+      ...obj.toJSON({ keepComments: true })
+    };
+    const typeName = getTypeNameByEnumObj(enumObj,ref.proto.package, traversal, isNested);
+
+    const enums = getEnumValues(enumObj);
+    store.setEnumValues(ref.proto.package, typeName, enums.map(e=>e.value));
+
+    return enumObj;
 };
 
 const traverseField = (store: ProtoStore, ref: ProtoRef, obj: any, context: TraverseContext,) => {
@@ -590,7 +598,7 @@ export const recursiveTraversal = (
         return traverseType(store, ref, obj, context, traversal, isNested);
     }
     if (obj instanceof Enum) {
-        return traverseEnum(store, ref, obj, context);
+        return traverseEnum(store, ref, obj, context, traversal, isNested);
     }
     if (obj instanceof Service) {
         return traverseService(store, ref, obj, context, traversal);

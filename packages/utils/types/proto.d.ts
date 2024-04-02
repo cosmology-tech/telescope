@@ -47,3 +47,4 @@ export declare const isRefExcluded: (ref: ProtoRef, exclude?: {
     protos?: string[];
 }) => boolean;
 export declare const getObjectName: (name: string, scope?: string[]) => string;
+export declare const getTypeNameFromFieldName: (name: string, importSrc: string, ref: ProtoRef) => string;

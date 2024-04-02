@@ -3,22 +3,7 @@ import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration, makeCommentBlock, cleanComment } from '../../utils';
 import { ProtoEnum } from '@cosmology/types';
 import { ProtoParseContext } from '../context';
-
-const getEnumValues = (proto: ProtoEnum) => {
-    const enums = Object.keys(proto.values).map(key => {
-        const e = {
-            name: key,
-            comment: null,
-            value: null
-        };
-        e.value = proto.values[key];
-        if (proto.comments[key]) {
-            e.comment = proto.comments[key];
-        }
-        return e;
-    });
-    return enums;
-}
+import { getEnumValues } from '@cosmology/utils';
 
 const ensureOneSpace = (str) => {
     if (/^[\s\n\t]+/.test(str)) return str;

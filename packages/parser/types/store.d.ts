@@ -17,6 +17,7 @@ export declare class ProtoStore implements IProtoStore {
     responses: Record<string, ProtoServiceMethod>;
     _traversed: boolean;
     _symbols: TraversalSymbol[];
+    _enumValueMapping: Record<string, Set<number>>;
     constructor(protoDirs?: string[], options?: TelescopeOptions);
     findProto(filename: any): ProtoRef;
     findProtoWhere(fn: (ref: ProtoRef) => boolean): ProtoRef;
@@ -45,5 +46,8 @@ export declare class ProtoStore implements IProtoStore {
     getImportFromRef(ref: ProtoRef, name: string): import("@cosmology/types").Lookup;
     getTypeUrlMap(ref: ProtoRef): import("@cosmology/types").InterfaceTypeUrlMap;
     getServices(myBase: string): Record<string, ProtoRef[]>;
+    setEnumValues(pkg: string, name: string, values: number[]): void;
+    isEnumValueExisting(pkg: string, name: string, value: number): boolean;
+    getExistingSmallestValue(pkg: string, name: string, value: number): number;
 }
 export {};

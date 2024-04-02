@@ -8,7 +8,7 @@ WIP
 
 this is a test to build a recursive lookup method that navigates through the fields
 and their imports, taking into account the possibility of duplicate nested names in
-certain proto files. It's unfinished because it was solved by passing a context 
+certain proto files. It's unfinished because it was solved by passing a context
 around. Leaving this here in case it needs to be picked back up.
 
 */
@@ -41,13 +41,13 @@ message MsgTypePackageA {
         BITCOIN = 5;
     }
 
-    
+
     enum EnumDuplicateName {
       A = 0;
       B = 1;
       C = 2;
     }
-    
+
     string address = 1;
     EnumPackageA someCoolField    = 2;
     EnumDuplicateName otherField  = 3;
@@ -376,6 +376,7 @@ describe('cosmology/example/c', () => {
       package: 'cosmology.finance',
       obj: {
         name: 'EnumPackageA',
+        package: "cosmology.finance",
         scope: ['cosmology.finance', 'MsgTypePackageA'],
         type: 'Enum',
         values: {

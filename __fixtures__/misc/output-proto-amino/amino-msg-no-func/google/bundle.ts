@@ -1,8 +1,8 @@
 import * as _106 from "./api/expr/v1alpha1/eval";
 import * as _107 from "./protobuf/any";
-import * as _108 from "./protobuf/duration";
-import * as _109 from "./protobuf/timestamp";
-import * as _110 from "./protobuf/descriptor";
+import * as _108 from "./protobuf/descriptor";
+import * as _109 from "./protobuf/duration";
+import * as _110 from "./protobuf/timestamp";
 export namespace google {
   export namespace api {
     export namespace expr {

@@ -109,6 +109,7 @@ exports[`pure proto 1`] = `
                   "SHA512": null,
                 },
                 "name": "FancyEnumType",
+                "package": "cosmology.finance",
                 "type": "Enum",
                 "values": {
                   "BITCOIN": 5,

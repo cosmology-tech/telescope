@@ -397,6 +397,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
 | `prototypes.typingsFormat.setDefaultEnumToUnrecognized`       |  false: enum empty value would be 0, true: -1(value for enum unrecognized)    |true|
 | `prototypes.typingsFormat.setDefaultCustomTypesToUndefined`       |  true: Timestamp,Duration,Any,Coin empty value would be undefined., false: using fromPartial to get an empty obj    |false|
+| `prototypes.typingsFormat.autoFixUndefinedEnumDefault`       |  the default value of an enum field would be: 1(proto2); 0(proto3); But in some rare cases, those default values are not existing. But enable this, default value will automatically fixed with the smallest value.  |false|
 
 ### Protobuf parser
 

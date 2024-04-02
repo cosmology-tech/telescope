@@ -308,6 +308,9 @@ describe("misc", () => {
             toProto: true,
             fromProto: true,
           },
+          typingsFormat: {
+            autoFixUndefinedEnumDefault: true
+          }
         },
         aminoEncoding: {
           enabled: true,

@@ -353,6 +353,43 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
       return "UNRECOGNIZED";
   }
 }
+export enum FeatureSet_Utf8Validation {
+  UTF8_VALIDATION_UNKNOWN = 0,
+  VERIFY = 2,
+  NONE = 3,
+  UNRECOGNIZED = -1,
+}
+export const FeatureSet_Utf8ValidationSDKType = FeatureSet_Utf8Validation;
+export function featureSet_Utf8ValidationFromJSON(object: any): FeatureSet_Utf8Validation {
+  switch (object) {
+    case 0:
+    case "UTF8_VALIDATION_UNKNOWN":
+      return FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN;
+    case 2:
+    case "VERIFY":
+      return FeatureSet_Utf8Validation.VERIFY;
+    case 3:
+    case "NONE":
+      return FeatureSet_Utf8Validation.NONE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FeatureSet_Utf8Validation.UNRECOGNIZED;
+  }
+}
+export function featureSet_Utf8ValidationToJSON(object: FeatureSet_Utf8Validation): string {
+  switch (object) {
+    case FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN:
+      return "UTF8_VALIDATION_UNKNOWN";
+    case FeatureSet_Utf8Validation.VERIFY:
+      return "VERIFY";
+    case FeatureSet_Utf8Validation.NONE:
+      return "NONE";
+    case FeatureSet_Utf8Validation.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
 /**
  * The protocol compiler can output a FileDescriptorSet containing the .proto
  * files it parses.
@@ -1277,6 +1314,12 @@ export interface GeneratedCodeInfo_AnnotationSDKType {
   source_file: string;
   begin: number;
   end: number;
+}
+export interface FeatureSet {
+  utf8Validation: FeatureSet_Utf8Validation;
+}
+export interface FeatureSetSDKType {
+  utf8_validation: FeatureSet_Utf8Validation;
 }
 function createBaseFileDescriptorSet(): FileDescriptorSet {
   return {
@@ -4540,6 +4583,67 @@ export const GeneratedCodeInfo_Annotation = {
     obj.source_file = message.sourceFile;
     obj.begin = message.begin;
     obj.end = message.end;
+    return obj;
+  }
+};
+function createBaseFeatureSet(): FeatureSet {
+  return {
+    utf8Validation: 1
+  };
+}
+export const FeatureSet = {
+  typeUrl: "/google.protobuf.FeatureSet",
+  encode(message: FeatureSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
+    if (message.utf8Validation !== 1) {
+      writer.uint32(32).int32(message.utf8Validation);
+    }
+    return writer;
+  },
+  decode(input: BinaryReader | Uint8Array, length?: number): FeatureSet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFeatureSet();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 4:
+          message.utf8Validation = (reader.int32() as any);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+  fromJSON(object: any): FeatureSet {
+    const obj = createBaseFeatureSet();
+    if (isSet(object.utf8Validation)) obj.utf8Validation = featureSet_Utf8ValidationFromJSON(object.utf8Validation);
+    return obj;
+  },
+  toJSON(message: FeatureSet): unknown {
+    const obj: any = {};
+    message.utf8Validation !== undefined && (obj.utf8Validation = featureSet_Utf8ValidationToJSON(message.utf8Validation));
+    return obj;
+  },
+  fromPartial(object: DeepPartial<FeatureSet>): FeatureSet {
+    const message = createBaseFeatureSet();
+    message.utf8Validation = object.utf8Validation ?? 1;
+    return message;
+  },
+  fromSDK(object: FeatureSetSDKType): FeatureSet {
+    return {
+      utf8Validation: isSet(object.utf8_validation) ? featureSet_Utf8ValidationFromJSON(object.utf8_validation) : -1
+    };
+  },
+  fromSDKJSON(object: any): FeatureSetSDKType {
+    return {
+      utf8_validation: isSet(object.utf8_validation) ? featureSet_Utf8ValidationFromJSON(object.utf8_validation) : -1
+    };
+  },
+  toSDK(message: FeatureSet): FeatureSetSDKType {
+    const obj: any = {};
+    message.utf8Validation !== undefined && (obj.utf8_validation = featureSet_Utf8ValidationToJSON(message.utf8Validation));
     return obj;
   }
 };
