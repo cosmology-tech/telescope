@@ -33,9 +33,8 @@ export declare class AminoParseContext extends GenericParseContext implements IP
 }
 export declare class ProtoParseContext extends GenericParseContext implements IParseContext {
     constructor(ref: ProtoRef, store: IProtoStore, options: TelescopeOptions);
-    setEnumValues(pkg: string, name: string, values: number[]): void;
-    isEnumValueExisting(pkg: string, name: string, value: number): boolean;
-    getExistingSmallestValue(pkg: string, name: string, value: number): number;
+    setEnumValues(pkg: string, name: string, protoSyntex: string, values: number[]): void;
+    getDefaultOrExistingSmallestEnumValue(pkg: string, name: string): number;
     getToEnum(field: ProtoField): string;
     getFromEnum(field: ProtoField): string;
 }

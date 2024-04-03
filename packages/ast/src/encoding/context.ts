@@ -208,16 +208,12 @@ export class ProtoParseContext extends GenericParseContext implements IParseCont
         this.options = options;
     }
 
-    setEnumValues(pkg: string, name: string, values: number[]) {
-        this.store.setEnumValues(pkg, name, values);
+    setEnumValues(pkg: string, name: string, protoSyntex: string, values: number[]) {
+        this.store.setEnumValues(pkg, name, protoSyntex, values);
     }
 
-    isEnumValueExisting(pkg: string, name: string, value: number) {
-        return this.store.isEnumValueExisting(pkg, name, value);
-    }
-
-    getExistingSmallestValue(pkg: string, name: string, value: number) {
-        return this.store.getExistingSmallestValue(pkg, name, value);
+    getDefaultOrExistingSmallestEnumValue(pkg: string, name: string) {
+        return this.store.getDefaultOrExistingSmallestEnumValue(pkg, name);
     }
 
     getToEnum(field: ProtoField) {

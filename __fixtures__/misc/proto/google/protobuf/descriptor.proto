@@ -868,6 +868,7 @@ message GeneratedCodeInfo {
 
 message FeatureSet {
   enum Utf8Validation {
+    SMALLEST = -2;
     UTF8_VALIDATION_UNKNOWN = 0;
     VERIFY = 2;
     NONE = 3;

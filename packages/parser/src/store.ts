@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions } from '@cosmology/types';
+import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions, ENUM_PROTO2_DEFAULT, ENUM_PROTO3_DEFAULT } from '@cosmology/types';
 import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
@@ -61,7 +61,10 @@ export class ProtoStore implements IProtoStore {
     _traversed: boolean = false;
     _symbols: TraversalSymbol[] = [];
 
-    _enumValueMapping: Record<string, Set<number>> = {};
+    _enumValueMapping: Record<string, {
+      syntax: string;
+      valueSet: Set<number>;
+    }> = {};
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
         this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
@@ -336,19 +339,26 @@ export class ProtoStore implements IProtoStore {
         return packages;
     }
 
-    setEnumValues(pkg: string, name: string, values: number[]) {
-        this._enumValueMapping[`${pkg}.${name}`] = new Set(values);
+    setEnumValues(pkg: string, name: string, protoSyntex:string, values: number[]) {
+        this._enumValueMapping[`${pkg}.${name}`] = {
+            syntax: protoSyntex,
+            valueSet: new Set(values)
+        };
     }
 
-    isEnumValueExisting(pkg: string, name: string, value: number) {
-        return Boolean(this._enumValueMapping[`${pkg}.${name}`]?.has(value));
-    }
+    getDefaultOrExistingSmallestEnumValue(pkg: string, name: string) {
+        const enumObj = this._enumValueMapping[`${pkg}.${name}`];
 
-    getExistingSmallestValue(pkg: string, name: string, value: number) {
-        if(!this.isEnumValueExisting(pkg, name, value)){
-            return Math.min(...Array.from(this._enumValueMapping[`${pkg}.${name}`] ?? []));
+        if (enumObj?.syntax === 'proto2') {
+          if(enumObj?.valueSet?.has(ENUM_PROTO2_DEFAULT)){
+            return ENUM_PROTO2_DEFAULT;
+          }
         } else {
-            return value;
+          if(enumObj?.valueSet?.has(ENUM_PROTO3_DEFAULT)){
+            return ENUM_PROTO3_DEFAULT;
+          }
         }
+
+        return Math.min(...Array.from(enumObj?.valueSet ?? []));
     }
 }

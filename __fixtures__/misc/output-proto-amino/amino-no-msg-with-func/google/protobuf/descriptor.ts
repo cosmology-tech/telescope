@@ -360,6 +360,7 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
   }
 }
 export enum FeatureSet_Utf8Validation {
+  SMALLEST = -2,
   UTF8_VALIDATION_UNKNOWN = 0,
   VERIFY = 2,
   NONE = 3,
@@ -369,6 +370,9 @@ export const FeatureSet_Utf8ValidationSDKType = FeatureSet_Utf8Validation;
 export const FeatureSet_Utf8ValidationAmino = FeatureSet_Utf8Validation;
 export function featureSet_Utf8ValidationFromJSON(object: any): FeatureSet_Utf8Validation {
   switch (object) {
+    case -2:
+    case "SMALLEST":
+      return FeatureSet_Utf8Validation.SMALLEST;
     case 0:
     case "UTF8_VALIDATION_UNKNOWN":
       return FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN;
@@ -386,6 +390,8 @@ export function featureSet_Utf8ValidationFromJSON(object: any): FeatureSet_Utf8V
 }
 export function featureSet_Utf8ValidationToJSON(object: FeatureSet_Utf8Validation): string {
   switch (object) {
+    case FeatureSet_Utf8Validation.SMALLEST:
+      return "SMALLEST";
     case FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN:
       return "UTF8_VALIDATION_UNKNOWN";
     case FeatureSet_Utf8Validation.VERIFY:

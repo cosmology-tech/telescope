@@ -360,6 +360,7 @@ export function methodOptions_IdempotencyLevelToJSON(object: MethodOptions_Idemp
   }
 }
 export enum FeatureSet_Utf8Validation {
+  SMALLEST = -2,
   UTF8_VALIDATION_UNKNOWN = 0,
   VERIFY = 2,
   NONE = 3,
@@ -369,6 +370,9 @@ export const FeatureSet_Utf8ValidationSDKType = FeatureSet_Utf8Validation;
 export const FeatureSet_Utf8ValidationAmino = FeatureSet_Utf8Validation;
 export function featureSet_Utf8ValidationFromJSON(object: any): FeatureSet_Utf8Validation {
   switch (object) {
+    case -2:
+    case "SMALLEST":
+      return FeatureSet_Utf8Validation.SMALLEST;
     case 0:
     case "UTF8_VALIDATION_UNKNOWN":
       return FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN;
@@ -386,6 +390,8 @@ export function featureSet_Utf8ValidationFromJSON(object: any): FeatureSet_Utf8V
 }
 export function featureSet_Utf8ValidationToJSON(object: FeatureSet_Utf8Validation): string {
   switch (object) {
+    case FeatureSet_Utf8Validation.SMALLEST:
+      return "SMALLEST";
     case FeatureSet_Utf8Validation.UTF8_VALIDATION_UNKNOWN:
       return "UTF8_VALIDATION_UNKNOWN";
     case FeatureSet_Utf8Validation.VERIFY:
@@ -6708,13 +6714,13 @@ export const GeneratedCodeInfo_Annotation = {
 };
 function createBaseFeatureSet(): FeatureSet {
   return {
-    utf8Validation: 0
+    utf8Validation: -2
   };
 }
 export const FeatureSet = {
   typeUrl: "/google.protobuf.FeatureSet",
   encode(message: FeatureSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.utf8Validation !== 0) {
+    if (message.utf8Validation !== -2) {
       writer.uint32(32).int32(message.utf8Validation);
     }
     return writer;
@@ -6748,7 +6754,7 @@ export const FeatureSet = {
   },
   fromPartial(object: DeepPartial<FeatureSet>): FeatureSet {
     const message = createBaseFeatureSet();
-    message.utf8Validation = object.utf8Validation ?? 0;
+    message.utf8Validation = object.utf8Validation ?? -2;
     return message;
   },
   fromSDK(object: FeatureSetSDKType): FeatureSet {
@@ -6775,7 +6781,7 @@ export const FeatureSet = {
   },
   toAmino(message: FeatureSet): FeatureSetAmino {
     const obj: any = {};
-    obj.utf8_validation = message.utf8Validation === 0 ? undefined : message.utf8Validation;
+    obj.utf8_validation = message.utf8Validation === -2 ? undefined : message.utf8Validation;
     return obj;
   },
   fromAminoMsg(object: FeatureSetAminoMsg): FeatureSet {

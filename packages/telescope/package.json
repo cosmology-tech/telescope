@@ -36,6 +36,7 @@
     "format": "eslint . --fix",
     "test": "jest",
     "test:min": "jest __tests__/telescope-v4.test.ts",
+    "test:misc": "jest __tests__/misc.test.ts",
     "test:watch": "jest --watch",
     "test:debug": "node --inspect node_modules/.bin/jest --runInBand"
   },
