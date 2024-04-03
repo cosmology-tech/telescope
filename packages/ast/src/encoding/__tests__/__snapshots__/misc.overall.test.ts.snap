@@ -4,13 +4,13 @@ exports[`misc/eval_request date 1`] = `
 "export const EvalRequest = {
   typeUrl: "/misc.EvalRequest",
   is(o: any): o is EvalRequest {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string") && isSet(o.opt));
   },
   isSDK(o: any): o is EvalRequestSDKType {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   isAmino(o: any): o is EvalRequestAmino {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {
@@ -45,6 +45,9 @@ exports[`misc/eval_request date 1`] = `
     }
     for (const v of message.testArray) {
       writer.uint32(114).string(v!);
+    }
+    if (message.opt !== 0) {
+      writer.uint32(120).int32(message.opt);
     }
     return writer;
   },
@@ -88,6 +91,9 @@ exports[`misc/eval_request date 1`] = `
         case 14:
           message.testArray.push(reader.string());
           break;
+        case 15:
+          message.opt = (reader.int32() as any);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -115,7 +121,8 @@ exports[`misc/eval_request date 1`] = `
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
       id: isSet(object.id) ? String(object.id) : undefined,
       name: isSet(object.name) ? String(object.name) : undefined,
-      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
+      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   toJSON(message: EvalRequest): unknown {
@@ -143,6 +150,7 @@ exports[`misc/eval_request date 1`] = `
     } else {
       obj.testArray = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromPartial(object: Partial<EvalRequest>): EvalRequest {
@@ -170,6 +178,7 @@ exports[`misc/eval_request date 1`] = `
     message.id = object.id ?? undefined;
     message.name = object.name ?? undefined;
     message.testArray = object.testArray?.map(e => e) || [];
+    message.opt = object.opt ?? 0;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -192,7 +201,8 @@ exports[`misc/eval_request date 1`] = `
       instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
       id: object?.id,
       name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -220,6 +230,7 @@ exports[`misc/eval_request date 1`] = `
     } else {
       obj.test_array = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -259,6 +270,9 @@ exports[`misc/eval_request date 1`] = `
       message.name = object.name;
     }
     message.testArray = object.test_array?.map(e => e) || [];
+    if (object.opt !== undefined && object.opt !== null) {
+      message.opt = object.opt;
+    }
     return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -286,6 +300,7 @@ exports[`misc/eval_request date 1`] = `
     } else {
       obj.test_array = message.testArray;
     }
+    obj.opt = message.opt ?? 0;
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
@@ -310,13 +325,13 @@ exports[`misc/eval_request timestamp 1`] = `
 "export const EvalRequest = {
   typeUrl: "/misc.EvalRequest",
   is(o: any): o is EvalRequest {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string") && isSet(o.opt));
   },
   isSDK(o: any): o is EvalRequestSDKType {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   isAmino(o: any): o is EvalRequestAmino {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {
@@ -351,6 +366,9 @@ exports[`misc/eval_request timestamp 1`] = `
     }
     for (const v of message.testArray) {
       writer.uint32(114).string(v!);
+    }
+    if (message.opt !== 0) {
+      writer.uint32(120).int32(message.opt);
     }
     return writer;
   },
@@ -394,6 +412,9 @@ exports[`misc/eval_request timestamp 1`] = `
         case 14:
           message.testArray.push(reader.string());
           break;
+        case 15:
+          message.opt = (reader.int32() as any);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -421,7 +442,8 @@ exports[`misc/eval_request timestamp 1`] = `
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined,
       id: isSet(object.id) ? String(object.id) : undefined,
       name: isSet(object.name) ? String(object.name) : undefined,
-      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : []
+      testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   toJSON(message: EvalRequest): unknown {
@@ -449,6 +471,7 @@ exports[`misc/eval_request timestamp 1`] = `
     } else {
       obj.testArray = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromPartial(object: Partial<EvalRequest>): EvalRequest {
@@ -476,6 +499,7 @@ exports[`misc/eval_request timestamp 1`] = `
     message.id = object.id ?? undefined;
     message.name = object.name ?? undefined;
     message.testArray = object.testArray?.map(e => e) || [];
+    message.opt = object.opt ?? 0;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -498,7 +522,8 @@ exports[`misc/eval_request timestamp 1`] = `
       instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
       id: object?.id,
       name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -526,6 +551,7 @@ exports[`misc/eval_request timestamp 1`] = `
     } else {
       obj.test_array = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -565,6 +591,9 @@ exports[`misc/eval_request timestamp 1`] = `
       message.name = object.name;
     }
     message.testArray = object.test_array?.map(e => e) || [];
+    if (object.opt !== undefined && object.opt !== null) {
+      message.opt = object.opt;
+    }
     return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -592,6 +621,7 @@ exports[`misc/eval_request timestamp 1`] = `
     } else {
       obj.test_array = message.testArray;
     }
+    obj.opt = message.opt ?? 0;
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {

@@ -488,7 +488,7 @@ const traverseEnum = (store: ProtoStore, ref: ProtoRef, obj: any, context: Trave
     const typeName = getTypeNameByEnumObj(enumObj,ref.proto.package, traversal, isNested);
 
     const enums = getEnumValues(enumObj);
-    store.setEnumValues(ref.proto.package, typeName, enums.map(e=>e.value));
+    store.setEnumValues(ref.proto.package, typeName, ref.proto.syntax, enums.map(e=>e.value));
 
     return enumObj;
 };

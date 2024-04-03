@@ -4,8 +4,9 @@ package misc;
 
 import "google/api/expr/v1alpha1/eval.proto";
 import "google/protobuf/any.proto";
-import "google/protobuf/timestamp.proto";
+import "google/protobuf/descriptor.proto";
 import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
 
 message EvalRequest {
   // Bindings for the external variables.  The types SHOULD be compatible
@@ -15,7 +16,7 @@ message EvalRequest {
   map<string, google.api.expr.v1alpha1.IdRef> refs = 2;
 
   uint32 test_num = 3;
-  string test_string = 4[(gogoproto.nullable) = false];
+  string test_string = 4 [(gogoproto.nullable) = false];
   bool test_bool = 5;
 
   // Used in v1beta1
@@ -25,11 +26,13 @@ message EvalRequest {
 
   oneof test_oneof {
     // [(gogoproto.nullable) = false] wouldn't work in this case
-    string id = 12[(gogoproto.nullable) = false];
+    string id = 12 [(gogoproto.nullable) = false];
     string name = 13;
   }
 
   repeated string test_array = 14;
+
+  FeatureSet.Utf8Validation opt = 15 [(gogoproto.jsontag) = "opt"];
 }
 
 message AccessConfig {

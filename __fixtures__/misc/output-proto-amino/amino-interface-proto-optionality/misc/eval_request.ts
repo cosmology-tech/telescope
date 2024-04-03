@@ -1,4 +1,5 @@
 import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
+import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject } from "../helpers";
 import { GlobalDecoderRegistry } from "../registry";
@@ -118,6 +119,7 @@ export interface EvalRequest {
   id?: string;
   name?: string;
   testArray: string[];
+  opt: FeatureSet_Utf8Validation;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/misc.EvalRequest";
@@ -142,6 +144,7 @@ export interface EvalRequestAmino {
   id?: string;
   name?: string;
   test_array: string[];
+  opt: FeatureSet_Utf8Validation;
 }
 export interface EvalRequestAminoMsg {
   type: "/misc.EvalRequest";
@@ -161,6 +164,7 @@ export interface EvalRequestSDKType {
   id?: string;
   name?: string;
   test_array: string[];
+  opt: FeatureSet_Utf8Validation;
 }
 export interface AccessConfig {
   sender: string;
@@ -410,19 +414,20 @@ function createBaseEvalRequest(): EvalRequest {
     instantiatePermission: undefined,
     id: undefined,
     name: undefined,
-    testArray: []
+    testArray: [],
+    opt: 0
   };
 }
 export const EvalRequest = {
   typeUrl: "/misc.EvalRequest",
   is(o: any): o is EvalRequest {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.testNum === "number" && typeof o.testString === "string" && typeof o.testBool === "boolean" && Array.isArray(o.testArray) && (!o.testArray.length || typeof o.testArray[0] === "string") && isSet(o.opt));
   },
   isSDK(o: any): o is EvalRequestSDKType {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   isAmino(o: any): o is EvalRequestAmino {
-    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string"));
+    return o && (o.$typeUrl === EvalRequest.typeUrl || isSet(o.bindings) && isSet(o.refs) && typeof o.test_num === "number" && typeof o.test_string === "string" && typeof o.test_bool === "boolean" && Array.isArray(o.test_array) && (!o.test_array.length || typeof o.test_array[0] === "string") && isSet(o.opt));
   },
   encode(message: EvalRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     Object.entries(message.bindings).forEach(([key, value]) => {
@@ -457,6 +462,9 @@ export const EvalRequest = {
     }
     for (const v of message.testArray) {
       writer.uint32(114).string(v!);
+    }
+    if (message.opt !== 0) {
+      writer.uint32(120).int32(message.opt);
     }
     return writer;
   },
@@ -500,6 +508,9 @@ export const EvalRequest = {
         case 14:
           message.testArray.push(reader.string());
           break;
+        case 15:
+          message.opt = (reader.int32() as any);
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -528,6 +539,7 @@ export const EvalRequest = {
     if (isSet(object.id)) obj.id = String(object.id);
     if (isSet(object.name)) obj.name = String(object.name);
     if (Array.isArray(object?.testArray)) obj.testArray = object.testArray.map((e: any) => String(e));
+    if (isSet(object.opt)) obj.opt = featureSet_Utf8ValidationFromJSON(object.opt);
     return obj;
   },
   toJSON(message: EvalRequest): unknown {
@@ -555,6 +567,7 @@ export const EvalRequest = {
     } else {
       obj.testArray = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
@@ -584,6 +597,7 @@ export const EvalRequest = {
     message.id = object.id ?? undefined;
     message.name = object.name ?? undefined;
     message.testArray = object.testArray?.map(e => e) || [];
+    message.opt = object.opt ?? 0;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -606,7 +620,8 @@ export const EvalRequest = {
       instantiatePermission: object.instantiate_permission ? AccessConfig.fromSDK(object.instantiate_permission) : undefined,
       id: object?.id,
       name: object?.name,
-      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : []
+      testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   fromSDKJSON(object: any): EvalRequestSDKType {
@@ -629,7 +644,8 @@ export const EvalRequest = {
       instantiate_permission: isSet(object.instantiate_permission) ? AccessConfig.fromSDKJSON(object.instantiate_permission) : undefined,
       id: isSet(object.id) ? String(object.id) : undefined,
       name: isSet(object.name) ? String(object.name) : undefined,
-      test_array: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => String(e)) : []
+      test_array: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => String(e)) : [],
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -657,6 +673,7 @@ export const EvalRequest = {
     } else {
       obj.test_array = [];
     }
+    message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -696,6 +713,9 @@ export const EvalRequest = {
       message.name = object.name;
     }
     message.testArray = object.test_array?.map(e => e) || [];
+    if (object.opt !== undefined && object.opt !== null) {
+      message.opt = object.opt;
+    }
     return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -723,6 +743,7 @@ export const EvalRequest = {
     } else {
       obj.test_array = message.testArray;
     }
+    obj.opt = message.opt ?? 0;
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {

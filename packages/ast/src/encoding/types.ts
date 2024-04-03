@@ -1,5 +1,5 @@
 import * as t from '@babel/types';
-import { ProtoField, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
+import { ENUM_PROTO2_DEFAULT, ENUM_PROTO3_DEFAULT, ProtoField, TelescopeLogLevel, TraversalSymbol } from '@cosmology/types';
 import { getProtoFieldTypeName, TypeLong } from '../utils';
 import { GenericParseContext, ProtoParseContext } from './context';
 import { getFieldOptionalityForDefaults, GOOGLE_TYPES, SCALAR_TYPES } from './proto';
@@ -552,21 +552,15 @@ function getDefaultTSTypeFromProtoTypeDefault(context: ProtoParseContext,field: 
 function getPreferredEnumDefault(context: ProtoParseContext, field: ProtoField) {
   const autoFixUndefinedEnumDefault = context.pluginValue('prototypes.typingsFormat.autoFixUndefinedEnumDefault')
 
-  // @ts-ignore
-  if (context.ref.proto?.syntax === 'proto2') {
-      if(autoFixUndefinedEnumDefault){
-        const typeName = getProtoFieldTypeName(context, field);
-        return context.getExistingSmallestValue(getPackage(field), typeName, 1)
-      } else {
-        return 1;
-      }
-  }
-
-  if(autoFixUndefinedEnumDefault){
+  if(autoFixUndefinedEnumDefault) {
     const typeName = getProtoFieldTypeName(context, field);
-    return context.getExistingSmallestValue(getPackage(field), typeName, 0)
+    return context.getDefaultOrExistingSmallestEnumValue(getPackage(field), typeName);
   } else {
-    return 0;
+    if (context.ref.proto?.syntax === 'proto2') {
+      return ENUM_PROTO2_DEFAULT;
+    } else {
+      return ENUM_PROTO3_DEFAULT;
+    }
   }
 }
 

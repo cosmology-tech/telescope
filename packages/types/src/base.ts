@@ -1,5 +1,8 @@
 import { TelescopeOptions } from "./telescope";
 
+export const ENUM_PROTO2_DEFAULT = 1;
+export const ENUM_PROTO3_DEFAULT = 0;
+
 export interface IParseContext {
     ref: ProtoRef;
     options: TelescopeOptions;
@@ -158,6 +161,7 @@ export interface ProtoRef {
     traversed?: TraversedProtoRoot;
 }
 export interface ProtoRoot {
+    syntax?: string;
     package: string;
     imports: string[];
     importNames?: Record<string, Record<string, string>>;
@@ -229,7 +233,6 @@ export interface IProtoStore {
   findProto(filename): ProtoRef;
   get(from: ProtoRef, name: string): Lookup;
   getTypeUrlMap(ref: ProtoRef);
-  setEnumValues(pkg: string, name: string, values: number[]): void;
-  isEnumValueExisting(pkg: string, name: string, value: number): boolean;
-  getExistingSmallestValue(pkg: string, name: string, value: number): number;
+  setEnumValues(pkg: string, name: string, protoSyntex:string, values: number[]): void;
+  getDefaultOrExistingSmallestEnumValue(pkg: string, name: string): number;
 }

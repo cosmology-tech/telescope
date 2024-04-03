@@ -12,6 +12,7 @@
     "ast:watch": "lerna run test:watch --parallel --scope \"@cosmology/ast\"",
     "regen": "lerna run test --parallel --scope \"@cosmology/telescope\"",
     "test:min": "lerna run test:min --parallel --scope \"@cosmology/telescope\"",
+    "test:misc": "lerna run test:misc --parallel --scope \"@cosmology/telescope\"",
     "resnap": "lerna run test:update --parallel --scope \"@cosmology/ast\"",
     "buidl:clean": "lerna run buidl:clean",
     "buidl:ast": "lerna run buidl --parallel --scope \"@cosmology/ast\"",
