@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.4](https://github.com/osmosis-labs/telescope/compare/@cosmology/starship-test@1.5.3...@cosmology/starship-test@1.5.4) (2024-04-07)
+
+**Note:** Version bump only for package @cosmology/starship-test
+
 ## [1.5.3](https://github.com/osmosis-labs/telescope/compare/@cosmology/starship-test@1.5.2...@cosmology/starship-test@1.5.3) (2024-04-03)
 
 **Note:** Version bump only for package @cosmology/starship-test
