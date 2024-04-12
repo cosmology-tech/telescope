@@ -1,11 +1,11 @@
-import * as t from '@babel/types';
-import { ProtoField } from '@cosmology/types';
-import { GenericParseContext, ProtoParseContext } from './context';
+import * as t from "@babel/types";
+import { ProtoField } from "@cosmology/types";
+import { GenericParseContext, ProtoParseContext } from "./context";
 export declare const getFieldNames: (field: ProtoField) => {
     propName: string;
     origName: string;
 };
-export type TelescopeBaseTypes = 'Msg' | 'SDKType' | 'Amino' | 'AminoMsg' | 'ProtoMsg' | 'Encoded';
+export type TelescopeBaseTypes = "Msg" | "SDKType" | "Amino" | "AminoMsg" | "ProtoMsg" | "Encoded";
 export declare const SymbolNames: {
     Msg: (name: string) => string;
     SDKType: (name: string) => string;
@@ -29,3 +29,14 @@ export declare const getTSTypeForAmino: (context: GenericParseContext, field: Pr
 export declare const getTSTypeForProto: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOneOf: boolean, useNullForOptionals?: boolean) => t.Expression;
 export declare const getDefaultTSTypeFromAminoTypeDefault: (context: ProtoParseContext, field: ProtoField) => t.CallExpression;
+export declare const getPushTextualSigLine: (arrayVar: string, textExp: t.Expression | t.PatternLike, indentExp: t.Expression | t.PatternLike, expert?: boolean) => t.ExpressionStatement;
+/**
+ * Get the textual key name
+ *
+ * e.g.:
+ * `orig_name` -> `Orig name`
+ * `key` -> `Key`
+ * @param origName
+ * @returns
+ */
+export declare const getTextualKeyName: (origName: string) => string;

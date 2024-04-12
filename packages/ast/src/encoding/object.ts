@@ -5,6 +5,7 @@ import { decodeMethod } from './proto/decode';
 import { encodeMethod } from './proto/encode';
 import { fromJSONMethod } from './proto/from-json';
 import { toJSONMethod } from './proto/to-json';
+import { toTextualSigMethod } from './textual';
 import { fromAminoJSONMethod, fromAminoMsgMethod } from './proto/from-amino';
 import { toAminoJSONMethod, toAminoMsgMethod } from './proto/to-amino';
 import { toSDKMethod } from './proto/to-sdk';
@@ -42,6 +43,7 @@ export const createObjectWithMethods = (
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.fromProto')) && fromProtoMsgMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMethod(context, name, proto),
         (context.pluginValue('aminoEncoding.enabled') && !context.pluginValue('aminoEncoding.useLegacyInlineEncoding') || context.pluginValue('prototypes.methods.toProto')) && toProtoMsgMethod(context, name, proto),
+        context.pluginValue('prototypes.methods.toTextualSig') && toTextualSigMethod(context, name, proto),
     ].filter(Boolean);
 
     return t.exportNamedDeclaration(

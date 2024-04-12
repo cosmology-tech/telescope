@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { DenomMetadata, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -376,5 +377,25 @@ export const Timestamp = {
       typeUrl: "/google.protobuf.Timestamp",
       value: Timestamp.encode(message).finish()
     };
+  },
+  toTextualSig(message: Timestamp, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "Timestamp object",
+      indent: indent
+    });
+    if (message.seconds !== undefined && message.seconds !== null) {
+      results.push({
+        text: `Seconds: ${message.seconds}`,
+        indent: indent
+      });
+    }
+    if (message.nanos !== undefined && message.nanos !== null) {
+      results.push({
+        text: `Nanos: ${message.nanos}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };

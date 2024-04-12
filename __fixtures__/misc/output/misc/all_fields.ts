@@ -7,6 +7,7 @@ import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, De
 import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { DenomMetadata, TextualSigLine } from "../types";
 export const protobufPackage = "misc";
 export interface EncodingTestForDontOmit {
   /** scalar */
@@ -1571,6 +1572,202 @@ export const EncodingTestForDontOmit = {
       typeUrl: "/misc.EncodingTestForDontOmit",
       value: EncodingTestForDontOmit.encode(message).finish()
     };
+  },
+  toTextualSig(message: EncodingTestForDontOmit, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EncodingTestForDontOmit object",
+      indent: indent
+    });
+    if (message.str !== undefined && message.str !== null) {
+      results.push({
+        text: `Str: ${message.str}`,
+        indent: indent
+      });
+    }
+    if (message.dOStr !== undefined && message.dOStr !== null) {
+      results.push({
+        text: `D o str: ${message.dOStr}`,
+        indent: indent
+      });
+    }
+    if (message.b !== undefined && message.b !== null) {
+      results.push({
+        text: `B: ${message.b}`,
+        indent: indent
+      });
+    }
+    if (message.dOB !== undefined && message.dOB !== null) {
+      results.push({
+        text: `D o b: ${message.dOB}`,
+        indent: indent
+      });
+    }
+    if (message.num !== undefined && message.num !== null) {
+      results.push({
+        text: `Num: ${message.num}`,
+        indent: indent
+      });
+    }
+    if (message.dONum !== undefined && message.dONum !== null) {
+      results.push({
+        text: `D o num: ${message.dONum}`,
+        indent: indent
+      });
+    }
+    if (message.big !== undefined && message.big !== null) {
+      results.push({
+        text: `Big: ${message.big}`,
+        indent: indent
+      });
+    }
+    if (message.dOBig !== undefined && message.dOBig !== null) {
+      results.push({
+        text: `D o big: ${message.dOBig}`,
+        indent: indent
+      });
+    }
+    if (message.proto !== undefined && message.proto !== null) {
+      results.push({
+        text: `Proto: ${message.proto}`,
+        indent: indent
+      });
+    }
+    if (message.dOProto !== undefined && message.dOProto !== null) {
+      results.push({
+        text: `D o proto: ${message.dOProto}`,
+        indent: indent
+      });
+    }
+    if (message.auth !== undefined && message.auth !== null) {
+      results.push({
+        text: `Auth: ${message.auth}`,
+        indent: indent
+      });
+    }
+    if (message.dOAuth !== undefined && message.dOAuth !== null) {
+      results.push({
+        text: `D o auth: ${message.dOAuth}`,
+        indent: indent
+      });
+    }
+    if (message.salt !== undefined && message.salt !== null) {
+      results.push({
+        text: `Salt: ${message.salt}`,
+        indent: indent
+      });
+    }
+    if (message.dOSalt !== undefined && message.dOSalt !== null) {
+      results.push({
+        text: `D o salt: ${message.dOSalt}`,
+        indent: indent
+      });
+    }
+    if (message.raw !== undefined && message.raw !== null) {
+      results.push({
+        text: `Raw: ${message.raw}`,
+        indent: indent
+      });
+    }
+    if (message.dORaw !== undefined && message.dORaw !== null) {
+      results.push({
+        text: `D o raw: ${message.dORaw}`,
+        indent: indent
+      });
+    }
+    if (message.wasm !== undefined && message.wasm !== null) {
+      results.push({
+        text: `Wasm: ${message.wasm}`,
+        indent: indent
+      });
+    }
+    if (message.dOWasm !== undefined && message.dOWasm !== null) {
+      results.push({
+        text: `D o wasm: ${message.dOWasm}`,
+        indent: indent
+      });
+    }
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push({
+        text: `Opt: ${message.opt}`,
+        indent: indent
+      });
+    }
+    if (message.dOOpt !== undefined && message.dOOpt !== null) {
+      results.push({
+        text: `D o opt: ${message.dOOpt}`,
+        indent: indent
+      });
+    }
+    if (message.period !== undefined && message.period !== null) {
+      results.push({
+        text: `Period: ${message.period}`,
+        indent: indent
+      });
+    }
+    if (message.dOPeriod !== undefined && message.dOPeriod !== null) {
+      results.push({
+        text: `D o period: ${message.dOPeriod}`,
+        indent: indent
+      });
+    }
+    if (message.date !== undefined && message.date !== null) {
+      results.push({
+        text: `Date: ${message.date}`,
+        indent: indent
+      });
+    }
+    if (message.dODate !== undefined && message.dODate !== null) {
+      results.push({
+        text: `D o date: ${message.dODate}`,
+        indent: indent
+      });
+    }
+    if (message.pubkey !== undefined && message.pubkey !== null) {
+      results.push({
+        text: `Pubkey: ${message.pubkey}`,
+        indent: indent
+      });
+    }
+    if (message.dOPubkey !== undefined && message.dOPubkey !== null) {
+      results.push({
+        text: `D o pubkey: ${message.dOPubkey}`,
+        indent: indent
+      });
+    }
+    message.nums = object.nums?.map(e => e) || [];
+    message.dONums = object.dONums?.map(e => e) || [];
+    message.bigs = object.bigs?.map(e => BigInt(e.toString())) || [];
+    message.dOBigs = object.dOBigs?.map(e => BigInt(e.toString())) || [];
+    message.salts = object.salts?.map(e => e) || [];
+    message.dOSalts = object.dOSalts?.map(e => e) || [];
+    message.raws = object.raws?.map(e => e) || [];
+    message.dORaws = object.dORaws?.map(e => e) || [];
+    message.wasms = object.wasms?.map(e => e) || [];
+    message.dOWasms = object.dOWasms?.map(e => e) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.dOOpts = object.dOOpts?.map(e => e) || [];
+    message.periods = object.periods?.map(e => Duration.toTextualSig(e)) || [];
+    message.dOPeriods = object.dOPeriods?.map(e => Duration.toTextualSig(e)) || [];
+    message.protos = object.protos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.dOProtos = object.dOProtos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.auths = object.auths?.map(e => Any.toTextualSig(e)) || [];
+    message.dOAuths = object.dOAuths?.map(e => Any.toTextualSig(e)) || [];
+    if (message.dec !== undefined && message.dec !== null) {
+      results.push({
+        text: `Dec: ${message.dec}`,
+        indent: indent
+      });
+    }
+    if (message.dODec !== undefined && message.dODec !== null) {
+      results.push({
+        text: `D o dec: ${message.dODec}`,
+        indent: indent
+      });
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.dODecs?.map(e => e) || [];
+    return results;
   }
 };
 function createBaseEncodingTestForOmit(): EncodingTestForOmit {
@@ -2732,5 +2929,201 @@ export const EncodingTestForOmit = {
       typeUrl: "/misc.EncodingTestForOmit",
       value: EncodingTestForOmit.encode(message).finish()
     };
+  },
+  toTextualSig(message: EncodingTestForOmit, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EncodingTestForOmit object",
+      indent: indent
+    });
+    if (message.str !== undefined && message.str !== null) {
+      results.push({
+        text: `Str: ${message.str}`,
+        indent: indent
+      });
+    }
+    if (message.oStr !== undefined && message.oStr !== null) {
+      results.push({
+        text: `O str: ${message.oStr}`,
+        indent: indent
+      });
+    }
+    if (message.b !== undefined && message.b !== null) {
+      results.push({
+        text: `B: ${message.b}`,
+        indent: indent
+      });
+    }
+    if (message.oB !== undefined && message.oB !== null) {
+      results.push({
+        text: `O b: ${message.oB}`,
+        indent: indent
+      });
+    }
+    if (message.num !== undefined && message.num !== null) {
+      results.push({
+        text: `Num: ${message.num}`,
+        indent: indent
+      });
+    }
+    if (message.oNum !== undefined && message.oNum !== null) {
+      results.push({
+        text: `O num: ${message.oNum}`,
+        indent: indent
+      });
+    }
+    if (message.big !== undefined && message.big !== null) {
+      results.push({
+        text: `Big: ${message.big}`,
+        indent: indent
+      });
+    }
+    if (message.oBig !== undefined && message.oBig !== null) {
+      results.push({
+        text: `O big: ${message.oBig}`,
+        indent: indent
+      });
+    }
+    if (message.proto !== undefined && message.proto !== null) {
+      results.push({
+        text: `Proto: ${message.proto}`,
+        indent: indent
+      });
+    }
+    if (message.oProto !== undefined && message.oProto !== null) {
+      results.push({
+        text: `O proto: ${message.oProto}`,
+        indent: indent
+      });
+    }
+    if (message.auth !== undefined && message.auth !== null) {
+      results.push({
+        text: `Auth: ${message.auth}`,
+        indent: indent
+      });
+    }
+    if (message.oAuth !== undefined && message.oAuth !== null) {
+      results.push({
+        text: `O auth: ${message.oAuth}`,
+        indent: indent
+      });
+    }
+    if (message.salt !== undefined && message.salt !== null) {
+      results.push({
+        text: `Salt: ${message.salt}`,
+        indent: indent
+      });
+    }
+    if (message.oSalt !== undefined && message.oSalt !== null) {
+      results.push({
+        text: `O salt: ${message.oSalt}`,
+        indent: indent
+      });
+    }
+    if (message.raw !== undefined && message.raw !== null) {
+      results.push({
+        text: `Raw: ${message.raw}`,
+        indent: indent
+      });
+    }
+    if (message.oRaw !== undefined && message.oRaw !== null) {
+      results.push({
+        text: `O raw: ${message.oRaw}`,
+        indent: indent
+      });
+    }
+    if (message.wasm !== undefined && message.wasm !== null) {
+      results.push({
+        text: `Wasm: ${message.wasm}`,
+        indent: indent
+      });
+    }
+    if (message.oWasm !== undefined && message.oWasm !== null) {
+      results.push({
+        text: `O wasm: ${message.oWasm}`,
+        indent: indent
+      });
+    }
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push({
+        text: `Opt: ${message.opt}`,
+        indent: indent
+      });
+    }
+    if (message.oOpt !== undefined && message.oOpt !== null) {
+      results.push({
+        text: `O opt: ${message.oOpt}`,
+        indent: indent
+      });
+    }
+    if (message.period !== undefined && message.period !== null) {
+      results.push({
+        text: `Period: ${message.period}`,
+        indent: indent
+      });
+    }
+    if (message.oPeriod !== undefined && message.oPeriod !== null) {
+      results.push({
+        text: `O period: ${message.oPeriod}`,
+        indent: indent
+      });
+    }
+    if (message.date !== undefined && message.date !== null) {
+      results.push({
+        text: `Date: ${message.date}`,
+        indent: indent
+      });
+    }
+    if (message.oDate !== undefined && message.oDate !== null) {
+      results.push({
+        text: `O date: ${message.oDate}`,
+        indent: indent
+      });
+    }
+    if (message.pubkey !== undefined && message.pubkey !== null) {
+      results.push({
+        text: `Pubkey: ${message.pubkey}`,
+        indent: indent
+      });
+    }
+    if (message.oPubkey !== undefined && message.oPubkey !== null) {
+      results.push({
+        text: `O pubkey: ${message.oPubkey}`,
+        indent: indent
+      });
+    }
+    message.nums = object.nums?.map(e => e) || [];
+    message.oNums = object.oNums?.map(e => e) || [];
+    message.bigs = object.bigs?.map(e => BigInt(e.toString())) || [];
+    message.oBigs = object.oBigs?.map(e => BigInt(e.toString())) || [];
+    message.salts = object.salts?.map(e => e) || [];
+    message.oSalts = object.oSalts?.map(e => e) || [];
+    message.raws = object.raws?.map(e => e) || [];
+    message.oRaws = object.oRaws?.map(e => e) || [];
+    message.wasms = object.wasms?.map(e => e) || [];
+    message.oWasms = object.oWasms?.map(e => e) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.oOpts = object.oOpts?.map(e => e) || [];
+    message.periods = object.periods?.map(e => Duration.toTextualSig(e)) || [];
+    message.oPeriods = object.oPeriods?.map(e => Duration.toTextualSig(e)) || [];
+    message.protos = object.protos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.oProtos = object.oProtos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.auths = object.auths?.map(e => Any.toTextualSig(e)) || [];
+    message.oAuths = object.oAuths?.map(e => Any.toTextualSig(e)) || [];
+    if (message.dec !== undefined && message.dec !== null) {
+      results.push({
+        text: `Dec: ${message.dec}`,
+        indent: indent
+      });
+    }
+    if (message.oDec !== undefined && message.oDec !== null) {
+      results.push({
+        text: `O dec: ${message.oDec}`,
+        indent: indent
+      });
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.oDecs?.map(e => e) || [];
+    return results;
   }
 };

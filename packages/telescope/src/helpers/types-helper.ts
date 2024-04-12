@@ -150,5 +150,20 @@ export interface SigningClientParams {
   rpcEndpoint: string | HttpEndpoint;
   signer: OfflineSigner;
 }
+
+export interface DenomMetadata {
+  display: string;
+  base: string;
+  denomUnits: {
+    denom: string;
+    exponent: number;
+  }[];
+}
+
+export interface TextualSigLine {
+  text: string;
+  indent: number;
+  expert: boolean;
+}
 `;
 };

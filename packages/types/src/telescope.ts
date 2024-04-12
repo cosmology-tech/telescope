@@ -52,6 +52,7 @@ interface TelescopeOpts {
             fromAmino?: boolean;
             toProto?: boolean;
             fromProto?: boolean;
+            toTextualSig?: boolean;
         },
         strictNullCheckForPrototypeMethods?: boolean;
         paginationDefaultFromPartial?: boolean;

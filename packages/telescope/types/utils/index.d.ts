@@ -85,6 +85,8 @@ export declare const UTILS: {
     BinaryWriter: string;
     TelescopeGeneratedType: string;
     GlobalDecoderRegistry: string;
+    DenomMetadata: string;
+    TextualSigLine: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

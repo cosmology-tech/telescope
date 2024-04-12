@@ -111,6 +111,14 @@ const input: TelescopeInput = {
 
 describe("misc", () => {
   it("generates", async () => {
+    input.options = deepmerge(options, {
+      prototypes: {
+        methods: {
+          toTextualSig: true,
+        },
+      },
+    });
+
     const telescope = new TelescopeBuilder(input);
 
     await telescope.build();

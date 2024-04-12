@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { DenomMetadata, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -426,5 +427,25 @@ export const Any = {
       typeUrl: "/google.protobuf.Any",
       value: Any.encode(message).finish()
     };
+  },
+  toTextualSig(message: Any, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "Any object",
+      indent: indent
+    });
+    if (message.typeUrl !== undefined && message.typeUrl !== null) {
+      results.push({
+        text: `Type url: ${message.typeUrl}`,
+        indent: indent
+      });
+    }
+    if (message.value !== undefined && message.value !== null) {
+      results.push({
+        text: `Value: ${message.value}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };

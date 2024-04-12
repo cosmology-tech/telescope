@@ -88,6 +88,8 @@ export const UTILS = {
   BinaryWriter: '__binary__',
   TelescopeGeneratedType: '__types__',
   GlobalDecoderRegistry: '__registry__',
+  DenomMetadata: '__types__',
+  TextualSigLine: '__types__',
 };
 
 export const UTIL_HELPERS = [

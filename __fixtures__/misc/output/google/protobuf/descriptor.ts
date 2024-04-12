@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { DenomMetadata, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
@@ -2354,6 +2355,15 @@ export const FileDescriptorSet = {
       typeUrl: "/google.protobuf.FileDescriptorSet",
       value: FileDescriptorSet.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileDescriptorSet, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FileDescriptorSet object",
+      indent: indent
+    });
+    message.file = object.file?.map(e => FileDescriptorProto.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseFileDescriptorProto(): FileDescriptorProto {
@@ -2721,6 +2731,51 @@ export const FileDescriptorProto = {
       typeUrl: "/google.protobuf.FileDescriptorProto",
       value: FileDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FileDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    if (message.package !== undefined && message.package !== null) {
+      results.push({
+        text: `Package: ${message.package}`,
+        indent: indent
+      });
+    }
+    message.dependency = object.dependency?.map(e => e) || [];
+    message.publicDependency = object.publicDependency?.map(e => e) || [];
+    message.weakDependency = object.weakDependency?.map(e => e) || [];
+    message.messageType = object.messageType?.map(e => DescriptorProto.toTextualSig(e)) || [];
+    message.enumType = object.enumType?.map(e => EnumDescriptorProto.toTextualSig(e)) || [];
+    message.service = object.service?.map(e => ServiceDescriptorProto.toTextualSig(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    if (message.sourceCodeInfo !== undefined && message.sourceCodeInfo !== null) {
+      results.push({
+        text: `Source code info: ${message.sourceCodeInfo}`,
+        indent: indent
+      });
+    }
+    if (message.syntax !== undefined && message.syntax !== null) {
+      results.push({
+        text: `Syntax: ${message.syntax}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseDescriptorProto(): DescriptorProto {
@@ -3044,6 +3099,34 @@ export const DescriptorProto = {
       typeUrl: "/google.protobuf.DescriptorProto",
       value: DescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "DescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    message.field = object.field?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    message.nestedType = object.nestedType?.map(e => DescriptorProto.toTextualSig(e)) || [];
+    message.enumType = object.enumType?.map(e => EnumDescriptorProto.toTextualSig(e)) || [];
+    message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.toTextualSig(e)) || [];
+    message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.toTextualSig(e)) || [];
+    message.reservedName = object.reservedName?.map(e => e) || [];
+    return results;
   }
 };
 function createBaseDescriptorProto_ExtensionRange(): DescriptorProto_ExtensionRange {
@@ -3168,6 +3251,32 @@ export const DescriptorProto_ExtensionRange = {
       typeUrl: "/google.protobuf.ExtensionRange",
       value: DescriptorProto_ExtensionRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto_ExtensionRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "DescriptorProto_ExtensionRange object",
+      indent: indent
+    });
+    if (message.start !== undefined && message.start !== null) {
+      results.push({
+        text: `Start: ${message.start}`,
+        indent: indent
+      });
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push({
+        text: `End: ${message.end}`,
+        indent: indent
+      });
+    }
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseDescriptorProto_ReservedRange(): DescriptorProto_ReservedRange {
@@ -3273,6 +3382,26 @@ export const DescriptorProto_ReservedRange = {
       typeUrl: "/google.protobuf.ReservedRange",
       value: DescriptorProto_ReservedRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto_ReservedRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "DescriptorProto_ReservedRange object",
+      indent: indent
+    });
+    if (message.start !== undefined && message.start !== null) {
+      results.push({
+        text: `Start: ${message.start}`,
+        indent: indent
+      });
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push({
+        text: `End: ${message.end}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseExtensionRangeOptions(): ExtensionRangeOptions {
@@ -3371,6 +3500,15 @@ export const ExtensionRangeOptions = {
       typeUrl: "/google.protobuf.ExtensionRangeOptions",
       value: ExtensionRangeOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: ExtensionRangeOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "ExtensionRangeOptions object",
+      indent: indent
+    });
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseFieldDescriptorProto(): FieldDescriptorProto {
@@ -3614,6 +3752,74 @@ export const FieldDescriptorProto = {
       typeUrl: "/google.protobuf.FieldDescriptorProto",
       value: FieldDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: FieldDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FieldDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    if (message.number !== undefined && message.number !== null) {
+      results.push({
+        text: `Number: ${message.number}`,
+        indent: indent
+      });
+    }
+    if (message.label !== undefined && message.label !== null) {
+      results.push({
+        text: `Label: ${message.label}`,
+        indent: indent
+      });
+    }
+    if (message.type !== undefined && message.type !== null) {
+      results.push({
+        text: `Type: ${message.type}`,
+        indent: indent
+      });
+    }
+    if (message.typeName !== undefined && message.typeName !== null) {
+      results.push({
+        text: `Type name: ${message.typeName}`,
+        indent: indent
+      });
+    }
+    if (message.extendee !== undefined && message.extendee !== null) {
+      results.push({
+        text: `Extendee: ${message.extendee}`,
+        indent: indent
+      });
+    }
+    if (message.defaultValue !== undefined && message.defaultValue !== null) {
+      results.push({
+        text: `Default value: ${message.defaultValue}`,
+        indent: indent
+      });
+    }
+    if (message.oneofIndex !== undefined && message.oneofIndex !== null) {
+      results.push({
+        text: `Oneof index: ${message.oneofIndex}`,
+        indent: indent
+      });
+    }
+    if (message.jsonName !== undefined && message.jsonName !== null) {
+      results.push({
+        text: `Json name: ${message.jsonName}`,
+        indent: indent
+      });
+    }
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseOneofDescriptorProto(): OneofDescriptorProto {
@@ -3721,6 +3927,26 @@ export const OneofDescriptorProto = {
       typeUrl: "/google.protobuf.OneofDescriptorProto",
       value: OneofDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: OneofDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "OneofDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseEnumDescriptorProto(): EnumDescriptorProto {
@@ -3909,6 +4135,29 @@ export const EnumDescriptorProto = {
       typeUrl: "/google.protobuf.EnumDescriptorProto",
       value: EnumDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EnumDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    message.value = object.value?.map(e => EnumValueDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.toTextualSig(e)) || [];
+    message.reservedName = object.reservedName?.map(e => e) || [];
+    return results;
   }
 };
 function createBaseEnumDescriptorProto_EnumReservedRange(): EnumDescriptorProto_EnumReservedRange {
@@ -4014,6 +4263,26 @@ export const EnumDescriptorProto_EnumReservedRange = {
       typeUrl: "/google.protobuf.EnumReservedRange",
       value: EnumDescriptorProto_EnumReservedRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumDescriptorProto_EnumReservedRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EnumDescriptorProto_EnumReservedRange object",
+      indent: indent
+    });
+    if (message.start !== undefined && message.start !== null) {
+      results.push({
+        text: `Start: ${message.start}`,
+        indent: indent
+      });
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push({
+        text: `End: ${message.end}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseEnumValueDescriptorProto(): EnumValueDescriptorProto {
@@ -4138,6 +4407,32 @@ export const EnumValueDescriptorProto = {
       typeUrl: "/google.protobuf.EnumValueDescriptorProto",
       value: EnumValueDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumValueDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EnumValueDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    if (message.number !== undefined && message.number !== null) {
+      results.push({
+        text: `Number: ${message.number}`,
+        indent: indent
+      });
+    }
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseServiceDescriptorProto(): ServiceDescriptorProto {
@@ -4272,6 +4567,27 @@ export const ServiceDescriptorProto = {
       typeUrl: "/google.protobuf.ServiceDescriptorProto",
       value: ServiceDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: ServiceDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "ServiceDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    message.method = object.method?.map(e => MethodDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseMethodDescriptorProto(): MethodDescriptorProto {
@@ -4447,6 +4763,50 @@ export const MethodDescriptorProto = {
       typeUrl: "/google.protobuf.MethodDescriptorProto",
       value: MethodDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: MethodDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "MethodDescriptorProto object",
+      indent: indent
+    });
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    if (message.inputType !== undefined && message.inputType !== null) {
+      results.push({
+        text: `Input type: ${message.inputType}`,
+        indent: indent
+      });
+    }
+    if (message.outputType !== undefined && message.outputType !== null) {
+      results.push({
+        text: `Output type: ${message.outputType}`,
+        indent: indent
+      });
+    }
+    if (message.options !== undefined && message.options !== null) {
+      results.push({
+        text: `Options: ${message.options}`,
+        indent: indent
+      });
+    }
+    if (message.clientStreaming !== undefined && message.clientStreaming !== null) {
+      results.push({
+        text: `Client streaming: ${message.clientStreaming}`,
+        indent: indent
+      });
+    }
+    if (message.serverStreaming !== undefined && message.serverStreaming !== null) {
+      results.push({
+        text: `Server streaming: ${message.serverStreaming}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseFileOptions(): FileOptions {
@@ -4885,6 +5245,135 @@ export const FileOptions = {
       typeUrl: "/google.protobuf.FileOptions",
       value: FileOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FileOptions object",
+      indent: indent
+    });
+    if (message.javaPackage !== undefined && message.javaPackage !== null) {
+      results.push({
+        text: `Java package: ${message.javaPackage}`,
+        indent: indent
+      });
+    }
+    if (message.javaOuterClassname !== undefined && message.javaOuterClassname !== null) {
+      results.push({
+        text: `Java outer classname: ${message.javaOuterClassname}`,
+        indent: indent
+      });
+    }
+    if (message.javaMultipleFiles !== undefined && message.javaMultipleFiles !== null) {
+      results.push({
+        text: `Java multiple files: ${message.javaMultipleFiles}`,
+        indent: indent
+      });
+    }
+    if (message.javaGenerateEqualsAndHash !== undefined && message.javaGenerateEqualsAndHash !== null) {
+      results.push({
+        text: `Java generate equals and hash: ${message.javaGenerateEqualsAndHash}`,
+        indent: indent
+      });
+    }
+    if (message.javaStringCheckUtf8 !== undefined && message.javaStringCheckUtf8 !== null) {
+      results.push({
+        text: `Java string check utf8: ${message.javaStringCheckUtf8}`,
+        indent: indent
+      });
+    }
+    if (message.optimizeFor !== undefined && message.optimizeFor !== null) {
+      results.push({
+        text: `Optimize for: ${message.optimizeFor}`,
+        indent: indent
+      });
+    }
+    if (message.goPackage !== undefined && message.goPackage !== null) {
+      results.push({
+        text: `Go package: ${message.goPackage}`,
+        indent: indent
+      });
+    }
+    if (message.ccGenericServices !== undefined && message.ccGenericServices !== null) {
+      results.push({
+        text: `Cc generic services: ${message.ccGenericServices}`,
+        indent: indent
+      });
+    }
+    if (message.javaGenericServices !== undefined && message.javaGenericServices !== null) {
+      results.push({
+        text: `Java generic services: ${message.javaGenericServices}`,
+        indent: indent
+      });
+    }
+    if (message.pyGenericServices !== undefined && message.pyGenericServices !== null) {
+      results.push({
+        text: `Py generic services: ${message.pyGenericServices}`,
+        indent: indent
+      });
+    }
+    if (message.phpGenericServices !== undefined && message.phpGenericServices !== null) {
+      results.push({
+        text: `Php generic services: ${message.phpGenericServices}`,
+        indent: indent
+      });
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    if (message.ccEnableArenas !== undefined && message.ccEnableArenas !== null) {
+      results.push({
+        text: `Cc enable arenas: ${message.ccEnableArenas}`,
+        indent: indent
+      });
+    }
+    if (message.objcClassPrefix !== undefined && message.objcClassPrefix !== null) {
+      results.push({
+        text: `Objc class prefix: ${message.objcClassPrefix}`,
+        indent: indent
+      });
+    }
+    if (message.csharpNamespace !== undefined && message.csharpNamespace !== null) {
+      results.push({
+        text: `Csharp namespace: ${message.csharpNamespace}`,
+        indent: indent
+      });
+    }
+    if (message.swiftPrefix !== undefined && message.swiftPrefix !== null) {
+      results.push({
+        text: `Swift prefix: ${message.swiftPrefix}`,
+        indent: indent
+      });
+    }
+    if (message.phpClassPrefix !== undefined && message.phpClassPrefix !== null) {
+      results.push({
+        text: `Php class prefix: ${message.phpClassPrefix}`,
+        indent: indent
+      });
+    }
+    if (message.phpNamespace !== undefined && message.phpNamespace !== null) {
+      results.push({
+        text: `Php namespace: ${message.phpNamespace}`,
+        indent: indent
+      });
+    }
+    if (message.phpMetadataNamespace !== undefined && message.phpMetadataNamespace !== null) {
+      results.push({
+        text: `Php metadata namespace: ${message.phpMetadataNamespace}`,
+        indent: indent
+      });
+    }
+    if (message.rubyPackage !== undefined && message.rubyPackage !== null) {
+      results.push({
+        text: `Ruby package: ${message.rubyPackage}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseMessageOptions(): MessageOptions {
@@ -5051,6 +5540,39 @@ export const MessageOptions = {
       typeUrl: "/google.protobuf.MessageOptions",
       value: MessageOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: MessageOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "MessageOptions object",
+      indent: indent
+    });
+    if (message.messageSetWireFormat !== undefined && message.messageSetWireFormat !== null) {
+      results.push({
+        text: `Message set wire format: ${message.messageSetWireFormat}`,
+        indent: indent
+      });
+    }
+    if (message.noStandardDescriptorAccessor !== undefined && message.noStandardDescriptorAccessor !== null) {
+      results.push({
+        text: `No standard descriptor accessor: ${message.noStandardDescriptorAccessor}`,
+        indent: indent
+      });
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    if (message.mapEntry !== undefined && message.mapEntry !== null) {
+      results.push({
+        text: `Map entry: ${message.mapEntry}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseFieldOptions(): FieldOptions {
@@ -5251,6 +5773,51 @@ export const FieldOptions = {
       typeUrl: "/google.protobuf.FieldOptions",
       value: FieldOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: FieldOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FieldOptions object",
+      indent: indent
+    });
+    if (message.ctype !== undefined && message.ctype !== null) {
+      results.push({
+        text: `Ctype: ${message.ctype}`,
+        indent: indent
+      });
+    }
+    if (message.packed !== undefined && message.packed !== null) {
+      results.push({
+        text: `Packed: ${message.packed}`,
+        indent: indent
+      });
+    }
+    if (message.jstype !== undefined && message.jstype !== null) {
+      results.push({
+        text: `Jstype: ${message.jstype}`,
+        indent: indent
+      });
+    }
+    if (message.lazy !== undefined && message.lazy !== null) {
+      results.push({
+        text: `Lazy: ${message.lazy}`,
+        indent: indent
+      });
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    if (message.weak !== undefined && message.weak !== null) {
+      results.push({
+        text: `Weak: ${message.weak}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseOneofOptions(): OneofOptions {
@@ -5349,6 +5916,15 @@ export const OneofOptions = {
       typeUrl: "/google.protobuf.OneofOptions",
       value: OneofOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: OneofOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "OneofOptions object",
+      indent: indent
+    });
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseEnumOptions(): EnumOptions {
@@ -5481,6 +6057,27 @@ export const EnumOptions = {
       typeUrl: "/google.protobuf.EnumOptions",
       value: EnumOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EnumOptions object",
+      indent: indent
+    });
+    if (message.allowAlias !== undefined && message.allowAlias !== null) {
+      results.push({
+        text: `Allow alias: ${message.allowAlias}`,
+        indent: indent
+      });
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseEnumValueOptions(): EnumValueOptions {
@@ -5596,6 +6193,21 @@ export const EnumValueOptions = {
       typeUrl: "/google.protobuf.EnumValueOptions",
       value: EnumValueOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumValueOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EnumValueOptions object",
+      indent: indent
+    });
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseServiceOptions(): ServiceOptions {
@@ -5711,6 +6323,21 @@ export const ServiceOptions = {
       typeUrl: "/google.protobuf.ServiceOptions",
       value: ServiceOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: ServiceOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "ServiceOptions object",
+      indent: indent
+    });
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseMethodOptions(): MethodOptions {
@@ -5843,6 +6470,27 @@ export const MethodOptions = {
       typeUrl: "/google.protobuf.MethodOptions",
       value: MethodOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: MethodOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "MethodOptions object",
+      indent: indent
+    });
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push({
+        text: `Deprecated: ${message.deprecated}`,
+        indent: indent
+      });
+    }
+    if (message.idempotencyLevel !== undefined && message.idempotencyLevel !== null) {
+      results.push({
+        text: `Idempotency level: ${message.idempotencyLevel}`,
+        indent: indent
+      });
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseUninterpretedOption(): UninterpretedOption {
@@ -6047,6 +6695,51 @@ export const UninterpretedOption = {
       typeUrl: "/google.protobuf.UninterpretedOption",
       value: UninterpretedOption.encode(message).finish()
     };
+  },
+  toTextualSig(message: UninterpretedOption, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "UninterpretedOption object",
+      indent: indent
+    });
+    message.name = object.name?.map(e => UninterpretedOption_NamePart.toTextualSig(e)) || [];
+    if (message.identifierValue !== undefined && message.identifierValue !== null) {
+      results.push({
+        text: `Identifier value: ${message.identifierValue}`,
+        indent: indent
+      });
+    }
+    if (message.positiveIntValue !== undefined && message.positiveIntValue !== null) {
+      results.push({
+        text: `Positive int value: ${message.positiveIntValue}`,
+        indent: indent
+      });
+    }
+    if (message.negativeIntValue !== undefined && message.negativeIntValue !== null) {
+      results.push({
+        text: `Negative int value: ${message.negativeIntValue}`,
+        indent: indent
+      });
+    }
+    if (message.doubleValue !== undefined && message.doubleValue !== null) {
+      results.push({
+        text: `Double value: ${message.doubleValue}`,
+        indent: indent
+      });
+    }
+    if (message.stringValue !== undefined && message.stringValue !== null) {
+      results.push({
+        text: `String value: ${message.stringValue}`,
+        indent: indent
+      });
+    }
+    if (message.aggregateValue !== undefined && message.aggregateValue !== null) {
+      results.push({
+        text: `Aggregate value: ${message.aggregateValue}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseUninterpretedOption_NamePart(): UninterpretedOption_NamePart {
@@ -6152,6 +6845,26 @@ export const UninterpretedOption_NamePart = {
       typeUrl: "/google.protobuf.NamePart",
       value: UninterpretedOption_NamePart.encode(message).finish()
     };
+  },
+  toTextualSig(message: UninterpretedOption_NamePart, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "UninterpretedOption_NamePart object",
+      indent: indent
+    });
+    if (message.namePart !== undefined && message.namePart !== null) {
+      results.push({
+        text: `Name part: ${message.namePart}`,
+        indent: indent
+      });
+    }
+    if (message.isExtension !== undefined && message.isExtension !== null) {
+      results.push({
+        text: `Is extension: ${message.isExtension}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseSourceCodeInfo(): SourceCodeInfo {
@@ -6250,6 +6963,15 @@ export const SourceCodeInfo = {
       typeUrl: "/google.protobuf.SourceCodeInfo",
       value: SourceCodeInfo.encode(message).finish()
     };
+  },
+  toTextualSig(message: SourceCodeInfo, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "SourceCodeInfo object",
+      indent: indent
+    });
+    message.location = object.location?.map(e => SourceCodeInfo_Location.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseSourceCodeInfo_Location(): SourceCodeInfo_Location {
@@ -6454,6 +7176,29 @@ export const SourceCodeInfo_Location = {
       typeUrl: "/google.protobuf.Location",
       value: SourceCodeInfo_Location.encode(message).finish()
     };
+  },
+  toTextualSig(message: SourceCodeInfo_Location, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "SourceCodeInfo_Location object",
+      indent: indent
+    });
+    message.path = object.path?.map(e => e) || [];
+    message.span = object.span?.map(e => e) || [];
+    if (message.leadingComments !== undefined && message.leadingComments !== null) {
+      results.push({
+        text: `Leading comments: ${message.leadingComments}`,
+        indent: indent
+      });
+    }
+    if (message.trailingComments !== undefined && message.trailingComments !== null) {
+      results.push({
+        text: `Trailing comments: ${message.trailingComments}`,
+        indent: indent
+      });
+    }
+    message.leadingDetachedComments = object.leadingDetachedComments?.map(e => e) || [];
+    return results;
   }
 };
 function createBaseGeneratedCodeInfo(): GeneratedCodeInfo {
@@ -6552,6 +7297,15 @@ export const GeneratedCodeInfo = {
       typeUrl: "/google.protobuf.GeneratedCodeInfo",
       value: GeneratedCodeInfo.encode(message).finish()
     };
+  },
+  toTextualSig(message: GeneratedCodeInfo, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "GeneratedCodeInfo object",
+      indent: indent
+    });
+    message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseGeneratedCodeInfo_Annotation(): GeneratedCodeInfo_Annotation {
@@ -6710,6 +7464,33 @@ export const GeneratedCodeInfo_Annotation = {
       typeUrl: "/google.protobuf.Annotation",
       value: GeneratedCodeInfo_Annotation.encode(message).finish()
     };
+  },
+  toTextualSig(message: GeneratedCodeInfo_Annotation, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "GeneratedCodeInfo_Annotation object",
+      indent: indent
+    });
+    message.path = object.path?.map(e => e) || [];
+    if (message.sourceFile !== undefined && message.sourceFile !== null) {
+      results.push({
+        text: `Source file: ${message.sourceFile}`,
+        indent: indent
+      });
+    }
+    if (message.begin !== undefined && message.begin !== null) {
+      results.push({
+        text: `Begin: ${message.begin}`,
+        indent: indent
+      });
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push({
+        text: `End: ${message.end}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseFeatureSet(): FeatureSet {
@@ -6798,5 +7579,19 @@ export const FeatureSet = {
       typeUrl: "/google.protobuf.FeatureSet",
       value: FeatureSet.encode(message).finish()
     };
+  },
+  toTextualSig(message: FeatureSet, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "FeatureSet object",
+      indent: indent
+    });
+    if (message.utf8Validation !== undefined && message.utf8Validation !== null) {
+      results.push({
+        text: `Utf8 validation: ${message.utf8Validation}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };

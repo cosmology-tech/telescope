@@ -2,6 +2,7 @@ import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSD
 import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject } from "../helpers";
+import { DenomMetadata, TextualSigLine } from "../types";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -299,6 +300,26 @@ export const EvalRequest_BindingsEntry = {
   },
   toProto(message: EvalRequest_BindingsEntry): Uint8Array {
     return EvalRequest_BindingsEntry.encode(message).finish();
+  },
+  toTextualSig(message: EvalRequest_BindingsEntry, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EvalRequest_BindingsEntry object",
+      indent: indent
+    });
+    if (message.key !== undefined && message.key !== null) {
+      results.push({
+        text: `Key: ${message.key}`,
+        indent: indent
+      });
+    }
+    if (message.value !== undefined && message.value !== null) {
+      results.push({
+        text: `Value: ${message.value}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseEvalRequest_RefsEntry(): EvalRequest_RefsEntry {
@@ -399,6 +420,26 @@ export const EvalRequest_RefsEntry = {
   },
   toProto(message: EvalRequest_RefsEntry): Uint8Array {
     return EvalRequest_RefsEntry.encode(message).finish();
+  },
+  toTextualSig(message: EvalRequest_RefsEntry, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EvalRequest_RefsEntry object",
+      indent: indent
+    });
+    if (message.key !== undefined && message.key !== null) {
+      results.push({
+        text: `Key: ${message.key}`,
+        indent: indent
+      });
+    }
+    if (message.value !== undefined && message.value !== null) {
+      results.push({
+        text: `Value: ${message.value}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseEvalRequest(): EvalRequest {
@@ -748,6 +789,73 @@ export const EvalRequest = {
       typeUrl: "/misc.EvalRequest",
       value: EvalRequest.encode(message).finish()
     };
+  },
+  toTextualSig(message: EvalRequest, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "EvalRequest object",
+      indent: indent
+    });
+    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
+      [key: string]: ExprValue;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = ExprValue.toTextualSig(value);
+      }
+      return acc;
+    }, {});
+    message.refs = Object.entries(object.refs ?? {}).reduce<{
+      [key: string]: IdRef;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = IdRef.toTextualSig(value);
+      }
+      return acc;
+    }, {});
+    if (message.testNum !== undefined && message.testNum !== null) {
+      results.push({
+        text: `Test num: ${message.testNum}`,
+        indent: indent
+      });
+    }
+    if (message.testString !== undefined && message.testString !== null) {
+      results.push({
+        text: `Test string: ${message.testString}`,
+        indent: indent
+      });
+    }
+    if (message.testBool !== undefined && message.testBool !== null) {
+      results.push({
+        text: `Test bool: ${message.testBool}`,
+        indent: indent
+      });
+    }
+    if (message.instantiatePermission !== undefined && message.instantiatePermission !== null) {
+      results.push({
+        text: `Instantiate permission: ${message.instantiatePermission}`,
+        indent: indent
+      });
+    }
+    if (message.id !== undefined && message.id !== null) {
+      results.push({
+        text: `Id: ${message.id}`,
+        indent: indent
+      });
+    }
+    if (message.name !== undefined && message.name !== null) {
+      results.push({
+        text: `Name: ${message.name}`,
+        indent: indent
+      });
+    }
+    message.testArray = object.testArray?.map(e => e) || [];
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push({
+        text: `Opt: ${message.opt}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseAccessConfig(): AccessConfig {
@@ -836,6 +944,20 @@ export const AccessConfig = {
       typeUrl: "/misc.AccessConfig",
       value: AccessConfig.encode(message).finish()
     };
+  },
+  toTextualSig(message: AccessConfig, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "AccessConfig object",
+      indent: indent
+    });
+    if (message.sender !== undefined && message.sender !== null) {
+      results.push({
+        text: `Sender: ${message.sender}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
 function createBaseGenericAuthorization(): GenericAuthorization {
@@ -924,5 +1046,19 @@ export const GenericAuthorization = {
       typeUrl: "/misc.GenericAuthorization",
       value: GenericAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: GenericAuthorization, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "GenericAuthorization object",
+      indent: indent
+    });
+    if (message.msg !== undefined && message.msg !== null) {
+      results.push({
+        text: `Msg: ${message.msg}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };

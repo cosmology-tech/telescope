@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { DenomMetadata, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -310,5 +311,25 @@ export const Duration = {
       typeUrl: "/google.protobuf.Duration",
       value: Duration.encode(message).finish()
     };
+  },
+  toTextualSig(message: Duration, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "Duration object",
+      indent: indent
+    });
+    if (message.seconds !== undefined && message.seconds !== null) {
+      results.push({
+        text: `Seconds: ${message.seconds}`,
+        indent: indent
+      });
+    }
+    if (message.nanos !== undefined && message.nanos !== null) {
+      results.push({
+        text: `Nanos: ${message.nanos}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };

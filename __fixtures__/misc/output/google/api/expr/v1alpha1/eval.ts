@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet } from "../../../../helpers";
+import { DenomMetadata, TextualSigLine } from "../../../../types";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
   /** The ids of the expressions with unknown values. */
@@ -135,6 +136,15 @@ export const ExprValue = {
       typeUrl: "/google.api.expr.v1alpha1.ExprValue",
       value: ExprValue.encode(message).finish()
     };
+  },
+  toTextualSig(message: ExprValue, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "ExprValue object",
+      indent: indent
+    });
+    message.exprs = object.exprs?.map(e => IdRef.toTextualSig(e)) || [];
+    return results;
   }
 };
 function createBaseIdRef(): IdRef {
@@ -223,5 +233,19 @@ export const IdRef = {
       typeUrl: "/google.api.expr.v1alpha1.IdRef",
       value: IdRef.encode(message).finish()
     };
+  },
+  toTextualSig(message: IdRef, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
+    const results: TextualSigLine[] = [];
+    results.push({
+      text: "IdRef object",
+      indent: indent
+    });
+    if (message.id !== undefined && message.id !== null) {
+      results.push({
+        text: `Id: ${message.id}`,
+        indent: indent
+      });
+    }
+    return results;
   }
 };
