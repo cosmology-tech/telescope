@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, formatNumberWithThousandSeparator } from "../../helpers";
 import { DenomMetadata, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 /**
@@ -320,13 +320,13 @@ export const Duration = {
     });
     if (message.seconds !== undefined && message.seconds !== null) {
       results.push({
-        text: `Seconds: ${message.seconds}`,
+        text: `Seconds: ${formatNumberWithThousandSeparator(message.seconds)}`,
         indent: indent
       });
     }
     if (message.nanos !== undefined && message.nanos !== null) {
       results.push({
-        text: `Nanos: ${message.nanos}`,
+        text: `Nanos: ${formatNumberWithThousandSeparator(message.nanos)}`,
         indent: indent
       });
     }

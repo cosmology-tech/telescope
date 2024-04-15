@@ -87,6 +87,10 @@ export declare const UTILS: {
     GlobalDecoderRegistry: string;
     DenomMetadata: string;
     TextualSigLine: string;
+    fromBooleanToString: string;
+    formatNumberWithThousandSeparator: string;
+    toHex: string;
+    toByteTextual: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

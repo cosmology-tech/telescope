@@ -90,6 +90,11 @@ export const UTILS = {
   GlobalDecoderRegistry: '__registry__',
   DenomMetadata: '__types__',
   TextualSigLine: '__types__',
+
+  fromBooleanToString: '__helpers__',
+  formatNumberWithThousandSeparator: '__helpers__',
+  toHex: '__extern__',
+  toByteTextual: '__extern__',
 };
 
 export const UTIL_HELPERS = [

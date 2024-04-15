@@ -71,7 +71,7 @@ export const plugin = (
     write(builder, "binary.ts", getHelperForBinary(builder.options));
   }
 
-  if (builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType || builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+  if (builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType || builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry || builder.options.prototypes.methods.toTextualSig) {
     builder.files.push('types.ts');
     write(builder, 'types.ts', getTypesHelper(builder.options));
   }

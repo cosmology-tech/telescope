@@ -69,20 +69,81 @@ export const toTextualSig = {
         );
     },
 
-    //
+    /**
+     * create code for formatted scalar with formatter
+     * @param args
+     * @param formatter
+     * @param isFormatterFromUtilHelper is formatter from util helper. default is true
+     * @returns
+     */
+    formattedScalar(
+        args: ToTextualSigMethod,
+        formatter: string,
+        isFormatterFromUtilHelper: boolean = true
+    ) {
+        if (isFormatterFromUtilHelper) {
+            args.context.addUtil(formatter);
+        }
+
+        const { propName } = getFieldNames(args.field);
+
+        return toTextualSig.scalar(
+            args,
+            t.callExpression(t.identifier(formatter), [
+                t.memberExpression(
+                    t.identifier("message"),
+                    t.identifier(propName)
+                ),
+            ])
+        );
+    },
+
+    // if (message.str !== undefined && message.str !== null) {
+    //   results.push({
+    //     text: `Str: ${message.str}`,
+    //     indent: indent
+    //   });
+    // }
     string(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        const isCosmosSDKDec =
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "github.com/cosmos/cosmos-sdk/types.Dec" ||
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "github.com/cosmos/cosmos-sdk/types.Int" ||
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "cosmossdk.io/math.LegacyDec";
+
+        if (isCosmosSDKDec) {
+            return toTextualSig.formattedScalar(
+                args,
+                "formatNumberWithThousandSeparator"
+            );
+        } else {
+            return toTextualSig.scalar(args);
+        }
     },
 
-    // message.disableMacros = object.disableMacros ?? false;
+    // if (message.b !== undefined && message.b !== null) {
+    //   results.push({
+    //     text: `B: ${fromBooleanToString(message.b)}`,
+    //     indent: indent
+    //   });
+    // }
     bool(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        return toTextualSig.formattedScalar(args, "fromBooleanToString");
     },
 
-    // message.doubleValue = object.doubleValue ?? 0;
-
+    // if (message.num !== undefined && message.num !== null) {
+    //   results.push({
+    //     text: `Num: ${formatNumberWithThousandSeparator(message.num)}`,
+    //     indent: indent
+    //   });
+    // }
     number(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        return toTextualSig.formattedScalar(
+            args,
+            "formatNumberWithThousandSeparator"
+        );
     },
 
     int32(args: ToTextualSigMethod) {
@@ -107,10 +168,17 @@ export const toTextualSig = {
         return toTextualSig.number(args);
     },
 
-    // OLD: message.myInt64Value = object.myInt64Value !== undefined && object.myInt64Value !== null ? Long.fromValue(object.myInt64Value) : Long.ZERO;
-    // NEW: if( object.myInt64Value !== undefined && object.myInt64Value !== null ) { message.myInt64Value = Long.fromValue(object.myInt64Value) }
+    // if (message.big !== undefined && message.big !== null) {
+    //   results.push({
+    //     text: `Big: ${formatNumberWithThousandSeparator(message.big)}`,
+    //     indent: indent
+    //   });
+    // }
     long(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        return toTextualSig.formattedScalar(
+            args,
+            "formatNumberWithThousandSeparator"
+        );
     },
 
     int64(args: ToTextualSigMethod) {
@@ -129,7 +197,6 @@ export const toTextualSig = {
         return toTextualSig.long(args);
     },
 
-    // message.signDoc = object.signDoc !== undefined && object.signDoc !== null ? SignDocDirectAux.toTextualSig(object.signDoc) : SignDocDirectAux.toTextualSig({});
     type(args: ToTextualSigMethod) {
         const prop = args.field.name;
         let name = args.context.getTypeName(args.field);
@@ -147,14 +214,23 @@ export const toTextualSig = {
         return toTextualSig.scalar(args);
     },
 
-    // message.mode = object.mode ?? 0;
+    // if (message.opt !== undefined && message.opt !== null) {
+    //   results.push({
+    //     text: `Opt: ${voteOptionToJSON(message.opt)}`,
+    //     indent: indent
+    //   });
+    // }
     enum(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        const enumFuncName = args.context.getToEnum(args.field);
+        return toTextualSig.formattedScalar(args, enumFuncName, false);
     },
 
     // message.queryData = object.queryData ?? new Uint8Array()
     bytes(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+        return toTextualSig.formattedScalar(
+            args,
+            "toByteTextual"
+        );
     },
 
     // message.period = object.period ?? undefined;

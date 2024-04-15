@@ -1,5 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, formatNumberWithThousandSeparator } from "../../../../helpers";
 import { DenomMetadata, TextualSigLine } from "../../../../types";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
@@ -242,7 +242,7 @@ export const IdRef = {
     });
     if (message.id !== undefined && message.id !== null) {
       results.push({
-        text: `Id: ${message.id}`,
+        text: `Id: ${formatNumberWithThousandSeparator(message.id)}`,
         indent: indent
       });
     }

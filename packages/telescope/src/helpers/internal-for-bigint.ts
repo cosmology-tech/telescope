@@ -248,6 +248,40 @@ export function fromJsonTimestamp(o: any): Timestamp {
   }
 }
 
+export function fromBooleanToString(bool) {
+  return bool ? 'True' : 'False';
+}
+
+export function formatNumberWithThousandSeparator(input: string | number | bigint): string {
+  const numStr = input.toString();
+
+  const parts = numStr.split('.');
+
+  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+
+  if (parts.length > 1) {
+      const decimalPart = parts[1].replace(/0+$/, '');
+
+      if (decimalPart.length > 0) {
+          return \`\${integerPart}.\${decimalPart}\`;
+      }
+  }
+
+  return integerPart;
+}
+
+export function toHex(data: Uint8Array): string {
+  let out = "";
+  for (let i = 0; i < data.length; i++) {
+      out += ("0" + data[i].toString(16)).slice(-2);
+
+      if ((i + 1) % 2 === 0 && i !== data.length - 1) {
+          out += " ";
+      }
+  }
+  return out;
+}
+
 function numberToLong(number: number) {
   return BigInt(Math.trunc(number));
 }

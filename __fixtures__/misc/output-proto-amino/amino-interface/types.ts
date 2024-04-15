@@ -165,6 +165,6 @@ export interface DenomMetadata {
 
 export interface TextualSigLine {
   text: string;
-  indent: number;
-  expert: boolean;
+  indent?: number;
+  expert?: boolean;
 }

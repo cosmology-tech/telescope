@@ -3,11 +3,12 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../google/protobuf/any";
 import { Duration, DurationAmino, DurationSDKType } from "../google/protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../binary";
-import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
+import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial, fromBooleanToString, formatNumberWithThousandSeparator } from "../helpers";
 import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 import { DenomMetadata, TextualSigLine } from "../types";
+import { toByteTextual } from "../extern";
 export const protobufPackage = "misc";
 export interface EncodingTestForDontOmit {
   /** scalar */
@@ -1593,37 +1594,37 @@ export const EncodingTestForDontOmit = {
     }
     if (message.b !== undefined && message.b !== null) {
       results.push({
-        text: `B: ${message.b}`,
+        text: `B: ${fromBooleanToString(message.b)}`,
         indent: indent
       });
     }
     if (message.dOB !== undefined && message.dOB !== null) {
       results.push({
-        text: `D o b: ${message.dOB}`,
+        text: `D o b: ${fromBooleanToString(message.dOB)}`,
         indent: indent
       });
     }
     if (message.num !== undefined && message.num !== null) {
       results.push({
-        text: `Num: ${message.num}`,
+        text: `Num: ${formatNumberWithThousandSeparator(message.num)}`,
         indent: indent
       });
     }
     if (message.dONum !== undefined && message.dONum !== null) {
       results.push({
-        text: `D o num: ${message.dONum}`,
+        text: `D o num: ${formatNumberWithThousandSeparator(message.dONum)}`,
         indent: indent
       });
     }
     if (message.big !== undefined && message.big !== null) {
       results.push({
-        text: `Big: ${message.big}`,
+        text: `Big: ${formatNumberWithThousandSeparator(message.big)}`,
         indent: indent
       });
     }
     if (message.dOBig !== undefined && message.dOBig !== null) {
       results.push({
-        text: `D o big: ${message.dOBig}`,
+        text: `D o big: ${formatNumberWithThousandSeparator(message.dOBig)}`,
         indent: indent
       });
     }
@@ -1653,49 +1654,49 @@ export const EncodingTestForDontOmit = {
     }
     if (message.salt !== undefined && message.salt !== null) {
       results.push({
-        text: `Salt: ${message.salt}`,
+        text: `Salt: ${toByteTextual(message.salt)}`,
         indent: indent
       });
     }
     if (message.dOSalt !== undefined && message.dOSalt !== null) {
       results.push({
-        text: `D o salt: ${message.dOSalt}`,
+        text: `D o salt: ${toByteTextual(message.dOSalt)}`,
         indent: indent
       });
     }
     if (message.raw !== undefined && message.raw !== null) {
       results.push({
-        text: `Raw: ${message.raw}`,
+        text: `Raw: ${toByteTextual(message.raw)}`,
         indent: indent
       });
     }
     if (message.dORaw !== undefined && message.dORaw !== null) {
       results.push({
-        text: `D o raw: ${message.dORaw}`,
+        text: `D o raw: ${toByteTextual(message.dORaw)}`,
         indent: indent
       });
     }
     if (message.wasm !== undefined && message.wasm !== null) {
       results.push({
-        text: `Wasm: ${message.wasm}`,
+        text: `Wasm: ${toByteTextual(message.wasm)}`,
         indent: indent
       });
     }
     if (message.dOWasm !== undefined && message.dOWasm !== null) {
       results.push({
-        text: `D o wasm: ${message.dOWasm}`,
+        text: `D o wasm: ${toByteTextual(message.dOWasm)}`,
         indent: indent
       });
     }
     if (message.opt !== undefined && message.opt !== null) {
       results.push({
-        text: `Opt: ${message.opt}`,
+        text: `Opt: ${voteOptionToJSON(message.opt)}`,
         indent: indent
       });
     }
     if (message.dOOpt !== undefined && message.dOOpt !== null) {
       results.push({
-        text: `D o opt: ${message.dOOpt}`,
+        text: `D o opt: ${voteOptionToJSON(message.dOOpt)}`,
         indent: indent
       });
     }
@@ -1755,13 +1756,13 @@ export const EncodingTestForDontOmit = {
     message.dOAuths = object.dOAuths?.map(e => Any.toTextualSig(e)) || [];
     if (message.dec !== undefined && message.dec !== null) {
       results.push({
-        text: `Dec: ${message.dec}`,
+        text: `Dec: ${formatNumberWithThousandSeparator(message.dec)}`,
         indent: indent
       });
     }
     if (message.dODec !== undefined && message.dODec !== null) {
       results.push({
-        text: `D o dec: ${message.dODec}`,
+        text: `D o dec: ${formatNumberWithThousandSeparator(message.dODec)}`,
         indent: indent
       });
     }
@@ -2950,37 +2951,37 @@ export const EncodingTestForOmit = {
     }
     if (message.b !== undefined && message.b !== null) {
       results.push({
-        text: `B: ${message.b}`,
+        text: `B: ${fromBooleanToString(message.b)}`,
         indent: indent
       });
     }
     if (message.oB !== undefined && message.oB !== null) {
       results.push({
-        text: `O b: ${message.oB}`,
+        text: `O b: ${fromBooleanToString(message.oB)}`,
         indent: indent
       });
     }
     if (message.num !== undefined && message.num !== null) {
       results.push({
-        text: `Num: ${message.num}`,
+        text: `Num: ${formatNumberWithThousandSeparator(message.num)}`,
         indent: indent
       });
     }
     if (message.oNum !== undefined && message.oNum !== null) {
       results.push({
-        text: `O num: ${message.oNum}`,
+        text: `O num: ${formatNumberWithThousandSeparator(message.oNum)}`,
         indent: indent
       });
     }
     if (message.big !== undefined && message.big !== null) {
       results.push({
-        text: `Big: ${message.big}`,
+        text: `Big: ${formatNumberWithThousandSeparator(message.big)}`,
         indent: indent
       });
     }
     if (message.oBig !== undefined && message.oBig !== null) {
       results.push({
-        text: `O big: ${message.oBig}`,
+        text: `O big: ${formatNumberWithThousandSeparator(message.oBig)}`,
         indent: indent
       });
     }
@@ -3010,49 +3011,49 @@ export const EncodingTestForOmit = {
     }
     if (message.salt !== undefined && message.salt !== null) {
       results.push({
-        text: `Salt: ${message.salt}`,
+        text: `Salt: ${toByteTextual(message.salt)}`,
         indent: indent
       });
     }
     if (message.oSalt !== undefined && message.oSalt !== null) {
       results.push({
-        text: `O salt: ${message.oSalt}`,
+        text: `O salt: ${toByteTextual(message.oSalt)}`,
         indent: indent
       });
     }
     if (message.raw !== undefined && message.raw !== null) {
       results.push({
-        text: `Raw: ${message.raw}`,
+        text: `Raw: ${toByteTextual(message.raw)}`,
         indent: indent
       });
     }
     if (message.oRaw !== undefined && message.oRaw !== null) {
       results.push({
-        text: `O raw: ${message.oRaw}`,
+        text: `O raw: ${toByteTextual(message.oRaw)}`,
         indent: indent
       });
     }
     if (message.wasm !== undefined && message.wasm !== null) {
       results.push({
-        text: `Wasm: ${message.wasm}`,
+        text: `Wasm: ${toByteTextual(message.wasm)}`,
         indent: indent
       });
     }
     if (message.oWasm !== undefined && message.oWasm !== null) {
       results.push({
-        text: `O wasm: ${message.oWasm}`,
+        text: `O wasm: ${toByteTextual(message.oWasm)}`,
         indent: indent
       });
     }
     if (message.opt !== undefined && message.opt !== null) {
       results.push({
-        text: `Opt: ${message.opt}`,
+        text: `Opt: ${voteOptionToJSON(message.opt)}`,
         indent: indent
       });
     }
     if (message.oOpt !== undefined && message.oOpt !== null) {
       results.push({
-        text: `O opt: ${message.oOpt}`,
+        text: `O opt: ${voteOptionToJSON(message.oOpt)}`,
         indent: indent
       });
     }
@@ -3112,13 +3113,13 @@ export const EncodingTestForOmit = {
     message.oAuths = object.oAuths?.map(e => Any.toTextualSig(e)) || [];
     if (message.dec !== undefined && message.dec !== null) {
       results.push({
-        text: `Dec: ${message.dec}`,
+        text: `Dec: ${formatNumberWithThousandSeparator(message.dec)}`,
         indent: indent
       });
     }
     if (message.oDec !== undefined && message.oDec !== null) {
       results.push({
-        text: `O dec: ${message.oDec}`,
+        text: `O dec: ${formatNumberWithThousandSeparator(message.oDec)}`,
         indent: indent
       });
     }

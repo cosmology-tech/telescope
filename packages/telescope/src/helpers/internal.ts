@@ -233,6 +233,28 @@ export function fromJsonTimestamp(o: any): Timestamp {
   }
 }
 
+export function fromBooleanToString(bool) {
+  return bool ? 'True' : 'False';
+}
+
+export function formatNumberWithThousandSeparator(input: string | number | bigint): string {
+  const numStr = input.toString();
+
+  const parts = numStr.split('.');
+
+  const integerPart = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, "'");
+
+  if (parts.length > 1) {
+      const decimalPart = parts[1].replace(/0+$/, '');
+
+      if (decimalPart.length > 0) {
+          return \`\${integerPart}.\${decimalPart}\`;
+      }
+  }
+
+  return integerPart;
+}
+
 function numberToLong(number: number) {
     return Long.fromNumber(number);
 }${options.aminoEncoding?.customTypes?.useCosmosSDKDec ? `

@@ -4,6 +4,14 @@ export declare const MSG_VAR_NAME = "message";
 export declare const ARRAY_VAR_NAME = "results";
 export declare const toTextualSig: {
     scalar(args: ToTextualSigMethod, expr?: t.Expression | t.TSType): t.Statement;
+    /**
+     * create code for formatted scalar with formatter
+     * @param args
+     * @param formatter
+     * @param isFormatterFromUtilHelper is formatter from util helper. default is true
+     * @returns
+     */
+    formattedScalar(args: ToTextualSigMethod, formatter: string, isFormatterFromUtilHelper?: boolean): t.Statement;
     string(args: ToTextualSigMethod): t.Statement;
     bool(args: ToTextualSigMethod): t.Statement;
     number(args: ToTextualSigMethod): t.Statement;

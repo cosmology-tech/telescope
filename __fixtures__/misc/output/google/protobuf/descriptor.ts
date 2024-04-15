@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { DeepPartial, isSet, formatNumberWithThousandSeparator, fromBooleanToString, bytesFromBase64, base64FromBytes } from "../../helpers";
 import { DenomMetadata, TextualSigLine } from "../../types";
+import { toByteTextual } from "../../extern";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
@@ -3260,13 +3261,13 @@ export const DescriptorProto_ExtensionRange = {
     });
     if (message.start !== undefined && message.start !== null) {
       results.push({
-        text: `Start: ${message.start}`,
+        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
         indent: indent
       });
     }
     if (message.end !== undefined && message.end !== null) {
       results.push({
-        text: `End: ${message.end}`,
+        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
         indent: indent
       });
     }
@@ -3391,13 +3392,13 @@ export const DescriptorProto_ReservedRange = {
     });
     if (message.start !== undefined && message.start !== null) {
       results.push({
-        text: `Start: ${message.start}`,
+        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
         indent: indent
       });
     }
     if (message.end !== undefined && message.end !== null) {
       results.push({
-        text: `End: ${message.end}`,
+        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
         indent: indent
       });
     }
@@ -3767,19 +3768,19 @@ export const FieldDescriptorProto = {
     }
     if (message.number !== undefined && message.number !== null) {
       results.push({
-        text: `Number: ${message.number}`,
+        text: `Number: ${formatNumberWithThousandSeparator(message.number)}`,
         indent: indent
       });
     }
     if (message.label !== undefined && message.label !== null) {
       results.push({
-        text: `Label: ${message.label}`,
+        text: `Label: ${fieldDescriptorProto_LabelToJSON(message.label)}`,
         indent: indent
       });
     }
     if (message.type !== undefined && message.type !== null) {
       results.push({
-        text: `Type: ${message.type}`,
+        text: `Type: ${fieldDescriptorProto_TypeToJSON(message.type)}`,
         indent: indent
       });
     }
@@ -3803,7 +3804,7 @@ export const FieldDescriptorProto = {
     }
     if (message.oneofIndex !== undefined && message.oneofIndex !== null) {
       results.push({
-        text: `Oneof index: ${message.oneofIndex}`,
+        text: `Oneof index: ${formatNumberWithThousandSeparator(message.oneofIndex)}`,
         indent: indent
       });
     }
@@ -4272,13 +4273,13 @@ export const EnumDescriptorProto_EnumReservedRange = {
     });
     if (message.start !== undefined && message.start !== null) {
       results.push({
-        text: `Start: ${message.start}`,
+        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
         indent: indent
       });
     }
     if (message.end !== undefined && message.end !== null) {
       results.push({
-        text: `End: ${message.end}`,
+        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
         indent: indent
       });
     }
@@ -4422,7 +4423,7 @@ export const EnumValueDescriptorProto = {
     }
     if (message.number !== undefined && message.number !== null) {
       results.push({
-        text: `Number: ${message.number}`,
+        text: `Number: ${formatNumberWithThousandSeparator(message.number)}`,
         indent: indent
       });
     }
@@ -4796,13 +4797,13 @@ export const MethodDescriptorProto = {
     }
     if (message.clientStreaming !== undefined && message.clientStreaming !== null) {
       results.push({
-        text: `Client streaming: ${message.clientStreaming}`,
+        text: `Client streaming: ${fromBooleanToString(message.clientStreaming)}`,
         indent: indent
       });
     }
     if (message.serverStreaming !== undefined && message.serverStreaming !== null) {
       results.push({
-        text: `Server streaming: ${message.serverStreaming}`,
+        text: `Server streaming: ${fromBooleanToString(message.serverStreaming)}`,
         indent: indent
       });
     }
@@ -5266,25 +5267,25 @@ export const FileOptions = {
     }
     if (message.javaMultipleFiles !== undefined && message.javaMultipleFiles !== null) {
       results.push({
-        text: `Java multiple files: ${message.javaMultipleFiles}`,
+        text: `Java multiple files: ${fromBooleanToString(message.javaMultipleFiles)}`,
         indent: indent
       });
     }
     if (message.javaGenerateEqualsAndHash !== undefined && message.javaGenerateEqualsAndHash !== null) {
       results.push({
-        text: `Java generate equals and hash: ${message.javaGenerateEqualsAndHash}`,
+        text: `Java generate equals and hash: ${fromBooleanToString(message.javaGenerateEqualsAndHash)}`,
         indent: indent
       });
     }
     if (message.javaStringCheckUtf8 !== undefined && message.javaStringCheckUtf8 !== null) {
       results.push({
-        text: `Java string check utf8: ${message.javaStringCheckUtf8}`,
+        text: `Java string check utf8: ${fromBooleanToString(message.javaStringCheckUtf8)}`,
         indent: indent
       });
     }
     if (message.optimizeFor !== undefined && message.optimizeFor !== null) {
       results.push({
-        text: `Optimize for: ${message.optimizeFor}`,
+        text: `Optimize for: ${fileOptions_OptimizeModeToJSON(message.optimizeFor)}`,
         indent: indent
       });
     }
@@ -5296,37 +5297,37 @@ export const FileOptions = {
     }
     if (message.ccGenericServices !== undefined && message.ccGenericServices !== null) {
       results.push({
-        text: `Cc generic services: ${message.ccGenericServices}`,
+        text: `Cc generic services: ${fromBooleanToString(message.ccGenericServices)}`,
         indent: indent
       });
     }
     if (message.javaGenericServices !== undefined && message.javaGenericServices !== null) {
       results.push({
-        text: `Java generic services: ${message.javaGenericServices}`,
+        text: `Java generic services: ${fromBooleanToString(message.javaGenericServices)}`,
         indent: indent
       });
     }
     if (message.pyGenericServices !== undefined && message.pyGenericServices !== null) {
       results.push({
-        text: `Py generic services: ${message.pyGenericServices}`,
+        text: `Py generic services: ${fromBooleanToString(message.pyGenericServices)}`,
         indent: indent
       });
     }
     if (message.phpGenericServices !== undefined && message.phpGenericServices !== null) {
       results.push({
-        text: `Php generic services: ${message.phpGenericServices}`,
+        text: `Php generic services: ${fromBooleanToString(message.phpGenericServices)}`,
         indent: indent
       });
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
     if (message.ccEnableArenas !== undefined && message.ccEnableArenas !== null) {
       results.push({
-        text: `Cc enable arenas: ${message.ccEnableArenas}`,
+        text: `Cc enable arenas: ${fromBooleanToString(message.ccEnableArenas)}`,
         indent: indent
       });
     }
@@ -5549,25 +5550,25 @@ export const MessageOptions = {
     });
     if (message.messageSetWireFormat !== undefined && message.messageSetWireFormat !== null) {
       results.push({
-        text: `Message set wire format: ${message.messageSetWireFormat}`,
+        text: `Message set wire format: ${fromBooleanToString(message.messageSetWireFormat)}`,
         indent: indent
       });
     }
     if (message.noStandardDescriptorAccessor !== undefined && message.noStandardDescriptorAccessor !== null) {
       results.push({
-        text: `No standard descriptor accessor: ${message.noStandardDescriptorAccessor}`,
+        text: `No standard descriptor accessor: ${fromBooleanToString(message.noStandardDescriptorAccessor)}`,
         indent: indent
       });
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
     if (message.mapEntry !== undefined && message.mapEntry !== null) {
       results.push({
-        text: `Map entry: ${message.mapEntry}`,
+        text: `Map entry: ${fromBooleanToString(message.mapEntry)}`,
         indent: indent
       });
     }
@@ -5782,37 +5783,37 @@ export const FieldOptions = {
     });
     if (message.ctype !== undefined && message.ctype !== null) {
       results.push({
-        text: `Ctype: ${message.ctype}`,
+        text: `Ctype: ${fieldOptions_CTypeToJSON(message.ctype)}`,
         indent: indent
       });
     }
     if (message.packed !== undefined && message.packed !== null) {
       results.push({
-        text: `Packed: ${message.packed}`,
+        text: `Packed: ${fromBooleanToString(message.packed)}`,
         indent: indent
       });
     }
     if (message.jstype !== undefined && message.jstype !== null) {
       results.push({
-        text: `Jstype: ${message.jstype}`,
+        text: `Jstype: ${fieldOptions_JSTypeToJSON(message.jstype)}`,
         indent: indent
       });
     }
     if (message.lazy !== undefined && message.lazy !== null) {
       results.push({
-        text: `Lazy: ${message.lazy}`,
+        text: `Lazy: ${fromBooleanToString(message.lazy)}`,
         indent: indent
       });
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
     if (message.weak !== undefined && message.weak !== null) {
       results.push({
-        text: `Weak: ${message.weak}`,
+        text: `Weak: ${fromBooleanToString(message.weak)}`,
         indent: indent
       });
     }
@@ -6066,13 +6067,13 @@ export const EnumOptions = {
     });
     if (message.allowAlias !== undefined && message.allowAlias !== null) {
       results.push({
-        text: `Allow alias: ${message.allowAlias}`,
+        text: `Allow alias: ${fromBooleanToString(message.allowAlias)}`,
         indent: indent
       });
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
@@ -6202,7 +6203,7 @@ export const EnumValueOptions = {
     });
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
@@ -6332,7 +6333,7 @@ export const ServiceOptions = {
     });
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
@@ -6479,13 +6480,13 @@ export const MethodOptions = {
     });
     if (message.deprecated !== undefined && message.deprecated !== null) {
       results.push({
-        text: `Deprecated: ${message.deprecated}`,
+        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
         indent: indent
       });
     }
     if (message.idempotencyLevel !== undefined && message.idempotencyLevel !== null) {
       results.push({
-        text: `Idempotency level: ${message.idempotencyLevel}`,
+        text: `Idempotency level: ${methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel)}`,
         indent: indent
       });
     }
@@ -6711,25 +6712,25 @@ export const UninterpretedOption = {
     }
     if (message.positiveIntValue !== undefined && message.positiveIntValue !== null) {
       results.push({
-        text: `Positive int value: ${message.positiveIntValue}`,
+        text: `Positive int value: ${formatNumberWithThousandSeparator(message.positiveIntValue)}`,
         indent: indent
       });
     }
     if (message.negativeIntValue !== undefined && message.negativeIntValue !== null) {
       results.push({
-        text: `Negative int value: ${message.negativeIntValue}`,
+        text: `Negative int value: ${formatNumberWithThousandSeparator(message.negativeIntValue)}`,
         indent: indent
       });
     }
     if (message.doubleValue !== undefined && message.doubleValue !== null) {
       results.push({
-        text: `Double value: ${message.doubleValue}`,
+        text: `Double value: ${formatNumberWithThousandSeparator(message.doubleValue)}`,
         indent: indent
       });
     }
     if (message.stringValue !== undefined && message.stringValue !== null) {
       results.push({
-        text: `String value: ${message.stringValue}`,
+        text: `String value: ${toByteTextual(message.stringValue)}`,
         indent: indent
       });
     }
@@ -6860,7 +6861,7 @@ export const UninterpretedOption_NamePart = {
     }
     if (message.isExtension !== undefined && message.isExtension !== null) {
       results.push({
-        text: `Is extension: ${message.isExtension}`,
+        text: `Is extension: ${fromBooleanToString(message.isExtension)}`,
         indent: indent
       });
     }
@@ -7480,13 +7481,13 @@ export const GeneratedCodeInfo_Annotation = {
     }
     if (message.begin !== undefined && message.begin !== null) {
       results.push({
-        text: `Begin: ${message.begin}`,
+        text: `Begin: ${formatNumberWithThousandSeparator(message.begin)}`,
         indent: indent
       });
     }
     if (message.end !== undefined && message.end !== null) {
       results.push({
-        text: `End: ${message.end}`,
+        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
         indent: indent
       });
     }
@@ -7588,7 +7589,7 @@ export const FeatureSet = {
     });
     if (message.utf8Validation !== undefined && message.utf8Validation !== null) {
       results.push({
-        text: `Utf8 validation: ${message.utf8Validation}`,
+        text: `Utf8 validation: ${featureSet_Utf8ValidationToJSON(message.utf8Validation)}`,
         indent: indent
       });
     }

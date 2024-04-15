@@ -58,7 +58,7 @@
     "@chain-registry/client": "1.11.0",
     "@confio/relayer": "0.7.0",
     "@cosmjs/cosmwasm-stargate": "0.29.4",
-    "@cosmjs/crypto": "0.29.4",
+    "@cosmjs/crypto": "0.32.0",
     "@cosmology/telescope": "^1.5.4",
     "@protobufs/confio": "^0.0.6",
     "@protobufs/cosmos": "^0.0.11",

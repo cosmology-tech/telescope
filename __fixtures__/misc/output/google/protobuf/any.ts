@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
 import { DenomMetadata, TextualSigLine } from "../../types";
+import { toByteTextual } from "../../extern";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -442,7 +443,7 @@ export const Any = {
     }
     if (message.value !== undefined && message.value !== null) {
       results.push({
-        text: `Value: ${message.value}`,
+        text: `Value: ${toByteTextual(message.value)}`,
         indent: indent
       });
     }

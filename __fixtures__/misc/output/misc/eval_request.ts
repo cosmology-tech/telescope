@@ -1,7 +1,7 @@
 import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
 import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, DeepPartial, isObject } from "../helpers";
+import { isSet, DeepPartial, isObject, formatNumberWithThousandSeparator, fromBooleanToString } from "../helpers";
 import { DenomMetadata, TextualSigLine } from "../types";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
@@ -814,7 +814,7 @@ export const EvalRequest = {
     }, {});
     if (message.testNum !== undefined && message.testNum !== null) {
       results.push({
-        text: `Test num: ${message.testNum}`,
+        text: `Test num: ${formatNumberWithThousandSeparator(message.testNum)}`,
         indent: indent
       });
     }
@@ -826,7 +826,7 @@ export const EvalRequest = {
     }
     if (message.testBool !== undefined && message.testBool !== null) {
       results.push({
-        text: `Test bool: ${message.testBool}`,
+        text: `Test bool: ${fromBooleanToString(message.testBool)}`,
         indent: indent
       });
     }
@@ -851,7 +851,7 @@ export const EvalRequest = {
     message.testArray = object.testArray?.map(e => e) || [];
     if (message.opt !== undefined && message.opt !== null) {
       results.push({
-        text: `Opt: ${message.opt}`,
+        text: `Opt: ${featureSet_Utf8ValidationToJSON(message.opt)}`,
         indent: indent
       });
     }
