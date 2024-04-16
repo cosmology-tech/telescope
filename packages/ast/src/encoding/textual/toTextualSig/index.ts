@@ -3,7 +3,13 @@ import { identifier, objectMethod } from "../../../utils";
 import { getFieldOptionality, getOneOfs } from "../../proto";
 import { ProtoParseContext } from "../../context";
 import { ProtoType, ProtoField } from "@cosmology/types";
-import { arrayTypes, toTextualSig, ARRAY_VAR_NAME, MSG_VAR_NAME } from "./utils";
+import {
+    arrayTypes,
+    toTextualSig,
+    ARRAY_VAR_NAME,
+    MSG_VAR_NAME,
+    TEXTUAL_METHOD_NAME,
+} from "./utils";
 import { getPushTextualSigLine } from "../../../encoding/types";
 
 const needsImplementation = (name: string, field: ProtoField) => {
@@ -165,6 +171,7 @@ export const toTextualSigMethod = (
     proto: ProtoType
 ) => {
     context.addUtil("DenomMetadata");
+    context.addUtil("ITextualSigLine");
     context.addUtil("TextualSigLine");
 
     const fields = toTextualSigMethodFields(context, name, proto);
@@ -175,13 +182,27 @@ export const toTextualSigMethod = (
 
     return objectMethod(
         "method",
-        t.identifier("toTextualSig"),
+        t.identifier(TEXTUAL_METHOD_NAME),
         [
             identifier(
                 varName,
                 t.tsTypeAnnotation(t.tsTypeReference(t.identifier(name)))
             ),
+            identifier(
+                ARRAY_VAR_NAME,
+                t.tsTypeAnnotation(
+                    t.tsArrayType(
+                        t.tsTypeReference(t.identifier("ITextualSigLine"))
+                    )
+                ),
+                true
+            ),
             identifier("indent", t.tsTypeAnnotation(t.tsNumberKeyword()), true),
+            identifier(
+                "expert",
+                t.tsTypeAnnotation(t.tsBooleanKeyword()),
+                true
+            ),
             identifier(
                 "metadata",
                 t.tsTypeAnnotation(
@@ -193,26 +214,21 @@ export const toTextualSigMethod = (
             ),
         ],
         t.blockStatement([
-            t.variableDeclaration("const", [
-                t.variableDeclarator(
-                    identifier(
-                        ARRAY_VAR_NAME,
-                        t.tsTypeAnnotation(
-                            t.tsArrayType(
-                                t.tsTypeReference(
-                                    t.identifier("TextualSigLine")
-                                )
-                            )
-                        )
-                    ),
-                    t.arrayExpression([])
-                ),
-            ]),
+            t.expressionStatement(
+                t.assignmentExpression(
+                    "=",
+                    t.identifier(ARRAY_VAR_NAME),
+                    t.logicalExpression(
+                        "??",
+                        t.identifier(ARRAY_VAR_NAME),
+                        t.arrayExpression([])
+                    )
+                )
+            ),
 
             getPushTextualSigLine(
                 ARRAY_VAR_NAME,
-                t.stringLiteral(`${name} object`),
-                t.identifier("indent")
+                t.stringLiteral(`${name} object`)
             ),
 
             ...fields,
@@ -224,7 +240,7 @@ export const toTextualSigMethod = (
         false,
         false,
         t.tsTypeAnnotation(
-            t.tsArrayType(t.tsTypeReference(t.identifier("TextualSigLine")))
+            t.tsArrayType(t.tsTypeReference(t.identifier("ITextualSigLine")))
         )
     );
 };

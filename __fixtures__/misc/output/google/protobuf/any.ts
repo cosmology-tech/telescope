@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
-import { DenomMetadata, TextualSigLine } from "../../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../types";
 import { toByteTextual } from "../../extern";
 export const protobufPackage = "google.protobuf";
 /**
@@ -429,23 +429,14 @@ export const Any = {
       value: Any.encode(message).finish()
     };
   },
-  toTextualSig(message: Any, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "Any object",
-      indent: indent
-    });
+  toTextualSig(message: Any, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Any object", indent, expert));
     if (message.typeUrl !== undefined && message.typeUrl !== null) {
-      results.push({
-        text: `Type url: ${message.typeUrl}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Type url: ${message.typeUrl}`, indent, expert).indentAdd(1));
     }
     if (message.value !== undefined && message.value !== null) {
-      results.push({
-        text: `Value: ${toByteTextual(message.value)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Value: ${toByteTextual(message.value)}`, indent, expert).indentAdd(1));
     }
     return results;
   }

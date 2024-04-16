@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
@@ -288,6 +289,17 @@ export const InterfaceDescriptor = {
       typeUrl: "/cosmos_proto.InterfaceDescriptor",
       value: InterfaceDescriptor.encode(message).finish()
     };
+  },
+  toTextualSig(message: InterfaceDescriptor, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("InterfaceDescriptor object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.description !== undefined && message.description !== null) {
+      results.push(new TextualSigLine(`Description: ${message.description}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(InterfaceDescriptor.typeUrl, InterfaceDescriptor);
@@ -439,6 +451,18 @@ export const ScalarDescriptor = {
       typeUrl: "/cosmos_proto.ScalarDescriptor",
       value: ScalarDescriptor.encode(message).finish()
     };
+  },
+  toTextualSig(message: ScalarDescriptor, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ScalarDescriptor object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.description !== undefined && message.description !== null) {
+      results.push(new TextualSigLine(`Description: ${message.description}`, indent, expert).indentAdd(1));
+    }
+    message.fieldType = object.fieldType?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(ScalarDescriptor.typeUrl, ScalarDescriptor);

@@ -29,7 +29,7 @@ export declare const getTSTypeForAmino: (context: GenericParseContext, field: Pr
 export declare const getTSTypeForProto: (context: GenericParseContext, field: ProtoField) => t.TSBooleanKeyword | t.TSNumberKeyword | t.TSStringKeyword | t.TSTypeReference;
 export declare const getDefaultTSTypeFromProtoType: (context: ProtoParseContext, field: ProtoField, isOneOf: boolean, useNullForOptionals?: boolean) => t.Expression;
 export declare const getDefaultTSTypeFromAminoTypeDefault: (context: ProtoParseContext, field: ProtoField) => t.CallExpression;
-export declare const getPushTextualSigLine: (arrayVar: string, textExp: t.Expression | t.PatternLike, indentExp: t.Expression | t.PatternLike, expert?: boolean) => t.ExpressionStatement;
+export declare const getPushTextualSigLine: (arrayVar: string, textExp: t.Expression, indentInc?: number) => t.ExpressionStatement;
 /**
  * Get the textual key name
  *

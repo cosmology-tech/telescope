@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../types";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.base.v1beta1";
 /**
@@ -237,6 +238,17 @@ export const Coin = {
       typeUrl: "/cosmos.base.v1beta1.Coin",
       value: Coin.encode(message).finish()
     };
+  },
+  toTextualSig(message: Coin, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Coin object", indent, expert));
+    if (message.denom !== undefined && message.denom !== null) {
+      results.push(new TextualSigLine(`Denom: ${message.denom}`, indent, expert).indentAdd(1));
+    }
+    if (message.amount !== undefined && message.amount !== null) {
+      results.push(new TextualSigLine(`Amount: ${message.amount}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(Coin.typeUrl, Coin);
@@ -360,6 +372,17 @@ export const DecCoin = {
       typeUrl: "/cosmos.base.v1beta1.DecCoin",
       value: DecCoin.encode(message).finish()
     };
+  },
+  toTextualSig(message: DecCoin, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DecCoin object", indent, expert));
+    if (message.denom !== undefined && message.denom !== null) {
+      results.push(new TextualSigLine(`Denom: ${message.denom}`, indent, expert).indentAdd(1));
+    }
+    if (message.amount !== undefined && message.amount !== null) {
+      results.push(new TextualSigLine(`Amount: ${message.amount}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DecCoin.typeUrl, DecCoin);
@@ -466,6 +489,14 @@ export const IntProto = {
       typeUrl: "/cosmos.base.v1beta1.IntProto",
       value: IntProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: IntProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("IntProto object", indent, expert));
+    if (message.int !== undefined && message.int !== null) {
+      results.push(new TextualSigLine(`Int: ${message.int}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(IntProto.typeUrl, IntProto);
@@ -572,6 +603,14 @@ export const DecProto = {
       typeUrl: "/cosmos.base.v1beta1.DecProto",
       value: DecProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: DecProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DecProto object", indent, expert));
+    if (message.dec !== undefined && message.dec !== null) {
+      results.push(new TextualSigLine(`Dec: ${message.dec}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DecProto.typeUrl, DecProto);

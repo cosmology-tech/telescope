@@ -86,11 +86,13 @@ export declare const UTILS: {
     TelescopeGeneratedType: string;
     GlobalDecoderRegistry: string;
     DenomMetadata: string;
+    ITextualSigLine: string;
     TextualSigLine: string;
     fromBooleanToString: string;
     formatNumberWithThousandSeparator: string;
-    toHex: string;
     toByteTextual: string;
+    toDurationTextual: string;
+    toTimestampTextual: string;
 };
 export declare const UTIL_HELPERS: string[];
 export declare const fixlocalpaths: (imports: ImportObj[]) => {

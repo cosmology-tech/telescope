@@ -255,6 +255,47 @@ export function formatNumberWithThousandSeparator(input: string | number | bigin
   return integerPart;
 }
 
+function toDurationTextual(duration: Duration): string {
+  let totalSeconds = Number(duration.seconds);
+  const nanos = duration.nanos;
+  let sign = totalSeconds < 0;
+
+  totalSeconds = Math.abs(totalSeconds);
+  let absNanos = Math.abs(nanos);
+
+  const days = Math.floor(totalSeconds / 86400);
+  totalSeconds %= 86400;
+  const hours = Math.floor(totalSeconds / 3600);
+  totalSeconds %= 3600;
+  const minutes = Math.floor(totalSeconds / 60);
+  const seconds = totalSeconds % 60;
+
+  const fractionalSeconds = seconds + absNanos / 1e9;
+
+  let result = "";
+  if (days > 0) result += \`\${days} day\${days > 1 ? "s" : ""}\`;
+  if (hours > 0) result += \`\${result ? ", " : ""}\${hours} hour\${hours > 1 ? "s" : ""}\`;
+  if (minutes > 0) result += \`\${result ? ", " : ""}\${minutes} minute\${minutes > 1 ? "s" : ""}\`;
+  if (seconds > 0 || nanos !== 0) {
+    result += \`\${result ? ", " : ""}\${fractionalSeconds.toFixed(3)} second\${fractionalSeconds !== 1 ? "s" : ""}\`;
+  }
+
+  if (result === "") result = "0 seconds"; // handle zero duration
+  return (sign < 0 ? "-" : "") + result;
+}
+
+function toTimestampTextual(timestamp: Timestamp): string {
+  const date = new Date(Number(timestamp.seconds * BigInt(1000)) );
+
+  const formattedDate = date.toISOString().replace('Z', '');
+  const baseDate = formattedDate.substring(0, formattedDate.length - 4);
+
+  const fractionalSeconds = (date.getMilliseconds() * 1e6 + timestamp.nanos) / 1e9;
+  const secondsWithFraction = fractionalSeconds.toFixed(3);
+
+  return \`\${baseDate}\${secondsWithFraction}Z\`;
+}
+
 function numberToLong(number: number) {
     return Long.fromNumber(number);
 }${options.aminoEncoding?.customTypes?.useCosmosSDKDec ? `

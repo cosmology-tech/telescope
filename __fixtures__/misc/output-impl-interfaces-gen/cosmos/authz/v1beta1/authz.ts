@@ -3,7 +3,8 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { DepositDeploymentAuthorization, DepositDeploymentAuthorizationProtoMsg, DepositDeploymentAuthorizationSDKType } from "../../../akash/deployment/v1beta1/authz";
 import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType } from "../../bank/v1beta1/authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, toTimestampTextual } from "../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../types";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
@@ -335,6 +336,14 @@ export const GenericAuthorization = {
       typeUrl: "/cosmos.authz.v1beta1.GenericAuthorization",
       value: GenericAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: GenericAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GenericAuthorization object", indent, expert));
+    if (message.msg !== undefined && message.msg !== null) {
+      results.push(new TextualSigLine(`Msg: ${message.msg}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);
@@ -523,6 +532,24 @@ export const Grant = {
       typeUrl: "/cosmos.authz.v1beta1.Grant",
       value: Grant.encode(message).finish()
     };
+  },
+  toTextualSig(message: Grant, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Grant object", indent, expert));
+    if (message.authorization !== undefined && message.authorization !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.authorization, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.expiration !== undefined && message.expiration !== null) {
+      results.push(new TextualSigLine(`Expiration: ${toTimestampTextual(message.expiration)}`, indent, expert).indentAdd(1));
+    }
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push(new TextualSigLine(`Opt: ${voteOptionToJSON(message.opt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.singleMsg !== undefined && message.singleMsg !== null) {
+      Any.toTextualSig(message.singleMsg, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    message.messages = object.messages?.map(e => Any.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(Grant.typeUrl, Grant);
@@ -682,6 +709,23 @@ export const GrantAuthorization = {
       typeUrl: "/cosmos.authz.v1beta1.GrantAuthorization",
       value: GrantAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: GrantAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GrantAuthorization object", indent, expert));
+    if (message.granter !== undefined && message.granter !== null) {
+      results.push(new TextualSigLine(`Granter: ${message.granter}`, indent, expert).indentAdd(1));
+    }
+    if (message.grantee !== undefined && message.grantee !== null) {
+      results.push(new TextualSigLine(`Grantee: ${message.grantee}`, indent, expert).indentAdd(1));
+    }
+    if (message.authorization !== undefined && message.authorization !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.authorization, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.expiration !== undefined && message.expiration !== null) {
+      results.push(new TextualSigLine(`Expiration: ${toTimestampTextual(message.expiration)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GrantAuthorization.typeUrl, GrantAuthorization);
@@ -798,6 +842,12 @@ export const GrantQueueItem = {
       typeUrl: "/cosmos.authz.v1beta1.GrantQueueItem",
       value: GrantQueueItem.encode(message).finish()
     };
+  },
+  toTextualSig(message: GrantQueueItem, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GrantQueueItem object", indent, expert));
+    message.msgTypeUrls = object.msgTypeUrls?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GrantQueueItem.typeUrl, GrantQueueItem);
@@ -914,6 +964,12 @@ export const Grants = {
       typeUrl: "/cosmos.authz.v1beta1.Grants",
       value: Grants.encode(message).finish()
     };
+  },
+  toTextualSig(message: Grants, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Grants object", indent, expert));
+    message.authorization = object.authorization?.map(e => (GlobalDecoderRegistry.toTextualSig(e) as any)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(Grants.typeUrl, Grants);

@@ -89,12 +89,14 @@ export const UTILS = {
   TelescopeGeneratedType: '__types__',
   GlobalDecoderRegistry: '__registry__',
   DenomMetadata: '__types__',
+  ITextualSigLine: '__types__',
   TextualSigLine: '__types__',
 
   fromBooleanToString: '__helpers__',
   formatNumberWithThousandSeparator: '__helpers__',
-  toHex: '__extern__',
   toByteTextual: '__extern__',
+  toDurationTextual: '__helpers__',
+  toTimestampTextual: '__helpers__',
 };
 
 export const UTIL_HELPERS = [

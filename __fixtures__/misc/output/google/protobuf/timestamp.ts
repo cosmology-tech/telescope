@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp, formatNumberWithThousandSeparator } from "../../helpers";
-import { DenomMetadata, TextualSigLine } from "../../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../types";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -378,23 +378,14 @@ export const Timestamp = {
       value: Timestamp.encode(message).finish()
     };
   },
-  toTextualSig(message: Timestamp, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "Timestamp object",
-      indent: indent
-    });
+  toTextualSig(message: Timestamp, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Timestamp object", indent, expert));
     if (message.seconds !== undefined && message.seconds !== null) {
-      results.push({
-        text: `Seconds: ${formatNumberWithThousandSeparator(message.seconds)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Seconds: ${formatNumberWithThousandSeparator(message.seconds)}`, indent, expert).indentAdd(1));
     }
     if (message.nanos !== undefined && message.nanos !== null) {
-      results.push({
-        text: `Nanos: ${formatNumberWithThousandSeparator(message.nanos)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Nanos: ${formatNumberWithThousandSeparator(message.nanos)}`, indent, expert).indentAdd(1));
     }
     return results;
   }

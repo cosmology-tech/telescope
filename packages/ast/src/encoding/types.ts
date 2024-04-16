@@ -582,25 +582,26 @@ function getPackage(field: ProtoField) {
 
 export const getPushTextualSigLine = (
     arrayVar: string,
-    textExp: t.Expression | t.PatternLike,
-    indentExp: t.Expression | t.PatternLike,
-    expert?: boolean
+    textExp: t.Expression,
+    indentInc?: number
 ) => {
-    const textualSigObjProps = [
-        t.objectProperty(t.identifier("text"), textExp),
-        t.objectProperty(t.identifier("indent"), indentExp),
-    ];
+    const newClass = t.newExpression(t.identifier("TextualSigLine"), [
+        textExp,
+        t.identifier("indent"),
+        t.identifier("expert"),
+    ]);
 
-    if (expert) {
-        textualSigObjProps.push(
-            t.objectProperty(t.identifier("expert"), t.booleanLiteral(true))
-        );
-    }
+    const pushedObj = indentInc
+        ? t.callExpression(
+              t.memberExpression(newClass, t.identifier("indentAdd")),
+              [t.numericLiteral(indentInc)]
+          )
+        : newClass;
 
     return t.expressionStatement(
         t.callExpression(
             t.memberExpression(t.identifier(arrayVar), t.identifier("push")),
-            [t.objectExpression(textualSigObjProps)]
+            [pushedObj]
         )
     );
 };

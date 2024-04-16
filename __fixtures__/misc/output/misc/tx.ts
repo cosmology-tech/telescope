@@ -1,7 +1,7 @@
 import { EncodingTestForDontOmit, EncodingTestForDontOmitAmino, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitAmino, EncodingTestForOmitSDKType } from "./all_fields";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
-import { DenomMetadata, TextualSigLine } from "../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 export const protobufPackage = "misc";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -157,23 +157,14 @@ export const InputMsg = {
       value: InputMsg.encode(message).finish()
     };
   },
-  toTextualSig(message: InputMsg, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "InputMsg object",
-      indent: indent
-    });
+  toTextualSig(message: InputMsg, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("InputMsg object", indent, expert));
     if (message.dOTests !== undefined && message.dOTests !== null) {
-      results.push({
-        text: `D o tests: ${message.dOTests}`,
-        indent: indent
-      });
+      EncodingTestForDontOmit.toTextualSig(message.dOTests, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.oTests !== undefined && message.oTests !== null) {
-      results.push({
-        text: `O tests: ${message.oTests}`,
-        indent: indent
-      });
+      EncodingTestForOmit.toTextualSig(message.oTests, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -245,12 +236,9 @@ export const MsgResponse = {
       value: MsgResponse.encode(message).finish()
     };
   },
-  toTextualSig(_: MsgResponse, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "MsgResponse object",
-      indent: indent
-    });
+  toTextualSig(_: MsgResponse, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MsgResponse object", indent, expert));
     return results;
   }
 };

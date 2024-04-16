@@ -2,7 +2,7 @@ import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSD
 import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject, formatNumberWithThousandSeparator, fromBooleanToString } from "../helpers";
-import { DenomMetadata, TextualSigLine } from "../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -301,23 +301,14 @@ export const EvalRequest_BindingsEntry = {
   toProto(message: EvalRequest_BindingsEntry): Uint8Array {
     return EvalRequest_BindingsEntry.encode(message).finish();
   },
-  toTextualSig(message: EvalRequest_BindingsEntry, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EvalRequest_BindingsEntry object",
-      indent: indent
-    });
+  toTextualSig(message: EvalRequest_BindingsEntry, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest_BindingsEntry object", indent, expert));
     if (message.key !== undefined && message.key !== null) {
-      results.push({
-        text: `Key: ${message.key}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Key: ${message.key}`, indent, expert).indentAdd(1));
     }
     if (message.value !== undefined && message.value !== null) {
-      results.push({
-        text: `Value: ${message.value}`,
-        indent: indent
-      });
+      ExprValue.toTextualSig(message.value, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -421,23 +412,14 @@ export const EvalRequest_RefsEntry = {
   toProto(message: EvalRequest_RefsEntry): Uint8Array {
     return EvalRequest_RefsEntry.encode(message).finish();
   },
-  toTextualSig(message: EvalRequest_RefsEntry, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EvalRequest_RefsEntry object",
-      indent: indent
-    });
+  toTextualSig(message: EvalRequest_RefsEntry, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest_RefsEntry object", indent, expert));
     if (message.key !== undefined && message.key !== null) {
-      results.push({
-        text: `Key: ${message.key}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Key: ${message.key}`, indent, expert).indentAdd(1));
     }
     if (message.value !== undefined && message.value !== null) {
-      results.push({
-        text: `Value: ${message.value}`,
-        indent: indent
-      });
+      IdRef.toTextualSig(message.value, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -790,70 +772,36 @@ export const EvalRequest = {
       value: EvalRequest.encode(message).finish()
     };
   },
-  toTextualSig(message: EvalRequest, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EvalRequest object",
-      indent: indent
-    });
-    message.bindings = Object.entries(object.bindings ?? {}).reduce<{
-      [key: string]: ExprValue;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = ExprValue.toTextualSig(value);
-      }
-      return acc;
-    }, {});
-    message.refs = Object.entries(object.refs ?? {}).reduce<{
-      [key: string]: IdRef;
-    }>((acc, [key, value]) => {
-      if (value !== undefined) {
-        acc[key] = IdRef.toTextualSig(value);
-      }
-      return acc;
-    }, {});
+  toTextualSig(message: EvalRequest, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest object", indent, expert));
+    if (message.bindings !== undefined && message.bindings !== null) {
+      results.push(new TextualSigLine(`Bindings: ${message.bindings}`, indent, expert).indentAdd(1));
+    }
+    if (message.refs !== undefined && message.refs !== null) {
+      results.push(new TextualSigLine(`Refs: ${message.refs}`, indent, expert).indentAdd(1));
+    }
     if (message.testNum !== undefined && message.testNum !== null) {
-      results.push({
-        text: `Test num: ${formatNumberWithThousandSeparator(message.testNum)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Test num: ${formatNumberWithThousandSeparator(message.testNum)}`, indent, expert).indentAdd(1));
     }
     if (message.testString !== undefined && message.testString !== null) {
-      results.push({
-        text: `Test string: ${message.testString}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Test string: ${message.testString}`, indent, expert).indentAdd(1));
     }
     if (message.testBool !== undefined && message.testBool !== null) {
-      results.push({
-        text: `Test bool: ${fromBooleanToString(message.testBool)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Test bool: ${fromBooleanToString(message.testBool)}`, indent, expert).indentAdd(1));
     }
     if (message.instantiatePermission !== undefined && message.instantiatePermission !== null) {
-      results.push({
-        text: `Instantiate permission: ${message.instantiatePermission}`,
-        indent: indent
-      });
+      AccessConfig.toTextualSig(message.instantiatePermission, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.id !== undefined && message.id !== null) {
-      results.push({
-        text: `Id: ${message.id}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Id: ${message.id}`, indent, expert).indentAdd(1));
     }
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     message.testArray = object.testArray?.map(e => e) || [];
     if (message.opt !== undefined && message.opt !== null) {
-      results.push({
-        text: `Opt: ${featureSet_Utf8ValidationToJSON(message.opt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Opt: ${featureSet_Utf8ValidationToJSON(message.opt)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -945,17 +893,11 @@ export const AccessConfig = {
       value: AccessConfig.encode(message).finish()
     };
   },
-  toTextualSig(message: AccessConfig, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "AccessConfig object",
-      indent: indent
-    });
+  toTextualSig(message: AccessConfig, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("AccessConfig object", indent, expert));
     if (message.sender !== undefined && message.sender !== null) {
-      results.push({
-        text: `Sender: ${message.sender}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Sender: ${message.sender}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -1047,17 +989,11 @@ export const GenericAuthorization = {
       value: GenericAuthorization.encode(message).finish()
     };
   },
-  toTextualSig(message: GenericAuthorization, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "GenericAuthorization object",
-      indent: indent
-    });
+  toTextualSig(message: GenericAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GenericAuthorization object", indent, expert));
     if (message.msg !== undefined && message.msg !== null) {
-      results.push({
-        text: `Msg: ${message.msg}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Msg: ${message.msg}`, indent, expert).indentAdd(1));
     }
     return results;
   }

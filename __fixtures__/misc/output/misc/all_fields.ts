@@ -3,11 +3,11 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../google/protobuf/any";
 import { Duration, DurationAmino, DurationSDKType } from "../google/protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../binary";
-import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial, fromBooleanToString, formatNumberWithThousandSeparator } from "../helpers";
+import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial, fromBooleanToString, formatNumberWithThousandSeparator, toDurationTextual, toTimestampTextual } from "../helpers";
 import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
-import { DenomMetadata, TextualSigLine } from "../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 import { toByteTextual } from "../extern";
 export const protobufPackage = "misc";
 export interface EncodingTestForDontOmit {
@@ -1574,167 +1574,86 @@ export const EncodingTestForDontOmit = {
       value: EncodingTestForDontOmit.encode(message).finish()
     };
   },
-  toTextualSig(message: EncodingTestForDontOmit, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EncodingTestForDontOmit object",
-      indent: indent
-    });
+  toTextualSig(message: EncodingTestForDontOmit, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EncodingTestForDontOmit object", indent, expert));
     if (message.str !== undefined && message.str !== null) {
-      results.push({
-        text: `Str: ${message.str}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Str: ${message.str}`, indent, expert).indentAdd(1));
     }
     if (message.dOStr !== undefined && message.dOStr !== null) {
-      results.push({
-        text: `D o str: ${message.dOStr}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o str: ${message.dOStr}`, indent, expert).indentAdd(1));
     }
     if (message.b !== undefined && message.b !== null) {
-      results.push({
-        text: `B: ${fromBooleanToString(message.b)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`B: ${fromBooleanToString(message.b)}`, indent, expert).indentAdd(1));
     }
     if (message.dOB !== undefined && message.dOB !== null) {
-      results.push({
-        text: `D o b: ${fromBooleanToString(message.dOB)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o b: ${fromBooleanToString(message.dOB)}`, indent, expert).indentAdd(1));
     }
     if (message.num !== undefined && message.num !== null) {
-      results.push({
-        text: `Num: ${formatNumberWithThousandSeparator(message.num)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Num: ${formatNumberWithThousandSeparator(message.num)}`, indent, expert).indentAdd(1));
     }
     if (message.dONum !== undefined && message.dONum !== null) {
-      results.push({
-        text: `D o num: ${formatNumberWithThousandSeparator(message.dONum)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o num: ${formatNumberWithThousandSeparator(message.dONum)}`, indent, expert).indentAdd(1));
     }
     if (message.big !== undefined && message.big !== null) {
-      results.push({
-        text: `Big: ${formatNumberWithThousandSeparator(message.big)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Big: ${formatNumberWithThousandSeparator(message.big)}`, indent, expert).indentAdd(1));
     }
     if (message.dOBig !== undefined && message.dOBig !== null) {
-      results.push({
-        text: `D o big: ${formatNumberWithThousandSeparator(message.dOBig)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o big: ${formatNumberWithThousandSeparator(message.dOBig)}`, indent, expert).indentAdd(1));
     }
     if (message.proto !== undefined && message.proto !== null) {
-      results.push({
-        text: `Proto: ${message.proto}`,
-        indent: indent
-      });
+      AccessConfig.toTextualSig(message.proto, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.dOProto !== undefined && message.dOProto !== null) {
-      results.push({
-        text: `D o proto: ${message.dOProto}`,
-        indent: indent
-      });
+      AccessConfig.toTextualSig(message.dOProto, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.auth !== undefined && message.auth !== null) {
-      results.push({
-        text: `Auth: ${message.auth}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.auth, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.dOAuth !== undefined && message.dOAuth !== null) {
-      results.push({
-        text: `D o auth: ${message.dOAuth}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.dOAuth, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.salt !== undefined && message.salt !== null) {
-      results.push({
-        text: `Salt: ${toByteTextual(message.salt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Salt: ${toByteTextual(message.salt)}`, indent, expert).indentAdd(1));
     }
     if (message.dOSalt !== undefined && message.dOSalt !== null) {
-      results.push({
-        text: `D o salt: ${toByteTextual(message.dOSalt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o salt: ${toByteTextual(message.dOSalt)}`, indent, expert).indentAdd(1));
     }
     if (message.raw !== undefined && message.raw !== null) {
-      results.push({
-        text: `Raw: ${toByteTextual(message.raw)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Raw: ${toByteTextual(message.raw)}`, indent, expert).indentAdd(1));
     }
     if (message.dORaw !== undefined && message.dORaw !== null) {
-      results.push({
-        text: `D o raw: ${toByteTextual(message.dORaw)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o raw: ${toByteTextual(message.dORaw)}`, indent, expert).indentAdd(1));
     }
     if (message.wasm !== undefined && message.wasm !== null) {
-      results.push({
-        text: `Wasm: ${toByteTextual(message.wasm)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Wasm: ${toByteTextual(message.wasm)}`, indent, expert).indentAdd(1));
     }
     if (message.dOWasm !== undefined && message.dOWasm !== null) {
-      results.push({
-        text: `D o wasm: ${toByteTextual(message.dOWasm)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o wasm: ${toByteTextual(message.dOWasm)}`, indent, expert).indentAdd(1));
     }
     if (message.opt !== undefined && message.opt !== null) {
-      results.push({
-        text: `Opt: ${voteOptionToJSON(message.opt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Opt: ${voteOptionToJSON(message.opt)}`, indent, expert).indentAdd(1));
     }
     if (message.dOOpt !== undefined && message.dOOpt !== null) {
-      results.push({
-        text: `D o opt: ${voteOptionToJSON(message.dOOpt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o opt: ${voteOptionToJSON(message.dOOpt)}`, indent, expert).indentAdd(1));
     }
     if (message.period !== undefined && message.period !== null) {
-      results.push({
-        text: `Period: ${message.period}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Period: ${toDurationTextual(message.period)}`, indent, expert).indentAdd(1));
     }
     if (message.dOPeriod !== undefined && message.dOPeriod !== null) {
-      results.push({
-        text: `D o period: ${message.dOPeriod}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o period: ${toDurationTextual(message.dOPeriod)}`, indent, expert).indentAdd(1));
     }
     if (message.date !== undefined && message.date !== null) {
-      results.push({
-        text: `Date: ${message.date}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Date: ${toTimestampTextual(message.date)}`, indent, expert).indentAdd(1));
     }
     if (message.dODate !== undefined && message.dODate !== null) {
-      results.push({
-        text: `D o date: ${message.dODate}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o date: ${toTimestampTextual(message.dODate)}`, indent, expert).indentAdd(1));
     }
     if (message.pubkey !== undefined && message.pubkey !== null) {
-      results.push({
-        text: `Pubkey: ${message.pubkey}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.pubkey, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.dOPubkey !== undefined && message.dOPubkey !== null) {
-      results.push({
-        text: `D o pubkey: ${message.dOPubkey}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.dOPubkey, results, indent ? indent + 1 : 1, expert, metadata);
     }
     message.nums = object.nums?.map(e => e) || [];
     message.dONums = object.dONums?.map(e => e) || [];
@@ -1755,16 +1674,10 @@ export const EncodingTestForDontOmit = {
     message.auths = object.auths?.map(e => Any.toTextualSig(e)) || [];
     message.dOAuths = object.dOAuths?.map(e => Any.toTextualSig(e)) || [];
     if (message.dec !== undefined && message.dec !== null) {
-      results.push({
-        text: `Dec: ${formatNumberWithThousandSeparator(message.dec)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Dec: ${formatNumberWithThousandSeparator(message.dec)}`, indent, expert).indentAdd(1));
     }
     if (message.dODec !== undefined && message.dODec !== null) {
-      results.push({
-        text: `D o dec: ${formatNumberWithThousandSeparator(message.dODec)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`D o dec: ${formatNumberWithThousandSeparator(message.dODec)}`, indent, expert).indentAdd(1));
     }
     message.decs = object.decs?.map(e => e) || [];
     message.dODecs = object.dODecs?.map(e => e) || [];
@@ -2931,167 +2844,86 @@ export const EncodingTestForOmit = {
       value: EncodingTestForOmit.encode(message).finish()
     };
   },
-  toTextualSig(message: EncodingTestForOmit, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EncodingTestForOmit object",
-      indent: indent
-    });
+  toTextualSig(message: EncodingTestForOmit, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EncodingTestForOmit object", indent, expert));
     if (message.str !== undefined && message.str !== null) {
-      results.push({
-        text: `Str: ${message.str}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Str: ${message.str}`, indent, expert).indentAdd(1));
     }
     if (message.oStr !== undefined && message.oStr !== null) {
-      results.push({
-        text: `O str: ${message.oStr}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O str: ${message.oStr}`, indent, expert).indentAdd(1));
     }
     if (message.b !== undefined && message.b !== null) {
-      results.push({
-        text: `B: ${fromBooleanToString(message.b)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`B: ${fromBooleanToString(message.b)}`, indent, expert).indentAdd(1));
     }
     if (message.oB !== undefined && message.oB !== null) {
-      results.push({
-        text: `O b: ${fromBooleanToString(message.oB)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O b: ${fromBooleanToString(message.oB)}`, indent, expert).indentAdd(1));
     }
     if (message.num !== undefined && message.num !== null) {
-      results.push({
-        text: `Num: ${formatNumberWithThousandSeparator(message.num)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Num: ${formatNumberWithThousandSeparator(message.num)}`, indent, expert).indentAdd(1));
     }
     if (message.oNum !== undefined && message.oNum !== null) {
-      results.push({
-        text: `O num: ${formatNumberWithThousandSeparator(message.oNum)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O num: ${formatNumberWithThousandSeparator(message.oNum)}`, indent, expert).indentAdd(1));
     }
     if (message.big !== undefined && message.big !== null) {
-      results.push({
-        text: `Big: ${formatNumberWithThousandSeparator(message.big)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Big: ${formatNumberWithThousandSeparator(message.big)}`, indent, expert).indentAdd(1));
     }
     if (message.oBig !== undefined && message.oBig !== null) {
-      results.push({
-        text: `O big: ${formatNumberWithThousandSeparator(message.oBig)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O big: ${formatNumberWithThousandSeparator(message.oBig)}`, indent, expert).indentAdd(1));
     }
     if (message.proto !== undefined && message.proto !== null) {
-      results.push({
-        text: `Proto: ${message.proto}`,
-        indent: indent
-      });
+      AccessConfig.toTextualSig(message.proto, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.oProto !== undefined && message.oProto !== null) {
-      results.push({
-        text: `O proto: ${message.oProto}`,
-        indent: indent
-      });
+      AccessConfig.toTextualSig(message.oProto, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.auth !== undefined && message.auth !== null) {
-      results.push({
-        text: `Auth: ${message.auth}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.auth, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.oAuth !== undefined && message.oAuth !== null) {
-      results.push({
-        text: `O auth: ${message.oAuth}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.oAuth, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.salt !== undefined && message.salt !== null) {
-      results.push({
-        text: `Salt: ${toByteTextual(message.salt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Salt: ${toByteTextual(message.salt)}`, indent, expert).indentAdd(1));
     }
     if (message.oSalt !== undefined && message.oSalt !== null) {
-      results.push({
-        text: `O salt: ${toByteTextual(message.oSalt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O salt: ${toByteTextual(message.oSalt)}`, indent, expert).indentAdd(1));
     }
     if (message.raw !== undefined && message.raw !== null) {
-      results.push({
-        text: `Raw: ${toByteTextual(message.raw)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Raw: ${toByteTextual(message.raw)}`, indent, expert).indentAdd(1));
     }
     if (message.oRaw !== undefined && message.oRaw !== null) {
-      results.push({
-        text: `O raw: ${toByteTextual(message.oRaw)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O raw: ${toByteTextual(message.oRaw)}`, indent, expert).indentAdd(1));
     }
     if (message.wasm !== undefined && message.wasm !== null) {
-      results.push({
-        text: `Wasm: ${toByteTextual(message.wasm)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Wasm: ${toByteTextual(message.wasm)}`, indent, expert).indentAdd(1));
     }
     if (message.oWasm !== undefined && message.oWasm !== null) {
-      results.push({
-        text: `O wasm: ${toByteTextual(message.oWasm)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O wasm: ${toByteTextual(message.oWasm)}`, indent, expert).indentAdd(1));
     }
     if (message.opt !== undefined && message.opt !== null) {
-      results.push({
-        text: `Opt: ${voteOptionToJSON(message.opt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Opt: ${voteOptionToJSON(message.opt)}`, indent, expert).indentAdd(1));
     }
     if (message.oOpt !== undefined && message.oOpt !== null) {
-      results.push({
-        text: `O opt: ${voteOptionToJSON(message.oOpt)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O opt: ${voteOptionToJSON(message.oOpt)}`, indent, expert).indentAdd(1));
     }
     if (message.period !== undefined && message.period !== null) {
-      results.push({
-        text: `Period: ${message.period}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Period: ${toDurationTextual(message.period)}`, indent, expert).indentAdd(1));
     }
     if (message.oPeriod !== undefined && message.oPeriod !== null) {
-      results.push({
-        text: `O period: ${message.oPeriod}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O period: ${toDurationTextual(message.oPeriod)}`, indent, expert).indentAdd(1));
     }
     if (message.date !== undefined && message.date !== null) {
-      results.push({
-        text: `Date: ${message.date}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Date: ${toTimestampTextual(message.date)}`, indent, expert).indentAdd(1));
     }
     if (message.oDate !== undefined && message.oDate !== null) {
-      results.push({
-        text: `O date: ${message.oDate}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O date: ${toTimestampTextual(message.oDate)}`, indent, expert).indentAdd(1));
     }
     if (message.pubkey !== undefined && message.pubkey !== null) {
-      results.push({
-        text: `Pubkey: ${message.pubkey}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.pubkey, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.oPubkey !== undefined && message.oPubkey !== null) {
-      results.push({
-        text: `O pubkey: ${message.oPubkey}`,
-        indent: indent
-      });
+      Any.toTextualSig(message.oPubkey, results, indent ? indent + 1 : 1, expert, metadata);
     }
     message.nums = object.nums?.map(e => e) || [];
     message.oNums = object.oNums?.map(e => e) || [];
@@ -3112,16 +2944,10 @@ export const EncodingTestForOmit = {
     message.auths = object.auths?.map(e => Any.toTextualSig(e)) || [];
     message.oAuths = object.oAuths?.map(e => Any.toTextualSig(e)) || [];
     if (message.dec !== undefined && message.dec !== null) {
-      results.push({
-        text: `Dec: ${formatNumberWithThousandSeparator(message.dec)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Dec: ${formatNumberWithThousandSeparator(message.dec)}`, indent, expert).indentAdd(1));
     }
     if (message.oDec !== undefined && message.oDec !== null) {
-      results.push({
-        text: `O dec: ${formatNumberWithThousandSeparator(message.oDec)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`O dec: ${formatNumberWithThousandSeparator(message.oDec)}`, indent, expert).indentAdd(1));
     }
     message.decs = object.decs?.map(e => e) || [];
     message.oDecs = object.oDecs?.map(e => e) || [];

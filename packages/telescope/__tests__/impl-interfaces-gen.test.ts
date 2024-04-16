@@ -120,6 +120,9 @@ describe("implements interface gen", () => {
 
         prototypes: {
           addTypeUrlToDecoders: false,
+          methods: {
+            toTextualSig: true,
+          },
         },
 
         aminoEncoding: {

@@ -1,8 +1,12 @@
 import { TelescopeOptions } from "@cosmology/types";
 
 export const getTypesHelper = (options: TelescopeOptions) => {
-  return `import { IBinaryReader, IBinaryWriter } from "./binary${options.restoreImportExtension ?? ""}";
-import { Any } from "./google/protobuf/any${options.restoreImportExtension ?? ""}";
+  return `import { IBinaryReader, IBinaryWriter } from "./binary${
+    options.restoreImportExtension ?? ""
+  }";
+import { Any } from "./google/protobuf/any${
+    options.restoreImportExtension ?? ""
+  }";
 import { OfflineSigner } from "@cosmjs/proto-signing";
 import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
 
@@ -40,6 +44,7 @@ export interface TelescopeGeneratedCodec<
   toSDK?: (message: T) => SDK;
   fromAmino?: (amino: Amino) => T;
   toAmino?: (message: T) => Amino;
+  toTextualSig?: (message: T, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]) => ITextualSigLine[];
   fromAminoMsg?: (aminoMsg: IAminoMsg<Amino>) => T;
   toAminoMsg?: (message: T) => IAminoMsg<Amino>;
   toProto?: (message: T) => Uint8Array;
@@ -160,10 +165,32 @@ export interface DenomMetadata {
   }[];
 }
 
-export interface TextualSigLine {
+export interface ITextualSigLine {
   text: string;
   indent?: number;
   expert?: boolean;
+}
+
+export class TextualSigLine implements ITextualSigLine {
+  text: string;
+  indent?: number;
+  expert?: boolean;
+
+  constructor(text: string, indent?: number, expert?: boolean) {
+    this.text = text;
+    if(indent){
+      this.indent = indent;
+    }
+    if(expert){
+      this.expert = expert;
+    }
+  }
+
+  indentAdd(num: number): TextualSigLine {
+    this.indent = this.indent ? this.indent + num : num;
+
+    return this;
+  }
 }
 `;
 };

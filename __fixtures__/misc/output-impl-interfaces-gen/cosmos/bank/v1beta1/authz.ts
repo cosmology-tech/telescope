@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../types";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -150,6 +151,12 @@ export const SendAuthorization = {
       typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
       value: SendAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: SendAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("SendAuthorization object", indent, expert));
+    message.spendLimit = object.spendLimit?.map(e => Coin.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(SendAuthorization.typeUrl, SendAuthorization);

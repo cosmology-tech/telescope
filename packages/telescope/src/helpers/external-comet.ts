@@ -36,7 +36,7 @@ export const createRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
   return rpc;
 }
 
-export function toHex(data: Uint8Array): string {
+export function toHexTextual(data: Uint8Array): string {
   let out = "";
   for (let i = 0; i < data.length; i++) {
       out += ("0" + data[i].toString(16)).slice(-2);
@@ -50,9 +50,9 @@ export function toHex(data: Uint8Array): string {
 
 export function toByteTextual(data: Uint8Array): string {
   if (data.length <= 35) {
-    return toHex(data);
+    return toHexTextual(data);
   } else {
-    return \`SHA-256=\${toHex(sha256(data))}\`;
+    return \`SHA-256=\${toHexTextual(sha256(data))}\`;
   }
 }
 `;

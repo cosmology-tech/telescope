@@ -2,8 +2,9 @@ import * as t from "@babel/types";
 import { ToTextualSigMethod } from "./index";
 export declare const MSG_VAR_NAME = "message";
 export declare const ARRAY_VAR_NAME = "results";
+export declare const TEXTUAL_METHOD_NAME = "toTextualSig";
 export declare const toTextualSig: {
-    scalar(args: ToTextualSigMethod, expr?: t.Expression | t.TSType): t.Statement;
+    scalar(args: ToTextualSigMethod, expr?: t.Expression | t.TSType, indentInc?: number): t.Statement;
     /**
      * create code for formatted scalar with formatter
      * @param args
@@ -11,7 +12,7 @@ export declare const toTextualSig: {
      * @param isFormatterFromUtilHelper is formatter from util helper. default is true
      * @returns
      */
-    formattedScalar(args: ToTextualSigMethod, formatter: string, isFormatterFromUtilHelper?: boolean): t.Statement;
+    formattedScalar(args: ToTextualSigMethod, formatter: string, indentInc?: number, expr?: t.Expression, isFormatterFromUtilHelper?: boolean): t.Statement;
     string(args: ToTextualSigMethod): t.Statement;
     bool(args: ToTextualSigMethod): t.Statement;
     number(args: ToTextualSigMethod): t.Statement;
@@ -29,13 +30,13 @@ export declare const toTextualSig: {
     fixed64(args: ToTextualSigMethod): t.Statement;
     sfixed64(args: ToTextualSigMethod): t.Statement;
     type(args: ToTextualSigMethod): t.Statement;
+    anyType(args: ToTextualSigMethod): t.Statement;
+    protoType(args: ToTextualSigMethod): t.Statement;
     enum(args: ToTextualSigMethod): t.Statement;
     bytes(args: ToTextualSigMethod): t.Statement;
     duration(args: ToTextualSigMethod): t.Statement;
-    durationString(args: ToTextualSigMethod): t.Statement;
     timestamp(args: ToTextualSigMethod): t.Statement;
-    timestampDate(args: ToTextualSigMethod): t.Statement;
-    keyHash(args: ToTextualSigMethod): t.ExpressionStatement;
+    keyHash(args: ToTextualSigMethod): t.Statement;
     array(args: ToTextualSigMethod, expr: t.Expression): t.ExpressionStatement;
 };
 export declare const arrayTypes: {

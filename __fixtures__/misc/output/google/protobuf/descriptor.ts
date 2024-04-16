@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, isSet, formatNumberWithThousandSeparator, fromBooleanToString, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { DenomMetadata, TextualSigLine } from "../../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../types";
 import { toByteTextual } from "../../extern";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
@@ -2357,12 +2357,9 @@ export const FileDescriptorSet = {
       value: FileDescriptorSet.encode(message).finish()
     };
   },
-  toTextualSig(message: FileDescriptorSet, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FileDescriptorSet object",
-      indent: indent
-    });
+  toTextualSig(message: FileDescriptorSet, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileDescriptorSet object", indent, expert));
     message.file = object.file?.map(e => FileDescriptorProto.toTextualSig(e)) || [];
     return results;
   }
@@ -2733,23 +2730,14 @@ export const FileDescriptorProto = {
       value: FileDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: FileDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FileDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: FileDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     if (message.package !== undefined && message.package !== null) {
-      results.push({
-        text: `Package: ${message.package}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Package: ${message.package}`, indent, expert).indentAdd(1));
     }
     message.dependency = object.dependency?.map(e => e) || [];
     message.publicDependency = object.publicDependency?.map(e => e) || [];
@@ -2759,22 +2747,13 @@ export const FileDescriptorProto = {
     message.service = object.service?.map(e => ServiceDescriptorProto.toTextualSig(e)) || [];
     message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      FileOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.sourceCodeInfo !== undefined && message.sourceCodeInfo !== null) {
-      results.push({
-        text: `Source code info: ${message.sourceCodeInfo}`,
-        indent: indent
-      });
+      SourceCodeInfo.toTextualSig(message.sourceCodeInfo, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.syntax !== undefined && message.syntax !== null) {
-      results.push({
-        text: `Syntax: ${message.syntax}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Syntax: ${message.syntax}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -3101,17 +3080,11 @@ export const DescriptorProto = {
       value: DescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: DescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "DescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: DescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     message.field = object.field?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
     message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
@@ -3120,10 +3093,7 @@ export const DescriptorProto = {
     message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.toTextualSig(e)) || [];
     message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.toTextualSig(e)) || [];
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      MessageOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.toTextualSig(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
@@ -3253,29 +3223,17 @@ export const DescriptorProto_ExtensionRange = {
       value: DescriptorProto_ExtensionRange.encode(message).finish()
     };
   },
-  toTextualSig(message: DescriptorProto_ExtensionRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "DescriptorProto_ExtensionRange object",
-      indent: indent
-    });
+  toTextualSig(message: DescriptorProto_ExtensionRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto_ExtensionRange object", indent, expert));
     if (message.start !== undefined && message.start !== null) {
-      results.push({
-        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
     }
     if (message.end !== undefined && message.end !== null) {
-      results.push({
-        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
     }
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      ExtensionRangeOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -3384,23 +3342,14 @@ export const DescriptorProto_ReservedRange = {
       value: DescriptorProto_ReservedRange.encode(message).finish()
     };
   },
-  toTextualSig(message: DescriptorProto_ReservedRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "DescriptorProto_ReservedRange object",
-      indent: indent
-    });
+  toTextualSig(message: DescriptorProto_ReservedRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto_ReservedRange object", indent, expert));
     if (message.start !== undefined && message.start !== null) {
-      results.push({
-        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
     }
     if (message.end !== undefined && message.end !== null) {
-      results.push({
-        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -3502,12 +3451,9 @@ export const ExtensionRangeOptions = {
       value: ExtensionRangeOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: ExtensionRangeOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "ExtensionRangeOptions object",
-      indent: indent
-    });
+  toTextualSig(message: ExtensionRangeOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ExtensionRangeOptions object", indent, expert));
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
   }
@@ -3754,71 +3700,38 @@ export const FieldDescriptorProto = {
       value: FieldDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: FieldDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FieldDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: FieldDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FieldDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     if (message.number !== undefined && message.number !== null) {
-      results.push({
-        text: `Number: ${formatNumberWithThousandSeparator(message.number)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Number: ${formatNumberWithThousandSeparator(message.number)}`, indent, expert).indentAdd(1));
     }
     if (message.label !== undefined && message.label !== null) {
-      results.push({
-        text: `Label: ${fieldDescriptorProto_LabelToJSON(message.label)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Label: ${fieldDescriptorProto_LabelToJSON(message.label)}`, indent, expert).indentAdd(1));
     }
     if (message.type !== undefined && message.type !== null) {
-      results.push({
-        text: `Type: ${fieldDescriptorProto_TypeToJSON(message.type)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Type: ${fieldDescriptorProto_TypeToJSON(message.type)}`, indent, expert).indentAdd(1));
     }
     if (message.typeName !== undefined && message.typeName !== null) {
-      results.push({
-        text: `Type name: ${message.typeName}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Type name: ${message.typeName}`, indent, expert).indentAdd(1));
     }
     if (message.extendee !== undefined && message.extendee !== null) {
-      results.push({
-        text: `Extendee: ${message.extendee}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Extendee: ${message.extendee}`, indent, expert).indentAdd(1));
     }
     if (message.defaultValue !== undefined && message.defaultValue !== null) {
-      results.push({
-        text: `Default value: ${message.defaultValue}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Default value: ${message.defaultValue}`, indent, expert).indentAdd(1));
     }
     if (message.oneofIndex !== undefined && message.oneofIndex !== null) {
-      results.push({
-        text: `Oneof index: ${formatNumberWithThousandSeparator(message.oneofIndex)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Oneof index: ${formatNumberWithThousandSeparator(message.oneofIndex)}`, indent, expert).indentAdd(1));
     }
     if (message.jsonName !== undefined && message.jsonName !== null) {
-      results.push({
-        text: `Json name: ${message.jsonName}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Json name: ${message.jsonName}`, indent, expert).indentAdd(1));
     }
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      FieldOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -3929,23 +3842,14 @@ export const OneofDescriptorProto = {
       value: OneofDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: OneofDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "OneofDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: OneofDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("OneofDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      OneofOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -4137,24 +4041,15 @@ export const EnumDescriptorProto = {
       value: EnumDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: EnumDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EnumDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: EnumDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     message.value = object.value?.map(e => EnumValueDescriptorProto.toTextualSig(e)) || [];
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      EnumOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.toTextualSig(e)) || [];
     message.reservedName = object.reservedName?.map(e => e) || [];
@@ -4265,23 +4160,14 @@ export const EnumDescriptorProto_EnumReservedRange = {
       value: EnumDescriptorProto_EnumReservedRange.encode(message).finish()
     };
   },
-  toTextualSig(message: EnumDescriptorProto_EnumReservedRange, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EnumDescriptorProto_EnumReservedRange object",
-      indent: indent
-    });
+  toTextualSig(message: EnumDescriptorProto_EnumReservedRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumDescriptorProto_EnumReservedRange object", indent, expert));
     if (message.start !== undefined && message.start !== null) {
-      results.push({
-        text: `Start: ${formatNumberWithThousandSeparator(message.start)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
     }
     if (message.end !== undefined && message.end !== null) {
-      results.push({
-        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -4409,29 +4295,17 @@ export const EnumValueDescriptorProto = {
       value: EnumValueDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: EnumValueDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EnumValueDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: EnumValueDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumValueDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     if (message.number !== undefined && message.number !== null) {
-      results.push({
-        text: `Number: ${formatNumberWithThousandSeparator(message.number)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Number: ${formatNumberWithThousandSeparator(message.number)}`, indent, expert).indentAdd(1));
     }
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      EnumValueOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -4569,24 +4443,15 @@ export const ServiceDescriptorProto = {
       value: ServiceDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: ServiceDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "ServiceDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: ServiceDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ServiceDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     message.method = object.method?.map(e => MethodDescriptorProto.toTextualSig(e)) || [];
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      ServiceOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     return results;
   }
@@ -4765,47 +4630,26 @@ export const MethodDescriptorProto = {
       value: MethodDescriptorProto.encode(message).finish()
     };
   },
-  toTextualSig(message: MethodDescriptorProto, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "MethodDescriptorProto object",
-      indent: indent
-    });
+  toTextualSig(message: MethodDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MethodDescriptorProto object", indent, expert));
     if (message.name !== undefined && message.name !== null) {
-      results.push({
-        text: `Name: ${message.name}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
     }
     if (message.inputType !== undefined && message.inputType !== null) {
-      results.push({
-        text: `Input type: ${message.inputType}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Input type: ${message.inputType}`, indent, expert).indentAdd(1));
     }
     if (message.outputType !== undefined && message.outputType !== null) {
-      results.push({
-        text: `Output type: ${message.outputType}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Output type: ${message.outputType}`, indent, expert).indentAdd(1));
     }
     if (message.options !== undefined && message.options !== null) {
-      results.push({
-        text: `Options: ${message.options}`,
-        indent: indent
-      });
+      MethodOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
     }
     if (message.clientStreaming !== undefined && message.clientStreaming !== null) {
-      results.push({
-        text: `Client streaming: ${fromBooleanToString(message.clientStreaming)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Client streaming: ${fromBooleanToString(message.clientStreaming)}`, indent, expert).indentAdd(1));
     }
     if (message.serverStreaming !== undefined && message.serverStreaming !== null) {
-      results.push({
-        text: `Server streaming: ${fromBooleanToString(message.serverStreaming)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Server streaming: ${fromBooleanToString(message.serverStreaming)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -5247,131 +5091,68 @@ export const FileOptions = {
       value: FileOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: FileOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FileOptions object",
-      indent: indent
-    });
+  toTextualSig(message: FileOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileOptions object", indent, expert));
     if (message.javaPackage !== undefined && message.javaPackage !== null) {
-      results.push({
-        text: `Java package: ${message.javaPackage}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java package: ${message.javaPackage}`, indent, expert).indentAdd(1));
     }
     if (message.javaOuterClassname !== undefined && message.javaOuterClassname !== null) {
-      results.push({
-        text: `Java outer classname: ${message.javaOuterClassname}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java outer classname: ${message.javaOuterClassname}`, indent, expert).indentAdd(1));
     }
     if (message.javaMultipleFiles !== undefined && message.javaMultipleFiles !== null) {
-      results.push({
-        text: `Java multiple files: ${fromBooleanToString(message.javaMultipleFiles)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java multiple files: ${fromBooleanToString(message.javaMultipleFiles)}`, indent, expert).indentAdd(1));
     }
     if (message.javaGenerateEqualsAndHash !== undefined && message.javaGenerateEqualsAndHash !== null) {
-      results.push({
-        text: `Java generate equals and hash: ${fromBooleanToString(message.javaGenerateEqualsAndHash)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java generate equals and hash: ${fromBooleanToString(message.javaGenerateEqualsAndHash)}`, indent, expert).indentAdd(1));
     }
     if (message.javaStringCheckUtf8 !== undefined && message.javaStringCheckUtf8 !== null) {
-      results.push({
-        text: `Java string check utf8: ${fromBooleanToString(message.javaStringCheckUtf8)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java string check utf8: ${fromBooleanToString(message.javaStringCheckUtf8)}`, indent, expert).indentAdd(1));
     }
     if (message.optimizeFor !== undefined && message.optimizeFor !== null) {
-      results.push({
-        text: `Optimize for: ${fileOptions_OptimizeModeToJSON(message.optimizeFor)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Optimize for: ${fileOptions_OptimizeModeToJSON(message.optimizeFor)}`, indent, expert).indentAdd(1));
     }
     if (message.goPackage !== undefined && message.goPackage !== null) {
-      results.push({
-        text: `Go package: ${message.goPackage}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Go package: ${message.goPackage}`, indent, expert).indentAdd(1));
     }
     if (message.ccGenericServices !== undefined && message.ccGenericServices !== null) {
-      results.push({
-        text: `Cc generic services: ${fromBooleanToString(message.ccGenericServices)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Cc generic services: ${fromBooleanToString(message.ccGenericServices)}`, indent, expert).indentAdd(1));
     }
     if (message.javaGenericServices !== undefined && message.javaGenericServices !== null) {
-      results.push({
-        text: `Java generic services: ${fromBooleanToString(message.javaGenericServices)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Java generic services: ${fromBooleanToString(message.javaGenericServices)}`, indent, expert).indentAdd(1));
     }
     if (message.pyGenericServices !== undefined && message.pyGenericServices !== null) {
-      results.push({
-        text: `Py generic services: ${fromBooleanToString(message.pyGenericServices)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Py generic services: ${fromBooleanToString(message.pyGenericServices)}`, indent, expert).indentAdd(1));
     }
     if (message.phpGenericServices !== undefined && message.phpGenericServices !== null) {
-      results.push({
-        text: `Php generic services: ${fromBooleanToString(message.phpGenericServices)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Php generic services: ${fromBooleanToString(message.phpGenericServices)}`, indent, expert).indentAdd(1));
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     if (message.ccEnableArenas !== undefined && message.ccEnableArenas !== null) {
-      results.push({
-        text: `Cc enable arenas: ${fromBooleanToString(message.ccEnableArenas)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Cc enable arenas: ${fromBooleanToString(message.ccEnableArenas)}`, indent, expert).indentAdd(1));
     }
     if (message.objcClassPrefix !== undefined && message.objcClassPrefix !== null) {
-      results.push({
-        text: `Objc class prefix: ${message.objcClassPrefix}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Objc class prefix: ${message.objcClassPrefix}`, indent, expert).indentAdd(1));
     }
     if (message.csharpNamespace !== undefined && message.csharpNamespace !== null) {
-      results.push({
-        text: `Csharp namespace: ${message.csharpNamespace}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Csharp namespace: ${message.csharpNamespace}`, indent, expert).indentAdd(1));
     }
     if (message.swiftPrefix !== undefined && message.swiftPrefix !== null) {
-      results.push({
-        text: `Swift prefix: ${message.swiftPrefix}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Swift prefix: ${message.swiftPrefix}`, indent, expert).indentAdd(1));
     }
     if (message.phpClassPrefix !== undefined && message.phpClassPrefix !== null) {
-      results.push({
-        text: `Php class prefix: ${message.phpClassPrefix}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Php class prefix: ${message.phpClassPrefix}`, indent, expert).indentAdd(1));
     }
     if (message.phpNamespace !== undefined && message.phpNamespace !== null) {
-      results.push({
-        text: `Php namespace: ${message.phpNamespace}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Php namespace: ${message.phpNamespace}`, indent, expert).indentAdd(1));
     }
     if (message.phpMetadataNamespace !== undefined && message.phpMetadataNamespace !== null) {
-      results.push({
-        text: `Php metadata namespace: ${message.phpMetadataNamespace}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Php metadata namespace: ${message.phpMetadataNamespace}`, indent, expert).indentAdd(1));
     }
     if (message.rubyPackage !== undefined && message.rubyPackage !== null) {
-      results.push({
-        text: `Ruby package: ${message.rubyPackage}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Ruby package: ${message.rubyPackage}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -5542,35 +5323,20 @@ export const MessageOptions = {
       value: MessageOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: MessageOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "MessageOptions object",
-      indent: indent
-    });
+  toTextualSig(message: MessageOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MessageOptions object", indent, expert));
     if (message.messageSetWireFormat !== undefined && message.messageSetWireFormat !== null) {
-      results.push({
-        text: `Message set wire format: ${fromBooleanToString(message.messageSetWireFormat)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Message set wire format: ${fromBooleanToString(message.messageSetWireFormat)}`, indent, expert).indentAdd(1));
     }
     if (message.noStandardDescriptorAccessor !== undefined && message.noStandardDescriptorAccessor !== null) {
-      results.push({
-        text: `No standard descriptor accessor: ${fromBooleanToString(message.noStandardDescriptorAccessor)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`No standard descriptor accessor: ${fromBooleanToString(message.noStandardDescriptorAccessor)}`, indent, expert).indentAdd(1));
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     if (message.mapEntry !== undefined && message.mapEntry !== null) {
-      results.push({
-        text: `Map entry: ${fromBooleanToString(message.mapEntry)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Map entry: ${fromBooleanToString(message.mapEntry)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -5775,47 +5541,26 @@ export const FieldOptions = {
       value: FieldOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: FieldOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FieldOptions object",
-      indent: indent
-    });
+  toTextualSig(message: FieldOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FieldOptions object", indent, expert));
     if (message.ctype !== undefined && message.ctype !== null) {
-      results.push({
-        text: `Ctype: ${fieldOptions_CTypeToJSON(message.ctype)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Ctype: ${fieldOptions_CTypeToJSON(message.ctype)}`, indent, expert).indentAdd(1));
     }
     if (message.packed !== undefined && message.packed !== null) {
-      results.push({
-        text: `Packed: ${fromBooleanToString(message.packed)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Packed: ${fromBooleanToString(message.packed)}`, indent, expert).indentAdd(1));
     }
     if (message.jstype !== undefined && message.jstype !== null) {
-      results.push({
-        text: `Jstype: ${fieldOptions_JSTypeToJSON(message.jstype)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Jstype: ${fieldOptions_JSTypeToJSON(message.jstype)}`, indent, expert).indentAdd(1));
     }
     if (message.lazy !== undefined && message.lazy !== null) {
-      results.push({
-        text: `Lazy: ${fromBooleanToString(message.lazy)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Lazy: ${fromBooleanToString(message.lazy)}`, indent, expert).indentAdd(1));
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     if (message.weak !== undefined && message.weak !== null) {
-      results.push({
-        text: `Weak: ${fromBooleanToString(message.weak)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Weak: ${fromBooleanToString(message.weak)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -5918,12 +5663,9 @@ export const OneofOptions = {
       value: OneofOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: OneofOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "OneofOptions object",
-      indent: indent
-    });
+  toTextualSig(message: OneofOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("OneofOptions object", indent, expert));
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
   }
@@ -6059,23 +5801,14 @@ export const EnumOptions = {
       value: EnumOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: EnumOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EnumOptions object",
-      indent: indent
-    });
+  toTextualSig(message: EnumOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumOptions object", indent, expert));
     if (message.allowAlias !== undefined && message.allowAlias !== null) {
-      results.push({
-        text: `Allow alias: ${fromBooleanToString(message.allowAlias)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Allow alias: ${fromBooleanToString(message.allowAlias)}`, indent, expert).indentAdd(1));
     }
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -6195,17 +5928,11 @@ export const EnumValueOptions = {
       value: EnumValueOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: EnumValueOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "EnumValueOptions object",
-      indent: indent
-    });
+  toTextualSig(message: EnumValueOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumValueOptions object", indent, expert));
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -6325,17 +6052,11 @@ export const ServiceOptions = {
       value: ServiceOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: ServiceOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "ServiceOptions object",
-      indent: indent
-    });
+  toTextualSig(message: ServiceOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ServiceOptions object", indent, expert));
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -6472,23 +6193,14 @@ export const MethodOptions = {
       value: MethodOptions.encode(message).finish()
     };
   },
-  toTextualSig(message: MethodOptions, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "MethodOptions object",
-      indent: indent
-    });
+  toTextualSig(message: MethodOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MethodOptions object", indent, expert));
     if (message.deprecated !== undefined && message.deprecated !== null) {
-      results.push({
-        text: `Deprecated: ${fromBooleanToString(message.deprecated)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
     }
     if (message.idempotencyLevel !== undefined && message.idempotencyLevel !== null) {
-      results.push({
-        text: `Idempotency level: ${methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Idempotency level: ${methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel)}`, indent, expert).indentAdd(1));
     }
     message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
     return results;
@@ -6697,48 +6409,27 @@ export const UninterpretedOption = {
       value: UninterpretedOption.encode(message).finish()
     };
   },
-  toTextualSig(message: UninterpretedOption, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "UninterpretedOption object",
-      indent: indent
-    });
+  toTextualSig(message: UninterpretedOption, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("UninterpretedOption object", indent, expert));
     message.name = object.name?.map(e => UninterpretedOption_NamePart.toTextualSig(e)) || [];
     if (message.identifierValue !== undefined && message.identifierValue !== null) {
-      results.push({
-        text: `Identifier value: ${message.identifierValue}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Identifier value: ${message.identifierValue}`, indent, expert).indentAdd(1));
     }
     if (message.positiveIntValue !== undefined && message.positiveIntValue !== null) {
-      results.push({
-        text: `Positive int value: ${formatNumberWithThousandSeparator(message.positiveIntValue)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Positive int value: ${formatNumberWithThousandSeparator(message.positiveIntValue)}`, indent, expert).indentAdd(1));
     }
     if (message.negativeIntValue !== undefined && message.negativeIntValue !== null) {
-      results.push({
-        text: `Negative int value: ${formatNumberWithThousandSeparator(message.negativeIntValue)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Negative int value: ${formatNumberWithThousandSeparator(message.negativeIntValue)}`, indent, expert).indentAdd(1));
     }
     if (message.doubleValue !== undefined && message.doubleValue !== null) {
-      results.push({
-        text: `Double value: ${formatNumberWithThousandSeparator(message.doubleValue)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Double value: ${formatNumberWithThousandSeparator(message.doubleValue)}`, indent, expert).indentAdd(1));
     }
     if (message.stringValue !== undefined && message.stringValue !== null) {
-      results.push({
-        text: `String value: ${toByteTextual(message.stringValue)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`String value: ${toByteTextual(message.stringValue)}`, indent, expert).indentAdd(1));
     }
     if (message.aggregateValue !== undefined && message.aggregateValue !== null) {
-      results.push({
-        text: `Aggregate value: ${message.aggregateValue}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Aggregate value: ${message.aggregateValue}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -6847,23 +6538,14 @@ export const UninterpretedOption_NamePart = {
       value: UninterpretedOption_NamePart.encode(message).finish()
     };
   },
-  toTextualSig(message: UninterpretedOption_NamePart, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "UninterpretedOption_NamePart object",
-      indent: indent
-    });
+  toTextualSig(message: UninterpretedOption_NamePart, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("UninterpretedOption_NamePart object", indent, expert));
     if (message.namePart !== undefined && message.namePart !== null) {
-      results.push({
-        text: `Name part: ${message.namePart}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Name part: ${message.namePart}`, indent, expert).indentAdd(1));
     }
     if (message.isExtension !== undefined && message.isExtension !== null) {
-      results.push({
-        text: `Is extension: ${fromBooleanToString(message.isExtension)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Is extension: ${fromBooleanToString(message.isExtension)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -6965,12 +6647,9 @@ export const SourceCodeInfo = {
       value: SourceCodeInfo.encode(message).finish()
     };
   },
-  toTextualSig(message: SourceCodeInfo, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "SourceCodeInfo object",
-      indent: indent
-    });
+  toTextualSig(message: SourceCodeInfo, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("SourceCodeInfo object", indent, expert));
     message.location = object.location?.map(e => SourceCodeInfo_Location.toTextualSig(e)) || [];
     return results;
   }
@@ -7178,25 +6857,16 @@ export const SourceCodeInfo_Location = {
       value: SourceCodeInfo_Location.encode(message).finish()
     };
   },
-  toTextualSig(message: SourceCodeInfo_Location, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "SourceCodeInfo_Location object",
-      indent: indent
-    });
+  toTextualSig(message: SourceCodeInfo_Location, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("SourceCodeInfo_Location object", indent, expert));
     message.path = object.path?.map(e => e) || [];
     message.span = object.span?.map(e => e) || [];
     if (message.leadingComments !== undefined && message.leadingComments !== null) {
-      results.push({
-        text: `Leading comments: ${message.leadingComments}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Leading comments: ${message.leadingComments}`, indent, expert).indentAdd(1));
     }
     if (message.trailingComments !== undefined && message.trailingComments !== null) {
-      results.push({
-        text: `Trailing comments: ${message.trailingComments}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Trailing comments: ${message.trailingComments}`, indent, expert).indentAdd(1));
     }
     message.leadingDetachedComments = object.leadingDetachedComments?.map(e => e) || [];
     return results;
@@ -7299,12 +6969,9 @@ export const GeneratedCodeInfo = {
       value: GeneratedCodeInfo.encode(message).finish()
     };
   },
-  toTextualSig(message: GeneratedCodeInfo, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "GeneratedCodeInfo object",
-      indent: indent
-    });
+  toTextualSig(message: GeneratedCodeInfo, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GeneratedCodeInfo object", indent, expert));
     message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.toTextualSig(e)) || [];
     return results;
   }
@@ -7466,30 +7133,18 @@ export const GeneratedCodeInfo_Annotation = {
       value: GeneratedCodeInfo_Annotation.encode(message).finish()
     };
   },
-  toTextualSig(message: GeneratedCodeInfo_Annotation, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "GeneratedCodeInfo_Annotation object",
-      indent: indent
-    });
+  toTextualSig(message: GeneratedCodeInfo_Annotation, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GeneratedCodeInfo_Annotation object", indent, expert));
     message.path = object.path?.map(e => e) || [];
     if (message.sourceFile !== undefined && message.sourceFile !== null) {
-      results.push({
-        text: `Source file: ${message.sourceFile}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Source file: ${message.sourceFile}`, indent, expert).indentAdd(1));
     }
     if (message.begin !== undefined && message.begin !== null) {
-      results.push({
-        text: `Begin: ${formatNumberWithThousandSeparator(message.begin)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Begin: ${formatNumberWithThousandSeparator(message.begin)}`, indent, expert).indentAdd(1));
     }
     if (message.end !== undefined && message.end !== null) {
-      results.push({
-        text: `End: ${formatNumberWithThousandSeparator(message.end)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
     }
     return results;
   }
@@ -7581,17 +7236,11 @@ export const FeatureSet = {
       value: FeatureSet.encode(message).finish()
     };
   },
-  toTextualSig(message: FeatureSet, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "FeatureSet object",
-      indent: indent
-    });
+  toTextualSig(message: FeatureSet, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FeatureSet object", indent, expert));
     if (message.utf8Validation !== undefined && message.utf8Validation !== null) {
-      results.push({
-        text: `Utf8 validation: ${featureSet_Utf8ValidationToJSON(message.utf8Validation)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Utf8 validation: ${featureSet_Utf8ValidationToJSON(message.utf8Validation)}`, indent, expert).indentAdd(1));
     }
     return results;
   }

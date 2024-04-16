@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../types";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.deployment.v1beta1";
 /**
@@ -137,6 +138,14 @@ export const DepositDeploymentAuthorization = {
       typeUrl: "/akash.deployment.v1beta1.DepositDeploymentAuthorization",
       value: DepositDeploymentAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: DepositDeploymentAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DepositDeploymentAuthorization object", indent, expert));
+    if (message.spendLimit !== undefined && message.spendLimit !== null) {
+      Coin.toTextualSig(message.spendLimit, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DepositDeploymentAuthorization.typeUrl, DepositDeploymentAuthorization);

@@ -1,6 +1,8 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, formatNumberWithThousandSeparator, fromBooleanToString } from "../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../types";
+import { toByteTextual } from "../../../extern";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -292,6 +294,28 @@ export const MsgInstantiateContract2 = {
       typeUrl: "/cosmos.bank.v1beta1.MsgInstantiateContract2",
       value: MsgInstantiateContract2.encode(message).finish()
     };
+  },
+  toTextualSig(message: MsgInstantiateContract2, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MsgInstantiateContract2 object", indent, expert));
+    if (message.codeId !== undefined && message.codeId !== null) {
+      results.push(new TextualSigLine(`Code id: ${formatNumberWithThousandSeparator(message.codeId)}`, indent, expert).indentAdd(1));
+    }
+    if (message.label !== undefined && message.label !== null) {
+      results.push(new TextualSigLine(`Label: ${message.label}`, indent, expert).indentAdd(1));
+    }
+    message.funds = object.funds?.map(e => Coin.toTextualSig(e)) || [];
+    if (message.salt !== undefined && message.salt !== null) {
+      results.push(new TextualSigLine(`Salt: ${toByteTextual(message.salt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.fixMsg !== undefined && message.fixMsg !== null) {
+      results.push(new TextualSigLine(`Fix msg: ${fromBooleanToString(message.fixMsg)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dontOmitemptyFixMsg !== undefined && message.dontOmitemptyFixMsg !== null) {
+      results.push(new TextualSigLine(`Dont omitempty fix msg: ${fromBooleanToString(message.dontOmitemptyFixMsg)}`, indent, expert).indentAdd(1));
+    }
+    message.aListOfBytes = object.aListOfBytes?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(MsgInstantiateContract2.typeUrl, MsgInstantiateContract2);

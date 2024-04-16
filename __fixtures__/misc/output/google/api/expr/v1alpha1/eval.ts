@@ -1,6 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, isSet, formatNumberWithThousandSeparator } from "../../../../helpers";
-import { DenomMetadata, TextualSigLine } from "../../../../types";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../../types";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
   /** The ids of the expressions with unknown values. */
@@ -137,12 +137,9 @@ export const ExprValue = {
       value: ExprValue.encode(message).finish()
     };
   },
-  toTextualSig(message: ExprValue, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "ExprValue object",
-      indent: indent
-    });
+  toTextualSig(message: ExprValue, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ExprValue object", indent, expert));
     message.exprs = object.exprs?.map(e => IdRef.toTextualSig(e)) || [];
     return results;
   }
@@ -234,17 +231,11 @@ export const IdRef = {
       value: IdRef.encode(message).finish()
     };
   },
-  toTextualSig(message: IdRef, indent?: number, metadata?: DenomMetadata[]): TextualSigLine[] {
-    const results: TextualSigLine[] = [];
-    results.push({
-      text: "IdRef object",
-      indent: indent
-    });
+  toTextualSig(message: IdRef, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("IdRef object", indent, expert));
     if (message.id !== undefined && message.id !== null) {
-      results.push({
-        text: `Id: ${formatNumberWithThousandSeparator(message.id)}`,
-        indent: indent
-      });
+      results.push(new TextualSigLine(`Id: ${formatNumberWithThousandSeparator(message.id)}`, indent, expert).indentAdd(1));
     }
     return results;
   }

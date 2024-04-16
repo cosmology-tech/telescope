@@ -10,6 +10,7 @@ import {
 
 export const MSG_VAR_NAME = "message";
 export const ARRAY_VAR_NAME = "results";
+export const TEXTUAL_METHOD_NAME = "toTextualSig";
 
 const setIfNotUndefinedAndNotNull = (
     prop: string,
@@ -40,7 +41,11 @@ const setIfNotUndefinedAndNotNull = (
 };
 
 export const toTextualSig = {
-    scalar(args: ToTextualSigMethod, expr?: t.Expression | t.TSType) {
+    scalar(
+        args: ToTextualSigMethod,
+        expr?: t.Expression | t.TSType,
+        indentInc?: number
+    ) {
         const { propName, origName } = getFieldNames(args.field);
 
         return setIfNotUndefinedAndNotNull(
@@ -59,12 +64,12 @@ export const toTextualSig = {
                     [
                         expr ??
                             t.memberExpression(
-                                t.identifier("message"),
+                                t.identifier(MSG_VAR_NAME),
                                 t.identifier(propName)
                             ),
                     ]
                 ),
-                t.identifier("indent")
+                indentInc
             )
         );
     },
@@ -79,6 +84,8 @@ export const toTextualSig = {
     formattedScalar(
         args: ToTextualSigMethod,
         formatter: string,
+        indentInc?: number,
+        expr?: t.Expression,
         isFormatterFromUtilHelper: boolean = true
     ) {
         if (isFormatterFromUtilHelper) {
@@ -90,11 +97,13 @@ export const toTextualSig = {
         return toTextualSig.scalar(
             args,
             t.callExpression(t.identifier(formatter), [
-                t.memberExpression(
-                    t.identifier("message"),
-                    t.identifier(propName)
-                ),
-            ])
+                expr ??
+                    t.memberExpression(
+                        t.identifier(MSG_VAR_NAME),
+                        t.identifier(propName)
+                    ),
+            ]),
+            indentInc
         );
     },
 
@@ -116,10 +125,11 @@ export const toTextualSig = {
         if (isCosmosSDKDec) {
             return toTextualSig.formattedScalar(
                 args,
-                "formatNumberWithThousandSeparator"
+                "formatNumberWithThousandSeparator",
+                1
             );
         } else {
-            return toTextualSig.scalar(args);
+            return toTextualSig.scalar(args, null, 1);
         }
     },
 
@@ -130,7 +140,7 @@ export const toTextualSig = {
     //   });
     // }
     bool(args: ToTextualSigMethod) {
-        return toTextualSig.formattedScalar(args, "fromBooleanToString");
+        return toTextualSig.formattedScalar(args, "fromBooleanToString", 1);
     },
 
     // if (message.num !== undefined && message.num !== null) {
@@ -142,7 +152,8 @@ export const toTextualSig = {
     number(args: ToTextualSigMethod) {
         return toTextualSig.formattedScalar(
             args,
-            "formatNumberWithThousandSeparator"
+            "formatNumberWithThousandSeparator",
+            1
         );
     },
 
@@ -177,7 +188,8 @@ export const toTextualSig = {
     long(args: ToTextualSigMethod) {
         return toTextualSig.formattedScalar(
             args,
-            "formatNumberWithThousandSeparator"
+            "formatNumberWithThousandSeparator",
+            1
         );
     },
 
@@ -198,9 +210,6 @@ export const toTextualSig = {
     },
 
     type(args: ToTextualSigMethod) {
-        const prop = args.field.name;
-        let name = args.context.getTypeName(args.field);
-
         if (
             !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
             args.context.options.interfaces.enabled &&
@@ -208,10 +217,79 @@ export const toTextualSig = {
             args.field.type === "google.protobuf.Any" &&
             args.field.options["(cosmos_proto.accepts_interface)"]
         ) {
-            name = "GlobalDecoderRegistry";
+            return toTextualSig.anyType(args);
         }
 
-        return toTextualSig.scalar(args);
+        return toTextualSig.protoType(args);
+    },
+
+    anyType(args: ToTextualSigMethod) {
+        const { propName } = getFieldNames(args.field);
+
+        return setIfNotUndefinedAndNotNull(
+            propName,
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier("GlobalDecoderRegistry"),
+                        t.identifier(TEXTUAL_METHOD_NAME)
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier(MSG_VAR_NAME),
+                            t.identifier(propName)
+                        ),
+                        t.identifier(ARRAY_VAR_NAME),
+                        t.conditionalExpression(
+                            t.identifier("indent"),
+                            t.binaryExpression(
+                                "+",
+                                t.identifier("indent"),
+                                t.numericLiteral(1)
+                            ),
+                            t.numericLiteral(1)
+                        ),
+                        t.identifier("expert"),
+                        t.identifier("metadata"),
+                    ]
+                )
+            )
+        );
+    },
+
+    protoType(args: ToTextualSigMethod) {
+        const { propName } = getFieldNames(args.field);
+        const name = args.context.getTypeName(args.field);
+
+        return setIfNotUndefinedAndNotNull(
+            propName,
+            t.expressionStatement(
+                t.callExpression(
+                    t.memberExpression(
+                        t.identifier(name),
+                        t.identifier(TEXTUAL_METHOD_NAME)
+                    ),
+                    [
+                        t.memberExpression(
+                            t.identifier(MSG_VAR_NAME),
+                            t.identifier(propName)
+                        ),
+                        t.identifier(ARRAY_VAR_NAME),
+                        t.conditionalExpression(
+                            t.identifier("indent"),
+                            t.binaryExpression(
+                                "+",
+                                t.identifier("indent"),
+                                t.numericLiteral(1)
+                            ),
+                            t.numericLiteral(1)
+                        ),
+                        t.identifier("expert"),
+                        t.identifier("metadata"),
+                    ]
+                )
+            )
+        );
     },
 
     // if (message.opt !== undefined && message.opt !== null) {
@@ -222,231 +300,54 @@ export const toTextualSig = {
     // }
     enum(args: ToTextualSigMethod) {
         const enumFuncName = args.context.getToEnum(args.field);
-        return toTextualSig.formattedScalar(args, enumFuncName, false);
+        return toTextualSig.formattedScalar(args, enumFuncName, 1, null, false);
     },
 
     // message.queryData = object.queryData ?? new Uint8Array()
     bytes(args: ToTextualSigMethod) {
-        return toTextualSig.formattedScalar(
-            args,
-            "toByteTextual"
-        );
-    },
+        const isCosmosSDKDec =
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "github.com/cosmos/cosmos-sdk/types.Dec" ||
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "github.com/cosmos/cosmos-sdk/types.Int" ||
+            args.field.options?.["(gogoproto.customtype)"] ==
+                "cosmossdk.io/math.LegacyDec";
 
-    // message.period = object.period ?? undefined;
+        if (isCosmosSDKDec) {
+            args.context.addUtil("fromUtf8");
+            args.context.addUtil("formatNumberWithThousandSeparator");
 
-    duration(args: ToTextualSigMethod) {
-        const durationFormat = args.context.pluginValue(
-            "prototypes.typingsFormat.duration"
-        );
-        switch (durationFormat) {
-            case "string":
-                return toTextualSig.durationString(args);
-            case "duration":
-            default:
-                return toTextualSig.type(args);
+            const { propName } = getFieldNames(args.field);
+
+            return toTextualSig.scalar(
+                args,
+                t.callExpression(
+                    t.identifier("formatNumberWithThousandSeparator"),
+                    [
+                        t.callExpression(t.identifier("fromUtf8"), [
+                            t.memberExpression(
+                                t.identifier(MSG_VAR_NAME),
+                                t.identifier(propName)
+                            ),
+                        ]),
+                    ]
+                )
+            );
+        } else {
+            return toTextualSig.formattedScalar(args, "toByteTextual", 1);
         }
     },
 
-    durationString(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
+    duration(args: ToTextualSigMethod) {
+        return toTextualSig.formattedScalar(args, "toDurationTextual", 1);
     },
 
     timestamp(args: ToTextualSigMethod) {
-        const timestampFormat = args.context.pluginValue(
-            "prototypes.typingsFormat.timestamp"
-        );
-        switch (timestampFormat) {
-            case "timestamp":
-                return toTextualSig.type(args);
-            case "date":
-            default:
-                return toTextualSig.timestampDate(args);
-        }
+        return toTextualSig.formattedScalar(args, "toTimestampTextual", 1);
     },
-
-    // message.periodReset = object.periodReset ?? undefined;
-
-    timestampDate(args: ToTextualSigMethod) {
-        return toTextualSig.scalar(args);
-    },
-
-    // message.referenceMap = Object.entries(object.referenceMap ?? {}).reduce<{
-    //     [key: Long]: Reference;
-    //   }>((acc, [key, value]) => {
-    //     if (value !== undefined) {
-    //       acc[Number(key)] = Reference.toTextualSig(value);
-    //     }
-
-    //     return acc;
-    //   }, {});
-
-    // message.labels = Object.entries(object.typeMap ?? {}).reduce<{
-    //     [key: string]: string;
-    // }>((acc, [key, value]) => {
-    //     if (value !== undefined) {
-    //         acc[key] = String(value);
-    //     }
-
-    //     return acc;
-    // }, {});
 
     keyHash(args: ToTextualSigMethod) {
-        const prop = args.field.name;
-        const keyType = args.field.keyType;
-        const valueType = args.field.parsedType.name;
-
-        let toTextualSigWithArgs = null;
-        // valueTypeType: string for identifier
-        let valueTypeType = valueType;
-        switch (valueType) {
-            case "string":
-                toTextualSigWithArgs = t.callExpression(
-                    t.identifier("String"),
-                    [t.identifier("value")]
-                );
-                break;
-            case "int32":
-            case "uint32":
-                valueTypeType = "number";
-                toTextualSigWithArgs = t.callExpression(
-                    t.identifier("Number"),
-                    [t.identifier("value")]
-                );
-                break;
-            case "int64":
-            case "uint64":
-            case "sint64":
-            case "fixed64":
-            case "sfixed64":
-                TypeLong.addUtil(args.context);
-
-                valueTypeType = TypeLong.getPropType(args.context);
-                toTextualSigWithArgs = TypeLong.getFromValueWithArgs(
-                    args.context,
-                    t.identifier("value")
-                );
-                break;
-            default:
-                toTextualSigWithArgs = t.callExpression(
-                    t.memberExpression(
-                        t.identifier(valueType),
-                        t.identifier("toTextualSig")
-                    ),
-                    [t.identifier("value")]
-                );
-        }
-
-        let wrapKey = null;
-        let keyTypeType = null;
-        switch (keyType) {
-            case "string":
-                wrapKey = (a) => a;
-                keyTypeType = t.tsStringKeyword();
-                break;
-            case "int64":
-            case "uint64":
-            case "sint64":
-            case "fixed64":
-            case "sfixed64":
-                wrapKey = (a) => t.callExpression(t.identifier("Number"), [a]);
-
-                TypeLong.addUtil(args.context);
-
-                keyTypeType = t.tsTypeReference(
-                    TypeLong.getPropIdentifier(args.context)
-                );
-                break;
-            case "int32":
-            case "uint32":
-                wrapKey = (a) => t.callExpression(t.identifier("Number"), [a]);
-                keyTypeType = t.tsNumberKeyword();
-                break;
-            default:
-                throw new Error("keyHash requires new type. Ask maintainers.");
-        }
-
-        return t.expressionStatement(
-            t.assignmentExpression(
-                "=",
-                t.memberExpression(t.identifier("message"), t.identifier(prop)),
-                callExpression(
-                    t.memberExpression(
-                        t.callExpression(
-                            t.memberExpression(
-                                t.identifier("Object"),
-                                t.identifier("entries")
-                            ),
-                            [
-                                t.logicalExpression(
-                                    "??",
-                                    t.memberExpression(
-                                        t.identifier("object"),
-                                        t.identifier(prop)
-                                    ),
-                                    t.objectExpression([])
-                                ),
-                            ]
-                        ),
-                        t.identifier("reduce")
-                    ),
-                    [
-                        t.arrowFunctionExpression(
-                            [
-                                t.identifier("acc"),
-                                t.arrayPattern([
-                                    t.identifier("key"),
-                                    t.identifier("value"),
-                                ]),
-                            ],
-                            t.blockStatement([
-                                t.ifStatement(
-                                    t.binaryExpression(
-                                        "!==",
-                                        t.identifier("value"),
-                                        t.identifier("undefined")
-                                    ),
-                                    t.blockStatement([
-                                        t.expressionStatement(
-                                            t.assignmentExpression(
-                                                "=",
-                                                t.memberExpression(
-                                                    t.identifier("acc"),
-                                                    wrapKey(
-                                                        t.identifier("key")
-                                                    ),
-                                                    true
-                                                ),
-                                                toTextualSigWithArgs
-                                            )
-                                        ),
-                                    ])
-                                ),
-                                t.returnStatement(t.identifier("acc")),
-                            ])
-                        ),
-                        t.objectExpression([]),
-                    ],
-                    t.tsTypeParameterInstantiation([
-                        t.tsTypeLiteral([
-                            t.tsIndexSignature(
-                                [
-                                    identifier(
-                                        "key",
-                                        t.tsTypeAnnotation(keyTypeType)
-                                    ),
-                                ],
-                                t.tsTypeAnnotation(
-                                    t.tsTypeReference(
-                                        t.identifier(valueTypeType)
-                                    )
-                                )
-                            ),
-                        ]),
-                    ])
-                )
-            )
-        );
+        return toTextualSig.scalar(args, null, 1);
     },
 
     // message.codeIds = object.codeIds?.map(e => Long.fromValue(e)) || [];
@@ -455,7 +356,10 @@ export const toTextualSig = {
         return t.expressionStatement(
             t.assignmentExpression(
                 "=",
-                t.memberExpression(t.identifier("message"), t.identifier(prop)),
+                t.memberExpression(
+                    t.identifier(MSG_VAR_NAME),
+                    t.identifier(prop)
+                ),
                 t.logicalExpression(
                     "||",
                     t.optionalCallExpression(
