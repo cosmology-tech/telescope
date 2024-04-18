@@ -249,7 +249,7 @@
     "@babel/helper-environment-visitor" "^7.22.20"
     "@babel/helper-wrap-function" "^7.22.20"
 
-"@babel/helper-replace-supers@^7.24.1":
+"@babel/helper-replace-supers@^7.22.20", "@babel/helper-replace-supers@^7.24.1":
   version "7.24.1"
   resolved "https://registry.npmjs.org/@babel/helper-replace-supers/-/helper-replace-supers-7.24.1.tgz#7085bd19d4a0b7ed8f405c1ed73ccb70f323abc1"
   integrity sha512-QCR1UqC9BzG5vZl8BMicmZ28RuUBnHhAMddD8yHFHDRH9lLTZ9uUPehX8ctVPT8l0TKblJidqcgUUKGVrePleQ==
