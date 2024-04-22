@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, DeepPartial } from "../../helpers";
+import { isSet, DeepPartial, formatNumberWithThousandSeparator } from "../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../types";
 import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.protobuf";
 /**
@@ -320,6 +321,17 @@ export const Duration = {
       typeUrl: "/google.protobuf.Duration",
       value: Duration.encode(message).finish()
     };
+  },
+  toTextualSig(message: Duration, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("Duration object", indent, expert));
+    if (message.seconds !== undefined && message.seconds !== null) {
+      results.push(new TextualSigLine(`Seconds: ${formatNumberWithThousandSeparator(message.seconds)}`, indent, expert).indentAdd(1));
+    }
+    if (message.nanos !== undefined && message.nanos !== null) {
+      results.push(new TextualSigLine(`Nanos: ${formatNumberWithThousandSeparator(message.nanos)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(Duration.typeUrl, Duration);

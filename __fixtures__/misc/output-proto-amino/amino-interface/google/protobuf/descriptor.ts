@@ -1,6 +1,8 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { DeepPartial, isSet, formatNumberWithThousandSeparator, fromBooleanToString, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../types";
 import { GlobalDecoderRegistry } from "../../registry";
+import { toByteTextual } from "../../extern";
 export const protobufPackage = "google.protobuf";
 export enum FieldDescriptorProto_Type {
   /**
@@ -2364,6 +2366,12 @@ export const FileDescriptorSet = {
       typeUrl: "/google.protobuf.FileDescriptorSet",
       value: FileDescriptorSet.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileDescriptorSet, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileDescriptorSet object", indent, expert));
+    message.file = object.file?.map(e => FileDescriptorProto.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FileDescriptorSet.typeUrl, FileDescriptorSet);
@@ -2741,6 +2749,33 @@ export const FileDescriptorProto = {
       typeUrl: "/google.protobuf.FileDescriptorProto",
       value: FileDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.package !== undefined && message.package !== null) {
+      results.push(new TextualSigLine(`Package: ${message.package}`, indent, expert).indentAdd(1));
+    }
+    message.dependency = object.dependency?.map(e => e) || [];
+    message.publicDependency = object.publicDependency?.map(e => e) || [];
+    message.weakDependency = object.weakDependency?.map(e => e) || [];
+    message.messageType = object.messageType?.map(e => DescriptorProto.toTextualSig(e)) || [];
+    message.enumType = object.enumType?.map(e => EnumDescriptorProto.toTextualSig(e)) || [];
+    message.service = object.service?.map(e => ServiceDescriptorProto.toTextualSig(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      FileOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.sourceCodeInfo !== undefined && message.sourceCodeInfo !== null) {
+      SourceCodeInfo.toTextualSig(message.sourceCodeInfo, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.syntax !== undefined && message.syntax !== null) {
+      results.push(new TextualSigLine(`Syntax: ${message.syntax}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FileDescriptorProto.typeUrl, FileDescriptorProto);
@@ -3074,6 +3109,25 @@ export const DescriptorProto = {
       typeUrl: "/google.protobuf.DescriptorProto",
       value: DescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    message.field = object.field?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    message.extension = object.extension?.map(e => FieldDescriptorProto.toTextualSig(e)) || [];
+    message.nestedType = object.nestedType?.map(e => DescriptorProto.toTextualSig(e)) || [];
+    message.enumType = object.enumType?.map(e => EnumDescriptorProto.toTextualSig(e)) || [];
+    message.extensionRange = object.extensionRange?.map(e => DescriptorProto_ExtensionRange.toTextualSig(e)) || [];
+    message.oneofDecl = object.oneofDecl?.map(e => OneofDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      MessageOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    message.reservedRange = object.reservedRange?.map(e => DescriptorProto_ReservedRange.toTextualSig(e)) || [];
+    message.reservedName = object.reservedName?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DescriptorProto.typeUrl, DescriptorProto);
@@ -3208,6 +3262,20 @@ export const DescriptorProto_ExtensionRange = {
       typeUrl: "/google.protobuf.ExtensionRange",
       value: DescriptorProto_ExtensionRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto_ExtensionRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto_ExtensionRange object", indent, expert));
+    if (message.start !== undefined && message.start !== null) {
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
+    }
+    if (message.options !== undefined && message.options !== null) {
+      ExtensionRangeOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DescriptorProto_ExtensionRange.typeUrl, DescriptorProto_ExtensionRange);
@@ -3323,6 +3391,17 @@ export const DescriptorProto_ReservedRange = {
       typeUrl: "/google.protobuf.ReservedRange",
       value: DescriptorProto_ReservedRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: DescriptorProto_ReservedRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("DescriptorProto_ReservedRange object", indent, expert));
+    if (message.start !== undefined && message.start !== null) {
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(DescriptorProto_ReservedRange.typeUrl, DescriptorProto_ReservedRange);
@@ -3431,6 +3510,12 @@ export const ExtensionRangeOptions = {
       typeUrl: "/google.protobuf.ExtensionRangeOptions",
       value: ExtensionRangeOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: ExtensionRangeOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ExtensionRangeOptions object", indent, expert));
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(ExtensionRangeOptions.typeUrl, ExtensionRangeOptions);
@@ -3684,6 +3769,41 @@ export const FieldDescriptorProto = {
       typeUrl: "/google.protobuf.FieldDescriptorProto",
       value: FieldDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: FieldDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FieldDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.number !== undefined && message.number !== null) {
+      results.push(new TextualSigLine(`Number: ${formatNumberWithThousandSeparator(message.number)}`, indent, expert).indentAdd(1));
+    }
+    if (message.label !== undefined && message.label !== null) {
+      results.push(new TextualSigLine(`Label: ${fieldDescriptorProto_LabelToJSON(message.label)}`, indent, expert).indentAdd(1));
+    }
+    if (message.type !== undefined && message.type !== null) {
+      results.push(new TextualSigLine(`Type: ${fieldDescriptorProto_TypeToJSON(message.type)}`, indent, expert).indentAdd(1));
+    }
+    if (message.typeName !== undefined && message.typeName !== null) {
+      results.push(new TextualSigLine(`Type name: ${message.typeName}`, indent, expert).indentAdd(1));
+    }
+    if (message.extendee !== undefined && message.extendee !== null) {
+      results.push(new TextualSigLine(`Extendee: ${message.extendee}`, indent, expert).indentAdd(1));
+    }
+    if (message.defaultValue !== undefined && message.defaultValue !== null) {
+      results.push(new TextualSigLine(`Default value: ${message.defaultValue}`, indent, expert).indentAdd(1));
+    }
+    if (message.oneofIndex !== undefined && message.oneofIndex !== null) {
+      results.push(new TextualSigLine(`Oneof index: ${formatNumberWithThousandSeparator(message.oneofIndex)}`, indent, expert).indentAdd(1));
+    }
+    if (message.jsonName !== undefined && message.jsonName !== null) {
+      results.push(new TextualSigLine(`Json name: ${message.jsonName}`, indent, expert).indentAdd(1));
+    }
+    if (message.options !== undefined && message.options !== null) {
+      FieldOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FieldDescriptorProto.typeUrl, FieldDescriptorProto);
@@ -3801,6 +3921,17 @@ export const OneofDescriptorProto = {
       typeUrl: "/google.protobuf.OneofDescriptorProto",
       value: OneofDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: OneofDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("OneofDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.options !== undefined && message.options !== null) {
+      OneofOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(OneofDescriptorProto.typeUrl, OneofDescriptorProto);
@@ -3999,6 +4130,20 @@ export const EnumDescriptorProto = {
       typeUrl: "/google.protobuf.EnumDescriptorProto",
       value: EnumDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    message.value = object.value?.map(e => EnumValueDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      EnumOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    message.reservedRange = object.reservedRange?.map(e => EnumDescriptorProto_EnumReservedRange.toTextualSig(e)) || [];
+    message.reservedName = object.reservedName?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EnumDescriptorProto.typeUrl, EnumDescriptorProto);
@@ -4114,6 +4259,17 @@ export const EnumDescriptorProto_EnumReservedRange = {
       typeUrl: "/google.protobuf.EnumReservedRange",
       value: EnumDescriptorProto_EnumReservedRange.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumDescriptorProto_EnumReservedRange, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumDescriptorProto_EnumReservedRange object", indent, expert));
+    if (message.start !== undefined && message.start !== null) {
+      results.push(new TextualSigLine(`Start: ${formatNumberWithThousandSeparator(message.start)}`, indent, expert).indentAdd(1));
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EnumDescriptorProto_EnumReservedRange.typeUrl, EnumDescriptorProto_EnumReservedRange);
@@ -4248,6 +4404,20 @@ export const EnumValueDescriptorProto = {
       typeUrl: "/google.protobuf.EnumValueDescriptorProto",
       value: EnumValueDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumValueDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumValueDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.number !== undefined && message.number !== null) {
+      results.push(new TextualSigLine(`Number: ${formatNumberWithThousandSeparator(message.number)}`, indent, expert).indentAdd(1));
+    }
+    if (message.options !== undefined && message.options !== null) {
+      EnumValueOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EnumValueDescriptorProto.typeUrl, EnumValueDescriptorProto);
@@ -4392,6 +4562,18 @@ export const ServiceDescriptorProto = {
       typeUrl: "/google.protobuf.ServiceDescriptorProto",
       value: ServiceDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: ServiceDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ServiceDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    message.method = object.method?.map(e => MethodDescriptorProto.toTextualSig(e)) || [];
+    if (message.options !== undefined && message.options !== null) {
+      ServiceOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(ServiceDescriptorProto.typeUrl, ServiceDescriptorProto);
@@ -4577,6 +4759,29 @@ export const MethodDescriptorProto = {
       typeUrl: "/google.protobuf.MethodDescriptorProto",
       value: MethodDescriptorProto.encode(message).finish()
     };
+  },
+  toTextualSig(message: MethodDescriptorProto, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MethodDescriptorProto object", indent, expert));
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    if (message.inputType !== undefined && message.inputType !== null) {
+      results.push(new TextualSigLine(`Input type: ${message.inputType}`, indent, expert).indentAdd(1));
+    }
+    if (message.outputType !== undefined && message.outputType !== null) {
+      results.push(new TextualSigLine(`Output type: ${message.outputType}`, indent, expert).indentAdd(1));
+    }
+    if (message.options !== undefined && message.options !== null) {
+      MethodOptions.toTextualSig(message.options, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.clientStreaming !== undefined && message.clientStreaming !== null) {
+      results.push(new TextualSigLine(`Client streaming: ${fromBooleanToString(message.clientStreaming)}`, indent, expert).indentAdd(1));
+    }
+    if (message.serverStreaming !== undefined && message.serverStreaming !== null) {
+      results.push(new TextualSigLine(`Server streaming: ${fromBooleanToString(message.serverStreaming)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(MethodDescriptorProto.typeUrl, MethodDescriptorProto);
@@ -5025,6 +5230,72 @@ export const FileOptions = {
       typeUrl: "/google.protobuf.FileOptions",
       value: FileOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: FileOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FileOptions object", indent, expert));
+    if (message.javaPackage !== undefined && message.javaPackage !== null) {
+      results.push(new TextualSigLine(`Java package: ${message.javaPackage}`, indent, expert).indentAdd(1));
+    }
+    if (message.javaOuterClassname !== undefined && message.javaOuterClassname !== null) {
+      results.push(new TextualSigLine(`Java outer classname: ${message.javaOuterClassname}`, indent, expert).indentAdd(1));
+    }
+    if (message.javaMultipleFiles !== undefined && message.javaMultipleFiles !== null) {
+      results.push(new TextualSigLine(`Java multiple files: ${fromBooleanToString(message.javaMultipleFiles)}`, indent, expert).indentAdd(1));
+    }
+    if (message.javaGenerateEqualsAndHash !== undefined && message.javaGenerateEqualsAndHash !== null) {
+      results.push(new TextualSigLine(`Java generate equals and hash: ${fromBooleanToString(message.javaGenerateEqualsAndHash)}`, indent, expert).indentAdd(1));
+    }
+    if (message.javaStringCheckUtf8 !== undefined && message.javaStringCheckUtf8 !== null) {
+      results.push(new TextualSigLine(`Java string check utf8: ${fromBooleanToString(message.javaStringCheckUtf8)}`, indent, expert).indentAdd(1));
+    }
+    if (message.optimizeFor !== undefined && message.optimizeFor !== null) {
+      results.push(new TextualSigLine(`Optimize for: ${fileOptions_OptimizeModeToJSON(message.optimizeFor)}`, indent, expert).indentAdd(1));
+    }
+    if (message.goPackage !== undefined && message.goPackage !== null) {
+      results.push(new TextualSigLine(`Go package: ${message.goPackage}`, indent, expert).indentAdd(1));
+    }
+    if (message.ccGenericServices !== undefined && message.ccGenericServices !== null) {
+      results.push(new TextualSigLine(`Cc generic services: ${fromBooleanToString(message.ccGenericServices)}`, indent, expert).indentAdd(1));
+    }
+    if (message.javaGenericServices !== undefined && message.javaGenericServices !== null) {
+      results.push(new TextualSigLine(`Java generic services: ${fromBooleanToString(message.javaGenericServices)}`, indent, expert).indentAdd(1));
+    }
+    if (message.pyGenericServices !== undefined && message.pyGenericServices !== null) {
+      results.push(new TextualSigLine(`Py generic services: ${fromBooleanToString(message.pyGenericServices)}`, indent, expert).indentAdd(1));
+    }
+    if (message.phpGenericServices !== undefined && message.phpGenericServices !== null) {
+      results.push(new TextualSigLine(`Php generic services: ${fromBooleanToString(message.phpGenericServices)}`, indent, expert).indentAdd(1));
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    if (message.ccEnableArenas !== undefined && message.ccEnableArenas !== null) {
+      results.push(new TextualSigLine(`Cc enable arenas: ${fromBooleanToString(message.ccEnableArenas)}`, indent, expert).indentAdd(1));
+    }
+    if (message.objcClassPrefix !== undefined && message.objcClassPrefix !== null) {
+      results.push(new TextualSigLine(`Objc class prefix: ${message.objcClassPrefix}`, indent, expert).indentAdd(1));
+    }
+    if (message.csharpNamespace !== undefined && message.csharpNamespace !== null) {
+      results.push(new TextualSigLine(`Csharp namespace: ${message.csharpNamespace}`, indent, expert).indentAdd(1));
+    }
+    if (message.swiftPrefix !== undefined && message.swiftPrefix !== null) {
+      results.push(new TextualSigLine(`Swift prefix: ${message.swiftPrefix}`, indent, expert).indentAdd(1));
+    }
+    if (message.phpClassPrefix !== undefined && message.phpClassPrefix !== null) {
+      results.push(new TextualSigLine(`Php class prefix: ${message.phpClassPrefix}`, indent, expert).indentAdd(1));
+    }
+    if (message.phpNamespace !== undefined && message.phpNamespace !== null) {
+      results.push(new TextualSigLine(`Php namespace: ${message.phpNamespace}`, indent, expert).indentAdd(1));
+    }
+    if (message.phpMetadataNamespace !== undefined && message.phpMetadataNamespace !== null) {
+      results.push(new TextualSigLine(`Php metadata namespace: ${message.phpMetadataNamespace}`, indent, expert).indentAdd(1));
+    }
+    if (message.rubyPackage !== undefined && message.rubyPackage !== null) {
+      results.push(new TextualSigLine(`Ruby package: ${message.rubyPackage}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FileOptions.typeUrl, FileOptions);
@@ -5201,6 +5472,24 @@ export const MessageOptions = {
       typeUrl: "/google.protobuf.MessageOptions",
       value: MessageOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: MessageOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MessageOptions object", indent, expert));
+    if (message.messageSetWireFormat !== undefined && message.messageSetWireFormat !== null) {
+      results.push(new TextualSigLine(`Message set wire format: ${fromBooleanToString(message.messageSetWireFormat)}`, indent, expert).indentAdd(1));
+    }
+    if (message.noStandardDescriptorAccessor !== undefined && message.noStandardDescriptorAccessor !== null) {
+      results.push(new TextualSigLine(`No standard descriptor accessor: ${fromBooleanToString(message.noStandardDescriptorAccessor)}`, indent, expert).indentAdd(1));
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    if (message.mapEntry !== undefined && message.mapEntry !== null) {
+      results.push(new TextualSigLine(`Map entry: ${fromBooleanToString(message.mapEntry)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(MessageOptions.typeUrl, MessageOptions);
@@ -5411,6 +5700,30 @@ export const FieldOptions = {
       typeUrl: "/google.protobuf.FieldOptions",
       value: FieldOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: FieldOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FieldOptions object", indent, expert));
+    if (message.ctype !== undefined && message.ctype !== null) {
+      results.push(new TextualSigLine(`Ctype: ${fieldOptions_CTypeToJSON(message.ctype)}`, indent, expert).indentAdd(1));
+    }
+    if (message.packed !== undefined && message.packed !== null) {
+      results.push(new TextualSigLine(`Packed: ${fromBooleanToString(message.packed)}`, indent, expert).indentAdd(1));
+    }
+    if (message.jstype !== undefined && message.jstype !== null) {
+      results.push(new TextualSigLine(`Jstype: ${fieldOptions_JSTypeToJSON(message.jstype)}`, indent, expert).indentAdd(1));
+    }
+    if (message.lazy !== undefined && message.lazy !== null) {
+      results.push(new TextualSigLine(`Lazy: ${fromBooleanToString(message.lazy)}`, indent, expert).indentAdd(1));
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    if (message.weak !== undefined && message.weak !== null) {
+      results.push(new TextualSigLine(`Weak: ${fromBooleanToString(message.weak)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FieldOptions.typeUrl, FieldOptions);
@@ -5519,6 +5832,12 @@ export const OneofOptions = {
       typeUrl: "/google.protobuf.OneofOptions",
       value: OneofOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: OneofOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("OneofOptions object", indent, expert));
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(OneofOptions.typeUrl, OneofOptions);
@@ -5661,6 +5980,18 @@ export const EnumOptions = {
       typeUrl: "/google.protobuf.EnumOptions",
       value: EnumOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumOptions object", indent, expert));
+    if (message.allowAlias !== undefined && message.allowAlias !== null) {
+      results.push(new TextualSigLine(`Allow alias: ${fromBooleanToString(message.allowAlias)}`, indent, expert).indentAdd(1));
+    }
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EnumOptions.typeUrl, EnumOptions);
@@ -5786,6 +6117,15 @@ export const EnumValueOptions = {
       typeUrl: "/google.protobuf.EnumValueOptions",
       value: EnumValueOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: EnumValueOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EnumValueOptions object", indent, expert));
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EnumValueOptions.typeUrl, EnumValueOptions);
@@ -5911,6 +6251,15 @@ export const ServiceOptions = {
       typeUrl: "/google.protobuf.ServiceOptions",
       value: ServiceOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: ServiceOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ServiceOptions object", indent, expert));
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(ServiceOptions.typeUrl, ServiceOptions);
@@ -6053,6 +6402,18 @@ export const MethodOptions = {
       typeUrl: "/google.protobuf.MethodOptions",
       value: MethodOptions.encode(message).finish()
     };
+  },
+  toTextualSig(message: MethodOptions, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MethodOptions object", indent, expert));
+    if (message.deprecated !== undefined && message.deprecated !== null) {
+      results.push(new TextualSigLine(`Deprecated: ${fromBooleanToString(message.deprecated)}`, indent, expert).indentAdd(1));
+    }
+    if (message.idempotencyLevel !== undefined && message.idempotencyLevel !== null) {
+      results.push(new TextualSigLine(`Idempotency level: ${methodOptions_IdempotencyLevelToJSON(message.idempotencyLevel)}`, indent, expert).indentAdd(1));
+    }
+    message.uninterpretedOption = object.uninterpretedOption?.map(e => UninterpretedOption.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(MethodOptions.typeUrl, MethodOptions);
@@ -6267,6 +6628,30 @@ export const UninterpretedOption = {
       typeUrl: "/google.protobuf.UninterpretedOption",
       value: UninterpretedOption.encode(message).finish()
     };
+  },
+  toTextualSig(message: UninterpretedOption, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("UninterpretedOption object", indent, expert));
+    message.name = object.name?.map(e => UninterpretedOption_NamePart.toTextualSig(e)) || [];
+    if (message.identifierValue !== undefined && message.identifierValue !== null) {
+      results.push(new TextualSigLine(`Identifier value: ${message.identifierValue}`, indent, expert).indentAdd(1));
+    }
+    if (message.positiveIntValue !== undefined && message.positiveIntValue !== null) {
+      results.push(new TextualSigLine(`Positive int value: ${formatNumberWithThousandSeparator(message.positiveIntValue)}`, indent, expert).indentAdd(1));
+    }
+    if (message.negativeIntValue !== undefined && message.negativeIntValue !== null) {
+      results.push(new TextualSigLine(`Negative int value: ${formatNumberWithThousandSeparator(message.negativeIntValue)}`, indent, expert).indentAdd(1));
+    }
+    if (message.doubleValue !== undefined && message.doubleValue !== null) {
+      results.push(new TextualSigLine(`Double value: ${formatNumberWithThousandSeparator(message.doubleValue)}`, indent, expert).indentAdd(1));
+    }
+    if (message.stringValue !== undefined && message.stringValue !== null) {
+      results.push(new TextualSigLine(`String value: ${toByteTextual(message.stringValue)}`, indent, expert).indentAdd(1));
+    }
+    if (message.aggregateValue !== undefined && message.aggregateValue !== null) {
+      results.push(new TextualSigLine(`Aggregate value: ${message.aggregateValue}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(UninterpretedOption.typeUrl, UninterpretedOption);
@@ -6382,6 +6767,17 @@ export const UninterpretedOption_NamePart = {
       typeUrl: "/google.protobuf.NamePart",
       value: UninterpretedOption_NamePart.encode(message).finish()
     };
+  },
+  toTextualSig(message: UninterpretedOption_NamePart, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("UninterpretedOption_NamePart object", indent, expert));
+    if (message.namePart !== undefined && message.namePart !== null) {
+      results.push(new TextualSigLine(`Name part: ${message.namePart}`, indent, expert).indentAdd(1));
+    }
+    if (message.isExtension !== undefined && message.isExtension !== null) {
+      results.push(new TextualSigLine(`Is extension: ${fromBooleanToString(message.isExtension)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(UninterpretedOption_NamePart.typeUrl, UninterpretedOption_NamePart);
@@ -6490,6 +6886,12 @@ export const SourceCodeInfo = {
       typeUrl: "/google.protobuf.SourceCodeInfo",
       value: SourceCodeInfo.encode(message).finish()
     };
+  },
+  toTextualSig(message: SourceCodeInfo, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("SourceCodeInfo object", indent, expert));
+    message.location = object.location?.map(e => SourceCodeInfo_Location.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(SourceCodeInfo.typeUrl, SourceCodeInfo);
@@ -6704,6 +7106,20 @@ export const SourceCodeInfo_Location = {
       typeUrl: "/google.protobuf.Location",
       value: SourceCodeInfo_Location.encode(message).finish()
     };
+  },
+  toTextualSig(message: SourceCodeInfo_Location, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("SourceCodeInfo_Location object", indent, expert));
+    message.path = object.path?.map(e => e) || [];
+    message.span = object.span?.map(e => e) || [];
+    if (message.leadingComments !== undefined && message.leadingComments !== null) {
+      results.push(new TextualSigLine(`Leading comments: ${message.leadingComments}`, indent, expert).indentAdd(1));
+    }
+    if (message.trailingComments !== undefined && message.trailingComments !== null) {
+      results.push(new TextualSigLine(`Trailing comments: ${message.trailingComments}`, indent, expert).indentAdd(1));
+    }
+    message.leadingDetachedComments = object.leadingDetachedComments?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(SourceCodeInfo_Location.typeUrl, SourceCodeInfo_Location);
@@ -6812,6 +7228,12 @@ export const GeneratedCodeInfo = {
       typeUrl: "/google.protobuf.GeneratedCodeInfo",
       value: GeneratedCodeInfo.encode(message).finish()
     };
+  },
+  toTextualSig(message: GeneratedCodeInfo, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GeneratedCodeInfo object", indent, expert));
+    message.annotation = object.annotation?.map(e => GeneratedCodeInfo_Annotation.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GeneratedCodeInfo.typeUrl, GeneratedCodeInfo);
@@ -6980,6 +7402,21 @@ export const GeneratedCodeInfo_Annotation = {
       typeUrl: "/google.protobuf.Annotation",
       value: GeneratedCodeInfo_Annotation.encode(message).finish()
     };
+  },
+  toTextualSig(message: GeneratedCodeInfo_Annotation, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GeneratedCodeInfo_Annotation object", indent, expert));
+    message.path = object.path?.map(e => e) || [];
+    if (message.sourceFile !== undefined && message.sourceFile !== null) {
+      results.push(new TextualSigLine(`Source file: ${message.sourceFile}`, indent, expert).indentAdd(1));
+    }
+    if (message.begin !== undefined && message.begin !== null) {
+      results.push(new TextualSigLine(`Begin: ${formatNumberWithThousandSeparator(message.begin)}`, indent, expert).indentAdd(1));
+    }
+    if (message.end !== undefined && message.end !== null) {
+      results.push(new TextualSigLine(`End: ${formatNumberWithThousandSeparator(message.end)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GeneratedCodeInfo_Annotation.typeUrl, GeneratedCodeInfo_Annotation);
@@ -7078,6 +7515,14 @@ export const FeatureSet = {
       typeUrl: "/google.protobuf.FeatureSet",
       value: FeatureSet.encode(message).finish()
     };
+  },
+  toTextualSig(message: FeatureSet, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("FeatureSet object", indent, expert));
+    if (message.utf8Validation !== undefined && message.utf8Validation !== null) {
+      results.push(new TextualSigLine(`Utf8 validation: ${featureSet_Utf8ValidationToJSON(message.utf8Validation)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(FeatureSet.typeUrl, FeatureSet);

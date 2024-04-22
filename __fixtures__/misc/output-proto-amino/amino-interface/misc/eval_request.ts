@@ -1,7 +1,8 @@
 import { ExprValue, ExprValueAmino, ExprValueSDKType, IdRef, IdRefAmino, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
 import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
-import { isSet, DeepPartial, isObject } from "../helpers";
+import { isSet, DeepPartial, isObject, formatNumberWithThousandSeparator, fromBooleanToString } from "../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
@@ -302,6 +303,17 @@ export const EvalRequest_BindingsEntry = {
   },
   toProto(message: EvalRequest_BindingsEntry): Uint8Array {
     return EvalRequest_BindingsEntry.encode(message).finish();
+  },
+  toTextualSig(message: EvalRequest_BindingsEntry, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest_BindingsEntry object", indent, expert));
+    if (message.key !== undefined && message.key !== null) {
+      results.push(new TextualSigLine(`Key: ${message.key}`, indent, expert).indentAdd(1));
+    }
+    if (message.value !== undefined && message.value !== null) {
+      ExprValue.toTextualSig(message.value, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 function createBaseEvalRequest_RefsEntry(): EvalRequest_RefsEntry {
@@ -402,6 +414,17 @@ export const EvalRequest_RefsEntry = {
   },
   toProto(message: EvalRequest_RefsEntry): Uint8Array {
     return EvalRequest_RefsEntry.encode(message).finish();
+  },
+  toTextualSig(message: EvalRequest_RefsEntry, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest_RefsEntry object", indent, expert));
+    if (message.key !== undefined && message.key !== null) {
+      results.push(new TextualSigLine(`Key: ${message.key}`, indent, expert).indentAdd(1));
+    }
+    if (message.value !== undefined && message.value !== null) {
+      IdRef.toTextualSig(message.value, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 function createBaseEvalRequest(): EvalRequest {
@@ -760,6 +783,39 @@ export const EvalRequest = {
       typeUrl: "/misc.EvalRequest",
       value: EvalRequest.encode(message).finish()
     };
+  },
+  toTextualSig(message: EvalRequest, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EvalRequest object", indent, expert));
+    if (message.bindings !== undefined && message.bindings !== null) {
+      results.push(new TextualSigLine(`Bindings: ${message.bindings}`, indent, expert).indentAdd(1));
+    }
+    if (message.refs !== undefined && message.refs !== null) {
+      results.push(new TextualSigLine(`Refs: ${message.refs}`, indent, expert).indentAdd(1));
+    }
+    if (message.testNum !== undefined && message.testNum !== null) {
+      results.push(new TextualSigLine(`Test num: ${formatNumberWithThousandSeparator(message.testNum)}`, indent, expert).indentAdd(1));
+    }
+    if (message.testString !== undefined && message.testString !== null) {
+      results.push(new TextualSigLine(`Test string: ${message.testString}`, indent, expert).indentAdd(1));
+    }
+    if (message.testBool !== undefined && message.testBool !== null) {
+      results.push(new TextualSigLine(`Test bool: ${fromBooleanToString(message.testBool)}`, indent, expert).indentAdd(1));
+    }
+    if (message.instantiatePermission !== undefined && message.instantiatePermission !== null) {
+      AccessConfig.toTextualSig(message.instantiatePermission, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.id !== undefined && message.id !== null) {
+      results.push(new TextualSigLine(`Id: ${message.id}`, indent, expert).indentAdd(1));
+    }
+    if (message.name !== undefined && message.name !== null) {
+      results.push(new TextualSigLine(`Name: ${message.name}`, indent, expert).indentAdd(1));
+    }
+    message.testArray = object.testArray?.map(e => e) || [];
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push(new TextualSigLine(`Opt: ${featureSet_Utf8ValidationToJSON(message.opt)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EvalRequest.typeUrl, EvalRequest);
@@ -858,6 +914,14 @@ export const AccessConfig = {
       typeUrl: "/misc.AccessConfig",
       value: AccessConfig.encode(message).finish()
     };
+  },
+  toTextualSig(message: AccessConfig, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("AccessConfig object", indent, expert));
+    if (message.sender !== undefined && message.sender !== null) {
+      results.push(new TextualSigLine(`Sender: ${message.sender}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(AccessConfig.typeUrl, AccessConfig);
@@ -957,6 +1021,14 @@ export const GenericAuthorization = {
       typeUrl: "/misc.GenericAuthorization",
       value: GenericAuthorization.encode(message).finish()
     };
+  },
+  toTextualSig(message: GenericAuthorization, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("GenericAuthorization object", indent, expert));
+    if (message.msg !== undefined && message.msg !== null) {
+      results.push(new TextualSigLine(`Msg: ${message.msg}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(GenericAuthorization.typeUrl, GenericAuthorization);

@@ -197,6 +197,10 @@ export class GlobalDecoderRegistry {
 
     return decoder.toAminoMsg!(data);
   }
+  static toTextualSig<T>(message: T, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    const decoder = getDecoderByInstance<T>(message);
+    return decoder.toTextualSig!(message, results, indent, expert, metadata);
+  }
 }
 
 function getDecoderByInstance<T = unknown, SDK = unknown, Amino = unknown>(

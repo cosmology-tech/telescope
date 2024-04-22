@@ -2,11 +2,13 @@ import { AccessConfig, AccessConfigAmino, AccessConfigSDKType, VoteOption, VoteO
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../google/protobuf/any";
 import { Duration, DurationAmino, DurationSDKType } from "../google/protobuf/duration";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/timestamp";
-import { isSet, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
+import { isSet, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, DeepPartial, fromBooleanToString, formatNumberWithThousandSeparator, toDurationTextual, toTimestampTextual } from "../helpers";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { Decimal } from "@cosmjs/math";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
+import { toByteTextual } from "../extern";
 import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 export interface EncodingTestForDontOmit {
@@ -1600,6 +1602,115 @@ export const EncodingTestForDontOmit = {
       typeUrl: "/misc.EncodingTestForDontOmit",
       value: EncodingTestForDontOmit.encode(message).finish()
     };
+  },
+  toTextualSig(message: EncodingTestForDontOmit, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EncodingTestForDontOmit object", indent, expert));
+    if (message.str !== undefined && message.str !== null) {
+      results.push(new TextualSigLine(`Str: ${message.str}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOStr !== undefined && message.dOStr !== null) {
+      results.push(new TextualSigLine(`D o str: ${message.dOStr}`, indent, expert).indentAdd(1));
+    }
+    if (message.b !== undefined && message.b !== null) {
+      results.push(new TextualSigLine(`B: ${fromBooleanToString(message.b)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOB !== undefined && message.dOB !== null) {
+      results.push(new TextualSigLine(`D o b: ${fromBooleanToString(message.dOB)}`, indent, expert).indentAdd(1));
+    }
+    if (message.num !== undefined && message.num !== null) {
+      results.push(new TextualSigLine(`Num: ${formatNumberWithThousandSeparator(message.num)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dONum !== undefined && message.dONum !== null) {
+      results.push(new TextualSigLine(`D o num: ${formatNumberWithThousandSeparator(message.dONum)}`, indent, expert).indentAdd(1));
+    }
+    if (message.big !== undefined && message.big !== null) {
+      results.push(new TextualSigLine(`Big: ${formatNumberWithThousandSeparator(message.big)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOBig !== undefined && message.dOBig !== null) {
+      results.push(new TextualSigLine(`D o big: ${formatNumberWithThousandSeparator(message.dOBig)}`, indent, expert).indentAdd(1));
+    }
+    if (message.proto !== undefined && message.proto !== null) {
+      AccessConfig.toTextualSig(message.proto, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.dOProto !== undefined && message.dOProto !== null) {
+      AccessConfig.toTextualSig(message.dOProto, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.auth !== undefined && message.auth !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.auth, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.dOAuth !== undefined && message.dOAuth !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.dOAuth, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.salt !== undefined && message.salt !== null) {
+      results.push(new TextualSigLine(`Salt: ${toByteTextual(message.salt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOSalt !== undefined && message.dOSalt !== null) {
+      results.push(new TextualSigLine(`D o salt: ${toByteTextual(message.dOSalt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.raw !== undefined && message.raw !== null) {
+      results.push(new TextualSigLine(`Raw: ${toByteTextual(message.raw)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dORaw !== undefined && message.dORaw !== null) {
+      results.push(new TextualSigLine(`D o raw: ${toByteTextual(message.dORaw)}`, indent, expert).indentAdd(1));
+    }
+    if (message.wasm !== undefined && message.wasm !== null) {
+      results.push(new TextualSigLine(`Wasm: ${toByteTextual(message.wasm)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOWasm !== undefined && message.dOWasm !== null) {
+      results.push(new TextualSigLine(`D o wasm: ${toByteTextual(message.dOWasm)}`, indent, expert).indentAdd(1));
+    }
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push(new TextualSigLine(`Opt: ${voteOptionToJSON(message.opt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOOpt !== undefined && message.dOOpt !== null) {
+      results.push(new TextualSigLine(`D o opt: ${voteOptionToJSON(message.dOOpt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.period !== undefined && message.period !== null) {
+      results.push(new TextualSigLine(`Period: ${toDurationTextual(message.period)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dOPeriod !== undefined && message.dOPeriod !== null) {
+      results.push(new TextualSigLine(`D o period: ${toDurationTextual(message.dOPeriod)}`, indent, expert).indentAdd(1));
+    }
+    if (message.date !== undefined && message.date !== null) {
+      results.push(new TextualSigLine(`Date: ${toTimestampTextual(message.date)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dODate !== undefined && message.dODate !== null) {
+      results.push(new TextualSigLine(`D o date: ${toTimestampTextual(message.dODate)}`, indent, expert).indentAdd(1));
+    }
+    if (message.pubkey !== undefined && message.pubkey !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.pubkey, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.dOPubkey !== undefined && message.dOPubkey !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.dOPubkey, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    message.nums = object.nums?.map(e => e) || [];
+    message.dONums = object.dONums?.map(e => e) || [];
+    message.bigs = object.bigs?.map(e => BigInt(e.toString())) || [];
+    message.dOBigs = object.dOBigs?.map(e => BigInt(e.toString())) || [];
+    message.salts = object.salts?.map(e => e) || [];
+    message.dOSalts = object.dOSalts?.map(e => e) || [];
+    message.raws = object.raws?.map(e => e) || [];
+    message.dORaws = object.dORaws?.map(e => e) || [];
+    message.wasms = object.wasms?.map(e => e) || [];
+    message.dOWasms = object.dOWasms?.map(e => e) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.dOOpts = object.dOOpts?.map(e => e) || [];
+    message.periods = object.periods?.map(e => Duration.toTextualSig(e)) || [];
+    message.dOPeriods = object.dOPeriods?.map(e => Duration.toTextualSig(e)) || [];
+    message.protos = object.protos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.dOProtos = object.dOProtos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.auths = object.auths?.map(e => (GlobalDecoderRegistry.toTextualSig(e) as any)) || [];
+    message.dOAuths = object.dOAuths?.map(e => (GlobalDecoderRegistry.toTextualSig(e) as any)) || [];
+    if (message.dec !== undefined && message.dec !== null) {
+      results.push(new TextualSigLine(`Dec: ${formatNumberWithThousandSeparator(message.dec)}`, indent, expert).indentAdd(1));
+    }
+    if (message.dODec !== undefined && message.dODec !== null) {
+      results.push(new TextualSigLine(`D o dec: ${formatNumberWithThousandSeparator(message.dODec)}`, indent, expert).indentAdd(1));
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.dODecs = object.dODecs?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EncodingTestForDontOmit.typeUrl, EncodingTestForDontOmit);
@@ -2774,6 +2885,115 @@ export const EncodingTestForOmit = {
       typeUrl: "/misc.EncodingTestForOmit",
       value: EncodingTestForOmit.encode(message).finish()
     };
+  },
+  toTextualSig(message: EncodingTestForOmit, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("EncodingTestForOmit object", indent, expert));
+    if (message.str !== undefined && message.str !== null) {
+      results.push(new TextualSigLine(`Str: ${message.str}`, indent, expert).indentAdd(1));
+    }
+    if (message.oStr !== undefined && message.oStr !== null) {
+      results.push(new TextualSigLine(`O str: ${message.oStr}`, indent, expert).indentAdd(1));
+    }
+    if (message.b !== undefined && message.b !== null) {
+      results.push(new TextualSigLine(`B: ${fromBooleanToString(message.b)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oB !== undefined && message.oB !== null) {
+      results.push(new TextualSigLine(`O b: ${fromBooleanToString(message.oB)}`, indent, expert).indentAdd(1));
+    }
+    if (message.num !== undefined && message.num !== null) {
+      results.push(new TextualSigLine(`Num: ${formatNumberWithThousandSeparator(message.num)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oNum !== undefined && message.oNum !== null) {
+      results.push(new TextualSigLine(`O num: ${formatNumberWithThousandSeparator(message.oNum)}`, indent, expert).indentAdd(1));
+    }
+    if (message.big !== undefined && message.big !== null) {
+      results.push(new TextualSigLine(`Big: ${formatNumberWithThousandSeparator(message.big)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oBig !== undefined && message.oBig !== null) {
+      results.push(new TextualSigLine(`O big: ${formatNumberWithThousandSeparator(message.oBig)}`, indent, expert).indentAdd(1));
+    }
+    if (message.proto !== undefined && message.proto !== null) {
+      AccessConfig.toTextualSig(message.proto, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.oProto !== undefined && message.oProto !== null) {
+      AccessConfig.toTextualSig(message.oProto, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.auth !== undefined && message.auth !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.auth, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.oAuth !== undefined && message.oAuth !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.oAuth, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.salt !== undefined && message.salt !== null) {
+      results.push(new TextualSigLine(`Salt: ${toByteTextual(message.salt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oSalt !== undefined && message.oSalt !== null) {
+      results.push(new TextualSigLine(`O salt: ${toByteTextual(message.oSalt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.raw !== undefined && message.raw !== null) {
+      results.push(new TextualSigLine(`Raw: ${toByteTextual(message.raw)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oRaw !== undefined && message.oRaw !== null) {
+      results.push(new TextualSigLine(`O raw: ${toByteTextual(message.oRaw)}`, indent, expert).indentAdd(1));
+    }
+    if (message.wasm !== undefined && message.wasm !== null) {
+      results.push(new TextualSigLine(`Wasm: ${toByteTextual(message.wasm)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oWasm !== undefined && message.oWasm !== null) {
+      results.push(new TextualSigLine(`O wasm: ${toByteTextual(message.oWasm)}`, indent, expert).indentAdd(1));
+    }
+    if (message.opt !== undefined && message.opt !== null) {
+      results.push(new TextualSigLine(`Opt: ${voteOptionToJSON(message.opt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oOpt !== undefined && message.oOpt !== null) {
+      results.push(new TextualSigLine(`O opt: ${voteOptionToJSON(message.oOpt)}`, indent, expert).indentAdd(1));
+    }
+    if (message.period !== undefined && message.period !== null) {
+      results.push(new TextualSigLine(`Period: ${toDurationTextual(message.period)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oPeriod !== undefined && message.oPeriod !== null) {
+      results.push(new TextualSigLine(`O period: ${toDurationTextual(message.oPeriod)}`, indent, expert).indentAdd(1));
+    }
+    if (message.date !== undefined && message.date !== null) {
+      results.push(new TextualSigLine(`Date: ${toTimestampTextual(message.date)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oDate !== undefined && message.oDate !== null) {
+      results.push(new TextualSigLine(`O date: ${toTimestampTextual(message.oDate)}`, indent, expert).indentAdd(1));
+    }
+    if (message.pubkey !== undefined && message.pubkey !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.pubkey, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.oPubkey !== undefined && message.oPubkey !== null) {
+      GlobalDecoderRegistry.toTextualSig(message.oPubkey, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    message.nums = object.nums?.map(e => e) || [];
+    message.oNums = object.oNums?.map(e => e) || [];
+    message.bigs = object.bigs?.map(e => BigInt(e.toString())) || [];
+    message.oBigs = object.oBigs?.map(e => BigInt(e.toString())) || [];
+    message.salts = object.salts?.map(e => e) || [];
+    message.oSalts = object.oSalts?.map(e => e) || [];
+    message.raws = object.raws?.map(e => e) || [];
+    message.oRaws = object.oRaws?.map(e => e) || [];
+    message.wasms = object.wasms?.map(e => e) || [];
+    message.oWasms = object.oWasms?.map(e => e) || [];
+    message.opts = object.opts?.map(e => e) || [];
+    message.oOpts = object.oOpts?.map(e => e) || [];
+    message.periods = object.periods?.map(e => Duration.toTextualSig(e)) || [];
+    message.oPeriods = object.oPeriods?.map(e => Duration.toTextualSig(e)) || [];
+    message.protos = object.protos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.oProtos = object.oProtos?.map(e => AccessConfig.toTextualSig(e)) || [];
+    message.auths = object.auths?.map(e => (GlobalDecoderRegistry.toTextualSig(e) as any)) || [];
+    message.oAuths = object.oAuths?.map(e => (GlobalDecoderRegistry.toTextualSig(e) as any)) || [];
+    if (message.dec !== undefined && message.dec !== null) {
+      results.push(new TextualSigLine(`Dec: ${formatNumberWithThousandSeparator(message.dec)}`, indent, expert).indentAdd(1));
+    }
+    if (message.oDec !== undefined && message.oDec !== null) {
+      results.push(new TextualSigLine(`O dec: ${formatNumberWithThousandSeparator(message.oDec)}`, indent, expert).indentAdd(1));
+    }
+    message.decs = object.decs?.map(e => e) || [];
+    message.oDecs = object.oDecs?.map(e => e) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(EncodingTestForOmit.typeUrl, EncodingTestForOmit);

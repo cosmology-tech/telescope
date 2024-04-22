@@ -1,6 +1,7 @@
 import { EncodingTestForDontOmit, EncodingTestForDontOmitAmino, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitAmino, EncodingTestForOmitSDKType } from "./all_fields";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../types";
 import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "misc";
 /**
@@ -165,6 +166,17 @@ export const InputMsg = {
       typeUrl: "/misc.InputMsg",
       value: InputMsg.encode(message).finish()
     };
+  },
+  toTextualSig(message: InputMsg, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("InputMsg object", indent, expert));
+    if (message.dOTests !== undefined && message.dOTests !== null) {
+      EncodingTestForDontOmit.toTextualSig(message.dOTests, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    if (message.oTests !== undefined && message.oTests !== null) {
+      EncodingTestForOmit.toTextualSig(message.oTests, results, indent ? indent + 1 : 1, expert, metadata);
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(InputMsg.typeUrl, InputMsg);
@@ -243,6 +255,11 @@ export const MsgResponse = {
       typeUrl: "/misc.MsgResponse",
       value: MsgResponse.encode(message).finish()
     };
+  },
+  toTextualSig(_: MsgResponse, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("MsgResponse object", indent, expert));
+    return results;
   }
 };
 GlobalDecoderRegistry.register(MsgResponse.typeUrl, MsgResponse);

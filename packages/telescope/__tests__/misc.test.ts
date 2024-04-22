@@ -399,6 +399,7 @@ describe("misc", () => {
             fromAmino: true,
             toProto: true,
             fromProto: true,
+            toTextualSig: true,
           },
         },
         aminoEncoding: {

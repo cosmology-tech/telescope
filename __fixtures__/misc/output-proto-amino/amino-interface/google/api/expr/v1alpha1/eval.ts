@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, isSet } from "../../../../helpers";
+import { DeepPartial, isSet, formatNumberWithThousandSeparator } from "../../../../helpers";
+import { DenomMetadata, ITextualSigLine, TextualSigLine } from "../../../../types";
 import { GlobalDecoderRegistry } from "../../../../registry";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
@@ -145,6 +146,12 @@ export const ExprValue = {
       typeUrl: "/google.api.expr.v1alpha1.ExprValue",
       value: ExprValue.encode(message).finish()
     };
+  },
+  toTextualSig(message: ExprValue, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("ExprValue object", indent, expert));
+    message.exprs = object.exprs?.map(e => IdRef.toTextualSig(e)) || [];
+    return results;
   }
 };
 GlobalDecoderRegistry.register(ExprValue.typeUrl, ExprValue);
@@ -243,6 +250,14 @@ export const IdRef = {
       typeUrl: "/google.api.expr.v1alpha1.IdRef",
       value: IdRef.encode(message).finish()
     };
+  },
+  toTextualSig(message: IdRef, results?: ITextualSigLine[], indent?: number, expert?: boolean, metadata?: DenomMetadata[]): ITextualSigLine[] {
+    results = results ?? [];
+    results.push(new TextualSigLine("IdRef object", indent, expert));
+    if (message.id !== undefined && message.id !== null) {
+      results.push(new TextualSigLine(`Id: ${formatNumberWithThousandSeparator(message.id)}`, indent, expert).indentAdd(1));
+    }
+    return results;
   }
 };
 GlobalDecoderRegistry.register(IdRef.typeUrl, IdRef);
