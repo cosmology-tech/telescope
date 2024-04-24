@@ -14,20 +14,23 @@ export async function clone({
   owner,
   repo,
   branch,
-  outDir = "./git-modules",
+  outDir,
 }: {
   owner: string;
   repo: string;
   branch?: string;
   protoDir?: string;
-  outDir?: string;
+  outDir: string;
 }) {
   const gitRepo = new GitRepo(owner, repo);
   const gitBranch = branch ?? (await getMainBranchName(gitRepo.httpsUrl));
-  if (isPathExist(`${outDir}/${owner}/${repo}`)) {
+  const outPath = `${outDir}/${owner}/${repo}`;
+  if (isPathExist(outPath)) {
+    console.warn(`Folder ${outPath} already exists, skip cloning`);
     return;
   }
   const gitDir = await gitRepo.clone(gitBranch, 1, outDir);
+  console.log(`Cloned ${owner}/${repo}/${gitBranch} to ${gitDir}`);
   const bufDeps = await getAllBufDeps(gitDir);
   await Promise.all(
     bufDeps.map(async (bufRepo) => {
@@ -45,13 +48,15 @@ export async function clone({
 }
 
 export async function extractProto({
+  sourceDir,
   targets,
-  outDir = "./proto",
+  outDir,
 }: {
+  sourceDir: string;
   targets: string[];
-  outDir?: string;
+  outDir: string;
 }) {
-  const allProtoFiles = await findAllProtoFiles("./git-modules");
+  const allProtoFiles = await findAllProtoFiles(sourceDir);
   const extractProtoFiles: { sourceFile: string; target: string }[] = [];
   await extractProtoFromDirs({
     targets,

@@ -63,6 +63,7 @@ async function run() {
 
   removeFolder(outDir);
   await extractProto({
+    sourceDir: "./git-modules",
     targets,
     outDir,
   });
