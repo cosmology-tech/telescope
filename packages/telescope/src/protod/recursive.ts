@@ -1,7 +1,7 @@
 import { getAllBufDeps } from "./bufbuild";
 import { GitRepo } from "./git-repo";
 import { GitInfo } from "./types";
-import { join, dirname } from "path";
+import { join, dirname, resolve } from "path";
 import {
   findAllProtoFiles,
   getCorrespondingGit,
@@ -54,7 +54,12 @@ export async function clone({
           const branch = await getMainBranchName(
             `https://github.com/${gitRepo.owner}/${gitRepo.repo}.git`
           );
-          const depsClonedResult = await clone({ ...gitRepo, outDir, branch });
+          const depsClonedResult = await clone({
+            ...gitRepo,
+            outDir,
+            branch,
+            protoDirMapping,
+          });
           clonedResult = {
             ...clonedResult,
             ...depsClonedResult,
@@ -119,7 +124,7 @@ function extractProtoFromDirs({
       extractProtoFiles.push(
         ...files
           .map((file) => {
-            const target = file.replace(source.protoPath, "");
+            const target = file.replace(resolve(source.protoPath), "");
             const duplicate = existingFiles.has(target);
             existingFiles.add(target);
             if (!duplicate) {
@@ -138,8 +143,14 @@ function extractProtoFromDirs({
                   sources,
                 });
 
-                if (deps && deps.length > 0) {
-                  return resultFiles.concat(deps);
+                const filteredDeps = deps?.filter((dep) => {
+                  const depDuplicate = existingFiles.has(dep.target);
+                  existingFiles.add(dep.target);
+                  return !depDuplicate;
+                });
+
+                if (filteredDeps && filteredDeps.length > 0) {
+                  resultFiles.push(...filteredDeps);
                 }
               }
 

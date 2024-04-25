@@ -107,7 +107,7 @@ describe("Test `clone`", () => {
       outDir: gitModules,
       branch: "release/v0.50.x",
       protoDirMapping:{
-        "gogo/protobuf/master": "protobuf",
+        "gogo/protobuf/master": ".",
       }
     });
 
