@@ -603,8 +603,8 @@ For querying data via REST endpoints, you can use LCD Clients. For a better deve
 ```ts
 const options: TelescopeOptions = {
     lcdClients: {
-        enabled: true;
-    }
+        enabled: true,
+    },
 };
 ```
 
