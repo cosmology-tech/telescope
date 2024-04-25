@@ -29,18 +29,6 @@ let codegenFolder = join(
   CODEGEN_FOLDER
 );
 
-describe("Test `clone`", () => {
-  it("should download `cosmos-sdk`, `googleapis`, `protobuf` to `./git-modules`", async () => {
-    removeFolder(gitModules);
-    await clone({
-      owner: "cosmos",
-      repo: "cosmos-sdk",
-      outDir: gitModules,
-      branch: "release/v0.50.x"
-    });
-  });
-});
-
 const options: TelescopeOptions = {
   classesUseArrowFunctions: true,
   env: "v-next",
@@ -110,14 +98,27 @@ const input: TelescopeInput = {
   options,
 };
 
-describe("Test `extractProto`", () => {
-  it("should extract `cosmos/bank/v1beta1/tx.proto` to `./proto`", async () => {
-    removeFolder(protoFolder);
-    await extractProto({
-      sourceDir: gitModules,
-      targets: ["cosmos/bank/v1beta1/tx.proto"],
-      outDir: protoFolder,
+describe("Test `clone`", () => {
+  it("should download `cosmos-sdk`, `googleapis`, `protobuf` to `./git-modules` and extract `cosmos/bank/v1beta1/tx.proto` to `./proto`", async () => {
+    removeFolder(gitModules);
+    const result = await clone({
+      owner: "cosmos",
+      repo: "cosmos-sdk",
+      outDir: gitModules,
+      branch: "release/v0.50.x",
+      protoDirMapping:{
+        "gogo/protobuf/master": "protobuf",
+      }
     });
+
+    if (result) {
+      removeFolder(protoFolder);
+      extractProto({
+        targets: ["cosmos/bank/v1beta1/tx.proto"],
+        sources: result,
+        outDir: protoFolder,
+      });
+    }
   });
 
   it("should successfully generate code in `./codegen`", async () => {

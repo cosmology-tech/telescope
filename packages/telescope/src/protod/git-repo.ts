@@ -15,7 +15,7 @@ export class GitRepo {
     return `git@github.com:${this.fullName}.git`;
   }
 
-  async clone(
+  clone(
     branch: string,
     depth: number = 1,
     outDir: string = "./git-modules"
@@ -25,7 +25,7 @@ export class GitRepo {
       console.log(`Cloning to ${dir}`);
       removeFolder(dir);
       makeDir(dir);
-      await exec(
+      exec(
         `git clone ${this.httpsUrl} --depth ${depth} --branch ${branch} --single-branch ${dir}`
       );
       return dir;

@@ -1,5 +1,7 @@
 import { getAllBufDeps } from "./bufbuild";
 import { GitRepo } from "./git-repo";
+import { GitInfo } from "./types";
+import { join, dirname } from "path";
 import {
   findAllProtoFiles,
   getCorrespondingGit,
@@ -9,19 +11,22 @@ import {
   parseProtoFile,
 } from "./utils";
 import fs from "fs";
+import { sync as globSync } from "glob";
 
 export async function clone({
   owner,
   repo,
   branch,
   outDir,
+  protoDirMapping,
 }: {
   owner: string;
   repo: string;
   branch?: string;
-  protoDir?: string;
+  protoDirMapping?: Record<string, string>;
   outDir: string;
 }) {
+  let clonedResult: Record<string, GitInfo> = {};
   const gitRepo = new GitRepo(owner, repo);
   const gitBranch = branch ?? (await getMainBranchName(gitRepo.httpsUrl));
   const outPath = `${outDir}/${owner}/${repo}`;
@@ -29,8 +34,17 @@ export async function clone({
     console.warn(`Folder ${outPath} already exists, skip cloning`);
     return;
   }
-  const gitDir = await gitRepo.clone(gitBranch, 1, outDir);
+  const gitDir = gitRepo.clone(gitBranch, 1, outDir);
   console.log(`Cloned ${owner}/${repo}/${gitBranch} to ${gitDir}`);
+  const protoDir =
+    protoDirMapping?.[`${owner}/${repo}/${gitBranch}`] ?? "proto";
+  clonedResult[`${owner}/${repo}/${gitBranch}`] = {
+    owner,
+    repo,
+    branch: gitBranch,
+    protoDir,
+    protoPath: `${outDir}/${owner}/${repo}/${gitBranch}/${protoDir}`,
+  };
   const bufDeps = await getAllBufDeps(gitDir);
   await Promise.all(
     bufDeps.map(async (bufRepo) => {
@@ -40,87 +54,103 @@ export async function clone({
           const branch = await getMainBranchName(
             `https://github.com/${gitRepo.owner}/${gitRepo.repo}.git`
           );
-          await clone({ ...gitRepo, outDir, branch });
+          const depsClonedResult = await clone({ ...gitRepo, outDir, branch });
+          clonedResult = {
+            ...clonedResult,
+            ...depsClonedResult,
+          };
         })
       );
     })
   );
+
+  return clonedResult;
 }
 
-export async function extractProto({
-  sourceDir,
+export function extractProto({
+  sources,
   targets,
   outDir,
 }: {
-  sourceDir: string;
+  sources: Record<string, GitInfo>;
   targets: string[];
   outDir: string;
 }) {
-  const allProtoFiles = await findAllProtoFiles(sourceDir);
-  const extractProtoFiles: { sourceFile: string; target: string }[] = [];
-  await extractProtoFromDirs({
-    targets,
-    allProtoFiles,
-    outDir,
-    extractProtoFiles,
-  });
+  const extractProtoFiles: { sourceFile: string; target: string }[] =
+    extractProtoFromDirs({
+      targets,
+      sources,
+    });
 
-  await Promise.all(
-    extractProtoFiles.map(async ({ sourceFile, target }) => {
-      const targetFile = `${outDir}/${target}`;
-      const temp = targetFile.split("/");
-      const deepTargetDir = temp.slice(1, temp.length - 1).join("/");
-      makeDir(deepTargetDir);
-      fs.copyFile(sourceFile, targetFile, (err) => {
-        if (err) throw err;
-        console.info(
-          `Copying ${target} from ${sourceFile.replace(target, "")}`
-        );
-      });
-    })
-  );
+  console.log(extractProtoFiles);
+
+  extractProtoFiles.map(({ sourceFile, target }) => {
+    const targetFile = join(outDir, target);
+    const deepTargetDir = dirname(targetFile);
+    console.log(`creating: ${deepTargetDir}`);
+    makeDir(deepTargetDir);
+    fs.copyFileSync(sourceFile, targetFile);
+    console.info(`Copied ${target} from ${sourceFile.replace(target, "")}`);
+  });
 }
 
-async function extractProtoFromDirs({
+function extractProtoFromDirs({
   targets,
-  allProtoFiles,
-  outDir = "./proto",
-  extractProtoFiles,
+  sources,
 }: {
   targets: string[];
-  allProtoFiles: string[];
-  outDir?: string;
-  extractProtoFiles: { sourceFile: string; target: string }[];
+  sources: Record<string, GitInfo>;
 }) {
-  await Promise.all(
-    targets.map(async (target) => {
-      if (
-        extractProtoFiles.findIndex((file) => file.target === target) !== -1
-      ) {
-        return;
-      }
-      const files = allProtoFiles.filter((filePath) =>
-        filePath.endsWith(target)
+  const extractProtoFiles: { sourceFile: string; target: string }[] = [];
+  const existingFiles = new Set();
+
+  if (!targets || targets.length === 0) {
+    return [];
+  }
+
+  if (!sources || Object.keys(sources).length === 0) {
+    return [];
+  }
+
+  for (const target of targets) {
+    for (const source of Object.values(sources)) {
+      const files = globSync(join(source.protoPath, target));
+
+      extractProtoFiles.push(
+        ...files
+          .map((file) => {
+            const target = file.replace(source.protoPath, "");
+            const duplicate = existingFiles.has(target);
+            existingFiles.add(target);
+            if (!duplicate) {
+              const resultFiles = [
+                {
+                  sourceFile: file,
+                  target,
+                },
+              ];
+
+              const newTargets = parseProtoFile(file);
+
+              if (newTargets && newTargets.length > 0) {
+                const deps = extractProtoFromDirs({
+                  targets: newTargets,
+                  sources,
+                });
+
+                if (deps && deps.length > 0) {
+                  return resultFiles.concat(deps);
+                }
+              }
+
+              return resultFiles;
+            }
+          })
+          .flat()
+          .filter(Boolean)
       );
-      if (files.length > 1) {
-        console.warn(
-          `\nWarning: There are multiple proto files for ${target}, by default choose the first one.\nFiles: \n${files.join(
-            "\n"
-          )}`
-        );
-      }
-      if (files.length === 0) {
-        throw new Error(`No proto file found for ${target}`);
-      }
-      const sourceFile = files[0];
-      extractProtoFiles.push({ sourceFile, target });
-      const newTargets = await parseProtoFile(sourceFile);
-      await extractProtoFromDirs({
-        targets: newTargets,
-        allProtoFiles,
-        outDir,
-        extractProtoFiles,
-      });
-    })
-  );
+    }
+  }
+
+  return extractProtoFiles;
 }

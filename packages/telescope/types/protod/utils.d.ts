@@ -1,7 +1,7 @@
 import { Repo } from "./types";
-export declare function exec(command: string, verbose?: boolean): Promise<{
+export declare function exec(command: string, verbose?: boolean): {
     stdout: any;
-}>;
+};
 export declare function getMainBranchName(url: string): Promise<"main" | "master">;
 export declare function getCorrespondingGit(bufRepo: Repo): Repo[];
 export declare function parseProtoFile(filePath: string): string[];

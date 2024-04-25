@@ -52,21 +52,21 @@ async function run() {
     omitClone = true;
   }
 
-  if (!omitClone) {
-    removeFolder("git-modules");
-    await clone({
-      owner,
-      repo,
-      outDir: "./git-modules",
+  removeFolder("git-modules");
+  const result = await clone({
+    owner,
+    repo,
+    outDir: "./git-modules",
+  });
+
+  if (result) {
+    removeFolder(outDir);
+    extractProto({
+      sources: result,
+      targets,
+      outDir,
     });
   }
-
-  removeFolder(outDir);
-  await extractProto({
-    sourceDir: "./git-modules",
-    targets,
-    outDir,
-  });
 }
 
 run();

@@ -4,7 +4,7 @@ import { bufInfo } from "./config";
 import { Repo } from "./types";
 import { sync as globSync } from "glob";
 
-export async function exec(command: string, verbose = false) {
+export function exec(command: string, verbose = false) {
   const { stdout, stderr } = _exec(command);
   if (stderr) {
     throw new Error(stderr);
@@ -16,11 +16,11 @@ export async function exec(command: string, verbose = false) {
 }
 
 export async function getMainBranchName(url: string) {
-  const { stdout } = await exec(`git ls-remote -h ${url} main`);
+  const { stdout } = exec(`git ls-remote -h ${url} main`);
   if (stdout) {
     return "main";
   }
-  const { stdout: stdout2 } = await exec(`git ls-remote -h ${url} master`);
+  const { stdout: stdout2 } = exec(`git ls-remote -h ${url} master`);
   if (stdout2) {
     return "master";
   }
