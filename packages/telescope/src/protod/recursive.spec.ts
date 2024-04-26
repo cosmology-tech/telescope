@@ -108,13 +108,15 @@ describe("Test `clone`", () => {
       branch: "release/v0.50.x",
       protoDirMapping:{
         "gogo/protobuf/master": ".",
+        "googleapis/googleapis/master": ".",
+        "protocolbuffers/protobuf/main": "src",
       }
     });
 
     if (result) {
       removeFolder(protoFolder);
       extractProto({
-        targets: ["cosmos/bank/v1beta1/tx.proto"],
+        targets: ["cosmos/bank/v1beta1/tx.proto", "cosmos/gov/**/*.proto", "cosmos/authz/**/*.proto"],
         sources: result,
         outDir: protoFolder,
       });

@@ -1,17 +1,19 @@
-import { exec as _exec } from 'shelljs';
+import { exec as _exec } from "shelljs";
 import fs from "fs";
 import { bufInfo } from "./config";
 import { Repo } from "./types";
 import { sync as globSync } from "glob";
 
 export function exec(command: string, verbose = false) {
-  const { stdout, stderr } = _exec(command);
-  if (stderr) {
+  const { code, stdout, stderr } = _exec(command);
+  if (code === 0) {
+    if (verbose) {
+      console.log(stdout);
+    }
+  } else {
     throw new Error(stderr);
   }
-  if (verbose) {
-    console.log(stdout);
-  }
+
   return { stdout };
 }
 
@@ -43,9 +45,18 @@ export function parseProtoFile(filePath: string): string[] {
     console.warn(`No such file ${filePath}`);
     return [];
   }
-  const proto = fs.readFileSync(filePath, "utf8");
+
+  let proto;
+
+  try {
+    proto = fs.readFileSync(filePath, "utf8");
+  } catch (error) {
+    console.log(filePath);
+    throw new Error(error);
+  }
+
   const deps: string[] = [];
-  proto.split("\n").forEach((line) => {
+  proto?.split("\n").forEach((line) => {
     if (line.trim().startsWith("import ")) {
       const dep = /import\s"(.+)";?/.exec(line)?.[1];
       if (!dep) {

@@ -87,8 +87,6 @@ export function extractProto({
       sources,
     });
 
-  console.log(extractProtoFiles);
-
   extractProtoFiles.map(({ sourceFile, target }) => {
     const targetFile = join(outDir, target);
     const deepTargetDir = dirname(targetFile);
@@ -124,14 +122,14 @@ function extractProtoFromDirs({
       extractProtoFiles.push(
         ...files
           .map((file) => {
-            const target = file.replace(resolve(source.protoPath), "");
-            const duplicate = existingFiles.has(target);
-            existingFiles.add(target);
+            const copyTarget = file.replace(resolve(source.protoPath), "");
+            const duplicate = existingFiles.has(copyTarget);
+            existingFiles.add(copyTarget);
             if (!duplicate) {
               const resultFiles = [
                 {
                   sourceFile: file,
-                  target,
+                  target: copyTarget,
                 },
               ];
 
