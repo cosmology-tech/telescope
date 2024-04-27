@@ -1,4 +1,4 @@
 declare const _default: (argv: {
     [key: string]: string | string[];
-}) => Promise<void>;
+}) => Promise<any>;
 export default _default;
