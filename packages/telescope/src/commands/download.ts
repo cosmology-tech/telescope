@@ -40,11 +40,18 @@ export default async (argv: { [key: string]: string | string[] }) => {
     outDir = "./proto";
   }
 
+  let branch = Array.isArray(argv["branch"]) ? argv["branch"][0] : argv["branch"];
+
+  let sshOpt = Array.isArray(argv["ssh"]) ? argv["ssh"][0] : argv["ssh"];
+  const ssh = sshOpt === "true";
+
   removeFolder("git-modules");
   const result = await clone({
     owner,
     repo,
+    branch,
     outDir: "./git-modules",
+    ssh
   });
 
   if (result) {

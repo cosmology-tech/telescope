@@ -110,7 +110,8 @@ describe("Test `clone`", () => {
         "gogo/protobuf/master": ".",
         "googleapis/googleapis/master": ".",
         "protocolbuffers/protobuf/main": "src",
-      }
+      },
+      ssh: true,
     });
 
     if (result) {

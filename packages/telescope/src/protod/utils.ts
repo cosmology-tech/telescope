@@ -11,6 +11,7 @@ export function exec(command: string, verbose = false) {
       console.log(stdout);
     }
   } else {
+    console.error(`Failed: ${command}`);
     throw new Error(stderr);
   }
 

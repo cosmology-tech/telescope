@@ -19,16 +19,18 @@ export async function clone({
   branch,
   outDir,
   protoDirMapping,
+  ssh,
 }: {
   owner: string;
   repo: string;
   branch?: string;
   protoDirMapping?: Record<string, string>;
   outDir: string;
+  ssh: boolean;
 }) {
   let clonedResult: Record<string, GitInfo> = {};
   const gitRepo = new GitRepo(owner, repo);
-  const gitBranch = branch ?? (await getMainBranchName(gitRepo.httpsUrl));
+  const gitBranch = branch ?? (await gitRepo.getMainBranchName(ssh));
   const outPath = `${outDir}/${owner}/${repo}`;
   if (isPathExist(outPath)) {
     console.warn(`Folder ${outPath} already exists, skip cloning`);
@@ -43,7 +45,7 @@ export async function clone({
     repo,
     branch: gitBranch,
     protoDir,
-    protoPath: `${outDir}/${owner}/${repo}/${gitBranch}/${protoDir}`,
+    protoPath: resolve(`${outDir}/${owner}/${repo}/${gitBranch}/${protoDir}`),
   };
   const bufDeps = await getAllBufDeps(gitDir);
   await Promise.all(
@@ -51,14 +53,14 @@ export async function clone({
       const gitRepos = getCorrespondingGit(bufRepo);
       await Promise.all(
         gitRepos.map(async (gitRepo) => {
-          const branch = await getMainBranchName(
-            `https://github.com/${gitRepo.owner}/${gitRepo.repo}.git`
-          );
+          const gitRepoObj = new GitRepo(gitRepo.owner, gitRepo.repo);
+          const branch = await gitRepoObj.getMainBranchName(ssh);
           const depsClonedResult = await clone({
             ...gitRepo,
             outDir,
             branch,
             protoDirMapping,
+            ssh,
           });
           clonedResult = {
             ...clonedResult,

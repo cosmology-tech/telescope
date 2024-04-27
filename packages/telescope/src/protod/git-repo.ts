@@ -1,4 +1,4 @@
-import { exec, makeDir, removeFolder } from "./utils";
+import { exec, getMainBranchName, makeDir, removeFolder } from "./utils";
 
 export class GitRepo {
   constructor(public readonly owner: string, public readonly repo: string) {}
@@ -15,10 +15,15 @@ export class GitRepo {
     return `git@github.com:${this.fullName}.git`;
   }
 
+  getMainBranchName(ssh: boolean = false) {
+    return getMainBranchName(ssh ? this.sshUrl : this.httpsUrl);
+  }
+
   clone(
     branch: string,
     depth: number = 1,
-    outDir: string = "./git-modules"
+    outDir: string = "./git-modules",
+    ssh: boolean = false
   ) {
     const dir = `${outDir}/${this.fullName}/${branch}`;
     try {
@@ -26,7 +31,9 @@ export class GitRepo {
       removeFolder(dir);
       makeDir(dir);
       exec(
-        `git clone ${this.httpsUrl} --depth ${depth} --branch ${branch} --single-branch ${dir}`
+        `git clone ${
+          ssh ? this.sshUrl : this.httpsUrl
+        } --depth ${depth} --branch ${branch} --single-branch ${dir}`
       );
       return dir;
     } catch (error) {
