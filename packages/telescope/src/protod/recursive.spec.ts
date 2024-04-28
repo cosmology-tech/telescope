@@ -104,7 +104,7 @@ describe("Test `clone`", () => {
     const result = await clone({
       owner: "cosmos",
       repo: "cosmos-sdk",
-      outDir: gitModules,
+      gitModulesDir: gitModules,
       branch: "release/v0.50.x",
       protoDirMapping:{
         "gogo/protobuf/master": ".",

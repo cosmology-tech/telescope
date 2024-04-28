@@ -1,6 +1,6 @@
 import { getAllBufDeps } from "./bufbuild";
 import { GitRepo } from "./git-repo";
-import { GitInfo } from "./types";
+import { CloneOptions, GitInfo, ProtoCopyOptions } from "./types";
 import { join, dirname, resolve } from "path";
 import {
   findAllProtoFiles,
@@ -17,17 +17,10 @@ export async function clone({
   owner,
   repo,
   branch,
-  outDir,
+  gitModulesDir: outDir,
   protoDirMapping,
   ssh,
-}: {
-  owner: string;
-  repo: string;
-  branch?: string;
-  protoDirMapping?: Record<string, string>;
-  outDir: string;
-  ssh: boolean;
-}) {
+}: CloneOptions) {
   let clonedResult: Record<string, GitInfo> = {};
   const gitRepo = new GitRepo(owner, repo);
   const gitBranch = branch ?? (await gitRepo.getMainBranchName(ssh));
@@ -57,7 +50,7 @@ export async function clone({
           const branch = await gitRepoObj.getMainBranchName(ssh);
           const depsClonedResult = await clone({
             ...gitRepo,
-            outDir,
+            gitModulesDir: outDir,
             branch,
             protoDirMapping,
             ssh,
@@ -74,15 +67,7 @@ export async function clone({
   return clonedResult;
 }
 
-export function extractProto({
-  sources,
-  targets,
-  outDir,
-}: {
-  sources: Record<string, GitInfo>;
-  targets: string[];
-  outDir: string;
-}) {
+export function extractProto({ sources, targets, outDir }: ProtoCopyOptions) {
   const extractProtoFiles: { sourceFile: string; target: string }[] =
     extractProtoFromDirs({
       targets,

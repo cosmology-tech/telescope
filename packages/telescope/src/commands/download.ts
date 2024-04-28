@@ -1,11 +1,33 @@
 import * as shell from "shelljs";
+import { readFileSync } from "fs";
 import { clone, extractProto } from "../protod/recursive";
 import { removeFolder } from "../protod/utils";
+import { DownloadOptions } from "src/protod/types";
 
 export default async (argv: { [key: string]: string | string[] }) => {
   if (!shell.which("git")) {
     shell.echo("Sorry, this script requires git");
     return shell.exit(1);
+  }
+
+  // owner: e.g. cosmos
+  // repo: e.g. cosmos-sdk
+  let configJson: DownloadOptions;
+
+  const config = Array.isArray(argv["config"])
+    ? argv["config"][0]
+    : argv["config"];
+
+  if (config) {
+    try {
+      const configText = readFileSync(config, {
+        encoding: "utf8",
+      });
+      configJson = JSON.parse(configText);
+    } catch (ex) {
+      console.log(ex);
+      throw new Error("Must provide a .json file for --config.");
+    }
   }
 
   const gitRepo = Array.isArray(argv["git-repo"])
@@ -32,6 +54,18 @@ export default async (argv: { [key: string]: string | string[] }) => {
     shell.exit(1);
   }
 
+  if (configJson) {
+    configJson.owner = owner;
+    configJson.repo = repo;
+    configJson.targets = targets;
+  } else {
+    configJson = {
+      owner,
+      repo,
+      targets,
+    };
+  }
+
   let outDir = Array.isArray(argv["out"]) ? argv["out"][0] : argv["out"];
   if (!outDir) {
     shell.echo(
@@ -40,26 +74,31 @@ export default async (argv: { [key: string]: string | string[] }) => {
     outDir = "./proto";
   }
 
-  let branch = Array.isArray(argv["branch"]) ? argv["branch"][0] : argv["branch"];
+  configJson.outDir = outDir;
 
-  let sshOpt = Array.isArray(argv["ssh"]) ? argv["ssh"][0] : argv["ssh"];
-  const ssh = sshOpt === "true";
+  let branch = Array.isArray(argv["branch"])
+    ? argv["branch"][0]
+    : argv["branch"];
+
+  if (branch) {
+    configJson.branch = branch;
+  }
 
   removeFolder("git-modules");
   const result = await clone({
-    owner,
-    repo,
-    branch,
-    outDir: "./git-modules",
-    ssh
+    owner: configJson.owner,
+    repo: configJson.repo,
+    branch: configJson.branch,
+    gitModulesDir: "./git-modules",
+    ssh: configJson.ssh,
   });
 
   if (result) {
     removeFolder(outDir);
     extractProto({
       sources: result,
-      targets,
-      outDir,
+      targets: configJson.targets,
+      outDir: configJson.outDir,
     });
   }
 };
