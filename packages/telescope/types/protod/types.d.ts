@@ -11,13 +11,13 @@ export interface GitInfo extends Repo {
     protoPath?: string;
 }
 export interface DownloadOptions {
-    owner: string;
-    repo: string;
+    owner?: string;
+    repo?: string;
     branch?: string;
     protoDirMapping?: Record<string, string>;
     outDir?: string;
     ssh?: boolean;
-    targets: string[];
+    targets?: string[];
 }
 export interface CloneOptions {
     owner: string;

@@ -1,0 +1,17 @@
+{
+      "owner": "cosmos",
+      "repo": "cosmos-sdk",
+      "branch": "release/v0.50.x",
+      "protoDirMapping": {
+        "gogo/protobuf/master": ".",
+        "googleapis/googleapis/master": ".",
+        "protocolbuffers/protobuf/main": "src"
+      },
+      "outDir": "testproto",
+      "ssh": true,
+      "targets": [
+        "cosmos/bank/v1beta1/tx.proto",
+        "cosmos/gov/**/*.proto",
+        "cosmos/authz/**/*.proto"
+      ]
+}

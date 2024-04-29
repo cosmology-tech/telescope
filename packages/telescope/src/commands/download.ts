@@ -12,8 +12,6 @@ export default async (argv: { [key: string]: string | string[] }) => {
     return shell.exit(1);
   }
 
-  // owner: e.g. cosmos
-  // repo: e.g. cosmos-sdk
   let configJson: DownloadOptions;
 
   const config = Array.isArray(argv["config"])
@@ -30,42 +28,45 @@ export default async (argv: { [key: string]: string | string[] }) => {
       console.log(ex);
       throw new Error("Must provide a .json file for --config.");
     }
+  } else {
+    configJson = {};
   }
 
   const gitRepo = Array.isArray(argv["git-repo"])
     ? argv["git-repo"][0]?.split("/")
     : argv["git-repo"]?.split?.("/");
 
-  if (!gitRepo) {
-    shell.echo("missing `git-repo` argument.\n");
-    return shell.exit(1);
+  if (gitRepo) {
+    // shell.echo("missing `git-repo` argument.\n");
+    // return shell.exit(1);
+    const [owner, repo] = gitRepo;
+
+    if (!owner || !repo) {
+      shell.echo("wrong `git-repo` format (i.e. <owner>/<repository>).\n");
+      return shell.exit(1);
+    }
+
+    configJson.owner = owner;
+    configJson.repo = repo;
   }
 
-  const [owner, repo] = gitRepo;
-
-  if (!owner || !repo) {
-    shell.echo("wrong `git-repo` format (i.e. <owner>/<repository>).\n");
+  if (!configJson.owner || !configJson.repo) {
+    shell.echo(
+      "missing `git-repo` argument, you can set through `--git-repo` argument or set `owner` and `repo` in config file.\n"
+    );
     return shell.exit(1);
   }
 
   const targets = Array.isArray(argv["targets"])
     ? argv["targets"]
     : argv["targets"]?.split(",");
-  if (!targets || targets.length === 0) {
-    shell.echo("there must be '--targets' file patterns split by comma.\n");
-    shell.exit(1);
+  if (targets && targets.length > 0) {
+    configJson.targets = targets;
   }
 
-  if (configJson) {
-    configJson.owner = owner;
-    configJson.repo = repo;
-    configJson.targets = targets;
-  } else {
-    configJson = {
-      owner,
-      repo,
-      targets,
-    };
+  if (!configJson.targets || configJson.targets.length === 0) {
+    shell.echo("there must be '--targets' file patterns.\n");
+    shell.exit(1);
   }
 
   if (!configJson.protoDirMapping) {
@@ -78,14 +79,16 @@ export default async (argv: { [key: string]: string | string[] }) => {
   );
 
   let outDir = Array.isArray(argv["out"]) ? argv["out"][0] : argv["out"];
-  if (!outDir) {
-    shell.echo(
-      "--out directory is not specified, downloading to `proto` folder by default.\n"
-    );
-    outDir = "./proto";
+  if (outDir) {
+    configJson.outDir = outDir;
   }
 
-  configJson.outDir = outDir;
+  if (!configJson.outDir) {
+    shell.echo(
+      "out directory is not specified, downloading to `proto` folder by default.\n"
+    );
+    configJson.outDir = "proto";
+  }
 
   let branch = Array.isArray(argv["branch"])
     ? argv["branch"][0]
@@ -95,11 +98,9 @@ export default async (argv: { [key: string]: string | string[] }) => {
     configJson.branch = branch;
   }
 
-  let sshOpt = Array.isArray(argv["ssh"]) ? argv["ssh"][0] : argv["ssh"];
+  let sshOpt = argv["ssh"];
 
-  if (sshOpt) {
-    configJson.ssh = sshOpt === "true";
-  }
+  configJson.ssh = configJson.ssh || !!sshOpt;
 
   removeFolder("git-modules");
   const result = await clone({
@@ -112,7 +113,7 @@ export default async (argv: { [key: string]: string | string[] }) => {
   });
 
   if (result) {
-    removeFolder(outDir);
+    removeFolder(configJson.outDir);
     extractProto({
       sources: result,
       targets: configJson.targets,
