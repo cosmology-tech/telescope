@@ -95,6 +95,12 @@ export default async (argv: { [key: string]: string | string[] }) => {
     configJson.branch = branch;
   }
 
+  let sshOpt = Array.isArray(argv["ssh"]) ? argv["ssh"][0] : argv["ssh"];
+
+  if (sshOpt) {
+    configJson.ssh = sshOpt === "true";
+  }
+
   removeFolder("git-modules");
   const result = await clone({
     owner: configJson.owner,

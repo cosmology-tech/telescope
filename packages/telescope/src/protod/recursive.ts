@@ -22,8 +22,8 @@ export async function clone({
   ssh,
 }: CloneOptions) {
   let clonedResult: Record<string, GitInfo> = {};
-  const gitRepo = new GitRepo(owner, repo);
-  const gitBranch = branch ?? (await gitRepo.getMainBranchName(ssh));
+  const gitRepo = new GitRepo(owner, repo, ssh);
+  const gitBranch = branch ?? (await gitRepo.mainBranchName);
   const outPath = `${outDir}/${owner}/${repo}`;
   if (isPathExist(outPath)) {
     console.warn(`Folder ${outPath} already exists, skip cloning`);
@@ -46,8 +46,8 @@ export async function clone({
       const gitRepos = getCorrespondingGit(bufRepo);
       await Promise.all(
         gitRepos.map(async (gitRepo) => {
-          const gitRepoObj = new GitRepo(gitRepo.owner, gitRepo.repo);
-          const branch = await gitRepoObj.getMainBranchName(ssh);
+          const gitRepoObj = new GitRepo(gitRepo.owner, gitRepo.repo, ssh);
+          const branch = await gitRepoObj.mainBranchName;
           const depsClonedResult = await clone({
             ...gitRepo,
             gitModulesDir: outDir,
@@ -77,7 +77,6 @@ export function extractProto({ sources, targets, outDir }: ProtoCopyOptions) {
   extractProtoFiles.map(({ sourceFile, target }) => {
     const targetFile = join(outDir, target);
     const deepTargetDir = dirname(targetFile);
-    console.log(`creating: ${deepTargetDir}`);
     makeDir(deepTargetDir);
     fs.copyFileSync(sourceFile, targetFile);
     console.info(`Copied ${target} from ${sourceFile.replace(target, "")}`);
