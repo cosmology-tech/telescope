@@ -106,7 +106,7 @@ describe("Test `clone`", () => {
       repo: "cosmos-sdk",
       gitModulesDir: gitModules,
       branch: "release/v0.50.x",
-      protoDirMapping:{
+      protoDirMapping: {
         "gogo/protobuf/master": ".",
         "googleapis/googleapis/master": ".",
         "protocolbuffers/protobuf/main": "src",
@@ -117,7 +117,11 @@ describe("Test `clone`", () => {
     if (result) {
       removeFolder(protoFolder);
       extractProto({
-        targets: ["cosmos/bank/v1beta1/tx.proto", "cosmos/gov/**/*.proto", "cosmos/authz/**/*.proto"],
+        targets: [
+          "cosmos/bank/v1beta1/tx.proto",
+          "cosmos/gov/**/*.proto",
+          "cosmos/authz/**/*.proto",
+        ],
         sources: result,
         outDir: protoFolder,
       });

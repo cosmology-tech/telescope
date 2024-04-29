@@ -22,3 +22,9 @@ export const bufInfo: BufInfo[] = [
     ],
   },
 ];
+
+export const presetProtoDirMapping = {
+  "gogo/protobuf/master": ".",
+  "googleapis/googleapis/master": ".",
+  "protocolbuffers/protobuf/main": "src",
+};

@@ -9,8 +9,8 @@ export interface BufInfo extends Repo {
 
 export interface GitInfo extends Repo {
   branch: string;
-  protoDir: string;
-  protoPath: string;
+  protoDir?: string;
+  protoPath?: string;
 }
 
 export interface DownloadOptions {

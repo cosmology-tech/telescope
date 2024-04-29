@@ -3,6 +3,8 @@ import { readFileSync } from "fs";
 import { clone, extractProto } from "../protod/recursive";
 import { removeFolder } from "../protod/utils";
 import { DownloadOptions } from "src/protod/types";
+import deepmerge from "deepmerge";
+import { presetProtoDirMapping } from "../protod/config";
 
 export default async (argv: { [key: string]: string | string[] }) => {
   if (!shell.which("git")) {
@@ -66,6 +68,15 @@ export default async (argv: { [key: string]: string | string[] }) => {
     };
   }
 
+  if (!configJson.protoDirMapping) {
+    configJson.protoDirMapping = {};
+  }
+
+  configJson.protoDirMapping = deepmerge(
+    presetProtoDirMapping,
+    configJson.protoDirMapping
+  );
+
   let outDir = Array.isArray(argv["out"]) ? argv["out"][0] : argv["out"];
   if (!outDir) {
     shell.echo(
@@ -91,6 +102,7 @@ export default async (argv: { [key: string]: string | string[] }) => {
     branch: configJson.branch,
     gitModulesDir: "./git-modules",
     ssh: configJson.ssh,
+    protoDirMapping: configJson.protoDirMapping,
   });
 
   if (result) {
