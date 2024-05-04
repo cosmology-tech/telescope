@@ -46,7 +46,7 @@ export class LCDQueryClient {
     if (typeof params?.queryHeight !== "undefined") {
       options.params.query_height = params.queryHeight;
     }
-    const endpoint = `ibc/apps/fee/v1/channels/${params.packetId.channel_id}/ports/${params.packetId.port_id}/sequences/${params.packetId.sequence}/incentivized_packet`;
+    const endpoint = `ibc/apps/fee/v1/channels/${params.packet_id.channel_id}/ports/${params.packet_id.port_id}/sequences/${params.packet_id.sequence}/incentivized_packet`;
     return QueryIncentivizedPacketResponse.fromSDKJSON(await this.req.get<QueryIncentivizedPacketResponseSDKType>(endpoint, options));
   }
   /* Gets all incentivized packets for a specific channel */
@@ -65,17 +65,17 @@ export class LCDQueryClient {
   }
   /* TotalRecvFees returns the total receive fees for a packet given its identifier */
   async totalRecvFees(_params: QueryTotalRecvFeesRequest = {}): Promise<QueryTotalRecvFeesResponseSDKType> {
-    const endpoint = `ibc/apps/fee/v1/channels/${params.packetId.channel_id}/ports/${params.packetId.port_id}/sequences/${params.packetId.sequence}/total_recv_fees`;
+    const endpoint = `ibc/apps/fee/v1/channels/${params.packet_id.channel_id}/ports/${params.packet_id.port_id}/sequences/${params.packet_id.sequence}/total_recv_fees`;
     return QueryTotalRecvFeesResponse.fromSDKJSON(await this.req.get<QueryTotalRecvFeesResponseSDKType>(endpoint));
   }
   /* TotalAckFees returns the total acknowledgement fees for a packet given its identifier */
   async totalAckFees(_params: QueryTotalAckFeesRequest = {}): Promise<QueryTotalAckFeesResponseSDKType> {
-    const endpoint = `ibc/apps/fee/v1/channels/${params.packetId.channel_id}/ports/${params.packetId.port_id}/sequences/${params.packetId.sequence}/total_ack_fees`;
+    const endpoint = `ibc/apps/fee/v1/channels/${params.packet_id.channel_id}/ports/${params.packet_id.port_id}/sequences/${params.packet_id.sequence}/total_ack_fees`;
     return QueryTotalAckFeesResponse.fromSDKJSON(await this.req.get<QueryTotalAckFeesResponseSDKType>(endpoint));
   }
   /* TotalTimeoutFees returns the total timeout fees for a packet given its identifier */
   async totalTimeoutFees(_params: QueryTotalTimeoutFeesRequest = {}): Promise<QueryTotalTimeoutFeesResponseSDKType> {
-    const endpoint = `ibc/apps/fee/v1/channels/${params.packetId.channel_id}/ports/${params.packetId.port_id}/sequences/${params.packetId.sequence}/total_timeout_fees`;
+    const endpoint = `ibc/apps/fee/v1/channels/${params.packet_id.channel_id}/ports/${params.packet_id.port_id}/sequences/${params.packet_id.sequence}/total_timeout_fees`;
     return QueryTotalTimeoutFeesResponse.fromSDKJSON(await this.req.get<QueryTotalTimeoutFeesResponseSDKType>(endpoint));
   }
   /* Payee returns the registered payee address for a specific channel given the relayer address */
