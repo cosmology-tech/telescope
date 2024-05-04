@@ -4,7 +4,7 @@
 
 ### deprecated aminoEncoding.useRecursiveV2encoding
 
-If `aminoEncoding.useRecursiveV2encoding: false` is used in your config, and want to keep it(not recommemded). It's changed into `aminoEncoding.useLegacyInlineEncoding: true`.
+If `aminoEncoding.useRecursiveV2encoding: false` is used in your config, and want to keep it(not recommended). It's changed into `aminoEncoding.useLegacyInlineEncoding: true`.
 
 We have removed the `useRecursiveV2encoding` option, then Telescope will use `useLegacyInlineEncoding: false` as default value. And the new version of the logic of this part will be applied.
 
@@ -26,7 +26,7 @@ If it's wanted to be kept off, please set explicitly:
 
 the default value of `prototypes.typingsFormat.customTypes.useCosmosSDKDec` has been changed into true for decimal fields to be properly decoded using Decimal.fromAtomics.
 
-Even though it's not recommemded, if it's wanted to be kept off, please set explicitly:
+Even though it's not recommended, if it's wanted to be kept off, please set explicitly:
 
 ```
     prototypes: {
@@ -40,7 +40,7 @@ Even though it's not recommemded, if it's wanted to be kept off, please set expl
 
 ### BigInt
 
-The default value of `prototypes.typingsFormat.num64` has been changed into 'bigint' for bettern handling int64 fields.
+The default value of `prototypes.typingsFormat.num64` has been changed into 'bigint' for better handling int64 fields.
 
 If it's wanted to be kept to be 'long', please set explicitly:
 
