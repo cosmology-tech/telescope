@@ -247,7 +247,7 @@ export function makeTemplateTag(info: ProtoServiceMethodInfo, noLeadingSlash: bo
         })
         .join('/');
     const segments = route.split('/');
-    const expressions: any = [];
+    const expressions: (t.Identifier | t.MemberExpression)[] = [];
     const quasis = [];
     let accumulatedPath = '';
     let isFirst = true;
