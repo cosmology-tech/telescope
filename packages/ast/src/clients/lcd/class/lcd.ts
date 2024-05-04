@@ -3,28 +3,6 @@ import { ProtoService, ProtoServiceMethod, ProtoServiceMethodInfo } from '@cosmo
 import { GenericParseContext } from '../../../encoding';
 import { arrowFunctionExpression, callExpression, classMethod, classProperty, identifier, objectPattern } from '../../../utils';
 
-// this is the ONLY time ast uses babel/parser
-import { parse } from '@babel/parser';
-
-const getAstFromString = (str: string) => {
-    const plugins = [
-        'objectRestSpread',
-        'classProperties',
-        'optionalCatchBinding',
-        'asyncGenerators',
-        'decorators-legacy',
-        'typescript',
-        'dynamicImport'
-    ];
-    const ast = parse(str, {
-        sourceType: 'module',
-        // @ts-ignore
-        plugins
-    });
-    return ast;
-};
-
-
 const getResponseTypeName = (
     context: GenericParseContext,
     name: string
@@ -254,7 +232,7 @@ export const getUrlTemplateString = (url: string) => {
 };
 
 const routeRegexForReplace = /[^\{\}\\-\_\\.$/a-zA-Z0-9]+/g;
-export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
+export function makeTemplateTag(info: ProtoServiceMethodInfo, noLeadingSlash: boolean = true): t.TemplateLiteral {
     const route = info.url
         .split('/')
         .filter(a => a !== '')
@@ -262,93 +240,44 @@ export const makeTemplateTag = (info: ProtoServiceMethodInfo) => {
             if (a.startsWith('{')) {
                 // clean weird routes like this one:
                 // /ibc/apps/transfer/v1/denom_traces/{hash=**}
-                return `$${a}`
-                    .replace(routeRegexForReplace, '')
-                    .replace('{', `{params.`)
+                return a.replace(routeRegexForReplace, '')
             } else {
                 return a;
             }
         })
         .join('/');
+    const segments = route.split('/');
+    const expressions: any = [];
+    const quasis = [];
+    let accumulatedPath = '';
+    let isFirst = true;
 
-    // clean route here
+    segments.forEach((segment, _index) => {
+        if (noLeadingSlash && segment === '') return;
 
-    const parsed = getAstFromString(`\`${route}\``);
-    // @ts-ignore
-    const ast: t.TemplateLiteral = parsed.program.body[0].expression;
+        if (segment.startsWith('{') && segment.endsWith('}')) {
+            // Dynamic segment
+            const paramName = segment.slice(1, -1);
+            // Push the accumulated static text as a quasi before adding the expression
+            quasis.push(t.templateElement({ raw: accumulatedPath + '/', cooked: accumulatedPath }, false));
+            accumulatedPath = '';  // Reset accumulated path after adding to quasis
 
-    ast.expressions = ast.expressions.map((expr: t.MemberExpression) => {
-        let name;
-        switch (expr.object.type) {
-            case 'MemberExpression': {
-                // e.g. params.thing.another
-                const memberExpr: t.MemberExpression = expr.object;
-                // @ts-ignore
-                name = memberExpr.property.name;
-                name = info.casing?.[name] ? info.casing[name] : name;
-                // @ts-ignore
-                expr.object.property.name = name;
-                break;
-            }
-            case 'Identifier': {
-                // e.g. params.thing
-                // @ts-ignore
-                const identifier: t.Identifier = expr.property;
-                name = identifier.name;
-                name = info.casing?.[name] ? info.casing[name] : name;
-                // @ts-ignore
-                expr.property.name = name;
-                break;
-            }
-            case 'Identifier':
-                break;
-            default:
-                throw new Error('unknown expression type in route parsing');
-        }
-        return expr;
-    }).filter(Boolean);
-    return ast;
-};
-
-// do we need to set end prop in ast?
-// we may want to t.templateElement!!!
-export const makeTemplateTagLegacy = (info: ProtoServiceMethodInfo) => {
-    if (!info.url) throw new Error('no URL on service method');
-
-    const parts = getUrlTemplateString(info.url);
-    const templateElts = parts.strs.map(raw => t.templateElement({ raw }))
-
-    // Number of TemplateLiteral quasis should be exactly one more than the number of expressions
-
-    const pathParams = info.pathParams.map(param => {
-        const name = info.casing?.[param] ? info.casing[param] : param;
-        return t.memberExpression(
-            t.identifier('params'),
-            t.identifier(name)
-        );
-    });
-
-    if (parts.atEnd) {
-        templateElts.push(t.templateElement({ raw: '' }));
-    }
-
-    // THIS MEANS WE PROBABLY HAVE A BUG
-    if (templateElts.length !== pathParams.length + 1) {
-        templateElts.push(t.templateElement({ raw: '' }));
-    }
-
-    templateElts.forEach((el, n) => {
-        if (n === templateElts.length - 1) {
-            // remove trailing slash...
-            el.value.raw = el.value.raw.replace(/\/$/, '');
+            // expressions.push(t.identifier(`params.${paramName}`));
+            expressions.push(t.memberExpression(t.identifier('params'), t.identifier(info.casing?.[paramName] ? info.casing[paramName] : paramName)));
+            // Prepare the next quasi to start with a slash if this is not the last segment
+            isFirst = false;
+        } else {
+            // Accumulate static text, ensuring to prepend a slash if it's not the first segment
+            accumulatedPath += (isFirst ? '' : '/') + segment;
+            isFirst = false;
         }
     });
 
-    return t.templateLiteral(
-        templateElts,
-        pathParams
-    );
-};
+    // Add the final accumulated static text as the last quasi
+    quasis.push(t.templateElement({ raw: accumulatedPath, cooked: accumulatedPath }, true));  // Mark the last quasi as tail
+
+    return t.templateLiteral(quasis, expressions);
+}
 
 const makeComment = (comment: string) => {
     return [{ type: 'CommentBlock', value: ` ${comment} ` }]
@@ -416,10 +345,10 @@ const buildRequestMethod = (
                 t.objectProperty(
                     t.identifier('pagination'),
                     paginationDefaultFromPartial ? t.callExpression(
-                      t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
-                      [t.objectExpression([])]
+                        t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
+                        [t.objectExpression([])]
                     ) :
-                    t.identifier('undefined'),
+                        t.identifier('undefined'),
                     false,
                     false
                 )

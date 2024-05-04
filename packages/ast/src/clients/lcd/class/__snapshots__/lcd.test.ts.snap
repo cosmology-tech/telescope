@@ -758,5 +758,3 @@ exports[`service info template 5`] = `
   ],
 }
 `;
-
-exports[`template tags 1`] = `"\`/\${params.cosmos}/feegrant/v1beta1/\${params.allowance}/\${params.granter}/\${params.grantee}\`"`;
