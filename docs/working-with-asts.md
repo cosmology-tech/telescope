@@ -32,7 +32,7 @@ yarn test:ast
 code ./scripts/test-output.json
 ```
 
-We use the npm module `ast-stringify` to strip out unneccesary props, and generate a JSON for reference.
+We use the npm module `ast-stringify` to strip out unnecessary props, and generate a JSON for reference.
 
 You will see a `File` and `Program`... only concern yourself with the `body[]`:
 
