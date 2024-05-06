@@ -92,7 +92,7 @@
     "@cosmology/proto-parser": "^1.5.2",
     "@cosmology/types": "^1.5.2",
     "@cosmology/utils": "^1.5.2",
-    "@cosmwasm/ts-codegen": "0.35.7",
+    "@cosmwasm/ts-codegen": "1.9.0",
     "@types/parse-package-name": "0.1.0",
     "case": "1.6.3",
     "dargs": "7.0.0",
