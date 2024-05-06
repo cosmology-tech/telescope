@@ -302,7 +302,7 @@ telescope({
 | `prototypes.includes.protos`              | include a set of proto files when transpilation. (if a proto both meet include and exclude, it'll be excluded)                 | `undefined`|
 | `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
 | `prototypes.excluded.protos`              | try to exclude a set of proto files from transpilation. if files inside the list are dependencies to other files, they'll be still transpiled.                 | `undefined`|
-| `prototypes.excluded.hardProtos`              | exclude a set of proto files from transpilation. Files in this list will be excluded no mater it's dependency to other files or not.                 | `undefined`|
+| `prototypes.excluded.hardProtos`              | exclude a set of proto files from transpilation. Files in this list will be excluded no matter it is a dependency to other files or not.                 | `undefined`|
 | `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`    |
 | `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`     |
 | `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
@@ -603,8 +603,8 @@ For querying data via REST endpoints, you can use LCD Clients. For a better deve
 ```ts
 const options: TelescopeOptions = {
     lcdClients: {
-        enabled: true;
-    }
+        enabled: true,
+    },
 };
 ```
 
