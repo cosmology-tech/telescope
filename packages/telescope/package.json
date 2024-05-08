@@ -106,6 +106,7 @@
     "minimist": "1.2.8",
     "mkdirp": "3.0.0",
     "parse-package-name": "1.0.0",
+    "yaml": "^2.3.4",
     "rimraf": "5.0.0"
   }
 }
