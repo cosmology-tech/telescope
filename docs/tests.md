@@ -2,7 +2,7 @@
 
 # Tests
 
-`cd` into a package and run the tests, for exmaple:
+`cd` into a package and run the tests, for example:
 
 ```
 cd ./packages/ast
