@@ -1,4 +1,10 @@
-import { exec, getMainBranchName, makeDir, removeFolder } from "./utils";
+import {
+  exec,
+  getMainBranchName,
+  isPathExist,
+  makeDir,
+  removeFolder,
+} from "./utils";
 
 export class GitRepo {
   constructor(
@@ -23,10 +29,21 @@ export class GitRepo {
     return getMainBranchName(this.ssh ? this.sshUrl : this.httpsUrl);
   }
 
-  clone(branch: string, depth: number = 1, outDir: string = "./git-modules") {
+  clone(
+    branch: string,
+    depth: number = 1,
+    outDir: string = "./git-modules",
+    isOverride?: boolean
+  ) {
     const dir = `${outDir}/${this.fullName}/${branch}`;
     try {
-      console.log(`Cloning to ${dir}`);
+      if (!isOverride && isPathExist(dir)) {
+        console.log(`Folder ${dir} already exists, skip cloning`);
+        return dir;
+      } else {
+        console.log(`Cloning to ${dir}`);
+      }
+
       removeFolder(dir);
       makeDir(dir);
       exec(
@@ -34,6 +51,7 @@ export class GitRepo {
           this.ssh ? this.sshUrl : this.httpsUrl
         } --depth ${depth} --branch ${branch} --single-branch ${dir}`
       );
+      console.log(`Cloned ${this.fullName}/${branch} to ${dir}`);
       return dir;
     } catch (error) {
       if ((error as Error).message.startsWith("Cloning into")) {

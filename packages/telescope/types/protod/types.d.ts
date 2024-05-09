@@ -11,13 +11,27 @@ export interface GitInfo extends Repo {
     protoPath?: string;
 }
 export interface DownloadOptions {
-    owner?: string;
-    repo?: string;
-    branch?: string;
+    repos?: {
+        owner: string;
+        repo: string;
+        branch?: string;
+    }[];
     protoDirMapping?: Record<string, string>;
     outDir?: string;
     ssh?: boolean;
     targets?: string[];
+    tempRepoDir?: string;
+    deleteTempRepoDir?: boolean;
+}
+export interface CloneAllOptions {
+    repos?: {
+        owner: string;
+        repo: string;
+        branch?: string;
+    }[];
+    protoDirMapping?: Record<string, string>;
+    gitModulesDir: string;
+    ssh: boolean;
 }
 export interface CloneOptions {
     owner: string;
@@ -26,6 +40,7 @@ export interface CloneOptions {
     protoDirMapping?: Record<string, string>;
     gitModulesDir: string;
     ssh: boolean;
+    cloned?: Record<string, GitInfo>;
 }
 export interface ProtoCopyOptions {
     sources: Record<string, GitInfo>;

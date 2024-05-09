@@ -7,5 +7,5 @@ export declare class GitRepo {
     get httpsUrl(): string;
     get sshUrl(): string;
     get mainBranchName(): Promise<"main" | "master">;
-    clone(branch: string, depth?: number, outDir?: string): string;
+    clone(branch: string, depth?: number, outDir?: string, isOverride?: boolean): string;
 }

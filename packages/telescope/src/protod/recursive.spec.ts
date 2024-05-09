@@ -2,7 +2,7 @@ import { TelescopeInput } from "..";
 import { TelescopeBuilder } from "../builder";
 import { TelescopeOptions } from "@cosmology/types";
 
-import { clone, extractProto } from "./recursive";
+import { clone, cloneAll, extractProto } from "./recursive";
 import { findAllProtoFiles, removeFolder } from "./utils";
 
 import { join } from "path";
@@ -16,6 +16,14 @@ let gitModules = join(
   "../../../../__fixtures__/misc/proto-download",
   GIT_MOUDLES
 );
+
+const GIT_MOUDLES_ALL = "git-modules-all";
+let gitModulesAll = join(
+  __dirname,
+  "../../../../__fixtures__/misc/proto-download",
+  GIT_MOUDLES_ALL
+);
+
 const PROTO_FOLDER = "proto";
 let protoFolder = join(
   __dirname,
@@ -97,6 +105,25 @@ const input: TelescopeInput = {
   protoDirs: [protoFolder],
   options,
 };
+
+describe("Test `cloneAll`", () => {
+  it("should download `injective`, `ibc-go` to `./git-modules`", async () => {
+    removeFolder(gitModulesAll);
+    const result = await cloneAll({
+      repos: [
+        { owner: "cosmos", repo: "ibc-go" },
+        { owner: "injectivelabs", repo: "sdk-go" },
+      ],
+      gitModulesDir: gitModulesAll,
+      protoDirMapping: {
+        "gogo/protobuf/master": ".",
+        "googleapis/googleapis/master": ".",
+        "protocolbuffers/protobuf/main": "src",
+      },
+      ssh: true,
+    });
+  });
+});
 
 describe("Test `clone`", () => {
   it("should download `cosmos-sdk`, `googleapis`, `protobuf` to `./git-modules` and extract `cosmos/bank/v1beta1/tx.proto` to `./proto`", async () => {

@@ -1,6 +1,11 @@
 import { getAllBufDeps } from "./bufbuild";
 import { GitRepo } from "./git-repo";
-import { CloneOptions, GitInfo, ProtoCopyOptions } from "./types";
+import {
+  CloneOptions,
+  GitInfo,
+  ProtoCopyOptions,
+  CloneAllOptions,
+} from "./types";
 import { join, dirname, resolve } from "path";
 import {
   findAllProtoFiles,
@@ -13,6 +18,33 @@ import {
 import fs from "fs";
 import { sync as globSync } from "glob";
 
+export async function cloneAll({
+  repos,
+  gitModulesDir,
+  protoDirMapping,
+  ssh,
+}: CloneAllOptions) {
+  let clonedResult: Record<string, GitInfo> = {};
+
+  for (const { owner, repo, branch } of repos) {
+    const cloned = await clone({
+      owner,
+      repo,
+      branch,
+      gitModulesDir,
+      protoDirMapping,
+      ssh,
+      cloned: clonedResult
+    });
+
+    for (const [key, value] of Object.entries(cloned)) {
+      clonedResult[key] = value;
+    }
+  }
+
+  return clonedResult;
+}
+
 export async function clone({
   owner,
   repo,
@@ -20,17 +52,20 @@ export async function clone({
   gitModulesDir: outDir,
   protoDirMapping,
   ssh,
+  cloned,
 }: CloneOptions) {
-  let clonedResult: Record<string, GitInfo> = {};
+  let clonedResult: Record<string, GitInfo> = cloned ?? {};
+
   const gitRepo = new GitRepo(owner, repo, ssh);
   const gitBranch = branch ?? (await gitRepo.mainBranchName);
-  const outPath = `${outDir}/${owner}/${repo}`;
-  if (isPathExist(outPath)) {
-    console.warn(`Folder ${outPath} already exists, skip cloning`);
-    return;
+  const resultKey = `${owner}/${repo}/${gitBranch}`;
+
+  if (clonedResult[resultKey]) {
+    console.log(`Skip cloning ${resultKey}`);
+    return clonedResult;
   }
+
   const gitDir = gitRepo.clone(gitBranch, 1, outDir);
-  console.log(`Cloned ${owner}/${repo}/${gitBranch} to ${gitDir}`);
   const protoDir =
     protoDirMapping?.[`${owner}/${repo}/${gitBranch}`] ?? "proto";
   clonedResult[`${owner}/${repo}/${gitBranch}`] = {
@@ -54,11 +89,11 @@ export async function clone({
             branch,
             protoDirMapping,
             ssh,
+            cloned: clonedResult
           });
-          clonedResult = {
-            ...clonedResult,
-            ...depsClonedResult,
-          };
+          for (const [key, value] of Object.entries(depsClonedResult)) {
+            clonedResult[key] = value;
+          }
         })
       );
     })
