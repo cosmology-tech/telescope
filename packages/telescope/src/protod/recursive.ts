@@ -7,14 +7,7 @@ import {
   CloneAllOptions,
 } from "./types";
 import { join, dirname, resolve } from "path";
-import {
-  findAllProtoFiles,
-  getCorrespondingGit,
-  getMainBranchName,
-  isPathExist,
-  makeDir,
-  parseProtoFile,
-} from "./utils";
+import { getCorrespondingGit, makeDir, parseProtoFile } from "./utils";
 import fs from "fs";
 import { sync as globSync } from "glob";
 
@@ -34,7 +27,7 @@ export async function cloneAll({
       gitModulesDir,
       protoDirMapping,
       ssh,
-      cloned: clonedResult
+      cloned: clonedResult,
     });
 
     for (const [key, value] of Object.entries(cloned)) {
@@ -57,7 +50,7 @@ export async function clone({
   let clonedResult: Record<string, GitInfo> = cloned ?? {};
 
   const gitRepo = new GitRepo(owner, repo, ssh);
-  const gitBranch = branch ?? (await gitRepo.mainBranchName);
+  const gitBranch = branch ?? (await gitRepo.getMainBranchName());
   const resultKey = `${owner}/${repo}/${gitBranch}`;
 
   if (clonedResult[resultKey]) {
@@ -82,14 +75,14 @@ export async function clone({
       await Promise.all(
         gitRepos.map(async (gitRepo) => {
           const gitRepoObj = new GitRepo(gitRepo.owner, gitRepo.repo, ssh);
-          const branch = await gitRepoObj.mainBranchName;
+          const branch = await gitRepoObj.getMainBranchName();
           const depsClonedResult = await clone({
             ...gitRepo,
             gitModulesDir: outDir,
             branch,
             protoDirMapping,
             ssh,
-            cloned: clonedResult
+            cloned: clonedResult,
           });
           for (const [key, value] of Object.entries(depsClonedResult)) {
             clonedResult[key] = value;

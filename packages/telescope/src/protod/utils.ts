@@ -19,6 +19,8 @@ export function exec(command: string, verbose = false) {
 }
 
 export async function getMainBranchName(url: string) {
+  console.log(`Checking main branch for ${url}`)
+
   const { stdout } = exec(`git ls-remote -h ${url} main`);
   if (stdout) {
     return "main";

@@ -6,6 +6,8 @@ import {
   removeFolder,
 } from "./utils";
 
+const branchCache: Record<string, string> = {};
+
 export class GitRepo {
   constructor(
     public readonly owner: string,
@@ -25,8 +27,16 @@ export class GitRepo {
     return `git@github.com:${this.fullName}.git`;
   }
 
-  get mainBranchName() {
-    return getMainBranchName(this.ssh ? this.sshUrl : this.httpsUrl);
+  async getMainBranchName() {
+    const url = this.ssh ? this.sshUrl : this.httpsUrl;
+
+    if (branchCache[url]) {
+      return branchCache[url];
+    }
+
+    branchCache[url] = await getMainBranchName(url);
+
+    return branchCache[url];
   }
 
   clone(
