@@ -1,6 +1,6 @@
 import * as shell from "shelljs";
 import { readFileSync } from "fs";
-import { clone, extractProto } from "../protod/recursive";
+import { clone, cloneAll, extractProto } from "../protod/recursive";
 import { removeFolder } from "../protod/utils";
 import { DownloadOptions } from "src/protod/types";
 import deepmerge from "deepmerge";
@@ -32,27 +32,28 @@ export default async (argv: { [key: string]: string | string[] }) => {
     configJson = {};
   }
 
-  const gitRepo = Array.isArray(argv["git-repo"])
-    ? argv["git-repo"][0]?.split("/")
-    : argv["git-repo"]?.split?.("/");
+  const gitRepos = Array.isArray(argv["git-repo"])
+    ? argv["git-repo"]
+    : [argv["git-repo"]];
 
-  if (gitRepo) {
-    // shell.echo("missing `git-repo` argument.\n");
-    // return shell.exit(1);
-    const [owner, repo] = gitRepo;
+  if (argv["git-repo"] && gitRepos && gitRepos.length > 0) {
+    configJson.repos = gitRepos.map((gitRepo) => {
+      const [owner, repo, branch] = gitRepo.split("/");
 
-    if (!owner || !repo) {
-      shell.echo("wrong `git-repo` format (i.e. <owner>/<repository>).\n");
-      return shell.exit(1);
-    }
+      if (!owner || !repo) {
+        shell.echo(
+          "wrong `git-repo` format (i.e. <owner>/<repository> or <owner>/<repository>/<branch>).\n"
+        );
+        return shell.exit(1);
+      }
 
-    configJson.owner = owner;
-    configJson.repo = repo;
+      return { owner, repo, branch };
+    });
   }
 
-  if (!configJson.owner || !configJson.repo) {
+  if (!configJson.repos || configJson.repos.length === 0) {
     shell.echo(
-      "missing `git-repo` argument, you can set through `--git-repo` argument or set `owner` and `repo` in config file.\n"
+      "missing `git-repo` argument, you can set through `--git-repo` argument or set repos field in config file.\n"
     );
     return shell.exit(1);
   }
@@ -90,23 +91,16 @@ export default async (argv: { [key: string]: string | string[] }) => {
     configJson.outDir = "proto";
   }
 
-  let branch = Array.isArray(argv["branch"])
-    ? argv["branch"][0]
-    : argv["branch"];
-
-  if (branch) {
-    configJson.branch = branch;
-  }
-
   let sshOpt = argv["ssh"];
 
   configJson.ssh = configJson.ssh || !!sshOpt;
 
-  removeFolder("git-modules");
-  const result = await clone({
-    owner: configJson.owner,
-    repo: configJson.repo,
-    branch: configJson.branch,
+  if (configJson.deleteTempRepoDir) {
+    removeFolder(configJson.tempRepoDir);
+  }
+
+  const result = await cloneAll({
+    repos: configJson.repos,
     gitModulesDir: "./git-modules",
     ssh: configJson.ssh,
     protoDirMapping: configJson.protoDirMapping,
