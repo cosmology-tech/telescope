@@ -217,7 +217,9 @@ interface TelescopeOpts {
         }[];
         instantOps?: {
             className: string,
-            include: {
+            include?: {
+              // a group of types of service to include, undefined for All.
+              serviceTypes?: ("Query" | "Tx" | string)[];
               patterns?: string[];
             },
             nameMapping?:{

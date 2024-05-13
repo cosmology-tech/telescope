@@ -26,7 +26,7 @@ export interface Query {
   tallyResult(request: QueryTallyResultRequest): Promise<QueryTallyResultResponse>;
 }
 /** Query defines the gRPC querier service for gov module */
-export interface CosmosAuthAccount {
+export interface CosmosAuthQueryAccount {
   /** Proposal queries proposal details based on ProposalID. */
   proposal(request: QueryProposalRequest): Promise<QueryProposalResponse>;
   /** Proposals queries all proposals based on given status. */
