@@ -173,8 +173,29 @@ const options: TelescopeOptions = {
         },
       },
       {
-        className: "CosmosAuthAccount",
+        className: "CosmosAuthQueryAccount",
         include: {
+          serviceTypes: ["Query"],
+          patterns: [
+            "cosmos.auth.**.*account*",
+            "cosmos.auth.**.*Account*",
+            "cosmos.gov.v1beta1.**",
+          ],
+        },
+        nameMapping: {
+          All: {
+            authModuleAccounts: "cosmos.auth.v1beta1.moduleAccounts",
+          },
+          Msg: {
+            txDeposit: "cosmos.gov.v1beta1.deposit",
+            txVote: "cosmos.gov.v1beta1.vote",
+          },
+        },
+      },
+      {
+        className: "CosmosAuthTxAccount",
+        include: {
+          serviceTypes: ["Tx"],
           patterns: [
             "cosmos.auth.**.*account*",
             "cosmos.auth.**.*Account*",

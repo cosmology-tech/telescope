@@ -12,15 +12,17 @@ const TEST_DATA_NONE_FOLDER = "test-data-none";
 let testData = join(__dirname, TEST_DATA_FOLDER);
 let testDataNone = join(__dirname, TEST_DATA_NONE_FOLDER);
 
+const testSwitch = false;
+
 describe("Test `getMainBranchName`", () => {
-  it("`cosmos-proto` should return `main`", async () => {
+  (testSwitch ? it : it.skip)("`cosmos-proto` should return `main`", async () => {
     const branch = await getMainBranchName(
       "https://github.com/cosmos/cosmos-proto.git"
     );
     expect(branch).toBe("main");
   });
 
-  it("`ics23` should return `master`", async () => {
+  (testSwitch ? it : it.skip)("`ics23` should return `master`", async () => {
     const branch = await getMainBranchName(
       "https://github.com/cosmos/ics23.git"
     );

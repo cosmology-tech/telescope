@@ -87,6 +87,12 @@ export const plugin = (
 
                   // get all query methods
                   const patterns = item.include?.patterns;
+                  const serviceTypes = item.include?.serviceTypes;
+
+                  if(serviceTypes && !serviceTypes.includes("Tx")){
+                    return
+                  }
+
                   const methodKeys = getQueryMethodNames(
                     bundlerFile.package,
                     Object.keys(svc.methods ?? {}),

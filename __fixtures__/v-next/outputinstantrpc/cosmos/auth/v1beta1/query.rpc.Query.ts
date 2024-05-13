@@ -29,7 +29,7 @@ export interface Query {
   addressStringToBytes(request: AddressStringToBytesRequest): Promise<AddressStringToBytesResponse>;
 }
 /** Query defines the gRPC querier service. */
-export interface CosmosAuthAccount {
+export interface CosmosAuthQueryAccount {
   /**
    * Accounts returns all the existing accounts
    * 
