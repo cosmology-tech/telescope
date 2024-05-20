@@ -3,6 +3,7 @@ import { Service, ServiceAmino, ServiceSDKType } from "../../service";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -733,7 +734,7 @@ export const ListServicesRequest = {
     if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
     return obj;
   },
-  toJSON(message: ListServicesRequest): unknown {
+  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
     message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -845,7 +846,7 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): unknown {
+  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
     if (message.services) {
       obj.services = message.services.map(e => e ? ManagedService.toJSON(e) : undefined);
@@ -943,7 +944,7 @@ export const GetServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: GetServiceRequest): unknown {
+  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     return obj;
@@ -1023,7 +1024,7 @@ export const CreateServiceRequest = {
     if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
     return obj;
   },
-  toJSON(message: CreateServiceRequest): unknown {
+  toJSON(message: CreateServiceRequest): JsonSafe<CreateServiceRequest> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
     return obj;
@@ -1105,7 +1106,7 @@ export const DeleteServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: DeleteServiceRequest): unknown {
+  toJSON(message: DeleteServiceRequest): JsonSafe<DeleteServiceRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     return obj;
@@ -1185,7 +1186,7 @@ export const UndeleteServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: UndeleteServiceRequest): unknown {
+  toJSON(message: UndeleteServiceRequest): JsonSafe<UndeleteServiceRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     return obj;
@@ -1265,7 +1266,7 @@ export const UndeleteServiceResponse = {
     if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
     return obj;
   },
-  toJSON(message: UndeleteServiceResponse): unknown {
+  toJSON(message: UndeleteServiceResponse): JsonSafe<UndeleteServiceResponse> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
     return obj;
@@ -1363,7 +1364,7 @@ export const GetServiceConfigRequest = {
     if (isSet(object.view)) obj.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: GetServiceConfigRequest): unknown {
+  toJSON(message: GetServiceConfigRequest): JsonSafe<GetServiceConfigRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.configId !== undefined && (obj.configId = message.configId);
@@ -1475,7 +1476,7 @@ export const ListServiceConfigsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListServiceConfigsRequest): unknown {
+  toJSON(message: ListServiceConfigsRequest): JsonSafe<ListServiceConfigsRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -1579,7 +1580,7 @@ export const ListServiceConfigsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServiceConfigsResponse): unknown {
+  toJSON(message: ListServiceConfigsResponse): JsonSafe<ListServiceConfigsResponse> {
     const obj: any = {};
     if (message.serviceConfigs) {
       obj.serviceConfigs = message.serviceConfigs.map(e => e ? Service.toJSON(e) : undefined);
@@ -1685,7 +1686,7 @@ export const CreateServiceConfigRequest = {
     if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
     return obj;
   },
-  toJSON(message: CreateServiceConfigRequest): unknown {
+  toJSON(message: CreateServiceConfigRequest): JsonSafe<CreateServiceConfigRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
@@ -1791,7 +1792,7 @@ export const SubmitConfigSourceRequest = {
     if (isSet(object.validateOnly)) obj.validateOnly = Boolean(object.validateOnly);
     return obj;
   },
-  toJSON(message: SubmitConfigSourceRequest): unknown {
+  toJSON(message: SubmitConfigSourceRequest): JsonSafe<SubmitConfigSourceRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.configSource !== undefined && (obj.configSource = message.configSource ? ConfigSource.toJSON(message.configSource) : undefined);
@@ -1889,7 +1890,7 @@ export const SubmitConfigSourceResponse = {
     if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
     return obj;
   },
-  toJSON(message: SubmitConfigSourceResponse): unknown {
+  toJSON(message: SubmitConfigSourceResponse): JsonSafe<SubmitConfigSourceResponse> {
     const obj: any = {};
     message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
     return obj;
@@ -1979,7 +1980,7 @@ export const CreateServiceRolloutRequest = {
     if (isSet(object.rollout)) obj.rollout = Rollout.fromJSON(object.rollout);
     return obj;
   },
-  toJSON(message: CreateServiceRolloutRequest): unknown {
+  toJSON(message: CreateServiceRolloutRequest): JsonSafe<CreateServiceRolloutRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toJSON(message.rollout) : undefined);
@@ -2093,7 +2094,7 @@ export const ListServiceRolloutsRequest = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     return obj;
   },
-  toJSON(message: ListServiceRolloutsRequest): unknown {
+  toJSON(message: ListServiceRolloutsRequest): JsonSafe<ListServiceRolloutsRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -2205,7 +2206,7 @@ export const ListServiceRolloutsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServiceRolloutsResponse): unknown {
+  toJSON(message: ListServiceRolloutsResponse): JsonSafe<ListServiceRolloutsResponse> {
     const obj: any = {};
     if (message.rollouts) {
       obj.rollouts = message.rollouts.map(e => e ? Rollout.toJSON(e) : undefined);
@@ -2311,7 +2312,7 @@ export const GetServiceRolloutRequest = {
     if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
     return obj;
   },
-  toJSON(message: GetServiceRolloutRequest): unknown {
+  toJSON(message: GetServiceRolloutRequest): JsonSafe<GetServiceRolloutRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.rolloutId !== undefined && (obj.rolloutId = message.rolloutId);
@@ -2407,7 +2408,7 @@ export const GenerateConfigReportRequest = {
     if (isSet(object.oldConfig)) obj.oldConfig = Any.fromJSON(object.oldConfig);
     return obj;
   },
-  toJSON(message: GenerateConfigReportRequest): unknown {
+  toJSON(message: GenerateConfigReportRequest): JsonSafe<GenerateConfigReportRequest> {
     const obj: any = {};
     message.newConfig !== undefined && (obj.newConfig = message.newConfig ? Any.toJSON(message.newConfig) : undefined);
     message.oldConfig !== undefined && (obj.oldConfig = message.oldConfig ? Any.toJSON(message.oldConfig) : undefined);
@@ -2523,7 +2524,7 @@ export const GenerateConfigReportResponse = {
     if (Array.isArray(object?.diagnostics)) obj.diagnostics = object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenerateConfigReportResponse): unknown {
+  toJSON(message: GenerateConfigReportResponse): JsonSafe<GenerateConfigReportResponse> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.id !== undefined && (obj.id = message.id);

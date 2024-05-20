@@ -2,6 +2,7 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1be
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -213,7 +214,7 @@ export const Incentive = {
     if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
     return obj;
   },
-  toJSON(message: Incentive): unknown {
+  toJSON(message: Incentive): JsonSafe<Incentive> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     if (message.allocations) {
@@ -353,7 +354,7 @@ export const GasMeter = {
     if (isSet(object.cumulativeGas)) obj.cumulativeGas = BigInt(object.cumulativeGas.toString());
     return obj;
   },
-  toJSON(message: GasMeter): unknown {
+  toJSON(message: GasMeter): JsonSafe<GasMeter> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.participant !== undefined && (obj.participant = message.participant);
@@ -484,7 +485,7 @@ export const RegisterIncentiveProposal = {
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
     return obj;
   },
-  toJSON(message: RegisterIncentiveProposal): unknown {
+  toJSON(message: RegisterIncentiveProposal): JsonSafe<RegisterIncentiveProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -622,7 +623,7 @@ export const CancelIncentiveProposal = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: CancelIncentiveProposal): unknown {
+  toJSON(message: CancelIncentiveProposal): JsonSafe<CancelIncentiveProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

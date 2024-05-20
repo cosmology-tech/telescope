@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
@@ -108,7 +109,7 @@ export const ListAllInterfacesRequest = {
     const obj = createBaseListAllInterfacesRequest();
     return obj;
   },
-  toJSON(_: ListAllInterfacesRequest): unknown {
+  toJSON(_: ListAllInterfacesRequest): JsonSafe<ListAllInterfacesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -180,7 +181,7 @@ export const ListAllInterfacesResponse = {
     if (Array.isArray(object?.interfaceNames)) obj.interfaceNames = object.interfaceNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ListAllInterfacesResponse): unknown {
+  toJSON(message: ListAllInterfacesResponse): JsonSafe<ListAllInterfacesResponse> {
     const obj: any = {};
     if (message.interfaceNames) {
       obj.interfaceNames = message.interfaceNames.map(e => e);
@@ -271,7 +272,7 @@ export const ListImplementationsRequest = {
     if (isSet(object.interfaceName)) obj.interfaceName = String(object.interfaceName);
     return obj;
   },
-  toJSON(message: ListImplementationsRequest): unknown {
+  toJSON(message: ListImplementationsRequest): JsonSafe<ListImplementationsRequest> {
     const obj: any = {};
     message.interfaceName !== undefined && (obj.interfaceName = message.interfaceName);
     return obj;
@@ -352,7 +353,7 @@ export const ListImplementationsResponse = {
     if (Array.isArray(object?.implementationMessageNames)) obj.implementationMessageNames = object.implementationMessageNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ListImplementationsResponse): unknown {
+  toJSON(message: ListImplementationsResponse): JsonSafe<ListImplementationsResponse> {
     const obj: any = {};
     if (message.implementationMessageNames) {
       obj.implementationMessageNames = message.implementationMessageNames.map(e => e);

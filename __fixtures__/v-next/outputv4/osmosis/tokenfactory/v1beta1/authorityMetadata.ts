@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
@@ -57,7 +58,7 @@ export const DenomAuthorityMetadata = {
     if (isSet(object.admin)) obj.admin = String(object.admin);
     return obj;
   },
-  toJSON(message: DenomAuthorityMetadata): unknown {
+  toJSON(message: DenomAuthorityMetadata): JsonSafe<DenomAuthorityMetadata> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     return obj;

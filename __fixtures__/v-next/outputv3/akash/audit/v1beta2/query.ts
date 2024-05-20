@@ -2,6 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Provider, ProviderAmino, ProviderSDKType } from "./audit";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
@@ -157,7 +158,7 @@ export const QueryProvidersResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProvidersResponse): unknown {
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
     const obj: any = {};
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
@@ -265,7 +266,7 @@ export const QueryProviderRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: QueryProviderRequest): unknown {
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -353,7 +354,7 @@ export const QueryAllProvidersAttributesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAllProvidersAttributesRequest): unknown {
+  toJSON(message: QueryAllProvidersAttributesRequest): JsonSafe<QueryAllProvidersAttributesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -443,7 +444,7 @@ export const QueryProviderAttributesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProviderAttributesRequest): unknown {
+  toJSON(message: QueryProviderAttributesRequest): JsonSafe<QueryProviderAttributesRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -541,7 +542,7 @@ export const QueryProviderAuditorRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: QueryProviderAuditorRequest): unknown {
+  toJSON(message: QueryProviderAuditorRequest): JsonSafe<QueryProviderAuditorRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -637,7 +638,7 @@ export const QueryAuditorAttributesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAuditorAttributesRequest): unknown {
+  toJSON(message: QueryAuditorAttributesRequest): JsonSafe<QueryAuditorAttributesRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);

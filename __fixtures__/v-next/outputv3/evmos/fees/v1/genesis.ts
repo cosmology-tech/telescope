@@ -1,6 +1,7 @@
 import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
@@ -125,7 +126,7 @@ export const GenesisState = {
     if (Array.isArray(object?.devFeeInfos)) obj.devFeeInfos = object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.devFeeInfos) {
@@ -257,7 +258,7 @@ export const Params = {
     if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);

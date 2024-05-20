@@ -2,6 +2,7 @@ import { Params, ParamsSDKType } from "./params.js";
 import { SuperfluidAsset, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordSDKType, SuperfluidIntermediaryAccount, SuperfluidIntermediaryAccountSDKType, LockIdIntermediaryAccountConnection, LockIdIntermediaryAccountConnectionSDKType } from "./superfluid.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "osmosis.superfluid";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -102,7 +103,7 @@ export const GenesisState = {
     if (Array.isArray(object?.intemediaryAccountConnections)) obj.intemediaryAccountConnections = object.intemediaryAccountConnections.map((e: any) => LockIdIntermediaryAccountConnection.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.superfluidAssets) {

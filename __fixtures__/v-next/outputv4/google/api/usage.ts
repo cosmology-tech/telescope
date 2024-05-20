@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -178,7 +179,7 @@ export const Usage = {
     if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
     return obj;
   },
-  toJSON(message: Usage): unknown {
+  toJSON(message: Usage): JsonSafe<Usage> {
     const obj: any = {};
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
@@ -320,7 +321,7 @@ export const UsageRule = {
     if (isSet(object.skipServiceControl)) obj.skipServiceControl = Boolean(object.skipServiceControl);
     return obj;
   },
-  toJSON(message: UsageRule): unknown {
+  toJSON(message: UsageRule): JsonSafe<UsageRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.allowUnregisteredCalls !== undefined && (obj.allowUnregisteredCalls = message.allowUnregisteredCalls);

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * `Any` contains an arbitrary serialized protocol buffer message along with a
@@ -366,7 +367,7 @@ export const Any = {
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     return obj;
   },
-  toJSON(message: Any): unknown {
+  toJSON(message: Any): JsonSafe<Any> {
     const obj: any = {};
     message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));

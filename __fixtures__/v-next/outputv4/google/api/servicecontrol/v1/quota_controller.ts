@@ -2,6 +2,7 @@ import { MetricValueSet, MetricValueSetSDKType } from "./metric_value.js";
 import { Status, StatusSDKType } from "../../../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -401,7 +402,7 @@ export const AllocateQuotaRequest = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: AllocateQuotaRequest): unknown {
+  toJSON(message: AllocateQuotaRequest): JsonSafe<AllocateQuotaRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.allocateOperation !== undefined && (obj.allocateOperation = message.allocateOperation ? QuotaOperation.toJSON(message.allocateOperation) : undefined);
@@ -516,7 +517,7 @@ export const QuotaOperation_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: QuotaOperation_LabelsEntry): unknown {
+  toJSON(message: QuotaOperation_LabelsEntry): JsonSafe<QuotaOperation_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -658,7 +659,7 @@ export const QuotaOperation = {
     if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
     return obj;
   },
-  toJSON(message: QuotaOperation): unknown {
+  toJSON(message: QuotaOperation): JsonSafe<QuotaOperation> {
     const obj: any = {};
     message.operationId !== undefined && (obj.operationId = message.operationId);
     message.methodName !== undefined && (obj.methodName = message.methodName);
@@ -862,7 +863,7 @@ export const AllocateQuotaResponse = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: AllocateQuotaResponse): unknown {
+  toJSON(message: AllocateQuotaResponse): JsonSafe<AllocateQuotaResponse> {
     const obj: any = {};
     message.operationId !== undefined && (obj.operationId = message.operationId);
     if (message.allocateErrors) {
@@ -1021,7 +1022,7 @@ export const QuotaError = {
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
     return obj;
   },
-  toJSON(message: QuotaError): unknown {
+  toJSON(message: QuotaError): JsonSafe<QuotaError> {
     const obj: any = {};
     message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
     message.subject !== undefined && (obj.subject = message.subject);

@@ -2,6 +2,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { Plan, PlanAmino, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * IdentifiedClientState defines a client state with an additional client
@@ -325,7 +326,7 @@ export const IdentifiedClientState = {
     if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
     return obj;
   },
-  toJSON(message: IdentifiedClientState): unknown {
+  toJSON(message: IdentifiedClientState): JsonSafe<IdentifiedClientState> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
@@ -424,7 +425,7 @@ export const ConsensusStateWithHeight = {
     if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
     return obj;
   },
-  toJSON(message: ConsensusStateWithHeight): unknown {
+  toJSON(message: ConsensusStateWithHeight): JsonSafe<ConsensusStateWithHeight> {
     const obj: any = {};
     message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
@@ -525,7 +526,7 @@ export const ClientConsensusStates = {
     if (Array.isArray(object?.consensusStates)) obj.consensusStates = object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
     return obj;
   },
-  toJSON(message: ClientConsensusStates): unknown {
+  toJSON(message: ClientConsensusStates): JsonSafe<ClientConsensusStates> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     if (message.consensusStates) {
@@ -649,7 +650,7 @@ export const ClientUpdateProposal = {
     if (isSet(object.substituteClientId)) obj.substituteClientId = String(object.substituteClientId);
     return obj;
   },
-  toJSON(message: ClientUpdateProposal): unknown {
+  toJSON(message: ClientUpdateProposal): JsonSafe<ClientUpdateProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -779,7 +780,7 @@ export const UpgradeProposal = {
     if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
     return obj;
   },
-  toJSON(message: UpgradeProposal): unknown {
+  toJSON(message: UpgradeProposal): JsonSafe<UpgradeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -896,7 +897,7 @@ export const Height = {
     if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
     return obj;
   },
-  toJSON(message: Height): unknown {
+  toJSON(message: Height): JsonSafe<Height> {
     const obj: any = {};
     message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
     message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
@@ -985,7 +986,7 @@ export const Params = {
     if (Array.isArray(object?.allowedClients)) obj.allowedClients = object.allowedClients.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.allowedClients) {
       obj.allowedClients = message.allowedClients.map(e => e);

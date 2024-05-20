@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -466,7 +467,7 @@ export const Documentation = {
     if (isSet(object.overview)) obj.overview = String(object.overview);
     return obj;
   },
-  toJSON(message: Documentation): unknown {
+  toJSON(message: Documentation): JsonSafe<Documentation> {
     const obj: any = {};
     message.summary !== undefined && (obj.summary = message.summary);
     if (message.pages) {
@@ -622,7 +623,7 @@ export const DocumentationRule = {
     if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
     return obj;
   },
-  toJSON(message: DocumentationRule): unknown {
+  toJSON(message: DocumentationRule): JsonSafe<DocumentationRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.description !== undefined && (obj.description = message.description);
@@ -734,7 +735,7 @@ export const Page = {
     if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
     return obj;
   },
-  toJSON(message: Page): unknown {
+  toJSON(message: Page): JsonSafe<Page> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.content !== undefined && (obj.content = message.content);

@@ -1,6 +1,7 @@
 import { DistrRecord, DistrRecordSDKType } from "./incentives.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -117,7 +118,7 @@ export const ReplacePoolIncentivesProposal = {
     if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
-  toJSON(message: ReplacePoolIncentivesProposal): unknown {
+  toJSON(message: ReplacePoolIncentivesProposal): JsonSafe<ReplacePoolIncentivesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -255,7 +256,7 @@ export const UpdatePoolIncentivesProposal = {
     if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
-  toJSON(message: UpdatePoolIncentivesProposal): unknown {
+  toJSON(message: UpdatePoolIncentivesProposal): JsonSafe<UpdatePoolIncentivesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

@@ -1,6 +1,7 @@
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
@@ -69,7 +70,7 @@ export const GenesisState = {
     if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || BigInt(0)).toString());
     if (message.locks) {

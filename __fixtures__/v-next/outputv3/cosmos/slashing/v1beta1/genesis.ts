@@ -1,6 +1,7 @@
 import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
@@ -172,7 +173,7 @@ export const GenesisState = {
     if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.signingInfos) {
@@ -299,7 +300,7 @@ export const SigningInfo = {
     if (isSet(object.validatorSigningInfo)) obj.validatorSigningInfo = ValidatorSigningInfo.fromJSON(object.validatorSigningInfo);
     return obj;
   },
-  toJSON(message: SigningInfo): unknown {
+  toJSON(message: SigningInfo): JsonSafe<SigningInfo> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.validatorSigningInfo !== undefined && (obj.validatorSigningInfo = message.validatorSigningInfo ? ValidatorSigningInfo.toJSON(message.validatorSigningInfo) : undefined);
@@ -398,7 +399,7 @@ export const ValidatorMissedBlocks = {
     if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
     return obj;
   },
-  toJSON(message: ValidatorMissedBlocks): unknown {
+  toJSON(message: ValidatorMissedBlocks): JsonSafe<ValidatorMissedBlocks> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.missedBlocks) {
@@ -505,7 +506,7 @@ export const MissedBlock = {
     if (isSet(object.missed)) obj.missed = Boolean(object.missed);
     return obj;
   },
-  toJSON(message: MissedBlock): unknown {
+  toJSON(message: MissedBlock): JsonSafe<MissedBlock> {
     const obj: any = {};
     message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
     message.missed !== undefined && (obj.missed = message.missed);

@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
 import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType, voteOptionFromJSON, voteOptionToJSON } from "./gov.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -177,7 +178,7 @@ export const MsgSubmitProposal = {
     if (isSet(object.proposer)) obj.proposer = String(object.proposer);
     return obj;
   },
-  toJSON(message: MsgSubmitProposal): unknown {
+  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
     const obj: any = {};
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     if (message.initialDeposit) {
@@ -301,7 +302,7 @@ export const MsgSubmitProposalResponse = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: MsgSubmitProposalResponse): unknown {
+  toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -413,7 +414,7 @@ export const MsgVote = {
     if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
     return obj;
   },
-  toJSON(message: MsgVote): unknown {
+  toJSON(message: MsgVote): JsonSafe<MsgVote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -518,7 +519,7 @@ export const MsgVoteResponse = {
     const obj = createBaseMsgVoteResponse();
     return obj;
   },
-  toJSON(_: MsgVoteResponse): unknown {
+  toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
     const obj: any = {};
     return obj;
   },
@@ -617,7 +618,7 @@ export const MsgVoteWeighted = {
     if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgVoteWeighted): unknown {
+  toJSON(message: MsgVoteWeighted): JsonSafe<MsgVoteWeighted> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -732,7 +733,7 @@ export const MsgVoteWeightedResponse = {
     const obj = createBaseMsgVoteWeightedResponse();
     return obj;
   },
-  toJSON(_: MsgVoteWeightedResponse): unknown {
+  toJSON(_: MsgVoteWeightedResponse): JsonSafe<MsgVoteWeightedResponse> {
     const obj: any = {};
     return obj;
   },
@@ -831,7 +832,7 @@ export const MsgDeposit = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgDeposit): unknown {
+  toJSON(message: MsgDeposit): JsonSafe<MsgDeposit> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -946,7 +947,7 @@ export const MsgDepositResponse = {
     const obj = createBaseMsgDepositResponse();
     return obj;
   },
-  toJSON(_: MsgDepositResponse): unknown {
+  toJSON(_: MsgDepositResponse): JsonSafe<MsgDepositResponse> {
     const obj: any = {};
     return obj;
   },

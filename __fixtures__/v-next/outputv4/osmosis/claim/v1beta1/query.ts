@@ -2,6 +2,7 @@ import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType, actionFromJSON,
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { Params, ParamsSDKType } from "./params.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -134,7 +135,7 @@ export const QueryModuleAccountBalanceRequest = {
     const obj = createBaseQueryModuleAccountBalanceRequest();
     return obj;
   },
-  toJSON(_: QueryModuleAccountBalanceRequest): unknown {
+  toJSON(_: QueryModuleAccountBalanceRequest): JsonSafe<QueryModuleAccountBalanceRequest> {
     const obj: any = {};
     return obj;
   },
@@ -217,7 +218,7 @@ export const QueryModuleAccountBalanceResponse = {
     if (Array.isArray(object?.moduleAccountBalance)) obj.moduleAccountBalance = object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryModuleAccountBalanceResponse): unknown {
+  toJSON(message: QueryModuleAccountBalanceResponse): JsonSafe<QueryModuleAccountBalanceResponse> {
     const obj: any = {};
     if (message.moduleAccountBalance) {
       obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toJSON(e) : undefined);
@@ -312,7 +313,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -395,7 +396,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -491,7 +492,7 @@ export const QueryClaimRecordRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryClaimRecordRequest): unknown {
+  toJSON(message: QueryClaimRecordRequest): JsonSafe<QueryClaimRecordRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -585,7 +586,7 @@ export const QueryClaimRecordResponse = {
     if (isSet(object.claimRecord)) obj.claimRecord = ClaimRecord.fromJSON(object.claimRecord);
     return obj;
   },
-  toJSON(message: QueryClaimRecordResponse): unknown {
+  toJSON(message: QueryClaimRecordResponse): JsonSafe<QueryClaimRecordResponse> {
     const obj: any = {};
     message.claimRecord !== undefined && (obj.claimRecord = message.claimRecord ? ClaimRecord.toJSON(message.claimRecord) : undefined);
     return obj;
@@ -689,7 +690,7 @@ export const QueryClaimableForActionRequest = {
     if (isSet(object.action)) obj.action = actionFromJSON(object.action);
     return obj;
   },
-  toJSON(message: QueryClaimableForActionRequest): unknown {
+  toJSON(message: QueryClaimableForActionRequest): JsonSafe<QueryClaimableForActionRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.action !== undefined && (obj.action = actionToJSON(message.action));
@@ -792,7 +793,7 @@ export const QueryClaimableForActionResponse = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryClaimableForActionResponse): unknown {
+  toJSON(message: QueryClaimableForActionResponse): JsonSafe<QueryClaimableForActionResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -896,7 +897,7 @@ export const QueryTotalClaimableRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryTotalClaimableRequest): unknown {
+  toJSON(message: QueryTotalClaimableRequest): JsonSafe<QueryTotalClaimableRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -990,7 +991,7 @@ export const QueryTotalClaimableResponse = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryTotalClaimableResponse): unknown {
+  toJSON(message: QueryTotalClaimableResponse): JsonSafe<QueryTotalClaimableResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);

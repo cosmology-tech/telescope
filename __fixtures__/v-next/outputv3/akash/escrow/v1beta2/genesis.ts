@@ -1,5 +1,6 @@
 import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** GenesisState defines the basic genesis state used by escrow module */
@@ -64,7 +65,7 @@ export const GenesisState = {
     if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => FractionalPayment.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);

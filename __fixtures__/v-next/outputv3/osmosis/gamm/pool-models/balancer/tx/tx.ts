@@ -1,6 +1,7 @@
 import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { isSet, DeepPartial } from "../../../../../helpers";
+import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -103,7 +104,7 @@ export const MsgCreateBalancerPool = {
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
     return obj;
   },
-  toJSON(message: MsgCreateBalancerPool): unknown {
+  toJSON(message: MsgCreateBalancerPool): JsonSafe<MsgCreateBalancerPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
@@ -220,7 +221,7 @@ export const MsgCreateBalancerPoolResponse = {
     if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
     return obj;
   },
-  toJSON(message: MsgCreateBalancerPoolResponse): unknown {
+  toJSON(message: MsgCreateBalancerPoolResponse): JsonSafe<MsgCreateBalancerPoolResponse> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;

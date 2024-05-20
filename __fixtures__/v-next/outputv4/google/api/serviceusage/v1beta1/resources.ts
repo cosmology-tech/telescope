@@ -8,6 +8,7 @@ import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from 
 import { Monitoring, MonitoringSDKType } from "../../monitoring.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -723,7 +724,7 @@ export const Service = {
     if (isSet(object.state)) obj.state = stateFromJSON(object.state);
     return obj;
   },
-  toJSON(message: Service): unknown {
+  toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.parent !== undefined && (obj.parent = message.parent);
@@ -912,7 +913,7 @@ export const ServiceConfig = {
     if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
     return obj;
   },
-  toJSON(message: ServiceConfig): unknown {
+  toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.title !== undefined && (obj.title = message.title);
@@ -1121,7 +1122,7 @@ export const OperationMetadata = {
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: OperationMetadata): unknown {
+  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);
@@ -1259,7 +1260,7 @@ export const ConsumerQuotaMetric = {
     if (isSet(object.unit)) obj.unit = String(object.unit);
     return obj;
   },
-  toJSON(message: ConsumerQuotaMetric): unknown {
+  toJSON(message: ConsumerQuotaMetric): JsonSafe<ConsumerQuotaMetric> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.metric !== undefined && (obj.metric = message.metric);
@@ -1452,7 +1453,7 @@ export const ConsumerQuotaLimit = {
     if (Array.isArray(object?.quotaBuckets)) obj.quotaBuckets = object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e));
     return obj;
   },
-  toJSON(message: ConsumerQuotaLimit): unknown {
+  toJSON(message: ConsumerQuotaLimit): JsonSafe<ConsumerQuotaLimit> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.metric !== undefined && (obj.metric = message.metric);
@@ -1602,7 +1603,7 @@ export const QuotaBucket_DimensionsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: QuotaBucket_DimensionsEntry): unknown {
+  toJSON(message: QuotaBucket_DimensionsEntry): JsonSafe<QuotaBucket_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1744,7 +1745,7 @@ export const QuotaBucket = {
     }, {});
     return obj;
   },
-  toJSON(message: QuotaBucket): unknown {
+  toJSON(message: QuotaBucket): JsonSafe<QuotaBucket> {
     const obj: any = {};
     message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
     message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
@@ -1931,7 +1932,7 @@ export const QuotaOverride_DimensionsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: QuotaOverride_DimensionsEntry): unknown {
+  toJSON(message: QuotaOverride_DimensionsEntry): JsonSafe<QuotaOverride_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2073,7 +2074,7 @@ export const QuotaOverride = {
     if (isSet(object.adminOverrideAncestor)) obj.adminOverrideAncestor = String(object.adminOverrideAncestor);
     return obj;
   },
-  toJSON(message: QuotaOverride): unknown {
+  toJSON(message: QuotaOverride): JsonSafe<QuotaOverride> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
@@ -2245,7 +2246,7 @@ export const OverrideInlineSource = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: OverrideInlineSource): unknown {
+  toJSON(message: OverrideInlineSource): JsonSafe<OverrideInlineSource> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -2350,7 +2351,7 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: AdminQuotaPolicy_DimensionsEntry): unknown {
+  toJSON(message: AdminQuotaPolicy_DimensionsEntry): JsonSafe<AdminQuotaPolicy_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2492,7 +2493,7 @@ export const AdminQuotaPolicy = {
     if (isSet(object.container)) obj.container = String(object.container);
     return obj;
   },
-  toJSON(message: AdminQuotaPolicy): unknown {
+  toJSON(message: AdminQuotaPolicy): JsonSafe<AdminQuotaPolicy> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
@@ -2672,7 +2673,7 @@ export const ServiceIdentity = {
     if (isSet(object.uniqueId)) obj.uniqueId = String(object.uniqueId);
     return obj;
   },
-  toJSON(message: ServiceIdentity): unknown {
+  toJSON(message: ServiceIdentity): JsonSafe<ServiceIdentity> {
     const obj: any = {};
     message.email !== undefined && (obj.email = message.email);
     message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);

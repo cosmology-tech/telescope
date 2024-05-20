@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -134,7 +135,7 @@ export const InflationDistribution = {
     if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
     return obj;
   },
-  toJSON(message: InflationDistribution): unknown {
+  toJSON(message: InflationDistribution): JsonSafe<InflationDistribution> {
     const obj: any = {};
     message.stakingRewards !== undefined && (obj.stakingRewards = message.stakingRewards);
     message.usageIncentives !== undefined && (obj.usageIncentives = message.usageIncentives);
@@ -272,7 +273,7 @@ export const ExponentialCalculation = {
     if (isSet(object.maxVariance)) obj.maxVariance = String(object.maxVariance);
     return obj;
   },
-  toJSON(message: ExponentialCalculation): unknown {
+  toJSON(message: ExponentialCalculation): JsonSafe<ExponentialCalculation> {
     const obj: any = {};
     message.a !== undefined && (obj.a = message.a);
     message.r !== undefined && (obj.r = message.r);

@@ -3,6 +3,7 @@ import { Attribute, AttributeSDKType } from "./attribute.js";
 import { Endpoint, EndpointSDKType } from "./endpoint.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "akash.base.v1beta1";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
@@ -113,7 +114,7 @@ export const CPU = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: CPU): unknown {
+  toJSON(message: CPU): JsonSafe<CPU> {
     const obj: any = {};
     message.units !== undefined && (obj.units = message.units ? ResourceValue.toJSON(message.units) : undefined);
     if (message.attributes) {
@@ -236,7 +237,7 @@ export const Memory = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Memory): unknown {
+  toJSON(message: Memory): JsonSafe<Memory> {
     const obj: any = {};
     message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
     if (message.attributes) {
@@ -359,7 +360,7 @@ export const Storage = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Storage): unknown {
+  toJSON(message: Storage): JsonSafe<Storage> {
     const obj: any = {};
     message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
     if (message.attributes) {
@@ -498,7 +499,7 @@ export const ResourceUnits = {
     if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResourceUnits): unknown {
+  toJSON(message: ResourceUnits): JsonSafe<ResourceUnits> {
     const obj: any = {};
     message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toJSON(message.cpu) : undefined);
     message.memory !== undefined && (obj.memory = message.memory ? Memory.toJSON(message.memory) : undefined);

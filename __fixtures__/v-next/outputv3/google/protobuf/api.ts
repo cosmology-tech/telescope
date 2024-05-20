@@ -2,6 +2,7 @@ import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJS
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -530,7 +531,7 @@ export const Api = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Api): unknown {
+  toJSON(message: Api): JsonSafe<Api> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.methods) {
@@ -738,7 +739,7 @@ export const Method = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Method): unknown {
+  toJSON(message: Method): JsonSafe<Method> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.requestTypeUrl !== undefined && (obj.requestTypeUrl = message.requestTypeUrl);
@@ -884,7 +885,7 @@ export const Mixin = {
     if (isSet(object.root)) obj.root = String(object.root);
     return obj;
   },
-  toJSON(message: Mixin): unknown {
+  toJSON(message: Mixin): JsonSafe<Mixin> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.root !== undefined && (obj.root = message.root);

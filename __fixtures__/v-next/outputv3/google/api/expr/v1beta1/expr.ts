@@ -2,6 +2,7 @@ import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -681,7 +682,7 @@ export const ParsedExpr = {
     if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
     return obj;
   },
-  toJSON(message: ParsedExpr): unknown {
+  toJSON(message: ParsedExpr): JsonSafe<ParsedExpr> {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
@@ -837,7 +838,7 @@ export const Expr = {
     if (isSet(object.comprehensionExpr)) obj.comprehensionExpr = Expr_Comprehension.fromJSON(object.comprehensionExpr);
     return obj;
   },
-  toJSON(message: Expr): unknown {
+  toJSON(message: Expr): JsonSafe<Expr> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.literalExpr !== undefined && (obj.literalExpr = message.literalExpr ? Literal.toJSON(message.literalExpr) : undefined);
@@ -987,7 +988,7 @@ export const Expr_Ident = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: Expr_Ident): unknown {
+  toJSON(message: Expr_Ident): JsonSafe<Expr_Ident> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1083,7 +1084,7 @@ export const Expr_Select = {
     if (isSet(object.testOnly)) obj.testOnly = Boolean(object.testOnly);
     return obj;
   },
-  toJSON(message: Expr_Select): unknown {
+  toJSON(message: Expr_Select): JsonSafe<Expr_Select> {
     const obj: any = {};
     message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
     message.field !== undefined && (obj.field = message.field);
@@ -1197,7 +1198,7 @@ export const Expr_Call = {
     if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_Call): unknown {
+  toJSON(message: Expr_Call): JsonSafe<Expr_Call> {
     const obj: any = {};
     message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
     message.function !== undefined && (obj.function = message.function);
@@ -1305,7 +1306,7 @@ export const Expr_CreateList = {
     if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_CreateList): unknown {
+  toJSON(message: Expr_CreateList): JsonSafe<Expr_CreateList> {
     const obj: any = {};
     if (message.elements) {
       obj.elements = message.elements.map(e => e ? Expr.toJSON(e) : undefined);
@@ -1403,7 +1404,7 @@ export const Expr_CreateStruct = {
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_CreateStruct): unknown {
+  toJSON(message: Expr_CreateStruct): JsonSafe<Expr_CreateStruct> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     if (message.entries) {
@@ -1525,7 +1526,7 @@ export const Expr_CreateStruct_Entry = {
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: Expr_CreateStruct_Entry): unknown {
+  toJSON(message: Expr_CreateStruct_Entry): JsonSafe<Expr_CreateStruct_Entry> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
@@ -1681,7 +1682,7 @@ export const Expr_Comprehension = {
     if (isSet(object.result)) obj.result = Expr.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: Expr_Comprehension): unknown {
+  toJSON(message: Expr_Comprehension): JsonSafe<Expr_Comprehension> {
     const obj: any = {};
     message.iterVar !== undefined && (obj.iterVar = message.iterVar);
     message.iterRange !== undefined && (obj.iterRange = message.iterRange ? Expr.toJSON(message.iterRange) : undefined);
@@ -1867,7 +1868,7 @@ export const Literal = {
     if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
     return obj;
   },
-  toJSON(message: Literal): unknown {
+  toJSON(message: Literal): JsonSafe<Literal> {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -436,7 +437,7 @@ export const ResourceDescriptor = {
     if (Array.isArray(object?.style)) obj.style = object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
     return obj;
   },
-  toJSON(message: ResourceDescriptor): unknown {
+  toJSON(message: ResourceDescriptor): JsonSafe<ResourceDescriptor> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     if (message.pattern) {
@@ -606,7 +607,7 @@ export const ResourceReference = {
     if (isSet(object.childType)) obj.childType = String(object.childType);
     return obj;
   },
-  toJSON(message: ResourceReference): unknown {
+  toJSON(message: ResourceReference): JsonSafe<ResourceReference> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.childType !== undefined && (obj.childType = message.childType);

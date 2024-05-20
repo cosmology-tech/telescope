@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
@@ -315,7 +316,7 @@ export const Params = {
     if (isSet(object.defaultSendEnabled)) obj.defaultSendEnabled = Boolean(object.defaultSendEnabled);
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.sendEnabled) {
       obj.sendEnabled = message.sendEnabled.map(e => e ? SendEnabled.toJSON(e) : undefined);
@@ -422,7 +423,7 @@ export const SendEnabled = {
     if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
     return obj;
   },
-  toJSON(message: SendEnabled): unknown {
+  toJSON(message: SendEnabled): JsonSafe<SendEnabled> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.enabled !== undefined && (obj.enabled = message.enabled);
@@ -519,7 +520,7 @@ export const Input = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Input): unknown {
+  toJSON(message: Input): JsonSafe<Input> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.coins) {
@@ -626,7 +627,7 @@ export const Output = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Output): unknown {
+  toJSON(message: Output): JsonSafe<Output> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.coins) {
@@ -726,7 +727,7 @@ export const Supply = {
     if (Array.isArray(object?.total)) obj.total = object.total.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Supply): unknown {
+  toJSON(message: Supply): JsonSafe<Supply> {
     const obj: any = {};
     if (message.total) {
       obj.total = message.total.map(e => e ? Coin.toJSON(e) : undefined);
@@ -833,7 +834,7 @@ export const DenomUnit = {
     if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: DenomUnit): unknown {
+  toJSON(message: DenomUnit): JsonSafe<DenomUnit> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
@@ -996,7 +997,7 @@ export const Metadata = {
     if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
     return obj;
   },
-  toJSON(message: Metadata): unknown {
+  toJSON(message: Metadata): JsonSafe<Metadata> {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     if (message.denomUnits) {

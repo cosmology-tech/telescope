@@ -1,6 +1,7 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.recovery.v1";
 /** GenesisState defines the recovery module's genesis state. */
 export interface GenesisState {
@@ -78,7 +79,7 @@ export const GenesisState = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -168,7 +169,7 @@ export const Params = {
     if (isSet(object.packetTimeoutDuration)) obj.packetTimeoutDuration = Duration.fromJSON(object.packetTimeoutDuration);
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableRecovery !== undefined && (obj.enableRecovery = message.enableRecovery);
     message.packetTimeoutDuration !== undefined && (obj.packetTimeoutDuration = message.packetTimeoutDuration ? Duration.toJSON(message.packetTimeoutDuration) : undefined);

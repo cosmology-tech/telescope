@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -152,7 +153,7 @@ export const DeploymentID = {
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     return obj;
   },
-  toJSON(message: DeploymentID): unknown {
+  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
@@ -266,7 +267,7 @@ export const Deployment = {
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
   },
-  toJSON(message: Deployment): unknown {
+  toJSON(message: Deployment): JsonSafe<Deployment> {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
@@ -390,7 +391,7 @@ export const DeploymentFilters = {
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
   },
-  toJSON(message: DeploymentFilters): unknown {
+  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());

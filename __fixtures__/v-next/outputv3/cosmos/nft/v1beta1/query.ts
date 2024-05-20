@@ -2,6 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { NFT, NFTAmino, NFTSDKType, Class, ClassAmino, ClassSDKType } from "./nft";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
@@ -294,7 +295,7 @@ export const QueryBalanceRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: QueryBalanceRequest): unknown {
+  toJSON(message: QueryBalanceRequest): JsonSafe<QueryBalanceRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -383,7 +384,7 @@ export const QueryBalanceResponse = {
     if (isSet(object.amount)) obj.amount = BigInt(object.amount.toString());
     return obj;
   },
-  toJSON(message: QueryBalanceResponse): unknown {
+  toJSON(message: QueryBalanceResponse): JsonSafe<QueryBalanceResponse> {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
@@ -474,7 +475,7 @@ export const QueryOwnerRequest = {
     if (isSet(object.id)) obj.id = String(object.id);
     return obj;
   },
-  toJSON(message: QueryOwnerRequest): unknown {
+  toJSON(message: QueryOwnerRequest): JsonSafe<QueryOwnerRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -563,7 +564,7 @@ export const QueryOwnerResponse = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: QueryOwnerResponse): unknown {
+  toJSON(message: QueryOwnerResponse): JsonSafe<QueryOwnerResponse> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -644,7 +645,7 @@ export const QuerySupplyRequest = {
     if (isSet(object.classId)) obj.classId = String(object.classId);
     return obj;
   },
-  toJSON(message: QuerySupplyRequest): unknown {
+  toJSON(message: QuerySupplyRequest): JsonSafe<QuerySupplyRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     return obj;
@@ -725,7 +726,7 @@ export const QuerySupplyResponse = {
     if (isSet(object.amount)) obj.amount = BigInt(object.amount.toString());
     return obj;
   },
-  toJSON(message: QuerySupplyResponse): unknown {
+  toJSON(message: QuerySupplyResponse): JsonSafe<QuerySupplyResponse> {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = (message.amount || BigInt(0)).toString());
     return obj;
@@ -824,7 +825,7 @@ export const QueryNFTsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryNFTsRequest): unknown {
+  toJSON(message: QueryNFTsRequest): JsonSafe<QueryNFTsRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -931,7 +932,7 @@ export const QueryNFTsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryNFTsResponse): unknown {
+  toJSON(message: QueryNFTsResponse): JsonSafe<QueryNFTsResponse> {
     const obj: any = {};
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toJSON(e) : undefined);
@@ -1040,7 +1041,7 @@ export const QueryNFTRequest = {
     if (isSet(object.id)) obj.id = String(object.id);
     return obj;
   },
-  toJSON(message: QueryNFTRequest): unknown {
+  toJSON(message: QueryNFTRequest): JsonSafe<QueryNFTRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -1129,7 +1130,7 @@ export const QueryNFTResponse = {
     if (isSet(object.nft)) obj.nft = NFT.fromJSON(object.nft);
     return obj;
   },
-  toJSON(message: QueryNFTResponse): unknown {
+  toJSON(message: QueryNFTResponse): JsonSafe<QueryNFTResponse> {
     const obj: any = {};
     message.nft !== undefined && (obj.nft = message.nft ? NFT.toJSON(message.nft) : undefined);
     return obj;
@@ -1212,7 +1213,7 @@ export const QueryClassRequest = {
     if (isSet(object.classId)) obj.classId = String(object.classId);
     return obj;
   },
-  toJSON(message: QueryClassRequest): unknown {
+  toJSON(message: QueryClassRequest): JsonSafe<QueryClassRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     return obj;
@@ -1293,7 +1294,7 @@ export const QueryClassResponse = {
     if (isSet(object.class)) obj.class = Class.fromJSON(object.class);
     return obj;
   },
-  toJSON(message: QueryClassResponse): unknown {
+  toJSON(message: QueryClassResponse): JsonSafe<QueryClassResponse> {
     const obj: any = {};
     message.class !== undefined && (obj.class = message.class ? Class.toJSON(message.class) : undefined);
     return obj;
@@ -1376,7 +1377,7 @@ export const QueryClassesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryClassesRequest): unknown {
+  toJSON(message: QueryClassesRequest): JsonSafe<QueryClassesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -1467,7 +1468,7 @@ export const QueryClassesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryClassesResponse): unknown {
+  toJSON(message: QueryClassesResponse): JsonSafe<QueryClassesResponse> {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toJSON(e) : undefined);

@@ -27,6 +27,7 @@ export * from "./extern.js";
 export * from "./react-query.js";
 export * from "./mobx.js";
 export * from "./pinia-endpoint.js";
+export * from "./json-safe.js";
 export * from "./varint.js";
 export * from "./utf8.js";
 export * from "./binary.js";

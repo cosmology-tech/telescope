@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta1";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -124,7 +125,7 @@ export const Attribute = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Attribute): unknown {
+  toJSON(message: Attribute): JsonSafe<Attribute> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -220,7 +221,7 @@ export const SignedBy = {
     if (Array.isArray(object?.anyOf)) obj.anyOf = object.anyOf.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: SignedBy): unknown {
+  toJSON(message: SignedBy): JsonSafe<SignedBy> {
     const obj: any = {};
     if (message.allOf) {
       obj.allOf = message.allOf.map(e => e);
@@ -336,7 +337,7 @@ export const PlacementRequirements = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: PlacementRequirements): unknown {
+  toJSON(message: PlacementRequirements): JsonSafe<PlacementRequirements> {
     const obj: any = {};
     message.signedBy !== undefined && (obj.signedBy = message.signedBy ? SignedBy.toJSON(message.signedBy) : undefined);
     if (message.attributes) {

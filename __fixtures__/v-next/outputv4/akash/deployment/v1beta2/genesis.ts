@@ -3,6 +3,7 @@ import { Group, GroupSDKType } from "./group.js";
 import { Params, ParamsSDKType } from "./params.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
@@ -75,7 +76,7 @@ export const GenesisDeployment = {
     if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisDeployment): unknown {
+  toJSON(message: GenesisDeployment): JsonSafe<GenesisDeployment> {
     const obj: any = {};
     message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
     if (message.groups) {
@@ -198,7 +199,7 @@ export const GenesisState = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toJSON(e) : undefined);

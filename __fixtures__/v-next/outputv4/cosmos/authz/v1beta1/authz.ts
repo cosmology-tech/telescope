@@ -2,6 +2,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any.js";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -119,7 +120,7 @@ export const GenericAuthorization = {
     if (isSet(object.msg)) obj.msg = String(object.msg);
     return obj;
   },
-  toJSON(message: GenericAuthorization): unknown {
+  toJSON(message: GenericAuthorization): JsonSafe<GenericAuthorization> {
     const obj: any = {};
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
@@ -221,7 +222,7 @@ export const Grant = {
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
-  toJSON(message: Grant): unknown {
+  toJSON(message: Grant): JsonSafe<Grant> {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
@@ -350,7 +351,7 @@ export const GrantAuthorization = {
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
-  toJSON(message: GrantAuthorization): unknown {
+  toJSON(message: GrantAuthorization): JsonSafe<GrantAuthorization> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -473,7 +474,7 @@ export const GrantQueueItem = {
     if (Array.isArray(object?.msgTypeUrls)) obj.msgTypeUrls = object.msgTypeUrls.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: GrantQueueItem): unknown {
+  toJSON(message: GrantQueueItem): JsonSafe<GrantQueueItem> {
     const obj: any = {};
     if (message.msgTypeUrls) {
       obj.msgTypeUrls = message.msgTypeUrls.map(e => e);
