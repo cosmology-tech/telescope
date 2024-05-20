@@ -79,7 +79,7 @@ export const UTILS = {
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
   useEndpoint: '__pinia-endpoint__',
-  jsonSafe: '__json-safe__',
+  JsonSafe: '__json-safe__',
   override: 'mobx',
   makeObservable: 'mobx',
   NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',

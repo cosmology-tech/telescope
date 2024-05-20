@@ -75,6 +75,7 @@ const options: TelescopeOptions = {
       num64: 'bigint',
       useDeepPartial: true,
       useExact: false,
+      jsonSafe: true,
       timestamp: 'date',
       duration: 'duration'
     }

@@ -92,6 +92,7 @@ interface TelescopeOpts {
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
+            jsonSafe?: boolean;
             timestamp?: 'date' | 'timestamp',
             duration?: 'duration' | 'string',
 
@@ -348,6 +349,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             num64: 'bigint',
             useDeepPartial: false,
             useExact: false,
+            jsonSafe: false,
             timestamp: 'date',
             duration: 'duration',
             updatedDuration: false,

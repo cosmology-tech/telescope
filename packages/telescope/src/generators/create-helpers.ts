@@ -3,7 +3,7 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, getHelperForBinary, getRegistryHelper, getTypesHelper } from '../helpers';
+import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, getHelperForBinary, getRegistryHelper, getTypesHelper, jsonSafe } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -58,6 +58,11 @@ export const plugin = (
   if (builder.options.rpcClients?.type === 'grpc-web') {
     builder.files.push('grpc-web.ts');
     write(builder, 'grpc-web.ts', grpcWeb);
+  }
+
+  if (builder.options.prototypes.typingsFormat.jsonSafe === true) {
+    builder.files.push("json-safe.ts");
+    write(builder, "json-safe.ts", jsonSafe);
   }
 
   if (builder.options.prototypes.typingsFormat.num64 === "bigint") {
