@@ -402,6 +402,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | `prototypes.typingsFormat.useTelescopeGeneratedType` |  Discard GeneratedType from cosmjs, use TelescopeGeneratedType instead inside *.registry.ts files  | `false`    |
 | `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `false`    |
 | `prototypes.typingsFormat.useExact`       | defaults to false, but if enabled uses the `Exact` TS type      | `false`   |
+| `prototypes.typingsFormat.jsonSafe`       | defaults to false, but if enabled uses the `JsonSafe` for `toJSON` methods      | `false`   |
 | `prototypes.typingsFormat.timestamp`      | use either `date` or `timestamp` for `Timestamp` proto type     | "date"    |
 | `prototypes.typingsFormat.duration`       | use either `duration` or `string` for `Duration` proto type     | "duration"|
 | `prototypes.typingsFormat.setDefaultEnumToUnrecognized`       |  false: enum empty value would be 0, true: -1(value for enum unrecognized)    |true|
