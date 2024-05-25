@@ -92,7 +92,7 @@ interface TelescopeOpts {
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
-            jsonSafe?: boolean;
+            toJsonUnknown?: boolean;
             timestamp?: 'date' | 'timestamp',
             duration?: 'duration' | 'string',
 
@@ -142,9 +142,9 @@ interface TelescopeOpts {
     aminoEncoding?: {
         enabled: boolean;
         customTypes?: {
-          useCosmosSDKDec?: boolean;
+            useCosmosSDKDec?: boolean;
         },
-        omitEmptyTags?: ( "omitempty" | "dont_omitempty" )[];
+        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -157,8 +157,8 @@ interface TelescopeOpts {
         */
         useLegacyInlineEncoding?: boolean;
         legacy?: {
-          useNullHandling?: boolean;
-          useOmitEmpty?: boolean;
+            useNullHandling?: boolean;
+            useOmitEmpty?: boolean;
         }
     };
 
@@ -184,20 +184,20 @@ interface TelescopeOpts {
         scopedIsExclusive?: boolean;
         bundle?: boolean;
         serviceImplement?: {
-          [
+            [
             key:
-              | "Msg"
-              | "Query"
-              | "Service"
-              | "ReflectionService"
-              | "ABCIApplication"
-              | string
-          ]: {
-            include?: {
-              patterns?: string[];
+                | "Msg"
+                | "Query"
+                | "Service"
+                | "ReflectionService"
+                | "ABCIApplication"
+                | string
+            ]: {
+                include?: {
+                    patterns?: string[];
+                };
+                type: "Query" | "Tx" | string;
             };
-            type: "Query" | "Tx" | string;
-          };
         };
         enabledServices?: (
             'Msg' |
@@ -219,20 +219,20 @@ interface TelescopeOpts {
         instantOps?: {
             className: string,
             include?: {
-              // a group of types of service to include, undefined for All.
-              serviceTypes?: ("Query" | "Tx" | string)[];
-              patterns?: string[];
+                // a group of types of service to include, undefined for All.
+                serviceTypes?: ("Query" | "Tx" | string)[];
+                patterns?: string[];
             },
-            nameMapping?:{
-              All: {
-                [key: string]: string;
-              };
-              Query?: {
-                [key: string]: string;
-              };
-              Msg?: {
-                [key: string]: string;
-              };
+            nameMapping?: {
+                All: {
+                    [key: string]: string;
+                };
+                Query?: {
+                    [key: string]: string;
+                };
+                Msg?: {
+                    [key: string]: string;
+                };
             }
         }[];
         useConnectComet?: boolean;
@@ -250,10 +250,10 @@ interface TelescopeOpts {
         },
         instantExport?: {
             include: {
-              patterns?: string[];
+                patterns?: string[];
             },
-            nameMapping?:{
-              [key: string]: string;
+            nameMapping?: {
+                [key: string]: string;
             }
         }
     };
@@ -344,12 +344,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
 
         typingsFormat: {
             customTypes: {
-              useCosmosSDKDec: true
+                useCosmosSDKDec: true
             },
             num64: 'bigint',
             useDeepPartial: false,
             useExact: false,
-            jsonSafe: false,
+            toJsonUnknown: true,
             timestamp: 'date',
             duration: 'duration',
             updatedDuration: false,
@@ -383,7 +383,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     aminoEncoding: {
         enabled: true,
         customTypes: {
-          useCosmosSDKDec: false
+            useCosmosSDKDec: false
         },
         omitEmptyTags: ["omitempty", "dont_omitempty"],
         casingFn: snake,

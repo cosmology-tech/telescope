@@ -77,7 +77,7 @@ interface TelescopeOpts {
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
             useExact?: boolean;
-            jsonSafe?: boolean;
+            toJsonUnknown?: boolean;
             timestamp?: 'date' | 'timestamp';
             duration?: 'duration' | 'string';
             setDefaultEnumToUnrecognized?: boolean;

@@ -155,7 +155,7 @@ export const toJSONMethod = (context: ProtoParseContext, name: string, proto: Pr
     }
 
     let typeAnnot: t.TSTypeAnnotation;
-    if (context.options.prototypes.typingsFormat.jsonSafe) {
+    if (!context.options.prototypes.typingsFormat.toJsonUnknown && context.options.prototypes.methods.toJSON) {
 
         context.addUtil('JsonSafe');
 

@@ -60,7 +60,7 @@ export const plugin = (
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  if (builder.options.prototypes.typingsFormat.jsonSafe === true) {
+  if (!builder.options.prototypes.typingsFormat.toJsonUnknown && builder.options.prototypes.methods.toJSON) {
     builder.files.push("json-safe.ts");
     write(builder, "json-safe.ts", jsonSafe);
   }

@@ -75,7 +75,7 @@ const options: TelescopeOptions = {
       num64: 'bigint',
       useDeepPartial: true,
       useExact: false,
-      jsonSafe: true,
+      toJsonUnknown: false,
       timestamp: 'date',
       duration: 'duration'
     }
@@ -169,7 +169,7 @@ const options: TelescopeOptions = {
     include: {
       patterns: ['osmosis/**/gamm/**/query.proto'],
       protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.bank.v1beta1', 'cosmos.auth.**',  'cosmos.nft.**']
+      packages: ['cosmos.bank.v1beta1', 'cosmos.auth.**', 'cosmos.nft.**']
     },
     instantExport: {
       include: {
