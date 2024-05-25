@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -139,7 +140,7 @@ export const Endpoint = {
     if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
     return obj;
   },
-  toJSON(message: Endpoint): unknown {
+  toJSON(message: Endpoint): JsonSafe<Endpoint> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.aliases) {

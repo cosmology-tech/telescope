@@ -3,6 +3,7 @@ import { Distribution_BucketOptions } from "../../api/distribution.js";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -392,7 +393,7 @@ export const LogMetric_LabelExtractorsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
+  toJSON(message: LogMetric_LabelExtractorsEntry): JsonSafe<LogMetric_LabelExtractorsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -574,7 +575,7 @@ export const LogMetric = {
     if (isSet(object.version)) obj.version = logMetric_ApiVersionFromJSON(object.version);
     return obj;
   },
-  toJSON(message: LogMetric): unknown {
+  toJSON(message: LogMetric): JsonSafe<LogMetric> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -809,7 +810,7 @@ export const ListLogMetricsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListLogMetricsRequest): unknown {
+  toJSON(message: ListLogMetricsRequest): JsonSafe<ListLogMetricsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -923,7 +924,7 @@ export const ListLogMetricsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogMetricsResponse): unknown {
+  toJSON(message: ListLogMetricsResponse): JsonSafe<ListLogMetricsResponse> {
     const obj: any = {};
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? LogMetric.toJSON(e) : undefined);
@@ -1030,7 +1031,7 @@ export const GetLogMetricRequest = {
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
     return obj;
   },
-  toJSON(message: GetLogMetricRequest): unknown {
+  toJSON(message: GetLogMetricRequest): JsonSafe<GetLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;
@@ -1126,7 +1127,7 @@ export const CreateLogMetricRequest = {
     if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
     return obj;
   },
-  toJSON(message: CreateLogMetricRequest): unknown {
+  toJSON(message: CreateLogMetricRequest): JsonSafe<CreateLogMetricRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
@@ -1233,7 +1234,7 @@ export const UpdateLogMetricRequest = {
     if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
     return obj;
   },
-  toJSON(message: UpdateLogMetricRequest): unknown {
+  toJSON(message: UpdateLogMetricRequest): JsonSafe<UpdateLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
@@ -1332,7 +1333,7 @@ export const DeleteLogMetricRequest = {
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
     return obj;
   },
-  toJSON(message: DeleteLogMetricRequest): unknown {
+  toJSON(message: DeleteLogMetricRequest): JsonSafe<DeleteLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;

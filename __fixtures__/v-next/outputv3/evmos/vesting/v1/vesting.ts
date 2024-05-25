@@ -2,6 +2,7 @@ import { BaseVestingAccount, BaseVestingAccountAmino, BaseVestingAccountSDKType,
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.vesting.v1";
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -129,7 +130,7 @@ export const ClawbackVestingAccount = {
     if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
     return obj;
   },
-  toJSON(message: ClawbackVestingAccount): unknown {
+  toJSON(message: ClawbackVestingAccount): JsonSafe<ClawbackVestingAccount> {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);

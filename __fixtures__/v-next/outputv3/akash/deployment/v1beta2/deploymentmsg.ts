@@ -3,6 +3,7 @@ import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCreateDeployment defines an SDK message for creating deployment */
 export interface MsgCreateDeployment {
@@ -200,7 +201,7 @@ export const MsgCreateDeployment = {
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },
-  toJSON(message: MsgCreateDeployment): unknown {
+  toJSON(message: MsgCreateDeployment): JsonSafe<MsgCreateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     if (message.groups) {
@@ -317,7 +318,7 @@ export const MsgCreateDeploymentResponse = {
     const obj = createBaseMsgCreateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgCreateDeploymentResponse): unknown {
+  toJSON(_: MsgCreateDeploymentResponse): JsonSafe<MsgCreateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -404,7 +405,7 @@ export const MsgDepositDeployment = {
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },
-  toJSON(message: MsgDepositDeployment): unknown {
+  toJSON(message: MsgDepositDeployment): JsonSafe<MsgDepositDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
@@ -495,7 +496,7 @@ export const MsgDepositDeploymentResponse = {
     const obj = createBaseMsgDepositDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgDepositDeploymentResponse): unknown {
+  toJSON(_: MsgDepositDeploymentResponse): JsonSafe<MsgDepositDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -574,7 +575,7 @@ export const MsgUpdateDeployment = {
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     return obj;
   },
-  toJSON(message: MsgUpdateDeployment): unknown {
+  toJSON(message: MsgUpdateDeployment): JsonSafe<MsgUpdateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
@@ -655,7 +656,7 @@ export const MsgUpdateDeploymentResponse = {
     const obj = createBaseMsgUpdateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateDeploymentResponse): unknown {
+  toJSON(_: MsgUpdateDeploymentResponse): JsonSafe<MsgUpdateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -726,7 +727,7 @@ export const MsgCloseDeployment = {
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgCloseDeployment): unknown {
+  toJSON(message: MsgCloseDeployment): JsonSafe<MsgCloseDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
@@ -799,7 +800,7 @@ export const MsgCloseDeploymentResponse = {
     const obj = createBaseMsgCloseDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgCloseDeploymentResponse): unknown {
+  toJSON(_: MsgCloseDeploymentResponse): JsonSafe<MsgCloseDeploymentResponse> {
     const obj: any = {};
     return obj;
   },

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -80,7 +81,7 @@ export const DevFeeInfo = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: DevFeeInfo): unknown {
+  toJSON(message: DevFeeInfo): JsonSafe<DevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);

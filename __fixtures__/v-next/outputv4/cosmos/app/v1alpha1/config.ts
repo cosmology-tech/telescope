@@ -1,5 +1,6 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, isSet } from "../../../helpers.js";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /**
@@ -96,7 +97,7 @@ export const Config = {
     if (Array.isArray(object?.modules)) obj.modules = object.modules.map((e: any) => ModuleConfig.fromJSON(e));
     return obj;
   },
-  toJSON(message: Config): unknown {
+  toJSON(message: Config): JsonSafe<Config> {
     const obj: any = {};
     if (message.modules) {
       obj.modules = message.modules.map(e => e ? ModuleConfig.toJSON(e) : undefined);
@@ -208,7 +209,7 @@ export const ModuleConfig = {
     if (isSet(object.config)) obj.config = Any.fromJSON(object.config);
     return obj;
   },
-  toJSON(message: ModuleConfig): unknown {
+  toJSON(message: ModuleConfig): JsonSafe<ModuleConfig> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);

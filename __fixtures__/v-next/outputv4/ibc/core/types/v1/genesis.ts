@@ -6,6 +6,7 @@ import { GenesisState as GenesisState3 } from "../../channel/v1/genesis.js";
 import { GenesisStateSDKType as GenesisState3SDKType } from "../../channel/v1/genesis.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "ibc.core.types.v1";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
@@ -77,7 +78,7 @@ export const GenesisState = {
     if (isSet(object.channelGenesis)) obj.channelGenesis = GenesisState3.fromJSON(object.channelGenesis);
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
     message.connectionGenesis !== undefined && (obj.connectionGenesis = message.connectionGenesis ? GenesisState2.toJSON(message.connectionGenesis) : undefined);

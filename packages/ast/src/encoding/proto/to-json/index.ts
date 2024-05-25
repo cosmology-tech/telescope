@@ -153,6 +153,23 @@ export const toJSONMethod = (context: ProtoParseContext, name: string, proto: Pr
     if (!fields.length) {
         varName = '_';
     }
+
+    let typeAnnot: t.TSTypeAnnotation;
+    if (!context.options.prototypes.typingsFormat.toJsonUnknown && context.options.prototypes.methods.toJSON) {
+
+        context.addUtil('JsonSafe');
+
+        const objTypeIdent = t.tsTypeReference(t.identifier(name));
+        typeAnnot = t.tsTypeAnnotation(t.tsTypeReference(
+            t.identifier('JsonSafe'),
+            t.tsTypeParameterInstantiation([objTypeIdent])
+        ));
+    } else {
+        typeAnnot = t.tsTypeAnnotation(
+            t.tsUnknownKeyword()
+        );
+    }
+
     return objectMethod('method',
         t.identifier('toJSON'),
         [
@@ -185,8 +202,6 @@ export const toJSONMethod = (context: ProtoParseContext, name: string, proto: Pr
         false,
         false,
         false,
-        t.tsTypeAnnotation(
-            t.tsUnknownKeyword()
-        )
+        typeAnnot
     );
 };

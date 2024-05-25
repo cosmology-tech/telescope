@@ -79,6 +79,7 @@ export const UTILS = {
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
   useEndpoint: '__pinia-endpoint__',
+  JsonSafe: '__json-safe__',
   override: 'mobx',
   makeObservable: 'mobx',
   NodeHttpTransport: '@improbable-eng/grpc-web-node-http-transport',
@@ -97,6 +98,7 @@ export const UTIL_HELPERS = [
   '__mobx__',
   '__binary__',
   '__pinia-endpoint__',
+  '__json-safe__',
   '__grpc-gateway__',
   '__grpc-web__',
   '__types__',
@@ -118,7 +120,7 @@ export const getRelativePath = (f1: string, f2: string, ext?: string) => {
   const rel = relative(dirname(f1), f2);
   let importPath = rel.replace(extname(rel), '');
   if (!/^\./.test(importPath)) importPath = `./${importPath}`;
-  return restoreExtension(importPath, ext) ;
+  return restoreExtension(importPath, ext);
 }
 
 export * from './common-create-bundle';

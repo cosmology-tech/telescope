@@ -2,6 +2,7 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { BIP44Params, BIP44ParamsAmino, BIP44ParamsSDKType } from "../../hd/v1/hd";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
@@ -186,7 +187,7 @@ export const Record = {
     if (isSet(object.offline)) obj.offline = Record_Offline.fromJSON(object.offline);
     return obj;
   },
-  toJSON(message: Record): unknown {
+  toJSON(message: Record): JsonSafe<Record> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
@@ -325,7 +326,7 @@ export const Record_Local = {
     if (isSet(object.privKeyType)) obj.privKeyType = String(object.privKeyType);
     return obj;
   },
-  toJSON(message: Record_Local): unknown {
+  toJSON(message: Record_Local): JsonSafe<Record_Local> {
     const obj: any = {};
     message.privKey !== undefined && (obj.privKey = message.privKey ? Any.toJSON(message.privKey) : undefined);
     message.privKeyType !== undefined && (obj.privKeyType = message.privKeyType);
@@ -416,7 +417,7 @@ export const Record_Ledger = {
     if (isSet(object.path)) obj.path = BIP44Params.fromJSON(object.path);
     return obj;
   },
-  toJSON(message: Record_Ledger): unknown {
+  toJSON(message: Record_Ledger): JsonSafe<Record_Ledger> {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path ? BIP44Params.toJSON(message.path) : undefined);
     return obj;
@@ -490,7 +491,7 @@ export const Record_Multi = {
     const obj = createBaseRecord_Multi();
     return obj;
   },
-  toJSON(_: Record_Multi): unknown {
+  toJSON(_: Record_Multi): JsonSafe<Record_Multi> {
     const obj: any = {};
     return obj;
   },
@@ -553,7 +554,7 @@ export const Record_Offline = {
     const obj = createBaseRecord_Offline();
     return obj;
   },
-  toJSON(_: Record_Offline): unknown {
+  toJSON(_: Record_Offline): JsonSafe<Record_Offline> {
     const obj: any = {};
     return obj;
   },

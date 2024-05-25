@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -141,7 +142,7 @@ export const ClaimRecord = {
     if (Array.isArray(object?.actionCompleted)) obj.actionCompleted = object.actionCompleted.map((e: any) => Boolean(e));
     return obj;
   },
-  toJSON(message: ClaimRecord): unknown {
+  toJSON(message: ClaimRecord): JsonSafe<ClaimRecord> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.initialClaimableAmount) {

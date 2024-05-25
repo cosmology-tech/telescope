@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
+import { JsonSafe } from "../json-safe";
 export const protobufPackage = "ics23";
 export enum HashOp {
   /** NO_HASH - NO_HASH is the default if no data passed. Note this is an illegal argument some places. */
@@ -761,7 +762,7 @@ export const ExistenceProof = {
     if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => InnerOp.fromJSON(e));
     return obj;
   },
-  toJSON(message: ExistenceProof): unknown {
+  toJSON(message: ExistenceProof): JsonSafe<ExistenceProof> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -893,7 +894,7 @@ export const NonExistenceProof = {
     if (isSet(object.right)) obj.right = ExistenceProof.fromJSON(object.right);
     return obj;
   },
-  toJSON(message: NonExistenceProof): unknown {
+  toJSON(message: NonExistenceProof): JsonSafe<NonExistenceProof> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.left !== undefined && (obj.left = message.left ? ExistenceProof.toJSON(message.left) : undefined);
@@ -1017,7 +1018,7 @@ export const CommitmentProof = {
     if (isSet(object.compressed)) obj.compressed = CompressedBatchProof.fromJSON(object.compressed);
     return obj;
   },
-  toJSON(message: CommitmentProof): unknown {
+  toJSON(message: CommitmentProof): JsonSafe<CommitmentProof> {
     const obj: any = {};
     message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toJSON(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toJSON(message.nonexist) : undefined);
@@ -1161,7 +1162,7 @@ export const LeafOp = {
     if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
     return obj;
   },
-  toJSON(message: LeafOp): unknown {
+  toJSON(message: LeafOp): JsonSafe<LeafOp> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     message.prehashKey !== undefined && (obj.prehashKey = hashOpToJSON(message.prehashKey));
@@ -1289,7 +1290,7 @@ export const InnerOp = {
     if (isSet(object.suffix)) obj.suffix = bytesFromBase64(object.suffix);
     return obj;
   },
-  toJSON(message: InnerOp): unknown {
+  toJSON(message: InnerOp): JsonSafe<InnerOp> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = hashOpToJSON(message.hash));
     message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
@@ -1409,7 +1410,7 @@ export const ProofSpec = {
     if (isSet(object.minDepth)) obj.minDepth = Number(object.minDepth);
     return obj;
   },
-  toJSON(message: ProofSpec): unknown {
+  toJSON(message: ProofSpec): JsonSafe<ProofSpec> {
     const obj: any = {};
     message.leafSpec !== undefined && (obj.leafSpec = message.leafSpec ? LeafOp.toJSON(message.leafSpec) : undefined);
     message.innerSpec !== undefined && (obj.innerSpec = message.innerSpec ? InnerSpec.toJSON(message.innerSpec) : undefined);
@@ -1566,7 +1567,7 @@ export const InnerSpec = {
     if (isSet(object.hash)) obj.hash = hashOpFromJSON(object.hash);
     return obj;
   },
-  toJSON(message: InnerSpec): unknown {
+  toJSON(message: InnerSpec): JsonSafe<InnerSpec> {
     const obj: any = {};
     if (message.childOrder) {
       obj.childOrder = message.childOrder.map(e => Math.round(e));
@@ -1696,7 +1697,7 @@ export const BatchProof = {
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => BatchEntry.fromJSON(e));
     return obj;
   },
-  toJSON(message: BatchProof): unknown {
+  toJSON(message: BatchProof): JsonSafe<BatchProof> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? BatchEntry.toJSON(e) : undefined);
@@ -1794,7 +1795,7 @@ export const BatchEntry = {
     if (isSet(object.nonexist)) obj.nonexist = NonExistenceProof.fromJSON(object.nonexist);
     return obj;
   },
-  toJSON(message: BatchEntry): unknown {
+  toJSON(message: BatchEntry): JsonSafe<BatchEntry> {
     const obj: any = {};
     message.exist !== undefined && (obj.exist = message.exist ? ExistenceProof.toJSON(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? NonExistenceProof.toJSON(message.nonexist) : undefined);
@@ -1894,7 +1895,7 @@ export const CompressedBatchProof = {
     if (Array.isArray(object?.lookupInners)) obj.lookupInners = object.lookupInners.map((e: any) => InnerOp.fromJSON(e));
     return obj;
   },
-  toJSON(message: CompressedBatchProof): unknown {
+  toJSON(message: CompressedBatchProof): JsonSafe<CompressedBatchProof> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? CompressedBatchEntry.toJSON(e) : undefined);
@@ -2010,7 +2011,7 @@ export const CompressedBatchEntry = {
     if (isSet(object.nonexist)) obj.nonexist = CompressedNonExistenceProof.fromJSON(object.nonexist);
     return obj;
   },
-  toJSON(message: CompressedBatchEntry): unknown {
+  toJSON(message: CompressedBatchEntry): JsonSafe<CompressedBatchEntry> {
     const obj: any = {};
     message.exist !== undefined && (obj.exist = message.exist ? CompressedExistenceProof.toJSON(message.exist) : undefined);
     message.nonexist !== undefined && (obj.nonexist = message.nonexist ? CompressedNonExistenceProof.toJSON(message.nonexist) : undefined);
@@ -2135,7 +2136,7 @@ export const CompressedExistenceProof = {
     if (Array.isArray(object?.path)) obj.path = object.path.map((e: any) => Number(e));
     return obj;
   },
-  toJSON(message: CompressedExistenceProof): unknown {
+  toJSON(message: CompressedExistenceProof): JsonSafe<CompressedExistenceProof> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -2267,7 +2268,7 @@ export const CompressedNonExistenceProof = {
     if (isSet(object.right)) obj.right = CompressedExistenceProof.fromJSON(object.right);
     return obj;
   },
-  toJSON(message: CompressedNonExistenceProof): unknown {
+  toJSON(message: CompressedNonExistenceProof): JsonSafe<CompressedNonExistenceProof> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.left !== undefined && (obj.left = message.left ? CompressedExistenceProof.toJSON(message.left) : undefined);

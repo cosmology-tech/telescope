@@ -1,6 +1,7 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -151,7 +152,7 @@ export const LogDescriptor = {
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
     return obj;
   },
-  toJSON(message: LogDescriptor): unknown {
+  toJSON(message: LogDescriptor): JsonSafe<LogDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.labels) {

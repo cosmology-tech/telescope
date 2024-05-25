@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
 import { Height, HeightSDKType } from "../../../core/client/v1/client.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -139,7 +140,7 @@ export const MsgTransfer = {
     if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
     return obj;
   },
-  toJSON(message: MsgTransfer): unknown {
+  toJSON(message: MsgTransfer): JsonSafe<MsgTransfer> {
     const obj: any = {};
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
@@ -284,7 +285,7 @@ export const MsgTransferResponse = {
     const obj = createBaseMsgTransferResponse();
     return obj;
   },
-  toJSON(_: MsgTransferResponse): unknown {
+  toJSON(_: MsgTransferResponse): JsonSafe<MsgTransferResponse> {
     const obj: any = {};
     return obj;
   },

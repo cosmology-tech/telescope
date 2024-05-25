@@ -1,6 +1,7 @@
 import { Certificate, CertificateAmino, CertificateSDKType } from "./cert";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
@@ -80,7 +81,7 @@ export const GenesisCertificate = {
     if (isSet(object.certificate)) obj.certificate = Certificate.fromJSON(object.certificate);
     return obj;
   },
-  toJSON(message: GenesisCertificate): unknown {
+  toJSON(message: GenesisCertificate): JsonSafe<GenesisCertificate> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
@@ -170,7 +171,7 @@ export const GenesisState = {
     if (Array.isArray(object?.certificates)) obj.certificates = object.certificates.map((e: any) => GenesisCertificate.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toJSON(e) : undefined);

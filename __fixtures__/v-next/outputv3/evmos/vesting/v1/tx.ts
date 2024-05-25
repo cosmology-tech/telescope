@@ -2,6 +2,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -213,7 +214,7 @@ export const MsgCreateClawbackVestingAccount = {
     if (isSet(object.merge)) obj.merge = Boolean(object.merge);
     return obj;
   },
-  toJSON(message: MsgCreateClawbackVestingAccount): unknown {
+  toJSON(message: MsgCreateClawbackVestingAccount): JsonSafe<MsgCreateClawbackVestingAccount> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -344,7 +345,7 @@ export const MsgCreateClawbackVestingAccountResponse = {
     const obj = createBaseMsgCreateClawbackVestingAccountResponse();
     return obj;
   },
-  toJSON(_: MsgCreateClawbackVestingAccountResponse): unknown {
+  toJSON(_: MsgCreateClawbackVestingAccountResponse): JsonSafe<MsgCreateClawbackVestingAccountResponse> {
     const obj: any = {};
     return obj;
   },
@@ -431,7 +432,7 @@ export const MsgClawback = {
     if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
     return obj;
   },
-  toJSON(message: MsgClawback): unknown {
+  toJSON(message: MsgClawback): JsonSafe<MsgClawback> {
     const obj: any = {};
     message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);
     message.accountAddress !== undefined && (obj.accountAddress = message.accountAddress);
@@ -518,7 +519,7 @@ export const MsgClawbackResponse = {
     const obj = createBaseMsgClawbackResponse();
     return obj;
   },
-  toJSON(_: MsgClawbackResponse): unknown {
+  toJSON(_: MsgClawbackResponse): JsonSafe<MsgClawbackResponse> {
     const obj: any = {};
     return obj;
   },

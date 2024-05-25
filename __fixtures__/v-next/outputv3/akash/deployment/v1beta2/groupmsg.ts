@@ -1,6 +1,7 @@
 import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
@@ -115,7 +116,7 @@ export const MsgCloseGroup = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgCloseGroup): unknown {
+  toJSON(message: MsgCloseGroup): JsonSafe<MsgCloseGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -188,7 +189,7 @@ export const MsgCloseGroupResponse = {
     const obj = createBaseMsgCloseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgCloseGroupResponse): unknown {
+  toJSON(_: MsgCloseGroupResponse): JsonSafe<MsgCloseGroupResponse> {
     const obj: any = {};
     return obj;
   },
@@ -259,7 +260,7 @@ export const MsgPauseGroup = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgPauseGroup): unknown {
+  toJSON(message: MsgPauseGroup): JsonSafe<MsgPauseGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -332,7 +333,7 @@ export const MsgPauseGroupResponse = {
     const obj = createBaseMsgPauseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgPauseGroupResponse): unknown {
+  toJSON(_: MsgPauseGroupResponse): JsonSafe<MsgPauseGroupResponse> {
     const obj: any = {};
     return obj;
   },
@@ -403,7 +404,7 @@ export const MsgStartGroup = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgStartGroup): unknown {
+  toJSON(message: MsgStartGroup): JsonSafe<MsgStartGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -476,7 +477,7 @@ export const MsgStartGroupResponse = {
     const obj = createBaseMsgStartGroupResponse();
     return obj;
   },
-  toJSON(_: MsgStartGroupResponse): unknown {
+  toJSON(_: MsgStartGroupResponse): JsonSafe<MsgStartGroupResponse> {
     const obj: any = {};
     return obj;
   },

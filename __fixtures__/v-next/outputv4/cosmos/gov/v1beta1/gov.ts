@@ -5,6 +5,7 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js"
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -385,7 +386,7 @@ export const WeightedVoteOption = {
     if (isSet(object.weight)) obj.weight = String(object.weight);
     return obj;
   },
-  toJSON(message: WeightedVoteOption): unknown {
+  toJSON(message: WeightedVoteOption): JsonSafe<WeightedVoteOption> {
     const obj: any = {};
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.weight !== undefined && (obj.weight = message.weight);
@@ -496,7 +497,7 @@ export const TextProposal = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: TextProposal): unknown {
+  toJSON(message: TextProposal): JsonSafe<TextProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -615,7 +616,7 @@ export const Deposit = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Deposit): unknown {
+  toJSON(message: Deposit): JsonSafe<Deposit> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -803,7 +804,7 @@ export const Proposal = {
     if (isSet(object.votingEndTime)) obj.votingEndTime = new Date(object.votingEndTime);
     return obj;
   },
-  toJSON(message: Proposal): unknown {
+  toJSON(message: Proposal): JsonSafe<Proposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
@@ -1009,7 +1010,7 @@ export const TallyResult = {
     if (isSet(object.noWithVeto)) obj.noWithVeto = String(object.noWithVeto);
     return obj;
   },
-  toJSON(message: TallyResult): unknown {
+  toJSON(message: TallyResult): JsonSafe<TallyResult> {
     const obj: any = {};
     message.yes !== undefined && (obj.yes = message.yes);
     message.abstain !== undefined && (obj.abstain = message.abstain);
@@ -1154,7 +1155,7 @@ export const Vote = {
     if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
     return obj;
   },
-  toJSON(message: Vote): unknown {
+  toJSON(message: Vote): JsonSafe<Vote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -1295,7 +1296,7 @@ export const DepositParams = {
     if (isSet(object.maxDepositPeriod)) obj.maxDepositPeriod = Duration.fromJSON(object.maxDepositPeriod);
     return obj;
   },
-  toJSON(message: DepositParams): unknown {
+  toJSON(message: DepositParams): JsonSafe<DepositParams> {
     const obj: any = {};
     if (message.minDeposit) {
       obj.minDeposit = message.minDeposit.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1410,7 +1411,7 @@ export const VotingParams = {
     if (isSet(object.votingPeriod)) obj.votingPeriod = Duration.fromJSON(object.votingPeriod);
     return obj;
   },
-  toJSON(message: VotingParams): unknown {
+  toJSON(message: VotingParams): JsonSafe<VotingParams> {
     const obj: any = {};
     message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
     return obj;
@@ -1522,7 +1523,7 @@ export const TallyParams = {
     if (isSet(object.vetoThreshold)) obj.vetoThreshold = bytesFromBase64(object.vetoThreshold);
     return obj;
   },
-  toJSON(message: TallyParams): unknown {
+  toJSON(message: TallyParams): JsonSafe<TallyParams> {
     const obj: any = {};
     message.quorum !== undefined && (obj.quorum = base64FromBytes(message.quorum !== undefined ? message.quorum : new Uint8Array()));
     message.threshold !== undefined && (obj.threshold = base64FromBytes(message.threshold !== undefined ? message.threshold : new Uint8Array()));

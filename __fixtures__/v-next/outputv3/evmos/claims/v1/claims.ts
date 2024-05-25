@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -205,7 +206,7 @@ export const Claim = {
     if (isSet(object.claimableAmount)) obj.claimableAmount = String(object.claimableAmount);
     return obj;
   },
-  toJSON(message: Claim): unknown {
+  toJSON(message: Claim): JsonSafe<Claim> {
     const obj: any = {};
     message.action !== undefined && (obj.action = actionToJSON(message.action));
     message.completed !== undefined && (obj.completed = message.completed);
@@ -326,7 +327,7 @@ export const ClaimsRecordAddress = {
     if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
     return obj;
   },
-  toJSON(message: ClaimsRecordAddress): unknown {
+  toJSON(message: ClaimsRecordAddress): JsonSafe<ClaimsRecordAddress> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
@@ -449,7 +450,7 @@ export const ClaimsRecord = {
     if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
     return obj;
   },
-  toJSON(message: ClaimsRecord): unknown {
+  toJSON(message: ClaimsRecord): JsonSafe<ClaimsRecord> {
     const obj: any = {};
     message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
     if (message.actionsCompleted) {

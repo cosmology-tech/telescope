@@ -3,6 +3,7 @@ import { CheckError, CheckErrorSDKType } from "./check_error.js";
 import { Status, StatusSDKType } from "../../../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in
@@ -343,7 +344,7 @@ export const CheckRequest = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: CheckRequest): unknown {
+  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.operation !== undefined && (obj.operation = message.operation ? Operation.toJSON(message.operation) : undefined);
@@ -483,7 +484,7 @@ export const CheckResponse = {
     if (isSet(object.checkInfo)) obj.checkInfo = CheckResponse_CheckInfo.fromJSON(object.checkInfo);
     return obj;
   },
-  toJSON(message: CheckResponse): unknown {
+  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
     const obj: any = {};
     message.operationId !== undefined && (obj.operationId = message.operationId);
     if (message.checkErrors) {
@@ -627,7 +628,7 @@ export const CheckResponse_CheckInfo = {
     if (isSet(object.consumerInfo)) obj.consumerInfo = CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo);
     return obj;
   },
-  toJSON(message: CheckResponse_CheckInfo): unknown {
+  toJSON(message: CheckResponse_CheckInfo): JsonSafe<CheckResponse_CheckInfo> {
     const obj: any = {};
     if (message.unusedArguments) {
       obj.unusedArguments = message.unusedArguments.map(e => e);
@@ -752,7 +753,7 @@ export const CheckResponse_ConsumerInfo = {
     if (isSet(object.consumerNumber)) obj.consumerNumber = BigInt(object.consumerNumber.toString());
     return obj;
   },
-  toJSON(message: CheckResponse_ConsumerInfo): unknown {
+  toJSON(message: CheckResponse_ConsumerInfo): JsonSafe<CheckResponse_ConsumerInfo> {
     const obj: any = {};
     message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt(0)).toString());
     message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
@@ -878,7 +879,7 @@ export const ReportRequest = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: ReportRequest): unknown {
+  toJSON(message: ReportRequest): JsonSafe<ReportRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     if (message.operations) {
@@ -1010,7 +1011,7 @@ export const ReportResponse = {
     if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
     return obj;
   },
-  toJSON(message: ReportResponse): unknown {
+  toJSON(message: ReportResponse): JsonSafe<ReportResponse> {
     const obj: any = {};
     if (message.reportErrors) {
       obj.reportErrors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toJSON(e) : undefined);
@@ -1134,7 +1135,7 @@ export const ReportResponse_ReportError = {
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
     return obj;
   },
-  toJSON(message: ReportResponse_ReportError): unknown {
+  toJSON(message: ReportResponse_ReportError): JsonSafe<ReportResponse_ReportError> {
     const obj: any = {};
     message.operationId !== undefined && (obj.operationId = message.operationId);
     message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);

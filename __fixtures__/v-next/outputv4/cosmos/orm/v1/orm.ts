@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.orm.v1";
 /** TableDescriptor describes an ORM table. */
 export interface TableDescriptor {
@@ -176,7 +177,7 @@ export const TableDescriptor = {
     if (isSet(object.id)) obj.id = Number(object.id);
     return obj;
   },
-  toJSON(message: TableDescriptor): unknown {
+  toJSON(message: TableDescriptor): JsonSafe<TableDescriptor> {
     const obj: any = {};
     message.primaryKey !== undefined && (obj.primaryKey = message.primaryKey ? PrimaryKeyDescriptor.toJSON(message.primaryKey) : undefined);
     if (message.index) {
@@ -308,7 +309,7 @@ export const PrimaryKeyDescriptor = {
     if (isSet(object.autoIncrement)) obj.autoIncrement = Boolean(object.autoIncrement);
     return obj;
   },
-  toJSON(message: PrimaryKeyDescriptor): unknown {
+  toJSON(message: PrimaryKeyDescriptor): JsonSafe<PrimaryKeyDescriptor> {
     const obj: any = {};
     message.fields !== undefined && (obj.fields = message.fields);
     message.autoIncrement !== undefined && (obj.autoIncrement = message.autoIncrement);
@@ -427,7 +428,7 @@ export const SecondaryIndexDescriptor = {
     if (isSet(object.unique)) obj.unique = Boolean(object.unique);
     return obj;
   },
-  toJSON(message: SecondaryIndexDescriptor): unknown {
+  toJSON(message: SecondaryIndexDescriptor): JsonSafe<SecondaryIndexDescriptor> {
     const obj: any = {};
     message.fields !== undefined && (obj.fields = message.fields);
     message.id !== undefined && (obj.id = Math.round(message.id));
@@ -539,7 +540,7 @@ export const SingletonDescriptor = {
     if (isSet(object.id)) obj.id = Number(object.id);
     return obj;
   },
-  toJSON(message: SingletonDescriptor): unknown {
+  toJSON(message: SingletonDescriptor): JsonSafe<SingletonDescriptor> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     return obj;

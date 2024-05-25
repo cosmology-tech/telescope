@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
@@ -75,7 +76,7 @@ export const QueryBalancesRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryBalancesRequest): unknown {
+  toJSON(message: QueryBalancesRequest): JsonSafe<QueryBalancesRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -179,7 +180,7 @@ export const QueryBalancesResponse = {
     if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryBalancesResponse): unknown {
+  toJSON(message: QueryBalancesResponse): JsonSafe<QueryBalancesResponse> {
     const obj: any = {};
     if (message.locked) {
       obj.locked = message.locked.map(e => e ? Coin.toJSON(e) : undefined);

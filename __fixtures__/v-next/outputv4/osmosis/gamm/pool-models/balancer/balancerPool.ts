@@ -3,6 +3,7 @@ import { Duration, DurationSDKType } from "../../../../google/protobuf/duration.
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -219,7 +220,7 @@ export const SmoothWeightChangeParams = {
     if (Array.isArray(object?.targetPoolWeights)) obj.targetPoolWeights = object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
     return obj;
   },
-  toJSON(message: SmoothWeightChangeParams): unknown {
+  toJSON(message: SmoothWeightChangeParams): JsonSafe<SmoothWeightChangeParams> {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -378,7 +379,7 @@ export const PoolParams = {
     if (isSet(object.smoothWeightChangeParams)) obj.smoothWeightChangeParams = SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams);
     return obj;
   },
-  toJSON(message: PoolParams): unknown {
+  toJSON(message: PoolParams): JsonSafe<PoolParams> {
     const obj: any = {};
     message.swapFee !== undefined && (obj.swapFee = message.swapFee);
     message.exitFee !== undefined && (obj.exitFee = message.exitFee);
@@ -500,7 +501,7 @@ export const PoolAsset = {
     if (isSet(object.weight)) obj.weight = String(object.weight);
     return obj;
   },
-  toJSON(message: PoolAsset): unknown {
+  toJSON(message: PoolAsset): JsonSafe<PoolAsset> {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
     message.weight !== undefined && (obj.weight = message.weight);
@@ -653,7 +654,7 @@ export const Pool = {
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
     return obj;
   },
-  toJSON(message: Pool): unknown {
+  toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());

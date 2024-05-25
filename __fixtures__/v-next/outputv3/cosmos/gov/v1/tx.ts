@@ -9,6 +9,7 @@ import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalProtoMsg, SetSu
 import { UpdateFeeTokenProposal, UpdateFeeTokenProposalProtoMsg, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -272,7 +273,7 @@ export const MsgSubmitProposal = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgSubmitProposal): unknown {
+  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
@@ -397,7 +398,7 @@ export const MsgSubmitProposalResponse = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: MsgSubmitProposalResponse): unknown {
+  toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -488,7 +489,7 @@ export const MsgExecLegacyContent = {
     if (isSet(object.authority)) obj.authority = String(object.authority);
     return obj;
   },
-  toJSON(message: MsgExecLegacyContent): unknown {
+  toJSON(message: MsgExecLegacyContent): JsonSafe<MsgExecLegacyContent> {
     const obj: any = {};
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     message.authority !== undefined && (obj.authority = message.authority);
@@ -570,7 +571,7 @@ export const MsgExecLegacyContentResponse = {
     const obj = createBaseMsgExecLegacyContentResponse();
     return obj;
   },
-  toJSON(_: MsgExecLegacyContentResponse): unknown {
+  toJSON(_: MsgExecLegacyContentResponse): JsonSafe<MsgExecLegacyContentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -666,7 +667,7 @@ export const MsgVote = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgVote): unknown {
+  toJSON(message: MsgVote): JsonSafe<MsgVote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -764,7 +765,7 @@ export const MsgVoteResponse = {
     const obj = createBaseMsgVoteResponse();
     return obj;
   },
-  toJSON(_: MsgVoteResponse): unknown {
+  toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
     const obj: any = {};
     return obj;
   },
@@ -860,7 +861,7 @@ export const MsgVoteWeighted = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgVoteWeighted): unknown {
+  toJSON(message: MsgVoteWeighted): JsonSafe<MsgVoteWeighted> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -968,7 +969,7 @@ export const MsgVoteWeightedResponse = {
     const obj = createBaseMsgVoteWeightedResponse();
     return obj;
   },
-  toJSON(_: MsgVoteWeightedResponse): unknown {
+  toJSON(_: MsgVoteWeightedResponse): JsonSafe<MsgVoteWeightedResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1056,7 +1057,7 @@ export const MsgDeposit = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgDeposit): unknown {
+  toJSON(message: MsgDeposit): JsonSafe<MsgDeposit> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -1156,7 +1157,7 @@ export const MsgDepositResponse = {
     const obj = createBaseMsgDepositResponse();
     return obj;
   },
-  toJSON(_: MsgDepositResponse): unknown {
+  toJSON(_: MsgDepositResponse): JsonSafe<MsgDepositResponse> {
     const obj: any = {};
     return obj;
   },

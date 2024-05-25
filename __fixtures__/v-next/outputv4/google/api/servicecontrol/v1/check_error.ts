@@ -1,6 +1,7 @@
 import { Status, StatusSDKType } from "../../../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -288,7 +289,7 @@ export const CheckError = {
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
     return obj;
   },
-  toJSON(message: CheckError): unknown {
+  toJSON(message: CheckError): JsonSafe<CheckError> {
     const obj: any = {};
     message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
     message.subject !== undefined && (obj.subject = message.subject);

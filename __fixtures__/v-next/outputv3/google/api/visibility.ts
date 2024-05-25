@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -203,7 +204,7 @@ export const Visibility = {
     if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => VisibilityRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Visibility): unknown {
+  toJSON(message: Visibility): JsonSafe<Visibility> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? VisibilityRule.toJSON(e) : undefined);
@@ -301,7 +302,7 @@ export const VisibilityRule = {
     if (isSet(object.restriction)) obj.restriction = String(object.restriction);
     return obj;
   },
-  toJSON(message: VisibilityRule): unknown {
+  toJSON(message: VisibilityRule): JsonSafe<VisibilityRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.restriction !== undefined && (obj.restriction = message.restriction);

@@ -2,6 +2,7 @@ import { SourceContext, SourceContextSDKType } from "./source_context.js";
 import { Any, AnySDKType } from "./any.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -463,7 +464,7 @@ export const Type = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Type): unknown {
+  toJSON(message: Type): JsonSafe<Type> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.fields) {
@@ -700,7 +701,7 @@ export const Field = {
     if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
     return obj;
   },
-  toJSON(message: Field): unknown {
+  toJSON(message: Field): JsonSafe<Field> {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
     message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
@@ -911,7 +912,7 @@ export const Enum = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Enum): unknown {
+  toJSON(message: Enum): JsonSafe<Enum> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.enumvalue) {
@@ -1073,7 +1074,7 @@ export const EnumValue = {
     if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     return obj;
   },
-  toJSON(message: EnumValue): unknown {
+  toJSON(message: EnumValue): JsonSafe<EnumValue> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.number !== undefined && (obj.number = Math.round(message.number));
@@ -1197,7 +1198,7 @@ export const Option = {
     if (isSet(object.value)) obj.value = Any.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: Option): unknown {
+  toJSON(message: Option): JsonSafe<Option> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);

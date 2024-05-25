@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -92,7 +93,7 @@ export const StoreKVPair = {
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     return obj;
   },
-  toJSON(message: StoreKVPair): unknown {
+  toJSON(message: StoreKVPair): JsonSafe<StoreKVPair> {
     const obj: any = {};
     message.storeKey !== undefined && (obj.storeKey = message.storeKey);
     message.delete !== undefined && (obj.delete = message.delete);

@@ -1,5 +1,6 @@
 import { Any, AnySDKType } from "../protobuf/any.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
 import { DeepPartial } from "../../helpers.js";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
@@ -50,7 +51,7 @@ export const SourceInfo = {
     if (Array.isArray(object?.sourceFiles)) obj.sourceFiles = object.sourceFiles.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: SourceInfo): unknown {
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
     if (message.sourceFiles) {
       obj.sourceFiles = message.sourceFiles.map(e => e ? Any.toJSON(e) : undefined);

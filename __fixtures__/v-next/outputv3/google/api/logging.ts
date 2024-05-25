@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -225,7 +226,7 @@ export const Logging = {
     if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
     return obj;
   },
-  toJSON(message: Logging): unknown {
+  toJSON(message: Logging): JsonSafe<Logging> {
     const obj: any = {};
     if (message.producerDestinations) {
       obj.producerDestinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
@@ -341,7 +342,7 @@ export const Logging_LoggingDestination = {
     if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: Logging_LoggingDestination): unknown {
+  toJSON(message: Logging_LoggingDestination): JsonSafe<Logging_LoggingDestination> {
     const obj: any = {};
     message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
     if (message.logs) {

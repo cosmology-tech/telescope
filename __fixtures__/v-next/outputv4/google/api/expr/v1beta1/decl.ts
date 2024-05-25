@@ -1,6 +1,7 @@
 import { Expr, ExprSDKType } from "./expr.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -161,7 +162,7 @@ export const Decl = {
     if (isSet(object.function)) obj.function = FunctionDecl.fromJSON(object.function);
     return obj;
   },
-  toJSON(message: Decl): unknown {
+  toJSON(message: Decl): JsonSafe<Decl> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.name !== undefined && (obj.name = message.name);
@@ -305,7 +306,7 @@ export const DeclType = {
     if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => DeclType.fromJSON(e));
     return obj;
   },
-  toJSON(message: DeclType): unknown {
+  toJSON(message: DeclType): JsonSafe<DeclType> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.type !== undefined && (obj.type = message.type);
@@ -429,7 +430,7 @@ export const IdentDecl = {
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: IdentDecl): unknown {
+  toJSON(message: IdentDecl): JsonSafe<IdentDecl> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? DeclType.toJSON(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -546,7 +547,7 @@ export const FunctionDecl = {
     if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
     return obj;
   },
-  toJSON(message: FunctionDecl): unknown {
+  toJSON(message: FunctionDecl): JsonSafe<FunctionDecl> {
     const obj: any = {};
     if (message.args) {
       obj.args = message.args.map(e => e ? IdentDecl.toJSON(e) : undefined);

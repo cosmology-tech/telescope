@@ -1,6 +1,7 @@
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -753,7 +754,7 @@ export const RetryInfo = {
     if (isSet(object.retryDelay)) obj.retryDelay = Duration.fromJSON(object.retryDelay);
     return obj;
   },
-  toJSON(message: RetryInfo): unknown {
+  toJSON(message: RetryInfo): JsonSafe<RetryInfo> {
     const obj: any = {};
     message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
     return obj;
@@ -843,7 +844,7 @@ export const DebugInfo = {
     if (isSet(object.detail)) obj.detail = String(object.detail);
     return obj;
   },
-  toJSON(message: DebugInfo): unknown {
+  toJSON(message: DebugInfo): JsonSafe<DebugInfo> {
     const obj: any = {};
     if (message.stackEntries) {
       obj.stackEntries = message.stackEntries.map(e => e);
@@ -941,7 +942,7 @@ export const QuotaFailure = {
     if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
     return obj;
   },
-  toJSON(message: QuotaFailure): unknown {
+  toJSON(message: QuotaFailure): JsonSafe<QuotaFailure> {
     const obj: any = {};
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toJSON(e) : undefined);
@@ -1039,7 +1040,7 @@ export const QuotaFailure_Violation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: QuotaFailure_Violation): unknown {
+  toJSON(message: QuotaFailure_Violation): JsonSafe<QuotaFailure_Violation> {
     const obj: any = {};
     message.subject !== undefined && (obj.subject = message.subject);
     message.description !== undefined && (obj.description = message.description);
@@ -1134,7 +1135,7 @@ export const ErrorInfo_MetadataEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: ErrorInfo_MetadataEntry): unknown {
+  toJSON(message: ErrorInfo_MetadataEntry): JsonSafe<ErrorInfo_MetadataEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1243,7 +1244,7 @@ export const ErrorInfo = {
     }, {});
     return obj;
   },
-  toJSON(message: ErrorInfo): unknown {
+  toJSON(message: ErrorInfo): JsonSafe<ErrorInfo> {
     const obj: any = {};
     message.reason !== undefined && (obj.reason = message.reason);
     message.domain !== undefined && (obj.domain = message.domain);
@@ -1371,7 +1372,7 @@ export const PreconditionFailure = {
     if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
     return obj;
   },
-  toJSON(message: PreconditionFailure): unknown {
+  toJSON(message: PreconditionFailure): JsonSafe<PreconditionFailure> {
     const obj: any = {};
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
@@ -1477,7 +1478,7 @@ export const PreconditionFailure_Violation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: PreconditionFailure_Violation): unknown {
+  toJSON(message: PreconditionFailure_Violation): JsonSafe<PreconditionFailure_Violation> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.subject !== undefined && (obj.subject = message.subject);
@@ -1573,7 +1574,7 @@ export const BadRequest = {
     if (Array.isArray(object?.fieldViolations)) obj.fieldViolations = object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
     return obj;
   },
-  toJSON(message: BadRequest): unknown {
+  toJSON(message: BadRequest): JsonSafe<BadRequest> {
     const obj: any = {};
     if (message.fieldViolations) {
       obj.fieldViolations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toJSON(e) : undefined);
@@ -1671,7 +1672,7 @@ export const BadRequest_FieldViolation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: BadRequest_FieldViolation): unknown {
+  toJSON(message: BadRequest_FieldViolation): JsonSafe<BadRequest_FieldViolation> {
     const obj: any = {};
     message.field !== undefined && (obj.field = message.field);
     message.description !== undefined && (obj.description = message.description);
@@ -1767,7 +1768,7 @@ export const RequestInfo = {
     if (isSet(object.servingData)) obj.servingData = String(object.servingData);
     return obj;
   },
-  toJSON(message: RequestInfo): unknown {
+  toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
     const obj: any = {};
     message.requestId !== undefined && (obj.requestId = message.requestId);
     message.servingData !== undefined && (obj.servingData = message.servingData);
@@ -1879,7 +1880,7 @@ export const ResourceInfo = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: ResourceInfo): unknown {
+  toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
     const obj: any = {};
     message.resourceType !== undefined && (obj.resourceType = message.resourceType);
     message.resourceName !== undefined && (obj.resourceName = message.resourceName);
@@ -1983,7 +1984,7 @@ export const Help = {
     if (Array.isArray(object?.links)) obj.links = object.links.map((e: any) => Help_Link.fromJSON(e));
     return obj;
   },
-  toJSON(message: Help): unknown {
+  toJSON(message: Help): JsonSafe<Help> {
     const obj: any = {};
     if (message.links) {
       obj.links = message.links.map(e => e ? Help_Link.toJSON(e) : undefined);
@@ -2081,7 +2082,7 @@ export const Help_Link = {
     if (isSet(object.url)) obj.url = String(object.url);
     return obj;
   },
-  toJSON(message: Help_Link): unknown {
+  toJSON(message: Help_Link): JsonSafe<Help_Link> {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     message.url !== undefined && (obj.url = message.url);
@@ -2177,7 +2178,7 @@ export const LocalizedMessage = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: LocalizedMessage): unknown {
+  toJSON(message: LocalizedMessage): JsonSafe<LocalizedMessage> {
     const obj: any = {};
     message.locale !== undefined && (obj.locale = message.locale);
     message.message !== undefined && (obj.message = message.message);

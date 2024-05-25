@@ -3,6 +3,7 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../protobuf/dura
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -884,7 +885,7 @@ export const ParsedExpr = {
     if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
     return obj;
   },
-  toJSON(message: ParsedExpr): unknown {
+  toJSON(message: ParsedExpr): JsonSafe<ParsedExpr> {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
@@ -1032,7 +1033,7 @@ export const Expr = {
     if (isSet(object.comprehensionExpr)) obj.comprehensionExpr = Expr_Comprehension.fromJSON(object.comprehensionExpr);
     return obj;
   },
-  toJSON(message: Expr): unknown {
+  toJSON(message: Expr): JsonSafe<Expr> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.constExpr !== undefined && (obj.constExpr = message.constExpr ? Constant.toJSON(message.constExpr) : undefined);
@@ -1184,7 +1185,7 @@ export const Expr_Ident = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: Expr_Ident): unknown {
+  toJSON(message: Expr_Ident): JsonSafe<Expr_Ident> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1280,7 +1281,7 @@ export const Expr_Select = {
     if (isSet(object.testOnly)) obj.testOnly = Boolean(object.testOnly);
     return obj;
   },
-  toJSON(message: Expr_Select): unknown {
+  toJSON(message: Expr_Select): JsonSafe<Expr_Select> {
     const obj: any = {};
     message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
     message.field !== undefined && (obj.field = message.field);
@@ -1394,7 +1395,7 @@ export const Expr_Call = {
     if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_Call): unknown {
+  toJSON(message: Expr_Call): JsonSafe<Expr_Call> {
     const obj: any = {};
     message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
     message.function !== undefined && (obj.function = message.function);
@@ -1502,7 +1503,7 @@ export const Expr_CreateList = {
     if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_CreateList): unknown {
+  toJSON(message: Expr_CreateList): JsonSafe<Expr_CreateList> {
     const obj: any = {};
     if (message.elements) {
       obj.elements = message.elements.map(e => e ? Expr.toJSON(e) : undefined);
@@ -1600,7 +1601,7 @@ export const Expr_CreateStruct = {
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_CreateStruct): unknown {
+  toJSON(message: Expr_CreateStruct): JsonSafe<Expr_CreateStruct> {
     const obj: any = {};
     message.messageName !== undefined && (obj.messageName = message.messageName);
     if (message.entries) {
@@ -1722,7 +1723,7 @@ export const Expr_CreateStruct_Entry = {
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: Expr_CreateStruct_Entry): unknown {
+  toJSON(message: Expr_CreateStruct_Entry): JsonSafe<Expr_CreateStruct_Entry> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
@@ -1880,7 +1881,7 @@ export const Expr_Comprehension = {
     if (isSet(object.result)) obj.result = Expr.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: Expr_Comprehension): unknown {
+  toJSON(message: Expr_Comprehension): JsonSafe<Expr_Comprehension> {
     const obj: any = {};
     message.iterVar !== undefined && (obj.iterVar = message.iterVar);
     message.iterRange !== undefined && (obj.iterRange = message.iterRange ? Expr.toJSON(message.iterRange) : undefined);
@@ -2082,7 +2083,7 @@ export const Constant = {
     if (isSet(object.timestampValue)) obj.timestampValue = new Date(object.timestampValue);
     return obj;
   },
-  toJSON(message: Constant): unknown {
+  toJSON(message: Constant): JsonSafe<Constant> {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
@@ -2243,7 +2244,7 @@ export const SourceInfo_PositionsEntry = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: SourceInfo_PositionsEntry): unknown {
+  toJSON(message: SourceInfo_PositionsEntry): JsonSafe<SourceInfo_PositionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.value !== undefined && (obj.value = Math.round(message.value));
@@ -2334,7 +2335,7 @@ export const SourceInfo_MacroCallsEntry = {
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: SourceInfo_MacroCallsEntry): unknown {
+  toJSON(message: SourceInfo_MacroCallsEntry): JsonSafe<SourceInfo_MacroCallsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -2483,7 +2484,7 @@ export const SourceInfo = {
     }, {});
     return obj;
   },
-  toJSON(message: SourceInfo): unknown {
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
     message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
     message.location !== undefined && (obj.location = message.location);
@@ -2693,7 +2694,7 @@ export const SourcePosition = {
     if (isSet(object.column)) obj.column = Number(object.column);
     return obj;
   },
-  toJSON(message: SourcePosition): unknown {
+  toJSON(message: SourcePosition): JsonSafe<SourcePosition> {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     message.offset !== undefined && (obj.offset = Math.round(message.offset));

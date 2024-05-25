@@ -2,6 +2,7 @@ import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, Quota
 import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
@@ -935,7 +936,7 @@ export const EnableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: EnableServiceRequest): unknown {
+  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1023,7 +1024,7 @@ export const DisableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: DisableServiceRequest): unknown {
+  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1111,7 +1112,7 @@ export const GetServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetServiceRequest): unknown {
+  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1223,7 +1224,7 @@ export const ListServicesRequest = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     return obj;
   },
-  toJSON(message: ListServicesRequest): unknown {
+  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -1346,7 +1347,7 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): unknown {
+  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
@@ -1461,7 +1462,7 @@ export const BatchEnableServicesRequest = {
     if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: BatchEnableServicesRequest): unknown {
+  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     if (message.serviceIds) {
@@ -1592,7 +1593,7 @@ export const ListConsumerQuotaMetricsRequest = {
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: ListConsumerQuotaMetricsRequest): unknown {
+  toJSON(message: ListConsumerQuotaMetricsRequest): JsonSafe<ListConsumerQuotaMetricsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -1715,7 +1716,7 @@ export const ListConsumerQuotaMetricsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListConsumerQuotaMetricsResponse): unknown {
+  toJSON(message: ListConsumerQuotaMetricsResponse): JsonSafe<ListConsumerQuotaMetricsResponse> {
     const obj: any = {};
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toJSON(e) : undefined);
@@ -1830,7 +1831,7 @@ export const GetConsumerQuotaMetricRequest = {
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: GetConsumerQuotaMetricRequest): unknown {
+  toJSON(message: GetConsumerQuotaMetricRequest): JsonSafe<GetConsumerQuotaMetricRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
@@ -1935,7 +1936,7 @@ export const GetConsumerQuotaLimitRequest = {
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: GetConsumerQuotaLimitRequest): unknown {
+  toJSON(message: GetConsumerQuotaLimitRequest): JsonSafe<GetConsumerQuotaLimitRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
@@ -2065,7 +2066,7 @@ export const CreateAdminOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: CreateAdminOverrideRequest): unknown {
+  toJSON(message: CreateAdminOverrideRequest): JsonSafe<CreateAdminOverrideRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
@@ -2233,7 +2234,7 @@ export const UpdateAdminOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: UpdateAdminOverrideRequest): unknown {
+  toJSON(message: UpdateAdminOverrideRequest): JsonSafe<UpdateAdminOverrideRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
@@ -2396,7 +2397,7 @@ export const DeleteAdminOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: DeleteAdminOverrideRequest): unknown {
+  toJSON(message: DeleteAdminOverrideRequest): JsonSafe<DeleteAdminOverrideRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.force !== undefined && (obj.force = message.force);
@@ -2528,7 +2529,7 @@ export const ListAdminOverridesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListAdminOverridesRequest): unknown {
+  toJSON(message: ListAdminOverridesRequest): JsonSafe<ListAdminOverridesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -2642,7 +2643,7 @@ export const ListAdminOverridesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListAdminOverridesResponse): unknown {
+  toJSON(message: ListAdminOverridesResponse): JsonSafe<ListAdminOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -2749,7 +2750,7 @@ export const BatchCreateAdminOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: BatchCreateAdminOverridesResponse): unknown {
+  toJSON(message: BatchCreateAdminOverridesResponse): JsonSafe<BatchCreateAdminOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -2880,7 +2881,7 @@ export const ImportAdminOverridesRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: ImportAdminOverridesRequest): unknown {
+  toJSON(message: ImportAdminOverridesRequest): JsonSafe<ImportAdminOverridesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
@@ -3007,7 +3008,7 @@ export const ImportAdminOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: ImportAdminOverridesResponse): unknown {
+  toJSON(message: ImportAdminOverridesResponse): JsonSafe<ImportAdminOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -3096,7 +3097,7 @@ export const ImportAdminOverridesMetadata = {
     const obj = createBaseImportAdminOverridesMetadata();
     return obj;
   },
-  toJSON(_: ImportAdminOverridesMetadata): unknown {
+  toJSON(_: ImportAdminOverridesMetadata): JsonSafe<ImportAdminOverridesMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -3206,7 +3207,7 @@ export const CreateConsumerOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: CreateConsumerOverrideRequest): unknown {
+  toJSON(message: CreateConsumerOverrideRequest): JsonSafe<CreateConsumerOverrideRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
@@ -3374,7 +3375,7 @@ export const UpdateConsumerOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: UpdateConsumerOverrideRequest): unknown {
+  toJSON(message: UpdateConsumerOverrideRequest): JsonSafe<UpdateConsumerOverrideRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
@@ -3537,7 +3538,7 @@ export const DeleteConsumerOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: DeleteConsumerOverrideRequest): unknown {
+  toJSON(message: DeleteConsumerOverrideRequest): JsonSafe<DeleteConsumerOverrideRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.force !== undefined && (obj.force = message.force);
@@ -3669,7 +3670,7 @@ export const ListConsumerOverridesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListConsumerOverridesRequest): unknown {
+  toJSON(message: ListConsumerOverridesRequest): JsonSafe<ListConsumerOverridesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -3783,7 +3784,7 @@ export const ListConsumerOverridesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListConsumerOverridesResponse): unknown {
+  toJSON(message: ListConsumerOverridesResponse): JsonSafe<ListConsumerOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -3890,7 +3891,7 @@ export const BatchCreateConsumerOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: BatchCreateConsumerOverridesResponse): unknown {
+  toJSON(message: BatchCreateConsumerOverridesResponse): JsonSafe<BatchCreateConsumerOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -4021,7 +4022,7 @@ export const ImportConsumerOverridesRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: ImportConsumerOverridesRequest): unknown {
+  toJSON(message: ImportConsumerOverridesRequest): JsonSafe<ImportConsumerOverridesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
@@ -4148,7 +4149,7 @@ export const ImportConsumerOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: ImportConsumerOverridesResponse): unknown {
+  toJSON(message: ImportConsumerOverridesResponse): JsonSafe<ImportConsumerOverridesResponse> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -4237,7 +4238,7 @@ export const ImportConsumerOverridesMetadata = {
     const obj = createBaseImportConsumerOverridesMetadata();
     return obj;
   },
-  toJSON(_: ImportConsumerOverridesMetadata): unknown {
+  toJSON(_: ImportConsumerOverridesMetadata): JsonSafe<ImportConsumerOverridesMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -4314,7 +4315,7 @@ export const ImportAdminQuotaPoliciesResponse = {
     if (Array.isArray(object?.policies)) obj.policies = object.policies.map((e: any) => AdminQuotaPolicy.fromJSON(e));
     return obj;
   },
-  toJSON(message: ImportAdminQuotaPoliciesResponse): unknown {
+  toJSON(message: ImportAdminQuotaPoliciesResponse): JsonSafe<ImportAdminQuotaPoliciesResponse> {
     const obj: any = {};
     if (message.policies) {
       obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toJSON(e) : undefined);
@@ -4403,7 +4404,7 @@ export const ImportAdminQuotaPoliciesMetadata = {
     const obj = createBaseImportAdminQuotaPoliciesMetadata();
     return obj;
   },
-  toJSON(_: ImportAdminQuotaPoliciesMetadata): unknown {
+  toJSON(_: ImportAdminQuotaPoliciesMetadata): JsonSafe<ImportAdminQuotaPoliciesMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -4471,7 +4472,7 @@ export const CreateAdminQuotaPolicyMetadata = {
     const obj = createBaseCreateAdminQuotaPolicyMetadata();
     return obj;
   },
-  toJSON(_: CreateAdminQuotaPolicyMetadata): unknown {
+  toJSON(_: CreateAdminQuotaPolicyMetadata): JsonSafe<CreateAdminQuotaPolicyMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -4539,7 +4540,7 @@ export const UpdateAdminQuotaPolicyMetadata = {
     const obj = createBaseUpdateAdminQuotaPolicyMetadata();
     return obj;
   },
-  toJSON(_: UpdateAdminQuotaPolicyMetadata): unknown {
+  toJSON(_: UpdateAdminQuotaPolicyMetadata): JsonSafe<UpdateAdminQuotaPolicyMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -4607,7 +4608,7 @@ export const DeleteAdminQuotaPolicyMetadata = {
     const obj = createBaseDeleteAdminQuotaPolicyMetadata();
     return obj;
   },
-  toJSON(_: DeleteAdminQuotaPolicyMetadata): unknown {
+  toJSON(_: DeleteAdminQuotaPolicyMetadata): JsonSafe<DeleteAdminQuotaPolicyMetadata> {
     const obj: any = {};
     return obj;
   },
@@ -4684,7 +4685,7 @@ export const GenerateServiceIdentityRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     return obj;
   },
-  toJSON(message: GenerateServiceIdentityRequest): unknown {
+  toJSON(message: GenerateServiceIdentityRequest): JsonSafe<GenerateServiceIdentityRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     return obj;
@@ -4780,7 +4781,7 @@ export const GetServiceIdentityResponse = {
     if (isSet(object.state)) obj.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
     return obj;
   },
-  toJSON(message: GetServiceIdentityResponse): unknown {
+  toJSON(message: GetServiceIdentityResponse): JsonSafe<GetServiceIdentityResponse> {
     const obj: any = {};
     message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toJSON(message.identity) : undefined);
     message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
@@ -4870,7 +4871,7 @@ export const GetServiceIdentityMetadata = {
     const obj = createBaseGetServiceIdentityMetadata();
     return obj;
   },
-  toJSON(_: GetServiceIdentityMetadata): unknown {
+  toJSON(_: GetServiceIdentityMetadata): JsonSafe<GetServiceIdentityMetadata> {
     const obj: any = {};
     return obj;
   },

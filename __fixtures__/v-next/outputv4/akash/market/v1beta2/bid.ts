@@ -2,6 +2,7 @@ import { OrderID, OrderIDSDKType } from "./order.js";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -229,7 +230,7 @@ export const MsgCreateBid = {
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     return obj;
   },
-  toJSON(message: MsgCreateBid): unknown {
+  toJSON(message: MsgCreateBid): JsonSafe<MsgCreateBid> {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? OrderID.toJSON(message.order) : undefined);
     message.provider !== undefined && (obj.provider = message.provider);
@@ -347,7 +348,7 @@ export const MsgCreateBidResponse = {
     const obj = createBaseMsgCreateBidResponse();
     return obj;
   },
-  toJSON(_: MsgCreateBidResponse): unknown {
+  toJSON(_: MsgCreateBidResponse): JsonSafe<MsgCreateBidResponse> {
     const obj: any = {};
     return obj;
   },
@@ -430,7 +431,7 @@ export const MsgCloseBid = {
     if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
     return obj;
   },
-  toJSON(message: MsgCloseBid): unknown {
+  toJSON(message: MsgCloseBid): JsonSafe<MsgCloseBid> {
     const obj: any = {};
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     return obj;
@@ -517,7 +518,7 @@ export const MsgCloseBidResponse = {
     const obj = createBaseMsgCloseBidResponse();
     return obj;
   },
-  toJSON(_: MsgCloseBidResponse): unknown {
+  toJSON(_: MsgCloseBidResponse): JsonSafe<MsgCloseBidResponse> {
     const obj: any = {};
     return obj;
   },
@@ -632,7 +633,7 @@ export const BidID = {
     if (isSet(object.provider)) obj.provider = String(object.provider);
     return obj;
   },
-  toJSON(message: BidID): unknown {
+  toJSON(message: BidID): JsonSafe<BidID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
@@ -788,7 +789,7 @@ export const Bid = {
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
   },
-  toJSON(message: Bid): unknown {
+  toJSON(message: Bid): JsonSafe<Bid> {
     const obj: any = {};
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
@@ -955,7 +956,7 @@ export const BidFilters = {
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
   },
-  toJSON(message: BidFilters): unknown {
+  toJSON(message: BidFilters): JsonSafe<BidFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());

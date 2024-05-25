@@ -3,6 +3,7 @@ import { DevFeeInfo, DevFeeInfoSDKType } from "./fees.js";
 import { Params, ParamsSDKType } from "./genesis.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -185,7 +186,7 @@ export const QueryDevFeeInfosRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfosRequest): unknown {
+  toJSON(message: QueryDevFeeInfosRequest): JsonSafe<QueryDevFeeInfosRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -283,7 +284,7 @@ export const QueryDevFeeInfosResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfosResponse): unknown {
+  toJSON(message: QueryDevFeeInfosResponse): JsonSafe<QueryDevFeeInfosResponse> {
     const obj: any = {};
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
@@ -392,7 +393,7 @@ export const QueryDevFeeInfoRequest = {
     if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfoRequest): unknown {
+  toJSON(message: QueryDevFeeInfoRequest): JsonSafe<QueryDevFeeInfoRequest> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     return obj;
@@ -480,7 +481,7 @@ export const QueryDevFeeInfoResponse = {
     if (isSet(object.fee)) obj.fee = DevFeeInfo.fromJSON(object.fee);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfoResponse): unknown {
+  toJSON(message: QueryDevFeeInfoResponse): JsonSafe<QueryDevFeeInfoResponse> {
     const obj: any = {};
     message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toJSON(message.fee) : undefined);
     return obj;
@@ -561,7 +562,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -638,7 +639,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -736,7 +737,7 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfosPerDeployerRequest): unknown {
+  toJSON(message: QueryDevFeeInfosPerDeployerRequest): JsonSafe<QueryDevFeeInfosPerDeployerRequest> {
     const obj: any = {};
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -843,7 +844,7 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfosPerDeployerResponse): unknown {
+  toJSON(message: QueryDevFeeInfosPerDeployerResponse): JsonSafe<QueryDevFeeInfosPerDeployerResponse> {
     const obj: any = {};
     if (message.fees) {
       obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);

@@ -1,6 +1,7 @@
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.inflation.v1";
@@ -270,7 +271,7 @@ export const QueryPeriodRequest = {
     const obj = createBaseQueryPeriodRequest();
     return obj;
   },
-  toJSON(_: QueryPeriodRequest): unknown {
+  toJSON(_: QueryPeriodRequest): JsonSafe<QueryPeriodRequest> {
     const obj: any = {};
     return obj;
   },
@@ -341,7 +342,7 @@ export const QueryPeriodResponse = {
     if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     return obj;
   },
-  toJSON(message: QueryPeriodResponse): unknown {
+  toJSON(message: QueryPeriodResponse): JsonSafe<QueryPeriodResponse> {
     const obj: any = {};
     message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
     return obj;
@@ -414,7 +415,7 @@ export const QueryEpochMintProvisionRequest = {
     const obj = createBaseQueryEpochMintProvisionRequest();
     return obj;
   },
-  toJSON(_: QueryEpochMintProvisionRequest): unknown {
+  toJSON(_: QueryEpochMintProvisionRequest): JsonSafe<QueryEpochMintProvisionRequest> {
     const obj: any = {};
     return obj;
   },
@@ -485,7 +486,7 @@ export const QueryEpochMintProvisionResponse = {
     if (isSet(object.epochMintProvision)) obj.epochMintProvision = DecCoin.fromJSON(object.epochMintProvision);
     return obj;
   },
-  toJSON(message: QueryEpochMintProvisionResponse): unknown {
+  toJSON(message: QueryEpochMintProvisionResponse): JsonSafe<QueryEpochMintProvisionResponse> {
     const obj: any = {};
     message.epochMintProvision !== undefined && (obj.epochMintProvision = message.epochMintProvision ? DecCoin.toJSON(message.epochMintProvision) : undefined);
     return obj;
@@ -558,7 +559,7 @@ export const QuerySkippedEpochsRequest = {
     const obj = createBaseQuerySkippedEpochsRequest();
     return obj;
   },
-  toJSON(_: QuerySkippedEpochsRequest): unknown {
+  toJSON(_: QuerySkippedEpochsRequest): JsonSafe<QuerySkippedEpochsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -629,7 +630,7 @@ export const QuerySkippedEpochsResponse = {
     if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
     return obj;
   },
-  toJSON(message: QuerySkippedEpochsResponse): unknown {
+  toJSON(message: QuerySkippedEpochsResponse): JsonSafe<QuerySkippedEpochsResponse> {
     const obj: any = {};
     message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
     return obj;
@@ -702,7 +703,7 @@ export const QueryCirculatingSupplyRequest = {
     const obj = createBaseQueryCirculatingSupplyRequest();
     return obj;
   },
-  toJSON(_: QueryCirculatingSupplyRequest): unknown {
+  toJSON(_: QueryCirculatingSupplyRequest): JsonSafe<QueryCirculatingSupplyRequest> {
     const obj: any = {};
     return obj;
   },
@@ -773,7 +774,7 @@ export const QueryCirculatingSupplyResponse = {
     if (isSet(object.circulatingSupply)) obj.circulatingSupply = DecCoin.fromJSON(object.circulatingSupply);
     return obj;
   },
-  toJSON(message: QueryCirculatingSupplyResponse): unknown {
+  toJSON(message: QueryCirculatingSupplyResponse): JsonSafe<QueryCirculatingSupplyResponse> {
     const obj: any = {};
     message.circulatingSupply !== undefined && (obj.circulatingSupply = message.circulatingSupply ? DecCoin.toJSON(message.circulatingSupply) : undefined);
     return obj;
@@ -846,7 +847,7 @@ export const QueryInflationRateRequest = {
     const obj = createBaseQueryInflationRateRequest();
     return obj;
   },
-  toJSON(_: QueryInflationRateRequest): unknown {
+  toJSON(_: QueryInflationRateRequest): JsonSafe<QueryInflationRateRequest> {
     const obj: any = {};
     return obj;
   },
@@ -917,7 +918,7 @@ export const QueryInflationRateResponse = {
     if (isSet(object.inflationRate)) obj.inflationRate = String(object.inflationRate);
     return obj;
   },
-  toJSON(message: QueryInflationRateResponse): unknown {
+  toJSON(message: QueryInflationRateResponse): JsonSafe<QueryInflationRateResponse> {
     const obj: any = {};
     message.inflationRate !== undefined && (obj.inflationRate = message.inflationRate);
     return obj;
@@ -988,7 +989,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1059,7 +1060,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

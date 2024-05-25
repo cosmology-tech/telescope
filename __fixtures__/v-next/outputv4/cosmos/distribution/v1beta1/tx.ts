@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
@@ -163,7 +164,7 @@ export const MsgSetWithdrawAddress = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: MsgSetWithdrawAddress): unknown {
+  toJSON(message: MsgSetWithdrawAddress): JsonSafe<MsgSetWithdrawAddress> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
@@ -257,7 +258,7 @@ export const MsgSetWithdrawAddressResponse = {
     const obj = createBaseMsgSetWithdrawAddressResponse();
     return obj;
   },
-  toJSON(_: MsgSetWithdrawAddressResponse): unknown {
+  toJSON(_: MsgSetWithdrawAddressResponse): JsonSafe<MsgSetWithdrawAddressResponse> {
     const obj: any = {};
     return obj;
   },
@@ -348,7 +349,7 @@ export const MsgWithdrawDelegatorReward = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: MsgWithdrawDelegatorReward): unknown {
+  toJSON(message: MsgWithdrawDelegatorReward): JsonSafe<MsgWithdrawDelegatorReward> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -451,7 +452,7 @@ export const MsgWithdrawDelegatorRewardResponse = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgWithdrawDelegatorRewardResponse): unknown {
+  toJSON(message: MsgWithdrawDelegatorRewardResponse): JsonSafe<MsgWithdrawDelegatorRewardResponse> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -555,7 +556,7 @@ export const MsgWithdrawValidatorCommission = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: MsgWithdrawValidatorCommission): unknown {
+  toJSON(message: MsgWithdrawValidatorCommission): JsonSafe<MsgWithdrawValidatorCommission> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     return obj;
@@ -649,7 +650,7 @@ export const MsgWithdrawValidatorCommissionResponse = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgWithdrawValidatorCommissionResponse): unknown {
+  toJSON(message: MsgWithdrawValidatorCommissionResponse): JsonSafe<MsgWithdrawValidatorCommissionResponse> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -761,7 +762,7 @@ export const MsgFundCommunityPool = {
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },
-  toJSON(message: MsgFundCommunityPool): unknown {
+  toJSON(message: MsgFundCommunityPool): JsonSafe<MsgFundCommunityPool> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -865,7 +866,7 @@ export const MsgFundCommunityPoolResponse = {
     const obj = createBaseMsgFundCommunityPoolResponse();
     return obj;
   },
-  toJSON(_: MsgFundCommunityPoolResponse): unknown {
+  toJSON(_: MsgFundCommunityPoolResponse): JsonSafe<MsgFundCommunityPoolResponse> {
     const obj: any = {};
     return obj;
   },

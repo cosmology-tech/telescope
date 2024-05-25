@@ -4,6 +4,7 @@ import { Duration, DurationSDKType } from "../../protobuf/duration.js";
 import { Status, StatusSDKType } from "../../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, isObject } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "google.logging.v2";
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -578,7 +579,7 @@ export const DeleteLogRequest = {
     if (isSet(object.logName)) obj.logName = String(object.logName);
     return obj;
   },
-  toJSON(message: DeleteLogRequest): unknown {
+  toJSON(message: DeleteLogRequest): JsonSafe<DeleteLogRequest> {
     const obj: any = {};
     message.logName !== undefined && (obj.logName = message.logName);
     return obj;
@@ -673,7 +674,7 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: WriteLogEntriesRequest_LabelsEntry): unknown {
+  toJSON(message: WriteLogEntriesRequest_LabelsEntry): JsonSafe<WriteLogEntriesRequest_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -815,7 +816,7 @@ export const WriteLogEntriesRequest = {
     if (isSet(object.dryRun)) obj.dryRun = Boolean(object.dryRun);
     return obj;
   },
-  toJSON(message: WriteLogEntriesRequest): unknown {
+  toJSON(message: WriteLogEntriesRequest): JsonSafe<WriteLogEntriesRequest> {
     const obj: any = {};
     message.logName !== undefined && (obj.logName = message.logName);
     message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toJSON(message.resource) : undefined);
@@ -988,7 +989,7 @@ export const WriteLogEntriesResponse = {
     const obj = createBaseWriteLogEntriesResponse();
     return obj;
   },
-  toJSON(_: WriteLogEntriesResponse): unknown {
+  toJSON(_: WriteLogEntriesResponse): JsonSafe<WriteLogEntriesResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1072,7 +1073,7 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     if (isSet(object.value)) obj.value = Status.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): unknown {
+  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): JsonSafe<WriteLogEntriesPartialErrors_LogEntryErrorsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = message.value ? Status.toJSON(message.value) : undefined);
@@ -1176,7 +1177,7 @@ export const WriteLogEntriesPartialErrors = {
     }, {});
     return obj;
   },
-  toJSON(message: WriteLogEntriesPartialErrors): unknown {
+  toJSON(message: WriteLogEntriesPartialErrors): JsonSafe<WriteLogEntriesPartialErrors> {
     const obj: any = {};
     obj.logEntryErrors = {};
     if (message.logEntryErrors) {
@@ -1333,7 +1334,7 @@ export const ListLogEntriesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListLogEntriesRequest): unknown {
+  toJSON(message: ListLogEntriesRequest): JsonSafe<ListLogEntriesRequest> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);
@@ -1475,7 +1476,7 @@ export const ListLogEntriesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogEntriesResponse): unknown {
+  toJSON(message: ListLogEntriesResponse): JsonSafe<ListLogEntriesResponse> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toJSON(e) : undefined);
@@ -1590,7 +1591,7 @@ export const ListMonitoredResourceDescriptorsRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListMonitoredResourceDescriptorsRequest): unknown {
+  toJSON(message: ListMonitoredResourceDescriptorsRequest): JsonSafe<ListMonitoredResourceDescriptorsRequest> {
     const obj: any = {};
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -1695,7 +1696,7 @@ export const ListMonitoredResourceDescriptorsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListMonitoredResourceDescriptorsResponse): unknown {
+  toJSON(message: ListMonitoredResourceDescriptorsResponse): JsonSafe<ListMonitoredResourceDescriptorsResponse> {
     const obj: any = {};
     if (message.resourceDescriptors) {
       obj.resourceDescriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
@@ -1826,7 +1827,7 @@ export const ListLogsRequest = {
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ListLogsRequest): unknown {
+  toJSON(message: ListLogsRequest): JsonSafe<ListLogsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -1959,7 +1960,7 @@ export const ListLogsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogsResponse): unknown {
+  toJSON(message: ListLogsResponse): JsonSafe<ListLogsResponse> {
     const obj: any = {};
     if (message.logNames) {
       obj.logNames = message.logNames.map(e => e);
@@ -2082,7 +2083,7 @@ export const TailLogEntriesRequest = {
     if (isSet(object.bufferWindow)) obj.bufferWindow = Duration.fromJSON(object.bufferWindow);
     return obj;
   },
-  toJSON(message: TailLogEntriesRequest): unknown {
+  toJSON(message: TailLogEntriesRequest): JsonSafe<TailLogEntriesRequest> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);
@@ -2208,7 +2209,7 @@ export const TailLogEntriesResponse = {
     if (Array.isArray(object?.suppressionInfo)) obj.suppressionInfo = object.suppressionInfo.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: TailLogEntriesResponse): unknown {
+  toJSON(message: TailLogEntriesResponse): JsonSafe<TailLogEntriesResponse> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? LogEntry.toJSON(e) : undefined);
@@ -2333,7 +2334,7 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     if (isSet(object.suppressedCount)) obj.suppressedCount = Number(object.suppressedCount);
     return obj;
   },
-  toJSON(message: TailLogEntriesResponse_SuppressionInfo): unknown {
+  toJSON(message: TailLogEntriesResponse_SuppressionInfo): JsonSafe<TailLogEntriesResponse_SuppressionInfo> {
     const obj: any = {};
     message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
     message.suppressedCount !== undefined && (obj.suppressedCount = Math.round(message.suppressedCount));

@@ -5,6 +5,7 @@ import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParams
 import { PublicKey, PublicKeySDKType } from "../crypto/keys.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "tendermint.abci";
 export enum CheckTxType {
   NEW = 0,
@@ -1064,7 +1065,7 @@ export const Request = {
     if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = RequestApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
     return obj;
   },
-  toJSON(message: Request): unknown {
+  toJSON(message: Request): JsonSafe<Request> {
     const obj: any = {};
     message.echo !== undefined && (obj.echo = message.echo ? RequestEcho.toJSON(message.echo) : undefined);
     message.flush !== undefined && (obj.flush = message.flush ? RequestFlush.toJSON(message.flush) : undefined);
@@ -1308,7 +1309,7 @@ export const RequestEcho = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: RequestEcho): unknown {
+  toJSON(message: RequestEcho): JsonSafe<RequestEcho> {
     const obj: any = {};
     message.message !== undefined && (obj.message = message.message);
     return obj;
@@ -1387,7 +1388,7 @@ export const RequestFlush = {
     const obj = createBaseRequestFlush();
     return obj;
   },
-  toJSON(_: RequestFlush): unknown {
+  toJSON(_: RequestFlush): JsonSafe<RequestFlush> {
     const obj: any = {};
     return obj;
   },
@@ -1480,7 +1481,7 @@ export const RequestInfo = {
     if (isSet(object.p2pVersion)) obj.p2pVersion = BigInt(object.p2pVersion.toString());
     return obj;
   },
-  toJSON(message: RequestInfo): unknown {
+  toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
     message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || BigInt(0)).toString());
@@ -1598,7 +1599,7 @@ export const RequestSetOption = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: RequestSetOption): unknown {
+  toJSON(message: RequestSetOption): JsonSafe<RequestSetOption> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1735,7 +1736,7 @@ export const RequestInitChain = {
     if (isSet(object.initialHeight)) obj.initialHeight = BigInt(object.initialHeight.toString());
     return obj;
   },
-  toJSON(message: RequestInitChain): unknown {
+  toJSON(message: RequestInitChain): JsonSafe<RequestInitChain> {
     const obj: any = {};
     message.time !== undefined && (obj.time = message.time.toISOString());
     message.chainId !== undefined && (obj.chainId = message.chainId);
@@ -1906,7 +1907,7 @@ export const RequestQuery = {
     if (isSet(object.prove)) obj.prove = Boolean(object.prove);
     return obj;
   },
-  toJSON(message: RequestQuery): unknown {
+  toJSON(message: RequestQuery): JsonSafe<RequestQuery> {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.path !== undefined && (obj.path = message.path);
@@ -2047,7 +2048,7 @@ export const RequestBeginBlock = {
     if (Array.isArray(object?.byzantineValidators)) obj.byzantineValidators = object.byzantineValidators.map((e: any) => Evidence.fromJSON(e));
     return obj;
   },
-  toJSON(message: RequestBeginBlock): unknown {
+  toJSON(message: RequestBeginBlock): JsonSafe<RequestBeginBlock> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
@@ -2184,7 +2185,7 @@ export const RequestCheckTx = {
     if (isSet(object.type)) obj.type = checkTxTypeFromJSON(object.type);
     return obj;
   },
-  toJSON(message: RequestCheckTx): unknown {
+  toJSON(message: RequestCheckTx): JsonSafe<RequestCheckTx> {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
     message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
@@ -2281,7 +2282,7 @@ export const RequestDeliverTx = {
     if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
     return obj;
   },
-  toJSON(message: RequestDeliverTx): unknown {
+  toJSON(message: RequestDeliverTx): JsonSafe<RequestDeliverTx> {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
     return obj;
@@ -2369,7 +2370,7 @@ export const RequestEndBlock = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
   },
-  toJSON(message: RequestEndBlock): unknown {
+  toJSON(message: RequestEndBlock): JsonSafe<RequestEndBlock> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
@@ -2450,7 +2451,7 @@ export const RequestCommit = {
     const obj = createBaseRequestCommit();
     return obj;
   },
-  toJSON(_: RequestCommit): unknown {
+  toJSON(_: RequestCommit): JsonSafe<RequestCommit> {
     const obj: any = {};
     return obj;
   },
@@ -2518,7 +2519,7 @@ export const RequestListSnapshots = {
     const obj = createBaseRequestListSnapshots();
     return obj;
   },
-  toJSON(_: RequestListSnapshots): unknown {
+  toJSON(_: RequestListSnapshots): JsonSafe<RequestListSnapshots> {
     const obj: any = {};
     return obj;
   },
@@ -2603,7 +2604,7 @@ export const RequestOfferSnapshot = {
     if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
     return obj;
   },
-  toJSON(message: RequestOfferSnapshot): unknown {
+  toJSON(message: RequestOfferSnapshot): JsonSafe<RequestOfferSnapshot> {
     const obj: any = {};
     message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toJSON(message.snapshot) : undefined);
     message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
@@ -2718,7 +2719,7 @@ export const RequestLoadSnapshotChunk = {
     if (isSet(object.chunk)) obj.chunk = Number(object.chunk);
     return obj;
   },
-  toJSON(message: RequestLoadSnapshotChunk): unknown {
+  toJSON(message: RequestLoadSnapshotChunk): JsonSafe<RequestLoadSnapshotChunk> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
@@ -2842,7 +2843,7 @@ export const RequestApplySnapshotChunk = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     return obj;
   },
-  toJSON(message: RequestApplySnapshotChunk): unknown {
+  toJSON(message: RequestApplySnapshotChunk): JsonSafe<RequestApplySnapshotChunk> {
     const obj: any = {};
     message.index !== undefined && (obj.index = Math.round(message.index));
     message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
@@ -3068,7 +3069,7 @@ export const Response = {
     if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = ResponseApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
     return obj;
   },
-  toJSON(message: Response): unknown {
+  toJSON(message: Response): JsonSafe<Response> {
     const obj: any = {};
     message.exception !== undefined && (obj.exception = message.exception ? ResponseException.toJSON(message.exception) : undefined);
     message.echo !== undefined && (obj.echo = message.echo ? ResponseEcho.toJSON(message.echo) : undefined);
@@ -3323,7 +3324,7 @@ export const ResponseException = {
     if (isSet(object.error)) obj.error = String(object.error);
     return obj;
   },
-  toJSON(message: ResponseException): unknown {
+  toJSON(message: ResponseException): JsonSafe<ResponseException> {
     const obj: any = {};
     message.error !== undefined && (obj.error = message.error);
     return obj;
@@ -3411,7 +3412,7 @@ export const ResponseEcho = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: ResponseEcho): unknown {
+  toJSON(message: ResponseEcho): JsonSafe<ResponseEcho> {
     const obj: any = {};
     message.message !== undefined && (obj.message = message.message);
     return obj;
@@ -3490,7 +3491,7 @@ export const ResponseFlush = {
     const obj = createBaseResponseFlush();
     return obj;
   },
-  toJSON(_: ResponseFlush): unknown {
+  toJSON(_: ResponseFlush): JsonSafe<ResponseFlush> {
     const obj: any = {};
     return obj;
   },
@@ -3599,7 +3600,7 @@ export const ResponseInfo = {
     if (isSet(object.lastBlockAppHash)) obj.lastBlockAppHash = bytesFromBase64(object.lastBlockAppHash);
     return obj;
   },
-  toJSON(message: ResponseInfo): unknown {
+  toJSON(message: ResponseInfo): JsonSafe<ResponseInfo> {
     const obj: any = {};
     message.data !== undefined && (obj.data = message.data);
     message.version !== undefined && (obj.version = message.version);
@@ -3743,7 +3744,7 @@ export const ResponseSetOption = {
     if (isSet(object.info)) obj.info = String(object.info);
     return obj;
   },
-  toJSON(message: ResponseSetOption): unknown {
+  toJSON(message: ResponseSetOption): JsonSafe<ResponseSetOption> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.log !== undefined && (obj.log = message.log);
@@ -3865,7 +3866,7 @@ export const ResponseInitChain = {
     if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
     return obj;
   },
-  toJSON(message: ResponseInitChain): unknown {
+  toJSON(message: ResponseInitChain): JsonSafe<ResponseInitChain> {
     const obj: any = {};
     message.consensusParams !== undefined && (obj.consensusParams = message.consensusParams ? ConsensusParams.toJSON(message.consensusParams) : undefined);
     if (message.validators) {
@@ -4047,7 +4048,7 @@ export const ResponseQuery = {
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
   },
-  toJSON(message: ResponseQuery): unknown {
+  toJSON(message: ResponseQuery): JsonSafe<ResponseQuery> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.log !== undefined && (obj.log = message.log);
@@ -4213,7 +4214,7 @@ export const ResponseBeginBlock = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseBeginBlock): unknown {
+  toJSON(message: ResponseBeginBlock): JsonSafe<ResponseBeginBlock> {
     const obj: any = {};
     if (message.events) {
       obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
@@ -4367,7 +4368,7 @@ export const ResponseCheckTx = {
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
   },
-  toJSON(message: ResponseCheckTx): unknown {
+  toJSON(message: ResponseCheckTx): JsonSafe<ResponseCheckTx> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -4588,7 +4589,7 @@ export const ResponseDeliverTx = {
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
   },
-  toJSON(message: ResponseDeliverTx): unknown {
+  toJSON(message: ResponseDeliverTx): JsonSafe<ResponseDeliverTx> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -4769,7 +4770,7 @@ export const ResponseEndBlock = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseEndBlock): unknown {
+  toJSON(message: ResponseEndBlock): JsonSafe<ResponseEndBlock> {
     const obj: any = {};
     if (message.validatorUpdates) {
       obj.validatorUpdates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
@@ -4905,7 +4906,7 @@ export const ResponseCommit = {
     if (isSet(object.retainHeight)) obj.retainHeight = BigInt(object.retainHeight.toString());
     return obj;
   },
-  toJSON(message: ResponseCommit): unknown {
+  toJSON(message: ResponseCommit): JsonSafe<ResponseCommit> {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || BigInt(0)).toString());
@@ -5004,7 +5005,7 @@ export const ResponseListSnapshots = {
     if (Array.isArray(object?.snapshots)) obj.snapshots = object.snapshots.map((e: any) => Snapshot.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseListSnapshots): unknown {
+  toJSON(message: ResponseListSnapshots): JsonSafe<ResponseListSnapshots> {
     const obj: any = {};
     if (message.snapshots) {
       obj.snapshots = message.snapshots.map(e => e ? Snapshot.toJSON(e) : undefined);
@@ -5102,7 +5103,7 @@ export const ResponseOfferSnapshot = {
     if (isSet(object.result)) obj.result = responseOfferSnapshot_ResultFromJSON(object.result);
     return obj;
   },
-  toJSON(message: ResponseOfferSnapshot): unknown {
+  toJSON(message: ResponseOfferSnapshot): JsonSafe<ResponseOfferSnapshot> {
     const obj: any = {};
     message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
     return obj;
@@ -5190,7 +5191,7 @@ export const ResponseLoadSnapshotChunk = {
     if (isSet(object.chunk)) obj.chunk = bytesFromBase64(object.chunk);
     return obj;
   },
-  toJSON(message: ResponseLoadSnapshotChunk): unknown {
+  toJSON(message: ResponseLoadSnapshotChunk): JsonSafe<ResponseLoadSnapshotChunk> {
     const obj: any = {};
     message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
     return obj;
@@ -5303,7 +5304,7 @@ export const ResponseApplySnapshotChunk = {
     if (Array.isArray(object?.rejectSenders)) obj.rejectSenders = object.rejectSenders.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ResponseApplySnapshotChunk): unknown {
+  toJSON(message: ResponseApplySnapshotChunk): JsonSafe<ResponseApplySnapshotChunk> {
     const obj: any = {};
     message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
     if (message.refetchChunks) {
@@ -5453,7 +5454,7 @@ export const ConsensusParams = {
     if (isSet(object.version)) obj.version = VersionParams.fromJSON(object.version);
     return obj;
   },
-  toJSON(message: ConsensusParams): unknown {
+  toJSON(message: ConsensusParams): JsonSafe<ConsensusParams> {
     const obj: any = {};
     message.block !== undefined && (obj.block = message.block ? BlockParams.toJSON(message.block) : undefined);
     message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toJSON(message.evidence) : undefined);
@@ -5584,7 +5585,7 @@ export const BlockParams = {
     if (isSet(object.maxGas)) obj.maxGas = BigInt(object.maxGas.toString());
     return obj;
   },
-  toJSON(message: BlockParams): unknown {
+  toJSON(message: BlockParams): JsonSafe<BlockParams> {
     const obj: any = {};
     message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || BigInt(0)).toString());
     message.maxGas !== undefined && (obj.maxGas = (message.maxGas || BigInt(0)).toString());
@@ -5693,7 +5694,7 @@ export const LastCommitInfo = {
     if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => VoteInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: LastCommitInfo): unknown {
+  toJSON(message: LastCommitInfo): JsonSafe<LastCommitInfo> {
     const obj: any = {};
     message.round !== undefined && (obj.round = Math.round(message.round));
     if (message.votes) {
@@ -5808,7 +5809,7 @@ export const Event = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => EventAttribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Event): unknown {
+  toJSON(message: Event): JsonSafe<Event> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     if (message.attributes) {
@@ -5931,7 +5932,7 @@ export const EventAttribute = {
     if (isSet(object.index)) obj.index = Boolean(object.index);
     return obj;
   },
-  toJSON(message: EventAttribute): unknown {
+  toJSON(message: EventAttribute): JsonSafe<EventAttribute> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -6061,7 +6062,7 @@ export const TxResult = {
     if (isSet(object.result)) obj.result = ResponseDeliverTx.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: TxResult): unknown {
+  toJSON(message: TxResult): JsonSafe<TxResult> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.index !== undefined && (obj.index = Math.round(message.index));
@@ -6188,7 +6189,7 @@ export const Validator = {
     if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
   },
-  toJSON(message: Validator): unknown {
+  toJSON(message: Validator): JsonSafe<Validator> {
     const obj: any = {};
     message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
     message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
@@ -6295,7 +6296,7 @@ export const ValidatorUpdate = {
     if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
   },
-  toJSON(message: ValidatorUpdate): unknown {
+  toJSON(message: ValidatorUpdate): JsonSafe<ValidatorUpdate> {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
     message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
@@ -6404,7 +6405,7 @@ export const VoteInfo = {
     if (isSet(object.signedLastBlock)) obj.signedLastBlock = Boolean(object.signedLastBlock);
     return obj;
   },
-  toJSON(message: VoteInfo): unknown {
+  toJSON(message: VoteInfo): JsonSafe<VoteInfo> {
     const obj: any = {};
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
     message.signedLastBlock !== undefined && (obj.signedLastBlock = message.signedLastBlock);
@@ -6535,7 +6536,7 @@ export const Evidence = {
     if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
     return obj;
   },
-  toJSON(message: Evidence): unknown {
+  toJSON(message: Evidence): JsonSafe<Evidence> {
     const obj: any = {};
     message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
     message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
@@ -6697,7 +6698,7 @@ export const Snapshot = {
     if (isSet(object.metadata)) obj.metadata = bytesFromBase64(object.metadata);
     return obj;
   },
-  toJSON(message: Snapshot): unknown {
+  toJSON(message: Snapshot): JsonSafe<Snapshot> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));

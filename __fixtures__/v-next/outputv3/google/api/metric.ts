@@ -3,6 +3,7 @@ import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -721,7 +722,7 @@ export const MetricDescriptor = {
     if (Array.isArray(object?.monitoredResourceTypes)) obj.monitoredResourceTypes = object.monitoredResourceTypes.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: MetricDescriptor): unknown {
+  toJSON(message: MetricDescriptor): JsonSafe<MetricDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = message.type);
@@ -919,7 +920,7 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     if (isSet(object.ingestDelay)) obj.ingestDelay = Duration.fromJSON(object.ingestDelay);
     return obj;
   },
-  toJSON(message: MetricDescriptor_MetricDescriptorMetadata): unknown {
+  toJSON(message: MetricDescriptor_MetricDescriptorMetadata): JsonSafe<MetricDescriptor_MetricDescriptorMetadata> {
     const obj: any = {};
     message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
     message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod ? Duration.toJSON(message.samplePeriod) : undefined);
@@ -1026,7 +1027,7 @@ export const Metric_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Metric_LabelsEntry): unknown {
+  toJSON(message: Metric_LabelsEntry): JsonSafe<Metric_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1127,7 +1128,7 @@ export const Metric = {
     }, {});
     return obj;
   },
-  toJSON(message: Metric): unknown {
+  toJSON(message: Metric): JsonSafe<Metric> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     obj.labels = {};

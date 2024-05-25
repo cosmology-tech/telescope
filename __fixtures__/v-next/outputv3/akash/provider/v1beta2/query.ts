@@ -2,6 +2,7 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
@@ -105,7 +106,7 @@ export const QueryProvidersRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProvidersRequest): unknown {
+  toJSON(message: QueryProvidersRequest): JsonSafe<QueryProvidersRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -195,7 +196,7 @@ export const QueryProvidersResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProvidersResponse): unknown {
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
     const obj: any = {};
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
@@ -295,7 +296,7 @@ export const QueryProviderRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: QueryProviderRequest): unknown {
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -375,7 +376,7 @@ export const QueryProviderResponse = {
     if (isSet(object.provider)) obj.provider = Provider.fromJSON(object.provider);
     return obj;
   },
-  toJSON(message: QueryProviderResponse): unknown {
+  toJSON(message: QueryProviderResponse): JsonSafe<QueryProviderResponse> {
     const obj: any = {};
     message.provider !== undefined && (obj.provider = message.provider ? Provider.toJSON(message.provider) : undefined);
     return obj;

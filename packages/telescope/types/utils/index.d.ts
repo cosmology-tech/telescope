@@ -76,6 +76,7 @@ export declare const UTILS: {
     QueryStore: string;
     MobxResponse: string;
     useEndpoint: string;
+    JsonSafe: string;
     override: string;
     makeObservable: string;
     NodeHttpTransport: string;

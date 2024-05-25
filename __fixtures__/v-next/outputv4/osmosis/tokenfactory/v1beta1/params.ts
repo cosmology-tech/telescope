@@ -1,5 +1,6 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial } from "../../../helpers.js";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** Params defines the parameters for the tokenfactory module. */
@@ -49,7 +50,7 @@ export const Params = {
     if (Array.isArray(object?.denomCreationFee)) obj.denomCreationFee = object.denomCreationFee.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.denomCreationFee) {
       obj.denomCreationFee = message.denomCreationFee.map(e => e ? Coin.toJSON(e) : undefined);

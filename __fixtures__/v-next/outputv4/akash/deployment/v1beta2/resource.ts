@@ -2,6 +2,7 @@ import { ResourceUnits, ResourceUnitsSDKType } from "../../base/v1beta2/resource
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Resource stores unit, total count and price of resource */
 export interface Resource {
@@ -70,7 +71,7 @@ export const Resource = {
     if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
     return obj;
   },
-  toJSON(message: Resource): unknown {
+  toJSON(message: Resource): JsonSafe<Resource> {
     const obj: any = {};
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toJSON(message.resources) : undefined);
     message.count !== undefined && (obj.count = Math.round(message.count));

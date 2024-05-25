@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../protobuf/any.js";
 import { Status, StatusSDKType } from "../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.longrunning";
 /**
  * This resource represents a long-running operation that is the result of a
@@ -278,7 +279,7 @@ export const Operation = {
     if (isSet(object.response)) obj.response = Any.fromJSON(object.response);
     return obj;
   },
-  toJSON(message: Operation): unknown {
+  toJSON(message: Operation): JsonSafe<Operation> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.metadata !== undefined && (obj.metadata = message.metadata ? Any.toJSON(message.metadata) : undefined);
@@ -408,7 +409,7 @@ export const GetOperationRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetOperationRequest): unknown {
+  toJSON(message: GetOperationRequest): JsonSafe<GetOperationRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -520,7 +521,7 @@ export const ListOperationsRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListOperationsRequest): unknown {
+  toJSON(message: ListOperationsRequest): JsonSafe<ListOperationsRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.filter !== undefined && (obj.filter = message.filter);
@@ -643,7 +644,7 @@ export const ListOperationsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListOperationsResponse): unknown {
+  toJSON(message: ListOperationsResponse): JsonSafe<ListOperationsResponse> {
     const obj: any = {};
     if (message.operations) {
       obj.operations = message.operations.map(e => e ? Operation.toJSON(e) : undefined);
@@ -750,7 +751,7 @@ export const CancelOperationRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: CancelOperationRequest): unknown {
+  toJSON(message: CancelOperationRequest): JsonSafe<CancelOperationRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -838,7 +839,7 @@ export const DeleteOperationRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: DeleteOperationRequest): unknown {
+  toJSON(message: DeleteOperationRequest): JsonSafe<DeleteOperationRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -934,7 +935,7 @@ export const WaitOperationRequest = {
     if (isSet(object.timeout)) obj.timeout = Duration.fromJSON(object.timeout);
     return obj;
   },
-  toJSON(message: WaitOperationRequest): unknown {
+  toJSON(message: WaitOperationRequest): JsonSafe<WaitOperationRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
@@ -1041,7 +1042,7 @@ export const OperationInfo = {
     if (isSet(object.metadataType)) obj.metadataType = String(object.metadataType);
     return obj;
   },
-  toJSON(message: OperationInfo): unknown {
+  toJSON(message: OperationInfo): JsonSafe<OperationInfo> {
     const obj: any = {};
     message.responseType !== undefined && (obj.responseType = message.responseType);
     message.metadataType !== undefined && (obj.metadataType = message.metadataType);

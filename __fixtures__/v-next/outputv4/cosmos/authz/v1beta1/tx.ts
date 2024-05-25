@@ -2,6 +2,7 @@ import { Grant, GrantSDKType } from "./authz.js";
 import { Any, AnySDKType } from "../../../google/protobuf/any.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -153,7 +154,7 @@ export const MsgGrant = {
     if (isSet(object.grant)) obj.grant = Grant.fromJSON(object.grant);
     return obj;
   },
-  toJSON(message: MsgGrant): unknown {
+  toJSON(message: MsgGrant): JsonSafe<MsgGrant> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -267,7 +268,7 @@ export const MsgExecResponse = {
     if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => bytesFromBase64(e));
     return obj;
   },
-  toJSON(message: MsgExecResponse): unknown {
+  toJSON(message: MsgExecResponse): JsonSafe<MsgExecResponse> {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
@@ -379,7 +380,7 @@ export const MsgExec = {
     if (Array.isArray(object?.msgs)) obj.msgs = object.msgs.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgExec): unknown {
+  toJSON(message: MsgExec): JsonSafe<MsgExec> {
     const obj: any = {};
     message.grantee !== undefined && (obj.grantee = message.grantee);
     if (message.msgs) {
@@ -483,7 +484,7 @@ export const MsgGrantResponse = {
     const obj = createBaseMsgGrantResponse();
     return obj;
   },
-  toJSON(_: MsgGrantResponse): unknown {
+  toJSON(_: MsgGrantResponse): JsonSafe<MsgGrantResponse> {
     const obj: any = {};
     return obj;
   },
@@ -582,7 +583,7 @@ export const MsgRevoke = {
     if (isSet(object.msgTypeUrl)) obj.msgTypeUrl = String(object.msgTypeUrl);
     return obj;
   },
-  toJSON(message: MsgRevoke): unknown {
+  toJSON(message: MsgRevoke): JsonSafe<MsgRevoke> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -685,7 +686,7 @@ export const MsgRevokeResponse = {
     const obj = createBaseMsgRevokeResponse();
     return obj;
   },
-  toJSON(_: MsgRevokeResponse): unknown {
+  toJSON(_: MsgRevokeResponse): JsonSafe<MsgRevokeResponse> {
     const obj: any = {};
     return obj;
   },

@@ -20,6 +20,7 @@ import { SourceInfo, SourceInfoSDKType } from "./source_info.js";
 import { UInt32Value, UInt32ValueSDKType } from "../protobuf/wrappers.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
 export const protobufPackage = "google.api";
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -426,7 +427,7 @@ export const Service = {
     if (isSet(object.configVersion)) obj.configVersion = UInt32Value.fromJSON(object.configVersion);
     return obj;
   },
-  toJSON(message: Service): unknown {
+  toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.title !== undefined && (obj.title = message.title);

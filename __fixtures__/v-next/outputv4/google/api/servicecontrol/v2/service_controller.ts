@@ -2,6 +2,7 @@ import { AttributeContext, AttributeContextSDKType } from "../../../rpc/context/
 import { Status, StatusSDKType } from "../../../rpc/status.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -231,7 +232,7 @@ export const CheckRequest = {
     if (isSet(object.flags)) obj.flags = String(object.flags);
     return obj;
   },
-  toJSON(message: CheckRequest): unknown {
+  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
@@ -399,7 +400,7 @@ export const ResourceInfo = {
     if (isSet(object.location)) obj.location = String(object.location);
     return obj;
   },
-  toJSON(message: ResourceInfo): unknown {
+  toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = message.type);
@@ -530,7 +531,7 @@ export const CheckResponse_HeadersEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: CheckResponse_HeadersEntry): unknown {
+  toJSON(message: CheckResponse_HeadersEntry): JsonSafe<CheckResponse_HeadersEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -640,7 +641,7 @@ export const CheckResponse = {
     }, {});
     return obj;
   },
-  toJSON(message: CheckResponse): unknown {
+  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
     const obj: any = {};
     message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     obj.headers = {};
@@ -792,7 +793,7 @@ export const ReportRequest = {
     if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => AttributeContext.fromJSON(e));
     return obj;
   },
-  toJSON(message: ReportRequest): unknown {
+  toJSON(message: ReportRequest): JsonSafe<ReportRequest> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
@@ -899,7 +900,7 @@ export const ReportResponse = {
     const obj = createBaseReportResponse();
     return obj;
   },
-  toJSON(_: ReportResponse): unknown {
+  toJSON(_: ReportResponse): JsonSafe<ReportResponse> {
     const obj: any = {};
     return obj;
   },

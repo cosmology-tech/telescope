@@ -2,6 +2,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
@@ -116,7 +117,7 @@ export const MsgSend = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgSend): unknown {
+  toJSON(message: MsgSend): JsonSafe<MsgSend> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -214,7 +215,7 @@ export const MsgSendResponse = {
     const obj = createBaseMsgSendResponse();
     return obj;
   },
-  toJSON(_: MsgSendResponse): unknown {
+  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
     const obj: any = {};
     return obj;
   },
@@ -294,7 +295,7 @@ export const MsgMultiSend = {
     if (Array.isArray(object?.outputs)) obj.outputs = object.outputs.map((e: any) => Output.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgMultiSend): unknown {
+  toJSON(message: MsgMultiSend): JsonSafe<MsgMultiSend> {
     const obj: any = {};
     if (message.inputs) {
       obj.inputs = message.inputs.map(e => e ? Input.toJSON(e) : undefined);
@@ -394,7 +395,7 @@ export const MsgMultiSendResponse = {
     const obj = createBaseMsgMultiSendResponse();
     return obj;
   },
-  toJSON(_: MsgMultiSendResponse): unknown {
+  toJSON(_: MsgMultiSendResponse): JsonSafe<MsgMultiSendResponse> {
     const obj: any = {};
     return obj;
   },
