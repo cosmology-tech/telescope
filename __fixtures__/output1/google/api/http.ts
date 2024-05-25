@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -692,7 +693,7 @@ export const Http = {
       fullyDecodeReservedExpansion: isSet(object.fullyDecodeReservedExpansion) ? Boolean(object.fullyDecodeReservedExpansion) : false
     };
   },
-  toJSON(message: Http): unknown {
+  toJSON(message: Http): JsonSafe<Http> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? HttpRule.toJSON(e) : undefined);
@@ -831,7 +832,7 @@ export const HttpRule = {
       additionalBindings: Array.isArray(object?.additionalBindings) ? object.additionalBindings.map((e: any) => HttpRule.fromJSON(e)) : []
     };
   },
-  toJSON(message: HttpRule): unknown {
+  toJSON(message: HttpRule): JsonSafe<HttpRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.get !== undefined && (obj.get = message.get);
@@ -938,7 +939,7 @@ export const CustomHttpPattern = {
       path: isSet(object.path) ? String(object.path) : ""
     };
   },
-  toJSON(message: CustomHttpPattern): unknown {
+  toJSON(message: CustomHttpPattern): JsonSafe<CustomHttpPattern> {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = message.kind);
     message.path !== undefined && (obj.path = message.path);

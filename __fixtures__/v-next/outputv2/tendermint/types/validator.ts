@@ -1,6 +1,7 @@
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -122,7 +123,7 @@ export const ValidatorSet = {
     if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
     return obj;
   },
-  toJSON(message: ValidatorSet): unknown {
+  toJSON(message: ValidatorSet): JsonSafe<ValidatorSet> {
     const obj: any = {};
     if (message.validators) {
       obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
@@ -259,7 +260,7 @@ export const Validator = {
     if (isSet(object.proposerPriority)) obj.proposerPriority = BigInt(object.proposerPriority.toString());
     return obj;
   },
-  toJSON(message: Validator): unknown {
+  toJSON(message: Validator): JsonSafe<Validator> {
     const obj: any = {};
     message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
@@ -380,7 +381,7 @@ export const SimpleValidator = {
     if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
     return obj;
   },
-  toJSON(message: SimpleValidator): unknown {
+  toJSON(message: SimpleValidator): JsonSafe<SimpleValidator> {
     const obj: any = {};
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
     message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());

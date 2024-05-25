@@ -1,6 +1,7 @@
 import { ProposalExecutorResult, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
@@ -246,7 +247,7 @@ export const EventCreateGroup = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: EventCreateGroup): unknown {
+  toJSON(message: EventCreateGroup): JsonSafe<EventCreateGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     return obj;
@@ -338,7 +339,7 @@ export const EventUpdateGroup = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: EventUpdateGroup): unknown {
+  toJSON(message: EventUpdateGroup): JsonSafe<EventUpdateGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     return obj;
@@ -430,7 +431,7 @@ export const EventCreateGroupPolicy = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: EventCreateGroupPolicy): unknown {
+  toJSON(message: EventCreateGroupPolicy): JsonSafe<EventCreateGroupPolicy> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -520,7 +521,7 @@ export const EventUpdateGroupPolicy = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: EventUpdateGroupPolicy): unknown {
+  toJSON(message: EventUpdateGroupPolicy): JsonSafe<EventUpdateGroupPolicy> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -610,7 +611,7 @@ export const EventSubmitProposal = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: EventSubmitProposal): unknown {
+  toJSON(message: EventSubmitProposal): JsonSafe<EventSubmitProposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -702,7 +703,7 @@ export const EventWithdrawProposal = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: EventWithdrawProposal): unknown {
+  toJSON(message: EventWithdrawProposal): JsonSafe<EventWithdrawProposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -794,7 +795,7 @@ export const EventVote = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: EventVote): unknown {
+  toJSON(message: EventVote): JsonSafe<EventVote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -894,7 +895,7 @@ export const EventExec = {
     if (isSet(object.result)) obj.result = proposalExecutorResultFromJSON(object.result);
     return obj;
   },
-  toJSON(message: EventExec): unknown {
+  toJSON(message: EventExec): JsonSafe<EventExec> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
@@ -1002,7 +1003,7 @@ export const EventLeaveGroup = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: EventLeaveGroup): unknown {
+  toJSON(message: EventLeaveGroup): JsonSafe<EventLeaveGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     message.address !== undefined && (obj.address = message.address);

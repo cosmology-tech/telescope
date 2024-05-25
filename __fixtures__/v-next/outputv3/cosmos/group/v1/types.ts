@@ -3,7 +3,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** VoteOption enumerates the valid vote options for a given proposal. */
 export enum VoteOption {
@@ -778,14 +777,6 @@ export const Member = {
     if (isSet(object.addedAt)) obj.addedAt = new Date(object.addedAt);
     return obj;
   },
-  toJSON(message: Member): JsonSafe<Member> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.weight !== undefined && (obj.weight = message.weight);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.addedAt !== undefined && (obj.addedAt = message.addedAt.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Member>): Member {
     const message = createBaseMember();
     message.address = object.address ?? "";
@@ -883,15 +874,6 @@ export const Members = {
     if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => Member.fromJSON(e));
     return obj;
   },
-  toJSON(message: Members): JsonSafe<Members> {
-    const obj: any = {};
-    if (message.members) {
-      obj.members = message.members.map(e => e ? Member.toJSON(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Members>): Members {
     const message = createBaseMembers();
     message.members = object.members?.map(e => Member.fromPartial(e)) || [];
@@ -981,12 +963,6 @@ export const ThresholdDecisionPolicy = {
     const obj = createBaseThresholdDecisionPolicy();
     if (isSet(object.threshold)) obj.threshold = String(object.threshold);
     if (isSet(object.windows)) obj.windows = DecisionPolicyWindows.fromJSON(object.windows);
-    return obj;
-  },
-  toJSON(message: ThresholdDecisionPolicy): JsonSafe<ThresholdDecisionPolicy> {
-    const obj: any = {};
-    message.threshold !== undefined && (obj.threshold = message.threshold);
-    message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toJSON(message.windows) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ThresholdDecisionPolicy>): ThresholdDecisionPolicy {
@@ -1083,12 +1059,6 @@ export const PercentageDecisionPolicy = {
     if (isSet(object.windows)) obj.windows = DecisionPolicyWindows.fromJSON(object.windows);
     return obj;
   },
-  toJSON(message: PercentageDecisionPolicy): JsonSafe<PercentageDecisionPolicy> {
-    const obj: any = {};
-    message.percentage !== undefined && (obj.percentage = message.percentage);
-    message.windows !== undefined && (obj.windows = message.windows ? DecisionPolicyWindows.toJSON(message.windows) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<PercentageDecisionPolicy>): PercentageDecisionPolicy {
     const message = createBasePercentageDecisionPolicy();
     message.percentage = object.percentage ?? "";
@@ -1180,12 +1150,6 @@ export const DecisionPolicyWindows = {
     const obj = createBaseDecisionPolicyWindows();
     if (isSet(object.votingPeriod)) obj.votingPeriod = Duration.fromJSON(object.votingPeriod);
     if (isSet(object.minExecutionPeriod)) obj.minExecutionPeriod = Duration.fromJSON(object.minExecutionPeriod);
-    return obj;
-  },
-  toJSON(message: DecisionPolicyWindows): JsonSafe<DecisionPolicyWindows> {
-    const obj: any = {};
-    message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
-    message.minExecutionPeriod !== undefined && (obj.minExecutionPeriod = message.minExecutionPeriod ? Duration.toJSON(message.minExecutionPeriod) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<DecisionPolicyWindows>): DecisionPolicyWindows {
@@ -1315,16 +1279,6 @@ export const GroupInfo = {
     if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
     return obj;
   },
-  toJSON(message: GroupInfo): JsonSafe<GroupInfo> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
-    message.createdAt !== undefined && (obj.createdAt = message.createdAt.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GroupInfo>): GroupInfo {
     const message = createBaseGroupInfo();
     if (object.id !== undefined && object.id !== null) {
@@ -1446,12 +1400,6 @@ export const GroupMember = {
     const obj = createBaseGroupMember();
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.member)) obj.member = Member.fromJSON(object.member);
-    return obj;
-  },
-  toJSON(message: GroupMember): JsonSafe<GroupMember> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.member !== undefined && (obj.member = message.member ? Member.toJSON(message.member) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GroupMember>): GroupMember {
@@ -1587,17 +1535,6 @@ export const GroupPolicyInfo = {
     if (isSet(object.version)) obj.version = BigInt(object.version.toString());
     if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
     if (isSet(object.createdAt)) obj.createdAt = new Date(object.createdAt);
-    return obj;
-  },
-  toJSON(message: GroupPolicyInfo): JsonSafe<GroupPolicyInfo> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
-    message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = message.createdAt.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<GroupPolicyInfo>): GroupPolicyInfo {
@@ -1820,31 +1757,6 @@ export const Proposal = {
     if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: Proposal): JsonSafe<Proposal> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.address !== undefined && (obj.address = message.address);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    if (message.proposers) {
-      obj.proposers = message.proposers.map(e => e);
-    } else {
-      obj.proposers = [];
-    }
-    message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
-    message.groupVersion !== undefined && (obj.groupVersion = (message.groupVersion || BigInt(0)).toString());
-    message.groupPolicyVersion !== undefined && (obj.groupPolicyVersion = (message.groupPolicyVersion || BigInt(0)).toString());
-    message.status !== undefined && (obj.status = proposalStatusToJSON(message.status));
-    message.result !== undefined && (obj.result = proposalResultToJSON(message.result));
-    message.finalTallyResult !== undefined && (obj.finalTallyResult = message.finalTallyResult ? TallyResult.toJSON(message.finalTallyResult) : undefined);
-    message.votingPeriodEnd !== undefined && (obj.votingPeriodEnd = message.votingPeriodEnd.toISOString());
-    message.executorResult !== undefined && (obj.executorResult = proposalExecutorResultToJSON(message.executorResult));
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Proposal>): Proposal {
     const message = createBaseProposal();
     if (object.id !== undefined && object.id !== null) {
@@ -2049,14 +1961,6 @@ export const TallyResult = {
     if (isSet(object.noWithVetoCount)) obj.noWithVetoCount = String(object.noWithVetoCount);
     return obj;
   },
-  toJSON(message: TallyResult): JsonSafe<TallyResult> {
-    const obj: any = {};
-    message.yesCount !== undefined && (obj.yesCount = message.yesCount);
-    message.abstainCount !== undefined && (obj.abstainCount = message.abstainCount);
-    message.noCount !== undefined && (obj.noCount = message.noCount);
-    message.noWithVetoCount !== undefined && (obj.noWithVetoCount = message.noWithVetoCount);
-    return obj;
-  },
   fromPartial(object: DeepPartial<TallyResult>): TallyResult {
     const message = createBaseTallyResult();
     message.yesCount = object.yesCount ?? "";
@@ -2184,15 +2088,6 @@ export const Vote = {
     if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     if (isSet(object.submitTime)) obj.submitTime = new Date(object.submitTime);
-    return obj;
-  },
-  toJSON(message: Vote): JsonSafe<Vote> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.submitTime !== undefined && (obj.submitTime = message.submitTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<Vote>): Vote {

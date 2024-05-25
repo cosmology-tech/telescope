@@ -2,6 +2,7 @@ import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { Event, EventAmino, EventSDKType } from "../../../../tendermint/abci/types";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -604,7 +605,7 @@ export const TxResponse = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: TxResponse): unknown {
+  toJSON(message: TxResponse): JsonSafe<TxResponse> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     message.txhash !== undefined && (obj.txhash = message.txhash);
@@ -834,7 +835,7 @@ export const ABCIMessageLog = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => StringEvent.fromJSON(e));
     return obj;
   },
-  toJSON(message: ABCIMessageLog): unknown {
+  toJSON(message: ABCIMessageLog): JsonSafe<ABCIMessageLog> {
     const obj: any = {};
     message.msgIndex !== undefined && (obj.msgIndex = Math.round(message.msgIndex));
     message.log !== undefined && (obj.log = message.log);
@@ -958,7 +959,7 @@ export const StringEvent = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: StringEvent): unknown {
+  toJSON(message: StringEvent): JsonSafe<StringEvent> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     if (message.attributes) {
@@ -1074,7 +1075,7 @@ export const Attribute = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Attribute): unknown {
+  toJSON(message: Attribute): JsonSafe<Attribute> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1180,7 +1181,7 @@ export const GasInfo = {
     if (isSet(object.gasUsed)) obj.gasUsed = BigInt(object.gasUsed.toString());
     return obj;
   },
-  toJSON(message: GasInfo): unknown {
+  toJSON(message: GasInfo): JsonSafe<GasInfo> {
     const obj: any = {};
     message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || BigInt(0)).toString());
     message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || BigInt(0)).toString());
@@ -1306,7 +1307,7 @@ export const Result = {
     if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: Result): unknown {
+  toJSON(message: Result): JsonSafe<Result> {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     message.log !== undefined && (obj.log = message.log);
@@ -1448,7 +1449,7 @@ export const SimulationResponse = {
     if (isSet(object.result)) obj.result = Result.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: SimulationResponse): unknown {
+  toJSON(message: SimulationResponse): JsonSafe<SimulationResponse> {
     const obj: any = {};
     message.gasInfo !== undefined && (obj.gasInfo = message.gasInfo ? GasInfo.toJSON(message.gasInfo) : undefined);
     message.result !== undefined && (obj.result = message.result ? Result.toJSON(message.result) : undefined);
@@ -1558,7 +1559,7 @@ export const MsgData = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgData): unknown {
+  toJSON(message: MsgData): JsonSafe<MsgData> {
     const obj: any = {};
     message.msgType !== undefined && (obj.msgType = message.msgType);
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -1664,7 +1665,7 @@ export const TxMsgData = {
     if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: TxMsgData): unknown {
+  toJSON(message: TxMsgData): JsonSafe<TxMsgData> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? MsgData.toJSON(e) : undefined);
@@ -1822,7 +1823,7 @@ export const SearchTxsResult = {
     if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => TxResponse.fromJSON(e));
     return obj;
   },
-  toJSON(message: SearchTxsResult): unknown {
+  toJSON(message: SearchTxsResult): JsonSafe<SearchTxsResult> {
     const obj: any = {};
     message.totalCount !== undefined && (obj.totalCount = (message.totalCount || BigInt(0)).toString());
     message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());

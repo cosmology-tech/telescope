@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Period, PeriodSDKType } from "./vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -172,7 +173,7 @@ export const MsgCreateVestingAccount = {
       delayed: isSet(object.delayed) ? Boolean(object.delayed) : false
     };
   },
-  toJSON(message: MsgCreateVestingAccount): unknown {
+  toJSON(message: MsgCreateVestingAccount): JsonSafe<MsgCreateVestingAccount> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -302,7 +303,7 @@ export const MsgCreateVestingAccountResponse = {
   fromJSON(_: any): MsgCreateVestingAccountResponse {
     return {};
   },
-  toJSON(_: MsgCreateVestingAccountResponse): unknown {
+  toJSON(_: MsgCreateVestingAccountResponse): JsonSafe<MsgCreateVestingAccountResponse> {
     const obj: any = {};
     return obj;
   },
@@ -401,7 +402,7 @@ export const MsgCreatePermanentLockedAccount = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgCreatePermanentLockedAccount): unknown {
+  toJSON(message: MsgCreatePermanentLockedAccount): JsonSafe<MsgCreatePermanentLockedAccount> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -513,7 +514,7 @@ export const MsgCreatePermanentLockedAccountResponse = {
   fromJSON(_: any): MsgCreatePermanentLockedAccountResponse {
     return {};
   },
-  toJSON(_: MsgCreatePermanentLockedAccountResponse): unknown {
+  toJSON(_: MsgCreatePermanentLockedAccountResponse): JsonSafe<MsgCreatePermanentLockedAccountResponse> {
     const obj: any = {};
     return obj;
   },
@@ -620,7 +621,7 @@ export const MsgCreatePeriodicVestingAccount = {
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgCreatePeriodicVestingAccount): unknown {
+  toJSON(message: MsgCreatePeriodicVestingAccount): JsonSafe<MsgCreatePeriodicVestingAccount> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -741,7 +742,7 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   fromJSON(_: any): MsgCreatePeriodicVestingAccountResponse {
     return {};
   },
-  toJSON(_: MsgCreatePeriodicVestingAccountResponse): unknown {
+  toJSON(_: MsgCreatePeriodicVestingAccountResponse): JsonSafe<MsgCreatePeriodicVestingAccountResponse> {
     const obj: any = {};
     return obj;
   },

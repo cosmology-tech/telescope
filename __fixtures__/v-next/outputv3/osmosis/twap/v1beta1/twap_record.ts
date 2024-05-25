@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -209,20 +208,6 @@ export const TwapRecord = {
     if (isSet(object.p0ArithmeticTwapAccumulator)) obj.p0ArithmeticTwapAccumulator = String(object.p0ArithmeticTwapAccumulator);
     if (isSet(object.p1ArithmeticTwapAccumulator)) obj.p1ArithmeticTwapAccumulator = String(object.p1ArithmeticTwapAccumulator);
     if (isSet(object.lastErrorTime)) obj.lastErrorTime = new Date(object.lastErrorTime);
-    return obj;
-  },
-  toJSON(message: TwapRecord): JsonSafe<TwapRecord> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);
-    message.asset1Denom !== undefined && (obj.asset1Denom = message.asset1Denom);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.p0LastSpotPrice !== undefined && (obj.p0LastSpotPrice = message.p0LastSpotPrice);
-    message.p1LastSpotPrice !== undefined && (obj.p1LastSpotPrice = message.p1LastSpotPrice);
-    message.p0ArithmeticTwapAccumulator !== undefined && (obj.p0ArithmeticTwapAccumulator = message.p0ArithmeticTwapAccumulator);
-    message.p1ArithmeticTwapAccumulator !== undefined && (obj.p1ArithmeticTwapAccumulator = message.p1ArithmeticTwapAccumulator);
-    message.lastErrorTime !== undefined && (obj.lastErrorTime = message.lastErrorTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<TwapRecord>): TwapRecord {

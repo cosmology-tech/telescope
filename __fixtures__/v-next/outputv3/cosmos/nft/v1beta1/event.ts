@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -131,14 +130,6 @@ export const EventSend = {
     if (isSet(object.receiver)) obj.receiver = String(object.receiver);
     return obj;
   },
-  toJSON(message: EventSend): JsonSafe<EventSend> {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventSend>): EventSend {
     const message = createBaseEventSend();
     message.classId = object.classId ?? "";
@@ -252,13 +243,6 @@ export const EventMint = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: EventMint): JsonSafe<EventMint> {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventMint>): EventMint {
     const message = createBaseEventMint();
     message.classId = object.classId ?? "";
@@ -363,13 +347,6 @@ export const EventBurn = {
     if (isSet(object.classId)) obj.classId = String(object.classId);
     if (isSet(object.id)) obj.id = String(object.id);
     if (isSet(object.owner)) obj.owner = String(object.owner);
-    return obj;
-  },
-  toJSON(message: EventBurn): JsonSafe<EventBurn> {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.owner !== undefined && (obj.owner = message.owner);
     return obj;
   },
   fromPartial(object: DeepPartial<EventBurn>): EventBurn {

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.reflection.v2alpha1";
 /** AppDescriptor describes a cosmos-sdk based application */
 export interface AppDescriptor {
@@ -777,7 +778,7 @@ export const AppDescriptor = {
     if (isSet(object.tx)) obj.tx = TxDescriptor.fromJSON(object.tx);
     return obj;
   },
-  toJSON(message: AppDescriptor): unknown {
+  toJSON(message: AppDescriptor): JsonSafe<AppDescriptor> {
     const obj: any = {};
     message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toJSON(message.authn) : undefined);
     message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toJSON(message.chain) : undefined);
@@ -927,7 +928,7 @@ export const TxDescriptor = {
     if (Array.isArray(object?.msgs)) obj.msgs = object.msgs.map((e: any) => MsgDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: TxDescriptor): unknown {
+  toJSON(message: TxDescriptor): JsonSafe<TxDescriptor> {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.msgs) {
@@ -1035,7 +1036,7 @@ export const AuthnDescriptor = {
     if (Array.isArray(object?.signModes)) obj.signModes = object.signModes.map((e: any) => SigningModeDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: AuthnDescriptor): unknown {
+  toJSON(message: AuthnDescriptor): JsonSafe<AuthnDescriptor> {
     const obj: any = {};
     if (message.signModes) {
       obj.signModes = message.signModes.map(e => e ? SigningModeDescriptor.toJSON(e) : undefined);
@@ -1151,7 +1152,7 @@ export const SigningModeDescriptor = {
     if (isSet(object.authnInfoProviderMethodFullname)) obj.authnInfoProviderMethodFullname = String(object.authnInfoProviderMethodFullname);
     return obj;
   },
-  toJSON(message: SigningModeDescriptor): unknown {
+  toJSON(message: SigningModeDescriptor): JsonSafe<SigningModeDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.number !== undefined && (obj.number = Math.round(message.number));
@@ -1257,7 +1258,7 @@ export const ChainDescriptor = {
     if (isSet(object.id)) obj.id = String(object.id);
     return obj;
   },
-  toJSON(message: ChainDescriptor): unknown {
+  toJSON(message: ChainDescriptor): JsonSafe<ChainDescriptor> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     return obj;
@@ -1347,7 +1348,7 @@ export const CodecDescriptor = {
     if (Array.isArray(object?.interfaces)) obj.interfaces = object.interfaces.map((e: any) => InterfaceDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: CodecDescriptor): unknown {
+  toJSON(message: CodecDescriptor): JsonSafe<CodecDescriptor> {
     const obj: any = {};
     if (message.interfaces) {
       obj.interfaces = message.interfaces.map(e => e ? InterfaceDescriptor.toJSON(e) : undefined);
@@ -1463,7 +1464,7 @@ export const InterfaceDescriptor = {
     if (Array.isArray(object?.interfaceImplementers)) obj.interfaceImplementers = object.interfaceImplementers.map((e: any) => InterfaceImplementerDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: InterfaceDescriptor): unknown {
+  toJSON(message: InterfaceDescriptor): JsonSafe<InterfaceDescriptor> {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.interfaceAcceptingMessages) {
@@ -1597,7 +1598,7 @@ export const InterfaceImplementerDescriptor = {
     if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
     return obj;
   },
-  toJSON(message: InterfaceImplementerDescriptor): unknown {
+  toJSON(message: InterfaceImplementerDescriptor): JsonSafe<InterfaceImplementerDescriptor> {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
@@ -1703,7 +1704,7 @@ export const InterfaceAcceptingMessageDescriptor = {
     if (Array.isArray(object?.fieldDescriptorNames)) obj.fieldDescriptorNames = object.fieldDescriptorNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: InterfaceAcceptingMessageDescriptor): unknown {
+  toJSON(message: InterfaceAcceptingMessageDescriptor): JsonSafe<InterfaceAcceptingMessageDescriptor> {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     if (message.fieldDescriptorNames) {
@@ -1811,7 +1812,7 @@ export const ConfigurationDescriptor = {
     if (isSet(object.bech32AccountAddressPrefix)) obj.bech32AccountAddressPrefix = String(object.bech32AccountAddressPrefix);
     return obj;
   },
-  toJSON(message: ConfigurationDescriptor): unknown {
+  toJSON(message: ConfigurationDescriptor): JsonSafe<ConfigurationDescriptor> {
     const obj: any = {};
     message.bech32AccountAddressPrefix !== undefined && (obj.bech32AccountAddressPrefix = message.bech32AccountAddressPrefix);
     return obj;
@@ -1901,7 +1902,7 @@ export const MsgDescriptor = {
     if (isSet(object.msgTypeUrl)) obj.msgTypeUrl = String(object.msgTypeUrl);
     return obj;
   },
-  toJSON(message: MsgDescriptor): unknown {
+  toJSON(message: MsgDescriptor): JsonSafe<MsgDescriptor> {
     const obj: any = {};
     message.msgTypeUrl !== undefined && (obj.msgTypeUrl = message.msgTypeUrl);
     return obj;
@@ -1982,7 +1983,7 @@ export const GetAuthnDescriptorRequest = {
     const obj = createBaseGetAuthnDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetAuthnDescriptorRequest): unknown {
+  toJSON(_: GetAuthnDescriptorRequest): JsonSafe<GetAuthnDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2063,7 +2064,7 @@ export const GetAuthnDescriptorResponse = {
     if (isSet(object.authn)) obj.authn = AuthnDescriptor.fromJSON(object.authn);
     return obj;
   },
-  toJSON(message: GetAuthnDescriptorResponse): unknown {
+  toJSON(message: GetAuthnDescriptorResponse): JsonSafe<GetAuthnDescriptorResponse> {
     const obj: any = {};
     message.authn !== undefined && (obj.authn = message.authn ? AuthnDescriptor.toJSON(message.authn) : undefined);
     return obj;
@@ -2146,7 +2147,7 @@ export const GetChainDescriptorRequest = {
     const obj = createBaseGetChainDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetChainDescriptorRequest): unknown {
+  toJSON(_: GetChainDescriptorRequest): JsonSafe<GetChainDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2227,7 +2228,7 @@ export const GetChainDescriptorResponse = {
     if (isSet(object.chain)) obj.chain = ChainDescriptor.fromJSON(object.chain);
     return obj;
   },
-  toJSON(message: GetChainDescriptorResponse): unknown {
+  toJSON(message: GetChainDescriptorResponse): JsonSafe<GetChainDescriptorResponse> {
     const obj: any = {};
     message.chain !== undefined && (obj.chain = message.chain ? ChainDescriptor.toJSON(message.chain) : undefined);
     return obj;
@@ -2310,7 +2311,7 @@ export const GetCodecDescriptorRequest = {
     const obj = createBaseGetCodecDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetCodecDescriptorRequest): unknown {
+  toJSON(_: GetCodecDescriptorRequest): JsonSafe<GetCodecDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2391,7 +2392,7 @@ export const GetCodecDescriptorResponse = {
     if (isSet(object.codec)) obj.codec = CodecDescriptor.fromJSON(object.codec);
     return obj;
   },
-  toJSON(message: GetCodecDescriptorResponse): unknown {
+  toJSON(message: GetCodecDescriptorResponse): JsonSafe<GetCodecDescriptorResponse> {
     const obj: any = {};
     message.codec !== undefined && (obj.codec = message.codec ? CodecDescriptor.toJSON(message.codec) : undefined);
     return obj;
@@ -2474,7 +2475,7 @@ export const GetConfigurationDescriptorRequest = {
     const obj = createBaseGetConfigurationDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetConfigurationDescriptorRequest): unknown {
+  toJSON(_: GetConfigurationDescriptorRequest): JsonSafe<GetConfigurationDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2555,7 +2556,7 @@ export const GetConfigurationDescriptorResponse = {
     if (isSet(object.config)) obj.config = ConfigurationDescriptor.fromJSON(object.config);
     return obj;
   },
-  toJSON(message: GetConfigurationDescriptorResponse): unknown {
+  toJSON(message: GetConfigurationDescriptorResponse): JsonSafe<GetConfigurationDescriptorResponse> {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? ConfigurationDescriptor.toJSON(message.config) : undefined);
     return obj;
@@ -2638,7 +2639,7 @@ export const GetQueryServicesDescriptorRequest = {
     const obj = createBaseGetQueryServicesDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetQueryServicesDescriptorRequest): unknown {
+  toJSON(_: GetQueryServicesDescriptorRequest): JsonSafe<GetQueryServicesDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2719,7 +2720,7 @@ export const GetQueryServicesDescriptorResponse = {
     if (isSet(object.queries)) obj.queries = QueryServicesDescriptor.fromJSON(object.queries);
     return obj;
   },
-  toJSON(message: GetQueryServicesDescriptorResponse): unknown {
+  toJSON(message: GetQueryServicesDescriptorResponse): JsonSafe<GetQueryServicesDescriptorResponse> {
     const obj: any = {};
     message.queries !== undefined && (obj.queries = message.queries ? QueryServicesDescriptor.toJSON(message.queries) : undefined);
     return obj;
@@ -2802,7 +2803,7 @@ export const GetTxDescriptorRequest = {
     const obj = createBaseGetTxDescriptorRequest();
     return obj;
   },
-  toJSON(_: GetTxDescriptorRequest): unknown {
+  toJSON(_: GetTxDescriptorRequest): JsonSafe<GetTxDescriptorRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2883,7 +2884,7 @@ export const GetTxDescriptorResponse = {
     if (isSet(object.tx)) obj.tx = TxDescriptor.fromJSON(object.tx);
     return obj;
   },
-  toJSON(message: GetTxDescriptorResponse): unknown {
+  toJSON(message: GetTxDescriptorResponse): JsonSafe<GetTxDescriptorResponse> {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? TxDescriptor.toJSON(message.tx) : undefined);
     return obj;
@@ -2975,7 +2976,7 @@ export const QueryServicesDescriptor = {
     if (Array.isArray(object?.queryServices)) obj.queryServices = object.queryServices.map((e: any) => QueryServiceDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryServicesDescriptor): unknown {
+  toJSON(message: QueryServicesDescriptor): JsonSafe<QueryServicesDescriptor> {
     const obj: any = {};
     if (message.queryServices) {
       obj.queryServices = message.queryServices.map(e => e ? QueryServiceDescriptor.toJSON(e) : undefined);
@@ -3091,7 +3092,7 @@ export const QueryServiceDescriptor = {
     if (Array.isArray(object?.methods)) obj.methods = object.methods.map((e: any) => QueryMethodDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryServiceDescriptor): unknown {
+  toJSON(message: QueryServiceDescriptor): JsonSafe<QueryServiceDescriptor> {
     const obj: any = {};
     message.fullname !== undefined && (obj.fullname = message.fullname);
     message.isModule !== undefined && (obj.isModule = message.isModule);
@@ -3215,7 +3216,7 @@ export const QueryMethodDescriptor = {
     if (isSet(object.fullQueryPath)) obj.fullQueryPath = String(object.fullQueryPath);
     return obj;
   },
-  toJSON(message: QueryMethodDescriptor): unknown {
+  toJSON(message: QueryMethodDescriptor): JsonSafe<QueryMethodDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.fullQueryPath !== undefined && (obj.fullQueryPath = message.fullQueryPath);

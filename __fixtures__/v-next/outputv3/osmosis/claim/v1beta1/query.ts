@@ -2,7 +2,6 @@ import { Action, ActionSDKType, ClaimRecord, ClaimRecordAmino, ClaimRecordSDKTyp
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -169,10 +168,6 @@ export const QueryModuleAccountBalanceRequest = {
     const obj = createBaseQueryModuleAccountBalanceRequest();
     return obj;
   },
-  toJSON(_: QueryModuleAccountBalanceRequest): JsonSafe<QueryModuleAccountBalanceRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryModuleAccountBalanceRequest>): QueryModuleAccountBalanceRequest {
     const message = createBaseQueryModuleAccountBalanceRequest();
     return message;
@@ -239,15 +234,6 @@ export const QueryModuleAccountBalanceResponse = {
   fromJSON(object: any): QueryModuleAccountBalanceResponse {
     const obj = createBaseQueryModuleAccountBalanceResponse();
     if (Array.isArray(object?.moduleAccountBalance)) obj.moduleAccountBalance = object.moduleAccountBalance.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryModuleAccountBalanceResponse): JsonSafe<QueryModuleAccountBalanceResponse> {
-    const obj: any = {};
-    if (message.moduleAccountBalance) {
-      obj.moduleAccountBalance = message.moduleAccountBalance.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.moduleAccountBalance = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryModuleAccountBalanceResponse>): QueryModuleAccountBalanceResponse {
@@ -323,10 +309,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -393,11 +375,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -478,11 +455,6 @@ export const QueryClaimRecordRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryClaimRecordRequest): JsonSafe<QueryClaimRecordRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryClaimRecordRequest>): QueryClaimRecordRequest {
     const message = createBaseQueryClaimRecordRequest();
     message.address = object.address ?? "";
@@ -557,11 +529,6 @@ export const QueryClaimRecordResponse = {
   fromJSON(object: any): QueryClaimRecordResponse {
     const obj = createBaseQueryClaimRecordResponse();
     if (isSet(object.claimRecord)) obj.claimRecord = ClaimRecord.fromJSON(object.claimRecord);
-    return obj;
-  },
-  toJSON(message: QueryClaimRecordResponse): JsonSafe<QueryClaimRecordResponse> {
-    const obj: any = {};
-    message.claimRecord !== undefined && (obj.claimRecord = message.claimRecord ? ClaimRecord.toJSON(message.claimRecord) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryClaimRecordResponse>): QueryClaimRecordResponse {
@@ -650,12 +617,6 @@ export const QueryClaimableForActionRequest = {
     if (isSet(object.action)) obj.action = actionFromJSON(object.action);
     return obj;
   },
-  toJSON(message: QueryClaimableForActionRequest): JsonSafe<QueryClaimableForActionRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.action !== undefined && (obj.action = actionToJSON(message.action));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryClaimableForActionRequest>): QueryClaimableForActionRequest {
     const message = createBaseQueryClaimableForActionRequest();
     message.address = object.address ?? "";
@@ -737,15 +698,6 @@ export const QueryClaimableForActionResponse = {
   fromJSON(object: any): QueryClaimableForActionResponse {
     const obj = createBaseQueryClaimableForActionResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryClaimableForActionResponse): JsonSafe<QueryClaimableForActionResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryClaimableForActionResponse>): QueryClaimableForActionResponse {
@@ -830,11 +782,6 @@ export const QueryTotalClaimableRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryTotalClaimableRequest): JsonSafe<QueryTotalClaimableRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryTotalClaimableRequest>): QueryTotalClaimableRequest {
     const message = createBaseQueryTotalClaimableRequest();
     message.address = object.address ?? "";
@@ -909,15 +856,6 @@ export const QueryTotalClaimableResponse = {
   fromJSON(object: any): QueryTotalClaimableResponse {
     const obj = createBaseQueryTotalClaimableResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryTotalClaimableResponse): JsonSafe<QueryTotalClaimableResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalClaimableResponse>): QueryTotalClaimableResponse {

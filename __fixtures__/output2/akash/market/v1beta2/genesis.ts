@@ -5,6 +5,7 @@ import { Lease } from "./lease";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
@@ -62,7 +63,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);

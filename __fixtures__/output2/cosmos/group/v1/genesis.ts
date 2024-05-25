@@ -3,6 +3,7 @@
 import { GroupInfo, GroupMember, GroupPolicyInfo, Proposal, Vote } from "./types";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
@@ -122,7 +123,7 @@ export const GenesisState = {
       votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.groupSeq !== undefined && (obj.groupSeq = (message.groupSeq || Long.UZERO).toString());
     if (message.groups) {

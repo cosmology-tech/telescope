@@ -1,6 +1,7 @@
 import { Params, ParamsSDKType, Validator, ValidatorSDKType, Delegation, DelegationSDKType, UnbondingDelegation, UnbondingDelegationSDKType, Redelegation, RedelegationSDKType } from "./staking";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /** GenesisState defines the staking module's genesis state. */
 export interface GenesisState {
@@ -139,7 +140,7 @@ export const GenesisState = {
       exported: isSet(object.exported) ? Boolean(object.exported) : false
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.lastTotalPower !== undefined && (obj.lastTotalPower = base64FromBytes(message.lastTotalPower !== undefined ? message.lastTotalPower : new Uint8Array()));
@@ -270,7 +271,7 @@ export const LastValidatorPower = {
       power: isSet(object.power) ? Long.fromValue(object.power) : Long.ZERO
     };
   },
-  toJSON(message: LastValidatorPower): unknown {
+  toJSON(message: LastValidatorPower): JsonSafe<LastValidatorPower> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.power !== undefined && (obj.power = (message.power || Long.ZERO).toString());

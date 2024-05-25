@@ -2,7 +2,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -291,12 +290,6 @@ export const MsgCreateDenom = {
     if (isSet(object.subdenom)) obj.subdenom = String(object.subdenom);
     return obj;
   },
-  toJSON(message: MsgCreateDenom): JsonSafe<MsgCreateDenom> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.subdenom !== undefined && (obj.subdenom = message.subdenom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateDenom>): MsgCreateDenom {
     const message = createBaseMsgCreateDenom();
     message.sender = object.sender ?? "";
@@ -378,11 +371,6 @@ export const MsgCreateDenomResponse = {
   fromJSON(object: any): MsgCreateDenomResponse {
     const obj = createBaseMsgCreateDenomResponse();
     if (isSet(object.newTokenDenom)) obj.newTokenDenom = String(object.newTokenDenom);
-    return obj;
-  },
-  toJSON(message: MsgCreateDenomResponse): JsonSafe<MsgCreateDenomResponse> {
-    const obj: any = {};
-    message.newTokenDenom !== undefined && (obj.newTokenDenom = message.newTokenDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateDenomResponse>): MsgCreateDenomResponse {
@@ -469,12 +457,6 @@ export const MsgMint = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgMint): JsonSafe<MsgMint> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgMint>): MsgMint {
     const message = createBaseMsgMint();
     message.sender = object.sender ?? "";
@@ -549,10 +531,6 @@ export const MsgMintResponse = {
   },
   fromJSON(_: any): MsgMintResponse {
     const obj = createBaseMsgMintResponse();
-    return obj;
-  },
-  toJSON(_: MsgMintResponse): JsonSafe<MsgMintResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgMintResponse>): MsgMintResponse {
@@ -631,12 +609,6 @@ export const MsgBurn = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgBurn): JsonSafe<MsgBurn> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgBurn>): MsgBurn {
     const message = createBaseMsgBurn();
     message.sender = object.sender ?? "";
@@ -711,10 +683,6 @@ export const MsgBurnResponse = {
   },
   fromJSON(_: any): MsgBurnResponse {
     const obj = createBaseMsgBurnResponse();
-    return obj;
-  },
-  toJSON(_: MsgBurnResponse): JsonSafe<MsgBurnResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgBurnResponse>): MsgBurnResponse {
@@ -801,13 +769,6 @@ export const MsgChangeAdmin = {
     if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
     return obj;
   },
-  toJSON(message: MsgChangeAdmin): JsonSafe<MsgChangeAdmin> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChangeAdmin>): MsgChangeAdmin {
     const message = createBaseMsgChangeAdmin();
     message.sender = object.sender ?? "";
@@ -889,10 +850,6 @@ export const MsgChangeAdminResponse = {
     const obj = createBaseMsgChangeAdminResponse();
     return obj;
   },
-  toJSON(_: MsgChangeAdminResponse): JsonSafe<MsgChangeAdminResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgChangeAdminResponse>): MsgChangeAdminResponse {
     const message = createBaseMsgChangeAdminResponse();
     return message;
@@ -969,12 +926,6 @@ export const MsgSetDenomMetadata = {
     if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
     return obj;
   },
-  toJSON(message: MsgSetDenomMetadata): JsonSafe<MsgSetDenomMetadata> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSetDenomMetadata>): MsgSetDenomMetadata {
     const message = createBaseMsgSetDenomMetadata();
     message.sender = object.sender ?? "";
@@ -1049,10 +1000,6 @@ export const MsgSetDenomMetadataResponse = {
   },
   fromJSON(_: any): MsgSetDenomMetadataResponse {
     const obj = createBaseMsgSetDenomMetadataResponse();
-    return obj;
-  },
-  toJSON(_: MsgSetDenomMetadataResponse): JsonSafe<MsgSetDenomMetadataResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgSetDenomMetadataResponse>): MsgSetDenomMetadataResponse {

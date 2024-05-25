@@ -75,38 +75,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createValidator(value: MsgCreateValidator) {
-      return {
-        typeUrl: "/cosmos.staking.v1beta1.MsgCreateValidator",
-        value: MsgCreateValidator.toJSON(value)
-      };
-    },
-    editValidator(value: MsgEditValidator) {
-      return {
-        typeUrl: "/cosmos.staking.v1beta1.MsgEditValidator",
-        value: MsgEditValidator.toJSON(value)
-      };
-    },
-    delegate(value: MsgDelegate) {
-      return {
-        typeUrl: "/cosmos.staking.v1beta1.MsgDelegate",
-        value: MsgDelegate.toJSON(value)
-      };
-    },
-    beginRedelegate(value: MsgBeginRedelegate) {
-      return {
-        typeUrl: "/cosmos.staking.v1beta1.MsgBeginRedelegate",
-        value: MsgBeginRedelegate.toJSON(value)
-      };
-    },
-    undelegate(value: MsgUndelegate) {
-      return {
-        typeUrl: "/cosmos.staking.v1beta1.MsgUndelegate",
-        value: MsgUndelegate.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createValidator(value: any) {
       return {

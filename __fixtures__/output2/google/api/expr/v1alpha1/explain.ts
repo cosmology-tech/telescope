@@ -3,6 +3,7 @@
 import { Value } from "./value";
 import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Values of intermediate expressions produced when evaluating expression.
@@ -75,7 +76,7 @@ export const Explain = {
       exprSteps: Array.isArray(object?.exprSteps) ? object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e)) : []
     };
   },
-  toJSON(message: Explain): unknown {
+  toJSON(message: Explain): JsonSafe<Explain> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
@@ -138,7 +139,7 @@ export const Explain_ExprStep = {
       valueIndex: isSet(object.valueIndex) ? Number(object.valueIndex) : 0
     };
   },
-  toJSON(message: Explain_ExprStep): unknown {
+  toJSON(message: Explain_ExprStep): JsonSafe<Explain_ExprStep> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || Long.ZERO).toString());
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));

@@ -4,6 +4,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 /**
  * EpochInfo is a struct that describes the data going into
@@ -149,7 +150,7 @@ export const EpochInfo = {
       currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
     };
   },
-  toJSON(message: EpochInfo): unknown {
+  toJSON(message: EpochInfo): JsonSafe<EpochInfo> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = fromTimestamp(message.startTime).toISOString());
@@ -206,7 +207,7 @@ export const GenesisState = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);

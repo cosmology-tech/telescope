@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -385,7 +386,7 @@ export const Authentication = {
     if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => AuthProvider.fromJSON(e));
     return obj;
   },
-  toJSON(message: Authentication): unknown {
+  toJSON(message: Authentication): JsonSafe<Authentication> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toJSON(e) : undefined);
@@ -526,7 +527,7 @@ export const AuthenticationRule = {
     if (Array.isArray(object?.requirements)) obj.requirements = object.requirements.map((e: any) => AuthRequirement.fromJSON(e));
     return obj;
   },
-  toJSON(message: AuthenticationRule): unknown {
+  toJSON(message: AuthenticationRule): JsonSafe<AuthenticationRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toJSON(message.oauth) : undefined);
@@ -669,7 +670,7 @@ export const JwtLocation = {
     if (isSet(object.valuePrefix)) obj.valuePrefix = String(object.valuePrefix);
     return obj;
   },
-  toJSON(message: JwtLocation): unknown {
+  toJSON(message: JwtLocation): JsonSafe<JwtLocation> {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header);
     message.query !== undefined && (obj.query = message.query);
@@ -815,7 +816,7 @@ export const AuthProvider = {
     if (Array.isArray(object?.jwtLocations)) obj.jwtLocations = object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e));
     return obj;
   },
-  toJSON(message: AuthProvider): unknown {
+  toJSON(message: AuthProvider): JsonSafe<AuthProvider> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.issuer !== undefined && (obj.issuer = message.issuer);
@@ -958,7 +959,7 @@ export const OAuthRequirements = {
     if (isSet(object.canonicalScopes)) obj.canonicalScopes = String(object.canonicalScopes);
     return obj;
   },
-  toJSON(message: OAuthRequirements): unknown {
+  toJSON(message: OAuthRequirements): JsonSafe<OAuthRequirements> {
     const obj: any = {};
     message.canonicalScopes !== undefined && (obj.canonicalScopes = message.canonicalScopes);
     return obj;
@@ -1054,7 +1055,7 @@ export const AuthRequirement = {
     if (isSet(object.audiences)) obj.audiences = String(object.audiences);
     return obj;
   },
-  toJSON(message: AuthRequirement): unknown {
+  toJSON(message: AuthRequirement): JsonSafe<AuthRequirement> {
     const obj: any = {};
     message.providerId !== undefined && (obj.providerId = message.providerId);
     message.audiences !== undefined && (obj.audiences = message.audiences);

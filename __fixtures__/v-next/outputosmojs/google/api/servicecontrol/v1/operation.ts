@@ -4,6 +4,7 @@ import { LogEntry, LogEntrySDKType } from "./log_entry";
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
@@ -201,7 +202,7 @@ export const Operation_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: Operation_LabelsEntry): unknown {
+  toJSON(message: Operation_LabelsEntry): JsonSafe<Operation_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -375,7 +376,7 @@ export const Operation = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: Operation): unknown {
+  toJSON(message: Operation): JsonSafe<Operation> {
     const obj: any = {};
     message.operationId !== undefined && (obj.operationId = message.operationId);
     message.operationName !== undefined && (obj.operationName = message.operationName);

@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.crypto";
 /** PublicKey defines the keys available for use with Tendermint Validators */
 export interface PublicKey {
@@ -50,7 +51,7 @@ export const PublicKey = {
       secp256k1: isSet(object.secp256k1) ? bytesFromBase64(object.secp256k1) : undefined
     };
   },
-  toJSON(message: PublicKey): unknown {
+  toJSON(message: PublicKey): JsonSafe<PublicKey> {
     const obj: any = {};
     message.ed25519 !== undefined && (obj.ed25519 = message.ed25519 !== undefined ? base64FromBytes(message.ed25519) : undefined);
     message.secp256k1 !== undefined && (obj.secp256k1 = message.secp256k1 !== undefined ? base64FromBytes(message.secp256k1) : undefined);

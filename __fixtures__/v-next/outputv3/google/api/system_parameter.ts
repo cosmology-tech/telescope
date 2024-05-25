@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -242,15 +241,6 @@ export const SystemParameters = {
     if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => SystemParameterRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: SystemParameters): JsonSafe<SystemParameters> {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? SystemParameterRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<SystemParameters>): SystemParameters {
     const message = createBaseSystemParameters();
     message.rules = object.rules?.map(e => SystemParameterRule.fromPartial(e)) || [];
@@ -338,16 +328,6 @@ export const SystemParameterRule = {
     const obj = createBaseSystemParameterRule();
     if (isSet(object.selector)) obj.selector = String(object.selector);
     if (Array.isArray(object?.parameters)) obj.parameters = object.parameters.map((e: any) => SystemParameter.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SystemParameterRule): JsonSafe<SystemParameterRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    if (message.parameters) {
-      obj.parameters = message.parameters.map(e => e ? SystemParameter.toJSON(e) : undefined);
-    } else {
-      obj.parameters = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SystemParameterRule>): SystemParameterRule {
@@ -452,13 +432,6 @@ export const SystemParameter = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.httpHeader)) obj.httpHeader = String(object.httpHeader);
     if (isSet(object.urlQueryParameter)) obj.urlQueryParameter = String(object.urlQueryParameter);
-    return obj;
-  },
-  toJSON(message: SystemParameter): JsonSafe<SystemParameter> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.httpHeader !== undefined && (obj.httpHeader = message.httpHeader);
-    message.urlQueryParameter !== undefined && (obj.urlQueryParameter = message.urlQueryParameter);
     return obj;
   },
   fromPartial(object: DeepPartial<SystemParameter>): SystemParameter {

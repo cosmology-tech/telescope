@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -230,7 +231,7 @@ export const Timestamp = {
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
-  toJSON(message: Timestamp): unknown {
+  toJSON(message: Timestamp): JsonSafe<Timestamp> {
     const obj: any = {};
     message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));

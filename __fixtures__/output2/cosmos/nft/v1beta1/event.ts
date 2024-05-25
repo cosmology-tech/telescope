@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** EventSend is emitted on Msg/Send */
 export interface EventSend {
@@ -80,7 +81,7 @@ export const EventSend = {
       receiver: isSet(object.receiver) ? String(object.receiver) : ""
     };
   },
-  toJSON(message: EventSend): unknown {
+  toJSON(message: EventSend): JsonSafe<EventSend> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -147,7 +148,7 @@ export const EventMint = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: EventMint): unknown {
+  toJSON(message: EventMint): JsonSafe<EventMint> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -212,7 +213,7 @@ export const EventBurn = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: EventBurn): unknown {
+  toJSON(message: EventBurn): JsonSafe<EventBurn> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);

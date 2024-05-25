@@ -1,7 +1,6 @@
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.types";
 export interface ValidatorSet {
   validators: Validator[];
@@ -109,17 +108,6 @@ export const ValidatorSet = {
     if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => Validator.fromJSON(e));
     if (isSet(object.proposer)) obj.proposer = Validator.fromJSON(object.proposer);
     if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
-    return obj;
-  },
-  toJSON(message: ValidatorSet): JsonSafe<ValidatorSet> {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.proposer !== undefined && (obj.proposer = message.proposer ? Validator.toJSON(message.proposer) : undefined);
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorSet>): ValidatorSet {
@@ -245,14 +233,6 @@ export const Validator = {
     if (isSet(object.proposerPriority)) obj.proposerPriority = BigInt(object.proposerPriority.toString());
     return obj;
   },
-  toJSON(message: Validator): JsonSafe<Validator> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
-    message.proposerPriority !== undefined && (obj.proposerPriority = (message.proposerPriority || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
@@ -361,12 +341,6 @@ export const SimpleValidator = {
     const obj = createBaseSimpleValidator();
     if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
     if (isSet(object.votingPower)) obj.votingPower = BigInt(object.votingPower.toString());
-    return obj;
-  },
-  toJSON(message: SimpleValidator): JsonSafe<SimpleValidator> {
-    const obj: any = {};
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.votingPower !== undefined && (obj.votingPower = (message.votingPower || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<SimpleValidator>): SimpleValidator {

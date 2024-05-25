@@ -1,6 +1,5 @@
 import { Plan, PlanAmino, PlanSDKType, ModuleVersion, ModuleVersionAmino, ModuleVersionSDKType } from "./upgrade";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
@@ -320,10 +319,6 @@ export const QueryCurrentPlanRequest = {
     const obj = createBaseQueryCurrentPlanRequest();
     return obj;
   },
-  toJSON(_: QueryCurrentPlanRequest): JsonSafe<QueryCurrentPlanRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryCurrentPlanRequest>): QueryCurrentPlanRequest {
     const message = createBaseQueryCurrentPlanRequest();
     return message;
@@ -390,11 +385,6 @@ export const QueryCurrentPlanResponse = {
   fromJSON(object: any): QueryCurrentPlanResponse {
     const obj = createBaseQueryCurrentPlanResponse();
     if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
-    return obj;
-  },
-  toJSON(message: QueryCurrentPlanResponse): JsonSafe<QueryCurrentPlanResponse> {
-    const obj: any = {};
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCurrentPlanResponse>): QueryCurrentPlanResponse {
@@ -475,11 +465,6 @@ export const QueryAppliedPlanRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: QueryAppliedPlanRequest): JsonSafe<QueryAppliedPlanRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAppliedPlanRequest>): QueryAppliedPlanRequest {
     const message = createBaseQueryAppliedPlanRequest();
     message.name = object.name ?? "";
@@ -554,11 +539,6 @@ export const QueryAppliedPlanResponse = {
   fromJSON(object: any): QueryAppliedPlanResponse {
     const obj = createBaseQueryAppliedPlanResponse();
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
-    return obj;
-  },
-  toJSON(message: QueryAppliedPlanResponse): JsonSafe<QueryAppliedPlanResponse> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAppliedPlanResponse>): QueryAppliedPlanResponse {
@@ -639,11 +619,6 @@ export const QueryUpgradedConsensusStateRequest = {
     if (isSet(object.lastHeight)) obj.lastHeight = BigInt(object.lastHeight.toString());
     return obj;
   },
-  toJSON(message: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
-    const obj: any = {};
-    message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     if (object.lastHeight !== undefined && object.lastHeight !== null) {
@@ -722,11 +697,6 @@ export const QueryUpgradedConsensusStateResponse = {
     if (isSet(object.upgradedConsensusState)) obj.upgradedConsensusState = bytesFromBase64(object.upgradedConsensusState);
     return obj;
   },
-  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
-    const obj: any = {};
-    message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = base64FromBytes(message.upgradedConsensusState !== undefined ? message.upgradedConsensusState : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
     message.upgradedConsensusState = object.upgradedConsensusState ?? new Uint8Array();
@@ -801,11 +771,6 @@ export const QueryModuleVersionsRequest = {
   fromJSON(object: any): QueryModuleVersionsRequest {
     const obj = createBaseQueryModuleVersionsRequest();
     if (isSet(object.moduleName)) obj.moduleName = String(object.moduleName);
-    return obj;
-  },
-  toJSON(message: QueryModuleVersionsRequest): JsonSafe<QueryModuleVersionsRequest> {
-    const obj: any = {};
-    message.moduleName !== undefined && (obj.moduleName = message.moduleName);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryModuleVersionsRequest>): QueryModuleVersionsRequest {
@@ -884,15 +849,6 @@ export const QueryModuleVersionsResponse = {
     if (Array.isArray(object?.moduleVersions)) obj.moduleVersions = object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryModuleVersionsResponse): JsonSafe<QueryModuleVersionsResponse> {
-    const obj: any = {};
-    if (message.moduleVersions) {
-      obj.moduleVersions = message.moduleVersions.map(e => e ? ModuleVersion.toJSON(e) : undefined);
-    } else {
-      obj.moduleVersions = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryModuleVersionsResponse>): QueryModuleVersionsResponse {
     const message = createBaseQueryModuleVersionsResponse();
     message.moduleVersions = object.moduleVersions?.map(e => ModuleVersion.fromPartial(e)) || [];
@@ -966,10 +922,6 @@ export const QueryAuthorityRequest = {
     const obj = createBaseQueryAuthorityRequest();
     return obj;
   },
-  toJSON(_: QueryAuthorityRequest): JsonSafe<QueryAuthorityRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryAuthorityRequest>): QueryAuthorityRequest {
     const message = createBaseQueryAuthorityRequest();
     return message;
@@ -1036,11 +988,6 @@ export const QueryAuthorityResponse = {
   fromJSON(object: any): QueryAuthorityResponse {
     const obj = createBaseQueryAuthorityResponse();
     if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: QueryAuthorityResponse): JsonSafe<QueryAuthorityResponse> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAuthorityResponse>): QueryAuthorityResponse {

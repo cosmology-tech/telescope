@@ -3,6 +3,7 @@
 import { TokenPair } from "./erc20";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -64,7 +65,7 @@ export const GenesisState = {
       tokenPairs: Array.isArray(object?.tokenPairs) ? object.tokenPairs.map((e: any) => TokenPair.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.tokenPairs) {
@@ -123,7 +124,7 @@ export const Params = {
       enableEvmHook: isSet(object.enableEvmHook) ? Boolean(object.enableEvmHook) : false
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableErc20 !== undefined && (obj.enableErc20 = message.enableErc20);
     message.enableEvmHook !== undefined && (obj.enableEvmHook = message.enableEvmHook);

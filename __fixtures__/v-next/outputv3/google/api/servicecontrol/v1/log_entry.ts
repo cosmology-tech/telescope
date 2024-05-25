@@ -5,7 +5,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { Struct, StructAmino, StructSDKType } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -335,12 +334,6 @@ export const LogEntry_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: LogEntry_LabelsEntry): JsonSafe<LogEntry_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LogEntry_LabelsEntry>): LogEntry_LabelsEntry {
     const message = createBaseLogEntry_LabelsEntry();
     message.key = object.key ?? "";
@@ -514,27 +507,6 @@ export const LogEntry = {
     if (isSet(object.structPayload)) obj.structPayload = Struct.fromJSON(object.structPayload);
     if (isSet(object.operation)) obj.operation = LogEntryOperation.fromJSON(object.operation);
     if (isSet(object.sourceLocation)) obj.sourceLocation = LogEntrySourceLocation.fromJSON(object.sourceLocation);
-    return obj;
-  },
-  toJSON(message: LogEntry): JsonSafe<LogEntry> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    message.severity !== undefined && (obj.severity = logSeverityToJSON(message.severity));
-    message.httpRequest !== undefined && (obj.httpRequest = message.httpRequest ? HttpRequest.toJSON(message.httpRequest) : undefined);
-    message.trace !== undefined && (obj.trace = message.trace);
-    message.insertId !== undefined && (obj.insertId = message.insertId);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.protoPayload !== undefined && (obj.protoPayload = message.protoPayload ? Any.toJSON(message.protoPayload) : undefined);
-    message.textPayload !== undefined && (obj.textPayload = message.textPayload);
-    message.structPayload !== undefined && (obj.structPayload = message.structPayload ? Struct.toJSON(message.structPayload) : undefined);
-    message.operation !== undefined && (obj.operation = message.operation ? LogEntryOperation.toJSON(message.operation) : undefined);
-    message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation ? LogEntrySourceLocation.toJSON(message.sourceLocation) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<LogEntry>): LogEntry {
@@ -750,14 +722,6 @@ export const LogEntryOperation = {
     if (isSet(object.last)) obj.last = Boolean(object.last);
     return obj;
   },
-  toJSON(message: LogEntryOperation): JsonSafe<LogEntryOperation> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.producer !== undefined && (obj.producer = message.producer);
-    message.first !== undefined && (obj.first = message.first);
-    message.last !== undefined && (obj.last = message.last);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LogEntryOperation>): LogEntryOperation {
     const message = createBaseLogEntryOperation();
     message.id = object.id ?? "";
@@ -868,13 +832,6 @@ export const LogEntrySourceLocation = {
     if (isSet(object.file)) obj.file = String(object.file);
     if (isSet(object.line)) obj.line = BigInt(object.line.toString());
     if (isSet(object.function)) obj.function = String(object.function);
-    return obj;
-  },
-  toJSON(message: LogEntrySourceLocation): JsonSafe<LogEntrySourceLocation> {
-    const obj: any = {};
-    message.file !== undefined && (obj.file = message.file);
-    message.line !== undefined && (obj.line = (message.line || BigInt(0)).toString());
-    message.function !== undefined && (obj.function = message.function);
     return obj;
   },
   fromPartial(object: DeepPartial<LogEntrySourceLocation>): LogEntrySourceLocation {

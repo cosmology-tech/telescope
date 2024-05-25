@@ -8,7 +8,6 @@ import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, Monitore
 import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -1082,14 +1081,6 @@ export const Service = {
     if (isSet(object.state)) obj.state = stateFromJSON(object.state);
     return obj;
   },
-  toJSON(message: Service): JsonSafe<Service> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toJSON(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
     message.name = object.name ?? "";
@@ -1260,32 +1251,6 @@ export const ServiceConfig = {
     if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
     return obj;
   },
-  toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toJSON(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toJSON(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toJSON(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toJSON(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toJSON(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitoredResources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.monitoredResources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
     message.name = object.name ?? "";
@@ -1452,15 +1417,6 @@ export const OperationMetadata = {
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
     const message = createBaseOperationMetadata();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
@@ -1580,24 +1536,6 @@ export const ConsumerQuotaMetric = {
     if (Array.isArray(object?.consumerQuotaLimits)) obj.consumerQuotaLimits = object.consumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
     if (Array.isArray(object?.descendantConsumerQuotaLimits)) obj.descendantConsumerQuotaLimits = object.descendantConsumerQuotaLimits.map((e: any) => ConsumerQuotaLimit.fromJSON(e));
     if (isSet(object.unit)) obj.unit = String(object.unit);
-    return obj;
-  },
-  toJSON(message: ConsumerQuotaMetric): JsonSafe<ConsumerQuotaMetric> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    if (message.consumerQuotaLimits) {
-      obj.consumerQuotaLimits = message.consumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.consumerQuotaLimits = [];
-    }
-    if (message.descendantConsumerQuotaLimits) {
-      obj.descendantConsumerQuotaLimits = message.descendantConsumerQuotaLimits.map(e => e ? ConsumerQuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.descendantConsumerQuotaLimits = [];
-    }
-    message.unit !== undefined && (obj.unit = message.unit);
     return obj;
   },
   fromPartial(object: DeepPartial<ConsumerQuotaMetric>): ConsumerQuotaMetric {
@@ -1762,20 +1700,6 @@ export const ConsumerQuotaLimit = {
     if (Array.isArray(object?.quotaBuckets)) obj.quotaBuckets = object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e));
     return obj;
   },
-  toJSON(message: ConsumerQuotaLimit): JsonSafe<ConsumerQuotaLimit> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.isPrecise !== undefined && (obj.isPrecise = message.isPrecise);
-    message.allowsAdminOverrides !== undefined && (obj.allowsAdminOverrides = message.allowsAdminOverrides);
-    if (message.quotaBuckets) {
-      obj.quotaBuckets = message.quotaBuckets.map(e => e ? QuotaBucket.toJSON(e) : undefined);
-    } else {
-      obj.quotaBuckets = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConsumerQuotaLimit>): ConsumerQuotaLimit {
     const message = createBaseConsumerQuotaLimit();
     message.name = object.name ?? "";
@@ -1897,12 +1821,6 @@ export const QuotaBucket_DimensionsEntry = {
     const obj = createBaseQuotaBucket_DimensionsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: QuotaBucket_DimensionsEntry): JsonSafe<QuotaBucket_DimensionsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaBucket_DimensionsEntry>): QuotaBucket_DimensionsEntry {
@@ -2030,21 +1948,6 @@ export const QuotaBucket = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: QuotaBucket): JsonSafe<QuotaBucket> {
-    const obj: any = {};
-    message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
-    message.producerOverride !== undefined && (obj.producerOverride = message.producerOverride ? QuotaOverride.toJSON(message.producerOverride) : undefined);
-    message.consumerOverride !== undefined && (obj.consumerOverride = message.consumerOverride ? QuotaOverride.toJSON(message.consumerOverride) : undefined);
-    message.adminOverride !== undefined && (obj.adminOverride = message.adminOverride ? QuotaOverride.toJSON(message.adminOverride) : undefined);
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaBucket>): QuotaBucket {
@@ -2201,12 +2104,6 @@ export const QuotaOverride_DimensionsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: QuotaOverride_DimensionsEntry): JsonSafe<QuotaOverride_DimensionsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QuotaOverride_DimensionsEntry>): QuotaOverride_DimensionsEntry {
     const message = createBaseQuotaOverride_DimensionsEntry();
     message.key = object.key ?? "";
@@ -2332,21 +2229,6 @@ export const QuotaOverride = {
     if (isSet(object.metric)) obj.metric = String(object.metric);
     if (isSet(object.unit)) obj.unit = String(object.unit);
     if (isSet(object.adminOverrideAncestor)) obj.adminOverrideAncestor = String(object.adminOverrideAncestor);
-    return obj;
-  },
-  toJSON(message: QuotaOverride): JsonSafe<QuotaOverride> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.adminOverrideAncestor !== undefined && (obj.adminOverrideAncestor = message.adminOverrideAncestor);
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaOverride>): QuotaOverride {
@@ -2488,15 +2370,6 @@ export const OverrideInlineSource = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: OverrideInlineSource): JsonSafe<OverrideInlineSource> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<OverrideInlineSource>): OverrideInlineSource {
     const message = createBaseOverrideInlineSource();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
@@ -2583,12 +2456,6 @@ export const AdminQuotaPolicy_DimensionsEntry = {
     const obj = createBaseAdminQuotaPolicy_DimensionsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AdminQuotaPolicy_DimensionsEntry): JsonSafe<AdminQuotaPolicy_DimensionsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<AdminQuotaPolicy_DimensionsEntry>): AdminQuotaPolicy_DimensionsEntry {
@@ -2716,21 +2583,6 @@ export const AdminQuotaPolicy = {
     if (isSet(object.metric)) obj.metric = String(object.metric);
     if (isSet(object.unit)) obj.unit = String(object.unit);
     if (isSet(object.container)) obj.container = String(object.container);
-    return obj;
-  },
-  toJSON(message: AdminQuotaPolicy): JsonSafe<AdminQuotaPolicy> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
-    obj.dimensions = {};
-    if (message.dimensions) {
-      Object.entries(message.dimensions).forEach(([k, v]) => {
-        obj.dimensions[k] = v;
-      });
-    }
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.container !== undefined && (obj.container = message.container);
     return obj;
   },
   fromPartial(object: DeepPartial<AdminQuotaPolicy>): AdminQuotaPolicy {
@@ -2878,12 +2730,6 @@ export const ServiceIdentity = {
     const obj = createBaseServiceIdentity();
     if (isSet(object.email)) obj.email = String(object.email);
     if (isSet(object.uniqueId)) obj.uniqueId = String(object.uniqueId);
-    return obj;
-  },
-  toJSON(message: ServiceIdentity): JsonSafe<ServiceIdentity> {
-    const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);
     return obj;
   },
   fromPartial(object: DeepPartial<ServiceIdentity>): ServiceIdentity {

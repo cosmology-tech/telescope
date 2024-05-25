@@ -4,6 +4,7 @@ import { GroupSpec, GroupID } from "./group";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -151,7 +152,7 @@ export const MsgCreateDeployment = {
       deposit: isSet(object.deposit) ? Coin.fromJSON(object.deposit) : undefined
     };
   },
-  toJSON(message: MsgCreateDeployment): unknown {
+  toJSON(message: MsgCreateDeployment): JsonSafe<MsgCreateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     if (message.groups) {
@@ -196,7 +197,7 @@ export const MsgCreateDeploymentResponse = {
   fromJSON(_: any): MsgCreateDeploymentResponse {
     return {};
   },
-  toJSON(_: MsgCreateDeploymentResponse): unknown {
+  toJSON(_: MsgCreateDeploymentResponse): JsonSafe<MsgCreateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -247,7 +248,7 @@ export const MsgDepositDeployment = {
       amount: isSet(object.amount) ? Coin.fromJSON(object.amount) : undefined
     };
   },
-  toJSON(message: MsgDepositDeployment): unknown {
+  toJSON(message: MsgDepositDeployment): JsonSafe<MsgDepositDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
@@ -284,7 +285,7 @@ export const MsgDepositDeploymentResponse = {
   fromJSON(_: any): MsgDepositDeploymentResponse {
     return {};
   },
-  toJSON(_: MsgDepositDeploymentResponse): unknown {
+  toJSON(_: MsgDepositDeploymentResponse): JsonSafe<MsgDepositDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -343,7 +344,7 @@ export const MsgUpdateDeployment = {
       version: isSet(object.version) ? bytesFromBase64(object.version) : new Uint8Array()
     };
   },
-  toJSON(message: MsgUpdateDeployment): unknown {
+  toJSON(message: MsgUpdateDeployment): JsonSafe<MsgUpdateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     if (message.groups) {
@@ -386,7 +387,7 @@ export const MsgUpdateDeploymentResponse = {
   fromJSON(_: any): MsgUpdateDeploymentResponse {
     return {};
   },
-  toJSON(_: MsgUpdateDeploymentResponse): unknown {
+  toJSON(_: MsgUpdateDeploymentResponse): JsonSafe<MsgUpdateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -429,7 +430,7 @@ export const MsgCloseDeployment = {
       id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: MsgCloseDeployment): unknown {
+  toJSON(message: MsgCloseDeployment): JsonSafe<MsgCloseDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
@@ -464,7 +465,7 @@ export const MsgCloseDeploymentResponse = {
   fromJSON(_: any): MsgCloseDeploymentResponse {
     return {};
   },
-  toJSON(_: MsgCloseDeploymentResponse): unknown {
+  toJSON(_: MsgCloseDeploymentResponse): JsonSafe<MsgCloseDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -515,7 +516,7 @@ export const DeploymentID = {
       dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
     };
   },
-  toJSON(message: DeploymentID): unknown {
+  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -586,7 +587,7 @@ export const Deployment = {
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
-  toJSON(message: Deployment): unknown {
+  toJSON(message: Deployment): JsonSafe<Deployment> {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
@@ -653,7 +654,7 @@ export const DeploymentFilters = {
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
-  toJSON(message: DeploymentFilters): unknown {
+  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());

@@ -8,7 +8,6 @@ import { MonitoredResourceDescriptor, MonitoredResourceDescriptorAmino, Monitore
 import { Monitoring, MonitoringAmino, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -308,14 +307,6 @@ export const Service = {
     if (isSet(object.state)) obj.state = stateFromJSON(object.state);
     return obj;
   },
-  toJSON(message: Service): JsonSafe<Service> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.config !== undefined && (obj.config = message.config ? ServiceConfig.toJSON(message.config) : undefined);
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Service>): Service {
     const message = createBaseService();
     message.name = object.name ?? "";
@@ -486,32 +477,6 @@ export const ServiceConfig = {
     if (isSet(object.monitoring)) obj.monitoring = Monitoring.fromJSON(object.monitoring);
     return obj;
   },
-  toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toJSON(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toJSON(message.documentation) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toJSON(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toJSON(message.authentication) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toJSON(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitoredResources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.monitoredResources = [];
-    }
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ServiceConfig>): ServiceConfig {
     const message = createBaseServiceConfig();
     message.name = object.name ?? "";
@@ -676,15 +641,6 @@ export const OperationMetadata = {
   fromJSON(object: any): OperationMetadata {
     const obj = createBaseOperationMetadata();
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {

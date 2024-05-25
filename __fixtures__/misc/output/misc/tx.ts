@@ -1,6 +1,7 @@
 import { EncodingTestForDontOmit, EncodingTestForDontOmitAmino, EncodingTestForDontOmitSDKType, EncodingTestForOmit, EncodingTestForOmitAmino, EncodingTestForOmitSDKType } from "./all_fields";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
+import { JsonSafe } from "../json-safe";
 export const protobufPackage = "misc";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -91,7 +92,7 @@ export const InputMsg = {
     if (isSet(object.oTests)) obj.oTests = EncodingTestForOmit.fromJSON(object.oTests);
     return obj;
   },
-  toJSON(message: InputMsg): unknown {
+  toJSON(message: InputMsg): JsonSafe<InputMsg> {
     const obj: any = {};
     message.dOTests !== undefined && (obj.dOTests = message.dOTests ? EncodingTestForDontOmit.toJSON(message.dOTests) : undefined);
     message.oTests !== undefined && (obj.oTests = message.oTests ? EncodingTestForOmit.toJSON(message.oTests) : undefined);
@@ -183,7 +184,7 @@ export const MsgResponse = {
     const obj = createBaseMsgResponse();
     return obj;
   },
-  toJSON(_: MsgResponse): unknown {
+  toJSON(_: MsgResponse): JsonSafe<MsgResponse> {
     const obj: any = {};
     return obj;
   },

@@ -1,6 +1,7 @@
 import { Distribution_Exemplar } from "../../distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * Distribution represents a frequency distribution of double-valued sample
@@ -290,7 +291,7 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
-  toJSON(message: Distribution): unknown {
+  toJSON(message: Distribution): JsonSafe<Distribution> {
     const obj: any = {};
     message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
     message.mean !== undefined && (obj.mean = message.mean);
@@ -495,7 +496,7 @@ export const Distribution_LinearBuckets = {
       offset: isSet(object.offset) ? Number(object.offset) : 0
     };
   },
-  toJSON(message: Distribution_LinearBuckets): unknown {
+  toJSON(message: Distribution_LinearBuckets): JsonSafe<Distribution_LinearBuckets> {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.width !== undefined && (obj.width = message.width);
@@ -617,7 +618,7 @@ export const Distribution_ExponentialBuckets = {
       scale: isSet(object.scale) ? Number(object.scale) : 0
     };
   },
-  toJSON(message: Distribution_ExponentialBuckets): unknown {
+  toJSON(message: Distribution_ExponentialBuckets): JsonSafe<Distribution_ExponentialBuckets> {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.growthFactor !== undefined && (obj.growthFactor = message.growthFactor);
@@ -732,7 +733,7 @@ export const Distribution_ExplicitBuckets = {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
-  toJSON(message: Distribution_ExplicitBuckets): unknown {
+  toJSON(message: Distribution_ExplicitBuckets): JsonSafe<Distribution_ExplicitBuckets> {
     const obj: any = {};
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);

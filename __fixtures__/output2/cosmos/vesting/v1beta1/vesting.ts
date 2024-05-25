@@ -4,6 +4,7 @@ import { BaseAccount } from "../../auth/v1beta1/auth";
 import { Coin } from "../../base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
  * BaseVestingAccount implements the VestingAccount interface. It contains all
@@ -122,7 +123,7 @@ export const BaseVestingAccount = {
       endTime: isSet(object.endTime) ? Long.fromValue(object.endTime) : Long.ZERO
     };
   },
-  toJSON(message: BaseVestingAccount): unknown {
+  toJSON(message: BaseVestingAccount): JsonSafe<BaseVestingAccount> {
     const obj: any = {};
     message.baseAccount !== undefined && (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
     if (message.originalVesting) {
@@ -195,7 +196,7 @@ export const ContinuousVestingAccount = {
       startTime: isSet(object.startTime) ? Long.fromValue(object.startTime) : Long.ZERO
     };
   },
-  toJSON(message: ContinuousVestingAccount): unknown {
+  toJSON(message: ContinuousVestingAccount): JsonSafe<ContinuousVestingAccount> {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
@@ -242,7 +243,7 @@ export const DelayedVestingAccount = {
       baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined
     };
   },
-  toJSON(message: DelayedVestingAccount): unknown {
+  toJSON(message: DelayedVestingAccount): JsonSafe<DelayedVestingAccount> {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     return obj;
@@ -295,7 +296,7 @@ export const Period = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Period): unknown {
+  toJSON(message: Period): JsonSafe<Period> {
     const obj: any = {};
     message.length !== undefined && (obj.length = (message.length || Long.ZERO).toString());
     if (message.amount) {
@@ -362,7 +363,7 @@ export const PeriodicVestingAccount = {
       vestingPeriods: Array.isArray(object?.vestingPeriods) ? object.vestingPeriods.map((e: any) => Period.fromJSON(e)) : []
     };
   },
-  toJSON(message: PeriodicVestingAccount): unknown {
+  toJSON(message: PeriodicVestingAccount): JsonSafe<PeriodicVestingAccount> {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     message.startTime !== undefined && (obj.startTime = (message.startTime || Long.ZERO).toString());
@@ -415,7 +416,7 @@ export const PermanentLockedAccount = {
       baseVestingAccount: isSet(object.baseVestingAccount) ? BaseVestingAccount.fromJSON(object.baseVestingAccount) : undefined
     };
   },
-  toJSON(message: PermanentLockedAccount): unknown {
+  toJSON(message: PermanentLockedAccount): JsonSafe<PermanentLockedAccount> {
     const obj: any = {};
     message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
     return obj;

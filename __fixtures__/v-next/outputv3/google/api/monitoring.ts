@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -299,20 +298,6 @@ export const Monitoring = {
     if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
     return obj;
   },
-  toJSON(message: Monitoring): JsonSafe<Monitoring> {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producerDestinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
-    } else {
-      obj.producerDestinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
-    } else {
-      obj.consumerDestinations = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Monitoring>): Monitoring {
     const message = createBaseMonitoring();
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
@@ -413,16 +398,6 @@ export const Monitoring_MonitoringDestination = {
     const obj = createBaseMonitoring_MonitoringDestination();
     if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
     if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Monitoring_MonitoringDestination): JsonSafe<Monitoring_MonitoringDestination> {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {

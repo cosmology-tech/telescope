@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -342,15 +341,6 @@ export const Backend = {
     if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => BackendRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Backend): JsonSafe<Backend> {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? BackendRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Backend>): Backend {
     const message = createBaseBackend();
     message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
@@ -494,19 +484,6 @@ export const BackendRule = {
     if (isSet(object.jwtAudience)) obj.jwtAudience = String(object.jwtAudience);
     if (isSet(object.disableAuth)) obj.disableAuth = Boolean(object.disableAuth);
     if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    return obj;
-  },
-  toJSON(message: BackendRule): JsonSafe<BackendRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.address !== undefined && (obj.address = message.address);
-    message.deadline !== undefined && (obj.deadline = message.deadline);
-    message.minDeadline !== undefined && (obj.minDeadline = message.minDeadline);
-    message.operationDeadline !== undefined && (obj.operationDeadline = message.operationDeadline);
-    message.pathTranslation !== undefined && (obj.pathTranslation = backendRule_PathTranslationToJSON(message.pathTranslation));
-    message.jwtAudience !== undefined && (obj.jwtAudience = message.jwtAudience);
-    message.disableAuth !== undefined && (obj.disableAuth = message.disableAuth);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
   fromPartial(object: DeepPartial<BackendRule>): BackendRule {

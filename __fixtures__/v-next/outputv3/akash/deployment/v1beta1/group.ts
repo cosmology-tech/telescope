@@ -3,7 +3,6 @@ import { ResourceUnits, ResourceUnitsAmino, ResourceUnitsSDKType } from "../../b
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -265,11 +264,6 @@ export const MsgCloseGroup = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgCloseGroup): JsonSafe<MsgCloseGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     if (object.id !== undefined && object.id !== null) {
@@ -338,10 +332,6 @@ export const MsgCloseGroupResponse = {
     const obj = createBaseMsgCloseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgCloseGroupResponse): JsonSafe<MsgCloseGroupResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
@@ -407,11 +397,6 @@ export const MsgPauseGroup = {
   fromJSON(object: any): MsgPauseGroup {
     const obj = createBaseMsgPauseGroup();
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgPauseGroup): JsonSafe<MsgPauseGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
@@ -482,10 +467,6 @@ export const MsgPauseGroupResponse = {
     const obj = createBaseMsgPauseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgPauseGroupResponse): JsonSafe<MsgPauseGroupResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
@@ -551,11 +532,6 @@ export const MsgStartGroup = {
   fromJSON(object: any): MsgStartGroup {
     const obj = createBaseMsgStartGroup();
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgStartGroup): JsonSafe<MsgStartGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
@@ -624,10 +600,6 @@ export const MsgStartGroupResponse = {
   },
   fromJSON(_: any): MsgStartGroupResponse {
     const obj = createBaseMsgStartGroupResponse();
-    return obj;
-  },
-  toJSON(_: MsgStartGroupResponse): JsonSafe<MsgStartGroupResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
@@ -711,13 +683,6 @@ export const GroupID = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    return obj;
-  },
-  toJSON(message: GroupID): JsonSafe<GroupID> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
   fromPartial(object: DeepPartial<GroupID>): GroupID {
@@ -825,17 +790,6 @@ export const GroupSpec = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
     if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => Resource.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GroupSpec): JsonSafe<GroupSpec> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? Resource.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
@@ -959,14 +913,6 @@ export const Group = {
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
   },
-  toJSON(message: Group): JsonSafe<Group> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
-    message.state !== undefined && (obj.state = group_StateToJSON(message.state));
-    message.groupSpec !== undefined && (obj.groupSpec = message.groupSpec ? GroupSpec.toJSON(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Group>): Group {
     const message = createBaseGroup();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -1083,13 +1029,6 @@ export const Resource = {
     if (isSet(object.resources)) obj.resources = ResourceUnits.fromJSON(object.resources);
     if (isSet(object.count)) obj.count = Number(object.count);
     if (isSet(object.price)) obj.price = Coin.fromJSON(object.price);
-    return obj;
-  },
-  toJSON(message: Resource): JsonSafe<Resource> {
-    const obj: any = {};
-    message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toJSON(message.resources) : undefined);
-    message.count !== undefined && (obj.count = Math.round(message.count));
-    message.price !== undefined && (obj.price = message.price ? Coin.toJSON(message.price) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Resource>): Resource {

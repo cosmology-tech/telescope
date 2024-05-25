@@ -1,6 +1,5 @@
 import { Provider, ProviderAmino, ProviderSDKType } from "./provider";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
@@ -52,15 +51,6 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.providers) {
-      obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
-    } else {
-      obj.providers = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

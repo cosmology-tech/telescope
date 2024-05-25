@@ -5,7 +5,6 @@ import { LeaseFilters, LeaseFiltersAmino, LeaseFiltersSDKType, LeaseID, LeaseIDA
 import { Account, AccountAmino, AccountSDKType, FractionalPayment, FractionalPaymentAmino, FractionalPaymentSDKType } from "../../escrow/v1beta2/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
@@ -266,12 +265,6 @@ export const QueryOrdersRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryOrdersRequest): JsonSafe<QueryOrdersRequest> {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toJSON(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryOrdersRequest>): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
     if (object.filters !== undefined && object.filters !== null) {
@@ -366,16 +359,6 @@ export const QueryOrdersResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryOrdersResponse): JsonSafe<QueryOrdersResponse> {
-    const obj: any = {};
-    if (message.orders) {
-      obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);
-    } else {
-      obj.orders = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryOrdersResponse>): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
@@ -466,11 +449,6 @@ export const QueryOrderRequest = {
     if (isSet(object.id)) obj.id = OrderID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: QueryOrderRequest): JsonSafe<QueryOrderRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? OrderID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryOrderRequest>): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
     if (object.id !== undefined && object.id !== null) {
@@ -546,11 +524,6 @@ export const QueryOrderResponse = {
   fromJSON(object: any): QueryOrderResponse {
     const obj = createBaseQueryOrderResponse();
     if (isSet(object.order)) obj.order = Order.fromJSON(object.order);
-    return obj;
-  },
-  toJSON(message: QueryOrderResponse): JsonSafe<QueryOrderResponse> {
-    const obj: any = {};
-    message.order !== undefined && (obj.order = message.order ? Order.toJSON(message.order) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryOrderResponse>): QueryOrderResponse {
@@ -636,12 +609,6 @@ export const QueryBidsRequest = {
     const obj = createBaseQueryBidsRequest();
     if (isSet(object.filters)) obj.filters = BidFilters.fromJSON(object.filters);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryBidsRequest): JsonSafe<QueryBidsRequest> {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toJSON(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBidsRequest>): QueryBidsRequest {
@@ -738,16 +705,6 @@ export const QueryBidsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryBidsResponse): JsonSafe<QueryBidsResponse> {
-    const obj: any = {};
-    if (message.bids) {
-      obj.bids = message.bids.map(e => e ? QueryBidResponse.toJSON(e) : undefined);
-    } else {
-      obj.bids = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryBidsResponse>): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
@@ -838,11 +795,6 @@ export const QueryBidRequest = {
     if (isSet(object.id)) obj.id = BidID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: QueryBidRequest): JsonSafe<QueryBidRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? BidID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryBidRequest>): QueryBidRequest {
     const message = createBaseQueryBidRequest();
     if (object.id !== undefined && object.id !== null) {
@@ -926,12 +878,6 @@ export const QueryBidResponse = {
     const obj = createBaseQueryBidResponse();
     if (isSet(object.bid)) obj.bid = Bid.fromJSON(object.bid);
     if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
-    return obj;
-  },
-  toJSON(message: QueryBidResponse): JsonSafe<QueryBidResponse> {
-    const obj: any = {};
-    message.bid !== undefined && (obj.bid = message.bid ? Bid.toJSON(message.bid) : undefined);
-    message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBidResponse>): QueryBidResponse {
@@ -1028,12 +974,6 @@ export const QueryLeasesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryLeasesRequest): JsonSafe<QueryLeasesRequest> {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toJSON(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryLeasesRequest>): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
     if (object.filters !== undefined && object.filters !== null) {
@@ -1128,16 +1068,6 @@ export const QueryLeasesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryLeasesResponse): JsonSafe<QueryLeasesResponse> {
-    const obj: any = {};
-    if (message.leases) {
-      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toJSON(e) : undefined);
-    } else {
-      obj.leases = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryLeasesResponse>): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
@@ -1228,11 +1158,6 @@ export const QueryLeaseRequest = {
     if (isSet(object.id)) obj.id = LeaseID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: QueryLeaseRequest): JsonSafe<QueryLeaseRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? LeaseID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryLeaseRequest>): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
     if (object.id !== undefined && object.id !== null) {
@@ -1316,12 +1241,6 @@ export const QueryLeaseResponse = {
     const obj = createBaseQueryLeaseResponse();
     if (isSet(object.lease)) obj.lease = Lease.fromJSON(object.lease);
     if (isSet(object.escrowPayment)) obj.escrowPayment = FractionalPayment.fromJSON(object.escrowPayment);
-    return obj;
-  },
-  toJSON(message: QueryLeaseResponse): JsonSafe<QueryLeaseResponse> {
-    const obj: any = {};
-    message.lease !== undefined && (obj.lease = message.lease ? Lease.toJSON(message.lease) : undefined);
-    message.escrowPayment !== undefined && (obj.escrowPayment = message.escrowPayment ? FractionalPayment.toJSON(message.escrowPayment) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryLeaseResponse>): QueryLeaseResponse {

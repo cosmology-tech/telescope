@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -123,7 +124,7 @@ export const QueryAccountsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAccountsRequest): unknown {
+  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
     const obj: any = {};
     message.scope !== undefined && (obj.scope = message.scope);
     message.xid !== undefined && (obj.xid = message.xid);
@@ -202,7 +203,7 @@ export const QueryAccountsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAccountsResponse): unknown {
+  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);
@@ -309,7 +310,7 @@ export const QueryPaymentsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPaymentsRequest): unknown {
+  toJSON(message: QueryPaymentsRequest): JsonSafe<QueryPaymentsRequest> {
     const obj: any = {};
     message.scope !== undefined && (obj.scope = message.scope);
     message.xid !== undefined && (obj.xid = message.xid);
@@ -392,7 +393,7 @@ export const QueryPaymentsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPaymentsResponse): unknown {
+  toJSON(message: QueryPaymentsResponse): JsonSafe<QueryPaymentsResponse> {
     const obj: any = {};
     if (message.payments) {
       obj.payments = message.payments.map(e => e ? Payment.toJSON(e) : undefined);

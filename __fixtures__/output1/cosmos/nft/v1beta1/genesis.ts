@@ -1,5 +1,6 @@
 import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
@@ -67,7 +68,7 @@ export const GenesisState = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toJSON(e) : undefined);
@@ -150,7 +151,7 @@ export const Entry = {
       nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromJSON(e)) : []
     };
   },
-  toJSON(message: Entry): unknown {
+  toJSON(message: Entry): JsonSafe<Entry> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     if (message.nfts) {

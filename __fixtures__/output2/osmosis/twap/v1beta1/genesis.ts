@@ -4,6 +4,7 @@ import { Duration } from "../../../google/protobuf/duration";
 import { TwapRecord } from "./twap_record";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
@@ -59,7 +60,7 @@ export const Params = {
       recordHistoryKeepPeriod: isSet(object.recordHistoryKeepPeriod) ? Duration.fromJSON(object.recordHistoryKeepPeriod) : undefined
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.pruneEpochIdentifier !== undefined && (obj.pruneEpochIdentifier = message.pruneEpochIdentifier);
     message.recordHistoryKeepPeriod !== undefined && (obj.recordHistoryKeepPeriod = message.recordHistoryKeepPeriod ? Duration.toJSON(message.recordHistoryKeepPeriod) : undefined);
@@ -114,7 +115,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.twaps) {
       obj.twaps = message.twaps.map(e => e ? TwapRecord.toJSON(e) : undefined);

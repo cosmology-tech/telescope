@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
@@ -55,7 +56,7 @@ export const Node = {
       children: Array.isArray(object?.children) ? object.children.map((e: any) => Child.fromJSON(e)) : []
     };
   },
-  toJSON(message: Node): unknown {
+  toJSON(message: Node): JsonSafe<Node> {
     const obj: any = {};
     if (message.children) {
       obj.children = message.children.map(e => e ? Child.toJSON(e) : undefined);
@@ -126,7 +127,7 @@ export const Child = {
       accumulation: isSet(object.accumulation) ? String(object.accumulation) : ""
     };
   },
-  toJSON(message: Child): unknown {
+  toJSON(message: Child): JsonSafe<Child> {
     const obj: any = {};
     message.index !== undefined && (obj.index = base64FromBytes(message.index !== undefined ? message.index : new Uint8Array()));
     message.accumulation !== undefined && (obj.accumulation = message.accumulation);
@@ -185,7 +186,7 @@ export const Leaf = {
       leaf: isSet(object.leaf) ? Child.fromJSON(object.leaf) : undefined
     };
   },
-  toJSON(message: Leaf): unknown {
+  toJSON(message: Leaf): JsonSafe<Leaf> {
     const obj: any = {};
     message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toJSON(message.leaf) : undefined);
     return obj;

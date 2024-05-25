@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /**
  * ValidatorPreference defines the message structure for
@@ -99,7 +100,7 @@ export const ValidatorPreference = {
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
-  toJSON(message: ValidatorPreference): unknown {
+  toJSON(message: ValidatorPreference): JsonSafe<ValidatorPreference> {
     const obj: any = {};
     message.valOperAddress !== undefined && (obj.valOperAddress = message.valOperAddress);
     message.weight !== undefined && (obj.weight = message.weight);
@@ -202,7 +203,7 @@ export const ValidatorSetPreferences = {
       preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
     };
   },
-  toJSON(message: ValidatorSetPreferences): unknown {
+  toJSON(message: ValidatorSetPreferences): JsonSafe<ValidatorSetPreferences> {
     const obj: any = {};
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toJSON(e) : undefined);

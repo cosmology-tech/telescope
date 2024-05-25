@@ -2,7 +2,6 @@ import { Header, HeaderAmino, HeaderSDKType, Data, DataAmino, DataSDKType, Commi
 import { EvidenceList, EvidenceListAmino, EvidenceListSDKType } from "./evidence";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.types";
 export interface Block {
   header: Header;
@@ -83,14 +82,6 @@ export const Block = {
     if (isSet(object.data)) obj.data = Data.fromJSON(object.data);
     if (isSet(object.evidence)) obj.evidence = EvidenceList.fromJSON(object.evidence);
     if (isSet(object.lastCommit)) obj.lastCommit = Commit.fromJSON(object.lastCommit);
-    return obj;
-  },
-  toJSON(message: Block): JsonSafe<Block> {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    message.data !== undefined && (obj.data = message.data ? Data.toJSON(message.data) : undefined);
-    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toJSON(message.evidence) : undefined);
-    message.lastCommit !== undefined && (obj.lastCommit = message.lastCommit ? Commit.toJSON(message.lastCommit) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Block>): Block {

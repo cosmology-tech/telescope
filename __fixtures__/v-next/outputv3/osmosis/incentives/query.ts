@@ -3,7 +3,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Gauge, GaugeAmino, GaugeSDKType } from "./gauge";
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
@@ -344,10 +343,6 @@ export const ModuleToDistributeCoinsRequest = {
     const obj = createBaseModuleToDistributeCoinsRequest();
     return obj;
   },
-  toJSON(_: ModuleToDistributeCoinsRequest): JsonSafe<ModuleToDistributeCoinsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ModuleToDistributeCoinsRequest>): ModuleToDistributeCoinsRequest {
     const message = createBaseModuleToDistributeCoinsRequest();
     return message;
@@ -414,15 +409,6 @@ export const ModuleToDistributeCoinsResponse = {
   fromJSON(object: any): ModuleToDistributeCoinsResponse {
     const obj = createBaseModuleToDistributeCoinsResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ModuleToDistributeCoinsResponse): JsonSafe<ModuleToDistributeCoinsResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleToDistributeCoinsResponse>): ModuleToDistributeCoinsResponse {
@@ -507,11 +493,6 @@ export const GaugeByIDRequest = {
     if (isSet(object.id)) obj.id = BigInt(object.id.toString());
     return obj;
   },
-  toJSON(message: GaugeByIDRequest): JsonSafe<GaugeByIDRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GaugeByIDRequest>): GaugeByIDRequest {
     const message = createBaseGaugeByIDRequest();
     if (object.id !== undefined && object.id !== null) {
@@ -590,11 +571,6 @@ export const GaugeByIDResponse = {
     if (isSet(object.gauge)) obj.gauge = Gauge.fromJSON(object.gauge);
     return obj;
   },
-  toJSON(message: GaugeByIDResponse): JsonSafe<GaugeByIDResponse> {
-    const obj: any = {};
-    message.gauge !== undefined && (obj.gauge = message.gauge ? Gauge.toJSON(message.gauge) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GaugeByIDResponse>): GaugeByIDResponse {
     const message = createBaseGaugeByIDResponse();
     if (object.gauge !== undefined && object.gauge !== null) {
@@ -671,11 +647,6 @@ export const GaugesRequest = {
   fromJSON(object: any): GaugesRequest {
     const obj = createBaseGaugesRequest();
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: GaugesRequest): JsonSafe<GaugesRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GaugesRequest>): GaugesRequest {
@@ -762,16 +733,6 @@ export const GaugesResponse = {
     const obj = createBaseGaugesResponse();
     if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: GaugesResponse): JsonSafe<GaugesResponse> {
-    const obj: any = {};
-    if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GaugesResponse>): GaugesResponse {
@@ -865,11 +826,6 @@ export const ActiveGaugesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: ActiveGaugesRequest): JsonSafe<ActiveGaugesRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ActiveGaugesRequest>): ActiveGaugesRequest {
     const message = createBaseActiveGaugesRequest();
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -954,16 +910,6 @@ export const ActiveGaugesResponse = {
     const obj = createBaseActiveGaugesResponse();
     if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: ActiveGaugesResponse): JsonSafe<ActiveGaugesResponse> {
-    const obj: any = {};
-    if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ActiveGaugesResponse>): ActiveGaugesResponse {
@@ -1065,12 +1011,6 @@ export const ActiveGaugesPerDenomRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: ActiveGaugesPerDenomRequest): JsonSafe<ActiveGaugesPerDenomRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomRequest>): ActiveGaugesPerDenomRequest {
     const message = createBaseActiveGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
@@ -1164,16 +1104,6 @@ export const ActiveGaugesPerDenomResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: ActiveGaugesPerDenomResponse): JsonSafe<ActiveGaugesPerDenomResponse> {
-    const obj: any = {};
-    if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ActiveGaugesPerDenomResponse>): ActiveGaugesPerDenomResponse {
     const message = createBaseActiveGaugesPerDenomResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
@@ -1265,11 +1195,6 @@ export const UpcomingGaugesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: UpcomingGaugesRequest): JsonSafe<UpcomingGaugesRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpcomingGaugesRequest>): UpcomingGaugesRequest {
     const message = createBaseUpcomingGaugesRequest();
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -1354,16 +1279,6 @@ export const UpcomingGaugesResponse = {
     const obj = createBaseUpcomingGaugesResponse();
     if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: UpcomingGaugesResponse): JsonSafe<UpcomingGaugesResponse> {
-    const obj: any = {};
-    if (message.data) {
-      obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UpcomingGaugesResponse>): UpcomingGaugesResponse {
@@ -1465,12 +1380,6 @@ export const UpcomingGaugesPerDenomRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: UpcomingGaugesPerDenomRequest): JsonSafe<UpcomingGaugesPerDenomRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomRequest>): UpcomingGaugesPerDenomRequest {
     const message = createBaseUpcomingGaugesPerDenomRequest();
     message.denom = object.denom ?? "";
@@ -1562,16 +1471,6 @@ export const UpcomingGaugesPerDenomResponse = {
     const obj = createBaseUpcomingGaugesPerDenomResponse();
     if (Array.isArray(object?.upcomingGauges)) obj.upcomingGauges = object.upcomingGauges.map((e: any) => Gauge.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: UpcomingGaugesPerDenomResponse): JsonSafe<UpcomingGaugesPerDenomResponse> {
-    const obj: any = {};
-    if (message.upcomingGauges) {
-      obj.upcomingGauges = message.upcomingGauges.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.upcomingGauges = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UpcomingGaugesPerDenomResponse>): UpcomingGaugesPerDenomResponse {
@@ -1690,17 +1589,6 @@ export const RewardsEstRequest = {
     if (isSet(object.endEpoch)) obj.endEpoch = BigInt(object.endEpoch.toString());
     return obj;
   },
-  toJSON(message: RewardsEstRequest): JsonSafe<RewardsEstRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    if (message.lockIds) {
-      obj.lockIds = message.lockIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.lockIds = [];
-    }
-    message.endEpoch !== undefined && (obj.endEpoch = (message.endEpoch || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<RewardsEstRequest>): RewardsEstRequest {
     const message = createBaseRewardsEstRequest();
     message.owner = object.owner ?? "";
@@ -1799,15 +1687,6 @@ export const RewardsEstResponse = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: RewardsEstResponse): JsonSafe<RewardsEstResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<RewardsEstResponse>): RewardsEstResponse {
     const message = createBaseRewardsEstResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
@@ -1881,10 +1760,6 @@ export const QueryLockableDurationsRequest = {
     const obj = createBaseQueryLockableDurationsRequest();
     return obj;
   },
-  toJSON(_: QueryLockableDurationsRequest): JsonSafe<QueryLockableDurationsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
@@ -1951,15 +1826,6 @@ export const QueryLockableDurationsResponse = {
   fromJSON(object: any): QueryLockableDurationsResponse {
     const obj = createBaseQueryLockableDurationsResponse();
     if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryLockableDurationsResponse): JsonSafe<QueryLockableDurationsResponse> {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryLockableDurationsResponse>): QueryLockableDurationsResponse {

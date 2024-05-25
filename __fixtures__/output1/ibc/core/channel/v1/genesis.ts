@@ -1,6 +1,7 @@
 import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisState {
@@ -133,7 +134,7 @@ export const GenesisState = {
       nextChannelSequence: isSet(object.nextChannelSequence) ? Long.fromValue(object.nextChannelSequence) : Long.UZERO
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.channels) {
       obj.channels = message.channels.map(e => e ? IdentifiedChannel.toJSON(e) : undefined);
@@ -288,7 +289,7 @@ export const PacketSequence = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
-  toJSON(message: PacketSequence): unknown {
+  toJSON(message: PacketSequence): JsonSafe<PacketSequence> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);

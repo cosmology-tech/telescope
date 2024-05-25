@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressSDKType, Claim, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
@@ -166,7 +167,7 @@ export const QueryTotalUnclaimedRequest = {
   fromJSON(_: any): QueryTotalUnclaimedRequest {
     return {};
   },
-  toJSON(_: QueryTotalUnclaimedRequest): unknown {
+  toJSON(_: QueryTotalUnclaimedRequest): JsonSafe<QueryTotalUnclaimedRequest> {
     const obj: any = {};
     return obj;
   },
@@ -243,7 +244,7 @@ export const QueryTotalUnclaimedResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalUnclaimedResponse): unknown {
+  toJSON(message: QueryTotalUnclaimedResponse): JsonSafe<QueryTotalUnclaimedResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -331,7 +332,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -408,7 +409,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -496,7 +497,7 @@ export const QueryClaimsRecordsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClaimsRecordsRequest): unknown {
+  toJSON(message: QueryClaimsRecordsRequest): JsonSafe<QueryClaimsRecordsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -592,7 +593,7 @@ export const QueryClaimsRecordsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClaimsRecordsResponse): unknown {
+  toJSON(message: QueryClaimsRecordsResponse): JsonSafe<QueryClaimsRecordsResponse> {
     const obj: any = {};
     if (message.claims) {
       obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toJSON(e) : undefined);
@@ -699,7 +700,7 @@ export const QueryClaimsRecordRequest = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: QueryClaimsRecordRequest): unknown {
+  toJSON(message: QueryClaimsRecordRequest): JsonSafe<QueryClaimsRecordRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -795,7 +796,7 @@ export const QueryClaimsRecordResponse = {
       claims: Array.isArray(object?.claims) ? object.claims.map((e: any) => Claim.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryClaimsRecordResponse): unknown {
+  toJSON(message: QueryClaimsRecordResponse): JsonSafe<QueryClaimsRecordResponse> {
     const obj: any = {};
     message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
     if (message.claims) {

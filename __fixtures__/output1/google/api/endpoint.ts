@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -134,7 +135,7 @@ export const Endpoint = {
       allowCors: isSet(object.allowCors) ? Boolean(object.allowCors) : false
     };
   },
-  toJSON(message: Endpoint): unknown {
+  toJSON(message: Endpoint): JsonSafe<Endpoint> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.aliases) {

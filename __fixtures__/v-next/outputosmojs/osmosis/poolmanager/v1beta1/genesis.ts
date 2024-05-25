@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { ModuleRoute, ModuleRouteSDKType } from "./module_route";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** Params holds parameters for the poolmanager module */
@@ -69,7 +70,7 @@ export const Params = {
       poolCreationFee: Array.isArray(object?.poolCreationFee) ? object.poolCreationFee.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.poolCreationFee) {
       obj.poolCreationFee = message.poolCreationFee.map(e => e ? Coin.toJSON(e) : undefined);
@@ -189,7 +190,7 @@ export const GenesisState = {
       poolRoutes: Array.isArray(object?.poolRoutes) ? object.poolRoutes.map((e: any) => ModuleRoute.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.nextPoolId !== undefined && (obj.nextPoolId = (message.nextPoolId || BigInt(0)).toString());
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);

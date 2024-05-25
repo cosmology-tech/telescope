@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
@@ -218,17 +217,6 @@ export const HttpBody = {
     if (isSet(object.contentType)) obj.contentType = String(object.contentType);
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: HttpBody): JsonSafe<HttpBody> {
-    const obj: any = {};
-    message.contentType !== undefined && (obj.contentType = message.contentType);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<HttpBody>): HttpBody {

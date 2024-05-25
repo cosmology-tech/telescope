@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -155,14 +154,6 @@ export const BaseAccount = {
     if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
     return obj;
   },
-  toJSON(message: BaseAccount): JsonSafe<BaseAccount> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
-    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || BigInt(0)).toString());
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
@@ -281,17 +272,6 @@ export const ModuleAccount = {
     if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
     if (isSet(object.name)) obj.name = String(object.name);
     if (Array.isArray(object?.permissions)) obj.permissions = object.permissions.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ModuleAccount): JsonSafe<ModuleAccount> {
-    const obj: any = {};
-    message.baseAccount !== undefined && (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
-    message.name !== undefined && (obj.name = message.name);
-    if (message.permissions) {
-      obj.permissions = message.permissions.map(e => e);
-    } else {
-      obj.permissions = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
@@ -422,15 +402,6 @@ export const Params = {
     if (isSet(object.txSizeCostPerByte)) obj.txSizeCostPerByte = BigInt(object.txSizeCostPerByte.toString());
     if (isSet(object.sigVerifyCostEd25519)) obj.sigVerifyCostEd25519 = BigInt(object.sigVerifyCostEd25519.toString());
     if (isSet(object.sigVerifyCostSecp256k1)) obj.sigVerifyCostSecp256k1 = BigInt(object.sigVerifyCostSecp256k1.toString());
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || BigInt(0)).toString());
-    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || BigInt(0)).toString());
-    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || BigInt(0)).toString());
-    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || BigInt(0)).toString());
-    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
@@ -653,15 +652,6 @@ export const FieldMask = {
   fromJSON(object: any): FieldMask {
     const obj = createBaseFieldMask();
     if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: FieldMask): JsonSafe<FieldMask> {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<FieldMask>): FieldMask {

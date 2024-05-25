@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -307,11 +306,6 @@ export const DoubleValue = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: DoubleValue): JsonSafe<DoubleValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DoubleValue>): DoubleValue {
     const message = createBaseDoubleValue();
     message.value = object.value ?? 0;
@@ -387,11 +381,6 @@ export const FloatValue = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: FloatValue): JsonSafe<FloatValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<FloatValue>): FloatValue {
     const message = createBaseFloatValue();
     message.value = object.value ?? 0;
@@ -465,11 +454,6 @@ export const Int64Value = {
   fromJSON(object: any): Int64Value {
     const obj = createBaseInt64Value();
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: Int64Value): JsonSafe<Int64Value> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Int64Value>): Int64Value {
@@ -549,11 +533,6 @@ export const UInt64Value = {
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
-  toJSON(message: UInt64Value): JsonSafe<UInt64Value> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<UInt64Value>): UInt64Value {
     const message = createBaseUInt64Value();
     if (object.value !== undefined && object.value !== null) {
@@ -631,11 +610,6 @@ export const Int32Value = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: Int32Value): JsonSafe<Int32Value> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Int32Value>): Int32Value {
     const message = createBaseInt32Value();
     message.value = object.value ?? 0;
@@ -709,11 +683,6 @@ export const UInt32Value = {
   fromJSON(object: any): UInt32Value {
     const obj = createBaseUInt32Value();
     if (isSet(object.value)) obj.value = Number(object.value);
-    return obj;
-  },
-  toJSON(message: UInt32Value): JsonSafe<UInt32Value> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
   },
   fromPartial(object: DeepPartial<UInt32Value>): UInt32Value {
@@ -791,11 +760,6 @@ export const BoolValue = {
     if (isSet(object.value)) obj.value = Boolean(object.value);
     return obj;
   },
-  toJSON(message: BoolValue): JsonSafe<BoolValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<BoolValue>): BoolValue {
     const message = createBaseBoolValue();
     message.value = object.value ?? false;
@@ -871,11 +835,6 @@ export const StringValue = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: StringValue): JsonSafe<StringValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<StringValue>): StringValue {
     const message = createBaseStringValue();
     message.value = object.value ?? "";
@@ -949,11 +908,6 @@ export const BytesValue = {
   fromJSON(object: any): BytesValue {
     const obj = createBaseBytesValue();
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: BytesValue): JsonSafe<BytesValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<BytesValue>): BytesValue {

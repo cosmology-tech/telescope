@@ -3,7 +3,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
@@ -123,16 +122,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (Array.isArray(object?.claimsRecords)) obj.claimsRecords = object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.claimsRecords) {
-      obj.claimsRecords = message.claimsRecords.map(e => e ? ClaimsRecordAddress.toJSON(e) : undefined);
-    } else {
-      obj.claimsRecords = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -271,25 +260,6 @@ export const Params = {
     if (isSet(object.claimsDenom)) obj.claimsDenom = String(object.claimsDenom);
     if (Array.isArray(object?.authorizedChannels)) obj.authorizedChannels = object.authorizedChannels.map((e: any) => String(e));
     if (Array.isArray(object?.evmChannels)) obj.evmChannels = object.evmChannels.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.enableClaims !== undefined && (obj.enableClaims = message.enableClaims);
-    message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
-    message.claimsDenom !== undefined && (obj.claimsDenom = message.claimsDenom);
-    if (message.authorizedChannels) {
-      obj.authorizedChannels = message.authorizedChannels.map(e => e);
-    } else {
-      obj.authorizedChannels = [];
-    }
-    if (message.evmChannels) {
-      obj.evmChannels = message.evmChannels.map(e => e);
-    } else {
-      obj.evmChannels = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

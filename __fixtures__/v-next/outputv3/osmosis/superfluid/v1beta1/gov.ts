@@ -1,7 +1,6 @@
 import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType } from "../superfluid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -158,17 +157,6 @@ export const SetSuperfluidAssetsProposal = {
     if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
     return obj;
   },
-  toJSON(message: SetSuperfluidAssetsProposal): JsonSafe<SetSuperfluidAssetsProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.assets) {
-      obj.assets = message.assets.map(e => e ? SuperfluidAsset.toJSON(e) : undefined);
-    } else {
-      obj.assets = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<SetSuperfluidAssetsProposal>): SetSuperfluidAssetsProposal {
     const message = createBaseSetSuperfluidAssetsProposal();
     message.title = object.title ?? "";
@@ -280,17 +268,6 @@ export const RemoveSuperfluidAssetsProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.superfluidAssetDenoms)) obj.superfluidAssetDenoms = object.superfluidAssetDenoms.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: RemoveSuperfluidAssetsProposal): JsonSafe<RemoveSuperfluidAssetsProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.superfluidAssetDenoms) {
-      obj.superfluidAssetDenoms = message.superfluidAssetDenoms.map(e => e);
-    } else {
-      obj.superfluidAssetDenoms = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<RemoveSuperfluidAssetsProposal>): RemoveSuperfluidAssetsProposal {
@@ -421,18 +398,6 @@ export const UpdateUnpoolWhiteListProposal = {
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.ids)) obj.ids = object.ids.map((e: any) => BigInt(e.toString()));
     if (isSet(object.isOverwrite)) obj.isOverwrite = Boolean(object.isOverwrite);
-    return obj;
-  },
-  toJSON(message: UpdateUnpoolWhiteListProposal): JsonSafe<UpdateUnpoolWhiteListProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.ids) {
-      obj.ids = message.ids.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.ids = [];
-    }
-    message.isOverwrite !== undefined && (obj.isOverwrite = message.isOverwrite);
     return obj;
   },
   fromPartial(object: DeepPartial<UpdateUnpoolWhiteListProposal>): UpdateUnpoolWhiteListProposal {

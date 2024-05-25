@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface TickInfo {
   liquidityGross: string;
@@ -88,7 +89,7 @@ export const TickInfo = {
       uptimeTrackers: Array.isArray(object?.uptimeTrackers) ? object.uptimeTrackers.map((e: any) => UptimeTracker.fromJSON(e)) : []
     };
   },
-  toJSON(message: TickInfo): unknown {
+  toJSON(message: TickInfo): JsonSafe<TickInfo> {
     const obj: any = {};
     message.liquidityGross !== undefined && (obj.liquidityGross = message.liquidityGross);
     message.liquidityNet !== undefined && (obj.liquidityNet = message.liquidityNet);
@@ -229,7 +230,7 @@ export const UptimeTracker = {
       uptimeGrowthOutside: Array.isArray(object?.uptimeGrowthOutside) ? object.uptimeGrowthOutside.map((e: any) => DecCoin.fromJSON(e)) : []
     };
   },
-  toJSON(message: UptimeTracker): unknown {
+  toJSON(message: UptimeTracker): JsonSafe<UptimeTracker> {
     const obj: any = {};
     if (message.uptimeGrowthOutside) {
       obj.uptimeGrowthOutside = message.uptimeGrowthOutside.map(e => e ? DecCoin.toJSON(e) : undefined);

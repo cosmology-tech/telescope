@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -63,7 +64,7 @@ export const FeeToken = {
       poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
     };
   },
-  toJSON(message: FeeToken): unknown {
+  toJSON(message: FeeToken): JsonSafe<FeeToken> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());

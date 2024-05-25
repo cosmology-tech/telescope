@@ -1,6 +1,7 @@
 import { Plan, PlanSDKType } from "./upgrade";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
@@ -122,7 +123,7 @@ export const MsgSoftwareUpgrade = {
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
     };
   },
-  toJSON(message: MsgSoftwareUpgrade): unknown {
+  toJSON(message: MsgSoftwareUpgrade): JsonSafe<MsgSoftwareUpgrade> {
     const obj: any = {};
     message.authority !== undefined && (obj.authority = message.authority);
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
@@ -215,7 +216,7 @@ export const MsgSoftwareUpgradeResponse = {
   fromJSON(_: any): MsgSoftwareUpgradeResponse {
     return {};
   },
-  toJSON(_: MsgSoftwareUpgradeResponse): unknown {
+  toJSON(_: MsgSoftwareUpgradeResponse): JsonSafe<MsgSoftwareUpgradeResponse> {
     const obj: any = {};
     return obj;
   },
@@ -298,7 +299,7 @@ export const MsgCancelUpgrade = {
       authority: isSet(object.authority) ? String(object.authority) : ""
     };
   },
-  toJSON(message: MsgCancelUpgrade): unknown {
+  toJSON(message: MsgCancelUpgrade): JsonSafe<MsgCancelUpgrade> {
     const obj: any = {};
     message.authority !== undefined && (obj.authority = message.authority);
     return obj;
@@ -382,7 +383,7 @@ export const MsgCancelUpgradeResponse = {
   fromJSON(_: any): MsgCancelUpgradeResponse {
     return {};
   },
-  toJSON(_: MsgCancelUpgradeResponse): unknown {
+  toJSON(_: MsgCancelUpgradeResponse): JsonSafe<MsgCancelUpgradeResponse> {
     const obj: any = {};
     return obj;
   },

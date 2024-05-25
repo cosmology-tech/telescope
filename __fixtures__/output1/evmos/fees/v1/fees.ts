@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -75,7 +76,7 @@ export const DevFeeInfo = {
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : ""
     };
   },
-  toJSON(message: DevFeeInfo): unknown {
+  toJSON(message: DevFeeInfo): JsonSafe<DevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);

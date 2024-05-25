@@ -3,7 +3,6 @@ import { Service, ServiceAmino, ServiceSDKType } from "../../service";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicemanagement.v1";
 export enum GetServiceConfigRequest_ConfigView {
   /** BASIC - Server response includes all fields except SourceInfo. */
@@ -734,14 +733,6 @@ export const ListServicesRequest = {
     if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
     return obj;
   },
-  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
-    const obj: any = {};
-    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
     const message = createBaseListServicesRequest();
     message.producerProjectId = object.producerProjectId ?? "";
@@ -846,16 +837,6 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? ManagedService.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => ManagedService.fromPartial(e)) || [];
@@ -944,11 +925,6 @@ export const GetServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
     const message = createBaseGetServiceRequest();
     message.serviceName = object.serviceName ?? "";
@@ -1022,11 +998,6 @@ export const CreateServiceRequest = {
   fromJSON(object: any): CreateServiceRequest {
     const obj = createBaseCreateServiceRequest();
     if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: CreateServiceRequest): JsonSafe<CreateServiceRequest> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateServiceRequest>): CreateServiceRequest {
@@ -1106,11 +1077,6 @@ export const DeleteServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: DeleteServiceRequest): JsonSafe<DeleteServiceRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteServiceRequest>): DeleteServiceRequest {
     const message = createBaseDeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
@@ -1186,11 +1152,6 @@ export const UndeleteServiceRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: UndeleteServiceRequest): JsonSafe<UndeleteServiceRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UndeleteServiceRequest>): UndeleteServiceRequest {
     const message = createBaseUndeleteServiceRequest();
     message.serviceName = object.serviceName ?? "";
@@ -1264,11 +1225,6 @@ export const UndeleteServiceResponse = {
   fromJSON(object: any): UndeleteServiceResponse {
     const obj = createBaseUndeleteServiceResponse();
     if (isSet(object.service)) obj.service = ManagedService.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: UndeleteServiceResponse): JsonSafe<UndeleteServiceResponse> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? ManagedService.toJSON(message.service) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UndeleteServiceResponse>): UndeleteServiceResponse {
@@ -1362,13 +1318,6 @@ export const GetServiceConfigRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.configId)) obj.configId = String(object.configId);
     if (isSet(object.view)) obj.view = getServiceConfigRequest_ConfigViewFromJSON(object.view);
-    return obj;
-  },
-  toJSON(message: GetServiceConfigRequest): JsonSafe<GetServiceConfigRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.configId !== undefined && (obj.configId = message.configId);
-    message.view !== undefined && (obj.view = getServiceConfigRequest_ConfigViewToJSON(message.view));
     return obj;
   },
   fromPartial(object: DeepPartial<GetServiceConfigRequest>): GetServiceConfigRequest {
@@ -1476,13 +1425,6 @@ export const ListServiceConfigsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListServiceConfigsRequest): JsonSafe<ListServiceConfigsRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServiceConfigsRequest>): ListServiceConfigsRequest {
     const message = createBaseListServiceConfigsRequest();
     message.serviceName = object.serviceName ?? "";
@@ -1580,16 +1522,6 @@ export const ListServiceConfigsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServiceConfigsResponse): JsonSafe<ListServiceConfigsResponse> {
-    const obj: any = {};
-    if (message.serviceConfigs) {
-      obj.serviceConfigs = message.serviceConfigs.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.serviceConfigs = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServiceConfigsResponse>): ListServiceConfigsResponse {
     const message = createBaseListServiceConfigsResponse();
     message.serviceConfigs = object.serviceConfigs?.map(e => Service.fromPartial(e)) || [];
@@ -1684,12 +1616,6 @@ export const CreateServiceConfigRequest = {
     const obj = createBaseCreateServiceConfigRequest();
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
-    return obj;
-  },
-  toJSON(message: CreateServiceConfigRequest): JsonSafe<CreateServiceConfigRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateServiceConfigRequest>): CreateServiceConfigRequest {
@@ -1792,13 +1718,6 @@ export const SubmitConfigSourceRequest = {
     if (isSet(object.validateOnly)) obj.validateOnly = Boolean(object.validateOnly);
     return obj;
   },
-  toJSON(message: SubmitConfigSourceRequest): JsonSafe<SubmitConfigSourceRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.configSource !== undefined && (obj.configSource = message.configSource ? ConfigSource.toJSON(message.configSource) : undefined);
-    message.validateOnly !== undefined && (obj.validateOnly = message.validateOnly);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SubmitConfigSourceRequest>): SubmitConfigSourceRequest {
     const message = createBaseSubmitConfigSourceRequest();
     message.serviceName = object.serviceName ?? "";
@@ -1890,11 +1809,6 @@ export const SubmitConfigSourceResponse = {
     if (isSet(object.serviceConfig)) obj.serviceConfig = Service.fromJSON(object.serviceConfig);
     return obj;
   },
-  toJSON(message: SubmitConfigSourceResponse): JsonSafe<SubmitConfigSourceResponse> {
-    const obj: any = {};
-    message.serviceConfig !== undefined && (obj.serviceConfig = message.serviceConfig ? Service.toJSON(message.serviceConfig) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SubmitConfigSourceResponse>): SubmitConfigSourceResponse {
     const message = createBaseSubmitConfigSourceResponse();
     if (object.serviceConfig !== undefined && object.serviceConfig !== null) {
@@ -1978,12 +1892,6 @@ export const CreateServiceRolloutRequest = {
     const obj = createBaseCreateServiceRolloutRequest();
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (isSet(object.rollout)) obj.rollout = Rollout.fromJSON(object.rollout);
-    return obj;
-  },
-  toJSON(message: CreateServiceRolloutRequest): JsonSafe<CreateServiceRolloutRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.rollout !== undefined && (obj.rollout = message.rollout ? Rollout.toJSON(message.rollout) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateServiceRolloutRequest>): CreateServiceRolloutRequest {
@@ -2094,14 +2002,6 @@ export const ListServiceRolloutsRequest = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     return obj;
   },
-  toJSON(message: ListServiceRolloutsRequest): JsonSafe<ListServiceRolloutsRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.filter !== undefined && (obj.filter = message.filter);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServiceRolloutsRequest>): ListServiceRolloutsRequest {
     const message = createBaseListServiceRolloutsRequest();
     message.serviceName = object.serviceName ?? "";
@@ -2206,16 +2106,6 @@ export const ListServiceRolloutsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServiceRolloutsResponse): JsonSafe<ListServiceRolloutsResponse> {
-    const obj: any = {};
-    if (message.rollouts) {
-      obj.rollouts = message.rollouts.map(e => e ? Rollout.toJSON(e) : undefined);
-    } else {
-      obj.rollouts = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServiceRolloutsResponse>): ListServiceRolloutsResponse {
     const message = createBaseListServiceRolloutsResponse();
     message.rollouts = object.rollouts?.map(e => Rollout.fromPartial(e)) || [];
@@ -2312,12 +2202,6 @@ export const GetServiceRolloutRequest = {
     if (isSet(object.rolloutId)) obj.rolloutId = String(object.rolloutId);
     return obj;
   },
-  toJSON(message: GetServiceRolloutRequest): JsonSafe<GetServiceRolloutRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.rolloutId !== undefined && (obj.rolloutId = message.rolloutId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetServiceRolloutRequest>): GetServiceRolloutRequest {
     const message = createBaseGetServiceRolloutRequest();
     message.serviceName = object.serviceName ?? "";
@@ -2406,12 +2290,6 @@ export const GenerateConfigReportRequest = {
     const obj = createBaseGenerateConfigReportRequest();
     if (isSet(object.newConfig)) obj.newConfig = Any.fromJSON(object.newConfig);
     if (isSet(object.oldConfig)) obj.oldConfig = Any.fromJSON(object.oldConfig);
-    return obj;
-  },
-  toJSON(message: GenerateConfigReportRequest): JsonSafe<GenerateConfigReportRequest> {
-    const obj: any = {};
-    message.newConfig !== undefined && (obj.newConfig = message.newConfig ? Any.toJSON(message.newConfig) : undefined);
-    message.oldConfig !== undefined && (obj.oldConfig = message.oldConfig ? Any.toJSON(message.oldConfig) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenerateConfigReportRequest>): GenerateConfigReportRequest {
@@ -2522,22 +2400,6 @@ export const GenerateConfigReportResponse = {
     if (isSet(object.id)) obj.id = String(object.id);
     if (Array.isArray(object?.changeReports)) obj.changeReports = object.changeReports.map((e: any) => ChangeReport.fromJSON(e));
     if (Array.isArray(object?.diagnostics)) obj.diagnostics = object.diagnostics.map((e: any) => Diagnostic.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenerateConfigReportResponse): JsonSafe<GenerateConfigReportResponse> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.id !== undefined && (obj.id = message.id);
-    if (message.changeReports) {
-      obj.changeReports = message.changeReports.map(e => e ? ChangeReport.toJSON(e) : undefined);
-    } else {
-      obj.changeReports = [];
-    }
-    if (message.diagnostics) {
-      obj.diagnostics = message.diagnostics.map(e => e ? Diagnostic.toJSON(e) : undefined);
-    } else {
-      obj.diagnostics = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenerateConfigReportResponse>): GenerateConfigReportResponse {

@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -92,13 +91,6 @@ export const Params = {
     if (isSet(object.inflationDecayFactor)) obj.inflationDecayFactor = String(object.inflationDecayFactor);
     if (isSet(object.initialInflation)) obj.initialInflation = String(object.initialInflation);
     if (isSet(object.variance)) obj.variance = String(object.variance);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.inflationDecayFactor !== undefined && (obj.inflationDecayFactor = message.inflationDecayFactor);
-    message.initialInflation !== undefined && (obj.initialInflation = message.initialInflation);
-    message.variance !== undefined && (obj.variance = message.variance);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

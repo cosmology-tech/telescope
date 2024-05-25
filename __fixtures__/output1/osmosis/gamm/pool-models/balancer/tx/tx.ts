@@ -1,6 +1,7 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
 import { Long, isSet, DeepPartial } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -82,7 +83,7 @@ export const MsgCreateBalancerPool = {
       futurePoolGovernor: isSet(object.futurePoolGovernor) ? String(object.futurePoolGovernor) : ""
     };
   },
-  toJSON(message: MsgCreateBalancerPool): unknown {
+  toJSON(message: MsgCreateBalancerPool): JsonSafe<MsgCreateBalancerPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
@@ -157,7 +158,7 @@ export const MsgCreateBalancerPoolResponse = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: MsgCreateBalancerPoolResponse): unknown {
+  toJSON(message: MsgCreateBalancerPoolResponse): JsonSafe<MsgCreateBalancerPoolResponse> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;

@@ -4,6 +4,7 @@ import { ExprValue, ExprValueSDKType } from "../../v1alpha1/eval";
 import { Status, StatusSDKType } from "../../../../rpc/status";
 import { Long, isSet, DeepPartial, isObject } from "../../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -258,7 +259,7 @@ export const ParseRequest = {
       disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
     };
   },
-  toJSON(message: ParseRequest): unknown {
+  toJSON(message: ParseRequest): JsonSafe<ParseRequest> {
     const obj: any = {};
     message.celSource !== undefined && (obj.celSource = message.celSource);
     message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
@@ -333,7 +334,7 @@ export const ParseResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
     };
   },
-  toJSON(message: ParseResponse): unknown {
+  toJSON(message: ParseResponse): JsonSafe<ParseResponse> {
     const obj: any = {};
     message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
     if (message.issues) {
@@ -424,7 +425,7 @@ export const CheckRequest = {
       noStdEnv: isSet(object.noStdEnv) ? Boolean(object.noStdEnv) : false
     };
   },
-  toJSON(message: CheckRequest): unknown {
+  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
     const obj: any = {};
     message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
     if (message.typeEnv) {
@@ -507,7 +508,7 @@ export const CheckResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
     };
   },
-  toJSON(message: CheckResponse): unknown {
+  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
     const obj: any = {};
     message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
     if (message.issues) {
@@ -582,7 +583,7 @@ export const EvalRequest_BindingsEntry = {
       value: isSet(object.value) ? ExprValue.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: EvalRequest_BindingsEntry): unknown {
+  toJSON(message: EvalRequest_BindingsEntry): JsonSafe<EvalRequest_BindingsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
@@ -676,7 +677,7 @@ export const EvalRequest = {
       container: isSet(object.container) ? String(object.container) : ""
     };
   },
-  toJSON(message: EvalRequest): unknown {
+  toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
     const obj: any = {};
     message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
     message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
@@ -773,7 +774,7 @@ export const EvalResponse = {
       issues: Array.isArray(object?.issues) ? object.issues.map((e: any) => Status.fromJSON(e)) : []
     };
   },
-  toJSON(message: EvalResponse): unknown {
+  toJSON(message: EvalResponse): JsonSafe<EvalResponse> {
     const obj: any = {};
     message.result !== undefined && (obj.result = message.result ? ExprValue.toJSON(message.result) : undefined);
     if (message.issues) {
@@ -856,7 +857,7 @@ export const IssueDetails = {
       id: isSet(object.id) ? Long.fromValue(object.id) : Long.ZERO
     };
   },
-  toJSON(message: IssueDetails): unknown {
+  toJSON(message: IssueDetails): JsonSafe<IssueDetails> {
     const obj: any = {};
     message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
     message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);

@@ -4,6 +4,7 @@ import { Coin } from "../../../../cosmos/base/v1beta1/coin";
 import { Height } from "../../../core/client/v1/client";
 import { Long, isSet, DeepPartial, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * MsgTransfer defines a msg to transfer fungible tokens (i.e Coins) between
@@ -116,7 +117,7 @@ export const MsgTransfer = {
       timeoutTimestamp: isSet(object.timeoutTimestamp) ? Long.fromValue(object.timeoutTimestamp) : Long.UZERO
     };
   },
-  toJSON(message: MsgTransfer): unknown {
+  toJSON(message: MsgTransfer): JsonSafe<MsgTransfer> {
     const obj: any = {};
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
@@ -163,7 +164,7 @@ export const MsgTransferResponse = {
   fromJSON(_: any): MsgTransferResponse {
     return {};
   },
-  toJSON(_: MsgTransferResponse): unknown {
+  toJSON(_: MsgTransferResponse): JsonSafe<MsgTransferResponse> {
     const obj: any = {};
     return obj;
   },

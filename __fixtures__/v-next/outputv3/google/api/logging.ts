@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -226,20 +225,6 @@ export const Logging = {
     if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
     return obj;
   },
-  toJSON(message: Logging): JsonSafe<Logging> {
-    const obj: any = {};
-    if (message.producerDestinations) {
-      obj.producerDestinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
-    } else {
-      obj.producerDestinations = [];
-    }
-    if (message.consumerDestinations) {
-      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
-    } else {
-      obj.consumerDestinations = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Logging>): Logging {
     const message = createBaseLogging();
     message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
@@ -340,16 +325,6 @@ export const Logging_LoggingDestination = {
     const obj = createBaseLogging_LoggingDestination();
     if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
     if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Logging_LoggingDestination): JsonSafe<Logging_LoggingDestination> {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e);
-    } else {
-      obj.logs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {

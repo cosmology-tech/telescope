@@ -5,6 +5,7 @@ import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp } from "../../protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -303,7 +304,7 @@ export const LogMetric_LabelExtractorsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: LogMetric_LabelExtractorsEntry): unknown {
+  toJSON(message: LogMetric_LabelExtractorsEntry): JsonSafe<LogMetric_LabelExtractorsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -441,7 +442,7 @@ export const LogMetric = {
       version: isSet(object.version) ? logMetric_ApiVersionFromJSON(object.version) : -1
     };
   },
-  toJSON(message: LogMetric): unknown {
+  toJSON(message: LogMetric): JsonSafe<LogMetric> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -534,7 +535,7 @@ export const ListLogMetricsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-  toJSON(message: ListLogMetricsRequest): unknown {
+  toJSON(message: ListLogMetricsRequest): JsonSafe<ListLogMetricsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -591,7 +592,7 @@ export const ListLogMetricsResponse = {
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-  toJSON(message: ListLogMetricsResponse): unknown {
+  toJSON(message: ListLogMetricsResponse): JsonSafe<ListLogMetricsResponse> {
     const obj: any = {};
     if (message.metrics) {
       obj.metrics = message.metrics.map(e => e ? LogMetric.toJSON(e) : undefined);
@@ -642,7 +643,7 @@ export const GetLogMetricRequest = {
       metricName: isSet(object.metricName) ? String(object.metricName) : ""
     };
   },
-  toJSON(message: GetLogMetricRequest): unknown {
+  toJSON(message: GetLogMetricRequest): JsonSafe<GetLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;
@@ -695,7 +696,7 @@ export const CreateLogMetricRequest = {
       metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
     };
   },
-  toJSON(message: CreateLogMetricRequest): unknown {
+  toJSON(message: CreateLogMetricRequest): JsonSafe<CreateLogMetricRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
@@ -750,7 +751,7 @@ export const UpdateLogMetricRequest = {
       metric: isSet(object.metric) ? LogMetric.fromJSON(object.metric) : undefined
     };
   },
-  toJSON(message: UpdateLogMetricRequest): unknown {
+  toJSON(message: UpdateLogMetricRequest): JsonSafe<UpdateLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
@@ -797,7 +798,7 @@ export const DeleteLogMetricRequest = {
       metricName: isSet(object.metricName) ? String(object.metricName) : ""
     };
   },
-  toJSON(message: DeleteLogMetricRequest): unknown {
+  toJSON(message: DeleteLogMetricRequest): JsonSafe<DeleteLogMetricRequest> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;

@@ -3,7 +3,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { Params, ParamsAmino, ParamsSDKType, BaseAccount, BaseAccountProtoMsg, BaseAccountSDKType, ModuleAccount, ModuleAccountProtoMsg, ModuleAccountSDKType } from "./auth";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -295,11 +294,6 @@ export const QueryAccountsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -384,16 +378,6 @@ export const QueryAccountsResponse = {
     const obj = createBaseQueryAccountsResponse();
     if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
@@ -487,11 +471,6 @@ export const QueryAccountRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryAccountRequest): JsonSafe<QueryAccountRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAccountRequest>): QueryAccountRequest {
     const message = createBaseQueryAccountRequest();
     message.address = object.address ?? "";
@@ -557,10 +536,6 @@ export const QueryModuleAccountsRequest = {
   },
   fromJSON(_: any): QueryModuleAccountsRequest {
     const obj = createBaseQueryModuleAccountsRequest();
-    return obj;
-  },
-  toJSON(_: QueryModuleAccountsRequest): JsonSafe<QueryModuleAccountsRequest> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<QueryModuleAccountsRequest>): QueryModuleAccountsRequest {
@@ -629,11 +604,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -714,11 +684,6 @@ export const QueryAccountResponse = {
     if (isSet(object.account)) obj.account = Any.fromJSON(object.account);
     return obj;
   },
-  toJSON(message: QueryAccountResponse): JsonSafe<QueryAccountResponse> {
-    const obj: any = {};
-    message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAccountResponse>): QueryAccountResponse {
     const message = createBaseQueryAccountResponse();
     if (object.account !== undefined && object.account !== null) {
@@ -788,10 +753,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -858,15 +819,6 @@ export const QueryModuleAccountsResponse = {
   fromJSON(object: any): QueryModuleAccountsResponse {
     const obj = createBaseQueryModuleAccountsResponse();
     if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryModuleAccountsResponse): JsonSafe<QueryModuleAccountsResponse> {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryModuleAccountsResponse>): QueryModuleAccountsResponse {
@@ -942,10 +894,6 @@ export const Bech32PrefixRequest = {
     const obj = createBaseBech32PrefixRequest();
     return obj;
   },
-  toJSON(_: Bech32PrefixRequest): JsonSafe<Bech32PrefixRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<Bech32PrefixRequest>): Bech32PrefixRequest {
     const message = createBaseBech32PrefixRequest();
     return message;
@@ -1012,11 +960,6 @@ export const Bech32PrefixResponse = {
   fromJSON(object: any): Bech32PrefixResponse {
     const obj = createBaseBech32PrefixResponse();
     if (isSet(object.bech32Prefix)) obj.bech32Prefix = String(object.bech32Prefix);
-    return obj;
-  },
-  toJSON(message: Bech32PrefixResponse): JsonSafe<Bech32PrefixResponse> {
-    const obj: any = {};
-    message.bech32Prefix !== undefined && (obj.bech32Prefix = message.bech32Prefix);
     return obj;
   },
   fromPartial(object: DeepPartial<Bech32PrefixResponse>): Bech32PrefixResponse {
@@ -1095,11 +1038,6 @@ export const AddressBytesToStringRequest = {
     if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
     return obj;
   },
-  toJSON(message: AddressBytesToStringRequest): JsonSafe<AddressBytesToStringRequest> {
-    const obj: any = {};
-    message.addressBytes !== undefined && (obj.addressBytes = base64FromBytes(message.addressBytes !== undefined ? message.addressBytes : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<AddressBytesToStringRequest>): AddressBytesToStringRequest {
     const message = createBaseAddressBytesToStringRequest();
     message.addressBytes = object.addressBytes ?? new Uint8Array();
@@ -1174,11 +1112,6 @@ export const AddressBytesToStringResponse = {
   fromJSON(object: any): AddressBytesToStringResponse {
     const obj = createBaseAddressBytesToStringResponse();
     if (isSet(object.addressString)) obj.addressString = String(object.addressString);
-    return obj;
-  },
-  toJSON(message: AddressBytesToStringResponse): JsonSafe<AddressBytesToStringResponse> {
-    const obj: any = {};
-    message.addressString !== undefined && (obj.addressString = message.addressString);
     return obj;
   },
   fromPartial(object: DeepPartial<AddressBytesToStringResponse>): AddressBytesToStringResponse {
@@ -1257,11 +1190,6 @@ export const AddressStringToBytesRequest = {
     if (isSet(object.addressString)) obj.addressString = String(object.addressString);
     return obj;
   },
-  toJSON(message: AddressStringToBytesRequest): JsonSafe<AddressStringToBytesRequest> {
-    const obj: any = {};
-    message.addressString !== undefined && (obj.addressString = message.addressString);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AddressStringToBytesRequest>): AddressStringToBytesRequest {
     const message = createBaseAddressStringToBytesRequest();
     message.addressString = object.addressString ?? "";
@@ -1336,11 +1264,6 @@ export const AddressStringToBytesResponse = {
   fromJSON(object: any): AddressStringToBytesResponse {
     const obj = createBaseAddressStringToBytesResponse();
     if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
-    return obj;
-  },
-  toJSON(message: AddressStringToBytesResponse): JsonSafe<AddressStringToBytesResponse> {
-    const obj: any = {};
-    message.addressBytes !== undefined && (obj.addressBytes = base64FromBytes(message.addressBytes !== undefined ? message.addressBytes : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<AddressStringToBytesResponse>): AddressStringToBytesResponse {

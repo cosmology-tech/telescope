@@ -25,3 +25,4 @@ export * from "./hooks";
 export * from "./contracts";
 export * from "./extern";
 export * from "./react-query";
+export * from "./json-safe";

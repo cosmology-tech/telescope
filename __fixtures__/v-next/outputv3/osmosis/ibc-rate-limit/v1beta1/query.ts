@@ -1,6 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -56,10 +55,6 @@ export const QueryParamsRequest = {
   },
   fromJSON(_: any): QueryParamsRequest {
     const obj = createBaseQueryParamsRequest();
-    return obj;
-  },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
@@ -128,11 +123,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {

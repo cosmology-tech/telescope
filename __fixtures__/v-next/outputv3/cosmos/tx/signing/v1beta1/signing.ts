@@ -1,7 +1,6 @@
 import { CompactBitArray, CompactBitArrayAmino, CompactBitArraySDKType } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
 /**
@@ -261,15 +260,6 @@ export const SignatureDescriptors = {
     if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e));
     return obj;
   },
-  toJSON(message: SignatureDescriptors): JsonSafe<SignatureDescriptors> {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<SignatureDescriptors>): SignatureDescriptors {
     const message = createBaseSignatureDescriptors();
     message.signatures = object.signatures?.map(e => SignatureDescriptor.fromPartial(e)) || [];
@@ -366,13 +356,6 @@ export const SignatureDescriptor = {
     if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
     if (isSet(object.data)) obj.data = SignatureDescriptor_Data.fromJSON(object.data);
     if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor): JsonSafe<SignatureDescriptor> {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
-    message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<SignatureDescriptor>): SignatureDescriptor {
@@ -479,12 +462,6 @@ export const SignatureDescriptor_Data = {
     if (isSet(object.multi)) obj.multi = SignatureDescriptor_Data_Multi.fromJSON(object.multi);
     return obj;
   },
-  toJSON(message: SignatureDescriptor_Data): JsonSafe<SignatureDescriptor_Data> {
-    const obj: any = {};
-    message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toJSON(message.single) : undefined);
-    message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toJSON(message.multi) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data>): SignatureDescriptor_Data {
     const message = createBaseSignatureDescriptor_Data();
     if (object.single !== undefined && object.single !== null) {
@@ -580,12 +557,6 @@ export const SignatureDescriptor_Data_Single = {
     if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
     return obj;
   },
-  toJSON(message: SignatureDescriptor_Data_Single): JsonSafe<SignatureDescriptor_Data_Single> {
-    const obj: any = {};
-    message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Single>): SignatureDescriptor_Data_Single {
     const message = createBaseSignatureDescriptor_Data_Single();
     message.mode = object.mode ?? 0;
@@ -675,16 +646,6 @@ export const SignatureDescriptor_Data_Multi = {
     const obj = createBaseSignatureDescriptor_Data_Multi();
     if (isSet(object.bitarray)) obj.bitarray = CompactBitArray.fromJSON(object.bitarray);
     if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => SignatureDescriptor_Data.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SignatureDescriptor_Data_Multi): JsonSafe<SignatureDescriptor_Data_Multi> {
-    const obj: any = {};
-    message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => e ? SignatureDescriptor_Data.toJSON(e) : undefined);
-    } else {
-      obj.signatures = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SignatureDescriptor_Data_Multi>): SignatureDescriptor_Data_Multi {

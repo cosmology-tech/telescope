@@ -2,6 +2,7 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
@@ -141,7 +142,7 @@ export const IncentiveRecord = {
       minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
     };
   },
-  toJSON(message: IncentiveRecord): unknown {
+  toJSON(message: IncentiveRecord): JsonSafe<IncentiveRecord> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.incentiveDenom !== undefined && (obj.incentiveDenom = message.incentiveDenom);
@@ -287,7 +288,7 @@ export const IncentiveRecordBody = {
       startTime: isSet(object.startTime) ? new Date(object.startTime) : undefined
     };
   },
-  toJSON(message: IncentiveRecordBody): unknown {
+  toJSON(message: IncentiveRecordBody): JsonSafe<IncentiveRecordBody> {
     const obj: any = {};
     message.remainingAmount !== undefined && (obj.remainingAmount = message.remainingAmount);
     message.emissionRate !== undefined && (obj.emissionRate = message.emissionRate);

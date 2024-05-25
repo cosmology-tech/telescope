@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Period, PeriodAmino, PeriodSDKType } from "../../../cosmos/vesting/v1beta1/vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.vesting.v1";
 /** MsgCreateClawbackVestingAccount defines a message that enables creating a ClawbackVestingAccount. */
 export interface MsgCreateClawbackVestingAccount {
@@ -214,24 +213,6 @@ export const MsgCreateClawbackVestingAccount = {
     if (isSet(object.merge)) obj.merge = Boolean(object.merge);
     return obj;
   },
-  toJSON(message: MsgCreateClawbackVestingAccount): JsonSafe<MsgCreateClawbackVestingAccount> {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    if (message.lockupPeriods) {
-      obj.lockupPeriods = message.lockupPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.lockupPeriods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.vestingPeriods = [];
-    }
-    message.merge !== undefined && (obj.merge = message.merge);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateClawbackVestingAccount>): MsgCreateClawbackVestingAccount {
     const message = createBaseMsgCreateClawbackVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
@@ -345,10 +326,6 @@ export const MsgCreateClawbackVestingAccountResponse = {
     const obj = createBaseMsgCreateClawbackVestingAccountResponse();
     return obj;
   },
-  toJSON(_: MsgCreateClawbackVestingAccountResponse): JsonSafe<MsgCreateClawbackVestingAccountResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateClawbackVestingAccountResponse>): MsgCreateClawbackVestingAccountResponse {
     const message = createBaseMsgCreateClawbackVestingAccountResponse();
     return message;
@@ -432,13 +409,6 @@ export const MsgClawback = {
     if (isSet(object.destAddress)) obj.destAddress = String(object.destAddress);
     return obj;
   },
-  toJSON(message: MsgClawback): JsonSafe<MsgClawback> {
-    const obj: any = {};
-    message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);
-    message.accountAddress !== undefined && (obj.accountAddress = message.accountAddress);
-    message.destAddress !== undefined && (obj.destAddress = message.destAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgClawback>): MsgClawback {
     const message = createBaseMsgClawback();
     message.funderAddress = object.funderAddress ?? "";
@@ -517,10 +487,6 @@ export const MsgClawbackResponse = {
   },
   fromJSON(_: any): MsgClawbackResponse {
     const obj = createBaseMsgClawbackResponse();
-    return obj;
-  },
-  toJSON(_: MsgClawbackResponse): JsonSafe<MsgClawbackResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgClawbackResponse>): MsgClawbackResponse {

@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -208,15 +207,6 @@ export const Billing = {
     if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e));
     return obj;
   },
-  toJSON(message: Billing): JsonSafe<Billing> {
-    const obj: any = {};
-    if (message.consumerDestinations) {
-      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toJSON(e) : undefined);
-    } else {
-      obj.consumerDestinations = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Billing>): Billing {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
@@ -304,16 +294,6 @@ export const Billing_BillingDestination = {
     const obj = createBaseBilling_BillingDestination();
     if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
     if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Billing_BillingDestination): JsonSafe<Billing_BillingDestination> {
-    const obj: any = {};
-    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e);
-    } else {
-      obj.metrics = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Billing_BillingDestination>): Billing_BillingDestination {

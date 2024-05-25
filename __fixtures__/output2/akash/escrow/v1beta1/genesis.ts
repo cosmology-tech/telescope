@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Account, Payment } from "./types";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** GenesisState defines the basic genesis state used by escrow module */
@@ -51,7 +52,7 @@ export const GenesisState = {
       payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => Payment.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);

@@ -2,7 +2,6 @@ import { OrderID, OrderIDAmino, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of bid */
 export enum Bid_State {
@@ -273,14 +272,6 @@ export const MsgCreateBid = {
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     return obj;
   },
-  toJSON(message: MsgCreateBid): JsonSafe<MsgCreateBid> {
-    const obj: any = {};
-    message.order !== undefined && (obj.order = message.order ? OrderID.toJSON(message.order) : undefined);
-    message.provider !== undefined && (obj.provider = message.provider);
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateBid>): MsgCreateBid {
     const message = createBaseMsgCreateBid();
     if (object.order !== undefined && object.order !== null) {
@@ -374,10 +365,6 @@ export const MsgCreateBidResponse = {
     const obj = createBaseMsgCreateBidResponse();
     return obj;
   },
-  toJSON(_: MsgCreateBidResponse): JsonSafe<MsgCreateBidResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateBidResponse>): MsgCreateBidResponse {
     const message = createBaseMsgCreateBidResponse();
     return message;
@@ -443,11 +430,6 @@ export const MsgCloseBid = {
   fromJSON(object: any): MsgCloseBid {
     const obj = createBaseMsgCloseBid();
     if (isSet(object.bidId)) obj.bidId = BidID.fromJSON(object.bidId);
-    return obj;
-  },
-  toJSON(message: MsgCloseBid): JsonSafe<MsgCloseBid> {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCloseBid>): MsgCloseBid {
@@ -516,10 +498,6 @@ export const MsgCloseBidResponse = {
   },
   fromJSON(_: any): MsgCloseBidResponse {
     const obj = createBaseMsgCloseBidResponse();
-    return obj;
-  },
-  toJSON(_: MsgCloseBidResponse): JsonSafe<MsgCloseBidResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCloseBidResponse>): MsgCloseBidResponse {
@@ -619,15 +597,6 @@ export const BidID = {
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     if (isSet(object.provider)) obj.provider = String(object.provider);
-    return obj;
-  },
-  toJSON(message: BidID): JsonSafe<BidID> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    message.provider !== undefined && (obj.provider = message.provider);
     return obj;
   },
   fromPartial(object: DeepPartial<BidID>): BidID {
@@ -757,14 +726,6 @@ export const Bid = {
     if (isSet(object.state)) obj.state = bid_StateFromJSON(object.state);
     if (isSet(object.price)) obj.price = DecCoin.fromJSON(object.price);
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Bid): JsonSafe<Bid> {
-    const obj: any = {};
-    message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
-    message.state !== undefined && (obj.state = bid_StateToJSON(message.state));
-    message.price !== undefined && (obj.price = message.price ? DecCoin.toJSON(message.price) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Bid>): Bid {
@@ -907,16 +868,6 @@ export const BidFilters = {
     if (isSet(object.oseq)) obj.oseq = Number(object.oseq);
     if (isSet(object.provider)) obj.provider = String(object.provider);
     if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: BidFilters): JsonSafe<BidFilters> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
-    message.oseq !== undefined && (obj.oseq = Math.round(message.oseq));
-    message.provider !== undefined && (obj.provider = message.provider);
-    message.state !== undefined && (obj.state = message.state);
     return obj;
   },
   fromPartial(object: DeepPartial<BidFilters>): BidFilters {

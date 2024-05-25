@@ -4,6 +4,7 @@ import { GroupID } from "./groupid";
 import { GroupSpec } from "./groupspec";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -124,7 +125,7 @@ export const Group = {
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
-  toJSON(message: Group): unknown {
+  toJSON(message: Group): JsonSafe<Group> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));

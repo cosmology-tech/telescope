@@ -5,6 +5,7 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../google/protobuf/
 import { BinaryReader, BinaryWriter } from "../binary";
 import { toTimestamp, fromTimestamp, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../helpers";
 import { Decimal } from "@cosmjs/math";
+import { JsonSafe } from "../json-safe";
 import { toUtf8, fromBase64, fromUtf8, toBase64 } from "@cosmjs/encoding";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 export const protobufPackage = "misc";
@@ -869,7 +870,7 @@ export const EncodingTestForDontOmit = {
     if (Array.isArray(object?.dODecs)) obj.dODecs = object.dODecs.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: EncodingTestForDontOmit): unknown {
+  toJSON(message: EncodingTestForDontOmit): JsonSafe<EncodingTestForDontOmit> {
     const obj: any = {};
     message.str !== undefined && (obj.str = message.str);
     message.dOStr !== undefined && (obj.dOStr = message.dOStr);
@@ -2027,7 +2028,7 @@ export const EncodingTestForOmit = {
     if (Array.isArray(object?.oDecs)) obj.oDecs = object.oDecs.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: EncodingTestForOmit): unknown {
+  toJSON(message: EncodingTestForOmit): JsonSafe<EncodingTestForOmit> {
     const obj: any = {};
     message.str !== undefined && (obj.str = message.str);
     message.oStr !== undefined && (obj.oStr = message.oStr);

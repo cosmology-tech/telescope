@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -76,7 +77,7 @@ export const StoreKVPair = {
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
-  toJSON(message: StoreKVPair): unknown {
+  toJSON(message: StoreKVPair): JsonSafe<StoreKVPair> {
     const obj: any = {};
     message.storeKey !== undefined && (obj.storeKey = message.storeKey);
     message.delete !== undefined && (obj.delete = message.delete);

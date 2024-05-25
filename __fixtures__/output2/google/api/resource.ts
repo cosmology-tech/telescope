@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -361,7 +362,7 @@ export const ResourceDescriptor = {
       style: Array.isArray(object?.style) ? object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e)) : []
     };
   },
-  toJSON(message: ResourceDescriptor): unknown {
+  toJSON(message: ResourceDescriptor): JsonSafe<ResourceDescriptor> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     if (message.pattern) {
@@ -434,7 +435,7 @@ export const ResourceReference = {
       childType: isSet(object.childType) ? String(object.childType) : ""
     };
   },
-  toJSON(message: ResourceReference): unknown {
+  toJSON(message: ResourceReference): JsonSafe<ResourceReference> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.childType !== undefined && (obj.childType = message.childType);

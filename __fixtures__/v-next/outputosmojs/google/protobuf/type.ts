@@ -2,6 +2,7 @@ import { SourceContext, SourceContextSDKType } from "./source_context";
 import { Any, AnySDKType } from "./any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -463,7 +464,7 @@ export const Type = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toJSON(message: Type): unknown {
+  toJSON(message: Type): JsonSafe<Type> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.fields) {
@@ -698,7 +699,7 @@ export const Field = {
       defaultValue: isSet(object.defaultValue) ? String(object.defaultValue) : ""
     };
   },
-  toJSON(message: Field): unknown {
+  toJSON(message: Field): JsonSafe<Field> {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
     message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
@@ -909,7 +910,7 @@ export const Enum = {
       syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
     };
   },
-  toJSON(message: Enum): unknown {
+  toJSON(message: Enum): JsonSafe<Enum> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.enumvalue) {
@@ -1069,7 +1070,7 @@ export const EnumValue = {
       options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromJSON(e)) : []
     };
   },
-  toJSON(message: EnumValue): unknown {
+  toJSON(message: EnumValue): JsonSafe<EnumValue> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.number !== undefined && (obj.number = Math.round(message.number));
@@ -1193,7 +1194,7 @@ export const Option = {
       value: isSet(object.value) ? Any.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: Option): unknown {
+  toJSON(message: Option): JsonSafe<Option> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);

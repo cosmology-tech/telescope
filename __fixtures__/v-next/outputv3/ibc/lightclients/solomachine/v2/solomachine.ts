@@ -3,7 +3,6 @@ import { ConnectionEnd, ConnectionEndAmino, ConnectionEndSDKType } from "../../.
 import { Channel, ChannelAmino, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.lightclients.solomachine.v2";
 /**
  * DataType defines the type of solo machine proof being created. This is done
@@ -644,14 +643,6 @@ export const ClientState = {
     if (isSet(object.allowUpdateAfterProposal)) obj.allowUpdateAfterProposal = Boolean(object.allowUpdateAfterProposal);
     return obj;
   },
-  toJSON(message: ClientState): JsonSafe<ClientState> {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.isFrozen !== undefined && (obj.isFrozen = message.isFrozen);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? ConsensusState.toJSON(message.consensusState) : undefined);
-    message.allowUpdateAfterProposal !== undefined && (obj.allowUpdateAfterProposal = message.allowUpdateAfterProposal);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     if (object.sequence !== undefined && object.sequence !== null) {
@@ -767,13 +758,6 @@ export const ConsensusState = {
     if (isSet(object.publicKey)) obj.publicKey = Any.fromJSON(object.publicKey);
     if (isSet(object.diversifier)) obj.diversifier = String(object.diversifier);
     if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    return obj;
-  },
-  toJSON(message: ConsensusState): JsonSafe<ConsensusState> {
-    const obj: any = {};
-    message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ConsensusState>): ConsensusState {
@@ -900,15 +884,6 @@ export const Header = {
     if (isSet(object.signature)) obj.signature = bytesFromBase64(object.signature);
     if (isSet(object.newPublicKey)) obj.newPublicKey = Any.fromJSON(object.newPublicKey);
     if (isSet(object.newDiversifier)) obj.newDiversifier = String(object.newDiversifier);
-    return obj;
-  },
-  toJSON(message: Header): JsonSafe<Header> {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
-    message.newPublicKey !== undefined && (obj.newPublicKey = message.newPublicKey ? Any.toJSON(message.newPublicKey) : undefined);
-    message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
     return obj;
   },
   fromPartial(object: DeepPartial<Header>): Header {
@@ -1045,14 +1020,6 @@ export const Misbehaviour = {
     if (isSet(object.signatureTwo)) obj.signatureTwo = SignatureAndData.fromJSON(object.signatureTwo);
     return obj;
   },
-  toJSON(message: Misbehaviour): JsonSafe<Misbehaviour> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.signatureOne !== undefined && (obj.signatureOne = message.signatureOne ? SignatureAndData.toJSON(message.signatureOne) : undefined);
-    message.signatureTwo !== undefined && (obj.signatureTwo = message.signatureTwo ? SignatureAndData.toJSON(message.signatureTwo) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Misbehaviour>): Misbehaviour {
     const message = createBaseMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -1180,14 +1147,6 @@ export const SignatureAndData = {
     if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
     return obj;
   },
-  toJSON(message: SignatureAndData): JsonSafe<SignatureAndData> {
-    const obj: any = {};
-    message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
-    message.dataType !== undefined && (obj.dataType = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<SignatureAndData>): SignatureAndData {
     const message = createBaseSignatureAndData();
     message.signature = object.signature ?? new Uint8Array();
@@ -1293,12 +1252,6 @@ export const TimestampedSignatureData = {
     const obj = createBaseTimestampedSignatureData();
     if (isSet(object.signatureData)) obj.signatureData = bytesFromBase64(object.signatureData);
     if (isSet(object.timestamp)) obj.timestamp = BigInt(object.timestamp.toString());
-    return obj;
-  },
-  toJSON(message: TimestampedSignatureData): JsonSafe<TimestampedSignatureData> {
-    const obj: any = {};
-    message.signatureData !== undefined && (obj.signatureData = base64FromBytes(message.signatureData !== undefined ? message.signatureData : new Uint8Array()));
-    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<TimestampedSignatureData>): TimestampedSignatureData {
@@ -1418,15 +1371,6 @@ export const SignBytes = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: SignBytes): JsonSafe<SignBytes> {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
-    message.diversifier !== undefined && (obj.diversifier = message.diversifier);
-    message.dataType !== undefined && (obj.dataType = dataTypeToJSON(message.dataType));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<SignBytes>): SignBytes {
     const message = createBaseSignBytes();
     if (object.sequence !== undefined && object.sequence !== null) {
@@ -1543,12 +1487,6 @@ export const HeaderData = {
     if (isSet(object.newDiversifier)) obj.newDiversifier = String(object.newDiversifier);
     return obj;
   },
-  toJSON(message: HeaderData): JsonSafe<HeaderData> {
-    const obj: any = {};
-    message.newPubKey !== undefined && (obj.newPubKey = message.newPubKey ? Any.toJSON(message.newPubKey) : undefined);
-    message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
-    return obj;
-  },
   fromPartial(object: DeepPartial<HeaderData>): HeaderData {
     const message = createBaseHeaderData();
     if (object.newPubKey !== undefined && object.newPubKey !== null) {
@@ -1640,12 +1578,6 @@ export const ClientStateData = {
     const obj = createBaseClientStateData();
     if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
     if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
-    return obj;
-  },
-  toJSON(message: ClientStateData): JsonSafe<ClientStateData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ClientStateData>): ClientStateData {
@@ -1741,12 +1673,6 @@ export const ConsensusStateData = {
     if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
     return obj;
   },
-  toJSON(message: ConsensusStateData): JsonSafe<ConsensusStateData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConsensusStateData>): ConsensusStateData {
     const message = createBaseConsensusStateData();
     message.path = object.path ?? new Uint8Array();
@@ -1838,12 +1764,6 @@ export const ConnectionStateData = {
     const obj = createBaseConnectionStateData();
     if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
     if (isSet(object.connection)) obj.connection = ConnectionEnd.fromJSON(object.connection);
-    return obj;
-  },
-  toJSON(message: ConnectionStateData): JsonSafe<ConnectionStateData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toJSON(message.connection) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ConnectionStateData>): ConnectionStateData {
@@ -1939,12 +1859,6 @@ export const ChannelStateData = {
     if (isSet(object.channel)) obj.channel = Channel.fromJSON(object.channel);
     return obj;
   },
-  toJSON(message: ChannelStateData): JsonSafe<ChannelStateData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ChannelStateData>): ChannelStateData {
     const message = createBaseChannelStateData();
     message.path = object.path ?? new Uint8Array();
@@ -2038,12 +1952,6 @@ export const PacketCommitmentData = {
     if (isSet(object.commitment)) obj.commitment = bytesFromBase64(object.commitment);
     return obj;
   },
-  toJSON(message: PacketCommitmentData): JsonSafe<PacketCommitmentData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment !== undefined ? message.commitment : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<PacketCommitmentData>): PacketCommitmentData {
     const message = createBasePacketCommitmentData();
     message.path = object.path ?? new Uint8Array();
@@ -2135,12 +2043,6 @@ export const PacketAcknowledgementData = {
     if (isSet(object.acknowledgement)) obj.acknowledgement = bytesFromBase64(object.acknowledgement);
     return obj;
   },
-  toJSON(message: PacketAcknowledgementData): JsonSafe<PacketAcknowledgementData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement !== undefined ? message.acknowledgement : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<PacketAcknowledgementData>): PacketAcknowledgementData {
     const message = createBasePacketAcknowledgementData();
     message.path = object.path ?? new Uint8Array();
@@ -2222,11 +2124,6 @@ export const PacketReceiptAbsenceData = {
   fromJSON(object: any): PacketReceiptAbsenceData {
     const obj = createBasePacketReceiptAbsenceData();
     if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
-    return obj;
-  },
-  toJSON(message: PacketReceiptAbsenceData): JsonSafe<PacketReceiptAbsenceData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<PacketReceiptAbsenceData>): PacketReceiptAbsenceData {
@@ -2311,12 +2208,6 @@ export const NextSequenceRecvData = {
     const obj = createBaseNextSequenceRecvData();
     if (isSet(object.path)) obj.path = bytesFromBase64(object.path);
     if (isSet(object.nextSeqRecv)) obj.nextSeqRecv = BigInt(object.nextSeqRecv.toString());
-    return obj;
-  },
-  toJSON(message: NextSequenceRecvData): JsonSafe<NextSequenceRecvData> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
-    message.nextSeqRecv !== undefined && (obj.nextSeqRecv = (message.nextSeqRecv || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<NextSequenceRecvData>): NextSequenceRecvData {

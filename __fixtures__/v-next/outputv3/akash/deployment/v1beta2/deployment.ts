@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -153,12 +152,6 @@ export const DeploymentID = {
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     return obj;
   },
-  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
     const message = createBaseDeploymentID();
     message.owner = object.owner ?? "";
@@ -265,14 +258,6 @@ export const Deployment = {
     if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Deployment): JsonSafe<Deployment> {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
@@ -389,13 +374,6 @@ export const DeploymentFilters = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.state !== undefined && (obj.state = message.state);
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {

@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Params, ParamsSDKType } from "./genesis";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
   poolId: Long;
@@ -115,7 +116,7 @@ export const ArithmeticTwapRequest = {
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined
     };
   },
-  toJSON(message: ArithmeticTwapRequest): unknown {
+  toJSON(message: ArithmeticTwapRequest): JsonSafe<ArithmeticTwapRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
@@ -186,7 +187,7 @@ export const ArithmeticTwapResponse = {
       arithmeticTwap: isSet(object.arithmeticTwap) ? String(object.arithmeticTwap) : ""
     };
   },
-  toJSON(message: ArithmeticTwapResponse): unknown {
+  toJSON(message: ArithmeticTwapResponse): JsonSafe<ArithmeticTwapResponse> {
     const obj: any = {};
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
@@ -265,7 +266,7 @@ export const ArithmeticTwapToNowRequest = {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined
     };
   },
-  toJSON(message: ArithmeticTwapToNowRequest): unknown {
+  toJSON(message: ArithmeticTwapToNowRequest): JsonSafe<ArithmeticTwapToNowRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
@@ -332,7 +333,7 @@ export const ArithmeticTwapToNowResponse = {
       arithmeticTwap: isSet(object.arithmeticTwap) ? String(object.arithmeticTwap) : ""
     };
   },
-  toJSON(message: ArithmeticTwapToNowResponse): unknown {
+  toJSON(message: ArithmeticTwapToNowResponse): JsonSafe<ArithmeticTwapToNowResponse> {
     const obj: any = {};
     message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
     return obj;
@@ -377,7 +378,7 @@ export const ParamsRequest = {
   fromJSON(_: any): ParamsRequest {
     return {};
   },
-  toJSON(_: ParamsRequest): unknown {
+  toJSON(_: ParamsRequest): JsonSafe<ParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -427,7 +428,7 @@ export const ParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: ParamsResponse): unknown {
+  toJSON(message: ParamsResponse): JsonSafe<ParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

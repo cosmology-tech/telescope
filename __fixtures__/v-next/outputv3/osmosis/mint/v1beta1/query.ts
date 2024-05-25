@@ -1,6 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -104,10 +103,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -174,11 +169,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -250,10 +240,6 @@ export const QueryEpochProvisionsRequest = {
     const obj = createBaseQueryEpochProvisionsRequest();
     return obj;
   },
-  toJSON(_: QueryEpochProvisionsRequest): JsonSafe<QueryEpochProvisionsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryEpochProvisionsRequest>): QueryEpochProvisionsRequest {
     const message = createBaseQueryEpochProvisionsRequest();
     return message;
@@ -320,11 +306,6 @@ export const QueryEpochProvisionsResponse = {
   fromJSON(object: any): QueryEpochProvisionsResponse {
     const obj = createBaseQueryEpochProvisionsResponse();
     if (isSet(object.epochProvisions)) obj.epochProvisions = bytesFromBase64(object.epochProvisions);
-    return obj;
-  },
-  toJSON(message: QueryEpochProvisionsResponse): JsonSafe<QueryEpochProvisionsResponse> {
-    const obj: any = {};
-    message.epochProvisions !== undefined && (obj.epochProvisions = base64FromBytes(message.epochProvisions !== undefined ? message.epochProvisions : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<QueryEpochProvisionsResponse>): QueryEpochProvisionsResponse {

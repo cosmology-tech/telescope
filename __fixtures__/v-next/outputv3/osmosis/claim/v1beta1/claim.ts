@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -140,21 +139,6 @@ export const ClaimRecord = {
     if (isSet(object.address)) obj.address = String(object.address);
     if (Array.isArray(object?.initialClaimableAmount)) obj.initialClaimableAmount = object.initialClaimableAmount.map((e: any) => Coin.fromJSON(e));
     if (Array.isArray(object?.actionCompleted)) obj.actionCompleted = object.actionCompleted.map((e: any) => Boolean(e));
-    return obj;
-  },
-  toJSON(message: ClaimRecord): JsonSafe<ClaimRecord> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.initialClaimableAmount) {
-      obj.initialClaimableAmount = message.initialClaimableAmount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.initialClaimableAmount = [];
-    }
-    if (message.actionCompleted) {
-      obj.actionCompleted = message.actionCompleted.map(e => e);
-    } else {
-      obj.actionCompleted = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ClaimRecord>): ClaimRecord {

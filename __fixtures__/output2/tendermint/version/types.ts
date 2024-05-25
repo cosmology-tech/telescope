@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -63,7 +64,7 @@ export const App = {
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
-  toJSON(message: App): unknown {
+  toJSON(message: App): JsonSafe<App> {
     const obj: any = {};
     message.protocol !== undefined && (obj.protocol = (message.protocol || Long.UZERO).toString());
     message.software !== undefined && (obj.software = message.software);
@@ -118,7 +119,7 @@ export const Consensus = {
       app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
     };
   },
-  toJSON(message: Consensus): unknown {
+  toJSON(message: Consensus): JsonSafe<Consensus> {
     const obj: any = {};
     message.block !== undefined && (obj.block = (message.block || Long.UZERO).toString());
     message.app !== undefined && (obj.app = (message.app || Long.UZERO).toString());

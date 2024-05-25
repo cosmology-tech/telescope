@@ -3,7 +3,6 @@ import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * QueryDevFeeInfosRequest is the request type for the Query/DevFeeInfos RPC
@@ -246,11 +245,6 @@ export const QueryDevFeeInfosRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfosRequest): JsonSafe<QueryDevFeeInfosRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDevFeeInfosRequest>): QueryDevFeeInfosRequest {
     const message = createBaseQueryDevFeeInfosRequest();
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -334,16 +328,6 @@ export const QueryDevFeeInfosResponse = {
     const obj = createBaseQueryDevFeeInfosResponse();
     if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosResponse): JsonSafe<QueryDevFeeInfosResponse> {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosResponse>): QueryDevFeeInfosResponse {
@@ -436,11 +420,6 @@ export const QueryDevFeeInfoRequest = {
     if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfoRequest): JsonSafe<QueryDevFeeInfoRequest> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDevFeeInfoRequest>): QueryDevFeeInfoRequest {
     const message = createBaseQueryDevFeeInfoRequest();
     message.contractAddress = object.contractAddress ?? "";
@@ -516,11 +495,6 @@ export const QueryDevFeeInfoResponse = {
     if (isSet(object.fee)) obj.fee = DevFeeInfo.fromJSON(object.fee);
     return obj;
   },
-  toJSON(message: QueryDevFeeInfoResponse): JsonSafe<QueryDevFeeInfoResponse> {
-    const obj: any = {};
-    message.fee !== undefined && (obj.fee = message.fee ? DevFeeInfo.toJSON(message.fee) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDevFeeInfoResponse>): QueryDevFeeInfoResponse {
     const message = createBaseQueryDevFeeInfoResponse();
     if (object.fee !== undefined && object.fee !== null) {
@@ -589,10 +563,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -658,11 +628,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -748,12 +713,6 @@ export const QueryDevFeeInfosPerDeployerRequest = {
     const obj = createBaseQueryDevFeeInfosPerDeployerRequest();
     if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosPerDeployerRequest): JsonSafe<QueryDevFeeInfosPerDeployerRequest> {
-    const obj: any = {};
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerRequest>): QueryDevFeeInfosPerDeployerRequest {
@@ -846,16 +805,6 @@ export const QueryDevFeeInfosPerDeployerResponse = {
     const obj = createBaseQueryDevFeeInfosPerDeployerResponse();
     if (Array.isArray(object?.fees)) obj.fees = object.fees.map((e: any) => DevFeeInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryDevFeeInfosPerDeployerResponse): JsonSafe<QueryDevFeeInfosPerDeployerResponse> {
-    const obj: any = {};
-    if (message.fees) {
-      obj.fees = message.fees.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
-    } else {
-      obj.fees = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDevFeeInfosPerDeployerResponse>): QueryDevFeeInfosPerDeployerResponse {

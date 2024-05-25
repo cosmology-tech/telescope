@@ -3,6 +3,7 @@ import { TokenPair, TokenPairSDKType } from "./erc20";
 import { Params, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -139,7 +140,7 @@ export const QueryTokenPairsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryTokenPairsRequest): unknown {
+  toJSON(message: QueryTokenPairsRequest): JsonSafe<QueryTokenPairsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -235,7 +236,7 @@ export const QueryTokenPairsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryTokenPairsResponse): unknown {
+  toJSON(message: QueryTokenPairsResponse): JsonSafe<QueryTokenPairsResponse> {
     const obj: any = {};
     if (message.tokenPairs) {
       obj.tokenPairs = message.tokenPairs.map(e => e ? TokenPair.toJSON(e) : undefined);
@@ -342,7 +343,7 @@ export const QueryTokenPairRequest = {
       token: isSet(object.token) ? String(object.token) : ""
     };
   },
-  toJSON(message: QueryTokenPairRequest): unknown {
+  toJSON(message: QueryTokenPairRequest): JsonSafe<QueryTokenPairRequest> {
     const obj: any = {};
     message.token !== undefined && (obj.token = message.token);
     return obj;
@@ -430,7 +431,7 @@ export const QueryTokenPairResponse = {
       tokenPair: isSet(object.tokenPair) ? TokenPair.fromJSON(object.tokenPair) : undefined
     };
   },
-  toJSON(message: QueryTokenPairResponse): unknown {
+  toJSON(message: QueryTokenPairResponse): JsonSafe<QueryTokenPairResponse> {
     const obj: any = {};
     message.tokenPair !== undefined && (obj.tokenPair = message.tokenPair ? TokenPair.toJSON(message.tokenPair) : undefined);
     return obj;
@@ -508,7 +509,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -585,7 +586,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

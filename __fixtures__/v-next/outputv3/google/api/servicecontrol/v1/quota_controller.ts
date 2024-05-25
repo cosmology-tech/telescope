@@ -2,7 +2,6 @@ import { MetricValueSet, MetricValueSetAmino, MetricValueSetSDKType } from "./me
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Supported quota modes. */
 export enum QuotaOperation_QuotaMode {
@@ -528,13 +527,6 @@ export const AllocateQuotaRequest = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: AllocateQuotaRequest): JsonSafe<AllocateQuotaRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.allocateOperation !== undefined && (obj.allocateOperation = message.allocateOperation ? QuotaOperation.toJSON(message.allocateOperation) : undefined);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AllocateQuotaRequest>): AllocateQuotaRequest {
     const message = createBaseAllocateQuotaRequest();
     message.serviceName = object.serviceName ?? "";
@@ -631,12 +623,6 @@ export const QuotaOperation_LabelsEntry = {
     const obj = createBaseQuotaOperation_LabelsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: QuotaOperation_LabelsEntry): JsonSafe<QuotaOperation_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaOperation_LabelsEntry>): QuotaOperation_LabelsEntry {
@@ -764,25 +750,6 @@ export const QuotaOperation = {
     }, {});
     if (Array.isArray(object?.quotaMetrics)) obj.quotaMetrics = object.quotaMetrics.map((e: any) => MetricValueSet.fromJSON(e));
     if (isSet(object.quotaMode)) obj.quotaMode = quotaOperation_QuotaModeFromJSON(object.quotaMode);
-    return obj;
-  },
-  toJSON(message: QuotaOperation): JsonSafe<QuotaOperation> {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    message.methodName !== undefined && (obj.methodName = message.methodName);
-    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.quotaMetrics) {
-      obj.quotaMetrics = message.quotaMetrics.map(e => e ? MetricValueSet.toJSON(e) : undefined);
-    } else {
-      obj.quotaMetrics = [];
-    }
-    message.quotaMode !== undefined && (obj.quotaMode = quotaOperation_QuotaModeToJSON(message.quotaMode));
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaOperation>): QuotaOperation {
@@ -952,22 +919,6 @@ export const AllocateQuotaResponse = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: AllocateQuotaResponse): JsonSafe<AllocateQuotaResponse> {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    if (message.allocateErrors) {
-      obj.allocateErrors = message.allocateErrors.map(e => e ? QuotaError.toJSON(e) : undefined);
-    } else {
-      obj.allocateErrors = [];
-    }
-    if (message.quotaMetrics) {
-      obj.quotaMetrics = message.quotaMetrics.map(e => e ? MetricValueSet.toJSON(e) : undefined);
-    } else {
-      obj.quotaMetrics = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AllocateQuotaResponse>): AllocateQuotaResponse {
     const message = createBaseAllocateQuotaResponse();
     message.operationId = object.operationId ?? "";
@@ -1098,14 +1049,6 @@ export const QuotaError = {
     if (isSet(object.subject)) obj.subject = String(object.subject);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
-  },
-  toJSON(message: QuotaError): JsonSafe<QuotaError> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = quotaError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaError>): QuotaError {

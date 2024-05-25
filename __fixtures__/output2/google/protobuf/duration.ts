@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * A Duration represents a signed, fixed-length span of time represented
@@ -122,7 +123,7 @@ export const Duration = {
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
-  toJSON(message: Duration): unknown {
+  toJSON(message: Duration): JsonSafe<Duration> {
     const obj: any = {};
     message.seconds !== undefined && (obj.seconds = (message.seconds || Long.ZERO).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));

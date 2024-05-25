@@ -3,6 +3,7 @@ import { ConnectionEnd, ConnectionEndSDKType } from "../../../core/connection/v1
 import { Channel, ChannelSDKType } from "../../../core/channel/v1/channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.lightclients.solomachine.v2";
 /**
  * DataType defines the type of solo machine proof being created. This is done
@@ -495,7 +496,7 @@ export const ClientState = {
       allowUpdateAfterProposal: isSet(object.allowUpdateAfterProposal) ? Boolean(object.allowUpdateAfterProposal) : false
     };
   },
-  toJSON(message: ClientState): unknown {
+  toJSON(message: ClientState): JsonSafe<ClientState> {
     const obj: any = {};
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.isFrozen !== undefined && (obj.isFrozen = message.isFrozen);
@@ -632,7 +633,7 @@ export const ConsensusState = {
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
   },
-  toJSON(message: ConsensusState): unknown {
+  toJSON(message: ConsensusState): JsonSafe<ConsensusState> {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.diversifier !== undefined && (obj.diversifier = message.diversifier);
@@ -776,7 +777,7 @@ export const Header = {
       newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
     };
   },
-  toJSON(message: Header): unknown {
+  toJSON(message: Header): JsonSafe<Header> {
     const obj: any = {};
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
@@ -930,7 +931,7 @@ export const Misbehaviour = {
       signatureTwo: isSet(object.signatureTwo) ? SignatureAndData.fromJSON(object.signatureTwo) : undefined
     };
   },
-  toJSON(message: Misbehaviour): unknown {
+  toJSON(message: Misbehaviour): JsonSafe<Misbehaviour> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
@@ -1075,7 +1076,7 @@ export const SignatureAndData = {
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
   },
-  toJSON(message: SignatureAndData): unknown {
+  toJSON(message: SignatureAndData): JsonSafe<SignatureAndData> {
     const obj: any = {};
     message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
     message.dataType !== undefined && (obj.dataType = dataTypeToJSON(message.dataType));
@@ -1204,7 +1205,7 @@ export const TimestampedSignatureData = {
       timestamp: isSet(object.timestamp) ? BigInt(object.timestamp.toString()) : BigInt(0)
     };
   },
-  toJSON(message: TimestampedSignatureData): unknown {
+  toJSON(message: TimestampedSignatureData): JsonSafe<TimestampedSignatureData> {
     const obj: any = {};
     message.signatureData !== undefined && (obj.signatureData = base64FromBytes(message.signatureData !== undefined ? message.signatureData : new Uint8Array()));
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
@@ -1339,7 +1340,7 @@ export const SignBytes = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
-  toJSON(message: SignBytes): unknown {
+  toJSON(message: SignBytes): JsonSafe<SignBytes> {
     const obj: any = {};
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.timestamp !== undefined && (obj.timestamp = (message.timestamp || BigInt(0)).toString());
@@ -1477,7 +1478,7 @@ export const HeaderData = {
       newDiversifier: isSet(object.newDiversifier) ? String(object.newDiversifier) : ""
     };
   },
-  toJSON(message: HeaderData): unknown {
+  toJSON(message: HeaderData): JsonSafe<HeaderData> {
     const obj: any = {};
     message.newPubKey !== undefined && (obj.newPubKey = message.newPubKey ? Any.toJSON(message.newPubKey) : undefined);
     message.newDiversifier !== undefined && (obj.newDiversifier = message.newDiversifier);
@@ -1588,7 +1589,7 @@ export const ClientStateData = {
       clientState: isSet(object.clientState) ? Any.fromJSON(object.clientState) : undefined
     };
   },
-  toJSON(message: ClientStateData): unknown {
+  toJSON(message: ClientStateData): JsonSafe<ClientStateData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
@@ -1699,7 +1700,7 @@ export const ConsensusStateData = {
       consensusState: isSet(object.consensusState) ? Any.fromJSON(object.consensusState) : undefined
     };
   },
-  toJSON(message: ConsensusStateData): unknown {
+  toJSON(message: ConsensusStateData): JsonSafe<ConsensusStateData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
@@ -1810,7 +1811,7 @@ export const ConnectionStateData = {
       connection: isSet(object.connection) ? ConnectionEnd.fromJSON(object.connection) : undefined
     };
   },
-  toJSON(message: ConnectionStateData): unknown {
+  toJSON(message: ConnectionStateData): JsonSafe<ConnectionStateData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toJSON(message.connection) : undefined);
@@ -1921,7 +1922,7 @@ export const ChannelStateData = {
       channel: isSet(object.channel) ? Channel.fromJSON(object.channel) : undefined
     };
   },
-  toJSON(message: ChannelStateData): unknown {
+  toJSON(message: ChannelStateData): JsonSafe<ChannelStateData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
@@ -2032,7 +2033,7 @@ export const PacketCommitmentData = {
       commitment: isSet(object.commitment) ? bytesFromBase64(object.commitment) : new Uint8Array()
     };
   },
-  toJSON(message: PacketCommitmentData): unknown {
+  toJSON(message: PacketCommitmentData): JsonSafe<PacketCommitmentData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.commitment !== undefined && (obj.commitment = base64FromBytes(message.commitment !== undefined ? message.commitment : new Uint8Array()));
@@ -2143,7 +2144,7 @@ export const PacketAcknowledgementData = {
       acknowledgement: isSet(object.acknowledgement) ? bytesFromBase64(object.acknowledgement) : new Uint8Array()
     };
   },
-  toJSON(message: PacketAcknowledgementData): unknown {
+  toJSON(message: PacketAcknowledgementData): JsonSafe<PacketAcknowledgementData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement !== undefined ? message.acknowledgement : new Uint8Array()));
@@ -2246,7 +2247,7 @@ export const PacketReceiptAbsenceData = {
       path: isSet(object.path) ? bytesFromBase64(object.path) : new Uint8Array()
     };
   },
-  toJSON(message: PacketReceiptAbsenceData): unknown {
+  toJSON(message: PacketReceiptAbsenceData): JsonSafe<PacketReceiptAbsenceData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     return obj;
@@ -2348,7 +2349,7 @@ export const NextSequenceRecvData = {
       nextSeqRecv: isSet(object.nextSeqRecv) ? BigInt(object.nextSeqRecv.toString()) : BigInt(0)
     };
   },
-  toJSON(message: NextSequenceRecvData): unknown {
+  toJSON(message: NextSequenceRecvData): JsonSafe<NextSequenceRecvData> {
     const obj: any = {};
     message.path !== undefined && (obj.path = base64FromBytes(message.path !== undefined ? message.path : new Uint8Array()));
     message.nextSeqRecv !== undefined && (obj.nextSeqRecv = (message.nextSeqRecv || BigInt(0)).toString());

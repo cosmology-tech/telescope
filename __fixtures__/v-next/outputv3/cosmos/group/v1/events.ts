@@ -1,7 +1,6 @@
 import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
@@ -211,11 +210,6 @@ export const EventCreateGroup = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: EventCreateGroup): JsonSafe<EventCreateGroup> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventCreateGroup>): EventCreateGroup {
     const message = createBaseEventCreateGroup();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -292,11 +286,6 @@ export const EventUpdateGroup = {
   fromJSON(object: any): EventUpdateGroup {
     const obj = createBaseEventUpdateGroup();
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
-    return obj;
-  },
-  toJSON(message: EventUpdateGroup): JsonSafe<EventUpdateGroup> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EventUpdateGroup>): EventUpdateGroup {
@@ -377,11 +366,6 @@ export const EventCreateGroupPolicy = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: EventCreateGroupPolicy): JsonSafe<EventCreateGroupPolicy> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventCreateGroupPolicy>): EventCreateGroupPolicy {
     const message = createBaseEventCreateGroupPolicy();
     message.address = object.address ?? "";
@@ -458,11 +442,6 @@ export const EventUpdateGroupPolicy = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: EventUpdateGroupPolicy): JsonSafe<EventUpdateGroupPolicy> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventUpdateGroupPolicy>): EventUpdateGroupPolicy {
     const message = createBaseEventUpdateGroupPolicy();
     message.address = object.address ?? "";
@@ -537,11 +516,6 @@ export const EventSubmitProposal = {
   fromJSON(object: any): EventSubmitProposal {
     const obj = createBaseEventSubmitProposal();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    return obj;
-  },
-  toJSON(message: EventSubmitProposal): JsonSafe<EventSubmitProposal> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EventSubmitProposal>): EventSubmitProposal {
@@ -622,11 +596,6 @@ export const EventWithdrawProposal = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: EventWithdrawProposal): JsonSafe<EventWithdrawProposal> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<EventWithdrawProposal>): EventWithdrawProposal {
     const message = createBaseEventWithdrawProposal();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -703,11 +672,6 @@ export const EventVote = {
   fromJSON(object: any): EventVote {
     const obj = createBaseEventVote();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
-    return obj;
-  },
-  toJSON(message: EventVote): JsonSafe<EventVote> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EventVote>): EventVote {
@@ -794,12 +758,6 @@ export const EventExec = {
     const obj = createBaseEventExec();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.result)) obj.result = proposalExecutorResultFromJSON(object.result);
-    return obj;
-  },
-  toJSON(message: EventExec): JsonSafe<EventExec> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
     return obj;
   },
   fromPartial(object: DeepPartial<EventExec>): EventExec {
@@ -893,12 +851,6 @@ export const EventLeaveGroup = {
     const obj = createBaseEventLeaveGroup();
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: EventLeaveGroup): JsonSafe<EventLeaveGroup> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.address !== undefined && (obj.address = message.address);
     return obj;
   },
   fromPartial(object: DeepPartial<EventLeaveGroup>): EventLeaveGroup {

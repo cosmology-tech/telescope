@@ -3,6 +3,7 @@
 import { ParamChange } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -58,7 +59,7 @@ export const QueryParamsRequest = {
       key: isSet(object.key) ? String(object.key) : ""
     };
   },
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
     message.key !== undefined && (obj.key = message.key);
@@ -105,7 +106,7 @@ export const QueryParamsResponse = {
       param: isSet(object.param) ? ParamChange.fromJSON(object.param) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
     return obj;

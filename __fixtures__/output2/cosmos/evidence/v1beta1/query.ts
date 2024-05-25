@@ -4,6 +4,7 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
@@ -67,7 +68,7 @@ export const QueryEvidenceRequest = {
       evidenceHash: isSet(object.evidenceHash) ? bytesFromBase64(object.evidenceHash) : new Uint8Array()
     };
   },
-  toJSON(message: QueryEvidenceRequest): unknown {
+  toJSON(message: QueryEvidenceRequest): JsonSafe<QueryEvidenceRequest> {
     const obj: any = {};
     message.evidenceHash !== undefined && (obj.evidenceHash = base64FromBytes(message.evidenceHash !== undefined ? message.evidenceHash : new Uint8Array()));
     return obj;
@@ -112,7 +113,7 @@ export const QueryEvidenceResponse = {
       evidence: isSet(object.evidence) ? Any.fromJSON(object.evidence) : undefined
     };
   },
-  toJSON(message: QueryEvidenceResponse): unknown {
+  toJSON(message: QueryEvidenceResponse): JsonSafe<QueryEvidenceResponse> {
     const obj: any = {};
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toJSON(message.evidence) : undefined);
     return obj;
@@ -157,7 +158,7 @@ export const QueryAllEvidenceRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAllEvidenceRequest): unknown {
+  toJSON(message: QueryAllEvidenceRequest): JsonSafe<QueryAllEvidenceRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -210,7 +211,7 @@ export const QueryAllEvidenceResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAllEvidenceResponse): unknown {
+  toJSON(message: QueryAllEvidenceResponse): JsonSafe<QueryAllEvidenceResponse> {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toJSON(e) : undefined);

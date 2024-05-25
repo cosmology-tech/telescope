@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.crypto";
 export interface Proof {
   total: bigint;
@@ -140,7 +141,7 @@ export const Proof = {
       aunts: Array.isArray(object?.aunts) ? object.aunts.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: Proof): unknown {
+  toJSON(message: Proof): JsonSafe<Proof> {
     const obj: any = {};
     message.total !== undefined && (obj.total = (message.total || BigInt(0)).toString());
     message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
@@ -273,7 +274,7 @@ export const ValueOp = {
       proof: isSet(object.proof) ? Proof.fromJSON(object.proof) : undefined
     };
   },
-  toJSON(message: ValueOp): unknown {
+  toJSON(message: ValueOp): JsonSafe<ValueOp> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.proof !== undefined && (obj.proof = message.proof ? Proof.toJSON(message.proof) : undefined);
@@ -386,7 +387,7 @@ export const DominoOp = {
       output: isSet(object.output) ? String(object.output) : ""
     };
   },
-  toJSON(message: DominoOp): unknown {
+  toJSON(message: DominoOp): JsonSafe<DominoOp> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.input !== undefined && (obj.input = message.input);
@@ -508,7 +509,7 @@ export const ProofOp = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
-  toJSON(message: ProofOp): unknown {
+  toJSON(message: ProofOp): JsonSafe<ProofOp> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
@@ -614,7 +615,7 @@ export const ProofOps = {
       ops: Array.isArray(object?.ops) ? object.ops.map((e: any) => ProofOp.fromJSON(e)) : []
     };
   },
-  toJSON(message: ProofOps): unknown {
+  toJSON(message: ProofOps): JsonSafe<ProofOps> {
     const obj: any = {};
     if (message.ops) {
       obj.ops = message.ops.map(e => e ? ProofOp.toJSON(e) : undefined);

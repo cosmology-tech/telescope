@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -233,13 +232,6 @@ export const MsgSuperfluidDelegate = {
     if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
     return obj;
   },
-  toJSON(message: MsgSuperfluidDelegate): JsonSafe<MsgSuperfluidDelegate> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
-    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSuperfluidDelegate>): MsgSuperfluidDelegate {
     const message = createBaseMsgSuperfluidDelegate();
     message.sender = object.sender ?? "";
@@ -323,10 +315,6 @@ export const MsgSuperfluidDelegateResponse = {
     const obj = createBaseMsgSuperfluidDelegateResponse();
     return obj;
   },
-  toJSON(_: MsgSuperfluidDelegateResponse): JsonSafe<MsgSuperfluidDelegateResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgSuperfluidDelegateResponse>): MsgSuperfluidDelegateResponse {
     const message = createBaseMsgSuperfluidDelegateResponse();
     return message;
@@ -401,12 +389,6 @@ export const MsgSuperfluidUndelegate = {
     const obj = createBaseMsgSuperfluidUndelegate();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
-    return obj;
-  },
-  toJSON(message: MsgSuperfluidUndelegate): JsonSafe<MsgSuperfluidUndelegate> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSuperfluidUndelegate>): MsgSuperfluidUndelegate {
@@ -485,10 +467,6 @@ export const MsgSuperfluidUndelegateResponse = {
     const obj = createBaseMsgSuperfluidUndelegateResponse();
     return obj;
   },
-  toJSON(_: MsgSuperfluidUndelegateResponse): JsonSafe<MsgSuperfluidUndelegateResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgSuperfluidUndelegateResponse>): MsgSuperfluidUndelegateResponse {
     const message = createBaseMsgSuperfluidUndelegateResponse();
     return message;
@@ -565,12 +543,6 @@ export const MsgSuperfluidUnbondLock = {
     if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
     return obj;
   },
-  toJSON(message: MsgSuperfluidUnbondLock): JsonSafe<MsgSuperfluidUnbondLock> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSuperfluidUnbondLock>): MsgSuperfluidUnbondLock {
     const message = createBaseMsgSuperfluidUnbondLock();
     message.sender = object.sender ?? "";
@@ -645,10 +617,6 @@ export const MsgSuperfluidUnbondLockResponse = {
   },
   fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
     const obj = createBaseMsgSuperfluidUnbondLockResponse();
-    return obj;
-  },
-  toJSON(_: MsgSuperfluidUnbondLockResponse): JsonSafe<MsgSuperfluidUnbondLockResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgSuperfluidUnbondLockResponse>): MsgSuperfluidUnbondLockResponse {
@@ -733,17 +701,6 @@ export const MsgLockAndSuperfluidDelegate = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.valAddr)) obj.valAddr = String(object.valAddr);
-    return obj;
-  },
-  toJSON(message: MsgLockAndSuperfluidDelegate): JsonSafe<MsgLockAndSuperfluidDelegate> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegate>): MsgLockAndSuperfluidDelegate {
@@ -842,11 +799,6 @@ export const MsgLockAndSuperfluidDelegateResponse = {
     if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
     return obj;
   },
-  toJSON(message: MsgLockAndSuperfluidDelegateResponse): JsonSafe<MsgLockAndSuperfluidDelegateResponse> {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     if (object.ID !== undefined && object.ID !== null) {
@@ -931,12 +883,6 @@ export const MsgUnPoolWhitelistedPool = {
     const obj = createBaseMsgUnPoolWhitelistedPool();
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    return obj;
-  },
-  toJSON(message: MsgUnPoolWhitelistedPool): JsonSafe<MsgUnPoolWhitelistedPool> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPool>): MsgUnPoolWhitelistedPool {
@@ -1031,15 +977,6 @@ export const MsgUnPoolWhitelistedPoolResponse = {
   fromJSON(object: any): MsgUnPoolWhitelistedPoolResponse {
     const obj = createBaseMsgUnPoolWhitelistedPoolResponse();
     if (Array.isArray(object?.exitedLockIds)) obj.exitedLockIds = object.exitedLockIds.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: MsgUnPoolWhitelistedPoolResponse): JsonSafe<MsgUnPoolWhitelistedPoolResponse> {
-    const obj: any = {};
-    if (message.exitedLockIds) {
-      obj.exitedLockIds = message.exitedLockIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.exitedLockIds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUnPoolWhitelistedPoolResponse>): MsgUnPoolWhitelistedPoolResponse {

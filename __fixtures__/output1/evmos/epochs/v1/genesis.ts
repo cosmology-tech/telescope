@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
@@ -111,7 +112,7 @@ export const EpochInfo = {
       currentEpochStartHeight: isSet(object.currentEpochStartHeight) ? Long.fromValue(object.currentEpochStartHeight) : Long.ZERO
     };
   },
-  toJSON(message: EpochInfo): unknown {
+  toJSON(message: EpochInfo): JsonSafe<EpochInfo> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
@@ -190,7 +191,7 @@ export const GenesisState = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);

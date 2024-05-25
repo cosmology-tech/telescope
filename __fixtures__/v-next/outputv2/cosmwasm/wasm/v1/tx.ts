@@ -2,6 +2,7 @@ import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgStoreCode submit Wasm code to the system */
@@ -410,7 +411,7 @@ export const MsgStoreCode = {
     if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
     return obj;
   },
-  toJSON(message: MsgStoreCode): unknown {
+  toJSON(message: MsgStoreCode): JsonSafe<MsgStoreCode> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
@@ -518,7 +519,7 @@ export const MsgStoreCodeResponse = {
     if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
     return obj;
   },
-  toJSON(message: MsgStoreCodeResponse): unknown {
+  toJSON(message: MsgStoreCodeResponse): JsonSafe<MsgStoreCodeResponse> {
     const obj: any = {};
     message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     return obj;
@@ -650,7 +651,7 @@ export const MsgInstantiateContract = {
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgInstantiateContract): unknown {
+  toJSON(message: MsgInstantiateContract): JsonSafe<MsgInstantiateContract> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.admin !== undefined && (obj.admin = message.admin);
@@ -800,7 +801,7 @@ export const MsgInstantiateContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgInstantiateContractResponse): unknown {
+  toJSON(message: MsgInstantiateContractResponse): JsonSafe<MsgInstantiateContractResponse> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -922,7 +923,7 @@ export const MsgExecuteContract = {
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgExecuteContract): unknown {
+  toJSON(message: MsgExecuteContract): JsonSafe<MsgExecuteContract> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.contract !== undefined && (obj.contract = message.contract);
@@ -1046,7 +1047,7 @@ export const MsgExecuteContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgExecuteContractResponse): unknown {
+  toJSON(message: MsgExecuteContractResponse): JsonSafe<MsgExecuteContractResponse> {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
@@ -1160,7 +1161,7 @@ export const MsgMigrateContract = {
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     return obj;
   },
-  toJSON(message: MsgMigrateContract): unknown {
+  toJSON(message: MsgMigrateContract): JsonSafe<MsgMigrateContract> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.contract !== undefined && (obj.contract = message.contract);
@@ -1276,7 +1277,7 @@ export const MsgMigrateContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgMigrateContractResponse): unknown {
+  toJSON(message: MsgMigrateContractResponse): JsonSafe<MsgMigrateContractResponse> {
     const obj: any = {};
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
@@ -1382,7 +1383,7 @@ export const MsgUpdateAdmin = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: MsgUpdateAdmin): unknown {
+  toJSON(message: MsgUpdateAdmin): JsonSafe<MsgUpdateAdmin> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
@@ -1479,7 +1480,7 @@ export const MsgUpdateAdminResponse = {
     const obj = createBaseMsgUpdateAdminResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateAdminResponse): unknown {
+  toJSON(_: MsgUpdateAdminResponse): JsonSafe<MsgUpdateAdminResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1568,7 +1569,7 @@ export const MsgClearAdmin = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: MsgClearAdmin): unknown {
+  toJSON(message: MsgClearAdmin): JsonSafe<MsgClearAdmin> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.contract !== undefined && (obj.contract = message.contract);
@@ -1657,7 +1658,7 @@ export const MsgClearAdminResponse = {
     const obj = createBaseMsgClearAdminResponse();
     return obj;
   },
-  toJSON(_: MsgClearAdminResponse): unknown {
+  toJSON(_: MsgClearAdminResponse): JsonSafe<MsgClearAdminResponse> {
     const obj: any = {};
     return obj;
   },

@@ -5,6 +5,7 @@ import { Group } from "./group";
 import { Params } from "./params";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
@@ -58,7 +59,7 @@ export const GenesisDeployment = {
       groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisDeployment): unknown {
+  toJSON(message: GenesisDeployment): JsonSafe<GenesisDeployment> {
     const obj: any = {};
     message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
     if (message.groups) {
@@ -117,7 +118,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toJSON(e) : undefined);

@@ -2,7 +2,6 @@ import { Member, MemberAmino, MemberSDKType, VoteOption, VoteOptionSDKType, Thre
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** Exec defines modes of execution of a proposal on creation or on new vote. */
 export enum Exec {
@@ -728,17 +727,6 @@ export const MsgCreateGroup = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgCreateGroup): JsonSafe<MsgCreateGroup> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    if (message.members) {
-      obj.members = message.members.map(e => e ? Member.toJSON(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateGroup>): MsgCreateGroup {
     const message = createBaseMsgCreateGroup();
     message.admin = object.admin ?? "";
@@ -835,11 +823,6 @@ export const MsgCreateGroupResponse = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: MsgCreateGroupResponse): JsonSafe<MsgCreateGroupResponse> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateGroupResponse>): MsgCreateGroupResponse {
     const message = createBaseMsgCreateGroupResponse();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -934,17 +917,6 @@ export const MsgUpdateGroupMembers = {
     if (Array.isArray(object?.memberUpdates)) obj.memberUpdates = object.memberUpdates.map((e: any) => Member.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgUpdateGroupMembers): JsonSafe<MsgUpdateGroupMembers> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    if (message.memberUpdates) {
-      obj.memberUpdates = message.memberUpdates.map(e => e ? Member.toJSON(e) : undefined);
-    } else {
-      obj.memberUpdates = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateGroupMembers>): MsgUpdateGroupMembers {
     const message = createBaseMsgUpdateGroupMembers();
     message.admin = object.admin ?? "";
@@ -1034,10 +1006,6 @@ export const MsgUpdateGroupMembersResponse = {
     const obj = createBaseMsgUpdateGroupMembersResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateGroupMembersResponse): JsonSafe<MsgUpdateGroupMembersResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgUpdateGroupMembersResponse>): MsgUpdateGroupMembersResponse {
     const message = createBaseMsgUpdateGroupMembersResponse();
     return message;
@@ -1122,13 +1090,6 @@ export const MsgUpdateGroupAdmin = {
     if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
     return obj;
   },
-  toJSON(message: MsgUpdateGroupAdmin): JsonSafe<MsgUpdateGroupAdmin> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateGroupAdmin>): MsgUpdateGroupAdmin {
     const message = createBaseMsgUpdateGroupAdmin();
     message.admin = object.admin ?? "";
@@ -1210,10 +1171,6 @@ export const MsgUpdateGroupAdminResponse = {
   },
   fromJSON(_: any): MsgUpdateGroupAdminResponse {
     const obj = createBaseMsgUpdateGroupAdminResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateGroupAdminResponse): JsonSafe<MsgUpdateGroupAdminResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateGroupAdminResponse>): MsgUpdateGroupAdminResponse {
@@ -1300,13 +1257,6 @@ export const MsgUpdateGroupMetadata = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgUpdateGroupMetadata): JsonSafe<MsgUpdateGroupMetadata> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateGroupMetadata>): MsgUpdateGroupMetadata {
     const message = createBaseMsgUpdateGroupMetadata();
     message.admin = object.admin ?? "";
@@ -1388,10 +1338,6 @@ export const MsgUpdateGroupMetadataResponse = {
   },
   fromJSON(_: any): MsgUpdateGroupMetadataResponse {
     const obj = createBaseMsgUpdateGroupMetadataResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateGroupMetadataResponse): JsonSafe<MsgUpdateGroupMetadataResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateGroupMetadataResponse>): MsgUpdateGroupMetadataResponse {
@@ -1484,14 +1430,6 @@ export const MsgCreateGroupPolicy = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
-    return obj;
-  },
-  toJSON(message: MsgCreateGroupPolicy): JsonSafe<MsgCreateGroupPolicy> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateGroupPolicy>): MsgCreateGroupPolicy {
@@ -1595,11 +1533,6 @@ export const MsgCreateGroupPolicyResponse = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: MsgCreateGroupPolicyResponse): JsonSafe<MsgCreateGroupPolicyResponse> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateGroupPolicyResponse>): MsgCreateGroupPolicyResponse {
     const message = createBaseMsgCreateGroupPolicyResponse();
     message.address = object.address ?? "";
@@ -1690,13 +1623,6 @@ export const MsgUpdateGroupPolicyAdmin = {
     if (isSet(object.admin)) obj.admin = String(object.admin);
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
-    return obj;
-  },
-  toJSON(message: MsgUpdateGroupPolicyAdmin): JsonSafe<MsgUpdateGroupPolicyAdmin> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.address !== undefined && (obj.address = message.address);
-    message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyAdmin>): MsgUpdateGroupPolicyAdmin {
@@ -1829,20 +1755,6 @@ export const MsgCreateGroupWithPolicy = {
     if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
     return obj;
   },
-  toJSON(message: MsgCreateGroupWithPolicy): JsonSafe<MsgCreateGroupWithPolicy> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    if (message.members) {
-      obj.members = message.members.map(e => e ? Member.toJSON(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-    message.groupMetadata !== undefined && (obj.groupMetadata = message.groupMetadata);
-    message.groupPolicyMetadata !== undefined && (obj.groupPolicyMetadata = message.groupPolicyMetadata);
-    message.groupPolicyAsAdmin !== undefined && (obj.groupPolicyAsAdmin = message.groupPolicyAsAdmin);
-    message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicy>): MsgCreateGroupWithPolicy {
     const message = createBaseMsgCreateGroupWithPolicy();
     message.admin = object.admin ?? "";
@@ -1970,12 +1882,6 @@ export const MsgCreateGroupWithPolicyResponse = {
     if (isSet(object.groupPolicyAddress)) obj.groupPolicyAddress = String(object.groupPolicyAddress);
     return obj;
   },
-  toJSON(message: MsgCreateGroupWithPolicyResponse): JsonSafe<MsgCreateGroupWithPolicyResponse> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.groupPolicyAddress !== undefined && (obj.groupPolicyAddress = message.groupPolicyAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateGroupWithPolicyResponse>): MsgCreateGroupWithPolicyResponse {
     const message = createBaseMsgCreateGroupWithPolicyResponse();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -2050,10 +1956,6 @@ export const MsgUpdateGroupPolicyAdminResponse = {
   },
   fromJSON(_: any): MsgUpdateGroupPolicyAdminResponse {
     const obj = createBaseMsgUpdateGroupPolicyAdminResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateGroupPolicyAdminResponse): JsonSafe<MsgUpdateGroupPolicyAdminResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyAdminResponse>): MsgUpdateGroupPolicyAdminResponse {
@@ -2140,13 +2042,6 @@ export const MsgUpdateGroupPolicyDecisionPolicy = {
     if (isSet(object.decisionPolicy)) obj.decisionPolicy = Any.fromJSON(object.decisionPolicy);
     return obj;
   },
-  toJSON(message: MsgUpdateGroupPolicyDecisionPolicy): JsonSafe<MsgUpdateGroupPolicyDecisionPolicy> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.address !== undefined && (obj.address = message.address);
-    message.decisionPolicy !== undefined && (obj.decisionPolicy = message.decisionPolicy ? Any.toJSON(message.decisionPolicy) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyDecisionPolicy>): MsgUpdateGroupPolicyDecisionPolicy {
     const message = createBaseMsgUpdateGroupPolicyDecisionPolicy();
     message.admin = object.admin ?? "";
@@ -2228,10 +2123,6 @@ export const MsgUpdateGroupPolicyDecisionPolicyResponse = {
   },
   fromJSON(_: any): MsgUpdateGroupPolicyDecisionPolicyResponse {
     const obj = createBaseMsgUpdateGroupPolicyDecisionPolicyResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateGroupPolicyDecisionPolicyResponse): JsonSafe<MsgUpdateGroupPolicyDecisionPolicyResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyDecisionPolicyResponse>): MsgUpdateGroupPolicyDecisionPolicyResponse {
@@ -2318,13 +2209,6 @@ export const MsgUpdateGroupPolicyMetadata = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     return obj;
   },
-  toJSON(message: MsgUpdateGroupPolicyMetadata): JsonSafe<MsgUpdateGroupPolicyMetadata> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.address !== undefined && (obj.address = message.address);
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateGroupPolicyMetadata>): MsgUpdateGroupPolicyMetadata {
     const message = createBaseMsgUpdateGroupPolicyMetadata();
     message.admin = object.admin ?? "";
@@ -2404,10 +2288,6 @@ export const MsgUpdateGroupPolicyMetadataResponse = {
   },
   fromJSON(_: any): MsgUpdateGroupPolicyMetadataResponse {
     const obj = createBaseMsgUpdateGroupPolicyMetadataResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateGroupPolicyMetadataResponse): JsonSafe<MsgUpdateGroupPolicyMetadataResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateGroupPolicyMetadataResponse>): MsgUpdateGroupPolicyMetadataResponse {
@@ -2508,23 +2388,6 @@ export const MsgSubmitProposal = {
     if (isSet(object.metadata)) obj.metadata = String(object.metadata);
     if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     if (isSet(object.exec)) obj.exec = execFromJSON(object.exec);
-    return obj;
-  },
-  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.proposers) {
-      obj.proposers = message.proposers.map(e => e);
-    } else {
-      obj.proposers = [];
-    }
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    if (message.messages) {
-      obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.messages = [];
-    }
-    message.exec !== undefined && (obj.exec = execToJSON(message.exec));
     return obj;
   },
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
@@ -2643,11 +2506,6 @@ export const MsgSubmitProposalResponse = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -2734,12 +2592,6 @@ export const MsgWithdrawProposal = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: MsgWithdrawProposal): JsonSafe<MsgWithdrawProposal> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgWithdrawProposal>): MsgWithdrawProposal {
     const message = createBaseMsgWithdrawProposal();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -2814,10 +2666,6 @@ export const MsgWithdrawProposalResponse = {
   },
   fromJSON(_: any): MsgWithdrawProposalResponse {
     const obj = createBaseMsgWithdrawProposalResponse();
-    return obj;
-  },
-  toJSON(_: MsgWithdrawProposalResponse): JsonSafe<MsgWithdrawProposalResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgWithdrawProposalResponse>): MsgWithdrawProposalResponse {
@@ -2920,15 +2768,6 @@ export const MsgVote = {
     if (isSet(object.exec)) obj.exec = execFromJSON(object.exec);
     return obj;
   },
-  toJSON(message: MsgVote): JsonSafe<MsgVote> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    message.metadata !== undefined && (obj.metadata = message.metadata);
-    message.exec !== undefined && (obj.exec = execToJSON(message.exec));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -3026,10 +2865,6 @@ export const MsgVoteResponse = {
     const obj = createBaseMsgVoteResponse();
     return obj;
   },
-  toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
     const message = createBaseMsgVoteResponse();
     return message;
@@ -3104,12 +2939,6 @@ export const MsgExec = {
     const obj = createBaseMsgExec();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.signer)) obj.signer = String(object.signer);
-    return obj;
-  },
-  toJSON(message: MsgExec): JsonSafe<MsgExec> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.signer !== undefined && (obj.signer = message.signer);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgExec>): MsgExec {
@@ -3188,10 +3017,6 @@ export const MsgExecResponse = {
     const obj = createBaseMsgExecResponse();
     return obj;
   },
-  toJSON(_: MsgExecResponse): JsonSafe<MsgExecResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgExecResponse>): MsgExecResponse {
     const message = createBaseMsgExecResponse();
     return message;
@@ -3268,12 +3093,6 @@ export const MsgLeaveGroup = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: MsgLeaveGroup): JsonSafe<MsgLeaveGroup> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgLeaveGroup>): MsgLeaveGroup {
     const message = createBaseMsgLeaveGroup();
     message.address = object.address ?? "";
@@ -3348,10 +3167,6 @@ export const MsgLeaveGroupResponse = {
   },
   fromJSON(_: any): MsgLeaveGroupResponse {
     const obj = createBaseMsgLeaveGroupResponse();
-    return obj;
-  },
-  toJSON(_: MsgLeaveGroupResponse): JsonSafe<MsgLeaveGroupResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgLeaveGroupResponse>): MsgLeaveGroupResponse {

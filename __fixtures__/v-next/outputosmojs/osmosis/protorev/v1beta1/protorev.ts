@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** TokenPairArbRoutes tracks all of the hot routes for a given pair of tokens */
 export interface TokenPairArbRoutes {
@@ -199,7 +200,7 @@ export const TokenPairArbRoutes = {
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
-  toJSON(message: TokenPairArbRoutes): unknown {
+  toJSON(message: TokenPairArbRoutes): JsonSafe<TokenPairArbRoutes> {
     const obj: any = {};
     if (message.arbRoutes) {
       obj.arbRoutes = message.arbRoutes.map(e => e ? Route.toJSON(e) : undefined);
@@ -329,7 +330,7 @@ export const Route = {
       stepSize: isSet(object.stepSize) ? String(object.stepSize) : ""
     };
   },
-  toJSON(message: Route): unknown {
+  toJSON(message: Route): JsonSafe<Route> {
     const obj: any = {};
     if (message.trades) {
       obj.trades = message.trades.map(e => e ? Trade.toJSON(e) : undefined);
@@ -458,7 +459,7 @@ export const Trade = {
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
-  toJSON(message: Trade): unknown {
+  toJSON(message: Trade): JsonSafe<Trade> {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = (message.pool || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
@@ -595,7 +596,7 @@ export const RouteStatistics = {
       route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: RouteStatistics): unknown {
+  toJSON(message: RouteStatistics): JsonSafe<RouteStatistics> {
     const obj: any = {};
     if (message.profits) {
       obj.profits = message.profits.map(e => e ? Coin.toJSON(e) : undefined);
@@ -743,7 +744,7 @@ export const PoolWeights = {
       concentratedWeight: isSet(object.concentratedWeight) ? BigInt(object.concentratedWeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: PoolWeights): unknown {
+  toJSON(message: PoolWeights): JsonSafe<PoolWeights> {
     const obj: any = {};
     message.stableWeight !== undefined && (obj.stableWeight = (message.stableWeight || BigInt(0)).toString());
     message.balancerWeight !== undefined && (obj.balancerWeight = (message.balancerWeight || BigInt(0)).toString());
@@ -863,7 +864,7 @@ export const BaseDenom = {
       stepSize: isSet(object.stepSize) ? String(object.stepSize) : ""
     };
   },
-  toJSON(message: BaseDenom): unknown {
+  toJSON(message: BaseDenom): JsonSafe<BaseDenom> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.stepSize !== undefined && (obj.stepSize = message.stepSize);

@@ -3,6 +3,7 @@
 import { SuperfluidAsset } from "../superfluid";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.superfluid.v1beta1";
 /**
  * SetSuperfluidAssetsProposal is a gov Content type to update the superfluid
@@ -82,7 +83,7 @@ export const SetSuperfluidAssetsProposal = {
       assets: Array.isArray(object?.assets) ? object.assets.map((e: any) => SuperfluidAsset.fromJSON(e)) : []
     };
   },
-  toJSON(message: SetSuperfluidAssetsProposal): unknown {
+  toJSON(message: SetSuperfluidAssetsProposal): JsonSafe<SetSuperfluidAssetsProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -151,7 +152,7 @@ export const RemoveSuperfluidAssetsProposal = {
       superfluidAssetDenoms: Array.isArray(object?.superfluidAssetDenoms) ? object.superfluidAssetDenoms.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: RemoveSuperfluidAssetsProposal): unknown {
+  toJSON(message: RemoveSuperfluidAssetsProposal): JsonSafe<RemoveSuperfluidAssetsProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -237,7 +238,7 @@ export const UpdateUnpoolWhiteListProposal = {
       isOverwrite: isSet(object.isOverwrite) ? Boolean(object.isOverwrite) : false
     };
   },
-  toJSON(message: UpdateUnpoolWhiteListProposal): unknown {
+  toJSON(message: UpdateUnpoolWhiteListProposal): JsonSafe<UpdateUnpoolWhiteListProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

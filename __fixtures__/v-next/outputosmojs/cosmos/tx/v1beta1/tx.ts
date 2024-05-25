@@ -4,6 +4,7 @@ import { CompactBitArray, CompactBitArraySDKType } from "../../crypto/multisig/v
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** Tx is the standard type used for broadcasting transactions. */
 export interface Tx {
@@ -491,7 +492,7 @@ export const Tx = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: Tx): unknown {
+  toJSON(message: Tx): JsonSafe<Tx> {
     const obj: any = {};
     message.body !== undefined && (obj.body = message.body ? TxBody.toJSON(message.body) : undefined);
     message.authInfo !== undefined && (obj.authInfo = message.authInfo ? AuthInfo.toJSON(message.authInfo) : undefined);
@@ -629,7 +630,7 @@ export const TxRaw = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: TxRaw): unknown {
+  toJSON(message: TxRaw): JsonSafe<TxRaw> {
     const obj: any = {};
     message.bodyBytes !== undefined && (obj.bodyBytes = base64FromBytes(message.bodyBytes !== undefined ? message.bodyBytes : new Uint8Array()));
     message.authInfoBytes !== undefined && (obj.authInfoBytes = base64FromBytes(message.authInfoBytes !== undefined ? message.authInfoBytes : new Uint8Array()));
@@ -775,7 +776,7 @@ export const SignDoc = {
       accountNumber: isSet(object.accountNumber) ? BigInt(object.accountNumber.toString()) : BigInt(0)
     };
   },
-  toJSON(message: SignDoc): unknown {
+  toJSON(message: SignDoc): JsonSafe<SignDoc> {
     const obj: any = {};
     message.bodyBytes !== undefined && (obj.bodyBytes = base64FromBytes(message.bodyBytes !== undefined ? message.bodyBytes : new Uint8Array()));
     message.authInfoBytes !== undefined && (obj.authInfoBytes = base64FromBytes(message.authInfoBytes !== undefined ? message.authInfoBytes : new Uint8Array()));
@@ -936,7 +937,7 @@ export const SignDocDirectAux = {
       tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
     };
   },
-  toJSON(message: SignDocDirectAux): unknown {
+  toJSON(message: SignDocDirectAux): JsonSafe<SignDocDirectAux> {
     const obj: any = {};
     message.bodyBytes !== undefined && (obj.bodyBytes = base64FromBytes(message.bodyBytes !== undefined ? message.bodyBytes : new Uint8Array()));
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
@@ -1107,7 +1108,7 @@ export const TxBody = {
       nonCriticalExtensionOptions: Array.isArray(object?.nonCriticalExtensionOptions) ? object.nonCriticalExtensionOptions.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: TxBody): unknown {
+  toJSON(message: TxBody): JsonSafe<TxBody> {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
@@ -1283,7 +1284,7 @@ export const AuthInfo = {
       tip: isSet(object.tip) ? Tip.fromJSON(object.tip) : undefined
     };
   },
-  toJSON(message: AuthInfo): unknown {
+  toJSON(message: AuthInfo): JsonSafe<AuthInfo> {
     const obj: any = {};
     if (message.signerInfos) {
       obj.signerInfos = message.signerInfos.map(e => e ? SignerInfo.toJSON(e) : undefined);
@@ -1421,7 +1422,7 @@ export const SignerInfo = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
-  toJSON(message: SignerInfo): unknown {
+  toJSON(message: SignerInfo): JsonSafe<SignerInfo> {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.modeInfo !== undefined && (obj.modeInfo = message.modeInfo ? ModeInfo.toJSON(message.modeInfo) : undefined);
@@ -1541,7 +1542,7 @@ export const ModeInfo = {
       multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
     };
   },
-  toJSON(message: ModeInfo): unknown {
+  toJSON(message: ModeInfo): JsonSafe<ModeInfo> {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toJSON(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
@@ -1644,7 +1645,7 @@ export const ModeInfo_Single = {
       mode: isSet(object.mode) ? signModeFromJSON(object.mode) : -1
     };
   },
-  toJSON(message: ModeInfo_Single): unknown {
+  toJSON(message: ModeInfo_Single): JsonSafe<ModeInfo_Single> {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     return obj;
@@ -1746,7 +1747,7 @@ export const ModeInfo_Multi = {
       modeInfos: Array.isArray(object?.modeInfos) ? object.modeInfos.map((e: any) => ModeInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: ModeInfo_Multi): unknown {
+  toJSON(message: ModeInfo_Multi): JsonSafe<ModeInfo_Multi> {
     const obj: any = {};
     message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
     if (message.modeInfos) {
@@ -1883,7 +1884,7 @@ export const Fee = {
       granter: isSet(object.granter) ? String(object.granter) : ""
     };
   },
-  toJSON(message: Fee): unknown {
+  toJSON(message: Fee): JsonSafe<Fee> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -2022,7 +2023,7 @@ export const Tip = {
       tipper: isSet(object.tipper) ? String(object.tipper) : ""
     };
   },
-  toJSON(message: Tip): unknown {
+  toJSON(message: Tip): JsonSafe<Tip> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -2159,7 +2160,7 @@ export const AuxSignerData = {
       sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
-  toJSON(message: AuxSignerData): unknown {
+  toJSON(message: AuxSignerData): JsonSafe<AuxSignerData> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);

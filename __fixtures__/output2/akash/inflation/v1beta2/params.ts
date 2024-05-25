@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.inflation.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -68,7 +69,7 @@ export const Params = {
       variance: isSet(object.variance) ? String(object.variance) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.inflationDecayFactor !== undefined && (obj.inflationDecayFactor = message.inflationDecayFactor);
     message.initialInflation !== undefined && (obj.initialInflation = message.initialInflation);

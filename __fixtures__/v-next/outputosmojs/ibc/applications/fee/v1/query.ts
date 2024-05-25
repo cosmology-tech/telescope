@@ -4,6 +4,7 @@ import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { FeeEnabledChannel, FeeEnabledChannelSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** QueryIncentivizedPacketsRequest defines the request type for the IncentivizedPackets rpc */
 export interface QueryIncentivizedPacketsRequest {
@@ -330,7 +331,7 @@ export const QueryIncentivizedPacketsRequest = {
       queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryIncentivizedPacketsRequest): unknown {
+  toJSON(message: QueryIncentivizedPacketsRequest): JsonSafe<QueryIncentivizedPacketsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
@@ -441,7 +442,7 @@ export const QueryIncentivizedPacketsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryIncentivizedPacketsResponse): unknown {
+  toJSON(message: QueryIncentivizedPacketsResponse): JsonSafe<QueryIncentivizedPacketsResponse> {
     const obj: any = {};
     if (message.incentivizedPackets) {
       obj.incentivizedPackets = message.incentivizedPackets.map(e => e ? IdentifiedPacketFees.toJSON(e) : undefined);
@@ -554,7 +555,7 @@ export const QueryIncentivizedPacketRequest = {
       queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryIncentivizedPacketRequest): unknown {
+  toJSON(message: QueryIncentivizedPacketRequest): JsonSafe<QueryIncentivizedPacketRequest> {
     const obj: any = {};
     message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
     return obj;
@@ -648,7 +649,7 @@ export const QueryIncentivizedPacketResponse = {
       incentivizedPacket: isSet(object.incentivizedPacket) ? IdentifiedPacketFees.fromJSON(object.incentivizedPacket) : undefined
     };
   },
-  toJSON(message: QueryIncentivizedPacketResponse): unknown {
+  toJSON(message: QueryIncentivizedPacketResponse): JsonSafe<QueryIncentivizedPacketResponse> {
     const obj: any = {};
     message.incentivizedPacket !== undefined && (obj.incentivizedPacket = message.incentivizedPacket ? IdentifiedPacketFees.toJSON(message.incentivizedPacket) : undefined);
     return obj;
@@ -766,7 +767,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
       queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryIncentivizedPacketsForChannelRequest): unknown {
+  toJSON(message: QueryIncentivizedPacketsForChannelRequest): JsonSafe<QueryIncentivizedPacketsForChannelRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     message.portId !== undefined && (obj.portId = message.portId);
@@ -895,7 +896,7 @@ export const QueryIncentivizedPacketsForChannelResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryIncentivizedPacketsForChannelResponse): unknown {
+  toJSON(message: QueryIncentivizedPacketsForChannelResponse): JsonSafe<QueryIncentivizedPacketsForChannelResponse> {
     const obj: any = {};
     if (message.incentivizedPackets) {
       obj.incentivizedPackets = message.incentivizedPackets.map(e => e ? IdentifiedPacketFees.toJSON(e) : undefined);
@@ -998,7 +999,7 @@ export const QueryTotalRecvFeesRequest = {
   fromJSON(_: any): QueryTotalRecvFeesRequest {
     return {};
   },
-  toJSON(_: QueryTotalRecvFeesRequest): unknown {
+  toJSON(_: QueryTotalRecvFeesRequest): JsonSafe<QueryTotalRecvFeesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1081,7 +1082,7 @@ export const QueryTotalRecvFeesResponse = {
       recvFees: Array.isArray(object?.recvFees) ? object.recvFees.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalRecvFeesResponse): unknown {
+  toJSON(message: QueryTotalRecvFeesResponse): JsonSafe<QueryTotalRecvFeesResponse> {
     const obj: any = {};
     if (message.recvFees) {
       obj.recvFees = message.recvFees.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1175,7 +1176,7 @@ export const QueryTotalAckFeesRequest = {
   fromJSON(_: any): QueryTotalAckFeesRequest {
     return {};
   },
-  toJSON(_: QueryTotalAckFeesRequest): unknown {
+  toJSON(_: QueryTotalAckFeesRequest): JsonSafe<QueryTotalAckFeesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1258,7 +1259,7 @@ export const QueryTotalAckFeesResponse = {
       ackFees: Array.isArray(object?.ackFees) ? object.ackFees.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalAckFeesResponse): unknown {
+  toJSON(message: QueryTotalAckFeesResponse): JsonSafe<QueryTotalAckFeesResponse> {
     const obj: any = {};
     if (message.ackFees) {
       obj.ackFees = message.ackFees.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1352,7 +1353,7 @@ export const QueryTotalTimeoutFeesRequest = {
   fromJSON(_: any): QueryTotalTimeoutFeesRequest {
     return {};
   },
-  toJSON(_: QueryTotalTimeoutFeesRequest): unknown {
+  toJSON(_: QueryTotalTimeoutFeesRequest): JsonSafe<QueryTotalTimeoutFeesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1435,7 +1436,7 @@ export const QueryTotalTimeoutFeesResponse = {
       timeoutFees: Array.isArray(object?.timeoutFees) ? object.timeoutFees.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalTimeoutFeesResponse): unknown {
+  toJSON(message: QueryTotalTimeoutFeesResponse): JsonSafe<QueryTotalTimeoutFeesResponse> {
     const obj: any = {};
     if (message.timeoutFees) {
       obj.timeoutFees = message.timeoutFees.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1547,7 +1548,7 @@ export const QueryPayeeRequest = {
       relayer: isSet(object.relayer) ? String(object.relayer) : ""
     };
   },
-  toJSON(message: QueryPayeeRequest): unknown {
+  toJSON(message: QueryPayeeRequest): JsonSafe<QueryPayeeRequest> {
     const obj: any = {};
     message.channelId !== undefined && (obj.channelId = message.channelId);
     message.relayer !== undefined && (obj.relayer = message.relayer);
@@ -1650,7 +1651,7 @@ export const QueryPayeeResponse = {
       payeeAddress: isSet(object.payeeAddress) ? String(object.payeeAddress) : ""
     };
   },
-  toJSON(message: QueryPayeeResponse): unknown {
+  toJSON(message: QueryPayeeResponse): JsonSafe<QueryPayeeResponse> {
     const obj: any = {};
     message.payeeAddress !== undefined && (obj.payeeAddress = message.payeeAddress);
     return obj;
@@ -1752,7 +1753,7 @@ export const QueryCounterpartyPayeeRequest = {
       relayer: isSet(object.relayer) ? String(object.relayer) : ""
     };
   },
-  toJSON(message: QueryCounterpartyPayeeRequest): unknown {
+  toJSON(message: QueryCounterpartyPayeeRequest): JsonSafe<QueryCounterpartyPayeeRequest> {
     const obj: any = {};
     message.channelId !== undefined && (obj.channelId = message.channelId);
     message.relayer !== undefined && (obj.relayer = message.relayer);
@@ -1855,7 +1856,7 @@ export const QueryCounterpartyPayeeResponse = {
       counterpartyPayee: isSet(object.counterpartyPayee) ? String(object.counterpartyPayee) : ""
     };
   },
-  toJSON(message: QueryCounterpartyPayeeResponse): unknown {
+  toJSON(message: QueryCounterpartyPayeeResponse): JsonSafe<QueryCounterpartyPayeeResponse> {
     const obj: any = {};
     message.counterpartyPayee !== undefined && (obj.counterpartyPayee = message.counterpartyPayee);
     return obj;
@@ -1957,7 +1958,7 @@ export const QueryFeeEnabledChannelsRequest = {
       queryHeight: isSet(object.queryHeight) ? BigInt(object.queryHeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryFeeEnabledChannelsRequest): unknown {
+  toJSON(message: QueryFeeEnabledChannelsRequest): JsonSafe<QueryFeeEnabledChannelsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     message.queryHeight !== undefined && (obj.queryHeight = (message.queryHeight || BigInt(0)).toString());
@@ -2068,7 +2069,7 @@ export const QueryFeeEnabledChannelsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryFeeEnabledChannelsResponse): unknown {
+  toJSON(message: QueryFeeEnabledChannelsResponse): JsonSafe<QueryFeeEnabledChannelsResponse> {
     const obj: any = {};
     if (message.feeEnabledChannels) {
       obj.feeEnabledChannels = message.feeEnabledChannels.map(e => e ? FeeEnabledChannel.toJSON(e) : undefined);
@@ -2189,7 +2190,7 @@ export const QueryFeeEnabledChannelRequest = {
       channelId: isSet(object.channelId) ? String(object.channelId) : ""
     };
   },
-  toJSON(message: QueryFeeEnabledChannelRequest): unknown {
+  toJSON(message: QueryFeeEnabledChannelRequest): JsonSafe<QueryFeeEnabledChannelRequest> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -2292,7 +2293,7 @@ export const QueryFeeEnabledChannelResponse = {
       feeEnabled: isSet(object.feeEnabled) ? Boolean(object.feeEnabled) : false
     };
   },
-  toJSON(message: QueryFeeEnabledChannelResponse): unknown {
+  toJSON(message: QueryFeeEnabledChannelResponse): JsonSafe<QueryFeeEnabledChannelResponse> {
     const obj: any = {};
     message.feeEnabled !== undefined && (obj.feeEnabled = message.feeEnabled);
     return obj;

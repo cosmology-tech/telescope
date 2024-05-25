@@ -3,7 +3,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../../google/pro
 import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
@@ -313,22 +312,6 @@ export const SmoothWeightChangeParams = {
     if (Array.isArray(object?.targetPoolWeights)) obj.targetPoolWeights = object.targetPoolWeights.map((e: any) => PoolAsset.fromJSON(e));
     return obj;
   },
-  toJSON(message: SmoothWeightChangeParams): JsonSafe<SmoothWeightChangeParams> {
-    const obj: any = {};
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    if (message.initialPoolWeights) {
-      obj.initialPoolWeights = message.initialPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.initialPoolWeights = [];
-    }
-    if (message.targetPoolWeights) {
-      obj.targetPoolWeights = message.targetPoolWeights.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.targetPoolWeights = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<SmoothWeightChangeParams>): SmoothWeightChangeParams {
     const message = createBaseSmoothWeightChangeParams();
     message.startTime = object.startTime ?? undefined;
@@ -456,13 +439,6 @@ export const PoolParams = {
     if (isSet(object.smoothWeightChangeParams)) obj.smoothWeightChangeParams = SmoothWeightChangeParams.fromJSON(object.smoothWeightChangeParams);
     return obj;
   },
-  toJSON(message: PoolParams): JsonSafe<PoolParams> {
-    const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
-    message.smoothWeightChangeParams !== undefined && (obj.smoothWeightChangeParams = message.smoothWeightChangeParams ? SmoothWeightChangeParams.toJSON(message.smoothWeightChangeParams) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<PoolParams>): PoolParams {
     const message = createBasePoolParams();
     message.swapFee = object.swapFee ?? "";
@@ -561,12 +537,6 @@ export const PoolAsset = {
     const obj = createBasePoolAsset();
     if (isSet(object.token)) obj.token = Coin.fromJSON(object.token);
     if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: PoolAsset): JsonSafe<PoolAsset> {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token ? Coin.toJSON(message.token) : undefined);
-    message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
   fromPartial(object: DeepPartial<PoolAsset>): PoolAsset {
@@ -701,21 +671,6 @@ export const Pool = {
     if (isSet(object.totalShares)) obj.totalShares = Coin.fromJSON(object.totalShares);
     if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
-    return obj;
-  },
-  toJSON(message: Pool): JsonSafe<Pool> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
-    if (message.poolAssets) {
-      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.poolAssets = [];
-    }
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     return obj;
   },
   fromPartial(object: DeepPartial<Pool>): Pool {

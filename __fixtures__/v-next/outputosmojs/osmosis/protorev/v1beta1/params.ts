@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** Params defines the parameters for the module. */
 export interface Params {
@@ -60,7 +61,7 @@ export const Params = {
       admin: isSet(object.admin) ? String(object.admin) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
     message.admin !== undefined && (obj.admin = message.admin);

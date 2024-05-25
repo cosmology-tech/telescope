@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * QueryDenomTraceRequest is the request type for the Query/DenomTrace RPC
@@ -113,7 +114,7 @@ export const QueryDenomTraceRequest = {
       hash: isSet(object.hash) ? String(object.hash) : ""
     };
   },
-  toJSON(message: QueryDenomTraceRequest): unknown {
+  toJSON(message: QueryDenomTraceRequest): JsonSafe<QueryDenomTraceRequest> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = message.hash);
     return obj;
@@ -168,7 +169,7 @@ export const QueryDenomTraceResponse = {
       denomTrace: isSet(object.denomTrace) ? DenomTrace.fromJSON(object.denomTrace) : undefined
     };
   },
-  toJSON(message: QueryDenomTraceResponse): unknown {
+  toJSON(message: QueryDenomTraceResponse): JsonSafe<QueryDenomTraceResponse> {
     const obj: any = {};
     message.denomTrace !== undefined && (obj.denomTrace = message.denomTrace ? DenomTrace.toJSON(message.denomTrace) : undefined);
     return obj;
@@ -223,7 +224,7 @@ export const QueryDenomTracesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryDenomTracesRequest): unknown {
+  toJSON(message: QueryDenomTracesRequest): JsonSafe<QueryDenomTracesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -286,7 +287,7 @@ export const QueryDenomTracesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryDenomTracesResponse): unknown {
+  toJSON(message: QueryDenomTracesResponse): JsonSafe<QueryDenomTracesResponse> {
     const obj: any = {};
     if (message.denomTraces) {
       obj.denomTraces = message.denomTraces.map(e => e ? DenomTrace.toJSON(e) : undefined);
@@ -343,7 +344,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -393,7 +394,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

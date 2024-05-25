@@ -37,20 +37,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    send(value: MsgSend) {
-      return {
-        typeUrl: "/cosmos.bank.v1beta1.MsgSend",
-        value: MsgSend.toJSON(value)
-      };
-    },
-    multiSend(value: MsgMultiSend) {
-      return {
-        typeUrl: "/cosmos.bank.v1beta1.MsgMultiSend",
-        value: MsgMultiSend.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     send(value: any) {
       return {

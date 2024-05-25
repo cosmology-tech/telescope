@@ -1,6 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method */
@@ -126,7 +127,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -209,7 +210,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -305,7 +306,7 @@ export const QuerySigningInfoRequest = {
     if (isSet(object.consAddress)) obj.consAddress = String(object.consAddress);
     return obj;
   },
-  toJSON(message: QuerySigningInfoRequest): unknown {
+  toJSON(message: QuerySigningInfoRequest): JsonSafe<QuerySigningInfoRequest> {
     const obj: any = {};
     message.consAddress !== undefined && (obj.consAddress = message.consAddress);
     return obj;
@@ -399,7 +400,7 @@ export const QuerySigningInfoResponse = {
     if (isSet(object.valSigningInfo)) obj.valSigningInfo = ValidatorSigningInfo.fromJSON(object.valSigningInfo);
     return obj;
   },
-  toJSON(message: QuerySigningInfoResponse): unknown {
+  toJSON(message: QuerySigningInfoResponse): JsonSafe<QuerySigningInfoResponse> {
     const obj: any = {};
     message.valSigningInfo !== undefined && (obj.valSigningInfo = message.valSigningInfo ? ValidatorSigningInfo.toJSON(message.valSigningInfo) : undefined);
     return obj;
@@ -495,7 +496,7 @@ export const QuerySigningInfosRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QuerySigningInfosRequest): unknown {
+  toJSON(message: QuerySigningInfosRequest): JsonSafe<QuerySigningInfosRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -599,7 +600,7 @@ export const QuerySigningInfosResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QuerySigningInfosResponse): unknown {
+  toJSON(message: QuerySigningInfosResponse): JsonSafe<QuerySigningInfosResponse> {
     const obj: any = {};
     if (message.info) {
       obj.info = message.info.map(e => e ? ValidatorSigningInfo.toJSON(e) : undefined);

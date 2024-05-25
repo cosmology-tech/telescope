@@ -1,8 +1,7 @@
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
@@ -135,11 +134,6 @@ export const QueryEvidenceRequest = {
     if (isSet(object.evidenceHash)) obj.evidenceHash = bytesFromBase64(object.evidenceHash);
     return obj;
   },
-  toJSON(message: QueryEvidenceRequest): JsonSafe<QueryEvidenceRequest> {
-    const obj: any = {};
-    message.evidenceHash !== undefined && (obj.evidenceHash = base64FromBytes(message.evidenceHash !== undefined ? message.evidenceHash : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
@@ -214,11 +208,6 @@ export const QueryEvidenceResponse = {
   fromJSON(object: any): QueryEvidenceResponse {
     const obj = createBaseQueryEvidenceResponse();
     if (isSet(object.evidence)) obj.evidence = Any.fromJSON(object.evidence);
-    return obj;
-  },
-  toJSON(message: QueryEvidenceResponse): JsonSafe<QueryEvidenceResponse> {
-    const obj: any = {};
-    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toJSON(message.evidence) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
@@ -297,11 +286,6 @@ export const QueryAllEvidenceRequest = {
   fromJSON(object: any): QueryAllEvidenceRequest {
     const obj = createBaseQueryAllEvidenceRequest();
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllEvidenceRequest): JsonSafe<QueryAllEvidenceRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
@@ -388,16 +372,6 @@ export const QueryAllEvidenceResponse = {
     const obj = createBaseQueryAllEvidenceResponse();
     if (Array.isArray(object?.evidence)) obj.evidence = object.evidence.map((e: any) => Any.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllEvidenceResponse): JsonSafe<QueryAllEvidenceResponse> {
-    const obj: any = {};
-    if (message.evidence) {
-      obj.evidence = message.evidence.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.evidence = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {

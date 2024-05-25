@@ -4,6 +4,7 @@ import { Duration, DurationSDKType } from "../../protobuf/duration";
 import { Any, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -668,7 +669,7 @@ export const AttributeContext = {
       extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: AttributeContext): unknown {
+  toJSON(message: AttributeContext): JsonSafe<AttributeContext> {
     const obj: any = {};
     message.origin !== undefined && (obj.origin = message.origin ? AttributeContext_Peer.toJSON(message.origin) : undefined);
     message.source !== undefined && (obj.source = message.source ? AttributeContext_Peer.toJSON(message.source) : undefined);
@@ -836,7 +837,7 @@ export const AttributeContext_Peer_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AttributeContext_Peer_LabelsEntry): unknown {
+  toJSON(message: AttributeContext_Peer_LabelsEntry): JsonSafe<AttributeContext_Peer_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -970,7 +971,7 @@ export const AttributeContext_Peer = {
       regionCode: isSet(object.regionCode) ? String(object.regionCode) : ""
     };
   },
-  toJSON(message: AttributeContext_Peer): unknown {
+  toJSON(message: AttributeContext_Peer): JsonSafe<AttributeContext_Peer> {
     const obj: any = {};
     message.ip !== undefined && (obj.ip = message.ip);
     message.port !== undefined && (obj.port = (message.port || BigInt(0)).toString());
@@ -1155,7 +1156,7 @@ export const AttributeContext_Api = {
       version: isSet(object.version) ? String(object.version) : ""
     };
   },
-  toJSON(message: AttributeContext_Api): unknown {
+  toJSON(message: AttributeContext_Api): JsonSafe<AttributeContext_Api> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service);
     message.operation !== undefined && (obj.operation = message.operation);
@@ -1302,7 +1303,7 @@ export const AttributeContext_Auth = {
       accessLevels: Array.isArray(object?.accessLevels) ? object.accessLevels.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: AttributeContext_Auth): unknown {
+  toJSON(message: AttributeContext_Auth): JsonSafe<AttributeContext_Auth> {
     const obj: any = {};
     message.principal !== undefined && (obj.principal = message.principal);
     if (message.audiences) {
@@ -1453,7 +1454,7 @@ export const AttributeContext_Request_HeadersEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AttributeContext_Request_HeadersEntry): unknown {
+  toJSON(message: AttributeContext_Request_HeadersEntry): JsonSafe<AttributeContext_Request_HeadersEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1643,7 +1644,7 @@ export const AttributeContext_Request = {
       auth: isSet(object.auth) ? AttributeContext_Auth.fromJSON(object.auth) : undefined
     };
   },
-  toJSON(message: AttributeContext_Request): unknown {
+  toJSON(message: AttributeContext_Request): JsonSafe<AttributeContext_Request> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.method !== undefined && (obj.method = message.method);
@@ -1874,7 +1875,7 @@ export const AttributeContext_Response_HeadersEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AttributeContext_Response_HeadersEntry): unknown {
+  toJSON(message: AttributeContext_Response_HeadersEntry): JsonSafe<AttributeContext_Response_HeadersEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2008,7 +2009,7 @@ export const AttributeContext_Response = {
       backendLatency: isSet(object.backendLatency) ? Duration.fromJSON(object.backendLatency) : undefined
     };
   },
-  toJSON(message: AttributeContext_Response): unknown {
+  toJSON(message: AttributeContext_Response): JsonSafe<AttributeContext_Response> {
     const obj: any = {};
     message.code !== undefined && (obj.code = (message.code || BigInt(0)).toString());
     message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
@@ -2176,7 +2177,7 @@ export const AttributeContext_Resource_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AttributeContext_Resource_LabelsEntry): unknown {
+  toJSON(message: AttributeContext_Resource_LabelsEntry): JsonSafe<AttributeContext_Resource_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2274,7 +2275,7 @@ export const AttributeContext_Resource_AnnotationsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AttributeContext_Resource_AnnotationsEntry): unknown {
+  toJSON(message: AttributeContext_Resource_AnnotationsEntry): JsonSafe<AttributeContext_Resource_AnnotationsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2475,7 +2476,7 @@ export const AttributeContext_Resource = {
       location: isSet(object.location) ? String(object.location) : ""
     };
   },
-  toJSON(message: AttributeContext_Resource): unknown {
+  toJSON(message: AttributeContext_Resource): JsonSafe<AttributeContext_Resource> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service);
     message.name !== undefined && (obj.name = message.name);

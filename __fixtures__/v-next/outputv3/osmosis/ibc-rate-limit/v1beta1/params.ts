@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** Params defines the parameters for the ibc-rate-limit module. */
 export interface Params {
@@ -52,11 +51,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -1,7 +1,6 @@
 import { Value, ValueAmino, ValueSDKType } from "./value";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -287,20 +286,6 @@ export const EvalState = {
     if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => EvalState_Result.fromJSON(e));
     return obj;
   },
-  toJSON(message: EvalState): JsonSafe<EvalState> {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? ExprValue.toJSON(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    if (message.results) {
-      obj.results = message.results.map(e => e ? EvalState_Result.toJSON(e) : undefined);
-    } else {
-      obj.results = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<EvalState>): EvalState {
     const message = createBaseEvalState();
     message.values = object.values?.map(e => ExprValue.fromPartial(e)) || [];
@@ -401,12 +386,6 @@ export const EvalState_Result = {
     const obj = createBaseEvalState_Result();
     if (isSet(object.expr)) obj.expr = BigInt(object.expr.toString());
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: EvalState_Result): JsonSafe<EvalState_Result> {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<EvalState_Result>): EvalState_Result {
@@ -511,13 +490,6 @@ export const ExprValue = {
     if (isSet(object.unknown)) obj.unknown = UnknownSet.fromJSON(object.unknown);
     return obj;
   },
-  toJSON(message: ExprValue): JsonSafe<ExprValue> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
-    message.error !== undefined && (obj.error = message.error ? ErrorSet.toJSON(message.error) : undefined);
-    message.unknown !== undefined && (obj.unknown = message.unknown ? UnknownSet.toJSON(message.unknown) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ExprValue>): ExprValue {
     const message = createBaseExprValue();
     if (object.value !== undefined && object.value !== null) {
@@ -613,15 +585,6 @@ export const ErrorSet = {
     if (Array.isArray(object?.errors)) obj.errors = object.errors.map((e: any) => Status.fromJSON(e));
     return obj;
   },
-  toJSON(message: ErrorSet): JsonSafe<ErrorSet> {
-    const obj: any = {};
-    if (message.errors) {
-      obj.errors = message.errors.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.errors = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ErrorSet>): ErrorSet {
     const message = createBaseErrorSet();
     message.errors = object.errors?.map(e => Status.fromPartial(e)) || [];
@@ -710,15 +673,6 @@ export const UnknownSet = {
   fromJSON(object: any): UnknownSet {
     const obj = createBaseUnknownSet();
     if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: UnknownSet): JsonSafe<UnknownSet> {
-    const obj: any = {};
-    if (message.exprs) {
-      obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.exprs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<UnknownSet>): UnknownSet {

@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -47,7 +48,7 @@ export const Params = {
       minimumRiskFactor: isSet(object.minimumRiskFactor) ? String(object.minimumRiskFactor) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.minimumRiskFactor !== undefined && (obj.minimumRiskFactor = message.minimumRiskFactor);
     return obj;

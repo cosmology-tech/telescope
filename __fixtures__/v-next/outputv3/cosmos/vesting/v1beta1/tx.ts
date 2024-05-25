@@ -2,7 +2,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Period, PeriodAmino, PeriodSDKType } from "./vesting";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.vesting.v1beta1";
 /**
  * MsgCreateVestingAccount defines a message that enables creating a vesting
@@ -213,19 +212,6 @@ export const MsgCreateVestingAccount = {
     if (isSet(object.delayed)) obj.delayed = Boolean(object.delayed);
     return obj;
   },
-  toJSON(message: MsgCreateVestingAccount): JsonSafe<MsgCreateVestingAccount> {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    message.endTime !== undefined && (obj.endTime = (message.endTime || BigInt(0)).toString());
-    message.delayed !== undefined && (obj.delayed = message.delayed);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateVestingAccount>): MsgCreateVestingAccount {
     const message = createBaseMsgCreateVestingAccount();
     message.fromAddress = object.fromAddress ?? "";
@@ -329,10 +315,6 @@ export const MsgCreateVestingAccountResponse = {
     const obj = createBaseMsgCreateVestingAccountResponse();
     return obj;
   },
-  toJSON(_: MsgCreateVestingAccountResponse): JsonSafe<MsgCreateVestingAccountResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateVestingAccountResponse>): MsgCreateVestingAccountResponse {
     const message = createBaseMsgCreateVestingAccountResponse();
     return message;
@@ -415,17 +397,6 @@ export const MsgCreatePermanentLockedAccount = {
     if (isSet(object.fromAddress)) obj.fromAddress = String(object.fromAddress);
     if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgCreatePermanentLockedAccount): JsonSafe<MsgCreatePermanentLockedAccount> {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreatePermanentLockedAccount>): MsgCreatePermanentLockedAccount {
@@ -513,10 +484,6 @@ export const MsgCreatePermanentLockedAccountResponse = {
   },
   fromJSON(_: any): MsgCreatePermanentLockedAccountResponse {
     const obj = createBaseMsgCreatePermanentLockedAccountResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreatePermanentLockedAccountResponse): JsonSafe<MsgCreatePermanentLockedAccountResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCreatePermanentLockedAccountResponse>): MsgCreatePermanentLockedAccountResponse {
@@ -609,18 +576,6 @@ export const MsgCreatePeriodicVestingAccount = {
     if (isSet(object.toAddress)) obj.toAddress = String(object.toAddress);
     if (isSet(object.startTime)) obj.startTime = BigInt(object.startTime.toString());
     if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgCreatePeriodicVestingAccount): JsonSafe<MsgCreatePeriodicVestingAccount> {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    message.startTime !== undefined && (obj.startTime = (message.startTime || BigInt(0)).toString());
-    if (message.vestingPeriods) {
-      obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.vestingPeriods = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreatePeriodicVestingAccount>): MsgCreatePeriodicVestingAccount {
@@ -717,10 +672,6 @@ export const MsgCreatePeriodicVestingAccountResponse = {
   },
   fromJSON(_: any): MsgCreatePeriodicVestingAccountResponse {
     const obj = createBaseMsgCreatePeriodicVestingAccountResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreatePeriodicVestingAccountResponse): JsonSafe<MsgCreatePeriodicVestingAccountResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCreatePeriodicVestingAccountResponse>): MsgCreatePeriodicVestingAccountResponse {

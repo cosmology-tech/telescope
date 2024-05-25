@@ -1,6 +1,7 @@
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -208,7 +209,7 @@ export const TokenPair = {
       contractOwner: isSet(object.contractOwner) ? ownerFromJSON(object.contractOwner) : -1
     };
   },
-  toJSON(message: TokenPair): unknown {
+  toJSON(message: TokenPair): JsonSafe<TokenPair> {
     const obj: any = {};
     message.erc20Address !== undefined && (obj.erc20Address = message.erc20Address);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -339,7 +340,7 @@ export const RegisterCoinProposal = {
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
     };
   },
-  toJSON(message: RegisterCoinProposal): unknown {
+  toJSON(message: RegisterCoinProposal): JsonSafe<RegisterCoinProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -461,7 +462,7 @@ export const RegisterERC20Proposal = {
       erc20address: isSet(object.erc20address) ? String(object.erc20address) : ""
     };
   },
-  toJSON(message: RegisterERC20Proposal): unknown {
+  toJSON(message: RegisterERC20Proposal): JsonSafe<RegisterERC20Proposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -583,7 +584,7 @@ export const ToggleTokenConversionProposal = {
       token: isSet(object.token) ? String(object.token) : ""
     };
   },
-  toJSON(message: ToggleTokenConversionProposal): unknown {
+  toJSON(message: ToggleTokenConversionProposal): JsonSafe<ToggleTokenConversionProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

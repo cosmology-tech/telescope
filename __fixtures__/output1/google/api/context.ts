@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -159,7 +160,7 @@ export const Context = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromJSON(e)) : []
     };
   },
-  toJSON(message: Context): unknown {
+  toJSON(message: Context): JsonSafe<Context> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? ContextRule.toJSON(e) : undefined);
@@ -254,7 +255,7 @@ export const ContextRule = {
       allowedResponseExtensions: Array.isArray(object?.allowedResponseExtensions) ? object.allowedResponseExtensions.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: ContextRule): unknown {
+  toJSON(message: ContextRule): JsonSafe<ContextRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     if (message.requested) {

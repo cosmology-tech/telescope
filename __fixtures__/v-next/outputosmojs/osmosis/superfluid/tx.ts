@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 export interface MsgSuperfluidDelegate {
   sender: string;
@@ -185,7 +186,7 @@ export const MsgSuperfluidDelegate = {
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
-  toJSON(message: MsgSuperfluidDelegate): unknown {
+  toJSON(message: MsgSuperfluidDelegate): JsonSafe<MsgSuperfluidDelegate> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
@@ -287,7 +288,7 @@ export const MsgSuperfluidDelegateResponse = {
   fromJSON(_: any): MsgSuperfluidDelegateResponse {
     return {};
   },
-  toJSON(_: MsgSuperfluidDelegateResponse): unknown {
+  toJSON(_: MsgSuperfluidDelegateResponse): JsonSafe<MsgSuperfluidDelegateResponse> {
     const obj: any = {};
     return obj;
   },
@@ -378,7 +379,7 @@ export const MsgSuperfluidUndelegate = {
       lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSuperfluidUndelegate): unknown {
+  toJSON(message: MsgSuperfluidUndelegate): JsonSafe<MsgSuperfluidUndelegate> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
@@ -471,7 +472,7 @@ export const MsgSuperfluidUndelegateResponse = {
   fromJSON(_: any): MsgSuperfluidUndelegateResponse {
     return {};
   },
-  toJSON(_: MsgSuperfluidUndelegateResponse): unknown {
+  toJSON(_: MsgSuperfluidUndelegateResponse): JsonSafe<MsgSuperfluidUndelegateResponse> {
     const obj: any = {};
     return obj;
   },
@@ -562,7 +563,7 @@ export const MsgSuperfluidUnbondLock = {
       lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSuperfluidUnbondLock): unknown {
+  toJSON(message: MsgSuperfluidUnbondLock): JsonSafe<MsgSuperfluidUnbondLock> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
@@ -655,7 +656,7 @@ export const MsgSuperfluidUnbondLockResponse = {
   fromJSON(_: any): MsgSuperfluidUnbondLockResponse {
     return {};
   },
-  toJSON(_: MsgSuperfluidUnbondLockResponse): unknown {
+  toJSON(_: MsgSuperfluidUnbondLockResponse): JsonSafe<MsgSuperfluidUnbondLockResponse> {
     const obj: any = {};
     return obj;
   },
@@ -754,7 +755,7 @@ export const MsgLockAndSuperfluidDelegate = {
       valAddr: isSet(object.valAddr) ? String(object.valAddr) : ""
     };
   },
-  toJSON(message: MsgLockAndSuperfluidDelegate): unknown {
+  toJSON(message: MsgLockAndSuperfluidDelegate): JsonSafe<MsgLockAndSuperfluidDelegate> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.coins) {
@@ -876,7 +877,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       ID: isSet(object.ID) ? BigInt(object.ID.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgLockAndSuperfluidDelegateResponse): unknown {
+  toJSON(message: MsgLockAndSuperfluidDelegateResponse): JsonSafe<MsgLockAndSuperfluidDelegateResponse> {
     const obj: any = {};
     message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
     return obj;
@@ -978,7 +979,7 @@ export const MsgUnPoolWhitelistedPool = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgUnPoolWhitelistedPool): unknown {
+  toJSON(message: MsgUnPoolWhitelistedPool): JsonSafe<MsgUnPoolWhitelistedPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -1090,7 +1091,7 @@ export const MsgUnPoolWhitelistedPoolResponse = {
       exitedLockIds: Array.isArray(object?.exitedLockIds) ? object.exitedLockIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: MsgUnPoolWhitelistedPoolResponse): unknown {
+  toJSON(message: MsgUnPoolWhitelistedPoolResponse): JsonSafe<MsgUnPoolWhitelistedPoolResponse> {
     const obj: any = {};
     if (message.exitedLockIds) {
       obj.exitedLockIds = message.exitedLockIds.map(e => (e || BigInt(0)).toString());

@@ -1,6 +1,7 @@
 import { DistrRecord, DistrRecordSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -108,7 +109,7 @@ export const ReplacePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: ReplacePoolIncentivesProposal): unknown {
+  toJSON(message: ReplacePoolIncentivesProposal): JsonSafe<ReplacePoolIncentivesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -195,7 +196,7 @@ export const UpdatePoolIncentivesProposal = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: UpdatePoolIncentivesProposal): unknown {
+  toJSON(message: UpdatePoolIncentivesProposal): JsonSafe<UpdatePoolIncentivesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

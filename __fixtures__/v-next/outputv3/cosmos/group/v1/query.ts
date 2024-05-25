@@ -2,7 +2,6 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { GroupInfo, GroupInfoAmino, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberSDKType, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType, TallyResult, TallyResultAmino, TallyResultSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
@@ -593,11 +592,6 @@ export const QueryGroupInfoRequest = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: QueryGroupInfoRequest): JsonSafe<QueryGroupInfoRequest> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupInfoRequest>): QueryGroupInfoRequest {
     const message = createBaseQueryGroupInfoRequest();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -674,11 +668,6 @@ export const QueryGroupInfoResponse = {
   fromJSON(object: any): QueryGroupInfoResponse {
     const obj = createBaseQueryGroupInfoResponse();
     if (isSet(object.info)) obj.info = GroupInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: QueryGroupInfoResponse): JsonSafe<QueryGroupInfoResponse> {
-    const obj: any = {};
-    message.info !== undefined && (obj.info = message.info ? GroupInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupInfoResponse>): QueryGroupInfoResponse {
@@ -759,11 +748,6 @@ export const QueryGroupPolicyInfoRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryGroupPolicyInfoRequest): JsonSafe<QueryGroupPolicyInfoRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoRequest>): QueryGroupPolicyInfoRequest {
     const message = createBaseQueryGroupPolicyInfoRequest();
     message.address = object.address ?? "";
@@ -838,11 +822,6 @@ export const QueryGroupPolicyInfoResponse = {
   fromJSON(object: any): QueryGroupPolicyInfoResponse {
     const obj = createBaseQueryGroupPolicyInfoResponse();
     if (isSet(object.info)) obj.info = GroupPolicyInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: QueryGroupPolicyInfoResponse): JsonSafe<QueryGroupPolicyInfoResponse> {
-    const obj: any = {};
-    message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupPolicyInfoResponse>): QueryGroupPolicyInfoResponse {
@@ -929,12 +908,6 @@ export const QueryGroupMembersRequest = {
     const obj = createBaseQueryGroupMembersRequest();
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryGroupMembersRequest): JsonSafe<QueryGroupMembersRequest> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupMembersRequest>): QueryGroupMembersRequest {
@@ -1030,16 +1003,6 @@ export const QueryGroupMembersResponse = {
     const obj = createBaseQueryGroupMembersResponse();
     if (Array.isArray(object?.members)) obj.members = object.members.map((e: any) => GroupMember.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryGroupMembersResponse): JsonSafe<QueryGroupMembersResponse> {
-    const obj: any = {};
-    if (message.members) {
-      obj.members = message.members.map(e => e ? GroupMember.toJSON(e) : undefined);
-    } else {
-      obj.members = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupMembersResponse>): QueryGroupMembersResponse {
@@ -1141,12 +1104,6 @@ export const QueryGroupsByAdminRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByAdminRequest): JsonSafe<QueryGroupsByAdminRequest> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupsByAdminRequest>): QueryGroupsByAdminRequest {
     const message = createBaseQueryGroupsByAdminRequest();
     message.admin = object.admin ?? "";
@@ -1238,16 +1195,6 @@ export const QueryGroupsByAdminResponse = {
     const obj = createBaseQueryGroupsByAdminResponse();
     if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryGroupsByAdminResponse): JsonSafe<QueryGroupsByAdminResponse> {
-    const obj: any = {};
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupsByAdminResponse>): QueryGroupsByAdminResponse {
@@ -1349,12 +1296,6 @@ export const QueryGroupPoliciesByGroupRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByGroupRequest): JsonSafe<QueryGroupPoliciesByGroupRequest> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupRequest>): QueryGroupPoliciesByGroupRequest {
     const message = createBaseQueryGroupPoliciesByGroupRequest();
     if (object.groupId !== undefined && object.groupId !== null) {
@@ -1448,16 +1389,6 @@ export const QueryGroupPoliciesByGroupResponse = {
     const obj = createBaseQueryGroupPoliciesByGroupResponse();
     if (Array.isArray(object?.groupPolicies)) obj.groupPolicies = object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryGroupPoliciesByGroupResponse): JsonSafe<QueryGroupPoliciesByGroupResponse> {
-    const obj: any = {};
-    if (message.groupPolicies) {
-      obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
-    } else {
-      obj.groupPolicies = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByGroupResponse>): QueryGroupPoliciesByGroupResponse {
@@ -1559,12 +1490,6 @@ export const QueryGroupPoliciesByAdminRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByAdminRequest): JsonSafe<QueryGroupPoliciesByAdminRequest> {
-    const obj: any = {};
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminRequest>): QueryGroupPoliciesByAdminRequest {
     const message = createBaseQueryGroupPoliciesByAdminRequest();
     message.admin = object.admin ?? "";
@@ -1658,16 +1583,6 @@ export const QueryGroupPoliciesByAdminResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByAdminResponse): JsonSafe<QueryGroupPoliciesByAdminResponse> {
-    const obj: any = {};
-    if (message.groupPolicies) {
-      obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
-    } else {
-      obj.groupPolicies = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupPoliciesByAdminResponse>): QueryGroupPoliciesByAdminResponse {
     const message = createBaseQueryGroupPoliciesByAdminResponse();
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
@@ -1759,11 +1674,6 @@ export const QueryProposalRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryProposalRequest): JsonSafe<QueryProposalRequest> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryProposalRequest>): QueryProposalRequest {
     const message = createBaseQueryProposalRequest();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -1840,11 +1750,6 @@ export const QueryProposalResponse = {
   fromJSON(object: any): QueryProposalResponse {
     const obj = createBaseQueryProposalResponse();
     if (isSet(object.proposal)) obj.proposal = Proposal.fromJSON(object.proposal);
-    return obj;
-  },
-  toJSON(message: QueryProposalResponse): JsonSafe<QueryProposalResponse> {
-    const obj: any = {};
-    message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toJSON(message.proposal) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryProposalResponse>): QueryProposalResponse {
@@ -1931,12 +1836,6 @@ export const QueryProposalsByGroupPolicyRequest = {
     const obj = createBaseQueryProposalsByGroupPolicyRequest();
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryProposalsByGroupPolicyRequest): JsonSafe<QueryProposalsByGroupPolicyRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyRequest>): QueryProposalsByGroupPolicyRequest {
@@ -2030,16 +1929,6 @@ export const QueryProposalsByGroupPolicyResponse = {
     const obj = createBaseQueryProposalsByGroupPolicyResponse();
     if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryProposalsByGroupPolicyResponse): JsonSafe<QueryProposalsByGroupPolicyResponse> {
-    const obj: any = {};
-    if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
-    } else {
-      obj.proposals = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryProposalsByGroupPolicyResponse>): QueryProposalsByGroupPolicyResponse {
@@ -2141,12 +2030,6 @@ export const QueryVoteByProposalVoterRequest = {
     if (isSet(object.voter)) obj.voter = String(object.voter);
     return obj;
   },
-  toJSON(message: QueryVoteByProposalVoterRequest): JsonSafe<QueryVoteByProposalVoterRequest> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterRequest>): QueryVoteByProposalVoterRequest {
     const message = createBaseQueryVoteByProposalVoterRequest();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -2230,11 +2113,6 @@ export const QueryVoteByProposalVoterResponse = {
   fromJSON(object: any): QueryVoteByProposalVoterResponse {
     const obj = createBaseQueryVoteByProposalVoterResponse();
     if (isSet(object.vote)) obj.vote = Vote.fromJSON(object.vote);
-    return obj;
-  },
-  toJSON(message: QueryVoteByProposalVoterResponse): JsonSafe<QueryVoteByProposalVoterResponse> {
-    const obj: any = {};
-    message.vote !== undefined && (obj.vote = message.vote ? Vote.toJSON(message.vote) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVoteByProposalVoterResponse>): QueryVoteByProposalVoterResponse {
@@ -2321,12 +2199,6 @@ export const QueryVotesByProposalRequest = {
     const obj = createBaseQueryVotesByProposalRequest();
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryVotesByProposalRequest): JsonSafe<QueryVotesByProposalRequest> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVotesByProposalRequest>): QueryVotesByProposalRequest {
@@ -2422,16 +2294,6 @@ export const QueryVotesByProposalResponse = {
     const obj = createBaseQueryVotesByProposalResponse();
     if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryVotesByProposalResponse): JsonSafe<QueryVotesByProposalResponse> {
-    const obj: any = {};
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVotesByProposalResponse>): QueryVotesByProposalResponse {
@@ -2533,12 +2395,6 @@ export const QueryVotesByVoterRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesByVoterRequest): JsonSafe<QueryVotesByVoterRequest> {
-    const obj: any = {};
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryVotesByVoterRequest>): QueryVotesByVoterRequest {
     const message = createBaseQueryVotesByVoterRequest();
     message.voter = object.voter ?? "";
@@ -2630,16 +2486,6 @@ export const QueryVotesByVoterResponse = {
     const obj = createBaseQueryVotesByVoterResponse();
     if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryVotesByVoterResponse): JsonSafe<QueryVotesByVoterResponse> {
-    const obj: any = {};
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryVotesByVoterResponse>): QueryVotesByVoterResponse {
@@ -2741,12 +2587,6 @@ export const QueryGroupsByMemberRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByMemberRequest): JsonSafe<QueryGroupsByMemberRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupsByMemberRequest>): QueryGroupsByMemberRequest {
     const message = createBaseQueryGroupsByMemberRequest();
     message.address = object.address ?? "";
@@ -2840,16 +2680,6 @@ export const QueryGroupsByMemberResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByMemberResponse): JsonSafe<QueryGroupsByMemberResponse> {
-    const obj: any = {};
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupsByMemberResponse>): QueryGroupsByMemberResponse {
     const message = createBaseQueryGroupsByMemberResponse();
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
@@ -2941,11 +2771,6 @@ export const QueryTallyResultRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryTallyResultRequest): JsonSafe<QueryTallyResultRequest> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryTallyResultRequest>): QueryTallyResultRequest {
     const message = createBaseQueryTallyResultRequest();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -3022,11 +2847,6 @@ export const QueryTallyResultResponse = {
   fromJSON(object: any): QueryTallyResultResponse {
     const obj = createBaseQueryTallyResultResponse();
     if (isSet(object.tally)) obj.tally = TallyResult.fromJSON(object.tally);
-    return obj;
-  },
-  toJSON(message: QueryTallyResultResponse): JsonSafe<QueryTallyResultResponse> {
-    const obj: any = {};
-    message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toJSON(message.tally) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTallyResultResponse>): QueryTallyResultResponse {

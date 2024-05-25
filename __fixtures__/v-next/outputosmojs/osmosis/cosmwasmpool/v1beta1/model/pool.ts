@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 export interface CosmWasmPool {
   poolAddress: string;
@@ -76,7 +77,7 @@ export const CosmWasmPool = {
       codeId: isSet(object.codeId) ? BigInt(object.codeId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: CosmWasmPool): unknown {
+  toJSON(message: CosmWasmPool): JsonSafe<CosmWasmPool> {
     const obj: any = {};
     message.poolAddress !== undefined && (obj.poolAddress = message.poolAddress);
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);

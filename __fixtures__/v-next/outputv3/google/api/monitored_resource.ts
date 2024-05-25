@@ -3,7 +3,6 @@ import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON
 import { Struct, StructAmino, StructSDKType } from "../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -388,20 +387,6 @@ export const MonitoredResourceDescriptor = {
     if (isSet(object.launchStage)) obj.launchStage = launchStageFromJSON(object.launchStage);
     return obj;
   },
-  toJSON(message: MonitoredResourceDescriptor): JsonSafe<MonitoredResourceDescriptor> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MonitoredResourceDescriptor>): MonitoredResourceDescriptor {
     const message = createBaseMonitoredResourceDescriptor();
     message.name = object.name ?? "";
@@ -525,12 +510,6 @@ export const MonitoredResource_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: MonitoredResource_LabelsEntry): JsonSafe<MonitoredResource_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MonitoredResource_LabelsEntry>): MonitoredResource_LabelsEntry {
     const message = createBaseMonitoredResource_LabelsEntry();
     message.key = object.key ?? "";
@@ -624,17 +603,6 @@ export const MonitoredResource = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: MonitoredResource): JsonSafe<MonitoredResource> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MonitoredResource>): MonitoredResource {
@@ -753,12 +721,6 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): JsonSafe<MonitoredResourceMetadata_UserLabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MonitoredResourceMetadata_UserLabelsEntry>): MonitoredResourceMetadata_UserLabelsEntry {
     const message = createBaseMonitoredResourceMetadata_UserLabelsEntry();
     message.key = object.key ?? "";
@@ -852,17 +814,6 @@ export const MonitoredResourceMetadata = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: MonitoredResourceMetadata): JsonSafe<MonitoredResourceMetadata> {
-    const obj: any = {};
-    message.systemLabels !== undefined && (obj.systemLabels = message.systemLabels ? Struct.toJSON(message.systemLabels) : undefined);
-    obj.userLabels = {};
-    if (message.userLabels) {
-      Object.entries(message.userLabels).forEach(([k, v]) => {
-        obj.userLabels[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MonitoredResourceMetadata>): MonitoredResourceMetadata {

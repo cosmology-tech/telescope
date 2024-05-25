@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protob
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 /**
  * EpochInfo is a struct that describes the data going into
@@ -237,17 +236,6 @@ export const EpochInfo = {
     if (isSet(object.currentEpochStartHeight)) obj.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
     return obj;
   },
-  toJSON(message: EpochInfo): JsonSafe<EpochInfo> {
-    const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
-    message.currentEpochStartTime !== undefined && (obj.currentEpochStartTime = message.currentEpochStartTime.toISOString());
-    message.epochCountingStarted !== undefined && (obj.epochCountingStarted = message.epochCountingStarted);
-    message.currentEpochStartHeight !== undefined && (obj.currentEpochStartHeight = (message.currentEpochStartHeight || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<EpochInfo>): EpochInfo {
     const message = createBaseEpochInfo();
     message.identifier = object.identifier ?? "";
@@ -370,15 +358,6 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.epochs) {
-      obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);
-    } else {
-      obj.epochs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

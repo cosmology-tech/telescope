@@ -4,6 +4,7 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -133,7 +134,7 @@ export const BasicAllowance = {
       expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   },
-  toJSON(message: BasicAllowance): unknown {
+  toJSON(message: BasicAllowance): JsonSafe<BasicAllowance> {
     const obj: any = {};
     if (message.spendLimit) {
       obj.spendLimit = message.spendLimit.map(e => e ? Coin.toJSON(e) : undefined);
@@ -232,7 +233,7 @@ export const PeriodicAllowance = {
       periodReset: isSet(object.periodReset) ? fromJsonTimestamp(object.periodReset) : undefined
     };
   },
-  toJSON(message: PeriodicAllowance): unknown {
+  toJSON(message: PeriodicAllowance): JsonSafe<PeriodicAllowance> {
     const obj: any = {};
     message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toJSON(message.basic) : undefined);
     message.period !== undefined && (obj.period = message.period ? Duration.toJSON(message.period) : undefined);
@@ -327,7 +328,7 @@ export const AllowedMsgAllowance = {
       allowedMessages: Array.isArray(object?.allowedMessages) ? object.allowedMessages.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: AllowedMsgAllowance): unknown {
+  toJSON(message: AllowedMsgAllowance): JsonSafe<AllowedMsgAllowance> {
     const obj: any = {};
     message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
     if (message.allowedMessages) {
@@ -410,7 +411,7 @@ export const Grant = {
       allowance: isSet(object.allowance) ? Any.fromJSON(object.allowance) : undefined
     };
   },
-  toJSON(message: Grant): unknown {
+  toJSON(message: Grant): JsonSafe<Grant> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);

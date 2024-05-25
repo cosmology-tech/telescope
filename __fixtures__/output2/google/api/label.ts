@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -102,7 +103,7 @@ export const LabelDescriptor = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: LabelDescriptor): unknown {
+  toJSON(message: LabelDescriptor): JsonSafe<LabelDescriptor> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.valueType !== undefined && (obj.valueType = labelDescriptor_ValueTypeToJSON(message.valueType));

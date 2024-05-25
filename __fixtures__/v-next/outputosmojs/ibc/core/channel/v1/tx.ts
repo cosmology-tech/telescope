@@ -2,6 +2,7 @@ import { Channel, ChannelSDKType, Packet, PacketSDKType } from "./channel";
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -386,7 +387,7 @@ export const MsgChannelOpenInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelOpenInit): unknown {
+  toJSON(message: MsgChannelOpenInit): JsonSafe<MsgChannelOpenInit> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
@@ -488,7 +489,7 @@ export const MsgChannelOpenInitResponse = {
   fromJSON(_: any): MsgChannelOpenInitResponse {
     return {};
   },
-  toJSON(_: MsgChannelOpenInitResponse): unknown {
+  toJSON(_: MsgChannelOpenInitResponse): JsonSafe<MsgChannelOpenInitResponse> {
     const obj: any = {};
     return obj;
   },
@@ -619,7 +620,7 @@ export const MsgChannelOpenTry = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelOpenTry): unknown {
+  toJSON(message: MsgChannelOpenTry): JsonSafe<MsgChannelOpenTry> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.previousChannelId !== undefined && (obj.previousChannelId = message.previousChannelId);
@@ -757,7 +758,7 @@ export const MsgChannelOpenTryResponse = {
   fromJSON(_: any): MsgChannelOpenTryResponse {
     return {};
   },
-  toJSON(_: MsgChannelOpenTryResponse): unknown {
+  toJSON(_: MsgChannelOpenTryResponse): JsonSafe<MsgChannelOpenTryResponse> {
     const obj: any = {};
     return obj;
   },
@@ -888,7 +889,7 @@ export const MsgChannelOpenAck = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelOpenAck): unknown {
+  toJSON(message: MsgChannelOpenAck): JsonSafe<MsgChannelOpenAck> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -1026,7 +1027,7 @@ export const MsgChannelOpenAckResponse = {
   fromJSON(_: any): MsgChannelOpenAckResponse {
     return {};
   },
-  toJSON(_: MsgChannelOpenAckResponse): unknown {
+  toJSON(_: MsgChannelOpenAckResponse): JsonSafe<MsgChannelOpenAckResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1141,7 +1142,7 @@ export const MsgChannelOpenConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelOpenConfirm): unknown {
+  toJSON(message: MsgChannelOpenConfirm): JsonSafe<MsgChannelOpenConfirm> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -1261,7 +1262,7 @@ export const MsgChannelOpenConfirmResponse = {
   fromJSON(_: any): MsgChannelOpenConfirmResponse {
     return {};
   },
-  toJSON(_: MsgChannelOpenConfirmResponse): unknown {
+  toJSON(_: MsgChannelOpenConfirmResponse): JsonSafe<MsgChannelOpenConfirmResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1360,7 +1361,7 @@ export const MsgChannelCloseInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelCloseInit): unknown {
+  toJSON(message: MsgChannelCloseInit): JsonSafe<MsgChannelCloseInit> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -1462,7 +1463,7 @@ export const MsgChannelCloseInitResponse = {
   fromJSON(_: any): MsgChannelCloseInitResponse {
     return {};
   },
-  toJSON(_: MsgChannelCloseInitResponse): unknown {
+  toJSON(_: MsgChannelCloseInitResponse): JsonSafe<MsgChannelCloseInitResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1577,7 +1578,7 @@ export const MsgChannelCloseConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgChannelCloseConfirm): unknown {
+  toJSON(message: MsgChannelCloseConfirm): JsonSafe<MsgChannelCloseConfirm> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -1697,7 +1698,7 @@ export const MsgChannelCloseConfirmResponse = {
   fromJSON(_: any): MsgChannelCloseConfirmResponse {
     return {};
   },
-  toJSON(_: MsgChannelCloseConfirmResponse): unknown {
+  toJSON(_: MsgChannelCloseConfirmResponse): JsonSafe<MsgChannelCloseConfirmResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1804,7 +1805,7 @@ export const MsgRecvPacket = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgRecvPacket): unknown {
+  toJSON(message: MsgRecvPacket): JsonSafe<MsgRecvPacket> {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
     message.proofCommitment !== undefined && (obj.proofCommitment = base64FromBytes(message.proofCommitment !== undefined ? message.proofCommitment : new Uint8Array()));
@@ -1915,7 +1916,7 @@ export const MsgRecvPacketResponse = {
   fromJSON(_: any): MsgRecvPacketResponse {
     return {};
   },
-  toJSON(_: MsgRecvPacketResponse): unknown {
+  toJSON(_: MsgRecvPacketResponse): JsonSafe<MsgRecvPacketResponse> {
     const obj: any = {};
     return obj;
   },
@@ -2030,7 +2031,7 @@ export const MsgTimeout = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgTimeout): unknown {
+  toJSON(message: MsgTimeout): JsonSafe<MsgTimeout> {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
     message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
@@ -2150,7 +2151,7 @@ export const MsgTimeoutResponse = {
   fromJSON(_: any): MsgTimeoutResponse {
     return {};
   },
-  toJSON(_: MsgTimeoutResponse): unknown {
+  toJSON(_: MsgTimeoutResponse): JsonSafe<MsgTimeoutResponse> {
     const obj: any = {};
     return obj;
   },
@@ -2273,7 +2274,7 @@ export const MsgTimeoutOnClose = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgTimeoutOnClose): unknown {
+  toJSON(message: MsgTimeoutOnClose): JsonSafe<MsgTimeoutOnClose> {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
     message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
@@ -2402,7 +2403,7 @@ export const MsgTimeoutOnCloseResponse = {
   fromJSON(_: any): MsgTimeoutOnCloseResponse {
     return {};
   },
-  toJSON(_: MsgTimeoutOnCloseResponse): unknown {
+  toJSON(_: MsgTimeoutOnCloseResponse): JsonSafe<MsgTimeoutOnCloseResponse> {
     const obj: any = {};
     return obj;
   },
@@ -2517,7 +2518,7 @@ export const MsgAcknowledgement = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgAcknowledgement): unknown {
+  toJSON(message: MsgAcknowledgement): JsonSafe<MsgAcknowledgement> {
     const obj: any = {};
     message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
     message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement !== undefined ? message.acknowledgement : new Uint8Array()));
@@ -2637,7 +2638,7 @@ export const MsgAcknowledgementResponse = {
   fromJSON(_: any): MsgAcknowledgementResponse {
     return {};
   },
-  toJSON(_: MsgAcknowledgementResponse): unknown {
+  toJSON(_: MsgAcknowledgementResponse): JsonSafe<MsgAcknowledgementResponse> {
     const obj: any = {};
     return obj;
   },

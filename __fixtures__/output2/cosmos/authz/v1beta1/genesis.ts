@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { GrantAuthorization } from "./authz";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** GenesisState defines the authz module's genesis state. */
@@ -42,7 +43,7 @@ export const GenesisState = {
       authorization: Array.isArray(object?.authorization) ? object.authorization.map((e: any) => GrantAuthorization.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.authorization) {
       obj.authorization = message.authorization.map(e => e ? GrantAuthorization.toJSON(e) : undefined);

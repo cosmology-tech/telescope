@@ -2,7 +2,6 @@ import { Params, ParamsAmino, ParamsSDKType, Metadata, MetadataAmino, MetadataSD
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
@@ -135,26 +134,6 @@ export const GenesisState = {
     if (Array.isArray(object?.denomMetadata)) obj.denomMetadata = object.denomMetadata.map((e: any) => Metadata.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.balances) {
-      obj.balances = message.balances.map(e => e ? Balance.toJSON(e) : undefined);
-    } else {
-      obj.balances = [];
-    }
-    if (message.supply) {
-      obj.supply = message.supply.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.supply = [];
-    }
-    if (message.denomMetadata) {
-      obj.denomMetadata = message.denomMetadata.map(e => e ? Metadata.toJSON(e) : undefined);
-    } else {
-      obj.denomMetadata = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     if (object.params !== undefined && object.params !== null) {
@@ -278,16 +257,6 @@ export const Balance = {
     const obj = createBaseBalance();
     if (isSet(object.address)) obj.address = String(object.address);
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Balance): JsonSafe<Balance> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Balance>): Balance {

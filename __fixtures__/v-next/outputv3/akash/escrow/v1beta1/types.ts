@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -240,12 +239,6 @@ export const AccountID = {
     if (isSet(object.xid)) obj.xid = String(object.xid);
     return obj;
   },
-  toJSON(message: AccountID): JsonSafe<AccountID> {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountID>): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
@@ -366,16 +359,6 @@ export const Account = {
     if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
     if (isSet(object.transferred)) obj.transferred = Coin.fromJSON(object.transferred);
     if (isSet(object.settledAt)) obj.settledAt = BigInt(object.settledAt.toString());
-    return obj;
-  },
-  toJSON(message: Account): JsonSafe<Account> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? AccountID.toJSON(message.id) : undefined);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
-    message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
-    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Account>): Account {
@@ -542,17 +525,6 @@ export const Payment = {
     if (isSet(object.rate)) obj.rate = Coin.fromJSON(object.rate);
     if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
     if (isSet(object.withdrawn)) obj.withdrawn = Coin.fromJSON(object.withdrawn);
-    return obj;
-  },
-  toJSON(message: Payment): JsonSafe<Payment> {
-    const obj: any = {};
-    message.accountId !== undefined && (obj.accountId = message.accountId ? AccountID.toJSON(message.accountId) : undefined);
-    message.paymentId !== undefined && (obj.paymentId = message.paymentId);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
-    message.rate !== undefined && (obj.rate = message.rate ? Coin.toJSON(message.rate) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
-    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toJSON(message.withdrawn) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Payment>): Payment {

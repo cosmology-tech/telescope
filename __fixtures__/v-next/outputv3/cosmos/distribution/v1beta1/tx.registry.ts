@@ -60,32 +60,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    setWithdrawAddress(value: MsgSetWithdrawAddress) {
-      return {
-        typeUrl: "/cosmos.distribution.v1beta1.MsgSetWithdrawAddress",
-        value: MsgSetWithdrawAddress.toJSON(value)
-      };
-    },
-    withdrawDelegatorReward(value: MsgWithdrawDelegatorReward) {
-      return {
-        typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward",
-        value: MsgWithdrawDelegatorReward.toJSON(value)
-      };
-    },
-    withdrawValidatorCommission(value: MsgWithdrawValidatorCommission) {
-      return {
-        typeUrl: "/cosmos.distribution.v1beta1.MsgWithdrawValidatorCommission",
-        value: MsgWithdrawValidatorCommission.toJSON(value)
-      };
-    },
-    fundCommunityPool(value: MsgFundCommunityPool) {
-      return {
-        typeUrl: "/cosmos.distribution.v1beta1.MsgFundCommunityPool",
-        value: MsgFundCommunityPool.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     setWithdrawAddress(value: any) {
       return {

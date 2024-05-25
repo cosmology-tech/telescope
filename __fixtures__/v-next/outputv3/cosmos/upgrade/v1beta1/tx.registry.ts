@@ -36,20 +36,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    softwareUpgrade(value: MsgSoftwareUpgrade) {
-      return {
-        typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-        value: MsgSoftwareUpgrade.toJSON(value)
-      };
-    },
-    cancelUpgrade(value: MsgCancelUpgrade) {
-      return {
-        typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
-        value: MsgCancelUpgrade.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     softwareUpgrade(value: any) {
       return {

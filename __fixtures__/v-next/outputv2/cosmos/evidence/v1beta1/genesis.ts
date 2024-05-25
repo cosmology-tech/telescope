@@ -1,5 +1,6 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** GenesisState defines the evidence module's genesis state. */
@@ -60,7 +61,7 @@ export const GenesisState = {
     if (Array.isArray(object?.evidence)) obj.evidence = object.evidence.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toJSON(e) : undefined);

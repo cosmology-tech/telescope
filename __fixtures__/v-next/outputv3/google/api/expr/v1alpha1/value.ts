@@ -1,8 +1,7 @@
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Represents a CEL value.
@@ -347,26 +346,6 @@ export const Value = {
     if (isSet(object.typeValue)) obj.typeValue = String(object.typeValue);
     return obj;
   },
-  toJSON(message: Value): JsonSafe<Value> {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    if (message.int64Value !== undefined) {
-      obj.int64Value = message.int64Value.toString();
-    }
-    if (message.uint64Value !== undefined) {
-      obj.uint64Value = message.uint64Value.toString();
-    }
-    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
-    message.enumValue !== undefined && (obj.enumValue = message.enumValue ? EnumValue.toJSON(message.enumValue) : undefined);
-    message.objectValue !== undefined && (obj.objectValue = message.objectValue ? Any.toJSON(message.objectValue) : undefined);
-    message.mapValue !== undefined && (obj.mapValue = message.mapValue ? MapValue.toJSON(message.mapValue) : undefined);
-    message.listValue !== undefined && (obj.listValue = message.listValue ? ListValue.toJSON(message.listValue) : undefined);
-    message.typeValue !== undefined && (obj.typeValue = message.typeValue);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
@@ -539,12 +518,6 @@ export const EnumValue = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: EnumValue): JsonSafe<EnumValue> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.type = object.type ?? "";
@@ -627,15 +600,6 @@ export const ListValue = {
     if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
     return obj;
   },
-  toJSON(message: ListValue): JsonSafe<ListValue> {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
-    } else {
-      obj.values = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListValue>): ListValue {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
@@ -715,15 +679,6 @@ export const MapValue = {
   fromJSON(object: any): MapValue {
     const obj = createBaseMapValue();
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MapValue): JsonSafe<MapValue> {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MapValue>): MapValue {
@@ -813,12 +768,6 @@ export const MapValue_Entry = {
     const obj = createBaseMapValue_Entry();
     if (isSet(object.key)) obj.key = Value.fromJSON(object.key);
     if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: MapValue_Entry): JsonSafe<MapValue_Entry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {

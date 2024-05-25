@@ -1,7 +1,6 @@
 import { DevFeeInfo, DevFeeInfoAmino, DevFeeInfoSDKType } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
@@ -126,16 +125,6 @@ export const GenesisState = {
     if (Array.isArray(object?.devFeeInfos)) obj.devFeeInfos = object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.devFeeInfos) {
-      obj.devFeeInfos = message.devFeeInfos.map(e => e ? DevFeeInfo.toJSON(e) : undefined);
-    } else {
-      obj.devFeeInfos = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     if (object.params !== undefined && object.params !== null) {
@@ -256,15 +245,6 @@ export const Params = {
     if (isSet(object.validatorShares)) obj.validatorShares = String(object.validatorShares);
     if (isSet(object.addrDerivationCostCreate)) obj.addrDerivationCostCreate = BigInt(object.addrDerivationCostCreate.toString());
     if (isSet(object.minGasPrice)) obj.minGasPrice = String(object.minGasPrice);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.enableFees !== undefined && (obj.enableFees = message.enableFees);
-    message.developerShares !== undefined && (obj.developerShares = message.developerShares);
-    message.validatorShares !== undefined && (obj.validatorShares = message.validatorShares);
-    message.addrDerivationCostCreate !== undefined && (obj.addrDerivationCostCreate = (message.addrDerivationCostCreate || BigInt(0)).toString());
-    message.minGasPrice !== undefined && (obj.minGasPrice = message.minGasPrice);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

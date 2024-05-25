@@ -1,7 +1,6 @@
 import { Plan, PlanAmino, PlanSDKType } from "./upgrade";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
@@ -156,12 +155,6 @@ export const MsgSoftwareUpgrade = {
     if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
     return obj;
   },
-  toJSON(message: MsgSoftwareUpgrade): JsonSafe<MsgSoftwareUpgrade> {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
@@ -238,10 +231,6 @@ export const MsgSoftwareUpgradeResponse = {
     const obj = createBaseMsgSoftwareUpgradeResponse();
     return obj;
   },
-  toJSON(_: MsgSoftwareUpgradeResponse): JsonSafe<MsgSoftwareUpgradeResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
@@ -310,11 +299,6 @@ export const MsgCancelUpgrade = {
     if (isSet(object.authority)) obj.authority = String(object.authority);
     return obj;
   },
-  toJSON(message: MsgCancelUpgrade): JsonSafe<MsgCancelUpgrade> {
-    const obj: any = {};
-    message.authority !== undefined && (obj.authority = message.authority);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
@@ -380,10 +364,6 @@ export const MsgCancelUpgradeResponse = {
   },
   fromJSON(_: any): MsgCancelUpgradeResponse {
     const obj = createBaseMsgCancelUpgradeResponse();
-    return obj;
-  },
-  toJSON(_: MsgCancelUpgradeResponse): JsonSafe<MsgCancelUpgradeResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {

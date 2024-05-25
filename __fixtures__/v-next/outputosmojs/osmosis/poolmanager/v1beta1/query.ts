@@ -2,6 +2,7 @@ import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAm
 import { Params, ParamsSDKType } from "./genesis";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** =============================== Params */
@@ -230,7 +231,7 @@ export const ParamsRequest = {
   fromJSON(_: any): ParamsRequest {
     return {};
   },
-  toJSON(_: ParamsRequest): unknown {
+  toJSON(_: ParamsRequest): JsonSafe<ParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -313,7 +314,7 @@ export const ParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: ParamsResponse): unknown {
+  toJSON(message: ParamsResponse): JsonSafe<ParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -423,7 +424,7 @@ export const EstimateSwapExactAmountInRequest = {
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
   },
-  toJSON(message: EstimateSwapExactAmountInRequest): unknown {
+  toJSON(message: EstimateSwapExactAmountInRequest): JsonSafe<EstimateSwapExactAmountInRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
@@ -561,7 +562,7 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
-  toJSON(message: EstimateSinglePoolSwapExactAmountInRequest): unknown {
+  toJSON(message: EstimateSinglePoolSwapExactAmountInRequest): JsonSafe<EstimateSinglePoolSwapExactAmountInRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
@@ -673,7 +674,7 @@ export const EstimateSwapExactAmountInResponse = {
       tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
     };
   },
-  toJSON(message: EstimateSwapExactAmountInResponse): unknown {
+  toJSON(message: EstimateSwapExactAmountInResponse): JsonSafe<EstimateSwapExactAmountInResponse> {
     const obj: any = {};
     message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
     return obj;
@@ -783,7 +784,7 @@ export const EstimateSwapExactAmountOutRequest = {
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
-  toJSON(message: EstimateSwapExactAmountOutRequest): unknown {
+  toJSON(message: EstimateSwapExactAmountOutRequest): JsonSafe<EstimateSwapExactAmountOutRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     if (message.routes) {
@@ -921,7 +922,7 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
-  toJSON(message: EstimateSinglePoolSwapExactAmountOutRequest): unknown {
+  toJSON(message: EstimateSinglePoolSwapExactAmountOutRequest): JsonSafe<EstimateSinglePoolSwapExactAmountOutRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
@@ -1033,7 +1034,7 @@ export const EstimateSwapExactAmountOutResponse = {
       tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
     };
   },
-  toJSON(message: EstimateSwapExactAmountOutResponse): unknown {
+  toJSON(message: EstimateSwapExactAmountOutResponse): JsonSafe<EstimateSwapExactAmountOutResponse> {
     const obj: any = {};
     message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
     return obj;
@@ -1117,7 +1118,7 @@ export const NumPoolsRequest = {
   fromJSON(_: any): NumPoolsRequest {
     return {};
   },
-  toJSON(_: NumPoolsRequest): unknown {
+  toJSON(_: NumPoolsRequest): JsonSafe<NumPoolsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1200,7 +1201,7 @@ export const NumPoolsResponse = {
       numPools: isSet(object.numPools) ? BigInt(object.numPools.toString()) : BigInt(0)
     };
   },
-  toJSON(message: NumPoolsResponse): unknown {
+  toJSON(message: NumPoolsResponse): JsonSafe<NumPoolsResponse> {
     const obj: any = {};
     message.numPools !== undefined && (obj.numPools = (message.numPools || BigInt(0)).toString());
     return obj;
@@ -1294,7 +1295,7 @@ export const PoolRequest = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: PoolRequest): unknown {
+  toJSON(message: PoolRequest): JsonSafe<PoolRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
@@ -1388,7 +1389,7 @@ export const PoolResponse = {
       pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined
     };
   },
-  toJSON(message: PoolResponse): unknown {
+  toJSON(message: PoolResponse): JsonSafe<PoolResponse> {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = message.pool ? Any.toJSON(message.pool) : undefined);
     return obj;
@@ -1482,7 +1483,7 @@ export const AllPoolsRequest = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: AllPoolsRequest): unknown {
+  toJSON(message: AllPoolsRequest): JsonSafe<AllPoolsRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
@@ -1576,7 +1577,7 @@ export const AllPoolsResponse = {
       pools: Array.isArray(object?.pools) ? object.pools.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: AllPoolsResponse): unknown {
+  toJSON(message: AllPoolsResponse): JsonSafe<AllPoolsResponse> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
@@ -1696,7 +1697,7 @@ export const SpotPriceRequest = {
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
-  toJSON(message: SpotPriceRequest): unknown {
+  toJSON(message: SpotPriceRequest): JsonSafe<SpotPriceRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
@@ -1808,7 +1809,7 @@ export const SpotPriceResponse = {
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
-  toJSON(message: SpotPriceResponse): unknown {
+  toJSON(message: SpotPriceResponse): JsonSafe<SpotPriceResponse> {
     const obj: any = {};
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;

@@ -2,6 +2,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.epochs.v1";
 export interface EpochInfo {
   identifier: string;
@@ -141,7 +142,7 @@ export const EpochInfo = {
     if (isSet(object.currentEpochStartHeight)) obj.currentEpochStartHeight = BigInt(object.currentEpochStartHeight.toString());
     return obj;
   },
-  toJSON(message: EpochInfo): unknown {
+  toJSON(message: EpochInfo): JsonSafe<EpochInfo> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
@@ -278,7 +279,7 @@ export const GenesisState = {
     if (Array.isArray(object?.epochs)) obj.epochs = object.epochs.map((e: any) => EpochInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);

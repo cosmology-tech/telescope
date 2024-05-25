@@ -4,7 +4,6 @@ import { ExprValue, ExprValueAmino, ExprValueSDKType } from "../../v1alpha1/eval
 import { Status, StatusAmino, StatusSDKType } from "../../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../../helpers";
-import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "google.api.expr.conformance.v1alpha1";
 /** Severities of issues. */
 export enum IssueDetails_Severity {
@@ -385,14 +384,6 @@ export const ParseRequest = {
     if (isSet(object.disableMacros)) obj.disableMacros = Boolean(object.disableMacros);
     return obj;
   },
-  toJSON(message: ParseRequest): JsonSafe<ParseRequest> {
-    const obj: any = {};
-    message.celSource !== undefined && (obj.celSource = message.celSource);
-    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
-    message.sourceLocation !== undefined && (obj.sourceLocation = message.sourceLocation);
-    message.disableMacros !== undefined && (obj.disableMacros = message.disableMacros);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ParseRequest>): ParseRequest {
     const message = createBaseParseRequest();
     message.celSource = object.celSource ?? "";
@@ -495,16 +486,6 @@ export const ParseResponse = {
     const obj = createBaseParseResponse();
     if (isSet(object.parsedExpr)) obj.parsedExpr = ParsedExpr.fromJSON(object.parsedExpr);
     if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ParseResponse): JsonSafe<ParseResponse> {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ParseResponse>): ParseResponse {
@@ -621,18 +602,6 @@ export const CheckRequest = {
     if (isSet(object.noStdEnv)) obj.noStdEnv = Boolean(object.noStdEnv);
     return obj;
   },
-  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    if (message.typeEnv) {
-      obj.typeEnv = message.typeEnv.map(e => e ? Decl.toJSON(e) : undefined);
-    } else {
-      obj.typeEnv = [];
-    }
-    message.container !== undefined && (obj.container = message.container);
-    message.noStdEnv !== undefined && (obj.noStdEnv = message.noStdEnv);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     if (object.parsedExpr !== undefined && object.parsedExpr !== null) {
@@ -745,16 +714,6 @@ export const CheckResponse = {
     if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
     return obj;
   },
-  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
-    const obj: any = {};
-    message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     if (object.checkedExpr !== undefined && object.checkedExpr !== null) {
@@ -850,12 +809,6 @@ export const EvalRequest_BindingsEntry = {
     const obj = createBaseEvalRequest_BindingsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: EvalRequest_BindingsEntry): JsonSafe<EvalRequest_BindingsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<EvalRequest_BindingsEntry>): EvalRequest_BindingsEntry {
@@ -969,19 +922,6 @@ export const EvalRequest = {
       return acc;
     }, {});
     if (isSet(object.container)) obj.container = String(object.container);
-    return obj;
-  },
-  toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
-    const obj: any = {};
-    message.parsedExpr !== undefined && (obj.parsedExpr = message.parsedExpr ? ParsedExpr.toJSON(message.parsedExpr) : undefined);
-    message.checkedExpr !== undefined && (obj.checkedExpr = message.checkedExpr ? CheckedExpr.toJSON(message.checkedExpr) : undefined);
-    obj.bindings = {};
-    if (message.bindings) {
-      Object.entries(message.bindings).forEach(([k, v]) => {
-        obj.bindings[k] = ExprValue.toJSON(v);
-      });
-    }
-    message.container !== undefined && (obj.container = message.container);
     return obj;
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
@@ -1119,16 +1059,6 @@ export const EvalResponse = {
     if (Array.isArray(object?.issues)) obj.issues = object.issues.map((e: any) => Status.fromJSON(e));
     return obj;
   },
-  toJSON(message: EvalResponse): JsonSafe<EvalResponse> {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = message.result ? ExprValue.toJSON(message.result) : undefined);
-    if (message.issues) {
-      obj.issues = message.issues.map(e => e ? Status.toJSON(e) : undefined);
-    } else {
-      obj.issues = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<EvalResponse>): EvalResponse {
     const message = createBaseEvalResponse();
     if (object.result !== undefined && object.result !== null) {
@@ -1233,13 +1163,6 @@ export const IssueDetails = {
     if (isSet(object.severity)) obj.severity = issueDetails_SeverityFromJSON(object.severity);
     if (isSet(object.position)) obj.position = SourcePosition.fromJSON(object.position);
     if (isSet(object.id)) obj.id = BigInt(object.id.toString());
-    return obj;
-  },
-  toJSON(message: IssueDetails): JsonSafe<IssueDetails> {
-    const obj: any = {};
-    message.severity !== undefined && (obj.severity = issueDetails_SeverityToJSON(message.severity));
-    message.position !== undefined && (obj.position = message.position ? SourcePosition.toJSON(message.position) : undefined);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<IssueDetails>): IssueDetails {

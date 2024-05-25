@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /** MsgCreateClient defines a message to create an IBC client */
 export interface MsgCreateClient {
@@ -270,13 +269,6 @@ export const MsgCreateClient = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgCreateClient): JsonSafe<MsgCreateClient> {
-    const obj: any = {};
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateClient>): MsgCreateClient {
     const message = createBaseMsgCreateClient();
     if (object.clientState !== undefined && object.clientState !== null) {
@@ -360,10 +352,6 @@ export const MsgCreateClientResponse = {
   },
   fromJSON(_: any): MsgCreateClientResponse {
     const obj = createBaseMsgCreateClientResponse();
-    return obj;
-  },
-  toJSON(_: MsgCreateClientResponse): JsonSafe<MsgCreateClientResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCreateClientResponse>): MsgCreateClientResponse {
@@ -450,13 +438,6 @@ export const MsgUpdateClient = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgUpdateClient): JsonSafe<MsgUpdateClient> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.header !== undefined && (obj.header = message.header ? Any.toJSON(message.header) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateClient>): MsgUpdateClient {
     const message = createBaseMsgUpdateClient();
     message.clientId = object.clientId ?? "";
@@ -538,10 +519,6 @@ export const MsgUpdateClientResponse = {
   },
   fromJSON(_: any): MsgUpdateClientResponse {
     const obj = createBaseMsgUpdateClientResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateClientResponse): JsonSafe<MsgUpdateClientResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateClientResponse>): MsgUpdateClientResponse {
@@ -652,16 +629,6 @@ export const MsgUpgradeClient = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgUpgradeClient): JsonSafe<MsgUpgradeClient> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
-    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
-    message.proofUpgradeClient !== undefined && (obj.proofUpgradeClient = base64FromBytes(message.proofUpgradeClient !== undefined ? message.proofUpgradeClient : new Uint8Array()));
-    message.proofUpgradeConsensusState !== undefined && (obj.proofUpgradeConsensusState = base64FromBytes(message.proofUpgradeConsensusState !== undefined ? message.proofUpgradeConsensusState : new Uint8Array()));
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpgradeClient>): MsgUpgradeClient {
     const message = createBaseMsgUpgradeClient();
     message.clientId = object.clientId ?? "";
@@ -768,10 +735,6 @@ export const MsgUpgradeClientResponse = {
     const obj = createBaseMsgUpgradeClientResponse();
     return obj;
   },
-  toJSON(_: MsgUpgradeClientResponse): JsonSafe<MsgUpgradeClientResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgUpgradeClientResponse>): MsgUpgradeClientResponse {
     const message = createBaseMsgUpgradeClientResponse();
     return message;
@@ -856,13 +819,6 @@ export const MsgSubmitMisbehaviour = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgSubmitMisbehaviour): JsonSafe<MsgSubmitMisbehaviour> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.misbehaviour !== undefined && (obj.misbehaviour = message.misbehaviour ? Any.toJSON(message.misbehaviour) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSubmitMisbehaviour>): MsgSubmitMisbehaviour {
     const message = createBaseMsgSubmitMisbehaviour();
     message.clientId = object.clientId ?? "";
@@ -944,10 +900,6 @@ export const MsgSubmitMisbehaviourResponse = {
   },
   fromJSON(_: any): MsgSubmitMisbehaviourResponse {
     const obj = createBaseMsgSubmitMisbehaviourResponse();
-    return obj;
-  },
-  toJSON(_: MsgSubmitMisbehaviourResponse): JsonSafe<MsgSubmitMisbehaviourResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgSubmitMisbehaviourResponse>): MsgSubmitMisbehaviourResponse {

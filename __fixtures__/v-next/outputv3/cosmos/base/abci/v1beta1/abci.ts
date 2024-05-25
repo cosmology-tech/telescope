@@ -2,7 +2,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../../google/proto
 import { Event, EventAmino, EventSDKType } from "../../../../tendermint/abci/types";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.abci.v1beta1";
 /**
  * TxResponse defines a structure containing relevant tx data and metadata. The
@@ -565,31 +564,6 @@ export const TxResponse = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: TxResponse): JsonSafe<TxResponse> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.txhash !== undefined && (obj.txhash = message.txhash);
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.data !== undefined && (obj.data = message.data);
-    message.rawLog !== undefined && (obj.rawLog = message.rawLog);
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e ? ABCIMessageLog.toJSON(e) : undefined);
-    } else {
-      obj.logs = [];
-    }
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || BigInt(0)).toString());
-    message.tx !== undefined && (obj.tx = message.tx ? Any.toJSON(message.tx) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp);
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<TxResponse>): TxResponse {
     const message = createBaseTxResponse();
     if (object.height !== undefined && object.height !== null) {
@@ -786,17 +760,6 @@ export const ABCIMessageLog = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => StringEvent.fromJSON(e));
     return obj;
   },
-  toJSON(message: ABCIMessageLog): JsonSafe<ABCIMessageLog> {
-    const obj: any = {};
-    message.msgIndex !== undefined && (obj.msgIndex = Math.round(message.msgIndex));
-    message.log !== undefined && (obj.log = message.log);
-    if (message.events) {
-      obj.events = message.events.map(e => e ? StringEvent.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ABCIMessageLog>): ABCIMessageLog {
     const message = createBaseABCIMessageLog();
     message.msgIndex = object.msgIndex ?? 0;
@@ -901,16 +864,6 @@ export const StringEvent = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: StringEvent): JsonSafe<StringEvent> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<StringEvent>): StringEvent {
     const message = createBaseStringEvent();
     message.type = object.type ?? "";
@@ -1008,12 +961,6 @@ export const Attribute = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Attribute): JsonSafe<Attribute> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
@@ -1103,12 +1050,6 @@ export const GasInfo = {
     const obj = createBaseGasInfo();
     if (isSet(object.gasWanted)) obj.gasWanted = BigInt(object.gasWanted.toString());
     if (isSet(object.gasUsed)) obj.gasUsed = BigInt(object.gasUsed.toString());
-    return obj;
-  },
-  toJSON(message: GasInfo): JsonSafe<GasInfo> {
-    const obj: any = {};
-    message.gasWanted !== undefined && (obj.gasWanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gasUsed = (message.gasUsed || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GasInfo>): GasInfo {
@@ -1220,22 +1161,6 @@ export const Result = {
     if (isSet(object.log)) obj.log = String(object.log);
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Result): JsonSafe<Result> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.log !== undefined && (obj.log = message.log);
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    if (message.msgResponses) {
-      obj.msgResponses = message.msgResponses.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.msgResponses = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Result>): Result {
@@ -1355,12 +1280,6 @@ export const SimulationResponse = {
     if (isSet(object.result)) obj.result = Result.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: SimulationResponse): JsonSafe<SimulationResponse> {
-    const obj: any = {};
-    message.gasInfo !== undefined && (obj.gasInfo = message.gasInfo ? GasInfo.toJSON(message.gasInfo) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Result.toJSON(message.result) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SimulationResponse>): SimulationResponse {
     const message = createBaseSimulationResponse();
     if (object.gasInfo !== undefined && object.gasInfo !== null) {
@@ -1456,12 +1375,6 @@ export const MsgData = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgData): JsonSafe<MsgData> {
-    const obj: any = {};
-    message.msgType !== undefined && (obj.msgType = message.msgType);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgData>): MsgData {
     const message = createBaseMsgData();
     message.msgType = object.msgType ?? "";
@@ -1551,20 +1464,6 @@ export const TxMsgData = {
     const obj = createBaseTxMsgData();
     if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => MsgData.fromJSON(e));
     if (Array.isArray(object?.msgResponses)) obj.msgResponses = object.msgResponses.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: TxMsgData): JsonSafe<TxMsgData> {
-    const obj: any = {};
-    if (message.data) {
-      obj.data = message.data.map(e => e ? MsgData.toJSON(e) : undefined);
-    } else {
-      obj.data = [];
-    }
-    if (message.msgResponses) {
-      obj.msgResponses = message.msgResponses.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.msgResponses = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<TxMsgData>): TxMsgData {
@@ -1700,20 +1599,6 @@ export const SearchTxsResult = {
     if (isSet(object.pageTotal)) obj.pageTotal = BigInt(object.pageTotal.toString());
     if (isSet(object.limit)) obj.limit = BigInt(object.limit.toString());
     if (Array.isArray(object?.txs)) obj.txs = object.txs.map((e: any) => TxResponse.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SearchTxsResult): JsonSafe<SearchTxsResult> {
-    const obj: any = {};
-    message.totalCount !== undefined && (obj.totalCount = (message.totalCount || BigInt(0)).toString());
-    message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
-    message.pageNumber !== undefined && (obj.pageNumber = (message.pageNumber || BigInt(0)).toString());
-    message.pageTotal !== undefined && (obj.pageTotal = (message.pageTotal || BigInt(0)).toString());
-    message.limit !== undefined && (obj.limit = (message.limit || BigInt(0)).toString());
-    if (message.txs) {
-      obj.txs = message.txs.map(e => e ? TxResponse.toJSON(e) : undefined);
-    } else {
-      obj.txs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SearchTxsResult>): SearchTxsResult {

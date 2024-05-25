@@ -1,7 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.type";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -332,25 +331,6 @@ export const HttpRequest = {
     if (isSet(object.cacheValidatedWithOriginServer)) obj.cacheValidatedWithOriginServer = Boolean(object.cacheValidatedWithOriginServer);
     if (isSet(object.cacheFillBytes)) obj.cacheFillBytes = BigInt(object.cacheFillBytes.toString());
     if (isSet(object.protocol)) obj.protocol = String(object.protocol);
-    return obj;
-  },
-  toJSON(message: HttpRequest): JsonSafe<HttpRequest> {
-    const obj: any = {};
-    message.requestMethod !== undefined && (obj.requestMethod = message.requestMethod);
-    message.requestUrl !== undefined && (obj.requestUrl = message.requestUrl);
-    message.requestSize !== undefined && (obj.requestSize = (message.requestSize || BigInt(0)).toString());
-    message.status !== undefined && (obj.status = Math.round(message.status));
-    message.responseSize !== undefined && (obj.responseSize = (message.responseSize || BigInt(0)).toString());
-    message.userAgent !== undefined && (obj.userAgent = message.userAgent);
-    message.remoteIp !== undefined && (obj.remoteIp = message.remoteIp);
-    message.serverIp !== undefined && (obj.serverIp = message.serverIp);
-    message.referer !== undefined && (obj.referer = message.referer);
-    message.latency !== undefined && (obj.latency = message.latency ? Duration.toJSON(message.latency) : undefined);
-    message.cacheLookup !== undefined && (obj.cacheLookup = message.cacheLookup);
-    message.cacheHit !== undefined && (obj.cacheHit = message.cacheHit);
-    message.cacheValidatedWithOriginServer !== undefined && (obj.cacheValidatedWithOriginServer = message.cacheValidatedWithOriginServer);
-    message.cacheFillBytes !== undefined && (obj.cacheFillBytes = (message.cacheFillBytes || BigInt(0)).toString());
-    message.protocol !== undefined && (obj.protocol = message.protocol);
     return obj;
   },
   fromPartial(object: DeepPartial<HttpRequest>): HttpRequest {

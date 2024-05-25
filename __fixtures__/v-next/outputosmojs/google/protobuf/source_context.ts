@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -58,7 +59,7 @@ export const SourceContext = {
       fileName: isSet(object.fileName) ? String(object.fileName) : ""
     };
   },
-  toJSON(message: SourceContext): unknown {
+  toJSON(message: SourceContext): JsonSafe<SourceContext> {
     const obj: any = {};
     message.fileName !== undefined && (obj.fileName = message.fileName);
     return obj;

@@ -37,20 +37,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createClawbackVestingAccount(value: MsgCreateClawbackVestingAccount) {
-      return {
-        typeUrl: "/evmos.vesting.v1.MsgCreateClawbackVestingAccount",
-        value: MsgCreateClawbackVestingAccount.toJSON(value)
-      };
-    },
-    clawback(value: MsgClawback) {
-      return {
-        typeUrl: "/evmos.vesting.v1.MsgClawback",
-        value: MsgClawback.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createClawbackVestingAccount(value: any) {
       return {

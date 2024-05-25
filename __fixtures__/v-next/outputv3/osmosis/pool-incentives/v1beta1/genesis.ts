@@ -2,7 +2,6 @@ import { Params, ParamsAmino, ParamsSDKType, DistrInfo, DistrInfoAmino, DistrInf
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
@@ -89,18 +88,6 @@ export const GenesisState = {
     if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     if (isSet(object.distrInfo)) obj.distrInfo = DistrInfo.fromJSON(object.distrInfo);
     if (isSet(object.poolToGauges)) obj.poolToGauges = PoolToGauges.fromJSON(object.poolToGauges);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
-    message.distrInfo !== undefined && (obj.distrInfo = message.distrInfo ? DistrInfo.toJSON(message.distrInfo) : undefined);
-    message.poolToGauges !== undefined && (obj.poolToGauges = message.poolToGauges ? PoolToGauges.toJSON(message.poolToGauges) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

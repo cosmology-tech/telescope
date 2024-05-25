@@ -1,5 +1,6 @@
 import { Params, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** =============================== Params */
@@ -45,7 +46,7 @@ export const ParamsRequest = {
   fromJSON(_: any): ParamsRequest {
     return {};
   },
-  toJSON(_: ParamsRequest): unknown {
+  toJSON(_: ParamsRequest): JsonSafe<ParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -128,7 +129,7 @@ export const ParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: ParamsResponse): unknown {
+  toJSON(message: ParamsResponse): JsonSafe<ParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

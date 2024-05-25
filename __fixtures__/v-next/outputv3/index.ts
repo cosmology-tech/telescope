@@ -22,7 +22,6 @@ export * from "./osmosis/bundle";
 export * from "./osmosis/client";
 export * from "./tendermint/bundle";
 export * from "./grpc-gateway";
-export * from "./json-safe";
 export * from "./varint";
 export * from "./utf8";
 export * from "./binary";

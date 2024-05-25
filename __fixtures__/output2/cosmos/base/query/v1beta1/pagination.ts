@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -131,7 +132,7 @@ export const PageRequest = {
       reverse: isSet(object.reverse) ? Boolean(object.reverse) : false
     };
   },
-  toJSON(message: PageRequest): unknown {
+  toJSON(message: PageRequest): JsonSafe<PageRequest> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.offset !== undefined && (obj.offset = (message.offset || Long.UZERO).toString());
@@ -192,7 +193,7 @@ export const PageResponse = {
       total: isSet(object.total) ? Long.fromValue(object.total) : Long.UZERO
     };
   },
-  toJSON(message: PageResponse): unknown {
+  toJSON(message: PageResponse): JsonSafe<PageResponse> {
     const obj: any = {};
     message.nextKey !== undefined && (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
     message.total !== undefined && (obj.total = (message.total || Long.UZERO).toString());

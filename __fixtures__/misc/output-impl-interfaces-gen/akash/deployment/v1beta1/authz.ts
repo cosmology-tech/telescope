@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "akash.deployment.v1beta1";
 /**
@@ -84,7 +85,7 @@ export const DepositDeploymentAuthorization = {
     if (isSet(object.spendLimit)) obj.spendLimit = Coin.fromJSON(object.spendLimit);
     return obj;
   },
-  toJSON(message: DepositDeploymentAuthorization): unknown {
+  toJSON(message: DepositDeploymentAuthorization): JsonSafe<DepositDeploymentAuthorization> {
     const obj: any = {};
     message.spendLimit !== undefined && (obj.spendLimit = message.spendLimit ? Coin.toJSON(message.spendLimit) : undefined);
     return obj;

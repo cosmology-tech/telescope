@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -130,16 +129,6 @@ export const CommitInfo = {
     if (Array.isArray(object?.storeInfos)) obj.storeInfos = object.storeInfos.map((e: any) => StoreInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: CommitInfo): JsonSafe<CommitInfo> {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
-    if (message.storeInfos) {
-      obj.storeInfos = message.storeInfos.map(e => e ? StoreInfo.toJSON(e) : undefined);
-    } else {
-      obj.storeInfos = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<CommitInfo>): CommitInfo {
     const message = createBaseCommitInfo();
     if (object.version !== undefined && object.version !== null) {
@@ -239,12 +228,6 @@ export const StoreInfo = {
     if (isSet(object.commitId)) obj.commitId = CommitID.fromJSON(object.commitId);
     return obj;
   },
-  toJSON(message: StoreInfo): JsonSafe<StoreInfo> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.commitId !== undefined && (obj.commitId = message.commitId ? CommitID.toJSON(message.commitId) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<StoreInfo>): StoreInfo {
     const message = createBaseStoreInfo();
     message.name = object.name ?? "";
@@ -336,12 +319,6 @@ export const CommitID = {
     const obj = createBaseCommitID();
     if (isSet(object.version)) obj.version = BigInt(object.version.toString());
     if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
-    return obj;
-  },
-  toJSON(message: CommitID): JsonSafe<CommitID> {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<CommitID>): CommitID {

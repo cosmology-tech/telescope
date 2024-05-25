@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.epochs.v1";
 export interface QueryEpochsInfoRequest {
   pagination?: PageRequest;
@@ -63,7 +64,7 @@ export const QueryEpochsInfoRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryEpochsInfoRequest): unknown {
+  toJSON(message: QueryEpochsInfoRequest): JsonSafe<QueryEpochsInfoRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -126,7 +127,7 @@ export const QueryEpochsInfoResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryEpochsInfoResponse): unknown {
+  toJSON(message: QueryEpochsInfoResponse): JsonSafe<QueryEpochsInfoResponse> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);
@@ -193,7 +194,7 @@ export const QueryCurrentEpochRequest = {
       identifier: isSet(object.identifier) ? String(object.identifier) : ""
     };
   },
-  toJSON(message: QueryCurrentEpochRequest): unknown {
+  toJSON(message: QueryCurrentEpochRequest): JsonSafe<QueryCurrentEpochRequest> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
@@ -248,7 +249,7 @@ export const QueryCurrentEpochResponse = {
       currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO
     };
   },
-  toJSON(message: QueryCurrentEpochResponse): unknown {
+  toJSON(message: QueryCurrentEpochResponse): JsonSafe<QueryCurrentEpochResponse> {
     const obj: any = {};
     message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
     return obj;

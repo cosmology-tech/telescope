@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
@@ -223,15 +222,6 @@ export const ProjectProperties = {
     if (Array.isArray(object?.properties)) obj.properties = object.properties.map((e: any) => Property.fromJSON(e));
     return obj;
   },
-  toJSON(message: ProjectProperties): JsonSafe<ProjectProperties> {
-    const obj: any = {};
-    if (message.properties) {
-      obj.properties = message.properties.map(e => e ? Property.toJSON(e) : undefined);
-    } else {
-      obj.properties = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ProjectProperties>): ProjectProperties {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
@@ -327,13 +317,6 @@ export const Property = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.type)) obj.type = property_PropertyTypeFromJSON(object.type);
     if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: Property): JsonSafe<Property> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
-    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
   fromPartial(object: DeepPartial<Property>): Property {

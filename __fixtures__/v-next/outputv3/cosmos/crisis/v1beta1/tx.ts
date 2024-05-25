@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** MsgVerifyInvariant represents a message to verify a particular invariance. */
 export interface MsgVerifyInvariant {
@@ -86,13 +85,6 @@ export const MsgVerifyInvariant = {
     if (isSet(object.invariantRoute)) obj.invariantRoute = String(object.invariantRoute);
     return obj;
   },
-  toJSON(message: MsgVerifyInvariant): JsonSafe<MsgVerifyInvariant> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.invariantModuleName !== undefined && (obj.invariantModuleName = message.invariantModuleName);
-    message.invariantRoute !== undefined && (obj.invariantRoute = message.invariantRoute);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgVerifyInvariant>): MsgVerifyInvariant {
     const message = createBaseMsgVerifyInvariant();
     message.sender = object.sender ?? "";
@@ -172,10 +164,6 @@ export const MsgVerifyInvariantResponse = {
   },
   fromJSON(_: any): MsgVerifyInvariantResponse {
     const obj = createBaseMsgVerifyInvariantResponse();
-    return obj;
-  },
-  toJSON(_: MsgVerifyInvariantResponse): JsonSafe<MsgVerifyInvariantResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgVerifyInvariantResponse>): MsgVerifyInvariantResponse {

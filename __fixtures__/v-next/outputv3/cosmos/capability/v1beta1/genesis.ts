@@ -1,7 +1,6 @@
 import { CapabilityOwners, CapabilityOwnersAmino, CapabilityOwnersSDKType } from "./capability";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwners {
@@ -99,12 +98,6 @@ export const GenesisOwners = {
     if (isSet(object.indexOwners)) obj.indexOwners = CapabilityOwners.fromJSON(object.indexOwners);
     return obj;
   },
-  toJSON(message: GenesisOwners): JsonSafe<GenesisOwners> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisOwners>): GenesisOwners {
     const message = createBaseGenesisOwners();
     if (object.index !== undefined && object.index !== null) {
@@ -198,16 +191,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => GenesisOwners.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? GenesisOwners.toJSON(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

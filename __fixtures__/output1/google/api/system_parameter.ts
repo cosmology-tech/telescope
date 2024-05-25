@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -146,7 +147,7 @@ export const SystemParameters = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => SystemParameterRule.fromJSON(e)) : []
     };
   },
-  toJSON(message: SystemParameters): unknown {
+  toJSON(message: SystemParameters): JsonSafe<SystemParameters> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? SystemParameterRule.toJSON(e) : undefined);
@@ -217,7 +218,7 @@ export const SystemParameterRule = {
       parameters: Array.isArray(object?.parameters) ? object.parameters.map((e: any) => SystemParameter.fromJSON(e)) : []
     };
   },
-  toJSON(message: SystemParameterRule): unknown {
+  toJSON(message: SystemParameterRule): JsonSafe<SystemParameterRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     if (message.parameters) {
@@ -300,7 +301,7 @@ export const SystemParameter = {
       urlQueryParameter: isSet(object.urlQueryParameter) ? String(object.urlQueryParameter) : ""
     };
   },
-  toJSON(message: SystemParameter): unknown {
+  toJSON(message: SystemParameter): JsonSafe<SystemParameter> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.httpHeader !== undefined && (obj.httpHeader = message.httpHeader);

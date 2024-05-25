@@ -2,6 +2,7 @@ import { ResourceValue, ResourceValueAmino, ResourceValueSDKType } from "./resou
 import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
@@ -118,7 +119,7 @@ export const CPU = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: CPU): unknown {
+  toJSON(message: CPU): JsonSafe<CPU> {
     const obj: any = {};
     message.units !== undefined && (obj.units = message.units ? ResourceValue.toJSON(message.units) : undefined);
     if (message.attributes) {
@@ -229,7 +230,7 @@ export const Memory = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Memory): unknown {
+  toJSON(message: Memory): JsonSafe<Memory> {
     const obj: any = {};
     message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
     if (message.attributes) {
@@ -348,7 +349,7 @@ export const Storage = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Storage): unknown {
+  toJSON(message: Storage): JsonSafe<Storage> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);

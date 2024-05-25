@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -74,7 +75,7 @@ export const MsgSend = {
       receiver: isSet(object.receiver) ? String(object.receiver) : ""
     };
   },
-  toJSON(message: MsgSend): unknown {
+  toJSON(message: MsgSend): JsonSafe<MsgSend> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -115,7 +116,7 @@ export const MsgSendResponse = {
   fromJSON(_: any): MsgSendResponse {
     return {};
   },
-  toJSON(_: MsgSendResponse): unknown {
+  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
     const obj: any = {};
     return obj;
   },

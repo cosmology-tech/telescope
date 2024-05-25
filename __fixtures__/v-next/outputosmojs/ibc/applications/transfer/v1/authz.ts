@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** Allocation defines the spend limit for a particular port and channel */
 export interface Allocation {
@@ -102,7 +103,7 @@ export const Allocation = {
       allowList: Array.isArray(object?.allowList) ? object.allowList.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: Allocation): unknown {
+  toJSON(message: Allocation): JsonSafe<Allocation> {
     const obj: any = {};
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
@@ -243,7 +244,7 @@ export const TransferAuthorization = {
       allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => Allocation.fromJSON(e)) : []
     };
   },
-  toJSON(message: TransferAuthorization): unknown {
+  toJSON(message: TransferAuthorization): JsonSafe<TransferAuthorization> {
     const obj: any = {};
     if (message.allocations) {
       obj.allocations = message.allocations.map(e => e ? Allocation.toJSON(e) : undefined);

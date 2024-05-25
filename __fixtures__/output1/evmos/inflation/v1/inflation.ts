@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -124,7 +125,7 @@ export const InflationDistribution = {
       communityPool: isSet(object.communityPool) ? String(object.communityPool) : ""
     };
   },
-  toJSON(message: InflationDistribution): unknown {
+  toJSON(message: InflationDistribution): JsonSafe<InflationDistribution> {
     const obj: any = {};
     message.stakingRewards !== undefined && (obj.stakingRewards = message.stakingRewards);
     message.usageIncentives !== undefined && (obj.usageIncentives = message.usageIncentives);
@@ -219,7 +220,7 @@ export const ExponentialCalculation = {
       maxVariance: isSet(object.maxVariance) ? String(object.maxVariance) : ""
     };
   },
-  toJSON(message: ExponentialCalculation): unknown {
+  toJSON(message: ExponentialCalculation): JsonSafe<ExponentialCalculation> {
     const obj: any = {};
     message.a !== undefined && (obj.a = message.a);
     message.r !== undefined && (obj.r = message.r);

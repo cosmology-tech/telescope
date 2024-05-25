@@ -4,6 +4,7 @@ import { DepositDeploymentAuthorization, DepositDeploymentAuthorizationProtoMsg,
 import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType } from "../../bank/v1beta1/authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
@@ -278,7 +279,7 @@ export const GenericAuthorization = {
     if (isSet(object.msg)) obj.msg = String(object.msg);
     return obj;
   },
-  toJSON(message: GenericAuthorization): unknown {
+  toJSON(message: GenericAuthorization): JsonSafe<GenericAuthorization> {
     const obj: any = {};
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
@@ -416,7 +417,7 @@ export const Grant = {
     if (Array.isArray(object?.messages)) obj.messages = object.messages.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: Grant): unknown {
+  toJSON(message: Grant): JsonSafe<Grant> {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? GlobalDecoderRegistry.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
@@ -596,7 +597,7 @@ export const GrantAuthorization = {
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
-  toJSON(message: GrantAuthorization): unknown {
+  toJSON(message: GrantAuthorization): JsonSafe<GrantAuthorization> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -731,7 +732,7 @@ export const GrantQueueItem = {
     if (Array.isArray(object?.msgTypeUrls)) obj.msgTypeUrls = object.msgTypeUrls.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: GrantQueueItem): unknown {
+  toJSON(message: GrantQueueItem): JsonSafe<GrantQueueItem> {
     const obj: any = {};
     if (message.msgTypeUrls) {
       obj.msgTypeUrls = message.msgTypeUrls.map(e => e);
@@ -847,7 +848,7 @@ export const Grants = {
     if (Array.isArray(object?.authorization)) obj.authorization = object.authorization.map((e: any) => GlobalDecoderRegistry.fromJSON(e));
     return obj;
   },
-  toJSON(message: Grants): unknown {
+  toJSON(message: Grants): JsonSafe<Grants> {
     const obj: any = {};
     if (message.authorization) {
       obj.authorization = message.authorization.map(e => e ? GlobalDecoderRegistry.toJSON(e) : undefined);

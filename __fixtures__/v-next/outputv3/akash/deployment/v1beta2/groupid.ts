@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
@@ -73,13 +72,6 @@ export const GroupID = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
-    return obj;
-  },
-  toJSON(message: GroupID): JsonSafe<GroupID> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
     return obj;
   },
   fromPartial(object: DeepPartial<GroupID>): GroupID {

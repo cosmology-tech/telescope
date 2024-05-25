@@ -3,6 +3,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
 /** GenesisState define the claims module's genesis state. */
 export interface GenesisState {
@@ -132,7 +133,7 @@ export const GenesisState = {
     if (Array.isArray(object?.claimsRecords)) obj.claimsRecords = object.claimsRecords.map((e: any) => ClaimsRecordAddress.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.claimsRecords) {
@@ -283,7 +284,7 @@ export const Params = {
     if (Array.isArray(object?.evmChannels)) obj.evmChannels = object.evmChannels.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableClaims !== undefined && (obj.enableClaims = message.enableClaims);
     message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());

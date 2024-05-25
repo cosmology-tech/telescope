@@ -2,7 +2,6 @@ import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./sourc
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "./any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
@@ -553,28 +552,6 @@ export const Type = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Type): JsonSafe<Type> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.fields) {
-      obj.fields = message.fields.map(e => e ? Field.toJSON(e) : undefined);
-    } else {
-      obj.fields = [];
-    }
-    if (message.oneofs) {
-      obj.oneofs = message.oneofs.map(e => e);
-    } else {
-      obj.oneofs = [];
-    }
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
-    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.name = object.name ?? "";
@@ -777,24 +754,6 @@ export const Field = {
     if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
     return obj;
   },
-  toJSON(message: Field): JsonSafe<Field> {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
-    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
-    message.number !== undefined && (obj.number = Math.round(message.number));
-    message.name !== undefined && (obj.name = message.name);
-    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
-    message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
-    message.packed !== undefined && (obj.packed = message.packed);
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.jsonName !== undefined && (obj.jsonName = message.jsonName);
-    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Field>): Field {
     const message = createBaseField();
     message.kind = object.kind ?? 0;
@@ -971,23 +930,6 @@ export const Enum = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Enum): JsonSafe<Enum> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.enumvalue) {
-      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toJSON(e) : undefined);
-    } else {
-      obj.enumvalue = [];
-    }
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
-    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Enum>): Enum {
     const message = createBaseEnum();
     message.name = object.name ?? "";
@@ -1121,17 +1063,6 @@ export const EnumValue = {
     if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
     return obj;
   },
-  toJSON(message: EnumValue): JsonSafe<EnumValue> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.number !== undefined && (obj.number = Math.round(message.number));
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.name = object.name ?? "";
@@ -1233,12 +1164,6 @@ export const Option = {
     const obj = createBaseOption();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.value)) obj.value = Any.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: Option): JsonSafe<Option> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Option>): Option {

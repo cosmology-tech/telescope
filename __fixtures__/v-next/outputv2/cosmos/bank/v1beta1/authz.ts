@@ -1,5 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -76,7 +77,7 @@ export const SendAuthorization = {
     if (Array.isArray(object?.spendLimit)) obj.spendLimit = object.spendLimit.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: SendAuthorization): unknown {
+  toJSON(message: SendAuthorization): JsonSafe<SendAuthorization> {
     const obj: any = {};
     if (message.spendLimit) {
       obj.spendLimit = message.spendLimit.map(e => e ? Coin.toJSON(e) : undefined);

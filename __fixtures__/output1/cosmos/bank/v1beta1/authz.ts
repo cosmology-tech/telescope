@@ -1,5 +1,6 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -54,7 +55,7 @@ export const SendAuthorization = {
       spendLimit: Array.isArray(object?.spendLimit) ? object.spendLimit.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: SendAuthorization): unknown {
+  toJSON(message: SendAuthorization): JsonSafe<SendAuthorization> {
     const obj: any = {};
     if (message.spendLimit) {
       obj.spendLimit = message.spendLimit.map(e => e ? Coin.toJSON(e) : undefined);

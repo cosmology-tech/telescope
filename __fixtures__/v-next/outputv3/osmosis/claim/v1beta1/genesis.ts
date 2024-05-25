@@ -3,7 +3,6 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { ClaimRecord, ClaimRecordAmino, ClaimRecordSDKType } from "./claim";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {
@@ -83,17 +82,6 @@ export const GenesisState = {
     if (isSet(object.moduleAccountBalance)) obj.moduleAccountBalance = Coin.fromJSON(object.moduleAccountBalance);
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (Array.isArray(object?.claimRecords)) obj.claimRecords = object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.moduleAccountBalance !== undefined && (obj.moduleAccountBalance = message.moduleAccountBalance ? Coin.toJSON(message.moduleAccountBalance) : undefined);
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.claimRecords) {
-      obj.claimRecords = message.claimRecords.map(e => e ? ClaimRecord.toJSON(e) : undefined);
-    } else {
-      obj.claimRecords = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

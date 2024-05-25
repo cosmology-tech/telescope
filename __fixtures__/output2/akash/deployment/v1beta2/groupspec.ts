@@ -4,6 +4,7 @@ import { PlacementRequirements } from "../../base/v1beta2/attribute";
 import { Resource } from "./resource";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
@@ -61,7 +62,7 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromJSON(e)) : []
     };
   },
-  toJSON(message: GroupSpec): unknown {
+  toJSON(message: GroupSpec): JsonSafe<GroupSpec> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);

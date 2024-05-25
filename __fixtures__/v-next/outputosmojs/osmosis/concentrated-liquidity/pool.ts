@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 export interface Pool {
   /** pool's address holding all liquidity tokens. */
@@ -170,7 +171,7 @@ export const Pool = {
       lastLiquidityUpdate: isSet(object.lastLiquidityUpdate) ? new Date(object.lastLiquidityUpdate) : undefined
     };
   },
-  toJSON(message: Pool): unknown {
+  toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.incentivesAddress !== undefined && (obj.incentivesAddress = message.incentivesAddress);

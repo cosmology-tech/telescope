@@ -4,7 +4,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duratio
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, isObject, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.rpc.context";
 /**
  * This message defines the standard attribute vocabulary for Google APIs.
@@ -1049,22 +1048,6 @@ export const AttributeContext = {
     if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: AttributeContext): JsonSafe<AttributeContext> {
-    const obj: any = {};
-    message.origin !== undefined && (obj.origin = message.origin ? AttributeContext_Peer.toJSON(message.origin) : undefined);
-    message.source !== undefined && (obj.source = message.source ? AttributeContext_Peer.toJSON(message.source) : undefined);
-    message.destination !== undefined && (obj.destination = message.destination ? AttributeContext_Peer.toJSON(message.destination) : undefined);
-    message.request !== undefined && (obj.request = message.request ? AttributeContext_Request.toJSON(message.request) : undefined);
-    message.response !== undefined && (obj.response = message.response ? AttributeContext_Response.toJSON(message.response) : undefined);
-    message.resource !== undefined && (obj.resource = message.resource ? AttributeContext_Resource.toJSON(message.resource) : undefined);
-    message.api !== undefined && (obj.api = message.api ? AttributeContext_Api.toJSON(message.api) : undefined);
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext>): AttributeContext {
     const message = createBaseAttributeContext();
     if (object.origin !== undefined && object.origin !== null) {
@@ -1216,12 +1199,6 @@ export const AttributeContext_Peer_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: AttributeContext_Peer_LabelsEntry): JsonSafe<AttributeContext_Peer_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext_Peer_LabelsEntry>): AttributeContext_Peer_LabelsEntry {
     const message = createBaseAttributeContext_Peer_LabelsEntry();
     message.key = object.key ?? "";
@@ -1339,20 +1316,6 @@ export const AttributeContext_Peer = {
     }, {});
     if (isSet(object.principal)) obj.principal = String(object.principal);
     if (isSet(object.regionCode)) obj.regionCode = String(object.regionCode);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Peer): JsonSafe<AttributeContext_Peer> {
-    const obj: any = {};
-    message.ip !== undefined && (obj.ip = message.ip);
-    message.port !== undefined && (obj.port = (message.port || BigInt(0)).toString());
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.principal !== undefined && (obj.principal = message.principal);
-    message.regionCode !== undefined && (obj.regionCode = message.regionCode);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Peer>): AttributeContext_Peer {
@@ -1511,14 +1474,6 @@ export const AttributeContext_Api = {
     if (isSet(object.version)) obj.version = String(object.version);
     return obj;
   },
-  toJSON(message: AttributeContext_Api): JsonSafe<AttributeContext_Api> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.operation !== undefined && (obj.operation = message.operation);
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext_Api>): AttributeContext_Api {
     const message = createBaseAttributeContext_Api();
     message.service = object.service ?? "";
@@ -1647,23 +1602,6 @@ export const AttributeContext_Auth = {
     if (Array.isArray(object?.accessLevels)) obj.accessLevels = object.accessLevels.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: AttributeContext_Auth): JsonSafe<AttributeContext_Auth> {
-    const obj: any = {};
-    message.principal !== undefined && (obj.principal = message.principal);
-    if (message.audiences) {
-      obj.audiences = message.audiences.map(e => e);
-    } else {
-      obj.audiences = [];
-    }
-    message.presenter !== undefined && (obj.presenter = message.presenter);
-    message.claims !== undefined && (obj.claims = message.claims ? Struct.toJSON(message.claims) : undefined);
-    if (message.accessLevels) {
-      obj.accessLevels = message.accessLevels.map(e => e);
-    } else {
-      obj.accessLevels = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext_Auth>): AttributeContext_Auth {
     const message = createBaseAttributeContext_Auth();
     message.principal = object.principal ?? "";
@@ -1786,12 +1724,6 @@ export const AttributeContext_Request_HeadersEntry = {
     const obj = createBaseAttributeContext_Request_HeadersEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Request_HeadersEntry): JsonSafe<AttributeContext_Request_HeadersEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Request_HeadersEntry>): AttributeContext_Request_HeadersEntry {
@@ -1967,27 +1899,6 @@ export const AttributeContext_Request = {
     if (isSet(object.protocol)) obj.protocol = String(object.protocol);
     if (isSet(object.reason)) obj.reason = String(object.reason);
     if (isSet(object.auth)) obj.auth = AttributeContext_Auth.fromJSON(object.auth);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Request): JsonSafe<AttributeContext_Request> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.method !== undefined && (obj.method = message.method);
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    message.path !== undefined && (obj.path = message.path);
-    message.host !== undefined && (obj.host = message.host);
-    message.scheme !== undefined && (obj.scheme = message.scheme);
-    message.query !== undefined && (obj.query = message.query);
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
-    message.protocol !== undefined && (obj.protocol = message.protocol);
-    message.reason !== undefined && (obj.reason = message.reason);
-    message.auth !== undefined && (obj.auth = message.auth ? AttributeContext_Auth.toJSON(message.auth) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Request>): AttributeContext_Request {
@@ -2180,12 +2091,6 @@ export const AttributeContext_Response_HeadersEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: AttributeContext_Response_HeadersEntry): JsonSafe<AttributeContext_Response_HeadersEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext_Response_HeadersEntry>): AttributeContext_Response_HeadersEntry {
     const message = createBaseAttributeContext_Response_HeadersEntry();
     message.key = object.key ?? "";
@@ -2303,20 +2208,6 @@ export const AttributeContext_Response = {
     }, {});
     if (isSet(object.time)) obj.time = new Date(object.time);
     if (isSet(object.backendLatency)) obj.backendLatency = Duration.fromJSON(object.backendLatency);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Response): JsonSafe<AttributeContext_Response> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = (message.code || BigInt(0)).toString());
-    message.size !== undefined && (obj.size = (message.size || BigInt(0)).toString());
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.backendLatency !== undefined && (obj.backendLatency = message.backendLatency ? Duration.toJSON(message.backendLatency) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Response>): AttributeContext_Response {
@@ -2462,12 +2353,6 @@ export const AttributeContext_Resource_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: AttributeContext_Resource_LabelsEntry): JsonSafe<AttributeContext_Resource_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributeContext_Resource_LabelsEntry>): AttributeContext_Resource_LabelsEntry {
     const message = createBaseAttributeContext_Resource_LabelsEntry();
     message.key = object.key ?? "";
@@ -2549,12 +2434,6 @@ export const AttributeContext_Resource_AnnotationsEntry = {
     const obj = createBaseAttributeContext_Resource_AnnotationsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Resource_AnnotationsEntry): JsonSafe<AttributeContext_Resource_AnnotationsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Resource_AnnotationsEntry>): AttributeContext_Resource_AnnotationsEntry {
@@ -2741,32 +2620,6 @@ export const AttributeContext_Resource = {
     if (isSet(object.deleteTime)) obj.deleteTime = new Date(object.deleteTime);
     if (isSet(object.etag)) obj.etag = String(object.etag);
     if (isSet(object.location)) obj.location = String(object.location);
-    return obj;
-  },
-  toJSON(message: AttributeContext_Resource): JsonSafe<AttributeContext_Resource> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service);
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.uid !== undefined && (obj.uid = message.uid);
-    obj.annotations = {};
-    if (message.annotations) {
-      Object.entries(message.annotations).forEach(([k, v]) => {
-        obj.annotations[k] = v;
-      });
-    }
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.deleteTime !== undefined && (obj.deleteTime = message.deleteTime.toISOString());
-    message.etag !== undefined && (obj.etag = message.etag);
-    message.location !== undefined && (obj.location = message.location);
     return obj;
   },
   fromPartial(object: DeepPartial<AttributeContext_Resource>): AttributeContext_Resource {

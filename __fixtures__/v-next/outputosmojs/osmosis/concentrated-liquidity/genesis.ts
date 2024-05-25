@@ -6,6 +6,7 @@ import { Position, PositionSDKType } from "./position";
 import { AccumulatorContent, AccumulatorContentSDKType } from "../accum/v1beta1/accum";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
  * FullTick contains tick index and pool id along with other tick model
@@ -145,7 +146,7 @@ export const FullTick = {
       info: isSet(object.info) ? TickInfo.fromJSON(object.info) : undefined
     };
   },
-  toJSON(message: FullTick): unknown {
+  toJSON(message: FullTick): JsonSafe<FullTick> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tickIndex !== undefined && (obj.tickIndex = (message.tickIndex || BigInt(0)).toString());
@@ -289,7 +290,7 @@ export const PoolData = {
       incentiveRecords: Array.isArray(object?.incentiveRecords) ? object.incentiveRecords.map((e: any) => IncentiveRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: PoolData): unknown {
+  toJSON(message: PoolData): JsonSafe<PoolData> {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = message.pool ? Any.toJSON(message.pool) : undefined);
     if (message.ticks) {
@@ -473,7 +474,7 @@ export const GenesisState = {
       nextPositionId: isSet(object.nextPositionId) ? BigInt(object.nextPositionId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.poolData) {
@@ -622,7 +623,7 @@ export const AccumObject = {
       accumContent: isSet(object.accumContent) ? AccumulatorContent.fromJSON(object.accumContent) : undefined
     };
   },
-  toJSON(message: AccumObject): unknown {
+  toJSON(message: AccumObject): JsonSafe<AccumObject> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.accumContent !== undefined && (obj.accumContent = message.accumContent ? AccumulatorContent.toJSON(message.accumContent) : undefined);

@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
@@ -67,7 +68,7 @@ export const Params = {
     if (Array.isArray(object?.poolCreationFee)) obj.poolCreationFee = object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.poolCreationFee) {
       obj.poolCreationFee = message.poolCreationFee.map(e => e ? Coin.toJSON(e) : undefined);
@@ -187,7 +188,7 @@ export const GenesisState = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);

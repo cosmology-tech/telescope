@@ -3,6 +3,7 @@ import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, BaseDenom, BaseDenomSDKT
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** GenesisState defines the protorev module's genesis state. */
 export interface GenesisState {
@@ -174,7 +175,7 @@ export const GenesisState = {
       pointCountForBlock: isSet(object.pointCountForBlock) ? BigInt(object.pointCountForBlock.toString()) : BigInt(0)
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.tokenPairArbRoutes) {

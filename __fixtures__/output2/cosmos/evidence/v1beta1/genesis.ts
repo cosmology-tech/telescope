@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /** GenesisState defines the evidence module's genesis state. */
@@ -43,7 +44,7 @@ export const GenesisState = {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Any.toJSON(e) : undefined);

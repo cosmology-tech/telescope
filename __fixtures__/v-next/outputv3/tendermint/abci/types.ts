@@ -5,7 +5,6 @@ import { EvidenceParams, EvidenceParamsAmino, EvidenceParamsSDKType, ValidatorPa
 import { PublicKey, PublicKeyAmino, PublicKeySDKType } from "../crypto/keys";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.abci";
 export enum CheckTxType {
   NEW = 0,
@@ -1358,25 +1357,6 @@ export const Request = {
     if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = RequestApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
     return obj;
   },
-  toJSON(message: Request): JsonSafe<Request> {
-    const obj: any = {};
-    message.echo !== undefined && (obj.echo = message.echo ? RequestEcho.toJSON(message.echo) : undefined);
-    message.flush !== undefined && (obj.flush = message.flush ? RequestFlush.toJSON(message.flush) : undefined);
-    message.info !== undefined && (obj.info = message.info ? RequestInfo.toJSON(message.info) : undefined);
-    message.setOption !== undefined && (obj.setOption = message.setOption ? RequestSetOption.toJSON(message.setOption) : undefined);
-    message.initChain !== undefined && (obj.initChain = message.initChain ? RequestInitChain.toJSON(message.initChain) : undefined);
-    message.query !== undefined && (obj.query = message.query ? RequestQuery.toJSON(message.query) : undefined);
-    message.beginBlock !== undefined && (obj.beginBlock = message.beginBlock ? RequestBeginBlock.toJSON(message.beginBlock) : undefined);
-    message.checkTx !== undefined && (obj.checkTx = message.checkTx ? RequestCheckTx.toJSON(message.checkTx) : undefined);
-    message.deliverTx !== undefined && (obj.deliverTx = message.deliverTx ? RequestDeliverTx.toJSON(message.deliverTx) : undefined);
-    message.endBlock !== undefined && (obj.endBlock = message.endBlock ? RequestEndBlock.toJSON(message.endBlock) : undefined);
-    message.commit !== undefined && (obj.commit = message.commit ? RequestCommit.toJSON(message.commit) : undefined);
-    message.listSnapshots !== undefined && (obj.listSnapshots = message.listSnapshots ? RequestListSnapshots.toJSON(message.listSnapshots) : undefined);
-    message.offerSnapshot !== undefined && (obj.offerSnapshot = message.offerSnapshot ? RequestOfferSnapshot.toJSON(message.offerSnapshot) : undefined);
-    message.loadSnapshotChunk !== undefined && (obj.loadSnapshotChunk = message.loadSnapshotChunk ? RequestLoadSnapshotChunk.toJSON(message.loadSnapshotChunk) : undefined);
-    message.applySnapshotChunk !== undefined && (obj.applySnapshotChunk = message.applySnapshotChunk ? RequestApplySnapshotChunk.toJSON(message.applySnapshotChunk) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Request>): Request {
     const message = createBaseRequest();
     if (object.echo !== undefined && object.echo !== null) {
@@ -1580,11 +1560,6 @@ export const RequestEcho = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: RequestEcho): JsonSafe<RequestEcho> {
-    const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestEcho>): RequestEcho {
     const message = createBaseRequestEcho();
     message.message = object.message ?? "";
@@ -1649,10 +1624,6 @@ export const RequestFlush = {
   },
   fromJSON(_: any): RequestFlush {
     const obj = createBaseRequestFlush();
-    return obj;
-  },
-  toJSON(_: RequestFlush): JsonSafe<RequestFlush> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<RequestFlush>): RequestFlush {
@@ -1736,13 +1707,6 @@ export const RequestInfo = {
     if (isSet(object.version)) obj.version = String(object.version);
     if (isSet(object.blockVersion)) obj.blockVersion = BigInt(object.blockVersion.toString());
     if (isSet(object.p2pVersion)) obj.p2pVersion = BigInt(object.p2pVersion.toString());
-    return obj;
-  },
-  toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
-    const obj: any = {};
-    message.version !== undefined && (obj.version = message.version);
-    message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || BigInt(0)).toString());
-    message.p2pVersion !== undefined && (obj.p2pVersion = (message.p2pVersion || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
@@ -1844,12 +1808,6 @@ export const RequestSetOption = {
     const obj = createBaseRequestSetOption();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: RequestSetOption): JsonSafe<RequestSetOption> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestSetOption>): RequestSetOption {
@@ -1972,20 +1930,6 @@ export const RequestInitChain = {
     if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => ValidatorUpdate.fromJSON(e));
     if (isSet(object.appStateBytes)) obj.appStateBytes = bytesFromBase64(object.appStateBytes);
     if (isSet(object.initialHeight)) obj.initialHeight = BigInt(object.initialHeight.toString());
-    return obj;
-  },
-  toJSON(message: RequestInitChain): JsonSafe<RequestInitChain> {
-    const obj: any = {};
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.chainId !== undefined && (obj.chainId = message.chainId);
-    message.consensusParams !== undefined && (obj.consensusParams = message.consensusParams ? ConsensusParams.toJSON(message.consensusParams) : undefined);
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.appStateBytes !== undefined && (obj.appStateBytes = base64FromBytes(message.appStateBytes !== undefined ? message.appStateBytes : new Uint8Array()));
-    message.initialHeight !== undefined && (obj.initialHeight = (message.initialHeight || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<RequestInitChain>): RequestInitChain {
@@ -2132,14 +2076,6 @@ export const RequestQuery = {
     if (isSet(object.prove)) obj.prove = Boolean(object.prove);
     return obj;
   },
-  toJSON(message: RequestQuery): JsonSafe<RequestQuery> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.path !== undefined && (obj.path = message.path);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.prove !== undefined && (obj.prove = message.prove);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestQuery>): RequestQuery {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
@@ -2262,18 +2198,6 @@ export const RequestBeginBlock = {
     if (Array.isArray(object?.byzantineValidators)) obj.byzantineValidators = object.byzantineValidators.map((e: any) => Evidence.fromJSON(e));
     return obj;
   },
-  toJSON(message: RequestBeginBlock): JsonSafe<RequestBeginBlock> {
-    const obj: any = {};
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    message.lastCommitInfo !== undefined && (obj.lastCommitInfo = message.lastCommitInfo ? LastCommitInfo.toJSON(message.lastCommitInfo) : undefined);
-    if (message.byzantineValidators) {
-      obj.byzantineValidators = message.byzantineValidators.map(e => e ? Evidence.toJSON(e) : undefined);
-    } else {
-      obj.byzantineValidators = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
     message.hash = object.hash ?? new Uint8Array();
@@ -2388,12 +2312,6 @@ export const RequestCheckTx = {
     if (isSet(object.type)) obj.type = checkTxTypeFromJSON(object.type);
     return obj;
   },
-  toJSON(message: RequestCheckTx): JsonSafe<RequestCheckTx> {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
-    message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestCheckTx>): RequestCheckTx {
     const message = createBaseRequestCheckTx();
     message.tx = object.tx ?? new Uint8Array();
@@ -2476,11 +2394,6 @@ export const RequestDeliverTx = {
     if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
     return obj;
   },
-  toJSON(message: RequestDeliverTx): JsonSafe<RequestDeliverTx> {
-    const obj: any = {};
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestDeliverTx>): RequestDeliverTx {
     const message = createBaseRequestDeliverTx();
     message.tx = object.tx ?? new Uint8Array();
@@ -2556,11 +2469,6 @@ export const RequestEndBlock = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
   },
-  toJSON(message: RequestEndBlock): JsonSafe<RequestEndBlock> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
     if (object.height !== undefined && object.height !== null) {
@@ -2629,10 +2537,6 @@ export const RequestCommit = {
     const obj = createBaseRequestCommit();
     return obj;
   },
-  toJSON(_: RequestCommit): JsonSafe<RequestCommit> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<RequestCommit>): RequestCommit {
     const message = createBaseRequestCommit();
     return message;
@@ -2689,10 +2593,6 @@ export const RequestListSnapshots = {
   },
   fromJSON(_: any): RequestListSnapshots {
     const obj = createBaseRequestListSnapshots();
-    return obj;
-  },
-  toJSON(_: RequestListSnapshots): JsonSafe<RequestListSnapshots> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<RequestListSnapshots>): RequestListSnapshots {
@@ -2768,12 +2668,6 @@ export const RequestOfferSnapshot = {
     const obj = createBaseRequestOfferSnapshot();
     if (isSet(object.snapshot)) obj.snapshot = Snapshot.fromJSON(object.snapshot);
     if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
-    return obj;
-  },
-  toJSON(message: RequestOfferSnapshot): JsonSafe<RequestOfferSnapshot> {
-    const obj: any = {};
-    message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toJSON(message.snapshot) : undefined);
-    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
@@ -2874,13 +2768,6 @@ export const RequestLoadSnapshotChunk = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.format)) obj.format = Number(object.format);
     if (isSet(object.chunk)) obj.chunk = Number(object.chunk);
-    return obj;
-  },
-  toJSON(message: RequestLoadSnapshotChunk): JsonSafe<RequestLoadSnapshotChunk> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.format !== undefined && (obj.format = Math.round(message.format));
-    message.chunk !== undefined && (obj.chunk = Math.round(message.chunk));
     return obj;
   },
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
@@ -2988,13 +2875,6 @@ export const RequestApplySnapshotChunk = {
     if (isSet(object.index)) obj.index = Number(object.index);
     if (isSet(object.chunk)) obj.chunk = bytesFromBase64(object.chunk);
     if (isSet(object.sender)) obj.sender = String(object.sender);
-    return obj;
-  },
-  toJSON(message: RequestApplySnapshotChunk): JsonSafe<RequestApplySnapshotChunk> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
-    message.sender !== undefined && (obj.sender = message.sender);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestApplySnapshotChunk>): RequestApplySnapshotChunk {
@@ -3204,26 +3084,6 @@ export const Response = {
     if (isSet(object.offerSnapshot)) obj.offerSnapshot = ResponseOfferSnapshot.fromJSON(object.offerSnapshot);
     if (isSet(object.loadSnapshotChunk)) obj.loadSnapshotChunk = ResponseLoadSnapshotChunk.fromJSON(object.loadSnapshotChunk);
     if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = ResponseApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
-    return obj;
-  },
-  toJSON(message: Response): JsonSafe<Response> {
-    const obj: any = {};
-    message.exception !== undefined && (obj.exception = message.exception ? ResponseException.toJSON(message.exception) : undefined);
-    message.echo !== undefined && (obj.echo = message.echo ? ResponseEcho.toJSON(message.echo) : undefined);
-    message.flush !== undefined && (obj.flush = message.flush ? ResponseFlush.toJSON(message.flush) : undefined);
-    message.info !== undefined && (obj.info = message.info ? ResponseInfo.toJSON(message.info) : undefined);
-    message.setOption !== undefined && (obj.setOption = message.setOption ? ResponseSetOption.toJSON(message.setOption) : undefined);
-    message.initChain !== undefined && (obj.initChain = message.initChain ? ResponseInitChain.toJSON(message.initChain) : undefined);
-    message.query !== undefined && (obj.query = message.query ? ResponseQuery.toJSON(message.query) : undefined);
-    message.beginBlock !== undefined && (obj.beginBlock = message.beginBlock ? ResponseBeginBlock.toJSON(message.beginBlock) : undefined);
-    message.checkTx !== undefined && (obj.checkTx = message.checkTx ? ResponseCheckTx.toJSON(message.checkTx) : undefined);
-    message.deliverTx !== undefined && (obj.deliverTx = message.deliverTx ? ResponseDeliverTx.toJSON(message.deliverTx) : undefined);
-    message.endBlock !== undefined && (obj.endBlock = message.endBlock ? ResponseEndBlock.toJSON(message.endBlock) : undefined);
-    message.commit !== undefined && (obj.commit = message.commit ? ResponseCommit.toJSON(message.commit) : undefined);
-    message.listSnapshots !== undefined && (obj.listSnapshots = message.listSnapshots ? ResponseListSnapshots.toJSON(message.listSnapshots) : undefined);
-    message.offerSnapshot !== undefined && (obj.offerSnapshot = message.offerSnapshot ? ResponseOfferSnapshot.toJSON(message.offerSnapshot) : undefined);
-    message.loadSnapshotChunk !== undefined && (obj.loadSnapshotChunk = message.loadSnapshotChunk ? ResponseLoadSnapshotChunk.toJSON(message.loadSnapshotChunk) : undefined);
-    message.applySnapshotChunk !== undefined && (obj.applySnapshotChunk = message.applySnapshotChunk ? ResponseApplySnapshotChunk.toJSON(message.applySnapshotChunk) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Response>): Response {
@@ -3438,11 +3298,6 @@ export const ResponseException = {
     if (isSet(object.error)) obj.error = String(object.error);
     return obj;
   },
-  toJSON(message: ResponseException): JsonSafe<ResponseException> {
-    const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseException>): ResponseException {
     const message = createBaseResponseException();
     message.error = object.error ?? "";
@@ -3518,11 +3373,6 @@ export const ResponseEcho = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: ResponseEcho): JsonSafe<ResponseEcho> {
-    const obj: any = {};
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseEcho>): ResponseEcho {
     const message = createBaseResponseEcho();
     message.message = object.message ?? "";
@@ -3587,10 +3437,6 @@ export const ResponseFlush = {
   },
   fromJSON(_: any): ResponseFlush {
     const obj = createBaseResponseFlush();
-    return obj;
-  },
-  toJSON(_: ResponseFlush): JsonSafe<ResponseFlush> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<ResponseFlush>): ResponseFlush {
@@ -3690,15 +3536,6 @@ export const ResponseInfo = {
     if (isSet(object.appVersion)) obj.appVersion = BigInt(object.appVersion.toString());
     if (isSet(object.lastBlockHeight)) obj.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
     if (isSet(object.lastBlockAppHash)) obj.lastBlockAppHash = bytesFromBase64(object.lastBlockAppHash);
-    return obj;
-  },
-  toJSON(message: ResponseInfo): JsonSafe<ResponseInfo> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = message.data);
-    message.version !== undefined && (obj.version = message.version);
-    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || BigInt(0)).toString());
-    message.lastBlockHeight !== undefined && (obj.lastBlockHeight = (message.lastBlockHeight || BigInt(0)).toString());
-    message.lastBlockAppHash !== undefined && (obj.lastBlockAppHash = base64FromBytes(message.lastBlockAppHash !== undefined ? message.lastBlockAppHash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseInfo>): ResponseInfo {
@@ -3824,13 +3661,6 @@ export const ResponseSetOption = {
     if (isSet(object.info)) obj.info = String(object.info);
     return obj;
   },
-  toJSON(message: ResponseSetOption): JsonSafe<ResponseSetOption> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseSetOption>): ResponseSetOption {
     const message = createBaseResponseSetOption();
     message.code = object.code ?? 0;
@@ -3934,17 +3764,6 @@ export const ResponseInitChain = {
     if (isSet(object.consensusParams)) obj.consensusParams = ConsensusParams.fromJSON(object.consensusParams);
     if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => ValidatorUpdate.fromJSON(e));
     if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
-    return obj;
-  },
-  toJSON(message: ResponseInitChain): JsonSafe<ResponseInitChain> {
-    const obj: any = {};
-    message.consensusParams !== undefined && (obj.consensusParams = message.consensusParams ? ConsensusParams.toJSON(message.consensusParams) : undefined);
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
-    } else {
-      obj.validators = [];
-    }
-    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
@@ -4108,19 +3927,6 @@ export const ResponseQuery = {
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
   },
-  toJSON(message: ResponseQuery): JsonSafe<ResponseQuery> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    message.proofOps !== undefined && (obj.proofOps = message.proofOps ? ProofOps.toJSON(message.proofOps) : undefined);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseQuery>): ResponseQuery {
     const message = createBaseResponseQuery();
     message.code = object.code ?? 0;
@@ -4258,15 +4064,6 @@ export const ResponseBeginBlock = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseBeginBlock): JsonSafe<ResponseBeginBlock> {
-    const obj: any = {};
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseBeginBlock>): ResponseBeginBlock {
     const message = createBaseResponseBeginBlock();
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
@@ -4402,22 +4199,6 @@ export const ResponseCheckTx = {
     if (isSet(object.gas_used)) obj.gasUsed = BigInt(object.gas_used.toString());
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
-    return obj;
-  },
-  toJSON(message: ResponseCheckTx): JsonSafe<ResponseCheckTx> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    message.codespace !== undefined && (obj.codespace = message.codespace);
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseCheckTx>): ResponseCheckTx {
@@ -4610,22 +4391,6 @@ export const ResponseDeliverTx = {
     if (isSet(object.codespace)) obj.codespace = String(object.codespace);
     return obj;
   },
-  toJSON(message: ResponseDeliverTx): JsonSafe<ResponseDeliverTx> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = Math.round(message.code));
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.log !== undefined && (obj.log = message.log);
-    message.info !== undefined && (obj.info = message.info);
-    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
-    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    message.codespace !== undefined && (obj.codespace = message.codespace);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseDeliverTx>): ResponseDeliverTx {
     const message = createBaseResponseDeliverTx();
     message.code = object.code ?? 0;
@@ -4776,21 +4541,6 @@ export const ResponseEndBlock = {
     if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseEndBlock): JsonSafe<ResponseEndBlock> {
-    const obj: any = {};
-    if (message.validatorUpdates) {
-      obj.validatorUpdates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
-    } else {
-      obj.validatorUpdates = [];
-    }
-    message.consensusParamUpdates !== undefined && (obj.consensusParamUpdates = message.consensusParamUpdates ? ConsensusParams.toJSON(message.consensusParamUpdates) : undefined);
-    if (message.events) {
-      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
-    } else {
-      obj.events = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
     message.validatorUpdates = object.validatorUpdates?.map(e => ValidatorUpdate.fromPartial(e)) || [];
@@ -4902,12 +4652,6 @@ export const ResponseCommit = {
     if (isSet(object.retainHeight)) obj.retainHeight = BigInt(object.retainHeight.toString());
     return obj;
   },
-  toJSON(message: ResponseCommit): JsonSafe<ResponseCommit> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
@@ -4992,15 +4736,6 @@ export const ResponseListSnapshots = {
     if (Array.isArray(object?.snapshots)) obj.snapshots = object.snapshots.map((e: any) => Snapshot.fromJSON(e));
     return obj;
   },
-  toJSON(message: ResponseListSnapshots): JsonSafe<ResponseListSnapshots> {
-    const obj: any = {};
-    if (message.snapshots) {
-      obj.snapshots = message.snapshots.map(e => e ? Snapshot.toJSON(e) : undefined);
-    } else {
-      obj.snapshots = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseListSnapshots>): ResponseListSnapshots {
     const message = createBaseResponseListSnapshots();
     message.snapshots = object.snapshots?.map(e => Snapshot.fromPartial(e)) || [];
@@ -5082,11 +4817,6 @@ export const ResponseOfferSnapshot = {
     if (isSet(object.result)) obj.result = responseOfferSnapshot_ResultFromJSON(object.result);
     return obj;
   },
-  toJSON(message: ResponseOfferSnapshot): JsonSafe<ResponseOfferSnapshot> {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResponseOfferSnapshot>): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
     message.result = object.result ?? 0;
@@ -5160,11 +4890,6 @@ export const ResponseLoadSnapshotChunk = {
   fromJSON(object: any): ResponseLoadSnapshotChunk {
     const obj = createBaseResponseLoadSnapshotChunk();
     if (isSet(object.chunk)) obj.chunk = bytesFromBase64(object.chunk);
-    return obj;
-  },
-  toJSON(message: ResponseLoadSnapshotChunk): JsonSafe<ResponseLoadSnapshotChunk> {
-    const obj: any = {};
-    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseLoadSnapshotChunk>): ResponseLoadSnapshotChunk {
@@ -5265,21 +4990,6 @@ export const ResponseApplySnapshotChunk = {
     if (isSet(object.result)) obj.result = responseApplySnapshotChunk_ResultFromJSON(object.result);
     if (Array.isArray(object?.refetchChunks)) obj.refetchChunks = object.refetchChunks.map((e: any) => Number(e));
     if (Array.isArray(object?.rejectSenders)) obj.rejectSenders = object.rejectSenders.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ResponseApplySnapshotChunk): JsonSafe<ResponseApplySnapshotChunk> {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
-    if (message.refetchChunks) {
-      obj.refetchChunks = message.refetchChunks.map(e => Math.round(e));
-    } else {
-      obj.refetchChunks = [];
-    }
-    if (message.rejectSenders) {
-      obj.rejectSenders = message.rejectSenders.map(e => e);
-    } else {
-      obj.rejectSenders = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ResponseApplySnapshotChunk>): ResponseApplySnapshotChunk {
@@ -5407,14 +5117,6 @@ export const ConsensusParams = {
     if (isSet(object.version)) obj.version = VersionParams.fromJSON(object.version);
     return obj;
   },
-  toJSON(message: ConsensusParams): JsonSafe<ConsensusParams> {
-    const obj: any = {};
-    message.block !== undefined && (obj.block = message.block ? BlockParams.toJSON(message.block) : undefined);
-    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toJSON(message.evidence) : undefined);
-    message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toJSON(message.validator) : undefined);
-    message.version !== undefined && (obj.version = message.version ? VersionParams.toJSON(message.version) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
     if (object.block !== undefined && object.block !== null) {
@@ -5527,12 +5229,6 @@ export const BlockParams = {
     if (isSet(object.maxGas)) obj.maxGas = BigInt(object.maxGas.toString());
     return obj;
   },
-  toJSON(message: BlockParams): JsonSafe<BlockParams> {
-    const obj: any = {};
-    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || BigInt(0)).toString());
-    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
     if (object.maxBytes !== undefined && object.maxBytes !== null) {
@@ -5625,16 +5321,6 @@ export const LastCommitInfo = {
     const obj = createBaseLastCommitInfo();
     if (isSet(object.round)) obj.round = Number(object.round);
     if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => VoteInfo.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: LastCommitInfo): JsonSafe<LastCommitInfo> {
-    const obj: any = {};
-    message.round !== undefined && (obj.round = Math.round(message.round));
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? VoteInfo.toJSON(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<LastCommitInfo>): LastCommitInfo {
@@ -5731,16 +5417,6 @@ export const Event = {
     const obj = createBaseEvent();
     if (isSet(object.type)) obj.type = String(object.type);
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => EventAttribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Event): JsonSafe<Event> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? EventAttribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Event>): Event {
@@ -5845,13 +5521,6 @@ export const EventAttribute = {
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     if (isSet(object.index)) obj.index = Boolean(object.index);
-    return obj;
-  },
-  toJSON(message: EventAttribute): JsonSafe<EventAttribute> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    message.index !== undefined && (obj.index = message.index);
     return obj;
   },
   fromPartial(object: DeepPartial<EventAttribute>): EventAttribute {
@@ -5967,14 +5636,6 @@ export const TxResult = {
     if (isSet(object.result)) obj.result = ResponseDeliverTx.fromJSON(object.result);
     return obj;
   },
-  toJSON(message: TxResult): JsonSafe<TxResult> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.index !== undefined && (obj.index = Math.round(message.index));
-    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
-    message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toJSON(message.result) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
     if (object.height !== undefined && object.height !== null) {
@@ -6083,12 +5744,6 @@ export const Validator = {
     if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     return obj;
   },
-  toJSON(message: Validator): JsonSafe<Validator> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
-    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
@@ -6179,12 +5834,6 @@ export const ValidatorUpdate = {
     const obj = createBaseValidatorUpdate();
     if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
     if (isSet(object.power)) obj.power = BigInt(object.power.toString());
-    return obj;
-  },
-  toJSON(message: ValidatorUpdate): JsonSafe<ValidatorUpdate> {
-    const obj: any = {};
-    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
-    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
@@ -6279,12 +5928,6 @@ export const VoteInfo = {
     const obj = createBaseVoteInfo();
     if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
     if (isSet(object.signedLastBlock)) obj.signedLastBlock = Boolean(object.signedLastBlock);
-    return obj;
-  },
-  toJSON(message: VoteInfo): JsonSafe<VoteInfo> {
-    const obj: any = {};
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    message.signedLastBlock !== undefined && (obj.signedLastBlock = message.signedLastBlock);
     return obj;
   },
   fromPartial(object: DeepPartial<VoteInfo>): VoteInfo {
@@ -6401,15 +6044,6 @@ export const Evidence = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     if (isSet(object.time)) obj.time = new Date(object.time);
     if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
-    return obj;
-  },
-  toJSON(message: Evidence): JsonSafe<Evidence> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
-    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Evidence>): Evidence {
@@ -6551,15 +6185,6 @@ export const Snapshot = {
     if (isSet(object.chunks)) obj.chunks = Number(object.chunks);
     if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
     if (isSet(object.metadata)) obj.metadata = bytesFromBase64(object.metadata);
-    return obj;
-  },
-  toJSON(message: Snapshot): JsonSafe<Snapshot> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.format !== undefined && (obj.format = Math.round(message.format));
-    message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {

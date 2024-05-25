@@ -2,7 +2,6 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Grant, GrantAmino, GrantSDKType } from "./feegrant";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** QueryAllowanceRequest is the request type for the Query/Allowance RPC method. */
 export interface QueryAllowanceRequest {
@@ -177,12 +176,6 @@ export const QueryAllowanceRequest = {
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
     return obj;
   },
-  toJSON(message: QueryAllowanceRequest): JsonSafe<QueryAllowanceRequest> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAllowanceRequest>): QueryAllowanceRequest {
     const message = createBaseQueryAllowanceRequest();
     message.granter = object.granter ?? "";
@@ -264,11 +257,6 @@ export const QueryAllowanceResponse = {
   fromJSON(object: any): QueryAllowanceResponse {
     const obj = createBaseQueryAllowanceResponse();
     if (isSet(object.allowance)) obj.allowance = Grant.fromJSON(object.allowance);
-    return obj;
-  },
-  toJSON(message: QueryAllowanceResponse): JsonSafe<QueryAllowanceResponse> {
-    const obj: any = {};
-    message.allowance !== undefined && (obj.allowance = message.allowance ? Grant.toJSON(message.allowance) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllowanceResponse>): QueryAllowanceResponse {
@@ -355,12 +343,6 @@ export const QueryAllowancesRequest = {
     const obj = createBaseQueryAllowancesRequest();
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllowancesRequest): JsonSafe<QueryAllowancesRequest> {
-    const obj: any = {};
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllowancesRequest>): QueryAllowancesRequest {
@@ -454,16 +436,6 @@ export const QueryAllowancesResponse = {
     const obj = createBaseQueryAllowancesResponse();
     if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllowancesResponse): JsonSafe<QueryAllowancesResponse> {
-    const obj: any = {};
-    if (message.allowances) {
-      obj.allowances = message.allowances.map(e => e ? Grant.toJSON(e) : undefined);
-    } else {
-      obj.allowances = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllowancesResponse>): QueryAllowancesResponse {
@@ -565,12 +537,6 @@ export const QueryAllowancesByGranterRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAllowancesByGranterRequest): JsonSafe<QueryAllowancesByGranterRequest> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAllowancesByGranterRequest>): QueryAllowancesByGranterRequest {
     const message = createBaseQueryAllowancesByGranterRequest();
     message.granter = object.granter ?? "";
@@ -662,16 +628,6 @@ export const QueryAllowancesByGranterResponse = {
     const obj = createBaseQueryAllowancesByGranterResponse();
     if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllowancesByGranterResponse): JsonSafe<QueryAllowancesByGranterResponse> {
-    const obj: any = {};
-    if (message.allowances) {
-      obj.allowances = message.allowances.map(e => e ? Grant.toJSON(e) : undefined);
-    } else {
-      obj.allowances = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllowancesByGranterResponse>): QueryAllowancesByGranterResponse {

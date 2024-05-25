@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.accum.v1beta1";
 export interface AccumulatorContent {
   accumValue: DecCoin[];
@@ -80,7 +81,7 @@ export const AccumulatorContent = {
       totalShares: isSet(object.totalShares) ? String(object.totalShares) : ""
     };
   },
-  toJSON(message: AccumulatorContent): unknown {
+  toJSON(message: AccumulatorContent): JsonSafe<AccumulatorContent> {
     const obj: any = {};
     if (message.accumValue) {
       obj.accumValue = message.accumValue.map(e => e ? DecCoin.toJSON(e) : undefined);
@@ -183,7 +184,7 @@ export const Options = {
   fromJSON(_: any): Options {
     return {};
   },
-  toJSON(_: Options): unknown {
+  toJSON(_: Options): JsonSafe<Options> {
     const obj: any = {};
     return obj;
   },
@@ -290,7 +291,7 @@ export const Record = {
       options: isSet(object.options) ? Options.fromJSON(object.options) : undefined
     };
   },
-  toJSON(message: Record): unknown {
+  toJSON(message: Record): JsonSafe<Record> {
     const obj: any = {};
     message.numShares !== undefined && (obj.numShares = message.numShares);
     if (message.initAccumValue) {

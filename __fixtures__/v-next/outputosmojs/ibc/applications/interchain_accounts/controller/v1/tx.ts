@@ -1,6 +1,7 @@
 import { InterchainAccountPacketData, InterchainAccountPacketDataSDKType } from "../../v1/packet";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { isSet, DeepPartial } from "../../../../../helpers";
+import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "ibc.applications.interchain_accounts.controller.v1";
 /** MsgRegisterInterchainAccount defines the payload for Msg/RegisterAccount */
 export interface MsgRegisterInterchainAccount {
@@ -117,7 +118,7 @@ export const MsgRegisterInterchainAccount = {
       version: isSet(object.version) ? String(object.version) : ""
     };
   },
-  toJSON(message: MsgRegisterInterchainAccount): unknown {
+  toJSON(message: MsgRegisterInterchainAccount): JsonSafe<MsgRegisterInterchainAccount> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
@@ -237,7 +238,7 @@ export const MsgRegisterInterchainAccountResponse = {
       portId: isSet(object.portId) ? String(object.portId) : ""
     };
   },
-  toJSON(message: MsgRegisterInterchainAccountResponse): unknown {
+  toJSON(message: MsgRegisterInterchainAccountResponse): JsonSafe<MsgRegisterInterchainAccountResponse> {
     const obj: any = {};
     message.channelId !== undefined && (obj.channelId = message.channelId);
     message.portId !== undefined && (obj.portId = message.portId);
@@ -364,7 +365,7 @@ export const MsgSendTx = {
       relativeTimeout: isSet(object.relativeTimeout) ? BigInt(object.relativeTimeout.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSendTx): unknown {
+  toJSON(message: MsgSendTx): JsonSafe<MsgSendTx> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
@@ -485,7 +486,7 @@ export const MsgSendTxResponse = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSendTxResponse): unknown {
+  toJSON(message: MsgSendTxResponse): JsonSafe<MsgSendTxResponse> {
     const obj: any = {};
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;

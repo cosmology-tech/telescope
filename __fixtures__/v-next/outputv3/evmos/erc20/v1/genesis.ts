@@ -1,7 +1,6 @@
 import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -100,16 +99,6 @@ export const GenesisState = {
     if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.tokenPairs) {
-      obj.tokenPairs = message.tokenPairs.map(e => e ? TokenPair.toJSON(e) : undefined);
-    } else {
-      obj.tokenPairs = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     if (object.params !== undefined && object.params !== null) {
@@ -206,12 +195,6 @@ export const Params = {
     const obj = createBaseParams();
     if (isSet(object.enableErc20)) obj.enableErc20 = Boolean(object.enableErc20);
     if (isSet(object.enableEvmHook)) obj.enableEvmHook = Boolean(object.enableEvmHook);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.enableErc20 !== undefined && (obj.enableErc20 = message.enableErc20);
-    message.enableEvmHook !== undefined && (obj.enableEvmHook = message.enableEvmHook);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

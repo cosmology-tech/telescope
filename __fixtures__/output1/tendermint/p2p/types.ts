@@ -1,6 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp, fromJsonTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: Long;
@@ -112,7 +113,7 @@ export const ProtocolVersion = {
       app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
     };
   },
-  toJSON(message: ProtocolVersion): unknown {
+  toJSON(message: ProtocolVersion): JsonSafe<ProtocolVersion> {
     const obj: any = {};
     message.p2p !== undefined && (obj.p2p = (message.p2p || Long.UZERO).toString());
     message.block !== undefined && (obj.block = (message.block || Long.UZERO).toString());
@@ -231,7 +232,7 @@ export const NodeInfo = {
       other: isSet(object.other) ? NodeInfoOther.fromJSON(object.other) : undefined
     };
   },
-  toJSON(message: NodeInfo): unknown {
+  toJSON(message: NodeInfo): JsonSafe<NodeInfo> {
     const obj: any = {};
     message.protocolVersion !== undefined && (obj.protocolVersion = message.protocolVersion ? ProtocolVersion.toJSON(message.protocolVersion) : undefined);
     message.nodeId !== undefined && (obj.nodeId = message.nodeId);
@@ -322,7 +323,7 @@ export const NodeInfoOther = {
       rpcAddress: isSet(object.rpcAddress) ? String(object.rpcAddress) : ""
     };
   },
-  toJSON(message: NodeInfoOther): unknown {
+  toJSON(message: NodeInfoOther): JsonSafe<NodeInfoOther> {
     const obj: any = {};
     message.txIndex !== undefined && (obj.txIndex = message.txIndex);
     message.rpcAddress !== undefined && (obj.rpcAddress = message.rpcAddress);
@@ -397,7 +398,7 @@ export const PeerInfo = {
       lastConnected: isSet(object.lastConnected) ? fromJsonTimestamp(object.lastConnected) : undefined
     };
   },
-  toJSON(message: PeerInfo): unknown {
+  toJSON(message: PeerInfo): JsonSafe<PeerInfo> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     if (message.addressInfo) {
@@ -492,7 +493,7 @@ export const PeerAddressInfo = {
       dialFailures: isSet(object.dialFailures) ? Number(object.dialFailures) : 0
     };
   },
-  toJSON(message: PeerAddressInfo): unknown {
+  toJSON(message: PeerAddressInfo): JsonSafe<PeerAddressInfo> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.lastDialSuccess !== undefined && (obj.lastDialSuccess = message.lastDialSuccess.toISOString());

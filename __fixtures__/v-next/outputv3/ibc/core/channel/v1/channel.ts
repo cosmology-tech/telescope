@@ -1,7 +1,6 @@
 import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -475,19 +474,6 @@ export const Channel = {
     if (isSet(object.version)) obj.version = String(object.version);
     return obj;
   },
-  toJSON(message: Channel): JsonSafe<Channel> {
-    const obj: any = {};
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    if (message.connectionHops) {
-      obj.connectionHops = message.connectionHops.map(e => e);
-    } else {
-      obj.connectionHops = [];
-    }
-    message.version !== undefined && (obj.version = message.version);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
@@ -648,21 +634,6 @@ export const IdentifiedChannel = {
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
     return obj;
   },
-  toJSON(message: IdentifiedChannel): JsonSafe<IdentifiedChannel> {
-    const obj: any = {};
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    if (message.connectionHops) {
-      obj.connectionHops = message.connectionHops.map(e => e);
-    } else {
-      obj.connectionHops = [];
-    }
-    message.version !== undefined && (obj.version = message.version);
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
@@ -795,12 +766,6 @@ export const Counterparty = {
     const obj = createBaseCounterparty();
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
-    return obj;
-  },
-  toJSON(message: Counterparty): JsonSafe<Counterparty> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
     return obj;
   },
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
@@ -940,18 +905,6 @@ export const Packet = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
     if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
-    return obj;
-  },
-  toJSON(message: Packet): JsonSafe<Packet> {
-    const obj: any = {};
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
-    message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
-    message.destinationPort !== undefined && (obj.destinationPort = message.destinationPort);
-    message.destinationChannel !== undefined && (obj.destinationChannel = message.destinationChannel);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Packet>): Packet {
@@ -1109,14 +1062,6 @@ export const PacketState = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: PacketState): JsonSafe<PacketState> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
@@ -1222,12 +1167,6 @@ export const Acknowledgement = {
     const obj = createBaseAcknowledgement();
     if (isSet(object.result)) obj.result = bytesFromBase64(object.result);
     if (isSet(object.error)) obj.error = String(object.error);
-    return obj;
-  },
-  toJSON(message: Acknowledgement): JsonSafe<Acknowledgement> {
-    const obj: any = {};
-    message.result !== undefined && (obj.result = message.result !== undefined ? base64FromBytes(message.result) : undefined);
-    message.error !== undefined && (obj.error = message.error);
     return obj;
   },
   fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement {

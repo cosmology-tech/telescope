@@ -5,6 +5,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Params } from "./auth";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -77,7 +78,7 @@ export const QueryAccountsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAccountsRequest): unknown {
+  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -130,7 +131,7 @@ export const QueryAccountsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAccountsResponse): unknown {
+  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
@@ -181,7 +182,7 @@ export const QueryAccountRequest = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: QueryAccountRequest): unknown {
+  toJSON(message: QueryAccountRequest): JsonSafe<QueryAccountRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -226,7 +227,7 @@ export const QueryAccountResponse = {
       account: isSet(object.account) ? Any.fromJSON(object.account) : undefined
     };
   },
-  toJSON(message: QueryAccountResponse): unknown {
+  toJSON(message: QueryAccountResponse): JsonSafe<QueryAccountResponse> {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     return obj;
@@ -261,7 +262,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -304,7 +305,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

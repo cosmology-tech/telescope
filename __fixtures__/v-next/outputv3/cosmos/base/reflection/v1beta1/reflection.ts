@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
@@ -109,10 +108,6 @@ export const ListAllInterfacesRequest = {
     const obj = createBaseListAllInterfacesRequest();
     return obj;
   },
-  toJSON(_: ListAllInterfacesRequest): JsonSafe<ListAllInterfacesRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
@@ -179,15 +174,6 @@ export const ListAllInterfacesResponse = {
   fromJSON(object: any): ListAllInterfacesResponse {
     const obj = createBaseListAllInterfacesResponse();
     if (Array.isArray(object?.interfaceNames)) obj.interfaceNames = object.interfaceNames.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ListAllInterfacesResponse): JsonSafe<ListAllInterfacesResponse> {
-    const obj: any = {};
-    if (message.interfaceNames) {
-      obj.interfaceNames = message.interfaceNames.map(e => e);
-    } else {
-      obj.interfaceNames = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
@@ -272,11 +258,6 @@ export const ListImplementationsRequest = {
     if (isSet(object.interfaceName)) obj.interfaceName = String(object.interfaceName);
     return obj;
   },
-  toJSON(message: ListImplementationsRequest): JsonSafe<ListImplementationsRequest> {
-    const obj: any = {};
-    message.interfaceName !== undefined && (obj.interfaceName = message.interfaceName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
@@ -351,15 +332,6 @@ export const ListImplementationsResponse = {
   fromJSON(object: any): ListImplementationsResponse {
     const obj = createBaseListImplementationsResponse();
     if (Array.isArray(object?.implementationMessageNames)) obj.implementationMessageNames = object.implementationMessageNames.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ListImplementationsResponse): JsonSafe<ListImplementationsResponse> {
-    const obj: any = {};
-    if (message.implementationMessageNames) {
-      obj.implementationMessageNames = message.implementationMessageNames.map(e => e);
-    } else {
-      obj.implementationMessageNames = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
+import { JsonSafe } from "../json-safe";
 import { GlobalDecoderRegistry } from "../registry";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
@@ -228,7 +229,7 @@ export const InterfaceDescriptor = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: InterfaceDescriptor): unknown {
+  toJSON(message: InterfaceDescriptor): JsonSafe<InterfaceDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -360,7 +361,7 @@ export const ScalarDescriptor = {
     if (Array.isArray(object?.fieldType)) obj.fieldType = object.fieldType.map((e: any) => scalarTypeFromJSON(e));
     return obj;
   },
-  toJSON(message: ScalarDescriptor): unknown {
+  toJSON(message: ScalarDescriptor): JsonSafe<ScalarDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
@@ -319,12 +318,6 @@ export const Timestamp = {
     const obj = createBaseTimestamp();
     if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
     if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
-    return obj;
-  },
-  toJSON(message: Timestamp): JsonSafe<Timestamp> {
-    const obj: any = {};
-    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
-    message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
     return obj;
   },
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {

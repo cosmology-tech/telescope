@@ -7,6 +7,7 @@ import { BlockID } from "../../../tendermint/types/types";
 import { Block } from "../../../tendermint/types/block";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.tx.v1beta1";
 /** OrderBy defines the sorting order */
 export enum OrderBy {
@@ -262,7 +263,7 @@ export const GetTxsEventRequest = {
       orderBy: isSet(object.orderBy) ? orderByFromJSON(object.orderBy) : -1
     };
   },
-  toJSON(message: GetTxsEventRequest): unknown {
+  toJSON(message: GetTxsEventRequest): JsonSafe<GetTxsEventRequest> {
     const obj: any = {};
     if (message.events) {
       obj.events = message.events.map(e => e);
@@ -331,7 +332,7 @@ export const GetTxsEventResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: GetTxsEventResponse): unknown {
+  toJSON(message: GetTxsEventResponse): JsonSafe<GetTxsEventResponse> {
     const obj: any = {};
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toJSON(e) : undefined);
@@ -396,7 +397,7 @@ export const BroadcastTxRequest = {
       mode: isSet(object.mode) ? broadcastModeFromJSON(object.mode) : -1
     };
   },
-  toJSON(message: BroadcastTxRequest): unknown {
+  toJSON(message: BroadcastTxRequest): JsonSafe<BroadcastTxRequest> {
     const obj: any = {};
     message.txBytes !== undefined && (obj.txBytes = base64FromBytes(message.txBytes !== undefined ? message.txBytes : new Uint8Array()));
     message.mode !== undefined && (obj.mode = broadcastModeToJSON(message.mode));
@@ -443,7 +444,7 @@ export const BroadcastTxResponse = {
       txResponse: isSet(object.txResponse) ? TxResponse.fromJSON(object.txResponse) : undefined
     };
   },
-  toJSON(message: BroadcastTxResponse): unknown {
+  toJSON(message: BroadcastTxResponse): JsonSafe<BroadcastTxResponse> {
     const obj: any = {};
     message.txResponse !== undefined && (obj.txResponse = message.txResponse ? TxResponse.toJSON(message.txResponse) : undefined);
     return obj;
@@ -496,7 +497,7 @@ export const SimulateRequest = {
       txBytes: isSet(object.txBytes) ? bytesFromBase64(object.txBytes) : new Uint8Array()
     };
   },
-  toJSON(message: SimulateRequest): unknown {
+  toJSON(message: SimulateRequest): JsonSafe<SimulateRequest> {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toJSON(message.tx) : undefined);
     message.txBytes !== undefined && (obj.txBytes = base64FromBytes(message.txBytes !== undefined ? message.txBytes : new Uint8Array()));
@@ -551,7 +552,7 @@ export const SimulateResponse = {
       result: isSet(object.result) ? Result.fromJSON(object.result) : undefined
     };
   },
-  toJSON(message: SimulateResponse): unknown {
+  toJSON(message: SimulateResponse): JsonSafe<SimulateResponse> {
     const obj: any = {};
     message.gasInfo !== undefined && (obj.gasInfo = message.gasInfo ? GasInfo.toJSON(message.gasInfo) : undefined);
     message.result !== undefined && (obj.result = message.result ? Result.toJSON(message.result) : undefined);
@@ -598,7 +599,7 @@ export const GetTxRequest = {
       hash: isSet(object.hash) ? String(object.hash) : ""
     };
   },
-  toJSON(message: GetTxRequest): unknown {
+  toJSON(message: GetTxRequest): JsonSafe<GetTxRequest> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = message.hash);
     return obj;
@@ -651,7 +652,7 @@ export const GetTxResponse = {
       txResponse: isSet(object.txResponse) ? TxResponse.fromJSON(object.txResponse) : undefined
     };
   },
-  toJSON(message: GetTxResponse): unknown {
+  toJSON(message: GetTxResponse): JsonSafe<GetTxResponse> {
     const obj: any = {};
     message.tx !== undefined && (obj.tx = message.tx ? Tx.toJSON(message.tx) : undefined);
     message.txResponse !== undefined && (obj.txResponse = message.txResponse ? TxResponse.toJSON(message.txResponse) : undefined);
@@ -706,7 +707,7 @@ export const GetBlockWithTxsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: GetBlockWithTxsRequest): unknown {
+  toJSON(message: GetBlockWithTxsRequest): JsonSafe<GetBlockWithTxsRequest> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -777,7 +778,7 @@ export const GetBlockWithTxsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: GetBlockWithTxsResponse): unknown {
+  toJSON(message: GetBlockWithTxsResponse): JsonSafe<GetBlockWithTxsResponse> {
     const obj: any = {};
     if (message.txs) {
       obj.txs = message.txs.map(e => e ? Tx.toJSON(e) : undefined);

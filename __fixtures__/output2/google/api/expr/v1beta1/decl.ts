@@ -3,6 +3,7 @@
 import { Expr } from "./expr";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -116,7 +117,7 @@ export const Decl = {
       function: isSet(object.function) ? FunctionDecl.fromJSON(object.function) : undefined
     };
   },
-  toJSON(message: Decl): unknown {
+  toJSON(message: Decl): JsonSafe<Decl> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.name !== undefined && (obj.name = message.name);
@@ -185,7 +186,7 @@ export const DeclType = {
       typeParams: Array.isArray(object?.typeParams) ? object.typeParams.map((e: any) => DeclType.fromJSON(e)) : []
     };
   },
-  toJSON(message: DeclType): unknown {
+  toJSON(message: DeclType): JsonSafe<DeclType> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     message.type !== undefined && (obj.type = message.type);
@@ -246,7 +247,7 @@ export const IdentDecl = {
       value: isSet(object.value) ? Expr.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: IdentDecl): unknown {
+  toJSON(message: IdentDecl): JsonSafe<IdentDecl> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? DeclType.toJSON(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
@@ -309,7 +310,7 @@ export const FunctionDecl = {
       receiverFunction: isSet(object.receiverFunction) ? Boolean(object.receiverFunction) : false
     };
   },
-  toJSON(message: FunctionDecl): unknown {
+  toJSON(message: FunctionDecl): JsonSafe<FunctionDecl> {
     const obj: any = {};
     if (message.args) {
       obj.args = message.args.map(e => e ? IdentDecl.toJSON(e) : undefined);

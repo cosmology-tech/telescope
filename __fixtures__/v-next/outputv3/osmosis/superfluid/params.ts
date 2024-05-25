@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -65,11 +64,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (isSet(object.minimumRiskFactor)) obj.minimumRiskFactor = String(object.minimumRiskFactor);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.minimumRiskFactor !== undefined && (obj.minimumRiskFactor = message.minimumRiskFactor);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /**
  * SetProtoRevEnabledProposal is a gov Content type to update whether the
@@ -98,7 +99,7 @@ export const SetProtoRevEnabledProposal = {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
     };
   },
-  toJSON(message: SetProtoRevEnabledProposal): unknown {
+  toJSON(message: SetProtoRevEnabledProposal): JsonSafe<SetProtoRevEnabledProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -226,7 +227,7 @@ export const SetProtoRevAdminAccountProposal = {
       account: isSet(object.account) ? String(object.account) : ""
     };
   },
-  toJSON(message: SetProtoRevAdminAccountProposal): unknown {
+  toJSON(message: SetProtoRevAdminAccountProposal): JsonSafe<SetProtoRevAdminAccountProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

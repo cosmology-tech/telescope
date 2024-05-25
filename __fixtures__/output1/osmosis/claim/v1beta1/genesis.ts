@@ -3,6 +3,7 @@ import { Params, ParamsSDKType } from "./params";
 import { ClaimRecord, ClaimRecordSDKType } from "./claim";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** GenesisState defines the claim module's genesis state. */
 export interface GenesisState {
@@ -69,7 +70,7 @@ export const GenesisState = {
       claimRecords: Array.isArray(object?.claimRecords) ? object.claimRecords.map((e: any) => ClaimRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.moduleAccountBalance !== undefined && (obj.moduleAccountBalance = message.moduleAccountBalance ? Coin.toJSON(message.moduleAccountBalance) : undefined);
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);

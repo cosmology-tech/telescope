@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "osmosis.store.v1beta1";
 export interface Node {
@@ -78,15 +77,6 @@ export const Node = {
   fromJSON(object: any): Node {
     const obj = createBaseNode();
     if (Array.isArray(object?.children)) obj.children = object.children.map((e: any) => Child.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Node): JsonSafe<Node> {
-    const obj: any = {};
-    if (message.children) {
-      obj.children = message.children.map(e => e ? Child.toJSON(e) : undefined);
-    } else {
-      obj.children = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Node>): Node {
@@ -179,12 +169,6 @@ export const Child = {
     if (isSet(object.accumulation)) obj.accumulation = String(object.accumulation);
     return obj;
   },
-  toJSON(message: Child): JsonSafe<Child> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = base64FromBytes(message.index !== undefined ? message.index : new Uint8Array()));
-    message.accumulation !== undefined && (obj.accumulation = message.accumulation);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Child>): Child {
     const message = createBaseChild();
     message.index = object.index ?? new Uint8Array();
@@ -266,11 +250,6 @@ export const Leaf = {
   fromJSON(object: any): Leaf {
     const obj = createBaseLeaf();
     if (isSet(object.leaf)) obj.leaf = Child.fromJSON(object.leaf);
-    return obj;
-  },
-  toJSON(message: Leaf): JsonSafe<Leaf> {
-    const obj: any = {};
-    message.leaf !== undefined && (obj.leaf = message.leaf ? Child.toJSON(message.leaf) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Leaf>): Leaf {

@@ -2,6 +2,7 @@ import { Params, ParamsSDKType, DistrInfo, DistrInfoSDKType, PoolToGauges, PoolT
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /** GenesisState defines the pool incentives module's genesis state. */
 export interface GenesisState {
@@ -81,7 +82,7 @@ export const GenesisState = {
       poolToGauges: isSet(object.poolToGauges) ? PoolToGauges.fromJSON(object.poolToGauges) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.lockableDurations) {

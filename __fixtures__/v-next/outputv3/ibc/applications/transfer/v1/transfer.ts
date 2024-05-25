@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
@@ -134,12 +133,6 @@ export const DenomTrace = {
     if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
     return obj;
   },
-  toJSON(message: DenomTrace): JsonSafe<DenomTrace> {
-    const obj: any = {};
-    message.path !== undefined && (obj.path = message.path);
-    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DenomTrace>): DenomTrace {
     const message = createBaseDenomTrace();
     message.path = object.path ?? "";
@@ -229,12 +222,6 @@ export const Params = {
     const obj = createBaseParams();
     if (isSet(object.sendEnabled)) obj.sendEnabled = Boolean(object.sendEnabled);
     if (isSet(object.receiveEnabled)) obj.receiveEnabled = Boolean(object.receiveEnabled);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.sendEnabled !== undefined && (obj.sendEnabled = message.sendEnabled);
-    message.receiveEnabled !== undefined && (obj.receiveEnabled = message.receiveEnabled);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

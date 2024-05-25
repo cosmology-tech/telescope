@@ -3,6 +3,7 @@ import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface QueryGaugeIdsRequest {
   poolId: bigint;
@@ -167,7 +168,7 @@ export const QueryGaugeIdsRequest = {
     if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
     return obj;
   },
-  toJSON(message: QueryGaugeIdsRequest): unknown {
+  toJSON(message: QueryGaugeIdsRequest): JsonSafe<QueryGaugeIdsRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
@@ -263,7 +264,7 @@ export const QueryGaugeIdsResponse = {
     if (Array.isArray(object?.gaugeIdsWithDuration)) obj.gaugeIdsWithDuration = object.gaugeIdsWithDuration.map((e: any) => QueryGaugeIdsResponse_GaugeIdWithDuration.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryGaugeIdsResponse): unknown {
+  toJSON(message: QueryGaugeIdsResponse): JsonSafe<QueryGaugeIdsResponse> {
     const obj: any = {};
     if (message.gaugeIdsWithDuration) {
       obj.gaugeIdsWithDuration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toJSON(e) : undefined);
@@ -383,7 +384,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     if (isSet(object.gaugeIncentivePercentage)) obj.gaugeIncentivePercentage = String(object.gaugeIncentivePercentage);
     return obj;
   },
-  toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): unknown {
+  toJSON(message: QueryGaugeIdsResponse_GaugeIdWithDuration): JsonSafe<QueryGaugeIdsResponse_GaugeIdWithDuration> {
     const obj: any = {};
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -490,7 +491,7 @@ export const QueryDistrInfoRequest = {
     const obj = createBaseQueryDistrInfoRequest();
     return obj;
   },
-  toJSON(_: QueryDistrInfoRequest): unknown {
+  toJSON(_: QueryDistrInfoRequest): JsonSafe<QueryDistrInfoRequest> {
     const obj: any = {};
     return obj;
   },
@@ -573,7 +574,7 @@ export const QueryDistrInfoResponse = {
     if (isSet(object.distrInfo)) obj.distrInfo = DistrInfo.fromJSON(object.distrInfo);
     return obj;
   },
-  toJSON(message: QueryDistrInfoResponse): unknown {
+  toJSON(message: QueryDistrInfoResponse): JsonSafe<QueryDistrInfoResponse> {
     const obj: any = {};
     message.distrInfo !== undefined && (obj.distrInfo = message.distrInfo ? DistrInfo.toJSON(message.distrInfo) : undefined);
     return obj;
@@ -660,7 +661,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -743,7 +744,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -830,7 +831,7 @@ export const QueryLockableDurationsRequest = {
     const obj = createBaseQueryLockableDurationsRequest();
     return obj;
   },
-  toJSON(_: QueryLockableDurationsRequest): unknown {
+  toJSON(_: QueryLockableDurationsRequest): JsonSafe<QueryLockableDurationsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -913,7 +914,7 @@ export const QueryLockableDurationsResponse = {
     if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryLockableDurationsResponse): unknown {
+  toJSON(message: QueryLockableDurationsResponse): JsonSafe<QueryLockableDurationsResponse> {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
@@ -1008,7 +1009,7 @@ export const QueryIncentivizedPoolsRequest = {
     const obj = createBaseQueryIncentivizedPoolsRequest();
     return obj;
   },
-  toJSON(_: QueryIncentivizedPoolsRequest): unknown {
+  toJSON(_: QueryIncentivizedPoolsRequest): JsonSafe<QueryIncentivizedPoolsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1107,7 +1108,7 @@ export const IncentivizedPool = {
     if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
     return obj;
   },
-  toJSON(message: IncentivizedPool): unknown {
+  toJSON(message: IncentivizedPool): JsonSafe<IncentivizedPool> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.lockableDuration !== undefined && (obj.lockableDuration = message.lockableDuration ? Duration.toJSON(message.lockableDuration) : undefined);
@@ -1225,7 +1226,7 @@ export const QueryIncentivizedPoolsResponse = {
     if (Array.isArray(object?.incentivizedPools)) obj.incentivizedPools = object.incentivizedPools.map((e: any) => IncentivizedPool.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryIncentivizedPoolsResponse): unknown {
+  toJSON(message: QueryIncentivizedPoolsResponse): JsonSafe<QueryIncentivizedPoolsResponse> {
     const obj: any = {};
     if (message.incentivizedPools) {
       obj.incentivizedPools = message.incentivizedPools.map(e => e ? IncentivizedPool.toJSON(e) : undefined);
@@ -1320,7 +1321,7 @@ export const QueryExternalIncentiveGaugesRequest = {
     const obj = createBaseQueryExternalIncentiveGaugesRequest();
     return obj;
   },
-  toJSON(_: QueryExternalIncentiveGaugesRequest): unknown {
+  toJSON(_: QueryExternalIncentiveGaugesRequest): JsonSafe<QueryExternalIncentiveGaugesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1403,7 +1404,7 @@ export const QueryExternalIncentiveGaugesResponse = {
     if (Array.isArray(object?.data)) obj.data = object.data.map((e: any) => Gauge.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryExternalIncentiveGaugesResponse): unknown {
+  toJSON(message: QueryExternalIncentiveGaugesResponse): JsonSafe<QueryExternalIncentiveGaugesResponse> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);

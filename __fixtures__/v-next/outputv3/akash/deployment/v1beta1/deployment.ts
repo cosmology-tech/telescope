@@ -3,8 +3,7 @@
 import { GroupSpec, GroupSpecAmino, GroupSpecSDKType, GroupID, GroupIDSDKType } from "./group";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -295,18 +294,6 @@ export const MsgCreateDeployment = {
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     return obj;
   },
-  toJSON(message: MsgCreateDeployment): JsonSafe<MsgCreateDeployment> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.deposit !== undefined && (obj.deposit = message.deposit ? Coin.toJSON(message.deposit) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateDeployment>): MsgCreateDeployment {
     const message = createBaseMsgCreateDeployment();
     if (object.id !== undefined && object.id !== null) {
@@ -404,10 +391,6 @@ export const MsgCreateDeploymentResponse = {
     const obj = createBaseMsgCreateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgCreateDeploymentResponse): JsonSafe<MsgCreateDeploymentResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateDeploymentResponse>): MsgCreateDeploymentResponse {
     const message = createBaseMsgCreateDeploymentResponse();
     return message;
@@ -481,12 +464,6 @@ export const MsgDepositDeployment = {
     const obj = createBaseMsgDepositDeployment();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
-  },
-  toJSON(message: MsgDepositDeployment): JsonSafe<MsgDepositDeployment> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgDepositDeployment>): MsgDepositDeployment {
@@ -564,10 +541,6 @@ export const MsgDepositDeploymentResponse = {
   },
   fromJSON(_: any): MsgDepositDeploymentResponse {
     const obj = createBaseMsgDepositDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgDepositDeploymentResponse): JsonSafe<MsgDepositDeploymentResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgDepositDeploymentResponse>): MsgDepositDeploymentResponse {
@@ -651,17 +624,6 @@ export const MsgUpdateDeployment = {
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
     if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupSpec.fromJSON(e));
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
-    return obj;
-  },
-  toJSON(message: MsgUpdateDeployment): JsonSafe<MsgUpdateDeployment> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupSpec.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUpdateDeployment>): MsgUpdateDeployment {
@@ -752,10 +714,6 @@ export const MsgUpdateDeploymentResponse = {
     const obj = createBaseMsgUpdateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateDeploymentResponse): JsonSafe<MsgUpdateDeploymentResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgUpdateDeploymentResponse>): MsgUpdateDeploymentResponse {
     const message = createBaseMsgUpdateDeploymentResponse();
     return message;
@@ -821,11 +779,6 @@ export const MsgCloseDeployment = {
   fromJSON(object: any): MsgCloseDeployment {
     const obj = createBaseMsgCloseDeployment();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgCloseDeployment): JsonSafe<MsgCloseDeployment> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCloseDeployment>): MsgCloseDeployment {
@@ -894,10 +847,6 @@ export const MsgCloseDeploymentResponse = {
   },
   fromJSON(_: any): MsgCloseDeploymentResponse {
     const obj = createBaseMsgCloseDeploymentResponse();
-    return obj;
-  },
-  toJSON(_: MsgCloseDeploymentResponse): JsonSafe<MsgCloseDeploymentResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCloseDeploymentResponse>): MsgCloseDeploymentResponse {
@@ -973,12 +922,6 @@ export const DeploymentID = {
     const obj = createBaseDeploymentID();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
-    return obj;
-  },
-  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentID>): DeploymentID {
@@ -1087,14 +1030,6 @@ export const Deployment = {
     if (isSet(object.state)) obj.state = deployment_StateFromJSON(object.state);
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Deployment): JsonSafe<Deployment> {
-    const obj: any = {};
-    message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
-    message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
-    message.version !== undefined && (obj.version = base64FromBytes(message.version !== undefined ? message.version : new Uint8Array()));
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Deployment>): Deployment {
@@ -1211,13 +1146,6 @@ export const DeploymentFilters = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     if (isSet(object.state)) obj.state = String(object.state);
-    return obj;
-  },
-  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
-    message.state !== undefined && (obj.state = message.state);
     return obj;
   },
   fromPartial(object: DeepPartial<DeploymentFilters>): DeploymentFilters {

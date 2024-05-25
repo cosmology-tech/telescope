@@ -1,5 +1,6 @@
 import { AuditedAttributes, AuditedAttributesSDKType } from "./audit";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.audit.v1beta2";
 /** GenesisState defines the basic genesis state used by audit module */
@@ -44,7 +45,7 @@ export const GenesisState = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toJSON(e) : undefined);

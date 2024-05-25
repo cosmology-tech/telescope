@@ -1,7 +1,6 @@
 import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.audit.v1beta2";
 /** Provider stores owner auditor and attributes details */
 export interface Provider {
@@ -197,17 +196,6 @@ export const Provider = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Provider): JsonSafe<Provider> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Provider>): Provider {
     const message = createBaseProvider();
     message.owner = object.owner ?? "";
@@ -319,17 +307,6 @@ export const AuditedAttributes = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: AuditedAttributes): JsonSafe<AuditedAttributes> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AuditedAttributes>): AuditedAttributes {
     const message = createBaseAuditedAttributes();
     message.owner = object.owner ?? "";
@@ -425,15 +402,6 @@ export const AttributesResponse = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => AuditedAttributes.fromJSON(e));
     return obj;
   },
-  toJSON(message: AttributesResponse): JsonSafe<AttributesResponse> {
-    const obj: any = {};
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AttributesResponse>): AttributesResponse {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
@@ -521,20 +489,6 @@ export const AttributesFilters = {
     const obj = createBaseAttributesFilters();
     if (Array.isArray(object?.auditors)) obj.auditors = object.auditors.map((e: any) => String(e));
     if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: AttributesFilters): JsonSafe<AttributesFilters> {
-    const obj: any = {};
-    if (message.auditors) {
-      obj.auditors = message.auditors.map(e => e);
-    } else {
-      obj.auditors = [];
-    }
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e);
-    } else {
-      obj.owners = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AttributesFilters>): AttributesFilters {
@@ -647,17 +601,6 @@ export const MsgSignProviderAttributes = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgSignProviderAttributes): JsonSafe<MsgSignProviderAttributes> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSignProviderAttributes>): MsgSignProviderAttributes {
     const message = createBaseMsgSignProviderAttributes();
     message.owner = object.owner ?? "";
@@ -744,10 +687,6 @@ export const MsgSignProviderAttributesResponse = {
     const obj = createBaseMsgSignProviderAttributesResponse();
     return obj;
   },
-  toJSON(_: MsgSignProviderAttributesResponse): JsonSafe<MsgSignProviderAttributesResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
@@ -829,17 +768,6 @@ export const MsgDeleteProviderAttributes = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.auditor)) obj.auditor = String(object.auditor);
     if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: MsgDeleteProviderAttributes): JsonSafe<MsgDeleteProviderAttributes> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.auditor !== undefined && (obj.auditor = message.auditor);
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgDeleteProviderAttributes>): MsgDeleteProviderAttributes {
@@ -926,10 +854,6 @@ export const MsgDeleteProviderAttributesResponse = {
   },
   fromJSON(_: any): MsgDeleteProviderAttributesResponse {
     const obj = createBaseMsgDeleteProviderAttributesResponse();
-    return obj;
-  },
-  toJSON(_: MsgDeleteProviderAttributesResponse): JsonSafe<MsgDeleteProviderAttributesResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {

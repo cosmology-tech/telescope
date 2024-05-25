@@ -8,6 +8,7 @@ import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from 
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -723,7 +724,7 @@ export const Service = {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
-  toJSON(message: Service): unknown {
+  toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.parent !== undefined && (obj.parent = message.parent);
@@ -910,7 +911,7 @@ export const ServiceConfig = {
       monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined
     };
   },
-  toJSON(message: ServiceConfig): unknown {
+  toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.title !== undefined && (obj.title = message.title);
@@ -1109,7 +1110,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: OperationMetadata): unknown {
+  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);
@@ -1247,7 +1248,7 @@ export const ConsumerQuotaMetric = {
       unit: isSet(object.unit) ? String(object.unit) : ""
     };
   },
-  toJSON(message: ConsumerQuotaMetric): unknown {
+  toJSON(message: ConsumerQuotaMetric): JsonSafe<ConsumerQuotaMetric> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.metric !== undefined && (obj.metric = message.metric);
@@ -1440,7 +1441,7 @@ export const ConsumerQuotaLimit = {
       quotaBuckets: Array.isArray(object?.quotaBuckets) ? object.quotaBuckets.map((e: any) => QuotaBucket.fromJSON(e)) : []
     };
   },
-  toJSON(message: ConsumerQuotaLimit): unknown {
+  toJSON(message: ConsumerQuotaLimit): JsonSafe<ConsumerQuotaLimit> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.metric !== undefined && (obj.metric = message.metric);
@@ -1590,7 +1591,7 @@ export const QuotaBucket_DimensionsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: QuotaBucket_DimensionsEntry): unknown {
+  toJSON(message: QuotaBucket_DimensionsEntry): JsonSafe<QuotaBucket_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1732,7 +1733,7 @@ export const QuotaBucket = {
       }, {}) : {}
     };
   },
-  toJSON(message: QuotaBucket): unknown {
+  toJSON(message: QuotaBucket): JsonSafe<QuotaBucket> {
     const obj: any = {};
     message.effectiveLimit !== undefined && (obj.effectiveLimit = (message.effectiveLimit || BigInt(0)).toString());
     message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
@@ -1909,7 +1910,7 @@ export const QuotaOverride_DimensionsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: QuotaOverride_DimensionsEntry): unknown {
+  toJSON(message: QuotaOverride_DimensionsEntry): JsonSafe<QuotaOverride_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2051,7 +2052,7 @@ export const QuotaOverride = {
       adminOverrideAncestor: isSet(object.adminOverrideAncestor) ? String(object.adminOverrideAncestor) : ""
     };
   },
-  toJSON(message: QuotaOverride): unknown {
+  toJSON(message: QuotaOverride): JsonSafe<QuotaOverride> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.overrideValue !== undefined && (obj.overrideValue = (message.overrideValue || BigInt(0)).toString());
@@ -2221,7 +2222,7 @@ export const OverrideInlineSource = {
       overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromJSON(e)) : []
     };
   },
-  toJSON(message: OverrideInlineSource): unknown {
+  toJSON(message: OverrideInlineSource): JsonSafe<OverrideInlineSource> {
     const obj: any = {};
     if (message.overrides) {
       obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
@@ -2326,7 +2327,7 @@ export const AdminQuotaPolicy_DimensionsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: AdminQuotaPolicy_DimensionsEntry): unknown {
+  toJSON(message: AdminQuotaPolicy_DimensionsEntry): JsonSafe<AdminQuotaPolicy_DimensionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -2468,7 +2469,7 @@ export const AdminQuotaPolicy = {
       container: isSet(object.container) ? String(object.container) : ""
     };
   },
-  toJSON(message: AdminQuotaPolicy): unknown {
+  toJSON(message: AdminQuotaPolicy): JsonSafe<AdminQuotaPolicy> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.policyValue !== undefined && (obj.policyValue = (message.policyValue || BigInt(0)).toString());
@@ -2646,7 +2647,7 @@ export const ServiceIdentity = {
       uniqueId: isSet(object.uniqueId) ? String(object.uniqueId) : ""
     };
   },
-  toJSON(message: ServiceIdentity): unknown {
+  toJSON(message: ServiceIdentity): JsonSafe<ServiceIdentity> {
     const obj: any = {};
     message.email !== undefined && (obj.email = message.email);
     message.uniqueId !== undefined && (obj.uniqueId = message.uniqueId);

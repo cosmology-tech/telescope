@@ -1,7 +1,6 @@
 import { DistrRecord, DistrRecordAmino, DistrRecordSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
@@ -152,17 +151,6 @@ export const ReplacePoolIncentivesProposal = {
     if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
     return obj;
   },
-  toJSON(message: ReplacePoolIncentivesProposal): JsonSafe<ReplacePoolIncentivesProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
     message.title = object.title ?? "";
@@ -274,17 +262,6 @@ export const UpdatePoolIncentivesProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: UpdatePoolIncentivesProposal): JsonSafe<UpdatePoolIncentivesProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {

@@ -1,6 +1,7 @@
 import { Height, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
@@ -369,7 +370,7 @@ export const Channel = {
       version: isSet(object.version) ? String(object.version) : ""
     };
   },
-  toJSON(message: Channel): unknown {
+  toJSON(message: Channel): JsonSafe<Channel> {
     const obj: any = {};
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
@@ -557,7 +558,7 @@ export const IdentifiedChannel = {
       channelId: isSet(object.channelId) ? String(object.channelId) : ""
     };
   },
-  toJSON(message: IdentifiedChannel): unknown {
+  toJSON(message: IdentifiedChannel): JsonSafe<IdentifiedChannel> {
     const obj: any = {};
     message.state !== undefined && (obj.state = stateToJSON(message.state));
     message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
@@ -723,7 +724,7 @@ export const Counterparty = {
       channelId: isSet(object.channelId) ? String(object.channelId) : ""
     };
   },
-  toJSON(message: Counterparty): unknown {
+  toJSON(message: Counterparty): JsonSafe<Counterparty> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -882,7 +883,7 @@ export const Packet = {
       timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
     };
   },
-  toJSON(message: Packet): unknown {
+  toJSON(message: Packet): JsonSafe<Packet> {
     const obj: any = {};
     message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
@@ -1063,7 +1064,7 @@ export const PacketState = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
-  toJSON(message: PacketState): unknown {
+  toJSON(message: PacketState): JsonSafe<PacketState> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);
@@ -1192,7 +1193,7 @@ export const Acknowledgement = {
       error: isSet(object.error) ? String(object.error) : undefined
     };
   },
-  toJSON(message: Acknowledgement): unknown {
+  toJSON(message: Acknowledgement): JsonSafe<Acknowledgement> {
     const obj: any = {};
     message.result !== undefined && (obj.result = message.result !== undefined ? base64FromBytes(message.result) : undefined);
     message.error !== undefined && (obj.error = message.error);

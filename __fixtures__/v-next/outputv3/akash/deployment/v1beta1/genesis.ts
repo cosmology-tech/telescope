@@ -3,7 +3,6 @@ import { Group, GroupAmino, GroupSDKType } from "./group";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
@@ -84,16 +83,6 @@ export const GenesisDeployment = {
     const obj = createBaseGenesisDeployment();
     if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
     if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisDeployment): JsonSafe<GenesisDeployment> {
-    const obj: any = {};
-    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisDeployment>): GenesisDeployment {
@@ -192,16 +181,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toJSON(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

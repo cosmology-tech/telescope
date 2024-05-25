@@ -5,6 +5,7 @@ import { Gauge } from "./gauge";
 import { Duration } from "../../google/protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -84,7 +85,7 @@ export const GenesisState = {
       lastGaugeId: isSet(object.lastGaugeId) ? Long.fromValue(object.lastGaugeId) : Long.UZERO
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.gauges) {

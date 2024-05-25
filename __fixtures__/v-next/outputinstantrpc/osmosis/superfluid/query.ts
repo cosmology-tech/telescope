@@ -5,6 +5,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.superfluid";
 export interface QueryParamsRequest {}
@@ -374,7 +375,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -457,7 +458,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -553,7 +554,7 @@ export const AssetTypeRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: AssetTypeRequest): unknown {
+  toJSON(message: AssetTypeRequest): JsonSafe<AssetTypeRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -647,7 +648,7 @@ export const AssetTypeResponse = {
     if (isSet(object.assetType)) obj.assetType = superfluidAssetTypeFromJSON(object.assetType);
     return obj;
   },
-  toJSON(message: AssetTypeResponse): unknown {
+  toJSON(message: AssetTypeResponse): JsonSafe<AssetTypeResponse> {
     const obj: any = {};
     message.assetType !== undefined && (obj.assetType = superfluidAssetTypeToJSON(message.assetType));
     return obj;
@@ -732,7 +733,7 @@ export const AllAssetsRequest = {
     const obj = createBaseAllAssetsRequest();
     return obj;
   },
-  toJSON(_: AllAssetsRequest): unknown {
+  toJSON(_: AllAssetsRequest): JsonSafe<AllAssetsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -815,7 +816,7 @@ export const AllAssetsResponse = {
     if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => SuperfluidAsset.fromJSON(e));
     return obj;
   },
-  toJSON(message: AllAssetsResponse): unknown {
+  toJSON(message: AllAssetsResponse): JsonSafe<AllAssetsResponse> {
     const obj: any = {};
     if (message.assets) {
       obj.assets = message.assets.map(e => e ? SuperfluidAsset.toJSON(e) : undefined);
@@ -919,7 +920,7 @@ export const AssetMultiplierRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: AssetMultiplierRequest): unknown {
+  toJSON(message: AssetMultiplierRequest): JsonSafe<AssetMultiplierRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -1013,7 +1014,7 @@ export const AssetMultiplierResponse = {
     if (isSet(object.osmoEquivalentMultiplier)) obj.osmoEquivalentMultiplier = OsmoEquivalentMultiplierRecord.fromJSON(object.osmoEquivalentMultiplier);
     return obj;
   },
-  toJSON(message: AssetMultiplierResponse): unknown {
+  toJSON(message: AssetMultiplierResponse): JsonSafe<AssetMultiplierResponse> {
     const obj: any = {};
     message.osmoEquivalentMultiplier !== undefined && (obj.osmoEquivalentMultiplier = message.osmoEquivalentMultiplier ? OsmoEquivalentMultiplierRecord.toJSON(message.osmoEquivalentMultiplier) : undefined);
     return obj;
@@ -1133,7 +1134,7 @@ export const SuperfluidIntermediaryAccountInfo = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: SuperfluidIntermediaryAccountInfo): unknown {
+  toJSON(message: SuperfluidIntermediaryAccountInfo): JsonSafe<SuperfluidIntermediaryAccountInfo> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
@@ -1256,7 +1257,7 @@ export const AllIntermediaryAccountsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: AllIntermediaryAccountsRequest): unknown {
+  toJSON(message: AllIntermediaryAccountsRequest): JsonSafe<AllIntermediaryAccountsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -1360,7 +1361,7 @@ export const AllIntermediaryAccountsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: AllIntermediaryAccountsResponse): unknown {
+  toJSON(message: AllIntermediaryAccountsResponse): JsonSafe<AllIntermediaryAccountsResponse> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? SuperfluidIntermediaryAccountInfo.toJSON(e) : undefined);
@@ -1475,7 +1476,7 @@ export const ConnectedIntermediaryAccountRequest = {
     if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
     return obj;
   },
-  toJSON(message: ConnectedIntermediaryAccountRequest): unknown {
+  toJSON(message: ConnectedIntermediaryAccountRequest): JsonSafe<ConnectedIntermediaryAccountRequest> {
     const obj: any = {};
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
@@ -1571,7 +1572,7 @@ export const ConnectedIntermediaryAccountResponse = {
     if (isSet(object.account)) obj.account = SuperfluidIntermediaryAccountInfo.fromJSON(object.account);
     return obj;
   },
-  toJSON(message: ConnectedIntermediaryAccountResponse): unknown {
+  toJSON(message: ConnectedIntermediaryAccountResponse): JsonSafe<ConnectedIntermediaryAccountResponse> {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? SuperfluidIntermediaryAccountInfo.toJSON(message.account) : undefined);
     return obj;
@@ -1667,7 +1668,7 @@ export const QueryTotalDelegationByValidatorForDenomRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: QueryTotalDelegationByValidatorForDenomRequest): unknown {
+  toJSON(message: QueryTotalDelegationByValidatorForDenomRequest): JsonSafe<QueryTotalDelegationByValidatorForDenomRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -1761,7 +1762,7 @@ export const QueryTotalDelegationByValidatorForDenomResponse = {
     if (Array.isArray(object?.assets)) obj.assets = object.assets.map((e: any) => Delegations.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): unknown {
+  toJSON(message: QueryTotalDelegationByValidatorForDenomResponse): JsonSafe<QueryTotalDelegationByValidatorForDenomResponse> {
     const obj: any = {};
     if (message.assets) {
       obj.assets = message.assets.map(e => e ? Delegations.toJSON(e) : undefined);
@@ -1881,7 +1882,7 @@ export const Delegations = {
     if (isSet(object.osmoEquivalent)) obj.osmoEquivalent = String(object.osmoEquivalent);
     return obj;
   },
-  toJSON(message: Delegations): unknown {
+  toJSON(message: Delegations): JsonSafe<Delegations> {
     const obj: any = {};
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
     message.amountSfsd !== undefined && (obj.amountSfsd = message.amountSfsd);
@@ -1984,7 +1985,7 @@ export const TotalSuperfluidDelegationsRequest = {
     const obj = createBaseTotalSuperfluidDelegationsRequest();
     return obj;
   },
-  toJSON(_: TotalSuperfluidDelegationsRequest): unknown {
+  toJSON(_: TotalSuperfluidDelegationsRequest): JsonSafe<TotalSuperfluidDelegationsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2067,7 +2068,7 @@ export const TotalSuperfluidDelegationsResponse = {
     if (isSet(object.totalDelegations)) obj.totalDelegations = String(object.totalDelegations);
     return obj;
   },
-  toJSON(message: TotalSuperfluidDelegationsResponse): unknown {
+  toJSON(message: TotalSuperfluidDelegationsResponse): JsonSafe<TotalSuperfluidDelegationsResponse> {
     const obj: any = {};
     message.totalDelegations !== undefined && (obj.totalDelegations = message.totalDelegations);
     return obj;
@@ -2177,7 +2178,7 @@ export const SuperfluidDelegationAmountRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: SuperfluidDelegationAmountRequest): unknown {
+  toJSON(message: SuperfluidDelegationAmountRequest): JsonSafe<SuperfluidDelegationAmountRequest> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -2289,7 +2290,7 @@ export const SuperfluidDelegationAmountResponse = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: SuperfluidDelegationAmountResponse): unknown {
+  toJSON(message: SuperfluidDelegationAmountResponse): JsonSafe<SuperfluidDelegationAmountResponse> {
     const obj: any = {};
     if (message.amount) {
       obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
@@ -2393,7 +2394,7 @@ export const SuperfluidDelegationsByDelegatorRequest = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     return obj;
   },
-  toJSON(message: SuperfluidDelegationsByDelegatorRequest): unknown {
+  toJSON(message: SuperfluidDelegationsByDelegatorRequest): JsonSafe<SuperfluidDelegationsByDelegatorRequest> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     return obj;
@@ -2503,7 +2504,7 @@ export const SuperfluidDelegationsByDelegatorResponse = {
     if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
     return obj;
   },
-  toJSON(message: SuperfluidDelegationsByDelegatorResponse): unknown {
+  toJSON(message: SuperfluidDelegationsByDelegatorResponse): JsonSafe<SuperfluidDelegationsByDelegatorResponse> {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
       obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
@@ -2645,7 +2646,7 @@ export const SuperfluidUndelegationsByDelegatorRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: SuperfluidUndelegationsByDelegatorRequest): unknown {
+  toJSON(message: SuperfluidUndelegationsByDelegatorRequest): JsonSafe<SuperfluidUndelegationsByDelegatorRequest> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -2764,7 +2765,7 @@ export const SuperfluidUndelegationsByDelegatorResponse = {
     if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
     return obj;
   },
-  toJSON(message: SuperfluidUndelegationsByDelegatorResponse): unknown {
+  toJSON(message: SuperfluidUndelegationsByDelegatorResponse): JsonSafe<SuperfluidUndelegationsByDelegatorResponse> {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
       obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
@@ -2914,7 +2915,7 @@ export const SuperfluidDelegationsByValidatorDenomRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: SuperfluidDelegationsByValidatorDenomRequest): unknown {
+  toJSON(message: SuperfluidDelegationsByValidatorDenomRequest): JsonSafe<SuperfluidDelegationsByValidatorDenomRequest> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -3017,7 +3018,7 @@ export const SuperfluidDelegationsByValidatorDenomResponse = {
     if (Array.isArray(object?.superfluidDelegationRecords)) obj.superfluidDelegationRecords = object.superfluidDelegationRecords.map((e: any) => SuperfluidDelegationRecord.fromJSON(e));
     return obj;
   },
-  toJSON(message: SuperfluidDelegationsByValidatorDenomResponse): unknown {
+  toJSON(message: SuperfluidDelegationsByValidatorDenomResponse): JsonSafe<SuperfluidDelegationsByValidatorDenomResponse> {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
       obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
@@ -3129,7 +3130,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): unknown {
+  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest): JsonSafe<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -3232,7 +3233,7 @@ export const EstimateSuperfluidDelegatedAmountByValidatorDenomResponse = {
     if (Array.isArray(object?.totalDelegatedCoins)) obj.totalDelegatedCoins = object.totalDelegatedCoins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): unknown {
+  toJSON(message: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse): JsonSafe<EstimateSuperfluidDelegatedAmountByValidatorDenomResponse> {
     const obj: any = {};
     if (message.totalDelegatedCoins) {
       obj.totalDelegatedCoins = message.totalDelegatedCoins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -3336,7 +3337,7 @@ export const QueryTotalDelegationByDelegatorRequest = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     return obj;
   },
-  toJSON(message: QueryTotalDelegationByDelegatorRequest): unknown {
+  toJSON(message: QueryTotalDelegationByDelegatorRequest): JsonSafe<QueryTotalDelegationByDelegatorRequest> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     return obj;
@@ -3454,7 +3455,7 @@ export const QueryTotalDelegationByDelegatorResponse = {
     if (isSet(object.totalEquivalentStakedAmount)) obj.totalEquivalentStakedAmount = Coin.fromJSON(object.totalEquivalentStakedAmount);
     return obj;
   },
-  toJSON(message: QueryTotalDelegationByDelegatorResponse): unknown {
+  toJSON(message: QueryTotalDelegationByDelegatorResponse): JsonSafe<QueryTotalDelegationByDelegatorResponse> {
     const obj: any = {};
     if (message.superfluidDelegationRecords) {
       obj.superfluidDelegationRecords = message.superfluidDelegationRecords.map(e => e ? SuperfluidDelegationRecord.toJSON(e) : undefined);
@@ -3598,7 +3599,7 @@ export const QueryUnpoolWhitelistRequest = {
     const obj = createBaseQueryUnpoolWhitelistRequest();
     return obj;
   },
-  toJSON(_: QueryUnpoolWhitelistRequest): unknown {
+  toJSON(_: QueryUnpoolWhitelistRequest): JsonSafe<QueryUnpoolWhitelistRequest> {
     const obj: any = {};
     return obj;
   },
@@ -3690,7 +3691,7 @@ export const QueryUnpoolWhitelistResponse = {
     if (Array.isArray(object?.poolIds)) obj.poolIds = object.poolIds.map((e: any) => BigInt(e.toString()));
     return obj;
   },
-  toJSON(message: QueryUnpoolWhitelistResponse): unknown {
+  toJSON(message: QueryUnpoolWhitelistResponse): JsonSafe<QueryUnpoolWhitelistResponse> {
     const obj: any = {};
     if (message.poolIds) {
       obj.poolIds = message.poolIds.map(e => (e || BigInt(0)).toString());

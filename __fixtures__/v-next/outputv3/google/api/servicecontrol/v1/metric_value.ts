@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/t
 import { Distribution, DistributionAmino, DistributionSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -186,12 +185,6 @@ export const MetricValue_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: MetricValue_LabelsEntry): JsonSafe<MetricValue_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
     const message = createBaseMetricValue_LabelsEntry();
     message.key = object.key ?? "";
@@ -333,25 +326,6 @@ export const MetricValue = {
     if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
     if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
     if (isSet(object.distributionValue)) obj.distributionValue = Distribution.fromJSON(object.distributionValue);
-    return obj;
-  },
-  toJSON(message: MetricValue): JsonSafe<MetricValue> {
-    const obj: any = {};
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    if (message.int64Value !== undefined) {
-      obj.int64Value = message.int64Value.toString();
-    }
-    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MetricValue>): MetricValue {
@@ -515,16 +489,6 @@ export const MetricValueSet = {
     const obj = createBaseMetricValueSet();
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
     if (Array.isArray(object?.metricValues)) obj.metricValues = object.metricValues.map((e: any) => MetricValue.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MetricValueSet): JsonSafe<MetricValueSet> {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    if (message.metricValues) {
-      obj.metricValues = message.metricValues.map(e => e ? MetricValue.toJSON(e) : undefined);
-    } else {
-      obj.metricValues = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {

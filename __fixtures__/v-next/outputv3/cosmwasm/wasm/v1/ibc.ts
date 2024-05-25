@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
 export interface MsgIBCSend {
@@ -129,14 +128,6 @@ export const MsgIBCSend = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgIBCSend): JsonSafe<MsgIBCSend> {
-    const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
-    message.timeoutHeight !== undefined && (obj.timeoutHeight = (message.timeoutHeight || BigInt(0)).toString());
-    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgIBCSend>): MsgIBCSend {
     const message = createBaseMsgIBCSend();
     message.channel = object.channel ?? "";
@@ -236,11 +227,6 @@ export const MsgIBCCloseChannel = {
   fromJSON(object: any): MsgIBCCloseChannel {
     const obj = createBaseMsgIBCCloseChannel();
     if (isSet(object.channel)) obj.channel = String(object.channel);
-    return obj;
-  },
-  toJSON(message: MsgIBCCloseChannel): JsonSafe<MsgIBCCloseChannel> {
-    const obj: any = {};
-    message.channel !== undefined && (obj.channel = message.channel);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgIBCCloseChannel>): MsgIBCCloseChannel {

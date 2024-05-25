@@ -3,6 +3,7 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -170,7 +171,7 @@ export const AccountID = {
       xid: isSet(object.xid) ? String(object.xid) : ""
     };
   },
-  toJSON(message: AccountID): unknown {
+  toJSON(message: AccountID): JsonSafe<AccountID> {
     const obj: any = {};
     message.scope !== undefined && (obj.scope = message.scope);
     message.xid !== undefined && (obj.xid = message.xid);
@@ -257,7 +258,7 @@ export const Account = {
       settledAt: isSet(object.settledAt) ? Long.fromValue(object.settledAt) : Long.ZERO
     };
   },
-  toJSON(message: Account): unknown {
+  toJSON(message: Account): JsonSafe<Account> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? AccountID.toJSON(message.id) : undefined);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -360,7 +361,7 @@ export const Payment = {
       withdrawn: isSet(object.withdrawn) ? Coin.fromJSON(object.withdrawn) : undefined
     };
   },
-  toJSON(message: Payment): unknown {
+  toJSON(message: Payment): JsonSafe<Payment> {
     const obj: any = {};
     message.accountId !== undefined && (obj.accountId = message.accountId ? AccountID.toJSON(message.accountId) : undefined);
     message.paymentId !== undefined && (obj.paymentId = message.paymentId);

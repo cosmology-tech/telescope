@@ -1,7 +1,6 @@
 import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
@@ -114,21 +113,6 @@ export const GenesisState = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
     if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.incentives) {
-      obj.incentives = message.incentives.map(e => e ? Incentive.toJSON(e) : undefined);
-    } else {
-      obj.incentives = [];
-    }
-    if (message.gasMeters) {
-      obj.gasMeters = message.gasMeters.map(e => e ? GasMeter.toJSON(e) : undefined);
-    } else {
-      obj.gasMeters = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -256,14 +240,6 @@ export const Params = {
     if (isSet(object.allocationLimit)) obj.allocationLimit = String(object.allocationLimit);
     if (isSet(object.incentivesEpochIdentifier)) obj.incentivesEpochIdentifier = String(object.incentivesEpochIdentifier);
     if (isSet(object.rewardScaler)) obj.rewardScaler = String(object.rewardScaler);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.enableIncentives !== undefined && (obj.enableIncentives = message.enableIncentives);
-    message.allocationLimit !== undefined && (obj.allocationLimit = message.allocationLimit);
-    message.incentivesEpochIdentifier !== undefined && (obj.incentivesEpochIdentifier = message.incentivesEpochIdentifier);
-    message.rewardScaler !== undefined && (obj.rewardScaler = message.rewardScaler);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

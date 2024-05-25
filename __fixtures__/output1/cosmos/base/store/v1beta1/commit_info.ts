@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * CommitInfo defines commit information used by the multi-store when committing
@@ -91,7 +92,7 @@ export const CommitInfo = {
       storeInfos: Array.isArray(object?.storeInfos) ? object.storeInfos.map((e: any) => StoreInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: CommitInfo): unknown {
+  toJSON(message: CommitInfo): JsonSafe<CommitInfo> {
     const obj: any = {};
     message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     if (message.storeInfos) {
@@ -166,7 +167,7 @@ export const StoreInfo = {
       commitId: isSet(object.commitId) ? CommitID.fromJSON(object.commitId) : undefined
     };
   },
-  toJSON(message: StoreInfo): unknown {
+  toJSON(message: StoreInfo): JsonSafe<StoreInfo> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.commitId !== undefined && (obj.commitId = message.commitId ? CommitID.toJSON(message.commitId) : undefined);
@@ -233,7 +234,7 @@ export const CommitID = {
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
-  toJSON(message: CommitID): unknown {
+  toJSON(message: CommitID): JsonSafe<CommitID> {
     const obj: any = {};
     message.version !== undefined && (obj.version = (message.version || Long.ZERO).toString());
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));

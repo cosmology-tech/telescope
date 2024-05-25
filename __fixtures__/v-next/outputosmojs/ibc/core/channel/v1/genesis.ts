@@ -1,6 +1,7 @@
 import { IdentifiedChannel, IdentifiedChannelSDKType, PacketState, PacketStateSDKType } from "./channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisState {
@@ -142,7 +143,7 @@ export const GenesisState = {
       nextChannelSequence: isSet(object.nextChannelSequence) ? BigInt(object.nextChannelSequence.toString()) : BigInt(0)
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.channels) {
       obj.channels = message.channels.map(e => e ? IdentifiedChannel.toJSON(e) : undefined);
@@ -385,7 +386,7 @@ export const PacketSequence = {
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
-  toJSON(message: PacketSequence): unknown {
+  toJSON(message: PacketSequence): JsonSafe<PacketSequence> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.channelId !== undefined && (obj.channelId = message.channelId);

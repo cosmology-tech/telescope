@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.kv.v1beta1";
 /** Pairs defines a repeated slice of Pair objects. */
@@ -71,15 +70,6 @@ export const Pairs = {
   fromJSON(object: any): Pairs {
     const obj = createBasePairs();
     if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => Pair.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Pairs): JsonSafe<Pairs> {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? Pair.toJSON(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Pairs>): Pairs {
@@ -170,12 +160,6 @@ export const Pair = {
     const obj = createBasePair();
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: Pair): JsonSafe<Pair> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<Pair>): Pair {

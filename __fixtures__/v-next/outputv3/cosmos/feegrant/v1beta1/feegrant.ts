@@ -4,7 +4,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * BasicAllowance implements Allowance with a one-time grant of tokens
@@ -221,16 +220,6 @@ export const BasicAllowance = {
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
-  toJSON(message: BasicAllowance): JsonSafe<BasicAllowance> {
-    const obj: any = {};
-    if (message.spendLimit) {
-      obj.spendLimit = message.spendLimit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.spendLimit = [];
-    }
-    message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<BasicAllowance>): BasicAllowance {
     const message = createBaseBasicAllowance();
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
@@ -351,23 +340,6 @@ export const PeriodicAllowance = {
     if (Array.isArray(object?.periodSpendLimit)) obj.periodSpendLimit = object.periodSpendLimit.map((e: any) => Coin.fromJSON(e));
     if (Array.isArray(object?.periodCanSpend)) obj.periodCanSpend = object.periodCanSpend.map((e: any) => Coin.fromJSON(e));
     if (isSet(object.periodReset)) obj.periodReset = new Date(object.periodReset);
-    return obj;
-  },
-  toJSON(message: PeriodicAllowance): JsonSafe<PeriodicAllowance> {
-    const obj: any = {};
-    message.basic !== undefined && (obj.basic = message.basic ? BasicAllowance.toJSON(message.basic) : undefined);
-    message.period !== undefined && (obj.period = message.period ? Duration.toJSON(message.period) : undefined);
-    if (message.periodSpendLimit) {
-      obj.periodSpendLimit = message.periodSpendLimit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.periodSpendLimit = [];
-    }
-    if (message.periodCanSpend) {
-      obj.periodCanSpend = message.periodCanSpend.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.periodCanSpend = [];
-    }
-    message.periodReset !== undefined && (obj.periodReset = message.periodReset.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<PeriodicAllowance>): PeriodicAllowance {
@@ -499,16 +471,6 @@ export const AllowedMsgAllowance = {
     if (Array.isArray(object?.allowedMessages)) obj.allowedMessages = object.allowedMessages.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: AllowedMsgAllowance): JsonSafe<AllowedMsgAllowance> {
-    const obj: any = {};
-    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
-    if (message.allowedMessages) {
-      obj.allowedMessages = message.allowedMessages.map(e => e);
-    } else {
-      obj.allowedMessages = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AllowedMsgAllowance>): AllowedMsgAllowance {
     const message = createBaseAllowedMsgAllowance();
     if (object.allowance !== undefined && object.allowance !== null) {
@@ -614,13 +576,6 @@ export const Grant = {
     if (isSet(object.granter)) obj.granter = String(object.granter);
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
     if (isSet(object.allowance)) obj.allowance = Any.fromJSON(object.allowance);
-    return obj;
-  },
-  toJSON(message: Grant): JsonSafe<Grant> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Grant>): Grant {

@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
@@ -71,7 +72,7 @@ export const QueryProvidersRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryProvidersRequest): unknown {
+  toJSON(message: QueryProvidersRequest): JsonSafe<QueryProvidersRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -134,7 +135,7 @@ export const QueryProvidersResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryProvidersResponse): unknown {
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
     const obj: any = {};
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
@@ -201,7 +202,7 @@ export const QueryProviderRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: QueryProviderRequest): unknown {
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -256,7 +257,7 @@ export const QueryProviderResponse = {
       provider: isSet(object.provider) ? Provider.fromJSON(object.provider) : undefined
     };
   },
-  toJSON(message: QueryProviderResponse): unknown {
+  toJSON(message: QueryProviderResponse): JsonSafe<QueryProviderResponse> {
     const obj: any = {};
     message.provider !== undefined && (obj.provider = message.provider ? Provider.toJSON(message.provider) : undefined);
     return obj;

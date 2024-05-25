@@ -1,7 +1,6 @@
 import { PoolParams, PoolParamsAmino, PoolParamsSDKType, PoolAsset, PoolAssetAmino, PoolAssetSDKType } from "../balancerPool";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { isSet, DeepPartial } from "../../../../../helpers";
-import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
@@ -102,18 +101,6 @@ export const MsgCreateBalancerPool = {
     if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
     if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
     if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
-    return obj;
-  },
-  toJSON(message: MsgCreateBalancerPool): JsonSafe<MsgCreateBalancerPool> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
-    if (message.poolAssets) {
-      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
-    } else {
-      obj.poolAssets = [];
-    }
-    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
@@ -219,11 +206,6 @@ export const MsgCreateBalancerPoolResponse = {
   fromJSON(object: any): MsgCreateBalancerPoolResponse {
     const obj = createBaseMsgCreateBalancerPoolResponse();
     if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
-    return obj;
-  },
-  toJSON(message: MsgCreateBalancerPoolResponse): JsonSafe<MsgCreateBalancerPoolResponse> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {

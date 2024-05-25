@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial } from "../helpers";
-import { JsonSafe } from "../json-safe";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
@@ -211,12 +210,6 @@ export const InterfaceDescriptor = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: InterfaceDescriptor): JsonSafe<InterfaceDescriptor> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
   fromPartial(object: DeepPartial<InterfaceDescriptor>): InterfaceDescriptor {
     const message = createBaseInterfaceDescriptor();
     message.name = object.name ?? "";
@@ -322,17 +315,6 @@ export const ScalarDescriptor = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.fieldType)) obj.fieldType = object.fieldType.map((e: any) => scalarTypeFromJSON(e));
-    return obj;
-  },
-  toJSON(message: ScalarDescriptor): JsonSafe<ScalarDescriptor> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.fieldType) {
-      obj.fieldType = message.fieldType.map(e => scalarTypeToJSON(e));
-    } else {
-      obj.fieldType = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ScalarDescriptor>): ScalarDescriptor {

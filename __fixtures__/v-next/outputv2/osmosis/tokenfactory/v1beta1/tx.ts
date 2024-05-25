@@ -2,6 +2,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * MsgCreateDenom defines the message structure for the CreateDenom gRPC service
@@ -330,7 +331,7 @@ export const MsgCreateDenom = {
     if (isSet(object.subdenom)) obj.subdenom = String(object.subdenom);
     return obj;
   },
-  toJSON(message: MsgCreateDenom): unknown {
+  toJSON(message: MsgCreateDenom): JsonSafe<MsgCreateDenom> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.subdenom !== undefined && (obj.subdenom = message.subdenom);
@@ -428,7 +429,7 @@ export const MsgCreateDenomResponse = {
     if (isSet(object.newTokenDenom)) obj.newTokenDenom = String(object.newTokenDenom);
     return obj;
   },
-  toJSON(message: MsgCreateDenomResponse): unknown {
+  toJSON(message: MsgCreateDenomResponse): JsonSafe<MsgCreateDenomResponse> {
     const obj: any = {};
     message.newTokenDenom !== undefined && (obj.newTokenDenom = message.newTokenDenom);
     return obj;
@@ -526,7 +527,7 @@ export const MsgMint = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgMint): unknown {
+  toJSON(message: MsgMint): JsonSafe<MsgMint> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
@@ -617,7 +618,7 @@ export const MsgMintResponse = {
     const obj = createBaseMsgMintResponse();
     return obj;
   },
-  toJSON(_: MsgMintResponse): unknown {
+  toJSON(_: MsgMintResponse): JsonSafe<MsgMintResponse> {
     const obj: any = {};
     return obj;
   },
@@ -706,7 +707,7 @@ export const MsgBurn = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgBurn): unknown {
+  toJSON(message: MsgBurn): JsonSafe<MsgBurn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
@@ -797,7 +798,7 @@ export const MsgBurnResponse = {
     const obj = createBaseMsgBurnResponse();
     return obj;
   },
-  toJSON(_: MsgBurnResponse): unknown {
+  toJSON(_: MsgBurnResponse): JsonSafe<MsgBurnResponse> {
     const obj: any = {};
     return obj;
   },
@@ -894,7 +895,7 @@ export const MsgChangeAdmin = {
     if (isSet(object.newAdmin)) obj.newAdmin = String(object.newAdmin);
     return obj;
   },
-  toJSON(message: MsgChangeAdmin): unknown {
+  toJSON(message: MsgChangeAdmin): JsonSafe<MsgChangeAdmin> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -991,7 +992,7 @@ export const MsgChangeAdminResponse = {
     const obj = createBaseMsgChangeAdminResponse();
     return obj;
   },
-  toJSON(_: MsgChangeAdminResponse): unknown {
+  toJSON(_: MsgChangeAdminResponse): JsonSafe<MsgChangeAdminResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1080,7 +1081,7 @@ export const MsgSetDenomMetadata = {
     if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
     return obj;
   },
-  toJSON(message: MsgSetDenomMetadata): unknown {
+  toJSON(message: MsgSetDenomMetadata): JsonSafe<MsgSetDenomMetadata> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
@@ -1171,7 +1172,7 @@ export const MsgSetDenomMetadataResponse = {
     const obj = createBaseMsgSetDenomMetadataResponse();
     return obj;
   },
-  toJSON(_: MsgSetDenomMetadataResponse): unknown {
+  toJSON(_: MsgSetDenomMetadataResponse): JsonSafe<MsgSetDenomMetadataResponse> {
     const obj: any = {};
     return obj;
   },

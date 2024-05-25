@@ -1,7 +1,6 @@
 import { Deposit, DepositAmino, DepositSDKType, Vote, VoteAmino, VoteSDKType, Proposal, ProposalAmino, ProposalSDKType, DepositParams, DepositParamsAmino, DepositParamsSDKType, VotingParams, VotingParamsAmino, VotingParamsSDKType, TallyParams, TallyParamsAmino, TallyParamsSDKType } from "./gov";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** GenesisState defines the gov module's genesis state. */
 export interface GenesisState {
@@ -133,29 +132,6 @@ export const GenesisState = {
     if (isSet(object.depositParams)) obj.depositParams = DepositParams.fromJSON(object.depositParams);
     if (isSet(object.votingParams)) obj.votingParams = VotingParams.fromJSON(object.votingParams);
     if (isSet(object.tallyParams)) obj.tallyParams = TallyParams.fromJSON(object.tallyParams);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.startingProposalId !== undefined && (obj.startingProposalId = (message.startingProposalId || BigInt(0)).toString());
-    if (message.deposits) {
-      obj.deposits = message.deposits.map(e => e ? Deposit.toJSON(e) : undefined);
-    } else {
-      obj.deposits = [];
-    }
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
-    if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
-    } else {
-      obj.proposals = [];
-    }
-    message.depositParams !== undefined && (obj.depositParams = message.depositParams ? DepositParams.toJSON(message.depositParams) : undefined);
-    message.votingParams !== undefined && (obj.votingParams = message.votingParams ? VotingParams.toJSON(message.votingParams) : undefined);
-    message.tallyParams !== undefined && (obj.tallyParams = message.tallyParams ? TallyParams.toJSON(message.tallyParams) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
@@ -262,15 +261,6 @@ export const Snapshot = {
     if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
     return obj;
   },
-  toJSON(message: Snapshot): JsonSafe<Snapshot> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.format !== undefined && (obj.format = Math.round(message.format));
-    message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
-    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
     if (object.height !== undefined && object.height !== null) {
@@ -377,15 +367,6 @@ export const Metadata = {
   fromJSON(object: any): Metadata {
     const obj = createBaseMetadata();
     if (Array.isArray(object?.chunkHashes)) obj.chunkHashes = object.chunkHashes.map((e: any) => bytesFromBase64(e));
-    return obj;
-  },
-  toJSON(message: Metadata): JsonSafe<Metadata> {
-    const obj: any = {};
-    if (message.chunkHashes) {
-      obj.chunkHashes = message.chunkHashes.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
-    } else {
-      obj.chunkHashes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Metadata>): Metadata {
@@ -508,16 +489,6 @@ export const SnapshotItem = {
     if (isSet(object.extensionPayload)) obj.extensionPayload = SnapshotExtensionPayload.fromJSON(object.extensionPayload);
     if (isSet(object.kv)) obj.kv = SnapshotKVItem.fromJSON(object.kv);
     if (isSet(object.schema)) obj.schema = SnapshotSchema.fromJSON(object.schema);
-    return obj;
-  },
-  toJSON(message: SnapshotItem): JsonSafe<SnapshotItem> {
-    const obj: any = {};
-    message.store !== undefined && (obj.store = message.store ? SnapshotStoreItem.toJSON(message.store) : undefined);
-    message.iavl !== undefined && (obj.iavl = message.iavl ? SnapshotIAVLItem.toJSON(message.iavl) : undefined);
-    message.extension !== undefined && (obj.extension = message.extension ? SnapshotExtensionMeta.toJSON(message.extension) : undefined);
-    message.extensionPayload !== undefined && (obj.extensionPayload = message.extensionPayload ? SnapshotExtensionPayload.toJSON(message.extensionPayload) : undefined);
-    message.kv !== undefined && (obj.kv = message.kv ? SnapshotKVItem.toJSON(message.kv) : undefined);
-    message.schema !== undefined && (obj.schema = message.schema ? SnapshotSchema.toJSON(message.schema) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotItem>): SnapshotItem {
@@ -643,11 +614,6 @@ export const SnapshotStoreItem = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: SnapshotStoreItem): JsonSafe<SnapshotStoreItem> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SnapshotStoreItem>): SnapshotStoreItem {
     const message = createBaseSnapshotStoreItem();
     message.name = object.name ?? "";
@@ -746,14 +712,6 @@ export const SnapshotIAVLItem = {
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     if (isSet(object.version)) obj.version = BigInt(object.version.toString());
     if (isSet(object.height)) obj.height = Number(object.height);
-    return obj;
-  },
-  toJSON(message: SnapshotIAVLItem): JsonSafe<SnapshotIAVLItem> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    message.version !== undefined && (obj.version = (message.version || BigInt(0)).toString());
-    message.height !== undefined && (obj.height = Math.round(message.height));
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotIAVLItem>): SnapshotIAVLItem {
@@ -863,12 +821,6 @@ export const SnapshotExtensionMeta = {
     if (isSet(object.format)) obj.format = Number(object.format);
     return obj;
   },
-  toJSON(message: SnapshotExtensionMeta): JsonSafe<SnapshotExtensionMeta> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.format !== undefined && (obj.format = Math.round(message.format));
-    return obj;
-  },
   fromPartial(object: DeepPartial<SnapshotExtensionMeta>): SnapshotExtensionMeta {
     const message = createBaseSnapshotExtensionMeta();
     message.name = object.name ?? "";
@@ -950,11 +902,6 @@ export const SnapshotExtensionPayload = {
   fromJSON(object: any): SnapshotExtensionPayload {
     const obj = createBaseSnapshotExtensionPayload();
     if (isSet(object.payload)) obj.payload = bytesFromBase64(object.payload);
-    return obj;
-  },
-  toJSON(message: SnapshotExtensionPayload): JsonSafe<SnapshotExtensionPayload> {
-    const obj: any = {};
-    message.payload !== undefined && (obj.payload = base64FromBytes(message.payload !== undefined ? message.payload : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotExtensionPayload>): SnapshotExtensionPayload {
@@ -1041,12 +988,6 @@ export const SnapshotKVItem = {
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     return obj;
   },
-  toJSON(message: SnapshotKVItem): JsonSafe<SnapshotKVItem> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<SnapshotKVItem>): SnapshotKVItem {
     const message = createBaseSnapshotKVItem();
     message.key = object.key ?? new Uint8Array();
@@ -1128,15 +1069,6 @@ export const SnapshotSchema = {
   fromJSON(object: any): SnapshotSchema {
     const obj = createBaseSnapshotSchema();
     if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => bytesFromBase64(e));
-    return obj;
-  },
-  toJSON(message: SnapshotSchema): JsonSafe<SnapshotSchema> {
-    const obj: any = {};
-    if (message.keys) {
-      obj.keys = message.keys.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
-    } else {
-      obj.keys = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SnapshotSchema>): SnapshotSchema {

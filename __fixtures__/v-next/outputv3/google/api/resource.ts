@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * A description of the historical or future-looking state of the
@@ -614,25 +613,6 @@ export const ResourceDescriptor = {
     if (Array.isArray(object?.style)) obj.style = object.style.map((e: any) => resourceDescriptor_StyleFromJSON(e));
     return obj;
   },
-  toJSON(message: ResourceDescriptor): JsonSafe<ResourceDescriptor> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.pattern) {
-      obj.pattern = message.pattern.map(e => e);
-    } else {
-      obj.pattern = [];
-    }
-    message.nameField !== undefined && (obj.nameField = message.nameField);
-    message.history !== undefined && (obj.history = resourceDescriptor_HistoryToJSON(message.history));
-    message.plural !== undefined && (obj.plural = message.plural);
-    message.singular !== undefined && (obj.singular = message.singular);
-    if (message.style) {
-      obj.style = message.style.map(e => resourceDescriptor_StyleToJSON(e));
-    } else {
-      obj.style = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResourceDescriptor>): ResourceDescriptor {
     const message = createBaseResourceDescriptor();
     message.type = object.type ?? "";
@@ -768,12 +748,6 @@ export const ResourceReference = {
     const obj = createBaseResourceReference();
     if (isSet(object.type)) obj.type = String(object.type);
     if (isSet(object.childType)) obj.childType = String(object.childType);
-    return obj;
-  },
-  toJSON(message: ResourceReference): JsonSafe<ResourceReference> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.childType !== undefined && (obj.childType = message.childType);
     return obj;
   },
   fromPartial(object: DeepPartial<ResourceReference>): ResourceReference {

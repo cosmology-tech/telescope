@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Certificate_State {
@@ -235,7 +236,7 @@ export const CertificateID = {
     if (isSet(object.serial)) obj.serial = String(object.serial);
     return obj;
   },
-  toJSON(message: CertificateID): unknown {
+  toJSON(message: CertificateID): JsonSafe<CertificateID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.serial !== undefined && (obj.serial = message.serial);
@@ -342,7 +343,7 @@ export const Certificate = {
     if (isSet(object.pubkey)) obj.pubkey = bytesFromBase64(object.pubkey);
     return obj;
   },
-  toJSON(message: Certificate): unknown {
+  toJSON(message: Certificate): JsonSafe<Certificate> {
     const obj: any = {};
     message.state !== undefined && (obj.state = certificate_StateToJSON(message.state));
     message.cert !== undefined && (obj.cert = base64FromBytes(message.cert !== undefined ? message.cert : new Uint8Array()));
@@ -457,7 +458,7 @@ export const CertificateFilter = {
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
   },
-  toJSON(message: CertificateFilter): unknown {
+  toJSON(message: CertificateFilter): JsonSafe<CertificateFilter> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.serial !== undefined && (obj.serial = message.serial);
@@ -572,7 +573,7 @@ export const MsgCreateCertificate = {
     if (isSet(object.pubkey)) obj.pubkey = bytesFromBase64(object.pubkey);
     return obj;
   },
-  toJSON(message: MsgCreateCertificate): unknown {
+  toJSON(message: MsgCreateCertificate): JsonSafe<MsgCreateCertificate> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.cert !== undefined && (obj.cert = base64FromBytes(message.cert !== undefined ? message.cert : new Uint8Array()));
@@ -662,7 +663,7 @@ export const MsgCreateCertificateResponse = {
     const obj = createBaseMsgCreateCertificateResponse();
     return obj;
   },
-  toJSON(_: MsgCreateCertificateResponse): unknown {
+  toJSON(_: MsgCreateCertificateResponse): JsonSafe<MsgCreateCertificateResponse> {
     const obj: any = {};
     return obj;
   },
@@ -736,7 +737,7 @@ export const MsgRevokeCertificate = {
     if (isSet(object.id)) obj.id = CertificateID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgRevokeCertificate): unknown {
+  toJSON(message: MsgRevokeCertificate): JsonSafe<MsgRevokeCertificate> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? CertificateID.toJSON(message.id) : undefined);
     return obj;
@@ -812,7 +813,7 @@ export const MsgRevokeCertificateResponse = {
     const obj = createBaseMsgRevokeCertificateResponse();
     return obj;
   },
-  toJSON(_: MsgRevokeCertificateResponse): unknown {
+  toJSON(_: MsgRevokeCertificateResponse): JsonSafe<MsgRevokeCertificateResponse> {
     const obj: any = {};
     return obj;
   },

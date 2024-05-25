@@ -2,6 +2,7 @@ import { ExprValue, ExprValueSDKType, IdRef, IdRefSDKType } from "../google/api/
 import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject } from "../helpers";
+import { JsonSafe } from "../json-safe";
 export const protobufPackage = "misc";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -186,7 +187,7 @@ export const EvalRequest_BindingsEntry = {
     if (isSet(object.value)) obj.value = ExprValue.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: EvalRequest_BindingsEntry): unknown {
+  toJSON(message: EvalRequest_BindingsEntry): JsonSafe<EvalRequest_BindingsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? ExprValue.toJSON(message.value) : undefined);
@@ -267,7 +268,7 @@ export const EvalRequest_RefsEntry = {
     if (isSet(object.value)) obj.value = IdRef.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: EvalRequest_RefsEntry): unknown {
+  toJSON(message: EvalRequest_RefsEntry): JsonSafe<EvalRequest_RefsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? IdRef.toJSON(message.value) : undefined);
@@ -435,7 +436,7 @@ export const EvalRequest = {
     if (isSet(object.opt)) obj.opt = featureSet_Utf8ValidationFromJSON(object.opt);
     return obj;
   },
-  toJSON(message: EvalRequest): unknown {
+  toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
     const obj: any = {};
     obj.bindings = {};
     if (message.bindings) {
@@ -617,7 +618,7 @@ export const AccessConfig = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     return obj;
   },
-  toJSON(message: AccessConfig): unknown {
+  toJSON(message: AccessConfig): JsonSafe<AccessConfig> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     return obj;
@@ -690,7 +691,7 @@ export const GenericAuthorization = {
     if (isSet(object.msg)) obj.msg = String(object.msg);
     return obj;
   },
-  toJSON(message: GenericAuthorization): unknown {
+  toJSON(message: GenericAuthorization): JsonSafe<GenericAuthorization> {
     const obj: any = {};
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;

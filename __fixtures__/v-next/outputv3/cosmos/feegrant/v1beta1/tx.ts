@@ -2,7 +2,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf
 import { BasicAllowance, BasicAllowanceProtoMsg, BasicAllowanceSDKType, PeriodicAllowance, PeriodicAllowanceProtoMsg, PeriodicAllowanceSDKType, AllowedMsgAllowance, AllowedMsgAllowanceProtoMsg, AllowedMsgAllowanceSDKType } from "./feegrant";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -139,13 +138,6 @@ export const MsgGrantAllowance = {
     if (isSet(object.allowance)) obj.allowance = Any.fromJSON(object.allowance);
     return obj;
   },
-  toJSON(message: MsgGrantAllowance): JsonSafe<MsgGrantAllowance> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.allowance !== undefined && (obj.allowance = message.allowance ? Any.toJSON(message.allowance) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgGrantAllowance>): MsgGrantAllowance {
     const message = createBaseMsgGrantAllowance();
     message.granter = object.granter ?? "";
@@ -229,10 +221,6 @@ export const MsgGrantAllowanceResponse = {
     const obj = createBaseMsgGrantAllowanceResponse();
     return obj;
   },
-  toJSON(_: MsgGrantAllowanceResponse): JsonSafe<MsgGrantAllowanceResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgGrantAllowanceResponse>): MsgGrantAllowanceResponse {
     const message = createBaseMsgGrantAllowanceResponse();
     return message;
@@ -309,12 +297,6 @@ export const MsgRevokeAllowance = {
     if (isSet(object.grantee)) obj.grantee = String(object.grantee);
     return obj;
   },
-  toJSON(message: MsgRevokeAllowance): JsonSafe<MsgRevokeAllowance> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgRevokeAllowance>): MsgRevokeAllowance {
     const message = createBaseMsgRevokeAllowance();
     message.granter = object.granter ?? "";
@@ -387,10 +369,6 @@ export const MsgRevokeAllowanceResponse = {
   },
   fromJSON(_: any): MsgRevokeAllowanceResponse {
     const obj = createBaseMsgRevokeAllowanceResponse();
-    return obj;
-  },
-  toJSON(_: MsgRevokeAllowanceResponse): JsonSafe<MsgRevokeAllowanceResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgRevokeAllowanceResponse>): MsgRevokeAllowanceResponse {

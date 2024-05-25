@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
@@ -135,7 +136,7 @@ export const ModuleDescriptor = {
       canMigrateFrom: Array.isArray(object?.canMigrateFrom) ? object.canMigrateFrom.map((e: any) => MigrateFromInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: ModuleDescriptor): unknown {
+  toJSON(message: ModuleDescriptor): JsonSafe<ModuleDescriptor> {
     const obj: any = {};
     message.goImport !== undefined && (obj.goImport = message.goImport);
     if (message.usePackage) {
@@ -200,7 +201,7 @@ export const PackageReference = {
       revision: isSet(object.revision) ? Number(object.revision) : 0
     };
   },
-  toJSON(message: PackageReference): unknown {
+  toJSON(message: PackageReference): JsonSafe<PackageReference> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.revision !== undefined && (obj.revision = Math.round(message.revision));
@@ -247,7 +248,7 @@ export const MigrateFromInfo = {
       module: isSet(object.module) ? String(object.module) : ""
     };
   },
-  toJSON(message: MigrateFromInfo): unknown {
+  toJSON(message: MigrateFromInfo): JsonSafe<MigrateFromInfo> {
     const obj: any = {};
     message.module !== undefined && (obj.module = message.module);
     return obj;

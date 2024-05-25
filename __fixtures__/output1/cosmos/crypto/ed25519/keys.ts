@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.crypto.ed25519";
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
@@ -69,7 +70,7 @@ export const PubKey = {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
-  toJSON(message: PubKey): unknown {
+  toJSON(message: PubKey): JsonSafe<PubKey> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;
@@ -124,7 +125,7 @@ export const PrivKey = {
       key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
     };
   },
-  toJSON(message: PrivKey): unknown {
+  toJSON(message: PrivKey): JsonSafe<PrivKey> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     return obj;

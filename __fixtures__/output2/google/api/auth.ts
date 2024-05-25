@@ -1,6 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -270,7 +271,7 @@ export const Authentication = {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => AuthProvider.fromJSON(e)) : []
     };
   },
-  toJSON(message: Authentication): unknown {
+  toJSON(message: Authentication): JsonSafe<Authentication> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? AuthenticationRule.toJSON(e) : undefined);
@@ -349,7 +350,7 @@ export const AuthenticationRule = {
       requirements: Array.isArray(object?.requirements) ? object.requirements.map((e: any) => AuthRequirement.fromJSON(e)) : []
     };
   },
-  toJSON(message: AuthenticationRule): unknown {
+  toJSON(message: AuthenticationRule): JsonSafe<AuthenticationRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.oauth !== undefined && (obj.oauth = message.oauth ? OAuthRequirements.toJSON(message.oauth) : undefined);
@@ -420,7 +421,7 @@ export const JwtLocation = {
       valuePrefix: isSet(object.valuePrefix) ? String(object.valuePrefix) : ""
     };
   },
-  toJSON(message: JwtLocation): unknown {
+  toJSON(message: JwtLocation): JsonSafe<JwtLocation> {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header);
     message.query !== undefined && (obj.query = message.query);
@@ -509,7 +510,7 @@ export const AuthProvider = {
       jwtLocations: Array.isArray(object?.jwtLocations) ? object.jwtLocations.map((e: any) => JwtLocation.fromJSON(e)) : []
     };
   },
-  toJSON(message: AuthProvider): unknown {
+  toJSON(message: AuthProvider): JsonSafe<AuthProvider> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.issuer !== undefined && (obj.issuer = message.issuer);
@@ -568,7 +569,7 @@ export const OAuthRequirements = {
       canonicalScopes: isSet(object.canonicalScopes) ? String(object.canonicalScopes) : ""
     };
   },
-  toJSON(message: OAuthRequirements): unknown {
+  toJSON(message: OAuthRequirements): JsonSafe<OAuthRequirements> {
     const obj: any = {};
     message.canonicalScopes !== undefined && (obj.canonicalScopes = message.canonicalScopes);
     return obj;
@@ -621,7 +622,7 @@ export const AuthRequirement = {
       audiences: isSet(object.audiences) ? String(object.audiences) : ""
     };
   },
-  toJSON(message: AuthRequirement): unknown {
+  toJSON(message: AuthRequirement): JsonSafe<AuthRequirement> {
     const obj: any = {};
     message.providerId !== undefined && (obj.providerId = message.providerId);
     message.audiences !== undefined && (obj.audiences = message.audiences);

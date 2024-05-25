@@ -22,6 +22,7 @@ import { SourceInfo } from "./source_info";
 import { UInt32Value } from "../protobuf/wrappers";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -371,7 +372,7 @@ export const Service = {
       configVersion: isSet(object.configVersion) ? UInt32Value.fromJSON(object.configVersion) : undefined
     };
   },
-  toJSON(message: Service): unknown {
+  toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.title !== undefined && (obj.title = message.title);

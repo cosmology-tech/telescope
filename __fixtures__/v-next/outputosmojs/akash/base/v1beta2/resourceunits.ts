@@ -2,6 +2,7 @@ import { CPU, CPUSDKType, Memory, MemorySDKType, Storage, StorageSDKType } from 
 import { Endpoint, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /**
  * ResourceUnits describes all available resources types for deployment/node etc
@@ -86,7 +87,7 @@ export const ResourceUnits = {
       endpoints: Array.isArray(object?.endpoints) ? object.endpoints.map((e: any) => Endpoint.fromJSON(e)) : []
     };
   },
-  toJSON(message: ResourceUnits): unknown {
+  toJSON(message: ResourceUnits): JsonSafe<ResourceUnits> {
     const obj: any = {};
     message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toJSON(message.cpu) : undefined);
     message.memory !== undefined && (obj.memory = message.memory ? Memory.toJSON(message.memory) : undefined);

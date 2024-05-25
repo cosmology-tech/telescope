@@ -5,6 +5,7 @@ import { GenesisState as GenesisState2 } from "../../connection/v1/genesis";
 import { GenesisState as GenesisState3 } from "../../channel/v1/genesis";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.types.v1";
 /** GenesisState defines the ibc module's genesis state. */
 export interface GenesisState {
@@ -65,7 +66,7 @@ export const GenesisState = {
       channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
     message.connectionGenesis !== undefined && (obj.connectionGenesis = message.connectionGenesis ? GenesisState2.toJSON(message.connectionGenesis) : undefined);

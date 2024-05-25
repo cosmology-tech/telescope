@@ -80,38 +80,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    submitProposal(value: MsgSubmitProposal) {
-      return {
-        typeUrl: "/cosmos.gov.v1.MsgSubmitProposal",
-        value: MsgSubmitProposal.toJSON(value)
-      };
-    },
-    execLegacyContent(value: MsgExecLegacyContent) {
-      return {
-        typeUrl: "/cosmos.gov.v1.MsgExecLegacyContent",
-        value: MsgExecLegacyContent.toJSON(value)
-      };
-    },
-    vote(value: MsgVote) {
-      return {
-        typeUrl: "/cosmos.gov.v1.MsgVote",
-        value: MsgVote.toJSON(value)
-      };
-    },
-    voteWeighted(value: MsgVoteWeighted) {
-      return {
-        typeUrl: "/cosmos.gov.v1.MsgVoteWeighted",
-        value: MsgVoteWeighted.toJSON(value)
-      };
-    },
-    deposit(value: MsgDeposit) {
-      return {
-        typeUrl: "/cosmos.gov.v1.MsgDeposit",
-        value: MsgDeposit.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     submitProposal(value: any) {
       return {

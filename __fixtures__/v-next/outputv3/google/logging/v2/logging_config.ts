@@ -2,7 +2,6 @@ import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../protobuf/fiel
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -2977,23 +2976,6 @@ export const LogBucket = {
     if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
     return obj;
   },
-  toJSON(message: LogBucket): JsonSafe<LogBucket> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.retentionDays !== undefined && (obj.retentionDays = Math.round(message.retentionDays));
-    message.locked !== undefined && (obj.locked = message.locked);
-    message.lifecycleState !== undefined && (obj.lifecycleState = lifecycleStateToJSON(message.lifecycleState));
-    if (message.restrictedFields) {
-      obj.restrictedFields = message.restrictedFields.map(e => e);
-    } else {
-      obj.restrictedFields = [];
-    }
-    message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LogBucket>): LogBucket {
     const message = createBaseLogBucket();
     message.name = object.name ?? "";
@@ -3163,15 +3145,6 @@ export const LogView = {
     if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
     if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
     if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
-  },
-  toJSON(message: LogView): JsonSafe<LogView> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   },
   fromPartial(object: DeepPartial<LogView>): LogView {
@@ -3365,26 +3338,6 @@ export const LogSink = {
     if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
     return obj;
   },
-  toJSON(message: LogSink): JsonSafe<LogSink> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.destination !== undefined && (obj.destination = message.destination);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.description !== undefined && (obj.description = message.description);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toJSON(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-    message.outputVersionFormat !== undefined && (obj.outputVersionFormat = logSink_VersionFormatToJSON(message.outputVersionFormat));
-    message.writerIdentity !== undefined && (obj.writerIdentity = message.writerIdentity);
-    message.includeChildren !== undefined && (obj.includeChildren = message.includeChildren);
-    message.bigqueryOptions !== undefined && (obj.bigqueryOptions = message.bigqueryOptions ? BigQueryOptions.toJSON(message.bigqueryOptions) : undefined);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<LogSink>): LogSink {
     const message = createBaseLogSink();
     message.name = object.name ?? "";
@@ -3553,12 +3506,6 @@ export const BigQueryOptions = {
     if (isSet(object.usesTimestampColumnPartitioning)) obj.usesTimestampColumnPartitioning = Boolean(object.usesTimestampColumnPartitioning);
     return obj;
   },
-  toJSON(message: BigQueryOptions): JsonSafe<BigQueryOptions> {
-    const obj: any = {};
-    message.usePartitionedTables !== undefined && (obj.usePartitionedTables = message.usePartitionedTables);
-    message.usesTimestampColumnPartitioning !== undefined && (obj.usesTimestampColumnPartitioning = message.usesTimestampColumnPartitioning);
-    return obj;
-  },
   fromPartial(object: DeepPartial<BigQueryOptions>): BigQueryOptions {
     const message = createBaseBigQueryOptions();
     message.usePartitionedTables = object.usePartitionedTables ?? false;
@@ -3657,13 +3604,6 @@ export const ListBucketsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListBucketsRequest): JsonSafe<ListBucketsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListBucketsRequest>): ListBucketsRequest {
     const message = createBaseListBucketsRequest();
     message.parent = object.parent ?? "";
@@ -3759,16 +3699,6 @@ export const ListBucketsResponse = {
     const obj = createBaseListBucketsResponse();
     if (Array.isArray(object?.buckets)) obj.buckets = object.buckets.map((e: any) => LogBucket.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListBucketsResponse): JsonSafe<ListBucketsResponse> {
-    const obj: any = {};
-    if (message.buckets) {
-      obj.buckets = message.buckets.map(e => e ? LogBucket.toJSON(e) : undefined);
-    } else {
-      obj.buckets = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
   fromPartial(object: DeepPartial<ListBucketsResponse>): ListBucketsResponse {
@@ -3873,13 +3803,6 @@ export const CreateBucketRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.bucketId)) obj.bucketId = String(object.bucketId);
     if (isSet(object.bucket)) obj.bucket = LogBucket.fromJSON(object.bucket);
-    return obj;
-  },
-  toJSON(message: CreateBucketRequest): JsonSafe<CreateBucketRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.bucketId !== undefined && (obj.bucketId = message.bucketId);
-    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateBucketRequest>): CreateBucketRequest {
@@ -3989,13 +3912,6 @@ export const UpdateBucketRequest = {
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
     return obj;
   },
-  toJSON(message: UpdateBucketRequest): JsonSafe<UpdateBucketRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateBucketRequest>): UpdateBucketRequest {
     const message = createBaseUpdateBucketRequest();
     message.name = object.name ?? "";
@@ -4089,11 +4005,6 @@ export const GetBucketRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetBucketRequest): JsonSafe<GetBucketRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetBucketRequest>): GetBucketRequest {
     const message = createBaseGetBucketRequest();
     message.name = object.name ?? "";
@@ -4169,11 +4080,6 @@ export const DeleteBucketRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: DeleteBucketRequest): JsonSafe<DeleteBucketRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteBucketRequest>): DeleteBucketRequest {
     const message = createBaseDeleteBucketRequest();
     message.name = object.name ?? "";
@@ -4247,11 +4153,6 @@ export const UndeleteBucketRequest = {
   fromJSON(object: any): UndeleteBucketRequest {
     const obj = createBaseUndeleteBucketRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: UndeleteBucketRequest): JsonSafe<UndeleteBucketRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<UndeleteBucketRequest>): UndeleteBucketRequest {
@@ -4343,13 +4244,6 @@ export const ListViewsRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
-  },
-  toJSON(message: ListViewsRequest): JsonSafe<ListViewsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
   fromPartial(object: DeepPartial<ListViewsRequest>): ListViewsRequest {
@@ -4447,16 +4341,6 @@ export const ListViewsResponse = {
     const obj = createBaseListViewsResponse();
     if (Array.isArray(object?.views)) obj.views = object.views.map((e: any) => LogView.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListViewsResponse): JsonSafe<ListViewsResponse> {
-    const obj: any = {};
-    if (message.views) {
-      obj.views = message.views.map(e => e ? LogView.toJSON(e) : undefined);
-    } else {
-      obj.views = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
   fromPartial(object: DeepPartial<ListViewsResponse>): ListViewsResponse {
@@ -4561,13 +4445,6 @@ export const CreateViewRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.viewId)) obj.viewId = String(object.viewId);
     if (isSet(object.view)) obj.view = LogView.fromJSON(object.view);
-    return obj;
-  },
-  toJSON(message: CreateViewRequest): JsonSafe<CreateViewRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.viewId !== undefined && (obj.viewId = message.viewId);
-    message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateViewRequest>): CreateViewRequest {
@@ -4677,13 +4554,6 @@ export const UpdateViewRequest = {
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
     return obj;
   },
-  toJSON(message: UpdateViewRequest): JsonSafe<UpdateViewRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateViewRequest>): UpdateViewRequest {
     const message = createBaseUpdateViewRequest();
     message.name = object.name ?? "";
@@ -4777,11 +4647,6 @@ export const GetViewRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetViewRequest): JsonSafe<GetViewRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetViewRequest>): GetViewRequest {
     const message = createBaseGetViewRequest();
     message.name = object.name ?? "";
@@ -4855,11 +4720,6 @@ export const DeleteViewRequest = {
   fromJSON(object: any): DeleteViewRequest {
     const obj = createBaseDeleteViewRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: DeleteViewRequest): JsonSafe<DeleteViewRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<DeleteViewRequest>): DeleteViewRequest {
@@ -4951,13 +4811,6 @@ export const ListSinksRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
-    return obj;
-  },
-  toJSON(message: ListSinksRequest): JsonSafe<ListSinksRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
     return obj;
   },
   fromPartial(object: DeepPartial<ListSinksRequest>): ListSinksRequest {
@@ -5057,16 +4910,6 @@ export const ListSinksResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListSinksResponse): JsonSafe<ListSinksResponse> {
-    const obj: any = {};
-    if (message.sinks) {
-      obj.sinks = message.sinks.map(e => e ? LogSink.toJSON(e) : undefined);
-    } else {
-      obj.sinks = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListSinksResponse>): ListSinksResponse {
     const message = createBaseListSinksResponse();
     message.sinks = object.sinks?.map(e => LogSink.fromPartial(e)) || [];
@@ -5153,11 +4996,6 @@ export const GetSinkRequest = {
   fromJSON(object: any): GetSinkRequest {
     const obj = createBaseGetSinkRequest();
     if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
-    return obj;
-  },
-  toJSON(message: GetSinkRequest): JsonSafe<GetSinkRequest> {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
   fromPartial(object: DeepPartial<GetSinkRequest>): GetSinkRequest {
@@ -5249,13 +5087,6 @@ export const CreateSinkRequest = {
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.sink)) obj.sink = LogSink.fromJSON(object.sink);
     if (isSet(object.uniqueWriterIdentity)) obj.uniqueWriterIdentity = Boolean(object.uniqueWriterIdentity);
-    return obj;
-  },
-  toJSON(message: CreateSinkRequest): JsonSafe<CreateSinkRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toJSON(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.uniqueWriterIdentity = message.uniqueWriterIdentity);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateSinkRequest>): CreateSinkRequest {
@@ -5373,14 +5204,6 @@ export const UpdateSinkRequest = {
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
     return obj;
   },
-  toJSON(message: UpdateSinkRequest): JsonSafe<UpdateSinkRequest> {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sinkName = message.sinkName);
-    message.sink !== undefined && (obj.sink = message.sink ? LogSink.toJSON(message.sink) : undefined);
-    message.uniqueWriterIdentity !== undefined && (obj.uniqueWriterIdentity = message.uniqueWriterIdentity);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateSinkRequest>): UpdateSinkRequest {
     const message = createBaseUpdateSinkRequest();
     message.sinkName = object.sinkName ?? "";
@@ -5479,11 +5302,6 @@ export const DeleteSinkRequest = {
   fromJSON(object: any): DeleteSinkRequest {
     const obj = createBaseDeleteSinkRequest();
     if (isSet(object.sinkName)) obj.sinkName = String(object.sinkName);
-    return obj;
-  },
-  toJSON(message: DeleteSinkRequest): JsonSafe<DeleteSinkRequest> {
-    const obj: any = {};
-    message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
   },
   fromPartial(object: DeepPartial<DeleteSinkRequest>): DeleteSinkRequest {
@@ -5599,16 +5417,6 @@ export const LogExclusion = {
     if (isSet(object.disabled)) obj.disabled = Boolean(object.disabled);
     if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
     if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
-  },
-  toJSON(message: LogExclusion): JsonSafe<LogExclusion> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<LogExclusion>): LogExclusion {
@@ -5737,13 +5545,6 @@ export const ListExclusionsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListExclusionsRequest): JsonSafe<ListExclusionsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListExclusionsRequest>): ListExclusionsRequest {
     const message = createBaseListExclusionsRequest();
     message.parent = object.parent ?? "";
@@ -5841,16 +5642,6 @@ export const ListExclusionsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListExclusionsResponse): JsonSafe<ListExclusionsResponse> {
-    const obj: any = {};
-    if (message.exclusions) {
-      obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toJSON(e) : undefined);
-    } else {
-      obj.exclusions = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListExclusionsResponse>): ListExclusionsResponse {
     const message = createBaseListExclusionsResponse();
     message.exclusions = object.exclusions?.map(e => LogExclusion.fromPartial(e)) || [];
@@ -5939,11 +5730,6 @@ export const GetExclusionRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetExclusionRequest): JsonSafe<GetExclusionRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetExclusionRequest>): GetExclusionRequest {
     const message = createBaseGetExclusionRequest();
     message.name = object.name ?? "";
@@ -6025,12 +5811,6 @@ export const CreateExclusionRequest = {
     const obj = createBaseCreateExclusionRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.exclusion)) obj.exclusion = LogExclusion.fromJSON(object.exclusion);
-    return obj;
-  },
-  toJSON(message: CreateExclusionRequest): JsonSafe<CreateExclusionRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateExclusionRequest>): CreateExclusionRequest {
@@ -6133,13 +5913,6 @@ export const UpdateExclusionRequest = {
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
     return obj;
   },
-  toJSON(message: UpdateExclusionRequest): JsonSafe<UpdateExclusionRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateExclusionRequest>): UpdateExclusionRequest {
     const message = createBaseUpdateExclusionRequest();
     message.name = object.name ?? "";
@@ -6233,11 +6006,6 @@ export const DeleteExclusionRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: DeleteExclusionRequest): JsonSafe<DeleteExclusionRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteExclusionRequest>): DeleteExclusionRequest {
     const message = createBaseDeleteExclusionRequest();
     message.name = object.name ?? "";
@@ -6311,11 +6079,6 @@ export const GetCmekSettingsRequest = {
   fromJSON(object: any): GetCmekSettingsRequest {
     const obj = createBaseGetCmekSettingsRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: GetCmekSettingsRequest): JsonSafe<GetCmekSettingsRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<GetCmekSettingsRequest>): GetCmekSettingsRequest {
@@ -6407,13 +6170,6 @@ export const UpdateCmekSettingsRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.cmekSettings)) obj.cmekSettings = CmekSettings.fromJSON(object.cmekSettings);
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
-  },
-  toJSON(message: UpdateCmekSettingsRequest): JsonSafe<UpdateCmekSettingsRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UpdateCmekSettingsRequest>): UpdateCmekSettingsRequest {
@@ -6525,13 +6281,6 @@ export const CmekSettings = {
     if (isSet(object.serviceAccountId)) obj.serviceAccountId = String(object.serviceAccountId);
     return obj;
   },
-  toJSON(message: CmekSettings): JsonSafe<CmekSettings> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kmsKeyName = message.kmsKeyName);
-    message.serviceAccountId !== undefined && (obj.serviceAccountId = message.serviceAccountId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CmekSettings>): CmekSettings {
     const message = createBaseCmekSettings();
     message.name = object.name ?? "";
@@ -6619,11 +6368,6 @@ export const GetSettingsRequest = {
   fromJSON(object: any): GetSettingsRequest {
     const obj = createBaseGetSettingsRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: GetSettingsRequest): JsonSafe<GetSettingsRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<GetSettingsRequest>): GetSettingsRequest {
@@ -6715,13 +6459,6 @@ export const UpdateSettingsRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.settings)) obj.settings = Settings.fromJSON(object.settings);
     if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
-    return obj;
-  },
-  toJSON(message: UpdateSettingsRequest): JsonSafe<UpdateSettingsRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.settings !== undefined && (obj.settings = message.settings ? Settings.toJSON(message.settings) : undefined);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UpdateSettingsRequest>): UpdateSettingsRequest {
@@ -6849,15 +6586,6 @@ export const Settings = {
     if (isSet(object.disableDefaultSink)) obj.disableDefaultSink = Boolean(object.disableDefaultSink);
     return obj;
   },
-  toJSON(message: Settings): JsonSafe<Settings> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.kmsKeyName !== undefined && (obj.kmsKeyName = message.kmsKeyName);
-    message.kmsServiceAccountId !== undefined && (obj.kmsServiceAccountId = message.kmsServiceAccountId);
-    message.storageLocation !== undefined && (obj.storageLocation = message.storageLocation);
-    message.disableDefaultSink !== undefined && (obj.disableDefaultSink = message.disableDefaultSink);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Settings>): Settings {
     const message = createBaseSettings();
     message.name = object.name ?? "";
@@ -6975,13 +6703,6 @@ export const CopyLogEntriesRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.destination)) obj.destination = String(object.destination);
-    return obj;
-  },
-  toJSON(message: CopyLogEntriesRequest): JsonSafe<CopyLogEntriesRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.destination !== undefined && (obj.destination = message.destination);
     return obj;
   },
   fromPartial(object: DeepPartial<CopyLogEntriesRequest>): CopyLogEntriesRequest {
@@ -7121,17 +6842,6 @@ export const CopyLogEntriesMetadata = {
     if (isSet(object.writerIdentity)) obj.writerIdentity = String(object.writerIdentity);
     return obj;
   },
-  toJSON(message: CopyLogEntriesMetadata): JsonSafe<CopyLogEntriesMetadata> {
-    const obj: any = {};
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    message.state !== undefined && (obj.state = operationStateToJSON(message.state));
-    message.cancellationRequested !== undefined && (obj.cancellationRequested = message.cancellationRequested);
-    message.request !== undefined && (obj.request = message.request ? CopyLogEntriesRequest.toJSON(message.request) : undefined);
-    message.progress !== undefined && (obj.progress = Math.round(message.progress));
-    message.writerIdentity !== undefined && (obj.writerIdentity = message.writerIdentity);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CopyLogEntriesMetadata>): CopyLogEntriesMetadata {
     const message = createBaseCopyLogEntriesMetadata();
     message.startTime = object.startTime ?? undefined;
@@ -7249,11 +6959,6 @@ export const CopyLogEntriesResponse = {
   fromJSON(object: any): CopyLogEntriesResponse {
     const obj = createBaseCopyLogEntriesResponse();
     if (isSet(object.logEntriesCopiedCount)) obj.logEntriesCopiedCount = BigInt(object.logEntriesCopiedCount.toString());
-    return obj;
-  },
-  toJSON(message: CopyLogEntriesResponse): JsonSafe<CopyLogEntriesResponse> {
-    const obj: any = {};
-    message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CopyLogEntriesResponse>): CopyLogEntriesResponse {

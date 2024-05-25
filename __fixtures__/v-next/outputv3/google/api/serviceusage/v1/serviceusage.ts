@@ -1,7 +1,6 @@
 import { Service, ServiceAmino, ServiceSDKType } from "./resources";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -559,11 +558,6 @@ export const EnableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
@@ -637,11 +631,6 @@ export const EnableServiceResponse = {
   fromJSON(object: any): EnableServiceResponse {
     const obj = createBaseEnableServiceResponse();
     if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
-    return obj;
-  },
-  toJSON(message: EnableServiceResponse): JsonSafe<EnableServiceResponse> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
@@ -737,13 +726,6 @@ export const DisableServiceRequest = {
     if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
     return obj;
   },
-  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.disableDependentServices !== undefined && (obj.disableDependentServices = message.disableDependentServices);
-    message.checkIfServiceHasUsage !== undefined && (obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
-    return obj;
-  },
   fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
@@ -833,11 +815,6 @@ export const DisableServiceResponse = {
     if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
     return obj;
   },
-  toJSON(message: DisableServiceResponse): JsonSafe<DisableServiceResponse> {
-    const obj: any = {};
-    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
     if (object.service !== undefined && object.service !== null) {
@@ -913,11 +890,6 @@ export const GetServiceRequest = {
   fromJSON(object: any): GetServiceRequest {
     const obj = createBaseGetServiceRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
@@ -1017,14 +989,6 @@ export const ListServicesRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
-  },
-  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
@@ -1131,16 +1095,6 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
@@ -1237,16 +1191,6 @@ export const BatchEnableServicesRequest = {
     if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    if (message.serviceIds) {
-      obj.serviceIds = message.serviceIds.map(e => e);
-    } else {
-      obj.serviceIds = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
     message.parent = object.parent ?? "";
@@ -1341,20 +1285,6 @@ export const BatchEnableServicesResponse = {
     const obj = createBaseBatchEnableServicesResponse();
     if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
     if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchEnableServicesResponse): JsonSafe<BatchEnableServicesResponse> {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    if (message.failures) {
-      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toJSON(e) : undefined);
-    } else {
-      obj.failures = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BatchEnableServicesResponse>): BatchEnableServicesResponse {
@@ -1459,12 +1389,6 @@ export const BatchEnableServicesResponse_EnableFailure = {
     if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
     return obj;
   },
-  toJSON(message: BatchEnableServicesResponse_EnableFailure): JsonSafe<BatchEnableServicesResponse_EnableFailure> {
-    const obj: any = {};
-    message.serviceId !== undefined && (obj.serviceId = message.serviceId);
-    message.errorMessage !== undefined && (obj.errorMessage = message.errorMessage);
-    return obj;
-  },
   fromPartial(object: DeepPartial<BatchEnableServicesResponse_EnableFailure>): BatchEnableServicesResponse_EnableFailure {
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
     message.serviceId = object.serviceId ?? "";
@@ -1555,16 +1479,6 @@ export const BatchGetServicesRequest = {
     if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: BatchGetServicesRequest): JsonSafe<BatchGetServicesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    if (message.names) {
-      obj.names = message.names.map(e => e);
-    } else {
-      obj.names = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<BatchGetServicesRequest>): BatchGetServicesRequest {
     const message = createBaseBatchGetServicesRequest();
     message.parent = object.parent ?? "";
@@ -1651,15 +1565,6 @@ export const BatchGetServicesResponse = {
   fromJSON(object: any): BatchGetServicesResponse {
     const obj = createBaseBatchGetServicesResponse();
     if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchGetServicesResponse): JsonSafe<BatchGetServicesResponse> {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BatchGetServicesResponse>): BatchGetServicesResponse {

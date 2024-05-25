@@ -1,6 +1,5 @@
 import { Class, ClassAmino, ClassSDKType, NFT, NFTAmino, NFTSDKType } from "./nft";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
@@ -89,20 +88,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.classes)) obj.classes = object.classes.map((e: any) => Class.fromJSON(e));
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Entry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.classes) {
-      obj.classes = message.classes.map(e => e ? Class.toJSON(e) : undefined);
-    } else {
-      obj.classes = [];
-    }
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Entry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -206,16 +191,6 @@ export const Entry = {
     const obj = createBaseEntry();
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (Array.isArray(object?.nfts)) obj.nfts = object.nfts.map((e: any) => NFT.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Entry): JsonSafe<Entry> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    if (message.nfts) {
-      obj.nfts = message.nfts.map(e => e ? NFT.toJSON(e) : undefined);
-    } else {
-      obj.nfts = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Entry>): Entry {

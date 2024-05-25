@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 export interface ExprValue {
@@ -66,7 +67,7 @@ export const ExprValue = {
     if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => IdRef.fromJSON(e));
     return obj;
   },
-  toJSON(message: ExprValue): unknown {
+  toJSON(message: ExprValue): JsonSafe<ExprValue> {
     const obj: any = {};
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => e ? IdRef.toJSON(e) : undefined);
@@ -161,7 +162,7 @@ export const IdRef = {
     if (isSet(object.id)) obj.id = Number(object.id);
     return obj;
   },
-  toJSON(message: IdRef): unknown {
+  toJSON(message: IdRef): JsonSafe<IdRef> {
     const obj: any = {};
     message.id !== undefined && (obj.id = Math.round(message.id));
     return obj;

@@ -2,7 +2,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputAmino, InputSDKType, Output, OutputAmino, OutputSDKType } from "./bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
@@ -117,17 +116,6 @@ export const MsgSend = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgSend): JsonSafe<MsgSend> {
-    const obj: any = {};
-    message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
-    message.toAddress !== undefined && (obj.toAddress = message.toAddress);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.fromAddress = object.fromAddress ?? "";
@@ -215,10 +203,6 @@ export const MsgSendResponse = {
     const obj = createBaseMsgSendResponse();
     return obj;
   },
-  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
@@ -293,20 +277,6 @@ export const MsgMultiSend = {
     const obj = createBaseMsgMultiSend();
     if (Array.isArray(object?.inputs)) obj.inputs = object.inputs.map((e: any) => Input.fromJSON(e));
     if (Array.isArray(object?.outputs)) obj.outputs = object.outputs.map((e: any) => Output.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgMultiSend): JsonSafe<MsgMultiSend> {
-    const obj: any = {};
-    if (message.inputs) {
-      obj.inputs = message.inputs.map(e => e ? Input.toJSON(e) : undefined);
-    } else {
-      obj.inputs = [];
-    }
-    if (message.outputs) {
-      obj.outputs = message.outputs.map(e => e ? Output.toJSON(e) : undefined);
-    } else {
-      obj.outputs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgMultiSend>): MsgMultiSend {
@@ -393,10 +363,6 @@ export const MsgMultiSendResponse = {
   },
   fromJSON(_: any): MsgMultiSendResponse {
     const obj = createBaseMsgMultiSendResponse();
-    return obj;
-  },
-  toJSON(_: MsgMultiSendResponse): JsonSafe<MsgMultiSendResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgMultiSendResponse>): MsgMultiSendResponse {

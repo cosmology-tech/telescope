@@ -1,6 +1,7 @@
 import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -85,7 +86,7 @@ export const GenesisState = {
       gasMeters: Array.isArray(object?.gasMeters) ? object.gasMeters.map((e: any) => GasMeter.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.incentives) {
@@ -188,7 +189,7 @@ export const Params = {
       rewardScaler: isSet(object.rewardScaler) ? String(object.rewardScaler) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableIncentives !== undefined && (obj.enableIncentives = message.enableIncentives);
     message.allocationLimit !== undefined && (obj.allocationLimit = message.allocationLimit);

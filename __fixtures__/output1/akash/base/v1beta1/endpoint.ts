@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta1";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
@@ -77,7 +78,7 @@ export const Endpoint = {
       kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1
     };
   },
-  toJSON(message: Endpoint): unknown {
+  toJSON(message: Endpoint): JsonSafe<Endpoint> {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
     return obj;

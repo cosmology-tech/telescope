@@ -4,6 +4,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
@@ -381,7 +382,7 @@ export const ModuleBalanceRequest = {
   fromJSON(_: any): ModuleBalanceRequest {
     return {};
   },
-  toJSON(_: ModuleBalanceRequest): unknown {
+  toJSON(_: ModuleBalanceRequest): JsonSafe<ModuleBalanceRequest> {
     const obj: any = {};
     return obj;
   },
@@ -464,7 +465,7 @@ export const ModuleBalanceResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ModuleBalanceResponse): unknown {
+  toJSON(message: ModuleBalanceResponse): JsonSafe<ModuleBalanceResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -558,7 +559,7 @@ export const ModuleLockedAmountRequest = {
   fromJSON(_: any): ModuleLockedAmountRequest {
     return {};
   },
-  toJSON(_: ModuleLockedAmountRequest): unknown {
+  toJSON(_: ModuleLockedAmountRequest): JsonSafe<ModuleLockedAmountRequest> {
     const obj: any = {};
     return obj;
   },
@@ -641,7 +642,7 @@ export const ModuleLockedAmountResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ModuleLockedAmountResponse): unknown {
+  toJSON(message: ModuleLockedAmountResponse): JsonSafe<ModuleLockedAmountResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -745,7 +746,7 @@ export const AccountUnlockableCoinsRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: AccountUnlockableCoinsRequest): unknown {
+  toJSON(message: AccountUnlockableCoinsRequest): JsonSafe<AccountUnlockableCoinsRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -839,7 +840,7 @@ export const AccountUnlockableCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountUnlockableCoinsResponse): unknown {
+  toJSON(message: AccountUnlockableCoinsResponse): JsonSafe<AccountUnlockableCoinsResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -943,7 +944,7 @@ export const AccountUnlockingCoinsRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: AccountUnlockingCoinsRequest): unknown {
+  toJSON(message: AccountUnlockingCoinsRequest): JsonSafe<AccountUnlockingCoinsRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -1037,7 +1038,7 @@ export const AccountUnlockingCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountUnlockingCoinsResponse): unknown {
+  toJSON(message: AccountUnlockingCoinsResponse): JsonSafe<AccountUnlockingCoinsResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1141,7 +1142,7 @@ export const AccountLockedCoinsRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: AccountLockedCoinsRequest): unknown {
+  toJSON(message: AccountLockedCoinsRequest): JsonSafe<AccountLockedCoinsRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -1235,7 +1236,7 @@ export const AccountLockedCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedCoinsResponse): unknown {
+  toJSON(message: AccountLockedCoinsResponse): JsonSafe<AccountLockedCoinsResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1347,7 +1348,7 @@ export const AccountLockedPastTimeRequest = {
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
-  toJSON(message: AccountLockedPastTimeRequest): unknown {
+  toJSON(message: AccountLockedPastTimeRequest): JsonSafe<AccountLockedPastTimeRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -1450,7 +1451,7 @@ export const AccountLockedPastTimeResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedPastTimeResponse): unknown {
+  toJSON(message: AccountLockedPastTimeResponse): JsonSafe<AccountLockedPastTimeResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -1562,7 +1563,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
-  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyRequest): unknown {
+  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyRequest): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -1665,7 +1666,7 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyResponse): unknown {
+  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyResponse): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -1777,7 +1778,7 @@ export const AccountUnlockedBeforeTimeRequest = {
       timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
     };
   },
-  toJSON(message: AccountUnlockedBeforeTimeRequest): unknown {
+  toJSON(message: AccountUnlockedBeforeTimeRequest): JsonSafe<AccountUnlockedBeforeTimeRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -1880,7 +1881,7 @@ export const AccountUnlockedBeforeTimeResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountUnlockedBeforeTimeResponse): unknown {
+  toJSON(message: AccountUnlockedBeforeTimeResponse): JsonSafe<AccountUnlockedBeforeTimeResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -2000,7 +2001,7 @@ export const AccountLockedPastTimeDenomRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: AccountLockedPastTimeDenomRequest): unknown {
+  toJSON(message: AccountLockedPastTimeDenomRequest): JsonSafe<AccountLockedPastTimeDenomRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -2112,7 +2113,7 @@ export const AccountLockedPastTimeDenomResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedPastTimeDenomResponse): unknown {
+  toJSON(message: AccountLockedPastTimeDenomResponse): JsonSafe<AccountLockedPastTimeDenomResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -2224,7 +2225,7 @@ export const LockedDenomRequest = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: LockedDenomRequest): unknown {
+  toJSON(message: LockedDenomRequest): JsonSafe<LockedDenomRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -2327,7 +2328,7 @@ export const LockedDenomResponse = {
       amount: isSet(object.amount) ? String(object.amount) : ""
     };
   },
-  toJSON(message: LockedDenomResponse): unknown {
+  toJSON(message: LockedDenomResponse): JsonSafe<LockedDenomResponse> {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = message.amount);
     return obj;
@@ -2421,7 +2422,7 @@ export const LockedRequest = {
       lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: LockedRequest): unknown {
+  toJSON(message: LockedRequest): JsonSafe<LockedRequest> {
     const obj: any = {};
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
@@ -2515,7 +2516,7 @@ export const LockedResponse = {
       lock: isSet(object.lock) ? PeriodLock.fromJSON(object.lock) : undefined
     };
   },
-  toJSON(message: LockedResponse): unknown {
+  toJSON(message: LockedResponse): JsonSafe<LockedResponse> {
     const obj: any = {};
     message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toJSON(message.lock) : undefined);
     return obj;
@@ -2609,7 +2610,7 @@ export const SyntheticLockupsByLockupIDRequest = {
       lockId: isSet(object.lockId) ? BigInt(object.lockId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: SyntheticLockupsByLockupIDRequest): unknown {
+  toJSON(message: SyntheticLockupsByLockupIDRequest): JsonSafe<SyntheticLockupsByLockupIDRequest> {
     const obj: any = {};
     message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
@@ -2703,7 +2704,7 @@ export const SyntheticLockupsByLockupIDResponse = {
       syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: SyntheticLockupsByLockupIDResponse): unknown {
+  toJSON(message: SyntheticLockupsByLockupIDResponse): JsonSafe<SyntheticLockupsByLockupIDResponse> {
     const obj: any = {};
     if (message.syntheticLocks) {
       obj.syntheticLocks = message.syntheticLocks.map(e => e ? SyntheticLock.toJSON(e) : undefined);
@@ -2815,7 +2816,7 @@ export const AccountLockedLongerDurationRequest = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: AccountLockedLongerDurationRequest): unknown {
+  toJSON(message: AccountLockedLongerDurationRequest): JsonSafe<AccountLockedLongerDurationRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -2918,7 +2919,7 @@ export const AccountLockedLongerDurationResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedLongerDurationResponse): unknown {
+  toJSON(message: AccountLockedLongerDurationResponse): JsonSafe<AccountLockedLongerDurationResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -3030,7 +3031,7 @@ export const AccountLockedDurationRequest = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: AccountLockedDurationRequest): unknown {
+  toJSON(message: AccountLockedDurationRequest): JsonSafe<AccountLockedDurationRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -3133,7 +3134,7 @@ export const AccountLockedDurationResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedDurationResponse): unknown {
+  toJSON(message: AccountLockedDurationResponse): JsonSafe<AccountLockedDurationResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -3245,7 +3246,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): unknown {
+  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -3348,7 +3349,7 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): unknown {
+  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -3468,7 +3469,7 @@ export const AccountLockedLongerDurationDenomRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: AccountLockedLongerDurationDenomRequest): unknown {
+  toJSON(message: AccountLockedLongerDurationDenomRequest): JsonSafe<AccountLockedLongerDurationDenomRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -3580,7 +3581,7 @@ export const AccountLockedLongerDurationDenomResponse = {
       locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: AccountLockedLongerDurationDenomResponse): unknown {
+  toJSON(message: AccountLockedLongerDurationDenomResponse): JsonSafe<AccountLockedLongerDurationDenomResponse> {
     const obj: any = {};
     if (message.locks) {
       obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
@@ -3674,7 +3675,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -3757,7 +3758,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

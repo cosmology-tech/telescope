@@ -2,6 +2,7 @@ import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSD
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
@@ -88,7 +89,7 @@ export const CertificateResponse = {
       serial: isSet(object.serial) ? String(object.serial) : ""
     };
   },
-  toJSON(message: CertificateResponse): unknown {
+  toJSON(message: CertificateResponse): JsonSafe<CertificateResponse> {
     const obj: any = {};
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
     message.serial !== undefined && (obj.serial = message.serial);
@@ -199,7 +200,7 @@ export const QueryCertificatesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryCertificatesRequest): unknown {
+  toJSON(message: QueryCertificatesRequest): JsonSafe<QueryCertificatesRequest> {
     const obj: any = {};
     message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toJSON(message.filter) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -310,7 +311,7 @@ export const QueryCertificatesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryCertificatesResponse): unknown {
+  toJSON(message: QueryCertificatesResponse): JsonSafe<QueryCertificatesResponse> {
     const obj: any = {};
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? CertificateResponse.toJSON(e) : undefined);

@@ -36,20 +36,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    signProviderAttributes(value: MsgSignProviderAttributes) {
-      return {
-        typeUrl: "/akash.audit.v1beta2.MsgSignProviderAttributes",
-        value: MsgSignProviderAttributes.toJSON(value)
-      };
-    },
-    deleteProviderAttributes(value: MsgDeleteProviderAttributes) {
-      return {
-        typeUrl: "/akash.audit.v1beta2.MsgDeleteProviderAttributes",
-        value: MsgDeleteProviderAttributes.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     signProviderAttributes(value: any) {
       return {

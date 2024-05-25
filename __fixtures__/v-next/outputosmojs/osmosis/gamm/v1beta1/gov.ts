@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * ReplaceMigrationRecordsProposal is a gov Content type for updating the
@@ -102,7 +103,7 @@ export const ReplaceMigrationRecordsProposal = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: ReplaceMigrationRecordsProposal): unknown {
+  toJSON(message: ReplaceMigrationRecordsProposal): JsonSafe<ReplaceMigrationRecordsProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -213,7 +214,7 @@ export const UpdateMigrationRecordsProposal = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: UpdateMigrationRecordsProposal): unknown {
+  toJSON(message: UpdateMigrationRecordsProposal): JsonSafe<UpdateMigrationRecordsProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

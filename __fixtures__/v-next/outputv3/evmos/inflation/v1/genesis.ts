@@ -1,7 +1,6 @@
 import { ExponentialCalculation, ExponentialCalculationAmino, ExponentialCalculationSDKType, InflationDistribution, InflationDistributionAmino, InflationDistributionSDKType } from "./inflation";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
@@ -141,15 +140,6 @@ export const GenesisState = {
     if (isSet(object.skippedEpochs)) obj.skippedEpochs = BigInt(object.skippedEpochs.toString());
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
-    message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.epochsPerPeriod !== undefined && (obj.epochsPerPeriod = (message.epochsPerPeriod || BigInt(0)).toString());
-    message.skippedEpochs !== undefined && (obj.skippedEpochs = (message.skippedEpochs || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     if (object.params !== undefined && object.params !== null) {
@@ -283,14 +273,6 @@ export const Params = {
     if (isSet(object.exponentialCalculation)) obj.exponentialCalculation = ExponentialCalculation.fromJSON(object.exponentialCalculation);
     if (isSet(object.inflationDistribution)) obj.inflationDistribution = InflationDistribution.fromJSON(object.inflationDistribution);
     if (isSet(object.enableInflation)) obj.enableInflation = Boolean(object.enableInflation);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
-    message.exponentialCalculation !== undefined && (obj.exponentialCalculation = message.exponentialCalculation ? ExponentialCalculation.toJSON(message.exponentialCalculation) : undefined);
-    message.inflationDistribution !== undefined && (obj.inflationDistribution = message.inflationDistribution ? InflationDistribution.toJSON(message.inflationDistribution) : undefined);
-    message.enableInflation !== undefined && (obj.enableInflation = message.enableInflation);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

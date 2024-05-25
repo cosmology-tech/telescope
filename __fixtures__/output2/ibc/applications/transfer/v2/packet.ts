@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v2";
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -76,7 +77,7 @@ export const FungibleTokenPacketData = {
       receiver: isSet(object.receiver) ? String(object.receiver) : ""
     };
   },
-  toJSON(message: FungibleTokenPacketData): unknown {
+  toJSON(message: FungibleTokenPacketData): JsonSafe<FungibleTokenPacketData> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.amount !== undefined && (obj.amount = message.amount);

@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
@@ -63,7 +64,7 @@ export const GroupID = {
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
-  toJSON(message: GroupID): unknown {
+  toJSON(message: GroupID): JsonSafe<GroupID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());

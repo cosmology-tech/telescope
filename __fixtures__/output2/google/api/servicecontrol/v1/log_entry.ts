@@ -7,6 +7,7 @@ import { Any } from "../../../protobuf/any";
 import { Struct } from "../../../protobuf/struct";
 import { Long, isSet, DeepPartial, fromJsonTimestamp, isObject, fromTimestamp } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -165,7 +166,7 @@ export const LogEntry_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: LogEntry_LabelsEntry): unknown {
+  toJSON(message: LogEntry_LabelsEntry): JsonSafe<LogEntry_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -311,7 +312,7 @@ export const LogEntry = {
       sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined
     };
   },
-  toJSON(message: LogEntry): unknown {
+  toJSON(message: LogEntry): JsonSafe<LogEntry> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.timestamp !== undefined && (obj.timestamp = fromTimestamp(message.timestamp).toISOString());
@@ -414,7 +415,7 @@ export const LogEntryOperation = {
       last: isSet(object.last) ? Boolean(object.last) : false
     };
   },
-  toJSON(message: LogEntryOperation): unknown {
+  toJSON(message: LogEntryOperation): JsonSafe<LogEntryOperation> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.producer !== undefined && (obj.producer = message.producer);
@@ -481,7 +482,7 @@ export const LogEntrySourceLocation = {
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
-  toJSON(message: LogEntrySourceLocation): unknown {
+  toJSON(message: LogEntrySourceLocation): JsonSafe<LogEntrySourceLocation> {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
     message.line !== undefined && (obj.line = (message.line || Long.ZERO).toString());

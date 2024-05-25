@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoin {
@@ -150,13 +149,6 @@ export const MsgConvertCoin = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     return obj;
   },
-  toJSON(message: MsgConvertCoin): JsonSafe<MsgConvertCoin> {
-    const obj: any = {};
-    message.coin !== undefined && (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgConvertCoin>): MsgConvertCoin {
     const message = createBaseMsgConvertCoin();
     if (object.coin !== undefined && object.coin !== null) {
@@ -237,10 +229,6 @@ export const MsgConvertCoinResponse = {
   },
   fromJSON(_: any): MsgConvertCoinResponse {
     const obj = createBaseMsgConvertCoinResponse();
-    return obj;
-  },
-  toJSON(_: MsgConvertCoinResponse): JsonSafe<MsgConvertCoinResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgConvertCoinResponse>): MsgConvertCoinResponse {
@@ -334,14 +322,6 @@ export const MsgConvertERC20 = {
     if (isSet(object.sender)) obj.sender = String(object.sender);
     return obj;
   },
-  toJSON(message: MsgConvertERC20): JsonSafe<MsgConvertERC20> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    message.sender !== undefined && (obj.sender = message.sender);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgConvertERC20>): MsgConvertERC20 {
     const message = createBaseMsgConvertERC20();
     message.contractAddress = object.contractAddress ?? "";
@@ -427,10 +407,6 @@ export const MsgConvertERC20Response = {
   },
   fromJSON(_: any): MsgConvertERC20Response {
     const obj = createBaseMsgConvertERC20Response();
-    return obj;
-  },
-  toJSON(_: MsgConvertERC20Response): JsonSafe<MsgConvertERC20Response> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgConvertERC20Response>): MsgConvertERC20Response {

@@ -2,7 +2,6 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { ContractInfo, ContractInfoAmino, ContractInfoSDKType, ContractCodeHistoryEntry, ContractCodeHistoryEntryAmino, ContractCodeHistoryEntrySDKType, Model, ModelAmino, ModelSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /**
@@ -561,11 +560,6 @@ export const QueryContractInfoRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryContractInfoRequest): JsonSafe<QueryContractInfoRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryContractInfoRequest>): QueryContractInfoRequest {
     const message = createBaseQueryContractInfoRequest();
     message.address = object.address ?? "";
@@ -648,12 +642,6 @@ export const QueryContractInfoResponse = {
     const obj = createBaseQueryContractInfoResponse();
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.contractInfo)) obj.contractInfo = ContractInfo.fromJSON(object.contractInfo);
-    return obj;
-  },
-  toJSON(message: QueryContractInfoResponse): JsonSafe<QueryContractInfoResponse> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.contractInfo !== undefined && (obj.contractInfo = message.contractInfo ? ContractInfo.toJSON(message.contractInfo) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryContractInfoResponse>): QueryContractInfoResponse {
@@ -749,12 +737,6 @@ export const QueryContractHistoryRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryContractHistoryRequest): JsonSafe<QueryContractHistoryRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryContractHistoryRequest>): QueryContractHistoryRequest {
     const message = createBaseQueryContractHistoryRequest();
     message.address = object.address ?? "";
@@ -846,16 +828,6 @@ export const QueryContractHistoryResponse = {
     const obj = createBaseQueryContractHistoryResponse();
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => ContractCodeHistoryEntry.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryContractHistoryResponse): JsonSafe<QueryContractHistoryResponse> {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? ContractCodeHistoryEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryContractHistoryResponse>): QueryContractHistoryResponse {
@@ -957,12 +929,6 @@ export const QueryContractsByCodeRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryContractsByCodeRequest): JsonSafe<QueryContractsByCodeRequest> {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryContractsByCodeRequest>): QueryContractsByCodeRequest {
     const message = createBaseQueryContractsByCodeRequest();
     if (object.codeId !== undefined && object.codeId !== null) {
@@ -1056,16 +1022,6 @@ export const QueryContractsByCodeResponse = {
     const obj = createBaseQueryContractsByCodeResponse();
     if (Array.isArray(object?.contracts)) obj.contracts = object.contracts.map((e: any) => String(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryContractsByCodeResponse): JsonSafe<QueryContractsByCodeResponse> {
-    const obj: any = {};
-    if (message.contracts) {
-      obj.contracts = message.contracts.map(e => e);
-    } else {
-      obj.contracts = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryContractsByCodeResponse>): QueryContractsByCodeResponse {
@@ -1167,12 +1123,6 @@ export const QueryAllContractStateRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAllContractStateRequest): JsonSafe<QueryAllContractStateRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAllContractStateRequest>): QueryAllContractStateRequest {
     const message = createBaseQueryAllContractStateRequest();
     message.address = object.address ?? "";
@@ -1264,16 +1214,6 @@ export const QueryAllContractStateResponse = {
     const obj = createBaseQueryAllContractStateResponse();
     if (Array.isArray(object?.models)) obj.models = object.models.map((e: any) => Model.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAllContractStateResponse): JsonSafe<QueryAllContractStateResponse> {
-    const obj: any = {};
-    if (message.models) {
-      obj.models = message.models.map(e => e ? Model.toJSON(e) : undefined);
-    } else {
-      obj.models = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAllContractStateResponse>): QueryAllContractStateResponse {
@@ -1375,12 +1315,6 @@ export const QueryRawContractStateRequest = {
     if (isSet(object.queryData)) obj.queryData = bytesFromBase64(object.queryData);
     return obj;
   },
-  toJSON(message: QueryRawContractStateRequest): JsonSafe<QueryRawContractStateRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryRawContractStateRequest>): QueryRawContractStateRequest {
     const message = createBaseQueryRawContractStateRequest();
     message.address = object.address ?? "";
@@ -1462,11 +1396,6 @@ export const QueryRawContractStateResponse = {
   fromJSON(object: any): QueryRawContractStateResponse {
     const obj = createBaseQueryRawContractStateResponse();
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
-    return obj;
-  },
-  toJSON(message: QueryRawContractStateResponse): JsonSafe<QueryRawContractStateResponse> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<QueryRawContractStateResponse>): QueryRawContractStateResponse {
@@ -1553,12 +1482,6 @@ export const QuerySmartContractStateRequest = {
     if (isSet(object.queryData)) obj.queryData = bytesFromBase64(object.queryData);
     return obj;
   },
-  toJSON(message: QuerySmartContractStateRequest): JsonSafe<QuerySmartContractStateRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QuerySmartContractStateRequest>): QuerySmartContractStateRequest {
     const message = createBaseQuerySmartContractStateRequest();
     message.address = object.address ?? "";
@@ -1642,11 +1565,6 @@ export const QuerySmartContractStateResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: QuerySmartContractStateResponse): JsonSafe<QuerySmartContractStateResponse> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QuerySmartContractStateResponse>): QuerySmartContractStateResponse {
     const message = createBaseQuerySmartContractStateResponse();
     message.data = object.data ?? new Uint8Array();
@@ -1721,11 +1639,6 @@ export const QueryCodeRequest = {
   fromJSON(object: any): QueryCodeRequest {
     const obj = createBaseQueryCodeRequest();
     if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
-    return obj;
-  },
-  toJSON(message: QueryCodeRequest): JsonSafe<QueryCodeRequest> {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCodeRequest>): QueryCodeRequest {
@@ -1820,13 +1733,6 @@ export const CodeInfoResponse = {
     if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
     if (isSet(object.creator)) obj.creator = String(object.creator);
     if (isSet(object.dataHash)) obj.dataHash = bytesFromBase64(object.dataHash);
-    return obj;
-  },
-  toJSON(message: CodeInfoResponse): JsonSafe<CodeInfoResponse> {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.dataHash !== undefined && (obj.dataHash = base64FromBytes(message.dataHash !== undefined ? message.dataHash : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<CodeInfoResponse>): CodeInfoResponse {
@@ -1929,12 +1835,6 @@ export const QueryCodeResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: QueryCodeResponse): JsonSafe<QueryCodeResponse> {
-    const obj: any = {};
-    message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfoResponse.toJSON(message.codeInfo) : undefined);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryCodeResponse>): QueryCodeResponse {
     const message = createBaseQueryCodeResponse();
     if (object.codeInfo !== undefined && object.codeInfo !== null) {
@@ -2018,11 +1918,6 @@ export const QueryCodesRequest = {
   fromJSON(object: any): QueryCodesRequest {
     const obj = createBaseQueryCodesRequest();
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryCodesRequest): JsonSafe<QueryCodesRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCodesRequest>): QueryCodesRequest {
@@ -2109,16 +2004,6 @@ export const QueryCodesResponse = {
     const obj = createBaseQueryCodesResponse();
     if (Array.isArray(object?.codeInfos)) obj.codeInfos = object.codeInfos.map((e: any) => CodeInfoResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryCodesResponse): JsonSafe<QueryCodesResponse> {
-    const obj: any = {};
-    if (message.codeInfos) {
-      obj.codeInfos = message.codeInfos.map(e => e ? CodeInfoResponse.toJSON(e) : undefined);
-    } else {
-      obj.codeInfos = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCodesResponse>): QueryCodesResponse {
@@ -2210,11 +2095,6 @@ export const QueryPinnedCodesRequest = {
   fromJSON(object: any): QueryPinnedCodesRequest {
     const obj = createBaseQueryPinnedCodesRequest();
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryPinnedCodesRequest): JsonSafe<QueryPinnedCodesRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPinnedCodesRequest>): QueryPinnedCodesRequest {
@@ -2310,16 +2190,6 @@ export const QueryPinnedCodesResponse = {
     const obj = createBaseQueryPinnedCodesResponse();
     if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => BigInt(e.toString()));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryPinnedCodesResponse): JsonSafe<QueryPinnedCodesResponse> {
-    const obj: any = {};
-    if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.codeIds = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPinnedCodesResponse>): QueryPinnedCodesResponse {

@@ -1,7 +1,6 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, toTimestamp, fromTimestamp } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.p2p";
 export interface ProtocolVersion {
   p2p: bigint;
@@ -164,13 +163,6 @@ export const ProtocolVersion = {
     if (isSet(object.app)) obj.app = BigInt(object.app.toString());
     return obj;
   },
-  toJSON(message: ProtocolVersion): JsonSafe<ProtocolVersion> {
-    const obj: any = {};
-    message.p2p !== undefined && (obj.p2p = (message.p2p || BigInt(0)).toString());
-    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
-    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ProtocolVersion>): ProtocolVersion {
     const message = createBaseProtocolVersion();
     if (object.p2p !== undefined && object.p2p !== null) {
@@ -322,18 +314,6 @@ export const NodeInfo = {
     if (isSet(object.other)) obj.other = NodeInfoOther.fromJSON(object.other);
     return obj;
   },
-  toJSON(message: NodeInfo): JsonSafe<NodeInfo> {
-    const obj: any = {};
-    message.protocolVersion !== undefined && (obj.protocolVersion = message.protocolVersion ? ProtocolVersion.toJSON(message.protocolVersion) : undefined);
-    message.nodeId !== undefined && (obj.nodeId = message.nodeId);
-    message.listenAddr !== undefined && (obj.listenAddr = message.listenAddr);
-    message.network !== undefined && (obj.network = message.network);
-    message.version !== undefined && (obj.version = message.version);
-    message.channels !== undefined && (obj.channels = base64FromBytes(message.channels !== undefined ? message.channels : new Uint8Array()));
-    message.moniker !== undefined && (obj.moniker = message.moniker);
-    message.other !== undefined && (obj.other = message.other ? NodeInfoOther.toJSON(message.other) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<NodeInfo>): NodeInfo {
     const message = createBaseNodeInfo();
     if (object.protocolVersion !== undefined && object.protocolVersion !== null) {
@@ -470,12 +450,6 @@ export const NodeInfoOther = {
     if (isSet(object.rpcAddress)) obj.rpcAddress = String(object.rpcAddress);
     return obj;
   },
-  toJSON(message: NodeInfoOther): JsonSafe<NodeInfoOther> {
-    const obj: any = {};
-    message.txIndex !== undefined && (obj.txIndex = message.txIndex);
-    message.rpcAddress !== undefined && (obj.rpcAddress = message.rpcAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<NodeInfoOther>): NodeInfoOther {
     const message = createBaseNodeInfoOther();
     message.txIndex = object.txIndex ?? "";
@@ -572,17 +546,6 @@ export const PeerInfo = {
     if (isSet(object.id)) obj.id = String(object.id);
     if (Array.isArray(object?.addressInfo)) obj.addressInfo = object.addressInfo.map((e: any) => PeerAddressInfo.fromJSON(e));
     if (isSet(object.lastConnected)) obj.lastConnected = new Date(object.lastConnected);
-    return obj;
-  },
-  toJSON(message: PeerInfo): JsonSafe<PeerInfo> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    if (message.addressInfo) {
-      obj.addressInfo = message.addressInfo.map(e => e ? PeerAddressInfo.toJSON(e) : undefined);
-    } else {
-      obj.addressInfo = [];
-    }
-    message.lastConnected !== undefined && (obj.lastConnected = message.lastConnected.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<PeerInfo>): PeerInfo {
@@ -702,14 +665,6 @@ export const PeerAddressInfo = {
     if (isSet(object.lastDialSuccess)) obj.lastDialSuccess = new Date(object.lastDialSuccess);
     if (isSet(object.lastDialFailure)) obj.lastDialFailure = new Date(object.lastDialFailure);
     if (isSet(object.dialFailures)) obj.dialFailures = Number(object.dialFailures);
-    return obj;
-  },
-  toJSON(message: PeerAddressInfo): JsonSafe<PeerAddressInfo> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.lastDialSuccess !== undefined && (obj.lastDialSuccess = message.lastDialSuccess.toISOString());
-    message.lastDialFailure !== undefined && (obj.lastDialFailure = message.lastDialFailure.toISOString());
-    message.dialFailures !== undefined && (obj.dialFailures = Math.round(message.dialFailures));
     return obj;
   },
   fromPartial(object: DeepPartial<PeerAddressInfo>): PeerAddressInfo {

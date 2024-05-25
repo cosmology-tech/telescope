@@ -1,7 +1,6 @@
 import { IdentifiedChannel, IdentifiedChannelAmino, IdentifiedChannelSDKType, PacketState, PacketStateAmino, PacketStateSDKType } from "./channel";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /** GenesisState defines the ibc channel submodule's genesis state. */
 export interface GenesisState {
@@ -163,46 +162,6 @@ export const GenesisState = {
     if (Array.isArray(object?.recvSequences)) obj.recvSequences = object.recvSequences.map((e: any) => PacketSequence.fromJSON(e));
     if (Array.isArray(object?.ackSequences)) obj.ackSequences = object.ackSequences.map((e: any) => PacketSequence.fromJSON(e));
     if (isSet(object.nextChannelSequence)) obj.nextChannelSequence = BigInt(object.nextChannelSequence.toString());
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.channels) {
-      obj.channels = message.channels.map(e => e ? IdentifiedChannel.toJSON(e) : undefined);
-    } else {
-      obj.channels = [];
-    }
-    if (message.acknowledgements) {
-      obj.acknowledgements = message.acknowledgements.map(e => e ? PacketState.toJSON(e) : undefined);
-    } else {
-      obj.acknowledgements = [];
-    }
-    if (message.commitments) {
-      obj.commitments = message.commitments.map(e => e ? PacketState.toJSON(e) : undefined);
-    } else {
-      obj.commitments = [];
-    }
-    if (message.receipts) {
-      obj.receipts = message.receipts.map(e => e ? PacketState.toJSON(e) : undefined);
-    } else {
-      obj.receipts = [];
-    }
-    if (message.sendSequences) {
-      obj.sendSequences = message.sendSequences.map(e => e ? PacketSequence.toJSON(e) : undefined);
-    } else {
-      obj.sendSequences = [];
-    }
-    if (message.recvSequences) {
-      obj.recvSequences = message.recvSequences.map(e => e ? PacketSequence.toJSON(e) : undefined);
-    } else {
-      obj.recvSequences = [];
-    }
-    if (message.ackSequences) {
-      obj.ackSequences = message.ackSequences.map(e => e ? PacketSequence.toJSON(e) : undefined);
-    } else {
-      obj.ackSequences = [];
-    }
-    message.nextChannelSequence !== undefined && (obj.nextChannelSequence = (message.nextChannelSequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
@@ -388,13 +347,6 @@ export const PacketSequence = {
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (isSet(object.channelId)) obj.channelId = String(object.channelId);
     if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
-    return obj;
-  },
-  toJSON(message: PacketSequence): JsonSafe<PacketSequence> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PacketSequence>): PacketSequence {

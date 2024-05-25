@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -79,7 +80,7 @@ export const Minter = {
       annualProvisions: isSet(object.annualProvisions) ? String(object.annualProvisions) : ""
     };
   },
-  toJSON(message: Minter): unknown {
+  toJSON(message: Minter): JsonSafe<Minter> {
     const obj: any = {};
     message.inflation !== undefined && (obj.inflation = message.inflation);
     message.annualProvisions !== undefined && (obj.annualProvisions = message.annualProvisions);
@@ -178,7 +179,7 @@ export const Params = {
       blocksPerYear: isSet(object.blocksPerYear) ? Long.fromValue(object.blocksPerYear) : Long.UZERO
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.inflationRateChange !== undefined && (obj.inflationRateChange = message.inflationRateChange);

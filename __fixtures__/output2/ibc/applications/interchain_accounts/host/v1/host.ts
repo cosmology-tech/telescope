@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../../helpers";
+import { JsonSafe } from "../../../../../json-safe";
 export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
 /**
  * Params defines the set of on-chain interchain accounts parameters.
@@ -55,7 +56,7 @@ export const Params = {
       allowMessages: Array.isArray(object?.allowMessages) ? object.allowMessages.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.hostEnabled !== undefined && (obj.hostEnabled = message.hostEnabled);
     if (message.allowMessages) {

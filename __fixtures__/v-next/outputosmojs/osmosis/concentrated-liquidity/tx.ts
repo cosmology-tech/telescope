@@ -3,6 +3,7 @@ import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** ===================== MsgCreatePosition */
@@ -282,7 +283,7 @@ export const MsgCreatePosition = {
       tokenMinAmount1: isSet(object.tokenMinAmount1) ? String(object.tokenMinAmount1) : ""
     };
   },
-  toJSON(message: MsgCreatePosition): unknown {
+  toJSON(message: MsgCreatePosition): JsonSafe<MsgCreatePosition> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
@@ -471,7 +472,7 @@ export const MsgCreatePositionResponse = {
       liquidityCreated: isSet(object.liquidityCreated) ? String(object.liquidityCreated) : ""
     };
   },
-  toJSON(message: MsgCreatePositionResponse): unknown {
+  toJSON(message: MsgCreatePositionResponse): JsonSafe<MsgCreatePositionResponse> {
     const obj: any = {};
     message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     message.amount0 !== undefined && (obj.amount0 = message.amount0);
@@ -617,7 +618,7 @@ export const MsgWithdrawPosition = {
       liquidityAmount: isSet(object.liquidityAmount) ? String(object.liquidityAmount) : ""
     };
   },
-  toJSON(message: MsgWithdrawPosition): unknown {
+  toJSON(message: MsgWithdrawPosition): JsonSafe<MsgWithdrawPosition> {
     const obj: any = {};
     message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
@@ -737,7 +738,7 @@ export const MsgWithdrawPositionResponse = {
       amount1: isSet(object.amount1) ? String(object.amount1) : ""
     };
   },
-  toJSON(message: MsgWithdrawPositionResponse): unknown {
+  toJSON(message: MsgWithdrawPositionResponse): JsonSafe<MsgWithdrawPositionResponse> {
     const obj: any = {};
     message.amount0 !== undefined && (obj.amount0 = message.amount0);
     message.amount1 !== undefined && (obj.amount1 = message.amount1);
@@ -857,7 +858,7 @@ export const MsgCollectFees = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgCollectFees): unknown {
+  toJSON(message: MsgCollectFees): JsonSafe<MsgCollectFees> {
     const obj: any = {};
     if (message.positionIds) {
       obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
@@ -970,7 +971,7 @@ export const MsgCollectFeesResponse = {
       collectedFees: Array.isArray(object?.collectedFees) ? object.collectedFees.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgCollectFeesResponse): unknown {
+  toJSON(message: MsgCollectFeesResponse): JsonSafe<MsgCollectFeesResponse> {
     const obj: any = {};
     if (message.collectedFees) {
       obj.collectedFees = message.collectedFees.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1091,7 +1092,7 @@ export const MsgCollectIncentives = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgCollectIncentives): unknown {
+  toJSON(message: MsgCollectIncentives): JsonSafe<MsgCollectIncentives> {
     const obj: any = {};
     if (message.positionIds) {
       obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
@@ -1204,7 +1205,7 @@ export const MsgCollectIncentivesResponse = {
       collectedIncentives: Array.isArray(object?.collectedIncentives) ? object.collectedIncentives.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgCollectIncentivesResponse): unknown {
+  toJSON(message: MsgCollectIncentivesResponse): JsonSafe<MsgCollectIncentivesResponse> {
     const obj: any = {};
     if (message.collectedIncentives) {
       obj.collectedIncentives = message.collectedIncentives.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1356,7 +1357,7 @@ export const MsgCreateIncentive = {
       minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
     };
   },
-  toJSON(message: MsgCreateIncentive): unknown {
+  toJSON(message: MsgCreateIncentive): JsonSafe<MsgCreateIncentive> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.sender !== undefined && (obj.sender = message.sender);
@@ -1536,7 +1537,7 @@ export const MsgCreateIncentiveResponse = {
       minUptime: isSet(object.minUptime) ? Duration.fromJSON(object.minUptime) : undefined
     };
   },
-  toJSON(message: MsgCreateIncentiveResponse): unknown {
+  toJSON(message: MsgCreateIncentiveResponse): JsonSafe<MsgCreateIncentiveResponse> {
     const obj: any = {};
     message.incentiveDenom !== undefined && (obj.incentiveDenom = message.incentiveDenom);
     message.incentiveAmount !== undefined && (obj.incentiveAmount = message.incentiveAmount);
@@ -1683,7 +1684,7 @@ export const MsgFungifyChargedPositions = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgFungifyChargedPositions): unknown {
+  toJSON(message: MsgFungifyChargedPositions): JsonSafe<MsgFungifyChargedPositions> {
     const obj: any = {};
     if (message.positionIds) {
       obj.positionIds = message.positionIds.map(e => (e || BigInt(0)).toString());
@@ -1796,7 +1797,7 @@ export const MsgFungifyChargedPositionsResponse = {
       newPositionId: isSet(object.newPositionId) ? BigInt(object.newPositionId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgFungifyChargedPositionsResponse): unknown {
+  toJSON(message: MsgFungifyChargedPositionsResponse): JsonSafe<MsgFungifyChargedPositionsResponse> {
     const obj: any = {};
     message.newPositionId !== undefined && (obj.newPositionId = (message.newPositionId || BigInt(0)).toString());
     return obj;

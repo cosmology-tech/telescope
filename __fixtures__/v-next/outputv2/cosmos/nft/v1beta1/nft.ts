@@ -1,6 +1,7 @@
 import { Any, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** Class defines the class of the nft type. */
 export interface Class {
@@ -180,7 +181,7 @@ export const Class = {
     if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
     return obj;
   },
-  toJSON(message: Class): unknown {
+  toJSON(message: Class): JsonSafe<Class> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.name !== undefined && (obj.name = message.name);
@@ -352,7 +353,7 @@ export const NFT = {
     if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
     return obj;
   },
-  toJSON(message: NFT): unknown {
+  toJSON(message: NFT): JsonSafe<NFT> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);

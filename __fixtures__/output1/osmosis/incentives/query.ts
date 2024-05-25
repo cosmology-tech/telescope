@@ -4,6 +4,7 @@ import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Long, DeepPartial, isSet } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 export interface ModuleToDistributeCoinsRequest {}
 export interface ModuleToDistributeCoinsRequestSDKType {}
@@ -178,7 +179,7 @@ export const ModuleToDistributeCoinsRequest = {
   fromJSON(_: any): ModuleToDistributeCoinsRequest {
     return {};
   },
-  toJSON(_: ModuleToDistributeCoinsRequest): unknown {
+  toJSON(_: ModuleToDistributeCoinsRequest): JsonSafe<ModuleToDistributeCoinsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -228,7 +229,7 @@ export const ModuleToDistributeCoinsResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ModuleToDistributeCoinsResponse): unknown {
+  toJSON(message: ModuleToDistributeCoinsResponse): JsonSafe<ModuleToDistributeCoinsResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -291,7 +292,7 @@ export const GaugeByIDRequest = {
       id: isSet(object.id) ? Long.fromValue(object.id) : Long.UZERO
     };
   },
-  toJSON(message: GaugeByIDRequest): unknown {
+  toJSON(message: GaugeByIDRequest): JsonSafe<GaugeByIDRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     return obj;
@@ -346,7 +347,7 @@ export const GaugeByIDResponse = {
       gauge: isSet(object.gauge) ? Gauge.fromJSON(object.gauge) : undefined
     };
   },
-  toJSON(message: GaugeByIDResponse): unknown {
+  toJSON(message: GaugeByIDResponse): JsonSafe<GaugeByIDResponse> {
     const obj: any = {};
     message.gauge !== undefined && (obj.gauge = message.gauge ? Gauge.toJSON(message.gauge) : undefined);
     return obj;
@@ -401,7 +402,7 @@ export const GaugesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: GaugesRequest): unknown {
+  toJSON(message: GaugesRequest): JsonSafe<GaugesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -464,7 +465,7 @@ export const GaugesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: GaugesResponse): unknown {
+  toJSON(message: GaugesResponse): JsonSafe<GaugesResponse> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
@@ -531,7 +532,7 @@ export const ActiveGaugesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: ActiveGaugesRequest): unknown {
+  toJSON(message: ActiveGaugesRequest): JsonSafe<ActiveGaugesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -594,7 +595,7 @@ export const ActiveGaugesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: ActiveGaugesResponse): unknown {
+  toJSON(message: ActiveGaugesResponse): JsonSafe<ActiveGaugesResponse> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
@@ -669,7 +670,7 @@ export const ActiveGaugesPerDenomRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: ActiveGaugesPerDenomRequest): unknown {
+  toJSON(message: ActiveGaugesPerDenomRequest): JsonSafe<ActiveGaugesPerDenomRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -736,7 +737,7 @@ export const ActiveGaugesPerDenomResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: ActiveGaugesPerDenomResponse): unknown {
+  toJSON(message: ActiveGaugesPerDenomResponse): JsonSafe<ActiveGaugesPerDenomResponse> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
@@ -803,7 +804,7 @@ export const UpcomingGaugesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: UpcomingGaugesRequest): unknown {
+  toJSON(message: UpcomingGaugesRequest): JsonSafe<UpcomingGaugesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -866,7 +867,7 @@ export const UpcomingGaugesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: UpcomingGaugesResponse): unknown {
+  toJSON(message: UpcomingGaugesResponse): JsonSafe<UpcomingGaugesResponse> {
     const obj: any = {};
     if (message.data) {
       obj.data = message.data.map(e => e ? Gauge.toJSON(e) : undefined);
@@ -941,7 +942,7 @@ export const UpcomingGaugesPerDenomRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: UpcomingGaugesPerDenomRequest): unknown {
+  toJSON(message: UpcomingGaugesPerDenomRequest): JsonSafe<UpcomingGaugesPerDenomRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1008,7 +1009,7 @@ export const UpcomingGaugesPerDenomResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: UpcomingGaugesPerDenomResponse): unknown {
+  toJSON(message: UpcomingGaugesPerDenomResponse): JsonSafe<UpcomingGaugesPerDenomResponse> {
     const obj: any = {};
     if (message.upcomingGauges) {
       obj.upcomingGauges = message.upcomingGauges.map(e => e ? Gauge.toJSON(e) : undefined);
@@ -1100,7 +1101,7 @@ export const RewardsEstRequest = {
       endEpoch: isSet(object.endEpoch) ? Long.fromValue(object.endEpoch) : Long.ZERO
     };
   },
-  toJSON(message: RewardsEstRequest): unknown {
+  toJSON(message: RewardsEstRequest): JsonSafe<RewardsEstRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     if (message.lockIds) {
@@ -1171,7 +1172,7 @@ export const RewardsEstResponse = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: RewardsEstResponse): unknown {
+  toJSON(message: RewardsEstResponse): JsonSafe<RewardsEstResponse> {
     const obj: any = {};
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1224,7 +1225,7 @@ export const QueryLockableDurationsRequest = {
   fromJSON(_: any): QueryLockableDurationsRequest {
     return {};
   },
-  toJSON(_: QueryLockableDurationsRequest): unknown {
+  toJSON(_: QueryLockableDurationsRequest): JsonSafe<QueryLockableDurationsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1274,7 +1275,7 @@ export const QueryLockableDurationsResponse = {
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryLockableDurationsResponse): unknown {
+  toJSON(message: QueryLockableDurationsResponse): JsonSafe<QueryLockableDurationsResponse> {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);

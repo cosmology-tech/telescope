@@ -5,6 +5,7 @@ import { ResourceUnits } from "../../base/v1beta1/resource";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -137,7 +138,7 @@ export const MsgCloseGroup = {
       id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: MsgCloseGroup): unknown {
+  toJSON(message: MsgCloseGroup): JsonSafe<MsgCloseGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -172,7 +173,7 @@ export const MsgCloseGroupResponse = {
   fromJSON(_: any): MsgCloseGroupResponse {
     return {};
   },
-  toJSON(_: MsgCloseGroupResponse): unknown {
+  toJSON(_: MsgCloseGroupResponse): JsonSafe<MsgCloseGroupResponse> {
     const obj: any = {};
     return obj;
   },
@@ -215,7 +216,7 @@ export const MsgPauseGroup = {
       id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: MsgPauseGroup): unknown {
+  toJSON(message: MsgPauseGroup): JsonSafe<MsgPauseGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -250,7 +251,7 @@ export const MsgPauseGroupResponse = {
   fromJSON(_: any): MsgPauseGroupResponse {
     return {};
   },
-  toJSON(_: MsgPauseGroupResponse): unknown {
+  toJSON(_: MsgPauseGroupResponse): JsonSafe<MsgPauseGroupResponse> {
     const obj: any = {};
     return obj;
   },
@@ -293,7 +294,7 @@ export const MsgStartGroup = {
       id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: MsgStartGroup): unknown {
+  toJSON(message: MsgStartGroup): JsonSafe<MsgStartGroup> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -328,7 +329,7 @@ export const MsgStartGroupResponse = {
   fromJSON(_: any): MsgStartGroupResponse {
     return {};
   },
-  toJSON(_: MsgStartGroupResponse): unknown {
+  toJSON(_: MsgStartGroupResponse): JsonSafe<MsgStartGroupResponse> {
     const obj: any = {};
     return obj;
   },
@@ -387,7 +388,7 @@ export const GroupID = {
       gseq: isSet(object.gseq) ? Number(object.gseq) : 0
     };
   },
-  toJSON(message: GroupID): unknown {
+  toJSON(message: GroupID): JsonSafe<GroupID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -452,7 +453,7 @@ export const GroupSpec = {
       resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromJSON(e)) : []
     };
   },
-  toJSON(message: GroupSpec): unknown {
+  toJSON(message: GroupSpec): JsonSafe<GroupSpec> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);
@@ -529,7 +530,7 @@ export const Group = {
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
-  toJSON(message: Group): unknown {
+  toJSON(message: Group): JsonSafe<Group> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));
@@ -596,7 +597,7 @@ export const Resource = {
       price: isSet(object.price) ? Coin.fromJSON(object.price) : undefined
     };
   },
-  toJSON(message: Resource): unknown {
+  toJSON(message: Resource): JsonSafe<Resource> {
     const obj: any = {};
     message.resources !== undefined && (obj.resources = message.resources ? ResourceUnits.toJSON(message.resources) : undefined);
     message.count !== undefined && (obj.count = Math.round(message.count));

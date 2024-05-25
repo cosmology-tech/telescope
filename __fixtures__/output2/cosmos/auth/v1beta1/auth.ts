@@ -3,6 +3,7 @@
 import { Any } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
@@ -87,7 +88,7 @@ export const BaseAccount = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
-  toJSON(message: BaseAccount): unknown {
+  toJSON(message: BaseAccount): JsonSafe<BaseAccount> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
@@ -154,7 +155,7 @@ export const ModuleAccount = {
       permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: ModuleAccount): unknown {
+  toJSON(message: ModuleAccount): JsonSafe<ModuleAccount> {
     const obj: any = {};
     message.baseAccount !== undefined && (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
     message.name !== undefined && (obj.name = message.name);
@@ -239,7 +240,7 @@ export const Params = {
       sigVerifyCostSecp256k1: isSet(object.sigVerifyCostSecp256k1) ? Long.fromValue(object.sigVerifyCostSecp256k1) : Long.UZERO
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || Long.UZERO).toString());
     message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || Long.UZERO).toString());

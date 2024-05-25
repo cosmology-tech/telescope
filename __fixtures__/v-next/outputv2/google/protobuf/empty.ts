@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
@@ -71,7 +72,7 @@ export const Empty = {
     const obj = createBaseEmpty();
     return obj;
   },
-  toJSON(_: Empty): unknown {
+  toJSON(_: Empty): JsonSafe<Empty> {
     const obj: any = {};
     return obj;
   },

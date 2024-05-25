@@ -5,6 +5,7 @@ import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 export const protobufPackage = "cosmos.staking.v1beta1";
@@ -570,7 +571,7 @@ export const HistoricalInfo = {
       valset: Array.isArray(object?.valset) ? object.valset.map((e: any) => Validator.fromJSON(e)) : []
     };
   },
-  toJSON(message: HistoricalInfo): unknown {
+  toJSON(message: HistoricalInfo): JsonSafe<HistoricalInfo> {
     const obj: any = {};
     message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
     if (message.valset) {
@@ -699,7 +700,7 @@ export const CommissionRates = {
       maxChangeRate: isSet(object.maxChangeRate) ? String(object.maxChangeRate) : ""
     };
   },
-  toJSON(message: CommissionRates): unknown {
+  toJSON(message: CommissionRates): JsonSafe<CommissionRates> {
     const obj: any = {};
     message.rate !== undefined && (obj.rate = message.rate);
     message.maxRate !== undefined && (obj.maxRate = message.maxRate);
@@ -819,7 +820,7 @@ export const Commission = {
       updateTime: isSet(object.updateTime) ? new Date(object.updateTime) : undefined
     };
   },
-  toJSON(message: Commission): unknown {
+  toJSON(message: Commission): JsonSafe<Commission> {
     const obj: any = {};
     message.commissionRates !== undefined && (obj.commissionRates = message.commissionRates ? CommissionRates.toJSON(message.commissionRates) : undefined);
     message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
@@ -954,7 +955,7 @@ export const Description = {
       details: isSet(object.details) ? String(object.details) : ""
     };
   },
-  toJSON(message: Description): unknown {
+  toJSON(message: Description): JsonSafe<Description> {
     const obj: any = {};
     message.moniker !== undefined && (obj.moniker = message.moniker);
     message.identity !== undefined && (obj.identity = message.identity);
@@ -1164,7 +1165,7 @@ export const Validator = {
       minSelfDelegation: isSet(object.minSelfDelegation) ? String(object.minSelfDelegation) : ""
     };
   },
-  toJSON(message: Validator): unknown {
+  toJSON(message: Validator): JsonSafe<Validator> {
     const obj: any = {};
     message.operatorAddress !== undefined && (obj.operatorAddress = message.operatorAddress);
     message.consensusPubkey !== undefined && (obj.consensusPubkey = message.consensusPubkey ? Any.toJSON(message.consensusPubkey) : undefined);
@@ -1348,7 +1349,7 @@ export const ValAddresses = {
       addresses: Array.isArray(object?.addresses) ? object.addresses.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: ValAddresses): unknown {
+  toJSON(message: ValAddresses): JsonSafe<ValAddresses> {
     const obj: any = {};
     if (message.addresses) {
       obj.addresses = message.addresses.map(e => e);
@@ -1460,7 +1461,7 @@ export const DVPair = {
       validatorAddress: isSet(object.validatorAddress) ? String(object.validatorAddress) : ""
     };
   },
-  toJSON(message: DVPair): unknown {
+  toJSON(message: DVPair): JsonSafe<DVPair> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -1563,7 +1564,7 @@ export const DVPairs = {
       pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => DVPair.fromJSON(e)) : []
     };
   },
-  toJSON(message: DVPairs): unknown {
+  toJSON(message: DVPairs): JsonSafe<DVPairs> {
     const obj: any = {};
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? DVPair.toJSON(e) : undefined);
@@ -1683,7 +1684,7 @@ export const DVVTriplet = {
       validatorDstAddress: isSet(object.validatorDstAddress) ? String(object.validatorDstAddress) : ""
     };
   },
-  toJSON(message: DVVTriplet): unknown {
+  toJSON(message: DVVTriplet): JsonSafe<DVVTriplet> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
@@ -1795,7 +1796,7 @@ export const DVVTriplets = {
       triplets: Array.isArray(object?.triplets) ? object.triplets.map((e: any) => DVVTriplet.fromJSON(e)) : []
     };
   },
-  toJSON(message: DVVTriplets): unknown {
+  toJSON(message: DVVTriplets): JsonSafe<DVVTriplets> {
     const obj: any = {};
     if (message.triplets) {
       obj.triplets = message.triplets.map(e => e ? DVVTriplet.toJSON(e) : undefined);
@@ -1915,7 +1916,7 @@ export const Delegation = {
       shares: isSet(object.shares) ? String(object.shares) : ""
     };
   },
-  toJSON(message: Delegation): unknown {
+  toJSON(message: Delegation): JsonSafe<Delegation> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -2043,7 +2044,7 @@ export const UnbondingDelegation = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e)) : []
     };
   },
-  toJSON(message: UnbondingDelegation): unknown {
+  toJSON(message: UnbondingDelegation): JsonSafe<UnbondingDelegation> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -2189,7 +2190,7 @@ export const UnbondingDelegationEntry = {
       balance: isSet(object.balance) ? String(object.balance) : ""
     };
   },
-  toJSON(message: UnbondingDelegationEntry): unknown {
+  toJSON(message: UnbondingDelegationEntry): JsonSafe<UnbondingDelegationEntry> {
     const obj: any = {};
     message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
@@ -2334,7 +2335,7 @@ export const RedelegationEntry = {
       sharesDst: isSet(object.sharesDst) ? String(object.sharesDst) : ""
     };
   },
-  toJSON(message: RedelegationEntry): unknown {
+  toJSON(message: RedelegationEntry): JsonSafe<RedelegationEntry> {
     const obj: any = {};
     message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
     message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
@@ -2479,7 +2480,7 @@ export const Redelegation = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntry.fromJSON(e)) : []
     };
   },
-  toJSON(message: Redelegation): unknown {
+  toJSON(message: Redelegation): JsonSafe<Redelegation> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
@@ -2650,7 +2651,7 @@ export const Params = {
       minCommissionRate: isSet(object.minCommissionRate) ? String(object.minCommissionRate) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime ? Duration.toJSON(message.unbondingTime) : undefined);
     message.maxValidators !== undefined && (obj.maxValidators = Math.round(message.maxValidators));
@@ -2797,7 +2798,7 @@ export const DelegationResponse = {
       balance: isSet(object.balance) ? Coin.fromJSON(object.balance) : undefined
     };
   },
-  toJSON(message: DelegationResponse): unknown {
+  toJSON(message: DelegationResponse): JsonSafe<DelegationResponse> {
     const obj: any = {};
     message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toJSON(message.delegation) : undefined);
     message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
@@ -2908,7 +2909,7 @@ export const RedelegationEntryResponse = {
       balance: isSet(object.balance) ? String(object.balance) : ""
     };
   },
-  toJSON(message: RedelegationEntryResponse): unknown {
+  toJSON(message: RedelegationEntryResponse): JsonSafe<RedelegationEntryResponse> {
     const obj: any = {};
     message.redelegationEntry !== undefined && (obj.redelegationEntry = message.redelegationEntry ? RedelegationEntry.toJSON(message.redelegationEntry) : undefined);
     message.balance !== undefined && (obj.balance = message.balance);
@@ -3019,7 +3020,7 @@ export const RedelegationResponse = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => RedelegationEntryResponse.fromJSON(e)) : []
     };
   },
-  toJSON(message: RedelegationResponse): unknown {
+  toJSON(message: RedelegationResponse): JsonSafe<RedelegationResponse> {
     const obj: any = {};
     message.redelegation !== undefined && (obj.redelegation = message.redelegation ? Redelegation.toJSON(message.redelegation) : undefined);
     if (message.entries) {
@@ -3140,7 +3141,7 @@ export const Pool = {
       bondedTokens: isSet(object.bondedTokens) ? String(object.bondedTokens) : ""
     };
   },
-  toJSON(message: Pool): unknown {
+  toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
     message.notBondedTokens !== undefined && (obj.notBondedTokens = message.notBondedTokens);
     message.bondedTokens !== undefined && (obj.bondedTokens = message.bondedTokens);

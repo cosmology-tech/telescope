@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.p2p";
 export interface NetAddress {
   id: string;
@@ -77,7 +78,7 @@ export const NetAddress = {
       port: isSet(object.port) ? Number(object.port) : 0
     };
   },
-  toJSON(message: NetAddress): unknown {
+  toJSON(message: NetAddress): JsonSafe<NetAddress> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.ip !== undefined && (obj.ip = message.ip);
@@ -142,7 +143,7 @@ export const ProtocolVersion = {
       app: isSet(object.app) ? Long.fromValue(object.app) : Long.UZERO
     };
   },
-  toJSON(message: ProtocolVersion): unknown {
+  toJSON(message: ProtocolVersion): JsonSafe<ProtocolVersion> {
     const obj: any = {};
     message.p2p !== undefined && (obj.p2p = (message.p2p || Long.UZERO).toString());
     message.block !== undefined && (obj.block = (message.block || Long.UZERO).toString());
@@ -247,7 +248,7 @@ export const DefaultNodeInfo = {
       other: isSet(object.other) ? DefaultNodeInfoOther.fromJSON(object.other) : undefined
     };
   },
-  toJSON(message: DefaultNodeInfo): unknown {
+  toJSON(message: DefaultNodeInfo): JsonSafe<DefaultNodeInfo> {
     const obj: any = {};
     message.protocolVersion !== undefined && (obj.protocolVersion = message.protocolVersion ? ProtocolVersion.toJSON(message.protocolVersion) : undefined);
     message.defaultNodeId !== undefined && (obj.defaultNodeId = message.defaultNodeId);
@@ -314,7 +315,7 @@ export const DefaultNodeInfoOther = {
       rpcAddress: isSet(object.rpcAddress) ? String(object.rpcAddress) : ""
     };
   },
-  toJSON(message: DefaultNodeInfoOther): unknown {
+  toJSON(message: DefaultNodeInfoOther): JsonSafe<DefaultNodeInfoOther> {
     const obj: any = {};
     message.txIndex !== undefined && (obj.txIndex = message.txIndex);
     message.rpcAddress !== undefined && (obj.rpcAddress = message.rpcAddress);

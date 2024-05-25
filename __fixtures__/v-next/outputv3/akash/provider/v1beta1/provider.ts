@@ -1,7 +1,6 @@
 import { Attribute, AttributeAmino, AttributeSDKType } from "../../base/v1beta1/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.provider.v1beta1";
 /** ProviderInfo */
 export interface ProviderInfo {
@@ -186,12 +185,6 @@ export const ProviderInfo = {
     if (isSet(object.website)) obj.website = String(object.website);
     return obj;
   },
-  toJSON(message: ProviderInfo): JsonSafe<ProviderInfo> {
-    const obj: any = {};
-    message.email !== undefined && (obj.email = message.email);
-    message.website !== undefined && (obj.website = message.website);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ProviderInfo>): ProviderInfo {
     const message = createBaseProviderInfo();
     message.email = object.email ?? "";
@@ -298,18 +291,6 @@ export const MsgCreateProvider = {
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
     return obj;
   },
-  toJSON(message: MsgCreateProvider): JsonSafe<MsgCreateProvider> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateProvider>): MsgCreateProvider {
     const message = createBaseMsgCreateProvider();
     message.owner = object.owner ?? "";
@@ -405,10 +386,6 @@ export const MsgCreateProviderResponse = {
     const obj = createBaseMsgCreateProviderResponse();
     return obj;
   },
-  toJSON(_: MsgCreateProviderResponse): JsonSafe<MsgCreateProviderResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateProviderResponse>): MsgCreateProviderResponse {
     const message = createBaseMsgCreateProviderResponse();
     return message;
@@ -498,18 +475,6 @@ export const MsgUpdateProvider = {
     if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: MsgUpdateProvider): JsonSafe<MsgUpdateProvider> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUpdateProvider>): MsgUpdateProvider {
@@ -607,10 +572,6 @@ export const MsgUpdateProviderResponse = {
     const obj = createBaseMsgUpdateProviderResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateProviderResponse): JsonSafe<MsgUpdateProviderResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgUpdateProviderResponse>): MsgUpdateProviderResponse {
     const message = createBaseMsgUpdateProviderResponse();
     return message;
@@ -678,11 +639,6 @@ export const MsgDeleteProvider = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: MsgDeleteProvider): JsonSafe<MsgDeleteProvider> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgDeleteProvider>): MsgDeleteProvider {
     const message = createBaseMsgDeleteProvider();
     message.owner = object.owner ?? "";
@@ -747,10 +703,6 @@ export const MsgDeleteProviderResponse = {
   },
   fromJSON(_: any): MsgDeleteProviderResponse {
     const obj = createBaseMsgDeleteProviderResponse();
-    return obj;
-  },
-  toJSON(_: MsgDeleteProviderResponse): JsonSafe<MsgDeleteProviderResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgDeleteProviderResponse>): MsgDeleteProviderResponse {
@@ -842,18 +794,6 @@ export const Provider = {
     if (isSet(object.hostUri)) obj.hostUri = String(object.hostUri);
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     if (isSet(object.info)) obj.info = ProviderInfo.fromJSON(object.info);
-    return obj;
-  },
-  toJSON(message: Provider): JsonSafe<Provider> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.hostUri !== undefined && (obj.hostUri = message.hostUri);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    message.info !== undefined && (obj.info = message.info ? ProviderInfo.toJSON(message.info) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Provider>): Provider {

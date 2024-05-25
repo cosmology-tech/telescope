@@ -3,6 +3,7 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -205,7 +206,7 @@ export const MsgCreateGauge = {
     if (isSet(object.numEpochsPaidOver)) obj.numEpochsPaidOver = BigInt(object.numEpochsPaidOver.toString());
     return obj;
   },
-  toJSON(message: MsgCreateGauge): unknown {
+  toJSON(message: MsgCreateGauge): JsonSafe<MsgCreateGauge> {
     const obj: any = {};
     message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -340,7 +341,7 @@ export const MsgCreateGaugeResponse = {
     const obj = createBaseMsgCreateGaugeResponse();
     return obj;
   },
-  toJSON(_: MsgCreateGaugeResponse): unknown {
+  toJSON(_: MsgCreateGaugeResponse): JsonSafe<MsgCreateGaugeResponse> {
     const obj: any = {};
     return obj;
   },
@@ -437,7 +438,7 @@ export const MsgAddToGauge = {
     if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgAddToGauge): unknown {
+  toJSON(message: MsgAddToGauge): JsonSafe<MsgAddToGauge> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
@@ -546,7 +547,7 @@ export const MsgAddToGaugeResponse = {
     const obj = createBaseMsgAddToGaugeResponse();
     return obj;
   },
-  toJSON(_: MsgAddToGaugeResponse): unknown {
+  toJSON(_: MsgAddToGaugeResponse): JsonSafe<MsgAddToGaugeResponse> {
     const obj: any = {};
     return obj;
   },

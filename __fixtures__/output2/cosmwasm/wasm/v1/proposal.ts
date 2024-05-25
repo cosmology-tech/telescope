@@ -4,6 +4,7 @@ import { AccessConfig } from "./types";
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
 export interface StoreCodeProposal {
@@ -220,7 +221,7 @@ export const StoreCodeProposal = {
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
     };
   },
-  toJSON(message: StoreCodeProposal): unknown {
+  toJSON(message: StoreCodeProposal): JsonSafe<StoreCodeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -329,7 +330,7 @@ export const InstantiateContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: InstantiateContractProposal): unknown {
+  toJSON(message: InstantiateContractProposal): JsonSafe<InstantiateContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -424,7 +425,7 @@ export const MigrateContractProposal = {
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
-  toJSON(message: MigrateContractProposal): unknown {
+  toJSON(message: MigrateContractProposal): JsonSafe<MigrateContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -501,7 +502,7 @@ export const SudoContractProposal = {
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
-  toJSON(message: SudoContractProposal): unknown {
+  toJSON(message: SudoContractProposal): JsonSafe<SudoContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -592,7 +593,7 @@ export const ExecuteContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ExecuteContractProposal): unknown {
+  toJSON(message: ExecuteContractProposal): JsonSafe<ExecuteContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -675,7 +676,7 @@ export const UpdateAdminProposal = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: UpdateAdminProposal): unknown {
+  toJSON(message: UpdateAdminProposal): JsonSafe<UpdateAdminProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -742,7 +743,7 @@ export const ClearAdminProposal = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: ClearAdminProposal): unknown {
+  toJSON(message: ClearAdminProposal): JsonSafe<ClearAdminProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -816,7 +817,7 @@ export const PinCodesProposal = {
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
-  toJSON(message: PinCodesProposal): unknown {
+  toJSON(message: PinCodesProposal): JsonSafe<PinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -894,7 +895,7 @@ export const UnpinCodesProposal = {
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => Long.fromValue(e)) : []
     };
   },
-  toJSON(message: UnpinCodesProposal): unknown {
+  toJSON(message: UnpinCodesProposal): JsonSafe<UnpinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -955,7 +956,7 @@ export const AccessConfigUpdate = {
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
     };
   },
-  toJSON(message: AccessConfigUpdate): unknown {
+  toJSON(message: AccessConfigUpdate): JsonSafe<AccessConfigUpdate> {
     const obj: any = {};
     message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
@@ -1018,7 +1019,7 @@ export const UpdateInstantiateConfigProposal = {
       accessConfigUpdates: Array.isArray(object?.accessConfigUpdates) ? object.accessConfigUpdates.map((e: any) => AccessConfigUpdate.fromJSON(e)) : []
     };
   },
-  toJSON(message: UpdateInstantiateConfigProposal): unknown {
+  toJSON(message: UpdateInstantiateConfigProposal): JsonSafe<UpdateInstantiateConfigProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

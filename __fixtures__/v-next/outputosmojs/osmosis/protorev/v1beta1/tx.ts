@@ -1,6 +1,7 @@
 import { TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** MsgSetHotRoutes defines the Msg/SetHotRoutes request type. */
 export interface MsgSetHotRoutes {
@@ -225,7 +226,7 @@ export const MsgSetHotRoutes = {
       hotRoutes: Array.isArray(object?.hotRoutes) ? object.hotRoutes.map((e: any) => TokenPairArbRoutes.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgSetHotRoutes): unknown {
+  toJSON(message: MsgSetHotRoutes): JsonSafe<MsgSetHotRoutes> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.hotRoutes) {
@@ -328,7 +329,7 @@ export const MsgSetHotRoutesResponse = {
   fromJSON(_: any): MsgSetHotRoutesResponse {
     return {};
   },
-  toJSON(_: MsgSetHotRoutesResponse): unknown {
+  toJSON(_: MsgSetHotRoutesResponse): JsonSafe<MsgSetHotRoutesResponse> {
     const obj: any = {};
     return obj;
   },
@@ -419,7 +420,7 @@ export const MsgSetDeveloperAccount = {
       developerAccount: isSet(object.developerAccount) ? String(object.developerAccount) : ""
     };
   },
-  toJSON(message: MsgSetDeveloperAccount): unknown {
+  toJSON(message: MsgSetDeveloperAccount): JsonSafe<MsgSetDeveloperAccount> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.developerAccount !== undefined && (obj.developerAccount = message.developerAccount);
@@ -512,7 +513,7 @@ export const MsgSetDeveloperAccountResponse = {
   fromJSON(_: any): MsgSetDeveloperAccountResponse {
     return {};
   },
-  toJSON(_: MsgSetDeveloperAccountResponse): unknown {
+  toJSON(_: MsgSetDeveloperAccountResponse): JsonSafe<MsgSetDeveloperAccountResponse> {
     const obj: any = {};
     return obj;
   },
@@ -603,7 +604,7 @@ export const MsgSetPoolWeights = {
       poolWeights: isSet(object.poolWeights) ? PoolWeights.fromJSON(object.poolWeights) : undefined
     };
   },
-  toJSON(message: MsgSetPoolWeights): unknown {
+  toJSON(message: MsgSetPoolWeights): JsonSafe<MsgSetPoolWeights> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.poolWeights !== undefined && (obj.poolWeights = message.poolWeights ? PoolWeights.toJSON(message.poolWeights) : undefined);
@@ -696,7 +697,7 @@ export const MsgSetPoolWeightsResponse = {
   fromJSON(_: any): MsgSetPoolWeightsResponse {
     return {};
   },
-  toJSON(_: MsgSetPoolWeightsResponse): unknown {
+  toJSON(_: MsgSetPoolWeightsResponse): JsonSafe<MsgSetPoolWeightsResponse> {
     const obj: any = {};
     return obj;
   },
@@ -787,7 +788,7 @@ export const MsgSetMaxPoolPointsPerTx = {
       maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSetMaxPoolPointsPerTx): unknown {
+  toJSON(message: MsgSetMaxPoolPointsPerTx): JsonSafe<MsgSetMaxPoolPointsPerTx> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
@@ -880,7 +881,7 @@ export const MsgSetMaxPoolPointsPerTxResponse = {
   fromJSON(_: any): MsgSetMaxPoolPointsPerTxResponse {
     return {};
   },
-  toJSON(_: MsgSetMaxPoolPointsPerTxResponse): unknown {
+  toJSON(_: MsgSetMaxPoolPointsPerTxResponse): JsonSafe<MsgSetMaxPoolPointsPerTxResponse> {
     const obj: any = {};
     return obj;
   },
@@ -971,7 +972,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
       maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgSetMaxPoolPointsPerBlock): unknown {
+  toJSON(message: MsgSetMaxPoolPointsPerBlock): JsonSafe<MsgSetMaxPoolPointsPerBlock> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
@@ -1064,7 +1065,7 @@ export const MsgSetMaxPoolPointsPerBlockResponse = {
   fromJSON(_: any): MsgSetMaxPoolPointsPerBlockResponse {
     return {};
   },
-  toJSON(_: MsgSetMaxPoolPointsPerBlockResponse): unknown {
+  toJSON(_: MsgSetMaxPoolPointsPerBlockResponse): JsonSafe<MsgSetMaxPoolPointsPerBlockResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1155,7 +1156,7 @@ export const MsgSetBaseDenoms = {
       baseDenoms: Array.isArray(object?.baseDenoms) ? object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgSetBaseDenoms): unknown {
+  toJSON(message: MsgSetBaseDenoms): JsonSafe<MsgSetBaseDenoms> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     if (message.baseDenoms) {
@@ -1258,7 +1259,7 @@ export const MsgSetBaseDenomsResponse = {
   fromJSON(_: any): MsgSetBaseDenomsResponse {
     return {};
   },
-  toJSON(_: MsgSetBaseDenomsResponse): unknown {
+  toJSON(_: MsgSetBaseDenomsResponse): JsonSafe<MsgSetBaseDenomsResponse> {
     const obj: any = {};
     return obj;
   },

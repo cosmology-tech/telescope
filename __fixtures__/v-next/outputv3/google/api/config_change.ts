@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -260,19 +259,6 @@ export const ConfigChange = {
     if (Array.isArray(object?.advices)) obj.advices = object.advices.map((e: any) => Advice.fromJSON(e));
     return obj;
   },
-  toJSON(message: ConfigChange): JsonSafe<ConfigChange> {
-    const obj: any = {};
-    message.element !== undefined && (obj.element = message.element);
-    message.oldValue !== undefined && (obj.oldValue = message.oldValue);
-    message.newValue !== undefined && (obj.newValue = message.newValue);
-    message.changeType !== undefined && (obj.changeType = changeTypeToJSON(message.changeType));
-    if (message.advices) {
-      obj.advices = message.advices.map(e => e ? Advice.toJSON(e) : undefined);
-    } else {
-      obj.advices = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConfigChange>): ConfigChange {
     const message = createBaseConfigChange();
     message.element = object.element ?? "";
@@ -380,11 +366,6 @@ export const Advice = {
   fromJSON(object: any): Advice {
     const obj = createBaseAdvice();
     if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: Advice): JsonSafe<Advice> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
   fromPartial(object: DeepPartial<Advice>): Advice {

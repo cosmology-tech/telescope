@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../base/v1beta1/coin";
 import { ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionSDKType, ValidatorHistoricalRewards, ValidatorHistoricalRewardsSDKType, ValidatorCurrentRewards, ValidatorCurrentRewardsSDKType, DelegatorStartingInfo, DelegatorStartingInfoSDKType, ValidatorSlashEvent, ValidatorSlashEventSDKType, Params, ParamsSDKType, FeePool, FeePoolSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * DelegatorWithdrawInfo is the address for where distributions rewards are
@@ -230,7 +231,7 @@ export const DelegatorWithdrawInfo = {
       withdrawAddress: isSet(object.withdrawAddress) ? String(object.withdrawAddress) : ""
     };
   },
-  toJSON(message: DelegatorWithdrawInfo): unknown {
+  toJSON(message: DelegatorWithdrawInfo): JsonSafe<DelegatorWithdrawInfo> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
@@ -341,7 +342,7 @@ export const ValidatorOutstandingRewardsRecord = {
       outstandingRewards: Array.isArray(object?.outstandingRewards) ? object.outstandingRewards.map((e: any) => DecCoin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ValidatorOutstandingRewardsRecord): unknown {
+  toJSON(message: ValidatorOutstandingRewardsRecord): JsonSafe<ValidatorOutstandingRewardsRecord> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     if (message.outstandingRewards) {
@@ -462,7 +463,7 @@ export const ValidatorAccumulatedCommissionRecord = {
       accumulated: isSet(object.accumulated) ? ValidatorAccumulatedCommission.fromJSON(object.accumulated) : undefined
     };
   },
-  toJSON(message: ValidatorAccumulatedCommissionRecord): unknown {
+  toJSON(message: ValidatorAccumulatedCommissionRecord): JsonSafe<ValidatorAccumulatedCommissionRecord> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.accumulated !== undefined && (obj.accumulated = message.accumulated ? ValidatorAccumulatedCommission.toJSON(message.accumulated) : undefined);
@@ -581,7 +582,7 @@ export const ValidatorHistoricalRewardsRecord = {
       rewards: isSet(object.rewards) ? ValidatorHistoricalRewards.fromJSON(object.rewards) : undefined
     };
   },
-  toJSON(message: ValidatorHistoricalRewardsRecord): unknown {
+  toJSON(message: ValidatorHistoricalRewardsRecord): JsonSafe<ValidatorHistoricalRewardsRecord> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
@@ -701,7 +702,7 @@ export const ValidatorCurrentRewardsRecord = {
       rewards: isSet(object.rewards) ? ValidatorCurrentRewards.fromJSON(object.rewards) : undefined
     };
   },
-  toJSON(message: ValidatorCurrentRewardsRecord): unknown {
+  toJSON(message: ValidatorCurrentRewardsRecord): JsonSafe<ValidatorCurrentRewardsRecord> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorCurrentRewards.toJSON(message.rewards) : undefined);
@@ -820,7 +821,7 @@ export const DelegatorStartingInfoRecord = {
       startingInfo: isSet(object.startingInfo) ? DelegatorStartingInfo.fromJSON(object.startingInfo) : undefined
     };
   },
-  toJSON(message: DelegatorStartingInfoRecord): unknown {
+  toJSON(message: DelegatorStartingInfoRecord): JsonSafe<DelegatorStartingInfoRecord> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -956,7 +957,7 @@ export const ValidatorSlashEventRecord = {
       validatorSlashEvent: isSet(object.validatorSlashEvent) ? ValidatorSlashEvent.fromJSON(object.validatorSlashEvent) : undefined
     };
   },
-  toJSON(message: ValidatorSlashEventRecord): unknown {
+  toJSON(message: ValidatorSlashEventRecord): JsonSafe<ValidatorSlashEventRecord> {
     const obj: any = {};
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
@@ -1149,7 +1150,7 @@ export const GenesisState = {
       validatorSlashEvents: Array.isArray(object?.validatorSlashEvents) ? object.validatorSlashEvents.map((e: any) => ValidatorSlashEventRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.feePool !== undefined && (obj.feePool = message.feePool ? FeePool.toJSON(message.feePool) : undefined);

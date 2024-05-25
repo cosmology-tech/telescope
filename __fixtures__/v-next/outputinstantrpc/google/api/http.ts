@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -705,7 +706,7 @@ export const Http = {
     if (isSet(object.fullyDecodeReservedExpansion)) obj.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
     return obj;
   },
-  toJSON(message: Http): unknown {
+  toJSON(message: Http): JsonSafe<Http> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? HttpRule.toJSON(e) : undefined);
@@ -884,7 +885,7 @@ export const HttpRule = {
     if (Array.isArray(object?.additionalBindings)) obj.additionalBindings = object.additionalBindings.map((e: any) => HttpRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: HttpRule): unknown {
+  toJSON(message: HttpRule): JsonSafe<HttpRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.get !== undefined && (obj.get = message.get);
@@ -1073,7 +1074,7 @@ export const CustomHttpPattern = {
     if (isSet(object.path)) obj.path = String(object.path);
     return obj;
   },
-  toJSON(message: CustomHttpPattern): unknown {
+  toJSON(message: CustomHttpPattern): JsonSafe<CustomHttpPattern> {
     const obj: any = {};
     message.kind !== undefined && (obj.kind = message.kind);
     message.path !== undefined && (obj.path = message.path);

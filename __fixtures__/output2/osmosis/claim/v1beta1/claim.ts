@@ -3,6 +3,7 @@
 import { Coin } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -117,7 +118,7 @@ export const ClaimRecord = {
       actionCompleted: Array.isArray(object?.actionCompleted) ? object.actionCompleted.map((e: any) => Boolean(e)) : []
     };
   },
-  toJSON(message: ClaimRecord): unknown {
+  toJSON(message: ClaimRecord): JsonSafe<ClaimRecord> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.initialClaimableAmount) {

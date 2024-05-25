@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.staking.v1beta1";
 /**
  * AuthorizationType defines the type of staking module authorization type
@@ -161,7 +162,7 @@ export const StakeAuthorization = {
       authorizationType: isSet(object.authorizationType) ? authorizationTypeFromJSON(object.authorizationType) : -1
     };
   },
-  toJSON(message: StakeAuthorization): unknown {
+  toJSON(message: StakeAuthorization): JsonSafe<StakeAuthorization> {
     const obj: any = {};
     message.maxTokens !== undefined && (obj.maxTokens = message.maxTokens ? Coin.toJSON(message.maxTokens) : undefined);
     message.allowList !== undefined && (obj.allowList = message.allowList ? StakeAuthorization_Validators.toJSON(message.allowList) : undefined);
@@ -282,7 +283,7 @@ export const StakeAuthorization_Validators = {
       address: Array.isArray(object?.address) ? object.address.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: StakeAuthorization_Validators): unknown {
+  toJSON(message: StakeAuthorization_Validators): JsonSafe<StakeAuthorization_Validators> {
     const obj: any = {};
     if (message.address) {
       obj.address = message.address.map(e => e);

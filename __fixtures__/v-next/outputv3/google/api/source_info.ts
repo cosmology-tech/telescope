@@ -1,6 +1,5 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
@@ -54,15 +53,6 @@ export const SourceInfo = {
   fromJSON(object: any): SourceInfo {
     const obj = createBaseSourceInfo();
     if (Array.isArray(object?.sourceFiles)) obj.sourceFiles = object.sourceFiles.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
-    const obj: any = {};
-    if (message.sourceFiles) {
-      obj.sourceFiles = message.sourceFiles.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.sourceFiles = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {

@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -246,11 +245,6 @@ export const Minter = {
     if (isSet(object.epochProvisions)) obj.epochProvisions = String(object.epochProvisions);
     return obj;
   },
-  toJSON(message: Minter): JsonSafe<Minter> {
-    const obj: any = {};
-    message.epochProvisions !== undefined && (obj.epochProvisions = message.epochProvisions);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Minter>): Minter {
     const message = createBaseMinter();
     message.epochProvisions = object.epochProvisions ?? "";
@@ -333,12 +327,6 @@ export const WeightedAddress = {
     const obj = createBaseWeightedAddress();
     if (isSet(object.address)) obj.address = String(object.address);
     if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: WeightedAddress): JsonSafe<WeightedAddress> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
   fromPartial(object: DeepPartial<WeightedAddress>): WeightedAddress {
@@ -446,14 +434,6 @@ export const DistributionProportions = {
     if (isSet(object.poolIncentives)) obj.poolIncentives = String(object.poolIncentives);
     if (isSet(object.developerRewards)) obj.developerRewards = String(object.developerRewards);
     if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
-    return obj;
-  },
-  toJSON(message: DistributionProportions): JsonSafe<DistributionProportions> {
-    const obj: any = {};
-    message.staking !== undefined && (obj.staking = message.staking);
-    message.poolIncentives !== undefined && (obj.poolIncentives = message.poolIncentives);
-    message.developerRewards !== undefined && (obj.developerRewards = message.developerRewards);
-    message.communityPool !== undefined && (obj.communityPool = message.communityPool);
     return obj;
   },
   fromPartial(object: DeepPartial<DistributionProportions>): DistributionProportions {
@@ -607,22 +587,6 @@ export const Params = {
     if (isSet(object.distributionProportions)) obj.distributionProportions = DistributionProportions.fromJSON(object.distributionProportions);
     if (Array.isArray(object?.weightedDeveloperRewardsReceivers)) obj.weightedDeveloperRewardsReceivers = object.weightedDeveloperRewardsReceivers.map((e: any) => WeightedAddress.fromJSON(e));
     if (isSet(object.mintingRewardsDistributionStartEpoch)) obj.mintingRewardsDistributionStartEpoch = BigInt(object.mintingRewardsDistributionStartEpoch.toString());
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
-    message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);
-    message.epochIdentifier !== undefined && (obj.epochIdentifier = message.epochIdentifier);
-    message.reductionPeriodInEpochs !== undefined && (obj.reductionPeriodInEpochs = (message.reductionPeriodInEpochs || BigInt(0)).toString());
-    message.reductionFactor !== undefined && (obj.reductionFactor = message.reductionFactor);
-    message.distributionProportions !== undefined && (obj.distributionProportions = message.distributionProportions ? DistributionProportions.toJSON(message.distributionProportions) : undefined);
-    if (message.weightedDeveloperRewardsReceivers) {
-      obj.weightedDeveloperRewardsReceivers = message.weightedDeveloperRewardsReceivers.map(e => e ? WeightedAddress.toJSON(e) : undefined);
-    } else {
-      obj.weightedDeveloperRewardsReceivers = [];
-    }
-    message.mintingRewardsDistributionStartEpoch !== undefined && (obj.mintingRewardsDistributionStartEpoch = (message.mintingRewardsDistributionStartEpoch || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /** Plan specifies information about a planned upgrade and when it should occur. */
 export interface Plan {
@@ -182,7 +183,7 @@ export const Plan = {
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
     };
   },
-  toJSON(message: Plan): unknown {
+  toJSON(message: Plan): JsonSafe<Plan> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.time !== undefined && (obj.time = message.time.toISOString());
@@ -269,7 +270,7 @@ export const SoftwareUpgradeProposal = {
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
     };
   },
-  toJSON(message: SoftwareUpgradeProposal): unknown {
+  toJSON(message: SoftwareUpgradeProposal): JsonSafe<SoftwareUpgradeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -340,7 +341,7 @@ export const CancelSoftwareUpgradeProposal = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: CancelSoftwareUpgradeProposal): unknown {
+  toJSON(message: CancelSoftwareUpgradeProposal): JsonSafe<CancelSoftwareUpgradeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -407,7 +408,7 @@ export const ModuleVersion = {
       version: isSet(object.version) ? Long.fromValue(object.version) : Long.UZERO
     };
   },
-  toJSON(message: ModuleVersion): unknown {
+  toJSON(message: ModuleVersion): JsonSafe<ModuleVersion> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.version !== undefined && (obj.version = (message.version || Long.UZERO).toString());

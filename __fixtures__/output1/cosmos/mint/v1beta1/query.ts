@@ -1,5 +1,6 @@
 import { Params, ParamsSDKType } from "./mint";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -83,7 +84,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -133,7 +134,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -178,7 +179,7 @@ export const QueryInflationRequest = {
   fromJSON(_: any): QueryInflationRequest {
     return {};
   },
-  toJSON(_: QueryInflationRequest): unknown {
+  toJSON(_: QueryInflationRequest): JsonSafe<QueryInflationRequest> {
     const obj: any = {};
     return obj;
   },
@@ -228,7 +229,7 @@ export const QueryInflationResponse = {
       inflation: isSet(object.inflation) ? bytesFromBase64(object.inflation) : new Uint8Array()
     };
   },
-  toJSON(message: QueryInflationResponse): unknown {
+  toJSON(message: QueryInflationResponse): JsonSafe<QueryInflationResponse> {
     const obj: any = {};
     message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation !== undefined ? message.inflation : new Uint8Array()));
     return obj;
@@ -273,7 +274,7 @@ export const QueryAnnualProvisionsRequest = {
   fromJSON(_: any): QueryAnnualProvisionsRequest {
     return {};
   },
-  toJSON(_: QueryAnnualProvisionsRequest): unknown {
+  toJSON(_: QueryAnnualProvisionsRequest): JsonSafe<QueryAnnualProvisionsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -323,7 +324,7 @@ export const QueryAnnualProvisionsResponse = {
       annualProvisions: isSet(object.annualProvisions) ? bytesFromBase64(object.annualProvisions) : new Uint8Array()
     };
   },
-  toJSON(message: QueryAnnualProvisionsResponse): unknown {
+  toJSON(message: QueryAnnualProvisionsResponse): JsonSafe<QueryAnnualProvisionsResponse> {
     const obj: any = {};
     message.annualProvisions !== undefined && (obj.annualProvisions = base64FromBytes(message.annualProvisions !== undefined ? message.annualProvisions : new Uint8Array()));
     return obj;

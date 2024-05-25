@@ -1,7 +1,6 @@
 import { MerklePrefix, MerklePrefixAmino, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * State defines if a connection is in one of the following states:
@@ -390,19 +389,6 @@ export const ConnectionEnd = {
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
     return obj;
   },
-  toJSON(message: ConnectionEnd): JsonSafe<ConnectionEnd> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toJSON(e) : undefined);
-    } else {
-      obj.versions = [];
-    }
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConnectionEnd>): ConnectionEnd {
     const message = createBaseConnectionEnd();
     message.clientId = object.clientId ?? "";
@@ -557,20 +543,6 @@ export const IdentifiedConnection = {
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
     return obj;
   },
-  toJSON(message: IdentifiedConnection): JsonSafe<IdentifiedConnection> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.versions) {
-      obj.versions = message.versions.map(e => e ? Version.toJSON(e) : undefined);
-    } else {
-      obj.versions = [];
-    }
-    message.state !== undefined && (obj.state = stateToJSON(message.state));
-    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
-    message.delayPeriod !== undefined && (obj.delayPeriod = (message.delayPeriod || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<IdentifiedConnection>): IdentifiedConnection {
     const message = createBaseIdentifiedConnection();
     message.id = object.id ?? "";
@@ -708,13 +680,6 @@ export const Counterparty = {
     if (isSet(object.prefix)) obj.prefix = MerklePrefix.fromJSON(object.prefix);
     return obj;
   },
-  toJSON(message: Counterparty): JsonSafe<Counterparty> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    message.connectionId !== undefined && (obj.connectionId = message.connectionId);
-    message.prefix !== undefined && (obj.prefix = message.prefix ? MerklePrefix.toJSON(message.prefix) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.clientId = object.clientId ?? "";
@@ -807,15 +772,6 @@ export const ClientPaths = {
     if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ClientPaths): JsonSafe<ClientPaths> {
-    const obj: any = {};
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ClientPaths>): ClientPaths {
     const message = createBaseClientPaths();
     message.paths = object.paths?.map(e => e) || [];
@@ -904,16 +860,6 @@ export const ConnectionPaths = {
     const obj = createBaseConnectionPaths();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
     if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ConnectionPaths): JsonSafe<ConnectionPaths> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.paths) {
-      obj.paths = message.paths.map(e => e);
-    } else {
-      obj.paths = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ConnectionPaths>): ConnectionPaths {
@@ -1013,16 +959,6 @@ export const Version = {
     if (Array.isArray(object?.features)) obj.features = object.features.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: Version): JsonSafe<Version> {
-    const obj: any = {};
-    message.identifier !== undefined && (obj.identifier = message.identifier);
-    if (message.features) {
-      obj.features = message.features.map(e => e);
-    } else {
-      obj.features = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
     message.identifier = object.identifier ?? "";
@@ -1110,11 +1046,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (isSet(object.maxExpectedTimePerBlock)) obj.maxExpectedTimePerBlock = BigInt(object.maxExpectedTimePerBlock.toString());
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -8,6 +8,7 @@ import { MonitoredResourceDescriptor, MonitoredResourceDescriptorSDKType } from 
 import { Monitoring, MonitoringSDKType } from "../../monitoring";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1";
 /** Whether or not a service has been enabled for use by a consumer. */
 export enum State {
@@ -216,7 +217,7 @@ export const Service = {
       state: isSet(object.state) ? stateFromJSON(object.state) : -1
     };
   },
-  toJSON(message: Service): unknown {
+  toJSON(message: Service): JsonSafe<Service> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.parent !== undefined && (obj.parent = message.parent);
@@ -355,7 +356,7 @@ export const ServiceConfig = {
       monitoring: isSet(object.monitoring) ? Monitoring.fromJSON(object.monitoring) : undefined
     };
   },
-  toJSON(message: ServiceConfig): unknown {
+  toJSON(message: ServiceConfig): JsonSafe<ServiceConfig> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.title !== undefined && (obj.title = message.title);
@@ -470,7 +471,7 @@ export const OperationMetadata = {
       resourceNames: Array.isArray(object?.resourceNames) ? object.resourceNames.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: OperationMetadata): unknown {
+  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);

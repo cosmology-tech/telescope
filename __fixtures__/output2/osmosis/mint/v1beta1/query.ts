@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Params } from "./mint";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -48,7 +49,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -91,7 +92,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -126,7 +127,7 @@ export const QueryEpochProvisionsRequest = {
   fromJSON(_: any): QueryEpochProvisionsRequest {
     return {};
   },
-  toJSON(_: QueryEpochProvisionsRequest): unknown {
+  toJSON(_: QueryEpochProvisionsRequest): JsonSafe<QueryEpochProvisionsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -169,7 +170,7 @@ export const QueryEpochProvisionsResponse = {
       epochProvisions: isSet(object.epochProvisions) ? bytesFromBase64(object.epochProvisions) : new Uint8Array()
     };
   },
-  toJSON(message: QueryEpochProvisionsResponse): unknown {
+  toJSON(message: QueryEpochProvisionsResponse): JsonSafe<QueryEpochProvisionsResponse> {
     const obj: any = {};
     message.epochProvisions !== undefined && (obj.epochProvisions = base64FromBytes(message.epochProvisions !== undefined ? message.epochProvisions : new Uint8Array()));
     return obj;

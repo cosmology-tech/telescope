@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -169,12 +168,6 @@ export const SourceInfo_PositionsEntry = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: SourceInfo_PositionsEntry): JsonSafe<SourceInfo_PositionsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = Math.round(message.value));
-    return obj;
-  },
   fromPartial(object: DeepPartial<SourceInfo_PositionsEntry>): SourceInfo_PositionsEntry {
     const message = createBaseSourceInfo_PositionsEntry();
     message.key = object.key ?? 0;
@@ -285,22 +278,6 @@ export const SourceInfo = {
       acc[Number(key)] = Number(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    if (message.lineOffsets) {
-      obj.lineOffsets = message.lineOffsets.map(e => Math.round(e));
-    } else {
-      obj.lineOffsets = [];
-    }
-    obj.positions = {};
-    if (message.positions) {
-      Object.entries(message.positions).forEach(([k, v]) => {
-        obj.positions[k] = Math.round(v);
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
@@ -447,14 +424,6 @@ export const SourcePosition = {
     if (isSet(object.offset)) obj.offset = Number(object.offset);
     if (isSet(object.line)) obj.line = Number(object.line);
     if (isSet(object.column)) obj.column = Number(object.column);
-    return obj;
-  },
-  toJSON(message: SourcePosition): JsonSafe<SourcePosition> {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.offset !== undefined && (obj.offset = Math.round(message.offset));
-    message.line !== undefined && (obj.line = Math.round(message.line));
-    message.column !== undefined && (obj.column = Math.round(message.column));
     return obj;
   },
   fromPartial(object: DeepPartial<SourcePosition>): SourcePosition {

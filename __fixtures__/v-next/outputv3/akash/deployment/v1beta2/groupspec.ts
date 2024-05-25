@@ -2,7 +2,6 @@ import { PlacementRequirements, PlacementRequirementsAmino, PlacementRequirement
 import { Resource, ResourceAmino, ResourceSDKType } from "./resource";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
@@ -75,17 +74,6 @@ export const GroupSpec = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
     if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => Resource.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GroupSpec): JsonSafe<GroupSpec> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? Resource.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {

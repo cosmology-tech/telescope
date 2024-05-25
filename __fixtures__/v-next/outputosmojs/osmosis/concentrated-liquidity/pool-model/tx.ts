@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** ===================== MsgCreateConcentratedPool */
 export interface MsgCreateConcentratedPool {
@@ -111,7 +112,7 @@ export const MsgCreateConcentratedPool = {
       swapFee: isSet(object.swapFee) ? String(object.swapFee) : ""
     };
   },
-  toJSON(message: MsgCreateConcentratedPool): unknown {
+  toJSON(message: MsgCreateConcentratedPool): JsonSafe<MsgCreateConcentratedPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.denom0 !== undefined && (obj.denom0 = message.denom0);
@@ -250,7 +251,7 @@ export const MsgCreateConcentratedPoolResponse = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgCreateConcentratedPoolResponse): unknown {
+  toJSON(message: MsgCreateConcentratedPoolResponse): JsonSafe<MsgCreateConcentratedPoolResponse> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;

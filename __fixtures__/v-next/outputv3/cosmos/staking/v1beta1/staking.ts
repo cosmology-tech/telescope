@@ -5,7 +5,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 import { Pubkey } from "@cosmjs/amino";
@@ -795,16 +794,6 @@ export const HistoricalInfo = {
     if (Array.isArray(object?.valset)) obj.valset = object.valset.map((e: any) => Validator.fromJSON(e));
     return obj;
   },
-  toJSON(message: HistoricalInfo): JsonSafe<HistoricalInfo> {
-    const obj: any = {};
-    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
-    if (message.valset) {
-      obj.valset = message.valset.map(e => e ? Validator.toJSON(e) : undefined);
-    } else {
-      obj.valset = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<HistoricalInfo>): HistoricalInfo {
     const message = createBaseHistoricalInfo();
     if (object.header !== undefined && object.header !== null) {
@@ -912,13 +901,6 @@ export const CommissionRates = {
     if (isSet(object.maxChangeRate)) obj.maxChangeRate = String(object.maxChangeRate);
     return obj;
   },
-  toJSON(message: CommissionRates): JsonSafe<CommissionRates> {
-    const obj: any = {};
-    message.rate !== undefined && (obj.rate = message.rate);
-    message.maxRate !== undefined && (obj.maxRate = message.maxRate);
-    message.maxChangeRate !== undefined && (obj.maxChangeRate = message.maxChangeRate);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CommissionRates>): CommissionRates {
     const message = createBaseCommissionRates();
     message.rate = object.rate ?? "";
@@ -1015,12 +997,6 @@ export const Commission = {
     const obj = createBaseCommission();
     if (isSet(object.commissionRates)) obj.commissionRates = CommissionRates.fromJSON(object.commissionRates);
     if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
-    return obj;
-  },
-  toJSON(message: Commission): JsonSafe<Commission> {
-    const obj: any = {};
-    message.commissionRates !== undefined && (obj.commissionRates = message.commissionRates ? CommissionRates.toJSON(message.commissionRates) : undefined);
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<Commission>): Commission {
@@ -1138,15 +1114,6 @@ export const Description = {
     if (isSet(object.website)) obj.website = String(object.website);
     if (isSet(object.securityContact)) obj.securityContact = String(object.securityContact);
     if (isSet(object.details)) obj.details = String(object.details);
-    return obj;
-  },
-  toJSON(message: Description): JsonSafe<Description> {
-    const obj: any = {};
-    message.moniker !== undefined && (obj.moniker = message.moniker);
-    message.identity !== undefined && (obj.identity = message.identity);
-    message.website !== undefined && (obj.website = message.website);
-    message.securityContact !== undefined && (obj.securityContact = message.securityContact);
-    message.details !== undefined && (obj.details = message.details);
     return obj;
   },
   fromPartial(object: DeepPartial<Description>): Description {
@@ -1333,21 +1300,6 @@ export const Validator = {
     if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
     return obj;
   },
-  toJSON(message: Validator): JsonSafe<Validator> {
-    const obj: any = {};
-    message.operatorAddress !== undefined && (obj.operatorAddress = message.operatorAddress);
-    message.consensusPubkey !== undefined && (obj.consensusPubkey = message.consensusPubkey ? Any.toJSON(message.consensusPubkey) : undefined);
-    message.jailed !== undefined && (obj.jailed = message.jailed);
-    message.status !== undefined && (obj.status = bondStatusToJSON(message.status));
-    message.tokens !== undefined && (obj.tokens = message.tokens);
-    message.delegatorShares !== undefined && (obj.delegatorShares = message.delegatorShares);
-    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    message.unbondingHeight !== undefined && (obj.unbondingHeight = (message.unbondingHeight || BigInt(0)).toString());
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime.toISOString());
-    message.commission !== undefined && (obj.commission = message.commission ? Commission.toJSON(message.commission) : undefined);
-    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.operatorAddress = object.operatorAddress ?? "";
@@ -1502,15 +1454,6 @@ export const ValAddresses = {
     if (Array.isArray(object?.addresses)) obj.addresses = object.addresses.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ValAddresses): JsonSafe<ValAddresses> {
-    const obj: any = {};
-    if (message.addresses) {
-      obj.addresses = message.addresses.map(e => e);
-    } else {
-      obj.addresses = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValAddresses>): ValAddresses {
     const message = createBaseValAddresses();
     message.addresses = object.addresses?.map(e => e) || [];
@@ -1601,12 +1544,6 @@ export const DVPair = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: DVPair): JsonSafe<DVPair> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DVPair>): DVPair {
     const message = createBaseDVPair();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1688,15 +1625,6 @@ export const DVPairs = {
   fromJSON(object: any): DVPairs {
     const obj = createBaseDVPairs();
     if (Array.isArray(object?.pairs)) obj.pairs = object.pairs.map((e: any) => DVPair.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DVPairs): JsonSafe<DVPairs> {
-    const obj: any = {};
-    if (message.pairs) {
-      obj.pairs = message.pairs.map(e => e ? DVPair.toJSON(e) : undefined);
-    } else {
-      obj.pairs = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<DVPairs>): DVPairs {
@@ -1797,13 +1725,6 @@ export const DVVTriplet = {
     if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
     return obj;
   },
-  toJSON(message: DVVTriplet): JsonSafe<DVVTriplet> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DVVTriplet>): DVVTriplet {
     const message = createBaseDVVTriplet();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1892,15 +1813,6 @@ export const DVVTriplets = {
   fromJSON(object: any): DVVTriplets {
     const obj = createBaseDVVTriplets();
     if (Array.isArray(object?.triplets)) obj.triplets = object.triplets.map((e: any) => DVVTriplet.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DVVTriplets): JsonSafe<DVVTriplets> {
-    const obj: any = {};
-    if (message.triplets) {
-      obj.triplets = message.triplets.map(e => e ? DVVTriplet.toJSON(e) : undefined);
-    } else {
-      obj.triplets = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<DVVTriplets>): DVVTriplets {
@@ -1999,13 +1911,6 @@ export const Delegation = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     if (isSet(object.shares)) obj.shares = String(object.shares);
-    return obj;
-  },
-  toJSON(message: Delegation): JsonSafe<Delegation> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.shares !== undefined && (obj.shares = message.shares);
     return obj;
   },
   fromPartial(object: DeepPartial<Delegation>): Delegation {
@@ -2112,17 +2017,6 @@ export const UnbondingDelegation = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => UnbondingDelegationEntry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: UnbondingDelegation): JsonSafe<UnbondingDelegation> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? UnbondingDelegationEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<UnbondingDelegation>): UnbondingDelegation {
@@ -2243,14 +2137,6 @@ export const UnbondingDelegationEntry = {
     if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
     if (isSet(object.initialBalance)) obj.initialBalance = String(object.initialBalance);
     if (isSet(object.balance)) obj.balance = String(object.balance);
-    return obj;
-  },
-  toJSON(message: UnbondingDelegationEntry): JsonSafe<UnbondingDelegationEntry> {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
-    message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
-    message.balance !== undefined && (obj.balance = message.balance);
     return obj;
   },
   fromPartial(object: DeepPartial<UnbondingDelegationEntry>): UnbondingDelegationEntry {
@@ -2376,14 +2262,6 @@ export const RedelegationEntry = {
     if (isSet(object.sharesDst)) obj.sharesDst = String(object.sharesDst);
     return obj;
   },
-  toJSON(message: RedelegationEntry): JsonSafe<RedelegationEntry> {
-    const obj: any = {};
-    message.creationHeight !== undefined && (obj.creationHeight = (message.creationHeight || BigInt(0)).toString());
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
-    message.initialBalance !== undefined && (obj.initialBalance = message.initialBalance);
-    message.sharesDst !== undefined && (obj.sharesDst = message.sharesDst);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RedelegationEntry>): RedelegationEntry {
     const message = createBaseRedelegationEntry();
     if (object.creationHeight !== undefined && object.creationHeight !== null) {
@@ -2505,18 +2383,6 @@ export const Redelegation = {
     if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
     if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Redelegation): JsonSafe<Redelegation> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Redelegation>): Redelegation {
@@ -2662,16 +2528,6 @@ export const Params = {
     if (isSet(object.minCommissionRate)) obj.minCommissionRate = String(object.minCommissionRate);
     return obj;
   },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.unbondingTime !== undefined && (obj.unbondingTime = message.unbondingTime ? Duration.toJSON(message.unbondingTime) : undefined);
-    message.maxValidators !== undefined && (obj.maxValidators = Math.round(message.maxValidators));
-    message.maxEntries !== undefined && (obj.maxEntries = Math.round(message.maxEntries));
-    message.historicalEntries !== undefined && (obj.historicalEntries = Math.round(message.historicalEntries));
-    message.bondDenom !== undefined && (obj.bondDenom = message.bondDenom);
-    message.minCommissionRate !== undefined && (obj.minCommissionRate = message.minCommissionRate);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     if (object.unbondingTime !== undefined && object.unbondingTime !== null) {
@@ -2793,12 +2649,6 @@ export const DelegationResponse = {
     if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
     return obj;
   },
-  toJSON(message: DelegationResponse): JsonSafe<DelegationResponse> {
-    const obj: any = {};
-    message.delegation !== undefined && (obj.delegation = message.delegation ? Delegation.toJSON(message.delegation) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DelegationResponse>): DelegationResponse {
     const message = createBaseDelegationResponse();
     if (object.delegation !== undefined && object.delegation !== null) {
@@ -2894,12 +2744,6 @@ export const RedelegationEntryResponse = {
     if (isSet(object.balance)) obj.balance = String(object.balance);
     return obj;
   },
-  toJSON(message: RedelegationEntryResponse): JsonSafe<RedelegationEntryResponse> {
-    const obj: any = {};
-    message.redelegationEntry !== undefined && (obj.redelegationEntry = message.redelegationEntry ? RedelegationEntry.toJSON(message.redelegationEntry) : undefined);
-    message.balance !== undefined && (obj.balance = message.balance);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RedelegationEntryResponse>): RedelegationEntryResponse {
     const message = createBaseRedelegationEntryResponse();
     if (object.redelegationEntry !== undefined && object.redelegationEntry !== null) {
@@ -2991,16 +2835,6 @@ export const RedelegationResponse = {
     const obj = createBaseRedelegationResponse();
     if (isSet(object.redelegation)) obj.redelegation = Redelegation.fromJSON(object.redelegation);
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => RedelegationEntryResponse.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: RedelegationResponse): JsonSafe<RedelegationResponse> {
-    const obj: any = {};
-    message.redelegation !== undefined && (obj.redelegation = message.redelegation ? Redelegation.toJSON(message.redelegation) : undefined);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? RedelegationEntryResponse.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<RedelegationResponse>): RedelegationResponse {
@@ -3100,12 +2934,6 @@ export const Pool = {
     const obj = createBasePool();
     if (isSet(object.notBondedTokens)) obj.notBondedTokens = String(object.notBondedTokens);
     if (isSet(object.bondedTokens)) obj.bondedTokens = String(object.bondedTokens);
-    return obj;
-  },
-  toJSON(message: Pool): JsonSafe<Pool> {
-    const obj: any = {};
-    message.notBondedTokens !== undefined && (obj.notBondedTokens = message.notBondedTokens);
-    message.bondedTokens !== undefined && (obj.bondedTokens = message.bondedTokens);
     return obj;
   },
   fromPartial(object: DeepPartial<Pool>): Pool {

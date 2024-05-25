@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.protobuf";
 /**
@@ -49,7 +50,7 @@ export const Empty = {
   fromJSON(_: any): Empty {
     return {};
   },
-  toJSON(_: Empty): unknown {
+  toJSON(_: Empty): JsonSafe<Empty> {
     const obj: any = {};
     return obj;
   },

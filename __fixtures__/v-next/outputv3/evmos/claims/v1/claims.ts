@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
@@ -206,13 +205,6 @@ export const Claim = {
     if (isSet(object.claimableAmount)) obj.claimableAmount = String(object.claimableAmount);
     return obj;
   },
-  toJSON(message: Claim): JsonSafe<Claim> {
-    const obj: any = {};
-    message.action !== undefined && (obj.action = actionToJSON(message.action));
-    message.completed !== undefined && (obj.completed = message.completed);
-    message.claimableAmount !== undefined && (obj.claimableAmount = message.claimableAmount);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Claim>): Claim {
     const message = createBaseClaim();
     message.action = object.action ?? 0;
@@ -327,17 +319,6 @@ export const ClaimsRecordAddress = {
     if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
     return obj;
   },
-  toJSON(message: ClaimsRecordAddress): JsonSafe<ClaimsRecordAddress> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
-    if (message.actionsCompleted) {
-      obj.actionsCompleted = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actionsCompleted = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ClaimsRecordAddress>): ClaimsRecordAddress {
     const message = createBaseClaimsRecordAddress();
     message.address = object.address ?? "";
@@ -448,16 +429,6 @@ export const ClaimsRecord = {
     const obj = createBaseClaimsRecord();
     if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
     if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
-    return obj;
-  },
-  toJSON(message: ClaimsRecord): JsonSafe<ClaimsRecord> {
-    const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
-    if (message.actionsCompleted) {
-      obj.actionsCompleted = message.actionsCompleted.map(e => e);
-    } else {
-      obj.actionsCompleted = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ClaimsRecord>): ClaimsRecord {

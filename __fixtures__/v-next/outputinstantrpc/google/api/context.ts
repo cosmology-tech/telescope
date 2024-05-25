@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -168,7 +169,7 @@ export const Context = {
     if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => ContextRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Context): unknown {
+  toJSON(message: Context): JsonSafe<Context> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? ContextRule.toJSON(e) : undefined);
@@ -298,7 +299,7 @@ export const ContextRule = {
     if (Array.isArray(object?.allowedResponseExtensions)) obj.allowedResponseExtensions = object.allowedResponseExtensions.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ContextRule): unknown {
+  toJSON(message: ContextRule): JsonSafe<ContextRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     if (message.requested) {

@@ -1,7 +1,6 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
@@ -96,13 +95,6 @@ export const UpdateFeeTokenProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.feetoken)) obj.feetoken = FeeToken.fromJSON(object.feetoken);
-    return obj;
-  },
-  toJSON(message: UpdateFeeTokenProposal): JsonSafe<UpdateFeeTokenProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {

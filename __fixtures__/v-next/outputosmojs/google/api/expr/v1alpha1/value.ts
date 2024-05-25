@@ -2,6 +2,7 @@ import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from 
 import { Any, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * Represents a CEL value.
@@ -270,7 +271,7 @@ export const Value = {
       typeValue: isSet(object.typeValue) ? String(object.typeValue) : undefined
     };
   },
-  toJSON(message: Value): unknown {
+  toJSON(message: Value): JsonSafe<Value> {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
@@ -469,7 +470,7 @@ export const EnumValue = {
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-  toJSON(message: EnumValue): unknown {
+  toJSON(message: EnumValue): JsonSafe<EnumValue> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     message.value !== undefined && (obj.value = Math.round(message.value));
@@ -566,7 +567,7 @@ export const ListValue = {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
     };
   },
-  toJSON(message: ListValue): unknown {
+  toJSON(message: ListValue): JsonSafe<ListValue> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
@@ -664,7 +665,7 @@ export const MapValue = {
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
     };
   },
-  toJSON(message: MapValue): unknown {
+  toJSON(message: MapValue): JsonSafe<MapValue> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
@@ -770,7 +771,7 @@ export const MapValue_Entry = {
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: MapValue_Entry): unknown {
+  toJSON(message: MapValue_Entry): JsonSafe<MapValue_Entry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);

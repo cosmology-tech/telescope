@@ -1,6 +1,7 @@
 import { MerklePrefix, MerklePrefixAmino, MerklePrefixSDKType } from "../../commitment/v1/commitment";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * State defines if a connection is in one of the following states:
@@ -417,7 +418,7 @@ export const ConnectionEnd = {
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
     return obj;
   },
-  toJSON(message: ConnectionEnd): unknown {
+  toJSON(message: ConnectionEnd): JsonSafe<ConnectionEnd> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     if (message.versions) {
@@ -593,7 +594,7 @@ export const IdentifiedConnection = {
     if (isSet(object.delayPeriod)) obj.delayPeriod = BigInt(object.delayPeriod.toString());
     return obj;
   },
-  toJSON(message: IdentifiedConnection): unknown {
+  toJSON(message: IdentifiedConnection): JsonSafe<IdentifiedConnection> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.clientId !== undefined && (obj.clientId = message.clientId);
@@ -753,7 +754,7 @@ export const Counterparty = {
     if (isSet(object.prefix)) obj.prefix = MerklePrefix.fromJSON(object.prefix);
     return obj;
   },
-  toJSON(message: Counterparty): unknown {
+  toJSON(message: Counterparty): JsonSafe<Counterparty> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
@@ -861,7 +862,7 @@ export const ClientPaths = {
     if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ClientPaths): unknown {
+  toJSON(message: ClientPaths): JsonSafe<ClientPaths> {
     const obj: any = {};
     if (message.paths) {
       obj.paths = message.paths.map(e => e);
@@ -969,7 +970,7 @@ export const ConnectionPaths = {
     if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ConnectionPaths): unknown {
+  toJSON(message: ConnectionPaths): JsonSafe<ConnectionPaths> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     if (message.paths) {
@@ -1085,7 +1086,7 @@ export const Version = {
     if (Array.isArray(object?.features)) obj.features = object.features.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: Version): unknown {
+  toJSON(message: Version): JsonSafe<Version> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     if (message.features) {
@@ -1193,7 +1194,7 @@ export const Params = {
     if (isSet(object.maxExpectedTimePerBlock)) obj.maxExpectedTimePerBlock = BigInt(object.maxExpectedTimePerBlock.toString());
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.maxExpectedTimePerBlock !== undefined && (obj.maxExpectedTimePerBlock = (message.maxExpectedTimePerBlock || BigInt(0)).toString());
     return obj;

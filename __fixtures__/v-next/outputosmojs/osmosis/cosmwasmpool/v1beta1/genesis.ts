@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** Params holds parameters for the cosmwasmpool module */
@@ -47,7 +48,7 @@ export const Params = {
   fromJSON(_: any): Params {
     return {};
   },
-  toJSON(_: Params): unknown {
+  toJSON(_: Params): JsonSafe<Params> {
     const obj: any = {};
     return obj;
   },
@@ -130,7 +131,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

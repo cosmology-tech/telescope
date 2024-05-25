@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /**
  * ===================== MsgJoinPool
@@ -327,7 +328,7 @@ export const MsgJoinPool = {
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgJoinPool): unknown {
+  toJSON(message: MsgJoinPool): JsonSafe<MsgJoinPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -466,7 +467,7 @@ export const MsgJoinPoolResponse = {
       tokenIn: Array.isArray(object?.tokenIn) ? object.tokenIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgJoinPoolResponse): unknown {
+  toJSON(message: MsgJoinPoolResponse): JsonSafe<MsgJoinPoolResponse> {
     const obj: any = {};
     message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
     if (message.tokenIn) {
@@ -603,7 +604,7 @@ export const MsgExitPool = {
       tokenOutMins: Array.isArray(object?.tokenOutMins) ? object.tokenOutMins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgExitPool): unknown {
+  toJSON(message: MsgExitPool): JsonSafe<MsgExitPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -734,7 +735,7 @@ export const MsgExitPoolResponse = {
       tokenOut: Array.isArray(object?.tokenOut) ? object.tokenOut.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgExitPoolResponse): unknown {
+  toJSON(message: MsgExitPoolResponse): JsonSafe<MsgExitPoolResponse> {
     const obj: any = {};
     if (message.tokenOut) {
       obj.tokenOut = message.tokenOut.map(e => e ? Coin.toJSON(e) : undefined);
@@ -846,7 +847,7 @@ export const SwapAmountInRoute = {
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
-  toJSON(message: SwapAmountInRoute): unknown {
+  toJSON(message: SwapAmountInRoute): JsonSafe<SwapAmountInRoute> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
@@ -973,7 +974,7 @@ export const MsgSwapExactAmountIn = {
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountIn): unknown {
+  toJSON(message: MsgSwapExactAmountIn): JsonSafe<MsgSwapExactAmountIn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {
@@ -1104,7 +1105,7 @@ export const MsgSwapExactAmountInResponse = {
       tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountInResponse): unknown {
+  toJSON(message: MsgSwapExactAmountInResponse): JsonSafe<MsgSwapExactAmountInResponse> {
     const obj: any = {};
     message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
     return obj;
@@ -1206,7 +1207,7 @@ export const SwapAmountOutRoute = {
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : ""
     };
   },
-  toJSON(message: SwapAmountOutRoute): unknown {
+  toJSON(message: SwapAmountOutRoute): JsonSafe<SwapAmountOutRoute> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);
@@ -1333,7 +1334,7 @@ export const MsgSwapExactAmountOut = {
       tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
     };
   },
-  toJSON(message: MsgSwapExactAmountOut): unknown {
+  toJSON(message: MsgSwapExactAmountOut): JsonSafe<MsgSwapExactAmountOut> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {
@@ -1464,7 +1465,7 @@ export const MsgSwapExactAmountOutResponse = {
       tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountOutResponse): unknown {
+  toJSON(message: MsgSwapExactAmountOutResponse): JsonSafe<MsgSwapExactAmountOutResponse> {
     const obj: any = {};
     message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
     return obj;
@@ -1582,7 +1583,7 @@ export const MsgJoinSwapExternAmountIn = {
       shareOutMinAmount: isSet(object.shareOutMinAmount) ? String(object.shareOutMinAmount) : ""
     };
   },
-  toJSON(message: MsgJoinSwapExternAmountIn): unknown {
+  toJSON(message: MsgJoinSwapExternAmountIn): JsonSafe<MsgJoinSwapExternAmountIn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -1703,7 +1704,7 @@ export const MsgJoinSwapExternAmountInResponse = {
       shareOutAmount: isSet(object.shareOutAmount) ? String(object.shareOutAmount) : ""
     };
   },
-  toJSON(message: MsgJoinSwapExternAmountInResponse): unknown {
+  toJSON(message: MsgJoinSwapExternAmountInResponse): JsonSafe<MsgJoinSwapExternAmountInResponse> {
     const obj: any = {};
     message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
     return obj;
@@ -1829,7 +1830,7 @@ export const MsgJoinSwapShareAmountOut = {
       tokenInMaxAmount: isSet(object.tokenInMaxAmount) ? String(object.tokenInMaxAmount) : ""
     };
   },
-  toJSON(message: MsgJoinSwapShareAmountOut): unknown {
+  toJSON(message: MsgJoinSwapShareAmountOut): JsonSafe<MsgJoinSwapShareAmountOut> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -1959,7 +1960,7 @@ export const MsgJoinSwapShareAmountOutResponse = {
       tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
     };
   },
-  toJSON(message: MsgJoinSwapShareAmountOutResponse): unknown {
+  toJSON(message: MsgJoinSwapShareAmountOutResponse): JsonSafe<MsgJoinSwapShareAmountOutResponse> {
     const obj: any = {};
     message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
     return obj;
@@ -2085,7 +2086,7 @@ export const MsgExitSwapShareAmountIn = {
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
     };
   },
-  toJSON(message: MsgExitSwapShareAmountIn): unknown {
+  toJSON(message: MsgExitSwapShareAmountIn): JsonSafe<MsgExitSwapShareAmountIn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -2215,7 +2216,7 @@ export const MsgExitSwapShareAmountInResponse = {
       tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
     };
   },
-  toJSON(message: MsgExitSwapShareAmountInResponse): unknown {
+  toJSON(message: MsgExitSwapShareAmountInResponse): JsonSafe<MsgExitSwapShareAmountInResponse> {
     const obj: any = {};
     message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
     return obj;
@@ -2333,7 +2334,7 @@ export const MsgExitSwapExternAmountOut = {
       shareInMaxAmount: isSet(object.shareInMaxAmount) ? String(object.shareInMaxAmount) : ""
     };
   },
-  toJSON(message: MsgExitSwapExternAmountOut): unknown {
+  toJSON(message: MsgExitSwapExternAmountOut): JsonSafe<MsgExitSwapExternAmountOut> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -2454,7 +2455,7 @@ export const MsgExitSwapExternAmountOutResponse = {
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
     };
   },
-  toJSON(message: MsgExitSwapExternAmountOutResponse): unknown {
+  toJSON(message: MsgExitSwapExternAmountOutResponse): JsonSafe<MsgExitSwapExternAmountOutResponse> {
     const obj: any = {};
     message.shareInAmount !== undefined && (obj.shareInAmount = message.shareInAmount);
     return obj;

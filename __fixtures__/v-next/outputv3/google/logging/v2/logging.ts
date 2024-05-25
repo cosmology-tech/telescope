@@ -4,7 +4,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../protobuf/duratio
 import { Status, StatusAmino, StatusSDKType } from "../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 /** An indicator of why entries were omitted. */
 export enum TailLogEntriesResponse_SuppressionInfo_Reason {
@@ -927,11 +926,6 @@ export const DeleteLogRequest = {
     if (isSet(object.logName)) obj.logName = String(object.logName);
     return obj;
   },
-  toJSON(message: DeleteLogRequest): JsonSafe<DeleteLogRequest> {
-    const obj: any = {};
-    message.logName !== undefined && (obj.logName = message.logName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteLogRequest>): DeleteLogRequest {
     const message = createBaseDeleteLogRequest();
     message.logName = object.logName ?? "";
@@ -1012,12 +1006,6 @@ export const WriteLogEntriesRequest_LabelsEntry = {
     const obj = createBaseWriteLogEntriesRequest_LabelsEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: WriteLogEntriesRequest_LabelsEntry): JsonSafe<WriteLogEntriesRequest_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesRequest_LabelsEntry>): WriteLogEntriesRequest_LabelsEntry {
@@ -1145,25 +1133,6 @@ export const WriteLogEntriesRequest = {
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => LogEntry.fromJSON(e));
     if (isSet(object.partialSuccess)) obj.partialSuccess = Boolean(object.partialSuccess);
     if (isSet(object.dryRun)) obj.dryRun = Boolean(object.dryRun);
-    return obj;
-  },
-  toJSON(message: WriteLogEntriesRequest): JsonSafe<WriteLogEntriesRequest> {
-    const obj: any = {};
-    message.logName !== undefined && (obj.logName = message.logName);
-    message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toJSON(message.resource) : undefined);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? LogEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    message.partialSuccess !== undefined && (obj.partialSuccess = message.partialSuccess);
-    message.dryRun !== undefined && (obj.dryRun = message.dryRun);
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesRequest>): WriteLogEntriesRequest {
@@ -1302,10 +1271,6 @@ export const WriteLogEntriesResponse = {
     const obj = createBaseWriteLogEntriesResponse();
     return obj;
   },
-  toJSON(_: WriteLogEntriesResponse): JsonSafe<WriteLogEntriesResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<WriteLogEntriesResponse>): WriteLogEntriesResponse {
     const message = createBaseWriteLogEntriesResponse();
     return message;
@@ -1378,12 +1343,6 @@ export const WriteLogEntriesPartialErrors_LogEntryErrorsEntry = {
     const obj = createBaseWriteLogEntriesPartialErrors_LogEntryErrorsEntry();
     if (isSet(object.key)) obj.key = Number(object.key);
     if (isSet(object.value)) obj.value = Status.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: WriteLogEntriesPartialErrors_LogEntryErrorsEntry): JsonSafe<WriteLogEntriesPartialErrors_LogEntryErrorsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = Math.round(message.key));
-    message.value !== undefined && (obj.value = message.value ? Status.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors_LogEntryErrorsEntry>): WriteLogEntriesPartialErrors_LogEntryErrorsEntry {
@@ -1473,16 +1432,6 @@ export const WriteLogEntriesPartialErrors = {
       acc[Number(key)] = Status.fromJSON(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: WriteLogEntriesPartialErrors): JsonSafe<WriteLogEntriesPartialErrors> {
-    const obj: any = {};
-    obj.logEntryErrors = {};
-    if (message.logEntryErrors) {
-      Object.entries(message.logEntryErrors).forEach(([k, v]) => {
-        obj.logEntryErrors[k] = Status.toJSON(v);
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<WriteLogEntriesPartialErrors>): WriteLogEntriesPartialErrors {
@@ -1619,19 +1568,6 @@ export const ListLogEntriesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListLogEntriesRequest): JsonSafe<ListLogEntriesRequest> {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.orderBy !== undefined && (obj.orderBy = message.orderBy);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogEntriesRequest>): ListLogEntriesRequest {
     const message = createBaseListLogEntriesRequest();
     message.resourceNames = object.resourceNames?.map(e => e) || [];
@@ -1749,16 +1685,6 @@ export const ListLogEntriesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogEntriesResponse): JsonSafe<ListLogEntriesResponse> {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? LogEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogEntriesResponse>): ListLogEntriesResponse {
     const message = createBaseListLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
@@ -1855,12 +1781,6 @@ export const ListMonitoredResourceDescriptorsRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListMonitoredResourceDescriptorsRequest): JsonSafe<ListMonitoredResourceDescriptorsRequest> {
-    const obj: any = {};
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsRequest>): ListMonitoredResourceDescriptorsRequest {
     const message = createBaseListMonitoredResourceDescriptorsRequest();
     message.pageSize = object.pageSize ?? 0;
@@ -1949,16 +1869,6 @@ export const ListMonitoredResourceDescriptorsResponse = {
     const obj = createBaseListMonitoredResourceDescriptorsResponse();
     if (Array.isArray(object?.resourceDescriptors)) obj.resourceDescriptors = object.resourceDescriptors.map((e: any) => MonitoredResourceDescriptor.fromJSON(e));
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
-    return obj;
-  },
-  toJSON(message: ListMonitoredResourceDescriptorsResponse): JsonSafe<ListMonitoredResourceDescriptorsResponse> {
-    const obj: any = {};
-    if (message.resourceDescriptors) {
-      obj.resourceDescriptors = message.resourceDescriptors.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.resourceDescriptors = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
     return obj;
   },
   fromPartial(object: DeepPartial<ListMonitoredResourceDescriptorsResponse>): ListMonitoredResourceDescriptorsResponse {
@@ -2073,18 +1983,6 @@ export const ListLogsRequest = {
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: ListLogsRequest): JsonSafe<ListLogsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogsRequest>): ListLogsRequest {
     const message = createBaseListLogsRequest();
     message.parent = object.parent ?? "";
@@ -2195,16 +2093,6 @@ export const ListLogsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogsResponse): JsonSafe<ListLogsResponse> {
-    const obj: any = {};
-    if (message.logNames) {
-      obj.logNames = message.logNames.map(e => e);
-    } else {
-      obj.logNames = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogsResponse>): ListLogsResponse {
     const message = createBaseListLogsResponse();
     message.logNames = object.logNames?.map(e => e) || [];
@@ -2307,17 +2195,6 @@ export const TailLogEntriesRequest = {
     if (Array.isArray(object?.resourceNames)) obj.resourceNames = object.resourceNames.map((e: any) => String(e));
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.bufferWindow)) obj.bufferWindow = Duration.fromJSON(object.bufferWindow);
-    return obj;
-  },
-  toJSON(message: TailLogEntriesRequest): JsonSafe<TailLogEntriesRequest> {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.bufferWindow !== undefined && (obj.bufferWindow = message.bufferWindow ? Duration.toJSON(message.bufferWindow) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<TailLogEntriesRequest>): TailLogEntriesRequest {
@@ -2425,20 +2302,6 @@ export const TailLogEntriesResponse = {
     if (Array.isArray(object?.suppressionInfo)) obj.suppressionInfo = object.suppressionInfo.map((e: any) => TailLogEntriesResponse_SuppressionInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: TailLogEntriesResponse): JsonSafe<TailLogEntriesResponse> {
-    const obj: any = {};
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? LogEntry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
-    if (message.suppressionInfo) {
-      obj.suppressionInfo = message.suppressionInfo.map(e => e ? TailLogEntriesResponse_SuppressionInfo.toJSON(e) : undefined);
-    } else {
-      obj.suppressionInfo = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<TailLogEntriesResponse>): TailLogEntriesResponse {
     const message = createBaseTailLogEntriesResponse();
     message.entries = object.entries?.map(e => LogEntry.fromPartial(e)) || [];
@@ -2539,12 +2402,6 @@ export const TailLogEntriesResponse_SuppressionInfo = {
     const obj = createBaseTailLogEntriesResponse_SuppressionInfo();
     if (isSet(object.reason)) obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonFromJSON(object.reason);
     if (isSet(object.suppressedCount)) obj.suppressedCount = Number(object.suppressedCount);
-    return obj;
-  },
-  toJSON(message: TailLogEntriesResponse_SuppressionInfo): JsonSafe<TailLogEntriesResponse_SuppressionInfo> {
-    const obj: any = {};
-    message.reason !== undefined && (obj.reason = tailLogEntriesResponse_SuppressionInfo_ReasonToJSON(message.reason));
-    message.suppressedCount !== undefined && (obj.suppressedCount = Math.round(message.suppressedCount));
     return obj;
   },
   fromPartial(object: DeepPartial<TailLogEntriesResponse_SuppressionInfo>): TailLogEntriesResponse_SuppressionInfo {

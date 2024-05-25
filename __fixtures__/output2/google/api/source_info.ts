@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
@@ -43,7 +44,7 @@ export const SourceInfo = {
       sourceFiles: Array.isArray(object?.sourceFiles) ? object.sourceFiles.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: SourceInfo): unknown {
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
     if (message.sourceFiles) {
       obj.sourceFiles = message.sourceFiles.map(e => e ? Any.toJSON(e) : undefined);

@@ -6,6 +6,7 @@ import { SwapAmountInRoute, SwapAmountOutRoute } from "./tx";
 import { Any } from "../../../google/protobuf/any";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** =============================== Pool */
 export interface QueryPoolRequest {
@@ -172,7 +173,7 @@ export const QueryPoolRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: QueryPoolRequest): unknown {
+  toJSON(message: QueryPoolRequest): JsonSafe<QueryPoolRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
@@ -217,7 +218,7 @@ export const QueryPoolResponse = {
       pool: isSet(object.pool) ? Any.fromJSON(object.pool) : undefined
     };
   },
-  toJSON(message: QueryPoolResponse): unknown {
+  toJSON(message: QueryPoolResponse): JsonSafe<QueryPoolResponse> {
     const obj: any = {};
     message.pool !== undefined && (obj.pool = message.pool ? Any.toJSON(message.pool) : undefined);
     return obj;
@@ -262,7 +263,7 @@ export const QueryPoolsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsRequest): unknown {
+  toJSON(message: QueryPoolsRequest): JsonSafe<QueryPoolsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -315,7 +316,7 @@ export const QueryPoolsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsResponse): unknown {
+  toJSON(message: QueryPoolsResponse): JsonSafe<QueryPoolsResponse> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
@@ -356,7 +357,7 @@ export const QueryNumPoolsRequest = {
   fromJSON(_: any): QueryNumPoolsRequest {
     return {};
   },
-  toJSON(_: QueryNumPoolsRequest): unknown {
+  toJSON(_: QueryNumPoolsRequest): JsonSafe<QueryNumPoolsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -399,7 +400,7 @@ export const QueryNumPoolsResponse = {
       numPools: isSet(object.numPools) ? Long.fromValue(object.numPools) : Long.UZERO
     };
   },
-  toJSON(message: QueryNumPoolsResponse): unknown {
+  toJSON(message: QueryNumPoolsResponse): JsonSafe<QueryNumPoolsResponse> {
     const obj: any = {};
     message.numPools !== undefined && (obj.numPools = (message.numPools || Long.UZERO).toString());
     return obj;
@@ -444,7 +445,7 @@ export const QueryPoolTypeRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: QueryPoolTypeRequest): unknown {
+  toJSON(message: QueryPoolTypeRequest): JsonSafe<QueryPoolTypeRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
@@ -489,7 +490,7 @@ export const QueryPoolTypeResponse = {
       poolType: isSet(object.poolType) ? String(object.poolType) : ""
     };
   },
-  toJSON(message: QueryPoolTypeResponse): unknown {
+  toJSON(message: QueryPoolTypeResponse): JsonSafe<QueryPoolTypeResponse> {
     const obj: any = {};
     message.poolType !== undefined && (obj.poolType = message.poolType);
     return obj;
@@ -542,7 +543,7 @@ export const QueryCalcJoinPoolSharesRequest = {
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryCalcJoinPoolSharesRequest): unknown {
+  toJSON(message: QueryCalcJoinPoolSharesRequest): JsonSafe<QueryCalcJoinPoolSharesRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.tokensIn) {
@@ -601,7 +602,7 @@ export const QueryCalcJoinPoolSharesResponse = {
       tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryCalcJoinPoolSharesResponse): unknown {
+  toJSON(message: QueryCalcJoinPoolSharesResponse): JsonSafe<QueryCalcJoinPoolSharesResponse> {
     const obj: any = {};
     message.shareOutAmount !== undefined && (obj.shareOutAmount = message.shareOutAmount);
     if (message.tokensOut) {
@@ -660,7 +661,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
       shareInAmount: isSet(object.shareInAmount) ? String(object.shareInAmount) : ""
     };
   },
-  toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): unknown {
+  toJSON(message: QueryCalcExitPoolCoinsFromSharesRequest): JsonSafe<QueryCalcExitPoolCoinsFromSharesRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.shareInAmount !== undefined && (obj.shareInAmount = message.shareInAmount);
@@ -707,7 +708,7 @@ export const QueryCalcExitPoolCoinsFromSharesResponse = {
       tokensOut: Array.isArray(object?.tokensOut) ? object.tokensOut.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryCalcExitPoolCoinsFromSharesResponse): unknown {
+  toJSON(message: QueryCalcExitPoolCoinsFromSharesResponse): JsonSafe<QueryCalcExitPoolCoinsFromSharesResponse> {
     const obj: any = {};
     if (message.tokensOut) {
       obj.tokensOut = message.tokensOut.map(e => e ? Coin.toJSON(e) : undefined);
@@ -756,7 +757,7 @@ export const QueryPoolParamsRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: QueryPoolParamsRequest): unknown {
+  toJSON(message: QueryPoolParamsRequest): JsonSafe<QueryPoolParamsRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
@@ -801,7 +802,7 @@ export const QueryPoolParamsResponse = {
       params: isSet(object.params) ? Any.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryPoolParamsResponse): unknown {
+  toJSON(message: QueryPoolParamsResponse): JsonSafe<QueryPoolParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Any.toJSON(message.params) : undefined);
     return obj;
@@ -846,7 +847,7 @@ export const QueryTotalPoolLiquidityRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: QueryTotalPoolLiquidityRequest): unknown {
+  toJSON(message: QueryTotalPoolLiquidityRequest): JsonSafe<QueryTotalPoolLiquidityRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
@@ -891,7 +892,7 @@ export const QueryTotalPoolLiquidityResponse = {
       liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalPoolLiquidityResponse): unknown {
+  toJSON(message: QueryTotalPoolLiquidityResponse): JsonSafe<QueryTotalPoolLiquidityResponse> {
     const obj: any = {};
     if (message.liquidity) {
       obj.liquidity = message.liquidity.map(e => e ? Coin.toJSON(e) : undefined);
@@ -940,7 +941,7 @@ export const QueryTotalSharesRequest = {
       poolId: isSet(object.poolId) ? Long.fromValue(object.poolId) : Long.UZERO
     };
   },
-  toJSON(message: QueryTotalSharesRequest): unknown {
+  toJSON(message: QueryTotalSharesRequest): JsonSafe<QueryTotalSharesRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     return obj;
@@ -985,7 +986,7 @@ export const QueryTotalSharesResponse = {
       totalShares: isSet(object.totalShares) ? Coin.fromJSON(object.totalShares) : undefined
     };
   },
-  toJSON(message: QueryTotalSharesResponse): unknown {
+  toJSON(message: QueryTotalSharesResponse): JsonSafe<QueryTotalSharesResponse> {
     const obj: any = {};
     message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
     return obj;
@@ -1038,7 +1039,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
       tokensIn: Array.isArray(object?.tokensIn) ? object.tokensIn.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): unknown {
+  toJSON(message: QueryCalcJoinPoolNoSwapSharesRequest): JsonSafe<QueryCalcJoinPoolNoSwapSharesRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     if (message.tokensIn) {
@@ -1097,7 +1098,7 @@ export const QueryCalcJoinPoolNoSwapSharesResponse = {
       sharesOut: isSet(object.sharesOut) ? String(object.sharesOut) : ""
     };
   },
-  toJSON(message: QueryCalcJoinPoolNoSwapSharesResponse): unknown {
+  toJSON(message: QueryCalcJoinPoolNoSwapSharesResponse): JsonSafe<QueryCalcJoinPoolNoSwapSharesResponse> {
     const obj: any = {};
     if (message.tokensOut) {
       obj.tokensOut = message.tokensOut.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1164,7 +1165,7 @@ export const QuerySpotPriceRequest = {
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
-  toJSON(message: QuerySpotPriceRequest): unknown {
+  toJSON(message: QuerySpotPriceRequest): JsonSafe<QuerySpotPriceRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
@@ -1229,7 +1230,7 @@ export const QueryPoolsWithFilterRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsWithFilterRequest): unknown {
+  toJSON(message: QueryPoolsWithFilterRequest): JsonSafe<QueryPoolsWithFilterRequest> {
     const obj: any = {};
     if (message.minLiquidity) {
       obj.minLiquidity = message.minLiquidity.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1290,7 +1291,7 @@ export const QueryPoolsWithFilterResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsWithFilterResponse): unknown {
+  toJSON(message: QueryPoolsWithFilterResponse): JsonSafe<QueryPoolsWithFilterResponse> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
@@ -1341,7 +1342,7 @@ export const QuerySpotPriceResponse = {
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
-  toJSON(message: QuerySpotPriceResponse): unknown {
+  toJSON(message: QuerySpotPriceResponse): JsonSafe<QuerySpotPriceResponse> {
     const obj: any = {};
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
@@ -1410,7 +1411,7 @@ export const QuerySwapExactAmountInRequest = {
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => SwapAmountInRoute.fromJSON(e)) : []
     };
   },
-  toJSON(message: QuerySwapExactAmountInRequest): unknown {
+  toJSON(message: QuerySwapExactAmountInRequest): JsonSafe<QuerySwapExactAmountInRequest> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
@@ -1465,7 +1466,7 @@ export const QuerySwapExactAmountInResponse = {
       tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
     };
   },
-  toJSON(message: QuerySwapExactAmountInResponse): unknown {
+  toJSON(message: QuerySwapExactAmountInResponse): JsonSafe<QuerySwapExactAmountInResponse> {
     const obj: any = {};
     message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
     return obj;
@@ -1534,7 +1535,7 @@ export const QuerySwapExactAmountOutRequest = {
       tokenOut: isSet(object.tokenOut) ? String(object.tokenOut) : ""
     };
   },
-  toJSON(message: QuerySwapExactAmountOutRequest): unknown {
+  toJSON(message: QuerySwapExactAmountOutRequest): JsonSafe<QuerySwapExactAmountOutRequest> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
@@ -1589,7 +1590,7 @@ export const QuerySwapExactAmountOutResponse = {
       tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
     };
   },
-  toJSON(message: QuerySwapExactAmountOutResponse): unknown {
+  toJSON(message: QuerySwapExactAmountOutResponse): JsonSafe<QuerySwapExactAmountOutResponse> {
     const obj: any = {};
     message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
     return obj;
@@ -1624,7 +1625,7 @@ export const QueryTotalLiquidityRequest = {
   fromJSON(_: any): QueryTotalLiquidityRequest {
     return {};
   },
-  toJSON(_: QueryTotalLiquidityRequest): unknown {
+  toJSON(_: QueryTotalLiquidityRequest): JsonSafe<QueryTotalLiquidityRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1667,7 +1668,7 @@ export const QueryTotalLiquidityResponse = {
       liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalLiquidityResponse): unknown {
+  toJSON(message: QueryTotalLiquidityResponse): JsonSafe<QueryTotalLiquidityResponse> {
     const obj: any = {};
     if (message.liquidity) {
       obj.liquidity = message.liquidity.map(e => e ? Coin.toJSON(e) : undefined);

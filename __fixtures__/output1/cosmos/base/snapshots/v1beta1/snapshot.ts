@@ -1,5 +1,6 @@
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.base.snapshots.v1beta1";
 /** Snapshot contains Tendermint state sync snapshot info. */
 export interface Snapshot {
@@ -170,7 +171,7 @@ export const Snapshot = {
       metadata: isSet(object.metadata) ? Metadata.fromJSON(object.metadata) : undefined
     };
   },
-  toJSON(message: Snapshot): unknown {
+  toJSON(message: Snapshot): JsonSafe<Snapshot> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || Long.UZERO).toString());
     message.format !== undefined && (obj.format = Math.round(message.format));
@@ -241,7 +242,7 @@ export const Metadata = {
       chunkHashes: Array.isArray(object?.chunkHashes) ? object.chunkHashes.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: Metadata): unknown {
+  toJSON(message: Metadata): JsonSafe<Metadata> {
     const obj: any = {};
     if (message.chunkHashes) {
       obj.chunkHashes = message.chunkHashes.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
@@ -344,7 +345,7 @@ export const SnapshotItem = {
       schema: isSet(object.schema) ? SnapshotSchema.fromJSON(object.schema) : undefined
     };
   },
-  toJSON(message: SnapshotItem): unknown {
+  toJSON(message: SnapshotItem): JsonSafe<SnapshotItem> {
     const obj: any = {};
     message.store !== undefined && (obj.store = message.store ? SnapshotStoreItem.toJSON(message.store) : undefined);
     message.iavl !== undefined && (obj.iavl = message.iavl ? SnapshotIAVLItem.toJSON(message.iavl) : undefined);
@@ -419,7 +420,7 @@ export const SnapshotStoreItem = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: SnapshotStoreItem): unknown {
+  toJSON(message: SnapshotStoreItem): JsonSafe<SnapshotStoreItem> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -498,7 +499,7 @@ export const SnapshotIAVLItem = {
       height: isSet(object.height) ? Number(object.height) : 0
     };
   },
-  toJSON(message: SnapshotIAVLItem): unknown {
+  toJSON(message: SnapshotIAVLItem): JsonSafe<SnapshotIAVLItem> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -573,7 +574,7 @@ export const SnapshotExtensionMeta = {
       format: isSet(object.format) ? Number(object.format) : 0
     };
   },
-  toJSON(message: SnapshotExtensionMeta): unknown {
+  toJSON(message: SnapshotExtensionMeta): JsonSafe<SnapshotExtensionMeta> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.format !== undefined && (obj.format = Math.round(message.format));
@@ -632,7 +633,7 @@ export const SnapshotExtensionPayload = {
       payload: isSet(object.payload) ? bytesFromBase64(object.payload) : new Uint8Array()
     };
   },
-  toJSON(message: SnapshotExtensionPayload): unknown {
+  toJSON(message: SnapshotExtensionPayload): JsonSafe<SnapshotExtensionPayload> {
     const obj: any = {};
     message.payload !== undefined && (obj.payload = base64FromBytes(message.payload !== undefined ? message.payload : new Uint8Array()));
     return obj;
@@ -695,7 +696,7 @@ export const SnapshotKVItem = {
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
-  toJSON(message: SnapshotKVItem): unknown {
+  toJSON(message: SnapshotKVItem): JsonSafe<SnapshotKVItem> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -754,7 +755,7 @@ export const SnapshotSchema = {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: SnapshotSchema): unknown {
+  toJSON(message: SnapshotSchema): JsonSafe<SnapshotSchema> {
     const obj: any = {};
     if (message.keys) {
       obj.keys = message.keys.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));

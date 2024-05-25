@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
@@ -105,14 +104,6 @@ export const MsgSend = {
     if (isSet(object.receiver)) obj.receiver = String(object.receiver);
     return obj;
   },
-  toJSON(message: MsgSend): JsonSafe<MsgSend> {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.classId = object.classId ?? "";
@@ -199,10 +190,6 @@ export const MsgSendResponse = {
   },
   fromJSON(_: any): MsgSendResponse {
     const obj = createBaseMsgSendResponse();
-    return obj;
-  },
-  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {

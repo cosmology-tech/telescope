@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -178,16 +177,6 @@ export const ValidatorSigningInfo = {
     if (isSet(object.missedBlocksCounter)) obj.missedBlocksCounter = BigInt(object.missedBlocksCounter.toString());
     return obj;
   },
-  toJSON(message: ValidatorSigningInfo): JsonSafe<ValidatorSigningInfo> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.startHeight !== undefined && (obj.startHeight = (message.startHeight || BigInt(0)).toString());
-    message.indexOffset !== undefined && (obj.indexOffset = (message.indexOffset || BigInt(0)).toString());
-    message.jailedUntil !== undefined && (obj.jailedUntil = message.jailedUntil.toISOString());
-    message.tombstoned !== undefined && (obj.tombstoned = message.tombstoned);
-    message.missedBlocksCounter !== undefined && (obj.missedBlocksCounter = (message.missedBlocksCounter || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorSigningInfo>): ValidatorSigningInfo {
     const message = createBaseValidatorSigningInfo();
     message.address = object.address ?? "";
@@ -335,15 +324,6 @@ export const Params = {
     if (isSet(object.downtimeJailDuration)) obj.downtimeJailDuration = Duration.fromJSON(object.downtimeJailDuration);
     if (isSet(object.slashFractionDoubleSign)) obj.slashFractionDoubleSign = bytesFromBase64(object.slashFractionDoubleSign);
     if (isSet(object.slashFractionDowntime)) obj.slashFractionDowntime = bytesFromBase64(object.slashFractionDowntime);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.signedBlocksWindow !== undefined && (obj.signedBlocksWindow = (message.signedBlocksWindow || BigInt(0)).toString());
-    message.minSignedPerWindow !== undefined && (obj.minSignedPerWindow = base64FromBytes(message.minSignedPerWindow !== undefined ? message.minSignedPerWindow : new Uint8Array()));
-    message.downtimeJailDuration !== undefined && (obj.downtimeJailDuration = message.downtimeJailDuration ? Duration.toJSON(message.downtimeJailDuration) : undefined);
-    message.slashFractionDoubleSign !== undefined && (obj.slashFractionDoubleSign = base64FromBytes(message.slashFractionDoubleSign !== undefined ? message.slashFractionDoubleSign : new Uint8Array()));
-    message.slashFractionDowntime !== undefined && (obj.slashFractionDowntime = base64FromBytes(message.slashFractionDowntime !== undefined ? message.slashFractionDowntime : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

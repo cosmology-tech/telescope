@@ -3,6 +3,7 @@
 import { Any } from "../protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -78,7 +79,7 @@ export const Status = {
       details: Array.isArray(object?.details) ? object.details.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: Status): unknown {
+  toJSON(message: Status): JsonSafe<Status> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.message !== undefined && (obj.message = message.message);

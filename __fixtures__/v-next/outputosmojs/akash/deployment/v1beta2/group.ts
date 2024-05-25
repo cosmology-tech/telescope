@@ -2,6 +2,7 @@ import { GroupID, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecSDKType } from "./groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -135,7 +136,7 @@ export const Group = {
       createdAt: isSet(object.createdAt) ? BigInt(object.createdAt.toString()) : BigInt(0)
     };
   },
-  toJSON(message: Group): unknown {
+  toJSON(message: Group): JsonSafe<Group> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
     message.state !== undefined && (obj.state = group_StateToJSON(message.state));

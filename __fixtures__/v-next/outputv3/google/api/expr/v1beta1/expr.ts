@@ -2,7 +2,6 @@ import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** An expression together with source information as returned by the parser. */
 export interface ParsedExpr {
@@ -682,13 +681,6 @@ export const ParsedExpr = {
     if (isSet(object.syntaxVersion)) obj.syntaxVersion = String(object.syntaxVersion);
     return obj;
   },
-  toJSON(message: ParsedExpr): JsonSafe<ParsedExpr> {
-    const obj: any = {};
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
-    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ParsedExpr>): ParsedExpr {
     const message = createBaseParsedExpr();
     if (object.expr !== undefined && object.expr !== null) {
@@ -838,18 +830,6 @@ export const Expr = {
     if (isSet(object.comprehensionExpr)) obj.comprehensionExpr = Expr_Comprehension.fromJSON(object.comprehensionExpr);
     return obj;
   },
-  toJSON(message: Expr): JsonSafe<Expr> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.literalExpr !== undefined && (obj.literalExpr = message.literalExpr ? Literal.toJSON(message.literalExpr) : undefined);
-    message.identExpr !== undefined && (obj.identExpr = message.identExpr ? Expr_Ident.toJSON(message.identExpr) : undefined);
-    message.selectExpr !== undefined && (obj.selectExpr = message.selectExpr ? Expr_Select.toJSON(message.selectExpr) : undefined);
-    message.callExpr !== undefined && (obj.callExpr = message.callExpr ? Expr_Call.toJSON(message.callExpr) : undefined);
-    message.listExpr !== undefined && (obj.listExpr = message.listExpr ? Expr_CreateList.toJSON(message.listExpr) : undefined);
-    message.structExpr !== undefined && (obj.structExpr = message.structExpr ? Expr_CreateStruct.toJSON(message.structExpr) : undefined);
-    message.comprehensionExpr !== undefined && (obj.comprehensionExpr = message.comprehensionExpr ? Expr_Comprehension.toJSON(message.comprehensionExpr) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Expr>): Expr {
     const message = createBaseExpr();
     message.id = object.id ?? 0;
@@ -988,11 +968,6 @@ export const Expr_Ident = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: Expr_Ident): JsonSafe<Expr_Ident> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Expr_Ident>): Expr_Ident {
     const message = createBaseExpr_Ident();
     message.name = object.name ?? "";
@@ -1082,13 +1057,6 @@ export const Expr_Select = {
     if (isSet(object.operand)) obj.operand = Expr.fromJSON(object.operand);
     if (isSet(object.field)) obj.field = String(object.field);
     if (isSet(object.testOnly)) obj.testOnly = Boolean(object.testOnly);
-    return obj;
-  },
-  toJSON(message: Expr_Select): JsonSafe<Expr_Select> {
-    const obj: any = {};
-    message.operand !== undefined && (obj.operand = message.operand ? Expr.toJSON(message.operand) : undefined);
-    message.field !== undefined && (obj.field = message.field);
-    message.testOnly !== undefined && (obj.testOnly = message.testOnly);
     return obj;
   },
   fromPartial(object: DeepPartial<Expr_Select>): Expr_Select {
@@ -1198,17 +1166,6 @@ export const Expr_Call = {
     if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_Call): JsonSafe<Expr_Call> {
-    const obj: any = {};
-    message.target !== undefined && (obj.target = message.target ? Expr.toJSON(message.target) : undefined);
-    message.function !== undefined && (obj.function = message.function);
-    if (message.args) {
-      obj.args = message.args.map(e => e ? Expr.toJSON(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Expr_Call>): Expr_Call {
     const message = createBaseExpr_Call();
     if (object.target !== undefined && object.target !== null) {
@@ -1306,15 +1263,6 @@ export const Expr_CreateList = {
     if (Array.isArray(object?.elements)) obj.elements = object.elements.map((e: any) => Expr.fromJSON(e));
     return obj;
   },
-  toJSON(message: Expr_CreateList): JsonSafe<Expr_CreateList> {
-    const obj: any = {};
-    if (message.elements) {
-      obj.elements = message.elements.map(e => e ? Expr.toJSON(e) : undefined);
-    } else {
-      obj.elements = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Expr_CreateList>): Expr_CreateList {
     const message = createBaseExpr_CreateList();
     message.elements = object.elements?.map(e => Expr.fromPartial(e)) || [];
@@ -1402,16 +1350,6 @@ export const Expr_CreateStruct = {
     const obj = createBaseExpr_CreateStruct();
     if (isSet(object.type)) obj.type = String(object.type);
     if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Expr_CreateStruct_Entry.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Expr_CreateStruct): JsonSafe<Expr_CreateStruct> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    if (message.entries) {
-      obj.entries = message.entries.map(e => e ? Expr_CreateStruct_Entry.toJSON(e) : undefined);
-    } else {
-      obj.entries = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Expr_CreateStruct>): Expr_CreateStruct {
@@ -1524,14 +1462,6 @@ export const Expr_CreateStruct_Entry = {
     if (isSet(object.fieldKey)) obj.fieldKey = String(object.fieldKey);
     if (isSet(object.mapKey)) obj.mapKey = Expr.fromJSON(object.mapKey);
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: Expr_CreateStruct_Entry): JsonSafe<Expr_CreateStruct_Entry> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.fieldKey !== undefined && (obj.fieldKey = message.fieldKey);
-    message.mapKey !== undefined && (obj.mapKey = message.mapKey ? Expr.toJSON(message.mapKey) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Expr_CreateStruct_Entry>): Expr_CreateStruct_Entry {
@@ -1680,17 +1610,6 @@ export const Expr_Comprehension = {
     if (isSet(object.loopCondition)) obj.loopCondition = Expr.fromJSON(object.loopCondition);
     if (isSet(object.loopStep)) obj.loopStep = Expr.fromJSON(object.loopStep);
     if (isSet(object.result)) obj.result = Expr.fromJSON(object.result);
-    return obj;
-  },
-  toJSON(message: Expr_Comprehension): JsonSafe<Expr_Comprehension> {
-    const obj: any = {};
-    message.iterVar !== undefined && (obj.iterVar = message.iterVar);
-    message.iterRange !== undefined && (obj.iterRange = message.iterRange ? Expr.toJSON(message.iterRange) : undefined);
-    message.accuVar !== undefined && (obj.accuVar = message.accuVar);
-    message.accuInit !== undefined && (obj.accuInit = message.accuInit ? Expr.toJSON(message.accuInit) : undefined);
-    message.loopCondition !== undefined && (obj.loopCondition = message.loopCondition ? Expr.toJSON(message.loopCondition) : undefined);
-    message.loopStep !== undefined && (obj.loopStep = message.loopStep ? Expr.toJSON(message.loopStep) : undefined);
-    message.result !== undefined && (obj.result = message.result ? Expr.toJSON(message.result) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Expr_Comprehension>): Expr_Comprehension {
@@ -1866,21 +1785,6 @@ export const Literal = {
     if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
     if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
     if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
-    return obj;
-  },
-  toJSON(message: Literal): JsonSafe<Literal> {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
-    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    if (message.int64Value !== undefined) {
-      obj.int64Value = message.int64Value.toString();
-    }
-    if (message.uint64Value !== undefined) {
-      obj.uint64Value = message.uint64Value.toString();
-    }
-    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
-    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Literal>): Literal {

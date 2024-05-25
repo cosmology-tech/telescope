@@ -2,7 +2,6 @@ import { CertificateFilter, CertificateFilterAmino, CertificateFilterSDKType, Ce
 import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageResponseAmino, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
@@ -104,12 +103,6 @@ export const CertificateResponse = {
     if (isSet(object.serial)) obj.serial = String(object.serial);
     return obj;
   },
-  toJSON(message: CertificateResponse): JsonSafe<CertificateResponse> {
-    const obj: any = {};
-    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
-    message.serial !== undefined && (obj.serial = message.serial);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CertificateResponse>): CertificateResponse {
     const message = createBaseCertificateResponse();
     if (object.certificate !== undefined && object.certificate !== null) {
@@ -200,12 +193,6 @@ export const QueryCertificatesRequest = {
     const obj = createBaseQueryCertificatesRequest();
     if (isSet(object.filter)) obj.filter = CertificateFilter.fromJSON(object.filter);
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryCertificatesRequest): JsonSafe<QueryCertificatesRequest> {
-    const obj: any = {};
-    message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toJSON(message.filter) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCertificatesRequest>): QueryCertificatesRequest {
@@ -300,16 +287,6 @@ export const QueryCertificatesResponse = {
     const obj = createBaseQueryCertificatesResponse();
     if (Array.isArray(object?.certificates)) obj.certificates = object.certificates.map((e: any) => CertificateResponse.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryCertificatesResponse): JsonSafe<QueryCertificatesResponse> {
-    const obj: any = {};
-    if (message.certificates) {
-      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toJSON(e) : undefined);
-    } else {
-      obj.certificates = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCertificatesResponse>): QueryCertificatesResponse {

@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "./auth";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * QueryAccountsRequest is the request type for the Query/Accounts RPC method.
@@ -219,7 +220,7 @@ export const QueryAccountsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAccountsRequest): unknown {
+  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -323,7 +324,7 @@ export const QueryAccountsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAccountsResponse): unknown {
+  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
@@ -438,7 +439,7 @@ export const QueryAccountRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryAccountRequest): unknown {
+  toJSON(message: QueryAccountRequest): JsonSafe<QueryAccountRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -523,7 +524,7 @@ export const QueryModuleAccountsRequest = {
     const obj = createBaseQueryModuleAccountsRequest();
     return obj;
   },
-  toJSON(_: QueryModuleAccountsRequest): unknown {
+  toJSON(_: QueryModuleAccountsRequest): JsonSafe<QueryModuleAccountsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -606,7 +607,7 @@ export const QueryParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -702,7 +703,7 @@ export const QueryAccountResponse = {
     if (isSet(object.account)) obj.account = Any.fromJSON(object.account);
     return obj;
   },
-  toJSON(message: QueryAccountResponse): unknown {
+  toJSON(message: QueryAccountResponse): JsonSafe<QueryAccountResponse> {
     const obj: any = {};
     message.account !== undefined && (obj.account = message.account ? Any.toJSON(message.account) : undefined);
     return obj;
@@ -789,7 +790,7 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -872,7 +873,7 @@ export const QueryModuleAccountsResponse = {
     if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryModuleAccountsResponse): unknown {
+  toJSON(message: QueryModuleAccountsResponse): JsonSafe<QueryModuleAccountsResponse> {
     const obj: any = {};
     if (message.accounts) {
       obj.accounts = message.accounts.map(e => e ? Any.toJSON(e) : undefined);
@@ -967,7 +968,7 @@ export const Bech32PrefixRequest = {
     const obj = createBaseBech32PrefixRequest();
     return obj;
   },
-  toJSON(_: Bech32PrefixRequest): unknown {
+  toJSON(_: Bech32PrefixRequest): JsonSafe<Bech32PrefixRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1050,7 +1051,7 @@ export const Bech32PrefixResponse = {
     if (isSet(object.bech32Prefix)) obj.bech32Prefix = String(object.bech32Prefix);
     return obj;
   },
-  toJSON(message: Bech32PrefixResponse): unknown {
+  toJSON(message: Bech32PrefixResponse): JsonSafe<Bech32PrefixResponse> {
     const obj: any = {};
     message.bech32Prefix !== undefined && (obj.bech32Prefix = message.bech32Prefix);
     return obj;
@@ -1144,7 +1145,7 @@ export const AddressBytesToStringRequest = {
     if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
     return obj;
   },
-  toJSON(message: AddressBytesToStringRequest): unknown {
+  toJSON(message: AddressBytesToStringRequest): JsonSafe<AddressBytesToStringRequest> {
     const obj: any = {};
     message.addressBytes !== undefined && (obj.addressBytes = base64FromBytes(message.addressBytes !== undefined ? message.addressBytes : new Uint8Array()));
     return obj;
@@ -1238,7 +1239,7 @@ export const AddressBytesToStringResponse = {
     if (isSet(object.addressString)) obj.addressString = String(object.addressString);
     return obj;
   },
-  toJSON(message: AddressBytesToStringResponse): unknown {
+  toJSON(message: AddressBytesToStringResponse): JsonSafe<AddressBytesToStringResponse> {
     const obj: any = {};
     message.addressString !== undefined && (obj.addressString = message.addressString);
     return obj;
@@ -1332,7 +1333,7 @@ export const AddressStringToBytesRequest = {
     if (isSet(object.addressString)) obj.addressString = String(object.addressString);
     return obj;
   },
-  toJSON(message: AddressStringToBytesRequest): unknown {
+  toJSON(message: AddressStringToBytesRequest): JsonSafe<AddressStringToBytesRequest> {
     const obj: any = {};
     message.addressString !== undefined && (obj.addressString = message.addressString);
     return obj;
@@ -1426,7 +1427,7 @@ export const AddressStringToBytesResponse = {
     if (isSet(object.addressBytes)) obj.addressBytes = bytesFromBase64(object.addressBytes);
     return obj;
   },
-  toJSON(message: AddressStringToBytesResponse): unknown {
+  toJSON(message: AddressStringToBytesResponse): JsonSafe<AddressStringToBytesResponse> {
     const obj: any = {};
     message.addressBytes !== undefined && (obj.addressBytes = base64FromBytes(message.addressBytes !== undefined ? message.addressBytes : new Uint8Array()));
     return obj;

@@ -2,6 +2,7 @@ import { PoolParams, PoolParamsSDKType } from "./stableswap_pool";
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateStableswapPool {
@@ -149,7 +150,7 @@ export const MsgCreateStableswapPool = {
       scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
   },
-  toJSON(message: MsgCreateStableswapPool): unknown {
+  toJSON(message: MsgCreateStableswapPool): JsonSafe<MsgCreateStableswapPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
@@ -308,7 +309,7 @@ export const MsgCreateStableswapPoolResponse = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgCreateStableswapPoolResponse): unknown {
+  toJSON(message: MsgCreateStableswapPoolResponse): JsonSafe<MsgCreateStableswapPoolResponse> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
@@ -427,7 +428,7 @@ export const MsgStableSwapAdjustScalingFactors = {
       scalingFactors: Array.isArray(object?.scalingFactors) ? object.scalingFactors.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: MsgStableSwapAdjustScalingFactors): unknown {
+  toJSON(message: MsgStableSwapAdjustScalingFactors): JsonSafe<MsgStableSwapAdjustScalingFactors> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -539,7 +540,7 @@ export const MsgStableSwapAdjustScalingFactorsResponse = {
   fromJSON(_: any): MsgStableSwapAdjustScalingFactorsResponse {
     return {};
   },
-  toJSON(_: MsgStableSwapAdjustScalingFactorsResponse): unknown {
+  toJSON(_: MsgStableSwapAdjustScalingFactorsResponse): JsonSafe<MsgStableSwapAdjustScalingFactorsResponse> {
     const obj: any = {};
     return obj;
   },

@@ -1,6 +1,7 @@
 import { CommitmentProof, CommitmentProofAmino, CommitmentProofSDKType } from "../../../../confio/proofs";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -169,7 +170,7 @@ export const MerkleRoot = {
     if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
     return obj;
   },
-  toJSON(message: MerkleRoot): unknown {
+  toJSON(message: MerkleRoot): JsonSafe<MerkleRoot> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
@@ -259,7 +260,7 @@ export const MerklePrefix = {
     if (isSet(object.keyPrefix)) obj.keyPrefix = bytesFromBase64(object.keyPrefix);
     return obj;
   },
-  toJSON(message: MerklePrefix): unknown {
+  toJSON(message: MerklePrefix): JsonSafe<MerklePrefix> {
     const obj: any = {};
     message.keyPrefix !== undefined && (obj.keyPrefix = base64FromBytes(message.keyPrefix !== undefined ? message.keyPrefix : new Uint8Array()));
     return obj;
@@ -349,7 +350,7 @@ export const MerklePath = {
     if (Array.isArray(object?.keyPath)) obj.keyPath = object.keyPath.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: MerklePath): unknown {
+  toJSON(message: MerklePath): JsonSafe<MerklePath> {
     const obj: any = {};
     if (message.keyPath) {
       obj.keyPath = message.keyPath.map(e => e);
@@ -449,7 +450,7 @@ export const MerkleProof = {
     if (Array.isArray(object?.proofs)) obj.proofs = object.proofs.map((e: any) => CommitmentProof.fromJSON(e));
     return obj;
   },
-  toJSON(message: MerkleProof): unknown {
+  toJSON(message: MerkleProof): JsonSafe<MerkleProof> {
     const obj: any = {};
     if (message.proofs) {
       obj.proofs = message.proofs.map(e => e ? CommitmentProof.toJSON(e) : undefined);

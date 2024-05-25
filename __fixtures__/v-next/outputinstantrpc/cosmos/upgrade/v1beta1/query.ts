@@ -1,5 +1,6 @@
 import { Plan, PlanSDKType, ModuleVersion, ModuleVersionSDKType } from "./upgrade";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
@@ -230,7 +231,7 @@ export const QueryCurrentPlanRequest = {
     const obj = createBaseQueryCurrentPlanRequest();
     return obj;
   },
-  toJSON(_: QueryCurrentPlanRequest): unknown {
+  toJSON(_: QueryCurrentPlanRequest): JsonSafe<QueryCurrentPlanRequest> {
     const obj: any = {};
     return obj;
   },
@@ -313,7 +314,7 @@ export const QueryCurrentPlanResponse = {
     if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
     return obj;
   },
-  toJSON(message: QueryCurrentPlanResponse): unknown {
+  toJSON(message: QueryCurrentPlanResponse): JsonSafe<QueryCurrentPlanResponse> {
     const obj: any = {};
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
     return obj;
@@ -409,7 +410,7 @@ export const QueryAppliedPlanRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: QueryAppliedPlanRequest): unknown {
+  toJSON(message: QueryAppliedPlanRequest): JsonSafe<QueryAppliedPlanRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -503,7 +504,7 @@ export const QueryAppliedPlanResponse = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
   },
-  toJSON(message: QueryAppliedPlanResponse): unknown {
+  toJSON(message: QueryAppliedPlanResponse): JsonSafe<QueryAppliedPlanResponse> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
     return obj;
@@ -599,7 +600,7 @@ export const QueryUpgradedConsensusStateRequest = {
     if (isSet(object.lastHeight)) obj.lastHeight = BigInt(object.lastHeight.toString());
     return obj;
   },
-  toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
+  toJSON(message: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
     const obj: any = {};
     message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || BigInt(0)).toString());
     return obj;
@@ -695,7 +696,7 @@ export const QueryUpgradedConsensusStateResponse = {
     if (isSet(object.upgradedConsensusState)) obj.upgradedConsensusState = bytesFromBase64(object.upgradedConsensusState);
     return obj;
   },
-  toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
+  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = base64FromBytes(message.upgradedConsensusState !== undefined ? message.upgradedConsensusState : new Uint8Array()));
     return obj;
@@ -789,7 +790,7 @@ export const QueryModuleVersionsRequest = {
     if (isSet(object.moduleName)) obj.moduleName = String(object.moduleName);
     return obj;
   },
-  toJSON(message: QueryModuleVersionsRequest): unknown {
+  toJSON(message: QueryModuleVersionsRequest): JsonSafe<QueryModuleVersionsRequest> {
     const obj: any = {};
     message.moduleName !== undefined && (obj.moduleName = message.moduleName);
     return obj;
@@ -883,7 +884,7 @@ export const QueryModuleVersionsResponse = {
     if (Array.isArray(object?.moduleVersions)) obj.moduleVersions = object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e));
     return obj;
   },
-  toJSON(message: QueryModuleVersionsResponse): unknown {
+  toJSON(message: QueryModuleVersionsResponse): JsonSafe<QueryModuleVersionsResponse> {
     const obj: any = {};
     if (message.moduleVersions) {
       obj.moduleVersions = message.moduleVersions.map(e => e ? ModuleVersion.toJSON(e) : undefined);
@@ -978,7 +979,7 @@ export const QueryAuthorityRequest = {
     const obj = createBaseQueryAuthorityRequest();
     return obj;
   },
-  toJSON(_: QueryAuthorityRequest): unknown {
+  toJSON(_: QueryAuthorityRequest): JsonSafe<QueryAuthorityRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1061,7 +1062,7 @@ export const QueryAuthorityResponse = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryAuthorityResponse): unknown {
+  toJSON(message: QueryAuthorityResponse): JsonSafe<QueryAuthorityResponse> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;

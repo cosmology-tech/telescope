@@ -1,6 +1,7 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { GlobalDecoderRegistry } from "../../../registry";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
@@ -159,7 +160,7 @@ export const MsgInstantiateContract2 = {
     if (Array.isArray(object?.aListOfBytes)) obj.aListOfBytes = object.aListOfBytes.map((e: any) => bytesFromBase64(e));
     return obj;
   },
-  toJSON(message: MsgInstantiateContract2): unknown {
+  toJSON(message: MsgInstantiateContract2): JsonSafe<MsgInstantiateContract2> {
     const obj: any = {};
     message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.label !== undefined && (obj.label = message.label);

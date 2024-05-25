@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
@@ -54,7 +55,7 @@ export const Params = {
       orderMaxBids: isSet(object.orderMaxBids) ? Number(object.orderMaxBids) : 0
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.bidMinDeposit !== undefined && (obj.bidMinDeposit = message.bidMinDeposit ? Coin.toJSON(message.bidMinDeposit) : undefined);
     message.orderMaxBids !== undefined && (obj.orderMaxBids = Math.round(message.orderMaxBids));

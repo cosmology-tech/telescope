@@ -2,7 +2,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../../cosmos/base/v1beta1/co
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -147,12 +146,6 @@ export const PoolParams = {
     const obj = createBasePoolParams();
     if (isSet(object.swapFee)) obj.swapFee = String(object.swapFee);
     if (isSet(object.exitFee)) obj.exitFee = String(object.exitFee);
-    return obj;
-  },
-  toJSON(message: PoolParams): JsonSafe<PoolParams> {
-    const obj: any = {};
-    message.swapFee !== undefined && (obj.swapFee = message.swapFee);
-    message.exitFee !== undefined && (obj.exitFee = message.exitFee);
     return obj;
   },
   fromPartial(object: DeepPartial<PoolParams>): PoolParams {
@@ -302,26 +295,6 @@ export const Pool = {
     if (Array.isArray(object?.poolLiquidity)) obj.poolLiquidity = object.poolLiquidity.map((e: any) => Coin.fromJSON(e));
     if (Array.isArray(object?.scalingFactors)) obj.scalingFactors = object.scalingFactors.map((e: any) => BigInt(e.toString()));
     if (isSet(object.scalingFactorController)) obj.scalingFactorController = String(object.scalingFactorController);
-    return obj;
-  },
-  toJSON(message: Pool): JsonSafe<Pool> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
-    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
-    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
-    message.totalShares !== undefined && (obj.totalShares = message.totalShares ? Coin.toJSON(message.totalShares) : undefined);
-    if (message.poolLiquidity) {
-      obj.poolLiquidity = message.poolLiquidity.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.poolLiquidity = [];
-    }
-    if (message.scalingFactors) {
-      obj.scalingFactors = message.scalingFactors.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.scalingFactors = [];
-    }
-    message.scalingFactorController !== undefined && (obj.scalingFactorController = message.scalingFactorController);
     return obj;
   },
   fromPartial(object: DeepPartial<Pool>): Pool {

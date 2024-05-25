@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: Long;
@@ -60,7 +61,7 @@ export const BitArray = {
       elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => Long.fromValue(e)) : []
     };
   },
-  toJSON(message: BitArray): unknown {
+  toJSON(message: BitArray): JsonSafe<BitArray> {
     const obj: any = {};
     message.bits !== undefined && (obj.bits = (message.bits || Long.ZERO).toString());
     if (message.elems) {

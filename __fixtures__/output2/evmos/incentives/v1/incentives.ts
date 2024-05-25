@@ -4,6 +4,7 @@ import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -118,7 +119,7 @@ export const Incentive = {
       totalGas: isSet(object.totalGas) ? Long.fromValue(object.totalGas) : Long.UZERO
     };
   },
-  toJSON(message: Incentive): unknown {
+  toJSON(message: Incentive): JsonSafe<Incentive> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     if (message.allocations) {
@@ -191,7 +192,7 @@ export const GasMeter = {
       cumulativeGas: isSet(object.cumulativeGas) ? Long.fromValue(object.cumulativeGas) : Long.UZERO
     };
   },
-  toJSON(message: GasMeter): unknown {
+  toJSON(message: GasMeter): JsonSafe<GasMeter> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.participant !== undefined && (obj.participant = message.participant);
@@ -272,7 +273,7 @@ export const RegisterIncentiveProposal = {
       epochs: isSet(object.epochs) ? Number(object.epochs) : 0
     };
   },
-  toJSON(message: RegisterIncentiveProposal): unknown {
+  toJSON(message: RegisterIncentiveProposal): JsonSafe<RegisterIncentiveProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -345,7 +346,7 @@ export const CancelIncentiveProposal = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: CancelIncentiveProposal): unknown {
+  toJSON(message: CancelIncentiveProposal): JsonSafe<CancelIncentiveProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

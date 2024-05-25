@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /** Supported data type of the property values */
@@ -170,7 +171,7 @@ export const ProjectProperties = {
       properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromJSON(e)) : []
     };
   },
-  toJSON(message: ProjectProperties): unknown {
+  toJSON(message: ProjectProperties): JsonSafe<ProjectProperties> {
     const obj: any = {};
     if (message.properties) {
       obj.properties = message.properties.map(e => e ? Property.toJSON(e) : undefined);
@@ -249,7 +250,7 @@ export const Property = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: Property): unknown {
+  toJSON(message: Property): JsonSafe<Property> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));

@@ -47,26 +47,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    registerDevFeeInfo(value: MsgRegisterDevFeeInfo) {
-      return {
-        typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
-        value: MsgRegisterDevFeeInfo.toJSON(value)
-      };
-    },
-    cancelDevFeeInfo(value: MsgCancelDevFeeInfo) {
-      return {
-        typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
-        value: MsgCancelDevFeeInfo.toJSON(value)
-      };
-    },
-    updateDevFeeInfo(value: MsgUpdateDevFeeInfo) {
-      return {
-        typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
-        value: MsgUpdateDevFeeInfo.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     registerDevFeeInfo(value: any) {
       return {

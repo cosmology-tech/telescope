@@ -2,7 +2,6 @@ import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./groupspec";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of group */
 export enum Group_State {
@@ -142,14 +141,6 @@ export const Group = {
     if (isSet(object.state)) obj.state = group_StateFromJSON(object.state);
     if (isSet(object.groupSpec)) obj.groupSpec = GroupSpec.fromJSON(object.groupSpec);
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
-    return obj;
-  },
-  toJSON(message: Group): JsonSafe<Group> {
-    const obj: any = {};
-    message.groupId !== undefined && (obj.groupId = message.groupId ? GroupID.toJSON(message.groupId) : undefined);
-    message.state !== undefined && (obj.state = group_StateToJSON(message.state));
-    message.groupSpec !== undefined && (obj.groupSpec = message.groupSpec ? GroupSpec.toJSON(message.groupSpec) : undefined);
-    message.createdAt !== undefined && (obj.createdAt = (message.createdAt || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Group>): Group {

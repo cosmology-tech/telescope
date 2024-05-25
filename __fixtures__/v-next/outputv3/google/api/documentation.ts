@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
@@ -467,24 +466,6 @@ export const Documentation = {
     if (isSet(object.overview)) obj.overview = String(object.overview);
     return obj;
   },
-  toJSON(message: Documentation): JsonSafe<Documentation> {
-    const obj: any = {};
-    message.summary !== undefined && (obj.summary = message.summary);
-    if (message.pages) {
-      obj.pages = message.pages.map(e => e ? Page.toJSON(e) : undefined);
-    } else {
-      obj.pages = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? DocumentationRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    message.documentationRootUrl !== undefined && (obj.documentationRootUrl = message.documentationRootUrl);
-    message.serviceRootUrl !== undefined && (obj.serviceRootUrl = message.serviceRootUrl);
-    message.overview !== undefined && (obj.overview = message.overview);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Documentation>): Documentation {
     const message = createBaseDocumentation();
     message.summary = object.summary ?? "";
@@ -623,13 +604,6 @@ export const DocumentationRule = {
     if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
     return obj;
   },
-  toJSON(message: DocumentationRule): JsonSafe<DocumentationRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.description !== undefined && (obj.description = message.description);
-    message.deprecationDescription !== undefined && (obj.deprecationDescription = message.deprecationDescription);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
     message.selector = object.selector ?? "";
@@ -733,17 +707,6 @@ export const Page = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.content)) obj.content = String(object.content);
     if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Page): JsonSafe<Page> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.content !== undefined && (obj.content = message.content);
-    if (message.subpages) {
-      obj.subpages = message.subpages.map(e => e ? Page.toJSON(e) : undefined);
-    } else {
-      obj.subpages = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Page>): Page {

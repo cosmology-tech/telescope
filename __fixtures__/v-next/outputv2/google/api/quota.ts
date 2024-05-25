@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -552,7 +553,7 @@ export const Quota = {
     if (Array.isArray(object?.metricRules)) obj.metricRules = object.metricRules.map((e: any) => MetricRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Quota): unknown {
+  toJSON(message: Quota): JsonSafe<Quota> {
     const obj: any = {};
     if (message.limits) {
       obj.limits = message.limits.map(e => e ? QuotaLimit.toJSON(e) : undefined);
@@ -670,7 +671,7 @@ export const MetricRule_MetricCostsEntry = {
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
-  toJSON(message: MetricRule_MetricCostsEntry): unknown {
+  toJSON(message: MetricRule_MetricCostsEntry): JsonSafe<MetricRule_MetricCostsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
@@ -776,7 +777,7 @@ export const MetricRule = {
     }, {});
     return obj;
   },
-  toJSON(message: MetricRule): unknown {
+  toJSON(message: MetricRule): JsonSafe<MetricRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     obj.metricCosts = {};
@@ -906,7 +907,7 @@ export const QuotaLimit_ValuesEntry = {
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
-  toJSON(message: QuotaLimit_ValuesEntry): unknown {
+  toJSON(message: QuotaLimit_ValuesEntry): JsonSafe<QuotaLimit_ValuesEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
@@ -1076,7 +1077,7 @@ export const QuotaLimit = {
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
     return obj;
   },
-  toJSON(message: QuotaLimit): unknown {
+  toJSON(message: QuotaLimit): JsonSafe<QuotaLimit> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);

@@ -5,6 +5,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { Height, IdentifiedClientState, ConsensusStateWithHeight, Params } from "./client";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -183,7 +184,7 @@ export const QueryClientStateRequest = {
       clientId: isSet(object.clientId) ? String(object.clientId) : ""
     };
   },
-  toJSON(message: QueryClientStateRequest): unknown {
+  toJSON(message: QueryClientStateRequest): JsonSafe<QueryClientStateRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
@@ -244,7 +245,7 @@ export const QueryClientStateResponse = {
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined
     };
   },
-  toJSON(message: QueryClientStateResponse): unknown {
+  toJSON(message: QueryClientStateResponse): JsonSafe<QueryClientStateResponse> {
     const obj: any = {};
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -293,7 +294,7 @@ export const QueryClientStatesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClientStatesRequest): unknown {
+  toJSON(message: QueryClientStatesRequest): JsonSafe<QueryClientStatesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -346,7 +347,7 @@ export const QueryClientStatesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClientStatesResponse): unknown {
+  toJSON(message: QueryClientStatesResponse): JsonSafe<QueryClientStatesResponse> {
     const obj: any = {};
     if (message.clientStates) {
       obj.clientStates = message.clientStates.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
@@ -421,7 +422,7 @@ export const QueryConsensusStateRequest = {
       latestHeight: isSet(object.latestHeight) ? Boolean(object.latestHeight) : false
     };
   },
-  toJSON(message: QueryConsensusStateRequest): unknown {
+  toJSON(message: QueryConsensusStateRequest): JsonSafe<QueryConsensusStateRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || Long.UZERO).toString());
@@ -488,7 +489,7 @@ export const QueryConsensusStateResponse = {
       proofHeight: isSet(object.proofHeight) ? Height.fromJSON(object.proofHeight) : undefined
     };
   },
-  toJSON(message: QueryConsensusStateResponse): unknown {
+  toJSON(message: QueryConsensusStateResponse): JsonSafe<QueryConsensusStateResponse> {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -545,7 +546,7 @@ export const QueryConsensusStatesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryConsensusStatesRequest): unknown {
+  toJSON(message: QueryConsensusStatesRequest): JsonSafe<QueryConsensusStatesRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -600,7 +601,7 @@ export const QueryConsensusStatesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryConsensusStatesResponse): unknown {
+  toJSON(message: QueryConsensusStatesResponse): JsonSafe<QueryConsensusStatesResponse> {
     const obj: any = {};
     if (message.consensusStates) {
       obj.consensusStates = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toJSON(e) : undefined);
@@ -651,7 +652,7 @@ export const QueryClientStatusRequest = {
       clientId: isSet(object.clientId) ? String(object.clientId) : ""
     };
   },
-  toJSON(message: QueryClientStatusRequest): unknown {
+  toJSON(message: QueryClientStatusRequest): JsonSafe<QueryClientStatusRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
@@ -696,7 +697,7 @@ export const QueryClientStatusResponse = {
       status: isSet(object.status) ? String(object.status) : ""
     };
   },
-  toJSON(message: QueryClientStatusResponse): unknown {
+  toJSON(message: QueryClientStatusResponse): JsonSafe<QueryClientStatusResponse> {
     const obj: any = {};
     message.status !== undefined && (obj.status = message.status);
     return obj;
@@ -731,7 +732,7 @@ export const QueryClientParamsRequest = {
   fromJSON(_: any): QueryClientParamsRequest {
     return {};
   },
-  toJSON(_: QueryClientParamsRequest): unknown {
+  toJSON(_: QueryClientParamsRequest): JsonSafe<QueryClientParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -774,7 +775,7 @@ export const QueryClientParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryClientParamsResponse): unknown {
+  toJSON(message: QueryClientParamsResponse): JsonSafe<QueryClientParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -809,7 +810,7 @@ export const QueryUpgradedClientStateRequest = {
   fromJSON(_: any): QueryUpgradedClientStateRequest {
     return {};
   },
-  toJSON(_: QueryUpgradedClientStateRequest): unknown {
+  toJSON(_: QueryUpgradedClientStateRequest): JsonSafe<QueryUpgradedClientStateRequest> {
     const obj: any = {};
     return obj;
   },
@@ -852,7 +853,7 @@ export const QueryUpgradedClientStateResponse = {
       upgradedClientState: isSet(object.upgradedClientState) ? Any.fromJSON(object.upgradedClientState) : undefined
     };
   },
-  toJSON(message: QueryUpgradedClientStateResponse): unknown {
+  toJSON(message: QueryUpgradedClientStateResponse): JsonSafe<QueryUpgradedClientStateResponse> {
     const obj: any = {};
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
@@ -887,7 +888,7 @@ export const QueryUpgradedConsensusStateRequest = {
   fromJSON(_: any): QueryUpgradedConsensusStateRequest {
     return {};
   },
-  toJSON(_: QueryUpgradedConsensusStateRequest): unknown {
+  toJSON(_: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
     const obj: any = {};
     return obj;
   },
@@ -930,7 +931,7 @@ export const QueryUpgradedConsensusStateResponse = {
       upgradedConsensusState: isSet(object.upgradedConsensusState) ? Any.fromJSON(object.upgradedConsensusState) : undefined
     };
   },
-  toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
+  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = message.upgradedConsensusState ? Any.toJSON(message.upgradedConsensusState) : undefined);
     return obj;

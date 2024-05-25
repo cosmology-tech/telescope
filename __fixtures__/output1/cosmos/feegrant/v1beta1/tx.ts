@@ -1,6 +1,7 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /**
  * MsgGrantAllowance adds permission for Grantee to spend up to Allowance
@@ -93,7 +94,7 @@ export const MsgGrantAllowance = {
       allowance: isSet(object.allowance) ? Any.fromJSON(object.allowance) : undefined
     };
   },
-  toJSON(message: MsgGrantAllowance): unknown {
+  toJSON(message: MsgGrantAllowance): JsonSafe<MsgGrantAllowance> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -146,7 +147,7 @@ export const MsgGrantAllowanceResponse = {
   fromJSON(_: any): MsgGrantAllowanceResponse {
     return {};
   },
-  toJSON(_: MsgGrantAllowanceResponse): unknown {
+  toJSON(_: MsgGrantAllowanceResponse): JsonSafe<MsgGrantAllowanceResponse> {
     const obj: any = {};
     return obj;
   },
@@ -204,7 +205,7 @@ export const MsgRevokeAllowance = {
       grantee: isSet(object.grantee) ? String(object.grantee) : ""
     };
   },
-  toJSON(message: MsgRevokeAllowance): unknown {
+  toJSON(message: MsgRevokeAllowance): JsonSafe<MsgRevokeAllowance> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -253,7 +254,7 @@ export const MsgRevokeAllowanceResponse = {
   fromJSON(_: any): MsgRevokeAllowanceResponse {
     return {};
   },
-  toJSON(_: MsgRevokeAllowanceResponse): unknown {
+  toJSON(_: MsgRevokeAllowanceResponse): JsonSafe<MsgRevokeAllowanceResponse> {
     const obj: any = {};
     return obj;
   },

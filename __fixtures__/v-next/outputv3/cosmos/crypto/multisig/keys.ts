@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.crypto.multisig";
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -76,16 +75,6 @@ export const LegacyAminoPubKey = {
     const obj = createBaseLegacyAminoPubKey();
     if (isSet(object.threshold)) obj.threshold = Number(object.threshold);
     if (Array.isArray(object?.publicKeys)) obj.publicKeys = object.publicKeys.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: LegacyAminoPubKey): JsonSafe<LegacyAminoPubKey> {
-    const obj: any = {};
-    message.threshold !== undefined && (obj.threshold = Math.round(message.threshold));
-    if (message.publicKeys) {
-      obj.publicKeys = message.publicKeys.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.publicKeys = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<LegacyAminoPubKey>): LegacyAminoPubKey {

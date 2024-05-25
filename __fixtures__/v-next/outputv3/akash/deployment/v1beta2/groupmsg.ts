@@ -1,7 +1,6 @@
 import { GroupID, GroupIDAmino, GroupIDSDKType } from "./groupid";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
@@ -116,11 +115,6 @@ export const MsgCloseGroup = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgCloseGroup): JsonSafe<MsgCloseGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
     if (object.id !== undefined && object.id !== null) {
@@ -189,10 +183,6 @@ export const MsgCloseGroupResponse = {
     const obj = createBaseMsgCloseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgCloseGroupResponse): JsonSafe<MsgCloseGroupResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
@@ -258,11 +248,6 @@ export const MsgPauseGroup = {
   fromJSON(object: any): MsgPauseGroup {
     const obj = createBaseMsgPauseGroup();
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgPauseGroup): JsonSafe<MsgPauseGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
@@ -333,10 +318,6 @@ export const MsgPauseGroupResponse = {
     const obj = createBaseMsgPauseGroupResponse();
     return obj;
   },
-  toJSON(_: MsgPauseGroupResponse): JsonSafe<MsgPauseGroupResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
@@ -402,11 +383,6 @@ export const MsgStartGroup = {
   fromJSON(object: any): MsgStartGroup {
     const obj = createBaseMsgStartGroup();
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: MsgStartGroup): JsonSafe<MsgStartGroup> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
@@ -475,10 +451,6 @@ export const MsgStartGroupResponse = {
   },
   fromJSON(_: any): MsgStartGroupResponse {
     const obj = createBaseMsgStartGroupResponse();
-    return obj;
-  },
-  toJSON(_: MsgStartGroupResponse): JsonSafe<MsgStartGroupResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {

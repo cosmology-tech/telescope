@@ -4,7 +4,6 @@ import { GroupID, GroupIDAmino, GroupIDSDKType, Group, GroupAmino, GroupSDKType 
 import { Account, AccountAmino, AccountSDKType } from "../../escrow/v1beta1/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
@@ -157,12 +156,6 @@ export const QueryDeploymentsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDeploymentsRequest): JsonSafe<QueryDeploymentsRequest> {
-    const obj: any = {};
-    message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toJSON(message.filters) : undefined);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
     if (object.filters !== undefined && object.filters !== null) {
@@ -257,16 +250,6 @@ export const QueryDeploymentsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDeploymentsResponse): JsonSafe<QueryDeploymentsResponse> {
-    const obj: any = {};
-    if (message.deployments) {
-      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toJSON(e) : undefined);
-    } else {
-      obj.deployments = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
@@ -355,11 +338,6 @@ export const QueryDeploymentRequest = {
   fromJSON(object: any): QueryDeploymentRequest {
     const obj = createBaseQueryDeploymentRequest();
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
-    return obj;
-  },
-  toJSON(message: QueryDeploymentRequest): JsonSafe<QueryDeploymentRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
@@ -453,17 +431,6 @@ export const QueryDeploymentResponse = {
     if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
     if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
     if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
-    return obj;
-  },
-  toJSON(message: QueryDeploymentResponse): JsonSafe<QueryDeploymentResponse> {
-    const obj: any = {};
-    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? Group.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
@@ -565,11 +532,6 @@ export const QueryGroupRequest = {
     if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: QueryGroupRequest): JsonSafe<QueryGroupRequest> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
     if (object.id !== undefined && object.id !== null) {
@@ -645,11 +607,6 @@ export const QueryGroupResponse = {
   fromJSON(object: any): QueryGroupResponse {
     const obj = createBaseQueryGroupResponse();
     if (isSet(object.group)) obj.group = Group.fromJSON(object.group);
-    return obj;
-  },
-  toJSON(message: QueryGroupResponse): JsonSafe<QueryGroupResponse> {
-    const obj: any = {};
-    message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {

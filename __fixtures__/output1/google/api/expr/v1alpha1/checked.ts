@@ -3,6 +3,7 @@ import { Empty, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { Long, isSet, DeepPartial, isObject } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -565,7 +566,7 @@ export const CheckedExpr_ReferenceMapEntry = {
       value: isSet(object.value) ? Reference.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: CheckedExpr_ReferenceMapEntry): unknown {
+  toJSON(message: CheckedExpr_ReferenceMapEntry): JsonSafe<CheckedExpr_ReferenceMapEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
@@ -632,7 +633,7 @@ export const CheckedExpr_TypeMapEntry = {
       value: isSet(object.value) ? Type.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: CheckedExpr_TypeMapEntry): unknown {
+  toJSON(message: CheckedExpr_TypeMapEntry): JsonSafe<CheckedExpr_TypeMapEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = (message.key || Long.ZERO).toString());
     message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
@@ -745,7 +746,7 @@ export const CheckedExpr = {
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
     };
   },
-  toJSON(message: CheckedExpr): unknown {
+  toJSON(message: CheckedExpr): JsonSafe<CheckedExpr> {
     const obj: any = {};
     obj.referenceMap = {};
     if (message.referenceMap) {
@@ -956,7 +957,7 @@ export const Type = {
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
     };
   },
-  toJSON(message: Type): unknown {
+  toJSON(message: Type): JsonSafe<Type> {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
     message.null !== undefined && (obj.null = nullValueToJSON(message.null));
@@ -1059,7 +1060,7 @@ export const Type_ListType = {
       elemType: isSet(object.elemType) ? Type.fromJSON(object.elemType) : undefined
     };
   },
-  toJSON(message: Type_ListType): unknown {
+  toJSON(message: Type_ListType): JsonSafe<Type_ListType> {
     const obj: any = {};
     message.elemType !== undefined && (obj.elemType = message.elemType ? Type.toJSON(message.elemType) : undefined);
     return obj;
@@ -1122,7 +1123,7 @@ export const Type_MapType = {
       valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
     };
   },
-  toJSON(message: Type_MapType): unknown {
+  toJSON(message: Type_MapType): JsonSafe<Type_MapType> {
     const obj: any = {};
     message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
     message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
@@ -1189,7 +1190,7 @@ export const Type_FunctionType = {
       argTypes: Array.isArray(object?.argTypes) ? object.argTypes.map((e: any) => Type.fromJSON(e)) : []
     };
   },
-  toJSON(message: Type_FunctionType): unknown {
+  toJSON(message: Type_FunctionType): JsonSafe<Type_FunctionType> {
     const obj: any = {};
     message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
     if (message.argTypes) {
@@ -1264,7 +1265,7 @@ export const Type_AbstractType = {
       parameterTypes: Array.isArray(object?.parameterTypes) ? object.parameterTypes.map((e: any) => Type.fromJSON(e)) : []
     };
   },
-  toJSON(message: Type_AbstractType): unknown {
+  toJSON(message: Type_AbstractType): JsonSafe<Type_AbstractType> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.parameterTypes) {
@@ -1347,7 +1348,7 @@ export const Decl = {
       function: isSet(object.function) ? Decl_FunctionDecl.fromJSON(object.function) : undefined
     };
   },
-  toJSON(message: Decl): unknown {
+  toJSON(message: Decl): JsonSafe<Decl> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toJSON(message.ident) : undefined);
@@ -1426,7 +1427,7 @@ export const Decl_IdentDecl = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-  toJSON(message: Decl_IdentDecl): unknown {
+  toJSON(message: Decl_IdentDecl): JsonSafe<Decl_IdentDecl> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
     message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
@@ -1489,7 +1490,7 @@ export const Decl_FunctionDecl = {
       overloads: Array.isArray(object?.overloads) ? object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e)) : []
     };
   },
-  toJSON(message: Decl_FunctionDecl): unknown {
+  toJSON(message: Decl_FunctionDecl): JsonSafe<Decl_FunctionDecl> {
     const obj: any = {};
     if (message.overloads) {
       obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
@@ -1592,7 +1593,7 @@ export const Decl_FunctionDecl_Overload = {
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-  toJSON(message: Decl_FunctionDecl_Overload): unknown {
+  toJSON(message: Decl_FunctionDecl_Overload): JsonSafe<Decl_FunctionDecl_Overload> {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
     if (message.params) {
@@ -1699,7 +1700,7 @@ export const Reference = {
       value: isSet(object.value) ? Constant.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: Reference): unknown {
+  toJSON(message: Reference): JsonSafe<Reference> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     if (message.overloadId) {

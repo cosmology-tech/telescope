@@ -1,7 +1,6 @@
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -263,14 +262,6 @@ export const TokenPair = {
     if (isSet(object.contractOwner)) obj.contractOwner = ownerFromJSON(object.contractOwner);
     return obj;
   },
-  toJSON(message: TokenPair): JsonSafe<TokenPair> {
-    const obj: any = {};
-    message.erc20Address !== undefined && (obj.erc20Address = message.erc20Address);
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    message.contractOwner !== undefined && (obj.contractOwner = ownerToJSON(message.contractOwner));
-    return obj;
-  },
   fromPartial(object: DeepPartial<TokenPair>): TokenPair {
     const message = createBaseTokenPair();
     message.erc20Address = object.erc20Address ?? "";
@@ -383,13 +374,6 @@ export const RegisterCoinProposal = {
     if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
     return obj;
   },
-  toJSON(message: RegisterCoinProposal): JsonSafe<RegisterCoinProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Metadata.toJSON(message.metadata) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RegisterCoinProposal>): RegisterCoinProposal {
     const message = createBaseRegisterCoinProposal();
     message.title = object.title ?? "";
@@ -497,13 +481,6 @@ export const RegisterERC20Proposal = {
     if (isSet(object.erc20address)) obj.erc20address = String(object.erc20address);
     return obj;
   },
-  toJSON(message: RegisterERC20Proposal): JsonSafe<RegisterERC20Proposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.erc20address !== undefined && (obj.erc20address = message.erc20address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RegisterERC20Proposal>): RegisterERC20Proposal {
     const message = createBaseRegisterERC20Proposal();
     message.title = object.title ?? "";
@@ -607,13 +584,6 @@ export const ToggleTokenConversionProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.token)) obj.token = String(object.token);
-    return obj;
-  },
-  toJSON(message: ToggleTokenConversionProposal): JsonSafe<ToggleTokenConversionProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.token !== undefined && (obj.token = message.token);
     return obj;
   },
   fromPartial(object: DeepPartial<ToggleTokenConversionProposal>): ToggleTokenConversionProposal {

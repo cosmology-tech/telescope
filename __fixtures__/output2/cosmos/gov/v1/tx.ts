@@ -5,6 +5,7 @@ import { Coin } from "../../base/v1beta1/coin";
 import { VoteOption, WeightedVoteOption, voteOptionFromJSON, voteOptionToJSON } from "./gov";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -117,7 +118,7 @@ export const MsgSubmitProposal = {
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
-  toJSON(message: MsgSubmitProposal): unknown {
+  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);
@@ -176,7 +177,7 @@ export const MsgSubmitProposalResponse = {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
-  toJSON(message: MsgSubmitProposalResponse): unknown {
+  toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
@@ -229,7 +230,7 @@ export const MsgExecLegacyContent = {
       authority: isSet(object.authority) ? String(object.authority) : ""
     };
   },
-  toJSON(message: MsgExecLegacyContent): unknown {
+  toJSON(message: MsgExecLegacyContent): JsonSafe<MsgExecLegacyContent> {
     const obj: any = {};
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     message.authority !== undefined && (obj.authority = message.authority);
@@ -266,7 +267,7 @@ export const MsgExecLegacyContentResponse = {
   fromJSON(_: any): MsgExecLegacyContentResponse {
     return {};
   },
-  toJSON(_: MsgExecLegacyContentResponse): unknown {
+  toJSON(_: MsgExecLegacyContentResponse): JsonSafe<MsgExecLegacyContentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -333,7 +334,7 @@ export const MsgVote = {
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
-  toJSON(message: MsgVote): unknown {
+  toJSON(message: MsgVote): JsonSafe<MsgVote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -374,7 +375,7 @@ export const MsgVoteResponse = {
   fromJSON(_: any): MsgVoteResponse {
     return {};
   },
-  toJSON(_: MsgVoteResponse): unknown {
+  toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
     const obj: any = {};
     return obj;
   },
@@ -441,7 +442,7 @@ export const MsgVoteWeighted = {
       metadata: isSet(object.metadata) ? String(object.metadata) : ""
     };
   },
-  toJSON(message: MsgVoteWeighted): unknown {
+  toJSON(message: MsgVoteWeighted): JsonSafe<MsgVoteWeighted> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -486,7 +487,7 @@ export const MsgVoteWeightedResponse = {
   fromJSON(_: any): MsgVoteWeightedResponse {
     return {};
   },
-  toJSON(_: MsgVoteWeightedResponse): unknown {
+  toJSON(_: MsgVoteWeightedResponse): JsonSafe<MsgVoteWeightedResponse> {
     const obj: any = {};
     return obj;
   },
@@ -545,7 +546,7 @@ export const MsgDeposit = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgDeposit): unknown {
+  toJSON(message: MsgDeposit): JsonSafe<MsgDeposit> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -588,7 +589,7 @@ export const MsgDepositResponse = {
   fromJSON(_: any): MsgDepositResponse {
     return {};
   },
-  toJSON(_: MsgDepositResponse): unknown {
+  toJSON(_: MsgDepositResponse): JsonSafe<MsgDepositResponse> {
     const obj: any = {};
     return obj;
   },

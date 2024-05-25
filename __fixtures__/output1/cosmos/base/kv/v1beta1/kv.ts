@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.kv.v1beta1";
 /** Pairs defines a repeated slice of Pair objects. */
@@ -53,7 +54,7 @@ export const Pairs = {
       pairs: Array.isArray(object?.pairs) ? object.pairs.map((e: any) => Pair.fromJSON(e)) : []
     };
   },
-  toJSON(message: Pairs): unknown {
+  toJSON(message: Pairs): JsonSafe<Pairs> {
     const obj: any = {};
     if (message.pairs) {
       obj.pairs = message.pairs.map(e => e ? Pair.toJSON(e) : undefined);
@@ -124,7 +125,7 @@ export const Pair = {
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
-  toJSON(message: Pair): unknown {
+  toJSON(message: Pair): JsonSafe<Pair> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));

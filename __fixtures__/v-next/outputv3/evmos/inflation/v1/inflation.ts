@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
@@ -180,13 +179,6 @@ export const InflationDistribution = {
     if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
     return obj;
   },
-  toJSON(message: InflationDistribution): JsonSafe<InflationDistribution> {
-    const obj: any = {};
-    message.stakingRewards !== undefined && (obj.stakingRewards = message.stakingRewards);
-    message.usageIncentives !== undefined && (obj.usageIncentives = message.usageIncentives);
-    message.communityPool !== undefined && (obj.communityPool = message.communityPool);
-    return obj;
-  },
   fromPartial(object: DeepPartial<InflationDistribution>): InflationDistribution {
     const message = createBaseInflationDistribution();
     message.stakingRewards = object.stakingRewards ?? "";
@@ -306,15 +298,6 @@ export const ExponentialCalculation = {
     if (isSet(object.c)) obj.c = String(object.c);
     if (isSet(object.bondingTarget)) obj.bondingTarget = String(object.bondingTarget);
     if (isSet(object.maxVariance)) obj.maxVariance = String(object.maxVariance);
-    return obj;
-  },
-  toJSON(message: ExponentialCalculation): JsonSafe<ExponentialCalculation> {
-    const obj: any = {};
-    message.a !== undefined && (obj.a = message.a);
-    message.r !== undefined && (obj.r = message.r);
-    message.c !== undefined && (obj.c = message.c);
-    message.bondingTarget !== undefined && (obj.bondingTarget = message.bondingTarget);
-    message.maxVariance !== undefined && (obj.maxVariance = message.maxVariance);
     return obj;
   },
   fromPartial(object: DeepPartial<ExponentialCalculation>): ExponentialCalculation {

@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** ModuleDescriptor describes an app module. */
 export interface ModuleDescriptor {
@@ -248,21 +247,6 @@ export const ModuleDescriptor = {
     if (Array.isArray(object?.canMigrateFrom)) obj.canMigrateFrom = object.canMigrateFrom.map((e: any) => MigrateFromInfo.fromJSON(e));
     return obj;
   },
-  toJSON(message: ModuleDescriptor): JsonSafe<ModuleDescriptor> {
-    const obj: any = {};
-    message.goImport !== undefined && (obj.goImport = message.goImport);
-    if (message.usePackage) {
-      obj.usePackage = message.usePackage.map(e => e ? PackageReference.toJSON(e) : undefined);
-    } else {
-      obj.usePackage = [];
-    }
-    if (message.canMigrateFrom) {
-      obj.canMigrateFrom = message.canMigrateFrom.map(e => e ? MigrateFromInfo.toJSON(e) : undefined);
-    } else {
-      obj.canMigrateFrom = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ModuleDescriptor>): ModuleDescriptor {
     const message = createBaseModuleDescriptor();
     message.goImport = object.goImport ?? "";
@@ -373,12 +357,6 @@ export const PackageReference = {
     if (isSet(object.revision)) obj.revision = Number(object.revision);
     return obj;
   },
-  toJSON(message: PackageReference): JsonSafe<PackageReference> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.revision !== undefined && (obj.revision = Math.round(message.revision));
-    return obj;
-  },
   fromPartial(object: DeepPartial<PackageReference>): PackageReference {
     const message = createBasePackageReference();
     message.name = object.name ?? "";
@@ -460,11 +438,6 @@ export const MigrateFromInfo = {
   fromJSON(object: any): MigrateFromInfo {
     const obj = createBaseMigrateFromInfo();
     if (isSet(object.module)) obj.module = String(object.module);
-    return obj;
-  },
-  toJSON(message: MigrateFromInfo): JsonSafe<MigrateFromInfo> {
-    const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
     return obj;
   },
   fromPartial(object: DeepPartial<MigrateFromInfo>): MigrateFromInfo {

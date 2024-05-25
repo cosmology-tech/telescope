@@ -3,6 +3,7 @@
 import { IdentifiedConnection, ConnectionPaths, Params } from "./connection";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.connection.v1";
 /** GenesisState defines the ibc connection submodule's genesis state. */
 export interface GenesisState {
@@ -70,7 +71,7 @@ export const GenesisState = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toJSON(e) : undefined);

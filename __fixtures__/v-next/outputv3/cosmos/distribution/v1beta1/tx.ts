@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /**
  * MsgSetWithdrawAddress sets the withdraw address for
@@ -208,12 +207,6 @@ export const MsgSetWithdrawAddress = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: MsgSetWithdrawAddress): JsonSafe<MsgSetWithdrawAddress> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSetWithdrawAddress>): MsgSetWithdrawAddress {
     const message = createBaseMsgSetWithdrawAddress();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -286,10 +279,6 @@ export const MsgSetWithdrawAddressResponse = {
   },
   fromJSON(_: any): MsgSetWithdrawAddressResponse {
     const obj = createBaseMsgSetWithdrawAddressResponse();
-    return obj;
-  },
-  toJSON(_: MsgSetWithdrawAddressResponse): JsonSafe<MsgSetWithdrawAddressResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgSetWithdrawAddressResponse>): MsgSetWithdrawAddressResponse {
@@ -366,12 +355,6 @@ export const MsgWithdrawDelegatorReward = {
     const obj = createBaseMsgWithdrawDelegatorReward();
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
-    return obj;
-  },
-  toJSON(message: MsgWithdrawDelegatorReward): JsonSafe<MsgWithdrawDelegatorReward> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorReward>): MsgWithdrawDelegatorReward {
@@ -457,15 +440,6 @@ export const MsgWithdrawDelegatorRewardResponse = {
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgWithdrawDelegatorRewardResponse): JsonSafe<MsgWithdrawDelegatorRewardResponse> {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgWithdrawDelegatorRewardResponse>): MsgWithdrawDelegatorRewardResponse {
     const message = createBaseMsgWithdrawDelegatorRewardResponse();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
@@ -548,11 +522,6 @@ export const MsgWithdrawValidatorCommission = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: MsgWithdrawValidatorCommission): JsonSafe<MsgWithdrawValidatorCommission> {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommission>): MsgWithdrawValidatorCommission {
     const message = createBaseMsgWithdrawValidatorCommission();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -627,15 +596,6 @@ export const MsgWithdrawValidatorCommissionResponse = {
   fromJSON(object: any): MsgWithdrawValidatorCommissionResponse {
     const obj = createBaseMsgWithdrawValidatorCommissionResponse();
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgWithdrawValidatorCommissionResponse): JsonSafe<MsgWithdrawValidatorCommissionResponse> {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgWithdrawValidatorCommissionResponse>): MsgWithdrawValidatorCommissionResponse {
@@ -728,16 +688,6 @@ export const MsgFundCommunityPool = {
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },
-  toJSON(message: MsgFundCommunityPool): JsonSafe<MsgFundCommunityPool> {
-    const obj: any = {};
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgFundCommunityPool>): MsgFundCommunityPool {
     const message = createBaseMsgFundCommunityPool();
     message.amount = object.amount?.map(e => Coin.fromPartial(e)) || [];
@@ -816,10 +766,6 @@ export const MsgFundCommunityPoolResponse = {
   },
   fromJSON(_: any): MsgFundCommunityPoolResponse {
     const obj = createBaseMsgFundCommunityPoolResponse();
-    return obj;
-  },
-  toJSON(_: MsgFundCommunityPoolResponse): JsonSafe<MsgFundCommunityPoolResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgFundCommunityPoolResponse>): MsgFundCommunityPoolResponse {

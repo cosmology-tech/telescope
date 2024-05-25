@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.twap.v1beta1";
 export interface ArithmeticTwapRequest {
@@ -166,15 +165,6 @@ export const ArithmeticTwapRequest = {
     if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
     return obj;
   },
-  toJSON(message: ArithmeticTwapRequest): JsonSafe<ArithmeticTwapRequest> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
-    message.quoteAsset !== undefined && (obj.quoteAsset = message.quoteAsset);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ArithmeticTwapRequest>): ArithmeticTwapRequest {
     const message = createBaseArithmeticTwapRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
@@ -281,11 +271,6 @@ export const ArithmeticTwapResponse = {
     if (isSet(object.arithmeticTwap)) obj.arithmeticTwap = String(object.arithmeticTwap);
     return obj;
   },
-  toJSON(message: ArithmeticTwapResponse): JsonSafe<ArithmeticTwapResponse> {
-    const obj: any = {};
-    message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ArithmeticTwapResponse>): ArithmeticTwapResponse {
     const message = createBaseArithmeticTwapResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
@@ -384,14 +369,6 @@ export const ArithmeticTwapToNowRequest = {
     if (isSet(object.baseAsset)) obj.baseAsset = String(object.baseAsset);
     if (isSet(object.quoteAsset)) obj.quoteAsset = String(object.quoteAsset);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    return obj;
-  },
-  toJSON(message: ArithmeticTwapToNowRequest): JsonSafe<ArithmeticTwapToNowRequest> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.baseAsset !== undefined && (obj.baseAsset = message.baseAsset);
-    message.quoteAsset !== undefined && (obj.quoteAsset = message.quoteAsset);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<ArithmeticTwapToNowRequest>): ArithmeticTwapToNowRequest {
@@ -493,11 +470,6 @@ export const ArithmeticTwapToNowResponse = {
     if (isSet(object.arithmeticTwap)) obj.arithmeticTwap = String(object.arithmeticTwap);
     return obj;
   },
-  toJSON(message: ArithmeticTwapToNowResponse): JsonSafe<ArithmeticTwapToNowResponse> {
-    const obj: any = {};
-    message.arithmeticTwap !== undefined && (obj.arithmeticTwap = message.arithmeticTwap);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ArithmeticTwapToNowResponse>): ArithmeticTwapToNowResponse {
     const message = createBaseArithmeticTwapToNowResponse();
     message.arithmeticTwap = object.arithmeticTwap ?? "";
@@ -563,10 +535,6 @@ export const ParamsRequest = {
   },
   fromJSON(_: any): ParamsRequest {
     const obj = createBaseParamsRequest();
-    return obj;
-  },
-  toJSON(_: ParamsRequest): JsonSafe<ParamsRequest> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<ParamsRequest>): ParamsRequest {
@@ -635,11 +603,6 @@ export const ParamsResponse = {
   fromJSON(object: any): ParamsResponse {
     const obj = createBaseParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: ParamsResponse): JsonSafe<ParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ParamsResponse>): ParamsResponse {

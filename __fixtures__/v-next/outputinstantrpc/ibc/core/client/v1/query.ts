@@ -3,6 +3,7 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
@@ -364,7 +365,7 @@ export const QueryClientStateRequest = {
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
     return obj;
   },
-  toJSON(message: QueryClientStateRequest): unknown {
+  toJSON(message: QueryClientStateRequest): JsonSafe<QueryClientStateRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
@@ -474,7 +475,7 @@ export const QueryClientStateResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryClientStateResponse): unknown {
+  toJSON(message: QueryClientStateResponse): JsonSafe<QueryClientStateResponse> {
     const obj: any = {};
     message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -590,7 +591,7 @@ export const QueryClientStatesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryClientStatesRequest): unknown {
+  toJSON(message: QueryClientStatesRequest): JsonSafe<QueryClientStatesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -694,7 +695,7 @@ export const QueryClientStatesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryClientStatesResponse): unknown {
+  toJSON(message: QueryClientStatesResponse): JsonSafe<QueryClientStatesResponse> {
     const obj: any = {};
     if (message.clientStates) {
       obj.clientStates = message.clientStates.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
@@ -833,7 +834,7 @@ export const QueryConsensusStateRequest = {
     if (isSet(object.latestHeight)) obj.latestHeight = Boolean(object.latestHeight);
     return obj;
   },
-  toJSON(message: QueryConsensusStateRequest): unknown {
+  toJSON(message: QueryConsensusStateRequest): JsonSafe<QueryConsensusStateRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
@@ -974,7 +975,7 @@ export const QueryConsensusStateResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryConsensusStateResponse): unknown {
+  toJSON(message: QueryConsensusStateResponse): JsonSafe<QueryConsensusStateResponse> {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -1098,7 +1099,7 @@ export const QueryConsensusStatesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryConsensusStatesRequest): unknown {
+  toJSON(message: QueryConsensusStatesRequest): JsonSafe<QueryConsensusStatesRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1211,7 +1212,7 @@ export const QueryConsensusStatesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryConsensusStatesResponse): unknown {
+  toJSON(message: QueryConsensusStatesResponse): JsonSafe<QueryConsensusStatesResponse> {
     const obj: any = {};
     if (message.consensusStates) {
       obj.consensusStates = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toJSON(e) : undefined);
@@ -1326,7 +1327,7 @@ export const QueryClientStatusRequest = {
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
     return obj;
   },
-  toJSON(message: QueryClientStatusRequest): unknown {
+  toJSON(message: QueryClientStatusRequest): JsonSafe<QueryClientStatusRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
@@ -1420,7 +1421,7 @@ export const QueryClientStatusResponse = {
     if (isSet(object.status)) obj.status = String(object.status);
     return obj;
   },
-  toJSON(message: QueryClientStatusResponse): unknown {
+  toJSON(message: QueryClientStatusResponse): JsonSafe<QueryClientStatusResponse> {
     const obj: any = {};
     message.status !== undefined && (obj.status = message.status);
     return obj;
@@ -1505,7 +1506,7 @@ export const QueryClientParamsRequest = {
     const obj = createBaseQueryClientParamsRequest();
     return obj;
   },
-  toJSON(_: QueryClientParamsRequest): unknown {
+  toJSON(_: QueryClientParamsRequest): JsonSafe<QueryClientParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1588,7 +1589,7 @@ export const QueryClientParamsResponse = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: QueryClientParamsResponse): unknown {
+  toJSON(message: QueryClientParamsResponse): JsonSafe<QueryClientParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -1675,7 +1676,7 @@ export const QueryUpgradedClientStateRequest = {
     const obj = createBaseQueryUpgradedClientStateRequest();
     return obj;
   },
-  toJSON(_: QueryUpgradedClientStateRequest): unknown {
+  toJSON(_: QueryUpgradedClientStateRequest): JsonSafe<QueryUpgradedClientStateRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1758,7 +1759,7 @@ export const QueryUpgradedClientStateResponse = {
     if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
     return obj;
   },
-  toJSON(message: QueryUpgradedClientStateResponse): unknown {
+  toJSON(message: QueryUpgradedClientStateResponse): JsonSafe<QueryUpgradedClientStateResponse> {
     const obj: any = {};
     message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
     return obj;
@@ -1845,7 +1846,7 @@ export const QueryUpgradedConsensusStateRequest = {
     const obj = createBaseQueryUpgradedConsensusStateRequest();
     return obj;
   },
-  toJSON(_: QueryUpgradedConsensusStateRequest): unknown {
+  toJSON(_: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1928,7 +1929,7 @@ export const QueryUpgradedConsensusStateResponse = {
     if (isSet(object.upgradedConsensusState)) obj.upgradedConsensusState = Any.fromJSON(object.upgradedConsensusState);
     return obj;
   },
-  toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
+  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = message.upgradedConsensusState ? Any.toJSON(message.upgradedConsensusState) : undefined);
     return obj;

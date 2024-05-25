@@ -2,6 +2,7 @@ import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./d
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 export interface GenesisDowntimeEntry {
   duration: Downtime;
@@ -72,7 +73,7 @@ export const GenesisDowntimeEntry = {
       lastDowntime: isSet(object.lastDowntime) ? new Date(object.lastDowntime) : undefined
     };
   },
-  toJSON(message: GenesisDowntimeEntry): unknown {
+  toJSON(message: GenesisDowntimeEntry): JsonSafe<GenesisDowntimeEntry> {
     const obj: any = {};
     message.duration !== undefined && (obj.duration = downtimeToJSON(message.duration));
     message.lastDowntime !== undefined && (obj.lastDowntime = message.lastDowntime.toISOString());
@@ -183,7 +184,7 @@ export const GenesisState = {
       lastBlockTime: isSet(object.lastBlockTime) ? new Date(object.lastBlockTime) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.downtimes) {
       obj.downtimes = message.downtimes.map(e => e ? GenesisDowntimeEntry.toJSON(e) : undefined);

@@ -1,7 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoAmino, ValidatorSigningInfoSDKType } from "./slashing";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
@@ -173,21 +172,6 @@ export const GenesisState = {
     if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.signingInfos) {
-      obj.signingInfos = message.signingInfos.map(e => e ? SigningInfo.toJSON(e) : undefined);
-    } else {
-      obj.signingInfos = [];
-    }
-    if (message.missedBlocks) {
-      obj.missedBlocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toJSON(e) : undefined);
-    } else {
-      obj.missedBlocks = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     if (object.params !== undefined && object.params !== null) {
@@ -300,12 +284,6 @@ export const SigningInfo = {
     if (isSet(object.validatorSigningInfo)) obj.validatorSigningInfo = ValidatorSigningInfo.fromJSON(object.validatorSigningInfo);
     return obj;
   },
-  toJSON(message: SigningInfo): JsonSafe<SigningInfo> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.validatorSigningInfo !== undefined && (obj.validatorSigningInfo = message.validatorSigningInfo ? ValidatorSigningInfo.toJSON(message.validatorSigningInfo) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
@@ -397,16 +375,6 @@ export const ValidatorMissedBlocks = {
     const obj = createBaseValidatorMissedBlocks();
     if (isSet(object.address)) obj.address = String(object.address);
     if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ValidatorMissedBlocks): JsonSafe<ValidatorMissedBlocks> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.missedBlocks) {
-      obj.missedBlocks = message.missedBlocks.map(e => e ? MissedBlock.toJSON(e) : undefined);
-    } else {
-      obj.missedBlocks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
@@ -504,12 +472,6 @@ export const MissedBlock = {
     const obj = createBaseMissedBlock();
     if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     if (isSet(object.missed)) obj.missed = Boolean(object.missed);
-    return obj;
-  },
-  toJSON(message: MissedBlock): JsonSafe<MissedBlock> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    message.missed !== undefined && (obj.missed = message.missed);
     return obj;
   },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {

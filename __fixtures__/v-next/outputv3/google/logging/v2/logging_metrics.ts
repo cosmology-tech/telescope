@@ -3,7 +3,6 @@ import { Distribution_BucketOptions } from "../../api/distribution";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 /** Logging API version. */
 export enum LogMetric_ApiVersion {
@@ -616,12 +615,6 @@ export const LogMetric_LabelExtractorsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: LogMetric_LabelExtractorsEntry): JsonSafe<LogMetric_LabelExtractorsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LogMetric_LabelExtractorsEntry>): LogMetric_LabelExtractorsEntry {
     const message = createBaseLogMetric_LabelExtractorsEntry();
     message.key = object.key ?? "";
@@ -787,26 +780,6 @@ export const LogMetric = {
     if (isSet(object.createTime)) obj.createTime = new Date(object.createTime);
     if (isSet(object.updateTime)) obj.updateTime = new Date(object.updateTime);
     if (isSet(object.version)) obj.version = logMetric_ApiVersionFromJSON(object.version);
-    return obj;
-  },
-  toJSON(message: LogMetric): JsonSafe<LogMetric> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.disabled !== undefined && (obj.disabled = message.disabled);
-    message.metricDescriptor !== undefined && (obj.metricDescriptor = message.metricDescriptor ? MetricDescriptor.toJSON(message.metricDescriptor) : undefined);
-    message.valueExtractor !== undefined && (obj.valueExtractor = message.valueExtractor);
-    obj.labelExtractors = {};
-    if (message.labelExtractors) {
-      Object.entries(message.labelExtractors).forEach(([k, v]) => {
-        obj.labelExtractors[k] = v;
-      });
-    }
-    message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.updateTime !== undefined && (obj.updateTime = message.updateTime.toISOString());
-    message.version !== undefined && (obj.version = logMetric_ApiVersionToJSON(message.version));
     return obj;
   },
   fromPartial(object: DeepPartial<LogMetric>): LogMetric {
@@ -1001,13 +974,6 @@ export const ListLogMetricsRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     return obj;
   },
-  toJSON(message: ListLogMetricsRequest): JsonSafe<ListLogMetricsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogMetricsRequest>): ListLogMetricsRequest {
     const message = createBaseListLogMetricsRequest();
     message.parent = object.parent ?? "";
@@ -1105,16 +1071,6 @@ export const ListLogMetricsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListLogMetricsResponse): JsonSafe<ListLogMetricsResponse> {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? LogMetric.toJSON(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListLogMetricsResponse>): ListLogMetricsResponse {
     const message = createBaseListLogMetricsResponse();
     message.metrics = object.metrics?.map(e => LogMetric.fromPartial(e)) || [];
@@ -1203,11 +1159,6 @@ export const GetLogMetricRequest = {
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
     return obj;
   },
-  toJSON(message: GetLogMetricRequest): JsonSafe<GetLogMetricRequest> {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetLogMetricRequest>): GetLogMetricRequest {
     const message = createBaseGetLogMetricRequest();
     message.metricName = object.metricName ?? "";
@@ -1289,12 +1240,6 @@ export const CreateLogMetricRequest = {
     const obj = createBaseCreateLogMetricRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
-    return obj;
-  },
-  toJSON(message: CreateLogMetricRequest): JsonSafe<CreateLogMetricRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CreateLogMetricRequest>): CreateLogMetricRequest {
@@ -1389,12 +1334,6 @@ export const UpdateLogMetricRequest = {
     if (isSet(object.metric)) obj.metric = LogMetric.fromJSON(object.metric);
     return obj;
   },
-  toJSON(message: UpdateLogMetricRequest): JsonSafe<UpdateLogMetricRequest> {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
-    message.metric !== undefined && (obj.metric = message.metric ? LogMetric.toJSON(message.metric) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateLogMetricRequest>): UpdateLogMetricRequest {
     const message = createBaseUpdateLogMetricRequest();
     message.metricName = object.metricName ?? "";
@@ -1477,11 +1416,6 @@ export const DeleteLogMetricRequest = {
   fromJSON(object: any): DeleteLogMetricRequest {
     const obj = createBaseDeleteLogMetricRequest();
     if (isSet(object.metricName)) obj.metricName = String(object.metricName);
-    return obj;
-  },
-  toJSON(message: DeleteLogMetricRequest): JsonSafe<DeleteLogMetricRequest> {
-    const obj: any = {};
-    message.metricName !== undefined && (obj.metricName = message.metricName);
     return obj;
   },
   fromPartial(object: DeepPartial<DeleteLogMetricRequest>): DeleteLogMetricRequest {

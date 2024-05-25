@@ -48,26 +48,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createProvider(value: MsgCreateProvider) {
-      return {
-        typeUrl: "/akash.provider.v1beta2.MsgCreateProvider",
-        value: MsgCreateProvider.toJSON(value)
-      };
-    },
-    updateProvider(value: MsgUpdateProvider) {
-      return {
-        typeUrl: "/akash.provider.v1beta2.MsgUpdateProvider",
-        value: MsgUpdateProvider.toJSON(value)
-      };
-    },
-    deleteProvider(value: MsgDeleteProvider) {
-      return {
-        typeUrl: "/akash.provider.v1beta2.MsgDeleteProvider",
-        value: MsgDeleteProvider.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createProvider(value: any) {
       return {

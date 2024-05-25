@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -188,18 +187,6 @@ export const Endpoint = {
     if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
     if (isSet(object.target)) obj.target = String(object.target);
     if (isSet(object.allowCors)) obj.allowCors = Boolean(object.allowCors);
-    return obj;
-  },
-  toJSON(message: Endpoint): JsonSafe<Endpoint> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
-    message.target !== undefined && (obj.target = message.target);
-    message.allowCors !== undefined && (obj.allowCors = message.allowCors);
     return obj;
   },
   fromPartial(object: DeepPartial<Endpoint>): Endpoint {

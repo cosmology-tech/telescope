@@ -4,6 +4,7 @@ import { CompactBitArray } from "../../../crypto/multisig/v1beta1/multisig";
 import { Any } from "../../../../google/protobuf/any";
 import { Long, DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.tx.signing.v1beta1";
 /** SignMode represents a signing mode with its own security guarantees. */
 export enum SignMode {
@@ -160,7 +161,7 @@ export const SignatureDescriptors = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
     };
   },
-  toJSON(message: SignatureDescriptors): unknown {
+  toJSON(message: SignatureDescriptors): JsonSafe<SignatureDescriptors> {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
@@ -225,7 +226,7 @@ export const SignatureDescriptor = {
       sequence: isSet(object.sequence) ? Long.fromValue(object.sequence) : Long.UZERO
     };
   },
-  toJSON(message: SignatureDescriptor): unknown {
+  toJSON(message: SignatureDescriptor): JsonSafe<SignatureDescriptor> {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
@@ -282,7 +283,7 @@ export const SignatureDescriptor_Data = {
       multi: isSet(object.multi) ? SignatureDescriptor_Data_Multi.fromJSON(object.multi) : undefined
     };
   },
-  toJSON(message: SignatureDescriptor_Data): unknown {
+  toJSON(message: SignatureDescriptor_Data): JsonSafe<SignatureDescriptor_Data> {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? SignatureDescriptor_Data_Single.toJSON(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? SignatureDescriptor_Data_Multi.toJSON(message.multi) : undefined);
@@ -337,7 +338,7 @@ export const SignatureDescriptor_Data_Single = {
       signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array()
     };
   },
-  toJSON(message: SignatureDescriptor_Data_Single): unknown {
+  toJSON(message: SignatureDescriptor_Data_Single): JsonSafe<SignatureDescriptor_Data_Single> {
     const obj: any = {};
     message.mode !== undefined && (obj.mode = signModeToJSON(message.mode));
     message.signature !== undefined && (obj.signature = base64FromBytes(message.signature !== undefined ? message.signature : new Uint8Array()));
@@ -392,7 +393,7 @@ export const SignatureDescriptor_Data_Multi = {
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor_Data.fromJSON(e)) : []
     };
   },
-  toJSON(message: SignatureDescriptor_Data_Multi): unknown {
+  toJSON(message: SignatureDescriptor_Data_Multi): JsonSafe<SignatureDescriptor_Data_Multi> {
     const obj: any = {};
     message.bitarray !== undefined && (obj.bitarray = message.bitarray ? CompactBitArray.toJSON(message.bitarray) : undefined);
     if (message.signatures) {

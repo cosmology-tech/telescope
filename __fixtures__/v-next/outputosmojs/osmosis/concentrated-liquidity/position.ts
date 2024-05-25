@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
 import { Decimal } from "@cosmjs/math";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /**
  * Position contains position's id, address, pool id, lower tick, upper tick
@@ -131,7 +132,7 @@ export const Position = {
       liquidity: isSet(object.liquidity) ? String(object.liquidity) : ""
     };
   },
-  toJSON(message: Position): unknown {
+  toJSON(message: Position): JsonSafe<Position> {
     const obj: any = {};
     message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     message.address !== undefined && (obj.address = message.address);
@@ -295,7 +296,7 @@ export const PositionWithUnderlyingAssetBreakdown = {
       asset1: isSet(object.asset1) ? Coin.fromJSON(object.asset1) : undefined
     };
   },
-  toJSON(message: PositionWithUnderlyingAssetBreakdown): unknown {
+  toJSON(message: PositionWithUnderlyingAssetBreakdown): JsonSafe<PositionWithUnderlyingAssetBreakdown> {
     const obj: any = {};
     message.position !== undefined && (obj.position = message.position ? Position.toJSON(message.position) : undefined);
     message.asset0 !== undefined && (obj.asset0 = message.asset0 ? Coin.toJSON(message.asset0) : undefined);

@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial, Exact, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -120,7 +121,7 @@ export const DeploymentID = {
       dseq: isSet(object.dseq) ? Long.fromValue(object.dseq) : Long.UZERO
     };
   },
-  toJSON(message: DeploymentID): unknown {
+  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -203,7 +204,7 @@ export const Deployment = {
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
-  toJSON(message: Deployment): unknown {
+  toJSON(message: Deployment): JsonSafe<Deployment> {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
@@ -286,7 +287,7 @@ export const DeploymentFilters = {
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
-  toJSON(message: DeploymentFilters): unknown {
+  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());

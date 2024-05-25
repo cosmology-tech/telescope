@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -59,7 +60,7 @@ export const Capability = {
       index: isSet(object.index) ? Long.fromValue(object.index) : Long.UZERO
     };
   },
-  toJSON(message: Capability): unknown {
+  toJSON(message: Capability): JsonSafe<Capability> {
     const obj: any = {};
     message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     return obj;
@@ -112,7 +113,7 @@ export const Owner = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: Owner): unknown {
+  toJSON(message: Owner): JsonSafe<Owner> {
     const obj: any = {};
     message.module !== undefined && (obj.module = message.module);
     message.name !== undefined && (obj.name = message.name);
@@ -159,7 +160,7 @@ export const CapabilityOwners = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => Owner.fromJSON(e)) : []
     };
   },
-  toJSON(message: CapabilityOwners): unknown {
+  toJSON(message: CapabilityOwners): JsonSafe<CapabilityOwners> {
     const obj: any = {};
     if (message.owners) {
       obj.owners = message.owners.map(e => e ? Owner.toJSON(e) : undefined);

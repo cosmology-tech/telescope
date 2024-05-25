@@ -3,7 +3,6 @@ import { CheckError, CheckErrorAmino, CheckErrorSDKType } from "./check_error";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * The type of the consumer as defined in
@@ -498,13 +497,6 @@ export const CheckRequest = {
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
     return obj;
   },
-  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.operation !== undefined && (obj.operation = message.operation ? Operation.toJSON(message.operation) : undefined);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
@@ -628,19 +620,6 @@ export const CheckResponse = {
     if (isSet(object.checkInfo)) obj.checkInfo = CheckResponse_CheckInfo.fromJSON(object.checkInfo);
     return obj;
   },
-  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    if (message.checkErrors) {
-      obj.checkErrors = message.checkErrors.map(e => e ? CheckError.toJSON(e) : undefined);
-    } else {
-      obj.checkErrors = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.serviceRolloutId = message.serviceRolloutId);
-    message.checkInfo !== undefined && (obj.checkInfo = message.checkInfo ? CheckResponse_CheckInfo.toJSON(message.checkInfo) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
     const message = createBaseCheckResponse();
     message.operationId = object.operationId ?? "";
@@ -760,16 +739,6 @@ export const CheckResponse_CheckInfo = {
     if (isSet(object.consumerInfo)) obj.consumerInfo = CheckResponse_ConsumerInfo.fromJSON(object.consumerInfo);
     return obj;
   },
-  toJSON(message: CheckResponse_CheckInfo): JsonSafe<CheckResponse_CheckInfo> {
-    const obj: any = {};
-    if (message.unusedArguments) {
-      obj.unusedArguments = message.unusedArguments.map(e => e);
-    } else {
-      obj.unusedArguments = [];
-    }
-    message.consumerInfo !== undefined && (obj.consumerInfo = message.consumerInfo ? CheckResponse_ConsumerInfo.toJSON(message.consumerInfo) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckResponse_CheckInfo>): CheckResponse_CheckInfo {
     const message = createBaseCheckResponse_CheckInfo();
     message.unusedArguments = object.unusedArguments?.map(e => e) || [];
@@ -874,13 +843,6 @@ export const CheckResponse_ConsumerInfo = {
     if (isSet(object.projectNumber)) obj.projectNumber = BigInt(object.projectNumber.toString());
     if (isSet(object.type)) obj.type = checkResponse_ConsumerInfo_ConsumerTypeFromJSON(object.type);
     if (isSet(object.consumerNumber)) obj.consumerNumber = BigInt(object.consumerNumber.toString());
-    return obj;
-  },
-  toJSON(message: CheckResponse_ConsumerInfo): JsonSafe<CheckResponse_ConsumerInfo> {
-    const obj: any = {};
-    message.projectNumber !== undefined && (obj.projectNumber = (message.projectNumber || BigInt(0)).toString());
-    message.type !== undefined && (obj.type = checkResponse_ConsumerInfo_ConsumerTypeToJSON(message.type));
-    message.consumerNumber !== undefined && (obj.consumerNumber = (message.consumerNumber || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<CheckResponse_ConsumerInfo>): CheckResponse_ConsumerInfo {
@@ -990,17 +952,6 @@ export const ReportRequest = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => Operation.fromJSON(e));
     if (isSet(object.serviceConfigId)) obj.serviceConfigId = String(object.serviceConfigId);
-    return obj;
-  },
-  toJSON(message: ReportRequest): JsonSafe<ReportRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toJSON(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
     return obj;
   },
   fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
@@ -1114,17 +1065,6 @@ export const ReportResponse = {
     if (isSet(object.serviceRolloutId)) obj.serviceRolloutId = String(object.serviceRolloutId);
     return obj;
   },
-  toJSON(message: ReportResponse): JsonSafe<ReportResponse> {
-    const obj: any = {};
-    if (message.reportErrors) {
-      obj.reportErrors = message.reportErrors.map(e => e ? ReportResponse_ReportError.toJSON(e) : undefined);
-    } else {
-      obj.reportErrors = [];
-    }
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.serviceRolloutId !== undefined && (obj.serviceRolloutId = message.serviceRolloutId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ReportResponse>): ReportResponse {
     const message = createBaseReportResponse();
     message.reportErrors = object.reportErrors?.map(e => ReportResponse_ReportError.fromPartial(e)) || [];
@@ -1226,12 +1166,6 @@ export const ReportResponse_ReportError = {
     const obj = createBaseReportResponse_ReportError();
     if (isSet(object.operationId)) obj.operationId = String(object.operationId);
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
-  },
-  toJSON(message: ReportResponse_ReportError): JsonSafe<ReportResponse_ReportError> {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ReportResponse_ReportError>): ReportResponse_ReportError {

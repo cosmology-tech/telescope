@@ -23,14 +23,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    unjail(value: MsgUnjail) {
-      return {
-        typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-        value: MsgUnjail.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     unjail(value: any) {
       return {

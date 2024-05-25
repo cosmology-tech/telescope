@@ -3,6 +3,7 @@
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -72,7 +73,7 @@ export const Equivocation = {
       consensusAddress: isSet(object.consensusAddress) ? String(object.consensusAddress) : ""
     };
   },
-  toJSON(message: Equivocation): unknown {
+  toJSON(message: Equivocation): JsonSafe<Equivocation> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     message.time !== undefined && (obj.time = fromTimestamp(message.time).toISOString());

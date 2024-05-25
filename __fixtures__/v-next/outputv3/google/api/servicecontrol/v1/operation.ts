@@ -4,7 +4,6 @@ import { LogEntry, LogEntryAmino, LogEntrySDKType } from "./log_entry";
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
@@ -289,12 +288,6 @@ export const Operation_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Operation_LabelsEntry): JsonSafe<Operation_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Operation_LabelsEntry>): Operation_LabelsEntry {
     const message = createBaseOperation_LabelsEntry();
     message.key = object.key ?? "";
@@ -452,37 +445,6 @@ export const Operation = {
     if (Array.isArray(object?.logEntries)) obj.logEntries = object.logEntries.map((e: any) => LogEntry.fromJSON(e));
     if (isSet(object.importance)) obj.importance = operation_ImportanceFromJSON(object.importance);
     if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Operation): JsonSafe<Operation> {
-    const obj: any = {};
-    message.operationId !== undefined && (obj.operationId = message.operationId);
-    message.operationName !== undefined && (obj.operationName = message.operationName);
-    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
-    if (message.metricValueSets) {
-      obj.metricValueSets = message.metricValueSets.map(e => e ? MetricValueSet.toJSON(e) : undefined);
-    } else {
-      obj.metricValueSets = [];
-    }
-    if (message.logEntries) {
-      obj.logEntries = message.logEntries.map(e => e ? LogEntry.toJSON(e) : undefined);
-    } else {
-      obj.logEntries = [];
-    }
-    message.importance !== undefined && (obj.importance = operation_ImportanceToJSON(message.importance));
-    if (message.extensions) {
-      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.extensions = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Operation>): Operation {

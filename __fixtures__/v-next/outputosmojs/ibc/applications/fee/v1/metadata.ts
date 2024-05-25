@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.fee.v1";
 /**
  * Metadata defines the ICS29 channel specific metadata encoded into the channel version bytestring
@@ -66,7 +67,7 @@ export const Metadata = {
       appVersion: isSet(object.appVersion) ? String(object.appVersion) : ""
     };
   },
-  toJSON(message: Metadata): unknown {
+  toJSON(message: Metadata): JsonSafe<Metadata> {
     const obj: any = {};
     message.feeVersion !== undefined && (obj.feeVersion = message.feeVersion);
     message.appVersion !== undefined && (obj.appVersion = message.appVersion);

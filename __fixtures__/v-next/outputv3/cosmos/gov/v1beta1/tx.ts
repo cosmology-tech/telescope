@@ -8,7 +8,6 @@ import { SetSuperfluidAssetsProposal, SetSuperfluidAssetsProposalProtoMsg, SetSu
 import { UpdateFeeTokenProposal, UpdateFeeTokenProposalProtoMsg, UpdateFeeTokenProposalSDKType } from "../../../osmosis/txfees/v1beta1/gov";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /**
  * MsgSubmitProposal defines an sdk.Msg type that supports submitting arbitrary
@@ -232,17 +231,6 @@ export const MsgSubmitProposal = {
     if (isSet(object.proposer)) obj.proposer = String(object.proposer);
     return obj;
   },
-  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
-    const obj: any = {};
-    message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
-    if (message.initialDeposit) {
-      obj.initialDeposit = message.initialDeposit.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.initialDeposit = [];
-    }
-    message.proposer !== undefined && (obj.proposer = message.proposer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSubmitProposal>): MsgSubmitProposal {
     const message = createBaseMsgSubmitProposal();
     if (object.content !== undefined && object.content !== null) {
@@ -341,11 +329,6 @@ export const MsgSubmitProposalResponse = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: MsgSubmitProposalResponse): JsonSafe<MsgSubmitProposalResponse> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgSubmitProposalResponse>): MsgSubmitProposalResponse {
     const message = createBaseMsgSubmitProposalResponse();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -440,13 +423,6 @@ export const MsgVote = {
     if (isSet(object.option)) obj.option = voteOptionFromJSON(object.option);
     return obj;
   },
-  toJSON(message: MsgVote): JsonSafe<MsgVote> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgVote>): MsgVote {
     const message = createBaseMsgVote();
     if (object.proposalId !== undefined && object.proposalId !== null) {
@@ -528,10 +504,6 @@ export const MsgVoteResponse = {
   },
   fromJSON(_: any): MsgVoteResponse {
     const obj = createBaseMsgVoteResponse();
-    return obj;
-  },
-  toJSON(_: MsgVoteResponse): JsonSafe<MsgVoteResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgVoteResponse>): MsgVoteResponse {
@@ -616,17 +588,6 @@ export const MsgVoteWeighted = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.voter)) obj.voter = String(object.voter);
     if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => WeightedVoteOption.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgVoteWeighted): JsonSafe<MsgVoteWeighted> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.voter !== undefined && (obj.voter = message.voter);
-    if (message.options) {
-      obj.options = message.options.map(e => e ? WeightedVoteOption.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgVoteWeighted>): MsgVoteWeighted {
@@ -718,10 +679,6 @@ export const MsgVoteWeightedResponse = {
     const obj = createBaseMsgVoteWeightedResponse();
     return obj;
   },
-  toJSON(_: MsgVoteWeightedResponse): JsonSafe<MsgVoteWeightedResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgVoteWeightedResponse>): MsgVoteWeightedResponse {
     const message = createBaseMsgVoteWeightedResponse();
     return message;
@@ -804,17 +761,6 @@ export const MsgDeposit = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgDeposit): JsonSafe<MsgDeposit> {
-    const obj: any = {};
-    message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
-    message.depositor !== undefined && (obj.depositor = message.depositor);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgDeposit>): MsgDeposit {
@@ -904,10 +850,6 @@ export const MsgDepositResponse = {
   },
   fromJSON(_: any): MsgDepositResponse {
     const obj = createBaseMsgDepositResponse();
-    return obj;
-  },
-  toJSON(_: MsgDepositResponse): JsonSafe<MsgDepositResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgDepositResponse>): MsgDepositResponse {

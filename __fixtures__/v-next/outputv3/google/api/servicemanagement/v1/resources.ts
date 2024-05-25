@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../protobuf/t
 import { ConfigChange, ConfigChangeAmino, ConfigChangeSDKType } from "../../config_change";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -829,12 +828,6 @@ export const ManagedService = {
     if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
     return obj;
   },
-  toJSON(message: ManagedService): JsonSafe<ManagedService> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ManagedService>): ManagedService {
     const message = createBaseManagedService();
     message.serviceName = object.serviceName ?? "";
@@ -939,22 +932,6 @@ export const OperationMetadata = {
     if (Array.isArray(object?.steps)) obj.steps = object.steps.map((e: any) => OperationMetadata_Step.fromJSON(e));
     if (isSet(object.progressPercentage)) obj.progressPercentage = Number(object.progressPercentage);
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
-    return obj;
-  },
-  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
-    const obj: any = {};
-    if (message.resourceNames) {
-      obj.resourceNames = message.resourceNames.map(e => e);
-    } else {
-      obj.resourceNames = [];
-    }
-    if (message.steps) {
-      obj.steps = message.steps.map(e => e ? OperationMetadata_Step.toJSON(e) : undefined);
-    } else {
-      obj.steps = [];
-    }
-    message.progressPercentage !== undefined && (obj.progressPercentage = Math.round(message.progressPercentage));
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<OperationMetadata>): OperationMetadata {
@@ -1073,12 +1050,6 @@ export const OperationMetadata_Step = {
     if (isSet(object.status)) obj.status = operationMetadata_StatusFromJSON(object.status);
     return obj;
   },
-  toJSON(message: OperationMetadata_Step): JsonSafe<OperationMetadata_Step> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
-    return obj;
-  },
   fromPartial(object: DeepPartial<OperationMetadata_Step>): OperationMetadata_Step {
     const message = createBaseOperationMetadata_Step();
     message.description = object.description ?? "";
@@ -1177,13 +1148,6 @@ export const Diagnostic = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: Diagnostic): JsonSafe<Diagnostic> {
-    const obj: any = {};
-    message.location !== undefined && (obj.location = message.location);
-    message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
-    message.message !== undefined && (obj.message = message.message);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Diagnostic>): Diagnostic {
     const message = createBaseDiagnostic();
     message.location = object.location ?? "";
@@ -1279,16 +1243,6 @@ export const ConfigSource = {
     const obj = createBaseConfigSource();
     if (isSet(object.id)) obj.id = String(object.id);
     if (Array.isArray(object?.files)) obj.files = object.files.map((e: any) => ConfigFile.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ConfigSource): JsonSafe<ConfigSource> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    if (message.files) {
-      obj.files = message.files.map(e => e ? ConfigFile.toJSON(e) : undefined);
-    } else {
-      obj.files = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ConfigSource>): ConfigSource {
@@ -1395,13 +1349,6 @@ export const ConfigFile = {
     if (isSet(object.fileType)) obj.fileType = configFile_FileTypeFromJSON(object.fileType);
     return obj;
   },
-  toJSON(message: ConfigFile): JsonSafe<ConfigFile> {
-    const obj: any = {};
-    message.filePath !== undefined && (obj.filePath = message.filePath);
-    message.fileContents !== undefined && (obj.fileContents = base64FromBytes(message.fileContents !== undefined ? message.fileContents : new Uint8Array()));
-    message.fileType !== undefined && (obj.fileType = configFile_FileTypeToJSON(message.fileType));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConfigFile>): ConfigFile {
     const message = createBaseConfigFile();
     message.filePath = object.filePath ?? "";
@@ -1491,11 +1438,6 @@ export const ConfigRef = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: ConfigRef): JsonSafe<ConfigRef> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ConfigRef>): ConfigRef {
     const message = createBaseConfigRef();
     message.name = object.name ?? "";
@@ -1569,15 +1511,6 @@ export const ChangeReport = {
   fromJSON(object: any): ChangeReport {
     const obj = createBaseChangeReport();
     if (Array.isArray(object?.configChanges)) obj.configChanges = object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ChangeReport): JsonSafe<ChangeReport> {
-    const obj: any = {};
-    if (message.configChanges) {
-      obj.configChanges = message.configChanges.map(e => e ? ConfigChange.toJSON(e) : undefined);
-    } else {
-      obj.configChanges = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ChangeReport>): ChangeReport {
@@ -1709,17 +1642,6 @@ export const Rollout = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: Rollout): JsonSafe<Rollout> {
-    const obj: any = {};
-    message.rolloutId !== undefined && (obj.rolloutId = message.rolloutId);
-    message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
-    message.createdBy !== undefined && (obj.createdBy = message.createdBy);
-    message.status !== undefined && (obj.status = rollout_RolloutStatusToJSON(message.status));
-    message.trafficPercentStrategy !== undefined && (obj.trafficPercentStrategy = message.trafficPercentStrategy ? Rollout_TrafficPercentStrategy.toJSON(message.trafficPercentStrategy) : undefined);
-    message.deleteServiceStrategy !== undefined && (obj.deleteServiceStrategy = message.deleteServiceStrategy ? Rollout_DeleteServiceStrategy.toJSON(message.deleteServiceStrategy) : undefined);
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Rollout>): Rollout {
     const message = createBaseRollout();
     message.rolloutId = object.rolloutId ?? "";
@@ -1848,12 +1770,6 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): JsonSafe<Rollout_TrafficPercentStrategy_PercentagesEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy_PercentagesEntry>): Rollout_TrafficPercentStrategy_PercentagesEntry {
     const message = createBaseRollout_TrafficPercentStrategy_PercentagesEntry();
     message.key = object.key ?? "";
@@ -1939,16 +1855,6 @@ export const Rollout_TrafficPercentStrategy = {
       acc[key] = double.fromJSON(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: Rollout_TrafficPercentStrategy): JsonSafe<Rollout_TrafficPercentStrategy> {
-    const obj: any = {};
-    obj.percentages = {};
-    if (message.percentages) {
-      Object.entries(message.percentages).forEach(([k, v]) => {
-        obj.percentages[k] = double.toJSON(v);
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Rollout_TrafficPercentStrategy>): Rollout_TrafficPercentStrategy {
@@ -2042,10 +1948,6 @@ export const Rollout_DeleteServiceStrategy = {
   },
   fromJSON(_: any): Rollout_DeleteServiceStrategy {
     const obj = createBaseRollout_DeleteServiceStrategy();
-    return obj;
-  },
-  toJSON(_: Rollout_DeleteServiceStrategy): JsonSafe<Rollout_DeleteServiceStrategy> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<Rollout_DeleteServiceStrategy>): Rollout_DeleteServiceStrategy {

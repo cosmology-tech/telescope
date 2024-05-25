@@ -1,6 +1,7 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta1/attribute";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.audit.v1beta1";
 /** Provider stores owner auditor and attributes details */
 export interface Provider {
@@ -126,7 +127,7 @@ export const Provider = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
     };
   },
-  toJSON(message: Provider): unknown {
+  toJSON(message: Provider): JsonSafe<Provider> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.auditor !== undefined && (obj.auditor = message.auditor);
@@ -213,7 +214,7 @@ export const AuditedAttributes = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
     };
   },
-  toJSON(message: AuditedAttributes): unknown {
+  toJSON(message: AuditedAttributes): JsonSafe<AuditedAttributes> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.auditor !== undefined && (obj.auditor = message.auditor);
@@ -284,7 +285,7 @@ export const AttributesResponse = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => AuditedAttributes.fromJSON(e)) : []
     };
   },
-  toJSON(message: AttributesResponse): unknown {
+  toJSON(message: AttributesResponse): JsonSafe<AttributesResponse> {
     const obj: any = {};
     if (message.attributes) {
       obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toJSON(e) : undefined);
@@ -355,7 +356,7 @@ export const AttributesFilters = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: AttributesFilters): unknown {
+  toJSON(message: AttributesFilters): JsonSafe<AttributesFilters> {
     const obj: any = {};
     if (message.auditors) {
       obj.auditors = message.auditors.map(e => e);
@@ -446,7 +447,7 @@ export const MsgSignProviderAttributes = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgSignProviderAttributes): unknown {
+  toJSON(message: MsgSignProviderAttributes): JsonSafe<MsgSignProviderAttributes> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.auditor !== undefined && (obj.auditor = message.auditor);
@@ -507,7 +508,7 @@ export const MsgSignProviderAttributesResponse = {
   fromJSON(_: any): MsgSignProviderAttributesResponse {
     return {};
   },
-  toJSON(_: MsgSignProviderAttributesResponse): unknown {
+  toJSON(_: MsgSignProviderAttributesResponse): JsonSafe<MsgSignProviderAttributesResponse> {
     const obj: any = {};
     return obj;
   },
@@ -573,7 +574,7 @@ export const MsgDeleteProviderAttributes = {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: MsgDeleteProviderAttributes): unknown {
+  toJSON(message: MsgDeleteProviderAttributes): JsonSafe<MsgDeleteProviderAttributes> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.auditor !== undefined && (obj.auditor = message.auditor);
@@ -634,7 +635,7 @@ export const MsgDeleteProviderAttributesResponse = {
   fromJSON(_: any): MsgDeleteProviderAttributesResponse {
     return {};
   },
-  toJSON(_: MsgDeleteProviderAttributesResponse): unknown {
+  toJSON(_: MsgDeleteProviderAttributesResponse): JsonSafe<MsgDeleteProviderAttributesResponse> {
     const obj: any = {};
     return obj;
   },

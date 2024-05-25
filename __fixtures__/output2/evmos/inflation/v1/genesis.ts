@@ -3,6 +3,7 @@
 import { ExponentialCalculation, InflationDistribution } from "./inflation";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.inflation.v1";
 /** GenesisState defines the inflation module's genesis state. */
 export interface GenesisState {
@@ -94,7 +95,7 @@ export const GenesisState = {
       skippedEpochs: isSet(object.skippedEpochs) ? Long.fromValue(object.skippedEpochs) : Long.UZERO
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     message.period !== undefined && (obj.period = (message.period || Long.UZERO).toString());
@@ -171,7 +172,7 @@ export const Params = {
       enableInflation: isSet(object.enableInflation) ? Boolean(object.enableInflation) : false
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.exponentialCalculation !== undefined && (obj.exponentialCalculation = message.exponentialCalculation ? ExponentialCalculation.toJSON(message.exponentialCalculation) : undefined);

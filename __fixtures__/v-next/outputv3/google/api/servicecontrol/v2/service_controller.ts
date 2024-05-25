@@ -2,7 +2,6 @@ import { AttributeContext, AttributeContextAmino, AttributeContextSDKType } from
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v2";
 /** Request message for the Check method. */
 export interface CheckRequest {
@@ -331,19 +330,6 @@ export const CheckRequest = {
     if (isSet(object.flags)) obj.flags = String(object.flags);
     return obj;
   },
-  toJSON(message: CheckRequest): JsonSafe<CheckRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    message.attributes !== undefined && (obj.attributes = message.attributes ? AttributeContext.toJSON(message.attributes) : undefined);
-    if (message.resources) {
-      obj.resources = message.resources.map(e => e ? ResourceInfo.toJSON(e) : undefined);
-    } else {
-      obj.resources = [];
-    }
-    message.flags !== undefined && (obj.flags = message.flags);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckRequest>): CheckRequest {
     const message = createBaseCheckRequest();
     message.serviceName = object.serviceName ?? "";
@@ -487,15 +473,6 @@ export const ResourceInfo = {
     if (isSet(object.location)) obj.location = String(object.location);
     return obj;
   },
-  toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    message.permission !== undefined && (obj.permission = message.permission);
-    message.container !== undefined && (obj.container = message.container);
-    message.location !== undefined && (obj.location = message.location);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.name = object.name ?? "";
@@ -606,12 +583,6 @@ export const CheckResponse_HeadersEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: CheckResponse_HeadersEntry): JsonSafe<CheckResponse_HeadersEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckResponse_HeadersEntry>): CheckResponse_HeadersEntry {
     const message = createBaseCheckResponse_HeadersEntry();
     message.key = object.key ?? "";
@@ -705,17 +676,6 @@ export const CheckResponse = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: CheckResponse): JsonSafe<CheckResponse> {
-    const obj: any = {};
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
-    obj.headers = {};
-    if (message.headers) {
-      Object.entries(message.headers).forEach(([k, v]) => {
-        obj.headers[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<CheckResponse>): CheckResponse {
@@ -845,17 +805,6 @@ export const ReportRequest = {
     if (Array.isArray(object?.operations)) obj.operations = object.operations.map((e: any) => AttributeContext.fromJSON(e));
     return obj;
   },
-  toJSON(message: ReportRequest): JsonSafe<ReportRequest> {
-    const obj: any = {};
-    message.serviceName !== undefined && (obj.serviceName = message.serviceName);
-    message.serviceConfigId !== undefined && (obj.serviceConfigId = message.serviceConfigId);
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? AttributeContext.toJSON(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ReportRequest>): ReportRequest {
     const message = createBaseReportRequest();
     message.serviceName = object.serviceName ?? "";
@@ -940,10 +889,6 @@ export const ReportResponse = {
   },
   fromJSON(_: any): ReportResponse {
     const obj = createBaseReportResponse();
-    return obj;
-  },
-  toJSON(_: ReportResponse): JsonSafe<ReportResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<ReportResponse>): ReportResponse {

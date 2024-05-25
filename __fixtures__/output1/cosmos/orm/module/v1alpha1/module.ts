@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial } from "../../../../helpers";
 export const protobufPackage = "cosmos.orm.module.v1alpha1";
 /**
@@ -37,7 +38,7 @@ export const Module = {
   fromJSON(_: any): Module {
     return {};
   },
-  toJSON(_: Module): unknown {
+  toJSON(_: Module): JsonSafe<Module> {
     const obj: any = {};
     return obj;
   },

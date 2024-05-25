@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { Decimal } from "@cosmjs/math";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.concentratedliquidity";
 export interface Params {
@@ -72,7 +73,7 @@ export const Params = {
       authorizedSwapFees: Array.isArray(object?.authorizedSwapFees) ? object.authorizedSwapFees.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     if (message.authorizedTickSpacing) {
       obj.authorizedTickSpacing = message.authorizedTickSpacing.map(e => (e || BigInt(0)).toString());

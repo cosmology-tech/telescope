@@ -3,6 +3,7 @@
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * MsgSubmitEvidence represents a message that supports submitting arbitrary
@@ -59,7 +60,7 @@ export const MsgSubmitEvidence = {
       evidence: isSet(object.evidence) ? Any.fromJSON(object.evidence) : undefined
     };
   },
-  toJSON(message: MsgSubmitEvidence): unknown {
+  toJSON(message: MsgSubmitEvidence): JsonSafe<MsgSubmitEvidence> {
     const obj: any = {};
     message.submitter !== undefined && (obj.submitter = message.submitter);
     message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toJSON(message.evidence) : undefined);
@@ -106,7 +107,7 @@ export const MsgSubmitEvidenceResponse = {
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
-  toJSON(message: MsgSubmitEvidenceResponse): unknown {
+  toJSON(message: MsgSubmitEvidenceResponse): JsonSafe<MsgSubmitEvidenceResponse> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;

@@ -3,7 +3,6 @@ import { Lease, LeaseAmino, LeaseSDKType } from "./lease";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
@@ -76,21 +75,6 @@ export const GenesisState = {
     if (Array.isArray(object?.orders)) obj.orders = object.orders.map((e: any) => Order.fromJSON(e));
     if (Array.isArray(object?.leases)) obj.leases = object.leases.map((e: any) => Lease.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.orders) {
-      obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);
-    } else {
-      obj.orders = [];
-    }
-    if (message.leases) {
-      obj.leases = message.leases.map(e => e ? Lease.toJSON(e) : undefined);
-    } else {
-      obj.leases = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

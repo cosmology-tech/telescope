@@ -3,6 +3,7 @@
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisState {
@@ -46,7 +47,7 @@ export const GenesisState = {
       constantFee: isSet(object.constantFee) ? Coin.fromJSON(object.constantFee) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.constantFee !== undefined && (obj.constantFee = message.constantFee ? Coin.toJSON(message.constantFee) : undefined);
     return obj;

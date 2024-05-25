@@ -1,7 +1,6 @@
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -150,18 +149,6 @@ export const LogDescriptor = {
     if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    return obj;
-  },
-  toJSON(message: LogDescriptor): JsonSafe<LogDescriptor> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.description !== undefined && (obj.description = message.description);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
     return obj;
   },
   fromPartial(object: DeepPartial<LogDescriptor>): LogDescriptor {

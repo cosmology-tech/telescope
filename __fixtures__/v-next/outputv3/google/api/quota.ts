@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet, isObject } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -533,20 +532,6 @@ export const Quota = {
     if (Array.isArray(object?.metricRules)) obj.metricRules = object.metricRules.map((e: any) => MetricRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Quota): JsonSafe<Quota> {
-    const obj: any = {};
-    if (message.limits) {
-      obj.limits = message.limits.map(e => e ? QuotaLimit.toJSON(e) : undefined);
-    } else {
-      obj.limits = [];
-    }
-    if (message.metricRules) {
-      obj.metricRules = message.metricRules.map(e => e ? MetricRule.toJSON(e) : undefined);
-    } else {
-      obj.metricRules = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Quota>): Quota {
     const message = createBaseQuota();
     message.limits = object.limits?.map(e => QuotaLimit.fromPartial(e)) || [];
@@ -648,12 +633,6 @@ export const MetricRule_MetricCostsEntry = {
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
-  toJSON(message: MetricRule_MetricCostsEntry): JsonSafe<MetricRule_MetricCostsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MetricRule_MetricCostsEntry>): MetricRule_MetricCostsEntry {
     const message = createBaseMetricRule_MetricCostsEntry();
     message.key = object.key ?? "";
@@ -749,17 +728,6 @@ export const MetricRule = {
       acc[key] = BigInt((value as bigint | string).toString());
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: MetricRule): JsonSafe<MetricRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    obj.metricCosts = {};
-    if (message.metricCosts) {
-      Object.entries(message.metricCosts).forEach(([k, v]) => {
-        obj.metricCosts[k] = v.toString();
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MetricRule>): MetricRule {
@@ -876,12 +844,6 @@ export const QuotaLimit_ValuesEntry = {
     const obj = createBaseQuotaLimit_ValuesEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
-    return obj;
-  },
-  toJSON(message: QuotaLimit_ValuesEntry): JsonSafe<QuotaLimit_ValuesEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaLimit_ValuesEntry>): QuotaLimit_ValuesEntry {
@@ -1043,25 +1005,6 @@ export const QuotaLimit = {
       return acc;
     }, {});
     if (isSet(object.displayName)) obj.displayName = String(object.displayName);
-    return obj;
-  },
-  toJSON(message: QuotaLimit): JsonSafe<QuotaLimit> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.description !== undefined && (obj.description = message.description);
-    message.defaultLimit !== undefined && (obj.defaultLimit = (message.defaultLimit || BigInt(0)).toString());
-    message.maxLimit !== undefined && (obj.maxLimit = (message.maxLimit || BigInt(0)).toString());
-    message.freeTier !== undefined && (obj.freeTier = (message.freeTier || BigInt(0)).toString());
-    message.duration !== undefined && (obj.duration = message.duration);
-    message.metric !== undefined && (obj.metric = message.metric);
-    message.unit !== undefined && (obj.unit = message.unit);
-    obj.values = {};
-    if (message.values) {
-      Object.entries(message.values).forEach(([k, v]) => {
-        obj.values[k] = v.toString();
-      });
-    }
-    message.displayName !== undefined && (obj.displayName = message.displayName);
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaLimit>): QuotaLimit {

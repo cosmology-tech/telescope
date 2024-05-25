@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../helpers";
+import { JsonSafe } from "../json-safe";
 export const protobufPackage = "cosmos_proto";
 export enum ScalarType {
   SCALAR_TYPE_UNSPECIFIED = 0,
@@ -151,7 +152,7 @@ export const InterfaceDescriptor = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: InterfaceDescriptor): unknown {
+  toJSON(message: InterfaceDescriptor): JsonSafe<InterfaceDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -235,7 +236,7 @@ export const ScalarDescriptor = {
       fieldType: Array.isArray(object?.fieldType) ? object.fieldType.map((e: any) => scalarTypeFromJSON(e)) : []
     };
   },
-  toJSON(message: ScalarDescriptor): unknown {
+  toJSON(message: ScalarDescriptor): JsonSafe<ScalarDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);

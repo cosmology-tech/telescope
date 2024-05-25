@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /**
  * ValidatorSigningInfo defines a validator's signing info for monitoring their
@@ -141,7 +142,7 @@ export const ValidatorSigningInfo = {
       missedBlocksCounter: isSet(object.missedBlocksCounter) ? BigInt(object.missedBlocksCounter.toString()) : BigInt(0)
     };
   },
-  toJSON(message: ValidatorSigningInfo): unknown {
+  toJSON(message: ValidatorSigningInfo): JsonSafe<ValidatorSigningInfo> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.startHeight !== undefined && (obj.startHeight = (message.startHeight || BigInt(0)).toString());
@@ -312,7 +313,7 @@ export const Params = {
       slashFractionDowntime: isSet(object.slashFractionDowntime) ? bytesFromBase64(object.slashFractionDowntime) : new Uint8Array()
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.signedBlocksWindow !== undefined && (obj.signedBlocksWindow = (message.signedBlocksWindow || BigInt(0)).toString());
     message.minSignedPerWindow !== undefined && (obj.minSignedPerWindow = base64FromBytes(message.minSignedPerWindow !== undefined ? message.minSignedPerWindow : new Uint8Array()));

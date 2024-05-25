@@ -5,6 +5,7 @@ import { Any } from "../../../../google/protobuf/any";
 import { Height } from "../../client/v1/client";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * MsgConnectionOpenInit defines the msg sent by an account on Chain A to
@@ -158,7 +159,7 @@ export const MsgConnectionOpenInit = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgConnectionOpenInit): unknown {
+  toJSON(message: MsgConnectionOpenInit): JsonSafe<MsgConnectionOpenInit> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
@@ -201,7 +202,7 @@ export const MsgConnectionOpenInitResponse = {
   fromJSON(_: any): MsgConnectionOpenInitResponse {
     return {};
   },
-  toJSON(_: MsgConnectionOpenInitResponse): unknown {
+  toJSON(_: MsgConnectionOpenInitResponse): JsonSafe<MsgConnectionOpenInitResponse> {
     const obj: any = {};
     return obj;
   },
@@ -332,7 +333,7 @@ export const MsgConnectionOpenTry = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgConnectionOpenTry): unknown {
+  toJSON(message: MsgConnectionOpenTry): JsonSafe<MsgConnectionOpenTry> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     message.previousConnectionId !== undefined && (obj.previousConnectionId = message.previousConnectionId);
@@ -393,7 +394,7 @@ export const MsgConnectionOpenTryResponse = {
   fromJSON(_: any): MsgConnectionOpenTryResponse {
     return {};
   },
-  toJSON(_: MsgConnectionOpenTryResponse): unknown {
+  toJSON(_: MsgConnectionOpenTryResponse): JsonSafe<MsgConnectionOpenTryResponse> {
     const obj: any = {};
     return obj;
   },
@@ -508,7 +509,7 @@ export const MsgConnectionOpenAck = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgConnectionOpenAck): unknown {
+  toJSON(message: MsgConnectionOpenAck): JsonSafe<MsgConnectionOpenAck> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.counterpartyConnectionId !== undefined && (obj.counterpartyConnectionId = message.counterpartyConnectionId);
@@ -561,7 +562,7 @@ export const MsgConnectionOpenAckResponse = {
   fromJSON(_: any): MsgConnectionOpenAckResponse {
     return {};
   },
-  toJSON(_: MsgConnectionOpenAckResponse): unknown {
+  toJSON(_: MsgConnectionOpenAckResponse): JsonSafe<MsgConnectionOpenAckResponse> {
     const obj: any = {};
     return obj;
   },
@@ -628,7 +629,7 @@ export const MsgConnectionOpenConfirm = {
       signer: isSet(object.signer) ? String(object.signer) : ""
     };
   },
-  toJSON(message: MsgConnectionOpenConfirm): unknown {
+  toJSON(message: MsgConnectionOpenConfirm): JsonSafe<MsgConnectionOpenConfirm> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.proofAck !== undefined && (obj.proofAck = base64FromBytes(message.proofAck !== undefined ? message.proofAck : new Uint8Array()));
@@ -669,7 +670,7 @@ export const MsgConnectionOpenConfirmResponse = {
   fromJSON(_: any): MsgConnectionOpenConfirmResponse {
     return {};
   },
-  toJSON(_: MsgConnectionOpenConfirmResponse): unknown {
+  toJSON(_: MsgConnectionOpenConfirmResponse): JsonSafe<MsgConnectionOpenConfirmResponse> {
     const obj: any = {};
     return obj;
   },

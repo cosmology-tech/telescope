@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** Params defines the parameters for the bank module. */
 export interface Params {
@@ -316,16 +315,6 @@ export const Params = {
     if (isSet(object.defaultSendEnabled)) obj.defaultSendEnabled = Boolean(object.defaultSendEnabled);
     return obj;
   },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    if (message.sendEnabled) {
-      obj.sendEnabled = message.sendEnabled.map(e => e ? SendEnabled.toJSON(e) : undefined);
-    } else {
-      obj.sendEnabled = [];
-    }
-    message.defaultSendEnabled !== undefined && (obj.defaultSendEnabled = message.defaultSendEnabled);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.sendEnabled = object.sendEnabled?.map(e => SendEnabled.fromPartial(e)) || [];
@@ -423,12 +412,6 @@ export const SendEnabled = {
     if (isSet(object.enabled)) obj.enabled = Boolean(object.enabled);
     return obj;
   },
-  toJSON(message: SendEnabled): JsonSafe<SendEnabled> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.enabled !== undefined && (obj.enabled = message.enabled);
-    return obj;
-  },
   fromPartial(object: DeepPartial<SendEnabled>): SendEnabled {
     const message = createBaseSendEnabled();
     message.denom = object.denom ?? "";
@@ -518,16 +501,6 @@ export const Input = {
     const obj = createBaseInput();
     if (isSet(object.address)) obj.address = String(object.address);
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Input): JsonSafe<Input> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Input>): Input {
@@ -627,16 +600,6 @@ export const Output = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: Output): JsonSafe<Output> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Output>): Output {
     const message = createBaseOutput();
     message.address = object.address ?? "";
@@ -725,15 +688,6 @@ export const Supply = {
   fromJSON(object: any): Supply {
     const obj = createBaseSupply();
     if (Array.isArray(object?.total)) obj.total = object.total.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Supply): JsonSafe<Supply> {
-    const obj: any = {};
-    if (message.total) {
-      obj.total = message.total.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.total = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Supply>): Supply {
@@ -832,17 +786,6 @@ export const DenomUnit = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     if (isSet(object.exponent)) obj.exponent = Number(object.exponent);
     if (Array.isArray(object?.aliases)) obj.aliases = object.aliases.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: DenomUnit): JsonSafe<DenomUnit> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.exponent !== undefined && (obj.exponent = Math.round(message.exponent));
-    if (message.aliases) {
-      obj.aliases = message.aliases.map(e => e);
-    } else {
-      obj.aliases = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<DenomUnit>): DenomUnit {
@@ -995,22 +938,6 @@ export const Metadata = {
     if (isSet(object.symbol)) obj.symbol = String(object.symbol);
     if (isSet(object.uri)) obj.uri = String(object.uri);
     if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
-    return obj;
-  },
-  toJSON(message: Metadata): JsonSafe<Metadata> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    if (message.denomUnits) {
-      obj.denomUnits = message.denomUnits.map(e => e ? DenomUnit.toJSON(e) : undefined);
-    } else {
-      obj.denomUnits = [];
-    }
-    message.base !== undefined && (obj.base = message.base);
-    message.display !== undefined && (obj.display = message.display);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
     return obj;
   },
   fromPartial(object: DeepPartial<Metadata>): Metadata {

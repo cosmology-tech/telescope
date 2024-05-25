@@ -3,6 +3,7 @@
 import { CommitmentProof } from "../../../../confio/proofs";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.commitment.v1";
 /**
  * MerkleRoot defines a merkle root hash.
@@ -71,7 +72,7 @@ export const MerkleRoot = {
       hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array()
     };
   },
-  toJSON(message: MerkleRoot): unknown {
+  toJSON(message: MerkleRoot): JsonSafe<MerkleRoot> {
     const obj: any = {};
     message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
     return obj;
@@ -116,7 +117,7 @@ export const MerklePrefix = {
       keyPrefix: isSet(object.keyPrefix) ? bytesFromBase64(object.keyPrefix) : new Uint8Array()
     };
   },
-  toJSON(message: MerklePrefix): unknown {
+  toJSON(message: MerklePrefix): JsonSafe<MerklePrefix> {
     const obj: any = {};
     message.keyPrefix !== undefined && (obj.keyPrefix = base64FromBytes(message.keyPrefix !== undefined ? message.keyPrefix : new Uint8Array()));
     return obj;
@@ -161,7 +162,7 @@ export const MerklePath = {
       keyPath: Array.isArray(object?.keyPath) ? object.keyPath.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: MerklePath): unknown {
+  toJSON(message: MerklePath): JsonSafe<MerklePath> {
     const obj: any = {};
     if (message.keyPath) {
       obj.keyPath = message.keyPath.map(e => e);
@@ -210,7 +211,7 @@ export const MerkleProof = {
       proofs: Array.isArray(object?.proofs) ? object.proofs.map((e: any) => CommitmentProof.fromJSON(e)) : []
     };
   },
-  toJSON(message: MerkleProof): unknown {
+  toJSON(message: MerkleProof): JsonSafe<MerkleProof> {
     const obj: any = {};
     if (message.proofs) {
       obj.proofs = message.proofs.map(e => e ? CommitmentProof.toJSON(e) : undefined);

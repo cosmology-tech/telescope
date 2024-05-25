@@ -1,6 +1,7 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType, orderFromJSON, orderToJSON } from "../../channel/v1/channel";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.port.v1";
 /** QueryAppVersionRequest is the request type for the Query/AppVersion RPC method */
 export interface QueryAppVersionRequest {
@@ -101,7 +102,7 @@ export const QueryAppVersionRequest = {
       proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
     };
   },
-  toJSON(message: QueryAppVersionRequest): unknown {
+  toJSON(message: QueryAppVersionRequest): JsonSafe<QueryAppVersionRequest> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
@@ -180,7 +181,7 @@ export const QueryAppVersionResponse = {
       version: isSet(object.version) ? String(object.version) : ""
     };
   },
-  toJSON(message: QueryAppVersionResponse): unknown {
+  toJSON(message: QueryAppVersionResponse): JsonSafe<QueryAppVersionResponse> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.version !== undefined && (obj.version = message.version);

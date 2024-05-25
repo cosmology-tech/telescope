@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Defines the HTTP configuration for an API service. It contains a list of
@@ -1058,16 +1057,6 @@ export const Http = {
     if (isSet(object.fullyDecodeReservedExpansion)) obj.fullyDecodeReservedExpansion = Boolean(object.fullyDecodeReservedExpansion);
     return obj;
   },
-  toJSON(message: Http): JsonSafe<Http> {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? HttpRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    message.fullyDecodeReservedExpansion !== undefined && (obj.fullyDecodeReservedExpansion = message.fullyDecodeReservedExpansion);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Http>): Http {
     const message = createBaseHttp();
     message.rules = object.rules?.map(e => HttpRule.fromPartial(e)) || [];
@@ -1228,24 +1217,6 @@ export const HttpRule = {
     if (Array.isArray(object?.additionalBindings)) obj.additionalBindings = object.additionalBindings.map((e: any) => HttpRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: HttpRule): JsonSafe<HttpRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.get !== undefined && (obj.get = message.get);
-    message.put !== undefined && (obj.put = message.put);
-    message.post !== undefined && (obj.post = message.post);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.patch !== undefined && (obj.patch = message.patch);
-    message.custom !== undefined && (obj.custom = message.custom ? CustomHttpPattern.toJSON(message.custom) : undefined);
-    message.body !== undefined && (obj.body = message.body);
-    message.responseBody !== undefined && (obj.responseBody = message.responseBody);
-    if (message.additionalBindings) {
-      obj.additionalBindings = message.additionalBindings.map(e => e ? HttpRule.toJSON(e) : undefined);
-    } else {
-      obj.additionalBindings = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<HttpRule>): HttpRule {
     const message = createBaseHttpRule();
     message.selector = object.selector ?? "";
@@ -1398,12 +1369,6 @@ export const CustomHttpPattern = {
     const obj = createBaseCustomHttpPattern();
     if (isSet(object.kind)) obj.kind = String(object.kind);
     if (isSet(object.path)) obj.path = String(object.path);
-    return obj;
-  },
-  toJSON(message: CustomHttpPattern): JsonSafe<CustomHttpPattern> {
-    const obj: any = {};
-    message.kind !== undefined && (obj.kind = message.kind);
-    message.path !== undefined && (obj.path = message.path);
     return obj;
   },
   fromPartial(object: DeepPartial<CustomHttpPattern>): CustomHttpPattern {

@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
@@ -93,11 +92,6 @@ export const QueryBalancesRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryBalancesRequest): JsonSafe<QueryBalancesRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryBalancesRequest>): QueryBalancesRequest {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
@@ -187,25 +181,6 @@ export const QueryBalancesResponse = {
     if (Array.isArray(object?.locked)) obj.locked = object.locked.map((e: any) => Coin.fromJSON(e));
     if (Array.isArray(object?.unvested)) obj.unvested = object.unvested.map((e: any) => Coin.fromJSON(e));
     if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryBalancesResponse): JsonSafe<QueryBalancesResponse> {
-    const obj: any = {};
-    if (message.locked) {
-      obj.locked = message.locked.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.locked = [];
-    }
-    if (message.unvested) {
-      obj.unvested = message.unvested.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.unvested = [];
-    }
-    if (message.vested) {
-      obj.vested = message.vested.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.vested = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBalancesResponse>): QueryBalancesResponse {

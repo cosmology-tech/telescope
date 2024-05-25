@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
@@ -88,7 +89,7 @@ export const App = {
       software: isSet(object.software) ? String(object.software) : ""
     };
   },
-  toJSON(message: App): unknown {
+  toJSON(message: App): JsonSafe<App> {
     const obj: any = {};
     message.protocol !== undefined && (obj.protocol = (message.protocol || BigInt(0)).toString());
     message.software !== undefined && (obj.software = message.software);
@@ -193,7 +194,7 @@ export const Consensus = {
       app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
     };
   },
-  toJSON(message: Consensus): unknown {
+  toJSON(message: Consensus): JsonSafe<Consensus> {
     const obj: any = {};
     message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
     message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());

@@ -2,7 +2,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../../../google/protob
 import { TwapRecord, TwapRecordAmino, TwapRecordSDKType } from "./twap_record";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /** Params holds parameters for the twap module */
 export interface Params {
@@ -88,12 +87,6 @@ export const Params = {
     const obj = createBaseParams();
     if (isSet(object.pruneEpochIdentifier)) obj.pruneEpochIdentifier = String(object.pruneEpochIdentifier);
     if (isSet(object.recordHistoryKeepPeriod)) obj.recordHistoryKeepPeriod = Duration.fromJSON(object.recordHistoryKeepPeriod);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.pruneEpochIdentifier !== undefined && (obj.pruneEpochIdentifier = message.pruneEpochIdentifier);
-    message.recordHistoryKeepPeriod !== undefined && (obj.recordHistoryKeepPeriod = message.recordHistoryKeepPeriod ? Duration.toJSON(message.recordHistoryKeepPeriod) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -187,16 +180,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (Array.isArray(object?.twaps)) obj.twaps = object.twaps.map((e: any) => TwapRecord.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.twaps) {
-      obj.twaps = message.twaps.map(e => e ? TwapRecord.toJSON(e) : undefined);
-    } else {
-      obj.twaps = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

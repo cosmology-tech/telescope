@@ -1,6 +1,7 @@
 import { Duration, DurationSDKType } from "../../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /**
  * A common proto for logging HTTP requests. Only contains semantics
@@ -252,7 +253,7 @@ export const HttpRequest = {
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
-  toJSON(message: HttpRequest): unknown {
+  toJSON(message: HttpRequest): JsonSafe<HttpRequest> {
     const obj: any = {};
     message.requestMethod !== undefined && (obj.requestMethod = message.requestMethod);
     message.requestUrl !== undefined && (obj.requestUrl = message.requestUrl);

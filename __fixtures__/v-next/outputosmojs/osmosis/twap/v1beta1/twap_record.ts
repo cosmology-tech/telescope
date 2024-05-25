@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp"
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -172,7 +173,7 @@ export const TwapRecord = {
       lastErrorTime: isSet(object.lastErrorTime) ? new Date(object.lastErrorTime) : undefined
     };
   },
-  toJSON(message: TwapRecord): unknown {
+  toJSON(message: TwapRecord): JsonSafe<TwapRecord> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);

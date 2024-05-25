@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.base.v1beta1";
 /**
  * Coin defines a token with a denomination and an amount.
@@ -146,12 +145,6 @@ export const Coin = {
     if (isSet(object.amount)) obj.amount = String(object.amount);
     return obj;
   },
-  toJSON(message: Coin): JsonSafe<Coin> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Coin>): Coin {
     const message = createBaseCoin();
     message.denom = object.denom ?? "";
@@ -243,12 +236,6 @@ export const DecCoin = {
     if (isSet(object.amount)) obj.amount = String(object.amount);
     return obj;
   },
-  toJSON(message: DecCoin): JsonSafe<DecCoin> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DecCoin>): DecCoin {
     const message = createBaseDecCoin();
     message.denom = object.denom ?? "";
@@ -332,11 +319,6 @@ export const IntProto = {
     if (isSet(object.int)) obj.int = String(object.int);
     return obj;
   },
-  toJSON(message: IntProto): JsonSafe<IntProto> {
-    const obj: any = {};
-    message.int !== undefined && (obj.int = message.int);
-    return obj;
-  },
   fromPartial(object: DeepPartial<IntProto>): IntProto {
     const message = createBaseIntProto();
     message.int = object.int ?? "";
@@ -411,11 +393,6 @@ export const DecProto = {
   fromJSON(object: any): DecProto {
     const obj = createBaseDecProto();
     if (isSet(object.dec)) obj.dec = String(object.dec);
-    return obj;
-  },
-  toJSON(message: DecProto): JsonSafe<DecProto> {
-    const obj: any = {};
-    message.dec !== undefined && (obj.dec = message.dec);
     return obj;
   },
   fromPartial(object: DeepPartial<DecProto>): DecProto {

@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Metadata defines a set of protocol specific data encoded into the ICS27 channel version bytestring
@@ -113,7 +114,7 @@ export const Metadata = {
       txType: isSet(object.txType) ? String(object.txType) : ""
     };
   },
-  toJSON(message: Metadata): unknown {
+  toJSON(message: Metadata): JsonSafe<Metadata> {
     const obj: any = {};
     message.version !== undefined && (obj.version = message.version);
     message.controllerConnectionId !== undefined && (obj.controllerConnectionId = message.controllerConnectionId);

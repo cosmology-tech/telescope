@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 export interface SwapAmountInRoute {
   poolId: bigint;
@@ -68,7 +69,7 @@ export const SwapAmountInRoute = {
       tokenOutDenom: isSet(object.tokenOutDenom) ? String(object.tokenOutDenom) : ""
     };
   },
-  toJSON(message: SwapAmountInRoute): unknown {
+  toJSON(message: SwapAmountInRoute): JsonSafe<SwapAmountInRoute> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenOutDenom !== undefined && (obj.tokenOutDenom = message.tokenOutDenom);
@@ -179,7 +180,7 @@ export const SwapAmountOutRoute = {
       tokenInDenom: isSet(object.tokenInDenom) ? String(object.tokenInDenom) : ""
     };
   },
-  toJSON(message: SwapAmountOutRoute): unknown {
+  toJSON(message: SwapAmountOutRoute): JsonSafe<SwapAmountOutRoute> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenInDenom !== undefined && (obj.tokenInDenom = message.tokenInDenom);

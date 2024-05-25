@@ -3,6 +3,7 @@
 import { Plan, ModuleVersion } from "./upgrade";
 import { Long, DeepPartial, isSet, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * QueryCurrentPlanRequest is the request type for the Query/CurrentPlan RPC
@@ -102,7 +103,7 @@ export const QueryCurrentPlanRequest = {
   fromJSON(_: any): QueryCurrentPlanRequest {
     return {};
   },
-  toJSON(_: QueryCurrentPlanRequest): unknown {
+  toJSON(_: QueryCurrentPlanRequest): JsonSafe<QueryCurrentPlanRequest> {
     const obj: any = {};
     return obj;
   },
@@ -145,7 +146,7 @@ export const QueryCurrentPlanResponse = {
       plan: isSet(object.plan) ? Plan.fromJSON(object.plan) : undefined
     };
   },
-  toJSON(message: QueryCurrentPlanResponse): unknown {
+  toJSON(message: QueryCurrentPlanResponse): JsonSafe<QueryCurrentPlanResponse> {
     const obj: any = {};
     message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
     return obj;
@@ -190,7 +191,7 @@ export const QueryAppliedPlanRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: QueryAppliedPlanRequest): unknown {
+  toJSON(message: QueryAppliedPlanRequest): JsonSafe<QueryAppliedPlanRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -235,7 +236,7 @@ export const QueryAppliedPlanResponse = {
       height: isSet(object.height) ? Long.fromValue(object.height) : Long.ZERO
     };
   },
-  toJSON(message: QueryAppliedPlanResponse): unknown {
+  toJSON(message: QueryAppliedPlanResponse): JsonSafe<QueryAppliedPlanResponse> {
     const obj: any = {};
     message.height !== undefined && (obj.height = (message.height || Long.ZERO).toString());
     return obj;
@@ -280,7 +281,7 @@ export const QueryUpgradedConsensusStateRequest = {
       lastHeight: isSet(object.lastHeight) ? Long.fromValue(object.lastHeight) : Long.ZERO
     };
   },
-  toJSON(message: QueryUpgradedConsensusStateRequest): unknown {
+  toJSON(message: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
     const obj: any = {};
     message.lastHeight !== undefined && (obj.lastHeight = (message.lastHeight || Long.ZERO).toString());
     return obj;
@@ -325,7 +326,7 @@ export const QueryUpgradedConsensusStateResponse = {
       upgradedConsensusState: isSet(object.upgradedConsensusState) ? bytesFromBase64(object.upgradedConsensusState) : new Uint8Array()
     };
   },
-  toJSON(message: QueryUpgradedConsensusStateResponse): unknown {
+  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
     const obj: any = {};
     message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = base64FromBytes(message.upgradedConsensusState !== undefined ? message.upgradedConsensusState : new Uint8Array()));
     return obj;
@@ -370,7 +371,7 @@ export const QueryModuleVersionsRequest = {
       moduleName: isSet(object.moduleName) ? String(object.moduleName) : ""
     };
   },
-  toJSON(message: QueryModuleVersionsRequest): unknown {
+  toJSON(message: QueryModuleVersionsRequest): JsonSafe<QueryModuleVersionsRequest> {
     const obj: any = {};
     message.moduleName !== undefined && (obj.moduleName = message.moduleName);
     return obj;
@@ -415,7 +416,7 @@ export const QueryModuleVersionsResponse = {
       moduleVersions: Array.isArray(object?.moduleVersions) ? object.moduleVersions.map((e: any) => ModuleVersion.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryModuleVersionsResponse): unknown {
+  toJSON(message: QueryModuleVersionsResponse): JsonSafe<QueryModuleVersionsResponse> {
     const obj: any = {};
     if (message.moduleVersions) {
       obj.moduleVersions = message.moduleVersions.map(e => e ? ModuleVersion.toJSON(e) : undefined);

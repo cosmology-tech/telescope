@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v2";
 /**
  * FungibleTokenPacketData defines a struct for the packet payload
@@ -105,14 +104,6 @@ export const FungibleTokenPacketData = {
     if (isSet(object.amount)) obj.amount = String(object.amount);
     if (isSet(object.sender)) obj.sender = String(object.sender);
     if (isSet(object.receiver)) obj.receiver = String(object.receiver);
-    return obj;
-  },
-  toJSON(message: FungibleTokenPacketData): JsonSafe<FungibleTokenPacketData> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.receiver !== undefined && (obj.receiver = message.receiver);
     return obj;
   },
   fromPartial(object: DeepPartial<FungibleTokenPacketData>): FungibleTokenPacketData {

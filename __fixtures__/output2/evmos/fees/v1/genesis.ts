@@ -3,6 +3,7 @@
 import { DevFeeInfo } from "./fees";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -75,7 +76,7 @@ export const GenesisState = {
       devFeeInfos: Array.isArray(object?.devFeeInfos) ? object.devFeeInfos.map((e: any) => DevFeeInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.devFeeInfos) {
@@ -158,7 +159,7 @@ export const Params = {
       minGasPrice: isSet(object.minGasPrice) ? String(object.minGasPrice) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableFees !== undefined && (obj.enableFees = message.enableFees);
     message.developerShares !== undefined && (obj.developerShares = message.developerShares);

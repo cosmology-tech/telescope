@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -60,11 +59,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (isSet(object.distrEpochIdentifier)) obj.distrEpochIdentifier = String(object.distrEpochIdentifier);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.distrEpochIdentifier !== undefined && (obj.distrEpochIdentifier = message.distrEpochIdentifier);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

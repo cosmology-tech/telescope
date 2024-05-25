@@ -1,7 +1,6 @@
 import { FileDescriptorProto, FileDescriptorProtoAmino, FileDescriptorProtoSDKType } from "../descriptor";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -333,14 +332,6 @@ export const Version = {
     if (isSet(object.suffix)) obj.suffix = String(object.suffix);
     return obj;
   },
-  toJSON(message: Version): JsonSafe<Version> {
-    const obj: any = {};
-    message.major !== undefined && (obj.major = Math.round(message.major));
-    message.minor !== undefined && (obj.minor = Math.round(message.minor));
-    message.patch !== undefined && (obj.patch = Math.round(message.patch));
-    message.suffix !== undefined && (obj.suffix = message.suffix);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Version>): Version {
     const message = createBaseVersion();
     message.major = object.major ?? 0;
@@ -461,22 +452,6 @@ export const CodeGeneratorRequest = {
     if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
     return obj;
   },
-  toJSON(message: CodeGeneratorRequest): JsonSafe<CodeGeneratorRequest> {
-    const obj: any = {};
-    if (message.fileToGenerate) {
-      obj.fileToGenerate = message.fileToGenerate.map(e => e);
-    } else {
-      obj.fileToGenerate = [];
-    }
-    message.parameter !== undefined && (obj.parameter = message.parameter);
-    if (message.protoFile) {
-      obj.protoFile = message.protoFile.map(e => e ? FileDescriptorProto.toJSON(e) : undefined);
-    } else {
-      obj.protoFile = [];
-    }
-    message.compilerVersion !== undefined && (obj.compilerVersion = message.compilerVersion ? Version.toJSON(message.compilerVersion) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CodeGeneratorRequest>): CodeGeneratorRequest {
     const message = createBaseCodeGeneratorRequest();
     message.fileToGenerate = object.fileToGenerate?.map(e => e) || [];
@@ -595,16 +570,6 @@ export const CodeGeneratorResponse = {
     if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
     return obj;
   },
-  toJSON(message: CodeGeneratorResponse): JsonSafe<CodeGeneratorResponse> {
-    const obj: any = {};
-    message.error !== undefined && (obj.error = message.error);
-    if (message.file) {
-      obj.file = message.file.map(e => e ? CodeGeneratorResponse_File.toJSON(e) : undefined);
-    } else {
-      obj.file = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<CodeGeneratorResponse>): CodeGeneratorResponse {
     const message = createBaseCodeGeneratorResponse();
     message.error = object.error ?? "";
@@ -707,13 +672,6 @@ export const CodeGeneratorResponse_File = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.insertionPoint)) obj.insertionPoint = String(object.insertionPoint);
     if (isSet(object.content)) obj.content = String(object.content);
-    return obj;
-  },
-  toJSON(message: CodeGeneratorResponse_File): JsonSafe<CodeGeneratorResponse_File> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.insertionPoint !== undefined && (obj.insertionPoint = message.insertionPoint);
-    message.content !== undefined && (obj.content = message.content);
     return obj;
   },
   fromPartial(object: DeepPartial<CodeGeneratorResponse_File>): CodeGeneratorResponse_File {

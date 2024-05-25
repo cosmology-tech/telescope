@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.store.v1beta1";
 /**
  * StoreKVPair is a KVStore KVPair used for listening to state changes (Sets and Deletes)
@@ -107,14 +106,6 @@ export const StoreKVPair = {
     if (isSet(object.delete)) obj.delete = Boolean(object.delete);
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: StoreKVPair): JsonSafe<StoreKVPair> {
-    const obj: any = {};
-    message.storeKey !== undefined && (obj.storeKey = message.storeKey);
-    message.delete !== undefined && (obj.delete = message.delete);
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<StoreKVPair>): StoreKVPair {

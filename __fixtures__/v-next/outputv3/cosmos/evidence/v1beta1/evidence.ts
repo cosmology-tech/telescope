@@ -1,7 +1,6 @@
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.evidence.v1beta1";
 /**
  * Equivocation implements the Evidence interface and defines evidence of double
@@ -95,14 +94,6 @@ export const Equivocation = {
     if (isSet(object.time)) obj.time = new Date(object.time);
     if (isSet(object.power)) obj.power = BigInt(object.power.toString());
     if (isSet(object.consensusAddress)) obj.consensusAddress = String(object.consensusAddress);
-    return obj;
-  },
-  toJSON(message: Equivocation): JsonSafe<Equivocation> {
-    const obj: any = {};
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    message.time !== undefined && (obj.time = message.time.toISOString());
-    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
-    message.consensusAddress !== undefined && (obj.consensusAddress = message.consensusAddress);
     return obj;
   },
   fromPartial(object: DeepPartial<Equivocation>): Equivocation {

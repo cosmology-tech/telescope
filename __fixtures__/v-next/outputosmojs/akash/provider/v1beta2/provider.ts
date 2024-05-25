@@ -1,6 +1,7 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.provider.v1beta2";
 /** ProviderInfo */
 export interface ProviderInfo {
@@ -149,7 +150,7 @@ export const ProviderInfo = {
       website: isSet(object.website) ? String(object.website) : ""
     };
   },
-  toJSON(message: ProviderInfo): unknown {
+  toJSON(message: ProviderInfo): JsonSafe<ProviderInfo> {
     const obj: any = {};
     message.email !== undefined && (obj.email = message.email);
     message.website !== undefined && (obj.website = message.website);
@@ -276,7 +277,7 @@ export const MsgCreateProvider = {
       info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
     };
   },
-  toJSON(message: MsgCreateProvider): unknown {
+  toJSON(message: MsgCreateProvider): JsonSafe<MsgCreateProvider> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.hostUri !== undefined && (obj.hostUri = message.hostUri);
@@ -397,7 +398,7 @@ export const MsgCreateProviderResponse = {
   fromJSON(_: any): MsgCreateProviderResponse {
     return {};
   },
-  toJSON(_: MsgCreateProviderResponse): unknown {
+  toJSON(_: MsgCreateProviderResponse): JsonSafe<MsgCreateProviderResponse> {
     const obj: any = {};
     return obj;
   },
@@ -504,7 +505,7 @@ export const MsgUpdateProvider = {
       info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
     };
   },
-  toJSON(message: MsgUpdateProvider): unknown {
+  toJSON(message: MsgUpdateProvider): JsonSafe<MsgUpdateProvider> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.hostUri !== undefined && (obj.hostUri = message.hostUri);
@@ -625,7 +626,7 @@ export const MsgUpdateProviderResponse = {
   fromJSON(_: any): MsgUpdateProviderResponse {
     return {};
   },
-  toJSON(_: MsgUpdateProviderResponse): unknown {
+  toJSON(_: MsgUpdateProviderResponse): JsonSafe<MsgUpdateProviderResponse> {
     const obj: any = {};
     return obj;
   },
@@ -708,7 +709,7 @@ export const MsgDeleteProvider = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: MsgDeleteProvider): unknown {
+  toJSON(message: MsgDeleteProvider): JsonSafe<MsgDeleteProvider> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -792,7 +793,7 @@ export const MsgDeleteProviderResponse = {
   fromJSON(_: any): MsgDeleteProviderResponse {
     return {};
   },
-  toJSON(_: MsgDeleteProviderResponse): unknown {
+  toJSON(_: MsgDeleteProviderResponse): JsonSafe<MsgDeleteProviderResponse> {
     const obj: any = {};
     return obj;
   },
@@ -899,7 +900,7 @@ export const Provider = {
       info: isSet(object.info) ? ProviderInfo.fromJSON(object.info) : undefined
     };
   },
-  toJSON(message: Provider): unknown {
+  toJSON(message: Provider): JsonSafe<Provider> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.hostUri !== undefined && (obj.hostUri = message.hostUri);

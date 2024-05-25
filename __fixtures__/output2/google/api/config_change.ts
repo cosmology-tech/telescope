@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Classifies set of possible modifications to an object in the service
@@ -178,7 +179,7 @@ export const ConfigChange = {
       advices: Array.isArray(object?.advices) ? object.advices.map((e: any) => Advice.fromJSON(e)) : []
     };
   },
-  toJSON(message: ConfigChange): unknown {
+  toJSON(message: ConfigChange): JsonSafe<ConfigChange> {
     const obj: any = {};
     message.element !== undefined && (obj.element = message.element);
     message.oldValue !== undefined && (obj.oldValue = message.oldValue);
@@ -235,7 +236,7 @@ export const Advice = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: Advice): unknown {
+  toJSON(message: Advice): JsonSafe<Advice> {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     return obj;

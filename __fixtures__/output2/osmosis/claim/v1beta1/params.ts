@@ -4,6 +4,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -71,7 +72,7 @@ export const Params = {
       claimDenom: isSet(object.claimDenom) ? String(object.claimDenom) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.airdropStartTime !== undefined && (obj.airdropStartTime = fromTimestamp(message.airdropStartTime).toISOString());
     message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);

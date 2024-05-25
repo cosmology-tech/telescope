@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -1282,15 +1281,6 @@ export const RoutingRule = {
     if (Array.isArray(object?.routingParameters)) obj.routingParameters = object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
     return obj;
   },
-  toJSON(message: RoutingRule): JsonSafe<RoutingRule> {
-    const obj: any = {};
-    if (message.routingParameters) {
-      obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
-    } else {
-      obj.routingParameters = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
@@ -1378,12 +1368,6 @@ export const RoutingParameter = {
     const obj = createBaseRoutingParameter();
     if (isSet(object.field)) obj.field = String(object.field);
     if (isSet(object.pathTemplate)) obj.pathTemplate = String(object.pathTemplate);
-    return obj;
-  },
-  toJSON(message: RoutingParameter): JsonSafe<RoutingParameter> {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);
     return obj;
   },
   fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {

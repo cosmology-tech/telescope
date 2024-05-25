@@ -4,6 +4,7 @@ import { Params } from "./auth";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.auth.v1beta1";
 /** GenesisState defines the auth module's genesis state. */
 export interface GenesisState {
@@ -54,7 +55,7 @@ export const GenesisState = {
       accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.accounts) {

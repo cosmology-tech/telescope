@@ -1,6 +1,7 @@
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /**
  * Type defines a classification of message issued from a controller chain to its associated interchain accounts
@@ -118,7 +119,7 @@ export const InterchainAccountPacketData = {
       memo: isSet(object.memo) ? String(object.memo) : ""
     };
   },
-  toJSON(message: InterchainAccountPacketData): unknown {
+  toJSON(message: InterchainAccountPacketData): JsonSafe<InterchainAccountPacketData> {
     const obj: any = {};
     message.type !== undefined && (obj.type = typeToJSON(message.type));
     message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
@@ -230,7 +231,7 @@ export const CosmosTx = {
       messages: Array.isArray(object?.messages) ? object.messages.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: CosmosTx): unknown {
+  toJSON(message: CosmosTx): JsonSafe<CosmosTx> {
     const obj: any = {};
     if (message.messages) {
       obj.messages = message.messages.map(e => e ? Any.toJSON(e) : undefined);

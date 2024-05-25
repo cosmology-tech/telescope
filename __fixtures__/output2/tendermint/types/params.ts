@@ -3,6 +3,7 @@
 import { Duration } from "../../google/protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.types";
 /**
  * ConsensusParams contains consensus critical parameters that determine the
@@ -136,7 +137,7 @@ export const ConsensusParams = {
       version: isSet(object.version) ? VersionParams.fromJSON(object.version) : undefined
     };
   },
-  toJSON(message: ConsensusParams): unknown {
+  toJSON(message: ConsensusParams): JsonSafe<ConsensusParams> {
     const obj: any = {};
     message.block !== undefined && (obj.block = message.block ? BlockParams.toJSON(message.block) : undefined);
     message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toJSON(message.evidence) : undefined);
@@ -203,7 +204,7 @@ export const BlockParams = {
       timeIotaMs: isSet(object.timeIotaMs) ? Long.fromValue(object.timeIotaMs) : Long.ZERO
     };
   },
-  toJSON(message: BlockParams): unknown {
+  toJSON(message: BlockParams): JsonSafe<BlockParams> {
     const obj: any = {};
     message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || Long.ZERO).toString());
     message.maxGas !== undefined && (obj.maxGas = (message.maxGas || Long.ZERO).toString());
@@ -268,7 +269,7 @@ export const EvidenceParams = {
       maxBytes: isSet(object.maxBytes) ? Long.fromValue(object.maxBytes) : Long.ZERO
     };
   },
-  toJSON(message: EvidenceParams): unknown {
+  toJSON(message: EvidenceParams): JsonSafe<EvidenceParams> {
     const obj: any = {};
     message.maxAgeNumBlocks !== undefined && (obj.maxAgeNumBlocks = (message.maxAgeNumBlocks || Long.ZERO).toString());
     message.maxAgeDuration !== undefined && (obj.maxAgeDuration = message.maxAgeDuration ? Duration.toJSON(message.maxAgeDuration) : undefined);
@@ -317,7 +318,7 @@ export const ValidatorParams = {
       pubKeyTypes: Array.isArray(object?.pubKeyTypes) ? object.pubKeyTypes.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: ValidatorParams): unknown {
+  toJSON(message: ValidatorParams): JsonSafe<ValidatorParams> {
     const obj: any = {};
     if (message.pubKeyTypes) {
       obj.pubKeyTypes = message.pubKeyTypes.map(e => e);
@@ -366,7 +367,7 @@ export const VersionParams = {
       appVersion: isSet(object.appVersion) ? Long.fromValue(object.appVersion) : Long.UZERO
     };
   },
-  toJSON(message: VersionParams): unknown {
+  toJSON(message: VersionParams): JsonSafe<VersionParams> {
     const obj: any = {};
     message.appVersion !== undefined && (obj.appVersion = (message.appVersion || Long.UZERO).toString());
     return obj;
@@ -419,7 +420,7 @@ export const HashedParams = {
       blockMaxGas: isSet(object.blockMaxGas) ? Long.fromValue(object.blockMaxGas) : Long.ZERO
     };
   },
-  toJSON(message: HashedParams): unknown {
+  toJSON(message: HashedParams): JsonSafe<HashedParams> {
     const obj: any = {};
     message.blockMaxBytes !== undefined && (obj.blockMaxBytes = (message.blockMaxBytes || Long.ZERO).toString());
     message.blockMaxGas !== undefined && (obj.blockMaxGas = (message.blockMaxGas || Long.ZERO).toString());

@@ -1,7 +1,6 @@
 import { GroupInfo, GroupInfoAmino, GroupInfoSDKType, GroupMember, GroupMemberAmino, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoAmino, GroupPolicyInfoSDKType, Proposal, ProposalAmino, ProposalSDKType, Vote, VoteAmino, VoteSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
@@ -164,38 +163,6 @@ export const GenesisState = {
     if (isSet(object.proposalSeq)) obj.proposalSeq = BigInt(object.proposalSeq.toString());
     if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
     if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.groupSeq !== undefined && (obj.groupSeq = (message.groupSeq || BigInt(0)).toString());
-    if (message.groups) {
-      obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
-    } else {
-      obj.groups = [];
-    }
-    if (message.groupMembers) {
-      obj.groupMembers = message.groupMembers.map(e => e ? GroupMember.toJSON(e) : undefined);
-    } else {
-      obj.groupMembers = [];
-    }
-    message.groupPolicySeq !== undefined && (obj.groupPolicySeq = (message.groupPolicySeq || BigInt(0)).toString());
-    if (message.groupPolicies) {
-      obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
-    } else {
-      obj.groupPolicies = [];
-    }
-    message.proposalSeq !== undefined && (obj.proposalSeq = (message.proposalSeq || BigInt(0)).toString());
-    if (message.proposals) {
-      obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
-    } else {
-      obj.proposals = [];
-    }
-    if (message.votes) {
-      obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
-    } else {
-      obj.votes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

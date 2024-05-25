@@ -6,6 +6,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Duration } from "../../google/protobuf/duration";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /**
  * Gauge is an object that stores and distributes yields to recipients who
@@ -142,7 +143,7 @@ export const Gauge = {
       distributedCoins: Array.isArray(object?.distributedCoins) ? object.distributedCoins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Gauge): unknown {
+  toJSON(message: Gauge): JsonSafe<Gauge> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());
     message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
@@ -209,7 +210,7 @@ export const LockableDurationsInfo = {
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
-  toJSON(message: LockableDurationsInfo): unknown {
+  toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);

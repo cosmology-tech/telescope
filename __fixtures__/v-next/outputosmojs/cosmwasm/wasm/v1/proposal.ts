@@ -2,6 +2,7 @@ import { AccessConfig, AccessConfigSDKType } from "./types";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -314,7 +315,7 @@ export const StoreCodeProposal = {
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
     };
   },
-  toJSON(message: StoreCodeProposal): unknown {
+  toJSON(message: StoreCodeProposal): JsonSafe<StoreCodeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -500,7 +501,7 @@ export const InstantiateContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: InstantiateContractProposal): unknown {
+  toJSON(message: InstantiateContractProposal): JsonSafe<InstantiateContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -699,7 +700,7 @@ export const MigrateContractProposal = {
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
-  toJSON(message: MigrateContractProposal): unknown {
+  toJSON(message: MigrateContractProposal): JsonSafe<MigrateContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -853,7 +854,7 @@ export const SudoContractProposal = {
       msg: isSet(object.msg) ? bytesFromBase64(object.msg) : new Uint8Array()
     };
   },
-  toJSON(message: SudoContractProposal): unknown {
+  toJSON(message: SudoContractProposal): JsonSafe<SudoContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1014,7 +1015,7 @@ export const ExecuteContractProposal = {
       funds: Array.isArray(object?.funds) ? object.funds.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: ExecuteContractProposal): unknown {
+  toJSON(message: ExecuteContractProposal): JsonSafe<ExecuteContractProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1187,7 +1188,7 @@ export const UpdateAdminProposal = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: UpdateAdminProposal): unknown {
+  toJSON(message: UpdateAdminProposal): JsonSafe<UpdateAdminProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1324,7 +1325,7 @@ export const ClearAdminProposal = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: ClearAdminProposal): unknown {
+  toJSON(message: ClearAdminProposal): JsonSafe<ClearAdminProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1461,7 +1462,7 @@ export const PinCodesProposal = {
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: PinCodesProposal): unknown {
+  toJSON(message: PinCodesProposal): JsonSafe<PinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -1608,7 +1609,7 @@ export const UnpinCodesProposal = {
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: UnpinCodesProposal): unknown {
+  toJSON(message: UnpinCodesProposal): JsonSafe<UnpinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

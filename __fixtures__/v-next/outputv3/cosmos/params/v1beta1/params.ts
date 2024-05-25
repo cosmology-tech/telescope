@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
@@ -105,17 +104,6 @@ export const ParameterChangeProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.changes)) obj.changes = object.changes.map((e: any) => ParamChange.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ParameterChangeProposal): JsonSafe<ParameterChangeProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.changes) {
-      obj.changes = message.changes.map(e => e ? ParamChange.toJSON(e) : undefined);
-    } else {
-      obj.changes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ParameterChangeProposal>): ParameterChangeProposal {
@@ -228,13 +216,6 @@ export const ParamChange = {
     if (isSet(object.subspace)) obj.subspace = String(object.subspace);
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: ParamChange): JsonSafe<ParamChange> {
-    const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<ParamChange>): ParamChange {

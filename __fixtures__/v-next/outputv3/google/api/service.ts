@@ -20,7 +20,6 @@ import { SourceInfo, SourceInfoAmino, SourceInfoSDKType } from "./source_info";
 import { UInt32Value, UInt32ValueAmino, UInt32ValueSDKType } from "../protobuf/wrappers";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Service` is the root object of Google service configuration schema. It
@@ -547,63 +546,6 @@ export const Service = {
     if (isSet(object.systemParameters)) obj.systemParameters = SystemParameters.fromJSON(object.systemParameters);
     if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
     if (isSet(object.configVersion)) obj.configVersion = UInt32Value.fromJSON(object.configVersion);
-    return obj;
-  },
-  toJSON(message: Service): JsonSafe<Service> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.title !== undefined && (obj.title = message.title);
-    message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
-    message.id !== undefined && (obj.id = message.id);
-    if (message.apis) {
-      obj.apis = message.apis.map(e => e ? Api.toJSON(e) : undefined);
-    } else {
-      obj.apis = [];
-    }
-    if (message.types) {
-      obj.types = message.types.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.types = [];
-    }
-    if (message.enums) {
-      obj.enums = message.enums.map(e => e ? Enum.toJSON(e) : undefined);
-    } else {
-      obj.enums = [];
-    }
-    message.documentation !== undefined && (obj.documentation = message.documentation ? Documentation.toJSON(message.documentation) : undefined);
-    message.backend !== undefined && (obj.backend = message.backend ? Backend.toJSON(message.backend) : undefined);
-    message.http !== undefined && (obj.http = message.http ? Http.toJSON(message.http) : undefined);
-    message.quota !== undefined && (obj.quota = message.quota ? Quota.toJSON(message.quota) : undefined);
-    message.authentication !== undefined && (obj.authentication = message.authentication ? Authentication.toJSON(message.authentication) : undefined);
-    message.context !== undefined && (obj.context = message.context ? Context.toJSON(message.context) : undefined);
-    message.usage !== undefined && (obj.usage = message.usage ? Usage.toJSON(message.usage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
-    message.control !== undefined && (obj.control = message.control ? Control.toJSON(message.control) : undefined);
-    if (message.logs) {
-      obj.logs = message.logs.map(e => e ? LogDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.logs = [];
-    }
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? MetricDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    if (message.monitoredResources) {
-      obj.monitoredResources = message.monitoredResources.map(e => e ? MonitoredResourceDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.monitoredResources = [];
-    }
-    message.billing !== undefined && (obj.billing = message.billing ? Billing.toJSON(message.billing) : undefined);
-    message.logging !== undefined && (obj.logging = message.logging ? Logging.toJSON(message.logging) : undefined);
-    message.monitoring !== undefined && (obj.monitoring = message.monitoring ? Monitoring.toJSON(message.monitoring) : undefined);
-    message.systemParameters !== undefined && (obj.systemParameters = message.systemParameters ? SystemParameters.toJSON(message.systemParameters) : undefined);
-    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.configVersion !== undefined && (obj.configVersion = message.configVersion ? UInt32Value.toJSON(message.configVersion) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Service>): Service {

@@ -2,6 +2,7 @@ import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** MsgCreateValidatorSetPreference is a list that holds validator-set. */
 export interface MsgSetValidatorSetPreference {
@@ -202,7 +203,7 @@ export const MsgSetValidatorSetPreference = {
       preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgSetValidatorSetPreference): unknown {
+  toJSON(message: MsgSetValidatorSetPreference): JsonSafe<MsgSetValidatorSetPreference> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     if (message.preferences) {
@@ -305,7 +306,7 @@ export const MsgSetValidatorSetPreferenceResponse = {
   fromJSON(_: any): MsgSetValidatorSetPreferenceResponse {
     return {};
   },
-  toJSON(_: MsgSetValidatorSetPreferenceResponse): unknown {
+  toJSON(_: MsgSetValidatorSetPreferenceResponse): JsonSafe<MsgSetValidatorSetPreferenceResponse> {
     const obj: any = {};
     return obj;
   },
@@ -396,7 +397,7 @@ export const MsgDelegateToValidatorSet = {
       coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined
     };
   },
-  toJSON(message: MsgDelegateToValidatorSet): unknown {
+  toJSON(message: MsgDelegateToValidatorSet): JsonSafe<MsgDelegateToValidatorSet> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     message.coin !== undefined && (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
@@ -489,7 +490,7 @@ export const MsgDelegateToValidatorSetResponse = {
   fromJSON(_: any): MsgDelegateToValidatorSetResponse {
     return {};
   },
-  toJSON(_: MsgDelegateToValidatorSetResponse): unknown {
+  toJSON(_: MsgDelegateToValidatorSetResponse): JsonSafe<MsgDelegateToValidatorSetResponse> {
     const obj: any = {};
     return obj;
   },
@@ -580,7 +581,7 @@ export const MsgUndelegateFromValidatorSet = {
       coin: isSet(object.coin) ? Coin.fromJSON(object.coin) : undefined
     };
   },
-  toJSON(message: MsgUndelegateFromValidatorSet): unknown {
+  toJSON(message: MsgUndelegateFromValidatorSet): JsonSafe<MsgUndelegateFromValidatorSet> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     message.coin !== undefined && (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
@@ -673,7 +674,7 @@ export const MsgUndelegateFromValidatorSetResponse = {
   fromJSON(_: any): MsgUndelegateFromValidatorSetResponse {
     return {};
   },
-  toJSON(_: MsgUndelegateFromValidatorSetResponse): unknown {
+  toJSON(_: MsgUndelegateFromValidatorSetResponse): JsonSafe<MsgUndelegateFromValidatorSetResponse> {
     const obj: any = {};
     return obj;
   },
@@ -764,7 +765,7 @@ export const MsgRedelegateValidatorSet = {
       preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgRedelegateValidatorSet): unknown {
+  toJSON(message: MsgRedelegateValidatorSet): JsonSafe<MsgRedelegateValidatorSet> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     if (message.preferences) {
@@ -867,7 +868,7 @@ export const MsgRedelegateValidatorSetResponse = {
   fromJSON(_: any): MsgRedelegateValidatorSetResponse {
     return {};
   },
-  toJSON(_: MsgRedelegateValidatorSetResponse): unknown {
+  toJSON(_: MsgRedelegateValidatorSetResponse): JsonSafe<MsgRedelegateValidatorSetResponse> {
     const obj: any = {};
     return obj;
   },
@@ -950,7 +951,7 @@ export const MsgWithdrawDelegationRewards = {
       delegator: isSet(object.delegator) ? String(object.delegator) : ""
     };
   },
-  toJSON(message: MsgWithdrawDelegationRewards): unknown {
+  toJSON(message: MsgWithdrawDelegationRewards): JsonSafe<MsgWithdrawDelegationRewards> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     return obj;
@@ -1034,7 +1035,7 @@ export const MsgWithdrawDelegationRewardsResponse = {
   fromJSON(_: any): MsgWithdrawDelegationRewardsResponse {
     return {};
   },
-  toJSON(_: MsgWithdrawDelegationRewardsResponse): unknown {
+  toJSON(_: MsgWithdrawDelegationRewardsResponse): JsonSafe<MsgWithdrawDelegationRewardsResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1125,7 +1126,7 @@ export const MsgDelegateBondedTokens = {
       lockID: isSet(object.lockID) ? BigInt(object.lockID.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgDelegateBondedTokens): unknown {
+  toJSON(message: MsgDelegateBondedTokens): JsonSafe<MsgDelegateBondedTokens> {
     const obj: any = {};
     message.delegator !== undefined && (obj.delegator = message.delegator);
     message.lockID !== undefined && (obj.lockID = (message.lockID || BigInt(0)).toString());
@@ -1218,7 +1219,7 @@ export const MsgDelegateBondedTokensResponse = {
   fromJSON(_: any): MsgDelegateBondedTokensResponse {
     return {};
   },
-  toJSON(_: MsgDelegateBondedTokensResponse): unknown {
+  toJSON(_: MsgDelegateBondedTokensResponse): JsonSafe<MsgDelegateBondedTokensResponse> {
     const obj: any = {};
     return obj;
   },

@@ -73,38 +73,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createDenom(value: MsgCreateDenom) {
-      return {
-        typeUrl: "/osmosis.tokenfactory.v1beta1.MsgCreateDenom",
-        value: MsgCreateDenom.toJSON(value)
-      };
-    },
-    mint(value: MsgMint) {
-      return {
-        typeUrl: "/osmosis.tokenfactory.v1beta1.MsgMint",
-        value: MsgMint.toJSON(value)
-      };
-    },
-    burn(value: MsgBurn) {
-      return {
-        typeUrl: "/osmosis.tokenfactory.v1beta1.MsgBurn",
-        value: MsgBurn.toJSON(value)
-      };
-    },
-    changeAdmin(value: MsgChangeAdmin) {
-      return {
-        typeUrl: "/osmosis.tokenfactory.v1beta1.MsgChangeAdmin",
-        value: MsgChangeAdmin.toJSON(value)
-      };
-    },
-    setDenomMetadata(value: MsgSetDenomMetadata) {
-      return {
-        typeUrl: "/osmosis.tokenfactory.v1beta1.MsgSetDenomMetadata",
-        value: MsgSetDenomMetadata.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createDenom(value: any) {
       return {

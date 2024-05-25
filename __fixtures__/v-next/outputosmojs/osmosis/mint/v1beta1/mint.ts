@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -166,7 +167,7 @@ export const Minter = {
       epochProvisions: isSet(object.epochProvisions) ? String(object.epochProvisions) : ""
     };
   },
-  toJSON(message: Minter): unknown {
+  toJSON(message: Minter): JsonSafe<Minter> {
     const obj: any = {};
     message.epochProvisions !== undefined && (obj.epochProvisions = message.epochProvisions);
     return obj;
@@ -268,7 +269,7 @@ export const WeightedAddress = {
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
-  toJSON(message: WeightedAddress): unknown {
+  toJSON(message: WeightedAddress): JsonSafe<WeightedAddress> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.weight !== undefined && (obj.weight = message.weight);
@@ -395,7 +396,7 @@ export const DistributionProportions = {
       communityPool: isSet(object.communityPool) ? String(object.communityPool) : ""
     };
   },
-  toJSON(message: DistributionProportions): unknown {
+  toJSON(message: DistributionProportions): JsonSafe<DistributionProportions> {
     const obj: any = {};
     message.staking !== undefined && (obj.staking = message.staking);
     message.poolIncentives !== undefined && (obj.poolIncentives = message.poolIncentives);
@@ -572,7 +573,7 @@ export const Params = {
       mintingRewardsDistributionStartEpoch: isSet(object.mintingRewardsDistributionStartEpoch) ? BigInt(object.mintingRewardsDistributionStartEpoch.toString()) : BigInt(0)
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
     message.genesisEpochProvisions !== undefined && (obj.genesisEpochProvisions = message.genesisEpochProvisions);

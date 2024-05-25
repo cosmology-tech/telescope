@@ -2,6 +2,7 @@ import { ProposalStatus, ProposalStatusSDKType, Proposal, ProposalSDKType, Vote,
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** QueryProposalRequest is the request type for the Query/Proposal RPC method. */
 export interface QueryProposalRequest {
@@ -288,7 +289,7 @@ export const QueryProposalRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryProposalRequest): unknown {
+  toJSON(message: QueryProposalRequest): JsonSafe<QueryProposalRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -384,7 +385,7 @@ export const QueryProposalResponse = {
     if (isSet(object.proposal)) obj.proposal = Proposal.fromJSON(object.proposal);
     return obj;
   },
-  toJSON(message: QueryProposalResponse): unknown {
+  toJSON(message: QueryProposalResponse): JsonSafe<QueryProposalResponse> {
     const obj: any = {};
     message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toJSON(message.proposal) : undefined);
     return obj;
@@ -504,7 +505,7 @@ export const QueryProposalsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProposalsRequest): unknown {
+  toJSON(message: QueryProposalsRequest): JsonSafe<QueryProposalsRequest> {
     const obj: any = {};
     message.proposalStatus !== undefined && (obj.proposalStatus = proposalStatusToJSON(message.proposalStatus));
     message.voter !== undefined && (obj.voter = message.voter);
@@ -635,7 +636,7 @@ export const QueryProposalsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProposalsResponse): unknown {
+  toJSON(message: QueryProposalsResponse): JsonSafe<QueryProposalsResponse> {
     const obj: any = {};
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
@@ -758,7 +759,7 @@ export const QueryVoteRequest = {
     if (isSet(object.voter)) obj.voter = String(object.voter);
     return obj;
   },
-  toJSON(message: QueryVoteRequest): unknown {
+  toJSON(message: QueryVoteRequest): JsonSafe<QueryVoteRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -863,7 +864,7 @@ export const QueryVoteResponse = {
     if (isSet(object.vote)) obj.vote = Vote.fromJSON(object.vote);
     return obj;
   },
-  toJSON(message: QueryVoteResponse): unknown {
+  toJSON(message: QueryVoteResponse): JsonSafe<QueryVoteResponse> {
     const obj: any = {};
     message.vote !== undefined && (obj.vote = message.vote ? Vote.toJSON(message.vote) : undefined);
     return obj;
@@ -967,7 +968,7 @@ export const QueryVotesRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesRequest): unknown {
+  toJSON(message: QueryVotesRequest): JsonSafe<QueryVotesRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1082,7 +1083,7 @@ export const QueryVotesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesResponse): unknown {
+  toJSON(message: QueryVotesResponse): JsonSafe<QueryVotesResponse> {
     const obj: any = {};
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
@@ -1197,7 +1198,7 @@ export const QueryParamsRequest = {
     if (isSet(object.paramsType)) obj.paramsType = String(object.paramsType);
     return obj;
   },
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     message.paramsType !== undefined && (obj.paramsType = message.paramsType);
     return obj;
@@ -1307,7 +1308,7 @@ export const QueryParamsResponse = {
     if (isSet(object.tallyParams)) obj.tallyParams = TallyParams.fromJSON(object.tallyParams);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.votingParams !== undefined && (obj.votingParams = message.votingParams ? VotingParams.toJSON(message.votingParams) : undefined);
     message.depositParams !== undefined && (obj.depositParams = message.depositParams ? DepositParams.toJSON(message.depositParams) : undefined);
@@ -1433,7 +1434,7 @@ export const QueryDepositRequest = {
     if (isSet(object.depositor)) obj.depositor = String(object.depositor);
     return obj;
   },
-  toJSON(message: QueryDepositRequest): unknown {
+  toJSON(message: QueryDepositRequest): JsonSafe<QueryDepositRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -1538,7 +1539,7 @@ export const QueryDepositResponse = {
     if (isSet(object.deposit)) obj.deposit = Deposit.fromJSON(object.deposit);
     return obj;
   },
-  toJSON(message: QueryDepositResponse): unknown {
+  toJSON(message: QueryDepositResponse): JsonSafe<QueryDepositResponse> {
     const obj: any = {};
     message.deposit !== undefined && (obj.deposit = message.deposit ? Deposit.toJSON(message.deposit) : undefined);
     return obj;
@@ -1642,7 +1643,7 @@ export const QueryDepositsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDepositsRequest): unknown {
+  toJSON(message: QueryDepositsRequest): JsonSafe<QueryDepositsRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1757,7 +1758,7 @@ export const QueryDepositsResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryDepositsResponse): unknown {
+  toJSON(message: QueryDepositsResponse): JsonSafe<QueryDepositsResponse> {
     const obj: any = {};
     if (message.deposits) {
       obj.deposits = message.deposits.map(e => e ? Deposit.toJSON(e) : undefined);
@@ -1872,7 +1873,7 @@ export const QueryTallyResultRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryTallyResultRequest): unknown {
+  toJSON(message: QueryTallyResultRequest): JsonSafe<QueryTallyResultRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -1968,7 +1969,7 @@ export const QueryTallyResultResponse = {
     if (isSet(object.tally)) obj.tally = TallyResult.fromJSON(object.tally);
     return obj;
   },
-  toJSON(message: QueryTallyResultResponse): unknown {
+  toJSON(message: QueryTallyResultResponse): JsonSafe<QueryTallyResultResponse> {
     const obj: any = {};
     message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toJSON(message.tally) : undefined);
     return obj;

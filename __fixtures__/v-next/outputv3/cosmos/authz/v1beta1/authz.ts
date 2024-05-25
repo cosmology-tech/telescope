@@ -10,7 +10,6 @@ import { SendAuthorization, SendAuthorizationProtoMsg, SendAuthorizationSDKType 
 import { StakeAuthorization, StakeAuthorizationProtoMsg, StakeAuthorizationSDKType } from "../../staking/v1beta1/authz";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -174,11 +173,6 @@ export const GenericAuthorization = {
     if (isSet(object.msg)) obj.msg = String(object.msg);
     return obj;
   },
-  toJSON(message: GenericAuthorization): JsonSafe<GenericAuthorization> {
-    const obj: any = {};
-    message.msg !== undefined && (obj.msg = message.msg);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenericAuthorization>): GenericAuthorization {
     const message = createBaseGenericAuthorization();
     message.msg = object.msg ?? "";
@@ -261,12 +255,6 @@ export const Grant = {
     const obj = createBaseGrant();
     if (isSet(object.authorization)) obj.authorization = Any.fromJSON(object.authorization);
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
-    return obj;
-  },
-  toJSON(message: Grant): JsonSafe<Grant> {
-    const obj: any = {};
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<Grant>): Grant {
@@ -378,14 +366,6 @@ export const GrantAuthorization = {
     if (isSet(object.expiration)) obj.expiration = new Date(object.expiration);
     return obj;
   },
-  toJSON(message: GrantAuthorization): JsonSafe<GrantAuthorization> {
-    const obj: any = {};
-    message.granter !== undefined && (obj.granter = message.granter);
-    message.grantee !== undefined && (obj.grantee = message.grantee);
-    message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
-    message.expiration !== undefined && (obj.expiration = message.expiration.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GrantAuthorization>): GrantAuthorization {
     const message = createBaseGrantAuthorization();
     message.granter = object.granter ?? "";
@@ -483,15 +463,6 @@ export const GrantQueueItem = {
   fromJSON(object: any): GrantQueueItem {
     const obj = createBaseGrantQueueItem();
     if (Array.isArray(object?.msgTypeUrls)) obj.msgTypeUrls = object.msgTypeUrls.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: GrantQueueItem): JsonSafe<GrantQueueItem> {
-    const obj: any = {};
-    if (message.msgTypeUrls) {
-      obj.msgTypeUrls = message.msgTypeUrls.map(e => e);
-    } else {
-      obj.msgTypeUrls = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GrantQueueItem>): GrantQueueItem {

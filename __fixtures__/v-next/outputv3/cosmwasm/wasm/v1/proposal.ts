@@ -1,8 +1,7 @@
 import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial } from "../../../helpers";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** StoreCodeProposal gov proposal content type to submit WASM code to the system */
@@ -440,15 +439,6 @@ export const StoreCodeProposal = {
     if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
     return obj;
   },
-  toJSON(message: StoreCodeProposal): JsonSafe<StoreCodeProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.runAs !== undefined && (obj.runAs = message.runAs);
-    message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
-    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<StoreCodeProposal>): StoreCodeProposal {
     const message = createBaseStoreCodeProposal();
     message.title = object.title ?? "";
@@ -609,22 +599,6 @@ export const InstantiateContractProposal = {
     if (isSet(object.label)) obj.label = String(object.label);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: InstantiateContractProposal): JsonSafe<InstantiateContractProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.runAs !== undefined && (obj.runAs = message.runAs);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.label !== undefined && (obj.label = message.label);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<InstantiateContractProposal>): InstantiateContractProposal {
@@ -792,15 +766,6 @@ export const MigrateContractProposal = {
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     return obj;
   },
-  toJSON(message: MigrateContractProposal): JsonSafe<MigrateContractProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MigrateContractProposal>): MigrateContractProposal {
     const message = createBaseMigrateContractProposal();
     message.title = object.title ?? "";
@@ -929,14 +894,6 @@ export const SudoContractProposal = {
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    return obj;
-  },
-  toJSON(message: SudoContractProposal): JsonSafe<SudoContractProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<SudoContractProposal>): SudoContractProposal {
@@ -1074,20 +1031,6 @@ export const ExecuteContractProposal = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ExecuteContractProposal): JsonSafe<ExecuteContractProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.runAs !== undefined && (obj.runAs = message.runAs);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ExecuteContractProposal>): ExecuteContractProposal {
@@ -1231,14 +1174,6 @@ export const UpdateAdminProposal = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: UpdateAdminProposal): JsonSafe<UpdateAdminProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateAdminProposal>): UpdateAdminProposal {
     const message = createBaseUpdateAdminProposal();
     message.title = object.title ?? "";
@@ -1350,13 +1285,6 @@ export const ClearAdminProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
-  },
-  toJSON(message: ClearAdminProposal): JsonSafe<ClearAdminProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
   fromPartial(object: DeepPartial<ClearAdminProposal>): ClearAdminProposal {
@@ -1472,17 +1400,6 @@ export const PinCodesProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: PinCodesProposal): JsonSafe<PinCodesProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.codeIds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<PinCodesProposal>): PinCodesProposal {
@@ -1604,17 +1521,6 @@ export const UnpinCodesProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (Array.isArray(object?.codeIds)) obj.codeIds = object.codeIds.map((e: any) => BigInt(e.toString()));
-    return obj;
-  },
-  toJSON(message: UnpinCodesProposal): JsonSafe<UnpinCodesProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    if (message.codeIds) {
-      obj.codeIds = message.codeIds.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.codeIds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<UnpinCodesProposal>): UnpinCodesProposal {

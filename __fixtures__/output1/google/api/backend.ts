@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -237,7 +238,7 @@ export const Backend = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => BackendRule.fromJSON(e)) : []
     };
   },
-  toJSON(message: Backend): unknown {
+  toJSON(message: Backend): JsonSafe<Backend> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? BackendRule.toJSON(e) : undefined);
@@ -364,7 +365,7 @@ export const BackendRule = {
       protocol: isSet(object.protocol) ? String(object.protocol) : ""
     };
   },
-  toJSON(message: BackendRule): unknown {
+  toJSON(message: BackendRule): JsonSafe<BackendRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.address !== undefined && (obj.address = message.address);

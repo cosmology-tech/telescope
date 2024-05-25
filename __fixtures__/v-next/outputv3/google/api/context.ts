@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -241,15 +240,6 @@ export const Context = {
     if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => ContextRule.fromJSON(e));
     return obj;
   },
-  toJSON(message: Context): JsonSafe<Context> {
-    const obj: any = {};
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? ContextRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Context>): Context {
     const message = createBaseContext();
     message.rules = object.rules?.map(e => ContextRule.fromPartial(e)) || [];
@@ -361,31 +351,6 @@ export const ContextRule = {
     if (Array.isArray(object?.provided)) obj.provided = object.provided.map((e: any) => String(e));
     if (Array.isArray(object?.allowedRequestExtensions)) obj.allowedRequestExtensions = object.allowedRequestExtensions.map((e: any) => String(e));
     if (Array.isArray(object?.allowedResponseExtensions)) obj.allowedResponseExtensions = object.allowedResponseExtensions.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: ContextRule): JsonSafe<ContextRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    if (message.requested) {
-      obj.requested = message.requested.map(e => e);
-    } else {
-      obj.requested = [];
-    }
-    if (message.provided) {
-      obj.provided = message.provided.map(e => e);
-    } else {
-      obj.provided = [];
-    }
-    if (message.allowedRequestExtensions) {
-      obj.allowedRequestExtensions = message.allowedRequestExtensions.map(e => e);
-    } else {
-      obj.allowedRequestExtensions = [];
-    }
-    if (message.allowedResponseExtensions) {
-      obj.allowedResponseExtensions = message.allowedResponseExtensions.map(e => e);
-    } else {
-      obj.allowedResponseExtensions = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ContextRule>): ContextRule {

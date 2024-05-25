@@ -1,6 +1,5 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.txfees.v1beta1";
@@ -150,10 +149,6 @@ export const QueryFeeTokensRequest = {
     const obj = createBaseQueryFeeTokensRequest();
     return obj;
   },
-  toJSON(_: QueryFeeTokensRequest): JsonSafe<QueryFeeTokensRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
@@ -220,15 +215,6 @@ export const QueryFeeTokensResponse = {
   fromJSON(object: any): QueryFeeTokensResponse {
     const obj = createBaseQueryFeeTokensResponse();
     if (Array.isArray(object?.feeTokens)) obj.feeTokens = object.feeTokens.map((e: any) => FeeToken.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryFeeTokensResponse): JsonSafe<QueryFeeTokensResponse> {
-    const obj: any = {};
-    if (message.feeTokens) {
-      obj.feeTokens = message.feeTokens.map(e => e ? FeeToken.toJSON(e) : undefined);
-    } else {
-      obj.feeTokens = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryFeeTokensResponse>): QueryFeeTokensResponse {
@@ -313,11 +299,6 @@ export const QueryDenomSpotPriceRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: QueryDenomSpotPriceRequest): JsonSafe<QueryDenomSpotPriceRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceRequest>): QueryDenomSpotPriceRequest {
     const message = createBaseQueryDenomSpotPriceRequest();
     message.denom = object.denom ?? "";
@@ -400,12 +381,6 @@ export const QueryDenomSpotPriceResponse = {
     const obj = createBaseQueryDenomSpotPriceResponse();
     if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
     if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
-    return obj;
-  },
-  toJSON(message: QueryDenomSpotPriceResponse): JsonSafe<QueryDenomSpotPriceResponse> {
-    const obj: any = {};
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
-    message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
@@ -493,11 +468,6 @@ export const QueryDenomPoolIdRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: QueryDenomPoolIdRequest): JsonSafe<QueryDenomPoolIdRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDenomPoolIdRequest>): QueryDenomPoolIdRequest {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
@@ -574,11 +544,6 @@ export const QueryDenomPoolIdResponse = {
     if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
     return obj;
   },
-  toJSON(message: QueryDenomPoolIdResponse): JsonSafe<QueryDenomPoolIdResponse> {
-    const obj: any = {};
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
     if (object.poolID !== undefined && object.poolID !== null) {
@@ -648,10 +613,6 @@ export const QueryBaseDenomRequest = {
     const obj = createBaseQueryBaseDenomRequest();
     return obj;
   },
-  toJSON(_: QueryBaseDenomRequest): JsonSafe<QueryBaseDenomRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
@@ -718,11 +679,6 @@ export const QueryBaseDenomResponse = {
   fromJSON(object: any): QueryBaseDenomResponse {
     const obj = createBaseQueryBaseDenomResponse();
     if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
-    return obj;
-  },
-  toJSON(message: QueryBaseDenomResponse): JsonSafe<QueryBaseDenomResponse> {
-    const obj: any = {};
-    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryBaseDenomResponse>): QueryBaseDenomResponse {

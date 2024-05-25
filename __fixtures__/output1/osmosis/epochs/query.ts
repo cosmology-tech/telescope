@@ -1,6 +1,7 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { Long, DeepPartial, isSet } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
 export interface QueryEpochsInfoRequestSDKType {}
@@ -46,7 +47,7 @@ export const QueryEpochsInfoRequest = {
   fromJSON(_: any): QueryEpochsInfoRequest {
     return {};
   },
-  toJSON(_: QueryEpochsInfoRequest): unknown {
+  toJSON(_: QueryEpochsInfoRequest): JsonSafe<QueryEpochsInfoRequest> {
     const obj: any = {};
     return obj;
   },
@@ -96,7 +97,7 @@ export const QueryEpochsInfoResponse = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryEpochsInfoResponse): unknown {
+  toJSON(message: QueryEpochsInfoResponse): JsonSafe<QueryEpochsInfoResponse> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);
@@ -159,7 +160,7 @@ export const QueryCurrentEpochRequest = {
       identifier: isSet(object.identifier) ? String(object.identifier) : ""
     };
   },
-  toJSON(message: QueryCurrentEpochRequest): unknown {
+  toJSON(message: QueryCurrentEpochRequest): JsonSafe<QueryCurrentEpochRequest> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
@@ -214,7 +215,7 @@ export const QueryCurrentEpochResponse = {
       currentEpoch: isSet(object.currentEpoch) ? Long.fromValue(object.currentEpoch) : Long.ZERO
     };
   },
-  toJSON(message: QueryCurrentEpochResponse): unknown {
+  toJSON(message: QueryCurrentEpochResponse): JsonSafe<QueryCurrentEpochResponse> {
     const obj: any = {};
     message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || Long.ZERO).toString());
     return obj;

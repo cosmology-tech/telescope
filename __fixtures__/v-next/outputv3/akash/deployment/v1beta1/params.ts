@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
@@ -52,11 +51,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (isSet(object.deploymentMinDeposit)) obj.deploymentMinDeposit = Coin.fromJSON(object.deploymentMinDeposit);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.deploymentMinDeposit !== undefined && (obj.deploymentMinDeposit = message.deploymentMinDeposit ? Coin.toJSON(message.deploymentMinDeposit) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

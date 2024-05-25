@@ -1,5 +1,6 @@
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -84,7 +85,7 @@ export const QuerySpotPriceRequest = {
       quoteAssetDenom: isSet(object.quoteAssetDenom) ? String(object.quoteAssetDenom) : ""
     };
   },
-  toJSON(message: QuerySpotPriceRequest): unknown {
+  toJSON(message: QuerySpotPriceRequest): JsonSafe<QuerySpotPriceRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
@@ -147,7 +148,7 @@ export const QuerySpotPriceResponse = {
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
-  toJSON(message: QuerySpotPriceResponse): unknown {
+  toJSON(message: QuerySpotPriceResponse): JsonSafe<QuerySpotPriceResponse> {
     const obj: any = {};
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;

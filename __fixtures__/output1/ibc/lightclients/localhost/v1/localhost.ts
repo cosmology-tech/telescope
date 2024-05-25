@@ -1,6 +1,7 @@
 import { Height, HeightSDKType } from "../../../core/client/v1/client";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -62,7 +63,7 @@ export const ClientState = {
       height: isSet(object.height) ? Height.fromJSON(object.height) : undefined
     };
   },
-  toJSON(message: ClientState): unknown {
+  toJSON(message: ClientState): JsonSafe<ClientState> {
     const obj: any = {};
     message.chainId !== undefined && (obj.chainId = message.chainId);
     message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);

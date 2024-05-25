@@ -5,6 +5,7 @@ import { Params, ParamsSDKType } from "../params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "osmosis.concentratedliquidity.v1beta1";
 /** =============================== UserPositions */
@@ -242,7 +243,7 @@ export const QueryUserPositionsRequest = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryUserPositionsRequest): unknown {
+  toJSON(message: QueryUserPositionsRequest): JsonSafe<QueryUserPositionsRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -345,7 +346,7 @@ export const QueryUserPositionsResponse = {
       positions: Array.isArray(object?.positions) ? object.positions.map((e: any) => PositionWithUnderlyingAssetBreakdown.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryUserPositionsResponse): unknown {
+  toJSON(message: QueryUserPositionsResponse): JsonSafe<QueryUserPositionsResponse> {
     const obj: any = {};
     if (message.positions) {
       obj.positions = message.positions.map(e => e ? PositionWithUnderlyingAssetBreakdown.toJSON(e) : undefined);
@@ -449,7 +450,7 @@ export const QueryPositionByIdRequest = {
       positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryPositionByIdRequest): unknown {
+  toJSON(message: QueryPositionByIdRequest): JsonSafe<QueryPositionByIdRequest> {
     const obj: any = {};
     message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     return obj;
@@ -543,7 +544,7 @@ export const QueryPositionByIdResponse = {
       position: isSet(object.position) ? PositionWithUnderlyingAssetBreakdown.fromJSON(object.position) : undefined
     };
   },
-  toJSON(message: QueryPositionByIdResponse): unknown {
+  toJSON(message: QueryPositionByIdResponse): JsonSafe<QueryPositionByIdResponse> {
     const obj: any = {};
     message.position !== undefined && (obj.position = message.position ? PositionWithUnderlyingAssetBreakdown.toJSON(message.position) : undefined);
     return obj;
@@ -637,7 +638,7 @@ export const QueryPoolsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsRequest): unknown {
+  toJSON(message: QueryPoolsRequest): JsonSafe<QueryPoolsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -739,7 +740,7 @@ export const QueryPoolsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsResponse): unknown {
+  toJSON(message: QueryPoolsResponse): JsonSafe<QueryPoolsResponse> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
@@ -842,7 +843,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -925,7 +926,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -1027,7 +1028,7 @@ export const TickLiquidityNet = {
       tickIndex: isSet(object.tickIndex) ? String(object.tickIndex) : ""
     };
   },
-  toJSON(message: TickLiquidityNet): unknown {
+  toJSON(message: TickLiquidityNet): JsonSafe<TickLiquidityNet> {
     const obj: any = {};
     message.liquidityNet !== undefined && (obj.liquidityNet = message.liquidityNet);
     message.tickIndex !== undefined && (obj.tickIndex = message.tickIndex);
@@ -1146,7 +1147,7 @@ export const LiquidityDepthWithRange = {
       upperTick: isSet(object.upperTick) ? String(object.upperTick) : ""
     };
   },
-  toJSON(message: LiquidityDepthWithRange): unknown {
+  toJSON(message: LiquidityDepthWithRange): JsonSafe<LiquidityDepthWithRange> {
     const obj: any = {};
     message.liquidityAmount !== undefined && (obj.liquidityAmount = message.liquidityAmount);
     message.lowerTick !== undefined && (obj.lowerTick = message.lowerTick);
@@ -1282,7 +1283,7 @@ export const QueryLiquidityNetInDirectionRequest = {
       boundTick: isSet(object.boundTick) ? String(object.boundTick) : undefined
     };
   },
-  toJSON(message: QueryLiquidityNetInDirectionRequest): unknown {
+  toJSON(message: QueryLiquidityNetInDirectionRequest): JsonSafe<QueryLiquidityNetInDirectionRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     message.tokenIn !== undefined && (obj.tokenIn = message.tokenIn);
@@ -1419,7 +1420,7 @@ export const QueryLiquidityNetInDirectionResponse = {
       currentLiquidity: isSet(object.currentLiquidity) ? String(object.currentLiquidity) : ""
     };
   },
-  toJSON(message: QueryLiquidityNetInDirectionResponse): unknown {
+  toJSON(message: QueryLiquidityNetInDirectionResponse): JsonSafe<QueryLiquidityNetInDirectionResponse> {
     const obj: any = {};
     if (message.liquidityDepths) {
       obj.liquidityDepths = message.liquidityDepths.map(e => e ? TickLiquidityNet.toJSON(e) : undefined);
@@ -1541,7 +1542,7 @@ export const QueryTotalLiquidityForRangeRequest = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryTotalLiquidityForRangeRequest): unknown {
+  toJSON(message: QueryTotalLiquidityForRangeRequest): JsonSafe<QueryTotalLiquidityForRangeRequest> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;
@@ -1635,7 +1636,7 @@ export const QueryTotalLiquidityForRangeResponse = {
       liquidity: Array.isArray(object?.liquidity) ? object.liquidity.map((e: any) => LiquidityDepthWithRange.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryTotalLiquidityForRangeResponse): unknown {
+  toJSON(message: QueryTotalLiquidityForRangeResponse): JsonSafe<QueryTotalLiquidityForRangeResponse> {
     const obj: any = {};
     if (message.liquidity) {
       obj.liquidity = message.liquidity.map(e => e ? LiquidityDepthWithRange.toJSON(e) : undefined);
@@ -1739,7 +1740,7 @@ export const QueryClaimableFeesRequest = {
       positionId: isSet(object.positionId) ? BigInt(object.positionId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryClaimableFeesRequest): unknown {
+  toJSON(message: QueryClaimableFeesRequest): JsonSafe<QueryClaimableFeesRequest> {
     const obj: any = {};
     message.positionId !== undefined && (obj.positionId = (message.positionId || BigInt(0)).toString());
     return obj;
@@ -1833,7 +1834,7 @@ export const QueryClaimableFeesResponse = {
       claimableFees: Array.isArray(object?.claimableFees) ? object.claimableFees.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryClaimableFeesResponse): unknown {
+  toJSON(message: QueryClaimableFeesResponse): JsonSafe<QueryClaimableFeesResponse> {
     const obj: any = {};
     if (message.claimableFees) {
       obj.claimableFees = message.claimableFees.map(e => e ? Coin.toJSON(e) : undefined);

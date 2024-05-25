@@ -2,6 +2,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** QueryGroupInfoRequest is the Query/GroupInfo request type. */
 export interface QueryGroupInfoRequest {
@@ -427,7 +428,7 @@ export const QueryGroupInfoRequest = {
     if (isSet(object.groupId)) obj.groupId = BigInt(object.groupId.toString());
     return obj;
   },
-  toJSON(message: QueryGroupInfoRequest): unknown {
+  toJSON(message: QueryGroupInfoRequest): JsonSafe<QueryGroupInfoRequest> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     return obj;
@@ -523,7 +524,7 @@ export const QueryGroupInfoResponse = {
     if (isSet(object.info)) obj.info = GroupInfo.fromJSON(object.info);
     return obj;
   },
-  toJSON(message: QueryGroupInfoResponse): unknown {
+  toJSON(message: QueryGroupInfoResponse): JsonSafe<QueryGroupInfoResponse> {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupInfo.toJSON(message.info) : undefined);
     return obj;
@@ -619,7 +620,7 @@ export const QueryGroupPolicyInfoRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryGroupPolicyInfoRequest): unknown {
+  toJSON(message: QueryGroupPolicyInfoRequest): JsonSafe<QueryGroupPolicyInfoRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -713,7 +714,7 @@ export const QueryGroupPolicyInfoResponse = {
     if (isSet(object.info)) obj.info = GroupPolicyInfo.fromJSON(object.info);
     return obj;
   },
-  toJSON(message: QueryGroupPolicyInfoResponse): unknown {
+  toJSON(message: QueryGroupPolicyInfoResponse): JsonSafe<QueryGroupPolicyInfoResponse> {
     const obj: any = {};
     message.info !== undefined && (obj.info = message.info ? GroupPolicyInfo.toJSON(message.info) : undefined);
     return obj;
@@ -817,7 +818,7 @@ export const QueryGroupMembersRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupMembersRequest): unknown {
+  toJSON(message: QueryGroupMembersRequest): JsonSafe<QueryGroupMembersRequest> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -932,7 +933,7 @@ export const QueryGroupMembersResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupMembersResponse): unknown {
+  toJSON(message: QueryGroupMembersResponse): JsonSafe<QueryGroupMembersResponse> {
     const obj: any = {};
     if (message.members) {
       obj.members = message.members.map(e => e ? GroupMember.toJSON(e) : undefined);
@@ -1055,7 +1056,7 @@ export const QueryGroupsByAdminRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByAdminRequest): unknown {
+  toJSON(message: QueryGroupsByAdminRequest): JsonSafe<QueryGroupsByAdminRequest> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1168,7 +1169,7 @@ export const QueryGroupsByAdminResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByAdminResponse): unknown {
+  toJSON(message: QueryGroupsByAdminResponse): JsonSafe<QueryGroupsByAdminResponse> {
     const obj: any = {};
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
@@ -1291,7 +1292,7 @@ export const QueryGroupPoliciesByGroupRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByGroupRequest): unknown {
+  toJSON(message: QueryGroupPoliciesByGroupRequest): JsonSafe<QueryGroupPoliciesByGroupRequest> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1406,7 +1407,7 @@ export const QueryGroupPoliciesByGroupResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByGroupResponse): unknown {
+  toJSON(message: QueryGroupPoliciesByGroupResponse): JsonSafe<QueryGroupPoliciesByGroupResponse> {
     const obj: any = {};
     if (message.groupPolicies) {
       obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
@@ -1529,7 +1530,7 @@ export const QueryGroupPoliciesByAdminRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByAdminRequest): unknown {
+  toJSON(message: QueryGroupPoliciesByAdminRequest): JsonSafe<QueryGroupPoliciesByAdminRequest> {
     const obj: any = {};
     message.admin !== undefined && (obj.admin = message.admin);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -1642,7 +1643,7 @@ export const QueryGroupPoliciesByAdminResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupPoliciesByAdminResponse): unknown {
+  toJSON(message: QueryGroupPoliciesByAdminResponse): JsonSafe<QueryGroupPoliciesByAdminResponse> {
     const obj: any = {};
     if (message.groupPolicies) {
       obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
@@ -1757,7 +1758,7 @@ export const QueryProposalRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryProposalRequest): unknown {
+  toJSON(message: QueryProposalRequest): JsonSafe<QueryProposalRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -1853,7 +1854,7 @@ export const QueryProposalResponse = {
     if (isSet(object.proposal)) obj.proposal = Proposal.fromJSON(object.proposal);
     return obj;
   },
-  toJSON(message: QueryProposalResponse): unknown {
+  toJSON(message: QueryProposalResponse): JsonSafe<QueryProposalResponse> {
     const obj: any = {};
     message.proposal !== undefined && (obj.proposal = message.proposal ? Proposal.toJSON(message.proposal) : undefined);
     return obj;
@@ -1957,7 +1958,7 @@ export const QueryProposalsByGroupPolicyRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProposalsByGroupPolicyRequest): unknown {
+  toJSON(message: QueryProposalsByGroupPolicyRequest): JsonSafe<QueryProposalsByGroupPolicyRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -2070,7 +2071,7 @@ export const QueryProposalsByGroupPolicyResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryProposalsByGroupPolicyResponse): unknown {
+  toJSON(message: QueryProposalsByGroupPolicyResponse): JsonSafe<QueryProposalsByGroupPolicyResponse> {
     const obj: any = {};
     if (message.proposals) {
       obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
@@ -2193,7 +2194,7 @@ export const QueryVoteByProposalVoterRequest = {
     if (isSet(object.voter)) obj.voter = String(object.voter);
     return obj;
   },
-  toJSON(message: QueryVoteByProposalVoterRequest): unknown {
+  toJSON(message: QueryVoteByProposalVoterRequest): JsonSafe<QueryVoteByProposalVoterRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -2298,7 +2299,7 @@ export const QueryVoteByProposalVoterResponse = {
     if (isSet(object.vote)) obj.vote = Vote.fromJSON(object.vote);
     return obj;
   },
-  toJSON(message: QueryVoteByProposalVoterResponse): unknown {
+  toJSON(message: QueryVoteByProposalVoterResponse): JsonSafe<QueryVoteByProposalVoterResponse> {
     const obj: any = {};
     message.vote !== undefined && (obj.vote = message.vote ? Vote.toJSON(message.vote) : undefined);
     return obj;
@@ -2402,7 +2403,7 @@ export const QueryVotesByProposalRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesByProposalRequest): unknown {
+  toJSON(message: QueryVotesByProposalRequest): JsonSafe<QueryVotesByProposalRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -2517,7 +2518,7 @@ export const QueryVotesByProposalResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesByProposalResponse): unknown {
+  toJSON(message: QueryVotesByProposalResponse): JsonSafe<QueryVotesByProposalResponse> {
     const obj: any = {};
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
@@ -2640,7 +2641,7 @@ export const QueryVotesByVoterRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesByVoterRequest): unknown {
+  toJSON(message: QueryVotesByVoterRequest): JsonSafe<QueryVotesByVoterRequest> {
     const obj: any = {};
     message.voter !== undefined && (obj.voter = message.voter);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -2753,7 +2754,7 @@ export const QueryVotesByVoterResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryVotesByVoterResponse): unknown {
+  toJSON(message: QueryVotesByVoterResponse): JsonSafe<QueryVotesByVoterResponse> {
     const obj: any = {};
     if (message.votes) {
       obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
@@ -2876,7 +2877,7 @@ export const QueryGroupsByMemberRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByMemberRequest): unknown {
+  toJSON(message: QueryGroupsByMemberRequest): JsonSafe<QueryGroupsByMemberRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -2989,7 +2990,7 @@ export const QueryGroupsByMemberResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryGroupsByMemberResponse): unknown {
+  toJSON(message: QueryGroupsByMemberResponse): JsonSafe<QueryGroupsByMemberResponse> {
     const obj: any = {};
     if (message.groups) {
       obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
@@ -3104,7 +3105,7 @@ export const QueryTallyResultRequest = {
     if (isSet(object.proposalId)) obj.proposalId = BigInt(object.proposalId.toString());
     return obj;
   },
-  toJSON(message: QueryTallyResultRequest): unknown {
+  toJSON(message: QueryTallyResultRequest): JsonSafe<QueryTallyResultRequest> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || BigInt(0)).toString());
     return obj;
@@ -3200,7 +3201,7 @@ export const QueryTallyResultResponse = {
     if (isSet(object.tally)) obj.tally = TallyResult.fromJSON(object.tally);
     return obj;
   },
-  toJSON(message: QueryTallyResultResponse): unknown {
+  toJSON(message: QueryTallyResultResponse): JsonSafe<QueryTallyResultResponse> {
     const obj: any = {};
     message.tally !== undefined && (obj.tally = message.tally ? TallyResult.toJSON(message.tally) : undefined);
     return obj;

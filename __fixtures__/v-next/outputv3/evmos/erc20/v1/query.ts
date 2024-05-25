@@ -3,7 +3,6 @@ import { TokenPair, TokenPairAmino, TokenPairSDKType } from "./erc20";
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /**
  * QueryTokenPairsRequest is the request type for the Query/TokenPairs RPC
@@ -181,11 +180,6 @@ export const QueryTokenPairsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryTokenPairsRequest): JsonSafe<QueryTokenPairsRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryTokenPairsRequest>): QueryTokenPairsRequest {
     const message = createBaseQueryTokenPairsRequest();
     if (object.pagination !== undefined && object.pagination !== null) {
@@ -269,16 +263,6 @@ export const QueryTokenPairsResponse = {
     const obj = createBaseQueryTokenPairsResponse();
     if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryTokenPairsResponse): JsonSafe<QueryTokenPairsResponse> {
-    const obj: any = {};
-    if (message.tokenPairs) {
-      obj.tokenPairs = message.tokenPairs.map(e => e ? TokenPair.toJSON(e) : undefined);
-    } else {
-      obj.tokenPairs = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTokenPairsResponse>): QueryTokenPairsResponse {
@@ -371,11 +355,6 @@ export const QueryTokenPairRequest = {
     if (isSet(object.token)) obj.token = String(object.token);
     return obj;
   },
-  toJSON(message: QueryTokenPairRequest): JsonSafe<QueryTokenPairRequest> {
-    const obj: any = {};
-    message.token !== undefined && (obj.token = message.token);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryTokenPairRequest>): QueryTokenPairRequest {
     const message = createBaseQueryTokenPairRequest();
     message.token = object.token ?? "";
@@ -451,11 +430,6 @@ export const QueryTokenPairResponse = {
     if (isSet(object.tokenPair)) obj.tokenPair = TokenPair.fromJSON(object.tokenPair);
     return obj;
   },
-  toJSON(message: QueryTokenPairResponse): JsonSafe<QueryTokenPairResponse> {
-    const obj: any = {};
-    message.tokenPair !== undefined && (obj.tokenPair = message.tokenPair ? TokenPair.toJSON(message.tokenPair) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryTokenPairResponse>): QueryTokenPairResponse {
     const message = createBaseQueryTokenPairResponse();
     if (object.tokenPair !== undefined && object.tokenPair !== null) {
@@ -524,10 +498,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -593,11 +563,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {

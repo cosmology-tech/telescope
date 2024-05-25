@@ -4,7 +4,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
@@ -491,10 +490,6 @@ export const ModuleBalanceRequest = {
     const obj = createBaseModuleBalanceRequest();
     return obj;
   },
-  toJSON(_: ModuleBalanceRequest): JsonSafe<ModuleBalanceRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ModuleBalanceRequest>): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
@@ -561,15 +556,6 @@ export const ModuleBalanceResponse = {
   fromJSON(object: any): ModuleBalanceResponse {
     const obj = createBaseModuleBalanceResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ModuleBalanceResponse): JsonSafe<ModuleBalanceResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleBalanceResponse>): ModuleBalanceResponse {
@@ -645,10 +631,6 @@ export const ModuleLockedAmountRequest = {
     const obj = createBaseModuleLockedAmountRequest();
     return obj;
   },
-  toJSON(_: ModuleLockedAmountRequest): JsonSafe<ModuleLockedAmountRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ModuleLockedAmountRequest>): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
@@ -715,15 +697,6 @@ export const ModuleLockedAmountResponse = {
   fromJSON(object: any): ModuleLockedAmountResponse {
     const obj = createBaseModuleLockedAmountResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ModuleLockedAmountResponse): JsonSafe<ModuleLockedAmountResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleLockedAmountResponse>): ModuleLockedAmountResponse {
@@ -808,11 +781,6 @@ export const AccountUnlockableCoinsRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: AccountUnlockableCoinsRequest): JsonSafe<AccountUnlockableCoinsRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountUnlockableCoinsRequest>): AccountUnlockableCoinsRequest {
     const message = createBaseAccountUnlockableCoinsRequest();
     message.owner = object.owner ?? "";
@@ -887,15 +855,6 @@ export const AccountUnlockableCoinsResponse = {
   fromJSON(object: any): AccountUnlockableCoinsResponse {
     const obj = createBaseAccountUnlockableCoinsResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountUnlockableCoinsResponse): JsonSafe<AccountUnlockableCoinsResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountUnlockableCoinsResponse>): AccountUnlockableCoinsResponse {
@@ -980,11 +939,6 @@ export const AccountUnlockingCoinsRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: AccountUnlockingCoinsRequest): JsonSafe<AccountUnlockingCoinsRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountUnlockingCoinsRequest>): AccountUnlockingCoinsRequest {
     const message = createBaseAccountUnlockingCoinsRequest();
     message.owner = object.owner ?? "";
@@ -1059,15 +1013,6 @@ export const AccountUnlockingCoinsResponse = {
   fromJSON(object: any): AccountUnlockingCoinsResponse {
     const obj = createBaseAccountUnlockingCoinsResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountUnlockingCoinsResponse): JsonSafe<AccountUnlockingCoinsResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountUnlockingCoinsResponse>): AccountUnlockingCoinsResponse {
@@ -1152,11 +1097,6 @@ export const AccountLockedCoinsRequest = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: AccountLockedCoinsRequest): JsonSafe<AccountLockedCoinsRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedCoinsRequest>): AccountLockedCoinsRequest {
     const message = createBaseAccountLockedCoinsRequest();
     message.owner = object.owner ?? "";
@@ -1231,15 +1171,6 @@ export const AccountLockedCoinsResponse = {
   fromJSON(object: any): AccountLockedCoinsResponse {
     const obj = createBaseAccountLockedCoinsResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedCoinsResponse): JsonSafe<AccountLockedCoinsResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedCoinsResponse>): AccountLockedCoinsResponse {
@@ -1332,12 +1263,6 @@ export const AccountLockedPastTimeRequest = {
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
     return obj;
   },
-  toJSON(message: AccountLockedPastTimeRequest): JsonSafe<AccountLockedPastTimeRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeRequest>): AccountLockedPastTimeRequest {
     const message = createBaseAccountLockedPastTimeRequest();
     message.owner = object.owner ?? "";
@@ -1419,15 +1344,6 @@ export const AccountLockedPastTimeResponse = {
   fromJSON(object: any): AccountLockedPastTimeResponse {
     const obj = createBaseAccountLockedPastTimeResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedPastTimeResponse): JsonSafe<AccountLockedPastTimeResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedPastTimeResponse>): AccountLockedPastTimeResponse {
@@ -1520,12 +1436,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
     return obj;
   },
-  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyRequest): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
@@ -1607,15 +1517,6 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const obj = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyResponse): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyResponse>): AccountLockedPastTimeNotUnlockingOnlyResponse {
@@ -1708,12 +1609,6 @@ export const AccountUnlockedBeforeTimeRequest = {
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
     return obj;
   },
-  toJSON(message: AccountUnlockedBeforeTimeRequest): JsonSafe<AccountUnlockedBeforeTimeRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeRequest>): AccountUnlockedBeforeTimeRequest {
     const message = createBaseAccountUnlockedBeforeTimeRequest();
     message.owner = object.owner ?? "";
@@ -1795,15 +1690,6 @@ export const AccountUnlockedBeforeTimeResponse = {
   fromJSON(object: any): AccountUnlockedBeforeTimeResponse {
     const obj = createBaseAccountUnlockedBeforeTimeResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountUnlockedBeforeTimeResponse): JsonSafe<AccountUnlockedBeforeTimeResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeResponse>): AccountUnlockedBeforeTimeResponse {
@@ -1904,13 +1790,6 @@ export const AccountLockedPastTimeDenomRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: AccountLockedPastTimeDenomRequest): JsonSafe<AccountLockedPastTimeDenomRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeDenomRequest>): AccountLockedPastTimeDenomRequest {
     const message = createBaseAccountLockedPastTimeDenomRequest();
     message.owner = object.owner ?? "";
@@ -1999,15 +1878,6 @@ export const AccountLockedPastTimeDenomResponse = {
   fromJSON(object: any): AccountLockedPastTimeDenomResponse {
     const obj = createBaseAccountLockedPastTimeDenomResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedPastTimeDenomResponse): JsonSafe<AccountLockedPastTimeDenomResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedPastTimeDenomResponse>): AccountLockedPastTimeDenomResponse {
@@ -2100,12 +1970,6 @@ export const LockedDenomRequest = {
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
   },
-  toJSON(message: LockedDenomRequest): JsonSafe<LockedDenomRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LockedDenomRequest>): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
     message.denom = object.denom ?? "";
@@ -2191,11 +2055,6 @@ export const LockedDenomResponse = {
     if (isSet(object.amount)) obj.amount = String(object.amount);
     return obj;
   },
-  toJSON(message: LockedDenomResponse): JsonSafe<LockedDenomResponse> {
-    const obj: any = {};
-    message.amount !== undefined && (obj.amount = message.amount);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LockedDenomResponse>): LockedDenomResponse {
     const message = createBaseLockedDenomResponse();
     message.amount = object.amount ?? "";
@@ -2270,11 +2129,6 @@ export const LockedRequest = {
   fromJSON(object: any): LockedRequest {
     const obj = createBaseLockedRequest();
     if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
-    return obj;
-  },
-  toJSON(message: LockedRequest): JsonSafe<LockedRequest> {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
@@ -2355,11 +2209,6 @@ export const LockedResponse = {
     if (isSet(object.lock)) obj.lock = PeriodLock.fromJSON(object.lock);
     return obj;
   },
-  toJSON(message: LockedResponse): JsonSafe<LockedResponse> {
-    const obj: any = {};
-    message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toJSON(message.lock) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<LockedResponse>): LockedResponse {
     const message = createBaseLockedResponse();
     if (object.lock !== undefined && object.lock !== null) {
@@ -2438,11 +2287,6 @@ export const SyntheticLockupsByLockupIDRequest = {
     if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
     return obj;
   },
-  toJSON(message: SyntheticLockupsByLockupIDRequest): JsonSafe<SyntheticLockupsByLockupIDRequest> {
-    const obj: any = {};
-    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
     if (object.lockId !== undefined && object.lockId !== null) {
@@ -2519,15 +2363,6 @@ export const SyntheticLockupsByLockupIDResponse = {
   fromJSON(object: any): SyntheticLockupsByLockupIDResponse {
     const obj = createBaseSyntheticLockupsByLockupIDResponse();
     if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: SyntheticLockupsByLockupIDResponse): JsonSafe<SyntheticLockupsByLockupIDResponse> {
-    const obj: any = {};
-    if (message.syntheticLocks) {
-      obj.syntheticLocks = message.syntheticLocks.map(e => e ? SyntheticLock.toJSON(e) : undefined);
-    } else {
-      obj.syntheticLocks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDResponse>): SyntheticLockupsByLockupIDResponse {
@@ -2620,12 +2455,6 @@ export const AccountLockedLongerDurationRequest = {
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
   },
-  toJSON(message: AccountLockedLongerDurationRequest): JsonSafe<AccountLockedLongerDurationRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationRequest>): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
     message.owner = object.owner ?? "";
@@ -2709,15 +2538,6 @@ export const AccountLockedLongerDurationResponse = {
   fromJSON(object: any): AccountLockedLongerDurationResponse {
     const obj = createBaseAccountLockedLongerDurationResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedLongerDurationResponse): JsonSafe<AccountLockedLongerDurationResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationResponse>): AccountLockedLongerDurationResponse {
@@ -2810,12 +2630,6 @@ export const AccountLockedDurationRequest = {
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
   },
-  toJSON(message: AccountLockedDurationRequest): JsonSafe<AccountLockedDurationRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedDurationRequest>): AccountLockedDurationRequest {
     const message = createBaseAccountLockedDurationRequest();
     message.owner = object.owner ?? "";
@@ -2899,15 +2713,6 @@ export const AccountLockedDurationResponse = {
   fromJSON(object: any): AccountLockedDurationResponse {
     const obj = createBaseAccountLockedDurationResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedDurationResponse): JsonSafe<AccountLockedDurationResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedDurationResponse>): AccountLockedDurationResponse {
@@ -3000,12 +2805,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
   },
-  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
@@ -3089,15 +2888,6 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const obj = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyResponse>): AccountLockedLongerDurationNotUnlockingOnlyResponse {
@@ -3198,13 +2988,6 @@ export const AccountLockedLongerDurationDenomRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: AccountLockedLongerDurationDenomRequest): JsonSafe<AccountLockedLongerDurationDenomRequest> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomRequest>): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
     message.owner = object.owner ?? "";
@@ -3297,15 +3080,6 @@ export const AccountLockedLongerDurationDenomResponse = {
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     return obj;
   },
-  toJSON(message: AccountLockedLongerDurationDenomResponse): JsonSafe<AccountLockedLongerDurationDenomResponse> {
-    const obj: any = {};
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomResponse>): AccountLockedLongerDurationDenomResponse {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
@@ -3379,10 +3153,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -3449,11 +3219,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {

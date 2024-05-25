@@ -6,6 +6,7 @@ import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
 import { Params } from "./genesis";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * QueryIncentivesRequest is the request type for the Query/Incentives RPC
@@ -148,7 +149,7 @@ export const QueryIncentivesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryIncentivesRequest): unknown {
+  toJSON(message: QueryIncentivesRequest): JsonSafe<QueryIncentivesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -201,7 +202,7 @@ export const QueryIncentivesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryIncentivesResponse): unknown {
+  toJSON(message: QueryIncentivesResponse): JsonSafe<QueryIncentivesResponse> {
     const obj: any = {};
     if (message.incentives) {
       obj.incentives = message.incentives.map(e => e ? Incentive.toJSON(e) : undefined);
@@ -252,7 +253,7 @@ export const QueryIncentiveRequest = {
       contract: isSet(object.contract) ? String(object.contract) : ""
     };
   },
-  toJSON(message: QueryIncentiveRequest): unknown {
+  toJSON(message: QueryIncentiveRequest): JsonSafe<QueryIncentiveRequest> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     return obj;
@@ -297,7 +298,7 @@ export const QueryIncentiveResponse = {
       incentive: isSet(object.incentive) ? Incentive.fromJSON(object.incentive) : undefined
     };
   },
-  toJSON(message: QueryIncentiveResponse): unknown {
+  toJSON(message: QueryIncentiveResponse): JsonSafe<QueryIncentiveResponse> {
     const obj: any = {};
     message.incentive !== undefined && (obj.incentive = message.incentive ? Incentive.toJSON(message.incentive) : undefined);
     return obj;
@@ -350,7 +351,7 @@ export const QueryGasMetersRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryGasMetersRequest): unknown {
+  toJSON(message: QueryGasMetersRequest): JsonSafe<QueryGasMetersRequest> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -405,7 +406,7 @@ export const QueryGasMetersResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryGasMetersResponse): unknown {
+  toJSON(message: QueryGasMetersResponse): JsonSafe<QueryGasMetersResponse> {
     const obj: any = {};
     if (message.gasMeters) {
       obj.gasMeters = message.gasMeters.map(e => e ? GasMeter.toJSON(e) : undefined);
@@ -464,7 +465,7 @@ export const QueryGasMeterRequest = {
       participant: isSet(object.participant) ? String(object.participant) : ""
     };
   },
-  toJSON(message: QueryGasMeterRequest): unknown {
+  toJSON(message: QueryGasMeterRequest): JsonSafe<QueryGasMeterRequest> {
     const obj: any = {};
     message.contract !== undefined && (obj.contract = message.contract);
     message.participant !== undefined && (obj.participant = message.participant);
@@ -511,7 +512,7 @@ export const QueryGasMeterResponse = {
       gasMeter: isSet(object.gasMeter) ? Long.fromValue(object.gasMeter) : Long.UZERO
     };
   },
-  toJSON(message: QueryGasMeterResponse): unknown {
+  toJSON(message: QueryGasMeterResponse): JsonSafe<QueryGasMeterResponse> {
     const obj: any = {};
     message.gasMeter !== undefined && (obj.gasMeter = (message.gasMeter || Long.UZERO).toString());
     return obj;
@@ -556,7 +557,7 @@ export const QueryAllocationMetersRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAllocationMetersRequest): unknown {
+  toJSON(message: QueryAllocationMetersRequest): JsonSafe<QueryAllocationMetersRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -609,7 +610,7 @@ export const QueryAllocationMetersResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAllocationMetersResponse): unknown {
+  toJSON(message: QueryAllocationMetersResponse): JsonSafe<QueryAllocationMetersResponse> {
     const obj: any = {};
     if (message.allocationMeters) {
       obj.allocationMeters = message.allocationMeters.map(e => e ? DecCoin.toJSON(e) : undefined);
@@ -660,7 +661,7 @@ export const QueryAllocationMeterRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: QueryAllocationMeterRequest): unknown {
+  toJSON(message: QueryAllocationMeterRequest): JsonSafe<QueryAllocationMeterRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -705,7 +706,7 @@ export const QueryAllocationMeterResponse = {
       allocationMeter: isSet(object.allocationMeter) ? DecCoin.fromJSON(object.allocationMeter) : undefined
     };
   },
-  toJSON(message: QueryAllocationMeterResponse): unknown {
+  toJSON(message: QueryAllocationMeterResponse): JsonSafe<QueryAllocationMeterResponse> {
     const obj: any = {};
     message.allocationMeter !== undefined && (obj.allocationMeter = message.allocationMeter ? DecCoin.toJSON(message.allocationMeter) : undefined);
     return obj;
@@ -740,7 +741,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -783,7 +784,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

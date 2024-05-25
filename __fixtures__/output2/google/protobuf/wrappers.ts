@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * Wrapper message for `double`.
@@ -118,7 +119,7 @@ export const DoubleValue = {
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-  toJSON(message: DoubleValue): unknown {
+  toJSON(message: DoubleValue): JsonSafe<DoubleValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
     return obj;
@@ -163,7 +164,7 @@ export const FloatValue = {
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-  toJSON(message: FloatValue): unknown {
+  toJSON(message: FloatValue): JsonSafe<FloatValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
     return obj;
@@ -208,7 +209,7 @@ export const Int64Value = {
       value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
-  toJSON(message: Int64Value): unknown {
+  toJSON(message: Int64Value): JsonSafe<Int64Value> {
     const obj: any = {};
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
     return obj;
@@ -253,7 +254,7 @@ export const UInt64Value = {
       value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
     };
   },
-  toJSON(message: UInt64Value): unknown {
+  toJSON(message: UInt64Value): JsonSafe<UInt64Value> {
     const obj: any = {};
     message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());
     return obj;
@@ -298,7 +299,7 @@ export const Int32Value = {
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-  toJSON(message: Int32Value): unknown {
+  toJSON(message: Int32Value): JsonSafe<Int32Value> {
     const obj: any = {};
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
@@ -343,7 +344,7 @@ export const UInt32Value = {
       value: isSet(object.value) ? Number(object.value) : 0
     };
   },
-  toJSON(message: UInt32Value): unknown {
+  toJSON(message: UInt32Value): JsonSafe<UInt32Value> {
     const obj: any = {};
     message.value !== undefined && (obj.value = Math.round(message.value));
     return obj;
@@ -388,7 +389,7 @@ export const BoolValue = {
       value: isSet(object.value) ? Boolean(object.value) : false
     };
   },
-  toJSON(message: BoolValue): unknown {
+  toJSON(message: BoolValue): JsonSafe<BoolValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
     return obj;
@@ -433,7 +434,7 @@ export const StringValue = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: StringValue): unknown {
+  toJSON(message: StringValue): JsonSafe<StringValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
     return obj;
@@ -478,7 +479,7 @@ export const BytesValue = {
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
-  toJSON(message: BytesValue): unknown {
+  toJSON(message: BytesValue): JsonSafe<BytesValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;

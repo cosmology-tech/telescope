@@ -2,6 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { RouteStatistics, RouteStatisticsSDKType, TokenPairArbRoutes, TokenPairArbRoutesSDKType, PoolWeights, PoolWeightsSDKType, BaseDenom, BaseDenomSDKType } from "./protorev";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.protorev.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
@@ -504,7 +505,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -587,7 +588,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
@@ -671,7 +672,7 @@ export const QueryGetProtoRevNumberOfTradesRequest = {
   fromJSON(_: any): QueryGetProtoRevNumberOfTradesRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevNumberOfTradesRequest): unknown {
+  toJSON(_: QueryGetProtoRevNumberOfTradesRequest): JsonSafe<QueryGetProtoRevNumberOfTradesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -754,7 +755,7 @@ export const QueryGetProtoRevNumberOfTradesResponse = {
       numberOfTrades: isSet(object.numberOfTrades) ? String(object.numberOfTrades) : ""
     };
   },
-  toJSON(message: QueryGetProtoRevNumberOfTradesResponse): unknown {
+  toJSON(message: QueryGetProtoRevNumberOfTradesResponse): JsonSafe<QueryGetProtoRevNumberOfTradesResponse> {
     const obj: any = {};
     message.numberOfTrades !== undefined && (obj.numberOfTrades = message.numberOfTrades);
     return obj;
@@ -848,7 +849,7 @@ export const QueryGetProtoRevProfitsByDenomRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: QueryGetProtoRevProfitsByDenomRequest): unknown {
+  toJSON(message: QueryGetProtoRevProfitsByDenomRequest): JsonSafe<QueryGetProtoRevProfitsByDenomRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -942,7 +943,7 @@ export const QueryGetProtoRevProfitsByDenomResponse = {
       profit: isSet(object.profit) ? Coin.fromJSON(object.profit) : undefined
     };
   },
-  toJSON(message: QueryGetProtoRevProfitsByDenomResponse): unknown {
+  toJSON(message: QueryGetProtoRevProfitsByDenomResponse): JsonSafe<QueryGetProtoRevProfitsByDenomResponse> {
     const obj: any = {};
     message.profit !== undefined && (obj.profit = message.profit ? Coin.toJSON(message.profit) : undefined);
     return obj;
@@ -1026,7 +1027,7 @@ export const QueryGetProtoRevAllProfitsRequest = {
   fromJSON(_: any): QueryGetProtoRevAllProfitsRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevAllProfitsRequest): unknown {
+  toJSON(_: QueryGetProtoRevAllProfitsRequest): JsonSafe<QueryGetProtoRevAllProfitsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1109,7 +1110,7 @@ export const QueryGetProtoRevAllProfitsResponse = {
       profits: Array.isArray(object?.profits) ? object.profits.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryGetProtoRevAllProfitsResponse): unknown {
+  toJSON(message: QueryGetProtoRevAllProfitsResponse): JsonSafe<QueryGetProtoRevAllProfitsResponse> {
     const obj: any = {};
     if (message.profits) {
       obj.profits = message.profits.map(e => e ? Coin.toJSON(e) : undefined);
@@ -1222,7 +1223,7 @@ export const QueryGetProtoRevStatisticsByRouteRequest = {
       route: Array.isArray(object?.route) ? object.route.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: QueryGetProtoRevStatisticsByRouteRequest): unknown {
+  toJSON(message: QueryGetProtoRevStatisticsByRouteRequest): JsonSafe<QueryGetProtoRevStatisticsByRouteRequest> {
     const obj: any = {};
     if (message.route) {
       obj.route = message.route.map(e => (e || BigInt(0)).toString());
@@ -1326,7 +1327,7 @@ export const QueryGetProtoRevStatisticsByRouteResponse = {
       statistics: isSet(object.statistics) ? RouteStatistics.fromJSON(object.statistics) : undefined
     };
   },
-  toJSON(message: QueryGetProtoRevStatisticsByRouteResponse): unknown {
+  toJSON(message: QueryGetProtoRevStatisticsByRouteResponse): JsonSafe<QueryGetProtoRevStatisticsByRouteResponse> {
     const obj: any = {};
     message.statistics !== undefined && (obj.statistics = message.statistics ? RouteStatistics.toJSON(message.statistics) : undefined);
     return obj;
@@ -1410,7 +1411,7 @@ export const QueryGetProtoRevAllRouteStatisticsRequest = {
   fromJSON(_: any): QueryGetProtoRevAllRouteStatisticsRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevAllRouteStatisticsRequest): unknown {
+  toJSON(_: QueryGetProtoRevAllRouteStatisticsRequest): JsonSafe<QueryGetProtoRevAllRouteStatisticsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1493,7 +1494,7 @@ export const QueryGetProtoRevAllRouteStatisticsResponse = {
       statistics: Array.isArray(object?.statistics) ? object.statistics.map((e: any) => RouteStatistics.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryGetProtoRevAllRouteStatisticsResponse): unknown {
+  toJSON(message: QueryGetProtoRevAllRouteStatisticsResponse): JsonSafe<QueryGetProtoRevAllRouteStatisticsResponse> {
     const obj: any = {};
     if (message.statistics) {
       obj.statistics = message.statistics.map(e => e ? RouteStatistics.toJSON(e) : undefined);
@@ -1587,7 +1588,7 @@ export const QueryGetProtoRevTokenPairArbRoutesRequest = {
   fromJSON(_: any): QueryGetProtoRevTokenPairArbRoutesRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevTokenPairArbRoutesRequest): unknown {
+  toJSON(_: QueryGetProtoRevTokenPairArbRoutesRequest): JsonSafe<QueryGetProtoRevTokenPairArbRoutesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1670,7 +1671,7 @@ export const QueryGetProtoRevTokenPairArbRoutesResponse = {
       routes: Array.isArray(object?.routes) ? object.routes.map((e: any) => TokenPairArbRoutes.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryGetProtoRevTokenPairArbRoutesResponse): unknown {
+  toJSON(message: QueryGetProtoRevTokenPairArbRoutesResponse): JsonSafe<QueryGetProtoRevTokenPairArbRoutesResponse> {
     const obj: any = {};
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? TokenPairArbRoutes.toJSON(e) : undefined);
@@ -1764,7 +1765,7 @@ export const QueryGetProtoRevAdminAccountRequest = {
   fromJSON(_: any): QueryGetProtoRevAdminAccountRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevAdminAccountRequest): unknown {
+  toJSON(_: QueryGetProtoRevAdminAccountRequest): JsonSafe<QueryGetProtoRevAdminAccountRequest> {
     const obj: any = {};
     return obj;
   },
@@ -1847,7 +1848,7 @@ export const QueryGetProtoRevAdminAccountResponse = {
       adminAccount: isSet(object.adminAccount) ? String(object.adminAccount) : ""
     };
   },
-  toJSON(message: QueryGetProtoRevAdminAccountResponse): unknown {
+  toJSON(message: QueryGetProtoRevAdminAccountResponse): JsonSafe<QueryGetProtoRevAdminAccountResponse> {
     const obj: any = {};
     message.adminAccount !== undefined && (obj.adminAccount = message.adminAccount);
     return obj;
@@ -1931,7 +1932,7 @@ export const QueryGetProtoRevDeveloperAccountRequest = {
   fromJSON(_: any): QueryGetProtoRevDeveloperAccountRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevDeveloperAccountRequest): unknown {
+  toJSON(_: QueryGetProtoRevDeveloperAccountRequest): JsonSafe<QueryGetProtoRevDeveloperAccountRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2014,7 +2015,7 @@ export const QueryGetProtoRevDeveloperAccountResponse = {
       developerAccount: isSet(object.developerAccount) ? String(object.developerAccount) : ""
     };
   },
-  toJSON(message: QueryGetProtoRevDeveloperAccountResponse): unknown {
+  toJSON(message: QueryGetProtoRevDeveloperAccountResponse): JsonSafe<QueryGetProtoRevDeveloperAccountResponse> {
     const obj: any = {};
     message.developerAccount !== undefined && (obj.developerAccount = message.developerAccount);
     return obj;
@@ -2098,7 +2099,7 @@ export const QueryGetProtoRevPoolWeightsRequest = {
   fromJSON(_: any): QueryGetProtoRevPoolWeightsRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevPoolWeightsRequest): unknown {
+  toJSON(_: QueryGetProtoRevPoolWeightsRequest): JsonSafe<QueryGetProtoRevPoolWeightsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2181,7 +2182,7 @@ export const QueryGetProtoRevPoolWeightsResponse = {
       poolWeights: isSet(object.poolWeights) ? PoolWeights.fromJSON(object.poolWeights) : undefined
     };
   },
-  toJSON(message: QueryGetProtoRevPoolWeightsResponse): unknown {
+  toJSON(message: QueryGetProtoRevPoolWeightsResponse): JsonSafe<QueryGetProtoRevPoolWeightsResponse> {
     const obj: any = {};
     message.poolWeights !== undefined && (obj.poolWeights = message.poolWeights ? PoolWeights.toJSON(message.poolWeights) : undefined);
     return obj;
@@ -2265,7 +2266,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockRequest = {
   fromJSON(_: any): QueryGetProtoRevMaxPoolPointsPerBlockRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevMaxPoolPointsPerBlockRequest): unknown {
+  toJSON(_: QueryGetProtoRevMaxPoolPointsPerBlockRequest): JsonSafe<QueryGetProtoRevMaxPoolPointsPerBlockRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2348,7 +2349,7 @@ export const QueryGetProtoRevMaxPoolPointsPerBlockResponse = {
       maxPoolPointsPerBlock: isSet(object.maxPoolPointsPerBlock) ? BigInt(object.maxPoolPointsPerBlock.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): unknown {
+  toJSON(message: QueryGetProtoRevMaxPoolPointsPerBlockResponse): JsonSafe<QueryGetProtoRevMaxPoolPointsPerBlockResponse> {
     const obj: any = {};
     message.maxPoolPointsPerBlock !== undefined && (obj.maxPoolPointsPerBlock = (message.maxPoolPointsPerBlock || BigInt(0)).toString());
     return obj;
@@ -2432,7 +2433,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxRequest = {
   fromJSON(_: any): QueryGetProtoRevMaxPoolPointsPerTxRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevMaxPoolPointsPerTxRequest): unknown {
+  toJSON(_: QueryGetProtoRevMaxPoolPointsPerTxRequest): JsonSafe<QueryGetProtoRevMaxPoolPointsPerTxRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2515,7 +2516,7 @@ export const QueryGetProtoRevMaxPoolPointsPerTxResponse = {
       maxPoolPointsPerTx: isSet(object.maxPoolPointsPerTx) ? BigInt(object.maxPoolPointsPerTx.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): unknown {
+  toJSON(message: QueryGetProtoRevMaxPoolPointsPerTxResponse): JsonSafe<QueryGetProtoRevMaxPoolPointsPerTxResponse> {
     const obj: any = {};
     message.maxPoolPointsPerTx !== undefined && (obj.maxPoolPointsPerTx = (message.maxPoolPointsPerTx || BigInt(0)).toString());
     return obj;
@@ -2599,7 +2600,7 @@ export const QueryGetProtoRevBaseDenomsRequest = {
   fromJSON(_: any): QueryGetProtoRevBaseDenomsRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevBaseDenomsRequest): unknown {
+  toJSON(_: QueryGetProtoRevBaseDenomsRequest): JsonSafe<QueryGetProtoRevBaseDenomsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2682,7 +2683,7 @@ export const QueryGetProtoRevBaseDenomsResponse = {
       baseDenoms: Array.isArray(object?.baseDenoms) ? object.baseDenoms.map((e: any) => BaseDenom.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryGetProtoRevBaseDenomsResponse): unknown {
+  toJSON(message: QueryGetProtoRevBaseDenomsResponse): JsonSafe<QueryGetProtoRevBaseDenomsResponse> {
     const obj: any = {};
     if (message.baseDenoms) {
       obj.baseDenoms = message.baseDenoms.map(e => e ? BaseDenom.toJSON(e) : undefined);
@@ -2776,7 +2777,7 @@ export const QueryGetProtoRevEnabledRequest = {
   fromJSON(_: any): QueryGetProtoRevEnabledRequest {
     return {};
   },
-  toJSON(_: QueryGetProtoRevEnabledRequest): unknown {
+  toJSON(_: QueryGetProtoRevEnabledRequest): JsonSafe<QueryGetProtoRevEnabledRequest> {
     const obj: any = {};
     return obj;
   },
@@ -2859,7 +2860,7 @@ export const QueryGetProtoRevEnabledResponse = {
       enabled: isSet(object.enabled) ? Boolean(object.enabled) : false
     };
   },
-  toJSON(message: QueryGetProtoRevEnabledResponse): unknown {
+  toJSON(message: QueryGetProtoRevEnabledResponse): JsonSafe<QueryGetProtoRevEnabledResponse> {
     const obj: any = {};
     message.enabled !== undefined && (obj.enabled = message.enabled);
     return obj;

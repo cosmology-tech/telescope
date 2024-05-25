@@ -97,50 +97,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createDeployment(value: MsgCreateDeployment) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgCreateDeployment",
-        value: MsgCreateDeployment.toJSON(value)
-      };
-    },
-    depositDeployment(value: MsgDepositDeployment) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgDepositDeployment",
-        value: MsgDepositDeployment.toJSON(value)
-      };
-    },
-    updateDeployment(value: MsgUpdateDeployment) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgUpdateDeployment",
-        value: MsgUpdateDeployment.toJSON(value)
-      };
-    },
-    closeDeployment(value: MsgCloseDeployment) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgCloseDeployment",
-        value: MsgCloseDeployment.toJSON(value)
-      };
-    },
-    closeGroup(value: MsgCloseGroup) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgCloseGroup",
-        value: MsgCloseGroup.toJSON(value)
-      };
-    },
-    pauseGroup(value: MsgPauseGroup) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgPauseGroup",
-        value: MsgPauseGroup.toJSON(value)
-      };
-    },
-    startGroup(value: MsgStartGroup) {
-      return {
-        typeUrl: "/akash.deployment.v1beta1.MsgStartGroup",
-        value: MsgStartGroup.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createDeployment(value: any) {
       return {

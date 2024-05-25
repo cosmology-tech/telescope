@@ -2,6 +2,7 @@ import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAm
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** ===================== MsgSwapExactAmountIn */
 export interface MsgSwapExactAmountIn {
@@ -118,7 +119,7 @@ export const MsgSwapExactAmountIn = {
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountIn): unknown {
+  toJSON(message: MsgSwapExactAmountIn): JsonSafe<MsgSwapExactAmountIn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {
@@ -249,7 +250,7 @@ export const MsgSwapExactAmountInResponse = {
       tokenOutAmount: isSet(object.tokenOutAmount) ? String(object.tokenOutAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountInResponse): unknown {
+  toJSON(message: MsgSwapExactAmountInResponse): JsonSafe<MsgSwapExactAmountInResponse> {
     const obj: any = {};
     message.tokenOutAmount !== undefined && (obj.tokenOutAmount = message.tokenOutAmount);
     return obj;
@@ -367,7 +368,7 @@ export const MsgSwapExactAmountOut = {
       tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
     };
   },
-  toJSON(message: MsgSwapExactAmountOut): unknown {
+  toJSON(message: MsgSwapExactAmountOut): JsonSafe<MsgSwapExactAmountOut> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {
@@ -498,7 +499,7 @@ export const MsgSwapExactAmountOutResponse = {
       tokenInAmount: isSet(object.tokenInAmount) ? String(object.tokenInAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountOutResponse): unknown {
+  toJSON(message: MsgSwapExactAmountOutResponse): JsonSafe<MsgSwapExactAmountOutResponse> {
     const obj: any = {};
     message.tokenInAmount !== undefined && (obj.tokenInAmount = message.tokenInAmount);
     return obj;

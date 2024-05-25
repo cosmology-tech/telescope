@@ -4,6 +4,7 @@ import { Value } from "./value";
 import { Status } from "../../../rpc/status";
 import { Long, DeepPartial, isSet } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
  * The state of an evaluation.
@@ -139,7 +140,7 @@ export const EvalState = {
       results: Array.isArray(object?.results) ? object.results.map((e: any) => EvalState_Result.fromJSON(e)) : []
     };
   },
-  toJSON(message: EvalState): unknown {
+  toJSON(message: EvalState): JsonSafe<EvalState> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? ExprValue.toJSON(e) : undefined);
@@ -202,7 +203,7 @@ export const EvalState_Result = {
       value: isSet(object.value) ? Long.fromValue(object.value) : Long.ZERO
     };
   },
-  toJSON(message: EvalState_Result): unknown {
+  toJSON(message: EvalState_Result): JsonSafe<EvalState_Result> {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = (message.expr || Long.ZERO).toString());
     message.value !== undefined && (obj.value = (message.value || Long.ZERO).toString());
@@ -265,7 +266,7 @@ export const ExprValue = {
       unknown: isSet(object.unknown) ? UnknownSet.fromJSON(object.unknown) : undefined
     };
   },
-  toJSON(message: ExprValue): unknown {
+  toJSON(message: ExprValue): JsonSafe<ExprValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     message.error !== undefined && (obj.error = message.error ? ErrorSet.toJSON(message.error) : undefined);
@@ -314,7 +315,7 @@ export const ErrorSet = {
       errors: Array.isArray(object?.errors) ? object.errors.map((e: any) => Status.fromJSON(e)) : []
     };
   },
-  toJSON(message: ErrorSet): unknown {
+  toJSON(message: ErrorSet): JsonSafe<ErrorSet> {
     const obj: any = {};
     if (message.errors) {
       obj.errors = message.errors.map(e => e ? Status.toJSON(e) : undefined);
@@ -372,7 +373,7 @@ export const UnknownSet = {
       exprs: Array.isArray(object?.exprs) ? object.exprs.map((e: any) => Long.fromValue(e)) : []
     };
   },
-  toJSON(message: UnknownSet): unknown {
+  toJSON(message: UnknownSet): JsonSafe<UnknownSet> {
     const obj: any = {};
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => (e || Long.ZERO).toString());

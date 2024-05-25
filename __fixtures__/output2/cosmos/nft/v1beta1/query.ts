@@ -4,6 +4,7 @@ import { PageRequest, PageResponse } from "../../base/query/v1beta1/pagination";
 import { NFT, Class } from "./nft";
 import { Long, isSet, DeepPartial, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** QueryBalanceRequest is the request type for the Query/Balance RPC method */
 export interface QueryBalanceRequest {
@@ -111,7 +112,7 @@ export const QueryBalanceRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: QueryBalanceRequest): unknown {
+  toJSON(message: QueryBalanceRequest): JsonSafe<QueryBalanceRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -158,7 +159,7 @@ export const QueryBalanceResponse = {
       amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
-  toJSON(message: QueryBalanceResponse): unknown {
+  toJSON(message: QueryBalanceResponse): JsonSafe<QueryBalanceResponse> {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
     return obj;
@@ -211,7 +212,7 @@ export const QueryOwnerRequest = {
       id: isSet(object.id) ? String(object.id) : ""
     };
   },
-  toJSON(message: QueryOwnerRequest): unknown {
+  toJSON(message: QueryOwnerRequest): JsonSafe<QueryOwnerRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -258,7 +259,7 @@ export const QueryOwnerResponse = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: QueryOwnerResponse): unknown {
+  toJSON(message: QueryOwnerResponse): JsonSafe<QueryOwnerResponse> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     return obj;
@@ -303,7 +304,7 @@ export const QuerySupplyRequest = {
       classId: isSet(object.classId) ? String(object.classId) : ""
     };
   },
-  toJSON(message: QuerySupplyRequest): unknown {
+  toJSON(message: QuerySupplyRequest): JsonSafe<QuerySupplyRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     return obj;
@@ -348,7 +349,7 @@ export const QuerySupplyResponse = {
       amount: isSet(object.amount) ? Long.fromValue(object.amount) : Long.UZERO
     };
   },
-  toJSON(message: QuerySupplyResponse): unknown {
+  toJSON(message: QuerySupplyResponse): JsonSafe<QuerySupplyResponse> {
     const obj: any = {};
     message.amount !== undefined && (obj.amount = (message.amount || Long.UZERO).toString());
     return obj;
@@ -409,7 +410,7 @@ export const QueryNFTsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryNFTsRequest): unknown {
+  toJSON(message: QueryNFTsRequest): JsonSafe<QueryNFTsRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -466,7 +467,7 @@ export const QueryNFTsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryNFTsResponse): unknown {
+  toJSON(message: QueryNFTsResponse): JsonSafe<QueryNFTsResponse> {
     const obj: any = {};
     if (message.nfts) {
       obj.nfts = message.nfts.map(e => e ? NFT.toJSON(e) : undefined);
@@ -525,7 +526,7 @@ export const QueryNFTRequest = {
       id: isSet(object.id) ? String(object.id) : ""
     };
   },
-  toJSON(message: QueryNFTRequest): unknown {
+  toJSON(message: QueryNFTRequest): JsonSafe<QueryNFTRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     message.id !== undefined && (obj.id = message.id);
@@ -572,7 +573,7 @@ export const QueryNFTResponse = {
       nft: isSet(object.nft) ? NFT.fromJSON(object.nft) : undefined
     };
   },
-  toJSON(message: QueryNFTResponse): unknown {
+  toJSON(message: QueryNFTResponse): JsonSafe<QueryNFTResponse> {
     const obj: any = {};
     message.nft !== undefined && (obj.nft = message.nft ? NFT.toJSON(message.nft) : undefined);
     return obj;
@@ -617,7 +618,7 @@ export const QueryClassRequest = {
       classId: isSet(object.classId) ? String(object.classId) : ""
     };
   },
-  toJSON(message: QueryClassRequest): unknown {
+  toJSON(message: QueryClassRequest): JsonSafe<QueryClassRequest> {
     const obj: any = {};
     message.classId !== undefined && (obj.classId = message.classId);
     return obj;
@@ -662,7 +663,7 @@ export const QueryClassResponse = {
       class: isSet(object.class) ? Class.fromJSON(object.class) : undefined
     };
   },
-  toJSON(message: QueryClassResponse): unknown {
+  toJSON(message: QueryClassResponse): JsonSafe<QueryClassResponse> {
     const obj: any = {};
     message.class !== undefined && (obj.class = message.class ? Class.toJSON(message.class) : undefined);
     return obj;
@@ -707,7 +708,7 @@ export const QueryClassesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClassesRequest): unknown {
+  toJSON(message: QueryClassesRequest): JsonSafe<QueryClassesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -760,7 +761,7 @@ export const QueryClassesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryClassesResponse): unknown {
+  toJSON(message: QueryClassesResponse): JsonSafe<QueryClassesResponse> {
     const obj: any = {};
     if (message.classes) {
       obj.classes = message.classes.map(e => e ? Class.toJSON(e) : undefined);

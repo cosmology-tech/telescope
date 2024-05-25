@@ -3,6 +3,7 @@
 import { FeeToken } from "./feetoken";
 import { Long, DeepPartial, isSet, Rpc } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensResponse {
@@ -57,7 +58,7 @@ export const QueryFeeTokensRequest = {
   fromJSON(_: any): QueryFeeTokensRequest {
     return {};
   },
-  toJSON(_: QueryFeeTokensRequest): unknown {
+  toJSON(_: QueryFeeTokensRequest): JsonSafe<QueryFeeTokensRequest> {
     const obj: any = {};
     return obj;
   },
@@ -100,7 +101,7 @@ export const QueryFeeTokensResponse = {
       feeTokens: Array.isArray(object?.feeTokens) ? object.feeTokens.map((e: any) => FeeToken.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryFeeTokensResponse): unknown {
+  toJSON(message: QueryFeeTokensResponse): JsonSafe<QueryFeeTokensResponse> {
     const obj: any = {};
     if (message.feeTokens) {
       obj.feeTokens = message.feeTokens.map(e => e ? FeeToken.toJSON(e) : undefined);
@@ -149,7 +150,7 @@ export const QueryDenomSpotPriceRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: QueryDenomSpotPriceRequest): unknown {
+  toJSON(message: QueryDenomSpotPriceRequest): JsonSafe<QueryDenomSpotPriceRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -202,7 +203,7 @@ export const QueryDenomSpotPriceResponse = {
       spotPrice: isSet(object.spotPrice) ? String(object.spotPrice) : ""
     };
   },
-  toJSON(message: QueryDenomSpotPriceResponse): unknown {
+  toJSON(message: QueryDenomSpotPriceResponse): JsonSafe<QueryDenomSpotPriceResponse> {
     const obj: any = {};
     message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
@@ -249,7 +250,7 @@ export const QueryDenomPoolIdRequest = {
       denom: isSet(object.denom) ? String(object.denom) : ""
     };
   },
-  toJSON(message: QueryDenomPoolIdRequest): unknown {
+  toJSON(message: QueryDenomPoolIdRequest): JsonSafe<QueryDenomPoolIdRequest> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     return obj;
@@ -294,7 +295,7 @@ export const QueryDenomPoolIdResponse = {
       poolID: isSet(object.poolID) ? Long.fromValue(object.poolID) : Long.UZERO
     };
   },
-  toJSON(message: QueryDenomPoolIdResponse): unknown {
+  toJSON(message: QueryDenomPoolIdResponse): JsonSafe<QueryDenomPoolIdResponse> {
     const obj: any = {};
     message.poolID !== undefined && (obj.poolID = (message.poolID || Long.UZERO).toString());
     return obj;
@@ -329,7 +330,7 @@ export const QueryBaseDenomRequest = {
   fromJSON(_: any): QueryBaseDenomRequest {
     return {};
   },
-  toJSON(_: QueryBaseDenomRequest): unknown {
+  toJSON(_: QueryBaseDenomRequest): JsonSafe<QueryBaseDenomRequest> {
     const obj: any = {};
     return obj;
   },
@@ -372,7 +373,7 @@ export const QueryBaseDenomResponse = {
       baseDenom: isSet(object.baseDenom) ? String(object.baseDenom) : ""
     };
   },
-  toJSON(message: QueryBaseDenomResponse): unknown {
+  toJSON(message: QueryBaseDenomResponse): JsonSafe<QueryBaseDenomResponse> {
     const obj: any = {};
     message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
     return obj;

@@ -1,6 +1,7 @@
 //@ts-nocheck
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -99,7 +100,7 @@ export const Visibility = {
       rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromJSON(e)) : []
     };
   },
-  toJSON(message: Visibility): unknown {
+  toJSON(message: Visibility): JsonSafe<Visibility> {
     const obj: any = {};
     if (message.rules) {
       obj.rules = message.rules.map(e => e ? VisibilityRule.toJSON(e) : undefined);
@@ -156,7 +157,7 @@ export const VisibilityRule = {
       restriction: isSet(object.restriction) ? String(object.restriction) : ""
     };
   },
-  toJSON(message: VisibilityRule): unknown {
+  toJSON(message: VisibilityRule): JsonSafe<VisibilityRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.restriction !== undefined && (obj.restriction = message.restriction);

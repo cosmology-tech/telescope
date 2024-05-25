@@ -4,6 +4,7 @@ import { Any } from "../../../google/protobuf/any";
 import { Timestamp } from "../../../google/protobuf/timestamp";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * GenericAuthorization gives the grantee unrestricted permissions to execute
@@ -67,7 +68,7 @@ export const GenericAuthorization = {
       msg: isSet(object.msg) ? String(object.msg) : ""
     };
   },
-  toJSON(message: GenericAuthorization): unknown {
+  toJSON(message: GenericAuthorization): JsonSafe<GenericAuthorization> {
     const obj: any = {};
     message.msg !== undefined && (obj.msg = message.msg);
     return obj;
@@ -120,7 +121,7 @@ export const Grant = {
       expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   },
-  toJSON(message: Grant): unknown {
+  toJSON(message: Grant): JsonSafe<Grant> {
     const obj: any = {};
     message.authorization !== undefined && (obj.authorization = message.authorization ? Any.toJSON(message.authorization) : undefined);
     message.expiration !== undefined && (obj.expiration = fromTimestamp(message.expiration).toISOString());
@@ -191,7 +192,7 @@ export const GrantAuthorization = {
       expiration: isSet(object.expiration) ? fromJsonTimestamp(object.expiration) : undefined
     };
   },
-  toJSON(message: GrantAuthorization): unknown {
+  toJSON(message: GrantAuthorization): JsonSafe<GrantAuthorization> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);

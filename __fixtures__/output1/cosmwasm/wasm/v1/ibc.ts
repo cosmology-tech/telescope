@@ -1,5 +1,6 @@
 import { Long, isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgIBCSend */
 export interface MsgIBCSend {
@@ -94,7 +95,7 @@ export const MsgIBCSend = {
       data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
     };
   },
-  toJSON(message: MsgIBCSend): unknown {
+  toJSON(message: MsgIBCSend): JsonSafe<MsgIBCSend> {
     const obj: any = {};
     message.channel !== undefined && (obj.channel = message.channel);
     message.timeoutHeight !== undefined && (obj.timeoutHeight = (message.timeoutHeight || Long.UZERO).toString());
@@ -161,7 +162,7 @@ export const MsgIBCCloseChannel = {
       channel: isSet(object.channel) ? String(object.channel) : ""
     };
   },
-  toJSON(message: MsgIBCCloseChannel): unknown {
+  toJSON(message: MsgIBCCloseChannel): JsonSafe<MsgIBCCloseChannel> {
     const obj: any = {};
     message.channel !== undefined && (obj.channel = message.channel);
     return obj;

@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/pro
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.claim.v1beta1";
 /** Params defines the claim module's parameters. */
 export interface Params {
@@ -89,14 +88,6 @@ export const Params = {
     if (isSet(object.durationUntilDecay)) obj.durationUntilDecay = Duration.fromJSON(object.durationUntilDecay);
     if (isSet(object.durationOfDecay)) obj.durationOfDecay = Duration.fromJSON(object.durationOfDecay);
     if (isSet(object.claimDenom)) obj.claimDenom = String(object.claimDenom);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.airdropStartTime !== undefined && (obj.airdropStartTime = message.airdropStartTime.toISOString());
-    message.durationUntilDecay !== undefined && (obj.durationUntilDecay = message.durationUntilDecay ? Duration.toJSON(message.durationUntilDecay) : undefined);
-    message.durationOfDecay !== undefined && (obj.durationOfDecay = message.durationOfDecay ? Duration.toJSON(message.durationOfDecay) : undefined);
-    message.claimDenom !== undefined && (obj.claimDenom = message.claimDenom);
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

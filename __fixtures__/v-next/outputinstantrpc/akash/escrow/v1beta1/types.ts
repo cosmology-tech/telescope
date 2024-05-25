@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
@@ -207,7 +208,7 @@ export const AccountID = {
     if (isSet(object.xid)) obj.xid = String(object.xid);
     return obj;
   },
-  toJSON(message: AccountID): unknown {
+  toJSON(message: AccountID): JsonSafe<AccountID> {
     const obj: any = {};
     message.scope !== undefined && (obj.scope = message.scope);
     message.xid !== undefined && (obj.xid = message.xid);
@@ -350,7 +351,7 @@ export const Account = {
     if (isSet(object.settledAt)) obj.settledAt = BigInt(object.settledAt.toString());
     return obj;
   },
-  toJSON(message: Account): unknown {
+  toJSON(message: Account): JsonSafe<Account> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? AccountID.toJSON(message.id) : undefined);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -545,7 +546,7 @@ export const Payment = {
     if (isSet(object.withdrawn)) obj.withdrawn = Coin.fromJSON(object.withdrawn);
     return obj;
   },
-  toJSON(message: Payment): unknown {
+  toJSON(message: Payment): JsonSafe<Payment> {
     const obj: any = {};
     message.accountId !== undefined && (obj.accountId = message.accountId ? AccountID.toJSON(message.accountId) : undefined);
     message.paymentId !== undefined && (obj.paymentId = message.paymentId);

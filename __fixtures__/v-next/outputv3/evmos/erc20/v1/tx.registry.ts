@@ -36,20 +36,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    convertCoin(value: MsgConvertCoin) {
-      return {
-        typeUrl: "/evmos.erc20.v1.MsgConvertCoin",
-        value: MsgConvertCoin.toJSON(value)
-      };
-    },
-    convertERC20(value: MsgConvertERC20) {
-      return {
-        typeUrl: "/evmos.erc20.v1.MsgConvertERC20",
-        value: MsgConvertERC20.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     convertCoin(value: any) {
       return {

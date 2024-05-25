@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /**
  * Capability defines an implementation of an object capability. The index
@@ -116,11 +115,6 @@ export const Capability = {
     if (isSet(object.index)) obj.index = BigInt(object.index.toString());
     return obj;
   },
-  toJSON(message: Capability): JsonSafe<Capability> {
-    const obj: any = {};
-    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Capability>): Capability {
     const message = createBaseCapability();
     if (object.index !== undefined && object.index !== null) {
@@ -207,12 +201,6 @@ export const Owner = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: Owner): JsonSafe<Owner> {
-    const obj: any = {};
-    message.module !== undefined && (obj.module = message.module);
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Owner>): Owner {
     const message = createBaseOwner();
     message.module = object.module ?? "";
@@ -294,15 +282,6 @@ export const CapabilityOwners = {
   fromJSON(object: any): CapabilityOwners {
     const obj = createBaseCapabilityOwners();
     if (Array.isArray(object?.owners)) obj.owners = object.owners.map((e: any) => Owner.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CapabilityOwners): JsonSafe<CapabilityOwners> {
-    const obj: any = {};
-    if (message.owners) {
-      obj.owners = message.owners.map(e => e ? Owner.toJSON(e) : undefined);
-    } else {
-      obj.owners = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<CapabilityOwners>): CapabilityOwners {

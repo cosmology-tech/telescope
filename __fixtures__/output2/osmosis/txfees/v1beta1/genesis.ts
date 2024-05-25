@@ -3,6 +3,7 @@
 import { FeeToken } from "./feetoken";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
@@ -51,7 +52,7 @@ export const GenesisState = {
       feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.basedenom !== undefined && (obj.basedenom = message.basedenom);
     if (message.feetokens) {

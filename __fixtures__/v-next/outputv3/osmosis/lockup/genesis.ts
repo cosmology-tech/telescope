@@ -1,7 +1,6 @@
 import { PeriodLock, PeriodLockAmino, PeriodLockSDKType, SyntheticLock, SyntheticLockAmino, SyntheticLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
@@ -75,21 +74,6 @@ export const GenesisState = {
     if (isSet(object.lastLockId)) obj.lastLockId = BigInt(object.lastLockId.toString());
     if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
     if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || BigInt(0)).toString());
-    if (message.locks) {
-      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.locks = [];
-    }
-    if (message.syntheticLocks) {
-      obj.syntheticLocks = message.syntheticLocks.map(e => e ? SyntheticLock.toJSON(e) : undefined);
-    } else {
-      obj.syntheticLocks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

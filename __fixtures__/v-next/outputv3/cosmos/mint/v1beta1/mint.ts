@@ -1,7 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** Minter represents the minting state. */
 export interface Minter {
@@ -111,12 +110,6 @@ export const Minter = {
     const obj = createBaseMinter();
     if (isSet(object.inflation)) obj.inflation = String(object.inflation);
     if (isSet(object.annualProvisions)) obj.annualProvisions = String(object.annualProvisions);
-    return obj;
-  },
-  toJSON(message: Minter): JsonSafe<Minter> {
-    const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = message.inflation);
-    message.annualProvisions !== undefined && (obj.annualProvisions = message.annualProvisions);
     return obj;
   },
   fromPartial(object: DeepPartial<Minter>): Minter {
@@ -240,16 +233,6 @@ export const Params = {
     if (isSet(object.inflationMin)) obj.inflationMin = String(object.inflationMin);
     if (isSet(object.goalBonded)) obj.goalBonded = String(object.goalBonded);
     if (isSet(object.blocksPerYear)) obj.blocksPerYear = BigInt(object.blocksPerYear.toString());
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.mintDenom !== undefined && (obj.mintDenom = message.mintDenom);
-    message.inflationRateChange !== undefined && (obj.inflationRateChange = message.inflationRateChange);
-    message.inflationMax !== undefined && (obj.inflationMax = message.inflationMax);
-    message.inflationMin !== undefined && (obj.inflationMin = message.inflationMin);
-    message.goalBonded !== undefined && (obj.goalBonded = message.goalBonded);
-    message.blocksPerYear !== undefined && (obj.blocksPerYear = (message.blocksPerYear || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

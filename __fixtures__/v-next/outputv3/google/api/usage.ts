@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -259,21 +258,6 @@ export const Usage = {
     if (isSet(object.producerNotificationChannel)) obj.producerNotificationChannel = String(object.producerNotificationChannel);
     return obj;
   },
-  toJSON(message: Usage): JsonSafe<Usage> {
-    const obj: any = {};
-    if (message.requirements) {
-      obj.requirements = message.requirements.map(e => e);
-    } else {
-      obj.requirements = [];
-    }
-    if (message.rules) {
-      obj.rules = message.rules.map(e => e ? UsageRule.toJSON(e) : undefined);
-    } else {
-      obj.rules = [];
-    }
-    message.producerNotificationChannel !== undefined && (obj.producerNotificationChannel = message.producerNotificationChannel);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Usage>): Usage {
     const message = createBaseUsage();
     message.requirements = object.requirements?.map(e => e) || [];
@@ -389,13 +373,6 @@ export const UsageRule = {
     if (isSet(object.selector)) obj.selector = String(object.selector);
     if (isSet(object.allowUnregisteredCalls)) obj.allowUnregisteredCalls = Boolean(object.allowUnregisteredCalls);
     if (isSet(object.skipServiceControl)) obj.skipServiceControl = Boolean(object.skipServiceControl);
-    return obj;
-  },
-  toJSON(message: UsageRule): JsonSafe<UsageRule> {
-    const obj: any = {};
-    message.selector !== undefined && (obj.selector = message.selector);
-    message.allowUnregisteredCalls !== undefined && (obj.allowUnregisteredCalls = message.allowUnregisteredCalls);
-    message.skipServiceControl !== undefined && (obj.skipServiceControl = message.skipServiceControl);
     return obj;
   },
   fromPartial(object: DeepPartial<UsageRule>): UsageRule {

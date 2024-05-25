@@ -3,7 +3,6 @@ import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { LabelDescriptor, LabelDescriptorAmino, LabelDescriptorSDKType } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * The kind of measurement. It describes how the data is reported.
@@ -722,29 +721,6 @@ export const MetricDescriptor = {
     if (Array.isArray(object?.monitoredResourceTypes)) obj.monitoredResourceTypes = object.monitoredResourceTypes.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: MetricDescriptor): JsonSafe<MetricDescriptor> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.type !== undefined && (obj.type = message.type);
-    if (message.labels) {
-      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
-    } else {
-      obj.labels = [];
-    }
-    message.metricKind !== undefined && (obj.metricKind = metricDescriptor_MetricKindToJSON(message.metricKind));
-    message.valueType !== undefined && (obj.valueType = metricDescriptor_ValueTypeToJSON(message.valueType));
-    message.unit !== undefined && (obj.unit = message.unit);
-    message.description !== undefined && (obj.description = message.description);
-    message.displayName !== undefined && (obj.displayName = message.displayName);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toJSON(message.metadata) : undefined);
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    if (message.monitoredResourceTypes) {
-      obj.monitoredResourceTypes = message.monitoredResourceTypes.map(e => e);
-    } else {
-      obj.monitoredResourceTypes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MetricDescriptor>): MetricDescriptor {
     const message = createBaseMetricDescriptor();
     message.name = object.name ?? "";
@@ -920,13 +896,6 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     if (isSet(object.ingestDelay)) obj.ingestDelay = Duration.fromJSON(object.ingestDelay);
     return obj;
   },
-  toJSON(message: MetricDescriptor_MetricDescriptorMetadata): JsonSafe<MetricDescriptor_MetricDescriptorMetadata> {
-    const obj: any = {};
-    message.launchStage !== undefined && (obj.launchStage = launchStageToJSON(message.launchStage));
-    message.samplePeriod !== undefined && (obj.samplePeriod = message.samplePeriod ? Duration.toJSON(message.samplePeriod) : undefined);
-    message.ingestDelay !== undefined && (obj.ingestDelay = message.ingestDelay ? Duration.toJSON(message.ingestDelay) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MetricDescriptor_MetricDescriptorMetadata>): MetricDescriptor_MetricDescriptorMetadata {
     const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
     message.launchStage = object.launchStage ?? 0;
@@ -1027,12 +996,6 @@ export const Metric_LabelsEntry = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Metric_LabelsEntry): JsonSafe<Metric_LabelsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Metric_LabelsEntry>): Metric_LabelsEntry {
     const message = createBaseMetric_LabelsEntry();
     message.key = object.key ?? "";
@@ -1126,17 +1089,6 @@ export const Metric = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: Metric): JsonSafe<Metric> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    obj.labels = {};
-    if (message.labels) {
-      Object.entries(message.labels).forEach(([k, v]) => {
-        obj.labels[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Metric>): Metric {

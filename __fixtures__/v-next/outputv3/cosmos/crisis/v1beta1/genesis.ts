@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisState {
@@ -61,11 +60,6 @@ export const GenesisState = {
   fromJSON(object: any): GenesisState {
     const obj = createBaseGenesisState();
     if (isSet(object.constantFee)) obj.constantFee = Coin.fromJSON(object.constantFee);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.constantFee !== undefined && (obj.constantFee = message.constantFee ? Coin.toJSON(message.constantFee) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

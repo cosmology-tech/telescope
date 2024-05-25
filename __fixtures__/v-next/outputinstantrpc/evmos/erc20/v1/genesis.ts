@@ -1,6 +1,7 @@
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -81,7 +82,7 @@ export const GenesisState = {
     if (Array.isArray(object?.tokenPairs)) obj.tokenPairs = object.tokenPairs.map((e: any) => TokenPair.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.tokenPairs) {
@@ -198,7 +199,7 @@ export const Params = {
     if (isSet(object.enableEvmHook)) obj.enableEvmHook = Boolean(object.enableEvmHook);
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableErc20 !== undefined && (obj.enableErc20 = message.enableErc20);
     message.enableEvmHook !== undefined && (obj.enableEvmHook = message.enableEvmHook);

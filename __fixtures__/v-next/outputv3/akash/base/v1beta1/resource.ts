@@ -3,7 +3,6 @@ import { Attribute, AttributeAmino, AttributeSDKType } from "./attribute";
 import { Endpoint, EndpointAmino, EndpointSDKType } from "./endpoint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta1";
 /** CPU stores resource units and cpu config attributes */
 export interface CPU {
@@ -139,16 +138,6 @@ export const CPU = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: CPU): JsonSafe<CPU> {
-    const obj: any = {};
-    message.units !== undefined && (obj.units = message.units ? ResourceValue.toJSON(message.units) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<CPU>): CPU {
     const message = createBaseCPU();
     if (object.units !== undefined && object.units !== null) {
@@ -247,16 +236,6 @@ export const Memory = {
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
     return obj;
   },
-  toJSON(message: Memory): JsonSafe<Memory> {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Memory>): Memory {
     const message = createBaseMemory();
     if (object.quantity !== undefined && object.quantity !== null) {
@@ -353,16 +332,6 @@ export const Storage = {
     const obj = createBaseStorage();
     if (isSet(object.quantity)) obj.quantity = ResourceValue.fromJSON(object.quantity);
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Storage): JsonSafe<Storage> {
-    const obj: any = {};
-    message.quantity !== undefined && (obj.quantity = message.quantity ? ResourceValue.toJSON(message.quantity) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Storage>): Storage {
@@ -477,18 +446,6 @@ export const ResourceUnits = {
     if (isSet(object.memory)) obj.memory = Memory.fromJSON(object.memory);
     if (isSet(object.storage)) obj.storage = Storage.fromJSON(object.storage);
     if (Array.isArray(object?.endpoints)) obj.endpoints = object.endpoints.map((e: any) => Endpoint.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ResourceUnits): JsonSafe<ResourceUnits> {
-    const obj: any = {};
-    message.cpu !== undefined && (obj.cpu = message.cpu ? CPU.toJSON(message.cpu) : undefined);
-    message.memory !== undefined && (obj.memory = message.memory ? Memory.toJSON(message.memory) : undefined);
-    message.storage !== undefined && (obj.storage = message.storage ? Storage.toJSON(message.storage) : undefined);
-    if (message.endpoints) {
-      obj.endpoints = message.endpoints.map(e => e ? Endpoint.toJSON(e) : undefined);
-    } else {
-      obj.endpoints = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ResourceUnits>): ResourceUnits {

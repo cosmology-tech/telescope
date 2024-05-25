@@ -2,6 +2,7 @@ import { Downtime, DowntimeSDKType, downtimeFromJSON, downtimeToJSON } from "./d
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.downtimedetector.v1beta1";
 /**
  * Query for has it been at least $RECOVERY_DURATION units of time,
@@ -76,7 +77,7 @@ export const RecoveredSinceDowntimeOfLengthRequest = {
       recovery: isSet(object.recovery) ? Duration.fromJSON(object.recovery) : undefined
     };
   },
-  toJSON(message: RecoveredSinceDowntimeOfLengthRequest): unknown {
+  toJSON(message: RecoveredSinceDowntimeOfLengthRequest): JsonSafe<RecoveredSinceDowntimeOfLengthRequest> {
     const obj: any = {};
     message.downtime !== undefined && (obj.downtime = downtimeToJSON(message.downtime));
     message.recovery !== undefined && (obj.recovery = message.recovery ? Duration.toJSON(message.recovery) : undefined);
@@ -179,7 +180,7 @@ export const RecoveredSinceDowntimeOfLengthResponse = {
       succesfullyRecovered: isSet(object.succesfullyRecovered) ? Boolean(object.succesfullyRecovered) : false
     };
   },
-  toJSON(message: RecoveredSinceDowntimeOfLengthResponse): unknown {
+  toJSON(message: RecoveredSinceDowntimeOfLengthResponse): JsonSafe<RecoveredSinceDowntimeOfLengthResponse> {
     const obj: any = {};
     message.succesfullyRecovered !== undefined && (obj.succesfullyRecovered = message.succesfullyRecovered);
     return obj;

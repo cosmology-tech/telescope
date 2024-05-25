@@ -1,6 +1,7 @@
 import { Incentive, IncentiveAmino, IncentiveSDKType, GasMeter, GasMeterAmino, GasMeterSDKType } from "./incentives";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 import { Decimal } from "@cosmjs/math";
 export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
@@ -123,7 +124,7 @@ export const GenesisState = {
     if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.incentives) {
@@ -268,7 +269,7 @@ export const Params = {
     if (isSet(object.rewardScaler)) obj.rewardScaler = String(object.rewardScaler);
     return obj;
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.enableIncentives !== undefined && (obj.enableIncentives = message.enableIncentives);
     message.allocationLimit !== undefined && (obj.allocationLimit = message.allocationLimit);

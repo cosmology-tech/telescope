@@ -2,7 +2,6 @@ import { BaseVestingAccount, BaseVestingAccountAmino, BaseVestingAccountSDKType,
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.vesting.v1";
 /**
  * ClawbackVestingAccount implements the VestingAccount interface. It provides
@@ -128,23 +127,6 @@ export const ClawbackVestingAccount = {
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     if (Array.isArray(object?.lockupPeriods)) obj.lockupPeriods = object.lockupPeriods.map((e: any) => Period.fromJSON(e));
     if (Array.isArray(object?.vestingPeriods)) obj.vestingPeriods = object.vestingPeriods.map((e: any) => Period.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ClawbackVestingAccount): JsonSafe<ClawbackVestingAccount> {
-    const obj: any = {};
-    message.baseVestingAccount !== undefined && (obj.baseVestingAccount = message.baseVestingAccount ? BaseVestingAccount.toJSON(message.baseVestingAccount) : undefined);
-    message.funderAddress !== undefined && (obj.funderAddress = message.funderAddress);
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    if (message.lockupPeriods) {
-      obj.lockupPeriods = message.lockupPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.lockupPeriods = [];
-    }
-    if (message.vestingPeriods) {
-      obj.vestingPeriods = message.vestingPeriods.map(e => e ? Period.toJSON(e) : undefined);
-    } else {
-      obj.vestingPeriods = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ClawbackVestingAccount>): ClawbackVestingAccount {

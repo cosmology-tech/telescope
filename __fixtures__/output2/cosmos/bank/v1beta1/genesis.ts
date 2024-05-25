@@ -4,6 +4,7 @@ import { Params, Metadata } from "./bank";
 import { Coin } from "../../base/v1beta1/coin";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** GenesisState defines the bank module's genesis state. */
 export interface GenesisState {
@@ -87,7 +88,7 @@ export const GenesisState = {
       denomMetadata: Array.isArray(object?.denomMetadata) ? object.denomMetadata.map((e: any) => Metadata.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.balances) {
@@ -158,7 +159,7 @@ export const Balance = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Balance): unknown {
+  toJSON(message: Balance): JsonSafe<Balance> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     if (message.coins) {

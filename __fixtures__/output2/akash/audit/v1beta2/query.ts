@@ -4,6 +4,7 @@ import { PageRequest, PageResponse } from "../../../cosmos/base/query/v1beta1/pa
 import { Provider } from "./audit";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
@@ -76,7 +77,7 @@ export const QueryProvidersResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryProvidersResponse): unknown {
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
     const obj: any = {};
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
@@ -135,7 +136,7 @@ export const QueryProviderRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: QueryProviderRequest): unknown {
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -182,7 +183,7 @@ export const QueryAllProvidersAttributesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAllProvidersAttributesRequest): unknown {
+  toJSON(message: QueryAllProvidersAttributesRequest): JsonSafe<QueryAllProvidersAttributesRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -235,7 +236,7 @@ export const QueryProviderAttributesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryProviderAttributesRequest): unknown {
+  toJSON(message: QueryProviderAttributesRequest): JsonSafe<QueryProviderAttributesRequest> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -290,7 +291,7 @@ export const QueryProviderAuditorRequest = {
       owner: isSet(object.owner) ? String(object.owner) : ""
     };
   },
-  toJSON(message: QueryProviderAuditorRequest): unknown {
+  toJSON(message: QueryProviderAuditorRequest): JsonSafe<QueryProviderAuditorRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -345,7 +346,7 @@ export const QueryAuditorAttributesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryAuditorAttributesRequest): unknown {
+  toJSON(message: QueryAuditorAttributesRequest): JsonSafe<QueryAuditorAttributesRequest> {
     const obj: any = {};
     message.auditor !== undefined && (obj.auditor = message.auditor);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);

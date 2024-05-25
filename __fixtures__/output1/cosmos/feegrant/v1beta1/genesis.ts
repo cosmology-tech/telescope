@@ -1,5 +1,6 @@
 import { Grant, GrantSDKType } from "./feegrant";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial } from "../../../helpers";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** GenesisState contains a set of fee allowances, persisted from the store */
@@ -44,7 +45,7 @@ export const GenesisState = {
       allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.allowances) {
       obj.allowances = message.allowances.map(e => e ? Grant.toJSON(e) : undefined);

@@ -2,7 +2,6 @@ import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { SuperfluidAsset, SuperfluidAssetAmino, SuperfluidAssetSDKType, OsmoEquivalentMultiplierRecord, OsmoEquivalentMultiplierRecordAmino, OsmoEquivalentMultiplierRecordSDKType, SuperfluidIntermediaryAccount, SuperfluidIntermediaryAccountAmino, SuperfluidIntermediaryAccountSDKType, LockIdIntermediaryAccountConnection, LockIdIntermediaryAccountConnectionAmino, LockIdIntermediaryAccountConnectionSDKType } from "./superfluid";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
@@ -122,31 +121,6 @@ export const GenesisState = {
     if (Array.isArray(object?.osmoEquivalentMultipliers)) obj.osmoEquivalentMultipliers = object.osmoEquivalentMultipliers.map((e: any) => OsmoEquivalentMultiplierRecord.fromJSON(e));
     if (Array.isArray(object?.intermediaryAccounts)) obj.intermediaryAccounts = object.intermediaryAccounts.map((e: any) => SuperfluidIntermediaryAccount.fromJSON(e));
     if (Array.isArray(object?.intemediaryAccountConnections)) obj.intemediaryAccountConnections = object.intemediaryAccountConnections.map((e: any) => LockIdIntermediaryAccountConnection.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.superfluidAssets) {
-      obj.superfluidAssets = message.superfluidAssets.map(e => e ? SuperfluidAsset.toJSON(e) : undefined);
-    } else {
-      obj.superfluidAssets = [];
-    }
-    if (message.osmoEquivalentMultipliers) {
-      obj.osmoEquivalentMultipliers = message.osmoEquivalentMultipliers.map(e => e ? OsmoEquivalentMultiplierRecord.toJSON(e) : undefined);
-    } else {
-      obj.osmoEquivalentMultipliers = [];
-    }
-    if (message.intermediaryAccounts) {
-      obj.intermediaryAccounts = message.intermediaryAccounts.map(e => e ? SuperfluidIntermediaryAccount.toJSON(e) : undefined);
-    } else {
-      obj.intermediaryAccounts = [];
-    }
-    if (message.intemediaryAccountConnections) {
-      obj.intemediaryAccountConnections = message.intemediaryAccountConnections.map(e => e ? LockIdIntermediaryAccountConnection.toJSON(e) : undefined);
-    } else {
-      obj.intemediaryAccountConnections = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

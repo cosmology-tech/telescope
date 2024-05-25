@@ -3,7 +3,6 @@ import { Gauge, GaugeAmino, GaugeSDKType } from "./gauge";
 import { Duration, DurationAmino, DurationSDKType } from "../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /**
  * GenesisState defines the incentives module's various parameters when first
@@ -117,22 +116,6 @@ export const GenesisState = {
     if (Array.isArray(object?.gauges)) obj.gauges = object.gauges.map((e: any) => Gauge.fromJSON(e));
     if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
     if (isSet(object.lastGaugeId)) obj.lastGaugeId = BigInt(object.lastGaugeId.toString());
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    if (message.gauges) {
-      obj.gauges = message.gauges.map(e => e ? Gauge.toJSON(e) : undefined);
-    } else {
-      obj.gauges = [];
-    }
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
-    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

@@ -1,5 +1,6 @@
 import { Config, ConfigSDKType } from "./config";
 import { BinaryReader, BinaryWriter } from "../../../binary";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
@@ -48,7 +49,7 @@ export const QueryConfigRequest = {
   fromJSON(_: any): QueryConfigRequest {
     return {};
   },
-  toJSON(_: QueryConfigRequest): unknown {
+  toJSON(_: QueryConfigRequest): JsonSafe<QueryConfigRequest> {
     const obj: any = {};
     return obj;
   },
@@ -131,7 +132,7 @@ export const QueryConfigResponse = {
       config: isSet(object.config) ? Config.fromJSON(object.config) : undefined
     };
   },
-  toJSON(message: QueryConfigResponse): unknown {
+  toJSON(message: QueryConfigResponse): JsonSafe<QueryConfigResponse> {
     const obj: any = {};
     message.config !== undefined && (obj.config = message.config ? Config.toJSON(message.config) : undefined);
     return obj;

@@ -5,6 +5,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Validator } from "./validator";
 import { Long, isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "tendermint.types";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
@@ -71,7 +72,7 @@ export const Evidence = {
       lightClientAttackEvidence: isSet(object.lightClientAttackEvidence) ? LightClientAttackEvidence.fromJSON(object.lightClientAttackEvidence) : undefined
     };
   },
-  toJSON(message: Evidence): unknown {
+  toJSON(message: Evidence): JsonSafe<Evidence> {
     const obj: any = {};
     message.duplicateVoteEvidence !== undefined && (obj.duplicateVoteEvidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toJSON(message.duplicateVoteEvidence) : undefined);
     message.lightClientAttackEvidence !== undefined && (obj.lightClientAttackEvidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toJSON(message.lightClientAttackEvidence) : undefined);
@@ -150,7 +151,7 @@ export const DuplicateVoteEvidence = {
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
-  toJSON(message: DuplicateVoteEvidence): unknown {
+  toJSON(message: DuplicateVoteEvidence): JsonSafe<DuplicateVoteEvidence> {
     const obj: any = {};
     message.voteA !== undefined && (obj.voteA = message.voteA ? Vote.toJSON(message.voteA) : undefined);
     message.voteB !== undefined && (obj.voteB = message.voteB ? Vote.toJSON(message.voteB) : undefined);
@@ -235,7 +236,7 @@ export const LightClientAttackEvidence = {
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
-  toJSON(message: LightClientAttackEvidence): unknown {
+  toJSON(message: LightClientAttackEvidence): JsonSafe<LightClientAttackEvidence> {
     const obj: any = {};
     message.conflictingBlock !== undefined && (obj.conflictingBlock = message.conflictingBlock ? LightBlock.toJSON(message.conflictingBlock) : undefined);
     message.commonHeight !== undefined && (obj.commonHeight = (message.commonHeight || Long.ZERO).toString());
@@ -292,7 +293,7 @@ export const EvidenceList = {
       evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Evidence.fromJSON(e)) : []
     };
   },
-  toJSON(message: EvidenceList): unknown {
+  toJSON(message: EvidenceList): JsonSafe<EvidenceList> {
     const obj: any = {};
     if (message.evidence) {
       obj.evidence = message.evidence.map(e => e ? Evidence.toJSON(e) : undefined);

@@ -1,7 +1,6 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./params";
 import { DenomAuthorityMetadata, DenomAuthorityMetadataAmino, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -159,10 +158,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -229,11 +224,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -314,11 +304,6 @@ export const QueryDenomAuthorityMetadataRequest = {
     if (isSet(object.denom)) obj.denom = String(object.denom);
     return obj;
   },
-  toJSON(message: QueryDenomAuthorityMetadataRequest): JsonSafe<QueryDenomAuthorityMetadataRequest> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataRequest>): QueryDenomAuthorityMetadataRequest {
     const message = createBaseQueryDenomAuthorityMetadataRequest();
     message.denom = object.denom ?? "";
@@ -393,11 +378,6 @@ export const QueryDenomAuthorityMetadataResponse = {
   fromJSON(object: any): QueryDenomAuthorityMetadataResponse {
     const obj = createBaseQueryDenomAuthorityMetadataResponse();
     if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
-    return obj;
-  },
-  toJSON(message: QueryDenomAuthorityMetadataResponse): JsonSafe<QueryDenomAuthorityMetadataResponse> {
-    const obj: any = {};
-    message.authorityMetadata !== undefined && (obj.authorityMetadata = message.authorityMetadata ? DenomAuthorityMetadata.toJSON(message.authorityMetadata) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDenomAuthorityMetadataResponse>): QueryDenomAuthorityMetadataResponse {
@@ -478,11 +458,6 @@ export const QueryDenomsFromCreatorRequest = {
     if (isSet(object.creator)) obj.creator = String(object.creator);
     return obj;
   },
-  toJSON(message: QueryDenomsFromCreatorRequest): JsonSafe<QueryDenomsFromCreatorRequest> {
-    const obj: any = {};
-    message.creator !== undefined && (obj.creator = message.creator);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDenomsFromCreatorRequest>): QueryDenomsFromCreatorRequest {
     const message = createBaseQueryDenomsFromCreatorRequest();
     message.creator = object.creator ?? "";
@@ -557,15 +532,6 @@ export const QueryDenomsFromCreatorResponse = {
   fromJSON(object: any): QueryDenomsFromCreatorResponse {
     const obj = createBaseQueryDenomsFromCreatorResponse();
     if (Array.isArray(object?.denoms)) obj.denoms = object.denoms.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: QueryDenomsFromCreatorResponse): JsonSafe<QueryDenomsFromCreatorResponse> {
-    const obj: any = {};
-    if (message.denoms) {
-      obj.denoms = message.denoms.map(e => e);
-    } else {
-      obj.denoms = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDenomsFromCreatorResponse>): QueryDenomsFromCreatorResponse {

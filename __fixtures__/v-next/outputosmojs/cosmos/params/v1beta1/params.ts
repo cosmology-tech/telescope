@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** ParameterChangeProposal defines a proposal to change one or more parameters. */
 export interface ParameterChangeProposal {
@@ -90,7 +91,7 @@ export const ParameterChangeProposal = {
       changes: Array.isArray(object?.changes) ? object.changes.map((e: any) => ParamChange.fromJSON(e)) : []
     };
   },
-  toJSON(message: ParameterChangeProposal): unknown {
+  toJSON(message: ParameterChangeProposal): JsonSafe<ParameterChangeProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -228,7 +229,7 @@ export const ParamChange = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: ParamChange): unknown {
+  toJSON(message: ParamChange): JsonSafe<ParamChange> {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
     message.key !== undefined && (obj.key = message.key);

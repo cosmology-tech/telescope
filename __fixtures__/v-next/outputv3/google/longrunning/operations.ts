@@ -3,7 +3,6 @@ import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { Status, StatusAmino, StatusSDKType } from "../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.longrunning";
 /**
  * This resource represents a long-running operation that is the result of a
@@ -397,15 +396,6 @@ export const Operation = {
     if (isSet(object.response)) obj.response = Any.fromJSON(object.response);
     return obj;
   },
-  toJSON(message: Operation): JsonSafe<Operation> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.metadata !== undefined && (obj.metadata = message.metadata ? Any.toJSON(message.metadata) : undefined);
-    message.done !== undefined && (obj.done = message.done);
-    message.error !== undefined && (obj.error = message.error ? Status.toJSON(message.error) : undefined);
-    message.response !== undefined && (obj.response = message.response ? Any.toJSON(message.response) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.name = object.name ?? "";
@@ -515,11 +505,6 @@ export const GetOperationRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetOperationRequest): JsonSafe<GetOperationRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetOperationRequest>): GetOperationRequest {
     const message = createBaseGetOperationRequest();
     message.name = object.name ?? "";
@@ -617,14 +602,6 @@ export const ListOperationsRequest = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
-    return obj;
-  },
-  toJSON(message: ListOperationsRequest): JsonSafe<ListOperationsRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.filter !== undefined && (obj.filter = message.filter);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
     return obj;
   },
   fromPartial(object: DeepPartial<ListOperationsRequest>): ListOperationsRequest {
@@ -731,16 +708,6 @@ export const ListOperationsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListOperationsResponse): JsonSafe<ListOperationsResponse> {
-    const obj: any = {};
-    if (message.operations) {
-      obj.operations = message.operations.map(e => e ? Operation.toJSON(e) : undefined);
-    } else {
-      obj.operations = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListOperationsResponse>): ListOperationsResponse {
     const message = createBaseListOperationsResponse();
     message.operations = object.operations?.map(e => Operation.fromPartial(e)) || [];
@@ -829,11 +796,6 @@ export const CancelOperationRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: CancelOperationRequest): JsonSafe<CancelOperationRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CancelOperationRequest>): CancelOperationRequest {
     const message = createBaseCancelOperationRequest();
     message.name = object.name ?? "";
@@ -907,11 +869,6 @@ export const DeleteOperationRequest = {
   fromJSON(object: any): DeleteOperationRequest {
     const obj = createBaseDeleteOperationRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: DeleteOperationRequest): JsonSafe<DeleteOperationRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<DeleteOperationRequest>): DeleteOperationRequest {
@@ -995,12 +952,6 @@ export const WaitOperationRequest = {
     const obj = createBaseWaitOperationRequest();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.timeout)) obj.timeout = Duration.fromJSON(object.timeout);
-    return obj;
-  },
-  toJSON(message: WaitOperationRequest): JsonSafe<WaitOperationRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.timeout !== undefined && (obj.timeout = message.timeout ? Duration.toJSON(message.timeout) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<WaitOperationRequest>): WaitOperationRequest {
@@ -1093,12 +1044,6 @@ export const OperationInfo = {
     const obj = createBaseOperationInfo();
     if (isSet(object.responseType)) obj.responseType = String(object.responseType);
     if (isSet(object.metadataType)) obj.metadataType = String(object.metadataType);
-    return obj;
-  },
-  toJSON(message: OperationInfo): JsonSafe<OperationInfo> {
-    const obj: any = {};
-    message.responseType !== undefined && (obj.responseType = message.responseType);
-    message.metadataType !== undefined && (obj.metadataType = message.metadataType);
     return obj;
   },
   fromPartial(object: DeepPartial<OperationInfo>): OperationInfo {

@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.nft.v1beta1";
 /** Class defines the class of the nft type. */
 export interface Class {
@@ -173,17 +172,6 @@ export const Class = {
     if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
     return obj;
   },
-  toJSON(message: Class): JsonSafe<Class> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = message.id);
-    message.name !== undefined && (obj.name = message.name);
-    message.symbol !== undefined && (obj.symbol = message.symbol);
-    message.description !== undefined && (obj.description = message.description);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
-    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
     message.id = object.id ?? "";
@@ -334,15 +322,6 @@ export const NFT = {
     if (isSet(object.uri)) obj.uri = String(object.uri);
     if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
     if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
-    return obj;
-  },
-  toJSON(message: NFT): JsonSafe<NFT> {
-    const obj: any = {};
-    message.classId !== undefined && (obj.classId = message.classId);
-    message.id !== undefined && (obj.id = message.id);
-    message.uri !== undefined && (obj.uri = message.uri);
-    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
-    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<NFT>): NFT {

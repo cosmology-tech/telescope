@@ -1,6 +1,7 @@
 import { Value, ValueAmino, ValueSDKType } from "./value";
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -306,7 +307,7 @@ export const EvalState = {
     if (Array.isArray(object?.results)) obj.results = object.results.map((e: any) => EvalState_Result.fromJSON(e));
     return obj;
   },
-  toJSON(message: EvalState): unknown {
+  toJSON(message: EvalState): JsonSafe<EvalState> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? ExprValue.toJSON(e) : undefined);
@@ -425,7 +426,7 @@ export const EvalState_Result = {
     if (isSet(object.value)) obj.value = BigInt(object.value.toString());
     return obj;
   },
-  toJSON(message: EvalState_Result): unknown {
+  toJSON(message: EvalState_Result): JsonSafe<EvalState_Result> {
     const obj: any = {};
     message.expr !== undefined && (obj.expr = (message.expr || BigInt(0)).toString());
     message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
@@ -536,7 +537,7 @@ export const ExprValue = {
     if (isSet(object.unknown)) obj.unknown = UnknownSet.fromJSON(object.unknown);
     return obj;
   },
-  toJSON(message: ExprValue): unknown {
+  toJSON(message: ExprValue): JsonSafe<ExprValue> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
     message.error !== undefined && (obj.error = message.error ? ErrorSet.toJSON(message.error) : undefined);
@@ -641,7 +642,7 @@ export const ErrorSet = {
     if (Array.isArray(object?.errors)) obj.errors = object.errors.map((e: any) => Status.fromJSON(e));
     return obj;
   },
-  toJSON(message: ErrorSet): unknown {
+  toJSON(message: ErrorSet): JsonSafe<ErrorSet> {
     const obj: any = {};
     if (message.errors) {
       obj.errors = message.errors.map(e => e ? Status.toJSON(e) : undefined);
@@ -743,7 +744,7 @@ export const UnknownSet = {
     if (Array.isArray(object?.exprs)) obj.exprs = object.exprs.map((e: any) => BigInt(e.toString()));
     return obj;
   },
-  toJSON(message: UnknownSet): unknown {
+  toJSON(message: UnknownSet): JsonSafe<UnknownSet> {
     const obj: any = {};
     if (message.exprs) {
       obj.exprs = message.exprs.map(e => (e || BigInt(0)).toString());

@@ -2,7 +2,6 @@ import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideAmino, QuotaOv
 import { FieldMask, FieldMaskAmino, FieldMaskSDKType } from "../../../protobuf/field_mask";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
@@ -1457,11 +1456,6 @@ export const EnableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
@@ -1537,11 +1531,6 @@ export const DisableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    return obj;
-  },
   fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
@@ -1615,11 +1604,6 @@ export const GetServiceRequest = {
   fromJSON(object: any): GetServiceRequest {
     const obj = createBaseGetServiceRequest();
     if (isSet(object.name)) obj.name = String(object.name);
-    return obj;
-  },
-  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
     return obj;
   },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
@@ -1719,14 +1703,6 @@ export const ListServicesRequest = {
     if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     if (isSet(object.filter)) obj.filter = String(object.filter);
-    return obj;
-  },
-  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.filter !== undefined && (obj.filter = message.filter);
     return obj;
   },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
@@ -1833,16 +1809,6 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
-    const obj: any = {};
-    if (message.services) {
-      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
-    } else {
-      obj.services = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
@@ -1937,16 +1903,6 @@ export const BatchEnableServicesRequest = {
     const obj = createBaseBatchEnableServicesRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
     if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    if (message.serviceIds) {
-      obj.serviceIds = message.serviceIds.map(e => e);
-    } else {
-      obj.serviceIds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
@@ -2061,14 +2017,6 @@ export const ListConsumerQuotaMetricsRequest = {
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: ListConsumerQuotaMetricsRequest): JsonSafe<ListConsumerQuotaMetricsRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListConsumerQuotaMetricsRequest>): ListConsumerQuotaMetricsRequest {
     const message = createBaseListConsumerQuotaMetricsRequest();
     message.parent = object.parent ?? "";
@@ -2173,16 +2121,6 @@ export const ListConsumerQuotaMetricsResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListConsumerQuotaMetricsResponse): JsonSafe<ListConsumerQuotaMetricsResponse> {
-    const obj: any = {};
-    if (message.metrics) {
-      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toJSON(e) : undefined);
-    } else {
-      obj.metrics = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListConsumerQuotaMetricsResponse>): ListConsumerQuotaMetricsResponse {
     const message = createBaseListConsumerQuotaMetricsResponse();
     message.metrics = object.metrics?.map(e => ConsumerQuotaMetric.fromPartial(e)) || [];
@@ -2279,12 +2217,6 @@ export const GetConsumerQuotaMetricRequest = {
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
     return obj;
   },
-  toJSON(message: GetConsumerQuotaMetricRequest): JsonSafe<GetConsumerQuotaMetricRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetConsumerQuotaMetricRequest>): GetConsumerQuotaMetricRequest {
     const message = createBaseGetConsumerQuotaMetricRequest();
     message.name = object.name ?? "";
@@ -2373,12 +2305,6 @@ export const GetConsumerQuotaLimitRequest = {
     const obj = createBaseGetConsumerQuotaLimitRequest();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
-    return obj;
-  },
-  toJSON(message: GetConsumerQuotaLimitRequest): JsonSafe<GetConsumerQuotaLimitRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
     return obj;
   },
   fromPartial(object: DeepPartial<GetConsumerQuotaLimitRequest>): GetConsumerQuotaLimitRequest {
@@ -2494,18 +2420,6 @@ export const CreateAdminOverrideRequest = {
     if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
     if (isSet(object.force)) obj.force = Boolean(object.force);
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
-  },
-  toJSON(message: CreateAdminOverrideRequest): JsonSafe<CreateAdminOverrideRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<CreateAdminOverrideRequest>): CreateAdminOverrideRequest {
@@ -2653,19 +2567,6 @@ export const UpdateAdminOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: UpdateAdminOverrideRequest): JsonSafe<UpdateAdminOverrideRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateAdminOverrideRequest>): UpdateAdminOverrideRequest {
     const message = createBaseUpdateAdminOverrideRequest();
     message.name = object.name ?? "";
@@ -2804,17 +2705,6 @@ export const DeleteAdminOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: DeleteAdminOverrideRequest): JsonSafe<DeleteAdminOverrideRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteAdminOverrideRequest>): DeleteAdminOverrideRequest {
     const message = createBaseDeleteAdminOverrideRequest();
     message.name = object.name ?? "";
@@ -2926,13 +2816,6 @@ export const ListAdminOverridesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListAdminOverridesRequest): JsonSafe<ListAdminOverridesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListAdminOverridesRequest>): ListAdminOverridesRequest {
     const message = createBaseListAdminOverridesRequest();
     message.parent = object.parent ?? "";
@@ -3030,16 +2913,6 @@ export const ListAdminOverridesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListAdminOverridesResponse): JsonSafe<ListAdminOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListAdminOverridesResponse>): ListAdminOverridesResponse {
     const message = createBaseListAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
@@ -3126,15 +2999,6 @@ export const BatchCreateAdminOverridesResponse = {
   fromJSON(object: any): BatchCreateAdminOverridesResponse {
     const obj = createBaseBatchCreateAdminOverridesResponse();
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchCreateAdminOverridesResponse): JsonSafe<BatchCreateAdminOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BatchCreateAdminOverridesResponse>): BatchCreateAdminOverridesResponse {
@@ -3251,18 +3115,6 @@ export const ImportAdminOverridesRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: ImportAdminOverridesRequest): JsonSafe<ImportAdminOverridesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ImportAdminOverridesRequest>): ImportAdminOverridesRequest {
     const message = createBaseImportAdminOverridesRequest();
     message.parent = object.parent ?? "";
@@ -3367,15 +3219,6 @@ export const ImportAdminOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: ImportAdminOverridesResponse): JsonSafe<ImportAdminOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ImportAdminOverridesResponse>): ImportAdminOverridesResponse {
     const message = createBaseImportAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
@@ -3446,10 +3289,6 @@ export const ImportAdminOverridesMetadata = {
   },
   fromJSON(_: any): ImportAdminOverridesMetadata {
     const obj = createBaseImportAdminOverridesMetadata();
-    return obj;
-  },
-  toJSON(_: ImportAdminOverridesMetadata): JsonSafe<ImportAdminOverridesMetadata> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<ImportAdminOverridesMetadata>): ImportAdminOverridesMetadata {
@@ -3550,18 +3389,6 @@ export const CreateConsumerOverrideRequest = {
     if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
     if (isSet(object.force)) obj.force = Boolean(object.force);
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
-    return obj;
-  },
-  toJSON(message: CreateConsumerOverrideRequest): JsonSafe<CreateConsumerOverrideRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<CreateConsumerOverrideRequest>): CreateConsumerOverrideRequest {
@@ -3709,19 +3536,6 @@ export const UpdateConsumerOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: UpdateConsumerOverrideRequest): JsonSafe<UpdateConsumerOverrideRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<UpdateConsumerOverrideRequest>): UpdateConsumerOverrideRequest {
     const message = createBaseUpdateConsumerOverrideRequest();
     message.name = object.name ?? "";
@@ -3860,17 +3674,6 @@ export const DeleteConsumerOverrideRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: DeleteConsumerOverrideRequest): JsonSafe<DeleteConsumerOverrideRequest> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeleteConsumerOverrideRequest>): DeleteConsumerOverrideRequest {
     const message = createBaseDeleteConsumerOverrideRequest();
     message.name = object.name ?? "";
@@ -3982,13 +3785,6 @@ export const ListConsumerOverridesRequest = {
     if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
     return obj;
   },
-  toJSON(message: ListConsumerOverridesRequest): JsonSafe<ListConsumerOverridesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
-    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListConsumerOverridesRequest>): ListConsumerOverridesRequest {
     const message = createBaseListConsumerOverridesRequest();
     message.parent = object.parent ?? "";
@@ -4086,16 +3882,6 @@ export const ListConsumerOverridesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListConsumerOverridesResponse): JsonSafe<ListConsumerOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ListConsumerOverridesResponse>): ListConsumerOverridesResponse {
     const message = createBaseListConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
@@ -4182,15 +3968,6 @@ export const BatchCreateConsumerOverridesResponse = {
   fromJSON(object: any): BatchCreateConsumerOverridesResponse {
     const obj = createBaseBatchCreateConsumerOverridesResponse();
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BatchCreateConsumerOverridesResponse): JsonSafe<BatchCreateConsumerOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BatchCreateConsumerOverridesResponse>): BatchCreateConsumerOverridesResponse {
@@ -4307,18 +4084,6 @@ export const ImportConsumerOverridesRequest = {
     if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
     return obj;
   },
-  toJSON(message: ImportConsumerOverridesRequest): JsonSafe<ImportConsumerOverridesRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
-    message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
-    message.force !== undefined && (obj.force = message.force);
-    if (message.forceOnly) {
-      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
-    } else {
-      obj.forceOnly = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ImportConsumerOverridesRequest>): ImportConsumerOverridesRequest {
     const message = createBaseImportConsumerOverridesRequest();
     message.parent = object.parent ?? "";
@@ -4423,15 +4188,6 @@ export const ImportConsumerOverridesResponse = {
     if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
     return obj;
   },
-  toJSON(message: ImportConsumerOverridesResponse): JsonSafe<ImportConsumerOverridesResponse> {
-    const obj: any = {};
-    if (message.overrides) {
-      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
-    } else {
-      obj.overrides = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ImportConsumerOverridesResponse>): ImportConsumerOverridesResponse {
     const message = createBaseImportConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
@@ -4504,10 +4260,6 @@ export const ImportConsumerOverridesMetadata = {
     const obj = createBaseImportConsumerOverridesMetadata();
     return obj;
   },
-  toJSON(_: ImportConsumerOverridesMetadata): JsonSafe<ImportConsumerOverridesMetadata> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ImportConsumerOverridesMetadata>): ImportConsumerOverridesMetadata {
     const message = createBaseImportConsumerOverridesMetadata();
     return message;
@@ -4573,15 +4325,6 @@ export const ImportAdminQuotaPoliciesResponse = {
   fromJSON(object: any): ImportAdminQuotaPoliciesResponse {
     const obj = createBaseImportAdminQuotaPoliciesResponse();
     if (Array.isArray(object?.policies)) obj.policies = object.policies.map((e: any) => AdminQuotaPolicy.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ImportAdminQuotaPoliciesResponse): JsonSafe<ImportAdminQuotaPoliciesResponse> {
-    const obj: any = {};
-    if (message.policies) {
-      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toJSON(e) : undefined);
-    } else {
-      obj.policies = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ImportAdminQuotaPoliciesResponse>): ImportAdminQuotaPoliciesResponse {
@@ -4656,10 +4399,6 @@ export const ImportAdminQuotaPoliciesMetadata = {
     const obj = createBaseImportAdminQuotaPoliciesMetadata();
     return obj;
   },
-  toJSON(_: ImportAdminQuotaPoliciesMetadata): JsonSafe<ImportAdminQuotaPoliciesMetadata> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<ImportAdminQuotaPoliciesMetadata>): ImportAdminQuotaPoliciesMetadata {
     const message = createBaseImportAdminQuotaPoliciesMetadata();
     return message;
@@ -4716,10 +4455,6 @@ export const CreateAdminQuotaPolicyMetadata = {
   },
   fromJSON(_: any): CreateAdminQuotaPolicyMetadata {
     const obj = createBaseCreateAdminQuotaPolicyMetadata();
-    return obj;
-  },
-  toJSON(_: CreateAdminQuotaPolicyMetadata): JsonSafe<CreateAdminQuotaPolicyMetadata> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<CreateAdminQuotaPolicyMetadata>): CreateAdminQuotaPolicyMetadata {
@@ -4780,10 +4515,6 @@ export const UpdateAdminQuotaPolicyMetadata = {
     const obj = createBaseUpdateAdminQuotaPolicyMetadata();
     return obj;
   },
-  toJSON(_: UpdateAdminQuotaPolicyMetadata): JsonSafe<UpdateAdminQuotaPolicyMetadata> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<UpdateAdminQuotaPolicyMetadata>): UpdateAdminQuotaPolicyMetadata {
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
     return message;
@@ -4840,10 +4571,6 @@ export const DeleteAdminQuotaPolicyMetadata = {
   },
   fromJSON(_: any): DeleteAdminQuotaPolicyMetadata {
     const obj = createBaseDeleteAdminQuotaPolicyMetadata();
-    return obj;
-  },
-  toJSON(_: DeleteAdminQuotaPolicyMetadata): JsonSafe<DeleteAdminQuotaPolicyMetadata> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<DeleteAdminQuotaPolicyMetadata>): DeleteAdminQuotaPolicyMetadata {
@@ -4911,11 +4638,6 @@ export const GenerateServiceIdentityRequest = {
   fromJSON(object: any): GenerateServiceIdentityRequest {
     const obj = createBaseGenerateServiceIdentityRequest();
     if (isSet(object.parent)) obj.parent = String(object.parent);
-    return obj;
-  },
-  toJSON(message: GenerateServiceIdentityRequest): JsonSafe<GenerateServiceIdentityRequest> {
-    const obj: any = {};
-    message.parent !== undefined && (obj.parent = message.parent);
     return obj;
   },
   fromPartial(object: DeepPartial<GenerateServiceIdentityRequest>): GenerateServiceIdentityRequest {
@@ -5001,12 +4723,6 @@ export const GetServiceIdentityResponse = {
     if (isSet(object.state)) obj.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
     return obj;
   },
-  toJSON(message: GetServiceIdentityResponse): JsonSafe<GetServiceIdentityResponse> {
-    const obj: any = {};
-    message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toJSON(message.identity) : undefined);
-    message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
-    return obj;
-  },
   fromPartial(object: DeepPartial<GetServiceIdentityResponse>): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
     if (object.identity !== undefined && object.identity !== null) {
@@ -5080,10 +4796,6 @@ export const GetServiceIdentityMetadata = {
   },
   fromJSON(_: any): GetServiceIdentityMetadata {
     const obj = createBaseGetServiceIdentityMetadata();
-    return obj;
-  },
-  toJSON(_: GetServiceIdentityMetadata): JsonSafe<GetServiceIdentityMetadata> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<GetServiceIdentityMetadata>): GetServiceIdentityMetadata {

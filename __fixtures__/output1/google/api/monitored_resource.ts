@@ -3,6 +3,7 @@ import { LaunchStage, LaunchStageSDKType, launchStageFromJSON, launchStageToJSON
 import { Struct, StructSDKType } from "../protobuf/struct";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * An object that describes the schema of a [MonitoredResource][google.api.MonitoredResource] object using a
@@ -253,7 +254,7 @@ export const MonitoredResourceDescriptor = {
       launchStage: isSet(object.launchStage) ? launchStageFromJSON(object.launchStage) : -1
     };
   },
-  toJSON(message: MonitoredResourceDescriptor): unknown {
+  toJSON(message: MonitoredResourceDescriptor): JsonSafe<MonitoredResourceDescriptor> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.type !== undefined && (obj.type = message.type);
@@ -344,7 +345,7 @@ export const MonitoredResource_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: MonitoredResource_LabelsEntry): unknown {
+  toJSON(message: MonitoredResource_LabelsEntry): JsonSafe<MonitoredResource_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -422,7 +423,7 @@ export const MonitoredResource = {
       }, {}) : {}
     };
   },
-  toJSON(message: MonitoredResource): unknown {
+  toJSON(message: MonitoredResource): JsonSafe<MonitoredResource> {
     const obj: any = {};
     message.type !== undefined && (obj.type = message.type);
     obj.labels = {};
@@ -511,7 +512,7 @@ export const MonitoredResourceMetadata_UserLabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): unknown {
+  toJSON(message: MonitoredResourceMetadata_UserLabelsEntry): JsonSafe<MonitoredResourceMetadata_UserLabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -589,7 +590,7 @@ export const MonitoredResourceMetadata = {
       }, {}) : {}
     };
   },
-  toJSON(message: MonitoredResourceMetadata): unknown {
+  toJSON(message: MonitoredResourceMetadata): JsonSafe<MonitoredResourceMetadata> {
     const obj: any = {};
     message.systemLabels !== undefined && (obj.systemLabels = message.systemLabels ? Struct.toJSON(message.systemLabels) : undefined);
     obj.userLabels = {};

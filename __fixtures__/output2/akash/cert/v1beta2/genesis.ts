@@ -3,6 +3,7 @@
 import { Certificate } from "./cert";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
@@ -55,7 +56,7 @@ export const GenesisCertificate = {
       certificate: isSet(object.certificate) ? Certificate.fromJSON(object.certificate) : undefined
     };
   },
-  toJSON(message: GenesisCertificate): unknown {
+  toJSON(message: GenesisCertificate): JsonSafe<GenesisCertificate> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
@@ -102,7 +103,7 @@ export const GenesisState = {
       certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => GenesisCertificate.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.certificates) {
       obj.certificates = message.certificates.map(e => e ? GenesisCertificate.toJSON(e) : undefined);

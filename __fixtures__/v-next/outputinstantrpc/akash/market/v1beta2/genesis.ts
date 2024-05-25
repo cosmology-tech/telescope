@@ -3,6 +3,7 @@ import { Lease, LeaseSDKType } from "./lease";
 import { Params, ParamsSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
@@ -71,7 +72,7 @@ export const GenesisState = {
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);

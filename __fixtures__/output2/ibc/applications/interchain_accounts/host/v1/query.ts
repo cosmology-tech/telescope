@@ -2,6 +2,7 @@
 /* eslint-disable */
 import { Params } from "./host";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../../json-safe";
 import { DeepPartial, isSet, Rpc } from "../../../../../helpers";
 export const protobufPackage = "ibc.applications.interchain_accounts.host.v1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -35,7 +36,7 @@ export const QueryParamsRequest = {
   fromJSON(_: any): QueryParamsRequest {
     return {};
   },
-  toJSON(_: QueryParamsRequest): unknown {
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     return obj;
   },
@@ -78,7 +79,7 @@ export const QueryParamsResponse = {
       params: isSet(object.params) ? Params.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;

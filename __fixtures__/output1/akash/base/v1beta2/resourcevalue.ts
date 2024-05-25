@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -43,7 +44,7 @@ export const ResourceValue = {
       val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
     };
   },
-  toJSON(message: ResourceValue): unknown {
+  toJSON(message: ResourceValue): JsonSafe<ResourceValue> {
     const obj: any = {};
     message.val !== undefined && (obj.val = base64FromBytes(message.val !== undefined ? message.val : new Uint8Array()));
     return obj;

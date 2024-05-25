@@ -1,7 +1,6 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** AccessType permission types */
@@ -380,11 +379,6 @@ export const AccessTypeParam = {
     if (isSet(object.value)) obj.value = accessTypeFromJSON(object.value);
     return obj;
   },
-  toJSON(message: AccessTypeParam): JsonSafe<AccessTypeParam> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = accessTypeToJSON(message.value));
-    return obj;
-  },
   fromPartial(object: DeepPartial<AccessTypeParam>): AccessTypeParam {
     const message = createBaseAccessTypeParam();
     message.value = object.value ?? 0;
@@ -467,12 +461,6 @@ export const AccessConfig = {
     const obj = createBaseAccessConfig();
     if (isSet(object.permission)) obj.permission = accessTypeFromJSON(object.permission);
     if (isSet(object.address)) obj.address = String(object.address);
-    return obj;
-  },
-  toJSON(message: AccessConfig): JsonSafe<AccessConfig> {
-    const obj: any = {};
-    message.permission !== undefined && (obj.permission = accessTypeToJSON(message.permission));
-    message.address !== undefined && (obj.address = message.address);
     return obj;
   },
   fromPartial(object: DeepPartial<AccessConfig>): AccessConfig {
@@ -572,13 +560,6 @@ export const Params = {
     if (isSet(object.codeUploadAccess)) obj.codeUploadAccess = AccessConfig.fromJSON(object.codeUploadAccess);
     if (isSet(object.instantiateDefaultPermission)) obj.instantiateDefaultPermission = accessTypeFromJSON(object.instantiateDefaultPermission);
     if (isSet(object.maxWasmCodeSize)) obj.maxWasmCodeSize = BigInt(object.maxWasmCodeSize.toString());
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.codeUploadAccess !== undefined && (obj.codeUploadAccess = message.codeUploadAccess ? AccessConfig.toJSON(message.codeUploadAccess) : undefined);
-    message.instantiateDefaultPermission !== undefined && (obj.instantiateDefaultPermission = accessTypeToJSON(message.instantiateDefaultPermission));
-    message.maxWasmCodeSize !== undefined && (obj.maxWasmCodeSize = (message.maxWasmCodeSize || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -689,13 +670,6 @@ export const CodeInfo = {
     if (isSet(object.codeHash)) obj.codeHash = bytesFromBase64(object.codeHash);
     if (isSet(object.creator)) obj.creator = String(object.creator);
     if (isSet(object.instantiateConfig)) obj.instantiateConfig = AccessConfig.fromJSON(object.instantiateConfig);
-    return obj;
-  },
-  toJSON(message: CodeInfo): JsonSafe<CodeInfo> {
-    const obj: any = {};
-    message.codeHash !== undefined && (obj.codeHash = base64FromBytes(message.codeHash !== undefined ? message.codeHash : new Uint8Array()));
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.instantiateConfig !== undefined && (obj.instantiateConfig = message.instantiateConfig ? AccessConfig.toJSON(message.instantiateConfig) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CodeInfo>): CodeInfo {
@@ -836,17 +810,6 @@ export const ContractInfo = {
     if (isSet(object.created)) obj.created = AbsoluteTxPosition.fromJSON(object.created);
     if (isSet(object.ibcPortId)) obj.ibcPortId = String(object.ibcPortId);
     if (isSet(object.extension)) obj.extension = Any.fromJSON(object.extension);
-    return obj;
-  },
-  toJSON(message: ContractInfo): JsonSafe<ContractInfo> {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.creator !== undefined && (obj.creator = message.creator);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.label !== undefined && (obj.label = message.label);
-    message.created !== undefined && (obj.created = message.created ? AbsoluteTxPosition.toJSON(message.created) : undefined);
-    message.ibcPortId !== undefined && (obj.ibcPortId = message.ibcPortId);
-    message.extension !== undefined && (obj.extension = message.extension ? Any.toJSON(message.extension) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ContractInfo>): ContractInfo {
@@ -997,14 +960,6 @@ export const ContractCodeHistoryEntry = {
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     return obj;
   },
-  toJSON(message: ContractCodeHistoryEntry): JsonSafe<ContractCodeHistoryEntry> {
-    const obj: any = {};
-    message.operation !== undefined && (obj.operation = contractCodeHistoryOperationTypeToJSON(message.operation));
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.updated !== undefined && (obj.updated = message.updated ? AbsoluteTxPosition.toJSON(message.updated) : undefined);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ContractCodeHistoryEntry>): ContractCodeHistoryEntry {
     const message = createBaseContractCodeHistoryEntry();
     message.operation = object.operation ?? 0;
@@ -1114,12 +1069,6 @@ export const AbsoluteTxPosition = {
     if (isSet(object.txIndex)) obj.txIndex = BigInt(object.txIndex.toString());
     return obj;
   },
-  toJSON(message: AbsoluteTxPosition): JsonSafe<AbsoluteTxPosition> {
-    const obj: any = {};
-    message.blockHeight !== undefined && (obj.blockHeight = (message.blockHeight || BigInt(0)).toString());
-    message.txIndex !== undefined && (obj.txIndex = (message.txIndex || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<AbsoluteTxPosition>): AbsoluteTxPosition {
     const message = createBaseAbsoluteTxPosition();
     if (object.blockHeight !== undefined && object.blockHeight !== null) {
@@ -1213,12 +1162,6 @@ export const Model = {
     const obj = createBaseModel();
     if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
-    return obj;
-  },
-  toJSON(message: Model): JsonSafe<Model> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<Model>): Model {

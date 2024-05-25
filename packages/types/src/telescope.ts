@@ -349,7 +349,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             num64: 'bigint',
             useDeepPartial: false,
             useExact: false,
-            toJsonUnknown: true,
+            toJsonUnknown: false,
             timestamp: 'date',
             duration: 'duration',
             updatedDuration: false,

@@ -1,6 +1,7 @@
 import { Metadata, MetadataAmino, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** Owner enumerates the ownership of a ERC20 contract. */
 export enum Owner {
@@ -278,7 +279,7 @@ export const TokenPair = {
     if (isSet(object.contractOwner)) obj.contractOwner = ownerFromJSON(object.contractOwner);
     return obj;
   },
-  toJSON(message: TokenPair): unknown {
+  toJSON(message: TokenPair): JsonSafe<TokenPair> {
     const obj: any = {};
     message.erc20Address !== undefined && (obj.erc20Address = message.erc20Address);
     message.denom !== undefined && (obj.denom = message.denom);
@@ -401,7 +402,7 @@ export const RegisterCoinProposal = {
     if (isSet(object.metadata)) obj.metadata = Metadata.fromJSON(object.metadata);
     return obj;
   },
-  toJSON(message: RegisterCoinProposal): unknown {
+  toJSON(message: RegisterCoinProposal): JsonSafe<RegisterCoinProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -518,7 +519,7 @@ export const RegisterERC20Proposal = {
     if (isSet(object.erc20address)) obj.erc20address = String(object.erc20address);
     return obj;
   },
-  toJSON(message: RegisterERC20Proposal): unknown {
+  toJSON(message: RegisterERC20Proposal): JsonSafe<RegisterERC20Proposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -633,7 +634,7 @@ export const ToggleTokenConversionProposal = {
     if (isSet(object.token)) obj.token = String(object.token);
     return obj;
   },
-  toJSON(message: ToggleTokenConversionProposal): unknown {
+  toJSON(message: ToggleTokenConversionProposal): JsonSafe<ToggleTokenConversionProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);

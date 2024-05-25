@@ -1,7 +1,6 @@
 import { FeeToken, FeeTokenAmino, FeeTokenSDKType } from "./feetoken";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
@@ -64,16 +63,6 @@ export const GenesisState = {
     const obj = createBaseGenesisState();
     if (isSet(object.basedenom)) obj.basedenom = String(object.basedenom);
     if (Array.isArray(object?.feetokens)) obj.feetokens = object.feetokens.map((e: any) => FeeToken.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.basedenom !== undefined && (obj.basedenom = message.basedenom);
-    if (message.feetokens) {
-      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toJSON(e) : undefined);
-    } else {
-      obj.feetokens = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

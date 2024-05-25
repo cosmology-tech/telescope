@@ -2,7 +2,6 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType, Coin, CoinAmino, CoinSDKType } f
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /** Params defines the set of params for the distribution module. */
 export interface Params {
@@ -439,14 +438,6 @@ export const Params = {
     if (isSet(object.withdrawAddrEnabled)) obj.withdrawAddrEnabled = Boolean(object.withdrawAddrEnabled);
     return obj;
   },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.communityTax !== undefined && (obj.communityTax = message.communityTax);
-    message.baseProposerReward !== undefined && (obj.baseProposerReward = message.baseProposerReward);
-    message.bonusProposerReward !== undefined && (obj.bonusProposerReward = message.bonusProposerReward);
-    message.withdrawAddrEnabled !== undefined && (obj.withdrawAddrEnabled = message.withdrawAddrEnabled);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.communityTax = object.communityTax ?? "";
@@ -552,16 +543,6 @@ export const ValidatorHistoricalRewards = {
     if (isSet(object.referenceCount)) obj.referenceCount = Number(object.referenceCount);
     return obj;
   },
-  toJSON(message: ValidatorHistoricalRewards): JsonSafe<ValidatorHistoricalRewards> {
-    const obj: any = {};
-    if (message.cumulativeRewardRatio) {
-      obj.cumulativeRewardRatio = message.cumulativeRewardRatio.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.cumulativeRewardRatio = [];
-    }
-    message.referenceCount !== undefined && (obj.referenceCount = Math.round(message.referenceCount));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorHistoricalRewards>): ValidatorHistoricalRewards {
     const message = createBaseValidatorHistoricalRewards();
     message.cumulativeRewardRatio = object.cumulativeRewardRatio?.map(e => DecCoin.fromPartial(e)) || [];
@@ -659,16 +640,6 @@ export const ValidatorCurrentRewards = {
     if (isSet(object.period)) obj.period = BigInt(object.period.toString());
     return obj;
   },
-  toJSON(message: ValidatorCurrentRewards): JsonSafe<ValidatorCurrentRewards> {
-    const obj: any = {};
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-    message.period !== undefined && (obj.period = (message.period || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorCurrentRewards>): ValidatorCurrentRewards {
     const message = createBaseValidatorCurrentRewards();
     message.rewards = object.rewards?.map(e => DecCoin.fromPartial(e)) || [];
@@ -760,15 +731,6 @@ export const ValidatorAccumulatedCommission = {
     if (Array.isArray(object?.commission)) obj.commission = object.commission.map((e: any) => DecCoin.fromJSON(e));
     return obj;
   },
-  toJSON(message: ValidatorAccumulatedCommission): JsonSafe<ValidatorAccumulatedCommission> {
-    const obj: any = {};
-    if (message.commission) {
-      obj.commission = message.commission.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.commission = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorAccumulatedCommission>): ValidatorAccumulatedCommission {
     const message = createBaseValidatorAccumulatedCommission();
     message.commission = object.commission?.map(e => DecCoin.fromPartial(e)) || [];
@@ -849,15 +811,6 @@ export const ValidatorOutstandingRewards = {
   fromJSON(object: any): ValidatorOutstandingRewards {
     const obj = createBaseValidatorOutstandingRewards();
     if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ValidatorOutstandingRewards): JsonSafe<ValidatorOutstandingRewards> {
-    const obj: any = {};
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ValidatorOutstandingRewards>): ValidatorOutstandingRewards {
@@ -950,12 +903,6 @@ export const ValidatorSlashEvent = {
     if (isSet(object.fraction)) obj.fraction = String(object.fraction);
     return obj;
   },
-  toJSON(message: ValidatorSlashEvent): JsonSafe<ValidatorSlashEvent> {
-    const obj: any = {};
-    message.validatorPeriod !== undefined && (obj.validatorPeriod = (message.validatorPeriod || BigInt(0)).toString());
-    message.fraction !== undefined && (obj.fraction = message.fraction);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorSlashEvent>): ValidatorSlashEvent {
     const message = createBaseValidatorSlashEvent();
     if (object.validatorPeriod !== undefined && object.validatorPeriod !== null) {
@@ -1041,15 +988,6 @@ export const ValidatorSlashEvents = {
     if (Array.isArray(object?.validatorSlashEvents)) obj.validatorSlashEvents = object.validatorSlashEvents.map((e: any) => ValidatorSlashEvent.fromJSON(e));
     return obj;
   },
-  toJSON(message: ValidatorSlashEvents): JsonSafe<ValidatorSlashEvents> {
-    const obj: any = {};
-    if (message.validatorSlashEvents) {
-      obj.validatorSlashEvents = message.validatorSlashEvents.map(e => e ? ValidatorSlashEvent.toJSON(e) : undefined);
-    } else {
-      obj.validatorSlashEvents = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<ValidatorSlashEvents>): ValidatorSlashEvents {
     const message = createBaseValidatorSlashEvents();
     message.validatorSlashEvents = object.validatorSlashEvents?.map(e => ValidatorSlashEvent.fromPartial(e)) || [];
@@ -1130,15 +1068,6 @@ export const FeePool = {
   fromJSON(object: any): FeePool {
     const obj = createBaseFeePool();
     if (Array.isArray(object?.communityPool)) obj.communityPool = object.communityPool.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: FeePool): JsonSafe<FeePool> {
-    const obj: any = {};
-    if (message.communityPool) {
-      obj.communityPool = message.communityPool.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.communityPool = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<FeePool>): FeePool {
@@ -1245,18 +1174,6 @@ export const CommunityPoolSpendProposal = {
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.recipient)) obj.recipient = String(object.recipient);
     if (Array.isArray(object?.amount)) obj.amount = object.amount.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: CommunityPoolSpendProposal): JsonSafe<CommunityPoolSpendProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.recipient !== undefined && (obj.recipient = message.recipient);
-    if (message.amount) {
-      obj.amount = message.amount.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.amount = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<CommunityPoolSpendProposal>): CommunityPoolSpendProposal {
@@ -1378,13 +1295,6 @@ export const DelegatorStartingInfo = {
     if (isSet(object.height)) obj.height = BigInt(object.height.toString());
     return obj;
   },
-  toJSON(message: DelegatorStartingInfo): JsonSafe<DelegatorStartingInfo> {
-    const obj: any = {};
-    message.previousPeriod !== undefined && (obj.previousPeriod = (message.previousPeriod || BigInt(0)).toString());
-    message.stake !== undefined && (obj.stake = message.stake);
-    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<DelegatorStartingInfo>): DelegatorStartingInfo {
     const message = createBaseDelegatorStartingInfo();
     if (object.previousPeriod !== undefined && object.previousPeriod !== null) {
@@ -1485,16 +1395,6 @@ export const DelegationDelegatorReward = {
     const obj = createBaseDelegationDelegatorReward();
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     if (Array.isArray(object?.reward)) obj.reward = object.reward.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DelegationDelegatorReward): JsonSafe<DelegationDelegatorReward> {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    if (message.reward) {
-      obj.reward = message.reward.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.reward = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<DelegationDelegatorReward>): DelegationDelegatorReward {
@@ -1616,15 +1516,6 @@ export const CommunityPoolSpendProposalWithDeposit = {
     if (isSet(object.recipient)) obj.recipient = String(object.recipient);
     if (isSet(object.amount)) obj.amount = String(object.amount);
     if (isSet(object.deposit)) obj.deposit = String(object.deposit);
-    return obj;
-  },
-  toJSON(message: CommunityPoolSpendProposalWithDeposit): JsonSafe<CommunityPoolSpendProposalWithDeposit> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.recipient !== undefined && (obj.recipient = message.recipient);
-    message.amount !== undefined && (obj.amount = message.amount);
-    message.deposit !== undefined && (obj.deposit = message.deposit);
     return obj;
   },
   fromPartial(object: DeepPartial<CommunityPoolSpendProposalWithDeposit>): CommunityPoolSpendProposalWithDeposit {

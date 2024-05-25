@@ -1,5 +1,6 @@
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
@@ -47,7 +48,7 @@ export const MsgUnjail = {
       validatorAddr: isSet(object.validatorAddr) ? String(object.validatorAddr) : ""
     };
   },
-  toJSON(message: MsgUnjail): unknown {
+  toJSON(message: MsgUnjail): JsonSafe<MsgUnjail> {
     const obj: any = {};
     message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
     return obj;
@@ -92,7 +93,7 @@ export const MsgUnjailResponse = {
   fromJSON(_: any): MsgUnjailResponse {
     return {};
   },
-  toJSON(_: MsgUnjailResponse): unknown {
+  toJSON(_: MsgUnjailResponse): JsonSafe<MsgUnjailResponse> {
     const obj: any = {};
     return obj;
   },

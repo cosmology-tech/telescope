@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -847,7 +848,7 @@ export const RoutingRule = {
       routingParameters: Array.isArray(object?.routingParameters) ? object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e)) : []
     };
   },
-  toJSON(message: RoutingRule): unknown {
+  toJSON(message: RoutingRule): JsonSafe<RoutingRule> {
     const obj: any = {};
     if (message.routingParameters) {
       obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
@@ -953,7 +954,7 @@ export const RoutingParameter = {
       pathTemplate: isSet(object.pathTemplate) ? String(object.pathTemplate) : ""
     };
   },
-  toJSON(message: RoutingParameter): unknown {
+  toJSON(message: RoutingParameter): JsonSafe<RoutingParameter> {
     const obj: any = {};
     message.field !== undefined && (obj.field = message.field);
     message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);

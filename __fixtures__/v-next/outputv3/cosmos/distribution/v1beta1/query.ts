@@ -2,7 +2,6 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Params, ParamsAmino, ParamsSDKType, ValidatorOutstandingRewards, ValidatorOutstandingRewardsAmino, ValidatorOutstandingRewardsSDKType, ValidatorAccumulatedCommission, ValidatorAccumulatedCommissionAmino, ValidatorAccumulatedCommissionSDKType, ValidatorSlashEvent, ValidatorSlashEventAmino, ValidatorSlashEventSDKType, DelegationDelegatorReward, DelegationDelegatorRewardAmino, DelegationDelegatorRewardSDKType } from "./distribution";
 import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.distribution.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -512,10 +511,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -582,11 +577,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -667,11 +657,6 @@ export const QueryValidatorOutstandingRewardsRequest = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: QueryValidatorOutstandingRewardsRequest): JsonSafe<QueryValidatorOutstandingRewardsRequest> {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryValidatorOutstandingRewardsRequest>): QueryValidatorOutstandingRewardsRequest {
     const message = createBaseQueryValidatorOutstandingRewardsRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -746,11 +731,6 @@ export const QueryValidatorOutstandingRewardsResponse = {
   fromJSON(object: any): QueryValidatorOutstandingRewardsResponse {
     const obj = createBaseQueryValidatorOutstandingRewardsResponse();
     if (isSet(object.rewards)) obj.rewards = ValidatorOutstandingRewards.fromJSON(object.rewards);
-    return obj;
-  },
-  toJSON(message: QueryValidatorOutstandingRewardsResponse): JsonSafe<QueryValidatorOutstandingRewardsResponse> {
-    const obj: any = {};
-    message.rewards !== undefined && (obj.rewards = message.rewards ? ValidatorOutstandingRewards.toJSON(message.rewards) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryValidatorOutstandingRewardsResponse>): QueryValidatorOutstandingRewardsResponse {
@@ -831,11 +811,6 @@ export const QueryValidatorCommissionRequest = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: QueryValidatorCommissionRequest): JsonSafe<QueryValidatorCommissionRequest> {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryValidatorCommissionRequest>): QueryValidatorCommissionRequest {
     const message = createBaseQueryValidatorCommissionRequest();
     message.validatorAddress = object.validatorAddress ?? "";
@@ -910,11 +885,6 @@ export const QueryValidatorCommissionResponse = {
   fromJSON(object: any): QueryValidatorCommissionResponse {
     const obj = createBaseQueryValidatorCommissionResponse();
     if (isSet(object.commission)) obj.commission = ValidatorAccumulatedCommission.fromJSON(object.commission);
-    return obj;
-  },
-  toJSON(message: QueryValidatorCommissionResponse): JsonSafe<QueryValidatorCommissionResponse> {
-    const obj: any = {};
-    message.commission !== undefined && (obj.commission = message.commission ? ValidatorAccumulatedCommission.toJSON(message.commission) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryValidatorCommissionResponse>): QueryValidatorCommissionResponse {
@@ -1017,14 +987,6 @@ export const QueryValidatorSlashesRequest = {
     if (isSet(object.startingHeight)) obj.startingHeight = BigInt(object.startingHeight.toString());
     if (isSet(object.endingHeight)) obj.endingHeight = BigInt(object.endingHeight.toString());
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryValidatorSlashesRequest): JsonSafe<QueryValidatorSlashesRequest> {
-    const obj: any = {};
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.startingHeight !== undefined && (obj.startingHeight = (message.startingHeight || BigInt(0)).toString());
-    message.endingHeight !== undefined && (obj.endingHeight = (message.endingHeight || BigInt(0)).toString());
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryValidatorSlashesRequest>): QueryValidatorSlashesRequest {
@@ -1138,16 +1100,6 @@ export const QueryValidatorSlashesResponse = {
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryValidatorSlashesResponse): JsonSafe<QueryValidatorSlashesResponse> {
-    const obj: any = {};
-    if (message.slashes) {
-      obj.slashes = message.slashes.map(e => e ? ValidatorSlashEvent.toJSON(e) : undefined);
-    } else {
-      obj.slashes = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryValidatorSlashesResponse>): QueryValidatorSlashesResponse {
     const message = createBaseQueryValidatorSlashesResponse();
     message.slashes = object.slashes?.map(e => ValidatorSlashEvent.fromPartial(e)) || [];
@@ -1247,12 +1199,6 @@ export const QueryDelegationRewardsRequest = {
     if (isSet(object.validatorAddress)) obj.validatorAddress = String(object.validatorAddress);
     return obj;
   },
-  toJSON(message: QueryDelegationRewardsRequest): JsonSafe<QueryDelegationRewardsRequest> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDelegationRewardsRequest>): QueryDelegationRewardsRequest {
     const message = createBaseQueryDelegationRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1334,15 +1280,6 @@ export const QueryDelegationRewardsResponse = {
   fromJSON(object: any): QueryDelegationRewardsResponse {
     const obj = createBaseQueryDelegationRewardsResponse();
     if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryDelegationRewardsResponse): JsonSafe<QueryDelegationRewardsResponse> {
-    const obj: any = {};
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDelegationRewardsResponse>): QueryDelegationRewardsResponse {
@@ -1427,11 +1364,6 @@ export const QueryDelegationTotalRewardsRequest = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     return obj;
   },
-  toJSON(message: QueryDelegationTotalRewardsRequest): JsonSafe<QueryDelegationTotalRewardsRequest> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDelegationTotalRewardsRequest>): QueryDelegationTotalRewardsRequest {
     const message = createBaseQueryDelegationTotalRewardsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1514,20 +1446,6 @@ export const QueryDelegationTotalRewardsResponse = {
     const obj = createBaseQueryDelegationTotalRewardsResponse();
     if (Array.isArray(object?.rewards)) obj.rewards = object.rewards.map((e: any) => DelegationDelegatorReward.fromJSON(e));
     if (Array.isArray(object?.total)) obj.total = object.total.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryDelegationTotalRewardsResponse): JsonSafe<QueryDelegationTotalRewardsResponse> {
-    const obj: any = {};
-    if (message.rewards) {
-      obj.rewards = message.rewards.map(e => e ? DelegationDelegatorReward.toJSON(e) : undefined);
-    } else {
-      obj.rewards = [];
-    }
-    if (message.total) {
-      obj.total = message.total.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.total = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDelegationTotalRewardsResponse>): QueryDelegationTotalRewardsResponse {
@@ -1625,11 +1543,6 @@ export const QueryDelegatorValidatorsRequest = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     return obj;
   },
-  toJSON(message: QueryDelegatorValidatorsRequest): JsonSafe<QueryDelegatorValidatorsRequest> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsRequest>): QueryDelegatorValidatorsRequest {
     const message = createBaseQueryDelegatorValidatorsRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1704,15 +1617,6 @@ export const QueryDelegatorValidatorsResponse = {
   fromJSON(object: any): QueryDelegatorValidatorsResponse {
     const obj = createBaseQueryDelegatorValidatorsResponse();
     if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: QueryDelegatorValidatorsResponse): JsonSafe<QueryDelegatorValidatorsResponse> {
-    const obj: any = {};
-    if (message.validators) {
-      obj.validators = message.validators.map(e => e);
-    } else {
-      obj.validators = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryDelegatorValidatorsResponse>): QueryDelegatorValidatorsResponse {
@@ -1797,11 +1701,6 @@ export const QueryDelegatorWithdrawAddressRequest = {
     if (isSet(object.delegatorAddress)) obj.delegatorAddress = String(object.delegatorAddress);
     return obj;
   },
-  toJSON(message: QueryDelegatorWithdrawAddressRequest): JsonSafe<QueryDelegatorWithdrawAddressRequest> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDelegatorWithdrawAddressRequest>): QueryDelegatorWithdrawAddressRequest {
     const message = createBaseQueryDelegatorWithdrawAddressRequest();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1878,11 +1777,6 @@ export const QueryDelegatorWithdrawAddressResponse = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: QueryDelegatorWithdrawAddressResponse): JsonSafe<QueryDelegatorWithdrawAddressResponse> {
-    const obj: any = {};
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryDelegatorWithdrawAddressResponse>): QueryDelegatorWithdrawAddressResponse {
     const message = createBaseQueryDelegatorWithdrawAddressResponse();
     message.withdrawAddress = object.withdrawAddress ?? "";
@@ -1948,10 +1842,6 @@ export const QueryCommunityPoolRequest = {
   },
   fromJSON(_: any): QueryCommunityPoolRequest {
     const obj = createBaseQueryCommunityPoolRequest();
-    return obj;
-  },
-  toJSON(_: QueryCommunityPoolRequest): JsonSafe<QueryCommunityPoolRequest> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<QueryCommunityPoolRequest>): QueryCommunityPoolRequest {
@@ -2020,15 +1910,6 @@ export const QueryCommunityPoolResponse = {
   fromJSON(object: any): QueryCommunityPoolResponse {
     const obj = createBaseQueryCommunityPoolResponse();
     if (Array.isArray(object?.pool)) obj.pool = object.pool.map((e: any) => DecCoin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryCommunityPoolResponse): JsonSafe<QueryCommunityPoolResponse> {
-    const obj: any = {};
-    if (message.pool) {
-      obj.pool = message.pool.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.pool = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryCommunityPoolResponse>): QueryCommunityPoolResponse {

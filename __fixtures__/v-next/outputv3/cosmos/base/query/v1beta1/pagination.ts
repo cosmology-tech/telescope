@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.query.v1beta1";
 /**
  * PageRequest is to be embedded in gRPC request messages for efficient
@@ -233,15 +232,6 @@ export const PageRequest = {
     if (isSet(object.reverse)) obj.reverse = Boolean(object.reverse);
     return obj;
   },
-  toJSON(message: PageRequest): JsonSafe<PageRequest> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.offset !== undefined && (obj.offset = (message.offset || BigInt(0)).toString());
-    message.limit !== undefined && (obj.limit = (message.limit || BigInt(0)).toString());
-    message.countTotal !== undefined && (obj.countTotal = message.countTotal);
-    message.reverse !== undefined && (obj.reverse = message.reverse);
-    return obj;
-  },
   fromPartial(object: DeepPartial<PageRequest>): PageRequest {
     const message = createBasePageRequest();
     message.key = object.key ?? new Uint8Array();
@@ -356,12 +346,6 @@ export const PageResponse = {
     const obj = createBasePageResponse();
     if (isSet(object.nextKey)) obj.nextKey = bytesFromBase64(object.nextKey);
     if (isSet(object.total)) obj.total = BigInt(object.total.toString());
-    return obj;
-  },
-  toJSON(message: PageResponse): JsonSafe<PageResponse> {
-    const obj: any = {};
-    message.nextKey !== undefined && (obj.nextKey = base64FromBytes(message.nextKey !== undefined ? message.nextKey : new Uint8Array()));
-    message.total !== undefined && (obj.total = (message.total || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<PageResponse>): PageResponse {

@@ -2,6 +2,7 @@ import { Params, ParamsSDKType } from "./params";
 import { DenomAuthorityMetadata, DenomAuthorityMetadataSDKType } from "./authorityMetadata";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** GenesisState defines the tokenfactory module's genesis state. */
 export interface GenesisState {
@@ -83,7 +84,7 @@ export const GenesisState = {
     if (Array.isArray(object?.factoryDenoms)) obj.factoryDenoms = object.factoryDenoms.map((e: any) => GenesisDenom.fromJSON(e));
     return obj;
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.factoryDenoms) {
@@ -206,7 +207,7 @@ export const GenesisDenom = {
     if (isSet(object.authorityMetadata)) obj.authorityMetadata = DenomAuthorityMetadata.fromJSON(object.authorityMetadata);
     return obj;
   },
-  toJSON(message: GenesisDenom): unknown {
+  toJSON(message: GenesisDenom): JsonSafe<GenesisDenom> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.authorityMetadata !== undefined && (obj.authorityMetadata = message.authorityMetadata ? DenomAuthorityMetadata.toJSON(message.authorityMetadata) : undefined);

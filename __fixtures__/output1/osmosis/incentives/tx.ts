@@ -3,6 +3,7 @@ import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.incentives";
 /** MsgCreateGauge creates a gague to distribute rewards to users */
 export interface MsgCreateGauge {
@@ -133,7 +134,7 @@ export const MsgCreateGauge = {
       numEpochsPaidOver: isSet(object.numEpochsPaidOver) ? Long.fromValue(object.numEpochsPaidOver) : Long.UZERO
     };
   },
-  toJSON(message: MsgCreateGauge): unknown {
+  toJSON(message: MsgCreateGauge): JsonSafe<MsgCreateGauge> {
     const obj: any = {};
     message.isPerpetual !== undefined && (obj.isPerpetual = message.isPerpetual);
     message.owner !== undefined && (obj.owner = message.owner);
@@ -206,7 +207,7 @@ export const MsgCreateGaugeResponse = {
   fromJSON(_: any): MsgCreateGaugeResponse {
     return {};
   },
-  toJSON(_: MsgCreateGaugeResponse): unknown {
+  toJSON(_: MsgCreateGaugeResponse): JsonSafe<MsgCreateGaugeResponse> {
     const obj: any = {};
     return obj;
   },
@@ -272,7 +273,7 @@ export const MsgAddToGauge = {
       rewards: Array.isArray(object?.rewards) ? object.rewards.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgAddToGauge): unknown {
+  toJSON(message: MsgAddToGauge): JsonSafe<MsgAddToGauge> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
@@ -333,7 +334,7 @@ export const MsgAddToGaugeResponse = {
   fromJSON(_: any): MsgAddToGaugeResponse {
     return {};
   },
-  toJSON(_: MsgAddToGaugeResponse): unknown {
+  toJSON(_: MsgAddToGaugeResponse): JsonSafe<MsgAddToGaugeResponse> {
     const obj: any = {};
     return obj;
   },

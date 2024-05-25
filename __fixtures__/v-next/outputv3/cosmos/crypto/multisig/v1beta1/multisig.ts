@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { bytesFromBase64, base64FromBytes, DeepPartial, isSet } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
+import { bytesFromBase64, DeepPartial, base64FromBytes, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.crypto.multisig.v1beta1";
 /**
  * MultiSignature wraps the signatures from a multisig.LegacyAminoPubKey.
@@ -100,15 +99,6 @@ export const MultiSignature = {
     if (Array.isArray(object?.signatures)) obj.signatures = object.signatures.map((e: any) => bytesFromBase64(e));
     return obj;
   },
-  toJSON(message: MultiSignature): JsonSafe<MultiSignature> {
-    const obj: any = {};
-    if (message.signatures) {
-      obj.signatures = message.signatures.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
-    } else {
-      obj.signatures = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MultiSignature>): MultiSignature {
     const message = createBaseMultiSignature();
     message.signatures = object.signatures?.map(e => e) || [];
@@ -197,12 +187,6 @@ export const CompactBitArray = {
     const obj = createBaseCompactBitArray();
     if (isSet(object.extraBitsStored)) obj.extraBitsStored = Number(object.extraBitsStored);
     if (isSet(object.elems)) obj.elems = bytesFromBase64(object.elems);
-    return obj;
-  },
-  toJSON(message: CompactBitArray): JsonSafe<CompactBitArray> {
-    const obj: any = {};
-    message.extraBitsStored !== undefined && (obj.extraBitsStored = Math.round(message.extraBitsStored));
-    message.elems !== undefined && (obj.elems = base64FromBytes(message.elems !== undefined ? message.elems : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<CompactBitArray>): CompactBitArray {

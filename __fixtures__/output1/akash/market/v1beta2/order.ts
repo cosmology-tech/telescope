@@ -1,6 +1,7 @@
 import { GroupSpec, GroupSpecSDKType } from "../../deployment/v1beta2/groupspec";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of order */
 export enum Order_State {
@@ -152,7 +153,7 @@ export const OrderID = {
       oseq: isSet(object.oseq) ? Number(object.oseq) : 0
     };
   },
-  toJSON(message: OrderID): unknown {
+  toJSON(message: OrderID): JsonSafe<OrderID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -243,7 +244,7 @@ export const Order = {
       createdAt: isSet(object.createdAt) ? Long.fromValue(object.createdAt) : Long.ZERO
     };
   },
-  toJSON(message: Order): unknown {
+  toJSON(message: Order): JsonSafe<Order> {
     const obj: any = {};
     message.orderId !== undefined && (obj.orderId = message.orderId ? OrderID.toJSON(message.orderId) : undefined);
     message.state !== undefined && (obj.state = order_StateToJSON(message.state));
@@ -342,7 +343,7 @@ export const OrderFilters = {
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
-  toJSON(message: OrderFilters): unknown {
+  toJSON(message: OrderFilters): JsonSafe<OrderFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());

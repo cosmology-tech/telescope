@@ -2,7 +2,6 @@ import { PageRequest, PageRequestAmino, PageRequestSDKType, PageResponse, PageRe
 import { Account, AccountAmino, AccountSDKType, Payment, PaymentAmino, PaymentSDKType } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
@@ -168,15 +167,6 @@ export const QueryAccountsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.scope = object.scope ?? "";
@@ -288,16 +278,6 @@ export const QueryAccountsResponse = {
     const obj = createBaseQueryAccountsResponse();
     if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Account.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
-    const obj: any = {};
-    if (message.accounts) {
-      obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);
-    } else {
-      obj.accounts = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
@@ -430,16 +410,6 @@ export const QueryPaymentsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryPaymentsRequest): JsonSafe<QueryPaymentsRequest> {
-    const obj: any = {};
-    message.scope !== undefined && (obj.scope = message.scope);
-    message.xid !== undefined && (obj.xid = message.xid);
-    message.id !== undefined && (obj.id = message.id);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.state !== undefined && (obj.state = message.state);
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryPaymentsRequest>): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
     message.scope = object.scope ?? "";
@@ -558,16 +528,6 @@ export const QueryPaymentsResponse = {
     const obj = createBaseQueryPaymentsResponse();
     if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => Payment.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryPaymentsResponse): JsonSafe<QueryPaymentsResponse> {
-    const obj: any = {};
-    if (message.payments) {
-      obj.payments = message.payments.map(e => e ? Payment.toJSON(e) : undefined);
-    } else {
-      obj.payments = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryPaymentsResponse>): QueryPaymentsResponse {

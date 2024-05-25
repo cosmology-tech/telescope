@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.orm.v1alpha1";
 /** StorageType */
 export enum StorageType {
@@ -208,16 +207,6 @@ export const ModuleSchemaDescriptor = {
     if (isSet(object.prefix)) obj.prefix = bytesFromBase64(object.prefix);
     return obj;
   },
-  toJSON(message: ModuleSchemaDescriptor): JsonSafe<ModuleSchemaDescriptor> {
-    const obj: any = {};
-    if (message.schemaFile) {
-      obj.schemaFile = message.schemaFile.map(e => e ? ModuleSchemaDescriptor_FileEntry.toJSON(e) : undefined);
-    } else {
-      obj.schemaFile = [];
-    }
-    message.prefix !== undefined && (obj.prefix = base64FromBytes(message.prefix !== undefined ? message.prefix : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor>): ModuleSchemaDescriptor {
     const message = createBaseModuleSchemaDescriptor();
     message.schemaFile = object.schemaFile?.map(e => ModuleSchemaDescriptor_FileEntry.fromPartial(e)) || [];
@@ -321,13 +310,6 @@ export const ModuleSchemaDescriptor_FileEntry = {
     if (isSet(object.id)) obj.id = Number(object.id);
     if (isSet(object.protoFileName)) obj.protoFileName = String(object.protoFileName);
     if (isSet(object.storageType)) obj.storageType = storageTypeFromJSON(object.storageType);
-    return obj;
-  },
-  toJSON(message: ModuleSchemaDescriptor_FileEntry): JsonSafe<ModuleSchemaDescriptor_FileEntry> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.protoFileName !== undefined && (obj.protoFileName = message.protoFileName);
-    message.storageType !== undefined && (obj.storageType = storageTypeToJSON(message.storageType));
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleSchemaDescriptor_FileEntry>): ModuleSchemaDescriptor_FileEntry {

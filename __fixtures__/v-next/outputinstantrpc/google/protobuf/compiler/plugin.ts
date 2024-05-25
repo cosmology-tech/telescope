@@ -1,6 +1,7 @@
 import { FileDescriptorProto, FileDescriptorProtoSDKType } from "../descriptor";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.protobuf.compiler";
 /** The version number of protocol compiler. */
 export interface Version {
@@ -217,7 +218,7 @@ export const Version = {
     if (isSet(object.suffix)) obj.suffix = String(object.suffix);
     return obj;
   },
-  toJSON(message: Version): unknown {
+  toJSON(message: Version): JsonSafe<Version> {
     const obj: any = {};
     message.major !== undefined && (obj.major = Math.round(message.major));
     message.minor !== undefined && (obj.minor = Math.round(message.minor));
@@ -356,7 +357,7 @@ export const CodeGeneratorRequest = {
     if (isSet(object.compilerVersion)) obj.compilerVersion = Version.fromJSON(object.compilerVersion);
     return obj;
   },
-  toJSON(message: CodeGeneratorRequest): unknown {
+  toJSON(message: CodeGeneratorRequest): JsonSafe<CodeGeneratorRequest> {
     const obj: any = {};
     if (message.fileToGenerate) {
       obj.fileToGenerate = message.fileToGenerate.map(e => e);
@@ -501,7 +502,7 @@ export const CodeGeneratorResponse = {
     if (Array.isArray(object?.file)) obj.file = object.file.map((e: any) => CodeGeneratorResponse_File.fromJSON(e));
     return obj;
   },
-  toJSON(message: CodeGeneratorResponse): unknown {
+  toJSON(message: CodeGeneratorResponse): JsonSafe<CodeGeneratorResponse> {
     const obj: any = {};
     message.error !== undefined && (obj.error = message.error);
     if (message.file) {
@@ -624,7 +625,7 @@ export const CodeGeneratorResponse_File = {
     if (isSet(object.content)) obj.content = String(object.content);
     return obj;
   },
-  toJSON(message: CodeGeneratorResponse_File): unknown {
+  toJSON(message: CodeGeneratorResponse_File): JsonSafe<CodeGeneratorResponse_File> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.insertionPoint !== undefined && (obj.insertionPoint = message.insertionPoint);

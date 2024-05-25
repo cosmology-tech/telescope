@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolmanager.v1beta1";
 /** PoolType is an enumeration of all supported pool types. */
 export enum PoolType {
@@ -126,7 +127,7 @@ export const ModuleRoute = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : undefined
     };
   },
-  toJSON(message: ModuleRoute): unknown {
+  toJSON(message: ModuleRoute): JsonSafe<ModuleRoute> {
     const obj: any = {};
     message.poolType !== undefined && (obj.poolType = poolTypeToJSON(message.poolType));
     if (message.poolId !== undefined) {

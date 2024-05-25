@@ -3,7 +3,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin"
 import { Params, ParamsAmino, ParamsSDKType } from "./genesis";
 import { ClaimsRecordAddress, ClaimsRecordAddressAmino, ClaimsRecordAddressSDKType, Claim, ClaimAmino, ClaimSDKType } from "./claims";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "evmos.claims.v1";
 /**
@@ -224,10 +223,6 @@ export const QueryTotalUnclaimedRequest = {
     const obj = createBaseQueryTotalUnclaimedRequest();
     return obj;
   },
-  toJSON(_: QueryTotalUnclaimedRequest): JsonSafe<QueryTotalUnclaimedRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryTotalUnclaimedRequest>): QueryTotalUnclaimedRequest {
     const message = createBaseQueryTotalUnclaimedRequest();
     return message;
@@ -293,15 +288,6 @@ export const QueryTotalUnclaimedResponse = {
   fromJSON(object: any): QueryTotalUnclaimedResponse {
     const obj = createBaseQueryTotalUnclaimedResponse();
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryTotalUnclaimedResponse): JsonSafe<QueryTotalUnclaimedResponse> {
-    const obj: any = {};
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryTotalUnclaimedResponse>): QueryTotalUnclaimedResponse {
@@ -376,10 +362,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -445,11 +427,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -527,11 +504,6 @@ export const QueryClaimsRecordsRequest = {
   fromJSON(object: any): QueryClaimsRecordsRequest {
     const obj = createBaseQueryClaimsRecordsRequest();
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordsRequest): JsonSafe<QueryClaimsRecordsRequest> {
-    const obj: any = {};
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordsRequest>): QueryClaimsRecordsRequest {
@@ -617,16 +589,6 @@ export const QueryClaimsRecordsResponse = {
     const obj = createBaseQueryClaimsRecordsResponse();
     if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => ClaimsRecordAddress.fromJSON(e));
     if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordsResponse): JsonSafe<QueryClaimsRecordsResponse> {
-    const obj: any = {};
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? ClaimsRecordAddress.toJSON(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
-    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordsResponse>): QueryClaimsRecordsResponse {
@@ -719,11 +681,6 @@ export const QueryClaimsRecordRequest = {
     if (isSet(object.address)) obj.address = String(object.address);
     return obj;
   },
-  toJSON(message: QueryClaimsRecordRequest): JsonSafe<QueryClaimsRecordRequest> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryClaimsRecordRequest>): QueryClaimsRecordRequest {
     const message = createBaseQueryClaimsRecordRequest();
     message.address = object.address ?? "";
@@ -805,16 +762,6 @@ export const QueryClaimsRecordResponse = {
     const obj = createBaseQueryClaimsRecordResponse();
     if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
     if (Array.isArray(object?.claims)) obj.claims = object.claims.map((e: any) => Claim.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QueryClaimsRecordResponse): JsonSafe<QueryClaimsRecordResponse> {
-    const obj: any = {};
-    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
-    if (message.claims) {
-      obj.claims = message.claims.map(e => e ? Claim.toJSON(e) : undefined);
-    } else {
-      obj.claims = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QueryClaimsRecordResponse>): QueryClaimsRecordResponse {

@@ -1,5 +1,4 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { JsonSafe } from "../../json-safe";
 import { DeepPartial } from "../../helpers";
 export const protobufPackage = "osmosis.lockup";
 export interface Params {
@@ -49,15 +48,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (Array.isArray(object?.forceUnlockAllowedAddresses)) obj.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    if (message.forceUnlockAllowedAddresses) {
-      obj.forceUnlockAllowedAddresses = message.forceUnlockAllowedAddresses.map(e => e);
-    } else {
-      obj.forceUnlockAllowedAddresses = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

@@ -5,6 +5,7 @@ import { Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, Exact } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
@@ -129,7 +130,7 @@ export const QueryDeploymentsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryDeploymentsRequest): unknown {
+  toJSON(message: QueryDeploymentsRequest): JsonSafe<QueryDeploymentsRequest> {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toJSON(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -240,7 +241,7 @@ export const QueryDeploymentsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryDeploymentsResponse): unknown {
+  toJSON(message: QueryDeploymentsResponse): JsonSafe<QueryDeploymentsResponse> {
     const obj: any = {};
     if (message.deployments) {
       obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toJSON(e) : undefined);
@@ -353,7 +354,7 @@ export const QueryDeploymentRequest = {
       id: isSet(object.id) ? DeploymentID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: QueryDeploymentRequest): unknown {
+  toJSON(message: QueryDeploymentRequest): JsonSafe<QueryDeploymentRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
@@ -463,7 +464,7 @@ export const QueryDeploymentResponse = {
       escrowAccount: isSet(object.escrowAccount) ? Account.fromJSON(object.escrowAccount) : undefined
     };
   },
-  toJSON(message: QueryDeploymentResponse): unknown {
+  toJSON(message: QueryDeploymentResponse): JsonSafe<QueryDeploymentResponse> {
     const obj: any = {};
     message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
     if (message.groups) {
@@ -585,7 +586,7 @@ export const QueryGroupRequest = {
       id: isSet(object.id) ? GroupID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: QueryGroupRequest): unknown {
+  toJSON(message: QueryGroupRequest): JsonSafe<QueryGroupRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
     return obj;
@@ -679,7 +680,7 @@ export const QueryGroupResponse = {
       group: isSet(object.group) ? Group.fromJSON(object.group) : undefined
     };
   },
-  toJSON(message: QueryGroupResponse): unknown {
+  toJSON(message: QueryGroupResponse): JsonSafe<QueryGroupResponse> {
     const obj: any = {};
     message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
     return obj;

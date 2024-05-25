@@ -1,5 +1,6 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "ibc.applications.fee.v1";
 /** Fee defines the ICS29 receive, acknowledgement and timeout fees */
@@ -117,7 +118,7 @@ export const Fee = {
       timeoutFee: Array.isArray(object?.timeoutFee) ? object.timeoutFee.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Fee): unknown {
+  toJSON(message: Fee): JsonSafe<Fee> {
     const obj: any = {};
     if (message.recvFee) {
       obj.recvFee = message.recvFee.map(e => e ? Coin.toJSON(e) : undefined);
@@ -275,7 +276,7 @@ export const PacketFee = {
       relayers: Array.isArray(object?.relayers) ? object.relayers.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: PacketFee): unknown {
+  toJSON(message: PacketFee): JsonSafe<PacketFee> {
     const obj: any = {};
     message.fee !== undefined && (obj.fee = message.fee ? Fee.toJSON(message.fee) : undefined);
     message.refundAddress !== undefined && (obj.refundAddress = message.refundAddress);
@@ -397,7 +398,7 @@ export const PacketFees = {
       packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : []
     };
   },
-  toJSON(message: PacketFees): unknown {
+  toJSON(message: PacketFees): JsonSafe<PacketFees> {
     const obj: any = {};
     if (message.packetFees) {
       obj.packetFees = message.packetFees.map(e => e ? PacketFee.toJSON(e) : undefined);
@@ -501,7 +502,7 @@ export const IdentifiedPacketFees = {
       packetFees: Array.isArray(object?.packetFees) ? object.packetFees.map((e: any) => PacketFee.fromJSON(e)) : []
     };
   },
-  toJSON(message: IdentifiedPacketFees): unknown {
+  toJSON(message: IdentifiedPacketFees): JsonSafe<IdentifiedPacketFees> {
     const obj: any = {};
     if (message.packetFees) {
       obj.packetFees = message.packetFees.map(e => e ? PacketFee.toJSON(e) : undefined);

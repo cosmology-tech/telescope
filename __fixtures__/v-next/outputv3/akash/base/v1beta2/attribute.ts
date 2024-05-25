@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -125,12 +124,6 @@ export const Attribute = {
     if (isSet(object.value)) obj.value = String(object.value);
     return obj;
   },
-  toJSON(message: Attribute): JsonSafe<Attribute> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Attribute>): Attribute {
     const message = createBaseAttribute();
     message.key = object.key ?? "";
@@ -219,20 +212,6 @@ export const SignedBy = {
     const obj = createBaseSignedBy();
     if (Array.isArray(object?.allOf)) obj.allOf = object.allOf.map((e: any) => String(e));
     if (Array.isArray(object?.anyOf)) obj.anyOf = object.anyOf.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: SignedBy): JsonSafe<SignedBy> {
-    const obj: any = {};
-    if (message.allOf) {
-      obj.allOf = message.allOf.map(e => e);
-    } else {
-      obj.allOf = [];
-    }
-    if (message.anyOf) {
-      obj.anyOf = message.anyOf.map(e => e);
-    } else {
-      obj.anyOf = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<SignedBy>): SignedBy {
@@ -335,16 +314,6 @@ export const PlacementRequirements = {
     const obj = createBasePlacementRequirements();
     if (isSet(object.signedBy)) obj.signedBy = SignedBy.fromJSON(object.signedBy);
     if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => Attribute.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: PlacementRequirements): JsonSafe<PlacementRequirements> {
-    const obj: any = {};
-    message.signedBy !== undefined && (obj.signedBy = message.signedBy ? SignedBy.toJSON(message.signedBy) : undefined);
-    if (message.attributes) {
-      obj.attributes = message.attributes.map(e => e ? Attribute.toJSON(e) : undefined);
-    } else {
-      obj.attributes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<PlacementRequirements>): PlacementRequirements {

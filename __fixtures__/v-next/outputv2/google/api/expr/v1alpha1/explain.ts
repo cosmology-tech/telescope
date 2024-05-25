@@ -1,5 +1,6 @@
 import { Value, ValueAmino, ValueSDKType } from "./value";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /**
@@ -133,7 +134,7 @@ export const Explain = {
     if (Array.isArray(object?.exprSteps)) obj.exprSteps = object.exprSteps.map((e: any) => Explain_ExprStep.fromJSON(e));
     return obj;
   },
-  toJSON(message: Explain): unknown {
+  toJSON(message: Explain): JsonSafe<Explain> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
@@ -252,7 +253,7 @@ export const Explain_ExprStep = {
     if (isSet(object.valueIndex)) obj.valueIndex = Number(object.valueIndex);
     return obj;
   },
-  toJSON(message: Explain_ExprStep): unknown {
+  toJSON(message: Explain_ExprStep): JsonSafe<Explain_ExprStep> {
     const obj: any = {};
     message.id !== undefined && (obj.id = (message.id || BigInt(0)).toString());
     message.valueIndex !== undefined && (obj.valueIndex = Math.round(message.valueIndex));

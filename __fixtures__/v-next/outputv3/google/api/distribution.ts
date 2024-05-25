@@ -2,7 +2,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../protobuf/timesta
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -612,25 +611,6 @@ export const Distribution = {
     if (Array.isArray(object?.exemplars)) obj.exemplars = object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e));
     return obj;
   },
-  toJSON(message: Distribution): JsonSafe<Distribution> {
-    const obj: any = {};
-    message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
-    message.mean !== undefined && (obj.mean = message.mean);
-    message.sumOfSquaredDeviation !== undefined && (obj.sumOfSquaredDeviation = message.sumOfSquaredDeviation);
-    message.range !== undefined && (obj.range = message.range ? Distribution_Range.toJSON(message.range) : undefined);
-    message.bucketOptions !== undefined && (obj.bucketOptions = message.bucketOptions ? Distribution_BucketOptions.toJSON(message.bucketOptions) : undefined);
-    if (message.bucketCounts) {
-      obj.bucketCounts = message.bucketCounts.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.bucketCounts = [];
-    }
-    if (message.exemplars) {
-      obj.exemplars = message.exemplars.map(e => e ? Distribution_Exemplar.toJSON(e) : undefined);
-    } else {
-      obj.exemplars = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Distribution>): Distribution {
     const message = createBaseDistribution();
     if (object.count !== undefined && object.count !== null) {
@@ -774,12 +754,6 @@ export const Distribution_Range = {
     if (isSet(object.max)) obj.max = Number(object.max);
     return obj;
   },
-  toJSON(message: Distribution_Range): JsonSafe<Distribution_Range> {
-    const obj: any = {};
-    message.min !== undefined && (obj.min = message.min);
-    message.max !== undefined && (obj.max = message.max);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Distribution_Range>): Distribution_Range {
     const message = createBaseDistribution_Range();
     message.min = object.min ?? 0;
@@ -876,13 +850,6 @@ export const Distribution_BucketOptions = {
     if (isSet(object.linearBuckets)) obj.linearBuckets = Distribution_BucketOptions_Linear.fromJSON(object.linearBuckets);
     if (isSet(object.exponentialBuckets)) obj.exponentialBuckets = Distribution_BucketOptions_Exponential.fromJSON(object.exponentialBuckets);
     if (isSet(object.explicitBuckets)) obj.explicitBuckets = Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets);
-    return obj;
-  },
-  toJSON(message: Distribution_BucketOptions): JsonSafe<Distribution_BucketOptions> {
-    const obj: any = {};
-    message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toJSON(message.linearBuckets) : undefined);
-    message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toJSON(message.exponentialBuckets) : undefined);
-    message.explicitBuckets !== undefined && (obj.explicitBuckets = message.explicitBuckets ? Distribution_BucketOptions_Explicit.toJSON(message.explicitBuckets) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Distribution_BucketOptions>): Distribution_BucketOptions {
@@ -996,13 +963,6 @@ export const Distribution_BucketOptions_Linear = {
     if (isSet(object.offset)) obj.offset = Number(object.offset);
     return obj;
   },
-  toJSON(message: Distribution_BucketOptions_Linear): JsonSafe<Distribution_BucketOptions_Linear> {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
-    message.width !== undefined && (obj.width = message.width);
-    message.offset !== undefined && (obj.offset = message.offset);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Distribution_BucketOptions_Linear>): Distribution_BucketOptions_Linear {
     const message = createBaseDistribution_BucketOptions_Linear();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -1108,13 +1068,6 @@ export const Distribution_BucketOptions_Exponential = {
     if (isSet(object.scale)) obj.scale = Number(object.scale);
     return obj;
   },
-  toJSON(message: Distribution_BucketOptions_Exponential): JsonSafe<Distribution_BucketOptions_Exponential> {
-    const obj: any = {};
-    message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
-    message.growthFactor !== undefined && (obj.growthFactor = message.growthFactor);
-    message.scale !== undefined && (obj.scale = message.scale);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Distribution_BucketOptions_Exponential>): Distribution_BucketOptions_Exponential {
     const message = createBaseDistribution_BucketOptions_Exponential();
     message.numFiniteBuckets = object.numFiniteBuckets ?? 0;
@@ -1213,15 +1166,6 @@ export const Distribution_BucketOptions_Explicit = {
     if (Array.isArray(object?.bounds)) obj.bounds = object.bounds.map((e: any) => Number(e));
     return obj;
   },
-  toJSON(message: Distribution_BucketOptions_Explicit): JsonSafe<Distribution_BucketOptions_Explicit> {
-    const obj: any = {};
-    if (message.bounds) {
-      obj.bounds = message.bounds.map(e => e);
-    } else {
-      obj.bounds = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Distribution_BucketOptions_Explicit>): Distribution_BucketOptions_Explicit {
     const message = createBaseDistribution_BucketOptions_Explicit();
     message.bounds = object.bounds?.map(e => e) || [];
@@ -1317,17 +1261,6 @@ export const Distribution_Exemplar = {
     if (isSet(object.value)) obj.value = Number(object.value);
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
     if (Array.isArray(object?.attachments)) obj.attachments = object.attachments.map((e: any) => Any.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Distribution_Exemplar): JsonSafe<Distribution_Exemplar> {
-    const obj: any = {};
-    message.value !== undefined && (obj.value = message.value);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    if (message.attachments) {
-      obj.attachments = message.attachments.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.attachments = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Distribution_Exemplar>): Distribution_Exemplar {

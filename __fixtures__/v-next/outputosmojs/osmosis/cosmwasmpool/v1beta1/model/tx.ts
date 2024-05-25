@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.cosmwasmpool.v1beta1";
 /** ===================== MsgCreateCosmwasmPool */
 export interface MsgCreateCosmWasmPool {
@@ -80,7 +81,7 @@ export const MsgCreateCosmWasmPool = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgCreateCosmWasmPool): unknown {
+  toJSON(message: MsgCreateCosmWasmPool): JsonSafe<MsgCreateCosmWasmPool> {
     const obj: any = {};
     message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     message.instantiateMsg !== undefined && (obj.instantiateMsg = base64FromBytes(message.instantiateMsg !== undefined ? message.instantiateMsg : new Uint8Array()));
@@ -192,7 +193,7 @@ export const MsgCreateCosmWasmPoolResponse = {
       poolId: isSet(object.poolId) ? BigInt(object.poolId.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgCreateCosmWasmPoolResponse): unknown {
+  toJSON(message: MsgCreateCosmWasmPoolResponse): JsonSafe<MsgCreateCosmWasmPoolResponse> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
     return obj;

@@ -7,6 +7,7 @@ import { LeaseFilters, LeaseID, Lease } from "./lease";
 import { Account, FractionalPayment } from "../../escrow/v1beta2/types";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
@@ -106,7 +107,7 @@ export const QueryOrdersRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryOrdersRequest): unknown {
+  toJSON(message: QueryOrdersRequest): JsonSafe<QueryOrdersRequest> {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toJSON(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -161,7 +162,7 @@ export const QueryOrdersResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryOrdersResponse): unknown {
+  toJSON(message: QueryOrdersResponse): JsonSafe<QueryOrdersResponse> {
     const obj: any = {};
     if (message.orders) {
       obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);
@@ -212,7 +213,7 @@ export const QueryOrderRequest = {
       id: isSet(object.id) ? OrderID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: QueryOrderRequest): unknown {
+  toJSON(message: QueryOrderRequest): JsonSafe<QueryOrderRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? OrderID.toJSON(message.id) : undefined);
     return obj;
@@ -257,7 +258,7 @@ export const QueryOrderResponse = {
       order: isSet(object.order) ? Order.fromJSON(object.order) : undefined
     };
   },
-  toJSON(message: QueryOrderResponse): unknown {
+  toJSON(message: QueryOrderResponse): JsonSafe<QueryOrderResponse> {
     const obj: any = {};
     message.order !== undefined && (obj.order = message.order ? Order.toJSON(message.order) : undefined);
     return obj;
@@ -310,7 +311,7 @@ export const QueryBidsRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryBidsRequest): unknown {
+  toJSON(message: QueryBidsRequest): JsonSafe<QueryBidsRequest> {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toJSON(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -365,7 +366,7 @@ export const QueryBidsResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryBidsResponse): unknown {
+  toJSON(message: QueryBidsResponse): JsonSafe<QueryBidsResponse> {
     const obj: any = {};
     if (message.bids) {
       obj.bids = message.bids.map(e => e ? QueryBidResponse.toJSON(e) : undefined);
@@ -416,7 +417,7 @@ export const QueryBidRequest = {
       id: isSet(object.id) ? BidID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: QueryBidRequest): unknown {
+  toJSON(message: QueryBidRequest): JsonSafe<QueryBidRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? BidID.toJSON(message.id) : undefined);
     return obj;
@@ -469,7 +470,7 @@ export const QueryBidResponse = {
       escrowAccount: isSet(object.escrowAccount) ? Account.fromJSON(object.escrowAccount) : undefined
     };
   },
-  toJSON(message: QueryBidResponse): unknown {
+  toJSON(message: QueryBidResponse): JsonSafe<QueryBidResponse> {
     const obj: any = {};
     message.bid !== undefined && (obj.bid = message.bid ? Bid.toJSON(message.bid) : undefined);
     message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
@@ -524,7 +525,7 @@ export const QueryLeasesRequest = {
       pagination: isSet(object.pagination) ? PageRequest.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryLeasesRequest): unknown {
+  toJSON(message: QueryLeasesRequest): JsonSafe<QueryLeasesRequest> {
     const obj: any = {};
     message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toJSON(message.filters) : undefined);
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
@@ -579,7 +580,7 @@ export const QueryLeasesResponse = {
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryLeasesResponse): unknown {
+  toJSON(message: QueryLeasesResponse): JsonSafe<QueryLeasesResponse> {
     const obj: any = {};
     if (message.leases) {
       obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toJSON(e) : undefined);
@@ -630,7 +631,7 @@ export const QueryLeaseRequest = {
       id: isSet(object.id) ? LeaseID.fromJSON(object.id) : undefined
     };
   },
-  toJSON(message: QueryLeaseRequest): unknown {
+  toJSON(message: QueryLeaseRequest): JsonSafe<QueryLeaseRequest> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? LeaseID.toJSON(message.id) : undefined);
     return obj;
@@ -683,7 +684,7 @@ export const QueryLeaseResponse = {
       escrowPayment: isSet(object.escrowPayment) ? FractionalPayment.fromJSON(object.escrowPayment) : undefined
     };
   },
-  toJSON(message: QueryLeaseResponse): unknown {
+  toJSON(message: QueryLeaseResponse): JsonSafe<QueryLeaseResponse> {
     const obj: any = {};
     message.lease !== undefined && (obj.lease = message.lease ? Lease.toJSON(message.lease) : undefined);
     message.escrowPayment !== undefined && (obj.escrowPayment = message.escrowPayment ? FractionalPayment.toJSON(message.escrowPayment) : undefined);

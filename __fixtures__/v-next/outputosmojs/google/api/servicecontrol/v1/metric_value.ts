@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { Distribution, DistributionSDKType } from "./distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
@@ -134,7 +135,7 @@ export const MetricValue_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: MetricValue_LabelsEntry): unknown {
+  toJSON(message: MetricValue_LabelsEntry): JsonSafe<MetricValue_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -292,7 +293,7 @@ export const MetricValue = {
       distributionValue: isSet(object.distributionValue) ? Distribution.fromJSON(object.distributionValue) : undefined
     };
   },
-  toJSON(message: MetricValue): unknown {
+  toJSON(message: MetricValue): JsonSafe<MetricValue> {
     const obj: any = {};
     obj.labels = {};
     if (message.labels) {
@@ -490,7 +491,7 @@ export const MetricValueSet = {
       metricValues: Array.isArray(object?.metricValues) ? object.metricValues.map((e: any) => MetricValue.fromJSON(e)) : []
     };
   },
-  toJSON(message: MetricValueSet): unknown {
+  toJSON(message: MetricValueSet): JsonSafe<MetricValueSet> {
     const obj: any = {};
     message.metricName !== undefined && (obj.metricName = message.metricName);
     if (message.metricValues) {

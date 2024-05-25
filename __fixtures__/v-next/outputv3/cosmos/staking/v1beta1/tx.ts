@@ -4,7 +4,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 import { encodePubkey, decodePubkey } from "@cosmjs/proto-signing";
 import { Decimal } from "@cosmjs/math";
 import { Pubkey } from "@cosmjs/amino";
@@ -325,17 +324,6 @@ export const MsgCreateValidator = {
     if (isSet(object.value)) obj.value = Coin.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: MsgCreateValidator): JsonSafe<MsgCreateValidator> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toJSON(message.commission) : undefined);
-    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.pubkey !== undefined && (obj.pubkey = message.pubkey ? Any.toJSON(message.pubkey) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Coin.toJSON(message.value) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCreateValidator>): MsgCreateValidator {
     const message = createBaseMsgCreateValidator();
     if (object.description !== undefined && object.description !== null) {
@@ -453,10 +441,6 @@ export const MsgCreateValidatorResponse = {
     const obj = createBaseMsgCreateValidatorResponse();
     return obj;
   },
-  toJSON(_: MsgCreateValidatorResponse): JsonSafe<MsgCreateValidatorResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgCreateValidatorResponse>): MsgCreateValidatorResponse {
     const message = createBaseMsgCreateValidatorResponse();
     return message;
@@ -549,14 +533,6 @@ export const MsgEditValidator = {
     if (isSet(object.minSelfDelegation)) obj.minSelfDelegation = String(object.minSelfDelegation);
     return obj;
   },
-  toJSON(message: MsgEditValidator): JsonSafe<MsgEditValidator> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.commissionRate !== undefined && (obj.commissionRate = message.commissionRate);
-    message.minSelfDelegation !== undefined && (obj.minSelfDelegation = message.minSelfDelegation);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgEditValidator>): MsgEditValidator {
     const message = createBaseMsgEditValidator();
     if (object.description !== undefined && object.description !== null) {
@@ -647,10 +623,6 @@ export const MsgEditValidatorResponse = {
     const obj = createBaseMsgEditValidatorResponse();
     return obj;
   },
-  toJSON(_: MsgEditValidatorResponse): JsonSafe<MsgEditValidatorResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgEditValidatorResponse>): MsgEditValidatorResponse {
     const message = createBaseMsgEditValidatorResponse();
     return message;
@@ -735,13 +707,6 @@ export const MsgDelegate = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgDelegate): JsonSafe<MsgDelegate> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgDelegate>): MsgDelegate {
     const message = createBaseMsgDelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -823,10 +788,6 @@ export const MsgDelegateResponse = {
   },
   fromJSON(_: any): MsgDelegateResponse {
     const obj = createBaseMsgDelegateResponse();
-    return obj;
-  },
-  toJSON(_: MsgDelegateResponse): JsonSafe<MsgDelegateResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgDelegateResponse>): MsgDelegateResponse {
@@ -919,14 +880,6 @@ export const MsgBeginRedelegate = {
     if (isSet(object.validatorSrcAddress)) obj.validatorSrcAddress = String(object.validatorSrcAddress);
     if (isSet(object.validatorDstAddress)) obj.validatorDstAddress = String(object.validatorDstAddress);
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
-    return obj;
-  },
-  toJSON(message: MsgBeginRedelegate): JsonSafe<MsgBeginRedelegate> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorSrcAddress !== undefined && (obj.validatorSrcAddress = message.validatorSrcAddress);
-    message.validatorDstAddress !== undefined && (obj.validatorDstAddress = message.validatorDstAddress);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgBeginRedelegate>): MsgBeginRedelegate {
@@ -1028,11 +981,6 @@ export const MsgBeginRedelegateResponse = {
     if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
     return obj;
   },
-  toJSON(message: MsgBeginRedelegateResponse): JsonSafe<MsgBeginRedelegateResponse> {
-    const obj: any = {};
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgBeginRedelegateResponse>): MsgBeginRedelegateResponse {
     const message = createBaseMsgBeginRedelegateResponse();
     message.completionTime = object.completionTime ?? undefined;
@@ -1125,13 +1073,6 @@ export const MsgUndelegate = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgUndelegate): JsonSafe<MsgUndelegate> {
-    const obj: any = {};
-    message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
-    message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
-    message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUndelegate>): MsgUndelegate {
     const message = createBaseMsgUndelegate();
     message.delegatorAddress = object.delegatorAddress ?? "";
@@ -1222,11 +1163,6 @@ export const MsgUndelegateResponse = {
   fromJSON(object: any): MsgUndelegateResponse {
     const obj = createBaseMsgUndelegateResponse();
     if (isSet(object.completionTime)) obj.completionTime = new Date(object.completionTime);
-    return obj;
-  },
-  toJSON(message: MsgUndelegateResponse): JsonSafe<MsgUndelegateResponse> {
-    const obj: any = {};
-    message.completionTime !== undefined && (obj.completionTime = message.completionTime.toISOString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgUndelegateResponse>): MsgUndelegateResponse {

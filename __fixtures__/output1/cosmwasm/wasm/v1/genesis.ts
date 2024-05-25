@@ -2,6 +2,7 @@ import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantia
 import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
@@ -140,7 +141,7 @@ export const GenesisState = {
       genMsgs: Array.isArray(object?.genMsgs) ? object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     if (message.codes) {
@@ -259,7 +260,7 @@ export const GenesisState_GenMsgs = {
       executeContract: isSet(object.executeContract) ? MsgExecuteContract.fromJSON(object.executeContract) : undefined
     };
   },
-  toJSON(message: GenesisState_GenMsgs): unknown {
+  toJSON(message: GenesisState_GenMsgs): JsonSafe<GenesisState_GenMsgs> {
     const obj: any = {};
     message.storeCode !== undefined && (obj.storeCode = message.storeCode ? MsgStoreCode.toJSON(message.storeCode) : undefined);
     message.instantiateContract !== undefined && (obj.instantiateContract = message.instantiateContract ? MsgInstantiateContract.toJSON(message.instantiateContract) : undefined);
@@ -346,7 +347,7 @@ export const Code = {
       pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
     };
   },
-  toJSON(message: Code): unknown {
+  toJSON(message: Code): JsonSafe<Code> {
     const obj: any = {};
     message.codeId !== undefined && (obj.codeId = (message.codeId || Long.UZERO).toString());
     message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
@@ -429,7 +430,7 @@ export const Contract = {
       contractState: Array.isArray(object?.contractState) ? object.contractState.map((e: any) => Model.fromJSON(e)) : []
     };
   },
-  toJSON(message: Contract): unknown {
+  toJSON(message: Contract): JsonSafe<Contract> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.contractInfo !== undefined && (obj.contractInfo = message.contractInfo ? ContractInfo.toJSON(message.contractInfo) : undefined);
@@ -508,7 +509,7 @@ export const Sequence = {
       value: isSet(object.value) ? Long.fromValue(object.value) : Long.UZERO
     };
   },
-  toJSON(message: Sequence): unknown {
+  toJSON(message: Sequence): JsonSafe<Sequence> {
     const obj: any = {};
     message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
     message.value !== undefined && (obj.value = (message.value || Long.UZERO).toString());

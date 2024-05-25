@@ -60,32 +60,6 @@ export const MessageComposer = {
       };
     }
   },
-  toJSON: {
-    createClient(value: MsgCreateClient) {
-      return {
-        typeUrl: "/ibc.core.client.v1.MsgCreateClient",
-        value: MsgCreateClient.toJSON(value)
-      };
-    },
-    updateClient(value: MsgUpdateClient) {
-      return {
-        typeUrl: "/ibc.core.client.v1.MsgUpdateClient",
-        value: MsgUpdateClient.toJSON(value)
-      };
-    },
-    upgradeClient(value: MsgUpgradeClient) {
-      return {
-        typeUrl: "/ibc.core.client.v1.MsgUpgradeClient",
-        value: MsgUpgradeClient.toJSON(value)
-      };
-    },
-    submitMisbehaviour(value: MsgSubmitMisbehaviour) {
-      return {
-        typeUrl: "/ibc.core.client.v1.MsgSubmitMisbehaviour",
-        value: MsgSubmitMisbehaviour.toJSON(value)
-      };
-    }
-  },
   fromJSON: {
     createClient(value: any) {
       return {

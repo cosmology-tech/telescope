@@ -1,5 +1,6 @@
 import { Provider, ProviderSDKType } from "./provider";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, Exact } from "../../../helpers";
 export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
@@ -44,7 +45,7 @@ export const GenesisState = {
       providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.providers) {
       obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);

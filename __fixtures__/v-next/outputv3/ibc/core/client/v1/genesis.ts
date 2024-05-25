@@ -1,7 +1,6 @@
 import { IdentifiedClientState, IdentifiedClientStateAmino, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesAmino, ClientConsensusStatesSDKType, Params, ParamsAmino, ParamsSDKType } from "./client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -180,28 +179,6 @@ export const GenesisState = {
     if (isSet(object.nextClientSequence)) obj.nextClientSequence = BigInt(object.nextClientSequence.toString());
     return obj;
   },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.clients) {
-      obj.clients = message.clients.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
-    } else {
-      obj.clients = [];
-    }
-    if (message.clientsConsensus) {
-      obj.clientsConsensus = message.clientsConsensus.map(e => e ? ClientConsensusStates.toJSON(e) : undefined);
-    } else {
-      obj.clientsConsensus = [];
-    }
-    if (message.clientsMetadata) {
-      obj.clientsMetadata = message.clientsMetadata.map(e => e ? IdentifiedGenesisMetadata.toJSON(e) : undefined);
-    } else {
-      obj.clientsMetadata = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
-    message.createLocalhost !== undefined && (obj.createLocalhost = message.createLocalhost);
-    message.nextClientSequence !== undefined && (obj.nextClientSequence = (message.nextClientSequence || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.clients = object.clients?.map(e => IdentifiedClientState.fromPartial(e)) || [];
@@ -343,12 +320,6 @@ export const GenesisMetadata = {
     if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
     return obj;
   },
-  toJSON(message: GenesisMetadata): JsonSafe<GenesisMetadata> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
-    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<GenesisMetadata>): GenesisMetadata {
     const message = createBaseGenesisMetadata();
     message.key = object.key ?? new Uint8Array();
@@ -438,16 +409,6 @@ export const IdentifiedGenesisMetadata = {
     const obj = createBaseIdentifiedGenesisMetadata();
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
     if (Array.isArray(object?.clientMetadata)) obj.clientMetadata = object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: IdentifiedGenesisMetadata): JsonSafe<IdentifiedGenesisMetadata> {
-    const obj: any = {};
-    message.clientId !== undefined && (obj.clientId = message.clientId);
-    if (message.clientMetadata) {
-      obj.clientMetadata = message.clientMetadata.map(e => e ? GenesisMetadata.toJSON(e) : undefined);
-    } else {
-      obj.clientMetadata = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<IdentifiedGenesisMetadata>): IdentifiedGenesisMetadata {

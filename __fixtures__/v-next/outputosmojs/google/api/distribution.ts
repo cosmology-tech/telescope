@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../protobuf/timestamp";
 import { Any, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * `Distribution` contains summary statistics for a population of values. It
@@ -423,7 +424,7 @@ export const Distribution = {
       exemplars: Array.isArray(object?.exemplars) ? object.exemplars.map((e: any) => Distribution_Exemplar.fromJSON(e)) : []
     };
   },
-  toJSON(message: Distribution): unknown {
+  toJSON(message: Distribution): JsonSafe<Distribution> {
     const obj: any = {};
     message.count !== undefined && (obj.count = (message.count || BigInt(0)).toString());
     message.mean !== undefined && (obj.mean = message.mean);
@@ -593,7 +594,7 @@ export const Distribution_Range = {
       max: isSet(object.max) ? Number(object.max) : 0
     };
   },
-  toJSON(message: Distribution_Range): unknown {
+  toJSON(message: Distribution_Range): JsonSafe<Distribution_Range> {
     const obj: any = {};
     message.min !== undefined && (obj.min = message.min);
     message.max !== undefined && (obj.max = message.max);
@@ -706,7 +707,7 @@ export const Distribution_BucketOptions = {
       explicitBuckets: isSet(object.explicitBuckets) ? Distribution_BucketOptions_Explicit.fromJSON(object.explicitBuckets) : undefined
     };
   },
-  toJSON(message: Distribution_BucketOptions): unknown {
+  toJSON(message: Distribution_BucketOptions): JsonSafe<Distribution_BucketOptions> {
     const obj: any = {};
     message.linearBuckets !== undefined && (obj.linearBuckets = message.linearBuckets ? Distribution_BucketOptions_Linear.toJSON(message.linearBuckets) : undefined);
     message.exponentialBuckets !== undefined && (obj.exponentialBuckets = message.exponentialBuckets ? Distribution_BucketOptions_Exponential.toJSON(message.exponentialBuckets) : undefined);
@@ -828,7 +829,7 @@ export const Distribution_BucketOptions_Linear = {
       offset: isSet(object.offset) ? Number(object.offset) : 0
     };
   },
-  toJSON(message: Distribution_BucketOptions_Linear): unknown {
+  toJSON(message: Distribution_BucketOptions_Linear): JsonSafe<Distribution_BucketOptions_Linear> {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.width !== undefined && (obj.width = message.width);
@@ -950,7 +951,7 @@ export const Distribution_BucketOptions_Exponential = {
       scale: isSet(object.scale) ? Number(object.scale) : 0
     };
   },
-  toJSON(message: Distribution_BucketOptions_Exponential): unknown {
+  toJSON(message: Distribution_BucketOptions_Exponential): JsonSafe<Distribution_BucketOptions_Exponential> {
     const obj: any = {};
     message.numFiniteBuckets !== undefined && (obj.numFiniteBuckets = Math.round(message.numFiniteBuckets));
     message.growthFactor !== undefined && (obj.growthFactor = message.growthFactor);
@@ -1065,7 +1066,7 @@ export const Distribution_BucketOptions_Explicit = {
       bounds: Array.isArray(object?.bounds) ? object.bounds.map((e: any) => Number(e)) : []
     };
   },
-  toJSON(message: Distribution_BucketOptions_Explicit): unknown {
+  toJSON(message: Distribution_BucketOptions_Explicit): JsonSafe<Distribution_BucketOptions_Explicit> {
     const obj: any = {};
     if (message.bounds) {
       obj.bounds = message.bounds.map(e => e);
@@ -1179,7 +1180,7 @@ export const Distribution_Exemplar = {
       attachments: Array.isArray(object?.attachments) ? object.attachments.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: Distribution_Exemplar): unknown {
+  toJSON(message: Distribution_Exemplar): JsonSafe<Distribution_Exemplar> {
     const obj: any = {};
     message.value !== undefined && (obj.value = message.value);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());

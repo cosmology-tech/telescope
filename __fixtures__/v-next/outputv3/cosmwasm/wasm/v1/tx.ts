@@ -1,8 +1,7 @@
 import { AccessConfig, AccessConfigAmino, AccessConfigSDKType } from "./types";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 import { fromBase64, toBase64, toUtf8, fromUtf8 } from "@cosmjs/encoding";
 export const protobufPackage = "cosmwasm.wasm.v1";
 /** MsgStoreCode submit Wasm code to the system */
@@ -363,13 +362,6 @@ export const MsgStoreCode = {
     if (isSet(object.instantiatePermission)) obj.instantiatePermission = AccessConfig.fromJSON(object.instantiatePermission);
     return obj;
   },
-  toJSON(message: MsgStoreCode): JsonSafe<MsgStoreCode> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
-    message.instantiatePermission !== undefined && (obj.instantiatePermission = message.instantiatePermission ? AccessConfig.toJSON(message.instantiatePermission) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgStoreCode>): MsgStoreCode {
     const message = createBaseMsgStoreCode();
     message.sender = object.sender ?? "";
@@ -460,11 +452,6 @@ export const MsgStoreCodeResponse = {
   fromJSON(object: any): MsgStoreCodeResponse {
     const obj = createBaseMsgStoreCodeResponse();
     if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
-    return obj;
-  },
-  toJSON(message: MsgStoreCodeResponse): JsonSafe<MsgStoreCodeResponse> {
-    const obj: any = {};
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgStoreCodeResponse>): MsgStoreCodeResponse {
@@ -583,20 +570,6 @@ export const MsgInstantiateContract = {
     if (isSet(object.label)) obj.label = String(object.label);
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgInstantiateContract): JsonSafe<MsgInstantiateContract> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.admin !== undefined && (obj.admin = message.admin);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.label !== undefined && (obj.label = message.label);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgInstantiateContract>): MsgInstantiateContract {
@@ -726,12 +699,6 @@ export const MsgInstantiateContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgInstantiateContractResponse): JsonSafe<MsgInstantiateContractResponse> {
-    const obj: any = {};
-    message.address !== undefined && (obj.address = message.address);
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgInstantiateContractResponse>): MsgInstantiateContractResponse {
     const message = createBaseMsgInstantiateContractResponse();
     message.address = object.address ?? "";
@@ -839,18 +806,6 @@ export const MsgExecuteContract = {
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgExecuteContract): JsonSafe<MsgExecuteContract> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
-    if (message.funds) {
-      obj.funds = message.funds.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.funds = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgExecuteContract>): MsgExecuteContract {
     const message = createBaseMsgExecuteContract();
     message.sender = object.sender ?? "";
@@ -954,11 +909,6 @@ export const MsgExecuteContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgExecuteContractResponse): JsonSafe<MsgExecuteContractResponse> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgExecuteContractResponse>): MsgExecuteContractResponse {
     const message = createBaseMsgExecuteContractResponse();
     message.data = object.data ?? new Uint8Array();
@@ -1057,14 +1007,6 @@ export const MsgMigrateContract = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
     if (isSet(object.msg)) obj.msg = bytesFromBase64(object.msg);
-    return obj;
-  },
-  toJSON(message: MsgMigrateContract): JsonSafe<MsgMigrateContract> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
-    message.msg !== undefined && (obj.msg = base64FromBytes(message.msg !== undefined ? message.msg : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<MsgMigrateContract>): MsgMigrateContract {
@@ -1166,11 +1108,6 @@ export const MsgMigrateContractResponse = {
     if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
     return obj;
   },
-  toJSON(message: MsgMigrateContractResponse): JsonSafe<MsgMigrateContractResponse> {
-    const obj: any = {};
-    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgMigrateContractResponse>): MsgMigrateContractResponse {
     const message = createBaseMsgMigrateContractResponse();
     message.data = object.data ?? new Uint8Array();
@@ -1263,13 +1200,6 @@ export const MsgUpdateAdmin = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: MsgUpdateAdmin): JsonSafe<MsgUpdateAdmin> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.newAdmin !== undefined && (obj.newAdmin = message.newAdmin);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateAdmin>): MsgUpdateAdmin {
     const message = createBaseMsgUpdateAdmin();
     message.sender = object.sender ?? "";
@@ -1351,10 +1281,6 @@ export const MsgUpdateAdminResponse = {
     const obj = createBaseMsgUpdateAdminResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateAdminResponse): JsonSafe<MsgUpdateAdminResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgUpdateAdminResponse>): MsgUpdateAdminResponse {
     const message = createBaseMsgUpdateAdminResponse();
     return message;
@@ -1431,12 +1357,6 @@ export const MsgClearAdmin = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     return obj;
   },
-  toJSON(message: MsgClearAdmin): JsonSafe<MsgClearAdmin> {
-    const obj: any = {};
-    message.sender !== undefined && (obj.sender = message.sender);
-    message.contract !== undefined && (obj.contract = message.contract);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgClearAdmin>): MsgClearAdmin {
     const message = createBaseMsgClearAdmin();
     message.sender = object.sender ?? "";
@@ -1509,10 +1429,6 @@ export const MsgClearAdminResponse = {
   },
   fromJSON(_: any): MsgClearAdminResponse {
     const obj = createBaseMsgClearAdminResponse();
-    return obj;
-  },
-  toJSON(_: MsgClearAdminResponse): JsonSafe<MsgClearAdminResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgClearAdminResponse>): MsgClearAdminResponse {

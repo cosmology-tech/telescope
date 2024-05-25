@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -185,7 +186,7 @@ export const Struct_FieldsEntry = {
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: Struct_FieldsEntry): unknown {
+  toJSON(message: Struct_FieldsEntry): JsonSafe<Struct_FieldsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
@@ -287,7 +288,7 @@ export const Struct = {
       }, {}) : {}
     };
   },
-  toJSON(message: Struct): unknown {
+  toJSON(message: Struct): JsonSafe<Struct> {
     const obj: any = {};
     obj.fields = {};
     if (message.fields) {
@@ -452,7 +453,7 @@ export const Value = {
       listValue: isSet(object.listValue) ? ListValue.fromJSON(object.listValue) : undefined
     };
   },
-  toJSON(message: Value): unknown {
+  toJSON(message: Value): JsonSafe<Value> {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.numberValue !== undefined && (obj.numberValue = message.numberValue);
@@ -585,7 +586,7 @@ export const ListValue = {
       values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromJSON(e)) : []
     };
   },
-  toJSON(message: ListValue): unknown {
+  toJSON(message: ListValue): JsonSafe<ListValue> {
     const obj: any = {};
     if (message.values) {
       obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);

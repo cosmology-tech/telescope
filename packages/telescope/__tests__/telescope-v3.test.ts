@@ -58,7 +58,7 @@ const options: TelescopeOptions = {
             encode: true,
             decode: true,
             fromJSON: true,
-            toJSON: true,
+            toJSON: false,
             fromPartial: true,
             toSDK: true,
             fromSDK: true,
@@ -82,7 +82,7 @@ const options: TelescopeOptions = {
         typingsFormat: {
             useDeepPartial: true,
             useExact: false,
-            toJsonUnknown: false,
+            toJsonUnknown: true,
             timestamp: 'date',
             duration: 'duration'
         }

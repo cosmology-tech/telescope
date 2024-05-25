@@ -4,6 +4,7 @@ import { Params as Params1 } from "../controller/v1/controller";
 import { Params as Params2 } from "../host/v1/host";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.interchain_accounts.v1";
 /** GenesisState defines the interchain accounts genesis state */
 export interface GenesisState {
@@ -78,7 +79,7 @@ export const GenesisState = {
       hostGenesisState: isSet(object.hostGenesisState) ? HostGenesisState.fromJSON(object.hostGenesisState) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.controllerGenesisState !== undefined && (obj.controllerGenesisState = message.controllerGenesisState ? ControllerGenesisState.toJSON(message.controllerGenesisState) : undefined);
     message.hostGenesisState !== undefined && (obj.hostGenesisState = message.hostGenesisState ? HostGenesisState.toJSON(message.hostGenesisState) : undefined);
@@ -149,7 +150,7 @@ export const ControllerGenesisState = {
       params: isSet(object.params) ? Params1.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: ControllerGenesisState): unknown {
+  toJSON(message: ControllerGenesisState): JsonSafe<ControllerGenesisState> {
     const obj: any = {};
     if (message.activeChannels) {
       obj.activeChannels = message.activeChannels.map(e => e ? ActiveChannel.toJSON(e) : undefined);
@@ -236,7 +237,7 @@ export const HostGenesisState = {
       params: isSet(object.params) ? Params2.fromJSON(object.params) : undefined
     };
   },
-  toJSON(message: HostGenesisState): unknown {
+  toJSON(message: HostGenesisState): JsonSafe<HostGenesisState> {
     const obj: any = {};
     if (message.activeChannels) {
       obj.activeChannels = message.activeChannels.map(e => e ? ActiveChannel.toJSON(e) : undefined);
@@ -311,7 +312,7 @@ export const ActiveChannel = {
       channelId: isSet(object.channelId) ? String(object.channelId) : ""
     };
   },
-  toJSON(message: ActiveChannel): unknown {
+  toJSON(message: ActiveChannel): JsonSafe<ActiveChannel> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.portId !== undefined && (obj.portId = message.portId);
@@ -376,7 +377,7 @@ export const RegisteredInterchainAccount = {
       accountAddress: isSet(object.accountAddress) ? String(object.accountAddress) : ""
     };
   },
-  toJSON(message: RegisteredInterchainAccount): unknown {
+  toJSON(message: RegisteredInterchainAccount): JsonSafe<RegisteredInterchainAccount> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.portId !== undefined && (obj.portId = message.portId);

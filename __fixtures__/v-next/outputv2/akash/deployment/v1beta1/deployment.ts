@@ -4,6 +4,7 @@ import { GroupSpec, GroupSpecAmino, GroupSpecSDKType } from "./group";
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.deployment.v1beta1";
 /** State is an enum which refers to state of deployment */
 export enum Deployment_State {
@@ -338,7 +339,7 @@ export const MsgCreateDeployment = {
     if (isSet(object.deposit)) obj.deposit = Coin.fromJSON(object.deposit);
     return obj;
   },
-  toJSON(message: MsgCreateDeployment): unknown {
+  toJSON(message: MsgCreateDeployment): JsonSafe<MsgCreateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     if (message.groups) {
@@ -450,7 +451,7 @@ export const MsgCreateDeploymentResponse = {
     const obj = createBaseMsgCreateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgCreateDeploymentResponse): unknown {
+  toJSON(_: MsgCreateDeploymentResponse): JsonSafe<MsgCreateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -532,7 +533,7 @@ export const MsgDepositDeployment = {
     if (isSet(object.amount)) obj.amount = Coin.fromJSON(object.amount);
     return obj;
   },
-  toJSON(message: MsgDepositDeployment): unknown {
+  toJSON(message: MsgDepositDeployment): JsonSafe<MsgDepositDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     message.amount !== undefined && (obj.amount = message.amount ? Coin.toJSON(message.amount) : undefined);
@@ -618,7 +619,7 @@ export const MsgDepositDeploymentResponse = {
     const obj = createBaseMsgDepositDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgDepositDeploymentResponse): unknown {
+  toJSON(_: MsgDepositDeploymentResponse): JsonSafe<MsgDepositDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -708,7 +709,7 @@ export const MsgUpdateDeployment = {
     if (isSet(object.version)) obj.version = bytesFromBase64(object.version);
     return obj;
   },
-  toJSON(message: MsgUpdateDeployment): unknown {
+  toJSON(message: MsgUpdateDeployment): JsonSafe<MsgUpdateDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     if (message.groups) {
@@ -810,7 +811,7 @@ export const MsgUpdateDeploymentResponse = {
     const obj = createBaseMsgUpdateDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateDeploymentResponse): unknown {
+  toJSON(_: MsgUpdateDeploymentResponse): JsonSafe<MsgUpdateDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -884,7 +885,7 @@ export const MsgCloseDeployment = {
     if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
     return obj;
   },
-  toJSON(message: MsgCloseDeployment): unknown {
+  toJSON(message: MsgCloseDeployment): JsonSafe<MsgCloseDeployment> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
     return obj;
@@ -960,7 +961,7 @@ export const MsgCloseDeploymentResponse = {
     const obj = createBaseMsgCloseDeploymentResponse();
     return obj;
   },
-  toJSON(_: MsgCloseDeploymentResponse): unknown {
+  toJSON(_: MsgCloseDeploymentResponse): JsonSafe<MsgCloseDeploymentResponse> {
     const obj: any = {};
     return obj;
   },
@@ -1042,7 +1043,7 @@ export const DeploymentID = {
     if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
     return obj;
   },
-  toJSON(message: DeploymentID): unknown {
+  toJSON(message: DeploymentID): JsonSafe<DeploymentID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
@@ -1159,7 +1160,7 @@ export const Deployment = {
     if (isSet(object.createdAt)) obj.createdAt = BigInt(object.createdAt.toString());
     return obj;
   },
-  toJSON(message: Deployment): unknown {
+  toJSON(message: Deployment): JsonSafe<Deployment> {
     const obj: any = {};
     message.deploymentId !== undefined && (obj.deploymentId = message.deploymentId ? DeploymentID.toJSON(message.deploymentId) : undefined);
     message.state !== undefined && (obj.state = deployment_StateToJSON(message.state));
@@ -1286,7 +1287,7 @@ export const DeploymentFilters = {
     if (isSet(object.state)) obj.state = String(object.state);
     return obj;
   },
-  toJSON(message: DeploymentFilters): unknown {
+  toJSON(message: DeploymentFilters): JsonSafe<DeploymentFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());

@@ -1,6 +1,7 @@
 import { ProposalExecutorResult, ProposalExecutorResultSDKType, proposalExecutorResultFromJSON, proposalExecutorResultToJSON } from "./types";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.group.v1";
 /** EventCreateGroup is an event emitted when a group is created. */
 export interface EventCreateGroup {
@@ -123,7 +124,7 @@ export const EventCreateGroup = {
       groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
-  toJSON(message: EventCreateGroup): unknown {
+  toJSON(message: EventCreateGroup): JsonSafe<EventCreateGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
@@ -178,7 +179,7 @@ export const EventUpdateGroup = {
       groupId: isSet(object.groupId) ? Long.fromValue(object.groupId) : Long.UZERO
     };
   },
-  toJSON(message: EventUpdateGroup): unknown {
+  toJSON(message: EventUpdateGroup): JsonSafe<EventUpdateGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     return obj;
@@ -233,7 +234,7 @@ export const EventCreateGroupPolicy = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: EventCreateGroupPolicy): unknown {
+  toJSON(message: EventCreateGroupPolicy): JsonSafe<EventCreateGroupPolicy> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -288,7 +289,7 @@ export const EventUpdateGroupPolicy = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: EventUpdateGroupPolicy): unknown {
+  toJSON(message: EventUpdateGroupPolicy): JsonSafe<EventUpdateGroupPolicy> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -343,7 +344,7 @@ export const EventSubmitProposal = {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
-  toJSON(message: EventSubmitProposal): unknown {
+  toJSON(message: EventSubmitProposal): JsonSafe<EventSubmitProposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
@@ -398,7 +399,7 @@ export const EventWithdrawProposal = {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
-  toJSON(message: EventWithdrawProposal): unknown {
+  toJSON(message: EventWithdrawProposal): JsonSafe<EventWithdrawProposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
@@ -453,7 +454,7 @@ export const EventVote = {
       proposalId: isSet(object.proposalId) ? Long.fromValue(object.proposalId) : Long.UZERO
     };
   },
-  toJSON(message: EventVote): unknown {
+  toJSON(message: EventVote): JsonSafe<EventVote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     return obj;
@@ -516,7 +517,7 @@ export const EventExec = {
       result: isSet(object.result) ? proposalExecutorResultFromJSON(object.result) : -1
     };
   },
-  toJSON(message: EventExec): unknown {
+  toJSON(message: EventExec): JsonSafe<EventExec> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.result !== undefined && (obj.result = proposalExecutorResultToJSON(message.result));
@@ -583,7 +584,7 @@ export const EventLeaveGroup = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: EventLeaveGroup): unknown {
+  toJSON(message: EventLeaveGroup): JsonSafe<EventLeaveGroup> {
     const obj: any = {};
     message.groupId !== undefined && (obj.groupId = (message.groupId || Long.UZERO).toString());
     message.address !== undefined && (obj.address = message.address);

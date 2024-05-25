@@ -4,6 +4,7 @@ import { Grant } from "./authz";
 import { Any } from "../../../google/protobuf/any";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes, Rpc } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /**
  * MsgGrant is a request type for Grant method. It declares authorization to the grantee
@@ -95,7 +96,7 @@ export const MsgGrant = {
       grant: isSet(object.grant) ? Grant.fromJSON(object.grant) : undefined
     };
   },
-  toJSON(message: MsgGrant): unknown {
+  toJSON(message: MsgGrant): JsonSafe<MsgGrant> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -144,7 +145,7 @@ export const MsgExecResponse = {
       results: Array.isArray(object?.results) ? object.results.map((e: any) => bytesFromBase64(e)) : []
     };
   },
-  toJSON(message: MsgExecResponse): unknown {
+  toJSON(message: MsgExecResponse): JsonSafe<MsgExecResponse> {
     const obj: any = {};
     if (message.results) {
       obj.results = message.results.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
@@ -201,7 +202,7 @@ export const MsgExec = {
       msgs: Array.isArray(object?.msgs) ? object.msgs.map((e: any) => Any.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgExec): unknown {
+  toJSON(message: MsgExec): JsonSafe<MsgExec> {
     const obj: any = {};
     message.grantee !== undefined && (obj.grantee = message.grantee);
     if (message.msgs) {
@@ -242,7 +243,7 @@ export const MsgGrantResponse = {
   fromJSON(_: any): MsgGrantResponse {
     return {};
   },
-  toJSON(_: MsgGrantResponse): unknown {
+  toJSON(_: MsgGrantResponse): JsonSafe<MsgGrantResponse> {
     const obj: any = {};
     return obj;
   },
@@ -301,7 +302,7 @@ export const MsgRevoke = {
       msgTypeUrl: isSet(object.msgTypeUrl) ? String(object.msgTypeUrl) : ""
     };
   },
-  toJSON(message: MsgRevoke): unknown {
+  toJSON(message: MsgRevoke): JsonSafe<MsgRevoke> {
     const obj: any = {};
     message.granter !== undefined && (obj.granter = message.granter);
     message.grantee !== undefined && (obj.grantee = message.grantee);
@@ -340,7 +341,7 @@ export const MsgRevokeResponse = {
   fromJSON(_: any): MsgRevokeResponse {
     return {};
   },
-  toJSON(_: MsgRevokeResponse): unknown {
+  toJSON(_: MsgRevokeResponse): JsonSafe<MsgRevokeResponse> {
     const obj: any = {};
     return obj;
   },

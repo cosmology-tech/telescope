@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
+import { isSet, bytesFromBase64, DeepPartial, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "akash.base.v1beta2";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
@@ -51,11 +50,6 @@ export const ResourceValue = {
   fromJSON(object: any): ResourceValue {
     const obj = createBaseResourceValue();
     if (isSet(object.val)) obj.val = bytesFromBase64(object.val);
-    return obj;
-  },
-  toJSON(message: ResourceValue): JsonSafe<ResourceValue> {
-    const obj: any = {};
-    message.val !== undefined && (obj.val = base64FromBytes(message.val !== undefined ? message.val : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<ResourceValue>): ResourceValue {

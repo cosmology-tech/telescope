@@ -1,4 +1,5 @@
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "google.api";
 /**
@@ -139,7 +140,7 @@ export const Billing = {
       consumerDestinations: Array.isArray(object?.consumerDestinations) ? object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e)) : []
     };
   },
-  toJSON(message: Billing): unknown {
+  toJSON(message: Billing): JsonSafe<Billing> {
     const obj: any = {};
     if (message.consumerDestinations) {
       obj.consumerDestinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toJSON(e) : undefined);
@@ -210,7 +211,7 @@ export const Billing_BillingDestination = {
       metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: Billing_BillingDestination): unknown {
+  toJSON(message: Billing_BillingDestination): JsonSafe<Billing_BillingDestination> {
     const obj: any = {};
     message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
     if (message.metrics) {

@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.erc20.v1";
 /** MsgConvertCoin defines a Msg to convert a native Cosmos coin to a ERC20 token */
 export interface MsgConvertCoin {
@@ -119,7 +120,7 @@ export const MsgConvertCoin = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgConvertCoin): unknown {
+  toJSON(message: MsgConvertCoin): JsonSafe<MsgConvertCoin> {
     const obj: any = {};
     message.coin !== undefined && (obj.coin = message.coin ? Coin.toJSON(message.coin) : undefined);
     message.receiver !== undefined && (obj.receiver = message.receiver);
@@ -215,7 +216,7 @@ export const MsgConvertCoinResponse = {
   fromJSON(_: any): MsgConvertCoinResponse {
     return {};
   },
-  toJSON(_: MsgConvertCoinResponse): unknown {
+  toJSON(_: MsgConvertCoinResponse): JsonSafe<MsgConvertCoinResponse> {
     const obj: any = {};
     return obj;
   },
@@ -316,7 +317,7 @@ export const MsgConvertERC20 = {
       sender: isSet(object.sender) ? String(object.sender) : ""
     };
   },
-  toJSON(message: MsgConvertERC20): unknown {
+  toJSON(message: MsgConvertERC20): JsonSafe<MsgConvertERC20> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.amount !== undefined && (obj.amount = message.amount);
@@ -421,7 +422,7 @@ export const MsgConvertERC20Response = {
   fromJSON(_: any): MsgConvertERC20Response {
     return {};
   },
-  toJSON(_: MsgConvertERC20Response): unknown {
+  toJSON(_: MsgConvertERC20Response): JsonSafe<MsgConvertERC20Response> {
     const obj: any = {};
     return obj;
   },

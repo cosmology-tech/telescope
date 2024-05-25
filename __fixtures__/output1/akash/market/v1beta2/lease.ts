@@ -2,6 +2,7 @@ import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType } from "./bid";
 import { Long, isSet, DeepPartial, Exact } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** State is an enum which refers to state of lease */
 export enum Lease_State {
@@ -203,7 +204,7 @@ export const LeaseID = {
       provider: isSet(object.provider) ? String(object.provider) : ""
     };
   },
-  toJSON(message: LeaseID): unknown {
+  toJSON(message: LeaseID): JsonSafe<LeaseID> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -306,7 +307,7 @@ export const Lease = {
       closedOn: isSet(object.closedOn) ? Long.fromValue(object.closedOn) : Long.ZERO
     };
   },
-  toJSON(message: Lease): unknown {
+  toJSON(message: Lease): JsonSafe<Lease> {
     const obj: any = {};
     message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
     message.state !== undefined && (obj.state = lease_StateToJSON(message.state));
@@ -417,7 +418,7 @@ export const LeaseFilters = {
       state: isSet(object.state) ? String(object.state) : ""
     };
   },
-  toJSON(message: LeaseFilters): unknown {
+  toJSON(message: LeaseFilters): JsonSafe<LeaseFilters> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.dseq !== undefined && (obj.dseq = (message.dseq || Long.UZERO).toString());
@@ -492,7 +493,7 @@ export const MsgCreateLease = {
       bidId: isSet(object.bidId) ? BidID.fromJSON(object.bidId) : undefined
     };
   },
-  toJSON(message: MsgCreateLease): unknown {
+  toJSON(message: MsgCreateLease): JsonSafe<MsgCreateLease> {
     const obj: any = {};
     message.bidId !== undefined && (obj.bidId = message.bidId ? BidID.toJSON(message.bidId) : undefined);
     return obj;
@@ -537,7 +538,7 @@ export const MsgCreateLeaseResponse = {
   fromJSON(_: any): MsgCreateLeaseResponse {
     return {};
   },
-  toJSON(_: MsgCreateLeaseResponse): unknown {
+  toJSON(_: MsgCreateLeaseResponse): JsonSafe<MsgCreateLeaseResponse> {
     const obj: any = {};
     return obj;
   },
@@ -587,7 +588,7 @@ export const MsgWithdrawLease = {
       bidId: isSet(object.bidId) ? LeaseID.fromJSON(object.bidId) : undefined
     };
   },
-  toJSON(message: MsgWithdrawLease): unknown {
+  toJSON(message: MsgWithdrawLease): JsonSafe<MsgWithdrawLease> {
     const obj: any = {};
     message.bidId !== undefined && (obj.bidId = message.bidId ? LeaseID.toJSON(message.bidId) : undefined);
     return obj;
@@ -632,7 +633,7 @@ export const MsgWithdrawLeaseResponse = {
   fromJSON(_: any): MsgWithdrawLeaseResponse {
     return {};
   },
-  toJSON(_: MsgWithdrawLeaseResponse): unknown {
+  toJSON(_: MsgWithdrawLeaseResponse): JsonSafe<MsgWithdrawLeaseResponse> {
     const obj: any = {};
     return obj;
   },
@@ -682,7 +683,7 @@ export const MsgCloseLease = {
       leaseId: isSet(object.leaseId) ? LeaseID.fromJSON(object.leaseId) : undefined
     };
   },
-  toJSON(message: MsgCloseLease): unknown {
+  toJSON(message: MsgCloseLease): JsonSafe<MsgCloseLease> {
     const obj: any = {};
     message.leaseId !== undefined && (obj.leaseId = message.leaseId ? LeaseID.toJSON(message.leaseId) : undefined);
     return obj;
@@ -727,7 +728,7 @@ export const MsgCloseLeaseResponse = {
   fromJSON(_: any): MsgCloseLeaseResponse {
     return {};
   },
-  toJSON(_: MsgCloseLeaseResponse): unknown {
+  toJSON(_: MsgCloseLeaseResponse): JsonSafe<MsgCloseLeaseResponse> {
     const obj: any = {};
     return obj;
   },

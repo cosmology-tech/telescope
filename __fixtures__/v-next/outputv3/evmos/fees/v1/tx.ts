@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
@@ -225,18 +224,6 @@ export const MsgRegisterDevFeeInfo = {
     if (Array.isArray(object?.nonces)) obj.nonces = object.nonces.map((e: any) => BigInt(e.toString()));
     return obj;
   },
-  toJSON(message: MsgRegisterDevFeeInfo): JsonSafe<MsgRegisterDevFeeInfo> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    if (message.nonces) {
-      obj.nonces = message.nonces.map(e => (e || BigInt(0)).toString());
-    } else {
-      obj.nonces = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgRegisterDevFeeInfo>): MsgRegisterDevFeeInfo {
     const message = createBaseMsgRegisterDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
@@ -330,10 +317,6 @@ export const MsgRegisterDevFeeInfoResponse = {
     const obj = createBaseMsgRegisterDevFeeInfoResponse();
     return obj;
   },
-  toJSON(_: MsgRegisterDevFeeInfoResponse): JsonSafe<MsgRegisterDevFeeInfoResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
@@ -409,12 +392,6 @@ export const MsgCancelDevFeeInfo = {
     if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
     return obj;
   },
-  toJSON(message: MsgCancelDevFeeInfo): JsonSafe<MsgCancelDevFeeInfo> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgCancelDevFeeInfo>): MsgCancelDevFeeInfo {
     const message = createBaseMsgCancelDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
@@ -486,10 +463,6 @@ export const MsgCancelDevFeeInfoResponse = {
   },
   fromJSON(_: any): MsgCancelDevFeeInfoResponse {
     const obj = createBaseMsgCancelDevFeeInfoResponse();
-    return obj;
-  },
-  toJSON(_: MsgCancelDevFeeInfoResponse): JsonSafe<MsgCancelDevFeeInfoResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
@@ -575,13 +548,6 @@ export const MsgUpdateDevFeeInfo = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: MsgUpdateDevFeeInfo): JsonSafe<MsgUpdateDevFeeInfo> {
-    const obj: any = {};
-    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
-    message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
-    message.withdrawAddress !== undefined && (obj.withdrawAddress = message.withdrawAddress);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgUpdateDevFeeInfo>): MsgUpdateDevFeeInfo {
     const message = createBaseMsgUpdateDevFeeInfo();
     message.contractAddress = object.contractAddress ?? "";
@@ -660,10 +626,6 @@ export const MsgUpdateDevFeeInfoResponse = {
   },
   fromJSON(_: any): MsgUpdateDevFeeInfoResponse {
     const obj = createBaseMsgUpdateDevFeeInfoResponse();
-    return obj;
-  },
-  toJSON(_: MsgUpdateDevFeeInfoResponse): JsonSafe<MsgUpdateDevFeeInfoResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {

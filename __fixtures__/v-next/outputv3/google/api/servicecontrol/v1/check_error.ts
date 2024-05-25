@@ -1,7 +1,6 @@
 import { Status, StatusAmino, StatusSDKType } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
@@ -313,14 +312,6 @@ export const CheckError = {
     if (isSet(object.subject)) obj.subject = String(object.subject);
     if (isSet(object.detail)) obj.detail = String(object.detail);
     if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
-    return obj;
-  },
-  toJSON(message: CheckError): JsonSafe<CheckError> {
-    const obj: any = {};
-    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.detail !== undefined && (obj.detail = message.detail);
-    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CheckError>): CheckError {

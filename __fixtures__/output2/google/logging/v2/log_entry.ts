@@ -8,6 +8,7 @@ import { LogSeverity, logSeverityFromJSON, logSeverityToJSON } from "../type/log
 import { HttpRequest } from "../type/http_request";
 import { Long, isSet, DeepPartial, fromJsonTimestamp, isObject, fromTimestamp } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 export interface LogEntry_LabelsEntry {
   key: string;
@@ -270,7 +271,7 @@ export const LogEntry_LabelsEntry = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: LogEntry_LabelsEntry): unknown {
+  toJSON(message: LogEntry_LabelsEntry): JsonSafe<LogEntry_LabelsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -456,7 +457,7 @@ export const LogEntry = {
       split: isSet(object.split) ? LogSplit.fromJSON(object.split) : undefined
     };
   },
-  toJSON(message: LogEntry): unknown {
+  toJSON(message: LogEntry): JsonSafe<LogEntry> {
     const obj: any = {};
     message.logName !== undefined && (obj.logName = message.logName);
     message.resource !== undefined && (obj.resource = message.resource ? MonitoredResource.toJSON(message.resource) : undefined);
@@ -569,7 +570,7 @@ export const LogEntryOperation = {
       last: isSet(object.last) ? Boolean(object.last) : false
     };
   },
-  toJSON(message: LogEntryOperation): unknown {
+  toJSON(message: LogEntryOperation): JsonSafe<LogEntryOperation> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     message.producer !== undefined && (obj.producer = message.producer);
@@ -636,7 +637,7 @@ export const LogEntrySourceLocation = {
       function: isSet(object.function) ? String(object.function) : ""
     };
   },
-  toJSON(message: LogEntrySourceLocation): unknown {
+  toJSON(message: LogEntrySourceLocation): JsonSafe<LogEntrySourceLocation> {
     const obj: any = {};
     message.file !== undefined && (obj.file = message.file);
     message.line !== undefined && (obj.line = (message.line || Long.ZERO).toString());
@@ -701,7 +702,7 @@ export const LogSplit = {
       totalSplits: isSet(object.totalSplits) ? Number(object.totalSplits) : 0
     };
   },
-  toJSON(message: LogSplit): unknown {
+  toJSON(message: LogSplit): JsonSafe<LogSplit> {
     const obj: any = {};
     message.uid !== undefined && (obj.uid = message.uid);
     message.index !== undefined && (obj.index = Math.round(message.index));

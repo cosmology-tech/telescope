@@ -2,6 +2,7 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BIP44Params, BIP44ParamsSDKType } from "../../hd/v1/hd";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "cosmos.crypto.keyring.v1";
 /** Record is used for representing a key in the keyring. */
 export interface Record {
@@ -154,7 +155,7 @@ export const Record = {
       offline: isSet(object.offline) ? Record_Offline.fromJSON(object.offline) : undefined
     };
   },
-  toJSON(message: Record): unknown {
+  toJSON(message: Record): JsonSafe<Record> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
@@ -301,7 +302,7 @@ export const Record_Local = {
       privKeyType: isSet(object.privKeyType) ? String(object.privKeyType) : ""
     };
   },
-  toJSON(message: Record_Local): unknown {
+  toJSON(message: Record_Local): JsonSafe<Record_Local> {
     const obj: any = {};
     message.privKey !== undefined && (obj.privKey = message.privKey ? Any.toJSON(message.privKey) : undefined);
     message.privKeyType !== undefined && (obj.privKeyType = message.privKeyType);
@@ -404,7 +405,7 @@ export const Record_Ledger = {
       path: isSet(object.path) ? BIP44Params.fromJSON(object.path) : undefined
     };
   },
-  toJSON(message: Record_Ledger): unknown {
+  toJSON(message: Record_Ledger): JsonSafe<Record_Ledger> {
     const obj: any = {};
     message.path !== undefined && (obj.path = message.path ? BIP44Params.toJSON(message.path) : undefined);
     return obj;
@@ -488,7 +489,7 @@ export const Record_Multi = {
   fromJSON(_: any): Record_Multi {
     return {};
   },
-  toJSON(_: Record_Multi): unknown {
+  toJSON(_: Record_Multi): JsonSafe<Record_Multi> {
     const obj: any = {};
     return obj;
   },
@@ -561,7 +562,7 @@ export const Record_Offline = {
   fromJSON(_: any): Record_Offline {
     return {};
   },
-  toJSON(_: Record_Offline): unknown {
+  toJSON(_: Record_Offline): JsonSafe<Record_Offline> {
     const obj: any = {};
     return obj;
   },

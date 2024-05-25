@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
@@ -78,12 +77,6 @@ export const FeeToken = {
     const obj = createBaseFeeToken();
     if (isSet(object.denom)) obj.denom = String(object.denom);
     if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
-    return obj;
-  },
-  toJSON(message: FeeToken): JsonSafe<FeeToken> {
-    const obj: any = {};
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {

@@ -1,7 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../../../google/protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -141,11 +140,6 @@ export const Params = {
     if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
     return obj;
   },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.mintedDenom !== undefined && (obj.mintedDenom = message.mintedDenom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintedDenom = object.mintedDenom ?? "";
@@ -220,15 +214,6 @@ export const LockableDurationsInfo = {
   fromJSON(object: any): LockableDurationsInfo {
     const obj = createBaseLockableDurationsInfo();
     if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
-    const obj: any = {};
-    if (message.lockableDurations) {
-      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
-    } else {
-      obj.lockableDurations = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo {
@@ -319,16 +304,6 @@ export const DistrInfo = {
     const obj = createBaseDistrInfo();
     if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
     if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: DistrInfo): JsonSafe<DistrInfo> {
-    const obj: any = {};
-    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
-    if (message.records) {
-      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
-    } else {
-      obj.records = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<DistrInfo>): DistrInfo {
@@ -426,12 +401,6 @@ export const DistrRecord = {
     const obj = createBaseDistrRecord();
     if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
     if (isSet(object.weight)) obj.weight = String(object.weight);
-    return obj;
-  },
-  toJSON(message: DistrRecord): JsonSafe<DistrRecord> {
-    const obj: any = {};
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    message.weight !== undefined && (obj.weight = message.weight);
     return obj;
   },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
@@ -535,13 +504,6 @@ export const PoolToGauge = {
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
     return obj;
   },
-  toJSON(message: PoolToGauge): JsonSafe<PoolToGauge> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
     if (object.poolId !== undefined && object.poolId !== null) {
@@ -636,15 +598,6 @@ export const PoolToGauges = {
   fromJSON(object: any): PoolToGauges {
     const obj = createBasePoolToGauges();
     if (Array.isArray(object?.poolToGauge)) obj.poolToGauge = object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: PoolToGauges): JsonSafe<PoolToGauges> {
-    const obj: any = {};
-    if (message.poolToGauge) {
-      obj.poolToGauge = message.poolToGauge.map(e => e ? PoolToGauge.toJSON(e) : undefined);
-    } else {
-      obj.poolToGauge = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<PoolToGauges>): PoolToGauges {

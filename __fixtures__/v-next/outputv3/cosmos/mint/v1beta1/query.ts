@@ -1,6 +1,5 @@
 import { Params, ParamsAmino, ParamsSDKType } from "./mint";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export const protobufPackage = "cosmos.mint.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
@@ -141,10 +140,6 @@ export const QueryParamsRequest = {
     const obj = createBaseQueryParamsRequest();
     return obj;
   },
-  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
@@ -211,11 +206,6 @@ export const QueryParamsResponse = {
   fromJSON(object: any): QueryParamsResponse {
     const obj = createBaseQueryParamsResponse();
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
@@ -287,10 +277,6 @@ export const QueryInflationRequest = {
     const obj = createBaseQueryInflationRequest();
     return obj;
   },
-  toJSON(_: QueryInflationRequest): JsonSafe<QueryInflationRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryInflationRequest>): QueryInflationRequest {
     const message = createBaseQueryInflationRequest();
     return message;
@@ -357,11 +343,6 @@ export const QueryInflationResponse = {
   fromJSON(object: any): QueryInflationResponse {
     const obj = createBaseQueryInflationResponse();
     if (isSet(object.inflation)) obj.inflation = bytesFromBase64(object.inflation);
-    return obj;
-  },
-  toJSON(message: QueryInflationResponse): JsonSafe<QueryInflationResponse> {
-    const obj: any = {};
-    message.inflation !== undefined && (obj.inflation = base64FromBytes(message.inflation !== undefined ? message.inflation : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<QueryInflationResponse>): QueryInflationResponse {
@@ -431,10 +412,6 @@ export const QueryAnnualProvisionsRequest = {
     const obj = createBaseQueryAnnualProvisionsRequest();
     return obj;
   },
-  toJSON(_: QueryAnnualProvisionsRequest): JsonSafe<QueryAnnualProvisionsRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QueryAnnualProvisionsRequest>): QueryAnnualProvisionsRequest {
     const message = createBaseQueryAnnualProvisionsRequest();
     return message;
@@ -501,11 +478,6 @@ export const QueryAnnualProvisionsResponse = {
   fromJSON(object: any): QueryAnnualProvisionsResponse {
     const obj = createBaseQueryAnnualProvisionsResponse();
     if (isSet(object.annualProvisions)) obj.annualProvisions = bytesFromBase64(object.annualProvisions);
-    return obj;
-  },
-  toJSON(message: QueryAnnualProvisionsResponse): JsonSafe<QueryAnnualProvisionsResponse> {
-    const obj: any = {};
-    message.annualProvisions !== undefined && (obj.annualProvisions = base64FromBytes(message.annualProvisions !== undefined ? message.annualProvisions : new Uint8Array()));
     return obj;
   },
   fromPartial(object: DeepPartial<QueryAnnualProvisionsResponse>): QueryAnnualProvisionsResponse {

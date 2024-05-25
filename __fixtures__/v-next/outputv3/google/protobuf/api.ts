@@ -2,7 +2,6 @@ import { Option, OptionAmino, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJS
 import { SourceContext, SourceContextAmino, SourceContextSDKType } from "./source_context";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
@@ -531,29 +530,6 @@ export const Api = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Api): JsonSafe<Api> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.methods) {
-      obj.methods = message.methods.map(e => e ? Method.toJSON(e) : undefined);
-    } else {
-      obj.methods = [];
-    }
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.version !== undefined && (obj.version = message.version);
-    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
-    if (message.mixins) {
-      obj.mixins = message.mixins.map(e => e ? Mixin.toJSON(e) : undefined);
-    } else {
-      obj.mixins = [];
-    }
-    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Api>): Api {
     const message = createBaseApi();
     message.name = object.name ?? "";
@@ -739,21 +715,6 @@ export const Method = {
     if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
     return obj;
   },
-  toJSON(message: Method): JsonSafe<Method> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.requestTypeUrl !== undefined && (obj.requestTypeUrl = message.requestTypeUrl);
-    message.requestStreaming !== undefined && (obj.requestStreaming = message.requestStreaming);
-    message.responseTypeUrl !== undefined && (obj.responseTypeUrl = message.responseTypeUrl);
-    message.responseStreaming !== undefined && (obj.responseStreaming = message.responseStreaming);
-    if (message.options) {
-      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
-    } else {
-      obj.options = [];
-    }
-    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
-    return obj;
-  },
   fromPartial(object: DeepPartial<Method>): Method {
     const message = createBaseMethod();
     message.name = object.name ?? "";
@@ -883,12 +844,6 @@ export const Mixin = {
     const obj = createBaseMixin();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.root)) obj.root = String(object.root);
-    return obj;
-  },
-  toJSON(message: Mixin): JsonSafe<Mixin> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.root !== undefined && (obj.root = message.root);
     return obj;
   },
   fromPartial(object: DeepPartial<Mixin>): Mixin {

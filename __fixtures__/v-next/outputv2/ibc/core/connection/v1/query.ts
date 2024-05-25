@@ -4,6 +4,7 @@ import { Height, HeightAmino, HeightSDKType, IdentifiedClientState, IdentifiedCl
 import { Any, AnyAmino, AnySDKType } from "../../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.connection.v1";
 /**
  * QueryConnectionRequest is the request type for the Query/Connection RPC
@@ -413,7 +414,7 @@ export const QueryConnectionRequest = {
     if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
     return obj;
   },
-  toJSON(message: QueryConnectionRequest): unknown {
+  toJSON(message: QueryConnectionRequest): JsonSafe<QueryConnectionRequest> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     return obj;
@@ -519,7 +520,7 @@ export const QueryConnectionResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryConnectionResponse): unknown {
+  toJSON(message: QueryConnectionResponse): JsonSafe<QueryConnectionResponse> {
     const obj: any = {};
     message.connection !== undefined && (obj.connection = message.connection ? ConnectionEnd.toJSON(message.connection) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -629,7 +630,7 @@ export const QueryConnectionsRequest = {
     if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
     return obj;
   },
-  toJSON(message: QueryConnectionsRequest): unknown {
+  toJSON(message: QueryConnectionsRequest): JsonSafe<QueryConnectionsRequest> {
     const obj: any = {};
     message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
     return obj;
@@ -737,7 +738,7 @@ export const QueryConnectionsResponse = {
     if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
     return obj;
   },
-  toJSON(message: QueryConnectionsResponse): unknown {
+  toJSON(message: QueryConnectionsResponse): JsonSafe<QueryConnectionsResponse> {
     const obj: any = {};
     if (message.connections) {
       obj.connections = message.connections.map(e => e ? IdentifiedConnection.toJSON(e) : undefined);
@@ -857,7 +858,7 @@ export const QueryClientConnectionsRequest = {
     if (isSet(object.clientId)) obj.clientId = String(object.clientId);
     return obj;
   },
-  toJSON(message: QueryClientConnectionsRequest): unknown {
+  toJSON(message: QueryClientConnectionsRequest): JsonSafe<QueryClientConnectionsRequest> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     return obj;
@@ -963,7 +964,7 @@ export const QueryClientConnectionsResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryClientConnectionsResponse): unknown {
+  toJSON(message: QueryClientConnectionsResponse): JsonSafe<QueryClientConnectionsResponse> {
     const obj: any = {};
     if (message.connectionPaths) {
       obj.connectionPaths = message.connectionPaths.map(e => e);
@@ -1081,7 +1082,7 @@ export const QueryConnectionClientStateRequest = {
     if (isSet(object.connectionId)) obj.connectionId = String(object.connectionId);
     return obj;
   },
-  toJSON(message: QueryConnectionClientStateRequest): unknown {
+  toJSON(message: QueryConnectionClientStateRequest): JsonSafe<QueryConnectionClientStateRequest> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     return obj;
@@ -1187,7 +1188,7 @@ export const QueryConnectionClientStateResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryConnectionClientStateResponse): unknown {
+  toJSON(message: QueryConnectionClientStateResponse): JsonSafe<QueryConnectionClientStateResponse> {
     const obj: any = {};
     message.identifiedClientState !== undefined && (obj.identifiedClientState = message.identifiedClientState ? IdentifiedClientState.toJSON(message.identifiedClientState) : undefined);
     message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
@@ -1313,7 +1314,7 @@ export const QueryConnectionConsensusStateRequest = {
     if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
     return obj;
   },
-  toJSON(message: QueryConnectionConsensusStateRequest): unknown {
+  toJSON(message: QueryConnectionConsensusStateRequest): JsonSafe<QueryConnectionConsensusStateRequest> {
     const obj: any = {};
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
     message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
@@ -1447,7 +1448,7 @@ export const QueryConnectionConsensusStateResponse = {
     if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
     return obj;
   },
-  toJSON(message: QueryConnectionConsensusStateResponse): unknown {
+  toJSON(message: QueryConnectionConsensusStateResponse): JsonSafe<QueryConnectionConsensusStateResponse> {
     const obj: any = {};
     message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
     message.clientId !== undefined && (obj.clientId = message.clientId);

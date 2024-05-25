@@ -3,6 +3,7 @@
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.superfluid";
 /**
  * SuperfluidAssetType indicates whether the superfluid asset is
@@ -138,7 +139,7 @@ export const SuperfluidAsset = {
       assetType: isSet(object.assetType) ? superfluidAssetTypeFromJSON(object.assetType) : -1
     };
   },
-  toJSON(message: SuperfluidAsset): unknown {
+  toJSON(message: SuperfluidAsset): JsonSafe<SuperfluidAsset> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.assetType !== undefined && (obj.assetType = superfluidAssetTypeToJSON(message.assetType));
@@ -201,7 +202,7 @@ export const SuperfluidIntermediaryAccount = {
       gaugeId: isSet(object.gaugeId) ? Long.fromValue(object.gaugeId) : Long.UZERO
     };
   },
-  toJSON(message: SuperfluidIntermediaryAccount): unknown {
+  toJSON(message: SuperfluidIntermediaryAccount): JsonSafe<SuperfluidIntermediaryAccount> {
     const obj: any = {};
     message.denom !== undefined && (obj.denom = message.denom);
     message.valAddr !== undefined && (obj.valAddr = message.valAddr);
@@ -266,7 +267,7 @@ export const OsmoEquivalentMultiplierRecord = {
       multiplier: isSet(object.multiplier) ? String(object.multiplier) : ""
     };
   },
-  toJSON(message: OsmoEquivalentMultiplierRecord): unknown {
+  toJSON(message: OsmoEquivalentMultiplierRecord): JsonSafe<OsmoEquivalentMultiplierRecord> {
     const obj: any = {};
     message.epochNumber !== undefined && (obj.epochNumber = (message.epochNumber || Long.ZERO).toString());
     message.denom !== undefined && (obj.denom = message.denom);
@@ -339,7 +340,7 @@ export const SuperfluidDelegationRecord = {
       equivalentStakedAmount: isSet(object.equivalentStakedAmount) ? Coin.fromJSON(object.equivalentStakedAmount) : undefined
     };
   },
-  toJSON(message: SuperfluidDelegationRecord): unknown {
+  toJSON(message: SuperfluidDelegationRecord): JsonSafe<SuperfluidDelegationRecord> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -398,7 +399,7 @@ export const LockIdIntermediaryAccountConnection = {
       intermediaryAccount: isSet(object.intermediaryAccount) ? String(object.intermediaryAccount) : ""
     };
   },
-  toJSON(message: LockIdIntermediaryAccountConnection): unknown {
+  toJSON(message: LockIdIntermediaryAccountConnection): JsonSafe<LockIdIntermediaryAccountConnection> {
     const obj: any = {};
     message.lockId !== undefined && (obj.lockId = (message.lockId || Long.UZERO).toString());
     message.intermediaryAccount !== undefined && (obj.intermediaryAccount = message.intermediaryAccount);
@@ -454,7 +455,7 @@ export const UnpoolWhitelistedPools = {
       ids: Array.isArray(object?.ids) ? object.ids.map((e: any) => Long.fromValue(e)) : []
     };
   },
-  toJSON(message: UnpoolWhitelistedPools): unknown {
+  toJSON(message: UnpoolWhitelistedPools): JsonSafe<UnpoolWhitelistedPools> {
     const obj: any = {};
     if (message.ids) {
       obj.ids = message.ids.map(e => (e || Long.UZERO).toString());

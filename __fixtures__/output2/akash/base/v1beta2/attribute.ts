@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.base.v1beta2";
 /** Attribute represents key value pair */
 export interface Attribute {
@@ -69,7 +70,7 @@ export const Attribute = {
       value: isSet(object.value) ? String(object.value) : ""
     };
   },
-  toJSON(message: Attribute): unknown {
+  toJSON(message: Attribute): JsonSafe<Attribute> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -124,7 +125,7 @@ export const SignedBy = {
       anyOf: Array.isArray(object?.anyOf) ? object.anyOf.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: SignedBy): unknown {
+  toJSON(message: SignedBy): JsonSafe<SignedBy> {
     const obj: any = {};
     if (message.allOf) {
       obj.allOf = message.allOf.map(e => e);
@@ -187,7 +188,7 @@ export const PlacementRequirements = {
       attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => Attribute.fromJSON(e)) : []
     };
   },
-  toJSON(message: PlacementRequirements): unknown {
+  toJSON(message: PlacementRequirements): JsonSafe<PlacementRequirements> {
     const obj: any = {};
     message.signedBy !== undefined && (obj.signedBy = message.signedBy ? SignedBy.toJSON(message.signedBy) : undefined);
     if (message.attributes) {

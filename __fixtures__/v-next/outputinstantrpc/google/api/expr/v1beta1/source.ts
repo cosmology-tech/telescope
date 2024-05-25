@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 export interface SourceInfo_PositionsEntry {
   key: number;
@@ -121,7 +122,7 @@ export const SourceInfo_PositionsEntry = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: SourceInfo_PositionsEntry): unknown {
+  toJSON(message: SourceInfo_PositionsEntry): JsonSafe<SourceInfo_PositionsEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = Math.round(message.key));
     message.value !== undefined && (obj.value = Math.round(message.value));
@@ -248,7 +249,7 @@ export const SourceInfo = {
     }, {});
     return obj;
   },
-  toJSON(message: SourceInfo): unknown {
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     if (message.lineOffsets) {
@@ -425,7 +426,7 @@ export const SourcePosition = {
     if (isSet(object.column)) obj.column = Number(object.column);
     return obj;
   },
-  toJSON(message: SourcePosition): unknown {
+  toJSON(message: SourcePosition): JsonSafe<SourcePosition> {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     message.offset !== undefined && (obj.offset = Math.round(message.offset));

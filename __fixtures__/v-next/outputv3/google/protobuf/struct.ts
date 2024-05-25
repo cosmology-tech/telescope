@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.protobuf";
 /**
  * `NullValue` is a singleton enumeration to represent the null value for the
@@ -238,12 +237,6 @@ export const Struct_FieldsEntry = {
     if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: Struct_FieldsEntry): JsonSafe<Struct_FieldsEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Struct_FieldsEntry>): Struct_FieldsEntry {
     const message = createBaseStruct_FieldsEntry();
     message.key = object.key ?? "";
@@ -331,16 +324,6 @@ export const Struct = {
       acc[key] = Value.fromJSON(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: Struct): JsonSafe<Struct> {
-    const obj: any = {};
-    obj.fields = {};
-    if (message.fields) {
-      Object.entries(message.fields).forEach(([k, v]) => {
-        obj.fields[k] = Value.toJSON(v);
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Struct>): Struct {
@@ -485,16 +468,6 @@ export const Value = {
     if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
     return obj;
   },
-  toJSON(message: Value): JsonSafe<Value> {
-    const obj: any = {};
-    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
-    message.numberValue !== undefined && (obj.numberValue = message.numberValue);
-    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
-    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
-    message.structValue !== undefined && (obj.structValue = message.structValue ? Struct.toJSON(message.structValue) : undefined);
-    message.listValue !== undefined && (obj.listValue = message.listValue ? ListValue.toJSON(message.listValue) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
@@ -607,15 +580,6 @@ export const ListValue = {
   fromJSON(object: any): ListValue {
     const obj = createBaseListValue();
     if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: ListValue): JsonSafe<ListValue> {
-    const obj: any = {};
-    if (message.values) {
-      obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
-    } else {
-      obj.values = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ListValue>): ListValue {

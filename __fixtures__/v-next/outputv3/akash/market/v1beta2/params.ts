@@ -1,7 +1,6 @@
 import { Coin, CoinAmino, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
@@ -63,12 +62,6 @@ export const Params = {
     const obj = createBaseParams();
     if (isSet(object.bidMinDeposit)) obj.bidMinDeposit = Coin.fromJSON(object.bidMinDeposit);
     if (isSet(object.orderMaxBids)) obj.orderMaxBids = Number(object.orderMaxBids);
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    message.bidMinDeposit !== undefined && (obj.bidMinDeposit = message.bidMinDeposit ? Coin.toJSON(message.bidMinDeposit) : undefined);
-    message.orderMaxBids !== undefined && (obj.orderMaxBids = Math.round(message.orderMaxBids));
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {

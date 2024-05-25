@@ -3,7 +3,6 @@ import { Empty, EmptyAmino, EmptySDKType } from "../../../protobuf/empty";
 import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, isObject } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1alpha1";
 /** CEL primitive types. */
 export enum Type_PrimitiveType {
@@ -889,12 +888,6 @@ export const CheckedExpr_ReferenceMapEntry = {
     if (isSet(object.value)) obj.value = Reference.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: CheckedExpr_ReferenceMapEntry): JsonSafe<CheckedExpr_ReferenceMapEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = message.value ? Reference.toJSON(message.value) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<CheckedExpr_ReferenceMapEntry>): CheckedExpr_ReferenceMapEntry {
     const message = createBaseCheckedExpr_ReferenceMapEntry();
     if (object.key !== undefined && object.key !== null) {
@@ -980,12 +973,6 @@ export const CheckedExpr_TypeMapEntry = {
     const obj = createBaseCheckedExpr_TypeMapEntry();
     if (isSet(object.key)) obj.key = BigInt(object.key.toString());
     if (isSet(object.value)) obj.value = Type.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: CheckedExpr_TypeMapEntry): JsonSafe<CheckedExpr_TypeMapEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = (message.key || BigInt(0)).toString());
-    message.value !== undefined && (obj.value = message.value ? Type.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CheckedExpr_TypeMapEntry>): CheckedExpr_TypeMapEntry {
@@ -1120,25 +1107,6 @@ export const CheckedExpr = {
     if (isSet(object.sourceInfo)) obj.sourceInfo = SourceInfo.fromJSON(object.sourceInfo);
     if (isSet(object.exprVersion)) obj.exprVersion = String(object.exprVersion);
     if (isSet(object.expr)) obj.expr = Expr.fromJSON(object.expr);
-    return obj;
-  },
-  toJSON(message: CheckedExpr): JsonSafe<CheckedExpr> {
-    const obj: any = {};
-    obj.referenceMap = {};
-    if (message.referenceMap) {
-      Object.entries(message.referenceMap).forEach(([k, v]) => {
-        obj.referenceMap[k] = Reference.toJSON(v);
-      });
-    }
-    obj.typeMap = {};
-    if (message.typeMap) {
-      Object.entries(message.typeMap).forEach(([k, v]) => {
-        obj.typeMap[k] = Type.toJSON(v);
-      });
-    }
-    message.sourceInfo !== undefined && (obj.sourceInfo = message.sourceInfo ? SourceInfo.toJSON(message.sourceInfo) : undefined);
-    message.exprVersion !== undefined && (obj.exprVersion = message.exprVersion);
-    message.expr !== undefined && (obj.expr = message.expr ? Expr.toJSON(message.expr) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<CheckedExpr>): CheckedExpr {
@@ -1398,23 +1366,6 @@ export const Type = {
     if (isSet(object.abstractType)) obj.abstractType = Type_AbstractType.fromJSON(object.abstractType);
     return obj;
   },
-  toJSON(message: Type): JsonSafe<Type> {
-    const obj: any = {};
-    message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
-    message.null !== undefined && (obj.null = nullValueToJSON(message.null));
-    message.primitive !== undefined && (obj.primitive = type_PrimitiveTypeToJSON(message.primitive));
-    message.wrapper !== undefined && (obj.wrapper = type_PrimitiveTypeToJSON(message.wrapper));
-    message.wellKnown !== undefined && (obj.wellKnown = type_WellKnownTypeToJSON(message.wellKnown));
-    message.listType !== undefined && (obj.listType = message.listType ? Type_ListType.toJSON(message.listType) : undefined);
-    message.mapType !== undefined && (obj.mapType = message.mapType ? Type_MapType.toJSON(message.mapType) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Type_FunctionType.toJSON(message.function) : undefined);
-    message.messageType !== undefined && (obj.messageType = message.messageType);
-    message.typeParam !== undefined && (obj.typeParam = message.typeParam);
-    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
-    message.error !== undefined && (obj.error = message.error ? Empty.toJSON(message.error) : undefined);
-    message.abstractType !== undefined && (obj.abstractType = message.abstractType ? Type_AbstractType.toJSON(message.abstractType) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     if (object.dyn !== undefined && object.dyn !== null) {
@@ -1588,11 +1539,6 @@ export const Type_ListType = {
     if (isSet(object.elemType)) obj.elemType = Type.fromJSON(object.elemType);
     return obj;
   },
-  toJSON(message: Type_ListType): JsonSafe<Type_ListType> {
-    const obj: any = {};
-    message.elemType !== undefined && (obj.elemType = message.elemType ? Type.toJSON(message.elemType) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Type_ListType>): Type_ListType {
     const message = createBaseType_ListType();
     if (object.elemType !== undefined && object.elemType !== null) {
@@ -1676,12 +1622,6 @@ export const Type_MapType = {
     const obj = createBaseType_MapType();
     if (isSet(object.keyType)) obj.keyType = Type.fromJSON(object.keyType);
     if (isSet(object.valueType)) obj.valueType = Type.fromJSON(object.valueType);
-    return obj;
-  },
-  toJSON(message: Type_MapType): JsonSafe<Type_MapType> {
-    const obj: any = {};
-    message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
-    message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Type_MapType>): Type_MapType {
@@ -1776,16 +1716,6 @@ export const Type_FunctionType = {
     const obj = createBaseType_FunctionType();
     if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
     if (Array.isArray(object?.argTypes)) obj.argTypes = object.argTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Type_FunctionType): JsonSafe<Type_FunctionType> {
-    const obj: any = {};
-    message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
-    if (message.argTypes) {
-      obj.argTypes = message.argTypes.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.argTypes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Type_FunctionType>): Type_FunctionType {
@@ -1884,16 +1814,6 @@ export const Type_AbstractType = {
     const obj = createBaseType_AbstractType();
     if (isSet(object.name)) obj.name = String(object.name);
     if (Array.isArray(object?.parameterTypes)) obj.parameterTypes = object.parameterTypes.map((e: any) => Type.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Type_AbstractType): JsonSafe<Type_AbstractType> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.parameterTypes) {
-      obj.parameterTypes = message.parameterTypes.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.parameterTypes = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Type_AbstractType>): Type_AbstractType {
@@ -1998,13 +1918,6 @@ export const Decl = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.ident)) obj.ident = Decl_IdentDecl.fromJSON(object.ident);
     if (isSet(object.function)) obj.function = Decl_FunctionDecl.fromJSON(object.function);
-    return obj;
-  },
-  toJSON(message: Decl): JsonSafe<Decl> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.ident !== undefined && (obj.ident = message.ident ? Decl_IdentDecl.toJSON(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? Decl_FunctionDecl.toJSON(message.function) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Decl>): Decl {
@@ -2116,13 +2029,6 @@ export const Decl_IdentDecl = {
     if (isSet(object.doc)) obj.doc = String(object.doc);
     return obj;
   },
-  toJSON(message: Decl_IdentDecl): JsonSafe<Decl_IdentDecl> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? Type.toJSON(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
-    message.doc !== undefined && (obj.doc = message.doc);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Decl_IdentDecl>): Decl_IdentDecl {
     const message = createBaseDecl_IdentDecl();
     if (object.type !== undefined && object.type !== null) {
@@ -2214,15 +2120,6 @@ export const Decl_FunctionDecl = {
   fromJSON(object: any): Decl_FunctionDecl {
     const obj = createBaseDecl_FunctionDecl();
     if (Array.isArray(object?.overloads)) obj.overloads = object.overloads.map((e: any) => Decl_FunctionDecl_Overload.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Decl_FunctionDecl): JsonSafe<Decl_FunctionDecl> {
-    const obj: any = {};
-    if (message.overloads) {
-      obj.overloads = message.overloads.map(e => e ? Decl_FunctionDecl_Overload.toJSON(e) : undefined);
-    } else {
-      obj.overloads = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Decl_FunctionDecl>): Decl_FunctionDecl {
@@ -2344,24 +2241,6 @@ export const Decl_FunctionDecl_Overload = {
     if (isSet(object.resultType)) obj.resultType = Type.fromJSON(object.resultType);
     if (isSet(object.isInstanceFunction)) obj.isInstanceFunction = Boolean(object.isInstanceFunction);
     if (isSet(object.doc)) obj.doc = String(object.doc);
-    return obj;
-  },
-  toJSON(message: Decl_FunctionDecl_Overload): JsonSafe<Decl_FunctionDecl_Overload> {
-    const obj: any = {};
-    message.overloadId !== undefined && (obj.overloadId = message.overloadId);
-    if (message.params) {
-      obj.params = message.params.map(e => e ? Type.toJSON(e) : undefined);
-    } else {
-      obj.params = [];
-    }
-    if (message.typeParams) {
-      obj.typeParams = message.typeParams.map(e => e);
-    } else {
-      obj.typeParams = [];
-    }
-    message.resultType !== undefined && (obj.resultType = message.resultType ? Type.toJSON(message.resultType) : undefined);
-    message.isInstanceFunction !== undefined && (obj.isInstanceFunction = message.isInstanceFunction);
-    message.doc !== undefined && (obj.doc = message.doc);
     return obj;
   },
   fromPartial(object: DeepPartial<Decl_FunctionDecl_Overload>): Decl_FunctionDecl_Overload {
@@ -2502,17 +2381,6 @@ export const Reference = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (Array.isArray(object?.overloadId)) obj.overloadId = object.overloadId.map((e: any) => String(e));
     if (isSet(object.value)) obj.value = Constant.fromJSON(object.value);
-    return obj;
-  },
-  toJSON(message: Reference): JsonSafe<Reference> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    if (message.overloadId) {
-      obj.overloadId = message.overloadId.map(e => e);
-    } else {
-      obj.overloadId = [];
-    }
-    message.value !== undefined && (obj.value = message.value ? Constant.toJSON(message.value) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<Reference>): Reference {

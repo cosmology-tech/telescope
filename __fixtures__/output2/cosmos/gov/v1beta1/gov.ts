@@ -6,6 +6,7 @@ import { Timestamp } from "../../../google/protobuf/timestamp";
 import { Duration } from "../../../google/protobuf/duration";
 import { Long, isSet, DeepPartial, fromJsonTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.gov.v1beta1";
 /** VoteOption enumerates the valid vote options for a given governance proposal. */
 export enum VoteOption {
@@ -271,7 +272,7 @@ export const WeightedVoteOption = {
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
-  toJSON(message: WeightedVoteOption): unknown {
+  toJSON(message: WeightedVoteOption): JsonSafe<WeightedVoteOption> {
     const obj: any = {};
     message.option !== undefined && (obj.option = voteOptionToJSON(message.option));
     message.weight !== undefined && (obj.weight = message.weight);
@@ -326,7 +327,7 @@ export const TextProposal = {
       description: isSet(object.description) ? String(object.description) : ""
     };
   },
-  toJSON(message: TextProposal): unknown {
+  toJSON(message: TextProposal): JsonSafe<TextProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -389,7 +390,7 @@ export const Deposit = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: Deposit): unknown {
+  toJSON(message: Deposit): JsonSafe<Deposit> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.depositor !== undefined && (obj.depositor = message.depositor);
@@ -506,7 +507,7 @@ export const Proposal = {
       votingEndTime: isSet(object.votingEndTime) ? fromJsonTimestamp(object.votingEndTime) : undefined
     };
   },
-  toJSON(message: Proposal): unknown {
+  toJSON(message: Proposal): JsonSafe<Proposal> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
@@ -595,7 +596,7 @@ export const TallyResult = {
       noWithVeto: isSet(object.noWithVeto) ? String(object.noWithVeto) : ""
     };
   },
-  toJSON(message: TallyResult): unknown {
+  toJSON(message: TallyResult): JsonSafe<TallyResult> {
     const obj: any = {};
     message.yes !== undefined && (obj.yes = message.yes);
     message.abstain !== undefined && (obj.abstain = message.abstain);
@@ -670,7 +671,7 @@ export const Vote = {
       options: Array.isArray(object?.options) ? object.options.map((e: any) => WeightedVoteOption.fromJSON(e)) : []
     };
   },
-  toJSON(message: Vote): unknown {
+  toJSON(message: Vote): JsonSafe<Vote> {
     const obj: any = {};
     message.proposalId !== undefined && (obj.proposalId = (message.proposalId || Long.UZERO).toString());
     message.voter !== undefined && (obj.voter = message.voter);
@@ -733,7 +734,7 @@ export const DepositParams = {
       maxDepositPeriod: isSet(object.maxDepositPeriod) ? Duration.fromJSON(object.maxDepositPeriod) : undefined
     };
   },
-  toJSON(message: DepositParams): unknown {
+  toJSON(message: DepositParams): JsonSafe<DepositParams> {
     const obj: any = {};
     if (message.minDeposit) {
       obj.minDeposit = message.minDeposit.map(e => e ? Coin.toJSON(e) : undefined);
@@ -784,7 +785,7 @@ export const VotingParams = {
       votingPeriod: isSet(object.votingPeriod) ? Duration.fromJSON(object.votingPeriod) : undefined
     };
   },
-  toJSON(message: VotingParams): unknown {
+  toJSON(message: VotingParams): JsonSafe<VotingParams> {
     const obj: any = {};
     message.votingPeriod !== undefined && (obj.votingPeriod = message.votingPeriod ? Duration.toJSON(message.votingPeriod) : undefined);
     return obj;
@@ -845,7 +846,7 @@ export const TallyParams = {
       vetoThreshold: isSet(object.vetoThreshold) ? bytesFromBase64(object.vetoThreshold) : new Uint8Array()
     };
   },
-  toJSON(message: TallyParams): unknown {
+  toJSON(message: TallyParams): JsonSafe<TallyParams> {
     const obj: any = {};
     message.quorum !== undefined && (obj.quorum = base64FromBytes(message.quorum !== undefined ? message.quorum : new Uint8Array()));
     message.threshold !== undefined && (obj.threshold = base64FromBytes(message.threshold !== undefined ? message.threshold : new Uint8Array()));

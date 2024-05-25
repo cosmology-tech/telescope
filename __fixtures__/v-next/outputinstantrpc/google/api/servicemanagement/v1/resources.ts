@@ -2,6 +2,7 @@ import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp";
 import { ConfigChange, ConfigChangeSDKType } from "../../config_change";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes, isObject } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.servicemanagement.v1";
 /** Code describes the status of the operation (or one of its steps). */
 export enum OperationMetadata_Status {
@@ -640,7 +641,7 @@ export const ManagedService = {
     if (isSet(object.producerProjectId)) obj.producerProjectId = String(object.producerProjectId);
     return obj;
   },
-  toJSON(message: ManagedService): unknown {
+  toJSON(message: ManagedService): JsonSafe<ManagedService> {
     const obj: any = {};
     message.serviceName !== undefined && (obj.serviceName = message.serviceName);
     message.producerProjectId !== undefined && (obj.producerProjectId = message.producerProjectId);
@@ -761,7 +762,7 @@ export const OperationMetadata = {
     if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
     return obj;
   },
-  toJSON(message: OperationMetadata): unknown {
+  toJSON(message: OperationMetadata): JsonSafe<OperationMetadata> {
     const obj: any = {};
     if (message.resourceNames) {
       obj.resourceNames = message.resourceNames.map(e => e);
@@ -904,7 +905,7 @@ export const OperationMetadata_Step = {
     if (isSet(object.status)) obj.status = operationMetadata_StatusFromJSON(object.status);
     return obj;
   },
-  toJSON(message: OperationMetadata_Step): unknown {
+  toJSON(message: OperationMetadata_Step): JsonSafe<OperationMetadata_Step> {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description);
     message.status !== undefined && (obj.status = operationMetadata_StatusToJSON(message.status));
@@ -1017,7 +1018,7 @@ export const Diagnostic = {
     if (isSet(object.message)) obj.message = String(object.message);
     return obj;
   },
-  toJSON(message: Diagnostic): unknown {
+  toJSON(message: Diagnostic): JsonSafe<Diagnostic> {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     message.kind !== undefined && (obj.kind = diagnostic_KindToJSON(message.kind));
@@ -1131,7 +1132,7 @@ export const ConfigSource = {
     if (Array.isArray(object?.files)) obj.files = object.files.map((e: any) => ConfigFile.fromJSON(e));
     return obj;
   },
-  toJSON(message: ConfigSource): unknown {
+  toJSON(message: ConfigSource): JsonSafe<ConfigSource> {
     const obj: any = {};
     message.id !== undefined && (obj.id = message.id);
     if (message.files) {
@@ -1254,7 +1255,7 @@ export const ConfigFile = {
     if (isSet(object.fileType)) obj.fileType = configFile_FileTypeFromJSON(object.fileType);
     return obj;
   },
-  toJSON(message: ConfigFile): unknown {
+  toJSON(message: ConfigFile): JsonSafe<ConfigFile> {
     const obj: any = {};
     message.filePath !== undefined && (obj.filePath = message.filePath);
     message.fileContents !== undefined && (obj.fileContents = base64FromBytes(message.fileContents !== undefined ? message.fileContents : new Uint8Array()));
@@ -1360,7 +1361,7 @@ export const ConfigRef = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: ConfigRef): unknown {
+  toJSON(message: ConfigRef): JsonSafe<ConfigRef> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1448,7 +1449,7 @@ export const ChangeReport = {
     if (Array.isArray(object?.configChanges)) obj.configChanges = object.configChanges.map((e: any) => ConfigChange.fromJSON(e));
     return obj;
   },
-  toJSON(message: ChangeReport): unknown {
+  toJSON(message: ChangeReport): JsonSafe<ChangeReport> {
     const obj: any = {};
     if (message.configChanges) {
       obj.configChanges = message.configChanges.map(e => e ? ConfigChange.toJSON(e) : undefined);
@@ -1594,7 +1595,7 @@ export const Rollout = {
     if (isSet(object.serviceName)) obj.serviceName = String(object.serviceName);
     return obj;
   },
-  toJSON(message: Rollout): unknown {
+  toJSON(message: Rollout): JsonSafe<Rollout> {
     const obj: any = {};
     message.rolloutId !== undefined && (obj.rolloutId = message.rolloutId);
     message.createTime !== undefined && (obj.createTime = message.createTime.toISOString());
@@ -1747,7 +1748,7 @@ export const Rollout_TrafficPercentStrategy_PercentagesEntry = {
     if (isSet(object.value)) obj.value = Number(object.value);
     return obj;
   },
-  toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): unknown {
+  toJSON(message: Rollout_TrafficPercentStrategy_PercentagesEntry): JsonSafe<Rollout_TrafficPercentStrategy_PercentagesEntry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key);
     message.value !== undefined && (obj.value = message.value);
@@ -1849,7 +1850,7 @@ export const Rollout_TrafficPercentStrategy = {
     }, {});
     return obj;
   },
-  toJSON(message: Rollout_TrafficPercentStrategy): unknown {
+  toJSON(message: Rollout_TrafficPercentStrategy): JsonSafe<Rollout_TrafficPercentStrategy> {
     const obj: any = {};
     obj.percentages = {};
     if (message.percentages) {
@@ -1965,7 +1966,7 @@ export const Rollout_DeleteServiceStrategy = {
     const obj = createBaseRollout_DeleteServiceStrategy();
     return obj;
   },
-  toJSON(_: Rollout_DeleteServiceStrategy): unknown {
+  toJSON(_: Rollout_DeleteServiceStrategy): JsonSafe<Rollout_DeleteServiceStrategy> {
     const obj: any = {};
     return obj;
   },

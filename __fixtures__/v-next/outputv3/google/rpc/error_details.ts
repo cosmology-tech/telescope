@@ -1,7 +1,6 @@
 import { Duration, DurationAmino, DurationSDKType } from "../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial, isObject } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.rpc";
 /**
  * Describes when the clients can retry a failed request. Clients could ignore
@@ -754,11 +753,6 @@ export const RetryInfo = {
     if (isSet(object.retryDelay)) obj.retryDelay = Duration.fromJSON(object.retryDelay);
     return obj;
   },
-  toJSON(message: RetryInfo): JsonSafe<RetryInfo> {
-    const obj: any = {};
-    message.retryDelay !== undefined && (obj.retryDelay = message.retryDelay ? Duration.toJSON(message.retryDelay) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<RetryInfo>): RetryInfo {
     const message = createBaseRetryInfo();
     if (object.retryDelay !== undefined && object.retryDelay !== null) {
@@ -842,16 +836,6 @@ export const DebugInfo = {
     const obj = createBaseDebugInfo();
     if (Array.isArray(object?.stackEntries)) obj.stackEntries = object.stackEntries.map((e: any) => String(e));
     if (isSet(object.detail)) obj.detail = String(object.detail);
-    return obj;
-  },
-  toJSON(message: DebugInfo): JsonSafe<DebugInfo> {
-    const obj: any = {};
-    if (message.stackEntries) {
-      obj.stackEntries = message.stackEntries.map(e => e);
-    } else {
-      obj.stackEntries = [];
-    }
-    message.detail !== undefined && (obj.detail = message.detail);
     return obj;
   },
   fromPartial(object: DeepPartial<DebugInfo>): DebugInfo {
@@ -940,15 +924,6 @@ export const QuotaFailure = {
   fromJSON(object: any): QuotaFailure {
     const obj = createBaseQuotaFailure();
     if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => QuotaFailure_Violation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QuotaFailure): JsonSafe<QuotaFailure> {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? QuotaFailure_Violation.toJSON(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QuotaFailure>): QuotaFailure {
@@ -1040,12 +1015,6 @@ export const QuotaFailure_Violation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: QuotaFailure_Violation): JsonSafe<QuotaFailure_Violation> {
-    const obj: any = {};
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QuotaFailure_Violation>): QuotaFailure_Violation {
     const message = createBaseQuotaFailure_Violation();
     message.subject = object.subject ?? "";
@@ -1133,12 +1102,6 @@ export const ErrorInfo_MetadataEntry = {
     const obj = createBaseErrorInfo_MetadataEntry();
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.value)) obj.value = String(object.value);
-    return obj;
-  },
-  toJSON(message: ErrorInfo_MetadataEntry): JsonSafe<ErrorInfo_MetadataEntry> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.value !== undefined && (obj.value = message.value);
     return obj;
   },
   fromPartial(object: DeepPartial<ErrorInfo_MetadataEntry>): ErrorInfo_MetadataEntry {
@@ -1242,18 +1205,6 @@ export const ErrorInfo = {
       acc[key] = String(value);
       return acc;
     }, {});
-    return obj;
-  },
-  toJSON(message: ErrorInfo): JsonSafe<ErrorInfo> {
-    const obj: any = {};
-    message.reason !== undefined && (obj.reason = message.reason);
-    message.domain !== undefined && (obj.domain = message.domain);
-    obj.metadata = {};
-    if (message.metadata) {
-      Object.entries(message.metadata).forEach(([k, v]) => {
-        obj.metadata[k] = v;
-      });
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<ErrorInfo>): ErrorInfo {
@@ -1372,15 +1323,6 @@ export const PreconditionFailure = {
     if (Array.isArray(object?.violations)) obj.violations = object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e));
     return obj;
   },
-  toJSON(message: PreconditionFailure): JsonSafe<PreconditionFailure> {
-    const obj: any = {};
-    if (message.violations) {
-      obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
-    } else {
-      obj.violations = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<PreconditionFailure>): PreconditionFailure {
     const message = createBasePreconditionFailure();
     message.violations = object.violations?.map(e => PreconditionFailure_Violation.fromPartial(e)) || [];
@@ -1478,13 +1420,6 @@ export const PreconditionFailure_Violation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: PreconditionFailure_Violation): JsonSafe<PreconditionFailure_Violation> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type);
-    message.subject !== undefined && (obj.subject = message.subject);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
   fromPartial(object: DeepPartial<PreconditionFailure_Violation>): PreconditionFailure_Violation {
     const message = createBasePreconditionFailure_Violation();
     message.type = object.type ?? "";
@@ -1572,15 +1507,6 @@ export const BadRequest = {
   fromJSON(object: any): BadRequest {
     const obj = createBaseBadRequest();
     if (Array.isArray(object?.fieldViolations)) obj.fieldViolations = object.fieldViolations.map((e: any) => BadRequest_FieldViolation.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: BadRequest): JsonSafe<BadRequest> {
-    const obj: any = {};
-    if (message.fieldViolations) {
-      obj.fieldViolations = message.fieldViolations.map(e => e ? BadRequest_FieldViolation.toJSON(e) : undefined);
-    } else {
-      obj.fieldViolations = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<BadRequest>): BadRequest {
@@ -1672,12 +1598,6 @@ export const BadRequest_FieldViolation = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: BadRequest_FieldViolation): JsonSafe<BadRequest_FieldViolation> {
-    const obj: any = {};
-    message.field !== undefined && (obj.field = message.field);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
   fromPartial(object: DeepPartial<BadRequest_FieldViolation>): BadRequest_FieldViolation {
     const message = createBaseBadRequest_FieldViolation();
     message.field = object.field ?? "";
@@ -1766,12 +1686,6 @@ export const RequestInfo = {
     const obj = createBaseRequestInfo();
     if (isSet(object.requestId)) obj.requestId = String(object.requestId);
     if (isSet(object.servingData)) obj.servingData = String(object.servingData);
-    return obj;
-  },
-  toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
-    const obj: any = {};
-    message.requestId !== undefined && (obj.requestId = message.requestId);
-    message.servingData !== undefined && (obj.servingData = message.servingData);
     return obj;
   },
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
@@ -1880,14 +1794,6 @@ export const ResourceInfo = {
     if (isSet(object.description)) obj.description = String(object.description);
     return obj;
   },
-  toJSON(message: ResourceInfo): JsonSafe<ResourceInfo> {
-    const obj: any = {};
-    message.resourceType !== undefined && (obj.resourceType = message.resourceType);
-    message.resourceName !== undefined && (obj.resourceName = message.resourceName);
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.description !== undefined && (obj.description = message.description);
-    return obj;
-  },
   fromPartial(object: DeepPartial<ResourceInfo>): ResourceInfo {
     const message = createBaseResourceInfo();
     message.resourceType = object.resourceType ?? "";
@@ -1984,15 +1890,6 @@ export const Help = {
     if (Array.isArray(object?.links)) obj.links = object.links.map((e: any) => Help_Link.fromJSON(e));
     return obj;
   },
-  toJSON(message: Help): JsonSafe<Help> {
-    const obj: any = {};
-    if (message.links) {
-      obj.links = message.links.map(e => e ? Help_Link.toJSON(e) : undefined);
-    } else {
-      obj.links = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Help>): Help {
     const message = createBaseHelp();
     message.links = object.links?.map(e => Help_Link.fromPartial(e)) || [];
@@ -2080,12 +1977,6 @@ export const Help_Link = {
     const obj = createBaseHelp_Link();
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.url)) obj.url = String(object.url);
-    return obj;
-  },
-  toJSON(message: Help_Link): JsonSafe<Help_Link> {
-    const obj: any = {};
-    message.description !== undefined && (obj.description = message.description);
-    message.url !== undefined && (obj.url = message.url);
     return obj;
   },
   fromPartial(object: DeepPartial<Help_Link>): Help_Link {
@@ -2176,12 +2067,6 @@ export const LocalizedMessage = {
     const obj = createBaseLocalizedMessage();
     if (isSet(object.locale)) obj.locale = String(object.locale);
     if (isSet(object.message)) obj.message = String(object.message);
-    return obj;
-  },
-  toJSON(message: LocalizedMessage): JsonSafe<LocalizedMessage> {
-    const obj: any = {};
-    message.locale !== undefined && (obj.locale = message.locale);
-    message.message !== undefined && (obj.message = message.message);
     return obj;
   },
   fromPartial(object: DeepPartial<LocalizedMessage>): LocalizedMessage {

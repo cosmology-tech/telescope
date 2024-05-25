@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.gamm.v2";
 /**
  * QuerySpotPriceRequest defines the gRPC request structure for a SpotPrice
@@ -112,13 +111,6 @@ export const QuerySpotPriceRequest = {
     if (isSet(object.quoteAssetDenom)) obj.quoteAssetDenom = String(object.quoteAssetDenom);
     return obj;
   },
-  toJSON(message: QuerySpotPriceRequest): JsonSafe<QuerySpotPriceRequest> {
-    const obj: any = {};
-    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
-    message.baseAssetDenom !== undefined && (obj.baseAssetDenom = message.baseAssetDenom);
-    message.quoteAssetDenom !== undefined && (obj.quoteAssetDenom = message.quoteAssetDenom);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QuerySpotPriceRequest>): QuerySpotPriceRequest {
     const message = createBaseQuerySpotPriceRequest();
     if (object.poolId !== undefined && object.poolId !== null) {
@@ -209,11 +201,6 @@ export const QuerySpotPriceResponse = {
   fromJSON(object: any): QuerySpotPriceResponse {
     const obj = createBaseQuerySpotPriceResponse();
     if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
-    return obj;
-  },
-  toJSON(message: QuerySpotPriceResponse): JsonSafe<QuerySpotPriceResponse> {
-    const obj: any = {};
-    message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySpotPriceResponse>): QuerySpotPriceResponse {

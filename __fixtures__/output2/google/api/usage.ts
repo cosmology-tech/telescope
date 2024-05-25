@@ -2,6 +2,7 @@
 /* eslint-disable */
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /** Configuration controlling usage of a service. */
 export interface Usage {
@@ -133,7 +134,7 @@ export const Usage = {
       producerNotificationChannel: isSet(object.producerNotificationChannel) ? String(object.producerNotificationChannel) : ""
     };
   },
-  toJSON(message: Usage): unknown {
+  toJSON(message: Usage): JsonSafe<Usage> {
     const obj: any = {};
     if (message.requirements) {
       obj.requirements = message.requirements.map(e => e);
@@ -206,7 +207,7 @@ export const UsageRule = {
       skipServiceControl: isSet(object.skipServiceControl) ? Boolean(object.skipServiceControl) : false
     };
   },
-  toJSON(message: UsageRule): unknown {
+  toJSON(message: UsageRule): JsonSafe<UsageRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     message.allowUnregisteredCalls !== undefined && (obj.allowUnregisteredCalls = message.allowUnregisteredCalls);

@@ -1,7 +1,6 @@
 import { Expr, ExprAmino, ExprSDKType } from "./expr";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.expr.v1beta1";
 /** A declaration. */
 export interface Decl {
@@ -208,15 +207,6 @@ export const Decl = {
     if (isSet(object.function)) obj.function = FunctionDecl.fromJSON(object.function);
     return obj;
   },
-  toJSON(message: Decl): JsonSafe<Decl> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.name !== undefined && (obj.name = message.name);
-    message.doc !== undefined && (obj.doc = message.doc);
-    message.ident !== undefined && (obj.ident = message.ident ? IdentDecl.toJSON(message.ident) : undefined);
-    message.function !== undefined && (obj.function = message.function ? FunctionDecl.toJSON(message.function) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<Decl>): Decl {
     const message = createBaseDecl();
     message.id = object.id ?? 0;
@@ -340,17 +330,6 @@ export const DeclType = {
     if (Array.isArray(object?.typeParams)) obj.typeParams = object.typeParams.map((e: any) => DeclType.fromJSON(e));
     return obj;
   },
-  toJSON(message: DeclType): JsonSafe<DeclType> {
-    const obj: any = {};
-    message.id !== undefined && (obj.id = Math.round(message.id));
-    message.type !== undefined && (obj.type = message.type);
-    if (message.typeParams) {
-      obj.typeParams = message.typeParams.map(e => e ? DeclType.toJSON(e) : undefined);
-    } else {
-      obj.typeParams = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<DeclType>): DeclType {
     const message = createBaseDeclType();
     message.id = object.id ?? 0;
@@ -454,12 +433,6 @@ export const IdentDecl = {
     if (isSet(object.value)) obj.value = Expr.fromJSON(object.value);
     return obj;
   },
-  toJSON(message: IdentDecl): JsonSafe<IdentDecl> {
-    const obj: any = {};
-    message.type !== undefined && (obj.type = message.type ? DeclType.toJSON(message.type) : undefined);
-    message.value !== undefined && (obj.value = message.value ? Expr.toJSON(message.value) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<IdentDecl>): IdentDecl {
     const message = createBaseIdentDecl();
     if (object.type !== undefined && object.type !== null) {
@@ -560,17 +533,6 @@ export const FunctionDecl = {
     if (Array.isArray(object?.args)) obj.args = object.args.map((e: any) => IdentDecl.fromJSON(e));
     if (isSet(object.returnType)) obj.returnType = DeclType.fromJSON(object.returnType);
     if (isSet(object.receiverFunction)) obj.receiverFunction = Boolean(object.receiverFunction);
-    return obj;
-  },
-  toJSON(message: FunctionDecl): JsonSafe<FunctionDecl> {
-    const obj: any = {};
-    if (message.args) {
-      obj.args = message.args.map(e => e ? IdentDecl.toJSON(e) : undefined);
-    } else {
-      obj.args = [];
-    }
-    message.returnType !== undefined && (obj.returnType = message.returnType ? DeclType.toJSON(message.returnType) : undefined);
-    message.receiverFunction !== undefined && (obj.receiverFunction = message.receiverFunction);
     return obj;
   },
   fromPartial(object: DeepPartial<FunctionDecl>): FunctionDecl {

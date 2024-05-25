@@ -1,6 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /** Value types that can be used as label values. */
 export enum LabelDescriptor_ValueType {
@@ -121,13 +120,6 @@ export const LabelDescriptor = {
     if (isSet(object.key)) obj.key = String(object.key);
     if (isSet(object.valueType)) obj.valueType = labelDescriptor_ValueTypeFromJSON(object.valueType);
     if (isSet(object.description)) obj.description = String(object.description);
-    return obj;
-  },
-  toJSON(message: LabelDescriptor): JsonSafe<LabelDescriptor> {
-    const obj: any = {};
-    message.key !== undefined && (obj.key = message.key);
-    message.valueType !== undefined && (obj.valueType = labelDescriptor_ValueTypeToJSON(message.valueType));
-    message.description !== undefined && (obj.description = message.description);
     return obj;
   },
   fromPartial(object: DeepPartial<LabelDescriptor>): LabelDescriptor {

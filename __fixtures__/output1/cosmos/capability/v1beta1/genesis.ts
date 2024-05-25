@@ -1,6 +1,7 @@
 import { CapabilityOwners, CapabilityOwnersSDKType } from "./capability";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.capability.v1beta1";
 /** GenesisOwners defines the capability owners with their corresponding index. */
 export interface GenesisOwners {
@@ -71,7 +72,7 @@ export const GenesisOwners = {
       indexOwners: isSet(object.indexOwners) ? CapabilityOwners.fromJSON(object.indexOwners) : undefined
     };
   },
-  toJSON(message: GenesisOwners): unknown {
+  toJSON(message: GenesisOwners): JsonSafe<GenesisOwners> {
     const obj: any = {};
     message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     message.indexOwners !== undefined && (obj.indexOwners = message.indexOwners ? CapabilityOwners.toJSON(message.indexOwners) : undefined);
@@ -138,7 +139,7 @@ export const GenesisState = {
       owners: Array.isArray(object?.owners) ? object.owners.map((e: any) => GenesisOwners.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.index !== undefined && (obj.index = (message.index || Long.UZERO).toString());
     if (message.owners) {

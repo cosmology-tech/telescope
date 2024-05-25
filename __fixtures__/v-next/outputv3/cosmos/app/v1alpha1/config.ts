@@ -1,6 +1,5 @@
 import { Any, AnyProtoMsg, AnyAmino, AnySDKType } from "../../../google/protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "cosmos.app.v1alpha1";
 /**
@@ -132,15 +131,6 @@ export const Config = {
     if (Array.isArray(object?.modules)) obj.modules = object.modules.map((e: any) => ModuleConfig.fromJSON(e));
     return obj;
   },
-  toJSON(message: Config): JsonSafe<Config> {
-    const obj: any = {};
-    if (message.modules) {
-      obj.modules = message.modules.map(e => e ? ModuleConfig.toJSON(e) : undefined);
-    } else {
-      obj.modules = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<Config>): Config {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
@@ -229,12 +219,6 @@ export const ModuleConfig = {
     const obj = createBaseModuleConfig();
     if (isSet(object.name)) obj.name = String(object.name);
     if (isSet(object.config)) obj.config = Any.fromJSON(object.config);
-    return obj;
-  },
-  toJSON(message: ModuleConfig): JsonSafe<ModuleConfig> {
-    const obj: any = {};
-    message.name !== undefined && (obj.name = message.name);
-    message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {

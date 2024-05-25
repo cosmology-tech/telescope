@@ -2,7 +2,6 @@ import { DecCoin, DecCoinAmino, DecCoinSDKType } from "../../../cosmos/base/v1be
 import { Timestamp, TimestampAmino, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
@@ -214,19 +213,6 @@ export const Incentive = {
     if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
     return obj;
   },
-  toJSON(message: Incentive): JsonSafe<Incentive> {
-    const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-    if (message.allocations) {
-      obj.allocations = message.allocations.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.allocations = [];
-    }
-    message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
-    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
-    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<Incentive>): Incentive {
     const message = createBaseIncentive();
     message.contract = object.contract ?? "";
@@ -354,13 +340,6 @@ export const GasMeter = {
     if (isSet(object.cumulativeGas)) obj.cumulativeGas = BigInt(object.cumulativeGas.toString());
     return obj;
   },
-  toJSON(message: GasMeter): JsonSafe<GasMeter> {
-    const obj: any = {};
-    message.contract !== undefined && (obj.contract = message.contract);
-    message.participant !== undefined && (obj.participant = message.participant);
-    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<GasMeter>): GasMeter {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
@@ -483,19 +462,6 @@ export const RegisterIncentiveProposal = {
     if (isSet(object.contract)) obj.contract = String(object.contract);
     if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
     if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
-    return obj;
-  },
-  toJSON(message: RegisterIncentiveProposal): JsonSafe<RegisterIncentiveProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
-    if (message.allocations) {
-      obj.allocations = message.allocations.map(e => e ? DecCoin.toJSON(e) : undefined);
-    } else {
-      obj.allocations = [];
-    }
-    message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
     return obj;
   },
   fromPartial(object: DeepPartial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
@@ -621,13 +587,6 @@ export const CancelIncentiveProposal = {
     if (isSet(object.title)) obj.title = String(object.title);
     if (isSet(object.description)) obj.description = String(object.description);
     if (isSet(object.contract)) obj.contract = String(object.contract);
-    return obj;
-  },
-  toJSON(message: CancelIncentiveProposal): JsonSafe<CancelIncentiveProposal> {
-    const obj: any = {};
-    message.title !== undefined && (obj.title = message.title);
-    message.description !== undefined && (obj.description = message.description);
-    message.contract !== undefined && (obj.contract = message.contract);
     return obj;
   },
   fromPartial(object: DeepPartial<CancelIncentiveProposal>): CancelIncentiveProposal {

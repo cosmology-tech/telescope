@@ -1,7 +1,6 @@
 import { ParamChange, ParamChangeAmino, ParamChangeSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
-import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -160,12 +159,6 @@ export const QueryParamsRequest = {
     if (isSet(object.key)) obj.key = String(object.key);
     return obj;
   },
-  toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
-    const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    message.key !== undefined && (obj.key = message.key);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     message.subspace = object.subspace ?? "";
@@ -249,11 +242,6 @@ export const QueryParamsResponse = {
     if (isSet(object.param)) obj.param = ParamChange.fromJSON(object.param);
     return obj;
   },
-  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
-    const obj: any = {};
-    message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
     if (object.param !== undefined && object.param !== null) {
@@ -323,10 +311,6 @@ export const QuerySubspacesRequest = {
     const obj = createBaseQuerySubspacesRequest();
     return obj;
   },
-  toJSON(_: QuerySubspacesRequest): JsonSafe<QuerySubspacesRequest> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
     return message;
@@ -393,15 +377,6 @@ export const QuerySubspacesResponse = {
   fromJSON(object: any): QuerySubspacesResponse {
     const obj = createBaseQuerySubspacesResponse();
     if (Array.isArray(object?.subspaces)) obj.subspaces = object.subspaces.map((e: any) => Subspace.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: QuerySubspacesResponse): JsonSafe<QuerySubspacesResponse> {
-    const obj: any = {};
-    if (message.subspaces) {
-      obj.subspaces = message.subspaces.map(e => e ? Subspace.toJSON(e) : undefined);
-    } else {
-      obj.subspaces = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
@@ -492,16 +467,6 @@ export const Subspace = {
     const obj = createBaseSubspace();
     if (isSet(object.subspace)) obj.subspace = String(object.subspace);
     if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
-    return obj;
-  },
-  toJSON(message: Subspace): JsonSafe<Subspace> {
-    const obj: any = {};
-    message.subspace !== undefined && (obj.subspace = message.subspace);
-    if (message.keys) {
-      obj.keys = message.keys.map(e => e);
-    } else {
-      obj.keys = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Subspace>): Subspace {

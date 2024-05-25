@@ -1,5 +1,6 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
 import { BinaryReader, BinaryWriter } from "../../binary";
+import { JsonSafe } from "../../json-safe";
 import { DeepPartial, isSet } from "../../helpers";
 export const protobufPackage = "osmosis.epochs.v1beta1";
 export interface QueryEpochsInfoRequest {}
@@ -63,7 +64,7 @@ export const QueryEpochsInfoRequest = {
   fromJSON(_: any): QueryEpochsInfoRequest {
     return {};
   },
-  toJSON(_: QueryEpochsInfoRequest): unknown {
+  toJSON(_: QueryEpochsInfoRequest): JsonSafe<QueryEpochsInfoRequest> {
     const obj: any = {};
     return obj;
   },
@@ -146,7 +147,7 @@ export const QueryEpochsInfoResponse = {
       epochs: Array.isArray(object?.epochs) ? object.epochs.map((e: any) => EpochInfo.fromJSON(e)) : []
     };
   },
-  toJSON(message: QueryEpochsInfoResponse): unknown {
+  toJSON(message: QueryEpochsInfoResponse): JsonSafe<QueryEpochsInfoResponse> {
     const obj: any = {};
     if (message.epochs) {
       obj.epochs = message.epochs.map(e => e ? EpochInfo.toJSON(e) : undefined);
@@ -250,7 +251,7 @@ export const QueryCurrentEpochRequest = {
       identifier: isSet(object.identifier) ? String(object.identifier) : ""
     };
   },
-  toJSON(message: QueryCurrentEpochRequest): unknown {
+  toJSON(message: QueryCurrentEpochRequest): JsonSafe<QueryCurrentEpochRequest> {
     const obj: any = {};
     message.identifier !== undefined && (obj.identifier = message.identifier);
     return obj;
@@ -344,7 +345,7 @@ export const QueryCurrentEpochResponse = {
       currentEpoch: isSet(object.currentEpoch) ? BigInt(object.currentEpoch.toString()) : BigInt(0)
     };
   },
-  toJSON(message: QueryCurrentEpochResponse): unknown {
+  toJSON(message: QueryCurrentEpochResponse): JsonSafe<QueryCurrentEpochResponse> {
     const obj: any = {};
     message.currentEpoch !== undefined && (obj.currentEpoch = (message.currentEpoch || BigInt(0)).toString());
     return obj;

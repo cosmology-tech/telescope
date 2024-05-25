@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
@@ -60,7 +61,7 @@ export const Control = {
       environment: isSet(object.environment) ? String(object.environment) : ""
     };
   },
-  toJSON(message: Control): unknown {
+  toJSON(message: Control): JsonSafe<Control> {
     const obj: any = {};
     message.environment !== undefined && (obj.environment = message.environment);
     return obj;

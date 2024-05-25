@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Input, InputSDKType, Output, OutputSDKType } from "./bank";
 import * as _m0 from "protobufjs/minimal";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /** MsgSend represents a message to send coins from one account to another. */
 export interface MsgSend {
@@ -83,7 +84,7 @@ export const MsgSend = {
       amount: Array.isArray(object?.amount) ? object.amount.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgSend): unknown {
+  toJSON(message: MsgSend): JsonSafe<MsgSend> {
     const obj: any = {};
     message.fromAddress !== undefined && (obj.fromAddress = message.fromAddress);
     message.toAddress !== undefined && (obj.toAddress = message.toAddress);
@@ -144,7 +145,7 @@ export const MsgSendResponse = {
   fromJSON(_: any): MsgSendResponse {
     return {};
   },
-  toJSON(_: MsgSendResponse): unknown {
+  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
     const obj: any = {};
     return obj;
   },
@@ -202,7 +203,7 @@ export const MsgMultiSend = {
       outputs: Array.isArray(object?.outputs) ? object.outputs.map((e: any) => Output.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgMultiSend): unknown {
+  toJSON(message: MsgMultiSend): JsonSafe<MsgMultiSend> {
     const obj: any = {};
     if (message.inputs) {
       obj.inputs = message.inputs.map(e => e ? Input.toJSON(e) : undefined);
@@ -267,7 +268,7 @@ export const MsgMultiSendResponse = {
   fromJSON(_: any): MsgMultiSendResponse {
     return {};
   },
-  toJSON(_: MsgMultiSendResponse): unknown {
+  toJSON(_: MsgMultiSendResponse): JsonSafe<MsgMultiSendResponse> {
     const obj: any = {};
     return obj;
   },

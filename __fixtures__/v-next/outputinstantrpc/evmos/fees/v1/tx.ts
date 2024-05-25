@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "evmos.fees.v1";
 /** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
 export interface MsgRegisterDevFeeInfo {
@@ -175,7 +176,7 @@ export const MsgRegisterDevFeeInfo = {
     if (Array.isArray(object?.nonces)) obj.nonces = object.nonces.map((e: any) => BigInt(e.toString()));
     return obj;
   },
-  toJSON(message: MsgRegisterDevFeeInfo): unknown {
+  toJSON(message: MsgRegisterDevFeeInfo): JsonSafe<MsgRegisterDevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
@@ -291,7 +292,7 @@ export const MsgRegisterDevFeeInfoResponse = {
     const obj = createBaseMsgRegisterDevFeeInfoResponse();
     return obj;
   },
-  toJSON(_: MsgRegisterDevFeeInfoResponse): unknown {
+  toJSON(_: MsgRegisterDevFeeInfoResponse): JsonSafe<MsgRegisterDevFeeInfoResponse> {
     const obj: any = {};
     return obj;
   },
@@ -376,7 +377,7 @@ export const MsgCancelDevFeeInfo = {
     if (isSet(object.deployerAddress)) obj.deployerAddress = String(object.deployerAddress);
     return obj;
   },
-  toJSON(message: MsgCancelDevFeeInfo): unknown {
+  toJSON(message: MsgCancelDevFeeInfo): JsonSafe<MsgCancelDevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
@@ -464,7 +465,7 @@ export const MsgCancelDevFeeInfoResponse = {
     const obj = createBaseMsgCancelDevFeeInfoResponse();
     return obj;
   },
-  toJSON(_: MsgCancelDevFeeInfoResponse): unknown {
+  toJSON(_: MsgCancelDevFeeInfoResponse): JsonSafe<MsgCancelDevFeeInfoResponse> {
     const obj: any = {};
     return obj;
   },
@@ -557,7 +558,7 @@ export const MsgUpdateDevFeeInfo = {
     if (isSet(object.withdrawAddress)) obj.withdrawAddress = String(object.withdrawAddress);
     return obj;
   },
-  toJSON(message: MsgUpdateDevFeeInfo): unknown {
+  toJSON(message: MsgUpdateDevFeeInfo): JsonSafe<MsgUpdateDevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
@@ -654,7 +655,7 @@ export const MsgUpdateDevFeeInfoResponse = {
     const obj = createBaseMsgUpdateDevFeeInfoResponse();
     return obj;
   },
-  toJSON(_: MsgUpdateDevFeeInfoResponse): unknown {
+  toJSON(_: MsgUpdateDevFeeInfoResponse): JsonSafe<MsgUpdateDevFeeInfoResponse> {
     const obj: any = {};
     return obj;
   },

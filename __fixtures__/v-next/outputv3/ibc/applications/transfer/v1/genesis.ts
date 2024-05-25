@@ -1,7 +1,6 @@
 import { DenomTrace, DenomTraceAmino, DenomTraceSDKType, Params, ParamsAmino, ParamsSDKType } from "./transfer";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisState {
@@ -75,17 +74,6 @@ export const GenesisState = {
     if (isSet(object.portId)) obj.portId = String(object.portId);
     if (Array.isArray(object?.denomTraces)) obj.denomTraces = object.denomTraces.map((e: any) => DenomTrace.fromJSON(e));
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    if (message.denomTraces) {
-      obj.denomTraces = message.denomTraces.map(e => e ? DenomTrace.toJSON(e) : undefined);
-    } else {
-      obj.denomTraces = [];
-    }
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

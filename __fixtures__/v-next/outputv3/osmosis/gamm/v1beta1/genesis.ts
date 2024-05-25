@@ -7,7 +7,6 @@ import { Pool as Pool2 } from "../pool-models/stableswap/stableswap_pool";
 import { PoolProtoMsg as Pool2ProtoMsg } from "../pool-models/stableswap/stableswap_pool";
 import { PoolSDKType as Pool2SDKType } from "../pool-models/stableswap/stableswap_pool";
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { JsonSafe } from "../../../json-safe";
 import { DeepPartial, isSet } from "../../../helpers";
 export const protobufPackage = "osmosis.gamm.v1beta1";
 /** Params holds parameters for the incentives module */
@@ -87,15 +86,6 @@ export const Params = {
   fromJSON(object: any): Params {
     const obj = createBaseParams();
     if (Array.isArray(object?.poolCreationFee)) obj.poolCreationFee = object.poolCreationFee.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: Params): JsonSafe<Params> {
-    const obj: any = {};
-    if (message.poolCreationFee) {
-      obj.poolCreationFee = message.poolCreationFee.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.poolCreationFee = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<Params>): Params {
@@ -194,17 +184,6 @@ export const GenesisState = {
     if (Array.isArray(object?.pools)) obj.pools = object.pools.map((e: any) => Any.fromJSON(e));
     if (isSet(object.nextPoolNumber)) obj.nextPoolNumber = BigInt(object.nextPoolNumber.toString());
     if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
-    return obj;
-  },
-  toJSON(message: GenesisState): JsonSafe<GenesisState> {
-    const obj: any = {};
-    if (message.pools) {
-      obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
-    } else {
-      obj.pools = [];
-    }
-    message.nextPoolNumber !== undefined && (obj.nextPoolNumber = (message.nextPoolNumber || BigInt(0)).toString());
-    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {

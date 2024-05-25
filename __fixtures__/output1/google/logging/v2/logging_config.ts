@@ -2,6 +2,7 @@ import { FieldMask, FieldMaskSDKType } from "../../protobuf/field_mask";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "google.logging.v2";
 /** Deprecated. This is unused. */
 export enum LogSink_VersionFormat {
@@ -1683,7 +1684,7 @@ export const LogBucket = {
       cmekSettings: isSet(object.cmekSettings) ? CmekSettings.fromJSON(object.cmekSettings) : undefined
     };
   },
-  toJSON(message: LogBucket): unknown {
+  toJSON(message: LogBucket): JsonSafe<LogBucket> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -1810,7 +1811,7 @@ export const LogView = {
       filter: isSet(object.filter) ? String(object.filter) : ""
     };
   },
-  toJSON(message: LogView): unknown {
+  toJSON(message: LogView): JsonSafe<LogView> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -1969,7 +1970,7 @@ export const LogSink = {
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
     };
   },
-  toJSON(message: LogSink): unknown {
+  toJSON(message: LogSink): JsonSafe<LogSink> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.destination !== undefined && (obj.destination = message.destination);
@@ -2084,7 +2085,7 @@ export const BigQueryOptions = {
       usesTimestampColumnPartitioning: isSet(object.usesTimestampColumnPartitioning) ? Boolean(object.usesTimestampColumnPartitioning) : false
     };
   },
-  toJSON(message: BigQueryOptions): unknown {
+  toJSON(message: BigQueryOptions): JsonSafe<BigQueryOptions> {
     const obj: any = {};
     message.usePartitionedTables !== undefined && (obj.usePartitionedTables = message.usePartitionedTables);
     message.usesTimestampColumnPartitioning !== undefined && (obj.usesTimestampColumnPartitioning = message.usesTimestampColumnPartitioning);
@@ -2159,7 +2160,7 @@ export const ListBucketsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-  toJSON(message: ListBucketsRequest): unknown {
+  toJSON(message: ListBucketsRequest): JsonSafe<ListBucketsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -2230,7 +2231,7 @@ export const ListBucketsResponse = {
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-  toJSON(message: ListBucketsResponse): unknown {
+  toJSON(message: ListBucketsResponse): JsonSafe<ListBucketsResponse> {
     const obj: any = {};
     if (message.buckets) {
       obj.buckets = message.buckets.map(e => e ? LogBucket.toJSON(e) : undefined);
@@ -2313,7 +2314,7 @@ export const CreateBucketRequest = {
       bucket: isSet(object.bucket) ? LogBucket.fromJSON(object.bucket) : undefined
     };
   },
-  toJSON(message: CreateBucketRequest): unknown {
+  toJSON(message: CreateBucketRequest): JsonSafe<CreateBucketRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.bucketId !== undefined && (obj.bucketId = message.bucketId);
@@ -2392,7 +2393,7 @@ export const UpdateBucketRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateBucketRequest): unknown {
+  toJSON(message: UpdateBucketRequest): JsonSafe<UpdateBucketRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.bucket !== undefined && (obj.bucket = message.bucket ? LogBucket.toJSON(message.bucket) : undefined);
@@ -2455,7 +2456,7 @@ export const GetBucketRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: GetBucketRequest): unknown {
+  toJSON(message: GetBucketRequest): JsonSafe<GetBucketRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -2510,7 +2511,7 @@ export const DeleteBucketRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: DeleteBucketRequest): unknown {
+  toJSON(message: DeleteBucketRequest): JsonSafe<DeleteBucketRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -2565,7 +2566,7 @@ export const UndeleteBucketRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: UndeleteBucketRequest): unknown {
+  toJSON(message: UndeleteBucketRequest): JsonSafe<UndeleteBucketRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -2636,7 +2637,7 @@ export const ListViewsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-  toJSON(message: ListViewsRequest): unknown {
+  toJSON(message: ListViewsRequest): JsonSafe<ListViewsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -2707,7 +2708,7 @@ export const ListViewsResponse = {
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-  toJSON(message: ListViewsResponse): unknown {
+  toJSON(message: ListViewsResponse): JsonSafe<ListViewsResponse> {
     const obj: any = {};
     if (message.views) {
       obj.views = message.views.map(e => e ? LogView.toJSON(e) : undefined);
@@ -2790,7 +2791,7 @@ export const CreateViewRequest = {
       view: isSet(object.view) ? LogView.fromJSON(object.view) : undefined
     };
   },
-  toJSON(message: CreateViewRequest): unknown {
+  toJSON(message: CreateViewRequest): JsonSafe<CreateViewRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.viewId !== undefined && (obj.viewId = message.viewId);
@@ -2869,7 +2870,7 @@ export const UpdateViewRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateViewRequest): unknown {
+  toJSON(message: UpdateViewRequest): JsonSafe<UpdateViewRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.view !== undefined && (obj.view = message.view ? LogView.toJSON(message.view) : undefined);
@@ -2932,7 +2933,7 @@ export const GetViewRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: GetViewRequest): unknown {
+  toJSON(message: GetViewRequest): JsonSafe<GetViewRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -2987,7 +2988,7 @@ export const DeleteViewRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: DeleteViewRequest): unknown {
+  toJSON(message: DeleteViewRequest): JsonSafe<DeleteViewRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -3058,7 +3059,7 @@ export const ListSinksRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-  toJSON(message: ListSinksRequest): unknown {
+  toJSON(message: ListSinksRequest): JsonSafe<ListSinksRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -3129,7 +3130,7 @@ export const ListSinksResponse = {
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-  toJSON(message: ListSinksResponse): unknown {
+  toJSON(message: ListSinksResponse): JsonSafe<ListSinksResponse> {
     const obj: any = {};
     if (message.sinks) {
       obj.sinks = message.sinks.map(e => e ? LogSink.toJSON(e) : undefined);
@@ -3196,7 +3197,7 @@ export const GetSinkRequest = {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
     };
   },
-  toJSON(message: GetSinkRequest): unknown {
+  toJSON(message: GetSinkRequest): JsonSafe<GetSinkRequest> {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
@@ -3267,7 +3268,7 @@ export const CreateSinkRequest = {
       uniqueWriterIdentity: isSet(object.uniqueWriterIdentity) ? Boolean(object.uniqueWriterIdentity) : false
     };
   },
-  toJSON(message: CreateSinkRequest): unknown {
+  toJSON(message: CreateSinkRequest): JsonSafe<CreateSinkRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toJSON(message.sink) : undefined);
@@ -3354,7 +3355,7 @@ export const UpdateSinkRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateSinkRequest): unknown {
+  toJSON(message: UpdateSinkRequest): JsonSafe<UpdateSinkRequest> {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     message.sink !== undefined && (obj.sink = message.sink ? LogSink.toJSON(message.sink) : undefined);
@@ -3421,7 +3422,7 @@ export const DeleteSinkRequest = {
       sinkName: isSet(object.sinkName) ? String(object.sinkName) : ""
     };
   },
-  toJSON(message: DeleteSinkRequest): unknown {
+  toJSON(message: DeleteSinkRequest): JsonSafe<DeleteSinkRequest> {
     const obj: any = {};
     message.sinkName !== undefined && (obj.sinkName = message.sinkName);
     return obj;
@@ -3516,7 +3517,7 @@ export const LogExclusion = {
       updateTime: isSet(object.updateTime) ? fromJsonTimestamp(object.updateTime) : undefined
     };
   },
-  toJSON(message: LogExclusion): unknown {
+  toJSON(message: LogExclusion): JsonSafe<LogExclusion> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.description !== undefined && (obj.description = message.description);
@@ -3607,7 +3608,7 @@ export const ListExclusionsRequest = {
       pageSize: isSet(object.pageSize) ? Number(object.pageSize) : 0
     };
   },
-  toJSON(message: ListExclusionsRequest): unknown {
+  toJSON(message: ListExclusionsRequest): JsonSafe<ListExclusionsRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageToken !== undefined && (obj.pageToken = message.pageToken);
@@ -3678,7 +3679,7 @@ export const ListExclusionsResponse = {
       nextPageToken: isSet(object.nextPageToken) ? String(object.nextPageToken) : ""
     };
   },
-  toJSON(message: ListExclusionsResponse): unknown {
+  toJSON(message: ListExclusionsResponse): JsonSafe<ListExclusionsResponse> {
     const obj: any = {};
     if (message.exclusions) {
       obj.exclusions = message.exclusions.map(e => e ? LogExclusion.toJSON(e) : undefined);
@@ -3745,7 +3746,7 @@ export const GetExclusionRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: GetExclusionRequest): unknown {
+  toJSON(message: GetExclusionRequest): JsonSafe<GetExclusionRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -3808,7 +3809,7 @@ export const CreateExclusionRequest = {
       exclusion: isSet(object.exclusion) ? LogExclusion.fromJSON(object.exclusion) : undefined
     };
   },
-  toJSON(message: CreateExclusionRequest): unknown {
+  toJSON(message: CreateExclusionRequest): JsonSafe<CreateExclusionRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
@@ -3883,7 +3884,7 @@ export const UpdateExclusionRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateExclusionRequest): unknown {
+  toJSON(message: UpdateExclusionRequest): JsonSafe<UpdateExclusionRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.exclusion !== undefined && (obj.exclusion = message.exclusion ? LogExclusion.toJSON(message.exclusion) : undefined);
@@ -3946,7 +3947,7 @@ export const DeleteExclusionRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: DeleteExclusionRequest): unknown {
+  toJSON(message: DeleteExclusionRequest): JsonSafe<DeleteExclusionRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4001,7 +4002,7 @@ export const GetCmekSettingsRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: GetCmekSettingsRequest): unknown {
+  toJSON(message: GetCmekSettingsRequest): JsonSafe<GetCmekSettingsRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4072,7 +4073,7 @@ export const UpdateCmekSettingsRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateCmekSettingsRequest): unknown {
+  toJSON(message: UpdateCmekSettingsRequest): JsonSafe<UpdateCmekSettingsRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.cmekSettings !== undefined && (obj.cmekSettings = message.cmekSettings ? CmekSettings.toJSON(message.cmekSettings) : undefined);
@@ -4151,7 +4152,7 @@ export const CmekSettings = {
       serviceAccountId: isSet(object.serviceAccountId) ? String(object.serviceAccountId) : ""
     };
   },
-  toJSON(message: CmekSettings): unknown {
+  toJSON(message: CmekSettings): JsonSafe<CmekSettings> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.kmsKeyName !== undefined && (obj.kmsKeyName = message.kmsKeyName);
@@ -4214,7 +4215,7 @@ export const GetSettingsRequest = {
       name: isSet(object.name) ? String(object.name) : ""
     };
   },
-  toJSON(message: GetSettingsRequest): unknown {
+  toJSON(message: GetSettingsRequest): JsonSafe<GetSettingsRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -4285,7 +4286,7 @@ export const UpdateSettingsRequest = {
       updateMask: isSet(object.updateMask) ? FieldMask.fromJSON(object.updateMask) : undefined
     };
   },
-  toJSON(message: UpdateSettingsRequest): unknown {
+  toJSON(message: UpdateSettingsRequest): JsonSafe<UpdateSettingsRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.settings !== undefined && (obj.settings = message.settings ? Settings.toJSON(message.settings) : undefined);
@@ -4380,7 +4381,7 @@ export const Settings = {
       disableDefaultSink: isSet(object.disableDefaultSink) ? Boolean(object.disableDefaultSink) : false
     };
   },
-  toJSON(message: Settings): unknown {
+  toJSON(message: Settings): JsonSafe<Settings> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.kmsKeyName !== undefined && (obj.kmsKeyName = message.kmsKeyName);
@@ -4467,7 +4468,7 @@ export const CopyLogEntriesRequest = {
       destination: isSet(object.destination) ? String(object.destination) : ""
     };
   },
-  toJSON(message: CopyLogEntriesRequest): unknown {
+  toJSON(message: CopyLogEntriesRequest): JsonSafe<CopyLogEntriesRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.filter !== undefined && (obj.filter = message.filter);
@@ -4578,7 +4579,7 @@ export const CopyLogEntriesMetadata = {
       writerIdentity: isSet(object.writerIdentity) ? String(object.writerIdentity) : ""
     };
   },
-  toJSON(message: CopyLogEntriesMetadata): unknown {
+  toJSON(message: CopyLogEntriesMetadata): JsonSafe<CopyLogEntriesMetadata> {
     const obj: any = {};
     message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
@@ -4657,7 +4658,7 @@ export const CopyLogEntriesResponse = {
       logEntriesCopiedCount: isSet(object.logEntriesCopiedCount) ? Long.fromValue(object.logEntriesCopiedCount) : Long.ZERO
     };
   },
-  toJSON(message: CopyLogEntriesResponse): unknown {
+  toJSON(message: CopyLogEntriesResponse): JsonSafe<CopyLogEntriesResponse> {
     const obj: any = {};
     message.logEntriesCopiedCount !== undefined && (obj.logEntriesCopiedCount = (message.logEntriesCopiedCount || Long.ZERO).toString());
     return obj;

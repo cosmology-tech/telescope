@@ -1,6 +1,7 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { Long, isSet, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
@@ -86,7 +87,7 @@ export const Params = {
       mintedDenom: isSet(object.mintedDenom) ? String(object.mintedDenom) : ""
     };
   },
-  toJSON(message: Params): unknown {
+  toJSON(message: Params): JsonSafe<Params> {
     const obj: any = {};
     message.mintedDenom !== undefined && (obj.mintedDenom = message.mintedDenom);
     return obj;
@@ -141,7 +142,7 @@ export const LockableDurationsInfo = {
       lockableDurations: Array.isArray(object?.lockableDurations) ? object.lockableDurations.map((e: any) => Duration.fromJSON(e)) : []
     };
   },
-  toJSON(message: LockableDurationsInfo): unknown {
+  toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
     const obj: any = {};
     if (message.lockableDurations) {
       obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
@@ -212,7 +213,7 @@ export const DistrInfo = {
       records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromJSON(e)) : []
     };
   },
-  toJSON(message: DistrInfo): unknown {
+  toJSON(message: DistrInfo): JsonSafe<DistrInfo> {
     const obj: any = {};
     message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
     if (message.records) {
@@ -287,7 +288,7 @@ export const DistrRecord = {
       weight: isSet(object.weight) ? String(object.weight) : ""
     };
   },
-  toJSON(message: DistrRecord): unknown {
+  toJSON(message: DistrRecord): JsonSafe<DistrRecord> {
     const obj: any = {};
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
     message.weight !== undefined && (obj.weight = message.weight);
@@ -362,7 +363,7 @@ export const PoolToGauge = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: PoolToGauge): unknown {
+  toJSON(message: PoolToGauge): JsonSafe<PoolToGauge> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || Long.UZERO).toString());
@@ -425,7 +426,7 @@ export const PoolToGauges = {
       poolToGauge: Array.isArray(object?.poolToGauge) ? object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e)) : []
     };
   },
-  toJSON(message: PoolToGauges): unknown {
+  toJSON(message: PoolToGauges): JsonSafe<PoolToGauges> {
     const obj: any = {};
     if (message.poolToGauge) {
       obj.poolToGauge = message.poolToGauge.map(e => e ? PoolToGauge.toJSON(e) : undefined);

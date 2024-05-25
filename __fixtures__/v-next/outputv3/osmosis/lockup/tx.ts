@@ -3,7 +3,6 @@ import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockAmino, PeriodLockSDKType } from "./lock";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.lockup";
 export interface MsgLockTokens {
   owner: string;
@@ -247,17 +246,6 @@ export const MsgLockTokens = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgLockTokens): JsonSafe<MsgLockTokens> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgLockTokens>): MsgLockTokens {
     const message = createBaseMsgLockTokens();
     message.owner = object.owner ?? "";
@@ -356,11 +344,6 @@ export const MsgLockTokensResponse = {
     if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
     return obj;
   },
-  toJSON(message: MsgLockTokensResponse): JsonSafe<MsgLockTokensResponse> {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgLockTokensResponse>): MsgLockTokensResponse {
     const message = createBaseMsgLockTokensResponse();
     if (object.ID !== undefined && object.ID !== null) {
@@ -439,11 +422,6 @@ export const MsgBeginUnlockingAll = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     return obj;
   },
-  toJSON(message: MsgBeginUnlockingAll): JsonSafe<MsgBeginUnlockingAll> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgBeginUnlockingAll>): MsgBeginUnlockingAll {
     const message = createBaseMsgBeginUnlockingAll();
     message.owner = object.owner ?? "";
@@ -518,15 +496,6 @@ export const MsgBeginUnlockingAllResponse = {
   fromJSON(object: any): MsgBeginUnlockingAllResponse {
     const obj = createBaseMsgBeginUnlockingAllResponse();
     if (Array.isArray(object?.unlocks)) obj.unlocks = object.unlocks.map((e: any) => PeriodLock.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgBeginUnlockingAllResponse): JsonSafe<MsgBeginUnlockingAllResponse> {
-    const obj: any = {};
-    if (message.unlocks) {
-      obj.unlocks = message.unlocks.map(e => e ? PeriodLock.toJSON(e) : undefined);
-    } else {
-      obj.unlocks = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgBeginUnlockingAllResponse>): MsgBeginUnlockingAllResponse {
@@ -627,17 +596,6 @@ export const MsgBeginUnlocking = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgBeginUnlocking): JsonSafe<MsgBeginUnlocking> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgBeginUnlocking>): MsgBeginUnlocking {
     const message = createBaseMsgBeginUnlocking();
     message.owner = object.owner ?? "";
@@ -736,11 +694,6 @@ export const MsgBeginUnlockingResponse = {
     if (isSet(object.success)) obj.success = Boolean(object.success);
     return obj;
   },
-  toJSON(message: MsgBeginUnlockingResponse): JsonSafe<MsgBeginUnlockingResponse> {
-    const obj: any = {};
-    message.success !== undefined && (obj.success = message.success);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgBeginUnlockingResponse>): MsgBeginUnlockingResponse {
     const message = createBaseMsgBeginUnlockingResponse();
     message.success = object.success ?? false;
@@ -831,13 +784,6 @@ export const MsgExtendLockup = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    return obj;
-  },
-  toJSON(message: MsgExtendLockup): JsonSafe<MsgExtendLockup> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgExtendLockup>): MsgExtendLockup {
@@ -934,11 +880,6 @@ export const MsgExtendLockupResponse = {
     if (isSet(object.success)) obj.success = Boolean(object.success);
     return obj;
   },
-  toJSON(message: MsgExtendLockupResponse): JsonSafe<MsgExtendLockupResponse> {
-    const obj: any = {};
-    message.success !== undefined && (obj.success = message.success);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgExtendLockupResponse>): MsgExtendLockupResponse {
     const message = createBaseMsgExtendLockupResponse();
     message.success = object.success ?? false;
@@ -1029,17 +970,6 @@ export const MsgForceUnlock = {
     if (isSet(object.owner)) obj.owner = String(object.owner);
     if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
-    return obj;
-  },
-  toJSON(message: MsgForceUnlock): JsonSafe<MsgForceUnlock> {
-    const obj: any = {};
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
     return obj;
   },
   fromPartial(object: DeepPartial<MsgForceUnlock>): MsgForceUnlock {
@@ -1138,11 +1068,6 @@ export const MsgForceUnlockResponse = {
   fromJSON(object: any): MsgForceUnlockResponse {
     const obj = createBaseMsgForceUnlockResponse();
     if (isSet(object.success)) obj.success = Boolean(object.success);
-    return obj;
-  },
-  toJSON(message: MsgForceUnlockResponse): JsonSafe<MsgForceUnlockResponse> {
-    const obj: any = {};
-    message.success !== undefined && (obj.success = message.success);
     return obj;
   },
   fromPartial(object: DeepPartial<MsgForceUnlockResponse>): MsgForceUnlockResponse {

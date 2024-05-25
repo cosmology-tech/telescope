@@ -1,6 +1,7 @@
 import { ParamChange, ParamChangeSDKType } from "./params";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
@@ -126,7 +127,7 @@ export const QueryParamsRequest = {
       key: isSet(object.key) ? String(object.key) : ""
     };
   },
-  toJSON(message: QueryParamsRequest): unknown {
+  toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
     message.key !== undefined && (obj.key = message.key);
@@ -229,7 +230,7 @@ export const QueryParamsResponse = {
       param: isSet(object.param) ? ParamChange.fromJSON(object.param) : undefined
     };
   },
-  toJSON(message: QueryParamsResponse): unknown {
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
     const obj: any = {};
     message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
     return obj;
@@ -313,7 +314,7 @@ export const QuerySubspacesRequest = {
   fromJSON(_: any): QuerySubspacesRequest {
     return {};
   },
-  toJSON(_: QuerySubspacesRequest): unknown {
+  toJSON(_: QuerySubspacesRequest): JsonSafe<QuerySubspacesRequest> {
     const obj: any = {};
     return obj;
   },
@@ -396,7 +397,7 @@ export const QuerySubspacesResponse = {
       subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromJSON(e)) : []
     };
   },
-  toJSON(message: QuerySubspacesResponse): unknown {
+  toJSON(message: QuerySubspacesResponse): JsonSafe<QuerySubspacesResponse> {
     const obj: any = {};
     if (message.subspaces) {
       obj.subspaces = message.subspaces.map(e => e ? Subspace.toJSON(e) : undefined);
@@ -508,7 +509,7 @@ export const Subspace = {
       keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
     };
   },
-  toJSON(message: Subspace): unknown {
+  toJSON(message: Subspace): JsonSafe<Subspace> {
     const obj: any = {};
     message.subspace !== undefined && (obj.subspace = message.subspace);
     if (message.keys) {

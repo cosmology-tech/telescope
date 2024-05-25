@@ -1,6 +1,7 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Long, toTimestamp, fromTimestamp, isSet, fromJsonTimestamp, DeepPartial } from "../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.twap.v1beta1";
 /**
  * A TWAP record should be indexed in state by pool_id, (asset pair), timestamp
@@ -166,7 +167,7 @@ export const TwapRecord = {
       lastErrorTime: isSet(object.lastErrorTime) ? fromJsonTimestamp(object.lastErrorTime) : undefined
     };
   },
-  toJSON(message: TwapRecord): unknown {
+  toJSON(message: TwapRecord): JsonSafe<TwapRecord> {
     const obj: any = {};
     message.poolId !== undefined && (obj.poolId = (message.poolId || Long.UZERO).toString());
     message.asset0Denom !== undefined && (obj.asset0Denom = message.asset0Denom);

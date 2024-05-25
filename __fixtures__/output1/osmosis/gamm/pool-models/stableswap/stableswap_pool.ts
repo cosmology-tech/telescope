@@ -1,6 +1,7 @@
 import { Coin, CoinSDKType } from "../../../../cosmos/base/v1beta1/coin";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "osmosis.gamm.poolmodels.stableswap.v1beta1";
 /**
  * PoolParams defined the parameters that will be managed by the pool
@@ -100,7 +101,7 @@ export const PoolParams = {
       exitFee: isSet(object.exitFee) ? String(object.exitFee) : ""
     };
   },
-  toJSON(message: PoolParams): unknown {
+  toJSON(message: PoolParams): JsonSafe<PoolParams> {
     const obj: any = {};
     message.swapFee !== undefined && (obj.swapFee = message.swapFee);
     message.exitFee !== undefined && (obj.exitFee = message.exitFee);
@@ -224,7 +225,7 @@ export const Pool = {
       scalingFactorController: isSet(object.scalingFactorController) ? String(object.scalingFactorController) : ""
     };
   },
-  toJSON(message: Pool): unknown {
+  toJSON(message: Pool): JsonSafe<Pool> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.id !== undefined && (obj.id = (message.id || Long.UZERO).toString());

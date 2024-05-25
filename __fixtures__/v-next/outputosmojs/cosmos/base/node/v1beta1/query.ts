@@ -1,4 +1,5 @@
 import { BinaryReader, BinaryWriter } from "../../../../binary";
+import { JsonSafe } from "../../../../json-safe";
 import { DeepPartial, isSet } from "../../../../helpers";
 export const protobufPackage = "cosmos.base.node.v1beta1";
 /** ConfigRequest defines the request structure for the Config gRPC query. */
@@ -46,7 +47,7 @@ export const ConfigRequest = {
   fromJSON(_: any): ConfigRequest {
     return {};
   },
-  toJSON(_: ConfigRequest): unknown {
+  toJSON(_: ConfigRequest): JsonSafe<ConfigRequest> {
     const obj: any = {};
     return obj;
   },
@@ -129,7 +130,7 @@ export const ConfigResponse = {
       minimumGasPrice: isSet(object.minimumGasPrice) ? String(object.minimumGasPrice) : ""
     };
   },
-  toJSON(message: ConfigResponse): unknown {
+  toJSON(message: ConfigResponse): JsonSafe<ConfigResponse> {
     const obj: any = {};
     message.minimumGasPrice !== undefined && (obj.minimumGasPrice = message.minimumGasPrice);
     return obj;

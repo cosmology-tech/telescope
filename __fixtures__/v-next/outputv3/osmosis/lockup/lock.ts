@@ -3,7 +3,6 @@ import { Timestamp, TimestampAmino, TimestampSDKType } from "../../google/protob
 import { Coin, CoinAmino, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../helpers";
-import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -326,19 +325,6 @@ export const PeriodLock = {
     if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: PeriodLock): JsonSafe<PeriodLock> {
-    const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || BigInt(0)).toString());
-    message.owner !== undefined && (obj.owner = message.owner);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    if (message.coins) {
-      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
-    } else {
-      obj.coins = [];
-    }
-    return obj;
-  },
   fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
     if (object.ID !== undefined && object.ID !== null) {
@@ -477,14 +463,6 @@ export const QueryCondition = {
     if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
     return obj;
   },
-  toJSON(message: QueryCondition): JsonSafe<QueryCondition> {
-    const obj: any = {};
-    message.lockQueryType !== undefined && (obj.lockQueryType = lockQueryTypeToJSON(message.lockQueryType));
-    message.denom !== undefined && (obj.denom = message.denom);
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
-    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
-    return obj;
-  },
   fromPartial(object: DeepPartial<QueryCondition>): QueryCondition {
     const message = createBaseQueryCondition();
     message.lockQueryType = object.lockQueryType ?? 0;
@@ -606,14 +584,6 @@ export const SyntheticLock = {
     if (isSet(object.synthDenom)) obj.synthDenom = String(object.synthDenom);
     if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
     if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
-    return obj;
-  },
-  toJSON(message: SyntheticLock): JsonSafe<SyntheticLock> {
-    const obj: any = {};
-    message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || BigInt(0)).toString());
-    message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);
-    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
-    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<SyntheticLock>): SyntheticLock {

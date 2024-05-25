@@ -1,6 +1,7 @@
 import { Service, ServiceAmino, ServiceSDKType } from "./resources";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
@@ -606,7 +607,7 @@ export const EnableServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: EnableServiceRequest): unknown {
+  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -689,7 +690,7 @@ export const EnableServiceResponse = {
     if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
     return obj;
   },
-  toJSON(message: EnableServiceResponse): unknown {
+  toJSON(message: EnableServiceResponse): JsonSafe<EnableServiceResponse> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
     return obj;
@@ -790,7 +791,7 @@ export const DisableServiceRequest = {
     if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
     return obj;
   },
-  toJSON(message: DisableServiceRequest): unknown {
+  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.disableDependentServices !== undefined && (obj.disableDependentServices = message.disableDependentServices);
@@ -889,7 +890,7 @@ export const DisableServiceResponse = {
     if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
     return obj;
   },
-  toJSON(message: DisableServiceResponse): unknown {
+  toJSON(message: DisableServiceResponse): JsonSafe<DisableServiceResponse> {
     const obj: any = {};
     message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
     return obj;
@@ -974,7 +975,7 @@ export const GetServiceRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     return obj;
   },
-  toJSON(message: GetServiceRequest): unknown {
+  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     return obj;
@@ -1081,7 +1082,7 @@ export const ListServicesRequest = {
     if (isSet(object.filter)) obj.filter = String(object.filter);
     return obj;
   },
-  toJSON(message: ListServicesRequest): unknown {
+  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
@@ -1196,7 +1197,7 @@ export const ListServicesResponse = {
     if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
     return obj;
   },
-  toJSON(message: ListServicesResponse): unknown {
+  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
     const obj: any = {};
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
@@ -1305,7 +1306,7 @@ export const BatchEnableServicesRequest = {
     if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: BatchEnableServicesRequest): unknown {
+  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     if (message.serviceIds) {
@@ -1414,7 +1415,7 @@ export const BatchEnableServicesResponse = {
     if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
     return obj;
   },
-  toJSON(message: BatchEnableServicesResponse): unknown {
+  toJSON(message: BatchEnableServicesResponse): JsonSafe<BatchEnableServicesResponse> {
     const obj: any = {};
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
@@ -1533,7 +1534,7 @@ export const BatchEnableServicesResponse_EnableFailure = {
     if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
     return obj;
   },
-  toJSON(message: BatchEnableServicesResponse_EnableFailure): unknown {
+  toJSON(message: BatchEnableServicesResponse_EnableFailure): JsonSafe<BatchEnableServicesResponse_EnableFailure> {
     const obj: any = {};
     message.serviceId !== undefined && (obj.serviceId = message.serviceId);
     message.errorMessage !== undefined && (obj.errorMessage = message.errorMessage);
@@ -1632,7 +1633,7 @@ export const BatchGetServicesRequest = {
     if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
     return obj;
   },
-  toJSON(message: BatchGetServicesRequest): unknown {
+  toJSON(message: BatchGetServicesRequest): JsonSafe<BatchGetServicesRequest> {
     const obj: any = {};
     message.parent !== undefined && (obj.parent = message.parent);
     if (message.names) {
@@ -1733,7 +1734,7 @@ export const BatchGetServicesResponse = {
     if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
     return obj;
   },
-  toJSON(message: BatchGetServicesResponse): unknown {
+  toJSON(message: BatchGetServicesResponse): JsonSafe<BatchGetServicesResponse> {
     const obj: any = {};
     if (message.services) {
       obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);

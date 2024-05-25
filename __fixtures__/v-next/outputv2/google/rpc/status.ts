@@ -1,6 +1,7 @@
 import { Any, AnyAmino, AnySDKType } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "google.rpc";
 /**
  * The `Status` type defines a logical error model that is suitable for
@@ -123,7 +124,7 @@ export const Status = {
     if (Array.isArray(object?.details)) obj.details = object.details.map((e: any) => Any.fromJSON(e));
     return obj;
   },
-  toJSON(message: Status): unknown {
+  toJSON(message: Status): JsonSafe<Status> {
     const obj: any = {};
     message.code !== undefined && (obj.code = Math.round(message.code));
     message.message !== undefined && (obj.message = message.message);

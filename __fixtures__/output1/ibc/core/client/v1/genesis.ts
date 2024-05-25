@@ -1,6 +1,7 @@
 import { IdentifiedClientState, IdentifiedClientStateSDKType, ClientConsensusStates, ClientConsensusStatesSDKType, Params, ParamsSDKType } from "./client";
 import { Long, isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.client.v1";
 /** GenesisState defines the ibc client submodule's genesis state. */
 export interface GenesisState {
@@ -133,7 +134,7 @@ export const GenesisState = {
       nextClientSequence: isSet(object.nextClientSequence) ? Long.fromValue(object.nextClientSequence) : Long.UZERO
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     if (message.clients) {
       obj.clients = message.clients.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
@@ -240,7 +241,7 @@ export const GenesisMetadata = {
       value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array()
     };
   },
-  toJSON(message: GenesisMetadata): unknown {
+  toJSON(message: GenesisMetadata): JsonSafe<GenesisMetadata> {
     const obj: any = {};
     message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
     message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
@@ -307,7 +308,7 @@ export const IdentifiedGenesisMetadata = {
       clientMetadata: Array.isArray(object?.clientMetadata) ? object.clientMetadata.map((e: any) => GenesisMetadata.fromJSON(e)) : []
     };
   },
-  toJSON(message: IdentifiedGenesisMetadata): unknown {
+  toJSON(message: IdentifiedGenesisMetadata): JsonSafe<IdentifiedGenesisMetadata> {
     const obj: any = {};
     message.clientId !== undefined && (obj.clientId = message.clientId);
     if (message.clientMetadata) {

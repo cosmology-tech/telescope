@@ -2,7 +2,6 @@ import { Channel, ChannelAmino, ChannelSDKType, Packet, PacketAmino, PacketSDKTy
 import { Height, HeightAmino, HeightSDKType } from "../../client/v1/client";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
-import { JsonSafe } from "../../../../json-safe";
 export const protobufPackage = "ibc.core.channel.v1";
 /**
  * MsgChannelOpenInit defines an sdk.Msg to initialize a channel handshake. It
@@ -516,13 +515,6 @@ export const MsgChannelOpenInit = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelOpenInit): JsonSafe<MsgChannelOpenInit> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelOpenInit>): MsgChannelOpenInit {
     const message = createBaseMsgChannelOpenInit();
     message.portId = object.portId ?? "";
@@ -604,10 +596,6 @@ export const MsgChannelOpenInitResponse = {
   },
   fromJSON(_: any): MsgChannelOpenInitResponse {
     const obj = createBaseMsgChannelOpenInitResponse();
-    return obj;
-  },
-  toJSON(_: MsgChannelOpenInitResponse): JsonSafe<MsgChannelOpenInitResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgChannelOpenInitResponse>): MsgChannelOpenInitResponse {
@@ -726,17 +714,6 @@ export const MsgChannelOpenTry = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelOpenTry): JsonSafe<MsgChannelOpenTry> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.previousChannelId !== undefined && (obj.previousChannelId = message.previousChannelId);
-    message.channel !== undefined && (obj.channel = message.channel ? Channel.toJSON(message.channel) : undefined);
-    message.counterpartyVersion !== undefined && (obj.counterpartyVersion = message.counterpartyVersion);
-    message.proofInit !== undefined && (obj.proofInit = base64FromBytes(message.proofInit !== undefined ? message.proofInit : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelOpenTry>): MsgChannelOpenTry {
     const message = createBaseMsgChannelOpenTry();
     message.portId = object.portId ?? "";
@@ -848,10 +825,6 @@ export const MsgChannelOpenTryResponse = {
   },
   fromJSON(_: any): MsgChannelOpenTryResponse {
     const obj = createBaseMsgChannelOpenTryResponse();
-    return obj;
-  },
-  toJSON(_: MsgChannelOpenTryResponse): JsonSafe<MsgChannelOpenTryResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgChannelOpenTryResponse>): MsgChannelOpenTryResponse {
@@ -970,17 +943,6 @@ export const MsgChannelOpenAck = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelOpenAck): JsonSafe<MsgChannelOpenAck> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.counterpartyChannelId !== undefined && (obj.counterpartyChannelId = message.counterpartyChannelId);
-    message.counterpartyVersion !== undefined && (obj.counterpartyVersion = message.counterpartyVersion);
-    message.proofTry !== undefined && (obj.proofTry = base64FromBytes(message.proofTry !== undefined ? message.proofTry : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelOpenAck>): MsgChannelOpenAck {
     const message = createBaseMsgChannelOpenAck();
     message.portId = object.portId ?? "";
@@ -1092,10 +1054,6 @@ export const MsgChannelOpenAckResponse = {
     const obj = createBaseMsgChannelOpenAckResponse();
     return obj;
   },
-  toJSON(_: MsgChannelOpenAckResponse): JsonSafe<MsgChannelOpenAckResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgChannelOpenAckResponse>): MsgChannelOpenAckResponse {
     const message = createBaseMsgChannelOpenAckResponse();
     return message;
@@ -1196,15 +1154,6 @@ export const MsgChannelOpenConfirm = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelOpenConfirm): JsonSafe<MsgChannelOpenConfirm> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.proofAck !== undefined && (obj.proofAck = base64FromBytes(message.proofAck !== undefined ? message.proofAck : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelOpenConfirm>): MsgChannelOpenConfirm {
     const message = createBaseMsgChannelOpenConfirm();
     message.portId = object.portId ?? "";
@@ -1302,10 +1251,6 @@ export const MsgChannelOpenConfirmResponse = {
     const obj = createBaseMsgChannelOpenConfirmResponse();
     return obj;
   },
-  toJSON(_: MsgChannelOpenConfirmResponse): JsonSafe<MsgChannelOpenConfirmResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgChannelOpenConfirmResponse>): MsgChannelOpenConfirmResponse {
     const message = createBaseMsgChannelOpenConfirmResponse();
     return message;
@@ -1390,13 +1335,6 @@ export const MsgChannelCloseInit = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelCloseInit): JsonSafe<MsgChannelCloseInit> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelCloseInit>): MsgChannelCloseInit {
     const message = createBaseMsgChannelCloseInit();
     message.portId = object.portId ?? "";
@@ -1476,10 +1414,6 @@ export const MsgChannelCloseInitResponse = {
   },
   fromJSON(_: any): MsgChannelCloseInitResponse {
     const obj = createBaseMsgChannelCloseInitResponse();
-    return obj;
-  },
-  toJSON(_: MsgChannelCloseInitResponse): JsonSafe<MsgChannelCloseInitResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgChannelCloseInitResponse>): MsgChannelCloseInitResponse {
@@ -1582,15 +1516,6 @@ export const MsgChannelCloseConfirm = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgChannelCloseConfirm): JsonSafe<MsgChannelCloseConfirm> {
-    const obj: any = {};
-    message.portId !== undefined && (obj.portId = message.portId);
-    message.channelId !== undefined && (obj.channelId = message.channelId);
-    message.proofInit !== undefined && (obj.proofInit = base64FromBytes(message.proofInit !== undefined ? message.proofInit : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgChannelCloseConfirm>): MsgChannelCloseConfirm {
     const message = createBaseMsgChannelCloseConfirm();
     message.portId = object.portId ?? "";
@@ -1688,10 +1613,6 @@ export const MsgChannelCloseConfirmResponse = {
     const obj = createBaseMsgChannelCloseConfirmResponse();
     return obj;
   },
-  toJSON(_: MsgChannelCloseConfirmResponse): JsonSafe<MsgChannelCloseConfirmResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgChannelCloseConfirmResponse>): MsgChannelCloseConfirmResponse {
     const message = createBaseMsgChannelCloseConfirmResponse();
     return message;
@@ -1784,14 +1705,6 @@ export const MsgRecvPacket = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgRecvPacket): JsonSafe<MsgRecvPacket> {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
-    message.proofCommitment !== undefined && (obj.proofCommitment = base64FromBytes(message.proofCommitment !== undefined ? message.proofCommitment : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgRecvPacket>): MsgRecvPacket {
     const message = createBaseMsgRecvPacket();
     if (object.packet !== undefined && object.packet !== null) {
@@ -1882,10 +1795,6 @@ export const MsgRecvPacketResponse = {
   },
   fromJSON(_: any): MsgRecvPacketResponse {
     const obj = createBaseMsgRecvPacketResponse();
-    return obj;
-  },
-  toJSON(_: MsgRecvPacketResponse): JsonSafe<MsgRecvPacketResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgRecvPacketResponse>): MsgRecvPacketResponse {
@@ -1988,15 +1897,6 @@ export const MsgTimeout = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgTimeout): JsonSafe<MsgTimeout> {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || BigInt(0)).toString());
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgTimeout>): MsgTimeout {
     const message = createBaseMsgTimeout();
     if (object.packet !== undefined && object.packet !== null) {
@@ -2096,10 +1996,6 @@ export const MsgTimeoutResponse = {
   },
   fromJSON(_: any): MsgTimeoutResponse {
     const obj = createBaseMsgTimeoutResponse();
-    return obj;
-  },
-  toJSON(_: MsgTimeoutResponse): JsonSafe<MsgTimeoutResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgTimeoutResponse>): MsgTimeoutResponse {
@@ -2210,16 +2106,6 @@ export const MsgTimeoutOnClose = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgTimeoutOnClose): JsonSafe<MsgTimeoutOnClose> {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
-    message.proofUnreceived !== undefined && (obj.proofUnreceived = base64FromBytes(message.proofUnreceived !== undefined ? message.proofUnreceived : new Uint8Array()));
-    message.proofClose !== undefined && (obj.proofClose = base64FromBytes(message.proofClose !== undefined ? message.proofClose : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.nextSequenceRecv !== undefined && (obj.nextSequenceRecv = (message.nextSequenceRecv || BigInt(0)).toString());
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgTimeoutOnClose>): MsgTimeoutOnClose {
     const message = createBaseMsgTimeoutOnClose();
     if (object.packet !== undefined && object.packet !== null) {
@@ -2328,10 +2214,6 @@ export const MsgTimeoutOnCloseResponse = {
     const obj = createBaseMsgTimeoutOnCloseResponse();
     return obj;
   },
-  toJSON(_: MsgTimeoutOnCloseResponse): JsonSafe<MsgTimeoutOnCloseResponse> {
-    const obj: any = {};
-    return obj;
-  },
   fromPartial(_: DeepPartial<MsgTimeoutOnCloseResponse>): MsgTimeoutOnCloseResponse {
     const message = createBaseMsgTimeoutOnCloseResponse();
     return message;
@@ -2432,15 +2314,6 @@ export const MsgAcknowledgement = {
     if (isSet(object.signer)) obj.signer = String(object.signer);
     return obj;
   },
-  toJSON(message: MsgAcknowledgement): JsonSafe<MsgAcknowledgement> {
-    const obj: any = {};
-    message.packet !== undefined && (obj.packet = message.packet ? Packet.toJSON(message.packet) : undefined);
-    message.acknowledgement !== undefined && (obj.acknowledgement = base64FromBytes(message.acknowledgement !== undefined ? message.acknowledgement : new Uint8Array()));
-    message.proofAcked !== undefined && (obj.proofAcked = base64FromBytes(message.proofAcked !== undefined ? message.proofAcked : new Uint8Array()));
-    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
-    message.signer !== undefined && (obj.signer = message.signer);
-    return obj;
-  },
   fromPartial(object: DeepPartial<MsgAcknowledgement>): MsgAcknowledgement {
     const message = createBaseMsgAcknowledgement();
     if (object.packet !== undefined && object.packet !== null) {
@@ -2538,10 +2411,6 @@ export const MsgAcknowledgementResponse = {
   },
   fromJSON(_: any): MsgAcknowledgementResponse {
     const obj = createBaseMsgAcknowledgementResponse();
-    return obj;
-  },
-  toJSON(_: MsgAcknowledgementResponse): JsonSafe<MsgAcknowledgementResponse> {
-    const obj: any = {};
     return obj;
   },
   fromPartial(_: DeepPartial<MsgAcknowledgementResponse>): MsgAcknowledgementResponse {

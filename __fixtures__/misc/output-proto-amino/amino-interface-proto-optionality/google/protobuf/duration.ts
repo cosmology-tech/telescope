@@ -1,5 +1,6 @@
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { isSet, DeepPartial } from "../../helpers";
+import { JsonSafe } from "../../json-safe";
 import { GlobalDecoderRegistry } from "../../registry";
 export const protobufPackage = "google.protobuf";
 /**
@@ -264,7 +265,7 @@ export const Duration = {
     if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
     return obj;
   },
-  toJSON(message: Duration): unknown {
+  toJSON(message: Duration): JsonSafe<Duration> {
     const obj: any = {};
     message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));

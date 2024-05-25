@@ -1,6 +1,7 @@
 import { ValidatorPreference, ValidatorPreferenceSDKType } from "./state";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial } from "../../../helpers";
+import { JsonSafe } from "../../../json-safe";
 export const protobufPackage = "osmosis.valsetpref.v1beta1";
 /** Request type for UserValidatorPreferences. */
 export interface UserValidatorPreferencesRequest {
@@ -62,7 +63,7 @@ export const UserValidatorPreferencesRequest = {
       address: isSet(object.address) ? String(object.address) : ""
     };
   },
-  toJSON(message: UserValidatorPreferencesRequest): unknown {
+  toJSON(message: UserValidatorPreferencesRequest): JsonSafe<UserValidatorPreferencesRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     return obj;
@@ -156,7 +157,7 @@ export const UserValidatorPreferencesResponse = {
       preferences: Array.isArray(object?.preferences) ? object.preferences.map((e: any) => ValidatorPreference.fromJSON(e)) : []
     };
   },
-  toJSON(message: UserValidatorPreferencesResponse): unknown {
+  toJSON(message: UserValidatorPreferencesResponse): JsonSafe<UserValidatorPreferencesResponse> {
     const obj: any = {};
     if (message.preferences) {
       obj.preferences = message.preferences.map(e => e ? ValidatorPreference.toJSON(e) : undefined);

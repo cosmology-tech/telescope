@@ -5,6 +5,7 @@ import { Timestamp } from "../../google/protobuf/timestamp";
 import { Coin } from "../../cosmos/base/v1beta1/coin";
 import { Long, isSet, fromJsonTimestamp, fromTimestamp, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.lockup";
 /**
  * LockQueryType defines the type of the lock query that can
@@ -190,7 +191,7 @@ export const PeriodLock = {
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: PeriodLock): unknown {
+  toJSON(message: PeriodLock): JsonSafe<PeriodLock> {
     const obj: any = {};
     message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
     message.owner !== undefined && (obj.owner = message.owner);
@@ -271,7 +272,7 @@ export const QueryCondition = {
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined
     };
   },
-  toJSON(message: QueryCondition): unknown {
+  toJSON(message: QueryCondition): JsonSafe<QueryCondition> {
     const obj: any = {};
     message.lockQueryType !== undefined && (obj.lockQueryType = lockQueryTypeToJSON(message.lockQueryType));
     message.denom !== undefined && (obj.denom = message.denom);
@@ -346,7 +347,7 @@ export const SyntheticLock = {
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined
     };
   },
-  toJSON(message: SyntheticLock): unknown {
+  toJSON(message: SyntheticLock): JsonSafe<SyntheticLock> {
     const obj: any = {};
     message.underlyingLockId !== undefined && (obj.underlyingLockId = (message.underlyingLockId || Long.UZERO).toString());
     message.synthDenom !== undefined && (obj.synthDenom = message.synthDenom);

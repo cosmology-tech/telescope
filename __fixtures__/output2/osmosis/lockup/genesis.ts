@@ -3,6 +3,7 @@
 import { PeriodLock, SyntheticLock } from "./lock";
 import { Long, isSet, DeepPartial } from "../../helpers";
 import * as _m0 from "protobufjs/minimal";
+import { JsonSafe } from "../../json-safe";
 export const protobufPackage = "osmosis.lockup";
 /** GenesisState defines the lockup module's genesis state. */
 export interface GenesisState {
@@ -60,7 +61,7 @@ export const GenesisState = {
       syntheticLocks: Array.isArray(object?.syntheticLocks) ? object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e)) : []
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.lastLockId !== undefined && (obj.lastLockId = (message.lastLockId || Long.UZERO).toString());
     if (message.locks) {
