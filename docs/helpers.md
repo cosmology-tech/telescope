@@ -2,7 +2,7 @@
 
 # Common helpers or utils
 
-when generating code, sometimes we need to import helpers, utils or packages. In that case, using addUtil method in context when building ast is recommend, since we only add utils as needed without worrying repetitive import:
+when generating code, sometimes we need to import helpers, utils or packages. In that case, using addUtil method in context when building ast is recommended, since we only add utils as needed without worrying about repetitive import:
 
 ```
 context.addUtil('useQuery');
@@ -46,7 +46,7 @@ export const UTILS = {
 If we have to import from the helper files created by ourselves, we can continue reading sections below.
 
 ## 1 create helper contents
-In this example, content of a common helper will be created and exported under folder apackages/telescope/src/helpers
+In this example, content of a common helper will be created and exported under folder packages/telescope/src/helpers
 ```js
 export const useEndpoint = defineStore('endpoint', {
 

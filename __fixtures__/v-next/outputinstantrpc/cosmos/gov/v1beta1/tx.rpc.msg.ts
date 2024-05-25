@@ -20,7 +20,7 @@ export interface Msg {
   deposit(signerAddress: string, message: MsgDeposit, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
 }
 /** Msg defines the bank Msg service. */
-export interface CosmosAuthAccount {
+export interface CosmosAuthTxAccount {
   /** SubmitProposal defines a method to create new proposal given a content. */
   submitProposal(signerAddress: string, message: MsgSubmitProposal, fee: number | StdFee | "auto", memo?: string): Promise<DeliverTxResponse>;
   /** Vote defines a method to add a vote on a specific proposal. */

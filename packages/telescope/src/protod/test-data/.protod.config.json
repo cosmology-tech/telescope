@@ -1,0 +1,42 @@
+{
+      "repos": [
+        { "owner": "cosmos", "repo": "cosmos-sdk", "branch": "release/v0.50.x" },
+        { "owner": "cosmos", "repo": "ibc-go" },
+        { "owner": "injectivelabs", "repo": "sdk-go" }
+      ],
+      "protoDirMapping": {
+        "gogo/protobuf/master": ".",
+        "googleapis/googleapis/master": ".",
+        "protocolbuffers/protobuf/main": "src"
+      },
+      "outDir": "../../__fixtures__/misc/proto-download/testproto",
+      "ssh": true,
+      "tempRepoDir": "git-modules",
+      "targets": [
+        "cosmos/auth/v1beta1/auth.proto",
+        "cosmos/vesting/v1beta1/vesting.proto",
+        "cosmos/crypto/secp256k1/keys.proto",
+        "cosmos/crypto/secp256r1/keys.proto",
+        "cosmos/crypto/ed25519/keys.proto",
+        "cosmos/authz/v1beta1/tx.proto",
+        "cosmos/bank/v1beta1/tx.proto",
+        "cosmos/distribution/v1beta1/tx.proto",
+        "cosmos/feegrant/v1beta1/tx.proto",
+        "cosmos/gov/v1beta1/tx.proto",
+        "cosmos/gov/v1/tx.proto",
+        "cosmos/group/v1/tx.proto",
+        "cosmos/staking/v1beta1/tx.proto",
+        "cosmos/vesting/v1beta1/tx.proto",
+        "cosmos/auth/v1beta1/query.proto",
+        "cosmos/bank/v1beta1/query.proto",
+        "cosmos/staking/v1beta1/query.proto",
+        "cosmos/gov/v1beta1/query.proto",
+        "cosmwasm/wasm/v1/tx.proto",
+        "cosmwasm/wasm/v1/query.proto",
+        "ibc/applications/transfer/v1/tx.proto",
+        "ibc/core/channel/v1/tx.proto",
+        "ibc/core/client/v1/tx.proto",
+        "ibc/core/connection/v1/tx.proto",
+        "injective/types/v1beta1/account.proto"
+      ]
+}

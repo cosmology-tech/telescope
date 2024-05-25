@@ -173,7 +173,8 @@ interface TelescopeOpts {
         }[];
         instantOps?: {
             className: string;
-            include: {
+            include?: {
+                serviceTypes?: ("Query" | "Tx" | string)[];
                 patterns?: string[];
             };
             nameMapping?: {

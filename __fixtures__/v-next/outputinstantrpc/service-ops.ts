@@ -12,8 +12,8 @@ export class OsmosisClaim {
     this.claimableForAction = _OsmosisClaimV1beta1Queryrpc.createClientImpl(rpc).claimableForAction;
   }
 }
-export interface CosmosAuthAccount extends _CosmosAuthV1beta1Queryrpc.CosmosAuthAccount, _CosmosGovV1beta1Queryrpc.CosmosAuthAccount, _CosmosGovV1beta1Txrpc.CosmosAuthAccount {}
-export class CosmosAuthAccount {
+export interface CosmosAuthQueryAccount extends _CosmosAuthV1beta1Queryrpc.CosmosAuthQueryAccount, _CosmosGovV1beta1Queryrpc.CosmosAuthQueryAccount {}
+export class CosmosAuthQueryAccount {
   rpc: TxRpc;
   init(rpc: TxRpc) {
     this.rpc = rpc;
@@ -28,6 +28,13 @@ export class CosmosAuthAccount {
     this.deposit = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposit;
     this.deposits = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).deposits;
     this.tallyResult = _CosmosGovV1beta1Queryrpc.createClientImpl(rpc).tallyResult;
+  }
+}
+export interface CosmosAuthTxAccount extends _CosmosGovV1beta1Txrpc.CosmosAuthTxAccount {}
+export class CosmosAuthTxAccount {
+  rpc: TxRpc;
+  init(rpc: TxRpc) {
+    this.rpc = rpc;
     this.submitProposal = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).submitProposal;
     this.txVote = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).vote;
     this.voteWeighted = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).voteWeighted;

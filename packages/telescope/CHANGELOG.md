@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.9...@cosmology/telescope@1.5.10) (2024-05-13)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.5.9](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.8...@cosmology/telescope@1.5.9) (2024-05-09)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.5.8](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.7...@cosmology/telescope@1.5.8) (2024-05-08)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.5.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.6...@cosmology/telescope@1.5.7) (2024-05-08)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.5.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.5...@cosmology/telescope@1.5.6) (2024-05-08)
+
+**Note:** Version bump only for package @cosmology/telescope
+
+## [1.5.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.4...@cosmology/telescope@1.5.5) (2024-05-08)
+
+**Note:** Version bump only for package @cosmology/telescope
+
 ## [1.5.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.3...@cosmology/telescope@1.5.4) (2024-04-07)
 
 **Note:** Version bump only for package @cosmology/telescope

@@ -9,3 +9,4 @@ packages/**/module
 launch.json
 .vscode/settings.json
 .idea/
+__fixtures__/misc/proto-download/**
