@@ -66,7 +66,7 @@ exports[`MsgExecuteContract interface 2`] = `
     if (Array.isArray(object?.funds)) obj.funds = object.funds.map((e: any) => Coin.fromJSON(e));
     return obj;
   },
-  toJSON(message: MsgExecuteContract): unknown {
+  toJSON(message: MsgExecuteContract): JsonSafe<MsgExecuteContract> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.contract !== undefined && (obj.contract = message.contract);

@@ -45,7 +45,7 @@ exports[`cosmos/staking/v1beta1 Delegation 1`] = `
       shares: isSet(object.shares) ? String(object.shares) : ""
     };
   },
-  toJSON(message: Delegation): unknown {
+  toJSON(message: Delegation): JsonSafe<Delegation> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -162,7 +162,7 @@ exports[`cosmos/staking/v1beta1 Delegation useCosmosSDKDec 1`] = `
       shares: isSet(object.shares) ? String(object.shares) : ""
     };
   },
-  toJSON(message: Delegation): unknown {
+  toJSON(message: Delegation): JsonSafe<Delegation> {
     const obj: any = {};
     message.delegatorAddress !== undefined && (obj.delegatorAddress = message.delegatorAddress);
     message.validatorAddress !== undefined && (obj.validatorAddress = message.validatorAddress);
@@ -279,7 +279,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptor 1`] = `
       sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
     };
   },
-  toJSON(message: SignatureDescriptor): unknown {
+  toJSON(message: SignatureDescriptor): JsonSafe<SignatureDescriptor> {
     const obj: any = {};
     message.publicKey !== undefined && (obj.publicKey = message.publicKey ? Any.toJSON(message.publicKey) : undefined);
     message.data !== undefined && (obj.data = message.data ? SignatureDescriptor_Data.toJSON(message.data) : undefined);
@@ -382,7 +382,7 @@ exports[`cosmos/tx/signing/v1beta1/signing SignatureDescriptors 1`] = `
       signatures: Array.isArray(object?.signatures) ? object.signatures.map((e: any) => SignatureDescriptor.fromJSON(e)) : []
     };
   },
-  toJSON(message: SignatureDescriptors): unknown {
+  toJSON(message: SignatureDescriptors): JsonSafe<SignatureDescriptors> {
     const obj: any = {};
     if (message.signatures) {
       obj.signatures = message.signatures.map(e => e ? SignatureDescriptor.toJSON(e) : undefined);
@@ -500,7 +500,7 @@ exports[`cosmos/tx/v1beta1/tx AuxSignerData 1`] = `
       sig: isSet(object.sig) ? bytesFromBase64(object.sig) : new Uint8Array()
     };
   },
-  toJSON(message: AuxSignerData): unknown {
+  toJSON(message: AuxSignerData): JsonSafe<AuxSignerData> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.signDoc !== undefined && (obj.signDoc = message.signDoc ? SignDocDirectAux.toJSON(message.signDoc) : undefined);
@@ -618,7 +618,7 @@ exports[`cosmos/tx/v1beta1/tx ModeInfo_Multi 1`] = `
       multi: isSet(object.multi) ? ModeInfo_Multi.fromJSON(object.multi) : undefined
     };
   },
-  toJSON(message: ModeInfo_Multi): unknown {
+  toJSON(message: ModeInfo_Multi): JsonSafe<ModeInfo_Multi> {
     const obj: any = {};
     message.single !== undefined && (obj.single = message.single ? ModeInfo_Single.toJSON(message.single) : undefined);
     message.multi !== undefined && (obj.multi = message.multi ? ModeInfo_Multi.toJSON(message.multi) : undefined);
@@ -736,7 +736,7 @@ exports[`cosmwasm/wasm/v1/proposal 1`] = `
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: PinCodesProposal): unknown {
+  toJSON(message: PinCodesProposal): JsonSafe<PinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -872,7 +872,7 @@ exports[`cosmwasm/wasm/v1/proposal 2`] = `
       codeIds: Array.isArray(object?.codeIds) ? object.codeIds.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: UnpinCodesProposal): unknown {
+  toJSON(message: UnpinCodesProposal): JsonSafe<UnpinCodesProposal> {
     const obj: any = {};
     message.title !== undefined && (obj.title = message.title);
     message.description !== undefined && (obj.description = message.description);
@@ -992,7 +992,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
       queryData: isSet(object.queryData) ? bytesFromBase64(object.queryData) : new Uint8Array()
     };
   },
-  toJSON(message: QueryRawContractStateRequest): unknown {
+  toJSON(message: QueryRawContractStateRequest): JsonSafe<QueryRawContractStateRequest> {
     const obj: any = {};
     message.address !== undefined && (obj.address = message.address);
     message.queryData !== undefined && (obj.queryData = base64FromBytes(message.queryData !== undefined ? message.queryData : new Uint8Array()));
@@ -1117,7 +1117,7 @@ exports[`evmos/fees/v1/tx 1`] = `
       nonces: Array.isArray(object?.nonces) ? object.nonces.map((e: any) => BigInt(e.toString())) : []
     };
   },
-  toJSON(message: MsgRegisterDevFeeInfo): unknown {
+  toJSON(message: MsgRegisterDevFeeInfo): JsonSafe<MsgRegisterDevFeeInfo> {
     const obj: any = {};
     message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
     message.deployerAddress !== undefined && (obj.deployerAddress = message.deployerAddress);
@@ -1253,7 +1253,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service ParseRequest 1
       disableMacros: isSet(object.disableMacros) ? Boolean(object.disableMacros) : false
     };
   },
-  toJSON(message: ParseRequest): unknown {
+  toJSON(message: ParseRequest): JsonSafe<ParseRequest> {
     const obj: any = {};
     message.celSource !== undefined && (obj.celSource = message.celSource);
     message.syntaxVersion !== undefined && (obj.syntaxVersion = message.syntaxVersion);
@@ -1393,7 +1393,7 @@ exports[`google/api/expr/v1alpha1/checked Decl_FunctionDecl_Overload MapType 1`]
       doc: isSet(object.doc) ? String(object.doc) : ""
     };
   },
-  toJSON(message: Decl_FunctionDecl_Overload): unknown {
+  toJSON(message: Decl_FunctionDecl_Overload): JsonSafe<Decl_FunctionDecl_Overload> {
     const obj: any = {};
     message.overloadId !== undefined && (obj.overloadId = message.overloadId);
     if (message.params) {
@@ -1618,7 +1618,7 @@ exports[`google/api/expr/v1alpha1/checked Type 1`] = `
       abstractType: isSet(object.abstractType) ? Type_AbstractType.fromJSON(object.abstractType) : undefined
     };
   },
-  toJSON(message: Type): unknown {
+  toJSON(message: Type): JsonSafe<Type> {
     const obj: any = {};
     message.dyn !== undefined && (obj.dyn = message.dyn ? Empty.toJSON(message.dyn) : undefined);
     message.null !== undefined && (obj.null = nullValueToJSON(message.null));
@@ -1802,7 +1802,7 @@ exports[`google/api/expr/v1alpha1/checked nested MapType 1`] = `
       valueType: isSet(object.valueType) ? Type.fromJSON(object.valueType) : undefined
     };
   },
-  toJSON(message: Type_MapType): unknown {
+  toJSON(message: Type_MapType): JsonSafe<Type_MapType> {
     const obj: any = {};
     message.keyType !== undefined && (obj.keyType = message.keyType ? Type.toJSON(message.keyType) : undefined);
     message.valueType !== undefined && (obj.valueType = message.valueType ? Type.toJSON(message.valueType) : undefined);
@@ -1941,7 +1941,7 @@ exports[`google/api/expr/v1alpha1/checked typeHash (Long) CheckedExpr 1`] = `
       expr: isSet(object.expr) ? Expr.fromJSON(object.expr) : undefined
     };
   },
-  toJSON(message: CheckedExpr): unknown {
+  toJSON(message: CheckedExpr): JsonSafe<CheckedExpr> {
     const obj: any = {};
     obj.referenceMap = {};
     if (message.referenceMap) {
@@ -2174,7 +2174,7 @@ exports[`google/api/expr/v1alpha1/syntax Constant 1`] = `
       timestampValue: isSet(object.timestampValue) ? fromJsonTimestamp(object.timestampValue) : undefined
     };
   },
-  toJSON(message: Constant): unknown {
+  toJSON(message: Constant): JsonSafe<Constant> {
     const obj: any = {};
     message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
     message.boolValue !== undefined && (obj.boolValue = message.boolValue);
@@ -2330,7 +2330,7 @@ exports[`google/api/expr/v1alpha1/value Entry 1`] = `
       value: isSet(object.value) ? Value.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: Entry): unknown {
+  toJSON(message: Entry): JsonSafe<Entry> {
     const obj: any = {};
     message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
     message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
@@ -2421,7 +2421,7 @@ exports[`google/api/expr/v1alpha1/value MapValue 1`] = `
       entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromJSON(e)) : []
     };
   },
-  toJSON(message: MapValue): unknown {
+  toJSON(message: MapValue): JsonSafe<MapValue> {
     const obj: any = {};
     if (message.entries) {
       obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
@@ -2548,7 +2548,7 @@ exports[`google/api/expr/v1beta1/source 1`] = `
       }, {}) : {}
     };
   },
-  toJSON(message: SourceInfo): unknown {
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
     const obj: any = {};
     message.location !== undefined && (obj.location = message.location);
     if (message.lineOffsets) {
@@ -2705,7 +2705,7 @@ exports[`google/api/quota keyType 1`] = `
       }, {}) : {}
     };
   },
-  toJSON(message: MetricRule): unknown {
+  toJSON(message: MetricRule): JsonSafe<MetricRule> {
     const obj: any = {};
     message.selector !== undefined && (obj.selector = message.selector);
     obj.metricCosts = {};
@@ -2916,7 +2916,7 @@ exports[`google/api/servicecontrol/v1/log_entry LogEntry 1`] = `
       sourceLocation: isSet(object.sourceLocation) ? LogEntrySourceLocation.fromJSON(object.sourceLocation) : undefined
     };
   },
-  toJSON(message: LogEntry): unknown {
+  toJSON(message: LogEntry): JsonSafe<LogEntry> {
     const obj: any = {};
     message.name !== undefined && (obj.name = message.name);
     message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
@@ -3131,7 +3131,7 @@ exports[`google/rpc/error_details name collisions 2`] = `
       violations: Array.isArray(object?.violations) ? object.violations.map((e: any) => PreconditionFailure_Violation.fromJSON(e)) : []
     };
   },
-  toJSON(message: PreconditionFailure): unknown {
+  toJSON(message: PreconditionFailure): JsonSafe<PreconditionFailure> {
     const obj: any = {};
     if (message.violations) {
       obj.violations = message.violations.map(e => e ? PreconditionFailure_Violation.toJSON(e) : undefined);
@@ -3250,7 +3250,7 @@ exports[`ibc/core/port/v1/query 1`] = `
       proposedVersion: isSet(object.proposedVersion) ? String(object.proposedVersion) : ""
     };
   },
-  toJSON(message: QueryAppVersionRequest): unknown {
+  toJSON(message: QueryAppVersionRequest): JsonSafe<QueryAppVersionRequest> {
     const obj: any = {};
     message.portId !== undefined && (obj.portId = message.portId);
     message.connectionId !== undefined && (obj.connectionId = message.connectionId);
@@ -3474,7 +3474,7 @@ exports[`ibc/core/types/v1/genesis name collisions 2`] = `
       channelGenesis: isSet(object.channelGenesis) ? GenesisState3.fromJSON(object.channelGenesis) : undefined
     };
   },
-  toJSON(message: GenesisState): unknown {
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
     const obj: any = {};
     message.clientGenesis !== undefined && (obj.clientGenesis = message.clientGenesis ? GenesisState1.toJSON(message.clientGenesis) : undefined);
     message.connectionGenesis !== undefined && (obj.connectionGenesis = message.connectionGenesis ? GenesisState2.toJSON(message.connectionGenesis) : undefined);
@@ -3769,7 +3769,7 @@ exports[`osmosis/gamm/v1beta1/query 1`] = `
       pagination: isSet(object.pagination) ? PageResponse.fromJSON(object.pagination) : undefined
     };
   },
-  toJSON(message: QueryPoolsResponse): unknown {
+  toJSON(message: QueryPoolsResponse): JsonSafe<QueryPoolsResponse> {
     const obj: any = {};
     if (message.pools) {
       obj.pools = message.pools.map(e => e ? Any.toJSON(e) : undefined);
@@ -3895,7 +3895,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgJoinPool 1`] = `
       tokenInMaxs: Array.isArray(object?.tokenInMaxs) ? object.tokenInMaxs.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgJoinPool): unknown {
+  toJSON(message: MsgJoinPool): JsonSafe<MsgJoinPool> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
@@ -4037,7 +4037,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountIn 1`] = `
       tokenOutMinAmount: isSet(object.tokenOutMinAmount) ? String(object.tokenOutMinAmount) : ""
     };
   },
-  toJSON(message: MsgSwapExactAmountIn): unknown {
+  toJSON(message: MsgSwapExactAmountIn): JsonSafe<MsgSwapExactAmountIn> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {
@@ -4179,7 +4179,7 @@ exports[`osmosis/gamm/v1beta1/tx MsgSwapExactAmountOut 1`] = `
       tokenOut: isSet(object.tokenOut) ? Coin.fromJSON(object.tokenOut) : undefined
     };
   },
-  toJSON(message: MsgSwapExactAmountOut): unknown {
+  toJSON(message: MsgSwapExactAmountOut): JsonSafe<MsgSwapExactAmountOut> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     if (message.routes) {

@@ -125,7 +125,7 @@ exports[`misc/eval_request date 1`] = `
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
-  toJSON(message: EvalRequest): unknown {
+  toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
     const obj: any = {};
     obj.bindings = {};
     if (message.bindings) {
@@ -446,7 +446,7 @@ exports[`misc/eval_request timestamp 1`] = `
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
     };
   },
-  toJSON(message: EvalRequest): unknown {
+  toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
     const obj: any = {};
     obj.bindings = {};
     if (message.bindings) {

@@ -53,7 +53,7 @@ exports[`osmosis/lockup/tx duration 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgLockTokens): unknown {
+  toJSON(message: MsgLockTokens): JsonSafe<MsgLockTokens> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
@@ -244,7 +244,7 @@ exports[`osmosis/lockup/tx string 2`] = `
       coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromJSON(e)) : []
     };
   },
-  toJSON(message: MsgLockTokens): unknown {
+  toJSON(message: MsgLockTokens): JsonSafe<MsgLockTokens> {
     const obj: any = {};
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration);

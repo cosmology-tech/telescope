@@ -38,7 +38,7 @@ exports[`Duration 1`] = `
       nanos: isSet(object.nanos) ? Number(object.nanos) : 0
     };
   },
-  toJSON(message: Duration): unknown {
+  toJSON(message: Duration): JsonSafe<Duration> {
     const obj: any = {};
     message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
     message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
@@ -128,7 +128,7 @@ exports[`Height 1`] = `
       revisionHeight: isSet(object.revisionHeight) ? BigInt(object.revisionHeight.toString()) : BigInt(0)
     };
   },
-  toJSON(message: Height): unknown {
+  toJSON(message: Height): JsonSafe<Height> {
     const obj: any = {};
     message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
     message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
@@ -261,7 +261,7 @@ exports[`MsgCreateValidator 1`] = `
       value: isSet(object.value) ? Coin.fromJSON(object.value) : undefined
     };
   },
-  toJSON(message: MsgCreateValidator): unknown {
+  toJSON(message: MsgCreateValidator): JsonSafe<MsgCreateValidator> {
     const obj: any = {};
     message.description !== undefined && (obj.description = message.description ? Description.toJSON(message.description) : undefined);
     message.commission !== undefined && (obj.commission = message.commission ? CommissionRates.toJSON(message.commission) : undefined);
@@ -410,7 +410,7 @@ exports[`MsgStoreCode 1`] = `
       instantiatePermission: isSet(object.instantiatePermission) ? AccessConfig.fromJSON(object.instantiatePermission) : undefined
     };
   },
-  toJSON(message: MsgStoreCode): unknown {
+  toJSON(message: MsgStoreCode): JsonSafe<MsgStoreCode> {
     const obj: any = {};
     message.sender !== undefined && (obj.sender = message.sender);
     message.wasmByteCode !== undefined && (obj.wasmByteCode = base64FromBytes(message.wasmByteCode !== undefined ? message.wasmByteCode : new Uint8Array()));
@@ -527,7 +527,7 @@ exports[`MsgSubmitProposal 1`] = `
       proposer: isSet(object.proposer) ? String(object.proposer) : ""
     };
   },
-  toJSON(message: MsgSubmitProposal): unknown {
+  toJSON(message: MsgSubmitProposal): JsonSafe<MsgSubmitProposal> {
     const obj: any = {};
     message.content !== undefined && (obj.content = message.content ? Any.toJSON(message.content) : undefined);
     if (message.initialDeposit) {
@@ -682,7 +682,7 @@ exports[`MsgTransfer 1`] = `
       timeoutTimestamp: isSet(object.timeoutTimestamp) ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0)
     };
   },
-  toJSON(message: MsgTransfer): unknown {
+  toJSON(message: MsgTransfer): JsonSafe<MsgTransfer> {
     const obj: any = {};
     message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
     message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
