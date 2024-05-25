@@ -5,7 +5,6 @@ export declare const getUrlTemplateString: (url: string) => {
     strs: any[];
     atEnd: boolean;
 };
-export declare const makeTemplateTag: (info: ProtoServiceMethodInfo) => t.TemplateLiteral;
-export declare const makeTemplateTagLegacy: (info: ProtoServiceMethodInfo) => t.TemplateLiteral;
+export declare function makeTemplateTag(info: ProtoServiceMethodInfo, noLeadingSlash?: boolean): t.TemplateLiteral;
 export declare const createLCDClient: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration;
 export declare const createAggregatedLCDClient: (context: GenericParseContext, services: ProtoService[], clientName: string) => t.ExportNamedDeclaration;

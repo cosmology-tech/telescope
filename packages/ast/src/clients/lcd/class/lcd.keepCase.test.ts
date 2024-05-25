@@ -1,16 +1,13 @@
 import {
-    getUrlTemplateString,
-    createAggregatedLCDClient,
-    createLCDClient,
-    makeTemplateTagLegacy
+    createLCDClient
 } from './lcd';
 import { traverse } from '@cosmology/proto-parser'
 import { getNestedProto } from '@cosmology/utils'
 import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
-import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
 import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';
 const store = getTestProtoStore();
+// @ts-ignore
 store.options.prototypes.parser.keepCase = true;
 store.traverseAll();
 

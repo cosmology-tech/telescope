@@ -1,15 +1,12 @@
 import {
     getUrlTemplateString,
-    createAggregatedLCDClient,
-    createLCDClient,
-    makeTemplateTagLegacy
+    createLCDClient
 } from './lcd';
 import { traverse } from '@cosmology/proto-parser'
 import { getNestedProto } from '@cosmology/utils'
 import { defaultTelescopeOptions, ProtoService } from '@cosmology/types';
-import generate from '@babel/generator';
 import { GenericParseContext } from '../../../encoding';
-import { getTestProtoStore, expectCode, printCode } from '../../../../test-utils';
+import { getTestProtoStore, expectCode } from '../../../../test-utils';
 const store = getTestProtoStore();
 store.traverseAll();
 
@@ -20,20 +17,6 @@ it('service info template', () => {
     expect(getUrlTemplateString('/osmosis/gamm/v1beta1/estimate/{swap_exact_amount_in}')).toMatchSnapshot();
     expect(getUrlTemplateString('/cosmos/feegrant/v1beta1/allowance/{granter}/{grantee}')).toMatchSnapshot();
 });
-
-it('template tags', () => {
-    const info = {
-        url: '/{cosmos}/feegrant/v1beta1/{allowance}/{granter}/{grantee}',
-        pathParams: [
-            'cosmos',
-            'allowance',
-            'granter',
-            'grantee'
-        ]
-    };
-    // @ts-ignore
-    expectCode(makeTemplateTagLegacy(info));
-})
 
 it('osmosis LCDClient', () => {
     const ref = store.findProto('osmosis/gamm/v1beta1/query.proto');
