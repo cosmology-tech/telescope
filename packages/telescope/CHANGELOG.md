@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.7.0...@cosmology/telescope@1.7.1) (2024-06-03)
+
+
+### Bug Fixes
+
+* **types:** handle Date in JsonSafe ([ae60a32](https://github.com/cosmology-tech/telescope/commit/ae60a32cc3dcd46bf84c3acfe49ba89ff328539c))
+
+
+
+
+
 # [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.6.0...@cosmology/telescope@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/telescope
