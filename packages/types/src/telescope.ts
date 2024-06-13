@@ -107,6 +107,10 @@ interface TelescopeOpts {
         };
     };
 
+    enums?: {
+        useCustomNames?: boolean;
+    },
+
     tsDisable?: {
         files?: string[];
         disableAll?: boolean;
@@ -357,6 +361,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             setDefaultEnumToUnrecognized: true,
             autoFixUndefinedEnumDefault: false,
         },
+    },
+
+    enums: {
+        useCustomNames: false
     },
 
     bundle: {

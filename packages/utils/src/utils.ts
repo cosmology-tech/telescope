@@ -104,13 +104,13 @@ export const getServiceImplement = (
   methodName: string,
   serviceImplement?: {
     [
-      key:
-        | "Msg"
-        | "Query"
-        | "Service"
-        | "ReflectionService"
-        | "ABCIApplication"
-        | string
+    key:
+      | "Msg"
+      | "Query"
+      | "Service"
+      | "ReflectionService"
+      | "ABCIApplication"
+      | string
     ]: {
       include?: {
         patterns?: string[];
@@ -172,7 +172,7 @@ export const restoreExtension = (path: string, ext?: string) => {
  * @returns duplicated import paths with the extension
  */
 export const duplicateImportPathsWithExt = (paths: ImportDeclaration[], ext?: string) => {
-  if(!ext){
+  if (!ext) {
     return paths;
   }
 
@@ -187,18 +187,24 @@ export const duplicateImportPathsWithExt = (paths: ImportDeclaration[], ext?: st
   })
 };
 
-export const getEnumValues = (proto: ProtoEnum) => {
+export interface EnumValue {
+  name: string;
+  comment?: string | null;
+  value: number;
+}
+
+export const getEnumValues = (proto: ProtoEnum): EnumValue[] => {
   const enums = Object.keys(proto.values).map(key => {
-      const e = {
-          name: key,
-          comment: null,
-          value: null
-      };
-      e.value = proto.values[key];
-      if (proto.comments[key]) {
-          e.comment = proto.comments[key];
-      }
-      return e;
+    const e = {
+      name: key,
+      comment: null,
+      value: null
+    };
+    e.value = proto.values[key];
+    if (proto.comments[key]) {
+      e.comment = proto.comments[key];
+    }
+    return e;
   });
   return enums;
 }

@@ -45,11 +45,12 @@ export declare const restoreExtension: (path: string, ext?: string) => string;
  * @returns duplicated import paths with the extension
  */
 export declare const duplicateImportPathsWithExt: (paths: ImportDeclaration[], ext?: string) => ImportDeclaration[];
-export declare const getEnumValues: (proto: ProtoEnum) => {
+export interface EnumValue {
     name: string;
-    comment: any;
-    value: any;
-}[];
+    comment?: string | null;
+    value: number;
+}
+export declare const getEnumValues: (proto: ProtoEnum) => EnumValue[];
 /**
  * get the type name by enum object while traversing the nested enum
  * @param field

@@ -24,6 +24,12 @@ export interface ProtoEnum {
     name?: string;
     package?: string; // added by parser
     values: { [key: string]: number };
+    valuesOptions?: {
+        [key: string]: {
+            '(gogoproto.enumvalue_customname)'?: string;
+            [key: string]: any;
+        };
+    };
     comment?: string;
     comments?: { [key: string]: string };
 };

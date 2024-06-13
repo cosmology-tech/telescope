@@ -87,6 +87,9 @@ interface TelescopeOpts {
             useTelescopeGeneratedType?: boolean;
         };
     };
+    enums?: {
+        useCustomNames?: boolean;
+    };
     tsDisable?: {
         files?: string[];
         disableAll?: boolean;
