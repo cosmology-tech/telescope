@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createProtoEnum 1`] = `
+"/** AccessType permission types */
+export enum NullValue {
+  /** ACCESS_TYPE_UNSPECIFIED - AccessTypeUnspecified placeholder for empty value */
+  ACCESS_TYPE_UNSPECIFIED = 0,
+  /** ACCESS_TYPE_NOBODY - AccessTypeNobody forbidden */
+  ACCESS_TYPE_NOBODY = 1,
+  /** ACCESS_TYPE_ONLY_ADDRESS - AccessTypeOnlyAddress restricted to an address */
+  ACCESS_TYPE_ONLY_ADDRESS = 2,
+  /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
+  ACCESS_TYPE_EVERYBODY = 3,
+  ACCESS_TYPE_SUPER_FUN = 4,
+  UNRECOGNIZED = -1,
+}"
+`;
+
+exports[`createProtoEnumFromJSON 1`] = `
+"export function accessTypeFromJSON(object: any): AccessType {
+  switch (object) {
+    case 0:
+    case "UnspecifiedAccess":
+      return AccessType.ACCESS_TYPE_UNSPECIFIED;
+    case 1:
+    case "NobodyAccess":
+      return AccessType.ACCESS_TYPE_NOBODY;
+    case 2:
+    case "OnlyAddressAccess":
+      return AccessType.ACCESS_TYPE_ONLY_ADDRESS;
+    case 3:
+    case "EverybodyAccess":
+      return AccessType.ACCESS_TYPE_EVERYBODY;
+    case 4:
+    case "SuperFunAccessType":
+      return AccessType.ACCESS_TYPE_SUPER_FUN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AccessType.UNRECOGNIZED;
+  }
+}"
+`;
+
+exports[`createProtoEnumToJSON 1`] = `
+"export function accessTypeToJSON(object: AccessType): string {
+  switch (object) {
+    case AccessType.ACCESS_TYPE_UNSPECIFIED:
+      return "UnspecifiedAccess";
+    case AccessType.ACCESS_TYPE_NOBODY:
+      return "NobodyAccess";
+    case AccessType.ACCESS_TYPE_ONLY_ADDRESS:
+      return "OnlyAddressAccess";
+    case AccessType.ACCESS_TYPE_EVERYBODY:
+      return "EverybodyAccess";
+    case AccessType.ACCESS_TYPE_SUPER_FUN:
+      return "SuperFunAccessType";
+    case AccessType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}"
+`;
