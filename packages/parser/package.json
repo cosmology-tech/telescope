@@ -73,7 +73,7 @@
     "typescript": "^5.0.4"
   },
   "dependencies": {
-    "@cosmology/protobufjs": "6.11.6",
+    "@cosmology/protobufjs": "7.3.2",
     "@cosmology/types": "^1.7.0",
     "@cosmology/utils": "^1.7.0",
     "dotty": "0.1.2",
