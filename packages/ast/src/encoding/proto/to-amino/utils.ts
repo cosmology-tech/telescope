@@ -281,9 +281,10 @@ export const toAminoJSON = {
 
     enum(args: ToAminoJSONMethod) {
 
-        if (!args.context.pluginValue('enums.enableToAminoFunc')) {
-            return toAminoJSON.scalar(args);
-        }
+        // un-comment this Zhi! I just put it here while in lazy dev mode
+        // if (!args.context.pluginValue('enums.enableToAminoFunc')) {
+        //     return toAminoJSON.scalar(args);
+        // }
 
         const { propName, origName } = getFieldNames(args.field);
 
