@@ -18,7 +18,7 @@ import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
 import { applyPatch } from 'fast-json-patch';
-import { convertProtoPathToNestedJSONPath, convertPackageNameToNestedJSONPath } from '@cosmology/utils';
+import { convertPackageNameToNestedJSONPath } from '@cosmology/utils';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -109,9 +109,6 @@ export class ProtoStore implements IProtoStore {
                     const ops = this.options.prototypes.patch[filename] ?? [];
                     try {
                         const result = applyPatch(protoJson, ops.map(op => {
-                            if (op.path.startsWith('~')) {
-                                op.path = convertProtoPathToNestedJSONPath(filename) + op.path.substring(1);
-                            }
                             if (op.path.startsWith('@')) {
                                 op.path = convertPackageNameToNestedJSONPath(protoJson.package) + op.path.substring(1);
                             }

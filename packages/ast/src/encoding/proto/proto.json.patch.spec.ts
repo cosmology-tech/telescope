@@ -5,7 +5,6 @@ import {
 } from "./enums";
 import {
     getNestedProto,
-    convertProtoPathToNestedJSONPath as convert,
     convertPackageNameToNestedJSONPath as convertPackage
 } from "@cosmology/utils";
 import { ProtoParseContext } from "@cosmology/ast";
@@ -14,15 +13,14 @@ import {
     getTestProtoStore
 } from "../../../test-utils";
 
-const p = convert('cosmwasm/wasm/v1/types.proto');
 const cp = convertPackage('cosmwasm.wasm.v1');
 const store = getTestProtoStore({
     prototypes: {
         patch: {
             'cosmwasm/wasm/v1/types.proto': [
-                { op: 'replace', path: '~/AccessType/valuesOptions/ACCESS_TYPE_NOBODY/(gogoproto.enumvalue_customname)', value: 'NobodyAccess' },
+                { op: 'replace', path: '@/AccessType/valuesOptions/ACCESS_TYPE_NOBODY/(gogoproto.enumvalue_customname)', value: 'NobodyAccess' },
                 { op: 'replace', path: '@/AccessType/valuesOptions/ACCESS_TYPE_UNSPECIFIED/(gogoproto.enumvalue_customname)', value: 'UnspecifiedAccess' },
-                { op: 'replace', path: p + '/AccessType/valuesOptions/ACCESS_TYPE_EVERYBODY/(gogoproto.enumvalue_customname)', value: 'EverybodyAccess' },
+                { op: 'replace', path: cp + '/AccessType/valuesOptions/ACCESS_TYPE_EVERYBODY/(gogoproto.enumvalue_customname)', value: 'EverybodyAccess' },
                 { op: 'replace', path: cp + '/AccessType/valuesOptions/ACCESS_TYPE_ONLY_ADDRESS/(gogoproto.enumvalue_customname)', value: 'OnlyAddressAccess' },
                 {
                     op: "add",
