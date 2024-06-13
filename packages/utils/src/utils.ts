@@ -226,3 +226,46 @@ function excludePackageFromTraversal(pkg: string, traversal: string[]) {
 
   return traversal.join('_').replace(connectedPkg, '');
 }
+
+
+/**
+ * Converts a protobuf package path into a deeply nested JSON path format suitable for
+ * hierarchical representations. This function is ideal for adapting proto package paths
+ * to structured configurations or mappings in JSON.
+ *
+ * @param protoPath The protobuf package path as a string, typically formatted as
+ *                  a directory-like structure such as "cosmwasm/wasm/v1/types.proto".
+ *                  The "types.proto" or any file name with '.proto' is excluded from
+ *                  the conversion.
+ *
+ *                  Example input:
+ *                  - "cosmwasm/wasm/v1/types.proto"
+ *
+ * @returns A string representing the deeply nested JSON path. The function constructs this
+ *          by starting with "/root/nested" and appending "/nested/{part}" for each segment
+ *          of the original path.
+ *          
+ *          Example output for "cosmwasm/wasm/v1/types.proto":
+ *          - "/root/nested/cosmwasm/nested/wasm/nested/v1"
+ *
+ * Usage:
+ * const jsonNestedPath = convertProtoPathToNestedJSONPath("cosmwasm/wasm/v1/types.proto");
+ * console.log(jsonNestedPath);  // Outputs: "/root/nested/cosmwasm/nested/wasm/nested/v1/nested"
+ */
+export function convertProtoPathToNestedJSONPath(protoPath: string): string {
+  // Split the path to isolate components, ignoring any '.proto' file specification
+  const parts = protoPath.split('/');
+  if (parts[parts.length - 1].includes('.proto')) {
+    parts.pop();
+  }
+
+  // Start with the base path
+  let jsonPath = '/root/nested';
+
+  // Append '/nested/{part}' for each path segment
+  parts.forEach(part => {
+    jsonPath += `/${part}/nested`;
+  });
+
+  return jsonPath;
+}

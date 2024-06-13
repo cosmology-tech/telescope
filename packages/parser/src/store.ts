@@ -17,6 +17,7 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
+import { applyOperation, applyPatch } from 'fast-json-patch';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -62,8 +63,8 @@ export class ProtoStore implements IProtoStore {
     _symbols: TraversalSymbol[] = [];
 
     _enumValueMapping: Record<string, {
-      syntax: string;
-      valueSet: Set<number>;
+        syntax: string;
+        valueSet: Set<number>;
     }> = {};
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
@@ -102,11 +103,16 @@ export class ProtoStore implements IProtoStore {
     processProtos(contents: { absolute: string, filename: string, content: string }[]) {
         return contents.map(({ absolute, filename, content }) => {
             try {
-                const proto = parseProto(content, this.options.prototypes.parser);
+                let protoJson = parseProto(content, this.options.prototypes.parser);
+                if (this.options.prototypes.patch && this.options.prototypes.patch[filename]) {
+                    const ops = this.options.prototypes.patch[filename];
+                    const result = applyPatch(protoJson, ops);
+                    protoJson = result.newDocument;
+                }
                 return {
                     absolute,
                     filename,
-                    proto,
+                    proto: protoJson,
                 };
             } catch (e) {
                 console.error(`${filename} has a proto syntax error`)
@@ -221,11 +227,11 @@ export class ProtoStore implements IProtoStore {
 
         this.protos = this.getProtos().map((ref: ProtoRef) => {
             const isHardExcluded = this.options?.prototypes?.excluded?.hardProtos && isRefExcluded(ref, {
-              protos: this.options?.prototypes?.excluded?.hardProtos
+                protos: this.options?.prototypes?.excluded?.hardProtos
             })
 
-            if(isHardExcluded){
-              return null;
+            if (isHardExcluded) {
+                return null;
             }
 
             if (!actualFiles.has(ref.filename)) {
@@ -339,7 +345,7 @@ export class ProtoStore implements IProtoStore {
         return packages;
     }
 
-    setEnumValues(pkg: string, name: string, protoSyntex:string, values: number[]) {
+    setEnumValues(pkg: string, name: string, protoSyntex: string, values: number[]) {
         this._enumValueMapping[`${pkg}.${name}`] = {
             syntax: protoSyntex,
             valueSet: new Set(values)
@@ -350,13 +356,13 @@ export class ProtoStore implements IProtoStore {
         const enumObj = this._enumValueMapping[`${pkg}.${name}`];
 
         if (enumObj?.syntax === 'proto2') {
-          if(enumObj?.valueSet?.has(ENUM_PROTO2_DEFAULT)){
-            return ENUM_PROTO2_DEFAULT;
-          }
+            if (enumObj?.valueSet?.has(ENUM_PROTO2_DEFAULT)) {
+                return ENUM_PROTO2_DEFAULT;
+            }
         } else {
-          if(enumObj?.valueSet?.has(ENUM_PROTO3_DEFAULT)){
-            return ENUM_PROTO3_DEFAULT;
-          }
+            if (enumObj?.valueSet?.has(ENUM_PROTO3_DEFAULT)) {
+                return ENUM_PROTO3_DEFAULT;
+            }
         }
 
         return Math.min(...Array.from(enumObj?.valueSet ?? []));

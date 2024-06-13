@@ -22,13 +22,13 @@ exports[`createProtoEnumFromJSON 1`] = `
     case "AccessTypeUnspecified":
       return AccessType.ACCESS_TYPE_UNSPECIFIED;
     case 1:
-    case "AccessTypeNobody":
+    case "NobodyAccess":
       return AccessType.ACCESS_TYPE_NOBODY;
     case 2:
     case "AccessTypeOnlyAddress":
       return AccessType.ACCESS_TYPE_ONLY_ADDRESS;
     case 3:
-    case "AccessTypeEverybody":
+    case "EverybodyAccess":
       return AccessType.ACCESS_TYPE_EVERYBODY;
     case -1:
     case "UNRECOGNIZED":
@@ -44,11 +44,11 @@ exports[`createProtoEnumToJSON 1`] = `
     case AccessType.ACCESS_TYPE_UNSPECIFIED:
       return "AccessTypeUnspecified";
     case AccessType.ACCESS_TYPE_NOBODY:
-      return "AccessTypeNobody";
+      return "NobodyAccess";
     case AccessType.ACCESS_TYPE_ONLY_ADDRESS:
       return "AccessTypeOnlyAddress";
     case AccessType.ACCESS_TYPE_EVERYBODY:
-      return "AccessTypeEverybody";
+      return "EverybodyAccess";
     case AccessType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
