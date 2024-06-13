@@ -93,6 +93,7 @@ interface TelescopeOpts {
     };
     enums?: {
         useCustomNames?: boolean;
+        enableToAminoFunc?: boolean;
     };
     tsDisable?: {
         files?: string[];

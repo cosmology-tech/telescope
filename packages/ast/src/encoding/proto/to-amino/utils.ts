@@ -14,107 +14,107 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
 
     valExpr = valExpr ?? t.memberExpression(t.identifier("message"), t.identifier(propName));
 
-      if (omitEmpty) {
-          valExpr = t.conditionalExpression(t.binaryExpression(
-              "===",
-              valExpr,
-              getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true)
-          ), t.identifier('undefined'), valExpr);
-      } else {
-          valExpr = t.logicalExpression(
-              "??",
-              valExpr,
-              getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true)
-          );
+    if (omitEmpty) {
+        valExpr = t.conditionalExpression(t.binaryExpression(
+            "===",
+            valExpr,
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true)
+        ), t.identifier('undefined'), valExpr);
+    } else {
+        valExpr = t.logicalExpression(
+            "??",
+            valExpr,
+            getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true)
+        );
     }
 
     return t.expressionStatement(
-      t.assignmentExpression(
-        "=",
-        t.memberExpression(t.identifier("obj"), t.identifier(origName)),
-        valExpr
-      )
+        t.assignmentExpression(
+            "=",
+            t.memberExpression(t.identifier("obj"), t.identifier(origName)),
+            valExpr
+        )
     );
-  };
+};
 
-  export const toAminoJSON = {
+export const toAminoJSON = {
 
-      scalar(args: ToAminoJSONMethod, valExpr?: t.Expression) {
+    scalar(args: ToAminoJSONMethod, valExpr?: t.Expression) {
         return setValue(args, valExpr)
-      },
+    },
 
-      string(args: ToAminoJSONMethod) {
+    string(args: ToAminoJSONMethod) {
         let valueExpr: t.Expression;
         const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
 
-        if(useCosmosSDKDec){
-          const isCosmosSDKDec =
-              (args.field.options?.['(gogoproto.customtype)'] ==
-                  'github.com/cosmos/cosmos-sdk/types.Dec') ||
-              (args.field.options?.['(gogoproto.customtype)'] ==
-                  'cosmossdk.io/math.LegacyDec');
+        if (useCosmosSDKDec) {
+            const isCosmosSDKDec =
+                (args.field.options?.['(gogoproto.customtype)'] ==
+                    'github.com/cosmos/cosmos-sdk/types.Dec') ||
+                (args.field.options?.['(gogoproto.customtype)'] ==
+                    'cosmossdk.io/math.LegacyDec');
 
-          if (isCosmosSDKDec) {
-              args.context.addUtil('padDecimal');
-              const { propName } = getFieldNames(args.field);
-              valueExpr = t.callExpression(
-                  t.identifier('padDecimal'),
-                  [
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      )
-                  ]
-              )
-          }
+            if (isCosmosSDKDec) {
+                args.context.addUtil('padDecimal');
+                const { propName } = getFieldNames(args.field);
+                valueExpr = t.callExpression(
+                    t.identifier('padDecimal'),
+                    [
+                        t.memberExpression(
+                            t.identifier('message'),
+                            t.identifier(propName)
+                        )
+                    ]
+                )
+            }
         }
 
         return setValue(args, valueExpr);
-      },
-      double(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
-      float(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
-      bool(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
+    },
+    double(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
+    float(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
+    bool(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
 
-      number(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
+    number(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
 
-      int32(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
+    int32(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
 
-      uint32(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
+    uint32(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
 
-      sint32(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
-      fixed32(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
-      sfixed32(args: ToAminoJSONMethod) {
-          return toAminoJSON.scalar(args);
-      },
+    sint32(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
+    fixed32(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
+    sfixed32(args: ToAminoJSONMethod) {
+        return toAminoJSON.scalar(args);
+    },
 
-      // obj.big = message.big ? message.big.toString() : "0";
-      // obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
-      long(args: ToAminoJSONMethod) {
+    // obj.big = message.big ? message.big.toString() : "0";
+    // obj.o_big = message.oBig !== BigInt(0) ? message.oBig.toString() : undefined;
+    long(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
 
         const omitEmpty = shouldOmitEmpty(args.context, args.field);
         const nullTest = omitEmpty
             ? TypeLong.getLongNotZero(propName, args.context)
             : t.memberExpression(
-                  t.identifier("message"),
-                  t.identifier(propName)
-              );
+                t.identifier("message"),
+                t.identifier(propName)
+            );
 
         return t.expressionStatement(
             t.assignmentExpression(
@@ -136,85 +136,85 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                 )
             )
         );
-      },
-      int64(args: ToAminoJSONMethod) {
-          return toAminoJSON.long(args);
-      },
-      uint64(args: ToAminoJSONMethod) {
-          return toAminoJSON.long(args);
-      },
-      sint64(args: ToAminoJSONMethod) {
-          return toAminoJSON.long(args);
-      },
-      fixed64(args: ToAminoJSONMethod) {
-          return toAminoJSON.long(args);
-      },
-      sfixed64(args: ToAminoJSONMethod) {
-          return toAminoJSON.long(args);
-      },
+    },
+    int64(args: ToAminoJSONMethod) {
+        return toAminoJSON.long(args);
+    },
+    uint64(args: ToAminoJSONMethod) {
+        return toAminoJSON.long(args);
+    },
+    sint64(args: ToAminoJSONMethod) {
+        return toAminoJSON.long(args);
+    },
+    fixed64(args: ToAminoJSONMethod) {
+        return toAminoJSON.long(args);
+    },
+    sfixed64(args: ToAminoJSONMethod) {
+        return toAminoJSON.long(args);
+    },
 
-      // obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
-      // obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
-      protoType(args: ToAminoJSONMethod) {
-          const { propName, origName } = getFieldNames(args.field);
-          const name = args.context.getTypeName(args.field);
+    // obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
+    // obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
+    protoType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        const name = args.context.getTypeName(args.field);
 
-          const omitEmpty = shouldOmitEmpty(args.context, args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = omitEmpty ?  t.identifier('undefined') : getDefaultTSTypeFromAminoTypeDefault(args.context, args.field);
+        let defaultValue: t.Expression = omitEmpty ? t.identifier('undefined') : getDefaultTSTypeFromAminoTypeDefault(args.context, args.field);
 
-          if (args.field.type === 'ibc.core.client.v1.Height') {
-              defaultValue = t.objectExpression([])
-          }
+        if (args.field.type === 'ibc.core.client.v1.Height') {
+            defaultValue = t.objectExpression([])
+        }
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      t.callExpression(
-                          t.memberExpression(
-                              t.identifier(name),
-                              t.identifier('toAmino')
-                          ),
-                          [
-                              t.memberExpression(
-                                  t.identifier('message'),
-                                  t.identifier(propName)
-                              ),
-                              ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
-                                  t.identifier('useInterfaces')
-                              ] : []),
-                          ]
-                      ),
-                      defaultValue
-                  )
-              )
-          );
-      },
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier(name),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                            ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                                t.identifier('useInterfaces')
+                            ] : []),
+                        ]
+                    ),
+                    defaultValue
+                )
+            )
+        );
+    },
 
-      anyType(args: ToAminoJSONMethod) {
-          const { propName, origName } = getFieldNames(args.field);
-          const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
-          const interfaceFnName = getInterfaceToAminoName(interfaceName)
+    anyType(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        const interfaceName = args.field.options['(cosmos_proto.accepts_interface)'];
+        const interfaceFnName = getInterfaceToAminoName(interfaceName)
 
-          args.context.getTypeName(args.field);
+        args.context.getTypeName(args.field);
 
-          const omitEmpty = shouldOmitEmpty(args.context, args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([
+        let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([
             t.objectProperty(t.identifier("type"), t.stringLiteral("")),
             t.objectProperty(t.identifier("value"), t.objectExpression([])),
-          ]) : t.identifier('undefined');
+        ]) : t.identifier('undefined');
 
-          let aminoFuncExpr: t.Expression = t.callExpression(
+        let aminoFuncExpr: t.Expression = t.callExpression(
             t.identifier(interfaceFnName),
             [
                 t.tsAsExpression(
@@ -230,69 +230,98 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                     t.identifier('useInterfaces')
                 ] : []),
             ]
-          );
+        );
 
-          const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
+        const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
 
-          if(isGlobalRegistry) {
+        if (isGlobalRegistry) {
             aminoFuncExpr = t.callExpression(
-              t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
-              [
-                t.memberExpression(
-                  t.identifier('message'),
-                  t.identifier(propName)
-                )
-              ]
+                t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
+                [
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    )
+                ]
             )
-          }
+        }
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      aminoFuncExpr,
-                      defaultValue
-                  )
-              )
-          );
-      },
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    aminoFuncExpr,
+                    defaultValue
+                )
+            )
+        );
+    },
 
-      type(args: ToAminoJSONMethod) {
-          if (
-              !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
-              args.context.options.interfaces.enabled &&
-              args.field.type === 'google.protobuf.Any' &&
-              args.field.options['(cosmos_proto.accepts_interface)']
+    type(args: ToAminoJSONMethod) {
+        if (
+            !args.context.options.aminoEncoding.useLegacyInlineEncoding &&
+            args.context.options.interfaces.enabled &&
+            args.field.type === 'google.protobuf.Any' &&
+            args.field.options['(cosmos_proto.accepts_interface)']
 
-          ) {
-              return toAminoJSON.anyType(args);
-          }
+        ) {
+            return toAminoJSON.anyType(args);
+        }
 
-          return toAminoJSON.protoType(args);
-      },
+        return toAminoJSON.protoType(args);
+    },
 
-      enum(args: ToAminoJSONMethod) {
-        return toAminoJSON.scalar(args);
-      },
+    enum(args: ToAminoJSONMethod) {
 
-      bytes(args: ToAminoJSONMethod) {
-          args.context.addUtil('base64FromBytes');
-          const { propName, origName } = getFieldNames(args.field);
+        if (!args.context.pluginValue('enums.enableToAminoFunc')) {
+            return toAminoJSON.scalar(args);
+        }
+
+        const { propName, origName } = getFieldNames(args.field);
+
+        const enumFuncName = args.context.getToEnum(args.field);
+
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
+        // Handle omit empty cases
+
+        let valExpr = t.callExpression(
+            t.identifier(enumFuncName),
+            [
+                t.memberExpression(
+                    t.identifier('message'),
+                    t.identifier(propName)
+                )
+            ]
+        );
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                "=",
+                t.memberExpression(t.identifier("obj"), t.identifier(origName)),
+                valExpr
+            )
+        );
+
+    },
+
+    bytes(args: ToAminoJSONMethod) {
+        args.context.addUtil('base64FromBytes');
+        const { propName, origName } = getFieldNames(args.field);
 
 
-          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
+        let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
 
-          const expr = t.callExpression(
+        const expr = t.callExpression(
             t.identifier('base64FromBytes'),
             [
                 t.memberExpression(
@@ -300,9 +329,9 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                     t.identifier(propName)
                 )
             ]
-          );
+        );
 
-          return t.expressionStatement(
+        return t.expressionStatement(
             t.assignmentExpression(
                 '=',
                 t.memberExpression(
@@ -318,93 +347,93 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                     defaultValue
                 )
             )
-          );
-      },
+        );
+    },
 
-      duration(args: ToAminoJSONMethod) {
-          return toAminoJSON.type(args);
-      },
+    duration(args: ToAminoJSONMethod) {
+        return toAminoJSON.type(args);
+    },
 
-      timestamp(args: ToAminoJSONMethod) {
-          const timestampFormat = args.context.pluginValue(
-              'prototypes.typingsFormat.timestamp'
-          );
-          switch (timestampFormat) {
-              case 'timestamp':
-                  return toAminoJSON.type(args);
-              case 'date':
-              default:
-                  return toAminoJSON.timestampDate(args);
-          }
-      },
+    timestamp(args: ToAminoJSONMethod) {
+        const timestampFormat = args.context.pluginValue(
+            'prototypes.typingsFormat.timestamp'
+        );
+        switch (timestampFormat) {
+            case 'timestamp':
+                return toAminoJSON.type(args);
+            case 'date':
+            default:
+                return toAminoJSON.timestampDate(args);
+        }
+    },
 
-      timestampDate(args: ToAminoJSONMethod) {
-          const { propName, origName } = getFieldNames(args.field);
-          args.context.addUtil('toTimestamp');
+    timestampDate(args: ToAminoJSONMethod) {
+        const { propName, origName } = getFieldNames(args.field);
+        args.context.addUtil('toTimestamp');
 
 
-          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
+        let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      t.callExpression(
-                          t.memberExpression(
-                              t.identifier('Timestamp'),
-                              t.identifier('toAmino')
-                          ),
-                          [
-                              t.callExpression(
-                                  t.identifier('toTimestamp'),
-                                  [
-                                      t.memberExpression(
-                                          t.identifier('message'),
-                                          t.identifier(propName)
-                                      )
-                                  ]
-                              )
-                          ]
-                      ),
-                      defaultValue
-                  )
-              )
-          );
-      },
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('Timestamp'),
+                            t.identifier('toAmino')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('toTimestamp'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    )
+                                ]
+                            )
+                        ]
+                    ),
+                    defaultValue
+                )
+            )
+        );
+    },
 
-      pubkey(args: ToAminoJSONMethod) {
-          args.context.addUtil('decodePubkey');
+    pubkey(args: ToAminoJSONMethod) {
+        args.context.addUtil('decodePubkey');
 
-          const { propName, origName } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
 
-          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
+        let defaultValue: t.Expression = !omitEmpty ? getDefaultTSTypeFromProtoType(args.context, args.field, args.isOneOf, true) : t.identifier('undefined');
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      //
-                      t.callExpression(
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
                         t.identifier('decodePubkey'),
                         [
                             t.memberExpression(
@@ -412,95 +441,95 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                                 t.identifier(propName)
                             ),
                         ]
-                      ),
-                      //
-                      defaultValue
-                  )
-              )
-          );
-      },
+                    ),
+                    //
+                    defaultValue
+                )
+            )
+        );
+    },
 
-      rawBytes(args: ToAminoJSONMethod) {
-          args.context.addUtil('fromUtf8');
+    rawBytes(args: ToAminoJSONMethod) {
+        args.context.addUtil('fromUtf8');
 
-          const { propName, origName } = getFieldNames(args.field);
-
-
-          const omitEmpty = shouldOmitEmpty(args.context,args.field);
-
-          let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([]) : t.identifier('undefined');
-
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      //
-                      t.callExpression(
-                          t.memberExpression(
-                              t.identifier('JSON'),
-                              t.identifier('parse')
-                          ),
-                          [
-                              t.callExpression(
-                                  t.identifier('fromUtf8'),
-                                  [
-                                      t.memberExpression(
-                                          t.identifier('message'),
-                                          t.identifier(propName)
-                                      ),
-                                  ]
-                              )
-                          ]
-                      ),
-                      //
-                      defaultValue
-                  )
-              )
-          );
-      },
-
-      wasmByteCode(args: ToAminoJSONMethod) {
-          args.context.addUtil('toBase64');
-
-          const { propName, origName } = getFieldNames(args.field);
+        const { propName, origName } = getFieldNames(args.field);
 
 
-          const omitEmpty = shouldOmitEmpty(args.context,args.field);
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
 
-          let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
+        let defaultValue: t.Expression = !omitEmpty ? t.objectExpression([]) : t.identifier('undefined');
 
-          return t.expressionStatement(
-              t.assignmentExpression(
-                  '=',
-                  t.memberExpression(
-                      t.identifier('obj'),
-                      t.identifier(origName)
-                  ),
-                  t.conditionalExpression(
-                      t.memberExpression(
-                          t.identifier('message'),
-                          t.identifier(propName)
-                      ),
-                      //
-                      t.callExpression(
-                          t.identifier('toBase64'),
-                          [
-                              t.memberExpression(
-                                  t.identifier('message'),
-                                  t.identifier(propName)
-                              ),
-                          ]
-                      ),
-            //
-                  defaultValue
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.memberExpression(
+                            t.identifier('JSON'),
+                            t.identifier('parse')
+                        ),
+                        [
+                            t.callExpression(
+                                t.identifier('fromUtf8'),
+                                [
+                                    t.memberExpression(
+                                        t.identifier('message'),
+                                        t.identifier(propName)
+                                    ),
+                                ]
+                            )
+                        ]
+                    ),
+                    //
+                    defaultValue
+                )
+            )
+        );
+    },
+
+    wasmByteCode(args: ToAminoJSONMethod) {
+        args.context.addUtil('toBase64');
+
+        const { propName, origName } = getFieldNames(args.field);
+
+
+        const omitEmpty = shouldOmitEmpty(args.context, args.field);
+
+        let defaultValue: t.Expression = !omitEmpty ? t.stringLiteral("") : t.identifier('undefined');
+
+        return t.expressionStatement(
+            t.assignmentExpression(
+                '=',
+                t.memberExpression(
+                    t.identifier('obj'),
+                    t.identifier(origName)
+                ),
+                t.conditionalExpression(
+                    t.memberExpression(
+                        t.identifier('message'),
+                        t.identifier(propName)
+                    ),
+                    //
+                    t.callExpression(
+                        t.identifier('toBase64'),
+                        [
+                            t.memberExpression(
+                                t.identifier('message'),
+                                t.identifier(propName)
+                            ),
+                        ]
+                    ),
+                    //
+                    defaultValue
                 )
             )
         );
@@ -517,7 +546,7 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
         let toAminoJSON = null;
         switch (valueType) {
             case 'string':
-                          toAminoJSON = t.identifier('v')
+                toAminoJSON = t.identifier('v')
                 break;
             case 'uint32':
             case 'int32':
@@ -685,28 +714,28 @@ export const arrayTypes = {
         return t.identifier('e');
     },
     string(args: ToAminoJSONMethod) {
-      const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
+        const useCosmosSDKDec = args.context.pluginValue('aminoEncoding.customTypes.useCosmosSDKDec');
 
-      if(useCosmosSDKDec){
-        const isCosmosSDKDec =
-            (args.field.options?.['(gogoproto.customtype)'] ==
-                'github.com/cosmos/cosmos-sdk/types.Dec') ||
-            (args.field.options?.['(gogoproto.customtype)'] ==
-                'cosmossdk.io/math.LegacyDec');
+        if (useCosmosSDKDec) {
+            const isCosmosSDKDec =
+                (args.field.options?.['(gogoproto.customtype)'] ==
+                    'github.com/cosmos/cosmos-sdk/types.Dec') ||
+                (args.field.options?.['(gogoproto.customtype)'] ==
+                    'cosmossdk.io/math.LegacyDec');
 
-        if (isCosmosSDKDec) {
-            args.context.addUtil('padDecimal');
-            const { propName } = getFieldNames(args.field);
-            return t.callExpression(
-                t.identifier('padDecimal'),
-                [
-                  t.identifier('e')
-                ]
-            )
+            if (isCosmosSDKDec) {
+                args.context.addUtil('padDecimal');
+                const { propName } = getFieldNames(args.field);
+                return t.callExpression(
+                    t.identifier('padDecimal'),
+                    [
+                        t.identifier('e')
+                    ]
+                )
+            }
         }
-      }
 
-      return arrayTypes.scalar();
+        return arrayTypes.scalar();
     },
     double() {
         return arrayTypes.scalar();
@@ -754,41 +783,41 @@ export const arrayTypes = {
         return arrayTypes.long(args);
     },
     rawBytes(args: ToAminoJSONMethod) {
-      args.context.addUtil("fromUtf8");
+        args.context.addUtil("fromUtf8");
 
-      return t.callExpression(
-        t.memberExpression(t.identifier("JSON"), t.identifier("parse")),
-        [
-          t.callExpression(t.identifier("fromUtf8"), [t.identifier("e")]),
-        ]
-      );
+        return t.callExpression(
+            t.memberExpression(t.identifier("JSON"), t.identifier("parse")),
+            [
+                t.callExpression(t.identifier("fromUtf8"), [t.identifier("e")]),
+            ]
+        );
     },
 
     wasmByteCode(args: ToAminoJSONMethod) {
-      args.context.addUtil("toBase64");
+        args.context.addUtil("toBase64");
 
-      return t.callExpression(t.identifier("toBase64"), [
-        t.identifier("e")
-      ]);
+        return t.callExpression(t.identifier("toBase64"), [
+            t.identifier("e")
+        ]);
     },
     bytes(args: ToAminoJSONMethod) {
-      // bytes [RawContractMessage]
-      if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
-        return arrayTypes.rawBytes(args);
-      }
-      // bytes [WASMByteCode]
-      if (args.field.options?.["(gogoproto.customname)"] === "WASMByteCode") {
-        return arrayTypes.wasmByteCode(args);
-      }
+        // bytes [RawContractMessage]
+        if (args.field.options?.["(gogoproto.casttype)"] === "RawContractMessage") {
+            return arrayTypes.rawBytes(args);
+        }
+        // bytes [WASMByteCode]
+        if (args.field.options?.["(gogoproto.customname)"] === "WASMByteCode") {
+            return arrayTypes.wasmByteCode(args);
+        }
 
-      //default
-      args.context.addUtil("base64FromBytes");
-      return t.callExpression(t.identifier("base64FromBytes"), [
-        t.identifier("e"),
-      ]);
+        //default
+        args.context.addUtil("base64FromBytes");
+        return t.callExpression(t.identifier("base64FromBytes"), [
+            t.identifier("e"),
+        ]);
     },
     enum() {
-      return arrayTypes.scalar();
+        return arrayTypes.scalar();
     },
     anyType(args: ToAminoJSONMethod) {
         const { propName, origName } = getFieldNames(args.field);
@@ -798,27 +827,27 @@ export const arrayTypes = {
         const isGlobalRegistry = args.context.options.interfaces?.useGlobalDecoderRegistry;
 
         let aminoFuncExpr: t.Expression = t.callExpression(
-                t.identifier(interfaceFnName),
-                [
-                    t.tsAsExpression(
-                        t.identifier('e'),
-                        t.tsTypeReference(
-                            t.identifier('Any')
-                        )
-                    ),
-                    ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
-                        t.identifier('useInterfaces')
-                    ] : []),
-                ]
-            );
-
-        if(isGlobalRegistry) {
-          aminoFuncExpr = t.callExpression(
-            t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
+            t.identifier(interfaceFnName),
             [
-              t.identifier('e')
+                t.tsAsExpression(
+                    t.identifier('e'),
+                    t.tsTypeReference(
+                        t.identifier('Any')
+                    )
+                ),
+                ...(args.context.options.interfaces.enabled && args.context.options.interfaces.useUseInterfacesParams ? [
+                    t.identifier('useInterfaces')
+                ] : []),
             ]
-          )
+        );
+
+        if (isGlobalRegistry) {
+            aminoFuncExpr = t.callExpression(
+                t.memberExpression(t.identifier('GlobalDecoderRegistry'), t.identifier('toAminoMsg')),
+                [
+                    t.identifier('e')
+                ]
+            )
         }
 
         return t.conditionalExpression(
