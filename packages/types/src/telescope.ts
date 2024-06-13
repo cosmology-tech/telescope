@@ -1,6 +1,7 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
 import { snake, camel } from 'case';
+import { Operation } from 'fast-json-patch';
 
 export enum TelescopeLogLevel {
     None = 0,
@@ -105,7 +106,15 @@ interface TelescopeOpts {
 
             useTelescopeGeneratedType?: boolean
         };
+
+        patch?: {
+            [key: string]: Operation[]
+        }
     };
+
+    enums?: {
+        useCustomNames?: boolean;
+    },
 
     tsDisable?: {
         files?: string[];
@@ -357,6 +366,10 @@ export const defaultTelescopeOptions: TelescopeOptions = {
             setDefaultEnumToUnrecognized: true,
             autoFixUndefinedEnumDefault: false,
         },
+    },
+
+    enums: {
+        useCustomNames: false
     },
 
     bundle: {

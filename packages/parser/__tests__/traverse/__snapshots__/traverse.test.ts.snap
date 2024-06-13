@@ -2895,8 +2895,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                         "comment": "ContractsByCode lists all smart contracts for a code id",
                         "fields": {
                           "codeId": {
-                            "comment": "grpc-gateway_out does not support Go style CodID
- pagination defines an optional pagination for the request.",
+                            "comment": "grpc-gateway_out does not support Go style CodID",
                             "id": 1,
                             "isScalar": true,
                             "options": {
@@ -2912,7 +2911,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                             "typeNum": 8,
                           },
                           "pagination": {
-                            "comment": null,
+                            "comment": "pagination defines an optional pagination for the request.",
                             "id": 2,
                             "import": "cosmos/base/query/v1beta1/pagination.proto",
                             "importedName": "cosmos.base.query.v1beta1.PageRequest",
@@ -3594,8 +3593,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
  RPC method",
                     "fields": {
                       "codeId": {
-                        "comment": "grpc-gateway_out does not support Go style CodID
- pagination defines an optional pagination for the request.",
+                        "comment": "grpc-gateway_out does not support Go style CodID",
                         "id": 1,
                         "isScalar": true,
                         "options": {
@@ -3611,7 +3609,7 @@ exports[`cosmwasm/wasm/v1/query 1`] = `
                         "typeNum": 8,
                       },
                       "pagination": {
-                        "comment": null,
+                        "comment": "pagination defines an optional pagination for the request.",
                         "id": 2,
                         "import": "cosmos/base/query/v1beta1/pagination.proto",
                         "importedName": "cosmos.base.query.v1beta1.PageRequest",

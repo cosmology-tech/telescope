@@ -22,6 +22,23 @@ exports[`find 1`] = `
       "VOTE_OPTION_UNSPECIFIED": 0,
       "VOTE_OPTION_YES": 1,
     },
+    "valuesOptions": {
+      "VOTE_OPTION_ABSTAIN": {
+        "(gogoproto.enumvalue_customname)": "OptionAbstain",
+      },
+      "VOTE_OPTION_NO": {
+        "(gogoproto.enumvalue_customname)": "OptionNo",
+      },
+      "VOTE_OPTION_NO_WITH_VETO": {
+        "(gogoproto.enumvalue_customname)": "OptionNoWithVeto",
+      },
+      "VOTE_OPTION_UNSPECIFIED": {
+        "(gogoproto.enumvalue_customname)": "OptionEmpty",
+      },
+      "VOTE_OPTION_YES": {
+        "(gogoproto.enumvalue_customname)": "OptionYes",
+      },
+    },
   },
   {
     "comment": "ProposalStatus enumerates the valid statuses of a proposal.",
@@ -49,6 +66,26 @@ exports[`find 1`] = `
       "PROPOSAL_STATUS_REJECTED": 4,
       "PROPOSAL_STATUS_UNSPECIFIED": 0,
       "PROPOSAL_STATUS_VOTING_PERIOD": 2,
+    },
+    "valuesOptions": {
+      "PROPOSAL_STATUS_DEPOSIT_PERIOD": {
+        "(gogoproto.enumvalue_customname)": "StatusDepositPeriod",
+      },
+      "PROPOSAL_STATUS_FAILED": {
+        "(gogoproto.enumvalue_customname)": "StatusFailed",
+      },
+      "PROPOSAL_STATUS_PASSED": {
+        "(gogoproto.enumvalue_customname)": "StatusPassed",
+      },
+      "PROPOSAL_STATUS_REJECTED": {
+        "(gogoproto.enumvalue_customname)": "StatusRejected",
+      },
+      "PROPOSAL_STATUS_UNSPECIFIED": {
+        "(gogoproto.enumvalue_customname)": "StatusNil",
+      },
+      "PROPOSAL_STATUS_VOTING_PERIOD": {
+        "(gogoproto.enumvalue_customname)": "StatusVotingPeriod",
+      },
     },
   },
 ]

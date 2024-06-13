@@ -3,7 +3,7 @@ import { getEnumFromJsonName, getEnumToJsonName } from './types';
 import { identifier, tsEnumMember, functionDeclaration, makeCommentBlock, cleanComment } from '../../utils';
 import { ProtoEnum } from '@cosmology/types';
 import { ProtoParseContext } from '../context';
-import { getEnumValues } from '@cosmology/utils';
+import { EnumValue, getEnumValues } from '@cosmology/utils';
 
 const ensureOneSpace = (str) => {
     if (/^[\s\n\t]+/.test(str)) return str;
@@ -25,6 +25,14 @@ const processEnumComment = (e: ProtoEnum) => {
         return ` *${ensureOneSpace(cleanComment(line))}`
     });
     return comments.join('\n');
+};
+
+const getEnumName = (context: ProtoParseContext, proto: ProtoEnum, entry: EnumValue) => {
+    if (context.pluginValue('enums.useCustomNames')) {
+        const customName = proto.valuesOptions?.[entry.name]?.['(gogoproto.enumvalue_customname)'];
+        return customName ?? entry.name;
+    }
+    return entry.name;
 };
 
 export const createProtoEnum = (
@@ -73,11 +81,11 @@ export const createProtoEnumFromJSON = (
     name: string,
     proto: ProtoEnum
 ) => {
-
     const enums = getEnumValues(proto);
     const switches = enums.reduce((m, e) => {
+        const enumName = getEnumName(context, proto, e);
         m.push(t.switchCase(t.numericLiteral(e.value), []));
-        m.push(t.switchCase(t.stringLiteral(e.name), [
+        m.push(t.switchCase(t.stringLiteral(enumName), [
             t.returnStatement(t.memberExpression(
                 t.identifier(name),
                 t.identifier(e.name)
@@ -128,9 +136,9 @@ export const createProtoEnumToJSON = (
     name: string,
     proto: ProtoEnum
 ) => {
-
     const enums = getEnumValues(proto);
     const switches = enums.map(e => {
+        const enumName = getEnumName(context, proto, e);
         return t.switchCase(
             t.memberExpression(
                 t.identifier(name),
@@ -138,7 +146,7 @@ export const createProtoEnumToJSON = (
             ),
             [
                 t.returnStatement(
-                    t.stringLiteral(e.name)
+                    t.stringLiteral(enumName)
                 )
             ]
         );

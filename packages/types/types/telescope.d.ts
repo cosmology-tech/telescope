@@ -1,5 +1,6 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 import { AminoExceptions } from "./aminos";
+import { Operation } from 'fast-json-patch';
 export declare enum TelescopeLogLevel {
     None = 0,
     Info = 1,
@@ -86,6 +87,12 @@ interface TelescopeOpts {
             updatedDuration?: boolean;
             useTelescopeGeneratedType?: boolean;
         };
+        patch?: {
+            [key: string]: Operation[];
+        };
+    };
+    enums?: {
+        useCustomNames?: boolean;
     };
     tsDisable?: {
         files?: string[];

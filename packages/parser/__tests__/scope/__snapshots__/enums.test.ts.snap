@@ -73,5 +73,6 @@ exports[`nested lookup 1`] = `
     "2": "WARNING",
     "3": "ERROR",
   },
+  "valuesOptions": undefined,
 }
 `;

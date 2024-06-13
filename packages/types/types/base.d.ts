@@ -22,6 +22,12 @@ export interface ProtoEnum {
     values: {
         [key: string]: number;
     };
+    valuesOptions?: {
+        [key: string]: {
+            '(gogoproto.enumvalue_customname)'?: string;
+            [key: string]: any;
+        };
+    };
     comment?: string;
     comments?: {
         [key: string]: string;

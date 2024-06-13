@@ -45,11 +45,12 @@ export declare const restoreExtension: (path: string, ext?: string) => string;
  * @returns duplicated import paths with the extension
  */
 export declare const duplicateImportPathsWithExt: (paths: ImportDeclaration[], ext?: string) => ImportDeclaration[];
-export declare const getEnumValues: (proto: ProtoEnum) => {
+export interface EnumValue {
     name: string;
-    comment: any;
-    value: any;
-}[];
+    comment?: string | null;
+    value: number;
+}
+export declare const getEnumValues: (proto: ProtoEnum) => EnumValue[];
 /**
  * get the type name by enum object while traversing the nested enum
  * @param field
@@ -59,3 +60,52 @@ export declare const getEnumValues: (proto: ProtoEnum) => {
  * @returns
  */
 export declare const getTypeNameByEnumObj: (field: any, pkg: string, traversal: string[], isNested: boolean) => any;
+/**
+ * Converts a protobuf package path into a deeply nested JSON path format suitable for
+ * hierarchical representations. This function is ideal for adapting proto package paths
+ * to structured configurations or mappings in JSON.
+ *
+ * @param protoPath The protobuf package path as a string, typically formatted as
+ *                  a directory-like structure such as "cosmwasm/wasm/v1/types.proto".
+ *                  The "types.proto" or any file name with '.proto' is excluded from
+ *                  the conversion.
+ *
+ *                  Example input:
+ *                  - "cosmwasm/wasm/v1/types.proto"
+ *
+ * @returns A string representing the deeply nested JSON path. The function constructs this
+ *          by starting with "/root/nested" and appending "/nested/{part}" for each segment
+ *          of the original path.
+ *
+ *          Example output for "cosmwasm/wasm/v1/types.proto":
+ *          - "/root/nested/cosmwasm/nested/wasm/nested/v1"
+ *
+ * Usage:
+ * const jsonNestedPath = convertProtoPathToNestedJSONPath("cosmwasm/wasm/v1/types.proto");
+ * console.log(jsonNestedPath);  // Outputs: "/root/nested/cosmwasm/nested/wasm/nested/v1/nested"
+ */
+export declare function convertProtoPathToNestedJSONPath(protoPath: string): string;
+/**
+ * Converts a dot-separated package name into a deeply nested JSON path format suitable for
+ * hierarchical representations. This function is ideal for adapting package names like those
+ * used in Protobuf or similar systems to structured configurations or mappings in JSON.
+ *
+ * @param packageName The dot-separated package name as a string, typically formatted as
+ *                    a namespace structure such as "cosmwasm.wasm.v1".
+ *
+ *                    Example input:
+ *                    - "cosmwasm.wasm.v1"
+ *
+ * @returns A string representing the deeply nested JSON path. The function constructs this
+ *          by starting with "/root/nested" and appending "/nested/{part}" for each segment
+ *          of the package name. This mimics a directory path structure in a JSON tree, where
+ *          each package level is further nested within its parent.
+ *
+ *          Example output for "cosmwasm.wasm.v1":
+ *          - "/root/nested/cosmwasm/nested/wasm/nested/v1"
+ *
+ * Usage:
+ * const jsonNestedPath = convertPackageNameToNestedJSONPath("cosmwasm.wasm.v1");
+ * console.log(jsonNestedPath);  // Outputs: "/root/nested/cosmwasm/nested/wasm/nested/v1/nested"
+ */
+export declare function convertPackageNameToNestedJSONPath(packageName: string): string;
