@@ -2,7 +2,7 @@ import { sync as glob } from 'glob';
 import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
-import { ALLOWED_RPC_SERVICES, ProtoDep, ProtoField, ProtoRef, ProtoServiceMethod, ProtoType, TelescopeOptions, ENUM_PROTO2_DEFAULT, ENUM_PROTO3_DEFAULT } from '@cosmology/types';
+import { ProtoDep, ProtoRef, ProtoServiceMethod, TelescopeOptions, ENUM_PROTO2_DEFAULT, ENUM_PROTO3_DEFAULT } from '@cosmology/types';
 import { createTypeUrlTypeMap, getNestedProto, getPackageAndNestedFromStr, isRefIncluded, isRefExcluded } from './';
 import { parseFullyTraversedProtoImports, symbolsToImportNames, traverse } from './traverse';
 import { lookupAny, lookupAnyFromImports } from './lookup';
@@ -17,7 +17,8 @@ import google_field_mask from './native/field_mask';
 import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
-import { applyOperation, applyPatch } from 'fast-json-patch';
+import { applyPatch } from 'fast-json-patch';
+import { convertProtoPathToNestedJSONPath, convertPackageNameToNestedJSONPath } from '@cosmology/utils';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -105,9 +106,22 @@ export class ProtoStore implements IProtoStore {
             try {
                 let protoJson = parseProto(content, this.options.prototypes.parser);
                 if (this.options.prototypes.patch && this.options.prototypes.patch[filename]) {
-                    const ops = this.options.prototypes.patch[filename];
-                    const result = applyPatch(protoJson, ops);
-                    protoJson = result.newDocument;
+                    const ops = this.options.prototypes.patch[filename] ?? [];
+                    try {
+                        const result = applyPatch(protoJson, ops.map(op => {
+                            if (op.path.startsWith('~')) {
+                                op.path = convertProtoPathToNestedJSONPath(filename) + op.path.substring(1);
+                            }
+                            if (op.path.startsWith('@')) {
+                                op.path = convertPackageNameToNestedJSONPath(protoJson.package) + op.path.substring(1);
+                            }
+                            return op;
+                        }));
+                        protoJson = result.newDocument;
+                    } catch (e2) {
+                        console.error('JSON Patch error on proto: ' + filename);
+                    }
+
                 }
                 return {
                     absolute,

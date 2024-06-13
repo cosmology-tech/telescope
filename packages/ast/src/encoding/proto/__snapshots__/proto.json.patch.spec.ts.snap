@@ -11,6 +11,7 @@ export enum NullValue {
   ACCESS_TYPE_ONLY_ADDRESS = 2,
   /** ACCESS_TYPE_EVERYBODY - AccessTypeEverybody unrestricted */
   ACCESS_TYPE_EVERYBODY = 3,
+  ACCESS_TYPE_SUPER_FUN = 4,
   UNRECOGNIZED = -1,
 }"
 `;
@@ -19,17 +20,20 @@ exports[`createProtoEnumFromJSON 1`] = `
 "export function accessTypeFromJSON(object: any): AccessType {
   switch (object) {
     case 0:
-    case "AccessTypeUnspecified":
+    case "UnspecifiedAccess":
       return AccessType.ACCESS_TYPE_UNSPECIFIED;
     case 1:
-    case "AccessTypeNobody":
+    case "NobodyAccess":
       return AccessType.ACCESS_TYPE_NOBODY;
     case 2:
-    case "AccessTypeOnlyAddress":
+    case "OnlyAddressAccess":
       return AccessType.ACCESS_TYPE_ONLY_ADDRESS;
     case 3:
-    case "AccessTypeEverybody":
+    case "EverybodyAccess":
       return AccessType.ACCESS_TYPE_EVERYBODY;
+    case 4:
+    case "SuperFunAccessType":
+      return AccessType.ACCESS_TYPE_SUPER_FUN;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -42,13 +46,15 @@ exports[`createProtoEnumToJSON 1`] = `
 "export function accessTypeToJSON(object: AccessType): string {
   switch (object) {
     case AccessType.ACCESS_TYPE_UNSPECIFIED:
-      return "AccessTypeUnspecified";
+      return "UnspecifiedAccess";
     case AccessType.ACCESS_TYPE_NOBODY:
-      return "AccessTypeNobody";
+      return "NobodyAccess";
     case AccessType.ACCESS_TYPE_ONLY_ADDRESS:
-      return "AccessTypeOnlyAddress";
+      return "OnlyAddressAccess";
     case AccessType.ACCESS_TYPE_EVERYBODY:
-      return "AccessTypeEverybody";
+      return "EverybodyAccess";
+    case AccessType.ACCESS_TYPE_SUPER_FUN:
+      return "SuperFunAccessType";
     case AccessType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

@@ -3,23 +3,16 @@ import {
     createProtoEnumFromJSON,
     createProtoEnumToJSON,
 } from "./enums";
-import { getNestedProto, convertProtoPathToNestedJSONPath as convert } from "@cosmology/utils";
+import {
+    getNestedProto
+} from "@cosmology/utils";
 import { ProtoParseContext } from "@cosmology/ast";
 import {
     expectCode,
     getTestProtoStore
 } from "../../../test-utils";
 
-const p = convert('cosmwasm/wasm/v1/types.proto');
 const store = getTestProtoStore({
-    prototypes: {
-        patch: {
-            'cosmwasm/wasm/v1/types.proto': [
-                { op: 'replace', path: p + '/AccessType/valuesOptions/ACCESS_TYPE_NOBODY/(gogoproto.enumvalue_customname)', value: 'NobodyAccess' },
-                { op: 'replace', path: p + '/AccessType/valuesOptions/ACCESS_TYPE_EVERYBODY/(gogoproto.enumvalue_customname)', value: 'EverybodyAccess' },
-            ]
-        }
-    },
     enums: {
         useCustomNames: true
     }
