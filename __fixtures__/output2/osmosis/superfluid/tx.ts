@@ -32,7 +32,7 @@ export interface MsgLockAndSuperfluidDelegate {
   valAddr: string;
 }
 export interface MsgLockAndSuperfluidDelegateResponse {
-  ID: Long;
+  iD: Long;
 }
 /**
  * MsgUnPoolWhitelistedPool Unpools every lock the sender has, that is
@@ -396,13 +396,13 @@ export const MsgLockAndSuperfluidDelegate = {
 };
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {
-    ID: Long.UZERO
+    iD: Long.UZERO
   };
 }
 export const MsgLockAndSuperfluidDelegateResponse = {
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.ID.isZero()) {
-      writer.uint32(8).uint64(message.ID);
+    if (!message.iD.isZero()) {
+      writer.uint32(8).uint64(message.iD);
     }
     return writer;
   },
@@ -414,7 +414,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.ID = (reader.uint64() as Long);
+          message.iD = (reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -425,17 +425,17 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO
+      iD: isSet(object.iD) ? Long.fromValue(object.iD) : Long.UZERO
     };
   },
   toJSON(message: MsgLockAndSuperfluidDelegateResponse): JsonSafe<MsgLockAndSuperfluidDelegateResponse> {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.iD !== undefined && (obj.iD = (message.iD || Long.UZERO).toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.iD = object.iD !== undefined && object.iD !== null ? Long.fromValue(object.iD) : Long.UZERO;
     return message;
   }
 };
