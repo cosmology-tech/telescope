@@ -68,10 +68,6 @@ export interface QueryGasMeterRequest {
  * method.
  */
 export interface QueryGasMeterResponse {
-  /**
-   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
-   */
   gasMeter: Long;
 }
 /**

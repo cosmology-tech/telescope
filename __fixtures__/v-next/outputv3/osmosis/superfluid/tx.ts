@@ -109,7 +109,7 @@ export interface MsgLockAndSuperfluidDelegateSDKType {
   val_addr: string;
 }
 export interface MsgLockAndSuperfluidDelegateResponse {
-  ID: bigint;
+  iD: bigint;
 }
 export interface MsgLockAndSuperfluidDelegateResponseProtoMsg {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse";
@@ -765,15 +765,15 @@ export const MsgLockAndSuperfluidDelegate = {
 };
 function createBaseMsgLockAndSuperfluidDelegateResponse(): MsgLockAndSuperfluidDelegateResponse {
   return {
-    ID: BigInt(0)
+    iD: BigInt(0)
   };
 }
 export const MsgLockAndSuperfluidDelegateResponse = {
   typeUrl: "/osmosis.superfluid.MsgLockAndSuperfluidDelegateResponse",
   aminoType: "osmosis/lock-and-superfluid-delegate-response",
   encode(message: MsgLockAndSuperfluidDelegateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.ID !== BigInt(0)) {
-      writer.uint32(8).uint64(message.ID);
+    if (message.iD !== BigInt(0)) {
+      writer.uint32(8).uint64(message.iD);
     }
     return writer;
   },
@@ -785,7 +785,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.ID = reader.uint64();
+          message.iD = reader.uint64();
           break;
         default:
           reader.skipType(tag & 7);
@@ -796,36 +796,36 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   fromJSON(object: any): MsgLockAndSuperfluidDelegateResponse {
     const obj = createBaseMsgLockAndSuperfluidDelegateResponse();
-    if (isSet(object.ID)) obj.ID = BigInt(object.ID.toString());
+    if (isSet(object.iD)) obj.iD = BigInt(object.iD.toString());
     return obj;
   },
   fromPartial(object: DeepPartial<MsgLockAndSuperfluidDelegateResponse>): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
-    if (object.ID !== undefined && object.ID !== null) {
-      message.ID = BigInt(object.ID.toString());
+    if (object.iD !== undefined && object.iD !== null) {
+      message.iD = BigInt(object.iD.toString());
     }
     return message;
   },
   fromSDK(object: MsgLockAndSuperfluidDelegateResponseSDKType): MsgLockAndSuperfluidDelegateResponse {
     return {
-      ID: object?.ID
+      iD: object?.ID
     };
   },
   toSDK(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseSDKType {
     const obj: any = {};
-    obj.ID = message.ID;
+    obj.ID = message.iD;
     return obj;
   },
   fromAmino(object: MsgLockAndSuperfluidDelegateResponseAmino): MsgLockAndSuperfluidDelegateResponse {
     const message = createBaseMsgLockAndSuperfluidDelegateResponse();
     if (object.ID !== undefined && object.ID !== null) {
-      message.ID = BigInt(object.ID);
+      message.iD = BigInt(object.ID);
     }
     return message;
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
-    obj.ID = message.ID !== BigInt(0) ? message.ID.toString() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgLockAndSuperfluidDelegateResponseProtoMsg, useInterfaces: boolean = true): MsgLockAndSuperfluidDelegateResponse {
