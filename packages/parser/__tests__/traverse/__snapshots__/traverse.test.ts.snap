@@ -7124,3 +7124,387 @@ exports[`osmosis/gamm/v1beta1/tx 1`] = `
   },
 }
 `;
+
+exports[`osmosis/lockup/lock 1`] = `
+{
+  "acceptsInterface": {},
+  "implementsInterface": {},
+  "importNames": {},
+  "imports": [
+    "gogoproto/gogo.proto",
+    "google/protobuf/duration.proto",
+    "google/protobuf/timestamp.proto",
+    "cosmos/base/v1beta1/coin.proto",
+  ],
+  "package": "osmosis.lockup",
+  "parsedExports": {
+    "PeriodLock": true,
+    "QueryCondition": true,
+    "SyntheticLock": true,
+  },
+  "parsedImports": {
+    "cosmos/base/v1beta1/coin.proto": [
+      "Coin",
+    ],
+    "google/protobuf/duration.proto": [
+      "Duration",
+    ],
+    "google/protobuf/timestamp.proto": [
+      "Timestamp",
+    ],
+  },
+  "root": {
+    "nested": {
+      "osmosis": {
+        "nested": {
+          "lockup": {
+            "nested": {
+              "LockQueryType": {
+                "comment": "LockQueryType defines the type of the lock query that can
+ either be by duration or start time of the lock.",
+                "comments": {
+                  "ByDuration": null,
+                  "ByTime": null,
+                },
+                "name": "LockQueryType",
+                "options": {
+                  "(gogoproto.goproto_enum_prefix)": false,
+                },
+                "package": "osmosis.lockup",
+                "type": "Enum",
+                "values": {
+                  "ByDuration": 0,
+                  "ByTime": 1,
+                },
+              },
+              "PeriodLock": {
+                "comment": "PeriodLock is a single lock unit by period defined by the x/lockup module.
+ It's a record of a locked coin at a specific time. It stores owner, duration,
+ unlock time and the number of coins locked. A state of a period lock is
+ created upon lock creation, and deleted once the lock has been matured after
+ the \`duration\` has passed since unbonding started.",
+                "fields": {
+                  "coins": {
+                    "comment": "Coins are the tokens locked within the lock, kept in the module account.",
+                    "id": 5,
+                    "import": "cosmos/base/v1beta1/coin.proto",
+                    "importedName": "cosmos.base.v1beta1.Coin",
+                    "options": {
+                      "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
+                      "(gogoproto.nullable)": false,
+                      "(telescope:camel)": "coins",
+                      "(telescope:name)": "coins",
+                      "(telescope:orig)": "coins",
+                    },
+                    "parsedType": {
+                      "name": "Coin",
+                      "type": "Type",
+                    },
+                    "rule": "repeated",
+                    "scope": [
+                      "cosmos.base.v1beta1",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "cosmos.base.v1beta1.Coin",
+                  },
+                  "duration": {
+                    "comment": "Duration is the time needed for a lock to mature after unlocking has
+ started.",
+                    "id": 3,
+                    "import": "google/protobuf/duration.proto",
+                    "importedName": "google.protobuf.Duration",
+                    "options": {
+                      "(gogoproto.jsontag)": "duration,omitempty",
+                      "(gogoproto.moretags)": "yaml:duration",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(telescope:camel)": "duration",
+                      "(telescope:name)": "duration",
+                      "(telescope:orig)": "duration",
+                    },
+                    "parsedType": {
+                      "name": "Duration",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Duration",
+                  },
+                  "endTime": {
+                    "comment": "EndTime refers to the time at which the lock would mature and get deleted.
+ This value is first initialized when an unlock has started for the lock,
+ end time being block time + duration.",
+                    "id": 4,
+                    "import": "google/protobuf/timestamp.proto",
+                    "importedName": "google.protobuf.Timestamp",
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:end_time",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true,
+                      "(telescope:camel)": "endTime",
+                      "(telescope:name)": "endTime",
+                      "(telescope:orig)": "end_time",
+                    },
+                    "parsedType": {
+                      "name": "Timestamp",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Timestamp",
+                  },
+                  "iD": {
+                    "comment": "ID is the unique id of the lock.
+ The ID of the lock is decided upon lock creation, incrementing by 1 for
+ every lock.",
+                    "id": 1,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "iD",
+                      "(telescope:name)": "iD",
+                      "(telescope:orig)": "ID",
+                    },
+                    "parsedType": {
+                      "name": "uint64",
+                      "type": "native",
+                    },
+                    "type": "uint64",
+                    "typeNum": 8,
+                  },
+                  "owner": {
+                    "comment": "Owner is the account address of the lock owner.
+ Only the owner can modify the state of the lock.",
+                    "id": 2,
+                    "isScalar": true,
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:owner",
+                      "(telescope:camel)": "owner",
+                      "(telescope:name)": "owner",
+                      "(telescope:orig)": "owner",
+                    },
+                    "parsedType": {
+                      "name": "string",
+                      "type": "native",
+                    },
+                    "type": "string",
+                    "typeNum": 13,
+                  },
+                },
+                "keyTypes": [],
+                "name": "PeriodLock",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "package": "osmosis.lockup",
+                "type": "Type",
+              },
+              "QueryCondition": {
+                "comment": "QueryCondition is a struct used for querying locks upon different conditions.
+ Duration field and timestamp fields could be optional, depending on the
+ LockQueryType.",
+                "fields": {
+                  "denom": {
+                    "comment": "Denom represents the token denomination we are looking to lock up",
+                    "id": 2,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "denom",
+                      "(telescope:name)": "denom",
+                      "(telescope:orig)": "denom",
+                    },
+                    "parsedType": {
+                      "name": "string",
+                      "type": "native",
+                    },
+                    "type": "string",
+                    "typeNum": 13,
+                  },
+                  "duration": {
+                    "comment": "Duration is used to query locks with longer duration than the specified
+ duration. Duration field must not be nil when the lock query type is
+ \`ByLockDuration\`.",
+                    "id": 3,
+                    "import": "google/protobuf/duration.proto",
+                    "importedName": "google.protobuf.Duration",
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:duration",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(telescope:camel)": "duration",
+                      "(telescope:name)": "duration",
+                      "(telescope:orig)": "duration",
+                    },
+                    "parsedType": {
+                      "name": "Duration",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Duration",
+                  },
+                  "lockQueryType": {
+                    "comment": "LockQueryType is a type of lock query, ByLockDuration | ByLockTime",
+                    "id": 1,
+                    "options": {
+                      "(telescope:camel)": "lockQueryType",
+                      "(telescope:name)": "lockQueryType",
+                      "(telescope:orig)": "lock_query_type",
+                    },
+                    "parsedType": {
+                      "name": "LockQueryType",
+                      "type": "Enum",
+                    },
+                    "scope": [
+                      "osmosis.lockup",
+                    ],
+                    "type": "LockQueryType",
+                  },
+                  "timestamp": {
+                    "comment": "Timestamp is used by locks started before the specified duration.
+ Timestamp field must not be nil when the lock query type is \`ByLockTime\`.
+ Querying locks with timestamp is currently not implemented.",
+                    "id": 4,
+                    "import": "google/protobuf/timestamp.proto",
+                    "importedName": "google.protobuf.Timestamp",
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:timestamp",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true,
+                      "(telescope:camel)": "timestamp",
+                      "(telescope:name)": "timestamp",
+                      "(telescope:orig)": "timestamp",
+                    },
+                    "parsedType": {
+                      "name": "Timestamp",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Timestamp",
+                  },
+                },
+                "keyTypes": [],
+                "name": "QueryCondition",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "package": "osmosis.lockup",
+                "type": "Type",
+              },
+              "SyntheticLock": {
+                "comment": "SyntheticLock is creating virtual lockup where new denom is combination of
+ original denom and synthetic suffix. At the time of synthetic lockup creation
+ and deletion, accumulation store is also being updated and on querier side,
+ they can query as freely as native lockup.",
+                "fields": {
+                  "duration": {
+                    "comment": "Duration is the duration for a synthetic lock to mature
+ at the point of unbonding has started.",
+                    "id": 4,
+                    "import": "google/protobuf/duration.proto",
+                    "importedName": "google.protobuf.Duration",
+                    "options": {
+                      "(gogoproto.jsontag)": "duration,omitempty",
+                      "(gogoproto.moretags)": "yaml:duration",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdduration)": true,
+                      "(telescope:camel)": "duration",
+                      "(telescope:name)": "duration",
+                      "(telescope:orig)": "duration",
+                    },
+                    "parsedType": {
+                      "name": "Duration",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Duration",
+                  },
+                  "endTime": {
+                    "comment": "used for unbonding synthetic lockups, for active synthetic lockups, this
+ value is set to uninitialized value",
+                    "id": 3,
+                    "import": "google/protobuf/timestamp.proto",
+                    "importedName": "google.protobuf.Timestamp",
+                    "options": {
+                      "(gogoproto.moretags)": "yaml:end_time",
+                      "(gogoproto.nullable)": false,
+                      "(gogoproto.stdtime)": true,
+                      "(telescope:camel)": "endTime",
+                      "(telescope:name)": "endTime",
+                      "(telescope:orig)": "end_time",
+                    },
+                    "parsedType": {
+                      "name": "Timestamp",
+                      "type": "Type",
+                    },
+                    "scope": [
+                      "google.protobuf",
+                    ],
+                    "scopeType": "protoImport",
+                    "type": "google.protobuf.Timestamp",
+                  },
+                  "synthDenom": {
+                    "comment": "SynthDenom is the synthetic denom that is a combination of
+ gamm share + bonding status + validator address.",
+                    "id": 2,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "synthDenom",
+                      "(telescope:name)": "synthDenom",
+                      "(telescope:orig)": "synth_denom",
+                    },
+                    "parsedType": {
+                      "name": "string",
+                      "type": "native",
+                    },
+                    "type": "string",
+                    "typeNum": 13,
+                  },
+                  "underlyingLockId": {
+                    "comment": "Underlying Lock ID is the underlying native lock's id for this synthetic
+ lockup. A synthetic lock MUST have an underlying lock.",
+                    "id": 1,
+                    "isScalar": true,
+                    "options": {
+                      "(telescope:camel)": "underlyingLockId",
+                      "(telescope:name)": "underlyingLockId",
+                      "(telescope:orig)": "underlying_lock_id",
+                    },
+                    "parsedType": {
+                      "name": "uint64",
+                      "type": "native",
+                    },
+                    "type": "uint64",
+                    "typeNum": 8,
+                  },
+                },
+                "keyTypes": [],
+                "name": "SyntheticLock",
+                "nested": null,
+                "oneofs": undefined,
+                "options": undefined,
+                "package": "osmosis.lockup",
+                "type": "Type",
+              },
+            },
+            "type": "Namespace",
+          },
+        },
+        "type": "Namespace",
+      },
+    },
+    "type": "Root",
+  },
+}
+`;

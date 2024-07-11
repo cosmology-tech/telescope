@@ -58,6 +58,12 @@ it('google/api/expr/v1alpha1/checked', () => {
   expect(res).toMatchSnapshot();
 });
 
+it('osmosis/lockup/lock', () => {
+  const ref = store.findProto('osmosis/lockup/lock.proto');
+  const res = traverse(store, ref);
+  expect(res).toMatchSnapshot();
+});
+
 
 it('Record', () => {
   const ref = store.findProto('cosmos/crypto/keyring/v1/record.proto');
