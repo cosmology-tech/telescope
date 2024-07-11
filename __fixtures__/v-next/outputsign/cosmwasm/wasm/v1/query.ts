@@ -144,11 +144,9 @@ export interface QueryContractHistoryResponseSDKType {
  * RPC method
  */
 export interface QueryContractsByCodeRequest {
-  /**
-   * grpc-gateway_out does not support Go style CodID
-   * pagination defines an optional pagination for the request.
-   */
+  /** grpc-gateway_out does not support Go style CodID */
   codeId: bigint;
+  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequest;
 }
 export interface QueryContractsByCodeRequestProtoMsg {
@@ -160,11 +158,9 @@ export interface QueryContractsByCodeRequestProtoMsg {
  * RPC method
  */
 export interface QueryContractsByCodeRequestAmino {
-  /**
-   * grpc-gateway_out does not support Go style CodID
-   * pagination defines an optional pagination for the request.
-   */
+  /** grpc-gateway_out does not support Go style CodID */
   code_id?: string;
+  /** pagination defines an optional pagination for the request. */
   pagination?: PageRequestAmino;
 }
 export interface QueryContractsByCodeRequestAminoMsg {

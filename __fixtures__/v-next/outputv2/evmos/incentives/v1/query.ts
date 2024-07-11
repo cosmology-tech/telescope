@@ -224,10 +224,6 @@ export interface QueryGasMeterRequestSDKType {
  * method.
  */
 export interface QueryGasMeterResponse {
-  /**
-   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
-   */
   gasMeter: bigint;
 }
 export interface QueryGasMeterResponseProtoMsg {
@@ -239,10 +235,6 @@ export interface QueryGasMeterResponseProtoMsg {
  * method.
  */
 export interface QueryGasMeterResponseAmino {
-  /**
-   * QueryGasMeterResponse is the response type for the Query/Incentive RPC
-   * method.
-   */
   gas_meter?: string;
 }
 export interface QueryGasMeterResponseAminoMsg {

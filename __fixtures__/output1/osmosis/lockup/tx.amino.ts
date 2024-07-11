@@ -114,12 +114,12 @@ export const AminoConverter = {
     aminoType: "osmosis/lockup/begin-unlock-period-lock",
     toAmino: ({
       owner,
-      ID,
+      iD,
       coins
     }: MsgBeginUnlocking): MsgBeginUnlockingAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: iD.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -133,7 +133,7 @@ export const AminoConverter = {
     }: MsgBeginUnlockingAminoType["value"]): MsgBeginUnlocking => {
       return {
         owner,
-        ID: Long.fromString(ID),
+        iD: Long.fromString(ID),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -145,12 +145,12 @@ export const AminoConverter = {
     aminoType: "osmosis/lockup/extend-lockup",
     toAmino: ({
       owner,
-      ID,
+      iD,
       duration
     }: MsgExtendLockup): MsgExtendLockupAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: iD.toString(),
         duration: (duration * 1_000_000_000).toString()
       };
     },
@@ -161,7 +161,7 @@ export const AminoConverter = {
     }: MsgExtendLockupAminoType["value"]): MsgExtendLockup => {
       return {
         owner,
-        ID: Long.fromString(ID),
+        iD: Long.fromString(ID),
         duration: {
           seconds: Long.fromNumber(Math.floor(parseInt(duration) / 1_000_000_000)),
           nanos: parseInt(duration) % 1_000_000_000
@@ -173,12 +173,12 @@ export const AminoConverter = {
     aminoType: "osmosis/lockup/force-unlock",
     toAmino: ({
       owner,
-      ID,
+      iD,
       coins
     }: MsgForceUnlock): MsgForceUnlockAminoType["value"] => {
       return {
         owner,
-        ID: ID.toString(),
+        ID: iD.toString(),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount
@@ -192,7 +192,7 @@ export const AminoConverter = {
     }: MsgForceUnlockAminoType["value"]): MsgForceUnlock => {
       return {
         owner,
-        ID: Long.fromString(ID),
+        iD: Long.fromString(ID),
         coins: coins.map(el0 => ({
           denom: el0.denom,
           amount: el0.amount

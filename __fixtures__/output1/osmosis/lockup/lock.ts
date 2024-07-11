@@ -53,7 +53,7 @@ export interface PeriodLock {
    * The ID of the lock is decided upon lock creation, incrementing by 1 for
    * every lock.
    */
-  ID: Long;
+  iD: Long;
   /**
    * Owner is the account address of the lock owner.
    * Only the owner can modify the state of the lock.
@@ -163,7 +163,7 @@ export interface SyntheticLockSDKType {
 }
 function createBasePeriodLock(): PeriodLock {
   return {
-    ID: Long.UZERO,
+    iD: Long.UZERO,
     owner: "",
     duration: Duration.fromPartial({}),
     endTime: new Date(),
@@ -172,8 +172,8 @@ function createBasePeriodLock(): PeriodLock {
 }
 export const PeriodLock = {
   encode(message: PeriodLock, writer: _m0.Writer = _m0.Writer.create()): _m0.Writer {
-    if (!message.ID.isZero()) {
-      writer.uint32(8).uint64(message.ID);
+    if (!message.iD.isZero()) {
+      writer.uint32(8).uint64(message.iD);
     }
     if (message.owner !== "") {
       writer.uint32(18).string(message.owner);
@@ -197,7 +197,7 @@ export const PeriodLock = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.ID = (reader.uint64() as Long);
+          message.iD = (reader.uint64() as Long);
           break;
         case 2:
           message.owner = reader.string();
@@ -220,7 +220,7 @@ export const PeriodLock = {
   },
   fromJSON(object: any): PeriodLock {
     return {
-      ID: isSet(object.ID) ? Long.fromValue(object.ID) : Long.UZERO,
+      iD: isSet(object.iD) ? Long.fromValue(object.iD) : Long.UZERO,
       owner: isSet(object.owner) ? String(object.owner) : "",
       duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
       endTime: isSet(object.endTime) ? fromJsonTimestamp(object.endTime) : undefined,
@@ -229,7 +229,7 @@ export const PeriodLock = {
   },
   toJSON(message: PeriodLock): JsonSafe<PeriodLock> {
     const obj: any = {};
-    message.ID !== undefined && (obj.ID = (message.ID || Long.UZERO).toString());
+    message.iD !== undefined && (obj.iD = (message.iD || Long.UZERO).toString());
     message.owner !== undefined && (obj.owner = message.owner);
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
     message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
@@ -242,7 +242,7 @@ export const PeriodLock = {
   },
   fromPartial(object: DeepPartial<PeriodLock>): PeriodLock {
     const message = createBasePeriodLock();
-    message.ID = object.ID !== undefined && object.ID !== null ? Long.fromValue(object.ID) : Long.UZERO;
+    message.iD = object.iD !== undefined && object.iD !== null ? Long.fromValue(object.iD) : Long.UZERO;
     message.owner = object.owner ?? "";
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.endTime = object.endTime ?? undefined;
@@ -251,7 +251,7 @@ export const PeriodLock = {
   },
   fromSDK(object: PeriodLockSDKType): PeriodLock {
     return {
-      ID: object?.ID,
+      iD: object?.ID,
       owner: object?.owner,
       duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
       endTime: object.end_time ? Timestamp.fromSDK(object.end_time) : undefined,
@@ -260,7 +260,7 @@ export const PeriodLock = {
   },
   toSDK(message: PeriodLock): PeriodLockSDKType {
     const obj: any = {};
-    obj.ID = message.ID;
+    obj.ID = message.iD;
     obj.owner = message.owner;
     message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
     message.endTime !== undefined && (obj.end_time = message.endTime ? Timestamp.toSDK(message.endTime) : undefined);
