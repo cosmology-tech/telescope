@@ -24,3 +24,12 @@ export declare const instanceType: (obj: any) => {
  * @returns
  */
 export declare const createEmptyProtoRef: (pkg?: string, filename?: string) => ProtoRef;
+/**
+ * Checks if the given nested names exist in the proto object, following the specified scope.
+ *
+ * @param {any} proto - The prototype object to check against.
+ * @param {string[]} nestedNames - An array of nested property names to check in the proto object.
+ * @param {string[]} scope - An array of scope names to validate against the nestedNames.
+ * @returns {boolean} - Returns true if the nested names exist in the proto object and match the scope, otherwise false.
+ */
+export declare const checkNestedNameInProto: (proto: any, nestedNames: string[], scope: string[]) => boolean;

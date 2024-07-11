@@ -1,6 +1,6 @@
 import { ProtoStore } from './store';
 import { ProtoRef } from '@cosmology/types';
-import { getNested, getNestedProto } from './';
+import { checkNestedNameInProto, getNested, getNestedProto } from './';
 import { Lookup } from '@cosmology/types';
 
 export type { Lookup } from '@cosmology/types';
@@ -12,6 +12,16 @@ export const recursiveLookup = (proto: any, name: string, scope: string[] = [], 
         name,
         scope,
         ...proto[name]
+    }
+    //check nested name
+    const nestedNames = name.split("_");
+
+    if (checkNestedNameInProto(proto, nestedNames, scope)) {
+        return {
+            name,
+            scope,
+            ...proto[nestedNames[nestedNames.length - 1]],
+        };
     }
 
     if (allowNested && proto) {
@@ -207,9 +217,9 @@ export const lookup = (
 ) => {
     const root = getRoot(ref);
 
-    if(!root.package) {
-      console.warn(`There's no package definition in ${ref.filename}`)
-      return
+    if (!root.package) {
+        console.warn(`There's no package definition in ${ref.filename}`)
+        return
     }
 
     const nested = getNestedProto(root);

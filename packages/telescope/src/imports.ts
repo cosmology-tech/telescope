@@ -281,7 +281,7 @@ const addDerivativeTypesToImports = (
       let lookup = null;
       try {
         lookup = context.store.getImportFromRef(ref, obj.name);
-      } catch (e) {}
+      } catch (e) { }
 
       const appendSuffix = (
         obj: ImportObj,
@@ -334,9 +334,11 @@ const addDerivativeTypesToImports = (
           const foundAmino = context.proto.derivedImports.find((a) => {
             if (a.type !== "Amino") return false;
             if (
-              AminoTypeObject.orig === a.symbol.symbolName &&
-              a.symbol.ref &&
-              a.symbol.source
+              AminoTypeObject.orig.includes("_")
+                ? AminoTypeObject.orig.split("_").at(-1) === a.symbol.symbolName
+                : AminoTypeObject.orig === a.symbol.symbolName &&
+                a.symbol.ref &&
+                a.symbol.source
             ) {
               // UNTIL you fix the ImportObjs to have ref...
               let rel = getRelativePath(a.symbol.ref, a.symbol.source);

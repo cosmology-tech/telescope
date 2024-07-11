@@ -222,3 +222,38 @@ export const createEmptyProtoRef = (pkg?: string, filename?: string): ProtoRef =
         }
     }
 };
+/**
+ * Checks if the given nested names exist in the proto object, following the specified scope.
+ *
+ * @param {any} proto - The prototype object to check against.
+ * @param {string[]} nestedNames - An array of nested property names to check in the proto object.
+ * @param {string[]} scope - An array of scope names to validate against the nestedNames.
+ * @returns {boolean} - Returns true if the nested names exist in the proto object and match the scope, otherwise false.
+ */
+export const checkNestedNameInProto = (
+    proto: any,
+    nestedNames: string[],
+    scope: string[]
+): boolean => {
+    // Check if the proto object has the property specified by the last element in nestedNames
+    if (!proto.hasOwnProperty(nestedNames[nestedNames.length - 1])) {
+        return false;
+    }
+
+    // Create temporary copies of nestedNames and scope for manipulation
+    let tempNestedNames = [...nestedNames];
+    let tempScope = [...scope];
+
+    // Remove the last element from tempNestedNames
+    tempNestedNames.pop();
+
+    // Loop through tempNestedNames and tempScope to ensure they match
+    while (tempNestedNames.length > 0) {
+        if (tempNestedNames.pop() !== tempScope.pop()) {
+            return false;
+        }
+    }
+
+    // If all checks pass, return true
+    return true;
+};
