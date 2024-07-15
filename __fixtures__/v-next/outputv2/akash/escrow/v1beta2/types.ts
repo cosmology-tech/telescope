@@ -516,7 +516,7 @@ export const Account = {
     obj.state = message.state ?? 0;
     obj.balance = message.balance ? DecCoin.toAmino(message.balance) : DecCoin.toAmino(DecCoin.fromPartial({}));
     obj.transferred = message.transferred ? DecCoin.toAmino(message.transferred) : DecCoin.toAmino(DecCoin.fromPartial({}));
-    obj.settled_at = message.settledAt ? message.settledAt.toString() : "0";
+    obj.settled_at = message.settledAt ? (message.settledAt?.toString)() : "0";
     obj.depositor = message.depositor ?? "";
     obj.funds = message.funds ? DecCoin.toAmino(message.funds) : DecCoin.toAmino(DecCoin.fromPartial({}));
     return obj;

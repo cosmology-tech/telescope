@@ -289,7 +289,7 @@ export const MsgSuperfluidDelegate = {
   toAmino(message: MsgSuperfluidDelegate): MsgSuperfluidDelegateAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? (message.lockId?.toString)() : undefined;
     obj.val_addr = message.valAddr === "" ? undefined : message.valAddr;
     return obj;
   },
@@ -429,7 +429,7 @@ export const MsgSuperfluidUndelegate = {
   toAmino(message: MsgSuperfluidUndelegate): MsgSuperfluidUndelegateAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? (message.lockId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidUndelegateAminoMsg): MsgSuperfluidUndelegate {
@@ -568,7 +568,7 @@ export const MsgSuperfluidUnbondLock = {
   toAmino(message: MsgSuperfluidUnbondLock): MsgSuperfluidUnbondLockAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId.toString() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? (message.lockId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSuperfluidUnbondLockAminoMsg): MsgSuperfluidUnbondLock {
@@ -790,7 +790,7 @@ export const MsgLockAndSuperfluidDelegateResponse = {
   },
   toAmino(message: MsgLockAndSuperfluidDelegateResponse): MsgLockAndSuperfluidDelegateResponseAmino {
     const obj: any = {};
-    obj.ID = message.iD !== BigInt(0) ? message.iD.toString() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgLockAndSuperfluidDelegateResponseAminoMsg): MsgLockAndSuperfluidDelegateResponse {
@@ -873,7 +873,7 @@ export const MsgUnPoolWhitelistedPool = {
   toAmino(message: MsgUnPoolWhitelistedPool): MsgUnPoolWhitelistedPoolAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgUnPoolWhitelistedPoolAminoMsg): MsgUnPoolWhitelistedPool {

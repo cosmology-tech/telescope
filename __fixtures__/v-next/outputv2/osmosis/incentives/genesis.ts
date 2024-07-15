@@ -200,7 +200,7 @@ export const GenesisState = {
     } else {
       obj.lockable_durations = message.lockableDurations;
     }
-    obj.last_gauge_id = message.lastGaugeId !== BigInt(0) ? message.lastGaugeId.toString() : undefined;
+    obj.last_gauge_id = message.lastGaugeId !== BigInt(0) ? (message.lastGaugeId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

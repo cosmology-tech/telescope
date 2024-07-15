@@ -959,7 +959,7 @@ export const QueryContractsByCodeRequest = {
   },
   toAmino(message: QueryContractsByCodeRequest, useInterfaces: boolean = true): QueryContractsByCodeRequestAmino {
     const obj: any = {};
-    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? (message.codeId?.toString)() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1663,7 +1663,7 @@ export const QueryCodeRequest = {
   },
   toAmino(message: QueryCodeRequest, useInterfaces: boolean = true): QueryCodeRequestAmino {
     const obj: any = {};
-    obj.code_id = message.codeId !== BigInt(0) ? message.codeId.toString() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? (message.codeId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryCodeRequestProtoMsg, useInterfaces: boolean = true): QueryCodeRequest {
@@ -1769,7 +1769,7 @@ export const CodeInfoResponse = {
   },
   toAmino(message: CodeInfoResponse, useInterfaces: boolean = true): CodeInfoResponseAmino {
     const obj: any = {};
-    obj.code_id = message.codeId ? message.codeId.toString() : "0";
+    obj.code_id = message.codeId ? (message.codeId?.toString)() : "0";
     obj.creator = message.creator === "" ? undefined : message.creator;
     obj.data_hash = message.dataHash ? base64FromBytes(message.dataHash) : undefined;
     return obj;

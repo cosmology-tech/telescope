@@ -273,7 +273,7 @@ export const Incentive = {
     }
     obj.epochs = message.epochs === 0 ? undefined : message.epochs;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
-    obj.total_gas = message.totalGas !== BigInt(0) ? message.totalGas.toString() : undefined;
+    obj.total_gas = message.totalGas !== BigInt(0) ? (message.totalGas?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: IncentiveProtoMsg, useInterfaces: boolean = true): Incentive {
@@ -380,7 +380,7 @@ export const GasMeter = {
     const obj: any = {};
     obj.contract = message.contract === "" ? undefined : message.contract;
     obj.participant = message.participant === "" ? undefined : message.participant;
-    obj.cumulative_gas = message.cumulativeGas !== BigInt(0) ? message.cumulativeGas.toString() : undefined;
+    obj.cumulative_gas = message.cumulativeGas !== BigInt(0) ? (message.cumulativeGas?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: GasMeterProtoMsg, useInterfaces: boolean = true): GasMeter {

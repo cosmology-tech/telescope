@@ -666,7 +666,7 @@ export const MetricRule_MetricCostsEntry = {
   toAmino(message: MetricRule_MetricCostsEntry, useInterfaces: boolean = true): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
     obj.key = message.key === "" ? undefined : message.key;
-    obj.value = message.value !== BigInt(0) ? message.value.toString() : undefined;
+    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: MetricRule_MetricCostsEntryProtoMsg, useInterfaces: boolean = true): MetricRule_MetricCostsEntry {
@@ -879,7 +879,7 @@ export const QuotaLimit_ValuesEntry = {
   toAmino(message: QuotaLimit_ValuesEntry, useInterfaces: boolean = true): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
     obj.key = message.key === "" ? undefined : message.key;
-    obj.value = message.value !== BigInt(0) ? message.value.toString() : undefined;
+    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QuotaLimit_ValuesEntryProtoMsg, useInterfaces: boolean = true): QuotaLimit_ValuesEntry {
@@ -1115,9 +1115,9 @@ export const QuotaLimit = {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
     obj.description = message.description === "" ? undefined : message.description;
-    obj.default_limit = message.defaultLimit !== BigInt(0) ? message.defaultLimit.toString() : undefined;
-    obj.max_limit = message.maxLimit !== BigInt(0) ? message.maxLimit.toString() : undefined;
-    obj.free_tier = message.freeTier !== BigInt(0) ? message.freeTier.toString() : undefined;
+    obj.default_limit = message.defaultLimit !== BigInt(0) ? (message.defaultLimit?.toString)() : undefined;
+    obj.max_limit = message.maxLimit !== BigInt(0) ? (message.maxLimit?.toString)() : undefined;
+    obj.free_tier = message.freeTier !== BigInt(0) ? (message.freeTier?.toString)() : undefined;
     obj.duration = message.duration === "" ? undefined : message.duration;
     obj.metric = message.metric === "" ? undefined : message.metric;
     obj.unit = message.unit === "" ? undefined : message.unit;

@@ -225,7 +225,7 @@ export const OrderID = {
   toAmino(message: OrderID): OrderIDAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     return obj;
@@ -372,7 +372,7 @@ export const Order = {
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
-    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? (message.createdAt?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: OrderAminoMsg): Order {
@@ -531,7 +531,7 @@ export const OrderFilters = {
   toAmino(message: OrderFilters): OrderFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     obj.state = message.state ?? "";

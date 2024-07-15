@@ -1180,7 +1180,7 @@ export const LogEntrySourceLocation = {
   toAmino(message: LogEntrySourceLocation, useInterfaces: boolean = true): LogEntrySourceLocationAmino {
     const obj: any = {};
     obj.file = message.file === "" ? undefined : message.file;
-    obj.line = message.line !== BigInt(0) ? message.line.toString() : undefined;
+    obj.line = message.line !== BigInt(0) ? (message.line?.toString)() : undefined;
     obj.function = message.function === "" ? undefined : message.function;
     return obj;
   },

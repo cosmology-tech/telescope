@@ -234,7 +234,7 @@ export const MsgCreateBalancerPoolResponse = {
   },
   toAmino(message: MsgCreateBalancerPoolResponse, useInterfaces: boolean = true): MsgCreateBalancerPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg, useInterfaces: boolean = true): MsgCreateBalancerPoolResponse {

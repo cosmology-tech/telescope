@@ -437,9 +437,9 @@ export const BlockParams = {
   },
   toAmino(message: BlockParams, useInterfaces: boolean = true): BlockParamsAmino {
     const obj: any = {};
-    obj.max_bytes = message.maxBytes !== BigInt(0) ? message.maxBytes.toString() : undefined;
-    obj.max_gas = message.maxGas !== BigInt(0) ? message.maxGas.toString() : undefined;
-    obj.time_iota_ms = message.timeIotaMs !== BigInt(0) ? message.timeIotaMs.toString() : undefined;
+    obj.max_bytes = message.maxBytes !== BigInt(0) ? (message.maxBytes?.toString)() : undefined;
+    obj.max_gas = message.maxGas !== BigInt(0) ? (message.maxGas?.toString)() : undefined;
+    obj.time_iota_ms = message.timeIotaMs !== BigInt(0) ? (message.timeIotaMs?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: BlockParamsProtoMsg, useInterfaces: boolean = true): BlockParams {
@@ -548,9 +548,9 @@ export const EvidenceParams = {
   },
   toAmino(message: EvidenceParams, useInterfaces: boolean = true): EvidenceParamsAmino {
     const obj: any = {};
-    obj.max_age_num_blocks = message.maxAgeNumBlocks !== BigInt(0) ? message.maxAgeNumBlocks.toString() : undefined;
+    obj.max_age_num_blocks = message.maxAgeNumBlocks !== BigInt(0) ? (message.maxAgeNumBlocks?.toString)() : undefined;
     obj.max_age_duration = message.maxAgeDuration ? Duration.toAmino(message.maxAgeDuration, useInterfaces) : undefined;
-    obj.max_bytes = message.maxBytes !== BigInt(0) ? message.maxBytes.toString() : undefined;
+    obj.max_bytes = message.maxBytes !== BigInt(0) ? (message.maxBytes?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: EvidenceParamsProtoMsg, useInterfaces: boolean = true): EvidenceParams {
@@ -708,7 +708,7 @@ export const VersionParams = {
   },
   toAmino(message: VersionParams, useInterfaces: boolean = true): VersionParamsAmino {
     const obj: any = {};
-    obj.app_version = message.appVersion !== BigInt(0) ? message.appVersion.toString() : undefined;
+    obj.app_version = message.appVersion !== BigInt(0) ? (message.appVersion?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: VersionParamsProtoMsg, useInterfaces: boolean = true): VersionParams {
@@ -801,8 +801,8 @@ export const HashedParams = {
   },
   toAmino(message: HashedParams, useInterfaces: boolean = true): HashedParamsAmino {
     const obj: any = {};
-    obj.block_max_bytes = message.blockMaxBytes !== BigInt(0) ? message.blockMaxBytes.toString() : undefined;
-    obj.block_max_gas = message.blockMaxGas !== BigInt(0) ? message.blockMaxGas.toString() : undefined;
+    obj.block_max_bytes = message.blockMaxBytes !== BigInt(0) ? (message.blockMaxBytes?.toString)() : undefined;
+    obj.block_max_gas = message.blockMaxGas !== BigInt(0) ? (message.blockMaxGas?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: HashedParamsProtoMsg, useInterfaces: boolean = true): HashedParams {

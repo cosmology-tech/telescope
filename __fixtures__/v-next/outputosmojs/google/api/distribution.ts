@@ -518,7 +518,7 @@ export const Distribution = {
   },
   toAmino(message: Distribution): DistributionAmino {
     const obj: any = {};
-    obj.count = message.count !== BigInt(0) ? message.count.toString() : undefined;
+    obj.count = message.count !== BigInt(0) ? (message.count?.toString)() : undefined;
     obj.mean = message.mean === 0 ? undefined : message.mean;
     obj.sum_of_squared_deviation = message.sumOfSquaredDeviation === 0 ? undefined : message.sumOfSquaredDeviation;
     obj.range = message.range ? Distribution_Range.toAmino(message.range) : undefined;

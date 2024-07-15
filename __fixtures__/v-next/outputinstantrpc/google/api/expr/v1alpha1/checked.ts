@@ -664,7 +664,7 @@ export const CheckedExpr_ReferenceMapEntry = {
   },
   toAmino(message: CheckedExpr_ReferenceMapEntry): CheckedExpr_ReferenceMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? (message.key?.toString)() : undefined;
     obj.value = message.value ? Reference.toAmino(message.value) : undefined;
     return obj;
   },
@@ -766,7 +766,7 @@ export const CheckedExpr_TypeMapEntry = {
   },
   toAmino(message: CheckedExpr_TypeMapEntry): CheckedExpr_TypeMapEntryAmino {
     const obj: any = {};
-    obj.key = message.key !== BigInt(0) ? message.key.toString() : undefined;
+    obj.key = message.key !== BigInt(0) ? (message.key?.toString)() : undefined;
     obj.value = message.value ? Type.toAmino(message.value) : undefined;
     return obj;
   },

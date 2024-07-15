@@ -1169,7 +1169,7 @@ export const MsgDelegateBondedTokens = {
   toAmino(message: MsgDelegateBondedTokens): MsgDelegateBondedTokensAmino {
     const obj: any = {};
     obj.delegator = message.delegator === "" ? undefined : message.delegator;
-    obj.lockID = message.lockID !== BigInt(0) ? message.lockID.toString() : undefined;
+    obj.lockID = message.lockID !== BigInt(0) ? (message.lockID?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgDelegateBondedTokensAminoMsg): MsgDelegateBondedTokens {

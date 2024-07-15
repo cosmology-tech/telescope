@@ -123,12 +123,12 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                 t.conditionalExpression(
                     nullTest,
                     t.callExpression(
-                        t.memberExpression(
+                        t.optionalMemberExpression(
                             t.memberExpression(
                                 t.identifier("message"),
                                 t.identifier(propName)
                             ),
-                            t.identifier("toString")
+                            t.identifier("toString"),undefined, true
                         ),
                         []
                     ),

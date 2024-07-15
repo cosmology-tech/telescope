@@ -1207,7 +1207,7 @@ export const IssueDetails = {
     const obj: any = {};
     obj.severity = message.severity === 0 ? undefined : message.severity;
     obj.position = message.position ? SourcePosition.toAmino(message.position, useInterfaces) : undefined;
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: IssueDetailsProtoMsg, useInterfaces: boolean = true): IssueDetails {
