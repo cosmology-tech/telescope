@@ -679,7 +679,7 @@ export const ValidatorCurrentRewards = {
     } else {
       obj.rewards = message.rewards;
     }
-    obj.period = message.period !== BigInt(0) ? message.period.toString() : undefined;
+    obj.period = message.period !== BigInt(0) ? (message.period?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: ValidatorCurrentRewardsProtoMsg, useInterfaces: boolean = true): ValidatorCurrentRewards {
@@ -935,7 +935,7 @@ export const ValidatorSlashEvent = {
   },
   toAmino(message: ValidatorSlashEvent, useInterfaces: boolean = true): ValidatorSlashEventAmino {
     const obj: any = {};
-    obj.validator_period = message.validatorPeriod !== BigInt(0) ? message.validatorPeriod.toString() : undefined;
+    obj.validator_period = message.validatorPeriod !== BigInt(0) ? (message.validatorPeriod?.toString)() : undefined;
     obj.fraction = message.fraction === "" ? undefined : message.fraction;
     return obj;
   },
@@ -1335,9 +1335,9 @@ export const DelegatorStartingInfo = {
   },
   toAmino(message: DelegatorStartingInfo, useInterfaces: boolean = true): DelegatorStartingInfoAmino {
     const obj: any = {};
-    obj.previous_period = message.previousPeriod !== BigInt(0) ? message.previousPeriod.toString() : undefined;
+    obj.previous_period = message.previousPeriod !== BigInt(0) ? (message.previousPeriod?.toString)() : undefined;
     obj.stake = message.stake === "" ? undefined : message.stake;
-    obj.height = message.height ? message.height.toString() : "0";
+    obj.height = message.height ? (message.height?.toString)() : "0";
     return obj;
   },
   fromProtoMsg(message: DelegatorStartingInfoProtoMsg, useInterfaces: boolean = true): DelegatorStartingInfo {

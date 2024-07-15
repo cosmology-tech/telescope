@@ -1064,7 +1064,7 @@ export const IssueDetails = {
     const obj: any = {};
     obj.severity = message.severity === 0 ? undefined : message.severity;
     obj.position = message.position ? SourcePosition.toAmino(message.position) : undefined;
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: IssueDetailsAminoMsg): IssueDetails {

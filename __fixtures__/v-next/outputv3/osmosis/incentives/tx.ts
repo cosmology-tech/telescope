@@ -258,7 +258,7 @@ export const MsgCreateGauge = {
       obj.coins = message.coins;
     }
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver !== BigInt(0) ? message.numEpochsPaidOver.toString() : undefined;
+    obj.num_epochs_paid_over = message.numEpochsPaidOver !== BigInt(0) ? (message.numEpochsPaidOver?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgCreateGaugeProtoMsg, useInterfaces: boolean = true): MsgCreateGauge {
@@ -426,7 +426,7 @@ export const MsgAddToGauge = {
   toAmino(message: MsgAddToGauge, useInterfaces: boolean = true): MsgAddToGaugeAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? (message.gaugeId?.toString)() : undefined;
     if (message.rewards) {
       obj.rewards = message.rewards.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {

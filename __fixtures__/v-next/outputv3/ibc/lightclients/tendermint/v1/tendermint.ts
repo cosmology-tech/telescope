@@ -945,8 +945,8 @@ export const Fraction = {
   },
   toAmino(message: Fraction, useInterfaces: boolean = true): FractionAmino {
     const obj: any = {};
-    obj.numerator = message.numerator !== BigInt(0) ? message.numerator.toString() : undefined;
-    obj.denominator = message.denominator !== BigInt(0) ? message.denominator.toString() : undefined;
+    obj.numerator = message.numerator !== BigInt(0) ? (message.numerator?.toString)() : undefined;
+    obj.denominator = message.denominator !== BigInt(0) ? (message.denominator?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: FractionProtoMsg, useInterfaces: boolean = true): Fraction {

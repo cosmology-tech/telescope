@@ -378,7 +378,7 @@ export const LastValidatorPower = {
   toAmino(message: LastValidatorPower, useInterfaces: boolean = true): LastValidatorPowerAmino {
     const obj: any = {};
     obj.address = message.address === "" ? undefined : message.address;
-    obj.power = message.power !== BigInt(0) ? message.power.toString() : undefined;
+    obj.power = message.power !== BigInt(0) ? (message.power?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: LastValidatorPowerProtoMsg, useInterfaces: boolean = true): LastValidatorPower {

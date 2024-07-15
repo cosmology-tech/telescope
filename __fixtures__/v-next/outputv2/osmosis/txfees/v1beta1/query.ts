@@ -499,7 +499,7 @@ export const QueryDenomSpotPriceResponse = {
   },
   toAmino(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseAmino {
     const obj: any = {};
-    obj.poolID = message.poolID !== BigInt(0) ? message.poolID.toString() : undefined;
+    obj.poolID = message.poolID !== BigInt(0) ? (message.poolID?.toString)() : undefined;
     obj.spot_price = message.spotPrice === "" ? undefined : message.spotPrice;
     return obj;
   },
@@ -682,7 +682,7 @@ export const QueryDenomPoolIdResponse = {
   },
   toAmino(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseAmino {
     const obj: any = {};
-    obj.poolID = message.poolID !== BigInt(0) ? message.poolID.toString() : undefined;
+    obj.poolID = message.poolID !== BigInt(0) ? (message.poolID?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryDenomPoolIdResponseAminoMsg): QueryDenomPoolIdResponse {

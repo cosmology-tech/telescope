@@ -1345,7 +1345,7 @@ export const AttributeContext_Peer = {
   toAmino(message: AttributeContext_Peer): AttributeContext_PeerAmino {
     const obj: any = {};
     obj.ip = message.ip === "" ? undefined : message.ip;
-    obj.port = message.port !== BigInt(0) ? message.port.toString() : undefined;
+    obj.port = message.port !== BigInt(0) ? (message.port?.toString)() : undefined;
     obj.labels = {};
     if (message.labels) {
       Object.entries(message.labels).forEach(([k, v]) => {
@@ -1856,7 +1856,7 @@ export const AttributeContext_Request = {
     obj.scheme = message.scheme === "" ? undefined : message.scheme;
     obj.query = message.query === "" ? undefined : message.query;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.size = message.size !== BigInt(0) ? message.size.toString() : undefined;
+    obj.size = message.size !== BigInt(0) ? (message.size?.toString)() : undefined;
     obj.protocol = message.protocol === "" ? undefined : message.protocol;
     obj.reason = message.reason === "" ? undefined : message.reason;
     obj.auth = message.auth ? AttributeContext_Auth.toAmino(message.auth) : undefined;
@@ -2058,8 +2058,8 @@ export const AttributeContext_Response = {
   },
   toAmino(message: AttributeContext_Response): AttributeContext_ResponseAmino {
     const obj: any = {};
-    obj.code = message.code !== BigInt(0) ? message.code.toString() : undefined;
-    obj.size = message.size !== BigInt(0) ? message.size.toString() : undefined;
+    obj.code = message.code !== BigInt(0) ? (message.code?.toString)() : undefined;
+    obj.size = message.size !== BigInt(0) ? (message.size?.toString)() : undefined;
     obj.headers = {};
     if (message.headers) {
       Object.entries(message.headers).forEach(([k, v]) => {

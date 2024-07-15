@@ -278,7 +278,7 @@ export const Snapshot = {
   },
   toAmino(message: Snapshot): SnapshotAmino {
     const obj: any = {};
-    obj.height = message.height !== BigInt(0) ? message.height.toString() : undefined;
+    obj.height = message.height !== BigInt(0) ? (message.height?.toString)() : undefined;
     obj.format = message.format === 0 ? undefined : message.format;
     obj.chunks = message.chunks === 0 ? undefined : message.chunks;
     obj.hash = message.hash ? base64FromBytes(message.hash) : undefined;
@@ -817,7 +817,7 @@ export const SnapshotIAVLItem = {
     const obj: any = {};
     obj.key = message.key ? base64FromBytes(message.key) : undefined;
     obj.value = message.value ? base64FromBytes(message.value) : undefined;
-    obj.version = message.version !== BigInt(0) ? message.version.toString() : undefined;
+    obj.version = message.version !== BigInt(0) ? (message.version?.toString)() : undefined;
     obj.height = message.height === 0 ? undefined : message.height;
     return obj;
   },

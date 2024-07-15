@@ -312,7 +312,7 @@ export const GenesisState = {
     } else {
       obj.ack_sequences = message.ackSequences;
     }
-    obj.next_channel_sequence = message.nextChannelSequence !== BigInt(0) ? message.nextChannelSequence.toString() : undefined;
+    obj.next_channel_sequence = message.nextChannelSequence !== BigInt(0) ? (message.nextChannelSequence?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
@@ -442,7 +442,7 @@ export const PacketSequence = {
     const obj: any = {};
     obj.port_id = message.portId === "" ? undefined : message.portId;
     obj.channel_id = message.channelId === "" ? undefined : message.channelId;
-    obj.sequence = message.sequence !== BigInt(0) ? message.sequence.toString() : undefined;
+    obj.sequence = message.sequence !== BigInt(0) ? (message.sequence?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: PacketSequenceAminoMsg): PacketSequence {

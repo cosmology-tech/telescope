@@ -1,1 +1,1 @@
-export declare const jsonSafe = "\nexport type JsonSafe<T> = {\n  [Prop in keyof T]: T[Prop] extends Uint8Array | bigint | Date ? string : T[Prop];\n}\n";
+export declare const jsonSafe = "\nexport type JsonSafe<T> = T extends Uint8Array | bigint | Date\n  ? string\n  : T extends Array<infer U>\n  ? Array<JsonSafe<U>>\n  : T extends object\n  ? { [K in keyof T]: JsonSafe<T[K]> }\n  : T;\n";

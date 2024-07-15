@@ -319,17 +319,17 @@ export const GenesisState = {
       obj.base_denoms = message.baseDenoms;
     }
     obj.pool_weights = message.poolWeights ? PoolWeights.toAmino(message.poolWeights) : undefined;
-    obj.days_since_module_genesis = message.daysSinceModuleGenesis !== BigInt(0) ? message.daysSinceModuleGenesis.toString() : undefined;
+    obj.days_since_module_genesis = message.daysSinceModuleGenesis !== BigInt(0) ? (message.daysSinceModuleGenesis?.toString)() : undefined;
     if (message.developerFees) {
       obj.developer_fees = message.developerFees.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
       obj.developer_fees = message.developerFees;
     }
-    obj.latest_block_height = message.latestBlockHeight !== BigInt(0) ? message.latestBlockHeight.toString() : undefined;
+    obj.latest_block_height = message.latestBlockHeight !== BigInt(0) ? (message.latestBlockHeight?.toString)() : undefined;
     obj.developer_address = message.developerAddress === "" ? undefined : message.developerAddress;
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock !== BigInt(0) ? message.maxPoolPointsPerBlock.toString() : undefined;
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx !== BigInt(0) ? message.maxPoolPointsPerTx.toString() : undefined;
-    obj.point_count_for_block = message.pointCountForBlock !== BigInt(0) ? message.pointCountForBlock.toString() : undefined;
+    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock !== BigInt(0) ? (message.maxPoolPointsPerBlock?.toString)() : undefined;
+    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx !== BigInt(0) ? (message.maxPoolPointsPerTx?.toString)() : undefined;
+    obj.point_count_for_block = message.pointCountForBlock !== BigInt(0) ? (message.pointCountForBlock?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

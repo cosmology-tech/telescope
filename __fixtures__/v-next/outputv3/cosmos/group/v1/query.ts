@@ -618,7 +618,7 @@ export const QueryGroupInfoRequest = {
   },
   toAmino(message: QueryGroupInfoRequest, useInterfaces: boolean = true): QueryGroupInfoRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryGroupInfoRequestProtoMsg, useInterfaces: boolean = true): QueryGroupInfoRequest {
@@ -944,7 +944,7 @@ export const QueryGroupMembersRequest = {
   },
   toAmino(message: QueryGroupMembersRequest, useInterfaces: boolean = true): QueryGroupMembersRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1330,7 +1330,7 @@ export const QueryGroupPoliciesByGroupRequest = {
   },
   toAmino(message: QueryGroupPoliciesByGroupRequest, useInterfaces: boolean = true): QueryGroupPoliciesByGroupRequestAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -1700,7 +1700,7 @@ export const QueryProposalRequest = {
   },
   toAmino(message: QueryProposalRequest, useInterfaces: boolean = true): QueryProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryProposalRequestProtoMsg, useInterfaces: boolean = true): QueryProposalRequest {
@@ -2062,7 +2062,7 @@ export const QueryVoteByProposalVoterRequest = {
   },
   toAmino(message: QueryVoteByProposalVoterRequest, useInterfaces: boolean = true): QueryVoteByProposalVoterRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     obj.voter = message.voter === "" ? undefined : message.voter;
     return obj;
   },
@@ -2235,7 +2235,7 @@ export const QueryVotesByProposalRequest = {
   },
   toAmino(message: QueryVotesByProposalRequest, useInterfaces: boolean = true): QueryVotesByProposalRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination, useInterfaces) : undefined;
     return obj;
   },
@@ -2797,7 +2797,7 @@ export const QueryTallyResultRequest = {
   },
   toAmino(message: QueryTallyResultRequest, useInterfaces: boolean = true): QueryTallyResultRequestAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryTallyResultRequestProtoMsg, useInterfaces: boolean = true): QueryTallyResultRequest {

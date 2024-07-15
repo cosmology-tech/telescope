@@ -435,7 +435,7 @@ export const DistrRecord = {
   },
   toAmino(message: DistrRecord, useInterfaces: boolean = true): DistrRecordAmino {
     const obj: any = {};
-    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? (message.gaugeId?.toString)() : undefined;
     obj.weight = message.weight === "" ? undefined : message.weight;
     return obj;
   },
@@ -546,8 +546,8 @@ export const PoolToGauge = {
   },
   toAmino(message: PoolToGauge, useInterfaces: boolean = true): PoolToGaugeAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
-    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? (message.gaugeId?.toString)() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },

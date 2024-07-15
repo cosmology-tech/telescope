@@ -480,7 +480,7 @@ export const EstimateSwapExactAmountInRequest = {
   },
   toAmino(message: EstimateSwapExactAmountInRequest): EstimateSwapExactAmountInRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
@@ -612,7 +612,7 @@ export const EstimateSinglePoolSwapExactAmountInRequest = {
   },
   toAmino(message: EstimateSinglePoolSwapExactAmountInRequest): EstimateSinglePoolSwapExactAmountInRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
     obj.token_out_denom = message.tokenOutDenom === "" ? undefined : message.tokenOutDenom;
     return obj;
@@ -840,7 +840,7 @@ export const EstimateSwapExactAmountOutRequest = {
   },
   toAmino(message: EstimateSwapExactAmountOutRequest): EstimateSwapExactAmountOutRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
     } else {
@@ -972,7 +972,7 @@ export const EstimateSinglePoolSwapExactAmountOutRequest = {
   },
   toAmino(message: EstimateSinglePoolSwapExactAmountOutRequest): EstimateSinglePoolSwapExactAmountOutRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.token_in_denom = message.tokenInDenom === "" ? undefined : message.tokenInDenom;
     obj.token_out = message.tokenOut === "" ? undefined : message.tokenOut;
     return obj;
@@ -1235,7 +1235,7 @@ export const NumPoolsResponse = {
   },
   toAmino(message: NumPoolsResponse): NumPoolsResponseAmino {
     const obj: any = {};
-    obj.num_pools = message.numPools !== BigInt(0) ? message.numPools.toString() : undefined;
+    obj.num_pools = message.numPools !== BigInt(0) ? (message.numPools?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: NumPoolsResponseAminoMsg): NumPoolsResponse {
@@ -1329,7 +1329,7 @@ export const PoolRequest = {
   },
   toAmino(message: PoolRequest): PoolRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: PoolRequestAminoMsg): PoolRequest {
@@ -1517,7 +1517,7 @@ export const AllPoolsRequest = {
   },
   toAmino(message: AllPoolsRequest): AllPoolsRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: AllPoolsRequestAminoMsg): AllPoolsRequest {
@@ -1747,7 +1747,7 @@ export const SpotPriceRequest = {
   },
   toAmino(message: SpotPriceRequest): SpotPriceRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.base_asset_denom = message.baseAssetDenom === "" ? undefined : message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom === "" ? undefined : message.quoteAssetDenom;
     return obj;

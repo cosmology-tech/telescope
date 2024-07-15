@@ -230,7 +230,7 @@ export const QueryGaugeIdsRequest = {
   },
   toAmino(message: QueryGaugeIdsRequest, useInterfaces: boolean = true): QueryGaugeIdsRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryGaugeIdsRequestProtoMsg, useInterfaces: boolean = true): QueryGaugeIdsRequest {
@@ -420,7 +420,7 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
   },
   toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration, useInterfaces: boolean = true): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
     const obj: any = {};
-    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? (message.gaugeId?.toString)() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     obj.gauge_incentive_percentage = message.gaugeIncentivePercentage === "" ? undefined : message.gaugeIncentivePercentage;
     return obj;
@@ -1006,9 +1006,9 @@ export const IncentivizedPool = {
   },
   toAmino(message: IncentivizedPool, useInterfaces: boolean = true): IncentivizedPoolAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.lockable_duration = message.lockableDuration ? Duration.toAmino(message.lockableDuration, useInterfaces) : undefined;
-    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId.toString() : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? (message.gaugeId?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: IncentivizedPoolProtoMsg, useInterfaces: boolean = true): IncentivizedPool {

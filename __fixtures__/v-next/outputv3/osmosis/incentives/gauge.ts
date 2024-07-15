@@ -291,7 +291,7 @@ export const Gauge = {
   },
   toAmino(message: Gauge, useInterfaces: boolean = true): GaugeAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? message.id.toString() : undefined;
+    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
     obj.is_perpetual = message.isPerpetual === false ? undefined : message.isPerpetual;
     obj.distribute_to = message.distributeTo ? QueryCondition.toAmino(message.distributeTo, useInterfaces) : undefined;
     if (message.coins) {
@@ -300,8 +300,8 @@ export const Gauge = {
       obj.coins = message.coins;
     }
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
-    obj.num_epochs_paid_over = message.numEpochsPaidOver !== BigInt(0) ? message.numEpochsPaidOver.toString() : undefined;
-    obj.filled_epochs = message.filledEpochs !== BigInt(0) ? message.filledEpochs.toString() : undefined;
+    obj.num_epochs_paid_over = message.numEpochsPaidOver !== BigInt(0) ? (message.numEpochsPaidOver?.toString)() : undefined;
+    obj.filled_epochs = message.filledEpochs !== BigInt(0) ? (message.filledEpochs?.toString)() : undefined;
     if (message.distributedCoins) {
       obj.distributed_coins = message.distributedCoins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {

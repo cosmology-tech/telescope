@@ -196,8 +196,8 @@ export const FullTick = {
   },
   toAmino(message: FullTick): FullTickAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
-    obj.tick_index = message.tickIndex !== BigInt(0) ? message.tickIndex.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.tick_index = message.tickIndex !== BigInt(0) ? (message.tickIndex?.toString)() : undefined;
     obj.info = message.info ? TickInfo.toAmino(message.info) : undefined;
     return obj;
   },
@@ -555,7 +555,7 @@ export const GenesisState = {
     } else {
       obj.positions = message.positions;
     }
-    obj.next_position_id = message.nextPositionId !== BigInt(0) ? message.nextPositionId.toString() : undefined;
+    obj.next_position_id = message.nextPositionId !== BigInt(0) ? (message.nextPositionId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

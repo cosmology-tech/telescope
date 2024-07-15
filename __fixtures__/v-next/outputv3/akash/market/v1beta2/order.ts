@@ -233,7 +233,7 @@ export const OrderID = {
   toAmino(message: OrderID, useInterfaces: boolean = true): OrderIDAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     return obj;
@@ -361,7 +361,7 @@ export const Order = {
     obj.order_id = message.orderId ? OrderID.toAmino(message.orderId, useInterfaces) : OrderID.toAmino(OrderID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.spec = message.spec ? GroupSpec.toAmino(message.spec, useInterfaces) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
-    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt.toString() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? (message.createdAt?.toString)() : undefined;
     return obj;
   },
   fromProtoMsg(message: OrderProtoMsg, useInterfaces: boolean = true): Order {
@@ -495,7 +495,7 @@ export const OrderFilters = {
   toAmino(message: OrderFilters, useInterfaces: boolean = true): OrderFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? message.dseq.toString() : "0";
+    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     obj.state = message.state ?? "";

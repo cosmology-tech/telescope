@@ -249,7 +249,7 @@ export const ArithmeticTwapRequest = {
   },
   toAmino(message: ArithmeticTwapRequest): ArithmeticTwapRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.base_asset = message.baseAsset === "" ? undefined : message.baseAsset;
     obj.quote_asset = message.quoteAsset === "" ? undefined : message.quoteAsset;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
@@ -480,7 +480,7 @@ export const ArithmeticTwapToNowRequest = {
   },
   toAmino(message: ArithmeticTwapToNowRequest): ArithmeticTwapToNowRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId.toString() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
     obj.base_asset = message.baseAsset === "" ? undefined : message.baseAsset;
     obj.quote_asset = message.quoteAsset === "" ? undefined : message.quoteAsset;
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;

@@ -300,7 +300,7 @@ export const Params = {
     obj.enable_fees = message.enableFees === false ? undefined : message.enableFees;
     obj.developer_shares = message.developerShares === "" ? undefined : message.developerShares;
     obj.validator_shares = message.validatorShares === "" ? undefined : message.validatorShares;
-    obj.addr_derivation_cost_create = message.addrDerivationCostCreate !== BigInt(0) ? message.addrDerivationCostCreate.toString() : undefined;
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate !== BigInt(0) ? (message.addrDerivationCostCreate?.toString)() : undefined;
     obj.min_gas_price = message.minGasPrice === "" ? undefined : message.minGasPrice;
     return obj;
   },

@@ -195,7 +195,7 @@ export const EventCreateGroup = {
   },
   toAmino(message: EventCreateGroup): EventCreateGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventCreateGroupAminoMsg): EventCreateGroup {
@@ -289,7 +289,7 @@ export const EventUpdateGroup = {
   },
   toAmino(message: EventUpdateGroup): EventUpdateGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventUpdateGroupAminoMsg): EventUpdateGroup {
@@ -571,7 +571,7 @@ export const EventSubmitProposal = {
   },
   toAmino(message: EventSubmitProposal): EventSubmitProposalAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventSubmitProposalAminoMsg): EventSubmitProposal {
@@ -665,7 +665,7 @@ export const EventWithdrawProposal = {
   },
   toAmino(message: EventWithdrawProposal): EventWithdrawProposalAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventWithdrawProposalAminoMsg): EventWithdrawProposal {
@@ -759,7 +759,7 @@ export const EventVote = {
   },
   toAmino(message: EventVote): EventVoteAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     return obj;
   },
   fromAminoMsg(object: EventVoteAminoMsg): EventVote {
@@ -869,7 +869,7 @@ export const EventExec = {
   },
   toAmino(message: EventExec): EventExecAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId.toString() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
     obj.result = message.result === 0 ? undefined : message.result;
     return obj;
   },
@@ -980,7 +980,7 @@ export const EventLeaveGroup = {
   },
   toAmino(message: EventLeaveGroup): EventLeaveGroupAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? message.groupId.toString() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
     obj.address = message.address === "" ? undefined : message.address;
     return obj;
   },
