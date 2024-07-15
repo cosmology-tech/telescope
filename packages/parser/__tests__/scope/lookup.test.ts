@@ -1,7 +1,26 @@
 import { ProtoStore } from '../../src/index'
 import { getObjectName, lookupSymbolScopes, lookup, getPackageAndNestedFromStr } from '../../src';
 import { getTestProtoStore } from '../../test-utils';
+import { getMiscTestProtoStore } from '@cosmology/ast/test-utils';
 const store = getTestProtoStore();
+
+const miscStore = getMiscTestProtoStore({
+  prototypes: {
+    excluded: {
+      // hard exclude faulty proto files
+      hardProtos: ["google/api/expr/v1alpha1/eval1.proto"],
+    },
+  },
+});
+miscStore.traverseAll();
+
+describe('test nested msg', () => {
+  const ref = miscStore.findProto('misc/nest.proto');
+  it('TestNest_Graph', () => {
+      const Graph = lookup(miscStore, ref, 'TestNest_Graph');
+      expect(Graph).toMatchSnapshot();
+  });
+});
 
 // you may need to fix TRAVERSE
 
@@ -34,7 +53,7 @@ describe('proto import self', () => {
 
 describe('proto example', () => {
     store.traverseAll();
-    // EXAMPLE: google/logging/v2/logging_metrics 
+    // EXAMPLE: google/logging/v2/logging_metrics
     // EXAMPLE: google/api/servicecontrol/v1/distribution
     const ref = store.findProto('google/logging/v2/logging_metrics.proto');
     it('imports/exports', () => {
@@ -52,12 +71,12 @@ describe('name resolution', () => {
     // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/descriptor.cc#L3798-L3812
     it('lookup', () => {
         // This first searches siblings of relative_to, then siblings of its
-        // parents, etc. 
+        // parents, etc.
 
         // For example, LookupSymbol("foo.bar", "baz.moo.corge") makes
         // FindSymbol("baz.moo.foo.bar")
         // FindSymbol("baz.foo.bar"),
-        // FindSymbol("foo.bar"). 
+        // FindSymbol("foo.bar").
 
         const lookups = lookupSymbolScopes('foo.bar', 'baz.moo.corge');
         expect(lookups).toEqual(

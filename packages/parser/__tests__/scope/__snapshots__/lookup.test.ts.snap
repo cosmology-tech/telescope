@@ -9,6 +9,7 @@ exports[`double import bug GenesisState 1`] = `
       "id": 3,
       "import": "ibc/core/channel/v1/genesis.proto",
       "importedName": "ibc.core.channel.v1.GenesisState",
+      "isNestedMsg": false,
       "options": {
         "(gogoproto.moretags)": "yaml:channel_genesis",
         "(gogoproto.nullable)": false,
@@ -31,6 +32,7 @@ exports[`double import bug GenesisState 1`] = `
       "id": 1,
       "import": "ibc/core/client/v1/genesis.proto",
       "importedName": "ibc.core.client.v1.GenesisState",
+      "isNestedMsg": false,
       "options": {
         "(gogoproto.moretags)": "yaml:client_genesis",
         "(gogoproto.nullable)": false,
@@ -53,6 +55,7 @@ exports[`double import bug GenesisState 1`] = `
       "id": 2,
       "import": "ibc/core/connection/v1/genesis.proto",
       "importedName": "ibc.core.connection.v1.GenesisState",
+      "isNestedMsg": false,
       "options": {
         "(gogoproto.moretags)": "yaml:connection_genesis",
         "(gogoproto.nullable)": false,
@@ -198,5 +201,41 @@ exports[`proto import self imports/exports 3`] = `
   "google/protobuf/timestamp.proto": {
     "Timestamp": "Timestamp",
   },
+}
+`;
+
+exports[`test nested msg TestNest_Graph 1`] = `
+{
+  "comment": null,
+  "fields": {
+    "name": {
+      "comment": null,
+      "id": 1,
+      "isScalar": true,
+      "options": {
+        "(telescope:camel)": "name",
+        "(telescope:name)": "name",
+        "(telescope:orig)": "name",
+      },
+      "parsedType": {
+        "name": "string",
+        "type": "native",
+      },
+      "type": "string",
+      "typeNum": 13,
+    },
+  },
+  "keyTypes": [],
+  "name": "Graph",
+  "nested": null,
+  "nestedMsgTypeName": "TestNest_Graph",
+  "oneofs": undefined,
+  "options": undefined,
+  "package": "misc",
+  "scope": [
+    "misc",
+    "TestNest",
+  ],
+  "type": "Type",
 }
 `;

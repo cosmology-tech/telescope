@@ -369,6 +369,7 @@ const traverseFields = (
                     ...serialize(),
                     importedName: found.importedName,
                     import: found.import,
+                    isNestedMsg: !!found.isNestedMsg
                 };
                 return m;
             }
@@ -393,6 +394,7 @@ const traverseFields = (
                         ...serialize(),
                         importedName: found.importedName,
                         import: found.import,
+                        isNestedMsg: !!found.isNested
                     };
                     return m;
                 }

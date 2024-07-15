@@ -263,6 +263,26 @@ export interface Reference {
 }"
 `;
 
+exports[`traversed misc/eval_request SDKType 1`] = `
+"export interface EvalRequestSDKType {
+  bindings: {
+    [key: string]: ExprValueSDKType;
+  };
+  refs: {
+    [key: string]: IdRefSDKType;
+  };
+  test_num: number;
+  test_string: string;
+  test_bool: boolean;
+  instantiate_permission?: AccessConfigSDKType;
+  id?: string;
+  name?: string;
+  test_array: string[];
+  opt: FeatureSet_Utf8Validation;
+  graph?: TestNest_GraphSDKType;
+}"
+`;
+
 exports[`traversed osmosis/claim/v1beta1/params 1`] = `
 "/** Params defines the claim module's parameters. */
 export interface Params {

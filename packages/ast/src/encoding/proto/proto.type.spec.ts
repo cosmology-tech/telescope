@@ -8,11 +8,21 @@ import { traverse } from '@cosmology/proto-parser'
 import { getNestedProto } from '@cosmology/utils'
 import { defaultTelescopeOptions } from '@cosmology/types'
 import { ProtoParseContext } from '../context';
-import { getTestProtoStore, expectCode, printCode } from '../../../test-utils';
+import { getTestProtoStore,getMiscTestProtoStore, expectCode, printCode } from '../../../test-utils';
 import deepmerge from 'deepmerge';
 
 const store = getTestProtoStore();
 store.traverseAll();
+
+const miscStore = getMiscTestProtoStore({
+  prototypes: {
+    excluded: {
+      // hard exclude faulty proto files
+      hardProtos: ["google/api/expr/v1alpha1/eval1.proto"],
+    },
+  },
+});
+miscStore.traverseAll();
 
 it('ListValue', async () => {
     const ref = store.findProto('google/protobuf/struct.proto');
@@ -118,6 +128,12 @@ describe('traversed', () => {
         const res = traverse(store, ref);
         const context = new ProtoParseContext(ref, store, defaultTelescopeOptions);
         expectCode(createProtoType(context, 'Params', res.root.nested.osmosis.nested.claim.nested.v1beta1.nested.Params));
+    });
+    it('misc/eval_request SDKType', async () => {
+      const ref = miscStore.findProto('misc/eval_request.proto');
+      const res = traverse(miscStore, ref);
+      const context = new ProtoParseContext(ref, miscStore, defaultTelescopeOptions);
+      expectCode(createProtoType(context, 'EvalRequest', res.root.nested.misc.nested.EvalRequest, 'SDKType'));
     });
     it('cosmos/app/v1alpha1/config', async () => {
         const ref = store.findProto('cosmos/app/v1alpha1/config.proto');

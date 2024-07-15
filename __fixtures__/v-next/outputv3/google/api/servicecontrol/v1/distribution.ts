@@ -1,4 +1,4 @@
-import { Distribution_Exemplar } from "../../distribution";
+import { Distribution_Exemplar, Distribution_ExemplarAmino, Distribution_ExemplarSDKType } from "../../distribution";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { isSet, DeepPartial } from "../../../../helpers";
 export const protobufPackage = "google.api.servicecontrol.v1";

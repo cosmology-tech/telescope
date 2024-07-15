@@ -135,7 +135,7 @@ export const getFieldTypeReference = (
                 type,
                 symbol: {
                     ref: context.ref.filename,
-                    readAs: field.parsedType.name, // maybe not!
+                    readAs: field.parsedType.name,
                     source: field.import,
                     symbolName: field.parsedType.name,
                     type: 'import'
@@ -253,13 +253,14 @@ export const getFieldAminoTypeReference = (
 
 
     if (field.parsedType?.type === 'Type') {
+        const typeName = field.isNestedMsg ? field.importedName : field.parsedType.name
         context.addImportDerivative({
             type: 'Amino',
             symbol: {
                 ref: context.ref.filename,
-                readAs: field.parsedType.name, // maybe not!
+                readAs: typeName,
                 source: field.import,
-                symbolName: field.parsedType.name,
+                symbolName: typeName,
                 type: 'import'
             },
         })

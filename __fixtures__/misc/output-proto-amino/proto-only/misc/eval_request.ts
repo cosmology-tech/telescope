@@ -1,6 +1,6 @@
 import { ExprValue, ExprValueSDKType, IdRef, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
-import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
-import { TestNest_Graph } from "./nest";
+import { FeatureSet_Utf8Validation, FeatureSet_Utf8ValidationSDKType, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
+import { TestNest_Graph, TestNest_GraphSDKType } from "./nest";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject } from "../helpers";
 import { JsonSafe } from "../json-safe";

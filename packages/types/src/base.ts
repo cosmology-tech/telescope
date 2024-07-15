@@ -105,6 +105,7 @@ export interface ProtoField {
     import?: string;
     importedName?: string;
     scopeType?: string;
+    isNestedMsg?: boolean;
 };
 
 // MOVE TO OPTIONS
@@ -230,6 +231,7 @@ export interface Lookup {
     importType: string;
     importedName: string;
     package: string;
+    isNestedMsg?: boolean;
 }
 
 export interface IProtoStore {

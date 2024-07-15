@@ -34,4 +34,5 @@ export declare const protoFieldsToArray: (proto: ProtoType) => {
     import?: string;
     importedName?: string;
     scopeType?: string;
+    isNestedMsg?: boolean;
 }[];

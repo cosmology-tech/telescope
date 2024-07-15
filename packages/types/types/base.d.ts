@@ -87,6 +87,7 @@ export interface ProtoField {
     import?: string;
     importedName?: string;
     scopeType?: string;
+    isNestedMsg?: boolean;
 }
 export declare const ALLOWED_RPC_SERVICES: string[];
 export interface ProtoServiceMethodInfo {
@@ -191,6 +192,7 @@ export interface Lookup {
     importType: string;
     importedName: string;
     package: string;
+    isNestedMsg?: boolean;
 }
 export interface IProtoStore {
     requests: Record<string, ProtoServiceMethod>;
