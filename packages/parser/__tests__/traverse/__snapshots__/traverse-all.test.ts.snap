@@ -42,6 +42,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service CheckRequest 1
     "id": 1,
     "import": "google/api/expr/v1alpha1/syntax.proto",
     "importedName": "google.api.expr.v1alpha1.ParsedExpr",
+    "isNestedMsg": false,
     "options": {
       "(telescope:camel)": "parsedExpr",
       "(telescope:name)": "parsedExpr",
@@ -64,6 +65,7 @@ exports[`google/api/expr/conformance/v1alpha1/conformance_service CheckRequest 1
     "id": 2,
     "import": "google/api/expr/v1alpha1/checked.proto",
     "importedName": "google.api.expr.v1alpha1.Decl",
+    "isNestedMsg": false,
     "options": {
       "(telescope:camel)": "typeEnv",
       "(telescope:name)": "typeEnv",

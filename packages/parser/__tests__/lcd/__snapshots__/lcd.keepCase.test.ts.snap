@@ -93,6 +93,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -161,6 +162,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -293,6 +295,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -457,6 +460,7 @@ exports[`queries 1`] = `
             "id": 4,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -637,6 +641,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -704,6 +709,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -771,6 +777,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -941,6 +948,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1001,6 +1009,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1051,6 +1060,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1087,6 +1097,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1247,6 +1258,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1283,6 +1295,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1530,6 +1543,7 @@ exports[`queries 1`] = `
         "id": 4,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1583,6 +1597,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1726,6 +1741,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1801,6 +1817,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1898,6 +1915,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1948,6 +1966,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -2004,6 +2023,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -2052,6 +2072,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",

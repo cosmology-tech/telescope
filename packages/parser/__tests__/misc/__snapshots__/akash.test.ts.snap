@@ -13,6 +13,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -48,6 +49,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -83,6 +85,7 @@ exports[`Akash 1`] = `
             "id": 4,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.jsontag)": "deposit",
               "(gogoproto.moretags)": "yaml:deposit",
@@ -124,6 +127,7 @@ exports[`Akash 1`] = `
             "id": 2,
             "import": "akash/deployment/v1beta2/groupspec.proto",
             "importedName": "akash.deployment.v1beta2.GroupSpec",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.jsontag)": "groups",
               "(gogoproto.moretags)": "yaml:groups",
@@ -148,6 +152,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -201,6 +206,7 @@ exports[`Akash 1`] = `
             "id": 2,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.jsontag)": "amount",
               "(gogoproto.moretags)": "yaml:amount",
@@ -242,6 +248,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -277,6 +284,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -312,6 +320,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/groupid.proto",
             "importedName": "akash.deployment.v1beta2.GroupID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",
@@ -347,6 +356,7 @@ exports[`Akash 1`] = `
             "id": 1,
             "import": "akash/deployment/v1beta2/deployment.proto",
             "importedName": "akash.deployment.v1beta2.DeploymentID",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.customname)": "ID",
               "(gogoproto.jsontag)": "id",

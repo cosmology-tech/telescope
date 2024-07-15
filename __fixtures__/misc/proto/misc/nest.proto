@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package misc;
+
+message TestNest {
+  message Graph {
+    string name = 1;
+  }
+  string test = 1;
+}

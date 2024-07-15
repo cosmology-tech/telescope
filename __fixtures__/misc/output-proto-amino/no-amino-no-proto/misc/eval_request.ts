@@ -1,5 +1,6 @@
 import { ExprValue, ExprValueSDKType, IdRef, IdRefSDKType } from "../google/api/expr/v1alpha1/eval";
-import { FeatureSet_Utf8Validation, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
+import { FeatureSet_Utf8Validation, FeatureSet_Utf8ValidationSDKType, featureSet_Utf8ValidationFromJSON, featureSet_Utf8ValidationToJSON } from "../google/protobuf/descriptor";
+import { TestNest_Graph, TestNest_GraphSDKType } from "./nest";
 import { BinaryReader, BinaryWriter } from "../binary";
 import { isSet, DeepPartial, isObject } from "../helpers";
 import { JsonSafe } from "../json-safe";
@@ -95,6 +96,7 @@ export interface EvalRequest {
   name?: string;
   testArray: string[];
   opt: FeatureSet_Utf8Validation;
+  graph?: TestNest_Graph;
 }
 export interface EvalRequestSDKType {
   bindings: {
@@ -111,6 +113,7 @@ export interface EvalRequestSDKType {
   name?: string;
   test_array: string[];
   opt: FeatureSet_Utf8Validation;
+  graph?: TestNest_GraphSDKType;
 }
 export interface AccessConfig {
   sender: string;
@@ -286,7 +289,8 @@ function createBaseEvalRequest(): EvalRequest {
     id: undefined,
     name: undefined,
     testArray: [],
-    opt: 0
+    opt: 0,
+    graph: undefined
   };
 }
 export const EvalRequest = {
@@ -327,6 +331,9 @@ export const EvalRequest = {
     }
     if (message.opt !== 0) {
       writer.uint32(120).int32(message.opt);
+    }
+    if (message.graph !== undefined) {
+      TestNest_Graph.encode(message.graph, writer.uint32(130).fork()).ldelim();
     }
     return writer;
   },
@@ -373,6 +380,9 @@ export const EvalRequest = {
         case 15:
           message.opt = (reader.int32() as any);
           break;
+        case 16:
+          message.graph = TestNest_Graph.decode(reader, reader.uint32());
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -402,6 +412,7 @@ export const EvalRequest = {
     if (isSet(object.name)) obj.name = String(object.name);
     if (Array.isArray(object?.testArray)) obj.testArray = object.testArray.map((e: any) => String(e));
     if (isSet(object.opt)) obj.opt = featureSet_Utf8ValidationFromJSON(object.opt);
+    if (isSet(object.graph)) obj.graph = TestNest_Graph.fromJSON(object.graph);
     return obj;
   },
   toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
@@ -430,6 +441,7 @@ export const EvalRequest = {
       obj.testArray = [];
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
+    message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toJSON(message.graph) : undefined);
     return obj;
   },
   fromPartial(object: DeepPartial<EvalRequest>): EvalRequest {
@@ -460,6 +472,9 @@ export const EvalRequest = {
     message.name = object.name ?? undefined;
     message.testArray = object.testArray?.map(e => e) || [];
     message.opt = object.opt ?? 0;
+    if (object.graph !== undefined && object.graph !== null) {
+      message.graph = TestNest_Graph.fromPartial(object.graph);
+    }
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -483,7 +498,8 @@ export const EvalRequest = {
       id: object?.id,
       name: object?.name,
       testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
-      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
+      graph: object.graph ? TestNest_Graph.fromSDK(object.graph) : undefined
     };
   },
   fromSDKJSON(object: any): EvalRequestSDKType {
@@ -507,7 +523,8 @@ export const EvalRequest = {
       id: isSet(object.id) ? String(object.id) : undefined,
       name: isSet(object.name) ? String(object.name) : undefined,
       test_array: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => String(e)) : [],
-      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1
+      opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
+      graph: isSet(object.graph) ? TestNest_Graph.fromSDKJSON(object.graph) : undefined
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -536,6 +553,7 @@ export const EvalRequest = {
       obj.test_array = [];
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
+    message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toSDK(message.graph) : undefined);
     return obj;
   }
 };

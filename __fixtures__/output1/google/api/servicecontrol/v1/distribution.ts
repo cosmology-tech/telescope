@@ -1,4 +1,4 @@
-import { Distribution_Exemplar } from "../../distribution";
+import { Distribution_Exemplar, Distribution_ExemplarSDKType } from "../../distribution";
 import { Long, isSet, DeepPartial } from "../../../../helpers";
 import * as _m0 from "protobufjs/minimal";
 import { JsonSafe } from "../../../../json-safe";

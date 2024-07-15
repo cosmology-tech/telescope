@@ -1,7 +1,8 @@
-import { ProtoStore } from './store';
-import { ProtoRef } from '@cosmology/types';
-import { Lookup } from '@cosmology/types';
-export type { Lookup } from '@cosmology/types';
+import { ProtoStore } from "./store";
+import { ProtoRef } from "@cosmology/types";
+import { Lookup } from "@cosmology/types";
+export type { Lookup } from "@cosmology/types";
+export declare const getNestedMsgType: (name: string, pkg: string, scope: string[]) => string;
 export declare const recursiveLookup: (proto: any, name: string, scope?: string[], allowNested?: boolean) => any;
 export declare const importLookup: (store: ProtoStore, ref: ProtoRef, name: string) => {
     name: string;

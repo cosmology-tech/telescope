@@ -173,6 +173,31 @@ export interface QueryGrantsRequestAmino {
 }"
 `;
 
+exports[`misc/eval_request EvalRequest 1`] = `
+"export interface EvalRequestAmino {
+  /**
+   * Bindings for the external variables.  The types SHOULD be compatible
+   * with the type environment in [CheckRequest][google.api.expr.conformance.v1alpha1.CheckRequest], if checked.
+   */
+  bindings?: {
+    [key: string]: ExprValueAmino;
+  };
+  refs?: {
+    [key: string]: IdRefAmino;
+  };
+  test_num?: number;
+  test_string?: string;
+  test_bool?: boolean;
+  instantiate_permission?: AccessConfigAmino;
+  /** [(gogoproto.nullable) = false] wouldn't work in this case */
+  id?: string;
+  name?: string;
+  test_array?: string[];
+  opt: FeatureSet_Utf8Validation;
+  graph?: TestNest_GraphAmino;
+}"
+`;
+
 exports[`osmosis/gamm/v1beta1/tx.proto MsgJoinPool 1`] = `
 "/**
  * ===================== MsgJoinPool

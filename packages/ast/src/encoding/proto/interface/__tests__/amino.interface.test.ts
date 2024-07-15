@@ -1,11 +1,21 @@
 import { getNestedProto } from '@cosmology/utils';
-import { expectCode, getTestProtoStore } from '../../../../../test-utils/'
+import { expectCode, getMiscTestProtoStore, getTestProtoStore } from '../../../../../test-utils/'
 import { ProtoParseContext } from '../../../context';
 import { createAminoType } from '../amino';
 import { createProtoInterfaceEncodedType } from '../proto';
 
 const store = getTestProtoStore();
 store.traverseAll();
+
+const miscStore = getMiscTestProtoStore({
+  prototypes: {
+    excluded: {
+      // hard exclude faulty proto files
+      hardProtos: ["google/api/expr/v1alpha1/eval1.proto"],
+    },
+  },
+});
+miscStore.traverseAll();
 
 describe('MsgSend', () => {
     const ref = store.findProto('cosmos/bank/v1beta1/tx.proto');
@@ -109,4 +119,14 @@ describe('osmosis/gamm/v1beta1/tx.proto', () => {
             getNestedProto(ref.traversed).MsgJoinPool
         ));
     });
+});
+
+describe('misc/eval_request', () => {
+  const ref = miscStore.findProto('misc/eval_request.proto');
+  const context = new ProtoParseContext(ref, miscStore, miscStore.options);
+  it('EvalRequest', () => {
+      expectCode(createAminoType(context, 'EvalRequest',
+          getNestedProto(ref.traversed).EvalRequest
+      ));
+  });
 });

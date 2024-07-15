@@ -1,5 +1,5 @@
 import { MetricDescriptor, MetricDescriptorSDKType } from "../../api/metric";
-import { Distribution_BucketOptions } from "../../api/distribution";
+import { Distribution_BucketOptions, Distribution_BucketOptionsSDKType } from "../../api/distribution";
 import { Timestamp, TimestampSDKType } from "../../protobuf/timestamp";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../helpers";

@@ -95,6 +95,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.nullable)": false,
@@ -146,6 +147,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.nullable)": false,
@@ -573,6 +575,7 @@ exports[`queries 1`] = `
             "id": 2,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -620,6 +623,7 @@ exports[`queries 1`] = `
             "id": 1,
             "import": "cosmos/base/v1beta1/coin.proto",
             "importedName": "cosmos.base.v1beta1.Coin",
+            "isNestedMsg": false,
             "options": {
               "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
               "(gogoproto.moretags)": "yaml:min_liquidity",
@@ -644,6 +648,7 @@ exports[`queries 1`] = `
             "id": 3,
             "import": "cosmos/base/query/v1beta1/pagination.proto",
             "importedName": "cosmos.base.query.v1beta1.PageRequest",
+            "isNestedMsg": false,
             "options": {
               "(telescope:camel)": "pagination",
               "(telescope:name)": "pagination",
@@ -953,6 +958,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.nullable)": false,
@@ -1005,6 +1011,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.nullable)": false,
@@ -1058,6 +1065,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:tokens_out",
@@ -1111,6 +1119,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.nullable)": false,
@@ -1165,6 +1174,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.nullable)": false,
@@ -1269,6 +1279,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "params",
           "(telescope:name)": "params",
@@ -1330,6 +1341,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
+        "isNestedMsg": false,
         "options": {
           "(cosmos_proto.accepts_interface)": "PoolI",
           "(telescope:camel)": "pool",
@@ -1421,6 +1433,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1453,6 +1466,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1473,6 +1487,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
+        "isNestedMsg": false,
         "options": {
           "(cosmos_proto.accepts_interface)": "PoolI",
           "(telescope:camel)": "pools",
@@ -1507,6 +1522,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:min_liquidity",
@@ -1531,6 +1547,7 @@ exports[`queries 1`] = `
         "id": 3,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageRequest",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1579,6 +1596,7 @@ exports[`queries 1`] = `
         "id": 2,
         "import": "cosmos/base/query/v1beta1/pagination.proto",
         "importedName": "cosmos.base.query.v1beta1.PageResponse",
+        "isNestedMsg": false,
         "options": {
           "(telescope:camel)": "pagination",
           "(telescope:name)": "pagination",
@@ -1599,6 +1617,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "google/protobuf/any.proto",
         "importedName": "google.protobuf.Any",
+        "isNestedMsg": false,
         "options": {
           "(cosmos_proto.accepts_interface)": "PoolI",
           "(telescope:camel)": "pools",
@@ -1980,6 +1999,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
@@ -2045,6 +2065,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.castrepeated)": "github.com/cosmos/cosmos-sdk/types.Coins",
           "(gogoproto.moretags)": "yaml:liquidity",
@@ -2110,6 +2131,7 @@ exports[`queries 1`] = `
         "id": 1,
         "import": "cosmos/base/v1beta1/coin.proto",
         "importedName": "cosmos.base.v1beta1.Coin",
+        "isNestedMsg": false,
         "options": {
           "(gogoproto.moretags)": "yaml:total_shares",
           "(gogoproto.nullable)": false,
