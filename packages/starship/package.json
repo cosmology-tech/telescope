@@ -71,7 +71,7 @@
     "@protobufs/tendermint": "^0.0.10",
     "@types/jest": "^29.5.0",
     "ast-stringify": "0.1.0",
-    "axios": "^1.6.0",
+    "axios": "^1.7.4",
     "bignumber.js": "9.1.0",
     "case": "1.6.3",
     "cosmjs-types": "0.5.2",
