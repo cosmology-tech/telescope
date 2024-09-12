@@ -5,6 +5,7 @@ import { TelescopeBuilder } from './index';
 import { join, relative, dirname } from 'path';
 import { TelescopeParseContext } from './build';
 import { TelescopeOptions } from '@cosmology/types';
+import { toPosixPath } from '@cosmology/utils';
 
 // TODO move to store
 export const getPackages = (store: ProtoStore) => {
@@ -39,7 +40,7 @@ export const bundlePackages = (store: ProtoStore) => {
     return Object.keys(allPackages).map(base => {
         const pkgs = allPackages[base];
         const bundleVariables = {};
-        const bundleFile = join(base, 'bundle.ts');
+        const bundleFile = toPosixPath(join(base, 'bundle.ts'));
         const importPaths = [];
         parsePackage(store.options, pkgs, bundleFile, importPaths, bundleVariables);
         return {
@@ -153,7 +154,7 @@ export const createFileBundle = (
     let rel = relative(dirname(bundleFile), filename);
     if (!rel.startsWith('.')) rel = `./${rel}`;
     const variable = `_${counter++}`;
-    importPaths.push(importNamespace(variable, rel));
+    importPaths.push(importNamespace(variable, toPosixPath(rel)));
     dotty.put(bundleVariables, pkg + '.__export', true);
     dotty.put(bundleVariables, pkg + '.' + variable, true);
 }

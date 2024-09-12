@@ -12,7 +12,7 @@ import {
 } from '@cosmology/ast';
 import { ProtoRef } from '@cosmology/types';
 import { camel, pascal } from 'case';
-import { duplicateImportPathsWithExt, variableSlug } from '@cosmology/utils';
+import { duplicateImportPathsWithExt, variableSlug, toPosixPath } from '@cosmology/utils';
 import { buildAllImportsFromGenericContext } from '../imports';
 
 export const plugin = (
@@ -102,6 +102,13 @@ export const plugin = (
       .concat(protos)
       .concat(clientOptions)
       .concat(clientBody);
+
+    // replace all backslash path for windows
+    for (let i = 0; i < cProg.length; i++) {
+        if(cProg[i].source?.value){
+            cProg[i].source.value = toPosixPath(cProg[i].source?.value)
+        }
+    }
 
     if (getTxRpc) {
       cProg = cProg.concat(getTxRpc);

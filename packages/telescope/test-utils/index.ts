@@ -3,6 +3,7 @@ import { ProtoType, TelescopeOptions } from '@cosmology/types';
 import { defaultTelescopeOptions as teleDefaults } from '@cosmology/types';
 import deepmerge from 'deepmerge';
 import { ProtoStore } from '@cosmology/proto-parser';
+import { toPosixPath } from '@cosmology/utils'
 
 
 export const expectCode = (ast) => {
@@ -38,12 +39,12 @@ const defaultTelescopeOptionsForTesting = {
 const defaultTelescopeOptions = deepmerge(teleDefaults, defaultTelescopeOptionsForTesting);
 
 export const getTestProtoStore = (options?: TelescopeOptions) => {
-    const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain1'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
+    const store = new ProtoStore([toPosixPath(__dirname) + '/../../../__fixtures__/chain1'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
     return store;
 }
 
 export const getTestProtoStore2 = (options?: TelescopeOptions) => {
-    const store = new ProtoStore([__dirname + '/../../../__fixtures__/chain2'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
+    const store = new ProtoStore([toPosixPath(__dirname) + '/../../../__fixtures__/chain2'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
     return store;
 }
 

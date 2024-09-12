@@ -1,7 +1,7 @@
 import generate from '@babel/generator';
 import { ProtoType, TelescopeOptions } from '@cosmology/types';
 import { ProtoStore } from '@cosmology/proto-parser'
-import { getNestedProto } from '@cosmology/utils'
+import { getNestedProto, toPosixPath } from '@cosmology/utils'
 import { AminoParseContext } from '../src/encoding/context';
 import { GenericParseContext } from '../src/encoding';
 import { defaultTelescopeOptions as teleDefaults } from '@cosmology/types';
@@ -45,7 +45,7 @@ export const getTestProtoStore = (options?: TelescopeOptions) => {
 }
 
 export const getMiscTestProtoStore = (options?: TelescopeOptions) => {
-  const store = new ProtoStore([__dirname + '/../../../__fixtures__/misc/proto'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
+  const store = new ProtoStore([toPosixPath(__dirname) + '/../../../__fixtures__/misc/proto'], options ? deepmerge(defaultTelescopeOptions, options) : deepmerge(defaultTelescopeOptions, {}));
   return store;
 }
 

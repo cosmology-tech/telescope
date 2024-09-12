@@ -1,6 +1,7 @@
 import { ProtoStore } from '@cosmology/proto-parser';
 import { TelescopeParseContext } from './build';
 import { TelescopeOptions, defaultTelescopeOptions } from '@cosmology/types';
+import { toPosixPath } from '@cosmology/utils';
 import { bundlePackages } from './bundle';
 import { BundlerFile, TelescopeInput } from './types';
 import { Bundler } from './bundler';
@@ -31,7 +32,14 @@ import { plugin as createRpcOpsBundle } from './generators/create-rpc-ops-bundle
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
   options = deepmerge(defaultTelescopeOptions, options ?? {});
-
+  // correct the path for windows
+  if(options.cosmwasm){
+    options.cosmwasm.outPath = toPosixPath(options.cosmwasm.outPath)
+    options.cosmwasm.contracts = options.cosmwasm.contracts.map((item:{name:string, dir:string})=>{
+      item.dir = toPosixPath(item.dir)
+      return item
+    })
+  }
   // strip off leading slashes
   options.tsDisable.files = options.tsDisable.files.map((file) =>
     file.startsWith('/') ? file : file.replace(/^\//, '')
@@ -67,10 +75,13 @@ export class TelescopeBuilder {
     store,
     options
   }: TelescopeInput & { store?: ProtoStore }) {
-    this.protoDirs = protoDirs;
-    this.outPath = resolve(outPath);
+    const fixedDirs = protoDirs.map((directory)=>{
+      return toPosixPath(directory)
+    });
+    this.protoDirs = fixedDirs
+    this.outPath = resolve(toPosixPath(outPath));
     this.options = sanitizeOptions(options);
-    this.store = store ?? new ProtoStore(protoDirs, this.options);
+    this.store = store ?? new ProtoStore(fixedDirs, this.options);
     this.store.traverseAll();
   }
 

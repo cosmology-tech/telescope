@@ -9,7 +9,7 @@ import {
 import { join, dirname, resolve } from "path";
 import { getCorrespondingGit, makeDir, parseProtoFile } from "./utils";
 import fs from "fs";
-import { sync as globSync } from "glob";
+import { crossGlob as glob } from '@cosmology/utils';
 
 export async function cloneAll({
   repos,
@@ -131,7 +131,7 @@ function extractProtoFromDirs({
 
   for (const target of targets) {
     for (const source of Object.values(sources)) {
-      const files = globSync(join(source.protoPath, target));
+      const files = glob(join(source.protoPath, target));
 
       extractProtoFiles.push(
         ...files

@@ -2,7 +2,7 @@ import { exec as _exec } from "shelljs";
 import fs from "fs";
 import { bufInfo } from "./config";
 import { Repo } from "./types";
-import { sync as globSync } from "glob";
+import { crossGlob as glob } from '@cosmology/utils';
 
 export function exec(command: string, verbose = false) {
   const { code, stdout, stderr } = _exec(command);
@@ -76,7 +76,7 @@ export function isPathExist(path: string): boolean {
 }
 
 export function findAllProtoFiles(dir: string): string[] {
-  return globSync(`${dir}/**/*.proto`, {
+  return glob(`${dir}/**/*.proto`, {
     ignore: `${dir}/node_modules/**`,
   });
 }
