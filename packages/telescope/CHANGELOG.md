@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.3...@cosmology/telescope@1.8.4) (2024-09-12)
+
+
+### Bug Fixes
+
+* **JsonSafe:** handle nested structures and arrays ([5812e73](https://github.com/cosmology-tech/telescope/commit/5812e734a15bdc6e9659930069e945586218a1e0))
+
+
+
+
+
 ## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.2...@cosmology/telescope@1.8.3) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/telescope
