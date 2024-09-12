@@ -8,6 +8,7 @@ import minimatch from 'minimatch';
 import generate from '@babel/generator';
 import { unused } from './unused';
 import traverse from '@babel/traverse';
+import { toPosixPath } from '@cosmology/utils';
 
 export const writeAstToFile = (
     outPath: string,
@@ -28,9 +29,9 @@ export const writeAstToFile = (
         });
         traverse(newAst, unused);
         const content2 = generate(newAst).code;
-        writeContentToFile(outPath, options, content2, filename);
+        writeContentToFile(toPosixPath(outPath), options, content2, toPosixPath(filename));
     } else {
-        writeContentToFile(outPath, options, content, filename);
+        writeContentToFile(toPosixPath(outPath), options, content, toPosixPath(filename));
     }
 }
 

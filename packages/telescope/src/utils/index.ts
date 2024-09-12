@@ -1,7 +1,7 @@
 import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
 import { ImportObj } from '../types';
-import { restoreExtension } from '@cosmology/utils';
+import { restoreExtension, toPosixPath } from '@cosmology/utils';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
   if (ref.traversed) return ref.traversed;
@@ -107,10 +107,11 @@ export const UTIL_HELPERS = [
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
   return imports.map(imp => {
+    const fixedPath = toPosixPath(imp.path)
     return {
       ...imp,
       path: (UTIL_HELPERS.includes(imp.path) || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
-        imp.path : `./${imp.path}`
+      fixedPath : `./${fixedPath}`
     };
   })
 };
@@ -120,6 +121,7 @@ export const getRelativePath = (f1: string, f2: string, ext?: string) => {
   const rel = relative(dirname(f1), f2);
   let importPath = rel.replace(extname(rel), '');
   if (!/^\./.test(importPath)) importPath = `./${importPath}`;
+  importPath = toPosixPath(importPath)
   return restoreExtension(importPath, ext);
 }
 

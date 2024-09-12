@@ -6,6 +6,7 @@ import { kebab } from "case";
 import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
 import { TelescopeParseContext } from '../src/build';
+import { toPosixPath } from '@cosmology/utils'
 
 const outPath = __dirname + '/../../../__fixtures__/output1';
 const store = getTestProtoStore();
@@ -282,7 +283,7 @@ const options: TelescopeOptions = {
 
 const input: TelescopeInput = {
   outPath,
-  protoDirs: [__dirname + '/../../../__fixtures__/chain1'],
+  protoDirs: [toPosixPath(__dirname) + '/../../../__fixtures__/chain1'],
   options
 };
 

@@ -8,6 +8,9 @@ import {
 } from "@cosmology/types";
 import { ImportDeclaration } from "@babel/types";
 import * as dotty from "dotty";
+import { sync as globSync } from 'glob';
+
+const posixPath = require('path').posix;
 
 /**
  * swap the key and value of the input object
@@ -242,7 +245,7 @@ function excludePackageFromTraversal(pkg: string, traversal: string[]) {
  *          by starting with "/root/nested" and appending "/nested/{part}" for each segment
  *          of the package name. This mimics a directory path structure in a JSON tree, where
  *          each package level is further nested within its parent.
- *          
+ *
  *          Example output for "cosmwasm.wasm.v1":
  *          - "/root/nested/cosmwasm/nested/wasm/nested/v1"
  *
@@ -260,3 +263,14 @@ export function convertPackageNameToNestedJSONPath(packageName: string): string 
 
   return jsonPath;
 }
+
+// Replace all \\ to / for windows support purpose
+export const crossGlob = (input:string, options?:object) => {
+    return globSync(toPosixPath(input), options);
+}
+
+// Unify all the path to posixPath for windows support purpose
+export const toPosixPath = (mixedPath): string => {
+  return mixedPath.replace(/\\/g, posixPath.sep);
+}
+

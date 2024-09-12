@@ -2,7 +2,7 @@ import fs from "fs";
 import { Repo } from "./types";
 import YAML from "yaml";
 import { isPathExist } from "./utils";
-import { sync as globSync } from "glob";
+import { crossGlob as glob } from '@cosmology/utils';
 
 export function parseBufLockFile(filePath: string): Repo[] {
   if (!isPathExist(filePath)) {
@@ -47,13 +47,13 @@ export function parseBufYamlFile(filePath: string): Repo[] {
 }
 
 export function findAllBufYamlFiles(dir: string): string[] {
-  return globSync(`${dir}/**/buf.yaml`, {
+  return glob(`${dir}/**/buf.yaml`, {
     ignore: `${dir}/node_modules/**`,
   });
 }
 
 export function findAllBufLockFiles(dir: string): string[] {
-  return globSync(`${dir}/**/buf.lock`, {
+  return glob(`${dir}/**/buf.lock`, {
     ignore: `${dir}/node_modules/**`,
   });
 }

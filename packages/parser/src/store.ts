@@ -1,4 +1,3 @@
-import { sync as glob } from 'glob';
 import { parse } from '@cosmology/protobufjs';
 import { readFileSync } from 'fs';
 import { join, resolve as pathResolve } from 'path';
@@ -18,7 +17,7 @@ import google_struct from './native/struct';
 import google_wrappers from './native/wrappers';
 import { ProtoResolver } from './resolver';
 import { applyPatch } from 'fast-json-patch';
-import { convertPackageNameToNestedJSONPath } from '@cosmology/utils';
+import { convertPackageNameToNestedJSONPath, crossGlob as glob, toPosixPath } from '@cosmology/utils';
 
 const GOOGLE_PROTOS = [
     ['google/protobuf/any.proto', google_any],
@@ -69,7 +68,9 @@ export class ProtoStore implements IProtoStore {
     }> = {};
 
     constructor(protoDirs: string[] = [], options: TelescopeOptions = defaultTelescopeOptions) {
-        this.protoDirs = protoDirs.map(protoDir => pathResolve(protoDir));
+        this.protoDirs = protoDirs.map((protoDir) => {
+            return toPosixPath(pathResolve(protoDir))
+        });
         this.options = options;
     }
 
@@ -135,11 +136,11 @@ export class ProtoStore implements IProtoStore {
     getProtos(): ProtoRef[] {
         if (this.protos) return this.protos;
         const contents = this.protoDirs.reduce((m, protoDir) => {
-            const protoSplat = join(protoDir, '/**/*.proto');
+            const protoSplat = toPosixPath(join(protoDir, '/**/*.proto'));
             const protoFiles = glob(protoSplat);
             const contents = protoFiles.map(filename => ({
                 absolute: filename,
-                filename: filename.split(protoDir)[1].replace(/^\//, ''),
+                filename: filename.split(toPosixPath(protoDir))[1].replace(/^\//, ''),
                 content: readFileSync(filename, 'utf-8')
             }));
             return [...m, ...contents];

@@ -1,5 +1,5 @@
 import { resolve, join, dirname, basename, extname } from 'path';
-import { sync as glob } from 'glob';
+import { crossGlob as glob } from '@cosmology/utils';
 import { mkdirp } from 'mkdirp';
 import { rimrafSync as rimraf } from 'rimraf';
 import { exec } from 'shelljs';
@@ -91,7 +91,7 @@ export default async (argv) => {
             return [extDir, resolve(join(cur, 'contracts', dst)), dir];
         });
 
-    // move protos 
+    // move protos
     for (const [src, dst, pkg] of cmds) {
         rimraf(dst);
         console.log(`installing ${pkg}...`);
