@@ -84,5 +84,16 @@ export declare const getTypeNameByEnumObj: (field: any, pkg: string, traversal: 
  * console.log(jsonNestedPath);  // Outputs: "/root/nested/cosmwasm/nested/wasm/nested/v1/nested"
  */
 export declare function convertPackageNameToNestedJSONPath(packageName: string): string;
+/**
+ * Replace all \\ to / for windows support purpose
+ * @param input
+ * @param options
+ * @returns
+ */
 export declare const crossGlob: (input: string, options?: object) => string[];
+/**
+ * Unify all the path to posixPath for windows support purpose
+ * @param mixedPath
+ * @returns
+ */
 export declare const toPosixPath: (mixedPath: any) => string;
