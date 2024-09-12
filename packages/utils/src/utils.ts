@@ -264,12 +264,21 @@ export function convertPackageNameToNestedJSONPath(packageName: string): string 
   return jsonPath;
 }
 
-// Replace all \\ to / for windows support purpose
+/**
+ * Replace all \\ to / for windows support purpose
+ * @param input
+ * @param options
+ * @returns
+ */
 export const crossGlob = (input:string, options?:object) => {
     return globSync(toPosixPath(input), options);
 }
 
-// Unify all the path to posixPath for windows support purpose
+/**
+ * Unify all the path to posixPath for windows support purpose
+ * @param mixedPath
+ * @returns
+ */
 export const toPosixPath = (mixedPath): string => {
   return mixedPath.replace(/\\/g, posixPath.sep);
 }
