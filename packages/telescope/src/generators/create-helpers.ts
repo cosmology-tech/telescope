@@ -95,12 +95,12 @@ export const plugin = (builder: TelescopeBuilder) => {
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  const useAgnostic =
-    builder.options.prototypes.typingsFormat.customTypes.useAgnostic;
+  const useAgoric =
+    builder.options.prototypes.typingsFormat.customTypes.useAgoricDecimal;
 
-  if (useAgnostic === 'default' || useAgnostic === undefined) {
+  if (useAgoric === 'default' || useAgoric === undefined) {
     builder.files.push('decimals.ts');
-    const content = useAgnostic === 'default' ? cosmjsDecimal : decimal;
+    const content = useAgoric === 'default' ? decimal : cosmjsDecimal;
     write(builder, 'decimals.ts', content);
   }
 

@@ -49,7 +49,7 @@ const options: TelescopeOptions = {
       customTypes: {
         useCosmosSDKDec: true,
         // default uses cosmjs/math Decimals, undefined uses agoric-sdk
-        useAgnostic: 'default',
+        useAgoricDecimal: 'default',
       },
       num64: 'bigint',
       useDeepPartial: true,
