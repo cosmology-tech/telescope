@@ -25,20 +25,23 @@ import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
 import { plugin as createHelpers } from './generators/create-helpers';
 import { plugin as createCosmWasmBundle } from './generators/create-cosmwasm-bundle';
-import { plugin as createPiniaStore } from './generators/create-pinia-store'
-import { plugin as createPiniaStoreBundle } from './generators/create-pinia-store-bundle'
-import { plugin as createRpcOpsBundle } from './generators/create-rpc-ops-bundle'
+import { plugin as createPiniaStore } from './generators/create-pinia-store';
+import { plugin as createPiniaStoreBundle } from './generators/create-pinia-store-bundle';
+import { plugin as createRpcOpsBundle } from './generators/create-rpc-ops-bundle';
+import { plugin as customizeUtils } from './generators/customize-utils';
 
 const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   // If an element at the same key is present for both x and y, the value from y will appear in the result.
   options = deepmerge(defaultTelescopeOptions, options ?? {});
   // correct the path for windows
-  if(options.cosmwasm){
-    options.cosmwasm.outPath = toPosixPath(options.cosmwasm.outPath)
-    options.cosmwasm.contracts = options.cosmwasm.contracts.map((item:{name:string, dir:string})=>{
-      item.dir = toPosixPath(item.dir)
-      return item
-    })
+  if (options.cosmwasm) {
+    options.cosmwasm.outPath = toPosixPath(options.cosmwasm.outPath);
+    options.cosmwasm.contracts = options.cosmwasm.contracts.map(
+      (item: { name: string; dir: string }) => {
+        item.dir = toPosixPath(item.dir);
+        return item;
+      }
+    );
   }
   // strip off leading slashes
   options.tsDisable.files = options.tsDisable.files.map((file) =>
@@ -49,7 +52,7 @@ const sanitizeOptions = (options: TelescopeOptions): TelescopeOptions => {
   );
   // uniq bc of deepmerge
   options.rpcClients.enabledServices = [
-    ...new Set([...options.rpcClients.enabledServices])
+    ...new Set([...options.rpcClients.enabledServices]),
   ];
   return options;
 };
@@ -73,12 +76,12 @@ export class TelescopeBuilder {
     protoDirs,
     outPath,
     store,
-    options
+    options,
   }: TelescopeInput & { store?: ProtoStore }) {
-    const fixedDirs = protoDirs.map((directory)=>{
-      return toPosixPath(directory)
+    const fixedDirs = protoDirs.map((directory) => {
+      return toPosixPath(directory);
     });
-    this.protoDirs = fixedDirs
+    this.protoDirs = fixedDirs;
     this.outPath = resolve(toPosixPath(outPath));
     this.options = sanitizeOptions(options);
     this.store = store ?? new ProtoStore(fixedDirs, this.options);
@@ -123,13 +126,23 @@ export class TelescopeBuilder {
 
   async build() {
     // check warnings
-    if(!this.options.aminoEncoding?.enabled && (this.options.prototypes?.methods?.fromAmino || this.options.prototypes?.methods?.toAmino)){
-      console.warn("There could be compilation errors in generated code, because 'aminoEncoding.enabled: false' means amino types wouldn't be created, but 'toAmino' or 'fromAmino' need amino types.");
+    if (
+      !this.options.aminoEncoding?.enabled &&
+      (this.options.prototypes?.methods?.fromAmino ||
+        this.options.prototypes?.methods?.toAmino)
+    ) {
+      console.warn(
+        "There could be compilation errors in generated code, because 'aminoEncoding.enabled: false' means amino types wouldn't be created, but 'toAmino' or 'fromAmino' need amino types."
+      );
     }
 
-    if(!this.options.prototypes.methods.fromPartial){
-      console.warn("The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on, otherwise there could be compilation errors in generated code.");
+    if (!this.options.prototypes.methods.fromPartial) {
+      console.warn(
+        "The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on, otherwise there could be compilation errors in generated code."
+      );
     }
+
+    customizeUtils(this);
 
     // [x] get bundle of all packages
     const bundles = bundlePackages(this.store).map((bundle) => {
@@ -150,7 +163,7 @@ export class TelescopeBuilder {
 
       createRPCQueryClients(this, bundler);
       createRPCMsgClients(this, bundler);
-      createPiniaStore(this, bundler)
+      createPiniaStore(this, bundler);
 
       // [x] write out one client for each base package, referencing the last two steps
       createStargateClients(this, bundler);
@@ -174,7 +187,7 @@ export class TelescopeBuilder {
     await createCosmWasmBundle(this);
 
     createHelpers(this);
-    createPiniaStoreBundle(this)
+    createPiniaStoreBundle(this);
 
     // finally, write one index file with all files, exported
     createIndex(this);

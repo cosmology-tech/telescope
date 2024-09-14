@@ -95,13 +95,9 @@ export const plugin = (builder: TelescopeBuilder) => {
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  const useAgoric =
-    builder.options.prototypes.typingsFormat.customTypes.useAgoricDecimal;
-
-  if (useAgoric === 'default' || useAgoric === undefined) {
+  if (builder.options.prototypes.typingsFormat.customTypes.useAgoricDecimal) {
     builder.files.push('decimals.ts');
-    const content = useAgoric === 'default' ? decimal : cosmjsDecimal;
-    write(builder, 'decimals.ts', content);
+    write(builder, 'decimals.ts', decimal);
   }
 
   if (

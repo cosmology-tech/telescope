@@ -48,7 +48,6 @@ const options: TelescopeOptions = {
     typingsFormat: {
       customTypes: {
         useCosmosSDKDec: true,
-        useAgoricDecimal: undefined,
       },
       num64: 'bigint',
       useDeepPartial: true,
@@ -428,6 +427,26 @@ describe('misc', () => {
           enabled: true,
           useProtoOptionality: true,
           useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it('generates with useAgoricDecimals', async () => {
+    const testFolder = '/output-decimals/agoric';
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
+      protoDirs: [__dirname + '/../../../__fixtures__/misc/proto'],
+      options: deepmerge(options, {
+        prototypes: {
+          typingsFormat: {
+            customTypes: {
+              useAgoricDecimal: true,
+            },
+          },
         },
       }),
     });

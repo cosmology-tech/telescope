@@ -21,7 +21,7 @@ export const UTILS = {
   bytesFromBase64: '__helpers__',
   BrowserHeaders: 'browser-headers',
   connectComet: '@cosmjs/tendermint-rpc',
-  Decimal: '__decimals__',
+  Decimal: '@cosmjs/math',
   padDecimal: '__helpers__',
   createProtobufRpcClient: '@cosmjs/stargate',
   Pubkey: '@cosmjs/amino',

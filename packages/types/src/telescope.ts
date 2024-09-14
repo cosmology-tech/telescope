@@ -87,7 +87,7 @@ interface TelescopeOpts {
     typingsFormat?: {
       customTypes?: {
         useCosmosSDKDec?: boolean;
-        useAgoricDecimal?: 'default' | undefined;
+        useAgoricDecimal?: boolean;
       };
 
       num64?: 'long' | 'bigint';
