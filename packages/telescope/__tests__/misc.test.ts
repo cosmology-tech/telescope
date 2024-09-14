@@ -48,8 +48,7 @@ const options: TelescopeOptions = {
     typingsFormat: {
       customTypes: {
         useCosmosSDKDec: true,
-        // default uses cosmjs/math Decimals, undefined uses agoric-sdk
-        useAgoricDecimal: 'default',
+        useAgoricDecimal: undefined,
       },
       num64: 'bigint',
       useDeepPartial: true,
