@@ -3,7 +3,24 @@ import { mkdirp } from 'mkdirp';
 import { TelescopeBuilder } from '../builder';
 import pkg from '../../package.json';
 import { writeContentToFile } from '../utils/files';
-import { external, externalComet, getHelper, getHelperForBigint, getReactQueryHelper, mobx, grpcGateway, grpcWeb, pinia, varint, utf8, getHelperForBinary, getRegistryHelper, getTypesHelper, jsonSafe } from '../helpers';
+import {
+  external,
+  externalComet,
+  getHelper,
+  getHelperForBigint,
+  getReactQueryHelper,
+  mobx,
+  grpcGateway,
+  grpcWeb,
+  pinia,
+  varint,
+  utf8,
+  getHelperForBinary,
+  getRegistryHelper,
+  getTypesHelper,
+  jsonSafe,
+  decimal,
+} from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 const header = `/**
@@ -20,19 +37,36 @@ const write = (
 ) => {
   const indexOutFile = join(builder.outPath, indexFile);
   mkdirp.sync(dirname(indexOutFile));
-  writeContentToFile(builder.outPath, builder.options, header + content, indexOutFile);
-}
+  writeContentToFile(
+    builder.outPath,
+    builder.options,
+    header + content,
+    indexOutFile
+  );
+};
 
-export const plugin = (
-  builder: TelescopeBuilder
-) => {
-  write(builder, 'helpers.ts', builder.options.prototypes.typingsFormat.num64 === 'bigint' ? getHelperForBigint(builder.options) : getHelper(builder.options));
+export const plugin = (builder: TelescopeBuilder) => {
+  write(
+    builder,
+    'helpers.ts',
+    builder.options.prototypes.typingsFormat.num64 === 'bigint'
+      ? getHelperForBigint(builder.options)
+      : getHelper(builder.options)
+  );
 
   // should be exported
-  if (builder.options.stargateClients.addGetTxRpc || builder.options.includeExternalHelpers || builder.options.reactQuery?.enabled) {
+  if (
+    builder.options.stargateClients.addGetTxRpc ||
+    builder.options.includeExternalHelpers ||
+    builder.options.reactQuery?.enabled
+  ) {
     // also react-query needs these...
     builder.files.push('extern.ts');
-    write(builder, 'extern.ts', builder.options.rpcClients?.useConnectComet ? externalComet : external);
+    write(
+      builder,
+      'extern.ts',
+      builder.options.rpcClients?.useConnectComet ? externalComet : external
+    );
   }
 
   if (builder.options.reactQuery?.enabled) {
@@ -60,28 +94,43 @@ export const plugin = (
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  if (!builder.options.prototypes.typingsFormat.toJsonUnknown && builder.options.prototypes.methods.toJSON) {
-    builder.files.push("json-safe.ts");
-    write(builder, "json-safe.ts", jsonSafe);
+  if (builder.options.prototypes.typingsFormat.customTypes.usePatchedDecimal) {
+    builder.files.push('decimals.ts');
+    write(builder, 'decimals.ts', decimal);
   }
 
-  if (builder.options.prototypes.typingsFormat.num64 === "bigint") {
-    builder.files.push("varint.ts");
-    write(builder, "varint.ts", varint);
-
-    builder.files.push("utf8.ts");
-    write(builder, "utf8.ts", utf8);
-
-    builder.files.push("binary.ts");
-    write(builder, "binary.ts", getHelperForBinary(builder.options));
+  if (
+    !builder.options.prototypes.typingsFormat.toJsonUnknown &&
+    builder.options.prototypes.methods.toJSON
+  ) {
+    builder.files.push('json-safe.ts');
+    write(builder, 'json-safe.ts', jsonSafe);
   }
 
-  if (builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType || builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+  if (builder.options.prototypes.typingsFormat.num64 === 'bigint') {
+    builder.files.push('varint.ts');
+    write(builder, 'varint.ts', varint);
+
+    builder.files.push('utf8.ts');
+    write(builder, 'utf8.ts', utf8);
+
+    builder.files.push('binary.ts');
+    write(builder, 'binary.ts', getHelperForBinary(builder.options));
+  }
+
+  if (
+    builder.options.prototypes?.typingsFormat?.useTelescopeGeneratedType ||
+    (builder.options.interfaces?.enabled &&
+      builder.options.interfaces?.useGlobalDecoderRegistry)
+  ) {
     builder.files.push('types.ts');
     write(builder, 'types.ts', getTypesHelper(builder.options));
   }
 
-  if (builder.options.interfaces?.enabled && builder.options.interfaces?.useGlobalDecoderRegistry) {
+  if (
+    builder.options.interfaces?.enabled &&
+    builder.options.interfaces?.useGlobalDecoderRegistry
+  ) {
     builder.files.push('registry.ts');
     write(builder, 'registry.ts', getRegistryHelper(builder.options));
   }

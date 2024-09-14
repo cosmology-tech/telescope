@@ -102,27 +102,31 @@ export const UTIL_HELPERS = [
   '__grpc-gateway__',
   '__grpc-web__',
   '__types__',
-  '__registry__'
+  '__registry__',
+  '__decimals__',
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
-  return imports.map(imp => {
-    const fixedPath = toPosixPath(imp.path)
+  return imports.map((imp) => {
+    const fixedPath = toPosixPath(imp.path);
     return {
       ...imp,
-      path: (UTIL_HELPERS.includes(imp.path) || imp.path.startsWith('.') || imp.path.startsWith('@')) ?
-      fixedPath : `./${fixedPath}`
+      path:
+        UTIL_HELPERS.includes(imp.path) ||
+        imp.path.startsWith('.') ||
+        imp.path.startsWith('@')
+          ? fixedPath
+          : `./${fixedPath}`,
     };
-  })
+  });
 };
-
 
 export const getRelativePath = (f1: string, f2: string, ext?: string) => {
   const rel = relative(dirname(f1), f2);
   let importPath = rel.replace(extname(rel), '');
   if (!/^\./.test(importPath)) importPath = `./${importPath}`;
-  importPath = toPosixPath(importPath)
+  importPath = toPosixPath(importPath);
   return restoreExtension(importPath, ext);
-}
+};
 
 export * from './common-create-bundle';

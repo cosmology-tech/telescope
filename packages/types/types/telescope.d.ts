@@ -1,5 +1,5 @@
 import { TSBuilderInput } from '@cosmwasm/ts-codegen';
-import { AminoExceptions } from "./aminos";
+import { AminoExceptions } from './aminos';
 import { Operation } from 'fast-json-patch';
 export declare enum TelescopeLogLevel {
     None = 0,
@@ -37,8 +37,8 @@ interface TelescopeOpts {
             fromJSON?: boolean;
             toJSON?: boolean;
             /**
-            * @deprecated The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on.
-            */
+             * @deprecated The 'fromPartial' option will be deprecated in a future version. Encoder objects need fromPartial to be a creator function to create instance of the type. So it should always be left on.
+             */
             fromPartial?: boolean;
             toSDK?: boolean;
             fromSDK?: boolean;
@@ -74,6 +74,7 @@ interface TelescopeOpts {
         typingsFormat?: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
+                usePatchedDecimal?: boolean;
             };
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
@@ -125,15 +126,15 @@ interface TelescopeOpts {
         customTypes?: {
             useCosmosSDKDec?: boolean;
         };
-        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
+        omitEmptyTags?: ('omitempty' | 'dont_omitempty')[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
         exceptions?: AminoExceptions;
         typeUrlToAmino?: (typeUrl: string) => string | undefined;
         /**
-        * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
-        */
+         * @deprecated The logic of useLegacyInlineEncoding will be deprecated in the future.
+         */
         useLegacyInlineEncoding?: boolean;
         legacy?: {
             useNullHandling?: boolean;
@@ -162,11 +163,11 @@ interface TelescopeOpts {
         scopedIsExclusive?: boolean;
         bundle?: boolean;
         serviceImplement?: {
-            [key: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string]: {
+            [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: {
                 include?: {
                     patterns?: string[];
                 };
-                type: "Query" | "Tx" | string;
+                type: 'Query' | 'Tx' | string;
             };
         };
         enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
@@ -182,7 +183,7 @@ interface TelescopeOpts {
         instantOps?: {
             className: string;
             include?: {
-                serviceTypes?: ("Query" | "Tx" | string)[];
+                serviceTypes?: ('Query' | 'Tx' | string)[];
                 patterns?: string[];
             };
             nameMapping?: {

@@ -15,7 +15,7 @@ export declare class TelescopeBuilder {
     readonly rpcMsgClients: BundlerFile[];
     readonly registries: BundlerFile[];
     readonly stateManagers: Record<string, BundlerFile[]>;
-    constructor({ protoDirs, outPath, store, options }: TelescopeInput & {
+    constructor({ protoDirs, outPath, store, options, }: TelescopeInput & {
         store?: ProtoStore;
     });
     context(ref: any): TelescopeParseContext;

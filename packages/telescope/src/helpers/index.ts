@@ -13,3 +13,4 @@ export * from './binary-coder';
 export * from './types-helper';
 export * from './registry-helper';
 export * from './json-safe';
+export * from './decimals';
