@@ -1,7 +1,3 @@
-export const cosmjsDecimal = `
-export { Decimal } from "@cosmjs/math";
-`;
-
 export const decimal = `
 // START agoric-sdk patch
 // The largest value we need is 18 (Ether).
