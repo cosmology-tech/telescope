@@ -20,6 +20,7 @@ import {
   getTypesHelper,
   jsonSafe,
   decimal,
+  base64,
 } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
@@ -97,6 +98,11 @@ export const plugin = (builder: TelescopeBuilder) => {
   if (builder.options.prototypes.typingsFormat.customTypes.useAgoricDecimal) {
     builder.files.push('decimals.ts');
     write(builder, 'decimals.ts', decimal);
+  }
+
+  if (builder.options.prototypes.typingsFormat.customTypes.base64Lib) {
+    builder.files.push('base64.ts');
+    write(builder, 'base64.ts', base64);
   }
 
   if (
