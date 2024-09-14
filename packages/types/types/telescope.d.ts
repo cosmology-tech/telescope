@@ -75,6 +75,7 @@ interface TelescopeOpts {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
                 useAgoricDecimal?: boolean;
+                base64Lib?: boolean;
             };
             num64?: 'long' | 'bigint';
             useDeepPartial?: boolean;
