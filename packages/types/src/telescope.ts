@@ -121,6 +121,11 @@ interface TelescopeOpts {
         disableAll?: boolean;
         patterns?: string[];
     },
+    typingsFormat?: {
+      customTypes?: {
+        useCosmosSDKDec?: boolean;
+        useAgnostic?: 'default' | undefined;
+      };
 
     eslintDisable?: {
         files?: string[];
