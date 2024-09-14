@@ -464,7 +464,7 @@ describe('misc', () => {
         prototypes: {
           typingsFormat: {
             customTypes: {
-              base64Lib: true,
+              base64Lib: '@endo/base64',
             },
           },
         },

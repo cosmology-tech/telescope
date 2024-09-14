@@ -14,4 +14,3 @@ export * from './types-helper';
 export * from './registry-helper';
 export * from './json-safe';
 export * from './decimals';
-export * from './base64';

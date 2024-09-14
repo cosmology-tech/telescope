@@ -11,9 +11,22 @@ export const plugin = (builder: TelescopeBuilder) => {
     UTILS.Decimal = '@cosmjs/math';
   }
 
-  if (builder.options.prototypes.typingsFormat.customTypes.base64Lib === true) {
-    UTILS.base64FromBytes = '@endo/base64';
-    UTILS.bytesFromBase64 = '@endo/base64';
+  if (
+    builder.options.prototypes.typingsFormat.customTypes.base64Lib ===
+    '@endo/base64'
+  ) {
+    UTILS.base64FromBytes = {
+      type: 'import',
+      path: '@endo/base64',
+      name: 'decodeBase64',
+      importAs: 'base64FromBytes',
+    };
+    UTILS.bytesFromBase64 = {
+      type: 'import',
+      path: '@endo/base64',
+      name: 'encodeBase64',
+      importAs: 'bytesFromBase64',
+    };
   } else {
     UTILS.base64FromBytes = '__helpers__';
     UTILS.bytesFromBase64 = '__helpers__';
