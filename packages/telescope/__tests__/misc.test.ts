@@ -434,7 +434,7 @@ describe('misc', () => {
     await telescope.build();
   });
 
-  it('generates with useAgoricDecimals', async () => {
+  it('generates with usePatchedDecimal', async () => {
     const testFolder = '/output-decimals/agoric';
 
     const telescope = new TelescopeBuilder({
@@ -444,7 +444,7 @@ describe('misc', () => {
         prototypes: {
           typingsFormat: {
             customTypes: {
-              useAgoricDecimal: true,
+              usePatchedDecimal: true,
             },
           },
         },

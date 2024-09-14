@@ -414,6 +414,7 @@ See [RPC Clients](#rpc-clients) for more info.
 | option                                    | description                                                     | defaults  |
 | ----------------------------------------- | --------------------------------------------------------------  | --------- |
 | `prototypes.typingsFormat.customTypes.useCosmosSDKDec` | enable handling "prototypes.typingsFormat.customTypes.useCosmosSDKDec" proto custom type. Used to show decimal fields with the custom type correctly. Highly recommend set to true.    | `true`    |
+| `prototypes.typingsFormat.customTypes.usePatchedDecimal` |  To use patched decimal other then decimal from @cosmjs/math    | `false`    |
 | `prototypes.typingsFormat.num64` | 'long' or 'bigint', the way of generating int64 proto types, set to 'bigint' to enable using more stable built-in type   | `bigint`    |
 | `prototypes.typingsFormat.useTelescopeGeneratedType` |  Discard GeneratedType from cosmjs, use TelescopeGeneratedType instead inside *.registry.ts files  | `false`    |
 | `prototypes.typingsFormat.useDeepPartial` | defaults to true, but if disabled uses the `Partial` TS type    | `false`    |
