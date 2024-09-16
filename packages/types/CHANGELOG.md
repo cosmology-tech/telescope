@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.8.2...@cosmology/types@1.9.0) (2024-09-16)
+
+
+### Bug Fixes
+
+* use correct var name for options ([f294fb9](https://github.com/cosmology-tech/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
+
+
+### Features
+
+* add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/cosmology-tech/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
+* add options to choose beteen cosmjs or agoric-sdk ([f4a4a6b](https://github.com/cosmology-tech/telescope/commit/f4a4a6bc28ab413823dbf2c59caf5d8a28a14666))
+
+
+
+
+
 ## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/types@1.8.1...@cosmology/types@1.8.2) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/types

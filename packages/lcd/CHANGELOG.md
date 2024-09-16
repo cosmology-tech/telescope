@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.5...@cosmology/lcd@0.14.0) (2024-09-16)
+
+
+### Features
+
+* add timeout to the argument of LcdClient constructor ([8e7c4e9](https://github.com/cosmology-tech/telescope/commit/8e7c4e92206b4931f8397c9810d582d85784ef4e))
+
+
+
+
+
 ## [0.13.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/lcd@0.13.4...@cosmology/lcd@0.13.5) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/lcd
