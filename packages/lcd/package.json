@@ -27,9 +27,18 @@
     "clean": "rimraf ./types",
     "prepare": "npm run build",
     "lint": "eslint .",
-    "format": "eslint . --fix"
+    "format": "eslint . --fix",
+    "test": "jest"
   },
   "jest": {
+    "preset": "ts-jest",
+    "testEnvironment": "node",
+    "transform": {
+      "^.+\\.ts?$": "ts-jest"
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/"
+    ],
     "testPathIgnorePatterns": [
       "main/",
       "types/"
