@@ -1,13 +1,15 @@
 import axios from 'axios';
 export class LCDClient {
     restEndpoint: string;
+    timeout: number;
     private instance: any;
 
-    constructor({ restEndpoint }) {
-        this.restEndpoint = restEndpoint.endsWith('/') ? restEndpoint : `${restEndpoint}/`;
+    constructor(config: { restEndpoint: string, timeout?: number }) {
+        this.restEndpoint = config.restEndpoint.endsWith('/') ? config.restEndpoint : `${config.restEndpoint}/`;
+        this.timeout = config.timeout ?? 10000;
         this.instance = axios.create({
             baseURL: this.restEndpoint,
-            timeout: 10000,
+            timeout: this.timeout,
             headers: {}
         });
         this.get = this.get.bind(this);
@@ -18,7 +20,7 @@ export class LCDClient {
         return new Promise<ResponseType>(async (resolve, reject) => {
             try {
                 const response = await this.instance.get(endpoint, {
-                    timeout: 10000,
+                    timeout: this.timeout,
                     ...opts
                 });
                 if (response && response.data) {
@@ -37,7 +39,7 @@ export class LCDClient {
         return new Promise<ResponseType>(async (resolve, reject) => {
             try {
                 const response = await this.instance.post(endpoint, body, {
-                    timeout: 10000,
+                    timeout: this.timeout,
                     ...opts
                 });
                 if (response && response.data) {
