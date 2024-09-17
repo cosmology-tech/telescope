@@ -453,4 +453,24 @@ describe('misc', () => {
 
     await telescope.build();
   });
+
+  it('generates with base64 lib', async () => {
+    const testFolder = '/output-base64/';
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
+      protoDirs: [__dirname + '/../../../__fixtures__/misc/proto'],
+      options: deepmerge(options, {
+        prototypes: {
+          typingsFormat: {
+            customTypes: {
+              base64Lib: '@endo/base64',
+            },
+          },
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
 });

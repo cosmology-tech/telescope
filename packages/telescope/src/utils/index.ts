@@ -1,6 +1,6 @@
 import { ProtoRoot, ProtoRef } from '@cosmology/types';
 import { relative, dirname, extname } from 'path';
-import { ImportObj } from '../types';
+import { ImportObj, UtilValue } from '../types';
 import { restoreExtension, toPosixPath } from '@cosmology/utils';
 
 export const getRoot = (ref: ProtoRef): ProtoRoot => {
@@ -12,7 +12,7 @@ export const getRoot = (ref: ProtoRef): ProtoRoot => {
 // Long: { type: 'default', path: 'long', name: 'Long ' },
 // namespaced:
 // _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
-export const UTILS = {
+export const UTILS: { [key: string]: UtilValue } = {
   _m0: { type: 'namespace', path: 'protobufjs/minimal', name: '_m0' },
   AminoHeight: '__helpers__',
   AminoMsg: '@cosmjs/amino',

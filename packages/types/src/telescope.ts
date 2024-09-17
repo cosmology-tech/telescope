@@ -88,6 +88,7 @@ interface TelescopeOpts {
       customTypes?: {
         useCosmosSDKDec?: boolean;
         usePatchedDecimal?: boolean;
+        base64Lib?: '@endo/base64';
       };
 
       num64?: 'long' | 'bigint';

@@ -20,6 +20,7 @@ export interface ImportObj {
     path: string;
     importAs?: string;
 }
+export type UtilValue = ImportObj | string;
 export interface DerivedImportObj extends ImportObj {
     orig: string;
 }
