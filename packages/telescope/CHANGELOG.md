@@ -3,93 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.4...@cosmology/telescope@1.9.0) (2024-09-16)
-
-
-### Bug Fixes
-
-* remove unused code. ([40b4130](https://github.com/cosmology-tech/telescope/commit/40b4130db43f14c8ea938171de0be53b9a19fe3f))
-* use correct var name for options ([f294fb9](https://github.com/cosmology-tech/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
-
+# [1.10.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.9.0...@cosmology/telescope@1.10.0) (2024-09-18)
 
 ### Features
 
-* add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/cosmology-tech/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
-* decimal supporting bigInt and options to use from cosmjs or agoric-sdk ([cc8dbb7](https://github.com/cosmology-tech/telescope/commit/cc8dbb7e7d96c1b53cd630fe9e987981389cf585))
+- add endo base64 lib support ([197da9e](https://github.com/cosmology-tech/telescope/commit/197da9e3ea10c7dde76dcf31da4484be70498c6e))
+- add endo/base64 support ([a920d39](https://github.com/cosmology-tech/telescope/commit/a920d39802b3c9fc45c12710c719f82adbdee04e))
 
-
-
-
-
-## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.3...@cosmology/telescope@1.8.4) (2024-09-12)
-
+# [1.9.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.4...@cosmology/telescope@1.9.0) (2024-09-16)
 
 ### Bug Fixes
 
-* **JsonSafe:** handle nested structures and arrays ([5812e73](https://github.com/cosmology-tech/telescope/commit/5812e734a15bdc6e9659930069e945586218a1e0))
+- remove unused code. ([40b4130](https://github.com/cosmology-tech/telescope/commit/40b4130db43f14c8ea938171de0be53b9a19fe3f))
+- use correct var name for options ([f294fb9](https://github.com/cosmology-tech/telescope/commit/f294fb936e1688e30a8b884db756693a80f52407))
 
+### Features
 
+- add conditional logic to change UTILS.decimals value ([cf5279b](https://github.com/cosmology-tech/telescope/commit/cf5279bbc9afa52bae57cccb2961c945d64c9ad4))
+- decimal supporting bigInt and options to use from cosmjs or agoric-sdk ([cc8dbb7](https://github.com/cosmology-tech/telescope/commit/cc8dbb7e7d96c1b53cd630fe9e987981389cf585))
 
+## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.3...@cosmology/telescope@1.8.4) (2024-09-12)
 
+### Bug Fixes
+
+- **JsonSafe:** handle nested structures and arrays ([5812e73](https://github.com/cosmology-tech/telescope/commit/5812e734a15bdc6e9659930069e945586218a1e0))
 
 ## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.2...@cosmology/telescope@1.8.3) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 ## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.1...@cosmology/telescope@1.8.2) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/telescope
-
-
-
-
 
 ## [1.8.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.8.0...@cosmology/telescope@1.8.1) (2024-06-26)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 # [1.8.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.7.1...@cosmology/telescope@1.8.0) (2024-06-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 ## [1.7.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.7.0...@cosmology/telescope@1.7.1) (2024-06-03)
-
 
 ### Bug Fixes
 
-* **types:** handle Date in JsonSafe ([ae60a32](https://github.com/cosmology-tech/telescope/commit/ae60a32cc3dcd46bf84c3acfe49ba89ff328539c))
-
-
-
-
+- **types:** handle Date in JsonSafe ([ae60a32](https://github.com/cosmology-tech/telescope/commit/ae60a32cc3dcd46bf84c3acfe49ba89ff328539c))
 
 # [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.6.0...@cosmology/telescope@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/telescope
 
-
-
-
-
 # [1.6.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.10...@cosmology/telescope@1.6.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/telescope
-
-
-
-
 
 ## [1.5.10](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.5.9...@cosmology/telescope@1.5.10) (2024-05-13)
 

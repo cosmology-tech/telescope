@@ -3,53 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.2...@cosmology/utils@1.8.3) (2024-09-16)
+## [1.8.4](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.3...@cosmology/utils@1.8.4) (2024-09-18)
 
 **Note:** Version bump only for package @cosmology/utils
 
+## [1.8.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.2...@cosmology/utils@1.8.3) (2024-09-16)
 
-
-
+**Note:** Version bump only for package @cosmology/utils
 
 ## [1.8.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.1...@cosmology/utils@1.8.2) (2024-09-12)
 
 **Note:** Version bump only for package @cosmology/utils
 
-
-
-
-
 ## [1.8.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.0...@cosmology/utils@1.8.1) (2024-06-28)
 
 **Note:** Version bump only for package @cosmology/utils
-
-
-
-
 
 # [1.8.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.7.0...@cosmology/utils@1.8.0) (2024-06-25)
 
 **Note:** Version bump only for package @cosmology/utils
 
-
-
-
-
 # [1.7.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.6.0...@cosmology/utils@1.7.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/utils
 
-
-
-
-
 # [1.6.0](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.5.3...@cosmology/utils@1.6.0) (2024-05-25)
 
 **Note:** Version bump only for package @cosmology/utils
-
-
-
-
 
 ## [1.5.3](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.5.2...@cosmology/utils@1.5.3) (2024-05-13)
 
