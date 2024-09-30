@@ -44,6 +44,7 @@ const options: TelescopeOptions = {
     includePackageVar: true,
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
+    isScalarDefaultToNullable: false,
     allowUndefinedTypes: false,
     typingsFormat: {
       customTypes: {
@@ -258,6 +259,32 @@ describe('misc', () => {
             toProto: true,
             fromProto: true,
           },
+        },
+        aminoEncoding: {
+          enabled: false,
+          useLegacyInlineEncoding: false,
+        },
+      }),
+    });
+
+    await telescope.build();
+  });
+
+  it('generates, proto only, isScalarDefaultToNullable true', async () => {
+    const testFolder = '/output-scalar-default-nullable-true';
+
+    const telescope = new TelescopeBuilder({
+      outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
+      protoDirs: [__dirname + '/../../../__fixtures__/misc/proto'],
+      options: deepmerge(options, {
+        prototypes: {
+          methods: {
+            toAmino: false,
+            fromAmino: false,
+            toProto: true,
+            fromProto: true,
+          },
+          isScalarDefaultToNullable: true,
         },
         aminoEncoding: {
           enabled: false,
