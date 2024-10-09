@@ -3,7 +3,7 @@ import { UTILS } from '../utils';
 
 export const plugin = (builder: TelescopeBuilder) => {
   if (
-    builder.options.prototypes.typingsFormat.customTypes.usePatchedDecimal ===
+    builder.options.prototypes.typingsFormat.customTypes.useEnhancedDecimal ===
     true
   ) {
     UTILS.Decimal = '__decimals__';
