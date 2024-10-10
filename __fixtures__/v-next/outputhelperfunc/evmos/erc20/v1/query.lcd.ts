@@ -1,0 +1,39 @@
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairSDKType } from "./erc20";
+import { Params, ParamsSDKType } from "./genesis";
+import { setPaginationParams } from "../../../helpers";
+import { LCDClient } from "@cosmology/lcd";
+import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
+export class LCDQueryClient {
+  req: LCDClient;
+  constructor({
+    requestClient
+  }: {
+    requestClient: LCDClient;
+  }) {
+    this.req = requestClient;
+  }
+  /* TokenPairs retrieves registered token pairs */
+  tokenPairs = async (params: QueryTokenPairsRequest = {
+    pagination: PageRequest.fromPartial({})
+  }): Promise<QueryTokenPairsResponseSDKType> => {
+    const options: any = {
+      params: {}
+    };
+    if (typeof params?.pagination !== "undefined") {
+      setPaginationParams(options, params.pagination);
+    }
+    const endpoint = `evmos/erc20/v1/token_pairs`;
+    return QueryTokenPairsResponse.fromSDKJSON(await this.req.get<QueryTokenPairsResponseSDKType>(endpoint, options));
+  };
+  /* TokenPair retrieves a registered token pair */
+  tokenPair = async (params: QueryTokenPairRequest): Promise<QueryTokenPairResponseSDKType> => {
+    const endpoint = `evmos/erc20/v1/token_pairs/${params.token}`;
+    return QueryTokenPairResponse.fromSDKJSON(await this.req.get<QueryTokenPairResponseSDKType>(endpoint));
+  };
+  /* Params retrieves the erc20 module params */
+  params = async (_params: QueryParamsRequest = {}): Promise<QueryParamsResponseSDKType> => {
+    const endpoint = `evmos/erc20/v1/params`;
+    return QueryParamsResponse.fromSDKJSON(await this.req.get<QueryParamsResponseSDKType>(endpoint));
+  };
+}

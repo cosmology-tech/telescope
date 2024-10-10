@@ -202,6 +202,30 @@ interface TelescopeOpts {
         }[];
         useConnectComet?: boolean;
     };
+    helperFuncCreators?: {
+        enabled: boolean;
+        genCustomHooks?: boolean;
+        include?: {
+            serviceTypes?: ('Query' | 'Msg' | string)[];
+            patterns?: string[];
+        };
+        creatorPrefix?: {
+            All?: string;
+            Query?: string;
+            Msg?: string;
+        };
+        nameMappers?: {
+            All?: {
+                [key: string]: "unchanged" | "get" | ((name: string) => string);
+            };
+            Query?: {
+                [key: string]: "unchanged" | "get" | ((name: string) => string);
+            };
+            Msg?: {
+                [key: string]: "unchanged" | "get" | ((name: string) => string);
+            };
+        };
+    };
     reactQuery?: {
         enabled: boolean;
         needExtraQueryKey?: boolean;
