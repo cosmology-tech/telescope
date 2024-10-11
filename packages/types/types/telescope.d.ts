@@ -206,23 +206,30 @@ interface TelescopeOpts {
         enabled: boolean;
         genCustomHooks?: boolean;
         include?: {
-            serviceTypes?: ('Query' | 'Msg' | string)[];
+            serviceTypes?: ('Query' | 'Msg' | 'All')[];
             patterns?: string[];
-        };
-        creatorPrefix?: {
-            All?: string;
-            Query?: string;
-            Msg?: string;
         };
         nameMappers?: {
             All?: {
-                [key: string]: "unchanged" | "get" | ((name: string) => string);
+                funcBody: {
+                    [key: string]: "unchanged" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
             };
             Query?: {
-                [key: string]: "unchanged" | "get" | ((name: string) => string);
+                funcBody: {
+                    [key: string]: "unchanged" | "get" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
             };
             Msg?: {
-                [key: string]: "unchanged" | "get" | ((name: string) => string);
+                funcBody: {
+                    [key: string]: "unchanged" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
             };
         };
     };

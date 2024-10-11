@@ -1,105 +1,145 @@
-import { buildAllImports, getDepsFromQueries } from '../imports';
-import { Bundler } from '../bundler';
+import { buildAllImports, getDepsFromQueries } from "../imports";
+import { Bundler } from "../bundler";
+import { createQueryHelperCreator, createQueryHooks } from "@cosmology/ast";
+import { getNestedProto, isRefIncluded } from "@cosmology/proto-parser";
+import { parse } from "../parse";
+import { TelescopeBuilder } from "../builder";
+import { ProtoRoot, ProtoService, QUERY_SVC_TYPES } from "@cosmology/types";
 import {
-    createRpcQueryExtension,
-    createRpcClientClass,
-    createRpcClientInterface,
-    createRpcQueryHookInterfaces,
-    createRpcQueryHookClientMap,
-    createRpcQueryHooks,
-    // grpc-gateway:
-    createGRPCGatewayQueryClass,
-    createGRPCGatewayWrapperClass,
-    //grpc-web:
-    createGrpcWebQueryClass,
-    createGrpcWebQueryInterface,
-    createMobxQueryStores,
-    GetDesc,
-    getMethodDesc,
-    grpcWebRpcInterface,
-    getGrpcWebImpl,
-    createRpcClientImpl,
-} from '@cosmology/ast';
-import { getNestedProto, isRefIncluded } from '@cosmology/proto-parser';
-import { parse } from '../parse';
-import { TelescopeBuilder } from '../builder';
-import { ProtoRoot, ProtoService } from '@cosmology/types';
-import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
-import { BundlerFile } from '../types';
+  camel,
+  getHelperFuncName,
+  getQueryMethodNames,
+  swapKeyValue,
+} from "@cosmology/utils";
+import { BundlerFile } from "../types";
 
-export const plugin = (
-    builder: TelescopeBuilder,
-    bundler: Bundler
-) => {
-    const clients = bundler.contexts.map(c => {
+export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
+  const clients = bundler.contexts
+    .map((c) => {
+      const enabled = c.proto.pluginValue("helperFuncCreators.enabled");
+      if (!enabled) return;
 
-        const enabled = c.proto.pluginValue('helperFuncCreators.enabled');
-        if (!enabled) return;
+      const serviceTypes = c.proto.pluginValue(
+        "helperFuncCreators.include.serviceTypes"
+      );
 
-        if (c.proto.isExcluded()) return;
+      if (
+        serviceTypes &&
+        !serviceTypes.includes("Query") &&
+        !serviceTypes.includes("All")
+      ) {
+        return;
+      }
 
-        const ctx = bundler.getFreshContext(c);
+      if (c.proto.isExcluded()) return;
 
-        // get mutations, services
-        parse(ctx);
+      const ctx = bundler.getFreshContext(c);
 
-        const proto = getNestedProto(c.ref.traversed as ProtoRoot);
+      // get mutations, services
+      parse(ctx);
 
-        //// Anything except Msg Service OK...
-        if (proto?.Msg) {
-          return;
-        }
+      const proto = getNestedProto(c.ref.traversed as ProtoRoot);
 
-        let getImportsFrom;
+      //// Anything except Msg Service OK...
+      if (proto?.Msg) {
+        return;
+      }
 
-        if(proto.Query) {
-          getImportsFrom = ctx.queries;
-        } else {
-          getImportsFrom = ctx.services;
-        }
+      let getImportsFrom;
 
-        const localname = bundler.getLocalFilename(c.ref, `rpc.func`);
-        const filename = bundler.getFilename(localname);
+      if (proto.Query) {
+        getImportsFrom = ctx.queries;
+      } else {
+        getImportsFrom = ctx.services;
+      }
 
-        const bundlerFile: BundlerFile = {
-            proto: c.ref.filename,
-            package: c.ref.proto.package,
-            localname,
-            filename
-        };
+      const localname = bundler.getLocalFilename(c.ref, `rpc.func`);
+      const filename = bundler.getFilename(localname);
 
-        const asts = [];
+      const bundlerFile: BundlerFile = {
+        proto: c.ref.filename,
+        package: c.ref.proto.package,
+        localname,
+        filename,
+      };
 
-        // TODO:: see if the function is excluded.
+      const asts = [];
 
-        // TODO:: gen helper funcs
+      QUERY_SVC_TYPES.forEach((svcKey) => {
+        if (proto[svcKey]) {
+          const svc: ProtoService = proto[svcKey];
+          const patterns = c.proto.pluginValue(
+            "helperFuncCreators.include.patterns"
+          );
+          const nameMappers = c.proto.pluginValue(
+            "helperFuncCreators.nameMappers"
+          );
 
-        const genCustomHooks = c.proto.pluginValue('helperFuncCreators.genCustomHooks');
+          const mapper = nameMappers?.Query || nameMappers?.All || {};
 
-        if(genCustomHooks) {
-          // TODO:: gen custom hooks
-        }
+          const methodKeys = getQueryMethodNames(
+            bundlerFile.package,
+            Object.keys(proto[svcKey].methods ?? {}),
+            patterns,
+            String
+          );
 
-        if (!asts.length) {
+          // see if the function is excluded.
+          if (!methodKeys || !methodKeys.length) {
             return;
+          }
+
+          // for each method key, create creators, hooks.
+          methodKeys.forEach((methodKey) => {
+            // get helperCreatorName
+            // get hookName
+            const { creator: helperCreatorName, hook: hookName } =
+              getHelperFuncName(bundlerFile.package, methodKey, mapper, "get");
+
+            // gen helper funcs
+            asts.push(
+              createQueryHelperCreator(
+                ctx.generic,
+                svc,
+                methodKey,
+                helperCreatorName
+              )
+            );
+
+            const genCustomHooks = c.proto.pluginValue(
+              "helperFuncCreators.genCustomHooks"
+            );
+
+            if (genCustomHooks) {
+              // gen custom hooks
+              asts.push(
+                createQueryHooks(
+                  ctx.generic,
+                  svc,
+                  methodKey,
+                  helperCreatorName,
+                  hookName
+                )
+              );
+            }
+          });
         }
+      });
 
-        const serviceImports = getDepsFromQueries(
-            getImportsFrom,
-            localname
-        );
+      if (!asts.length) {
+        return;
+      }
 
-        // TODO we do NOT need all imports...
-        const imports = buildAllImports(ctx, serviceImports, localname);
-        const prog = []
-            .concat(imports)
-            .concat(ctx.body)
-            .concat(asts);
+      const serviceImports = getDepsFromQueries(getImportsFrom, localname);
 
-        bundler.writeAst(prog, filename);
-        bundler.addToBundle(c, localname);
+      // TODO we do NOT need all imports...
+      const imports = buildAllImports(ctx, serviceImports, localname);
+      const prog = [].concat(imports).concat(ctx.body).concat(asts);
 
-        return bundlerFile;
+      bundler.writeAst(prog, filename);
+      bundler.addToBundle(c, localname);
 
-    }).filter(Boolean);
+      return bundlerFile;
+    })
+    .filter(Boolean);
 };

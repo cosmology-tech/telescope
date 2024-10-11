@@ -1,11 +1,12 @@
 import { buildAllImports, getDepsFromQueries } from '../imports';
 import { Bundler } from '../bundler';
-import { createRpcClientClass, createRpcClientInterface, createGRPCGatewayMsgClass, GetDesc, getMethodDesc, grpcWebRpcInterface, createGrpcWebMsgInterface, createGrpcWebMsgClass, getGrpcWebImpl, createRpcClientImpl } from '@cosmology/ast';
+import { createMsgHelperCreator, createMsgHooks } from '@cosmology/ast';
 import { getNestedProto } from '@cosmology/proto-parser';
 import { parse } from '../parse';
 import { TelescopeBuilder } from '../builder';
-import { camel, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
+import { camel, getHelperFuncName, getQueryMethodNames, swapKeyValue } from '@cosmology/utils';
 import { BundlerFile } from 'src/types';
+import { ProtoService, TX_SVC_TYPES } from '@cosmology/types';
 
 export const plugin = (
     builder: TelescopeBuilder,
@@ -19,6 +20,18 @@ export const plugin = (
 
         const enabled = c.proto.pluginValue('helperFuncCreators.enabled');
         if (!enabled) return;
+
+        const serviceTypes = c.proto.pluginValue(
+          "helperFuncCreators.include.serviceTypes"
+        );
+
+        if (
+          serviceTypes &&
+          !serviceTypes.includes("Msg") &&
+          !serviceTypes.includes("All")
+        ) {
+          return;
+        }
 
         if (c.proto.isExcluded()) return;
 
@@ -45,13 +58,78 @@ export const plugin = (
           isMsg: true
         };
 
-        // TODO:: see if the function is excluded.
+        // // TODO:: see if the function is excluded.
 
-        // TODO:: gen helper funcs
-        const genCustomHooks = c.proto.pluginValue('helperFuncCreators.genCustomHooks');
+        // // TODO:: gen helper funcs
+        // const genCustomHooks = c.proto.pluginValue('helperFuncCreators.genCustomHooks');
 
-        if(genCustomHooks) {
-          // TODO:: gen custom hooks
+        // if(genCustomHooks) {
+        //   // TODO:: gen custom hooks
+        // }
+
+        TX_SVC_TYPES.forEach((svcKey) => {
+          if (proto[svcKey]) {
+            const svc: ProtoService = proto[svcKey];
+            const patterns = c.proto.pluginValue(
+              "helperFuncCreators.include.patterns"
+            );
+            const nameMappers = c.proto.pluginValue(
+              "helperFuncCreators.nameMappers"
+            );
+
+            const mapper = nameMappers?.Msg || nameMappers?.All || {};
+
+            const methodKeys = getQueryMethodNames(
+              bundlerFile.package,
+              Object.keys(proto[svcKey].methods ?? {}),
+              patterns,
+              String
+            );
+
+            // see if the function is excluded.
+            if (!methodKeys || !methodKeys.length) {
+              return;
+            }
+
+            // for each method key, create creators, hooks.
+            methodKeys.forEach((methodKey) => {
+              // get helperCreatorName
+              // get hookName
+              const { creator: helperCreatorName, hook: hookName } =
+                getHelperFuncName(bundlerFile.package, methodKey, mapper, "unchanged");
+
+              // gen helper funcs
+              asts.push(
+                createMsgHelperCreator(
+                  ctx.generic,
+                  svc,
+                  methodKey,
+                  helperCreatorName
+                )
+              );
+
+              const genCustomHooks = c.proto.pluginValue(
+                "helperFuncCreators.genCustomHooks"
+              );
+
+              if (genCustomHooks) {
+                // gen custom hooks
+                asts.push(
+                  createMsgHooks(
+                    ctx.generic,
+                    svc,
+                    methodKey,
+                    helperCreatorName,
+                    hookName
+                  )
+                );
+              }
+            });
+          }
+        });
+
+        if (!asts.length) {
+          return;
         }
 
         const serviceImports = getDepsFromQueries(
