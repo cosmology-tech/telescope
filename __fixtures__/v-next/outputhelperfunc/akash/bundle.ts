@@ -73,31 +73,48 @@ import * as _334 from "./escrow/v1beta1/query.lcd";
 import * as _335 from "./escrow/v1beta2/query.lcd";
 import * as _336 from "./market/v1beta2/query.lcd";
 import * as _337 from "./provider/v1beta2/query.lcd";
-import * as _338 from "./audit/v1beta2/query.rpc.Query";
-import * as _339 from "./cert/v1beta2/query.rpc.Query";
-import * as _340 from "./deployment/v1beta2/query.rpc.Query";
-import * as _341 from "./escrow/v1beta1/query.rpc.Query";
-import * as _342 from "./escrow/v1beta2/query.rpc.Query";
-import * as _343 from "./market/v1beta2/query.rpc.Query";
-import * as _344 from "./provider/v1beta2/query.rpc.Query";
-import * as _345 from "./audit/v1beta1/audit.rpc.msg";
-import * as _346 from "./audit/v1beta2/audit.rpc.msg";
-import * as _347 from "./cert/v1beta2/cert.rpc.msg";
-import * as _348 from "./deployment/v1beta2/service.rpc.msg";
-import * as _349 from "./market/v1beta2/service.rpc.msg";
-import * as _350 from "./provider/v1beta1/provider.rpc.msg";
-import * as _351 from "./provider/v1beta2/provider.rpc.msg";
-import * as _352 from "./cert/v1beta2/query.pinia.store";
-import * as _536 from "./lcd";
-import * as _537 from "./rpc.query";
-import * as _538 from "./rpc.tx";
+import * as _338 from "./audit/v1beta2/query.rpc.func";
+import * as _339 from "./cert/v1beta2/query.rpc.func";
+import * as _340 from "./deployment/v1beta1/query.rpc.func";
+import * as _341 from "./deployment/v1beta2/query.rpc.func";
+import * as _342 from "./escrow/v1beta1/query.rpc.func";
+import * as _343 from "./escrow/v1beta2/query.rpc.func";
+import * as _344 from "./market/v1beta2/query.rpc.func";
+import * as _345 from "./provider/v1beta2/query.rpc.func";
+import * as _346 from "./audit/v1beta2/query.rpc.Query";
+import * as _347 from "./cert/v1beta2/query.rpc.Query";
+import * as _348 from "./deployment/v1beta2/query.rpc.Query";
+import * as _349 from "./escrow/v1beta1/query.rpc.Query";
+import * as _350 from "./escrow/v1beta2/query.rpc.Query";
+import * as _351 from "./market/v1beta2/query.rpc.Query";
+import * as _352 from "./provider/v1beta2/query.rpc.Query";
+import * as _353 from "./audit/v1beta1/audit.rpc.func";
+import * as _354 from "./audit/v1beta2/audit.rpc.func";
+import * as _355 from "./cert/v1beta2/cert.rpc.func";
+import * as _356 from "./deployment/v1beta1/deployment.rpc.func";
+import * as _357 from "./deployment/v1beta2/service.rpc.func";
+import * as _358 from "./market/v1beta2/service.rpc.func";
+import * as _359 from "./provider/v1beta1/provider.rpc.func";
+import * as _360 from "./provider/v1beta2/provider.rpc.func";
+import * as _361 from "./audit/v1beta1/audit.rpc.msg";
+import * as _362 from "./audit/v1beta2/audit.rpc.msg";
+import * as _363 from "./cert/v1beta2/cert.rpc.msg";
+import * as _364 from "./deployment/v1beta2/service.rpc.msg";
+import * as _365 from "./market/v1beta2/service.rpc.msg";
+import * as _366 from "./provider/v1beta1/provider.rpc.msg";
+import * as _367 from "./provider/v1beta2/provider.rpc.msg";
+import * as _368 from "./cert/v1beta2/query.pinia.store";
+import * as _629 from "./lcd";
+import * as _630 from "./rpc.query";
+import * as _631 from "./rpc.tx";
 export namespace akash {
   export namespace audit {
     export const v1beta1 = {
       ..._0,
       ..._316,
       ..._323,
-      ..._345
+      ..._353,
+      ..._361
     };
     export const v1beta2 = {
       ..._1,
@@ -107,7 +124,9 @@ export namespace akash {
       ..._324,
       ..._330,
       ..._338,
-      ..._346
+      ..._346,
+      ..._354,
+      ..._362
     };
   }
   export namespace base {
@@ -135,7 +154,9 @@ export namespace akash {
       ..._331,
       ..._339,
       ..._347,
-      ..._352
+      ..._355,
+      ..._363,
+      ..._368
     };
   }
   export namespace deployment {
@@ -146,7 +167,9 @@ export namespace akash {
       ..._19,
       ..._20,
       ..._21,
-      ..._332
+      ..._332,
+      ..._340,
+      ..._356
     };
     export const v1beta2 = {
       ..._22,
@@ -164,8 +187,10 @@ export namespace akash {
       ..._319,
       ..._326,
       ..._333,
-      ..._340,
-      ..._348
+      ..._341,
+      ..._348,
+      ..._357,
+      ..._364
     };
   }
   export namespace escrow {
@@ -174,14 +199,16 @@ export namespace akash {
       ..._35,
       ..._36,
       ..._334,
-      ..._341
+      ..._342,
+      ..._349
     };
     export const v1beta2 = {
       ..._37,
       ..._38,
       ..._39,
       ..._335,
-      ..._342
+      ..._343,
+      ..._350
     };
   }
   export namespace inflation {
@@ -202,8 +229,10 @@ export namespace akash {
       ..._320,
       ..._327,
       ..._336,
-      ..._343,
-      ..._349
+      ..._344,
+      ..._351,
+      ..._358,
+      ..._365
     };
   }
   export namespace provider {
@@ -211,7 +240,8 @@ export namespace akash {
       ..._49,
       ..._321,
       ..._328,
-      ..._350
+      ..._359,
+      ..._366
     };
     export const v1beta2 = {
       ..._50,
@@ -220,13 +250,15 @@ export namespace akash {
       ..._322,
       ..._329,
       ..._337,
-      ..._344,
-      ..._351
+      ..._345,
+      ..._352,
+      ..._360,
+      ..._367
     };
   }
   export const ClientFactory = {
-    ..._536,
-    ..._537,
-    ..._538
+    ..._629,
+    ..._630,
+    ..._631
   };
 }

@@ -82,7 +82,7 @@ export const plugin = (
             const methodKeys = getQueryMethodNames(
               bundlerFile.package,
               Object.keys(proto[svcKey].methods ?? {}),
-              patterns,
+              patterns || ["**"],
               String
             );
 

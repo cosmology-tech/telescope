@@ -258,11 +258,11 @@ export function getHelperFuncName(
     funcBodyFn === "unchanged"
       ? String
       : funcBodyFn === "get"
-      ? (name: string) => camel("get_" + name)
+      ? (name: string) => camel("get_" + camel(name))
       : funcBodyFn;
 
   return {
-    creator: camel(`${creatorPrefix}_${funcBodyFn(methodKey)}`),
-    hook: camel(`${hookPrefix}_${funcBodyFn(methodKey)}`),
+    creator: camel(`${creatorPrefix || "create"}_${camel(funcBodyFn(methodKey))}`),
+    hook: camel(`${hookPrefix || "use"}_${camel(funcBodyFn(methodKey))}`),
   };
 }

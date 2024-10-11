@@ -1,0 +1,5 @@
+import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
+return createCreateCertificate;
+return useCreateCertificate;
+return createRevokeCertificate;
+return useRevokeCertificate;

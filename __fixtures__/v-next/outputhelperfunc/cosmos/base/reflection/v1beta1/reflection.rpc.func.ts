@@ -1,0 +1,5 @@
+import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
+return createGetListAllInterfaces;
+return useGetListAllInterfaces;
+return createGetListImplementations;
+return useGetListImplementations;

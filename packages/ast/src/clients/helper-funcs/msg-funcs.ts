@@ -22,7 +22,7 @@ export function createMsgHelperCreator(
     // get related converters.
     // e.g.: converters: toConverters(MsgMultiSend),
 
-    return t.identifier(helperCreatorName);
+    return t.returnStatement(t.identifier(helperCreatorName));
 }
 
 /**
@@ -41,5 +41,5 @@ export function createMsgHooks(
     helperCreatorName: string,
     hookName: string
 ) {
-    return t.identifier(hookName);
+    return t.returnStatement(t.identifier(hookName));
 }

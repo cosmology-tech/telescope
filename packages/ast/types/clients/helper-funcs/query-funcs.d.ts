@@ -9,7 +9,7 @@ import { GenericParseContext } from "../../encoding";
  * @param helperCreatorName e.g. "createGetBalance"
  * @returns
  */
-export declare function createQueryHelperCreator(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string): t.Identifier;
+export declare function createQueryHelperCreator(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string): t.ReturnStatement;
 /**
  *
  * @param context
@@ -19,4 +19,4 @@ export declare function createQueryHelperCreator(context: GenericParseContext, s
  * @param hookName e.g. "useGetBalance"
  * @returns
  */
-export declare function createQueryHooks(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string, hookName: string): t.Identifier;
+export declare function createQueryHooks(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string, hookName: string): t.ReturnStatement;

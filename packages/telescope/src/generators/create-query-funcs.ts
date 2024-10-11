@@ -80,7 +80,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
           const methodKeys = getQueryMethodNames(
             bundlerFile.package,
             Object.keys(proto[svcKey].methods ?? {}),
-            patterns,
+            patterns || ["**"],
             String
           );
 

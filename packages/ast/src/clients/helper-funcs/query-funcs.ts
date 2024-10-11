@@ -14,9 +14,9 @@ export function createQueryHelperCreator(
     context: GenericParseContext,
     service: ProtoService,
     methodKey: string,
-    helperCreatorName: string,
+    helperCreatorName: string
 ) {
-    return t.identifier(helperCreatorName);
+    return t.returnStatement(t.identifier(helperCreatorName));
 }
 
 /**
@@ -33,7 +33,7 @@ export function createQueryHooks(
     service: ProtoService,
     methodKey: string,
     helperCreatorName: string,
-    hookName: string,
+    hookName: string
 ) {
-    return t.identifier(hookName);
+    return t.returnStatement(t.identifier(hookName));
 }

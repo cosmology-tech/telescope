@@ -1,0 +1,10 @@
+import { Any, AnySDKType } from "../../../../google/protobuf/any";
+import { MsgCreateClient, MsgCreateClientSDKType, MsgCreateClientResponse, MsgCreateClientResponseSDKType, MsgUpdateClient, MsgUpdateClientSDKType, MsgUpdateClientResponse, MsgUpdateClientResponseSDKType, MsgUpgradeClient, MsgUpgradeClientSDKType, MsgUpgradeClientResponse, MsgUpgradeClientResponseSDKType, MsgSubmitMisbehaviour, MsgSubmitMisbehaviourSDKType, MsgSubmitMisbehaviourResponse, MsgSubmitMisbehaviourResponseSDKType } from "./tx";
+return createCreateClient;
+return useCreateClient;
+return createUpdateClient;
+return useUpdateClient;
+return createUpgradeClient;
+return useUpgradeClient;
+return createSubmitMisbehaviour;
+return useSubmitMisbehaviour;
