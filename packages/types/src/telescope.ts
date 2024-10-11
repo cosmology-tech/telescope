@@ -259,17 +259,19 @@ interface TelescopeOpts {
     nameMappers?: {
       All?: {
         // to map the method name to a new name to make the body part without the prefix.
+        // default to "unchanged"
         // e.g. "*" : (name: string) => `get${name}`;
         funcBody: {
           [key: string]: "unchanged" | ( (name: string) => string );
         },
-        // default to ""
+        // default to "create"
         creatorPrefix: string;
         // default to "use"
         hookPrefix: string;
       };
       Query?: {
         // to map the method name to a new name to make the body part without the prefix.
+        // default to "get"
         funcBody: {
           [key: string]: "unchanged" | "get" | ( (name: string) => string );
         },
@@ -280,6 +282,7 @@ interface TelescopeOpts {
       };
       Msg?: {
         // to map the method name to a new name to make the body part without the prefix.
+        // default to "unchanged"
         funcBody: {
           [key: string]: "unchanged" | ( (name: string) => string );
         },
