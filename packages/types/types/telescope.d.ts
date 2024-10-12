@@ -1,6 +1,6 @@
-import { TSBuilderInput } from '@cosmwasm/ts-codegen';
-import { AminoExceptions } from './aminos';
-import { Operation } from 'fast-json-patch';
+import { TSBuilderInput } from "@cosmwasm/ts-codegen";
+import { AminoExceptions } from "./aminos";
+import { Operation } from "fast-json-patch";
 export declare enum TelescopeLogLevel {
     None = 0,
     Info = 1,
@@ -9,7 +9,7 @@ export declare enum TelescopeLogLevel {
     Debug = 4
 }
 interface TelescopeOpts {
-    env?: 'default' | 'v-next';
+    env?: "default" | "v-next";
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
@@ -75,15 +75,15 @@ interface TelescopeOpts {
         typingsFormat?: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
-                usePatchedDecimal?: boolean;
-                base64Lib?: '@endo/base64';
+                useEnhancedDecimal?: boolean;
+                base64Lib?: "@endo/base64";
             };
-            num64?: 'long' | 'bigint';
+            num64?: "long" | "bigint";
             useDeepPartial?: boolean;
             useExact?: boolean;
             toJsonUnknown?: boolean;
-            timestamp?: 'date' | 'timestamp';
-            duration?: 'duration' | 'string';
+            timestamp?: "date" | "timestamp";
+            duration?: "duration" | "string";
             setDefaultEnumToUnrecognized?: boolean;
             autoFixUndefinedEnumDefault?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
@@ -128,7 +128,7 @@ interface TelescopeOpts {
         customTypes?: {
             useCosmosSDKDec?: boolean;
         };
-        omitEmptyTags?: ('omitempty' | 'dont_omitempty')[];
+        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -157,7 +157,7 @@ interface TelescopeOpts {
         }[];
     };
     rpcClients?: {
-        type?: 'tendermint' | 'grpc-web' | 'grpc-gateway';
+        type?: "tendermint" | "grpc-web" | "grpc-gateway";
         enabled: boolean;
         inline?: boolean;
         extensions?: boolean;
@@ -165,14 +165,14 @@ interface TelescopeOpts {
         scopedIsExclusive?: boolean;
         bundle?: boolean;
         serviceImplement?: {
-            [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: {
+            [key: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string]: {
                 include?: {
                     patterns?: string[];
                 };
-                type: 'Query' | 'Tx' | string;
+                type: "Query" | "Tx" | string;
             };
         };
-        enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
+        enabledServices?: ("Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string)[];
         scoped?: {
             dir: string;
             filename?: string;
@@ -185,7 +185,7 @@ interface TelescopeOpts {
         instantOps?: {
             className: string;
             include?: {
-                serviceTypes?: ('Query' | 'Tx' | string)[];
+                serviceTypes?: ("Query" | "Tx" | string)[];
                 patterns?: string[];
             };
             nameMapping?: {
