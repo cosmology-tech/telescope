@@ -1,20 +1,20 @@
-import * as _89 from "./api/expr/v1alpha1/eval";
-import * as _90 from "./protobuf/any";
-import * as _91 from "./protobuf/descriptor";
-import * as _92 from "./protobuf/duration";
-import * as _93 from "./protobuf/timestamp";
+import * as _101 from "./api/expr/v1alpha1/eval";
+import * as _102 from "./protobuf/any";
+import * as _103 from "./protobuf/descriptor";
+import * as _104 from "./protobuf/duration";
+import * as _105 from "./protobuf/timestamp";
 export namespace google {
   export namespace api {
     export namespace expr {
       export const v1alpha1 = {
-        ..._89
+        ..._101
       };
     }
   }
   export const protobuf = {
-    ..._90,
-    ..._91,
-    ..._92,
-    ..._93
+    ..._102,
+    ..._103,
+    ..._104,
+    ..._105
   };
 }

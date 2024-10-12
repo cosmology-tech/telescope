@@ -1,7 +1,7 @@
-import { TSBuilderInput } from '@cosmwasm/ts-codegen';
-import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from './aminos';
-import { snake, camel } from 'case';
-import { Operation } from 'fast-json-patch';
+import { TSBuilderInput } from "@cosmwasm/ts-codegen";
+import { AminoExceptions, DEFAULT_AMINO_EXCEPTIONS } from "./aminos";
+import { snake, camel } from "case";
+import { Operation } from "fast-json-patch";
 
 export enum TelescopeLogLevel {
   None = 0,
@@ -11,7 +11,7 @@ export enum TelescopeLogLevel {
   Debug,
 }
 interface TelescopeOpts {
-  env?: 'default' | 'v-next';
+  env?: "default" | "v-next";
   removeUnusedImports?: boolean;
   classesUseArrowFunctions?: boolean;
   useSDKTypes?: boolean;
@@ -60,6 +60,7 @@ interface TelescopeOpts {
     useOptionalNullable?: boolean;
     allowUndefinedTypes?: boolean;
     allowEncodeDefaultScalars?: boolean;
+    isScalarDefaultToNullable?: boolean;
 
     optionalQueryParams?: boolean;
     optionalPageRequests?: boolean;
@@ -88,15 +89,15 @@ interface TelescopeOpts {
       customTypes?: {
         useCosmosSDKDec?: boolean;
         useEnhancedDecimal?: boolean;
-        base64Lib?: '@endo/base64';
+        base64Lib?: "@endo/base64";
       };
 
-      num64?: 'long' | 'bigint';
+      num64?: "long" | "bigint";
       useDeepPartial?: boolean;
       useExact?: boolean;
       toJsonUnknown?: boolean;
-      timestamp?: 'date' | 'timestamp';
-      duration?: 'duration' | 'string';
+      timestamp?: "date" | "timestamp";
+      duration?: "duration" | "string";
 
       setDefaultEnumToUnrecognized?: boolean;
       autoFixUndefinedEnumDefault?: boolean;
@@ -154,7 +155,7 @@ interface TelescopeOpts {
     customTypes?: {
       useCosmosSDKDec?: boolean;
     };
-    omitEmptyTags?: ('omitempty' | 'dont_omitempty')[];
+    omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
     useProtoOptionality?: boolean;
     disableMsgTypes?: boolean;
     casingFn?: Function;
@@ -186,7 +187,7 @@ interface TelescopeOpts {
     }[];
   };
   rpcClients?: {
-    type?: 'tendermint' | 'grpc-web' | 'grpc-gateway';
+    type?: "tendermint" | "grpc-web" | "grpc-gateway";
     enabled: boolean;
     inline?: boolean;
     extensions?: boolean;
@@ -196,25 +197,25 @@ interface TelescopeOpts {
     serviceImplement?: {
       [
         key:
-          | 'Msg'
-          | 'Query'
-          | 'Service'
-          | 'ReflectionService'
-          | 'ABCIApplication'
+          | "Msg"
+          | "Query"
+          | "Service"
+          | "ReflectionService"
+          | "ABCIApplication"
           | string
       ]: {
         include?: {
           patterns?: string[];
         };
-        type: 'Query' | 'Tx' | string;
+        type: "Query" | "Tx" | string;
       };
     };
     enabledServices?: (
-      | 'Msg'
-      | 'Query'
-      | 'Service'
-      | 'ReflectionService'
-      | 'ABCIApplication'
+      | "Msg"
+      | "Query"
+      | "Service"
+      | "ReflectionService"
+      | "ABCIApplication"
       | string
     )[];
     scoped?: {
@@ -230,7 +231,7 @@ interface TelescopeOpts {
       className: string;
       include?: {
         // a group of types of service to include, undefined for All.
-        serviceTypes?: ('Query' | 'Tx' | string)[];
+        serviceTypes?: ("Query" | "Tx" | string)[];
         patterns?: string[];
       };
       nameMapping?: {
@@ -301,7 +302,7 @@ export type TelescopeOption = keyof TelescopeOpts;
 export const defaultTelescopeOptions: TelescopeOptions = {
   // global options (can be overridden through plugins)
 
-  env: 'default',
+  env: "default",
   removeUnusedImports: true,
   classesUseArrowFunctions: false,
   useSDKTypes: true,
@@ -356,12 +357,12 @@ export const defaultTelescopeOptions: TelescopeOptions = {
       customTypes: {
         useCosmosSDKDec: true,
       },
-      num64: 'bigint',
+      num64: "bigint",
       useDeepPartial: false,
       useExact: false,
       toJsonUnknown: false,
-      timestamp: 'date',
-      duration: 'duration',
+      timestamp: "date",
+      duration: "duration",
       updatedDuration: false,
 
       setDefaultEnumToUnrecognized: true,
@@ -399,7 +400,7 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     customTypes: {
       useCosmosSDKDec: false,
     },
-    omitEmptyTags: ['omitempty', 'dont_omitempty'],
+    omitEmptyTags: ["omitempty", "dont_omitempty"],
     casingFn: snake,
     exceptions: {
       ...DEFAULT_AMINO_EXCEPTIONS,
@@ -411,13 +412,13 @@ export const defaultTelescopeOptions: TelescopeOptions = {
     scopedIsExclusive: true,
   },
   rpcClients: {
-    type: 'tendermint',
+    type: "tendermint",
     enabled: true,
     extensions: true,
     inline: false,
     bundle: true,
     camelCase: true,
-    enabledServices: ['Msg', 'Query', 'Service'],
+    enabledServices: ["Msg", "Query", "Service"],
     scopedIsExclusive: true,
   },
 

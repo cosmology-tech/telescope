@@ -1,20 +1,20 @@
-import * as _148 from "./all_fields";
-import * as _149 from "./eval_request";
-import * as _150 from "./nest";
-import * as _151 from "./tx";
-import * as _152 from "./tx.amino";
-import * as _153 from "./tx.registry";
-import * as _154 from "./tx.rpc.msg";
-import * as _155 from "./rpc.tx";
+import * as _160 from "./all_fields";
+import * as _161 from "./eval_request";
+import * as _162 from "./nest";
+import * as _163 from "./tx";
+import * as _164 from "./tx.amino";
+import * as _165 from "./tx.registry";
+import * as _166 from "./tx.rpc.msg";
+import * as _167 from "./rpc.tx";
 export const misc = {
-  ..._148,
-  ..._149,
-  ..._150,
-  ..._151,
-  ..._152,
-  ..._153,
-  ..._154,
+  ..._160,
+  ..._161,
+  ..._162,
+  ..._163,
+  ..._164,
+  ..._165,
+  ..._166,
   ClientFactory: {
-    ..._155
+    ..._167
   }
 };
