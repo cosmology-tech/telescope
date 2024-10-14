@@ -29,7 +29,8 @@ export function createQueryHelperCreator(
         return ast.tsTypeAliasDeclaration(
             ast.identifier(`Use${method}Query`),
             // No type parameters for type alias
-            ast.tsTypeParameterDeclaration([null]),
+            // To add a type parameter, use ast.tsTypeParameterDeclaration([]),
+            null,
             ast.tsTypeReference(
                 ast.identifier("UseQueryParams"),
                 ast.tsTypeParameterInstantiation([
