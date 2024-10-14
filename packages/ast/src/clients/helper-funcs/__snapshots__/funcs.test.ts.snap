@@ -25,15 +25,15 @@ const useMultiSend = buildUseMutation<MsgMultiSend, Error>({
 `;
 
 exports[`query funcs works 1`] = `
-"type UseBalanceQuery<> = UseQueryParams<QueryBalanceRequest, QueryBalanceResponse>;
-type UseAllBalancesQuery<> = UseQueryParams<QueryAllBalancesRequest, QueryAllBalancesResponse>;
-type UseSpendableBalancesQuery<> = UseQueryParams<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>;
-type UseTotalSupplyQuery<> = UseQueryParams<QueryTotalSupplyRequest, QueryTotalSupplyResponse>;
-type UseSupplyOfQuery<> = UseQueryParams<QuerySupplyOfRequest, QuerySupplyOfResponse>;
-type UseParamsQuery<> = UseQueryParams<QueryParamsRequest, QueryParamsResponse>;
-type UseDenomMetadataQuery<> = UseQueryParams<QueryDenomMetadataRequest, QueryDenomMetadataResponse>;
-type UseDenomsMetadataQuery<> = UseQueryParams<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>;
-type UseDenomOwnersQuery<> = UseQueryParams<QueryDenomOwnersRequest, QueryDenomOwnersResponse>;
+"type UseBalanceQuery = UseQueryParams<QueryBalanceRequest, QueryBalanceResponse>;
+type UseAllBalancesQuery = UseQueryParams<QueryAllBalancesRequest, QueryAllBalancesResponse>;
+type UseSpendableBalancesQuery = UseQueryParams<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>;
+type UseTotalSupplyQuery = UseQueryParams<QueryTotalSupplyRequest, QueryTotalSupplyResponse>;
+type UseSupplyOfQuery = UseQueryParams<QuerySupplyOfRequest, QuerySupplyOfResponse>;
+type UseParamsQuery = UseQueryParams<QueryParamsRequest, QueryParamsResponse>;
+type UseDenomMetadataQuery = UseQueryParams<QueryDenomMetadataRequest, QueryDenomMetadataResponse>;
+type UseDenomsMetadataQuery = UseQueryParams<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>;
+type UseDenomOwnersQuery = UseQueryParams<QueryDenomOwnersRequest, QueryDenomOwnersResponse>;
 const createGetBalance = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   reqEncoderFn: QueryBalanceRequest.encode,
   resDecoderFn: QueryBalanceResponse.decode,
