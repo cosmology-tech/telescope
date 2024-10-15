@@ -93,8 +93,8 @@ export function createQueryHelperCreator(
     ]);
 
     const customHookArgumentsType = ast.tsTypeAnnotation(
-        //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
-        ast.tsTypeReference(ast.identifier("abc"))
+        //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the string.
+        ast.tsTypeReference(ast.identifier("() => ISigningClient | undefined"))
     );
     const arg = ast.identifier("getRpcInstance");
 
