@@ -1,10 +1,15 @@
+import * as ast from "@babel/types";
 import { GenericParseContext } from "../../encoding";
 import { getNestedProto } from "@cosmology/utils";
 import { traverse } from "@cosmology/proto-parser";
 import { expectCode, getTestProtoStore, printCode } from "../../../test-utils";
 import { defaultTelescopeOptions, ProtoService } from "@cosmology/types";
 import { createMsgHelperCreator, createMsgHooks } from "./msg-funcs";
-import { createQueryHelperCreator, createQueryHooks } from "./query-funcs";
+import {
+    createQueryHelperCreator,
+    createQueryHooks,
+    createTypeAliases,
+} from "./query-funcs";
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -13,16 +18,8 @@ it("query funcs works", async () => {
     const ref = store.findProto("cosmos/bank/v1beta1/query.proto");
 
     const res = traverse(store, ref);
-    console.log(
-        `🍀 \n | 🍄 file: funcs.test.ts:17 \n | 🍄 it \n | 🍄 res:`,
-        res
-    );
 
     const { Query } = getNestedProto(res);
-    console.log(
-        `🍀 \n | 🍄 file: funcs.test.ts:22 \n | 🍄 it \n | 🍄 Query:`,
-        Query
-    );
 
     const mockService: ProtoService = Query;
 
@@ -32,9 +29,33 @@ it("query funcs works", async () => {
         defaultTelescopeOptions
     );
 
-    expectCode(createQueryHelperCreator(mockContext, mockService));
+    expectCode(
+        createTypeAliases(
+            mockContext,
+            mockService,
+            "Balance",
+            "createGetBalance"
+        )
+    );
 
-    expectCode(createQueryHooks(mockContext, mockService));
+    expectCode(
+        createQueryHelperCreator(
+            mockContext,
+            mockService,
+            "Balance",
+            "createGetBalance"
+        )
+    );
+
+    expectCode(
+        createQueryHooks(
+            mockContext,
+            mockService,
+            "Balance",
+            "createGetBalance",
+            "useBalance"
+        )
+    );
 });
 
 it("msg funcs works", async () => {
@@ -52,7 +73,22 @@ it("msg funcs works", async () => {
         defaultTelescopeOptions
     );
 
-    expectCode(createMsgHelperCreator(mockContext, mockService));
+    expectCode(
+        createMsgHelperCreator(
+            mockContext,
+            mockService,
+            "MsgSend",
+            "createSend"
+        )
+    );
 
-    expectCode(createMsgHooks(mockContext, mockService));
+    expectCode(
+        createMsgHooks(
+            mockContext,
+            mockService,
+            "MsgSend",
+            "createSend",
+            "useSend"
+        )
+    );
 });
