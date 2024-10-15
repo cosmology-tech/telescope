@@ -11,6 +11,37 @@ import { GenericParseContext } from "../../encoding";
     import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, QueryAllBalancesResponse, QuerySpendableBalancesRequest, QuerySpendableBalancesResponse, QueryTotalSupplyRequest, QueryTotalSupplyResponse, QuerySupplyOfRequest, QuerySupplyOfResponse, QueryParamsRequest, QueryParamsResponse, QueryDenomMetadataRequest, QueryDenomMetadataResponse, QueryDenomsMetadataRequest, QueryDenomsMetadataResponse, QueryDenomOwnersRequest, QueryDenomOwnersResponse } from "./query";
  */
 
+export function createTypeAliases(
+    context: GenericParseContext,
+    service: ProtoService,
+    methodKey?: string,
+    helperCreatorName?: string
+) {
+    context.addUtil("buildQuery");
+    context.addUtil("Rpc");
+    context.addUtil("UseQueryParams");
+    context.addUtil("buildUseQuery");
+
+    return ast.exportNamedDeclaration(
+        ast.tsTypeAliasDeclaration(
+            ast.identifier(`Use${methodKey}Query`),
+            // No type parameters for type alias
+            // To add a type parameter, use ast.tsTypeParameterDeclaration([]),
+            null,
+            ast.tsTypeReference(
+                ast.identifier("UseQueryParams"),
+                ast.tsTypeParameterInstantiation([
+                    ast.tsTypeReference(
+                        ast.identifier(service.methods[methodKey].requestType)
+                    ),
+                    ast.tsTypeReference(
+                        ast.identifier(service.methods[methodKey].responseType)
+                    ),
+                ])
+            )
+        )
+    );
+}
 /**
  *
  * @param context
@@ -25,84 +56,60 @@ export function createQueryHelperCreator(
     methodKey?: string,
     helperCreatorName?: string
 ) {
-    const typeAliases = Object.keys(service.methods).map((method) => {
-        return ast.tsTypeAliasDeclaration(
-            ast.identifier(`Use${method}Query`),
-            // No type parameters for type alias
-            // To add a type parameter, use ast.tsTypeParameterDeclaration([]),
-            null,
-            ast.tsTypeReference(
-                ast.identifier("UseQueryParams"),
-                ast.tsTypeParameterInstantiation([
-                    ast.tsTypeReference(
-                        ast.identifier(service.methods[method].requestType)
-                    ),
-                    ast.tsTypeReference(
-                        ast.identifier(service.methods[method].responseType)
-                    ),
-                ])
-            )
-        );
-    });
+    const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("reqEncoderFn"),
+                ast.memberExpression(
+                    ast.identifier(`Query${methodKey}Request`),
+                    ast.identifier("encode")
+                )
+            ),
+            ast.objectProperty(
+                ast.identifier("resDecoderFn"),
+                ast.memberExpression(
+                    ast.identifier(`Query${methodKey}Response`),
+                    ast.identifier("decode")
+                )
+            ),
+            ast.objectProperty(
+                ast.identifier("service"),
+                // TODO: Does this value needs to change?
+                ast.stringLiteral("cosmos.bank.v1beta1.Query")
+            ),
+            ast.objectProperty(
+                ast.identifier("method"),
+                ast.stringLiteral(methodKey)
+            ),
+            ast.objectProperty(
+                ast.identifier("getRpcInstance"),
+                ast.identifier("getRpcInstance")
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(`Query${methodKey}Request`)),
+        ast.tsTypeReference(ast.identifier(`Query${methodKey}Response`)),
+    ]);
 
-    const createrFunctions = Object.keys(service.methods).map((method) => {
-        const callExpression = ast.callExpression(
-            ast.identifier("buildQuery"),
-            [
-                ast.objectExpression([
-                    ast.objectProperty(
-                        ast.identifier("reqEncoderFn"),
-                        ast.memberExpression(
-                            ast.identifier(`Query${method}Request`),
-                            ast.identifier("encode")
-                        )
-                    ),
-                    ast.objectProperty(
-                        ast.identifier("resDecoderFn"),
-                        ast.memberExpression(
-                            ast.identifier(`Query${method}Response`),
-                            ast.identifier("decode")
-                        )
-                    ),
-                    ast.objectProperty(
-                        ast.identifier("service"),
-                        ast.stringLiteral("cosmos.bank.v1beta1.Query")
-                    ),
-                    ast.objectProperty(
-                        ast.identifier("method"),
-                        ast.stringLiteral(method)
-                    ),
-                    ast.objectProperty(
-                        ast.identifier("getRpcInstance"),
-                        ast.identifier("getRpcInstance")
-                    ),
-                ]),
-            ]
-        );
-        callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-            ast.tsTypeReference(ast.identifier(`Query${method}Request`)),
-            ast.tsTypeReference(ast.identifier(`Query${method}Response`)),
-        ]);
+    const customHookArgumentsType = ast.tsTypeAnnotation(
+        //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
+        ast.tsTypeReference(ast.identifier("abc"))
+    );
+    const arg = ast.identifier("getRpcInstance");
 
-        const customHookArgumentsType = ast.tsTypeAnnotation(
-            //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
-            ast.tsTypeReference(ast.identifier("() => Rpc | undefined"))
-        );
-        const arg = ast.identifier("getRpcInstance");
+    arg.typeAnnotation = customHookArgumentsType;
 
-        arg.typeAnnotation = customHookArgumentsType;
+    const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
 
-        const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
-
-        return ast.variableDeclaration("const", [
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
             ast.variableDeclarator(
-                ast.identifier(`createGet${method}`),
+                ast.identifier(helperCreatorName),
                 arrowFuncExp
             ),
-        ]);
-    });
-
-    return ast.program([...typeAliases, ...createrFunctions]);
+        ])
+    );
 }
 
 /**
@@ -121,35 +128,26 @@ export function createQueryHooks(
     helperCreatorName?: string,
     hookName?: string
 ) {
-    const hooks = Object.keys(service.methods).map((method) => {
-        const callExpression = ast.callExpression(
-            ast.identifier("buildUseQuery"),
-            [
-                ast.objectExpression([
-                    ast.objectProperty(
-                        ast.identifier("builderQueryFn"),
-                        ast.identifier(`createGet${method}`)
-                    ),
-                    ast.objectProperty(
-                        ast.identifier("queryKeyPrefix"),
-                        ast.stringLiteral(`${method}Query`)
-                    ),
-                ]),
-            ]
-        );
-
-        callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-            ast.tsTypeReference(ast.identifier(`Query${method}Request`)),
-            ast.tsTypeReference(ast.identifier(`Query${method}Response`)),
-        ]);
-
-        return ast.variableDeclaration("const", [
-            ast.variableDeclarator(
-                ast.identifier(`use${method}`),
-                callExpression
+    // return ast.returnStatement(ast.identifier(hookName));
+    const callExpression = ast.callExpression(ast.identifier("buildUseQuery"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("builderQueryFn"),
+                ast.identifier(helperCreatorName)
             ),
-        ]);
-    });
-
-    return ast.program([...hooks]);
+            ast.objectProperty(
+                ast.identifier("queryKeyPrefix"),
+                ast.stringLiteral(`${methodKey}Query`)
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(`Query${methodKey}Request`)),
+        ast.tsTypeReference(ast.identifier(`Query${methodKey}Response`)),
+    ]);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(ast.identifier(hookName), callExpression),
+        ])
+    );
 }

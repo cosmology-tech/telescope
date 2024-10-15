@@ -25,58 +25,52 @@ export function createMsgHelperCreator(
     methodKey?: string,
     helperCreatorName?: string
 ) {
-    console.log(`🍀 \n | 🍄 file: msg-funcs.ts:19 \n | 🍄 service:`, service);
-    const createrFunctions = Object.keys(service.methods).map((method) => {
-        const callExpression = ast.callExpression(ast.identifier("buildTx"), [
-            ast.objectExpression([
-                ast.objectProperty(
-                    ast.identifier("getSigningClient"),
-                    ast.identifier("getSigningClient")
-                ),
-                ast.objectProperty(
-                    ast.identifier("typeUrl: "),
-                    ast.memberExpression(
-                        ast.identifier(`Msg${method}`),
-                        ast.identifier("typeUrl")
-                    )
-                ),
-                //**TODO: Improvements, where can i grab toEncoders and toConverters instead of hard coding the string?
-                //!!FIX: the toEncoders and toConverters are functions calls, not strings
-                ast.objectProperty(
-                    ast.identifier("encoders"),
-                    ast.stringLiteral(`toEncoders(Msg${method})`)
-                ),
-                ast.objectProperty(
-                    ast.identifier("converters"),
-                    ast.stringLiteral(`toConverters(Msg${method})`)
-                ),
-            ]),
-        ]);
-
-        callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-            ast.tsTypeReference(ast.identifier(`Msg${method}`)),
-        ]);
-
-        const customHookArgumentsType = ast.tsTypeAnnotation(
-            //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
-            ast.tsTypeReference(
-                ast.identifier(" () => ISigningClient | undefined")
-            )
-        );
-        const arg = ast.identifier("getSigningClient");
-        arg.typeAnnotation = customHookArgumentsType;
-
-        const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
-
-        return ast.variableDeclaration("const", [
+    context.addUtil("buildTx");
+    context.addUtil("ISigningClient");
+    context.addUtil("buildUseMutation");
+    const callExpression = ast.callExpression(ast.identifier("buildTx"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("getSigningClient"),
+                ast.identifier("getSigningClient")
+            ),
+            ast.objectProperty(
+                ast.identifier("typeUrl: "),
+                ast.memberExpression(
+                    ast.identifier(methodKey),
+                    ast.identifier("typeUrl")
+                )
+            ),
+            //**TODO: Improvements, where can i grab toEncoders and toConverters instead of hard coding the string?
+            //!!FIX: the toEncoders and toConverters are functions calls, not strings
+            ast.objectProperty(
+                ast.identifier("encoders"),
+                ast.stringLiteral(`toEncoders(${methodKey})`)
+            ),
+            ast.objectProperty(
+                ast.identifier("converters"),
+                ast.stringLiteral(`toConverters(${methodKey})`)
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(methodKey)),
+    ]);
+    const customHookArgumentsType = ast.tsTypeAnnotation(
+        //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
+        ast.tsTypeReference(ast.identifier(" () => ISigningClient | undefined"))
+    );
+    const arg = ast.identifier("getSigningClient");
+    arg.typeAnnotation = customHookArgumentsType;
+    const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
             ast.variableDeclarator(
-                ast.identifier(`create${method}`),
+                ast.identifier(helperCreatorName),
                 arrowFuncExp
             ),
-        ]);
-    });
-
-    return ast.program([...createrFunctions]);
+        ])
+    );
 }
 
 /**
@@ -95,31 +89,24 @@ export function createMsgHooks(
     helperCreatorName?: string,
     hookName?: string
 ) {
-    const hooks = Object.keys(service.methods).map((method) => {
-        const callExpression = ast.callExpression(
-            ast.identifier("buildUseMutation"),
-            [
-                ast.objectExpression([
-                    ast.objectProperty(
-                        ast.identifier("builderMutationFn"),
-                        ast.identifier(`create${method}`)
-                    ),
-                ]),
-            ]
-        );
-
-        callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-            ast.tsTypeReference(ast.identifier(`Msg${method}`)),
-            ast.tsTypeReference(ast.identifier(`Error`)),
-        ]);
-
-        return ast.variableDeclaration("const", [
-            ast.variableDeclarator(
-                ast.identifier(`use${method}`),
-                callExpression
-            ),
-        ]);
-    });
-
-    return ast.program([...hooks]);
+    const callExpression = ast.callExpression(
+        ast.identifier("buildUseMutation"),
+        [
+            ast.objectExpression([
+                ast.objectProperty(
+                    ast.identifier("builderMutationFn"),
+                    ast.identifier(helperCreatorName)
+                ),
+            ]),
+        ]
+    );
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(methodKey)),
+        ast.tsTypeReference(ast.identifier(`Error`)),
+    ]);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(ast.identifier(hookName), callExpression),
+        ])
+    );
 }

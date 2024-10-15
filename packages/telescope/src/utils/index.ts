@@ -75,6 +75,9 @@ export const UTILS: { [key: string]: UtilValue } = {
   useRpcClient: '__react-query__',
   useTendermintClient: '__react-query__',
   ReactQueryParams: '__react-query__',
+  buildUseMutation:'__react-query__',
+  UseQueryParams:'__react-query__',
+  buildUseQuery:'__react-query__',
   UseQueryOptions: '@tanstack/react-query',
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
@@ -89,6 +92,9 @@ export const UTILS: { [key: string]: UtilValue } = {
   BinaryWriter: '__binary__',
   TelescopeGeneratedType: '__types__',
   GlobalDecoderRegistry: '__registry__',
+  buildTx:'__helper-func-types__',
+  ISigningClient:'__helper-func-types__',
+  buildQuery:'__helper-func-types__'
 };
 
 export const UTIL_HELPERS = [
@@ -104,6 +110,7 @@ export const UTIL_HELPERS = [
   '__types__',
   '__registry__',
   '__decimals__',
+  '__helper-func-types__'
 ];
 
 export const fixlocalpaths = (imports: ImportObj[]) => {
