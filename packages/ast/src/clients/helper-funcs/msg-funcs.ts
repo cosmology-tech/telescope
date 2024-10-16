@@ -2,15 +2,6 @@ import * as ast from "@babel/types";
 import { ProtoService } from "@cosmology/types";
 import { GenericParseContext } from "../../encoding";
 
-// ** The end result of generation should include the following imports
-// TODO: I need to add the imports for generation instead of hard coding them, it should comes from the UTILS in telescope
-/**
-    import { buildTx, ISigningClient } from "../../../helper-func-types";
-    import { MsgSend, MsgMultiSend } from "./tx";
-    import { toConverters, toEncoders } from "@interchainjs/cosmos/utils";
-    import { buildUseMutation } from "../../../react-query";
- */
-
 /**
  *
  * @param context
@@ -28,6 +19,7 @@ export function createMsgHelperCreator(
     context.addUtil("buildTx");
     context.addUtil("ISigningClient");
     context.addUtil("buildUseMutation");
+    context.addUtil("SigningClientResolver");
     const callExpression = ast.callExpression(ast.identifier("buildTx"), [
         ast.objectExpression([
             ast.objectProperty(
@@ -57,8 +49,7 @@ export function createMsgHelperCreator(
         ast.tsTypeReference(ast.identifier(methodKey)),
     ]);
     const customHookArgumentsType = ast.tsTypeAnnotation(
-        //TODO: Improvements, Figure out how to write ast code to generate the function expression below instead of hard coding the strong.
-        ast.tsTypeReference(ast.identifier(" () => ISigningClient | undefined"))
+        ast.tsTypeReference(ast.identifier("SigningClientResolver"))
     );
     const arg = ast.identifier("getSigningClient");
     arg.typeAnnotation = customHookArgumentsType;

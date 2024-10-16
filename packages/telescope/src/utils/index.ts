@@ -69,6 +69,7 @@ export const UTILS: { [key: string]: UtilValue } = {
   toBase64: '@cosmjs/encoding',
   toDuration: '__helpers__',
   toTimestamp: '__helpers__',
+  SigningClientResolver:'__helpers__',
   toUtf8: '@cosmjs/encoding',
   useQuery: '@tanstack/react-query',
   useRpcEndpoint: '__react-query__',

@@ -1,10 +1,6 @@
 import { buildAllImports, getDepsFromQueries } from "../imports";
 import { Bundler } from "../bundler";
-import {
-  createQueryHelperCreator,
-  createQueryHooks,
-  createTypeAliases,
-} from "@cosmology/ast";
+import { createQueryHelperCreator, createQueryHooks } from "@cosmology/ast";
 import { getNestedProto, isRefIncluded } from "@cosmology/proto-parser";
 import { parse } from "../parse";
 import { TelescopeBuilder } from "../builder";
@@ -100,16 +96,11 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
             const { creator: helperCreatorName, hook: hookName } =
               getHelperFuncName(bundlerFile.package, methodKey, mapper, "get");
 
-            //gen type aliases
-            asts.push(
-              createTypeAliases(ctx.generic, svc, methodKey, helperCreatorName)
-            );
-
             // gen helper funcs
             asts.push(
               createQueryHelperCreator(
                 ctx.generic,
-                svc,
+                svc.methods[methodKey],
                 methodKey,
                 helperCreatorName
               )
@@ -124,7 +115,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
               asts.push(
                 createQueryHooks(
                   ctx.generic,
-                  svc,
+                  svc.methods[methodKey],
                   methodKey,
                   helperCreatorName,
                   hookName
