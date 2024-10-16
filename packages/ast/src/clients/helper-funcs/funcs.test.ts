@@ -5,11 +5,7 @@ import { traverse } from "@cosmology/proto-parser";
 import { expectCode, getTestProtoStore, printCode } from "../../../test-utils";
 import { defaultTelescopeOptions, ProtoService } from "@cosmology/types";
 import { createMsgHelperCreator, createMsgHooks } from "./msg-funcs";
-import {
-    createQueryHelperCreator,
-    createQueryHooks,
-    createTypeAliases,
-} from "./query-funcs";
+import { createQueryHelperCreator, createQueryHooks } from "./query-funcs";
 
 const store = getTestProtoStore();
 store.traverseAll();
@@ -30,18 +26,9 @@ it("query funcs works", async () => {
     );
 
     expectCode(
-        createTypeAliases(
-            mockContext,
-            mockService,
-            "Balance",
-            "createGetBalance"
-        )
-    );
-
-    expectCode(
         createQueryHelperCreator(
             mockContext,
-            mockService,
+            mockService.methods["Balance"],
             "Balance",
             "createGetBalance"
         )
@@ -50,7 +37,7 @@ it("query funcs works", async () => {
     expectCode(
         createQueryHooks(
             mockContext,
-            mockService,
+            mockService.methods["Balance"],
             "Balance",
             "createGetBalance",
             "useBalance"
