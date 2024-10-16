@@ -170,6 +170,10 @@ export const getFieldOptionality = (
 ) => {
     const isScalarDefaultToNullable = context.pluginValue('prototypes.isScalarDefaultToNullable');
 
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
+        return false
+    }
+
     if (isArrayField(field) || isEnumField(field) || (!isScalarDefaultToNullable && isScalarField(field))) {
         // these field types are required by default!
         if (isOneOf) {
@@ -186,17 +190,21 @@ export const getFieldOptionalityForAmino = (
   field: ProtoField,
   isOneOf: boolean
 ) => {
-  const useProtoOptionality = context.pluginValue('aminoEncoding.useProtoOptionality');
+    const useProtoOptionality = context.pluginValue('aminoEncoding.useProtoOptionality');
 
-  if(useProtoOptionality){
-    return getFieldOptionalityForDefaults(context, field, isOneOf);
-  }
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
+        return false
+    }
 
-  if (isOneOf) {
-    return true;
-  }
+    if(useProtoOptionality){
+        return getFieldOptionalityForDefaults(context, field, isOneOf);
+    }
 
-  return shouldOmitEmpty(context, field)
+    if (isOneOf) {
+        return true;
+    }
+
+    return shouldOmitEmpty(context, field)
 };
 
 export const isScalarField = (
@@ -232,6 +240,10 @@ export const getFieldOptionalityForDefaults = (
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
     const isScalarDefaultToNullable = !field?.options?.['(gogoproto.nullable)'] && context.pluginValue('prototypes.isScalarDefaultToNullable');
 
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
+        return false
+    }
+
     if (isArrayField(field) || isEnumField(field) || !isScalarDefaultToNullable && isScalarField(field) || isMapField(field)) {
         // these field types are required by default!
 
@@ -257,6 +269,23 @@ export const getFieldOptionalityForDefaults = (
             fieldDefaultIsOptional
         );
 };
+
+/**
+ * get deprecated option from string, return true/false as string
+ * @param input
+ * @returns string
+*/
+export const getOptionDeprecated = (input: string) =>{
+    // Regular expression to match deprecated value with optional spaces
+    const deprecatedRegex = /deprecated:\s*"(true|false)"/;
+
+    // Extract the deprecated value
+    const match = input.match(deprecatedRegex);
+    if(match && match[1]) {
+        return match[1]
+    }
+    return null
+}
 
 
 
