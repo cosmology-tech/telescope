@@ -18,6 +18,8 @@ import { plugin as createRPCQueryClientsScoped } from './generators/create-rpc-q
 import { plugin as createRPCMsgClientsScoped } from './generators/create-rpc-msg-client-scoped';
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
+import { plugin as createQueryFuncs } from './generators/create-query-funcs';
+import { plugin as createMsgFuncs } from './generators/create-msg-funcs';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
 import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
@@ -161,7 +163,9 @@ export class TelescopeBuilder {
       // [x] write out one registry helper for all contexts w/mutations
       createLCDClients(this, bundler);
 
+      createQueryFuncs(this, bundler);
       createRPCQueryClients(this, bundler);
+      createMsgFuncs(this, bundler);
       createRPCMsgClients(this, bundler);
       createPiniaStore(this, bundler);
 

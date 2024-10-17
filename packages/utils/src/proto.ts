@@ -54,7 +54,6 @@ export const makeHookKeyName = (name: string) => {
   return camel(name + "Query");
 };
 
-
 // https://github.com/isaacs/minimatch/blob/main/src/index.ts#L61
 // Optimized checking for the most common glob patterns.
 const globPattern = /\*+([^+@!?\*\[\(]*)/;
@@ -76,7 +75,6 @@ export const getQueryMethodNames = (
 
   return methodKeys
     .map((key) => {
-
       const methodName = make(key);
       const methodNameWithPkg = `${packagePath}.${methodName}`;
 
@@ -105,53 +103,59 @@ export const getQueryMethodNames = (
  * @returns
  */
 export const isRefIncluded = (
-    ref: ProtoRef,
-    include?: {
-        patterns?: string[];
-        packages?: string[];
-        protos?: string[];
-    }
+  ref: ProtoRef,
+  include?: {
+    patterns?: string[];
+    packages?: string[];
+    protos?: string[];
+  }
 ) => {
-    // if no include object, no filter
-    if (!include) return true;
-    // if no arrays are populated, no filter
-    if (
-        !include.patterns?.length &&
-        !include.packages?.length &&
-        !include.protos?.length
-    ) {
-        return true;
-    }
+  // if no include object, no filter
+  if (!include) return true;
+  // if no arrays are populated, no filter
+  if (
+    !include.patterns?.length &&
+    !include.packages?.length &&
+    !include.protos?.length
+  ) {
+    return true;
+  }
 
-    // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
-    if (Boolean(ref.filename) && include?.patterns?.some(pattern => minimatch(ref.filename, pattern))) {
-        return true;
-    }
+  // TODO consider deprecating `patterns` in favor of packages and protos supporting minimatch
+  if (
+    Boolean(ref.filename) &&
+    include?.patterns?.some((pattern) => minimatch(ref.filename, pattern))
+  ) {
+    return true;
+  }
 
-    const pkgMatched = Boolean(ref.proto?.package) && include?.packages?.some(pkgName => {
-        if (!globPattern.test(pkgName)) {
-            return ref.proto.package === pkgName;
-        }
-        return minimatch(ref.proto.package, pkgName)
+  const pkgMatched =
+    Boolean(ref.proto?.package) &&
+    include?.packages?.some((pkgName) => {
+      if (!globPattern.test(pkgName)) {
+        return ref.proto.package === pkgName;
+      }
+      return minimatch(ref.proto.package, pkgName);
     });
 
-    if (pkgMatched) {
-        return true;
-    }
+  if (pkgMatched) {
+    return true;
+  }
 
-    const protoMatched = Boolean(ref.filename) && include?.protos?.some(protoName => {
-        if (!globPattern.test(protoName)) {
-            return ref.filename === protoName;
-        }
-        return minimatch(ref.filename, protoName)
+  const protoMatched =
+    Boolean(ref.filename) &&
+    include?.protos?.some((protoName) => {
+      if (!globPattern.test(protoName)) {
+        return ref.filename === protoName;
+      }
+      return minimatch(ref.filename, protoName);
     });
 
-    if (protoMatched) {
-        return true;
-    }
+  if (protoMatched) {
+    return true;
+  }
 
-    return false;
-
+  return false;
 };
 
 /**
@@ -161,23 +165,20 @@ export const isRefIncluded = (
  * @returns
  */
 export const isRefExcluded = (
-    ref: ProtoRef,
-    exclude?: {
-        packages?: string[];
-        protos?: string[];
-    }
+  ref: ProtoRef,
+  exclude?: {
+    packages?: string[];
+    protos?: string[];
+  }
 ) => {
-    // if no include object, no filter
-    if (!exclude) return false;
-    // if no arrays are populated, no filter
-    if (
-        !exclude.packages?.length &&
-        !exclude.protos?.length
-    ) {
-        return false;
-    }
+  // if no include object, no filter
+  if (!exclude) return false;
+  // if no arrays are populated, no filter
+  if (!exclude.packages?.length && !exclude.protos?.length) {
+    return false;
+  }
 
-    return isRefIncluded(ref, exclude);
+  return isRefIncluded(ref, exclude);
 };
 
 /*
@@ -186,21 +187,82 @@ export const isRefExcluded = (
 */
 
 export const getObjectName = (name: string, scope: string[] = []) => {
-    if (!scope.length || scope.length === 1) return name;
-    const [_pkg, ...scopes] = scope;
-    return [...scopes, name].join('_')
+  if (!scope.length || scope.length === 1) return name;
+  const [_pkg, ...scopes] = scope;
+  return [...scopes, name].join("_");
 };
 
-export const getTypeNameFromFieldName = (name: string, importSrc: string, ref: ProtoRef) => {
+export const getTypeNameFromFieldName = (
+  name: string,
+  importSrc: string,
+  ref: ProtoRef
+) => {
   let importedAs = name;
   const names = ref.traversed?.importNames;
-  if (names
-      && names.hasOwnProperty(importSrc)
-      && names[importSrc].hasOwnProperty(name)
+  if (
+    names &&
+    names.hasOwnProperty(importSrc) &&
+    names[importSrc].hasOwnProperty(name)
   ) {
-
-      importedAs = names[importSrc][name];
+    importedAs = names[importSrc][name];
   }
 
   return importedAs;
+};
+
+/**
+ * get the name of the helper function.
+ * @param packagePath e.g. "cosmos.bank.v1beta1"
+ * @param methodKey e.g. "balance"
+ * @param mapper
+ */
+export function getHelperFuncName(
+  packagePath: string,
+  methodKey: string,
+  mapper: {
+    funcBody?: {
+      [key: string]: "unchanged" | "get" | ((name: string) => string);
+    };
+    creatorPrefix?: string;
+    hookPrefix?: string;
+  },
+  defaultFuncBodyFn: "unchanged" | "get" | ((name: string) => string)
+): {
+  creator: string;
+  hook: string;
+} {
+  mapper = mapper ?? {};
+  const { funcBody, creatorPrefix, hookPrefix } = mapper;
+  const methodKeyWithPkg = `${packagePath}.${methodKey}`;
+  let funcBodyFn: "unchanged" | "get" | ((name: string) => string);
+
+  if (funcBody) {
+    for (const pattern in funcBody) {
+      let isMatching = false;
+
+      if (!globPattern.test(pattern)) {
+        isMatching = methodKeyWithPkg === pattern;
+      }
+
+      isMatching = minimatch(methodKeyWithPkg, pattern);
+
+      if (isMatching) {
+        funcBodyFn = funcBody[pattern];
+        break;
+      }
+    }
+  }
+
+  funcBodyFn = funcBodyFn ?? defaultFuncBodyFn;
+  funcBodyFn =
+    funcBodyFn === "unchanged"
+      ? String
+      : funcBodyFn === "get"
+      ? (name: string) => camel("get_" + camel(name))
+      : funcBodyFn;
+
+  return {
+    creator: camel(`${creatorPrefix || "create"}_${camel(funcBodyFn(methodKey))}`),
+    hook: camel(`${hookPrefix || "use"}_${camel(funcBodyFn(methodKey))}`),
+  };
 }

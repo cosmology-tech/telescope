@@ -1,0 +1,10 @@
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { TokenPair, TokenPairSDKType } from "./erc20";
+import { Params, ParamsSDKType } from "./genesis";
+import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
+return createGetTokenPairs;
+return useGetTokenPairs;
+return createGetTokenPair;
+return useGetTokenPair;
+return createGetParams;
+return useGetParams;

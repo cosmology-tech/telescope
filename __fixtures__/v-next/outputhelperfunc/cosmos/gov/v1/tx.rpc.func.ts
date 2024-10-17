@@ -1,0 +1,14 @@
+import { Any, AnySDKType } from "../../../google/protobuf/any";
+import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
+import { VoteOption, VoteOptionSDKType, WeightedVoteOption, WeightedVoteOptionSDKType } from "./gov";
+import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgExecLegacyContent, MsgExecLegacyContentSDKType, MsgExecLegacyContentResponse, MsgExecLegacyContentResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
+return createSubmitProposal;
+return useSubmitProposal;
+return createExecLegacyContent;
+return useExecLegacyContent;
+return createVote;
+return useVote;
+return createVoteWeighted;
+return useVoteWeighted;
+return createDeposit;
+return useDeposit;

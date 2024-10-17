@@ -48,3 +48,19 @@ export declare const isRefExcluded: (ref: ProtoRef, exclude?: {
 }) => boolean;
 export declare const getObjectName: (name: string, scope?: string[]) => string;
 export declare const getTypeNameFromFieldName: (name: string, importSrc: string, ref: ProtoRef) => string;
+/**
+ * get the name of the helper function.
+ * @param packagePath e.g. "cosmos.bank.v1beta1"
+ * @param methodKey e.g. "balance"
+ * @param mapper
+ */
+export declare function getHelperFuncName(packagePath: string, methodKey: string, mapper: {
+    funcBody?: {
+        [key: string]: "unchanged" | "get" | ((name: string) => string);
+    };
+    creatorPrefix?: string;
+    hookPrefix?: string;
+}, defaultFuncBodyFn: "unchanged" | "get" | ((name: string) => string)): {
+    creator: string;
+    hook: string;
+};

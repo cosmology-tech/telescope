@@ -1,0 +1,11 @@
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
+import { Provider, ProviderSDKType } from "./audit";
+import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
+return createGetAllProvidersAttributes;
+return useGetAllProvidersAttributes;
+return createGetProviderAttributes;
+return useGetProviderAttributes;
+return createGetProviderAuditorAttributes;
+return useGetProviderAuditorAttributes;
+return createGetAuditorAttributes;
+return useGetAuditorAttributes;
