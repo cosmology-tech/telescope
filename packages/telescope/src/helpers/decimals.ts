@@ -1,5 +1,4 @@
 export const decimal = `
-// START agoric-sdk patch
 // The largest value we need is 18 (Ether).
 const maxFractionalDigits = 30;
 /**
@@ -106,5 +105,4 @@ export class Decimal {
     }
   }
 }
-// END agoric-sdk patch
 `;

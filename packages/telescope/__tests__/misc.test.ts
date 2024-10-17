@@ -461,8 +461,8 @@ describe('misc', () => {
     await telescope.build();
   });
 
-  it('generates with usePatchedDecimal', async () => {
-    const testFolder = '/output-decimals/agoric';
+  it('generates with useEnhancedDecimal', async () => {
+    const testFolder = '/output-decimals';
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
@@ -471,7 +471,7 @@ describe('misc', () => {
         prototypes: {
           typingsFormat: {
             customTypes: {
-              usePatchedDecimal: true,
+              useEnhancedDecimal: true,
             },
           },
         },

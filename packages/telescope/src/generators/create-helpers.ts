@@ -94,7 +94,7 @@ export const plugin = (builder: TelescopeBuilder) => {
     write(builder, 'grpc-web.ts', grpcWeb);
   }
 
-  if (builder.options.prototypes.typingsFormat.customTypes.usePatchedDecimal) {
+  if (builder.options.prototypes.typingsFormat.customTypes.useEnhancedDecimal) {
     builder.files.push('decimals.ts');
     write(builder, 'decimals.ts', decimal);
   }
