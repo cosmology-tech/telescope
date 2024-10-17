@@ -37,6 +37,16 @@ const notEmptyString = (prop: string): t.Expression => {
     )
 };
 
+const nullCheckAndCondition = (inputProp: string, inputExpression: t.Expression): t.Expression => {
+    return t.logicalExpression('&&',
+        t.memberExpression(
+            t.identifier('message'),
+            t.identifier(inputProp)
+        ),
+        inputExpression
+    );
+};
+
 const lengthNotZero = (prop: string): t.Expression => {
     return t.binaryExpression(
         '!==',
@@ -355,7 +365,7 @@ export const encode = {
 export const types = {
 
     /*
-        if (message.sender !== "") {
+        if (message.sender && message.sender !== "") {
             writer.uint32(10).string(message.sender);
         }
     */
@@ -370,7 +380,12 @@ export const types = {
                 'cosmossdk.io/math.LegacyDec');
 
         return t.ifStatement(
-            wrapOptional(prop, notEmptyString(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notEmptyString(prop)) : notEmptyString(prop),
+                isOptional,
+                args
+            ),
             useCosmosSDKDec && isCosmosSDKDec
                 ? customType(num, prop, 'string', args.field.options?.['(gogoproto.customtype)'], args)
                 : scalarType(num, prop, 'string')
@@ -378,123 +393,183 @@ export const types = {
     },
 
     /*
-        if (message.doubleValue !== 0) {
+        if (message.doubleValue && message.doubleValue !== 0) {
           writer.uint32(41).double(message.doubleValue);
         }
     */
 
     double(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'double')
         )
     },
 
     /*
-        if (message.floatValue !== 0) {
+        if (message.floatValue && message.floatValue !== 0) {
           writer.uint32(41).float(message.floatValue);
         }
     */
 
     float(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'float')
         )
     },
 
 
-    //   if (message.int32Value !== 0) {
+    //   if (message.int32Value && message.int32Value !== 0) {
     //     writer.uint32(24).int32(message.int32Value);
     //   }
 
     int32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'int32')
         );
     },
 
-    //   if (message.sint32Value !== 0) {
+    //   if (message.sint32Value && message.sint32Value !== 0) {
     //     writer.uint32(24).sint32(message.sint32Value);
     //   }
 
     sint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'sint32')
         );
     },
 
-    //   if (message.int32Value !== 0) {
+    //   if (message.int32Value && message.int32Value !== 0) {
     //     writer.uint32(24).uint32(message.int32Value);
     //   }
 
     uint32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'uint32')
         );
     },
 
     fixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'fixed32')
         );
     },
 
     sfixed32(num: number, prop: string, isOptional: boolean, args?: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, notZero(prop), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, notZero(prop)) : notZero(prop),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'sfixed32')
         );
     },
 
 
-    //   if (!message.int64Value.isZero()) {
+    //   if (message.int64Value && !message.int64Value.isZero()) {
     //     writer.uint32(24).int64(message.int64Value);
     //   }
 
     int64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, TypeLong.getLongNotZero(prop, args.context)) : TypeLong.getLongNotZero(prop, args.context),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'int64', args)
         )
     },
 
-    //   if (!message.sint64Value.isZero()) {
+    //   if (message.sint64Value && !message.sint64Value.isZero()) {
     //     writer.uint32(24).sint64(message.sint64Value);
     //   }
 
     sint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, TypeLong.getLongNotZero(prop, args.context)) : TypeLong.getLongNotZero(prop, args.context),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'sint64', args)
         )
     },
 
-    //   if (!message.int64Value.isZero()) {
+    //   if (message.int64Value && !message.int64Value.isZero()) {
     //     writer.uint32(24).uint64(message.int64Value);
     //   }
 
     uint64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, TypeLong.getLongNotZero(prop, args.context)) : TypeLong.getLongNotZero(prop, args.context),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'uint64', args)
         )
     },
 
     fixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, TypeLong.getLongNotZero(prop, args.context)) : TypeLong.getLongNotZero(prop, args.context),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'fixed64', args)
         )
     },
 
     sfixed64(num: number, prop: string, isOptional: boolean, args: EncodeMethod) {
         return t.ifStatement(
-            wrapOptional(prop, TypeLong.getLongNotZero(prop, args.context), isOptional, args),
+            wrapOptional(
+                prop,
+                args.context.pluginValue('prototypes.enforceNullCheck')? nullCheckAndCondition(prop, TypeLong.getLongNotZero(prop, args.context)) : TypeLong.getLongNotZero(prop, args.context),
+                isOptional,
+                args
+            ),
             scalarType(num, prop, 'sfixed64', args)
         )
     },

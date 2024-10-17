@@ -305,28 +305,29 @@ telescope({
 
 ### Prototypes Options
 
-| option                                    | description                                                     | defaults   |
-| ----------------------------------------- | --------------------------------------------------------------  | ---------- |
-| `prototypes.enabled`                      | enables the generation of proto encoding methods                | `true`     |
-| `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name       | `false`    |
-| `prototypes.includes.packages`            | include a set of packages when transpilation. (if a package both meet include and exclude, it'll be excluded)                    | `undefined`|
-| `prototypes.includes.protos`              | include a set of proto files when transpilation. (if a proto both meet include and exclude, it'll be excluded)                 | `undefined`|
-| `prototypes.excluded.packages`            | exclude a set of packages from transpilation                    | `undefined`|
-| `prototypes.excluded.protos`              | try to exclude a set of proto files from transpilation. if files inside the list are dependencies to other files, they'll be still transpiled.                 | `undefined`|
-| `prototypes.excluded.hardProtos`              | exclude a set of proto files from transpilation. Files in this list will be excluded no matter it is a dependency to other files or not.                 | `undefined`|
-| `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field         | `false`    |
-| `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality    | `true`     |
-| `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                | `false`    |
-| `prototypes.allowEncodeDefaultScalars`          | boolean value allowing encoders encoding default values of scalar types. e.g. empty string, 0 or false                | `false`    |
-| `prototypes.isScalarDefaultToNullable`          | Determines whether scalar types are nullable by default when gogoproto.nullable is not specified. If set to true, scalar types will be nullable; if false, they will be required             | `false`     |
-| `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                | `false`    |
-| `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional          | `false`    |
-| `prototypes.addTypeUrlToDecoders`         | add $typeUrl field to generated interfaces          | `true`    |
-| `prototypes.addAminoTypeToObjects`         | add aminoType field to generated Decoders          | `false`    |
-| `prototypes.addTypeUrlToObjects`         | add typeUrl field to generated Decoders          | `true`    |
-| `prototypes.enableRegistryLoader`         |    generate Registry loader to *.registry.ts files       | `true`    |
-| `prototypes.enableMessageComposer`         |    generate MessageComposer to *.registry.ts files       | `true`    |
-| `prototypes.patch`                    | An object mapping filenames to an array of `Operation` to be applied as patches to proto files during generation. See [JSON Patch Protos](#json-patch-protos) | `undefined`|
+| option                                    | description                                                                                                                                                                      | defaults    |
+| ----------------------------------------- |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| `prototypes.enabled`                      | enables the generation of proto encoding methods                                                                                                                                 | `true`      |
+| `prototypes.includePackageVar`            | export a `protoPackage` variable to indicate package name                                                                                                                        | `false`     |
+| `prototypes.includes.packages`            | include a set of packages when transpilation. (if a package both meet include and exclude, it'll be excluded)                                                                    | `undefined` |
+| `prototypes.includes.protos`              | include a set of proto files when transpilation. (if a proto both meet include and exclude, it'll be excluded)                                                                   | `undefined` |
+| `prototypes.excluded.packages`            | exclude a set of packages from transpilation                                                                                                                                     | `undefined` |
+| `prototypes.excluded.protos`              | try to exclude a set of proto files from transpilation. if files inside the list are dependencies to other files, they'll be still transpiled.                                   | `undefined` |
+| `prototypes.excluded.hardProtos`              | exclude a set of proto files from transpilation. Files in this list will be excluded no matter it is a dependency to other files or not.                                         | `undefined` |
+| `prototypes.fieldDefaultIsOptional`       | boolean value representing default optionality of field                                                                                                                          | `false`     |
+| `prototypes.useOptionalNullable`          | use `(gogoproto.nullable)` values in determining optionality                                                                                                                     | `true`      |
+| `prototypes.allowUndefinedTypes`          | boolean value allowing `Type`s to be `undefined`                                                                                                                                 | `false`     |
+| `prototypes.allowEncodeDefaultScalars`          | boolean value allowing encoders encoding default values of scalar types. e.g. empty string, 0 or false                                                                           | `false`     |
+| `prototypes.isScalarDefaultToNullable`          | Determines whether scalar types are nullable by default when gogoproto.nullable is not specified. If set to true, scalar types will be nullable; if false, they will be required | `false`     |
+| `prototypes.enforceNullCheck`          | Determines whether to enforce checking required scalar fields not null or undefined during encoding | `false`     |
+| `prototypes.optionalQueryParams`          | boolean value setting queryParams to be optional                                                                                                                                 | `false`     |
+| `prototypes.optionalPageRequests`         | boolean value setting `PageRequest` fields to optional                                                                                                                           | `false`     |
+| `prototypes.addTypeUrlToDecoders`         | add $typeUrl field to generated interfaces                                                                                                                                       | `true`      |
+| `prototypes.addAminoTypeToObjects`         | add aminoType field to generated Decoders                                                                                                                                        | `false`     |
+| `prototypes.addTypeUrlToObjects`         | add typeUrl field to generated Decoders                                                                                                                                          | `true`      |
+| `prototypes.enableRegistryLoader`         | generate Registry loader to *.registry.ts files                                                                                                                                  | `true`      |
+| `prototypes.enableMessageComposer`         | generate MessageComposer to *.registry.ts files                                                                                                                                  | `true`      |
+| `prototypes.patch`                    | An object mapping filenames to an array of `Operation` to be applied as patches to proto files during generation. See [JSON Patch Protos](#json-patch-protos)                    | `undefined` |
 
 ### Prototypes Methods
 

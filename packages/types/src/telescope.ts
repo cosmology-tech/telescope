@@ -61,6 +61,7 @@ interface TelescopeOpts {
     allowUndefinedTypes?: boolean;
     allowEncodeDefaultScalars?: boolean;
     isScalarDefaultToNullable?: boolean;
+    enforceNullCheck?: boolean;
 
     optionalQueryParams?: boolean;
     optionalPageRequests?: boolean;
