@@ -20,14 +20,14 @@ export function createQueryHelperCreator(
     const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
         ast.objectExpression([
             ast.objectProperty(
-                ast.identifier("Encoder"),
+                ast.identifier("encoder"),
                 ast.memberExpression(
                     ast.identifier(service.requestType),
                     ast.identifier("encode")
                 )
             ),
             ast.objectProperty(
-                ast.identifier("Decoder"),
+                ast.identifier("decoder"),
                 ast.memberExpression(
                     ast.identifier(service.responseType),
                     ast.identifier("decode")
