@@ -20,6 +20,9 @@ export function createMsgHelperCreator(
     context.addUtil("ISigningClient");
     context.addUtil("buildUseMutation");
     context.addUtil("SigningClientResolver");
+    context.addUtil("toEncoders");
+    context.addUtil("toConverters");
+
     const callExpression = ast.callExpression(ast.identifier("buildTx"), [
         ast.objectExpression([
             ast.objectProperty(
@@ -33,15 +36,17 @@ export function createMsgHelperCreator(
                     ast.identifier("typeUrl")
                 )
             ),
-            //**TODO: Improvements, where can i grab toEncoders and toConverters instead of hard coding the string?
-            //!!FIX: the toEncoders and toConverters are functions calls, not strings
             ast.objectProperty(
                 ast.identifier("encoders"),
-                ast.stringLiteral(`toEncoders(${methodKey})`)
+                ast.callExpression(ast.identifier("toEncoders"), [
+                    ast.identifier(methodKey),
+                ])
             ),
             ast.objectProperty(
                 ast.identifier("converters"),
-                ast.stringLiteral(`toConverters(${methodKey})`)
+                ast.callExpression(ast.identifier("toConverters"), [
+                    ast.identifier(methodKey),
+                ])
             ),
         ]),
     ]);
