@@ -645,7 +645,7 @@ export const MetricRule_MetricCostsEntry = {
   toAmino(message: MetricRule_MetricCostsEntry): MetricRule_MetricCostsEntryAmino {
     const obj: any = {};
     obj.key = message.key === "" ? undefined : message.key;
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MetricRule_MetricCostsEntryAminoMsg): MetricRule_MetricCostsEntry {
@@ -813,7 +813,7 @@ export const QuotaLimit_ValuesEntry = {
   toAmino(message: QuotaLimit_ValuesEntry): QuotaLimit_ValuesEntryAmino {
     const obj: any = {};
     obj.key = message.key === "" ? undefined : message.key;
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuotaLimit_ValuesEntryAminoMsg): QuotaLimit_ValuesEntry {
@@ -995,9 +995,9 @@ export const QuotaLimit = {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
     obj.description = message.description === "" ? undefined : message.description;
-    obj.default_limit = message.defaultLimit !== BigInt(0) ? (message.defaultLimit?.toString)() : undefined;
-    obj.max_limit = message.maxLimit !== BigInt(0) ? (message.maxLimit?.toString)() : undefined;
-    obj.free_tier = message.freeTier !== BigInt(0) ? (message.freeTier?.toString)() : undefined;
+    obj.default_limit = message.defaultLimit !== BigInt(0) ? message.defaultLimit?.toString() : undefined;
+    obj.max_limit = message.maxLimit !== BigInt(0) ? message.maxLimit?.toString() : undefined;
+    obj.free_tier = message.freeTier !== BigInt(0) ? message.freeTier?.toString() : undefined;
     obj.duration = message.duration === "" ? undefined : message.duration;
     obj.metric = message.metric === "" ? undefined : message.metric;
     obj.unit = message.unit === "" ? undefined : message.unit;

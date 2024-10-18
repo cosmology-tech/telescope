@@ -1027,7 +1027,7 @@ export const QueryGasMeterResponse = {
   },
   toAmino(message: QueryGasMeterResponse, useInterfaces: boolean = true): QueryGasMeterResponseAmino {
     const obj: any = {};
-    obj.gas_meter = message.gasMeter !== BigInt(0) ? (message.gasMeter?.toString)() : undefined;
+    obj.gas_meter = message.gasMeter !== BigInt(0) ? message.gasMeter?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryGasMeterResponseProtoMsg, useInterfaces: boolean = true): QueryGasMeterResponse {

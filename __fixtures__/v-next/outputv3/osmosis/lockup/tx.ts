@@ -370,7 +370,7 @@ export const MsgLockTokensResponse = {
   },
   toAmino(message: MsgLockTokensResponse, useInterfaces: boolean = true): MsgLockTokensResponseAmino {
     const obj: any = {};
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgLockTokensResponseProtoMsg, useInterfaces: boolean = true): MsgLockTokensResponse {
@@ -637,7 +637,7 @@ export const MsgBeginUnlocking = {
   toAmino(message: MsgBeginUnlocking, useInterfaces: boolean = true): MsgBeginUnlockingAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {
@@ -827,7 +827,7 @@ export const MsgExtendLockup = {
   toAmino(message: MsgExtendLockup, useInterfaces: boolean = true): MsgExtendLockupAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     return obj;
   },
@@ -1013,7 +1013,7 @@ export const MsgForceUnlock = {
   toAmino(message: MsgForceUnlock, useInterfaces: boolean = true): MsgForceUnlockAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e, useInterfaces) : undefined);
     } else {

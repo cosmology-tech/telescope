@@ -6987,7 +6987,7 @@ export const CopyLogEntriesResponse = {
   },
   toAmino(message: CopyLogEntriesResponse, useInterfaces: boolean = true): CopyLogEntriesResponseAmino {
     const obj: any = {};
-    obj.log_entries_copied_count = message.logEntriesCopiedCount !== BigInt(0) ? (message.logEntriesCopiedCount?.toString)() : undefined;
+    obj.log_entries_copied_count = message.logEntriesCopiedCount !== BigInt(0) ? message.logEntriesCopiedCount?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: CopyLogEntriesResponseProtoMsg, useInterfaces: boolean = true): CopyLogEntriesResponse {

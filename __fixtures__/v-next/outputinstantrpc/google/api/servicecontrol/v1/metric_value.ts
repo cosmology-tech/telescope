@@ -430,7 +430,7 @@ export const MetricValue = {
     obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.bool_value = message.boolValue === null ? undefined : message.boolValue;
-    obj.int64_value = message.int64Value !== BigInt(0) ? (message.int64Value?.toString)() : undefined;
+    obj.int64_value = message.int64Value !== BigInt(0) ? message.int64Value?.toString() : undefined;
     obj.double_value = message.doubleValue === null ? undefined : message.doubleValue;
     obj.string_value = message.stringValue === null ? undefined : message.stringValue;
     obj.distribution_value = message.distributionValue ? Distribution.toAmino(message.distributionValue) : undefined;

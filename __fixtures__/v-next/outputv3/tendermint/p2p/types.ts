@@ -205,9 +205,9 @@ export const ProtocolVersion = {
   },
   toAmino(message: ProtocolVersion, useInterfaces: boolean = true): ProtocolVersionAmino {
     const obj: any = {};
-    obj.p2p = message.p2p !== BigInt(0) ? (message.p2p?.toString)() : undefined;
-    obj.block = message.block !== BigInt(0) ? (message.block?.toString)() : undefined;
-    obj.app = message.app !== BigInt(0) ? (message.app?.toString)() : undefined;
+    obj.p2p = message.p2p !== BigInt(0) ? message.p2p?.toString() : undefined;
+    obj.block = message.block !== BigInt(0) ? message.block?.toString() : undefined;
+    obj.app = message.app !== BigInt(0) ? message.app?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ProtocolVersionProtoMsg, useInterfaces: boolean = true): ProtocolVersion {

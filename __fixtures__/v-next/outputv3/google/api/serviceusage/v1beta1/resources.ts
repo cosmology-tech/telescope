@@ -2036,8 +2036,8 @@ export const QuotaBucket = {
   },
   toAmino(message: QuotaBucket, useInterfaces: boolean = true): QuotaBucketAmino {
     const obj: any = {};
-    obj.effective_limit = message.effectiveLimit !== BigInt(0) ? (message.effectiveLimit?.toString)() : undefined;
-    obj.default_limit = message.defaultLimit !== BigInt(0) ? (message.defaultLimit?.toString)() : undefined;
+    obj.effective_limit = message.effectiveLimit !== BigInt(0) ? message.effectiveLimit?.toString() : undefined;
+    obj.default_limit = message.defaultLimit !== BigInt(0) ? message.defaultLimit?.toString() : undefined;
     obj.producer_override = message.producerOverride ? QuotaOverride.toAmino(message.producerOverride, useInterfaces) : undefined;
     obj.consumer_override = message.consumerOverride ? QuotaOverride.toAmino(message.consumerOverride, useInterfaces) : undefined;
     obj.admin_override = message.adminOverride ? QuotaOverride.toAmino(message.adminOverride, useInterfaces) : undefined;
@@ -2310,7 +2310,7 @@ export const QuotaOverride = {
   toAmino(message: QuotaOverride, useInterfaces: boolean = true): QuotaOverrideAmino {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
-    obj.override_value = message.overrideValue !== BigInt(0) ? (message.overrideValue?.toString)() : undefined;
+    obj.override_value = message.overrideValue !== BigInt(0) ? message.overrideValue?.toString() : undefined;
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {
@@ -2664,7 +2664,7 @@ export const AdminQuotaPolicy = {
   toAmino(message: AdminQuotaPolicy, useInterfaces: boolean = true): AdminQuotaPolicyAmino {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
-    obj.policy_value = message.policyValue !== BigInt(0) ? (message.policyValue?.toString)() : undefined;
+    obj.policy_value = message.policyValue !== BigInt(0) ? message.policyValue?.toString() : undefined;
     obj.dimensions = {};
     if (message.dimensions) {
       Object.entries(message.dimensions).forEach(([k, v]) => {

@@ -350,7 +350,7 @@ export const MsgLockTokensResponse = {
   },
   toAmino(message: MsgLockTokensResponse): MsgLockTokensResponseAmino {
     const obj: any = {};
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgLockTokensResponseAminoMsg): MsgLockTokensResponse {
@@ -681,7 +681,7 @@ export const MsgBeginUnlocking = {
   toAmino(message: MsgBeginUnlocking): MsgBeginUnlockingAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -907,7 +907,7 @@ export const MsgExtendLockup = {
   toAmino(message: MsgExtendLockup): MsgExtendLockupAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
     return obj;
   },
@@ -1135,7 +1135,7 @@ export const MsgForceUnlock = {
   toAmino(message: MsgForceUnlock): MsgForceUnlockAmino {
     const obj: any = {};
     obj.owner = message.owner === "" ? undefined : message.owner;
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     if (message.coins) {
       obj.coins = message.coins.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
