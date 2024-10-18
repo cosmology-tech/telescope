@@ -960,9 +960,9 @@ export const CheckResponse_ConsumerInfo = {
   },
   toAmino(message: CheckResponse_ConsumerInfo): CheckResponse_ConsumerInfoAmino {
     const obj: any = {};
-    obj.project_number = message.projectNumber !== BigInt(0) ? (message.projectNumber?.toString)() : undefined;
+    obj.project_number = message.projectNumber !== BigInt(0) ? message.projectNumber?.toString() : undefined;
     obj.type = message.type === 0 ? undefined : message.type;
-    obj.consumer_number = message.consumerNumber !== BigInt(0) ? (message.consumerNumber?.toString)() : undefined;
+    obj.consumer_number = message.consumerNumber !== BigInt(0) ? message.consumerNumber?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: CheckResponse_ConsumerInfoAminoMsg): CheckResponse_ConsumerInfo {

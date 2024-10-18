@@ -379,7 +379,7 @@ export const PeriodLock = {
   },
   toAmino(message: PeriodLock, useInterfaces: boolean = true): PeriodLockAmino {
     const obj: any = {};
-    obj.ID = message.iD !== BigInt(0) ? (message.iD?.toString)() : undefined;
+    obj.ID = message.iD !== BigInt(0) ? message.iD?.toString() : undefined;
     obj.owner = message.owner === "" ? undefined : message.owner;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
@@ -632,7 +632,7 @@ export const SyntheticLock = {
   },
   toAmino(message: SyntheticLock, useInterfaces: boolean = true): SyntheticLockAmino {
     const obj: any = {};
-    obj.underlying_lock_id = message.underlyingLockId !== BigInt(0) ? (message.underlyingLockId?.toString)() : undefined;
+    obj.underlying_lock_id = message.underlyingLockId !== BigInt(0) ? message.underlyingLockId?.toString() : undefined;
     obj.synth_denom = message.synthDenom === "" ? undefined : message.synthDenom;
     obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
     obj.duration = message.duration ? Duration.toAmino(message.duration, useInterfaces) : undefined;

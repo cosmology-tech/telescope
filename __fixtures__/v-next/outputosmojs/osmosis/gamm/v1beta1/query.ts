@@ -451,7 +451,7 @@ export const QueryPoolRequest = {
   },
   toAmino(message: QueryPoolRequest): QueryPoolRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolRequestAminoMsg): QueryPoolRequest {
@@ -927,7 +927,7 @@ export const QueryNumPoolsResponse = {
   },
   toAmino(message: QueryNumPoolsResponse): QueryNumPoolsResponseAmino {
     const obj: any = {};
-    obj.num_pools = message.numPools !== BigInt(0) ? (message.numPools?.toString)() : undefined;
+    obj.num_pools = message.numPools !== BigInt(0) ? message.numPools?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryNumPoolsResponseAminoMsg): QueryNumPoolsResponse {
@@ -1021,7 +1021,7 @@ export const QueryPoolTypeRequest = {
   },
   toAmino(message: QueryPoolTypeRequest): QueryPoolTypeRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolTypeRequestAminoMsg): QueryPoolTypeRequest {
@@ -1231,7 +1231,7 @@ export const QueryCalcJoinPoolSharesRequest = {
   },
   toAmino(message: QueryCalcJoinPoolSharesRequest): QueryCalcJoinPoolSharesRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     if (message.tokensIn) {
       obj.tokens_in = message.tokensIn.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -1467,7 +1467,7 @@ export const QueryCalcExitPoolCoinsFromSharesRequest = {
   },
   toAmino(message: QueryCalcExitPoolCoinsFromSharesRequest): QueryCalcExitPoolCoinsFromSharesRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     obj.share_in_amount = message.shareInAmount === "" ? undefined : message.shareInAmount;
     return obj;
   },
@@ -1666,7 +1666,7 @@ export const QueryPoolParamsRequest = {
   },
   toAmino(message: QueryPoolParamsRequest): QueryPoolParamsRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPoolParamsRequestAminoMsg): QueryPoolParamsRequest {
@@ -1854,7 +1854,7 @@ export const QueryTotalPoolLiquidityRequest = {
   },
   toAmino(message: QueryTotalPoolLiquidityRequest): QueryTotalPoolLiquidityRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTotalPoolLiquidityRequestAminoMsg): QueryTotalPoolLiquidityRequest {
@@ -2052,7 +2052,7 @@ export const QueryTotalSharesRequest = {
   },
   toAmino(message: QueryTotalSharesRequest): QueryTotalSharesRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryTotalSharesRequestAminoMsg): QueryTotalSharesRequest {
@@ -2262,7 +2262,7 @@ export const QueryCalcJoinPoolNoSwapSharesRequest = {
   },
   toAmino(message: QueryCalcJoinPoolNoSwapSharesRequest): QueryCalcJoinPoolNoSwapSharesRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     if (message.tokensIn) {
       obj.tokens_in = message.tokensIn.map(e => e ? Coin.toAmino(e) : undefined);
     } else {
@@ -2514,7 +2514,7 @@ export const QuerySpotPriceRequest = {
   },
   toAmino(message: QuerySpotPriceRequest): QuerySpotPriceRequestAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     obj.base_asset_denom = message.baseAssetDenom === "" ? undefined : message.baseAssetDenom;
     obj.quote_asset_denom = message.quoteAssetDenom === "" ? undefined : message.quoteAssetDenom;
     return obj;
@@ -3018,7 +3018,7 @@ export const QuerySwapExactAmountInRequest = {
   toAmino(message: QuerySwapExactAmountInRequest): QuerySwapExactAmountInRequestAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     obj.token_in = message.tokenIn === "" ? undefined : message.tokenIn;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountInRoute.toAmino(e) : undefined);
@@ -3267,7 +3267,7 @@ export const QuerySwapExactAmountOutRequest = {
   toAmino(message: QuerySwapExactAmountOutRequest): QuerySwapExactAmountOutRequestAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     if (message.routes) {
       obj.routes = message.routes.map(e => e ? SwapAmountOutRoute.toAmino(e) : undefined);
     } else {

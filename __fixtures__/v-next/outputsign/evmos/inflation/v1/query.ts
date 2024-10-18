@@ -388,7 +388,7 @@ export const QueryPeriodResponse = {
   },
   toAmino(message: QueryPeriodResponse): QueryPeriodResponseAmino {
     const obj: any = {};
-    obj.period = message.period !== BigInt(0) ? (message.period?.toString)() : undefined;
+    obj.period = message.period !== BigInt(0) ? message.period?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryPeriodResponseAminoMsg): QueryPeriodResponse {
@@ -618,7 +618,7 @@ export const QuerySkippedEpochsResponse = {
   },
   toAmino(message: QuerySkippedEpochsResponse): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
-    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? (message.skippedEpochs?.toString)() : undefined;
+    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? message.skippedEpochs?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QuerySkippedEpochsResponseAminoMsg): QuerySkippedEpochsResponse {

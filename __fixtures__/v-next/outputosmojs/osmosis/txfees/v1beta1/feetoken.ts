@@ -112,7 +112,7 @@ export const FeeToken = {
   toAmino(message: FeeToken): FeeTokenAmino {
     const obj: any = {};
     obj.denom = message.denom === "" ? undefined : message.denom;
-    obj.poolID = message.poolID !== BigInt(0) ? (message.poolID?.toString)() : undefined;
+    obj.poolID = message.poolID !== BigInt(0) ? message.poolID?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: FeeTokenAminoMsg): FeeToken {

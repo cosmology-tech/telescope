@@ -325,7 +325,7 @@ export const Plan = {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
     obj.time = message.time ? Timestamp.toAmino(toTimestamp(message.time)) : undefined;
-    obj.height = message.height !== BigInt(0) ? (message.height?.toString)() : undefined;
+    obj.height = message.height !== BigInt(0) ? message.height?.toString() : undefined;
     obj.info = message.info === "" ? undefined : message.info;
     obj.upgraded_client_state = message.upgradedClientState ? Any.toAmino(message.upgradedClientState, useInterfaces) : undefined;
     return obj;
@@ -619,7 +619,7 @@ export const ModuleVersion = {
   toAmino(message: ModuleVersion, useInterfaces: boolean = true): ModuleVersionAmino {
     const obj: any = {};
     obj.name = message.name === "" ? undefined : message.name;
-    obj.version = message.version !== BigInt(0) ? (message.version?.toString)() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ModuleVersionProtoMsg, useInterfaces: boolean = true): ModuleVersion {

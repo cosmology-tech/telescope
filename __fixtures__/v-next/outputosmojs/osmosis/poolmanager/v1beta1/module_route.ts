@@ -172,7 +172,7 @@ export const ModuleRoute = {
   toAmino(message: ModuleRoute): ModuleRouteAmino {
     const obj: any = {};
     obj.pool_type = message.poolType === 0 ? undefined : message.poolType;
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ModuleRouteAminoMsg): ModuleRoute {

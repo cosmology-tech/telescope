@@ -131,7 +131,7 @@ export const App = {
   },
   toAmino(message: App): AppAmino {
     const obj: any = {};
-    obj.protocol = message.protocol !== BigInt(0) ? (message.protocol?.toString)() : undefined;
+    obj.protocol = message.protocol !== BigInt(0) ? message.protocol?.toString() : undefined;
     obj.software = message.software === "" ? undefined : message.software;
     return obj;
   },
@@ -236,8 +236,8 @@ export const Consensus = {
   },
   toAmino(message: Consensus): ConsensusAmino {
     const obj: any = {};
-    obj.block = message.block !== BigInt(0) ? (message.block?.toString)() : undefined;
-    obj.app = message.app !== BigInt(0) ? (message.app?.toString)() : undefined;
+    obj.block = message.block !== BigInt(0) ? message.block?.toString() : undefined;
+    obj.app = message.app !== BigInt(0) ? message.app?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: ConsensusAminoMsg): Consensus {

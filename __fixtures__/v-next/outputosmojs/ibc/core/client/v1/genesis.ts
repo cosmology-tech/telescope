@@ -256,7 +256,7 @@ export const GenesisState = {
     }
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     obj.create_localhost = message.createLocalhost === false ? undefined : message.createLocalhost;
-    obj.next_client_sequence = message.nextClientSequence !== BigInt(0) ? (message.nextClientSequence?.toString)() : undefined;
+    obj.next_client_sequence = message.nextClientSequence !== BigInt(0) ? message.nextClientSequence?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {

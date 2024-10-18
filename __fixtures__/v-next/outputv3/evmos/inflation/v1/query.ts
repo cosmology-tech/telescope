@@ -363,7 +363,7 @@ export const QueryPeriodResponse = {
   },
   toAmino(message: QueryPeriodResponse, useInterfaces: boolean = true): QueryPeriodResponseAmino {
     const obj: any = {};
-    obj.period = message.period !== BigInt(0) ? (message.period?.toString)() : undefined;
+    obj.period = message.period !== BigInt(0) ? message.period?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QueryPeriodResponseProtoMsg, useInterfaces: boolean = true): QueryPeriodResponse {
@@ -633,7 +633,7 @@ export const QuerySkippedEpochsResponse = {
   },
   toAmino(message: QuerySkippedEpochsResponse, useInterfaces: boolean = true): QuerySkippedEpochsResponseAmino {
     const obj: any = {};
-    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? (message.skippedEpochs?.toString)() : undefined;
+    obj.skipped_epochs = message.skippedEpochs !== BigInt(0) ? message.skippedEpochs?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: QuerySkippedEpochsResponseProtoMsg, useInterfaces: boolean = true): QuerySkippedEpochsResponse {

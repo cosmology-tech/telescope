@@ -447,9 +447,9 @@ export const HttpRequest = {
     const obj: any = {};
     obj.request_method = message.requestMethod === "" ? undefined : message.requestMethod;
     obj.request_url = message.requestUrl === "" ? undefined : message.requestUrl;
-    obj.request_size = message.requestSize !== BigInt(0) ? (message.requestSize?.toString)() : undefined;
+    obj.request_size = message.requestSize !== BigInt(0) ? message.requestSize?.toString() : undefined;
     obj.status = message.status === 0 ? undefined : message.status;
-    obj.response_size = message.responseSize !== BigInt(0) ? (message.responseSize?.toString)() : undefined;
+    obj.response_size = message.responseSize !== BigInt(0) ? message.responseSize?.toString() : undefined;
     obj.user_agent = message.userAgent === "" ? undefined : message.userAgent;
     obj.remote_ip = message.remoteIp === "" ? undefined : message.remoteIp;
     obj.server_ip = message.serverIp === "" ? undefined : message.serverIp;
@@ -458,7 +458,7 @@ export const HttpRequest = {
     obj.cache_lookup = message.cacheLookup === false ? undefined : message.cacheLookup;
     obj.cache_hit = message.cacheHit === false ? undefined : message.cacheHit;
     obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer === false ? undefined : message.cacheValidatedWithOriginServer;
-    obj.cache_fill_bytes = message.cacheFillBytes !== BigInt(0) ? (message.cacheFillBytes?.toString)() : undefined;
+    obj.cache_fill_bytes = message.cacheFillBytes !== BigInt(0) ? message.cacheFillBytes?.toString() : undefined;
     obj.protocol = message.protocol === "" ? undefined : message.protocol;
     return obj;
   },

@@ -830,7 +830,7 @@ export const Pool = {
   toAmino(message: Pool): PoolAmino {
     const obj: any = {};
     obj.address = message.address === "" ? undefined : message.address;
-    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
     obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
     obj.total_shares = message.totalShares ? Coin.toAmino(message.totalShares) : undefined;

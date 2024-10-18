@@ -138,7 +138,7 @@ export const App = {
   },
   toAmino(message: App, useInterfaces: boolean = true): AppAmino {
     const obj: any = {};
-    obj.protocol = message.protocol !== BigInt(0) ? (message.protocol?.toString)() : undefined;
+    obj.protocol = message.protocol !== BigInt(0) ? message.protocol?.toString() : undefined;
     obj.software = message.software === "" ? undefined : message.software;
     return obj;
   },
@@ -232,8 +232,8 @@ export const Consensus = {
   },
   toAmino(message: Consensus, useInterfaces: boolean = true): ConsensusAmino {
     const obj: any = {};
-    obj.block = message.block !== BigInt(0) ? (message.block?.toString)() : undefined;
-    obj.app = message.app !== BigInt(0) ? (message.app?.toString)() : undefined;
+    obj.block = message.block !== BigInt(0) ? message.block?.toString() : undefined;
+    obj.app = message.app !== BigInt(0) ? message.app?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: ConsensusProtoMsg, useInterfaces: boolean = true): Consensus {
