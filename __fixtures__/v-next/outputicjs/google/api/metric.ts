@@ -1,6 +1,6 @@
 import { LaunchStage } from "./launch_stage";
-import { Duration } from "../protobuf/duration";
-import { LabelDescriptor } from "./label";
+import { Duration, DurationAmino } from "../protobuf/duration";
+import { LabelDescriptor, LabelDescriptorAmino } from "./label";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial } from "../../helpers";
 /**
@@ -25,6 +25,7 @@ export enum MetricDescriptor_MetricKind {
   CUMULATIVE = 3,
   UNRECOGNIZED = -1,
 }
+export const MetricDescriptor_MetricKindAmino = MetricDescriptor_MetricKind;
 export function metricDescriptor_MetricKindFromJSON(object: any): MetricDescriptor_MetricKind {
   switch (object) {
     case 0:
@@ -84,6 +85,7 @@ export enum MetricDescriptor_ValueType {
   MONEY = 6,
   UNRECOGNIZED = -1,
 }
+export const MetricDescriptor_ValueTypeAmino = MetricDescriptor_ValueType;
 export function metricDescriptor_ValueTypeFromJSON(object: any): MetricDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -299,6 +301,179 @@ export interface MetricDescriptor {
    */
   monitoredResourceTypes: string[];
 }
+export interface MetricDescriptorProtoMsg {
+  typeUrl: "/google.api.MetricDescriptor";
+  value: Uint8Array;
+}
+/**
+ * Defines a metric type and its schema. Once a metric descriptor is created,
+ * deleting or altering it stops data collection and makes the metric type's
+ * existing data unusable.
+ */
+export interface MetricDescriptorAmino {
+  /** The resource name of the metric descriptor. */
+  name: string;
+  /**
+   * The metric type, including its DNS name prefix. The type is not
+   * URL-encoded. All user-defined metric types have the DNS name
+   * `custom.googleapis.com` or `external.googleapis.com`. Metric types should
+   * use a natural hierarchical grouping. For example:
+   * 
+   *     "custom.googleapis.com/invoice/paid/amount"
+   *     "external.googleapis.com/prometheus/up"
+   *     "appengine.googleapis.com/http/server/response_latencies"
+   */
+  type: string;
+  /**
+   * The set of labels that can be used to describe a specific
+   * instance of this metric type. For example, the
+   * `appengine.googleapis.com/http/server/response_latencies` metric
+   * type has a label for the HTTP response code, `response_code`, so
+   * you can look at latencies for successful responses or just
+   * for responses that failed.
+   */
+  labels: LabelDescriptorAmino[];
+  /**
+   * Whether the metric records instantaneous values, changes to a value, etc.
+   * Some combinations of `metric_kind` and `value_type` might not be supported.
+   */
+  metric_kind: MetricDescriptor_MetricKind;
+  /**
+   * Whether the measurement is an integer, a floating-point number, etc.
+   * Some combinations of `metric_kind` and `value_type` might not be supported.
+   */
+  value_type: MetricDescriptor_ValueType;
+  /**
+   * The units in which the metric value is reported. It is only applicable
+   * if the `value_type` is `INT64`, `DOUBLE`, or `DISTRIBUTION`. The `unit`
+   * defines the representation of the stored metric values.
+   * 
+   * Different systems might scale the values to be more easily displayed (so a
+   * value of `0.02kBy` _might_ be displayed as `20By`, and a value of
+   * `3523kBy` _might_ be displayed as `3.5MBy`). However, if the `unit` is
+   * `kBy`, then the value of the metric is always in thousands of bytes, no
+   * matter how it might be displayed.
+   * 
+   * If you want a custom metric to record the exact number of CPU-seconds used
+   * by a job, you can create an `INT64 CUMULATIVE` metric whose `unit` is
+   * `s{CPU}` (or equivalently `1s{CPU}` or just `s`). If the job uses 12,005
+   * CPU-seconds, then the value is written as `12005`.
+   * 
+   * Alternatively, if you want a custom metric to record data in a more
+   * granular way, you can create a `DOUBLE CUMULATIVE` metric whose `unit` is
+   * `ks{CPU}`, and then write the value `12.005` (which is `12005/1000`),
+   * or use `Kis{CPU}` and write `11.723` (which is `12005/1024`).
+   * 
+   * The supported units are a subset of [The Unified Code for Units of
+   * Measure](https://unitsofmeasure.org/ucum.html) standard:
+   * 
+   * **Basic units (UNIT)**
+   * 
+   * * `bit`   bit
+   * * `By`    byte
+   * * `s`     second
+   * * `min`   minute
+   * * `h`     hour
+   * * `d`     day
+   * * `1`     dimensionless
+   * 
+   * **Prefixes (PREFIX)**
+   * 
+   * * `k`     kilo    (10^3)
+   * * `M`     mega    (10^6)
+   * * `G`     giga    (10^9)
+   * * `T`     tera    (10^12)
+   * * `P`     peta    (10^15)
+   * * `E`     exa     (10^18)
+   * * `Z`     zetta   (10^21)
+   * * `Y`     yotta   (10^24)
+   * 
+   * * `m`     milli   (10^-3)
+   * * `u`     micro   (10^-6)
+   * * `n`     nano    (10^-9)
+   * * `p`     pico    (10^-12)
+   * * `f`     femto   (10^-15)
+   * * `a`     atto    (10^-18)
+   * * `z`     zepto   (10^-21)
+   * * `y`     yocto   (10^-24)
+   * 
+   * * `Ki`    kibi    (2^10)
+   * * `Mi`    mebi    (2^20)
+   * * `Gi`    gibi    (2^30)
+   * * `Ti`    tebi    (2^40)
+   * * `Pi`    pebi    (2^50)
+   * 
+   * **Grammar**
+   * 
+   * The grammar also includes these connectors:
+   * 
+   * * `/`    division or ratio (as an infix operator). For examples,
+   *          `kBy/{email}` or `MiBy/10ms` (although you should almost never
+   *          have `/s` in a metric `unit`; rates should always be computed at
+   *          query time from the underlying cumulative or delta value).
+   * * `.`    multiplication or composition (as an infix operator). For
+   *          examples, `GBy.d` or `k{watt}.h`.
+   * 
+   * The grammar for a unit is as follows:
+   * 
+   *     Expression = Component { "." Component } { "/" Component } ;
+   * 
+   *     Component = ( [ PREFIX ] UNIT | "%" ) [ Annotation ]
+   *               | Annotation
+   *               | "1"
+   *               ;
+   * 
+   *     Annotation = "{" NAME "}" ;
+   * 
+   * Notes:
+   * 
+   * * `Annotation` is just a comment if it follows a `UNIT`. If the annotation
+   *    is used alone, then the unit is equivalent to `1`. For examples,
+   *    `{request}/s == 1/s`, `By{transmitted}/s == By/s`.
+   * * `NAME` is a sequence of non-blank printable ASCII characters not
+   *    containing `{` or `}`.
+   * * `1` represents a unitary [dimensionless
+   *    unit](https://en.wikipedia.org/wiki/Dimensionless_quantity) of 1, such
+   *    as in `1/s`. It is typically used when none of the basic units are
+   *    appropriate. For example, "new users per day" can be represented as
+   *    `1/d` or `{new-users}/d` (and a metric value `5` would mean "5 new
+   *    users). Alternatively, "thousands of page views per day" would be
+   *    represented as `1000/d` or `k1/d` or `k{page_views}/d` (and a metric
+   *    value of `5.3` would mean "5300 page views per day").
+   * * `%` represents dimensionless value of 1/100, and annotates values giving
+   *    a percentage (so the metric values are typically in the range of 0..100,
+   *    and a metric value `3` means "3 percent").
+   * * `10^2.%` indicates a metric contains a ratio, typically in the range
+   *    0..1, that will be multiplied by 100 and displayed as a percentage
+   *    (so a metric value `0.03` means "3 percent").
+   */
+  unit: string;
+  /** A detailed description of the metric, which can be used in documentation. */
+  description: string;
+  /**
+   * A concise name for the metric, which can be displayed in user interfaces.
+   * Use sentence case without an ending period, for example "Request count".
+   * This field is optional but it is recommended to be set for any metrics
+   * associated with user-visible concepts, such as Quota.
+   */
+  display_name: string;
+  /** Optional. Metadata which can be used to guide usage of the metric. */
+  metadata?: MetricDescriptor_MetricDescriptorMetadataAmino;
+  /** Optional. The launch stage of the metric definition. */
+  launch_stage: LaunchStage;
+  /**
+   * Read-only. If present, then a [time
+   * series][google.monitoring.v3.TimeSeries], which is identified partially by
+   * a metric type and a [MonitoredResourceDescriptor][google.api.MonitoredResourceDescriptor], that is associated
+   * with this metric type can only be associated with one of the monitored
+   * resource types listed here.
+   */
+  monitored_resource_types: string[];
+}
+export interface MetricDescriptorAminoMsg {
+  type: "/google.api.MetricDescriptor";
+  value: MetricDescriptorAmino;
+}
 /** Additional annotations that can be used to guide the usage of a metric. */
 export interface MetricDescriptor_MetricDescriptorMetadata {
   /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
@@ -318,9 +493,48 @@ export interface MetricDescriptor_MetricDescriptorMetadata {
    */
   ingestDelay?: Duration;
 }
+export interface MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+  typeUrl: "/google.api.MetricDescriptorMetadata";
+  value: Uint8Array;
+}
+/** Additional annotations that can be used to guide the usage of a metric. */
+export interface MetricDescriptor_MetricDescriptorMetadataAmino {
+  /** Deprecated. Must use the [MetricDescriptor.launch_stage][google.api.MetricDescriptor.launch_stage] instead. */
+  /** @deprecated */
+  launch_stage: LaunchStage;
+  /**
+   * The sampling period of metric data points. For metrics which are written
+   * periodically, consecutive data points are stored at this time interval,
+   * excluding data loss due to errors. Metrics with a higher granularity have
+   * a smaller sampling period.
+   */
+  sample_period?: DurationAmino;
+  /**
+   * The delay of data points caused by ingestion. Data points older than this
+   * age are guaranteed to be ingested and available to be read, excluding
+   * data loss due to errors.
+   */
+  ingest_delay?: DurationAmino;
+}
+export interface MetricDescriptor_MetricDescriptorMetadataAminoMsg {
+  type: "/google.api.MetricDescriptorMetadata";
+  value: MetricDescriptor_MetricDescriptorMetadataAmino;
+}
 export interface Metric_LabelsEntry {
   key: string;
   value: string;
+}
+export interface Metric_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
+export interface Metric_LabelsEntryAmino {
+  key: string;
+  value: string;
+}
+export interface Metric_LabelsEntryAminoMsg {
+  type: string;
+  value: Metric_LabelsEntryAmino;
 }
 /**
  * A specific metric, identified by specifying values for all of the
@@ -339,6 +553,32 @@ export interface Metric {
   labels: {
     [key: string]: string;
   };
+}
+export interface MetricProtoMsg {
+  typeUrl: "/google.api.Metric";
+  value: Uint8Array;
+}
+/**
+ * A specific metric, identified by specifying values for all of the
+ * labels of a [`MetricDescriptor`][google.api.MetricDescriptor].
+ */
+export interface MetricAmino {
+  /**
+   * An existing metric type, see [google.api.MetricDescriptor][google.api.MetricDescriptor].
+   * For example, `custom.googleapis.com/invoice/paid/amount`.
+   */
+  type: string;
+  /**
+   * The set of label values that uniquely identify this metric. All
+   * labels listed in the `MetricDescriptor` must be assigned values.
+   */
+  labels: {
+    [key: string]: string;
+  };
+}
+export interface MetricAminoMsg {
+  type: "/google.api.Metric";
+  value: MetricAmino;
 }
 function createBaseMetricDescriptor(): MetricDescriptor {
   return {
@@ -454,6 +694,77 @@ export const MetricDescriptor = {
     message.launchStage = object.launchStage ?? 0;
     message.monitoredResourceTypes = object.monitoredResourceTypes?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: MetricDescriptorAmino): MetricDescriptor {
+    const message = createBaseMetricDescriptor();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = object.labels?.map(e => LabelDescriptor.fromAmino(e)) || [];
+    if (object.metric_kind !== undefined && object.metric_kind !== null) {
+      message.metricKind = object.metric_kind;
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = object.value_type;
+    }
+    if (object.unit !== undefined && object.unit !== null) {
+      message.unit = object.unit;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    if (object.display_name !== undefined && object.display_name !== null) {
+      message.displayName = object.display_name;
+    }
+    if (object.metadata !== undefined && object.metadata !== null) {
+      message.metadata = MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.metadata);
+    }
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = object.launch_stage;
+    }
+    message.monitoredResourceTypes = object.monitored_resource_types?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: MetricDescriptor): MetricDescriptorAmino {
+    const obj: any = {};
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === "" ? undefined : message.type;
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toAmino(e) : undefined);
+    } else {
+      obj.labels = message.labels;
+    }
+    obj.metric_kind = message.metricKind === 0 ? undefined : message.metricKind;
+    obj.value_type = message.valueType === 0 ? undefined : message.valueType;
+    obj.unit = message.unit === "" ? undefined : message.unit;
+    obj.description = message.description === "" ? undefined : message.description;
+    obj.display_name = message.displayName === "" ? undefined : message.displayName;
+    obj.metadata = message.metadata ? MetricDescriptor_MetricDescriptorMetadata.toAmino(message.metadata) : undefined;
+    obj.launch_stage = message.launchStage === 0 ? undefined : message.launchStage;
+    if (message.monitoredResourceTypes) {
+      obj.monitored_resource_types = message.monitoredResourceTypes.map(e => e);
+    } else {
+      obj.monitored_resource_types = message.monitoredResourceTypes;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricDescriptorAminoMsg): MetricDescriptor {
+    return MetricDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricDescriptorProtoMsg): MetricDescriptor {
+    return MetricDescriptor.decode(message.value);
+  },
+  toProto(message: MetricDescriptor): Uint8Array {
+    return MetricDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: MetricDescriptor): MetricDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptor",
+      value: MetricDescriptor.encode(message).finish()
+    };
   }
 };
 function createBaseMetricDescriptor_MetricDescriptorMetadata(): MetricDescriptor_MetricDescriptorMetadata {
@@ -506,6 +817,41 @@ export const MetricDescriptor_MetricDescriptorMetadata = {
     message.samplePeriod = object.samplePeriod !== undefined && object.samplePeriod !== null ? Duration.fromPartial(object.samplePeriod) : undefined;
     message.ingestDelay = object.ingestDelay !== undefined && object.ingestDelay !== null ? Duration.fromPartial(object.ingestDelay) : undefined;
     return message;
+  },
+  fromAmino(object: MetricDescriptor_MetricDescriptorMetadataAmino): MetricDescriptor_MetricDescriptorMetadata {
+    const message = createBaseMetricDescriptor_MetricDescriptorMetadata();
+    if (object.launch_stage !== undefined && object.launch_stage !== null) {
+      message.launchStage = object.launch_stage;
+    }
+    if (object.sample_period !== undefined && object.sample_period !== null) {
+      message.samplePeriod = Duration.fromAmino(object.sample_period);
+    }
+    if (object.ingest_delay !== undefined && object.ingest_delay !== null) {
+      message.ingestDelay = Duration.fromAmino(object.ingest_delay);
+    }
+    return message;
+  },
+  toAmino(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataAmino {
+    const obj: any = {};
+    obj.launch_stage = message.launchStage === 0 ? undefined : message.launchStage;
+    obj.sample_period = message.samplePeriod ? Duration.toAmino(message.samplePeriod) : undefined;
+    obj.ingest_delay = message.ingestDelay ? Duration.toAmino(message.ingestDelay) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MetricDescriptor_MetricDescriptorMetadataAminoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricDescriptor_MetricDescriptorMetadataProtoMsg): MetricDescriptor_MetricDescriptorMetadata {
+    return MetricDescriptor_MetricDescriptorMetadata.decode(message.value);
+  },
+  toProto(message: MetricDescriptor_MetricDescriptorMetadata): Uint8Array {
+    return MetricDescriptor_MetricDescriptorMetadata.encode(message).finish();
+  },
+  toProtoMsg(message: MetricDescriptor_MetricDescriptorMetadata): MetricDescriptor_MetricDescriptorMetadataProtoMsg {
+    return {
+      typeUrl: "/google.api.MetricDescriptorMetadata",
+      value: MetricDescriptor_MetricDescriptorMetadata.encode(message).finish()
+    };
   }
 };
 function createBaseMetric_LabelsEntry(): Metric_LabelsEntry {
@@ -549,6 +895,31 @@ export const Metric_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: Metric_LabelsEntryAmino): Metric_LabelsEntry {
+    const message = createBaseMetric_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
+  },
+  toAmino(message: Metric_LabelsEntry): Metric_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
+    return obj;
+  },
+  fromAminoMsg(object: Metric_LabelsEntryAminoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Metric_LabelsEntryProtoMsg): Metric_LabelsEntry {
+    return Metric_LabelsEntry.decode(message.value);
+  },
+  toProto(message: Metric_LabelsEntry): Uint8Array {
+    return Metric_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseMetric(): Metric {
@@ -606,5 +977,46 @@ export const Metric = {
       return acc;
     }, {});
     return message;
+  },
+  fromAmino(object: MetricAmino): Metric {
+    const message = createBaseMetric();
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {});
+    return message;
+  },
+  toAmino(message: Metric): MetricAmino {
+    const obj: any = {};
+    obj.type = message.type === "" ? undefined : message.type;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MetricAminoMsg): Metric {
+    return Metric.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MetricProtoMsg): Metric {
+    return Metric.decode(message.value);
+  },
+  toProto(message: Metric): Uint8Array {
+    return Metric.encode(message).finish();
+  },
+  toProtoMsg(message: Metric): MetricProtoMsg {
+    return {
+      typeUrl: "/google.api.Metric",
+      value: Metric.encode(message).finish()
+    };
   }
 };

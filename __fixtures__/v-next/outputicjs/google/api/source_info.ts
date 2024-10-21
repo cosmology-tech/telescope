@@ -1,10 +1,23 @@
-import { Any } from "../protobuf/any";
+import { Any, AnyAmino } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial } from "../../helpers";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
   /** All files used during config generation. */
   sourceFiles: Any[];
+}
+export interface SourceInfoProtoMsg {
+  typeUrl: "/google.api.SourceInfo";
+  value: Uint8Array;
+}
+/** Source information used to create a Service Config */
+export interface SourceInfoAmino {
+  /** All files used during config generation. */
+  source_files: AnyAmino[];
+}
+export interface SourceInfoAminoMsg {
+  type: "/google.api.SourceInfo";
+  value: SourceInfoAmino;
 }
 function createBaseSourceInfo(): SourceInfo {
   return {
@@ -40,5 +53,34 @@ export const SourceInfo = {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: SourceInfoAmino): SourceInfo {
+    const message = createBaseSourceInfo();
+    message.sourceFiles = object.source_files?.map(e => Any.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: SourceInfo): SourceInfoAmino {
+    const obj: any = {};
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.source_files = message.sourceFiles;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SourceInfoAminoMsg): SourceInfo {
+    return SourceInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: SourceInfoProtoMsg): SourceInfo {
+    return SourceInfo.decode(message.value);
+  },
+  toProto(message: SourceInfo): Uint8Array {
+    return SourceInfo.encode(message).finish();
+  },
+  toProtoMsg(message: SourceInfo): SourceInfoProtoMsg {
+    return {
+      typeUrl: "/google.api.SourceInfo",
+      value: SourceInfo.encode(message).finish()
+    };
   }
 };

@@ -1,14 +1,48 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 export interface Node {
   children: Child[];
+}
+export interface NodeProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Node";
+  value: Uint8Array;
+}
+export interface NodeAmino {
+  children: ChildAmino[];
+}
+export interface NodeAminoMsg {
+  type: "osmosis/store/node";
+  value: NodeAmino;
 }
 export interface Child {
   index: Uint8Array;
   accumulation: string;
 }
+export interface ChildProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Child";
+  value: Uint8Array;
+}
+export interface ChildAmino {
+  index: string;
+  accumulation: string;
+}
+export interface ChildAminoMsg {
+  type: "osmosis/store/child";
+  value: ChildAmino;
+}
 export interface Leaf {
   leaf?: Child;
+}
+export interface LeafProtoMsg {
+  typeUrl: "/osmosis.store.v1beta1.Leaf";
+  value: Uint8Array;
+}
+export interface LeafAmino {
+  leaf?: ChildAmino;
+}
+export interface LeafAminoMsg {
+  type: "osmosis/store/leaf";
+  value: LeafAmino;
 }
 function createBaseNode(): Node {
   return {
@@ -45,6 +79,41 @@ export const Node = {
     const message = createBaseNode();
     message.children = object.children?.map(e => Child.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: NodeAmino): Node {
+    const message = createBaseNode();
+    message.children = object.children?.map(e => Child.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Node): NodeAmino {
+    const obj: any = {};
+    if (message.children) {
+      obj.children = message.children.map(e => e ? Child.toAmino(e) : undefined);
+    } else {
+      obj.children = message.children;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: NodeAminoMsg): Node {
+    return Node.fromAmino(object.value);
+  },
+  toAminoMsg(message: Node): NodeAminoMsg {
+    return {
+      type: "osmosis/store/node",
+      value: Node.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: NodeProtoMsg): Node {
+    return Node.decode(message.value);
+  },
+  toProto(message: Node): Uint8Array {
+    return Node.encode(message).finish();
+  },
+  toProtoMsg(message: Node): NodeProtoMsg {
+    return {
+      typeUrl: "/osmosis.store.v1beta1.Node",
+      value: Node.encode(message).finish()
+    };
   }
 };
 function createBaseChild(): Child {
@@ -90,6 +159,43 @@ export const Child = {
     message.index = object.index ?? new Uint8Array();
     message.accumulation = object.accumulation ?? "";
     return message;
+  },
+  fromAmino(object: ChildAmino): Child {
+    const message = createBaseChild();
+    if (object.index !== undefined && object.index !== null) {
+      message.index = bytesFromBase64(object.index);
+    }
+    if (object.accumulation !== undefined && object.accumulation !== null) {
+      message.accumulation = object.accumulation;
+    }
+    return message;
+  },
+  toAmino(message: Child): ChildAmino {
+    const obj: any = {};
+    obj.index = message.index ? base64FromBytes(message.index) : undefined;
+    obj.accumulation = message.accumulation === "" ? undefined : message.accumulation;
+    return obj;
+  },
+  fromAminoMsg(object: ChildAminoMsg): Child {
+    return Child.fromAmino(object.value);
+  },
+  toAminoMsg(message: Child): ChildAminoMsg {
+    return {
+      type: "osmosis/store/child",
+      value: Child.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ChildProtoMsg): Child {
+    return Child.decode(message.value);
+  },
+  toProto(message: Child): Uint8Array {
+    return Child.encode(message).finish();
+  },
+  toProtoMsg(message: Child): ChildProtoMsg {
+    return {
+      typeUrl: "/osmosis.store.v1beta1.Child",
+      value: Child.encode(message).finish()
+    };
   }
 };
 function createBaseLeaf(): Leaf {
@@ -127,5 +233,38 @@ export const Leaf = {
     const message = createBaseLeaf();
     message.leaf = object.leaf !== undefined && object.leaf !== null ? Child.fromPartial(object.leaf) : undefined;
     return message;
+  },
+  fromAmino(object: LeafAmino): Leaf {
+    const message = createBaseLeaf();
+    if (object.leaf !== undefined && object.leaf !== null) {
+      message.leaf = Child.fromAmino(object.leaf);
+    }
+    return message;
+  },
+  toAmino(message: Leaf): LeafAmino {
+    const obj: any = {};
+    obj.leaf = message.leaf ? Child.toAmino(message.leaf) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LeafAminoMsg): Leaf {
+    return Leaf.fromAmino(object.value);
+  },
+  toAminoMsg(message: Leaf): LeafAminoMsg {
+    return {
+      type: "osmosis/store/leaf",
+      value: Leaf.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: LeafProtoMsg): Leaf {
+    return Leaf.decode(message.value);
+  },
+  toProto(message: Leaf): Uint8Array {
+    return Leaf.encode(message).finish();
+  },
+  toProtoMsg(message: Leaf): LeafProtoMsg {
+    return {
+      typeUrl: "/osmosis.store.v1beta1.Leaf",
+      value: Leaf.encode(message).finish()
+    };
   }
 };

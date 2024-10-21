@@ -15,6 +15,29 @@ export interface DevFeeInfo {
    */
   withdrawAddress: string;
 }
+export interface DevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.DevFeeInfo";
+  value: Uint8Array;
+}
+/**
+ * DevFeeInfo defines an instance that organizes fee distribution conditions
+ * for the owner of a given smart contract
+ */
+export interface DevFeeInfoAmino {
+  /** hex address of registered contract */
+  contract_address: string;
+  /** bech32 address of contract deployer */
+  deployer_address: string;
+  /**
+   * bech32 address of account receiving the transaction fees
+   * it defaults to deployer_address
+   */
+  withdraw_address: string;
+}
+export interface DevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.DevFeeInfo";
+  value: DevFeeInfoAmino;
+}
 function createBaseDevFeeInfo(): DevFeeInfo {
   return {
     contractAddress: "",
@@ -65,5 +88,40 @@ export const DevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+  fromAmino(object: DevFeeInfoAmino): DevFeeInfo {
+    const message = createBaseDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
+  },
+  toAmino(message: DevFeeInfo): DevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
+    return obj;
+  },
+  fromAminoMsg(object: DevFeeInfoAminoMsg): DevFeeInfo {
+    return DevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DevFeeInfoProtoMsg): DevFeeInfo {
+    return DevFeeInfo.decode(message.value);
+  },
+  toProto(message: DevFeeInfo): Uint8Array {
+    return DevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: DevFeeInfo): DevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.DevFeeInfo",
+      value: DevFeeInfo.encode(message).finish()
+    };
   }
 };

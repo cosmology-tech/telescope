@@ -1,8 +1,20 @@
 import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
   val: Uint8Array;
+}
+export interface ResourceValueProtoMsg {
+  typeUrl: "/akash.base.v1beta2.ResourceValue";
+  value: Uint8Array;
+}
+/** Unit stores cpu, memory and storage metrics */
+export interface ResourceValueAmino {
+  val: string;
+}
+export interface ResourceValueAminoMsg {
+  type: "/akash.base.v1beta2.ResourceValue";
+  value: ResourceValueAmino;
 }
 function createBaseResourceValue(): ResourceValue {
   return {
@@ -38,5 +50,32 @@ export const ResourceValue = {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
+  },
+  fromAmino(object: ResourceValueAmino): ResourceValue {
+    const message = createBaseResourceValue();
+    if (object.val !== undefined && object.val !== null) {
+      message.val = bytesFromBase64(object.val);
+    }
+    return message;
+  },
+  toAmino(message: ResourceValue): ResourceValueAmino {
+    const obj: any = {};
+    obj.val = message.val ? base64FromBytes(message.val) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
+    return ResourceValue.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
+    return ResourceValue.decode(message.value);
+  },
+  toProto(message: ResourceValue): Uint8Array {
+    return ResourceValue.encode(message).finish();
+  },
+  toProtoMsg(message: ResourceValue): ResourceValueProtoMsg {
+    return {
+      typeUrl: "/akash.base.v1beta2.ResourceValue",
+      value: ResourceValue.encode(message).finish()
+    };
   }
 };

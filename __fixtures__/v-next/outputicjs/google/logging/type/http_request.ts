@@ -1,4 +1,4 @@
-import { Duration } from "../../protobuf/duration";
+import { Duration, DurationAmino } from "../../protobuf/duration";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /**
@@ -79,6 +79,93 @@ export interface HttpRequest {
   cacheFillBytes: bigint;
   /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
   protocol: string;
+}
+export interface HttpRequestProtoMsg {
+  typeUrl: "/google.logging.type.HttpRequest";
+  value: Uint8Array;
+}
+/**
+ * A common proto for logging HTTP requests. Only contains semantics
+ * defined by the HTTP specification. Product-specific logging
+ * information MUST be defined in a separate message.
+ */
+export interface HttpRequestAmino {
+  /** The request method. Examples: `"GET"`, `"HEAD"`, `"PUT"`, `"POST"`. */
+  request_method: string;
+  /**
+   * The scheme (http, https), the host name, the path and the query
+   * portion of the URL that was requested.
+   * Example: `"http://example.com/some/info?color=red"`.
+   */
+  request_url: string;
+  /**
+   * The size of the HTTP request message in bytes, including the request
+   * headers and the request body.
+   */
+  request_size: string;
+  /**
+   * The response code indicating the status of response.
+   * Examples: 200, 404.
+   */
+  status: number;
+  /**
+   * The size of the HTTP response message sent back to the client, in bytes,
+   * including the response headers and the response body.
+   */
+  response_size: string;
+  /**
+   * The user agent sent by the client. Example:
+   * `"Mozilla/4.0 (compatible; MSIE 6.0; Windows 98; Q312461; .NET
+   * CLR 1.0.3705)"`.
+   */
+  user_agent: string;
+  /**
+   * The IP address (IPv4 or IPv6) of the client that issued the HTTP
+   * request. This field can include port information. Examples:
+   * `"192.168.1.1"`, `"10.0.0.1:80"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  remote_ip: string;
+  /**
+   * The IP address (IPv4 or IPv6) of the origin server that the request was
+   * sent to. This field can include port information. Examples:
+   * `"192.168.1.1"`, `"10.0.0.1:80"`, `"FE80::0202:B3FF:FE1E:8329"`.
+   */
+  server_ip: string;
+  /**
+   * The referer URL of the request, as defined in
+   * [HTTP/1.1 Header Field
+   * Definitions](http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html).
+   */
+  referer: string;
+  /**
+   * The request processing latency on the server, from the time the request was
+   * received until the response was sent.
+   */
+  latency?: DurationAmino;
+  /** Whether or not a cache lookup was attempted. */
+  cache_lookup: boolean;
+  /**
+   * Whether or not an entity was served from cache
+   * (with or without validation).
+   */
+  cache_hit: boolean;
+  /**
+   * Whether or not the response was validated with the origin server before
+   * being served from cache. This field is only meaningful if `cache_hit` is
+   * True.
+   */
+  cache_validated_with_origin_server: boolean;
+  /**
+   * The number of HTTP response bytes inserted into cache. Set only when a
+   * cache fill was attempted.
+   */
+  cache_fill_bytes: string;
+  /** Protocol used for the request. Examples: "HTTP/1.1", "HTTP/2", "websocket" */
+  protocol: string;
+}
+export interface HttpRequestAminoMsg {
+  type: "/google.logging.type.HttpRequest";
+  value: HttpRequestAmino;
 }
 function createBaseHttpRequest(): HttpRequest {
   return {
@@ -226,5 +313,88 @@ export const HttpRequest = {
     message.cacheFillBytes = object.cacheFillBytes !== undefined && object.cacheFillBytes !== null ? BigInt(object.cacheFillBytes.toString()) : BigInt(0);
     message.protocol = object.protocol ?? "";
     return message;
+  },
+  fromAmino(object: HttpRequestAmino): HttpRequest {
+    const message = createBaseHttpRequest();
+    if (object.request_method !== undefined && object.request_method !== null) {
+      message.requestMethod = object.request_method;
+    }
+    if (object.request_url !== undefined && object.request_url !== null) {
+      message.requestUrl = object.request_url;
+    }
+    if (object.request_size !== undefined && object.request_size !== null) {
+      message.requestSize = BigInt(object.request_size);
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = object.status;
+    }
+    if (object.response_size !== undefined && object.response_size !== null) {
+      message.responseSize = BigInt(object.response_size);
+    }
+    if (object.user_agent !== undefined && object.user_agent !== null) {
+      message.userAgent = object.user_agent;
+    }
+    if (object.remote_ip !== undefined && object.remote_ip !== null) {
+      message.remoteIp = object.remote_ip;
+    }
+    if (object.server_ip !== undefined && object.server_ip !== null) {
+      message.serverIp = object.server_ip;
+    }
+    if (object.referer !== undefined && object.referer !== null) {
+      message.referer = object.referer;
+    }
+    if (object.latency !== undefined && object.latency !== null) {
+      message.latency = Duration.fromAmino(object.latency);
+    }
+    if (object.cache_lookup !== undefined && object.cache_lookup !== null) {
+      message.cacheLookup = object.cache_lookup;
+    }
+    if (object.cache_hit !== undefined && object.cache_hit !== null) {
+      message.cacheHit = object.cache_hit;
+    }
+    if (object.cache_validated_with_origin_server !== undefined && object.cache_validated_with_origin_server !== null) {
+      message.cacheValidatedWithOriginServer = object.cache_validated_with_origin_server;
+    }
+    if (object.cache_fill_bytes !== undefined && object.cache_fill_bytes !== null) {
+      message.cacheFillBytes = BigInt(object.cache_fill_bytes);
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
+  },
+  toAmino(message: HttpRequest): HttpRequestAmino {
+    const obj: any = {};
+    obj.request_method = message.requestMethod === "" ? undefined : message.requestMethod;
+    obj.request_url = message.requestUrl === "" ? undefined : message.requestUrl;
+    obj.request_size = message.requestSize !== BigInt(0) ? message.requestSize?.toString() : undefined;
+    obj.status = message.status === 0 ? undefined : message.status;
+    obj.response_size = message.responseSize !== BigInt(0) ? message.responseSize?.toString() : undefined;
+    obj.user_agent = message.userAgent === "" ? undefined : message.userAgent;
+    obj.remote_ip = message.remoteIp === "" ? undefined : message.remoteIp;
+    obj.server_ip = message.serverIp === "" ? undefined : message.serverIp;
+    obj.referer = message.referer === "" ? undefined : message.referer;
+    obj.latency = message.latency ? Duration.toAmino(message.latency) : undefined;
+    obj.cache_lookup = message.cacheLookup === false ? undefined : message.cacheLookup;
+    obj.cache_hit = message.cacheHit === false ? undefined : message.cacheHit;
+    obj.cache_validated_with_origin_server = message.cacheValidatedWithOriginServer === false ? undefined : message.cacheValidatedWithOriginServer;
+    obj.cache_fill_bytes = message.cacheFillBytes !== BigInt(0) ? message.cacheFillBytes?.toString() : undefined;
+    obj.protocol = message.protocol === "" ? undefined : message.protocol;
+    return obj;
+  },
+  fromAminoMsg(object: HttpRequestAminoMsg): HttpRequest {
+    return HttpRequest.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HttpRequestProtoMsg): HttpRequest {
+    return HttpRequest.decode(message.value);
+  },
+  toProto(message: HttpRequest): Uint8Array {
+    return HttpRequest.encode(message).finish();
+  },
+  toProtoMsg(message: HttpRequest): HttpRequestProtoMsg {
+    return {
+      typeUrl: "/google.logging.type.HttpRequest",
+      value: HttpRequest.encode(message).finish()
+    };
   }
 };

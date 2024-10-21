@@ -14,6 +14,7 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
+export const Property_PropertyTypeAmino = Property_PropertyType;
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -76,6 +77,36 @@ export interface ProjectProperties {
   /** List of per consumer project-specific properties. */
   properties: Property[];
 }
+export interface ProjectPropertiesProtoMsg {
+  typeUrl: "/google.api.ProjectProperties";
+  value: Uint8Array;
+}
+/**
+ * A descriptor for defining project properties for a service. One service may
+ * have many consumer projects, and the service may want to behave differently
+ * depending on some properties on the project. For example, a project may be
+ * associated with a school, or a business, or a government agency, a business
+ * type property on the project may affect how a service responds to the client.
+ * This descriptor defines which properties are allowed to be set on a project.
+ * 
+ * Example:
+ * 
+ *    project_properties:
+ *      properties:
+ *      - name: NO_WATERMARK
+ *        type: BOOL
+ *        description: Allows usage of the API without watermarks.
+ *      - name: EXTENDED_TILE_CACHE_PERIOD
+ *        type: INT64
+ */
+export interface ProjectPropertiesAmino {
+  /** List of per consumer project-specific properties. */
+  properties: PropertyAmino[];
+}
+export interface ProjectPropertiesAminoMsg {
+  type: "/google.api.ProjectProperties";
+  value: ProjectPropertiesAmino;
+}
 /**
  * Defines project properties.
  * 
@@ -95,6 +126,34 @@ export interface Property {
   type: Property_PropertyType;
   /** The description of the property */
   description: string;
+}
+export interface PropertyProtoMsg {
+  typeUrl: "/google.api.Property";
+  value: Uint8Array;
+}
+/**
+ * Defines project properties.
+ * 
+ * API services can define properties that can be assigned to consumer projects
+ * so that backends can perform response customization without having to make
+ * additional calls or maintain additional storage. For example, Maps API
+ * defines properties that controls map tile cache period, or whether to embed a
+ * watermark in a result.
+ * 
+ * These values can be set via API producer console. Only API providers can
+ * define and set these properties.
+ */
+export interface PropertyAmino {
+  /** The name of the property (a.k.a key). */
+  name: string;
+  /** The type of this property. */
+  type: Property_PropertyType;
+  /** The description of the property */
+  description: string;
+}
+export interface PropertyAminoMsg {
+  type: "/google.api.Property";
+  value: PropertyAmino;
 }
 function createBaseProjectProperties(): ProjectProperties {
   return {
@@ -130,6 +189,35 @@ export const ProjectProperties = {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
+    const message = createBaseProjectProperties();
+    message.properties = object.properties?.map(e => Property.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: ProjectProperties): ProjectPropertiesAmino {
+    const obj: any = {};
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toAmino(e) : undefined);
+    } else {
+      obj.properties = message.properties;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProjectPropertiesAminoMsg): ProjectProperties {
+    return ProjectProperties.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProjectPropertiesProtoMsg): ProjectProperties {
+    return ProjectProperties.decode(message.value);
+  },
+  toProto(message: ProjectProperties): Uint8Array {
+    return ProjectProperties.encode(message).finish();
+  },
+  toProtoMsg(message: ProjectProperties): ProjectPropertiesProtoMsg {
+    return {
+      typeUrl: "/google.api.ProjectProperties",
+      value: ProjectProperties.encode(message).finish()
+    };
   }
 };
 function createBaseProperty(): Property {
@@ -182,5 +270,40 @@ export const Property = {
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: PropertyAmino): Property {
+    const message = createBaseProperty();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.type !== undefined && object.type !== null) {
+      message.type = object.type;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
+  },
+  toAmino(message: Property): PropertyAmino {
+    const obj: any = {};
+    obj.name = message.name === "" ? undefined : message.name;
+    obj.type = message.type === 0 ? undefined : message.type;
+    obj.description = message.description === "" ? undefined : message.description;
+    return obj;
+  },
+  fromAminoMsg(object: PropertyAminoMsg): Property {
+    return Property.fromAmino(object.value);
+  },
+  fromProtoMsg(message: PropertyProtoMsg): Property {
+    return Property.decode(message.value);
+  },
+  toProto(message: Property): Uint8Array {
+    return Property.encode(message).finish();
+  },
+  toProtoMsg(message: Property): PropertyProtoMsg {
+    return {
+      typeUrl: "/google.api.Property",
+      value: Property.encode(message).finish()
+    };
   }
 };

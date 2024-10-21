@@ -14,6 +14,7 @@ export enum Action {
   ACTION_IBC_TRANSFER = 4,
   UNRECOGNIZED = -1,
 }
+export const ActionAmino = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -66,6 +67,26 @@ export interface Claim {
   /** claimable token amount for the action. Zero if completed */
   claimableAmount: string;
 }
+export interface ClaimProtoMsg {
+  typeUrl: "/evmos.claims.v1.Claim";
+  value: Uint8Array;
+}
+/**
+ * Claim defines the action, completed flag and the remaining claimable amount
+ * for a given user. This is only used during client queries.
+ */
+export interface ClaimAmino {
+  /** action enum */
+  action: Action;
+  /** true if the action has been completed */
+  completed: boolean;
+  /** claimable token amount for the action. Zero if completed */
+  claimable_amount: string;
+}
+export interface ClaimAminoMsg {
+  type: "/evmos.claims.v1.Claim";
+  value: ClaimAmino;
+}
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddress {
   /** bech32 or hex address of claim user */
@@ -74,6 +95,23 @@ export interface ClaimsRecordAddress {
   initialClaimableAmount: string;
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+export interface ClaimsRecordAddressProtoMsg {
+  typeUrl: "/evmos.claims.v1.ClaimsRecordAddress";
+  value: Uint8Array;
+}
+/** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
+export interface ClaimsRecordAddressAmino {
+  /** bech32 or hex address of claim user */
+  address: string;
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: string;
+  /** slice of the available actions completed */
+  actions_completed: boolean[];
+}
+export interface ClaimsRecordAddressAminoMsg {
+  type: "/evmos.claims.v1.ClaimsRecordAddress";
+  value: ClaimsRecordAddressAmino;
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
@@ -84,6 +122,24 @@ export interface ClaimsRecord {
   initialClaimableAmount: string;
   /** slice of the available actions completed */
   actionsCompleted: boolean[];
+}
+export interface ClaimsRecordProtoMsg {
+  typeUrl: "/evmos.claims.v1.ClaimsRecord";
+  value: Uint8Array;
+}
+/**
+ * ClaimsRecord defines the initial claimable airdrop amount and the list of
+ * completed actions to claim the tokens.
+ */
+export interface ClaimsRecordAmino {
+  /** total initial claimable amount for the user */
+  initial_claimable_amount: string;
+  /** slice of the available actions completed */
+  actions_completed: boolean[];
+}
+export interface ClaimsRecordAminoMsg {
+  type: "/evmos.claims.v1.ClaimsRecord";
+  value: ClaimsRecordAmino;
 }
 function createBaseClaim(): Claim {
   return {
@@ -135,6 +191,41 @@ export const Claim = {
     message.completed = object.completed ?? false;
     message.claimableAmount = object.claimableAmount ?? "";
     return message;
+  },
+  fromAmino(object: ClaimAmino): Claim {
+    const message = createBaseClaim();
+    if (object.action !== undefined && object.action !== null) {
+      message.action = object.action;
+    }
+    if (object.completed !== undefined && object.completed !== null) {
+      message.completed = object.completed;
+    }
+    if (object.claimable_amount !== undefined && object.claimable_amount !== null) {
+      message.claimableAmount = object.claimable_amount;
+    }
+    return message;
+  },
+  toAmino(message: Claim): ClaimAmino {
+    const obj: any = {};
+    obj.action = message.action === 0 ? undefined : message.action;
+    obj.completed = message.completed === false ? undefined : message.completed;
+    obj.claimable_amount = message.claimableAmount === "" ? undefined : message.claimableAmount;
+    return obj;
+  },
+  fromAminoMsg(object: ClaimAminoMsg): Claim {
+    return Claim.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ClaimProtoMsg): Claim {
+    return Claim.decode(message.value);
+  },
+  toProto(message: Claim): Uint8Array {
+    return Claim.encode(message).finish();
+  },
+  toProtoMsg(message: Claim): ClaimProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.Claim",
+      value: Claim.encode(message).finish()
+    };
   }
 };
 function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
@@ -196,6 +287,43 @@ export const ClaimsRecordAddress = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
+    const message = createBaseClaimsRecordAddress();
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: ClaimsRecordAddress): ClaimsRecordAddressAmino {
+    const obj: any = {};
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = message.actionsCompleted;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ClaimsRecordAddressAminoMsg): ClaimsRecordAddress {
+    return ClaimsRecordAddress.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ClaimsRecordAddressProtoMsg): ClaimsRecordAddress {
+    return ClaimsRecordAddress.decode(message.value);
+  },
+  toProto(message: ClaimsRecordAddress): Uint8Array {
+    return ClaimsRecordAddress.encode(message).finish();
+  },
+  toProtoMsg(message: ClaimsRecordAddress): ClaimsRecordAddressProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
+      value: ClaimsRecordAddress.encode(message).finish()
+    };
   }
 };
 function createBaseClaimsRecord(): ClaimsRecord {
@@ -249,5 +377,38 @@ export const ClaimsRecord = {
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
+    const message = createBaseClaimsRecord();
+    if (object.initial_claimable_amount !== undefined && object.initial_claimable_amount !== null) {
+      message.initialClaimableAmount = object.initial_claimable_amount;
+    }
+    message.actionsCompleted = object.actions_completed?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: ClaimsRecord): ClaimsRecordAmino {
+    const obj: any = {};
+    obj.initial_claimable_amount = message.initialClaimableAmount === "" ? undefined : message.initialClaimableAmount;
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = message.actionsCompleted;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ClaimsRecordAminoMsg): ClaimsRecord {
+    return ClaimsRecord.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ClaimsRecordProtoMsg): ClaimsRecord {
+    return ClaimsRecord.decode(message.value);
+  },
+  toProto(message: ClaimsRecord): Uint8Array {
+    return ClaimsRecord.encode(message).finish();
+  },
+  toProtoMsg(message: ClaimsRecord): ClaimsRecordProtoMsg {
+    return {
+      typeUrl: "/evmos.claims.v1.ClaimsRecord",
+      value: ClaimsRecord.encode(message).finish()
+    };
   }
 };

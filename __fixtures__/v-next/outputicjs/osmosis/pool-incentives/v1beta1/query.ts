@@ -1,43 +1,191 @@
-import { Duration } from "../../../google/protobuf/duration";
-import { DistrInfo, Params } from "./incentives";
-import { Gauge } from "../../incentives/gauge";
+import { Duration, DurationAmino } from "../../../google/protobuf/duration";
+import { DistrInfo, DistrInfoAmino, Params, ParamsAmino } from "./incentives";
+import { Gauge, GaugeAmino } from "../../incentives/gauge";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 export interface QueryGaugeIdsRequest {
   poolId: bigint;
 }
+export interface QueryGaugeIdsRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest";
+  value: Uint8Array;
+}
+export interface QueryGaugeIdsRequestAmino {
+  pool_id: string;
+}
+export interface QueryGaugeIdsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-gauge-ids-request";
+  value: QueryGaugeIdsRequestAmino;
+}
 export interface QueryGaugeIdsResponse {
   gaugeIdsWithDuration: QueryGaugeIdsResponse_GaugeIdWithDuration[];
+}
+export interface QueryGaugeIdsResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse";
+  value: Uint8Array;
+}
+export interface QueryGaugeIdsResponseAmino {
+  gauge_ids_with_duration: QueryGaugeIdsResponse_GaugeIdWithDurationAmino[];
+}
+export interface QueryGaugeIdsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-gauge-ids-response";
+  value: QueryGaugeIdsResponseAmino;
 }
 export interface QueryGaugeIdsResponse_GaugeIdWithDuration {
   gaugeId: bigint;
   duration: Duration;
   gaugeIncentivePercentage: string;
 }
+export interface QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration";
+  value: Uint8Array;
+}
+export interface QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
+  gauge_id: string;
+  duration: DurationAmino;
+  gauge_incentive_percentage: string;
+}
+export interface QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
+  type: "osmosis/poolincentives/gauge-id-with-duration";
+  value: QueryGaugeIdsResponse_GaugeIdWithDurationAmino;
+}
 export interface QueryDistrInfoRequest {}
+export interface QueryDistrInfoRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest";
+  value: Uint8Array;
+}
+export interface QueryDistrInfoRequestAmino {}
+export interface QueryDistrInfoRequestAminoMsg {
+  type: "osmosis/poolincentives/query-distr-info-request";
+  value: QueryDistrInfoRequestAmino;
+}
 export interface QueryDistrInfoResponse {
   distrInfo: DistrInfo;
 }
+export interface QueryDistrInfoResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse";
+  value: Uint8Array;
+}
+export interface QueryDistrInfoResponseAmino {
+  distr_info: DistrInfoAmino;
+}
+export interface QueryDistrInfoResponseAminoMsg {
+  type: "osmosis/poolincentives/query-distr-info-response";
+  value: QueryDistrInfoResponseAmino;
+}
 export interface QueryParamsRequest {}
+export interface QueryParamsRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest";
+  value: Uint8Array;
+}
+export interface QueryParamsRequestAmino {}
+export interface QueryParamsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-params-request";
+  value: QueryParamsRequestAmino;
+}
 export interface QueryParamsResponse {
   params: Params;
 }
+export interface QueryParamsResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse";
+  value: Uint8Array;
+}
+export interface QueryParamsResponseAmino {
+  params: ParamsAmino;
+}
+export interface QueryParamsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-params-response";
+  value: QueryParamsResponseAmino;
+}
 export interface QueryLockableDurationsRequest {}
+export interface QueryLockableDurationsRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest";
+  value: Uint8Array;
+}
+export interface QueryLockableDurationsRequestAmino {}
+export interface QueryLockableDurationsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-lockable-durations-request";
+  value: QueryLockableDurationsRequestAmino;
+}
 export interface QueryLockableDurationsResponse {
   lockableDurations: Duration[];
 }
+export interface QueryLockableDurationsResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse";
+  value: Uint8Array;
+}
+export interface QueryLockableDurationsResponseAmino {
+  lockable_durations: DurationAmino[];
+}
+export interface QueryLockableDurationsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-lockable-durations-response";
+  value: QueryLockableDurationsResponseAmino;
+}
 export interface QueryIncentivizedPoolsRequest {}
+export interface QueryIncentivizedPoolsRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest";
+  value: Uint8Array;
+}
+export interface QueryIncentivizedPoolsRequestAmino {}
+export interface QueryIncentivizedPoolsRequestAminoMsg {
+  type: "osmosis/poolincentives/query-incentivized-pools-request";
+  value: QueryIncentivizedPoolsRequestAmino;
+}
 export interface IncentivizedPool {
   poolId: bigint;
   lockableDuration: Duration;
   gaugeId: bigint;
 }
+export interface IncentivizedPoolProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool";
+  value: Uint8Array;
+}
+export interface IncentivizedPoolAmino {
+  pool_id: string;
+  lockable_duration: DurationAmino;
+  gauge_id: string;
+}
+export interface IncentivizedPoolAminoMsg {
+  type: "osmosis/poolincentives/incentivized-pool";
+  value: IncentivizedPoolAmino;
+}
 export interface QueryIncentivizedPoolsResponse {
   incentivizedPools: IncentivizedPool[];
 }
+export interface QueryIncentivizedPoolsResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse";
+  value: Uint8Array;
+}
+export interface QueryIncentivizedPoolsResponseAmino {
+  incentivized_pools: IncentivizedPoolAmino[];
+}
+export interface QueryIncentivizedPoolsResponseAminoMsg {
+  type: "osmosis/poolincentives/query-incentivized-pools-response";
+  value: QueryIncentivizedPoolsResponseAmino;
+}
 export interface QueryExternalIncentiveGaugesRequest {}
+export interface QueryExternalIncentiveGaugesRequestProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest";
+  value: Uint8Array;
+}
+export interface QueryExternalIncentiveGaugesRequestAmino {}
+export interface QueryExternalIncentiveGaugesRequestAminoMsg {
+  type: "osmosis/poolincentives/query-external-incentive-gauges-request";
+  value: QueryExternalIncentiveGaugesRequestAmino;
+}
 export interface QueryExternalIncentiveGaugesResponse {
   data: Gauge[];
+}
+export interface QueryExternalIncentiveGaugesResponseProtoMsg {
+  typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse";
+  value: Uint8Array;
+}
+export interface QueryExternalIncentiveGaugesResponseAmino {
+  data: GaugeAmino[];
+}
+export interface QueryExternalIncentiveGaugesResponseAminoMsg {
+  type: "osmosis/poolincentives/query-external-incentive-gauges-response";
+  value: QueryExternalIncentiveGaugesResponseAmino;
 }
 function createBaseQueryGaugeIdsRequest(): QueryGaugeIdsRequest {
   return {
@@ -74,6 +222,39 @@ export const QueryGaugeIdsRequest = {
     const message = createBaseQueryGaugeIdsRequest();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
+  },
+  fromAmino(object: QueryGaugeIdsRequestAmino): QueryGaugeIdsRequest {
+    const message = createBaseQueryGaugeIdsRequest();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
+  },
+  toAmino(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGaugeIdsRequestAminoMsg): QueryGaugeIdsRequest {
+    return QueryGaugeIdsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-gauge-ids-request",
+      value: QueryGaugeIdsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGaugeIdsRequestProtoMsg): QueryGaugeIdsRequest {
+    return QueryGaugeIdsRequest.decode(message.value);
+  },
+  toProto(message: QueryGaugeIdsRequest): Uint8Array {
+    return QueryGaugeIdsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGaugeIdsRequest): QueryGaugeIdsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsRequest",
+      value: QueryGaugeIdsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGaugeIdsResponse(): QueryGaugeIdsResponse {
@@ -111,6 +292,41 @@ export const QueryGaugeIdsResponse = {
     const message = createBaseQueryGaugeIdsResponse();
     message.gaugeIdsWithDuration = object.gaugeIdsWithDuration?.map(e => QueryGaugeIdsResponse_GaugeIdWithDuration.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: QueryGaugeIdsResponseAmino): QueryGaugeIdsResponse {
+    const message = createBaseQueryGaugeIdsResponse();
+    message.gaugeIdsWithDuration = object.gauge_ids_with_duration?.map(e => QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: QueryGaugeIdsResponse): QueryGaugeIdsResponseAmino {
+    const obj: any = {};
+    if (message.gaugeIdsWithDuration) {
+      obj.gauge_ids_with_duration = message.gaugeIdsWithDuration.map(e => e ? QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(e) : undefined);
+    } else {
+      obj.gauge_ids_with_duration = message.gaugeIdsWithDuration;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryGaugeIdsResponseAminoMsg): QueryGaugeIdsResponse {
+    return QueryGaugeIdsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGaugeIdsResponse): QueryGaugeIdsResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-gauge-ids-response",
+      value: QueryGaugeIdsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGaugeIdsResponseProtoMsg): QueryGaugeIdsResponse {
+    return QueryGaugeIdsResponse.decode(message.value);
+  },
+  toProto(message: QueryGaugeIdsResponse): Uint8Array {
+    return QueryGaugeIdsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGaugeIdsResponse): QueryGaugeIdsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryGaugeIdsResponse",
+      value: QueryGaugeIdsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryGaugeIdsResponse_GaugeIdWithDuration(): QueryGaugeIdsResponse_GaugeIdWithDuration {
@@ -164,6 +380,47 @@ export const QueryGaugeIdsResponse_GaugeIdWithDuration = {
     message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
     message.gaugeIncentivePercentage = object.gaugeIncentivePercentage ?? "";
     return message;
+  },
+  fromAmino(object: QueryGaugeIdsResponse_GaugeIdWithDurationAmino): QueryGaugeIdsResponse_GaugeIdWithDuration {
+    const message = createBaseQueryGaugeIdsResponse_GaugeIdWithDuration();
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromAmino(object.duration);
+    }
+    if (object.gauge_incentive_percentage !== undefined && object.gauge_incentive_percentage !== null) {
+      message.gaugeIncentivePercentage = object.gauge_incentive_percentage;
+    }
+    return message;
+  },
+  toAmino(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationAmino {
+    const obj: any = {};
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId?.toString() : undefined;
+    obj.duration = message.duration ? Duration.toAmino(message.duration) : undefined;
+    obj.gauge_incentive_percentage = message.gaugeIncentivePercentage === "" ? undefined : message.gaugeIncentivePercentage;
+    return obj;
+  },
+  fromAminoMsg(object: QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg): QueryGaugeIdsResponse_GaugeIdWithDuration {
+    return QueryGaugeIdsResponse_GaugeIdWithDuration.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationAminoMsg {
+    return {
+      type: "osmosis/poolincentives/gauge-id-with-duration",
+      value: QueryGaugeIdsResponse_GaugeIdWithDuration.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg): QueryGaugeIdsResponse_GaugeIdWithDuration {
+    return QueryGaugeIdsResponse_GaugeIdWithDuration.decode(message.value);
+  },
+  toProto(message: QueryGaugeIdsResponse_GaugeIdWithDuration): Uint8Array {
+    return QueryGaugeIdsResponse_GaugeIdWithDuration.encode(message).finish();
+  },
+  toProtoMsg(message: QueryGaugeIdsResponse_GaugeIdWithDuration): QueryGaugeIdsResponse_GaugeIdWithDurationProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.GaugeIdWithDuration",
+      value: QueryGaugeIdsResponse_GaugeIdWithDuration.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDistrInfoRequest(): QueryDistrInfoRequest {
@@ -192,6 +449,35 @@ export const QueryDistrInfoRequest = {
   fromPartial(_: DeepPartial<QueryDistrInfoRequest>): QueryDistrInfoRequest {
     const message = createBaseQueryDistrInfoRequest();
     return message;
+  },
+  fromAmino(_: QueryDistrInfoRequestAmino): QueryDistrInfoRequest {
+    const message = createBaseQueryDistrInfoRequest();
+    return message;
+  },
+  toAmino(_: QueryDistrInfoRequest): QueryDistrInfoRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryDistrInfoRequestAminoMsg): QueryDistrInfoRequest {
+    return QueryDistrInfoRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDistrInfoRequest): QueryDistrInfoRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-distr-info-request",
+      value: QueryDistrInfoRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDistrInfoRequestProtoMsg): QueryDistrInfoRequest {
+    return QueryDistrInfoRequest.decode(message.value);
+  },
+  toProto(message: QueryDistrInfoRequest): Uint8Array {
+    return QueryDistrInfoRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDistrInfoRequest): QueryDistrInfoRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoRequest",
+      value: QueryDistrInfoRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryDistrInfoResponse(): QueryDistrInfoResponse {
@@ -229,6 +515,39 @@ export const QueryDistrInfoResponse = {
     const message = createBaseQueryDistrInfoResponse();
     message.distrInfo = object.distrInfo !== undefined && object.distrInfo !== null ? DistrInfo.fromPartial(object.distrInfo) : undefined;
     return message;
+  },
+  fromAmino(object: QueryDistrInfoResponseAmino): QueryDistrInfoResponse {
+    const message = createBaseQueryDistrInfoResponse();
+    if (object.distr_info !== undefined && object.distr_info !== null) {
+      message.distrInfo = DistrInfo.fromAmino(object.distr_info);
+    }
+    return message;
+  },
+  toAmino(message: QueryDistrInfoResponse): QueryDistrInfoResponseAmino {
+    const obj: any = {};
+    obj.distr_info = message.distrInfo ? DistrInfo.toAmino(message.distrInfo) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryDistrInfoResponseAminoMsg): QueryDistrInfoResponse {
+    return QueryDistrInfoResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDistrInfoResponse): QueryDistrInfoResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-distr-info-response",
+      value: QueryDistrInfoResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryDistrInfoResponseProtoMsg): QueryDistrInfoResponse {
+    return QueryDistrInfoResponse.decode(message.value);
+  },
+  toProto(message: QueryDistrInfoResponse): Uint8Array {
+    return QueryDistrInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryDistrInfoResponse): QueryDistrInfoResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryDistrInfoResponse",
+      value: QueryDistrInfoResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsRequest(): QueryParamsRequest {
@@ -257,6 +576,35 @@ export const QueryParamsRequest = {
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+  fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
+    const message = createBaseQueryParamsRequest();
+    return message;
+  },
+  toAmino(_: QueryParamsRequest): QueryParamsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsRequestAminoMsg): QueryParamsRequest {
+    return QueryParamsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsRequest): QueryParamsRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-params-request",
+      value: QueryParamsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsRequestProtoMsg): QueryParamsRequest {
+    return QueryParamsRequest.decode(message.value);
+  },
+  toProto(message: QueryParamsRequest): Uint8Array {
+    return QueryParamsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsRequest): QueryParamsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsRequest",
+      value: QueryParamsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryParamsResponse(): QueryParamsResponse {
@@ -294,6 +642,39 @@ export const QueryParamsResponse = {
     const message = createBaseQueryParamsResponse();
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     return message;
+  },
+  fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
+    const message = createBaseQueryParamsResponse();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    return message;
+  },
+  toAmino(message: QueryParamsResponse): QueryParamsResponseAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: QueryParamsResponseAminoMsg): QueryParamsResponse {
+    return QueryParamsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryParamsResponse): QueryParamsResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-params-response",
+      value: QueryParamsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryParamsResponseProtoMsg): QueryParamsResponse {
+    return QueryParamsResponse.decode(message.value);
+  },
+  toProto(message: QueryParamsResponse): Uint8Array {
+    return QueryParamsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryParamsResponse): QueryParamsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryParamsResponse",
+      value: QueryParamsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryLockableDurationsRequest(): QueryLockableDurationsRequest {
@@ -322,6 +703,35 @@ export const QueryLockableDurationsRequest = {
   fromPartial(_: DeepPartial<QueryLockableDurationsRequest>): QueryLockableDurationsRequest {
     const message = createBaseQueryLockableDurationsRequest();
     return message;
+  },
+  fromAmino(_: QueryLockableDurationsRequestAmino): QueryLockableDurationsRequest {
+    const message = createBaseQueryLockableDurationsRequest();
+    return message;
+  },
+  toAmino(_: QueryLockableDurationsRequest): QueryLockableDurationsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryLockableDurationsRequestAminoMsg): QueryLockableDurationsRequest {
+    return QueryLockableDurationsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLockableDurationsRequest): QueryLockableDurationsRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-lockable-durations-request",
+      value: QueryLockableDurationsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryLockableDurationsRequestProtoMsg): QueryLockableDurationsRequest {
+    return QueryLockableDurationsRequest.decode(message.value);
+  },
+  toProto(message: QueryLockableDurationsRequest): Uint8Array {
+    return QueryLockableDurationsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryLockableDurationsRequest): QueryLockableDurationsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsRequest",
+      value: QueryLockableDurationsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryLockableDurationsResponse(): QueryLockableDurationsResponse {
@@ -359,6 +769,41 @@ export const QueryLockableDurationsResponse = {
     const message = createBaseQueryLockableDurationsResponse();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: QueryLockableDurationsResponseAmino): QueryLockableDurationsResponse {
+    const message = createBaseQueryLockableDurationsResponse();
+    message.lockableDurations = object.lockable_durations?.map(e => Duration.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAmino {
+    const obj: any = {};
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toAmino(e) : undefined);
+    } else {
+      obj.lockable_durations = message.lockableDurations;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryLockableDurationsResponseAminoMsg): QueryLockableDurationsResponse {
+    return QueryLockableDurationsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-lockable-durations-response",
+      value: QueryLockableDurationsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryLockableDurationsResponseProtoMsg): QueryLockableDurationsResponse {
+    return QueryLockableDurationsResponse.decode(message.value);
+  },
+  toProto(message: QueryLockableDurationsResponse): Uint8Array {
+    return QueryLockableDurationsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryLockableDurationsResponse): QueryLockableDurationsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryLockableDurationsResponse",
+      value: QueryLockableDurationsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryIncentivizedPoolsRequest(): QueryIncentivizedPoolsRequest {
@@ -387,6 +832,35 @@ export const QueryIncentivizedPoolsRequest = {
   fromPartial(_: DeepPartial<QueryIncentivizedPoolsRequest>): QueryIncentivizedPoolsRequest {
     const message = createBaseQueryIncentivizedPoolsRequest();
     return message;
+  },
+  fromAmino(_: QueryIncentivizedPoolsRequestAmino): QueryIncentivizedPoolsRequest {
+    const message = createBaseQueryIncentivizedPoolsRequest();
+    return message;
+  },
+  toAmino(_: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentivizedPoolsRequestAminoMsg): QueryIncentivizedPoolsRequest {
+    return QueryIncentivizedPoolsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-incentivized-pools-request",
+      value: QueryIncentivizedPoolsRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryIncentivizedPoolsRequestProtoMsg): QueryIncentivizedPoolsRequest {
+    return QueryIncentivizedPoolsRequest.decode(message.value);
+  },
+  toProto(message: QueryIncentivizedPoolsRequest): Uint8Array {
+    return QueryIncentivizedPoolsRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentivizedPoolsRequest): QueryIncentivizedPoolsRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsRequest",
+      value: QueryIncentivizedPoolsRequest.encode(message).finish()
+    };
   }
 };
 function createBaseIncentivizedPool(): IncentivizedPool {
@@ -440,6 +914,47 @@ export const IncentivizedPool = {
     message.lockableDuration = object.lockableDuration !== undefined && object.lockableDuration !== null ? Duration.fromPartial(object.lockableDuration) : undefined;
     message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
     return message;
+  },
+  fromAmino(object: IncentivizedPoolAmino): IncentivizedPool {
+    const message = createBaseIncentivizedPool();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    if (object.lockable_duration !== undefined && object.lockable_duration !== null) {
+      message.lockableDuration = Duration.fromAmino(object.lockable_duration);
+    }
+    if (object.gauge_id !== undefined && object.gauge_id !== null) {
+      message.gaugeId = BigInt(object.gauge_id);
+    }
+    return message;
+  },
+  toAmino(message: IncentivizedPool): IncentivizedPoolAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
+    obj.lockable_duration = message.lockableDuration ? Duration.toAmino(message.lockableDuration) : undefined;
+    obj.gauge_id = message.gaugeId !== BigInt(0) ? message.gaugeId?.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: IncentivizedPoolAminoMsg): IncentivizedPool {
+    return IncentivizedPool.fromAmino(object.value);
+  },
+  toAminoMsg(message: IncentivizedPool): IncentivizedPoolAminoMsg {
+    return {
+      type: "osmosis/poolincentives/incentivized-pool",
+      value: IncentivizedPool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: IncentivizedPoolProtoMsg): IncentivizedPool {
+    return IncentivizedPool.decode(message.value);
+  },
+  toProto(message: IncentivizedPool): Uint8Array {
+    return IncentivizedPool.encode(message).finish();
+  },
+  toProtoMsg(message: IncentivizedPool): IncentivizedPoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.IncentivizedPool",
+      value: IncentivizedPool.encode(message).finish()
+    };
   }
 };
 function createBaseQueryIncentivizedPoolsResponse(): QueryIncentivizedPoolsResponse {
@@ -477,6 +992,41 @@ export const QueryIncentivizedPoolsResponse = {
     const message = createBaseQueryIncentivizedPoolsResponse();
     message.incentivizedPools = object.incentivizedPools?.map(e => IncentivizedPool.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: QueryIncentivizedPoolsResponseAmino): QueryIncentivizedPoolsResponse {
+    const message = createBaseQueryIncentivizedPoolsResponse();
+    message.incentivizedPools = object.incentivized_pools?.map(e => IncentivizedPool.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseAmino {
+    const obj: any = {};
+    if (message.incentivizedPools) {
+      obj.incentivized_pools = message.incentivizedPools.map(e => e ? IncentivizedPool.toAmino(e) : undefined);
+    } else {
+      obj.incentivized_pools = message.incentivizedPools;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryIncentivizedPoolsResponseAminoMsg): QueryIncentivizedPoolsResponse {
+    return QueryIncentivizedPoolsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-incentivized-pools-response",
+      value: QueryIncentivizedPoolsResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryIncentivizedPoolsResponseProtoMsg): QueryIncentivizedPoolsResponse {
+    return QueryIncentivizedPoolsResponse.decode(message.value);
+  },
+  toProto(message: QueryIncentivizedPoolsResponse): Uint8Array {
+    return QueryIncentivizedPoolsResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryIncentivizedPoolsResponse): QueryIncentivizedPoolsResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryIncentivizedPoolsResponse",
+      value: QueryIncentivizedPoolsResponse.encode(message).finish()
+    };
   }
 };
 function createBaseQueryExternalIncentiveGaugesRequest(): QueryExternalIncentiveGaugesRequest {
@@ -505,6 +1055,35 @@ export const QueryExternalIncentiveGaugesRequest = {
   fromPartial(_: DeepPartial<QueryExternalIncentiveGaugesRequest>): QueryExternalIncentiveGaugesRequest {
     const message = createBaseQueryExternalIncentiveGaugesRequest();
     return message;
+  },
+  fromAmino(_: QueryExternalIncentiveGaugesRequestAmino): QueryExternalIncentiveGaugesRequest {
+    const message = createBaseQueryExternalIncentiveGaugesRequest();
+    return message;
+  },
+  toAmino(_: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: QueryExternalIncentiveGaugesRequestAminoMsg): QueryExternalIncentiveGaugesRequest {
+    return QueryExternalIncentiveGaugesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-external-incentive-gauges-request",
+      value: QueryExternalIncentiveGaugesRequest.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryExternalIncentiveGaugesRequestProtoMsg): QueryExternalIncentiveGaugesRequest {
+    return QueryExternalIncentiveGaugesRequest.decode(message.value);
+  },
+  toProto(message: QueryExternalIncentiveGaugesRequest): Uint8Array {
+    return QueryExternalIncentiveGaugesRequest.encode(message).finish();
+  },
+  toProtoMsg(message: QueryExternalIncentiveGaugesRequest): QueryExternalIncentiveGaugesRequestProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesRequest",
+      value: QueryExternalIncentiveGaugesRequest.encode(message).finish()
+    };
   }
 };
 function createBaseQueryExternalIncentiveGaugesResponse(): QueryExternalIncentiveGaugesResponse {
@@ -542,5 +1121,40 @@ export const QueryExternalIncentiveGaugesResponse = {
     const message = createBaseQueryExternalIncentiveGaugesResponse();
     message.data = object.data?.map(e => Gauge.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: QueryExternalIncentiveGaugesResponseAmino): QueryExternalIncentiveGaugesResponse {
+    const message = createBaseQueryExternalIncentiveGaugesResponse();
+    message.data = object.data?.map(e => Gauge.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: QueryExternalIncentiveGaugesResponse): QueryExternalIncentiveGaugesResponseAmino {
+    const obj: any = {};
+    if (message.data) {
+      obj.data = message.data.map(e => e ? Gauge.toAmino(e) : undefined);
+    } else {
+      obj.data = message.data;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: QueryExternalIncentiveGaugesResponseAminoMsg): QueryExternalIncentiveGaugesResponse {
+    return QueryExternalIncentiveGaugesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryExternalIncentiveGaugesResponse): QueryExternalIncentiveGaugesResponseAminoMsg {
+    return {
+      type: "osmosis/poolincentives/query-external-incentive-gauges-response",
+      value: QueryExternalIncentiveGaugesResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: QueryExternalIncentiveGaugesResponseProtoMsg): QueryExternalIncentiveGaugesResponse {
+    return QueryExternalIncentiveGaugesResponse.decode(message.value);
+  },
+  toProto(message: QueryExternalIncentiveGaugesResponse): Uint8Array {
+    return QueryExternalIncentiveGaugesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: QueryExternalIncentiveGaugesResponse): QueryExternalIncentiveGaugesResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.poolincentives.v1beta1.QueryExternalIncentiveGaugesResponse",
+      value: QueryExternalIncentiveGaugesResponse.encode(message).finish()
+    };
   }
 };

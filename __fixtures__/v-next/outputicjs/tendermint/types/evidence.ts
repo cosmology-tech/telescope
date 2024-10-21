@@ -1,11 +1,23 @@
-import { Vote, LightBlock } from "./types";
+import { Vote, VoteAmino, LightBlock, LightBlockAmino } from "./types";
 import { Timestamp } from "../../google/protobuf/timestamp";
-import { Validator } from "./validator";
+import { Validator, ValidatorAmino } from "./validator";
 import { BinaryReader, BinaryWriter } from "../../binary";
 import { DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
 export interface Evidence {
   duplicateVoteEvidence?: DuplicateVoteEvidence;
   lightClientAttackEvidence?: LightClientAttackEvidence;
+}
+export interface EvidenceProtoMsg {
+  typeUrl: "/tendermint.types.Evidence";
+  value: Uint8Array;
+}
+export interface EvidenceAmino {
+  duplicate_vote_evidence?: DuplicateVoteEvidenceAmino;
+  light_client_attack_evidence?: LightClientAttackEvidenceAmino;
+}
+export interface EvidenceAminoMsg {
+  type: "/tendermint.types.Evidence";
+  value: EvidenceAmino;
 }
 /** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
 export interface DuplicateVoteEvidence {
@@ -15,6 +27,22 @@ export interface DuplicateVoteEvidence {
   validatorPower: bigint;
   timestamp: Date;
 }
+export interface DuplicateVoteEvidenceProtoMsg {
+  typeUrl: "/tendermint.types.DuplicateVoteEvidence";
+  value: Uint8Array;
+}
+/** DuplicateVoteEvidence contains evidence of a validator signed two conflicting votes. */
+export interface DuplicateVoteEvidenceAmino {
+  vote_a?: VoteAmino;
+  vote_b?: VoteAmino;
+  total_voting_power: string;
+  validator_power: string;
+  timestamp: string;
+}
+export interface DuplicateVoteEvidenceAminoMsg {
+  type: "/tendermint.types.DuplicateVoteEvidence";
+  value: DuplicateVoteEvidenceAmino;
+}
 /** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
 export interface LightClientAttackEvidence {
   conflictingBlock?: LightBlock;
@@ -23,8 +51,35 @@ export interface LightClientAttackEvidence {
   totalVotingPower: bigint;
   timestamp: Date;
 }
+export interface LightClientAttackEvidenceProtoMsg {
+  typeUrl: "/tendermint.types.LightClientAttackEvidence";
+  value: Uint8Array;
+}
+/** LightClientAttackEvidence contains evidence of a set of validators attempting to mislead a light client. */
+export interface LightClientAttackEvidenceAmino {
+  conflicting_block?: LightBlockAmino;
+  common_height: string;
+  byzantine_validators: ValidatorAmino[];
+  total_voting_power: string;
+  timestamp: string;
+}
+export interface LightClientAttackEvidenceAminoMsg {
+  type: "/tendermint.types.LightClientAttackEvidence";
+  value: LightClientAttackEvidenceAmino;
+}
 export interface EvidenceList {
   evidence: Evidence[];
+}
+export interface EvidenceListProtoMsg {
+  typeUrl: "/tendermint.types.EvidenceList";
+  value: Uint8Array;
+}
+export interface EvidenceListAmino {
+  evidence: EvidenceAmino[];
+}
+export interface EvidenceListAminoMsg {
+  type: "/tendermint.types.EvidenceList";
+  value: EvidenceListAmino;
 }
 function createBaseEvidence(): Evidence {
   return {
@@ -68,6 +123,37 @@ export const Evidence = {
     message.duplicateVoteEvidence = object.duplicateVoteEvidence !== undefined && object.duplicateVoteEvidence !== null ? DuplicateVoteEvidence.fromPartial(object.duplicateVoteEvidence) : undefined;
     message.lightClientAttackEvidence = object.lightClientAttackEvidence !== undefined && object.lightClientAttackEvidence !== null ? LightClientAttackEvidence.fromPartial(object.lightClientAttackEvidence) : undefined;
     return message;
+  },
+  fromAmino(object: EvidenceAmino): Evidence {
+    const message = createBaseEvidence();
+    if (object.duplicate_vote_evidence !== undefined && object.duplicate_vote_evidence !== null) {
+      message.duplicateVoteEvidence = DuplicateVoteEvidence.fromAmino(object.duplicate_vote_evidence);
+    }
+    if (object.light_client_attack_evidence !== undefined && object.light_client_attack_evidence !== null) {
+      message.lightClientAttackEvidence = LightClientAttackEvidence.fromAmino(object.light_client_attack_evidence);
+    }
+    return message;
+  },
+  toAmino(message: Evidence): EvidenceAmino {
+    const obj: any = {};
+    obj.duplicate_vote_evidence = message.duplicateVoteEvidence ? DuplicateVoteEvidence.toAmino(message.duplicateVoteEvidence) : undefined;
+    obj.light_client_attack_evidence = message.lightClientAttackEvidence ? LightClientAttackEvidence.toAmino(message.lightClientAttackEvidence) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: EvidenceAminoMsg): Evidence {
+    return Evidence.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EvidenceProtoMsg): Evidence {
+    return Evidence.decode(message.value);
+  },
+  toProto(message: Evidence): Uint8Array {
+    return Evidence.encode(message).finish();
+  },
+  toProtoMsg(message: Evidence): EvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.Evidence",
+      value: Evidence.encode(message).finish()
+    };
   }
 };
 function createBaseDuplicateVoteEvidence(): DuplicateVoteEvidence {
@@ -136,6 +222,49 @@ export const DuplicateVoteEvidence = {
     message.validatorPower = object.validatorPower !== undefined && object.validatorPower !== null ? BigInt(object.validatorPower.toString()) : BigInt(0);
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+  fromAmino(object: DuplicateVoteEvidenceAmino): DuplicateVoteEvidence {
+    const message = createBaseDuplicateVoteEvidence();
+    if (object.vote_a !== undefined && object.vote_a !== null) {
+      message.voteA = Vote.fromAmino(object.vote_a);
+    }
+    if (object.vote_b !== undefined && object.vote_b !== null) {
+      message.voteB = Vote.fromAmino(object.vote_b);
+    }
+    if (object.total_voting_power !== undefined && object.total_voting_power !== null) {
+      message.totalVotingPower = BigInt(object.total_voting_power);
+    }
+    if (object.validator_power !== undefined && object.validator_power !== null) {
+      message.validatorPower = BigInt(object.validator_power);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    return message;
+  },
+  toAmino(message: DuplicateVoteEvidence): DuplicateVoteEvidenceAmino {
+    const obj: any = {};
+    obj.vote_a = message.voteA ? Vote.toAmino(message.voteA) : undefined;
+    obj.vote_b = message.voteB ? Vote.toAmino(message.voteB) : undefined;
+    obj.total_voting_power = message.totalVotingPower !== BigInt(0) ? message.totalVotingPower?.toString() : undefined;
+    obj.validator_power = message.validatorPower !== BigInt(0) ? message.validatorPower?.toString() : undefined;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: DuplicateVoteEvidenceAminoMsg): DuplicateVoteEvidence {
+    return DuplicateVoteEvidence.fromAmino(object.value);
+  },
+  fromProtoMsg(message: DuplicateVoteEvidenceProtoMsg): DuplicateVoteEvidence {
+    return DuplicateVoteEvidence.decode(message.value);
+  },
+  toProto(message: DuplicateVoteEvidence): Uint8Array {
+    return DuplicateVoteEvidence.encode(message).finish();
+  },
+  toProtoMsg(message: DuplicateVoteEvidence): DuplicateVoteEvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.DuplicateVoteEvidence",
+      value: DuplicateVoteEvidence.encode(message).finish()
+    };
   }
 };
 function createBaseLightClientAttackEvidence(): LightClientAttackEvidence {
@@ -204,6 +333,51 @@ export const LightClientAttackEvidence = {
     message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+  fromAmino(object: LightClientAttackEvidenceAmino): LightClientAttackEvidence {
+    const message = createBaseLightClientAttackEvidence();
+    if (object.conflicting_block !== undefined && object.conflicting_block !== null) {
+      message.conflictingBlock = LightBlock.fromAmino(object.conflicting_block);
+    }
+    if (object.common_height !== undefined && object.common_height !== null) {
+      message.commonHeight = BigInt(object.common_height);
+    }
+    message.byzantineValidators = object.byzantine_validators?.map(e => Validator.fromAmino(e)) || [];
+    if (object.total_voting_power !== undefined && object.total_voting_power !== null) {
+      message.totalVotingPower = BigInt(object.total_voting_power);
+    }
+    if (object.timestamp !== undefined && object.timestamp !== null) {
+      message.timestamp = fromTimestamp(Timestamp.fromAmino(object.timestamp));
+    }
+    return message;
+  },
+  toAmino(message: LightClientAttackEvidence): LightClientAttackEvidenceAmino {
+    const obj: any = {};
+    obj.conflicting_block = message.conflictingBlock ? LightBlock.toAmino(message.conflictingBlock) : undefined;
+    obj.common_height = message.commonHeight !== BigInt(0) ? message.commonHeight?.toString() : undefined;
+    if (message.byzantineValidators) {
+      obj.byzantine_validators = message.byzantineValidators.map(e => e ? Validator.toAmino(e) : undefined);
+    } else {
+      obj.byzantine_validators = message.byzantineValidators;
+    }
+    obj.total_voting_power = message.totalVotingPower !== BigInt(0) ? message.totalVotingPower?.toString() : undefined;
+    obj.timestamp = message.timestamp ? Timestamp.toAmino(toTimestamp(message.timestamp)) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: LightClientAttackEvidenceAminoMsg): LightClientAttackEvidence {
+    return LightClientAttackEvidence.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LightClientAttackEvidenceProtoMsg): LightClientAttackEvidence {
+    return LightClientAttackEvidence.decode(message.value);
+  },
+  toProto(message: LightClientAttackEvidence): Uint8Array {
+    return LightClientAttackEvidence.encode(message).finish();
+  },
+  toProtoMsg(message: LightClientAttackEvidence): LightClientAttackEvidenceProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.LightClientAttackEvidence",
+      value: LightClientAttackEvidence.encode(message).finish()
+    };
   }
 };
 function createBaseEvidenceList(): EvidenceList {
@@ -240,5 +414,34 @@ export const EvidenceList = {
     const message = createBaseEvidenceList();
     message.evidence = object.evidence?.map(e => Evidence.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: EvidenceListAmino): EvidenceList {
+    const message = createBaseEvidenceList();
+    message.evidence = object.evidence?.map(e => Evidence.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: EvidenceList): EvidenceListAmino {
+    const obj: any = {};
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Evidence.toAmino(e) : undefined);
+    } else {
+      obj.evidence = message.evidence;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: EvidenceListAminoMsg): EvidenceList {
+    return EvidenceList.fromAmino(object.value);
+  },
+  fromProtoMsg(message: EvidenceListProtoMsg): EvidenceList {
+    return EvidenceList.decode(message.value);
+  },
+  toProto(message: EvidenceList): Uint8Array {
+    return EvidenceList.encode(message).finish();
+  },
+  toProtoMsg(message: EvidenceList): EvidenceListProtoMsg {
+    return {
+      typeUrl: "/tendermint.types.EvidenceList",
+      value: EvidenceList.encode(message).finish()
+    };
   }
 };

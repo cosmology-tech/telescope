@@ -1,10 +1,23 @@
-import { Account, Payment } from "./types";
+import { Account, AccountAmino, Payment, PaymentAmino } from "./types";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisState {
   accounts: Account[];
   payments: Payment[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/akash.escrow.v1beta1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the basic genesis state used by escrow module */
+export interface GenesisStateAmino {
+  accounts: AccountAmino[];
+  payments: PaymentAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/akash.escrow.v1beta1.GenesisState";
+  value: GenesisStateAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -48,5 +61,40 @@ export const GenesisState = {
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
     message.payments = object.payments?.map(e => Payment.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    const message = createBaseGenesisState();
+    message.accounts = object.accounts?.map(e => Account.fromAmino(e)) || [];
+    message.payments = object.payments?.map(e => Payment.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toAmino(e) : undefined);
+    } else {
+      obj.accounts = message.accounts;
+    }
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? Payment.toAmino(e) : undefined);
+    } else {
+      obj.payments = message.payments;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/akash.escrow.v1beta1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };

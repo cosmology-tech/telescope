@@ -61,6 +61,7 @@ export enum BackendRule_PathTranslation {
   APPEND_PATH_TO_ADDRESS = 2,
   UNRECOGNIZED = -1,
 }
+export const BackendRule_PathTranslationAmino = BackendRule_PathTranslation;
 export function backendRule_PathTranslationFromJSON(object: any): BackendRule_PathTranslation {
   switch (object) {
     case 0:
@@ -99,6 +100,23 @@ export interface Backend {
    * **NOTE:** All service configuration rules follow "last one wins" order.
    */
   rules: BackendRule[];
+}
+export interface BackendProtoMsg {
+  typeUrl: "/google.api.Backend";
+  value: Uint8Array;
+}
+/** `Backend` defines the backend configuration for a service. */
+export interface BackendAmino {
+  /**
+   * A list of API backend rules that apply to individual API methods.
+   * 
+   * **NOTE:** All service configuration rules follow "last one wins" order.
+   */
+  rules: BackendRuleAmino[];
+}
+export interface BackendAminoMsg {
+  type: "/google.api.Backend";
+  value: BackendAmino;
 }
 /** A backend rule provides configuration for an individual API element. */
 export interface BackendRule {
@@ -185,6 +203,99 @@ export interface BackendRule {
    */
   protocol: string;
 }
+export interface BackendRuleProtoMsg {
+  typeUrl: "/google.api.BackendRule";
+  value: Uint8Array;
+}
+/** A backend rule provides configuration for an individual API element. */
+export interface BackendRuleAmino {
+  /**
+   * Selects the methods to which this rule applies.
+   * 
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
+   */
+  selector: string;
+  /**
+   * The address of the API backend.
+   * 
+   * The scheme is used to determine the backend protocol and security.
+   * The following schemes are accepted:
+   * 
+   *    SCHEME        PROTOCOL    SECURITY
+   *    http://       HTTP        None
+   *    https://      HTTP        TLS
+   *    grpc://       gRPC        None
+   *    grpcs://      gRPC        TLS
+   * 
+   * It is recommended to explicitly include a scheme. Leaving out the scheme
+   * may cause constrasting behaviors across platforms.
+   * 
+   * If the port is unspecified, the default is:
+   * - 80 for schemes without TLS
+   * - 443 for schemes with TLS
+   * 
+   * For HTTP backends, use [protocol][google.api.BackendRule.protocol]
+   * to specify the protocol version.
+   */
+  address: string;
+  /**
+   * The number of seconds to wait for a response from a request. The default
+   * varies based on the request protocol and deployment environment.
+   */
+  deadline: number;
+  /**
+   * Minimum deadline in seconds needed for this method. Calls having deadline
+   * value lower than this will be rejected.
+   */
+  min_deadline: number;
+  /**
+   * The number of seconds to wait for the completion of a long running
+   * operation. The default is no deadline.
+   */
+  operation_deadline: number;
+  path_translation: BackendRule_PathTranslation;
+  /**
+   * The JWT audience is used when generating a JWT ID token for the backend.
+   * This ID token will be added in the HTTP "authorization" header, and sent
+   * to the backend.
+   */
+  jwt_audience?: string;
+  /**
+   * When disable_auth is true, a JWT ID token won't be generated and the
+   * original "Authorization" HTTP header will be preserved. If the header is
+   * used to carry the original token and is expected by the backend, this
+   * field must be set to true to preserve the header.
+   */
+  disable_auth?: boolean;
+  /**
+   * The protocol used for sending a request to the backend.
+   * The supported values are "http/1.1" and "h2".
+   * 
+   * The default value is inferred from the scheme in the
+   * [address][google.api.BackendRule.address] field:
+   * 
+   *    SCHEME        PROTOCOL
+   *    http://       http/1.1
+   *    https://      http/1.1
+   *    grpc://       h2
+   *    grpcs://      h2
+   * 
+   * For secure HTTP backends (https://) that support HTTP/2, set this field
+   * to "h2" for improved performance.
+   * 
+   * Configuring this field to non-default values is only supported for secure
+   * HTTP backends. This field will be ignored for all other backends.
+   * 
+   * See
+   * https://www.iana.org/assignments/tls-extensiontype-values/tls-extensiontype-values.xhtml#alpn-protocol-ids
+   * for more details on the supported values.
+   */
+  protocol: string;
+}
+export interface BackendRuleAminoMsg {
+  type: "/google.api.BackendRule";
+  value: BackendRuleAmino;
+}
 function createBaseBackend(): Backend {
   return {
     rules: []
@@ -219,6 +330,35 @@ export const Backend = {
     const message = createBaseBackend();
     message.rules = object.rules?.map(e => BackendRule.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: BackendAmino): Backend {
+    const message = createBaseBackend();
+    message.rules = object.rules?.map(e => BackendRule.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Backend): BackendAmino {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? BackendRule.toAmino(e) : undefined);
+    } else {
+      obj.rules = message.rules;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: BackendAminoMsg): Backend {
+    return Backend.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BackendProtoMsg): Backend {
+    return Backend.decode(message.value);
+  },
+  toProto(message: Backend): Uint8Array {
+    return Backend.encode(message).finish();
+  },
+  toProtoMsg(message: Backend): BackendProtoMsg {
+    return {
+      typeUrl: "/google.api.Backend",
+      value: Backend.encode(message).finish()
+    };
   }
 };
 function createBaseBackendRule(): BackendRule {
@@ -319,5 +459,64 @@ export const BackendRule = {
     message.disableAuth = object.disableAuth ?? undefined;
     message.protocol = object.protocol ?? "";
     return message;
+  },
+  fromAmino(object: BackendRuleAmino): BackendRule {
+    const message = createBaseBackendRule();
+    if (object.selector !== undefined && object.selector !== null) {
+      message.selector = object.selector;
+    }
+    if (object.address !== undefined && object.address !== null) {
+      message.address = object.address;
+    }
+    if (object.deadline !== undefined && object.deadline !== null) {
+      message.deadline = object.deadline;
+    }
+    if (object.min_deadline !== undefined && object.min_deadline !== null) {
+      message.minDeadline = object.min_deadline;
+    }
+    if (object.operation_deadline !== undefined && object.operation_deadline !== null) {
+      message.operationDeadline = object.operation_deadline;
+    }
+    if (object.path_translation !== undefined && object.path_translation !== null) {
+      message.pathTranslation = object.path_translation;
+    }
+    if (object.jwt_audience !== undefined && object.jwt_audience !== null) {
+      message.jwtAudience = object.jwt_audience;
+    }
+    if (object.disable_auth !== undefined && object.disable_auth !== null) {
+      message.disableAuth = object.disable_auth;
+    }
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = object.protocol;
+    }
+    return message;
+  },
+  toAmino(message: BackendRule): BackendRuleAmino {
+    const obj: any = {};
+    obj.selector = message.selector === "" ? undefined : message.selector;
+    obj.address = message.address === "" ? undefined : message.address;
+    obj.deadline = message.deadline === 0 ? undefined : message.deadline;
+    obj.min_deadline = message.minDeadline === 0 ? undefined : message.minDeadline;
+    obj.operation_deadline = message.operationDeadline === 0 ? undefined : message.operationDeadline;
+    obj.path_translation = message.pathTranslation === 0 ? undefined : message.pathTranslation;
+    obj.jwt_audience = message.jwtAudience === null ? undefined : message.jwtAudience;
+    obj.disable_auth = message.disableAuth === null ? undefined : message.disableAuth;
+    obj.protocol = message.protocol === "" ? undefined : message.protocol;
+    return obj;
+  },
+  fromAminoMsg(object: BackendRuleAminoMsg): BackendRule {
+    return BackendRule.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BackendRuleProtoMsg): BackendRule {
+    return BackendRule.decode(message.value);
+  },
+  toProto(message: BackendRule): Uint8Array {
+    return BackendRule.encode(message).finish();
+  },
+  toProtoMsg(message: BackendRule): BackendRuleProtoMsg {
+    return {
+      typeUrl: "/google.api.BackendRule",
+      value: BackendRule.encode(message).finish()
+    };
   }
 };

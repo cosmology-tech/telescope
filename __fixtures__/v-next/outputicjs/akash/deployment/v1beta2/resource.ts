@@ -1,5 +1,5 @@
-import { ResourceUnits } from "../../base/v1beta2/resourceunits";
-import { DecCoin } from "../../../cosmos/base/v1beta1/coin";
+import { ResourceUnits, ResourceUnitsAmino } from "../../base/v1beta2/resourceunits";
+import { DecCoin, DecCoinAmino } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** Resource stores unit, total count and price of resource */
@@ -7,6 +7,20 @@ export interface Resource {
   resources: ResourceUnits;
   count: number;
   price: DecCoin;
+}
+export interface ResourceProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.Resource";
+  value: Uint8Array;
+}
+/** Resource stores unit, total count and price of resource */
+export interface ResourceAmino {
+  resources: ResourceUnitsAmino;
+  count: number;
+  price: DecCoinAmino;
+}
+export interface ResourceAminoMsg {
+  type: "/akash.deployment.v1beta2.Resource";
+  value: ResourceAmino;
 }
 function createBaseResource(): Resource {
   return {
@@ -58,5 +72,40 @@ export const Resource = {
     message.count = object.count ?? 0;
     message.price = object.price !== undefined && object.price !== null ? DecCoin.fromPartial(object.price) : undefined;
     return message;
+  },
+  fromAmino(object: ResourceAmino): Resource {
+    const message = createBaseResource();
+    if (object.resources !== undefined && object.resources !== null) {
+      message.resources = ResourceUnits.fromAmino(object.resources);
+    }
+    if (object.count !== undefined && object.count !== null) {
+      message.count = object.count;
+    }
+    if (object.price !== undefined && object.price !== null) {
+      message.price = DecCoin.fromAmino(object.price);
+    }
+    return message;
+  },
+  toAmino(message: Resource): ResourceAmino {
+    const obj: any = {};
+    obj.resources = message.resources ? ResourceUnits.toAmino(message.resources) : ResourceUnits.toAmino(ResourceUnits.fromPartial({}));
+    obj.count = message.count ?? 0;
+    obj.price = message.price ? DecCoin.toAmino(message.price) : DecCoin.toAmino(DecCoin.fromPartial({}));
+    return obj;
+  },
+  fromAminoMsg(object: ResourceAminoMsg): Resource {
+    return Resource.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ResourceProtoMsg): Resource {
+    return Resource.decode(message.value);
+  },
+  toProto(message: Resource): Uint8Array {
+    return Resource.encode(message).finish();
+  },
+  toProtoMsg(message: Resource): ResourceProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.Resource",
+      value: Resource.encode(message).finish()
+    };
   }
 };

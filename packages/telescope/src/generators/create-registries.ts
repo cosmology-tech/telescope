@@ -8,7 +8,7 @@ export const plugin = (
     bundler: Bundler
 ) => {
 
-    if (!builder.options.aminoEncoding.enabled) {
+    if (!builder.options.aminoEncoding?.enabled || !builder.options.rpcClients?.enabled) {
         return;
     }
 

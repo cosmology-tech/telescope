@@ -393,6 +393,7 @@ export enum ErrorReason {
   ACCESS_TOKEN_TYPE_UNSUPPORTED = 19,
   UNRECOGNIZED = -1,
 }
+export const ErrorReasonAmino = ErrorReason;
 export function errorReasonFromJSON(object: any): ErrorReason {
   switch (object) {
     case 0:

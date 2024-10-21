@@ -1,7 +1,7 @@
 import { Timestamp } from "../../../protobuf/timestamp";
-import { MetricValueSet } from "./metric_value";
-import { LogEntry } from "./log_entry";
-import { Any } from "../../../protobuf/any";
+import { MetricValueSet, MetricValueSetAmino } from "./metric_value";
+import { LogEntry, LogEntryAmino } from "./log_entry";
+import { Any, AnyAmino } from "../../../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial, toTimestamp, fromTimestamp } from "../../../../helpers";
 /** Defines the importance of the data contained in the operation. */
@@ -19,6 +19,7 @@ export enum Operation_Importance {
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
+export const Operation_ImportanceAmino = Operation_Importance;
 export function operation_ImportanceFromJSON(object: any): Operation_Importance {
   switch (object) {
     case 0:
@@ -47,6 +48,18 @@ export function operation_ImportanceToJSON(object: Operation_Importance): string
 export interface Operation_LabelsEntry {
   key: string;
   value: string;
+}
+export interface Operation_LabelsEntryProtoMsg {
+  typeUrl: string;
+  value: Uint8Array;
+}
+export interface Operation_LabelsEntryAmino {
+  key: string;
+  value: string;
+}
+export interface Operation_LabelsEntryAminoMsg {
+  type: string;
+  value: Operation_LabelsEntryAmino;
 }
 /** Represents information regarding an operation. */
 export interface Operation {
@@ -130,6 +143,96 @@ export interface Operation {
   /** Unimplemented. */
   extensions: Any[];
 }
+export interface OperationProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.Operation";
+  value: Uint8Array;
+}
+/** Represents information regarding an operation. */
+export interface OperationAmino {
+  /**
+   * Identity of the operation. This must be unique within the scope of the
+   * service that generated the operation. If the service calls
+   * Check() and Report() on the same operation, the two calls should carry
+   * the same id.
+   * 
+   * UUID version 4 is recommended, though not required.
+   * In scenarios where an operation is computed from existing information
+   * and an idempotent id is desirable for deduplication purpose, UUID version 5
+   * is recommended. See RFC 4122 for details.
+   */
+  operation_id: string;
+  /** Fully qualified name of the operation. Reserved for future use. */
+  operation_name: string;
+  /**
+   * Identity of the consumer who is using the service.
+   * This field should be filled in for the operations initiated by a
+   * consumer, but not for service-initiated operations that are
+   * not related to a specific consumer.
+   * 
+   * - This can be in one of the following formats:
+   *     - project:PROJECT_ID,
+   *     - project`_`number:PROJECT_NUMBER,
+   *     - projects/PROJECT_ID or PROJECT_NUMBER,
+   *     - folders/FOLDER_NUMBER,
+   *     - organizations/ORGANIZATION_NUMBER,
+   *     - api`_`key:API_KEY.
+   */
+  consumer_id: string;
+  /** Required. Start time of the operation. */
+  start_time?: string;
+  /**
+   * End time of the operation.
+   * Required when the operation is used in
+   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
+   * but optional when the operation is used in
+   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
+   */
+  end_time?: string;
+  /**
+   * Labels describing the operation. Only the following labels are allowed:
+   * 
+   * - Labels describing monitored resources as defined in
+   *   the service configuration.
+   * - Default labels of metric values. When specified, labels defined in the
+   *   metric value override these default.
+   * - The following labels defined by Google Cloud Platform:
+   *     - `cloud.googleapis.com/location` describing the location where the
+   *        operation happened,
+   *     - `servicecontrol.googleapis.com/user_agent` describing the user agent
+   *        of the API request,
+   *     - `servicecontrol.googleapis.com/service_agent` describing the service
+   *        used to handle the API request (e.g. ESP),
+   *     - `servicecontrol.googleapis.com/platform` describing the platform
+   *        where the API is served, such as App Engine, Compute Engine, or
+   *        Kubernetes Engine.
+   */
+  labels: {
+    [key: string]: string;
+  };
+  /**
+   * Represents information about this operation. Each MetricValueSet
+   * corresponds to a metric defined in the service configuration.
+   * The data type used in the MetricValueSet must agree with
+   * the data type specified in the metric definition.
+   * 
+   * Within a single operation, it is not allowed to have more than one
+   * MetricValue instances that have the same metric names and identical
+   * label value combinations. If a request has such duplicated MetricValue
+   * instances, the entire request is rejected with
+   * an invalid argument error.
+   */
+  metric_value_sets: MetricValueSetAmino[];
+  /** Represents information to be logged. */
+  log_entries: LogEntryAmino[];
+  /** DO NOT USE. This is an experimental field. */
+  importance: Operation_Importance;
+  /** Unimplemented. */
+  extensions: AnyAmino[];
+}
+export interface OperationAminoMsg {
+  type: "/google.api.servicecontrol.v1.Operation";
+  value: OperationAmino;
+}
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
     key: "",
@@ -171,6 +274,31 @@ export const Operation_LabelsEntry = {
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromAmino(object: Operation_LabelsEntryAmino): Operation_LabelsEntry {
+    const message = createBaseOperation_LabelsEntry();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = object.value;
+    }
+    return message;
+  },
+  toAmino(message: Operation_LabelsEntry): Operation_LabelsEntryAmino {
+    const obj: any = {};
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value = message.value === "" ? undefined : message.value;
+    return obj;
+  },
+  fromAminoMsg(object: Operation_LabelsEntryAminoMsg): Operation_LabelsEntry {
+    return Operation_LabelsEntry.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Operation_LabelsEntryProtoMsg): Operation_LabelsEntry {
+    return Operation_LabelsEntry.decode(message.value);
+  },
+  toProto(message: Operation_LabelsEntry): Uint8Array {
+    return Operation_LabelsEntry.encode(message).finish();
   }
 };
 function createBaseOperation(): Operation {
@@ -292,5 +420,84 @@ export const Operation = {
     message.importance = object.importance ?? 0;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: OperationAmino): Operation {
+    const message = createBaseOperation();
+    if (object.operation_id !== undefined && object.operation_id !== null) {
+      message.operationId = object.operation_id;
+    }
+    if (object.operation_name !== undefined && object.operation_name !== null) {
+      message.operationName = object.operation_name;
+    }
+    if (object.consumer_id !== undefined && object.consumer_id !== null) {
+      message.consumerId = object.consumer_id;
+    }
+    if (object.start_time !== undefined && object.start_time !== null) {
+      message.startTime = fromTimestamp(Timestamp.fromAmino(object.start_time));
+    }
+    if (object.end_time !== undefined && object.end_time !== null) {
+      message.endTime = fromTimestamp(Timestamp.fromAmino(object.end_time));
+    }
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = String(value);
+      }
+      return acc;
+    }, {});
+    message.metricValueSets = object.metric_value_sets?.map(e => MetricValueSet.fromAmino(e)) || [];
+    message.logEntries = object.log_entries?.map(e => LogEntry.fromAmino(e)) || [];
+    if (object.importance !== undefined && object.importance !== null) {
+      message.importance = object.importance;
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Operation): OperationAmino {
+    const obj: any = {};
+    obj.operation_id = message.operationId === "" ? undefined : message.operationId;
+    obj.operation_name = message.operationName === "" ? undefined : message.operationName;
+    obj.consumer_id = message.consumerId === "" ? undefined : message.consumerId;
+    obj.start_time = message.startTime ? Timestamp.toAmino(toTimestamp(message.startTime)) : undefined;
+    obj.end_time = message.endTime ? Timestamp.toAmino(toTimestamp(message.endTime)) : undefined;
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    if (message.metricValueSets) {
+      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toAmino(e) : undefined);
+    } else {
+      obj.metric_value_sets = message.metricValueSets;
+    }
+    if (message.logEntries) {
+      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toAmino(e) : undefined);
+    } else {
+      obj.log_entries = message.logEntries;
+    }
+    obj.importance = message.importance === 0 ? undefined : message.importance;
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.extensions = message.extensions;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: OperationAminoMsg): Operation {
+    return Operation.fromAmino(object.value);
+  },
+  fromProtoMsg(message: OperationProtoMsg): Operation {
+    return Operation.decode(message.value);
+  },
+  toProto(message: Operation): Uint8Array {
+    return Operation.encode(message).finish();
+  },
+  toProtoMsg(message: Operation): OperationProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.Operation",
+      value: Operation.encode(message).finish()
+    };
   }
 };

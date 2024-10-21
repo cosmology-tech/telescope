@@ -1,4 +1,4 @@
-import { DevFeeInfo } from "./fees";
+import { DevFeeInfo, DevFeeInfoAmino } from "./fees";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** GenesisState defines the module's genesis state. */
@@ -7,6 +7,21 @@ export interface GenesisState {
   params: Params;
   /** active registered contracts */
   devFeeInfos: DevFeeInfo[];
+}
+export interface GenesisStateProtoMsg {
+  typeUrl: "/evmos.fees.v1.GenesisState";
+  value: Uint8Array;
+}
+/** GenesisState defines the module's genesis state. */
+export interface GenesisStateAmino {
+  /** module parameters */
+  params: ParamsAmino;
+  /** active registered contracts */
+  dev_fee_infos: DevFeeInfoAmino[];
+}
+export interface GenesisStateAminoMsg {
+  type: "/evmos.fees.v1.GenesisState";
+  value: GenesisStateAmino;
 }
 /** Params defines the fees module params */
 export interface Params {
@@ -29,6 +44,36 @@ export interface Params {
   addrDerivationCostCreate: bigint;
   /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
   minGasPrice: string;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/evmos.fees.v1.Params";
+  value: Uint8Array;
+}
+/** Params defines the fees module params */
+export interface ParamsAmino {
+  /** parameter to enable fees */
+  enable_fees: boolean;
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to the registered contract owner
+   */
+  developer_shares: string;
+  /**
+   * developer_shares defines the proportion of the transaction fees to be
+   * distributed to validators
+   */
+  validator_shares: string;
+  /**
+   * addr_derivation_cost_create defines the cost of address derivation for
+   * verifying the contract deployer at fee registration
+   */
+  addr_derivation_cost_create: string;
+  /** min_gas_price defines the minimum gas price value for cosmos and eth transactions */
+  min_gas_price: string;
+}
+export interface ParamsAminoMsg {
+  type: "/evmos.fees.v1.Params";
+  value: ParamsAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -72,6 +117,39 @@ export const GenesisState = {
     message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
     message.devFeeInfos = object.devFeeInfos?.map(e => DevFeeInfo.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: GenesisStateAmino): GenesisState {
+    const message = createBaseGenesisState();
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromAmino(object.params);
+    }
+    message.devFeeInfos = object.dev_fee_infos?.map(e => DevFeeInfo.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: GenesisState): GenesisStateAmino {
+    const obj: any = {};
+    obj.params = message.params ? Params.toAmino(message.params) : undefined;
+    if (message.devFeeInfos) {
+      obj.dev_fee_infos = message.devFeeInfos.map(e => e ? DevFeeInfo.toAmino(e) : undefined);
+    } else {
+      obj.dev_fee_infos = message.devFeeInfos;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
+    return GenesisState.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
+    return GenesisState.decode(message.value);
+  },
+  toProto(message: GenesisState): Uint8Array {
+    return GenesisState.encode(message).finish();
+  },
+  toProtoMsg(message: GenesisState): GenesisStateProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.GenesisState",
+      value: GenesisState.encode(message).finish()
+    };
   }
 };
 function createBaseParams(): Params {
@@ -140,5 +218,48 @@ export const Params = {
     message.addrDerivationCostCreate = object.addrDerivationCostCreate !== undefined && object.addrDerivationCostCreate !== null ? BigInt(object.addrDerivationCostCreate.toString()) : BigInt(0);
     message.minGasPrice = object.minGasPrice ?? "";
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    const message = createBaseParams();
+    if (object.enable_fees !== undefined && object.enable_fees !== null) {
+      message.enableFees = object.enable_fees;
+    }
+    if (object.developer_shares !== undefined && object.developer_shares !== null) {
+      message.developerShares = object.developer_shares;
+    }
+    if (object.validator_shares !== undefined && object.validator_shares !== null) {
+      message.validatorShares = object.validator_shares;
+    }
+    if (object.addr_derivation_cost_create !== undefined && object.addr_derivation_cost_create !== null) {
+      message.addrDerivationCostCreate = BigInt(object.addr_derivation_cost_create);
+    }
+    if (object.min_gas_price !== undefined && object.min_gas_price !== null) {
+      message.minGasPrice = object.min_gas_price;
+    }
+    return message;
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.enable_fees = message.enableFees === false ? undefined : message.enableFees;
+    obj.developer_shares = message.developerShares === "" ? undefined : message.developerShares;
+    obj.validator_shares = message.validatorShares === "" ? undefined : message.validatorShares;
+    obj.addr_derivation_cost_create = message.addrDerivationCostCreate !== BigInt(0) ? message.addrDerivationCostCreate?.toString() : undefined;
+    obj.min_gas_price = message.minGasPrice === "" ? undefined : message.minGasPrice;
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

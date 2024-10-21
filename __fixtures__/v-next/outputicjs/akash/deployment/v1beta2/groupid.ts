@@ -6,6 +6,20 @@ export interface GroupID {
   dseq: bigint;
   gseq: number;
 }
+export interface GroupIDProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupID";
+  value: Uint8Array;
+}
+/** GroupID stores owner, deployment sequence number and group sequence number */
+export interface GroupIDAmino {
+  owner: string;
+  dseq: string;
+  gseq: number;
+}
+export interface GroupIDAminoMsg {
+  type: "/akash.deployment.v1beta2.GroupID";
+  value: GroupIDAmino;
+}
 function createBaseGroupID(): GroupID {
   return {
     owner: "",
@@ -56,5 +70,40 @@ export const GroupID = {
     message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
     message.gseq = object.gseq ?? 0;
     return message;
+  },
+  fromAmino(object: GroupIDAmino): GroupID {
+    const message = createBaseGroupID();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq);
+    }
+    if (object.gseq !== undefined && object.gseq !== null) {
+      message.gseq = object.gseq;
+    }
+    return message;
+  },
+  toAmino(message: GroupID): GroupIDAmino {
+    const obj: any = {};
+    obj.owner = message.owner ?? "";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
+    obj.gseq = message.gseq ?? 0;
+    return obj;
+  },
+  fromAminoMsg(object: GroupIDAminoMsg): GroupID {
+    return GroupID.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GroupIDProtoMsg): GroupID {
+    return GroupID.decode(message.value);
+  },
+  toProto(message: GroupID): Uint8Array {
+    return GroupID.encode(message).finish();
+  },
+  toProtoMsg(message: GroupID): GroupIDProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupID",
+      value: GroupID.encode(message).finish()
+    };
   }
 };

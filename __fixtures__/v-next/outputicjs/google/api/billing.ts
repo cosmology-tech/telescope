@@ -43,6 +43,57 @@ export interface Billing {
    */
   consumerDestinations: Billing_BillingDestination[];
 }
+export interface BillingProtoMsg {
+  typeUrl: "/google.api.Billing";
+  value: Uint8Array;
+}
+/**
+ * Billing related configuration of the service.
+ * 
+ * The following example shows how to configure monitored resources and metrics
+ * for billing, `consumer_destinations` is the only supported destination and
+ * the monitored resources need at least one label key
+ * `cloud.googleapis.com/location` to indicate the location of the billing
+ * usage, using different monitored resources between monitoring and billing is
+ * recommended so they can be evolved independently:
+ * 
+ * 
+ *     monitored_resources:
+ *     - type: library.googleapis.com/billing_branch
+ *       labels:
+ *       - key: cloud.googleapis.com/location
+ *         description: |
+ *           Predefined label to support billing location restriction.
+ *       - key: city
+ *         description: |
+ *           Custom label to define the city where the library branch is located
+ *           in.
+ *       - key: name
+ *         description: Custom label to define the name of the library branch.
+ *     metrics:
+ *     - name: library.googleapis.com/book/borrowed_count
+ *       metric_kind: DELTA
+ *       value_type: INT64
+ *       unit: "1"
+ *     billing:
+ *       consumer_destinations:
+ *       - monitored_resource: library.googleapis.com/billing_branch
+ *         metrics:
+ *         - library.googleapis.com/book/borrowed_count
+ */
+export interface BillingAmino {
+  /**
+   * Billing configurations for sending metrics to the consumer project.
+   * There can be multiple consumer destinations per service, each one must have
+   * a different monitored resource type. A metric can be used in at most
+   * one consumer destination.
+   */
+  consumer_destinations: Billing_BillingDestinationAmino[];
+}
+export interface BillingAminoMsg {
+  type: "/google.api.Billing";
+  value: BillingAmino;
+}
 /**
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
@@ -58,6 +109,30 @@ export interface Billing_BillingDestination {
    * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
    */
   metrics: string[];
+}
+export interface Billing_BillingDestinationProtoMsg {
+  typeUrl: "/google.api.BillingDestination";
+  value: Uint8Array;
+}
+/**
+ * Configuration of a specific billing destination (Currently only support
+ * bill against consumer project).
+ */
+export interface Billing_BillingDestinationAmino {
+  /**
+   * The monitored resource type. The type must be defined in
+   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
+   */
+  monitored_resource: string;
+  /**
+   * Names of the metrics to report to this billing destination.
+   * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
+   */
+  metrics: string[];
+}
+export interface Billing_BillingDestinationAminoMsg {
+  type: "/google.api.BillingDestination";
+  value: Billing_BillingDestinationAmino;
 }
 function createBaseBilling(): Billing {
   return {
@@ -93,6 +168,35 @@ export const Billing = {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: BillingAmino): Billing {
+    const message = createBaseBilling();
+    message.consumerDestinations = object.consumer_destinations?.map(e => Billing_BillingDestination.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Billing): BillingAmino {
+    const obj: any = {};
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toAmino(e) : undefined);
+    } else {
+      obj.consumer_destinations = message.consumerDestinations;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: BillingAminoMsg): Billing {
+    return Billing.fromAmino(object.value);
+  },
+  fromProtoMsg(message: BillingProtoMsg): Billing {
+    return Billing.decode(message.value);
+  },
+  toProto(message: Billing): Uint8Array {
+    return Billing.encode(message).finish();
+  },
+  toProtoMsg(message: Billing): BillingProtoMsg {
+    return {
+      typeUrl: "/google.api.Billing",
+      value: Billing.encode(message).finish()
+    };
   }
 };
 function createBaseBilling_BillingDestination(): Billing_BillingDestination {
@@ -137,5 +241,38 @@ export const Billing_BillingDestination = {
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
+    const message = createBaseBilling_BillingDestination();
+    if (object.monitored_resource !== undefined && object.monitored_resource !== null) {
+      message.monitoredResource = object.monitored_resource;
+    }
+    message.metrics = object.metrics?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: Billing_BillingDestination): Billing_BillingDestinationAmino {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource === "" ? undefined : message.monitoredResource;
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = message.metrics;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: Billing_BillingDestinationAminoMsg): Billing_BillingDestination {
+    return Billing_BillingDestination.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Billing_BillingDestinationProtoMsg): Billing_BillingDestination {
+    return Billing_BillingDestination.decode(message.value);
+  },
+  toProto(message: Billing_BillingDestination): Uint8Array {
+    return Billing_BillingDestination.encode(message).finish();
+  },
+  toProtoMsg(message: Billing_BillingDestination): Billing_BillingDestinationProtoMsg {
+    return {
+      typeUrl: "/google.api.BillingDestination",
+      value: Billing_BillingDestination.encode(message).finish()
+    };
   }
 };
