@@ -156,7 +156,7 @@ function createBaseEvalRequest_BindingsEntry(): EvalRequest_BindingsEntry {
 }
 export const EvalRequest_BindingsEntry = {
   encode(message: EvalRequest_BindingsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key && message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -237,7 +237,7 @@ function createBaseEvalRequest_RefsEntry(): EvalRequest_RefsEntry {
 }
 export const EvalRequest_RefsEntry = {
   encode(message: EvalRequest_RefsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key && message.key !== "") {
       writer.uint32(10).string(message.key);
     }
     if (message.value !== undefined) {
@@ -340,10 +340,10 @@ export const EvalRequest = {
         value
       }, writer.uint32(18).fork()).ldelim();
     });
-    if (message.testNum !== 0) {
+    if (message.testNum && message.testNum !== 0) {
       writer.uint32(24).uint32(message.testNum);
     }
-    if (message.testString !== "") {
+    if (message.testString && message.testString !== "") {
       writer.uint32(34).string(message.testString);
     }
     if (message.testBool === true) {
@@ -609,7 +609,7 @@ function createBaseAccessConfig(): AccessConfig {
 export const AccessConfig = {
   typeUrl: "/misc.AccessConfig",
   encode(message: AccessConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender && message.sender !== "") {
       writer.uint32(10).string(message.sender);
     }
     return writer;
@@ -682,7 +682,7 @@ function createBaseGenericAuthorization(): GenericAuthorization {
 export const GenericAuthorization = {
   typeUrl: "/misc.GenericAuthorization",
   encode(message: GenericAuthorization, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.msg !== "") {
+    if (message.msg && message.msg !== "") {
       writer.uint32(10).string(message.msg);
     }
     return writer;

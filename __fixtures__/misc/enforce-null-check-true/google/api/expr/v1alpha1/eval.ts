@@ -113,7 +113,7 @@ function createBaseIdRef(): IdRef {
 export const IdRef = {
   typeUrl: "/google.api.expr.v1alpha1.IdRef",
   encode(message: IdRef, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== 0) {
+    if (message.id && message.id !== 0) {
       writer.uint32(8).int32(message.id);
     }
     return writer;

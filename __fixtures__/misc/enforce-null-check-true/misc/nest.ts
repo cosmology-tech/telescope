@@ -30,7 +30,7 @@ function createBaseTestNest(): TestNest {
 export const TestNest = {
   typeUrl: "/misc.TestNest",
   encode(message: TestNest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.test !== "") {
+    if (message.test && message.test !== "") {
       writer.uint32(10).string(message.test);
     }
     return writer;
@@ -103,7 +103,7 @@ function createBaseTestNest_Graph(): TestNest_Graph {
 export const TestNest_Graph = {
   typeUrl: "/misc.Graph",
   encode(message: TestNest_Graph, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name && message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
