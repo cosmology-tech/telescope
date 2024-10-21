@@ -33,12 +33,12 @@ const options: TelescopeOptions = {
       encode: true,
       decode: true,
       fromPartial: true,
-      toAmino: true,
-      fromAmino: true,
+      toAmino: false,
+      fromAmino: false,
       fromProto: false,
       toProto: false,
     },
-    addTypeUrlToDecoders: true,
+    addTypeUrlToDecoders: false,
     addTypeUrlToObjects: true,
     addAminoTypeToObjects: true,
     typingsFormat: {
@@ -64,33 +64,31 @@ const options: TelescopeOptions = {
     enabled: false,
   },
   rpcClients: {
-    enabled: true,
+    enabled: false,
     inline: false,
     extensions: false,
     camelCase: true,
     enabledServices: [
-      "Msg",
-      "Query",
-      "Service",
-      "ReflectionService",
-      "ABCIApplication",
+      // 'Msg',
+      'Query',
+      // 'Service',
+      // 'ReflectionService',
+      // 'ABCIApplication'
     ],
-    serviceImplement: {
-      Msg: {
-        type: "Tx",
-      },
-      Query: {
-        type: "Query",
-      },
-    },
   },
+
+  helperFuncCreators: {
+    enabled: true,
+    genCustomHooks: true,
+  },
+
   interfaces: {
     enabled: true,
     useGlobalDecoderRegistry: true,
     useUnionTypes: true,
   },
   aminoEncoding: {
-    enabled: true,
+    enabled: false,
     useLegacyInlineEncoding: false,
     disableMsgTypes: false,
     useProtoOptionality: true,
