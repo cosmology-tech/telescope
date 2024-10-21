@@ -253,7 +253,7 @@ export const GenesisState = {
     } else {
       obj.pools = message.pools;
     }
-    obj.next_pool_number = message.nextPoolNumber !== BigInt(0) ? (message.nextPoolNumber?.toString)() : undefined;
+    obj.next_pool_number = message.nextPoolNumber !== BigInt(0) ? message.nextPoolNumber?.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     return obj;
   },

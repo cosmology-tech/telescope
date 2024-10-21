@@ -314,10 +314,10 @@ function createBaseEncodingTestForDontOmit(): EncodingTestForDontOmit {
 export const EncodingTestForDontOmit = {
   typeUrl: "/misc.EncodingTestForDontOmit",
   encode(message: EncodingTestForDontOmit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.str !== "") {
+    if (message.str && message.str !== "") {
       writer.uint32(10).string(message.str);
     }
-    if (message.dOStr !== "") {
+    if (message.dOStr && message.dOStr !== "") {
       writer.uint32(18).string(message.dOStr);
     }
     if (message.b === true) {
@@ -326,16 +326,16 @@ export const EncodingTestForDontOmit = {
     if (message.dOB === true) {
       writer.uint32(32).bool(message.dOB);
     }
-    if (message.num !== 0) {
+    if (message.num && message.num !== 0) {
       writer.uint32(40).int32(message.num);
     }
-    if (message.dONum !== 0) {
+    if (message.dONum && message.dONum !== 0) {
       writer.uint32(48).int32(message.dONum);
     }
-    if (message.big !== BigInt(0)) {
+    if (message.big && message.big !== BigInt(0)) {
       writer.uint32(56).int64(message.big);
     }
-    if (message.dOBig !== BigInt(0)) {
+    if (message.dOBig && message.dOBig !== BigInt(0)) {
       writer.uint32(64).int64(message.dOBig);
     }
     if (message.proto !== undefined) {
@@ -458,10 +458,10 @@ export const EncodingTestForDontOmit = {
     for (const v of message.dOAuths) {
       Any.encode(v!, writer.uint32(370).fork()).ldelim();
     }
-    if (message.dec !== "") {
+    if (message.dec && message.dec !== "") {
       writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
     }
-    if (message.dODec !== "") {
+    if (message.dODec && message.dODec !== "") {
       writer.uint32(386).string(Decimal.fromUserInput(message.dODec, 18).atomics);
     }
     for (const v of message.decs) {
@@ -1232,10 +1232,10 @@ function createBaseEncodingTestForOmit(): EncodingTestForOmit {
 export const EncodingTestForOmit = {
   typeUrl: "/misc.EncodingTestForOmit",
   encode(message: EncodingTestForOmit, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.str !== "") {
+    if (message.str && message.str !== "") {
       writer.uint32(10).string(message.str);
     }
-    if (message.oStr !== "") {
+    if (message.oStr && message.oStr !== "") {
       writer.uint32(18).string(message.oStr);
     }
     if (message.b === true) {
@@ -1244,16 +1244,16 @@ export const EncodingTestForOmit = {
     if (message.oB === true) {
       writer.uint32(32).bool(message.oB);
     }
-    if (message.num !== 0) {
+    if (message.num && message.num !== 0) {
       writer.uint32(40).int32(message.num);
     }
-    if (message.oNum !== 0) {
+    if (message.oNum && message.oNum !== 0) {
       writer.uint32(48).int32(message.oNum);
     }
-    if (message.big !== BigInt(0)) {
+    if (message.big && message.big !== BigInt(0)) {
       writer.uint32(56).int64(message.big);
     }
-    if (message.oBig !== BigInt(0)) {
+    if (message.oBig && message.oBig !== BigInt(0)) {
       writer.uint32(64).int64(message.oBig);
     }
     if (message.proto !== undefined) {
@@ -1376,10 +1376,10 @@ export const EncodingTestForOmit = {
     for (const v of message.oAuths) {
       Any.encode(v!, writer.uint32(370).fork()).ldelim();
     }
-    if (message.dec !== "") {
+    if (message.dec && message.dec !== "") {
       writer.uint32(378).string(Decimal.fromUserInput(message.dec, 18).atomics);
     }
-    if (message.oDec !== "") {
+    if (message.oDec && message.oDec !== "") {
       writer.uint32(386).string(Decimal.fromUserInput(message.oDec, 18).atomics);
     }
     for (const v of message.decs) {
