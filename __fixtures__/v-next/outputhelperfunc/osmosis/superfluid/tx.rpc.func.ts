@@ -1,51 +1,50 @@
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
-import { buildTx, ISigningClient } from "../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../helper-func-types";
 import { buildUseMutation } from "../../react-query";
-import { SigningClientResolver } from "../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSuperfluidDelegate, MsgSuperfluidDelegateSDKType, MsgSuperfluidDelegateResponse, MsgSuperfluidDelegateResponseSDKType, MsgSuperfluidUndelegate, MsgSuperfluidUndelegateSDKType, MsgSuperfluidUndelegateResponse, MsgSuperfluidUndelegateResponseSDKType, MsgSuperfluidUnbondLock, MsgSuperfluidUnbondLockSDKType, MsgSuperfluidUnbondLockResponse, MsgSuperfluidUnbondLockResponseSDKType, MsgLockAndSuperfluidDelegate, MsgLockAndSuperfluidDelegateSDKType, MsgLockAndSuperfluidDelegateResponse, MsgLockAndSuperfluidDelegateResponseSDKType, MsgUnPoolWhitelistedPool, MsgUnPoolWhitelistedPoolSDKType, MsgUnPoolWhitelistedPoolResponse, MsgUnPoolWhitelistedPoolResponseSDKType } from "./tx";
-export const createSuperfluidDelegate = (getSigningClient: SigningClientResolver) => buildTx<SuperfluidDelegate>({
+export const createSuperfluidDelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgSuperfluidDelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSuperfluidDelegate.typeUrl,
-  encoders: toEncoders(SuperfluidDelegate),
-  converters: toConverters(SuperfluidDelegate)
+  typeUrl: MsgSuperfluidDelegate.typeUrl,
+  encoders: toEncoders(MsgSuperfluidDelegate),
+  converters: toConverters(MsgSuperfluidDelegate)
 });
-export const useSuperfluidDelegate = buildUseMutation<SuperfluidDelegate, Error>({
+export const useSuperfluidDelegate = buildUseMutation<MsgSuperfluidDelegate, Error>({
   builderMutationFn: createSuperfluidDelegate
 });
-export const createSuperfluidUndelegate = (getSigningClient: SigningClientResolver) => buildTx<SuperfluidUndelegate>({
+export const createSuperfluidUndelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgSuperfluidUndelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSuperfluidUndelegate.typeUrl,
-  encoders: toEncoders(SuperfluidUndelegate),
-  converters: toConverters(SuperfluidUndelegate)
+  typeUrl: MsgSuperfluidUndelegate.typeUrl,
+  encoders: toEncoders(MsgSuperfluidUndelegate),
+  converters: toConverters(MsgSuperfluidUndelegate)
 });
-export const useSuperfluidUndelegate = buildUseMutation<SuperfluidUndelegate, Error>({
+export const useSuperfluidUndelegate = buildUseMutation<MsgSuperfluidUndelegate, Error>({
   builderMutationFn: createSuperfluidUndelegate
 });
-export const createSuperfluidUnbondLock = (getSigningClient: SigningClientResolver) => buildTx<SuperfluidUnbondLock>({
+export const createSuperfluidUnbondLock = (getSigningClient: SigningClientResolver) => buildTx<MsgSuperfluidUnbondLock>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSuperfluidUnbondLock.typeUrl,
-  encoders: toEncoders(SuperfluidUnbondLock),
-  converters: toConverters(SuperfluidUnbondLock)
+  typeUrl: MsgSuperfluidUnbondLock.typeUrl,
+  encoders: toEncoders(MsgSuperfluidUnbondLock),
+  converters: toConverters(MsgSuperfluidUnbondLock)
 });
-export const useSuperfluidUnbondLock = buildUseMutation<SuperfluidUnbondLock, Error>({
+export const useSuperfluidUnbondLock = buildUseMutation<MsgSuperfluidUnbondLock, Error>({
   builderMutationFn: createSuperfluidUnbondLock
 });
-export const createLockAndSuperfluidDelegate = (getSigningClient: SigningClientResolver) => buildTx<LockAndSuperfluidDelegate>({
+export const createLockAndSuperfluidDelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgLockAndSuperfluidDelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgLockAndSuperfluidDelegate.typeUrl,
-  encoders: toEncoders(LockAndSuperfluidDelegate),
-  converters: toConverters(LockAndSuperfluidDelegate)
+  typeUrl: MsgLockAndSuperfluidDelegate.typeUrl,
+  encoders: toEncoders(MsgLockAndSuperfluidDelegate),
+  converters: toConverters(MsgLockAndSuperfluidDelegate)
 });
-export const useLockAndSuperfluidDelegate = buildUseMutation<LockAndSuperfluidDelegate, Error>({
+export const useLockAndSuperfluidDelegate = buildUseMutation<MsgLockAndSuperfluidDelegate, Error>({
   builderMutationFn: createLockAndSuperfluidDelegate
 });
-export const createUnPoolWhitelistedPool = (getSigningClient: SigningClientResolver) => buildTx<UnPoolWhitelistedPool>({
+export const createUnPoolWhitelistedPool = (getSigningClient: SigningClientResolver) => buildTx<MsgUnPoolWhitelistedPool>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUnPoolWhitelistedPool.typeUrl,
-  encoders: toEncoders(UnPoolWhitelistedPool),
-  converters: toConverters(UnPoolWhitelistedPool)
+  typeUrl: MsgUnPoolWhitelistedPool.typeUrl,
+  encoders: toEncoders(MsgUnPoolWhitelistedPool),
+  converters: toConverters(MsgUnPoolWhitelistedPool)
 });
-export const useUnPoolWhitelistedPool = buildUseMutation<UnPoolWhitelistedPool, Error>({
+export const useUnPoolWhitelistedPool = buildUseMutation<MsgUnPoolWhitelistedPool, Error>({
   builderMutationFn: createUnPoolWhitelistedPool
 });

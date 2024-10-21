@@ -1,14 +1,13 @@
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgUnjail, MsgUnjailSDKType, MsgUnjailResponse, MsgUnjailResponseSDKType } from "./tx";
-export const createUnjail = (getSigningClient: SigningClientResolver) => buildTx<Unjail>({
+export const createUnjail = (getSigningClient: SigningClientResolver) => buildTx<MsgUnjail>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUnjail.typeUrl,
-  encoders: toEncoders(Unjail),
-  converters: toConverters(Unjail)
+  typeUrl: MsgUnjail.typeUrl,
+  encoders: toEncoders(MsgUnjail),
+  converters: toConverters(MsgUnjail)
 });
-export const useUnjail = buildUseMutation<Unjail, Error>({
+export const useUnjail = buildUseMutation<MsgUnjail, Error>({
   builderMutationFn: createUnjail
 });

@@ -1,15 +1,14 @@
 import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool";
-import { buildTx, ISigningClient } from "../../../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../../../helper-func-types";
 import { buildUseMutation } from "../../../../../react-query";
-import { SigningClientResolver } from "../../../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateBalancerPool, MsgCreateBalancerPoolSDKType, MsgCreateBalancerPoolResponse, MsgCreateBalancerPoolResponseSDKType } from "./tx";
-export const createCreateBalancerPool = (getSigningClient: SigningClientResolver) => buildTx<CreateBalancerPool>({
+export const createCreateBalancerPool = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateBalancerPool>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateBalancerPool.typeUrl,
-  encoders: toEncoders(CreateBalancerPool),
-  converters: toConverters(CreateBalancerPool)
+  typeUrl: MsgCreateBalancerPool.typeUrl,
+  encoders: toEncoders(MsgCreateBalancerPool),
+  converters: toConverters(MsgCreateBalancerPool)
 });
-export const useCreateBalancerPool = buildUseMutation<CreateBalancerPool, Error>({
+export const useCreateBalancerPool = buildUseMutation<MsgCreateBalancerPool, Error>({
   builderMutationFn: createCreateBalancerPool
 });

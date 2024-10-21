@@ -1,5 +1,5 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
-import { SigningClientResolver } from "../../../../helpers";
+import { SigningClientResolver } from "../../../../helper-func-types";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
 export const createGetAppVersion = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAppVersionRequest, QueryAppVersionResponse>({
   encoder: QueryAppVersionRequest.encode,

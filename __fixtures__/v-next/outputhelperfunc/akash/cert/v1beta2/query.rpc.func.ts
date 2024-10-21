@@ -1,6 +1,6 @@
 import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert";
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryCertificatesRequest, QueryCertificatesRequestSDKType, QueryCertificatesResponse, QueryCertificatesResponseSDKType } from "./query";
 export const createGetCertificates = (getRpcInstance: SigningClientResolver) => buildQuery<QueryCertificatesRequest, QueryCertificatesResponse>({
   encoder: QueryCertificatesRequest.encode,

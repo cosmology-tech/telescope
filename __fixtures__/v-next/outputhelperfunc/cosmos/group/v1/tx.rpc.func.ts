@@ -1,133 +1,132 @@
 import { Member, MemberSDKType, VoteOption, VoteOptionSDKType } from "./types";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateGroup, MsgCreateGroupSDKType, MsgCreateGroupResponse, MsgCreateGroupResponseSDKType, MsgUpdateGroupMembers, MsgUpdateGroupMembersSDKType, MsgUpdateGroupMembersResponse, MsgUpdateGroupMembersResponseSDKType, MsgUpdateGroupAdmin, MsgUpdateGroupAdminSDKType, MsgUpdateGroupAdminResponse, MsgUpdateGroupAdminResponseSDKType, MsgUpdateGroupMetadata, MsgUpdateGroupMetadataSDKType, MsgUpdateGroupMetadataResponse, MsgUpdateGroupMetadataResponseSDKType, MsgCreateGroupPolicy, MsgCreateGroupPolicySDKType, MsgCreateGroupPolicyResponse, MsgCreateGroupPolicyResponseSDKType, MsgCreateGroupWithPolicy, MsgCreateGroupWithPolicySDKType, MsgCreateGroupWithPolicyResponse, MsgCreateGroupWithPolicyResponseSDKType, MsgUpdateGroupPolicyAdmin, MsgUpdateGroupPolicyAdminSDKType, MsgUpdateGroupPolicyAdminResponse, MsgUpdateGroupPolicyAdminResponseSDKType, MsgUpdateGroupPolicyDecisionPolicy, MsgUpdateGroupPolicyDecisionPolicySDKType, MsgUpdateGroupPolicyDecisionPolicyResponse, MsgUpdateGroupPolicyDecisionPolicyResponseSDKType, MsgUpdateGroupPolicyMetadata, MsgUpdateGroupPolicyMetadataSDKType, MsgUpdateGroupPolicyMetadataResponse, MsgUpdateGroupPolicyMetadataResponseSDKType, MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgWithdrawProposal, MsgWithdrawProposalSDKType, MsgWithdrawProposalResponse, MsgWithdrawProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgLeaveGroup, MsgLeaveGroupSDKType, MsgLeaveGroupResponse, MsgLeaveGroupResponseSDKType } from "./tx";
-export const createCreateGroup = (getSigningClient: SigningClientResolver) => buildTx<CreateGroup>({
+export const createCreateGroup = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateGroup>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateGroup.typeUrl,
-  encoders: toEncoders(CreateGroup),
-  converters: toConverters(CreateGroup)
+  typeUrl: MsgCreateGroup.typeUrl,
+  encoders: toEncoders(MsgCreateGroup),
+  converters: toConverters(MsgCreateGroup)
 });
-export const useCreateGroup = buildUseMutation<CreateGroup, Error>({
+export const useCreateGroup = buildUseMutation<MsgCreateGroup, Error>({
   builderMutationFn: createCreateGroup
 });
-export const createUpdateGroupMembers = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupMembers>({
+export const createUpdateGroupMembers = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupMembers>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupMembers.typeUrl,
-  encoders: toEncoders(UpdateGroupMembers),
-  converters: toConverters(UpdateGroupMembers)
+  typeUrl: MsgUpdateGroupMembers.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupMembers),
+  converters: toConverters(MsgUpdateGroupMembers)
 });
-export const useUpdateGroupMembers = buildUseMutation<UpdateGroupMembers, Error>({
+export const useUpdateGroupMembers = buildUseMutation<MsgUpdateGroupMembers, Error>({
   builderMutationFn: createUpdateGroupMembers
 });
-export const createUpdateGroupAdmin = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupAdmin>({
+export const createUpdateGroupAdmin = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupAdmin>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupAdmin.typeUrl,
-  encoders: toEncoders(UpdateGroupAdmin),
-  converters: toConverters(UpdateGroupAdmin)
+  typeUrl: MsgUpdateGroupAdmin.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupAdmin),
+  converters: toConverters(MsgUpdateGroupAdmin)
 });
-export const useUpdateGroupAdmin = buildUseMutation<UpdateGroupAdmin, Error>({
+export const useUpdateGroupAdmin = buildUseMutation<MsgUpdateGroupAdmin, Error>({
   builderMutationFn: createUpdateGroupAdmin
 });
-export const createUpdateGroupMetadata = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupMetadata>({
+export const createUpdateGroupMetadata = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupMetadata>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupMetadata.typeUrl,
-  encoders: toEncoders(UpdateGroupMetadata),
-  converters: toConverters(UpdateGroupMetadata)
+  typeUrl: MsgUpdateGroupMetadata.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupMetadata),
+  converters: toConverters(MsgUpdateGroupMetadata)
 });
-export const useUpdateGroupMetadata = buildUseMutation<UpdateGroupMetadata, Error>({
+export const useUpdateGroupMetadata = buildUseMutation<MsgUpdateGroupMetadata, Error>({
   builderMutationFn: createUpdateGroupMetadata
 });
-export const createCreateGroupPolicy = (getSigningClient: SigningClientResolver) => buildTx<CreateGroupPolicy>({
+export const createCreateGroupPolicy = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateGroupPolicy>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateGroupPolicy.typeUrl,
-  encoders: toEncoders(CreateGroupPolicy),
-  converters: toConverters(CreateGroupPolicy)
+  typeUrl: MsgCreateGroupPolicy.typeUrl,
+  encoders: toEncoders(MsgCreateGroupPolicy),
+  converters: toConverters(MsgCreateGroupPolicy)
 });
-export const useCreateGroupPolicy = buildUseMutation<CreateGroupPolicy, Error>({
+export const useCreateGroupPolicy = buildUseMutation<MsgCreateGroupPolicy, Error>({
   builderMutationFn: createCreateGroupPolicy
 });
-export const createCreateGroupWithPolicy = (getSigningClient: SigningClientResolver) => buildTx<CreateGroupWithPolicy>({
+export const createCreateGroupWithPolicy = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateGroupWithPolicy>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateGroupWithPolicy.typeUrl,
-  encoders: toEncoders(CreateGroupWithPolicy),
-  converters: toConverters(CreateGroupWithPolicy)
+  typeUrl: MsgCreateGroupWithPolicy.typeUrl,
+  encoders: toEncoders(MsgCreateGroupWithPolicy),
+  converters: toConverters(MsgCreateGroupWithPolicy)
 });
-export const useCreateGroupWithPolicy = buildUseMutation<CreateGroupWithPolicy, Error>({
+export const useCreateGroupWithPolicy = buildUseMutation<MsgCreateGroupWithPolicy, Error>({
   builderMutationFn: createCreateGroupWithPolicy
 });
-export const createUpdateGroupPolicyAdmin = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupPolicyAdmin>({
+export const createUpdateGroupPolicyAdmin = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupPolicyAdmin>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupPolicyAdmin.typeUrl,
-  encoders: toEncoders(UpdateGroupPolicyAdmin),
-  converters: toConverters(UpdateGroupPolicyAdmin)
+  typeUrl: MsgUpdateGroupPolicyAdmin.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupPolicyAdmin),
+  converters: toConverters(MsgUpdateGroupPolicyAdmin)
 });
-export const useUpdateGroupPolicyAdmin = buildUseMutation<UpdateGroupPolicyAdmin, Error>({
+export const useUpdateGroupPolicyAdmin = buildUseMutation<MsgUpdateGroupPolicyAdmin, Error>({
   builderMutationFn: createUpdateGroupPolicyAdmin
 });
-export const createUpdateGroupPolicyDecisionPolicy = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupPolicyDecisionPolicy>({
+export const createUpdateGroupPolicyDecisionPolicy = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupPolicyDecisionPolicy>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupPolicyDecisionPolicy.typeUrl,
-  encoders: toEncoders(UpdateGroupPolicyDecisionPolicy),
-  converters: toConverters(UpdateGroupPolicyDecisionPolicy)
+  typeUrl: MsgUpdateGroupPolicyDecisionPolicy.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupPolicyDecisionPolicy),
+  converters: toConverters(MsgUpdateGroupPolicyDecisionPolicy)
 });
-export const useUpdateGroupPolicyDecisionPolicy = buildUseMutation<UpdateGroupPolicyDecisionPolicy, Error>({
+export const useUpdateGroupPolicyDecisionPolicy = buildUseMutation<MsgUpdateGroupPolicyDecisionPolicy, Error>({
   builderMutationFn: createUpdateGroupPolicyDecisionPolicy
 });
-export const createUpdateGroupPolicyMetadata = (getSigningClient: SigningClientResolver) => buildTx<UpdateGroupPolicyMetadata>({
+export const createUpdateGroupPolicyMetadata = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateGroupPolicyMetadata>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateGroupPolicyMetadata.typeUrl,
-  encoders: toEncoders(UpdateGroupPolicyMetadata),
-  converters: toConverters(UpdateGroupPolicyMetadata)
+  typeUrl: MsgUpdateGroupPolicyMetadata.typeUrl,
+  encoders: toEncoders(MsgUpdateGroupPolicyMetadata),
+  converters: toConverters(MsgUpdateGroupPolicyMetadata)
 });
-export const useUpdateGroupPolicyMetadata = buildUseMutation<UpdateGroupPolicyMetadata, Error>({
+export const useUpdateGroupPolicyMetadata = buildUseMutation<MsgUpdateGroupPolicyMetadata, Error>({
   builderMutationFn: createUpdateGroupPolicyMetadata
 });
-export const createSubmitProposal = (getSigningClient: SigningClientResolver) => buildTx<SubmitProposal>({
+export const createSubmitProposal = (getSigningClient: SigningClientResolver) => buildTx<MsgSubmitProposal>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSubmitProposal.typeUrl,
-  encoders: toEncoders(SubmitProposal),
-  converters: toConverters(SubmitProposal)
+  typeUrl: MsgSubmitProposal.typeUrl,
+  encoders: toEncoders(MsgSubmitProposal),
+  converters: toConverters(MsgSubmitProposal)
 });
-export const useSubmitProposal = buildUseMutation<SubmitProposal, Error>({
+export const useSubmitProposal = buildUseMutation<MsgSubmitProposal, Error>({
   builderMutationFn: createSubmitProposal
 });
-export const createWithdrawProposal = (getSigningClient: SigningClientResolver) => buildTx<WithdrawProposal>({
+export const createWithdrawProposal = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawProposal>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgWithdrawProposal.typeUrl,
-  encoders: toEncoders(WithdrawProposal),
-  converters: toConverters(WithdrawProposal)
+  typeUrl: MsgWithdrawProposal.typeUrl,
+  encoders: toEncoders(MsgWithdrawProposal),
+  converters: toConverters(MsgWithdrawProposal)
 });
-export const useWithdrawProposal = buildUseMutation<WithdrawProposal, Error>({
+export const useWithdrawProposal = buildUseMutation<MsgWithdrawProposal, Error>({
   builderMutationFn: createWithdrawProposal
 });
-export const createVote = (getSigningClient: SigningClientResolver) => buildTx<Vote>({
+export const createVote = (getSigningClient: SigningClientResolver) => buildTx<MsgVote>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgVote.typeUrl,
-  encoders: toEncoders(Vote),
-  converters: toConverters(Vote)
+  typeUrl: MsgVote.typeUrl,
+  encoders: toEncoders(MsgVote),
+  converters: toConverters(MsgVote)
 });
-export const useVote = buildUseMutation<Vote, Error>({
+export const useVote = buildUseMutation<MsgVote, Error>({
   builderMutationFn: createVote
 });
-export const createExec = (getSigningClient: SigningClientResolver) => buildTx<Exec>({
+export const createExec = (getSigningClient: SigningClientResolver) => buildTx<MsgExec>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgExec.typeUrl,
-  encoders: toEncoders(Exec),
-  converters: toConverters(Exec)
+  typeUrl: MsgExec.typeUrl,
+  encoders: toEncoders(MsgExec),
+  converters: toConverters(MsgExec)
 });
-export const useExec = buildUseMutation<Exec, Error>({
+export const useExec = buildUseMutation<MsgExec, Error>({
   builderMutationFn: createExec
 });
-export const createLeaveGroup = (getSigningClient: SigningClientResolver) => buildTx<LeaveGroup>({
+export const createLeaveGroup = (getSigningClient: SigningClientResolver) => buildTx<MsgLeaveGroup>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgLeaveGroup.typeUrl,
-  encoders: toEncoders(LeaveGroup),
-  converters: toConverters(LeaveGroup)
+  typeUrl: MsgLeaveGroup.typeUrl,
+  encoders: toEncoders(MsgLeaveGroup),
+  converters: toConverters(MsgLeaveGroup)
 });
-export const useLeaveGroup = buildUseMutation<LeaveGroup, Error>({
+export const useLeaveGroup = buildUseMutation<MsgLeaveGroup, Error>({
   builderMutationFn: createLeaveGroup
 });

@@ -1,70 +1,69 @@
 import { GroupSpec, GroupSpecSDKType, GroupID, GroupIDSDKType, MsgCloseGroup, MsgCloseGroupSDKType, MsgCloseGroupResponse, MsgCloseGroupResponseSDKType, MsgPauseGroup, MsgPauseGroupSDKType, MsgPauseGroupResponse, MsgPauseGroupResponseSDKType, MsgStartGroup, MsgStartGroupSDKType, MsgStartGroupResponse, MsgStartGroupResponseSDKType } from "./group";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateDeployment, MsgCreateDeploymentSDKType, MsgCreateDeploymentResponse, MsgCreateDeploymentResponseSDKType, MsgDepositDeployment, MsgDepositDeploymentSDKType, MsgDepositDeploymentResponse, MsgDepositDeploymentResponseSDKType, MsgUpdateDeployment, MsgUpdateDeploymentSDKType, MsgUpdateDeploymentResponse, MsgUpdateDeploymentResponseSDKType, MsgCloseDeployment, MsgCloseDeploymentSDKType, MsgCloseDeploymentResponse, MsgCloseDeploymentResponseSDKType } from "./deployment";
-export const createCreateDeployment = (getSigningClient: SigningClientResolver) => buildTx<CreateDeployment>({
+export const createCreateDeployment = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateDeployment>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateDeployment.typeUrl,
-  encoders: toEncoders(CreateDeployment),
-  converters: toConverters(CreateDeployment)
+  typeUrl: MsgCreateDeployment.typeUrl,
+  encoders: toEncoders(MsgCreateDeployment),
+  converters: toConverters(MsgCreateDeployment)
 });
-export const useCreateDeployment = buildUseMutation<CreateDeployment, Error>({
+export const useCreateDeployment = buildUseMutation<MsgCreateDeployment, Error>({
   builderMutationFn: createCreateDeployment
 });
-export const createDepositDeployment = (getSigningClient: SigningClientResolver) => buildTx<DepositDeployment>({
+export const createDepositDeployment = (getSigningClient: SigningClientResolver) => buildTx<MsgDepositDeployment>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgDepositDeployment.typeUrl,
-  encoders: toEncoders(DepositDeployment),
-  converters: toConverters(DepositDeployment)
+  typeUrl: MsgDepositDeployment.typeUrl,
+  encoders: toEncoders(MsgDepositDeployment),
+  converters: toConverters(MsgDepositDeployment)
 });
-export const useDepositDeployment = buildUseMutation<DepositDeployment, Error>({
+export const useDepositDeployment = buildUseMutation<MsgDepositDeployment, Error>({
   builderMutationFn: createDepositDeployment
 });
-export const createUpdateDeployment = (getSigningClient: SigningClientResolver) => buildTx<UpdateDeployment>({
+export const createUpdateDeployment = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateDeployment>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateDeployment.typeUrl,
-  encoders: toEncoders(UpdateDeployment),
-  converters: toConverters(UpdateDeployment)
+  typeUrl: MsgUpdateDeployment.typeUrl,
+  encoders: toEncoders(MsgUpdateDeployment),
+  converters: toConverters(MsgUpdateDeployment)
 });
-export const useUpdateDeployment = buildUseMutation<UpdateDeployment, Error>({
+export const useUpdateDeployment = buildUseMutation<MsgUpdateDeployment, Error>({
   builderMutationFn: createUpdateDeployment
 });
-export const createCloseDeployment = (getSigningClient: SigningClientResolver) => buildTx<CloseDeployment>({
+export const createCloseDeployment = (getSigningClient: SigningClientResolver) => buildTx<MsgCloseDeployment>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCloseDeployment.typeUrl,
-  encoders: toEncoders(CloseDeployment),
-  converters: toConverters(CloseDeployment)
+  typeUrl: MsgCloseDeployment.typeUrl,
+  encoders: toEncoders(MsgCloseDeployment),
+  converters: toConverters(MsgCloseDeployment)
 });
-export const useCloseDeployment = buildUseMutation<CloseDeployment, Error>({
+export const useCloseDeployment = buildUseMutation<MsgCloseDeployment, Error>({
   builderMutationFn: createCloseDeployment
 });
-export const createCloseGroup = (getSigningClient: SigningClientResolver) => buildTx<CloseGroup>({
+export const createCloseGroup = (getSigningClient: SigningClientResolver) => buildTx<MsgCloseGroup>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCloseGroup.typeUrl,
-  encoders: toEncoders(CloseGroup),
-  converters: toConverters(CloseGroup)
+  typeUrl: MsgCloseGroup.typeUrl,
+  encoders: toEncoders(MsgCloseGroup),
+  converters: toConverters(MsgCloseGroup)
 });
-export const useCloseGroup = buildUseMutation<CloseGroup, Error>({
+export const useCloseGroup = buildUseMutation<MsgCloseGroup, Error>({
   builderMutationFn: createCloseGroup
 });
-export const createPauseGroup = (getSigningClient: SigningClientResolver) => buildTx<PauseGroup>({
+export const createPauseGroup = (getSigningClient: SigningClientResolver) => buildTx<MsgPauseGroup>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgPauseGroup.typeUrl,
-  encoders: toEncoders(PauseGroup),
-  converters: toConverters(PauseGroup)
+  typeUrl: MsgPauseGroup.typeUrl,
+  encoders: toEncoders(MsgPauseGroup),
+  converters: toConverters(MsgPauseGroup)
 });
-export const usePauseGroup = buildUseMutation<PauseGroup, Error>({
+export const usePauseGroup = buildUseMutation<MsgPauseGroup, Error>({
   builderMutationFn: createPauseGroup
 });
-export const createStartGroup = (getSigningClient: SigningClientResolver) => buildTx<StartGroup>({
+export const createStartGroup = (getSigningClient: SigningClientResolver) => buildTx<MsgStartGroup>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgStartGroup.typeUrl,
-  encoders: toEncoders(StartGroup),
-  converters: toConverters(StartGroup)
+  typeUrl: MsgStartGroup.typeUrl,
+  encoders: toEncoders(MsgStartGroup),
+  converters: toConverters(MsgStartGroup)
 });
-export const useStartGroup = buildUseMutation<StartGroup, Error>({
+export const useStartGroup = buildUseMutation<MsgStartGroup, Error>({
   builderMutationFn: createStartGroup
 });

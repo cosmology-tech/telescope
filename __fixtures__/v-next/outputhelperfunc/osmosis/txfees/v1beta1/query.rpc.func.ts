@@ -1,5 +1,5 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
 export const createGetFeeTokens = (getRpcInstance: SigningClientResolver) => buildQuery<QueryFeeTokensRequest, QueryFeeTokensResponse>({
   encoder: QueryFeeTokensRequest.encode,

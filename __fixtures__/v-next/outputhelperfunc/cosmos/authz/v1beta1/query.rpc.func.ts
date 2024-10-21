@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
 export const createGetGrants = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
   encoder: QueryGrantsRequest.encode,

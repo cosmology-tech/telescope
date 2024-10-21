@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./audit";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
 export const createGetAllProvidersAttributes = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
   encoder: QueryAllProvidersAttributesRequest.encode,

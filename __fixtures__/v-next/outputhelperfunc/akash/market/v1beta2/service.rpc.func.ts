@@ -2,52 +2,51 @@ import { OrderID, OrderIDSDKType } from "./order";
 import { DecCoin, DecCoinSDKType, Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { BidID, BidIDSDKType, MsgCreateBid, MsgCreateBidSDKType, MsgCreateBidResponse, MsgCreateBidResponseSDKType, MsgCloseBid, MsgCloseBidSDKType, MsgCloseBidResponse, MsgCloseBidResponseSDKType } from "./bid";
 import { LeaseID, LeaseIDSDKType, MsgWithdrawLease, MsgWithdrawLeaseSDKType, MsgWithdrawLeaseResponse, MsgWithdrawLeaseResponseSDKType, MsgCreateLease, MsgCreateLeaseSDKType, MsgCreateLeaseResponse, MsgCreateLeaseResponseSDKType, MsgCloseLease, MsgCloseLeaseSDKType, MsgCloseLeaseResponse, MsgCloseLeaseResponseSDKType } from "./lease";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
-export const createCreateBid = (getSigningClient: SigningClientResolver) => buildTx<CreateBid>({
+export const createCreateBid = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateBid>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateBid.typeUrl,
-  encoders: toEncoders(CreateBid),
-  converters: toConverters(CreateBid)
+  typeUrl: MsgCreateBid.typeUrl,
+  encoders: toEncoders(MsgCreateBid),
+  converters: toConverters(MsgCreateBid)
 });
-export const useCreateBid = buildUseMutation<CreateBid, Error>({
+export const useCreateBid = buildUseMutation<MsgCreateBid, Error>({
   builderMutationFn: createCreateBid
 });
-export const createCloseBid = (getSigningClient: SigningClientResolver) => buildTx<CloseBid>({
+export const createCloseBid = (getSigningClient: SigningClientResolver) => buildTx<MsgCloseBid>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCloseBid.typeUrl,
-  encoders: toEncoders(CloseBid),
-  converters: toConverters(CloseBid)
+  typeUrl: MsgCloseBid.typeUrl,
+  encoders: toEncoders(MsgCloseBid),
+  converters: toConverters(MsgCloseBid)
 });
-export const useCloseBid = buildUseMutation<CloseBid, Error>({
+export const useCloseBid = buildUseMutation<MsgCloseBid, Error>({
   builderMutationFn: createCloseBid
 });
-export const createWithdrawLease = (getSigningClient: SigningClientResolver) => buildTx<WithdrawLease>({
+export const createWithdrawLease = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawLease>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgWithdrawLease.typeUrl,
-  encoders: toEncoders(WithdrawLease),
-  converters: toConverters(WithdrawLease)
+  typeUrl: MsgWithdrawLease.typeUrl,
+  encoders: toEncoders(MsgWithdrawLease),
+  converters: toConverters(MsgWithdrawLease)
 });
-export const useWithdrawLease = buildUseMutation<WithdrawLease, Error>({
+export const useWithdrawLease = buildUseMutation<MsgWithdrawLease, Error>({
   builderMutationFn: createWithdrawLease
 });
-export const createCreateLease = (getSigningClient: SigningClientResolver) => buildTx<CreateLease>({
+export const createCreateLease = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateLease>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateLease.typeUrl,
-  encoders: toEncoders(CreateLease),
-  converters: toConverters(CreateLease)
+  typeUrl: MsgCreateLease.typeUrl,
+  encoders: toEncoders(MsgCreateLease),
+  converters: toConverters(MsgCreateLease)
 });
-export const useCreateLease = buildUseMutation<CreateLease, Error>({
+export const useCreateLease = buildUseMutation<MsgCreateLease, Error>({
   builderMutationFn: createCreateLease
 });
-export const createCloseLease = (getSigningClient: SigningClientResolver) => buildTx<CloseLease>({
+export const createCloseLease = (getSigningClient: SigningClientResolver) => buildTx<MsgCloseLease>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCloseLease.typeUrl,
-  encoders: toEncoders(CloseLease),
-  converters: toConverters(CloseLease)
+  typeUrl: MsgCloseLease.typeUrl,
+  encoders: toEncoders(MsgCloseLease),
+  converters: toConverters(MsgCloseLease)
 });
-export const useCloseLease = buildUseMutation<CloseLease, Error>({
+export const useCloseLease = buildUseMutation<MsgCloseLease, Error>({
   builderMutationFn: createCloseLease
 });

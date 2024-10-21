@@ -1,5 +1,5 @@
 import { EpochInfo, EpochInfoSDKType } from "./genesis";
-import { SigningClientResolver } from "../../helpers";
+import { SigningClientResolver } from "../../helper-func-types";
 import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoResponse, QueryEpochsInfoResponseSDKType, QueryCurrentEpochRequest, QueryCurrentEpochRequestSDKType, QueryCurrentEpochResponse, QueryCurrentEpochResponseSDKType } from "./query";
 export const createGetEpochInfos = (getRpcInstance: SigningClientResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
   encoder: QueryEpochsInfoRequest.encode,

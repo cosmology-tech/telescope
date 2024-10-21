@@ -1,4 +1,4 @@
-import { SigningClientResolver } from "../../../../helpers";
+import { SigningClientResolver } from "../../../../helper-func-types";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
 export const createGetListAllInterfaces = (getRpcInstance: SigningClientResolver) => buildQuery<ListAllInterfacesRequest, ListAllInterfacesResponse>({
   encoder: ListAllInterfacesRequest.encode,

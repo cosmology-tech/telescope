@@ -3,7 +3,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { TxResponse, TxResponseSDKType, GasInfo, GasInfoSDKType, Result, ResultSDKType } from "../../base/abci/v1beta1/abci";
 import { BlockID, BlockIDSDKType } from "../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../tendermint/types/block";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { SimulateRequest, SimulateRequestSDKType, SimulateResponse, SimulateResponseSDKType, GetTxRequest, GetTxRequestSDKType, GetTxResponse, GetTxResponseSDKType, BroadcastTxRequest, BroadcastTxRequestSDKType, BroadcastTxResponse, BroadcastTxResponseSDKType, GetTxsEventRequest, GetTxsEventRequestSDKType, GetTxsEventResponse, GetTxsEventResponseSDKType, GetBlockWithTxsRequest, GetBlockWithTxsRequestSDKType, GetBlockWithTxsResponse, GetBlockWithTxsResponseSDKType } from "./service";
 export const createGetSimulate = (getRpcInstance: SigningClientResolver) => buildQuery<SimulateRequest, SimulateResponse>({
   encoder: SimulateRequest.encode,

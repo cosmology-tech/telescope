@@ -1,33 +1,32 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateProvider, MsgCreateProviderSDKType, MsgCreateProviderResponse, MsgCreateProviderResponseSDKType, MsgUpdateProvider, MsgUpdateProviderSDKType, MsgUpdateProviderResponse, MsgUpdateProviderResponseSDKType, MsgDeleteProvider, MsgDeleteProviderSDKType, MsgDeleteProviderResponse, MsgDeleteProviderResponseSDKType } from "./provider";
-export const createCreateProvider = (getSigningClient: SigningClientResolver) => buildTx<CreateProvider>({
+export const createCreateProvider = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateProvider>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateProvider.typeUrl,
-  encoders: toEncoders(CreateProvider),
-  converters: toConverters(CreateProvider)
+  typeUrl: MsgCreateProvider.typeUrl,
+  encoders: toEncoders(MsgCreateProvider),
+  converters: toConverters(MsgCreateProvider)
 });
-export const useCreateProvider = buildUseMutation<CreateProvider, Error>({
+export const useCreateProvider = buildUseMutation<MsgCreateProvider, Error>({
   builderMutationFn: createCreateProvider
 });
-export const createUpdateProvider = (getSigningClient: SigningClientResolver) => buildTx<UpdateProvider>({
+export const createUpdateProvider = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateProvider>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateProvider.typeUrl,
-  encoders: toEncoders(UpdateProvider),
-  converters: toConverters(UpdateProvider)
+  typeUrl: MsgUpdateProvider.typeUrl,
+  encoders: toEncoders(MsgUpdateProvider),
+  converters: toConverters(MsgUpdateProvider)
 });
-export const useUpdateProvider = buildUseMutation<UpdateProvider, Error>({
+export const useUpdateProvider = buildUseMutation<MsgUpdateProvider, Error>({
   builderMutationFn: createUpdateProvider
 });
-export const createDeleteProvider = (getSigningClient: SigningClientResolver) => buildTx<DeleteProvider>({
+export const createDeleteProvider = (getSigningClient: SigningClientResolver) => buildTx<MsgDeleteProvider>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgDeleteProvider.typeUrl,
-  encoders: toEncoders(DeleteProvider),
-  converters: toConverters(DeleteProvider)
+  typeUrl: MsgDeleteProvider.typeUrl,
+  encoders: toEncoders(MsgDeleteProvider),
+  converters: toConverters(MsgDeleteProvider)
 });
-export const useDeleteProvider = buildUseMutation<DeleteProvider, Error>({
+export const useDeleteProvider = buildUseMutation<MsgDeleteProvider, Error>({
   builderMutationFn: createDeleteProvider
 });

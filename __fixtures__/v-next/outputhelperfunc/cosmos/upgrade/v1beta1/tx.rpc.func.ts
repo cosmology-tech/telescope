@@ -1,24 +1,23 @@
 import { Plan, PlanSDKType } from "./upgrade";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSoftwareUpgrade, MsgSoftwareUpgradeSDKType, MsgSoftwareUpgradeResponse, MsgSoftwareUpgradeResponseSDKType, MsgCancelUpgrade, MsgCancelUpgradeSDKType, MsgCancelUpgradeResponse, MsgCancelUpgradeResponseSDKType } from "./tx";
-export const createSoftwareUpgrade = (getSigningClient: SigningClientResolver) => buildTx<SoftwareUpgrade>({
+export const createSoftwareUpgrade = (getSigningClient: SigningClientResolver) => buildTx<MsgSoftwareUpgrade>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSoftwareUpgrade.typeUrl,
-  encoders: toEncoders(SoftwareUpgrade),
-  converters: toConverters(SoftwareUpgrade)
+  typeUrl: MsgSoftwareUpgrade.typeUrl,
+  encoders: toEncoders(MsgSoftwareUpgrade),
+  converters: toConverters(MsgSoftwareUpgrade)
 });
-export const useSoftwareUpgrade = buildUseMutation<SoftwareUpgrade, Error>({
+export const useSoftwareUpgrade = buildUseMutation<MsgSoftwareUpgrade, Error>({
   builderMutationFn: createSoftwareUpgrade
 });
-export const createCancelUpgrade = (getSigningClient: SigningClientResolver) => buildTx<CancelUpgrade>({
+export const createCancelUpgrade = (getSigningClient: SigningClientResolver) => buildTx<MsgCancelUpgrade>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCancelUpgrade.typeUrl,
-  encoders: toEncoders(CancelUpgrade),
-  converters: toConverters(CancelUpgrade)
+  typeUrl: MsgCancelUpgrade.typeUrl,
+  encoders: toEncoders(MsgCancelUpgrade),
+  converters: toConverters(MsgCancelUpgrade)
 });
-export const useCancelUpgrade = buildUseMutation<CancelUpgrade, Error>({
+export const useCancelUpgrade = buildUseMutation<MsgCancelUpgrade, Error>({
   builderMutationFn: createCancelUpgrade
 });

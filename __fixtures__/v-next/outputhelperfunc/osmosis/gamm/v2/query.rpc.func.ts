@@ -1,4 +1,4 @@
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType } from "./query";
 export const createGetSpotPrice = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
   encoder: QuerySpotPriceRequest.encode,

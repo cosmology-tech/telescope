@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
 export const createGetAccounts = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
   encoder: QueryAccountsRequest.encode,

@@ -1,14 +1,13 @@
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgVerifyInvariant, MsgVerifyInvariantSDKType, MsgVerifyInvariantResponse, MsgVerifyInvariantResponseSDKType } from "./tx";
-export const createVerifyInvariant = (getSigningClient: SigningClientResolver) => buildTx<VerifyInvariant>({
+export const createVerifyInvariant = (getSigningClient: SigningClientResolver) => buildTx<MsgVerifyInvariant>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgVerifyInvariant.typeUrl,
-  encoders: toEncoders(VerifyInvariant),
-  converters: toConverters(VerifyInvariant)
+  typeUrl: MsgVerifyInvariant.typeUrl,
+  encoders: toEncoders(MsgVerifyInvariant),
+  converters: toConverters(MsgVerifyInvariant)
 });
-export const useVerifyInvariant = buildUseMutation<VerifyInvariant, Error>({
+export const useVerifyInvariant = buildUseMutation<MsgVerifyInvariant, Error>({
   builderMutationFn: createVerifyInvariant
 });

@@ -1,7 +1,7 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import { Params, ParamsSDKType } from "./genesis";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export const createGetTokenPairs = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
   encoder: QueryTokenPairsRequest.encode,

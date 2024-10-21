@@ -3,7 +3,7 @@
 exports[`msg funcs works 1`] = `
 "export const createSend = (getSigningClient: SigningClientResolver) => buildTx<MsgSend>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSend.typeUrl,
+  typeUrl: MsgSend.typeUrl,
   encoders: toEncoders(MsgSend),
   converters: toConverters(MsgSend)
 });"

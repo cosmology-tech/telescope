@@ -1,44 +1,43 @@
 import { Counterparty, CounterpartySDKType, Version, VersionSDKType } from "./connection";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType } from "../../client/v1/client";
-import { buildTx, ISigningClient } from "../../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../../helper-func-types";
 import { buildUseMutation } from "../../../../react-query";
-import { SigningClientResolver } from "../../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgConnectionOpenInit, MsgConnectionOpenInitSDKType, MsgConnectionOpenInitResponse, MsgConnectionOpenInitResponseSDKType, MsgConnectionOpenTry, MsgConnectionOpenTrySDKType, MsgConnectionOpenTryResponse, MsgConnectionOpenTryResponseSDKType, MsgConnectionOpenAck, MsgConnectionOpenAckSDKType, MsgConnectionOpenAckResponse, MsgConnectionOpenAckResponseSDKType, MsgConnectionOpenConfirm, MsgConnectionOpenConfirmSDKType, MsgConnectionOpenConfirmResponse, MsgConnectionOpenConfirmResponseSDKType } from "./tx";
-export const createConnectionOpenInit = (getSigningClient: SigningClientResolver) => buildTx<ConnectionOpenInit>({
+export const createConnectionOpenInit = (getSigningClient: SigningClientResolver) => buildTx<MsgConnectionOpenInit>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgConnectionOpenInit.typeUrl,
-  encoders: toEncoders(ConnectionOpenInit),
-  converters: toConverters(ConnectionOpenInit)
+  typeUrl: MsgConnectionOpenInit.typeUrl,
+  encoders: toEncoders(MsgConnectionOpenInit),
+  converters: toConverters(MsgConnectionOpenInit)
 });
-export const useConnectionOpenInit = buildUseMutation<ConnectionOpenInit, Error>({
+export const useConnectionOpenInit = buildUseMutation<MsgConnectionOpenInit, Error>({
   builderMutationFn: createConnectionOpenInit
 });
-export const createConnectionOpenTry = (getSigningClient: SigningClientResolver) => buildTx<ConnectionOpenTry>({
+export const createConnectionOpenTry = (getSigningClient: SigningClientResolver) => buildTx<MsgConnectionOpenTry>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgConnectionOpenTry.typeUrl,
-  encoders: toEncoders(ConnectionOpenTry),
-  converters: toConverters(ConnectionOpenTry)
+  typeUrl: MsgConnectionOpenTry.typeUrl,
+  encoders: toEncoders(MsgConnectionOpenTry),
+  converters: toConverters(MsgConnectionOpenTry)
 });
-export const useConnectionOpenTry = buildUseMutation<ConnectionOpenTry, Error>({
+export const useConnectionOpenTry = buildUseMutation<MsgConnectionOpenTry, Error>({
   builderMutationFn: createConnectionOpenTry
 });
-export const createConnectionOpenAck = (getSigningClient: SigningClientResolver) => buildTx<ConnectionOpenAck>({
+export const createConnectionOpenAck = (getSigningClient: SigningClientResolver) => buildTx<MsgConnectionOpenAck>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgConnectionOpenAck.typeUrl,
-  encoders: toEncoders(ConnectionOpenAck),
-  converters: toConverters(ConnectionOpenAck)
+  typeUrl: MsgConnectionOpenAck.typeUrl,
+  encoders: toEncoders(MsgConnectionOpenAck),
+  converters: toConverters(MsgConnectionOpenAck)
 });
-export const useConnectionOpenAck = buildUseMutation<ConnectionOpenAck, Error>({
+export const useConnectionOpenAck = buildUseMutation<MsgConnectionOpenAck, Error>({
   builderMutationFn: createConnectionOpenAck
 });
-export const createConnectionOpenConfirm = (getSigningClient: SigningClientResolver) => buildTx<ConnectionOpenConfirm>({
+export const createConnectionOpenConfirm = (getSigningClient: SigningClientResolver) => buildTx<MsgConnectionOpenConfirm>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgConnectionOpenConfirm.typeUrl,
-  encoders: toEncoders(ConnectionOpenConfirm),
-  converters: toConverters(ConnectionOpenConfirm)
+  typeUrl: MsgConnectionOpenConfirm.typeUrl,
+  encoders: toEncoders(MsgConnectionOpenConfirm),
+  converters: toConverters(MsgConnectionOpenConfirm)
 });
-export const useConnectionOpenConfirm = buildUseMutation<ConnectionOpenConfirm, Error>({
+export const useConnectionOpenConfirm = buildUseMutation<MsgConnectionOpenConfirm, Error>({
   builderMutationFn: createConnectionOpenConfirm
 });

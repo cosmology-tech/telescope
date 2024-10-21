@@ -1,23 +1,22 @@
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateCertificate, MsgCreateCertificateSDKType, MsgCreateCertificateResponse, MsgCreateCertificateResponseSDKType, MsgRevokeCertificate, MsgRevokeCertificateSDKType, MsgRevokeCertificateResponse, MsgRevokeCertificateResponseSDKType } from "./cert";
-export const createCreateCertificate = (getSigningClient: SigningClientResolver) => buildTx<CreateCertificate>({
+export const createCreateCertificate = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateCertificate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateCertificate.typeUrl,
-  encoders: toEncoders(CreateCertificate),
-  converters: toConverters(CreateCertificate)
+  typeUrl: MsgCreateCertificate.typeUrl,
+  encoders: toEncoders(MsgCreateCertificate),
+  converters: toConverters(MsgCreateCertificate)
 });
-export const useCreateCertificate = buildUseMutation<CreateCertificate, Error>({
+export const useCreateCertificate = buildUseMutation<MsgCreateCertificate, Error>({
   builderMutationFn: createCreateCertificate
 });
-export const createRevokeCertificate = (getSigningClient: SigningClientResolver) => buildTx<RevokeCertificate>({
+export const createRevokeCertificate = (getSigningClient: SigningClientResolver) => buildTx<MsgRevokeCertificate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgRevokeCertificate.typeUrl,
-  encoders: toEncoders(RevokeCertificate),
-  converters: toConverters(RevokeCertificate)
+  typeUrl: MsgRevokeCertificate.typeUrl,
+  encoders: toEncoders(MsgRevokeCertificate),
+  converters: toConverters(MsgRevokeCertificate)
 });
-export const useRevokeCertificate = buildUseMutation<RevokeCertificate, Error>({
+export const useRevokeCertificate = buildUseMutation<MsgRevokeCertificate, Error>({
   builderMutationFn: createRevokeCertificate
 });

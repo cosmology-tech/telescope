@@ -1,15 +1,14 @@
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSubmitEvidence, MsgSubmitEvidenceSDKType, MsgSubmitEvidenceResponse, MsgSubmitEvidenceResponseSDKType } from "./tx";
-export const createSubmitEvidence = (getSigningClient: SigningClientResolver) => buildTx<SubmitEvidence>({
+export const createSubmitEvidence = (getSigningClient: SigningClientResolver) => buildTx<MsgSubmitEvidence>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSubmitEvidence.typeUrl,
-  encoders: toEncoders(SubmitEvidence),
-  converters: toConverters(SubmitEvidence)
+  typeUrl: MsgSubmitEvidence.typeUrl,
+  encoders: toEncoders(MsgSubmitEvidence),
+  converters: toConverters(MsgSubmitEvidence)
 });
-export const useSubmitEvidence = buildUseMutation<SubmitEvidence, Error>({
+export const useSubmitEvidence = buildUseMutation<MsgSubmitEvidence, Error>({
   builderMutationFn: createSubmitEvidence
 });

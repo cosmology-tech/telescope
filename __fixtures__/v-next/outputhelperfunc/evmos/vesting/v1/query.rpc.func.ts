@@ -1,5 +1,5 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryBalancesRequest, QueryBalancesRequestSDKType, QueryBalancesResponse, QueryBalancesResponseSDKType } from "./query";
 export const createGetBalances = (getRpcInstance: SigningClientResolver) => buildQuery<QueryBalancesRequest, QueryBalancesResponse>({
   encoder: QueryBalancesRequest.encode,

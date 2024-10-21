@@ -1,34 +1,33 @@
 import { Grant, GrantSDKType } from "./authz";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgGrant, MsgGrantSDKType, MsgGrantResponse, MsgGrantResponseSDKType, MsgExec, MsgExecSDKType, MsgExecResponse, MsgExecResponseSDKType, MsgRevoke, MsgRevokeSDKType, MsgRevokeResponse, MsgRevokeResponseSDKType } from "./tx";
-export const createGrant = (getSigningClient: SigningClientResolver) => buildTx<Grant>({
+export const createGrant = (getSigningClient: SigningClientResolver) => buildTx<MsgGrant>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgGrant.typeUrl,
-  encoders: toEncoders(Grant),
-  converters: toConverters(Grant)
+  typeUrl: MsgGrant.typeUrl,
+  encoders: toEncoders(MsgGrant),
+  converters: toConverters(MsgGrant)
 });
-export const useGrant = buildUseMutation<Grant, Error>({
+export const useGrant = buildUseMutation<MsgGrant, Error>({
   builderMutationFn: createGrant
 });
-export const createExec = (getSigningClient: SigningClientResolver) => buildTx<Exec>({
+export const createExec = (getSigningClient: SigningClientResolver) => buildTx<MsgExec>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgExec.typeUrl,
-  encoders: toEncoders(Exec),
-  converters: toConverters(Exec)
+  typeUrl: MsgExec.typeUrl,
+  encoders: toEncoders(MsgExec),
+  converters: toConverters(MsgExec)
 });
-export const useExec = buildUseMutation<Exec, Error>({
+export const useExec = buildUseMutation<MsgExec, Error>({
   builderMutationFn: createExec
 });
-export const createRevoke = (getSigningClient: SigningClientResolver) => buildTx<Revoke>({
+export const createRevoke = (getSigningClient: SigningClientResolver) => buildTx<MsgRevoke>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgRevoke.typeUrl,
-  encoders: toEncoders(Revoke),
-  converters: toConverters(Revoke)
+  typeUrl: MsgRevoke.typeUrl,
+  encoders: toEncoders(MsgRevoke),
+  converters: toConverters(MsgRevoke)
 });
-export const useRevoke = buildUseMutation<Revoke, Error>({
+export const useRevoke = buildUseMutation<MsgRevoke, Error>({
   builderMutationFn: createRevoke
 });

@@ -2,53 +2,52 @@ import { Description, DescriptionSDKType, CommissionRates, CommissionRatesSDKTyp
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateValidator, MsgCreateValidatorSDKType, MsgCreateValidatorResponse, MsgCreateValidatorResponseSDKType, MsgEditValidator, MsgEditValidatorSDKType, MsgEditValidatorResponse, MsgEditValidatorResponseSDKType, MsgDelegate, MsgDelegateSDKType, MsgDelegateResponse, MsgDelegateResponseSDKType, MsgBeginRedelegate, MsgBeginRedelegateSDKType, MsgBeginRedelegateResponse, MsgBeginRedelegateResponseSDKType, MsgUndelegate, MsgUndelegateSDKType, MsgUndelegateResponse, MsgUndelegateResponseSDKType } from "./tx";
-export const createCreateValidator = (getSigningClient: SigningClientResolver) => buildTx<CreateValidator>({
+export const createCreateValidator = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateValidator>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateValidator.typeUrl,
-  encoders: toEncoders(CreateValidator),
-  converters: toConverters(CreateValidator)
+  typeUrl: MsgCreateValidator.typeUrl,
+  encoders: toEncoders(MsgCreateValidator),
+  converters: toConverters(MsgCreateValidator)
 });
-export const useCreateValidator = buildUseMutation<CreateValidator, Error>({
+export const useCreateValidator = buildUseMutation<MsgCreateValidator, Error>({
   builderMutationFn: createCreateValidator
 });
-export const createEditValidator = (getSigningClient: SigningClientResolver) => buildTx<EditValidator>({
+export const createEditValidator = (getSigningClient: SigningClientResolver) => buildTx<MsgEditValidator>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgEditValidator.typeUrl,
-  encoders: toEncoders(EditValidator),
-  converters: toConverters(EditValidator)
+  typeUrl: MsgEditValidator.typeUrl,
+  encoders: toEncoders(MsgEditValidator),
+  converters: toConverters(MsgEditValidator)
 });
-export const useEditValidator = buildUseMutation<EditValidator, Error>({
+export const useEditValidator = buildUseMutation<MsgEditValidator, Error>({
   builderMutationFn: createEditValidator
 });
-export const createDelegate = (getSigningClient: SigningClientResolver) => buildTx<Delegate>({
+export const createDelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgDelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgDelegate.typeUrl,
-  encoders: toEncoders(Delegate),
-  converters: toConverters(Delegate)
+  typeUrl: MsgDelegate.typeUrl,
+  encoders: toEncoders(MsgDelegate),
+  converters: toConverters(MsgDelegate)
 });
-export const useDelegate = buildUseMutation<Delegate, Error>({
+export const useDelegate = buildUseMutation<MsgDelegate, Error>({
   builderMutationFn: createDelegate
 });
-export const createBeginRedelegate = (getSigningClient: SigningClientResolver) => buildTx<BeginRedelegate>({
+export const createBeginRedelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgBeginRedelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgBeginRedelegate.typeUrl,
-  encoders: toEncoders(BeginRedelegate),
-  converters: toConverters(BeginRedelegate)
+  typeUrl: MsgBeginRedelegate.typeUrl,
+  encoders: toEncoders(MsgBeginRedelegate),
+  converters: toConverters(MsgBeginRedelegate)
 });
-export const useBeginRedelegate = buildUseMutation<BeginRedelegate, Error>({
+export const useBeginRedelegate = buildUseMutation<MsgBeginRedelegate, Error>({
   builderMutationFn: createBeginRedelegate
 });
-export const createUndelegate = (getSigningClient: SigningClientResolver) => buildTx<Undelegate>({
+export const createUndelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgUndelegate>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUndelegate.typeUrl,
-  encoders: toEncoders(Undelegate),
-  converters: toConverters(Undelegate)
+  typeUrl: MsgUndelegate.typeUrl,
+  encoders: toEncoders(MsgUndelegate),
+  converters: toConverters(MsgUndelegate)
 });
-export const useUndelegate = buildUseMutation<Undelegate, Error>({
+export const useUndelegate = buildUseMutation<MsgUndelegate, Error>({
   builderMutationFn: createUndelegate
 });

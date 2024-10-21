@@ -1,32 +1,31 @@
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgRegisterDevFeeInfo, MsgRegisterDevFeeInfoSDKType, MsgRegisterDevFeeInfoResponse, MsgRegisterDevFeeInfoResponseSDKType, MsgCancelDevFeeInfo, MsgCancelDevFeeInfoSDKType, MsgCancelDevFeeInfoResponse, MsgCancelDevFeeInfoResponseSDKType, MsgUpdateDevFeeInfo, MsgUpdateDevFeeInfoSDKType, MsgUpdateDevFeeInfoResponse, MsgUpdateDevFeeInfoResponseSDKType } from "./tx";
-export const createRegisterDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<RegisterDevFeeInfo>({
+export const createRegisterDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<MsgRegisterDevFeeInfo>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgRegisterDevFeeInfo.typeUrl,
-  encoders: toEncoders(RegisterDevFeeInfo),
-  converters: toConverters(RegisterDevFeeInfo)
+  typeUrl: MsgRegisterDevFeeInfo.typeUrl,
+  encoders: toEncoders(MsgRegisterDevFeeInfo),
+  converters: toConverters(MsgRegisterDevFeeInfo)
 });
-export const useRegisterDevFeeInfo = buildUseMutation<RegisterDevFeeInfo, Error>({
+export const useRegisterDevFeeInfo = buildUseMutation<MsgRegisterDevFeeInfo, Error>({
   builderMutationFn: createRegisterDevFeeInfo
 });
-export const createCancelDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<CancelDevFeeInfo>({
+export const createCancelDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<MsgCancelDevFeeInfo>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCancelDevFeeInfo.typeUrl,
-  encoders: toEncoders(CancelDevFeeInfo),
-  converters: toConverters(CancelDevFeeInfo)
+  typeUrl: MsgCancelDevFeeInfo.typeUrl,
+  encoders: toEncoders(MsgCancelDevFeeInfo),
+  converters: toConverters(MsgCancelDevFeeInfo)
 });
-export const useCancelDevFeeInfo = buildUseMutation<CancelDevFeeInfo, Error>({
+export const useCancelDevFeeInfo = buildUseMutation<MsgCancelDevFeeInfo, Error>({
   builderMutationFn: createCancelDevFeeInfo
 });
-export const createUpdateDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<UpdateDevFeeInfo>({
+export const createUpdateDevFeeInfo = (getSigningClient: SigningClientResolver) => buildTx<MsgUpdateDevFeeInfo>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgUpdateDevFeeInfo.typeUrl,
-  encoders: toEncoders(UpdateDevFeeInfo),
-  converters: toConverters(UpdateDevFeeInfo)
+  typeUrl: MsgUpdateDevFeeInfo.typeUrl,
+  encoders: toEncoders(MsgUpdateDevFeeInfo),
+  converters: toConverters(MsgUpdateDevFeeInfo)
 });
-export const useUpdateDevFeeInfo = buildUseMutation<UpdateDevFeeInfo, Error>({
+export const useUpdateDevFeeInfo = buildUseMutation<MsgUpdateDevFeeInfo, Error>({
   builderMutationFn: createUpdateDevFeeInfo
 });

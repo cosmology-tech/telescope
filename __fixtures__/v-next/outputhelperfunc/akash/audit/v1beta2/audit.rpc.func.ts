@@ -1,24 +1,23 @@
 import { Attribute, AttributeSDKType } from "../../base/v1beta2/attribute";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSignProviderAttributes, MsgSignProviderAttributesSDKType, MsgSignProviderAttributesResponse, MsgSignProviderAttributesResponseSDKType, MsgDeleteProviderAttributes, MsgDeleteProviderAttributesSDKType, MsgDeleteProviderAttributesResponse, MsgDeleteProviderAttributesResponseSDKType } from "./audit";
-export const createSignProviderAttributes = (getSigningClient: SigningClientResolver) => buildTx<SignProviderAttributes>({
+export const createSignProviderAttributes = (getSigningClient: SigningClientResolver) => buildTx<MsgSignProviderAttributes>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSignProviderAttributes.typeUrl,
-  encoders: toEncoders(SignProviderAttributes),
-  converters: toConverters(SignProviderAttributes)
+  typeUrl: MsgSignProviderAttributes.typeUrl,
+  encoders: toEncoders(MsgSignProviderAttributes),
+  converters: toConverters(MsgSignProviderAttributes)
 });
-export const useSignProviderAttributes = buildUseMutation<SignProviderAttributes, Error>({
+export const useSignProviderAttributes = buildUseMutation<MsgSignProviderAttributes, Error>({
   builderMutationFn: createSignProviderAttributes
 });
-export const createDeleteProviderAttributes = (getSigningClient: SigningClientResolver) => buildTx<DeleteProviderAttributes>({
+export const createDeleteProviderAttributes = (getSigningClient: SigningClientResolver) => buildTx<MsgDeleteProviderAttributes>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgDeleteProviderAttributes.typeUrl,
-  encoders: toEncoders(DeleteProviderAttributes),
-  converters: toConverters(DeleteProviderAttributes)
+  typeUrl: MsgDeleteProviderAttributes.typeUrl,
+  encoders: toEncoders(MsgDeleteProviderAttributes),
+  converters: toConverters(MsgDeleteProviderAttributes)
 });
-export const useDeleteProviderAttributes = buildUseMutation<DeleteProviderAttributes, Error>({
+export const useDeleteProviderAttributes = buildUseMutation<MsgDeleteProviderAttributes, Error>({
   builderMutationFn: createDeleteProviderAttributes
 });

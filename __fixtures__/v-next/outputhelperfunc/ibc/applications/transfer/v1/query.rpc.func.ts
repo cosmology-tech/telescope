@@ -1,6 +1,6 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
-import { SigningClientResolver } from "../../../../helpers";
+import { SigningClientResolver } from "../../../../helper-func-types";
 import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
 export const createGetDenomTrace = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
   encoder: QueryDenomTraceRequest.encode,

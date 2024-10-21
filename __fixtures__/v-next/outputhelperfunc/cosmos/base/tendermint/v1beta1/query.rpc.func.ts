@@ -3,7 +3,7 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import { SigningClientResolver } from "../../../../helpers";
+import { SigningClientResolver } from "../../../../helper-func-types";
 import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseSDKType } from "./query";
 export const createGetGetNodeInfo = (getRpcInstance: SigningClientResolver) => buildQuery<GetNodeInfoRequest, GetNodeInfoResponse>({
   encoder: GetNodeInfoRequest.encode,

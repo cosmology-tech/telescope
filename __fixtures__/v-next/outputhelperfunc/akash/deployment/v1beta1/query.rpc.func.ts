@@ -2,7 +2,7 @@ import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentID
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta1/types";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 export const createGetDeployments = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDeploymentsRequest, QueryDeploymentsResponse>({
   encoder: QueryDeploymentsRequest.encode,

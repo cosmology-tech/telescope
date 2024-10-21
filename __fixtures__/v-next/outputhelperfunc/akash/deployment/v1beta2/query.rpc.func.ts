@@ -3,7 +3,7 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { GroupID, GroupIDSDKType } from "./groupid";
 import { Group, GroupSDKType } from "./group";
 import { Account, AccountSDKType } from "../../escrow/v1beta2/types";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymentsResponse, QueryDeploymentsResponseSDKType, QueryDeploymentRequest, QueryDeploymentRequestSDKType, QueryDeploymentResponse, QueryDeploymentResponseSDKType, QueryGroupRequest, QueryGroupRequestSDKType, QueryGroupResponse, QueryGroupResponseSDKType } from "./query";
 export const createGetDeployments = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDeploymentsRequest, QueryDeploymentsResponse>({
   encoder: QueryDeploymentsRequest.encode,

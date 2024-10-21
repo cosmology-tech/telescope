@@ -1,5 +1,5 @@
 import { Config, ConfigSDKType } from "./config";
-import { SigningClientResolver } from "../../../helpers";
+import { SigningClientResolver } from "../../../helper-func-types";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 export const createGetConfig = (getRpcInstance: SigningClientResolver) => buildQuery<QueryConfigRequest, QueryConfigResponse>({
   encoder: QueryConfigRequest.encode,

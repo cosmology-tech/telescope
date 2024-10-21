@@ -1,52 +1,51 @@
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Metadata, MetadataSDKType } from "../../../cosmos/bank/v1beta1/bank";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateDenom, MsgCreateDenomSDKType, MsgCreateDenomResponse, MsgCreateDenomResponseSDKType, MsgMint, MsgMintSDKType, MsgMintResponse, MsgMintResponseSDKType, MsgBurn, MsgBurnSDKType, MsgBurnResponse, MsgBurnResponseSDKType, MsgChangeAdmin, MsgChangeAdminSDKType, MsgChangeAdminResponse, MsgChangeAdminResponseSDKType, MsgSetDenomMetadata, MsgSetDenomMetadataSDKType, MsgSetDenomMetadataResponse, MsgSetDenomMetadataResponseSDKType } from "./tx";
-export const createCreateDenom = (getSigningClient: SigningClientResolver) => buildTx<CreateDenom>({
+export const createCreateDenom = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateDenom>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgCreateDenom.typeUrl,
-  encoders: toEncoders(CreateDenom),
-  converters: toConverters(CreateDenom)
+  typeUrl: MsgCreateDenom.typeUrl,
+  encoders: toEncoders(MsgCreateDenom),
+  converters: toConverters(MsgCreateDenom)
 });
-export const useCreateDenom = buildUseMutation<CreateDenom, Error>({
+export const useCreateDenom = buildUseMutation<MsgCreateDenom, Error>({
   builderMutationFn: createCreateDenom
 });
-export const createMint = (getSigningClient: SigningClientResolver) => buildTx<Mint>({
+export const createMint = (getSigningClient: SigningClientResolver) => buildTx<MsgMint>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgMint.typeUrl,
-  encoders: toEncoders(Mint),
-  converters: toConverters(Mint)
+  typeUrl: MsgMint.typeUrl,
+  encoders: toEncoders(MsgMint),
+  converters: toConverters(MsgMint)
 });
-export const useMint = buildUseMutation<Mint, Error>({
+export const useMint = buildUseMutation<MsgMint, Error>({
   builderMutationFn: createMint
 });
-export const createBurn = (getSigningClient: SigningClientResolver) => buildTx<Burn>({
+export const createBurn = (getSigningClient: SigningClientResolver) => buildTx<MsgBurn>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgBurn.typeUrl,
-  encoders: toEncoders(Burn),
-  converters: toConverters(Burn)
+  typeUrl: MsgBurn.typeUrl,
+  encoders: toEncoders(MsgBurn),
+  converters: toConverters(MsgBurn)
 });
-export const useBurn = buildUseMutation<Burn, Error>({
+export const useBurn = buildUseMutation<MsgBurn, Error>({
   builderMutationFn: createBurn
 });
-export const createChangeAdmin = (getSigningClient: SigningClientResolver) => buildTx<ChangeAdmin>({
+export const createChangeAdmin = (getSigningClient: SigningClientResolver) => buildTx<MsgChangeAdmin>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgChangeAdmin.typeUrl,
-  encoders: toEncoders(ChangeAdmin),
-  converters: toConverters(ChangeAdmin)
+  typeUrl: MsgChangeAdmin.typeUrl,
+  encoders: toEncoders(MsgChangeAdmin),
+  converters: toConverters(MsgChangeAdmin)
 });
-export const useChangeAdmin = buildUseMutation<ChangeAdmin, Error>({
+export const useChangeAdmin = buildUseMutation<MsgChangeAdmin, Error>({
   builderMutationFn: createChangeAdmin
 });
-export const createSetDenomMetadata = (getSigningClient: SigningClientResolver) => buildTx<SetDenomMetadata>({
+export const createSetDenomMetadata = (getSigningClient: SigningClientResolver) => buildTx<MsgSetDenomMetadata>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSetDenomMetadata.typeUrl,
-  encoders: toEncoders(SetDenomMetadata),
-  converters: toConverters(SetDenomMetadata)
+  typeUrl: MsgSetDenomMetadata.typeUrl,
+  encoders: toEncoders(MsgSetDenomMetadata),
+  converters: toConverters(MsgSetDenomMetadata)
 });
-export const useSetDenomMetadata = buildUseMutation<SetDenomMetadata, Error>({
+export const useSetDenomMetadata = buildUseMutation<MsgSetDenomMetadata, Error>({
   builderMutationFn: createSetDenomMetadata
 });

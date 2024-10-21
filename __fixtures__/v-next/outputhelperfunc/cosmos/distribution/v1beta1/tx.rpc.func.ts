@@ -1,42 +1,41 @@
 import { Coin, CoinSDKType } from "../../base/v1beta1/coin";
-import { buildTx, ISigningClient } from "../../../helper-func-types";
+import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
-import { SigningClientResolver } from "../../../helpers";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSetWithdrawAddress, MsgSetWithdrawAddressSDKType, MsgSetWithdrawAddressResponse, MsgSetWithdrawAddressResponseSDKType, MsgWithdrawDelegatorReward, MsgWithdrawDelegatorRewardSDKType, MsgWithdrawDelegatorRewardResponse, MsgWithdrawDelegatorRewardResponseSDKType, MsgWithdrawValidatorCommission, MsgWithdrawValidatorCommissionSDKType, MsgWithdrawValidatorCommissionResponse, MsgWithdrawValidatorCommissionResponseSDKType, MsgFundCommunityPool, MsgFundCommunityPoolSDKType, MsgFundCommunityPoolResponse, MsgFundCommunityPoolResponseSDKType } from "./tx";
-export const createSetWithdrawAddress = (getSigningClient: SigningClientResolver) => buildTx<SetWithdrawAddress>({
+export const createSetWithdrawAddress = (getSigningClient: SigningClientResolver) => buildTx<MsgSetWithdrawAddress>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgSetWithdrawAddress.typeUrl,
-  encoders: toEncoders(SetWithdrawAddress),
-  converters: toConverters(SetWithdrawAddress)
+  typeUrl: MsgSetWithdrawAddress.typeUrl,
+  encoders: toEncoders(MsgSetWithdrawAddress),
+  converters: toConverters(MsgSetWithdrawAddress)
 });
-export const useSetWithdrawAddress = buildUseMutation<SetWithdrawAddress, Error>({
+export const useSetWithdrawAddress = buildUseMutation<MsgSetWithdrawAddress, Error>({
   builderMutationFn: createSetWithdrawAddress
 });
-export const createWithdrawDelegatorReward = (getSigningClient: SigningClientResolver) => buildTx<WithdrawDelegatorReward>({
+export const createWithdrawDelegatorReward = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawDelegatorReward>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgWithdrawDelegatorReward.typeUrl,
-  encoders: toEncoders(WithdrawDelegatorReward),
-  converters: toConverters(WithdrawDelegatorReward)
+  typeUrl: MsgWithdrawDelegatorReward.typeUrl,
+  encoders: toEncoders(MsgWithdrawDelegatorReward),
+  converters: toConverters(MsgWithdrawDelegatorReward)
 });
-export const useWithdrawDelegatorReward = buildUseMutation<WithdrawDelegatorReward, Error>({
+export const useWithdrawDelegatorReward = buildUseMutation<MsgWithdrawDelegatorReward, Error>({
   builderMutationFn: createWithdrawDelegatorReward
 });
-export const createWithdrawValidatorCommission = (getSigningClient: SigningClientResolver) => buildTx<WithdrawValidatorCommission>({
+export const createWithdrawValidatorCommission = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawValidatorCommission>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgWithdrawValidatorCommission.typeUrl,
-  encoders: toEncoders(WithdrawValidatorCommission),
-  converters: toConverters(WithdrawValidatorCommission)
+  typeUrl: MsgWithdrawValidatorCommission.typeUrl,
+  encoders: toEncoders(MsgWithdrawValidatorCommission),
+  converters: toConverters(MsgWithdrawValidatorCommission)
 });
-export const useWithdrawValidatorCommission = buildUseMutation<WithdrawValidatorCommission, Error>({
+export const useWithdrawValidatorCommission = buildUseMutation<MsgWithdrawValidatorCommission, Error>({
   builderMutationFn: createWithdrawValidatorCommission
 });
-export const createFundCommunityPool = (getSigningClient: SigningClientResolver) => buildTx<FundCommunityPool>({
+export const createFundCommunityPool = (getSigningClient: SigningClientResolver) => buildTx<MsgFundCommunityPool>({
   getSigningClient: getSigningClient,
-  typeUrl: : MsgFundCommunityPool.typeUrl,
-  encoders: toEncoders(FundCommunityPool),
-  converters: toConverters(FundCommunityPool)
+  typeUrl: MsgFundCommunityPool.typeUrl,
+  encoders: toEncoders(MsgFundCommunityPool),
+  converters: toConverters(MsgFundCommunityPool)
 });
-export const useFundCommunityPool = buildUseMutation<FundCommunityPool, Error>({
+export const useFundCommunityPool = buildUseMutation<MsgFundCommunityPool, Error>({
   builderMutationFn: createFundCommunityPool
 });
