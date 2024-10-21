@@ -1,9 +1,10 @@
 import { Duration, DurationSDKType } from "../../../google/protobuf/duration";
 import { DistrInfo, DistrInfoSDKType, Params, ParamsSDKType } from "./incentives";
 import { Gauge, GaugeSDKType } from "../../incentives/gauge";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryGaugeIdsRequest, QueryGaugeIdsRequestSDKType, QueryGaugeIdsResponse, QueryGaugeIdsResponseSDKType, QueryDistrInfoRequest, QueryDistrInfoRequestSDKType, QueryDistrInfoResponse, QueryDistrInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType, QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsRequestSDKType, QueryIncentivizedPoolsResponse, QueryIncentivizedPoolsResponseSDKType, QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesRequestSDKType, QueryExternalIncentiveGaugesResponse, QueryExternalIncentiveGaugesResponseSDKType } from "./query";
-export const createGetGaugeIds = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGaugeIdsRequest, QueryGaugeIdsResponse>({
+export const createGetGaugeIds = (getRpcInstance: RpcResolver) => buildQuery<QueryGaugeIdsRequest, QueryGaugeIdsResponse>({
   encoder: QueryGaugeIdsRequest.encode,
   decoder: QueryGaugeIdsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -14,7 +15,7 @@ export const useGetGaugeIds = buildUseQuery<QueryGaugeIdsRequest, QueryGaugeIdsR
   builderQueryFn: createGetGaugeIds,
   queryKeyPrefix: "GaugeIdsQuery"
 });
-export const createGetDistrInfo = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDistrInfoRequest, QueryDistrInfoResponse>({
+export const createGetDistrInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryDistrInfoRequest, QueryDistrInfoResponse>({
   encoder: QueryDistrInfoRequest.encode,
   decoder: QueryDistrInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -25,7 +26,7 @@ export const useGetDistrInfo = buildUseQuery<QueryDistrInfoRequest, QueryDistrIn
   builderQueryFn: createGetDistrInfo,
   queryKeyPrefix: "DistrInfoQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -36,7 +37,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetLockableDurations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
+export const createGetLockableDurations = (getRpcInstance: RpcResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
   encoder: QueryLockableDurationsRequest.encode,
   decoder: QueryLockableDurationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -47,7 +48,7 @@ export const useGetLockableDurations = buildUseQuery<QueryLockableDurationsReque
   builderQueryFn: createGetLockableDurations,
   queryKeyPrefix: "LockableDurationsQuery"
 });
-export const createGetIncentivizedPools = (getRpcInstance: SigningClientResolver) => buildQuery<QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse>({
+export const createGetIncentivizedPools = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse>({
   encoder: QueryIncentivizedPoolsRequest.encode,
   decoder: QueryIncentivizedPoolsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -58,7 +59,7 @@ export const useGetIncentivizedPools = buildUseQuery<QueryIncentivizedPoolsReque
   builderQueryFn: createGetIncentivizedPools,
   queryKeyPrefix: "IncentivizedPoolsQuery"
 });
-export const createGetExternalIncentiveGauges = (getRpcInstance: SigningClientResolver) => buildQuery<QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse>({
+export const createGetExternalIncentiveGauges = (getRpcInstance: RpcResolver) => buildQuery<QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse>({
   encoder: QueryExternalIncentiveGaugesRequest.encode,
   decoder: QueryExternalIncentiveGaugesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

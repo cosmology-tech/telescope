@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { GroupInfo, GroupInfoSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, GroupMember, GroupMemberSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType, TallyResult, TallyResultSDKType } from "./types";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResponse, QueryGroupInfoResponseSDKType, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoRequestSDKType, QueryGroupPolicyInfoResponse, QueryGroupPolicyInfoResponseSDKType, QueryGroupMembersRequest, QueryGroupMembersRequestSDKType, QueryGroupMembersResponse, QueryGroupMembersResponseSDKType, QueryGroupsByAdminRequest, QueryGroupsByAdminRequestSDKType, QueryGroupsByAdminResponse, QueryGroupsByAdminResponseSDKType, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupRequestSDKType, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByGroupResponseSDKType, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminRequestSDKType, QueryGroupPoliciesByAdminResponse, QueryGroupPoliciesByAdminResponseSDKType, QueryProposalRequest, QueryProposalRequestSDKType, QueryProposalResponse, QueryProposalResponseSDKType, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyRequestSDKType, QueryProposalsByGroupPolicyResponse, QueryProposalsByGroupPolicyResponseSDKType, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterRequestSDKType, QueryVoteByProposalVoterResponse, QueryVoteByProposalVoterResponseSDKType, QueryVotesByProposalRequest, QueryVotesByProposalRequestSDKType, QueryVotesByProposalResponse, QueryVotesByProposalResponseSDKType, QueryVotesByVoterRequest, QueryVotesByVoterRequestSDKType, QueryVotesByVoterResponse, QueryVotesByVoterResponseSDKType, QueryGroupsByMemberRequest, QueryGroupsByMemberRequestSDKType, QueryGroupsByMemberResponse, QueryGroupsByMemberResponseSDKType, QueryTallyResultRequest, QueryTallyResultRequestSDKType, QueryTallyResultResponse, QueryTallyResultResponseSDKType } from "./query";
-export const createGetGroupInfo = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
+export const createGetGroupInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
   encoder: QueryGroupInfoRequest.encode,
   decoder: QueryGroupInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetGroupInfo = buildUseQuery<QueryGroupInfoRequest, QueryGroupIn
   builderQueryFn: createGetGroupInfo,
   queryKeyPrefix: "GroupInfoQuery"
 });
-export const createGetGroupPolicyInfo = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
+export const createGetGroupPolicyInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
   encoder: QueryGroupPolicyInfoRequest.encode,
   decoder: QueryGroupPolicyInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetGroupPolicyInfo = buildUseQuery<QueryGroupPolicyInfoRequest, 
   builderQueryFn: createGetGroupPolicyInfo,
   queryKeyPrefix: "GroupPolicyInfoQuery"
 });
-export const createGetGroupMembers = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
+export const createGetGroupMembers = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
   encoder: QueryGroupMembersRequest.encode,
   decoder: QueryGroupMembersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -35,7 +36,7 @@ export const useGetGroupMembers = buildUseQuery<QueryGroupMembersRequest, QueryG
   builderQueryFn: createGetGroupMembers,
   queryKeyPrefix: "GroupMembersQuery"
 });
-export const createGetGroupsByAdmin = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
+export const createGetGroupsByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
   encoder: QueryGroupsByAdminRequest.encode,
   decoder: QueryGroupsByAdminResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -46,7 +47,7 @@ export const useGetGroupsByAdmin = buildUseQuery<QueryGroupsByAdminRequest, Quer
   builderQueryFn: createGetGroupsByAdmin,
   queryKeyPrefix: "GroupsByAdminQuery"
 });
-export const createGetGroupPoliciesByGroup = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
+export const createGetGroupPoliciesByGroup = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
   encoder: QueryGroupPoliciesByGroupRequest.encode,
   decoder: QueryGroupPoliciesByGroupResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -57,7 +58,7 @@ export const useGetGroupPoliciesByGroup = buildUseQuery<QueryGroupPoliciesByGrou
   builderQueryFn: createGetGroupPoliciesByGroup,
   queryKeyPrefix: "GroupPoliciesByGroupQuery"
 });
-export const createGetGroupPoliciesByAdmin = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
+export const createGetGroupPoliciesByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
   encoder: QueryGroupPoliciesByAdminRequest.encode,
   decoder: QueryGroupPoliciesByAdminResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -68,7 +69,7 @@ export const useGetGroupPoliciesByAdmin = buildUseQuery<QueryGroupPoliciesByAdmi
   builderQueryFn: createGetGroupPoliciesByAdmin,
   queryKeyPrefix: "GroupPoliciesByAdminQuery"
 });
-export const createGetProposal = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProposalRequest, QueryProposalResponse>({
+export const createGetProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalRequest, QueryProposalResponse>({
   encoder: QueryProposalRequest.encode,
   decoder: QueryProposalResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -79,7 +80,7 @@ export const useGetProposal = buildUseQuery<QueryProposalRequest, QueryProposalR
   builderQueryFn: createGetProposal,
   queryKeyPrefix: "ProposalQuery"
 });
-export const createGetProposalsByGroupPolicy = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
+export const createGetProposalsByGroupPolicy = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
   encoder: QueryProposalsByGroupPolicyRequest.encode,
   decoder: QueryProposalsByGroupPolicyResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -90,7 +91,7 @@ export const useGetProposalsByGroupPolicy = buildUseQuery<QueryProposalsByGroupP
   builderQueryFn: createGetProposalsByGroupPolicy,
   queryKeyPrefix: "ProposalsByGroupPolicyQuery"
 });
-export const createGetVoteByProposalVoter = (getRpcInstance: SigningClientResolver) => buildQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
+export const createGetVoteByProposalVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
   encoder: QueryVoteByProposalVoterRequest.encode,
   decoder: QueryVoteByProposalVoterResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -101,7 +102,7 @@ export const useGetVoteByProposalVoter = buildUseQuery<QueryVoteByProposalVoterR
   builderQueryFn: createGetVoteByProposalVoter,
   queryKeyPrefix: "VoteByProposalVoterQuery"
 });
-export const createGetVotesByProposal = (getRpcInstance: SigningClientResolver) => buildQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
+export const createGetVotesByProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
   encoder: QueryVotesByProposalRequest.encode,
   decoder: QueryVotesByProposalResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -112,7 +113,7 @@ export const useGetVotesByProposal = buildUseQuery<QueryVotesByProposalRequest, 
   builderQueryFn: createGetVotesByProposal,
   queryKeyPrefix: "VotesByProposalQuery"
 });
-export const createGetVotesByVoter = (getRpcInstance: SigningClientResolver) => buildQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
+export const createGetVotesByVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
   encoder: QueryVotesByVoterRequest.encode,
   decoder: QueryVotesByVoterResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -123,7 +124,7 @@ export const useGetVotesByVoter = buildUseQuery<QueryVotesByVoterRequest, QueryV
   builderQueryFn: createGetVotesByVoter,
   queryKeyPrefix: "VotesByVoterQuery"
 });
-export const createGetGroupsByMember = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
+export const createGetGroupsByMember = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
   encoder: QueryGroupsByMemberRequest.encode,
   decoder: QueryGroupsByMemberResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -134,7 +135,7 @@ export const useGetGroupsByMember = buildUseQuery<QueryGroupsByMemberRequest, Qu
   builderQueryFn: createGetGroupsByMember,
   queryKeyPrefix: "GroupsByMemberQuery"
 });
-export const createGetTallyResult = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
+export const createGetTallyResult = (getRpcInstance: RpcResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
   encoder: QueryTallyResultRequest.encode,
   decoder: QueryTallyResultResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

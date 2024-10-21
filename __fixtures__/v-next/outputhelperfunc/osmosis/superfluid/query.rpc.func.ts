@@ -4,9 +4,10 @@ import { SuperfluidAssetType, SuperfluidAssetTypeSDKType, SuperfluidAsset, Super
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { SyntheticLock, SyntheticLockSDKType } from "../lockup/lock";
 import { DelegationResponse, DelegationResponseSDKType } from "../../cosmos/staking/v1beta1/staking";
-import { SigningClientResolver } from "../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../helper-func-types";
+import { buildUseQuery } from "../../react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, AssetTypeRequest, AssetTypeRequestSDKType, AssetTypeResponse, AssetTypeResponseSDKType, AllAssetsRequest, AllAssetsRequestSDKType, AllAssetsResponse, AllAssetsResponseSDKType, AssetMultiplierRequest, AssetMultiplierRequestSDKType, AssetMultiplierResponse, AssetMultiplierResponseSDKType, AllIntermediaryAccountsRequest, AllIntermediaryAccountsRequestSDKType, AllIntermediaryAccountsResponse, AllIntermediaryAccountsResponseSDKType, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountRequestSDKType, ConnectedIntermediaryAccountResponse, ConnectedIntermediaryAccountResponseSDKType, QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomRequestSDKType, QueryTotalDelegationByValidatorForDenomResponse, QueryTotalDelegationByValidatorForDenomResponseSDKType, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsRequestSDKType, TotalSuperfluidDelegationsResponse, TotalSuperfluidDelegationsResponseSDKType, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountRequestSDKType, SuperfluidDelegationAmountResponse, SuperfluidDelegationAmountResponseSDKType, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorRequestSDKType, SuperfluidDelegationsByDelegatorResponse, SuperfluidDelegationsByDelegatorResponseSDKType, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorRequestSDKType, SuperfluidUndelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorResponseSDKType, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomRequestSDKType, SuperfluidDelegationsByValidatorDenomResponse, SuperfluidDelegationsByValidatorDenomResponseSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomRequestSDKType, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomResponseSDKType, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorRequestSDKType, QueryTotalDelegationByDelegatorResponse, QueryTotalDelegationByDelegatorResponseSDKType, QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistRequestSDKType, QueryUnpoolWhitelistResponse, QueryUnpoolWhitelistResponseSDKType } from "./query";
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -17,7 +18,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetAssetType = (getRpcInstance: SigningClientResolver) => buildQuery<AssetTypeRequest, AssetTypeResponse>({
+export const createGetAssetType = (getRpcInstance: RpcResolver) => buildQuery<AssetTypeRequest, AssetTypeResponse>({
   encoder: AssetTypeRequest.encode,
   decoder: AssetTypeResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -28,7 +29,7 @@ export const useGetAssetType = buildUseQuery<AssetTypeRequest, AssetTypeResponse
   builderQueryFn: createGetAssetType,
   queryKeyPrefix: "AssetTypeQuery"
 });
-export const createGetAllAssets = (getRpcInstance: SigningClientResolver) => buildQuery<AllAssetsRequest, AllAssetsResponse>({
+export const createGetAllAssets = (getRpcInstance: RpcResolver) => buildQuery<AllAssetsRequest, AllAssetsResponse>({
   encoder: AllAssetsRequest.encode,
   decoder: AllAssetsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -39,7 +40,7 @@ export const useGetAllAssets = buildUseQuery<AllAssetsRequest, AllAssetsResponse
   builderQueryFn: createGetAllAssets,
   queryKeyPrefix: "AllAssetsQuery"
 });
-export const createGetAssetMultiplier = (getRpcInstance: SigningClientResolver) => buildQuery<AssetMultiplierRequest, AssetMultiplierResponse>({
+export const createGetAssetMultiplier = (getRpcInstance: RpcResolver) => buildQuery<AssetMultiplierRequest, AssetMultiplierResponse>({
   encoder: AssetMultiplierRequest.encode,
   decoder: AssetMultiplierResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -50,7 +51,7 @@ export const useGetAssetMultiplier = buildUseQuery<AssetMultiplierRequest, Asset
   builderQueryFn: createGetAssetMultiplier,
   queryKeyPrefix: "AssetMultiplierQuery"
 });
-export const createGetAllIntermediaryAccounts = (getRpcInstance: SigningClientResolver) => buildQuery<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse>({
+export const createGetAllIntermediaryAccounts = (getRpcInstance: RpcResolver) => buildQuery<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse>({
   encoder: AllIntermediaryAccountsRequest.encode,
   decoder: AllIntermediaryAccountsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -61,7 +62,7 @@ export const useGetAllIntermediaryAccounts = buildUseQuery<AllIntermediaryAccoun
   builderQueryFn: createGetAllIntermediaryAccounts,
   queryKeyPrefix: "AllIntermediaryAccountsQuery"
 });
-export const createGetConnectedIntermediaryAccount = (getRpcInstance: SigningClientResolver) => buildQuery<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse>({
+export const createGetConnectedIntermediaryAccount = (getRpcInstance: RpcResolver) => buildQuery<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse>({
   encoder: ConnectedIntermediaryAccountRequest.encode,
   decoder: ConnectedIntermediaryAccountResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -72,7 +73,7 @@ export const useGetConnectedIntermediaryAccount = buildUseQuery<ConnectedInterme
   builderQueryFn: createGetConnectedIntermediaryAccount,
   queryKeyPrefix: "ConnectedIntermediaryAccountQuery"
 });
-export const createGetTotalDelegationByValidatorForDenom = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse>({
+export const createGetTotalDelegationByValidatorForDenom = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse>({
   encoder: QueryTotalDelegationByValidatorForDenomRequest.encode,
   decoder: QueryTotalDelegationByValidatorForDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -83,7 +84,7 @@ export const useGetTotalDelegationByValidatorForDenom = buildUseQuery<QueryTotal
   builderQueryFn: createGetTotalDelegationByValidatorForDenom,
   queryKeyPrefix: "TotalDelegationByValidatorForDenomQuery"
 });
-export const createGetTotalSuperfluidDelegations = (getRpcInstance: SigningClientResolver) => buildQuery<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse>({
+export const createGetTotalSuperfluidDelegations = (getRpcInstance: RpcResolver) => buildQuery<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse>({
   encoder: TotalSuperfluidDelegationsRequest.encode,
   decoder: TotalSuperfluidDelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -94,7 +95,7 @@ export const useGetTotalSuperfluidDelegations = buildUseQuery<TotalSuperfluidDel
   builderQueryFn: createGetTotalSuperfluidDelegations,
   queryKeyPrefix: "TotalSuperfluidDelegationsQuery"
 });
-export const createGetSuperfluidDelegationAmount = (getRpcInstance: SigningClientResolver) => buildQuery<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse>({
+export const createGetSuperfluidDelegationAmount = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse>({
   encoder: SuperfluidDelegationAmountRequest.encode,
   decoder: SuperfluidDelegationAmountResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -105,7 +106,7 @@ export const useGetSuperfluidDelegationAmount = buildUseQuery<SuperfluidDelegati
   builderQueryFn: createGetSuperfluidDelegationAmount,
   queryKeyPrefix: "SuperfluidDelegationAmountQuery"
 });
-export const createGetSuperfluidDelegationsByDelegator = (getRpcInstance: SigningClientResolver) => buildQuery<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse>({
+export const createGetSuperfluidDelegationsByDelegator = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse>({
   encoder: SuperfluidDelegationsByDelegatorRequest.encode,
   decoder: SuperfluidDelegationsByDelegatorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -116,7 +117,7 @@ export const useGetSuperfluidDelegationsByDelegator = buildUseQuery<SuperfluidDe
   builderQueryFn: createGetSuperfluidDelegationsByDelegator,
   queryKeyPrefix: "SuperfluidDelegationsByDelegatorQuery"
 });
-export const createGetSuperfluidUndelegationsByDelegator = (getRpcInstance: SigningClientResolver) => buildQuery<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse>({
+export const createGetSuperfluidUndelegationsByDelegator = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse>({
   encoder: SuperfluidUndelegationsByDelegatorRequest.encode,
   decoder: SuperfluidUndelegationsByDelegatorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -127,7 +128,7 @@ export const useGetSuperfluidUndelegationsByDelegator = buildUseQuery<Superfluid
   builderQueryFn: createGetSuperfluidUndelegationsByDelegator,
   queryKeyPrefix: "SuperfluidUndelegationsByDelegatorQuery"
 });
-export const createGetSuperfluidDelegationsByValidatorDenom = (getRpcInstance: SigningClientResolver) => buildQuery<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse>({
+export const createGetSuperfluidDelegationsByValidatorDenom = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse>({
   encoder: SuperfluidDelegationsByValidatorDenomRequest.encode,
   decoder: SuperfluidDelegationsByValidatorDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -138,7 +139,7 @@ export const useGetSuperfluidDelegationsByValidatorDenom = buildUseQuery<Superfl
   builderQueryFn: createGetSuperfluidDelegationsByValidatorDenom,
   queryKeyPrefix: "SuperfluidDelegationsByValidatorDenomQuery"
 });
-export const createGetEstimateSuperfluidDelegatedAmountByValidatorDenom = (getRpcInstance: SigningClientResolver) => buildQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>({
+export const createGetEstimateSuperfluidDelegatedAmountByValidatorDenom = (getRpcInstance: RpcResolver) => buildQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>({
   encoder: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode,
   decoder: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -149,7 +150,7 @@ export const useGetEstimateSuperfluidDelegatedAmountByValidatorDenom = buildUseQ
   builderQueryFn: createGetEstimateSuperfluidDelegatedAmountByValidatorDenom,
   queryKeyPrefix: "EstimateSuperfluidDelegatedAmountByValidatorDenomQuery"
 });
-export const createGetTotalDelegationByDelegator = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse>({
+export const createGetTotalDelegationByDelegator = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse>({
   encoder: QueryTotalDelegationByDelegatorRequest.encode,
   decoder: QueryTotalDelegationByDelegatorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -160,7 +161,7 @@ export const useGetTotalDelegationByDelegator = buildUseQuery<QueryTotalDelegati
   builderQueryFn: createGetTotalDelegationByDelegator,
   queryKeyPrefix: "TotalDelegationByDelegatorQuery"
 });
-export const createGetUnpoolWhitelist = (getRpcInstance: SigningClientResolver) => buildQuery<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse>({
+export const createGetUnpoolWhitelist = (getRpcInstance: RpcResolver) => buildQuery<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse>({
   encoder: QueryUnpoolWhitelistRequest.encode,
   decoder: QueryUnpoolWhitelistResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

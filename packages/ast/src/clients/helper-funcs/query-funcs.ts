@@ -16,7 +16,8 @@ export function createQueryHelperCreator(
     methodKey?: string,
     helperCreatorName?: string
 ) {
-    context.addUtil("SigningClientResolver");
+    context.addUtil("RpcResolver");
+    context.addUtil("buildQuery");
     const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
         ast.objectExpression([
             ast.objectProperty(
@@ -54,10 +55,9 @@ export function createQueryHelperCreator(
     ]);
 
     const customHookArgumentsType = ast.tsTypeAnnotation(
-        ast.tsTypeReference(ast.identifier("SigningClientResolver"))
+        ast.tsTypeReference(ast.identifier("RpcResolver"))
     );
     const arg = ast.identifier("getRpcInstance");
-
     arg.typeAnnotation = customHookArgumentsType;
 
     const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
@@ -88,6 +88,7 @@ export function createQueryHooks(
     helperCreatorName?: string,
     hookName?: string
 ) {
+    context.addUtil("buildUseQuery");
     const callExpression = ast.callExpression(ast.identifier("buildUseQuery"), [
         ast.objectExpression([
             ast.objectProperty(

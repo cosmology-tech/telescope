@@ -1,7 +1,8 @@
 import { FeeToken, FeeTokenSDKType } from "./feetoken";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResponse, QueryFeeTokensResponseSDKType, QueryDenomSpotPriceRequest, QueryDenomSpotPriceRequestSDKType, QueryDenomSpotPriceResponse, QueryDenomSpotPriceResponseSDKType, QueryDenomPoolIdRequest, QueryDenomPoolIdRequestSDKType, QueryDenomPoolIdResponse, QueryDenomPoolIdResponseSDKType, QueryBaseDenomRequest, QueryBaseDenomRequestSDKType, QueryBaseDenomResponse, QueryBaseDenomResponseSDKType } from "./query";
-export const createGetFeeTokens = (getRpcInstance: SigningClientResolver) => buildQuery<QueryFeeTokensRequest, QueryFeeTokensResponse>({
+export const createGetFeeTokens = (getRpcInstance: RpcResolver) => buildQuery<QueryFeeTokensRequest, QueryFeeTokensResponse>({
   encoder: QueryFeeTokensRequest.encode,
   decoder: QueryFeeTokensResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -12,7 +13,7 @@ export const useGetFeeTokens = buildUseQuery<QueryFeeTokensRequest, QueryFeeToke
   builderQueryFn: createGetFeeTokens,
   queryKeyPrefix: "FeeTokensQuery"
 });
-export const createGetDenomSpotPrice = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse>({
+export const createGetDenomSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse>({
   encoder: QueryDenomSpotPriceRequest.encode,
   decoder: QueryDenomSpotPriceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -23,7 +24,7 @@ export const useGetDenomSpotPrice = buildUseQuery<QueryDenomSpotPriceRequest, Qu
   builderQueryFn: createGetDenomSpotPrice,
   queryKeyPrefix: "DenomSpotPriceQuery"
 });
-export const createGetDenomPoolId = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDenomPoolIdRequest, QueryDenomPoolIdResponse>({
+export const createGetDenomPoolId = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomPoolIdRequest, QueryDenomPoolIdResponse>({
   encoder: QueryDenomPoolIdRequest.encode,
   decoder: QueryDenomPoolIdResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -34,7 +35,7 @@ export const useGetDenomPoolId = buildUseQuery<QueryDenomPoolIdRequest, QueryDen
   builderQueryFn: createGetDenomPoolId,
   queryKeyPrefix: "DenomPoolIdQuery"
 });
-export const createGetBaseDenom = (getRpcInstance: SigningClientResolver) => buildQuery<QueryBaseDenomRequest, QueryBaseDenomResponse>({
+export const createGetBaseDenom = (getRpcInstance: RpcResolver) => buildQuery<QueryBaseDenomRequest, QueryBaseDenomResponse>({
   encoder: QueryBaseDenomRequest.encode,
   decoder: QueryBaseDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

@@ -1,6 +1,7 @@
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInterfacesResponse, ListAllInterfacesResponseSDKType, ListImplementationsRequest, ListImplementationsRequestSDKType, ListImplementationsResponse, ListImplementationsResponseSDKType } from "./reflection";
-export const createGetListAllInterfaces = (getRpcInstance: SigningClientResolver) => buildQuery<ListAllInterfacesRequest, ListAllInterfacesResponse>({
+export const createGetListAllInterfaces = (getRpcInstance: RpcResolver) => buildQuery<ListAllInterfacesRequest, ListAllInterfacesResponse>({
   encoder: ListAllInterfacesRequest.encode,
   decoder: ListAllInterfacesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -11,7 +12,7 @@ export const useGetListAllInterfaces = buildUseQuery<ListAllInterfacesRequest, L
   builderQueryFn: createGetListAllInterfaces,
   queryKeyPrefix: "ListAllInterfacesQuery"
 });
-export const createGetListImplementations = (getRpcInstance: SigningClientResolver) => buildQuery<ListImplementationsRequest, ListImplementationsResponse>({
+export const createGetListImplementations = (getRpcInstance: RpcResolver) => buildQuery<ListImplementationsRequest, ListImplementationsResponse>({
   encoder: ListImplementationsRequest.encode,
   decoder: ListImplementationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

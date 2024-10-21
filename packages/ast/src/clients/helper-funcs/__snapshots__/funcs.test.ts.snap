@@ -16,7 +16,7 @@ exports[`msg funcs works 2`] = `
 `;
 
 exports[`query funcs works 1`] = `
-"export const createGetBalance = (getRpcInstance: SigningClientResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
+"export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encoder: QueryBalanceRequest.encode,
   decoder: QueryBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

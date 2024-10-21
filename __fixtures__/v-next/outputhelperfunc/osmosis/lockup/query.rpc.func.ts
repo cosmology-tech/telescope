@@ -3,9 +3,10 @@ import { Duration, DurationSDKType } from "../../google/protobuf/duration";
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock";
 import { Params, ParamsSDKType } from "./params";
-import { SigningClientResolver } from "../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../helper-func-types";
+import { buildUseQuery } from "../../react-query";
 import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceResponse, ModuleBalanceResponseSDKType, ModuleLockedAmountRequest, ModuleLockedAmountRequestSDKType, ModuleLockedAmountResponse, ModuleLockedAmountResponseSDKType, AccountUnlockableCoinsRequest, AccountUnlockableCoinsRequestSDKType, AccountUnlockableCoinsResponse, AccountUnlockableCoinsResponseSDKType, AccountUnlockingCoinsRequest, AccountUnlockingCoinsRequestSDKType, AccountUnlockingCoinsResponse, AccountUnlockingCoinsResponseSDKType, AccountLockedCoinsRequest, AccountLockedCoinsRequestSDKType, AccountLockedCoinsResponse, AccountLockedCoinsResponseSDKType, AccountLockedPastTimeRequest, AccountLockedPastTimeRequestSDKType, AccountLockedPastTimeResponse, AccountLockedPastTimeResponseSDKType, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyRequestSDKType, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountLockedPastTimeNotUnlockingOnlyResponseSDKType, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeRequestSDKType, AccountUnlockedBeforeTimeResponse, AccountUnlockedBeforeTimeResponseSDKType, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomRequestSDKType, AccountLockedPastTimeDenomResponse, AccountLockedPastTimeDenomResponseSDKType, LockedDenomRequest, LockedDenomRequestSDKType, LockedDenomResponse, LockedDenomResponseSDKType, LockedRequest, LockedRequestSDKType, LockedResponse, LockedResponseSDKType, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDRequestSDKType, SyntheticLockupsByLockupIDResponse, SyntheticLockupsByLockupIDResponseSDKType, AccountLockedLongerDurationRequest, AccountLockedLongerDurationRequestSDKType, AccountLockedLongerDurationResponse, AccountLockedLongerDurationResponseSDKType, AccountLockedDurationRequest, AccountLockedDurationRequestSDKType, AccountLockedDurationResponse, AccountLockedDurationResponseSDKType, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomRequestSDKType, AccountLockedLongerDurationDenomResponse, AccountLockedLongerDurationDenomResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export const createGetModuleBalance = (getRpcInstance: SigningClientResolver) => buildQuery<ModuleBalanceRequest, ModuleBalanceResponse>({
+export const createGetModuleBalance = (getRpcInstance: RpcResolver) => buildQuery<ModuleBalanceRequest, ModuleBalanceResponse>({
   encoder: ModuleBalanceRequest.encode,
   decoder: ModuleBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -16,7 +17,7 @@ export const useGetModuleBalance = buildUseQuery<ModuleBalanceRequest, ModuleBal
   builderQueryFn: createGetModuleBalance,
   queryKeyPrefix: "ModuleBalanceQuery"
 });
-export const createGetModuleLockedAmount = (getRpcInstance: SigningClientResolver) => buildQuery<ModuleLockedAmountRequest, ModuleLockedAmountResponse>({
+export const createGetModuleLockedAmount = (getRpcInstance: RpcResolver) => buildQuery<ModuleLockedAmountRequest, ModuleLockedAmountResponse>({
   encoder: ModuleLockedAmountRequest.encode,
   decoder: ModuleLockedAmountResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -27,7 +28,7 @@ export const useGetModuleLockedAmount = buildUseQuery<ModuleLockedAmountRequest,
   builderQueryFn: createGetModuleLockedAmount,
   queryKeyPrefix: "ModuleLockedAmountQuery"
 });
-export const createGetAccountUnlockableCoins = (getRpcInstance: SigningClientResolver) => buildQuery<AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse>({
+export const createGetAccountUnlockableCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse>({
   encoder: AccountUnlockableCoinsRequest.encode,
   decoder: AccountUnlockableCoinsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -38,7 +39,7 @@ export const useGetAccountUnlockableCoins = buildUseQuery<AccountUnlockableCoins
   builderQueryFn: createGetAccountUnlockableCoins,
   queryKeyPrefix: "AccountUnlockableCoinsQuery"
 });
-export const createGetAccountUnlockingCoins = (getRpcInstance: SigningClientResolver) => buildQuery<AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse>({
+export const createGetAccountUnlockingCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse>({
   encoder: AccountUnlockingCoinsRequest.encode,
   decoder: AccountUnlockingCoinsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -49,7 +50,7 @@ export const useGetAccountUnlockingCoins = buildUseQuery<AccountUnlockingCoinsRe
   builderQueryFn: createGetAccountUnlockingCoins,
   queryKeyPrefix: "AccountUnlockingCoinsQuery"
 });
-export const createGetAccountLockedCoins = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedCoinsRequest, AccountLockedCoinsResponse>({
+export const createGetAccountLockedCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedCoinsRequest, AccountLockedCoinsResponse>({
   encoder: AccountLockedCoinsRequest.encode,
   decoder: AccountLockedCoinsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -60,7 +61,7 @@ export const useGetAccountLockedCoins = buildUseQuery<AccountLockedCoinsRequest,
   builderQueryFn: createGetAccountLockedCoins,
   queryKeyPrefix: "AccountLockedCoinsQuery"
 });
-export const createGetAccountLockedPastTime = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedPastTimeRequest, AccountLockedPastTimeResponse>({
+export const createGetAccountLockedPastTime = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeRequest, AccountLockedPastTimeResponse>({
   encoder: AccountLockedPastTimeRequest.encode,
   decoder: AccountLockedPastTimeResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -71,7 +72,7 @@ export const useGetAccountLockedPastTime = buildUseQuery<AccountLockedPastTimeRe
   builderQueryFn: createGetAccountLockedPastTime,
   queryKeyPrefix: "AccountLockedPastTimeQuery"
 });
-export const createGetAccountLockedPastTimeNotUnlockingOnly = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse>({
+export const createGetAccountLockedPastTimeNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse>({
   encoder: AccountLockedPastTimeNotUnlockingOnlyRequest.encode,
   decoder: AccountLockedPastTimeNotUnlockingOnlyResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -82,7 +83,7 @@ export const useGetAccountLockedPastTimeNotUnlockingOnly = buildUseQuery<Account
   builderQueryFn: createGetAccountLockedPastTimeNotUnlockingOnly,
   queryKeyPrefix: "AccountLockedPastTimeNotUnlockingOnlyQuery"
 });
-export const createGetAccountUnlockedBeforeTime = (getRpcInstance: SigningClientResolver) => buildQuery<AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse>({
+export const createGetAccountUnlockedBeforeTime = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse>({
   encoder: AccountUnlockedBeforeTimeRequest.encode,
   decoder: AccountUnlockedBeforeTimeResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -93,7 +94,7 @@ export const useGetAccountUnlockedBeforeTime = buildUseQuery<AccountUnlockedBefo
   builderQueryFn: createGetAccountUnlockedBeforeTime,
   queryKeyPrefix: "AccountUnlockedBeforeTimeQuery"
 });
-export const createGetAccountLockedPastTimeDenom = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse>({
+export const createGetAccountLockedPastTimeDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse>({
   encoder: AccountLockedPastTimeDenomRequest.encode,
   decoder: AccountLockedPastTimeDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -104,7 +105,7 @@ export const useGetAccountLockedPastTimeDenom = buildUseQuery<AccountLockedPastT
   builderQueryFn: createGetAccountLockedPastTimeDenom,
   queryKeyPrefix: "AccountLockedPastTimeDenomQuery"
 });
-export const createGetLockedDenom = (getRpcInstance: SigningClientResolver) => buildQuery<LockedDenomRequest, LockedDenomResponse>({
+export const createGetLockedDenom = (getRpcInstance: RpcResolver) => buildQuery<LockedDenomRequest, LockedDenomResponse>({
   encoder: LockedDenomRequest.encode,
   decoder: LockedDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -115,7 +116,7 @@ export const useGetLockedDenom = buildUseQuery<LockedDenomRequest, LockedDenomRe
   builderQueryFn: createGetLockedDenom,
   queryKeyPrefix: "LockedDenomQuery"
 });
-export const createGetLockedByID = (getRpcInstance: SigningClientResolver) => buildQuery<LockedRequest, LockedResponse>({
+export const createGetLockedByID = (getRpcInstance: RpcResolver) => buildQuery<LockedRequest, LockedResponse>({
   encoder: LockedRequest.encode,
   decoder: LockedResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -126,7 +127,7 @@ export const useGetLockedByID = buildUseQuery<LockedRequest, LockedResponse>({
   builderQueryFn: createGetLockedByID,
   queryKeyPrefix: "LockedByIDQuery"
 });
-export const createGetSyntheticLockupsByLockupID = (getRpcInstance: SigningClientResolver) => buildQuery<SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse>({
+export const createGetSyntheticLockupsByLockupID = (getRpcInstance: RpcResolver) => buildQuery<SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse>({
   encoder: SyntheticLockupsByLockupIDRequest.encode,
   decoder: SyntheticLockupsByLockupIDResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -137,7 +138,7 @@ export const useGetSyntheticLockupsByLockupID = buildUseQuery<SyntheticLockupsBy
   builderQueryFn: createGetSyntheticLockupsByLockupID,
   queryKeyPrefix: "SyntheticLockupsByLockupIDQuery"
 });
-export const createGetAccountLockedLongerDuration = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse>({
+export const createGetAccountLockedLongerDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse>({
   encoder: AccountLockedLongerDurationRequest.encode,
   decoder: AccountLockedLongerDurationResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -148,7 +149,7 @@ export const useGetAccountLockedLongerDuration = buildUseQuery<AccountLockedLong
   builderQueryFn: createGetAccountLockedLongerDuration,
   queryKeyPrefix: "AccountLockedLongerDurationQuery"
 });
-export const createGetAccountLockedDuration = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedDurationRequest, AccountLockedDurationResponse>({
+export const createGetAccountLockedDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedDurationRequest, AccountLockedDurationResponse>({
   encoder: AccountLockedDurationRequest.encode,
   decoder: AccountLockedDurationResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -159,7 +160,7 @@ export const useGetAccountLockedDuration = buildUseQuery<AccountLockedDurationRe
   builderQueryFn: createGetAccountLockedDuration,
   queryKeyPrefix: "AccountLockedDurationQuery"
 });
-export const createGetAccountLockedLongerDurationNotUnlockingOnly = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse>({
+export const createGetAccountLockedLongerDurationNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse>({
   encoder: AccountLockedLongerDurationNotUnlockingOnlyRequest.encode,
   decoder: AccountLockedLongerDurationNotUnlockingOnlyResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -170,7 +171,7 @@ export const useGetAccountLockedLongerDurationNotUnlockingOnly = buildUseQuery<A
   builderQueryFn: createGetAccountLockedLongerDurationNotUnlockingOnly,
   queryKeyPrefix: "AccountLockedLongerDurationNotUnlockingOnlyQuery"
 });
-export const createGetAccountLockedLongerDurationDenom = (getRpcInstance: SigningClientResolver) => buildQuery<AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse>({
+export const createGetAccountLockedLongerDurationDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse>({
   encoder: AccountLockedLongerDurationDenomRequest.encode,
   decoder: AccountLockedLongerDurationDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -181,7 +182,7 @@ export const useGetAccountLockedLongerDurationDenom = buildUseQuery<AccountLocke
   builderQueryFn: createGetAccountLockedLongerDurationDenom,
   queryKeyPrefix: "AccountLockedLongerDurationDenomQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

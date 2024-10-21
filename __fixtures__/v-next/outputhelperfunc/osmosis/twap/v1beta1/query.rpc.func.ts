@@ -1,8 +1,9 @@
 import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp";
 import { Params, ParamsSDKType } from "./genesis";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKType, ArithmeticTwapRequest, ArithmeticTwapRequestSDKType, ArithmeticTwapResponse, ArithmeticTwapResponseSDKType, ArithmeticTwapToNowRequest, ArithmeticTwapToNowRequestSDKType, ArithmeticTwapToNowResponse, ArithmeticTwapToNowResponseSDKType } from "./query";
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<ParamsRequest, ParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<ParamsRequest, ParamsResponse>({
   encoder: ParamsRequest.encode,
   decoder: ParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetParams = buildUseQuery<ParamsRequest, ParamsResponse>({
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetArithmeticTwap = (getRpcInstance: SigningClientResolver) => buildQuery<ArithmeticTwapRequest, ArithmeticTwapResponse>({
+export const createGetArithmeticTwap = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapRequest, ArithmeticTwapResponse>({
   encoder: ArithmeticTwapRequest.encode,
   decoder: ArithmeticTwapResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetArithmeticTwap = buildUseQuery<ArithmeticTwapRequest, Arithme
   builderQueryFn: createGetArithmeticTwap,
   queryKeyPrefix: "ArithmeticTwapQuery"
 });
-export const createGetArithmeticTwapToNow = (getRpcInstance: SigningClientResolver) => buildQuery<ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse>({
+export const createGetArithmeticTwapToNow = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse>({
   encoder: ArithmeticTwapToNowRequest.encode,
   decoder: ArithmeticTwapToNowResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

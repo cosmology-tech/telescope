@@ -1,8 +1,9 @@
 import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./genesis";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryPeriodRequest, QueryPeriodRequestSDKType, QueryPeriodResponse, QueryPeriodResponseSDKType, QueryEpochMintProvisionRequest, QueryEpochMintProvisionRequestSDKType, QueryEpochMintProvisionResponse, QueryEpochMintProvisionResponseSDKType, QuerySkippedEpochsRequest, QuerySkippedEpochsRequestSDKType, QuerySkippedEpochsResponse, QuerySkippedEpochsResponseSDKType, QueryCirculatingSupplyRequest, QueryCirculatingSupplyRequestSDKType, QueryCirculatingSupplyResponse, QueryCirculatingSupplyResponseSDKType, QueryInflationRateRequest, QueryInflationRateRequestSDKType, QueryInflationRateResponse, QueryInflationRateResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export const createGetPeriod = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPeriodRequest, QueryPeriodResponse>({
+export const createGetPeriod = (getRpcInstance: RpcResolver) => buildQuery<QueryPeriodRequest, QueryPeriodResponse>({
   encoder: QueryPeriodRequest.encode,
   decoder: QueryPeriodResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetPeriod = buildUseQuery<QueryPeriodRequest, QueryPeriodRespons
   builderQueryFn: createGetPeriod,
   queryKeyPrefix: "PeriodQuery"
 });
-export const createGetEpochMintProvision = (getRpcInstance: SigningClientResolver) => buildQuery<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>({
+export const createGetEpochMintProvision = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>({
   encoder: QueryEpochMintProvisionRequest.encode,
   decoder: QueryEpochMintProvisionResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetEpochMintProvision = buildUseQuery<QueryEpochMintProvisionReq
   builderQueryFn: createGetEpochMintProvision,
   queryKeyPrefix: "EpochMintProvisionQuery"
 });
-export const createGetSkippedEpochs = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>({
+export const createGetSkippedEpochs = (getRpcInstance: RpcResolver) => buildQuery<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>({
   encoder: QuerySkippedEpochsRequest.encode,
   decoder: QuerySkippedEpochsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -35,7 +36,7 @@ export const useGetSkippedEpochs = buildUseQuery<QuerySkippedEpochsRequest, Quer
   builderQueryFn: createGetSkippedEpochs,
   queryKeyPrefix: "SkippedEpochsQuery"
 });
-export const createGetCirculatingSupply = (getRpcInstance: SigningClientResolver) => buildQuery<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>({
+export const createGetCirculatingSupply = (getRpcInstance: RpcResolver) => buildQuery<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>({
   encoder: QueryCirculatingSupplyRequest.encode,
   decoder: QueryCirculatingSupplyResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -46,7 +47,7 @@ export const useGetCirculatingSupply = buildUseQuery<QueryCirculatingSupplyReque
   builderQueryFn: createGetCirculatingSupply,
   queryKeyPrefix: "CirculatingSupplyQuery"
 });
-export const createGetInflationRate = (getRpcInstance: SigningClientResolver) => buildQuery<QueryInflationRateRequest, QueryInflationRateResponse>({
+export const createGetInflationRate = (getRpcInstance: RpcResolver) => buildQuery<QueryInflationRateRequest, QueryInflationRateResponse>({
   encoder: QueryInflationRateRequest.encode,
   decoder: QueryInflationRateResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -57,7 +58,7 @@ export const useGetInflationRate = buildUseQuery<QueryInflationRateRequest, Quer
   builderQueryFn: createGetInflationRate,
   queryKeyPrefix: "InflationRateQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

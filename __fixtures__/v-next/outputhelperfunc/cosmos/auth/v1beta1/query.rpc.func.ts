@@ -1,9 +1,10 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
 import { Params, ParamsSDKType } from "./auth";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryAccountRequest, QueryAccountRequestSDKType, QueryAccountResponse, QueryAccountResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryModuleAccountsRequest, QueryModuleAccountsRequestSDKType, QueryModuleAccountsResponse, QueryModuleAccountsResponseSDKType, Bech32PrefixRequest, Bech32PrefixRequestSDKType, Bech32PrefixResponse, Bech32PrefixResponseSDKType, AddressBytesToStringRequest, AddressBytesToStringRequestSDKType, AddressBytesToStringResponse, AddressBytesToStringResponseSDKType, AddressStringToBytesRequest, AddressStringToBytesRequestSDKType, AddressStringToBytesResponse, AddressStringToBytesResponseSDKType } from "./query";
-export const createGetAccounts = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
+export const createGetAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
   encoder: QueryAccountsRequest.encode,
   decoder: QueryAccountsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -14,7 +15,7 @@ export const useGetAccounts = buildUseQuery<QueryAccountsRequest, QueryAccountsR
   builderQueryFn: createGetAccounts,
   queryKeyPrefix: "AccountsQuery"
 });
-export const createGetAccount = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAccountRequest, QueryAccountResponse>({
+export const createGetAccount = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountRequest, QueryAccountResponse>({
   encoder: QueryAccountRequest.encode,
   decoder: QueryAccountResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -25,7 +26,7 @@ export const useGetAccount = buildUseQuery<QueryAccountRequest, QueryAccountResp
   builderQueryFn: createGetAccount,
   queryKeyPrefix: "AccountQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -36,7 +37,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetModuleAccounts = (getRpcInstance: SigningClientResolver) => buildQuery<QueryModuleAccountsRequest, QueryModuleAccountsResponse>({
+export const createGetModuleAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleAccountsRequest, QueryModuleAccountsResponse>({
   encoder: QueryModuleAccountsRequest.encode,
   decoder: QueryModuleAccountsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -47,7 +48,7 @@ export const useGetModuleAccounts = buildUseQuery<QueryModuleAccountsRequest, Qu
   builderQueryFn: createGetModuleAccounts,
   queryKeyPrefix: "ModuleAccountsQuery"
 });
-export const createGetBech32Prefix = (getRpcInstance: SigningClientResolver) => buildQuery<Bech32PrefixRequest, Bech32PrefixResponse>({
+export const createGetBech32Prefix = (getRpcInstance: RpcResolver) => buildQuery<Bech32PrefixRequest, Bech32PrefixResponse>({
   encoder: Bech32PrefixRequest.encode,
   decoder: Bech32PrefixResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -58,7 +59,7 @@ export const useGetBech32Prefix = buildUseQuery<Bech32PrefixRequest, Bech32Prefi
   builderQueryFn: createGetBech32Prefix,
   queryKeyPrefix: "Bech32PrefixQuery"
 });
-export const createGetAddressBytesToString = (getRpcInstance: SigningClientResolver) => buildQuery<AddressBytesToStringRequest, AddressBytesToStringResponse>({
+export const createGetAddressBytesToString = (getRpcInstance: RpcResolver) => buildQuery<AddressBytesToStringRequest, AddressBytesToStringResponse>({
   encoder: AddressBytesToStringRequest.encode,
   decoder: AddressBytesToStringResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -69,7 +70,7 @@ export const useGetAddressBytesToString = buildUseQuery<AddressBytesToStringRequ
   builderQueryFn: createGetAddressBytesToString,
   queryKeyPrefix: "AddressBytesToStringQuery"
 });
-export const createGetAddressStringToBytes = (getRpcInstance: SigningClientResolver) => buildQuery<AddressStringToBytesRequest, AddressStringToBytesResponse>({
+export const createGetAddressStringToBytes = (getRpcInstance: RpcResolver) => buildQuery<AddressStringToBytesRequest, AddressStringToBytesResponse>({
   encoder: AddressStringToBytesRequest.encode,
   decoder: AddressStringToBytesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

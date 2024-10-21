@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsResponse, QueryAccountsResponseSDKType, QueryPaymentsRequest, QueryPaymentsRequestSDKType, QueryPaymentsResponse, QueryPaymentsResponseSDKType } from "./query";
-export const createGetAccounts = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
+export const createGetAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
   encoder: QueryAccountsRequest.encode,
   decoder: QueryAccountsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetAccounts = buildUseQuery<QueryAccountsRequest, QueryAccountsR
   builderQueryFn: createGetAccounts,
   queryKeyPrefix: "AccountsQuery"
 });
-export const createGetPayments = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPaymentsRequest, QueryPaymentsResponse>({
+export const createGetPayments = (getRpcInstance: RpcResolver) => buildQuery<QueryPaymentsRequest, QueryPaymentsResponse>({
   encoder: QueryPaymentsRequest.encode,
   decoder: QueryPaymentsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

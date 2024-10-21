@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./provider";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
-export const createGetProviders = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
+export const createGetProviders = (getRpcInstance: RpcResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
   encoder: QueryProvidersRequest.encode,
   decoder: QueryProvidersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetProviders = buildUseQuery<QueryProvidersRequest, QueryProvide
   builderQueryFn: createGetProviders,
   queryKeyPrefix: "ProvidersQuery"
 });
-export const createGetProvider = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
+export const createGetProvider = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
   encoder: QueryProviderRequest.encode,
   decoder: QueryProviderResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

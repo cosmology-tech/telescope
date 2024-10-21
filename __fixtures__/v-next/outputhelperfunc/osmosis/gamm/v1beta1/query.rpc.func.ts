@@ -2,9 +2,10 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { SwapAmountInRoute, SwapAmountInRouteSDKType, SwapAmountOutRoute, SwapAmountOutRouteSDKType } from "./tx";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryPoolsResponseSDKType, QueryNumPoolsRequest, QueryNumPoolsRequestSDKType, QueryNumPoolsResponse, QueryNumPoolsResponseSDKType, QueryTotalLiquidityRequest, QueryTotalLiquidityRequestSDKType, QueryTotalLiquidityResponse, QueryTotalLiquidityResponseSDKType, QueryPoolsWithFilterRequest, QueryPoolsWithFilterRequestSDKType, QueryPoolsWithFilterResponse, QueryPoolsWithFilterResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryPoolTypeRequest, QueryPoolTypeRequestSDKType, QueryPoolTypeResponse, QueryPoolTypeResponseSDKType, QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesRequestSDKType, QueryCalcJoinPoolNoSwapSharesResponse, QueryCalcJoinPoolNoSwapSharesResponseSDKType, QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesRequestSDKType, QueryCalcJoinPoolSharesResponse, QueryCalcJoinPoolSharesResponseSDKType, QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesRequestSDKType, QueryCalcExitPoolCoinsFromSharesResponse, QueryCalcExitPoolCoinsFromSharesResponseSDKType, QueryPoolParamsRequest, QueryPoolParamsRequestSDKType, QueryPoolParamsResponse, QueryPoolParamsResponseSDKType, QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityRequestSDKType, QueryTotalPoolLiquidityResponse, QueryTotalPoolLiquidityResponseSDKType, QueryTotalSharesRequest, QueryTotalSharesRequestSDKType, QueryTotalSharesResponse, QueryTotalSharesResponseSDKType, QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResponse, QuerySpotPriceResponseSDKType, QuerySwapExactAmountInRequest, QuerySwapExactAmountInRequestSDKType, QuerySwapExactAmountInResponse, QuerySwapExactAmountInResponseSDKType, QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutRequestSDKType, QuerySwapExactAmountOutResponse, QuerySwapExactAmountOutResponseSDKType } from "./query";
-export const createGetPools = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolsRequest, QueryPoolsResponse>({
+export const createGetPools = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolsRequest, QueryPoolsResponse>({
   encoder: QueryPoolsRequest.encode,
   decoder: QueryPoolsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -15,7 +16,7 @@ export const useGetPools = buildUseQuery<QueryPoolsRequest, QueryPoolsResponse>(
   builderQueryFn: createGetPools,
   queryKeyPrefix: "PoolsQuery"
 });
-export const createGetNumPools = (getRpcInstance: SigningClientResolver) => buildQuery<QueryNumPoolsRequest, QueryNumPoolsResponse>({
+export const createGetNumPools = (getRpcInstance: RpcResolver) => buildQuery<QueryNumPoolsRequest, QueryNumPoolsResponse>({
   encoder: QueryNumPoolsRequest.encode,
   decoder: QueryNumPoolsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -26,7 +27,7 @@ export const useGetNumPools = buildUseQuery<QueryNumPoolsRequest, QueryNumPoolsR
   builderQueryFn: createGetNumPools,
   queryKeyPrefix: "NumPoolsQuery"
 });
-export const createGetTotalLiquidity = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>({
+export const createGetTotalLiquidity = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>({
   encoder: QueryTotalLiquidityRequest.encode,
   decoder: QueryTotalLiquidityResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -37,7 +38,7 @@ export const useGetTotalLiquidity = buildUseQuery<QueryTotalLiquidityRequest, Qu
   builderQueryFn: createGetTotalLiquidity,
   queryKeyPrefix: "TotalLiquidityQuery"
 });
-export const createGetPoolsWithFilter = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>({
+export const createGetPoolsWithFilter = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>({
   encoder: QueryPoolsWithFilterRequest.encode,
   decoder: QueryPoolsWithFilterResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -48,7 +49,7 @@ export const useGetPoolsWithFilter = buildUseQuery<QueryPoolsWithFilterRequest, 
   builderQueryFn: createGetPoolsWithFilter,
   queryKeyPrefix: "PoolsWithFilterQuery"
 });
-export const createGetPool = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolRequest, QueryPoolResponse>({
+export const createGetPool = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolRequest, QueryPoolResponse>({
   encoder: QueryPoolRequest.encode,
   decoder: QueryPoolResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -59,7 +60,7 @@ export const useGetPool = buildUseQuery<QueryPoolRequest, QueryPoolResponse>({
   builderQueryFn: createGetPool,
   queryKeyPrefix: "PoolQuery"
 });
-export const createGetPoolType = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolTypeRequest, QueryPoolTypeResponse>({
+export const createGetPoolType = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolTypeRequest, QueryPoolTypeResponse>({
   encoder: QueryPoolTypeRequest.encode,
   decoder: QueryPoolTypeResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -70,7 +71,7 @@ export const useGetPoolType = buildUseQuery<QueryPoolTypeRequest, QueryPoolTypeR
   builderQueryFn: createGetPoolType,
   queryKeyPrefix: "PoolTypeQuery"
 });
-export const createGetCalcJoinPoolNoSwapShares = (getRpcInstance: SigningClientResolver) => buildQuery<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>({
+export const createGetCalcJoinPoolNoSwapShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>({
   encoder: QueryCalcJoinPoolNoSwapSharesRequest.encode,
   decoder: QueryCalcJoinPoolNoSwapSharesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -81,7 +82,7 @@ export const useGetCalcJoinPoolNoSwapShares = buildUseQuery<QueryCalcJoinPoolNoS
   builderQueryFn: createGetCalcJoinPoolNoSwapShares,
   queryKeyPrefix: "CalcJoinPoolNoSwapSharesQuery"
 });
-export const createGetCalcJoinPoolShares = (getRpcInstance: SigningClientResolver) => buildQuery<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>({
+export const createGetCalcJoinPoolShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>({
   encoder: QueryCalcJoinPoolSharesRequest.encode,
   decoder: QueryCalcJoinPoolSharesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -92,7 +93,7 @@ export const useGetCalcJoinPoolShares = buildUseQuery<QueryCalcJoinPoolSharesReq
   builderQueryFn: createGetCalcJoinPoolShares,
   queryKeyPrefix: "CalcJoinPoolSharesQuery"
 });
-export const createGetCalcExitPoolCoinsFromShares = (getRpcInstance: SigningClientResolver) => buildQuery<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>({
+export const createGetCalcExitPoolCoinsFromShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>({
   encoder: QueryCalcExitPoolCoinsFromSharesRequest.encode,
   decoder: QueryCalcExitPoolCoinsFromSharesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -103,7 +104,7 @@ export const useGetCalcExitPoolCoinsFromShares = buildUseQuery<QueryCalcExitPool
   builderQueryFn: createGetCalcExitPoolCoinsFromShares,
   queryKeyPrefix: "CalcExitPoolCoinsFromSharesQuery"
 });
-export const createGetPoolParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolParamsRequest, QueryPoolParamsResponse>({
+export const createGetPoolParams = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolParamsRequest, QueryPoolParamsResponse>({
   encoder: QueryPoolParamsRequest.encode,
   decoder: QueryPoolParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -114,7 +115,7 @@ export const useGetPoolParams = buildUseQuery<QueryPoolParamsRequest, QueryPoolP
   builderQueryFn: createGetPoolParams,
   queryKeyPrefix: "PoolParamsQuery"
 });
-export const createGetTotalPoolLiquidity = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>({
+export const createGetTotalPoolLiquidity = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>({
   encoder: QueryTotalPoolLiquidityRequest.encode,
   decoder: QueryTotalPoolLiquidityResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -125,7 +126,7 @@ export const useGetTotalPoolLiquidity = buildUseQuery<QueryTotalPoolLiquidityReq
   builderQueryFn: createGetTotalPoolLiquidity,
   queryKeyPrefix: "TotalPoolLiquidityQuery"
 });
-export const createGetTotalShares = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalSharesRequest, QueryTotalSharesResponse>({
+export const createGetTotalShares = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalSharesRequest, QueryTotalSharesResponse>({
   encoder: QueryTotalSharesRequest.encode,
   decoder: QueryTotalSharesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -136,7 +137,7 @@ export const useGetTotalShares = buildUseQuery<QueryTotalSharesRequest, QueryTot
   builderQueryFn: createGetTotalShares,
   queryKeyPrefix: "TotalSharesQuery"
 });
-export const createGetSpotPrice = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
+export const createGetSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
   encoder: QuerySpotPriceRequest.encode,
   decoder: QuerySpotPriceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -147,7 +148,7 @@ export const useGetSpotPrice = buildUseQuery<QuerySpotPriceRequest, QuerySpotPri
   builderQueryFn: createGetSpotPrice,
   queryKeyPrefix: "SpotPriceQuery"
 });
-export const createGetEstimateSwapExactAmountIn = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>({
+export const createGetEstimateSwapExactAmountIn = (getRpcInstance: RpcResolver) => buildQuery<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>({
   encoder: QuerySwapExactAmountInRequest.encode,
   decoder: QuerySwapExactAmountInResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -158,7 +159,7 @@ export const useGetEstimateSwapExactAmountIn = buildUseQuery<QuerySwapExactAmoun
   builderQueryFn: createGetEstimateSwapExactAmountIn,
   queryKeyPrefix: "EstimateSwapExactAmountInQuery"
 });
-export const createGetEstimateSwapExactAmountOut = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>({
+export const createGetEstimateSwapExactAmountOut = (getRpcInstance: RpcResolver) => buildQuery<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>({
   encoder: QuerySwapExactAmountOutRequest.encode,
   decoder: QuerySwapExactAmountOutResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

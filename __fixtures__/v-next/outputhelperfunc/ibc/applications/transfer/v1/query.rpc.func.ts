@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer";
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { QueryDenomTraceRequest, QueryDenomTraceRequestSDKType, QueryDenomTraceResponse, QueryDenomTraceResponseSDKType, QueryDenomTracesRequest, QueryDenomTracesRequestSDKType, QueryDenomTracesResponse, QueryDenomTracesResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export const createGetDenomTrace = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
+export const createGetDenomTrace = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
   encoder: QueryDenomTraceRequest.encode,
   decoder: QueryDenomTraceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetDenomTrace = buildUseQuery<QueryDenomTraceRequest, QueryDenom
   builderQueryFn: createGetDenomTrace,
   queryKeyPrefix: "DenomTraceQuery"
 });
-export const createGetDenomTraces = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDenomTracesRequest, QueryDenomTracesResponse>({
+export const createGetDenomTraces = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomTracesRequest, QueryDenomTracesResponse>({
   encoder: QueryDenomTracesRequest.encode,
   decoder: QueryDenomTracesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetDenomTraces = buildUseQuery<QueryDenomTracesRequest, QueryDen
   builderQueryFn: createGetDenomTraces,
   queryKeyPrefix: "DenomTracesQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

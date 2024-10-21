@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { Provider, ProviderSDKType } from "./audit";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderAttributesRequest, QueryProviderAttributesRequestSDKType, QueryProviderAuditorRequest, QueryProviderAuditorRequestSDKType, QueryAuditorAttributesRequest, QueryAuditorAttributesRequestSDKType } from "./query";
-export const createGetAllProvidersAttributes = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
+export const createGetAllProvidersAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
   encoder: QueryAllProvidersAttributesRequest.encode,
   decoder: QueryProvidersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetAllProvidersAttributes = buildUseQuery<QueryAllProvidersAttri
   builderQueryFn: createGetAllProvidersAttributes,
   queryKeyPrefix: "AllProvidersAttributesQuery"
 });
-export const createGetProviderAttributes = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProviderAttributesRequest, QueryProvidersResponse>({
+export const createGetProviderAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderAttributesRequest, QueryProvidersResponse>({
   encoder: QueryProviderAttributesRequest.encode,
   decoder: QueryProvidersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetProviderAttributes = buildUseQuery<QueryProviderAttributesReq
   builderQueryFn: createGetProviderAttributes,
   queryKeyPrefix: "ProviderAttributesQuery"
 });
-export const createGetProviderAuditorAttributes = (getRpcInstance: SigningClientResolver) => buildQuery<QueryProviderAuditorRequest, QueryProvidersResponse>({
+export const createGetProviderAuditorAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderAuditorRequest, QueryProvidersResponse>({
   encoder: QueryProviderAuditorRequest.encode,
   decoder: QueryProvidersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -35,7 +36,7 @@ export const useGetProviderAuditorAttributes = buildUseQuery<QueryProviderAudito
   builderQueryFn: createGetProviderAuditorAttributes,
   queryKeyPrefix: "ProviderAuditorAttributesQuery"
 });
-export const createGetAuditorAttributes = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAuditorAttributesRequest, QueryProvidersResponse>({
+export const createGetAuditorAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryAuditorAttributesRequest, QueryProvidersResponse>({
   encoder: QueryAuditorAttributesRequest.encode,
   decoder: QueryProvidersResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

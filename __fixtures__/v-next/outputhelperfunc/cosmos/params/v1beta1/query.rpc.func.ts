@@ -1,7 +1,8 @@
 import { ParamChange, ParamChangeSDKType } from "./params";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -12,7 +13,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetSubspaces = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySubspacesRequest, QuerySubspacesResponse>({
+export const createGetSubspaces = (getRpcInstance: RpcResolver) => buildQuery<QuerySubspacesRequest, QuerySubspacesResponse>({
   encoder: QuerySubspacesRequest.encode,
   decoder: QuerySubspacesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

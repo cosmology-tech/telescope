@@ -2,9 +2,10 @@ import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } fr
 import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin";
 import { Gauge, GaugeSDKType } from "./gauge";
 import { Duration, DurationSDKType } from "../../google/protobuf/duration";
-import { SigningClientResolver } from "../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../helper-func-types";
+import { buildUseQuery } from "../../react-query";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
-export const createGetModuleToDistributeCoins = (getRpcInstance: SigningClientResolver) => buildQuery<ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse>({
+export const createGetModuleToDistributeCoins = (getRpcInstance: RpcResolver) => buildQuery<ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse>({
   encoder: ModuleToDistributeCoinsRequest.encode,
   decoder: ModuleToDistributeCoinsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -15,7 +16,7 @@ export const useGetModuleToDistributeCoins = buildUseQuery<ModuleToDistributeCoi
   builderQueryFn: createGetModuleToDistributeCoins,
   queryKeyPrefix: "ModuleToDistributeCoinsQuery"
 });
-export const createGetGaugeByID = (getRpcInstance: SigningClientResolver) => buildQuery<GaugeByIDRequest, GaugeByIDResponse>({
+export const createGetGaugeByID = (getRpcInstance: RpcResolver) => buildQuery<GaugeByIDRequest, GaugeByIDResponse>({
   encoder: GaugeByIDRequest.encode,
   decoder: GaugeByIDResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -26,7 +27,7 @@ export const useGetGaugeByID = buildUseQuery<GaugeByIDRequest, GaugeByIDResponse
   builderQueryFn: createGetGaugeByID,
   queryKeyPrefix: "GaugeByIDQuery"
 });
-export const createGetGauges = (getRpcInstance: SigningClientResolver) => buildQuery<GaugesRequest, GaugesResponse>({
+export const createGetGauges = (getRpcInstance: RpcResolver) => buildQuery<GaugesRequest, GaugesResponse>({
   encoder: GaugesRequest.encode,
   decoder: GaugesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -37,7 +38,7 @@ export const useGetGauges = buildUseQuery<GaugesRequest, GaugesResponse>({
   builderQueryFn: createGetGauges,
   queryKeyPrefix: "GaugesQuery"
 });
-export const createGetActiveGauges = (getRpcInstance: SigningClientResolver) => buildQuery<ActiveGaugesRequest, ActiveGaugesResponse>({
+export const createGetActiveGauges = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesRequest, ActiveGaugesResponse>({
   encoder: ActiveGaugesRequest.encode,
   decoder: ActiveGaugesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -48,7 +49,7 @@ export const useGetActiveGauges = buildUseQuery<ActiveGaugesRequest, ActiveGauge
   builderQueryFn: createGetActiveGauges,
   queryKeyPrefix: "ActiveGaugesQuery"
 });
-export const createGetActiveGaugesPerDenom = (getRpcInstance: SigningClientResolver) => buildQuery<ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse>({
+export const createGetActiveGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse>({
   encoder: ActiveGaugesPerDenomRequest.encode,
   decoder: ActiveGaugesPerDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -59,7 +60,7 @@ export const useGetActiveGaugesPerDenom = buildUseQuery<ActiveGaugesPerDenomRequ
   builderQueryFn: createGetActiveGaugesPerDenom,
   queryKeyPrefix: "ActiveGaugesPerDenomQuery"
 });
-export const createGetUpcomingGauges = (getRpcInstance: SigningClientResolver) => buildQuery<UpcomingGaugesRequest, UpcomingGaugesResponse>({
+export const createGetUpcomingGauges = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesRequest, UpcomingGaugesResponse>({
   encoder: UpcomingGaugesRequest.encode,
   decoder: UpcomingGaugesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -70,7 +71,7 @@ export const useGetUpcomingGauges = buildUseQuery<UpcomingGaugesRequest, Upcomin
   builderQueryFn: createGetUpcomingGauges,
   queryKeyPrefix: "UpcomingGaugesQuery"
 });
-export const createGetUpcomingGaugesPerDenom = (getRpcInstance: SigningClientResolver) => buildQuery<UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse>({
+export const createGetUpcomingGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse>({
   encoder: UpcomingGaugesPerDenomRequest.encode,
   decoder: UpcomingGaugesPerDenomResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -81,7 +82,7 @@ export const useGetUpcomingGaugesPerDenom = buildUseQuery<UpcomingGaugesPerDenom
   builderQueryFn: createGetUpcomingGaugesPerDenom,
   queryKeyPrefix: "UpcomingGaugesPerDenomQuery"
 });
-export const createGetRewardsEst = (getRpcInstance: SigningClientResolver) => buildQuery<RewardsEstRequest, RewardsEstResponse>({
+export const createGetRewardsEst = (getRpcInstance: RpcResolver) => buildQuery<RewardsEstRequest, RewardsEstResponse>({
   encoder: RewardsEstRequest.encode,
   decoder: RewardsEstResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -92,7 +93,7 @@ export const useGetRewardsEst = buildUseQuery<RewardsEstRequest, RewardsEstRespo
   builderQueryFn: createGetRewardsEst,
   queryKeyPrefix: "RewardsEstQuery"
 });
-export const createGetLockableDurations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
+export const createGetLockableDurations = (getRpcInstance: RpcResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
   encoder: QueryLockableDurationsRequest.encode,
   decoder: QueryLockableDurationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

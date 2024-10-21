@@ -3,9 +3,10 @@ import { Header, HeaderSDKType } from "../types/types";
 import { ProofOps, ProofOpsSDKType } from "../crypto/proof";
 import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params";
 import { PublicKey, PublicKeySDKType } from "../crypto/keys";
-import { SigningClientResolver } from "../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../helper-func-types";
+import { buildUseQuery } from "../../react-query";
 import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, RequestFlush, RequestFlushSDKType, ResponseFlush, ResponseFlushSDKType, RequestInfo, RequestInfoSDKType, ResponseInfo, ResponseInfoSDKType, RequestSetOption, RequestSetOptionSDKType, ResponseSetOption, ResponseSetOptionSDKType, RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestCheckTx, RequestCheckTxSDKType, ResponseCheckTx, ResponseCheckTxSDKType, RequestQuery, RequestQuerySDKType, ResponseQuery, ResponseQuerySDKType, RequestCommit, RequestCommitSDKType, ResponseCommit, ResponseCommitSDKType, RequestInitChain, RequestInitChainSDKType, ResponseInitChain, ResponseInitChainSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, RequestListSnapshots, RequestListSnapshotsSDKType, ResponseListSnapshots, ResponseListSnapshotsSDKType, RequestOfferSnapshot, RequestOfferSnapshotSDKType, ResponseOfferSnapshot, ResponseOfferSnapshotSDKType, RequestLoadSnapshotChunk, RequestLoadSnapshotChunkSDKType, ResponseLoadSnapshotChunk, ResponseLoadSnapshotChunkSDKType, RequestApplySnapshotChunk, RequestApplySnapshotChunkSDKType, ResponseApplySnapshotChunk, ResponseApplySnapshotChunkSDKType } from "./types";
-export const createGetEcho = (getRpcInstance: SigningClientResolver) => buildQuery<RequestEcho, ResponseEcho>({
+export const createGetEcho = (getRpcInstance: RpcResolver) => buildQuery<RequestEcho, ResponseEcho>({
   encoder: RequestEcho.encode,
   decoder: ResponseEcho.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -16,7 +17,7 @@ export const useGetEcho = buildUseQuery<RequestEcho, ResponseEcho>({
   builderQueryFn: createGetEcho,
   queryKeyPrefix: "EchoQuery"
 });
-export const createGetFlush = (getRpcInstance: SigningClientResolver) => buildQuery<RequestFlush, ResponseFlush>({
+export const createGetFlush = (getRpcInstance: RpcResolver) => buildQuery<RequestFlush, ResponseFlush>({
   encoder: RequestFlush.encode,
   decoder: ResponseFlush.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -27,7 +28,7 @@ export const useGetFlush = buildUseQuery<RequestFlush, ResponseFlush>({
   builderQueryFn: createGetFlush,
   queryKeyPrefix: "FlushQuery"
 });
-export const createGetInfo = (getRpcInstance: SigningClientResolver) => buildQuery<RequestInfo, ResponseInfo>({
+export const createGetInfo = (getRpcInstance: RpcResolver) => buildQuery<RequestInfo, ResponseInfo>({
   encoder: RequestInfo.encode,
   decoder: ResponseInfo.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -38,7 +39,7 @@ export const useGetInfo = buildUseQuery<RequestInfo, ResponseInfo>({
   builderQueryFn: createGetInfo,
   queryKeyPrefix: "InfoQuery"
 });
-export const createGetSetOption = (getRpcInstance: SigningClientResolver) => buildQuery<RequestSetOption, ResponseSetOption>({
+export const createGetSetOption = (getRpcInstance: RpcResolver) => buildQuery<RequestSetOption, ResponseSetOption>({
   encoder: RequestSetOption.encode,
   decoder: ResponseSetOption.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -49,7 +50,7 @@ export const useGetSetOption = buildUseQuery<RequestSetOption, ResponseSetOption
   builderQueryFn: createGetSetOption,
   queryKeyPrefix: "SetOptionQuery"
 });
-export const createGetDeliverTx = (getRpcInstance: SigningClientResolver) => buildQuery<RequestDeliverTx, ResponseDeliverTx>({
+export const createGetDeliverTx = (getRpcInstance: RpcResolver) => buildQuery<RequestDeliverTx, ResponseDeliverTx>({
   encoder: RequestDeliverTx.encode,
   decoder: ResponseDeliverTx.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -60,7 +61,7 @@ export const useGetDeliverTx = buildUseQuery<RequestDeliverTx, ResponseDeliverTx
   builderQueryFn: createGetDeliverTx,
   queryKeyPrefix: "DeliverTxQuery"
 });
-export const createGetCheckTx = (getRpcInstance: SigningClientResolver) => buildQuery<RequestCheckTx, ResponseCheckTx>({
+export const createGetCheckTx = (getRpcInstance: RpcResolver) => buildQuery<RequestCheckTx, ResponseCheckTx>({
   encoder: RequestCheckTx.encode,
   decoder: ResponseCheckTx.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -71,7 +72,7 @@ export const useGetCheckTx = buildUseQuery<RequestCheckTx, ResponseCheckTx>({
   builderQueryFn: createGetCheckTx,
   queryKeyPrefix: "CheckTxQuery"
 });
-export const createGetQuery = (getRpcInstance: SigningClientResolver) => buildQuery<RequestQuery, ResponseQuery>({
+export const createGetQuery = (getRpcInstance: RpcResolver) => buildQuery<RequestQuery, ResponseQuery>({
   encoder: RequestQuery.encode,
   decoder: ResponseQuery.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -82,7 +83,7 @@ export const useGetQuery = buildUseQuery<RequestQuery, ResponseQuery>({
   builderQueryFn: createGetQuery,
   queryKeyPrefix: "QueryQuery"
 });
-export const createGetCommit = (getRpcInstance: SigningClientResolver) => buildQuery<RequestCommit, ResponseCommit>({
+export const createGetCommit = (getRpcInstance: RpcResolver) => buildQuery<RequestCommit, ResponseCommit>({
   encoder: RequestCommit.encode,
   decoder: ResponseCommit.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -93,7 +94,7 @@ export const useGetCommit = buildUseQuery<RequestCommit, ResponseCommit>({
   builderQueryFn: createGetCommit,
   queryKeyPrefix: "CommitQuery"
 });
-export const createGetInitChain = (getRpcInstance: SigningClientResolver) => buildQuery<RequestInitChain, ResponseInitChain>({
+export const createGetInitChain = (getRpcInstance: RpcResolver) => buildQuery<RequestInitChain, ResponseInitChain>({
   encoder: RequestInitChain.encode,
   decoder: ResponseInitChain.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -104,7 +105,7 @@ export const useGetInitChain = buildUseQuery<RequestInitChain, ResponseInitChain
   builderQueryFn: createGetInitChain,
   queryKeyPrefix: "InitChainQuery"
 });
-export const createGetBeginBlock = (getRpcInstance: SigningClientResolver) => buildQuery<RequestBeginBlock, ResponseBeginBlock>({
+export const createGetBeginBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestBeginBlock, ResponseBeginBlock>({
   encoder: RequestBeginBlock.encode,
   decoder: ResponseBeginBlock.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -115,7 +116,7 @@ export const useGetBeginBlock = buildUseQuery<RequestBeginBlock, ResponseBeginBl
   builderQueryFn: createGetBeginBlock,
   queryKeyPrefix: "BeginBlockQuery"
 });
-export const createGetEndBlock = (getRpcInstance: SigningClientResolver) => buildQuery<RequestEndBlock, ResponseEndBlock>({
+export const createGetEndBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestEndBlock, ResponseEndBlock>({
   encoder: RequestEndBlock.encode,
   decoder: ResponseEndBlock.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -126,7 +127,7 @@ export const useGetEndBlock = buildUseQuery<RequestEndBlock, ResponseEndBlock>({
   builderQueryFn: createGetEndBlock,
   queryKeyPrefix: "EndBlockQuery"
 });
-export const createGetListSnapshots = (getRpcInstance: SigningClientResolver) => buildQuery<RequestListSnapshots, ResponseListSnapshots>({
+export const createGetListSnapshots = (getRpcInstance: RpcResolver) => buildQuery<RequestListSnapshots, ResponseListSnapshots>({
   encoder: RequestListSnapshots.encode,
   decoder: ResponseListSnapshots.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -137,7 +138,7 @@ export const useGetListSnapshots = buildUseQuery<RequestListSnapshots, ResponseL
   builderQueryFn: createGetListSnapshots,
   queryKeyPrefix: "ListSnapshotsQuery"
 });
-export const createGetOfferSnapshot = (getRpcInstance: SigningClientResolver) => buildQuery<RequestOfferSnapshot, ResponseOfferSnapshot>({
+export const createGetOfferSnapshot = (getRpcInstance: RpcResolver) => buildQuery<RequestOfferSnapshot, ResponseOfferSnapshot>({
   encoder: RequestOfferSnapshot.encode,
   decoder: ResponseOfferSnapshot.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -148,7 +149,7 @@ export const useGetOfferSnapshot = buildUseQuery<RequestOfferSnapshot, ResponseO
   builderQueryFn: createGetOfferSnapshot,
   queryKeyPrefix: "OfferSnapshotQuery"
 });
-export const createGetLoadSnapshotChunk = (getRpcInstance: SigningClientResolver) => buildQuery<RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk>({
+export const createGetLoadSnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk>({
   encoder: RequestLoadSnapshotChunk.encode,
   decoder: ResponseLoadSnapshotChunk.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -159,7 +160,7 @@ export const useGetLoadSnapshotChunk = buildUseQuery<RequestLoadSnapshotChunk, R
   builderQueryFn: createGetLoadSnapshotChunk,
   queryKeyPrefix: "LoadSnapshotChunkQuery"
 });
-export const createGetApplySnapshotChunk = (getRpcInstance: SigningClientResolver) => buildQuery<RequestApplySnapshotChunk, ResponseApplySnapshotChunk>({
+export const createGetApplySnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestApplySnapshotChunk, ResponseApplySnapshotChunk>({
   encoder: RequestApplySnapshotChunk.encode,
   decoder: ResponseApplySnapshotChunk.decode,
   service: "cosmos.bank.v1beta1.Query",

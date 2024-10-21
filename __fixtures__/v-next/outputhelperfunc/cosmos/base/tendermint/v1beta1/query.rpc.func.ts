@@ -3,9 +3,10 @@ import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { BlockID, BlockIDSDKType } from "../../../../tendermint/types/types";
 import { Block, BlockSDKType } from "../../../../tendermint/types/block";
 import { NodeInfo, NodeInfoSDKType } from "../../../../tendermint/p2p/types";
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { GetNodeInfoRequest, GetNodeInfoRequestSDKType, GetNodeInfoResponse, GetNodeInfoResponseSDKType, GetSyncingRequest, GetSyncingRequestSDKType, GetSyncingResponse, GetSyncingResponseSDKType, GetLatestBlockRequest, GetLatestBlockRequestSDKType, GetLatestBlockResponse, GetLatestBlockResponseSDKType, GetBlockByHeightRequest, GetBlockByHeightRequestSDKType, GetBlockByHeightResponse, GetBlockByHeightResponseSDKType, GetLatestValidatorSetRequest, GetLatestValidatorSetRequestSDKType, GetLatestValidatorSetResponse, GetLatestValidatorSetResponseSDKType, GetValidatorSetByHeightRequest, GetValidatorSetByHeightRequestSDKType, GetValidatorSetByHeightResponse, GetValidatorSetByHeightResponseSDKType } from "./query";
-export const createGetGetNodeInfo = (getRpcInstance: SigningClientResolver) => buildQuery<GetNodeInfoRequest, GetNodeInfoResponse>({
+export const createGetGetNodeInfo = (getRpcInstance: RpcResolver) => buildQuery<GetNodeInfoRequest, GetNodeInfoResponse>({
   encoder: GetNodeInfoRequest.encode,
   decoder: GetNodeInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -16,7 +17,7 @@ export const useGetGetNodeInfo = buildUseQuery<GetNodeInfoRequest, GetNodeInfoRe
   builderQueryFn: createGetGetNodeInfo,
   queryKeyPrefix: "GetNodeInfoQuery"
 });
-export const createGetGetSyncing = (getRpcInstance: SigningClientResolver) => buildQuery<GetSyncingRequest, GetSyncingResponse>({
+export const createGetGetSyncing = (getRpcInstance: RpcResolver) => buildQuery<GetSyncingRequest, GetSyncingResponse>({
   encoder: GetSyncingRequest.encode,
   decoder: GetSyncingResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -27,7 +28,7 @@ export const useGetGetSyncing = buildUseQuery<GetSyncingRequest, GetSyncingRespo
   builderQueryFn: createGetGetSyncing,
   queryKeyPrefix: "GetSyncingQuery"
 });
-export const createGetGetLatestBlock = (getRpcInstance: SigningClientResolver) => buildQuery<GetLatestBlockRequest, GetLatestBlockResponse>({
+export const createGetGetLatestBlock = (getRpcInstance: RpcResolver) => buildQuery<GetLatestBlockRequest, GetLatestBlockResponse>({
   encoder: GetLatestBlockRequest.encode,
   decoder: GetLatestBlockResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -38,7 +39,7 @@ export const useGetGetLatestBlock = buildUseQuery<GetLatestBlockRequest, GetLate
   builderQueryFn: createGetGetLatestBlock,
   queryKeyPrefix: "GetLatestBlockQuery"
 });
-export const createGetGetBlockByHeight = (getRpcInstance: SigningClientResolver) => buildQuery<GetBlockByHeightRequest, GetBlockByHeightResponse>({
+export const createGetGetBlockByHeight = (getRpcInstance: RpcResolver) => buildQuery<GetBlockByHeightRequest, GetBlockByHeightResponse>({
   encoder: GetBlockByHeightRequest.encode,
   decoder: GetBlockByHeightResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -49,7 +50,7 @@ export const useGetGetBlockByHeight = buildUseQuery<GetBlockByHeightRequest, Get
   builderQueryFn: createGetGetBlockByHeight,
   queryKeyPrefix: "GetBlockByHeightQuery"
 });
-export const createGetGetLatestValidatorSet = (getRpcInstance: SigningClientResolver) => buildQuery<GetLatestValidatorSetRequest, GetLatestValidatorSetResponse>({
+export const createGetGetLatestValidatorSet = (getRpcInstance: RpcResolver) => buildQuery<GetLatestValidatorSetRequest, GetLatestValidatorSetResponse>({
   encoder: GetLatestValidatorSetRequest.encode,
   decoder: GetLatestValidatorSetResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -60,7 +61,7 @@ export const useGetGetLatestValidatorSet = buildUseQuery<GetLatestValidatorSetRe
   builderQueryFn: createGetGetLatestValidatorSet,
   queryKeyPrefix: "GetLatestValidatorSetQuery"
 });
-export const createGetGetValidatorSetByHeight = (getRpcInstance: SigningClientResolver) => buildQuery<GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse>({
+export const createGetGetValidatorSetByHeight = (getRpcInstance: RpcResolver) => buildQuery<GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse>({
   encoder: GetValidatorSetByHeightRequest.encode,
   decoder: GetValidatorSetByHeightResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

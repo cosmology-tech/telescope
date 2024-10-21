@@ -1,9 +1,10 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination";
 import { Any, AnySDKType } from "../../../../google/protobuf/any";
 import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client";
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
-export const createGetClientState = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
+export const createGetClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
   encoder: QueryClientStateRequest.encode,
   decoder: QueryClientStateResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -14,7 +15,7 @@ export const useGetClientState = buildUseQuery<QueryClientStateRequest, QueryCli
   builderQueryFn: createGetClientState,
   queryKeyPrefix: "ClientStateQuery"
 });
-export const createGetClientStates = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
+export const createGetClientStates = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
   encoder: QueryClientStatesRequest.encode,
   decoder: QueryClientStatesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -25,7 +26,7 @@ export const useGetClientStates = buildUseQuery<QueryClientStatesRequest, QueryC
   builderQueryFn: createGetClientStates,
   queryKeyPrefix: "ClientStatesQuery"
 });
-export const createGetConsensusState = (getRpcInstance: SigningClientResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
+export const createGetConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
   encoder: QueryConsensusStateRequest.encode,
   decoder: QueryConsensusStateResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -36,7 +37,7 @@ export const useGetConsensusState = buildUseQuery<QueryConsensusStateRequest, Qu
   builderQueryFn: createGetConsensusState,
   queryKeyPrefix: "ConsensusStateQuery"
 });
-export const createGetConsensusStates = (getRpcInstance: SigningClientResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
+export const createGetConsensusStates = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
   encoder: QueryConsensusStatesRequest.encode,
   decoder: QueryConsensusStatesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -47,7 +48,7 @@ export const useGetConsensusStates = buildUseQuery<QueryConsensusStatesRequest, 
   builderQueryFn: createGetConsensusStates,
   queryKeyPrefix: "ConsensusStatesQuery"
 });
-export const createGetClientStatus = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
+export const createGetClientStatus = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
   encoder: QueryClientStatusRequest.encode,
   decoder: QueryClientStatusResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -58,7 +59,7 @@ export const useGetClientStatus = buildUseQuery<QueryClientStatusRequest, QueryC
   builderQueryFn: createGetClientStatus,
   queryKeyPrefix: "ClientStatusQuery"
 });
-export const createGetClientParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
+export const createGetClientParams = (getRpcInstance: RpcResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
   encoder: QueryClientParamsRequest.encode,
   decoder: QueryClientParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -69,7 +70,7 @@ export const useGetClientParams = buildUseQuery<QueryClientParamsRequest, QueryC
   builderQueryFn: createGetClientParams,
   queryKeyPrefix: "ClientParamsQuery"
 });
-export const createGetUpgradedClientState = (getRpcInstance: SigningClientResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
+export const createGetUpgradedClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
   encoder: QueryUpgradedClientStateRequest.encode,
   decoder: QueryUpgradedClientStateResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -80,7 +81,7 @@ export const useGetUpgradedClientState = buildUseQuery<QueryUpgradedClientStateR
   builderQueryFn: createGetUpgradedClientState,
   queryKeyPrefix: "UpgradedClientStateQuery"
 });
-export const createGetUpgradedConsensusState = (getRpcInstance: SigningClientResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
+export const createGetUpgradedConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
   encoder: QueryUpgradedConsensusStateRequest.encode,
   decoder: QueryUpgradedConsensusStateResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

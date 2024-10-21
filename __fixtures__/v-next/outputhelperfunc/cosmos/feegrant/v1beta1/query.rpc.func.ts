@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType } from "./feegrant";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
-export const createGetAllowance = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllowanceRequest, QueryAllowanceResponse>({
+export const createGetAllowance = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowanceRequest, QueryAllowanceResponse>({
   encoder: QueryAllowanceRequest.encode,
   decoder: QueryAllowanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetAllowance = buildUseQuery<QueryAllowanceRequest, QueryAllowan
   builderQueryFn: createGetAllowance,
   queryKeyPrefix: "AllowanceQuery"
 });
-export const createGetAllowances = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllowancesRequest, QueryAllowancesResponse>({
+export const createGetAllowances = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowancesRequest, QueryAllowancesResponse>({
   encoder: QueryAllowancesRequest.encode,
   decoder: QueryAllowancesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetAllowances = buildUseQuery<QueryAllowancesRequest, QueryAllow
   builderQueryFn: createGetAllowances,
   queryKeyPrefix: "AllowancesQuery"
 });
-export const createGetAllowancesByGranter = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllowancesByGranterRequest, QueryAllowancesByGranterResponse>({
+export const createGetAllowancesByGranter = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowancesByGranterRequest, QueryAllowancesByGranterResponse>({
   encoder: QueryAllowancesByGranterRequest.encode,
   decoder: QueryAllowancesByGranterResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

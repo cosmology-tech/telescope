@@ -1,9 +1,10 @@
 import { Action, ActionSDKType, ClaimRecord, ClaimRecordSDKType } from "./claim";
 import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin";
 import { Params, ParamsSDKType } from "./params";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
-export const createGetModuleAccountBalance = (getRpcInstance: SigningClientResolver) => buildQuery<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse>({
+export const createGetModuleAccountBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse>({
   encoder: QueryModuleAccountBalanceRequest.encode,
   decoder: QueryModuleAccountBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -14,7 +15,7 @@ export const useGetModuleAccountBalance = buildUseQuery<QueryModuleAccountBalanc
   builderQueryFn: createGetModuleAccountBalance,
   queryKeyPrefix: "ModuleAccountBalanceQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -25,7 +26,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetClaimRecord = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClaimRecordRequest, QueryClaimRecordResponse>({
+export const createGetClaimRecord = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimRecordRequest, QueryClaimRecordResponse>({
   encoder: QueryClaimRecordRequest.encode,
   decoder: QueryClaimRecordResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -36,7 +37,7 @@ export const useGetClaimRecord = buildUseQuery<QueryClaimRecordRequest, QueryCla
   builderQueryFn: createGetClaimRecord,
   queryKeyPrefix: "ClaimRecordQuery"
 });
-export const createGetClaimableForAction = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClaimableForActionRequest, QueryClaimableForActionResponse>({
+export const createGetClaimableForAction = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimableForActionRequest, QueryClaimableForActionResponse>({
   encoder: QueryClaimableForActionRequest.encode,
   decoder: QueryClaimableForActionResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -47,7 +48,7 @@ export const useGetClaimableForAction = buildUseQuery<QueryClaimableForActionReq
   builderQueryFn: createGetClaimableForAction,
   queryKeyPrefix: "ClaimableForActionQuery"
 });
-export const createGetTotalClaimable = (getRpcInstance: SigningClientResolver) => buildQuery<QueryTotalClaimableRequest, QueryTotalClaimableResponse>({
+export const createGetTotalClaimable = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalClaimableRequest, QueryTotalClaimableResponse>({
   encoder: QueryTotalClaimableRequest.encode,
   decoder: QueryTotalClaimableResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

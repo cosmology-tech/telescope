@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Grant, GrantSDKType, GrantAuthorization, GrantAuthorizationSDKType } from "./authz";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
-export const createGetGrants = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
+export const createGetGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
   encoder: QueryGrantsRequest.encode,
   decoder: QueryGrantsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetGrants = buildUseQuery<QueryGrantsRequest, QueryGrantsRespons
   builderQueryFn: createGetGrants,
   queryKeyPrefix: "GrantsQuery"
 });
-export const createGetGranterGrants = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
+export const createGetGranterGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
   encoder: QueryGranterGrantsRequest.encode,
   decoder: QueryGranterGrantsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetGranterGrants = buildUseQuery<QueryGranterGrantsRequest, Quer
   builderQueryFn: createGetGranterGrants,
   queryKeyPrefix: "GranterGrantsQuery"
 });
-export const createGetGranteeGrants = (getRpcInstance: SigningClientResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
+export const createGetGranteeGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
   encoder: QueryGranteeGrantsRequest.encode,
   decoder: QueryGranteeGrantsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Validator, ValidatorSDKType, DelegationResponse, DelegationResponseSDKType, UnbondingDelegation, UnbondingDelegationSDKType, RedelegationResponse, RedelegationResponseSDKType, HistoricalInfo, HistoricalInfoSDKType, Pool, PoolSDKType, Params, ParamsSDKType } from "./staking";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryValidatorsRequest, QueryValidatorsRequestSDKType, QueryValidatorsResponse, QueryValidatorsResponseSDKType, QueryValidatorRequest, QueryValidatorRequestSDKType, QueryValidatorResponse, QueryValidatorResponseSDKType, QueryValidatorDelegationsRequest, QueryValidatorDelegationsRequestSDKType, QueryValidatorDelegationsResponse, QueryValidatorDelegationsResponseSDKType, QueryValidatorUnbondingDelegationsRequest, QueryValidatorUnbondingDelegationsRequestSDKType, QueryValidatorUnbondingDelegationsResponse, QueryValidatorUnbondingDelegationsResponseSDKType, QueryDelegationRequest, QueryDelegationRequestSDKType, QueryDelegationResponse, QueryDelegationResponseSDKType, QueryUnbondingDelegationRequest, QueryUnbondingDelegationRequestSDKType, QueryUnbondingDelegationResponse, QueryUnbondingDelegationResponseSDKType, QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsRequestSDKType, QueryDelegatorDelegationsResponse, QueryDelegatorDelegationsResponseSDKType, QueryDelegatorUnbondingDelegationsRequest, QueryDelegatorUnbondingDelegationsRequestSDKType, QueryDelegatorUnbondingDelegationsResponse, QueryDelegatorUnbondingDelegationsResponseSDKType, QueryRedelegationsRequest, QueryRedelegationsRequestSDKType, QueryRedelegationsResponse, QueryRedelegationsResponseSDKType, QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsRequestSDKType, QueryDelegatorValidatorsResponse, QueryDelegatorValidatorsResponseSDKType, QueryDelegatorValidatorRequest, QueryDelegatorValidatorRequestSDKType, QueryDelegatorValidatorResponse, QueryDelegatorValidatorResponseSDKType, QueryHistoricalInfoRequest, QueryHistoricalInfoRequestSDKType, QueryHistoricalInfoResponse, QueryHistoricalInfoResponseSDKType, QueryPoolRequest, QueryPoolRequestSDKType, QueryPoolResponse, QueryPoolResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-export const createGetValidators = (getRpcInstance: SigningClientResolver) => buildQuery<QueryValidatorsRequest, QueryValidatorsResponse>({
+export const createGetValidators = (getRpcInstance: RpcResolver) => buildQuery<QueryValidatorsRequest, QueryValidatorsResponse>({
   encoder: QueryValidatorsRequest.encode,
   decoder: QueryValidatorsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetValidators = buildUseQuery<QueryValidatorsRequest, QueryValid
   builderQueryFn: createGetValidators,
   queryKeyPrefix: "ValidatorsQuery"
 });
-export const createGetValidator = (getRpcInstance: SigningClientResolver) => buildQuery<QueryValidatorRequest, QueryValidatorResponse>({
+export const createGetValidator = (getRpcInstance: RpcResolver) => buildQuery<QueryValidatorRequest, QueryValidatorResponse>({
   encoder: QueryValidatorRequest.encode,
   decoder: QueryValidatorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetValidator = buildUseQuery<QueryValidatorRequest, QueryValidat
   builderQueryFn: createGetValidator,
   queryKeyPrefix: "ValidatorQuery"
 });
-export const createGetValidatorDelegations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryValidatorDelegationsRequest, QueryValidatorDelegationsResponse>({
+export const createGetValidatorDelegations = (getRpcInstance: RpcResolver) => buildQuery<QueryValidatorDelegationsRequest, QueryValidatorDelegationsResponse>({
   encoder: QueryValidatorDelegationsRequest.encode,
   decoder: QueryValidatorDelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -35,7 +36,7 @@ export const useGetValidatorDelegations = buildUseQuery<QueryValidatorDelegation
   builderQueryFn: createGetValidatorDelegations,
   queryKeyPrefix: "ValidatorDelegationsQuery"
 });
-export const createGetValidatorUnbondingDelegations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryValidatorUnbondingDelegationsRequest, QueryValidatorUnbondingDelegationsResponse>({
+export const createGetValidatorUnbondingDelegations = (getRpcInstance: RpcResolver) => buildQuery<QueryValidatorUnbondingDelegationsRequest, QueryValidatorUnbondingDelegationsResponse>({
   encoder: QueryValidatorUnbondingDelegationsRequest.encode,
   decoder: QueryValidatorUnbondingDelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -46,7 +47,7 @@ export const useGetValidatorUnbondingDelegations = buildUseQuery<QueryValidatorU
   builderQueryFn: createGetValidatorUnbondingDelegations,
   queryKeyPrefix: "ValidatorUnbondingDelegationsQuery"
 });
-export const createGetDelegation = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDelegationRequest, QueryDelegationResponse>({
+export const createGetDelegation = (getRpcInstance: RpcResolver) => buildQuery<QueryDelegationRequest, QueryDelegationResponse>({
   encoder: QueryDelegationRequest.encode,
   decoder: QueryDelegationResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -57,7 +58,7 @@ export const useGetDelegation = buildUseQuery<QueryDelegationRequest, QueryDeleg
   builderQueryFn: createGetDelegation,
   queryKeyPrefix: "DelegationQuery"
 });
-export const createGetUnbondingDelegation = (getRpcInstance: SigningClientResolver) => buildQuery<QueryUnbondingDelegationRequest, QueryUnbondingDelegationResponse>({
+export const createGetUnbondingDelegation = (getRpcInstance: RpcResolver) => buildQuery<QueryUnbondingDelegationRequest, QueryUnbondingDelegationResponse>({
   encoder: QueryUnbondingDelegationRequest.encode,
   decoder: QueryUnbondingDelegationResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -68,7 +69,7 @@ export const useGetUnbondingDelegation = buildUseQuery<QueryUnbondingDelegationR
   builderQueryFn: createGetUnbondingDelegation,
   queryKeyPrefix: "UnbondingDelegationQuery"
 });
-export const createGetDelegatorDelegations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsResponse>({
+export const createGetDelegatorDelegations = (getRpcInstance: RpcResolver) => buildQuery<QueryDelegatorDelegationsRequest, QueryDelegatorDelegationsResponse>({
   encoder: QueryDelegatorDelegationsRequest.encode,
   decoder: QueryDelegatorDelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -79,7 +80,7 @@ export const useGetDelegatorDelegations = buildUseQuery<QueryDelegatorDelegation
   builderQueryFn: createGetDelegatorDelegations,
   queryKeyPrefix: "DelegatorDelegationsQuery"
 });
-export const createGetDelegatorUnbondingDelegations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDelegatorUnbondingDelegationsRequest, QueryDelegatorUnbondingDelegationsResponse>({
+export const createGetDelegatorUnbondingDelegations = (getRpcInstance: RpcResolver) => buildQuery<QueryDelegatorUnbondingDelegationsRequest, QueryDelegatorUnbondingDelegationsResponse>({
   encoder: QueryDelegatorUnbondingDelegationsRequest.encode,
   decoder: QueryDelegatorUnbondingDelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -90,7 +91,7 @@ export const useGetDelegatorUnbondingDelegations = buildUseQuery<QueryDelegatorU
   builderQueryFn: createGetDelegatorUnbondingDelegations,
   queryKeyPrefix: "DelegatorUnbondingDelegationsQuery"
 });
-export const createGetRedelegations = (getRpcInstance: SigningClientResolver) => buildQuery<QueryRedelegationsRequest, QueryRedelegationsResponse>({
+export const createGetRedelegations = (getRpcInstance: RpcResolver) => buildQuery<QueryRedelegationsRequest, QueryRedelegationsResponse>({
   encoder: QueryRedelegationsRequest.encode,
   decoder: QueryRedelegationsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -101,7 +102,7 @@ export const useGetRedelegations = buildUseQuery<QueryRedelegationsRequest, Quer
   builderQueryFn: createGetRedelegations,
   queryKeyPrefix: "RedelegationsQuery"
 });
-export const createGetDelegatorValidators = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsResponse>({
+export const createGetDelegatorValidators = (getRpcInstance: RpcResolver) => buildQuery<QueryDelegatorValidatorsRequest, QueryDelegatorValidatorsResponse>({
   encoder: QueryDelegatorValidatorsRequest.encode,
   decoder: QueryDelegatorValidatorsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -112,7 +113,7 @@ export const useGetDelegatorValidators = buildUseQuery<QueryDelegatorValidatorsR
   builderQueryFn: createGetDelegatorValidators,
   queryKeyPrefix: "DelegatorValidatorsQuery"
 });
-export const createGetDelegatorValidator = (getRpcInstance: SigningClientResolver) => buildQuery<QueryDelegatorValidatorRequest, QueryDelegatorValidatorResponse>({
+export const createGetDelegatorValidator = (getRpcInstance: RpcResolver) => buildQuery<QueryDelegatorValidatorRequest, QueryDelegatorValidatorResponse>({
   encoder: QueryDelegatorValidatorRequest.encode,
   decoder: QueryDelegatorValidatorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -123,7 +124,7 @@ export const useGetDelegatorValidator = buildUseQuery<QueryDelegatorValidatorReq
   builderQueryFn: createGetDelegatorValidator,
   queryKeyPrefix: "DelegatorValidatorQuery"
 });
-export const createGetHistoricalInfo = (getRpcInstance: SigningClientResolver) => buildQuery<QueryHistoricalInfoRequest, QueryHistoricalInfoResponse>({
+export const createGetHistoricalInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryHistoricalInfoRequest, QueryHistoricalInfoResponse>({
   encoder: QueryHistoricalInfoRequest.encode,
   decoder: QueryHistoricalInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -134,7 +135,7 @@ export const useGetHistoricalInfo = buildUseQuery<QueryHistoricalInfoRequest, Qu
   builderQueryFn: createGetHistoricalInfo,
   queryKeyPrefix: "HistoricalInfoQuery"
 });
-export const createGetPool = (getRpcInstance: SigningClientResolver) => buildQuery<QueryPoolRequest, QueryPoolResponse>({
+export const createGetPool = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolRequest, QueryPoolResponse>({
   encoder: QueryPoolRequest.encode,
   decoder: QueryPoolResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -145,7 +146,7 @@ export const useGetPool = buildUseQuery<QueryPoolRequest, QueryPoolResponse>({
   builderQueryFn: createGetPool,
   queryKeyPrefix: "PoolQuery"
 });
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

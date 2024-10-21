@@ -1,7 +1,8 @@
 import { Config, ConfigSDKType } from "./config";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
-export const createGetConfig = (getRpcInstance: SigningClientResolver) => buildQuery<QueryConfigRequest, QueryConfigResponse>({
+export const createGetConfig = (getRpcInstance: RpcResolver) => buildQuery<QueryConfigRequest, QueryConfigResponse>({
   encoder: QueryConfigRequest.encode,
   decoder: QueryConfigResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

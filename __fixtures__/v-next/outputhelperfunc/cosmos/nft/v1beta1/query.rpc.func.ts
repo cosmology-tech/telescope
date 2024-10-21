@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { NFT, NFTSDKType, Class, ClassSDKType } from "./nft";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryBalanceRequest, QueryBalanceRequestSDKType, QueryBalanceResponse, QueryBalanceResponseSDKType, QueryOwnerRequest, QueryOwnerRequestSDKType, QueryOwnerResponse, QueryOwnerResponseSDKType, QuerySupplyRequest, QuerySupplyRequestSDKType, QuerySupplyResponse, QuerySupplyResponseSDKType, QueryNFTsRequest, QueryNFTsRequestSDKType, QueryNFTsResponse, QueryNFTsResponseSDKType, QueryNFTRequest, QueryNFTRequestSDKType, QueryNFTResponse, QueryNFTResponseSDKType, QueryClassRequest, QueryClassRequestSDKType, QueryClassResponse, QueryClassResponseSDKType, QueryClassesRequest, QueryClassesRequestSDKType, QueryClassesResponse, QueryClassesResponseSDKType } from "./query";
-export const createGetBalance = (getRpcInstance: SigningClientResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
+export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encoder: QueryBalanceRequest.encode,
   decoder: QueryBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResp
   builderQueryFn: createGetBalance,
   queryKeyPrefix: "BalanceQuery"
 });
-export const createGetOwner = (getRpcInstance: SigningClientResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
+export const createGetOwner = (getRpcInstance: RpcResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
   encoder: QueryOwnerRequest.encode,
   decoder: QueryOwnerResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetOwner = buildUseQuery<QueryOwnerRequest, QueryOwnerResponse>(
   builderQueryFn: createGetOwner,
   queryKeyPrefix: "OwnerQuery"
 });
-export const createGetSupply = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
+export const createGetSupply = (getRpcInstance: RpcResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
   encoder: QuerySupplyRequest.encode,
   decoder: QuerySupplyResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -35,7 +36,7 @@ export const useGetSupply = buildUseQuery<QuerySupplyRequest, QuerySupplyRespons
   builderQueryFn: createGetSupply,
   queryKeyPrefix: "SupplyQuery"
 });
-export const createGetNFTs = (getRpcInstance: SigningClientResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
+export const createGetNFTs = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
   encoder: QueryNFTsRequest.encode,
   decoder: QueryNFTsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -46,7 +47,7 @@ export const useGetNFTs = buildUseQuery<QueryNFTsRequest, QueryNFTsResponse>({
   builderQueryFn: createGetNFTs,
   queryKeyPrefix: "NFTsQuery"
 });
-export const createGetNFT = (getRpcInstance: SigningClientResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
+export const createGetNFT = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
   encoder: QueryNFTRequest.encode,
   decoder: QueryNFTResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -57,7 +58,7 @@ export const useGetNFT = buildUseQuery<QueryNFTRequest, QueryNFTResponse>({
   builderQueryFn: createGetNFT,
   queryKeyPrefix: "NFTQuery"
 });
-export const createGetClass = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
+export const createGetClass = (getRpcInstance: RpcResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
   encoder: QueryClassRequest.encode,
   decoder: QueryClassResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -68,7 +69,7 @@ export const useGetClass = buildUseQuery<QueryClassRequest, QueryClassResponse>(
   builderQueryFn: createGetClass,
   queryKeyPrefix: "ClassQuery"
 });
-export const createGetClasses = (getRpcInstance: SigningClientResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
+export const createGetClasses = (getRpcInstance: RpcResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
   encoder: QueryClassesRequest.encode,
   decoder: QueryClassesResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

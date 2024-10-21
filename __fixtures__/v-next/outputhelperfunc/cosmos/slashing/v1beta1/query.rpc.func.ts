@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query";
-export const createGetParams = (getRpcInstance: SigningClientResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encoder: QueryParamsRequest.encode,
   decoder: QueryParamsResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetSigningInfo = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySigningInfoRequest, QuerySigningInfoResponse>({
+export const createGetSigningInfo = (getRpcInstance: RpcResolver) => buildQuery<QuerySigningInfoRequest, QuerySigningInfoResponse>({
   encoder: QuerySigningInfoRequest.encode,
   decoder: QuerySigningInfoResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -24,7 +25,7 @@ export const useGetSigningInfo = buildUseQuery<QuerySigningInfoRequest, QuerySig
   builderQueryFn: createGetSigningInfo,
   queryKeyPrefix: "SigningInfoQuery"
 });
-export const createGetSigningInfos = (getRpcInstance: SigningClientResolver) => buildQuery<QuerySigningInfosRequest, QuerySigningInfosResponse>({
+export const createGetSigningInfos = (getRpcInstance: RpcResolver) => buildQuery<QuerySigningInfosRequest, QuerySigningInfosResponse>({
   encoder: QuerySigningInfosRequest.encode,
   decoder: QuerySigningInfosResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

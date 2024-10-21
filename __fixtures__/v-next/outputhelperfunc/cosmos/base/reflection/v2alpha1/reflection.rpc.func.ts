@@ -1,6 +1,7 @@
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { GetAuthnDescriptorRequest, GetAuthnDescriptorRequestSDKType, GetAuthnDescriptorResponse, GetAuthnDescriptorResponseSDKType, GetChainDescriptorRequest, GetChainDescriptorRequestSDKType, GetChainDescriptorResponse, GetChainDescriptorResponseSDKType, GetCodecDescriptorRequest, GetCodecDescriptorRequestSDKType, GetCodecDescriptorResponse, GetCodecDescriptorResponseSDKType, GetConfigurationDescriptorRequest, GetConfigurationDescriptorRequestSDKType, GetConfigurationDescriptorResponse, GetConfigurationDescriptorResponseSDKType, GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorRequestSDKType, GetQueryServicesDescriptorResponse, GetQueryServicesDescriptorResponseSDKType, GetTxDescriptorRequest, GetTxDescriptorRequestSDKType, GetTxDescriptorResponse, GetTxDescriptorResponseSDKType } from "./reflection";
-export const createGetGetAuthnDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetAuthnDescriptorRequest, GetAuthnDescriptorResponse>({
+export const createGetGetAuthnDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetAuthnDescriptorRequest, GetAuthnDescriptorResponse>({
   encoder: GetAuthnDescriptorRequest.encode,
   decoder: GetAuthnDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -11,7 +12,7 @@ export const useGetGetAuthnDescriptor = buildUseQuery<GetAuthnDescriptorRequest,
   builderQueryFn: createGetGetAuthnDescriptor,
   queryKeyPrefix: "GetAuthnDescriptorQuery"
 });
-export const createGetGetChainDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetChainDescriptorRequest, GetChainDescriptorResponse>({
+export const createGetGetChainDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetChainDescriptorRequest, GetChainDescriptorResponse>({
   encoder: GetChainDescriptorRequest.encode,
   decoder: GetChainDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -22,7 +23,7 @@ export const useGetGetChainDescriptor = buildUseQuery<GetChainDescriptorRequest,
   builderQueryFn: createGetGetChainDescriptor,
   queryKeyPrefix: "GetChainDescriptorQuery"
 });
-export const createGetGetCodecDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetCodecDescriptorRequest, GetCodecDescriptorResponse>({
+export const createGetGetCodecDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetCodecDescriptorRequest, GetCodecDescriptorResponse>({
   encoder: GetCodecDescriptorRequest.encode,
   decoder: GetCodecDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -33,7 +34,7 @@ export const useGetGetCodecDescriptor = buildUseQuery<GetCodecDescriptorRequest,
   builderQueryFn: createGetGetCodecDescriptor,
   queryKeyPrefix: "GetCodecDescriptorQuery"
 });
-export const createGetGetConfigurationDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetConfigurationDescriptorRequest, GetConfigurationDescriptorResponse>({
+export const createGetGetConfigurationDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetConfigurationDescriptorRequest, GetConfigurationDescriptorResponse>({
   encoder: GetConfigurationDescriptorRequest.encode,
   decoder: GetConfigurationDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -44,7 +45,7 @@ export const useGetGetConfigurationDescriptor = buildUseQuery<GetConfigurationDe
   builderQueryFn: createGetGetConfigurationDescriptor,
   queryKeyPrefix: "GetConfigurationDescriptorQuery"
 });
-export const createGetGetQueryServicesDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorResponse>({
+export const createGetGetQueryServicesDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorResponse>({
   encoder: GetQueryServicesDescriptorRequest.encode,
   decoder: GetQueryServicesDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -55,7 +56,7 @@ export const useGetGetQueryServicesDescriptor = buildUseQuery<GetQueryServicesDe
   builderQueryFn: createGetGetQueryServicesDescriptor,
   queryKeyPrefix: "GetQueryServicesDescriptorQuery"
 });
-export const createGetGetTxDescriptor = (getRpcInstance: SigningClientResolver) => buildQuery<GetTxDescriptorRequest, GetTxDescriptorResponse>({
+export const createGetGetTxDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetTxDescriptorRequest, GetTxDescriptorResponse>({
   encoder: GetTxDescriptorRequest.encode,
   decoder: GetTxDescriptorResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

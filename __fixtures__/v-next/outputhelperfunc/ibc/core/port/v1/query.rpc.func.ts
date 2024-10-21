@@ -1,7 +1,8 @@
 import { Order, OrderSDKType, Counterparty, CounterpartySDKType } from "../../channel/v1/channel";
-import { SigningClientResolver } from "../../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../../helper-func-types";
+import { buildUseQuery } from "../../../../react-query";
 import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionResponse, QueryAppVersionResponseSDKType } from "./query";
-export const createGetAppVersion = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAppVersionRequest, QueryAppVersionResponse>({
+export const createGetAppVersion = (getRpcInstance: RpcResolver) => buildQuery<QueryAppVersionRequest, QueryAppVersionResponse>({
   encoder: QueryAppVersionRequest.encode,
   decoder: QueryAppVersionResponse.decode,
   service: "cosmos.bank.v1beta1.Query",

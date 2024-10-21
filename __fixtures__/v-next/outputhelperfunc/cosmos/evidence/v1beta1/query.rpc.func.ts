@@ -1,8 +1,9 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination";
 import { Any, AnySDKType } from "../../../google/protobuf/any";
-import { SigningClientResolver } from "../../../helper-func-types";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query";
-export const createGetEvidence = (getRpcInstance: SigningClientResolver) => buildQuery<QueryEvidenceRequest, QueryEvidenceResponse>({
+export const createGetEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryEvidenceRequest, QueryEvidenceResponse>({
   encoder: QueryEvidenceRequest.encode,
   decoder: QueryEvidenceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
@@ -13,7 +14,7 @@ export const useGetEvidence = buildUseQuery<QueryEvidenceRequest, QueryEvidenceR
   builderQueryFn: createGetEvidence,
   queryKeyPrefix: "EvidenceQuery"
 });
-export const createGetAllEvidence = (getRpcInstance: SigningClientResolver) => buildQuery<QueryAllEvidenceRequest, QueryAllEvidenceResponse>({
+export const createGetAllEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryAllEvidenceRequest, QueryAllEvidenceResponse>({
   encoder: QueryAllEvidenceRequest.encode,
   decoder: QueryAllEvidenceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
