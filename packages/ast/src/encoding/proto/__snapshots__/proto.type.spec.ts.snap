@@ -280,6 +280,7 @@ exports[`traversed misc/eval_request SDKType 1`] = `
   test_array: string[];
   opt: FeatureSet_Utf8Validation;
   graph?: TestNest_GraphSDKType;
+  deprecated?: string;
 }"
 `;
 

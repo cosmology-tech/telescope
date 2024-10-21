@@ -52,6 +52,9 @@ exports[`misc/eval_request date 1`] = `
     if (message.graph !== undefined) {
       TestNest_Graph.encode(message.graph, writer.uint32(130).fork()).ldelim();
     }
+    if (message.deprecated !== undefined) {
+      writer.uint32(138).string(message.deprecated);
+    }
     return writer;
   },
   decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
@@ -100,6 +103,9 @@ exports[`misc/eval_request date 1`] = `
         case 16:
           message.graph = TestNest_Graph.decode(reader, reader.uint32());
           break;
+        case 17:
+          message.deprecated = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -129,7 +135,8 @@ exports[`misc/eval_request date 1`] = `
       name: isSet(object.name) ? String(object.name) : undefined,
       testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : [],
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
-      graph: isSet(object.graph) ? TestNest_Graph.fromJSON(object.graph) : undefined
+      graph: isSet(object.graph) ? TestNest_Graph.fromJSON(object.graph) : undefined,
+      deprecated: isSet(object.deprecated) ? String(object.deprecated) : undefined
     };
   },
   toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
@@ -159,6 +166,7 @@ exports[`misc/eval_request date 1`] = `
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toJSON(message.graph) : undefined);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     return obj;
   },
   fromPartial(object: Partial<EvalRequest>): EvalRequest {
@@ -188,6 +196,7 @@ exports[`misc/eval_request date 1`] = `
     message.testArray = object.testArray?.map(e => e) || [];
     message.opt = object.opt ?? 0;
     message.graph = object.graph !== undefined && object.graph !== null ? TestNest_Graph.fromPartial(object.graph) : undefined;
+    message.deprecated = object.deprecated ?? undefined;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -212,7 +221,8 @@ exports[`misc/eval_request date 1`] = `
       name: object?.name,
       testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
-      graph: object.graph ? TestNest_Graph.fromSDK(object.graph) : undefined
+      graph: object.graph ? TestNest_Graph.fromSDK(object.graph) : undefined,
+      deprecated: object?.deprecated
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -242,6 +252,7 @@ exports[`misc/eval_request date 1`] = `
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toSDK(message.graph) : undefined);
+    obj.deprecated = message.deprecated;
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -287,6 +298,9 @@ exports[`misc/eval_request date 1`] = `
     if (object.graph !== undefined && object.graph !== null) {
       message.graph = TestNest_Graph.fromAmino(object.graph);
     }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
     return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -316,6 +330,7 @@ exports[`misc/eval_request date 1`] = `
     }
     obj.opt = message.opt ?? 0;
     obj.graph = message.graph ? TestNest_Graph.toAmino(message.graph) : undefined;
+    obj.deprecated = message.deprecated === null ? undefined : message.deprecated;
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
@@ -388,6 +403,9 @@ exports[`misc/eval_request timestamp 1`] = `
     if (message.graph !== undefined) {
       TestNest_Graph.encode(message.graph, writer.uint32(130).fork()).ldelim();
     }
+    if (message.deprecated !== undefined) {
+      writer.uint32(138).string(message.deprecated);
+    }
     return writer;
   },
   decode(input: BinaryReader | Uint8Array, length?: number): EvalRequest {
@@ -436,6 +454,9 @@ exports[`misc/eval_request timestamp 1`] = `
         case 16:
           message.graph = TestNest_Graph.decode(reader, reader.uint32());
           break;
+        case 17:
+          message.deprecated = reader.string();
+          break;
         default:
           reader.skipType(tag & 7);
           break;
@@ -465,7 +486,8 @@ exports[`misc/eval_request timestamp 1`] = `
       name: isSet(object.name) ? String(object.name) : undefined,
       testArray: Array.isArray(object?.testArray) ? object.testArray.map((e: any) => String(e)) : [],
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
-      graph: isSet(object.graph) ? TestNest_Graph.fromJSON(object.graph) : undefined
+      graph: isSet(object.graph) ? TestNest_Graph.fromJSON(object.graph) : undefined,
+      deprecated: isSet(object.deprecated) ? String(object.deprecated) : undefined
     };
   },
   toJSON(message: EvalRequest): JsonSafe<EvalRequest> {
@@ -495,6 +517,7 @@ exports[`misc/eval_request timestamp 1`] = `
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toJSON(message.graph) : undefined);
+    message.deprecated !== undefined && (obj.deprecated = message.deprecated);
     return obj;
   },
   fromPartial(object: Partial<EvalRequest>): EvalRequest {
@@ -524,6 +547,7 @@ exports[`misc/eval_request timestamp 1`] = `
     message.testArray = object.testArray?.map(e => e) || [];
     message.opt = object.opt ?? 0;
     message.graph = object.graph !== undefined && object.graph !== null ? TestNest_Graph.fromPartial(object.graph) : undefined;
+    message.deprecated = object.deprecated ?? undefined;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -548,7 +572,8 @@ exports[`misc/eval_request timestamp 1`] = `
       name: object?.name,
       testArray: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => e) : [],
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
-      graph: object.graph ? TestNest_Graph.fromSDK(object.graph) : undefined
+      graph: object.graph ? TestNest_Graph.fromSDK(object.graph) : undefined,
+      deprecated: object?.deprecated
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {
@@ -578,6 +603,7 @@ exports[`misc/eval_request timestamp 1`] = `
     }
     message.opt !== undefined && (obj.opt = featureSet_Utf8ValidationToJSON(message.opt));
     message.graph !== undefined && (obj.graph = message.graph ? TestNest_Graph.toSDK(message.graph) : undefined);
+    obj.deprecated = message.deprecated;
     return obj;
   },
   fromAmino(object: EvalRequestAmino): EvalRequest {
@@ -623,6 +649,9 @@ exports[`misc/eval_request timestamp 1`] = `
     if (object.graph !== undefined && object.graph !== null) {
       message.graph = TestNest_Graph.fromAmino(object.graph);
     }
+    if (object.deprecated !== undefined && object.deprecated !== null) {
+      message.deprecated = object.deprecated;
+    }
     return message;
   },
   toAmino(message: EvalRequest): EvalRequestAmino {
@@ -652,6 +681,7 @@ exports[`misc/eval_request timestamp 1`] = `
     }
     obj.opt = message.opt ?? 0;
     obj.graph = message.graph ? TestNest_Graph.toAmino(message.graph) : undefined;
+    obj.deprecated = message.deprecated === null ? undefined : message.deprecated;
     return obj;
   },
   fromAminoMsg(object: EvalRequestAminoMsg): EvalRequest {
