@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.1...@cosmology/telescope@1.10.2) (2024-10-21)
+
+### Bug Fixes
+
+- fix ast export issue, add imports utils. ([a224606](https://github.com/cosmology-tech/telescope/commit/a2246062dda6a5f1ec3c2953263a5c7aff2bb71d))
+- flag names ([eed7fb3](https://github.com/cosmology-tech/telescope/commit/eed7fb3b6f726ff3590b7919f6445298f98f07da))
+- minor ast adjustments ([e38bbb6](https://github.com/cosmology-tech/telescope/commit/e38bbb610aeaf234602838d0f83368e6735a3eb2))
+- pass in ProtoServiceMethod type, use SigningClientResolver type, remove type aliases. ([620568c](https://github.com/cosmology-tech/telescope/commit/620568c0e5d44b96d39c88a6293b16507a42ab9f))
+
+### Features
+
+- use ast call expression for toEncoders&toConverters. ([471d866](https://github.com/cosmology-tech/telescope/commit/471d86645cde92a3dcb71ee00c1c8f529926c72a))
+
 ## [1.10.1](https://github.com/cosmology-tech/telescope/compare/@cosmology/telescope@1.10.0...@cosmology/telescope@1.10.1) (2024-10-05)
 
 **Note:** Version bump only for package @cosmology/telescope

@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.8.5...@cosmology/ast@1.8.6) (2024-10-21)
+
+### Bug Fixes
+
+- fix ast export issue, add imports utils. ([a224606](https://github.com/cosmology-tech/telescope/commit/a2246062dda6a5f1ec3c2953263a5c7aff2bb71d))
+- minor ast adjustments ([e38bbb6](https://github.com/cosmology-tech/telescope/commit/e38bbb610aeaf234602838d0f83368e6735a3eb2))
+- pass in ProtoServiceMethod type, use SigningClientResolver type, remove type aliases. ([620568c](https://github.com/cosmology-tech/telescope/commit/620568c0e5d44b96d39c88a6293b16507a42ab9f))
+- remove type parameter angled brackets ([ede54cc](https://github.com/cosmology-tech/telescope/commit/ede54ccd86a1e7d4aa5b7181255103a2930112f1))
+- type fix on typeUrl ([0b65248](https://github.com/cosmology-tech/telescope/commit/0b65248ce87e6b61ddc222172610870d0a438e0a))
+- type reference for the customhook argument ([6d5c760](https://github.com/cosmology-tech/telescope/commit/6d5c7604bf983304772320d0e57ca6e4dd66a678))
+- update encoder decoder identifiers. ([573b2e2](https://github.com/cosmology-tech/telescope/commit/573b2e2e174487af5241e3f6eb0fd4d5aaa0c9b4))
+- use lower caps ([3d2a83e](https://github.com/cosmology-tech/telescope/commit/3d2a83e593d8316bfdca4cce6482c2224b0523fa))
+
+### Features
+
+- ast generation code for msg funcs and helper funcs. ([2cad946](https://github.com/cosmology-tech/telescope/commit/2cad946b890e2478370abddc6fce92165d5a360a))
+- use ast call expression for toEncoders&toConverters. ([471d866](https://github.com/cosmology-tech/telescope/commit/471d86645cde92a3dcb71ee00c1c8f529926c72a))
+
 ## [1.8.5](https://github.com/cosmology-tech/telescope/compare/@cosmology/ast@1.8.4...@cosmology/ast@1.8.5) (2024-10-05)
 
 **Note:** Version bump only for package @cosmology/ast
