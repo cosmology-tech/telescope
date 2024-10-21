@@ -1,4 +1,4 @@
-import * as t from "@babel/types";
+import * as ast from "@babel/types";
 import { ProtoService } from "@cosmology/types";
 import { GenericParseContext } from "../../encoding";
 /**
@@ -9,7 +9,7 @@ import { GenericParseContext } from "../../encoding";
  * @param helperCreatorName e.g. "createGetBalance"
  * @returns
  */
-export declare function createMsgHelperCreator(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string): t.ReturnStatement;
+export declare function createMsgHelperCreator(context: GenericParseContext, service: ProtoService, methodKey?: string, helperCreatorName?: string): ast.ExportNamedDeclaration;
 /**
  *
  * @param context
@@ -19,4 +19,4 @@ export declare function createMsgHelperCreator(context: GenericParseContext, ser
  * @param hookName e.g. "useGetBalance"
  * @returns
  */
-export declare function createMsgHooks(context: GenericParseContext, service: ProtoService, methodKey: string, helperCreatorName: string, hookName: string): t.ReturnStatement;
+export declare function createMsgHooks(context: GenericParseContext, service: ProtoService, methodKey?: string, helperCreatorName?: string, hookName?: string): ast.ExportNamedDeclaration;
