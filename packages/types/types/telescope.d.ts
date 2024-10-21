@@ -10,6 +10,7 @@ export declare enum TelescopeLogLevel {
 }
 interface TelescopeOpts {
     env?: 'default' | 'v-next';
+    useInterchainJs?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
