@@ -1,4 +1,4 @@
-import { Coin } from "../../base/v1beta1/coin";
+import { Coin, CoinAmino } from "../../base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /**
@@ -9,6 +9,23 @@ import { DeepPartial } from "../../../helpers";
  */
 export interface SendAuthorization {
   spendLimit: Coin[];
+}
+export interface SendAuthorizationProtoMsg {
+  typeUrl: "/cosmos.bank.v1beta1.SendAuthorization";
+  value: Uint8Array;
+}
+/**
+ * SendAuthorization allows the grantee to spend up to spend_limit coins from
+ * the granter's account.
+ * 
+ * Since: cosmos-sdk 0.43
+ */
+export interface SendAuthorizationAmino {
+  spend_limit: CoinAmino[];
+}
+export interface SendAuthorizationAminoMsg {
+  type: "cosmos-sdk/SendAuthorization";
+  value: SendAuthorizationAmino;
 }
 function createBaseSendAuthorization(): SendAuthorization {
   return {
@@ -45,5 +62,40 @@ export const SendAuthorization = {
     const message = createBaseSendAuthorization();
     message.spendLimit = object.spendLimit?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: SendAuthorizationAmino): SendAuthorization {
+    const message = createBaseSendAuthorization();
+    message.spendLimit = object.spend_limit?.map(e => Coin.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: SendAuthorization): SendAuthorizationAmino {
+    const obj: any = {};
+    if (message.spendLimit) {
+      obj.spend_limit = message.spendLimit.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.spend_limit = message.spendLimit;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: SendAuthorizationAminoMsg): SendAuthorization {
+    return SendAuthorization.fromAmino(object.value);
+  },
+  toAminoMsg(message: SendAuthorization): SendAuthorizationAminoMsg {
+    return {
+      type: "cosmos-sdk/SendAuthorization",
+      value: SendAuthorization.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: SendAuthorizationProtoMsg): SendAuthorization {
+    return SendAuthorization.decode(message.value);
+  },
+  toProto(message: SendAuthorization): Uint8Array {
+    return SendAuthorization.encode(message).finish();
+  },
+  toProtoMsg(message: SendAuthorization): SendAuthorizationProtoMsg {
+    return {
+      typeUrl: "/cosmos.bank.v1beta1.SendAuthorization",
+      value: SendAuthorization.encode(message).finish()
+    };
   }
 };

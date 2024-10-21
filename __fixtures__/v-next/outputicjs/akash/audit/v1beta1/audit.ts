@@ -1,4 +1,4 @@
-import { Attribute } from "../../base/v1beta1/attribute";
+import { Attribute, AttributeAmino } from "../../base/v1beta1/attribute";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** Provider stores owner auditor and attributes details */
@@ -7,20 +7,73 @@ export interface Provider {
   auditor: string;
   attributes: Attribute[];
 }
+export interface ProviderProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.Provider";
+  value: Uint8Array;
+}
+/** Provider stores owner auditor and attributes details */
+export interface ProviderAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
+}
+export interface ProviderAminoMsg {
+  type: "/akash.audit.v1beta1.Provider";
+  value: ProviderAmino;
+}
 /** Attributes */
 export interface AuditedAttributes {
   owner: string;
   auditor: string;
   attributes: Attribute[];
 }
+export interface AuditedAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AuditedAttributes";
+  value: Uint8Array;
+}
+/** Attributes */
+export interface AuditedAttributesAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
+}
+export interface AuditedAttributesAminoMsg {
+  type: "/akash.audit.v1beta1.AuditedAttributes";
+  value: AuditedAttributesAmino;
+}
 /** AttributesResponse represents details of deployment along with group details */
 export interface AttributesResponse {
   attributes: AuditedAttributes[];
+}
+export interface AttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesResponse";
+  value: Uint8Array;
+}
+/** AttributesResponse represents details of deployment along with group details */
+export interface AttributesResponseAmino {
+  attributes: AuditedAttributesAmino[];
+}
+export interface AttributesResponseAminoMsg {
+  type: "/akash.audit.v1beta1.AttributesResponse";
+  value: AttributesResponseAmino;
 }
 /** AttributesFilters defines filters used to filter deployments */
 export interface AttributesFilters {
   auditors: string[];
   owners: string[];
+}
+export interface AttributesFiltersProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.AttributesFilters";
+  value: Uint8Array;
+}
+/** AttributesFilters defines filters used to filter deployments */
+export interface AttributesFiltersAmino {
+  auditors: string[];
+  owners: string[];
+}
+export interface AttributesFiltersAminoMsg {
+  type: "/akash.audit.v1beta1.AttributesFilters";
+  value: AttributesFiltersAmino;
 }
 /** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
 export interface MsgSignProviderAttributes {
@@ -28,16 +81,64 @@ export interface MsgSignProviderAttributes {
   auditor: string;
   attributes: Attribute[];
 }
+export interface MsgSignProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes";
+  value: Uint8Array;
+}
+/** MsgSignProviderAttributes defines an SDK message for signing a provider attributes */
+export interface MsgSignProviderAttributesAmino {
+  owner: string;
+  auditor: string;
+  attributes: AttributeAmino[];
+}
+export interface MsgSignProviderAttributesAminoMsg {
+  type: "/akash.audit.v1beta1.MsgSignProviderAttributes";
+  value: MsgSignProviderAttributesAmino;
+}
 /** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
 export interface MsgSignProviderAttributesResponse {}
+export interface MsgSignProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse";
+  value: Uint8Array;
+}
+/** MsgSignProviderAttributesResponse defines the Msg/CreateProvider response type. */
+export interface MsgSignProviderAttributesResponseAmino {}
+export interface MsgSignProviderAttributesResponseAminoMsg {
+  type: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse";
+  value: MsgSignProviderAttributesResponseAmino;
+}
 /** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
 export interface MsgDeleteProviderAttributes {
   owner: string;
   auditor: string;
   keys: string[];
 }
+export interface MsgDeleteProviderAttributesProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes";
+  value: Uint8Array;
+}
+/** MsgDeleteProviderAttributes defined the Msg/DeleteProviderAttributes */
+export interface MsgDeleteProviderAttributesAmino {
+  owner: string;
+  auditor: string;
+  keys: string[];
+}
+export interface MsgDeleteProviderAttributesAminoMsg {
+  type: "/akash.audit.v1beta1.MsgDeleteProviderAttributes";
+  value: MsgDeleteProviderAttributesAmino;
+}
 /** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
 export interface MsgDeleteProviderAttributesResponse {}
+export interface MsgDeleteProviderAttributesResponseProtoMsg {
+  typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse";
+  value: Uint8Array;
+}
+/** MsgDeleteProviderAttributesResponse defines the Msg/ProviderAttributes response type. */
+export interface MsgDeleteProviderAttributesResponseAmino {}
+export interface MsgDeleteProviderAttributesResponseAminoMsg {
+  type: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse";
+  value: MsgDeleteProviderAttributesResponseAmino;
+}
 function createBaseProvider(): Provider {
   return {
     owner: "",
@@ -88,6 +189,43 @@ export const Provider = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ProviderAmino): Provider {
+    const message = createBaseProvider();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Provider): ProviderAmino {
+    const obj: any = {};
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = message.attributes;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ProviderAminoMsg): Provider {
+    return Provider.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ProviderProtoMsg): Provider {
+    return Provider.decode(message.value);
+  },
+  toProto(message: Provider): Uint8Array {
+    return Provider.encode(message).finish();
+  },
+  toProtoMsg(message: Provider): ProviderProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.Provider",
+      value: Provider.encode(message).finish()
+    };
   }
 };
 function createBaseAuditedAttributes(): AuditedAttributes {
@@ -140,6 +278,43 @@ export const AuditedAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: AuditedAttributesAmino): AuditedAttributes {
+    const message = createBaseAuditedAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: AuditedAttributes): AuditedAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = message.attributes;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: AuditedAttributesAminoMsg): AuditedAttributes {
+    return AuditedAttributes.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AuditedAttributesProtoMsg): AuditedAttributes {
+    return AuditedAttributes.decode(message.value);
+  },
+  toProto(message: AuditedAttributes): Uint8Array {
+    return AuditedAttributes.encode(message).finish();
+  },
+  toProtoMsg(message: AuditedAttributes): AuditedAttributesProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.AuditedAttributes",
+      value: AuditedAttributes.encode(message).finish()
+    };
   }
 };
 function createBaseAttributesResponse(): AttributesResponse {
@@ -176,6 +351,35 @@ export const AttributesResponse = {
     const message = createBaseAttributesResponse();
     message.attributes = object.attributes?.map(e => AuditedAttributes.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: AttributesResponseAmino): AttributesResponse {
+    const message = createBaseAttributesResponse();
+    message.attributes = object.attributes?.map(e => AuditedAttributes.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: AttributesResponse): AttributesResponseAmino {
+    const obj: any = {};
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? AuditedAttributes.toAmino(e) : undefined);
+    } else {
+      obj.attributes = message.attributes;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: AttributesResponseAminoMsg): AttributesResponse {
+    return AttributesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AttributesResponseProtoMsg): AttributesResponse {
+    return AttributesResponse.decode(message.value);
+  },
+  toProto(message: AttributesResponse): Uint8Array {
+    return AttributesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: AttributesResponse): AttributesResponseProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.AttributesResponse",
+      value: AttributesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseAttributesFilters(): AttributesFilters {
@@ -220,6 +424,41 @@ export const AttributesFilters = {
     message.auditors = object.auditors?.map(e => e) || [];
     message.owners = object.owners?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: AttributesFiltersAmino): AttributesFilters {
+    const message = createBaseAttributesFilters();
+    message.auditors = object.auditors?.map(e => e) || [];
+    message.owners = object.owners?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: AttributesFilters): AttributesFiltersAmino {
+    const obj: any = {};
+    if (message.auditors) {
+      obj.auditors = message.auditors.map(e => e);
+    } else {
+      obj.auditors = message.auditors;
+    }
+    if (message.owners) {
+      obj.owners = message.owners.map(e => e);
+    } else {
+      obj.owners = message.owners;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: AttributesFiltersAminoMsg): AttributesFilters {
+    return AttributesFilters.fromAmino(object.value);
+  },
+  fromProtoMsg(message: AttributesFiltersProtoMsg): AttributesFilters {
+    return AttributesFilters.decode(message.value);
+  },
+  toProto(message: AttributesFilters): Uint8Array {
+    return AttributesFilters.encode(message).finish();
+  },
+  toProtoMsg(message: AttributesFilters): AttributesFiltersProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.AttributesFilters",
+      value: AttributesFilters.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSignProviderAttributes(): MsgSignProviderAttributes {
@@ -272,6 +511,43 @@ export const MsgSignProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.attributes = object.attributes?.map(e => Attribute.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: MsgSignProviderAttributesAmino): MsgSignProviderAttributes {
+    const message = createBaseMsgSignProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.attributes = object.attributes?.map(e => Attribute.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: MsgSignProviderAttributes): MsgSignProviderAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? Attribute.toAmino(e) : undefined);
+    } else {
+      obj.attributes = message.attributes;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgSignProviderAttributesAminoMsg): MsgSignProviderAttributes {
+    return MsgSignProviderAttributes.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgSignProviderAttributesProtoMsg): MsgSignProviderAttributes {
+    return MsgSignProviderAttributes.decode(message.value);
+  },
+  toProto(message: MsgSignProviderAttributes): Uint8Array {
+    return MsgSignProviderAttributes.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSignProviderAttributes): MsgSignProviderAttributesProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributes",
+      value: MsgSignProviderAttributes.encode(message).finish()
+    };
   }
 };
 function createBaseMsgSignProviderAttributesResponse(): MsgSignProviderAttributesResponse {
@@ -299,6 +575,29 @@ export const MsgSignProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgSignProviderAttributesResponse>): MsgSignProviderAttributesResponse {
     const message = createBaseMsgSignProviderAttributesResponse();
     return message;
+  },
+  fromAmino(_: MsgSignProviderAttributesResponseAmino): MsgSignProviderAttributesResponse {
+    const message = createBaseMsgSignProviderAttributesResponse();
+    return message;
+  },
+  toAmino(_: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgSignProviderAttributesResponseAminoMsg): MsgSignProviderAttributesResponse {
+    return MsgSignProviderAttributesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgSignProviderAttributesResponseProtoMsg): MsgSignProviderAttributesResponse {
+    return MsgSignProviderAttributesResponse.decode(message.value);
+  },
+  toProto(message: MsgSignProviderAttributesResponse): Uint8Array {
+    return MsgSignProviderAttributesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgSignProviderAttributesResponse): MsgSignProviderAttributesResponseProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.MsgSignProviderAttributesResponse",
+      value: MsgSignProviderAttributesResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProviderAttributes(): MsgDeleteProviderAttributes {
@@ -351,6 +650,43 @@ export const MsgDeleteProviderAttributes = {
     message.auditor = object.auditor ?? "";
     message.keys = object.keys?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: MsgDeleteProviderAttributesAmino): MsgDeleteProviderAttributes {
+    const message = createBaseMsgDeleteProviderAttributes();
+    if (object.owner !== undefined && object.owner !== null) {
+      message.owner = object.owner;
+    }
+    if (object.auditor !== undefined && object.auditor !== null) {
+      message.auditor = object.auditor;
+    }
+    message.keys = object.keys?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesAmino {
+    const obj: any = {};
+    obj.owner = message.owner ?? "";
+    obj.auditor = message.auditor ?? "";
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = message.keys;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderAttributesAminoMsg): MsgDeleteProviderAttributes {
+    return MsgDeleteProviderAttributes.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteProviderAttributesProtoMsg): MsgDeleteProviderAttributes {
+    return MsgDeleteProviderAttributes.decode(message.value);
+  },
+  toProto(message: MsgDeleteProviderAttributes): Uint8Array {
+    return MsgDeleteProviderAttributes.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProviderAttributes): MsgDeleteProviderAttributesProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributes",
+      value: MsgDeleteProviderAttributes.encode(message).finish()
+    };
   }
 };
 function createBaseMsgDeleteProviderAttributesResponse(): MsgDeleteProviderAttributesResponse {
@@ -378,5 +714,28 @@ export const MsgDeleteProviderAttributesResponse = {
   fromPartial(_: DeepPartial<MsgDeleteProviderAttributesResponse>): MsgDeleteProviderAttributesResponse {
     const message = createBaseMsgDeleteProviderAttributesResponse();
     return message;
+  },
+  fromAmino(_: MsgDeleteProviderAttributesResponseAmino): MsgDeleteProviderAttributesResponse {
+    const message = createBaseMsgDeleteProviderAttributesResponse();
+    return message;
+  },
+  toAmino(_: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgDeleteProviderAttributesResponseAminoMsg): MsgDeleteProviderAttributesResponse {
+    return MsgDeleteProviderAttributesResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgDeleteProviderAttributesResponseProtoMsg): MsgDeleteProviderAttributesResponse {
+    return MsgDeleteProviderAttributesResponse.decode(message.value);
+  },
+  toProto(message: MsgDeleteProviderAttributesResponse): Uint8Array {
+    return MsgDeleteProviderAttributesResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgDeleteProviderAttributesResponse): MsgDeleteProviderAttributesResponseProtoMsg {
+    return {
+      typeUrl: "/akash.audit.v1beta1.MsgDeleteProviderAttributesResponse",
+      value: MsgDeleteProviderAttributesResponse.encode(message).finish()
+    };
   }
 };

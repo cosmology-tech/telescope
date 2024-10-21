@@ -1,4 +1,4 @@
-import { Value } from "./value";
+import { Value, ValueAmino } from "./value";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial } from "../../../../helpers";
 /**
@@ -23,12 +23,57 @@ export interface Explain {
    */
   exprSteps: Explain_ExprStep[];
 }
+export interface ExplainProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.Explain";
+  value: Uint8Array;
+}
+/**
+ * Values of intermediate expressions produced when evaluating expression.
+ * Deprecated, use `EvalState` instead.
+ */
+/** @deprecated */
+export interface ExplainAmino {
+  /**
+   * All of the observed values.
+   * 
+   * The field value_index is an index in the values list.
+   * Separating values from steps is needed to remove redundant values.
+   */
+  values: ValueAmino[];
+  /**
+   * List of steps.
+   * 
+   * Repeated evaluations of the same expression generate new ExprStep
+   * instances. The order of such ExprStep instances matches the order of
+   * elements returned by Comprehension.iter_range.
+   */
+  expr_steps: Explain_ExprStepAmino[];
+}
+export interface ExplainAminoMsg {
+  type: "/google.api.expr.v1alpha1.Explain";
+  value: ExplainAmino;
+}
 /** ID and value index of one step. */
 export interface Explain_ExprStep {
   /** ID of corresponding Expr node. */
   id: bigint;
   /** Index of the value in the values list. */
   valueIndex: number;
+}
+export interface Explain_ExprStepProtoMsg {
+  typeUrl: "/google.api.expr.v1alpha1.ExprStep";
+  value: Uint8Array;
+}
+/** ID and value index of one step. */
+export interface Explain_ExprStepAmino {
+  /** ID of corresponding Expr node. */
+  id: string;
+  /** Index of the value in the values list. */
+  value_index: number;
+}
+export interface Explain_ExprStepAminoMsg {
+  type: "/google.api.expr.v1alpha1.ExprStep";
+  value: Explain_ExprStepAmino;
 }
 function createBaseExplain(): Explain {
   return {
@@ -72,6 +117,41 @@ export const Explain = {
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     message.exprSteps = object.exprSteps?.map(e => Explain_ExprStep.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ExplainAmino): Explain {
+    const message = createBaseExplain();
+    message.values = object.values?.map(e => Value.fromAmino(e)) || [];
+    message.exprSteps = object.expr_steps?.map(e => Explain_ExprStep.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Explain): ExplainAmino {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toAmino(e) : undefined);
+    } else {
+      obj.values = message.values;
+    }
+    if (message.exprSteps) {
+      obj.expr_steps = message.exprSteps.map(e => e ? Explain_ExprStep.toAmino(e) : undefined);
+    } else {
+      obj.expr_steps = message.exprSteps;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ExplainAminoMsg): Explain {
+    return Explain.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ExplainProtoMsg): Explain {
+    return Explain.decode(message.value);
+  },
+  toProto(message: Explain): Uint8Array {
+    return Explain.encode(message).finish();
+  },
+  toProtoMsg(message: Explain): ExplainProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.Explain",
+      value: Explain.encode(message).finish()
+    };
   }
 };
 function createBaseExplain_ExprStep(): Explain_ExprStep {
@@ -116,5 +196,36 @@ export const Explain_ExprStep = {
     message.id = object.id !== undefined && object.id !== null ? BigInt(object.id.toString()) : BigInt(0);
     message.valueIndex = object.valueIndex ?? 0;
     return message;
+  },
+  fromAmino(object: Explain_ExprStepAmino): Explain_ExprStep {
+    const message = createBaseExplain_ExprStep();
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BigInt(object.id);
+    }
+    if (object.value_index !== undefined && object.value_index !== null) {
+      message.valueIndex = object.value_index;
+    }
+    return message;
+  },
+  toAmino(message: Explain_ExprStep): Explain_ExprStepAmino {
+    const obj: any = {};
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
+    obj.value_index = message.valueIndex === 0 ? undefined : message.valueIndex;
+    return obj;
+  },
+  fromAminoMsg(object: Explain_ExprStepAminoMsg): Explain_ExprStep {
+    return Explain_ExprStep.fromAmino(object.value);
+  },
+  fromProtoMsg(message: Explain_ExprStepProtoMsg): Explain_ExprStep {
+    return Explain_ExprStep.decode(message.value);
+  },
+  toProto(message: Explain_ExprStep): Uint8Array {
+    return Explain_ExprStep.encode(message).finish();
+  },
+  toProtoMsg(message: Explain_ExprStep): Explain_ExprStepProtoMsg {
+    return {
+      typeUrl: "/google.api.expr.v1alpha1.ExprStep",
+      value: Explain_ExprStep.encode(message).finish()
+    };
   }
 };

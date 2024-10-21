@@ -1,4 +1,4 @@
-import { PoolParams, PoolAsset } from "../balancerPool";
+import { PoolParams, PoolParamsAmino, PoolAsset, PoolAssetAmino } from "../balancerPool";
 import { BinaryReader, BinaryWriter } from "../../../../../binary";
 import { DeepPartial } from "../../../../../helpers";
 /** ===================== MsgCreatePool */
@@ -8,9 +8,36 @@ export interface MsgCreateBalancerPool {
   poolAssets: PoolAsset[];
   futurePoolGovernor: string;
 }
+export interface MsgCreateBalancerPoolProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool";
+  value: Uint8Array;
+}
+/** ===================== MsgCreatePool */
+export interface MsgCreateBalancerPoolAmino {
+  sender: string;
+  pool_params?: PoolParamsAmino;
+  pool_assets: PoolAssetAmino[];
+  future_pool_governor: string;
+}
+export interface MsgCreateBalancerPoolAminoMsg {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
+  value: MsgCreateBalancerPoolAmino;
+}
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
   poolId: bigint;
+}
+export interface MsgCreateBalancerPoolResponseProtoMsg {
+  typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse";
+  value: Uint8Array;
+}
+/** Returns the poolID */
+export interface MsgCreateBalancerPoolResponseAmino {
+  pool_id: string;
+}
+export interface MsgCreateBalancerPoolResponseAminoMsg {
+  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
+  value: MsgCreateBalancerPoolResponseAmino;
 }
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
@@ -71,6 +98,53 @@ export const MsgCreateBalancerPool = {
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
+  },
+  fromAmino(object: MsgCreateBalancerPoolAmino): MsgCreateBalancerPool {
+    const message = createBaseMsgCreateBalancerPool();
+    if (object.sender !== undefined && object.sender !== null) {
+      message.sender = object.sender;
+    }
+    if (object.pool_params !== undefined && object.pool_params !== null) {
+      message.poolParams = PoolParams.fromAmino(object.pool_params);
+    }
+    message.poolAssets = object.pool_assets?.map(e => PoolAsset.fromAmino(e)) || [];
+    if (object.future_pool_governor !== undefined && object.future_pool_governor !== null) {
+      message.futurePoolGovernor = object.future_pool_governor;
+    }
+    return message;
+  },
+  toAmino(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAmino {
+    const obj: any = {};
+    obj.sender = message.sender === "" ? undefined : message.sender;
+    obj.pool_params = message.poolParams ? PoolParams.toAmino(message.poolParams) : undefined;
+    if (message.poolAssets) {
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toAmino(e) : undefined);
+    } else {
+      obj.pool_assets = message.poolAssets;
+    }
+    obj.future_pool_governor = message.futurePoolGovernor === "" ? undefined : message.futurePoolGovernor;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateBalancerPoolAminoMsg): MsgCreateBalancerPool {
+    return MsgCreateBalancerPool.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateBalancerPool): MsgCreateBalancerPoolAminoMsg {
+    return {
+      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
+      value: MsgCreateBalancerPool.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateBalancerPoolProtoMsg): MsgCreateBalancerPool {
+    return MsgCreateBalancerPool.decode(message.value);
+  },
+  toProto(message: MsgCreateBalancerPool): Uint8Array {
+    return MsgCreateBalancerPool.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateBalancerPool): MsgCreateBalancerPoolProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
+      value: MsgCreateBalancerPool.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolResponse {
@@ -108,5 +182,38 @@ export const MsgCreateBalancerPoolResponse = {
     const message = createBaseMsgCreateBalancerPoolResponse();
     message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
     return message;
+  },
+  fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {
+    const message = createBaseMsgCreateBalancerPoolResponse();
+    if (object.pool_id !== undefined && object.pool_id !== null) {
+      message.poolId = BigInt(object.pool_id);
+    }
+    return message;
+  },
+  toAmino(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAmino {
+    const obj: any = {};
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCreateBalancerPoolResponseAminoMsg): MsgCreateBalancerPoolResponse {
+    return MsgCreateBalancerPoolResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseAminoMsg {
+    return {
+      type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
+      value: MsgCreateBalancerPoolResponse.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: MsgCreateBalancerPoolResponseProtoMsg): MsgCreateBalancerPoolResponse {
+    return MsgCreateBalancerPoolResponse.decode(message.value);
+  },
+  toProto(message: MsgCreateBalancerPoolResponse): Uint8Array {
+    return MsgCreateBalancerPoolResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseProtoMsg {
+    return {
+      typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
+      value: MsgCreateBalancerPoolResponse.encode(message).finish()
+    };
   }
 };

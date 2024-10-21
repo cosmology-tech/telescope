@@ -78,7 +78,7 @@ const options: TelescopeOptions = {
     useUnionTypes: true,
   },
   aminoEncoding: {
-    enabled: false,
+    enabled: true,
     useLegacyInlineEncoding: false,
     disableMsgTypes: false,
     useProtoOptionality: true,

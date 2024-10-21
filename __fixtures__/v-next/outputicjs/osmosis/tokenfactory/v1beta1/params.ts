@@ -1,9 +1,21 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** Params defines the parameters for the tokenfactory module. */
 export interface Params {
   denomCreationFee: Coin[];
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.tokenfactory.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the tokenfactory module. */
+export interface ParamsAmino {
+  denom_creation_fee: CoinAmino[];
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/tokenfactory/params";
+  value: ParamsAmino;
 }
 function createBaseParams(): Params {
   return {
@@ -40,5 +52,40 @@ export const Params = {
     const message = createBaseParams();
     message.denomCreationFee = object.denomCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    const message = createBaseParams();
+    message.denomCreationFee = object.denom_creation_fee?.map(e => Coin.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.denomCreationFee) {
+      obj.denom_creation_fee = message.denomCreationFee.map(e => e ? Coin.toAmino(e) : undefined);
+    } else {
+      obj.denom_creation_fee = message.denomCreationFee;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/tokenfactory/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.tokenfactory.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

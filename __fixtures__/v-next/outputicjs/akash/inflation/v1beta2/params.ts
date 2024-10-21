@@ -15,6 +15,29 @@ export interface Params {
    */
   variance: string;
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.inflation.v1beta2.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  /** InflationDecayFactor is the number of years it takes inflation to halve. */
+  inflation_decay_factor: string;
+  /**
+   * InitialInflation is the rate at which inflation starts at genesis.
+   * It is a decimal value in the range [0.0, 100.0].
+   */
+  initial_inflation: string;
+  /**
+   * Variance defines the fraction by which inflation can vary from ideal inflation in a block.
+   * It is a decimal value in the range [0.0, 1.0].
+   */
+  variance: string;
+}
+export interface ParamsAminoMsg {
+  type: "/akash.inflation.v1beta2.Params";
+  value: ParamsAmino;
+}
 function createBaseParams(): Params {
   return {
     inflationDecayFactor: "",
@@ -65,5 +88,40 @@ export const Params = {
     message.initialInflation = object.initialInflation ?? "";
     message.variance = object.variance ?? "";
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    const message = createBaseParams();
+    if (object.inflation_decay_factor !== undefined && object.inflation_decay_factor !== null) {
+      message.inflationDecayFactor = object.inflation_decay_factor;
+    }
+    if (object.initial_inflation !== undefined && object.initial_inflation !== null) {
+      message.initialInflation = object.initial_inflation;
+    }
+    if (object.variance !== undefined && object.variance !== null) {
+      message.variance = object.variance;
+    }
+    return message;
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.inflation_decay_factor = message.inflationDecayFactor ?? "";
+    obj.initial_inflation = message.initialInflation ?? "";
+    obj.variance = message.variance ?? "";
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.inflation.v1beta2.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

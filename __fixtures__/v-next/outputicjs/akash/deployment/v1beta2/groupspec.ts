@@ -1,5 +1,5 @@
-import { PlacementRequirements } from "../../base/v1beta2/attribute";
-import { Resource } from "./resource";
+import { PlacementRequirements, PlacementRequirementsAmino } from "../../base/v1beta2/attribute";
+import { Resource, ResourceAmino } from "./resource";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** GroupSpec stores group specifications */
@@ -7,6 +7,20 @@ export interface GroupSpec {
   name: string;
   requirements: PlacementRequirements;
   resources: Resource[];
+}
+export interface GroupSpecProtoMsg {
+  typeUrl: "/akash.deployment.v1beta2.GroupSpec";
+  value: Uint8Array;
+}
+/** GroupSpec stores group specifications */
+export interface GroupSpecAmino {
+  name: string;
+  requirements: PlacementRequirementsAmino;
+  resources: ResourceAmino[];
+}
+export interface GroupSpecAminoMsg {
+  type: "/akash.deployment.v1beta2.GroupSpec";
+  value: GroupSpecAmino;
 }
 function createBaseGroupSpec(): GroupSpec {
   return {
@@ -58,5 +72,42 @@ export const GroupSpec = {
     message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: GroupSpecAmino): GroupSpec {
+    const message = createBaseGroupSpec();
+    if (object.name !== undefined && object.name !== null) {
+      message.name = object.name;
+    }
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromAmino(object.requirements);
+    }
+    message.resources = object.resources?.map(e => Resource.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: GroupSpec): GroupSpecAmino {
+    const obj: any = {};
+    obj.name = message.name ?? "";
+    obj.requirements = message.requirements ? PlacementRequirements.toAmino(message.requirements) : PlacementRequirements.toAmino(PlacementRequirements.fromPartial({}));
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toAmino(e) : undefined);
+    } else {
+      obj.resources = message.resources;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
+    return GroupSpec.fromAmino(object.value);
+  },
+  fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
+    return GroupSpec.decode(message.value);
+  },
+  toProto(message: GroupSpec): Uint8Array {
+    return GroupSpec.encode(message).finish();
+  },
+  toProtoMsg(message: GroupSpec): GroupSpecProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta2.GroupSpec",
+      value: GroupSpec.encode(message).finish()
+    };
   }
 };

@@ -18,11 +18,50 @@ export interface MsgRegisterDevFeeInfo {
    */
   nonces: bigint[];
 }
+export interface MsgRegisterDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: Uint8Array;
+}
+/** MsgRegisterFeesContract defines a message that registers a DevFeeInfo */
+export interface MsgRegisterDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /**
+   * bech32 address of message sender, must be the same as the origin EOA
+   * sending the transaction which deploys the contract
+   */
+  deployer_address: string;
+  /** bech32 address of account receiving the transaction fees */
+  withdraw_address: string;
+  /**
+   * array of nonces from the address path, where the last nonce is
+   * the nonce that determines the contract's address - it can be an EOA nonce
+   * or a factory contract nonce
+   */
+  nonces: string[];
+}
+export interface MsgRegisterDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfo";
+  value: MsgRegisterDevFeeInfoAmino;
+}
 /**
  * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
  * type
  */
 export interface MsgRegisterDevFeeInfoResponse {}
+export interface MsgRegisterDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: Uint8Array;
+}
+/**
+ * MsgRegisterDevFeeInfoResponse defines the MsgRegisterDevFeeInfo response
+ * type
+ */
+export interface MsgRegisterDevFeeInfoResponseAmino {}
+export interface MsgRegisterDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse";
+  value: MsgRegisterDevFeeInfoResponseAmino;
+}
 /**
  * MsgCancelDevFeeInfo defines a message that cancels a registered a
  * DevFeeInfo
@@ -33,8 +72,36 @@ export interface MsgCancelDevFeeInfo {
   /** deployer bech32 address */
   deployerAddress: string;
 }
+export interface MsgCancelDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: Uint8Array;
+}
+/**
+ * MsgCancelDevFeeInfo defines a message that cancels a registered a
+ * DevFeeInfo
+ */
+export interface MsgCancelDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /** deployer bech32 address */
+  deployer_address: string;
+}
+export interface MsgCancelDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfo";
+  value: MsgCancelDevFeeInfoAmino;
+}
 /** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
 export interface MsgCancelDevFeeInfoResponse {}
+export interface MsgCancelDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: Uint8Array;
+}
+/** MsgCancelDevFeeInfoResponse defines the MsgCancelDevFeeInfo response type */
+export interface MsgCancelDevFeeInfoResponseAmino {}
+export interface MsgCancelDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse";
+  value: MsgCancelDevFeeInfoResponseAmino;
+}
 /**
  * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
  * a registered DevFeeInfo
@@ -47,8 +114,38 @@ export interface MsgUpdateDevFeeInfo {
   /** new withdraw bech32 address for receiving the transaction fees */
   withdrawAddress: string;
 }
+export interface MsgUpdateDevFeeInfoProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: Uint8Array;
+}
+/**
+ * MsgUpdateDevFeeInfo defines a message that updates the withdraw address for
+ * a registered DevFeeInfo
+ */
+export interface MsgUpdateDevFeeInfoAmino {
+  /** contract hex address */
+  contract_address: string;
+  /** deployer bech32 address */
+  deployer_address: string;
+  /** new withdraw bech32 address for receiving the transaction fees */
+  withdraw_address: string;
+}
+export interface MsgUpdateDevFeeInfoAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfo";
+  value: MsgUpdateDevFeeInfoAmino;
+}
 /** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
 export interface MsgUpdateDevFeeInfoResponse {}
+export interface MsgUpdateDevFeeInfoResponseProtoMsg {
+  typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: Uint8Array;
+}
+/** MsgUpdateDevFeeInfoResponse defines the MsgUpdateDevFeeInfo response type */
+export interface MsgUpdateDevFeeInfoResponseAmino {}
+export interface MsgUpdateDevFeeInfoResponseAminoMsg {
+  type: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse";
+  value: MsgUpdateDevFeeInfoResponseAmino;
+}
 function createBaseMsgRegisterDevFeeInfo(): MsgRegisterDevFeeInfo {
   return {
     contractAddress: "",
@@ -116,6 +213,47 @@ export const MsgRegisterDevFeeInfo = {
     message.withdrawAddress = object.withdrawAddress ?? "";
     message.nonces = object.nonces?.map(e => BigInt(e.toString())) || [];
     return message;
+  },
+  fromAmino(object: MsgRegisterDevFeeInfoAmino): MsgRegisterDevFeeInfo {
+    const message = createBaseMsgRegisterDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    message.nonces = object.nonces?.map(e => BigInt(e)) || [];
+    return message;
+  },
+  toAmino(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
+    if (message.nonces) {
+      obj.nonces = message.nonces.map(e => e.toString());
+    } else {
+      obj.nonces = message.nonces;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoAminoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRegisterDevFeeInfoProtoMsg): MsgRegisterDevFeeInfo {
+    return MsgRegisterDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgRegisterDevFeeInfo): Uint8Array {
+    return MsgRegisterDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterDevFeeInfo): MsgRegisterDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfo",
+      value: MsgRegisterDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgRegisterDevFeeInfoResponse(): MsgRegisterDevFeeInfoResponse {
@@ -143,6 +281,29 @@ export const MsgRegisterDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgRegisterDevFeeInfoResponse>): MsgRegisterDevFeeInfoResponse {
     const message = createBaseMsgRegisterDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgRegisterDevFeeInfoResponseAmino): MsgRegisterDevFeeInfoResponse {
+    const message = createBaseMsgRegisterDevFeeInfoResponse();
+    return message;
+  },
+  toAmino(_: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgRegisterDevFeeInfoResponseAminoMsg): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgRegisterDevFeeInfoResponseProtoMsg): MsgRegisterDevFeeInfoResponse {
+    return MsgRegisterDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgRegisterDevFeeInfoResponse): Uint8Array {
+    return MsgRegisterDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgRegisterDevFeeInfoResponse): MsgRegisterDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgRegisterDevFeeInfoResponse",
+      value: MsgRegisterDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCancelDevFeeInfo(): MsgCancelDevFeeInfo {
@@ -187,6 +348,37 @@ export const MsgCancelDevFeeInfo = {
     message.contractAddress = object.contractAddress ?? "";
     message.deployerAddress = object.deployerAddress ?? "";
     return message;
+  },
+  fromAmino(object: MsgCancelDevFeeInfoAmino): MsgCancelDevFeeInfo {
+    const message = createBaseMsgCancelDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    return message;
+  },
+  toAmino(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoAminoMsg): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCancelDevFeeInfoProtoMsg): MsgCancelDevFeeInfo {
+    return MsgCancelDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgCancelDevFeeInfo): Uint8Array {
+    return MsgCancelDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCancelDevFeeInfo): MsgCancelDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfo",
+      value: MsgCancelDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgCancelDevFeeInfoResponse(): MsgCancelDevFeeInfoResponse {
@@ -214,6 +406,29 @@ export const MsgCancelDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgCancelDevFeeInfoResponse>): MsgCancelDevFeeInfoResponse {
     const message = createBaseMsgCancelDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgCancelDevFeeInfoResponseAmino): MsgCancelDevFeeInfoResponse {
+    const message = createBaseMsgCancelDevFeeInfoResponse();
+    return message;
+  },
+  toAmino(_: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgCancelDevFeeInfoResponseAminoMsg): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgCancelDevFeeInfoResponseProtoMsg): MsgCancelDevFeeInfoResponse {
+    return MsgCancelDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgCancelDevFeeInfoResponse): Uint8Array {
+    return MsgCancelDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgCancelDevFeeInfoResponse): MsgCancelDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgCancelDevFeeInfoResponse",
+      value: MsgCancelDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDevFeeInfo(): MsgUpdateDevFeeInfo {
@@ -266,6 +481,41 @@ export const MsgUpdateDevFeeInfo = {
     message.deployerAddress = object.deployerAddress ?? "";
     message.withdrawAddress = object.withdrawAddress ?? "";
     return message;
+  },
+  fromAmino(object: MsgUpdateDevFeeInfoAmino): MsgUpdateDevFeeInfo {
+    const message = createBaseMsgUpdateDevFeeInfo();
+    if (object.contract_address !== undefined && object.contract_address !== null) {
+      message.contractAddress = object.contract_address;
+    }
+    if (object.deployer_address !== undefined && object.deployer_address !== null) {
+      message.deployerAddress = object.deployer_address;
+    }
+    if (object.withdraw_address !== undefined && object.withdraw_address !== null) {
+      message.withdrawAddress = object.withdraw_address;
+    }
+    return message;
+  },
+  toAmino(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoAmino {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress === "" ? undefined : message.contractAddress;
+    obj.deployer_address = message.deployerAddress === "" ? undefined : message.deployerAddress;
+    obj.withdraw_address = message.withdrawAddress === "" ? undefined : message.withdrawAddress;
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoAminoMsg): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateDevFeeInfoProtoMsg): MsgUpdateDevFeeInfo {
+    return MsgUpdateDevFeeInfo.decode(message.value);
+  },
+  toProto(message: MsgUpdateDevFeeInfo): Uint8Array {
+    return MsgUpdateDevFeeInfo.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDevFeeInfo): MsgUpdateDevFeeInfoProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfo",
+      value: MsgUpdateDevFeeInfo.encode(message).finish()
+    };
   }
 };
 function createBaseMsgUpdateDevFeeInfoResponse(): MsgUpdateDevFeeInfoResponse {
@@ -293,5 +543,28 @@ export const MsgUpdateDevFeeInfoResponse = {
   fromPartial(_: DeepPartial<MsgUpdateDevFeeInfoResponse>): MsgUpdateDevFeeInfoResponse {
     const message = createBaseMsgUpdateDevFeeInfoResponse();
     return message;
+  },
+  fromAmino(_: MsgUpdateDevFeeInfoResponseAmino): MsgUpdateDevFeeInfoResponse {
+    const message = createBaseMsgUpdateDevFeeInfoResponse();
+    return message;
+  },
+  toAmino(_: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseAmino {
+    const obj: any = {};
+    return obj;
+  },
+  fromAminoMsg(object: MsgUpdateDevFeeInfoResponseAminoMsg): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.fromAmino(object.value);
+  },
+  fromProtoMsg(message: MsgUpdateDevFeeInfoResponseProtoMsg): MsgUpdateDevFeeInfoResponse {
+    return MsgUpdateDevFeeInfoResponse.decode(message.value);
+  },
+  toProto(message: MsgUpdateDevFeeInfoResponse): Uint8Array {
+    return MsgUpdateDevFeeInfoResponse.encode(message).finish();
+  },
+  toProtoMsg(message: MsgUpdateDevFeeInfoResponse): MsgUpdateDevFeeInfoResponseProtoMsg {
+    return {
+      typeUrl: "/evmos.fees.v1.MsgUpdateDevFeeInfoResponse",
+      value: MsgUpdateDevFeeInfoResponse.encode(message).finish()
+    };
   }
 };

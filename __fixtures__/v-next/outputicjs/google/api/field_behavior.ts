@@ -56,6 +56,7 @@ export enum FieldBehavior {
   NON_EMPTY_DEFAULT = 7,
   UNRECOGNIZED = -1,
 }
+export const FieldBehaviorAmino = FieldBehavior;
 export function fieldBehaviorFromJSON(object: any): FieldBehavior {
   switch (object) {
     case 0:

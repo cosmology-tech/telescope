@@ -1,9 +1,21 @@
-import { Coin } from "../../../cosmos/base/v1beta1/coin";
+import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
 import { BinaryReader, BinaryWriter } from "../../../binary";
 import { DeepPartial } from "../../../helpers";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit: Coin;
+}
+export interface ParamsProtoMsg {
+  typeUrl: "/akash.deployment.v1beta1.Params";
+  value: Uint8Array;
+}
+/** Params defines the parameters for the x/deployment package */
+export interface ParamsAmino {
+  deployment_min_deposit: CoinAmino;
+}
+export interface ParamsAminoMsg {
+  type: "/akash.deployment.v1beta1.Params";
+  value: ParamsAmino;
 }
 function createBaseParams(): Params {
   return {
@@ -39,5 +51,32 @@ export const Params = {
     const message = createBaseParams();
     message.deploymentMinDeposit = object.deploymentMinDeposit !== undefined && object.deploymentMinDeposit !== null ? Coin.fromPartial(object.deploymentMinDeposit) : undefined;
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    const message = createBaseParams();
+    if (object.deployment_min_deposit !== undefined && object.deployment_min_deposit !== null) {
+      message.deploymentMinDeposit = Coin.fromAmino(object.deployment_min_deposit);
+    }
+    return message;
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    obj.deployment_min_deposit = message.deploymentMinDeposit ? Coin.toAmino(message.deploymentMinDeposit) : Coin.toAmino(Coin.fromPartial({}));
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/akash.deployment.v1beta1.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

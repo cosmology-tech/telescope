@@ -10,6 +10,7 @@ export enum LabelDescriptor_ValueType {
   INT64 = 2,
   UNRECOGNIZED = -1,
 }
+export const LabelDescriptor_ValueTypeAmino = LabelDescriptor_ValueType;
 export function labelDescriptor_ValueTypeFromJSON(object: any): LabelDescriptor_ValueType {
   switch (object) {
     case 0:
@@ -48,6 +49,23 @@ export interface LabelDescriptor {
   valueType: LabelDescriptor_ValueType;
   /** A human-readable description for the label. */
   description: string;
+}
+export interface LabelDescriptorProtoMsg {
+  typeUrl: "/google.api.LabelDescriptor";
+  value: Uint8Array;
+}
+/** A description of a label. */
+export interface LabelDescriptorAmino {
+  /** The label key. */
+  key: string;
+  /** The type of data that can be assigned to the label. */
+  value_type: LabelDescriptor_ValueType;
+  /** A human-readable description for the label. */
+  description: string;
+}
+export interface LabelDescriptorAminoMsg {
+  type: "/google.api.LabelDescriptor";
+  value: LabelDescriptorAmino;
 }
 function createBaseLabelDescriptor(): LabelDescriptor {
   return {
@@ -99,5 +117,40 @@ export const LabelDescriptor = {
     message.valueType = object.valueType ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+  fromAmino(object: LabelDescriptorAmino): LabelDescriptor {
+    const message = createBaseLabelDescriptor();
+    if (object.key !== undefined && object.key !== null) {
+      message.key = object.key;
+    }
+    if (object.value_type !== undefined && object.value_type !== null) {
+      message.valueType = object.value_type;
+    }
+    if (object.description !== undefined && object.description !== null) {
+      message.description = object.description;
+    }
+    return message;
+  },
+  toAmino(message: LabelDescriptor): LabelDescriptorAmino {
+    const obj: any = {};
+    obj.key = message.key === "" ? undefined : message.key;
+    obj.value_type = message.valueType === 0 ? undefined : message.valueType;
+    obj.description = message.description === "" ? undefined : message.description;
+    return obj;
+  },
+  fromAminoMsg(object: LabelDescriptorAminoMsg): LabelDescriptor {
+    return LabelDescriptor.fromAmino(object.value);
+  },
+  fromProtoMsg(message: LabelDescriptorProtoMsg): LabelDescriptor {
+    return LabelDescriptor.decode(message.value);
+  },
+  toProto(message: LabelDescriptor): Uint8Array {
+    return LabelDescriptor.encode(message).finish();
+  },
+  toProtoMsg(message: LabelDescriptor): LabelDescriptorProtoMsg {
+    return {
+      typeUrl: "/google.api.LabelDescriptor",
+      value: LabelDescriptor.encode(message).finish()
+    };
   }
 };

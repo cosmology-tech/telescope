@@ -1,4 +1,4 @@
-import { Status } from "../../../rpc/status";
+import { Status, StatusAmino } from "../../../rpc/status";
 import { BinaryReader, BinaryWriter } from "../../../../binary";
 import { DeepPartial } from "../../../../helpers";
 /** Error codes for Check responses. */
@@ -68,6 +68,7 @@ export enum CheckError_Code {
   CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE = 305,
   UNRECOGNIZED = -1,
 }
+export const CheckError_CodeAmino = CheckError_Code;
 export function checkError_CodeFromJSON(object: any): CheckError_Code {
   switch (object) {
     case 0:
@@ -213,6 +214,39 @@ export interface CheckError {
    */
   status?: Status;
 }
+export interface CheckErrorProtoMsg {
+  typeUrl: "/google.api.servicecontrol.v1.CheckError";
+  value: Uint8Array;
+}
+/**
+ * Defines the errors to be returned in
+ * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
+ */
+export interface CheckErrorAmino {
+  /** The error code. */
+  code: CheckError_Code;
+  /**
+   * Subject to whom this error applies. See the specific code enum for more
+   * details on this field. For example:
+   * 
+   * - "project:<project-id or project-number>"
+   * - "folder:<folder-id>"
+   * - "organization:<organization-id>"
+   */
+  subject: string;
+  /** Free-form text providing details on the error cause of the error. */
+  detail: string;
+  /**
+   * Contains public information about the check error. If available,
+   * `status.code` will be non zero and client can propagate it out as public
+   * error.
+   */
+  status?: StatusAmino;
+}
+export interface CheckErrorAminoMsg {
+  type: "/google.api.servicecontrol.v1.CheckError";
+  value: CheckErrorAmino;
+}
 function createBaseCheckError(): CheckError {
   return {
     code: 0,
@@ -271,5 +305,44 @@ export const CheckError = {
     message.detail = object.detail ?? "";
     message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
     return message;
+  },
+  fromAmino(object: CheckErrorAmino): CheckError {
+    const message = createBaseCheckError();
+    if (object.code !== undefined && object.code !== null) {
+      message.code = object.code;
+    }
+    if (object.subject !== undefined && object.subject !== null) {
+      message.subject = object.subject;
+    }
+    if (object.detail !== undefined && object.detail !== null) {
+      message.detail = object.detail;
+    }
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromAmino(object.status);
+    }
+    return message;
+  },
+  toAmino(message: CheckError): CheckErrorAmino {
+    const obj: any = {};
+    obj.code = message.code === 0 ? undefined : message.code;
+    obj.subject = message.subject === "" ? undefined : message.subject;
+    obj.detail = message.detail === "" ? undefined : message.detail;
+    obj.status = message.status ? Status.toAmino(message.status) : undefined;
+    return obj;
+  },
+  fromAminoMsg(object: CheckErrorAminoMsg): CheckError {
+    return CheckError.fromAmino(object.value);
+  },
+  fromProtoMsg(message: CheckErrorProtoMsg): CheckError {
+    return CheckError.decode(message.value);
+  },
+  toProto(message: CheckError): Uint8Array {
+    return CheckError.encode(message).finish();
+  },
+  toProtoMsg(message: CheckError): CheckErrorProtoMsg {
+    return {
+      typeUrl: "/google.api.servicecontrol.v1.CheckError",
+      value: CheckError.encode(message).finish()
+    };
   }
 };

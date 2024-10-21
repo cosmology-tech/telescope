@@ -3,6 +3,17 @@ import { DeepPartial } from "../../helpers";
 export interface Params {
   forceUnlockAllowedAddresses: string[];
 }
+export interface ParamsProtoMsg {
+  typeUrl: "/osmosis.lockup.Params";
+  value: Uint8Array;
+}
+export interface ParamsAmino {
+  force_unlock_allowed_addresses: string[];
+}
+export interface ParamsAminoMsg {
+  type: "osmosis/lockup/params";
+  value: ParamsAmino;
+}
 function createBaseParams(): Params {
   return {
     forceUnlockAllowedAddresses: []
@@ -38,5 +49,40 @@ export const Params = {
     const message = createBaseParams();
     message.forceUnlockAllowedAddresses = object.forceUnlockAllowedAddresses?.map(e => e) || [];
     return message;
+  },
+  fromAmino(object: ParamsAmino): Params {
+    const message = createBaseParams();
+    message.forceUnlockAllowedAddresses = object.force_unlock_allowed_addresses?.map(e => e) || [];
+    return message;
+  },
+  toAmino(message: Params): ParamsAmino {
+    const obj: any = {};
+    if (message.forceUnlockAllowedAddresses) {
+      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses.map(e => e);
+    } else {
+      obj.force_unlock_allowed_addresses = message.forceUnlockAllowedAddresses;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: ParamsAminoMsg): Params {
+    return Params.fromAmino(object.value);
+  },
+  toAminoMsg(message: Params): ParamsAminoMsg {
+    return {
+      type: "osmosis/lockup/params",
+      value: Params.toAmino(message)
+    };
+  },
+  fromProtoMsg(message: ParamsProtoMsg): Params {
+    return Params.decode(message.value);
+  },
+  toProto(message: Params): Uint8Array {
+    return Params.encode(message).finish();
+  },
+  toProtoMsg(message: Params): ParamsProtoMsg {
+    return {
+      typeUrl: "/osmosis.lockup.Params",
+      value: Params.encode(message).finish()
+    };
   }
 };

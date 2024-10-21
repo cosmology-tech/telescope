@@ -1,6 +1,6 @@
-import { Any } from "../protobuf/any";
+import { Any, AnyAmino } from "../protobuf/any";
 import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -57,6 +57,70 @@ export interface HttpBody {
    */
   extensions: Any[];
 }
+export interface HttpBodyProtoMsg {
+  typeUrl: "/google.api.HttpBody";
+  value: Uint8Array;
+}
+/**
+ * Message that represents an arbitrary HTTP body. It should only be used for
+ * payload formats that can't be represented as JSON, such as raw binary or
+ * an HTML page.
+ * 
+ * 
+ * This message can be used both in streaming and non-streaming API methods in
+ * the request as well as the response.
+ * 
+ * It can be used as a top-level request field, which is convenient if one
+ * wants to extract parameters from either the URL or HTTP template into the
+ * request fields and also want access to the raw HTTP body.
+ * 
+ * Example:
+ * 
+ *     message GetResourceRequest {
+ *       // A unique request id.
+ *       string request_id = 1;
+ * 
+ *       // The raw HTTP body is bound to this field.
+ *       google.api.HttpBody http_body = 2;
+ * 
+ *     }
+ * 
+ *     service ResourceService {
+ *       rpc GetResource(GetResourceRequest)
+ *         returns (google.api.HttpBody);
+ *       rpc UpdateResource(google.api.HttpBody)
+ *         returns (google.protobuf.Empty);
+ * 
+ *     }
+ * 
+ * Example with streaming methods:
+ * 
+ *     service CaldavService {
+ *       rpc GetCalendar(stream google.api.HttpBody)
+ *         returns (stream google.api.HttpBody);
+ *       rpc UpdateCalendar(stream google.api.HttpBody)
+ *         returns (stream google.api.HttpBody);
+ * 
+ *     }
+ * 
+ * Use of this type only changes how the request and response bodies are
+ * handled, all other features will continue to work unchanged.
+ */
+export interface HttpBodyAmino {
+  /** The HTTP Content-Type header value specifying the content type of the body. */
+  content_type: string;
+  /** The HTTP request/response body as raw binary. */
+  data: string;
+  /**
+   * Application specific response metadata. Must be set in the first response
+   * for streaming APIs.
+   */
+  extensions: AnyAmino[];
+}
+export interface HttpBodyAminoMsg {
+  type: "/google.api.HttpBody";
+  value: HttpBodyAmino;
+}
 function createBaseHttpBody(): HttpBody {
   return {
     contentType: "",
@@ -107,5 +171,42 @@ export const HttpBody = {
     message.data = object.data ?? new Uint8Array();
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromAmino(object: HttpBodyAmino): HttpBody {
+    const message = createBaseHttpBody();
+    if (object.content_type !== undefined && object.content_type !== null) {
+      message.contentType = object.content_type;
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = bytesFromBase64(object.data);
+    }
+    message.extensions = object.extensions?.map(e => Any.fromAmino(e)) || [];
+    return message;
+  },
+  toAmino(message: HttpBody): HttpBodyAmino {
+    const obj: any = {};
+    obj.content_type = message.contentType === "" ? undefined : message.contentType;
+    obj.data = message.data ? base64FromBytes(message.data) : undefined;
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toAmino(e) : undefined);
+    } else {
+      obj.extensions = message.extensions;
+    }
+    return obj;
+  },
+  fromAminoMsg(object: HttpBodyAminoMsg): HttpBody {
+    return HttpBody.fromAmino(object.value);
+  },
+  fromProtoMsg(message: HttpBodyProtoMsg): HttpBody {
+    return HttpBody.decode(message.value);
+  },
+  toProto(message: HttpBody): Uint8Array {
+    return HttpBody.encode(message).finish();
+  },
+  toProtoMsg(message: HttpBody): HttpBodyProtoMsg {
+    return {
+      typeUrl: "/google.api.HttpBody",
+      value: HttpBody.encode(message).finish()
+    };
   }
 };

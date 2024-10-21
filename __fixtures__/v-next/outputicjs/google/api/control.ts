@@ -12,6 +12,26 @@ export interface Control {
    */
   environment: string;
 }
+export interface ControlProtoMsg {
+  typeUrl: "/google.api.Control";
+  value: Uint8Array;
+}
+/**
+ * Selects and configures the service controller used by the service.  The
+ * service controller handles features like abuse, quota, billing, logging,
+ * monitoring, etc.
+ */
+export interface ControlAmino {
+  /**
+   * The service control environment to use. If empty, no control plane
+   * feature (like quota and billing) will be enabled.
+   */
+  environment: string;
+}
+export interface ControlAminoMsg {
+  type: "/google.api.Control";
+  value: ControlAmino;
+}
 function createBaseControl(): Control {
   return {
     environment: ""
@@ -46,5 +66,32 @@ export const Control = {
     const message = createBaseControl();
     message.environment = object.environment ?? "";
     return message;
+  },
+  fromAmino(object: ControlAmino): Control {
+    const message = createBaseControl();
+    if (object.environment !== undefined && object.environment !== null) {
+      message.environment = object.environment;
+    }
+    return message;
+  },
+  toAmino(message: Control): ControlAmino {
+    const obj: any = {};
+    obj.environment = message.environment === "" ? undefined : message.environment;
+    return obj;
+  },
+  fromAminoMsg(object: ControlAminoMsg): Control {
+    return Control.fromAmino(object.value);
+  },
+  fromProtoMsg(message: ControlProtoMsg): Control {
+    return Control.decode(message.value);
+  },
+  toProto(message: Control): Uint8Array {
+    return Control.encode(message).finish();
+  },
+  toProtoMsg(message: Control): ControlProtoMsg {
+    return {
+      typeUrl: "/google.api.Control",
+      value: Control.encode(message).finish()
+    };
   }
 };
