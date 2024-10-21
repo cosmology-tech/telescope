@@ -1,5 +1,5 @@
 import * as ast from "@babel/types";
-import { ProtoService } from "@cosmology/types";
+import { ProtoServiceMethod } from "@cosmology/types";
 import { GenericParseContext } from "../../encoding";
 
 /**
@@ -12,8 +12,7 @@ import { GenericParseContext } from "../../encoding";
  */
 export function createMsgHelperCreator(
     context: GenericParseContext,
-    service: ProtoService,
-    methodKey?: string,
+    service: ProtoServiceMethod,
     helperCreatorName?: string
 ) {
     context.addUtil("buildTx");
@@ -30,28 +29,28 @@ export function createMsgHelperCreator(
                 ast.identifier("getSigningClient")
             ),
             ast.objectProperty(
-                ast.identifier("typeUrl: "),
+                ast.identifier("typeUrl"),
                 ast.memberExpression(
-                    ast.identifier(methodKey),
+                    ast.identifier(service.requestType),
                     ast.identifier("typeUrl")
                 )
             ),
             ast.objectProperty(
                 ast.identifier("encoders"),
                 ast.callExpression(ast.identifier("toEncoders"), [
-                    ast.identifier(methodKey),
+                    ast.identifier(service.requestType),
                 ])
             ),
             ast.objectProperty(
                 ast.identifier("converters"),
                 ast.callExpression(ast.identifier("toConverters"), [
-                    ast.identifier(methodKey),
+                    ast.identifier(service.requestType),
                 ])
             ),
         ]),
     ]);
     callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-        ast.tsTypeReference(ast.identifier(methodKey)),
+        ast.tsTypeReference(ast.identifier(service.requestType)),
     ]);
     const customHookArgumentsType = ast.tsTypeAnnotation(
         ast.tsTypeReference(ast.identifier("SigningClientResolver"))
@@ -80,8 +79,7 @@ export function createMsgHelperCreator(
  */
 export function createMsgHooks(
     context: GenericParseContext,
-    service: ProtoService,
-    methodKey?: string,
+    service: ProtoServiceMethod,
     helperCreatorName?: string,
     hookName?: string
 ) {
@@ -97,7 +95,7 @@ export function createMsgHooks(
         ]
     );
     callExpression.typeParameters = ast.tsTypeParameterInstantiation([
-        ast.tsTypeReference(ast.identifier(methodKey)),
+        ast.tsTypeReference(ast.identifier(service.requestType)),
         ast.tsTypeReference(ast.identifier(`Error`)),
     ]);
     return ast.exportNamedDeclaration(

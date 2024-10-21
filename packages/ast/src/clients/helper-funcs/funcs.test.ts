@@ -63,8 +63,7 @@ it("msg funcs works", async () => {
     expectCode(
         createMsgHelperCreator(
             mockContext,
-            mockService,
-            "MsgSend",
+            mockService.methods["Send"],
             "createSend"
         )
     );
@@ -72,8 +71,7 @@ it("msg funcs works", async () => {
     expectCode(
         createMsgHooks(
             mockContext,
-            mockService,
-            "MsgSend",
+            mockService.methods["Send"],
             "createSend",
             "useSend"
         )

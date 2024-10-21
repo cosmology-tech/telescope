@@ -102,8 +102,7 @@ export const plugin = (
               asts.push(
                 createMsgHelperCreator(
                   ctx.generic,
-                  svc,
-                  methodKey,
+                  svc.methods[methodKey],
                   helperCreatorName
                 )
               );
@@ -117,8 +116,7 @@ export const plugin = (
                 asts.push(
                   createMsgHooks(
                     ctx.generic,
-                    svc,
-                    methodKey,
+                    svc.methods[methodKey],
                     helperCreatorName,
                     hookName
                   )
