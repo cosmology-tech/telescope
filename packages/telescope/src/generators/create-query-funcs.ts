@@ -100,7 +100,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
             asts.push(
               createQueryHelperCreator(
                 ctx.generic,
-                svc,
+                svc.methods[methodKey],
                 methodKey,
                 helperCreatorName
               )
@@ -115,7 +115,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
               asts.push(
                 createQueryHooks(
                   ctx.generic,
-                  svc,
+                  svc.methods[methodKey],
                   methodKey,
                   helperCreatorName,
                   hookName

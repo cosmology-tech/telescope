@@ -6,8 +6,8 @@ import { BinaryReader, BinaryWriter } from "./binary";
 import { Rpc } from "./helpers";
 
 export interface QueryBuilderOptions<TReq, TRes> {
-  reqEncoderFn: (request: TReq, writer?: BinaryWriter) => BinaryWriter
-  resDecoderFn: (input: BinaryReader | Uint8Array, length?: number) => TRes
+  encoder: (request: TReq, writer?: BinaryWriter) => BinaryWriter
+  decoder: (input: BinaryReader | Uint8Array, length?: number) => TRes
   service: string,
   method: string,
   getRpcInstance: () => Rpc | undefined
@@ -19,9 +19,9 @@ export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
 
       if (!rpc) throw new Error("Query Rpc is not initialized");
 
-      const data = opts.reqEncoderFn(request).finish();
+      const data = opts.encoder(request).finish();
       const response = await rpc.request(opts.service, opts.method, data);
-      return opts.resDecoderFn(response);
+      return opts.decoder(response);
     };
 }
 
@@ -163,5 +163,8 @@ export interface AminoConverter {
   fromAmino: (data: any) => any;
   toAmino: (data: any) => any;
 }
+
+export type SigningClientResolver = () => ISigningClient | undefined;
+export type RpcResolver = () => Rpc | undefined;
 `;
 };

@@ -1,5 +1,5 @@
-import * as t from "@babel/types";
-import { ProtoService } from "@cosmology/types";
+import * as ast from "@babel/types";
+import { ProtoServiceMethod } from "@cosmology/types";
 import { GenericParseContext } from "../../encoding";
 
 /**
@@ -12,11 +12,64 @@ import { GenericParseContext } from "../../encoding";
  */
 export function createQueryHelperCreator(
     context: GenericParseContext,
-    service: ProtoService,
-    methodKey: string,
-    helperCreatorName: string
+    service: ProtoServiceMethod,
+    methodKey?: string,
+    helperCreatorName?: string
 ) {
-    return t.returnStatement(t.identifier(helperCreatorName));
+    context.addUtil("RpcResolver");
+    context.addUtil("buildQuery");
+    const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("encoder"),
+                ast.memberExpression(
+                    ast.identifier(service.requestType),
+                    ast.identifier("encode")
+                )
+            ),
+            ast.objectProperty(
+                ast.identifier("decoder"),
+                ast.memberExpression(
+                    ast.identifier(service.responseType),
+                    ast.identifier("decode")
+                )
+            ),
+            ast.objectProperty(
+                ast.identifier("service"),
+                // Does this value needs to change?
+                ast.stringLiteral("cosmos.bank.v1beta1.Query")
+            ),
+            ast.objectProperty(
+                ast.identifier("method"),
+                ast.stringLiteral(methodKey)
+            ),
+            ast.objectProperty(
+                ast.identifier("getRpcInstance"),
+                ast.identifier("getRpcInstance")
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(service.requestType)),
+        ast.tsTypeReference(ast.identifier(service.responseType)),
+    ]);
+
+    const customHookArgumentsType = ast.tsTypeAnnotation(
+        ast.tsTypeReference(ast.identifier("RpcResolver"))
+    );
+    const arg = ast.identifier("getRpcInstance");
+    arg.typeAnnotation = customHookArgumentsType;
+
+    const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
+
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(
+                ast.identifier(helperCreatorName),
+                arrowFuncExp
+            ),
+        ])
+    );
 }
 
 /**
@@ -30,10 +83,31 @@ export function createQueryHelperCreator(
  */
 export function createQueryHooks(
     context: GenericParseContext,
-    service: ProtoService,
-    methodKey: string,
-    helperCreatorName: string,
-    hookName: string
+    service: ProtoServiceMethod,
+    methodKey?: string,
+    helperCreatorName?: string,
+    hookName?: string
 ) {
-    return t.returnStatement(t.identifier(hookName));
+    context.addUtil("buildUseQuery");
+    const callExpression = ast.callExpression(ast.identifier("buildUseQuery"), [
+        ast.objectExpression([
+            ast.objectProperty(
+                ast.identifier("builderQueryFn"),
+                ast.identifier(helperCreatorName)
+            ),
+            ast.objectProperty(
+                ast.identifier("queryKeyPrefix"),
+                ast.stringLiteral(`${methodKey}Query`)
+            ),
+        ]),
+    ]);
+    callExpression.typeParameters = ast.tsTypeParameterInstantiation([
+        ast.tsTypeReference(ast.identifier(service.requestType)),
+        ast.tsTypeReference(ast.identifier(service.responseType)),
+    ]);
+    return ast.exportNamedDeclaration(
+        ast.variableDeclaration("const", [
+            ast.variableDeclarator(ast.identifier(hookName), callExpression),
+        ])
+    );
 }

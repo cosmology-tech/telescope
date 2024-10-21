@@ -1,10 +1,39 @@
 import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination";
 import { TokenPair, TokenPairSDKType } from "./erc20";
 import { Params, ParamsSDKType } from "./genesis";
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsResponse, QueryTokenPairsResponseSDKType, QueryTokenPairRequest, QueryTokenPairRequestSDKType, QueryTokenPairResponse, QueryTokenPairResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType } from "./query";
-return createGetTokenPairs;
-return useGetTokenPairs;
-return createGetTokenPair;
-return useGetTokenPair;
-return createGetParams;
-return useGetParams;
+export const createGetTokenPairs = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
+  encoder: QueryTokenPairsRequest.encode,
+  decoder: QueryTokenPairsResponse.decode,
+  service: "cosmos.bank.v1beta1.Query",
+  method: "TokenPairs",
+  getRpcInstance: getRpcInstance
+});
+export const useGetTokenPairs = buildUseQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
+  builderQueryFn: createGetTokenPairs,
+  queryKeyPrefix: "TokenPairsQuery"
+});
+export const createGetTokenPair = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
+  encoder: QueryTokenPairRequest.encode,
+  decoder: QueryTokenPairResponse.decode,
+  service: "cosmos.bank.v1beta1.Query",
+  method: "TokenPair",
+  getRpcInstance: getRpcInstance
+});
+export const useGetTokenPair = buildUseQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
+  builderQueryFn: createGetTokenPair,
+  queryKeyPrefix: "TokenPairQuery"
+});
+export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+  encoder: QueryParamsRequest.encode,
+  decoder: QueryParamsResponse.decode,
+  service: "cosmos.bank.v1beta1.Query",
+  method: "Params",
+  getRpcInstance: getRpcInstance
+});
+export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsResponse>({
+  builderQueryFn: createGetParams,
+  queryKeyPrefix: "ParamsQuery"
+});
