@@ -134,7 +134,7 @@ export const GenesisState = {
     const obj: any = {};
     obj.minter = message.minter ? Minter.toAmino(message.minter) : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
-    obj.reduction_started_epoch = message.reductionStartedEpoch !== BigInt(0) ? (message.reductionStartedEpoch?.toString)() : undefined;
+    obj.reduction_started_epoch = message.reductionStartedEpoch !== BigInt(0) ? message.reductionStartedEpoch?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
