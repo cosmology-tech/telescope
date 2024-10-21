@@ -1,139 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`msg funcs works 1`] = `
-"const createSend = (getSigningClient:  () => ISigningClient | undefined) => buildTx<MsgSend>({
+"export const createSend = (getSigningClient: SigningClientResolver) => buildTx<MsgSend>({
   getSigningClient: getSigningClient,
   typeUrl: : MsgSend.typeUrl,
-  encoders: "toEncoders(MsgSend)",
-  converters: "toConverters(MsgSend)"
-});
-const createMultiSend = (getSigningClient:  () => ISigningClient | undefined) => buildTx<MsgMultiSend>({
-  getSigningClient: getSigningClient,
-  typeUrl: : MsgMultiSend.typeUrl,
-  encoders: "toEncoders(MsgMultiSend)",
-  converters: "toConverters(MsgMultiSend)"
+  encoders: toEncoders(MsgSend),
+  converters: toConverters(MsgSend)
 });"
 `;
 
 exports[`msg funcs works 2`] = `
-"const useSend = buildUseMutation<MsgSend, Error>({
+"export const useSend = buildUseMutation<MsgSend, Error>({
   builderMutationFn: createSend
-});
-const useMultiSend = buildUseMutation<MsgMultiSend, Error>({
-  builderMutationFn: createMultiSend
 });"
 `;
 
 exports[`query funcs works 1`] = `
-"type UseBalanceQuery = UseQueryParams<QueryBalanceRequest, QueryBalanceResponse>;
-type UseAllBalancesQuery = UseQueryParams<QueryAllBalancesRequest, QueryAllBalancesResponse>;
-type UseSpendableBalancesQuery = UseQueryParams<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>;
-type UseTotalSupplyQuery = UseQueryParams<QueryTotalSupplyRequest, QueryTotalSupplyResponse>;
-type UseSupplyOfQuery = UseQueryParams<QuerySupplyOfRequest, QuerySupplyOfResponse>;
-type UseParamsQuery = UseQueryParams<QueryParamsRequest, QueryParamsResponse>;
-type UseDenomMetadataQuery = UseQueryParams<QueryDenomMetadataRequest, QueryDenomMetadataResponse>;
-type UseDenomsMetadataQuery = UseQueryParams<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>;
-type UseDenomOwnersQuery = UseQueryParams<QueryDenomOwnersRequest, QueryDenomOwnersResponse>;
-const createGetBalance = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
-  reqEncoderFn: QueryBalanceRequest.encode,
-  resDecoderFn: QueryBalanceResponse.decode,
+"export const createGetBalance = (getRpcInstance: SigningClientResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
+  encoder: QueryBalanceRequest.encode,
+  decoder: QueryBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
   method: "Balance",
-  getRpcInstance: getRpcInstance
-});
-const createGetAllBalances = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryAllBalancesRequest, QueryAllBalancesResponse>({
-  reqEncoderFn: QueryAllBalancesRequest.encode,
-  resDecoderFn: QueryAllBalancesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "AllBalances",
-  getRpcInstance: getRpcInstance
-});
-const createGetSpendableBalances = (getRpcInstance: () => Rpc | undefined) => buildQuery<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>({
-  reqEncoderFn: QuerySpendableBalancesRequest.encode,
-  resDecoderFn: QuerySpendableBalancesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "SpendableBalances",
-  getRpcInstance: getRpcInstance
-});
-const createGetTotalSupply = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryTotalSupplyRequest, QueryTotalSupplyResponse>({
-  reqEncoderFn: QueryTotalSupplyRequest.encode,
-  resDecoderFn: QueryTotalSupplyResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "TotalSupply",
-  getRpcInstance: getRpcInstance
-});
-const createGetSupplyOf = (getRpcInstance: () => Rpc | undefined) => buildQuery<QuerySupplyOfRequest, QuerySupplyOfResponse>({
-  reqEncoderFn: QuerySupplyOfRequest.encode,
-  resDecoderFn: QuerySupplyOfResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "SupplyOf",
-  getRpcInstance: getRpcInstance
-});
-const createGetParams = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  reqEncoderFn: QueryParamsRequest.encode,
-  resDecoderFn: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "Params",
-  getRpcInstance: getRpcInstance
-});
-const createGetDenomMetadata = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryDenomMetadataRequest, QueryDenomMetadataResponse>({
-  reqEncoderFn: QueryDenomMetadataRequest.encode,
-  resDecoderFn: QueryDenomMetadataResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "DenomMetadata",
-  getRpcInstance: getRpcInstance
-});
-const createGetDenomsMetadata = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>({
-  reqEncoderFn: QueryDenomsMetadataRequest.encode,
-  resDecoderFn: QueryDenomsMetadataResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "DenomsMetadata",
-  getRpcInstance: getRpcInstance
-});
-const createGetDenomOwners = (getRpcInstance: () => Rpc | undefined) => buildQuery<QueryDenomOwnersRequest, QueryDenomOwnersResponse>({
-  reqEncoderFn: QueryDenomOwnersRequest.encode,
-  resDecoderFn: QueryDenomOwnersResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
-  method: "DenomOwners",
   getRpcInstance: getRpcInstance
 });"
 `;
 
 exports[`query funcs works 2`] = `
-"const useBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResponse>({
+"export const useBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResponse>({
   builderQueryFn: createGetBalance,
   queryKeyPrefix: "BalanceQuery"
-});
-const useAllBalances = buildUseQuery<QueryAllBalancesRequest, QueryAllBalancesResponse>({
-  builderQueryFn: createGetAllBalances,
-  queryKeyPrefix: "AllBalancesQuery"
-});
-const useSpendableBalances = buildUseQuery<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>({
-  builderQueryFn: createGetSpendableBalances,
-  queryKeyPrefix: "SpendableBalancesQuery"
-});
-const useTotalSupply = buildUseQuery<QueryTotalSupplyRequest, QueryTotalSupplyResponse>({
-  builderQueryFn: createGetTotalSupply,
-  queryKeyPrefix: "TotalSupplyQuery"
-});
-const useSupplyOf = buildUseQuery<QuerySupplyOfRequest, QuerySupplyOfResponse>({
-  builderQueryFn: createGetSupplyOf,
-  queryKeyPrefix: "SupplyOfQuery"
-});
-const useParams = buildUseQuery<QueryParamsRequest, QueryParamsResponse>({
-  builderQueryFn: createGetParams,
-  queryKeyPrefix: "ParamsQuery"
-});
-const useDenomMetadata = buildUseQuery<QueryDenomMetadataRequest, QueryDenomMetadataResponse>({
-  builderQueryFn: createGetDenomMetadata,
-  queryKeyPrefix: "DenomMetadataQuery"
-});
-const useDenomsMetadata = buildUseQuery<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>({
-  builderQueryFn: createGetDenomsMetadata,
-  queryKeyPrefix: "DenomsMetadataQuery"
-});
-const useDenomOwners = buildUseQuery<QueryDenomOwnersRequest, QueryDenomOwnersResponse>({
-  builderQueryFn: createGetDenomOwners,
-  queryKeyPrefix: "DenomOwnersQuery"
 });"
 `;
