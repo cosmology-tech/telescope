@@ -375,6 +375,24 @@ See [LCD Clients](#lcd-clients) for more info.
 
 See [RPC Clients](#rpc-clients) for more info.
 
+### Helper Functions
+
+| Option                                  | Description                                                                                          | Defaults                     |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------- |
+| `helperFuncCreators.enabled`            | Determines if `.func` files will be generated.                                                        | `false`                      |
+| `helperFuncCreators.genCustomHooks`     | Specifies whether custom hooks will be generated.                                                     | `false`                      |
+| `helperFuncCreators.include.serviceTypes`| Specifies which types of services to include (`Query`, `Msg`). `undefined` includes all types. | `undefined`                  |
+| `helperFuncCreators.include.patterns`   | A list of patterns (e.g., `"**"`, `"cosmos.bank.v1beta1.bala*"`, etc.) to match specific services.     | `undefined`                         |
+| `helperFuncCreators.nameMappers.All.funcBody`  | Maps method names to a new name for all services.                                                     | `"unchanged"`                |
+| `helperFuncCreators.nameMappers.All.creatorPrefix` | Prefix for the function creator.                                                                      | `"create"`                   |
+| `helperFuncCreators.nameMappers.All.hookPrefix`    | Prefix for the hooks.                                                                                 | `"use"`                      |
+| `helperFuncCreators.nameMappers.Query.funcBody`   | Maps method names to a new name for `Query` services.                                                 | `"get"`                      |
+| `helperFuncCreators.nameMappers.Query.creatorPrefix`| Prefix for the function creator for `Query` services.                                                 | `"create"`                   |
+| `helperFuncCreators.nameMappers.Query.hookPrefix` | Prefix for the hooks for `Query` services.                                                            | `"use"`                      |
+| `helperFuncCreators.nameMappers.Msg.funcBody`     | Maps method names to a new name for `Msg` services.                                                   | `"unchanged"`                |
+| `helperFuncCreators.nameMappers.Msg.creatorPrefix`| Prefix for the function creator for `Msg` services.                                                   | `"create"`                   |
+| `helperFuncCreators.nameMappers.Msg.hookPrefix`   | Prefix for the hooks for `Msg` services.                                                              | `"use"`                      |
+
 ### Stargate Client Options
 
 | option                                       | description                                                     | defaults |
@@ -1142,7 +1160,7 @@ Checkout these related projects:
 
 ## Credits
 
-🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.zone/validator)
+🛠 Built by Cosmology — if you like our tools, please consider delegating to [our validator ⚛️](https://cosmology.zone/validator)
 
 Thanks to these engineers, teams and projects for inspiring Telescope:
 
@@ -1158,4 +1176,3 @@ Thanks to these engineers, teams and projects for inspiring Telescope:
 AS DESCRIBED IN THE TELESCOPE LICENSES, THE SOFTWARE IS PROVIDED “AS IS”, AT YOUR OWN RISK, AND WITHOUT WARRANTIES OF ANY KIND.
 
 No developer or entity involved in creating Telescope will be liable for any claims or damages whatsoever associated with your use, inability to use, or your interaction with other users of the Telescope code or Telescope CLI, including any direct, indirect, incidental, special, exemplary, punitive or consequential damages, or loss of profits, cryptocurrencies, tokens, or anything else of value.
-
