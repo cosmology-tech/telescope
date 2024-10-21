@@ -65,16 +65,6 @@ const options: TelescopeOptions = {
   },
   rpcClients: {
     enabled: false,
-    inline: false,
-    extensions: false,
-    camelCase: true,
-    enabledServices: [
-      // 'Msg',
-      'Query',
-      // 'Service',
-      // 'ReflectionService',
-      // 'ABCIApplication'
-    ],
   },
 
   helperFuncCreators: {
@@ -84,7 +74,7 @@ const options: TelescopeOptions = {
 
   interfaces: {
     enabled: true,
-    useGlobalDecoderRegistry: true,
+    useGlobalDecoderRegistry: false,
     useUnionTypes: true,
   },
   aminoEncoding: {
