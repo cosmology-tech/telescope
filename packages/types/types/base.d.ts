@@ -1,4 +1,6 @@
 import { TelescopeOptions } from "./telescope";
+export declare const TX_SVC_TYPES: string[];
+export declare const QUERY_SVC_TYPES: string[];
 export declare const ENUM_PROTO2_DEFAULT = 1;
 export declare const ENUM_PROTO3_DEFAULT = 0;
 export interface IParseContext {

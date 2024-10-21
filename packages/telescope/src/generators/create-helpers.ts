@@ -20,6 +20,8 @@ import {
   getTypesHelper,
   jsonSafe,
   decimal,
+  getHelperFuncTypes,
+  getReactQueryHelperHooks,
 } from '../helpers';
 
 const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
@@ -69,9 +71,19 @@ export const plugin = (builder: TelescopeBuilder) => {
     );
   }
 
+  if (builder.options.helperFuncCreators?.enabled) {
+    builder.files.push('helper-func-types.ts');
+    write(builder, 'helper-func-types.ts', getHelperFuncTypes(builder.options));
+  }
+
   if (builder.options.reactQuery?.enabled) {
     builder.files.push('react-query.ts');
-    write(builder, 'react-query.ts', getReactQueryHelper(builder.options));
+
+    if(builder.options?.helperFuncCreators?.enabled && builder.options?.helperFuncCreators?.genCustomHooks){
+      write(builder, 'react-query.ts', getReactQueryHelperHooks(builder.options));
+    } else {
+      write(builder, 'react-query.ts', getReactQueryHelper(builder.options));
+    }
   }
 
   if (builder.options.mobx?.enabled) {

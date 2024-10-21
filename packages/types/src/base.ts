@@ -1,5 +1,16 @@
 import { TelescopeOptions } from "./telescope";
 
+export const TX_SVC_TYPES = [
+    'Msg',
+];
+
+export const QUERY_SVC_TYPES = [
+    'Query',
+    'Service',
+    'ReflectionService',
+    'ABCIApplication'
+];
+
 export const ENUM_PROTO2_DEFAULT = 1;
 export const ENUM_PROTO3_DEFAULT = 0;
 
