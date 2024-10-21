@@ -166,3 +166,5 @@ export interface AminoConverter {
   fromAmino: (data: any) => any;
   toAmino: (data: any) => any;
 }
+
+export type SigningClientResolver = () => ISigningClient | undefined;
