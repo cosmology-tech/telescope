@@ -63,7 +63,9 @@ export const useRpcClient = <TData = ProtobufRpcClient>({
     options,
     rpcClientQueryKey,
 }: UseRpcClientQuery<TData>) => {
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient({
+      context: options?.context
+    });
     const key = rpcClientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
     return useQuery<ProtobufRpcClient, Error, TData>([key, rpcEndpoint], async () => {
       if(!rpcEndpoint) {
@@ -120,7 +122,9 @@ export function buildUseQuery<TReq, TRes>(opts: UseQueryBuilderOptions<TReq, TRe
     rpcClientQueryKey,
     customizedQueryKey,
   }: UseQueryParams<TReq, TRes, TData>) => {
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient({
+      context: options?.context
+    });
     const key = rpcClientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
     const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [key];
     const rpc = queryClient.getQueryData<Rpc>(queryKey);
@@ -137,7 +141,7 @@ export interface UseQueryParams<TReq, TRes, TData = TRes> extends ReactQueryPara
 }
 
 export interface ReactMutationParams<TData, TError, TVariables, TContext = unknown> {
-  options?: MutationOptions<TData, TError, TVariables, TContext>;
+  options?: UseMutationOptions<TData, TError, TVariables, TContext>;
   rpcEndpoint?: string | HttpEndpoint;
   signingClientQueryKey?: string;
 }
@@ -159,7 +163,9 @@ export function buildUseMutation<TMsg, TError>(opts: UseMutationBuilderOptions<T
     rpcEndpoint,
     signingClientQueryKey
   }: ReactMutationParams<DeliverTxResponse, TError, ITxArgs<TMsg>>) => {
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient({
+      context: options?.context
+    });
     const key = signingClientQueryKey || DEFAULT_SIGNING_CLIENT_QUERY_KEY;
     const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [DEFAULT_SIGNING_CLIENT_QUERY_KEY];
     const signingClient = queryClient.getQueryData<ISigningClient>(queryKey);
