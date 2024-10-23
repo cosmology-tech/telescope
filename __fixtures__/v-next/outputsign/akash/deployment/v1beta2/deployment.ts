@@ -179,7 +179,7 @@ export const DeploymentID = {
   toAmino(message: DeploymentID): DeploymentIDAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
     return obj;
   },
   fromAminoMsg(object: DeploymentIDAminoMsg): DeploymentID {
@@ -282,7 +282,7 @@ export const Deployment = {
     obj.deployment_id = message.deploymentId ? DeploymentID.toAmino(message.deploymentId) : DeploymentID.toAmino(DeploymentID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.version = message.version ? base64FromBytes(message.version) : "";
-    obj.created_at = message.createdAt !== BigInt(0) ? (message.createdAt?.toString)() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: DeploymentAminoMsg): Deployment {
@@ -370,7 +370,7 @@ export const DeploymentFilters = {
   toAmino(message: DeploymentFilters): DeploymentFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
     obj.state = message.state ?? "";
     return obj;
   },

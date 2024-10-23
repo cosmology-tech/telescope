@@ -246,7 +246,7 @@ export const GenesisState = {
   },
   toAmino(message: GenesisState): GenesisStateAmino {
     const obj: any = {};
-    obj.next_pool_id = message.nextPoolId !== BigInt(0) ? (message.nextPoolId?.toString)() : undefined;
+    obj.next_pool_id = message.nextPoolId !== BigInt(0) ? message.nextPoolId?.toString() : undefined;
     obj.params = message.params ? Params.toAmino(message.params) : undefined;
     if (message.poolRoutes) {
       obj.pool_routes = message.poolRoutes.map(e => e ? ModuleRoute.toAmino(e) : undefined);

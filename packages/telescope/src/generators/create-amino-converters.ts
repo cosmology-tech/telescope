@@ -9,7 +9,8 @@ export const plugin = (
 ) => {
 
     const aminoEncoding = builder.options.aminoEncoding;
-    if (!aminoEncoding.enabled) {
+
+    if (!aminoEncoding?.enabled || !builder.options.rpcClients?.enabled) {
         return;
     }
 

@@ -650,7 +650,7 @@ export const BidID = {
   toAmino(message: BidID, useInterfaces: boolean = true): BidIDAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     obj.provider = message.provider ?? "";
@@ -779,7 +779,7 @@ export const Bid = {
     obj.bid_id = message.bidId ? BidID.toAmino(message.bidId, useInterfaces) : BidID.toAmino(BidID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.price = message.price ? DecCoin.toAmino(message.price, useInterfaces) : DecCoin.toAmino(DecCoin.fromPartial({}));
-    obj.created_at = message.createdAt !== BigInt(0) ? (message.createdAt?.toString)() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: BidProtoMsg, useInterfaces: boolean = true): Bid {
@@ -927,7 +927,7 @@ export const BidFilters = {
   toAmino(message: BidFilters, useInterfaces: boolean = true): BidFiltersAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
     obj.gseq = message.gseq ?? 0;
     obj.oseq = message.oseq ?? 0;
     obj.provider = message.provider ?? "";

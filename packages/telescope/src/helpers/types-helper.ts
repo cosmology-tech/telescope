@@ -1,10 +1,20 @@
 import { TelescopeOptions } from "@cosmology/types";
 
 export const getTypesHelper = (options: TelescopeOptions) => {
-  return `import { IBinaryReader, IBinaryWriter } from "./binary${options.restoreImportExtension ?? ""}";
-import { Any } from "./google/protobuf/any${options.restoreImportExtension ?? ""}";
-import { OfflineSigner } from "@cosmjs/proto-signing";
-import { HttpEndpoint } from "@cosmjs/tendermint-rpc";
+  return `import { IBinaryReader, IBinaryWriter } from "./binary${
+    options.restoreImportExtension ?? ""
+  }";
+import { Any } from "./google/protobuf/any${
+    options.restoreImportExtension ?? ""
+  }";
+import { OfflineSigner } from "${
+    options.useInterchainJs
+      ? "@interchainjs/cosmos/types/wallet"
+      : "@cosmjs/proto-signing"
+  }";
+import { HttpEndpoint } from "${
+    options.useInterchainJs ? "@interchainjs/types" : "@cosmjs/tendermint-rpc"
+  }";
 
 export type ProtoMsg = Omit<Any, "typeUrl"> & { typeUrl: any };
 

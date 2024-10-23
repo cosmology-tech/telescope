@@ -12,6 +12,7 @@ export enum TelescopeLogLevel {
 }
 interface TelescopeOpts {
   env?: 'default' | 'v-next';
+  useInterchainJs?: boolean;
   removeUnusedImports?: boolean;
   classesUseArrowFunctions?: boolean;
   useSDKTypes?: boolean;
@@ -61,6 +62,7 @@ interface TelescopeOpts {
     allowUndefinedTypes?: boolean;
     allowEncodeDefaultScalars?: boolean;
     isScalarDefaultToNullable?: boolean;
+    enforceNullCheck?: boolean;
 
     optionalQueryParams?: boolean;
     optionalPageRequests?: boolean;
@@ -88,7 +90,7 @@ interface TelescopeOpts {
     typingsFormat?: {
       customTypes?: {
         useCosmosSDKDec?: boolean;
-        usePatchedDecimal?: boolean;
+        useEnhancedDecimal?: boolean;
         base64Lib?: '@endo/base64';
       };
 
@@ -247,6 +249,51 @@ interface TelescopeOpts {
       };
     }[];
     useConnectComet?: boolean;
+  };
+  helperFuncCreators?: {
+    enabled: boolean;
+    genCustomHooks?: boolean;
+    include?: {
+      // a group of types of service to include, undefined for All.
+      serviceTypes?: ('Query' | 'Msg' | 'All')[];
+      patterns?: string[];
+    };
+    nameMappers?: {
+      All?: {
+        // to map the method name to a new name to make the body part without the prefix.
+        // default to "unchanged"
+        // e.g. "*" : (name: string) => `get${name}`;
+        funcBody: {
+          [key: string]: "unchanged" | ( (name: string) => string );
+        },
+        // default to "create"
+        creatorPrefix: string;
+        // default to "use"
+        hookPrefix: string;
+      };
+      Query?: {
+        // to map the method name to a new name to make the body part without the prefix.
+        // default to "get"
+        funcBody: {
+          [key: string]: "unchanged" | "get" | ( (name: string) => string );
+        },
+        // default to "create"
+        creatorPrefix: string;
+        // default to "use"
+        hookPrefix: string;
+      };
+      Msg?: {
+        // to map the method name to a new name to make the body part without the prefix.
+        // default to "unchanged"
+        funcBody: {
+          [key: string]: "unchanged" | ( (name: string) => string );
+        },
+        // default to "create"
+        creatorPrefix: string;
+        // default to "use"
+        hookPrefix: string;
+      };
+    };
   };
   reactQuery?: {
     enabled: boolean;

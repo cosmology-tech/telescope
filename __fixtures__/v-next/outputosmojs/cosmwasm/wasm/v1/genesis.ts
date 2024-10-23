@@ -542,7 +542,7 @@ export const Code = {
   },
   toAmino(message: Code): CodeAmino {
     const obj: any = {};
-    obj.code_id = message.codeId !== BigInt(0) ? (message.codeId?.toString)() : undefined;
+    obj.code_id = message.codeId !== BigInt(0) ? message.codeId?.toString() : undefined;
     obj.code_info = message.codeInfo ? CodeInfo.toAmino(message.codeInfo) : undefined;
     obj.code_bytes = message.codeBytes ? base64FromBytes(message.codeBytes) : undefined;
     obj.pinned = message.pinned === false ? undefined : message.pinned;
@@ -794,7 +794,7 @@ export const Sequence = {
   toAmino(message: Sequence): SequenceAmino {
     const obj: any = {};
     obj.id_key = message.idKey ? base64FromBytes(message.idKey) : undefined;
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SequenceAminoMsg): Sequence {

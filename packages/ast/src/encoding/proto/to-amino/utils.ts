@@ -116,22 +116,25 @@ const setValue = (args: ToAminoJSONMethod, valExpr?: t.Expression) => {
                   t.identifier(propName)
               );
 
+        const template = require('@babel/template').default;
+        // Create a template that represents message.oBig.toString()
+        const expressionTemplate = template.expression(`
+          MESSAGE.OBJECT?.METHOD()
+        `);
+
+        // Generate AST node from the template by providing the identifiers
+        const messageNode = expressionTemplate({
+          MESSAGE: t.identifier('message'),
+          OBJECT: t.identifier(propName),
+          METHOD: t.identifier('toString'),
+        });
         return t.expressionStatement(
             t.assignmentExpression(
                 "=",
                 t.memberExpression(t.identifier("obj"), t.identifier(origName)),
                 t.conditionalExpression(
                     nullTest,
-                    t.callExpression(
-                        t.optionalMemberExpression(
-                            t.memberExpression(
-                                t.identifier("message"),
-                                t.identifier(propName)
-                            ),
-                            t.identifier("toString"),undefined, true
-                        ),
-                        []
-                    ),
+                    messageNode,
                     omitEmpty ? t.identifier("undefined") : t.stringLiteral("0")
                 )
             )

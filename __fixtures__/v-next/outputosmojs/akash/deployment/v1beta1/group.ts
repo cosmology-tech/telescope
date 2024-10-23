@@ -789,7 +789,7 @@ export const GroupID = {
   toAmino(message: GroupID): GroupIDAmino {
     const obj: any = {};
     obj.owner = message.owner ?? "";
-    obj.dseq = message.dseq ? (message.dseq?.toString)() : "0";
+    obj.dseq = message.dseq ? message.dseq?.toString() : "0";
     obj.gseq = message.gseq ?? 0;
     return obj;
   },
@@ -1073,7 +1073,7 @@ export const Group = {
     obj.group_id = message.groupId ? GroupID.toAmino(message.groupId) : GroupID.toAmino(GroupID.fromPartial({}));
     obj.state = message.state ?? 0;
     obj.group_spec = message.groupSpec ? GroupSpec.toAmino(message.groupSpec) : GroupSpec.toAmino(GroupSpec.fromPartial({}));
-    obj.created_at = message.createdAt !== BigInt(0) ? (message.createdAt?.toString)() : undefined;
+    obj.created_at = message.createdAt !== BigInt(0) ? message.createdAt?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: GroupAminoMsg): Group {

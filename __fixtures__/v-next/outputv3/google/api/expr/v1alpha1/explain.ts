@@ -259,7 +259,7 @@ export const Explain_ExprStep = {
   },
   toAmino(message: Explain_ExprStep, useInterfaces: boolean = true): Explain_ExprStepAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.value_index = message.valueIndex === 0 ? undefined : message.valueIndex;
     return obj;
   },

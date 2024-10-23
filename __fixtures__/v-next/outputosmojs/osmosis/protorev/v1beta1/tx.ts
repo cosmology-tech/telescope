@@ -831,7 +831,7 @@ export const MsgSetMaxPoolPointsPerTx = {
   toAmino(message: MsgSetMaxPoolPointsPerTx): MsgSetMaxPoolPointsPerTxAmino {
     const obj: any = {};
     obj.admin = message.admin === "" ? undefined : message.admin;
-    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx !== BigInt(0) ? (message.maxPoolPointsPerTx?.toString)() : undefined;
+    obj.max_pool_points_per_tx = message.maxPoolPointsPerTx !== BigInt(0) ? message.maxPoolPointsPerTx?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSetMaxPoolPointsPerTxAminoMsg): MsgSetMaxPoolPointsPerTx {
@@ -1015,7 +1015,7 @@ export const MsgSetMaxPoolPointsPerBlock = {
   toAmino(message: MsgSetMaxPoolPointsPerBlock): MsgSetMaxPoolPointsPerBlockAmino {
     const obj: any = {};
     obj.admin = message.admin === "" ? undefined : message.admin;
-    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock !== BigInt(0) ? (message.maxPoolPointsPerBlock?.toString)() : undefined;
+    obj.max_pool_points_per_block = message.maxPoolPointsPerBlock !== BigInt(0) ? message.maxPoolPointsPerBlock?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgSetMaxPoolPointsPerBlockAminoMsg): MsgSetMaxPoolPointsPerBlock {

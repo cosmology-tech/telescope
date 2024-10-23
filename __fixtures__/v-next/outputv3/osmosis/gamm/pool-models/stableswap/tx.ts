@@ -324,7 +324,7 @@ export const MsgCreateStableswapPoolResponse = {
   },
   toAmino(message: MsgCreateStableswapPoolResponse, useInterfaces: boolean = true): MsgCreateStableswapPoolResponseAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: MsgCreateStableswapPoolResponseProtoMsg, useInterfaces: boolean = true): MsgCreateStableswapPoolResponse {
@@ -442,7 +442,7 @@ export const MsgStableSwapAdjustScalingFactors = {
   toAmino(message: MsgStableSwapAdjustScalingFactors, useInterfaces: boolean = true): MsgStableSwapAdjustScalingFactorsAmino {
     const obj: any = {};
     obj.sender = message.sender === "" ? undefined : message.sender;
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     if (message.scalingFactors) {
       obj.scaling_factors = message.scalingFactors.map(e => e.toString());
     } else {

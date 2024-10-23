@@ -482,7 +482,7 @@ export const Int64Value = {
   },
   toAmino(message: Int64Value, useInterfaces: boolean = true): Int64ValueAmino {
     const obj: any = {};
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: Int64ValueProtoMsg, useInterfaces: boolean = true): Int64Value {
@@ -559,7 +559,7 @@ export const UInt64Value = {
   },
   toAmino(message: UInt64Value, useInterfaces: boolean = true): UInt64ValueAmino {
     const obj: any = {};
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: UInt64ValueProtoMsg, useInterfaces: boolean = true): UInt64Value {

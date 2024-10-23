@@ -208,7 +208,7 @@ export const IncentiveRecord = {
   },
   toAmino(message: IncentiveRecord): IncentiveRecordAmino {
     const obj: any = {};
-    obj.pool_id = message.poolId !== BigInt(0) ? (message.poolId?.toString)() : undefined;
+    obj.pool_id = message.poolId !== BigInt(0) ? message.poolId?.toString() : undefined;
     obj.incentive_denom = message.incentiveDenom === "" ? undefined : message.incentiveDenom;
     obj.incentive_creator_addr = message.incentiveCreatorAddr === "" ? undefined : message.incentiveCreatorAddr;
     obj.incentive_record_body = message.incentiveRecordBody ? IncentiveRecordBody.toAmino(message.incentiveRecordBody) : undefined;

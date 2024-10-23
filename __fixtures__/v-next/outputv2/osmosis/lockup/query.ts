@@ -2619,7 +2619,7 @@ export const LockedRequest = {
   },
   toAmino(message: LockedRequest): LockedRequestAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId !== BigInt(0) ? (message.lockId?.toString)() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: LockedRequestAminoMsg): LockedRequest {
@@ -2803,7 +2803,7 @@ export const SyntheticLockupsByLockupIDRequest = {
   },
   toAmino(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestAmino {
     const obj: any = {};
-    obj.lock_id = message.lockId !== BigInt(0) ? (message.lockId?.toString)() : undefined;
+    obj.lock_id = message.lockId !== BigInt(0) ? message.lockId?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: SyntheticLockupsByLockupIDRequestAminoMsg): SyntheticLockupsByLockupIDRequest {

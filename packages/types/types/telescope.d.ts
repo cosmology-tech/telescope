@@ -10,6 +10,7 @@ export declare enum TelescopeLogLevel {
 }
 interface TelescopeOpts {
     env?: 'default' | 'v-next';
+    useInterchainJs?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
     useSDKTypes?: boolean;
@@ -56,6 +57,7 @@ interface TelescopeOpts {
         allowUndefinedTypes?: boolean;
         allowEncodeDefaultScalars?: boolean;
         isScalarDefaultToNullable?: boolean;
+        enforceNullCheck?: boolean;
         optionalQueryParams?: boolean;
         optionalPageRequests?: boolean;
         addTypeUrlToObjects?: boolean;
@@ -75,7 +77,7 @@ interface TelescopeOpts {
         typingsFormat?: {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
-                usePatchedDecimal?: boolean;
+                useEnhancedDecimal?: boolean;
                 base64Lib?: '@endo/base64';
             };
             num64?: 'long' | 'bigint';
@@ -201,6 +203,37 @@ interface TelescopeOpts {
             };
         }[];
         useConnectComet?: boolean;
+    };
+    helperFuncCreators?: {
+        enabled: boolean;
+        genCustomHooks?: boolean;
+        include?: {
+            serviceTypes?: ('Query' | 'Msg' | 'All')[];
+            patterns?: string[];
+        };
+        nameMappers?: {
+            All?: {
+                funcBody: {
+                    [key: string]: "unchanged" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
+            };
+            Query?: {
+                funcBody: {
+                    [key: string]: "unchanged" | "get" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
+            };
+            Msg?: {
+                funcBody: {
+                    [key: string]: "unchanged" | ((name: string) => string);
+                };
+                creatorPrefix: string;
+                hookPrefix: string;
+            };
+        };
     };
     reactQuery?: {
         enabled: boolean;

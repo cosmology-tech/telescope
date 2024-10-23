@@ -45,6 +45,7 @@ const options: TelescopeOptions = {
     fieldDefaultIsOptional: false,
     useOptionalNullable: true,
     isScalarDefaultToNullable: false,
+    enforceNullCheck: false,
     allowUndefinedTypes: false,
     typingsFormat: {
       customTypes: {
@@ -296,6 +297,32 @@ describe('misc', () => {
     await telescope.build();
   });
 
+    it('generates, proto only, enforceNullCheck true', async () => {
+      const testFolder = '/enforce-null-check-true';
+
+      const telescope = new TelescopeBuilder({
+        outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
+        protoDirs: [__dirname + '/../../../__fixtures__/misc/proto'],
+        options: deepmerge(options, {
+          prototypes: {
+            methods: {
+              toAmino: false,
+              fromAmino: false,
+              toProto: true,
+              fromProto: true,
+            },
+            enforceNullCheck: true,
+          },
+          aminoEncoding: {
+            enabled: false,
+            useLegacyInlineEncoding: false,
+          },
+        }),
+      });
+
+      await telescope.build();
+    });
+
   it('generates, proto only, legacy', async () => {
     const testFolder = '/output-proto-amino/proto-only-legacy';
 
@@ -461,8 +488,8 @@ describe('misc', () => {
     await telescope.build();
   });
 
-  it('generates with usePatchedDecimal', async () => {
-    const testFolder = '/output-decimals/agoric';
+  it('generates with useEnhancedDecimal', async () => {
+    const testFolder = '/output-decimals';
 
     const telescope = new TelescopeBuilder({
       outPath: __dirname + '/../../../__fixtures__/misc' + testFolder,
@@ -471,7 +498,7 @@ describe('misc', () => {
         prototypes: {
           typingsFormat: {
             customTypes: {
-              usePatchedDecimal: true,
+              useEnhancedDecimal: true,
             },
           },
         },

@@ -374,7 +374,7 @@ export const QueryIncentivizedPacketsRequest = {
   toAmino(message: QueryIncentivizedPacketsRequest): QueryIncentivizedPacketsRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.query_height = message.queryHeight !== BigInt(0) ? (message.queryHeight?.toString)() : undefined;
+    obj.query_height = message.queryHeight !== BigInt(0) ? message.queryHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryIncentivizedPacketsRequestAminoMsg): QueryIncentivizedPacketsRequest {
@@ -589,7 +589,7 @@ export const QueryIncentivizedPacketRequest = {
   },
   toAmino(message: QueryIncentivizedPacketRequest): QueryIncentivizedPacketRequestAmino {
     const obj: any = {};
-    obj.query_height = message.queryHeight !== BigInt(0) ? (message.queryHeight?.toString)() : undefined;
+    obj.query_height = message.queryHeight !== BigInt(0) ? message.queryHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryIncentivizedPacketRequestAminoMsg): QueryIncentivizedPacketRequest {
@@ -828,7 +828,7 @@ export const QueryIncentivizedPacketsForChannelRequest = {
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
     obj.port_id = message.portId === "" ? undefined : message.portId;
     obj.channel_id = message.channelId === "" ? undefined : message.channelId;
-    obj.query_height = message.queryHeight !== BigInt(0) ? (message.queryHeight?.toString)() : undefined;
+    obj.query_height = message.queryHeight !== BigInt(0) ? message.queryHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryIncentivizedPacketsForChannelRequestAminoMsg): QueryIncentivizedPacketsForChannelRequest {
@@ -2001,7 +2001,7 @@ export const QueryFeeEnabledChannelsRequest = {
   toAmino(message: QueryFeeEnabledChannelsRequest): QueryFeeEnabledChannelsRequestAmino {
     const obj: any = {};
     obj.pagination = message.pagination ? PageRequest.toAmino(message.pagination) : undefined;
-    obj.query_height = message.queryHeight !== BigInt(0) ? (message.queryHeight?.toString)() : undefined;
+    obj.query_height = message.queryHeight !== BigInt(0) ? message.queryHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: QueryFeeEnabledChannelsRequestAminoMsg): QueryFeeEnabledChannelsRequest {

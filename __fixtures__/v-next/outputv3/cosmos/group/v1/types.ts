@@ -1337,10 +1337,10 @@ export const GroupInfo = {
   },
   toAmino(message: GroupInfo, useInterfaces: boolean = true): GroupInfoAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.admin = message.admin === "" ? undefined : message.admin;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
-    obj.version = message.version !== BigInt(0) ? (message.version?.toString)() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version?.toString() : undefined;
     obj.total_weight = message.totalWeight === "" ? undefined : message.totalWeight;
     obj.created_at = message.createdAt ? Timestamp.toAmino(toTimestamp(message.createdAt)) : undefined;
     return obj;
@@ -1436,7 +1436,7 @@ export const GroupMember = {
   },
   toAmino(message: GroupMember, useInterfaces: boolean = true): GroupMemberAmino {
     const obj: any = {};
-    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId?.toString() : undefined;
     obj.member = message.member ? Member.toAmino(message.member, useInterfaces) : undefined;
     return obj;
   },
@@ -1604,10 +1604,10 @@ export const GroupPolicyInfo = {
   toAmino(message: GroupPolicyInfo, useInterfaces: boolean = true): GroupPolicyInfoAmino {
     const obj: any = {};
     obj.address = message.address === "" ? undefined : message.address;
-    obj.group_id = message.groupId !== BigInt(0) ? (message.groupId?.toString)() : undefined;
+    obj.group_id = message.groupId !== BigInt(0) ? message.groupId?.toString() : undefined;
     obj.admin = message.admin === "" ? undefined : message.admin;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
-    obj.version = message.version !== BigInt(0) ? (message.version?.toString)() : undefined;
+    obj.version = message.version !== BigInt(0) ? message.version?.toString() : undefined;
     obj.decision_policy = message.decisionPolicy ? DecisionPolicy_ToAmino((message.decisionPolicy as Any), useInterfaces) : undefined;
     obj.created_at = message.createdAt ? Timestamp.toAmino(toTimestamp(message.createdAt)) : undefined;
     return obj;
@@ -1865,7 +1865,7 @@ export const Proposal = {
   },
   toAmino(message: Proposal, useInterfaces: boolean = true): ProposalAmino {
     const obj: any = {};
-    obj.id = message.id !== BigInt(0) ? (message.id?.toString)() : undefined;
+    obj.id = message.id !== BigInt(0) ? message.id?.toString() : undefined;
     obj.address = message.address === "" ? undefined : message.address;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;
     if (message.proposers) {
@@ -1874,8 +1874,8 @@ export const Proposal = {
       obj.proposers = message.proposers;
     }
     obj.submit_time = message.submitTime ? Timestamp.toAmino(toTimestamp(message.submitTime)) : undefined;
-    obj.group_version = message.groupVersion !== BigInt(0) ? (message.groupVersion?.toString)() : undefined;
-    obj.group_policy_version = message.groupPolicyVersion !== BigInt(0) ? (message.groupPolicyVersion?.toString)() : undefined;
+    obj.group_version = message.groupVersion !== BigInt(0) ? message.groupVersion?.toString() : undefined;
+    obj.group_policy_version = message.groupPolicyVersion !== BigInt(0) ? message.groupPolicyVersion?.toString() : undefined;
     obj.status = message.status === 0 ? undefined : message.status;
     obj.result = message.result === 0 ? undefined : message.result;
     obj.final_tally_result = message.finalTallyResult ? TallyResult.toAmino(message.finalTallyResult, useInterfaces) : undefined;
@@ -2140,7 +2140,7 @@ export const Vote = {
   },
   toAmino(message: Vote, useInterfaces: boolean = true): VoteAmino {
     const obj: any = {};
-    obj.proposal_id = message.proposalId !== BigInt(0) ? (message.proposalId?.toString)() : undefined;
+    obj.proposal_id = message.proposalId !== BigInt(0) ? message.proposalId?.toString() : undefined;
     obj.voter = message.voter === "" ? undefined : message.voter;
     obj.option = message.option === 0 ? undefined : message.option;
     obj.metadata = message.metadata === "" ? undefined : message.metadata;

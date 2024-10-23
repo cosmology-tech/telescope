@@ -1426,8 +1426,8 @@ export const EncodingTestForDontOmit = {
     obj.d_o_b = message.dOB ?? false;
     obj.num = message.num === 0 ? undefined : message.num;
     obj.d_o_num = message.dONum ?? 0;
-    obj.big = message.big !== BigInt(0) ? (message.big?.toString)() : undefined;
-    obj.d_o_big = message.dOBig ? (message.dOBig?.toString)() : "0";
+    obj.big = message.big !== BigInt(0) ? message.big?.toString() : undefined;
+    obj.d_o_big = message.dOBig ? message.dOBig?.toString() : "0";
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : undefined;
     obj.d_o_proto = message.dOProto ? AccessConfig.toAmino(message.dOProto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.auth = message.auth ? Any.toAmino(message.auth) : undefined;
@@ -2584,8 +2584,8 @@ export const EncodingTestForOmit = {
     obj.o_b = message.oB === false ? undefined : message.oB;
     obj.num = message.num ?? 0;
     obj.o_num = message.oNum === 0 ? undefined : message.oNum;
-    obj.big = message.big ? (message.big?.toString)() : "0";
-    obj.o_big = message.oBig !== BigInt(0) ? (message.oBig?.toString)() : undefined;
+    obj.big = message.big ? message.big?.toString() : "0";
+    obj.o_big = message.oBig !== BigInt(0) ? message.oBig?.toString() : undefined;
     obj.proto = message.proto ? AccessConfig.toAmino(message.proto) : AccessConfig.toAmino(AccessConfig.fromPartial({}));
     obj.o_proto = message.oProto ? AccessConfig.toAmino(message.oProto) : undefined;
     obj.auth = message.auth ? Any.toAmino(message.auth) : Any.toAmino(Any.fromPartial({}));

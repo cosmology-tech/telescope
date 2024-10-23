@@ -160,8 +160,8 @@ exports[`Height 1`] = `
   },
   toAmino(message: Height): HeightAmino {
     const obj: any = {};
-    obj.revision_number = message.revisionNumber !== BigInt(0) ? (message.revisionNumber?.toString)() : undefined;
-    obj.revision_height = message.revisionHeight !== BigInt(0) ? (message.revisionHeight?.toString)() : undefined;
+    obj.revision_number = message.revisionNumber !== BigInt(0) ? message.revisionNumber?.toString() : undefined;
+    obj.revision_height = message.revisionHeight !== BigInt(0) ? message.revisionHeight?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: HeightAminoMsg): Height {
@@ -759,7 +759,7 @@ exports[`MsgTransfer 1`] = `
     obj.sender = message.sender === "" ? undefined : message.sender;
     obj.receiver = message.receiver === "" ? undefined : message.receiver;
     obj.timeout_height = message.timeoutHeight ? Height.toAmino(message.timeoutHeight) : {};
-    obj.timeout_timestamp = message.timeoutTimestamp !== BigInt(0) ? (message.timeoutTimestamp?.toString)() : undefined;
+    obj.timeout_timestamp = message.timeoutTimestamp !== BigInt(0) ? message.timeoutTimestamp?.toString() : undefined;
     return obj;
   },
   fromAminoMsg(object: MsgTransferAminoMsg): MsgTransfer {

@@ -422,8 +422,8 @@ export const EvalState_Result = {
   },
   toAmino(message: EvalState_Result, useInterfaces: boolean = true): EvalState_ResultAmino {
     const obj: any = {};
-    obj.expr = message.expr !== BigInt(0) ? (message.expr?.toString)() : undefined;
-    obj.value = message.value !== BigInt(0) ? (message.value?.toString)() : undefined;
+    obj.expr = message.expr !== BigInt(0) ? message.expr?.toString() : undefined;
+    obj.value = message.value !== BigInt(0) ? message.value?.toString() : undefined;
     return obj;
   },
   fromProtoMsg(message: EvalState_ResultProtoMsg, useInterfaces: boolean = true): EvalState_Result {
