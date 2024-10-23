@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { ModuleBalanceRequest, ModuleBalanceResponse, ModuleLockedAmountRequest, ModuleLockedAmountResponse, AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse, AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse, AccountLockedCoinsRequest, AccountLockedCoinsResponse, AccountLockedPastTimeRequest, AccountLockedPastTimeResponse, AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse, AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse, AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse, LockedDenomRequest, LockedDenomResponse, LockedRequest, LockedResponse, SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse, AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse, AccountLockedDurationRequest, AccountLockedDurationResponse, AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse, AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
 export const createGetModuleBalance = (getRpcInstance: RpcResolver) => buildQuery<ModuleBalanceRequest, ModuleBalanceResponse>({
-  encoder: ModuleBalanceRequest.encode,
-  decoder: ModuleBalanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ModuleBalanceRequest.encode,
+  decode: ModuleBalanceResponse.decode,
+  service: "osmosis.lockup.ModuleBalance",
   method: "ModuleBalance",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetModuleBalance = buildUseQuery<ModuleBalanceRequest, ModuleBal
   queryKeyPrefix: "ModuleBalanceQuery"
 });
 export const createGetModuleLockedAmount = (getRpcInstance: RpcResolver) => buildQuery<ModuleLockedAmountRequest, ModuleLockedAmountResponse>({
-  encoder: ModuleLockedAmountRequest.encode,
-  decoder: ModuleLockedAmountResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ModuleLockedAmountRequest.encode,
+  decode: ModuleLockedAmountResponse.decode,
+  service: "osmosis.lockup.ModuleLockedAmount",
   method: "ModuleLockedAmount",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetModuleLockedAmount = buildUseQuery<ModuleLockedAmountRequest,
   queryKeyPrefix: "ModuleLockedAmountQuery"
 });
 export const createGetAccountUnlockableCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse>({
-  encoder: AccountUnlockableCoinsRequest.encode,
-  decoder: AccountUnlockableCoinsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountUnlockableCoinsRequest.encode,
+  decode: AccountUnlockableCoinsResponse.decode,
+  service: "osmosis.lockup.AccountUnlockableCoins",
   method: "AccountUnlockableCoins",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetAccountUnlockableCoins = buildUseQuery<AccountUnlockableCoins
   queryKeyPrefix: "AccountUnlockableCoinsQuery"
 });
 export const createGetAccountUnlockingCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse>({
-  encoder: AccountUnlockingCoinsRequest.encode,
-  decoder: AccountUnlockingCoinsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountUnlockingCoinsRequest.encode,
+  decode: AccountUnlockingCoinsResponse.decode,
+  service: "osmosis.lockup.AccountUnlockingCoins",
   method: "AccountUnlockingCoins",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetAccountUnlockingCoins = buildUseQuery<AccountUnlockingCoinsRe
   queryKeyPrefix: "AccountUnlockingCoinsQuery"
 });
 export const createGetAccountLockedCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedCoinsRequest, AccountLockedCoinsResponse>({
-  encoder: AccountLockedCoinsRequest.encode,
-  decoder: AccountLockedCoinsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedCoinsRequest.encode,
+  decode: AccountLockedCoinsResponse.decode,
+  service: "osmosis.lockup.AccountLockedCoins",
   method: "AccountLockedCoins",
   getRpcInstance: getRpcInstance
 });
@@ -57,9 +57,9 @@ export const useGetAccountLockedCoins = buildUseQuery<AccountLockedCoinsRequest,
   queryKeyPrefix: "AccountLockedCoinsQuery"
 });
 export const createGetAccountLockedPastTime = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeRequest, AccountLockedPastTimeResponse>({
-  encoder: AccountLockedPastTimeRequest.encode,
-  decoder: AccountLockedPastTimeResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedPastTimeRequest.encode,
+  decode: AccountLockedPastTimeResponse.decode,
+  service: "osmosis.lockup.AccountLockedPastTime",
   method: "AccountLockedPastTime",
   getRpcInstance: getRpcInstance
 });
@@ -68,9 +68,9 @@ export const useGetAccountLockedPastTime = buildUseQuery<AccountLockedPastTimeRe
   queryKeyPrefix: "AccountLockedPastTimeQuery"
 });
 export const createGetAccountLockedPastTimeNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse>({
-  encoder: AccountLockedPastTimeNotUnlockingOnlyRequest.encode,
-  decoder: AccountLockedPastTimeNotUnlockingOnlyResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedPastTimeNotUnlockingOnlyRequest.encode,
+  decode: AccountLockedPastTimeNotUnlockingOnlyResponse.decode,
+  service: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnly",
   method: "AccountLockedPastTimeNotUnlockingOnly",
   getRpcInstance: getRpcInstance
 });
@@ -79,9 +79,9 @@ export const useGetAccountLockedPastTimeNotUnlockingOnly = buildUseQuery<Account
   queryKeyPrefix: "AccountLockedPastTimeNotUnlockingOnlyQuery"
 });
 export const createGetAccountUnlockedBeforeTime = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse>({
-  encoder: AccountUnlockedBeforeTimeRequest.encode,
-  decoder: AccountUnlockedBeforeTimeResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountUnlockedBeforeTimeRequest.encode,
+  decode: AccountUnlockedBeforeTimeResponse.decode,
+  service: "osmosis.lockup.AccountUnlockedBeforeTime",
   method: "AccountUnlockedBeforeTime",
   getRpcInstance: getRpcInstance
 });
@@ -90,9 +90,9 @@ export const useGetAccountUnlockedBeforeTime = buildUseQuery<AccountUnlockedBefo
   queryKeyPrefix: "AccountUnlockedBeforeTimeQuery"
 });
 export const createGetAccountLockedPastTimeDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse>({
-  encoder: AccountLockedPastTimeDenomRequest.encode,
-  decoder: AccountLockedPastTimeDenomResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedPastTimeDenomRequest.encode,
+  decode: AccountLockedPastTimeDenomResponse.decode,
+  service: "osmosis.lockup.AccountLockedPastTimeDenom",
   method: "AccountLockedPastTimeDenom",
   getRpcInstance: getRpcInstance
 });
@@ -101,9 +101,9 @@ export const useGetAccountLockedPastTimeDenom = buildUseQuery<AccountLockedPastT
   queryKeyPrefix: "AccountLockedPastTimeDenomQuery"
 });
 export const createGetLockedDenom = (getRpcInstance: RpcResolver) => buildQuery<LockedDenomRequest, LockedDenomResponse>({
-  encoder: LockedDenomRequest.encode,
-  decoder: LockedDenomResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: LockedDenomRequest.encode,
+  decode: LockedDenomResponse.decode,
+  service: "osmosis.lockup.LockedDenom",
   method: "LockedDenom",
   getRpcInstance: getRpcInstance
 });
@@ -112,9 +112,9 @@ export const useGetLockedDenom = buildUseQuery<LockedDenomRequest, LockedDenomRe
   queryKeyPrefix: "LockedDenomQuery"
 });
 export const createGetLockedByID = (getRpcInstance: RpcResolver) => buildQuery<LockedRequest, LockedResponse>({
-  encoder: LockedRequest.encode,
-  decoder: LockedResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: LockedRequest.encode,
+  decode: LockedResponse.decode,
+  service: "osmosis.lockup.LockedByID",
   method: "LockedByID",
   getRpcInstance: getRpcInstance
 });
@@ -123,9 +123,9 @@ export const useGetLockedByID = buildUseQuery<LockedRequest, LockedResponse>({
   queryKeyPrefix: "LockedByIDQuery"
 });
 export const createGetSyntheticLockupsByLockupID = (getRpcInstance: RpcResolver) => buildQuery<SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse>({
-  encoder: SyntheticLockupsByLockupIDRequest.encode,
-  decoder: SyntheticLockupsByLockupIDResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: SyntheticLockupsByLockupIDRequest.encode,
+  decode: SyntheticLockupsByLockupIDResponse.decode,
+  service: "osmosis.lockup.SyntheticLockupsByLockupID",
   method: "SyntheticLockupsByLockupID",
   getRpcInstance: getRpcInstance
 });
@@ -134,9 +134,9 @@ export const useGetSyntheticLockupsByLockupID = buildUseQuery<SyntheticLockupsBy
   queryKeyPrefix: "SyntheticLockupsByLockupIDQuery"
 });
 export const createGetAccountLockedLongerDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse>({
-  encoder: AccountLockedLongerDurationRequest.encode,
-  decoder: AccountLockedLongerDurationResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedLongerDurationRequest.encode,
+  decode: AccountLockedLongerDurationResponse.decode,
+  service: "osmosis.lockup.AccountLockedLongerDuration",
   method: "AccountLockedLongerDuration",
   getRpcInstance: getRpcInstance
 });
@@ -145,9 +145,9 @@ export const useGetAccountLockedLongerDuration = buildUseQuery<AccountLockedLong
   queryKeyPrefix: "AccountLockedLongerDurationQuery"
 });
 export const createGetAccountLockedDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedDurationRequest, AccountLockedDurationResponse>({
-  encoder: AccountLockedDurationRequest.encode,
-  decoder: AccountLockedDurationResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedDurationRequest.encode,
+  decode: AccountLockedDurationResponse.decode,
+  service: "osmosis.lockup.AccountLockedDuration",
   method: "AccountLockedDuration",
   getRpcInstance: getRpcInstance
 });
@@ -156,9 +156,9 @@ export const useGetAccountLockedDuration = buildUseQuery<AccountLockedDurationRe
   queryKeyPrefix: "AccountLockedDurationQuery"
 });
 export const createGetAccountLockedLongerDurationNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse>({
-  encoder: AccountLockedLongerDurationNotUnlockingOnlyRequest.encode,
-  decoder: AccountLockedLongerDurationNotUnlockingOnlyResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedLongerDurationNotUnlockingOnlyRequest.encode,
+  decode: AccountLockedLongerDurationNotUnlockingOnlyResponse.decode,
+  service: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnly",
   method: "AccountLockedLongerDurationNotUnlockingOnly",
   getRpcInstance: getRpcInstance
 });
@@ -167,9 +167,9 @@ export const useGetAccountLockedLongerDurationNotUnlockingOnly = buildUseQuery<A
   queryKeyPrefix: "AccountLockedLongerDurationNotUnlockingOnlyQuery"
 });
 export const createGetAccountLockedLongerDurationDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse>({
-  encoder: AccountLockedLongerDurationDenomRequest.encode,
-  decoder: AccountLockedLongerDurationDenomResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: AccountLockedLongerDurationDenomRequest.encode,
+  decode: AccountLockedLongerDurationDenomResponse.decode,
+  service: "osmosis.lockup.AccountLockedLongerDurationDenom",
   method: "AccountLockedLongerDurationDenom",
   getRpcInstance: getRpcInstance
 });
@@ -178,9 +178,9 @@ export const useGetAccountLockedLongerDurationDenom = buildUseQuery<AccountLocke
   queryKeyPrefix: "AccountLockedLongerDurationDenomQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "osmosis.lockup.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

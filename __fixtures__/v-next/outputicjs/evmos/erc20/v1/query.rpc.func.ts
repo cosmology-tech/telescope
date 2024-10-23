@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsResponse, QueryTokenPairRequest, QueryTokenPairResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
 export const createGetTokenPairs = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
-  encoder: QueryTokenPairsRequest.encode,
-  decoder: QueryTokenPairsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryTokenPairsRequest.encode,
+  decode: QueryTokenPairsResponse.decode,
+  service: "evmos.erc20.v1.TokenPairs",
   method: "TokenPairs",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetTokenPairs = buildUseQuery<QueryTokenPairsRequest, QueryToken
   queryKeyPrefix: "TokenPairsQuery"
 });
 export const createGetTokenPair = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
-  encoder: QueryTokenPairRequest.encode,
-  decoder: QueryTokenPairResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryTokenPairRequest.encode,
+  decode: QueryTokenPairResponse.decode,
+  service: "evmos.erc20.v1.TokenPair",
   method: "TokenPair",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetTokenPair = buildUseQuery<QueryTokenPairRequest, QueryTokenPa
   queryKeyPrefix: "TokenPairQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "evmos.erc20.v1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

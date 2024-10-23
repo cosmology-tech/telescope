@@ -4,9 +4,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, QueryGrantsResponseSDKType, QueryGranterGrantsRequest, QueryGranterGrantsRequestSDKType, QueryGranterGrantsResponse, QueryGranterGrantsResponseSDKType, QueryGranteeGrantsRequest, QueryGranteeGrantsRequestSDKType, QueryGranteeGrantsResponse, QueryGranteeGrantsResponseSDKType } from "./query";
 export const createGetGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
-  encoder: QueryGrantsRequest.encode,
-  decoder: QueryGrantsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryGrantsRequest.encode,
+  decode: QueryGrantsResponse.decode,
+  service: "cosmos.authz.v1beta1.Grants",
   method: "Grants",
   getRpcInstance: getRpcInstance
 });
@@ -15,9 +15,9 @@ export const useGetGrants = buildUseQuery<QueryGrantsRequest, QueryGrantsRespons
   queryKeyPrefix: "GrantsQuery"
 });
 export const createGetGranterGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
-  encoder: QueryGranterGrantsRequest.encode,
-  decoder: QueryGranterGrantsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryGranterGrantsRequest.encode,
+  decode: QueryGranterGrantsResponse.decode,
+  service: "cosmos.authz.v1beta1.GranterGrants",
   method: "GranterGrants",
   getRpcInstance: getRpcInstance
 });
@@ -26,9 +26,9 @@ export const useGetGranterGrants = buildUseQuery<QueryGranterGrantsRequest, Quer
   queryKeyPrefix: "GranterGrantsQuery"
 });
 export const createGetGranteeGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
-  encoder: QueryGranteeGrantsRequest.encode,
-  decoder: QueryGranteeGrantsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryGranteeGrantsRequest.encode,
+  decode: QueryGranteeGrantsResponse.decode,
+  service: "cosmos.authz.v1beta1.GranteeGrants",
   method: "GranteeGrants",
   getRpcInstance: getRpcInstance
 });

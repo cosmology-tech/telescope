@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryChannelRequest, QueryChannelResponse, QueryChannelsRequest, QueryChannelsResponse, QueryConnectionChannelsRequest, QueryConnectionChannelsResponse, QueryChannelClientStateRequest, QueryChannelClientStateResponse, QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse, QueryPacketCommitmentRequest, QueryPacketCommitmentResponse, QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse, QueryPacketReceiptRequest, QueryPacketReceiptResponse, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse, QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse } from "./query";
 export const createGetChannel = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelRequest, QueryChannelResponse>({
-  encoder: QueryChannelRequest.encode,
-  decoder: QueryChannelResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryChannelRequest.encode,
+  decode: QueryChannelResponse.decode,
+  service: "ibc.core.channel.v1.Channel",
   method: "Channel",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetChannel = buildUseQuery<QueryChannelRequest, QueryChannelResp
   queryKeyPrefix: "ChannelQuery"
 });
 export const createGetChannels = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelsRequest, QueryChannelsResponse>({
-  encoder: QueryChannelsRequest.encode,
-  decoder: QueryChannelsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryChannelsRequest.encode,
+  decode: QueryChannelsResponse.decode,
+  service: "ibc.core.channel.v1.Channels",
   method: "Channels",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetChannels = buildUseQuery<QueryChannelsRequest, QueryChannelsR
   queryKeyPrefix: "ChannelsQuery"
 });
 export const createGetConnectionChannels = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionChannelsRequest, QueryConnectionChannelsResponse>({
-  encoder: QueryConnectionChannelsRequest.encode,
-  decoder: QueryConnectionChannelsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConnectionChannelsRequest.encode,
+  decode: QueryConnectionChannelsResponse.decode,
+  service: "ibc.core.channel.v1.ConnectionChannels",
   method: "ConnectionChannels",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetConnectionChannels = buildUseQuery<QueryConnectionChannelsReq
   queryKeyPrefix: "ConnectionChannelsQuery"
 });
 export const createGetChannelClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelClientStateRequest, QueryChannelClientStateResponse>({
-  encoder: QueryChannelClientStateRequest.encode,
-  decoder: QueryChannelClientStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryChannelClientStateRequest.encode,
+  decode: QueryChannelClientStateResponse.decode,
+  service: "ibc.core.channel.v1.ChannelClientState",
   method: "ChannelClientState",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetChannelClientState = buildUseQuery<QueryChannelClientStateReq
   queryKeyPrefix: "ChannelClientStateQuery"
 });
 export const createGetChannelConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse>({
-  encoder: QueryChannelConsensusStateRequest.encode,
-  decoder: QueryChannelConsensusStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryChannelConsensusStateRequest.encode,
+  decode: QueryChannelConsensusStateResponse.decode,
+  service: "ibc.core.channel.v1.ChannelConsensusState",
   method: "ChannelConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -57,9 +57,9 @@ export const useGetChannelConsensusState = buildUseQuery<QueryChannelConsensusSt
   queryKeyPrefix: "ChannelConsensusStateQuery"
 });
 export const createGetPacketCommitment = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketCommitmentRequest, QueryPacketCommitmentResponse>({
-  encoder: QueryPacketCommitmentRequest.encode,
-  decoder: QueryPacketCommitmentResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPacketCommitmentRequest.encode,
+  decode: QueryPacketCommitmentResponse.decode,
+  service: "ibc.core.channel.v1.PacketCommitment",
   method: "PacketCommitment",
   getRpcInstance: getRpcInstance
 });
@@ -68,9 +68,9 @@ export const useGetPacketCommitment = buildUseQuery<QueryPacketCommitmentRequest
   queryKeyPrefix: "PacketCommitmentQuery"
 });
 export const createGetPacketCommitments = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse>({
-  encoder: QueryPacketCommitmentsRequest.encode,
-  decoder: QueryPacketCommitmentsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPacketCommitmentsRequest.encode,
+  decode: QueryPacketCommitmentsResponse.decode,
+  service: "ibc.core.channel.v1.PacketCommitments",
   method: "PacketCommitments",
   getRpcInstance: getRpcInstance
 });
@@ -79,9 +79,9 @@ export const useGetPacketCommitments = buildUseQuery<QueryPacketCommitmentsReque
   queryKeyPrefix: "PacketCommitmentsQuery"
 });
 export const createGetPacketReceipt = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketReceiptRequest, QueryPacketReceiptResponse>({
-  encoder: QueryPacketReceiptRequest.encode,
-  decoder: QueryPacketReceiptResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPacketReceiptRequest.encode,
+  decode: QueryPacketReceiptResponse.decode,
+  service: "ibc.core.channel.v1.PacketReceipt",
   method: "PacketReceipt",
   getRpcInstance: getRpcInstance
 });
@@ -90,9 +90,9 @@ export const useGetPacketReceipt = buildUseQuery<QueryPacketReceiptRequest, Quer
   queryKeyPrefix: "PacketReceiptQuery"
 });
 export const createGetPacketAcknowledgement = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse>({
-  encoder: QueryPacketAcknowledgementRequest.encode,
-  decoder: QueryPacketAcknowledgementResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPacketAcknowledgementRequest.encode,
+  decode: QueryPacketAcknowledgementResponse.decode,
+  service: "ibc.core.channel.v1.PacketAcknowledgement",
   method: "PacketAcknowledgement",
   getRpcInstance: getRpcInstance
 });
@@ -101,9 +101,9 @@ export const useGetPacketAcknowledgement = buildUseQuery<QueryPacketAcknowledgem
   queryKeyPrefix: "PacketAcknowledgementQuery"
 });
 export const createGetPacketAcknowledgements = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse>({
-  encoder: QueryPacketAcknowledgementsRequest.encode,
-  decoder: QueryPacketAcknowledgementsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPacketAcknowledgementsRequest.encode,
+  decode: QueryPacketAcknowledgementsResponse.decode,
+  service: "ibc.core.channel.v1.PacketAcknowledgements",
   method: "PacketAcknowledgements",
   getRpcInstance: getRpcInstance
 });
@@ -112,9 +112,9 @@ export const useGetPacketAcknowledgements = buildUseQuery<QueryPacketAcknowledge
   queryKeyPrefix: "PacketAcknowledgementsQuery"
 });
 export const createGetUnreceivedPackets = (getRpcInstance: RpcResolver) => buildQuery<QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse>({
-  encoder: QueryUnreceivedPacketsRequest.encode,
-  decoder: QueryUnreceivedPacketsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryUnreceivedPacketsRequest.encode,
+  decode: QueryUnreceivedPacketsResponse.decode,
+  service: "ibc.core.channel.v1.UnreceivedPackets",
   method: "UnreceivedPackets",
   getRpcInstance: getRpcInstance
 });
@@ -123,9 +123,9 @@ export const useGetUnreceivedPackets = buildUseQuery<QueryUnreceivedPacketsReque
   queryKeyPrefix: "UnreceivedPacketsQuery"
 });
 export const createGetUnreceivedAcks = (getRpcInstance: RpcResolver) => buildQuery<QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse>({
-  encoder: QueryUnreceivedAcksRequest.encode,
-  decoder: QueryUnreceivedAcksResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryUnreceivedAcksRequest.encode,
+  decode: QueryUnreceivedAcksResponse.decode,
+  service: "ibc.core.channel.v1.UnreceivedAcks",
   method: "UnreceivedAcks",
   getRpcInstance: getRpcInstance
 });
@@ -134,9 +134,9 @@ export const useGetUnreceivedAcks = buildUseQuery<QueryUnreceivedAcksRequest, Qu
   queryKeyPrefix: "UnreceivedAcksQuery"
 });
 export const createGetNextSequenceReceive = (getRpcInstance: RpcResolver) => buildQuery<QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse>({
-  encoder: QueryNextSequenceReceiveRequest.encode,
-  decoder: QueryNextSequenceReceiveResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryNextSequenceReceiveRequest.encode,
+  decode: QueryNextSequenceReceiveResponse.decode,
+  service: "ibc.core.channel.v1.NextSequenceReceive",
   method: "NextSequenceReceive",
   getRpcInstance: getRpcInstance
 });

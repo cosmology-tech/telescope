@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryAppVersionRequest, QueryAppVersionResponse } from "./query";
 export const createGetAppVersion = (getRpcInstance: RpcResolver) => buildQuery<QueryAppVersionRequest, QueryAppVersionResponse>({
-  encoder: QueryAppVersionRequest.encode,
-  decoder: QueryAppVersionResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAppVersionRequest.encode,
+  decode: QueryAppVersionResponse.decode,
+  service: "ibc.core.port.v1.AppVersion",
   method: "AppVersion",
   getRpcInstance: getRpcInstance
 });

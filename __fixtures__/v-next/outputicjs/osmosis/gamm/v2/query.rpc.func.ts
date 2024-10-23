@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QuerySpotPriceRequest, QuerySpotPriceResponse } from "./query";
 export const createGetSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
-  encoder: QuerySpotPriceRequest.encode,
-  decoder: QuerySpotPriceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QuerySpotPriceRequest.encode,
+  decode: QuerySpotPriceResponse.decode,
+  service: "osmosis.gamm.v2.SpotPrice",
   method: "SpotPrice",
   getRpcInstance: getRpcInstance
 });

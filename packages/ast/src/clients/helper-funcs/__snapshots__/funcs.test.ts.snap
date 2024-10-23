@@ -17,9 +17,9 @@ exports[`msg funcs works 2`] = `
 
 exports[`query funcs works 1`] = `
 "export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
-  encoder: QueryBalanceRequest.encode,
-  decoder: QueryBalanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryBalanceRequest.encode,
+  decode: QueryBalanceResponse.decode,
+  service: "cosmos.bank.v1beta1.Balance",
   method: "Balance",
   getRpcInstance: getRpcInstance
 });"

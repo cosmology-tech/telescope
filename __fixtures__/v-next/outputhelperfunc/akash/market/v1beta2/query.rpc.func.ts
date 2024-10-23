@@ -7,9 +7,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, QueryOrdersResponseSDKType, QueryOrderRequest, QueryOrderRequestSDKType, QueryOrderResponse, QueryOrderResponseSDKType, QueryBidsRequest, QueryBidsRequestSDKType, QueryBidsResponse, QueryBidsResponseSDKType, QueryBidRequest, QueryBidRequestSDKType, QueryBidResponse, QueryBidResponseSDKType, QueryLeasesRequest, QueryLeasesRequestSDKType, QueryLeasesResponse, QueryLeasesResponseSDKType, QueryLeaseRequest, QueryLeaseRequestSDKType, QueryLeaseResponse, QueryLeaseResponseSDKType } from "./query";
 export const createGetOrders = (getRpcInstance: RpcResolver) => buildQuery<QueryOrdersRequest, QueryOrdersResponse>({
-  encoder: QueryOrdersRequest.encode,
-  decoder: QueryOrdersResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryOrdersRequest.encode,
+  decode: QueryOrdersResponse.decode,
+  service: "akash.market.v1beta2.Orders",
   method: "Orders",
   getRpcInstance: getRpcInstance
 });
@@ -18,9 +18,9 @@ export const useGetOrders = buildUseQuery<QueryOrdersRequest, QueryOrdersRespons
   queryKeyPrefix: "OrdersQuery"
 });
 export const createGetOrder = (getRpcInstance: RpcResolver) => buildQuery<QueryOrderRequest, QueryOrderResponse>({
-  encoder: QueryOrderRequest.encode,
-  decoder: QueryOrderResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryOrderRequest.encode,
+  decode: QueryOrderResponse.decode,
+  service: "akash.market.v1beta2.Order",
   method: "Order",
   getRpcInstance: getRpcInstance
 });
@@ -29,9 +29,9 @@ export const useGetOrder = buildUseQuery<QueryOrderRequest, QueryOrderResponse>(
   queryKeyPrefix: "OrderQuery"
 });
 export const createGetBids = (getRpcInstance: RpcResolver) => buildQuery<QueryBidsRequest, QueryBidsResponse>({
-  encoder: QueryBidsRequest.encode,
-  decoder: QueryBidsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryBidsRequest.encode,
+  decode: QueryBidsResponse.decode,
+  service: "akash.market.v1beta2.Bids",
   method: "Bids",
   getRpcInstance: getRpcInstance
 });
@@ -40,9 +40,9 @@ export const useGetBids = buildUseQuery<QueryBidsRequest, QueryBidsResponse>({
   queryKeyPrefix: "BidsQuery"
 });
 export const createGetBid = (getRpcInstance: RpcResolver) => buildQuery<QueryBidRequest, QueryBidResponse>({
-  encoder: QueryBidRequest.encode,
-  decoder: QueryBidResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryBidRequest.encode,
+  decode: QueryBidResponse.decode,
+  service: "akash.market.v1beta2.Bid",
   method: "Bid",
   getRpcInstance: getRpcInstance
 });
@@ -51,9 +51,9 @@ export const useGetBid = buildUseQuery<QueryBidRequest, QueryBidResponse>({
   queryKeyPrefix: "BidQuery"
 });
 export const createGetLeases = (getRpcInstance: RpcResolver) => buildQuery<QueryLeasesRequest, QueryLeasesResponse>({
-  encoder: QueryLeasesRequest.encode,
-  decoder: QueryLeasesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryLeasesRequest.encode,
+  decode: QueryLeasesResponse.decode,
+  service: "akash.market.v1beta2.Leases",
   method: "Leases",
   getRpcInstance: getRpcInstance
 });
@@ -62,9 +62,9 @@ export const useGetLeases = buildUseQuery<QueryLeasesRequest, QueryLeasesRespons
   queryKeyPrefix: "LeasesQuery"
 });
 export const createGetLease = (getRpcInstance: RpcResolver) => buildQuery<QueryLeaseRequest, QueryLeaseResponse>({
-  encoder: QueryLeaseRequest.encode,
-  decoder: QueryLeaseResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryLeaseRequest.encode,
+  decode: QueryLeaseResponse.decode,
+  service: "akash.market.v1beta2.Lease",
   method: "Lease",
   getRpcInstance: getRpcInstance
 });

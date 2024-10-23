@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryDeploymentsRequest, QueryDeploymentsResponse, QueryDeploymentRequest, QueryDeploymentResponse, QueryGroupRequest, QueryGroupResponse } from "./query";
 export const createGetDeployments = (getRpcInstance: RpcResolver) => buildQuery<QueryDeploymentsRequest, QueryDeploymentsResponse>({
-  encoder: QueryDeploymentsRequest.encode,
-  decoder: QueryDeploymentsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDeploymentsRequest.encode,
+  decode: QueryDeploymentsResponse.decode,
+  service: "akash.deployment.v1beta1.Deployments",
   method: "Deployments",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetDeployments = buildUseQuery<QueryDeploymentsRequest, QueryDep
   queryKeyPrefix: "DeploymentsQuery"
 });
 export const createGetDeployment = (getRpcInstance: RpcResolver) => buildQuery<QueryDeploymentRequest, QueryDeploymentResponse>({
-  encoder: QueryDeploymentRequest.encode,
-  decoder: QueryDeploymentResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDeploymentRequest.encode,
+  decode: QueryDeploymentResponse.decode,
+  service: "akash.deployment.v1beta1.Deployment",
   method: "Deployment",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetDeployment = buildUseQuery<QueryDeploymentRequest, QueryDeplo
   queryKeyPrefix: "DeploymentQuery"
 });
 export const createGetGroup = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupRequest, QueryGroupResponse>({
-  encoder: QueryGroupRequest.encode,
-  decoder: QueryGroupResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryGroupRequest.encode,
+  decode: QueryGroupResponse.decode,
+  service: "akash.deployment.v1beta1.Group",
   method: "Group",
   getRpcInstance: getRpcInstance
 });

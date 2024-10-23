@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryBalancesRequest, QueryBalancesResponse } from "./query";
 export const createGetBalances = (getRpcInstance: RpcResolver) => buildQuery<QueryBalancesRequest, QueryBalancesResponse>({
-  encoder: QueryBalancesRequest.encode,
-  decoder: QueryBalancesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryBalancesRequest.encode,
+  decode: QueryBalancesResponse.decode,
+  service: "evmos.vesting.v1.Balances",
   method: "Balances",
   getRpcInstance: getRpcInstance
 });

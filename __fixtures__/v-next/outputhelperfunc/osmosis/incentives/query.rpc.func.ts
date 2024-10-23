@@ -6,9 +6,9 @@ import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, ModuleToDistributeCoinsResponse, ModuleToDistributeCoinsResponseSDKType, GaugeByIDRequest, GaugeByIDRequestSDKType, GaugeByIDResponse, GaugeByIDResponseSDKType, GaugesRequest, GaugesRequestSDKType, GaugesResponse, GaugesResponseSDKType, ActiveGaugesRequest, ActiveGaugesRequestSDKType, ActiveGaugesResponse, ActiveGaugesResponseSDKType, ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomRequestSDKType, ActiveGaugesPerDenomResponse, ActiveGaugesPerDenomResponseSDKType, UpcomingGaugesRequest, UpcomingGaugesRequestSDKType, UpcomingGaugesResponse, UpcomingGaugesResponseSDKType, UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomRequestSDKType, UpcomingGaugesPerDenomResponse, UpcomingGaugesPerDenomResponseSDKType, RewardsEstRequest, RewardsEstRequestSDKType, RewardsEstResponse, RewardsEstResponseSDKType, QueryLockableDurationsRequest, QueryLockableDurationsRequestSDKType, QueryLockableDurationsResponse, QueryLockableDurationsResponseSDKType } from "./query";
 export const createGetModuleToDistributeCoins = (getRpcInstance: RpcResolver) => buildQuery<ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse>({
-  encoder: ModuleToDistributeCoinsRequest.encode,
-  decoder: ModuleToDistributeCoinsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ModuleToDistributeCoinsRequest.encode,
+  decode: ModuleToDistributeCoinsResponse.decode,
+  service: "osmosis.incentives.ModuleToDistributeCoins",
   method: "ModuleToDistributeCoins",
   getRpcInstance: getRpcInstance
 });
@@ -17,9 +17,9 @@ export const useGetModuleToDistributeCoins = buildUseQuery<ModuleToDistributeCoi
   queryKeyPrefix: "ModuleToDistributeCoinsQuery"
 });
 export const createGetGaugeByID = (getRpcInstance: RpcResolver) => buildQuery<GaugeByIDRequest, GaugeByIDResponse>({
-  encoder: GaugeByIDRequest.encode,
-  decoder: GaugeByIDResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GaugeByIDRequest.encode,
+  decode: GaugeByIDResponse.decode,
+  service: "osmosis.incentives.GaugeByID",
   method: "GaugeByID",
   getRpcInstance: getRpcInstance
 });
@@ -28,9 +28,9 @@ export const useGetGaugeByID = buildUseQuery<GaugeByIDRequest, GaugeByIDResponse
   queryKeyPrefix: "GaugeByIDQuery"
 });
 export const createGetGauges = (getRpcInstance: RpcResolver) => buildQuery<GaugesRequest, GaugesResponse>({
-  encoder: GaugesRequest.encode,
-  decoder: GaugesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GaugesRequest.encode,
+  decode: GaugesResponse.decode,
+  service: "osmosis.incentives.Gauges",
   method: "Gauges",
   getRpcInstance: getRpcInstance
 });
@@ -39,9 +39,9 @@ export const useGetGauges = buildUseQuery<GaugesRequest, GaugesResponse>({
   queryKeyPrefix: "GaugesQuery"
 });
 export const createGetActiveGauges = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesRequest, ActiveGaugesResponse>({
-  encoder: ActiveGaugesRequest.encode,
-  decoder: ActiveGaugesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ActiveGaugesRequest.encode,
+  decode: ActiveGaugesResponse.decode,
+  service: "osmosis.incentives.ActiveGauges",
   method: "ActiveGauges",
   getRpcInstance: getRpcInstance
 });
@@ -50,9 +50,9 @@ export const useGetActiveGauges = buildUseQuery<ActiveGaugesRequest, ActiveGauge
   queryKeyPrefix: "ActiveGaugesQuery"
 });
 export const createGetActiveGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse>({
-  encoder: ActiveGaugesPerDenomRequest.encode,
-  decoder: ActiveGaugesPerDenomResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ActiveGaugesPerDenomRequest.encode,
+  decode: ActiveGaugesPerDenomResponse.decode,
+  service: "osmosis.incentives.ActiveGaugesPerDenom",
   method: "ActiveGaugesPerDenom",
   getRpcInstance: getRpcInstance
 });
@@ -61,9 +61,9 @@ export const useGetActiveGaugesPerDenom = buildUseQuery<ActiveGaugesPerDenomRequ
   queryKeyPrefix: "ActiveGaugesPerDenomQuery"
 });
 export const createGetUpcomingGauges = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesRequest, UpcomingGaugesResponse>({
-  encoder: UpcomingGaugesRequest.encode,
-  decoder: UpcomingGaugesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: UpcomingGaugesRequest.encode,
+  decode: UpcomingGaugesResponse.decode,
+  service: "osmosis.incentives.UpcomingGauges",
   method: "UpcomingGauges",
   getRpcInstance: getRpcInstance
 });
@@ -72,9 +72,9 @@ export const useGetUpcomingGauges = buildUseQuery<UpcomingGaugesRequest, Upcomin
   queryKeyPrefix: "UpcomingGaugesQuery"
 });
 export const createGetUpcomingGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse>({
-  encoder: UpcomingGaugesPerDenomRequest.encode,
-  decoder: UpcomingGaugesPerDenomResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: UpcomingGaugesPerDenomRequest.encode,
+  decode: UpcomingGaugesPerDenomResponse.decode,
+  service: "osmosis.incentives.UpcomingGaugesPerDenom",
   method: "UpcomingGaugesPerDenom",
   getRpcInstance: getRpcInstance
 });
@@ -83,9 +83,9 @@ export const useGetUpcomingGaugesPerDenom = buildUseQuery<UpcomingGaugesPerDenom
   queryKeyPrefix: "UpcomingGaugesPerDenomQuery"
 });
 export const createGetRewardsEst = (getRpcInstance: RpcResolver) => buildQuery<RewardsEstRequest, RewardsEstResponse>({
-  encoder: RewardsEstRequest.encode,
-  decoder: RewardsEstResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RewardsEstRequest.encode,
+  decode: RewardsEstResponse.decode,
+  service: "osmosis.incentives.RewardsEst",
   method: "RewardsEst",
   getRpcInstance: getRpcInstance
 });
@@ -94,9 +94,9 @@ export const useGetRewardsEst = buildUseQuery<RewardsEstRequest, RewardsEstRespo
   queryKeyPrefix: "RewardsEstQuery"
 });
 export const createGetLockableDurations = (getRpcInstance: RpcResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
-  encoder: QueryLockableDurationsRequest.encode,
-  decoder: QueryLockableDurationsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryLockableDurationsRequest.encode,
+  decode: QueryLockableDurationsResponse.decode,
+  service: "osmosis.incentives.LockableDurations",
   method: "LockableDurations",
   getRpcInstance: getRpcInstance
 });

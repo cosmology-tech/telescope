@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { ParamsRequest, ParamsResponse, ArithmeticTwapRequest, ArithmeticTwapResponse, ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse } from "./query";
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<ParamsRequest, ParamsResponse>({
-  encoder: ParamsRequest.encode,
-  decoder: ParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ParamsRequest.encode,
+  decode: ParamsResponse.decode,
+  service: "osmosis.twap.v1beta1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetParams = buildUseQuery<ParamsRequest, ParamsResponse>({
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetArithmeticTwap = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapRequest, ArithmeticTwapResponse>({
-  encoder: ArithmeticTwapRequest.encode,
-  decoder: ArithmeticTwapResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ArithmeticTwapRequest.encode,
+  decode: ArithmeticTwapResponse.decode,
+  service: "osmosis.twap.v1beta1.ArithmeticTwap",
   method: "ArithmeticTwap",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetArithmeticTwap = buildUseQuery<ArithmeticTwapRequest, Arithme
   queryKeyPrefix: "ArithmeticTwapQuery"
 });
 export const createGetArithmeticTwapToNow = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse>({
-  encoder: ArithmeticTwapToNowRequest.encode,
-  decoder: ArithmeticTwapToNowResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: ArithmeticTwapToNowRequest.encode,
+  decode: ArithmeticTwapToNowResponse.decode,
+  service: "osmosis.twap.v1beta1.ArithmeticTwapToNow",
   method: "ArithmeticTwapToNow",
   getRpcInstance: getRpcInstance
 });

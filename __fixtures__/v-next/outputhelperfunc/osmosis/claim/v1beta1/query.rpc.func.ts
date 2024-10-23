@@ -5,9 +5,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceRequestSDKType, QueryModuleAccountBalanceResponse, QueryModuleAccountBalanceResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimRecordRequest, QueryClaimRecordRequestSDKType, QueryClaimRecordResponse, QueryClaimRecordResponseSDKType, QueryClaimableForActionRequest, QueryClaimableForActionRequestSDKType, QueryClaimableForActionResponse, QueryClaimableForActionResponseSDKType, QueryTotalClaimableRequest, QueryTotalClaimableRequestSDKType, QueryTotalClaimableResponse, QueryTotalClaimableResponseSDKType } from "./query";
 export const createGetModuleAccountBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse>({
-  encoder: QueryModuleAccountBalanceRequest.encode,
-  decoder: QueryModuleAccountBalanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryModuleAccountBalanceRequest.encode,
+  decode: QueryModuleAccountBalanceResponse.decode,
+  service: "osmosis.claim.v1beta1.ModuleAccountBalance",
   method: "ModuleAccountBalance",
   getRpcInstance: getRpcInstance
 });
@@ -16,9 +16,9 @@ export const useGetModuleAccountBalance = buildUseQuery<QueryModuleAccountBalanc
   queryKeyPrefix: "ModuleAccountBalanceQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "osmosis.claim.v1beta1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -27,9 +27,9 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetClaimRecord = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimRecordRequest, QueryClaimRecordResponse>({
-  encoder: QueryClaimRecordRequest.encode,
-  decoder: QueryClaimRecordResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClaimRecordRequest.encode,
+  decode: QueryClaimRecordResponse.decode,
+  service: "osmosis.claim.v1beta1.ClaimRecord",
   method: "ClaimRecord",
   getRpcInstance: getRpcInstance
 });
@@ -38,9 +38,9 @@ export const useGetClaimRecord = buildUseQuery<QueryClaimRecordRequest, QueryCla
   queryKeyPrefix: "ClaimRecordQuery"
 });
 export const createGetClaimableForAction = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimableForActionRequest, QueryClaimableForActionResponse>({
-  encoder: QueryClaimableForActionRequest.encode,
-  decoder: QueryClaimableForActionResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClaimableForActionRequest.encode,
+  decode: QueryClaimableForActionResponse.decode,
+  service: "osmosis.claim.v1beta1.ClaimableForAction",
   method: "ClaimableForAction",
   getRpcInstance: getRpcInstance
 });
@@ -49,9 +49,9 @@ export const useGetClaimableForAction = buildUseQuery<QueryClaimableForActionReq
   queryKeyPrefix: "ClaimableForActionQuery"
 });
 export const createGetTotalClaimable = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalClaimableRequest, QueryTotalClaimableResponse>({
-  encoder: QueryTotalClaimableRequest.encode,
-  decoder: QueryTotalClaimableResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryTotalClaimableRequest.encode,
+  decode: QueryTotalClaimableResponse.decode,
+  service: "osmosis.claim.v1beta1.TotalClaimable",
   method: "TotalClaimable",
   getRpcInstance: getRpcInstance
 });

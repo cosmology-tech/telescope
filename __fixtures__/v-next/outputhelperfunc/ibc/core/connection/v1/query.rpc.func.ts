@@ -6,9 +6,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryConnectionRequest, QueryConnectionRequestSDKType, QueryConnectionResponse, QueryConnectionResponseSDKType, QueryConnectionsRequest, QueryConnectionsRequestSDKType, QueryConnectionsResponse, QueryConnectionsResponseSDKType, QueryClientConnectionsRequest, QueryClientConnectionsRequestSDKType, QueryClientConnectionsResponse, QueryClientConnectionsResponseSDKType, QueryConnectionClientStateRequest, QueryConnectionClientStateRequestSDKType, QueryConnectionClientStateResponse, QueryConnectionClientStateResponseSDKType, QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateRequestSDKType, QueryConnectionConsensusStateResponse, QueryConnectionConsensusStateResponseSDKType } from "./query";
 export const createGetConnection = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionRequest, QueryConnectionResponse>({
-  encoder: QueryConnectionRequest.encode,
-  decoder: QueryConnectionResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConnectionRequest.encode,
+  decode: QueryConnectionResponse.decode,
+  service: "ibc.core.connection.v1.Connection",
   method: "Connection",
   getRpcInstance: getRpcInstance
 });
@@ -17,9 +17,9 @@ export const useGetConnection = buildUseQuery<QueryConnectionRequest, QueryConne
   queryKeyPrefix: "ConnectionQuery"
 });
 export const createGetConnections = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionsRequest, QueryConnectionsResponse>({
-  encoder: QueryConnectionsRequest.encode,
-  decoder: QueryConnectionsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConnectionsRequest.encode,
+  decode: QueryConnectionsResponse.decode,
+  service: "ibc.core.connection.v1.Connections",
   method: "Connections",
   getRpcInstance: getRpcInstance
 });
@@ -28,9 +28,9 @@ export const useGetConnections = buildUseQuery<QueryConnectionsRequest, QueryCon
   queryKeyPrefix: "ConnectionsQuery"
 });
 export const createGetClientConnections = (getRpcInstance: RpcResolver) => buildQuery<QueryClientConnectionsRequest, QueryClientConnectionsResponse>({
-  encoder: QueryClientConnectionsRequest.encode,
-  decoder: QueryClientConnectionsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClientConnectionsRequest.encode,
+  decode: QueryClientConnectionsResponse.decode,
+  service: "ibc.core.connection.v1.ClientConnections",
   method: "ClientConnections",
   getRpcInstance: getRpcInstance
 });
@@ -39,9 +39,9 @@ export const useGetClientConnections = buildUseQuery<QueryClientConnectionsReque
   queryKeyPrefix: "ClientConnectionsQuery"
 });
 export const createGetConnectionClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionClientStateRequest, QueryConnectionClientStateResponse>({
-  encoder: QueryConnectionClientStateRequest.encode,
-  decoder: QueryConnectionClientStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConnectionClientStateRequest.encode,
+  decode: QueryConnectionClientStateResponse.decode,
+  service: "ibc.core.connection.v1.ConnectionClientState",
   method: "ConnectionClientState",
   getRpcInstance: getRpcInstance
 });
@@ -50,9 +50,9 @@ export const useGetConnectionClientState = buildUseQuery<QueryConnectionClientSt
   queryKeyPrefix: "ConnectionClientStateQuery"
 });
 export const createGetConnectionConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse>({
-  encoder: QueryConnectionConsensusStateRequest.encode,
-  decoder: QueryConnectionConsensusStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConnectionConsensusStateRequest.encode,
+  decode: QueryConnectionConsensusStateResponse.decode,
+  service: "ibc.core.connection.v1.ConnectionConsensusState",
   method: "ConnectionConsensusState",
   getRpcInstance: getRpcInstance
 });

@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryCurrentPlanRequest, QueryCurrentPlanResponse, QueryAppliedPlanRequest, QueryAppliedPlanResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse, QueryModuleVersionsRequest, QueryModuleVersionsResponse, QueryAuthorityRequest, QueryAuthorityResponse } from "./query";
 export const createGetCurrentPlan = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentPlanRequest, QueryCurrentPlanResponse>({
-  encoder: QueryCurrentPlanRequest.encode,
-  decoder: QueryCurrentPlanResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryCurrentPlanRequest.encode,
+  decode: QueryCurrentPlanResponse.decode,
+  service: "cosmos.upgrade.v1beta1.CurrentPlan",
   method: "CurrentPlan",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetCurrentPlan = buildUseQuery<QueryCurrentPlanRequest, QueryCur
   queryKeyPrefix: "CurrentPlanQuery"
 });
 export const createGetAppliedPlan = (getRpcInstance: RpcResolver) => buildQuery<QueryAppliedPlanRequest, QueryAppliedPlanResponse>({
-  encoder: QueryAppliedPlanRequest.encode,
-  decoder: QueryAppliedPlanResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAppliedPlanRequest.encode,
+  decode: QueryAppliedPlanResponse.decode,
+  service: "cosmos.upgrade.v1beta1.AppliedPlan",
   method: "AppliedPlan",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetAppliedPlan = buildUseQuery<QueryAppliedPlanRequest, QueryApp
   queryKeyPrefix: "AppliedPlanQuery"
 });
 export const createGetUpgradedConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
-  encoder: QueryUpgradedConsensusStateRequest.encode,
-  decoder: QueryUpgradedConsensusStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryUpgradedConsensusStateRequest.encode,
+  decode: QueryUpgradedConsensusStateResponse.decode,
+  service: "cosmos.upgrade.v1beta1.UpgradedConsensusState",
   method: "UpgradedConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetUpgradedConsensusState = buildUseQuery<QueryUpgradedConsensus
   queryKeyPrefix: "UpgradedConsensusStateQuery"
 });
 export const createGetModuleVersions = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleVersionsRequest, QueryModuleVersionsResponse>({
-  encoder: QueryModuleVersionsRequest.encode,
-  decoder: QueryModuleVersionsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryModuleVersionsRequest.encode,
+  decode: QueryModuleVersionsResponse.decode,
+  service: "cosmos.upgrade.v1beta1.ModuleVersions",
   method: "ModuleVersions",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetModuleVersions = buildUseQuery<QueryModuleVersionsRequest, Qu
   queryKeyPrefix: "ModuleVersionsQuery"
 });
 export const createGetAuthority = (getRpcInstance: RpcResolver) => buildQuery<QueryAuthorityRequest, QueryAuthorityResponse>({
-  encoder: QueryAuthorityRequest.encode,
-  decoder: QueryAuthorityResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAuthorityRequest.encode,
+  decode: QueryAuthorityResponse.decode,
+  service: "cosmos.upgrade.v1beta1.Authority",
   method: "Authority",
   getRpcInstance: getRpcInstance
 });
