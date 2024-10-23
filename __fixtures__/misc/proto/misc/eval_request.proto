@@ -36,6 +36,10 @@ message EvalRequest {
   FeatureSet.Utf8Validation opt = 15 [(gogoproto.jsontag) = "opt"];
 
   TestNest.Graph graph = 16;
+
+  // deprecated option
+  string deprecated = 17 [(gogoproto.moretags) = "yaml:\"deprecated\",deprecated:\"true\""];
+  string false_deprecated = 18 [(gogoproto.moretags) = "yaml:\"false_deprecated\",deprecated:\"false\""];
 }
 
 message AccessConfig {

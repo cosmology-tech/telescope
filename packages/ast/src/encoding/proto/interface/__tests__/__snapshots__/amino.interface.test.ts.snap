@@ -195,6 +195,9 @@ exports[`misc/eval_request EvalRequest 1`] = `
   test_array?: string[];
   opt: FeatureSet_Utf8Validation;
   graph?: TestNest_GraphAmino;
+  /** deprecated option */
+  deprecated?: string;
+  false_deprecated?: string;
 }"
 `;
 

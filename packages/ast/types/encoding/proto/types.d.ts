@@ -91,3 +91,9 @@ export declare const isArrayField: (field: ProtoField) => boolean;
 export declare const isEnumField: (field: ProtoField) => boolean;
 export declare const isMapField: (field: ProtoField) => string;
 export declare const getFieldOptionalityForDefaults: (context: ProtoParseContext | AminoParseContext, field: ProtoField, isOneOf: boolean) => any;
+/**
+ * get deprecated option from string, return true/false as string
+ * @param input
+ * @returns string
+*/
+export declare const getOptionDeprecated: (input: string) => string;
