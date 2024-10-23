@@ -3,9 +3,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySubspacesRequest, QuerySubspacesRequestSDKType, QuerySubspacesResponse, QuerySubspacesResponseSDKType } from "./query";
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "cosmos.params.v1beta1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -14,9 +14,9 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetSubspaces = (getRpcInstance: RpcResolver) => buildQuery<QuerySubspacesRequest, QuerySubspacesResponse>({
-  encoder: QuerySubspacesRequest.encode,
-  decoder: QuerySubspacesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QuerySubspacesRequest.encode,
+  decode: QuerySubspacesResponse.decode,
+  service: "cosmos.params.v1beta1.Subspaces",
   method: "Subspaces",
   getRpcInstance: getRpcInstance
 });

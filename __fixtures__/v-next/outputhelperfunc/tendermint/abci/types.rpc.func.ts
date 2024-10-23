@@ -7,9 +7,9 @@ import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, RequestFlush, RequestFlushSDKType, ResponseFlush, ResponseFlushSDKType, RequestInfo, RequestInfoSDKType, ResponseInfo, ResponseInfoSDKType, RequestSetOption, RequestSetOptionSDKType, ResponseSetOption, ResponseSetOptionSDKType, RequestDeliverTx, RequestDeliverTxSDKType, ResponseDeliverTx, ResponseDeliverTxSDKType, RequestCheckTx, RequestCheckTxSDKType, ResponseCheckTx, ResponseCheckTxSDKType, RequestQuery, RequestQuerySDKType, ResponseQuery, ResponseQuerySDKType, RequestCommit, RequestCommitSDKType, ResponseCommit, ResponseCommitSDKType, RequestInitChain, RequestInitChainSDKType, ResponseInitChain, ResponseInitChainSDKType, RequestBeginBlock, RequestBeginBlockSDKType, ResponseBeginBlock, ResponseBeginBlockSDKType, RequestEndBlock, RequestEndBlockSDKType, ResponseEndBlock, ResponseEndBlockSDKType, RequestListSnapshots, RequestListSnapshotsSDKType, ResponseListSnapshots, ResponseListSnapshotsSDKType, RequestOfferSnapshot, RequestOfferSnapshotSDKType, ResponseOfferSnapshot, ResponseOfferSnapshotSDKType, RequestLoadSnapshotChunk, RequestLoadSnapshotChunkSDKType, ResponseLoadSnapshotChunk, ResponseLoadSnapshotChunkSDKType, RequestApplySnapshotChunk, RequestApplySnapshotChunkSDKType, ResponseApplySnapshotChunk, ResponseApplySnapshotChunkSDKType } from "./types";
 export const createGetEcho = (getRpcInstance: RpcResolver) => buildQuery<RequestEcho, ResponseEcho>({
-  encoder: RequestEcho.encode,
-  decoder: ResponseEcho.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestEcho.encode,
+  decode: ResponseEcho.decode,
+  service: "tendermint.abci.Echo",
   method: "Echo",
   getRpcInstance: getRpcInstance
 });
@@ -18,9 +18,9 @@ export const useGetEcho = buildUseQuery<RequestEcho, ResponseEcho>({
   queryKeyPrefix: "EchoQuery"
 });
 export const createGetFlush = (getRpcInstance: RpcResolver) => buildQuery<RequestFlush, ResponseFlush>({
-  encoder: RequestFlush.encode,
-  decoder: ResponseFlush.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestFlush.encode,
+  decode: ResponseFlush.decode,
+  service: "tendermint.abci.Flush",
   method: "Flush",
   getRpcInstance: getRpcInstance
 });
@@ -29,9 +29,9 @@ export const useGetFlush = buildUseQuery<RequestFlush, ResponseFlush>({
   queryKeyPrefix: "FlushQuery"
 });
 export const createGetInfo = (getRpcInstance: RpcResolver) => buildQuery<RequestInfo, ResponseInfo>({
-  encoder: RequestInfo.encode,
-  decoder: ResponseInfo.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestInfo.encode,
+  decode: ResponseInfo.decode,
+  service: "tendermint.abci.Info",
   method: "Info",
   getRpcInstance: getRpcInstance
 });
@@ -40,9 +40,9 @@ export const useGetInfo = buildUseQuery<RequestInfo, ResponseInfo>({
   queryKeyPrefix: "InfoQuery"
 });
 export const createGetSetOption = (getRpcInstance: RpcResolver) => buildQuery<RequestSetOption, ResponseSetOption>({
-  encoder: RequestSetOption.encode,
-  decoder: ResponseSetOption.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestSetOption.encode,
+  decode: ResponseSetOption.decode,
+  service: "tendermint.abci.SetOption",
   method: "SetOption",
   getRpcInstance: getRpcInstance
 });
@@ -51,9 +51,9 @@ export const useGetSetOption = buildUseQuery<RequestSetOption, ResponseSetOption
   queryKeyPrefix: "SetOptionQuery"
 });
 export const createGetDeliverTx = (getRpcInstance: RpcResolver) => buildQuery<RequestDeliverTx, ResponseDeliverTx>({
-  encoder: RequestDeliverTx.encode,
-  decoder: ResponseDeliverTx.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestDeliverTx.encode,
+  decode: ResponseDeliverTx.decode,
+  service: "tendermint.abci.DeliverTx",
   method: "DeliverTx",
   getRpcInstance: getRpcInstance
 });
@@ -62,9 +62,9 @@ export const useGetDeliverTx = buildUseQuery<RequestDeliverTx, ResponseDeliverTx
   queryKeyPrefix: "DeliverTxQuery"
 });
 export const createGetCheckTx = (getRpcInstance: RpcResolver) => buildQuery<RequestCheckTx, ResponseCheckTx>({
-  encoder: RequestCheckTx.encode,
-  decoder: ResponseCheckTx.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestCheckTx.encode,
+  decode: ResponseCheckTx.decode,
+  service: "tendermint.abci.CheckTx",
   method: "CheckTx",
   getRpcInstance: getRpcInstance
 });
@@ -73,9 +73,9 @@ export const useGetCheckTx = buildUseQuery<RequestCheckTx, ResponseCheckTx>({
   queryKeyPrefix: "CheckTxQuery"
 });
 export const createGetQuery = (getRpcInstance: RpcResolver) => buildQuery<RequestQuery, ResponseQuery>({
-  encoder: RequestQuery.encode,
-  decoder: ResponseQuery.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestQuery.encode,
+  decode: ResponseQuery.decode,
+  service: "tendermint.abci.Query",
   method: "Query",
   getRpcInstance: getRpcInstance
 });
@@ -84,9 +84,9 @@ export const useGetQuery = buildUseQuery<RequestQuery, ResponseQuery>({
   queryKeyPrefix: "QueryQuery"
 });
 export const createGetCommit = (getRpcInstance: RpcResolver) => buildQuery<RequestCommit, ResponseCommit>({
-  encoder: RequestCommit.encode,
-  decoder: ResponseCommit.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestCommit.encode,
+  decode: ResponseCommit.decode,
+  service: "tendermint.abci.Commit",
   method: "Commit",
   getRpcInstance: getRpcInstance
 });
@@ -95,9 +95,9 @@ export const useGetCommit = buildUseQuery<RequestCommit, ResponseCommit>({
   queryKeyPrefix: "CommitQuery"
 });
 export const createGetInitChain = (getRpcInstance: RpcResolver) => buildQuery<RequestInitChain, ResponseInitChain>({
-  encoder: RequestInitChain.encode,
-  decoder: ResponseInitChain.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestInitChain.encode,
+  decode: ResponseInitChain.decode,
+  service: "tendermint.abci.InitChain",
   method: "InitChain",
   getRpcInstance: getRpcInstance
 });
@@ -106,9 +106,9 @@ export const useGetInitChain = buildUseQuery<RequestInitChain, ResponseInitChain
   queryKeyPrefix: "InitChainQuery"
 });
 export const createGetBeginBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestBeginBlock, ResponseBeginBlock>({
-  encoder: RequestBeginBlock.encode,
-  decoder: ResponseBeginBlock.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestBeginBlock.encode,
+  decode: ResponseBeginBlock.decode,
+  service: "tendermint.abci.BeginBlock",
   method: "BeginBlock",
   getRpcInstance: getRpcInstance
 });
@@ -117,9 +117,9 @@ export const useGetBeginBlock = buildUseQuery<RequestBeginBlock, ResponseBeginBl
   queryKeyPrefix: "BeginBlockQuery"
 });
 export const createGetEndBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestEndBlock, ResponseEndBlock>({
-  encoder: RequestEndBlock.encode,
-  decoder: ResponseEndBlock.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestEndBlock.encode,
+  decode: ResponseEndBlock.decode,
+  service: "tendermint.abci.EndBlock",
   method: "EndBlock",
   getRpcInstance: getRpcInstance
 });
@@ -128,9 +128,9 @@ export const useGetEndBlock = buildUseQuery<RequestEndBlock, ResponseEndBlock>({
   queryKeyPrefix: "EndBlockQuery"
 });
 export const createGetListSnapshots = (getRpcInstance: RpcResolver) => buildQuery<RequestListSnapshots, ResponseListSnapshots>({
-  encoder: RequestListSnapshots.encode,
-  decoder: ResponseListSnapshots.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestListSnapshots.encode,
+  decode: ResponseListSnapshots.decode,
+  service: "tendermint.abci.ListSnapshots",
   method: "ListSnapshots",
   getRpcInstance: getRpcInstance
 });
@@ -139,9 +139,9 @@ export const useGetListSnapshots = buildUseQuery<RequestListSnapshots, ResponseL
   queryKeyPrefix: "ListSnapshotsQuery"
 });
 export const createGetOfferSnapshot = (getRpcInstance: RpcResolver) => buildQuery<RequestOfferSnapshot, ResponseOfferSnapshot>({
-  encoder: RequestOfferSnapshot.encode,
-  decoder: ResponseOfferSnapshot.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestOfferSnapshot.encode,
+  decode: ResponseOfferSnapshot.decode,
+  service: "tendermint.abci.OfferSnapshot",
   method: "OfferSnapshot",
   getRpcInstance: getRpcInstance
 });
@@ -150,9 +150,9 @@ export const useGetOfferSnapshot = buildUseQuery<RequestOfferSnapshot, ResponseO
   queryKeyPrefix: "OfferSnapshotQuery"
 });
 export const createGetLoadSnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk>({
-  encoder: RequestLoadSnapshotChunk.encode,
-  decoder: ResponseLoadSnapshotChunk.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestLoadSnapshotChunk.encode,
+  decode: ResponseLoadSnapshotChunk.decode,
+  service: "tendermint.abci.LoadSnapshotChunk",
   method: "LoadSnapshotChunk",
   getRpcInstance: getRpcInstance
 });
@@ -161,9 +161,9 @@ export const useGetLoadSnapshotChunk = buildUseQuery<RequestLoadSnapshotChunk, R
   queryKeyPrefix: "LoadSnapshotChunkQuery"
 });
 export const createGetApplySnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestApplySnapshotChunk, ResponseApplySnapshotChunk>({
-  encoder: RequestApplySnapshotChunk.encode,
-  decoder: ResponseApplySnapshotChunk.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: RequestApplySnapshotChunk.encode,
+  decode: ResponseApplySnapshotChunk.decode,
+  service: "tendermint.abci.ApplySnapshotChunk",
   method: "ApplySnapshotChunk",
   getRpcInstance: getRpcInstance
 });

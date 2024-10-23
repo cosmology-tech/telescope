@@ -5,9 +5,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInfosResponse, QueryDevFeeInfosResponseSDKType, QueryDevFeeInfoRequest, QueryDevFeeInfoRequestSDKType, QueryDevFeeInfoResponse, QueryDevFeeInfoResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerRequestSDKType, QueryDevFeeInfosPerDeployerResponse, QueryDevFeeInfosPerDeployerResponseSDKType } from "./query";
 export const createGetDevFeeInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse>({
-  encoder: QueryDevFeeInfosRequest.encode,
-  decoder: QueryDevFeeInfosResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDevFeeInfosRequest.encode,
+  decode: QueryDevFeeInfosResponse.decode,
+  service: "evmos.fees.v1.DevFeeInfos",
   method: "DevFeeInfos",
   getRpcInstance: getRpcInstance
 });
@@ -16,9 +16,9 @@ export const useGetDevFeeInfos = buildUseQuery<QueryDevFeeInfosRequest, QueryDev
   queryKeyPrefix: "DevFeeInfosQuery"
 });
 export const createGetDevFeeInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfoRequest, QueryDevFeeInfoResponse>({
-  encoder: QueryDevFeeInfoRequest.encode,
-  decoder: QueryDevFeeInfoResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDevFeeInfoRequest.encode,
+  decode: QueryDevFeeInfoResponse.decode,
+  service: "evmos.fees.v1.DevFeeInfo",
   method: "DevFeeInfo",
   getRpcInstance: getRpcInstance
 });
@@ -27,9 +27,9 @@ export const useGetDevFeeInfo = buildUseQuery<QueryDevFeeInfoRequest, QueryDevFe
   queryKeyPrefix: "DevFeeInfoQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "evmos.fees.v1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -38,9 +38,9 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetDevFeeInfosPerDeployer = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse>({
-  encoder: QueryDevFeeInfosPerDeployerRequest.encode,
-  decoder: QueryDevFeeInfosPerDeployerResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDevFeeInfosPerDeployerRequest.encode,
+  decode: QueryDevFeeInfosPerDeployerResponse.decode,
+  service: "evmos.fees.v1.DevFeeInfosPerDeployer",
   method: "DevFeeInfosPerDeployer",
   getRpcInstance: getRpcInstance
 });

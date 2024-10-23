@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
 export const createGetEpochInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
-  encoder: QueryEpochsInfoRequest.encode,
-  decoder: QueryEpochsInfoResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryEpochsInfoRequest.encode,
+  decode: QueryEpochsInfoResponse.decode,
+  service: "osmosis.epochs.v1beta1.EpochInfos",
   method: "EpochInfos",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpoch
   queryKeyPrefix: "EpochInfosQuery"
 });
 export const createGetCurrentEpoch = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
-  encoder: QueryCurrentEpochRequest.encode,
-  decoder: QueryCurrentEpochResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryCurrentEpochRequest.encode,
+  decode: QueryCurrentEpochResponse.decode,
+  service: "osmosis.epochs.v1beta1.CurrentEpoch",
   method: "CurrentEpoch",
   getRpcInstance: getRpcInstance
 });

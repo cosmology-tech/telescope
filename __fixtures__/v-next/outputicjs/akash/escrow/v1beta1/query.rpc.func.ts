@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryAccountsRequest, QueryAccountsResponse, QueryPaymentsRequest, QueryPaymentsResponse } from "./query";
 export const createGetAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
-  encoder: QueryAccountsRequest.encode,
-  decoder: QueryAccountsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAccountsRequest.encode,
+  decode: QueryAccountsResponse.decode,
+  service: "akash.escrow.v1beta1.Accounts",
   method: "Accounts",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetAccounts = buildUseQuery<QueryAccountsRequest, QueryAccountsR
   queryKeyPrefix: "AccountsQuery"
 });
 export const createGetPayments = (getRpcInstance: RpcResolver) => buildQuery<QueryPaymentsRequest, QueryPaymentsResponse>({
-  encoder: QueryPaymentsRequest.encode,
-  decoder: QueryPaymentsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPaymentsRequest.encode,
+  decode: QueryPaymentsResponse.decode,
+  service: "akash.escrow.v1beta1.Payments",
   method: "Payments",
   getRpcInstance: getRpcInstance
 });

@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryCertificatesRequest, QueryCertificatesResponse } from "./query";
 export const createGetCertificates = (getRpcInstance: RpcResolver) => buildQuery<QueryCertificatesRequest, QueryCertificatesResponse>({
-  encoder: QueryCertificatesRequest.encode,
-  decoder: QueryCertificatesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryCertificatesRequest.encode,
+  decode: QueryCertificatesResponse.decode,
+  service: "akash.cert.v1beta2.Certificates",
   method: "Certificates",
   getRpcInstance: getRpcInstance
 });

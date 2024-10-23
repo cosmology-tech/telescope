@@ -5,9 +5,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryClientStateRequest, QueryClientStateRequestSDKType, QueryClientStateResponse, QueryClientStateResponseSDKType, QueryClientStatesRequest, QueryClientStatesRequestSDKType, QueryClientStatesResponse, QueryClientStatesResponseSDKType, QueryConsensusStateRequest, QueryConsensusStateRequestSDKType, QueryConsensusStateResponse, QueryConsensusStateResponseSDKType, QueryConsensusStatesRequest, QueryConsensusStatesRequestSDKType, QueryConsensusStatesResponse, QueryConsensusStatesResponseSDKType, QueryClientStatusRequest, QueryClientStatusRequestSDKType, QueryClientStatusResponse, QueryClientStatusResponseSDKType, QueryClientParamsRequest, QueryClientParamsRequestSDKType, QueryClientParamsResponse, QueryClientParamsResponseSDKType, QueryUpgradedClientStateRequest, QueryUpgradedClientStateRequestSDKType, QueryUpgradedClientStateResponse, QueryUpgradedClientStateResponseSDKType, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateRequestSDKType, QueryUpgradedConsensusStateResponse, QueryUpgradedConsensusStateResponseSDKType } from "./query";
 export const createGetClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
-  encoder: QueryClientStateRequest.encode,
-  decoder: QueryClientStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClientStateRequest.encode,
+  decode: QueryClientStateResponse.decode,
+  service: "ibc.core.client.v1.ClientState",
   method: "ClientState",
   getRpcInstance: getRpcInstance
 });
@@ -16,9 +16,9 @@ export const useGetClientState = buildUseQuery<QueryClientStateRequest, QueryCli
   queryKeyPrefix: "ClientStateQuery"
 });
 export const createGetClientStates = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
-  encoder: QueryClientStatesRequest.encode,
-  decoder: QueryClientStatesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClientStatesRequest.encode,
+  decode: QueryClientStatesResponse.decode,
+  service: "ibc.core.client.v1.ClientStates",
   method: "ClientStates",
   getRpcInstance: getRpcInstance
 });
@@ -27,9 +27,9 @@ export const useGetClientStates = buildUseQuery<QueryClientStatesRequest, QueryC
   queryKeyPrefix: "ClientStatesQuery"
 });
 export const createGetConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
-  encoder: QueryConsensusStateRequest.encode,
-  decoder: QueryConsensusStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConsensusStateRequest.encode,
+  decode: QueryConsensusStateResponse.decode,
+  service: "ibc.core.client.v1.ConsensusState",
   method: "ConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -38,9 +38,9 @@ export const useGetConsensusState = buildUseQuery<QueryConsensusStateRequest, Qu
   queryKeyPrefix: "ConsensusStateQuery"
 });
 export const createGetConsensusStates = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
-  encoder: QueryConsensusStatesRequest.encode,
-  decoder: QueryConsensusStatesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConsensusStatesRequest.encode,
+  decode: QueryConsensusStatesResponse.decode,
+  service: "ibc.core.client.v1.ConsensusStates",
   method: "ConsensusStates",
   getRpcInstance: getRpcInstance
 });
@@ -49,9 +49,9 @@ export const useGetConsensusStates = buildUseQuery<QueryConsensusStatesRequest, 
   queryKeyPrefix: "ConsensusStatesQuery"
 });
 export const createGetClientStatus = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
-  encoder: QueryClientStatusRequest.encode,
-  decoder: QueryClientStatusResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClientStatusRequest.encode,
+  decode: QueryClientStatusResponse.decode,
+  service: "ibc.core.client.v1.ClientStatus",
   method: "ClientStatus",
   getRpcInstance: getRpcInstance
 });
@@ -60,9 +60,9 @@ export const useGetClientStatus = buildUseQuery<QueryClientStatusRequest, QueryC
   queryKeyPrefix: "ClientStatusQuery"
 });
 export const createGetClientParams = (getRpcInstance: RpcResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
-  encoder: QueryClientParamsRequest.encode,
-  decoder: QueryClientParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClientParamsRequest.encode,
+  decode: QueryClientParamsResponse.decode,
+  service: "ibc.core.client.v1.ClientParams",
   method: "ClientParams",
   getRpcInstance: getRpcInstance
 });
@@ -71,9 +71,9 @@ export const useGetClientParams = buildUseQuery<QueryClientParamsRequest, QueryC
   queryKeyPrefix: "ClientParamsQuery"
 });
 export const createGetUpgradedClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
-  encoder: QueryUpgradedClientStateRequest.encode,
-  decoder: QueryUpgradedClientStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryUpgradedClientStateRequest.encode,
+  decode: QueryUpgradedClientStateResponse.decode,
+  service: "ibc.core.client.v1.UpgradedClientState",
   method: "UpgradedClientState",
   getRpcInstance: getRpcInstance
 });
@@ -82,9 +82,9 @@ export const useGetUpgradedClientState = buildUseQuery<QueryUpgradedClientStateR
   queryKeyPrefix: "UpgradedClientStateQuery"
 });
 export const createGetUpgradedConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
-  encoder: QueryUpgradedConsensusStateRequest.encode,
-  decoder: QueryUpgradedConsensusStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryUpgradedConsensusStateRequest.encode,
+  decode: QueryUpgradedConsensusStateResponse.decode,
+  service: "ibc.core.client.v1.UpgradedConsensusState",
   method: "UpgradedConsensusState",
   getRpcInstance: getRpcInstance
 });

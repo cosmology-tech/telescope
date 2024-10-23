@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { GetAuthnDescriptorRequest, GetAuthnDescriptorResponse, GetChainDescriptorRequest, GetChainDescriptorResponse, GetCodecDescriptorRequest, GetCodecDescriptorResponse, GetConfigurationDescriptorRequest, GetConfigurationDescriptorResponse, GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorResponse, GetTxDescriptorRequest, GetTxDescriptorResponse } from "./reflection";
 export const createGetGetAuthnDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetAuthnDescriptorRequest, GetAuthnDescriptorResponse>({
-  encoder: GetAuthnDescriptorRequest.encode,
-  decoder: GetAuthnDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetAuthnDescriptorRequest.encode,
+  decode: GetAuthnDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptor",
   method: "GetAuthnDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetGetAuthnDescriptor = buildUseQuery<GetAuthnDescriptorRequest,
   queryKeyPrefix: "GetAuthnDescriptorQuery"
 });
 export const createGetGetChainDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetChainDescriptorRequest, GetChainDescriptorResponse>({
-  encoder: GetChainDescriptorRequest.encode,
-  decoder: GetChainDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetChainDescriptorRequest.encode,
+  decode: GetChainDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetChainDescriptor",
   method: "GetChainDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetGetChainDescriptor = buildUseQuery<GetChainDescriptorRequest,
   queryKeyPrefix: "GetChainDescriptorQuery"
 });
 export const createGetGetCodecDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetCodecDescriptorRequest, GetCodecDescriptorResponse>({
-  encoder: GetCodecDescriptorRequest.encode,
-  decoder: GetCodecDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetCodecDescriptorRequest.encode,
+  decode: GetCodecDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetCodecDescriptor",
   method: "GetCodecDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetGetCodecDescriptor = buildUseQuery<GetCodecDescriptorRequest,
   queryKeyPrefix: "GetCodecDescriptorQuery"
 });
 export const createGetGetConfigurationDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetConfigurationDescriptorRequest, GetConfigurationDescriptorResponse>({
-  encoder: GetConfigurationDescriptorRequest.encode,
-  decoder: GetConfigurationDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetConfigurationDescriptorRequest.encode,
+  decode: GetConfigurationDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptor",
   method: "GetConfigurationDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetGetConfigurationDescriptor = buildUseQuery<GetConfigurationDe
   queryKeyPrefix: "GetConfigurationDescriptorQuery"
 });
 export const createGetGetQueryServicesDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorResponse>({
-  encoder: GetQueryServicesDescriptorRequest.encode,
-  decoder: GetQueryServicesDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetQueryServicesDescriptorRequest.encode,
+  decode: GetQueryServicesDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptor",
   method: "GetQueryServicesDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -57,9 +57,9 @@ export const useGetGetQueryServicesDescriptor = buildUseQuery<GetQueryServicesDe
   queryKeyPrefix: "GetQueryServicesDescriptorQuery"
 });
 export const createGetGetTxDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetTxDescriptorRequest, GetTxDescriptorResponse>({
-  encoder: GetTxDescriptorRequest.encode,
-  decoder: GetTxDescriptorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetTxDescriptorRequest.encode,
+  decode: GetTxDescriptorResponse.decode,
+  service: "cosmos.base.reflection.v2alpha1.GetTxDescriptor",
   method: "GetTxDescriptor",
   getRpcInstance: getRpcInstance
 });

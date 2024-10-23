@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryParamsRequest, QueryParamsResponse, QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse, QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse } from "./query";
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "osmosis.tokenfactory.v1beta1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetDenomAuthorityMetadata = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse>({
-  encoder: QueryDenomAuthorityMetadataRequest.encode,
-  decoder: QueryDenomAuthorityMetadataResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDenomAuthorityMetadataRequest.encode,
+  decode: QueryDenomAuthorityMetadataResponse.decode,
+  service: "osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
   method: "DenomAuthorityMetadata",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetDenomAuthorityMetadata = buildUseQuery<QueryDenomAuthorityMet
   queryKeyPrefix: "DenomAuthorityMetadataQuery"
 });
 export const createGetDenomsFromCreator = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse>({
-  encoder: QueryDenomsFromCreatorRequest.encode,
-  decoder: QueryDenomsFromCreatorResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryDenomsFromCreatorRequest.encode,
+  decode: QueryDenomsFromCreatorResponse.decode,
+  service: "osmosis.tokenfactory.v1beta1.DenomsFromCreator",
   method: "DenomsFromCreator",
   getRpcInstance: getRpcInstance
 });

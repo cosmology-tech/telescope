@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { GetNodeInfoRequest, GetNodeInfoResponse, GetSyncingRequest, GetSyncingResponse, GetLatestBlockRequest, GetLatestBlockResponse, GetBlockByHeightRequest, GetBlockByHeightResponse, GetLatestValidatorSetRequest, GetLatestValidatorSetResponse, GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse } from "./query";
 export const createGetGetNodeInfo = (getRpcInstance: RpcResolver) => buildQuery<GetNodeInfoRequest, GetNodeInfoResponse>({
-  encoder: GetNodeInfoRequest.encode,
-  decoder: GetNodeInfoResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetNodeInfoRequest.encode,
+  decode: GetNodeInfoResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetNodeInfo",
   method: "GetNodeInfo",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetGetNodeInfo = buildUseQuery<GetNodeInfoRequest, GetNodeInfoRe
   queryKeyPrefix: "GetNodeInfoQuery"
 });
 export const createGetGetSyncing = (getRpcInstance: RpcResolver) => buildQuery<GetSyncingRequest, GetSyncingResponse>({
-  encoder: GetSyncingRequest.encode,
-  decoder: GetSyncingResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetSyncingRequest.encode,
+  decode: GetSyncingResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetSyncing",
   method: "GetSyncing",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetGetSyncing = buildUseQuery<GetSyncingRequest, GetSyncingRespo
   queryKeyPrefix: "GetSyncingQuery"
 });
 export const createGetGetLatestBlock = (getRpcInstance: RpcResolver) => buildQuery<GetLatestBlockRequest, GetLatestBlockResponse>({
-  encoder: GetLatestBlockRequest.encode,
-  decoder: GetLatestBlockResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetLatestBlockRequest.encode,
+  decode: GetLatestBlockResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetLatestBlock",
   method: "GetLatestBlock",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetGetLatestBlock = buildUseQuery<GetLatestBlockRequest, GetLate
   queryKeyPrefix: "GetLatestBlockQuery"
 });
 export const createGetGetBlockByHeight = (getRpcInstance: RpcResolver) => buildQuery<GetBlockByHeightRequest, GetBlockByHeightResponse>({
-  encoder: GetBlockByHeightRequest.encode,
-  decoder: GetBlockByHeightResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetBlockByHeightRequest.encode,
+  decode: GetBlockByHeightResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetBlockByHeight",
   method: "GetBlockByHeight",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetGetBlockByHeight = buildUseQuery<GetBlockByHeightRequest, Get
   queryKeyPrefix: "GetBlockByHeightQuery"
 });
 export const createGetGetLatestValidatorSet = (getRpcInstance: RpcResolver) => buildQuery<GetLatestValidatorSetRequest, GetLatestValidatorSetResponse>({
-  encoder: GetLatestValidatorSetRequest.encode,
-  decoder: GetLatestValidatorSetResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetLatestValidatorSetRequest.encode,
+  decode: GetLatestValidatorSetResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetLatestValidatorSet",
   method: "GetLatestValidatorSet",
   getRpcInstance: getRpcInstance
 });
@@ -57,9 +57,9 @@ export const useGetGetLatestValidatorSet = buildUseQuery<GetLatestValidatorSetRe
   queryKeyPrefix: "GetLatestValidatorSetQuery"
 });
 export const createGetGetValidatorSetByHeight = (getRpcInstance: RpcResolver) => buildQuery<GetValidatorSetByHeightRequest, GetValidatorSetByHeightResponse>({
-  encoder: GetValidatorSetByHeightRequest.encode,
-  decoder: GetValidatorSetByHeightResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetValidatorSetByHeightRequest.encode,
+  decode: GetValidatorSetByHeightResponse.decode,
+  service: "cosmos.base.tendermint.v1beta1.GetValidatorSetByHeight",
   method: "GetValidatorSetByHeight",
   getRpcInstance: getRpcInstance
 });

@@ -6,9 +6,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTotalUnclaimedResponse, QueryTotalUnclaimedResponseSDKType, QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QueryClaimsRecordsRequest, QueryClaimsRecordsRequestSDKType, QueryClaimsRecordsResponse, QueryClaimsRecordsResponseSDKType, QueryClaimsRecordRequest, QueryClaimsRecordRequestSDKType, QueryClaimsRecordResponse, QueryClaimsRecordResponseSDKType } from "./query";
 export const createGetTotalUnclaimed = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse>({
-  encoder: QueryTotalUnclaimedRequest.encode,
-  decoder: QueryTotalUnclaimedResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryTotalUnclaimedRequest.encode,
+  decode: QueryTotalUnclaimedResponse.decode,
+  service: "evmos.claims.v1.TotalUnclaimed",
   method: "TotalUnclaimed",
   getRpcInstance: getRpcInstance
 });
@@ -17,9 +17,9 @@ export const useGetTotalUnclaimed = buildUseQuery<QueryTotalUnclaimedRequest, Qu
   queryKeyPrefix: "TotalUnclaimedQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
-  encoder: QueryParamsRequest.encode,
-  decoder: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryParamsRequest.encode,
+  decode: QueryParamsResponse.decode,
+  service: "evmos.claims.v1.Params",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -28,9 +28,9 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   queryKeyPrefix: "ParamsQuery"
 });
 export const createGetClaimsRecords = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimsRecordsRequest, QueryClaimsRecordsResponse>({
-  encoder: QueryClaimsRecordsRequest.encode,
-  decoder: QueryClaimsRecordsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClaimsRecordsRequest.encode,
+  decode: QueryClaimsRecordsResponse.decode,
+  service: "evmos.claims.v1.ClaimsRecords",
   method: "ClaimsRecords",
   getRpcInstance: getRpcInstance
 });
@@ -39,9 +39,9 @@ export const useGetClaimsRecords = buildUseQuery<QueryClaimsRecordsRequest, Quer
   queryKeyPrefix: "ClaimsRecordsQuery"
 });
 export const createGetClaimsRecord = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimsRecordRequest, QueryClaimsRecordResponse>({
-  encoder: QueryClaimsRecordRequest.encode,
-  decoder: QueryClaimsRecordResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClaimsRecordRequest.encode,
+  decode: QueryClaimsRecordResponse.decode,
+  service: "evmos.claims.v1.ClaimsRecord",
   method: "ClaimsRecord",
   getRpcInstance: getRpcInstance
 });

@@ -3,9 +3,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query";
 export const createGetConfig = (getRpcInstance: RpcResolver) => buildQuery<QueryConfigRequest, QueryConfigResponse>({
-  encoder: QueryConfigRequest.encode,
-  decoder: QueryConfigResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryConfigRequest.encode,
+  decode: QueryConfigResponse.decode,
+  service: "cosmos.app.v1alpha1.Config",
   method: "Config",
   getRpcInstance: getRpcInstance
 });

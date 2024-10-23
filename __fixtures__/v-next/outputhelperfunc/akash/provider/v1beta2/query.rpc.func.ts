@@ -4,9 +4,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryProvidersRequest, QueryProvidersRequestSDKType, QueryProvidersResponse, QueryProvidersResponseSDKType, QueryProviderRequest, QueryProviderRequestSDKType, QueryProviderResponse, QueryProviderResponseSDKType } from "./query";
 export const createGetProviders = (getRpcInstance: RpcResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
-  encoder: QueryProvidersRequest.encode,
-  decoder: QueryProvidersResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryProvidersRequest.encode,
+  decode: QueryProvidersResponse.decode,
+  service: "akash.provider.v1beta2.Providers",
   method: "Providers",
   getRpcInstance: getRpcInstance
 });
@@ -15,9 +15,9 @@ export const useGetProviders = buildUseQuery<QueryProvidersRequest, QueryProvide
   queryKeyPrefix: "ProvidersQuery"
 });
 export const createGetProvider = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
-  encoder: QueryProviderRequest.encode,
-  decoder: QueryProviderResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryProviderRequest.encode,
+  decode: QueryProviderResponse.decode,
+  service: "akash.provider.v1beta2.Provider",
   method: "Provider",
   getRpcInstance: getRpcInstance
 });

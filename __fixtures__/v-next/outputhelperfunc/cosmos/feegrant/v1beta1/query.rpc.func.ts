@@ -4,9 +4,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryAllowanceRequest, QueryAllowanceRequestSDKType, QueryAllowanceResponse, QueryAllowanceResponseSDKType, QueryAllowancesRequest, QueryAllowancesRequestSDKType, QueryAllowancesResponse, QueryAllowancesResponseSDKType, QueryAllowancesByGranterRequest, QueryAllowancesByGranterRequestSDKType, QueryAllowancesByGranterResponse, QueryAllowancesByGranterResponseSDKType } from "./query";
 export const createGetAllowance = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowanceRequest, QueryAllowanceResponse>({
-  encoder: QueryAllowanceRequest.encode,
-  decoder: QueryAllowanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAllowanceRequest.encode,
+  decode: QueryAllowanceResponse.decode,
+  service: "cosmos.feegrant.v1beta1.Allowance",
   method: "Allowance",
   getRpcInstance: getRpcInstance
 });
@@ -15,9 +15,9 @@ export const useGetAllowance = buildUseQuery<QueryAllowanceRequest, QueryAllowan
   queryKeyPrefix: "AllowanceQuery"
 });
 export const createGetAllowances = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowancesRequest, QueryAllowancesResponse>({
-  encoder: QueryAllowancesRequest.encode,
-  decoder: QueryAllowancesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAllowancesRequest.encode,
+  decode: QueryAllowancesResponse.decode,
+  service: "cosmos.feegrant.v1beta1.Allowances",
   method: "Allowances",
   getRpcInstance: getRpcInstance
 });
@@ -26,9 +26,9 @@ export const useGetAllowances = buildUseQuery<QueryAllowancesRequest, QueryAllow
   queryKeyPrefix: "AllowancesQuery"
 });
 export const createGetAllowancesByGranter = (getRpcInstance: RpcResolver) => buildQuery<QueryAllowancesByGranterRequest, QueryAllowancesByGranterResponse>({
-  encoder: QueryAllowancesByGranterRequest.encode,
-  decoder: QueryAllowancesByGranterResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAllowancesByGranterRequest.encode,
+  decode: QueryAllowancesByGranterResponse.decode,
+  service: "cosmos.feegrant.v1beta1.AllowancesByGranter",
   method: "AllowancesByGranter",
   getRpcInstance: getRpcInstance
 });

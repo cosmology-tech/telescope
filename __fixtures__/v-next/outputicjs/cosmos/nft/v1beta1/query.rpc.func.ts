@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryOwnerRequest, QueryOwnerResponse, QuerySupplyRequest, QuerySupplyResponse, QueryNFTsRequest, QueryNFTsResponse, QueryNFTRequest, QueryNFTResponse, QueryClassRequest, QueryClassResponse, QueryClassesRequest, QueryClassesResponse } from "./query";
 export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
-  encoder: QueryBalanceRequest.encode,
-  decoder: QueryBalanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryBalanceRequest.encode,
+  decode: QueryBalanceResponse.decode,
+  service: "cosmos.nft.v1beta1.Balance",
   method: "Balance",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResp
   queryKeyPrefix: "BalanceQuery"
 });
 export const createGetOwner = (getRpcInstance: RpcResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
-  encoder: QueryOwnerRequest.encode,
-  decoder: QueryOwnerResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryOwnerRequest.encode,
+  decode: QueryOwnerResponse.decode,
+  service: "cosmos.nft.v1beta1.Owner",
   method: "Owner",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetOwner = buildUseQuery<QueryOwnerRequest, QueryOwnerResponse>(
   queryKeyPrefix: "OwnerQuery"
 });
 export const createGetSupply = (getRpcInstance: RpcResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
-  encoder: QuerySupplyRequest.encode,
-  decoder: QuerySupplyResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QuerySupplyRequest.encode,
+  decode: QuerySupplyResponse.decode,
+  service: "cosmos.nft.v1beta1.Supply",
   method: "Supply",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetSupply = buildUseQuery<QuerySupplyRequest, QuerySupplyRespons
   queryKeyPrefix: "SupplyQuery"
 });
 export const createGetNFTs = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
-  encoder: QueryNFTsRequest.encode,
-  decoder: QueryNFTsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryNFTsRequest.encode,
+  decode: QueryNFTsResponse.decode,
+  service: "cosmos.nft.v1beta1.NFTs",
   method: "NFTs",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetNFTs = buildUseQuery<QueryNFTsRequest, QueryNFTsResponse>({
   queryKeyPrefix: "NFTsQuery"
 });
 export const createGetNFT = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
-  encoder: QueryNFTRequest.encode,
-  decoder: QueryNFTResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryNFTRequest.encode,
+  decode: QueryNFTResponse.decode,
+  service: "cosmos.nft.v1beta1.NFT",
   method: "NFT",
   getRpcInstance: getRpcInstance
 });
@@ -57,9 +57,9 @@ export const useGetNFT = buildUseQuery<QueryNFTRequest, QueryNFTResponse>({
   queryKeyPrefix: "NFTQuery"
 });
 export const createGetClass = (getRpcInstance: RpcResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
-  encoder: QueryClassRequest.encode,
-  decoder: QueryClassResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClassRequest.encode,
+  decode: QueryClassResponse.decode,
+  service: "cosmos.nft.v1beta1.Class",
   method: "Class",
   getRpcInstance: getRpcInstance
 });
@@ -68,9 +68,9 @@ export const useGetClass = buildUseQuery<QueryClassRequest, QueryClassResponse>(
   queryKeyPrefix: "ClassQuery"
 });
 export const createGetClasses = (getRpcInstance: RpcResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
-  encoder: QueryClassesRequest.encode,
-  decoder: QueryClassesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryClassesRequest.encode,
+  decode: QueryClassesResponse.decode,
+  service: "cosmos.nft.v1beta1.Classes",
   method: "Classes",
   getRpcInstance: getRpcInstance
 });

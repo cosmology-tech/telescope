@@ -4,9 +4,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryContractInfoRequest, QueryContractInfoRequestSDKType, QueryContractInfoResponse, QueryContractInfoResponseSDKType, QueryContractHistoryRequest, QueryContractHistoryRequestSDKType, QueryContractHistoryResponse, QueryContractHistoryResponseSDKType, QueryContractsByCodeRequest, QueryContractsByCodeRequestSDKType, QueryContractsByCodeResponse, QueryContractsByCodeResponseSDKType, QueryAllContractStateRequest, QueryAllContractStateRequestSDKType, QueryAllContractStateResponse, QueryAllContractStateResponseSDKType, QueryRawContractStateRequest, QueryRawContractStateRequestSDKType, QueryRawContractStateResponse, QueryRawContractStateResponseSDKType, QuerySmartContractStateRequest, QuerySmartContractStateRequestSDKType, QuerySmartContractStateResponse, QuerySmartContractStateResponseSDKType, QueryCodeRequest, QueryCodeRequestSDKType, QueryCodeResponse, QueryCodeResponseSDKType, QueryCodesRequest, QueryCodesRequestSDKType, QueryCodesResponse, QueryCodesResponseSDKType, QueryPinnedCodesRequest, QueryPinnedCodesRequestSDKType, QueryPinnedCodesResponse, QueryPinnedCodesResponseSDKType } from "./query";
 export const createGetContractInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryContractInfoRequest, QueryContractInfoResponse>({
-  encoder: QueryContractInfoRequest.encode,
-  decoder: QueryContractInfoResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryContractInfoRequest.encode,
+  decode: QueryContractInfoResponse.decode,
+  service: "cosmwasm.wasm.v1.ContractInfo",
   method: "ContractInfo",
   getRpcInstance: getRpcInstance
 });
@@ -15,9 +15,9 @@ export const useGetContractInfo = buildUseQuery<QueryContractInfoRequest, QueryC
   queryKeyPrefix: "ContractInfoQuery"
 });
 export const createGetContractHistory = (getRpcInstance: RpcResolver) => buildQuery<QueryContractHistoryRequest, QueryContractHistoryResponse>({
-  encoder: QueryContractHistoryRequest.encode,
-  decoder: QueryContractHistoryResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryContractHistoryRequest.encode,
+  decode: QueryContractHistoryResponse.decode,
+  service: "cosmwasm.wasm.v1.ContractHistory",
   method: "ContractHistory",
   getRpcInstance: getRpcInstance
 });
@@ -26,9 +26,9 @@ export const useGetContractHistory = buildUseQuery<QueryContractHistoryRequest, 
   queryKeyPrefix: "ContractHistoryQuery"
 });
 export const createGetContractsByCode = (getRpcInstance: RpcResolver) => buildQuery<QueryContractsByCodeRequest, QueryContractsByCodeResponse>({
-  encoder: QueryContractsByCodeRequest.encode,
-  decoder: QueryContractsByCodeResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryContractsByCodeRequest.encode,
+  decode: QueryContractsByCodeResponse.decode,
+  service: "cosmwasm.wasm.v1.ContractsByCode",
   method: "ContractsByCode",
   getRpcInstance: getRpcInstance
 });
@@ -37,9 +37,9 @@ export const useGetContractsByCode = buildUseQuery<QueryContractsByCodeRequest, 
   queryKeyPrefix: "ContractsByCodeQuery"
 });
 export const createGetAllContractState = (getRpcInstance: RpcResolver) => buildQuery<QueryAllContractStateRequest, QueryAllContractStateResponse>({
-  encoder: QueryAllContractStateRequest.encode,
-  decoder: QueryAllContractStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAllContractStateRequest.encode,
+  decode: QueryAllContractStateResponse.decode,
+  service: "cosmwasm.wasm.v1.AllContractState",
   method: "AllContractState",
   getRpcInstance: getRpcInstance
 });
@@ -48,9 +48,9 @@ export const useGetAllContractState = buildUseQuery<QueryAllContractStateRequest
   queryKeyPrefix: "AllContractStateQuery"
 });
 export const createGetRawContractState = (getRpcInstance: RpcResolver) => buildQuery<QueryRawContractStateRequest, QueryRawContractStateResponse>({
-  encoder: QueryRawContractStateRequest.encode,
-  decoder: QueryRawContractStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryRawContractStateRequest.encode,
+  decode: QueryRawContractStateResponse.decode,
+  service: "cosmwasm.wasm.v1.RawContractState",
   method: "RawContractState",
   getRpcInstance: getRpcInstance
 });
@@ -59,9 +59,9 @@ export const useGetRawContractState = buildUseQuery<QueryRawContractStateRequest
   queryKeyPrefix: "RawContractStateQuery"
 });
 export const createGetSmartContractState = (getRpcInstance: RpcResolver) => buildQuery<QuerySmartContractStateRequest, QuerySmartContractStateResponse>({
-  encoder: QuerySmartContractStateRequest.encode,
-  decoder: QuerySmartContractStateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QuerySmartContractStateRequest.encode,
+  decode: QuerySmartContractStateResponse.decode,
+  service: "cosmwasm.wasm.v1.SmartContractState",
   method: "SmartContractState",
   getRpcInstance: getRpcInstance
 });
@@ -70,9 +70,9 @@ export const useGetSmartContractState = buildUseQuery<QuerySmartContractStateReq
   queryKeyPrefix: "SmartContractStateQuery"
 });
 export const createGetCode = (getRpcInstance: RpcResolver) => buildQuery<QueryCodeRequest, QueryCodeResponse>({
-  encoder: QueryCodeRequest.encode,
-  decoder: QueryCodeResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryCodeRequest.encode,
+  decode: QueryCodeResponse.decode,
+  service: "cosmwasm.wasm.v1.Code",
   method: "Code",
   getRpcInstance: getRpcInstance
 });
@@ -81,9 +81,9 @@ export const useGetCode = buildUseQuery<QueryCodeRequest, QueryCodeResponse>({
   queryKeyPrefix: "CodeQuery"
 });
 export const createGetCodes = (getRpcInstance: RpcResolver) => buildQuery<QueryCodesRequest, QueryCodesResponse>({
-  encoder: QueryCodesRequest.encode,
-  decoder: QueryCodesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryCodesRequest.encode,
+  decode: QueryCodesResponse.decode,
+  service: "cosmwasm.wasm.v1.Codes",
   method: "Codes",
   getRpcInstance: getRpcInstance
 });
@@ -92,9 +92,9 @@ export const useGetCodes = buildUseQuery<QueryCodesRequest, QueryCodesResponse>(
   queryKeyPrefix: "CodesQuery"
 });
 export const createGetPinnedCodes = (getRpcInstance: RpcResolver) => buildQuery<QueryPinnedCodesRequest, QueryPinnedCodesResponse>({
-  encoder: QueryPinnedCodesRequest.encode,
-  decoder: QueryPinnedCodesResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryPinnedCodesRequest.encode,
+  decode: QueryPinnedCodesResponse.decode,
+  service: "cosmwasm.wasm.v1.PinnedCodes",
   method: "PinnedCodes",
   getRpcInstance: getRpcInstance
 });

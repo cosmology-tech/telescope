@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { SimulateRequest, SimulateResponse, GetTxRequest, GetTxResponse, BroadcastTxRequest, BroadcastTxResponse, GetTxsEventRequest, GetTxsEventResponse, GetBlockWithTxsRequest, GetBlockWithTxsResponse } from "./service";
 export const createGetSimulate = (getRpcInstance: RpcResolver) => buildQuery<SimulateRequest, SimulateResponse>({
-  encoder: SimulateRequest.encode,
-  decoder: SimulateResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: SimulateRequest.encode,
+  decode: SimulateResponse.decode,
+  service: "cosmos.tx.v1beta1.Simulate",
   method: "Simulate",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetSimulate = buildUseQuery<SimulateRequest, SimulateResponse>({
   queryKeyPrefix: "SimulateQuery"
 });
 export const createGetGetTx = (getRpcInstance: RpcResolver) => buildQuery<GetTxRequest, GetTxResponse>({
-  encoder: GetTxRequest.encode,
-  decoder: GetTxResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetTxRequest.encode,
+  decode: GetTxResponse.decode,
+  service: "cosmos.tx.v1beta1.GetTx",
   method: "GetTx",
   getRpcInstance: getRpcInstance
 });
@@ -24,9 +24,9 @@ export const useGetGetTx = buildUseQuery<GetTxRequest, GetTxResponse>({
   queryKeyPrefix: "GetTxQuery"
 });
 export const createGetBroadcastTx = (getRpcInstance: RpcResolver) => buildQuery<BroadcastTxRequest, BroadcastTxResponse>({
-  encoder: BroadcastTxRequest.encode,
-  decoder: BroadcastTxResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: BroadcastTxRequest.encode,
+  decode: BroadcastTxResponse.decode,
+  service: "cosmos.tx.v1beta1.BroadcastTx",
   method: "BroadcastTx",
   getRpcInstance: getRpcInstance
 });
@@ -35,9 +35,9 @@ export const useGetBroadcastTx = buildUseQuery<BroadcastTxRequest, BroadcastTxRe
   queryKeyPrefix: "BroadcastTxQuery"
 });
 export const createGetGetTxsEvent = (getRpcInstance: RpcResolver) => buildQuery<GetTxsEventRequest, GetTxsEventResponse>({
-  encoder: GetTxsEventRequest.encode,
-  decoder: GetTxsEventResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetTxsEventRequest.encode,
+  decode: GetTxsEventResponse.decode,
+  service: "cosmos.tx.v1beta1.GetTxsEvent",
   method: "GetTxsEvent",
   getRpcInstance: getRpcInstance
 });
@@ -46,9 +46,9 @@ export const useGetGetTxsEvent = buildUseQuery<GetTxsEventRequest, GetTxsEventRe
   queryKeyPrefix: "GetTxsEventQuery"
 });
 export const createGetGetBlockWithTxs = (getRpcInstance: RpcResolver) => buildQuery<GetBlockWithTxsRequest, GetBlockWithTxsResponse>({
-  encoder: GetBlockWithTxsRequest.encode,
-  decoder: GetBlockWithTxsResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: GetBlockWithTxsRequest.encode,
+  decode: GetBlockWithTxsResponse.decode,
+  service: "cosmos.tx.v1beta1.GetBlockWithTxs",
   method: "GetBlockWithTxs",
   getRpcInstance: getRpcInstance
 });

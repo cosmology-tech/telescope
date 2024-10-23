@@ -16,19 +16,21 @@ export function createQueryHelperCreator(
     methodKey?: string,
     helperCreatorName?: string
 ) {
+    const pkgImportName = context.ref.proto.package + '.' + service.name
+
     context.addUtil("RpcResolver");
     context.addUtil("buildQuery");
     const callExpression = ast.callExpression(ast.identifier("buildQuery"), [
         ast.objectExpression([
             ast.objectProperty(
-                ast.identifier("encoder"),
+                ast.identifier("encode"),
                 ast.memberExpression(
                     ast.identifier(service.requestType),
                     ast.identifier("encode")
                 )
             ),
             ast.objectProperty(
-                ast.identifier("decoder"),
+                ast.identifier("decode"),
                 ast.memberExpression(
                     ast.identifier(service.responseType),
                     ast.identifier("decode")
@@ -36,8 +38,7 @@ export function createQueryHelperCreator(
             ),
             ast.objectProperty(
                 ast.identifier("service"),
-                // Does this value needs to change?
-                ast.stringLiteral("cosmos.bank.v1beta1.Query")
+                ast.stringLiteral(pkgImportName)
             ),
             ast.objectProperty(
                 ast.identifier("method"),

@@ -2,9 +2,9 @@ import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryEvidenceRequest, QueryEvidenceResponse, QueryAllEvidenceRequest, QueryAllEvidenceResponse } from "./query";
 export const createGetEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryEvidenceRequest, QueryEvidenceResponse>({
-  encoder: QueryEvidenceRequest.encode,
-  decoder: QueryEvidenceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryEvidenceRequest.encode,
+  decode: QueryEvidenceResponse.decode,
+  service: "cosmos.evidence.v1beta1.Evidence",
   method: "Evidence",
   getRpcInstance: getRpcInstance
 });
@@ -13,9 +13,9 @@ export const useGetEvidence = buildUseQuery<QueryEvidenceRequest, QueryEvidenceR
   queryKeyPrefix: "EvidenceQuery"
 });
 export const createGetAllEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryAllEvidenceRequest, QueryAllEvidenceResponse>({
-  encoder: QueryAllEvidenceRequest.encode,
-  decoder: QueryAllEvidenceResponse.decode,
-  service: "cosmos.bank.v1beta1.Query",
+  encode: QueryAllEvidenceRequest.encode,
+  decode: QueryAllEvidenceResponse.decode,
+  service: "cosmos.evidence.v1beta1.AllEvidence",
   method: "AllEvidence",
   getRpcInstance: getRpcInstance
 });
