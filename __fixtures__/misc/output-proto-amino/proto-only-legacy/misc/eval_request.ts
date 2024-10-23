@@ -106,7 +106,7 @@ export interface EvalRequest {
   opt: FeatureSet_Utf8Validation;
   graph?: TestNest_Graph;
   /** deprecated option */
-  deprecated: string;
+  deprecated?: string;
 }
 export interface EvalRequestProtoMsg {
   typeUrl: "/misc.EvalRequest";
@@ -128,7 +128,7 @@ export interface EvalRequestSDKType {
   test_array: string[];
   opt: FeatureSet_Utf8Validation;
   graph?: TestNest_GraphSDKType;
-  deprecated: string;
+  deprecated?: string;
 }
 export interface AccessConfig {
   sender: string;
@@ -326,7 +326,7 @@ function createBaseEvalRequest(): EvalRequest {
     testArray: [],
     opt: 0,
     graph: undefined,
-    deprecated: ""
+    deprecated: undefined
   };
 }
 export const EvalRequest = {
@@ -371,7 +371,7 @@ export const EvalRequest = {
     if (message.graph !== undefined) {
       TestNest_Graph.encode(message.graph, writer.uint32(130).fork()).ldelim();
     }
-    if (message.deprecated !== "") {
+    if (message.deprecated !== undefined) {
       writer.uint32(138).string(message.deprecated);
     }
     return writer;
@@ -519,7 +519,7 @@ export const EvalRequest = {
     if (object.graph !== undefined && object.graph !== null) {
       message.graph = TestNest_Graph.fromPartial(object.graph);
     }
-    message.deprecated = object.deprecated ?? "";
+    message.deprecated = object.deprecated ?? undefined;
     return message;
   },
   fromSDK(object: EvalRequestSDKType): EvalRequest {
@@ -571,7 +571,7 @@ export const EvalRequest = {
       test_array: Array.isArray(object?.test_array) ? object.test_array.map((e: any) => String(e)) : [],
       opt: isSet(object.opt) ? featureSet_Utf8ValidationFromJSON(object.opt) : -1,
       graph: isSet(object.graph) ? TestNest_Graph.fromSDKJSON(object.graph) : undefined,
-      deprecated: isSet(object.deprecated) ? String(object.deprecated) : ""
+      deprecated: isSet(object.deprecated) ? String(object.deprecated) : undefined
     };
   },
   toSDK(message: EvalRequest): EvalRequestSDKType {

@@ -170,8 +170,8 @@ export const getFieldOptionality = (
 ) => {
     const isScalarDefaultToNullable = context.pluginValue('prototypes.isScalarDefaultToNullable');
 
-    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
-        return false
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'true'){
+        return true
     }
 
     if (isArrayField(field) || isEnumField(field) || (!isScalarDefaultToNullable && isScalarField(field))) {
@@ -191,9 +191,8 @@ export const getFieldOptionalityForAmino = (
   isOneOf: boolean
 ) => {
     const useProtoOptionality = context.pluginValue('aminoEncoding.useProtoOptionality');
-
-    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
-        return false
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'true'){
+        return true
     }
 
     if(useProtoOptionality){
@@ -240,8 +239,8 @@ export const getFieldOptionalityForDefaults = (
     const useOptionalNullable = context.pluginValue('prototypes.useOptionalNullable');
     const isScalarDefaultToNullable = !field?.options?.['(gogoproto.nullable)'] && context.pluginValue('prototypes.isScalarDefaultToNullable');
 
-    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'false'){
-        return false
+    if(field?.options?.['(gogoproto.moretags)'] && getOptionDeprecated(field?.options?.['(gogoproto.moretags)']) === 'true'){
+        return true
     }
 
     if (isArrayField(field) || isEnumField(field) || !isScalarDefaultToNullable && isScalarField(field) || isMapField(field)) {
@@ -277,7 +276,7 @@ export const getFieldOptionalityForDefaults = (
 */
 export const getOptionDeprecated = (input: string) =>{
     // Regular expression to match deprecated value with optional spaces
-    const deprecatedRegex = /deprecated:\s*"(true|false)"/;
+    const deprecatedRegex = /\s*deprecated:\s*(true|false)\s*/;
 
     // Extract the deprecated value
     const match = input.match(deprecatedRegex);
