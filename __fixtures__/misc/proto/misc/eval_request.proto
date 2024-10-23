@@ -39,6 +39,7 @@ message EvalRequest {
 
   // deprecated option
   string deprecated = 17 [(gogoproto.moretags) = "yaml:\"deprecated\",deprecated:\"true\""];
+  string false_deprecated = 18 [(gogoproto.moretags) = "yaml:\"deprecated\",deprecated:\"false\""];
 }
 
 message AccessConfig {

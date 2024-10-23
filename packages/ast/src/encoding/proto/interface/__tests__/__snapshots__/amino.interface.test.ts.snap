@@ -197,6 +197,7 @@ exports[`misc/eval_request EvalRequest 1`] = `
   graph?: TestNest_GraphAmino;
   /** deprecated option */
   deprecated?: string;
+  false_deprecated?: string;
 }"
 `;
 
