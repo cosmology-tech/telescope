@@ -5,7 +5,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.mint.v1beta1.Params",
+  service: "osmosis.mint.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetEpochProvisions = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochProvisionsRequest, QueryEpochProvisionsResponse>({
   encode: QueryEpochProvisionsRequest.encode,
   decode: QueryEpochProvisionsResponse.decode,
-  service: "osmosis.mint.v1beta1.EpochProvisions",
+  service: "osmosis.mint.v1beta1.Query",
   method: "EpochProvisions",
   getRpcInstance: getRpcInstance
 });

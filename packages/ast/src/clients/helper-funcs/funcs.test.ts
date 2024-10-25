@@ -29,6 +29,7 @@ it("query funcs works", async () => {
         createQueryHelperCreator(
             mockContext,
             mockService.methods["Balance"],
+            mockService.name,
             "Balance",
             "createGetBalance"
         )

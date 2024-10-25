@@ -5,7 +5,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "cosmos.params.v1beta1.Params",
+  service: "cosmos.params.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetSubspaces = (getRpcInstance: RpcResolver) => buildQuery<QuerySubspacesRequest, QuerySubspacesResponse>({
   encode: QuerySubspacesRequest.encode,
   decode: QuerySubspacesResponse.decode,
-  service: "cosmos.params.v1beta1.Subspaces",
+  service: "cosmos.params.v1beta1.Query",
   method: "Subspaces",
   getRpcInstance: getRpcInstance
 });

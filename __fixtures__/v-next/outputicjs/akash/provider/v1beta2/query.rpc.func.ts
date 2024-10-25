@@ -4,7 +4,7 @@ import { QueryProvidersRequest, QueryProvidersResponse, QueryProviderRequest, Qu
 export const createGetProviders = (getRpcInstance: RpcResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
   encode: QueryProvidersRequest.encode,
   decode: QueryProvidersResponse.decode,
-  service: "akash.provider.v1beta2.Providers",
+  service: "akash.provider.v1beta2.Query",
   method: "Providers",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetProviders = buildUseQuery<QueryProvidersRequest, QueryProvide
 export const createGetProvider = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
   encode: QueryProviderRequest.encode,
   decode: QueryProviderResponse.decode,
-  service: "akash.provider.v1beta2.Provider",
+  service: "akash.provider.v1beta2.Query",
   method: "Provider",
   getRpcInstance: getRpcInstance
 });

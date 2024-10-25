@@ -6,7 +6,7 @@ import { QueryGroupInfoRequest, QueryGroupInfoRequestSDKType, QueryGroupInfoResp
 export const createGetGroupInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
   encode: QueryGroupInfoRequest.encode,
   decode: QueryGroupInfoResponse.decode,
-  service: "cosmos.group.v1.GroupInfo",
+  service: "cosmos.group.v1.Query",
   method: "GroupInfo",
   getRpcInstance: getRpcInstance
 });
@@ -17,7 +17,7 @@ export const useGetGroupInfo = buildUseQuery<QueryGroupInfoRequest, QueryGroupIn
 export const createGetGroupPolicyInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
   encode: QueryGroupPolicyInfoRequest.encode,
   decode: QueryGroupPolicyInfoResponse.decode,
-  service: "cosmos.group.v1.GroupPolicyInfo",
+  service: "cosmos.group.v1.Query",
   method: "GroupPolicyInfo",
   getRpcInstance: getRpcInstance
 });
@@ -28,7 +28,7 @@ export const useGetGroupPolicyInfo = buildUseQuery<QueryGroupPolicyInfoRequest, 
 export const createGetGroupMembers = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
   encode: QueryGroupMembersRequest.encode,
   decode: QueryGroupMembersResponse.decode,
-  service: "cosmos.group.v1.GroupMembers",
+  service: "cosmos.group.v1.Query",
   method: "GroupMembers",
   getRpcInstance: getRpcInstance
 });
@@ -39,7 +39,7 @@ export const useGetGroupMembers = buildUseQuery<QueryGroupMembersRequest, QueryG
 export const createGetGroupsByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
   encode: QueryGroupsByAdminRequest.encode,
   decode: QueryGroupsByAdminResponse.decode,
-  service: "cosmos.group.v1.GroupsByAdmin",
+  service: "cosmos.group.v1.Query",
   method: "GroupsByAdmin",
   getRpcInstance: getRpcInstance
 });
@@ -50,7 +50,7 @@ export const useGetGroupsByAdmin = buildUseQuery<QueryGroupsByAdminRequest, Quer
 export const createGetGroupPoliciesByGroup = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
   encode: QueryGroupPoliciesByGroupRequest.encode,
   decode: QueryGroupPoliciesByGroupResponse.decode,
-  service: "cosmos.group.v1.GroupPoliciesByGroup",
+  service: "cosmos.group.v1.Query",
   method: "GroupPoliciesByGroup",
   getRpcInstance: getRpcInstance
 });
@@ -61,7 +61,7 @@ export const useGetGroupPoliciesByGroup = buildUseQuery<QueryGroupPoliciesByGrou
 export const createGetGroupPoliciesByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
   encode: QueryGroupPoliciesByAdminRequest.encode,
   decode: QueryGroupPoliciesByAdminResponse.decode,
-  service: "cosmos.group.v1.GroupPoliciesByAdmin",
+  service: "cosmos.group.v1.Query",
   method: "GroupPoliciesByAdmin",
   getRpcInstance: getRpcInstance
 });
@@ -72,7 +72,7 @@ export const useGetGroupPoliciesByAdmin = buildUseQuery<QueryGroupPoliciesByAdmi
 export const createGetProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalRequest, QueryProposalResponse>({
   encode: QueryProposalRequest.encode,
   decode: QueryProposalResponse.decode,
-  service: "cosmos.group.v1.Proposal",
+  service: "cosmos.group.v1.Query",
   method: "Proposal",
   getRpcInstance: getRpcInstance
 });
@@ -83,7 +83,7 @@ export const useGetProposal = buildUseQuery<QueryProposalRequest, QueryProposalR
 export const createGetProposalsByGroupPolicy = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
   encode: QueryProposalsByGroupPolicyRequest.encode,
   decode: QueryProposalsByGroupPolicyResponse.decode,
-  service: "cosmos.group.v1.ProposalsByGroupPolicy",
+  service: "cosmos.group.v1.Query",
   method: "ProposalsByGroupPolicy",
   getRpcInstance: getRpcInstance
 });
@@ -94,7 +94,7 @@ export const useGetProposalsByGroupPolicy = buildUseQuery<QueryProposalsByGroupP
 export const createGetVoteByProposalVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
   encode: QueryVoteByProposalVoterRequest.encode,
   decode: QueryVoteByProposalVoterResponse.decode,
-  service: "cosmos.group.v1.VoteByProposalVoter",
+  service: "cosmos.group.v1.Query",
   method: "VoteByProposalVoter",
   getRpcInstance: getRpcInstance
 });
@@ -105,7 +105,7 @@ export const useGetVoteByProposalVoter = buildUseQuery<QueryVoteByProposalVoterR
 export const createGetVotesByProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
   encode: QueryVotesByProposalRequest.encode,
   decode: QueryVotesByProposalResponse.decode,
-  service: "cosmos.group.v1.VotesByProposal",
+  service: "cosmos.group.v1.Query",
   method: "VotesByProposal",
   getRpcInstance: getRpcInstance
 });
@@ -116,7 +116,7 @@ export const useGetVotesByProposal = buildUseQuery<QueryVotesByProposalRequest, 
 export const createGetVotesByVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
   encode: QueryVotesByVoterRequest.encode,
   decode: QueryVotesByVoterResponse.decode,
-  service: "cosmos.group.v1.VotesByVoter",
+  service: "cosmos.group.v1.Query",
   method: "VotesByVoter",
   getRpcInstance: getRpcInstance
 });
@@ -127,7 +127,7 @@ export const useGetVotesByVoter = buildUseQuery<QueryVotesByVoterRequest, QueryV
 export const createGetGroupsByMember = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
   encode: QueryGroupsByMemberRequest.encode,
   decode: QueryGroupsByMemberResponse.decode,
-  service: "cosmos.group.v1.GroupsByMember",
+  service: "cosmos.group.v1.Query",
   method: "GroupsByMember",
   getRpcInstance: getRpcInstance
 });
@@ -138,7 +138,7 @@ export const useGetGroupsByMember = buildUseQuery<QueryGroupsByMemberRequest, Qu
 export const createGetTallyResult = (getRpcInstance: RpcResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
   encode: QueryTallyResultRequest.encode,
   decode: QueryTallyResultResponse.decode,
-  service: "cosmos.group.v1.TallyResult",
+  service: "cosmos.group.v1.Query",
   method: "TallyResult",
   getRpcInstance: getRpcInstance
 });

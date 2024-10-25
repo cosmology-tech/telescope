@@ -5,7 +5,7 @@ import { QueryCurrentPlanRequest, QueryCurrentPlanRequestSDKType, QueryCurrentPl
 export const createGetCurrentPlan = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentPlanRequest, QueryCurrentPlanResponse>({
   encode: QueryCurrentPlanRequest.encode,
   decode: QueryCurrentPlanResponse.decode,
-  service: "cosmos.upgrade.v1beta1.CurrentPlan",
+  service: "cosmos.upgrade.v1beta1.Query",
   method: "CurrentPlan",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetCurrentPlan = buildUseQuery<QueryCurrentPlanRequest, QueryCur
 export const createGetAppliedPlan = (getRpcInstance: RpcResolver) => buildQuery<QueryAppliedPlanRequest, QueryAppliedPlanResponse>({
   encode: QueryAppliedPlanRequest.encode,
   decode: QueryAppliedPlanResponse.decode,
-  service: "cosmos.upgrade.v1beta1.AppliedPlan",
+  service: "cosmos.upgrade.v1beta1.Query",
   method: "AppliedPlan",
   getRpcInstance: getRpcInstance
 });
@@ -27,7 +27,7 @@ export const useGetAppliedPlan = buildUseQuery<QueryAppliedPlanRequest, QueryApp
 export const createGetUpgradedConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
   encode: QueryUpgradedConsensusStateRequest.encode,
   decode: QueryUpgradedConsensusStateResponse.decode,
-  service: "cosmos.upgrade.v1beta1.UpgradedConsensusState",
+  service: "cosmos.upgrade.v1beta1.Query",
   method: "UpgradedConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -38,7 +38,7 @@ export const useGetUpgradedConsensusState = buildUseQuery<QueryUpgradedConsensus
 export const createGetModuleVersions = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleVersionsRequest, QueryModuleVersionsResponse>({
   encode: QueryModuleVersionsRequest.encode,
   decode: QueryModuleVersionsResponse.decode,
-  service: "cosmos.upgrade.v1beta1.ModuleVersions",
+  service: "cosmos.upgrade.v1beta1.Query",
   method: "ModuleVersions",
   getRpcInstance: getRpcInstance
 });
@@ -49,7 +49,7 @@ export const useGetModuleVersions = buildUseQuery<QueryModuleVersionsRequest, Qu
 export const createGetAuthority = (getRpcInstance: RpcResolver) => buildQuery<QueryAuthorityRequest, QueryAuthorityResponse>({
   encode: QueryAuthorityRequest.encode,
   decode: QueryAuthorityResponse.decode,
-  service: "cosmos.upgrade.v1beta1.Authority",
+  service: "cosmos.upgrade.v1beta1.Query",
   method: "Authority",
   getRpcInstance: getRpcInstance
 });

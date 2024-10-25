@@ -9,7 +9,7 @@ import { QueryOrdersRequest, QueryOrdersRequestSDKType, QueryOrdersResponse, Que
 export const createGetOrders = (getRpcInstance: RpcResolver) => buildQuery<QueryOrdersRequest, QueryOrdersResponse>({
   encode: QueryOrdersRequest.encode,
   decode: QueryOrdersResponse.decode,
-  service: "akash.market.v1beta2.Orders",
+  service: "akash.market.v1beta2.Query",
   method: "Orders",
   getRpcInstance: getRpcInstance
 });
@@ -20,7 +20,7 @@ export const useGetOrders = buildUseQuery<QueryOrdersRequest, QueryOrdersRespons
 export const createGetOrder = (getRpcInstance: RpcResolver) => buildQuery<QueryOrderRequest, QueryOrderResponse>({
   encode: QueryOrderRequest.encode,
   decode: QueryOrderResponse.decode,
-  service: "akash.market.v1beta2.Order",
+  service: "akash.market.v1beta2.Query",
   method: "Order",
   getRpcInstance: getRpcInstance
 });
@@ -31,7 +31,7 @@ export const useGetOrder = buildUseQuery<QueryOrderRequest, QueryOrderResponse>(
 export const createGetBids = (getRpcInstance: RpcResolver) => buildQuery<QueryBidsRequest, QueryBidsResponse>({
   encode: QueryBidsRequest.encode,
   decode: QueryBidsResponse.decode,
-  service: "akash.market.v1beta2.Bids",
+  service: "akash.market.v1beta2.Query",
   method: "Bids",
   getRpcInstance: getRpcInstance
 });
@@ -42,7 +42,7 @@ export const useGetBids = buildUseQuery<QueryBidsRequest, QueryBidsResponse>({
 export const createGetBid = (getRpcInstance: RpcResolver) => buildQuery<QueryBidRequest, QueryBidResponse>({
   encode: QueryBidRequest.encode,
   decode: QueryBidResponse.decode,
-  service: "akash.market.v1beta2.Bid",
+  service: "akash.market.v1beta2.Query",
   method: "Bid",
   getRpcInstance: getRpcInstance
 });
@@ -53,7 +53,7 @@ export const useGetBid = buildUseQuery<QueryBidRequest, QueryBidResponse>({
 export const createGetLeases = (getRpcInstance: RpcResolver) => buildQuery<QueryLeasesRequest, QueryLeasesResponse>({
   encode: QueryLeasesRequest.encode,
   decode: QueryLeasesResponse.decode,
-  service: "akash.market.v1beta2.Leases",
+  service: "akash.market.v1beta2.Query",
   method: "Leases",
   getRpcInstance: getRpcInstance
 });
@@ -64,7 +64,7 @@ export const useGetLeases = buildUseQuery<QueryLeasesRequest, QueryLeasesRespons
 export const createGetLease = (getRpcInstance: RpcResolver) => buildQuery<QueryLeaseRequest, QueryLeaseResponse>({
   encode: QueryLeaseRequest.encode,
   decode: QueryLeaseResponse.decode,
-  service: "akash.market.v1beta2.Lease",
+  service: "akash.market.v1beta2.Query",
   method: "Lease",
   getRpcInstance: getRpcInstance
 });

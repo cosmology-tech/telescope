@@ -8,7 +8,7 @@ import { ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsRequestSDKType, 
 export const createGetModuleToDistributeCoins = (getRpcInstance: RpcResolver) => buildQuery<ModuleToDistributeCoinsRequest, ModuleToDistributeCoinsResponse>({
   encode: ModuleToDistributeCoinsRequest.encode,
   decode: ModuleToDistributeCoinsResponse.decode,
-  service: "osmosis.incentives.ModuleToDistributeCoins",
+  service: "osmosis.incentives.Query",
   method: "ModuleToDistributeCoins",
   getRpcInstance: getRpcInstance
 });
@@ -19,7 +19,7 @@ export const useGetModuleToDistributeCoins = buildUseQuery<ModuleToDistributeCoi
 export const createGetGaugeByID = (getRpcInstance: RpcResolver) => buildQuery<GaugeByIDRequest, GaugeByIDResponse>({
   encode: GaugeByIDRequest.encode,
   decode: GaugeByIDResponse.decode,
-  service: "osmosis.incentives.GaugeByID",
+  service: "osmosis.incentives.Query",
   method: "GaugeByID",
   getRpcInstance: getRpcInstance
 });
@@ -30,7 +30,7 @@ export const useGetGaugeByID = buildUseQuery<GaugeByIDRequest, GaugeByIDResponse
 export const createGetGauges = (getRpcInstance: RpcResolver) => buildQuery<GaugesRequest, GaugesResponse>({
   encode: GaugesRequest.encode,
   decode: GaugesResponse.decode,
-  service: "osmosis.incentives.Gauges",
+  service: "osmosis.incentives.Query",
   method: "Gauges",
   getRpcInstance: getRpcInstance
 });
@@ -41,7 +41,7 @@ export const useGetGauges = buildUseQuery<GaugesRequest, GaugesResponse>({
 export const createGetActiveGauges = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesRequest, ActiveGaugesResponse>({
   encode: ActiveGaugesRequest.encode,
   decode: ActiveGaugesResponse.decode,
-  service: "osmosis.incentives.ActiveGauges",
+  service: "osmosis.incentives.Query",
   method: "ActiveGauges",
   getRpcInstance: getRpcInstance
 });
@@ -52,7 +52,7 @@ export const useGetActiveGauges = buildUseQuery<ActiveGaugesRequest, ActiveGauge
 export const createGetActiveGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<ActiveGaugesPerDenomRequest, ActiveGaugesPerDenomResponse>({
   encode: ActiveGaugesPerDenomRequest.encode,
   decode: ActiveGaugesPerDenomResponse.decode,
-  service: "osmosis.incentives.ActiveGaugesPerDenom",
+  service: "osmosis.incentives.Query",
   method: "ActiveGaugesPerDenom",
   getRpcInstance: getRpcInstance
 });
@@ -63,7 +63,7 @@ export const useGetActiveGaugesPerDenom = buildUseQuery<ActiveGaugesPerDenomRequ
 export const createGetUpcomingGauges = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesRequest, UpcomingGaugesResponse>({
   encode: UpcomingGaugesRequest.encode,
   decode: UpcomingGaugesResponse.decode,
-  service: "osmosis.incentives.UpcomingGauges",
+  service: "osmosis.incentives.Query",
   method: "UpcomingGauges",
   getRpcInstance: getRpcInstance
 });
@@ -74,7 +74,7 @@ export const useGetUpcomingGauges = buildUseQuery<UpcomingGaugesRequest, Upcomin
 export const createGetUpcomingGaugesPerDenom = (getRpcInstance: RpcResolver) => buildQuery<UpcomingGaugesPerDenomRequest, UpcomingGaugesPerDenomResponse>({
   encode: UpcomingGaugesPerDenomRequest.encode,
   decode: UpcomingGaugesPerDenomResponse.decode,
-  service: "osmosis.incentives.UpcomingGaugesPerDenom",
+  service: "osmosis.incentives.Query",
   method: "UpcomingGaugesPerDenom",
   getRpcInstance: getRpcInstance
 });
@@ -85,7 +85,7 @@ export const useGetUpcomingGaugesPerDenom = buildUseQuery<UpcomingGaugesPerDenom
 export const createGetRewardsEst = (getRpcInstance: RpcResolver) => buildQuery<RewardsEstRequest, RewardsEstResponse>({
   encode: RewardsEstRequest.encode,
   decode: RewardsEstResponse.decode,
-  service: "osmosis.incentives.RewardsEst",
+  service: "osmosis.incentives.Query",
   method: "RewardsEst",
   getRpcInstance: getRpcInstance
 });
@@ -96,7 +96,7 @@ export const useGetRewardsEst = buildUseQuery<RewardsEstRequest, RewardsEstRespo
 export const createGetLockableDurations = (getRpcInstance: RpcResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
   encode: QueryLockableDurationsRequest.encode,
   decode: QueryLockableDurationsResponse.decode,
-  service: "osmosis.incentives.LockableDurations",
+  service: "osmosis.incentives.Query",
   method: "LockableDurations",
   getRpcInstance: getRpcInstance
 });

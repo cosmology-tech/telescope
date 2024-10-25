@@ -8,7 +8,7 @@ import { QueryPoolsRequest, QueryPoolsRequestSDKType, QueryPoolsResponse, QueryP
 export const createGetPools = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolsRequest, QueryPoolsResponse>({
   encode: QueryPoolsRequest.encode,
   decode: QueryPoolsResponse.decode,
-  service: "osmosis.gamm.v1beta1.Pools",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "Pools",
   getRpcInstance: getRpcInstance
 });
@@ -19,7 +19,7 @@ export const useGetPools = buildUseQuery<QueryPoolsRequest, QueryPoolsResponse>(
 export const createGetNumPools = (getRpcInstance: RpcResolver) => buildQuery<QueryNumPoolsRequest, QueryNumPoolsResponse>({
   encode: QueryNumPoolsRequest.encode,
   decode: QueryNumPoolsResponse.decode,
-  service: "osmosis.gamm.v1beta1.NumPools",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "NumPools",
   getRpcInstance: getRpcInstance
 });
@@ -30,7 +30,7 @@ export const useGetNumPools = buildUseQuery<QueryNumPoolsRequest, QueryNumPoolsR
 export const createGetTotalLiquidity = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalLiquidityRequest, QueryTotalLiquidityResponse>({
   encode: QueryTotalLiquidityRequest.encode,
   decode: QueryTotalLiquidityResponse.decode,
-  service: "osmosis.gamm.v1beta1.TotalLiquidity",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "TotalLiquidity",
   getRpcInstance: getRpcInstance
 });
@@ -41,7 +41,7 @@ export const useGetTotalLiquidity = buildUseQuery<QueryTotalLiquidityRequest, Qu
 export const createGetPoolsWithFilter = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolsWithFilterRequest, QueryPoolsWithFilterResponse>({
   encode: QueryPoolsWithFilterRequest.encode,
   decode: QueryPoolsWithFilterResponse.decode,
-  service: "osmosis.gamm.v1beta1.PoolsWithFilter",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "PoolsWithFilter",
   getRpcInstance: getRpcInstance
 });
@@ -52,7 +52,7 @@ export const useGetPoolsWithFilter = buildUseQuery<QueryPoolsWithFilterRequest, 
 export const createGetPool = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolRequest, QueryPoolResponse>({
   encode: QueryPoolRequest.encode,
   decode: QueryPoolResponse.decode,
-  service: "osmosis.gamm.v1beta1.Pool",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "Pool",
   getRpcInstance: getRpcInstance
 });
@@ -63,7 +63,7 @@ export const useGetPool = buildUseQuery<QueryPoolRequest, QueryPoolResponse>({
 export const createGetPoolType = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolTypeRequest, QueryPoolTypeResponse>({
   encode: QueryPoolTypeRequest.encode,
   decode: QueryPoolTypeResponse.decode,
-  service: "osmosis.gamm.v1beta1.PoolType",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "PoolType",
   getRpcInstance: getRpcInstance
 });
@@ -74,7 +74,7 @@ export const useGetPoolType = buildUseQuery<QueryPoolTypeRequest, QueryPoolTypeR
 export const createGetCalcJoinPoolNoSwapShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcJoinPoolNoSwapSharesRequest, QueryCalcJoinPoolNoSwapSharesResponse>({
   encode: QueryCalcJoinPoolNoSwapSharesRequest.encode,
   decode: QueryCalcJoinPoolNoSwapSharesResponse.decode,
-  service: "osmosis.gamm.v1beta1.CalcJoinPoolNoSwapShares",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "CalcJoinPoolNoSwapShares",
   getRpcInstance: getRpcInstance
 });
@@ -85,7 +85,7 @@ export const useGetCalcJoinPoolNoSwapShares = buildUseQuery<QueryCalcJoinPoolNoS
 export const createGetCalcJoinPoolShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcJoinPoolSharesRequest, QueryCalcJoinPoolSharesResponse>({
   encode: QueryCalcJoinPoolSharesRequest.encode,
   decode: QueryCalcJoinPoolSharesResponse.decode,
-  service: "osmosis.gamm.v1beta1.CalcJoinPoolShares",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "CalcJoinPoolShares",
   getRpcInstance: getRpcInstance
 });
@@ -96,7 +96,7 @@ export const useGetCalcJoinPoolShares = buildUseQuery<QueryCalcJoinPoolSharesReq
 export const createGetCalcExitPoolCoinsFromShares = (getRpcInstance: RpcResolver) => buildQuery<QueryCalcExitPoolCoinsFromSharesRequest, QueryCalcExitPoolCoinsFromSharesResponse>({
   encode: QueryCalcExitPoolCoinsFromSharesRequest.encode,
   decode: QueryCalcExitPoolCoinsFromSharesResponse.decode,
-  service: "osmosis.gamm.v1beta1.CalcExitPoolCoinsFromShares",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "CalcExitPoolCoinsFromShares",
   getRpcInstance: getRpcInstance
 });
@@ -107,7 +107,7 @@ export const useGetCalcExitPoolCoinsFromShares = buildUseQuery<QueryCalcExitPool
 export const createGetPoolParams = (getRpcInstance: RpcResolver) => buildQuery<QueryPoolParamsRequest, QueryPoolParamsResponse>({
   encode: QueryPoolParamsRequest.encode,
   decode: QueryPoolParamsResponse.decode,
-  service: "osmosis.gamm.v1beta1.PoolParams",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "PoolParams",
   getRpcInstance: getRpcInstance
 });
@@ -118,7 +118,7 @@ export const useGetPoolParams = buildUseQuery<QueryPoolParamsRequest, QueryPoolP
 export const createGetTotalPoolLiquidity = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalPoolLiquidityRequest, QueryTotalPoolLiquidityResponse>({
   encode: QueryTotalPoolLiquidityRequest.encode,
   decode: QueryTotalPoolLiquidityResponse.decode,
-  service: "osmosis.gamm.v1beta1.TotalPoolLiquidity",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "TotalPoolLiquidity",
   getRpcInstance: getRpcInstance
 });
@@ -129,7 +129,7 @@ export const useGetTotalPoolLiquidity = buildUseQuery<QueryTotalPoolLiquidityReq
 export const createGetTotalShares = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalSharesRequest, QueryTotalSharesResponse>({
   encode: QueryTotalSharesRequest.encode,
   decode: QueryTotalSharesResponse.decode,
-  service: "osmosis.gamm.v1beta1.TotalShares",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "TotalShares",
   getRpcInstance: getRpcInstance
 });
@@ -140,7 +140,7 @@ export const useGetTotalShares = buildUseQuery<QueryTotalSharesRequest, QueryTot
 export const createGetSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
   encode: QuerySpotPriceRequest.encode,
   decode: QuerySpotPriceResponse.decode,
-  service: "osmosis.gamm.v1beta1.SpotPrice",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "SpotPrice",
   getRpcInstance: getRpcInstance
 });
@@ -151,7 +151,7 @@ export const useGetSpotPrice = buildUseQuery<QuerySpotPriceRequest, QuerySpotPri
 export const createGetEstimateSwapExactAmountIn = (getRpcInstance: RpcResolver) => buildQuery<QuerySwapExactAmountInRequest, QuerySwapExactAmountInResponse>({
   encode: QuerySwapExactAmountInRequest.encode,
   decode: QuerySwapExactAmountInResponse.decode,
-  service: "osmosis.gamm.v1beta1.EstimateSwapExactAmountIn",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "EstimateSwapExactAmountIn",
   getRpcInstance: getRpcInstance
 });
@@ -162,7 +162,7 @@ export const useGetEstimateSwapExactAmountIn = buildUseQuery<QuerySwapExactAmoun
 export const createGetEstimateSwapExactAmountOut = (getRpcInstance: RpcResolver) => buildQuery<QuerySwapExactAmountOutRequest, QuerySwapExactAmountOutResponse>({
   encode: QuerySwapExactAmountOutRequest.encode,
   decode: QuerySwapExactAmountOutResponse.decode,
-  service: "osmosis.gamm.v1beta1.EstimateSwapExactAmountOut",
+  service: "osmosis.gamm.v1beta1.Query",
   method: "EstimateSwapExactAmountOut",
   getRpcInstance: getRpcInstance
 });

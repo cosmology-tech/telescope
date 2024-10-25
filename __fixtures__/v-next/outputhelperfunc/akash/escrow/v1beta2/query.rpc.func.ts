@@ -6,7 +6,7 @@ import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsRespons
 export const createGetAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
   encode: QueryAccountsRequest.encode,
   decode: QueryAccountsResponse.decode,
-  service: "akash.escrow.v1beta2.Accounts",
+  service: "akash.escrow.v1beta2.Query",
   method: "Accounts",
   getRpcInstance: getRpcInstance
 });
@@ -17,7 +17,7 @@ export const useGetAccounts = buildUseQuery<QueryAccountsRequest, QueryAccountsR
 export const createGetPayments = (getRpcInstance: RpcResolver) => buildQuery<QueryPaymentsRequest, QueryPaymentsResponse>({
   encode: QueryPaymentsRequest.encode,
   decode: QueryPaymentsResponse.decode,
-  service: "akash.escrow.v1beta2.Payments",
+  service: "akash.escrow.v1beta2.Query",
   method: "Payments",
   getRpcInstance: getRpcInstance
 });

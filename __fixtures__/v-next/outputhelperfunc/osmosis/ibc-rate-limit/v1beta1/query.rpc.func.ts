@@ -5,7 +5,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.ibcratelimit.v1beta1.Params",
+  service: "osmosis.ibcratelimit.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

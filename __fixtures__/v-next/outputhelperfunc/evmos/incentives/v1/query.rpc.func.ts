@@ -8,7 +8,7 @@ import { QueryIncentivesRequest, QueryIncentivesRequestSDKType, QueryIncentivesR
 export const createGetIncentives = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentivesRequest, QueryIncentivesResponse>({
   encode: QueryIncentivesRequest.encode,
   decode: QueryIncentivesResponse.decode,
-  service: "evmos.incentives.v1.Incentives",
+  service: "evmos.incentives.v1.Query",
   method: "Incentives",
   getRpcInstance: getRpcInstance
 });
@@ -19,7 +19,7 @@ export const useGetIncentives = buildUseQuery<QueryIncentivesRequest, QueryIncen
 export const createGetIncentive = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentiveRequest, QueryIncentiveResponse>({
   encode: QueryIncentiveRequest.encode,
   decode: QueryIncentiveResponse.decode,
-  service: "evmos.incentives.v1.Incentive",
+  service: "evmos.incentives.v1.Query",
   method: "Incentive",
   getRpcInstance: getRpcInstance
 });
@@ -30,7 +30,7 @@ export const useGetIncentive = buildUseQuery<QueryIncentiveRequest, QueryIncenti
 export const createGetGasMeters = (getRpcInstance: RpcResolver) => buildQuery<QueryGasMetersRequest, QueryGasMetersResponse>({
   encode: QueryGasMetersRequest.encode,
   decode: QueryGasMetersResponse.decode,
-  service: "evmos.incentives.v1.GasMeters",
+  service: "evmos.incentives.v1.Query",
   method: "GasMeters",
   getRpcInstance: getRpcInstance
 });
@@ -41,7 +41,7 @@ export const useGetGasMeters = buildUseQuery<QueryGasMetersRequest, QueryGasMete
 export const createGetGasMeter = (getRpcInstance: RpcResolver) => buildQuery<QueryGasMeterRequest, QueryGasMeterResponse>({
   encode: QueryGasMeterRequest.encode,
   decode: QueryGasMeterResponse.decode,
-  service: "evmos.incentives.v1.GasMeter",
+  service: "evmos.incentives.v1.Query",
   method: "GasMeter",
   getRpcInstance: getRpcInstance
 });
@@ -52,7 +52,7 @@ export const useGetGasMeter = buildUseQuery<QueryGasMeterRequest, QueryGasMeterR
 export const createGetAllocationMeters = (getRpcInstance: RpcResolver) => buildQuery<QueryAllocationMetersRequest, QueryAllocationMetersResponse>({
   encode: QueryAllocationMetersRequest.encode,
   decode: QueryAllocationMetersResponse.decode,
-  service: "evmos.incentives.v1.AllocationMeters",
+  service: "evmos.incentives.v1.Query",
   method: "AllocationMeters",
   getRpcInstance: getRpcInstance
 });
@@ -63,7 +63,7 @@ export const useGetAllocationMeters = buildUseQuery<QueryAllocationMetersRequest
 export const createGetAllocationMeter = (getRpcInstance: RpcResolver) => buildQuery<QueryAllocationMeterRequest, QueryAllocationMeterResponse>({
   encode: QueryAllocationMeterRequest.encode,
   decode: QueryAllocationMeterResponse.decode,
-  service: "evmos.incentives.v1.AllocationMeter",
+  service: "evmos.incentives.v1.Query",
   method: "AllocationMeter",
   getRpcInstance: getRpcInstance
 });
@@ -74,7 +74,7 @@ export const useGetAllocationMeter = buildUseQuery<QueryAllocationMeterRequest, 
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "evmos.incentives.v1.Params",
+  service: "evmos.incentives.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

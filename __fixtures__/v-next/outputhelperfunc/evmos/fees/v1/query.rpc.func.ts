@@ -7,7 +7,7 @@ import { QueryDevFeeInfosRequest, QueryDevFeeInfosRequestSDKType, QueryDevFeeInf
 export const createGetDevFeeInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse>({
   encode: QueryDevFeeInfosRequest.encode,
   decode: QueryDevFeeInfosResponse.decode,
-  service: "evmos.fees.v1.DevFeeInfos",
+  service: "evmos.fees.v1.Query",
   method: "DevFeeInfos",
   getRpcInstance: getRpcInstance
 });
@@ -18,7 +18,7 @@ export const useGetDevFeeInfos = buildUseQuery<QueryDevFeeInfosRequest, QueryDev
 export const createGetDevFeeInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfoRequest, QueryDevFeeInfoResponse>({
   encode: QueryDevFeeInfoRequest.encode,
   decode: QueryDevFeeInfoResponse.decode,
-  service: "evmos.fees.v1.DevFeeInfo",
+  service: "evmos.fees.v1.Query",
   method: "DevFeeInfo",
   getRpcInstance: getRpcInstance
 });
@@ -29,7 +29,7 @@ export const useGetDevFeeInfo = buildUseQuery<QueryDevFeeInfoRequest, QueryDevFe
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "evmos.fees.v1.Params",
+  service: "evmos.fees.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -40,7 +40,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetDevFeeInfosPerDeployer = (getRpcInstance: RpcResolver) => buildQuery<QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse>({
   encode: QueryDevFeeInfosPerDeployerRequest.encode,
   decode: QueryDevFeeInfosPerDeployerResponse.decode,
-  service: "evmos.fees.v1.DevFeeInfosPerDeployer",
+  service: "evmos.fees.v1.Query",
   method: "DevFeeInfosPerDeployer",
   getRpcInstance: getRpcInstance
 });

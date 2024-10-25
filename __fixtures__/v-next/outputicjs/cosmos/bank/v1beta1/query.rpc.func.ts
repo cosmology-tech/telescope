@@ -4,7 +4,7 @@ import { QueryBalanceRequest, QueryBalanceResponse, QueryAllBalancesRequest, Que
 export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encode: QueryBalanceRequest.encode,
   decode: QueryBalanceResponse.decode,
-  service: "cosmos.bank.v1beta1.Balance",
+  service: "cosmos.bank.v1beta1.Query",
   method: "Balance",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResp
 export const createGetAllBalances = (getRpcInstance: RpcResolver) => buildQuery<QueryAllBalancesRequest, QueryAllBalancesResponse>({
   encode: QueryAllBalancesRequest.encode,
   decode: QueryAllBalancesResponse.decode,
-  service: "cosmos.bank.v1beta1.AllBalances",
+  service: "cosmos.bank.v1beta1.Query",
   method: "AllBalances",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetAllBalances = buildUseQuery<QueryAllBalancesRequest, QueryAll
 export const createGetSpendableBalances = (getRpcInstance: RpcResolver) => buildQuery<QuerySpendableBalancesRequest, QuerySpendableBalancesResponse>({
   encode: QuerySpendableBalancesRequest.encode,
   decode: QuerySpendableBalancesResponse.decode,
-  service: "cosmos.bank.v1beta1.SpendableBalances",
+  service: "cosmos.bank.v1beta1.Query",
   method: "SpendableBalances",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetSpendableBalances = buildUseQuery<QuerySpendableBalancesReque
 export const createGetTotalSupply = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalSupplyRequest, QueryTotalSupplyResponse>({
   encode: QueryTotalSupplyRequest.encode,
   decode: QueryTotalSupplyResponse.decode,
-  service: "cosmos.bank.v1beta1.TotalSupply",
+  service: "cosmos.bank.v1beta1.Query",
   method: "TotalSupply",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetTotalSupply = buildUseQuery<QueryTotalSupplyRequest, QueryTot
 export const createGetSupplyOf = (getRpcInstance: RpcResolver) => buildQuery<QuerySupplyOfRequest, QuerySupplyOfResponse>({
   encode: QuerySupplyOfRequest.encode,
   decode: QuerySupplyOfResponse.decode,
-  service: "cosmos.bank.v1beta1.SupplyOf",
+  service: "cosmos.bank.v1beta1.Query",
   method: "SupplyOf",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetSupplyOf = buildUseQuery<QuerySupplyOfRequest, QuerySupplyOfR
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "cosmos.bank.v1beta1.Params",
+  service: "cosmos.bank.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -70,7 +70,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetDenomMetadata = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomMetadataRequest, QueryDenomMetadataResponse>({
   encode: QueryDenomMetadataRequest.encode,
   decode: QueryDenomMetadataResponse.decode,
-  service: "cosmos.bank.v1beta1.DenomMetadata",
+  service: "cosmos.bank.v1beta1.Query",
   method: "DenomMetadata",
   getRpcInstance: getRpcInstance
 });
@@ -81,7 +81,7 @@ export const useGetDenomMetadata = buildUseQuery<QueryDenomMetadataRequest, Quer
 export const createGetDenomsMetadata = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomsMetadataRequest, QueryDenomsMetadataResponse>({
   encode: QueryDenomsMetadataRequest.encode,
   decode: QueryDenomsMetadataResponse.decode,
-  service: "cosmos.bank.v1beta1.DenomsMetadata",
+  service: "cosmos.bank.v1beta1.Query",
   method: "DenomsMetadata",
   getRpcInstance: getRpcInstance
 });
@@ -92,7 +92,7 @@ export const useGetDenomsMetadata = buildUseQuery<QueryDenomsMetadataRequest, Qu
 export const createGetDenomOwners = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomOwnersRequest, QueryDenomOwnersResponse>({
   encode: QueryDenomOwnersRequest.encode,
   decode: QueryDenomOwnersResponse.decode,
-  service: "cosmos.bank.v1beta1.DenomOwners",
+  service: "cosmos.bank.v1beta1.Query",
   method: "DenomOwners",
   getRpcInstance: getRpcInstance
 });

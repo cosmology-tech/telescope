@@ -4,7 +4,7 @@ import { QueryContractInfoRequest, QueryContractInfoResponse, QueryContractHisto
 export const createGetContractInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryContractInfoRequest, QueryContractInfoResponse>({
   encode: QueryContractInfoRequest.encode,
   decode: QueryContractInfoResponse.decode,
-  service: "cosmwasm.wasm.v1.ContractInfo",
+  service: "cosmwasm.wasm.v1.Query",
   method: "ContractInfo",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetContractInfo = buildUseQuery<QueryContractInfoRequest, QueryC
 export const createGetContractHistory = (getRpcInstance: RpcResolver) => buildQuery<QueryContractHistoryRequest, QueryContractHistoryResponse>({
   encode: QueryContractHistoryRequest.encode,
   decode: QueryContractHistoryResponse.decode,
-  service: "cosmwasm.wasm.v1.ContractHistory",
+  service: "cosmwasm.wasm.v1.Query",
   method: "ContractHistory",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetContractHistory = buildUseQuery<QueryContractHistoryRequest, 
 export const createGetContractsByCode = (getRpcInstance: RpcResolver) => buildQuery<QueryContractsByCodeRequest, QueryContractsByCodeResponse>({
   encode: QueryContractsByCodeRequest.encode,
   decode: QueryContractsByCodeResponse.decode,
-  service: "cosmwasm.wasm.v1.ContractsByCode",
+  service: "cosmwasm.wasm.v1.Query",
   method: "ContractsByCode",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetContractsByCode = buildUseQuery<QueryContractsByCodeRequest, 
 export const createGetAllContractState = (getRpcInstance: RpcResolver) => buildQuery<QueryAllContractStateRequest, QueryAllContractStateResponse>({
   encode: QueryAllContractStateRequest.encode,
   decode: QueryAllContractStateResponse.decode,
-  service: "cosmwasm.wasm.v1.AllContractState",
+  service: "cosmwasm.wasm.v1.Query",
   method: "AllContractState",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetAllContractState = buildUseQuery<QueryAllContractStateRequest
 export const createGetRawContractState = (getRpcInstance: RpcResolver) => buildQuery<QueryRawContractStateRequest, QueryRawContractStateResponse>({
   encode: QueryRawContractStateRequest.encode,
   decode: QueryRawContractStateResponse.decode,
-  service: "cosmwasm.wasm.v1.RawContractState",
+  service: "cosmwasm.wasm.v1.Query",
   method: "RawContractState",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetRawContractState = buildUseQuery<QueryRawContractStateRequest
 export const createGetSmartContractState = (getRpcInstance: RpcResolver) => buildQuery<QuerySmartContractStateRequest, QuerySmartContractStateResponse>({
   encode: QuerySmartContractStateRequest.encode,
   decode: QuerySmartContractStateResponse.decode,
-  service: "cosmwasm.wasm.v1.SmartContractState",
+  service: "cosmwasm.wasm.v1.Query",
   method: "SmartContractState",
   getRpcInstance: getRpcInstance
 });
@@ -70,7 +70,7 @@ export const useGetSmartContractState = buildUseQuery<QuerySmartContractStateReq
 export const createGetCode = (getRpcInstance: RpcResolver) => buildQuery<QueryCodeRequest, QueryCodeResponse>({
   encode: QueryCodeRequest.encode,
   decode: QueryCodeResponse.decode,
-  service: "cosmwasm.wasm.v1.Code",
+  service: "cosmwasm.wasm.v1.Query",
   method: "Code",
   getRpcInstance: getRpcInstance
 });
@@ -81,7 +81,7 @@ export const useGetCode = buildUseQuery<QueryCodeRequest, QueryCodeResponse>({
 export const createGetCodes = (getRpcInstance: RpcResolver) => buildQuery<QueryCodesRequest, QueryCodesResponse>({
   encode: QueryCodesRequest.encode,
   decode: QueryCodesResponse.decode,
-  service: "cosmwasm.wasm.v1.Codes",
+  service: "cosmwasm.wasm.v1.Query",
   method: "Codes",
   getRpcInstance: getRpcInstance
 });
@@ -92,7 +92,7 @@ export const useGetCodes = buildUseQuery<QueryCodesRequest, QueryCodesResponse>(
 export const createGetPinnedCodes = (getRpcInstance: RpcResolver) => buildQuery<QueryPinnedCodesRequest, QueryPinnedCodesResponse>({
   encode: QueryPinnedCodesRequest.encode,
   decode: QueryPinnedCodesResponse.decode,
-  service: "cosmwasm.wasm.v1.PinnedCodes",
+  service: "cosmwasm.wasm.v1.Query",
   method: "PinnedCodes",
   getRpcInstance: getRpcInstance
 });

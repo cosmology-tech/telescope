@@ -4,7 +4,7 @@ import { QueryGaugeIdsRequest, QueryGaugeIdsResponse, QueryDistrInfoRequest, Que
 export const createGetGaugeIds = (getRpcInstance: RpcResolver) => buildQuery<QueryGaugeIdsRequest, QueryGaugeIdsResponse>({
   encode: QueryGaugeIdsRequest.encode,
   decode: QueryGaugeIdsResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.GaugeIds",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "GaugeIds",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetGaugeIds = buildUseQuery<QueryGaugeIdsRequest, QueryGaugeIdsR
 export const createGetDistrInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryDistrInfoRequest, QueryDistrInfoResponse>({
   encode: QueryDistrInfoRequest.encode,
   decode: QueryDistrInfoResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.DistrInfo",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "DistrInfo",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetDistrInfo = buildUseQuery<QueryDistrInfoRequest, QueryDistrIn
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.Params",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetLockableDurations = (getRpcInstance: RpcResolver) => buildQuery<QueryLockableDurationsRequest, QueryLockableDurationsResponse>({
   encode: QueryLockableDurationsRequest.encode,
   decode: QueryLockableDurationsResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.LockableDurations",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "LockableDurations",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetLockableDurations = buildUseQuery<QueryLockableDurationsReque
 export const createGetIncentivizedPools = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentivizedPoolsRequest, QueryIncentivizedPoolsResponse>({
   encode: QueryIncentivizedPoolsRequest.encode,
   decode: QueryIncentivizedPoolsResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.IncentivizedPools",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "IncentivizedPools",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetIncentivizedPools = buildUseQuery<QueryIncentivizedPoolsReque
 export const createGetExternalIncentiveGauges = (getRpcInstance: RpcResolver) => buildQuery<QueryExternalIncentiveGaugesRequest, QueryExternalIncentiveGaugesResponse>({
   encode: QueryExternalIncentiveGaugesRequest.encode,
   decode: QueryExternalIncentiveGaugesResponse.decode,
-  service: "osmosis.poolincentives.v1beta1.ExternalIncentiveGauges",
+  service: "osmosis.poolincentives.v1beta1.Query",
   method: "ExternalIncentiveGauges",
   getRpcInstance: getRpcInstance
 });

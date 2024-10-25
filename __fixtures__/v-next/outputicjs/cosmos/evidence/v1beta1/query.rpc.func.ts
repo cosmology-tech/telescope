@@ -4,7 +4,7 @@ import { QueryEvidenceRequest, QueryEvidenceResponse, QueryAllEvidenceRequest, Q
 export const createGetEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryEvidenceRequest, QueryEvidenceResponse>({
   encode: QueryEvidenceRequest.encode,
   decode: QueryEvidenceResponse.decode,
-  service: "cosmos.evidence.v1beta1.Evidence",
+  service: "cosmos.evidence.v1beta1.Query",
   method: "Evidence",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetEvidence = buildUseQuery<QueryEvidenceRequest, QueryEvidenceR
 export const createGetAllEvidence = (getRpcInstance: RpcResolver) => buildQuery<QueryAllEvidenceRequest, QueryAllEvidenceResponse>({
   encode: QueryAllEvidenceRequest.encode,
   decode: QueryAllEvidenceResponse.decode,
-  service: "cosmos.evidence.v1beta1.AllEvidence",
+  service: "cosmos.evidence.v1beta1.Query",
   method: "AllEvidence",
   getRpcInstance: getRpcInstance
 });

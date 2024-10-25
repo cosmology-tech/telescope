@@ -101,6 +101,7 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
               createQueryHelperCreator(
                 ctx.generic,
                 svc.methods[methodKey],
+                svc.name,
                 methodKey,
                 helperCreatorName
               )

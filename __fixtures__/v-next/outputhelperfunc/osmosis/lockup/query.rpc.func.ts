@@ -9,7 +9,7 @@ import { ModuleBalanceRequest, ModuleBalanceRequestSDKType, ModuleBalanceRespons
 export const createGetModuleBalance = (getRpcInstance: RpcResolver) => buildQuery<ModuleBalanceRequest, ModuleBalanceResponse>({
   encode: ModuleBalanceRequest.encode,
   decode: ModuleBalanceResponse.decode,
-  service: "osmosis.lockup.ModuleBalance",
+  service: "osmosis.lockup.Query",
   method: "ModuleBalance",
   getRpcInstance: getRpcInstance
 });
@@ -20,7 +20,7 @@ export const useGetModuleBalance = buildUseQuery<ModuleBalanceRequest, ModuleBal
 export const createGetModuleLockedAmount = (getRpcInstance: RpcResolver) => buildQuery<ModuleLockedAmountRequest, ModuleLockedAmountResponse>({
   encode: ModuleLockedAmountRequest.encode,
   decode: ModuleLockedAmountResponse.decode,
-  service: "osmosis.lockup.ModuleLockedAmount",
+  service: "osmosis.lockup.Query",
   method: "ModuleLockedAmount",
   getRpcInstance: getRpcInstance
 });
@@ -31,7 +31,7 @@ export const useGetModuleLockedAmount = buildUseQuery<ModuleLockedAmountRequest,
 export const createGetAccountUnlockableCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockableCoinsRequest, AccountUnlockableCoinsResponse>({
   encode: AccountUnlockableCoinsRequest.encode,
   decode: AccountUnlockableCoinsResponse.decode,
-  service: "osmosis.lockup.AccountUnlockableCoins",
+  service: "osmosis.lockup.Query",
   method: "AccountUnlockableCoins",
   getRpcInstance: getRpcInstance
 });
@@ -42,7 +42,7 @@ export const useGetAccountUnlockableCoins = buildUseQuery<AccountUnlockableCoins
 export const createGetAccountUnlockingCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockingCoinsRequest, AccountUnlockingCoinsResponse>({
   encode: AccountUnlockingCoinsRequest.encode,
   decode: AccountUnlockingCoinsResponse.decode,
-  service: "osmosis.lockup.AccountUnlockingCoins",
+  service: "osmosis.lockup.Query",
   method: "AccountUnlockingCoins",
   getRpcInstance: getRpcInstance
 });
@@ -53,7 +53,7 @@ export const useGetAccountUnlockingCoins = buildUseQuery<AccountUnlockingCoinsRe
 export const createGetAccountLockedCoins = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedCoinsRequest, AccountLockedCoinsResponse>({
   encode: AccountLockedCoinsRequest.encode,
   decode: AccountLockedCoinsResponse.decode,
-  service: "osmosis.lockup.AccountLockedCoins",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedCoins",
   getRpcInstance: getRpcInstance
 });
@@ -64,7 +64,7 @@ export const useGetAccountLockedCoins = buildUseQuery<AccountLockedCoinsRequest,
 export const createGetAccountLockedPastTime = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeRequest, AccountLockedPastTimeResponse>({
   encode: AccountLockedPastTimeRequest.encode,
   decode: AccountLockedPastTimeResponse.decode,
-  service: "osmosis.lockup.AccountLockedPastTime",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedPastTime",
   getRpcInstance: getRpcInstance
 });
@@ -75,7 +75,7 @@ export const useGetAccountLockedPastTime = buildUseQuery<AccountLockedPastTimeRe
 export const createGetAccountLockedPastTimeNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeNotUnlockingOnlyRequest, AccountLockedPastTimeNotUnlockingOnlyResponse>({
   encode: AccountLockedPastTimeNotUnlockingOnlyRequest.encode,
   decode: AccountLockedPastTimeNotUnlockingOnlyResponse.decode,
-  service: "osmosis.lockup.AccountLockedPastTimeNotUnlockingOnly",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedPastTimeNotUnlockingOnly",
   getRpcInstance: getRpcInstance
 });
@@ -86,7 +86,7 @@ export const useGetAccountLockedPastTimeNotUnlockingOnly = buildUseQuery<Account
 export const createGetAccountUnlockedBeforeTime = (getRpcInstance: RpcResolver) => buildQuery<AccountUnlockedBeforeTimeRequest, AccountUnlockedBeforeTimeResponse>({
   encode: AccountUnlockedBeforeTimeRequest.encode,
   decode: AccountUnlockedBeforeTimeResponse.decode,
-  service: "osmosis.lockup.AccountUnlockedBeforeTime",
+  service: "osmosis.lockup.Query",
   method: "AccountUnlockedBeforeTime",
   getRpcInstance: getRpcInstance
 });
@@ -97,7 +97,7 @@ export const useGetAccountUnlockedBeforeTime = buildUseQuery<AccountUnlockedBefo
 export const createGetAccountLockedPastTimeDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedPastTimeDenomRequest, AccountLockedPastTimeDenomResponse>({
   encode: AccountLockedPastTimeDenomRequest.encode,
   decode: AccountLockedPastTimeDenomResponse.decode,
-  service: "osmosis.lockup.AccountLockedPastTimeDenom",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedPastTimeDenom",
   getRpcInstance: getRpcInstance
 });
@@ -108,7 +108,7 @@ export const useGetAccountLockedPastTimeDenom = buildUseQuery<AccountLockedPastT
 export const createGetLockedDenom = (getRpcInstance: RpcResolver) => buildQuery<LockedDenomRequest, LockedDenomResponse>({
   encode: LockedDenomRequest.encode,
   decode: LockedDenomResponse.decode,
-  service: "osmosis.lockup.LockedDenom",
+  service: "osmosis.lockup.Query",
   method: "LockedDenom",
   getRpcInstance: getRpcInstance
 });
@@ -119,7 +119,7 @@ export const useGetLockedDenom = buildUseQuery<LockedDenomRequest, LockedDenomRe
 export const createGetLockedByID = (getRpcInstance: RpcResolver) => buildQuery<LockedRequest, LockedResponse>({
   encode: LockedRequest.encode,
   decode: LockedResponse.decode,
-  service: "osmosis.lockup.LockedByID",
+  service: "osmosis.lockup.Query",
   method: "LockedByID",
   getRpcInstance: getRpcInstance
 });
@@ -130,7 +130,7 @@ export const useGetLockedByID = buildUseQuery<LockedRequest, LockedResponse>({
 export const createGetSyntheticLockupsByLockupID = (getRpcInstance: RpcResolver) => buildQuery<SyntheticLockupsByLockupIDRequest, SyntheticLockupsByLockupIDResponse>({
   encode: SyntheticLockupsByLockupIDRequest.encode,
   decode: SyntheticLockupsByLockupIDResponse.decode,
-  service: "osmosis.lockup.SyntheticLockupsByLockupID",
+  service: "osmosis.lockup.Query",
   method: "SyntheticLockupsByLockupID",
   getRpcInstance: getRpcInstance
 });
@@ -141,7 +141,7 @@ export const useGetSyntheticLockupsByLockupID = buildUseQuery<SyntheticLockupsBy
 export const createGetAccountLockedLongerDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationRequest, AccountLockedLongerDurationResponse>({
   encode: AccountLockedLongerDurationRequest.encode,
   decode: AccountLockedLongerDurationResponse.decode,
-  service: "osmosis.lockup.AccountLockedLongerDuration",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedLongerDuration",
   getRpcInstance: getRpcInstance
 });
@@ -152,7 +152,7 @@ export const useGetAccountLockedLongerDuration = buildUseQuery<AccountLockedLong
 export const createGetAccountLockedDuration = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedDurationRequest, AccountLockedDurationResponse>({
   encode: AccountLockedDurationRequest.encode,
   decode: AccountLockedDurationResponse.decode,
-  service: "osmosis.lockup.AccountLockedDuration",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedDuration",
   getRpcInstance: getRpcInstance
 });
@@ -163,7 +163,7 @@ export const useGetAccountLockedDuration = buildUseQuery<AccountLockedDurationRe
 export const createGetAccountLockedLongerDurationNotUnlockingOnly = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationNotUnlockingOnlyRequest, AccountLockedLongerDurationNotUnlockingOnlyResponse>({
   encode: AccountLockedLongerDurationNotUnlockingOnlyRequest.encode,
   decode: AccountLockedLongerDurationNotUnlockingOnlyResponse.decode,
-  service: "osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnly",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedLongerDurationNotUnlockingOnly",
   getRpcInstance: getRpcInstance
 });
@@ -174,7 +174,7 @@ export const useGetAccountLockedLongerDurationNotUnlockingOnly = buildUseQuery<A
 export const createGetAccountLockedLongerDurationDenom = (getRpcInstance: RpcResolver) => buildQuery<AccountLockedLongerDurationDenomRequest, AccountLockedLongerDurationDenomResponse>({
   encode: AccountLockedLongerDurationDenomRequest.encode,
   decode: AccountLockedLongerDurationDenomResponse.decode,
-  service: "osmosis.lockup.AccountLockedLongerDurationDenom",
+  service: "osmosis.lockup.Query",
   method: "AccountLockedLongerDurationDenom",
   getRpcInstance: getRpcInstance
 });
@@ -185,7 +185,7 @@ export const useGetAccountLockedLongerDurationDenom = buildUseQuery<AccountLocke
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.lockup.Params",
+  service: "osmosis.lockup.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

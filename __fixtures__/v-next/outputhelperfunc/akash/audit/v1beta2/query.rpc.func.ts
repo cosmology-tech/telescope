@@ -6,7 +6,7 @@ import { QueryAllProvidersAttributesRequest, QueryAllProvidersAttributesRequestS
 export const createGetAllProvidersAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
   encode: QueryAllProvidersAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
-  service: "akash.audit.v1beta2.AllProvidersAttributes",
+  service: "akash.audit.v1beta2.Query",
   method: "AllProvidersAttributes",
   getRpcInstance: getRpcInstance
 });
@@ -17,7 +17,7 @@ export const useGetAllProvidersAttributes = buildUseQuery<QueryAllProvidersAttri
 export const createGetProviderAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderAttributesRequest, QueryProvidersResponse>({
   encode: QueryProviderAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
-  service: "akash.audit.v1beta2.ProviderAttributes",
+  service: "akash.audit.v1beta2.Query",
   method: "ProviderAttributes",
   getRpcInstance: getRpcInstance
 });
@@ -28,7 +28,7 @@ export const useGetProviderAttributes = buildUseQuery<QueryProviderAttributesReq
 export const createGetProviderAuditorAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryProviderAuditorRequest, QueryProvidersResponse>({
   encode: QueryProviderAuditorRequest.encode,
   decode: QueryProvidersResponse.decode,
-  service: "akash.audit.v1beta2.ProviderAuditorAttributes",
+  service: "akash.audit.v1beta2.Query",
   method: "ProviderAuditorAttributes",
   getRpcInstance: getRpcInstance
 });
@@ -39,7 +39,7 @@ export const useGetProviderAuditorAttributes = buildUseQuery<QueryProviderAudito
 export const createGetAuditorAttributes = (getRpcInstance: RpcResolver) => buildQuery<QueryAuditorAttributesRequest, QueryProvidersResponse>({
   encode: QueryAuditorAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
-  service: "akash.audit.v1beta2.AuditorAttributes",
+  service: "akash.audit.v1beta2.Query",
   method: "AuditorAttributes",
   getRpcInstance: getRpcInstance
 });

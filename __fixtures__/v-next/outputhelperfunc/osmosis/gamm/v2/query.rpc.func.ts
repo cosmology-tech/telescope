@@ -4,7 +4,7 @@ import { QuerySpotPriceRequest, QuerySpotPriceRequestSDKType, QuerySpotPriceResp
 export const createGetSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QuerySpotPriceRequest, QuerySpotPriceResponse>({
   encode: QuerySpotPriceRequest.encode,
   decode: QuerySpotPriceResponse.decode,
-  service: "osmosis.gamm.v2.SpotPrice",
+  service: "osmosis.gamm.v2.Query",
   method: "SpotPrice",
   getRpcInstance: getRpcInstance
 });

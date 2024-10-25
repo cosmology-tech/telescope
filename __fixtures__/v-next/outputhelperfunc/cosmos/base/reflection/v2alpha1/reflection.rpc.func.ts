@@ -4,7 +4,7 @@ import { GetAuthnDescriptorRequest, GetAuthnDescriptorRequestSDKType, GetAuthnDe
 export const createGetGetAuthnDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetAuthnDescriptorRequest, GetAuthnDescriptorResponse>({
   encode: GetAuthnDescriptorRequest.encode,
   decode: GetAuthnDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetAuthnDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetAuthnDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetGetAuthnDescriptor = buildUseQuery<GetAuthnDescriptorRequest,
 export const createGetGetChainDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetChainDescriptorRequest, GetChainDescriptorResponse>({
   encode: GetChainDescriptorRequest.encode,
   decode: GetChainDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetChainDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetChainDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetGetChainDescriptor = buildUseQuery<GetChainDescriptorRequest,
 export const createGetGetCodecDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetCodecDescriptorRequest, GetCodecDescriptorResponse>({
   encode: GetCodecDescriptorRequest.encode,
   decode: GetCodecDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetCodecDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetCodecDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetGetCodecDescriptor = buildUseQuery<GetCodecDescriptorRequest,
 export const createGetGetConfigurationDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetConfigurationDescriptorRequest, GetConfigurationDescriptorResponse>({
   encode: GetConfigurationDescriptorRequest.encode,
   decode: GetConfigurationDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetConfigurationDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetConfigurationDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetGetConfigurationDescriptor = buildUseQuery<GetConfigurationDe
 export const createGetGetQueryServicesDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetQueryServicesDescriptorRequest, GetQueryServicesDescriptorResponse>({
   encode: GetQueryServicesDescriptorRequest.encode,
   decode: GetQueryServicesDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetQueryServicesDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetQueryServicesDescriptor",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetGetQueryServicesDescriptor = buildUseQuery<GetQueryServicesDe
 export const createGetGetTxDescriptor = (getRpcInstance: RpcResolver) => buildQuery<GetTxDescriptorRequest, GetTxDescriptorResponse>({
   encode: GetTxDescriptorRequest.encode,
   decode: GetTxDescriptorResponse.decode,
-  service: "cosmos.base.reflection.v2alpha1.GetTxDescriptor",
+  service: "cosmos.base.reflection.v2alpha1.ReflectionService",
   method: "GetTxDescriptor",
   getRpcInstance: getRpcInstance
 });

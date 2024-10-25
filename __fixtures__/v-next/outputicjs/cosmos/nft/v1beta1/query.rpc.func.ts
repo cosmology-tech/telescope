@@ -4,7 +4,7 @@ import { QueryBalanceRequest, QueryBalanceResponse, QueryOwnerRequest, QueryOwne
 export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encode: QueryBalanceRequest.encode,
   decode: QueryBalanceResponse.decode,
-  service: "cosmos.nft.v1beta1.Balance",
+  service: "cosmos.nft.v1beta1.Query",
   method: "Balance",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResp
 export const createGetOwner = (getRpcInstance: RpcResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
   encode: QueryOwnerRequest.encode,
   decode: QueryOwnerResponse.decode,
-  service: "cosmos.nft.v1beta1.Owner",
+  service: "cosmos.nft.v1beta1.Query",
   method: "Owner",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetOwner = buildUseQuery<QueryOwnerRequest, QueryOwnerResponse>(
 export const createGetSupply = (getRpcInstance: RpcResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
   encode: QuerySupplyRequest.encode,
   decode: QuerySupplyResponse.decode,
-  service: "cosmos.nft.v1beta1.Supply",
+  service: "cosmos.nft.v1beta1.Query",
   method: "Supply",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetSupply = buildUseQuery<QuerySupplyRequest, QuerySupplyRespons
 export const createGetNFTs = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
   encode: QueryNFTsRequest.encode,
   decode: QueryNFTsResponse.decode,
-  service: "cosmos.nft.v1beta1.NFTs",
+  service: "cosmos.nft.v1beta1.Query",
   method: "NFTs",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetNFTs = buildUseQuery<QueryNFTsRequest, QueryNFTsResponse>({
 export const createGetNFT = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
   encode: QueryNFTRequest.encode,
   decode: QueryNFTResponse.decode,
-  service: "cosmos.nft.v1beta1.NFT",
+  service: "cosmos.nft.v1beta1.Query",
   method: "NFT",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetNFT = buildUseQuery<QueryNFTRequest, QueryNFTResponse>({
 export const createGetClass = (getRpcInstance: RpcResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
   encode: QueryClassRequest.encode,
   decode: QueryClassResponse.decode,
-  service: "cosmos.nft.v1beta1.Class",
+  service: "cosmos.nft.v1beta1.Query",
   method: "Class",
   getRpcInstance: getRpcInstance
 });
@@ -70,7 +70,7 @@ export const useGetClass = buildUseQuery<QueryClassRequest, QueryClassResponse>(
 export const createGetClasses = (getRpcInstance: RpcResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
   encode: QueryClassesRequest.encode,
   decode: QueryClassesResponse.decode,
-  service: "cosmos.nft.v1beta1.Classes",
+  service: "cosmos.nft.v1beta1.Query",
   method: "Classes",
   getRpcInstance: getRpcInstance
 });
