@@ -9,7 +9,7 @@ import { RequestEcho, RequestEchoSDKType, ResponseEcho, ResponseEchoSDKType, Req
 export const createGetEcho = (getRpcInstance: RpcResolver) => buildQuery<RequestEcho, ResponseEcho>({
   encode: RequestEcho.encode,
   decode: ResponseEcho.decode,
-  service: "tendermint.abci.Echo",
+  service: "tendermint.abci.ABCIApplication",
   method: "Echo",
   getRpcInstance: getRpcInstance
 });
@@ -20,7 +20,7 @@ export const useGetEcho = buildUseQuery<RequestEcho, ResponseEcho>({
 export const createGetFlush = (getRpcInstance: RpcResolver) => buildQuery<RequestFlush, ResponseFlush>({
   encode: RequestFlush.encode,
   decode: ResponseFlush.decode,
-  service: "tendermint.abci.Flush",
+  service: "tendermint.abci.ABCIApplication",
   method: "Flush",
   getRpcInstance: getRpcInstance
 });
@@ -31,7 +31,7 @@ export const useGetFlush = buildUseQuery<RequestFlush, ResponseFlush>({
 export const createGetInfo = (getRpcInstance: RpcResolver) => buildQuery<RequestInfo, ResponseInfo>({
   encode: RequestInfo.encode,
   decode: ResponseInfo.decode,
-  service: "tendermint.abci.Info",
+  service: "tendermint.abci.ABCIApplication",
   method: "Info",
   getRpcInstance: getRpcInstance
 });
@@ -42,7 +42,7 @@ export const useGetInfo = buildUseQuery<RequestInfo, ResponseInfo>({
 export const createGetSetOption = (getRpcInstance: RpcResolver) => buildQuery<RequestSetOption, ResponseSetOption>({
   encode: RequestSetOption.encode,
   decode: ResponseSetOption.decode,
-  service: "tendermint.abci.SetOption",
+  service: "tendermint.abci.ABCIApplication",
   method: "SetOption",
   getRpcInstance: getRpcInstance
 });
@@ -53,7 +53,7 @@ export const useGetSetOption = buildUseQuery<RequestSetOption, ResponseSetOption
 export const createGetDeliverTx = (getRpcInstance: RpcResolver) => buildQuery<RequestDeliverTx, ResponseDeliverTx>({
   encode: RequestDeliverTx.encode,
   decode: ResponseDeliverTx.decode,
-  service: "tendermint.abci.DeliverTx",
+  service: "tendermint.abci.ABCIApplication",
   method: "DeliverTx",
   getRpcInstance: getRpcInstance
 });
@@ -64,7 +64,7 @@ export const useGetDeliverTx = buildUseQuery<RequestDeliverTx, ResponseDeliverTx
 export const createGetCheckTx = (getRpcInstance: RpcResolver) => buildQuery<RequestCheckTx, ResponseCheckTx>({
   encode: RequestCheckTx.encode,
   decode: ResponseCheckTx.decode,
-  service: "tendermint.abci.CheckTx",
+  service: "tendermint.abci.ABCIApplication",
   method: "CheckTx",
   getRpcInstance: getRpcInstance
 });
@@ -75,7 +75,7 @@ export const useGetCheckTx = buildUseQuery<RequestCheckTx, ResponseCheckTx>({
 export const createGetQuery = (getRpcInstance: RpcResolver) => buildQuery<RequestQuery, ResponseQuery>({
   encode: RequestQuery.encode,
   decode: ResponseQuery.decode,
-  service: "tendermint.abci.Query",
+  service: "tendermint.abci.ABCIApplication",
   method: "Query",
   getRpcInstance: getRpcInstance
 });
@@ -86,7 +86,7 @@ export const useGetQuery = buildUseQuery<RequestQuery, ResponseQuery>({
 export const createGetCommit = (getRpcInstance: RpcResolver) => buildQuery<RequestCommit, ResponseCommit>({
   encode: RequestCommit.encode,
   decode: ResponseCommit.decode,
-  service: "tendermint.abci.Commit",
+  service: "tendermint.abci.ABCIApplication",
   method: "Commit",
   getRpcInstance: getRpcInstance
 });
@@ -97,7 +97,7 @@ export const useGetCommit = buildUseQuery<RequestCommit, ResponseCommit>({
 export const createGetInitChain = (getRpcInstance: RpcResolver) => buildQuery<RequestInitChain, ResponseInitChain>({
   encode: RequestInitChain.encode,
   decode: ResponseInitChain.decode,
-  service: "tendermint.abci.InitChain",
+  service: "tendermint.abci.ABCIApplication",
   method: "InitChain",
   getRpcInstance: getRpcInstance
 });
@@ -108,7 +108,7 @@ export const useGetInitChain = buildUseQuery<RequestInitChain, ResponseInitChain
 export const createGetBeginBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestBeginBlock, ResponseBeginBlock>({
   encode: RequestBeginBlock.encode,
   decode: ResponseBeginBlock.decode,
-  service: "tendermint.abci.BeginBlock",
+  service: "tendermint.abci.ABCIApplication",
   method: "BeginBlock",
   getRpcInstance: getRpcInstance
 });
@@ -119,7 +119,7 @@ export const useGetBeginBlock = buildUseQuery<RequestBeginBlock, ResponseBeginBl
 export const createGetEndBlock = (getRpcInstance: RpcResolver) => buildQuery<RequestEndBlock, ResponseEndBlock>({
   encode: RequestEndBlock.encode,
   decode: ResponseEndBlock.decode,
-  service: "tendermint.abci.EndBlock",
+  service: "tendermint.abci.ABCIApplication",
   method: "EndBlock",
   getRpcInstance: getRpcInstance
 });
@@ -130,7 +130,7 @@ export const useGetEndBlock = buildUseQuery<RequestEndBlock, ResponseEndBlock>({
 export const createGetListSnapshots = (getRpcInstance: RpcResolver) => buildQuery<RequestListSnapshots, ResponseListSnapshots>({
   encode: RequestListSnapshots.encode,
   decode: ResponseListSnapshots.decode,
-  service: "tendermint.abci.ListSnapshots",
+  service: "tendermint.abci.ABCIApplication",
   method: "ListSnapshots",
   getRpcInstance: getRpcInstance
 });
@@ -141,7 +141,7 @@ export const useGetListSnapshots = buildUseQuery<RequestListSnapshots, ResponseL
 export const createGetOfferSnapshot = (getRpcInstance: RpcResolver) => buildQuery<RequestOfferSnapshot, ResponseOfferSnapshot>({
   encode: RequestOfferSnapshot.encode,
   decode: ResponseOfferSnapshot.decode,
-  service: "tendermint.abci.OfferSnapshot",
+  service: "tendermint.abci.ABCIApplication",
   method: "OfferSnapshot",
   getRpcInstance: getRpcInstance
 });
@@ -152,7 +152,7 @@ export const useGetOfferSnapshot = buildUseQuery<RequestOfferSnapshot, ResponseO
 export const createGetLoadSnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestLoadSnapshotChunk, ResponseLoadSnapshotChunk>({
   encode: RequestLoadSnapshotChunk.encode,
   decode: ResponseLoadSnapshotChunk.decode,
-  service: "tendermint.abci.LoadSnapshotChunk",
+  service: "tendermint.abci.ABCIApplication",
   method: "LoadSnapshotChunk",
   getRpcInstance: getRpcInstance
 });
@@ -163,7 +163,7 @@ export const useGetLoadSnapshotChunk = buildUseQuery<RequestLoadSnapshotChunk, R
 export const createGetApplySnapshotChunk = (getRpcInstance: RpcResolver) => buildQuery<RequestApplySnapshotChunk, ResponseApplySnapshotChunk>({
   encode: RequestApplySnapshotChunk.encode,
   decode: ResponseApplySnapshotChunk.decode,
-  service: "tendermint.abci.ApplySnapshotChunk",
+  service: "tendermint.abci.ABCIApplication",
   method: "ApplySnapshotChunk",
   getRpcInstance: getRpcInstance
 });

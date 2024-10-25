@@ -8,7 +8,7 @@ import { QueryTotalUnclaimedRequest, QueryTotalUnclaimedRequestSDKType, QueryTot
 export const createGetTotalUnclaimed = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalUnclaimedRequest, QueryTotalUnclaimedResponse>({
   encode: QueryTotalUnclaimedRequest.encode,
   decode: QueryTotalUnclaimedResponse.decode,
-  service: "evmos.claims.v1.TotalUnclaimed",
+  service: "evmos.claims.v1.Query",
   method: "TotalUnclaimed",
   getRpcInstance: getRpcInstance
 });
@@ -19,7 +19,7 @@ export const useGetTotalUnclaimed = buildUseQuery<QueryTotalUnclaimedRequest, Qu
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "evmos.claims.v1.Params",
+  service: "evmos.claims.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -30,7 +30,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetClaimsRecords = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimsRecordsRequest, QueryClaimsRecordsResponse>({
   encode: QueryClaimsRecordsRequest.encode,
   decode: QueryClaimsRecordsResponse.decode,
-  service: "evmos.claims.v1.ClaimsRecords",
+  service: "evmos.claims.v1.Query",
   method: "ClaimsRecords",
   getRpcInstance: getRpcInstance
 });
@@ -41,7 +41,7 @@ export const useGetClaimsRecords = buildUseQuery<QueryClaimsRecordsRequest, Quer
 export const createGetClaimsRecord = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimsRecordRequest, QueryClaimsRecordResponse>({
   encode: QueryClaimsRecordRequest.encode,
   decode: QueryClaimsRecordResponse.decode,
-  service: "evmos.claims.v1.ClaimsRecord",
+  service: "evmos.claims.v1.Query",
   method: "ClaimsRecord",
   getRpcInstance: getRpcInstance
 });

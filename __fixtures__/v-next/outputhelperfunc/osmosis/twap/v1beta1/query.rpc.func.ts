@@ -6,7 +6,7 @@ import { ParamsRequest, ParamsRequestSDKType, ParamsResponse, ParamsResponseSDKT
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<ParamsRequest, ParamsResponse>({
   encode: ParamsRequest.encode,
   decode: ParamsResponse.decode,
-  service: "osmosis.twap.v1beta1.Params",
+  service: "osmosis.twap.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -17,7 +17,7 @@ export const useGetParams = buildUseQuery<ParamsRequest, ParamsResponse>({
 export const createGetArithmeticTwap = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapRequest, ArithmeticTwapResponse>({
   encode: ArithmeticTwapRequest.encode,
   decode: ArithmeticTwapResponse.decode,
-  service: "osmosis.twap.v1beta1.ArithmeticTwap",
+  service: "osmosis.twap.v1beta1.Query",
   method: "ArithmeticTwap",
   getRpcInstance: getRpcInstance
 });
@@ -28,7 +28,7 @@ export const useGetArithmeticTwap = buildUseQuery<ArithmeticTwapRequest, Arithme
 export const createGetArithmeticTwapToNow = (getRpcInstance: RpcResolver) => buildQuery<ArithmeticTwapToNowRequest, ArithmeticTwapToNowResponse>({
   encode: ArithmeticTwapToNowRequest.encode,
   decode: ArithmeticTwapToNowResponse.decode,
-  service: "osmosis.twap.v1beta1.ArithmeticTwapToNow",
+  service: "osmosis.twap.v1beta1.Query",
   method: "ArithmeticTwapToNow",
   getRpcInstance: getRpcInstance
 });

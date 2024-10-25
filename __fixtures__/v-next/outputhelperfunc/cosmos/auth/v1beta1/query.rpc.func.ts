@@ -7,7 +7,7 @@ import { QueryAccountsRequest, QueryAccountsRequestSDKType, QueryAccountsRespons
 export const createGetAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountsRequest, QueryAccountsResponse>({
   encode: QueryAccountsRequest.encode,
   decode: QueryAccountsResponse.decode,
-  service: "cosmos.auth.v1beta1.Accounts",
+  service: "cosmos.auth.v1beta1.Query",
   method: "Accounts",
   getRpcInstance: getRpcInstance
 });
@@ -18,7 +18,7 @@ export const useGetAccounts = buildUseQuery<QueryAccountsRequest, QueryAccountsR
 export const createGetAccount = (getRpcInstance: RpcResolver) => buildQuery<QueryAccountRequest, QueryAccountResponse>({
   encode: QueryAccountRequest.encode,
   decode: QueryAccountResponse.decode,
-  service: "cosmos.auth.v1beta1.Account",
+  service: "cosmos.auth.v1beta1.Query",
   method: "Account",
   getRpcInstance: getRpcInstance
 });
@@ -29,7 +29,7 @@ export const useGetAccount = buildUseQuery<QueryAccountRequest, QueryAccountResp
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "cosmos.auth.v1beta1.Params",
+  service: "cosmos.auth.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -40,7 +40,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetModuleAccounts = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleAccountsRequest, QueryModuleAccountsResponse>({
   encode: QueryModuleAccountsRequest.encode,
   decode: QueryModuleAccountsResponse.decode,
-  service: "cosmos.auth.v1beta1.ModuleAccounts",
+  service: "cosmos.auth.v1beta1.Query",
   method: "ModuleAccounts",
   getRpcInstance: getRpcInstance
 });
@@ -51,7 +51,7 @@ export const useGetModuleAccounts = buildUseQuery<QueryModuleAccountsRequest, Qu
 export const createGetBech32Prefix = (getRpcInstance: RpcResolver) => buildQuery<Bech32PrefixRequest, Bech32PrefixResponse>({
   encode: Bech32PrefixRequest.encode,
   decode: Bech32PrefixResponse.decode,
-  service: "cosmos.auth.v1beta1.Bech32Prefix",
+  service: "cosmos.auth.v1beta1.Query",
   method: "Bech32Prefix",
   getRpcInstance: getRpcInstance
 });
@@ -62,7 +62,7 @@ export const useGetBech32Prefix = buildUseQuery<Bech32PrefixRequest, Bech32Prefi
 export const createGetAddressBytesToString = (getRpcInstance: RpcResolver) => buildQuery<AddressBytesToStringRequest, AddressBytesToStringResponse>({
   encode: AddressBytesToStringRequest.encode,
   decode: AddressBytesToStringResponse.decode,
-  service: "cosmos.auth.v1beta1.AddressBytesToString",
+  service: "cosmos.auth.v1beta1.Query",
   method: "AddressBytesToString",
   getRpcInstance: getRpcInstance
 });
@@ -73,7 +73,7 @@ export const useGetAddressBytesToString = buildUseQuery<AddressBytesToStringRequ
 export const createGetAddressStringToBytes = (getRpcInstance: RpcResolver) => buildQuery<AddressStringToBytesRequest, AddressStringToBytesResponse>({
   encode: AddressStringToBytesRequest.encode,
   decode: AddressStringToBytesResponse.decode,
-  service: "cosmos.auth.v1beta1.AddressStringToBytes",
+  service: "cosmos.auth.v1beta1.Query",
   method: "AddressStringToBytes",
   getRpcInstance: getRpcInstance
 });

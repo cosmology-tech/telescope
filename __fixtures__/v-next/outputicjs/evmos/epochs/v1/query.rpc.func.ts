@@ -4,7 +4,7 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochReque
 export const createGetEpochInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
   encode: QueryEpochsInfoRequest.encode,
   decode: QueryEpochsInfoResponse.decode,
-  service: "evmos.epochs.v1.EpochInfos",
+  service: "evmos.epochs.v1.Query",
   method: "EpochInfos",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpoch
 export const createGetCurrentEpoch = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
   encode: QueryCurrentEpochRequest.encode,
   decode: QueryCurrentEpochResponse.decode,
-  service: "evmos.epochs.v1.CurrentEpoch",
+  service: "evmos.epochs.v1.Query",
   method: "CurrentEpoch",
   getRpcInstance: getRpcInstance
 });

@@ -5,7 +5,7 @@ import { QueryFeeTokensRequest, QueryFeeTokensRequestSDKType, QueryFeeTokensResp
 export const createGetFeeTokens = (getRpcInstance: RpcResolver) => buildQuery<QueryFeeTokensRequest, QueryFeeTokensResponse>({
   encode: QueryFeeTokensRequest.encode,
   decode: QueryFeeTokensResponse.decode,
-  service: "osmosis.txfees.v1beta1.FeeTokens",
+  service: "osmosis.txfees.v1beta1.Query",
   method: "FeeTokens",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetFeeTokens = buildUseQuery<QueryFeeTokensRequest, QueryFeeToke
 export const createGetDenomSpotPrice = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomSpotPriceRequest, QueryDenomSpotPriceResponse>({
   encode: QueryDenomSpotPriceRequest.encode,
   decode: QueryDenomSpotPriceResponse.decode,
-  service: "osmosis.txfees.v1beta1.DenomSpotPrice",
+  service: "osmosis.txfees.v1beta1.Query",
   method: "DenomSpotPrice",
   getRpcInstance: getRpcInstance
 });
@@ -27,7 +27,7 @@ export const useGetDenomSpotPrice = buildUseQuery<QueryDenomSpotPriceRequest, Qu
 export const createGetDenomPoolId = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomPoolIdRequest, QueryDenomPoolIdResponse>({
   encode: QueryDenomPoolIdRequest.encode,
   decode: QueryDenomPoolIdResponse.decode,
-  service: "osmosis.txfees.v1beta1.DenomPoolId",
+  service: "osmosis.txfees.v1beta1.Query",
   method: "DenomPoolId",
   getRpcInstance: getRpcInstance
 });
@@ -38,7 +38,7 @@ export const useGetDenomPoolId = buildUseQuery<QueryDenomPoolIdRequest, QueryDen
 export const createGetBaseDenom = (getRpcInstance: RpcResolver) => buildQuery<QueryBaseDenomRequest, QueryBaseDenomResponse>({
   encode: QueryBaseDenomRequest.encode,
   decode: QueryBaseDenomResponse.decode,
-  service: "osmosis.txfees.v1beta1.BaseDenom",
+  service: "osmosis.txfees.v1beta1.Query",
   method: "BaseDenom",
   getRpcInstance: getRpcInstance
 });

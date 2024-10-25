@@ -4,7 +4,7 @@ import { QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse, Qu
 export const createGetModuleAccountBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryModuleAccountBalanceRequest, QueryModuleAccountBalanceResponse>({
   encode: QueryModuleAccountBalanceRequest.encode,
   decode: QueryModuleAccountBalanceResponse.decode,
-  service: "osmosis.claim.v1beta1.ModuleAccountBalance",
+  service: "osmosis.claim.v1beta1.Query",
   method: "ModuleAccountBalance",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetModuleAccountBalance = buildUseQuery<QueryModuleAccountBalanc
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.claim.v1beta1.Params",
+  service: "osmosis.claim.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetClaimRecord = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimRecordRequest, QueryClaimRecordResponse>({
   encode: QueryClaimRecordRequest.encode,
   decode: QueryClaimRecordResponse.decode,
-  service: "osmosis.claim.v1beta1.ClaimRecord",
+  service: "osmosis.claim.v1beta1.Query",
   method: "ClaimRecord",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetClaimRecord = buildUseQuery<QueryClaimRecordRequest, QueryCla
 export const createGetClaimableForAction = (getRpcInstance: RpcResolver) => buildQuery<QueryClaimableForActionRequest, QueryClaimableForActionResponse>({
   encode: QueryClaimableForActionRequest.encode,
   decode: QueryClaimableForActionResponse.decode,
-  service: "osmosis.claim.v1beta1.ClaimableForAction",
+  service: "osmosis.claim.v1beta1.Query",
   method: "ClaimableForAction",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetClaimableForAction = buildUseQuery<QueryClaimableForActionReq
 export const createGetTotalClaimable = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalClaimableRequest, QueryTotalClaimableResponse>({
   encode: QueryTotalClaimableRequest.encode,
   decode: QueryTotalClaimableResponse.decode,
-  service: "osmosis.claim.v1beta1.TotalClaimable",
+  service: "osmosis.claim.v1beta1.Query",
   method: "TotalClaimable",
   getRpcInstance: getRpcInstance
 });

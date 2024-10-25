@@ -13,10 +13,11 @@ import { GenericParseContext } from "../../encoding";
 export function createQueryHelperCreator(
     context: GenericParseContext,
     service: ProtoServiceMethod,
+    svcKey: string,
     methodKey?: string,
     helperCreatorName?: string
 ) {
-    const pkgImportName = context.ref.proto.package + '.' + service.name
+    const pkgImportName = context.ref.proto.package + '.' + svcKey
 
     context.addUtil("RpcResolver");
     context.addUtil("buildQuery");

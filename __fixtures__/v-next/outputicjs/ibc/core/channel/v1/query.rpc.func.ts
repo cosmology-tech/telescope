@@ -4,7 +4,7 @@ import { QueryChannelRequest, QueryChannelResponse, QueryChannelsRequest, QueryC
 export const createGetChannel = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelRequest, QueryChannelResponse>({
   encode: QueryChannelRequest.encode,
   decode: QueryChannelResponse.decode,
-  service: "ibc.core.channel.v1.Channel",
+  service: "ibc.core.channel.v1.Query",
   method: "Channel",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetChannel = buildUseQuery<QueryChannelRequest, QueryChannelResp
 export const createGetChannels = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelsRequest, QueryChannelsResponse>({
   encode: QueryChannelsRequest.encode,
   decode: QueryChannelsResponse.decode,
-  service: "ibc.core.channel.v1.Channels",
+  service: "ibc.core.channel.v1.Query",
   method: "Channels",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetChannels = buildUseQuery<QueryChannelsRequest, QueryChannelsR
 export const createGetConnectionChannels = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionChannelsRequest, QueryConnectionChannelsResponse>({
   encode: QueryConnectionChannelsRequest.encode,
   decode: QueryConnectionChannelsResponse.decode,
-  service: "ibc.core.channel.v1.ConnectionChannels",
+  service: "ibc.core.channel.v1.Query",
   method: "ConnectionChannels",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetConnectionChannels = buildUseQuery<QueryConnectionChannelsReq
 export const createGetChannelClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelClientStateRequest, QueryChannelClientStateResponse>({
   encode: QueryChannelClientStateRequest.encode,
   decode: QueryChannelClientStateResponse.decode,
-  service: "ibc.core.channel.v1.ChannelClientState",
+  service: "ibc.core.channel.v1.Query",
   method: "ChannelClientState",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetChannelClientState = buildUseQuery<QueryChannelClientStateReq
 export const createGetChannelConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse>({
   encode: QueryChannelConsensusStateRequest.encode,
   decode: QueryChannelConsensusStateResponse.decode,
-  service: "ibc.core.channel.v1.ChannelConsensusState",
+  service: "ibc.core.channel.v1.Query",
   method: "ChannelConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetChannelConsensusState = buildUseQuery<QueryChannelConsensusSt
 export const createGetPacketCommitment = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketCommitmentRequest, QueryPacketCommitmentResponse>({
   encode: QueryPacketCommitmentRequest.encode,
   decode: QueryPacketCommitmentResponse.decode,
-  service: "ibc.core.channel.v1.PacketCommitment",
+  service: "ibc.core.channel.v1.Query",
   method: "PacketCommitment",
   getRpcInstance: getRpcInstance
 });
@@ -70,7 +70,7 @@ export const useGetPacketCommitment = buildUseQuery<QueryPacketCommitmentRequest
 export const createGetPacketCommitments = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse>({
   encode: QueryPacketCommitmentsRequest.encode,
   decode: QueryPacketCommitmentsResponse.decode,
-  service: "ibc.core.channel.v1.PacketCommitments",
+  service: "ibc.core.channel.v1.Query",
   method: "PacketCommitments",
   getRpcInstance: getRpcInstance
 });
@@ -81,7 +81,7 @@ export const useGetPacketCommitments = buildUseQuery<QueryPacketCommitmentsReque
 export const createGetPacketReceipt = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketReceiptRequest, QueryPacketReceiptResponse>({
   encode: QueryPacketReceiptRequest.encode,
   decode: QueryPacketReceiptResponse.decode,
-  service: "ibc.core.channel.v1.PacketReceipt",
+  service: "ibc.core.channel.v1.Query",
   method: "PacketReceipt",
   getRpcInstance: getRpcInstance
 });
@@ -92,7 +92,7 @@ export const useGetPacketReceipt = buildUseQuery<QueryPacketReceiptRequest, Quer
 export const createGetPacketAcknowledgement = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse>({
   encode: QueryPacketAcknowledgementRequest.encode,
   decode: QueryPacketAcknowledgementResponse.decode,
-  service: "ibc.core.channel.v1.PacketAcknowledgement",
+  service: "ibc.core.channel.v1.Query",
   method: "PacketAcknowledgement",
   getRpcInstance: getRpcInstance
 });
@@ -103,7 +103,7 @@ export const useGetPacketAcknowledgement = buildUseQuery<QueryPacketAcknowledgem
 export const createGetPacketAcknowledgements = (getRpcInstance: RpcResolver) => buildQuery<QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse>({
   encode: QueryPacketAcknowledgementsRequest.encode,
   decode: QueryPacketAcknowledgementsResponse.decode,
-  service: "ibc.core.channel.v1.PacketAcknowledgements",
+  service: "ibc.core.channel.v1.Query",
   method: "PacketAcknowledgements",
   getRpcInstance: getRpcInstance
 });
@@ -114,7 +114,7 @@ export const useGetPacketAcknowledgements = buildUseQuery<QueryPacketAcknowledge
 export const createGetUnreceivedPackets = (getRpcInstance: RpcResolver) => buildQuery<QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse>({
   encode: QueryUnreceivedPacketsRequest.encode,
   decode: QueryUnreceivedPacketsResponse.decode,
-  service: "ibc.core.channel.v1.UnreceivedPackets",
+  service: "ibc.core.channel.v1.Query",
   method: "UnreceivedPackets",
   getRpcInstance: getRpcInstance
 });
@@ -125,7 +125,7 @@ export const useGetUnreceivedPackets = buildUseQuery<QueryUnreceivedPacketsReque
 export const createGetUnreceivedAcks = (getRpcInstance: RpcResolver) => buildQuery<QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse>({
   encode: QueryUnreceivedAcksRequest.encode,
   decode: QueryUnreceivedAcksResponse.decode,
-  service: "ibc.core.channel.v1.UnreceivedAcks",
+  service: "ibc.core.channel.v1.Query",
   method: "UnreceivedAcks",
   getRpcInstance: getRpcInstance
 });
@@ -136,7 +136,7 @@ export const useGetUnreceivedAcks = buildUseQuery<QueryUnreceivedAcksRequest, Qu
 export const createGetNextSequenceReceive = (getRpcInstance: RpcResolver) => buildQuery<QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse>({
   encode: QueryNextSequenceReceiveRequest.encode,
   decode: QueryNextSequenceReceiveResponse.decode,
-  service: "ibc.core.channel.v1.NextSequenceReceive",
+  service: "ibc.core.channel.v1.Query",
   method: "NextSequenceReceive",
   getRpcInstance: getRpcInstance
 });

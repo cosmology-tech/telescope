@@ -8,7 +8,7 @@ import { QueryDeploymentsRequest, QueryDeploymentsRequestSDKType, QueryDeploymen
 export const createGetDeployments = (getRpcInstance: RpcResolver) => buildQuery<QueryDeploymentsRequest, QueryDeploymentsResponse>({
   encode: QueryDeploymentsRequest.encode,
   decode: QueryDeploymentsResponse.decode,
-  service: "akash.deployment.v1beta1.Deployments",
+  service: "akash.deployment.v1beta1.Query",
   method: "Deployments",
   getRpcInstance: getRpcInstance
 });
@@ -19,7 +19,7 @@ export const useGetDeployments = buildUseQuery<QueryDeploymentsRequest, QueryDep
 export const createGetDeployment = (getRpcInstance: RpcResolver) => buildQuery<QueryDeploymentRequest, QueryDeploymentResponse>({
   encode: QueryDeploymentRequest.encode,
   decode: QueryDeploymentResponse.decode,
-  service: "akash.deployment.v1beta1.Deployment",
+  service: "akash.deployment.v1beta1.Query",
   method: "Deployment",
   getRpcInstance: getRpcInstance
 });
@@ -30,7 +30,7 @@ export const useGetDeployment = buildUseQuery<QueryDeploymentRequest, QueryDeplo
 export const createGetGroup = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupRequest, QueryGroupResponse>({
   encode: QueryGroupRequest.encode,
   decode: QueryGroupResponse.decode,
-  service: "akash.deployment.v1beta1.Group",
+  service: "akash.deployment.v1beta1.Query",
   method: "Group",
   getRpcInstance: getRpcInstance
 });

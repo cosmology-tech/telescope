@@ -9,7 +9,7 @@ import { GenericParseContext } from "../../encoding";
  * @param helperCreatorName e.g. "createGetBalance"
  * @returns
  */
-export declare function createQueryHelperCreator(context: GenericParseContext, service: ProtoServiceMethod, methodKey?: string, helperCreatorName?: string): ast.ExportNamedDeclaration;
+export declare function createQueryHelperCreator(context: GenericParseContext, service: ProtoServiceMethod, svcKey: string, methodKey?: string, helperCreatorName?: string): ast.ExportNamedDeclaration;
 /**
  *
  * @param context

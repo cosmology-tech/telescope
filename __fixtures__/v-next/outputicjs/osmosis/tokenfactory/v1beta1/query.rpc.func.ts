@@ -4,7 +4,7 @@ import { QueryParamsRequest, QueryParamsResponse, QueryDenomAuthorityMetadataReq
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.tokenfactory.v1beta1.Params",
+  service: "osmosis.tokenfactory.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetDenomAuthorityMetadata = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomAuthorityMetadataRequest, QueryDenomAuthorityMetadataResponse>({
   encode: QueryDenomAuthorityMetadataRequest.encode,
   decode: QueryDenomAuthorityMetadataResponse.decode,
-  service: "osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
+  service: "osmosis.tokenfactory.v1beta1.Query",
   method: "DenomAuthorityMetadata",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetDenomAuthorityMetadata = buildUseQuery<QueryDenomAuthorityMet
 export const createGetDenomsFromCreator = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomsFromCreatorRequest, QueryDenomsFromCreatorResponse>({
   encode: QueryDenomsFromCreatorRequest.encode,
   decode: QueryDenomsFromCreatorResponse.decode,
-  service: "osmosis.tokenfactory.v1beta1.DenomsFromCreator",
+  service: "osmosis.tokenfactory.v1beta1.Query",
   method: "DenomsFromCreator",
   getRpcInstance: getRpcInstance
 });

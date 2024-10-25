@@ -5,7 +5,7 @@ import { QueryAppVersionRequest, QueryAppVersionRequestSDKType, QueryAppVersionR
 export const createGetAppVersion = (getRpcInstance: RpcResolver) => buildQuery<QueryAppVersionRequest, QueryAppVersionResponse>({
   encode: QueryAppVersionRequest.encode,
   decode: QueryAppVersionResponse.decode,
-  service: "ibc.core.port.v1.AppVersion",
+  service: "ibc.core.port.v1.Query",
   method: "AppVersion",
   getRpcInstance: getRpcInstance
 });

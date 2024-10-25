@@ -4,7 +4,7 @@ import { QueryBalancesRequest, QueryBalancesResponse } from "./query";
 export const createGetBalances = (getRpcInstance: RpcResolver) => buildQuery<QueryBalancesRequest, QueryBalancesResponse>({
   encode: QueryBalancesRequest.encode,
   decode: QueryBalancesResponse.decode,
-  service: "evmos.vesting.v1.Balances",
+  service: "evmos.vesting.v1.Query",
   method: "Balances",
   getRpcInstance: getRpcInstance
 });

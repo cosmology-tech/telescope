@@ -7,7 +7,7 @@ import { QueryTokenPairsRequest, QueryTokenPairsRequestSDKType, QueryTokenPairsR
 export const createGetTokenPairs = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
   encode: QueryTokenPairsRequest.encode,
   decode: QueryTokenPairsResponse.decode,
-  service: "evmos.erc20.v1.TokenPairs",
+  service: "evmos.erc20.v1.Query",
   method: "TokenPairs",
   getRpcInstance: getRpcInstance
 });
@@ -18,7 +18,7 @@ export const useGetTokenPairs = buildUseQuery<QueryTokenPairsRequest, QueryToken
 export const createGetTokenPair = (getRpcInstance: RpcResolver) => buildQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
   encode: QueryTokenPairRequest.encode,
   decode: QueryTokenPairResponse.decode,
-  service: "evmos.erc20.v1.TokenPair",
+  service: "evmos.erc20.v1.Query",
   method: "TokenPair",
   getRpcInstance: getRpcInstance
 });
@@ -29,7 +29,7 @@ export const useGetTokenPair = buildUseQuery<QueryTokenPairRequest, QueryTokenPa
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "evmos.erc20.v1.Params",
+  service: "evmos.erc20.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

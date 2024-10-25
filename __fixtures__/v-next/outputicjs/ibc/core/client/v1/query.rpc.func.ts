@@ -4,7 +4,7 @@ import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesReq
 export const createGetClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
   encode: QueryClientStateRequest.encode,
   decode: QueryClientStateResponse.decode,
-  service: "ibc.core.client.v1.ClientState",
+  service: "ibc.core.client.v1.Query",
   method: "ClientState",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetClientState = buildUseQuery<QueryClientStateRequest, QueryCli
 export const createGetClientStates = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
   encode: QueryClientStatesRequest.encode,
   decode: QueryClientStatesResponse.decode,
-  service: "ibc.core.client.v1.ClientStates",
+  service: "ibc.core.client.v1.Query",
   method: "ClientStates",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetClientStates = buildUseQuery<QueryClientStatesRequest, QueryC
 export const createGetConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
   encode: QueryConsensusStateRequest.encode,
   decode: QueryConsensusStateResponse.decode,
-  service: "ibc.core.client.v1.ConsensusState",
+  service: "ibc.core.client.v1.Query",
   method: "ConsensusState",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetConsensusState = buildUseQuery<QueryConsensusStateRequest, Qu
 export const createGetConsensusStates = (getRpcInstance: RpcResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
   encode: QueryConsensusStatesRequest.encode,
   decode: QueryConsensusStatesResponse.decode,
-  service: "ibc.core.client.v1.ConsensusStates",
+  service: "ibc.core.client.v1.Query",
   method: "ConsensusStates",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetConsensusStates = buildUseQuery<QueryConsensusStatesRequest, 
 export const createGetClientStatus = (getRpcInstance: RpcResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
   encode: QueryClientStatusRequest.encode,
   decode: QueryClientStatusResponse.decode,
-  service: "ibc.core.client.v1.ClientStatus",
+  service: "ibc.core.client.v1.Query",
   method: "ClientStatus",
   getRpcInstance: getRpcInstance
 });
@@ -59,7 +59,7 @@ export const useGetClientStatus = buildUseQuery<QueryClientStatusRequest, QueryC
 export const createGetClientParams = (getRpcInstance: RpcResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
   encode: QueryClientParamsRequest.encode,
   decode: QueryClientParamsResponse.decode,
-  service: "ibc.core.client.v1.ClientParams",
+  service: "ibc.core.client.v1.Query",
   method: "ClientParams",
   getRpcInstance: getRpcInstance
 });
@@ -70,7 +70,7 @@ export const useGetClientParams = buildUseQuery<QueryClientParamsRequest, QueryC
 export const createGetUpgradedClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
   encode: QueryUpgradedClientStateRequest.encode,
   decode: QueryUpgradedClientStateResponse.decode,
-  service: "ibc.core.client.v1.UpgradedClientState",
+  service: "ibc.core.client.v1.Query",
   method: "UpgradedClientState",
   getRpcInstance: getRpcInstance
 });
@@ -81,7 +81,7 @@ export const useGetUpgradedClientState = buildUseQuery<QueryUpgradedClientStateR
 export const createGetUpgradedConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
   encode: QueryUpgradedConsensusStateRequest.encode,
   decode: QueryUpgradedConsensusStateResponse.decode,
-  service: "ibc.core.client.v1.UpgradedConsensusState",
+  service: "ibc.core.client.v1.Query",
   method: "UpgradedConsensusState",
   getRpcInstance: getRpcInstance
 });

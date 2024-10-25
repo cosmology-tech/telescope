@@ -4,7 +4,7 @@ import { QueryConnectionRequest, QueryConnectionResponse, QueryConnectionsReques
 export const createGetConnection = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionRequest, QueryConnectionResponse>({
   encode: QueryConnectionRequest.encode,
   decode: QueryConnectionResponse.decode,
-  service: "ibc.core.connection.v1.Connection",
+  service: "ibc.core.connection.v1.Query",
   method: "Connection",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetConnection = buildUseQuery<QueryConnectionRequest, QueryConne
 export const createGetConnections = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionsRequest, QueryConnectionsResponse>({
   encode: QueryConnectionsRequest.encode,
   decode: QueryConnectionsResponse.decode,
-  service: "ibc.core.connection.v1.Connections",
+  service: "ibc.core.connection.v1.Query",
   method: "Connections",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetConnections = buildUseQuery<QueryConnectionsRequest, QueryCon
 export const createGetClientConnections = (getRpcInstance: RpcResolver) => buildQuery<QueryClientConnectionsRequest, QueryClientConnectionsResponse>({
   encode: QueryClientConnectionsRequest.encode,
   decode: QueryClientConnectionsResponse.decode,
-  service: "ibc.core.connection.v1.ClientConnections",
+  service: "ibc.core.connection.v1.Query",
   method: "ClientConnections",
   getRpcInstance: getRpcInstance
 });
@@ -37,7 +37,7 @@ export const useGetClientConnections = buildUseQuery<QueryClientConnectionsReque
 export const createGetConnectionClientState = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionClientStateRequest, QueryConnectionClientStateResponse>({
   encode: QueryConnectionClientStateRequest.encode,
   decode: QueryConnectionClientStateResponse.decode,
-  service: "ibc.core.connection.v1.ConnectionClientState",
+  service: "ibc.core.connection.v1.Query",
   method: "ConnectionClientState",
   getRpcInstance: getRpcInstance
 });
@@ -48,7 +48,7 @@ export const useGetConnectionClientState = buildUseQuery<QueryConnectionClientSt
 export const createGetConnectionConsensusState = (getRpcInstance: RpcResolver) => buildQuery<QueryConnectionConsensusStateRequest, QueryConnectionConsensusStateResponse>({
   encode: QueryConnectionConsensusStateRequest.encode,
   decode: QueryConnectionConsensusStateResponse.decode,
-  service: "ibc.core.connection.v1.ConnectionConsensusState",
+  service: "ibc.core.connection.v1.Query",
   method: "ConnectionConsensusState",
   getRpcInstance: getRpcInstance
 });

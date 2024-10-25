@@ -5,7 +5,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "cosmos.mint.v1beta1.Params",
+  service: "cosmos.mint.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetInflation = (getRpcInstance: RpcResolver) => buildQuery<QueryInflationRequest, QueryInflationResponse>({
   encode: QueryInflationRequest.encode,
   decode: QueryInflationResponse.decode,
-  service: "cosmos.mint.v1beta1.Inflation",
+  service: "cosmos.mint.v1beta1.Query",
   method: "Inflation",
   getRpcInstance: getRpcInstance
 });
@@ -27,7 +27,7 @@ export const useGetInflation = buildUseQuery<QueryInflationRequest, QueryInflati
 export const createGetAnnualProvisions = (getRpcInstance: RpcResolver) => buildQuery<QueryAnnualProvisionsRequest, QueryAnnualProvisionsResponse>({
   encode: QueryAnnualProvisionsRequest.encode,
   decode: QueryAnnualProvisionsResponse.decode,
-  service: "cosmos.mint.v1beta1.AnnualProvisions",
+  service: "cosmos.mint.v1beta1.Query",
   method: "AnnualProvisions",
   getRpcInstance: getRpcInstance
 });

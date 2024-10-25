@@ -5,7 +5,7 @@ import { QueryEpochsInfoRequest, QueryEpochsInfoRequestSDKType, QueryEpochsInfoR
 export const createGetEpochInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
   encode: QueryEpochsInfoRequest.encode,
   decode: QueryEpochsInfoResponse.decode,
-  service: "osmosis.epochs.v1beta1.EpochInfos",
+  service: "osmosis.epochs.v1beta1.Query",
   method: "EpochInfos",
   getRpcInstance: getRpcInstance
 });
@@ -16,7 +16,7 @@ export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpoch
 export const createGetCurrentEpoch = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
   encode: QueryCurrentEpochRequest.encode,
   decode: QueryCurrentEpochResponse.decode,
-  service: "osmosis.epochs.v1beta1.CurrentEpoch",
+  service: "osmosis.epochs.v1beta1.Query",
   method: "CurrentEpoch",
   getRpcInstance: getRpcInstance
 });

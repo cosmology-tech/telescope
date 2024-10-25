@@ -10,7 +10,7 @@ import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, Que
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "osmosis.superfluid.Params",
+  service: "osmosis.superfluid.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -21,7 +21,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetAssetType = (getRpcInstance: RpcResolver) => buildQuery<AssetTypeRequest, AssetTypeResponse>({
   encode: AssetTypeRequest.encode,
   decode: AssetTypeResponse.decode,
-  service: "osmosis.superfluid.AssetType",
+  service: "osmosis.superfluid.Query",
   method: "AssetType",
   getRpcInstance: getRpcInstance
 });
@@ -32,7 +32,7 @@ export const useGetAssetType = buildUseQuery<AssetTypeRequest, AssetTypeResponse
 export const createGetAllAssets = (getRpcInstance: RpcResolver) => buildQuery<AllAssetsRequest, AllAssetsResponse>({
   encode: AllAssetsRequest.encode,
   decode: AllAssetsResponse.decode,
-  service: "osmosis.superfluid.AllAssets",
+  service: "osmosis.superfluid.Query",
   method: "AllAssets",
   getRpcInstance: getRpcInstance
 });
@@ -43,7 +43,7 @@ export const useGetAllAssets = buildUseQuery<AllAssetsRequest, AllAssetsResponse
 export const createGetAssetMultiplier = (getRpcInstance: RpcResolver) => buildQuery<AssetMultiplierRequest, AssetMultiplierResponse>({
   encode: AssetMultiplierRequest.encode,
   decode: AssetMultiplierResponse.decode,
-  service: "osmosis.superfluid.AssetMultiplier",
+  service: "osmosis.superfluid.Query",
   method: "AssetMultiplier",
   getRpcInstance: getRpcInstance
 });
@@ -54,7 +54,7 @@ export const useGetAssetMultiplier = buildUseQuery<AssetMultiplierRequest, Asset
 export const createGetAllIntermediaryAccounts = (getRpcInstance: RpcResolver) => buildQuery<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse>({
   encode: AllIntermediaryAccountsRequest.encode,
   decode: AllIntermediaryAccountsResponse.decode,
-  service: "osmosis.superfluid.AllIntermediaryAccounts",
+  service: "osmosis.superfluid.Query",
   method: "AllIntermediaryAccounts",
   getRpcInstance: getRpcInstance
 });
@@ -65,7 +65,7 @@ export const useGetAllIntermediaryAccounts = buildUseQuery<AllIntermediaryAccoun
 export const createGetConnectedIntermediaryAccount = (getRpcInstance: RpcResolver) => buildQuery<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse>({
   encode: ConnectedIntermediaryAccountRequest.encode,
   decode: ConnectedIntermediaryAccountResponse.decode,
-  service: "osmosis.superfluid.ConnectedIntermediaryAccount",
+  service: "osmosis.superfluid.Query",
   method: "ConnectedIntermediaryAccount",
   getRpcInstance: getRpcInstance
 });
@@ -76,7 +76,7 @@ export const useGetConnectedIntermediaryAccount = buildUseQuery<ConnectedInterme
 export const createGetTotalDelegationByValidatorForDenom = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse>({
   encode: QueryTotalDelegationByValidatorForDenomRequest.encode,
   decode: QueryTotalDelegationByValidatorForDenomResponse.decode,
-  service: "osmosis.superfluid.TotalDelegationByValidatorForDenom",
+  service: "osmosis.superfluid.Query",
   method: "TotalDelegationByValidatorForDenom",
   getRpcInstance: getRpcInstance
 });
@@ -87,7 +87,7 @@ export const useGetTotalDelegationByValidatorForDenom = buildUseQuery<QueryTotal
 export const createGetTotalSuperfluidDelegations = (getRpcInstance: RpcResolver) => buildQuery<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse>({
   encode: TotalSuperfluidDelegationsRequest.encode,
   decode: TotalSuperfluidDelegationsResponse.decode,
-  service: "osmosis.superfluid.TotalSuperfluidDelegations",
+  service: "osmosis.superfluid.Query",
   method: "TotalSuperfluidDelegations",
   getRpcInstance: getRpcInstance
 });
@@ -98,7 +98,7 @@ export const useGetTotalSuperfluidDelegations = buildUseQuery<TotalSuperfluidDel
 export const createGetSuperfluidDelegationAmount = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse>({
   encode: SuperfluidDelegationAmountRequest.encode,
   decode: SuperfluidDelegationAmountResponse.decode,
-  service: "osmosis.superfluid.SuperfluidDelegationAmount",
+  service: "osmosis.superfluid.Query",
   method: "SuperfluidDelegationAmount",
   getRpcInstance: getRpcInstance
 });
@@ -109,7 +109,7 @@ export const useGetSuperfluidDelegationAmount = buildUseQuery<SuperfluidDelegati
 export const createGetSuperfluidDelegationsByDelegator = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse>({
   encode: SuperfluidDelegationsByDelegatorRequest.encode,
   decode: SuperfluidDelegationsByDelegatorResponse.decode,
-  service: "osmosis.superfluid.SuperfluidDelegationsByDelegator",
+  service: "osmosis.superfluid.Query",
   method: "SuperfluidDelegationsByDelegator",
   getRpcInstance: getRpcInstance
 });
@@ -120,7 +120,7 @@ export const useGetSuperfluidDelegationsByDelegator = buildUseQuery<SuperfluidDe
 export const createGetSuperfluidUndelegationsByDelegator = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse>({
   encode: SuperfluidUndelegationsByDelegatorRequest.encode,
   decode: SuperfluidUndelegationsByDelegatorResponse.decode,
-  service: "osmosis.superfluid.SuperfluidUndelegationsByDelegator",
+  service: "osmosis.superfluid.Query",
   method: "SuperfluidUndelegationsByDelegator",
   getRpcInstance: getRpcInstance
 });
@@ -131,7 +131,7 @@ export const useGetSuperfluidUndelegationsByDelegator = buildUseQuery<Superfluid
 export const createGetSuperfluidDelegationsByValidatorDenom = (getRpcInstance: RpcResolver) => buildQuery<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse>({
   encode: SuperfluidDelegationsByValidatorDenomRequest.encode,
   decode: SuperfluidDelegationsByValidatorDenomResponse.decode,
-  service: "osmosis.superfluid.SuperfluidDelegationsByValidatorDenom",
+  service: "osmosis.superfluid.Query",
   method: "SuperfluidDelegationsByValidatorDenom",
   getRpcInstance: getRpcInstance
 });
@@ -142,7 +142,7 @@ export const useGetSuperfluidDelegationsByValidatorDenom = buildUseQuery<Superfl
 export const createGetEstimateSuperfluidDelegatedAmountByValidatorDenom = (getRpcInstance: RpcResolver) => buildQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>({
   encode: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode,
   decode: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode,
-  service: "osmosis.superfluid.EstimateSuperfluidDelegatedAmountByValidatorDenom",
+  service: "osmosis.superfluid.Query",
   method: "EstimateSuperfluidDelegatedAmountByValidatorDenom",
   getRpcInstance: getRpcInstance
 });
@@ -153,7 +153,7 @@ export const useGetEstimateSuperfluidDelegatedAmountByValidatorDenom = buildUseQ
 export const createGetTotalDelegationByDelegator = (getRpcInstance: RpcResolver) => buildQuery<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse>({
   encode: QueryTotalDelegationByDelegatorRequest.encode,
   decode: QueryTotalDelegationByDelegatorResponse.decode,
-  service: "osmosis.superfluid.TotalDelegationByDelegator",
+  service: "osmosis.superfluid.Query",
   method: "TotalDelegationByDelegator",
   getRpcInstance: getRpcInstance
 });
@@ -164,7 +164,7 @@ export const useGetTotalDelegationByDelegator = buildUseQuery<QueryTotalDelegati
 export const createGetUnpoolWhitelist = (getRpcInstance: RpcResolver) => buildQuery<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse>({
   encode: QueryUnpoolWhitelistRequest.encode,
   decode: QueryUnpoolWhitelistResponse.decode,
-  service: "osmosis.superfluid.UnpoolWhitelist",
+  service: "osmosis.superfluid.Query",
   method: "UnpoolWhitelist",
   getRpcInstance: getRpcInstance
 });

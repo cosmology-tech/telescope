@@ -4,7 +4,7 @@ import { ListAllInterfacesRequest, ListAllInterfacesRequestSDKType, ListAllInter
 export const createGetListAllInterfaces = (getRpcInstance: RpcResolver) => buildQuery<ListAllInterfacesRequest, ListAllInterfacesResponse>({
   encode: ListAllInterfacesRequest.encode,
   decode: ListAllInterfacesResponse.decode,
-  service: "cosmos.base.reflection.v1beta1.ListAllInterfaces",
+  service: "cosmos.base.reflection.v1beta1.ReflectionService",
   method: "ListAllInterfaces",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetListAllInterfaces = buildUseQuery<ListAllInterfacesRequest, L
 export const createGetListImplementations = (getRpcInstance: RpcResolver) => buildQuery<ListImplementationsRequest, ListImplementationsResponse>({
   encode: ListImplementationsRequest.encode,
   decode: ListImplementationsResponse.decode,
-  service: "cosmos.base.reflection.v1beta1.ListImplementations",
+  service: "cosmos.base.reflection.v1beta1.ReflectionService",
   method: "ListImplementations",
   getRpcInstance: getRpcInstance
 });

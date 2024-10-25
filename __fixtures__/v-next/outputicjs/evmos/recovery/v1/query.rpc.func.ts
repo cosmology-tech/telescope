@@ -4,7 +4,7 @@ import { QueryParamsRequest, QueryParamsResponse } from "./query";
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "evmos.recovery.v1.Params",
+  service: "evmos.recovery.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });

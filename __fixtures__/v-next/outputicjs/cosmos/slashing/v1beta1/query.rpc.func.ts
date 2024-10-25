@@ -4,7 +4,7 @@ import { QueryParamsRequest, QueryParamsResponse, QuerySigningInfoRequest, Query
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "cosmos.slashing.v1beta1.Params",
+  service: "cosmos.slashing.v1beta1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
 export const createGetSigningInfo = (getRpcInstance: RpcResolver) => buildQuery<QuerySigningInfoRequest, QuerySigningInfoResponse>({
   encode: QuerySigningInfoRequest.encode,
   decode: QuerySigningInfoResponse.decode,
-  service: "cosmos.slashing.v1beta1.SigningInfo",
+  service: "cosmos.slashing.v1beta1.Query",
   method: "SigningInfo",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetSigningInfo = buildUseQuery<QuerySigningInfoRequest, QuerySig
 export const createGetSigningInfos = (getRpcInstance: RpcResolver) => buildQuery<QuerySigningInfosRequest, QuerySigningInfosResponse>({
   encode: QuerySigningInfosRequest.encode,
   decode: QuerySigningInfosResponse.decode,
-  service: "cosmos.slashing.v1beta1.SigningInfos",
+  service: "cosmos.slashing.v1beta1.Query",
   method: "SigningInfos",
   getRpcInstance: getRpcInstance
 });

@@ -5,7 +5,7 @@ import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, Que
 export const createGetConfig = (getRpcInstance: RpcResolver) => buildQuery<QueryConfigRequest, QueryConfigResponse>({
   encode: QueryConfigRequest.encode,
   decode: QueryConfigResponse.decode,
-  service: "cosmos.app.v1alpha1.Config",
+  service: "cosmos.app.v1alpha1.Query",
   method: "Config",
   getRpcInstance: getRpcInstance
 });

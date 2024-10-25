@@ -6,7 +6,7 @@ import { QueryGrantsRequest, QueryGrantsRequestSDKType, QueryGrantsResponse, Que
 export const createGetGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
   encode: QueryGrantsRequest.encode,
   decode: QueryGrantsResponse.decode,
-  service: "cosmos.authz.v1beta1.Grants",
+  service: "cosmos.authz.v1beta1.Query",
   method: "Grants",
   getRpcInstance: getRpcInstance
 });
@@ -17,7 +17,7 @@ export const useGetGrants = buildUseQuery<QueryGrantsRequest, QueryGrantsRespons
 export const createGetGranterGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
   encode: QueryGranterGrantsRequest.encode,
   decode: QueryGranterGrantsResponse.decode,
-  service: "cosmos.authz.v1beta1.GranterGrants",
+  service: "cosmos.authz.v1beta1.Query",
   method: "GranterGrants",
   getRpcInstance: getRpcInstance
 });
@@ -28,7 +28,7 @@ export const useGetGranterGrants = buildUseQuery<QueryGranterGrantsRequest, Quer
 export const createGetGranteeGrants = (getRpcInstance: RpcResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
   encode: QueryGranteeGrantsRequest.encode,
   decode: QueryGranteeGrantsResponse.decode,
-  service: "cosmos.authz.v1beta1.GranteeGrants",
+  service: "cosmos.authz.v1beta1.Query",
   method: "GranteeGrants",
   getRpcInstance: getRpcInstance
 });

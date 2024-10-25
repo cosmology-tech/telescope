@@ -4,7 +4,7 @@ import { QueryDenomTraceRequest, QueryDenomTraceResponse, QueryDenomTracesReques
 export const createGetDenomTrace = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
   encode: QueryDenomTraceRequest.encode,
   decode: QueryDenomTraceResponse.decode,
-  service: "ibc.applications.transfer.v1.DenomTrace",
+  service: "ibc.applications.transfer.v1.Query",
   method: "DenomTrace",
   getRpcInstance: getRpcInstance
 });
@@ -15,7 +15,7 @@ export const useGetDenomTrace = buildUseQuery<QueryDenomTraceRequest, QueryDenom
 export const createGetDenomTraces = (getRpcInstance: RpcResolver) => buildQuery<QueryDenomTracesRequest, QueryDenomTracesResponse>({
   encode: QueryDenomTracesRequest.encode,
   decode: QueryDenomTracesResponse.decode,
-  service: "ibc.applications.transfer.v1.DenomTraces",
+  service: "ibc.applications.transfer.v1.Query",
   method: "DenomTraces",
   getRpcInstance: getRpcInstance
 });
@@ -26,7 +26,7 @@ export const useGetDenomTraces = buildUseQuery<QueryDenomTracesRequest, QueryDen
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
-  service: "ibc.applications.transfer.v1.Params",
+  service: "ibc.applications.transfer.v1.Query",
   method: "Params",
   getRpcInstance: getRpcInstance
 });
