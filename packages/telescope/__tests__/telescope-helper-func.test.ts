@@ -220,7 +220,10 @@ const options: TelescopeOptions = {
     genCustomHooks: true,
     include: {
       // pattern matching is case sensitive
-      patterns: ["cosmos.gov.v1beta1.**"],
+      patterns: [
+        "cosmos.gov.v1beta1.**",
+        "cosmos.bank.v1beta1.*Send*"
+      ],
     },
     nameMappers: {
       All: {
