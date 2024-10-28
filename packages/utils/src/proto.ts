@@ -1,7 +1,13 @@
 import { camel, variableSlug } from ".";
 import { pascal, snake } from "case";
 import minimatch from "minimatch";
-import { ProtoField, ProtoRef, ProtoRoot } from "@cosmology/types";
+import {
+  ProtoField,
+  ProtoRef,
+  ProtoRoot,
+  HelperFuncNameMappers,
+  HelperFuncNameMappersRule,
+} from "@cosmology/types";
 import dotty from "dotty";
 
 export const getNestedProto = (root: ProtoRoot) => {
@@ -84,6 +90,7 @@ export const getQueryMethodNames = (
           if (!globPattern.test(pattern)) {
             return methodNameWithPkg === pattern;
           }
+
           return minimatch(methodNameWithPkg, pattern);
         });
 
@@ -214,32 +221,25 @@ export const getTypeNameFromFieldName = (
  * get the name of the helper function.
  * @param packagePath e.g. "cosmos.bank.v1beta1"
  * @param methodKey e.g. "balance"
- * @param mapper
+ * @param mappers a list of mappers to apply. An earlier one will override a later one.
  */
 export function getHelperFuncName(
   packagePath: string,
   methodKey: string,
-  mapper: {
-    funcBody?: {
-      [key: string]: "unchanged" | "get" | ((name: string) => string);
-    };
-    creatorPrefix?: string;
-    hookPrefix?: string;
-  },
+  mappers: HelperFuncNameMappers[],
   defaultFuncBodyFn: "unchanged" | "get" | ((name: string) => string)
 ): {
   creator: string;
   hook: string;
 } {
-  mapper = mapper ?? {};
-  const { funcBody, creatorPrefix, hookPrefix } = mapper;
+  let rule: HelperFuncNameMappersRule;
   const methodKeyWithPkg = `${packagePath}.${methodKey}`;
-  let funcBodyFn: "unchanged" | "get" | ((name: string) => string);
 
-  if (funcBody) {
-    for (const pattern in funcBody) {
-      let isMatching = false;
+  for (const m of mappers) {
+    let mapper = m ?? {};
+    let isMatching = false;
 
+    for (const pattern in mapper) {
       if (!globPattern.test(pattern)) {
         isMatching = methodKeyWithPkg === pattern;
       }
@@ -247,13 +247,27 @@ export function getHelperFuncName(
       isMatching = minimatch(methodKeyWithPkg, pattern);
 
       if (isMatching) {
-        funcBodyFn = funcBody[pattern];
+        rule = mapper[pattern];
         break;
       }
     }
+
+    if (isMatching) {
+      break;
+    }
   }
 
-  funcBodyFn = funcBodyFn ?? defaultFuncBodyFn;
+  let {
+    funcBody: funcBodyFn,
+    creatorPrefix,
+    hookPrefix,
+  } = {
+    funcBody: defaultFuncBodyFn,
+    creatorPrefix: "create",
+    hookPrefix: "use",
+    ...rule,
+  };
+
   funcBodyFn =
     funcBodyFn === "unchanged"
       ? String
@@ -262,7 +276,7 @@ export function getHelperFuncName(
       : funcBodyFn;
 
   return {
-    creator: camel(`${creatorPrefix || "create"}_${camel(funcBodyFn(methodKey))}`),
-    hook: camel(`${hookPrefix || "use"}_${camel(funcBodyFn(methodKey))}`),
+    creator: camel(`${creatorPrefix}_${camel(funcBodyFn(methodKey))}`),
+    hook: camel(`${hookPrefix}_${camel(funcBodyFn(methodKey))}`),
   };
 }

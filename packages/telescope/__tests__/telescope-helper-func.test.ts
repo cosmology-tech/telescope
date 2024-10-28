@@ -218,6 +218,53 @@ const options: TelescopeOptions = {
   helperFuncCreators: {
     enabled: true,
     genCustomHooks: true,
+    include: {
+      // pattern matching is case sensitive
+      patterns: ["cosmos.gov.v1beta1.**"],
+    },
+    nameMappers: {
+      All: {
+        "cosmos.gov.v1beta1.*Vote*": {
+          funcBody: (name: string) => {
+            return `helper${name}`;
+          },
+          creatorPrefix: "build",
+          hookPrefix: "use",
+        },
+        "cosmos.gov.v1beta1.*Deposit*": {
+          funcBody: (name: string) => {
+            return `check${name}`;
+          },
+        },
+      },
+      Query: {
+        // this rule will override Deposits method matched in All
+        // createGoOverDeposits and useGoOverDeposits will be created
+        "cosmos.gov.v1beta1.*Deposits*": {
+          funcBody: (name: string) => {
+            return `goOver${name}`;
+          },
+        },
+      },
+      Msg: {
+        // this rule will override VoteWeighted method matched in All
+        // constructLetsVoteWeighted and useTxLetsVoteWeighted will be created
+        "cosmos.gov.v1beta1.*VoteWeighted*": {
+          funcBody: (name: string) => {
+            return `lets${name}`;
+          },
+          creatorPrefix: "construct",
+          hookPrefix: "useTx",
+        },
+        // this rule will override Deposit method matched in All
+        // createToDeposit and useToDeposit will be created
+        "cosmos.gov.v1beta1.*Deposit*": {
+          funcBody: (name: string) => {
+            return `to${name}`;
+          },
+        },
+      }
+    },
   },
 
   reactQuery: {
@@ -262,7 +309,7 @@ const options: TelescopeOptions = {
     enabled: true,
     legacy: {
       useNullHandling: true,
-      useOmitEmpty: true
+      useOmitEmpty: true,
     },
     exceptions: {
       "/akash.audit.v1beta2.MsgSignProviderAttributes": {

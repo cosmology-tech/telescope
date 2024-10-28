@@ -1,6 +1,6 @@
-import { TSBuilderInput } from '@cosmwasm/ts-codegen';
-import { AminoExceptions } from './aminos';
-import { Operation } from 'fast-json-patch';
+import { TSBuilderInput } from "@cosmwasm/ts-codegen";
+import { AminoExceptions } from "./aminos";
+import { Operation } from "fast-json-patch";
 export declare enum TelescopeLogLevel {
     None = 0,
     Info = 1,
@@ -8,8 +8,30 @@ export declare enum TelescopeLogLevel {
     Error = 3,
     Debug = 4
 }
-interface TelescopeOpts {
-    env?: 'default' | 'v-next';
+/**
+ * The name mappers for helper functions.
+ */
+export interface HelperFuncNameMappersRule {
+    funcBody: "unchanged" | "get" | ((name: string) => string);
+    creatorPrefix?: string;
+    hookPrefix?: string;
+}
+/**
+ * The name mappers for helper functions.
+ */
+export interface HelperFuncNameMappers {
+    /**
+     * the key is a pattern to apply rules of followed body and prefix. case insensitive
+     * .e.g: cosmos.gov.v1beta1.*Vote*
+     */
+    [key: string]: {
+        funcBody: "unchanged" | "get" | ((name: string) => string);
+        creatorPrefix?: string;
+        hookPrefix?: string;
+    };
+}
+export interface TelescopeOpts {
+    env?: "default" | "v-next";
     useInterchainJs?: boolean;
     removeUnusedImports?: boolean;
     classesUseArrowFunctions?: boolean;
@@ -78,14 +100,14 @@ interface TelescopeOpts {
             customTypes?: {
                 useCosmosSDKDec?: boolean;
                 useEnhancedDecimal?: boolean;
-                base64Lib?: '@endo/base64';
+                base64Lib?: "@endo/base64";
             };
-            num64?: 'long' | 'bigint';
+            num64?: "long" | "bigint";
             useDeepPartial?: boolean;
             useExact?: boolean;
             toJsonUnknown?: boolean;
-            timestamp?: 'date' | 'timestamp';
-            duration?: 'duration' | 'string';
+            timestamp?: "date" | "timestamp";
+            duration?: "duration" | "string";
             setDefaultEnumToUnrecognized?: boolean;
             autoFixUndefinedEnumDefault?: boolean;
             setDefaultCustomTypesToUndefined?: boolean;
@@ -130,7 +152,7 @@ interface TelescopeOpts {
         customTypes?: {
             useCosmosSDKDec?: boolean;
         };
-        omitEmptyTags?: ('omitempty' | 'dont_omitempty')[];
+        omitEmptyTags?: ("omitempty" | "dont_omitempty")[];
         useProtoOptionality?: boolean;
         disableMsgTypes?: boolean;
         casingFn?: Function;
@@ -159,7 +181,7 @@ interface TelescopeOpts {
         }[];
     };
     rpcClients?: {
-        type?: 'tendermint' | 'grpc-web' | 'grpc-gateway';
+        type?: "tendermint" | "grpc-web" | "grpc-gateway";
         enabled: boolean;
         inline?: boolean;
         extensions?: boolean;
@@ -167,14 +189,14 @@ interface TelescopeOpts {
         scopedIsExclusive?: boolean;
         bundle?: boolean;
         serviceImplement?: {
-            [key: 'Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string]: {
+            [key: "Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string]: {
                 include?: {
                     patterns?: string[];
                 };
-                type: 'Query' | 'Tx' | string;
+                type: "Query" | "Tx" | string;
             };
         };
-        enabledServices?: ('Msg' | 'Query' | 'Service' | 'ReflectionService' | 'ABCIApplication' | string)[];
+        enabledServices?: ("Msg" | "Query" | "Service" | "ReflectionService" | "ABCIApplication" | string)[];
         scoped?: {
             dir: string;
             filename?: string;
@@ -187,7 +209,7 @@ interface TelescopeOpts {
         instantOps?: {
             className: string;
             include?: {
-                serviceTypes?: ('Query' | 'Tx' | string)[];
+                serviceTypes?: ("Query" | "Tx" | string)[];
                 patterns?: string[];
             };
             nameMapping?: {
@@ -208,31 +230,27 @@ interface TelescopeOpts {
         enabled: boolean;
         genCustomHooks?: boolean;
         include?: {
-            serviceTypes?: ('Query' | 'Msg' | 'All')[];
+            serviceTypes?: ("Query" | "Tx")[];
             patterns?: string[];
         };
         nameMappers?: {
-            All?: {
-                funcBody: {
-                    [key: string]: "unchanged" | ((name: string) => string);
-                };
-                creatorPrefix: string;
-                hookPrefix: string;
-            };
-            Query?: {
-                funcBody: {
-                    [key: string]: "unchanged" | "get" | ((name: string) => string);
-                };
-                creatorPrefix: string;
-                hookPrefix: string;
-            };
-            Msg?: {
-                funcBody: {
-                    [key: string]: "unchanged" | ((name: string) => string);
-                };
-                creatorPrefix: string;
-                hookPrefix: string;
-            };
+            /**
+             * to map the method name based on the rules of followed body and prefix.
+             * funcBody default to "unchanged"
+             */
+            All?: HelperFuncNameMappers;
+            /**
+             * to map the method name based on the rules of followed body and prefix.
+             * this will override the All rules if pattern exists.
+             * funcBody default to "get"
+             */
+            Query?: HelperFuncNameMappers;
+            /**
+             * to map the method name based on the rules of followed body and prefix.
+             * this will override the All rules if pattern exists.
+             * funcBody default to "unchanged"
+             */
+            Msg?: HelperFuncNameMappers;
         };
     };
     reactQuery?: {

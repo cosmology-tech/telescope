@@ -25,26 +25,26 @@ export const useGetProposals = buildUseQuery<QueryProposalsRequest, QueryProposa
   builderQueryFn: createGetProposals,
   queryKeyPrefix: "ProposalsQuery"
 });
-export const createGetVote = (getRpcInstance: RpcResolver) => buildQuery<QueryVoteRequest, QueryVoteResponse>({
+export const buildHelperVote = (getRpcInstance: RpcResolver) => buildQuery<QueryVoteRequest, QueryVoteResponse>({
   encode: QueryVoteRequest.encode,
   decode: QueryVoteResponse.decode,
   service: "cosmos.gov.v1beta1.Query",
   method: "Vote",
   getRpcInstance: getRpcInstance
 });
-export const useGetVote = buildUseQuery<QueryVoteRequest, QueryVoteResponse>({
-  builderQueryFn: createGetVote,
+export const useHelperVote = buildUseQuery<QueryVoteRequest, QueryVoteResponse>({
+  builderQueryFn: buildHelperVote,
   queryKeyPrefix: "VoteQuery"
 });
-export const createGetVotes = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesRequest, QueryVotesResponse>({
+export const buildHelperVotes = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesRequest, QueryVotesResponse>({
   encode: QueryVotesRequest.encode,
   decode: QueryVotesResponse.decode,
   service: "cosmos.gov.v1beta1.Query",
   method: "Votes",
   getRpcInstance: getRpcInstance
 });
-export const useGetVotes = buildUseQuery<QueryVotesRequest, QueryVotesResponse>({
-  builderQueryFn: createGetVotes,
+export const useHelperVotes = buildUseQuery<QueryVotesRequest, QueryVotesResponse>({
+  builderQueryFn: buildHelperVotes,
   queryKeyPrefix: "VotesQuery"
 });
 export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
@@ -58,26 +58,26 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetDeposit = (getRpcInstance: RpcResolver) => buildQuery<QueryDepositRequest, QueryDepositResponse>({
+export const createCheckDeposit = (getRpcInstance: RpcResolver) => buildQuery<QueryDepositRequest, QueryDepositResponse>({
   encode: QueryDepositRequest.encode,
   decode: QueryDepositResponse.decode,
   service: "cosmos.gov.v1beta1.Query",
   method: "Deposit",
   getRpcInstance: getRpcInstance
 });
-export const useGetDeposit = buildUseQuery<QueryDepositRequest, QueryDepositResponse>({
-  builderQueryFn: createGetDeposit,
+export const useCheckDeposit = buildUseQuery<QueryDepositRequest, QueryDepositResponse>({
+  builderQueryFn: createCheckDeposit,
   queryKeyPrefix: "DepositQuery"
 });
-export const createGetDeposits = (getRpcInstance: RpcResolver) => buildQuery<QueryDepositsRequest, QueryDepositsResponse>({
+export const createGoOverDeposits = (getRpcInstance: RpcResolver) => buildQuery<QueryDepositsRequest, QueryDepositsResponse>({
   encode: QueryDepositsRequest.encode,
   decode: QueryDepositsResponse.decode,
   service: "cosmos.gov.v1beta1.Query",
   method: "Deposits",
   getRpcInstance: getRpcInstance
 });
-export const useGetDeposits = buildUseQuery<QueryDepositsRequest, QueryDepositsResponse>({
-  builderQueryFn: createGetDeposits,
+export const useGoOverDeposits = buildUseQuery<QueryDepositsRequest, QueryDepositsResponse>({
+  builderQueryFn: createGoOverDeposits,
   queryKeyPrefix: "DepositsQuery"
 });
 export const createGetTallyResult = (getRpcInstance: RpcResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({

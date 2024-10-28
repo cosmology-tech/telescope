@@ -75,8 +75,6 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
             "helperFuncCreators.nameMappers"
           );
 
-          const mapper = nameMappers?.Query || nameMappers?.All || {};
-
           const methodKeys = getQueryMethodNames(
             bundlerFile.package,
             Object.keys(proto[svcKey].methods ?? {}),
@@ -94,7 +92,12 @@ export const plugin = (builder: TelescopeBuilder, bundler: Bundler) => {
             // get helperCreatorName
             // get hookName
             const { creator: helperCreatorName, hook: hookName } =
-              getHelperFuncName(bundlerFile.package, methodKey, mapper, "get");
+              getHelperFuncName(
+                bundlerFile.package,
+                methodKey,
+                [nameMappers?.Query, nameMappers?.All],
+                "get"
+              );
 
             // gen helper funcs
             asts.push(
