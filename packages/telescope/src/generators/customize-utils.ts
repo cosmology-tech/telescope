@@ -31,4 +31,13 @@ export const plugin = (builder: TelescopeBuilder) => {
     UTILS.base64FromBytes = '__helpers__';
     UTILS.bytesFromBase64 = '__helpers__';
   }
+
+  if (builder.options.useInterchainJs === true) {
+    UTILS.AminoMsg = {
+      type: 'import',
+      path: '@interchainjs/ReadOnlyAminoMsg',
+      name: 'ReadOnlyAminoMsg',
+      importAs: 'AminoMsg',
+    };
+  }
 };

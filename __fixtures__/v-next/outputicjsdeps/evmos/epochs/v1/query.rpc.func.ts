@@ -1,0 +1,25 @@
+import { RpcResolver, buildQuery } from "../../../helper-func-types";
+import { buildUseQuery } from "../../../react-query";
+import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
+export const createGetEpochInfos = (getRpcInstance: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
+  encode: QueryEpochsInfoRequest.encode,
+  decode: QueryEpochsInfoResponse.decode,
+  service: "evmos.epochs.v1.Query",
+  method: "EpochInfos",
+  getRpcInstance: getRpcInstance
+});
+export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
+  builderQueryFn: createGetEpochInfos,
+  queryKeyPrefix: "EpochInfosQuery"
+});
+export const createGetCurrentEpoch = (getRpcInstance: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
+  encode: QueryCurrentEpochRequest.encode,
+  decode: QueryCurrentEpochResponse.decode,
+  service: "evmos.epochs.v1.Query",
+  method: "CurrentEpoch",
+  getRpcInstance: getRpcInstance
+});
+export const useGetCurrentEpoch = buildUseQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
+  builderQueryFn: createGetCurrentEpoch,
+  queryKeyPrefix: "CurrentEpochQuery"
+});
