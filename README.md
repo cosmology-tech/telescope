@@ -221,12 +221,12 @@ yarn add --dev @cosmology/telescope
 Install helpers and cosmjs [dependencies listed here](#dependencies)
 
 ```js
-import { join } from "path";
-import telescope from "@cosmology/telescope";
-import { sync as rimraf } from "rimraf";
+import { join } from 'path';
+import telescope from '@cosmology/telescope';
+import { sync as rimraf } from 'rimraf';
 
-const protoDirs = [join(__dirname, "/../proto")];
-const outPath = join(__dirname, "../src");
+const protoDirs = [join(__dirname, '/../proto')];
+const outPath = join(__dirname, '../src');
 rimraf(outPath);
 
 telescope({
@@ -270,7 +270,7 @@ telescope({
   },
 })
   .then(() => {
-    console.log("✨ all done!");
+    console.log('✨ all done!');
   })
   .catch((e) => {
     console.error(e);
@@ -522,7 +522,7 @@ This example shows messages from the `osmojs`, which was built with Telescope.
 Import the `osmosis` object from `osmojs`. In this case, we're show the messages available from the `osmosis.gamm.v1beta1` module:
 
 ```js
-import { osmosis } from "osmojs";
+import { osmosis } from 'osmojs';
 
 const {
   joinPool,
@@ -539,7 +539,7 @@ const {
 Now you can construct messages. If you use vscode or another typescript-enabled IDE, you should also be able to use `ctrl+space` to see auto-completion of the fields required for the message.
 
 ```js
-import { coin } from "@cosmjs/amino";
+import { coin } from '@cosmjs/amino';
 
 const msg = swapExactAmountIn({
   sender,
@@ -554,22 +554,22 @@ const msg = swapExactAmountIn({
 Make sure to create a `fee` object in addition to your message.
 
 ```js
-import { coins } from "@cosmjs/amino";
+import { coins } from '@cosmjs/amino';
 
 const fee = {
-  amount: coins(0, "uosmo"),
-  gas: "250000",
+  amount: coins(0, 'uosmo'),
+  gas: '250000',
 };
 ```
 
 if you are broadcasting multiple messages in a batch, you should `simulate` your tx and estimate the fee
 
 ```js
-import { Dec, IntPretty } from "@keplr-wallet/unit";
+import { Dec, IntPretty } from '@keplr-wallet/unit';
 
 const gasEstimated = await stargateClient.simulate(address, msgs, memo);
 const fee = {
-  amount: coins(0, "uosmo"),
+  amount: coins(0, 'uosmo'),
   gas: new IntPretty(new Dec(gasEstimated).mul(new Dec(1.3)))
     .maxDecimals(0)
     .locale(false)
@@ -584,7 +584,7 @@ Every module gets their own signing client. This example demonstrates for the `o
 Use `getSigningOsmosisClient` to get your `SigningStargateClient`, with the Osmosis proto/amino messages full-loaded. No need to manually add amino types, just require and initialize the client:
 
 ```js
-import { getSigningOsmosisClient } from "osmojs";
+import { getSigningOsmosisClient } from 'osmojs';
 
 const client = await getSigningOsmosisClient({
   rpcEndpoint,
@@ -601,23 +601,23 @@ To broadcast messages, you'll want to use either [keplr](https://docs.keplr.app/
 Likely you'll want to use the Amino, so unless you need proto, you should use this one:
 
 ```js
-import { getOfflineSigner as getOfflineSignerAmino } from "cosmjs-utils";
+import { getOfflineSigner as getOfflineSignerAmino } from 'cosmjs-utils';
 ```
 
 ### Proto Signer
 
 ```js
-import { getOfflineSigner as getOfflineSignerProto } from "cosmjs-utils";
+import { getOfflineSigner as getOfflineSignerProto } from 'cosmjs-utils';
 ```
 
 WARNING: NOT RECOMMENDED TO USE PLAIN-TEXT MNEMONICS. Please take care of your security and use best practices such as AES encryption and/or methods from 12factor applications.
 
 ```js
-import { chains } from "chain-registry";
+import { chains } from 'chain-registry';
 
 const mnemonic =
-  "unfold client turtle either pilot stock floor glow toward bullet car science";
-const chain = chains.find(({ chain_name }) => chain_name === "osmosis");
+  'unfold client turtle either pilot stock floor glow toward bullet car science';
+const chain = chains.find(({ chain_name }) => chain_name === 'osmosis');
 const signer = await getOfflineSigner({
   mnemonic,
   chain,
@@ -629,15 +629,15 @@ const signer = await getOfflineSigner({
 Now that you have your `client`, you can broadcast messages:
 
 ```js
-import { signAndBroadcast } from "@osmosnauts/helpers";
+import { signAndBroadcast } from '@osmosnauts/helpers';
 
 const res = await signAndBroadcast({
   client, // SigningStargateClient
-  chainId: "osmosis-1", // use 'osmo-test-4' for testnet
+  chainId: 'osmosis-1', // use 'osmo-test-4' for testnet
   address,
   msgs: [msg],
   fee,
-  memo: "",
+  memo: '',
 });
 ```
 
@@ -661,26 +661,26 @@ const options: TelescopeOptions = {
     enabled: true,
     scoped: [
       {
-        dir: "osmosis",
-        filename: "custom-lcd-client.ts",
+        dir: 'osmosis',
+        filename: 'custom-lcd-client.ts',
         packages: [
-          "cosmos.bank.v1beta1",
-          "cosmos.gov.v1beta1",
-          "osmosis.gamm.v1beta1",
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'osmosis.gamm.v1beta1',
         ],
         addToBundle: true,
-        methodName: "createCustomLCDClient",
+        methodName: 'createCustomLCDClient',
       },
       {
-        dir: "evmos",
-        filename: "custom-lcd-client.ts",
+        dir: 'evmos',
+        filename: 'custom-lcd-client.ts',
         packages: [
-          "cosmos.bank.v1beta1",
-          "cosmos.gov.v1beta1",
-          "evmos.erc20.v1",
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'evmos.erc20.v1',
         ],
         addToBundle: true,
-        methodName: "createEvmosLCDClient",
+        methodName: 'createEvmosLCDClient',
       },
     ],
   },
@@ -690,7 +690,7 @@ const options: TelescopeOptions = {
 This will generate a nice helper in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
-import { osmosis } from "./codegen";
+import { osmosis } from './codegen';
 
 const main = async () => {
   const client = await osmosis.ClientFactory.createLCDClient({
@@ -698,9 +698,9 @@ const main = async () => {
   });
 
   // now you can query the modules
-  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: '1' });
   const balance = await client.cosmos.bank.v1beta1.allBalances({
-    address: "osmo1addresshere",
+    address: 'osmo1addresshere',
   });
 };
 ```
@@ -710,7 +710,7 @@ const main = async () => {
 If you want to instantiate a single client, for any module that has a `Query` type, there will be a `LCDQueryClient` object:
 
 ```js
-import { osmosis } from "osmojs";
+import { osmosis } from 'osmojs';
 
 export const main = async () => {
   const requestClient = new LCDClient({ restEndpoint: REST_ENDPOINT });
@@ -720,7 +720,7 @@ export const main = async () => {
 };
 
 main().then(() => {
-  console.log("all done");
+  console.log('all done');
 });
 ```
 
@@ -733,7 +733,7 @@ For querying data via RPC endpoints, you can use RPC Clients. For a better devel
 ```ts
 const options: TelescopeOptions = {
   rpcClients: {
-    type: "tendermint",
+    type: 'tendermint',
     enabled: true,
     camelCase: true,
   },
@@ -749,16 +749,16 @@ const options: TelescopeOptions = {
     camelCase: true,
     scoped: [
       {
-        dir: "osmosis",
-        filename: "osmosis-rpc-client.ts",
+        dir: 'osmosis',
+        filename: 'osmosis-rpc-client.ts',
         packages: [
-          "cosmos.bank.v1beta1",
-          "cosmos.gov.v1beta1",
-          "osmosis.gamm.v1beta1",
+          'cosmos.bank.v1beta1',
+          'cosmos.gov.v1beta1',
+          'osmosis.gamm.v1beta1',
         ],
         addToBundle: true,
-        methodNameQuery: "createRPCQueryClient",
-        methodNameTx: "createRPCTxClient",
+        methodNameQuery: 'createRPCQueryClient',
+        methodNameTx: 'createRPCTxClient',
       },
     ],
   },
@@ -768,7 +768,7 @@ const options: TelescopeOptions = {
 This will generate helpers `createRPCQueryClient` and `createRPCTxClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
-import { osmosis } from "./codegen";
+import { osmosis } from './codegen';
 
 const main = async () => {
   const client = await osmosis.ClientFactory.createRPCQueryClient({
@@ -776,9 +776,9 @@ const main = async () => {
   });
 
   // now you can query the modules
-  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: '1' });
   const balance = await client.cosmos.bank.v1beta1.allBalances({
-    address: "osmo1addresshere",
+    address: 'osmo1addresshere',
   });
 };
 ```
@@ -790,7 +790,7 @@ For querying data via gRPC-web endpoints, you can use gRPC-web Clients. For a be
 ```ts
 const options: TelescopeOptions = {
   rpcClients: {
-    type: "grpc-web",
+    type: 'grpc-web',
     enabled: true,
     camelCase: true,
   },
@@ -800,15 +800,15 @@ const options: TelescopeOptions = {
 This will generate helpers `createGrpcWebClient` and `createGrpcMsgClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object, if you need an example with scaffold and broadcast msg you can refer to the example below in `grpc-gateway`:
 
 ```js
-import { osmosis } from "./codegen";
+import { osmosis } from './codegen';
 
 const main = async () => {
   const client = await osmosis.ClientFactory.createGrpcWebClient({ endpoint });
 
   // now you can query the modules
-  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: '1' });
   const balance = await client.cosmos.bank.v1beta1.allBalances({
-    address: "osmo1addresshere",
+    address: 'osmo1addresshere',
   });
 };
 ```
@@ -820,7 +820,7 @@ For querying data via gRPC-web endpoints, you can use gRPC-web Clients. For a be
 ```ts
 const options: TelescopeOptions = {
   rpcClients: {
-    type: "grpc-gateway",
+    type: 'grpc-gateway',
     enabled: true,
     camelCase: true,
   },
@@ -830,7 +830,7 @@ const options: TelescopeOptions = {
 This will generate helpers `createGrpcGateWayClient` in the `ClientFactory`, which you can then use to query multiple modules from a single object:
 
 ```js
-import { osmosis } from "./codegen";
+import { osmosis } from './codegen';
 
 const main = async () => {
   // endpoint here is lcd endpoint
@@ -839,9 +839,9 @@ const main = async () => {
   });
 
   // now you can query the modules
-  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: "1" });
+  const pool = await client.osmosis.gamm.v1beta1.pool({ poolId: '1' });
   const balance = await client.cosmos.bank.v1beta1.allBalances({
-    address: "osmo1addresshere",
+    address: 'osmo1addresshere',
   });
 };
 ```
@@ -851,13 +851,13 @@ Below will be an example of scaffold a `grant` Proto Msg for grpc-web and grpc-g
 ```js
 const { grant } = cosmos.authz.v1beta1.MessageComposer.withTypeUrl;
 const msg = grant({
-  granter: "granter_address",
-  grantee: "grantee_address",
+  granter: 'granter_address',
+  grantee: 'grantee_address',
   grant: {
     authorization: StakeAuthorization.toProtoMsg({
       maxTokens: {
-        denom: "uosmo",
-        amount: "100000000",
+        denom: 'uosmo',
+        amount: '100000000',
       },
       authorizationType: AuthorizationType.AUTHORIZATION_TYPE_DELEGATE,
     }),
@@ -866,10 +866,10 @@ const msg = grant({
 });
 
 const signed_tx = await signClient.sign(
-  "granter_address",
+  'granter_address',
   [msg],
   fee,
-  "telescope: grant",
+  'telescope: grant',
   signerData
 );
 const txRawBytes = Uint8Array.from(TxRaw.encode(signed_tx).finish());
@@ -889,7 +889,7 @@ If you want to instantiate a single client, you can generate RPC classes with th
 For any module that has a `Msg`, `Query` or `Service` type, a
 
 ```js
-import { osmosis, cosmos } from "osmojs";
+import { osmosis, cosmos } from 'osmojs';
 
 const MsgClient = osmosis.gamm.v1beta1.MsgClientImpl;
 const QueryClient = osmosis.gamm.v1beta1.QueryClientImpl;
@@ -899,9 +899,9 @@ const ServiceClient = cosmos.base.tendermint.v1beta1.ServiceClientImpl;
 Here is an example of making a query if you want to use the RPC client classes manually:
 
 ```js
-import { osmosis } from "osmojs";
-import { createProtobufRpcClient, QueryClient } from "@cosmjs/stargate";
-import { Tendermint34Client } from "@cosmjs/tendermint-rpc";
+import { osmosis } from 'osmojs';
+import { createProtobufRpcClient, QueryClient } from '@cosmjs/stargate';
+import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
 
 export const main = async () => {
   const tmClient = await Tendermint34Client.connect(RPC_ENDPOINT);
@@ -914,7 +914,7 @@ export const main = async () => {
 };
 
 main().then(() => {
-  console.log("all done");
+  console.log('all done');
 });
 ```
 
@@ -1028,11 +1028,11 @@ This example is with `osmosis` module in `osmojs`, but it is the same pattern fo
 NOTE: this is using `@cosmjs/stargate@0.28.4`
 
 ```js
-import { AminoTypes, SigningStargateClient } from "@cosmjs/stargate";
-import { Registry } from "@cosmjs/proto-signing";
-import { defaultRegistryTypes } from "@cosmjs/stargate";
-import { OfflineSigner } from "@cosmjs/proto-signing";
-import { osmosis } from "osmojs";
+import { AminoTypes, SigningStargateClient } from '@cosmjs/stargate';
+import { Registry } from '@cosmjs/proto-signing';
+import { defaultRegistryTypes } from '@cosmjs/stargate';
+import { OfflineSigner } from '@cosmjs/proto-signing';
+import { osmosis } from 'osmojs';
 
 export const getCustomSigningClient = async ({
   rpcEndpoint,
@@ -1116,20 +1116,20 @@ Here is how these patches can be defined within the prototypes configuration:
 Generate TypeScript SDKs for your CosmWasm smart contracts by using the `cosmwasm` option on `TelescopeOptions`. The `cosmwasm` option is actually a direct reference to the `TSBuilderInput` object, for the most up-to-date documentation, visit [@cosmwasm/ts-codegen](https://github.com/CosmWasm/ts-codegen).
 
 ```ts
-import { TSBuilderInput } from "@cosmwasm/ts-codegen";
+import { TSBuilderInput } from '@cosmwasm/ts-codegen';
 const options: TelescopeOptions = {
   cosmwasm: {
     contracts: [
       {
-        name: "SG721",
-        dir: "./path/to/sg721/schema",
+        name: 'SG721',
+        dir: './path/to/sg721/schema',
       },
       {
-        name: "Minter",
-        dir: "./path/to/Minter/schema",
+        name: 'Minter',
+        dir: './path/to/Minter/schema',
       },
     ],
-    outPath: "./path/to/code/src/",
+    outPath: './path/to/code/src/',
   },
 };
 ```
