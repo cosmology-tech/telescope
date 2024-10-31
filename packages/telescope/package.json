@@ -35,6 +35,7 @@
     "lint": "eslint .",
     "format": "eslint . --fix",
     "test": "jest",
+    "test:funcs": "jest __tests__/telescope-helper-func.test.ts",
     "test:min": "jest __tests__/telescope-v4.test.ts",
     "test:misc": "jest __tests__/misc.test.ts",
     "test:watch": "jest --watch",

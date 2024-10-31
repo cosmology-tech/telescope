@@ -14,30 +14,30 @@ export const createSubmitProposal = (getSigningClient: SigningClientResolver) =>
 export const useSubmitProposal = buildUseMutation<MsgSubmitProposal, Error>({
   builderMutationFn: createSubmitProposal
 });
-export const createVote = (getSigningClient: SigningClientResolver) => buildTx<MsgVote>({
+export const buildHelperVote = (getSigningClient: SigningClientResolver) => buildTx<MsgVote>({
   getSigningClient: getSigningClient,
   typeUrl: MsgVote.typeUrl,
   encoders: toEncoders(MsgVote),
   converters: toConverters(MsgVote)
 });
-export const useVote = buildUseMutation<MsgVote, Error>({
-  builderMutationFn: createVote
+export const useHelperVote = buildUseMutation<MsgVote, Error>({
+  builderMutationFn: buildHelperVote
 });
-export const createVoteWeighted = (getSigningClient: SigningClientResolver) => buildTx<MsgVoteWeighted>({
+export const constructLetsVoteWeighted = (getSigningClient: SigningClientResolver) => buildTx<MsgVoteWeighted>({
   getSigningClient: getSigningClient,
   typeUrl: MsgVoteWeighted.typeUrl,
   encoders: toEncoders(MsgVoteWeighted),
   converters: toConverters(MsgVoteWeighted)
 });
-export const useVoteWeighted = buildUseMutation<MsgVoteWeighted, Error>({
-  builderMutationFn: createVoteWeighted
+export const useTxLetsVoteWeighted = buildUseMutation<MsgVoteWeighted, Error>({
+  builderMutationFn: constructLetsVoteWeighted
 });
-export const createDeposit = (getSigningClient: SigningClientResolver) => buildTx<MsgDeposit>({
+export const createToDeposit = (getSigningClient: SigningClientResolver) => buildTx<MsgDeposit>({
   getSigningClient: getSigningClient,
   typeUrl: MsgDeposit.typeUrl,
   encoders: toEncoders(MsgDeposit),
   converters: toConverters(MsgDeposit)
 });
-export const useDeposit = buildUseMutation<MsgDeposit, Error>({
-  builderMutationFn: createDeposit
+export const useToDeposit = buildUseMutation<MsgDeposit, Error>({
+  builderMutationFn: createToDeposit
 });

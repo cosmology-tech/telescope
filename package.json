@@ -11,6 +11,7 @@
     "ast:fixture": "lerna run test:ast --parallel --scope \"@cosmology/ast\"",
     "ast:watch": "lerna run test:watch --parallel --scope \"@cosmology/ast\"",
     "regen": "lerna run test --parallel --scope \"@cosmology/telescope\"",
+    "regen:funcs": "lerna run test:funcs --parallel --scope \"@cosmology/telescope\"",
     "test:min": "lerna run test:min --parallel --scope \"@cosmology/telescope\"",
     "test:misc": "lerna run test:misc --parallel --scope \"@cosmology/telescope\"",
     "resnap": "lerna run test:update --parallel --scope \"@cosmology/ast\"",

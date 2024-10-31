@@ -1,4 +1,4 @@
-import { ProtoRef, ProtoRoot } from "@cosmology/types";
+import { ProtoRef, ProtoRoot, HelperFuncNameMappers } from "@cosmology/types";
 export declare const getNestedProto: (root: ProtoRoot) => any;
 export declare const getNestedProtoGeneric: (root: ProtoRoot, path: string[]) => any;
 export declare const getNested: (root: ProtoRoot, path: string[]) => any;
@@ -52,15 +52,9 @@ export declare const getTypeNameFromFieldName: (name: string, importSrc: string,
  * get the name of the helper function.
  * @param packagePath e.g. "cosmos.bank.v1beta1"
  * @param methodKey e.g. "balance"
- * @param mapper
+ * @param mappers a list of mappers to apply. An earlier one will override a later one.
  */
-export declare function getHelperFuncName(packagePath: string, methodKey: string, mapper: {
-    funcBody?: {
-        [key: string]: "unchanged" | "get" | ((name: string) => string);
-    };
-    creatorPrefix?: string;
-    hookPrefix?: string;
-}, defaultFuncBodyFn: "unchanged" | "get" | ((name: string) => string)): {
+export declare function getHelperFuncName(packagePath: string, methodKey: string, mappers: HelperFuncNameMappers[], defaultFuncBodyFn: "unchanged" | "get" | ((name: string) => string)): {
     creator: string;
     hook: string;
 };
