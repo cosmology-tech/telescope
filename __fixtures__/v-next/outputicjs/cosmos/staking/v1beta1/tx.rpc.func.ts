@@ -2,8 +2,8 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateValidator, MsgEditValidator, MsgDelegate, MsgBeginRedelegate, MsgUndelegate } from "./tx";
-export const createCreateValidator = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateValidator>({
-  getSigningClient: getSigningClient,
+export const createCreateValidator = (clientResolver: SigningClientResolver) => buildTx<MsgCreateValidator>({
+  clientResolver,
   typeUrl: MsgCreateValidator.typeUrl,
   encoders: toEncoders(MsgCreateValidator),
   converters: toConverters(MsgCreateValidator)
@@ -11,8 +11,8 @@ export const createCreateValidator = (getSigningClient: SigningClientResolver) =
 export const useCreateValidator = buildUseMutation<MsgCreateValidator, Error>({
   builderMutationFn: createCreateValidator
 });
-export const createEditValidator = (getSigningClient: SigningClientResolver) => buildTx<MsgEditValidator>({
-  getSigningClient: getSigningClient,
+export const createEditValidator = (clientResolver: SigningClientResolver) => buildTx<MsgEditValidator>({
+  clientResolver,
   typeUrl: MsgEditValidator.typeUrl,
   encoders: toEncoders(MsgEditValidator),
   converters: toConverters(MsgEditValidator)
@@ -20,8 +20,8 @@ export const createEditValidator = (getSigningClient: SigningClientResolver) => 
 export const useEditValidator = buildUseMutation<MsgEditValidator, Error>({
   builderMutationFn: createEditValidator
 });
-export const createDelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgDelegate>({
-  getSigningClient: getSigningClient,
+export const createDelegate = (clientResolver: SigningClientResolver) => buildTx<MsgDelegate>({
+  clientResolver,
   typeUrl: MsgDelegate.typeUrl,
   encoders: toEncoders(MsgDelegate),
   converters: toConverters(MsgDelegate)
@@ -29,8 +29,8 @@ export const createDelegate = (getSigningClient: SigningClientResolver) => build
 export const useDelegate = buildUseMutation<MsgDelegate, Error>({
   builderMutationFn: createDelegate
 });
-export const createBeginRedelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgBeginRedelegate>({
-  getSigningClient: getSigningClient,
+export const createBeginRedelegate = (clientResolver: SigningClientResolver) => buildTx<MsgBeginRedelegate>({
+  clientResolver,
   typeUrl: MsgBeginRedelegate.typeUrl,
   encoders: toEncoders(MsgBeginRedelegate),
   converters: toConverters(MsgBeginRedelegate)
@@ -38,8 +38,8 @@ export const createBeginRedelegate = (getSigningClient: SigningClientResolver) =
 export const useBeginRedelegate = buildUseMutation<MsgBeginRedelegate, Error>({
   builderMutationFn: createBeginRedelegate
 });
-export const createUndelegate = (getSigningClient: SigningClientResolver) => buildTx<MsgUndelegate>({
-  getSigningClient: getSigningClient,
+export const createUndelegate = (clientResolver: SigningClientResolver) => buildTx<MsgUndelegate>({
+  clientResolver,
   typeUrl: MsgUndelegate.typeUrl,
   encoders: toEncoders(MsgUndelegate),
   converters: toConverters(MsgUndelegate)

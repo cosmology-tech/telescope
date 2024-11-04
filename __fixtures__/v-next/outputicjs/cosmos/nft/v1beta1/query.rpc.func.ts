@@ -1,78 +1,78 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryBalanceRequest, QueryBalanceResponse, QueryOwnerRequest, QueryOwnerResponse, QuerySupplyRequest, QuerySupplyResponse, QueryNFTsRequest, QueryNFTsResponse, QueryNFTRequest, QueryNFTResponse, QueryClassRequest, QueryClassResponse, QueryClassesRequest, QueryClassesResponse } from "./query";
-export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
+export const createGetBalance = (clientResolver: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encode: QueryBalanceRequest.encode,
   decode: QueryBalanceResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "Balance",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetBalance = buildUseQuery<QueryBalanceRequest, QueryBalanceResponse>({
   builderQueryFn: createGetBalance,
   queryKeyPrefix: "BalanceQuery"
 });
-export const createGetOwner = (getRpcInstance: RpcResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
+export const createGetOwner = (clientResolver: RpcResolver) => buildQuery<QueryOwnerRequest, QueryOwnerResponse>({
   encode: QueryOwnerRequest.encode,
   decode: QueryOwnerResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "Owner",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetOwner = buildUseQuery<QueryOwnerRequest, QueryOwnerResponse>({
   builderQueryFn: createGetOwner,
   queryKeyPrefix: "OwnerQuery"
 });
-export const createGetSupply = (getRpcInstance: RpcResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
+export const createGetSupply = (clientResolver: RpcResolver) => buildQuery<QuerySupplyRequest, QuerySupplyResponse>({
   encode: QuerySupplyRequest.encode,
   decode: QuerySupplyResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "Supply",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetSupply = buildUseQuery<QuerySupplyRequest, QuerySupplyResponse>({
   builderQueryFn: createGetSupply,
   queryKeyPrefix: "SupplyQuery"
 });
-export const createGetNFTs = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
+export const createGetNFTs = (clientResolver: RpcResolver) => buildQuery<QueryNFTsRequest, QueryNFTsResponse>({
   encode: QueryNFTsRequest.encode,
   decode: QueryNFTsResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "NFTs",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetNFTs = buildUseQuery<QueryNFTsRequest, QueryNFTsResponse>({
   builderQueryFn: createGetNFTs,
   queryKeyPrefix: "NFTsQuery"
 });
-export const createGetNFT = (getRpcInstance: RpcResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
+export const createGetNFT = (clientResolver: RpcResolver) => buildQuery<QueryNFTRequest, QueryNFTResponse>({
   encode: QueryNFTRequest.encode,
   decode: QueryNFTResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "NFT",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetNFT = buildUseQuery<QueryNFTRequest, QueryNFTResponse>({
   builderQueryFn: createGetNFT,
   queryKeyPrefix: "NFTQuery"
 });
-export const createGetClass = (getRpcInstance: RpcResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
+export const createGetClass = (clientResolver: RpcResolver) => buildQuery<QueryClassRequest, QueryClassResponse>({
   encode: QueryClassRequest.encode,
   decode: QueryClassResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "Class",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetClass = buildUseQuery<QueryClassRequest, QueryClassResponse>({
   builderQueryFn: createGetClass,
   queryKeyPrefix: "ClassQuery"
 });
-export const createGetClasses = (getRpcInstance: RpcResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
+export const createGetClasses = (clientResolver: RpcResolver) => buildQuery<QueryClassesRequest, QueryClassesResponse>({
   encode: QueryClassesRequest.encode,
   decode: QueryClassesResponse.decode,
   service: "cosmos.nft.v1beta1.Query",
   method: "Classes",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetClasses = buildUseQuery<QueryClassesRequest, QueryClassesResponse>({
   builderQueryFn: createGetClasses,

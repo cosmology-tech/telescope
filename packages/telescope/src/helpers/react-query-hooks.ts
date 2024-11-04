@@ -1,21 +1,27 @@
 import { TelescopeOptions } from "@cosmology/types";
 
 export const getReactQueryHelperHooks = (options: TelescopeOptions) => {
-  return `import { getRpcClient } from './extern${options.restoreImportExtension ?? ""}'
+  return `
+
+
+import { getRpcClient } from './extern${options.restoreImportExtension ?? ""}'
 import {
+  isRpc,
   Rpc,
-} from './helpers'
+} from './helpers${options.restoreImportExtension ?? ""}'
 import {
   ITxArgs,
   ISigningClient,
   StdFee,
-  DeliverTxResponse
-} from './helper-func-types'
+  DeliverTxResponse,
+  SigningClientResolver,
+  RpcResolver,
+  isISigningClient
+} from './helper-func-types${options.restoreImportExtension ?? ""}'
 import {
     useQuery,
     useQueryClient,
     UseQueryOptions,
-    MutationOptions,
     useMutation,
     UseMutationOptions,
     QueryKey,
@@ -32,13 +38,21 @@ export const DEFAULT_RPC_CLIENT_QUERY_KEY = 'rpcClient';
 export const DEFAULT_RPC_ENDPOINT_QUERY_KEY = 'rpcEndPoint';
 export const DEFAULT_SIGNING_CLIENT_QUERY_KEY = 'signingClient';
 
+export interface CacheResolver {
+    rpcEndpoint?: string | HttpEndpoint;
+    clientQueryKey?: string;
+}
+
+export function isCacheResolver(resolver: unknown) : resolver is CacheResolver {
+    return resolver !== null && resolver !== undefined && (resolver as CacheResolver).rpcEndpoint !== undefined && (resolver as CacheResolver).clientQueryKey !== undefined;
+}
+
 export interface ReactQueryParams<TResponse, TData = TResponse> {
     options?: UseQueryOptions<TResponse, Error, TData>;
-    rpcEndpoint?: string | HttpEndpoint;
-    rpcClientQueryKey?: string;
 }
 
 export interface UseRpcClientQuery<TData> extends ReactQueryParams<ProtobufRpcClient, TData> {
+    clientResolver?: CacheResolver;
 }
 
 ${
@@ -78,20 +92,20 @@ export const useRpcEndpoint = <TData = string | HttpEndpoint>({
 }
 
 export const useRpcClient = <TData = ProtobufRpcClient>({
-    rpcEndpoint,
     options,
-    rpcClientQueryKey,
+    clientResolver
 }: UseRpcClientQuery<TData>) => {
     const queryClient = useQueryClient({
       context: options?.context
     });
-    const key = rpcClientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
-    return useQuery<ProtobufRpcClient, Error, TData>([key, rpcEndpoint], async () => {
-      if(!rpcEndpoint) {
+
+    const key = clientResolver?.clientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
+    return useQuery<ProtobufRpcClient, Error, TData>([key, clientResolver?.rpcEndpoint], async () => {
+      if(!clientResolver?.rpcEndpoint) {
         throw new Error('rpcEndpoint is required');
       }
 
-      const client = await getRpcClient(rpcEndpoint);
+      const client = await getRpcClient(clientResolver.rpcEndpoint);
       if(!client) {
           throw new Error('Failed to connect to rpc client');
       }
@@ -140,7 +154,7 @@ ${
 };
 
 export interface UseQueryBuilderOptions<TReq, TRes> {
-  builderQueryFn: (getRpcInstance: () => Rpc | undefined) => (request: TReq) => Promise<TRes>,
+  builderQueryFn: (clientResolver: RpcResolver) => (request: TReq) => Promise<TRes>,
   queryKeyPrefix: string,
 }
 
@@ -149,37 +163,52 @@ export function buildUseQuery<TReq, TRes>(opts: UseQueryBuilderOptions<TReq, TRe
   return <TData = TRes>({
     request,
     options,
-    rpcEndpoint,
-    rpcClientQueryKey,
+    clientResolver,
     customizedQueryKey,
   }: UseQueryParams<TReq, TRes, TData>) => {
     const queryClient = useQueryClient({
       context: options?.context
     });
-    const key = rpcClientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
-    const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [key];
-    const rpc = queryClient.getQueryData<Rpc>(queryKey);
-    const queryFn = opts.builderQueryFn(()=>{
-      return rpc;
-    });
+
+    let rpcResolver: RpcResolver | undefined;
+
+    if(isRpc(clientResolver)) {
+      rpcResolver = clientResolver;
+    } else if(isCacheResolver(clientResolver)) {
+      const key = clientResolver.clientQueryKey || DEFAULT_RPC_CLIENT_QUERY_KEY;
+      const queryKey = clientResolver.rpcEndpoint ? [key, clientResolver.rpcEndpoint] : [key];
+      rpcResolver = queryClient.getQueryData<Rpc>(queryKey);
+
+      if(!rpcResolver && clientResolver.rpcEndpoint) {
+        rpcResolver = clientResolver.rpcEndpoint;
+      }
+    } else {
+      rpcResolver = clientResolver;
+    }
+
+    if(!rpcResolver) {
+      throw new Error('RpcResolver is not initialized');
+    }
+
+    const queryFn = opts.builderQueryFn(rpcResolver);
     return useQuery<TRes, Error, TData>(customizedQueryKey || [opts.queryKeyPrefix, request], () => queryFn(request), options);
   };
 }
 
 export interface UseQueryParams<TReq, TRes, TData = TRes> extends ReactQueryParams<TRes, TData> {
   request: TReq;
+  clientResolver?: CacheResolver | RpcResolver;
   customizedQueryKey?: QueryKey
 }
 
 export interface ReactMutationParams<TData, TError, TVariables, TContext = unknown> {
   options?: UseMutationOptions<TData, TError, TVariables, TContext>;
-  rpcEndpoint?: string | HttpEndpoint;
-  signingClientQueryKey?: string;
+  clientResolver?: CacheResolver | SigningClientResolver;
 }
 
 
 export interface UseMutationBuilderOptions<TMsg> {
-  builderMutationFn: (getSigningClientInstance: () => ISigningClient | undefined) => (
+  builderMutationFn: (getSigningClientInstance: SigningClientResolver) => (
     signerAddress: string,
     message: TMsg,
     fee: StdFee | 'auto',
@@ -191,19 +220,29 @@ export interface UseMutationBuilderOptions<TMsg> {
 export function buildUseMutation<TMsg, TError>(opts: UseMutationBuilderOptions<TMsg>) {
   return ({
     options,
-    rpcEndpoint,
-    signingClientQueryKey
+    clientResolver
   }: ReactMutationParams<DeliverTxResponse, TError, ITxArgs<TMsg>>) => {
     const queryClient = useQueryClient({
       context: options?.context
     });
-    const key = signingClientQueryKey || DEFAULT_SIGNING_CLIENT_QUERY_KEY;
-    const queryKey = rpcEndpoint ? [key, rpcEndpoint] : [DEFAULT_SIGNING_CLIENT_QUERY_KEY];
-    const signingClient = queryClient.getQueryData<ISigningClient>(queryKey);
 
-    const mutationFn = opts.builderMutationFn(() => {
-      return signingClient;
-    });
+    let signingClientResolver: SigningClientResolver | undefined;
+
+    if(isISigningClient(clientResolver)) {
+      signingClientResolver = clientResolver;
+    } else if(isCacheResolver(clientResolver)) {
+      const key = clientResolver.clientQueryKey || DEFAULT_SIGNING_CLIENT_QUERY_KEY;
+      const queryKey = clientResolver.rpcEndpoint ? [key, clientResolver.rpcEndpoint] : [key];
+      signingClientResolver = queryClient.getQueryData<ISigningClient>(queryKey);
+    } else {
+      clientResolver = clientResolver;
+    }
+
+    if(!signingClientResolver) {
+      throw new Error('SigningClientResolver is not initialized');
+    }
+
+    const mutationFn = opts.builderMutationFn(signingClientResolver);
 
     return useMutation<DeliverTxResponse, Error, ITxArgs<TMsg>>(
       (reqData: ITxArgs<TMsg>) => mutationFn(reqData.signerAddress, reqData.message, reqData.fee, reqData.memo),

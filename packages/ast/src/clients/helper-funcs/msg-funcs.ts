@@ -25,8 +25,10 @@ export function createMsgHelperCreator(
     const callExpression = ast.callExpression(ast.identifier("buildTx"), [
         ast.objectExpression([
             ast.objectProperty(
-                ast.identifier("getSigningClient"),
-                ast.identifier("getSigningClient")
+                ast.identifier("clientResolver"),
+                ast.identifier("clientResolver"),
+                false,
+                true
             ),
             ast.objectProperty(
                 ast.identifier("typeUrl"),
@@ -55,7 +57,7 @@ export function createMsgHelperCreator(
     const customHookArgumentsType = ast.tsTypeAnnotation(
         ast.tsTypeReference(ast.identifier("SigningClientResolver"))
     );
-    const arg = ast.identifier("getSigningClient");
+    const arg = ast.identifier("clientResolver");
     arg.typeAnnotation = customHookArgumentsType;
     const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
     return ast.exportNamedDeclaration(

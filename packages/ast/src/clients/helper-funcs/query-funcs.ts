@@ -46,8 +46,9 @@ export function createQueryHelperCreator(
                 ast.stringLiteral(methodKey)
             ),
             ast.objectProperty(
-                ast.identifier("getRpcInstance"),
-                ast.identifier("getRpcInstance")
+                ast.identifier("clientResolver"),
+                ast.identifier("clientResolver"),
+                false, true
             ),
         ]),
     ]);
@@ -59,7 +60,7 @@ export function createQueryHelperCreator(
     const customHookArgumentsType = ast.tsTypeAnnotation(
         ast.tsTypeReference(ast.identifier("RpcResolver"))
     );
-    const arg = ast.identifier("getRpcInstance");
+    const arg = ast.identifier("clientResolver");
     arg.typeAnnotation = customHookArgumentsType;
 
     const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
