@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.7](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.6...@cosmology/utils@1.8.7) (2024-11-04)
+
+**Note:** Version bump only for package @cosmology/utils
+
 ## [1.8.6](https://github.com/cosmology-tech/telescope/compare/@cosmology/utils@1.8.5...@cosmology/utils@1.8.6) (2024-10-21)
 
 **Note:** Version bump only for package @cosmology/utils

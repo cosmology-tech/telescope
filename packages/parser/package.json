@@ -1,6 +1,6 @@
 {
   "name": "@cosmology/proto-parser",
-  "version": "1.8.6",
+  "version": "1.8.7",
   "description": "A Parser for Cosmos Protobufs",
   "author": "Dan Lynch <pyramation@gmail.com>",
   "homepage": "https://github.com/cosmology-tech/telescope/tree/master/packages/parser#readme",
@@ -74,8 +74,8 @@
   },
   "dependencies": {
     "@cosmology/protobufjs": "7.3.2",
-    "@cosmology/types": "^1.10.2",
-    "@cosmology/utils": "^1.8.6",
+    "@cosmology/types": "^1.10.3",
+    "@cosmology/utils": "^1.8.7",
     "dotty": "0.1.2",
     "fast-json-patch": "3.1.1",
     "glob": "8.0.3",
