@@ -2,8 +2,8 @@ import { buildTx, SigningClientResolver } from "../../../../helper-func-types";
 import { buildUseMutation } from "../../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateStableswapPool, MsgStableSwapAdjustScalingFactors } from "./tx";
-export const createCreateStableswapPool = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateStableswapPool>({
-  getSigningClient: getSigningClient,
+export const createCreateStableswapPool = (clientResolver: SigningClientResolver) => buildTx<MsgCreateStableswapPool>({
+  clientResolver,
   typeUrl: MsgCreateStableswapPool.typeUrl,
   encoders: toEncoders(MsgCreateStableswapPool),
   converters: toConverters(MsgCreateStableswapPool)
@@ -11,8 +11,8 @@ export const createCreateStableswapPool = (getSigningClient: SigningClientResolv
 export const useCreateStableswapPool = buildUseMutation<MsgCreateStableswapPool, Error>({
   builderMutationFn: createCreateStableswapPool
 });
-export const createStableSwapAdjustScalingFactors = (getSigningClient: SigningClientResolver) => buildTx<MsgStableSwapAdjustScalingFactors>({
-  getSigningClient: getSigningClient,
+export const createStableSwapAdjustScalingFactors = (clientResolver: SigningClientResolver) => buildTx<MsgStableSwapAdjustScalingFactors>({
+  clientResolver,
   typeUrl: MsgStableSwapAdjustScalingFactors.typeUrl,
   encoders: toEncoders(MsgStableSwapAdjustScalingFactors),
   converters: toConverters(MsgStableSwapAdjustScalingFactors)

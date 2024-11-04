@@ -1,78 +1,78 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryIncentivesRequest, QueryIncentivesResponse, QueryIncentiveRequest, QueryIncentiveResponse, QueryGasMetersRequest, QueryGasMetersResponse, QueryGasMeterRequest, QueryGasMeterResponse, QueryAllocationMetersRequest, QueryAllocationMetersResponse, QueryAllocationMeterRequest, QueryAllocationMeterResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export const createGetIncentives = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentivesRequest, QueryIncentivesResponse>({
+export const createGetIncentives = (clientResolver: RpcResolver) => buildQuery<QueryIncentivesRequest, QueryIncentivesResponse>({
   encode: QueryIncentivesRequest.encode,
   decode: QueryIncentivesResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "Incentives",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetIncentives = buildUseQuery<QueryIncentivesRequest, QueryIncentivesResponse>({
   builderQueryFn: createGetIncentives,
   queryKeyPrefix: "IncentivesQuery"
 });
-export const createGetIncentive = (getRpcInstance: RpcResolver) => buildQuery<QueryIncentiveRequest, QueryIncentiveResponse>({
+export const createGetIncentive = (clientResolver: RpcResolver) => buildQuery<QueryIncentiveRequest, QueryIncentiveResponse>({
   encode: QueryIncentiveRequest.encode,
   decode: QueryIncentiveResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "Incentive",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetIncentive = buildUseQuery<QueryIncentiveRequest, QueryIncentiveResponse>({
   builderQueryFn: createGetIncentive,
   queryKeyPrefix: "IncentiveQuery"
 });
-export const createGetGasMeters = (getRpcInstance: RpcResolver) => buildQuery<QueryGasMetersRequest, QueryGasMetersResponse>({
+export const createGetGasMeters = (clientResolver: RpcResolver) => buildQuery<QueryGasMetersRequest, QueryGasMetersResponse>({
   encode: QueryGasMetersRequest.encode,
   decode: QueryGasMetersResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "GasMeters",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGasMeters = buildUseQuery<QueryGasMetersRequest, QueryGasMetersResponse>({
   builderQueryFn: createGetGasMeters,
   queryKeyPrefix: "GasMetersQuery"
 });
-export const createGetGasMeter = (getRpcInstance: RpcResolver) => buildQuery<QueryGasMeterRequest, QueryGasMeterResponse>({
+export const createGetGasMeter = (clientResolver: RpcResolver) => buildQuery<QueryGasMeterRequest, QueryGasMeterResponse>({
   encode: QueryGasMeterRequest.encode,
   decode: QueryGasMeterResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "GasMeter",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGasMeter = buildUseQuery<QueryGasMeterRequest, QueryGasMeterResponse>({
   builderQueryFn: createGetGasMeter,
   queryKeyPrefix: "GasMeterQuery"
 });
-export const createGetAllocationMeters = (getRpcInstance: RpcResolver) => buildQuery<QueryAllocationMetersRequest, QueryAllocationMetersResponse>({
+export const createGetAllocationMeters = (clientResolver: RpcResolver) => buildQuery<QueryAllocationMetersRequest, QueryAllocationMetersResponse>({
   encode: QueryAllocationMetersRequest.encode,
   decode: QueryAllocationMetersResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "AllocationMeters",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetAllocationMeters = buildUseQuery<QueryAllocationMetersRequest, QueryAllocationMetersResponse>({
   builderQueryFn: createGetAllocationMeters,
   queryKeyPrefix: "AllocationMetersQuery"
 });
-export const createGetAllocationMeter = (getRpcInstance: RpcResolver) => buildQuery<QueryAllocationMeterRequest, QueryAllocationMeterResponse>({
+export const createGetAllocationMeter = (clientResolver: RpcResolver) => buildQuery<QueryAllocationMeterRequest, QueryAllocationMeterResponse>({
   encode: QueryAllocationMeterRequest.encode,
   decode: QueryAllocationMeterResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "AllocationMeter",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetAllocationMeter = buildUseQuery<QueryAllocationMeterRequest, QueryAllocationMeterResponse>({
   builderQueryFn: createGetAllocationMeter,
   queryKeyPrefix: "AllocationMeterQuery"
 });
-export const createGetParams = (getRpcInstance: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "evmos.incentives.v1.Query",
   method: "Params",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsResponse>({
   builderQueryFn: createGetParams,

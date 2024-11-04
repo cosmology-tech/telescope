@@ -5,8 +5,8 @@ import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSubmitProposal, MsgSubmitProposalSDKType, MsgSubmitProposalResponse, MsgSubmitProposalResponseSDKType, MsgVote, MsgVoteSDKType, MsgVoteResponse, MsgVoteResponseSDKType, MsgVoteWeighted, MsgVoteWeightedSDKType, MsgVoteWeightedResponse, MsgVoteWeightedResponseSDKType, MsgDeposit, MsgDepositSDKType, MsgDepositResponse, MsgDepositResponseSDKType } from "./tx";
-export const createSubmitProposal = (getSigningClient: SigningClientResolver) => buildTx<MsgSubmitProposal>({
-  getSigningClient: getSigningClient,
+export const createSubmitProposal = (clientResolver: SigningClientResolver) => buildTx<MsgSubmitProposal>({
+  clientResolver,
   typeUrl: MsgSubmitProposal.typeUrl,
   encoders: toEncoders(MsgSubmitProposal),
   converters: toConverters(MsgSubmitProposal)
@@ -14,8 +14,8 @@ export const createSubmitProposal = (getSigningClient: SigningClientResolver) =>
 export const useSubmitProposal = buildUseMutation<MsgSubmitProposal, Error>({
   builderMutationFn: createSubmitProposal
 });
-export const buildHelperVote = (getSigningClient: SigningClientResolver) => buildTx<MsgVote>({
-  getSigningClient: getSigningClient,
+export const buildHelperVote = (clientResolver: SigningClientResolver) => buildTx<MsgVote>({
+  clientResolver,
   typeUrl: MsgVote.typeUrl,
   encoders: toEncoders(MsgVote),
   converters: toConverters(MsgVote)
@@ -23,8 +23,8 @@ export const buildHelperVote = (getSigningClient: SigningClientResolver) => buil
 export const useHelperVote = buildUseMutation<MsgVote, Error>({
   builderMutationFn: buildHelperVote
 });
-export const constructLetsVoteWeighted = (getSigningClient: SigningClientResolver) => buildTx<MsgVoteWeighted>({
-  getSigningClient: getSigningClient,
+export const constructLetsVoteWeighted = (clientResolver: SigningClientResolver) => buildTx<MsgVoteWeighted>({
+  clientResolver,
   typeUrl: MsgVoteWeighted.typeUrl,
   encoders: toEncoders(MsgVoteWeighted),
   converters: toConverters(MsgVoteWeighted)
@@ -32,8 +32,8 @@ export const constructLetsVoteWeighted = (getSigningClient: SigningClientResolve
 export const useTxLetsVoteWeighted = buildUseMutation<MsgVoteWeighted, Error>({
   builderMutationFn: constructLetsVoteWeighted
 });
-export const createToDeposit = (getSigningClient: SigningClientResolver) => buildTx<MsgDeposit>({
-  getSigningClient: getSigningClient,
+export const createToDeposit = (clientResolver: SigningClientResolver) => buildTx<MsgDeposit>({
+  clientResolver,
   typeUrl: MsgDeposit.typeUrl,
   encoders: toEncoders(MsgDeposit),
   converters: toConverters(MsgDeposit)

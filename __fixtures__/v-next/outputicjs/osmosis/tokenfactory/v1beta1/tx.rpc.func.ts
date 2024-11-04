@@ -2,8 +2,8 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateDenom, MsgMint, MsgBurn, MsgChangeAdmin, MsgSetDenomMetadata } from "./tx";
-export const createCreateDenom = (getSigningClient: SigningClientResolver) => buildTx<MsgCreateDenom>({
-  getSigningClient: getSigningClient,
+export const createCreateDenom = (clientResolver: SigningClientResolver) => buildTx<MsgCreateDenom>({
+  clientResolver,
   typeUrl: MsgCreateDenom.typeUrl,
   encoders: toEncoders(MsgCreateDenom),
   converters: toConverters(MsgCreateDenom)
@@ -11,8 +11,8 @@ export const createCreateDenom = (getSigningClient: SigningClientResolver) => bu
 export const useCreateDenom = buildUseMutation<MsgCreateDenom, Error>({
   builderMutationFn: createCreateDenom
 });
-export const createMint = (getSigningClient: SigningClientResolver) => buildTx<MsgMint>({
-  getSigningClient: getSigningClient,
+export const createMint = (clientResolver: SigningClientResolver) => buildTx<MsgMint>({
+  clientResolver,
   typeUrl: MsgMint.typeUrl,
   encoders: toEncoders(MsgMint),
   converters: toConverters(MsgMint)
@@ -20,8 +20,8 @@ export const createMint = (getSigningClient: SigningClientResolver) => buildTx<M
 export const useMint = buildUseMutation<MsgMint, Error>({
   builderMutationFn: createMint
 });
-export const createBurn = (getSigningClient: SigningClientResolver) => buildTx<MsgBurn>({
-  getSigningClient: getSigningClient,
+export const createBurn = (clientResolver: SigningClientResolver) => buildTx<MsgBurn>({
+  clientResolver,
   typeUrl: MsgBurn.typeUrl,
   encoders: toEncoders(MsgBurn),
   converters: toConverters(MsgBurn)
@@ -29,8 +29,8 @@ export const createBurn = (getSigningClient: SigningClientResolver) => buildTx<M
 export const useBurn = buildUseMutation<MsgBurn, Error>({
   builderMutationFn: createBurn
 });
-export const createChangeAdmin = (getSigningClient: SigningClientResolver) => buildTx<MsgChangeAdmin>({
-  getSigningClient: getSigningClient,
+export const createChangeAdmin = (clientResolver: SigningClientResolver) => buildTx<MsgChangeAdmin>({
+  clientResolver,
   typeUrl: MsgChangeAdmin.typeUrl,
   encoders: toEncoders(MsgChangeAdmin),
   converters: toConverters(MsgChangeAdmin)
@@ -38,8 +38,8 @@ export const createChangeAdmin = (getSigningClient: SigningClientResolver) => bu
 export const useChangeAdmin = buildUseMutation<MsgChangeAdmin, Error>({
   builderMutationFn: createChangeAdmin
 });
-export const createSetDenomMetadata = (getSigningClient: SigningClientResolver) => buildTx<MsgSetDenomMetadata>({
-  getSigningClient: getSigningClient,
+export const createSetDenomMetadata = (clientResolver: SigningClientResolver) => buildTx<MsgSetDenomMetadata>({
+  clientResolver,
   typeUrl: MsgSetDenomMetadata.typeUrl,
   encoders: toEncoders(MsgSetDenomMetadata),
   converters: toConverters(MsgSetDenomMetadata)

@@ -2,8 +2,8 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSetWithdrawAddress, MsgWithdrawDelegatorReward, MsgWithdrawValidatorCommission, MsgFundCommunityPool } from "./tx";
-export const createSetWithdrawAddress = (getSigningClient: SigningClientResolver) => buildTx<MsgSetWithdrawAddress>({
-  getSigningClient: getSigningClient,
+export const createSetWithdrawAddress = (clientResolver: SigningClientResolver) => buildTx<MsgSetWithdrawAddress>({
+  clientResolver,
   typeUrl: MsgSetWithdrawAddress.typeUrl,
   encoders: toEncoders(MsgSetWithdrawAddress),
   converters: toConverters(MsgSetWithdrawAddress)
@@ -11,8 +11,8 @@ export const createSetWithdrawAddress = (getSigningClient: SigningClientResolver
 export const useSetWithdrawAddress = buildUseMutation<MsgSetWithdrawAddress, Error>({
   builderMutationFn: createSetWithdrawAddress
 });
-export const createWithdrawDelegatorReward = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawDelegatorReward>({
-  getSigningClient: getSigningClient,
+export const createWithdrawDelegatorReward = (clientResolver: SigningClientResolver) => buildTx<MsgWithdrawDelegatorReward>({
+  clientResolver,
   typeUrl: MsgWithdrawDelegatorReward.typeUrl,
   encoders: toEncoders(MsgWithdrawDelegatorReward),
   converters: toConverters(MsgWithdrawDelegatorReward)
@@ -20,8 +20,8 @@ export const createWithdrawDelegatorReward = (getSigningClient: SigningClientRes
 export const useWithdrawDelegatorReward = buildUseMutation<MsgWithdrawDelegatorReward, Error>({
   builderMutationFn: createWithdrawDelegatorReward
 });
-export const createWithdrawValidatorCommission = (getSigningClient: SigningClientResolver) => buildTx<MsgWithdrawValidatorCommission>({
-  getSigningClient: getSigningClient,
+export const createWithdrawValidatorCommission = (clientResolver: SigningClientResolver) => buildTx<MsgWithdrawValidatorCommission>({
+  clientResolver,
   typeUrl: MsgWithdrawValidatorCommission.typeUrl,
   encoders: toEncoders(MsgWithdrawValidatorCommission),
   converters: toConverters(MsgWithdrawValidatorCommission)
@@ -29,8 +29,8 @@ export const createWithdrawValidatorCommission = (getSigningClient: SigningClien
 export const useWithdrawValidatorCommission = buildUseMutation<MsgWithdrawValidatorCommission, Error>({
   builderMutationFn: createWithdrawValidatorCommission
 });
-export const createFundCommunityPool = (getSigningClient: SigningClientResolver) => buildTx<MsgFundCommunityPool>({
-  getSigningClient: getSigningClient,
+export const createFundCommunityPool = (clientResolver: SigningClientResolver) => buildTx<MsgFundCommunityPool>({
+  clientResolver,
   typeUrl: MsgFundCommunityPool.typeUrl,
   encoders: toEncoders(MsgFundCommunityPool),
   converters: toConverters(MsgFundCommunityPool)

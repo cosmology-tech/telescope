@@ -1,144 +1,144 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryGroupInfoRequest, QueryGroupInfoResponse, QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse, QueryGroupMembersRequest, QueryGroupMembersResponse, QueryGroupsByAdminRequest, QueryGroupsByAdminResponse, QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse, QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse, QueryProposalRequest, QueryProposalResponse, QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse, QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse, QueryVotesByProposalRequest, QueryVotesByProposalResponse, QueryVotesByVoterRequest, QueryVotesByVoterResponse, QueryGroupsByMemberRequest, QueryGroupsByMemberResponse, QueryTallyResultRequest, QueryTallyResultResponse } from "./query";
-export const createGetGroupInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
+export const createGetGroupInfo = (clientResolver: RpcResolver) => buildQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
   encode: QueryGroupInfoRequest.encode,
   decode: QueryGroupInfoResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupInfo",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupInfo = buildUseQuery<QueryGroupInfoRequest, QueryGroupInfoResponse>({
   builderQueryFn: createGetGroupInfo,
   queryKeyPrefix: "GroupInfoQuery"
 });
-export const createGetGroupPolicyInfo = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
+export const createGetGroupPolicyInfo = (clientResolver: RpcResolver) => buildQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
   encode: QueryGroupPolicyInfoRequest.encode,
   decode: QueryGroupPolicyInfoResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupPolicyInfo",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupPolicyInfo = buildUseQuery<QueryGroupPolicyInfoRequest, QueryGroupPolicyInfoResponse>({
   builderQueryFn: createGetGroupPolicyInfo,
   queryKeyPrefix: "GroupPolicyInfoQuery"
 });
-export const createGetGroupMembers = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
+export const createGetGroupMembers = (clientResolver: RpcResolver) => buildQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
   encode: QueryGroupMembersRequest.encode,
   decode: QueryGroupMembersResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupMembers",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupMembers = buildUseQuery<QueryGroupMembersRequest, QueryGroupMembersResponse>({
   builderQueryFn: createGetGroupMembers,
   queryKeyPrefix: "GroupMembersQuery"
 });
-export const createGetGroupsByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
+export const createGetGroupsByAdmin = (clientResolver: RpcResolver) => buildQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
   encode: QueryGroupsByAdminRequest.encode,
   decode: QueryGroupsByAdminResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupsByAdmin",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupsByAdmin = buildUseQuery<QueryGroupsByAdminRequest, QueryGroupsByAdminResponse>({
   builderQueryFn: createGetGroupsByAdmin,
   queryKeyPrefix: "GroupsByAdminQuery"
 });
-export const createGetGroupPoliciesByGroup = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
+export const createGetGroupPoliciesByGroup = (clientResolver: RpcResolver) => buildQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
   encode: QueryGroupPoliciesByGroupRequest.encode,
   decode: QueryGroupPoliciesByGroupResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupPoliciesByGroup",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupPoliciesByGroup = buildUseQuery<QueryGroupPoliciesByGroupRequest, QueryGroupPoliciesByGroupResponse>({
   builderQueryFn: createGetGroupPoliciesByGroup,
   queryKeyPrefix: "GroupPoliciesByGroupQuery"
 });
-export const createGetGroupPoliciesByAdmin = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
+export const createGetGroupPoliciesByAdmin = (clientResolver: RpcResolver) => buildQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
   encode: QueryGroupPoliciesByAdminRequest.encode,
   decode: QueryGroupPoliciesByAdminResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupPoliciesByAdmin",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupPoliciesByAdmin = buildUseQuery<QueryGroupPoliciesByAdminRequest, QueryGroupPoliciesByAdminResponse>({
   builderQueryFn: createGetGroupPoliciesByAdmin,
   queryKeyPrefix: "GroupPoliciesByAdminQuery"
 });
-export const createGetProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalRequest, QueryProposalResponse>({
+export const createGetProposal = (clientResolver: RpcResolver) => buildQuery<QueryProposalRequest, QueryProposalResponse>({
   encode: QueryProposalRequest.encode,
   decode: QueryProposalResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "Proposal",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetProposal = buildUseQuery<QueryProposalRequest, QueryProposalResponse>({
   builderQueryFn: createGetProposal,
   queryKeyPrefix: "ProposalQuery"
 });
-export const createGetProposalsByGroupPolicy = (getRpcInstance: RpcResolver) => buildQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
+export const createGetProposalsByGroupPolicy = (clientResolver: RpcResolver) => buildQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
   encode: QueryProposalsByGroupPolicyRequest.encode,
   decode: QueryProposalsByGroupPolicyResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "ProposalsByGroupPolicy",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetProposalsByGroupPolicy = buildUseQuery<QueryProposalsByGroupPolicyRequest, QueryProposalsByGroupPolicyResponse>({
   builderQueryFn: createGetProposalsByGroupPolicy,
   queryKeyPrefix: "ProposalsByGroupPolicyQuery"
 });
-export const createGetVoteByProposalVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
+export const createGetVoteByProposalVoter = (clientResolver: RpcResolver) => buildQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
   encode: QueryVoteByProposalVoterRequest.encode,
   decode: QueryVoteByProposalVoterResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "VoteByProposalVoter",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetVoteByProposalVoter = buildUseQuery<QueryVoteByProposalVoterRequest, QueryVoteByProposalVoterResponse>({
   builderQueryFn: createGetVoteByProposalVoter,
   queryKeyPrefix: "VoteByProposalVoterQuery"
 });
-export const createGetVotesByProposal = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
+export const createGetVotesByProposal = (clientResolver: RpcResolver) => buildQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
   encode: QueryVotesByProposalRequest.encode,
   decode: QueryVotesByProposalResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "VotesByProposal",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetVotesByProposal = buildUseQuery<QueryVotesByProposalRequest, QueryVotesByProposalResponse>({
   builderQueryFn: createGetVotesByProposal,
   queryKeyPrefix: "VotesByProposalQuery"
 });
-export const createGetVotesByVoter = (getRpcInstance: RpcResolver) => buildQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
+export const createGetVotesByVoter = (clientResolver: RpcResolver) => buildQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
   encode: QueryVotesByVoterRequest.encode,
   decode: QueryVotesByVoterResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "VotesByVoter",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetVotesByVoter = buildUseQuery<QueryVotesByVoterRequest, QueryVotesByVoterResponse>({
   builderQueryFn: createGetVotesByVoter,
   queryKeyPrefix: "VotesByVoterQuery"
 });
-export const createGetGroupsByMember = (getRpcInstance: RpcResolver) => buildQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
+export const createGetGroupsByMember = (clientResolver: RpcResolver) => buildQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
   encode: QueryGroupsByMemberRequest.encode,
   decode: QueryGroupsByMemberResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "GroupsByMember",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetGroupsByMember = buildUseQuery<QueryGroupsByMemberRequest, QueryGroupsByMemberResponse>({
   builderQueryFn: createGetGroupsByMember,
   queryKeyPrefix: "GroupsByMemberQuery"
 });
-export const createGetTallyResult = (getRpcInstance: RpcResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
+export const createGetTallyResult = (clientResolver: RpcResolver) => buildQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
   encode: QueryTallyResultRequest.encode,
   decode: QueryTallyResultResponse.decode,
   service: "cosmos.group.v1.Query",
   method: "TallyResult",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });
 export const useGetTallyResult = buildUseQuery<QueryTallyResultRequest, QueryTallyResultResponse>({
   builderQueryFn: createGetTallyResult,

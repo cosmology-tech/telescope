@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`msg funcs works 1`] = `
-"export const createSend = (getSigningClient: SigningClientResolver) => buildTx<MsgSend>({
-  getSigningClient: getSigningClient,
+"export const createSend = (clientResolver: SigningClientResolver) => buildTx<MsgSend>({
+  clientResolver,
   typeUrl: MsgSend.typeUrl,
   encoders: toEncoders(MsgSend),
   converters: toConverters(MsgSend)
@@ -16,12 +16,12 @@ exports[`msg funcs works 2`] = `
 `;
 
 exports[`query funcs works 1`] = `
-"export const createGetBalance = (getRpcInstance: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
+"export const createGetBalance = (clientResolver: RpcResolver) => buildQuery<QueryBalanceRequest, QueryBalanceResponse>({
   encode: QueryBalanceRequest.encode,
   decode: QueryBalanceResponse.decode,
   service: "cosmos.bank.v1beta1.Query",
   method: "Balance",
-  getRpcInstance: getRpcInstance
+  clientResolver
 });"
 `;
 
