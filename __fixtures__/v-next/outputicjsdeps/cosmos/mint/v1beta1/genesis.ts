@@ -1,6 +1,8 @@
-import { Minter, MinterAmino, Params, ParamsAmino } from "./mint";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Minter, MinterSDKType, Params, ParamsSDKType } from "./mint.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.mint.v1beta1";
 /** GenesisState defines the mint module's genesis state. */
 export interface GenesisState {
   /** minter is a space for holding current inflation information. */
@@ -13,15 +15,9 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the mint module's genesis state. */
-export interface GenesisStateAmino {
-  /** minter is a space for holding current inflation information. */
-  minter: MinterAmino;
-  /** params defines all the paramaters of the module. */
-  params: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  minter: MinterSDKType;
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -31,7 +27,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.mint.v1beta1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.minter !== undefined) {
       Minter.encode(message.minter, writer.uint32(10).fork()).ldelim();
@@ -61,11 +56,45 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.minter)) obj.minter = Minter.fromJSON(object.minter);
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.minter !== undefined && (obj.minter = message.minter ? Minter.toJSON(message.minter) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.minter = object.minter !== undefined && object.minter !== null ? Minter.fromPartial(object.minter) : undefined;
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.minter !== undefined && object.minter !== null) {
+      message.minter = Minter.fromPartial(object.minter);
+    }
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      minter: object.minter ? Minter.fromSDK(object.minter) : undefined,
+      params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      minter: isSet(object.minter) ? Minter.fromSDKJSON(object.minter) : undefined,
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.minter !== undefined && (obj.minter = message.minter ? Minter.toSDK(message.minter) : undefined);
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

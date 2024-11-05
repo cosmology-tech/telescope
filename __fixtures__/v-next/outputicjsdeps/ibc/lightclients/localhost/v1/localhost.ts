@@ -1,6 +1,8 @@
-import { Height, HeightAmino } from "../../../core/client/v1/client";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { Height, HeightSDKType } from "../../../core/client/v1/client.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
  * access to keys outside the client prefix.
@@ -19,15 +21,9 @@ export interface ClientStateProtoMsg {
  * ClientState defines a loopback (localhost) client. It requires (read-only)
  * access to keys outside the client prefix.
  */
-export interface ClientStateAmino {
-  /** self chain ID */
+export interface ClientStateSDKType {
   chain_id: string;
-  /** self latest block height */
-  height: HeightAmino;
-}
-export interface ClientStateAminoMsg {
-  type: "cosmos-sdk/ClientState";
-  value: ClientStateAmino;
+  height: HeightSDKType;
 }
 function createBaseClientState(): ClientState {
   return {
@@ -37,9 +33,8 @@ function createBaseClientState(): ClientState {
 }
 export const ClientState = {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState",
-  aminoType: "cosmos-sdk/ClientState",
   encode(message: ClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(10).string(message.chainId);
     }
     if (message.height !== undefined) {
@@ -67,11 +62,43 @@ export const ClientState = {
     }
     return message;
   },
+  fromJSON(object: any): ClientState {
+    const obj = createBaseClientState();
+    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
+    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
+    return obj;
+  },
+  toJSON(message: ClientState): JsonSafe<ClientState> {
+    const obj: any = {};
+    message.chainId !== undefined && (obj.chainId = message.chainId);
+    message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ClientState>): ClientState {
     const message = createBaseClientState();
     message.chainId = object.chainId ?? "";
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
     return message;
+  },
+  fromSDK(object: ClientStateSDKType): ClientState {
+    return {
+      chainId: object?.chain_id,
+      height: object.height ? Height.fromSDK(object.height) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ClientStateSDKType {
+    return {
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined
+    };
+  },
+  toSDK(message: ClientState): ClientStateSDKType {
+    const obj: any = {};
+    obj.chain_id = message.chainId;
+    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
+    return obj;
   },
   fromAmino(object: ClientStateAmino): ClientState {
     const message = createBaseClientState();

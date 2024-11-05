@@ -1,6 +1,8 @@
-import { Grant, GrantAmino } from "./feegrant";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Grant, GrantSDKType } from "./feegrant.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial } from "../../../helpers.js";
+export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
   allowances: Grant[];
@@ -10,12 +12,8 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState contains a set of fee allowances, persisted from the store */
-export interface GenesisStateAmino {
-  allowances: GrantAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  allowances: GrantSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -24,7 +22,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.feegrant.v1beta1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allowances) {
       Grant.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -48,10 +45,43 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.allowances)) obj.allowances = object.allowances.map((e: any) => Grant.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toJSON(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.allowances = object.allowances?.map(e => Grant.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      allowances: Array.isArray(object?.allowances) ? object.allowances.map((e: any) => Grant.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.allowances) {
+      obj.allowances = message.allowances.map(e => e ? Grant.toSDK(e) : undefined);
+    } else {
+      obj.allowances = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

@@ -1,8 +1,10 @@
-import { Params, ParamsAmino } from "./params";
-import { Gauge, GaugeAmino } from "./gauge";
-import { Duration, DurationAmino } from "../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { Params, ParamsSDKType } from "./params.js";
+import { Gauge, GaugeSDKType } from "./gauge.js";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "osmosis.incentives";
 /**
  * GenesisState defines the incentives module's various parameters when first
  * initialized
@@ -31,25 +33,11 @@ export interface GenesisStateProtoMsg {
  * GenesisState defines the incentives module's various parameters when first
  * initialized
  */
-export interface GenesisStateAmino {
-  /** params are all the parameters of the module */
-  params: ParamsAmino;
-  /** gauges are all gauges that should exist at genesis */
-  gauges: GaugeAmino[];
-  /**
-   * lockable_durations are all lockup durations that gauges can be locked for
-   * in order to recieve incentives
-   */
-  lockable_durations: DurationAmino[];
-  /**
-   * last_gauge_id is what the gauge number will increment from when creating
-   * the next gauge after genesis
-   */
-  last_gauge_id: string;
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/incentives/genesis-state";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  params: ParamsSDKType;
+  gauges: GaugeSDKType[];
+  lockable_durations: DurationSDKType[];
+  last_gauge_id: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -61,7 +49,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.incentives.GenesisState",
-  aminoType: "osmosis/incentives/genesis-state",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -72,7 +59,7 @@ export const GenesisState = {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.lastGaugeId !== BigInt(0)) {
+    if (message.lastGaugeId !== undefined) {
       writer.uint32(32).uint64(message.lastGaugeId);
     }
     return writer;
@@ -103,13 +90,73 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.gauges)) obj.gauges = object.gauges.map((e: any) => Gauge.fromJSON(e));
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    if (isSet(object.lastGaugeId)) obj.lastGaugeId = BigInt(object.lastGaugeId.toString());
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.gauges) {
+      obj.gauges = message.gauges.map(e => e ? Gauge.toJSON(e) : undefined);
+    } else {
+      obj.gauges = [];
+    }
+    if (message.lockableDurations) {
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
+    } else {
+      obj.lockableDurations = [];
+    }
+    message.lastGaugeId !== undefined && (obj.lastGaugeId = (message.lastGaugeId || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.gauges = object.gauges?.map(e => Gauge.fromPartial(e)) || [];
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
-    message.lastGaugeId = object.lastGaugeId !== undefined && object.lastGaugeId !== null ? BigInt(object.lastGaugeId.toString()) : BigInt(0);
+    if (object.lastGaugeId !== undefined && object.lastGaugeId !== null) {
+      message.lastGaugeId = BigInt(object.lastGaugeId.toString());
+    }
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined,
+      gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDK(e)) : [],
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : [],
+      lastGaugeId: object?.last_gauge_id
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      gauges: Array.isArray(object?.gauges) ? object.gauges.map((e: any) => Gauge.fromSDKJSON(e)) : [],
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : [],
+      last_gauge_id: isSet(object.last_gauge_id) ? BigInt(object.last_gauge_id.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    if (message.gauges) {
+      obj.gauges = message.gauges.map(e => e ? Gauge.toSDK(e) : undefined);
+    } else {
+      obj.gauges = [];
+    }
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+    obj.last_gauge_id = message.lastGaugeId;
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

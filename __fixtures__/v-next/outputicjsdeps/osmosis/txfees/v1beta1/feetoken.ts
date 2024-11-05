@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * FeeToken is a struct that specifies a coin denom, and pool ID pair.
  * This marks the token as eligible for use as a tx fee asset in Osmosis.
@@ -20,13 +22,9 @@ export interface FeeTokenProtoMsg {
  * Its price in osmo is derived through looking at the provided pool ID.
  * The pool ID must have osmo as one of its assets.
  */
-export interface FeeTokenAmino {
+export interface FeeTokenSDKType {
   denom: string;
-  poolID: string;
-}
-export interface FeeTokenAminoMsg {
-  type: "osmosis/txfees/fee-token";
-  value: FeeTokenAmino;
+  poolID: bigint;
 }
 function createBaseFeeToken(): FeeToken {
   return {
@@ -36,12 +34,11 @@ function createBaseFeeToken(): FeeToken {
 }
 export const FeeToken = {
   typeUrl: "/osmosis.txfees.v1beta1.FeeToken",
-  aminoType: "osmosis/txfees/fee-token",
   encode(message: FeeToken, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
-    if (message.poolID !== BigInt(0)) {
+    if (message.poolID !== undefined) {
       writer.uint32(16).uint64(message.poolID);
     }
     return writer;
@@ -66,11 +63,43 @@ export const FeeToken = {
     }
     return message;
   },
+  fromJSON(object: any): FeeToken {
+    const obj = createBaseFeeToken();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    return obj;
+  },
+  toJSON(message: FeeToken): JsonSafe<FeeToken> {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<FeeToken>): FeeToken {
     const message = createBaseFeeToken();
     message.denom = object.denom ?? "";
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
+  },
+  fromSDK(object: FeeTokenSDKType): FeeToken {
+    return {
+      denom: object?.denom,
+      poolID: object?.poolID
+    };
+  },
+  fromSDKJSON(object: any): FeeTokenSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: FeeToken): FeeTokenSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    obj.poolID = message.poolID;
+    return obj;
   },
   fromAmino(object: FeeTokenAmino): FeeToken {
     const message = createBaseFeeToken();

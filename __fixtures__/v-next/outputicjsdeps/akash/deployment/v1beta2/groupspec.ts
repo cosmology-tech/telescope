@@ -1,7 +1,9 @@
-import { PlacementRequirements, PlacementRequirementsAmino } from "../../base/v1beta2/attribute";
-import { Resource, ResourceAmino } from "./resource";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { PlacementRequirements, PlacementRequirementsSDKType } from "../../base/v1beta2/attribute.js";
+import { Resource, ResourceSDKType } from "./resource.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupSpec stores group specifications */
 export interface GroupSpec {
   name: string;
@@ -13,14 +15,10 @@ export interface GroupSpecProtoMsg {
   value: Uint8Array;
 }
 /** GroupSpec stores group specifications */
-export interface GroupSpecAmino {
+export interface GroupSpecSDKType {
   name: string;
-  requirements: PlacementRequirementsAmino;
-  resources: ResourceAmino[];
-}
-export interface GroupSpecAminoMsg {
-  type: "/akash.deployment.v1beta2.GroupSpec";
-  value: GroupSpecAmino;
+  requirements: PlacementRequirementsSDKType;
+  resources: ResourceSDKType[];
 }
 function createBaseGroupSpec(): GroupSpec {
   return {
@@ -32,7 +30,7 @@ function createBaseGroupSpec(): GroupSpec {
 export const GroupSpec = {
   typeUrl: "/akash.deployment.v1beta2.GroupSpec",
   encode(message: GroupSpec, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.requirements !== undefined) {
@@ -66,12 +64,57 @@ export const GroupSpec = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GroupSpec>): GroupSpec {
+  fromJSON(object: any): GroupSpec {
+    const obj = createBaseGroupSpec();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.requirements)) obj.requirements = PlacementRequirements.fromJSON(object.requirements);
+    if (Array.isArray(object?.resources)) obj.resources = object.resources.map((e: any) => Resource.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GroupSpec): JsonSafe<GroupSpec> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toJSON(message.requirements) : undefined);
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toJSON(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupSpec>, I>>(object: I): GroupSpec {
     const message = createBaseGroupSpec();
     message.name = object.name ?? "";
-    message.requirements = object.requirements !== undefined && object.requirements !== null ? PlacementRequirements.fromPartial(object.requirements) : undefined;
+    if (object.requirements !== undefined && object.requirements !== null) {
+      message.requirements = PlacementRequirements.fromPartial(object.requirements);
+    }
     message.resources = object.resources?.map(e => Resource.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GroupSpecSDKType): GroupSpec {
+    return {
+      name: object?.name,
+      requirements: object.requirements ? PlacementRequirements.fromSDK(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GroupSpecSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      requirements: isSet(object.requirements) ? PlacementRequirements.fromSDKJSON(object.requirements) : undefined,
+      resources: Array.isArray(object?.resources) ? object.resources.map((e: any) => Resource.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GroupSpec): GroupSpecSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.requirements !== undefined && (obj.requirements = message.requirements ? PlacementRequirements.toSDK(message.requirements) : undefined);
+    if (message.resources) {
+      obj.resources = message.resources.map(e => e ? Resource.toSDK(e) : undefined);
+    } else {
+      obj.resources = [];
+    }
+    return obj;
   },
   fromAmino(object: GroupSpecAmino): GroupSpec {
     const message = createBaseGroupSpec();
@@ -97,6 +140,12 @@ export const GroupSpec = {
   },
   fromAminoMsg(object: GroupSpecAminoMsg): GroupSpec {
     return GroupSpec.fromAmino(object.value);
+  },
+  toAminoMsg(message: GroupSpec): GroupSpecAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/group-spec",
+      value: GroupSpec.toAmino(message)
+    };
   },
   fromProtoMsg(message: GroupSpecProtoMsg): GroupSpec {
     return GroupSpec.decode(message.value);

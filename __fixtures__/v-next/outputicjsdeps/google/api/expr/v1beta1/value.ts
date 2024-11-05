@@ -1,7 +1,9 @@
-import { NullValue } from "../../../protobuf/struct";
-import { Any, AnyAmino } from "../../../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { NullValue, NullValueSDKType, nullValueFromJSON, nullValueToJSON } from "../../../protobuf/struct.js";
+import { Any, AnySDKType } from "../../../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.expr.v1beta1";
 /**
  * Represents a CEL value.
  * 
@@ -44,35 +46,19 @@ export interface ValueProtoMsg {
  * This is similar to `google.protobuf.Value`, but can represent CEL's full
  * range of values.
  */
-export interface ValueAmino {
-  /** Null value. */
+export interface ValueSDKType {
   null_value?: NullValue;
-  /** Boolean value. */
   bool_value?: boolean;
-  /** Signed integer value. */
-  int64_value?: string;
-  /** Unsigned integer value. */
-  uint64_value?: string;
-  /** Floating point value. */
+  int64_value?: bigint;
+  uint64_value?: bigint;
   double_value?: number;
-  /** UTF-8 string value. */
   string_value?: string;
-  /** Byte string value. */
-  bytes_value?: string;
-  /** An enum value. */
-  enum_value?: EnumValueAmino;
-  /** The proto message backing an object value. */
-  object_value?: AnyAmino;
-  /** Map value. */
-  map_value?: MapValueAmino;
-  /** List value. */
-  list_value?: ListValueAmino;
-  /** A Type value represented by the fully qualified name of the type. */
+  bytes_value?: Uint8Array;
+  enum_value?: EnumValueSDKType;
+  object_value?: AnySDKType;
+  map_value?: MapValueSDKType;
+  list_value?: ListValueSDKType;
   type_value?: string;
-}
-export interface ValueAminoMsg {
-  type: "/google.api.expr.v1beta1.Value";
-  value: ValueAmino;
 }
 /** An enum value. */
 export interface EnumValue {
@@ -86,15 +72,9 @@ export interface EnumValueProtoMsg {
   value: Uint8Array;
 }
 /** An enum value. */
-export interface EnumValueAmino {
-  /** The fully qualified name of the enum type. */
+export interface EnumValueSDKType {
   type: string;
-  /** The value of the enum. */
   value: number;
-}
-export interface EnumValueAminoMsg {
-  type: "/google.api.expr.v1beta1.EnumValue";
-  value: EnumValueAmino;
 }
 /**
  * A list.
@@ -116,13 +96,8 @@ export interface ListValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-export interface ListValueAmino {
-  /** The ordered values in the list. */
-  values: ValueAmino[];
-}
-export interface ListValueAminoMsg {
-  type: "/google.api.expr.v1beta1.ListValue";
-  value: ListValueAmino;
+export interface ListValueSDKType {
+  values: ValueSDKType[];
 }
 /**
  * A map.
@@ -149,18 +124,8 @@ export interface MapValueProtoMsg {
  * Wrapped in a message so 'not set' and empty can be differentiated, which is
  * required for use in a 'oneof'.
  */
-export interface MapValueAmino {
-  /**
-   * The set of map entries.
-   * 
-   * CEL has fewer restrictions on keys, so a protobuf map represenation
-   * cannot be used.
-   */
-  entries: MapValue_EntryAmino[];
-}
-export interface MapValueAminoMsg {
-  type: "/google.api.expr.v1beta1.MapValue";
-  value: MapValueAmino;
+export interface MapValueSDKType {
+  entries: MapValue_EntrySDKType[];
 }
 /** An entry in the map. */
 export interface MapValue_Entry {
@@ -179,20 +144,9 @@ export interface MapValue_EntryProtoMsg {
   value: Uint8Array;
 }
 /** An entry in the map. */
-export interface MapValue_EntryAmino {
-  /**
-   * The key.
-   * 
-   * Must be unique with in the map.
-   * Currently only boolean, int, uint, and string values can be keys.
-   */
-  key?: ValueAmino;
-  /** The value. */
-  value?: ValueAmino;
-}
-export interface MapValue_EntryAminoMsg {
-  type: "/google.api.expr.v1beta1.Entry";
-  value: MapValue_EntryAmino;
+export interface MapValue_EntrySDKType {
+  key?: ValueSDKType;
+  value?: ValueSDKType;
 }
 function createBaseValue(): Value {
   return {
@@ -301,21 +255,117 @@ export const Value = {
     }
     return message;
   },
+  fromJSON(object: any): Value {
+    const obj = createBaseValue();
+    if (isSet(object.nullValue)) obj.nullValue = nullValueFromJSON(object.nullValue);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.uint64Value)) obj.uint64Value = BigInt(object.uint64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.bytesValue)) obj.bytesValue = bytesFromBase64(object.bytesValue);
+    if (isSet(object.enumValue)) obj.enumValue = EnumValue.fromJSON(object.enumValue);
+    if (isSet(object.objectValue)) obj.objectValue = Any.fromJSON(object.objectValue);
+    if (isSet(object.mapValue)) obj.mapValue = MapValue.fromJSON(object.mapValue);
+    if (isSet(object.listValue)) obj.listValue = ListValue.fromJSON(object.listValue);
+    if (isSet(object.typeValue)) obj.typeValue = String(object.typeValue);
+    return obj;
+  },
+  toJSON(message: Value): JsonSafe<Value> {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.nullValue = nullValueToJSON(message.nullValue));
+    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    if (message.uint64Value !== undefined) {
+      obj.uint64Value = message.uint64Value.toString();
+    }
+    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
+    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
+    message.bytesValue !== undefined && (obj.bytesValue = message.bytesValue !== undefined ? base64FromBytes(message.bytesValue) : undefined);
+    message.enumValue !== undefined && (obj.enumValue = message.enumValue ? EnumValue.toJSON(message.enumValue) : undefined);
+    message.objectValue !== undefined && (obj.objectValue = message.objectValue ? Any.toJSON(message.objectValue) : undefined);
+    message.mapValue !== undefined && (obj.mapValue = message.mapValue ? MapValue.toJSON(message.mapValue) : undefined);
+    message.listValue !== undefined && (obj.listValue = message.listValue ? ListValue.toJSON(message.listValue) : undefined);
+    message.typeValue !== undefined && (obj.typeValue = message.typeValue);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Value>): Value {
     const message = createBaseValue();
     message.nullValue = object.nullValue ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
-    message.uint64Value = object.uint64Value !== undefined && object.uint64Value !== null ? BigInt(object.uint64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
+    if (object.uint64Value !== undefined && object.uint64Value !== null) {
+      message.uint64Value = BigInt(object.uint64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
     message.bytesValue = object.bytesValue ?? undefined;
-    message.enumValue = object.enumValue !== undefined && object.enumValue !== null ? EnumValue.fromPartial(object.enumValue) : undefined;
-    message.objectValue = object.objectValue !== undefined && object.objectValue !== null ? Any.fromPartial(object.objectValue) : undefined;
-    message.mapValue = object.mapValue !== undefined && object.mapValue !== null ? MapValue.fromPartial(object.mapValue) : undefined;
-    message.listValue = object.listValue !== undefined && object.listValue !== null ? ListValue.fromPartial(object.listValue) : undefined;
+    if (object.enumValue !== undefined && object.enumValue !== null) {
+      message.enumValue = EnumValue.fromPartial(object.enumValue);
+    }
+    if (object.objectValue !== undefined && object.objectValue !== null) {
+      message.objectValue = Any.fromPartial(object.objectValue);
+    }
+    if (object.mapValue !== undefined && object.mapValue !== null) {
+      message.mapValue = MapValue.fromPartial(object.mapValue);
+    }
+    if (object.listValue !== undefined && object.listValue !== null) {
+      message.listValue = ListValue.fromPartial(object.listValue);
+    }
     message.typeValue = object.typeValue ?? undefined;
     return message;
+  },
+  fromSDK(object: ValueSDKType): Value {
+    return {
+      nullValue: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      uint64Value: object?.uint64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      bytesValue: object?.bytes_value,
+      enumValue: object.enum_value ? EnumValue.fromSDK(object.enum_value) : undefined,
+      objectValue: object.object_value ? Any.fromSDK(object.object_value) : undefined,
+      mapValue: object.map_value ? MapValue.fromSDK(object.map_value) : undefined,
+      listValue: object.list_value ? ListValue.fromSDK(object.list_value) : undefined,
+      typeValue: object?.type_value
+    };
+  },
+  fromSDKJSON(object: any): ValueSDKType {
+    return {
+      null_value: isSet(object.null_value) ? nullValueFromJSON(object.null_value) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
+      uint64_value: isSet(object.uint64_value) ? BigInt(object.uint64_value.toString()) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      bytes_value: isSet(object.bytes_value) ? bytesFromBase64(object.bytes_value) : undefined,
+      enum_value: isSet(object.enum_value) ? EnumValue.fromSDKJSON(object.enum_value) : undefined,
+      object_value: isSet(object.object_value) ? Any.fromSDKJSON(object.object_value) : undefined,
+      map_value: isSet(object.map_value) ? MapValue.fromSDKJSON(object.map_value) : undefined,
+      list_value: isSet(object.list_value) ? ListValue.fromSDKJSON(object.list_value) : undefined,
+      type_value: isSet(object.type_value) ? String(object.type_value) : undefined
+    };
+  },
+  toSDK(message: Value): ValueSDKType {
+    const obj: any = {};
+    message.nullValue !== undefined && (obj.null_value = nullValueToJSON(message.nullValue));
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.uint64_value = message.uint64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    obj.bytes_value = message.bytesValue;
+    message.enumValue !== undefined && (obj.enum_value = message.enumValue ? EnumValue.toSDK(message.enumValue) : undefined);
+    message.objectValue !== undefined && (obj.object_value = message.objectValue ? Any.toSDK(message.objectValue) : undefined);
+    message.mapValue !== undefined && (obj.map_value = message.mapValue ? MapValue.toSDK(message.mapValue) : undefined);
+    message.listValue !== undefined && (obj.list_value = message.listValue ? ListValue.toSDK(message.listValue) : undefined);
+    obj.type_value = message.typeValue;
+    return obj;
   },
   fromAmino(object: ValueAmino): Value {
     const message = createBaseValue();
@@ -398,10 +448,10 @@ function createBaseEnumValue(): EnumValue {
 export const EnumValue = {
   typeUrl: "/google.api.expr.v1beta1.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
-    if (message.value !== 0) {
+    if (message.value !== undefined) {
       writer.uint32(16).int32(message.value);
     }
     return writer;
@@ -426,11 +476,41 @@ export const EnumValue = {
     }
     return message;
   },
+  fromJSON(object: any): EnumValue {
+    const obj = createBaseEnumValue();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (isSet(object.value)) obj.value = Number(object.value);
+    return obj;
+  },
+  toJSON(message: EnumValue): JsonSafe<EnumValue> {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    message.value !== undefined && (obj.value = Math.round(message.value));
+    return obj;
+  },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.type = object.type ?? "";
     message.value = object.value ?? 0;
     return message;
+  },
+  fromSDK(object: EnumValueSDKType): EnumValue {
+    return {
+      type: object?.type,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): EnumValueSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      value: isSet(object.value) ? Number(object.value) : 0
+    };
+  },
+  toSDK(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    obj.type = message.type;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: EnumValueAmino): EnumValue {
     const message = createBaseEnumValue();
@@ -494,10 +574,43 @@ export const ListValue = {
     }
     return message;
   },
+  fromJSON(object: any): ListValue {
+    const obj = createBaseListValue();
+    if (Array.isArray(object?.values)) obj.values = object.values.map((e: any) => Value.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ListValue): JsonSafe<ListValue> {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toJSON(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListValue>): ListValue {
     const message = createBaseListValue();
     message.values = object.values?.map(e => Value.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ListValueSDKType): ListValue {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ListValueSDKType {
+    return {
+      values: Array.isArray(object?.values) ? object.values.map((e: any) => Value.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ListValue): ListValueSDKType {
+    const obj: any = {};
+    if (message.values) {
+      obj.values = message.values.map(e => e ? Value.toSDK(e) : undefined);
+    } else {
+      obj.values = [];
+    }
+    return obj;
   },
   fromAmino(object: ListValueAmino): ListValue {
     const message = createBaseListValue();
@@ -559,10 +672,43 @@ export const MapValue = {
     }
     return message;
   },
+  fromJSON(object: any): MapValue {
+    const obj = createBaseMapValue();
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => MapValue_Entry.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: MapValue): JsonSafe<MapValue> {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toJSON(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<MapValue>): MapValue {
     const message = createBaseMapValue();
     message.entries = object.entries?.map(e => MapValue_Entry.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: MapValueSDKType): MapValue {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): MapValueSDKType {
+    return {
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => MapValue_Entry.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: MapValue): MapValueSDKType {
+    const obj: any = {};
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? MapValue_Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
   },
   fromAmino(object: MapValueAmino): MapValue {
     const message = createBaseMapValue();
@@ -631,11 +777,45 @@ export const MapValue_Entry = {
     }
     return message;
   },
+  fromJSON(object: any): MapValue_Entry {
+    const obj = createBaseMapValue_Entry();
+    if (isSet(object.key)) obj.key = Value.fromJSON(object.key);
+    if (isSet(object.value)) obj.value = Value.fromJSON(object.value);
+    return obj;
+  },
+  toJSON(message: MapValue_Entry): JsonSafe<MapValue_Entry> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toJSON(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toJSON(message.value) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MapValue_Entry>): MapValue_Entry {
     const message = createBaseMapValue_Entry();
-    message.key = object.key !== undefined && object.key !== null ? Value.fromPartial(object.key) : undefined;
-    message.value = object.value !== undefined && object.value !== null ? Value.fromPartial(object.value) : undefined;
+    if (object.key !== undefined && object.key !== null) {
+      message.key = Value.fromPartial(object.key);
+    }
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Value.fromPartial(object.value);
+    }
     return message;
+  },
+  fromSDK(object: MapValue_EntrySDKType): MapValue_Entry {
+    return {
+      key: object.key ? Value.fromSDK(object.key) : undefined,
+      value: object.value ? Value.fromSDK(object.value) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MapValue_EntrySDKType {
+    return {
+      key: isSet(object.key) ? Value.fromSDKJSON(object.key) : undefined,
+      value: isSet(object.value) ? Value.fromSDKJSON(object.value) : undefined
+    };
+  },
+  toSDK(message: MapValue_Entry): MapValue_EntrySDKType {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key ? Value.toSDK(message.key) : undefined);
+    message.value !== undefined && (obj.value = message.value ? Value.toSDK(message.value) : undefined);
+    return obj;
   },
   fromAmino(object: MapValue_EntryAmino): MapValue_Entry {
     const message = createBaseMapValue_Entry();

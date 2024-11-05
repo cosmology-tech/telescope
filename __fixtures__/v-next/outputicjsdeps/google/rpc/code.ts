@@ -1,3 +1,4 @@
+export const protobufPackage = "google.rpc";
 /**
  * The canonical error codes for gRPC APIs.
  * 
@@ -181,7 +182,7 @@ export enum Code {
   DATA_LOSS = 15,
   UNRECOGNIZED = -1,
 }
-export const CodeAmino = Code;
+export const CodeSDKType = Code;
 export function codeFromJSON(object: any): Code {
   switch (object) {
     case 0:

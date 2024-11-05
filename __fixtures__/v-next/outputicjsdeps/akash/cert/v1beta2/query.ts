@@ -1,7 +1,9 @@
-import { CertificateFilter, CertificateFilterAmino, Certificate, CertificateAmino } from "./cert";
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { CertificateFilter, CertificateFilterSDKType, Certificate, CertificateSDKType } from "./cert.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.cert.v1beta2";
 /** CertificateResponse contains a single X509 certificate and its serial number */
 export interface CertificateResponse {
   certificate: Certificate;
@@ -12,13 +14,9 @@ export interface CertificateResponseProtoMsg {
   value: Uint8Array;
 }
 /** CertificateResponse contains a single X509 certificate and its serial number */
-export interface CertificateResponseAmino {
-  certificate: CertificateAmino;
+export interface CertificateResponseSDKType {
+  certificate: CertificateSDKType;
   serial: string;
-}
-export interface CertificateResponseAminoMsg {
-  type: "/akash.cert.v1beta2.CertificateResponse";
-  value: CertificateResponseAmino;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryCertificatesRequest {
@@ -30,13 +28,9 @@ export interface QueryCertificatesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
-export interface QueryCertificatesRequestAmino {
-  filter: CertificateFilterAmino;
-  pagination?: PageRequestAmino;
-}
-export interface QueryCertificatesRequestAminoMsg {
-  type: "/akash.cert.v1beta2.QueryCertificatesRequest";
-  value: QueryCertificatesRequestAmino;
+export interface QueryCertificatesRequestSDKType {
+  filter: CertificateFilterSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
 export interface QueryCertificatesResponse {
@@ -48,13 +42,9 @@ export interface QueryCertificatesResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryCertificatesResponse is response type for the Query/Certificates RPC method */
-export interface QueryCertificatesResponseAmino {
-  certificates: CertificateResponseAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryCertificatesResponseAminoMsg {
-  type: "/akash.cert.v1beta2.QueryCertificatesResponse";
-  value: QueryCertificatesResponseAmino;
+export interface QueryCertificatesResponseSDKType {
+  certificates: CertificateResponseSDKType[];
+  pagination?: PageResponseSDKType;
 }
 function createBaseCertificateResponse(): CertificateResponse {
   return {
@@ -68,7 +58,7 @@ export const CertificateResponse = {
     if (message.certificate !== undefined) {
       Certificate.encode(message.certificate, writer.uint32(10).fork()).ldelim();
     }
-    if (message.serial !== "") {
+    if (message.serial !== undefined) {
       writer.uint32(18).string(message.serial);
     }
     return writer;
@@ -93,11 +83,43 @@ export const CertificateResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<CertificateResponse>): CertificateResponse {
+  fromJSON(object: any): CertificateResponse {
+    const obj = createBaseCertificateResponse();
+    if (isSet(object.certificate)) obj.certificate = Certificate.fromJSON(object.certificate);
+    if (isSet(object.serial)) obj.serial = String(object.serial);
+    return obj;
+  },
+  toJSON(message: CertificateResponse): JsonSafe<CertificateResponse> {
+    const obj: any = {};
+    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toJSON(message.certificate) : undefined);
+    message.serial !== undefined && (obj.serial = message.serial);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<CertificateResponse>, I>>(object: I): CertificateResponse {
     const message = createBaseCertificateResponse();
-    message.certificate = object.certificate !== undefined && object.certificate !== null ? Certificate.fromPartial(object.certificate) : undefined;
+    if (object.certificate !== undefined && object.certificate !== null) {
+      message.certificate = Certificate.fromPartial(object.certificate);
+    }
     message.serial = object.serial ?? "";
     return message;
+  },
+  fromSDK(object: CertificateResponseSDKType): CertificateResponse {
+    return {
+      certificate: object.certificate ? Certificate.fromSDK(object.certificate) : undefined,
+      serial: object?.serial
+    };
+  },
+  fromSDKJSON(object: any): CertificateResponseSDKType {
+    return {
+      certificate: isSet(object.certificate) ? Certificate.fromSDKJSON(object.certificate) : undefined,
+      serial: isSet(object.serial) ? String(object.serial) : ""
+    };
+  },
+  toSDK(message: CertificateResponse): CertificateResponseSDKType {
+    const obj: any = {};
+    message.certificate !== undefined && (obj.certificate = message.certificate ? Certificate.toSDK(message.certificate) : undefined);
+    obj.serial = message.serial;
+    return obj;
   },
   fromAmino(object: CertificateResponseAmino): CertificateResponse {
     const message = createBaseCertificateResponse();
@@ -117,6 +139,12 @@ export const CertificateResponse = {
   },
   fromAminoMsg(object: CertificateResponseAminoMsg): CertificateResponse {
     return CertificateResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: CertificateResponse): CertificateResponseAminoMsg {
+    return {
+      type: "akash/cert/v1beta2/certificate-response",
+      value: CertificateResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: CertificateResponseProtoMsg): CertificateResponse {
     return CertificateResponse.decode(message.value);
@@ -168,11 +196,45 @@ export const QueryCertificatesRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryCertificatesRequest>): QueryCertificatesRequest {
+  fromJSON(object: any): QueryCertificatesRequest {
+    const obj = createBaseQueryCertificatesRequest();
+    if (isSet(object.filter)) obj.filter = CertificateFilter.fromJSON(object.filter);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryCertificatesRequest): JsonSafe<QueryCertificatesRequest> {
+    const obj: any = {};
+    message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toJSON(message.filter) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryCertificatesRequest>, I>>(object: I): QueryCertificatesRequest {
     const message = createBaseQueryCertificatesRequest();
-    message.filter = object.filter !== undefined && object.filter !== null ? CertificateFilter.fromPartial(object.filter) : undefined;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.filter !== undefined && object.filter !== null) {
+      message.filter = CertificateFilter.fromPartial(object.filter);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryCertificatesRequestSDKType): QueryCertificatesRequest {
+    return {
+      filter: object.filter ? CertificateFilter.fromSDK(object.filter) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryCertificatesRequestSDKType {
+    return {
+      filter: isSet(object.filter) ? CertificateFilter.fromSDKJSON(object.filter) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryCertificatesRequest): QueryCertificatesRequestSDKType {
+    const obj: any = {};
+    message.filter !== undefined && (obj.filter = message.filter ? CertificateFilter.toSDK(message.filter) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryCertificatesRequestAmino): QueryCertificatesRequest {
     const message = createBaseQueryCertificatesRequest();
@@ -192,6 +254,12 @@ export const QueryCertificatesRequest = {
   },
   fromAminoMsg(object: QueryCertificatesRequestAminoMsg): QueryCertificatesRequest {
     return QueryCertificatesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryCertificatesRequest): QueryCertificatesRequestAminoMsg {
+    return {
+      type: "akash/cert/v1beta2/query-certificates-request",
+      value: QueryCertificatesRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryCertificatesRequestProtoMsg): QueryCertificatesRequest {
     return QueryCertificatesRequest.decode(message.value);
@@ -243,11 +311,51 @@ export const QueryCertificatesResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryCertificatesResponse>): QueryCertificatesResponse {
+  fromJSON(object: any): QueryCertificatesResponse {
+    const obj = createBaseQueryCertificatesResponse();
+    if (Array.isArray(object?.certificates)) obj.certificates = object.certificates.map((e: any) => CertificateResponse.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryCertificatesResponse): JsonSafe<QueryCertificatesResponse> {
+    const obj: any = {};
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toJSON(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryCertificatesResponse>, I>>(object: I): QueryCertificatesResponse {
     const message = createBaseQueryCertificatesResponse();
     message.certificates = object.certificates?.map(e => CertificateResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryCertificatesResponseSDKType): QueryCertificatesResponse {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryCertificatesResponseSDKType {
+    return {
+      certificates: Array.isArray(object?.certificates) ? object.certificates.map((e: any) => CertificateResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryCertificatesResponse): QueryCertificatesResponseSDKType {
+    const obj: any = {};
+    if (message.certificates) {
+      obj.certificates = message.certificates.map(e => e ? CertificateResponse.toSDK(e) : undefined);
+    } else {
+      obj.certificates = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryCertificatesResponseAmino): QueryCertificatesResponse {
     const message = createBaseQueryCertificatesResponse();
@@ -269,6 +377,12 @@ export const QueryCertificatesResponse = {
   },
   fromAminoMsg(object: QueryCertificatesResponseAminoMsg): QueryCertificatesResponse {
     return QueryCertificatesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryCertificatesResponse): QueryCertificatesResponseAminoMsg {
+    return {
+      type: "akash/cert/v1beta2/query-certificates-response",
+      value: QueryCertificatesResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryCertificatesResponseProtoMsg): QueryCertificatesResponse {
     return QueryCertificatesResponse.decode(message.value);

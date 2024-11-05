@@ -1,7 +1,9 @@
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderAmino } from "./audit";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Provider, ProviderSDKType } from "./audit.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.audit.v1beta2";
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
   providers: Provider[];
@@ -12,13 +14,9 @@ export interface QueryProvidersResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
-export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryProvidersResponseAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProvidersResponse";
-  value: QueryProvidersResponseAmino;
+export interface QueryProvidersResponseSDKType {
+  providers: ProviderSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -30,13 +28,9 @@ export interface QueryProviderRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
-export interface QueryProviderRequestAmino {
+export interface QueryProviderRequestSDKType {
   auditor: string;
   owner: string;
-}
-export interface QueryProviderRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderRequest";
-  value: QueryProviderRequestAmino;
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
 export interface QueryAllProvidersAttributesRequest {
@@ -47,12 +41,8 @@ export interface QueryAllProvidersAttributesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAllProvidersAttributesRequest is request type for the Query/All Providers RPC method */
-export interface QueryAllProvidersAttributesRequestAmino {
-  pagination?: PageRequestAmino;
-}
-export interface QueryAllProvidersAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryAllProvidersAttributesRequest";
-  value: QueryAllProvidersAttributesRequestAmino;
+export interface QueryAllProvidersAttributesRequestSDKType {
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderAttributesRequest {
@@ -64,13 +54,9 @@ export interface QueryProviderAttributesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderAttributesRequest is request type for the Query/Provider RPC method */
-export interface QueryProviderAttributesRequestAmino {
+export interface QueryProviderAttributesRequestSDKType {
   owner: string;
-  pagination?: PageRequestAmino;
-}
-export interface QueryProviderAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderAttributesRequest";
-  value: QueryProviderAttributesRequestAmino;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
 export interface QueryProviderAuditorRequest {
@@ -82,13 +68,9 @@ export interface QueryProviderAuditorRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderAuditorRequest is request type for the Query/Providers RPC method */
-export interface QueryProviderAuditorRequestAmino {
+export interface QueryProviderAuditorRequestSDKType {
   auditor: string;
   owner: string;
-}
-export interface QueryProviderAuditorRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryProviderAuditorRequest";
-  value: QueryProviderAuditorRequestAmino;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
 export interface QueryAuditorAttributesRequest {
@@ -100,13 +82,9 @@ export interface QueryAuditorAttributesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAuditorAttributesRequest is request type for the Query/Providers RPC method */
-export interface QueryAuditorAttributesRequestAmino {
+export interface QueryAuditorAttributesRequestSDKType {
   auditor: string;
-  pagination?: PageRequestAmino;
-}
-export interface QueryAuditorAttributesRequestAminoMsg {
-  type: "/akash.audit.v1beta2.QueryAuditorAttributesRequest";
-  value: QueryAuditorAttributesRequestAmino;
+  pagination?: PageRequestSDKType;
 }
 function createBaseQueryProvidersResponse(): QueryProvidersResponse {
   return {
@@ -145,11 +123,51 @@ export const QueryProvidersResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
+  fromJSON(object: any): QueryProvidersResponse {
+    const obj = createBaseQueryProvidersResponse();
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
@@ -171,6 +189,12 @@ export const QueryProvidersResponse = {
   },
   fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
     return QueryProvidersResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProvidersResponse): QueryProvidersResponseAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-providers-response",
+      value: QueryProvidersResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
     return QueryProvidersResponse.decode(message.value);
@@ -194,10 +218,10 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 export const QueryProviderRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderRequest",
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     return writer;
@@ -222,11 +246,41 @@ export const QueryProviderRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProviderRequest>): QueryProviderRequest {
+  fromJSON(object: any): QueryProviderRequest {
+    const obj = createBaseQueryProviderRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
+    const obj: any = {};
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProviderRequest>, I>>(object: I): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
+    return {
+      auditor: object?.auditor,
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): QueryProviderRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
@@ -246,6 +300,12 @@ export const QueryProviderRequest = {
   },
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
     return QueryProviderRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderRequest): QueryProviderRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-request",
+      value: QueryProviderRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
     return QueryProviderRequest.decode(message.value);
@@ -290,10 +350,37 @@ export const QueryAllProvidersAttributesRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryAllProvidersAttributesRequest>): QueryAllProvidersAttributesRequest {
+  fromJSON(object: any): QueryAllProvidersAttributesRequest {
+    const obj = createBaseQueryAllProvidersAttributesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAllProvidersAttributesRequest): JsonSafe<QueryAllProvidersAttributesRequest> {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryAllProvidersAttributesRequest>, I>>(object: I): QueryAllProvidersAttributesRequest {
     const message = createBaseQueryAllProvidersAttributesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAllProvidersAttributesRequestSDKType): QueryAllProvidersAttributesRequest {
+    return {
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAllProvidersAttributesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAllProvidersAttributesRequestAmino): QueryAllProvidersAttributesRequest {
     const message = createBaseQueryAllProvidersAttributesRequest();
@@ -309,6 +396,12 @@ export const QueryAllProvidersAttributesRequest = {
   },
   fromAminoMsg(object: QueryAllProvidersAttributesRequestAminoMsg): QueryAllProvidersAttributesRequest {
     return QueryAllProvidersAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAllProvidersAttributesRequest): QueryAllProvidersAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-all-providers-attributes-request",
+      value: QueryAllProvidersAttributesRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryAllProvidersAttributesRequestProtoMsg): QueryAllProvidersAttributesRequest {
     return QueryAllProvidersAttributesRequest.decode(message.value);
@@ -332,7 +425,7 @@ function createBaseQueryProviderAttributesRequest(): QueryProviderAttributesRequ
 export const QueryProviderAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAttributesRequest",
   encode(message: QueryProviderAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.pagination !== undefined) {
@@ -360,11 +453,43 @@ export const QueryProviderAttributesRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProviderAttributesRequest>): QueryProviderAttributesRequest {
+  fromJSON(object: any): QueryProviderAttributesRequest {
+    const obj = createBaseQueryProviderAttributesRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryProviderAttributesRequest): JsonSafe<QueryProviderAttributesRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProviderAttributesRequest>, I>>(object: I): QueryProviderAttributesRequest {
     const message = createBaseQueryProviderAttributesRequest();
     message.owner = object.owner ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryProviderAttributesRequestSDKType): QueryProviderAttributesRequest {
+    return {
+      owner: object?.owner,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryProviderAttributesRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryProviderAttributesRequestAmino): QueryProviderAttributesRequest {
     const message = createBaseQueryProviderAttributesRequest();
@@ -384,6 +509,12 @@ export const QueryProviderAttributesRequest = {
   },
   fromAminoMsg(object: QueryProviderAttributesRequestAminoMsg): QueryProviderAttributesRequest {
     return QueryProviderAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderAttributesRequest): QueryProviderAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-attributes-request",
+      value: QueryProviderAttributesRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProviderAttributesRequestProtoMsg): QueryProviderAttributesRequest {
     return QueryProviderAttributesRequest.decode(message.value);
@@ -407,10 +538,10 @@ function createBaseQueryProviderAuditorRequest(): QueryProviderAuditorRequest {
 export const QueryProviderAuditorRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryProviderAuditorRequest",
   encode(message: QueryProviderAuditorRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     return writer;
@@ -435,11 +566,41 @@ export const QueryProviderAuditorRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProviderAuditorRequest>): QueryProviderAuditorRequest {
+  fromJSON(object: any): QueryProviderAuditorRequest {
+    const obj = createBaseQueryProviderAuditorRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: QueryProviderAuditorRequest): JsonSafe<QueryProviderAuditorRequest> {
+    const obj: any = {};
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProviderAuditorRequest>, I>>(object: I): QueryProviderAuditorRequest {
     const message = createBaseQueryProviderAuditorRequest();
     message.auditor = object.auditor ?? "";
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: QueryProviderAuditorRequestSDKType): QueryProviderAuditorRequest {
+    return {
+      auditor: object?.auditor,
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): QueryProviderAuditorRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestSDKType {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: QueryProviderAuditorRequestAmino): QueryProviderAuditorRequest {
     const message = createBaseQueryProviderAuditorRequest();
@@ -459,6 +620,12 @@ export const QueryProviderAuditorRequest = {
   },
   fromAminoMsg(object: QueryProviderAuditorRequestAminoMsg): QueryProviderAuditorRequest {
     return QueryProviderAuditorRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderAuditorRequest): QueryProviderAuditorRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-provider-auditor-request",
+      value: QueryProviderAuditorRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProviderAuditorRequestProtoMsg): QueryProviderAuditorRequest {
     return QueryProviderAuditorRequest.decode(message.value);
@@ -482,7 +649,7 @@ function createBaseQueryAuditorAttributesRequest(): QueryAuditorAttributesReques
 export const QueryAuditorAttributesRequest = {
   typeUrl: "/akash.audit.v1beta2.QueryAuditorAttributesRequest",
   encode(message: QueryAuditorAttributesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.auditor !== "") {
+    if (message.auditor !== undefined) {
       writer.uint32(10).string(message.auditor);
     }
     if (message.pagination !== undefined) {
@@ -510,11 +677,43 @@ export const QueryAuditorAttributesRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryAuditorAttributesRequest>): QueryAuditorAttributesRequest {
+  fromJSON(object: any): QueryAuditorAttributesRequest {
+    const obj = createBaseQueryAuditorAttributesRequest();
+    if (isSet(object.auditor)) obj.auditor = String(object.auditor);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAuditorAttributesRequest): JsonSafe<QueryAuditorAttributesRequest> {
+    const obj: any = {};
+    message.auditor !== undefined && (obj.auditor = message.auditor);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryAuditorAttributesRequest>, I>>(object: I): QueryAuditorAttributesRequest {
     const message = createBaseQueryAuditorAttributesRequest();
     message.auditor = object.auditor ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAuditorAttributesRequestSDKType): QueryAuditorAttributesRequest {
+    return {
+      auditor: object?.auditor,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAuditorAttributesRequestSDKType {
+    return {
+      auditor: isSet(object.auditor) ? String(object.auditor) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestSDKType {
+    const obj: any = {};
+    obj.auditor = message.auditor;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAuditorAttributesRequestAmino): QueryAuditorAttributesRequest {
     const message = createBaseQueryAuditorAttributesRequest();
@@ -534,6 +733,12 @@ export const QueryAuditorAttributesRequest = {
   },
   fromAminoMsg(object: QueryAuditorAttributesRequestAminoMsg): QueryAuditorAttributesRequest {
     return QueryAuditorAttributesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAuditorAttributesRequest): QueryAuditorAttributesRequestAminoMsg {
+    return {
+      type: "akash/audit/v1beta2/query-auditor-attributes-request",
+      value: QueryAuditorAttributesRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryAuditorAttributesRequestProtoMsg): QueryAuditorAttributesRequest {
     return QueryAuditorAttributesRequest.decode(message.value);

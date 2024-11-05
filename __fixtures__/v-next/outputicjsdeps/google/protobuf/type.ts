@@ -1,7 +1,9 @@
-import { SourceContext, SourceContextAmino } from "./source_context";
-import { Any, AnyAmino } from "./any";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { SourceContext, SourceContextSDKType } from "./source_context.js";
+import { Any, AnySDKType } from "./any.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.protobuf";
 /** Basic field types. */
 export enum Field_Kind {
   /** TYPE_UNKNOWN - Field type unknown. */
@@ -44,7 +46,7 @@ export enum Field_Kind {
   TYPE_SINT64 = 18,
   UNRECOGNIZED = -1,
 }
-export const Field_KindAmino = Field_Kind;
+export const Field_KindSDKType = Field_Kind;
 export function field_KindFromJSON(object: any): Field_Kind {
   switch (object) {
     case 0:
@@ -167,7 +169,7 @@ export enum Field_Cardinality {
   CARDINALITY_REPEATED = 3,
   UNRECOGNIZED = -1,
 }
-export const Field_CardinalityAmino = Field_Cardinality;
+export const Field_CardinalitySDKType = Field_Cardinality;
 export function field_CardinalityFromJSON(object: any): Field_Cardinality {
   switch (object) {
     case 0:
@@ -211,7 +213,7 @@ export enum Syntax {
   SYNTAX_PROTO3 = 1,
   UNRECOGNIZED = -1,
 }
-export const SyntaxAmino = Syntax;
+export const SyntaxSDKType = Syntax;
 export function syntaxFromJSON(object: any): Syntax {
   switch (object) {
     case 0:
@@ -257,23 +259,13 @@ export interface TypeProtoMsg {
   value: Uint8Array;
 }
 /** A protocol buffer message type. */
-export interface TypeAmino {
-  /** The fully qualified message name. */
+export interface TypeSDKType {
   name: string;
-  /** The list of fields. */
-  fields: FieldAmino[];
-  /** The list of types appearing in `oneof` definitions in this type. */
+  fields: FieldSDKType[];
   oneofs: string[];
-  /** The protocol buffer options. */
-  options: OptionAmino[];
-  /** The source context. */
-  source_context?: SourceContextAmino;
-  /** The source syntax. */
+  options: OptionSDKType[];
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
-}
-export interface TypeAminoMsg {
-  type: "/google.protobuf.Type";
-  value: TypeAmino;
 }
 /** A single field of a message type. */
 export interface Field {
@@ -309,37 +301,17 @@ export interface FieldProtoMsg {
   value: Uint8Array;
 }
 /** A single field of a message type. */
-export interface FieldAmino {
-  /** The field type. */
+export interface FieldSDKType {
   kind: Field_Kind;
-  /** The field cardinality. */
   cardinality: Field_Cardinality;
-  /** The field number. */
   number: number;
-  /** The field name. */
   name: string;
-  /**
-   * The field type URL, without the scheme, for message or enumeration
-   * types. Example: `"type.googleapis.com/google.protobuf.Timestamp"`.
-   */
   type_url: string;
-  /**
-   * The index of the field type in `Type.oneofs`, for message or enumeration
-   * types. The first type has index 1; zero means the type is not in the list.
-   */
   oneof_index: number;
-  /** Whether to use alternative packed wire representation. */
   packed: boolean;
-  /** The protocol buffer options. */
-  options: OptionAmino[];
-  /** The field JSON name. */
+  options: OptionSDKType[];
   json_name: string;
-  /** The string value of the default value of this field. Proto2 syntax only. */
   default_value: string;
-}
-export interface FieldAminoMsg {
-  type: "/google.protobuf.Field";
-  value: FieldAmino;
 }
 /** Enum type definition. */
 export interface Enum {
@@ -359,21 +331,12 @@ export interface EnumProtoMsg {
   value: Uint8Array;
 }
 /** Enum type definition. */
-export interface EnumAmino {
-  /** Enum type name. */
+export interface EnumSDKType {
   name: string;
-  /** Enum value definitions. */
-  enumvalue: EnumValueAmino[];
-  /** Protocol buffer options. */
-  options: OptionAmino[];
-  /** The source context. */
-  source_context?: SourceContextAmino;
-  /** The source syntax. */
+  enumvalue: EnumValueSDKType[];
+  options: OptionSDKType[];
+  source_context?: SourceContextSDKType;
   syntax: Syntax;
-}
-export interface EnumAminoMsg {
-  type: "/google.protobuf.Enum";
-  value: EnumAmino;
 }
 /** Enum value definition. */
 export interface EnumValue {
@@ -389,17 +352,10 @@ export interface EnumValueProtoMsg {
   value: Uint8Array;
 }
 /** Enum value definition. */
-export interface EnumValueAmino {
-  /** Enum value name. */
+export interface EnumValueSDKType {
   name: string;
-  /** Enum value number. */
   number: number;
-  /** Protocol buffer options. */
-  options: OptionAmino[];
-}
-export interface EnumValueAminoMsg {
-  type: "/google.protobuf.EnumValue";
-  value: EnumValueAmino;
+  options: OptionSDKType[];
 }
 /**
  * A protocol buffer option, which can be attached to a message, field,
@@ -429,25 +385,9 @@ export interface OptionProtoMsg {
  * A protocol buffer option, which can be attached to a message, field,
  * enumeration, etc.
  */
-export interface OptionAmino {
-  /**
-   * The option's name. For protobuf built-in options (options defined in
-   * descriptor.proto), this is the short name. For example, `"map_entry"`.
-   * For custom options, it should be the fully-qualified name. For example,
-   * `"google.api.http"`.
-   */
+export interface OptionSDKType {
   name: string;
-  /**
-   * The option's value packed in an Any message. If the value is a primitive,
-   * the corresponding wrapper type defined in google/protobuf/wrappers.proto
-   * should be used. If the value is an enum, it should be stored as an int32
-   * value using the google.protobuf.Int32Value type.
-   */
-  value?: AnyAmino;
-}
-export interface OptionAminoMsg {
-  type: "/google.protobuf.Option";
-  value: OptionAmino;
+  value?: AnySDKType;
 }
 function createBaseType(): Type {
   return {
@@ -462,7 +402,7 @@ function createBaseType(): Type {
 export const Type = {
   typeUrl: "/google.protobuf.Type",
   encode(message: Type, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.fields) {
@@ -514,15 +454,91 @@ export const Type = {
     }
     return message;
   },
+  fromJSON(object: any): Type {
+    const obj = createBaseType();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.fields)) obj.fields = object.fields.map((e: any) => Field.fromJSON(e));
+    if (Array.isArray(object?.oneofs)) obj.oneofs = object.oneofs.map((e: any) => String(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
+  },
+  toJSON(message: Type): JsonSafe<Type> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toJSON(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Type>): Type {
     const message = createBaseType();
     message.name = object.name ?? "";
     message.fields = object.fields?.map(e => Field.fromPartial(e)) || [];
     message.oneofs = object.oneofs?.map(e => e) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+  fromSDK(object: TypeSDKType): Type {
+    return {
+      name: object?.name,
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDK(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => e) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  fromSDKJSON(object: any): TypeSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      fields: Array.isArray(object?.fields) ? object.fields.map((e: any) => Field.fromSDKJSON(e)) : [],
+      oneofs: Array.isArray(object?.oneofs) ? object.oneofs.map((e: any) => String(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toSDK(message: Type): TypeSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.fields) {
+      obj.fields = message.fields.map(e => e ? Field.toSDK(e) : undefined);
+    } else {
+      obj.fields = [];
+    }
+    if (message.oneofs) {
+      obj.oneofs = message.oneofs.map(e => e);
+    } else {
+      obj.oneofs = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   },
   fromAmino(object: TypeAmino): Type {
     const message = createBaseType();
@@ -601,28 +617,28 @@ export const Field = {
     if (message.cardinality !== 0) {
       writer.uint32(16).int32(message.cardinality);
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       writer.uint32(24).int32(message.number);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(34).string(message.name);
     }
-    if (message.typeUrl !== "") {
+    if (message.typeUrl !== undefined) {
       writer.uint32(50).string(message.typeUrl);
     }
-    if (message.oneofIndex !== 0) {
+    if (message.oneofIndex !== undefined) {
       writer.uint32(56).int32(message.oneofIndex);
     }
-    if (message.packed === true) {
+    if (message.packed !== undefined) {
       writer.uint32(64).bool(message.packed);
     }
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(74).fork()).ldelim();
     }
-    if (message.jsonName !== "") {
+    if (message.jsonName !== undefined) {
       writer.uint32(82).string(message.jsonName);
     }
-    if (message.defaultValue !== "") {
+    if (message.defaultValue !== undefined) {
       writer.uint32(90).string(message.defaultValue);
     }
     return writer;
@@ -671,6 +687,38 @@ export const Field = {
     }
     return message;
   },
+  fromJSON(object: any): Field {
+    const obj = createBaseField();
+    if (isSet(object.kind)) obj.kind = field_KindFromJSON(object.kind);
+    if (isSet(object.cardinality)) obj.cardinality = field_CardinalityFromJSON(object.cardinality);
+    if (isSet(object.number)) obj.number = Number(object.number);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.typeUrl)) obj.typeUrl = String(object.typeUrl);
+    if (isSet(object.oneofIndex)) obj.oneofIndex = Number(object.oneofIndex);
+    if (isSet(object.packed)) obj.packed = Boolean(object.packed);
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.jsonName)) obj.jsonName = String(object.jsonName);
+    if (isSet(object.defaultValue)) obj.defaultValue = String(object.defaultValue);
+    return obj;
+  },
+  toJSON(message: Field): JsonSafe<Field> {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
+    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
+    message.number !== undefined && (obj.number = Math.round(message.number));
+    message.name !== undefined && (obj.name = message.name);
+    message.typeUrl !== undefined && (obj.typeUrl = message.typeUrl);
+    message.oneofIndex !== undefined && (obj.oneofIndex = Math.round(message.oneofIndex));
+    message.packed !== undefined && (obj.packed = message.packed);
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.jsonName !== undefined && (obj.jsonName = message.jsonName);
+    message.defaultValue !== undefined && (obj.defaultValue = message.defaultValue);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Field>): Field {
     const message = createBaseField();
     message.kind = object.kind ?? 0;
@@ -684,6 +732,52 @@ export const Field = {
     message.jsonName = object.jsonName ?? "";
     message.defaultValue = object.defaultValue ?? "";
     return message;
+  },
+  fromSDK(object: FieldSDKType): Field {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      number: object?.number,
+      name: object?.name,
+      typeUrl: object?.type_url,
+      oneofIndex: object?.oneof_index,
+      packed: object?.packed,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      jsonName: object?.json_name,
+      defaultValue: object?.default_value
+    };
+  },
+  fromSDKJSON(object: any): FieldSDKType {
+    return {
+      kind: isSet(object.kind) ? field_KindFromJSON(object.kind) : -1,
+      cardinality: isSet(object.cardinality) ? field_CardinalityFromJSON(object.cardinality) : -1,
+      number: isSet(object.number) ? Number(object.number) : 0,
+      name: isSet(object.name) ? String(object.name) : "",
+      type_url: isSet(object.type_url) ? String(object.type_url) : "",
+      oneof_index: isSet(object.oneof_index) ? Number(object.oneof_index) : 0,
+      packed: isSet(object.packed) ? Boolean(object.packed) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      json_name: isSet(object.json_name) ? String(object.json_name) : "",
+      default_value: isSet(object.default_value) ? String(object.default_value) : ""
+    };
+  },
+  toSDK(message: Field): FieldSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = field_KindToJSON(message.kind));
+    message.cardinality !== undefined && (obj.cardinality = field_CardinalityToJSON(message.cardinality));
+    obj.number = message.number;
+    obj.name = message.name;
+    obj.type_url = message.typeUrl;
+    obj.oneof_index = message.oneofIndex;
+    obj.packed = message.packed;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.json_name = message.jsonName;
+    obj.default_value = message.defaultValue;
+    return obj;
   },
   fromAmino(object: FieldAmino): Field {
     const message = createBaseField();
@@ -763,7 +857,7 @@ function createBaseEnum(): Enum {
 export const Enum = {
   typeUrl: "/google.protobuf.Enum",
   encode(message: Enum, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.enumvalue) {
@@ -809,14 +903,77 @@ export const Enum = {
     }
     return message;
   },
+  fromJSON(object: any): Enum {
+    const obj = createBaseEnum();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.enumvalue)) obj.enumvalue = object.enumvalue.map((e: any) => EnumValue.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
+  },
+  toJSON(message: Enum): JsonSafe<Enum> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toJSON(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Enum>): Enum {
     const message = createBaseEnum();
     message.name = object.name ?? "";
     message.enumvalue = object.enumvalue?.map(e => EnumValue.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+  fromSDK(object: EnumSDKType): Enum {
+    return {
+      name: object?.name,
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDK(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  fromSDKJSON(object: any): EnumSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      enumvalue: Array.isArray(object?.enumvalue) ? object.enumvalue.map((e: any) => EnumValue.fromSDKJSON(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toSDK(message: Enum): EnumSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.enumvalue) {
+      obj.enumvalue = message.enumvalue.map(e => e ? EnumValue.toSDK(e) : undefined);
+    } else {
+      obj.enumvalue = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   },
   fromAmino(object: EnumAmino): Enum {
     const message = createBaseEnum();
@@ -876,10 +1033,10 @@ function createBaseEnumValue(): EnumValue {
 export const EnumValue = {
   typeUrl: "/google.protobuf.EnumValue",
   encode(message: EnumValue, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.number !== 0) {
+    if (message.number !== undefined) {
       writer.uint32(16).int32(message.number);
     }
     for (const v of message.options) {
@@ -910,12 +1067,55 @@ export const EnumValue = {
     }
     return message;
   },
+  fromJSON(object: any): EnumValue {
+    const obj = createBaseEnumValue();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.number)) obj.number = Number(object.number);
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: EnumValue): JsonSafe<EnumValue> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.number !== undefined && (obj.number = Math.round(message.number));
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<EnumValue>): EnumValue {
     const message = createBaseEnumValue();
     message.name = object.name ?? "";
     message.number = object.number ?? 0;
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: EnumValueSDKType): EnumValue {
+    return {
+      name: object?.name,
+      number: object?.number,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): EnumValueSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      number: isSet(object.number) ? Number(object.number) : 0,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: EnumValue): EnumValueSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.number = message.number;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    return obj;
   },
   fromAmino(object: EnumValueAmino): EnumValue {
     const message = createBaseEnumValue();
@@ -964,7 +1164,7 @@ function createBaseOption(): Option {
 export const Option = {
   typeUrl: "/google.protobuf.Option",
   encode(message: Option, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.value !== undefined) {
@@ -992,11 +1192,43 @@ export const Option = {
     }
     return message;
   },
+  fromJSON(object: any): Option {
+    const obj = createBaseOption();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.value)) obj.value = Any.fromJSON(object.value);
+    return obj;
+  },
+  toJSON(message: Option): JsonSafe<Option> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.value !== undefined && (obj.value = message.value ? Any.toJSON(message.value) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Option>): Option {
     const message = createBaseOption();
     message.name = object.name ?? "";
-    message.value = object.value !== undefined && object.value !== null ? Any.fromPartial(object.value) : undefined;
+    if (object.value !== undefined && object.value !== null) {
+      message.value = Any.fromPartial(object.value);
+    }
     return message;
+  },
+  fromSDK(object: OptionSDKType): Option {
+    return {
+      name: object?.name,
+      value: object.value ? Any.fromSDK(object.value) : undefined
+    };
+  },
+  fromSDKJSON(object: any): OptionSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      value: isSet(object.value) ? Any.fromSDKJSON(object.value) : undefined
+    };
+  },
+  toSDK(message: Option): OptionSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.value !== undefined && (obj.value = message.value ? Any.toSDK(message.value) : undefined);
+    return obj;
   },
   fromAmino(object: OptionAmino): Option {
     const message = createBaseOption();

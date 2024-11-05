@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.api";
 /**
  * Selects and configures the service controller used by the service.  The
  * service controller handles features like abuse, quota, billing, logging,
@@ -21,16 +23,8 @@ export interface ControlProtoMsg {
  * service controller handles features like abuse, quota, billing, logging,
  * monitoring, etc.
  */
-export interface ControlAmino {
-  /**
-   * The service control environment to use. If empty, no control plane
-   * feature (like quota and billing) will be enabled.
-   */
+export interface ControlSDKType {
   environment: string;
-}
-export interface ControlAminoMsg {
-  type: "/google.api.Control";
-  value: ControlAmino;
 }
 function createBaseControl(): Control {
   return {
@@ -40,7 +34,7 @@ function createBaseControl(): Control {
 export const Control = {
   typeUrl: "/google.api.Control",
   encode(message: Control, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.environment !== "") {
+    if (message.environment !== undefined) {
       writer.uint32(10).string(message.environment);
     }
     return writer;
@@ -62,10 +56,35 @@ export const Control = {
     }
     return message;
   },
+  fromJSON(object: any): Control {
+    const obj = createBaseControl();
+    if (isSet(object.environment)) obj.environment = String(object.environment);
+    return obj;
+  },
+  toJSON(message: Control): JsonSafe<Control> {
+    const obj: any = {};
+    message.environment !== undefined && (obj.environment = message.environment);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Control>): Control {
     const message = createBaseControl();
     message.environment = object.environment ?? "";
     return message;
+  },
+  fromSDK(object: ControlSDKType): Control {
+    return {
+      environment: object?.environment
+    };
+  },
+  fromSDKJSON(object: any): ControlSDKType {
+    return {
+      environment: isSet(object.environment) ? String(object.environment) : ""
+    };
+  },
+  toSDK(message: Control): ControlSDKType {
+    const obj: any = {};
+    obj.environment = message.environment;
+    return obj;
   },
   fromAmino(object: ControlAmino): Control {
     const message = createBaseControl();

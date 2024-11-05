@@ -1,9 +1,11 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { MetricValueSet, MetricValueSetAmino } from "./metric_value";
-import { LogEntry, LogEntryAmino } from "./log_entry";
-import { Any, AnyAmino } from "../../../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp } from "../../../../helpers";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
+import { MetricValueSet, MetricValueSetSDKType } from "./metric_value.js";
+import { LogEntry, LogEntrySDKType } from "./log_entry.js";
+import { Any, AnySDKType } from "../../../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.servicecontrol.v1";
 /** Defines the importance of the data contained in the operation. */
 export enum Operation_Importance {
   /**
@@ -19,7 +21,7 @@ export enum Operation_Importance {
   HIGH = 1,
   UNRECOGNIZED = -1,
 }
-export const Operation_ImportanceAmino = Operation_Importance;
+export const Operation_ImportanceSDKType = Operation_Importance;
 export function operation_ImportanceFromJSON(object: any): Operation_Importance {
   switch (object) {
     case 0:
@@ -53,13 +55,9 @@ export interface Operation_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface Operation_LabelsEntryAmino {
+export interface Operation_LabelsEntrySDKType {
   key: string;
   value: string;
-}
-export interface Operation_LabelsEntryAminoMsg {
-  type: string;
-  value: Operation_LabelsEntryAmino;
 }
 /** Represents information regarding an operation. */
 export interface Operation {
@@ -148,90 +146,19 @@ export interface OperationProtoMsg {
   value: Uint8Array;
 }
 /** Represents information regarding an operation. */
-export interface OperationAmino {
-  /**
-   * Identity of the operation. This must be unique within the scope of the
-   * service that generated the operation. If the service calls
-   * Check() and Report() on the same operation, the two calls should carry
-   * the same id.
-   * 
-   * UUID version 4 is recommended, though not required.
-   * In scenarios where an operation is computed from existing information
-   * and an idempotent id is desirable for deduplication purpose, UUID version 5
-   * is recommended. See RFC 4122 for details.
-   */
+export interface OperationSDKType {
   operation_id: string;
-  /** Fully qualified name of the operation. Reserved for future use. */
   operation_name: string;
-  /**
-   * Identity of the consumer who is using the service.
-   * This field should be filled in for the operations initiated by a
-   * consumer, but not for service-initiated operations that are
-   * not related to a specific consumer.
-   * 
-   * - This can be in one of the following formats:
-   *     - project:PROJECT_ID,
-   *     - project`_`number:PROJECT_NUMBER,
-   *     - projects/PROJECT_ID or PROJECT_NUMBER,
-   *     - folders/FOLDER_NUMBER,
-   *     - organizations/ORGANIZATION_NUMBER,
-   *     - api`_`key:API_KEY.
-   */
   consumer_id: string;
-  /** Required. Start time of the operation. */
-  start_time?: string;
-  /**
-   * End time of the operation.
-   * Required when the operation is used in
-   * [ServiceController.Report][google.api.servicecontrol.v1.ServiceController.Report],
-   * but optional when the operation is used in
-   * [ServiceController.Check][google.api.servicecontrol.v1.ServiceController.Check].
-   */
-  end_time?: string;
-  /**
-   * Labels describing the operation. Only the following labels are allowed:
-   * 
-   * - Labels describing monitored resources as defined in
-   *   the service configuration.
-   * - Default labels of metric values. When specified, labels defined in the
-   *   metric value override these default.
-   * - The following labels defined by Google Cloud Platform:
-   *     - `cloud.googleapis.com/location` describing the location where the
-   *        operation happened,
-   *     - `servicecontrol.googleapis.com/user_agent` describing the user agent
-   *        of the API request,
-   *     - `servicecontrol.googleapis.com/service_agent` describing the service
-   *        used to handle the API request (e.g. ESP),
-   *     - `servicecontrol.googleapis.com/platform` describing the platform
-   *        where the API is served, such as App Engine, Compute Engine, or
-   *        Kubernetes Engine.
-   */
+  start_time?: Date;
+  end_time?: Date;
   labels: {
     [key: string]: string;
   };
-  /**
-   * Represents information about this operation. Each MetricValueSet
-   * corresponds to a metric defined in the service configuration.
-   * The data type used in the MetricValueSet must agree with
-   * the data type specified in the metric definition.
-   * 
-   * Within a single operation, it is not allowed to have more than one
-   * MetricValue instances that have the same metric names and identical
-   * label value combinations. If a request has such duplicated MetricValue
-   * instances, the entire request is rejected with
-   * an invalid argument error.
-   */
-  metric_value_sets: MetricValueSetAmino[];
-  /** Represents information to be logged. */
-  log_entries: LogEntryAmino[];
-  /** DO NOT USE. This is an experimental field. */
+  metric_value_sets: MetricValueSetSDKType[];
+  log_entries: LogEntrySDKType[];
   importance: Operation_Importance;
-  /** Unimplemented. */
-  extensions: AnyAmino[];
-}
-export interface OperationAminoMsg {
-  type: "/google.api.servicecontrol.v1.Operation";
-  value: OperationAmino;
+  extensions: AnySDKType[];
 }
 function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
   return {
@@ -241,10 +168,10 @@ function createBaseOperation_LabelsEntry(): Operation_LabelsEntry {
 }
 export const Operation_LabelsEntry = {
   encode(message: Operation_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -269,11 +196,41 @@ export const Operation_LabelsEntry = {
     }
     return message;
   },
+  fromJSON(object: any): Operation_LabelsEntry {
+    const obj = createBaseOperation_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
+  },
+  toJSON(message: Operation_LabelsEntry): JsonSafe<Operation_LabelsEntry> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Operation_LabelsEntry>): Operation_LabelsEntry {
     const message = createBaseOperation_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromSDK(object: Operation_LabelsEntrySDKType): Operation_LabelsEntry {
+    return {
+      key: object?.key,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): Operation_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+  toSDK(message: Operation_LabelsEntry): Operation_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: Operation_LabelsEntryAmino): Operation_LabelsEntry {
     const message = createBaseOperation_LabelsEntry();
@@ -318,13 +275,13 @@ function createBaseOperation(): Operation {
 export const Operation = {
   typeUrl: "/google.api.servicecontrol.v1.Operation",
   encode(message: Operation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.operationId !== "") {
+    if (message.operationId !== undefined) {
       writer.uint32(10).string(message.operationId);
     }
-    if (message.operationName !== "") {
+    if (message.operationName !== undefined) {
       writer.uint32(18).string(message.operationName);
     }
-    if (message.consumerId !== "") {
+    if (message.consumerId !== undefined) {
       writer.uint32(26).string(message.consumerId);
     }
     if (message.startTime !== undefined) {
@@ -400,6 +357,56 @@ export const Operation = {
     }
     return message;
   },
+  fromJSON(object: any): Operation {
+    const obj = createBaseOperation();
+    if (isSet(object.operationId)) obj.operationId = String(object.operationId);
+    if (isSet(object.operationName)) obj.operationName = String(object.operationName);
+    if (isSet(object.consumerId)) obj.consumerId = String(object.consumerId);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (Array.isArray(object?.metricValueSets)) obj.metricValueSets = object.metricValueSets.map((e: any) => MetricValueSet.fromJSON(e));
+    if (Array.isArray(object?.logEntries)) obj.logEntries = object.logEntries.map((e: any) => LogEntry.fromJSON(e));
+    if (isSet(object.importance)) obj.importance = operation_ImportanceFromJSON(object.importance);
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Operation): JsonSafe<Operation> {
+    const obj: any = {};
+    message.operationId !== undefined && (obj.operationId = message.operationId);
+    message.operationName !== undefined && (obj.operationName = message.operationName);
+    message.consumerId !== undefined && (obj.consumerId = message.consumerId);
+    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
+    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    if (message.metricValueSets) {
+      obj.metricValueSets = message.metricValueSets.map(e => e ? MetricValueSet.toJSON(e) : undefined);
+    } else {
+      obj.metricValueSets = [];
+    }
+    if (message.logEntries) {
+      obj.logEntries = message.logEntries.map(e => e ? LogEntry.toJSON(e) : undefined);
+    } else {
+      obj.logEntries = [];
+    }
+    message.importance !== undefined && (obj.importance = operation_ImportanceToJSON(message.importance));
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Operation>): Operation {
     const message = createBaseOperation();
     message.operationId = object.operationId ?? "";
@@ -420,6 +427,75 @@ export const Operation = {
     message.importance = object.importance ?? 0;
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: OperationSDKType): Operation {
+    return {
+      operationId: object?.operation_id,
+      operationName: object?.operation_name,
+      consumerId: object?.consumer_id,
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metricValueSets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDK(e)) : [],
+      logEntries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDK(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): OperationSDKType {
+    return {
+      operation_id: isSet(object.operation_id) ? String(object.operation_id) : "",
+      operation_name: isSet(object.operation_name) ? String(object.operation_name) : "",
+      consumer_id: isSet(object.consumer_id) ? String(object.consumer_id) : "",
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      metric_value_sets: Array.isArray(object?.metric_value_sets) ? object.metric_value_sets.map((e: any) => MetricValueSet.fromSDKJSON(e)) : [],
+      log_entries: Array.isArray(object?.log_entries) ? object.log_entries.map((e: any) => LogEntry.fromSDKJSON(e)) : [],
+      importance: isSet(object.importance) ? operation_ImportanceFromJSON(object.importance) : -1,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Operation): OperationSDKType {
+    const obj: any = {};
+    obj.operation_id = message.operationId;
+    obj.operation_name = message.operationName;
+    obj.consumer_id = message.consumerId;
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    if (message.metricValueSets) {
+      obj.metric_value_sets = message.metricValueSets.map(e => e ? MetricValueSet.toSDK(e) : undefined);
+    } else {
+      obj.metric_value_sets = [];
+    }
+    if (message.logEntries) {
+      obj.log_entries = message.logEntries.map(e => e ? LogEntry.toSDK(e) : undefined);
+    } else {
+      obj.log_entries = [];
+    }
+    message.importance !== undefined && (obj.importance = operation_ImportanceToJSON(message.importance));
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+    return obj;
   },
   fromAmino(object: OperationAmino): Operation {
     const message = createBaseOperation();

@@ -1,6 +1,8 @@
-import { GroupID, GroupIDAmino } from "./groupid";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { GroupID, GroupIDSDKType } from "./groupid.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.deployment.v1beta2";
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgCloseGroup {
   id: GroupID;
@@ -10,12 +12,8 @@ export interface MsgCloseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseGroup defines SDK message to close a single Group within a Deployment. */
-export interface MsgCloseGroupAmino {
-  id: GroupIDAmino;
-}
-export interface MsgCloseGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroup";
-  value: MsgCloseGroupAmino;
+export interface MsgCloseGroupSDKType {
+  id: GroupIDSDKType;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
 export interface MsgCloseGroupResponse {}
@@ -24,11 +22,7 @@ export interface MsgCloseGroupResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgCloseGroupResponse defines the Msg/CloseGroup response type. */
-export interface MsgCloseGroupResponseAmino {}
-export interface MsgCloseGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgCloseGroupResponse";
-  value: MsgCloseGroupResponseAmino;
-}
+export interface MsgCloseGroupResponseSDKType {}
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgPauseGroup {
   id: GroupID;
@@ -38,12 +32,8 @@ export interface MsgPauseGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgPauseGroup defines SDK message to close a single Group within a Deployment. */
-export interface MsgPauseGroupAmino {
-  id: GroupIDAmino;
-}
-export interface MsgPauseGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroup";
-  value: MsgPauseGroupAmino;
+export interface MsgPauseGroupSDKType {
+  id: GroupIDSDKType;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
 export interface MsgPauseGroupResponse {}
@@ -52,11 +42,7 @@ export interface MsgPauseGroupResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgPauseGroupResponse defines the Msg/PauseGroup response type. */
-export interface MsgPauseGroupResponseAmino {}
-export interface MsgPauseGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgPauseGroupResponse";
-  value: MsgPauseGroupResponseAmino;
-}
+export interface MsgPauseGroupResponseSDKType {}
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
 export interface MsgStartGroup {
   id: GroupID;
@@ -66,12 +52,8 @@ export interface MsgStartGroupProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroup defines SDK message to close a single Group within a Deployment. */
-export interface MsgStartGroupAmino {
-  id: GroupIDAmino;
-}
-export interface MsgStartGroupAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroup";
-  value: MsgStartGroupAmino;
+export interface MsgStartGroupSDKType {
+  id: GroupIDSDKType;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
 export interface MsgStartGroupResponse {}
@@ -80,11 +62,7 @@ export interface MsgStartGroupResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgStartGroupResponse defines the Msg/StartGroup response type. */
-export interface MsgStartGroupResponseAmino {}
-export interface MsgStartGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta2.MsgStartGroupResponse";
-  value: MsgStartGroupResponseAmino;
-}
+export interface MsgStartGroupResponseSDKType {}
 function createBaseMsgCloseGroup(): MsgCloseGroup {
   return {
     id: GroupID.fromPartial({})
@@ -115,10 +93,37 @@ export const MsgCloseGroup = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<MsgCloseGroup>): MsgCloseGroup {
+  fromJSON(object: any): MsgCloseGroup {
+    const obj = createBaseMsgCloseGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: MsgCloseGroup): JsonSafe<MsgCloseGroup> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgCloseGroup>, I>>(object: I): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: MsgCloseGroupSDKType): MsgCloseGroup {
+    return {
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MsgCloseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: MsgCloseGroup): MsgCloseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: MsgCloseGroupAmino): MsgCloseGroup {
     const message = createBaseMsgCloseGroup();
@@ -134,6 +139,12 @@ export const MsgCloseGroup = {
   },
   fromAminoMsg(object: MsgCloseGroupAminoMsg): MsgCloseGroup {
     return MsgCloseGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseGroup): MsgCloseGroupAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-close-group",
+      value: MsgCloseGroup.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgCloseGroupProtoMsg): MsgCloseGroup {
     return MsgCloseGroup.decode(message.value);
@@ -170,9 +181,27 @@ export const MsgCloseGroupResponse = {
     }
     return message;
   },
-  fromPartial(_: DeepPartial<MsgCloseGroupResponse>): MsgCloseGroupResponse {
+  fromJSON(_: any): MsgCloseGroupResponse {
+    const obj = createBaseMsgCloseGroupResponse();
+    return obj;
+  },
+  toJSON(_: MsgCloseGroupResponse): JsonSafe<MsgCloseGroupResponse> {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgCloseGroupResponse>, I>>(_: I): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
     return message;
+  },
+  fromSDK(_: MsgCloseGroupResponseSDKType): MsgCloseGroupResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgCloseGroupResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgCloseGroupResponse): MsgCloseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgCloseGroupResponseAmino): MsgCloseGroupResponse {
     const message = createBaseMsgCloseGroupResponse();
@@ -184,6 +213,12 @@ export const MsgCloseGroupResponse = {
   },
   fromAminoMsg(object: MsgCloseGroupResponseAminoMsg): MsgCloseGroupResponse {
     return MsgCloseGroupResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgCloseGroupResponse): MsgCloseGroupResponseAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-close-group-response",
+      value: MsgCloseGroupResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgCloseGroupResponseProtoMsg): MsgCloseGroupResponse {
     return MsgCloseGroupResponse.decode(message.value);
@@ -228,10 +263,37 @@ export const MsgPauseGroup = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<MsgPauseGroup>): MsgPauseGroup {
+  fromJSON(object: any): MsgPauseGroup {
+    const obj = createBaseMsgPauseGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: MsgPauseGroup): JsonSafe<MsgPauseGroup> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgPauseGroup>, I>>(object: I): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: MsgPauseGroupSDKType): MsgPauseGroup {
+    return {
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MsgPauseGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: MsgPauseGroup): MsgPauseGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: MsgPauseGroupAmino): MsgPauseGroup {
     const message = createBaseMsgPauseGroup();
@@ -247,6 +309,12 @@ export const MsgPauseGroup = {
   },
   fromAminoMsg(object: MsgPauseGroupAminoMsg): MsgPauseGroup {
     return MsgPauseGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgPauseGroup): MsgPauseGroupAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-pause-group",
+      value: MsgPauseGroup.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgPauseGroupProtoMsg): MsgPauseGroup {
     return MsgPauseGroup.decode(message.value);
@@ -283,9 +351,27 @@ export const MsgPauseGroupResponse = {
     }
     return message;
   },
-  fromPartial(_: DeepPartial<MsgPauseGroupResponse>): MsgPauseGroupResponse {
+  fromJSON(_: any): MsgPauseGroupResponse {
+    const obj = createBaseMsgPauseGroupResponse();
+    return obj;
+  },
+  toJSON(_: MsgPauseGroupResponse): JsonSafe<MsgPauseGroupResponse> {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgPauseGroupResponse>, I>>(_: I): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
     return message;
+  },
+  fromSDK(_: MsgPauseGroupResponseSDKType): MsgPauseGroupResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgPauseGroupResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgPauseGroupResponse): MsgPauseGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgPauseGroupResponseAmino): MsgPauseGroupResponse {
     const message = createBaseMsgPauseGroupResponse();
@@ -297,6 +383,12 @@ export const MsgPauseGroupResponse = {
   },
   fromAminoMsg(object: MsgPauseGroupResponseAminoMsg): MsgPauseGroupResponse {
     return MsgPauseGroupResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgPauseGroupResponse): MsgPauseGroupResponseAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-pause-group-response",
+      value: MsgPauseGroupResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgPauseGroupResponseProtoMsg): MsgPauseGroupResponse {
     return MsgPauseGroupResponse.decode(message.value);
@@ -341,10 +433,37 @@ export const MsgStartGroup = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<MsgStartGroup>): MsgStartGroup {
+  fromJSON(object: any): MsgStartGroup {
+    const obj = createBaseMsgStartGroup();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: MsgStartGroup): JsonSafe<MsgStartGroup> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgStartGroup>, I>>(object: I): MsgStartGroup {
     const message = createBaseMsgStartGroup();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: MsgStartGroupSDKType): MsgStartGroup {
+    return {
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MsgStartGroupSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: MsgStartGroup): MsgStartGroupSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: MsgStartGroupAmino): MsgStartGroup {
     const message = createBaseMsgStartGroup();
@@ -360,6 +479,12 @@ export const MsgStartGroup = {
   },
   fromAminoMsg(object: MsgStartGroupAminoMsg): MsgStartGroup {
     return MsgStartGroup.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgStartGroup): MsgStartGroupAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-start-group",
+      value: MsgStartGroup.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgStartGroupProtoMsg): MsgStartGroup {
     return MsgStartGroup.decode(message.value);
@@ -396,9 +521,27 @@ export const MsgStartGroupResponse = {
     }
     return message;
   },
-  fromPartial(_: DeepPartial<MsgStartGroupResponse>): MsgStartGroupResponse {
+  fromJSON(_: any): MsgStartGroupResponse {
+    const obj = createBaseMsgStartGroupResponse();
+    return obj;
+  },
+  toJSON(_: MsgStartGroupResponse): JsonSafe<MsgStartGroupResponse> {
+    const obj: any = {};
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<MsgStartGroupResponse>, I>>(_: I): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
     return message;
+  },
+  fromSDK(_: MsgStartGroupResponseSDKType): MsgStartGroupResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgStartGroupResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgStartGroupResponse): MsgStartGroupResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgStartGroupResponseAmino): MsgStartGroupResponse {
     const message = createBaseMsgStartGroupResponse();
@@ -410,6 +553,12 @@ export const MsgStartGroupResponse = {
   },
   fromAminoMsg(object: MsgStartGroupResponseAminoMsg): MsgStartGroupResponse {
     return MsgStartGroupResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: MsgStartGroupResponse): MsgStartGroupResponseAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/testonly-start-group-response",
+      value: MsgStartGroupResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: MsgStartGroupResponseProtoMsg): MsgStartGroupResponse {
     return MsgStartGroupResponse.decode(message.value);

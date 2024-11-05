@@ -1,7 +1,9 @@
-import { Header, HeaderAmino, Data, DataAmino, Commit, CommitAmino } from "./types";
-import { EvidenceList, EvidenceListAmino } from "./evidence";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { Header, HeaderSDKType, Data, DataSDKType, Commit, CommitSDKType } from "./types.js";
+import { EvidenceList, EvidenceListSDKType } from "./evidence.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "tendermint.types";
 export interface Block {
   header: Header;
   data: Data;
@@ -12,15 +14,11 @@ export interface BlockProtoMsg {
   typeUrl: "/tendermint.types.Block";
   value: Uint8Array;
 }
-export interface BlockAmino {
-  header: HeaderAmino;
-  data: DataAmino;
-  evidence: EvidenceListAmino;
-  last_commit?: CommitAmino;
-}
-export interface BlockAminoMsg {
-  type: "/tendermint.types.Block";
-  value: BlockAmino;
+export interface BlockSDKType {
+  header: HeaderSDKType;
+  data: DataSDKType;
+  evidence: EvidenceListSDKType;
+  last_commit?: CommitSDKType;
 }
 function createBaseBlock(): Block {
   return {
@@ -73,13 +71,61 @@ export const Block = {
     }
     return message;
   },
+  fromJSON(object: any): Block {
+    const obj = createBaseBlock();
+    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
+    if (isSet(object.data)) obj.data = Data.fromJSON(object.data);
+    if (isSet(object.evidence)) obj.evidence = EvidenceList.fromJSON(object.evidence);
+    if (isSet(object.lastCommit)) obj.lastCommit = Commit.fromJSON(object.lastCommit);
+    return obj;
+  },
+  toJSON(message: Block): JsonSafe<Block> {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Data.toJSON(message.data) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toJSON(message.evidence) : undefined);
+    message.lastCommit !== undefined && (obj.lastCommit = message.lastCommit ? Commit.toJSON(message.lastCommit) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Block>): Block {
     const message = createBaseBlock();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
-    message.data = object.data !== undefined && object.data !== null ? Data.fromPartial(object.data) : undefined;
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceList.fromPartial(object.evidence) : undefined;
-    message.lastCommit = object.lastCommit !== undefined && object.lastCommit !== null ? Commit.fromPartial(object.lastCommit) : undefined;
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Data.fromPartial(object.data);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceList.fromPartial(object.evidence);
+    }
+    if (object.lastCommit !== undefined && object.lastCommit !== null) {
+      message.lastCommit = Commit.fromPartial(object.lastCommit);
+    }
     return message;
+  },
+  fromSDK(object: BlockSDKType): Block {
+    return {
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      data: object.data ? Data.fromSDK(object.data) : undefined,
+      evidence: object.evidence ? EvidenceList.fromSDK(object.evidence) : undefined,
+      lastCommit: object.last_commit ? Commit.fromSDK(object.last_commit) : undefined
+    };
+  },
+  fromSDKJSON(object: any): BlockSDKType {
+    return {
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      data: isSet(object.data) ? Data.fromSDKJSON(object.data) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceList.fromSDKJSON(object.evidence) : undefined,
+      last_commit: isSet(object.last_commit) ? Commit.fromSDKJSON(object.last_commit) : undefined
+    };
+  },
+  toSDK(message: Block): BlockSDKType {
+    const obj: any = {};
+    message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
+    message.data !== undefined && (obj.data = message.data ? Data.toSDK(message.data) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceList.toSDK(message.evidence) : undefined);
+    message.lastCommit !== undefined && (obj.last_commit = message.lastCommit ? Commit.toSDK(message.lastCommit) : undefined);
+    return obj;
   },
   fromAmino(object: BlockAmino): Block {
     const message = createBaseBlock();

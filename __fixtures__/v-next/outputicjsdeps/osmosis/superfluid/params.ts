@@ -1,5 +1,8 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { Decimal } from "@cosmjs/math";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
   /**
@@ -15,18 +18,8 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the superfluid module */
-export interface ParamsAmino {
-  /**
-   * minimum_risk_factor is to be cut on OSMO equivalent value of lp tokens for
-   * superfluid staking, default: 5%. The minimum risk factor works
-   * to counter-balance the staked amount on chain's exposure to various asset
-   * volatilities, and have base staking be 'resistant' to volatility.
-   */
+export interface ParamsSDKType {
   minimum_risk_factor: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/params";
-  value: ParamsAmino;
 }
 function createBaseParams(): Params {
   return {
@@ -35,10 +28,9 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.superfluid.Params",
-  aminoType: "osmosis/params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.minimumRiskFactor !== "") {
-      writer.uint32(10).string(message.minimumRiskFactor);
+    if (message.minimumRiskFactor !== undefined) {
+      writer.uint32(10).string(Decimal.fromUserInput(message.minimumRiskFactor, 18).atomics);
     }
     return writer;
   },
@@ -50,7 +42,7 @@ export const Params = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.minimumRiskFactor = reader.string();
+          message.minimumRiskFactor = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -59,10 +51,35 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.minimumRiskFactor)) obj.minimumRiskFactor = String(object.minimumRiskFactor);
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.minimumRiskFactor !== undefined && (obj.minimumRiskFactor = message.minimumRiskFactor);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.minimumRiskFactor = object.minimumRiskFactor ?? "";
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      minimumRiskFactor: object?.minimum_risk_factor
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      minimum_risk_factor: isSet(object.minimum_risk_factor) ? String(object.minimum_risk_factor) : ""
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.minimum_risk_factor = message.minimumRiskFactor;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.api";
 /**
  * `Documentation` provides the information for describing a service.
  * 
@@ -158,49 +160,13 @@ export interface DocumentationProtoMsg {
  * The directive `suppress_warning` does not directly affect documentation
  * and is documented together with service config validation.
  */
-export interface DocumentationAmino {
-  /**
-   * A short summary of what the service does. Can only be provided by
-   * plain text.
-   */
+export interface DocumentationSDKType {
   summary: string;
-  /** The top level pages for the documentation set. */
-  pages: PageAmino[];
-  /**
-   * A list of documentation rules that apply to individual API elements.
-   * 
-   * **NOTE:** All service configuration rules follow "last one wins" order.
-   */
-  rules: DocumentationRuleAmino[];
-  /** The URL to the root of documentation. */
+  pages: PageSDKType[];
+  rules: DocumentationRuleSDKType[];
   documentation_root_url: string;
-  /**
-   * Specifies the service root url if the default one (the service name
-   * from the yaml file) is not suitable. This can be seen in any fully
-   * specified service urls as well as sections that show a base that other
-   * urls are relative to.
-   */
   service_root_url: string;
-  /**
-   * Declares a single overview page. For example:
-   * <pre><code>documentation:
-   *   summary: ...
-   *   overview: &#40;== include overview.md ==&#41;
-   * </code></pre>
-   * This is a shortcut for the following declaration (using pages style):
-   * <pre><code>documentation:
-   *   summary: ...
-   *   pages:
-   *   - name: Overview
-   *     content: &#40;== include overview.md ==&#41;
-   * </code></pre>
-   * Note: you cannot specify both `overview` field and `pages` field.
-   */
   overview: string;
-}
-export interface DocumentationAminoMsg {
-  type: "/google.api.Documentation";
-  value: DocumentationAmino;
 }
 /** A documentation rule provides information about individual API elements. */
 export interface DocumentationRule {
@@ -226,27 +192,10 @@ export interface DocumentationRuleProtoMsg {
   value: Uint8Array;
 }
 /** A documentation rule provides information about individual API elements. */
-export interface DocumentationRuleAmino {
-  /**
-   * The selector is a comma-separated list of patterns. Each pattern is a
-   * qualified name of the element which may end in "*", indicating a wildcard.
-   * Wildcards are only allowed at the end and for a whole component of the
-   * qualified name, i.e. "foo.*" is ok, but not "foo.b*" or "foo.*.bar". A
-   * wildcard will match one or more components. To specify a default for all
-   * applicable elements, the whole pattern "*" is used.
-   */
+export interface DocumentationRuleSDKType {
   selector: string;
-  /** Description of the selected API(s). */
   description: string;
-  /**
-   * Deprecation description of the selected element(s). It can be provided if
-   * an element is marked as `deprecated`.
-   */
   deprecation_description: string;
-}
-export interface DocumentationRuleAminoMsg {
-  type: "/google.api.DocumentationRule";
-  value: DocumentationRuleAmino;
 }
 /**
  * Represents a documentation page. A page can contain subpages to represent
@@ -289,38 +238,10 @@ export interface PageProtoMsg {
  * Represents a documentation page. A page can contain subpages to represent
  * nested documentation set structure.
  */
-export interface PageAmino {
-  /**
-   * The name of the page. It will be used as an identity of the page to
-   * generate URI of the page, text of the link to this page in navigation,
-   * etc. The full page name (start from the root page name to this page
-   * concatenated with `.`) can be used as reference to the page in your
-   * documentation. For example:
-   * <pre><code>pages:
-   * - name: Tutorial
-   *   content: &#40;== include tutorial.md ==&#41;
-   *   subpages:
-   *   - name: Java
-   *     content: &#40;== include tutorial_java.md ==&#41;
-   * </code></pre>
-   * You can reference `Java` page using Markdown reference link syntax:
-   * `[Java][Tutorial.Java]`.
-   */
+export interface PageSDKType {
   name: string;
-  /**
-   * The Markdown content of the page. You can use <code>&#40;== include {path}
-   * ==&#41;</code> to include content from a Markdown file.
-   */
   content: string;
-  /**
-   * Subpages of this page. The order of subpages specified here will be
-   * honored in the generated docset.
-   */
-  subpages: PageAmino[];
-}
-export interface PageAminoMsg {
-  type: "/google.api.Page";
-  value: PageAmino;
+  subpages: PageSDKType[];
 }
 function createBaseDocumentation(): Documentation {
   return {
@@ -335,7 +256,7 @@ function createBaseDocumentation(): Documentation {
 export const Documentation = {
   typeUrl: "/google.api.Documentation",
   encode(message: Documentation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.summary !== "") {
+    if (message.summary !== undefined) {
       writer.uint32(10).string(message.summary);
     }
     for (const v of message.pages) {
@@ -344,13 +265,13 @@ export const Documentation = {
     for (const v of message.rules) {
       DocumentationRule.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.documentationRootUrl !== "") {
+    if (message.documentationRootUrl !== undefined) {
       writer.uint32(34).string(message.documentationRootUrl);
     }
-    if (message.serviceRootUrl !== "") {
+    if (message.serviceRootUrl !== undefined) {
       writer.uint32(50).string(message.serviceRootUrl);
     }
-    if (message.overview !== "") {
+    if (message.overview !== undefined) {
       writer.uint32(18).string(message.overview);
     }
     return writer;
@@ -387,6 +308,34 @@ export const Documentation = {
     }
     return message;
   },
+  fromJSON(object: any): Documentation {
+    const obj = createBaseDocumentation();
+    if (isSet(object.summary)) obj.summary = String(object.summary);
+    if (Array.isArray(object?.pages)) obj.pages = object.pages.map((e: any) => Page.fromJSON(e));
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => DocumentationRule.fromJSON(e));
+    if (isSet(object.documentationRootUrl)) obj.documentationRootUrl = String(object.documentationRootUrl);
+    if (isSet(object.serviceRootUrl)) obj.serviceRootUrl = String(object.serviceRootUrl);
+    if (isSet(object.overview)) obj.overview = String(object.overview);
+    return obj;
+  },
+  toJSON(message: Documentation): JsonSafe<Documentation> {
+    const obj: any = {};
+    message.summary !== undefined && (obj.summary = message.summary);
+    if (message.pages) {
+      obj.pages = message.pages.map(e => e ? Page.toJSON(e) : undefined);
+    } else {
+      obj.pages = [];
+    }
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? DocumentationRule.toJSON(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    message.documentationRootUrl !== undefined && (obj.documentationRootUrl = message.documentationRootUrl);
+    message.serviceRootUrl !== undefined && (obj.serviceRootUrl = message.serviceRootUrl);
+    message.overview !== undefined && (obj.overview = message.overview);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Documentation>): Documentation {
     const message = createBaseDocumentation();
     message.summary = object.summary ?? "";
@@ -396,6 +345,44 @@ export const Documentation = {
     message.serviceRootUrl = object.serviceRootUrl ?? "";
     message.overview = object.overview ?? "";
     return message;
+  },
+  fromSDK(object: DocumentationSDKType): Documentation {
+    return {
+      summary: object?.summary,
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDK(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDK(e)) : [],
+      documentationRootUrl: object?.documentation_root_url,
+      serviceRootUrl: object?.service_root_url,
+      overview: object?.overview
+    };
+  },
+  fromSDKJSON(object: any): DocumentationSDKType {
+    return {
+      summary: isSet(object.summary) ? String(object.summary) : "",
+      pages: Array.isArray(object?.pages) ? object.pages.map((e: any) => Page.fromSDKJSON(e)) : [],
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => DocumentationRule.fromSDKJSON(e)) : [],
+      documentation_root_url: isSet(object.documentation_root_url) ? String(object.documentation_root_url) : "",
+      service_root_url: isSet(object.service_root_url) ? String(object.service_root_url) : "",
+      overview: isSet(object.overview) ? String(object.overview) : ""
+    };
+  },
+  toSDK(message: Documentation): DocumentationSDKType {
+    const obj: any = {};
+    obj.summary = message.summary;
+    if (message.pages) {
+      obj.pages = message.pages.map(e => e ? Page.toSDK(e) : undefined);
+    } else {
+      obj.pages = [];
+    }
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? DocumentationRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    obj.documentation_root_url = message.documentationRootUrl;
+    obj.service_root_url = message.serviceRootUrl;
+    obj.overview = message.overview;
+    return obj;
   },
   fromAmino(object: DocumentationAmino): Documentation {
     const message = createBaseDocumentation();
@@ -459,13 +446,13 @@ function createBaseDocumentationRule(): DocumentationRule {
 export const DocumentationRule = {
   typeUrl: "/google.api.DocumentationRule",
   encode(message: DocumentationRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.deprecationDescription !== "") {
+    if (message.deprecationDescription !== undefined) {
       writer.uint32(26).string(message.deprecationDescription);
     }
     return writer;
@@ -493,12 +480,47 @@ export const DocumentationRule = {
     }
     return message;
   },
+  fromJSON(object: any): DocumentationRule {
+    const obj = createBaseDocumentationRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.deprecationDescription)) obj.deprecationDescription = String(object.deprecationDescription);
+    return obj;
+  },
+  toJSON(message: DocumentationRule): JsonSafe<DocumentationRule> {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    message.description !== undefined && (obj.description = message.description);
+    message.deprecationDescription !== undefined && (obj.deprecationDescription = message.deprecationDescription);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DocumentationRule>): DocumentationRule {
     const message = createBaseDocumentationRule();
     message.selector = object.selector ?? "";
     message.description = object.description ?? "";
     message.deprecationDescription = object.deprecationDescription ?? "";
     return message;
+  },
+  fromSDK(object: DocumentationRuleSDKType): DocumentationRule {
+    return {
+      selector: object?.selector,
+      description: object?.description,
+      deprecationDescription: object?.deprecation_description
+    };
+  },
+  fromSDKJSON(object: any): DocumentationRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      deprecation_description: isSet(object.deprecation_description) ? String(object.deprecation_description) : ""
+    };
+  },
+  toSDK(message: DocumentationRule): DocumentationRuleSDKType {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.description = message.description;
+    obj.deprecation_description = message.deprecationDescription;
+    return obj;
   },
   fromAmino(object: DocumentationRuleAmino): DocumentationRule {
     const message = createBaseDocumentationRule();
@@ -546,10 +568,10 @@ function createBasePage(): Page {
 export const Page = {
   typeUrl: "/google.api.Page",
   encode(message: Page, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.content !== "") {
+    if (message.content !== undefined) {
       writer.uint32(18).string(message.content);
     }
     for (const v of message.subpages) {
@@ -580,12 +602,55 @@ export const Page = {
     }
     return message;
   },
+  fromJSON(object: any): Page {
+    const obj = createBasePage();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.content)) obj.content = String(object.content);
+    if (Array.isArray(object?.subpages)) obj.subpages = object.subpages.map((e: any) => Page.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Page): JsonSafe<Page> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.content !== undefined && (obj.content = message.content);
+    if (message.subpages) {
+      obj.subpages = message.subpages.map(e => e ? Page.toJSON(e) : undefined);
+    } else {
+      obj.subpages = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Page>): Page {
     const message = createBasePage();
     message.name = object.name ?? "";
     message.content = object.content ?? "";
     message.subpages = object.subpages?.map(e => Page.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: PageSDKType): Page {
+    return {
+      name: object?.name,
+      content: object?.content,
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): PageSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      content: isSet(object.content) ? String(object.content) : "",
+      subpages: Array.isArray(object?.subpages) ? object.subpages.map((e: any) => Page.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Page): PageSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.content = message.content;
+    if (message.subpages) {
+      obj.subpages = message.subpages.map(e => e ? Page.toSDK(e) : undefined);
+    } else {
+      obj.subpages = [];
+    }
+    return obj;
   },
   fromAmino(object: PageAmino): Page {
     const message = createBasePage();

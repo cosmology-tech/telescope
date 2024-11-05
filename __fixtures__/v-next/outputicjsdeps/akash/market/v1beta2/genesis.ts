@@ -1,8 +1,10 @@
-import { Order, OrderAmino } from "./order";
-import { Lease, LeaseAmino } from "./lease";
-import { Params, ParamsAmino } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Order, OrderSDKType } from "./order.js";
+import { Lease, LeaseSDKType } from "./lease.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.market.v1beta2";
 /** GenesisState defines the basic genesis state used by market module */
 export interface GenesisState {
   orders: Order[];
@@ -14,14 +16,10 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by market module */
-export interface GenesisStateAmino {
-  orders: OrderAmino[];
-  leases: LeaseAmino[];
-  params: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.market.v1beta2.GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  orders: OrderSDKType[];
+  leases: LeaseSDKType[];
+  params: ParamsSDKType;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -67,12 +65,65 @@ export const GenesisState = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.orders)) obj.orders = object.orders.map((e: any) => Order.fromJSON(e));
+    if (Array.isArray(object?.leases)) obj.leases = object.leases.map((e: any) => Lease.fromJSON(e));
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? Lease.toJSON(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
     message.leases = object.leases?.map(e => Lease.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDK(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromSDK(e)) : [],
+      params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => Lease.fromSDKJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toSDK(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? Lease.toSDK(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -100,6 +151,12 @@ export const GenesisState = {
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/market/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

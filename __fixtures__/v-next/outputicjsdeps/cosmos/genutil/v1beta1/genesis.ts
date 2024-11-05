@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.genutil.v1beta1";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
   /** gen_txs defines the genesis transactions. */
@@ -10,13 +12,8 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the raw genesis transaction in JSON. */
-export interface GenesisStateAmino {
-  /** gen_txs defines the genesis transactions. */
-  gen_txs: string[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  gen_txs: Uint8Array[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -25,7 +22,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.genutil.v1beta1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.genTxs) {
       writer.uint32(10).bytes(v!);
@@ -49,10 +45,43 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.genTxs)) obj.genTxs = object.genTxs.map((e: any) => bytesFromBase64(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.genTxs) {
+      obj.genTxs = message.genTxs.map(e => base64FromBytes(e !== undefined ? e : new Uint8Array()));
+    } else {
+      obj.genTxs = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.genTxs = object.genTxs?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      genTxs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      gen_txs: Array.isArray(object?.gen_txs) ? object.gen_txs.map((e: any) => bytesFromBase64(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.genTxs) {
+      obj.gen_txs = message.genTxs.map(e => e);
+    } else {
+      obj.gen_txs = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

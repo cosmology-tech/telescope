@@ -1,7 +1,9 @@
-import { Option, OptionAmino, Syntax } from "./type";
-import { SourceContext, SourceContextAmino } from "./source_context";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { Option, OptionSDKType, Syntax, SyntaxSDKType, syntaxFromJSON, syntaxToJSON } from "./type.js";
+import { SourceContext, SourceContextSDKType } from "./source_context.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.protobuf";
 /**
  * Api is a light-weight descriptor for an API Interface.
  * 
@@ -70,51 +72,14 @@ export interface ApiProtoMsg {
  * this message itself. See https://cloud.google.com/apis/design/glossary for
  * detailed terminology.
  */
-export interface ApiAmino {
-  /**
-   * The fully qualified name of this interface, including package name
-   * followed by the interface's simple name.
-   */
+export interface ApiSDKType {
   name: string;
-  /** The methods of this interface, in unspecified order. */
-  methods: MethodAmino[];
-  /** Any metadata attached to the interface. */
-  options: OptionAmino[];
-  /**
-   * A version string for this interface. If specified, must have the form
-   * `major-version.minor-version`, as in `1.10`. If the minor version is
-   * omitted, it defaults to zero. If the entire version field is empty, the
-   * major version is derived from the package name, as outlined below. If the
-   * field is not empty, the version in the package name will be verified to be
-   * consistent with what is provided here.
-   * 
-   * The versioning schema uses [semantic
-   * versioning](http://semver.org) where the major version number
-   * indicates a breaking change and the minor version an additive,
-   * non-breaking change. Both version numbers are signals to users
-   * what to expect from different versions, and should be carefully
-   * chosen based on the product plan.
-   * 
-   * The major version is also reflected in the package name of the
-   * interface, which must end in `v<major-version>`, as in
-   * `google.feature.v1`. For major versions 0 and 1, the suffix can
-   * be omitted. Zero major versions must only be used for
-   * experimental, non-GA interfaces.
-   */
+  methods: MethodSDKType[];
+  options: OptionSDKType[];
   version: string;
-  /**
-   * Source context for the protocol buffer service represented by this
-   * message.
-   */
-  source_context?: SourceContextAmino;
-  /** Included interfaces. See [Mixin][]. */
-  mixins: MixinAmino[];
-  /** The source syntax of the service. */
+  source_context?: SourceContextSDKType;
+  mixins: MixinSDKType[];
   syntax: Syntax;
-}
-export interface ApiAminoMsg {
-  type: "/google.protobuf.Api";
-  value: ApiAmino;
 }
 /** Method represents a method of an API interface. */
 export interface Method {
@@ -138,25 +103,14 @@ export interface MethodProtoMsg {
   value: Uint8Array;
 }
 /** Method represents a method of an API interface. */
-export interface MethodAmino {
-  /** The simple name of this method. */
+export interface MethodSDKType {
   name: string;
-  /** A URL of the input message type. */
   request_type_url: string;
-  /** If true, the request is streamed. */
   request_streaming: boolean;
-  /** The URL of the output message type. */
   response_type_url: string;
-  /** If true, the response is streamed. */
   response_streaming: boolean;
-  /** Any metadata attached to the method. */
-  options: OptionAmino[];
-  /** The source syntax of this method. */
+  options: OptionSDKType[];
   syntax: Syntax;
-}
-export interface MethodAminoMsg {
-  type: "/google.protobuf.Method";
-  value: MethodAmino;
 }
 /**
  * Declares an API Interface to be included in this interface. The including
@@ -331,18 +285,9 @@ export interface MixinProtoMsg {
  *       ...
  *     }
  */
-export interface MixinAmino {
-  /** The fully qualified name of the interface which is included. */
+export interface MixinSDKType {
   name: string;
-  /**
-   * If non-empty specifies a path under which inherited HTTP paths
-   * are rooted.
-   */
   root: string;
-}
-export interface MixinAminoMsg {
-  type: "/google.protobuf.Mixin";
-  value: MixinAmino;
 }
 function createBaseApi(): Api {
   return {
@@ -358,7 +303,7 @@ function createBaseApi(): Api {
 export const Api = {
   typeUrl: "/google.protobuf.Api",
   encode(message: Api, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.methods) {
@@ -367,7 +312,7 @@ export const Api = {
     for (const v of message.options) {
       Option.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(34).string(message.version);
     }
     if (message.sourceContext !== undefined) {
@@ -416,16 +361,97 @@ export const Api = {
     }
     return message;
   },
+  fromJSON(object: any): Api {
+    const obj = createBaseApi();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.methods)) obj.methods = object.methods.map((e: any) => Method.fromJSON(e));
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.sourceContext)) obj.sourceContext = SourceContext.fromJSON(object.sourceContext);
+    if (Array.isArray(object?.mixins)) obj.mixins = object.mixins.map((e: any) => Mixin.fromJSON(e));
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
+  },
+  toJSON(message: Api): JsonSafe<Api> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    if (message.methods) {
+      obj.methods = message.methods.map(e => e ? Method.toJSON(e) : undefined);
+    } else {
+      obj.methods = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.version !== undefined && (obj.version = message.version);
+    message.sourceContext !== undefined && (obj.sourceContext = message.sourceContext ? SourceContext.toJSON(message.sourceContext) : undefined);
+    if (message.mixins) {
+      obj.mixins = message.mixins.map(e => e ? Mixin.toJSON(e) : undefined);
+    } else {
+      obj.mixins = [];
+    }
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Api>): Api {
     const message = createBaseApi();
     message.name = object.name ?? "";
     message.methods = object.methods?.map(e => Method.fromPartial(e)) || [];
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.version = object.version ?? "";
-    message.sourceContext = object.sourceContext !== undefined && object.sourceContext !== null ? SourceContext.fromPartial(object.sourceContext) : undefined;
+    if (object.sourceContext !== undefined && object.sourceContext !== null) {
+      message.sourceContext = SourceContext.fromPartial(object.sourceContext);
+    }
     message.mixins = object.mixins?.map(e => Mixin.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+  fromSDK(object: ApiSDKType): Api {
+    return {
+      name: object?.name,
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDK(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      version: object?.version,
+      sourceContext: object.source_context ? SourceContext.fromSDK(object.source_context) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDK(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  fromSDKJSON(object: any): ApiSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      methods: Array.isArray(object?.methods) ? object.methods.map((e: any) => Method.fromSDKJSON(e)) : [],
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      source_context: isSet(object.source_context) ? SourceContext.fromSDKJSON(object.source_context) : undefined,
+      mixins: Array.isArray(object?.mixins) ? object.mixins.map((e: any) => Mixin.fromSDKJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toSDK(message: Api): ApiSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.methods) {
+      obj.methods = message.methods.map(e => e ? Method.toSDK(e) : undefined);
+    } else {
+      obj.methods = [];
+    }
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    obj.version = message.version;
+    message.sourceContext !== undefined && (obj.source_context = message.sourceContext ? SourceContext.toSDK(message.sourceContext) : undefined);
+    if (message.mixins) {
+      obj.mixins = message.mixins.map(e => e ? Mixin.toSDK(e) : undefined);
+    } else {
+      obj.mixins = [];
+    }
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   },
   fromAmino(object: ApiAmino): Api {
     const message = createBaseApi();
@@ -499,19 +525,19 @@ function createBaseMethod(): Method {
 export const Method = {
   typeUrl: "/google.protobuf.Method",
   encode(message: Method, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.requestTypeUrl !== "") {
+    if (message.requestTypeUrl !== undefined) {
       writer.uint32(18).string(message.requestTypeUrl);
     }
-    if (message.requestStreaming === true) {
+    if (message.requestStreaming !== undefined) {
       writer.uint32(24).bool(message.requestStreaming);
     }
-    if (message.responseTypeUrl !== "") {
+    if (message.responseTypeUrl !== undefined) {
       writer.uint32(34).string(message.responseTypeUrl);
     }
-    if (message.responseStreaming === true) {
+    if (message.responseStreaming !== undefined) {
       writer.uint32(40).bool(message.responseStreaming);
     }
     for (const v of message.options) {
@@ -557,6 +583,32 @@ export const Method = {
     }
     return message;
   },
+  fromJSON(object: any): Method {
+    const obj = createBaseMethod();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.requestTypeUrl)) obj.requestTypeUrl = String(object.requestTypeUrl);
+    if (isSet(object.requestStreaming)) obj.requestStreaming = Boolean(object.requestStreaming);
+    if (isSet(object.responseTypeUrl)) obj.responseTypeUrl = String(object.responseTypeUrl);
+    if (isSet(object.responseStreaming)) obj.responseStreaming = Boolean(object.responseStreaming);
+    if (Array.isArray(object?.options)) obj.options = object.options.map((e: any) => Option.fromJSON(e));
+    if (isSet(object.syntax)) obj.syntax = syntaxFromJSON(object.syntax);
+    return obj;
+  },
+  toJSON(message: Method): JsonSafe<Method> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.requestTypeUrl !== undefined && (obj.requestTypeUrl = message.requestTypeUrl);
+    message.requestStreaming !== undefined && (obj.requestStreaming = message.requestStreaming);
+    message.responseTypeUrl !== undefined && (obj.responseTypeUrl = message.responseTypeUrl);
+    message.responseStreaming !== undefined && (obj.responseStreaming = message.responseStreaming);
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toJSON(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Method>): Method {
     const message = createBaseMethod();
     message.name = object.name ?? "";
@@ -567,6 +619,43 @@ export const Method = {
     message.options = object.options?.map(e => Option.fromPartial(e)) || [];
     message.syntax = object.syntax ?? 0;
     return message;
+  },
+  fromSDK(object: MethodSDKType): Method {
+    return {
+      name: object?.name,
+      requestTypeUrl: object?.request_type_url,
+      requestStreaming: object?.request_streaming,
+      responseTypeUrl: object?.response_type_url,
+      responseStreaming: object?.response_streaming,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDK(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  fromSDKJSON(object: any): MethodSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      request_type_url: isSet(object.request_type_url) ? String(object.request_type_url) : "",
+      request_streaming: isSet(object.request_streaming) ? Boolean(object.request_streaming) : false,
+      response_type_url: isSet(object.response_type_url) ? String(object.response_type_url) : "",
+      response_streaming: isSet(object.response_streaming) ? Boolean(object.response_streaming) : false,
+      options: Array.isArray(object?.options) ? object.options.map((e: any) => Option.fromSDKJSON(e)) : [],
+      syntax: isSet(object.syntax) ? syntaxFromJSON(object.syntax) : -1
+    };
+  },
+  toSDK(message: Method): MethodSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.request_type_url = message.requestTypeUrl;
+    obj.request_streaming = message.requestStreaming;
+    obj.response_type_url = message.responseTypeUrl;
+    obj.response_streaming = message.responseStreaming;
+    if (message.options) {
+      obj.options = message.options.map(e => e ? Option.toSDK(e) : undefined);
+    } else {
+      obj.options = [];
+    }
+    message.syntax !== undefined && (obj.syntax = syntaxToJSON(message.syntax));
+    return obj;
   },
   fromAmino(object: MethodAmino): Method {
     const message = createBaseMethod();
@@ -631,10 +720,10 @@ function createBaseMixin(): Mixin {
 export const Mixin = {
   typeUrl: "/google.protobuf.Mixin",
   encode(message: Mixin, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.root !== "") {
+    if (message.root !== undefined) {
       writer.uint32(18).string(message.root);
     }
     return writer;
@@ -659,11 +748,41 @@ export const Mixin = {
     }
     return message;
   },
+  fromJSON(object: any): Mixin {
+    const obj = createBaseMixin();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.root)) obj.root = String(object.root);
+    return obj;
+  },
+  toJSON(message: Mixin): JsonSafe<Mixin> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.root !== undefined && (obj.root = message.root);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Mixin>): Mixin {
     const message = createBaseMixin();
     message.name = object.name ?? "";
     message.root = object.root ?? "";
     return message;
+  },
+  fromSDK(object: MixinSDKType): Mixin {
+    return {
+      name: object?.name,
+      root: object?.root
+    };
+  },
+  fromSDKJSON(object: any): MixinSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      root: isSet(object.root) ? String(object.root) : ""
+    };
+  },
+  toSDK(message: Mixin): MixinSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.root = message.root;
+    return obj;
   },
   fromAmino(object: MixinAmino): Mixin {
     const message = createBaseMixin();

@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial } from "../../helpers.js";
+export const protobufPackage = "google.protobuf";
 /**
  * A generic empty message that you can re-use to avoid defining duplicated
  * empty messages in your APIs. A typical example is to use it as the request
@@ -27,11 +29,7 @@ export interface EmptyProtoMsg {
  * 
  * The JSON representation for `Empty` is empty JSON object `{}`.
  */
-export interface EmptyAmino {}
-export interface EmptyAminoMsg {
-  type: "/google.protobuf.Empty";
-  value: EmptyAmino;
-}
+export interface EmptySDKType {}
 function createBaseEmpty(): Empty {
   return {};
 }
@@ -54,9 +52,27 @@ export const Empty = {
     }
     return message;
   },
+  fromJSON(_: any): Empty {
+    const obj = createBaseEmpty();
+    return obj;
+  },
+  toJSON(_: Empty): JsonSafe<Empty> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<Empty>): Empty {
     const message = createBaseEmpty();
     return message;
+  },
+  fromSDK(_: EmptySDKType): Empty {
+    return {};
+  },
+  fromSDKJSON(_: any): EmptySDKType {
+    return {};
+  },
+  toSDK(_: Empty): EmptySDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: EmptyAmino): Empty {
     const message = createBaseEmpty();

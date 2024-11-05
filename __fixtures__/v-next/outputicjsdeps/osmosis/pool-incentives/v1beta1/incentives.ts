@@ -1,6 +1,8 @@
-import { Duration, DurationAmino } from "../../../google/protobuf/duration";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Duration, DurationSDKType } from "../../../google/protobuf/duration.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.poolincentives.v1beta1";
 export interface Params {
   /**
    * minted_denom is the denomination of the coin expected to be minted by the
@@ -14,18 +16,8 @@ export interface ParamsProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params";
   value: Uint8Array;
 }
-export interface ParamsAmino {
-  /**
-   * minted_denom is the denomination of the coin expected to be minted by the
-   * minting module. Pool-incentives module doesn’t actually mint the coin
-   * itself, but rather manages the distribution of coins that matches the
-   * defined minted_denom.
-   */
+export interface ParamsSDKType {
   minted_denom: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/poolincentives/params";
-  value: ParamsAmino;
 }
 export interface LockableDurationsInfo {
   lockableDurations: Duration[];
@@ -34,12 +26,8 @@ export interface LockableDurationsInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo";
   value: Uint8Array;
 }
-export interface LockableDurationsInfoAmino {
-  lockable_durations: DurationAmino[];
-}
-export interface LockableDurationsInfoAminoMsg {
-  type: "osmosis/poolincentives/lockable-durations-info";
-  value: LockableDurationsInfoAmino;
+export interface LockableDurationsInfoSDKType {
+  lockable_durations: DurationSDKType[];
 }
 export interface DistrInfo {
   totalWeight: string;
@@ -49,13 +37,9 @@ export interface DistrInfoProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo";
   value: Uint8Array;
 }
-export interface DistrInfoAmino {
+export interface DistrInfoSDKType {
   total_weight: string;
-  records: DistrRecordAmino[];
-}
-export interface DistrInfoAminoMsg {
-  type: "osmosis/poolincentives/distr-info";
-  value: DistrInfoAmino;
+  records: DistrRecordSDKType[];
 }
 export interface DistrRecord {
   gaugeId: bigint;
@@ -65,13 +49,9 @@ export interface DistrRecordProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord";
   value: Uint8Array;
 }
-export interface DistrRecordAmino {
-  gauge_id: string;
+export interface DistrRecordSDKType {
+  gauge_id: bigint;
   weight: string;
-}
-export interface DistrRecordAminoMsg {
-  type: "osmosis/poolincentives/distr-record";
-  value: DistrRecordAmino;
 }
 export interface PoolToGauge {
   poolId: bigint;
@@ -82,14 +62,10 @@ export interface PoolToGaugeProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge";
   value: Uint8Array;
 }
-export interface PoolToGaugeAmino {
-  pool_id: string;
-  gauge_id: string;
-  duration: DurationAmino;
-}
-export interface PoolToGaugeAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauge";
-  value: PoolToGaugeAmino;
+export interface PoolToGaugeSDKType {
+  pool_id: bigint;
+  gauge_id: bigint;
+  duration: DurationSDKType;
 }
 export interface PoolToGauges {
   poolToGauge: PoolToGauge[];
@@ -98,12 +74,8 @@ export interface PoolToGaugesProtoMsg {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges";
   value: Uint8Array;
 }
-export interface PoolToGaugesAmino {
-  pool_to_gauge: PoolToGaugeAmino[];
-}
-export interface PoolToGaugesAminoMsg {
-  type: "osmosis/poolincentives/pool-to-gauges";
-  value: PoolToGaugesAmino;
+export interface PoolToGaugesSDKType {
+  pool_to_gauge: PoolToGaugeSDKType[];
 }
 function createBaseParams(): Params {
   return {
@@ -112,9 +84,8 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.poolincentives.v1beta1.Params",
-  aminoType: "osmosis/poolincentives/params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.mintedDenom !== "") {
+    if (message.mintedDenom !== undefined) {
       writer.uint32(10).string(message.mintedDenom);
     }
     return writer;
@@ -136,10 +107,35 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.mintedDenom)) obj.mintedDenom = String(object.mintedDenom);
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.mintedDenom !== undefined && (obj.mintedDenom = message.mintedDenom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.mintedDenom = object.mintedDenom ?? "";
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      mintedDenom: object?.minted_denom
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      minted_denom: isSet(object.minted_denom) ? String(object.minted_denom) : ""
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.minted_denom = message.mintedDenom;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();
@@ -182,7 +178,6 @@ function createBaseLockableDurationsInfo(): LockableDurationsInfo {
 }
 export const LockableDurationsInfo = {
   typeUrl: "/osmosis.poolincentives.v1beta1.LockableDurationsInfo",
-  aminoType: "osmosis/poolincentives/lockable-durations-info",
   encode(message: LockableDurationsInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.lockableDurations) {
       Duration.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -206,10 +201,43 @@ export const LockableDurationsInfo = {
     }
     return message;
   },
+  fromJSON(object: any): LockableDurationsInfo {
+    const obj = createBaseLockableDurationsInfo();
+    if (Array.isArray(object?.lockableDurations)) obj.lockableDurations = object.lockableDurations.map((e: any) => Duration.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: LockableDurationsInfo): JsonSafe<LockableDurationsInfo> {
+    const obj: any = {};
+    if (message.lockableDurations) {
+      obj.lockableDurations = message.lockableDurations.map(e => e ? Duration.toJSON(e) : undefined);
+    } else {
+      obj.lockableDurations = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<LockableDurationsInfo>): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
     message.lockableDurations = object.lockableDurations?.map(e => Duration.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: LockableDurationsInfoSDKType): LockableDurationsInfo {
+    return {
+      lockableDurations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): LockableDurationsInfoSDKType {
+    return {
+      lockable_durations: Array.isArray(object?.lockable_durations) ? object.lockable_durations.map((e: any) => Duration.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: LockableDurationsInfo): LockableDurationsInfoSDKType {
+    const obj: any = {};
+    if (message.lockableDurations) {
+      obj.lockable_durations = message.lockableDurations.map(e => e ? Duration.toSDK(e) : undefined);
+    } else {
+      obj.lockable_durations = [];
+    }
+    return obj;
   },
   fromAmino(object: LockableDurationsInfoAmino): LockableDurationsInfo {
     const message = createBaseLockableDurationsInfo();
@@ -255,9 +283,8 @@ function createBaseDistrInfo(): DistrInfo {
 }
 export const DistrInfo = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrInfo",
-  aminoType: "osmosis/poolincentives/distr-info",
   encode(message: DistrInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.totalWeight !== "") {
+    if (message.totalWeight !== undefined) {
       writer.uint32(10).string(message.totalWeight);
     }
     for (const v of message.records) {
@@ -285,11 +312,49 @@ export const DistrInfo = {
     }
     return message;
   },
+  fromJSON(object: any): DistrInfo {
+    const obj = createBaseDistrInfo();
+    if (isSet(object.totalWeight)) obj.totalWeight = String(object.totalWeight);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: DistrInfo): JsonSafe<DistrInfo> {
+    const obj: any = {};
+    message.totalWeight !== undefined && (obj.totalWeight = message.totalWeight);
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<DistrInfo>): DistrInfo {
     const message = createBaseDistrInfo();
     message.totalWeight = object.totalWeight ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: DistrInfoSDKType): DistrInfo {
+    return {
+      totalWeight: object?.total_weight,
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): DistrInfoSDKType {
+    return {
+      total_weight: isSet(object.total_weight) ? String(object.total_weight) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: DistrInfo): DistrInfoSDKType {
+    const obj: any = {};
+    obj.total_weight = message.totalWeight;
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
   },
   fromAmino(object: DistrInfoAmino): DistrInfo {
     const message = createBaseDistrInfo();
@@ -339,12 +404,11 @@ function createBaseDistrRecord(): DistrRecord {
 }
 export const DistrRecord = {
   typeUrl: "/osmosis.poolincentives.v1beta1.DistrRecord",
-  aminoType: "osmosis/poolincentives/distr-record",
   encode(message: DistrRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(8).uint64(message.gaugeId);
     }
-    if (message.weight !== "") {
+    if (message.weight !== undefined) {
       writer.uint32(18).string(message.weight);
     }
     return writer;
@@ -369,11 +433,43 @@ export const DistrRecord = {
     }
     return message;
   },
+  fromJSON(object: any): DistrRecord {
+    const obj = createBaseDistrRecord();
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    if (isSet(object.weight)) obj.weight = String(object.weight);
+    return obj;
+  },
+  toJSON(message: DistrRecord): JsonSafe<DistrRecord> {
+    const obj: any = {};
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
+    message.weight !== undefined && (obj.weight = message.weight);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DistrRecord>): DistrRecord {
     const message = createBaseDistrRecord();
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
     message.weight = object.weight ?? "";
     return message;
+  },
+  fromSDK(object: DistrRecordSDKType): DistrRecord {
+    return {
+      gaugeId: object?.gauge_id,
+      weight: object?.weight
+    };
+  },
+  fromSDKJSON(object: any): DistrRecordSDKType {
+    return {
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
+      weight: isSet(object.weight) ? String(object.weight) : ""
+    };
+  },
+  toSDK(message: DistrRecord): DistrRecordSDKType {
+    const obj: any = {};
+    obj.gauge_id = message.gaugeId;
+    obj.weight = message.weight;
+    return obj;
   },
   fromAmino(object: DistrRecordAmino): DistrRecord {
     const message = createBaseDistrRecord();
@@ -422,12 +518,11 @@ function createBasePoolToGauge(): PoolToGauge {
 }
 export const PoolToGauge = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauge",
-  aminoType: "osmosis/poolincentives/pool-to-gauge",
   encode(message: PoolToGauge, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
-    if (message.gaugeId !== BigInt(0)) {
+    if (message.gaugeId !== undefined) {
       writer.uint32(16).uint64(message.gaugeId);
     }
     if (message.duration !== undefined) {
@@ -458,12 +553,53 @@ export const PoolToGauge = {
     }
     return message;
   },
+  fromJSON(object: any): PoolToGauge {
+    const obj = createBasePoolToGauge();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    if (isSet(object.gaugeId)) obj.gaugeId = BigInt(object.gaugeId.toString());
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
+  },
+  toJSON(message: PoolToGauge): JsonSafe<PoolToGauge> {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    message.gaugeId !== undefined && (obj.gaugeId = (message.gaugeId || BigInt(0)).toString());
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<PoolToGauge>): PoolToGauge {
     const message = createBasePoolToGauge();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
-    message.gaugeId = object.gaugeId !== undefined && object.gaugeId !== null ? BigInt(object.gaugeId.toString()) : BigInt(0);
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
+    if (object.gaugeId !== undefined && object.gaugeId !== null) {
+      message.gaugeId = BigInt(object.gaugeId.toString());
+    }
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
+  },
+  fromSDK(object: PoolToGaugeSDKType): PoolToGauge {
+    return {
+      poolId: object?.pool_id,
+      gaugeId: object?.gauge_id,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+  fromSDKJSON(object: any): PoolToGaugeSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0),
+      gauge_id: isSet(object.gauge_id) ? BigInt(object.gauge_id.toString()) : BigInt(0),
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+  toSDK(message: PoolToGauge): PoolToGaugeSDKType {
+    const obj: any = {};
+    obj.pool_id = message.poolId;
+    obj.gauge_id = message.gaugeId;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   },
   fromAmino(object: PoolToGaugeAmino): PoolToGauge {
     const message = createBasePoolToGauge();
@@ -514,7 +650,6 @@ function createBasePoolToGauges(): PoolToGauges {
 }
 export const PoolToGauges = {
   typeUrl: "/osmosis.poolincentives.v1beta1.PoolToGauges",
-  aminoType: "osmosis/poolincentives/pool-to-gauges",
   encode(message: PoolToGauges, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.poolToGauge) {
       PoolToGauge.encode(v!, writer.uint32(18).fork()).ldelim();
@@ -538,10 +673,43 @@ export const PoolToGauges = {
     }
     return message;
   },
+  fromJSON(object: any): PoolToGauges {
+    const obj = createBasePoolToGauges();
+    if (Array.isArray(object?.poolToGauge)) obj.poolToGauge = object.poolToGauge.map((e: any) => PoolToGauge.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: PoolToGauges): JsonSafe<PoolToGauges> {
+    const obj: any = {};
+    if (message.poolToGauge) {
+      obj.poolToGauge = message.poolToGauge.map(e => e ? PoolToGauge.toJSON(e) : undefined);
+    } else {
+      obj.poolToGauge = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<PoolToGauges>): PoolToGauges {
     const message = createBasePoolToGauges();
     message.poolToGauge = object.poolToGauge?.map(e => PoolToGauge.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: PoolToGaugesSDKType): PoolToGauges {
+    return {
+      poolToGauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): PoolToGaugesSDKType {
+    return {
+      pool_to_gauge: Array.isArray(object?.pool_to_gauge) ? object.pool_to_gauge.map((e: any) => PoolToGauge.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: PoolToGauges): PoolToGaugesSDKType {
+    const obj: any = {};
+    if (message.poolToGauge) {
+      obj.pool_to_gauge = message.poolToGauge.map(e => e ? PoolToGauge.toSDK(e) : undefined);
+    } else {
+      obj.pool_to_gauge = [];
+    }
+    return obj;
   },
   fromAmino(object: PoolToGaugesAmino): PoolToGauges {
     const message = createBasePoolToGauges();

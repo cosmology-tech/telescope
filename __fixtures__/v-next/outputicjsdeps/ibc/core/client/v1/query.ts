@@ -1,8 +1,10 @@
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../../cosmos/base/query/v1beta1/pagination";
-import { Any, AnyAmino } from "../../../../google/protobuf/any";
-import { Height, HeightAmino, IdentifiedClientState, IdentifiedClientStateAmino, ConsensusStateWithHeight, ConsensusStateWithHeightAmino, Params, ParamsAmino } from "./client";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../../cosmos/base/query/v1beta1/pagination.js";
+import { Any, AnySDKType } from "../../../../google/protobuf/any.js";
+import { Height, HeightSDKType, IdentifiedClientState, IdentifiedClientStateSDKType, ConsensusStateWithHeight, ConsensusStateWithHeightSDKType, Params, ParamsSDKType } from "./client.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "ibc.core.client.v1";
 /**
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
  * method
@@ -19,13 +21,8 @@ export interface QueryClientStateRequestProtoMsg {
  * QueryClientStateRequest is the request type for the Query/ClientState RPC
  * method
  */
-export interface QueryClientStateRequestAmino {
-  /** client state unique identifier */
+export interface QueryClientStateRequestSDKType {
   client_id: string;
-}
-export interface QueryClientStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStateRequest";
-  value: QueryClientStateRequestAmino;
 }
 /**
  * QueryClientStateResponse is the response type for the Query/ClientState RPC
@@ -49,17 +46,10 @@ export interface QueryClientStateResponseProtoMsg {
  * method. Besides the client state, it includes a proof and the height from
  * which the proof was retrieved.
  */
-export interface QueryClientStateResponseAmino {
-  /** client state associated with the request identifier */
-  client_state?: AnyAmino;
-  /** merkle proof of existence */
-  proof: string;
-  /** height at which the proof was retrieved */
-  proof_height: HeightAmino;
-}
-export interface QueryClientStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStateResponse";
-  value: QueryClientStateResponseAmino;
+export interface QueryClientStateResponseSDKType {
+  client_state?: AnySDKType;
+  proof: Uint8Array;
+  proof_height: HeightSDKType;
 }
 /**
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
@@ -77,13 +67,8 @@ export interface QueryClientStatesRequestProtoMsg {
  * QueryClientStatesRequest is the request type for the Query/ClientStates RPC
  * method
  */
-export interface QueryClientStatesRequestAmino {
-  /** pagination request */
-  pagination?: PageRequestAmino;
-}
-export interface QueryClientStatesRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStatesRequest";
-  value: QueryClientStatesRequestAmino;
+export interface QueryClientStatesRequestSDKType {
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
@@ -103,15 +88,9 @@ export interface QueryClientStatesResponseProtoMsg {
  * QueryClientStatesResponse is the response type for the Query/ClientStates RPC
  * method.
  */
-export interface QueryClientStatesResponseAmino {
-  /** list of stored ClientStates of the chain. */
-  client_states: IdentifiedClientStateAmino[];
-  /** pagination response */
-  pagination?: PageResponseAmino;
-}
-export interface QueryClientStatesResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStatesResponse";
-  value: QueryClientStatesResponseAmino;
+export interface QueryClientStatesResponseSDKType {
+  client_states: IdentifiedClientStateSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryConsensusStateRequest is the request type for the Query/ConsensusState
@@ -140,22 +119,11 @@ export interface QueryConsensusStateRequestProtoMsg {
  * RPC method. Besides the consensus state, it includes a proof and the height
  * from which the proof was retrieved.
  */
-export interface QueryConsensusStateRequestAmino {
-  /** client identifier */
+export interface QueryConsensusStateRequestSDKType {
   client_id: string;
-  /** consensus state revision number */
-  revision_number: string;
-  /** consensus state revision height */
-  revision_height: string;
-  /**
-   * latest_height overrrides the height field and queries the latest stored
-   * ConsensusState
-   */
+  revision_number: bigint;
+  revision_height: bigint;
   latest_height: boolean;
-}
-export interface QueryConsensusStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStateRequest";
-  value: QueryConsensusStateRequestAmino;
 }
 /**
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
@@ -177,17 +145,10 @@ export interface QueryConsensusStateResponseProtoMsg {
  * QueryConsensusStateResponse is the response type for the Query/ConsensusState
  * RPC method
  */
-export interface QueryConsensusStateResponseAmino {
-  /** consensus state associated with the client identifier at the given height */
-  consensus_state?: AnyAmino;
-  /** merkle proof of existence */
-  proof: string;
-  /** height at which the proof was retrieved */
-  proof_height: HeightAmino;
-}
-export interface QueryConsensusStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStateResponse";
-  value: QueryConsensusStateResponseAmino;
+export interface QueryConsensusStateResponseSDKType {
+  consensus_state?: AnySDKType;
+  proof: Uint8Array;
+  proof_height: HeightSDKType;
 }
 /**
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
@@ -207,15 +168,9 @@ export interface QueryConsensusStatesRequestProtoMsg {
  * QueryConsensusStatesRequest is the request type for the Query/ConsensusStates
  * RPC method.
  */
-export interface QueryConsensusStatesRequestAmino {
-  /** client identifier */
+export interface QueryConsensusStatesRequestSDKType {
   client_id: string;
-  /** pagination request */
-  pagination?: PageRequestAmino;
-}
-export interface QueryConsensusStatesRequestAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStatesRequest";
-  value: QueryConsensusStatesRequestAmino;
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryConsensusStatesResponse is the response type for the
@@ -235,15 +190,9 @@ export interface QueryConsensusStatesResponseProtoMsg {
  * QueryConsensusStatesResponse is the response type for the
  * Query/ConsensusStates RPC method
  */
-export interface QueryConsensusStatesResponseAmino {
-  /** consensus states associated with the identifier */
-  consensus_states: ConsensusStateWithHeightAmino[];
-  /** pagination response */
-  pagination?: PageResponseAmino;
-}
-export interface QueryConsensusStatesResponseAminoMsg {
-  type: "cosmos-sdk/QueryConsensusStatesResponse";
-  value: QueryConsensusStatesResponseAmino;
+export interface QueryConsensusStatesResponseSDKType {
+  consensus_states: ConsensusStateWithHeightSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /**
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
@@ -261,13 +210,8 @@ export interface QueryClientStatusRequestProtoMsg {
  * QueryClientStatusRequest is the request type for the Query/ClientStatus RPC
  * method
  */
-export interface QueryClientStatusRequestAmino {
-  /** client unique identifier */
+export interface QueryClientStatusRequestSDKType {
   client_id: string;
-}
-export interface QueryClientStatusRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientStatusRequest";
-  value: QueryClientStatusRequestAmino;
 }
 /**
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
@@ -284,12 +228,8 @@ export interface QueryClientStatusResponseProtoMsg {
  * QueryClientStatusResponse is the response type for the Query/ClientStatus RPC
  * method. It returns the current status of the IBC client.
  */
-export interface QueryClientStatusResponseAmino {
+export interface QueryClientStatusResponseSDKType {
   status: string;
-}
-export interface QueryClientStatusResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientStatusResponse";
-  value: QueryClientStatusResponseAmino;
 }
 /**
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
@@ -304,11 +244,7 @@ export interface QueryClientParamsRequestProtoMsg {
  * QueryClientParamsRequest is the request type for the Query/ClientParams RPC
  * method.
  */
-export interface QueryClientParamsRequestAmino {}
-export interface QueryClientParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryClientParamsRequest";
-  value: QueryClientParamsRequestAmino;
-}
+export interface QueryClientParamsRequestSDKType {}
 /**
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
@@ -325,13 +261,8 @@ export interface QueryClientParamsResponseProtoMsg {
  * QueryClientParamsResponse is the response type for the Query/ClientParams RPC
  * method.
  */
-export interface QueryClientParamsResponseAmino {
-  /** params defines the parameters of the module. */
-  params?: ParamsAmino;
-}
-export interface QueryClientParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryClientParamsResponse";
-  value: QueryClientParamsResponseAmino;
+export interface QueryClientParamsResponseSDKType {
+  params?: ParamsSDKType;
 }
 /**
  * QueryUpgradedClientStateRequest is the request type for the
@@ -346,11 +277,7 @@ export interface QueryUpgradedClientStateRequestProtoMsg {
  * QueryUpgradedClientStateRequest is the request type for the
  * Query/UpgradedClientState RPC method
  */
-export interface QueryUpgradedClientStateRequestAmino {}
-export interface QueryUpgradedClientStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedClientStateRequest";
-  value: QueryUpgradedClientStateRequestAmino;
-}
+export interface QueryUpgradedClientStateRequestSDKType {}
 /**
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
@@ -367,13 +294,8 @@ export interface QueryUpgradedClientStateResponseProtoMsg {
  * QueryUpgradedClientStateResponse is the response type for the
  * Query/UpgradedClientState RPC method.
  */
-export interface QueryUpgradedClientStateResponseAmino {
-  /** client state associated with the request identifier */
-  upgraded_client_state?: AnyAmino;
-}
-export interface QueryUpgradedClientStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedClientStateResponse";
-  value: QueryUpgradedClientStateResponseAmino;
+export interface QueryUpgradedClientStateResponseSDKType {
+  upgraded_client_state?: AnySDKType;
 }
 /**
  * QueryUpgradedConsensusStateRequest is the request type for the
@@ -388,11 +310,7 @@ export interface QueryUpgradedConsensusStateRequestProtoMsg {
  * QueryUpgradedConsensusStateRequest is the request type for the
  * Query/UpgradedConsensusState RPC method
  */
-export interface QueryUpgradedConsensusStateRequestAmino {}
-export interface QueryUpgradedConsensusStateRequestAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedConsensusStateRequest";
-  value: QueryUpgradedConsensusStateRequestAmino;
-}
+export interface QueryUpgradedConsensusStateRequestSDKType {}
 /**
  * QueryUpgradedConsensusStateResponse is the response type for the
  * Query/UpgradedConsensusState RPC method.
@@ -409,13 +327,8 @@ export interface QueryUpgradedConsensusStateResponseProtoMsg {
  * QueryUpgradedConsensusStateResponse is the response type for the
  * Query/UpgradedConsensusState RPC method.
  */
-export interface QueryUpgradedConsensusStateResponseAmino {
-  /** Consensus state associated with the request identifier */
-  upgraded_consensus_state?: AnyAmino;
-}
-export interface QueryUpgradedConsensusStateResponseAminoMsg {
-  type: "cosmos-sdk/QueryUpgradedConsensusStateResponse";
-  value: QueryUpgradedConsensusStateResponseAmino;
+export interface QueryUpgradedConsensusStateResponseSDKType {
+  upgraded_consensus_state?: AnySDKType;
 }
 function createBaseQueryClientStateRequest(): QueryClientStateRequest {
   return {
@@ -424,9 +337,8 @@ function createBaseQueryClientStateRequest(): QueryClientStateRequest {
 }
 export const QueryClientStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStateRequest",
-  aminoType: "cosmos-sdk/QueryClientStateRequest",
   encode(message: QueryClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
@@ -448,10 +360,35 @@ export const QueryClientStateRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStateRequest {
+    const obj = createBaseQueryClientStateRequest();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    return obj;
+  },
+  toJSON(message: QueryClientStateRequest): JsonSafe<QueryClientStateRequest> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStateRequest>): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+  fromSDK(object: QueryClientStateRequestSDKType): QueryClientStateRequest {
+    return {
+      clientId: object?.client_id
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStateRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
+    };
+  },
+  toSDK(message: QueryClientStateRequest): QueryClientStateRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
   },
   fromAmino(object: QueryClientStateRequestAmino): QueryClientStateRequest {
     const message = createBaseQueryClientStateRequest();
@@ -496,7 +433,6 @@ function createBaseQueryClientStateResponse(): QueryClientStateResponse {
 }
 export const QueryClientStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStateResponse",
-  aminoType: "cosmos-sdk/QueryClientStateResponse",
   encode(message: QueryClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.clientState !== undefined) {
       Any.encode(message.clientState, writer.uint32(10).fork()).ldelim();
@@ -532,12 +468,51 @@ export const QueryClientStateResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStateResponse {
+    const obj = createBaseQueryClientStateResponse();
+    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
+    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
+    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
+    return obj;
+  },
+  toJSON(message: QueryClientStateResponse): JsonSafe<QueryClientStateResponse> {
+    const obj: any = {};
+    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
+    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStateResponse>): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
+  },
+  fromSDK(object: QueryClientStateResponseSDKType): QueryClientStateResponse {
+    return {
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStateResponseSDKType {
+    return {
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+  toSDK(message: QueryClientStateResponse): QueryClientStateResponseSDKType {
+    const obj: any = {};
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    obj.proof = message.proof;
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
+    return obj;
   },
   fromAmino(object: QueryClientStateResponseAmino): QueryClientStateResponse {
     const message = createBaseQueryClientStateResponse();
@@ -588,7 +563,6 @@ function createBaseQueryClientStatesRequest(): QueryClientStatesRequest {
 }
 export const QueryClientStatesRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatesRequest",
-  aminoType: "cosmos-sdk/QueryClientStatesRequest",
   encode(message: QueryClientStatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -612,10 +586,37 @@ export const QueryClientStatesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStatesRequest {
+    const obj = createBaseQueryClientStatesRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryClientStatesRequest): JsonSafe<QueryClientStatesRequest> {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStatesRequest>): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryClientStatesRequestSDKType): QueryClientStatesRequest {
+    return {
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStatesRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryClientStatesRequest): QueryClientStatesRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryClientStatesRequestAmino): QueryClientStatesRequest {
     const message = createBaseQueryClientStatesRequest();
@@ -659,7 +660,6 @@ function createBaseQueryClientStatesResponse(): QueryClientStatesResponse {
 }
 export const QueryClientStatesResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatesResponse",
-  aminoType: "cosmos-sdk/QueryClientStatesResponse",
   encode(message: QueryClientStatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.clientStates) {
       IdentifiedClientState.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -689,11 +689,51 @@ export const QueryClientStatesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStatesResponse {
+    const obj = createBaseQueryClientStatesResponse();
+    if (Array.isArray(object?.clientStates)) obj.clientStates = object.clientStates.map((e: any) => IdentifiedClientState.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryClientStatesResponse): JsonSafe<QueryClientStatesResponse> {
+    const obj: any = {};
+    if (message.clientStates) {
+      obj.clientStates = message.clientStates.map(e => e ? IdentifiedClientState.toJSON(e) : undefined);
+    } else {
+      obj.clientStates = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStatesResponse>): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
     message.clientStates = object.clientStates?.map(e => IdentifiedClientState.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryClientStatesResponseSDKType): QueryClientStatesResponse {
+    return {
+      clientStates: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStatesResponseSDKType {
+    return {
+      client_states: Array.isArray(object?.client_states) ? object.client_states.map((e: any) => IdentifiedClientState.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryClientStatesResponse): QueryClientStatesResponseSDKType {
+    const obj: any = {};
+    if (message.clientStates) {
+      obj.client_states = message.clientStates.map(e => e ? IdentifiedClientState.toSDK(e) : undefined);
+    } else {
+      obj.client_states = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryClientStatesResponseAmino): QueryClientStatesResponse {
     const message = createBaseQueryClientStatesResponse();
@@ -745,18 +785,17 @@ function createBaseQueryConsensusStateRequest(): QueryConsensusStateRequest {
 }
 export const QueryConsensusStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateRequest",
-  aminoType: "cosmos-sdk/QueryConsensusStateRequest",
   encode(message: QueryConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
-    if (message.revisionNumber !== BigInt(0)) {
+    if (message.revisionNumber !== undefined) {
       writer.uint32(16).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (message.revisionHeight !== undefined) {
       writer.uint32(24).uint64(message.revisionHeight);
     }
-    if (message.latestHeight === true) {
+    if (message.latestHeight !== undefined) {
       writer.uint32(32).bool(message.latestHeight);
     }
     return writer;
@@ -787,13 +826,57 @@ export const QueryConsensusStateRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryConsensusStateRequest {
+    const obj = createBaseQueryConsensusStateRequest();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
+    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
+    if (isSet(object.latestHeight)) obj.latestHeight = Boolean(object.latestHeight);
+    return obj;
+  },
+  toJSON(message: QueryConsensusStateRequest): JsonSafe<QueryConsensusStateRequest> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
+    message.latestHeight !== undefined && (obj.latestHeight = message.latestHeight);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryConsensusStateRequest>): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
     message.clientId = object.clientId ?? "";
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = BigInt(object.revisionNumber.toString());
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = BigInt(object.revisionHeight.toString());
+    }
     message.latestHeight = object.latestHeight ?? false;
     return message;
+  },
+  fromSDK(object: QueryConsensusStateRequestSDKType): QueryConsensusStateRequest {
+    return {
+      clientId: object?.client_id,
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height,
+      latestHeight: object?.latest_height
+    };
+  },
+  fromSDKJSON(object: any): QueryConsensusStateRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0),
+      latest_height: isSet(object.latest_height) ? Boolean(object.latest_height) : false
+    };
+  },
+  toSDK(message: QueryConsensusStateRequest): QueryConsensusStateRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
+    obj.latest_height = message.latestHeight;
+    return obj;
   },
   fromAmino(object: QueryConsensusStateRequestAmino): QueryConsensusStateRequest {
     const message = createBaseQueryConsensusStateRequest();
@@ -850,7 +933,6 @@ function createBaseQueryConsensusStateResponse(): QueryConsensusStateResponse {
 }
 export const QueryConsensusStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStateResponse",
-  aminoType: "cosmos-sdk/QueryConsensusStateResponse",
   encode(message: QueryConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.consensusState !== undefined) {
       Any.encode(message.consensusState, writer.uint32(10).fork()).ldelim();
@@ -886,12 +968,51 @@ export const QueryConsensusStateResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryConsensusStateResponse {
+    const obj = createBaseQueryConsensusStateResponse();
+    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
+    if (isSet(object.proof)) obj.proof = bytesFromBase64(object.proof);
+    if (isSet(object.proofHeight)) obj.proofHeight = Height.fromJSON(object.proofHeight);
+    return obj;
+  },
+  toJSON(message: QueryConsensusStateResponse): JsonSafe<QueryConsensusStateResponse> {
+    const obj: any = {};
+    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
+    message.proof !== undefined && (obj.proof = base64FromBytes(message.proof !== undefined ? message.proof : new Uint8Array()));
+    message.proofHeight !== undefined && (obj.proofHeight = message.proofHeight ? Height.toJSON(message.proofHeight) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryConsensusStateResponse>): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     message.proof = object.proof ?? new Uint8Array();
-    message.proofHeight = object.proofHeight !== undefined && object.proofHeight !== null ? Height.fromPartial(object.proofHeight) : undefined;
+    if (object.proofHeight !== undefined && object.proofHeight !== null) {
+      message.proofHeight = Height.fromPartial(object.proofHeight);
+    }
     return message;
+  },
+  fromSDK(object: QueryConsensusStateResponseSDKType): QueryConsensusStateResponse {
+    return {
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined,
+      proof: object?.proof,
+      proofHeight: object.proof_height ? Height.fromSDK(object.proof_height) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryConsensusStateResponseSDKType {
+    return {
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined,
+      proof: isSet(object.proof) ? bytesFromBase64(object.proof) : new Uint8Array(),
+      proof_height: isSet(object.proof_height) ? Height.fromSDKJSON(object.proof_height) : undefined
+    };
+  },
+  toSDK(message: QueryConsensusStateResponse): QueryConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    obj.proof = message.proof;
+    message.proofHeight !== undefined && (obj.proof_height = message.proofHeight ? Height.toSDK(message.proofHeight) : undefined);
+    return obj;
   },
   fromAmino(object: QueryConsensusStateResponseAmino): QueryConsensusStateResponse {
     const message = createBaseQueryConsensusStateResponse();
@@ -943,9 +1064,8 @@ function createBaseQueryConsensusStatesRequest(): QueryConsensusStatesRequest {
 }
 export const QueryConsensusStatesRequest = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesRequest",
-  aminoType: "cosmos-sdk/QueryConsensusStatesRequest",
   encode(message: QueryConsensusStatesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.pagination !== undefined) {
@@ -973,11 +1093,43 @@ export const QueryConsensusStatesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryConsensusStatesRequest {
+    const obj = createBaseQueryConsensusStatesRequest();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryConsensusStatesRequest): JsonSafe<QueryConsensusStatesRequest> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryConsensusStatesRequest>): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
     message.clientId = object.clientId ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryConsensusStatesRequestSDKType): QueryConsensusStatesRequest {
+    return {
+      clientId: object?.client_id,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryConsensusStatesRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryConsensusStatesRequest): QueryConsensusStatesRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryConsensusStatesRequestAmino): QueryConsensusStatesRequest {
     const message = createBaseQueryConsensusStatesRequest();
@@ -1025,7 +1177,6 @@ function createBaseQueryConsensusStatesResponse(): QueryConsensusStatesResponse 
 }
 export const QueryConsensusStatesResponse = {
   typeUrl: "/ibc.core.client.v1.QueryConsensusStatesResponse",
-  aminoType: "cosmos-sdk/QueryConsensusStatesResponse",
   encode(message: QueryConsensusStatesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.consensusStates) {
       ConsensusStateWithHeight.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1055,11 +1206,51 @@ export const QueryConsensusStatesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryConsensusStatesResponse {
+    const obj = createBaseQueryConsensusStatesResponse();
+    if (Array.isArray(object?.consensusStates)) obj.consensusStates = object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryConsensusStatesResponse): JsonSafe<QueryConsensusStatesResponse> {
+    const obj: any = {};
+    if (message.consensusStates) {
+      obj.consensusStates = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toJSON(e) : undefined);
+    } else {
+      obj.consensusStates = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryConsensusStatesResponse>): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryConsensusStatesResponseSDKType): QueryConsensusStatesResponse {
+    return {
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryConsensusStatesResponseSDKType {
+    return {
+      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryConsensusStatesResponse): QueryConsensusStatesResponseSDKType {
+    const obj: any = {};
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryConsensusStatesResponseAmino): QueryConsensusStatesResponse {
     const message = createBaseQueryConsensusStatesResponse();
@@ -1108,9 +1299,8 @@ function createBaseQueryClientStatusRequest(): QueryClientStatusRequest {
 }
 export const QueryClientStatusRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusRequest",
-  aminoType: "cosmos-sdk/QueryClientStatusRequest",
   encode(message: QueryClientStatusRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     return writer;
@@ -1132,10 +1322,35 @@ export const QueryClientStatusRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStatusRequest {
+    const obj = createBaseQueryClientStatusRequest();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    return obj;
+  },
+  toJSON(message: QueryClientStatusRequest): JsonSafe<QueryClientStatusRequest> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStatusRequest>): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
     message.clientId = object.clientId ?? "";
     return message;
+  },
+  fromSDK(object: QueryClientStatusRequestSDKType): QueryClientStatusRequest {
+    return {
+      clientId: object?.client_id
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStatusRequestSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : ""
+    };
+  },
+  toSDK(message: QueryClientStatusRequest): QueryClientStatusRequestSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    return obj;
   },
   fromAmino(object: QueryClientStatusRequestAmino): QueryClientStatusRequest {
     const message = createBaseQueryClientStatusRequest();
@@ -1178,9 +1393,8 @@ function createBaseQueryClientStatusResponse(): QueryClientStatusResponse {
 }
 export const QueryClientStatusResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientStatusResponse",
-  aminoType: "cosmos-sdk/QueryClientStatusResponse",
   encode(message: QueryClientStatusResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.status !== "") {
+    if (message.status !== undefined) {
       writer.uint32(10).string(message.status);
     }
     return writer;
@@ -1202,10 +1416,35 @@ export const QueryClientStatusResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientStatusResponse {
+    const obj = createBaseQueryClientStatusResponse();
+    if (isSet(object.status)) obj.status = String(object.status);
+    return obj;
+  },
+  toJSON(message: QueryClientStatusResponse): JsonSafe<QueryClientStatusResponse> {
+    const obj: any = {};
+    message.status !== undefined && (obj.status = message.status);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientStatusResponse>): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
     message.status = object.status ?? "";
     return message;
+  },
+  fromSDK(object: QueryClientStatusResponseSDKType): QueryClientStatusResponse {
+    return {
+      status: object?.status
+    };
+  },
+  fromSDKJSON(object: any): QueryClientStatusResponseSDKType {
+    return {
+      status: isSet(object.status) ? String(object.status) : ""
+    };
+  },
+  toSDK(message: QueryClientStatusResponse): QueryClientStatusResponseSDKType {
+    const obj: any = {};
+    obj.status = message.status;
+    return obj;
   },
   fromAmino(object: QueryClientStatusResponseAmino): QueryClientStatusResponse {
     const message = createBaseQueryClientStatusResponse();
@@ -1246,7 +1485,6 @@ function createBaseQueryClientParamsRequest(): QueryClientParamsRequest {
 }
 export const QueryClientParamsRequest = {
   typeUrl: "/ibc.core.client.v1.QueryClientParamsRequest",
-  aminoType: "cosmos-sdk/QueryClientParamsRequest",
   encode(_: QueryClientParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1264,9 +1502,27 @@ export const QueryClientParamsRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryClientParamsRequest {
+    const obj = createBaseQueryClientParamsRequest();
+    return obj;
+  },
+  toJSON(_: QueryClientParamsRequest): JsonSafe<QueryClientParamsRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryClientParamsRequest>): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
     return message;
+  },
+  fromSDK(_: QueryClientParamsRequestSDKType): QueryClientParamsRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryClientParamsRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryClientParamsRequest): QueryClientParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryClientParamsRequestAmino): QueryClientParamsRequest {
     const message = createBaseQueryClientParamsRequest();
@@ -1305,7 +1561,6 @@ function createBaseQueryClientParamsResponse(): QueryClientParamsResponse {
 }
 export const QueryClientParamsResponse = {
   typeUrl: "/ibc.core.client.v1.QueryClientParamsResponse",
-  aminoType: "cosmos-sdk/QueryClientParamsResponse",
   encode(message: QueryClientParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -1329,10 +1584,37 @@ export const QueryClientParamsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryClientParamsResponse {
+    const obj = createBaseQueryClientParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
+  },
+  toJSON(message: QueryClientParamsResponse): JsonSafe<QueryClientParamsResponse> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryClientParamsResponse>): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
+  },
+  fromSDK(object: QueryClientParamsResponseSDKType): QueryClientParamsResponse {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryClientParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+  toSDK(message: QueryClientParamsResponse): QueryClientParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   },
   fromAmino(object: QueryClientParamsResponseAmino): QueryClientParamsResponse {
     const message = createBaseQueryClientParamsResponse();
@@ -1373,7 +1655,6 @@ function createBaseQueryUpgradedClientStateRequest(): QueryUpgradedClientStateRe
 }
 export const QueryUpgradedClientStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateRequest",
-  aminoType: "cosmos-sdk/QueryUpgradedClientStateRequest",
   encode(_: QueryUpgradedClientStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1391,9 +1672,27 @@ export const QueryUpgradedClientStateRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryUpgradedClientStateRequest {
+    const obj = createBaseQueryUpgradedClientStateRequest();
+    return obj;
+  },
+  toJSON(_: QueryUpgradedClientStateRequest): JsonSafe<QueryUpgradedClientStateRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryUpgradedClientStateRequest>): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
     return message;
+  },
+  fromSDK(_: QueryUpgradedClientStateRequestSDKType): QueryUpgradedClientStateRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryUpgradedClientStateRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryUpgradedClientStateRequest): QueryUpgradedClientStateRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryUpgradedClientStateRequestAmino): QueryUpgradedClientStateRequest {
     const message = createBaseQueryUpgradedClientStateRequest();
@@ -1432,7 +1731,6 @@ function createBaseQueryUpgradedClientStateResponse(): QueryUpgradedClientStateR
 }
 export const QueryUpgradedClientStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedClientStateResponse",
-  aminoType: "cosmos-sdk/QueryUpgradedClientStateResponse",
   encode(message: QueryUpgradedClientStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.upgradedClientState !== undefined) {
       Any.encode(message.upgradedClientState, writer.uint32(10).fork()).ldelim();
@@ -1456,10 +1754,37 @@ export const QueryUpgradedClientStateResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryUpgradedClientStateResponse {
+    const obj = createBaseQueryUpgradedClientStateResponse();
+    if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
+    return obj;
+  },
+  toJSON(message: QueryUpgradedClientStateResponse): JsonSafe<QueryUpgradedClientStateResponse> {
+    const obj: any = {};
+    message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryUpgradedClientStateResponse>): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
+  },
+  fromSDK(object: QueryUpgradedClientStateResponseSDKType): QueryUpgradedClientStateResponse {
+    return {
+      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryUpgradedClientStateResponseSDKType {
+    return {
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+  toSDK(message: QueryUpgradedClientStateResponse): QueryUpgradedClientStateResponseSDKType {
+    const obj: any = {};
+    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
+    return obj;
   },
   fromAmino(object: QueryUpgradedClientStateResponseAmino): QueryUpgradedClientStateResponse {
     const message = createBaseQueryUpgradedClientStateResponse();
@@ -1500,7 +1825,6 @@ function createBaseQueryUpgradedConsensusStateRequest(): QueryUpgradedConsensusS
 }
 export const QueryUpgradedConsensusStateRequest = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateRequest",
-  aminoType: "cosmos-sdk/QueryUpgradedConsensusStateRequest",
   encode(_: QueryUpgradedConsensusStateRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -1518,9 +1842,27 @@ export const QueryUpgradedConsensusStateRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryUpgradedConsensusStateRequest {
+    const obj = createBaseQueryUpgradedConsensusStateRequest();
+    return obj;
+  },
+  toJSON(_: QueryUpgradedConsensusStateRequest): JsonSafe<QueryUpgradedConsensusStateRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryUpgradedConsensusStateRequest>): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
     return message;
+  },
+  fromSDK(_: QueryUpgradedConsensusStateRequestSDKType): QueryUpgradedConsensusStateRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryUpgradedConsensusStateRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryUpgradedConsensusStateRequest): QueryUpgradedConsensusStateRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryUpgradedConsensusStateRequestAmino): QueryUpgradedConsensusStateRequest {
     const message = createBaseQueryUpgradedConsensusStateRequest();
@@ -1559,7 +1901,6 @@ function createBaseQueryUpgradedConsensusStateResponse(): QueryUpgradedConsensus
 }
 export const QueryUpgradedConsensusStateResponse = {
   typeUrl: "/ibc.core.client.v1.QueryUpgradedConsensusStateResponse",
-  aminoType: "cosmos-sdk/QueryUpgradedConsensusStateResponse",
   encode(message: QueryUpgradedConsensusStateResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.upgradedConsensusState !== undefined) {
       Any.encode(message.upgradedConsensusState, writer.uint32(10).fork()).ldelim();
@@ -1583,10 +1924,37 @@ export const QueryUpgradedConsensusStateResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryUpgradedConsensusStateResponse {
+    const obj = createBaseQueryUpgradedConsensusStateResponse();
+    if (isSet(object.upgradedConsensusState)) obj.upgradedConsensusState = Any.fromJSON(object.upgradedConsensusState);
+    return obj;
+  },
+  toJSON(message: QueryUpgradedConsensusStateResponse): JsonSafe<QueryUpgradedConsensusStateResponse> {
+    const obj: any = {};
+    message.upgradedConsensusState !== undefined && (obj.upgradedConsensusState = message.upgradedConsensusState ? Any.toJSON(message.upgradedConsensusState) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryUpgradedConsensusStateResponse>): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();
-    message.upgradedConsensusState = object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null ? Any.fromPartial(object.upgradedConsensusState) : undefined;
+    if (object.upgradedConsensusState !== undefined && object.upgradedConsensusState !== null) {
+      message.upgradedConsensusState = Any.fromPartial(object.upgradedConsensusState);
+    }
     return message;
+  },
+  fromSDK(object: QueryUpgradedConsensusStateResponseSDKType): QueryUpgradedConsensusStateResponse {
+    return {
+      upgradedConsensusState: object.upgraded_consensus_state ? Any.fromSDK(object.upgraded_consensus_state) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryUpgradedConsensusStateResponseSDKType {
+    return {
+      upgraded_consensus_state: isSet(object.upgraded_consensus_state) ? Any.fromSDKJSON(object.upgraded_consensus_state) : undefined
+    };
+  },
+  toSDK(message: QueryUpgradedConsensusStateResponse): QueryUpgradedConsensusStateResponseSDKType {
+    const obj: any = {};
+    message.upgradedConsensusState !== undefined && (obj.upgraded_consensus_state = message.upgradedConsensusState ? Any.toSDK(message.upgradedConsensusState) : undefined);
+    return obj;
   },
   fromAmino(object: QueryUpgradedConsensusStateResponseAmino): QueryUpgradedConsensusStateResponse {
     const message = createBaseQueryUpgradedConsensusStateResponse();

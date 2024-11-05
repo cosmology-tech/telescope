@@ -1,7 +1,9 @@
-import { MsgStoreCode, MsgStoreCodeAmino, MsgInstantiateContract, MsgInstantiateContractAmino, MsgExecuteContract, MsgExecuteContractAmino } from "./tx";
-import { Params, ParamsAmino, CodeInfo, CodeInfoAmino, ContractInfo, ContractInfoAmino, Model, ModelAmino } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { MsgStoreCode, MsgStoreCodeSDKType, MsgInstantiateContract, MsgInstantiateContractSDKType, MsgExecuteContract, MsgExecuteContractSDKType } from "./tx.js";
+import { Params, ParamsSDKType, CodeInfo, CodeInfoSDKType, ContractInfo, ContractInfoSDKType, Model, ModelSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmwasm.wasm.v1";
 /** GenesisState - genesis state of x/wasm */
 export interface GenesisState {
   params: Params;
@@ -15,16 +17,12 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState - genesis state of x/wasm */
-export interface GenesisStateAmino {
-  params: ParamsAmino;
-  codes: CodeAmino[];
-  contracts: ContractAmino[];
-  sequences: SequenceAmino[];
-  gen_msgs: GenesisState_GenMsgsAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "wasm/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  params: ParamsSDKType;
+  codes: CodeSDKType[];
+  contracts: ContractSDKType[];
+  sequences: SequenceSDKType[];
+  gen_msgs: GenesisState_GenMsgsSDKType[];
 }
 /**
  * GenMsgs define the messages that can be executed during genesis phase in
@@ -43,14 +41,10 @@ export interface GenesisState_GenMsgsProtoMsg {
  * GenMsgs define the messages that can be executed during genesis phase in
  * order. The intention is to have more human readable data that is auditable.
  */
-export interface GenesisState_GenMsgsAmino {
-  store_code?: MsgStoreCodeAmino;
-  instantiate_contract?: MsgInstantiateContractAmino;
-  execute_contract?: MsgExecuteContractAmino;
-}
-export interface GenesisState_GenMsgsAminoMsg {
-  type: "wasm/GenMsgs";
-  value: GenesisState_GenMsgsAmino;
+export interface GenesisState_GenMsgsSDKType {
+  store_code?: MsgStoreCodeSDKType;
+  instantiate_contract?: MsgInstantiateContractSDKType;
+  execute_contract?: MsgExecuteContractSDKType;
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
 export interface Code {
@@ -65,16 +59,11 @@ export interface CodeProtoMsg {
   value: Uint8Array;
 }
 /** Code struct encompasses CodeInfo and CodeBytes */
-export interface CodeAmino {
-  code_id: string;
-  code_info: CodeInfoAmino;
-  code_bytes: string;
-  /** Pinned to wasmvm cache */
+export interface CodeSDKType {
+  code_id: bigint;
+  code_info: CodeInfoSDKType;
+  code_bytes: Uint8Array;
   pinned: boolean;
-}
-export interface CodeAminoMsg {
-  type: "wasm/Code";
-  value: CodeAmino;
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
 export interface Contract {
@@ -87,14 +76,10 @@ export interface ContractProtoMsg {
   value: Uint8Array;
 }
 /** Contract struct encompasses ContractAddress, ContractInfo, and ContractState */
-export interface ContractAmino {
+export interface ContractSDKType {
   contract_address: string;
-  contract_info: ContractInfoAmino;
-  contract_state: ModelAmino[];
-}
-export interface ContractAminoMsg {
-  type: "wasm/Contract";
-  value: ContractAmino;
+  contract_info: ContractInfoSDKType;
+  contract_state: ModelSDKType[];
 }
 /** Sequence key and value of an id generation counter */
 export interface Sequence {
@@ -106,13 +91,9 @@ export interface SequenceProtoMsg {
   value: Uint8Array;
 }
 /** Sequence key and value of an id generation counter */
-export interface SequenceAmino {
-  id_key: string;
-  value: string;
-}
-export interface SequenceAminoMsg {
-  type: "wasm/Sequence";
-  value: SequenceAmino;
+export interface SequenceSDKType {
+  id_key: Uint8Array;
+  value: bigint;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -125,7 +106,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmwasm.wasm.v1.GenesisState",
-  aminoType: "wasm/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -173,14 +153,93 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.codes)) obj.codes = object.codes.map((e: any) => Code.fromJSON(e));
+    if (Array.isArray(object?.contracts)) obj.contracts = object.contracts.map((e: any) => Contract.fromJSON(e));
+    if (Array.isArray(object?.sequences)) obj.sequences = object.sequences.map((e: any) => Sequence.fromJSON(e));
+    if (Array.isArray(object?.genMsgs)) obj.genMsgs = object.genMsgs.map((e: any) => GenesisState_GenMsgs.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.codes) {
+      obj.codes = message.codes.map(e => e ? Code.toJSON(e) : undefined);
+    } else {
+      obj.codes = [];
+    }
+    if (message.contracts) {
+      obj.contracts = message.contracts.map(e => e ? Contract.toJSON(e) : undefined);
+    } else {
+      obj.contracts = [];
+    }
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e ? Sequence.toJSON(e) : undefined);
+    } else {
+      obj.sequences = [];
+    }
+    if (message.genMsgs) {
+      obj.genMsgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toJSON(e) : undefined);
+    } else {
+      obj.genMsgs = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.codes = object.codes?.map(e => Code.fromPartial(e)) || [];
     message.contracts = object.contracts?.map(e => Contract.fromPartial(e)) || [];
     message.sequences = object.sequences?.map(e => Sequence.fromPartial(e)) || [];
     message.genMsgs = object.genMsgs?.map(e => GenesisState_GenMsgs.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDK(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDK(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDK(e)) : [],
+      genMsgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      codes: Array.isArray(object?.codes) ? object.codes.map((e: any) => Code.fromSDKJSON(e)) : [],
+      contracts: Array.isArray(object?.contracts) ? object.contracts.map((e: any) => Contract.fromSDKJSON(e)) : [],
+      sequences: Array.isArray(object?.sequences) ? object.sequences.map((e: any) => Sequence.fromSDKJSON(e)) : [],
+      gen_msgs: Array.isArray(object?.gen_msgs) ? object.gen_msgs.map((e: any) => GenesisState_GenMsgs.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    if (message.codes) {
+      obj.codes = message.codes.map(e => e ? Code.toSDK(e) : undefined);
+    } else {
+      obj.codes = [];
+    }
+    if (message.contracts) {
+      obj.contracts = message.contracts.map(e => e ? Contract.toSDK(e) : undefined);
+    } else {
+      obj.contracts = [];
+    }
+    if (message.sequences) {
+      obj.sequences = message.sequences.map(e => e ? Sequence.toSDK(e) : undefined);
+    } else {
+      obj.sequences = [];
+    }
+    if (message.genMsgs) {
+      obj.gen_msgs = message.genMsgs.map(e => e ? GenesisState_GenMsgs.toSDK(e) : undefined);
+    } else {
+      obj.gen_msgs = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -249,7 +308,6 @@ function createBaseGenesisState_GenMsgs(): GenesisState_GenMsgs {
 }
 export const GenesisState_GenMsgs = {
   typeUrl: "/cosmwasm.wasm.v1.GenMsgs",
-  aminoType: "wasm/GenMsgs",
   encode(message: GenesisState_GenMsgs, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.storeCode !== undefined) {
       MsgStoreCode.encode(message.storeCode, writer.uint32(10).fork()).ldelim();
@@ -285,12 +343,53 @@ export const GenesisState_GenMsgs = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState_GenMsgs {
+    const obj = createBaseGenesisState_GenMsgs();
+    if (isSet(object.storeCode)) obj.storeCode = MsgStoreCode.fromJSON(object.storeCode);
+    if (isSet(object.instantiateContract)) obj.instantiateContract = MsgInstantiateContract.fromJSON(object.instantiateContract);
+    if (isSet(object.executeContract)) obj.executeContract = MsgExecuteContract.fromJSON(object.executeContract);
+    return obj;
+  },
+  toJSON(message: GenesisState_GenMsgs): JsonSafe<GenesisState_GenMsgs> {
+    const obj: any = {};
+    message.storeCode !== undefined && (obj.storeCode = message.storeCode ? MsgStoreCode.toJSON(message.storeCode) : undefined);
+    message.instantiateContract !== undefined && (obj.instantiateContract = message.instantiateContract ? MsgInstantiateContract.toJSON(message.instantiateContract) : undefined);
+    message.executeContract !== undefined && (obj.executeContract = message.executeContract ? MsgExecuteContract.toJSON(message.executeContract) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState_GenMsgs>): GenesisState_GenMsgs {
     const message = createBaseGenesisState_GenMsgs();
-    message.storeCode = object.storeCode !== undefined && object.storeCode !== null ? MsgStoreCode.fromPartial(object.storeCode) : undefined;
-    message.instantiateContract = object.instantiateContract !== undefined && object.instantiateContract !== null ? MsgInstantiateContract.fromPartial(object.instantiateContract) : undefined;
-    message.executeContract = object.executeContract !== undefined && object.executeContract !== null ? MsgExecuteContract.fromPartial(object.executeContract) : undefined;
+    if (object.storeCode !== undefined && object.storeCode !== null) {
+      message.storeCode = MsgStoreCode.fromPartial(object.storeCode);
+    }
+    if (object.instantiateContract !== undefined && object.instantiateContract !== null) {
+      message.instantiateContract = MsgInstantiateContract.fromPartial(object.instantiateContract);
+    }
+    if (object.executeContract !== undefined && object.executeContract !== null) {
+      message.executeContract = MsgExecuteContract.fromPartial(object.executeContract);
+    }
     return message;
+  },
+  fromSDK(object: GenesisState_GenMsgsSDKType): GenesisState_GenMsgs {
+    return {
+      storeCode: object.store_code ? MsgStoreCode.fromSDK(object.store_code) : undefined,
+      instantiateContract: object.instantiate_contract ? MsgInstantiateContract.fromSDK(object.instantiate_contract) : undefined,
+      executeContract: object.execute_contract ? MsgExecuteContract.fromSDK(object.execute_contract) : undefined
+    };
+  },
+  fromSDKJSON(object: any): GenesisState_GenMsgsSDKType {
+    return {
+      store_code: isSet(object.store_code) ? MsgStoreCode.fromSDKJSON(object.store_code) : undefined,
+      instantiate_contract: isSet(object.instantiate_contract) ? MsgInstantiateContract.fromSDKJSON(object.instantiate_contract) : undefined,
+      execute_contract: isSet(object.execute_contract) ? MsgExecuteContract.fromSDKJSON(object.execute_contract) : undefined
+    };
+  },
+  toSDK(message: GenesisState_GenMsgs): GenesisState_GenMsgsSDKType {
+    const obj: any = {};
+    message.storeCode !== undefined && (obj.store_code = message.storeCode ? MsgStoreCode.toSDK(message.storeCode) : undefined);
+    message.instantiateContract !== undefined && (obj.instantiate_contract = message.instantiateContract ? MsgInstantiateContract.toSDK(message.instantiateContract) : undefined);
+    message.executeContract !== undefined && (obj.execute_contract = message.executeContract ? MsgExecuteContract.toSDK(message.executeContract) : undefined);
+    return obj;
   },
   fromAmino(object: GenesisState_GenMsgsAmino): GenesisState_GenMsgs {
     const message = createBaseGenesisState_GenMsgs();
@@ -344,9 +443,8 @@ function createBaseCode(): Code {
 }
 export const Code = {
   typeUrl: "/cosmwasm.wasm.v1.Code",
-  aminoType: "wasm/Code",
   encode(message: Code, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.codeId !== BigInt(0)) {
+    if (message.codeId !== undefined) {
       writer.uint32(8).uint64(message.codeId);
     }
     if (message.codeInfo !== undefined) {
@@ -355,7 +453,7 @@ export const Code = {
     if (message.codeBytes.length !== 0) {
       writer.uint32(26).bytes(message.codeBytes);
     }
-    if (message.pinned === true) {
+    if (message.pinned !== undefined) {
       writer.uint32(32).bool(message.pinned);
     }
     return writer;
@@ -386,13 +484,57 @@ export const Code = {
     }
     return message;
   },
+  fromJSON(object: any): Code {
+    const obj = createBaseCode();
+    if (isSet(object.codeId)) obj.codeId = BigInt(object.codeId.toString());
+    if (isSet(object.codeInfo)) obj.codeInfo = CodeInfo.fromJSON(object.codeInfo);
+    if (isSet(object.codeBytes)) obj.codeBytes = bytesFromBase64(object.codeBytes);
+    if (isSet(object.pinned)) obj.pinned = Boolean(object.pinned);
+    return obj;
+  },
+  toJSON(message: Code): JsonSafe<Code> {
+    const obj: any = {};
+    message.codeId !== undefined && (obj.codeId = (message.codeId || BigInt(0)).toString());
+    message.codeInfo !== undefined && (obj.codeInfo = message.codeInfo ? CodeInfo.toJSON(message.codeInfo) : undefined);
+    message.codeBytes !== undefined && (obj.codeBytes = base64FromBytes(message.codeBytes !== undefined ? message.codeBytes : new Uint8Array()));
+    message.pinned !== undefined && (obj.pinned = message.pinned);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Code>): Code {
     const message = createBaseCode();
-    message.codeId = object.codeId !== undefined && object.codeId !== null ? BigInt(object.codeId.toString()) : BigInt(0);
-    message.codeInfo = object.codeInfo !== undefined && object.codeInfo !== null ? CodeInfo.fromPartial(object.codeInfo) : undefined;
+    if (object.codeId !== undefined && object.codeId !== null) {
+      message.codeId = BigInt(object.codeId.toString());
+    }
+    if (object.codeInfo !== undefined && object.codeInfo !== null) {
+      message.codeInfo = CodeInfo.fromPartial(object.codeInfo);
+    }
     message.codeBytes = object.codeBytes ?? new Uint8Array();
     message.pinned = object.pinned ?? false;
     return message;
+  },
+  fromSDK(object: CodeSDKType): Code {
+    return {
+      codeId: object?.code_id,
+      codeInfo: object.code_info ? CodeInfo.fromSDK(object.code_info) : undefined,
+      codeBytes: object?.code_bytes,
+      pinned: object?.pinned
+    };
+  },
+  fromSDKJSON(object: any): CodeSDKType {
+    return {
+      code_id: isSet(object.code_id) ? BigInt(object.code_id.toString()) : BigInt(0),
+      code_info: isSet(object.code_info) ? CodeInfo.fromSDKJSON(object.code_info) : undefined,
+      code_bytes: isSet(object.code_bytes) ? bytesFromBase64(object.code_bytes) : new Uint8Array(),
+      pinned: isSet(object.pinned) ? Boolean(object.pinned) : false
+    };
+  },
+  toSDK(message: Code): CodeSDKType {
+    const obj: any = {};
+    obj.code_id = message.codeId;
+    message.codeInfo !== undefined && (obj.code_info = message.codeInfo ? CodeInfo.toSDK(message.codeInfo) : undefined);
+    obj.code_bytes = message.codeBytes;
+    obj.pinned = message.pinned;
+    return obj;
   },
   fromAmino(object: CodeAmino): Code {
     const message = createBaseCode();
@@ -449,9 +591,8 @@ function createBaseContract(): Contract {
 }
 export const Contract = {
   typeUrl: "/cosmwasm.wasm.v1.Contract",
-  aminoType: "wasm/Contract",
   encode(message: Contract, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contractAddress !== "") {
+    if (message.contractAddress !== undefined) {
       writer.uint32(10).string(message.contractAddress);
     }
     if (message.contractInfo !== undefined) {
@@ -485,12 +626,57 @@ export const Contract = {
     }
     return message;
   },
+  fromJSON(object: any): Contract {
+    const obj = createBaseContract();
+    if (isSet(object.contractAddress)) obj.contractAddress = String(object.contractAddress);
+    if (isSet(object.contractInfo)) obj.contractInfo = ContractInfo.fromJSON(object.contractInfo);
+    if (Array.isArray(object?.contractState)) obj.contractState = object.contractState.map((e: any) => Model.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Contract): JsonSafe<Contract> {
+    const obj: any = {};
+    message.contractAddress !== undefined && (obj.contractAddress = message.contractAddress);
+    message.contractInfo !== undefined && (obj.contractInfo = message.contractInfo ? ContractInfo.toJSON(message.contractInfo) : undefined);
+    if (message.contractState) {
+      obj.contractState = message.contractState.map(e => e ? Model.toJSON(e) : undefined);
+    } else {
+      obj.contractState = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Contract>): Contract {
     const message = createBaseContract();
     message.contractAddress = object.contractAddress ?? "";
-    message.contractInfo = object.contractInfo !== undefined && object.contractInfo !== null ? ContractInfo.fromPartial(object.contractInfo) : undefined;
+    if (object.contractInfo !== undefined && object.contractInfo !== null) {
+      message.contractInfo = ContractInfo.fromPartial(object.contractInfo);
+    }
     message.contractState = object.contractState?.map(e => Model.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ContractSDKType): Contract {
+    return {
+      contractAddress: object?.contract_address,
+      contractInfo: object.contract_info ? ContractInfo.fromSDK(object.contract_info) : undefined,
+      contractState: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ContractSDKType {
+    return {
+      contract_address: isSet(object.contract_address) ? String(object.contract_address) : "",
+      contract_info: isSet(object.contract_info) ? ContractInfo.fromSDKJSON(object.contract_info) : undefined,
+      contract_state: Array.isArray(object?.contract_state) ? object.contract_state.map((e: any) => Model.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Contract): ContractSDKType {
+    const obj: any = {};
+    obj.contract_address = message.contractAddress;
+    message.contractInfo !== undefined && (obj.contract_info = message.contractInfo ? ContractInfo.toSDK(message.contractInfo) : undefined);
+    if (message.contractState) {
+      obj.contract_state = message.contractState.map(e => e ? Model.toSDK(e) : undefined);
+    } else {
+      obj.contract_state = [];
+    }
+    return obj;
   },
   fromAmino(object: ContractAmino): Contract {
     const message = createBaseContract();
@@ -544,12 +730,11 @@ function createBaseSequence(): Sequence {
 }
 export const Sequence = {
   typeUrl: "/cosmwasm.wasm.v1.Sequence",
-  aminoType: "wasm/Sequence",
   encode(message: Sequence, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.idKey.length !== 0) {
       writer.uint32(10).bytes(message.idKey);
     }
-    if (message.value !== BigInt(0)) {
+    if (message.value !== undefined) {
       writer.uint32(16).uint64(message.value);
     }
     return writer;
@@ -574,11 +759,43 @@ export const Sequence = {
     }
     return message;
   },
+  fromJSON(object: any): Sequence {
+    const obj = createBaseSequence();
+    if (isSet(object.idKey)) obj.idKey = bytesFromBase64(object.idKey);
+    if (isSet(object.value)) obj.value = BigInt(object.value.toString());
+    return obj;
+  },
+  toJSON(message: Sequence): JsonSafe<Sequence> {
+    const obj: any = {};
+    message.idKey !== undefined && (obj.idKey = base64FromBytes(message.idKey !== undefined ? message.idKey : new Uint8Array()));
+    message.value !== undefined && (obj.value = (message.value || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Sequence>): Sequence {
     const message = createBaseSequence();
     message.idKey = object.idKey ?? new Uint8Array();
-    message.value = object.value !== undefined && object.value !== null ? BigInt(object.value.toString()) : BigInt(0);
+    if (object.value !== undefined && object.value !== null) {
+      message.value = BigInt(object.value.toString());
+    }
     return message;
+  },
+  fromSDK(object: SequenceSDKType): Sequence {
+    return {
+      idKey: object?.id_key,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): SequenceSDKType {
+    return {
+      id_key: isSet(object.id_key) ? bytesFromBase64(object.id_key) : new Uint8Array(),
+      value: isSet(object.value) ? BigInt(object.value.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Sequence): SequenceSDKType {
+    const obj: any = {};
+    obj.id_key = message.idKey;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: SequenceAmino): Sequence {
     const message = createBaseSequence();

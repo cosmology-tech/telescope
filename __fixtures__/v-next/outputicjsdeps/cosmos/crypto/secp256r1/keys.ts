@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.crypto.secp256r1";
 /** PubKey defines a secp256r1 ECDSA public key. */
 export interface PubKey {
   /**
@@ -13,16 +15,8 @@ export interface PubKeyProtoMsg {
   value: Uint8Array;
 }
 /** PubKey defines a secp256r1 ECDSA public key. */
-export interface PubKeyAmino {
-  /**
-   * Point on secp256r1 curve in a compressed representation as specified in section
-   * 4.3.6 of ANSI X9.62: https://webstore.ansi.org/standards/ascx9/ansix9621998
-   */
-  key: string;
-}
-export interface PubKeyAminoMsg {
-  type: "cosmos-sdk/PubKey";
-  value: PubKeyAmino;
+export interface PubKeySDKType {
+  key: Uint8Array;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
 export interface PrivKey {
@@ -34,13 +28,8 @@ export interface PrivKeyProtoMsg {
   value: Uint8Array;
 }
 /** PrivKey defines a secp256r1 ECDSA private key. */
-export interface PrivKeyAmino {
-  /** secret number serialized using big-endian encoding */
-  secret: string;
-}
-export interface PrivKeyAminoMsg {
-  type: "cosmos-sdk/PrivKey";
-  value: PrivKeyAmino;
+export interface PrivKeySDKType {
+  secret: Uint8Array;
 }
 function createBasePubKey(): PubKey {
   return {
@@ -49,7 +38,6 @@ function createBasePubKey(): PubKey {
 }
 export const PubKey = {
   typeUrl: "/cosmos.crypto.secp256r1.PubKey",
-  aminoType: "cosmos-sdk/PubKey",
   encode(message: PubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -73,10 +61,35 @@ export const PubKey = {
     }
     return message;
   },
+  fromJSON(object: any): PubKey {
+    const obj = createBasePubKey();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    return obj;
+  },
+  toJSON(message: PubKey): JsonSafe<PubKey> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: PubKeySDKType): PubKey {
+    return {
+      key: object?.key
+    };
+  },
+  fromSDKJSON(object: any): PubKeySDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
+  },
+  toSDK(message: PubKey): PubKeySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    return obj;
   },
   fromAmino(object: PubKeyAmino): PubKey {
     const message = createBasePubKey();
@@ -119,7 +132,6 @@ function createBasePrivKey(): PrivKey {
 }
 export const PrivKey = {
   typeUrl: "/cosmos.crypto.secp256r1.PrivKey",
-  aminoType: "cosmos-sdk/PrivKey",
   encode(message: PrivKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.secret.length !== 0) {
       writer.uint32(10).bytes(message.secret);
@@ -143,10 +155,35 @@ export const PrivKey = {
     }
     return message;
   },
+  fromJSON(object: any): PrivKey {
+    const obj = createBasePrivKey();
+    if (isSet(object.secret)) obj.secret = bytesFromBase64(object.secret);
+    return obj;
+  },
+  toJSON(message: PrivKey): JsonSafe<PrivKey> {
+    const obj: any = {};
+    message.secret !== undefined && (obj.secret = base64FromBytes(message.secret !== undefined ? message.secret : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
     message.secret = object.secret ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: PrivKeySDKType): PrivKey {
+    return {
+      secret: object?.secret
+    };
+  },
+  fromSDKJSON(object: any): PrivKeySDKType {
+    return {
+      secret: isSet(object.secret) ? bytesFromBase64(object.secret) : new Uint8Array()
+    };
+  },
+  toSDK(message: PrivKey): PrivKeySDKType {
+    const obj: any = {};
+    obj.secret = message.secret;
+    return obj;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     const message = createBasePrivKey();

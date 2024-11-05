@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.crypto.ed25519";
 /**
  * PubKey is an ed25519 public key for handling Tendermint keys in SDK.
  * It's needed for Any serialization and SDK compatibility.
@@ -21,12 +23,8 @@ export interface PubKeyProtoMsg {
  * ADR-28. Nevertheless, you will like to use ed25519 in app user level
  * then you must create a new proto message and follow ADR-28 for Address construction.
  */
-export interface PubKeyAmino {
-  key: string;
-}
-export interface PubKeyAminoMsg {
-  type: "cosmos-sdk/PubKey";
-  value: PubKeyAmino;
+export interface PubKeySDKType {
+  key: Uint8Array;
 }
 /**
  * Deprecated: PrivKey defines a ed25519 private key.
@@ -43,12 +41,8 @@ export interface PrivKeyProtoMsg {
  * Deprecated: PrivKey defines a ed25519 private key.
  * NOTE: ed25519 keys must not be used in SDK apps except in a tendermint validator context.
  */
-export interface PrivKeyAmino {
-  key: string;
-}
-export interface PrivKeyAminoMsg {
-  type: "cosmos-sdk/PrivKey";
-  value: PrivKeyAmino;
+export interface PrivKeySDKType {
+  key: Uint8Array;
 }
 function createBasePubKey(): PubKey {
   return {
@@ -57,7 +51,6 @@ function createBasePubKey(): PubKey {
 }
 export const PubKey = {
   typeUrl: "/cosmos.crypto.ed25519.PubKey",
-  aminoType: "cosmos-sdk/PubKey",
   encode(message: PubKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -81,10 +74,35 @@ export const PubKey = {
     }
     return message;
   },
+  fromJSON(object: any): PubKey {
+    const obj = createBasePubKey();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    return obj;
+  },
+  toJSON(message: PubKey): JsonSafe<PubKey> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<PubKey>): PubKey {
     const message = createBasePubKey();
     message.key = object.key ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: PubKeySDKType): PubKey {
+    return {
+      key: object?.key
+    };
+  },
+  fromSDKJSON(object: any): PubKeySDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
+  },
+  toSDK(message: PubKey): PubKeySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    return obj;
   },
   fromAmino(object: PubKeyAmino): PubKey {
     const message = createBasePubKey();
@@ -127,7 +145,6 @@ function createBasePrivKey(): PrivKey {
 }
 export const PrivKey = {
   typeUrl: "/cosmos.crypto.ed25519.PrivKey",
-  aminoType: "cosmos-sdk/PrivKey",
   encode(message: PrivKey, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.key.length !== 0) {
       writer.uint32(10).bytes(message.key);
@@ -151,10 +168,35 @@ export const PrivKey = {
     }
     return message;
   },
+  fromJSON(object: any): PrivKey {
+    const obj = createBasePrivKey();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    return obj;
+  },
+  toJSON(message: PrivKey): JsonSafe<PrivKey> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<PrivKey>): PrivKey {
     const message = createBasePrivKey();
     message.key = object.key ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: PrivKeySDKType): PrivKey {
+    return {
+      key: object?.key
+    };
+  },
+  fromSDKJSON(object: any): PrivKeySDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array()
+    };
+  },
+  toSDK(message: PrivKey): PrivKeySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    return obj;
   },
   fromAmino(object: PrivKeyAmino): PrivKey {
     const message = createBasePrivKey();

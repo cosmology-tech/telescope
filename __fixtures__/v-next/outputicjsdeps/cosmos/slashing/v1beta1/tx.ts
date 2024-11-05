@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.slashing.v1beta1";
 /** MsgUnjail defines the Msg/Unjail request type */
 export interface MsgUnjail {
   validatorAddr: string;
@@ -9,12 +11,8 @@ export interface MsgUnjailProtoMsg {
   value: Uint8Array;
 }
 /** MsgUnjail defines the Msg/Unjail request type */
-export interface MsgUnjailAmino {
+export interface MsgUnjailSDKType {
   validator_addr: string;
-}
-export interface MsgUnjailAminoMsg {
-  type: "cosmos-sdk/MsgUnjail";
-  value: MsgUnjailAmino;
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
 export interface MsgUnjailResponse {}
@@ -23,11 +21,7 @@ export interface MsgUnjailResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgUnjailResponse defines the Msg/Unjail response type */
-export interface MsgUnjailResponseAmino {}
-export interface MsgUnjailResponseAminoMsg {
-  type: "cosmos-sdk/MsgUnjailResponse";
-  value: MsgUnjailResponseAmino;
-}
+export interface MsgUnjailResponseSDKType {}
 function createBaseMsgUnjail(): MsgUnjail {
   return {
     validatorAddr: ""
@@ -35,9 +29,8 @@ function createBaseMsgUnjail(): MsgUnjail {
 }
 export const MsgUnjail = {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjail",
-  aminoType: "cosmos-sdk/MsgUnjail",
   encode(message: MsgUnjail, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.validatorAddr !== "") {
+    if (message.validatorAddr !== undefined) {
       writer.uint32(10).string(message.validatorAddr);
     }
     return writer;
@@ -59,10 +52,35 @@ export const MsgUnjail = {
     }
     return message;
   },
+  fromJSON(object: any): MsgUnjail {
+    const obj = createBaseMsgUnjail();
+    if (isSet(object.validatorAddr)) obj.validatorAddr = String(object.validatorAddr);
+    return obj;
+  },
+  toJSON(message: MsgUnjail): JsonSafe<MsgUnjail> {
+    const obj: any = {};
+    message.validatorAddr !== undefined && (obj.validatorAddr = message.validatorAddr);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgUnjail>): MsgUnjail {
     const message = createBaseMsgUnjail();
     message.validatorAddr = object.validatorAddr ?? "";
     return message;
+  },
+  fromSDK(object: MsgUnjailSDKType): MsgUnjail {
+    return {
+      validatorAddr: object?.validator_addr
+    };
+  },
+  fromSDKJSON(object: any): MsgUnjailSDKType {
+    return {
+      validator_addr: isSet(object.validator_addr) ? String(object.validator_addr) : ""
+    };
+  },
+  toSDK(message: MsgUnjail): MsgUnjailSDKType {
+    const obj: any = {};
+    obj.validator_addr = message.validatorAddr;
+    return obj;
   },
   fromAmino(object: MsgUnjailAmino): MsgUnjail {
     const message = createBaseMsgUnjail();
@@ -103,7 +121,6 @@ function createBaseMsgUnjailResponse(): MsgUnjailResponse {
 }
 export const MsgUnjailResponse = {
   typeUrl: "/cosmos.slashing.v1beta1.MsgUnjailResponse",
-  aminoType: "cosmos-sdk/MsgUnjailResponse",
   encode(_: MsgUnjailResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -121,9 +138,27 @@ export const MsgUnjailResponse = {
     }
     return message;
   },
+  fromJSON(_: any): MsgUnjailResponse {
+    const obj = createBaseMsgUnjailResponse();
+    return obj;
+  },
+  toJSON(_: MsgUnjailResponse): JsonSafe<MsgUnjailResponse> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<MsgUnjailResponse>): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();
     return message;
+  },
+  fromSDK(_: MsgUnjailResponseSDKType): MsgUnjailResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgUnjailResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgUnjailResponse): MsgUnjailResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgUnjailResponseAmino): MsgUnjailResponse {
     const message = createBaseMsgUnjailResponse();

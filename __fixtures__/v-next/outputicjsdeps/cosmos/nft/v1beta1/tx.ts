@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.nft.v1beta1";
 /** MsgSend represents a message to send a nft from one account to another account. */
 export interface MsgSend {
   /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
@@ -16,19 +18,11 @@ export interface MsgSendProtoMsg {
   value: Uint8Array;
 }
 /** MsgSend represents a message to send a nft from one account to another account. */
-export interface MsgSendAmino {
-  /** class_id defines the unique identifier of the nft classification, similar to the contract address of ERC721 */
+export interface MsgSendSDKType {
   class_id: string;
-  /** id defines the unique identification of nft */
   id: string;
-  /** sender is the address of the owner of nft */
   sender: string;
-  /** receiver is the receiver address of nft */
   receiver: string;
-}
-export interface MsgSendAminoMsg {
-  type: "cosmos-sdk/MsgNFTSend";
-  value: MsgSendAmino;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
 export interface MsgSendResponse {}
@@ -37,11 +31,7 @@ export interface MsgSendResponseProtoMsg {
   value: Uint8Array;
 }
 /** MsgSendResponse defines the Msg/Send response type. */
-export interface MsgSendResponseAmino {}
-export interface MsgSendResponseAminoMsg {
-  type: "cosmos-sdk/MsgSendResponse";
-  value: MsgSendResponseAmino;
-}
+export interface MsgSendResponseSDKType {}
 function createBaseMsgSend(): MsgSend {
   return {
     classId: "",
@@ -52,18 +42,17 @@ function createBaseMsgSend(): MsgSend {
 }
 export const MsgSend = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSend",
-  aminoType: "cosmos-sdk/MsgNFTSend",
   encode(message: MsgSend, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
-    if (message.receiver !== "") {
+    if (message.receiver !== undefined) {
       writer.uint32(34).string(message.receiver);
     }
     return writer;
@@ -94,6 +83,22 @@ export const MsgSend = {
     }
     return message;
   },
+  fromJSON(object: any): MsgSend {
+    const obj = createBaseMsgSend();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.receiver)) obj.receiver = String(object.receiver);
+    return obj;
+  },
+  toJSON(message: MsgSend): JsonSafe<MsgSend> {
+    const obj: any = {};
+    message.classId !== undefined && (obj.classId = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.receiver !== undefined && (obj.receiver = message.receiver);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgSend>): MsgSend {
     const message = createBaseMsgSend();
     message.classId = object.classId ?? "";
@@ -101,6 +106,30 @@ export const MsgSend = {
     message.sender = object.sender ?? "";
     message.receiver = object.receiver ?? "";
     return message;
+  },
+  fromSDK(object: MsgSendSDKType): MsgSend {
+    return {
+      classId: object?.class_id,
+      id: object?.id,
+      sender: object?.sender,
+      receiver: object?.receiver
+    };
+  },
+  fromSDKJSON(object: any): MsgSendSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      receiver: isSet(object.receiver) ? String(object.receiver) : ""
+    };
+  },
+  toSDK(message: MsgSend): MsgSendSDKType {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.sender = message.sender;
+    obj.receiver = message.receiver;
+    return obj;
   },
   fromAmino(object: MsgSendAmino): MsgSend {
     const message = createBaseMsgSend();
@@ -153,7 +182,6 @@ function createBaseMsgSendResponse(): MsgSendResponse {
 }
 export const MsgSendResponse = {
   typeUrl: "/cosmos.nft.v1beta1.MsgSendResponse",
-  aminoType: "cosmos-sdk/MsgSendResponse",
   encode(_: MsgSendResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -171,9 +199,27 @@ export const MsgSendResponse = {
     }
     return message;
   },
+  fromJSON(_: any): MsgSendResponse {
+    const obj = createBaseMsgSendResponse();
+    return obj;
+  },
+  toJSON(_: MsgSendResponse): JsonSafe<MsgSendResponse> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<MsgSendResponse>): MsgSendResponse {
     const message = createBaseMsgSendResponse();
     return message;
+  },
+  fromSDK(_: MsgSendResponseSDKType): MsgSendResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgSendResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgSendResponse): MsgSendResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgSendResponseAmino): MsgSendResponse {
     const message = createBaseMsgSendResponse();

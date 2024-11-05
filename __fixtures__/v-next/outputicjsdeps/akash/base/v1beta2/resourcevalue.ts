@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.base.v1beta2";
 /** Unit stores cpu, memory and storage metrics */
 export interface ResourceValue {
   val: Uint8Array;
@@ -9,12 +11,8 @@ export interface ResourceValueProtoMsg {
   value: Uint8Array;
 }
 /** Unit stores cpu, memory and storage metrics */
-export interface ResourceValueAmino {
-  val: string;
-}
-export interface ResourceValueAminoMsg {
-  type: "/akash.base.v1beta2.ResourceValue";
-  value: ResourceValueAmino;
+export interface ResourceValueSDKType {
+  val: Uint8Array;
 }
 function createBaseResourceValue(): ResourceValue {
   return {
@@ -46,10 +44,35 @@ export const ResourceValue = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<ResourceValue>): ResourceValue {
+  fromJSON(object: any): ResourceValue {
+    const obj = createBaseResourceValue();
+    if (isSet(object.val)) obj.val = bytesFromBase64(object.val);
+    return obj;
+  },
+  toJSON(message: ResourceValue): JsonSafe<ResourceValue> {
+    const obj: any = {};
+    message.val !== undefined && (obj.val = base64FromBytes(message.val !== undefined ? message.val : new Uint8Array()));
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<ResourceValue>, I>>(object: I): ResourceValue {
     const message = createBaseResourceValue();
     message.val = object.val ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: ResourceValueSDKType): ResourceValue {
+    return {
+      val: object?.val
+    };
+  },
+  fromSDKJSON(object: any): ResourceValueSDKType {
+    return {
+      val: isSet(object.val) ? bytesFromBase64(object.val) : new Uint8Array()
+    };
+  },
+  toSDK(message: ResourceValue): ResourceValueSDKType {
+    const obj: any = {};
+    obj.val = message.val;
+    return obj;
   },
   fromAmino(object: ResourceValueAmino): ResourceValue {
     const message = createBaseResourceValue();
@@ -65,6 +88,12 @@ export const ResourceValue = {
   },
   fromAminoMsg(object: ResourceValueAminoMsg): ResourceValue {
     return ResourceValue.fromAmino(object.value);
+  },
+  toAminoMsg(message: ResourceValue): ResourceValueAminoMsg {
+    return {
+      type: "akash/base/v1beta2/resource-value",
+      value: ResourceValue.toAmino(message)
+    };
   },
   fromProtoMsg(message: ResourceValueProtoMsg): ResourceValue {
     return ResourceValue.decode(message.value);

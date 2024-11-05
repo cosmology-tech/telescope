@@ -1,6 +1,8 @@
-import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.escrow.v1beta1";
 /** State stores state for an escrow account */
 export enum Account_State {
   /** invalid - AccountStateInvalid is an invalid state */
@@ -13,7 +15,7 @@ export enum Account_State {
   overdrawn = 3,
   UNRECOGNIZED = -1,
 }
-export const Account_StateAmino = Account_State;
+export const Account_StateSDKType = Account_State;
 export function account_StateFromJSON(object: any): Account_State {
   switch (object) {
     case 0:
@@ -61,7 +63,7 @@ export enum Payment_State {
   overdrawn = 3,
   UNRECOGNIZED = -1,
 }
-export const Payment_StateAmino = Payment_State;
+export const Payment_StateSDKType = Payment_State;
 export function payment_StateFromJSON(object: any): Payment_State {
   switch (object) {
     case 0:
@@ -107,13 +109,9 @@ export interface AccountIDProtoMsg {
   value: Uint8Array;
 }
 /** AccountID is the account identifier */
-export interface AccountIDAmino {
+export interface AccountIDSDKType {
   scope: string;
   xid: string;
-}
-export interface AccountIDAminoMsg {
-  type: "/akash.escrow.v1beta1.AccountID";
-  value: AccountIDAmino;
 }
 /** Account stores state for an escrow account */
 export interface Account {
@@ -135,23 +133,13 @@ export interface AccountProtoMsg {
   value: Uint8Array;
 }
 /** Account stores state for an escrow account */
-export interface AccountAmino {
-  /** unique identifier for this escrow account */
-  id: AccountIDAmino;
-  /** bech32 encoded account address of the owner of this escrow account */
+export interface AccountSDKType {
+  id: AccountIDSDKType;
   owner: string;
-  /** current state of this escrow account */
   state: Account_State;
-  /** unspent coins received from the owner's wallet */
-  balance: CoinAmino;
-  /** total coins spent by this account */
-  transferred: CoinAmino;
-  /** block height at which this account was last settled */
-  settled_at: string;
-}
-export interface AccountAminoMsg {
-  type: "/akash.escrow.v1beta1.Account";
-  value: AccountAmino;
+  balance: CoinSDKType;
+  transferred: CoinSDKType;
+  settled_at: bigint;
 }
 /** Payment stores state for a payment */
 export interface Payment {
@@ -168,18 +156,14 @@ export interface PaymentProtoMsg {
   value: Uint8Array;
 }
 /** Payment stores state for a payment */
-export interface PaymentAmino {
-  account_id: AccountIDAmino;
+export interface PaymentSDKType {
+  account_id: AccountIDSDKType;
   payment_id: string;
   owner: string;
   state: Payment_State;
-  rate: CoinAmino;
-  balance: CoinAmino;
-  withdrawn: CoinAmino;
-}
-export interface PaymentAminoMsg {
-  type: "/akash.escrow.v1beta1.Payment";
-  value: PaymentAmino;
+  rate: CoinSDKType;
+  balance: CoinSDKType;
+  withdrawn: CoinSDKType;
 }
 function createBaseAccountID(): AccountID {
   return {
@@ -190,10 +174,10 @@ function createBaseAccountID(): AccountID {
 export const AccountID = {
   typeUrl: "/akash.escrow.v1beta1.AccountID",
   encode(message: AccountID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
     return writer;
@@ -218,11 +202,41 @@ export const AccountID = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<AccountID>): AccountID {
+  fromJSON(object: any): AccountID {
+    const obj = createBaseAccountID();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    return obj;
+  },
+  toJSON(message: AccountID): JsonSafe<AccountID> {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<AccountID>, I>>(object: I): AccountID {
     const message = createBaseAccountID();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     return message;
+  },
+  fromSDK(object: AccountIDSDKType): AccountID {
+    return {
+      scope: object?.scope,
+      xid: object?.xid
+    };
+  },
+  fromSDKJSON(object: any): AccountIDSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : ""
+    };
+  },
+  toSDK(message: AccountID): AccountIDSDKType {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    return obj;
   },
   fromAmino(object: AccountIDAmino): AccountID {
     const message = createBaseAccountID();
@@ -242,6 +256,12 @@ export const AccountID = {
   },
   fromAminoMsg(object: AccountIDAminoMsg): AccountID {
     return AccountID.fromAmino(object.value);
+  },
+  toAminoMsg(message: AccountID): AccountIDAminoMsg {
+    return {
+      type: "akash/escrow/account-i-d",
+      value: AccountID.toAmino(message)
+    };
   },
   fromProtoMsg(message: AccountIDProtoMsg): AccountID {
     return AccountID.decode(message.value);
@@ -272,7 +292,7 @@ export const Account = {
     if (message.id !== undefined) {
       AccountID.encode(message.id, writer.uint32(10).fork()).ldelim();
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(18).string(message.owner);
     }
     if (message.state !== 0) {
@@ -284,7 +304,7 @@ export const Account = {
     if (message.transferred !== undefined) {
       Coin.encode(message.transferred, writer.uint32(42).fork()).ldelim();
     }
-    if (message.settledAt !== BigInt(0)) {
+    if (message.settledAt !== undefined) {
       writer.uint32(48).int64(message.settledAt);
     }
     return writer;
@@ -321,15 +341,73 @@ export const Account = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<Account>): Account {
+  fromJSON(object: any): Account {
+    const obj = createBaseAccount();
+    if (isSet(object.id)) obj.id = AccountID.fromJSON(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = account_StateFromJSON(object.state);
+    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
+    if (isSet(object.transferred)) obj.transferred = Coin.fromJSON(object.transferred);
+    if (isSet(object.settledAt)) obj.settledAt = BigInt(object.settledAt.toString());
+    return obj;
+  },
+  toJSON(message: Account): JsonSafe<Account> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? AccountID.toJSON(message.id) : undefined);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
+    message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toJSON(message.transferred) : undefined);
+    message.settledAt !== undefined && (obj.settledAt = (message.settledAt || BigInt(0)).toString());
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<Account>, I>>(object: I): Account {
     const message = createBaseAccount();
-    message.id = object.id !== undefined && object.id !== null ? AccountID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = AccountID.fromPartial(object.id);
+    }
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
-    message.transferred = object.transferred !== undefined && object.transferred !== null ? Coin.fromPartial(object.transferred) : undefined;
-    message.settledAt = object.settledAt !== undefined && object.settledAt !== null ? BigInt(object.settledAt.toString()) : BigInt(0);
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
+    if (object.transferred !== undefined && object.transferred !== null) {
+      message.transferred = Coin.fromPartial(object.transferred);
+    }
+    if (object.settledAt !== undefined && object.settledAt !== null) {
+      message.settledAt = BigInt(object.settledAt.toString());
+    }
     return message;
+  },
+  fromSDK(object: AccountSDKType): Account {
+    return {
+      id: object.id ? AccountID.fromSDK(object.id) : undefined,
+      owner: object?.owner,
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
+      transferred: object.transferred ? Coin.fromSDK(object.transferred) : undefined,
+      settledAt: object?.settled_at
+    };
+  },
+  fromSDKJSON(object: any): AccountSDKType {
+    return {
+      id: isSet(object.id) ? AccountID.fromSDKJSON(object.id) : undefined,
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? account_StateFromJSON(object.state) : -1,
+      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
+      transferred: isSet(object.transferred) ? Coin.fromSDKJSON(object.transferred) : undefined,
+      settled_at: isSet(object.settled_at) ? BigInt(object.settled_at.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Account): AccountSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? AccountID.toSDK(message.id) : undefined);
+    obj.owner = message.owner;
+    message.state !== undefined && (obj.state = account_StateToJSON(message.state));
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
+    message.transferred !== undefined && (obj.transferred = message.transferred ? Coin.toSDK(message.transferred) : undefined);
+    obj.settled_at = message.settledAt;
+    return obj;
   },
   fromAmino(object: AccountAmino): Account {
     const message = createBaseAccount();
@@ -366,6 +444,12 @@ export const Account = {
   fromAminoMsg(object: AccountAminoMsg): Account {
     return Account.fromAmino(object.value);
   },
+  toAminoMsg(message: Account): AccountAminoMsg {
+    return {
+      type: "akash/escrow/account",
+      value: Account.toAmino(message)
+    };
+  },
   fromProtoMsg(message: AccountProtoMsg): Account {
     return Account.decode(message.value);
   },
@@ -396,10 +480,10 @@ export const Payment = {
     if (message.accountId !== undefined) {
       AccountID.encode(message.accountId, writer.uint32(10).fork()).ldelim();
     }
-    if (message.paymentId !== "") {
+    if (message.paymentId !== undefined) {
       writer.uint32(18).string(message.paymentId);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
     if (message.state !== 0) {
@@ -451,16 +535,79 @@ export const Payment = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<Payment>): Payment {
+  fromJSON(object: any): Payment {
+    const obj = createBasePayment();
+    if (isSet(object.accountId)) obj.accountId = AccountID.fromJSON(object.accountId);
+    if (isSet(object.paymentId)) obj.paymentId = String(object.paymentId);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = payment_StateFromJSON(object.state);
+    if (isSet(object.rate)) obj.rate = Coin.fromJSON(object.rate);
+    if (isSet(object.balance)) obj.balance = Coin.fromJSON(object.balance);
+    if (isSet(object.withdrawn)) obj.withdrawn = Coin.fromJSON(object.withdrawn);
+    return obj;
+  },
+  toJSON(message: Payment): JsonSafe<Payment> {
+    const obj: any = {};
+    message.accountId !== undefined && (obj.accountId = message.accountId ? AccountID.toJSON(message.accountId) : undefined);
+    message.paymentId !== undefined && (obj.paymentId = message.paymentId);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
+    message.rate !== undefined && (obj.rate = message.rate ? Coin.toJSON(message.rate) : undefined);
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toJSON(message.balance) : undefined);
+    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toJSON(message.withdrawn) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<Payment>, I>>(object: I): Payment {
     const message = createBasePayment();
-    message.accountId = object.accountId !== undefined && object.accountId !== null ? AccountID.fromPartial(object.accountId) : undefined;
+    if (object.accountId !== undefined && object.accountId !== null) {
+      message.accountId = AccountID.fromPartial(object.accountId);
+    }
     message.paymentId = object.paymentId ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? 0;
-    message.rate = object.rate !== undefined && object.rate !== null ? Coin.fromPartial(object.rate) : undefined;
-    message.balance = object.balance !== undefined && object.balance !== null ? Coin.fromPartial(object.balance) : undefined;
-    message.withdrawn = object.withdrawn !== undefined && object.withdrawn !== null ? Coin.fromPartial(object.withdrawn) : undefined;
+    if (object.rate !== undefined && object.rate !== null) {
+      message.rate = Coin.fromPartial(object.rate);
+    }
+    if (object.balance !== undefined && object.balance !== null) {
+      message.balance = Coin.fromPartial(object.balance);
+    }
+    if (object.withdrawn !== undefined && object.withdrawn !== null) {
+      message.withdrawn = Coin.fromPartial(object.withdrawn);
+    }
     return message;
+  },
+  fromSDK(object: PaymentSDKType): Payment {
+    return {
+      accountId: object.account_id ? AccountID.fromSDK(object.account_id) : undefined,
+      paymentId: object?.payment_id,
+      owner: object?.owner,
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
+      rate: object.rate ? Coin.fromSDK(object.rate) : undefined,
+      balance: object.balance ? Coin.fromSDK(object.balance) : undefined,
+      withdrawn: object.withdrawn ? Coin.fromSDK(object.withdrawn) : undefined
+    };
+  },
+  fromSDKJSON(object: any): PaymentSDKType {
+    return {
+      account_id: isSet(object.account_id) ? AccountID.fromSDKJSON(object.account_id) : undefined,
+      payment_id: isSet(object.payment_id) ? String(object.payment_id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? payment_StateFromJSON(object.state) : -1,
+      rate: isSet(object.rate) ? Coin.fromSDKJSON(object.rate) : undefined,
+      balance: isSet(object.balance) ? Coin.fromSDKJSON(object.balance) : undefined,
+      withdrawn: isSet(object.withdrawn) ? Coin.fromSDKJSON(object.withdrawn) : undefined
+    };
+  },
+  toSDK(message: Payment): PaymentSDKType {
+    const obj: any = {};
+    message.accountId !== undefined && (obj.account_id = message.accountId ? AccountID.toSDK(message.accountId) : undefined);
+    obj.payment_id = message.paymentId;
+    obj.owner = message.owner;
+    message.state !== undefined && (obj.state = payment_StateToJSON(message.state));
+    message.rate !== undefined && (obj.rate = message.rate ? Coin.toSDK(message.rate) : undefined);
+    message.balance !== undefined && (obj.balance = message.balance ? Coin.toSDK(message.balance) : undefined);
+    message.withdrawn !== undefined && (obj.withdrawn = message.withdrawn ? Coin.toSDK(message.withdrawn) : undefined);
+    return obj;
   },
   fromAmino(object: PaymentAmino): Payment {
     const message = createBasePayment();
@@ -500,6 +647,12 @@ export const Payment = {
   },
   fromAminoMsg(object: PaymentAminoMsg): Payment {
     return Payment.fromAmino(object.value);
+  },
+  toAminoMsg(message: Payment): PaymentAminoMsg {
+    return {
+      type: "akash/escrow/payment",
+      value: Payment.toAmino(message)
+    };
   },
   fromProtoMsg(message: PaymentProtoMsg): Payment {
     return Payment.decode(message.value);

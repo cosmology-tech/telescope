@@ -1,6 +1,8 @@
-import { Plan, PlanAmino } from "./upgrade";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Plan, PlanSDKType } from "./upgrade.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.upgrade.v1beta1";
 /**
  * MsgSoftwareUpgrade is the Msg/SoftwareUpgrade request type.
  * 
@@ -21,15 +23,9 @@ export interface MsgSoftwareUpgradeProtoMsg {
  * 
  * Since: cosmos-sdk 0.46
  */
-export interface MsgSoftwareUpgradeAmino {
-  /** authority is the address of the governance account. */
+export interface MsgSoftwareUpgradeSDKType {
   authority: string;
-  /** plan is the upgrade plan. */
-  plan: PlanAmino;
-}
-export interface MsgSoftwareUpgradeAminoMsg {
-  type: "cosmos-sdk/MsgSoftwareUpgrade";
-  value: MsgSoftwareUpgradeAmino;
+  plan: PlanSDKType;
 }
 /**
  * MsgSoftwareUpgradeResponse is the Msg/SoftwareUpgrade response type.
@@ -46,11 +42,7 @@ export interface MsgSoftwareUpgradeResponseProtoMsg {
  * 
  * Since: cosmos-sdk 0.46
  */
-export interface MsgSoftwareUpgradeResponseAmino {}
-export interface MsgSoftwareUpgradeResponseAminoMsg {
-  type: "cosmos-sdk/MsgSoftwareUpgradeResponse";
-  value: MsgSoftwareUpgradeResponseAmino;
-}
+export interface MsgSoftwareUpgradeResponseSDKType {}
 /**
  * MsgCancelUpgrade is the Msg/CancelUpgrade request type.
  * 
@@ -69,13 +61,8 @@ export interface MsgCancelUpgradeProtoMsg {
  * 
  * Since: cosmos-sdk 0.46
  */
-export interface MsgCancelUpgradeAmino {
-  /** authority is the address of the governance account. */
+export interface MsgCancelUpgradeSDKType {
   authority: string;
-}
-export interface MsgCancelUpgradeAminoMsg {
-  type: "cosmos-sdk/MsgCancelUpgrade";
-  value: MsgCancelUpgradeAmino;
 }
 /**
  * MsgCancelUpgradeResponse is the Msg/CancelUpgrade response type.
@@ -92,11 +79,7 @@ export interface MsgCancelUpgradeResponseProtoMsg {
  * 
  * Since: cosmos-sdk 0.46
  */
-export interface MsgCancelUpgradeResponseAmino {}
-export interface MsgCancelUpgradeResponseAminoMsg {
-  type: "cosmos-sdk/MsgCancelUpgradeResponse";
-  value: MsgCancelUpgradeResponseAmino;
-}
+export interface MsgCancelUpgradeResponseSDKType {}
 function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
   return {
     authority: "",
@@ -105,9 +88,8 @@ function createBaseMsgSoftwareUpgrade(): MsgSoftwareUpgrade {
 }
 export const MsgSoftwareUpgrade = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgrade",
-  aminoType: "cosmos-sdk/MsgSoftwareUpgrade",
   encode(message: MsgSoftwareUpgrade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       writer.uint32(10).string(message.authority);
     }
     if (message.plan !== undefined) {
@@ -135,11 +117,43 @@ export const MsgSoftwareUpgrade = {
     }
     return message;
   },
+  fromJSON(object: any): MsgSoftwareUpgrade {
+    const obj = createBaseMsgSoftwareUpgrade();
+    if (isSet(object.authority)) obj.authority = String(object.authority);
+    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
+    return obj;
+  },
+  toJSON(message: MsgSoftwareUpgrade): JsonSafe<MsgSoftwareUpgrade> {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgSoftwareUpgrade>): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
     message.authority = object.authority ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
     return message;
+  },
+  fromSDK(object: MsgSoftwareUpgradeSDKType): MsgSoftwareUpgrade {
+    return {
+      authority: object?.authority,
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MsgSoftwareUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined
+    };
+  },
+  toSDK(message: MsgSoftwareUpgrade): MsgSoftwareUpgradeSDKType {
+    const obj: any = {};
+    obj.authority = message.authority;
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    return obj;
   },
   fromAmino(object: MsgSoftwareUpgradeAmino): MsgSoftwareUpgrade {
     const message = createBaseMsgSoftwareUpgrade();
@@ -184,7 +198,6 @@ function createBaseMsgSoftwareUpgradeResponse(): MsgSoftwareUpgradeResponse {
 }
 export const MsgSoftwareUpgradeResponse = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgSoftwareUpgradeResponse",
-  aminoType: "cosmos-sdk/MsgSoftwareUpgradeResponse",
   encode(_: MsgSoftwareUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -202,9 +215,27 @@ export const MsgSoftwareUpgradeResponse = {
     }
     return message;
   },
+  fromJSON(_: any): MsgSoftwareUpgradeResponse {
+    const obj = createBaseMsgSoftwareUpgradeResponse();
+    return obj;
+  },
+  toJSON(_: MsgSoftwareUpgradeResponse): JsonSafe<MsgSoftwareUpgradeResponse> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<MsgSoftwareUpgradeResponse>): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
     return message;
+  },
+  fromSDK(_: MsgSoftwareUpgradeResponseSDKType): MsgSoftwareUpgradeResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgSoftwareUpgradeResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgSoftwareUpgradeResponse): MsgSoftwareUpgradeResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgSoftwareUpgradeResponseAmino): MsgSoftwareUpgradeResponse {
     const message = createBaseMsgSoftwareUpgradeResponse();
@@ -243,9 +274,8 @@ function createBaseMsgCancelUpgrade(): MsgCancelUpgrade {
 }
 export const MsgCancelUpgrade = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgrade",
-  aminoType: "cosmos-sdk/MsgCancelUpgrade",
   encode(message: MsgCancelUpgrade, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.authority !== "") {
+    if (message.authority !== undefined) {
       writer.uint32(10).string(message.authority);
     }
     return writer;
@@ -267,10 +297,35 @@ export const MsgCancelUpgrade = {
     }
     return message;
   },
+  fromJSON(object: any): MsgCancelUpgrade {
+    const obj = createBaseMsgCancelUpgrade();
+    if (isSet(object.authority)) obj.authority = String(object.authority);
+    return obj;
+  },
+  toJSON(message: MsgCancelUpgrade): JsonSafe<MsgCancelUpgrade> {
+    const obj: any = {};
+    message.authority !== undefined && (obj.authority = message.authority);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgCancelUpgrade>): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
     message.authority = object.authority ?? "";
     return message;
+  },
+  fromSDK(object: MsgCancelUpgradeSDKType): MsgCancelUpgrade {
+    return {
+      authority: object?.authority
+    };
+  },
+  fromSDKJSON(object: any): MsgCancelUpgradeSDKType {
+    return {
+      authority: isSet(object.authority) ? String(object.authority) : ""
+    };
+  },
+  toSDK(message: MsgCancelUpgrade): MsgCancelUpgradeSDKType {
+    const obj: any = {};
+    obj.authority = message.authority;
+    return obj;
   },
   fromAmino(object: MsgCancelUpgradeAmino): MsgCancelUpgrade {
     const message = createBaseMsgCancelUpgrade();
@@ -311,7 +366,6 @@ function createBaseMsgCancelUpgradeResponse(): MsgCancelUpgradeResponse {
 }
 export const MsgCancelUpgradeResponse = {
   typeUrl: "/cosmos.upgrade.v1beta1.MsgCancelUpgradeResponse",
-  aminoType: "cosmos-sdk/MsgCancelUpgradeResponse",
   encode(_: MsgCancelUpgradeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -329,9 +383,27 @@ export const MsgCancelUpgradeResponse = {
     }
     return message;
   },
+  fromJSON(_: any): MsgCancelUpgradeResponse {
+    const obj = createBaseMsgCancelUpgradeResponse();
+    return obj;
+  },
+  toJSON(_: MsgCancelUpgradeResponse): JsonSafe<MsgCancelUpgradeResponse> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<MsgCancelUpgradeResponse>): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();
     return message;
+  },
+  fromSDK(_: MsgCancelUpgradeResponseSDKType): MsgCancelUpgradeResponse {
+    return {};
+  },
+  fromSDKJSON(_: any): MsgCancelUpgradeResponseSDKType {
+    return {};
+  },
+  toSDK(_: MsgCancelUpgradeResponse): MsgCancelUpgradeResponseSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: MsgCancelUpgradeResponseAmino): MsgCancelUpgradeResponse {
     const message = createBaseMsgCancelUpgradeResponse();

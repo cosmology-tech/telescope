@@ -1,7 +1,9 @@
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../base/query/v1beta1/pagination";
-import { Any, AnyAmino } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../base/query/v1beta1/pagination.js";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.evidence.v1beta1";
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
 export interface QueryEvidenceRequest {
   /** evidence_hash defines the hash of the requested evidence. */
@@ -12,13 +14,8 @@ export interface QueryEvidenceRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryEvidenceRequest is the request type for the Query/Evidence RPC method. */
-export interface QueryEvidenceRequestAmino {
-  /** evidence_hash defines the hash of the requested evidence. */
-  evidence_hash: string;
-}
-export interface QueryEvidenceRequestAminoMsg {
-  type: "cosmos-sdk/QueryEvidenceRequest";
-  value: QueryEvidenceRequestAmino;
+export interface QueryEvidenceRequestSDKType {
+  evidence_hash: Uint8Array;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
 export interface QueryEvidenceResponse {
@@ -30,13 +27,8 @@ export interface QueryEvidenceResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryEvidenceResponse is the response type for the Query/Evidence RPC method. */
-export interface QueryEvidenceResponseAmino {
-  /** evidence returns the requested evidence. */
-  evidence?: AnyAmino;
-}
-export interface QueryEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/QueryEvidenceResponse";
-  value: QueryEvidenceResponseAmino;
+export interface QueryEvidenceResponseSDKType {
+  evidence?: AnySDKType;
 }
 /**
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
@@ -54,13 +46,8 @@ export interface QueryAllEvidenceRequestProtoMsg {
  * QueryEvidenceRequest is the request type for the Query/AllEvidence RPC
  * method.
  */
-export interface QueryAllEvidenceRequestAmino {
-  /** pagination defines an optional pagination for the request. */
-  pagination?: PageRequestAmino;
-}
-export interface QueryAllEvidenceRequestAminoMsg {
-  type: "cosmos-sdk/QueryAllEvidenceRequest";
-  value: QueryAllEvidenceRequestAmino;
+export interface QueryAllEvidenceRequestSDKType {
+  pagination?: PageRequestSDKType;
 }
 /**
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
@@ -80,15 +67,9 @@ export interface QueryAllEvidenceResponseProtoMsg {
  * QueryAllEvidenceResponse is the response type for the Query/AllEvidence RPC
  * method.
  */
-export interface QueryAllEvidenceResponseAmino {
-  /** evidence returns all evidences. */
-  evidence: AnyAmino[];
-  /** pagination defines the pagination in the response. */
-  pagination?: PageResponseAmino;
-}
-export interface QueryAllEvidenceResponseAminoMsg {
-  type: "cosmos-sdk/QueryAllEvidenceResponse";
-  value: QueryAllEvidenceResponseAmino;
+export interface QueryAllEvidenceResponseSDKType {
+  evidence: AnySDKType[];
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
   return {
@@ -97,7 +78,6 @@ function createBaseQueryEvidenceRequest(): QueryEvidenceRequest {
 }
 export const QueryEvidenceRequest = {
   typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceRequest",
-  aminoType: "cosmos-sdk/QueryEvidenceRequest",
   encode(message: QueryEvidenceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.evidenceHash.length !== 0) {
       writer.uint32(10).bytes(message.evidenceHash);
@@ -121,10 +101,35 @@ export const QueryEvidenceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryEvidenceRequest {
+    const obj = createBaseQueryEvidenceRequest();
+    if (isSet(object.evidenceHash)) obj.evidenceHash = bytesFromBase64(object.evidenceHash);
+    return obj;
+  },
+  toJSON(message: QueryEvidenceRequest): JsonSafe<QueryEvidenceRequest> {
+    const obj: any = {};
+    message.evidenceHash !== undefined && (obj.evidenceHash = base64FromBytes(message.evidenceHash !== undefined ? message.evidenceHash : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryEvidenceRequest>): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
     message.evidenceHash = object.evidenceHash ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: QueryEvidenceRequestSDKType): QueryEvidenceRequest {
+    return {
+      evidenceHash: object?.evidence_hash
+    };
+  },
+  fromSDKJSON(object: any): QueryEvidenceRequestSDKType {
+    return {
+      evidence_hash: isSet(object.evidence_hash) ? bytesFromBase64(object.evidence_hash) : new Uint8Array()
+    };
+  },
+  toSDK(message: QueryEvidenceRequest): QueryEvidenceRequestSDKType {
+    const obj: any = {};
+    obj.evidence_hash = message.evidenceHash;
+    return obj;
   },
   fromAmino(object: QueryEvidenceRequestAmino): QueryEvidenceRequest {
     const message = createBaseQueryEvidenceRequest();
@@ -167,7 +172,6 @@ function createBaseQueryEvidenceResponse(): QueryEvidenceResponse {
 }
 export const QueryEvidenceResponse = {
   typeUrl: "/cosmos.evidence.v1beta1.QueryEvidenceResponse",
-  aminoType: "cosmos-sdk/QueryEvidenceResponse",
   encode(message: QueryEvidenceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.evidence !== undefined) {
       Any.encode(message.evidence, writer.uint32(10).fork()).ldelim();
@@ -191,10 +195,37 @@ export const QueryEvidenceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryEvidenceResponse {
+    const obj = createBaseQueryEvidenceResponse();
+    if (isSet(object.evidence)) obj.evidence = Any.fromJSON(object.evidence);
+    return obj;
+  },
+  toJSON(message: QueryEvidenceResponse): JsonSafe<QueryEvidenceResponse> {
+    const obj: any = {};
+    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toJSON(message.evidence) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryEvidenceResponse>): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? Any.fromPartial(object.evidence) : undefined;
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = Any.fromPartial(object.evidence);
+    }
     return message;
+  },
+  fromSDK(object: QueryEvidenceResponseSDKType): QueryEvidenceResponse {
+    return {
+      evidence: object.evidence ? Any.fromSDK(object.evidence) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryEvidenceResponseSDKType {
+    return {
+      evidence: isSet(object.evidence) ? Any.fromSDKJSON(object.evidence) : undefined
+    };
+  },
+  toSDK(message: QueryEvidenceResponse): QueryEvidenceResponseSDKType {
+    const obj: any = {};
+    message.evidence !== undefined && (obj.evidence = message.evidence ? Any.toSDK(message.evidence) : undefined);
+    return obj;
   },
   fromAmino(object: QueryEvidenceResponseAmino): QueryEvidenceResponse {
     const message = createBaseQueryEvidenceResponse();
@@ -237,7 +268,6 @@ function createBaseQueryAllEvidenceRequest(): QueryAllEvidenceRequest {
 }
 export const QueryAllEvidenceRequest = {
   typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceRequest",
-  aminoType: "cosmos-sdk/QueryAllEvidenceRequest",
   encode(message: QueryAllEvidenceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.pagination !== undefined) {
       PageRequest.encode(message.pagination, writer.uint32(10).fork()).ldelim();
@@ -261,10 +291,37 @@ export const QueryAllEvidenceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryAllEvidenceRequest {
+    const obj = createBaseQueryAllEvidenceRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAllEvidenceRequest): JsonSafe<QueryAllEvidenceRequest> {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryAllEvidenceRequest>): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAllEvidenceRequestSDKType): QueryAllEvidenceRequest {
+    return {
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAllEvidenceRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAllEvidenceRequest): QueryAllEvidenceRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAllEvidenceRequestAmino): QueryAllEvidenceRequest {
     const message = createBaseQueryAllEvidenceRequest();
@@ -308,7 +365,6 @@ function createBaseQueryAllEvidenceResponse(): QueryAllEvidenceResponse {
 }
 export const QueryAllEvidenceResponse = {
   typeUrl: "/cosmos.evidence.v1beta1.QueryAllEvidenceResponse",
-  aminoType: "cosmos-sdk/QueryAllEvidenceResponse",
   encode(message: QueryAllEvidenceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.evidence) {
       Any.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -338,11 +394,51 @@ export const QueryAllEvidenceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryAllEvidenceResponse {
+    const obj = createBaseQueryAllEvidenceResponse();
+    if (Array.isArray(object?.evidence)) obj.evidence = object.evidence.map((e: any) => Any.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAllEvidenceResponse): JsonSafe<QueryAllEvidenceResponse> {
+    const obj: any = {};
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryAllEvidenceResponse>): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();
     message.evidence = object.evidence?.map(e => Any.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAllEvidenceResponseSDKType): QueryAllEvidenceResponse {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAllEvidenceResponseSDKType {
+    return {
+      evidence: Array.isArray(object?.evidence) ? object.evidence.map((e: any) => Any.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAllEvidenceResponse): QueryAllEvidenceResponseSDKType {
+    const obj: any = {};
+    if (message.evidence) {
+      obj.evidence = message.evidence.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.evidence = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAllEvidenceResponseAmino): QueryAllEvidenceResponse {
     const message = createBaseQueryAllEvidenceResponse();

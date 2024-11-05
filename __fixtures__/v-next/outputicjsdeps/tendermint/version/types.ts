@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "tendermint.version";
 /**
  * App includes the protocol and software version for the application.
  * This information is included in ResponseInfo. The App.Protocol can be
@@ -18,13 +20,9 @@ export interface AppProtoMsg {
  * This information is included in ResponseInfo. The App.Protocol can be
  * updated in ResponseEndBlock.
  */
-export interface AppAmino {
-  protocol: string;
+export interface AppSDKType {
+  protocol: bigint;
   software: string;
-}
-export interface AppAminoMsg {
-  type: "/tendermint.version.App";
-  value: AppAmino;
 }
 /**
  * Consensus captures the consensus rules for processing a block in the blockchain,
@@ -44,13 +42,9 @@ export interface ConsensusProtoMsg {
  * including all blockchain data structures and the rules of the application's
  * state transition machine.
  */
-export interface ConsensusAmino {
-  block: string;
-  app: string;
-}
-export interface ConsensusAminoMsg {
-  type: "/tendermint.version.Consensus";
-  value: ConsensusAmino;
+export interface ConsensusSDKType {
+  block: bigint;
+  app: bigint;
 }
 function createBaseApp(): App {
   return {
@@ -61,10 +55,10 @@ function createBaseApp(): App {
 export const App = {
   typeUrl: "/tendermint.version.App",
   encode(message: App, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.protocol !== BigInt(0)) {
+    if (message.protocol !== undefined) {
       writer.uint32(8).uint64(message.protocol);
     }
-    if (message.software !== "") {
+    if (message.software !== undefined) {
       writer.uint32(18).string(message.software);
     }
     return writer;
@@ -89,11 +83,43 @@ export const App = {
     }
     return message;
   },
+  fromJSON(object: any): App {
+    const obj = createBaseApp();
+    if (isSet(object.protocol)) obj.protocol = BigInt(object.protocol.toString());
+    if (isSet(object.software)) obj.software = String(object.software);
+    return obj;
+  },
+  toJSON(message: App): JsonSafe<App> {
+    const obj: any = {};
+    message.protocol !== undefined && (obj.protocol = (message.protocol || BigInt(0)).toString());
+    message.software !== undefined && (obj.software = message.software);
+    return obj;
+  },
   fromPartial(object: DeepPartial<App>): App {
     const message = createBaseApp();
-    message.protocol = object.protocol !== undefined && object.protocol !== null ? BigInt(object.protocol.toString()) : BigInt(0);
+    if (object.protocol !== undefined && object.protocol !== null) {
+      message.protocol = BigInt(object.protocol.toString());
+    }
     message.software = object.software ?? "";
     return message;
+  },
+  fromSDK(object: AppSDKType): App {
+    return {
+      protocol: object?.protocol,
+      software: object?.software
+    };
+  },
+  fromSDKJSON(object: any): AppSDKType {
+    return {
+      protocol: isSet(object.protocol) ? BigInt(object.protocol.toString()) : BigInt(0),
+      software: isSet(object.software) ? String(object.software) : ""
+    };
+  },
+  toSDK(message: App): AppSDKType {
+    const obj: any = {};
+    obj.protocol = message.protocol;
+    obj.software = message.software;
+    return obj;
   },
   fromAmino(object: AppAmino): App {
     const message = createBaseApp();
@@ -136,10 +162,10 @@ function createBaseConsensus(): Consensus {
 export const Consensus = {
   typeUrl: "/tendermint.version.Consensus",
   encode(message: Consensus, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.block !== BigInt(0)) {
+    if (message.block !== undefined) {
       writer.uint32(8).uint64(message.block);
     }
-    if (message.app !== BigInt(0)) {
+    if (message.app !== undefined) {
       writer.uint32(16).uint64(message.app);
     }
     return writer;
@@ -164,11 +190,45 @@ export const Consensus = {
     }
     return message;
   },
+  fromJSON(object: any): Consensus {
+    const obj = createBaseConsensus();
+    if (isSet(object.block)) obj.block = BigInt(object.block.toString());
+    if (isSet(object.app)) obj.app = BigInt(object.app.toString());
+    return obj;
+  },
+  toJSON(message: Consensus): JsonSafe<Consensus> {
+    const obj: any = {};
+    message.block !== undefined && (obj.block = (message.block || BigInt(0)).toString());
+    message.app !== undefined && (obj.app = (message.app || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Consensus>): Consensus {
     const message = createBaseConsensus();
-    message.block = object.block !== undefined && object.block !== null ? BigInt(object.block.toString()) : BigInt(0);
-    message.app = object.app !== undefined && object.app !== null ? BigInt(object.app.toString()) : BigInt(0);
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BigInt(object.block.toString());
+    }
+    if (object.app !== undefined && object.app !== null) {
+      message.app = BigInt(object.app.toString());
+    }
     return message;
+  },
+  fromSDK(object: ConsensusSDKType): Consensus {
+    return {
+      block: object?.block,
+      app: object?.app
+    };
+  },
+  fromSDKJSON(object: any): ConsensusSDKType {
+    return {
+      block: isSet(object.block) ? BigInt(object.block.toString()) : BigInt(0),
+      app: isSet(object.app) ? BigInt(object.app.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Consensus): ConsensusSDKType {
+    const obj: any = {};
+    obj.block = message.block;
+    obj.app = message.app;
+    return obj;
   },
   fromAmino(object: ConsensusAmino): Consensus {
     const message = createBaseConsensus();

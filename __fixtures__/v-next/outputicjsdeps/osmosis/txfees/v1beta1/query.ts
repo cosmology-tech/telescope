@@ -1,16 +1,15 @@
-import { FeeToken, FeeTokenAmino } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
+import { Decimal } from "@cosmjs/math";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 export interface QueryFeeTokensRequest {}
 export interface QueryFeeTokensRequestProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensRequest";
   value: Uint8Array;
 }
-export interface QueryFeeTokensRequestAmino {}
-export interface QueryFeeTokensRequestAminoMsg {
-  type: "osmosis/txfees/query-fee-tokens-request";
-  value: QueryFeeTokensRequestAmino;
-}
+export interface QueryFeeTokensRequestSDKType {}
 export interface QueryFeeTokensResponse {
   feeTokens: FeeToken[];
 }
@@ -18,12 +17,8 @@ export interface QueryFeeTokensResponseProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensResponse";
   value: Uint8Array;
 }
-export interface QueryFeeTokensResponseAmino {
-  fee_tokens: FeeTokenAmino[];
-}
-export interface QueryFeeTokensResponseAminoMsg {
-  type: "osmosis/txfees/query-fee-tokens-response";
-  value: QueryFeeTokensResponseAmino;
+export interface QueryFeeTokensResponseSDKType {
+  fee_tokens: FeeTokenSDKType[];
 }
 /**
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
@@ -40,12 +35,8 @@ export interface QueryDenomSpotPriceRequestProtoMsg {
  * QueryDenomSpotPriceRequest defines grpc request structure for querying spot
  * price for the specified tx fee denom
  */
-export interface QueryDenomSpotPriceRequestAmino {
+export interface QueryDenomSpotPriceRequestSDKType {
   denom: string;
-}
-export interface QueryDenomSpotPriceRequestAminoMsg {
-  type: "osmosis/txfees/query-denom-spot-price-request";
-  value: QueryDenomSpotPriceRequestAmino;
 }
 /**
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
@@ -63,13 +54,9 @@ export interface QueryDenomSpotPriceResponseProtoMsg {
  * QueryDenomSpotPriceRequest defines grpc response structure for querying spot
  * price for the specified tx fee denom
  */
-export interface QueryDenomSpotPriceResponseAmino {
-  poolID: string;
+export interface QueryDenomSpotPriceResponseSDKType {
+  poolID: bigint;
   spot_price: string;
-}
-export interface QueryDenomSpotPriceResponseAminoMsg {
-  type: "osmosis/txfees/query-denom-spot-price-response";
-  value: QueryDenomSpotPriceResponseAmino;
 }
 export interface QueryDenomPoolIdRequest {
   denom: string;
@@ -78,12 +65,8 @@ export interface QueryDenomPoolIdRequestProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdRequest";
   value: Uint8Array;
 }
-export interface QueryDenomPoolIdRequestAmino {
+export interface QueryDenomPoolIdRequestSDKType {
   denom: string;
-}
-export interface QueryDenomPoolIdRequestAminoMsg {
-  type: "osmosis/txfees/query-denom-pool-id-request";
-  value: QueryDenomPoolIdRequestAmino;
 }
 export interface QueryDenomPoolIdResponse {
   poolID: bigint;
@@ -92,23 +75,15 @@ export interface QueryDenomPoolIdResponseProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse";
   value: Uint8Array;
 }
-export interface QueryDenomPoolIdResponseAmino {
-  poolID: string;
-}
-export interface QueryDenomPoolIdResponseAminoMsg {
-  type: "osmosis/txfees/query-denom-pool-id-response";
-  value: QueryDenomPoolIdResponseAmino;
+export interface QueryDenomPoolIdResponseSDKType {
+  poolID: bigint;
 }
 export interface QueryBaseDenomRequest {}
 export interface QueryBaseDenomRequestProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomRequest";
   value: Uint8Array;
 }
-export interface QueryBaseDenomRequestAmino {}
-export interface QueryBaseDenomRequestAminoMsg {
-  type: "osmosis/txfees/query-base-denom-request";
-  value: QueryBaseDenomRequestAmino;
-}
+export interface QueryBaseDenomRequestSDKType {}
 export interface QueryBaseDenomResponse {
   baseDenom: string;
 }
@@ -116,19 +91,14 @@ export interface QueryBaseDenomResponseProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomResponse";
   value: Uint8Array;
 }
-export interface QueryBaseDenomResponseAmino {
+export interface QueryBaseDenomResponseSDKType {
   base_denom: string;
-}
-export interface QueryBaseDenomResponseAminoMsg {
-  type: "osmosis/txfees/query-base-denom-response";
-  value: QueryBaseDenomResponseAmino;
 }
 function createBaseQueryFeeTokensRequest(): QueryFeeTokensRequest {
   return {};
 }
 export const QueryFeeTokensRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensRequest",
-  aminoType: "osmosis/txfees/query-fee-tokens-request",
   encode(_: QueryFeeTokensRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -146,9 +116,27 @@ export const QueryFeeTokensRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryFeeTokensRequest {
+    const obj = createBaseQueryFeeTokensRequest();
+    return obj;
+  },
+  toJSON(_: QueryFeeTokensRequest): JsonSafe<QueryFeeTokensRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryFeeTokensRequest>): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
     return message;
+  },
+  fromSDK(_: QueryFeeTokensRequestSDKType): QueryFeeTokensRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryFeeTokensRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryFeeTokensRequest): QueryFeeTokensRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryFeeTokensRequestAmino): QueryFeeTokensRequest {
     const message = createBaseQueryFeeTokensRequest();
@@ -187,7 +175,6 @@ function createBaseQueryFeeTokensResponse(): QueryFeeTokensResponse {
 }
 export const QueryFeeTokensResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryFeeTokensResponse",
-  aminoType: "osmosis/txfees/query-fee-tokens-response",
   encode(message: QueryFeeTokensResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.feeTokens) {
       FeeToken.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -211,10 +198,43 @@ export const QueryFeeTokensResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryFeeTokensResponse {
+    const obj = createBaseQueryFeeTokensResponse();
+    if (Array.isArray(object?.feeTokens)) obj.feeTokens = object.feeTokens.map((e: any) => FeeToken.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: QueryFeeTokensResponse): JsonSafe<QueryFeeTokensResponse> {
+    const obj: any = {};
+    if (message.feeTokens) {
+      obj.feeTokens = message.feeTokens.map(e => e ? FeeToken.toJSON(e) : undefined);
+    } else {
+      obj.feeTokens = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryFeeTokensResponse>): QueryFeeTokensResponse {
     const message = createBaseQueryFeeTokensResponse();
     message.feeTokens = object.feeTokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: QueryFeeTokensResponseSDKType): QueryFeeTokensResponse {
+    return {
+      feeTokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): QueryFeeTokensResponseSDKType {
+    return {
+      fee_tokens: Array.isArray(object?.fee_tokens) ? object.fee_tokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: QueryFeeTokensResponse): QueryFeeTokensResponseSDKType {
+    const obj: any = {};
+    if (message.feeTokens) {
+      obj.fee_tokens = message.feeTokens.map(e => e ? FeeToken.toSDK(e) : undefined);
+    } else {
+      obj.fee_tokens = [];
+    }
+    return obj;
   },
   fromAmino(object: QueryFeeTokensResponseAmino): QueryFeeTokensResponse {
     const message = createBaseQueryFeeTokensResponse();
@@ -259,9 +279,8 @@ function createBaseQueryDenomSpotPriceRequest(): QueryDenomSpotPriceRequest {
 }
 export const QueryDenomSpotPriceRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceRequest",
-  aminoType: "osmosis/txfees/query-denom-spot-price-request",
   encode(message: QueryDenomSpotPriceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -283,10 +302,35 @@ export const QueryDenomSpotPriceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryDenomSpotPriceRequest {
+    const obj = createBaseQueryDenomSpotPriceRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
+  },
+  toJSON(message: QueryDenomSpotPriceRequest): JsonSafe<QueryDenomSpotPriceRequest> {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceRequest>): QueryDenomSpotPriceRequest {
     const message = createBaseQueryDenomSpotPriceRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+  fromSDK(object: QueryDenomSpotPriceRequestSDKType): QueryDenomSpotPriceRequest {
+    return {
+      denom: object?.denom
+    };
+  },
+  fromSDKJSON(object: any): QueryDenomSpotPriceRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+  toSDK(message: QueryDenomSpotPriceRequest): QueryDenomSpotPriceRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
   },
   fromAmino(object: QueryDenomSpotPriceRequestAmino): QueryDenomSpotPriceRequest {
     const message = createBaseQueryDenomSpotPriceRequest();
@@ -330,13 +374,12 @@ function createBaseQueryDenomSpotPriceResponse(): QueryDenomSpotPriceResponse {
 }
 export const QueryDenomSpotPriceResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomSpotPriceResponse",
-  aminoType: "osmosis/txfees/query-denom-spot-price-response",
   encode(message: QueryDenomSpotPriceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolID !== BigInt(0)) {
+    if (message.poolID !== undefined) {
       writer.uint32(8).uint64(message.poolID);
     }
-    if (message.spotPrice !== "") {
-      writer.uint32(18).string(message.spotPrice);
+    if (message.spotPrice !== undefined) {
+      writer.uint32(18).string(Decimal.fromUserInput(message.spotPrice, 18).atomics);
     }
     return writer;
   },
@@ -351,7 +394,7 @@ export const QueryDenomSpotPriceResponse = {
           message.poolID = reader.uint64();
           break;
         case 2:
-          message.spotPrice = reader.string();
+          message.spotPrice = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -360,11 +403,43 @@ export const QueryDenomSpotPriceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryDenomSpotPriceResponse {
+    const obj = createBaseQueryDenomSpotPriceResponse();
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    if (isSet(object.spotPrice)) obj.spotPrice = String(object.spotPrice);
+    return obj;
+  },
+  toJSON(message: QueryDenomSpotPriceResponse): JsonSafe<QueryDenomSpotPriceResponse> {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
+    message.spotPrice !== undefined && (obj.spotPrice = message.spotPrice);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryDenomSpotPriceResponse>): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     message.spotPrice = object.spotPrice ?? "";
     return message;
+  },
+  fromSDK(object: QueryDenomSpotPriceResponseSDKType): QueryDenomSpotPriceResponse {
+    return {
+      poolID: object?.poolID,
+      spotPrice: object?.spot_price
+    };
+  },
+  fromSDKJSON(object: any): QueryDenomSpotPriceResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0),
+      spot_price: isSet(object.spot_price) ? String(object.spot_price) : ""
+    };
+  },
+  toSDK(message: QueryDenomSpotPriceResponse): QueryDenomSpotPriceResponseSDKType {
+    const obj: any = {};
+    obj.poolID = message.poolID;
+    obj.spot_price = message.spotPrice;
+    return obj;
   },
   fromAmino(object: QueryDenomSpotPriceResponseAmino): QueryDenomSpotPriceResponse {
     const message = createBaseQueryDenomSpotPriceResponse();
@@ -411,9 +486,8 @@ function createBaseQueryDenomPoolIdRequest(): QueryDenomPoolIdRequest {
 }
 export const QueryDenomPoolIdRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdRequest",
-  aminoType: "osmosis/txfees/query-denom-pool-id-request",
   encode(message: QueryDenomPoolIdRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     return writer;
@@ -435,10 +509,35 @@ export const QueryDenomPoolIdRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryDenomPoolIdRequest {
+    const obj = createBaseQueryDenomPoolIdRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
+  },
+  toJSON(message: QueryDenomPoolIdRequest): JsonSafe<QueryDenomPoolIdRequest> {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryDenomPoolIdRequest>): QueryDenomPoolIdRequest {
     const message = createBaseQueryDenomPoolIdRequest();
     message.denom = object.denom ?? "";
     return message;
+  },
+  fromSDK(object: QueryDenomPoolIdRequestSDKType): QueryDenomPoolIdRequest {
+    return {
+      denom: object?.denom
+    };
+  },
+  fromSDKJSON(object: any): QueryDenomPoolIdRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+  toSDK(message: QueryDenomPoolIdRequest): QueryDenomPoolIdRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    return obj;
   },
   fromAmino(object: QueryDenomPoolIdRequestAmino): QueryDenomPoolIdRequest {
     const message = createBaseQueryDenomPoolIdRequest();
@@ -481,9 +580,8 @@ function createBaseQueryDenomPoolIdResponse(): QueryDenomPoolIdResponse {
 }
 export const QueryDenomPoolIdResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryDenomPoolIdResponse",
-  aminoType: "osmosis/txfees/query-denom-pool-id-response",
   encode(message: QueryDenomPoolIdResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolID !== BigInt(0)) {
+    if (message.poolID !== undefined) {
       writer.uint32(8).uint64(message.poolID);
     }
     return writer;
@@ -505,10 +603,37 @@ export const QueryDenomPoolIdResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryDenomPoolIdResponse {
+    const obj = createBaseQueryDenomPoolIdResponse();
+    if (isSet(object.poolID)) obj.poolID = BigInt(object.poolID.toString());
+    return obj;
+  },
+  toJSON(message: QueryDenomPoolIdResponse): JsonSafe<QueryDenomPoolIdResponse> {
+    const obj: any = {};
+    message.poolID !== undefined && (obj.poolID = (message.poolID || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryDenomPoolIdResponse>): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
-    message.poolID = object.poolID !== undefined && object.poolID !== null ? BigInt(object.poolID.toString()) : BigInt(0);
+    if (object.poolID !== undefined && object.poolID !== null) {
+      message.poolID = BigInt(object.poolID.toString());
+    }
     return message;
+  },
+  fromSDK(object: QueryDenomPoolIdResponseSDKType): QueryDenomPoolIdResponse {
+    return {
+      poolID: object?.poolID
+    };
+  },
+  fromSDKJSON(object: any): QueryDenomPoolIdResponseSDKType {
+    return {
+      poolID: isSet(object.poolID) ? BigInt(object.poolID.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: QueryDenomPoolIdResponse): QueryDenomPoolIdResponseSDKType {
+    const obj: any = {};
+    obj.poolID = message.poolID;
+    return obj;
   },
   fromAmino(object: QueryDenomPoolIdResponseAmino): QueryDenomPoolIdResponse {
     const message = createBaseQueryDenomPoolIdResponse();
@@ -549,7 +674,6 @@ function createBaseQueryBaseDenomRequest(): QueryBaseDenomRequest {
 }
 export const QueryBaseDenomRequest = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomRequest",
-  aminoType: "osmosis/txfees/query-base-denom-request",
   encode(_: QueryBaseDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -567,9 +691,27 @@ export const QueryBaseDenomRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryBaseDenomRequest {
+    const obj = createBaseQueryBaseDenomRequest();
+    return obj;
+  },
+  toJSON(_: QueryBaseDenomRequest): JsonSafe<QueryBaseDenomRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryBaseDenomRequest>): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
     return message;
+  },
+  fromSDK(_: QueryBaseDenomRequestSDKType): QueryBaseDenomRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryBaseDenomRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryBaseDenomRequest): QueryBaseDenomRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryBaseDenomRequestAmino): QueryBaseDenomRequest {
     const message = createBaseQueryBaseDenomRequest();
@@ -608,9 +750,8 @@ function createBaseQueryBaseDenomResponse(): QueryBaseDenomResponse {
 }
 export const QueryBaseDenomResponse = {
   typeUrl: "/osmosis.txfees.v1beta1.QueryBaseDenomResponse",
-  aminoType: "osmosis/txfees/query-base-denom-response",
   encode(message: QueryBaseDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.baseDenom !== "") {
+    if (message.baseDenom !== undefined) {
       writer.uint32(10).string(message.baseDenom);
     }
     return writer;
@@ -632,10 +773,35 @@ export const QueryBaseDenomResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryBaseDenomResponse {
+    const obj = createBaseQueryBaseDenomResponse();
+    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
+    return obj;
+  },
+  toJSON(message: QueryBaseDenomResponse): JsonSafe<QueryBaseDenomResponse> {
+    const obj: any = {};
+    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryBaseDenomResponse>): QueryBaseDenomResponse {
     const message = createBaseQueryBaseDenomResponse();
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+  fromSDK(object: QueryBaseDenomResponseSDKType): QueryBaseDenomResponse {
+    return {
+      baseDenom: object?.base_denom
+    };
+  },
+  fromSDKJSON(object: any): QueryBaseDenomResponseSDKType {
+    return {
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
+  },
+  toSDK(message: QueryBaseDenomResponse): QueryBaseDenomResponseSDKType {
+    const obj: any = {};
+    obj.base_denom = message.baseDenom;
+    return obj;
   },
   fromAmino(object: QueryBaseDenomResponseAmino): QueryBaseDenomResponse {
     const message = createBaseQueryBaseDenomResponse();

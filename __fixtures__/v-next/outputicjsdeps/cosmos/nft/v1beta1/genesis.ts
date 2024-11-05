@@ -1,6 +1,8 @@
-import { Class, ClassAmino, NFT, NFTAmino } from "./nft";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Class, ClassSDKType, NFT, NFTSDKType } from "./nft.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
+export const protobufPackage = "cosmos.nft.v1beta1";
 /** GenesisState defines the nft module's genesis state. */
 export interface GenesisState {
   /** class defines the class of the nft type. */
@@ -12,14 +14,9 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the nft module's genesis state. */
-export interface GenesisStateAmino {
-  /** class defines the class of the nft type. */
-  classes: ClassAmino[];
-  entries: EntryAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  classes: ClassSDKType[];
+  entries: EntrySDKType[];
 }
 /** Entry Defines all nft owned by a person */
 export interface Entry {
@@ -33,15 +30,9 @@ export interface EntryProtoMsg {
   value: Uint8Array;
 }
 /** Entry Defines all nft owned by a person */
-export interface EntryAmino {
-  /** owner is the owner address of the following nft */
+export interface EntrySDKType {
   owner: string;
-  /** nfts is a group of nfts of the same owner */
-  nfts: NFTAmino[];
-}
-export interface EntryAminoMsg {
-  type: "cosmos-sdk/Entry";
-  value: EntryAmino;
+  nfts: NFTSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -51,7 +42,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.nft.v1beta1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.classes) {
       Class.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -81,11 +71,57 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.classes)) obj.classes = object.classes.map((e: any) => Class.fromJSON(e));
+    if (Array.isArray(object?.entries)) obj.entries = object.entries.map((e: any) => Entry.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.classes) {
+      obj.classes = message.classes.map(e => e ? Class.toJSON(e) : undefined);
+    } else {
+      obj.classes = [];
+    }
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Entry.toJSON(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.classes = object.classes?.map(e => Class.fromPartial(e)) || [];
     message.entries = object.entries?.map(e => Entry.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDK(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      classes: Array.isArray(object?.classes) ? object.classes.map((e: any) => Class.fromSDKJSON(e)) : [],
+      entries: Array.isArray(object?.entries) ? object.entries.map((e: any) => Entry.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.classes) {
+      obj.classes = message.classes.map(e => e ? Class.toSDK(e) : undefined);
+    } else {
+      obj.classes = [];
+    }
+    if (message.entries) {
+      obj.entries = message.entries.map(e => e ? Entry.toSDK(e) : undefined);
+    } else {
+      obj.entries = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -137,9 +173,8 @@ function createBaseEntry(): Entry {
 }
 export const Entry = {
   typeUrl: "/cosmos.nft.v1beta1.Entry",
-  aminoType: "cosmos-sdk/Entry",
   encode(message: Entry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     for (const v of message.nfts) {
@@ -167,11 +202,49 @@ export const Entry = {
     }
     return message;
   },
+  fromJSON(object: any): Entry {
+    const obj = createBaseEntry();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (Array.isArray(object?.nfts)) obj.nfts = object.nfts.map((e: any) => NFT.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Entry): JsonSafe<Entry> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    if (message.nfts) {
+      obj.nfts = message.nfts.map(e => e ? NFT.toJSON(e) : undefined);
+    } else {
+      obj.nfts = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Entry>): Entry {
     const message = createBaseEntry();
     message.owner = object.owner ?? "";
     message.nfts = object.nfts?.map(e => NFT.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: EntrySDKType): Entry {
+    return {
+      owner: object?.owner,
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): EntrySDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      nfts: Array.isArray(object?.nfts) ? object.nfts.map((e: any) => NFT.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Entry): EntrySDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    if (message.nfts) {
+      obj.nfts = message.nfts.map(e => e ? NFT.toSDK(e) : undefined);
+    } else {
+      obj.nfts = [];
+    }
+    return obj;
   },
   fromAmino(object: EntryAmino): Entry {
     const message = createBaseEntry();

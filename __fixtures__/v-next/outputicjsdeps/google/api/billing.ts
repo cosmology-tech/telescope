@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * Billing related configuration of the service.
  * 
@@ -81,18 +83,8 @@ export interface BillingProtoMsg {
  *         metrics:
  *         - library.googleapis.com/book/borrowed_count
  */
-export interface BillingAmino {
-  /**
-   * Billing configurations for sending metrics to the consumer project.
-   * There can be multiple consumer destinations per service, each one must have
-   * a different monitored resource type. A metric can be used in at most
-   * one consumer destination.
-   */
-  consumer_destinations: Billing_BillingDestinationAmino[];
-}
-export interface BillingAminoMsg {
-  type: "/google.api.Billing";
-  value: BillingAmino;
+export interface BillingSDKType {
+  consumer_destinations: Billing_BillingDestinationSDKType[];
 }
 /**
  * Configuration of a specific billing destination (Currently only support
@@ -118,21 +110,9 @@ export interface Billing_BillingDestinationProtoMsg {
  * Configuration of a specific billing destination (Currently only support
  * bill against consumer project).
  */
-export interface Billing_BillingDestinationAmino {
-  /**
-   * The monitored resource type. The type must be defined in
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
+export interface Billing_BillingDestinationSDKType {
   monitored_resource: string;
-  /**
-   * Names of the metrics to report to this billing destination.
-   * Each name must be defined in [Service.metrics][google.api.Service.metrics] section.
-   */
   metrics: string[];
-}
-export interface Billing_BillingDestinationAminoMsg {
-  type: "/google.api.BillingDestination";
-  value: Billing_BillingDestinationAmino;
 }
 function createBaseBilling(): Billing {
   return {
@@ -164,10 +144,43 @@ export const Billing = {
     }
     return message;
   },
+  fromJSON(object: any): Billing {
+    const obj = createBaseBilling();
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Billing_BillingDestination.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Billing): JsonSafe<Billing> {
+    const obj: any = {};
+    if (message.consumerDestinations) {
+      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toJSON(e) : undefined);
+    } else {
+      obj.consumerDestinations = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Billing>): Billing {
     const message = createBaseBilling();
     message.consumerDestinations = object.consumerDestinations?.map(e => Billing_BillingDestination.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: BillingSDKType): Billing {
+    return {
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): BillingSDKType {
+    return {
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Billing_BillingDestination.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Billing): BillingSDKType {
+    const obj: any = {};
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Billing_BillingDestination.toSDK(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+    return obj;
   },
   fromAmino(object: BillingAmino): Billing {
     const message = createBaseBilling();
@@ -208,7 +221,7 @@ function createBaseBilling_BillingDestination(): Billing_BillingDestination {
 export const Billing_BillingDestination = {
   typeUrl: "/google.api.BillingDestination",
   encode(message: Billing_BillingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -236,11 +249,49 @@ export const Billing_BillingDestination = {
     }
     return message;
   },
+  fromJSON(object: any): Billing_BillingDestination {
+    const obj = createBaseBilling_BillingDestination();
+    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: Billing_BillingDestination): JsonSafe<Billing_BillingDestination> {
+    const obj: any = {};
+    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Billing_BillingDestination>): Billing_BillingDestination {
     const message = createBaseBilling_BillingDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: Billing_BillingDestinationSDKType): Billing_BillingDestination {
+    return {
+      monitoredResource: object?.monitored_resource,
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): Billing_BillingDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: Billing_BillingDestination): Billing_BillingDestinationSDKType {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource;
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+    return obj;
   },
   fromAmino(object: Billing_BillingDestinationAmino): Billing_BillingDestination {
     const message = createBaseBilling_BillingDestination();

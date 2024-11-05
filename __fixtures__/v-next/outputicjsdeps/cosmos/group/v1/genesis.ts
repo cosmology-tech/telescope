@@ -1,6 +1,8 @@
-import { GroupInfo, GroupInfoAmino, GroupMember, GroupMemberAmino, GroupPolicyInfo, GroupPolicyInfoAmino, Proposal, ProposalAmino, Vote, VoteAmino } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { GroupInfo, GroupInfoSDKType, GroupMember, GroupMemberSDKType, GroupPolicyInfo, GroupPolicyInfoSDKType, Proposal, ProposalSDKType, Vote, VoteSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.group.v1";
 /** GenesisState defines the group module's genesis state. */
 export interface GenesisState {
   /**
@@ -34,36 +36,15 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the group module's genesis state. */
-export interface GenesisStateAmino {
-  /**
-   * group_seq is the group table orm.Sequence,
-   * it is used to get the next group ID.
-   */
-  group_seq: string;
-  /** groups is the list of groups info. */
-  groups: GroupInfoAmino[];
-  /** group_members is the list of groups members. */
-  group_members: GroupMemberAmino[];
-  /**
-   * group_policy_seq is the group policy table orm.Sequence,
-   * it is used to generate the next group policy account address.
-   */
-  group_policy_seq: string;
-  /** group_policies is the list of group policies info. */
-  group_policies: GroupPolicyInfoAmino[];
-  /**
-   * proposal_seq is the proposal table orm.Sequence,
-   * it is used to get the next proposal ID.
-   */
-  proposal_seq: string;
-  /** proposals is the list of proposals. */
-  proposals: ProposalAmino[];
-  /** votes is the list of votes. */
-  votes: VoteAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  group_seq: bigint;
+  groups: GroupInfoSDKType[];
+  group_members: GroupMemberSDKType[];
+  group_policy_seq: bigint;
+  group_policies: GroupPolicyInfoSDKType[];
+  proposal_seq: bigint;
+  proposals: ProposalSDKType[];
+  votes: VoteSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -79,9 +60,8 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.group.v1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.groupSeq !== BigInt(0)) {
+    if (message.groupSeq !== undefined) {
       writer.uint32(8).uint64(message.groupSeq);
     }
     for (const v of message.groups) {
@@ -90,13 +70,13 @@ export const GenesisState = {
     for (const v of message.groupMembers) {
       GroupMember.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.groupPolicySeq !== BigInt(0)) {
+    if (message.groupPolicySeq !== undefined) {
       writer.uint32(32).uint64(message.groupPolicySeq);
     }
     for (const v of message.groupPolicies) {
       GroupPolicyInfo.encode(v!, writer.uint32(42).fork()).ldelim();
     }
-    if (message.proposalSeq !== BigInt(0)) {
+    if (message.proposalSeq !== undefined) {
       writer.uint32(48).uint64(message.proposalSeq);
     }
     for (const v of message.proposals) {
@@ -145,17 +125,123 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.groupSeq)) obj.groupSeq = BigInt(object.groupSeq.toString());
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => GroupInfo.fromJSON(e));
+    if (Array.isArray(object?.groupMembers)) obj.groupMembers = object.groupMembers.map((e: any) => GroupMember.fromJSON(e));
+    if (isSet(object.groupPolicySeq)) obj.groupPolicySeq = BigInt(object.groupPolicySeq.toString());
+    if (Array.isArray(object?.groupPolicies)) obj.groupPolicies = object.groupPolicies.map((e: any) => GroupPolicyInfo.fromJSON(e));
+    if (isSet(object.proposalSeq)) obj.proposalSeq = BigInt(object.proposalSeq.toString());
+    if (Array.isArray(object?.proposals)) obj.proposals = object.proposals.map((e: any) => Proposal.fromJSON(e));
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => Vote.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.groupSeq !== undefined && (obj.groupSeq = (message.groupSeq || BigInt(0)).toString());
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toJSON(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    if (message.groupMembers) {
+      obj.groupMembers = message.groupMembers.map(e => e ? GroupMember.toJSON(e) : undefined);
+    } else {
+      obj.groupMembers = [];
+    }
+    message.groupPolicySeq !== undefined && (obj.groupPolicySeq = (message.groupPolicySeq || BigInt(0)).toString());
+    if (message.groupPolicies) {
+      obj.groupPolicies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toJSON(e) : undefined);
+    } else {
+      obj.groupPolicies = [];
+    }
+    message.proposalSeq !== undefined && (obj.proposalSeq = (message.proposalSeq || BigInt(0)).toString());
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toJSON(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toJSON(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.groupSeq = object.groupSeq !== undefined && object.groupSeq !== null ? BigInt(object.groupSeq.toString()) : BigInt(0);
+    if (object.groupSeq !== undefined && object.groupSeq !== null) {
+      message.groupSeq = BigInt(object.groupSeq.toString());
+    }
     message.groups = object.groups?.map(e => GroupInfo.fromPartial(e)) || [];
     message.groupMembers = object.groupMembers?.map(e => GroupMember.fromPartial(e)) || [];
-    message.groupPolicySeq = object.groupPolicySeq !== undefined && object.groupPolicySeq !== null ? BigInt(object.groupPolicySeq.toString()) : BigInt(0);
+    if (object.groupPolicySeq !== undefined && object.groupPolicySeq !== null) {
+      message.groupPolicySeq = BigInt(object.groupPolicySeq.toString());
+    }
     message.groupPolicies = object.groupPolicies?.map(e => GroupPolicyInfo.fromPartial(e)) || [];
-    message.proposalSeq = object.proposalSeq !== undefined && object.proposalSeq !== null ? BigInt(object.proposalSeq.toString()) : BigInt(0);
+    if (object.proposalSeq !== undefined && object.proposalSeq !== null) {
+      message.proposalSeq = BigInt(object.proposalSeq.toString());
+    }
     message.proposals = object.proposals?.map(e => Proposal.fromPartial(e)) || [];
     message.votes = object.votes?.map(e => Vote.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      groupSeq: object?.group_seq,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDK(e)) : [],
+      groupMembers: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromSDK(e)) : [],
+      groupPolicySeq: object?.group_policy_seq,
+      groupPolicies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDK(e)) : [],
+      proposalSeq: object?.proposal_seq,
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDK(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      group_seq: isSet(object.group_seq) ? BigInt(object.group_seq.toString()) : BigInt(0),
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => GroupInfo.fromSDKJSON(e)) : [],
+      group_members: Array.isArray(object?.group_members) ? object.group_members.map((e: any) => GroupMember.fromSDKJSON(e)) : [],
+      group_policy_seq: isSet(object.group_policy_seq) ? BigInt(object.group_policy_seq.toString()) : BigInt(0),
+      group_policies: Array.isArray(object?.group_policies) ? object.group_policies.map((e: any) => GroupPolicyInfo.fromSDKJSON(e)) : [],
+      proposal_seq: isSet(object.proposal_seq) ? BigInt(object.proposal_seq.toString()) : BigInt(0),
+      proposals: Array.isArray(object?.proposals) ? object.proposals.map((e: any) => Proposal.fromSDKJSON(e)) : [],
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => Vote.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    obj.group_seq = message.groupSeq;
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? GroupInfo.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    if (message.groupMembers) {
+      obj.group_members = message.groupMembers.map(e => e ? GroupMember.toSDK(e) : undefined);
+    } else {
+      obj.group_members = [];
+    }
+    obj.group_policy_seq = message.groupPolicySeq;
+    if (message.groupPolicies) {
+      obj.group_policies = message.groupPolicies.map(e => e ? GroupPolicyInfo.toSDK(e) : undefined);
+    } else {
+      obj.group_policies = [];
+    }
+    obj.proposal_seq = message.proposalSeq;
+    if (message.proposals) {
+      obj.proposals = message.proposals.map(e => e ? Proposal.toSDK(e) : undefined);
+    } else {
+      obj.proposals = [];
+    }
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? Vote.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

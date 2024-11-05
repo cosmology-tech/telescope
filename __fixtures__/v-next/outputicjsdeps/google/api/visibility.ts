@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * `Visibility` defines restrictions for the visibility of service
  * elements.  Restrictions are specified using visibility labels
@@ -60,17 +62,8 @@ export interface VisibilityProtoMsg {
  * Here, all methods are publicly visible except for the restricted methods
  * EnhancedSearch and Delegate.
  */
-export interface VisibilityAmino {
-  /**
-   * A list of visibility rules that apply to individual API elements.
-   * 
-   * **NOTE:** All service configuration rules follow "last one wins" order.
-   */
-  rules: VisibilityRuleAmino[];
-}
-export interface VisibilityAminoMsg {
-  type: "/google.api.Visibility";
-  value: VisibilityAmino;
+export interface VisibilitySDKType {
+  rules: VisibilityRuleSDKType[];
 }
 /**
  * A visibility rule provides visibility configuration for an individual API
@@ -110,35 +103,9 @@ export interface VisibilityRuleProtoMsg {
  * A visibility rule provides visibility configuration for an individual API
  * element.
  */
-export interface VisibilityRuleAmino {
-  /**
-   * Selects methods, messages, fields, enums, etc. to which this rule applies.
-   * 
-   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-   */
+export interface VisibilityRuleSDKType {
   selector: string;
-  /**
-   * A comma-separated list of visibility labels that apply to the `selector`.
-   * Any of the listed labels can be used to grant the visibility.
-   * 
-   * If a rule has multiple labels, removing one of the labels but not all of
-   * them can break clients.
-   * 
-   * Example:
-   * 
-   *     visibility:
-   *       rules:
-   *       - selector: google.calendar.Calendar.EnhancedSearch
-   *         restriction: INTERNAL, PREVIEW
-   * 
-   * Removing INTERNAL from this restriction will break clients that rely on
-   * this method and only had access to it through INTERNAL.
-   */
   restriction: string;
-}
-export interface VisibilityRuleAminoMsg {
-  type: "/google.api.VisibilityRule";
-  value: VisibilityRuleAmino;
 }
 function createBaseVisibility(): Visibility {
   return {
@@ -170,10 +137,43 @@ export const Visibility = {
     }
     return message;
   },
+  fromJSON(object: any): Visibility {
+    const obj = createBaseVisibility();
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => VisibilityRule.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Visibility): JsonSafe<Visibility> {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toJSON(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Visibility>): Visibility {
     const message = createBaseVisibility();
     message.rules = object.rules?.map(e => VisibilityRule.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: VisibilitySDKType): Visibility {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): VisibilitySDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => VisibilityRule.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Visibility): VisibilitySDKType {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? VisibilityRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
   },
   fromAmino(object: VisibilityAmino): Visibility {
     const message = createBaseVisibility();
@@ -214,10 +214,10 @@ function createBaseVisibilityRule(): VisibilityRule {
 export const VisibilityRule = {
   typeUrl: "/google.api.VisibilityRule",
   encode(message: VisibilityRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
-    if (message.restriction !== "") {
+    if (message.restriction !== undefined) {
       writer.uint32(18).string(message.restriction);
     }
     return writer;
@@ -242,11 +242,41 @@ export const VisibilityRule = {
     }
     return message;
   },
+  fromJSON(object: any): VisibilityRule {
+    const obj = createBaseVisibilityRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (isSet(object.restriction)) obj.restriction = String(object.restriction);
+    return obj;
+  },
+  toJSON(message: VisibilityRule): JsonSafe<VisibilityRule> {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    message.restriction !== undefined && (obj.restriction = message.restriction);
+    return obj;
+  },
   fromPartial(object: DeepPartial<VisibilityRule>): VisibilityRule {
     const message = createBaseVisibilityRule();
     message.selector = object.selector ?? "";
     message.restriction = object.restriction ?? "";
     return message;
+  },
+  fromSDK(object: VisibilityRuleSDKType): VisibilityRule {
+    return {
+      selector: object?.selector,
+      restriction: object?.restriction
+    };
+  },
+  fromSDKJSON(object: any): VisibilityRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      restriction: isSet(object.restriction) ? String(object.restriction) : ""
+    };
+  },
+  toSDK(message: VisibilityRule): VisibilityRuleSDKType {
+    const obj: any = {};
+    obj.selector = message.selector;
+    obj.restriction = message.restriction;
+    return obj;
   },
   fromAmino(object: VisibilityRuleAmino): VisibilityRule {
     const message = createBaseVisibilityRule();

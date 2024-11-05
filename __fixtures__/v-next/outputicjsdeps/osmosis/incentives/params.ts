@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
   /**
@@ -13,16 +15,8 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params holds parameters for the incentives module */
-export interface ParamsAmino {
-  /**
-   * distr_epoch_identifier is what epoch type distribution will be triggered by
-   * (day, week, etc.)
-   */
+export interface ParamsSDKType {
   distr_epoch_identifier: string;
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/incentives/params";
-  value: ParamsAmino;
 }
 function createBaseParams(): Params {
   return {
@@ -31,9 +25,8 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.incentives.Params",
-  aminoType: "osmosis/incentives/params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.distrEpochIdentifier !== "") {
+    if (message.distrEpochIdentifier !== undefined) {
       writer.uint32(10).string(message.distrEpochIdentifier);
     }
     return writer;
@@ -55,10 +48,35 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.distrEpochIdentifier)) obj.distrEpochIdentifier = String(object.distrEpochIdentifier);
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.distrEpochIdentifier !== undefined && (obj.distrEpochIdentifier = message.distrEpochIdentifier);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.distrEpochIdentifier = object.distrEpochIdentifier ?? "";
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      distrEpochIdentifier: object?.distr_epoch_identifier
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      distr_epoch_identifier: isSet(object.distr_epoch_identifier) ? String(object.distr_epoch_identifier) : ""
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.distr_epoch_identifier = message.distrEpochIdentifier;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

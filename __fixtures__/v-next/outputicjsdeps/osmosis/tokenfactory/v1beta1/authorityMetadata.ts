@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /**
  * DenomAuthorityMetadata specifies metadata for addresses that have specific
  * capabilities over a token factory denom. Right now there is only one Admin
@@ -18,13 +20,8 @@ export interface DenomAuthorityMetadataProtoMsg {
  * capabilities over a token factory denom. Right now there is only one Admin
  * permission, but is planned to be extended to the future.
  */
-export interface DenomAuthorityMetadataAmino {
-  /** Can be empty for no admin, or a valid osmosis address */
+export interface DenomAuthorityMetadataSDKType {
   admin: string;
-}
-export interface DenomAuthorityMetadataAminoMsg {
-  type: "osmosis/tokenfactory/denom-authority-metadata";
-  value: DenomAuthorityMetadataAmino;
 }
 function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
   return {
@@ -33,9 +30,8 @@ function createBaseDenomAuthorityMetadata(): DenomAuthorityMetadata {
 }
 export const DenomAuthorityMetadata = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.DenomAuthorityMetadata",
-  aminoType: "osmosis/tokenfactory/denom-authority-metadata",
   encode(message: DenomAuthorityMetadata, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.admin !== "") {
+    if (message.admin !== undefined) {
       writer.uint32(10).string(message.admin);
     }
     return writer;
@@ -57,10 +53,35 @@ export const DenomAuthorityMetadata = {
     }
     return message;
   },
+  fromJSON(object: any): DenomAuthorityMetadata {
+    const obj = createBaseDenomAuthorityMetadata();
+    if (isSet(object.admin)) obj.admin = String(object.admin);
+    return obj;
+  },
+  toJSON(message: DenomAuthorityMetadata): JsonSafe<DenomAuthorityMetadata> {
+    const obj: any = {};
+    message.admin !== undefined && (obj.admin = message.admin);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DenomAuthorityMetadata>): DenomAuthorityMetadata {
     const message = createBaseDenomAuthorityMetadata();
     message.admin = object.admin ?? "";
     return message;
+  },
+  fromSDK(object: DenomAuthorityMetadataSDKType): DenomAuthorityMetadata {
+    return {
+      admin: object?.admin
+    };
+  },
+  fromSDKJSON(object: any): DenomAuthorityMetadataSDKType {
+    return {
+      admin: isSet(object.admin) ? String(object.admin) : ""
+    };
+  },
+  toSDK(message: DenomAuthorityMetadata): DenomAuthorityMetadataSDKType {
+    const obj: any = {};
+    obj.admin = message.admin;
+    return obj;
   },
   fromAmino(object: DenomAuthorityMetadataAmino): DenomAuthorityMetadata {
     const message = createBaseDenomAuthorityMetadata();

@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { JsonSafe } from "../../../../json-safe.js";
+import { DeepPartial } from "../../../../helpers.js";
+export const protobufPackage = "cosmos.orm.module.v1alpha1";
 /**
  * Module defines the ORM module which adds providers to the app container for
  * module-scoped DB's. In the future it may provide gRPC services for interacting
@@ -15,17 +17,12 @@ export interface ModuleProtoMsg {
  * module-scoped DB's. In the future it may provide gRPC services for interacting
  * with ORM data.
  */
-export interface ModuleAmino {}
-export interface ModuleAminoMsg {
-  type: "cosmos-sdk/Module";
-  value: ModuleAmino;
-}
+export interface ModuleSDKType {}
 function createBaseModule(): Module {
   return {};
 }
 export const Module = {
   typeUrl: "/cosmos.orm.module.v1alpha1.Module",
-  aminoType: "cosmos-sdk/Module",
   encode(_: Module, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -43,9 +40,27 @@ export const Module = {
     }
     return message;
   },
+  fromJSON(_: any): Module {
+    const obj = createBaseModule();
+    return obj;
+  },
+  toJSON(_: Module): JsonSafe<Module> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<Module>): Module {
     const message = createBaseModule();
     return message;
+  },
+  fromSDK(_: ModuleSDKType): Module {
+    return {};
+  },
+  fromSDKJSON(_: any): ModuleSDKType {
+    return {};
+  },
+  toSDK(_: Module): ModuleSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ModuleAmino): Module {
     const message = createBaseModule();

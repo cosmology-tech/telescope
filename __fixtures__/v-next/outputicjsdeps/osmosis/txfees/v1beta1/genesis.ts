@@ -1,6 +1,8 @@
-import { FeeToken, FeeTokenAmino } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
   basedenom: string;
@@ -11,13 +13,9 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the txfees module's genesis state. */
-export interface GenesisStateAmino {
+export interface GenesisStateSDKType {
   basedenom: string;
-  feetokens: FeeTokenAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "osmosis/txfees/genesis-state";
-  value: GenesisStateAmino;
+  feetokens: FeeTokenSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -27,9 +25,8 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState",
-  aminoType: "osmosis/txfees/genesis-state",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.basedenom !== "") {
+    if (message.basedenom !== undefined) {
       writer.uint32(10).string(message.basedenom);
     }
     for (const v of message.feetokens) {
@@ -57,11 +54,49 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.basedenom)) obj.basedenom = String(object.basedenom);
+    if (Array.isArray(object?.feetokens)) obj.feetokens = object.feetokens.map((e: any) => FeeToken.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.basedenom !== undefined && (obj.basedenom = message.basedenom);
+    if (message.feetokens) {
+      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toJSON(e) : undefined);
+    } else {
+      obj.feetokens = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
     message.basedenom = object.basedenom ?? "";
     message.feetokens = object.feetokens?.map(e => FeeToken.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      basedenom: object?.basedenom,
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      basedenom: isSet(object.basedenom) ? String(object.basedenom) : "",
+      feetokens: Array.isArray(object?.feetokens) ? object.feetokens.map((e: any) => FeeToken.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    obj.basedenom = message.basedenom;
+    if (message.feetokens) {
+      obj.feetokens = message.feetokens.map(e => e ? FeeToken.toSDK(e) : undefined);
+    } else {
+      obj.feetokens = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();

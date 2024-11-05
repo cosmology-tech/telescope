@@ -1,6 +1,8 @@
-import { Any, AnyAmino } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
+export const protobufPackage = "cosmos.app.v1alpha1";
 /**
  * Config represents the configuration for a Cosmos SDK ABCI app.
  * It is intended that all state machine logic including the version of
@@ -27,13 +29,8 @@ export interface ConfigProtoMsg {
  * that strive for the maximum ease of maintainability should be able to describe
  * their state machine with a config object alone.
  */
-export interface ConfigAmino {
-  /** modules are the module configurations for the app. */
-  modules: ModuleConfigAmino[];
-}
-export interface ConfigAminoMsg {
-  type: "cosmos-sdk/Config";
-  value: ConfigAmino;
+export interface ConfigSDKType {
+  modules: ModuleConfigSDKType[];
 }
 /** ModuleConfig is a module configuration for an app. */
 export interface ModuleConfig {
@@ -61,29 +58,9 @@ export interface ModuleConfigProtoMsg {
   value: Uint8Array;
 }
 /** ModuleConfig is a module configuration for an app. */
-export interface ModuleConfigAmino {
-  /**
-   * name is the unique name of the module within the app. It should be a name
-   * that persists between different versions of a module so that modules
-   * can be smoothly upgraded to new versions.
-   * 
-   * For example, for the module cosmos.bank.module.v1.Module, we may chose
-   * to simply name the module "bank" in the app. When we upgrade to
-   * cosmos.bank.module.v2.Module, the app-specific name "bank" stays the same
-   * and the framework knows that the v2 module should receive all the same state
-   * that the v1 module had. Note: modules should provide info on which versions
-   * they can migrate from in the ModuleDescriptor.can_migration_from field.
-   */
+export interface ModuleConfigSDKType {
   name: string;
-  /**
-   * config is the config object for the module. Module config messages should
-   * define a ModuleDescriptor using the cosmos.app.v1alpha1.is_module extension.
-   */
-  config?: AnyAmino;
-}
-export interface ModuleConfigAminoMsg {
-  type: "cosmos-sdk/ModuleConfig";
-  value: ModuleConfigAmino;
+  config?: AnySDKType;
 }
 function createBaseConfig(): Config {
   return {
@@ -92,7 +69,6 @@ function createBaseConfig(): Config {
 }
 export const Config = {
   typeUrl: "/cosmos.app.v1alpha1.Config",
-  aminoType: "cosmos-sdk/Config",
   encode(message: Config, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.modules) {
       ModuleConfig.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -116,10 +92,43 @@ export const Config = {
     }
     return message;
   },
+  fromJSON(object: any): Config {
+    const obj = createBaseConfig();
+    if (Array.isArray(object?.modules)) obj.modules = object.modules.map((e: any) => ModuleConfig.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Config): JsonSafe<Config> {
+    const obj: any = {};
+    if (message.modules) {
+      obj.modules = message.modules.map(e => e ? ModuleConfig.toJSON(e) : undefined);
+    } else {
+      obj.modules = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Config>): Config {
     const message = createBaseConfig();
     message.modules = object.modules?.map(e => ModuleConfig.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ConfigSDKType): Config {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ConfigSDKType {
+    return {
+      modules: Array.isArray(object?.modules) ? object.modules.map((e: any) => ModuleConfig.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Config): ConfigSDKType {
+    const obj: any = {};
+    if (message.modules) {
+      obj.modules = message.modules.map(e => e ? ModuleConfig.toSDK(e) : undefined);
+    } else {
+      obj.modules = [];
+    }
+    return obj;
   },
   fromAmino(object: ConfigAmino): Config {
     const message = createBaseConfig();
@@ -165,9 +174,8 @@ function createBaseModuleConfig(): ModuleConfig {
 }
 export const ModuleConfig = {
   typeUrl: "/cosmos.app.v1alpha1.ModuleConfig",
-  aminoType: "cosmos-sdk/ModuleConfig",
   encode(message: ModuleConfig, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.config !== undefined) {
@@ -195,11 +203,43 @@ export const ModuleConfig = {
     }
     return message;
   },
+  fromJSON(object: any): ModuleConfig {
+    const obj = createBaseModuleConfig();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.config)) obj.config = Any.fromJSON(object.config);
+    return obj;
+  },
+  toJSON(message: ModuleConfig): JsonSafe<ModuleConfig> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.config !== undefined && (obj.config = message.config ? Any.toJSON(message.config) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ModuleConfig>): ModuleConfig {
     const message = createBaseModuleConfig();
     message.name = object.name ?? "";
-    message.config = object.config !== undefined && object.config !== null ? Any.fromPartial(object.config) : undefined;
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Any.fromPartial(object.config);
+    }
     return message;
+  },
+  fromSDK(object: ModuleConfigSDKType): ModuleConfig {
+    return {
+      name: object?.name,
+      config: object.config ? Any.fromSDK(object.config) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ModuleConfigSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      config: isSet(object.config) ? Any.fromSDKJSON(object.config) : undefined
+    };
+  },
+  toSDK(message: ModuleConfig): ModuleConfigSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.config !== undefined && (obj.config = message.config ? Any.toSDK(message.config) : undefined);
+    return obj;
   },
   fromAmino(object: ModuleConfigAmino): ModuleConfig {
     const message = createBaseModuleConfig();

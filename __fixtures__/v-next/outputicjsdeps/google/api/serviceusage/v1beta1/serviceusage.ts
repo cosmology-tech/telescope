@@ -1,7 +1,9 @@
-import { QuotaView, QuotaOverride, QuotaOverrideAmino, QuotaSafetyCheck, OverrideInlineSource, OverrideInlineSourceAmino, Service, ServiceAmino, ConsumerQuotaMetric, ConsumerQuotaMetricAmino, AdminQuotaPolicy, AdminQuotaPolicyAmino, ServiceIdentity, ServiceIdentityAmino } from "./resources";
-import { FieldMask, FieldMaskAmino } from "../../../protobuf/field_mask";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { QuotaView, QuotaViewSDKType, QuotaOverride, QuotaOverrideSDKType, QuotaSafetyCheck, QuotaSafetyCheckSDKType, OverrideInlineSource, OverrideInlineSourceSDKType, Service, ServiceSDKType, ConsumerQuotaMetric, ConsumerQuotaMetricSDKType, AdminQuotaPolicy, AdminQuotaPolicySDKType, ServiceIdentity, ServiceIdentitySDKType, quotaViewFromJSON, quotaViewToJSON, quotaSafetyCheckFromJSON, quotaSafetyCheckToJSON } from "./resources.js";
+import { FieldMask, FieldMaskSDKType } from "../../../protobuf/field_mask.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.serviceusage.v1beta1";
 /** Enum for service identity state. */
 export enum GetServiceIdentityResponse_IdentityState {
   /**
@@ -13,7 +15,7 @@ export enum GetServiceIdentityResponse_IdentityState {
   ACTIVE = 1,
   UNRECOGNIZED = -1,
 }
-export const GetServiceIdentityResponse_IdentityStateAmino = GetServiceIdentityResponse_IdentityState;
+export const GetServiceIdentityResponse_IdentityStateSDKType = GetServiceIdentityResponse_IdentityState;
 export function getServiceIdentityResponse_IdentityStateFromJSON(object: any): GetServiceIdentityResponse_IdentityState {
   switch (object) {
     case 0:
@@ -61,25 +63,8 @@ export interface EnableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `EnableService` method. */
-export interface EnableServiceRequestAmino {
-  /**
-   * Name of the consumer and service to enable the service on.
-   * 
-   * The `EnableService` and `DisableService` methods currently only support
-   * projects.
-   * 
-   * Enabling a service requires that the service is public or is shared with
-   * the user enabling the service.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
+export interface EnableServiceRequestSDKType {
   name: string;
-}
-export interface EnableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.EnableServiceRequest";
-  value: EnableServiceRequestAmino;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequest {
@@ -99,21 +84,8 @@ export interface DisableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `DisableService` method. */
-export interface DisableServiceRequestAmino {
-  /**
-   * Name of the consumer and service to disable the service on.
-   * 
-   * The enable and disable methods currently only support projects.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
+export interface DisableServiceRequestSDKType {
   name: string;
-}
-export interface DisableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DisableServiceRequest";
-  value: DisableServiceRequestAmino;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequest {
@@ -131,19 +103,8 @@ export interface GetServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `GetService` method. */
-export interface GetServiceRequestAmino {
-  /**
-   * Name of the consumer and service to get the `ConsumerState` for.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com`
-   * where `123` is the project number (not project ID).
-   */
+export interface GetServiceRequestSDKType {
   name: string;
-}
-export interface GetServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceRequest";
-  value: GetServiceRequestAmino;
 }
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequest {
@@ -177,35 +138,11 @@ export interface ListServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `ListServices` method. */
-export interface ListServicesRequestAmino {
-  /**
-   * Parent to search for services on.
-   * 
-   * An example name would be:
-   * `projects/123`
-   * where `123` is the project number (not project ID).
-   */
+export interface ListServicesRequestSDKType {
   parent: string;
-  /**
-   * Requested size of the next page of data.
-   * Requested page size cannot exceed 200.
-   *  If not set, the default page size is 50.
-   */
   page_size: number;
-  /**
-   * Token identifying which result to start with, which is returned by a
-   * previous list call.
-   */
   page_token: string;
-  /**
-   * Only list services that conform to the given filter.
-   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
-   */
   filter: string;
-}
-export interface ListServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListServicesRequest";
-  value: ListServicesRequestAmino;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
@@ -222,18 +159,9 @@ export interface ListServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the `ListServices` method. */
-export interface ListServicesResponseAmino {
-  /** The available services for the requested project. */
-  services: ServiceAmino[];
-  /**
-   * Token that can be passed to `ListServices` to resume a paginated
-   * query.
-   */
+export interface ListServicesResponseSDKType {
+  services: ServiceSDKType[];
   next_page_token: string;
-}
-export interface ListServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListServicesResponse";
-  value: ListServicesResponseAmino;
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequest {
@@ -270,38 +198,9 @@ export interface BatchEnableServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `BatchEnableServices` method. */
-export interface BatchEnableServicesRequestAmino {
-  /**
-   * Parent to enable services on.
-   * 
-   * An example name would be:
-   * `projects/123`
-   * where `123` is the project number (not project ID).
-   * 
-   * The `BatchEnableServices` method currently only supports projects.
-   */
+export interface BatchEnableServicesRequestSDKType {
   parent: string;
-  /**
-   * The identifiers of the services to enable on the project.
-   * 
-   * A valid identifier would be:
-   * serviceusage.googleapis.com
-   * 
-   * Enabling services requires that each service is public or is shared with
-   * the user enabling the service.
-   * 
-   * Two or more services must be specified. To enable a single service,
-   * use the `EnableService` method instead.
-   * 
-   * A single request can enable a maximum of 20 services at a time. If more
-   * than 20 services are specified, the request will fail, and no state changes
-   * will occur.
-   */
   service_ids: string[];
-}
-export interface BatchEnableServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest";
-  value: BatchEnableServicesRequestAmino;
 }
 /** Request message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsRequest {
@@ -329,29 +228,11 @@ export interface ListConsumerQuotaMetricsRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ListConsumerQuotaMetrics */
-export interface ListConsumerQuotaMetricsRequestAmino {
-  /**
-   * Parent of the quotas resource.
-   * 
-   * Some example names would be:
-   * `projects/123/services/serviceconsumermanagement.googleapis.com`
-   * `folders/345/services/serviceconsumermanagement.googleapis.com`
-   * `organizations/456/services/serviceconsumermanagement.googleapis.com`
-   */
+export interface ListConsumerQuotaMetricsRequestSDKType {
   parent: string;
-  /** Requested size of the next page of data. */
   page_size: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
   page_token: string;
-  /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface ListConsumerQuotaMetricsRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest";
-  value: ListConsumerQuotaMetricsRequestAmino;
 }
 /** Response message for ListConsumerQuotaMetrics */
 export interface ListConsumerQuotaMetricsResponse {
@@ -368,18 +249,9 @@ export interface ListConsumerQuotaMetricsResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ListConsumerQuotaMetrics */
-export interface ListConsumerQuotaMetricsResponseAmino {
-  /** Quota settings for the consumer, organized by quota metric. */
-  metrics: ConsumerQuotaMetricAmino[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
+export interface ListConsumerQuotaMetricsResponseSDKType {
+  metrics: ConsumerQuotaMetricSDKType[];
   next_page_token: string;
-}
-export interface ListConsumerQuotaMetricsResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsResponse";
-  value: ListConsumerQuotaMetricsResponseAmino;
 }
 /** Request message for GetConsumerQuotaMetric */
 export interface GetConsumerQuotaMetricRequest {
@@ -398,20 +270,9 @@ export interface GetConsumerQuotaMetricRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GetConsumerQuotaMetric */
-export interface GetConsumerQuotaMetricRequestAmino {
-  /**
-   * The resource name of the quota limit.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com/quotas/metrics/serviceusage.googleapis.com%2Fmutate_requests`
-   */
+export interface GetConsumerQuotaMetricRequestSDKType {
   name: string;
-  /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface GetConsumerQuotaMetricRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest";
-  value: GetConsumerQuotaMetricRequestAmino;
 }
 /** Request message for GetConsumerQuotaLimit */
 export interface GetConsumerQuotaLimitRequest {
@@ -430,20 +291,9 @@ export interface GetConsumerQuotaLimitRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for GetConsumerQuotaLimit */
-export interface GetConsumerQuotaLimitRequestAmino {
-  /**
-   * The resource name of the quota limit.
-   * 
-   * Use the quota limit resource name returned by previous
-   * ListConsumerQuotaMetrics and GetConsumerQuotaMetric API calls.
-   */
+export interface GetConsumerQuotaLimitRequestSDKType {
   name: string;
-  /** Specifies the level of detail for quota information in the response. */
   view: QuotaView;
-}
-export interface GetConsumerQuotaLimitRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest";
-  value: GetConsumerQuotaLimitRequestAmino;
 }
 /** Request message for CreateAdminOverride. */
 export interface CreateAdminOverrideRequest {
@@ -476,34 +326,11 @@ export interface CreateAdminOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for CreateAdminOverride. */
-export interface CreateAdminOverrideRequestAmino {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
+export interface CreateAdminOverrideRequestSDKType {
   parent: string;
-  /** The admin override to create. */
-  override?: QuotaOverrideAmino;
-  /**
-   * Whether to force the creation of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  override?: QuotaOverrideSDKType;
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface CreateAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest";
-  value: CreateAdminOverrideRequestAmino;
 }
 /** Request message for UpdateAdminOverride. */
 export interface UpdateAdminOverrideRequest {
@@ -543,41 +370,12 @@ export interface UpdateAdminOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for UpdateAdminOverride. */
-export interface UpdateAdminOverrideRequestAmino {
-  /**
-   * The resource name of the override to update.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
-   */
+export interface UpdateAdminOverrideRequestSDKType {
   name: string;
-  /**
-   * The new override.
-   * Only the override_value is updated; all other fields are ignored.
-   */
-  override?: QuotaOverrideAmino;
-  /**
-   * Whether to force the update of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  override?: QuotaOverrideSDKType;
   force: boolean;
-  /**
-   * Update only the specified fields of the override.
-   * If unset, all fields will be updated.
-   */
-  update_mask?: FieldMaskAmino;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
+  update_mask?: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
-}
-export interface UpdateAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest";
-  value: UpdateAdminOverrideRequestAmino;
 }
 /** Request message for DeleteAdminOverride. */
 export interface DeleteAdminOverrideRequest {
@@ -607,31 +405,10 @@ export interface DeleteAdminOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for DeleteAdminOverride. */
-export interface DeleteAdminOverrideRequestAmino {
-  /**
-   * The resource name of the override to delete.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/adminOverrides/4a3f2c1d`
-   */
+export interface DeleteAdminOverrideRequestSDKType {
   name: string;
-  /**
-   * Whether to force the deletion of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface DeleteAdminOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest";
-  value: DeleteAdminOverrideRequestAmino;
 }
 /** Request message for ListAdminOverrides */
 export interface ListAdminOverridesRequest {
@@ -656,26 +433,10 @@ export interface ListAdminOverridesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ListAdminOverrides */
-export interface ListAdminOverridesRequestAmino {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
+export interface ListAdminOverridesRequestSDKType {
   parent: string;
-  /** Requested size of the next page of data. */
   page_size: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
   page_token: string;
-}
-export interface ListAdminOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest";
-  value: ListAdminOverridesRequestAmino;
 }
 /** Response message for ListAdminOverrides. */
 export interface ListAdminOverridesResponse {
@@ -692,18 +453,9 @@ export interface ListAdminOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ListAdminOverrides. */
-export interface ListAdminOverridesResponseAmino {
-  /** Admin overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
+export interface ListAdminOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
   next_page_token: string;
-}
-export interface ListAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListAdminOverridesResponse";
-  value: ListAdminOverridesResponseAmino;
 }
 /** Response message for BatchCreateAdminOverrides */
 export interface BatchCreateAdminOverridesResponse {
@@ -715,13 +467,8 @@ export interface BatchCreateAdminOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for BatchCreateAdminOverrides */
-export interface BatchCreateAdminOverridesResponseAmino {
-  /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
-}
-export interface BatchCreateAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchCreateAdminOverridesResponse";
-  value: BatchCreateAdminOverridesResponseAmino;
+export interface BatchCreateAdminOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
 }
 /** Request message for ImportAdminOverrides */
 export interface ImportAdminOverridesRequest {
@@ -753,33 +500,11 @@ export interface ImportAdminOverridesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ImportAdminOverrides */
-export interface ImportAdminOverridesRequestAmino {
-  /**
-   * The resource name of the consumer.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com`
-   */
+export interface ImportAdminOverridesRequestSDKType {
   parent: string;
-  /** The import data is specified in the request message itself */
-  inline_source?: OverrideInlineSourceAmino;
-  /**
-   * Whether to force the creation of the quota overrides.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  inline_source?: OverrideInlineSourceSDKType;
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface ImportAdminOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest";
-  value: ImportAdminOverridesRequestAmino;
 }
 /** Response message for ImportAdminOverrides */
 export interface ImportAdminOverridesResponse {
@@ -791,13 +516,8 @@ export interface ImportAdminOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ImportAdminOverrides */
-export interface ImportAdminOverridesResponseAmino {
-  /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
-}
-export interface ImportAdminOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesResponse";
-  value: ImportAdminOverridesResponseAmino;
+export interface ImportAdminOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -814,11 +534,7 @@ export interface ImportAdminOverridesMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by ImportAdminOverrides.
  */
-export interface ImportAdminOverridesMetadataAmino {}
-export interface ImportAdminOverridesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminOverridesMetadata";
-  value: ImportAdminOverridesMetadataAmino;
-}
+export interface ImportAdminOverridesMetadataSDKType {}
 /** Request message for CreateConsumerOverride. */
 export interface CreateConsumerOverrideRequest {
   /**
@@ -850,34 +566,11 @@ export interface CreateConsumerOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for CreateConsumerOverride. */
-export interface CreateConsumerOverrideRequestAmino {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
+export interface CreateConsumerOverrideRequestSDKType {
   parent: string;
-  /** The override to create. */
-  override?: QuotaOverrideAmino;
-  /**
-   * Whether to force the creation of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  override?: QuotaOverrideSDKType;
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface CreateConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest";
-  value: CreateConsumerOverrideRequestAmino;
 }
 /** Request message for UpdateConsumerOverride. */
 export interface UpdateConsumerOverrideRequest {
@@ -917,41 +610,12 @@ export interface UpdateConsumerOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for UpdateConsumerOverride. */
-export interface UpdateConsumerOverrideRequestAmino {
-  /**
-   * The resource name of the override to update.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   */
+export interface UpdateConsumerOverrideRequestSDKType {
   name: string;
-  /**
-   * The new override.
-   * Only the override_value is updated; all other fields are ignored.
-   */
-  override?: QuotaOverrideAmino;
-  /**
-   * Whether to force the update of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  override?: QuotaOverrideSDKType;
   force: boolean;
-  /**
-   * Update only the specified fields of the override.
-   * If unset, all fields will be updated.
-   */
-  update_mask?: FieldMaskAmino;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
+  update_mask?: FieldMaskSDKType;
   force_only: QuotaSafetyCheck[];
-}
-export interface UpdateConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest";
-  value: UpdateConsumerOverrideRequestAmino;
 }
 /** Request message for DeleteConsumerOverride. */
 export interface DeleteConsumerOverrideRequest {
@@ -981,31 +645,10 @@ export interface DeleteConsumerOverrideRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for DeleteConsumerOverride. */
-export interface DeleteConsumerOverrideRequestAmino {
-  /**
-   * The resource name of the override to delete.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion/consumerOverrides/4a3f2c1d`
-   */
+export interface DeleteConsumerOverrideRequestSDKType {
   name: string;
-  /**
-   * Whether to force the deletion of the quota override.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface DeleteConsumerOverrideRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest";
-  value: DeleteConsumerOverrideRequestAmino;
 }
 /** Request message for ListConsumerOverrides */
 export interface ListConsumerOverridesRequest {
@@ -1030,26 +673,10 @@ export interface ListConsumerOverridesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ListConsumerOverrides */
-export interface ListConsumerOverridesRequestAmino {
-  /**
-   * The resource name of the parent quota limit, returned by a
-   * ListConsumerQuotaMetrics or GetConsumerQuotaMetric call.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com/consumerQuotaMetrics/compute.googleapis.com%2Fcpus/limits/%2Fproject%2Fregion`
-   */
+export interface ListConsumerOverridesRequestSDKType {
   parent: string;
-  /** Requested size of the next page of data. */
   page_size: number;
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
   page_token: string;
-}
-export interface ListConsumerOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest";
-  value: ListConsumerOverridesRequestAmino;
 }
 /** Response message for ListConsumerOverrides. */
 export interface ListConsumerOverridesResponse {
@@ -1066,18 +693,9 @@ export interface ListConsumerOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ListConsumerOverrides. */
-export interface ListConsumerOverridesResponseAmino {
-  /** Consumer overrides on this limit. */
-  overrides: QuotaOverrideAmino[];
-  /**
-   * Token identifying which result to start with; returned by a previous list
-   * call.
-   */
+export interface ListConsumerOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
   next_page_token: string;
-}
-export interface ListConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ListConsumerOverridesResponse";
-  value: ListConsumerOverridesResponseAmino;
 }
 /** Response message for BatchCreateConsumerOverrides */
 export interface BatchCreateConsumerOverridesResponse {
@@ -1089,13 +707,8 @@ export interface BatchCreateConsumerOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for BatchCreateConsumerOverrides */
-export interface BatchCreateConsumerOverridesResponseAmino {
-  /** The overrides that were created. */
-  overrides: QuotaOverrideAmino[];
-}
-export interface BatchCreateConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.BatchCreateConsumerOverridesResponse";
-  value: BatchCreateConsumerOverridesResponseAmino;
+export interface BatchCreateConsumerOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
 }
 /** Request message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesRequest {
@@ -1127,33 +740,11 @@ export interface ImportConsumerOverridesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for ImportConsumerOverrides */
-export interface ImportConsumerOverridesRequestAmino {
-  /**
-   * The resource name of the consumer.
-   * 
-   * An example name would be:
-   * `projects/123/services/compute.googleapis.com`
-   */
+export interface ImportConsumerOverridesRequestSDKType {
   parent: string;
-  /** The import data is specified in the request message itself */
-  inline_source?: OverrideInlineSourceAmino;
-  /**
-   * Whether to force the creation of the quota overrides.
-   * Setting the force parameter to 'true' ignores all quota safety checks that
-   * would fail the request. QuotaSafetyCheck lists all such validations.
-   */
+  inline_source?: OverrideInlineSourceSDKType;
   force: boolean;
-  /**
-   * The list of quota safety checks to ignore before the override mutation.
-   * Unlike 'force' field that ignores all the quota safety checks, the
-   * 'force_only' field ignores only the specified checks; other checks are
-   * still enforced. The 'force' and 'force_only' fields cannot both be set.
-   */
   force_only: QuotaSafetyCheck[];
-}
-export interface ImportConsumerOverridesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest";
-  value: ImportConsumerOverridesRequestAmino;
 }
 /** Response message for ImportConsumerOverrides */
 export interface ImportConsumerOverridesResponse {
@@ -1165,13 +756,8 @@ export interface ImportConsumerOverridesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ImportConsumerOverrides */
-export interface ImportConsumerOverridesResponseAmino {
-  /** The overrides that were created from the imported data. */
-  overrides: QuotaOverrideAmino[];
-}
-export interface ImportConsumerOverridesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesResponse";
-  value: ImportConsumerOverridesResponseAmino;
+export interface ImportConsumerOverridesResponseSDKType {
+  overrides: QuotaOverrideSDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -1188,11 +774,7 @@ export interface ImportConsumerOverridesMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by ImportConsumerOverrides.
  */
-export interface ImportConsumerOverridesMetadataAmino {}
-export interface ImportConsumerOverridesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesMetadata";
-  value: ImportConsumerOverridesMetadataAmino;
-}
+export interface ImportConsumerOverridesMetadataSDKType {}
 /** Response message for ImportAdminQuotaPolicies */
 export interface ImportAdminQuotaPoliciesResponse {
   /** The policies that were created from the imported data. */
@@ -1203,13 +785,8 @@ export interface ImportAdminQuotaPoliciesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for ImportAdminQuotaPolicies */
-export interface ImportAdminQuotaPoliciesResponseAmino {
-  /** The policies that were created from the imported data. */
-  policies: AdminQuotaPolicyAmino[];
-}
-export interface ImportAdminQuotaPoliciesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesResponse";
-  value: ImportAdminQuotaPoliciesResponseAmino;
+export interface ImportAdminQuotaPoliciesResponseSDKType {
+  policies: AdminQuotaPolicySDKType[];
 }
 /**
  * Metadata message that provides information such as progress,
@@ -1226,11 +803,7 @@ export interface ImportAdminQuotaPoliciesMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by ImportAdminQuotaPolicies.
  */
-export interface ImportAdminQuotaPoliciesMetadataAmino {}
-export interface ImportAdminQuotaPoliciesMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.ImportAdminQuotaPoliciesMetadata";
-  value: ImportAdminQuotaPoliciesMetadataAmino;
-}
+export interface ImportAdminQuotaPoliciesMetadataSDKType {}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1246,11 +819,7 @@ export interface CreateAdminQuotaPolicyMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by CreateAdminQuotaPolicy.
  */
-export interface CreateAdminQuotaPolicyMetadataAmino {}
-export interface CreateAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.CreateAdminQuotaPolicyMetadata";
-  value: CreateAdminQuotaPolicyMetadataAmino;
-}
+export interface CreateAdminQuotaPolicyMetadataSDKType {}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1266,11 +835,7 @@ export interface UpdateAdminQuotaPolicyMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by UpdateAdminQuotaPolicy.
  */
-export interface UpdateAdminQuotaPolicyMetadataAmino {}
-export interface UpdateAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.UpdateAdminQuotaPolicyMetadata";
-  value: UpdateAdminQuotaPolicyMetadataAmino;
-}
+export interface UpdateAdminQuotaPolicyMetadataSDKType {}
 /**
  * Metadata message that provides information such as progress,
  * partial failures, and similar information on each GetOperation call
@@ -1286,11 +851,7 @@ export interface DeleteAdminQuotaPolicyMetadataProtoMsg {
  * partial failures, and similar information on each GetOperation call
  * of LRO returned by DeleteAdminQuotaPolicy.
  */
-export interface DeleteAdminQuotaPolicyMetadataAmino {}
-export interface DeleteAdminQuotaPolicyMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.DeleteAdminQuotaPolicyMetadata";
-  value: DeleteAdminQuotaPolicyMetadataAmino;
-}
+export interface DeleteAdminQuotaPolicyMetadataSDKType {}
 /** Request message for generating service identity. */
 export interface GenerateServiceIdentityRequest {
   /**
@@ -1309,21 +870,8 @@ export interface GenerateServiceIdentityRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for generating service identity. */
-export interface GenerateServiceIdentityRequestAmino {
-  /**
-   * Name of the consumer and service to generate an identity for.
-   * 
-   * The `GenerateServiceIdentity` methods currently only support projects.
-   * 
-   * An example name would be:
-   * `projects/123/services/example.googleapis.com` where `123` is the
-   * project number.
-   */
+export interface GenerateServiceIdentityRequestSDKType {
   parent: string;
-}
-export interface GenerateServiceIdentityRequestAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest";
-  value: GenerateServiceIdentityRequestAmino;
 }
 /** Response message for getting service identity. */
 export interface GetServiceIdentityResponse {
@@ -1341,19 +889,9 @@ export interface GetServiceIdentityResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for getting service identity. */
-export interface GetServiceIdentityResponseAmino {
-  /**
-   * Service identity that service producer can use to access consumer
-   * resources. If exists is true, it contains email and unique_id. If exists is
-   * false, it contains pre-constructed email and empty unique_id.
-   */
-  identity?: ServiceIdentityAmino;
-  /** Service identity state. */
+export interface GetServiceIdentityResponseSDKType {
+  identity?: ServiceIdentitySDKType;
   state: GetServiceIdentityResponse_IdentityState;
-}
-export interface GetServiceIdentityResponseAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceIdentityResponse";
-  value: GetServiceIdentityResponseAmino;
 }
 /** Metadata for the `GetServiceIdentity` method. */
 export interface GetServiceIdentityMetadata {}
@@ -1362,11 +900,7 @@ export interface GetServiceIdentityMetadataProtoMsg {
   value: Uint8Array;
 }
 /** Metadata for the `GetServiceIdentity` method. */
-export interface GetServiceIdentityMetadataAmino {}
-export interface GetServiceIdentityMetadataAminoMsg {
-  type: "/google.api.serviceusage.v1beta1.GetServiceIdentityMetadata";
-  value: GetServiceIdentityMetadataAmino;
-}
+export interface GetServiceIdentityMetadataSDKType {}
 function createBaseEnableServiceRequest(): EnableServiceRequest {
   return {
     name: ""
@@ -1375,7 +909,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1397,10 +931,35 @@ export const EnableServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): EnableServiceRequest {
+    const obj = createBaseEnableServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
+  },
+  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
+  },
   fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+  fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
+    return {
+      name: object?.name
+    };
+  },
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+  toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   },
   fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
@@ -1438,7 +997,7 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1460,10 +1019,35 @@ export const DisableServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): DisableServiceRequest {
+    const obj = createBaseDisableServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
+  },
+  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+  fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
+    return {
+      name: object?.name
+    };
+  },
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+  toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   },
   fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
@@ -1501,7 +1085,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -1523,10 +1107,35 @@ export const GetServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): GetServiceRequest {
+    const obj = createBaseGetServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
+  },
+  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
+  },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
     const message = createBaseGetServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
+    return {
+      name: object?.name
+    };
+  },
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   },
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
     const message = createBaseGetServiceRequest();
@@ -1567,16 +1176,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -1607,6 +1216,22 @@ export const ListServicesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListServicesRequest {
+    const obj = createBaseListServicesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    return obj;
+  },
+  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
+    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
     const message = createBaseListServicesRequest();
     message.parent = object.parent ?? "";
@@ -1614,6 +1239,30 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.filter = object.filter ?? "";
     return message;
+  },
+  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
+    return {
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      filter: object?.filter
+    };
+  },
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.filter = message.filter;
+    return obj;
   },
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
     const message = createBaseListServicesRequest();
@@ -1667,7 +1316,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1692,11 +1341,49 @@ export const ListServicesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListServicesResponse {
+    const obj = createBaseListServicesResponse();
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
+  },
+  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
+      nextPageToken: object?.next_page_token
+    };
+  },
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   },
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
     const message = createBaseListServicesResponse();
@@ -1741,7 +1428,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1769,11 +1456,49 @@ export const BatchEnableServicesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): BatchEnableServicesRequest {
+    const obj = createBaseBatchEnableServicesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    if (message.serviceIds) {
+      obj.serviceIds = message.serviceIds.map(e => e);
+    } else {
+      obj.serviceIds = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
     message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
+    return {
+      parent: object?.parent,
+      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    if (message.serviceIds) {
+      obj.service_ids = message.serviceIds.map(e => e);
+    } else {
+      obj.service_ids = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
@@ -1820,13 +1545,13 @@ function createBaseListConsumerQuotaMetricsRequest(): ListConsumerQuotaMetricsRe
 export const ListConsumerQuotaMetricsRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerQuotaMetricsRequest",
   encode(message: ListConsumerQuotaMetricsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     if (message.view !== 0) {
@@ -1860,6 +1585,22 @@ export const ListConsumerQuotaMetricsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListConsumerQuotaMetricsRequest {
+    const obj = createBaseListConsumerQuotaMetricsRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
+    return obj;
+  },
+  toJSON(message: ListConsumerQuotaMetricsRequest): JsonSafe<ListConsumerQuotaMetricsRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
+    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListConsumerQuotaMetricsRequest>): ListConsumerQuotaMetricsRequest {
     const message = createBaseListConsumerQuotaMetricsRequest();
     message.parent = object.parent ?? "";
@@ -1867,6 +1608,30 @@ export const ListConsumerQuotaMetricsRequest = {
     message.pageToken = object.pageToken ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+  fromSDK(object: ListConsumerQuotaMetricsRequestSDKType): ListConsumerQuotaMetricsRequest {
+    return {
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  toSDK(message: ListConsumerQuotaMetricsRequest): ListConsumerQuotaMetricsRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   },
   fromAmino(object: ListConsumerQuotaMetricsRequestAmino): ListConsumerQuotaMetricsRequest {
     const message = createBaseListConsumerQuotaMetricsRequest();
@@ -1920,7 +1685,7 @@ export const ListConsumerQuotaMetricsResponse = {
     for (const v of message.metrics) {
       ConsumerQuotaMetric.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -1945,11 +1710,49 @@ export const ListConsumerQuotaMetricsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListConsumerQuotaMetricsResponse {
+    const obj = createBaseListConsumerQuotaMetricsResponse();
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => ConsumerQuotaMetric.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
+  },
+  toJSON(message: ListConsumerQuotaMetricsResponse): JsonSafe<ListConsumerQuotaMetricsResponse> {
+    const obj: any = {};
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toJSON(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListConsumerQuotaMetricsResponse>): ListConsumerQuotaMetricsResponse {
     const message = createBaseListConsumerQuotaMetricsResponse();
     message.metrics = object.metrics?.map(e => ConsumerQuotaMetric.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListConsumerQuotaMetricsResponseSDKType): ListConsumerQuotaMetricsResponse {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDK(e)) : [],
+      nextPageToken: object?.next_page_token
+    };
+  },
+  fromSDKJSON(object: any): ListConsumerQuotaMetricsResponseSDKType {
+    return {
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => ConsumerQuotaMetric.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+  toSDK(message: ListConsumerQuotaMetricsResponse): ListConsumerQuotaMetricsResponseSDKType {
+    const obj: any = {};
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e ? ConsumerQuotaMetric.toSDK(e) : undefined);
+    } else {
+      obj.metrics = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   },
   fromAmino(object: ListConsumerQuotaMetricsResponseAmino): ListConsumerQuotaMetricsResponse {
     const message = createBaseListConsumerQuotaMetricsResponse();
@@ -1994,7 +1797,7 @@ function createBaseGetConsumerQuotaMetricRequest(): GetConsumerQuotaMetricReques
 export const GetConsumerQuotaMetricRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaMetricRequest",
   encode(message: GetConsumerQuotaMetricRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== 0) {
@@ -2022,11 +1825,41 @@ export const GetConsumerQuotaMetricRequest = {
     }
     return message;
   },
+  fromJSON(object: any): GetConsumerQuotaMetricRequest {
+    const obj = createBaseGetConsumerQuotaMetricRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
+    return obj;
+  },
+  toJSON(message: GetConsumerQuotaMetricRequest): JsonSafe<GetConsumerQuotaMetricRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
+  },
   fromPartial(object: DeepPartial<GetConsumerQuotaMetricRequest>): GetConsumerQuotaMetricRequest {
     const message = createBaseGetConsumerQuotaMetricRequest();
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+  fromSDK(object: GetConsumerQuotaMetricRequestSDKType): GetConsumerQuotaMetricRequest {
+    return {
+      name: object?.name,
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  fromSDKJSON(object: any): GetConsumerQuotaMetricRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  toSDK(message: GetConsumerQuotaMetricRequest): GetConsumerQuotaMetricRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   },
   fromAmino(object: GetConsumerQuotaMetricRequestAmino): GetConsumerQuotaMetricRequest {
     const message = createBaseGetConsumerQuotaMetricRequest();
@@ -2069,7 +1902,7 @@ function createBaseGetConsumerQuotaLimitRequest(): GetConsumerQuotaLimitRequest 
 export const GetConsumerQuotaLimitRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GetConsumerQuotaLimitRequest",
   encode(message: GetConsumerQuotaLimitRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.view !== 0) {
@@ -2097,11 +1930,41 @@ export const GetConsumerQuotaLimitRequest = {
     }
     return message;
   },
+  fromJSON(object: any): GetConsumerQuotaLimitRequest {
+    const obj = createBaseGetConsumerQuotaLimitRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.view)) obj.view = quotaViewFromJSON(object.view);
+    return obj;
+  },
+  toJSON(message: GetConsumerQuotaLimitRequest): JsonSafe<GetConsumerQuotaLimitRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
+  },
   fromPartial(object: DeepPartial<GetConsumerQuotaLimitRequest>): GetConsumerQuotaLimitRequest {
     const message = createBaseGetConsumerQuotaLimitRequest();
     message.name = object.name ?? "";
     message.view = object.view ?? 0;
     return message;
+  },
+  fromSDK(object: GetConsumerQuotaLimitRequestSDKType): GetConsumerQuotaLimitRequest {
+    return {
+      name: object?.name,
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  fromSDKJSON(object: any): GetConsumerQuotaLimitRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      view: isSet(object.view) ? quotaViewFromJSON(object.view) : -1
+    };
+  },
+  toSDK(message: GetConsumerQuotaLimitRequest): GetConsumerQuotaLimitRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.view !== undefined && (obj.view = quotaViewToJSON(message.view));
+    return obj;
   },
   fromAmino(object: GetConsumerQuotaLimitRequestAmino): GetConsumerQuotaLimitRequest {
     const message = createBaseGetConsumerQuotaLimitRequest();
@@ -2146,13 +2009,13 @@ function createBaseCreateAdminOverrideRequest(): CreateAdminOverrideRequest {
 export const CreateAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateAdminOverrideRequest",
   encode(message: CreateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -2195,13 +2058,63 @@ export const CreateAdminOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): CreateAdminOverrideRequest {
+    const obj = createBaseCreateAdminOverrideRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: CreateAdminOverrideRequest): JsonSafe<CreateAdminOverrideRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<CreateAdminOverrideRequest>): CreateAdminOverrideRequest {
     const message = createBaseCreateAdminOverrideRequest();
     message.parent = object.parent ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromPartial(object.override);
+    }
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: CreateAdminOverrideRequestSDKType): CreateAdminOverrideRequest {
+    return {
+      parent: object?.parent,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): CreateAdminOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: CreateAdminOverrideRequest): CreateAdminOverrideRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: CreateAdminOverrideRequestAmino): CreateAdminOverrideRequest {
     const message = createBaseCreateAdminOverrideRequest();
@@ -2257,13 +2170,13 @@ function createBaseUpdateAdminOverrideRequest(): UpdateAdminOverrideRequest {
 export const UpdateAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateAdminOverrideRequest",
   encode(message: UpdateAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     if (message.updateMask !== undefined) {
@@ -2312,14 +2225,71 @@ export const UpdateAdminOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): UpdateAdminOverrideRequest {
+    const obj = createBaseUpdateAdminOverrideRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: UpdateAdminOverrideRequest): JsonSafe<UpdateAdminOverrideRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<UpdateAdminOverrideRequest>): UpdateAdminOverrideRequest {
     const message = createBaseUpdateAdminOverrideRequest();
     message.name = object.name ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromPartial(object.override);
+    }
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: UpdateAdminOverrideRequestSDKType): UpdateAdminOverrideRequest {
+    return {
+      name: object?.name,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: object?.force,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): UpdateAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: UpdateAdminOverrideRequest): UpdateAdminOverrideRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    obj.force = message.force;
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: UpdateAdminOverrideRequestAmino): UpdateAdminOverrideRequest {
     const message = createBaseUpdateAdminOverrideRequest();
@@ -2377,10 +2347,10 @@ function createBaseDeleteAdminOverrideRequest(): DeleteAdminOverrideRequest {
 export const DeleteAdminOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteAdminOverrideRequest",
   encode(message: DeleteAdminOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(16).bool(message.force);
     }
     writer.uint32(26).fork();
@@ -2420,12 +2390,55 @@ export const DeleteAdminOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): DeleteAdminOverrideRequest {
+    const obj = createBaseDeleteAdminOverrideRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: DeleteAdminOverrideRequest): JsonSafe<DeleteAdminOverrideRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<DeleteAdminOverrideRequest>): DeleteAdminOverrideRequest {
     const message = createBaseDeleteAdminOverrideRequest();
     message.name = object.name ?? "";
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: DeleteAdminOverrideRequestSDKType): DeleteAdminOverrideRequest {
+    return {
+      name: object?.name,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): DeleteAdminOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: DeleteAdminOverrideRequest): DeleteAdminOverrideRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: DeleteAdminOverrideRequestAmino): DeleteAdminOverrideRequest {
     const message = createBaseDeleteAdminOverrideRequest();
@@ -2475,13 +2488,13 @@ function createBaseListAdminOverridesRequest(): ListAdminOverridesRequest {
 export const ListAdminOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListAdminOverridesRequest",
   encode(message: ListAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -2509,12 +2522,47 @@ export const ListAdminOverridesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListAdminOverridesRequest {
+    const obj = createBaseListAdminOverridesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    return obj;
+  },
+  toJSON(message: ListAdminOverridesRequest): JsonSafe<ListAdminOverridesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
+    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListAdminOverridesRequest>): ListAdminOverridesRequest {
     const message = createBaseListAdminOverridesRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListAdminOverridesRequestSDKType): ListAdminOverridesRequest {
+    return {
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
+    };
+  },
+  fromSDKJSON(object: any): ListAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+  toSDK(message: ListAdminOverridesRequest): ListAdminOverridesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
   },
   fromAmino(object: ListAdminOverridesRequestAmino): ListAdminOverridesRequest {
     const message = createBaseListAdminOverridesRequest();
@@ -2564,7 +2612,7 @@ export const ListAdminOverridesResponse = {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -2589,11 +2637,49 @@ export const ListAdminOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListAdminOverridesResponse {
+    const obj = createBaseListAdminOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
+  },
+  toJSON(message: ListAdminOverridesResponse): JsonSafe<ListAdminOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListAdminOverridesResponse>): ListAdminOverridesResponse {
     const message = createBaseListAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListAdminOverridesResponseSDKType): ListAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
+      nextPageToken: object?.next_page_token
+    };
+  },
+  fromSDKJSON(object: any): ListAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+  toSDK(message: ListAdminOverridesResponse): ListAdminOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   },
   fromAmino(object: ListAdminOverridesResponseAmino): ListAdminOverridesResponse {
     const message = createBaseListAdminOverridesResponse();
@@ -2659,10 +2745,43 @@ export const BatchCreateAdminOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): BatchCreateAdminOverridesResponse {
+    const obj = createBaseBatchCreateAdminOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: BatchCreateAdminOverridesResponse): JsonSafe<BatchCreateAdminOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchCreateAdminOverridesResponse>): BatchCreateAdminOverridesResponse {
     const message = createBaseBatchCreateAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: BatchCreateAdminOverridesResponseSDKType): BatchCreateAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchCreateAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: BatchCreateAdminOverridesResponse): BatchCreateAdminOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchCreateAdminOverridesResponseAmino): BatchCreateAdminOverridesResponse {
     const message = createBaseBatchCreateAdminOverridesResponse();
@@ -2705,13 +2824,13 @@ function createBaseImportAdminOverridesRequest(): ImportAdminOverridesRequest {
 export const ImportAdminOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportAdminOverridesRequest",
   encode(message: ImportAdminOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.inlineSource !== undefined) {
       OverrideInlineSource.encode(message.inlineSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -2754,13 +2873,63 @@ export const ImportAdminOverridesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ImportAdminOverridesRequest {
+    const obj = createBaseImportAdminOverridesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.inlineSource)) obj.inlineSource = OverrideInlineSource.fromJSON(object.inlineSource);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: ImportAdminOverridesRequest): JsonSafe<ImportAdminOverridesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ImportAdminOverridesRequest>): ImportAdminOverridesRequest {
     const message = createBaseImportAdminOverridesRequest();
     message.parent = object.parent ?? "";
-    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
+    if (object.inlineSource !== undefined && object.inlineSource !== null) {
+      message.inlineSource = OverrideInlineSource.fromPartial(object.inlineSource);
+    }
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ImportAdminOverridesRequestSDKType): ImportAdminOverridesRequest {
+    return {
+      parent: object?.parent,
+      inlineSource: object.inline_source ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ImportAdminOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: ImportAdminOverridesRequest): ImportAdminOverridesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: ImportAdminOverridesRequestAmino): ImportAdminOverridesRequest {
     const message = createBaseImportAdminOverridesRequest();
@@ -2834,10 +3003,43 @@ export const ImportAdminOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ImportAdminOverridesResponse {
+    const obj = createBaseImportAdminOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ImportAdminOverridesResponse): JsonSafe<ImportAdminOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ImportAdminOverridesResponse>): ImportAdminOverridesResponse {
     const message = createBaseImportAdminOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ImportAdminOverridesResponseSDKType): ImportAdminOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ImportAdminOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ImportAdminOverridesResponse): ImportAdminOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
   },
   fromAmino(object: ImportAdminOverridesResponseAmino): ImportAdminOverridesResponse {
     const message = createBaseImportAdminOverridesResponse();
@@ -2891,9 +3093,27 @@ export const ImportAdminOverridesMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): ImportAdminOverridesMetadata {
+    const obj = createBaseImportAdminOverridesMetadata();
+    return obj;
+  },
+  toJSON(_: ImportAdminOverridesMetadata): JsonSafe<ImportAdminOverridesMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ImportAdminOverridesMetadata>): ImportAdminOverridesMetadata {
     const message = createBaseImportAdminOverridesMetadata();
     return message;
+  },
+  fromSDK(_: ImportAdminOverridesMetadataSDKType): ImportAdminOverridesMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): ImportAdminOverridesMetadataSDKType {
+    return {};
+  },
+  toSDK(_: ImportAdminOverridesMetadata): ImportAdminOverridesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ImportAdminOverridesMetadataAmino): ImportAdminOverridesMetadata {
     const message = createBaseImportAdminOverridesMetadata();
@@ -2930,13 +3150,13 @@ function createBaseCreateConsumerOverrideRequest(): CreateConsumerOverrideReques
 export const CreateConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.CreateConsumerOverrideRequest",
   encode(message: CreateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -2979,13 +3199,63 @@ export const CreateConsumerOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): CreateConsumerOverrideRequest {
+    const obj = createBaseCreateConsumerOverrideRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: CreateConsumerOverrideRequest): JsonSafe<CreateConsumerOverrideRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<CreateConsumerOverrideRequest>): CreateConsumerOverrideRequest {
     const message = createBaseCreateConsumerOverrideRequest();
     message.parent = object.parent ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromPartial(object.override);
+    }
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: CreateConsumerOverrideRequestSDKType): CreateConsumerOverrideRequest {
+    return {
+      parent: object?.parent,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): CreateConsumerOverrideRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: CreateConsumerOverrideRequest): CreateConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: CreateConsumerOverrideRequestAmino): CreateConsumerOverrideRequest {
     const message = createBaseCreateConsumerOverrideRequest();
@@ -3041,13 +3311,13 @@ function createBaseUpdateConsumerOverrideRequest(): UpdateConsumerOverrideReques
 export const UpdateConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.UpdateConsumerOverrideRequest",
   encode(message: UpdateConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.override !== undefined) {
       QuotaOverride.encode(message.override, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     if (message.updateMask !== undefined) {
@@ -3096,14 +3366,71 @@ export const UpdateConsumerOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): UpdateConsumerOverrideRequest {
+    const obj = createBaseUpdateConsumerOverrideRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.override)) obj.override = QuotaOverride.fromJSON(object.override);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (isSet(object.updateMask)) obj.updateMask = FieldMask.fromJSON(object.updateMask);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: UpdateConsumerOverrideRequest): JsonSafe<UpdateConsumerOverrideRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toJSON(message.override) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    message.updateMask !== undefined && (obj.updateMask = message.updateMask ? FieldMask.toJSON(message.updateMask) : undefined);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<UpdateConsumerOverrideRequest>): UpdateConsumerOverrideRequest {
     const message = createBaseUpdateConsumerOverrideRequest();
     message.name = object.name ?? "";
-    message.override = object.override !== undefined && object.override !== null ? QuotaOverride.fromPartial(object.override) : undefined;
+    if (object.override !== undefined && object.override !== null) {
+      message.override = QuotaOverride.fromPartial(object.override);
+    }
     message.force = object.force ?? false;
-    message.updateMask = object.updateMask !== undefined && object.updateMask !== null ? FieldMask.fromPartial(object.updateMask) : undefined;
+    if (object.updateMask !== undefined && object.updateMask !== null) {
+      message.updateMask = FieldMask.fromPartial(object.updateMask);
+    }
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: UpdateConsumerOverrideRequestSDKType): UpdateConsumerOverrideRequest {
+    return {
+      name: object?.name,
+      override: object.override ? QuotaOverride.fromSDK(object.override) : undefined,
+      force: object?.force,
+      updateMask: object.update_mask ? FieldMask.fromSDK(object.update_mask) : undefined,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): UpdateConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      override: isSet(object.override) ? QuotaOverride.fromSDKJSON(object.override) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      update_mask: isSet(object.update_mask) ? FieldMask.fromSDKJSON(object.update_mask) : undefined,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: UpdateConsumerOverrideRequest): UpdateConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.override !== undefined && (obj.override = message.override ? QuotaOverride.toSDK(message.override) : undefined);
+    obj.force = message.force;
+    message.updateMask !== undefined && (obj.update_mask = message.updateMask ? FieldMask.toSDK(message.updateMask) : undefined);
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: UpdateConsumerOverrideRequestAmino): UpdateConsumerOverrideRequest {
     const message = createBaseUpdateConsumerOverrideRequest();
@@ -3161,10 +3488,10 @@ function createBaseDeleteConsumerOverrideRequest(): DeleteConsumerOverrideReques
 export const DeleteConsumerOverrideRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.DeleteConsumerOverrideRequest",
   encode(message: DeleteConsumerOverrideRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(16).bool(message.force);
     }
     writer.uint32(26).fork();
@@ -3204,12 +3531,55 @@ export const DeleteConsumerOverrideRequest = {
     }
     return message;
   },
+  fromJSON(object: any): DeleteConsumerOverrideRequest {
+    const obj = createBaseDeleteConsumerOverrideRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: DeleteConsumerOverrideRequest): JsonSafe<DeleteConsumerOverrideRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<DeleteConsumerOverrideRequest>): DeleteConsumerOverrideRequest {
     const message = createBaseDeleteConsumerOverrideRequest();
     message.name = object.name ?? "";
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: DeleteConsumerOverrideRequestSDKType): DeleteConsumerOverrideRequest {
+    return {
+      name: object?.name,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): DeleteConsumerOverrideRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: DeleteConsumerOverrideRequest): DeleteConsumerOverrideRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: DeleteConsumerOverrideRequestAmino): DeleteConsumerOverrideRequest {
     const message = createBaseDeleteConsumerOverrideRequest();
@@ -3259,13 +3629,13 @@ function createBaseListConsumerOverridesRequest(): ListConsumerOverridesRequest 
 export const ListConsumerOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ListConsumerOverridesRequest",
   encode(message: ListConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
     return writer;
@@ -3293,12 +3663,47 @@ export const ListConsumerOverridesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListConsumerOverridesRequest {
+    const obj = createBaseListConsumerOverridesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    return obj;
+  },
+  toJSON(message: ListConsumerOverridesRequest): JsonSafe<ListConsumerOverridesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
+    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListConsumerOverridesRequest>): ListConsumerOverridesRequest {
     const message = createBaseListConsumerOverridesRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
     message.pageToken = object.pageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListConsumerOverridesRequestSDKType): ListConsumerOverridesRequest {
+    return {
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token
+    };
+  },
+  fromSDKJSON(object: any): ListConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : ""
+    };
+  },
+  toSDK(message: ListConsumerOverridesRequest): ListConsumerOverridesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    return obj;
   },
   fromAmino(object: ListConsumerOverridesRequestAmino): ListConsumerOverridesRequest {
     const message = createBaseListConsumerOverridesRequest();
@@ -3348,7 +3753,7 @@ export const ListConsumerOverridesResponse = {
     for (const v of message.overrides) {
       QuotaOverride.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -3373,11 +3778,49 @@ export const ListConsumerOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListConsumerOverridesResponse {
+    const obj = createBaseListConsumerOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
+  },
+  toJSON(message: ListConsumerOverridesResponse): JsonSafe<ListConsumerOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListConsumerOverridesResponse>): ListConsumerOverridesResponse {
     const message = createBaseListConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListConsumerOverridesResponseSDKType): ListConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : [],
+      nextPageToken: object?.next_page_token
+    };
+  },
+  fromSDKJSON(object: any): ListConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+  toSDK(message: ListConsumerOverridesResponse): ListConsumerOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   },
   fromAmino(object: ListConsumerOverridesResponseAmino): ListConsumerOverridesResponse {
     const message = createBaseListConsumerOverridesResponse();
@@ -3443,10 +3886,43 @@ export const BatchCreateConsumerOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): BatchCreateConsumerOverridesResponse {
+    const obj = createBaseBatchCreateConsumerOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: BatchCreateConsumerOverridesResponse): JsonSafe<BatchCreateConsumerOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchCreateConsumerOverridesResponse>): BatchCreateConsumerOverridesResponse {
     const message = createBaseBatchCreateConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: BatchCreateConsumerOverridesResponseSDKType): BatchCreateConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchCreateConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: BatchCreateConsumerOverridesResponse): BatchCreateConsumerOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchCreateConsumerOverridesResponseAmino): BatchCreateConsumerOverridesResponse {
     const message = createBaseBatchCreateConsumerOverridesResponse();
@@ -3489,13 +3965,13 @@ function createBaseImportConsumerOverridesRequest(): ImportConsumerOverridesRequ
 export const ImportConsumerOverridesRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.ImportConsumerOverridesRequest",
   encode(message: ImportConsumerOverridesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     if (message.inlineSource !== undefined) {
       OverrideInlineSource.encode(message.inlineSource, writer.uint32(18).fork()).ldelim();
     }
-    if (message.force === true) {
+    if (message.force !== undefined) {
       writer.uint32(24).bool(message.force);
     }
     writer.uint32(34).fork();
@@ -3538,13 +4014,63 @@ export const ImportConsumerOverridesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ImportConsumerOverridesRequest {
+    const obj = createBaseImportConsumerOverridesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.inlineSource)) obj.inlineSource = OverrideInlineSource.fromJSON(object.inlineSource);
+    if (isSet(object.force)) obj.force = Boolean(object.force);
+    if (Array.isArray(object?.forceOnly)) obj.forceOnly = object.forceOnly.map((e: any) => quotaSafetyCheckFromJSON(e));
+    return obj;
+  },
+  toJSON(message: ImportConsumerOverridesRequest): JsonSafe<ImportConsumerOverridesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.inlineSource !== undefined && (obj.inlineSource = message.inlineSource ? OverrideInlineSource.toJSON(message.inlineSource) : undefined);
+    message.force !== undefined && (obj.force = message.force);
+    if (message.forceOnly) {
+      obj.forceOnly = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.forceOnly = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ImportConsumerOverridesRequest>): ImportConsumerOverridesRequest {
     const message = createBaseImportConsumerOverridesRequest();
     message.parent = object.parent ?? "";
-    message.inlineSource = object.inlineSource !== undefined && object.inlineSource !== null ? OverrideInlineSource.fromPartial(object.inlineSource) : undefined;
+    if (object.inlineSource !== undefined && object.inlineSource !== null) {
+      message.inlineSource = OverrideInlineSource.fromPartial(object.inlineSource);
+    }
     message.force = object.force ?? false;
     message.forceOnly = object.forceOnly?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ImportConsumerOverridesRequestSDKType): ImportConsumerOverridesRequest {
+    return {
+      parent: object?.parent,
+      inlineSource: object.inline_source ? OverrideInlineSource.fromSDK(object.inline_source) : undefined,
+      force: object?.force,
+      forceOnly: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ImportConsumerOverridesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      inline_source: isSet(object.inline_source) ? OverrideInlineSource.fromSDKJSON(object.inline_source) : undefined,
+      force: isSet(object.force) ? Boolean(object.force) : false,
+      force_only: Array.isArray(object?.force_only) ? object.force_only.map((e: any) => quotaSafetyCheckFromJSON(e)) : []
+    };
+  },
+  toSDK(message: ImportConsumerOverridesRequest): ImportConsumerOverridesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    message.inlineSource !== undefined && (obj.inline_source = message.inlineSource ? OverrideInlineSource.toSDK(message.inlineSource) : undefined);
+    obj.force = message.force;
+    if (message.forceOnly) {
+      obj.force_only = message.forceOnly.map(e => quotaSafetyCheckToJSON(e));
+    } else {
+      obj.force_only = [];
+    }
+    return obj;
   },
   fromAmino(object: ImportConsumerOverridesRequestAmino): ImportConsumerOverridesRequest {
     const message = createBaseImportConsumerOverridesRequest();
@@ -3618,10 +4144,43 @@ export const ImportConsumerOverridesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ImportConsumerOverridesResponse {
+    const obj = createBaseImportConsumerOverridesResponse();
+    if (Array.isArray(object?.overrides)) obj.overrides = object.overrides.map((e: any) => QuotaOverride.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ImportConsumerOverridesResponse): JsonSafe<ImportConsumerOverridesResponse> {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toJSON(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ImportConsumerOverridesResponse>): ImportConsumerOverridesResponse {
     const message = createBaseImportConsumerOverridesResponse();
     message.overrides = object.overrides?.map(e => QuotaOverride.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ImportConsumerOverridesResponseSDKType): ImportConsumerOverridesResponse {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ImportConsumerOverridesResponseSDKType {
+    return {
+      overrides: Array.isArray(object?.overrides) ? object.overrides.map((e: any) => QuotaOverride.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ImportConsumerOverridesResponse): ImportConsumerOverridesResponseSDKType {
+    const obj: any = {};
+    if (message.overrides) {
+      obj.overrides = message.overrides.map(e => e ? QuotaOverride.toSDK(e) : undefined);
+    } else {
+      obj.overrides = [];
+    }
+    return obj;
   },
   fromAmino(object: ImportConsumerOverridesResponseAmino): ImportConsumerOverridesResponse {
     const message = createBaseImportConsumerOverridesResponse();
@@ -3675,9 +4234,27 @@ export const ImportConsumerOverridesMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): ImportConsumerOverridesMetadata {
+    const obj = createBaseImportConsumerOverridesMetadata();
+    return obj;
+  },
+  toJSON(_: ImportConsumerOverridesMetadata): JsonSafe<ImportConsumerOverridesMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ImportConsumerOverridesMetadata>): ImportConsumerOverridesMetadata {
     const message = createBaseImportConsumerOverridesMetadata();
     return message;
+  },
+  fromSDK(_: ImportConsumerOverridesMetadataSDKType): ImportConsumerOverridesMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): ImportConsumerOverridesMetadataSDKType {
+    return {};
+  },
+  toSDK(_: ImportConsumerOverridesMetadata): ImportConsumerOverridesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ImportConsumerOverridesMetadataAmino): ImportConsumerOverridesMetadata {
     const message = createBaseImportConsumerOverridesMetadata();
@@ -3733,10 +4310,43 @@ export const ImportAdminQuotaPoliciesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ImportAdminQuotaPoliciesResponse {
+    const obj = createBaseImportAdminQuotaPoliciesResponse();
+    if (Array.isArray(object?.policies)) obj.policies = object.policies.map((e: any) => AdminQuotaPolicy.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ImportAdminQuotaPoliciesResponse): JsonSafe<ImportAdminQuotaPoliciesResponse> {
+    const obj: any = {};
+    if (message.policies) {
+      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toJSON(e) : undefined);
+    } else {
+      obj.policies = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ImportAdminQuotaPoliciesResponse>): ImportAdminQuotaPoliciesResponse {
     const message = createBaseImportAdminQuotaPoliciesResponse();
     message.policies = object.policies?.map(e => AdminQuotaPolicy.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ImportAdminQuotaPoliciesResponseSDKType): ImportAdminQuotaPoliciesResponse {
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ImportAdminQuotaPoliciesResponseSDKType {
+    return {
+      policies: Array.isArray(object?.policies) ? object.policies.map((e: any) => AdminQuotaPolicy.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ImportAdminQuotaPoliciesResponse): ImportAdminQuotaPoliciesResponseSDKType {
+    const obj: any = {};
+    if (message.policies) {
+      obj.policies = message.policies.map(e => e ? AdminQuotaPolicy.toSDK(e) : undefined);
+    } else {
+      obj.policies = [];
+    }
+    return obj;
   },
   fromAmino(object: ImportAdminQuotaPoliciesResponseAmino): ImportAdminQuotaPoliciesResponse {
     const message = createBaseImportAdminQuotaPoliciesResponse();
@@ -3790,9 +4400,27 @@ export const ImportAdminQuotaPoliciesMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): ImportAdminQuotaPoliciesMetadata {
+    const obj = createBaseImportAdminQuotaPoliciesMetadata();
+    return obj;
+  },
+  toJSON(_: ImportAdminQuotaPoliciesMetadata): JsonSafe<ImportAdminQuotaPoliciesMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ImportAdminQuotaPoliciesMetadata>): ImportAdminQuotaPoliciesMetadata {
     const message = createBaseImportAdminQuotaPoliciesMetadata();
     return message;
+  },
+  fromSDK(_: ImportAdminQuotaPoliciesMetadataSDKType): ImportAdminQuotaPoliciesMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): ImportAdminQuotaPoliciesMetadataSDKType {
+    return {};
+  },
+  toSDK(_: ImportAdminQuotaPoliciesMetadata): ImportAdminQuotaPoliciesMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ImportAdminQuotaPoliciesMetadataAmino): ImportAdminQuotaPoliciesMetadata {
     const message = createBaseImportAdminQuotaPoliciesMetadata();
@@ -3840,9 +4468,27 @@ export const CreateAdminQuotaPolicyMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): CreateAdminQuotaPolicyMetadata {
+    const obj = createBaseCreateAdminQuotaPolicyMetadata();
+    return obj;
+  },
+  toJSON(_: CreateAdminQuotaPolicyMetadata): JsonSafe<CreateAdminQuotaPolicyMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<CreateAdminQuotaPolicyMetadata>): CreateAdminQuotaPolicyMetadata {
     const message = createBaseCreateAdminQuotaPolicyMetadata();
     return message;
+  },
+  fromSDK(_: CreateAdminQuotaPolicyMetadataSDKType): CreateAdminQuotaPolicyMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): CreateAdminQuotaPolicyMetadataSDKType {
+    return {};
+  },
+  toSDK(_: CreateAdminQuotaPolicyMetadata): CreateAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: CreateAdminQuotaPolicyMetadataAmino): CreateAdminQuotaPolicyMetadata {
     const message = createBaseCreateAdminQuotaPolicyMetadata();
@@ -3890,9 +4536,27 @@ export const UpdateAdminQuotaPolicyMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): UpdateAdminQuotaPolicyMetadata {
+    const obj = createBaseUpdateAdminQuotaPolicyMetadata();
+    return obj;
+  },
+  toJSON(_: UpdateAdminQuotaPolicyMetadata): JsonSafe<UpdateAdminQuotaPolicyMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<UpdateAdminQuotaPolicyMetadata>): UpdateAdminQuotaPolicyMetadata {
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
     return message;
+  },
+  fromSDK(_: UpdateAdminQuotaPolicyMetadataSDKType): UpdateAdminQuotaPolicyMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): UpdateAdminQuotaPolicyMetadataSDKType {
+    return {};
+  },
+  toSDK(_: UpdateAdminQuotaPolicyMetadata): UpdateAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: UpdateAdminQuotaPolicyMetadataAmino): UpdateAdminQuotaPolicyMetadata {
     const message = createBaseUpdateAdminQuotaPolicyMetadata();
@@ -3940,9 +4604,27 @@ export const DeleteAdminQuotaPolicyMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): DeleteAdminQuotaPolicyMetadata {
+    const obj = createBaseDeleteAdminQuotaPolicyMetadata();
+    return obj;
+  },
+  toJSON(_: DeleteAdminQuotaPolicyMetadata): JsonSafe<DeleteAdminQuotaPolicyMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<DeleteAdminQuotaPolicyMetadata>): DeleteAdminQuotaPolicyMetadata {
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
     return message;
+  },
+  fromSDK(_: DeleteAdminQuotaPolicyMetadataSDKType): DeleteAdminQuotaPolicyMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): DeleteAdminQuotaPolicyMetadataSDKType {
+    return {};
+  },
+  toSDK(_: DeleteAdminQuotaPolicyMetadata): DeleteAdminQuotaPolicyMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: DeleteAdminQuotaPolicyMetadataAmino): DeleteAdminQuotaPolicyMetadata {
     const message = createBaseDeleteAdminQuotaPolicyMetadata();
@@ -3976,7 +4658,7 @@ function createBaseGenerateServiceIdentityRequest(): GenerateServiceIdentityRequ
 export const GenerateServiceIdentityRequest = {
   typeUrl: "/google.api.serviceusage.v1beta1.GenerateServiceIdentityRequest",
   encode(message: GenerateServiceIdentityRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     return writer;
@@ -3998,10 +4680,35 @@ export const GenerateServiceIdentityRequest = {
     }
     return message;
   },
+  fromJSON(object: any): GenerateServiceIdentityRequest {
+    const obj = createBaseGenerateServiceIdentityRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    return obj;
+  },
+  toJSON(message: GenerateServiceIdentityRequest): JsonSafe<GenerateServiceIdentityRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenerateServiceIdentityRequest>): GenerateServiceIdentityRequest {
     const message = createBaseGenerateServiceIdentityRequest();
     message.parent = object.parent ?? "";
     return message;
+  },
+  fromSDK(object: GenerateServiceIdentityRequestSDKType): GenerateServiceIdentityRequest {
+    return {
+      parent: object?.parent
+    };
+  },
+  fromSDKJSON(object: any): GenerateServiceIdentityRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : ""
+    };
+  },
+  toSDK(message: GenerateServiceIdentityRequest): GenerateServiceIdentityRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    return obj;
   },
   fromAmino(object: GenerateServiceIdentityRequestAmino): GenerateServiceIdentityRequest {
     const message = createBaseGenerateServiceIdentityRequest();
@@ -4068,11 +4775,43 @@ export const GetServiceIdentityResponse = {
     }
     return message;
   },
+  fromJSON(object: any): GetServiceIdentityResponse {
+    const obj = createBaseGetServiceIdentityResponse();
+    if (isSet(object.identity)) obj.identity = ServiceIdentity.fromJSON(object.identity);
+    if (isSet(object.state)) obj.state = getServiceIdentityResponse_IdentityStateFromJSON(object.state);
+    return obj;
+  },
+  toJSON(message: GetServiceIdentityResponse): JsonSafe<GetServiceIdentityResponse> {
+    const obj: any = {};
+    message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toJSON(message.identity) : undefined);
+    message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
+    return obj;
+  },
   fromPartial(object: DeepPartial<GetServiceIdentityResponse>): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
-    message.identity = object.identity !== undefined && object.identity !== null ? ServiceIdentity.fromPartial(object.identity) : undefined;
+    if (object.identity !== undefined && object.identity !== null) {
+      message.identity = ServiceIdentity.fromPartial(object.identity);
+    }
     message.state = object.state ?? 0;
     return message;
+  },
+  fromSDK(object: GetServiceIdentityResponseSDKType): GetServiceIdentityResponse {
+    return {
+      identity: object.identity ? ServiceIdentity.fromSDK(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
+    };
+  },
+  fromSDKJSON(object: any): GetServiceIdentityResponseSDKType {
+    return {
+      identity: isSet(object.identity) ? ServiceIdentity.fromSDKJSON(object.identity) : undefined,
+      state: isSet(object.state) ? getServiceIdentityResponse_IdentityStateFromJSON(object.state) : -1
+    };
+  },
+  toSDK(message: GetServiceIdentityResponse): GetServiceIdentityResponseSDKType {
+    const obj: any = {};
+    message.identity !== undefined && (obj.identity = message.identity ? ServiceIdentity.toSDK(message.identity) : undefined);
+    message.state !== undefined && (obj.state = getServiceIdentityResponse_IdentityStateToJSON(message.state));
+    return obj;
   },
   fromAmino(object: GetServiceIdentityResponseAmino): GetServiceIdentityResponse {
     const message = createBaseGetServiceIdentityResponse();
@@ -4128,9 +4867,27 @@ export const GetServiceIdentityMetadata = {
     }
     return message;
   },
+  fromJSON(_: any): GetServiceIdentityMetadata {
+    const obj = createBaseGetServiceIdentityMetadata();
+    return obj;
+  },
+  toJSON(_: GetServiceIdentityMetadata): JsonSafe<GetServiceIdentityMetadata> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<GetServiceIdentityMetadata>): GetServiceIdentityMetadata {
     const message = createBaseGetServiceIdentityMetadata();
     return message;
+  },
+  fromSDK(_: GetServiceIdentityMetadataSDKType): GetServiceIdentityMetadata {
+    return {};
+  },
+  fromSDKJSON(_: any): GetServiceIdentityMetadataSDKType {
+    return {};
+  },
+  toSDK(_: GetServiceIdentityMetadata): GetServiceIdentityMetadataSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: GetServiceIdentityMetadataAmino): GetServiceIdentityMetadata {
     const message = createBaseGetServiceIdentityMetadata();

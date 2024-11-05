@@ -1,5 +1,8 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { Decimal } from "@cosmjs/math";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "evmos.inflation.v1";
 /**
  * InflationDistribution defines the distribution in which inflation is
  * allocated through minting on each epoch (staking, incentives, community). It
@@ -39,26 +42,10 @@ export interface InflationDistributionProtoMsg {
  * mintDistribution1 = distribution1 / (1 - teamVestingDistribution)
  * 0.5333333         = 40%           / (1 - 25%)
  */
-export interface InflationDistributionAmino {
-  /**
-   * staking_rewards defines the proportion of the minted minted_denom that is
-   * to be allocated as staking rewards
-   */
+export interface InflationDistributionSDKType {
   staking_rewards: string;
-  /**
-   * usage_incentives defines the proportion of the minted minted_denom that is
-   * to be allocated to the incentives module address
-   */
   usage_incentives: string;
-  /**
-   * community_pool defines the proportion of the minted minted_denom that is to
-   * be allocated to the community pool
-   */
   community_pool: string;
-}
-export interface InflationDistributionAminoMsg {
-  type: "/evmos.inflation.v1.InflationDistribution";
-  value: InflationDistributionAmino;
 }
 /**
  * ExponentialCalculation holds factors to calculate exponential inflation on
@@ -90,21 +77,12 @@ export interface ExponentialCalculationProtoMsg {
  * f(x)            = (a * (1 - r) ^ x + c)  *  (1 + max_variance - bondedRatio *
  * (max_variance / bonding_target))
  */
-export interface ExponentialCalculationAmino {
-  /** initial value */
+export interface ExponentialCalculationSDKType {
   a: string;
-  /** reduction factor */
   r: string;
-  /** long term inflation */
   c: string;
-  /** bonding target */
   bonding_target: string;
-  /** max variance */
   max_variance: string;
-}
-export interface ExponentialCalculationAminoMsg {
-  type: "/evmos.inflation.v1.ExponentialCalculation";
-  value: ExponentialCalculationAmino;
 }
 function createBaseInflationDistribution(): InflationDistribution {
   return {
@@ -116,14 +94,14 @@ function createBaseInflationDistribution(): InflationDistribution {
 export const InflationDistribution = {
   typeUrl: "/evmos.inflation.v1.InflationDistribution",
   encode(message: InflationDistribution, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.stakingRewards !== "") {
-      writer.uint32(10).string(message.stakingRewards);
+    if (message.stakingRewards !== undefined) {
+      writer.uint32(10).string(Decimal.fromUserInput(message.stakingRewards, 18).atomics);
     }
-    if (message.usageIncentives !== "") {
-      writer.uint32(18).string(message.usageIncentives);
+    if (message.usageIncentives !== undefined) {
+      writer.uint32(18).string(Decimal.fromUserInput(message.usageIncentives, 18).atomics);
     }
-    if (message.communityPool !== "") {
-      writer.uint32(26).string(message.communityPool);
+    if (message.communityPool !== undefined) {
+      writer.uint32(26).string(Decimal.fromUserInput(message.communityPool, 18).atomics);
     }
     return writer;
   },
@@ -135,13 +113,13 @@ export const InflationDistribution = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.stakingRewards = reader.string();
+          message.stakingRewards = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 2:
-          message.usageIncentives = reader.string();
+          message.usageIncentives = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
-          message.communityPool = reader.string();
+          message.communityPool = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -150,12 +128,47 @@ export const InflationDistribution = {
     }
     return message;
   },
+  fromJSON(object: any): InflationDistribution {
+    const obj = createBaseInflationDistribution();
+    if (isSet(object.stakingRewards)) obj.stakingRewards = String(object.stakingRewards);
+    if (isSet(object.usageIncentives)) obj.usageIncentives = String(object.usageIncentives);
+    if (isSet(object.communityPool)) obj.communityPool = String(object.communityPool);
+    return obj;
+  },
+  toJSON(message: InflationDistribution): JsonSafe<InflationDistribution> {
+    const obj: any = {};
+    message.stakingRewards !== undefined && (obj.stakingRewards = message.stakingRewards);
+    message.usageIncentives !== undefined && (obj.usageIncentives = message.usageIncentives);
+    message.communityPool !== undefined && (obj.communityPool = message.communityPool);
+    return obj;
+  },
   fromPartial(object: DeepPartial<InflationDistribution>): InflationDistribution {
     const message = createBaseInflationDistribution();
     message.stakingRewards = object.stakingRewards ?? "";
     message.usageIncentives = object.usageIncentives ?? "";
     message.communityPool = object.communityPool ?? "";
     return message;
+  },
+  fromSDK(object: InflationDistributionSDKType): InflationDistribution {
+    return {
+      stakingRewards: object?.staking_rewards,
+      usageIncentives: object?.usage_incentives,
+      communityPool: object?.community_pool
+    };
+  },
+  fromSDKJSON(object: any): InflationDistributionSDKType {
+    return {
+      staking_rewards: isSet(object.staking_rewards) ? String(object.staking_rewards) : "",
+      usage_incentives: isSet(object.usage_incentives) ? String(object.usage_incentives) : "",
+      community_pool: isSet(object.community_pool) ? String(object.community_pool) : ""
+    };
+  },
+  toSDK(message: InflationDistribution): InflationDistributionSDKType {
+    const obj: any = {};
+    obj.staking_rewards = message.stakingRewards;
+    obj.usage_incentives = message.usageIncentives;
+    obj.community_pool = message.communityPool;
+    return obj;
   },
   fromAmino(object: InflationDistributionAmino): InflationDistribution {
     const message = createBaseInflationDistribution();
@@ -205,20 +218,20 @@ function createBaseExponentialCalculation(): ExponentialCalculation {
 export const ExponentialCalculation = {
   typeUrl: "/evmos.inflation.v1.ExponentialCalculation",
   encode(message: ExponentialCalculation, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.a !== "") {
-      writer.uint32(10).string(message.a);
+    if (message.a !== undefined) {
+      writer.uint32(10).string(Decimal.fromUserInput(message.a, 18).atomics);
     }
-    if (message.r !== "") {
-      writer.uint32(18).string(message.r);
+    if (message.r !== undefined) {
+      writer.uint32(18).string(Decimal.fromUserInput(message.r, 18).atomics);
     }
-    if (message.c !== "") {
-      writer.uint32(26).string(message.c);
+    if (message.c !== undefined) {
+      writer.uint32(26).string(Decimal.fromUserInput(message.c, 18).atomics);
     }
-    if (message.bondingTarget !== "") {
-      writer.uint32(34).string(message.bondingTarget);
+    if (message.bondingTarget !== undefined) {
+      writer.uint32(34).string(Decimal.fromUserInput(message.bondingTarget, 18).atomics);
     }
-    if (message.maxVariance !== "") {
-      writer.uint32(42).string(message.maxVariance);
+    if (message.maxVariance !== undefined) {
+      writer.uint32(42).string(Decimal.fromUserInput(message.maxVariance, 18).atomics);
     }
     return writer;
   },
@@ -230,19 +243,19 @@ export const ExponentialCalculation = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1:
-          message.a = reader.string();
+          message.a = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 2:
-          message.r = reader.string();
+          message.r = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
-          message.c = reader.string();
+          message.c = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 4:
-          message.bondingTarget = reader.string();
+          message.bondingTarget = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 5:
-          message.maxVariance = reader.string();
+          message.maxVariance = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -250,6 +263,24 @@ export const ExponentialCalculation = {
       }
     }
     return message;
+  },
+  fromJSON(object: any): ExponentialCalculation {
+    const obj = createBaseExponentialCalculation();
+    if (isSet(object.a)) obj.a = String(object.a);
+    if (isSet(object.r)) obj.r = String(object.r);
+    if (isSet(object.c)) obj.c = String(object.c);
+    if (isSet(object.bondingTarget)) obj.bondingTarget = String(object.bondingTarget);
+    if (isSet(object.maxVariance)) obj.maxVariance = String(object.maxVariance);
+    return obj;
+  },
+  toJSON(message: ExponentialCalculation): JsonSafe<ExponentialCalculation> {
+    const obj: any = {};
+    message.a !== undefined && (obj.a = message.a);
+    message.r !== undefined && (obj.r = message.r);
+    message.c !== undefined && (obj.c = message.c);
+    message.bondingTarget !== undefined && (obj.bondingTarget = message.bondingTarget);
+    message.maxVariance !== undefined && (obj.maxVariance = message.maxVariance);
+    return obj;
   },
   fromPartial(object: DeepPartial<ExponentialCalculation>): ExponentialCalculation {
     const message = createBaseExponentialCalculation();
@@ -259,6 +290,33 @@ export const ExponentialCalculation = {
     message.bondingTarget = object.bondingTarget ?? "";
     message.maxVariance = object.maxVariance ?? "";
     return message;
+  },
+  fromSDK(object: ExponentialCalculationSDKType): ExponentialCalculation {
+    return {
+      a: object?.a,
+      r: object?.r,
+      c: object?.c,
+      bondingTarget: object?.bonding_target,
+      maxVariance: object?.max_variance
+    };
+  },
+  fromSDKJSON(object: any): ExponentialCalculationSDKType {
+    return {
+      a: isSet(object.a) ? String(object.a) : "",
+      r: isSet(object.r) ? String(object.r) : "",
+      c: isSet(object.c) ? String(object.c) : "",
+      bonding_target: isSet(object.bonding_target) ? String(object.bonding_target) : "",
+      max_variance: isSet(object.max_variance) ? String(object.max_variance) : ""
+    };
+  },
+  toSDK(message: ExponentialCalculation): ExponentialCalculationSDKType {
+    const obj: any = {};
+    obj.a = message.a;
+    obj.r = message.r;
+    obj.c = message.c;
+    obj.bonding_target = message.bondingTarget;
+    obj.max_variance = message.maxVariance;
+    return obj;
   },
   fromAmino(object: ExponentialCalculationAmino): ExponentialCalculation {
     const message = createBaseExponentialCalculation();

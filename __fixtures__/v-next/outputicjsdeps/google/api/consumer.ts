@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /** Supported data type of the property values */
 export enum Property_PropertyType {
   /** UNSPECIFIED - The type is unspecified, and will result in an error. */
@@ -14,7 +16,7 @@ export enum Property_PropertyType {
   DOUBLE = 4,
   UNRECOGNIZED = -1,
 }
-export const Property_PropertyTypeAmino = Property_PropertyType;
+export const Property_PropertyTypeSDKType = Property_PropertyType;
 export function property_PropertyTypeFromJSON(object: any): Property_PropertyType {
   switch (object) {
     case 0:
@@ -99,13 +101,8 @@ export interface ProjectPropertiesProtoMsg {
  *      - name: EXTENDED_TILE_CACHE_PERIOD
  *        type: INT64
  */
-export interface ProjectPropertiesAmino {
-  /** List of per consumer project-specific properties. */
-  properties: PropertyAmino[];
-}
-export interface ProjectPropertiesAminoMsg {
-  type: "/google.api.ProjectProperties";
-  value: ProjectPropertiesAmino;
+export interface ProjectPropertiesSDKType {
+  properties: PropertySDKType[];
 }
 /**
  * Defines project properties.
@@ -143,17 +140,10 @@ export interface PropertyProtoMsg {
  * These values can be set via API producer console. Only API providers can
  * define and set these properties.
  */
-export interface PropertyAmino {
-  /** The name of the property (a.k.a key). */
+export interface PropertySDKType {
   name: string;
-  /** The type of this property. */
   type: Property_PropertyType;
-  /** The description of the property */
   description: string;
-}
-export interface PropertyAminoMsg {
-  type: "/google.api.Property";
-  value: PropertyAmino;
 }
 function createBaseProjectProperties(): ProjectProperties {
   return {
@@ -185,10 +175,43 @@ export const ProjectProperties = {
     }
     return message;
   },
+  fromJSON(object: any): ProjectProperties {
+    const obj = createBaseProjectProperties();
+    if (Array.isArray(object?.properties)) obj.properties = object.properties.map((e: any) => Property.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ProjectProperties): JsonSafe<ProjectProperties> {
+    const obj: any = {};
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toJSON(e) : undefined);
+    } else {
+      obj.properties = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ProjectProperties>): ProjectProperties {
     const message = createBaseProjectProperties();
     message.properties = object.properties?.map(e => Property.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ProjectPropertiesSDKType): ProjectProperties {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ProjectPropertiesSDKType {
+    return {
+      properties: Array.isArray(object?.properties) ? object.properties.map((e: any) => Property.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ProjectProperties): ProjectPropertiesSDKType {
+    const obj: any = {};
+    if (message.properties) {
+      obj.properties = message.properties.map(e => e ? Property.toSDK(e) : undefined);
+    } else {
+      obj.properties = [];
+    }
+    return obj;
   },
   fromAmino(object: ProjectPropertiesAmino): ProjectProperties {
     const message = createBaseProjectProperties();
@@ -230,13 +253,13 @@ function createBaseProperty(): Property {
 export const Property = {
   typeUrl: "/google.api.Property",
   encode(message: Property, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     if (message.type !== 0) {
       writer.uint32(16).int32(message.type);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
     return writer;
@@ -264,12 +287,47 @@ export const Property = {
     }
     return message;
   },
+  fromJSON(object: any): Property {
+    const obj = createBaseProperty();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.type)) obj.type = property_PropertyTypeFromJSON(object.type);
+    if (isSet(object.description)) obj.description = String(object.description);
+    return obj;
+  },
+  toJSON(message: Property): JsonSafe<Property> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
+    message.description !== undefined && (obj.description = message.description);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Property>): Property {
     const message = createBaseProperty();
     message.name = object.name ?? "";
     message.type = object.type ?? 0;
     message.description = object.description ?? "";
     return message;
+  },
+  fromSDK(object: PropertySDKType): Property {
+    return {
+      name: object?.name,
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: object?.description
+    };
+  },
+  fromSDKJSON(object: any): PropertySDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      type: isSet(object.type) ? property_PropertyTypeFromJSON(object.type) : -1,
+      description: isSet(object.description) ? String(object.description) : ""
+    };
+  },
+  toSDK(message: Property): PropertySDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    message.type !== undefined && (obj.type = property_PropertyTypeToJSON(message.type));
+    obj.description = message.description;
+    return obj;
   },
   fromAmino(object: PropertyAmino): Property {
     const message = createBaseProperty();

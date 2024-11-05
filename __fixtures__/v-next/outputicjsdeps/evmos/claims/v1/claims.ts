@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "evmos.claims.v1";
 /** Action defines the list of available actions to claim the airdrop tokens. */
 export enum Action {
   /** ACTION_UNSPECIFIED - UNSPECIFIED defines an invalid action. */
@@ -14,7 +16,7 @@ export enum Action {
   ACTION_IBC_TRANSFER = 4,
   UNRECOGNIZED = -1,
 }
-export const ActionAmino = Action;
+export const ActionSDKType = Action;
 export function actionFromJSON(object: any): Action {
   switch (object) {
     case 0:
@@ -75,17 +77,10 @@ export interface ClaimProtoMsg {
  * Claim defines the action, completed flag and the remaining claimable amount
  * for a given user. This is only used during client queries.
  */
-export interface ClaimAmino {
-  /** action enum */
+export interface ClaimSDKType {
   action: Action;
-  /** true if the action has been completed */
   completed: boolean;
-  /** claimable token amount for the action. Zero if completed */
   claimable_amount: string;
-}
-export interface ClaimAminoMsg {
-  type: "/evmos.claims.v1.Claim";
-  value: ClaimAmino;
 }
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
 export interface ClaimsRecordAddress {
@@ -101,17 +96,10 @@ export interface ClaimsRecordAddressProtoMsg {
   value: Uint8Array;
 }
 /** ClaimsRecordAddress is the claims metadata per address that is used at Genesis. */
-export interface ClaimsRecordAddressAmino {
-  /** bech32 or hex address of claim user */
+export interface ClaimsRecordAddressSDKType {
   address: string;
-  /** total initial claimable amount for the user */
   initial_claimable_amount: string;
-  /** slice of the available actions completed */
   actions_completed: boolean[];
-}
-export interface ClaimsRecordAddressAminoMsg {
-  type: "/evmos.claims.v1.ClaimsRecordAddress";
-  value: ClaimsRecordAddressAmino;
 }
 /**
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
@@ -131,15 +119,9 @@ export interface ClaimsRecordProtoMsg {
  * ClaimsRecord defines the initial claimable airdrop amount and the list of
  * completed actions to claim the tokens.
  */
-export interface ClaimsRecordAmino {
-  /** total initial claimable amount for the user */
+export interface ClaimsRecordSDKType {
   initial_claimable_amount: string;
-  /** slice of the available actions completed */
   actions_completed: boolean[];
-}
-export interface ClaimsRecordAminoMsg {
-  type: "/evmos.claims.v1.ClaimsRecord";
-  value: ClaimsRecordAmino;
 }
 function createBaseClaim(): Claim {
   return {
@@ -154,10 +136,10 @@ export const Claim = {
     if (message.action !== 0) {
       writer.uint32(8).int32(message.action);
     }
-    if (message.completed === true) {
+    if (message.completed !== undefined) {
       writer.uint32(16).bool(message.completed);
     }
-    if (message.claimableAmount !== "") {
+    if (message.claimableAmount !== undefined) {
       writer.uint32(26).string(message.claimableAmount);
     }
     return writer;
@@ -185,12 +167,47 @@ export const Claim = {
     }
     return message;
   },
+  fromJSON(object: any): Claim {
+    const obj = createBaseClaim();
+    if (isSet(object.action)) obj.action = actionFromJSON(object.action);
+    if (isSet(object.completed)) obj.completed = Boolean(object.completed);
+    if (isSet(object.claimableAmount)) obj.claimableAmount = String(object.claimableAmount);
+    return obj;
+  },
+  toJSON(message: Claim): JsonSafe<Claim> {
+    const obj: any = {};
+    message.action !== undefined && (obj.action = actionToJSON(message.action));
+    message.completed !== undefined && (obj.completed = message.completed);
+    message.claimableAmount !== undefined && (obj.claimableAmount = message.claimableAmount);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Claim>): Claim {
     const message = createBaseClaim();
     message.action = object.action ?? 0;
     message.completed = object.completed ?? false;
     message.claimableAmount = object.claimableAmount ?? "";
     return message;
+  },
+  fromSDK(object: ClaimSDKType): Claim {
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
+      completed: object?.completed,
+      claimableAmount: object?.claimable_amount
+    };
+  },
+  fromSDKJSON(object: any): ClaimSDKType {
+    return {
+      action: isSet(object.action) ? actionFromJSON(object.action) : -1,
+      completed: isSet(object.completed) ? Boolean(object.completed) : false,
+      claimable_amount: isSet(object.claimable_amount) ? String(object.claimable_amount) : ""
+    };
+  },
+  toSDK(message: Claim): ClaimSDKType {
+    const obj: any = {};
+    message.action !== undefined && (obj.action = actionToJSON(message.action));
+    obj.completed = message.completed;
+    obj.claimable_amount = message.claimableAmount;
+    return obj;
   },
   fromAmino(object: ClaimAmino): Claim {
     const message = createBaseClaim();
@@ -238,10 +255,10 @@ function createBaseClaimsRecordAddress(): ClaimsRecordAddress {
 export const ClaimsRecordAddress = {
   typeUrl: "/evmos.claims.v1.ClaimsRecordAddress",
   encode(message: ClaimsRecordAddress, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
-    if (message.initialClaimableAmount !== "") {
+    if (message.initialClaimableAmount !== undefined) {
       writer.uint32(18).string(message.initialClaimableAmount);
     }
     writer.uint32(26).fork();
@@ -281,12 +298,55 @@ export const ClaimsRecordAddress = {
     }
     return message;
   },
+  fromJSON(object: any): ClaimsRecordAddress {
+    const obj = createBaseClaimsRecordAddress();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
+    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
+    return obj;
+  },
+  toJSON(message: ClaimsRecordAddress): JsonSafe<ClaimsRecordAddress> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
+    if (message.actionsCompleted) {
+      obj.actionsCompleted = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actionsCompleted = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ClaimsRecordAddress>): ClaimsRecordAddress {
     const message = createBaseClaimsRecordAddress();
     message.address = object.address ?? "";
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ClaimsRecordAddressSDKType): ClaimsRecordAddress {
+    return {
+      address: object?.address,
+      initialClaimableAmount: object?.initial_claimable_amount,
+      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ClaimsRecordAddressSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
+    };
+  },
+  toSDK(message: ClaimsRecordAddress): ClaimsRecordAddressSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.initial_claimable_amount = message.initialClaimableAmount;
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = [];
+    }
+    return obj;
   },
   fromAmino(object: ClaimsRecordAddressAmino): ClaimsRecordAddress {
     const message = createBaseClaimsRecordAddress();
@@ -335,7 +395,7 @@ function createBaseClaimsRecord(): ClaimsRecord {
 export const ClaimsRecord = {
   typeUrl: "/evmos.claims.v1.ClaimsRecord",
   encode(message: ClaimsRecord, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.initialClaimableAmount !== "") {
+    if (message.initialClaimableAmount !== undefined) {
       writer.uint32(10).string(message.initialClaimableAmount);
     }
     writer.uint32(18).fork();
@@ -372,11 +432,49 @@ export const ClaimsRecord = {
     }
     return message;
   },
+  fromJSON(object: any): ClaimsRecord {
+    const obj = createBaseClaimsRecord();
+    if (isSet(object.initialClaimableAmount)) obj.initialClaimableAmount = String(object.initialClaimableAmount);
+    if (Array.isArray(object?.actionsCompleted)) obj.actionsCompleted = object.actionsCompleted.map((e: any) => Boolean(e));
+    return obj;
+  },
+  toJSON(message: ClaimsRecord): JsonSafe<ClaimsRecord> {
+    const obj: any = {};
+    message.initialClaimableAmount !== undefined && (obj.initialClaimableAmount = message.initialClaimableAmount);
+    if (message.actionsCompleted) {
+      obj.actionsCompleted = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actionsCompleted = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ClaimsRecord>): ClaimsRecord {
     const message = createBaseClaimsRecord();
     message.initialClaimableAmount = object.initialClaimableAmount ?? "";
     message.actionsCompleted = object.actionsCompleted?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ClaimsRecordSDKType): ClaimsRecord {
+    return {
+      initialClaimableAmount: object?.initial_claimable_amount,
+      actionsCompleted: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ClaimsRecordSDKType {
+    return {
+      initial_claimable_amount: isSet(object.initial_claimable_amount) ? String(object.initial_claimable_amount) : "",
+      actions_completed: Array.isArray(object?.actions_completed) ? object.actions_completed.map((e: any) => Boolean(e)) : []
+    };
+  },
+  toSDK(message: ClaimsRecord): ClaimsRecordSDKType {
+    const obj: any = {};
+    obj.initial_claimable_amount = message.initialClaimableAmount;
+    if (message.actionsCompleted) {
+      obj.actions_completed = message.actionsCompleted.map(e => e);
+    } else {
+      obj.actions_completed = [];
+    }
+    return obj;
   },
   fromAmino(object: ClaimsRecordAmino): ClaimsRecord {
     const message = createBaseClaimsRecord();

@@ -1,3 +1,4 @@
+export const protobufPackage = "google.api";
 /**
  * The launch stage as defined by [Google Cloud Platform
  * Launch Stages](http://cloud.google.com/terms/launch-stages).
@@ -52,7 +53,7 @@ export enum LaunchStage {
   DEPRECATED = 5,
   UNRECOGNIZED = -1,
 }
-export const LaunchStageAmino = LaunchStage;
+export const LaunchStageSDKType = LaunchStage;
 export function launchStageFromJSON(object: any): LaunchStage {
   switch (object) {
     case 0:

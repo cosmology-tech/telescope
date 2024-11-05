@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * Monitoring configuration of the service.
  * 
@@ -132,29 +134,9 @@ export interface MonitoringProtoMsg {
  *         - library.googleapis.com/book/returned_count
  *         - library.googleapis.com/book/num_overdue
  */
-export interface MonitoringAmino {
-  /**
-   * Monitoring configurations for sending metrics to the producer project.
-   * There can be multiple producer destinations. A monitored resource type may
-   * appear in multiple monitoring destinations if different aggregations are
-   * needed for different sets of metrics associated with that monitored
-   * resource type. A monitored resource and metric pair may only be used once
-   * in the Monitoring configuration.
-   */
-  producer_destinations: Monitoring_MonitoringDestinationAmino[];
-  /**
-   * Monitoring configurations for sending metrics to the consumer project.
-   * There can be multiple consumer destinations. A monitored resource type may
-   * appear in multiple monitoring destinations if different aggregations are
-   * needed for different sets of metrics associated with that monitored
-   * resource type. A monitored resource and metric pair may only be used once
-   * in the Monitoring configuration.
-   */
-  consumer_destinations: Monitoring_MonitoringDestinationAmino[];
-}
-export interface MonitoringAminoMsg {
-  type: "/google.api.Monitoring";
-  value: MonitoringAmino;
+export interface MonitoringSDKType {
+  producer_destinations: Monitoring_MonitoringDestinationSDKType[];
+  consumer_destinations: Monitoring_MonitoringDestinationSDKType[];
 }
 /**
  * Configuration of a specific monitoring destination (the producer project
@@ -180,21 +162,9 @@ export interface Monitoring_MonitoringDestinationProtoMsg {
  * Configuration of a specific monitoring destination (the producer project
  * or the consumer project).
  */
-export interface Monitoring_MonitoringDestinationAmino {
-  /**
-   * The monitored resource type. The type must be defined in
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
+export interface Monitoring_MonitoringDestinationSDKType {
   monitored_resource: string;
-  /**
-   * Types of the metrics to report to this monitoring destination.
-   * Each type must be defined in [Service.metrics][google.api.Service.metrics] section.
-   */
   metrics: string[];
-}
-export interface Monitoring_MonitoringDestinationAminoMsg {
-  type: "/google.api.MonitoringDestination";
-  value: Monitoring_MonitoringDestinationAmino;
 }
 function createBaseMonitoring(): Monitoring {
   return {
@@ -233,11 +203,57 @@ export const Monitoring = {
     }
     return message;
   },
+  fromJSON(object: any): Monitoring {
+    const obj = createBaseMonitoring();
+    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Monitoring_MonitoringDestination.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Monitoring): JsonSafe<Monitoring> {
+    const obj: any = {};
+    if (message.producerDestinations) {
+      obj.producerDestinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
+    } else {
+      obj.producerDestinations = [];
+    }
+    if (message.consumerDestinations) {
+      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toJSON(e) : undefined);
+    } else {
+      obj.consumerDestinations = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Monitoring>): Monitoring {
     const message = createBaseMonitoring();
     message.producerDestinations = object.producerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Monitoring_MonitoringDestination.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: MonitoringSDKType): Monitoring {
+    return {
+      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): MonitoringSDKType {
+    return {
+      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : [],
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Monitoring_MonitoringDestination.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Monitoring): MonitoringSDKType {
+    const obj: any = {};
+    if (message.producerDestinations) {
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
+    } else {
+      obj.producer_destinations = [];
+    }
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Monitoring_MonitoringDestination.toSDK(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+    return obj;
   },
   fromAmino(object: MonitoringAmino): Monitoring {
     const message = createBaseMonitoring();
@@ -284,7 +300,7 @@ function createBaseMonitoring_MonitoringDestination(): Monitoring_MonitoringDest
 export const Monitoring_MonitoringDestination = {
   typeUrl: "/google.api.MonitoringDestination",
   encode(message: Monitoring_MonitoringDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(10).string(message.monitoredResource);
     }
     for (const v of message.metrics) {
@@ -312,11 +328,49 @@ export const Monitoring_MonitoringDestination = {
     }
     return message;
   },
+  fromJSON(object: any): Monitoring_MonitoringDestination {
+    const obj = createBaseMonitoring_MonitoringDestination();
+    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
+    if (Array.isArray(object?.metrics)) obj.metrics = object.metrics.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: Monitoring_MonitoringDestination): JsonSafe<Monitoring_MonitoringDestination> {
+    const obj: any = {};
+    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Monitoring_MonitoringDestination>): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.metrics = object.metrics?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: Monitoring_MonitoringDestinationSDKType): Monitoring_MonitoringDestination {
+    return {
+      monitoredResource: object?.monitored_resource,
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): Monitoring_MonitoringDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      metrics: Array.isArray(object?.metrics) ? object.metrics.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: Monitoring_MonitoringDestination): Monitoring_MonitoringDestinationSDKType {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource;
+    if (message.metrics) {
+      obj.metrics = message.metrics.map(e => e);
+    } else {
+      obj.metrics = [];
+    }
+    return obj;
   },
   fromAmino(object: Monitoring_MonitoringDestinationAmino): Monitoring_MonitoringDestination {
     const message = createBaseMonitoring_MonitoringDestination();

@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
@@ -19,16 +21,8 @@ export interface SourceContextProtoMsg {
  * `SourceContext` represents information about the source of a
  * protobuf element, like the file in which it is defined.
  */
-export interface SourceContextAmino {
-  /**
-   * The path-qualified name of the .proto file that contained the associated
-   * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
-   */
+export interface SourceContextSDKType {
   file_name: string;
-}
-export interface SourceContextAminoMsg {
-  type: "/google.protobuf.SourceContext";
-  value: SourceContextAmino;
 }
 function createBaseSourceContext(): SourceContext {
   return {
@@ -38,7 +32,7 @@ function createBaseSourceContext(): SourceContext {
 export const SourceContext = {
   typeUrl: "/google.protobuf.SourceContext",
   encode(message: SourceContext, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.fileName !== "") {
+    if (message.fileName !== undefined) {
       writer.uint32(10).string(message.fileName);
     }
     return writer;
@@ -60,10 +54,35 @@ export const SourceContext = {
     }
     return message;
   },
+  fromJSON(object: any): SourceContext {
+    const obj = createBaseSourceContext();
+    if (isSet(object.fileName)) obj.fileName = String(object.fileName);
+    return obj;
+  },
+  toJSON(message: SourceContext): JsonSafe<SourceContext> {
+    const obj: any = {};
+    message.fileName !== undefined && (obj.fileName = message.fileName);
+    return obj;
+  },
   fromPartial(object: DeepPartial<SourceContext>): SourceContext {
     const message = createBaseSourceContext();
     message.fileName = object.fileName ?? "";
     return message;
+  },
+  fromSDK(object: SourceContextSDKType): SourceContext {
+    return {
+      fileName: object?.file_name
+    };
+  },
+  fromSDKJSON(object: any): SourceContextSDKType {
+    return {
+      file_name: isSet(object.file_name) ? String(object.file_name) : ""
+    };
+  },
+  toSDK(message: SourceContext): SourceContextSDKType {
+    const obj: any = {};
+    obj.file_name = message.fileName;
+    return obj;
   },
   fromAmino(object: SourceContextAmino): SourceContext {
     const message = createBaseSourceContext();

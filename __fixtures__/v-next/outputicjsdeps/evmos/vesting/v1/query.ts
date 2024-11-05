@@ -1,6 +1,8 @@
-import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
@@ -11,13 +13,8 @@ export interface QueryBalancesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
-export interface QueryBalancesRequestAmino {
-  /** address of the clawback vesting account */
+export interface QueryBalancesRequestSDKType {
   address: string;
-}
-export interface QueryBalancesRequestAminoMsg {
-  type: "/evmos.vesting.v1.QueryBalancesRequest";
-  value: QueryBalancesRequestAmino;
 }
 /**
  * QueryBalancesResponse is the response type for the Query/Balances RPC
@@ -39,17 +36,10 @@ export interface QueryBalancesResponseProtoMsg {
  * QueryBalancesResponse is the response type for the Query/Balances RPC
  * method.
  */
-export interface QueryBalancesResponseAmino {
-  /** current amount of locked tokens */
-  locked: CoinAmino[];
-  /** current amount of unvested tokens */
-  unvested: CoinAmino[];
-  /** current amount of vested tokens */
-  vested: CoinAmino[];
-}
-export interface QueryBalancesResponseAminoMsg {
-  type: "/evmos.vesting.v1.QueryBalancesResponse";
-  value: QueryBalancesResponseAmino;
+export interface QueryBalancesResponseSDKType {
+  locked: CoinSDKType[];
+  unvested: CoinSDKType[];
+  vested: CoinSDKType[];
 }
 function createBaseQueryBalancesRequest(): QueryBalancesRequest {
   return {
@@ -59,7 +49,7 @@ function createBaseQueryBalancesRequest(): QueryBalancesRequest {
 export const QueryBalancesRequest = {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest",
   encode(message: QueryBalancesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     return writer;
@@ -81,10 +71,35 @@ export const QueryBalancesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryBalancesRequest {
+    const obj = createBaseQueryBalancesRequest();
+    if (isSet(object.address)) obj.address = String(object.address);
+    return obj;
+  },
+  toJSON(message: QueryBalancesRequest): JsonSafe<QueryBalancesRequest> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryBalancesRequest>): QueryBalancesRequest {
     const message = createBaseQueryBalancesRequest();
     message.address = object.address ?? "";
     return message;
+  },
+  fromSDK(object: QueryBalancesRequestSDKType): QueryBalancesRequest {
+    return {
+      address: object?.address
+    };
+  },
+  fromSDKJSON(object: any): QueryBalancesRequestSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : ""
+    };
+  },
+  toSDK(message: QueryBalancesRequest): QueryBalancesRequestSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    return obj;
   },
   fromAmino(object: QueryBalancesRequestAmino): QueryBalancesRequest {
     const message = createBaseQueryBalancesRequest();
@@ -158,12 +173,71 @@ export const QueryBalancesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryBalancesResponse {
+    const obj = createBaseQueryBalancesResponse();
+    if (Array.isArray(object?.locked)) obj.locked = object.locked.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.unvested)) obj.unvested = object.unvested.map((e: any) => Coin.fromJSON(e));
+    if (Array.isArray(object?.vested)) obj.vested = object.vested.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: QueryBalancesResponse): JsonSafe<QueryBalancesResponse> {
+    const obj: any = {};
+    if (message.locked) {
+      obj.locked = message.locked.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.locked = [];
+    }
+    if (message.unvested) {
+      obj.unvested = message.unvested.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.unvested = [];
+    }
+    if (message.vested) {
+      obj.vested = message.vested.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.vested = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryBalancesResponse>): QueryBalancesResponse {
     const message = createBaseQueryBalancesResponse();
     message.locked = object.locked?.map(e => Coin.fromPartial(e)) || [];
     message.unvested = object.unvested?.map(e => Coin.fromPartial(e)) || [];
     message.vested = object.vested?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: QueryBalancesResponseSDKType): QueryBalancesResponse {
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDK(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDK(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): QueryBalancesResponseSDKType {
+    return {
+      locked: Array.isArray(object?.locked) ? object.locked.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      unvested: Array.isArray(object?.unvested) ? object.unvested.map((e: any) => Coin.fromSDKJSON(e)) : [],
+      vested: Array.isArray(object?.vested) ? object.vested.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: QueryBalancesResponse): QueryBalancesResponseSDKType {
+    const obj: any = {};
+    if (message.locked) {
+      obj.locked = message.locked.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.locked = [];
+    }
+    if (message.unvested) {
+      obj.unvested = message.unvested.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.unvested = [];
+    }
+    if (message.vested) {
+      obj.vested = message.vested.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.vested = [];
+    }
+    return obj;
   },
   fromAmino(object: QueryBalancesResponseAmino): QueryBalancesResponse {
     const message = createBaseQueryBalancesResponse();

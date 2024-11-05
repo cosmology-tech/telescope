@@ -1,8 +1,10 @@
-import { Deployment, DeploymentAmino } from "./deployment";
-import { Group, GroupAmino } from "./group";
-import { Params, ParamsAmino } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Deployment, DeploymentSDKType } from "./deployment.js";
+import { Group, GroupSDKType } from "./group.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.deployment.v1beta2";
 /** GenesisDeployment defines the basic genesis state used by deployment module */
 export interface GenesisDeployment {
   deployment: Deployment;
@@ -13,13 +15,9 @@ export interface GenesisDeploymentProtoMsg {
   value: Uint8Array;
 }
 /** GenesisDeployment defines the basic genesis state used by deployment module */
-export interface GenesisDeploymentAmino {
-  deployment: DeploymentAmino;
-  groups: GroupAmino[];
-}
-export interface GenesisDeploymentAminoMsg {
-  type: "/akash.deployment.v1beta2.GenesisDeployment";
-  value: GenesisDeploymentAmino;
+export interface GenesisDeploymentSDKType {
+  deployment: DeploymentSDKType;
+  groups: GroupSDKType[];
 }
 /** GenesisState stores slice of genesis deployment instance */
 export interface GenesisState {
@@ -31,13 +29,9 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState stores slice of genesis deployment instance */
-export interface GenesisStateAmino {
-  deployments: GenesisDeploymentAmino[];
-  params: ParamsAmino;
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.deployment.v1beta2.GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  deployments: GenesisDeploymentSDKType[];
+  params: ParamsSDKType;
 }
 function createBaseGenesisDeployment(): GenesisDeployment {
   return {
@@ -76,11 +70,51 @@ export const GenesisDeployment = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GenesisDeployment>): GenesisDeployment {
+  fromJSON(object: any): GenesisDeployment {
+    const obj = createBaseGenesisDeployment();
+    if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisDeployment): JsonSafe<GenesisDeployment> {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toJSON(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisDeployment>, I>>(object: I): GenesisDeployment {
     const message = createBaseGenesisDeployment();
-    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromPartial(object.deployment);
+    }
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisDeploymentSDKType): GenesisDeployment {
+    return {
+      deployment: object.deployment ? Deployment.fromSDK(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisDeploymentSDKType {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisDeployment): GenesisDeploymentSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisDeploymentAmino): GenesisDeployment {
     const message = createBaseGenesisDeployment();
@@ -102,6 +136,12 @@ export const GenesisDeployment = {
   },
   fromAminoMsg(object: GenesisDeploymentAminoMsg): GenesisDeployment {
     return GenesisDeployment.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisDeployment): GenesisDeploymentAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/genesis-deployment",
+      value: GenesisDeployment.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisDeploymentProtoMsg): GenesisDeployment {
     return GenesisDeployment.decode(message.value);
@@ -153,11 +193,51 @@ export const GenesisState = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => GenesisDeployment.fromJSON(e));
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toJSON(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.deployments = object.deployments?.map(e => GenesisDeployment.fromPartial(e)) || [];
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDK(e)) : [],
+      params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => GenesisDeployment.fromSDKJSON(e)) : [],
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? GenesisDeployment.toSDK(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -179,6 +259,12 @@ export const GenesisState = {
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

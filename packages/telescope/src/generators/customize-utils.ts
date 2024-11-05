@@ -39,5 +39,11 @@ export const plugin = (builder: TelescopeBuilder) => {
       name: 'ReadOnlyAminoMsg',
       importAs: 'AminoMsg',
     };
+    UTILS.Pubkey = {
+      type: 'import',
+      path: '@interchainjs/Pubkey',
+      name: 'Pubkey',
+      importAs: 'Pubkey',
+    };
   }
 };

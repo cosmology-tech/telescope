@@ -1,10 +1,12 @@
-import { OrderFilters, OrderFiltersAmino, OrderID, OrderIDAmino, Order, OrderAmino } from "./order";
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { BidFilters, BidFiltersAmino, BidID, BidIDAmino, Bid, BidAmino } from "./bid";
-import { LeaseFilters, LeaseFiltersAmino, LeaseID, LeaseIDAmino, Lease, LeaseAmino } from "./lease";
-import { Account, AccountAmino, FractionalPayment, FractionalPaymentAmino } from "../../escrow/v1beta2/types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { OrderFilters, OrderFiltersSDKType, OrderID, OrderIDSDKType, Order, OrderSDKType } from "./order.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { BidFilters, BidFiltersSDKType, BidID, BidIDSDKType, Bid, BidSDKType } from "./bid.js";
+import { LeaseFilters, LeaseFiltersSDKType, LeaseID, LeaseIDSDKType, Lease, LeaseSDKType } from "./lease.js";
+import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "../../escrow/v1beta2/types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.market.v1beta2";
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
 export interface QueryOrdersRequest {
   filters: OrderFilters;
@@ -15,13 +17,9 @@ export interface QueryOrdersRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrdersRequest is request type for the Query/Orders RPC method */
-export interface QueryOrdersRequestAmino {
-  filters: OrderFiltersAmino;
-  pagination?: PageRequestAmino;
-}
-export interface QueryOrdersRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrdersRequest";
-  value: QueryOrdersRequestAmino;
+export interface QueryOrdersRequestSDKType {
+  filters: OrderFiltersSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
 export interface QueryOrdersResponse {
@@ -33,13 +31,9 @@ export interface QueryOrdersResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrdersResponse is response type for the Query/Orders RPC method */
-export interface QueryOrdersResponseAmino {
-  orders: OrderAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryOrdersResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrdersResponse";
-  value: QueryOrdersResponseAmino;
+export interface QueryOrdersResponseSDKType {
+  orders: OrderSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
 export interface QueryOrderRequest {
@@ -50,12 +44,8 @@ export interface QueryOrderRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrderRequest is request type for the Query/Order RPC method */
-export interface QueryOrderRequestAmino {
-  id: OrderIDAmino;
-}
-export interface QueryOrderRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrderRequest";
-  value: QueryOrderRequestAmino;
+export interface QueryOrderRequestSDKType {
+  id: OrderIDSDKType;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
 export interface QueryOrderResponse {
@@ -66,12 +56,8 @@ export interface QueryOrderResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryOrderResponse is response type for the Query/Order RPC method */
-export interface QueryOrderResponseAmino {
-  order: OrderAmino;
-}
-export interface QueryOrderResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryOrderResponse";
-  value: QueryOrderResponseAmino;
+export interface QueryOrderResponseSDKType {
+  order: OrderSDKType;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
 export interface QueryBidsRequest {
@@ -83,13 +69,9 @@ export interface QueryBidsRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidsRequest is request type for the Query/Bids RPC method */
-export interface QueryBidsRequestAmino {
-  filters: BidFiltersAmino;
-  pagination?: PageRequestAmino;
-}
-export interface QueryBidsRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidsRequest";
-  value: QueryBidsRequestAmino;
+export interface QueryBidsRequestSDKType {
+  filters: BidFiltersSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
 export interface QueryBidsResponse {
@@ -101,13 +83,9 @@ export interface QueryBidsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidsResponse is response type for the Query/Bids RPC method */
-export interface QueryBidsResponseAmino {
-  bids: QueryBidResponseAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryBidsResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidsResponse";
-  value: QueryBidsResponseAmino;
+export interface QueryBidsResponseSDKType {
+  bids: QueryBidResponseSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
 export interface QueryBidRequest {
@@ -118,12 +96,8 @@ export interface QueryBidRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidRequest is request type for the Query/Bid RPC method */
-export interface QueryBidRequestAmino {
-  id: BidIDAmino;
-}
-export interface QueryBidRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidRequest";
-  value: QueryBidRequestAmino;
+export interface QueryBidRequestSDKType {
+  id: BidIDSDKType;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
 export interface QueryBidResponse {
@@ -135,13 +109,9 @@ export interface QueryBidResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryBidResponse is response type for the Query/Bid RPC method */
-export interface QueryBidResponseAmino {
-  bid: BidAmino;
-  escrow_account: AccountAmino;
-}
-export interface QueryBidResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryBidResponse";
-  value: QueryBidResponseAmino;
+export interface QueryBidResponseSDKType {
+  bid: BidSDKType;
+  escrow_account: AccountSDKType;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
 export interface QueryLeasesRequest {
@@ -153,13 +123,9 @@ export interface QueryLeasesRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeasesRequest is request type for the Query/Leases RPC method */
-export interface QueryLeasesRequestAmino {
-  filters: LeaseFiltersAmino;
-  pagination?: PageRequestAmino;
-}
-export interface QueryLeasesRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeasesRequest";
-  value: QueryLeasesRequestAmino;
+export interface QueryLeasesRequestSDKType {
+  filters: LeaseFiltersSDKType;
+  pagination?: PageRequestSDKType;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
 export interface QueryLeasesResponse {
@@ -171,13 +137,9 @@ export interface QueryLeasesResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeasesResponse is response type for the Query/Leases RPC method */
-export interface QueryLeasesResponseAmino {
-  leases: QueryLeaseResponseAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryLeasesResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeasesResponse";
-  value: QueryLeasesResponseAmino;
+export interface QueryLeasesResponseSDKType {
+  leases: QueryLeaseResponseSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
 export interface QueryLeaseRequest {
@@ -188,12 +150,8 @@ export interface QueryLeaseRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeaseRequest is request type for the Query/Lease RPC method */
-export interface QueryLeaseRequestAmino {
-  id: LeaseIDAmino;
-}
-export interface QueryLeaseRequestAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeaseRequest";
-  value: QueryLeaseRequestAmino;
+export interface QueryLeaseRequestSDKType {
+  id: LeaseIDSDKType;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
 export interface QueryLeaseResponse {
@@ -205,13 +163,9 @@ export interface QueryLeaseResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryLeaseResponse is response type for the Query/Lease RPC method */
-export interface QueryLeaseResponseAmino {
-  lease: LeaseAmino;
-  escrow_payment: FractionalPaymentAmino;
-}
-export interface QueryLeaseResponseAminoMsg {
-  type: "/akash.market.v1beta2.QueryLeaseResponse";
-  value: QueryLeaseResponseAmino;
+export interface QueryLeaseResponseSDKType {
+  lease: LeaseSDKType;
+  escrow_payment: FractionalPaymentSDKType;
 }
 function createBaseQueryOrdersRequest(): QueryOrdersRequest {
   return {
@@ -250,11 +204,45 @@ export const QueryOrdersRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryOrdersRequest>): QueryOrdersRequest {
+  fromJSON(object: any): QueryOrdersRequest {
+    const obj = createBaseQueryOrdersRequest();
+    if (isSet(object.filters)) obj.filters = OrderFilters.fromJSON(object.filters);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryOrdersRequest): JsonSafe<QueryOrdersRequest> {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toJSON(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryOrdersRequest>, I>>(object: I): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? OrderFilters.fromPartial(object.filters) : undefined;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = OrderFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryOrdersRequestSDKType): QueryOrdersRequest {
+    return {
+      filters: object.filters ? OrderFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryOrdersRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? OrderFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryOrdersRequest): QueryOrdersRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? OrderFilters.toSDK(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryOrdersRequestAmino): QueryOrdersRequest {
     const message = createBaseQueryOrdersRequest();
@@ -274,6 +262,12 @@ export const QueryOrdersRequest = {
   },
   fromAminoMsg(object: QueryOrdersRequestAminoMsg): QueryOrdersRequest {
     return QueryOrdersRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryOrdersRequest): QueryOrdersRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-orders-request",
+      value: QueryOrdersRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryOrdersRequestProtoMsg): QueryOrdersRequest {
     return QueryOrdersRequest.decode(message.value);
@@ -325,11 +319,51 @@ export const QueryOrdersResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryOrdersResponse>): QueryOrdersResponse {
+  fromJSON(object: any): QueryOrdersResponse {
+    const obj = createBaseQueryOrdersResponse();
+    if (Array.isArray(object?.orders)) obj.orders = object.orders.map((e: any) => Order.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryOrdersResponse): JsonSafe<QueryOrdersResponse> {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toJSON(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryOrdersResponse>, I>>(object: I): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
     message.orders = object.orders?.map(e => Order.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryOrdersResponseSDKType): QueryOrdersResponse {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryOrdersResponseSDKType {
+    return {
+      orders: Array.isArray(object?.orders) ? object.orders.map((e: any) => Order.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryOrdersResponse): QueryOrdersResponseSDKType {
+    const obj: any = {};
+    if (message.orders) {
+      obj.orders = message.orders.map(e => e ? Order.toSDK(e) : undefined);
+    } else {
+      obj.orders = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryOrdersResponseAmino): QueryOrdersResponse {
     const message = createBaseQueryOrdersResponse();
@@ -351,6 +385,12 @@ export const QueryOrdersResponse = {
   },
   fromAminoMsg(object: QueryOrdersResponseAminoMsg): QueryOrdersResponse {
     return QueryOrdersResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryOrdersResponse): QueryOrdersResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-orders-response",
+      value: QueryOrdersResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryOrdersResponseProtoMsg): QueryOrdersResponse {
     return QueryOrdersResponse.decode(message.value);
@@ -395,10 +435,37 @@ export const QueryOrderRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryOrderRequest>): QueryOrderRequest {
+  fromJSON(object: any): QueryOrderRequest {
+    const obj = createBaseQueryOrderRequest();
+    if (isSet(object.id)) obj.id = OrderID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: QueryOrderRequest): JsonSafe<QueryOrderRequest> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? OrderID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryOrderRequest>, I>>(object: I): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
-    message.id = object.id !== undefined && object.id !== null ? OrderID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = OrderID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: QueryOrderRequestSDKType): QueryOrderRequest {
+    return {
+      id: object.id ? OrderID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryOrderRequestSDKType {
+    return {
+      id: isSet(object.id) ? OrderID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: QueryOrderRequest): QueryOrderRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? OrderID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: QueryOrderRequestAmino): QueryOrderRequest {
     const message = createBaseQueryOrderRequest();
@@ -414,6 +481,12 @@ export const QueryOrderRequest = {
   },
   fromAminoMsg(object: QueryOrderRequestAminoMsg): QueryOrderRequest {
     return QueryOrderRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryOrderRequest): QueryOrderRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-order-request",
+      value: QueryOrderRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryOrderRequestProtoMsg): QueryOrderRequest {
     return QueryOrderRequest.decode(message.value);
@@ -458,10 +531,37 @@ export const QueryOrderResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryOrderResponse>): QueryOrderResponse {
+  fromJSON(object: any): QueryOrderResponse {
+    const obj = createBaseQueryOrderResponse();
+    if (isSet(object.order)) obj.order = Order.fromJSON(object.order);
+    return obj;
+  },
+  toJSON(message: QueryOrderResponse): JsonSafe<QueryOrderResponse> {
+    const obj: any = {};
+    message.order !== undefined && (obj.order = message.order ? Order.toJSON(message.order) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryOrderResponse>, I>>(object: I): QueryOrderResponse {
     const message = createBaseQueryOrderResponse();
-    message.order = object.order !== undefined && object.order !== null ? Order.fromPartial(object.order) : undefined;
+    if (object.order !== undefined && object.order !== null) {
+      message.order = Order.fromPartial(object.order);
+    }
     return message;
+  },
+  fromSDK(object: QueryOrderResponseSDKType): QueryOrderResponse {
+    return {
+      order: object.order ? Order.fromSDK(object.order) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryOrderResponseSDKType {
+    return {
+      order: isSet(object.order) ? Order.fromSDKJSON(object.order) : undefined
+    };
+  },
+  toSDK(message: QueryOrderResponse): QueryOrderResponseSDKType {
+    const obj: any = {};
+    message.order !== undefined && (obj.order = message.order ? Order.toSDK(message.order) : undefined);
+    return obj;
   },
   fromAmino(object: QueryOrderResponseAmino): QueryOrderResponse {
     const message = createBaseQueryOrderResponse();
@@ -477,6 +577,12 @@ export const QueryOrderResponse = {
   },
   fromAminoMsg(object: QueryOrderResponseAminoMsg): QueryOrderResponse {
     return QueryOrderResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryOrderResponse): QueryOrderResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-order-response",
+      value: QueryOrderResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryOrderResponseProtoMsg): QueryOrderResponse {
     return QueryOrderResponse.decode(message.value);
@@ -528,11 +634,45 @@ export const QueryBidsRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryBidsRequest>): QueryBidsRequest {
+  fromJSON(object: any): QueryBidsRequest {
+    const obj = createBaseQueryBidsRequest();
+    if (isSet(object.filters)) obj.filters = BidFilters.fromJSON(object.filters);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryBidsRequest): JsonSafe<QueryBidsRequest> {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toJSON(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryBidsRequest>, I>>(object: I): QueryBidsRequest {
     const message = createBaseQueryBidsRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? BidFilters.fromPartial(object.filters) : undefined;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = BidFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryBidsRequestSDKType): QueryBidsRequest {
+    return {
+      filters: object.filters ? BidFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryBidsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? BidFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryBidsRequest): QueryBidsRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? BidFilters.toSDK(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryBidsRequestAmino): QueryBidsRequest {
     const message = createBaseQueryBidsRequest();
@@ -552,6 +692,12 @@ export const QueryBidsRequest = {
   },
   fromAminoMsg(object: QueryBidsRequestAminoMsg): QueryBidsRequest {
     return QueryBidsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryBidsRequest): QueryBidsRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-bids-request",
+      value: QueryBidsRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryBidsRequestProtoMsg): QueryBidsRequest {
     return QueryBidsRequest.decode(message.value);
@@ -603,11 +749,51 @@ export const QueryBidsResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryBidsResponse>): QueryBidsResponse {
+  fromJSON(object: any): QueryBidsResponse {
+    const obj = createBaseQueryBidsResponse();
+    if (Array.isArray(object?.bids)) obj.bids = object.bids.map((e: any) => QueryBidResponse.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryBidsResponse): JsonSafe<QueryBidsResponse> {
+    const obj: any = {};
+    if (message.bids) {
+      obj.bids = message.bids.map(e => e ? QueryBidResponse.toJSON(e) : undefined);
+    } else {
+      obj.bids = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryBidsResponse>, I>>(object: I): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
     message.bids = object.bids?.map(e => QueryBidResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryBidsResponseSDKType): QueryBidsResponse {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryBidsResponseSDKType {
+    return {
+      bids: Array.isArray(object?.bids) ? object.bids.map((e: any) => QueryBidResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryBidsResponse): QueryBidsResponseSDKType {
+    const obj: any = {};
+    if (message.bids) {
+      obj.bids = message.bids.map(e => e ? QueryBidResponse.toSDK(e) : undefined);
+    } else {
+      obj.bids = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryBidsResponseAmino): QueryBidsResponse {
     const message = createBaseQueryBidsResponse();
@@ -629,6 +815,12 @@ export const QueryBidsResponse = {
   },
   fromAminoMsg(object: QueryBidsResponseAminoMsg): QueryBidsResponse {
     return QueryBidsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryBidsResponse): QueryBidsResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-bids-response",
+      value: QueryBidsResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryBidsResponseProtoMsg): QueryBidsResponse {
     return QueryBidsResponse.decode(message.value);
@@ -673,10 +865,37 @@ export const QueryBidRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryBidRequest>): QueryBidRequest {
+  fromJSON(object: any): QueryBidRequest {
+    const obj = createBaseQueryBidRequest();
+    if (isSet(object.id)) obj.id = BidID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: QueryBidRequest): JsonSafe<QueryBidRequest> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? BidID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryBidRequest>, I>>(object: I): QueryBidRequest {
     const message = createBaseQueryBidRequest();
-    message.id = object.id !== undefined && object.id !== null ? BidID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = BidID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: QueryBidRequestSDKType): QueryBidRequest {
+    return {
+      id: object.id ? BidID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryBidRequestSDKType {
+    return {
+      id: isSet(object.id) ? BidID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: QueryBidRequest): QueryBidRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? BidID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: QueryBidRequestAmino): QueryBidRequest {
     const message = createBaseQueryBidRequest();
@@ -692,6 +911,12 @@ export const QueryBidRequest = {
   },
   fromAminoMsg(object: QueryBidRequestAminoMsg): QueryBidRequest {
     return QueryBidRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryBidRequest): QueryBidRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-bid-request",
+      value: QueryBidRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryBidRequestProtoMsg): QueryBidRequest {
     return QueryBidRequest.decode(message.value);
@@ -743,11 +968,45 @@ export const QueryBidResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryBidResponse>): QueryBidResponse {
+  fromJSON(object: any): QueryBidResponse {
+    const obj = createBaseQueryBidResponse();
+    if (isSet(object.bid)) obj.bid = Bid.fromJSON(object.bid);
+    if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
+    return obj;
+  },
+  toJSON(message: QueryBidResponse): JsonSafe<QueryBidResponse> {
+    const obj: any = {};
+    message.bid !== undefined && (obj.bid = message.bid ? Bid.toJSON(message.bid) : undefined);
+    message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryBidResponse>, I>>(object: I): QueryBidResponse {
     const message = createBaseQueryBidResponse();
-    message.bid = object.bid !== undefined && object.bid !== null ? Bid.fromPartial(object.bid) : undefined;
-    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
+    if (object.bid !== undefined && object.bid !== null) {
+      message.bid = Bid.fromPartial(object.bid);
+    }
+    if (object.escrowAccount !== undefined && object.escrowAccount !== null) {
+      message.escrowAccount = Account.fromPartial(object.escrowAccount);
+    }
     return message;
+  },
+  fromSDK(object: QueryBidResponseSDKType): QueryBidResponse {
+    return {
+      bid: object.bid ? Bid.fromSDK(object.bid) : undefined,
+      escrowAccount: object.escrow_account ? Account.fromSDK(object.escrow_account) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryBidResponseSDKType {
+    return {
+      bid: isSet(object.bid) ? Bid.fromSDKJSON(object.bid) : undefined,
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
+  },
+  toSDK(message: QueryBidResponse): QueryBidResponseSDKType {
+    const obj: any = {};
+    message.bid !== undefined && (obj.bid = message.bid ? Bid.toSDK(message.bid) : undefined);
+    message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
+    return obj;
   },
   fromAmino(object: QueryBidResponseAmino): QueryBidResponse {
     const message = createBaseQueryBidResponse();
@@ -767,6 +1026,12 @@ export const QueryBidResponse = {
   },
   fromAminoMsg(object: QueryBidResponseAminoMsg): QueryBidResponse {
     return QueryBidResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryBidResponse): QueryBidResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-bid-response",
+      value: QueryBidResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryBidResponseProtoMsg): QueryBidResponse {
     return QueryBidResponse.decode(message.value);
@@ -818,11 +1083,45 @@ export const QueryLeasesRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryLeasesRequest>): QueryLeasesRequest {
+  fromJSON(object: any): QueryLeasesRequest {
+    const obj = createBaseQueryLeasesRequest();
+    if (isSet(object.filters)) obj.filters = LeaseFilters.fromJSON(object.filters);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryLeasesRequest): JsonSafe<QueryLeasesRequest> {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toJSON(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLeasesRequest>, I>>(object: I): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? LeaseFilters.fromPartial(object.filters) : undefined;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = LeaseFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryLeasesRequestSDKType): QueryLeasesRequest {
+    return {
+      filters: object.filters ? LeaseFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryLeasesRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? LeaseFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryLeasesRequest): QueryLeasesRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? LeaseFilters.toSDK(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryLeasesRequestAmino): QueryLeasesRequest {
     const message = createBaseQueryLeasesRequest();
@@ -842,6 +1141,12 @@ export const QueryLeasesRequest = {
   },
   fromAminoMsg(object: QueryLeasesRequestAminoMsg): QueryLeasesRequest {
     return QueryLeasesRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLeasesRequest): QueryLeasesRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-leases-request",
+      value: QueryLeasesRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryLeasesRequestProtoMsg): QueryLeasesRequest {
     return QueryLeasesRequest.decode(message.value);
@@ -893,11 +1198,51 @@ export const QueryLeasesResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryLeasesResponse>): QueryLeasesResponse {
+  fromJSON(object: any): QueryLeasesResponse {
+    const obj = createBaseQueryLeasesResponse();
+    if (Array.isArray(object?.leases)) obj.leases = object.leases.map((e: any) => QueryLeaseResponse.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryLeasesResponse): JsonSafe<QueryLeasesResponse> {
+    const obj: any = {};
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toJSON(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLeasesResponse>, I>>(object: I): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
     message.leases = object.leases?.map(e => QueryLeaseResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryLeasesResponseSDKType): QueryLeasesResponse {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryLeasesResponseSDKType {
+    return {
+      leases: Array.isArray(object?.leases) ? object.leases.map((e: any) => QueryLeaseResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryLeasesResponse): QueryLeasesResponseSDKType {
+    const obj: any = {};
+    if (message.leases) {
+      obj.leases = message.leases.map(e => e ? QueryLeaseResponse.toSDK(e) : undefined);
+    } else {
+      obj.leases = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryLeasesResponseAmino): QueryLeasesResponse {
     const message = createBaseQueryLeasesResponse();
@@ -919,6 +1264,12 @@ export const QueryLeasesResponse = {
   },
   fromAminoMsg(object: QueryLeasesResponseAminoMsg): QueryLeasesResponse {
     return QueryLeasesResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLeasesResponse): QueryLeasesResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-leases-response",
+      value: QueryLeasesResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryLeasesResponseProtoMsg): QueryLeasesResponse {
     return QueryLeasesResponse.decode(message.value);
@@ -963,10 +1314,37 @@ export const QueryLeaseRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryLeaseRequest>): QueryLeaseRequest {
+  fromJSON(object: any): QueryLeaseRequest {
+    const obj = createBaseQueryLeaseRequest();
+    if (isSet(object.id)) obj.id = LeaseID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: QueryLeaseRequest): JsonSafe<QueryLeaseRequest> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? LeaseID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLeaseRequest>, I>>(object: I): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
-    message.id = object.id !== undefined && object.id !== null ? LeaseID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = LeaseID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: QueryLeaseRequestSDKType): QueryLeaseRequest {
+    return {
+      id: object.id ? LeaseID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryLeaseRequestSDKType {
+    return {
+      id: isSet(object.id) ? LeaseID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: QueryLeaseRequest): QueryLeaseRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? LeaseID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: QueryLeaseRequestAmino): QueryLeaseRequest {
     const message = createBaseQueryLeaseRequest();
@@ -982,6 +1360,12 @@ export const QueryLeaseRequest = {
   },
   fromAminoMsg(object: QueryLeaseRequestAminoMsg): QueryLeaseRequest {
     return QueryLeaseRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLeaseRequest): QueryLeaseRequestAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-lease-request",
+      value: QueryLeaseRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryLeaseRequestProtoMsg): QueryLeaseRequest {
     return QueryLeaseRequest.decode(message.value);
@@ -1033,11 +1417,45 @@ export const QueryLeaseResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryLeaseResponse>): QueryLeaseResponse {
+  fromJSON(object: any): QueryLeaseResponse {
+    const obj = createBaseQueryLeaseResponse();
+    if (isSet(object.lease)) obj.lease = Lease.fromJSON(object.lease);
+    if (isSet(object.escrowPayment)) obj.escrowPayment = FractionalPayment.fromJSON(object.escrowPayment);
+    return obj;
+  },
+  toJSON(message: QueryLeaseResponse): JsonSafe<QueryLeaseResponse> {
+    const obj: any = {};
+    message.lease !== undefined && (obj.lease = message.lease ? Lease.toJSON(message.lease) : undefined);
+    message.escrowPayment !== undefined && (obj.escrowPayment = message.escrowPayment ? FractionalPayment.toJSON(message.escrowPayment) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryLeaseResponse>, I>>(object: I): QueryLeaseResponse {
     const message = createBaseQueryLeaseResponse();
-    message.lease = object.lease !== undefined && object.lease !== null ? Lease.fromPartial(object.lease) : undefined;
-    message.escrowPayment = object.escrowPayment !== undefined && object.escrowPayment !== null ? FractionalPayment.fromPartial(object.escrowPayment) : undefined;
+    if (object.lease !== undefined && object.lease !== null) {
+      message.lease = Lease.fromPartial(object.lease);
+    }
+    if (object.escrowPayment !== undefined && object.escrowPayment !== null) {
+      message.escrowPayment = FractionalPayment.fromPartial(object.escrowPayment);
+    }
     return message;
+  },
+  fromSDK(object: QueryLeaseResponseSDKType): QueryLeaseResponse {
+    return {
+      lease: object.lease ? Lease.fromSDK(object.lease) : undefined,
+      escrowPayment: object.escrow_payment ? FractionalPayment.fromSDK(object.escrow_payment) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryLeaseResponseSDKType {
+    return {
+      lease: isSet(object.lease) ? Lease.fromSDKJSON(object.lease) : undefined,
+      escrow_payment: isSet(object.escrow_payment) ? FractionalPayment.fromSDKJSON(object.escrow_payment) : undefined
+    };
+  },
+  toSDK(message: QueryLeaseResponse): QueryLeaseResponseSDKType {
+    const obj: any = {};
+    message.lease !== undefined && (obj.lease = message.lease ? Lease.toSDK(message.lease) : undefined);
+    message.escrowPayment !== undefined && (obj.escrow_payment = message.escrowPayment ? FractionalPayment.toSDK(message.escrowPayment) : undefined);
+    return obj;
   },
   fromAmino(object: QueryLeaseResponseAmino): QueryLeaseResponse {
     const message = createBaseQueryLeaseResponse();
@@ -1057,6 +1475,12 @@ export const QueryLeaseResponse = {
   },
   fromAminoMsg(object: QueryLeaseResponseAminoMsg): QueryLeaseResponse {
     return QueryLeaseResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryLeaseResponse): QueryLeaseResponseAminoMsg {
+    return {
+      type: "akash/market/v1beta2/query-lease-response",
+      value: QueryLeaseResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryLeaseResponseProtoMsg): QueryLeaseResponse {
     return QueryLeaseResponse.decode(message.value);

@@ -1,16 +1,18 @@
-import { Timestamp } from "../../google/protobuf/timestamp";
-import { Header, HeaderAmino } from "../types/types";
-import { ProofOps, ProofOpsAmino } from "../crypto/proof";
-import { EvidenceParams, EvidenceParamsAmino, ValidatorParams, ValidatorParamsAmino, VersionParams, VersionParamsAmino } from "../types/params";
-import { PublicKey, PublicKeyAmino } from "../crypto/keys";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
+import { Header, HeaderSDKType } from "../types/types.js";
+import { ProofOps, ProofOpsSDKType } from "../crypto/proof.js";
+import { EvidenceParams, EvidenceParamsSDKType, ValidatorParams, ValidatorParamsSDKType, VersionParams, VersionParamsSDKType } from "../types/params.js";
+import { PublicKey, PublicKeySDKType } from "../crypto/keys.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, bytesFromBase64, base64FromBytes } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "tendermint.abci";
 export enum CheckTxType {
   NEW = 0,
   RECHECK = 1,
   UNRECOGNIZED = -1,
 }
-export const CheckTxTypeAmino = CheckTxType;
+export const CheckTxTypeSDKType = CheckTxType;
 export function checkTxTypeFromJSON(object: any): CheckTxType {
   switch (object) {
     case 0:
@@ -51,7 +53,7 @@ export enum ResponseOfferSnapshot_Result {
   REJECT_SENDER = 5,
   UNRECOGNIZED = -1,
 }
-export const ResponseOfferSnapshot_ResultAmino = ResponseOfferSnapshot_Result;
+export const ResponseOfferSnapshot_ResultSDKType = ResponseOfferSnapshot_Result;
 export function responseOfferSnapshot_ResultFromJSON(object: any): ResponseOfferSnapshot_Result {
   switch (object) {
     case 0:
@@ -112,7 +114,7 @@ export enum ResponseApplySnapshotChunk_Result {
   REJECT_SNAPSHOT = 5,
   UNRECOGNIZED = -1,
 }
-export const ResponseApplySnapshotChunk_ResultAmino = ResponseApplySnapshotChunk_Result;
+export const ResponseApplySnapshotChunk_ResultSDKType = ResponseApplySnapshotChunk_Result;
 export function responseApplySnapshotChunk_ResultFromJSON(object: any): ResponseApplySnapshotChunk_Result {
   switch (object) {
     case 0:
@@ -164,7 +166,7 @@ export enum EvidenceType {
   LIGHT_CLIENT_ATTACK = 2,
   UNRECOGNIZED = -1,
 }
-export const EvidenceTypeAmino = EvidenceType;
+export const EvidenceTypeSDKType = EvidenceType;
 export function evidenceTypeFromJSON(object: any): EvidenceType {
   switch (object) {
     case 0:
@@ -216,26 +218,22 @@ export interface RequestProtoMsg {
   typeUrl: "/tendermint.abci.Request";
   value: Uint8Array;
 }
-export interface RequestAmino {
-  echo?: RequestEchoAmino;
-  flush?: RequestFlushAmino;
-  info?: RequestInfoAmino;
-  set_option?: RequestSetOptionAmino;
-  init_chain?: RequestInitChainAmino;
-  query?: RequestQueryAmino;
-  begin_block?: RequestBeginBlockAmino;
-  check_tx?: RequestCheckTxAmino;
-  deliver_tx?: RequestDeliverTxAmino;
-  end_block?: RequestEndBlockAmino;
-  commit?: RequestCommitAmino;
-  list_snapshots?: RequestListSnapshotsAmino;
-  offer_snapshot?: RequestOfferSnapshotAmino;
-  load_snapshot_chunk?: RequestLoadSnapshotChunkAmino;
-  apply_snapshot_chunk?: RequestApplySnapshotChunkAmino;
-}
-export interface RequestAminoMsg {
-  type: "/tendermint.abci.Request";
-  value: RequestAmino;
+export interface RequestSDKType {
+  echo?: RequestEchoSDKType;
+  flush?: RequestFlushSDKType;
+  info?: RequestInfoSDKType;
+  set_option?: RequestSetOptionSDKType;
+  init_chain?: RequestInitChainSDKType;
+  query?: RequestQuerySDKType;
+  begin_block?: RequestBeginBlockSDKType;
+  check_tx?: RequestCheckTxSDKType;
+  deliver_tx?: RequestDeliverTxSDKType;
+  end_block?: RequestEndBlockSDKType;
+  commit?: RequestCommitSDKType;
+  list_snapshots?: RequestListSnapshotsSDKType;
+  offer_snapshot?: RequestOfferSnapshotSDKType;
+  load_snapshot_chunk?: RequestLoadSnapshotChunkSDKType;
+  apply_snapshot_chunk?: RequestApplySnapshotChunkSDKType;
 }
 export interface RequestEcho {
   message: string;
@@ -244,23 +242,15 @@ export interface RequestEchoProtoMsg {
   typeUrl: "/tendermint.abci.RequestEcho";
   value: Uint8Array;
 }
-export interface RequestEchoAmino {
+export interface RequestEchoSDKType {
   message: string;
-}
-export interface RequestEchoAminoMsg {
-  type: "/tendermint.abci.RequestEcho";
-  value: RequestEchoAmino;
 }
 export interface RequestFlush {}
 export interface RequestFlushProtoMsg {
   typeUrl: "/tendermint.abci.RequestFlush";
   value: Uint8Array;
 }
-export interface RequestFlushAmino {}
-export interface RequestFlushAminoMsg {
-  type: "/tendermint.abci.RequestFlush";
-  value: RequestFlushAmino;
-}
+export interface RequestFlushSDKType {}
 export interface RequestInfo {
   version: string;
   blockVersion: bigint;
@@ -270,14 +260,10 @@ export interface RequestInfoProtoMsg {
   typeUrl: "/tendermint.abci.RequestInfo";
   value: Uint8Array;
 }
-export interface RequestInfoAmino {
+export interface RequestInfoSDKType {
   version: string;
-  block_version: string;
-  p2p_version: string;
-}
-export interface RequestInfoAminoMsg {
-  type: "/tendermint.abci.RequestInfo";
-  value: RequestInfoAmino;
+  block_version: bigint;
+  p2p_version: bigint;
 }
 /** nondeterministic */
 export interface RequestSetOption {
@@ -289,13 +275,9 @@ export interface RequestSetOptionProtoMsg {
   value: Uint8Array;
 }
 /** nondeterministic */
-export interface RequestSetOptionAmino {
+export interface RequestSetOptionSDKType {
   key: string;
   value: string;
-}
-export interface RequestSetOptionAminoMsg {
-  type: "/tendermint.abci.RequestSetOption";
-  value: RequestSetOptionAmino;
 }
 export interface RequestInitChain {
   time: Date;
@@ -309,17 +291,13 @@ export interface RequestInitChainProtoMsg {
   typeUrl: "/tendermint.abci.RequestInitChain";
   value: Uint8Array;
 }
-export interface RequestInitChainAmino {
-  time: string;
+export interface RequestInitChainSDKType {
+  time: Date;
   chain_id: string;
-  consensus_params?: ConsensusParamsAmino;
-  validators: ValidatorUpdateAmino[];
-  app_state_bytes: string;
-  initial_height: string;
-}
-export interface RequestInitChainAminoMsg {
-  type: "/tendermint.abci.RequestInitChain";
-  value: RequestInitChainAmino;
+  consensus_params?: ConsensusParamsSDKType;
+  validators: ValidatorUpdateSDKType[];
+  app_state_bytes: Uint8Array;
+  initial_height: bigint;
 }
 export interface RequestQuery {
   data: Uint8Array;
@@ -331,15 +309,11 @@ export interface RequestQueryProtoMsg {
   typeUrl: "/tendermint.abci.RequestQuery";
   value: Uint8Array;
 }
-export interface RequestQueryAmino {
-  data: string;
+export interface RequestQuerySDKType {
+  data: Uint8Array;
   path: string;
-  height: string;
+  height: bigint;
   prove: boolean;
-}
-export interface RequestQueryAminoMsg {
-  type: "/tendermint.abci.RequestQuery";
-  value: RequestQueryAmino;
 }
 export interface RequestBeginBlock {
   hash: Uint8Array;
@@ -351,15 +325,11 @@ export interface RequestBeginBlockProtoMsg {
   typeUrl: "/tendermint.abci.RequestBeginBlock";
   value: Uint8Array;
 }
-export interface RequestBeginBlockAmino {
-  hash: string;
-  header: HeaderAmino;
-  last_commit_info: LastCommitInfoAmino;
-  byzantine_validators: EvidenceAmino[];
-}
-export interface RequestBeginBlockAminoMsg {
-  type: "/tendermint.abci.RequestBeginBlock";
-  value: RequestBeginBlockAmino;
+export interface RequestBeginBlockSDKType {
+  hash: Uint8Array;
+  header: HeaderSDKType;
+  last_commit_info: LastCommitInfoSDKType;
+  byzantine_validators: EvidenceSDKType[];
 }
 export interface RequestCheckTx {
   tx: Uint8Array;
@@ -369,13 +339,9 @@ export interface RequestCheckTxProtoMsg {
   typeUrl: "/tendermint.abci.RequestCheckTx";
   value: Uint8Array;
 }
-export interface RequestCheckTxAmino {
-  tx: string;
+export interface RequestCheckTxSDKType {
+  tx: Uint8Array;
   type: CheckTxType;
-}
-export interface RequestCheckTxAminoMsg {
-  type: "/tendermint.abci.RequestCheckTx";
-  value: RequestCheckTxAmino;
 }
 export interface RequestDeliverTx {
   tx: Uint8Array;
@@ -384,12 +350,8 @@ export interface RequestDeliverTxProtoMsg {
   typeUrl: "/tendermint.abci.RequestDeliverTx";
   value: Uint8Array;
 }
-export interface RequestDeliverTxAmino {
-  tx: string;
-}
-export interface RequestDeliverTxAminoMsg {
-  type: "/tendermint.abci.RequestDeliverTx";
-  value: RequestDeliverTxAmino;
+export interface RequestDeliverTxSDKType {
+  tx: Uint8Array;
 }
 export interface RequestEndBlock {
   height: bigint;
@@ -398,23 +360,15 @@ export interface RequestEndBlockProtoMsg {
   typeUrl: "/tendermint.abci.RequestEndBlock";
   value: Uint8Array;
 }
-export interface RequestEndBlockAmino {
-  height: string;
-}
-export interface RequestEndBlockAminoMsg {
-  type: "/tendermint.abci.RequestEndBlock";
-  value: RequestEndBlockAmino;
+export interface RequestEndBlockSDKType {
+  height: bigint;
 }
 export interface RequestCommit {}
 export interface RequestCommitProtoMsg {
   typeUrl: "/tendermint.abci.RequestCommit";
   value: Uint8Array;
 }
-export interface RequestCommitAmino {}
-export interface RequestCommitAminoMsg {
-  type: "/tendermint.abci.RequestCommit";
-  value: RequestCommitAmino;
-}
+export interface RequestCommitSDKType {}
 /** lists available snapshots */
 export interface RequestListSnapshots {}
 export interface RequestListSnapshotsProtoMsg {
@@ -422,11 +376,7 @@ export interface RequestListSnapshotsProtoMsg {
   value: Uint8Array;
 }
 /** lists available snapshots */
-export interface RequestListSnapshotsAmino {}
-export interface RequestListSnapshotsAminoMsg {
-  type: "/tendermint.abci.RequestListSnapshots";
-  value: RequestListSnapshotsAmino;
-}
+export interface RequestListSnapshotsSDKType {}
 /** offers a snapshot to the application */
 export interface RequestOfferSnapshot {
   /** snapshot offered by peers */
@@ -439,15 +389,9 @@ export interface RequestOfferSnapshotProtoMsg {
   value: Uint8Array;
 }
 /** offers a snapshot to the application */
-export interface RequestOfferSnapshotAmino {
-  /** snapshot offered by peers */
-  snapshot?: SnapshotAmino;
-  /** light client-verified app hash for snapshot height */
-  app_hash: string;
-}
-export interface RequestOfferSnapshotAminoMsg {
-  type: "/tendermint.abci.RequestOfferSnapshot";
-  value: RequestOfferSnapshotAmino;
+export interface RequestOfferSnapshotSDKType {
+  snapshot?: SnapshotSDKType;
+  app_hash: Uint8Array;
 }
 /** loads a snapshot chunk */
 export interface RequestLoadSnapshotChunk {
@@ -460,14 +404,10 @@ export interface RequestLoadSnapshotChunkProtoMsg {
   value: Uint8Array;
 }
 /** loads a snapshot chunk */
-export interface RequestLoadSnapshotChunkAmino {
-  height: string;
+export interface RequestLoadSnapshotChunkSDKType {
+  height: bigint;
   format: number;
   chunk: number;
-}
-export interface RequestLoadSnapshotChunkAminoMsg {
-  type: "/tendermint.abci.RequestLoadSnapshotChunk";
-  value: RequestLoadSnapshotChunkAmino;
 }
 /** Applies a snapshot chunk */
 export interface RequestApplySnapshotChunk {
@@ -480,14 +420,10 @@ export interface RequestApplySnapshotChunkProtoMsg {
   value: Uint8Array;
 }
 /** Applies a snapshot chunk */
-export interface RequestApplySnapshotChunkAmino {
+export interface RequestApplySnapshotChunkSDKType {
   index: number;
-  chunk: string;
+  chunk: Uint8Array;
   sender: string;
-}
-export interface RequestApplySnapshotChunkAminoMsg {
-  type: "/tendermint.abci.RequestApplySnapshotChunk";
-  value: RequestApplySnapshotChunkAmino;
 }
 export interface Response {
   exception?: ResponseException;
@@ -511,27 +447,23 @@ export interface ResponseProtoMsg {
   typeUrl: "/tendermint.abci.Response";
   value: Uint8Array;
 }
-export interface ResponseAmino {
-  exception?: ResponseExceptionAmino;
-  echo?: ResponseEchoAmino;
-  flush?: ResponseFlushAmino;
-  info?: ResponseInfoAmino;
-  set_option?: ResponseSetOptionAmino;
-  init_chain?: ResponseInitChainAmino;
-  query?: ResponseQueryAmino;
-  begin_block?: ResponseBeginBlockAmino;
-  check_tx?: ResponseCheckTxAmino;
-  deliver_tx?: ResponseDeliverTxAmino;
-  end_block?: ResponseEndBlockAmino;
-  commit?: ResponseCommitAmino;
-  list_snapshots?: ResponseListSnapshotsAmino;
-  offer_snapshot?: ResponseOfferSnapshotAmino;
-  load_snapshot_chunk?: ResponseLoadSnapshotChunkAmino;
-  apply_snapshot_chunk?: ResponseApplySnapshotChunkAmino;
-}
-export interface ResponseAminoMsg {
-  type: "/tendermint.abci.Response";
-  value: ResponseAmino;
+export interface ResponseSDKType {
+  exception?: ResponseExceptionSDKType;
+  echo?: ResponseEchoSDKType;
+  flush?: ResponseFlushSDKType;
+  info?: ResponseInfoSDKType;
+  set_option?: ResponseSetOptionSDKType;
+  init_chain?: ResponseInitChainSDKType;
+  query?: ResponseQuerySDKType;
+  begin_block?: ResponseBeginBlockSDKType;
+  check_tx?: ResponseCheckTxSDKType;
+  deliver_tx?: ResponseDeliverTxSDKType;
+  end_block?: ResponseEndBlockSDKType;
+  commit?: ResponseCommitSDKType;
+  list_snapshots?: ResponseListSnapshotsSDKType;
+  offer_snapshot?: ResponseOfferSnapshotSDKType;
+  load_snapshot_chunk?: ResponseLoadSnapshotChunkSDKType;
+  apply_snapshot_chunk?: ResponseApplySnapshotChunkSDKType;
 }
 /** nondeterministic */
 export interface ResponseException {
@@ -542,12 +474,8 @@ export interface ResponseExceptionProtoMsg {
   value: Uint8Array;
 }
 /** nondeterministic */
-export interface ResponseExceptionAmino {
+export interface ResponseExceptionSDKType {
   error: string;
-}
-export interface ResponseExceptionAminoMsg {
-  type: "/tendermint.abci.ResponseException";
-  value: ResponseExceptionAmino;
 }
 export interface ResponseEcho {
   message: string;
@@ -556,23 +484,15 @@ export interface ResponseEchoProtoMsg {
   typeUrl: "/tendermint.abci.ResponseEcho";
   value: Uint8Array;
 }
-export interface ResponseEchoAmino {
+export interface ResponseEchoSDKType {
   message: string;
-}
-export interface ResponseEchoAminoMsg {
-  type: "/tendermint.abci.ResponseEcho";
-  value: ResponseEchoAmino;
 }
 export interface ResponseFlush {}
 export interface ResponseFlushProtoMsg {
   typeUrl: "/tendermint.abci.ResponseFlush";
   value: Uint8Array;
 }
-export interface ResponseFlushAmino {}
-export interface ResponseFlushAminoMsg {
-  type: "/tendermint.abci.ResponseFlush";
-  value: ResponseFlushAmino;
-}
+export interface ResponseFlushSDKType {}
 export interface ResponseInfo {
   data: string;
   version: string;
@@ -584,16 +504,12 @@ export interface ResponseInfoProtoMsg {
   typeUrl: "/tendermint.abci.ResponseInfo";
   value: Uint8Array;
 }
-export interface ResponseInfoAmino {
+export interface ResponseInfoSDKType {
   data: string;
   version: string;
-  app_version: string;
-  last_block_height: string;
-  last_block_app_hash: string;
-}
-export interface ResponseInfoAminoMsg {
-  type: "/tendermint.abci.ResponseInfo";
-  value: ResponseInfoAmino;
+  app_version: bigint;
+  last_block_height: bigint;
+  last_block_app_hash: Uint8Array;
 }
 /** nondeterministic */
 export interface ResponseSetOption {
@@ -607,15 +523,10 @@ export interface ResponseSetOptionProtoMsg {
   value: Uint8Array;
 }
 /** nondeterministic */
-export interface ResponseSetOptionAmino {
+export interface ResponseSetOptionSDKType {
   code: number;
-  /** bytes data = 2; */
   log: string;
   info: string;
-}
-export interface ResponseSetOptionAminoMsg {
-  type: "/tendermint.abci.ResponseSetOption";
-  value: ResponseSetOptionAmino;
 }
 export interface ResponseInitChain {
   consensusParams?: ConsensusParams;
@@ -626,14 +537,10 @@ export interface ResponseInitChainProtoMsg {
   typeUrl: "/tendermint.abci.ResponseInitChain";
   value: Uint8Array;
 }
-export interface ResponseInitChainAmino {
-  consensus_params?: ConsensusParamsAmino;
-  validators: ValidatorUpdateAmino[];
-  app_hash: string;
-}
-export interface ResponseInitChainAminoMsg {
-  type: "/tendermint.abci.ResponseInitChain";
-  value: ResponseInitChainAmino;
+export interface ResponseInitChainSDKType {
+  consensus_params?: ConsensusParamsSDKType;
+  validators: ValidatorUpdateSDKType[];
+  app_hash: Uint8Array;
 }
 export interface ResponseQuery {
   code: number;
@@ -652,22 +559,16 @@ export interface ResponseQueryProtoMsg {
   typeUrl: "/tendermint.abci.ResponseQuery";
   value: Uint8Array;
 }
-export interface ResponseQueryAmino {
+export interface ResponseQuerySDKType {
   code: number;
-  /** bytes data = 2; // use "value" instead. */
   log: string;
-  /** nondeterministic */
   info: string;
-  index: string;
-  key: string;
-  value: string;
-  proof_ops?: ProofOpsAmino;
-  height: string;
+  index: bigint;
+  key: Uint8Array;
+  value: Uint8Array;
+  proof_ops?: ProofOpsSDKType;
+  height: bigint;
   codespace: string;
-}
-export interface ResponseQueryAminoMsg {
-  type: "/tendermint.abci.ResponseQuery";
-  value: ResponseQueryAmino;
 }
 export interface ResponseBeginBlock {
   events: Event[];
@@ -676,12 +577,8 @@ export interface ResponseBeginBlockProtoMsg {
   typeUrl: "/tendermint.abci.ResponseBeginBlock";
   value: Uint8Array;
 }
-export interface ResponseBeginBlockAmino {
-  events: EventAmino[];
-}
-export interface ResponseBeginBlockAminoMsg {
-  type: "/tendermint.abci.ResponseBeginBlock";
-  value: ResponseBeginBlockAmino;
+export interface ResponseBeginBlockSDKType {
+  events: EventSDKType[];
 }
 export interface ResponseCheckTx {
   code: number;
@@ -699,21 +596,15 @@ export interface ResponseCheckTxProtoMsg {
   typeUrl: "/tendermint.abci.ResponseCheckTx";
   value: Uint8Array;
 }
-export interface ResponseCheckTxAmino {
+export interface ResponseCheckTxSDKType {
   code: number;
-  data: string;
-  /** nondeterministic */
+  data: Uint8Array;
   log: string;
-  /** nondeterministic */
   info: string;
-  gas_wanted: string;
-  gas_used: string;
-  events: EventAmino[];
+  gas_wanted: bigint;
+  gas_used: bigint;
+  events: EventSDKType[];
   codespace: string;
-}
-export interface ResponseCheckTxAminoMsg {
-  type: "/tendermint.abci.ResponseCheckTx";
-  value: ResponseCheckTxAmino;
 }
 export interface ResponseDeliverTx {
   code: number;
@@ -731,21 +622,15 @@ export interface ResponseDeliverTxProtoMsg {
   typeUrl: "/tendermint.abci.ResponseDeliverTx";
   value: Uint8Array;
 }
-export interface ResponseDeliverTxAmino {
+export interface ResponseDeliverTxSDKType {
   code: number;
-  data: string;
-  /** nondeterministic */
+  data: Uint8Array;
   log: string;
-  /** nondeterministic */
   info: string;
-  gas_wanted: string;
-  gas_used: string;
-  events: EventAmino[];
+  gas_wanted: bigint;
+  gas_used: bigint;
+  events: EventSDKType[];
   codespace: string;
-}
-export interface ResponseDeliverTxAminoMsg {
-  type: "/tendermint.abci.ResponseDeliverTx";
-  value: ResponseDeliverTxAmino;
 }
 export interface ResponseEndBlock {
   validatorUpdates: ValidatorUpdate[];
@@ -756,14 +641,10 @@ export interface ResponseEndBlockProtoMsg {
   typeUrl: "/tendermint.abci.ResponseEndBlock";
   value: Uint8Array;
 }
-export interface ResponseEndBlockAmino {
-  validator_updates: ValidatorUpdateAmino[];
-  consensus_param_updates?: ConsensusParamsAmino;
-  events: EventAmino[];
-}
-export interface ResponseEndBlockAminoMsg {
-  type: "/tendermint.abci.ResponseEndBlock";
-  value: ResponseEndBlockAmino;
+export interface ResponseEndBlockSDKType {
+  validator_updates: ValidatorUpdateSDKType[];
+  consensus_param_updates?: ConsensusParamsSDKType;
+  events: EventSDKType[];
 }
 export interface ResponseCommit {
   /** reserve 1 */
@@ -774,14 +655,9 @@ export interface ResponseCommitProtoMsg {
   typeUrl: "/tendermint.abci.ResponseCommit";
   value: Uint8Array;
 }
-export interface ResponseCommitAmino {
-  /** reserve 1 */
-  data: string;
-  retain_height: string;
-}
-export interface ResponseCommitAminoMsg {
-  type: "/tendermint.abci.ResponseCommit";
-  value: ResponseCommitAmino;
+export interface ResponseCommitSDKType {
+  data: Uint8Array;
+  retain_height: bigint;
 }
 export interface ResponseListSnapshots {
   snapshots: Snapshot[];
@@ -790,12 +666,8 @@ export interface ResponseListSnapshotsProtoMsg {
   typeUrl: "/tendermint.abci.ResponseListSnapshots";
   value: Uint8Array;
 }
-export interface ResponseListSnapshotsAmino {
-  snapshots: SnapshotAmino[];
-}
-export interface ResponseListSnapshotsAminoMsg {
-  type: "/tendermint.abci.ResponseListSnapshots";
-  value: ResponseListSnapshotsAmino;
+export interface ResponseListSnapshotsSDKType {
+  snapshots: SnapshotSDKType[];
 }
 export interface ResponseOfferSnapshot {
   result: ResponseOfferSnapshot_Result;
@@ -804,12 +676,8 @@ export interface ResponseOfferSnapshotProtoMsg {
   typeUrl: "/tendermint.abci.ResponseOfferSnapshot";
   value: Uint8Array;
 }
-export interface ResponseOfferSnapshotAmino {
+export interface ResponseOfferSnapshotSDKType {
   result: ResponseOfferSnapshot_Result;
-}
-export interface ResponseOfferSnapshotAminoMsg {
-  type: "/tendermint.abci.ResponseOfferSnapshot";
-  value: ResponseOfferSnapshotAmino;
 }
 export interface ResponseLoadSnapshotChunk {
   chunk: Uint8Array;
@@ -818,12 +686,8 @@ export interface ResponseLoadSnapshotChunkProtoMsg {
   typeUrl: "/tendermint.abci.ResponseLoadSnapshotChunk";
   value: Uint8Array;
 }
-export interface ResponseLoadSnapshotChunkAmino {
-  chunk: string;
-}
-export interface ResponseLoadSnapshotChunkAminoMsg {
-  type: "/tendermint.abci.ResponseLoadSnapshotChunk";
-  value: ResponseLoadSnapshotChunkAmino;
+export interface ResponseLoadSnapshotChunkSDKType {
+  chunk: Uint8Array;
 }
 export interface ResponseApplySnapshotChunk {
   result: ResponseApplySnapshotChunk_Result;
@@ -836,16 +700,10 @@ export interface ResponseApplySnapshotChunkProtoMsg {
   typeUrl: "/tendermint.abci.ResponseApplySnapshotChunk";
   value: Uint8Array;
 }
-export interface ResponseApplySnapshotChunkAmino {
+export interface ResponseApplySnapshotChunkSDKType {
   result: ResponseApplySnapshotChunk_Result;
-  /** Chunks to refetch and reapply */
   refetch_chunks: number[];
-  /** Chunk senders to reject and ban */
   reject_senders: string[];
-}
-export interface ResponseApplySnapshotChunkAminoMsg {
-  type: "/tendermint.abci.ResponseApplySnapshotChunk";
-  value: ResponseApplySnapshotChunkAmino;
 }
 /**
  * ConsensusParams contains all consensus-relevant parameters
@@ -865,15 +723,11 @@ export interface ConsensusParamsProtoMsg {
  * ConsensusParams contains all consensus-relevant parameters
  * that can be adjusted by the abci app
  */
-export interface ConsensusParamsAmino {
-  block?: BlockParamsAmino;
-  evidence?: EvidenceParamsAmino;
-  validator?: ValidatorParamsAmino;
-  version?: VersionParamsAmino;
-}
-export interface ConsensusParamsAminoMsg {
-  type: "/tendermint.abci.ConsensusParams";
-  value: ConsensusParamsAmino;
+export interface ConsensusParamsSDKType {
+  block?: BlockParamsSDKType;
+  evidence?: EvidenceParamsSDKType;
+  validator?: ValidatorParamsSDKType;
+  version?: VersionParamsSDKType;
 }
 /** BlockParams contains limits on the block size. */
 export interface BlockParams {
@@ -887,15 +741,9 @@ export interface BlockParamsProtoMsg {
   value: Uint8Array;
 }
 /** BlockParams contains limits on the block size. */
-export interface BlockParamsAmino {
-  /** Note: must be greater than 0 */
-  max_bytes: string;
-  /** Note: must be greater or equal to -1 */
-  max_gas: string;
-}
-export interface BlockParamsAminoMsg {
-  type: "/tendermint.abci.BlockParams";
-  value: BlockParamsAmino;
+export interface BlockParamsSDKType {
+  max_bytes: bigint;
+  max_gas: bigint;
 }
 export interface LastCommitInfo {
   round: number;
@@ -905,13 +753,9 @@ export interface LastCommitInfoProtoMsg {
   typeUrl: "/tendermint.abci.LastCommitInfo";
   value: Uint8Array;
 }
-export interface LastCommitInfoAmino {
+export interface LastCommitInfoSDKType {
   round: number;
-  votes: VoteInfoAmino[];
-}
-export interface LastCommitInfoAminoMsg {
-  type: "/tendermint.abci.LastCommitInfo";
-  value: LastCommitInfoAmino;
+  votes: VoteInfoSDKType[];
 }
 /**
  * Event allows application developers to attach additional information to
@@ -931,13 +775,9 @@ export interface EventProtoMsg {
  * ResponseBeginBlock, ResponseEndBlock, ResponseCheckTx and ResponseDeliverTx.
  * Later, transactions may be queried using these events.
  */
-export interface EventAmino {
+export interface EventSDKType {
   type: string;
-  attributes: EventAttributeAmino[];
-}
-export interface EventAminoMsg {
-  type: "/tendermint.abci.Event";
-  value: EventAmino;
+  attributes: EventAttributeSDKType[];
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
 export interface EventAttribute {
@@ -951,15 +791,10 @@ export interface EventAttributeProtoMsg {
   value: Uint8Array;
 }
 /** EventAttribute is a single key-value pair, associated with an event. */
-export interface EventAttributeAmino {
-  key: string;
-  value: string;
-  /** nondeterministic */
+export interface EventAttributeSDKType {
+  key: Uint8Array;
+  value: Uint8Array;
   index: boolean;
-}
-export interface EventAttributeAminoMsg {
-  type: "/tendermint.abci.EventAttribute";
-  value: EventAttributeAmino;
 }
 /**
  * TxResult contains results of executing the transaction.
@@ -981,15 +816,11 @@ export interface TxResultProtoMsg {
  * 
  * One usage is indexing transaction results.
  */
-export interface TxResultAmino {
-  height: string;
+export interface TxResultSDKType {
+  height: bigint;
   index: number;
-  tx: string;
-  result: ResponseDeliverTxAmino;
-}
-export interface TxResultAminoMsg {
-  type: "/tendermint.abci.TxResult";
-  value: TxResultAmino;
+  tx: Uint8Array;
+  result: ResponseDeliverTxSDKType;
 }
 /** Validator */
 export interface Validator {
@@ -1003,15 +834,9 @@ export interface ValidatorProtoMsg {
   value: Uint8Array;
 }
 /** Validator */
-export interface ValidatorAmino {
-  /** The first 20 bytes of SHA256(public key) */
-  address: string;
-  /** PubKey pub_key = 2 [(gogoproto.nullable)=false]; */
-  power: string;
-}
-export interface ValidatorAminoMsg {
-  type: "/tendermint.abci.Validator";
-  value: ValidatorAmino;
+export interface ValidatorSDKType {
+  address: Uint8Array;
+  power: bigint;
 }
 /** ValidatorUpdate */
 export interface ValidatorUpdate {
@@ -1023,13 +848,9 @@ export interface ValidatorUpdateProtoMsg {
   value: Uint8Array;
 }
 /** ValidatorUpdate */
-export interface ValidatorUpdateAmino {
-  pub_key: PublicKeyAmino;
-  power: string;
-}
-export interface ValidatorUpdateAminoMsg {
-  type: "/tendermint.abci.ValidatorUpdate";
-  value: ValidatorUpdateAmino;
+export interface ValidatorUpdateSDKType {
+  pub_key: PublicKeySDKType;
+  power: bigint;
 }
 /** VoteInfo */
 export interface VoteInfo {
@@ -1041,13 +862,9 @@ export interface VoteInfoProtoMsg {
   value: Uint8Array;
 }
 /** VoteInfo */
-export interface VoteInfoAmino {
-  validator: ValidatorAmino;
+export interface VoteInfoSDKType {
+  validator: ValidatorSDKType;
   signed_last_block: boolean;
-}
-export interface VoteInfoAminoMsg {
-  type: "/tendermint.abci.VoteInfo";
-  value: VoteInfoAmino;
 }
 export interface Evidence {
   type: EvidenceType;
@@ -1068,24 +885,12 @@ export interface EvidenceProtoMsg {
   typeUrl: "/tendermint.abci.Evidence";
   value: Uint8Array;
 }
-export interface EvidenceAmino {
+export interface EvidenceSDKType {
   type: EvidenceType;
-  /** The offending validator */
-  validator: ValidatorAmino;
-  /** The height when the offense occurred */
-  height: string;
-  /** The corresponding time where the offense occurred */
-  time: string;
-  /**
-   * Total voting power of the validator set in case the ABCI application does
-   * not store historical validators.
-   * https://github.com/tendermint/tendermint/issues/4581
-   */
-  total_voting_power: string;
-}
-export interface EvidenceAminoMsg {
-  type: "/tendermint.abci.Evidence";
-  value: EvidenceAmino;
+  validator: ValidatorSDKType;
+  height: bigint;
+  time: Date;
+  total_voting_power: bigint;
 }
 export interface Snapshot {
   /** The height at which the snapshot was taken */
@@ -1103,21 +908,12 @@ export interface SnapshotProtoMsg {
   typeUrl: "/tendermint.abci.Snapshot";
   value: Uint8Array;
 }
-export interface SnapshotAmino {
-  /** The height at which the snapshot was taken */
-  height: string;
-  /** The application-specific snapshot format */
+export interface SnapshotSDKType {
+  height: bigint;
   format: number;
-  /** Number of chunks in the snapshot */
   chunks: number;
-  /** Arbitrary snapshot hash, equal only if identical */
-  hash: string;
-  /** Arbitrary application metadata */
-  metadata: string;
-}
-export interface SnapshotAminoMsg {
-  type: "/tendermint.abci.Snapshot";
-  value: SnapshotAmino;
+  hash: Uint8Array;
+  metadata: Uint8Array;
 }
 function createBaseRequest(): Request {
   return {
@@ -1247,24 +1043,149 @@ export const Request = {
     }
     return message;
   },
+  fromJSON(object: any): Request {
+    const obj = createBaseRequest();
+    if (isSet(object.echo)) obj.echo = RequestEcho.fromJSON(object.echo);
+    if (isSet(object.flush)) obj.flush = RequestFlush.fromJSON(object.flush);
+    if (isSet(object.info)) obj.info = RequestInfo.fromJSON(object.info);
+    if (isSet(object.setOption)) obj.setOption = RequestSetOption.fromJSON(object.setOption);
+    if (isSet(object.initChain)) obj.initChain = RequestInitChain.fromJSON(object.initChain);
+    if (isSet(object.query)) obj.query = RequestQuery.fromJSON(object.query);
+    if (isSet(object.beginBlock)) obj.beginBlock = RequestBeginBlock.fromJSON(object.beginBlock);
+    if (isSet(object.checkTx)) obj.checkTx = RequestCheckTx.fromJSON(object.checkTx);
+    if (isSet(object.deliverTx)) obj.deliverTx = RequestDeliverTx.fromJSON(object.deliverTx);
+    if (isSet(object.endBlock)) obj.endBlock = RequestEndBlock.fromJSON(object.endBlock);
+    if (isSet(object.commit)) obj.commit = RequestCommit.fromJSON(object.commit);
+    if (isSet(object.listSnapshots)) obj.listSnapshots = RequestListSnapshots.fromJSON(object.listSnapshots);
+    if (isSet(object.offerSnapshot)) obj.offerSnapshot = RequestOfferSnapshot.fromJSON(object.offerSnapshot);
+    if (isSet(object.loadSnapshotChunk)) obj.loadSnapshotChunk = RequestLoadSnapshotChunk.fromJSON(object.loadSnapshotChunk);
+    if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = RequestApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
+    return obj;
+  },
+  toJSON(message: Request): JsonSafe<Request> {
+    const obj: any = {};
+    message.echo !== undefined && (obj.echo = message.echo ? RequestEcho.toJSON(message.echo) : undefined);
+    message.flush !== undefined && (obj.flush = message.flush ? RequestFlush.toJSON(message.flush) : undefined);
+    message.info !== undefined && (obj.info = message.info ? RequestInfo.toJSON(message.info) : undefined);
+    message.setOption !== undefined && (obj.setOption = message.setOption ? RequestSetOption.toJSON(message.setOption) : undefined);
+    message.initChain !== undefined && (obj.initChain = message.initChain ? RequestInitChain.toJSON(message.initChain) : undefined);
+    message.query !== undefined && (obj.query = message.query ? RequestQuery.toJSON(message.query) : undefined);
+    message.beginBlock !== undefined && (obj.beginBlock = message.beginBlock ? RequestBeginBlock.toJSON(message.beginBlock) : undefined);
+    message.checkTx !== undefined && (obj.checkTx = message.checkTx ? RequestCheckTx.toJSON(message.checkTx) : undefined);
+    message.deliverTx !== undefined && (obj.deliverTx = message.deliverTx ? RequestDeliverTx.toJSON(message.deliverTx) : undefined);
+    message.endBlock !== undefined && (obj.endBlock = message.endBlock ? RequestEndBlock.toJSON(message.endBlock) : undefined);
+    message.commit !== undefined && (obj.commit = message.commit ? RequestCommit.toJSON(message.commit) : undefined);
+    message.listSnapshots !== undefined && (obj.listSnapshots = message.listSnapshots ? RequestListSnapshots.toJSON(message.listSnapshots) : undefined);
+    message.offerSnapshot !== undefined && (obj.offerSnapshot = message.offerSnapshot ? RequestOfferSnapshot.toJSON(message.offerSnapshot) : undefined);
+    message.loadSnapshotChunk !== undefined && (obj.loadSnapshotChunk = message.loadSnapshotChunk ? RequestLoadSnapshotChunk.toJSON(message.loadSnapshotChunk) : undefined);
+    message.applySnapshotChunk !== undefined && (obj.applySnapshotChunk = message.applySnapshotChunk ? RequestApplySnapshotChunk.toJSON(message.applySnapshotChunk) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Request>): Request {
     const message = createBaseRequest();
-    message.echo = object.echo !== undefined && object.echo !== null ? RequestEcho.fromPartial(object.echo) : undefined;
-    message.flush = object.flush !== undefined && object.flush !== null ? RequestFlush.fromPartial(object.flush) : undefined;
-    message.info = object.info !== undefined && object.info !== null ? RequestInfo.fromPartial(object.info) : undefined;
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? RequestSetOption.fromPartial(object.setOption) : undefined;
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? RequestInitChain.fromPartial(object.initChain) : undefined;
-    message.query = object.query !== undefined && object.query !== null ? RequestQuery.fromPartial(object.query) : undefined;
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? RequestBeginBlock.fromPartial(object.beginBlock) : undefined;
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? RequestCheckTx.fromPartial(object.checkTx) : undefined;
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? RequestDeliverTx.fromPartial(object.deliverTx) : undefined;
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? RequestEndBlock.fromPartial(object.endBlock) : undefined;
-    message.commit = object.commit !== undefined && object.commit !== null ? RequestCommit.fromPartial(object.commit) : undefined;
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? RequestListSnapshots.fromPartial(object.listSnapshots) : undefined;
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? RequestOfferSnapshot.fromPartial(object.offerSnapshot) : undefined;
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : undefined;
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : undefined;
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = RequestEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = RequestFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = RequestInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = RequestSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = RequestInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = RequestQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = RequestBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = RequestCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = RequestDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = RequestEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = RequestCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = RequestListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = RequestOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = RequestLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = RequestApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
+  },
+  fromSDK(object: RequestSDKType): Request {
+    return {
+      echo: object.echo ? RequestEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? RequestFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? RequestInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? RequestSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? RequestInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? RequestQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? RequestBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? RequestCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? RequestDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? RequestEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? RequestCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? RequestListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? RequestOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? RequestLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? RequestApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+    };
+  },
+  fromSDKJSON(object: any): RequestSDKType {
+    return {
+      echo: isSet(object.echo) ? RequestEcho.fromSDKJSON(object.echo) : undefined,
+      flush: isSet(object.flush) ? RequestFlush.fromSDKJSON(object.flush) : undefined,
+      info: isSet(object.info) ? RequestInfo.fromSDKJSON(object.info) : undefined,
+      set_option: isSet(object.set_option) ? RequestSetOption.fromSDKJSON(object.set_option) : undefined,
+      init_chain: isSet(object.init_chain) ? RequestInitChain.fromSDKJSON(object.init_chain) : undefined,
+      query: isSet(object.query) ? RequestQuery.fromSDKJSON(object.query) : undefined,
+      begin_block: isSet(object.begin_block) ? RequestBeginBlock.fromSDKJSON(object.begin_block) : undefined,
+      check_tx: isSet(object.check_tx) ? RequestCheckTx.fromSDKJSON(object.check_tx) : undefined,
+      deliver_tx: isSet(object.deliver_tx) ? RequestDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
+      end_block: isSet(object.end_block) ? RequestEndBlock.fromSDKJSON(object.end_block) : undefined,
+      commit: isSet(object.commit) ? RequestCommit.fromSDKJSON(object.commit) : undefined,
+      list_snapshots: isSet(object.list_snapshots) ? RequestListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
+      offer_snapshot: isSet(object.offer_snapshot) ? RequestOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
+      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? RequestLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
+      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? RequestApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
+    };
+  },
+  toSDK(message: Request): RequestSDKType {
+    const obj: any = {};
+    message.echo !== undefined && (obj.echo = message.echo ? RequestEcho.toSDK(message.echo) : undefined);
+    message.flush !== undefined && (obj.flush = message.flush ? RequestFlush.toSDK(message.flush) : undefined);
+    message.info !== undefined && (obj.info = message.info ? RequestInfo.toSDK(message.info) : undefined);
+    message.setOption !== undefined && (obj.set_option = message.setOption ? RequestSetOption.toSDK(message.setOption) : undefined);
+    message.initChain !== undefined && (obj.init_chain = message.initChain ? RequestInitChain.toSDK(message.initChain) : undefined);
+    message.query !== undefined && (obj.query = message.query ? RequestQuery.toSDK(message.query) : undefined);
+    message.beginBlock !== undefined && (obj.begin_block = message.beginBlock ? RequestBeginBlock.toSDK(message.beginBlock) : undefined);
+    message.checkTx !== undefined && (obj.check_tx = message.checkTx ? RequestCheckTx.toSDK(message.checkTx) : undefined);
+    message.deliverTx !== undefined && (obj.deliver_tx = message.deliverTx ? RequestDeliverTx.toSDK(message.deliverTx) : undefined);
+    message.endBlock !== undefined && (obj.end_block = message.endBlock ? RequestEndBlock.toSDK(message.endBlock) : undefined);
+    message.commit !== undefined && (obj.commit = message.commit ? RequestCommit.toSDK(message.commit) : undefined);
+    message.listSnapshots !== undefined && (obj.list_snapshots = message.listSnapshots ? RequestListSnapshots.toSDK(message.listSnapshots) : undefined);
+    message.offerSnapshot !== undefined && (obj.offer_snapshot = message.offerSnapshot ? RequestOfferSnapshot.toSDK(message.offerSnapshot) : undefined);
+    message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? RequestLoadSnapshotChunk.toSDK(message.loadSnapshotChunk) : undefined);
+    message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? RequestApplySnapshotChunk.toSDK(message.applySnapshotChunk) : undefined);
+    return obj;
   },
   fromAmino(object: RequestAmino): Request {
     const message = createBaseRequest();
@@ -1358,7 +1279,7 @@ function createBaseRequestEcho(): RequestEcho {
 export const RequestEcho = {
   typeUrl: "/tendermint.abci.RequestEcho",
   encode(message: RequestEcho, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(10).string(message.message);
     }
     return writer;
@@ -1380,10 +1301,35 @@ export const RequestEcho = {
     }
     return message;
   },
+  fromJSON(object: any): RequestEcho {
+    const obj = createBaseRequestEcho();
+    if (isSet(object.message)) obj.message = String(object.message);
+    return obj;
+  },
+  toJSON(message: RequestEcho): JsonSafe<RequestEcho> {
+    const obj: any = {};
+    message.message !== undefined && (obj.message = message.message);
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestEcho>): RequestEcho {
     const message = createBaseRequestEcho();
     message.message = object.message ?? "";
     return message;
+  },
+  fromSDK(object: RequestEchoSDKType): RequestEcho {
+    return {
+      message: object?.message
+    };
+  },
+  fromSDKJSON(object: any): RequestEchoSDKType {
+    return {
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+  toSDK(message: RequestEcho): RequestEchoSDKType {
+    const obj: any = {};
+    obj.message = message.message;
+    return obj;
   },
   fromAmino(object: RequestEchoAmino): RequestEcho {
     const message = createBaseRequestEcho();
@@ -1435,9 +1381,27 @@ export const RequestFlush = {
     }
     return message;
   },
+  fromJSON(_: any): RequestFlush {
+    const obj = createBaseRequestFlush();
+    return obj;
+  },
+  toJSON(_: RequestFlush): JsonSafe<RequestFlush> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<RequestFlush>): RequestFlush {
     const message = createBaseRequestFlush();
     return message;
+  },
+  fromSDK(_: RequestFlushSDKType): RequestFlush {
+    return {};
+  },
+  fromSDKJSON(_: any): RequestFlushSDKType {
+    return {};
+  },
+  toSDK(_: RequestFlush): RequestFlushSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: RequestFlushAmino): RequestFlush {
     const message = createBaseRequestFlush();
@@ -1473,13 +1437,13 @@ function createBaseRequestInfo(): RequestInfo {
 export const RequestInfo = {
   typeUrl: "/tendermint.abci.RequestInfo",
   encode(message: RequestInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(10).string(message.version);
     }
-    if (message.blockVersion !== BigInt(0)) {
+    if (message.blockVersion !== undefined) {
       writer.uint32(16).uint64(message.blockVersion);
     }
-    if (message.p2pVersion !== BigInt(0)) {
+    if (message.p2pVersion !== undefined) {
       writer.uint32(24).uint64(message.p2pVersion);
     }
     return writer;
@@ -1507,12 +1471,51 @@ export const RequestInfo = {
     }
     return message;
   },
+  fromJSON(object: any): RequestInfo {
+    const obj = createBaseRequestInfo();
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.blockVersion)) obj.blockVersion = BigInt(object.blockVersion.toString());
+    if (isSet(object.p2pVersion)) obj.p2pVersion = BigInt(object.p2pVersion.toString());
+    return obj;
+  },
+  toJSON(message: RequestInfo): JsonSafe<RequestInfo> {
+    const obj: any = {};
+    message.version !== undefined && (obj.version = message.version);
+    message.blockVersion !== undefined && (obj.blockVersion = (message.blockVersion || BigInt(0)).toString());
+    message.p2pVersion !== undefined && (obj.p2pVersion = (message.p2pVersion || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestInfo>): RequestInfo {
     const message = createBaseRequestInfo();
     message.version = object.version ?? "";
-    message.blockVersion = object.blockVersion !== undefined && object.blockVersion !== null ? BigInt(object.blockVersion.toString()) : BigInt(0);
-    message.p2pVersion = object.p2pVersion !== undefined && object.p2pVersion !== null ? BigInt(object.p2pVersion.toString()) : BigInt(0);
+    if (object.blockVersion !== undefined && object.blockVersion !== null) {
+      message.blockVersion = BigInt(object.blockVersion.toString());
+    }
+    if (object.p2pVersion !== undefined && object.p2pVersion !== null) {
+      message.p2pVersion = BigInt(object.p2pVersion.toString());
+    }
     return message;
+  },
+  fromSDK(object: RequestInfoSDKType): RequestInfo {
+    return {
+      version: object?.version,
+      blockVersion: object?.block_version,
+      p2pVersion: object?.p2p_version
+    };
+  },
+  fromSDKJSON(object: any): RequestInfoSDKType {
+    return {
+      version: isSet(object.version) ? String(object.version) : "",
+      block_version: isSet(object.block_version) ? BigInt(object.block_version.toString()) : BigInt(0),
+      p2p_version: isSet(object.p2p_version) ? BigInt(object.p2p_version.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: RequestInfo): RequestInfoSDKType {
+    const obj: any = {};
+    obj.version = message.version;
+    obj.block_version = message.blockVersion;
+    obj.p2p_version = message.p2pVersion;
+    return obj;
   },
   fromAmino(object: RequestInfoAmino): RequestInfo {
     const message = createBaseRequestInfo();
@@ -1559,10 +1562,10 @@ function createBaseRequestSetOption(): RequestSetOption {
 export const RequestSetOption = {
   typeUrl: "/tendermint.abci.RequestSetOption",
   encode(message: RequestSetOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -1587,11 +1590,41 @@ export const RequestSetOption = {
     }
     return message;
   },
+  fromJSON(object: any): RequestSetOption {
+    const obj = createBaseRequestSetOption();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
+  },
+  toJSON(message: RequestSetOption): JsonSafe<RequestSetOption> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestSetOption>): RequestSetOption {
     const message = createBaseRequestSetOption();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromSDK(object: RequestSetOptionSDKType): RequestSetOption {
+    return {
+      key: object?.key,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): RequestSetOptionSDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+  toSDK(message: RequestSetOption): RequestSetOptionSDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: RequestSetOptionAmino): RequestSetOption {
     const message = createBaseRequestSetOption();
@@ -1641,7 +1674,7 @@ export const RequestInitChain = {
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(10).fork()).ldelim();
     }
-    if (message.chainId !== "") {
+    if (message.chainId !== undefined) {
       writer.uint32(18).string(message.chainId);
     }
     if (message.consensusParams !== undefined) {
@@ -1653,7 +1686,7 @@ export const RequestInitChain = {
     if (message.appStateBytes.length !== 0) {
       writer.uint32(42).bytes(message.appStateBytes);
     }
-    if (message.initialHeight !== BigInt(0)) {
+    if (message.initialHeight !== undefined) {
       writer.uint32(48).int64(message.initialHeight);
     }
     return writer;
@@ -1690,15 +1723,77 @@ export const RequestInitChain = {
     }
     return message;
   },
+  fromJSON(object: any): RequestInitChain {
+    const obj = createBaseRequestInitChain();
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.chainId)) obj.chainId = String(object.chainId);
+    if (isSet(object.consensusParams)) obj.consensusParams = ConsensusParams.fromJSON(object.consensusParams);
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => ValidatorUpdate.fromJSON(e));
+    if (isSet(object.appStateBytes)) obj.appStateBytes = bytesFromBase64(object.appStateBytes);
+    if (isSet(object.initialHeight)) obj.initialHeight = BigInt(object.initialHeight.toString());
+    return obj;
+  },
+  toJSON(message: RequestInitChain): JsonSafe<RequestInitChain> {
+    const obj: any = {};
+    message.time !== undefined && (obj.time = message.time.toISOString());
+    message.chainId !== undefined && (obj.chainId = message.chainId);
+    message.consensusParams !== undefined && (obj.consensusParams = message.consensusParams ? ConsensusParams.toJSON(message.consensusParams) : undefined);
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+    message.appStateBytes !== undefined && (obj.appStateBytes = base64FromBytes(message.appStateBytes !== undefined ? message.appStateBytes : new Uint8Array()));
+    message.initialHeight !== undefined && (obj.initialHeight = (message.initialHeight || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestInitChain>): RequestInitChain {
     const message = createBaseRequestInitChain();
     message.time = object.time ?? undefined;
     message.chainId = object.chainId ?? "";
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : undefined;
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appStateBytes = object.appStateBytes ?? new Uint8Array();
-    message.initialHeight = object.initialHeight !== undefined && object.initialHeight !== null ? BigInt(object.initialHeight.toString()) : BigInt(0);
+    if (object.initialHeight !== undefined && object.initialHeight !== null) {
+      message.initialHeight = BigInt(object.initialHeight.toString());
+    }
     return message;
+  },
+  fromSDK(object: RequestInitChainSDKType): RequestInitChain {
+    return {
+      time: object.time ?? undefined,
+      chainId: object?.chain_id,
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
+      appStateBytes: object?.app_state_bytes,
+      initialHeight: object?.initial_height
+    };
+  },
+  fromSDKJSON(object: any): RequestInitChainSDKType {
+    return {
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      chain_id: isSet(object.chain_id) ? String(object.chain_id) : "",
+      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      app_state_bytes: isSet(object.app_state_bytes) ? bytesFromBase64(object.app_state_bytes) : new Uint8Array(),
+      initial_height: isSet(object.initial_height) ? BigInt(object.initial_height.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: RequestInitChain): RequestInitChainSDKType {
+    const obj: any = {};
+    message.time !== undefined && (obj.time = message.time ?? undefined);
+    obj.chain_id = message.chainId;
+    message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toSDK(message.consensusParams) : undefined);
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toSDK(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+    obj.app_state_bytes = message.appStateBytes;
+    obj.initial_height = message.initialHeight;
+    return obj;
   },
   fromAmino(object: RequestInitChainAmino): RequestInitChain {
     const message = createBaseRequestInitChain();
@@ -1764,13 +1859,13 @@ export const RequestQuery = {
     if (message.data.length !== 0) {
       writer.uint32(10).bytes(message.data);
     }
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(18).string(message.path);
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(24).int64(message.height);
     }
-    if (message.prove === true) {
+    if (message.prove !== undefined) {
       writer.uint32(32).bool(message.prove);
     }
     return writer;
@@ -1801,13 +1896,55 @@ export const RequestQuery = {
     }
     return message;
   },
+  fromJSON(object: any): RequestQuery {
+    const obj = createBaseRequestQuery();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.path)) obj.path = String(object.path);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.prove)) obj.prove = Boolean(object.prove);
+    return obj;
+  },
+  toJSON(message: RequestQuery): JsonSafe<RequestQuery> {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.path !== undefined && (obj.path = message.path);
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.prove !== undefined && (obj.prove = message.prove);
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestQuery>): RequestQuery {
     const message = createBaseRequestQuery();
     message.data = object.data ?? new Uint8Array();
     message.path = object.path ?? "";
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.prove = object.prove ?? false;
     return message;
+  },
+  fromSDK(object: RequestQuerySDKType): RequestQuery {
+    return {
+      data: object?.data,
+      path: object?.path,
+      height: object?.height,
+      prove: object?.prove
+    };
+  },
+  fromSDKJSON(object: any): RequestQuerySDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      path: isSet(object.path) ? String(object.path) : "",
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      prove: isSet(object.prove) ? Boolean(object.prove) : false
+    };
+  },
+  toSDK(message: RequestQuery): RequestQuerySDKType {
+    const obj: any = {};
+    obj.data = message.data;
+    obj.path = message.path;
+    obj.height = message.height;
+    obj.prove = message.prove;
+    return obj;
   },
   fromAmino(object: RequestQueryAmino): RequestQuery {
     const message = createBaseRequestQuery();
@@ -1900,13 +2037,65 @@ export const RequestBeginBlock = {
     }
     return message;
   },
+  fromJSON(object: any): RequestBeginBlock {
+    const obj = createBaseRequestBeginBlock();
+    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
+    if (isSet(object.header)) obj.header = Header.fromJSON(object.header);
+    if (isSet(object.lastCommitInfo)) obj.lastCommitInfo = LastCommitInfo.fromJSON(object.lastCommitInfo);
+    if (Array.isArray(object?.byzantineValidators)) obj.byzantineValidators = object.byzantineValidators.map((e: any) => Evidence.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: RequestBeginBlock): JsonSafe<RequestBeginBlock> {
+    const obj: any = {};
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.header !== undefined && (obj.header = message.header ? Header.toJSON(message.header) : undefined);
+    message.lastCommitInfo !== undefined && (obj.lastCommitInfo = message.lastCommitInfo ? LastCommitInfo.toJSON(message.lastCommitInfo) : undefined);
+    if (message.byzantineValidators) {
+      obj.byzantineValidators = message.byzantineValidators.map(e => e ? Evidence.toJSON(e) : undefined);
+    } else {
+      obj.byzantineValidators = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestBeginBlock>): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
     message.hash = object.hash ?? new Uint8Array();
-    message.header = object.header !== undefined && object.header !== null ? Header.fromPartial(object.header) : undefined;
-    message.lastCommitInfo = object.lastCommitInfo !== undefined && object.lastCommitInfo !== null ? LastCommitInfo.fromPartial(object.lastCommitInfo) : undefined;
+    if (object.header !== undefined && object.header !== null) {
+      message.header = Header.fromPartial(object.header);
+    }
+    if (object.lastCommitInfo !== undefined && object.lastCommitInfo !== null) {
+      message.lastCommitInfo = LastCommitInfo.fromPartial(object.lastCommitInfo);
+    }
     message.byzantineValidators = object.byzantineValidators?.map(e => Evidence.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: RequestBeginBlockSDKType): RequestBeginBlock {
+    return {
+      hash: object?.hash,
+      header: object.header ? Header.fromSDK(object.header) : undefined,
+      lastCommitInfo: object.last_commit_info ? LastCommitInfo.fromSDK(object.last_commit_info) : undefined,
+      byzantineValidators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): RequestBeginBlockSDKType {
+    return {
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      header: isSet(object.header) ? Header.fromSDKJSON(object.header) : undefined,
+      last_commit_info: isSet(object.last_commit_info) ? LastCommitInfo.fromSDKJSON(object.last_commit_info) : undefined,
+      byzantine_validators: Array.isArray(object?.byzantine_validators) ? object.byzantine_validators.map((e: any) => Evidence.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: RequestBeginBlock): RequestBeginBlockSDKType {
+    const obj: any = {};
+    obj.hash = message.hash;
+    message.header !== undefined && (obj.header = message.header ? Header.toSDK(message.header) : undefined);
+    message.lastCommitInfo !== undefined && (obj.last_commit_info = message.lastCommitInfo ? LastCommitInfo.toSDK(message.lastCommitInfo) : undefined);
+    if (message.byzantineValidators) {
+      obj.byzantine_validators = message.byzantineValidators.map(e => e ? Evidence.toSDK(e) : undefined);
+    } else {
+      obj.byzantine_validators = [];
+    }
+    return obj;
   },
   fromAmino(object: RequestBeginBlockAmino): RequestBeginBlock {
     const message = createBaseRequestBeginBlock();
@@ -1987,11 +2176,41 @@ export const RequestCheckTx = {
     }
     return message;
   },
+  fromJSON(object: any): RequestCheckTx {
+    const obj = createBaseRequestCheckTx();
+    if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
+    if (isSet(object.type)) obj.type = checkTxTypeFromJSON(object.type);
+    return obj;
+  },
+  toJSON(message: RequestCheckTx): JsonSafe<RequestCheckTx> {
+    const obj: any = {};
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestCheckTx>): RequestCheckTx {
     const message = createBaseRequestCheckTx();
     message.tx = object.tx ?? new Uint8Array();
     message.type = object.type ?? 0;
     return message;
+  },
+  fromSDK(object: RequestCheckTxSDKType): RequestCheckTx {
+    return {
+      tx: object?.tx,
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
+    };
+  },
+  fromSDKJSON(object: any): RequestCheckTxSDKType {
+    return {
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
+      type: isSet(object.type) ? checkTxTypeFromJSON(object.type) : -1
+    };
+  },
+  toSDK(message: RequestCheckTx): RequestCheckTxSDKType {
+    const obj: any = {};
+    obj.tx = message.tx;
+    message.type !== undefined && (obj.type = checkTxTypeToJSON(message.type));
+    return obj;
   },
   fromAmino(object: RequestCheckTxAmino): RequestCheckTx {
     const message = createBaseRequestCheckTx();
@@ -2055,10 +2274,35 @@ export const RequestDeliverTx = {
     }
     return message;
   },
+  fromJSON(object: any): RequestDeliverTx {
+    const obj = createBaseRequestDeliverTx();
+    if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
+    return obj;
+  },
+  toJSON(message: RequestDeliverTx): JsonSafe<RequestDeliverTx> {
+    const obj: any = {};
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestDeliverTx>): RequestDeliverTx {
     const message = createBaseRequestDeliverTx();
     message.tx = object.tx ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: RequestDeliverTxSDKType): RequestDeliverTx {
+    return {
+      tx: object?.tx
+    };
+  },
+  fromSDKJSON(object: any): RequestDeliverTxSDKType {
+    return {
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array()
+    };
+  },
+  toSDK(message: RequestDeliverTx): RequestDeliverTxSDKType {
+    const obj: any = {};
+    obj.tx = message.tx;
+    return obj;
   },
   fromAmino(object: RequestDeliverTxAmino): RequestDeliverTx {
     const message = createBaseRequestDeliverTx();
@@ -2096,7 +2340,7 @@ function createBaseRequestEndBlock(): RequestEndBlock {
 export const RequestEndBlock = {
   typeUrl: "/tendermint.abci.RequestEndBlock",
   encode(message: RequestEndBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
     return writer;
@@ -2118,10 +2362,37 @@ export const RequestEndBlock = {
     }
     return message;
   },
+  fromJSON(object: any): RequestEndBlock {
+    const obj = createBaseRequestEndBlock();
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    return obj;
+  },
+  toJSON(message: RequestEndBlock): JsonSafe<RequestEndBlock> {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestEndBlock>): RequestEndBlock {
     const message = createBaseRequestEndBlock();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     return message;
+  },
+  fromSDK(object: RequestEndBlockSDKType): RequestEndBlock {
+    return {
+      height: object?.height
+    };
+  },
+  fromSDKJSON(object: any): RequestEndBlockSDKType {
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: RequestEndBlock): RequestEndBlockSDKType {
+    const obj: any = {};
+    obj.height = message.height;
+    return obj;
   },
   fromAmino(object: RequestEndBlockAmino): RequestEndBlock {
     const message = createBaseRequestEndBlock();
@@ -2173,9 +2444,27 @@ export const RequestCommit = {
     }
     return message;
   },
+  fromJSON(_: any): RequestCommit {
+    const obj = createBaseRequestCommit();
+    return obj;
+  },
+  toJSON(_: RequestCommit): JsonSafe<RequestCommit> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<RequestCommit>): RequestCommit {
     const message = createBaseRequestCommit();
     return message;
+  },
+  fromSDK(_: RequestCommitSDKType): RequestCommit {
+    return {};
+  },
+  fromSDKJSON(_: any): RequestCommitSDKType {
+    return {};
+  },
+  toSDK(_: RequestCommit): RequestCommitSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: RequestCommitAmino): RequestCommit {
     const message = createBaseRequestCommit();
@@ -2223,9 +2512,27 @@ export const RequestListSnapshots = {
     }
     return message;
   },
+  fromJSON(_: any): RequestListSnapshots {
+    const obj = createBaseRequestListSnapshots();
+    return obj;
+  },
+  toJSON(_: RequestListSnapshots): JsonSafe<RequestListSnapshots> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<RequestListSnapshots>): RequestListSnapshots {
     const message = createBaseRequestListSnapshots();
     return message;
+  },
+  fromSDK(_: RequestListSnapshotsSDKType): RequestListSnapshots {
+    return {};
+  },
+  fromSDKJSON(_: any): RequestListSnapshotsSDKType {
+    return {};
+  },
+  toSDK(_: RequestListSnapshots): RequestListSnapshotsSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: RequestListSnapshotsAmino): RequestListSnapshots {
     const message = createBaseRequestListSnapshots();
@@ -2288,11 +2595,43 @@ export const RequestOfferSnapshot = {
     }
     return message;
   },
+  fromJSON(object: any): RequestOfferSnapshot {
+    const obj = createBaseRequestOfferSnapshot();
+    if (isSet(object.snapshot)) obj.snapshot = Snapshot.fromJSON(object.snapshot);
+    if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
+    return obj;
+  },
+  toJSON(message: RequestOfferSnapshot): JsonSafe<RequestOfferSnapshot> {
+    const obj: any = {};
+    message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toJSON(message.snapshot) : undefined);
+    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestOfferSnapshot>): RequestOfferSnapshot {
     const message = createBaseRequestOfferSnapshot();
-    message.snapshot = object.snapshot !== undefined && object.snapshot !== null ? Snapshot.fromPartial(object.snapshot) : undefined;
+    if (object.snapshot !== undefined && object.snapshot !== null) {
+      message.snapshot = Snapshot.fromPartial(object.snapshot);
+    }
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: RequestOfferSnapshotSDKType): RequestOfferSnapshot {
+    return {
+      snapshot: object.snapshot ? Snapshot.fromSDK(object.snapshot) : undefined,
+      appHash: object?.app_hash
+    };
+  },
+  fromSDKJSON(object: any): RequestOfferSnapshotSDKType {
+    return {
+      snapshot: isSet(object.snapshot) ? Snapshot.fromSDKJSON(object.snapshot) : undefined,
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+    };
+  },
+  toSDK(message: RequestOfferSnapshot): RequestOfferSnapshotSDKType {
+    const obj: any = {};
+    message.snapshot !== undefined && (obj.snapshot = message.snapshot ? Snapshot.toSDK(message.snapshot) : undefined);
+    obj.app_hash = message.appHash;
+    return obj;
   },
   fromAmino(object: RequestOfferSnapshotAmino): RequestOfferSnapshot {
     const message = createBaseRequestOfferSnapshot();
@@ -2336,13 +2675,13 @@ function createBaseRequestLoadSnapshotChunk(): RequestLoadSnapshotChunk {
 export const RequestLoadSnapshotChunk = {
   typeUrl: "/tendermint.abci.RequestLoadSnapshotChunk",
   encode(message: RequestLoadSnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).uint64(message.height);
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       writer.uint32(16).uint32(message.format);
     }
-    if (message.chunk !== 0) {
+    if (message.chunk !== undefined) {
       writer.uint32(24).uint32(message.chunk);
     }
     return writer;
@@ -2370,12 +2709,49 @@ export const RequestLoadSnapshotChunk = {
     }
     return message;
   },
+  fromJSON(object: any): RequestLoadSnapshotChunk {
+    const obj = createBaseRequestLoadSnapshotChunk();
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.format)) obj.format = Number(object.format);
+    if (isSet(object.chunk)) obj.chunk = Number(object.chunk);
+    return obj;
+  },
+  toJSON(message: RequestLoadSnapshotChunk): JsonSafe<RequestLoadSnapshotChunk> {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.format !== undefined && (obj.format = Math.round(message.format));
+    message.chunk !== undefined && (obj.chunk = Math.round(message.chunk));
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestLoadSnapshotChunk>): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.format = object.format ?? 0;
     message.chunk = object.chunk ?? 0;
     return message;
+  },
+  fromSDK(object: RequestLoadSnapshotChunkSDKType): RequestLoadSnapshotChunk {
+    return {
+      height: object?.height,
+      format: object?.format,
+      chunk: object?.chunk
+    };
+  },
+  fromSDKJSON(object: any): RequestLoadSnapshotChunkSDKType {
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunk: isSet(object.chunk) ? Number(object.chunk) : 0
+    };
+  },
+  toSDK(message: RequestLoadSnapshotChunk): RequestLoadSnapshotChunkSDKType {
+    const obj: any = {};
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunk = message.chunk;
+    return obj;
   },
   fromAmino(object: RequestLoadSnapshotChunkAmino): RequestLoadSnapshotChunk {
     const message = createBaseRequestLoadSnapshotChunk();
@@ -2423,13 +2799,13 @@ function createBaseRequestApplySnapshotChunk(): RequestApplySnapshotChunk {
 export const RequestApplySnapshotChunk = {
   typeUrl: "/tendermint.abci.RequestApplySnapshotChunk",
   encode(message: RequestApplySnapshotChunk, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(8).uint32(message.index);
     }
     if (message.chunk.length !== 0) {
       writer.uint32(18).bytes(message.chunk);
     }
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(26).string(message.sender);
     }
     return writer;
@@ -2457,12 +2833,47 @@ export const RequestApplySnapshotChunk = {
     }
     return message;
   },
+  fromJSON(object: any): RequestApplySnapshotChunk {
+    const obj = createBaseRequestApplySnapshotChunk();
+    if (isSet(object.index)) obj.index = Number(object.index);
+    if (isSet(object.chunk)) obj.chunk = bytesFromBase64(object.chunk);
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    return obj;
+  },
+  toJSON(message: RequestApplySnapshotChunk): JsonSafe<RequestApplySnapshotChunk> {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = Math.round(message.index));
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
+    message.sender !== undefined && (obj.sender = message.sender);
+    return obj;
+  },
   fromPartial(object: DeepPartial<RequestApplySnapshotChunk>): RequestApplySnapshotChunk {
     const message = createBaseRequestApplySnapshotChunk();
     message.index = object.index ?? 0;
     message.chunk = object.chunk ?? new Uint8Array();
     message.sender = object.sender ?? "";
     return message;
+  },
+  fromSDK(object: RequestApplySnapshotChunkSDKType): RequestApplySnapshotChunk {
+    return {
+      index: object?.index,
+      chunk: object?.chunk,
+      sender: object?.sender
+    };
+  },
+  fromSDKJSON(object: any): RequestApplySnapshotChunkSDKType {
+    return {
+      index: isSet(object.index) ? Number(object.index) : 0,
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array(),
+      sender: isSet(object.sender) ? String(object.sender) : ""
+    };
+  },
+  toSDK(message: RequestApplySnapshotChunk): RequestApplySnapshotChunkSDKType {
+    const obj: any = {};
+    obj.index = message.index;
+    obj.chunk = message.chunk;
+    obj.sender = message.sender;
+    return obj;
   },
   fromAmino(object: RequestApplySnapshotChunkAmino): RequestApplySnapshotChunk {
     const message = createBaseRequestApplySnapshotChunk();
@@ -2635,25 +3046,157 @@ export const Response = {
     }
     return message;
   },
+  fromJSON(object: any): Response {
+    const obj = createBaseResponse();
+    if (isSet(object.exception)) obj.exception = ResponseException.fromJSON(object.exception);
+    if (isSet(object.echo)) obj.echo = ResponseEcho.fromJSON(object.echo);
+    if (isSet(object.flush)) obj.flush = ResponseFlush.fromJSON(object.flush);
+    if (isSet(object.info)) obj.info = ResponseInfo.fromJSON(object.info);
+    if (isSet(object.setOption)) obj.setOption = ResponseSetOption.fromJSON(object.setOption);
+    if (isSet(object.initChain)) obj.initChain = ResponseInitChain.fromJSON(object.initChain);
+    if (isSet(object.query)) obj.query = ResponseQuery.fromJSON(object.query);
+    if (isSet(object.beginBlock)) obj.beginBlock = ResponseBeginBlock.fromJSON(object.beginBlock);
+    if (isSet(object.checkTx)) obj.checkTx = ResponseCheckTx.fromJSON(object.checkTx);
+    if (isSet(object.deliverTx)) obj.deliverTx = ResponseDeliverTx.fromJSON(object.deliverTx);
+    if (isSet(object.endBlock)) obj.endBlock = ResponseEndBlock.fromJSON(object.endBlock);
+    if (isSet(object.commit)) obj.commit = ResponseCommit.fromJSON(object.commit);
+    if (isSet(object.listSnapshots)) obj.listSnapshots = ResponseListSnapshots.fromJSON(object.listSnapshots);
+    if (isSet(object.offerSnapshot)) obj.offerSnapshot = ResponseOfferSnapshot.fromJSON(object.offerSnapshot);
+    if (isSet(object.loadSnapshotChunk)) obj.loadSnapshotChunk = ResponseLoadSnapshotChunk.fromJSON(object.loadSnapshotChunk);
+    if (isSet(object.applySnapshotChunk)) obj.applySnapshotChunk = ResponseApplySnapshotChunk.fromJSON(object.applySnapshotChunk);
+    return obj;
+  },
+  toJSON(message: Response): JsonSafe<Response> {
+    const obj: any = {};
+    message.exception !== undefined && (obj.exception = message.exception ? ResponseException.toJSON(message.exception) : undefined);
+    message.echo !== undefined && (obj.echo = message.echo ? ResponseEcho.toJSON(message.echo) : undefined);
+    message.flush !== undefined && (obj.flush = message.flush ? ResponseFlush.toJSON(message.flush) : undefined);
+    message.info !== undefined && (obj.info = message.info ? ResponseInfo.toJSON(message.info) : undefined);
+    message.setOption !== undefined && (obj.setOption = message.setOption ? ResponseSetOption.toJSON(message.setOption) : undefined);
+    message.initChain !== undefined && (obj.initChain = message.initChain ? ResponseInitChain.toJSON(message.initChain) : undefined);
+    message.query !== undefined && (obj.query = message.query ? ResponseQuery.toJSON(message.query) : undefined);
+    message.beginBlock !== undefined && (obj.beginBlock = message.beginBlock ? ResponseBeginBlock.toJSON(message.beginBlock) : undefined);
+    message.checkTx !== undefined && (obj.checkTx = message.checkTx ? ResponseCheckTx.toJSON(message.checkTx) : undefined);
+    message.deliverTx !== undefined && (obj.deliverTx = message.deliverTx ? ResponseDeliverTx.toJSON(message.deliverTx) : undefined);
+    message.endBlock !== undefined && (obj.endBlock = message.endBlock ? ResponseEndBlock.toJSON(message.endBlock) : undefined);
+    message.commit !== undefined && (obj.commit = message.commit ? ResponseCommit.toJSON(message.commit) : undefined);
+    message.listSnapshots !== undefined && (obj.listSnapshots = message.listSnapshots ? ResponseListSnapshots.toJSON(message.listSnapshots) : undefined);
+    message.offerSnapshot !== undefined && (obj.offerSnapshot = message.offerSnapshot ? ResponseOfferSnapshot.toJSON(message.offerSnapshot) : undefined);
+    message.loadSnapshotChunk !== undefined && (obj.loadSnapshotChunk = message.loadSnapshotChunk ? ResponseLoadSnapshotChunk.toJSON(message.loadSnapshotChunk) : undefined);
+    message.applySnapshotChunk !== undefined && (obj.applySnapshotChunk = message.applySnapshotChunk ? ResponseApplySnapshotChunk.toJSON(message.applySnapshotChunk) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Response>): Response {
     const message = createBaseResponse();
-    message.exception = object.exception !== undefined && object.exception !== null ? ResponseException.fromPartial(object.exception) : undefined;
-    message.echo = object.echo !== undefined && object.echo !== null ? ResponseEcho.fromPartial(object.echo) : undefined;
-    message.flush = object.flush !== undefined && object.flush !== null ? ResponseFlush.fromPartial(object.flush) : undefined;
-    message.info = object.info !== undefined && object.info !== null ? ResponseInfo.fromPartial(object.info) : undefined;
-    message.setOption = object.setOption !== undefined && object.setOption !== null ? ResponseSetOption.fromPartial(object.setOption) : undefined;
-    message.initChain = object.initChain !== undefined && object.initChain !== null ? ResponseInitChain.fromPartial(object.initChain) : undefined;
-    message.query = object.query !== undefined && object.query !== null ? ResponseQuery.fromPartial(object.query) : undefined;
-    message.beginBlock = object.beginBlock !== undefined && object.beginBlock !== null ? ResponseBeginBlock.fromPartial(object.beginBlock) : undefined;
-    message.checkTx = object.checkTx !== undefined && object.checkTx !== null ? ResponseCheckTx.fromPartial(object.checkTx) : undefined;
-    message.deliverTx = object.deliverTx !== undefined && object.deliverTx !== null ? ResponseDeliverTx.fromPartial(object.deliverTx) : undefined;
-    message.endBlock = object.endBlock !== undefined && object.endBlock !== null ? ResponseEndBlock.fromPartial(object.endBlock) : undefined;
-    message.commit = object.commit !== undefined && object.commit !== null ? ResponseCommit.fromPartial(object.commit) : undefined;
-    message.listSnapshots = object.listSnapshots !== undefined && object.listSnapshots !== null ? ResponseListSnapshots.fromPartial(object.listSnapshots) : undefined;
-    message.offerSnapshot = object.offerSnapshot !== undefined && object.offerSnapshot !== null ? ResponseOfferSnapshot.fromPartial(object.offerSnapshot) : undefined;
-    message.loadSnapshotChunk = object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null ? ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk) : undefined;
-    message.applySnapshotChunk = object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null ? ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk) : undefined;
+    if (object.exception !== undefined && object.exception !== null) {
+      message.exception = ResponseException.fromPartial(object.exception);
+    }
+    if (object.echo !== undefined && object.echo !== null) {
+      message.echo = ResponseEcho.fromPartial(object.echo);
+    }
+    if (object.flush !== undefined && object.flush !== null) {
+      message.flush = ResponseFlush.fromPartial(object.flush);
+    }
+    if (object.info !== undefined && object.info !== null) {
+      message.info = ResponseInfo.fromPartial(object.info);
+    }
+    if (object.setOption !== undefined && object.setOption !== null) {
+      message.setOption = ResponseSetOption.fromPartial(object.setOption);
+    }
+    if (object.initChain !== undefined && object.initChain !== null) {
+      message.initChain = ResponseInitChain.fromPartial(object.initChain);
+    }
+    if (object.query !== undefined && object.query !== null) {
+      message.query = ResponseQuery.fromPartial(object.query);
+    }
+    if (object.beginBlock !== undefined && object.beginBlock !== null) {
+      message.beginBlock = ResponseBeginBlock.fromPartial(object.beginBlock);
+    }
+    if (object.checkTx !== undefined && object.checkTx !== null) {
+      message.checkTx = ResponseCheckTx.fromPartial(object.checkTx);
+    }
+    if (object.deliverTx !== undefined && object.deliverTx !== null) {
+      message.deliverTx = ResponseDeliverTx.fromPartial(object.deliverTx);
+    }
+    if (object.endBlock !== undefined && object.endBlock !== null) {
+      message.endBlock = ResponseEndBlock.fromPartial(object.endBlock);
+    }
+    if (object.commit !== undefined && object.commit !== null) {
+      message.commit = ResponseCommit.fromPartial(object.commit);
+    }
+    if (object.listSnapshots !== undefined && object.listSnapshots !== null) {
+      message.listSnapshots = ResponseListSnapshots.fromPartial(object.listSnapshots);
+    }
+    if (object.offerSnapshot !== undefined && object.offerSnapshot !== null) {
+      message.offerSnapshot = ResponseOfferSnapshot.fromPartial(object.offerSnapshot);
+    }
+    if (object.loadSnapshotChunk !== undefined && object.loadSnapshotChunk !== null) {
+      message.loadSnapshotChunk = ResponseLoadSnapshotChunk.fromPartial(object.loadSnapshotChunk);
+    }
+    if (object.applySnapshotChunk !== undefined && object.applySnapshotChunk !== null) {
+      message.applySnapshotChunk = ResponseApplySnapshotChunk.fromPartial(object.applySnapshotChunk);
+    }
     return message;
+  },
+  fromSDK(object: ResponseSDKType): Response {
+    return {
+      exception: object.exception ? ResponseException.fromSDK(object.exception) : undefined,
+      echo: object.echo ? ResponseEcho.fromSDK(object.echo) : undefined,
+      flush: object.flush ? ResponseFlush.fromSDK(object.flush) : undefined,
+      info: object.info ? ResponseInfo.fromSDK(object.info) : undefined,
+      setOption: object.set_option ? ResponseSetOption.fromSDK(object.set_option) : undefined,
+      initChain: object.init_chain ? ResponseInitChain.fromSDK(object.init_chain) : undefined,
+      query: object.query ? ResponseQuery.fromSDK(object.query) : undefined,
+      beginBlock: object.begin_block ? ResponseBeginBlock.fromSDK(object.begin_block) : undefined,
+      checkTx: object.check_tx ? ResponseCheckTx.fromSDK(object.check_tx) : undefined,
+      deliverTx: object.deliver_tx ? ResponseDeliverTx.fromSDK(object.deliver_tx) : undefined,
+      endBlock: object.end_block ? ResponseEndBlock.fromSDK(object.end_block) : undefined,
+      commit: object.commit ? ResponseCommit.fromSDK(object.commit) : undefined,
+      listSnapshots: object.list_snapshots ? ResponseListSnapshots.fromSDK(object.list_snapshots) : undefined,
+      offerSnapshot: object.offer_snapshot ? ResponseOfferSnapshot.fromSDK(object.offer_snapshot) : undefined,
+      loadSnapshotChunk: object.load_snapshot_chunk ? ResponseLoadSnapshotChunk.fromSDK(object.load_snapshot_chunk) : undefined,
+      applySnapshotChunk: object.apply_snapshot_chunk ? ResponseApplySnapshotChunk.fromSDK(object.apply_snapshot_chunk) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ResponseSDKType {
+    return {
+      exception: isSet(object.exception) ? ResponseException.fromSDKJSON(object.exception) : undefined,
+      echo: isSet(object.echo) ? ResponseEcho.fromSDKJSON(object.echo) : undefined,
+      flush: isSet(object.flush) ? ResponseFlush.fromSDKJSON(object.flush) : undefined,
+      info: isSet(object.info) ? ResponseInfo.fromSDKJSON(object.info) : undefined,
+      set_option: isSet(object.set_option) ? ResponseSetOption.fromSDKJSON(object.set_option) : undefined,
+      init_chain: isSet(object.init_chain) ? ResponseInitChain.fromSDKJSON(object.init_chain) : undefined,
+      query: isSet(object.query) ? ResponseQuery.fromSDKJSON(object.query) : undefined,
+      begin_block: isSet(object.begin_block) ? ResponseBeginBlock.fromSDKJSON(object.begin_block) : undefined,
+      check_tx: isSet(object.check_tx) ? ResponseCheckTx.fromSDKJSON(object.check_tx) : undefined,
+      deliver_tx: isSet(object.deliver_tx) ? ResponseDeliverTx.fromSDKJSON(object.deliver_tx) : undefined,
+      end_block: isSet(object.end_block) ? ResponseEndBlock.fromSDKJSON(object.end_block) : undefined,
+      commit: isSet(object.commit) ? ResponseCommit.fromSDKJSON(object.commit) : undefined,
+      list_snapshots: isSet(object.list_snapshots) ? ResponseListSnapshots.fromSDKJSON(object.list_snapshots) : undefined,
+      offer_snapshot: isSet(object.offer_snapshot) ? ResponseOfferSnapshot.fromSDKJSON(object.offer_snapshot) : undefined,
+      load_snapshot_chunk: isSet(object.load_snapshot_chunk) ? ResponseLoadSnapshotChunk.fromSDKJSON(object.load_snapshot_chunk) : undefined,
+      apply_snapshot_chunk: isSet(object.apply_snapshot_chunk) ? ResponseApplySnapshotChunk.fromSDKJSON(object.apply_snapshot_chunk) : undefined
+    };
+  },
+  toSDK(message: Response): ResponseSDKType {
+    const obj: any = {};
+    message.exception !== undefined && (obj.exception = message.exception ? ResponseException.toSDK(message.exception) : undefined);
+    message.echo !== undefined && (obj.echo = message.echo ? ResponseEcho.toSDK(message.echo) : undefined);
+    message.flush !== undefined && (obj.flush = message.flush ? ResponseFlush.toSDK(message.flush) : undefined);
+    message.info !== undefined && (obj.info = message.info ? ResponseInfo.toSDK(message.info) : undefined);
+    message.setOption !== undefined && (obj.set_option = message.setOption ? ResponseSetOption.toSDK(message.setOption) : undefined);
+    message.initChain !== undefined && (obj.init_chain = message.initChain ? ResponseInitChain.toSDK(message.initChain) : undefined);
+    message.query !== undefined && (obj.query = message.query ? ResponseQuery.toSDK(message.query) : undefined);
+    message.beginBlock !== undefined && (obj.begin_block = message.beginBlock ? ResponseBeginBlock.toSDK(message.beginBlock) : undefined);
+    message.checkTx !== undefined && (obj.check_tx = message.checkTx ? ResponseCheckTx.toSDK(message.checkTx) : undefined);
+    message.deliverTx !== undefined && (obj.deliver_tx = message.deliverTx ? ResponseDeliverTx.toSDK(message.deliverTx) : undefined);
+    message.endBlock !== undefined && (obj.end_block = message.endBlock ? ResponseEndBlock.toSDK(message.endBlock) : undefined);
+    message.commit !== undefined && (obj.commit = message.commit ? ResponseCommit.toSDK(message.commit) : undefined);
+    message.listSnapshots !== undefined && (obj.list_snapshots = message.listSnapshots ? ResponseListSnapshots.toSDK(message.listSnapshots) : undefined);
+    message.offerSnapshot !== undefined && (obj.offer_snapshot = message.offerSnapshot ? ResponseOfferSnapshot.toSDK(message.offerSnapshot) : undefined);
+    message.loadSnapshotChunk !== undefined && (obj.load_snapshot_chunk = message.loadSnapshotChunk ? ResponseLoadSnapshotChunk.toSDK(message.loadSnapshotChunk) : undefined);
+    message.applySnapshotChunk !== undefined && (obj.apply_snapshot_chunk = message.applySnapshotChunk ? ResponseApplySnapshotChunk.toSDK(message.applySnapshotChunk) : undefined);
+    return obj;
   },
   fromAmino(object: ResponseAmino): Response {
     const message = createBaseResponse();
@@ -2751,7 +3294,7 @@ function createBaseResponseException(): ResponseException {
 export const ResponseException = {
   typeUrl: "/tendermint.abci.ResponseException",
   encode(message: ResponseException, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.error !== "") {
+    if (message.error !== undefined) {
       writer.uint32(10).string(message.error);
     }
     return writer;
@@ -2773,10 +3316,35 @@ export const ResponseException = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseException {
+    const obj = createBaseResponseException();
+    if (isSet(object.error)) obj.error = String(object.error);
+    return obj;
+  },
+  toJSON(message: ResponseException): JsonSafe<ResponseException> {
+    const obj: any = {};
+    message.error !== undefined && (obj.error = message.error);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseException>): ResponseException {
     const message = createBaseResponseException();
     message.error = object.error ?? "";
     return message;
+  },
+  fromSDK(object: ResponseExceptionSDKType): ResponseException {
+    return {
+      error: object?.error
+    };
+  },
+  fromSDKJSON(object: any): ResponseExceptionSDKType {
+    return {
+      error: isSet(object.error) ? String(object.error) : ""
+    };
+  },
+  toSDK(message: ResponseException): ResponseExceptionSDKType {
+    const obj: any = {};
+    obj.error = message.error;
+    return obj;
   },
   fromAmino(object: ResponseExceptionAmino): ResponseException {
     const message = createBaseResponseException();
@@ -2814,7 +3382,7 @@ function createBaseResponseEcho(): ResponseEcho {
 export const ResponseEcho = {
   typeUrl: "/tendermint.abci.ResponseEcho",
   encode(message: ResponseEcho, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.message !== "") {
+    if (message.message !== undefined) {
       writer.uint32(10).string(message.message);
     }
     return writer;
@@ -2836,10 +3404,35 @@ export const ResponseEcho = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseEcho {
+    const obj = createBaseResponseEcho();
+    if (isSet(object.message)) obj.message = String(object.message);
+    return obj;
+  },
+  toJSON(message: ResponseEcho): JsonSafe<ResponseEcho> {
+    const obj: any = {};
+    message.message !== undefined && (obj.message = message.message);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseEcho>): ResponseEcho {
     const message = createBaseResponseEcho();
     message.message = object.message ?? "";
     return message;
+  },
+  fromSDK(object: ResponseEchoSDKType): ResponseEcho {
+    return {
+      message: object?.message
+    };
+  },
+  fromSDKJSON(object: any): ResponseEchoSDKType {
+    return {
+      message: isSet(object.message) ? String(object.message) : ""
+    };
+  },
+  toSDK(message: ResponseEcho): ResponseEchoSDKType {
+    const obj: any = {};
+    obj.message = message.message;
+    return obj;
   },
   fromAmino(object: ResponseEchoAmino): ResponseEcho {
     const message = createBaseResponseEcho();
@@ -2891,9 +3484,27 @@ export const ResponseFlush = {
     }
     return message;
   },
+  fromJSON(_: any): ResponseFlush {
+    const obj = createBaseResponseFlush();
+    return obj;
+  },
+  toJSON(_: ResponseFlush): JsonSafe<ResponseFlush> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ResponseFlush>): ResponseFlush {
     const message = createBaseResponseFlush();
     return message;
+  },
+  fromSDK(_: ResponseFlushSDKType): ResponseFlush {
+    return {};
+  },
+  fromSDKJSON(_: any): ResponseFlushSDKType {
+    return {};
+  },
+  toSDK(_: ResponseFlush): ResponseFlushSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ResponseFlushAmino): ResponseFlush {
     const message = createBaseResponseFlush();
@@ -2931,16 +3542,16 @@ function createBaseResponseInfo(): ResponseInfo {
 export const ResponseInfo = {
   typeUrl: "/tendermint.abci.ResponseInfo",
   encode(message: ResponseInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.data !== "") {
+    if (message.data !== undefined) {
       writer.uint32(10).string(message.data);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(18).string(message.version);
     }
-    if (message.appVersion !== BigInt(0)) {
+    if (message.appVersion !== undefined) {
       writer.uint32(24).uint64(message.appVersion);
     }
-    if (message.lastBlockHeight !== BigInt(0)) {
+    if (message.lastBlockHeight !== undefined) {
       writer.uint32(32).int64(message.lastBlockHeight);
     }
     if (message.lastBlockAppHash.length !== 0) {
@@ -2977,14 +3588,63 @@ export const ResponseInfo = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseInfo {
+    const obj = createBaseResponseInfo();
+    if (isSet(object.data)) obj.data = String(object.data);
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.appVersion)) obj.appVersion = BigInt(object.appVersion.toString());
+    if (isSet(object.lastBlockHeight)) obj.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
+    if (isSet(object.lastBlockAppHash)) obj.lastBlockAppHash = bytesFromBase64(object.lastBlockAppHash);
+    return obj;
+  },
+  toJSON(message: ResponseInfo): JsonSafe<ResponseInfo> {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = message.data);
+    message.version !== undefined && (obj.version = message.version);
+    message.appVersion !== undefined && (obj.appVersion = (message.appVersion || BigInt(0)).toString());
+    message.lastBlockHeight !== undefined && (obj.lastBlockHeight = (message.lastBlockHeight || BigInt(0)).toString());
+    message.lastBlockAppHash !== undefined && (obj.lastBlockAppHash = base64FromBytes(message.lastBlockAppHash !== undefined ? message.lastBlockAppHash : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseInfo>): ResponseInfo {
     const message = createBaseResponseInfo();
     message.data = object.data ?? "";
     message.version = object.version ?? "";
-    message.appVersion = object.appVersion !== undefined && object.appVersion !== null ? BigInt(object.appVersion.toString()) : BigInt(0);
-    message.lastBlockHeight = object.lastBlockHeight !== undefined && object.lastBlockHeight !== null ? BigInt(object.lastBlockHeight.toString()) : BigInt(0);
+    if (object.appVersion !== undefined && object.appVersion !== null) {
+      message.appVersion = BigInt(object.appVersion.toString());
+    }
+    if (object.lastBlockHeight !== undefined && object.lastBlockHeight !== null) {
+      message.lastBlockHeight = BigInt(object.lastBlockHeight.toString());
+    }
     message.lastBlockAppHash = object.lastBlockAppHash ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: ResponseInfoSDKType): ResponseInfo {
+    return {
+      data: object?.data,
+      version: object?.version,
+      appVersion: object?.app_version,
+      lastBlockHeight: object?.last_block_height,
+      lastBlockAppHash: object?.last_block_app_hash
+    };
+  },
+  fromSDKJSON(object: any): ResponseInfoSDKType {
+    return {
+      data: isSet(object.data) ? String(object.data) : "",
+      version: isSet(object.version) ? String(object.version) : "",
+      app_version: isSet(object.app_version) ? BigInt(object.app_version.toString()) : BigInt(0),
+      last_block_height: isSet(object.last_block_height) ? BigInt(object.last_block_height.toString()) : BigInt(0),
+      last_block_app_hash: isSet(object.last_block_app_hash) ? bytesFromBase64(object.last_block_app_hash) : new Uint8Array()
+    };
+  },
+  toSDK(message: ResponseInfo): ResponseInfoSDKType {
+    const obj: any = {};
+    obj.data = message.data;
+    obj.version = message.version;
+    obj.app_version = message.appVersion;
+    obj.last_block_height = message.lastBlockHeight;
+    obj.last_block_app_hash = message.lastBlockAppHash;
+    return obj;
   },
   fromAmino(object: ResponseInfoAmino): ResponseInfo {
     const message = createBaseResponseInfo();
@@ -3040,13 +3700,13 @@ function createBaseResponseSetOption(): ResponseSetOption {
 export const ResponseSetOption = {
   typeUrl: "/tendermint.abci.ResponseSetOption",
   encode(message: ResponseSetOption, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
     return writer;
@@ -3074,12 +3734,47 @@ export const ResponseSetOption = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseSetOption {
+    const obj = createBaseResponseSetOption();
+    if (isSet(object.code)) obj.code = Number(object.code);
+    if (isSet(object.log)) obj.log = String(object.log);
+    if (isSet(object.info)) obj.info = String(object.info);
+    return obj;
+  },
+  toJSON(message: ResponseSetOption): JsonSafe<ResponseSetOption> {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = Math.round(message.code));
+    message.log !== undefined && (obj.log = message.log);
+    message.info !== undefined && (obj.info = message.info);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseSetOption>): ResponseSetOption {
     const message = createBaseResponseSetOption();
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
     return message;
+  },
+  fromSDK(object: ResponseSetOptionSDKType): ResponseSetOption {
+    return {
+      code: object?.code,
+      log: object?.log,
+      info: object?.info
+    };
+  },
+  fromSDKJSON(object: any): ResponseSetOptionSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : ""
+    };
+  },
+  toSDK(message: ResponseSetOption): ResponseSetOptionSDKType {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
+    return obj;
   },
   fromAmino(object: ResponseSetOptionAmino): ResponseSetOption {
     const message = createBaseResponseSetOption();
@@ -3161,12 +3856,57 @@ export const ResponseInitChain = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseInitChain {
+    const obj = createBaseResponseInitChain();
+    if (isSet(object.consensusParams)) obj.consensusParams = ConsensusParams.fromJSON(object.consensusParams);
+    if (Array.isArray(object?.validators)) obj.validators = object.validators.map((e: any) => ValidatorUpdate.fromJSON(e));
+    if (isSet(object.appHash)) obj.appHash = bytesFromBase64(object.appHash);
+    return obj;
+  },
+  toJSON(message: ResponseInitChain): JsonSafe<ResponseInitChain> {
+    const obj: any = {};
+    message.consensusParams !== undefined && (obj.consensusParams = message.consensusParams ? ConsensusParams.toJSON(message.consensusParams) : undefined);
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+    message.appHash !== undefined && (obj.appHash = base64FromBytes(message.appHash !== undefined ? message.appHash : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseInitChain>): ResponseInitChain {
     const message = createBaseResponseInitChain();
-    message.consensusParams = object.consensusParams !== undefined && object.consensusParams !== null ? ConsensusParams.fromPartial(object.consensusParams) : undefined;
+    if (object.consensusParams !== undefined && object.consensusParams !== null) {
+      message.consensusParams = ConsensusParams.fromPartial(object.consensusParams);
+    }
     message.validators = object.validators?.map(e => ValidatorUpdate.fromPartial(e)) || [];
     message.appHash = object.appHash ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: ResponseInitChainSDKType): ResponseInitChain {
+    return {
+      consensusParams: object.consensus_params ? ConsensusParams.fromSDK(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
+      appHash: object?.app_hash
+    };
+  },
+  fromSDKJSON(object: any): ResponseInitChainSDKType {
+    return {
+      consensus_params: isSet(object.consensus_params) ? ConsensusParams.fromSDKJSON(object.consensus_params) : undefined,
+      validators: Array.isArray(object?.validators) ? object.validators.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      app_hash: isSet(object.app_hash) ? bytesFromBase64(object.app_hash) : new Uint8Array()
+    };
+  },
+  toSDK(message: ResponseInitChain): ResponseInitChainSDKType {
+    const obj: any = {};
+    message.consensusParams !== undefined && (obj.consensus_params = message.consensusParams ? ConsensusParams.toSDK(message.consensusParams) : undefined);
+    if (message.validators) {
+      obj.validators = message.validators.map(e => e ? ValidatorUpdate.toSDK(e) : undefined);
+    } else {
+      obj.validators = [];
+    }
+    obj.app_hash = message.appHash;
+    return obj;
   },
   fromAmino(object: ResponseInitChainAmino): ResponseInitChain {
     const message = createBaseResponseInitChain();
@@ -3222,16 +3962,16 @@ function createBaseResponseQuery(): ResponseQuery {
 export const ResponseQuery = {
   typeUrl: "/tendermint.abci.ResponseQuery",
   encode(message: ResponseQuery, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(40).int64(message.index);
     }
     if (message.key.length !== 0) {
@@ -3243,10 +3983,10 @@ export const ResponseQuery = {
     if (message.proofOps !== undefined) {
       ProofOps.encode(message.proofOps, writer.uint32(66).fork()).ldelim();
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(72).int64(message.height);
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(82).string(message.codespace);
     }
     return writer;
@@ -3292,18 +4032,89 @@ export const ResponseQuery = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseQuery {
+    const obj = createBaseResponseQuery();
+    if (isSet(object.code)) obj.code = Number(object.code);
+    if (isSet(object.log)) obj.log = String(object.log);
+    if (isSet(object.info)) obj.info = String(object.info);
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    if (isSet(object.proofOps)) obj.proofOps = ProofOps.fromJSON(object.proofOps);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.codespace)) obj.codespace = String(object.codespace);
+    return obj;
+  },
+  toJSON(message: ResponseQuery): JsonSafe<ResponseQuery> {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = Math.round(message.code));
+    message.log !== undefined && (obj.log = message.log);
+    message.info !== undefined && (obj.info = message.info);
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    message.proofOps !== undefined && (obj.proofOps = message.proofOps ? ProofOps.toJSON(message.proofOps) : undefined);
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.codespace !== undefined && (obj.codespace = message.codespace);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseQuery>): ResponseQuery {
     const message = createBaseResponseQuery();
     message.code = object.code ?? 0;
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
-    message.proofOps = object.proofOps !== undefined && object.proofOps !== null ? ProofOps.fromPartial(object.proofOps) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.proofOps !== undefined && object.proofOps !== null) {
+      message.proofOps = ProofOps.fromPartial(object.proofOps);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.codespace = object.codespace ?? "";
     return message;
+  },
+  fromSDK(object: ResponseQuerySDKType): ResponseQuery {
+    return {
+      code: object?.code,
+      log: object?.log,
+      info: object?.info,
+      index: object?.index,
+      key: object?.key,
+      value: object?.value,
+      proofOps: object.proof_ops ? ProofOps.fromSDK(object.proof_ops) : undefined,
+      height: object?.height,
+      codespace: object?.codespace
+    };
+  },
+  fromSDKJSON(object: any): ResponseQuerySDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      proof_ops: isSet(object.proof_ops) ? ProofOps.fromSDKJSON(object.proof_ops) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
+  },
+  toSDK(message: ResponseQuery): ResponseQuerySDKType {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.index = message.index;
+    obj.key = message.key;
+    obj.value = message.value;
+    message.proofOps !== undefined && (obj.proof_ops = message.proofOps ? ProofOps.toSDK(message.proofOps) : undefined);
+    obj.height = message.height;
+    obj.codespace = message.codespace;
+    return obj;
   },
   fromAmino(object: ResponseQueryAmino): ResponseQuery {
     const message = createBaseResponseQuery();
@@ -3395,10 +4206,43 @@ export const ResponseBeginBlock = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseBeginBlock {
+    const obj = createBaseResponseBeginBlock();
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ResponseBeginBlock): JsonSafe<ResponseBeginBlock> {
+    const obj: any = {};
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseBeginBlock>): ResponseBeginBlock {
     const message = createBaseResponseBeginBlock();
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ResponseBeginBlockSDKType): ResponseBeginBlock {
+    return {
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ResponseBeginBlockSDKType {
+    return {
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ResponseBeginBlock): ResponseBeginBlockSDKType {
+    const obj: any = {};
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    return obj;
   },
   fromAmino(object: ResponseBeginBlockAmino): ResponseBeginBlock {
     const message = createBaseResponseBeginBlock();
@@ -3445,28 +4289,28 @@ function createBaseResponseCheckTx(): ResponseCheckTx {
 export const ResponseCheckTx = {
   typeUrl: "/tendermint.abci.ResponseCheckTx",
   encode(message: ResponseCheckTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(40).int64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(48).int64(message.gasUsed);
     }
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(66).string(message.codespace);
     }
     return writer;
@@ -3509,17 +4353,89 @@ export const ResponseCheckTx = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseCheckTx {
+    const obj = createBaseResponseCheckTx();
+    if (isSet(object.code)) obj.code = Number(object.code);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.log)) obj.log = String(object.log);
+    if (isSet(object.info)) obj.info = String(object.info);
+    if (isSet(object.gas_wanted)) obj.gasWanted = BigInt(object.gas_wanted.toString());
+    if (isSet(object.gas_used)) obj.gasUsed = BigInt(object.gas_used.toString());
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
+    if (isSet(object.codespace)) obj.codespace = String(object.codespace);
+    return obj;
+  },
+  toJSON(message: ResponseCheckTx): JsonSafe<ResponseCheckTx> {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = Math.round(message.code));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.log !== undefined && (obj.log = message.log);
+    message.info !== undefined && (obj.info = message.info);
+    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
+    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    message.codespace !== undefined && (obj.codespace = message.codespace);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseCheckTx>): ResponseCheckTx {
     const message = createBaseResponseCheckTx();
     message.code = object.code ?? 0;
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
+  },
+  fromSDK(object: ResponseCheckTxSDKType): ResponseCheckTx {
+    return {
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
+      codespace: object?.codespace
+    };
+  },
+  fromSDKJSON(object: any): ResponseCheckTxSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
+  },
+  toSDK(message: ResponseCheckTx): ResponseCheckTxSDKType {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    obj.codespace = message.codespace;
+    return obj;
   },
   fromAmino(object: ResponseCheckTxAmino): ResponseCheckTx {
     const message = createBaseResponseCheckTx();
@@ -3594,28 +4510,28 @@ function createBaseResponseDeliverTx(): ResponseDeliverTx {
 export const ResponseDeliverTx = {
   typeUrl: "/tendermint.abci.ResponseDeliverTx",
   encode(message: ResponseDeliverTx, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.code !== 0) {
+    if (message.code !== undefined) {
       writer.uint32(8).uint32(message.code);
     }
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.log !== "") {
+    if (message.log !== undefined) {
       writer.uint32(26).string(message.log);
     }
-    if (message.info !== "") {
+    if (message.info !== undefined) {
       writer.uint32(34).string(message.info);
     }
-    if (message.gasWanted !== BigInt(0)) {
+    if (message.gasWanted !== undefined) {
       writer.uint32(40).int64(message.gasWanted);
     }
-    if (message.gasUsed !== BigInt(0)) {
+    if (message.gasUsed !== undefined) {
       writer.uint32(48).int64(message.gasUsed);
     }
     for (const v of message.events) {
       Event.encode(v!, writer.uint32(58).fork()).ldelim();
     }
-    if (message.codespace !== "") {
+    if (message.codespace !== undefined) {
       writer.uint32(66).string(message.codespace);
     }
     return writer;
@@ -3658,17 +4574,89 @@ export const ResponseDeliverTx = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseDeliverTx {
+    const obj = createBaseResponseDeliverTx();
+    if (isSet(object.code)) obj.code = Number(object.code);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.log)) obj.log = String(object.log);
+    if (isSet(object.info)) obj.info = String(object.info);
+    if (isSet(object.gas_wanted)) obj.gasWanted = BigInt(object.gas_wanted.toString());
+    if (isSet(object.gas_used)) obj.gasUsed = BigInt(object.gas_used.toString());
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
+    if (isSet(object.codespace)) obj.codespace = String(object.codespace);
+    return obj;
+  },
+  toJSON(message: ResponseDeliverTx): JsonSafe<ResponseDeliverTx> {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = Math.round(message.code));
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.log !== undefined && (obj.log = message.log);
+    message.info !== undefined && (obj.info = message.info);
+    message.gasWanted !== undefined && (obj.gas_wanted = (message.gasWanted || BigInt(0)).toString());
+    message.gasUsed !== undefined && (obj.gas_used = (message.gasUsed || BigInt(0)).toString());
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    message.codespace !== undefined && (obj.codespace = message.codespace);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseDeliverTx>): ResponseDeliverTx {
     const message = createBaseResponseDeliverTx();
     message.code = object.code ?? 0;
     message.data = object.data ?? new Uint8Array();
     message.log = object.log ?? "";
     message.info = object.info ?? "";
-    message.gasWanted = object.gasWanted !== undefined && object.gasWanted !== null ? BigInt(object.gasWanted.toString()) : BigInt(0);
-    message.gasUsed = object.gasUsed !== undefined && object.gasUsed !== null ? BigInt(object.gasUsed.toString()) : BigInt(0);
+    if (object.gasWanted !== undefined && object.gasWanted !== null) {
+      message.gasWanted = BigInt(object.gasWanted.toString());
+    }
+    if (object.gasUsed !== undefined && object.gasUsed !== null) {
+      message.gasUsed = BigInt(object.gasUsed.toString());
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     message.codespace = object.codespace ?? "";
     return message;
+  },
+  fromSDK(object: ResponseDeliverTxSDKType): ResponseDeliverTx {
+    return {
+      code: object?.code,
+      data: object?.data,
+      log: object?.log,
+      info: object?.info,
+      gasWanted: object?.gas_wanted,
+      gasUsed: object?.gas_used,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : [],
+      codespace: object?.codespace
+    };
+  },
+  fromSDKJSON(object: any): ResponseDeliverTxSDKType {
+    return {
+      code: isSet(object.code) ? Number(object.code) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      log: isSet(object.log) ? String(object.log) : "",
+      info: isSet(object.info) ? String(object.info) : "",
+      gas_wanted: isSet(object.gas_wanted) ? BigInt(object.gas_wanted.toString()) : BigInt(0),
+      gas_used: isSet(object.gas_used) ? BigInt(object.gas_used.toString()) : BigInt(0),
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : [],
+      codespace: isSet(object.codespace) ? String(object.codespace) : ""
+    };
+  },
+  toSDK(message: ResponseDeliverTx): ResponseDeliverTxSDKType {
+    const obj: any = {};
+    obj.code = message.code;
+    obj.data = message.data;
+    obj.log = message.log;
+    obj.info = message.info;
+    obj.gas_wanted = message.gasWanted;
+    obj.gas_used = message.gasUsed;
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    obj.codespace = message.codespace;
+    return obj;
   },
   fromAmino(object: ResponseDeliverTxAmino): ResponseDeliverTx {
     const message = createBaseResponseDeliverTx();
@@ -3772,12 +4760,65 @@ export const ResponseEndBlock = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseEndBlock {
+    const obj = createBaseResponseEndBlock();
+    if (Array.isArray(object?.validatorUpdates)) obj.validatorUpdates = object.validatorUpdates.map((e: any) => ValidatorUpdate.fromJSON(e));
+    if (isSet(object.consensusParamUpdates)) obj.consensusParamUpdates = ConsensusParams.fromJSON(object.consensusParamUpdates);
+    if (Array.isArray(object?.events)) obj.events = object.events.map((e: any) => Event.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ResponseEndBlock): JsonSafe<ResponseEndBlock> {
+    const obj: any = {};
+    if (message.validatorUpdates) {
+      obj.validatorUpdates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toJSON(e) : undefined);
+    } else {
+      obj.validatorUpdates = [];
+    }
+    message.consensusParamUpdates !== undefined && (obj.consensusParamUpdates = message.consensusParamUpdates ? ConsensusParams.toJSON(message.consensusParamUpdates) : undefined);
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toJSON(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseEndBlock>): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
     message.validatorUpdates = object.validatorUpdates?.map(e => ValidatorUpdate.fromPartial(e)) || [];
-    message.consensusParamUpdates = object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null ? ConsensusParams.fromPartial(object.consensusParamUpdates) : undefined;
+    if (object.consensusParamUpdates !== undefined && object.consensusParamUpdates !== null) {
+      message.consensusParamUpdates = ConsensusParams.fromPartial(object.consensusParamUpdates);
+    }
     message.events = object.events?.map(e => Event.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ResponseEndBlockSDKType): ResponseEndBlock {
+    return {
+      validatorUpdates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDK(e)) : [],
+      consensusParamUpdates: object.consensus_param_updates ? ConsensusParams.fromSDK(object.consensus_param_updates) : undefined,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ResponseEndBlockSDKType {
+    return {
+      validator_updates: Array.isArray(object?.validator_updates) ? object.validator_updates.map((e: any) => ValidatorUpdate.fromSDKJSON(e)) : [],
+      consensus_param_updates: isSet(object.consensus_param_updates) ? ConsensusParams.fromSDKJSON(object.consensus_param_updates) : undefined,
+      events: Array.isArray(object?.events) ? object.events.map((e: any) => Event.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ResponseEndBlock): ResponseEndBlockSDKType {
+    const obj: any = {};
+    if (message.validatorUpdates) {
+      obj.validator_updates = message.validatorUpdates.map(e => e ? ValidatorUpdate.toSDK(e) : undefined);
+    } else {
+      obj.validator_updates = [];
+    }
+    message.consensusParamUpdates !== undefined && (obj.consensus_param_updates = message.consensusParamUpdates ? ConsensusParams.toSDK(message.consensusParamUpdates) : undefined);
+    if (message.events) {
+      obj.events = message.events.map(e => e ? Event.toSDK(e) : undefined);
+    } else {
+      obj.events = [];
+    }
+    return obj;
   },
   fromAmino(object: ResponseEndBlockAmino): ResponseEndBlock {
     const message = createBaseResponseEndBlock();
@@ -3831,7 +4872,7 @@ export const ResponseCommit = {
     if (message.data.length !== 0) {
       writer.uint32(18).bytes(message.data);
     }
-    if (message.retainHeight !== BigInt(0)) {
+    if (message.retainHeight !== undefined) {
       writer.uint32(24).int64(message.retainHeight);
     }
     return writer;
@@ -3856,11 +4897,43 @@ export const ResponseCommit = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseCommit {
+    const obj = createBaseResponseCommit();
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.retainHeight)) obj.retainHeight = BigInt(object.retainHeight.toString());
+    return obj;
+  },
+  toJSON(message: ResponseCommit): JsonSafe<ResponseCommit> {
+    const obj: any = {};
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.retainHeight !== undefined && (obj.retainHeight = (message.retainHeight || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseCommit>): ResponseCommit {
     const message = createBaseResponseCommit();
     message.data = object.data ?? new Uint8Array();
-    message.retainHeight = object.retainHeight !== undefined && object.retainHeight !== null ? BigInt(object.retainHeight.toString()) : BigInt(0);
+    if (object.retainHeight !== undefined && object.retainHeight !== null) {
+      message.retainHeight = BigInt(object.retainHeight.toString());
+    }
     return message;
+  },
+  fromSDK(object: ResponseCommitSDKType): ResponseCommit {
+    return {
+      data: object?.data,
+      retainHeight: object?.retain_height
+    };
+  },
+  fromSDKJSON(object: any): ResponseCommitSDKType {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      retain_height: isSet(object.retain_height) ? BigInt(object.retain_height.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: ResponseCommit): ResponseCommitSDKType {
+    const obj: any = {};
+    obj.data = message.data;
+    obj.retain_height = message.retainHeight;
+    return obj;
   },
   fromAmino(object: ResponseCommitAmino): ResponseCommit {
     const message = createBaseResponseCommit();
@@ -3924,10 +4997,43 @@ export const ResponseListSnapshots = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseListSnapshots {
+    const obj = createBaseResponseListSnapshots();
+    if (Array.isArray(object?.snapshots)) obj.snapshots = object.snapshots.map((e: any) => Snapshot.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ResponseListSnapshots): JsonSafe<ResponseListSnapshots> {
+    const obj: any = {};
+    if (message.snapshots) {
+      obj.snapshots = message.snapshots.map(e => e ? Snapshot.toJSON(e) : undefined);
+    } else {
+      obj.snapshots = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseListSnapshots>): ResponseListSnapshots {
     const message = createBaseResponseListSnapshots();
     message.snapshots = object.snapshots?.map(e => Snapshot.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ResponseListSnapshotsSDKType): ResponseListSnapshots {
+    return {
+      snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ResponseListSnapshotsSDKType {
+    return {
+      snapshots: Array.isArray(object?.snapshots) ? object.snapshots.map((e: any) => Snapshot.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ResponseListSnapshots): ResponseListSnapshotsSDKType {
+    const obj: any = {};
+    if (message.snapshots) {
+      obj.snapshots = message.snapshots.map(e => e ? Snapshot.toSDK(e) : undefined);
+    } else {
+      obj.snapshots = [];
+    }
+    return obj;
   },
   fromAmino(object: ResponseListSnapshotsAmino): ResponseListSnapshots {
     const message = createBaseResponseListSnapshots();
@@ -3989,10 +5095,35 @@ export const ResponseOfferSnapshot = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseOfferSnapshot {
+    const obj = createBaseResponseOfferSnapshot();
+    if (isSet(object.result)) obj.result = responseOfferSnapshot_ResultFromJSON(object.result);
+    return obj;
+  },
+  toJSON(message: ResponseOfferSnapshot): JsonSafe<ResponseOfferSnapshot> {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseOfferSnapshot>): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
     message.result = object.result ?? 0;
     return message;
+  },
+  fromSDK(object: ResponseOfferSnapshotSDKType): ResponseOfferSnapshot {
+    return {
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
+    };
+  },
+  fromSDKJSON(object: any): ResponseOfferSnapshotSDKType {
+    return {
+      result: isSet(object.result) ? responseOfferSnapshot_ResultFromJSON(object.result) : -1
+    };
+  },
+  toSDK(message: ResponseOfferSnapshot): ResponseOfferSnapshotSDKType {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = responseOfferSnapshot_ResultToJSON(message.result));
+    return obj;
   },
   fromAmino(object: ResponseOfferSnapshotAmino): ResponseOfferSnapshot {
     const message = createBaseResponseOfferSnapshot();
@@ -4052,10 +5183,35 @@ export const ResponseLoadSnapshotChunk = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseLoadSnapshotChunk {
+    const obj = createBaseResponseLoadSnapshotChunk();
+    if (isSet(object.chunk)) obj.chunk = bytesFromBase64(object.chunk);
+    return obj;
+  },
+  toJSON(message: ResponseLoadSnapshotChunk): JsonSafe<ResponseLoadSnapshotChunk> {
+    const obj: any = {};
+    message.chunk !== undefined && (obj.chunk = base64FromBytes(message.chunk !== undefined ? message.chunk : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseLoadSnapshotChunk>): ResponseLoadSnapshotChunk {
     const message = createBaseResponseLoadSnapshotChunk();
     message.chunk = object.chunk ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: ResponseLoadSnapshotChunkSDKType): ResponseLoadSnapshotChunk {
+    return {
+      chunk: object?.chunk
+    };
+  },
+  fromSDKJSON(object: any): ResponseLoadSnapshotChunkSDKType {
+    return {
+      chunk: isSet(object.chunk) ? bytesFromBase64(object.chunk) : new Uint8Array()
+    };
+  },
+  toSDK(message: ResponseLoadSnapshotChunk): ResponseLoadSnapshotChunkSDKType {
+    const obj: any = {};
+    obj.chunk = message.chunk;
+    return obj;
   },
   fromAmino(object: ResponseLoadSnapshotChunkAmino): ResponseLoadSnapshotChunk {
     const message = createBaseResponseLoadSnapshotChunk();
@@ -4138,12 +5294,63 @@ export const ResponseApplySnapshotChunk = {
     }
     return message;
   },
+  fromJSON(object: any): ResponseApplySnapshotChunk {
+    const obj = createBaseResponseApplySnapshotChunk();
+    if (isSet(object.result)) obj.result = responseApplySnapshotChunk_ResultFromJSON(object.result);
+    if (Array.isArray(object?.refetchChunks)) obj.refetchChunks = object.refetchChunks.map((e: any) => Number(e));
+    if (Array.isArray(object?.rejectSenders)) obj.rejectSenders = object.rejectSenders.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: ResponseApplySnapshotChunk): JsonSafe<ResponseApplySnapshotChunk> {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
+    if (message.refetchChunks) {
+      obj.refetchChunks = message.refetchChunks.map(e => Math.round(e));
+    } else {
+      obj.refetchChunks = [];
+    }
+    if (message.rejectSenders) {
+      obj.rejectSenders = message.rejectSenders.map(e => e);
+    } else {
+      obj.rejectSenders = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ResponseApplySnapshotChunk>): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
     message.result = object.result ?? 0;
     message.refetchChunks = object.refetchChunks?.map(e => e) || [];
     message.rejectSenders = object.rejectSenders?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ResponseApplySnapshotChunkSDKType): ResponseApplySnapshotChunk {
+    return {
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
+      refetchChunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => e) : [],
+      rejectSenders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ResponseApplySnapshotChunkSDKType {
+    return {
+      result: isSet(object.result) ? responseApplySnapshotChunk_ResultFromJSON(object.result) : -1,
+      refetch_chunks: Array.isArray(object?.refetch_chunks) ? object.refetch_chunks.map((e: any) => Number(e)) : [],
+      reject_senders: Array.isArray(object?.reject_senders) ? object.reject_senders.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: ResponseApplySnapshotChunk): ResponseApplySnapshotChunkSDKType {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = responseApplySnapshotChunk_ResultToJSON(message.result));
+    if (message.refetchChunks) {
+      obj.refetch_chunks = message.refetchChunks.map(e => e);
+    } else {
+      obj.refetch_chunks = [];
+    }
+    if (message.rejectSenders) {
+      obj.reject_senders = message.rejectSenders.map(e => e);
+    } else {
+      obj.reject_senders = [];
+    }
+    return obj;
   },
   fromAmino(object: ResponseApplySnapshotChunkAmino): ResponseApplySnapshotChunk {
     const message = createBaseResponseApplySnapshotChunk();
@@ -4236,13 +5443,61 @@ export const ConsensusParams = {
     }
     return message;
   },
+  fromJSON(object: any): ConsensusParams {
+    const obj = createBaseConsensusParams();
+    if (isSet(object.block)) obj.block = BlockParams.fromJSON(object.block);
+    if (isSet(object.evidence)) obj.evidence = EvidenceParams.fromJSON(object.evidence);
+    if (isSet(object.validator)) obj.validator = ValidatorParams.fromJSON(object.validator);
+    if (isSet(object.version)) obj.version = VersionParams.fromJSON(object.version);
+    return obj;
+  },
+  toJSON(message: ConsensusParams): JsonSafe<ConsensusParams> {
+    const obj: any = {};
+    message.block !== undefined && (obj.block = message.block ? BlockParams.toJSON(message.block) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toJSON(message.evidence) : undefined);
+    message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toJSON(message.validator) : undefined);
+    message.version !== undefined && (obj.version = message.version ? VersionParams.toJSON(message.version) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ConsensusParams>): ConsensusParams {
     const message = createBaseConsensusParams();
-    message.block = object.block !== undefined && object.block !== null ? BlockParams.fromPartial(object.block) : undefined;
-    message.evidence = object.evidence !== undefined && object.evidence !== null ? EvidenceParams.fromPartial(object.evidence) : undefined;
-    message.validator = object.validator !== undefined && object.validator !== null ? ValidatorParams.fromPartial(object.validator) : undefined;
-    message.version = object.version !== undefined && object.version !== null ? VersionParams.fromPartial(object.version) : undefined;
+    if (object.block !== undefined && object.block !== null) {
+      message.block = BlockParams.fromPartial(object.block);
+    }
+    if (object.evidence !== undefined && object.evidence !== null) {
+      message.evidence = EvidenceParams.fromPartial(object.evidence);
+    }
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = ValidatorParams.fromPartial(object.validator);
+    }
+    if (object.version !== undefined && object.version !== null) {
+      message.version = VersionParams.fromPartial(object.version);
+    }
     return message;
+  },
+  fromSDK(object: ConsensusParamsSDKType): ConsensusParams {
+    return {
+      block: object.block ? BlockParams.fromSDK(object.block) : undefined,
+      evidence: object.evidence ? EvidenceParams.fromSDK(object.evidence) : undefined,
+      validator: object.validator ? ValidatorParams.fromSDK(object.validator) : undefined,
+      version: object.version ? VersionParams.fromSDK(object.version) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ConsensusParamsSDKType {
+    return {
+      block: isSet(object.block) ? BlockParams.fromSDKJSON(object.block) : undefined,
+      evidence: isSet(object.evidence) ? EvidenceParams.fromSDKJSON(object.evidence) : undefined,
+      validator: isSet(object.validator) ? ValidatorParams.fromSDKJSON(object.validator) : undefined,
+      version: isSet(object.version) ? VersionParams.fromSDKJSON(object.version) : undefined
+    };
+  },
+  toSDK(message: ConsensusParams): ConsensusParamsSDKType {
+    const obj: any = {};
+    message.block !== undefined && (obj.block = message.block ? BlockParams.toSDK(message.block) : undefined);
+    message.evidence !== undefined && (obj.evidence = message.evidence ? EvidenceParams.toSDK(message.evidence) : undefined);
+    message.validator !== undefined && (obj.validator = message.validator ? ValidatorParams.toSDK(message.validator) : undefined);
+    message.version !== undefined && (obj.version = message.version ? VersionParams.toSDK(message.version) : undefined);
+    return obj;
   },
   fromAmino(object: ConsensusParamsAmino): ConsensusParams {
     const message = createBaseConsensusParams();
@@ -4293,10 +5548,10 @@ function createBaseBlockParams(): BlockParams {
 export const BlockParams = {
   typeUrl: "/tendermint.abci.BlockParams",
   encode(message: BlockParams, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxBytes !== BigInt(0)) {
+    if (message.maxBytes !== undefined) {
       writer.uint32(8).int64(message.maxBytes);
     }
-    if (message.maxGas !== BigInt(0)) {
+    if (message.maxGas !== undefined) {
       writer.uint32(16).int64(message.maxGas);
     }
     return writer;
@@ -4321,11 +5576,45 @@ export const BlockParams = {
     }
     return message;
   },
+  fromJSON(object: any): BlockParams {
+    const obj = createBaseBlockParams();
+    if (isSet(object.maxBytes)) obj.maxBytes = BigInt(object.maxBytes.toString());
+    if (isSet(object.maxGas)) obj.maxGas = BigInt(object.maxGas.toString());
+    return obj;
+  },
+  toJSON(message: BlockParams): JsonSafe<BlockParams> {
+    const obj: any = {};
+    message.maxBytes !== undefined && (obj.maxBytes = (message.maxBytes || BigInt(0)).toString());
+    message.maxGas !== undefined && (obj.maxGas = (message.maxGas || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<BlockParams>): BlockParams {
     const message = createBaseBlockParams();
-    message.maxBytes = object.maxBytes !== undefined && object.maxBytes !== null ? BigInt(object.maxBytes.toString()) : BigInt(0);
-    message.maxGas = object.maxGas !== undefined && object.maxGas !== null ? BigInt(object.maxGas.toString()) : BigInt(0);
+    if (object.maxBytes !== undefined && object.maxBytes !== null) {
+      message.maxBytes = BigInt(object.maxBytes.toString());
+    }
+    if (object.maxGas !== undefined && object.maxGas !== null) {
+      message.maxGas = BigInt(object.maxGas.toString());
+    }
     return message;
+  },
+  fromSDK(object: BlockParamsSDKType): BlockParams {
+    return {
+      maxBytes: object?.max_bytes,
+      maxGas: object?.max_gas
+    };
+  },
+  fromSDKJSON(object: any): BlockParamsSDKType {
+    return {
+      max_bytes: isSet(object.max_bytes) ? BigInt(object.max_bytes.toString()) : BigInt(0),
+      max_gas: isSet(object.max_gas) ? BigInt(object.max_gas.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: BlockParams): BlockParamsSDKType {
+    const obj: any = {};
+    obj.max_bytes = message.maxBytes;
+    obj.max_gas = message.maxGas;
+    return obj;
   },
   fromAmino(object: BlockParamsAmino): BlockParams {
     const message = createBaseBlockParams();
@@ -4368,7 +5657,7 @@ function createBaseLastCommitInfo(): LastCommitInfo {
 export const LastCommitInfo = {
   typeUrl: "/tendermint.abci.LastCommitInfo",
   encode(message: LastCommitInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.round !== 0) {
+    if (message.round !== undefined) {
       writer.uint32(8).int32(message.round);
     }
     for (const v of message.votes) {
@@ -4396,11 +5685,49 @@ export const LastCommitInfo = {
     }
     return message;
   },
+  fromJSON(object: any): LastCommitInfo {
+    const obj = createBaseLastCommitInfo();
+    if (isSet(object.round)) obj.round = Number(object.round);
+    if (Array.isArray(object?.votes)) obj.votes = object.votes.map((e: any) => VoteInfo.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: LastCommitInfo): JsonSafe<LastCommitInfo> {
+    const obj: any = {};
+    message.round !== undefined && (obj.round = Math.round(message.round));
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? VoteInfo.toJSON(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<LastCommitInfo>): LastCommitInfo {
     const message = createBaseLastCommitInfo();
     message.round = object.round ?? 0;
     message.votes = object.votes?.map(e => VoteInfo.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: LastCommitInfoSDKType): LastCommitInfo {
+    return {
+      round: object?.round,
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): LastCommitInfoSDKType {
+    return {
+      round: isSet(object.round) ? Number(object.round) : 0,
+      votes: Array.isArray(object?.votes) ? object.votes.map((e: any) => VoteInfo.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: LastCommitInfo): LastCommitInfoSDKType {
+    const obj: any = {};
+    obj.round = message.round;
+    if (message.votes) {
+      obj.votes = message.votes.map(e => e ? VoteInfo.toSDK(e) : undefined);
+    } else {
+      obj.votes = [];
+    }
+    return obj;
   },
   fromAmino(object: LastCommitInfoAmino): LastCommitInfo {
     const message = createBaseLastCommitInfo();
@@ -4445,7 +5772,7 @@ function createBaseEvent(): Event {
 export const Event = {
   typeUrl: "/tendermint.abci.Event",
   encode(message: Event, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.type !== "") {
+    if (message.type !== undefined) {
       writer.uint32(10).string(message.type);
     }
     for (const v of message.attributes) {
@@ -4473,11 +5800,49 @@ export const Event = {
     }
     return message;
   },
+  fromJSON(object: any): Event {
+    const obj = createBaseEvent();
+    if (isSet(object.type)) obj.type = String(object.type);
+    if (Array.isArray(object?.attributes)) obj.attributes = object.attributes.map((e: any) => EventAttribute.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Event): JsonSafe<Event> {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = message.type);
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? EventAttribute.toJSON(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Event>): Event {
     const message = createBaseEvent();
     message.type = object.type ?? "";
     message.attributes = object.attributes?.map(e => EventAttribute.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: EventSDKType): Event {
+    return {
+      type: object?.type,
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): EventSDKType {
+    return {
+      type: isSet(object.type) ? String(object.type) : "",
+      attributes: Array.isArray(object?.attributes) ? object.attributes.map((e: any) => EventAttribute.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Event): EventSDKType {
+    const obj: any = {};
+    obj.type = message.type;
+    if (message.attributes) {
+      obj.attributes = message.attributes.map(e => e ? EventAttribute.toSDK(e) : undefined);
+    } else {
+      obj.attributes = [];
+    }
+    return obj;
   },
   fromAmino(object: EventAmino): Event {
     const message = createBaseEvent();
@@ -4529,7 +5894,7 @@ export const EventAttribute = {
     if (message.value.length !== 0) {
       writer.uint32(18).bytes(message.value);
     }
-    if (message.index === true) {
+    if (message.index !== undefined) {
       writer.uint32(24).bool(message.index);
     }
     return writer;
@@ -4557,12 +5922,47 @@ export const EventAttribute = {
     }
     return message;
   },
+  fromJSON(object: any): EventAttribute {
+    const obj = createBaseEventAttribute();
+    if (isSet(object.key)) obj.key = bytesFromBase64(object.key);
+    if (isSet(object.value)) obj.value = bytesFromBase64(object.value);
+    if (isSet(object.index)) obj.index = Boolean(object.index);
+    return obj;
+  },
+  toJSON(message: EventAttribute): JsonSafe<EventAttribute> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = base64FromBytes(message.key !== undefined ? message.key : new Uint8Array()));
+    message.value !== undefined && (obj.value = base64FromBytes(message.value !== undefined ? message.value : new Uint8Array()));
+    message.index !== undefined && (obj.index = message.index);
+    return obj;
+  },
   fromPartial(object: DeepPartial<EventAttribute>): EventAttribute {
     const message = createBaseEventAttribute();
     message.key = object.key ?? new Uint8Array();
     message.value = object.value ?? new Uint8Array();
     message.index = object.index ?? false;
     return message;
+  },
+  fromSDK(object: EventAttributeSDKType): EventAttribute {
+    return {
+      key: object?.key,
+      value: object?.value,
+      index: object?.index
+    };
+  },
+  fromSDKJSON(object: any): EventAttributeSDKType {
+    return {
+      key: isSet(object.key) ? bytesFromBase64(object.key) : new Uint8Array(),
+      value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(),
+      index: isSet(object.index) ? Boolean(object.index) : false
+    };
+  },
+  toSDK(message: EventAttribute): EventAttributeSDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    obj.index = message.index;
+    return obj;
   },
   fromAmino(object: EventAttributeAmino): EventAttribute {
     const message = createBaseEventAttribute();
@@ -4611,10 +6011,10 @@ function createBaseTxResult(): TxResult {
 export const TxResult = {
   typeUrl: "/tendermint.abci.TxResult",
   encode(message: TxResult, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).int64(message.height);
     }
-    if (message.index !== 0) {
+    if (message.index !== undefined) {
       writer.uint32(16).uint32(message.index);
     }
     if (message.tx.length !== 0) {
@@ -4651,13 +6051,57 @@ export const TxResult = {
     }
     return message;
   },
+  fromJSON(object: any): TxResult {
+    const obj = createBaseTxResult();
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.index)) obj.index = Number(object.index);
+    if (isSet(object.tx)) obj.tx = bytesFromBase64(object.tx);
+    if (isSet(object.result)) obj.result = ResponseDeliverTx.fromJSON(object.result);
+    return obj;
+  },
+  toJSON(message: TxResult): JsonSafe<TxResult> {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.index !== undefined && (obj.index = Math.round(message.index));
+    message.tx !== undefined && (obj.tx = base64FromBytes(message.tx !== undefined ? message.tx : new Uint8Array()));
+    message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toJSON(message.result) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<TxResult>): TxResult {
     const message = createBaseTxResult();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.index = object.index ?? 0;
     message.tx = object.tx ?? new Uint8Array();
-    message.result = object.result !== undefined && object.result !== null ? ResponseDeliverTx.fromPartial(object.result) : undefined;
+    if (object.result !== undefined && object.result !== null) {
+      message.result = ResponseDeliverTx.fromPartial(object.result);
+    }
     return message;
+  },
+  fromSDK(object: TxResultSDKType): TxResult {
+    return {
+      height: object?.height,
+      index: object?.index,
+      tx: object?.tx,
+      result: object.result ? ResponseDeliverTx.fromSDK(object.result) : undefined
+    };
+  },
+  fromSDKJSON(object: any): TxResultSDKType {
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      index: isSet(object.index) ? Number(object.index) : 0,
+      tx: isSet(object.tx) ? bytesFromBase64(object.tx) : new Uint8Array(),
+      result: isSet(object.result) ? ResponseDeliverTx.fromSDKJSON(object.result) : undefined
+    };
+  },
+  toSDK(message: TxResult): TxResultSDKType {
+    const obj: any = {};
+    obj.height = message.height;
+    obj.index = message.index;
+    obj.tx = message.tx;
+    message.result !== undefined && (obj.result = message.result ? ResponseDeliverTx.toSDK(message.result) : undefined);
+    return obj;
   },
   fromAmino(object: TxResultAmino): TxResult {
     const message = createBaseTxResult();
@@ -4711,7 +6155,7 @@ export const Validator = {
     if (message.address.length !== 0) {
       writer.uint32(10).bytes(message.address);
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(24).int64(message.power);
     }
     return writer;
@@ -4736,11 +6180,43 @@ export const Validator = {
     }
     return message;
   },
+  fromJSON(object: any): Validator {
+    const obj = createBaseValidator();
+    if (isSet(object.address)) obj.address = bytesFromBase64(object.address);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
+    return obj;
+  },
+  toJSON(message: Validator): JsonSafe<Validator> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = base64FromBytes(message.address !== undefined ? message.address : new Uint8Array()));
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Validator>): Validator {
     const message = createBaseValidator();
     message.address = object.address ?? new Uint8Array();
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
+  },
+  fromSDK(object: ValidatorSDKType): Validator {
+    return {
+      address: object?.address,
+      power: object?.power
+    };
+  },
+  fromSDKJSON(object: any): ValidatorSDKType {
+    return {
+      address: isSet(object.address) ? bytesFromBase64(object.address) : new Uint8Array(),
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Validator): ValidatorSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    obj.power = message.power;
+    return obj;
   },
   fromAmino(object: ValidatorAmino): Validator {
     const message = createBaseValidator();
@@ -4786,7 +6262,7 @@ export const ValidatorUpdate = {
     if (message.pubKey !== undefined) {
       PublicKey.encode(message.pubKey, writer.uint32(10).fork()).ldelim();
     }
-    if (message.power !== BigInt(0)) {
+    if (message.power !== undefined) {
       writer.uint32(16).int64(message.power);
     }
     return writer;
@@ -4811,11 +6287,45 @@ export const ValidatorUpdate = {
     }
     return message;
   },
+  fromJSON(object: any): ValidatorUpdate {
+    const obj = createBaseValidatorUpdate();
+    if (isSet(object.pubKey)) obj.pubKey = PublicKey.fromJSON(object.pubKey);
+    if (isSet(object.power)) obj.power = BigInt(object.power.toString());
+    return obj;
+  },
+  toJSON(message: ValidatorUpdate): JsonSafe<ValidatorUpdate> {
+    const obj: any = {};
+    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? PublicKey.toJSON(message.pubKey) : undefined);
+    message.power !== undefined && (obj.power = (message.power || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<ValidatorUpdate>): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? PublicKey.fromPartial(object.pubKey) : undefined;
-    message.power = object.power !== undefined && object.power !== null ? BigInt(object.power.toString()) : BigInt(0);
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = PublicKey.fromPartial(object.pubKey);
+    }
+    if (object.power !== undefined && object.power !== null) {
+      message.power = BigInt(object.power.toString());
+    }
     return message;
+  },
+  fromSDK(object: ValidatorUpdateSDKType): ValidatorUpdate {
+    return {
+      pubKey: object.pub_key ? PublicKey.fromSDK(object.pub_key) : undefined,
+      power: object?.power
+    };
+  },
+  fromSDKJSON(object: any): ValidatorUpdateSDKType {
+    return {
+      pub_key: isSet(object.pub_key) ? PublicKey.fromSDKJSON(object.pub_key) : undefined,
+      power: isSet(object.power) ? BigInt(object.power.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: ValidatorUpdate): ValidatorUpdateSDKType {
+    const obj: any = {};
+    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? PublicKey.toSDK(message.pubKey) : undefined);
+    obj.power = message.power;
+    return obj;
   },
   fromAmino(object: ValidatorUpdateAmino): ValidatorUpdate {
     const message = createBaseValidatorUpdate();
@@ -4861,7 +6371,7 @@ export const VoteInfo = {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(10).fork()).ldelim();
     }
-    if (message.signedLastBlock === true) {
+    if (message.signedLastBlock !== undefined) {
       writer.uint32(16).bool(message.signedLastBlock);
     }
     return writer;
@@ -4886,11 +6396,43 @@ export const VoteInfo = {
     }
     return message;
   },
+  fromJSON(object: any): VoteInfo {
+    const obj = createBaseVoteInfo();
+    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
+    if (isSet(object.signedLastBlock)) obj.signedLastBlock = Boolean(object.signedLastBlock);
+    return obj;
+  },
+  toJSON(message: VoteInfo): JsonSafe<VoteInfo> {
+    const obj: any = {};
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
+    message.signedLastBlock !== undefined && (obj.signedLastBlock = message.signedLastBlock);
+    return obj;
+  },
   fromPartial(object: DeepPartial<VoteInfo>): VoteInfo {
     const message = createBaseVoteInfo();
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
     message.signedLastBlock = object.signedLastBlock ?? false;
     return message;
+  },
+  fromSDK(object: VoteInfoSDKType): VoteInfo {
+    return {
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
+      signedLastBlock: object?.signed_last_block
+    };
+  },
+  fromSDKJSON(object: any): VoteInfoSDKType {
+    return {
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
+      signed_last_block: isSet(object.signed_last_block) ? Boolean(object.signed_last_block) : false
+    };
+  },
+  toSDK(message: VoteInfo): VoteInfoSDKType {
+    const obj: any = {};
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    obj.signed_last_block = message.signedLastBlock;
+    return obj;
   },
   fromAmino(object: VoteInfoAmino): VoteInfo {
     const message = createBaseVoteInfo();
@@ -4942,13 +6484,13 @@ export const Evidence = {
     if (message.validator !== undefined) {
       Validator.encode(message.validator, writer.uint32(18).fork()).ldelim();
     }
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(24).int64(message.height);
     }
     if (message.time !== undefined) {
       Timestamp.encode(toTimestamp(message.time), writer.uint32(34).fork()).ldelim();
     }
-    if (message.totalVotingPower !== BigInt(0)) {
+    if (message.totalVotingPower !== undefined) {
       writer.uint32(40).int64(message.totalVotingPower);
     }
     return writer;
@@ -4982,14 +6524,65 @@ export const Evidence = {
     }
     return message;
   },
+  fromJSON(object: any): Evidence {
+    const obj = createBaseEvidence();
+    if (isSet(object.type)) obj.type = evidenceTypeFromJSON(object.type);
+    if (isSet(object.validator)) obj.validator = Validator.fromJSON(object.validator);
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.time)) obj.time = new Date(object.time);
+    if (isSet(object.totalVotingPower)) obj.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    return obj;
+  },
+  toJSON(message: Evidence): JsonSafe<Evidence> {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toJSON(message.validator) : undefined);
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.time !== undefined && (obj.time = message.time.toISOString());
+    message.totalVotingPower !== undefined && (obj.totalVotingPower = (message.totalVotingPower || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Evidence>): Evidence {
     const message = createBaseEvidence();
     message.type = object.type ?? 0;
-    message.validator = object.validator !== undefined && object.validator !== null ? Validator.fromPartial(object.validator) : undefined;
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.validator !== undefined && object.validator !== null) {
+      message.validator = Validator.fromPartial(object.validator);
+    }
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.time = object.time ?? undefined;
-    message.totalVotingPower = object.totalVotingPower !== undefined && object.totalVotingPower !== null ? BigInt(object.totalVotingPower.toString()) : BigInt(0);
+    if (object.totalVotingPower !== undefined && object.totalVotingPower !== null) {
+      message.totalVotingPower = BigInt(object.totalVotingPower.toString());
+    }
     return message;
+  },
+  fromSDK(object: EvidenceSDKType): Evidence {
+    return {
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
+      validator: object.validator ? Validator.fromSDK(object.validator) : undefined,
+      height: object?.height,
+      time: object.time ?? undefined,
+      totalVotingPower: object?.total_voting_power
+    };
+  },
+  fromSDKJSON(object: any): EvidenceSDKType {
+    return {
+      type: isSet(object.type) ? evidenceTypeFromJSON(object.type) : -1,
+      validator: isSet(object.validator) ? Validator.fromSDKJSON(object.validator) : undefined,
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      time: isSet(object.time) ? new Date(object.time) : undefined,
+      total_voting_power: isSet(object.total_voting_power) ? BigInt(object.total_voting_power.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Evidence): EvidenceSDKType {
+    const obj: any = {};
+    message.type !== undefined && (obj.type = evidenceTypeToJSON(message.type));
+    message.validator !== undefined && (obj.validator = message.validator ? Validator.toSDK(message.validator) : undefined);
+    obj.height = message.height;
+    message.time !== undefined && (obj.time = message.time ?? undefined);
+    obj.total_voting_power = message.totalVotingPower;
+    return obj;
   },
   fromAmino(object: EvidenceAmino): Evidence {
     const message = createBaseEvidence();
@@ -5047,13 +6640,13 @@ function createBaseSnapshot(): Snapshot {
 export const Snapshot = {
   typeUrl: "/tendermint.abci.Snapshot",
   encode(message: Snapshot, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.height !== BigInt(0)) {
+    if (message.height !== undefined) {
       writer.uint32(8).uint64(message.height);
     }
-    if (message.format !== 0) {
+    if (message.format !== undefined) {
       writer.uint32(16).uint32(message.format);
     }
-    if (message.chunks !== 0) {
+    if (message.chunks !== undefined) {
       writer.uint32(24).uint32(message.chunks);
     }
     if (message.hash.length !== 0) {
@@ -5093,14 +6686,61 @@ export const Snapshot = {
     }
     return message;
   },
+  fromJSON(object: any): Snapshot {
+    const obj = createBaseSnapshot();
+    if (isSet(object.height)) obj.height = BigInt(object.height.toString());
+    if (isSet(object.format)) obj.format = Number(object.format);
+    if (isSet(object.chunks)) obj.chunks = Number(object.chunks);
+    if (isSet(object.hash)) obj.hash = bytesFromBase64(object.hash);
+    if (isSet(object.metadata)) obj.metadata = bytesFromBase64(object.metadata);
+    return obj;
+  },
+  toJSON(message: Snapshot): JsonSafe<Snapshot> {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = (message.height || BigInt(0)).toString());
+    message.format !== undefined && (obj.format = Math.round(message.format));
+    message.chunks !== undefined && (obj.chunks = Math.round(message.chunks));
+    message.hash !== undefined && (obj.hash = base64FromBytes(message.hash !== undefined ? message.hash : new Uint8Array()));
+    message.metadata !== undefined && (obj.metadata = base64FromBytes(message.metadata !== undefined ? message.metadata : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Snapshot>): Snapshot {
     const message = createBaseSnapshot();
-    message.height = object.height !== undefined && object.height !== null ? BigInt(object.height.toString()) : BigInt(0);
+    if (object.height !== undefined && object.height !== null) {
+      message.height = BigInt(object.height.toString());
+    }
     message.format = object.format ?? 0;
     message.chunks = object.chunks ?? 0;
     message.hash = object.hash ?? new Uint8Array();
     message.metadata = object.metadata ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: SnapshotSDKType): Snapshot {
+    return {
+      height: object?.height,
+      format: object?.format,
+      chunks: object?.chunks,
+      hash: object?.hash,
+      metadata: object?.metadata
+    };
+  },
+  fromSDKJSON(object: any): SnapshotSDKType {
+    return {
+      height: isSet(object.height) ? BigInt(object.height.toString()) : BigInt(0),
+      format: isSet(object.format) ? Number(object.format) : 0,
+      chunks: isSet(object.chunks) ? Number(object.chunks) : 0,
+      hash: isSet(object.hash) ? bytesFromBase64(object.hash) : new Uint8Array(),
+      metadata: isSet(object.metadata) ? bytesFromBase64(object.metadata) : new Uint8Array()
+    };
+  },
+  toSDK(message: Snapshot): SnapshotSDKType {
+    const obj: any = {};
+    obj.height = message.height;
+    obj.format = message.format;
+    obj.chunks = message.chunks;
+    obj.hash = message.hash;
+    obj.metadata = message.metadata;
+    return obj;
   },
   fromAmino(object: SnapshotAmino): Snapshot {
     const message = createBaseSnapshot();

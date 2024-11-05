@@ -1,112 +1,91 @@
-import { DeploymentFilters, DeploymentFiltersAmino, DeploymentID, DeploymentIDAmino, Deployment, DeploymentAmino } from "./deployment";
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { GroupID, GroupIDAmino, Group, GroupAmino } from "./group";
-import { Account, AccountAmino } from "../../escrow/v1beta1/types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DeploymentFilters, DeploymentFiltersSDKType, DeploymentID, DeploymentIDSDKType, Deployment, DeploymentSDKType } from "./deployment.js";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { GroupID, GroupIDSDKType, Group, GroupSDKType } from "./group.js";
+import { Account, AccountSDKType } from "../../escrow/v1beta1/types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, Exact, Rpc } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
+export const protobufPackage = "akash.deployment.v1beta1";
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
 export interface QueryDeploymentsRequest {
-  filters: DeploymentFilters;
-  pagination?: PageRequest;
+  filters: DeploymentFilters | undefined;
+  pagination?: PageRequest | undefined;
 }
 export interface QueryDeploymentsRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
   value: Uint8Array;
 }
 /** QueryDeploymentsRequest is request type for the Query/Deployments RPC method */
-export interface QueryDeploymentsRequestAmino {
-  filters: DeploymentFiltersAmino;
-  pagination?: PageRequestAmino;
-}
-export interface QueryDeploymentsRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentsRequest";
-  value: QueryDeploymentsRequestAmino;
+export interface QueryDeploymentsRequestSDKType {
+  filters: DeploymentFiltersSDKType | undefined;
+  pagination?: PageRequestSDKType | undefined;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
 export interface QueryDeploymentsResponse {
   deployments: QueryDeploymentResponse[];
-  pagination?: PageResponse;
+  pagination?: PageResponse | undefined;
 }
 export interface QueryDeploymentsResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
   value: Uint8Array;
 }
 /** QueryDeploymentsResponse is response type for the Query/Deployments RPC method */
-export interface QueryDeploymentsResponseAmino {
-  deployments: QueryDeploymentResponseAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryDeploymentsResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentsResponse";
-  value: QueryDeploymentsResponseAmino;
+export interface QueryDeploymentsResponseSDKType {
+  deployments: QueryDeploymentResponseSDKType[];
+  pagination?: PageResponseSDKType | undefined;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
 export interface QueryDeploymentRequest {
-  id: DeploymentID;
+  id: DeploymentID | undefined;
 }
 export interface QueryDeploymentRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentRequest";
   value: Uint8Array;
 }
 /** QueryDeploymentRequest is request type for the Query/Deployment RPC method */
-export interface QueryDeploymentRequestAmino {
-  id: DeploymentIDAmino;
-}
-export interface QueryDeploymentRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentRequest";
-  value: QueryDeploymentRequestAmino;
+export interface QueryDeploymentRequestSDKType {
+  id: DeploymentIDSDKType | undefined;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
 export interface QueryDeploymentResponse {
-  deployment: Deployment;
+  deployment: Deployment | undefined;
   groups: Group[];
-  escrowAccount: Account;
+  escrowAccount: Account | undefined;
 }
 export interface QueryDeploymentResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryDeploymentResponse";
   value: Uint8Array;
 }
 /** QueryDeploymentResponse is response type for the Query/Deployment RPC method */
-export interface QueryDeploymentResponseAmino {
-  deployment: DeploymentAmino;
-  groups: GroupAmino[];
-  escrow_account: AccountAmino;
-}
-export interface QueryDeploymentResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryDeploymentResponse";
-  value: QueryDeploymentResponseAmino;
+export interface QueryDeploymentResponseSDKType {
+  deployment: DeploymentSDKType | undefined;
+  groups: GroupSDKType[];
+  escrow_account: AccountSDKType | undefined;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
 export interface QueryGroupRequest {
-  id: GroupID;
+  id: GroupID | undefined;
 }
 export interface QueryGroupRequestProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryGroupRequest";
   value: Uint8Array;
 }
 /** QueryGroupRequest is request type for the Query/Group RPC method */
-export interface QueryGroupRequestAmino {
-  id: GroupIDAmino;
-}
-export interface QueryGroupRequestAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryGroupRequest";
-  value: QueryGroupRequestAmino;
+export interface QueryGroupRequestSDKType {
+  id: GroupIDSDKType | undefined;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
 export interface QueryGroupResponse {
-  group: Group;
+  group: Group | undefined;
 }
 export interface QueryGroupResponseProtoMsg {
   typeUrl: "/akash.deployment.v1beta1.QueryGroupResponse";
   value: Uint8Array;
 }
 /** QueryGroupResponse is response type for the Query/Group RPC method */
-export interface QueryGroupResponseAmino {
-  group: GroupAmino;
-}
-export interface QueryGroupResponseAminoMsg {
-  type: "/akash.deployment.v1beta1.QueryGroupResponse";
-  value: QueryGroupResponseAmino;
+export interface QueryGroupResponseSDKType {
+  group: GroupSDKType | undefined;
 }
 function createBaseQueryDeploymentsRequest(): QueryDeploymentsRequest {
   return {
@@ -145,11 +124,45 @@ export const QueryDeploymentsRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentsRequest>): QueryDeploymentsRequest {
+  fromJSON(object: any): QueryDeploymentsRequest {
+    const obj = createBaseQueryDeploymentsRequest();
+    if (isSet(object.filters)) obj.filters = DeploymentFilters.fromJSON(object.filters);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryDeploymentsRequest): JsonSafe<QueryDeploymentsRequest> {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toJSON(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentsRequest>, I>>(object: I): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
-    message.filters = object.filters !== undefined && object.filters !== null ? DeploymentFilters.fromPartial(object.filters) : undefined;
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.filters !== undefined && object.filters !== null) {
+      message.filters = DeploymentFilters.fromPartial(object.filters);
+    }
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryDeploymentsRequestSDKType): QueryDeploymentsRequest {
+    return {
+      filters: object.filters ? DeploymentFilters.fromSDK(object.filters) : undefined,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryDeploymentsRequestSDKType {
+    return {
+      filters: isSet(object.filters) ? DeploymentFilters.fromSDKJSON(object.filters) : undefined,
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryDeploymentsRequest): QueryDeploymentsRequestSDKType {
+    const obj: any = {};
+    message.filters !== undefined && (obj.filters = message.filters ? DeploymentFilters.toSDK(message.filters) : undefined);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryDeploymentsRequestAmino): QueryDeploymentsRequest {
     const message = createBaseQueryDeploymentsRequest();
@@ -169,6 +182,12 @@ export const QueryDeploymentsRequest = {
   },
   fromAminoMsg(object: QueryDeploymentsRequestAminoMsg): QueryDeploymentsRequest {
     return QueryDeploymentsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDeploymentsRequest): QueryDeploymentsRequestAminoMsg {
+    return {
+      type: "akash/deployment/query-deployments-request",
+      value: QueryDeploymentsRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryDeploymentsRequestProtoMsg): QueryDeploymentsRequest {
     return QueryDeploymentsRequest.decode(message.value);
@@ -220,11 +239,51 @@ export const QueryDeploymentsResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentsResponse>): QueryDeploymentsResponse {
+  fromJSON(object: any): QueryDeploymentsResponse {
+    const obj = createBaseQueryDeploymentsResponse();
+    if (Array.isArray(object?.deployments)) obj.deployments = object.deployments.map((e: any) => QueryDeploymentResponse.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryDeploymentsResponse): JsonSafe<QueryDeploymentsResponse> {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toJSON(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentsResponse>, I>>(object: I): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
     message.deployments = object.deployments?.map(e => QueryDeploymentResponse.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryDeploymentsResponseSDKType): QueryDeploymentsResponse {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryDeploymentsResponseSDKType {
+    return {
+      deployments: Array.isArray(object?.deployments) ? object.deployments.map((e: any) => QueryDeploymentResponse.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryDeploymentsResponse): QueryDeploymentsResponseSDKType {
+    const obj: any = {};
+    if (message.deployments) {
+      obj.deployments = message.deployments.map(e => e ? QueryDeploymentResponse.toSDK(e) : undefined);
+    } else {
+      obj.deployments = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryDeploymentsResponseAmino): QueryDeploymentsResponse {
     const message = createBaseQueryDeploymentsResponse();
@@ -246,6 +305,12 @@ export const QueryDeploymentsResponse = {
   },
   fromAminoMsg(object: QueryDeploymentsResponseAminoMsg): QueryDeploymentsResponse {
     return QueryDeploymentsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDeploymentsResponse): QueryDeploymentsResponseAminoMsg {
+    return {
+      type: "akash/deployment/query-deployments-response",
+      value: QueryDeploymentsResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryDeploymentsResponseProtoMsg): QueryDeploymentsResponse {
     return QueryDeploymentsResponse.decode(message.value);
@@ -290,10 +355,37 @@ export const QueryDeploymentRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentRequest>): QueryDeploymentRequest {
+  fromJSON(object: any): QueryDeploymentRequest {
+    const obj = createBaseQueryDeploymentRequest();
+    if (isSet(object.id)) obj.id = DeploymentID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: QueryDeploymentRequest): JsonSafe<QueryDeploymentRequest> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentRequest>, I>>(object: I): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
-    message.id = object.id !== undefined && object.id !== null ? DeploymentID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = DeploymentID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: QueryDeploymentRequestSDKType): QueryDeploymentRequest {
+    return {
+      id: object.id ? DeploymentID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryDeploymentRequestSDKType {
+    return {
+      id: isSet(object.id) ? DeploymentID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: QueryDeploymentRequest): QueryDeploymentRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? DeploymentID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: QueryDeploymentRequestAmino): QueryDeploymentRequest {
     const message = createBaseQueryDeploymentRequest();
@@ -309,6 +401,12 @@ export const QueryDeploymentRequest = {
   },
   fromAminoMsg(object: QueryDeploymentRequestAminoMsg): QueryDeploymentRequest {
     return QueryDeploymentRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDeploymentRequest): QueryDeploymentRequestAminoMsg {
+    return {
+      type: "akash/deployment/query-deployment-request",
+      value: QueryDeploymentRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryDeploymentRequestProtoMsg): QueryDeploymentRequest {
     return QueryDeploymentRequest.decode(message.value);
@@ -367,12 +465,59 @@ export const QueryDeploymentResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryDeploymentResponse>): QueryDeploymentResponse {
+  fromJSON(object: any): QueryDeploymentResponse {
+    const obj = createBaseQueryDeploymentResponse();
+    if (isSet(object.deployment)) obj.deployment = Deployment.fromJSON(object.deployment);
+    if (Array.isArray(object?.groups)) obj.groups = object.groups.map((e: any) => Group.fromJSON(e));
+    if (isSet(object.escrowAccount)) obj.escrowAccount = Account.fromJSON(object.escrowAccount);
+    return obj;
+  },
+  toJSON(message: QueryDeploymentResponse): JsonSafe<QueryDeploymentResponse> {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toJSON(message.deployment) : undefined);
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toJSON(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    message.escrowAccount !== undefined && (obj.escrowAccount = message.escrowAccount ? Account.toJSON(message.escrowAccount) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryDeploymentResponse>, I>>(object: I): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
-    message.deployment = object.deployment !== undefined && object.deployment !== null ? Deployment.fromPartial(object.deployment) : undefined;
+    if (object.deployment !== undefined && object.deployment !== null) {
+      message.deployment = Deployment.fromPartial(object.deployment);
+    }
     message.groups = object.groups?.map(e => Group.fromPartial(e)) || [];
-    message.escrowAccount = object.escrowAccount !== undefined && object.escrowAccount !== null ? Account.fromPartial(object.escrowAccount) : undefined;
+    if (object.escrowAccount !== undefined && object.escrowAccount !== null) {
+      message.escrowAccount = Account.fromPartial(object.escrowAccount);
+    }
     return message;
+  },
+  fromSDK(object: QueryDeploymentResponseSDKType): QueryDeploymentResponse {
+    return {
+      deployment: object.deployment ? Deployment.fromSDK(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDK(e)) : [],
+      escrowAccount: object.escrow_account ? Account.fromSDK(object.escrow_account) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryDeploymentResponseSDKType {
+    return {
+      deployment: isSet(object.deployment) ? Deployment.fromSDKJSON(object.deployment) : undefined,
+      groups: Array.isArray(object?.groups) ? object.groups.map((e: any) => Group.fromSDKJSON(e)) : [],
+      escrow_account: isSet(object.escrow_account) ? Account.fromSDKJSON(object.escrow_account) : undefined
+    };
+  },
+  toSDK(message: QueryDeploymentResponse): QueryDeploymentResponseSDKType {
+    const obj: any = {};
+    message.deployment !== undefined && (obj.deployment = message.deployment ? Deployment.toSDK(message.deployment) : undefined);
+    if (message.groups) {
+      obj.groups = message.groups.map(e => e ? Group.toSDK(e) : undefined);
+    } else {
+      obj.groups = [];
+    }
+    message.escrowAccount !== undefined && (obj.escrow_account = message.escrowAccount ? Account.toSDK(message.escrowAccount) : undefined);
+    return obj;
   },
   fromAmino(object: QueryDeploymentResponseAmino): QueryDeploymentResponse {
     const message = createBaseQueryDeploymentResponse();
@@ -398,6 +543,12 @@ export const QueryDeploymentResponse = {
   },
   fromAminoMsg(object: QueryDeploymentResponseAminoMsg): QueryDeploymentResponse {
     return QueryDeploymentResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryDeploymentResponse): QueryDeploymentResponseAminoMsg {
+    return {
+      type: "akash/deployment/query-deployment-response",
+      value: QueryDeploymentResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryDeploymentResponseProtoMsg): QueryDeploymentResponse {
     return QueryDeploymentResponse.decode(message.value);
@@ -442,10 +593,37 @@ export const QueryGroupRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryGroupRequest>): QueryGroupRequest {
+  fromJSON(object: any): QueryGroupRequest {
+    const obj = createBaseQueryGroupRequest();
+    if (isSet(object.id)) obj.id = GroupID.fromJSON(object.id);
+    return obj;
+  },
+  toJSON(message: QueryGroupRequest): JsonSafe<QueryGroupRequest> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toJSON(message.id) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryGroupRequest>, I>>(object: I): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
-    message.id = object.id !== undefined && object.id !== null ? GroupID.fromPartial(object.id) : undefined;
+    if (object.id !== undefined && object.id !== null) {
+      message.id = GroupID.fromPartial(object.id);
+    }
     return message;
+  },
+  fromSDK(object: QueryGroupRequestSDKType): QueryGroupRequest {
+    return {
+      id: object.id ? GroupID.fromSDK(object.id) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryGroupRequestSDKType {
+    return {
+      id: isSet(object.id) ? GroupID.fromSDKJSON(object.id) : undefined
+    };
+  },
+  toSDK(message: QueryGroupRequest): QueryGroupRequestSDKType {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id ? GroupID.toSDK(message.id) : undefined);
+    return obj;
   },
   fromAmino(object: QueryGroupRequestAmino): QueryGroupRequest {
     const message = createBaseQueryGroupRequest();
@@ -461,6 +639,12 @@ export const QueryGroupRequest = {
   },
   fromAminoMsg(object: QueryGroupRequestAminoMsg): QueryGroupRequest {
     return QueryGroupRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryGroupRequest): QueryGroupRequestAminoMsg {
+    return {
+      type: "akash/deployment/query-group-request",
+      value: QueryGroupRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryGroupRequestProtoMsg): QueryGroupRequest {
     return QueryGroupRequest.decode(message.value);
@@ -505,10 +689,37 @@ export const QueryGroupResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryGroupResponse>): QueryGroupResponse {
+  fromJSON(object: any): QueryGroupResponse {
+    const obj = createBaseQueryGroupResponse();
+    if (isSet(object.group)) obj.group = Group.fromJSON(object.group);
+    return obj;
+  },
+  toJSON(message: QueryGroupResponse): JsonSafe<QueryGroupResponse> {
+    const obj: any = {};
+    message.group !== undefined && (obj.group = message.group ? Group.toJSON(message.group) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<Partial<QueryGroupResponse>, I>>(object: I): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
-    message.group = object.group !== undefined && object.group !== null ? Group.fromPartial(object.group) : undefined;
+    if (object.group !== undefined && object.group !== null) {
+      message.group = Group.fromPartial(object.group);
+    }
     return message;
+  },
+  fromSDK(object: QueryGroupResponseSDKType): QueryGroupResponse {
+    return {
+      group: object.group ? Group.fromSDK(object.group) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryGroupResponseSDKType {
+    return {
+      group: isSet(object.group) ? Group.fromSDKJSON(object.group) : undefined
+    };
+  },
+  toSDK(message: QueryGroupResponse): QueryGroupResponseSDKType {
+    const obj: any = {};
+    message.group !== undefined && (obj.group = message.group ? Group.toSDK(message.group) : undefined);
+    return obj;
   },
   fromAmino(object: QueryGroupResponseAmino): QueryGroupResponse {
     const message = createBaseQueryGroupResponse();
@@ -525,6 +736,12 @@ export const QueryGroupResponse = {
   fromAminoMsg(object: QueryGroupResponseAminoMsg): QueryGroupResponse {
     return QueryGroupResponse.fromAmino(object.value);
   },
+  toAminoMsg(message: QueryGroupResponse): QueryGroupResponseAminoMsg {
+    return {
+      type: "akash/deployment/query-group-response",
+      value: QueryGroupResponse.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QueryGroupResponseProtoMsg): QueryGroupResponse {
     return QueryGroupResponse.decode(message.value);
   },
@@ -537,4 +754,52 @@ export const QueryGroupResponse = {
       value: QueryGroupResponse.encode(message).finish()
     };
   }
+};
+/** Query defines the gRPC querier service */
+export interface Query {
+  /** Deployments queries deployments */
+  deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse>;
+  /** Deployment queries deployment details */
+  deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse>;
+  /** Group queries group details */
+  group(request: QueryGroupRequest): Promise<QueryGroupResponse>;
+}
+export class QueryClientImpl implements Query {
+  private readonly rpc: Rpc;
+  constructor(rpc: Rpc) {
+    this.rpc = rpc;
+  }
+  /* Deployments queries deployments */
+  deployments = async (request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> => {
+    const data = QueryDeploymentsRequest.encode(request).finish();
+    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployments", data);
+    return promise.then(data => QueryDeploymentsResponse.decode(new BinaryReader(data)));
+  };
+  /* Deployment queries deployment details */
+  deployment = async (request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> => {
+    const data = QueryDeploymentRequest.encode(request).finish();
+    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Deployment", data);
+    return promise.then(data => QueryDeploymentResponse.decode(new BinaryReader(data)));
+  };
+  /* Group queries group details */
+  group = async (request: QueryGroupRequest): Promise<QueryGroupResponse> => {
+    const data = QueryGroupRequest.encode(request).finish();
+    const promise = this.rpc.request("akash.deployment.v1beta1.Query", "Group", data);
+    return promise.then(data => QueryGroupResponse.decode(new BinaryReader(data)));
+  };
+}
+export const createRpcQueryExtension = (base: QueryClient) => {
+  const rpc = createProtobufRpcClient(base);
+  const queryService = new QueryClientImpl(rpc);
+  return {
+    deployments(request: QueryDeploymentsRequest): Promise<QueryDeploymentsResponse> {
+      return queryService.deployments(request);
+    },
+    deployment(request: QueryDeploymentRequest): Promise<QueryDeploymentResponse> {
+      return queryService.deployment(request);
+    },
+    group(request: QueryGroupRequest): Promise<QueryGroupResponse> {
+      return queryService.group(request);
+    }
+  };
 };

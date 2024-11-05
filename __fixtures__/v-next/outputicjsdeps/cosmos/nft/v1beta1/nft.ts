@@ -1,6 +1,8 @@
-import { Any, AnyAmino } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.nft.v1beta1";
 /** Class defines the class of the nft type. */
 export interface Class {
   /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
@@ -23,25 +25,14 @@ export interface ClassProtoMsg {
   value: Uint8Array;
 }
 /** Class defines the class of the nft type. */
-export interface ClassAmino {
-  /** id defines the unique identifier of the NFT classification, similar to the contract address of ERC721 */
+export interface ClassSDKType {
   id: string;
-  /** name defines the human-readable name of the NFT classification. Optional */
   name: string;
-  /** symbol is an abbreviated name for nft classification. Optional */
   symbol: string;
-  /** description is a brief description of nft classification. Optional */
   description: string;
-  /** uri for the class metadata stored off chain. It can define schema for Class and NFT `Data` attributes. Optional */
   uri: string;
-  /** uri_hash is a hash of the document pointed by uri. Optional */
   uri_hash: string;
-  /** data is the app specific metadata of the NFT class. Optional */
-  data?: AnyAmino;
-}
-export interface ClassAminoMsg {
-  type: "cosmos-sdk/Class";
-  value: ClassAmino;
+  data?: AnySDKType;
 }
 /** NFT defines the NFT. */
 export interface NFT {
@@ -61,21 +52,12 @@ export interface NFTProtoMsg {
   value: Uint8Array;
 }
 /** NFT defines the NFT. */
-export interface NFTAmino {
-  /** class_id associated with the NFT, similar to the contract address of ERC721 */
+export interface NFTSDKType {
   class_id: string;
-  /** id is a unique identifier of the NFT */
   id: string;
-  /** uri for the NFT metadata stored off chain */
   uri: string;
-  /** uri_hash is a hash of the document pointed by uri */
   uri_hash: string;
-  /** data is an app specific data of the NFT. Optional */
-  data?: AnyAmino;
-}
-export interface NFTAminoMsg {
-  type: "cosmos-sdk/NFT";
-  value: NFTAmino;
+  data?: AnySDKType;
 }
 function createBaseClass(): Class {
   return {
@@ -90,24 +72,23 @@ function createBaseClass(): Class {
 }
 export const Class = {
   typeUrl: "/cosmos.nft.v1beta1.Class",
-  aminoType: "cosmos-sdk/Class",
   encode(message: Class, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(10).string(message.id);
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
-    if (message.symbol !== "") {
+    if (message.symbol !== undefined) {
       writer.uint32(26).string(message.symbol);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(34).string(message.description);
     }
-    if (message.uri !== "") {
+    if (message.uri !== undefined) {
       writer.uint32(42).string(message.uri);
     }
-    if (message.uriHash !== "") {
+    if (message.uriHash !== undefined) {
       writer.uint32(50).string(message.uriHash);
     }
     if (message.data !== undefined) {
@@ -150,6 +131,28 @@ export const Class = {
     }
     return message;
   },
+  fromJSON(object: any): Class {
+    const obj = createBaseClass();
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.symbol)) obj.symbol = String(object.symbol);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.uri)) obj.uri = String(object.uri);
+    if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
+    if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
+    return obj;
+  },
+  toJSON(message: Class): JsonSafe<Class> {
+    const obj: any = {};
+    message.id !== undefined && (obj.id = message.id);
+    message.name !== undefined && (obj.name = message.name);
+    message.symbol !== undefined && (obj.symbol = message.symbol);
+    message.description !== undefined && (obj.description = message.description);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Class>): Class {
     const message = createBaseClass();
     message.id = object.id ?? "";
@@ -158,8 +161,43 @@ export const Class = {
     message.description = object.description ?? "";
     message.uri = object.uri ?? "";
     message.uriHash = object.uriHash ?? "";
-    message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromPartial(object.data);
+    }
     return message;
+  },
+  fromSDK(object: ClassSDKType): Class {
+    return {
+      id: object?.id,
+      name: object?.name,
+      symbol: object?.symbol,
+      description: object?.description,
+      uri: object?.uri,
+      uriHash: object?.uri_hash,
+      data: object.data ? Any.fromSDK(object.data) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ClassSDKType {
+    return {
+      id: isSet(object.id) ? String(object.id) : "",
+      name: isSet(object.name) ? String(object.name) : "",
+      symbol: isSet(object.symbol) ? String(object.symbol) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
+    };
+  },
+  toSDK(message: Class): ClassSDKType {
+    const obj: any = {};
+    obj.id = message.id;
+    obj.name = message.name;
+    obj.symbol = message.symbol;
+    obj.description = message.description;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
+    return obj;
   },
   fromAmino(object: ClassAmino): Class {
     const message = createBaseClass();
@@ -230,18 +268,17 @@ function createBaseNFT(): NFT {
 }
 export const NFT = {
   typeUrl: "/cosmos.nft.v1beta1.NFT",
-  aminoType: "cosmos-sdk/NFT",
   encode(message: NFT, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.classId !== "") {
+    if (message.classId !== undefined) {
       writer.uint32(10).string(message.classId);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(18).string(message.id);
     }
-    if (message.uri !== "") {
+    if (message.uri !== undefined) {
       writer.uint32(26).string(message.uri);
     }
-    if (message.uriHash !== "") {
+    if (message.uriHash !== undefined) {
       writer.uint32(34).string(message.uriHash);
     }
     if (message.data !== undefined) {
@@ -278,14 +315,61 @@ export const NFT = {
     }
     return message;
   },
+  fromJSON(object: any): NFT {
+    const obj = createBaseNFT();
+    if (isSet(object.classId)) obj.classId = String(object.classId);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.uri)) obj.uri = String(object.uri);
+    if (isSet(object.uriHash)) obj.uriHash = String(object.uriHash);
+    if (isSet(object.data)) obj.data = Any.fromJSON(object.data);
+    return obj;
+  },
+  toJSON(message: NFT): JsonSafe<NFT> {
+    const obj: any = {};
+    message.classId !== undefined && (obj.classId = message.classId);
+    message.id !== undefined && (obj.id = message.id);
+    message.uri !== undefined && (obj.uri = message.uri);
+    message.uriHash !== undefined && (obj.uriHash = message.uriHash);
+    message.data !== undefined && (obj.data = message.data ? Any.toJSON(message.data) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<NFT>): NFT {
     const message = createBaseNFT();
     message.classId = object.classId ?? "";
     message.id = object.id ?? "";
     message.uri = object.uri ?? "";
     message.uriHash = object.uriHash ?? "";
-    message.data = object.data !== undefined && object.data !== null ? Any.fromPartial(object.data) : undefined;
+    if (object.data !== undefined && object.data !== null) {
+      message.data = Any.fromPartial(object.data);
+    }
     return message;
+  },
+  fromSDK(object: NFTSDKType): NFT {
+    return {
+      classId: object?.class_id,
+      id: object?.id,
+      uri: object?.uri,
+      uriHash: object?.uri_hash,
+      data: object.data ? Any.fromSDK(object.data) : undefined
+    };
+  },
+  fromSDKJSON(object: any): NFTSDKType {
+    return {
+      class_id: isSet(object.class_id) ? String(object.class_id) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      uri: isSet(object.uri) ? String(object.uri) : "",
+      uri_hash: isSet(object.uri_hash) ? String(object.uri_hash) : "",
+      data: isSet(object.data) ? Any.fromSDKJSON(object.data) : undefined
+    };
+  },
+  toSDK(message: NFT): NFTSDKType {
+    const obj: any = {};
+    obj.class_id = message.classId;
+    obj.id = message.id;
+    obj.uri = message.uri;
+    obj.uri_hash = message.uriHash;
+    message.data !== undefined && (obj.data = message.data ? Any.toSDK(message.data) : undefined);
+    return obj;
   },
   fromAmino(object: NFTAmino): NFT {
     const message = createBaseNFT();

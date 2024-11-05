@@ -1,7 +1,9 @@
-import { DecCoin, DecCoinAmino } from "../../../cosmos/base/v1beta1/coin";
-import { Timestamp } from "../../../google/protobuf/timestamp";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { toTimestamp, fromTimestamp, DeepPartial } from "../../../helpers";
+import { DecCoin, DecCoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { Timestamp, TimestampSDKType } from "../../../google/protobuf/timestamp.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { toTimestamp, fromTimestamp, isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "evmos.incentives.v1";
 /**
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
@@ -26,21 +28,12 @@ export interface IncentiveProtoMsg {
  * Incentive defines an instance that organizes distribution conditions for a
  * given smart contract
  */
-export interface IncentiveAmino {
-  /** contract address */
+export interface IncentiveSDKType {
   contract: string;
-  /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoinAmino[];
-  /** number of remaining epochs */
+  allocations: DecCoinSDKType[];
   epochs: number;
-  /** distribution start time */
-  start_time: string;
-  /** cumulative gas spent by all gasmeters of the incentive during the epoch */
-  total_gas: string;
-}
-export interface IncentiveAminoMsg {
-  type: "/evmos.incentives.v1.Incentive";
-  value: IncentiveAmino;
+  start_time: Date;
+  total_gas: bigint;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
 export interface GasMeter {
@@ -56,17 +49,10 @@ export interface GasMeterProtoMsg {
   value: Uint8Array;
 }
 /** GasMeter tracks the cumulative gas spent per participant in one epoch */
-export interface GasMeterAmino {
-  /** hex address of the incentivized contract */
+export interface GasMeterSDKType {
   contract: string;
-  /** participant address that interacts with the incentive */
   participant: string;
-  /** cumulative gas spent during the epoch */
-  cumulative_gas: string;
-}
-export interface GasMeterAminoMsg {
-  type: "/evmos.incentives.v1.GasMeter";
-  value: GasMeterAmino;
+  cumulative_gas: bigint;
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
 export interface RegisterIncentiveProposal {
@@ -86,21 +72,12 @@ export interface RegisterIncentiveProposalProtoMsg {
   value: Uint8Array;
 }
 /** RegisterIncentiveProposal is a gov Content type to register an incentive */
-export interface RegisterIncentiveProposalAmino {
-  /** title of the proposal */
+export interface RegisterIncentiveProposalSDKType {
   title: string;
-  /** proposal description */
   description: string;
-  /** contract address */
   contract: string;
-  /** denoms and percentage of rewards to be allocated */
-  allocations: DecCoinAmino[];
-  /** number of remaining epochs */
+  allocations: DecCoinSDKType[];
   epochs: number;
-}
-export interface RegisterIncentiveProposalAminoMsg {
-  type: "/evmos.incentives.v1.RegisterIncentiveProposal";
-  value: RegisterIncentiveProposalAmino;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
 export interface CancelIncentiveProposal {
@@ -116,17 +93,10 @@ export interface CancelIncentiveProposalProtoMsg {
   value: Uint8Array;
 }
 /** CancelIncentiveProposal is a gov Content type to cancel an incentive */
-export interface CancelIncentiveProposalAmino {
-  /** title of the proposal */
+export interface CancelIncentiveProposalSDKType {
   title: string;
-  /** proposal description */
   description: string;
-  /** contract address */
   contract: string;
-}
-export interface CancelIncentiveProposalAminoMsg {
-  type: "/evmos.incentives.v1.CancelIncentiveProposal";
-  value: CancelIncentiveProposalAmino;
 }
 function createBaseIncentive(): Incentive {
   return {
@@ -140,19 +110,19 @@ function createBaseIncentive(): Incentive {
 export const Incentive = {
   typeUrl: "/evmos.incentives.v1.Incentive",
   encode(message: Incentive, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
     for (const v of message.allocations) {
       DecCoin.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.epochs !== 0) {
+    if (message.epochs !== undefined) {
       writer.uint32(24).uint32(message.epochs);
     }
     if (message.startTime !== undefined) {
       Timestamp.encode(toTimestamp(message.startTime), writer.uint32(34).fork()).ldelim();
     }
-    if (message.totalGas !== BigInt(0)) {
+    if (message.totalGas !== undefined) {
       writer.uint32(40).uint64(message.totalGas);
     }
     return writer;
@@ -186,14 +156,69 @@ export const Incentive = {
     }
     return message;
   },
+  fromJSON(object: any): Incentive {
+    const obj = createBaseIncentive();
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
+    if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.totalGas)) obj.totalGas = BigInt(object.totalGas.toString());
+    return obj;
+  },
+  toJSON(message: Incentive): JsonSafe<Incentive> {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toJSON(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
+    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
+    message.totalGas !== undefined && (obj.totalGas = (message.totalGas || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Incentive>): Incentive {
     const message = createBaseIncentive();
     message.contract = object.contract ?? "";
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     message.startTime = object.startTime ?? undefined;
-    message.totalGas = object.totalGas !== undefined && object.totalGas !== null ? BigInt(object.totalGas.toString()) : BigInt(0);
+    if (object.totalGas !== undefined && object.totalGas !== null) {
+      message.totalGas = BigInt(object.totalGas.toString());
+    }
     return message;
+  },
+  fromSDK(object: IncentiveSDKType): Incentive {
+    return {
+      contract: object?.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
+      epochs: object?.epochs,
+      startTime: object.start_time ?? undefined,
+      totalGas: object?.total_gas
+    };
+  },
+  fromSDKJSON(object: any): IncentiveSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0,
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      total_gas: isSet(object.total_gas) ? BigInt(object.total_gas.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Incentive): IncentiveSDKType {
+    const obj: any = {};
+    obj.contract = message.contract;
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    obj.epochs = message.epochs;
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    obj.total_gas = message.totalGas;
+    return obj;
   },
   fromAmino(object: IncentiveAmino): Incentive {
     const message = createBaseIncentive();
@@ -251,13 +276,13 @@ function createBaseGasMeter(): GasMeter {
 export const GasMeter = {
   typeUrl: "/evmos.incentives.v1.GasMeter",
   encode(message: GasMeter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(10).string(message.contract);
     }
-    if (message.participant !== "") {
+    if (message.participant !== undefined) {
       writer.uint32(18).string(message.participant);
     }
-    if (message.cumulativeGas !== BigInt(0)) {
+    if (message.cumulativeGas !== undefined) {
       writer.uint32(24).uint64(message.cumulativeGas);
     }
     return writer;
@@ -285,12 +310,49 @@ export const GasMeter = {
     }
     return message;
   },
+  fromJSON(object: any): GasMeter {
+    const obj = createBaseGasMeter();
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (isSet(object.participant)) obj.participant = String(object.participant);
+    if (isSet(object.cumulativeGas)) obj.cumulativeGas = BigInt(object.cumulativeGas.toString());
+    return obj;
+  },
+  toJSON(message: GasMeter): JsonSafe<GasMeter> {
+    const obj: any = {};
+    message.contract !== undefined && (obj.contract = message.contract);
+    message.participant !== undefined && (obj.participant = message.participant);
+    message.cumulativeGas !== undefined && (obj.cumulativeGas = (message.cumulativeGas || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<GasMeter>): GasMeter {
     const message = createBaseGasMeter();
     message.contract = object.contract ?? "";
     message.participant = object.participant ?? "";
-    message.cumulativeGas = object.cumulativeGas !== undefined && object.cumulativeGas !== null ? BigInt(object.cumulativeGas.toString()) : BigInt(0);
+    if (object.cumulativeGas !== undefined && object.cumulativeGas !== null) {
+      message.cumulativeGas = BigInt(object.cumulativeGas.toString());
+    }
     return message;
+  },
+  fromSDK(object: GasMeterSDKType): GasMeter {
+    return {
+      contract: object?.contract,
+      participant: object?.participant,
+      cumulativeGas: object?.cumulative_gas
+    };
+  },
+  fromSDKJSON(object: any): GasMeterSDKType {
+    return {
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      participant: isSet(object.participant) ? String(object.participant) : "",
+      cumulative_gas: isSet(object.cumulative_gas) ? BigInt(object.cumulative_gas.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: GasMeter): GasMeterSDKType {
+    const obj: any = {};
+    obj.contract = message.contract;
+    obj.participant = message.participant;
+    obj.cumulative_gas = message.cumulativeGas;
+    return obj;
   },
   fromAmino(object: GasMeterAmino): GasMeter {
     const message = createBaseGasMeter();
@@ -340,19 +402,19 @@ function createBaseRegisterIncentiveProposal(): RegisterIncentiveProposal {
 export const RegisterIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.RegisterIncentiveProposal",
   encode(message: RegisterIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(26).string(message.contract);
     }
     for (const v of message.allocations) {
       DecCoin.encode(v!, writer.uint32(34).fork()).ldelim();
     }
-    if (message.epochs !== 0) {
+    if (message.epochs !== undefined) {
       writer.uint32(40).uint32(message.epochs);
     }
     return writer;
@@ -386,6 +448,28 @@ export const RegisterIncentiveProposal = {
     }
     return message;
   },
+  fromJSON(object: any): RegisterIncentiveProposal {
+    const obj = createBaseRegisterIncentiveProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    if (Array.isArray(object?.allocations)) obj.allocations = object.allocations.map((e: any) => DecCoin.fromJSON(e));
+    if (isSet(object.epochs)) obj.epochs = Number(object.epochs);
+    return obj;
+  },
+  toJSON(message: RegisterIncentiveProposal): JsonSafe<RegisterIncentiveProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toJSON(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    message.epochs !== undefined && (obj.epochs = Math.round(message.epochs));
+    return obj;
+  },
   fromPartial(object: DeepPartial<RegisterIncentiveProposal>): RegisterIncentiveProposal {
     const message = createBaseRegisterIncentiveProposal();
     message.title = object.title ?? "";
@@ -394,6 +478,37 @@ export const RegisterIncentiveProposal = {
     message.allocations = object.allocations?.map(e => DecCoin.fromPartial(e)) || [];
     message.epochs = object.epochs ?? 0;
     return message;
+  },
+  fromSDK(object: RegisterIncentiveProposalSDKType): RegisterIncentiveProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      contract: object?.contract,
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDK(e)) : [],
+      epochs: object?.epochs
+    };
+  },
+  fromSDKJSON(object: any): RegisterIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : "",
+      allocations: Array.isArray(object?.allocations) ? object.allocations.map((e: any) => DecCoin.fromSDKJSON(e)) : [],
+      epochs: isSet(object.epochs) ? Number(object.epochs) : 0
+    };
+  },
+  toSDK(message: RegisterIncentiveProposal): RegisterIncentiveProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    if (message.allocations) {
+      obj.allocations = message.allocations.map(e => e ? DecCoin.toSDK(e) : undefined);
+    } else {
+      obj.allocations = [];
+    }
+    obj.epochs = message.epochs;
+    return obj;
   },
   fromAmino(object: RegisterIncentiveProposalAmino): RegisterIncentiveProposal {
     const message = createBaseRegisterIncentiveProposal();
@@ -451,13 +566,13 @@ function createBaseCancelIncentiveProposal(): CancelIncentiveProposal {
 export const CancelIncentiveProposal = {
   typeUrl: "/evmos.incentives.v1.CancelIncentiveProposal",
   encode(message: CancelIncentiveProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.contract !== "") {
+    if (message.contract !== undefined) {
       writer.uint32(26).string(message.contract);
     }
     return writer;
@@ -485,12 +600,47 @@ export const CancelIncentiveProposal = {
     }
     return message;
   },
+  fromJSON(object: any): CancelIncentiveProposal {
+    const obj = createBaseCancelIncentiveProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.contract)) obj.contract = String(object.contract);
+    return obj;
+  },
+  toJSON(message: CancelIncentiveProposal): JsonSafe<CancelIncentiveProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.contract !== undefined && (obj.contract = message.contract);
+    return obj;
+  },
   fromPartial(object: DeepPartial<CancelIncentiveProposal>): CancelIncentiveProposal {
     const message = createBaseCancelIncentiveProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.contract = object.contract ?? "";
     return message;
+  },
+  fromSDK(object: CancelIncentiveProposalSDKType): CancelIncentiveProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      contract: object?.contract
+    };
+  },
+  fromSDKJSON(object: any): CancelIncentiveProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      contract: isSet(object.contract) ? String(object.contract) : ""
+    };
+  },
+  toSDK(message: CancelIncentiveProposal): CancelIncentiveProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.contract = message.contract;
+    return obj;
   },
   fromAmino(object: CancelIncentiveProposalAmino): CancelIncentiveProposal {
     const message = createBaseCancelIncentiveProposal();

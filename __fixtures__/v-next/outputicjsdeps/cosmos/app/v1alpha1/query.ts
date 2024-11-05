@@ -1,6 +1,8 @@
-import { Config, ConfigAmino } from "./config";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Config, ConfigSDKType } from "./config.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../helpers.js";
+export const protobufPackage = "cosmos.app.v1alpha1";
 /** QueryConfigRequest is the Query/Config request type. */
 export interface QueryConfigRequest {}
 export interface QueryConfigRequestProtoMsg {
@@ -8,11 +10,7 @@ export interface QueryConfigRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryConfigRequest is the Query/Config request type. */
-export interface QueryConfigRequestAmino {}
-export interface QueryConfigRequestAminoMsg {
-  type: "cosmos-sdk/QueryConfigRequest";
-  value: QueryConfigRequestAmino;
-}
+export interface QueryConfigRequestSDKType {}
 /** QueryConfigRequest is the Query/Config response type. */
 export interface QueryConfigResponse {
   /** config is the current app config. */
@@ -23,20 +21,14 @@ export interface QueryConfigResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryConfigRequest is the Query/Config response type. */
-export interface QueryConfigResponseAmino {
-  /** config is the current app config. */
-  config?: ConfigAmino;
-}
-export interface QueryConfigResponseAminoMsg {
-  type: "cosmos-sdk/QueryConfigResponse";
-  value: QueryConfigResponseAmino;
+export interface QueryConfigResponseSDKType {
+  config?: ConfigSDKType;
 }
 function createBaseQueryConfigRequest(): QueryConfigRequest {
   return {};
 }
 export const QueryConfigRequest = {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigRequest",
-  aminoType: "cosmos-sdk/QueryConfigRequest",
   encode(_: QueryConfigRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -54,9 +46,27 @@ export const QueryConfigRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryConfigRequest {
+    const obj = createBaseQueryConfigRequest();
+    return obj;
+  },
+  toJSON(_: QueryConfigRequest): JsonSafe<QueryConfigRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryConfigRequest>): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
     return message;
+  },
+  fromSDK(_: QueryConfigRequestSDKType): QueryConfigRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryConfigRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryConfigRequest): QueryConfigRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryConfigRequestAmino): QueryConfigRequest {
     const message = createBaseQueryConfigRequest();
@@ -95,7 +105,6 @@ function createBaseQueryConfigResponse(): QueryConfigResponse {
 }
 export const QueryConfigResponse = {
   typeUrl: "/cosmos.app.v1alpha1.QueryConfigResponse",
-  aminoType: "cosmos-sdk/QueryConfigResponse",
   encode(message: QueryConfigResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.config !== undefined) {
       Config.encode(message.config, writer.uint32(10).fork()).ldelim();
@@ -119,10 +128,37 @@ export const QueryConfigResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryConfigResponse {
+    const obj = createBaseQueryConfigResponse();
+    if (isSet(object.config)) obj.config = Config.fromJSON(object.config);
+    return obj;
+  },
+  toJSON(message: QueryConfigResponse): JsonSafe<QueryConfigResponse> {
+    const obj: any = {};
+    message.config !== undefined && (obj.config = message.config ? Config.toJSON(message.config) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryConfigResponse>): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();
-    message.config = object.config !== undefined && object.config !== null ? Config.fromPartial(object.config) : undefined;
+    if (object.config !== undefined && object.config !== null) {
+      message.config = Config.fromPartial(object.config);
+    }
     return message;
+  },
+  fromSDK(object: QueryConfigResponseSDKType): QueryConfigResponse {
+    return {
+      config: object.config ? Config.fromSDK(object.config) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryConfigResponseSDKType {
+    return {
+      config: isSet(object.config) ? Config.fromSDKJSON(object.config) : undefined
+    };
+  },
+  toSDK(message: QueryConfigResponse): QueryConfigResponseSDKType {
+    const obj: any = {};
+    message.config !== undefined && (obj.config = message.config ? Config.toSDK(message.config) : undefined);
+    return obj;
   },
   fromAmino(object: QueryConfigResponseAmino): QueryConfigResponse {
     const message = createBaseQueryConfigResponse();

@@ -1,6 +1,8 @@
-import { Any, AnyAmino } from "../../../google/protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Any, AnySDKType } from "../../../google/protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.auth.v1beta1";
 /**
  * BaseAccount defines a base account type. It contains all the necessary fields
  * for basic account functionality. Any custom account type should extend this
@@ -21,15 +23,11 @@ export interface BaseAccountProtoMsg {
  * for basic account functionality. Any custom account type should extend this
  * type for additional functionality (e.g. vesting).
  */
-export interface BaseAccountAmino {
+export interface BaseAccountSDKType {
   address: string;
-  pub_key?: AnyAmino;
-  account_number: string;
-  sequence: string;
-}
-export interface BaseAccountAminoMsg {
-  type: "cosmos-sdk/BaseAccount";
-  value: BaseAccountAmino;
+  pub_key?: AnySDKType;
+  account_number: bigint;
+  sequence: bigint;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
 export interface ModuleAccount {
@@ -42,14 +40,10 @@ export interface ModuleAccountProtoMsg {
   value: Uint8Array;
 }
 /** ModuleAccount defines an account for modules that holds coins on a pool. */
-export interface ModuleAccountAmino {
-  base_account?: BaseAccountAmino;
+export interface ModuleAccountSDKType {
+  base_account?: BaseAccountSDKType;
   name: string;
   permissions: string[];
-}
-export interface ModuleAccountAminoMsg {
-  type: "cosmos-sdk/ModuleAccount";
-  value: ModuleAccountAmino;
 }
 /** Params defines the parameters for the auth module. */
 export interface Params {
@@ -64,16 +58,12 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the parameters for the auth module. */
-export interface ParamsAmino {
-  max_memo_characters: string;
-  tx_sig_limit: string;
-  tx_size_cost_per_byte: string;
-  sig_verify_cost_ed25519: string;
-  sig_verify_cost_secp256k1: string;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
+export interface ParamsSDKType {
+  max_memo_characters: bigint;
+  tx_sig_limit: bigint;
+  tx_size_cost_per_byte: bigint;
+  sig_verify_cost_ed25519: bigint;
+  sig_verify_cost_secp256k1: bigint;
 }
 function createBaseBaseAccount(): BaseAccount {
   return {
@@ -85,18 +75,17 @@ function createBaseBaseAccount(): BaseAccount {
 }
 export const BaseAccount = {
   typeUrl: "/cosmos.auth.v1beta1.BaseAccount",
-  aminoType: "cosmos-sdk/BaseAccount",
   encode(message: BaseAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.pubKey !== undefined) {
       Any.encode(message.pubKey, writer.uint32(18).fork()).ldelim();
     }
-    if (message.accountNumber !== BigInt(0)) {
+    if (message.accountNumber !== undefined) {
       writer.uint32(24).uint64(message.accountNumber);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(32).uint64(message.sequence);
     }
     return writer;
@@ -127,13 +116,59 @@ export const BaseAccount = {
     }
     return message;
   },
+  fromJSON(object: any): BaseAccount {
+    const obj = createBaseBaseAccount();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.pubKey)) obj.pubKey = Any.fromJSON(object.pubKey);
+    if (isSet(object.accountNumber)) obj.accountNumber = BigInt(object.accountNumber.toString());
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    return obj;
+  },
+  toJSON(message: BaseAccount): JsonSafe<BaseAccount> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.pubKey !== undefined && (obj.pubKey = message.pubKey ? Any.toJSON(message.pubKey) : undefined);
+    message.accountNumber !== undefined && (obj.accountNumber = (message.accountNumber || BigInt(0)).toString());
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<BaseAccount>): BaseAccount {
     const message = createBaseBaseAccount();
     message.address = object.address ?? "";
-    message.pubKey = object.pubKey !== undefined && object.pubKey !== null ? Any.fromPartial(object.pubKey) : undefined;
-    message.accountNumber = object.accountNumber !== undefined && object.accountNumber !== null ? BigInt(object.accountNumber.toString()) : BigInt(0);
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.pubKey !== undefined && object.pubKey !== null) {
+      message.pubKey = Any.fromPartial(object.pubKey);
+    }
+    if (object.accountNumber !== undefined && object.accountNumber !== null) {
+      message.accountNumber = BigInt(object.accountNumber.toString());
+    }
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     return message;
+  },
+  fromSDK(object: BaseAccountSDKType): BaseAccount {
+    return {
+      address: object?.address,
+      pubKey: object.pub_key ? Any.fromSDK(object.pub_key) : undefined,
+      accountNumber: object?.account_number,
+      sequence: object?.sequence
+    };
+  },
+  fromSDKJSON(object: any): BaseAccountSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      pub_key: isSet(object.pub_key) ? Any.fromSDKJSON(object.pub_key) : undefined,
+      account_number: isSet(object.account_number) ? BigInt(object.account_number.toString()) : BigInt(0),
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: BaseAccount): BaseAccountSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    message.pubKey !== undefined && (obj.pub_key = message.pubKey ? Any.toSDK(message.pubKey) : undefined);
+    obj.account_number = message.accountNumber;
+    obj.sequence = message.sequence;
+    return obj;
   },
   fromAmino(object: BaseAccountAmino): BaseAccount {
     const message = createBaseBaseAccount();
@@ -190,12 +225,11 @@ function createBaseModuleAccount(): ModuleAccount {
 }
 export const ModuleAccount = {
   typeUrl: "/cosmos.auth.v1beta1.ModuleAccount",
-  aminoType: "cosmos-sdk/ModuleAccount",
   encode(message: ModuleAccount, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.baseAccount !== undefined) {
       BaseAccount.encode(message.baseAccount, writer.uint32(10).fork()).ldelim();
     }
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(18).string(message.name);
     }
     for (const v of message.permissions) {
@@ -226,12 +260,57 @@ export const ModuleAccount = {
     }
     return message;
   },
+  fromJSON(object: any): ModuleAccount {
+    const obj = createBaseModuleAccount();
+    if (isSet(object.baseAccount)) obj.baseAccount = BaseAccount.fromJSON(object.baseAccount);
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.permissions)) obj.permissions = object.permissions.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: ModuleAccount): JsonSafe<ModuleAccount> {
+    const obj: any = {};
+    message.baseAccount !== undefined && (obj.baseAccount = message.baseAccount ? BaseAccount.toJSON(message.baseAccount) : undefined);
+    message.name !== undefined && (obj.name = message.name);
+    if (message.permissions) {
+      obj.permissions = message.permissions.map(e => e);
+    } else {
+      obj.permissions = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ModuleAccount>): ModuleAccount {
     const message = createBaseModuleAccount();
-    message.baseAccount = object.baseAccount !== undefined && object.baseAccount !== null ? BaseAccount.fromPartial(object.baseAccount) : undefined;
+    if (object.baseAccount !== undefined && object.baseAccount !== null) {
+      message.baseAccount = BaseAccount.fromPartial(object.baseAccount);
+    }
     message.name = object.name ?? "";
     message.permissions = object.permissions?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ModuleAccountSDKType): ModuleAccount {
+    return {
+      baseAccount: object.base_account ? BaseAccount.fromSDK(object.base_account) : undefined,
+      name: object?.name,
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ModuleAccountSDKType {
+    return {
+      base_account: isSet(object.base_account) ? BaseAccount.fromSDKJSON(object.base_account) : undefined,
+      name: isSet(object.name) ? String(object.name) : "",
+      permissions: Array.isArray(object?.permissions) ? object.permissions.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: ModuleAccount): ModuleAccountSDKType {
+    const obj: any = {};
+    message.baseAccount !== undefined && (obj.base_account = message.baseAccount ? BaseAccount.toSDK(message.baseAccount) : undefined);
+    obj.name = message.name;
+    if (message.permissions) {
+      obj.permissions = message.permissions.map(e => e);
+    } else {
+      obj.permissions = [];
+    }
+    return obj;
   },
   fromAmino(object: ModuleAccountAmino): ModuleAccount {
     const message = createBaseModuleAccount();
@@ -288,21 +367,20 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/cosmos.auth.v1beta1.Params",
-  aminoType: "cosmos-sdk/Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.maxMemoCharacters !== BigInt(0)) {
+    if (message.maxMemoCharacters !== undefined) {
       writer.uint32(8).uint64(message.maxMemoCharacters);
     }
-    if (message.txSigLimit !== BigInt(0)) {
+    if (message.txSigLimit !== undefined) {
       writer.uint32(16).uint64(message.txSigLimit);
     }
-    if (message.txSizeCostPerByte !== BigInt(0)) {
+    if (message.txSizeCostPerByte !== undefined) {
       writer.uint32(24).uint64(message.txSizeCostPerByte);
     }
-    if (message.sigVerifyCostEd25519 !== BigInt(0)) {
+    if (message.sigVerifyCostEd25519 !== undefined) {
       writer.uint32(32).uint64(message.sigVerifyCostEd25519);
     }
-    if (message.sigVerifyCostSecp256k1 !== BigInt(0)) {
+    if (message.sigVerifyCostSecp256k1 !== undefined) {
       writer.uint32(40).uint64(message.sigVerifyCostSecp256k1);
     }
     return writer;
@@ -336,14 +414,69 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.maxMemoCharacters)) obj.maxMemoCharacters = BigInt(object.maxMemoCharacters.toString());
+    if (isSet(object.txSigLimit)) obj.txSigLimit = BigInt(object.txSigLimit.toString());
+    if (isSet(object.txSizeCostPerByte)) obj.txSizeCostPerByte = BigInt(object.txSizeCostPerByte.toString());
+    if (isSet(object.sigVerifyCostEd25519)) obj.sigVerifyCostEd25519 = BigInt(object.sigVerifyCostEd25519.toString());
+    if (isSet(object.sigVerifyCostSecp256k1)) obj.sigVerifyCostSecp256k1 = BigInt(object.sigVerifyCostSecp256k1.toString());
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.maxMemoCharacters !== undefined && (obj.maxMemoCharacters = (message.maxMemoCharacters || BigInt(0)).toString());
+    message.txSigLimit !== undefined && (obj.txSigLimit = (message.txSigLimit || BigInt(0)).toString());
+    message.txSizeCostPerByte !== undefined && (obj.txSizeCostPerByte = (message.txSizeCostPerByte || BigInt(0)).toString());
+    message.sigVerifyCostEd25519 !== undefined && (obj.sigVerifyCostEd25519 = (message.sigVerifyCostEd25519 || BigInt(0)).toString());
+    message.sigVerifyCostSecp256k1 !== undefined && (obj.sigVerifyCostSecp256k1 = (message.sigVerifyCostSecp256k1 || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
-    message.maxMemoCharacters = object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null ? BigInt(object.maxMemoCharacters.toString()) : BigInt(0);
-    message.txSigLimit = object.txSigLimit !== undefined && object.txSigLimit !== null ? BigInt(object.txSigLimit.toString()) : BigInt(0);
-    message.txSizeCostPerByte = object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null ? BigInt(object.txSizeCostPerByte.toString()) : BigInt(0);
-    message.sigVerifyCostEd25519 = object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null ? BigInt(object.sigVerifyCostEd25519.toString()) : BigInt(0);
-    message.sigVerifyCostSecp256k1 = object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null ? BigInt(object.sigVerifyCostSecp256k1.toString()) : BigInt(0);
+    if (object.maxMemoCharacters !== undefined && object.maxMemoCharacters !== null) {
+      message.maxMemoCharacters = BigInt(object.maxMemoCharacters.toString());
+    }
+    if (object.txSigLimit !== undefined && object.txSigLimit !== null) {
+      message.txSigLimit = BigInt(object.txSigLimit.toString());
+    }
+    if (object.txSizeCostPerByte !== undefined && object.txSizeCostPerByte !== null) {
+      message.txSizeCostPerByte = BigInt(object.txSizeCostPerByte.toString());
+    }
+    if (object.sigVerifyCostEd25519 !== undefined && object.sigVerifyCostEd25519 !== null) {
+      message.sigVerifyCostEd25519 = BigInt(object.sigVerifyCostEd25519.toString());
+    }
+    if (object.sigVerifyCostSecp256k1 !== undefined && object.sigVerifyCostSecp256k1 !== null) {
+      message.sigVerifyCostSecp256k1 = BigInt(object.sigVerifyCostSecp256k1.toString());
+    }
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      maxMemoCharacters: object?.max_memo_characters,
+      txSigLimit: object?.tx_sig_limit,
+      txSizeCostPerByte: object?.tx_size_cost_per_byte,
+      sigVerifyCostEd25519: object?.sig_verify_cost_ed25519,
+      sigVerifyCostSecp256k1: object?.sig_verify_cost_secp256k1
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      max_memo_characters: isSet(object.max_memo_characters) ? BigInt(object.max_memo_characters.toString()) : BigInt(0),
+      tx_sig_limit: isSet(object.tx_sig_limit) ? BigInt(object.tx_sig_limit.toString()) : BigInt(0),
+      tx_size_cost_per_byte: isSet(object.tx_size_cost_per_byte) ? BigInt(object.tx_size_cost_per_byte.toString()) : BigInt(0),
+      sig_verify_cost_ed25519: isSet(object.sig_verify_cost_ed25519) ? BigInt(object.sig_verify_cost_ed25519.toString()) : BigInt(0),
+      sig_verify_cost_secp256k1: isSet(object.sig_verify_cost_secp256k1) ? BigInt(object.sig_verify_cost_secp256k1.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.max_memo_characters = message.maxMemoCharacters;
+    obj.tx_sig_limit = message.txSigLimit;
+    obj.tx_size_cost_per_byte = message.txSizeCostPerByte;
+    obj.sig_verify_cost_ed25519 = message.sigVerifyCostEd25519;
+    obj.sig_verify_cost_secp256k1 = message.sigVerifyCostSecp256k1;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

@@ -1,6 +1,8 @@
-import { Any, AnyAmino } from "../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { Any, AnySDKType } from "../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /** Source information used to create a Service Config */
 export interface SourceInfo {
   /** All files used during config generation. */
@@ -11,13 +13,8 @@ export interface SourceInfoProtoMsg {
   value: Uint8Array;
 }
 /** Source information used to create a Service Config */
-export interface SourceInfoAmino {
-  /** All files used during config generation. */
-  source_files: AnyAmino[];
-}
-export interface SourceInfoAminoMsg {
-  type: "/google.api.SourceInfo";
-  value: SourceInfoAmino;
+export interface SourceInfoSDKType {
+  source_files: AnySDKType[];
 }
 function createBaseSourceInfo(): SourceInfo {
   return {
@@ -49,10 +46,43 @@ export const SourceInfo = {
     }
     return message;
   },
+  fromJSON(object: any): SourceInfo {
+    const obj = createBaseSourceInfo();
+    if (Array.isArray(object?.sourceFiles)) obj.sourceFiles = object.sourceFiles.map((e: any) => Any.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: SourceInfo): JsonSafe<SourceInfo> {
+    const obj: any = {};
+    if (message.sourceFiles) {
+      obj.sourceFiles = message.sourceFiles.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.sourceFiles = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<SourceInfo>): SourceInfo {
     const message = createBaseSourceInfo();
     message.sourceFiles = object.sourceFiles?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: SourceInfoSDKType): SourceInfo {
+    return {
+      sourceFiles: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): SourceInfoSDKType {
+    return {
+      source_files: Array.isArray(object?.source_files) ? object.source_files.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: SourceInfo): SourceInfoSDKType {
+    const obj: any = {};
+    if (message.sourceFiles) {
+      obj.source_files = message.sourceFiles.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.source_files = [];
+    }
+    return obj;
   },
   fromAmino(object: SourceInfoAmino): SourceInfo {
     const message = createBaseSourceInfo();

@@ -1,6 +1,8 @@
-import { Params, ParamsAmino, ValidatorSigningInfo, ValidatorSigningInfoAmino } from "./slashing";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKType } from "./slashing.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.slashing.v1beta1";
 /** GenesisState defines the slashing module's genesis state. */
 export interface GenesisState {
   /** params defines all the paramaters of related to deposit. */
@@ -21,23 +23,10 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the slashing module's genesis state. */
-export interface GenesisStateAmino {
-  /** params defines all the paramaters of related to deposit. */
-  params: ParamsAmino;
-  /**
-   * signing_infos represents a map between validator addresses and their
-   * signing infos.
-   */
-  signing_infos: SigningInfoAmino[];
-  /**
-   * missed_blocks represents a map between validator addresses and their
-   * missed blocks.
-   */
-  missed_blocks: ValidatorMissedBlocksAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "cosmos-sdk/GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  params: ParamsSDKType;
+  signing_infos: SigningInfoSDKType[];
+  missed_blocks: ValidatorMissedBlocksSDKType[];
 }
 /** SigningInfo stores validator signing info of corresponding address. */
 export interface SigningInfo {
@@ -51,15 +40,9 @@ export interface SigningInfoProtoMsg {
   value: Uint8Array;
 }
 /** SigningInfo stores validator signing info of corresponding address. */
-export interface SigningInfoAmino {
-  /** address is the validator address. */
+export interface SigningInfoSDKType {
   address: string;
-  /** validator_signing_info represents the signing info of this validator. */
-  validator_signing_info: ValidatorSigningInfoAmino;
-}
-export interface SigningInfoAminoMsg {
-  type: "cosmos-sdk/SigningInfo";
-  value: SigningInfoAmino;
+  validator_signing_info: ValidatorSigningInfoSDKType;
 }
 /**
  * ValidatorMissedBlocks contains array of missed blocks of corresponding
@@ -79,15 +62,9 @@ export interface ValidatorMissedBlocksProtoMsg {
  * ValidatorMissedBlocks contains array of missed blocks of corresponding
  * address.
  */
-export interface ValidatorMissedBlocksAmino {
-  /** address is the validator address. */
+export interface ValidatorMissedBlocksSDKType {
   address: string;
-  /** missed_blocks is an array of missed blocks by the validator. */
-  missed_blocks: MissedBlockAmino[];
-}
-export interface ValidatorMissedBlocksAminoMsg {
-  type: "cosmos-sdk/ValidatorMissedBlocks";
-  value: ValidatorMissedBlocksAmino;
+  missed_blocks: MissedBlockSDKType[];
 }
 /** MissedBlock contains height and missed status as boolean. */
 export interface MissedBlock {
@@ -101,15 +78,9 @@ export interface MissedBlockProtoMsg {
   value: Uint8Array;
 }
 /** MissedBlock contains height and missed status as boolean. */
-export interface MissedBlockAmino {
-  /** index is the height at which the block was missed. */
-  index: string;
-  /** missed is the missed status. */
+export interface MissedBlockSDKType {
+  index: bigint;
   missed: boolean;
-}
-export interface MissedBlockAminoMsg {
-  type: "cosmos-sdk/MissedBlock";
-  value: MissedBlockAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -120,7 +91,6 @@ function createBaseGenesisState(): GenesisState {
 }
 export const GenesisState = {
   typeUrl: "/cosmos.slashing.v1beta1.GenesisState",
-  aminoType: "cosmos-sdk/GenesisState",
   encode(message: GenesisState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -156,12 +126,65 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.signingInfos)) obj.signingInfos = object.signingInfos.map((e: any) => SigningInfo.fromJSON(e));
+    if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => ValidatorMissedBlocks.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.signingInfos) {
+      obj.signingInfos = message.signingInfos.map(e => e ? SigningInfo.toJSON(e) : undefined);
+    } else {
+      obj.signingInfos = [];
+    }
+    if (message.missedBlocks) {
+      obj.missedBlocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toJSON(e) : undefined);
+    } else {
+      obj.missedBlocks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.signingInfos = object.signingInfos?.map(e => SigningInfo.fromPartial(e)) || [];
     message.missedBlocks = object.missedBlocks?.map(e => ValidatorMissedBlocks.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined,
+      signingInfos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDK(e)) : [],
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      signing_infos: Array.isArray(object?.signing_infos) ? object.signing_infos.map((e: any) => SigningInfo.fromSDKJSON(e)) : [],
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => ValidatorMissedBlocks.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    if (message.signingInfos) {
+      obj.signing_infos = message.signingInfos.map(e => e ? SigningInfo.toSDK(e) : undefined);
+    } else {
+      obj.signing_infos = [];
+    }
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? ValidatorMissedBlocks.toSDK(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -217,9 +240,8 @@ function createBaseSigningInfo(): SigningInfo {
 }
 export const SigningInfo = {
   typeUrl: "/cosmos.slashing.v1beta1.SigningInfo",
-  aminoType: "cosmos-sdk/SigningInfo",
   encode(message: SigningInfo, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     if (message.validatorSigningInfo !== undefined) {
@@ -247,11 +269,43 @@ export const SigningInfo = {
     }
     return message;
   },
+  fromJSON(object: any): SigningInfo {
+    const obj = createBaseSigningInfo();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (isSet(object.validatorSigningInfo)) obj.validatorSigningInfo = ValidatorSigningInfo.fromJSON(object.validatorSigningInfo);
+    return obj;
+  },
+  toJSON(message: SigningInfo): JsonSafe<SigningInfo> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    message.validatorSigningInfo !== undefined && (obj.validatorSigningInfo = message.validatorSigningInfo ? ValidatorSigningInfo.toJSON(message.validatorSigningInfo) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<SigningInfo>): SigningInfo {
     const message = createBaseSigningInfo();
     message.address = object.address ?? "";
-    message.validatorSigningInfo = object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null ? ValidatorSigningInfo.fromPartial(object.validatorSigningInfo) : undefined;
+    if (object.validatorSigningInfo !== undefined && object.validatorSigningInfo !== null) {
+      message.validatorSigningInfo = ValidatorSigningInfo.fromPartial(object.validatorSigningInfo);
+    }
     return message;
+  },
+  fromSDK(object: SigningInfoSDKType): SigningInfo {
+    return {
+      address: object?.address,
+      validatorSigningInfo: object.validator_signing_info ? ValidatorSigningInfo.fromSDK(object.validator_signing_info) : undefined
+    };
+  },
+  fromSDKJSON(object: any): SigningInfoSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      validator_signing_info: isSet(object.validator_signing_info) ? ValidatorSigningInfo.fromSDKJSON(object.validator_signing_info) : undefined
+    };
+  },
+  toSDK(message: SigningInfo): SigningInfoSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    message.validatorSigningInfo !== undefined && (obj.validator_signing_info = message.validatorSigningInfo ? ValidatorSigningInfo.toSDK(message.validatorSigningInfo) : undefined);
+    return obj;
   },
   fromAmino(object: SigningInfoAmino): SigningInfo {
     const message = createBaseSigningInfo();
@@ -299,9 +353,8 @@ function createBaseValidatorMissedBlocks(): ValidatorMissedBlocks {
 }
 export const ValidatorMissedBlocks = {
   typeUrl: "/cosmos.slashing.v1beta1.ValidatorMissedBlocks",
-  aminoType: "cosmos-sdk/ValidatorMissedBlocks",
   encode(message: ValidatorMissedBlocks, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.address !== "") {
+    if (message.address !== undefined) {
       writer.uint32(10).string(message.address);
     }
     for (const v of message.missedBlocks) {
@@ -329,11 +382,49 @@ export const ValidatorMissedBlocks = {
     }
     return message;
   },
+  fromJSON(object: any): ValidatorMissedBlocks {
+    const obj = createBaseValidatorMissedBlocks();
+    if (isSet(object.address)) obj.address = String(object.address);
+    if (Array.isArray(object?.missedBlocks)) obj.missedBlocks = object.missedBlocks.map((e: any) => MissedBlock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ValidatorMissedBlocks): JsonSafe<ValidatorMissedBlocks> {
+    const obj: any = {};
+    message.address !== undefined && (obj.address = message.address);
+    if (message.missedBlocks) {
+      obj.missedBlocks = message.missedBlocks.map(e => e ? MissedBlock.toJSON(e) : undefined);
+    } else {
+      obj.missedBlocks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ValidatorMissedBlocks>): ValidatorMissedBlocks {
     const message = createBaseValidatorMissedBlocks();
     message.address = object.address ?? "";
     message.missedBlocks = object.missedBlocks?.map(e => MissedBlock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ValidatorMissedBlocksSDKType): ValidatorMissedBlocks {
+    return {
+      address: object?.address,
+      missedBlocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ValidatorMissedBlocksSDKType {
+    return {
+      address: isSet(object.address) ? String(object.address) : "",
+      missed_blocks: Array.isArray(object?.missed_blocks) ? object.missed_blocks.map((e: any) => MissedBlock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ValidatorMissedBlocks): ValidatorMissedBlocksSDKType {
+    const obj: any = {};
+    obj.address = message.address;
+    if (message.missedBlocks) {
+      obj.missed_blocks = message.missedBlocks.map(e => e ? MissedBlock.toSDK(e) : undefined);
+    } else {
+      obj.missed_blocks = [];
+    }
+    return obj;
   },
   fromAmino(object: ValidatorMissedBlocksAmino): ValidatorMissedBlocks {
     const message = createBaseValidatorMissedBlocks();
@@ -383,12 +474,11 @@ function createBaseMissedBlock(): MissedBlock {
 }
 export const MissedBlock = {
   typeUrl: "/cosmos.slashing.v1beta1.MissedBlock",
-  aminoType: "cosmos-sdk/MissedBlock",
   encode(message: MissedBlock, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.index !== BigInt(0)) {
+    if (message.index !== undefined) {
       writer.uint32(8).int64(message.index);
     }
-    if (message.missed === true) {
+    if (message.missed !== undefined) {
       writer.uint32(16).bool(message.missed);
     }
     return writer;
@@ -413,11 +503,43 @@ export const MissedBlock = {
     }
     return message;
   },
+  fromJSON(object: any): MissedBlock {
+    const obj = createBaseMissedBlock();
+    if (isSet(object.index)) obj.index = BigInt(object.index.toString());
+    if (isSet(object.missed)) obj.missed = Boolean(object.missed);
+    return obj;
+  },
+  toJSON(message: MissedBlock): JsonSafe<MissedBlock> {
+    const obj: any = {};
+    message.index !== undefined && (obj.index = (message.index || BigInt(0)).toString());
+    message.missed !== undefined && (obj.missed = message.missed);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MissedBlock>): MissedBlock {
     const message = createBaseMissedBlock();
-    message.index = object.index !== undefined && object.index !== null ? BigInt(object.index.toString()) : BigInt(0);
+    if (object.index !== undefined && object.index !== null) {
+      message.index = BigInt(object.index.toString());
+    }
     message.missed = object.missed ?? false;
     return message;
+  },
+  fromSDK(object: MissedBlockSDKType): MissedBlock {
+    return {
+      index: object?.index,
+      missed: object?.missed
+    };
+  },
+  fromSDKJSON(object: any): MissedBlockSDKType {
+    return {
+      index: isSet(object.index) ? BigInt(object.index.toString()) : BigInt(0),
+      missed: isSet(object.missed) ? Boolean(object.missed) : false
+    };
+  },
+  toSDK(message: MissedBlock): MissedBlockSDKType {
+    const obj: any = {};
+    obj.index = message.index;
+    obj.missed = message.missed;
+    return obj;
   },
   fromAmino(object: MissedBlockAmino): MissedBlock {
     const message = createBaseMissedBlock();

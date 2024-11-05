@@ -1,3 +1,4 @@
+export const protobufPackage = "google.logging.type";
 /**
  * The severity of the event described in a log entry, expressed as one of the
  * standard severity levels listed below.  For your reference, the levels are
@@ -39,7 +40,7 @@ export enum LogSeverity {
   EMERGENCY = 800,
   UNRECOGNIZED = -1,
 }
-export const LogSeverityAmino = LogSeverity;
+export const LogSeveritySDKType = LogSeverity;
 export function logSeverityFromJSON(object: any): LogSeverity {
   switch (object) {
     case 0:

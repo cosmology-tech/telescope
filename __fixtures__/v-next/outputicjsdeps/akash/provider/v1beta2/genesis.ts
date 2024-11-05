@@ -1,6 +1,8 @@
-import { Provider, ProviderAmino } from "./provider";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Provider, ProviderSDKType } from "./provider.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial, Exact } from "../../../helpers.js";
+export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisState {
   providers: Provider[];
@@ -10,12 +12,8 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the basic genesis state used by provider module */
-export interface GenesisStateAmino {
-  providers: ProviderAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/akash.provider.v1beta2.GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  providers: ProviderSDKType[];
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -47,10 +45,43 @@ export const GenesisState = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GenesisState>): GenesisState {
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GenesisState>, I>>(object: I): GenesisState {
     const message = createBaseGenesisState();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -68,6 +99,12 @@ export const GenesisState = {
   },
   fromAminoMsg(object: GenesisStateAminoMsg): GenesisState {
     return GenesisState.fromAmino(object.value);
+  },
+  toAminoMsg(message: GenesisState): GenesisStateAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/genesis-state",
+      value: GenesisState.toAmino(message)
+    };
   },
   fromProtoMsg(message: GenesisStateProtoMsg): GenesisState {
     return GenesisState.decode(message.value);

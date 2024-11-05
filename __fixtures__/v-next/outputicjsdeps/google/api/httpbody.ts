@@ -1,6 +1,8 @@
-import { Any, AnyAmino } from "../protobuf/any";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../helpers";
+import { Any, AnySDKType } from "../protobuf/any.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, bytesFromBase64, base64FromBytes, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.api";
 /**
  * Message that represents an arbitrary HTTP body. It should only be used for
  * payload formats that can't be represented as JSON, such as raw binary or
@@ -106,20 +108,10 @@ export interface HttpBodyProtoMsg {
  * Use of this type only changes how the request and response bodies are
  * handled, all other features will continue to work unchanged.
  */
-export interface HttpBodyAmino {
-  /** The HTTP Content-Type header value specifying the content type of the body. */
+export interface HttpBodySDKType {
   content_type: string;
-  /** The HTTP request/response body as raw binary. */
-  data: string;
-  /**
-   * Application specific response metadata. Must be set in the first response
-   * for streaming APIs.
-   */
-  extensions: AnyAmino[];
-}
-export interface HttpBodyAminoMsg {
-  type: "/google.api.HttpBody";
-  value: HttpBodyAmino;
+  data: Uint8Array;
+  extensions: AnySDKType[];
 }
 function createBaseHttpBody(): HttpBody {
   return {
@@ -131,7 +123,7 @@ function createBaseHttpBody(): HttpBody {
 export const HttpBody = {
   typeUrl: "/google.api.HttpBody",
   encode(message: HttpBody, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.contentType !== "") {
+    if (message.contentType !== undefined) {
       writer.uint32(10).string(message.contentType);
     }
     if (message.data.length !== 0) {
@@ -165,12 +157,55 @@ export const HttpBody = {
     }
     return message;
   },
+  fromJSON(object: any): HttpBody {
+    const obj = createBaseHttpBody();
+    if (isSet(object.contentType)) obj.contentType = String(object.contentType);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (Array.isArray(object?.extensions)) obj.extensions = object.extensions.map((e: any) => Any.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: HttpBody): JsonSafe<HttpBody> {
+    const obj: any = {};
+    message.contentType !== undefined && (obj.contentType = message.contentType);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toJSON(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<HttpBody>): HttpBody {
     const message = createBaseHttpBody();
     message.contentType = object.contentType ?? "";
     message.data = object.data ?? new Uint8Array();
     message.extensions = object.extensions?.map(e => Any.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: HttpBodySDKType): HttpBody {
+    return {
+      contentType: object?.content_type,
+      data: object?.data,
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): HttpBodySDKType {
+    return {
+      content_type: isSet(object.content_type) ? String(object.content_type) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      extensions: Array.isArray(object?.extensions) ? object.extensions.map((e: any) => Any.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: HttpBody): HttpBodySDKType {
+    const obj: any = {};
+    obj.content_type = message.contentType;
+    obj.data = message.data;
+    if (message.extensions) {
+      obj.extensions = message.extensions.map(e => e ? Any.toSDK(e) : undefined);
+    } else {
+      obj.extensions = [];
+    }
+    return obj;
   },
   fromAmino(object: HttpBodyAmino): HttpBody {
     const message = createBaseHttpBody();

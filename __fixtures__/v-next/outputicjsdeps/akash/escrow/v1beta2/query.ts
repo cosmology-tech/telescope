@@ -1,7 +1,9 @@
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Account, AccountAmino, FractionalPayment, FractionalPaymentAmino } from "./types";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } from "./types.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.escrow.v1beta2";
 /** QueryAccountRequest is request type for the Query/Account RPC method */
 export interface QueryAccountsRequest {
   scope: string;
@@ -15,16 +17,12 @@ export interface QueryAccountsRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryAccountRequest is request type for the Query/Account RPC method */
-export interface QueryAccountsRequestAmino {
+export interface QueryAccountsRequestSDKType {
   scope: string;
   xid: string;
   owner: string;
   state: string;
-  pagination?: PageRequestAmino;
-}
-export interface QueryAccountsRequestAminoMsg {
-  type: "/akash.escrow.v1beta2.QueryAccountsRequest";
-  value: QueryAccountsRequestAmino;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryAccountsResponse {
@@ -36,13 +34,9 @@ export interface QueryAccountsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
-export interface QueryAccountsResponseAmino {
-  accounts: AccountAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryAccountsResponseAminoMsg {
-  type: "/akash.escrow.v1beta2.QueryAccountsResponse";
-  value: QueryAccountsResponseAmino;
+export interface QueryAccountsResponseSDKType {
+  accounts: AccountSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
 export interface QueryPaymentsRequest {
@@ -58,17 +52,13 @@ export interface QueryPaymentsRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryPaymentRequest is request type for the Query/Payment RPC method */
-export interface QueryPaymentsRequestAmino {
+export interface QueryPaymentsRequestSDKType {
   scope: string;
   xid: string;
   id: string;
   owner: string;
   state: string;
-  pagination?: PageRequestAmino;
-}
-export interface QueryPaymentsRequestAminoMsg {
-  type: "/akash.escrow.v1beta2.QueryPaymentsRequest";
-  value: QueryPaymentsRequestAmino;
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryPaymentsResponse {
@@ -80,13 +70,9 @@ export interface QueryPaymentsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
-export interface QueryPaymentsResponseAmino {
-  payments: FractionalPaymentAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryPaymentsResponseAminoMsg {
-  type: "/akash.escrow.v1beta2.QueryPaymentsResponse";
-  value: QueryPaymentsResponseAmino;
+export interface QueryPaymentsResponseSDKType {
+  payments: FractionalPaymentSDKType[];
+  pagination?: PageResponseSDKType;
 }
 function createBaseQueryAccountsRequest(): QueryAccountsRequest {
   return {
@@ -100,16 +86,16 @@ function createBaseQueryAccountsRequest(): QueryAccountsRequest {
 export const QueryAccountsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryAccountsRequest",
   encode(message: QueryAccountsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(26).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(34).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -146,14 +132,61 @@ export const QueryAccountsRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryAccountsRequest>): QueryAccountsRequest {
+  fromJSON(object: any): QueryAccountsRequest {
+    const obj = createBaseQueryAccountsRequest();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = String(object.state);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAccountsRequest): JsonSafe<QueryAccountsRequest> {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = message.state);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryAccountsRequest>, I>>(object: I): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAccountsRequestSDKType): QueryAccountsRequest {
+    return {
+      scope: object?.scope,
+      xid: object?.xid,
+      owner: object?.owner,
+      state: object?.state,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAccountsRequestSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? String(object.state) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAccountsRequest): QueryAccountsRequestSDKType {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAccountsRequestAmino): QueryAccountsRequest {
     const message = createBaseQueryAccountsRequest();
@@ -185,6 +218,12 @@ export const QueryAccountsRequest = {
   },
   fromAminoMsg(object: QueryAccountsRequestAminoMsg): QueryAccountsRequest {
     return QueryAccountsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountsRequest): QueryAccountsRequestAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/query-accounts-request",
+      value: QueryAccountsRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryAccountsRequestProtoMsg): QueryAccountsRequest {
     return QueryAccountsRequest.decode(message.value);
@@ -236,11 +275,51 @@ export const QueryAccountsResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryAccountsResponse>): QueryAccountsResponse {
+  fromJSON(object: any): QueryAccountsResponse {
+    const obj = createBaseQueryAccountsResponse();
+    if (Array.isArray(object?.accounts)) obj.accounts = object.accounts.map((e: any) => Account.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryAccountsResponse): JsonSafe<QueryAccountsResponse> {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toJSON(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryAccountsResponse>, I>>(object: I): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
     message.accounts = object.accounts?.map(e => Account.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryAccountsResponseSDKType): QueryAccountsResponse {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryAccountsResponseSDKType {
+    return {
+      accounts: Array.isArray(object?.accounts) ? object.accounts.map((e: any) => Account.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryAccountsResponse): QueryAccountsResponseSDKType {
+    const obj: any = {};
+    if (message.accounts) {
+      obj.accounts = message.accounts.map(e => e ? Account.toSDK(e) : undefined);
+    } else {
+      obj.accounts = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryAccountsResponseAmino): QueryAccountsResponse {
     const message = createBaseQueryAccountsResponse();
@@ -262,6 +341,12 @@ export const QueryAccountsResponse = {
   },
   fromAminoMsg(object: QueryAccountsResponseAminoMsg): QueryAccountsResponse {
     return QueryAccountsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryAccountsResponse): QueryAccountsResponseAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/query-accounts-response",
+      value: QueryAccountsResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryAccountsResponseProtoMsg): QueryAccountsResponse {
     return QueryAccountsResponse.decode(message.value);
@@ -289,19 +374,19 @@ function createBaseQueryPaymentsRequest(): QueryPaymentsRequest {
 export const QueryPaymentsRequest = {
   typeUrl: "/akash.escrow.v1beta2.QueryPaymentsRequest",
   encode(message: QueryPaymentsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.scope !== "") {
+    if (message.scope !== undefined) {
       writer.uint32(10).string(message.scope);
     }
-    if (message.xid !== "") {
+    if (message.xid !== undefined) {
       writer.uint32(18).string(message.xid);
     }
-    if (message.id !== "") {
+    if (message.id !== undefined) {
       writer.uint32(26).string(message.id);
     }
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(34).string(message.owner);
     }
-    if (message.state !== "") {
+    if (message.state !== undefined) {
       writer.uint32(42).string(message.state);
     }
     if (message.pagination !== undefined) {
@@ -341,15 +426,67 @@ export const QueryPaymentsRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryPaymentsRequest>): QueryPaymentsRequest {
+  fromJSON(object: any): QueryPaymentsRequest {
+    const obj = createBaseQueryPaymentsRequest();
+    if (isSet(object.scope)) obj.scope = String(object.scope);
+    if (isSet(object.xid)) obj.xid = String(object.xid);
+    if (isSet(object.id)) obj.id = String(object.id);
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.state)) obj.state = String(object.state);
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryPaymentsRequest): JsonSafe<QueryPaymentsRequest> {
+    const obj: any = {};
+    message.scope !== undefined && (obj.scope = message.scope);
+    message.xid !== undefined && (obj.xid = message.xid);
+    message.id !== undefined && (obj.id = message.id);
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.state !== undefined && (obj.state = message.state);
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryPaymentsRequest>, I>>(object: I): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
     message.scope = object.scope ?? "";
     message.xid = object.xid ?? "";
     message.id = object.id ?? "";
     message.owner = object.owner ?? "";
     message.state = object.state ?? "";
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryPaymentsRequestSDKType): QueryPaymentsRequest {
+    return {
+      scope: object?.scope,
+      xid: object?.xid,
+      id: object?.id,
+      owner: object?.owner,
+      state: object?.state,
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryPaymentsRequestSDKType {
+    return {
+      scope: isSet(object.scope) ? String(object.scope) : "",
+      xid: isSet(object.xid) ? String(object.xid) : "",
+      id: isSet(object.id) ? String(object.id) : "",
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      state: isSet(object.state) ? String(object.state) : "",
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryPaymentsRequest): QueryPaymentsRequestSDKType {
+    const obj: any = {};
+    obj.scope = message.scope;
+    obj.xid = message.xid;
+    obj.id = message.id;
+    obj.owner = message.owner;
+    obj.state = message.state;
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryPaymentsRequestAmino): QueryPaymentsRequest {
     const message = createBaseQueryPaymentsRequest();
@@ -385,6 +522,12 @@ export const QueryPaymentsRequest = {
   },
   fromAminoMsg(object: QueryPaymentsRequestAminoMsg): QueryPaymentsRequest {
     return QueryPaymentsRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryPaymentsRequest): QueryPaymentsRequestAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/query-payments-request",
+      value: QueryPaymentsRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryPaymentsRequestProtoMsg): QueryPaymentsRequest {
     return QueryPaymentsRequest.decode(message.value);
@@ -436,11 +579,51 @@ export const QueryPaymentsResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryPaymentsResponse>): QueryPaymentsResponse {
+  fromJSON(object: any): QueryPaymentsResponse {
+    const obj = createBaseQueryPaymentsResponse();
+    if (Array.isArray(object?.payments)) obj.payments = object.payments.map((e: any) => FractionalPayment.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryPaymentsResponse): JsonSafe<QueryPaymentsResponse> {
+    const obj: any = {};
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toJSON(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryPaymentsResponse>, I>>(object: I): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
     message.payments = object.payments?.map(e => FractionalPayment.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryPaymentsResponseSDKType): QueryPaymentsResponse {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryPaymentsResponseSDKType {
+    return {
+      payments: Array.isArray(object?.payments) ? object.payments.map((e: any) => FractionalPayment.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryPaymentsResponse): QueryPaymentsResponseSDKType {
+    const obj: any = {};
+    if (message.payments) {
+      obj.payments = message.payments.map(e => e ? FractionalPayment.toSDK(e) : undefined);
+    } else {
+      obj.payments = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryPaymentsResponseAmino): QueryPaymentsResponse {
     const message = createBaseQueryPaymentsResponse();
@@ -462,6 +645,12 @@ export const QueryPaymentsResponse = {
   },
   fromAminoMsg(object: QueryPaymentsResponseAminoMsg): QueryPaymentsResponse {
     return QueryPaymentsResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryPaymentsResponse): QueryPaymentsResponseAminoMsg {
+    return {
+      type: "akash/escrow/v1beta2/query-payments-response",
+      value: QueryPaymentsResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryPaymentsResponseProtoMsg): QueryPaymentsResponse {
     return QueryPaymentsResponse.decode(message.value);

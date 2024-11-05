@@ -1,3 +1,4 @@
+export const protobufPackage = "google.api";
 /**
  * Defines the supported values for `google.rpc.ErrorInfo.reason` for the
  * `googleapis.com` error domain. This error domain is reserved for [Service
@@ -393,7 +394,7 @@ export enum ErrorReason {
   ACCESS_TOKEN_TYPE_UNSUPPORTED = 19,
   UNRECOGNIZED = -1,
 }
-export const ErrorReasonAmino = ErrorReason;
+export const ErrorReasonSDKType = ErrorReason;
 export function errorReasonFromJSON(object: any): ErrorReason {
   switch (object) {
     case 0:

@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "tendermint.libs.bits";
 export interface BitArray {
   bits: bigint;
   elems: bigint[];
@@ -8,13 +10,9 @@ export interface BitArrayProtoMsg {
   typeUrl: "/tendermint.libs.bits.BitArray";
   value: Uint8Array;
 }
-export interface BitArrayAmino {
-  bits: string;
-  elems: string[];
-}
-export interface BitArrayAminoMsg {
-  type: "/tendermint.libs.bits.BitArray";
-  value: BitArrayAmino;
+export interface BitArraySDKType {
+  bits: bigint;
+  elems: bigint[];
 }
 function createBaseBitArray(): BitArray {
   return {
@@ -25,7 +23,7 @@ function createBaseBitArray(): BitArray {
 export const BitArray = {
   typeUrl: "/tendermint.libs.bits.BitArray",
   encode(message: BitArray, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.bits !== BigInt(0)) {
+    if (message.bits !== undefined) {
       writer.uint32(8).int64(message.bits);
     }
     writer.uint32(18).fork();
@@ -62,11 +60,51 @@ export const BitArray = {
     }
     return message;
   },
+  fromJSON(object: any): BitArray {
+    const obj = createBaseBitArray();
+    if (isSet(object.bits)) obj.bits = BigInt(object.bits.toString());
+    if (Array.isArray(object?.elems)) obj.elems = object.elems.map((e: any) => BigInt(e.toString()));
+    return obj;
+  },
+  toJSON(message: BitArray): JsonSafe<BitArray> {
+    const obj: any = {};
+    message.bits !== undefined && (obj.bits = (message.bits || BigInt(0)).toString());
+    if (message.elems) {
+      obj.elems = message.elems.map(e => (e || BigInt(0)).toString());
+    } else {
+      obj.elems = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BitArray>): BitArray {
     const message = createBaseBitArray();
-    message.bits = object.bits !== undefined && object.bits !== null ? BigInt(object.bits.toString()) : BigInt(0);
+    if (object.bits !== undefined && object.bits !== null) {
+      message.bits = BigInt(object.bits.toString());
+    }
     message.elems = object.elems?.map(e => BigInt(e.toString())) || [];
     return message;
+  },
+  fromSDK(object: BitArraySDKType): BitArray {
+    return {
+      bits: object?.bits,
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): BitArraySDKType {
+    return {
+      bits: isSet(object.bits) ? BigInt(object.bits.toString()) : BigInt(0),
+      elems: Array.isArray(object?.elems) ? object.elems.map((e: any) => BigInt(e.toString())) : []
+    };
+  },
+  toSDK(message: BitArray): BitArraySDKType {
+    const obj: any = {};
+    obj.bits = message.bits;
+    if (message.elems) {
+      obj.elems = message.elems.map(e => e);
+    } else {
+      obj.elems = [];
+    }
+    return obj;
   },
   fromAmino(object: BitArrayAmino): BitArray {
     const message = createBaseBitArray();

@@ -1,7 +1,9 @@
-import { Timestamp } from "../../../protobuf/timestamp";
-import { Distribution, DistributionAmino } from "./distribution";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp } from "../../../../helpers";
+import { Timestamp, TimestampSDKType } from "../../../protobuf/timestamp.js";
+import { Distribution, DistributionSDKType } from "./distribution.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, toTimestamp, fromTimestamp, isObject } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.servicecontrol.v1";
 export interface MetricValue_LabelsEntry {
   key: string;
   value: string;
@@ -10,13 +12,9 @@ export interface MetricValue_LabelsEntryProtoMsg {
   typeUrl: string;
   value: Uint8Array;
 }
-export interface MetricValue_LabelsEntryAmino {
+export interface MetricValue_LabelsEntrySDKType {
   key: string;
   value: string;
-}
-export interface MetricValue_LabelsEntryAminoMsg {
-  type: string;
-  value: MetricValue_LabelsEntryAmino;
 }
 /** Represents a single metric value. */
 export interface MetricValue {
@@ -59,44 +57,17 @@ export interface MetricValueProtoMsg {
   value: Uint8Array;
 }
 /** Represents a single metric value. */
-export interface MetricValueAmino {
-  /**
-   * The labels describing the metric value.
-   * See comments on [google.api.servicecontrol.v1.Operation.labels][google.api.servicecontrol.v1.Operation.labels] for
-   * the overriding relationship.
-   * Note that this map must not contain monitored resource labels.
-   */
+export interface MetricValueSDKType {
   labels: {
     [key: string]: string;
   };
-  /**
-   * The start of the time period over which this metric value's measurement
-   * applies. The time period has different semantics for different metric
-   * types (cumulative, delta, and gauge). See the metric definition
-   * documentation in the service configuration for details. If not specified,
-   * [google.api.servicecontrol.v1.Operation.start_time][google.api.servicecontrol.v1.Operation.start_time] will be used.
-   */
-  start_time?: string;
-  /**
-   * The end of the time period over which this metric value's measurement
-   * applies.  If not specified,
-   * [google.api.servicecontrol.v1.Operation.end_time][google.api.servicecontrol.v1.Operation.end_time] will be used.
-   */
-  end_time?: string;
-  /** A boolean value. */
+  start_time?: Date;
+  end_time?: Date;
   bool_value?: boolean;
-  /** A signed 64-bit integer value. */
-  int64_value?: string;
-  /** A double precision floating point value. */
+  int64_value?: bigint;
   double_value?: number;
-  /** A text string value. */
   string_value?: string;
-  /** A distribution value. */
-  distribution_value?: DistributionAmino;
-}
-export interface MetricValueAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValue";
-  value: MetricValueAmino;
+  distribution_value?: DistributionSDKType;
 }
 /**
  * Represents a set of metric values in the same metric.
@@ -118,15 +89,9 @@ export interface MetricValueSetProtoMsg {
  * Each metric value in the set should have a unique combination of start time,
  * end time, and label values.
  */
-export interface MetricValueSetAmino {
-  /** The metric name defined in the service configuration. */
+export interface MetricValueSetSDKType {
   metric_name: string;
-  /** The values in this metric. */
-  metric_values: MetricValueAmino[];
-}
-export interface MetricValueSetAminoMsg {
-  type: "/google.api.servicecontrol.v1.MetricValueSet";
-  value: MetricValueSetAmino;
+  metric_values: MetricValueSDKType[];
 }
 function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
   return {
@@ -136,10 +101,10 @@ function createBaseMetricValue_LabelsEntry(): MetricValue_LabelsEntry {
 }
 export const MetricValue_LabelsEntry = {
   encode(message: MetricValue_LabelsEntry, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(10).string(message.key);
     }
-    if (message.value !== "") {
+    if (message.value !== undefined) {
       writer.uint32(18).string(message.value);
     }
     return writer;
@@ -164,11 +129,41 @@ export const MetricValue_LabelsEntry = {
     }
     return message;
   },
+  fromJSON(object: any): MetricValue_LabelsEntry {
+    const obj = createBaseMetricValue_LabelsEntry();
+    if (isSet(object.key)) obj.key = String(object.key);
+    if (isSet(object.value)) obj.value = String(object.value);
+    return obj;
+  },
+  toJSON(message: MetricValue_LabelsEntry): JsonSafe<MetricValue_LabelsEntry> {
+    const obj: any = {};
+    message.key !== undefined && (obj.key = message.key);
+    message.value !== undefined && (obj.value = message.value);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MetricValue_LabelsEntry>): MetricValue_LabelsEntry {
     const message = createBaseMetricValue_LabelsEntry();
     message.key = object.key ?? "";
     message.value = object.value ?? "";
     return message;
+  },
+  fromSDK(object: MetricValue_LabelsEntrySDKType): MetricValue_LabelsEntry {
+    return {
+      key: object?.key,
+      value: object?.value
+    };
+  },
+  fromSDKJSON(object: any): MetricValue_LabelsEntrySDKType {
+    return {
+      key: isSet(object.key) ? String(object.key) : "",
+      value: isSet(object.value) ? String(object.value) : ""
+    };
+  },
+  toSDK(message: MetricValue_LabelsEntry): MetricValue_LabelsEntrySDKType {
+    const obj: any = {};
+    obj.key = message.key;
+    obj.value = message.value;
+    return obj;
   },
   fromAmino(object: MetricValue_LabelsEntryAmino): MetricValue_LabelsEntry {
     const message = createBaseMetricValue_LabelsEntry();
@@ -281,6 +276,42 @@ export const MetricValue = {
     }
     return message;
   },
+  fromJSON(object: any): MetricValue {
+    const obj = createBaseMetricValue();
+    if (isObject(object.labels)) obj.labels = Object.entries(object.labels).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
+      acc[key] = String(value);
+      return acc;
+    }, {});
+    if (isSet(object.startTime)) obj.startTime = new Date(object.startTime);
+    if (isSet(object.endTime)) obj.endTime = new Date(object.endTime);
+    if (isSet(object.boolValue)) obj.boolValue = Boolean(object.boolValue);
+    if (isSet(object.int64Value)) obj.int64Value = BigInt(object.int64Value.toString());
+    if (isSet(object.doubleValue)) obj.doubleValue = Number(object.doubleValue);
+    if (isSet(object.stringValue)) obj.stringValue = String(object.stringValue);
+    if (isSet(object.distributionValue)) obj.distributionValue = Distribution.fromJSON(object.distributionValue);
+    return obj;
+  },
+  toJSON(message: MetricValue): JsonSafe<MetricValue> {
+    const obj: any = {};
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    message.startTime !== undefined && (obj.startTime = message.startTime.toISOString());
+    message.endTime !== undefined && (obj.endTime = message.endTime.toISOString());
+    message.boolValue !== undefined && (obj.boolValue = message.boolValue);
+    if (message.int64Value !== undefined) {
+      obj.int64Value = message.int64Value.toString();
+    }
+    message.doubleValue !== undefined && (obj.doubleValue = message.doubleValue);
+    message.stringValue !== undefined && (obj.stringValue = message.stringValue);
+    message.distributionValue !== undefined && (obj.distributionValue = message.distributionValue ? Distribution.toJSON(message.distributionValue) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MetricValue>): MetricValue {
     const message = createBaseMetricValue();
     message.labels = Object.entries(object.labels ?? {}).reduce<{
@@ -294,11 +325,66 @@ export const MetricValue = {
     message.startTime = object.startTime ?? undefined;
     message.endTime = object.endTime ?? undefined;
     message.boolValue = object.boolValue ?? undefined;
-    message.int64Value = object.int64Value !== undefined && object.int64Value !== null ? BigInt(object.int64Value.toString()) : undefined;
+    if (object.int64Value !== undefined && object.int64Value !== null) {
+      message.int64Value = BigInt(object.int64Value.toString());
+    }
     message.doubleValue = object.doubleValue ?? undefined;
     message.stringValue = object.stringValue ?? undefined;
-    message.distributionValue = object.distributionValue !== undefined && object.distributionValue !== null ? Distribution.fromPartial(object.distributionValue) : undefined;
+    if (object.distributionValue !== undefined && object.distributionValue !== null) {
+      message.distributionValue = Distribution.fromPartial(object.distributionValue);
+    }
     return message;
+  },
+  fromSDK(object: MetricValueSDKType): MetricValue {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      startTime: object.start_time ?? undefined,
+      endTime: object.end_time ?? undefined,
+      boolValue: object?.bool_value,
+      int64Value: object?.int64_value,
+      doubleValue: object?.double_value,
+      stringValue: object?.string_value,
+      distributionValue: object.distribution_value ? Distribution.fromSDK(object.distribution_value) : undefined
+    };
+  },
+  fromSDKJSON(object: any): MetricValueSDKType {
+    return {
+      labels: isObject(object.labels) ? Object.entries(object.labels).reduce<{
+        [key: string]: string;
+      }>((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {}) : {},
+      start_time: isSet(object.start_time) ? new Date(object.start_time) : undefined,
+      end_time: isSet(object.end_time) ? new Date(object.end_time) : undefined,
+      bool_value: isSet(object.bool_value) ? Boolean(object.bool_value) : undefined,
+      int64_value: isSet(object.int64_value) ? BigInt(object.int64_value.toString()) : undefined,
+      double_value: isSet(object.double_value) ? Number(object.double_value) : undefined,
+      string_value: isSet(object.string_value) ? String(object.string_value) : undefined,
+      distribution_value: isSet(object.distribution_value) ? Distribution.fromSDKJSON(object.distribution_value) : undefined
+    };
+  },
+  toSDK(message: MetricValue): MetricValueSDKType {
+    const obj: any = {};
+    obj.labels = {};
+    if (message.labels) {
+      Object.entries(message.labels).forEach(([k, v]) => {
+        obj.labels[k] = v;
+      });
+    }
+    message.startTime !== undefined && (obj.start_time = message.startTime ?? undefined);
+    message.endTime !== undefined && (obj.end_time = message.endTime ?? undefined);
+    obj.bool_value = message.boolValue;
+    obj.int64_value = message.int64Value;
+    obj.double_value = message.doubleValue;
+    obj.string_value = message.stringValue;
+    message.distributionValue !== undefined && (obj.distribution_value = message.distributionValue ? Distribution.toSDK(message.distributionValue) : undefined);
+    return obj;
   },
   fromAmino(object: MetricValueAmino): MetricValue {
     const message = createBaseMetricValue();
@@ -375,7 +461,7 @@ function createBaseMetricValueSet(): MetricValueSet {
 export const MetricValueSet = {
   typeUrl: "/google.api.servicecontrol.v1.MetricValueSet",
   encode(message: MetricValueSet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.metricName !== "") {
+    if (message.metricName !== undefined) {
       writer.uint32(10).string(message.metricName);
     }
     for (const v of message.metricValues) {
@@ -403,11 +489,49 @@ export const MetricValueSet = {
     }
     return message;
   },
+  fromJSON(object: any): MetricValueSet {
+    const obj = createBaseMetricValueSet();
+    if (isSet(object.metricName)) obj.metricName = String(object.metricName);
+    if (Array.isArray(object?.metricValues)) obj.metricValues = object.metricValues.map((e: any) => MetricValue.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: MetricValueSet): JsonSafe<MetricValueSet> {
+    const obj: any = {};
+    message.metricName !== undefined && (obj.metricName = message.metricName);
+    if (message.metricValues) {
+      obj.metricValues = message.metricValues.map(e => e ? MetricValue.toJSON(e) : undefined);
+    } else {
+      obj.metricValues = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<MetricValueSet>): MetricValueSet {
     const message = createBaseMetricValueSet();
     message.metricName = object.metricName ?? "";
     message.metricValues = object.metricValues?.map(e => MetricValue.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: MetricValueSetSDKType): MetricValueSet {
+    return {
+      metricName: object?.metric_name,
+      metricValues: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): MetricValueSetSDKType {
+    return {
+      metric_name: isSet(object.metric_name) ? String(object.metric_name) : "",
+      metric_values: Array.isArray(object?.metric_values) ? object.metric_values.map((e: any) => MetricValue.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: MetricValueSet): MetricValueSetSDKType {
+    const obj: any = {};
+    obj.metric_name = message.metricName;
+    if (message.metricValues) {
+      obj.metric_values = message.metricValues.map(e => e ? MetricValue.toSDK(e) : undefined);
+    } else {
+      obj.metric_values = [];
+    }
+    return obj;
   },
   fromAmino(object: MetricValueSetAmino): MetricValueSet {
     const message = createBaseMetricValueSet();

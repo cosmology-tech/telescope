@@ -1,6 +1,8 @@
-import { FeeToken, FeeTokenAmino } from "./feetoken";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.txfees.v1beta1";
 /**
  * UpdateFeeTokenProposal is a gov Content type for adding a new whitelisted fee
  * token. It must specify a denom along with gamm pool ID to use as a spot price
@@ -24,14 +26,10 @@ export interface UpdateFeeTokenProposalProtoMsg {
  * used to update the Pool to associate with the denom. If Pool ID is set to 0,
  * it will remove the denom from the whitelisted set.
  */
-export interface UpdateFeeTokenProposalAmino {
+export interface UpdateFeeTokenProposalSDKType {
   title: string;
   description: string;
-  feetoken: FeeTokenAmino;
-}
-export interface UpdateFeeTokenProposalAminoMsg {
-  type: "osmosis/txfees/update-fee-token-proposal";
-  value: UpdateFeeTokenProposalAmino;
+  feetoken: FeeTokenSDKType;
 }
 function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
   return {
@@ -42,12 +40,11 @@ function createBaseUpdateFeeTokenProposal(): UpdateFeeTokenProposal {
 }
 export const UpdateFeeTokenProposal = {
   typeUrl: "/osmosis.txfees.v1beta1.UpdateFeeTokenProposal",
-  aminoType: "osmosis/txfees/update-fee-token-proposal",
   encode(message: UpdateFeeTokenProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.feetoken !== undefined) {
@@ -78,12 +75,49 @@ export const UpdateFeeTokenProposal = {
     }
     return message;
   },
+  fromJSON(object: any): UpdateFeeTokenProposal {
+    const obj = createBaseUpdateFeeTokenProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.feetoken)) obj.feetoken = FeeToken.fromJSON(object.feetoken);
+    return obj;
+  },
+  toJSON(message: UpdateFeeTokenProposal): JsonSafe<UpdateFeeTokenProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toJSON(message.feetoken) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<UpdateFeeTokenProposal>): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.feetoken = object.feetoken !== undefined && object.feetoken !== null ? FeeToken.fromPartial(object.feetoken) : undefined;
+    if (object.feetoken !== undefined && object.feetoken !== null) {
+      message.feetoken = FeeToken.fromPartial(object.feetoken);
+    }
     return message;
+  },
+  fromSDK(object: UpdateFeeTokenProposalSDKType): UpdateFeeTokenProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      feetoken: object.feetoken ? FeeToken.fromSDK(object.feetoken) : undefined
+    };
+  },
+  fromSDKJSON(object: any): UpdateFeeTokenProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      feetoken: isSet(object.feetoken) ? FeeToken.fromSDKJSON(object.feetoken) : undefined
+    };
+  },
+  toSDK(message: UpdateFeeTokenProposal): UpdateFeeTokenProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    message.feetoken !== undefined && (obj.feetoken = message.feetoken ? FeeToken.toSDK(message.feetoken) : undefined);
+    return obj;
   },
   fromAmino(object: UpdateFeeTokenProposalAmino): UpdateFeeTokenProposal {
     const message = createBaseUpdateFeeTokenProposal();

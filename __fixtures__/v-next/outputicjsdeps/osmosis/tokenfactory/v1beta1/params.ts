@@ -1,6 +1,8 @@
-import { Coin, CoinAmino } from "../../../cosmos/base/v1beta1/coin";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { DeepPartial } from "../../../helpers.js";
+export const protobufPackage = "osmosis.tokenfactory.v1beta1";
 /** Params defines the parameters for the tokenfactory module. */
 export interface Params {
   denomCreationFee: Coin[];
@@ -10,12 +12,8 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the parameters for the tokenfactory module. */
-export interface ParamsAmino {
-  denom_creation_fee: CoinAmino[];
-}
-export interface ParamsAminoMsg {
-  type: "osmosis/tokenfactory/params";
-  value: ParamsAmino;
+export interface ParamsSDKType {
+  denom_creation_fee: CoinSDKType[];
 }
 function createBaseParams(): Params {
   return {
@@ -24,7 +22,6 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/osmosis.tokenfactory.v1beta1.Params",
-  aminoType: "osmosis/tokenfactory/params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.denomCreationFee) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -48,10 +45,43 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (Array.isArray(object?.denomCreationFee)) obj.denomCreationFee = object.denomCreationFee.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    if (message.denomCreationFee) {
+      obj.denomCreationFee = message.denomCreationFee.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.denomCreationFee = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.denomCreationFee = object.denomCreationFee?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      denomCreationFee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      denom_creation_fee: Array.isArray(object?.denom_creation_fee) ? object.denom_creation_fee.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    if (message.denomCreationFee) {
+      obj.denom_creation_fee = message.denomCreationFee.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.denom_creation_fee = [];
+    }
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

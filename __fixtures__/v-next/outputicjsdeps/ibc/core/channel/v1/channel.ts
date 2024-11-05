@@ -1,6 +1,8 @@
-import { Height, HeightAmino } from "../../client/v1/client";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers";
+import { Height, HeightSDKType } from "../../client/v1/client.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial, bytesFromBase64, base64FromBytes } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "ibc.core.channel.v1";
 /**
  * State defines if a channel is in one of the following states:
  * CLOSED, INIT, TRYOPEN, OPEN or UNINITIALIZED.
@@ -24,7 +26,7 @@ export enum State {
   STATE_CLOSED = 4,
   UNRECOGNIZED = -1,
 }
-export const StateAmino = State;
+export const StateSDKType = State;
 export function stateFromJSON(object: any): State {
   switch (object) {
     case 0:
@@ -78,7 +80,7 @@ export enum Order {
   ORDER_ORDERED = 2,
   UNRECOGNIZED = -1,
 }
-export const OrderAmino = Order;
+export const OrderSDKType = Order;
 export function orderFromJSON(object: any): Order {
   switch (object) {
     case 0:
@@ -138,24 +140,12 @@ export interface ChannelProtoMsg {
  * modules on separate blockchains, which has at least one end capable of
  * sending packets and one end capable of receiving packets.
  */
-export interface ChannelAmino {
-  /** current state of the channel end */
+export interface ChannelSDKType {
   state: State;
-  /** whether the channel is ordered or unordered */
   ordering: Order;
-  /** counterparty channel end */
-  counterparty: CounterpartyAmino;
-  /**
-   * list of connection identifiers, in order, along which packets sent on
-   * this channel will travel
-   */
+  counterparty: CounterpartySDKType;
   connection_hops: string[];
-  /** opaque channel version, which is agreed upon during the handshake */
   version: string;
-}
-export interface ChannelAminoMsg {
-  type: "cosmos-sdk/Channel";
-  value: ChannelAmino;
 }
 /**
  * IdentifiedChannel defines a channel with additional port and channel
@@ -188,28 +178,14 @@ export interface IdentifiedChannelProtoMsg {
  * IdentifiedChannel defines a channel with additional port and channel
  * identifier fields.
  */
-export interface IdentifiedChannelAmino {
-  /** current state of the channel end */
+export interface IdentifiedChannelSDKType {
   state: State;
-  /** whether the channel is ordered or unordered */
   ordering: Order;
-  /** counterparty channel end */
-  counterparty: CounterpartyAmino;
-  /**
-   * list of connection identifiers, in order, along which packets sent on
-   * this channel will travel
-   */
+  counterparty: CounterpartySDKType;
   connection_hops: string[];
-  /** opaque channel version, which is agreed upon during the handshake */
   version: string;
-  /** port identifier */
   port_id: string;
-  /** channel identifier */
   channel_id: string;
-}
-export interface IdentifiedChannelAminoMsg {
-  type: "cosmos-sdk/IdentifiedChannel";
-  value: IdentifiedChannelAmino;
 }
 /** Counterparty defines a channel end counterparty */
 export interface Counterparty {
@@ -223,15 +199,9 @@ export interface CounterpartyProtoMsg {
   value: Uint8Array;
 }
 /** Counterparty defines a channel end counterparty */
-export interface CounterpartyAmino {
-  /** port on the counterparty chain which owns the other end of the channel. */
+export interface CounterpartySDKType {
   port_id: string;
-  /** channel end on the counterparty chain */
   channel_id: string;
-}
-export interface CounterpartyAminoMsg {
-  type: "cosmos-sdk/Counterparty";
-  value: CounterpartyAmino;
 }
 /** Packet defines a type that carries data across different chains through IBC */
 export interface Packet {
@@ -261,31 +231,15 @@ export interface PacketProtoMsg {
   value: Uint8Array;
 }
 /** Packet defines a type that carries data across different chains through IBC */
-export interface PacketAmino {
-  /**
-   * number corresponds to the order of sends and receives, where a Packet
-   * with an earlier sequence number must be sent and received before a Packet
-   * with a later sequence number.
-   */
-  sequence: string;
-  /** identifies the port on the sending chain. */
+export interface PacketSDKType {
+  sequence: bigint;
   source_port: string;
-  /** identifies the channel end on the sending chain. */
   source_channel: string;
-  /** identifies the port on the receiving chain. */
   destination_port: string;
-  /** identifies the channel end on the receiving chain. */
   destination_channel: string;
-  /** actual opaque bytes transferred directly to the application module */
-  data: string;
-  /** block height after which the packet times out */
-  timeout_height: HeightAmino;
-  /** block timestamp (in nanoseconds) after which the packet times out */
-  timeout_timestamp: string;
-}
-export interface PacketAminoMsg {
-  type: "cosmos-sdk/Packet";
-  value: PacketAmino;
+  data: Uint8Array;
+  timeout_height: HeightSDKType;
+  timeout_timestamp: bigint;
 }
 /**
  * PacketState defines the generic type necessary to retrieve and store
@@ -313,19 +267,11 @@ export interface PacketStateProtoMsg {
  * Caller is responsible for knowing the context necessary to interpret this
  * state as a commitment, acknowledgement, or a receipt.
  */
-export interface PacketStateAmino {
-  /** channel port identifier. */
+export interface PacketStateSDKType {
   port_id: string;
-  /** channel unique identifier. */
   channel_id: string;
-  /** packet sequence. */
-  sequence: string;
-  /** embedded data that represents packet state. */
-  data: string;
-}
-export interface PacketStateAminoMsg {
-  type: "cosmos-sdk/PacketState";
-  value: PacketStateAmino;
+  sequence: bigint;
+  data: Uint8Array;
 }
 /**
  * Acknowledgement is the recommended acknowledgement format to be used by
@@ -353,13 +299,9 @@ export interface AcknowledgementProtoMsg {
  * `0xaa` (result) or `0xb2` (error). Implemented as defined by ICS:
  * https://github.com/cosmos/ibc/tree/master/spec/core/ics-004-channel-and-packet-semantics#acknowledgement-envelope
  */
-export interface AcknowledgementAmino {
-  result?: string;
+export interface AcknowledgementSDKType {
+  result?: Uint8Array;
   error?: string;
-}
-export interface AcknowledgementAminoMsg {
-  type: "cosmos-sdk/Acknowledgement";
-  value: AcknowledgementAmino;
 }
 function createBaseChannel(): Channel {
   return {
@@ -372,7 +314,6 @@ function createBaseChannel(): Channel {
 }
 export const Channel = {
   typeUrl: "/ibc.core.channel.v1.Channel",
-  aminoType: "cosmos-sdk/Channel",
   encode(message: Channel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
@@ -386,7 +327,7 @@ export const Channel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(42).string(message.version);
     }
     return writer;
@@ -420,14 +361,69 @@ export const Channel = {
     }
     return message;
   },
+  fromJSON(object: any): Channel {
+    const obj = createBaseChannel();
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (Array.isArray(object?.connectionHops)) obj.connectionHops = object.connectionHops.map((e: any) => String(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    return obj;
+  },
+  toJSON(message: Channel): JsonSafe<Channel> {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
+    if (message.connectionHops) {
+      obj.connectionHops = message.connectionHops.map(e => e);
+    } else {
+      obj.connectionHops = [];
+    }
+    message.version !== undefined && (obj.version = message.version);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Channel>): Channel {
     const message = createBaseChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     return message;
+  },
+  fromSDK(object: ChannelSDKType): Channel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: object?.version
+    };
+  },
+  fromSDKJSON(object: any): ChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : ""
+    };
+  },
+  toSDK(message: Channel): ChannelSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+    obj.version = message.version;
+    return obj;
   },
   fromAmino(object: ChannelAmino): Channel {
     const message = createBaseChannel();
@@ -494,7 +490,6 @@ function createBaseIdentifiedChannel(): IdentifiedChannel {
 }
 export const IdentifiedChannel = {
   typeUrl: "/ibc.core.channel.v1.IdentifiedChannel",
-  aminoType: "cosmos-sdk/IdentifiedChannel",
   encode(message: IdentifiedChannel, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.state !== 0) {
       writer.uint32(8).int32(message.state);
@@ -508,13 +503,13 @@ export const IdentifiedChannel = {
     for (const v of message.connectionHops) {
       writer.uint32(34).string(v!);
     }
-    if (message.version !== "") {
+    if (message.version !== undefined) {
       writer.uint32(42).string(message.version);
     }
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(50).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(58).string(message.channelId);
     }
     return writer;
@@ -554,16 +549,81 @@ export const IdentifiedChannel = {
     }
     return message;
   },
+  fromJSON(object: any): IdentifiedChannel {
+    const obj = createBaseIdentifiedChannel();
+    if (isSet(object.state)) obj.state = stateFromJSON(object.state);
+    if (isSet(object.ordering)) obj.ordering = orderFromJSON(object.ordering);
+    if (isSet(object.counterparty)) obj.counterparty = Counterparty.fromJSON(object.counterparty);
+    if (Array.isArray(object?.connectionHops)) obj.connectionHops = object.connectionHops.map((e: any) => String(e));
+    if (isSet(object.version)) obj.version = String(object.version);
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
+  },
+  toJSON(message: IdentifiedChannel): JsonSafe<IdentifiedChannel> {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toJSON(message.counterparty) : undefined);
+    if (message.connectionHops) {
+      obj.connectionHops = message.connectionHops.map(e => e);
+    } else {
+      obj.connectionHops = [];
+    }
+    message.version !== undefined && (obj.version = message.version);
+    message.portId !== undefined && (obj.portId = message.portId);
+    message.channelId !== undefined && (obj.channelId = message.channelId);
+    return obj;
+  },
   fromPartial(object: DeepPartial<IdentifiedChannel>): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
     message.state = object.state ?? 0;
     message.ordering = object.ordering ?? 0;
-    message.counterparty = object.counterparty !== undefined && object.counterparty !== null ? Counterparty.fromPartial(object.counterparty) : undefined;
+    if (object.counterparty !== undefined && object.counterparty !== null) {
+      message.counterparty = Counterparty.fromPartial(object.counterparty);
+    }
     message.connectionHops = object.connectionHops?.map(e => e) || [];
     message.version = object.version ?? "";
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+  fromSDK(object: IdentifiedChannelSDKType): IdentifiedChannel {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: object.counterparty ? Counterparty.fromSDK(object.counterparty) : undefined,
+      connectionHops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => e) : [],
+      version: object?.version,
+      portId: object?.port_id,
+      channelId: object?.channel_id
+    };
+  },
+  fromSDKJSON(object: any): IdentifiedChannelSDKType {
+    return {
+      state: isSet(object.state) ? stateFromJSON(object.state) : -1,
+      ordering: isSet(object.ordering) ? orderFromJSON(object.ordering) : -1,
+      counterparty: isSet(object.counterparty) ? Counterparty.fromSDKJSON(object.counterparty) : undefined,
+      connection_hops: Array.isArray(object?.connection_hops) ? object.connection_hops.map((e: any) => String(e)) : [],
+      version: isSet(object.version) ? String(object.version) : "",
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
+  },
+  toSDK(message: IdentifiedChannel): IdentifiedChannelSDKType {
+    const obj: any = {};
+    message.state !== undefined && (obj.state = stateToJSON(message.state));
+    message.ordering !== undefined && (obj.ordering = orderToJSON(message.ordering));
+    message.counterparty !== undefined && (obj.counterparty = message.counterparty ? Counterparty.toSDK(message.counterparty) : undefined);
+    if (message.connectionHops) {
+      obj.connection_hops = message.connectionHops.map(e => e);
+    } else {
+      obj.connection_hops = [];
+    }
+    obj.version = message.version;
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    return obj;
   },
   fromAmino(object: IdentifiedChannelAmino): IdentifiedChannel {
     const message = createBaseIdentifiedChannel();
@@ -633,12 +693,11 @@ function createBaseCounterparty(): Counterparty {
 }
 export const Counterparty = {
   typeUrl: "/ibc.core.channel.v1.Counterparty",
-  aminoType: "cosmos-sdk/Counterparty",
   encode(message: Counterparty, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(18).string(message.channelId);
     }
     return writer;
@@ -663,11 +722,41 @@ export const Counterparty = {
     }
     return message;
   },
+  fromJSON(object: any): Counterparty {
+    const obj = createBaseCounterparty();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    return obj;
+  },
+  toJSON(message: Counterparty): JsonSafe<Counterparty> {
+    const obj: any = {};
+    message.portId !== undefined && (obj.portId = message.portId);
+    message.channelId !== undefined && (obj.channelId = message.channelId);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Counterparty>): Counterparty {
     const message = createBaseCounterparty();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
     return message;
+  },
+  fromSDK(object: CounterpartySDKType): Counterparty {
+    return {
+      portId: object?.port_id,
+      channelId: object?.channel_id
+    };
+  },
+  fromSDKJSON(object: any): CounterpartySDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : ""
+    };
+  },
+  toSDK(message: Counterparty): CounterpartySDKType {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    return obj;
   },
   fromAmino(object: CounterpartyAmino): Counterparty {
     const message = createBaseCounterparty();
@@ -721,21 +810,20 @@ function createBasePacket(): Packet {
 }
 export const Packet = {
   typeUrl: "/ibc.core.channel.v1.Packet",
-  aminoType: "cosmos-sdk/Packet",
   encode(message: Packet, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(8).uint64(message.sequence);
     }
-    if (message.sourcePort !== "") {
+    if (message.sourcePort !== undefined) {
       writer.uint32(18).string(message.sourcePort);
     }
-    if (message.sourceChannel !== "") {
+    if (message.sourceChannel !== undefined) {
       writer.uint32(26).string(message.sourceChannel);
     }
-    if (message.destinationPort !== "") {
+    if (message.destinationPort !== undefined) {
       writer.uint32(34).string(message.destinationPort);
     }
-    if (message.destinationChannel !== "") {
+    if (message.destinationChannel !== undefined) {
       writer.uint32(42).string(message.destinationChannel);
     }
     if (message.data.length !== 0) {
@@ -744,7 +832,7 @@ export const Packet = {
     if (message.timeoutHeight !== undefined) {
       Height.encode(message.timeoutHeight, writer.uint32(58).fork()).ldelim();
     }
-    if (message.timeoutTimestamp !== BigInt(0)) {
+    if (message.timeoutTimestamp !== undefined) {
       writer.uint32(64).uint64(message.timeoutTimestamp);
     }
     return writer;
@@ -787,17 +875,83 @@ export const Packet = {
     }
     return message;
   },
+  fromJSON(object: any): Packet {
+    const obj = createBasePacket();
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    if (isSet(object.sourcePort)) obj.sourcePort = String(object.sourcePort);
+    if (isSet(object.sourceChannel)) obj.sourceChannel = String(object.sourceChannel);
+    if (isSet(object.destinationPort)) obj.destinationPort = String(object.destinationPort);
+    if (isSet(object.destinationChannel)) obj.destinationChannel = String(object.destinationChannel);
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    if (isSet(object.timeoutHeight)) obj.timeoutHeight = Height.fromJSON(object.timeoutHeight);
+    if (isSet(object.timeoutTimestamp)) obj.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    return obj;
+  },
+  toJSON(message: Packet): JsonSafe<Packet> {
+    const obj: any = {};
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
+    message.sourcePort !== undefined && (obj.sourcePort = message.sourcePort);
+    message.sourceChannel !== undefined && (obj.sourceChannel = message.sourceChannel);
+    message.destinationPort !== undefined && (obj.destinationPort = message.destinationPort);
+    message.destinationChannel !== undefined && (obj.destinationChannel = message.destinationChannel);
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    message.timeoutHeight !== undefined && (obj.timeoutHeight = message.timeoutHeight ? Height.toJSON(message.timeoutHeight) : undefined);
+    message.timeoutTimestamp !== undefined && (obj.timeoutTimestamp = (message.timeoutTimestamp || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Packet>): Packet {
     const message = createBasePacket();
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     message.sourcePort = object.sourcePort ?? "";
     message.sourceChannel = object.sourceChannel ?? "";
     message.destinationPort = object.destinationPort ?? "";
     message.destinationChannel = object.destinationChannel ?? "";
     message.data = object.data ?? new Uint8Array();
-    message.timeoutHeight = object.timeoutHeight !== undefined && object.timeoutHeight !== null ? Height.fromPartial(object.timeoutHeight) : undefined;
-    message.timeoutTimestamp = object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null ? BigInt(object.timeoutTimestamp.toString()) : BigInt(0);
+    if (object.timeoutHeight !== undefined && object.timeoutHeight !== null) {
+      message.timeoutHeight = Height.fromPartial(object.timeoutHeight);
+    }
+    if (object.timeoutTimestamp !== undefined && object.timeoutTimestamp !== null) {
+      message.timeoutTimestamp = BigInt(object.timeoutTimestamp.toString());
+    }
     return message;
+  },
+  fromSDK(object: PacketSDKType): Packet {
+    return {
+      sequence: object?.sequence,
+      sourcePort: object?.source_port,
+      sourceChannel: object?.source_channel,
+      destinationPort: object?.destination_port,
+      destinationChannel: object?.destination_channel,
+      data: object?.data,
+      timeoutHeight: object.timeout_height ? Height.fromSDK(object.timeout_height) : undefined,
+      timeoutTimestamp: object?.timeout_timestamp
+    };
+  },
+  fromSDKJSON(object: any): PacketSDKType {
+    return {
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      source_port: isSet(object.source_port) ? String(object.source_port) : "",
+      source_channel: isSet(object.source_channel) ? String(object.source_channel) : "",
+      destination_port: isSet(object.destination_port) ? String(object.destination_port) : "",
+      destination_channel: isSet(object.destination_channel) ? String(object.destination_channel) : "",
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(),
+      timeout_height: isSet(object.timeout_height) ? Height.fromSDKJSON(object.timeout_height) : undefined,
+      timeout_timestamp: isSet(object.timeout_timestamp) ? BigInt(object.timeout_timestamp.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Packet): PacketSDKType {
+    const obj: any = {};
+    obj.sequence = message.sequence;
+    obj.source_port = message.sourcePort;
+    obj.source_channel = message.sourceChannel;
+    obj.destination_port = message.destinationPort;
+    obj.destination_channel = message.destinationChannel;
+    obj.data = message.data;
+    message.timeoutHeight !== undefined && (obj.timeout_height = message.timeoutHeight ? Height.toSDK(message.timeoutHeight) : undefined);
+    obj.timeout_timestamp = message.timeoutTimestamp;
+    return obj;
   },
   fromAmino(object: PacketAmino): Packet {
     const message = createBasePacket();
@@ -871,15 +1025,14 @@ function createBasePacketState(): PacketState {
 }
 export const PacketState = {
   typeUrl: "/ibc.core.channel.v1.PacketState",
-  aminoType: "cosmos-sdk/PacketState",
   encode(message: PacketState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.portId !== "") {
+    if (message.portId !== undefined) {
       writer.uint32(10).string(message.portId);
     }
-    if (message.channelId !== "") {
+    if (message.channelId !== undefined) {
       writer.uint32(18).string(message.channelId);
     }
-    if (message.sequence !== BigInt(0)) {
+    if (message.sequence !== undefined) {
       writer.uint32(24).uint64(message.sequence);
     }
     if (message.data.length !== 0) {
@@ -913,13 +1066,55 @@ export const PacketState = {
     }
     return message;
   },
+  fromJSON(object: any): PacketState {
+    const obj = createBasePacketState();
+    if (isSet(object.portId)) obj.portId = String(object.portId);
+    if (isSet(object.channelId)) obj.channelId = String(object.channelId);
+    if (isSet(object.sequence)) obj.sequence = BigInt(object.sequence.toString());
+    if (isSet(object.data)) obj.data = bytesFromBase64(object.data);
+    return obj;
+  },
+  toJSON(message: PacketState): JsonSafe<PacketState> {
+    const obj: any = {};
+    message.portId !== undefined && (obj.portId = message.portId);
+    message.channelId !== undefined && (obj.channelId = message.channelId);
+    message.sequence !== undefined && (obj.sequence = (message.sequence || BigInt(0)).toString());
+    message.data !== undefined && (obj.data = base64FromBytes(message.data !== undefined ? message.data : new Uint8Array()));
+    return obj;
+  },
   fromPartial(object: DeepPartial<PacketState>): PacketState {
     const message = createBasePacketState();
     message.portId = object.portId ?? "";
     message.channelId = object.channelId ?? "";
-    message.sequence = object.sequence !== undefined && object.sequence !== null ? BigInt(object.sequence.toString()) : BigInt(0);
+    if (object.sequence !== undefined && object.sequence !== null) {
+      message.sequence = BigInt(object.sequence.toString());
+    }
     message.data = object.data ?? new Uint8Array();
     return message;
+  },
+  fromSDK(object: PacketStateSDKType): PacketState {
+    return {
+      portId: object?.port_id,
+      channelId: object?.channel_id,
+      sequence: object?.sequence,
+      data: object?.data
+    };
+  },
+  fromSDKJSON(object: any): PacketStateSDKType {
+    return {
+      port_id: isSet(object.port_id) ? String(object.port_id) : "",
+      channel_id: isSet(object.channel_id) ? String(object.channel_id) : "",
+      sequence: isSet(object.sequence) ? BigInt(object.sequence.toString()) : BigInt(0),
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array()
+    };
+  },
+  toSDK(message: PacketState): PacketStateSDKType {
+    const obj: any = {};
+    obj.port_id = message.portId;
+    obj.channel_id = message.channelId;
+    obj.sequence = message.sequence;
+    obj.data = message.data;
+    return obj;
   },
   fromAmino(object: PacketStateAmino): PacketState {
     const message = createBasePacketState();
@@ -975,7 +1170,6 @@ function createBaseAcknowledgement(): Acknowledgement {
 }
 export const Acknowledgement = {
   typeUrl: "/ibc.core.channel.v1.Acknowledgement",
-  aminoType: "cosmos-sdk/Acknowledgement",
   encode(message: Acknowledgement, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.result !== undefined) {
       writer.uint32(170).bytes(message.result);
@@ -1005,11 +1199,41 @@ export const Acknowledgement = {
     }
     return message;
   },
+  fromJSON(object: any): Acknowledgement {
+    const obj = createBaseAcknowledgement();
+    if (isSet(object.result)) obj.result = bytesFromBase64(object.result);
+    if (isSet(object.error)) obj.error = String(object.error);
+    return obj;
+  },
+  toJSON(message: Acknowledgement): JsonSafe<Acknowledgement> {
+    const obj: any = {};
+    message.result !== undefined && (obj.result = message.result !== undefined ? base64FromBytes(message.result) : undefined);
+    message.error !== undefined && (obj.error = message.error);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Acknowledgement>): Acknowledgement {
     const message = createBaseAcknowledgement();
     message.result = object.result ?? undefined;
     message.error = object.error ?? undefined;
     return message;
+  },
+  fromSDK(object: AcknowledgementSDKType): Acknowledgement {
+    return {
+      result: object?.result,
+      error: object?.error
+    };
+  },
+  fromSDKJSON(object: any): AcknowledgementSDKType {
+    return {
+      result: isSet(object.result) ? bytesFromBase64(object.result) : undefined,
+      error: isSet(object.error) ? String(object.error) : undefined
+    };
+  },
+  toSDK(message: Acknowledgement): AcknowledgementSDKType {
+    const obj: any = {};
+    obj.result = message.result;
+    obj.error = message.error;
+    return obj;
   },
   fromAmino(object: AcknowledgementAmino): Acknowledgement {
     const message = createBaseAcknowledgement();

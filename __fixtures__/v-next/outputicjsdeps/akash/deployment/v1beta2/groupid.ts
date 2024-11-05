@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.deployment.v1beta2";
 /** GroupID stores owner, deployment sequence number and group sequence number */
 export interface GroupID {
   owner: string;
@@ -11,14 +13,10 @@ export interface GroupIDProtoMsg {
   value: Uint8Array;
 }
 /** GroupID stores owner, deployment sequence number and group sequence number */
-export interface GroupIDAmino {
+export interface GroupIDSDKType {
   owner: string;
-  dseq: string;
+  dseq: bigint;
   gseq: number;
-}
-export interface GroupIDAminoMsg {
-  type: "/akash.deployment.v1beta2.GroupID";
-  value: GroupIDAmino;
 }
 function createBaseGroupID(): GroupID {
   return {
@@ -30,13 +28,13 @@ function createBaseGroupID(): GroupID {
 export const GroupID = {
   typeUrl: "/akash.deployment.v1beta2.GroupID",
   encode(message: GroupID, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
-    if (message.dseq !== BigInt(0)) {
+    if (message.dseq !== undefined) {
       writer.uint32(16).uint64(message.dseq);
     }
-    if (message.gseq !== 0) {
+    if (message.gseq !== undefined) {
       writer.uint32(24).uint32(message.gseq);
     }
     return writer;
@@ -64,12 +62,49 @@ export const GroupID = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<GroupID>): GroupID {
+  fromJSON(object: any): GroupID {
+    const obj = createBaseGroupID();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.dseq)) obj.dseq = BigInt(object.dseq.toString());
+    if (isSet(object.gseq)) obj.gseq = Number(object.gseq);
+    return obj;
+  },
+  toJSON(message: GroupID): JsonSafe<GroupID> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.dseq !== undefined && (obj.dseq = (message.dseq || BigInt(0)).toString());
+    message.gseq !== undefined && (obj.gseq = Math.round(message.gseq));
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<GroupID>, I>>(object: I): GroupID {
     const message = createBaseGroupID();
     message.owner = object.owner ?? "";
-    message.dseq = object.dseq !== undefined && object.dseq !== null ? BigInt(object.dseq.toString()) : BigInt(0);
+    if (object.dseq !== undefined && object.dseq !== null) {
+      message.dseq = BigInt(object.dseq.toString());
+    }
     message.gseq = object.gseq ?? 0;
     return message;
+  },
+  fromSDK(object: GroupIDSDKType): GroupID {
+    return {
+      owner: object?.owner,
+      dseq: object?.dseq,
+      gseq: object?.gseq
+    };
+  },
+  fromSDKJSON(object: any): GroupIDSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      dseq: isSet(object.dseq) ? BigInt(object.dseq.toString()) : BigInt(0),
+      gseq: isSet(object.gseq) ? Number(object.gseq) : 0
+    };
+  },
+  toSDK(message: GroupID): GroupIDSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    obj.dseq = message.dseq;
+    obj.gseq = message.gseq;
+    return obj;
   },
   fromAmino(object: GroupIDAmino): GroupID {
     const message = createBaseGroupID();
@@ -93,6 +128,12 @@ export const GroupID = {
   },
   fromAminoMsg(object: GroupIDAminoMsg): GroupID {
     return GroupID.fromAmino(object.value);
+  },
+  toAminoMsg(message: GroupID): GroupIDAminoMsg {
+    return {
+      type: "akash/deployment/v1beta2/group-i-d",
+      value: GroupID.toAmino(message)
+    };
   },
   fromProtoMsg(message: GroupIDProtoMsg): GroupID {
     return GroupID.decode(message.value);

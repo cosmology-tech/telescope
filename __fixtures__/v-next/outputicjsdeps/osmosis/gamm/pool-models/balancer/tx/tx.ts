@@ -1,6 +1,8 @@
-import { PoolParams, PoolParamsAmino, PoolAsset, PoolAssetAmino } from "../balancerPool";
-import { BinaryReader, BinaryWriter } from "../../../../../binary";
-import { DeepPartial } from "../../../../../helpers";
+import { PoolParams, PoolParamsSDKType, PoolAsset, PoolAssetSDKType } from "../balancerPool.js";
+import { BinaryReader, BinaryWriter } from "../../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../../helpers.js";
+import { JsonSafe } from "../../../../../json-safe.js";
+export const protobufPackage = "osmosis.gamm.poolmodels.balancer.v1beta1";
 /** ===================== MsgCreatePool */
 export interface MsgCreateBalancerPool {
   sender: string;
@@ -13,15 +15,11 @@ export interface MsgCreateBalancerPoolProtoMsg {
   value: Uint8Array;
 }
 /** ===================== MsgCreatePool */
-export interface MsgCreateBalancerPoolAmino {
+export interface MsgCreateBalancerPoolSDKType {
   sender: string;
-  pool_params?: PoolParamsAmino;
-  pool_assets: PoolAssetAmino[];
+  pool_params?: PoolParamsSDKType;
+  pool_assets: PoolAssetSDKType[];
   future_pool_governor: string;
-}
-export interface MsgCreateBalancerPoolAminoMsg {
-  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool";
-  value: MsgCreateBalancerPoolAmino;
 }
 /** Returns the poolID */
 export interface MsgCreateBalancerPoolResponse {
@@ -32,12 +30,8 @@ export interface MsgCreateBalancerPoolResponseProtoMsg {
   value: Uint8Array;
 }
 /** Returns the poolID */
-export interface MsgCreateBalancerPoolResponseAmino {
-  pool_id: string;
-}
-export interface MsgCreateBalancerPoolResponseAminoMsg {
-  type: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response";
-  value: MsgCreateBalancerPoolResponseAmino;
+export interface MsgCreateBalancerPoolResponseSDKType {
+  pool_id: bigint;
 }
 function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
   return {
@@ -49,9 +43,8 @@ function createBaseMsgCreateBalancerPool(): MsgCreateBalancerPool {
 }
 export const MsgCreateBalancerPool = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPool",
-  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool",
   encode(message: MsgCreateBalancerPool, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sender !== "") {
+    if (message.sender !== undefined) {
       writer.uint32(10).string(message.sender);
     }
     if (message.poolParams !== undefined) {
@@ -60,7 +53,7 @@ export const MsgCreateBalancerPool = {
     for (const v of message.poolAssets) {
       PoolAsset.encode(v!, writer.uint32(26).fork()).ldelim();
     }
-    if (message.futurePoolGovernor !== "") {
+    if (message.futurePoolGovernor !== undefined) {
       writer.uint32(34).string(message.futurePoolGovernor);
     }
     return writer;
@@ -91,13 +84,63 @@ export const MsgCreateBalancerPool = {
     }
     return message;
   },
+  fromJSON(object: any): MsgCreateBalancerPool {
+    const obj = createBaseMsgCreateBalancerPool();
+    if (isSet(object.sender)) obj.sender = String(object.sender);
+    if (isSet(object.poolParams)) obj.poolParams = PoolParams.fromJSON(object.poolParams);
+    if (Array.isArray(object?.poolAssets)) obj.poolAssets = object.poolAssets.map((e: any) => PoolAsset.fromJSON(e));
+    if (isSet(object.futurePoolGovernor)) obj.futurePoolGovernor = String(object.futurePoolGovernor);
+    return obj;
+  },
+  toJSON(message: MsgCreateBalancerPool): JsonSafe<MsgCreateBalancerPool> {
+    const obj: any = {};
+    message.sender !== undefined && (obj.sender = message.sender);
+    message.poolParams !== undefined && (obj.poolParams = message.poolParams ? PoolParams.toJSON(message.poolParams) : undefined);
+    if (message.poolAssets) {
+      obj.poolAssets = message.poolAssets.map(e => e ? PoolAsset.toJSON(e) : undefined);
+    } else {
+      obj.poolAssets = [];
+    }
+    message.futurePoolGovernor !== undefined && (obj.futurePoolGovernor = message.futurePoolGovernor);
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgCreateBalancerPool>): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
     message.sender = object.sender ?? "";
-    message.poolParams = object.poolParams !== undefined && object.poolParams !== null ? PoolParams.fromPartial(object.poolParams) : undefined;
+    if (object.poolParams !== undefined && object.poolParams !== null) {
+      message.poolParams = PoolParams.fromPartial(object.poolParams);
+    }
     message.poolAssets = object.poolAssets?.map(e => PoolAsset.fromPartial(e)) || [];
     message.futurePoolGovernor = object.futurePoolGovernor ?? "";
     return message;
+  },
+  fromSDK(object: MsgCreateBalancerPoolSDKType): MsgCreateBalancerPool {
+    return {
+      sender: object?.sender,
+      poolParams: object.pool_params ? PoolParams.fromSDK(object.pool_params) : undefined,
+      poolAssets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDK(e)) : [],
+      futurePoolGovernor: object?.future_pool_governor
+    };
+  },
+  fromSDKJSON(object: any): MsgCreateBalancerPoolSDKType {
+    return {
+      sender: isSet(object.sender) ? String(object.sender) : "",
+      pool_params: isSet(object.pool_params) ? PoolParams.fromSDKJSON(object.pool_params) : undefined,
+      pool_assets: Array.isArray(object?.pool_assets) ? object.pool_assets.map((e: any) => PoolAsset.fromSDKJSON(e)) : [],
+      future_pool_governor: isSet(object.future_pool_governor) ? String(object.future_pool_governor) : ""
+    };
+  },
+  toSDK(message: MsgCreateBalancerPool): MsgCreateBalancerPoolSDKType {
+    const obj: any = {};
+    obj.sender = message.sender;
+    message.poolParams !== undefined && (obj.pool_params = message.poolParams ? PoolParams.toSDK(message.poolParams) : undefined);
+    if (message.poolAssets) {
+      obj.pool_assets = message.poolAssets.map(e => e ? PoolAsset.toSDK(e) : undefined);
+    } else {
+      obj.pool_assets = [];
+    }
+    obj.future_pool_governor = message.futurePoolGovernor;
+    return obj;
   },
   fromAmino(object: MsgCreateBalancerPoolAmino): MsgCreateBalancerPool {
     const message = createBaseMsgCreateBalancerPool();
@@ -154,9 +197,8 @@ function createBaseMsgCreateBalancerPoolResponse(): MsgCreateBalancerPoolRespons
 }
 export const MsgCreateBalancerPoolResponse = {
   typeUrl: "/osmosis.gamm.poolmodels.balancer.v1beta1.MsgCreateBalancerPoolResponse",
-  aminoType: "osmosis/gamm/poolmodels/balancer/create-balancer-pool-response",
   encode(message: MsgCreateBalancerPoolResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.poolId !== BigInt(0)) {
+    if (message.poolId !== undefined) {
       writer.uint32(8).uint64(message.poolId);
     }
     return writer;
@@ -178,10 +220,37 @@ export const MsgCreateBalancerPoolResponse = {
     }
     return message;
   },
+  fromJSON(object: any): MsgCreateBalancerPoolResponse {
+    const obj = createBaseMsgCreateBalancerPoolResponse();
+    if (isSet(object.poolId)) obj.poolId = BigInt(object.poolId.toString());
+    return obj;
+  },
+  toJSON(message: MsgCreateBalancerPoolResponse): JsonSafe<MsgCreateBalancerPoolResponse> {
+    const obj: any = {};
+    message.poolId !== undefined && (obj.poolId = (message.poolId || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<MsgCreateBalancerPoolResponse>): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();
-    message.poolId = object.poolId !== undefined && object.poolId !== null ? BigInt(object.poolId.toString()) : BigInt(0);
+    if (object.poolId !== undefined && object.poolId !== null) {
+      message.poolId = BigInt(object.poolId.toString());
+    }
     return message;
+  },
+  fromSDK(object: MsgCreateBalancerPoolResponseSDKType): MsgCreateBalancerPoolResponse {
+    return {
+      poolId: object?.pool_id
+    };
+  },
+  fromSDKJSON(object: any): MsgCreateBalancerPoolResponseSDKType {
+    return {
+      pool_id: isSet(object.pool_id) ? BigInt(object.pool_id.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: MsgCreateBalancerPoolResponse): MsgCreateBalancerPoolResponseSDKType {
+    const obj: any = {};
+    obj.pool_id = message.poolId;
+    return obj;
   },
   fromAmino(object: MsgCreateBalancerPoolResponseAmino): MsgCreateBalancerPoolResponse {
     const message = createBaseMsgCreateBalancerPoolResponse();

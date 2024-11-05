@@ -1,7 +1,9 @@
-import { Any, AnyAmino } from "../../../../google/protobuf/any";
-import { Plan, PlanAmino } from "../../../../cosmos/upgrade/v1beta1/upgrade";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { Any, AnySDKType } from "../../../../google/protobuf/any.js";
+import { Plan, PlanSDKType } from "../../../../cosmos/upgrade/v1beta1/upgrade.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "ibc.core.client.v1";
 /**
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
@@ -20,15 +22,9 @@ export interface IdentifiedClientStateProtoMsg {
  * IdentifiedClientState defines a client state with an additional client
  * identifier field.
  */
-export interface IdentifiedClientStateAmino {
-  /** client identifier */
+export interface IdentifiedClientStateSDKType {
   client_id: string;
-  /** client state */
-  client_state?: AnyAmino;
-}
-export interface IdentifiedClientStateAminoMsg {
-  type: "cosmos-sdk/IdentifiedClientState";
-  value: IdentifiedClientStateAmino;
+  client_state?: AnySDKType;
 }
 /**
  * ConsensusStateWithHeight defines a consensus state with an additional height
@@ -48,15 +44,9 @@ export interface ConsensusStateWithHeightProtoMsg {
  * ConsensusStateWithHeight defines a consensus state with an additional height
  * field.
  */
-export interface ConsensusStateWithHeightAmino {
-  /** consensus state height */
-  height: HeightAmino;
-  /** consensus state */
-  consensus_state?: AnyAmino;
-}
-export interface ConsensusStateWithHeightAminoMsg {
-  type: "cosmos-sdk/ConsensusStateWithHeight";
-  value: ConsensusStateWithHeightAmino;
+export interface ConsensusStateWithHeightSDKType {
+  height: HeightSDKType;
+  consensus_state?: AnySDKType;
 }
 /**
  * ClientConsensusStates defines all the stored consensus states for a given
@@ -76,15 +66,9 @@ export interface ClientConsensusStatesProtoMsg {
  * ClientConsensusStates defines all the stored consensus states for a given
  * client.
  */
-export interface ClientConsensusStatesAmino {
-  /** client identifier */
+export interface ClientConsensusStatesSDKType {
   client_id: string;
-  /** consensus states and their heights associated with the client */
-  consensus_states: ConsensusStateWithHeightAmino[];
-}
-export interface ClientConsensusStatesAminoMsg {
-  type: "cosmos-sdk/ClientConsensusStates";
-  value: ClientConsensusStatesAmino;
+  consensus_states: ConsensusStateWithHeightSDKType[];
 }
 /**
  * ClientUpdateProposal is a governance proposal. If it passes, the substitute
@@ -115,22 +99,11 @@ export interface ClientUpdateProposalProtoMsg {
  * handler may fail if the subject and the substitute do not match in client and
  * chain parameters (with exception to latest height, frozen height, and chain-id).
  */
-export interface ClientUpdateProposalAmino {
-  /** the title of the update proposal */
+export interface ClientUpdateProposalSDKType {
   title: string;
-  /** the description of the proposal */
   description: string;
-  /** the client identifier for the client to be updated if the proposal passes */
   subject_client_id: string;
-  /**
-   * the substitute client identifier for the client standing in for the subject
-   * client
-   */
   substitute_client_id: string;
-}
-export interface ClientUpdateProposalAminoMsg {
-  type: "cosmos-sdk/ClientUpdateProposal";
-  value: ClientUpdateProposalAmino;
 }
 /**
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
@@ -158,23 +131,11 @@ export interface UpgradeProposalProtoMsg {
  * UpgradeProposal is a gov Content type for initiating an IBC breaking
  * upgrade.
  */
-export interface UpgradeProposalAmino {
+export interface UpgradeProposalSDKType {
   title: string;
   description: string;
-  plan: PlanAmino;
-  /**
-   * An UpgradedClientState must be provided to perform an IBC breaking upgrade.
-   * This will make the chain commit to the correct upgraded (self) client state
-   * before the upgrade occurs, so that connecting chains can verify that the
-   * new upgraded client is valid by verifying a proof on the previous version
-   * of the chain. This will allow IBC connections to persist smoothly across
-   * planned chain upgrades
-   */
-  upgraded_client_state?: AnyAmino;
-}
-export interface UpgradeProposalAminoMsg {
-  type: "cosmos-sdk/UpgradeProposal";
-  value: UpgradeProposalAmino;
+  plan: PlanSDKType;
+  upgraded_client_state?: AnySDKType;
 }
 /**
  * Height is a monotonically increasing data type
@@ -210,15 +171,9 @@ export interface HeightProtoMsg {
  * height continues to be monitonically increasing even as the RevisionHeight
  * gets reset
  */
-export interface HeightAmino {
-  /** the revision that the client is currently on */
-  revision_number: string;
-  /** the height within the given revision */
-  revision_height: string;
-}
-export interface HeightAminoMsg {
-  type: "cosmos-sdk/Height";
-  value: HeightAmino;
+export interface HeightSDKType {
+  revision_number: bigint;
+  revision_height: bigint;
 }
 /** Params defines the set of IBC light client parameters. */
 export interface Params {
@@ -230,13 +185,8 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the set of IBC light client parameters. */
-export interface ParamsAmino {
-  /** allowed_clients defines the list of allowed client state types. */
+export interface ParamsSDKType {
   allowed_clients: string[];
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 function createBaseIdentifiedClientState(): IdentifiedClientState {
   return {
@@ -246,9 +196,8 @@ function createBaseIdentifiedClientState(): IdentifiedClientState {
 }
 export const IdentifiedClientState = {
   typeUrl: "/ibc.core.client.v1.IdentifiedClientState",
-  aminoType: "cosmos-sdk/IdentifiedClientState",
   encode(message: IdentifiedClientState, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     if (message.clientState !== undefined) {
@@ -276,11 +225,43 @@ export const IdentifiedClientState = {
     }
     return message;
   },
+  fromJSON(object: any): IdentifiedClientState {
+    const obj = createBaseIdentifiedClientState();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (isSet(object.clientState)) obj.clientState = Any.fromJSON(object.clientState);
+    return obj;
+  },
+  toJSON(message: IdentifiedClientState): JsonSafe<IdentifiedClientState> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    message.clientState !== undefined && (obj.clientState = message.clientState ? Any.toJSON(message.clientState) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<IdentifiedClientState>): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
     message.clientId = object.clientId ?? "";
-    message.clientState = object.clientState !== undefined && object.clientState !== null ? Any.fromPartial(object.clientState) : undefined;
+    if (object.clientState !== undefined && object.clientState !== null) {
+      message.clientState = Any.fromPartial(object.clientState);
+    }
     return message;
+  },
+  fromSDK(object: IdentifiedClientStateSDKType): IdentifiedClientState {
+    return {
+      clientId: object?.client_id,
+      clientState: object.client_state ? Any.fromSDK(object.client_state) : undefined
+    };
+  },
+  fromSDKJSON(object: any): IdentifiedClientStateSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      client_state: isSet(object.client_state) ? Any.fromSDKJSON(object.client_state) : undefined
+    };
+  },
+  toSDK(message: IdentifiedClientState): IdentifiedClientStateSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    message.clientState !== undefined && (obj.client_state = message.clientState ? Any.toSDK(message.clientState) : undefined);
+    return obj;
   },
   fromAmino(object: IdentifiedClientStateAmino): IdentifiedClientState {
     const message = createBaseIdentifiedClientState();
@@ -328,7 +309,6 @@ function createBaseConsensusStateWithHeight(): ConsensusStateWithHeight {
 }
 export const ConsensusStateWithHeight = {
   typeUrl: "/ibc.core.client.v1.ConsensusStateWithHeight",
-  aminoType: "cosmos-sdk/ConsensusStateWithHeight",
   encode(message: ConsensusStateWithHeight, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.height !== undefined) {
       Height.encode(message.height, writer.uint32(10).fork()).ldelim();
@@ -358,11 +338,45 @@ export const ConsensusStateWithHeight = {
     }
     return message;
   },
+  fromJSON(object: any): ConsensusStateWithHeight {
+    const obj = createBaseConsensusStateWithHeight();
+    if (isSet(object.height)) obj.height = Height.fromJSON(object.height);
+    if (isSet(object.consensusState)) obj.consensusState = Any.fromJSON(object.consensusState);
+    return obj;
+  },
+  toJSON(message: ConsensusStateWithHeight): JsonSafe<ConsensusStateWithHeight> {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height ? Height.toJSON(message.height) : undefined);
+    message.consensusState !== undefined && (obj.consensusState = message.consensusState ? Any.toJSON(message.consensusState) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ConsensusStateWithHeight>): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
-    message.height = object.height !== undefined && object.height !== null ? Height.fromPartial(object.height) : undefined;
-    message.consensusState = object.consensusState !== undefined && object.consensusState !== null ? Any.fromPartial(object.consensusState) : undefined;
+    if (object.height !== undefined && object.height !== null) {
+      message.height = Height.fromPartial(object.height);
+    }
+    if (object.consensusState !== undefined && object.consensusState !== null) {
+      message.consensusState = Any.fromPartial(object.consensusState);
+    }
     return message;
+  },
+  fromSDK(object: ConsensusStateWithHeightSDKType): ConsensusStateWithHeight {
+    return {
+      height: object.height ? Height.fromSDK(object.height) : undefined,
+      consensusState: object.consensus_state ? Any.fromSDK(object.consensus_state) : undefined
+    };
+  },
+  fromSDKJSON(object: any): ConsensusStateWithHeightSDKType {
+    return {
+      height: isSet(object.height) ? Height.fromSDKJSON(object.height) : undefined,
+      consensus_state: isSet(object.consensus_state) ? Any.fromSDKJSON(object.consensus_state) : undefined
+    };
+  },
+  toSDK(message: ConsensusStateWithHeight): ConsensusStateWithHeightSDKType {
+    const obj: any = {};
+    message.height !== undefined && (obj.height = message.height ? Height.toSDK(message.height) : undefined);
+    message.consensusState !== undefined && (obj.consensus_state = message.consensusState ? Any.toSDK(message.consensusState) : undefined);
+    return obj;
   },
   fromAmino(object: ConsensusStateWithHeightAmino): ConsensusStateWithHeight {
     const message = createBaseConsensusStateWithHeight();
@@ -410,9 +424,8 @@ function createBaseClientConsensusStates(): ClientConsensusStates {
 }
 export const ClientConsensusStates = {
   typeUrl: "/ibc.core.client.v1.ClientConsensusStates",
-  aminoType: "cosmos-sdk/ClientConsensusStates",
   encode(message: ClientConsensusStates, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.clientId !== "") {
+    if (message.clientId !== undefined) {
       writer.uint32(10).string(message.clientId);
     }
     for (const v of message.consensusStates) {
@@ -440,11 +453,49 @@ export const ClientConsensusStates = {
     }
     return message;
   },
+  fromJSON(object: any): ClientConsensusStates {
+    const obj = createBaseClientConsensusStates();
+    if (isSet(object.clientId)) obj.clientId = String(object.clientId);
+    if (Array.isArray(object?.consensusStates)) obj.consensusStates = object.consensusStates.map((e: any) => ConsensusStateWithHeight.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ClientConsensusStates): JsonSafe<ClientConsensusStates> {
+    const obj: any = {};
+    message.clientId !== undefined && (obj.clientId = message.clientId);
+    if (message.consensusStates) {
+      obj.consensusStates = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toJSON(e) : undefined);
+    } else {
+      obj.consensusStates = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ClientConsensusStates>): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
     message.clientId = object.clientId ?? "";
     message.consensusStates = object.consensusStates?.map(e => ConsensusStateWithHeight.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ClientConsensusStatesSDKType): ClientConsensusStates {
+    return {
+      clientId: object?.client_id,
+      consensusStates: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ClientConsensusStatesSDKType {
+    return {
+      client_id: isSet(object.client_id) ? String(object.client_id) : "",
+      consensus_states: Array.isArray(object?.consensus_states) ? object.consensus_states.map((e: any) => ConsensusStateWithHeight.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ClientConsensusStates): ClientConsensusStatesSDKType {
+    const obj: any = {};
+    obj.client_id = message.clientId;
+    if (message.consensusStates) {
+      obj.consensus_states = message.consensusStates.map(e => e ? ConsensusStateWithHeight.toSDK(e) : undefined);
+    } else {
+      obj.consensus_states = [];
+    }
+    return obj;
   },
   fromAmino(object: ClientConsensusStatesAmino): ClientConsensusStates {
     const message = createBaseClientConsensusStates();
@@ -496,18 +547,17 @@ function createBaseClientUpdateProposal(): ClientUpdateProposal {
 }
 export const ClientUpdateProposal = {
   typeUrl: "/ibc.core.client.v1.ClientUpdateProposal",
-  aminoType: "cosmos-sdk/ClientUpdateProposal",
   encode(message: ClientUpdateProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
-    if (message.subjectClientId !== "") {
+    if (message.subjectClientId !== undefined) {
       writer.uint32(26).string(message.subjectClientId);
     }
-    if (message.substituteClientId !== "") {
+    if (message.substituteClientId !== undefined) {
       writer.uint32(34).string(message.substituteClientId);
     }
     return writer;
@@ -538,6 +588,22 @@ export const ClientUpdateProposal = {
     }
     return message;
   },
+  fromJSON(object: any): ClientUpdateProposal {
+    const obj = createBaseClientUpdateProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.subjectClientId)) obj.subjectClientId = String(object.subjectClientId);
+    if (isSet(object.substituteClientId)) obj.substituteClientId = String(object.substituteClientId);
+    return obj;
+  },
+  toJSON(message: ClientUpdateProposal): JsonSafe<ClientUpdateProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.subjectClientId !== undefined && (obj.subjectClientId = message.subjectClientId);
+    message.substituteClientId !== undefined && (obj.substituteClientId = message.substituteClientId);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ClientUpdateProposal>): ClientUpdateProposal {
     const message = createBaseClientUpdateProposal();
     message.title = object.title ?? "";
@@ -545,6 +611,30 @@ export const ClientUpdateProposal = {
     message.subjectClientId = object.subjectClientId ?? "";
     message.substituteClientId = object.substituteClientId ?? "";
     return message;
+  },
+  fromSDK(object: ClientUpdateProposalSDKType): ClientUpdateProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      subjectClientId: object?.subject_client_id,
+      substituteClientId: object?.substitute_client_id
+    };
+  },
+  fromSDKJSON(object: any): ClientUpdateProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      subject_client_id: isSet(object.subject_client_id) ? String(object.subject_client_id) : "",
+      substitute_client_id: isSet(object.substitute_client_id) ? String(object.substitute_client_id) : ""
+    };
+  },
+  toSDK(message: ClientUpdateProposal): ClientUpdateProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    obj.subject_client_id = message.subjectClientId;
+    obj.substitute_client_id = message.substituteClientId;
+    return obj;
   },
   fromAmino(object: ClientUpdateProposalAmino): ClientUpdateProposal {
     const message = createBaseClientUpdateProposal();
@@ -602,12 +692,11 @@ function createBaseUpgradeProposal(): UpgradeProposal {
 }
 export const UpgradeProposal = {
   typeUrl: "/ibc.core.client.v1.UpgradeProposal",
-  aminoType: "cosmos-sdk/UpgradeProposal",
   encode(message: UpgradeProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     if (message.plan !== undefined) {
@@ -644,13 +733,57 @@ export const UpgradeProposal = {
     }
     return message;
   },
+  fromJSON(object: any): UpgradeProposal {
+    const obj = createBaseUpgradeProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.plan)) obj.plan = Plan.fromJSON(object.plan);
+    if (isSet(object.upgradedClientState)) obj.upgradedClientState = Any.fromJSON(object.upgradedClientState);
+    return obj;
+  },
+  toJSON(message: UpgradeProposal): JsonSafe<UpgradeProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toJSON(message.plan) : undefined);
+    message.upgradedClientState !== undefined && (obj.upgradedClientState = message.upgradedClientState ? Any.toJSON(message.upgradedClientState) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<UpgradeProposal>): UpgradeProposal {
     const message = createBaseUpgradeProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
-    message.plan = object.plan !== undefined && object.plan !== null ? Plan.fromPartial(object.plan) : undefined;
-    message.upgradedClientState = object.upgradedClientState !== undefined && object.upgradedClientState !== null ? Any.fromPartial(object.upgradedClientState) : undefined;
+    if (object.plan !== undefined && object.plan !== null) {
+      message.plan = Plan.fromPartial(object.plan);
+    }
+    if (object.upgradedClientState !== undefined && object.upgradedClientState !== null) {
+      message.upgradedClientState = Any.fromPartial(object.upgradedClientState);
+    }
     return message;
+  },
+  fromSDK(object: UpgradeProposalSDKType): UpgradeProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      plan: object.plan ? Plan.fromSDK(object.plan) : undefined,
+      upgradedClientState: object.upgraded_client_state ? Any.fromSDK(object.upgraded_client_state) : undefined
+    };
+  },
+  fromSDKJSON(object: any): UpgradeProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      plan: isSet(object.plan) ? Plan.fromSDKJSON(object.plan) : undefined,
+      upgraded_client_state: isSet(object.upgraded_client_state) ? Any.fromSDKJSON(object.upgraded_client_state) : undefined
+    };
+  },
+  toSDK(message: UpgradeProposal): UpgradeProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    message.plan !== undefined && (obj.plan = message.plan ? Plan.toSDK(message.plan) : undefined);
+    message.upgradedClientState !== undefined && (obj.upgraded_client_state = message.upgradedClientState ? Any.toSDK(message.upgradedClientState) : undefined);
+    return obj;
   },
   fromAmino(object: UpgradeProposalAmino): UpgradeProposal {
     const message = createBaseUpgradeProposal();
@@ -706,12 +839,11 @@ function createBaseHeight(): Height {
 }
 export const Height = {
   typeUrl: "/ibc.core.client.v1.Height",
-  aminoType: "cosmos-sdk/Height",
   encode(message: Height, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.revisionNumber !== BigInt(0)) {
+    if (message.revisionNumber !== undefined) {
       writer.uint32(8).uint64(message.revisionNumber);
     }
-    if (message.revisionHeight !== BigInt(0)) {
+    if (message.revisionHeight !== undefined) {
       writer.uint32(16).uint64(message.revisionHeight);
     }
     return writer;
@@ -736,11 +868,45 @@ export const Height = {
     }
     return message;
   },
+  fromJSON(object: any): Height {
+    const obj = createBaseHeight();
+    if (isSet(object.revisionNumber)) obj.revisionNumber = BigInt(object.revisionNumber.toString());
+    if (isSet(object.revisionHeight)) obj.revisionHeight = BigInt(object.revisionHeight.toString());
+    return obj;
+  },
+  toJSON(message: Height): JsonSafe<Height> {
+    const obj: any = {};
+    message.revisionNumber !== undefined && (obj.revisionNumber = (message.revisionNumber || BigInt(0)).toString());
+    message.revisionHeight !== undefined && (obj.revisionHeight = (message.revisionHeight || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<Height>): Height {
     const message = createBaseHeight();
-    message.revisionNumber = object.revisionNumber !== undefined && object.revisionNumber !== null ? BigInt(object.revisionNumber.toString()) : BigInt(0);
-    message.revisionHeight = object.revisionHeight !== undefined && object.revisionHeight !== null ? BigInt(object.revisionHeight.toString()) : BigInt(0);
+    if (object.revisionNumber !== undefined && object.revisionNumber !== null) {
+      message.revisionNumber = BigInt(object.revisionNumber.toString());
+    }
+    if (object.revisionHeight !== undefined && object.revisionHeight !== null) {
+      message.revisionHeight = BigInt(object.revisionHeight.toString());
+    }
     return message;
+  },
+  fromSDK(object: HeightSDKType): Height {
+    return {
+      revisionNumber: object?.revision_number,
+      revisionHeight: object?.revision_height
+    };
+  },
+  fromSDKJSON(object: any): HeightSDKType {
+    return {
+      revision_number: isSet(object.revision_number) ? BigInt(object.revision_number.toString()) : BigInt(0),
+      revision_height: isSet(object.revision_height) ? BigInt(object.revision_height.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: Height): HeightSDKType {
+    const obj: any = {};
+    obj.revision_number = message.revisionNumber;
+    obj.revision_height = message.revisionHeight;
+    return obj;
   },
   fromAmino(object: HeightAmino): Height {
     return {
@@ -783,7 +949,6 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/ibc.core.client.v1.Params",
-  aminoType: "cosmos-sdk/Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.allowedClients) {
       writer.uint32(10).string(v!);
@@ -807,10 +972,43 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (Array.isArray(object?.allowedClients)) obj.allowedClients = object.allowedClients.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    if (message.allowedClients) {
+      obj.allowedClients = message.allowedClients.map(e => e);
+    } else {
+      obj.allowedClients = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.allowedClients = object.allowedClients?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      allowedClients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      allowed_clients: Array.isArray(object?.allowed_clients) ? object.allowed_clients.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    if (message.allowedClients) {
+      obj.allowed_clients = message.allowedClients.map(e => e);
+    } else {
+      obj.allowed_clients = [];
+    }
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

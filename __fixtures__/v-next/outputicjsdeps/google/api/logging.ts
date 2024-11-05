@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * Logging configuration of the service.
  * 
@@ -82,25 +84,9 @@ export interface LoggingProtoMsg {
  *         logs:
  *         - activity_history
  */
-export interface LoggingAmino {
-  /**
-   * Logging configurations for sending logs to the producer project.
-   * There can be multiple producer destinations, each one must have a
-   * different monitored resource type. A log can be used in at most
-   * one producer destination.
-   */
-  producer_destinations: Logging_LoggingDestinationAmino[];
-  /**
-   * Logging configurations for sending logs to the consumer project.
-   * There can be multiple consumer destinations, each one must have a
-   * different monitored resource type. A log can be used in at most
-   * one consumer destination.
-   */
-  consumer_destinations: Logging_LoggingDestinationAmino[];
-}
-export interface LoggingAminoMsg {
-  type: "/google.api.Logging";
-  value: LoggingAmino;
+export interface LoggingSDKType {
+  producer_destinations: Logging_LoggingDestinationSDKType[];
+  consumer_destinations: Logging_LoggingDestinationSDKType[];
 }
 /**
  * Configuration of a specific logging destination (the producer project
@@ -128,23 +114,9 @@ export interface Logging_LoggingDestinationProtoMsg {
  * Configuration of a specific logging destination (the producer project
  * or the consumer project).
  */
-export interface Logging_LoggingDestinationAmino {
-  /**
-   * The monitored resource type. The type must be defined in the
-   * [Service.monitored_resources][google.api.Service.monitored_resources] section.
-   */
+export interface Logging_LoggingDestinationSDKType {
   monitored_resource: string;
-  /**
-   * Names of the logs to be sent to this destination. Each name must
-   * be defined in the [Service.logs][google.api.Service.logs] section. If the log name is
-   * not a domain scoped name, it will be automatically prefixed with
-   * the service name followed by "/".
-   */
   logs: string[];
-}
-export interface Logging_LoggingDestinationAminoMsg {
-  type: "/google.api.LoggingDestination";
-  value: Logging_LoggingDestinationAmino;
 }
 function createBaseLogging(): Logging {
   return {
@@ -183,11 +155,57 @@ export const Logging = {
     }
     return message;
   },
+  fromJSON(object: any): Logging {
+    const obj = createBaseLogging();
+    if (Array.isArray(object?.producerDestinations)) obj.producerDestinations = object.producerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    if (Array.isArray(object?.consumerDestinations)) obj.consumerDestinations = object.consumerDestinations.map((e: any) => Logging_LoggingDestination.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Logging): JsonSafe<Logging> {
+    const obj: any = {};
+    if (message.producerDestinations) {
+      obj.producerDestinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
+    } else {
+      obj.producerDestinations = [];
+    }
+    if (message.consumerDestinations) {
+      obj.consumerDestinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toJSON(e) : undefined);
+    } else {
+      obj.consumerDestinations = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Logging>): Logging {
     const message = createBaseLogging();
     message.producerDestinations = object.producerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     message.consumerDestinations = object.consumerDestinations?.map(e => Logging_LoggingDestination.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: LoggingSDKType): Logging {
+    return {
+      producerDestinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromSDK(e)) : [],
+      consumerDestinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): LoggingSDKType {
+    return {
+      producer_destinations: Array.isArray(object?.producer_destinations) ? object.producer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : [],
+      consumer_destinations: Array.isArray(object?.consumer_destinations) ? object.consumer_destinations.map((e: any) => Logging_LoggingDestination.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Logging): LoggingSDKType {
+    const obj: any = {};
+    if (message.producerDestinations) {
+      obj.producer_destinations = message.producerDestinations.map(e => e ? Logging_LoggingDestination.toSDK(e) : undefined);
+    } else {
+      obj.producer_destinations = [];
+    }
+    if (message.consumerDestinations) {
+      obj.consumer_destinations = message.consumerDestinations.map(e => e ? Logging_LoggingDestination.toSDK(e) : undefined);
+    } else {
+      obj.consumer_destinations = [];
+    }
+    return obj;
   },
   fromAmino(object: LoggingAmino): Logging {
     const message = createBaseLogging();
@@ -234,7 +252,7 @@ function createBaseLogging_LoggingDestination(): Logging_LoggingDestination {
 export const Logging_LoggingDestination = {
   typeUrl: "/google.api.LoggingDestination",
   encode(message: Logging_LoggingDestination, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.monitoredResource !== "") {
+    if (message.monitoredResource !== undefined) {
       writer.uint32(26).string(message.monitoredResource);
     }
     for (const v of message.logs) {
@@ -262,11 +280,49 @@ export const Logging_LoggingDestination = {
     }
     return message;
   },
+  fromJSON(object: any): Logging_LoggingDestination {
+    const obj = createBaseLogging_LoggingDestination();
+    if (isSet(object.monitoredResource)) obj.monitoredResource = String(object.monitoredResource);
+    if (Array.isArray(object?.logs)) obj.logs = object.logs.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: Logging_LoggingDestination): JsonSafe<Logging_LoggingDestination> {
+    const obj: any = {};
+    message.monitoredResource !== undefined && (obj.monitoredResource = message.monitoredResource);
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e);
+    } else {
+      obj.logs = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Logging_LoggingDestination>): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();
     message.monitoredResource = object.monitoredResource ?? "";
     message.logs = object.logs?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: Logging_LoggingDestinationSDKType): Logging_LoggingDestination {
+    return {
+      monitoredResource: object?.monitored_resource,
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): Logging_LoggingDestinationSDKType {
+    return {
+      monitored_resource: isSet(object.monitored_resource) ? String(object.monitored_resource) : "",
+      logs: Array.isArray(object?.logs) ? object.logs.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: Logging_LoggingDestination): Logging_LoggingDestinationSDKType {
+    const obj: any = {};
+    obj.monitored_resource = message.monitoredResource;
+    if (message.logs) {
+      obj.logs = message.logs.map(e => e);
+    } else {
+      obj.logs = [];
+    }
+    return obj;
   },
   fromAmino(object: Logging_LoggingDestinationAmino): Logging_LoggingDestination {
     const message = createBaseLogging_LoggingDestination();

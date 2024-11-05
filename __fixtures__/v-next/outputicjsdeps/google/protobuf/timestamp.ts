@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial, fromJsonTimestamp, fromTimestamp } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.protobuf";
 /**
  * A Timestamp represents a point in time independent of any time zone or local
  * calendar, encoded as a count of seconds and fractions of seconds at
@@ -187,10 +189,9 @@ export interface TimestampProtoMsg {
  * http://www.joda.org/joda-time/apidocs/org/joda/time/format/ISODateTimeFormat.html#dateTime%2D%2D
  * ) to obtain a formatter capable of generating timestamps in this format.
  */
-export type TimestampAmino = string;
-export interface TimestampAminoMsg {
-  type: "/google.protobuf.Timestamp";
-  value: TimestampAmino;
+export interface TimestampSDKType {
+  seconds: bigint;
+  nanos: number;
 }
 function createBaseTimestamp(): Timestamp {
   return {
@@ -201,10 +202,10 @@ function createBaseTimestamp(): Timestamp {
 export const Timestamp = {
   typeUrl: "/google.protobuf.Timestamp",
   encode(message: Timestamp, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.seconds !== BigInt(0)) {
+    if (message.seconds !== undefined) {
       writer.uint32(8).int64(message.seconds);
     }
-    if (message.nanos !== 0) {
+    if (message.nanos !== undefined) {
       writer.uint32(16).int32(message.nanos);
     }
     return writer;
@@ -229,11 +230,43 @@ export const Timestamp = {
     }
     return message;
   },
+  fromJSON(object: any): Timestamp {
+    const obj = createBaseTimestamp();
+    if (isSet(object.seconds)) obj.seconds = BigInt(object.seconds.toString());
+    if (isSet(object.nanos)) obj.nanos = Number(object.nanos);
+    return obj;
+  },
+  toJSON(message: Timestamp): JsonSafe<Timestamp> {
+    const obj: any = {};
+    message.seconds !== undefined && (obj.seconds = (message.seconds || BigInt(0)).toString());
+    message.nanos !== undefined && (obj.nanos = Math.round(message.nanos));
+    return obj;
+  },
   fromPartial(object: DeepPartial<Timestamp>): Timestamp {
     const message = createBaseTimestamp();
-    message.seconds = object.seconds !== undefined && object.seconds !== null ? BigInt(object.seconds.toString()) : BigInt(0);
+    if (object.seconds !== undefined && object.seconds !== null) {
+      message.seconds = BigInt(object.seconds.toString());
+    }
     message.nanos = object.nanos ?? 0;
     return message;
+  },
+  fromSDK(object: TimestampSDKType): Timestamp {
+    return {
+      seconds: object?.seconds,
+      nanos: object?.nanos
+    };
+  },
+  fromSDKJSON(object: any): TimestampSDKType {
+    return {
+      seconds: isSet(object.seconds) ? BigInt(object.seconds.toString()) : BigInt(0),
+      nanos: isSet(object.nanos) ? Number(object.nanos) : 0
+    };
+  },
+  toSDK(message: Timestamp): TimestampSDKType {
+    const obj: any = {};
+    obj.seconds = message.seconds;
+    obj.nanos = message.nanos;
+    return obj;
   },
   fromAmino(object: TimestampAmino): Timestamp {
     return fromJsonTimestamp(object);

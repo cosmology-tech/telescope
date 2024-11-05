@@ -1,6 +1,8 @@
-import { Status, StatusAmino } from "../../../rpc/status";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { Status, StatusSDKType } from "../../../rpc/status.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.servicecontrol.v1";
 /** Error codes for Check responses. */
 export enum CheckError_Code {
   /** ERROR_CODE_UNSPECIFIED - This is never used in `CheckResponse`. */
@@ -68,7 +70,7 @@ export enum CheckError_Code {
   CLOUD_RESOURCE_MANAGER_BACKEND_UNAVAILABLE = 305,
   UNRECOGNIZED = -1,
 }
-export const CheckError_CodeAmino = CheckError_Code;
+export const CheckError_CodeSDKType = CheckError_Code;
 export function checkError_CodeFromJSON(object: any): CheckError_Code {
   switch (object) {
     case 0:
@@ -222,30 +224,11 @@ export interface CheckErrorProtoMsg {
  * Defines the errors to be returned in
  * [google.api.servicecontrol.v1.CheckResponse.check_errors][google.api.servicecontrol.v1.CheckResponse.check_errors].
  */
-export interface CheckErrorAmino {
-  /** The error code. */
+export interface CheckErrorSDKType {
   code: CheckError_Code;
-  /**
-   * Subject to whom this error applies. See the specific code enum for more
-   * details on this field. For example:
-   * 
-   * - "project:<project-id or project-number>"
-   * - "folder:<folder-id>"
-   * - "organization:<organization-id>"
-   */
   subject: string;
-  /** Free-form text providing details on the error cause of the error. */
   detail: string;
-  /**
-   * Contains public information about the check error. If available,
-   * `status.code` will be non zero and client can propagate it out as public
-   * error.
-   */
-  status?: StatusAmino;
-}
-export interface CheckErrorAminoMsg {
-  type: "/google.api.servicecontrol.v1.CheckError";
-  value: CheckErrorAmino;
+  status?: StatusSDKType;
 }
 function createBaseCheckError(): CheckError {
   return {
@@ -261,10 +244,10 @@ export const CheckError = {
     if (message.code !== 0) {
       writer.uint32(8).int32(message.code);
     }
-    if (message.subject !== "") {
+    if (message.subject !== undefined) {
       writer.uint32(34).string(message.subject);
     }
-    if (message.detail !== "") {
+    if (message.detail !== undefined) {
       writer.uint32(18).string(message.detail);
     }
     if (message.status !== undefined) {
@@ -298,13 +281,55 @@ export const CheckError = {
     }
     return message;
   },
+  fromJSON(object: any): CheckError {
+    const obj = createBaseCheckError();
+    if (isSet(object.code)) obj.code = checkError_CodeFromJSON(object.code);
+    if (isSet(object.subject)) obj.subject = String(object.subject);
+    if (isSet(object.detail)) obj.detail = String(object.detail);
+    if (isSet(object.status)) obj.status = Status.fromJSON(object.status);
+    return obj;
+  },
+  toJSON(message: CheckError): JsonSafe<CheckError> {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
+    message.subject !== undefined && (obj.subject = message.subject);
+    message.detail !== undefined && (obj.detail = message.detail);
+    message.status !== undefined && (obj.status = message.status ? Status.toJSON(message.status) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<CheckError>): CheckError {
     const message = createBaseCheckError();
     message.code = object.code ?? 0;
     message.subject = object.subject ?? "";
     message.detail = object.detail ?? "";
-    message.status = object.status !== undefined && object.status !== null ? Status.fromPartial(object.status) : undefined;
+    if (object.status !== undefined && object.status !== null) {
+      message.status = Status.fromPartial(object.status);
+    }
     return message;
+  },
+  fromSDK(object: CheckErrorSDKType): CheckError {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
+      subject: object?.subject,
+      detail: object?.detail,
+      status: object.status ? Status.fromSDK(object.status) : undefined
+    };
+  },
+  fromSDKJSON(object: any): CheckErrorSDKType {
+    return {
+      code: isSet(object.code) ? checkError_CodeFromJSON(object.code) : -1,
+      subject: isSet(object.subject) ? String(object.subject) : "",
+      detail: isSet(object.detail) ? String(object.detail) : "",
+      status: isSet(object.status) ? Status.fromSDKJSON(object.status) : undefined
+    };
+  },
+  toSDK(message: CheckError): CheckErrorSDKType {
+    const obj: any = {};
+    message.code !== undefined && (obj.code = checkError_CodeToJSON(message.code));
+    obj.subject = message.subject;
+    obj.detail = message.detail;
+    message.status !== undefined && (obj.status = message.status ? Status.toSDK(message.status) : undefined);
+    return obj;
   },
   fromAmino(object: CheckErrorAmino): CheckError {
     const message = createBaseCheckError();

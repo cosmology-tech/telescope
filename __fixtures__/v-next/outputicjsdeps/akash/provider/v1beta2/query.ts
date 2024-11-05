@@ -1,7 +1,9 @@
-import { PageRequest, PageRequestAmino, PageResponse, PageResponseAmino } from "../../../cosmos/base/query/v1beta1/pagination";
-import { Provider, ProviderAmino } from "./provider";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { PageRequest, PageRequestSDKType, PageResponse, PageResponseSDKType } from "../../../cosmos/base/query/v1beta1/pagination.js";
+import { Provider, ProviderSDKType } from "./provider.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.provider.v1beta2";
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
 export interface QueryProvidersRequest {
   pagination?: PageRequest;
@@ -11,12 +13,8 @@ export interface QueryProvidersRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersRequest is request type for the Query/Providers RPC method */
-export interface QueryProvidersRequestAmino {
-  pagination?: PageRequestAmino;
-}
-export interface QueryProvidersRequestAminoMsg {
-  type: "/akash.provider.v1beta2.QueryProvidersRequest";
-  value: QueryProvidersRequestAmino;
+export interface QueryProvidersRequestSDKType {
+  pagination?: PageRequestSDKType;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
 export interface QueryProvidersResponse {
@@ -28,13 +26,9 @@ export interface QueryProvidersResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProvidersResponse is response type for the Query/Providers RPC method */
-export interface QueryProvidersResponseAmino {
-  providers: ProviderAmino[];
-  pagination?: PageResponseAmino;
-}
-export interface QueryProvidersResponseAminoMsg {
-  type: "/akash.provider.v1beta2.QueryProvidersResponse";
-  value: QueryProvidersResponseAmino;
+export interface QueryProvidersResponseSDKType {
+  providers: ProviderSDKType[];
+  pagination?: PageResponseSDKType;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
 export interface QueryProviderRequest {
@@ -45,12 +39,8 @@ export interface QueryProviderRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderRequest is request type for the Query/Provider RPC method */
-export interface QueryProviderRequestAmino {
+export interface QueryProviderRequestSDKType {
   owner: string;
-}
-export interface QueryProviderRequestAminoMsg {
-  type: "/akash.provider.v1beta2.QueryProviderRequest";
-  value: QueryProviderRequestAmino;
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
 export interface QueryProviderResponse {
@@ -61,12 +51,8 @@ export interface QueryProviderResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryProviderResponse is response type for the Query/Provider RPC method */
-export interface QueryProviderResponseAmino {
-  provider: ProviderAmino;
-}
-export interface QueryProviderResponseAminoMsg {
-  type: "/akash.provider.v1beta2.QueryProviderResponse";
-  value: QueryProviderResponseAmino;
+export interface QueryProviderResponseSDKType {
+  provider: ProviderSDKType;
 }
 function createBaseQueryProvidersRequest(): QueryProvidersRequest {
   return {
@@ -98,10 +84,37 @@ export const QueryProvidersRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProvidersRequest>): QueryProvidersRequest {
+  fromJSON(object: any): QueryProvidersRequest {
+    const obj = createBaseQueryProvidersRequest();
+    if (isSet(object.pagination)) obj.pagination = PageRequest.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryProvidersRequest): JsonSafe<QueryProvidersRequest> {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProvidersRequest>, I>>(object: I): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageRequest.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageRequest.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryProvidersRequestSDKType): QueryProvidersRequest {
+    return {
+      pagination: object.pagination ? PageRequest.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryProvidersRequestSDKType {
+    return {
+      pagination: isSet(object.pagination) ? PageRequest.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryProvidersRequest): QueryProvidersRequestSDKType {
+    const obj: any = {};
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageRequest.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryProvidersRequestAmino): QueryProvidersRequest {
     const message = createBaseQueryProvidersRequest();
@@ -117,6 +130,12 @@ export const QueryProvidersRequest = {
   },
   fromAminoMsg(object: QueryProvidersRequestAminoMsg): QueryProvidersRequest {
     return QueryProvidersRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProvidersRequest): QueryProvidersRequestAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/query-providers-request",
+      value: QueryProvidersRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProvidersRequestProtoMsg): QueryProvidersRequest {
     return QueryProvidersRequest.decode(message.value);
@@ -168,11 +187,51 @@ export const QueryProvidersResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProvidersResponse>): QueryProvidersResponse {
+  fromJSON(object: any): QueryProvidersResponse {
+    const obj = createBaseQueryProvidersResponse();
+    if (Array.isArray(object?.providers)) obj.providers = object.providers.map((e: any) => Provider.fromJSON(e));
+    if (isSet(object.pagination)) obj.pagination = PageResponse.fromJSON(object.pagination);
+    return obj;
+  },
+  toJSON(message: QueryProvidersResponse): JsonSafe<QueryProvidersResponse> {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toJSON(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toJSON(message.pagination) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProvidersResponse>, I>>(object: I): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
     message.providers = object.providers?.map(e => Provider.fromPartial(e)) || [];
-    message.pagination = object.pagination !== undefined && object.pagination !== null ? PageResponse.fromPartial(object.pagination) : undefined;
+    if (object.pagination !== undefined && object.pagination !== null) {
+      message.pagination = PageResponse.fromPartial(object.pagination);
+    }
     return message;
+  },
+  fromSDK(object: QueryProvidersResponseSDKType): QueryProvidersResponse {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDK(e)) : [],
+      pagination: object.pagination ? PageResponse.fromSDK(object.pagination) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryProvidersResponseSDKType {
+    return {
+      providers: Array.isArray(object?.providers) ? object.providers.map((e: any) => Provider.fromSDKJSON(e)) : [],
+      pagination: isSet(object.pagination) ? PageResponse.fromSDKJSON(object.pagination) : undefined
+    };
+  },
+  toSDK(message: QueryProvidersResponse): QueryProvidersResponseSDKType {
+    const obj: any = {};
+    if (message.providers) {
+      obj.providers = message.providers.map(e => e ? Provider.toSDK(e) : undefined);
+    } else {
+      obj.providers = [];
+    }
+    message.pagination !== undefined && (obj.pagination = message.pagination ? PageResponse.toSDK(message.pagination) : undefined);
+    return obj;
   },
   fromAmino(object: QueryProvidersResponseAmino): QueryProvidersResponse {
     const message = createBaseQueryProvidersResponse();
@@ -195,6 +254,12 @@ export const QueryProvidersResponse = {
   fromAminoMsg(object: QueryProvidersResponseAminoMsg): QueryProvidersResponse {
     return QueryProvidersResponse.fromAmino(object.value);
   },
+  toAminoMsg(message: QueryProvidersResponse): QueryProvidersResponseAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/query-providers-response",
+      value: QueryProvidersResponse.toAmino(message)
+    };
+  },
   fromProtoMsg(message: QueryProvidersResponseProtoMsg): QueryProvidersResponse {
     return QueryProvidersResponse.decode(message.value);
   },
@@ -216,7 +281,7 @@ function createBaseQueryProviderRequest(): QueryProviderRequest {
 export const QueryProviderRequest = {
   typeUrl: "/akash.provider.v1beta2.QueryProviderRequest",
   encode(message: QueryProviderRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -238,10 +303,35 @@ export const QueryProviderRequest = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProviderRequest>): QueryProviderRequest {
+  fromJSON(object: any): QueryProviderRequest {
+    const obj = createBaseQueryProviderRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: QueryProviderRequest): JsonSafe<QueryProviderRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProviderRequest>, I>>(object: I): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: QueryProviderRequestSDKType): QueryProviderRequest {
+    return {
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): QueryProviderRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: QueryProviderRequest): QueryProviderRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: QueryProviderRequestAmino): QueryProviderRequest {
     const message = createBaseQueryProviderRequest();
@@ -257,6 +347,12 @@ export const QueryProviderRequest = {
   },
   fromAminoMsg(object: QueryProviderRequestAminoMsg): QueryProviderRequest {
     return QueryProviderRequest.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderRequest): QueryProviderRequestAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/query-provider-request",
+      value: QueryProviderRequest.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProviderRequestProtoMsg): QueryProviderRequest {
     return QueryProviderRequest.decode(message.value);
@@ -301,10 +397,37 @@ export const QueryProviderResponse = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<QueryProviderResponse>): QueryProviderResponse {
+  fromJSON(object: any): QueryProviderResponse {
+    const obj = createBaseQueryProviderResponse();
+    if (isSet(object.provider)) obj.provider = Provider.fromJSON(object.provider);
+    return obj;
+  },
+  toJSON(message: QueryProviderResponse): JsonSafe<QueryProviderResponse> {
+    const obj: any = {};
+    message.provider !== undefined && (obj.provider = message.provider ? Provider.toJSON(message.provider) : undefined);
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<QueryProviderResponse>, I>>(object: I): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
-    message.provider = object.provider !== undefined && object.provider !== null ? Provider.fromPartial(object.provider) : undefined;
+    if (object.provider !== undefined && object.provider !== null) {
+      message.provider = Provider.fromPartial(object.provider);
+    }
     return message;
+  },
+  fromSDK(object: QueryProviderResponseSDKType): QueryProviderResponse {
+    return {
+      provider: object.provider ? Provider.fromSDK(object.provider) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryProviderResponseSDKType {
+    return {
+      provider: isSet(object.provider) ? Provider.fromSDKJSON(object.provider) : undefined
+    };
+  },
+  toSDK(message: QueryProviderResponse): QueryProviderResponseSDKType {
+    const obj: any = {};
+    message.provider !== undefined && (obj.provider = message.provider ? Provider.toSDK(message.provider) : undefined);
+    return obj;
   },
   fromAmino(object: QueryProviderResponseAmino): QueryProviderResponse {
     const message = createBaseQueryProviderResponse();
@@ -320,6 +443,12 @@ export const QueryProviderResponse = {
   },
   fromAminoMsg(object: QueryProviderResponseAminoMsg): QueryProviderResponse {
     return QueryProviderResponse.fromAmino(object.value);
+  },
+  toAminoMsg(message: QueryProviderResponse): QueryProviderResponseAminoMsg {
+    return {
+      type: "akash/provider/v1beta2/query-provider-response",
+      value: QueryProviderResponse.toAmino(message)
+    };
   },
   fromProtoMsg(message: QueryProviderResponseProtoMsg): QueryProviderResponse {
     return QueryProviderResponse.decode(message.value);

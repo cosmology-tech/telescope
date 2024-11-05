@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * Specifies the routing information that should be sent along with the request
  * in the form of routing header.
@@ -737,20 +739,8 @@ export interface RoutingRuleProtoMsg {
  *     x-goog-request-params:
  *     table_location=instances/instance_bar&routing_id=prof_qux
  */
-export interface RoutingRuleAmino {
-  /**
-   * A collection of Routing Parameter specifications.
-   * **NOTE:** If multiple Routing Parameters describe the same key
-   * (via the `path_template` field or via the `field` field when
-   * `path_template` is not provided), "last one wins" rule
-   * determines which Parameter gets used.
-   * See the examples for more details.
-   */
-  routing_parameters: RoutingParameterAmino[];
-}
-export interface RoutingRuleAminoMsg {
-  type: "/google.api.RoutingRule";
-  value: RoutingRuleAmino;
+export interface RoutingRuleSDKType {
+  routing_parameters: RoutingParameterSDKType[];
 }
 /** A projection from an input message to the GRPC or REST header. */
 export interface RoutingParameter {
@@ -819,70 +809,9 @@ export interface RoutingParameterProtoMsg {
   value: Uint8Array;
 }
 /** A projection from an input message to the GRPC or REST header. */
-export interface RoutingParameterAmino {
-  /** A request field to extract the header key-value pair from. */
+export interface RoutingParameterSDKType {
   field: string;
-  /**
-   * A pattern matching the key-value field. Optional.
-   * If not specified, the whole field specified in the `field` field will be
-   * taken as value, and its name used as key. If specified, it MUST contain
-   * exactly one named segment (along with any number of unnamed segments) The
-   * pattern will be matched over the field specified in the `field` field, then
-   * if the match is successful:
-   * - the name of the single named segment will be used as a header name,
-   * - the match value of the segment will be used as a header value;
-   * if the match is NOT successful, nothing will be sent.
-   * 
-   * Example:
-   * 
-   *               -- This is a field in the request message
-   *              |   that the header value will be extracted from.
-   *              |
-   *              |                     -- This is the key name in the
-   *              |                    |   routing header.
-   *              V                    |
-   *     field: "table_name"           v
-   *     path_template: "projects/*\/{table_location=instances/*}/tables/*"
-   *                                                ^            ^
-   *                                                |            |
-   *       In the {} brackets is the pattern that --             |
-   *       specifies what to extract from the                    |
-   *       field as a value to be sent.                          |
-   *                                                             |
-   *      The string in the field must match the whole pattern --
-   *      before brackets, inside brackets, after brackets.
-   * 
-   * When looking at this specific example, we can see that:
-   * - A key-value pair with the key `table_location`
-   *   and the value matching `instances/*` should be added
-   *   to the x-goog-request-params routing header.
-   * - The value is extracted from the request message's `table_name` field
-   *   if it matches the full pattern specified:
-   *   `projects/*\/instances/*\/tables/*`.
-   * 
-   * **NB:** If the `path_template` field is not provided, the key name is
-   * equal to the field name, and the whole field should be sent as a value.
-   * This makes the pattern for the field and the value functionally equivalent
-   * to `**`, and the configuration
-   * 
-   *     {
-   *       field: "table_name"
-   *     }
-   * 
-   * is a functionally equivalent shorthand to:
-   * 
-   *     {
-   *       field: "table_name"
-   *       path_template: "{table_name=**}"
-   *     }
-   * 
-   * See Example 1 for more details.
-   */
   path_template: string;
-}
-export interface RoutingParameterAminoMsg {
-  type: "/google.api.RoutingParameter";
-  value: RoutingParameterAmino;
 }
 function createBaseRoutingRule(): RoutingRule {
   return {
@@ -914,10 +843,43 @@ export const RoutingRule = {
     }
     return message;
   },
+  fromJSON(object: any): RoutingRule {
+    const obj = createBaseRoutingRule();
+    if (Array.isArray(object?.routingParameters)) obj.routingParameters = object.routingParameters.map((e: any) => RoutingParameter.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: RoutingRule): JsonSafe<RoutingRule> {
+    const obj: any = {};
+    if (message.routingParameters) {
+      obj.routingParameters = message.routingParameters.map(e => e ? RoutingParameter.toJSON(e) : undefined);
+    } else {
+      obj.routingParameters = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<RoutingRule>): RoutingRule {
     const message = createBaseRoutingRule();
     message.routingParameters = object.routingParameters?.map(e => RoutingParameter.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: RoutingRuleSDKType): RoutingRule {
+    return {
+      routingParameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): RoutingRuleSDKType {
+    return {
+      routing_parameters: Array.isArray(object?.routing_parameters) ? object.routing_parameters.map((e: any) => RoutingParameter.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: RoutingRule): RoutingRuleSDKType {
+    const obj: any = {};
+    if (message.routingParameters) {
+      obj.routing_parameters = message.routingParameters.map(e => e ? RoutingParameter.toSDK(e) : undefined);
+    } else {
+      obj.routing_parameters = [];
+    }
+    return obj;
   },
   fromAmino(object: RoutingRuleAmino): RoutingRule {
     const message = createBaseRoutingRule();
@@ -958,10 +920,10 @@ function createBaseRoutingParameter(): RoutingParameter {
 export const RoutingParameter = {
   typeUrl: "/google.api.RoutingParameter",
   encode(message: RoutingParameter, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.field !== "") {
+    if (message.field !== undefined) {
       writer.uint32(10).string(message.field);
     }
-    if (message.pathTemplate !== "") {
+    if (message.pathTemplate !== undefined) {
       writer.uint32(18).string(message.pathTemplate);
     }
     return writer;
@@ -986,11 +948,41 @@ export const RoutingParameter = {
     }
     return message;
   },
+  fromJSON(object: any): RoutingParameter {
+    const obj = createBaseRoutingParameter();
+    if (isSet(object.field)) obj.field = String(object.field);
+    if (isSet(object.pathTemplate)) obj.pathTemplate = String(object.pathTemplate);
+    return obj;
+  },
+  toJSON(message: RoutingParameter): JsonSafe<RoutingParameter> {
+    const obj: any = {};
+    message.field !== undefined && (obj.field = message.field);
+    message.pathTemplate !== undefined && (obj.pathTemplate = message.pathTemplate);
+    return obj;
+  },
   fromPartial(object: DeepPartial<RoutingParameter>): RoutingParameter {
     const message = createBaseRoutingParameter();
     message.field = object.field ?? "";
     message.pathTemplate = object.pathTemplate ?? "";
     return message;
+  },
+  fromSDK(object: RoutingParameterSDKType): RoutingParameter {
+    return {
+      field: object?.field,
+      pathTemplate: object?.path_template
+    };
+  },
+  fromSDKJSON(object: any): RoutingParameterSDKType {
+    return {
+      field: isSet(object.field) ? String(object.field) : "",
+      path_template: isSet(object.path_template) ? String(object.path_template) : ""
+    };
+  },
+  toSDK(message: RoutingParameter): RoutingParameterSDKType {
+    const obj: any = {};
+    obj.field = message.field;
+    obj.path_template = message.pathTemplate;
+    return obj;
   },
   fromAmino(object: RoutingParameterAmino): RoutingParameter {
     const message = createBaseRoutingParameter();

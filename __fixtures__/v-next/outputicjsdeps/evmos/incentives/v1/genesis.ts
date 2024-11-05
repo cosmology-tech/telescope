@@ -1,6 +1,9 @@
-import { Incentive, IncentiveAmino, GasMeter, GasMeterAmino } from "./incentives";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { Incentive, IncentiveSDKType, GasMeter, GasMeterSDKType } from "./incentives.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+import { Decimal } from "@cosmjs/math";
+export const protobufPackage = "evmos.incentives.v1";
 /** GenesisState defines the module's genesis state. */
 export interface GenesisState {
   /** module parameters */
@@ -15,17 +18,10 @@ export interface GenesisStateProtoMsg {
   value: Uint8Array;
 }
 /** GenesisState defines the module's genesis state. */
-export interface GenesisStateAmino {
-  /** module parameters */
-  params: ParamsAmino;
-  /** active incentives */
-  incentives: IncentiveAmino[];
-  /** active Gasmeters */
-  gas_meters: GasMeterAmino[];
-}
-export interface GenesisStateAminoMsg {
-  type: "/evmos.incentives.v1.GenesisState";
-  value: GenesisStateAmino;
+export interface GenesisStateSDKType {
+  params: ParamsSDKType;
+  incentives: IncentiveSDKType[];
+  gas_meters: GasMeterSDKType[];
 }
 /** Params defines the incentives module params */
 export interface Params {
@@ -43,19 +39,11 @@ export interface ParamsProtoMsg {
   value: Uint8Array;
 }
 /** Params defines the incentives module params */
-export interface ParamsAmino {
-  /** parameter to enable incentives */
+export interface ParamsSDKType {
   enable_incentives: boolean;
-  /** maximum percentage an incentive can allocate per denomination */
   allocation_limit: string;
-  /** identifier for the epochs module hooks */
   incentives_epoch_identifier: string;
-  /** scaling factor for capping rewards */
   reward_scaler: string;
-}
-export interface ParamsAminoMsg {
-  type: "/evmos.incentives.v1.Params";
-  value: ParamsAmino;
 }
 function createBaseGenesisState(): GenesisState {
   return {
@@ -101,12 +89,65 @@ export const GenesisState = {
     }
     return message;
   },
+  fromJSON(object: any): GenesisState {
+    const obj = createBaseGenesisState();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    if (Array.isArray(object?.incentives)) obj.incentives = object.incentives.map((e: any) => Incentive.fromJSON(e));
+    if (Array.isArray(object?.gasMeters)) obj.gasMeters = object.gasMeters.map((e: any) => GasMeter.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: GenesisState): JsonSafe<GenesisState> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toJSON(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+    if (message.gasMeters) {
+      obj.gasMeters = message.gasMeters.map(e => e ? GasMeter.toJSON(e) : undefined);
+    } else {
+      obj.gasMeters = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<GenesisState>): GenesisState {
     const message = createBaseGenesisState();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     message.incentives = object.incentives?.map(e => Incentive.fromPartial(e)) || [];
     message.gasMeters = object.gasMeters?.map(e => GasMeter.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: GenesisStateSDKType): GenesisState {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDK(e)) : [],
+      gasMeters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): GenesisStateSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined,
+      incentives: Array.isArray(object?.incentives) ? object.incentives.map((e: any) => Incentive.fromSDKJSON(e)) : [],
+      gas_meters: Array.isArray(object?.gas_meters) ? object.gas_meters.map((e: any) => GasMeter.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: GenesisState): GenesisStateSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    if (message.incentives) {
+      obj.incentives = message.incentives.map(e => e ? Incentive.toSDK(e) : undefined);
+    } else {
+      obj.incentives = [];
+    }
+    if (message.gasMeters) {
+      obj.gas_meters = message.gasMeters.map(e => e ? GasMeter.toSDK(e) : undefined);
+    } else {
+      obj.gas_meters = [];
+    }
+    return obj;
   },
   fromAmino(object: GenesisStateAmino): GenesisState {
     const message = createBaseGenesisState();
@@ -159,17 +200,17 @@ function createBaseParams(): Params {
 export const Params = {
   typeUrl: "/evmos.incentives.v1.Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.enableIncentives === true) {
+    if (message.enableIncentives !== undefined) {
       writer.uint32(8).bool(message.enableIncentives);
     }
-    if (message.allocationLimit !== "") {
-      writer.uint32(18).string(message.allocationLimit);
+    if (message.allocationLimit !== undefined) {
+      writer.uint32(18).string(Decimal.fromUserInput(message.allocationLimit, 18).atomics);
     }
-    if (message.incentivesEpochIdentifier !== "") {
+    if (message.incentivesEpochIdentifier !== undefined) {
       writer.uint32(26).string(message.incentivesEpochIdentifier);
     }
-    if (message.rewardScaler !== "") {
-      writer.uint32(34).string(message.rewardScaler);
+    if (message.rewardScaler !== undefined) {
+      writer.uint32(34).string(Decimal.fromUserInput(message.rewardScaler, 18).atomics);
     }
     return writer;
   },
@@ -184,13 +225,13 @@ export const Params = {
           message.enableIncentives = reader.bool();
           break;
         case 2:
-          message.allocationLimit = reader.string();
+          message.allocationLimit = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         case 3:
           message.incentivesEpochIdentifier = reader.string();
           break;
         case 4:
-          message.rewardScaler = reader.string();
+          message.rewardScaler = Decimal.fromAtomics(reader.string(), 18).toString();
           break;
         default:
           reader.skipType(tag & 7);
@@ -199,6 +240,22 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.enableIncentives)) obj.enableIncentives = Boolean(object.enableIncentives);
+    if (isSet(object.allocationLimit)) obj.allocationLimit = String(object.allocationLimit);
+    if (isSet(object.incentivesEpochIdentifier)) obj.incentivesEpochIdentifier = String(object.incentivesEpochIdentifier);
+    if (isSet(object.rewardScaler)) obj.rewardScaler = String(object.rewardScaler);
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.enableIncentives !== undefined && (obj.enableIncentives = message.enableIncentives);
+    message.allocationLimit !== undefined && (obj.allocationLimit = message.allocationLimit);
+    message.incentivesEpochIdentifier !== undefined && (obj.incentivesEpochIdentifier = message.incentivesEpochIdentifier);
+    message.rewardScaler !== undefined && (obj.rewardScaler = message.rewardScaler);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.enableIncentives = object.enableIncentives ?? false;
@@ -206,6 +263,30 @@ export const Params = {
     message.incentivesEpochIdentifier = object.incentivesEpochIdentifier ?? "";
     message.rewardScaler = object.rewardScaler ?? "";
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      enableIncentives: object?.enable_incentives,
+      allocationLimit: object?.allocation_limit,
+      incentivesEpochIdentifier: object?.incentives_epoch_identifier,
+      rewardScaler: object?.reward_scaler
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      enable_incentives: isSet(object.enable_incentives) ? Boolean(object.enable_incentives) : false,
+      allocation_limit: isSet(object.allocation_limit) ? String(object.allocation_limit) : "",
+      incentives_epoch_identifier: isSet(object.incentives_epoch_identifier) ? String(object.incentives_epoch_identifier) : "",
+      reward_scaler: isSet(object.reward_scaler) ? String(object.reward_scaler) : ""
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.enable_incentives = message.enableIncentives;
+    obj.allocation_limit = message.allocationLimit;
+    obj.incentives_epoch_identifier = message.incentivesEpochIdentifier;
+    obj.reward_scaler = message.rewardScaler;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();

@@ -1,6 +1,8 @@
-import { Service, ServiceAmino } from "./resources";
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { Service, ServiceSDKType } from "./resources.js";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "google.api.serviceusage.v1";
 /**
  * Enum to determine if service usage should be checked when disabling a
  * service.
@@ -18,7 +20,7 @@ export enum DisableServiceRequest_CheckIfServiceHasUsage {
   CHECK = 2,
   UNRECOGNIZED = -1,
 }
-export const DisableServiceRequest_CheckIfServiceHasUsageAmino = DisableServiceRequest_CheckIfServiceHasUsage;
+export const DisableServiceRequest_CheckIfServiceHasUsageSDKType = DisableServiceRequest_CheckIfServiceHasUsage;
 export function disableServiceRequest_CheckIfServiceHasUsageFromJSON(object: any): DisableServiceRequest_CheckIfServiceHasUsage {
   switch (object) {
     case 0:
@@ -71,25 +73,8 @@ export interface EnableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `EnableService` method. */
-export interface EnableServiceRequestAmino {
-  /**
-   * Name of the consumer and service to enable the service on.
-   * 
-   * The `EnableService` and `DisableService` methods currently only support
-   * projects.
-   * 
-   * Enabling a service requires that the service is public or is shared with
-   * the user enabling the service.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
+export interface EnableServiceRequestSDKType {
   name: string;
-}
-export interface EnableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableServiceRequest";
-  value: EnableServiceRequestAmino;
 }
 /**
  * Response message for the `EnableService` method.
@@ -109,13 +94,8 @@ export interface EnableServiceResponseProtoMsg {
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
-export interface EnableServiceResponseAmino {
-  /** The new state of the service after enabling. */
-  service?: ServiceAmino;
-}
-export interface EnableServiceResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableServiceResponse";
-  value: EnableServiceResponseAmino;
+export interface EnableServiceResponseSDKType {
+  service?: ServiceSDKType;
 }
 /** Request message for the `DisableService` method. */
 export interface DisableServiceRequest {
@@ -145,31 +125,10 @@ export interface DisableServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `DisableService` method. */
-export interface DisableServiceRequestAmino {
-  /**
-   * Name of the consumer and service to disable the service on.
-   * 
-   * The enable and disable methods currently only support projects.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
+export interface DisableServiceRequestSDKType {
   name: string;
-  /**
-   * Indicates if services that are enabled and which depend on this service
-   * should also be disabled. If not set, an error will be generated if any
-   * enabled services depend on the service to be disabled. When set, the
-   * service, and any enabled services that depend on it, will be disabled
-   * together.
-   */
   disable_dependent_services: boolean;
-  /** Defines the behavior for checking service usage when disabling a service. */
   check_if_service_has_usage: DisableServiceRequest_CheckIfServiceHasUsage;
-}
-export interface DisableServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.DisableServiceRequest";
-  value: DisableServiceRequestAmino;
 }
 /**
  * Response message for the `DisableService` method.
@@ -189,13 +148,8 @@ export interface DisableServiceResponseProtoMsg {
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
-export interface DisableServiceResponseAmino {
-  /** The new state of the service after disabling. */
-  service?: ServiceAmino;
-}
-export interface DisableServiceResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.DisableServiceResponse";
-  value: DisableServiceResponseAmino;
+export interface DisableServiceResponseSDKType {
+  service?: ServiceSDKType;
 }
 /** Request message for the `GetService` method. */
 export interface GetServiceRequest {
@@ -213,19 +167,8 @@ export interface GetServiceRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `GetService` method. */
-export interface GetServiceRequestAmino {
-  /**
-   * Name of the consumer and service to get the `ConsumerState` for.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   */
+export interface GetServiceRequestSDKType {
   name: string;
-}
-export interface GetServiceRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.GetServiceRequest";
-  value: GetServiceRequestAmino;
 }
 /** Request message for the `ListServices` method. */
 export interface ListServicesRequest {
@@ -258,34 +201,11 @@ export interface ListServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `ListServices` method. */
-export interface ListServicesRequestAmino {
-  /**
-   * Parent to search for services on.
-   * 
-   * An example name would be:
-   * `projects/123` where `123` is the project number.
-   */
+export interface ListServicesRequestSDKType {
   parent: string;
-  /**
-   * Requested size of the next page of data.
-   * Requested page size cannot exceed 200.
-   * If not set, the default page size is 50.
-   */
   page_size: number;
-  /**
-   * Token identifying which result to start with, which is returned by a
-   * previous list call.
-   */
   page_token: string;
-  /**
-   * Only list services that conform to the given filter.
-   * The allowed filter strings are `state:ENABLED` and `state:DISABLED`.
-   */
   filter: string;
-}
-export interface ListServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.ListServicesRequest";
-  value: ListServicesRequestAmino;
 }
 /** Response message for the `ListServices` method. */
 export interface ListServicesResponse {
@@ -302,18 +222,9 @@ export interface ListServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the `ListServices` method. */
-export interface ListServicesResponseAmino {
-  /** The available services for the requested project. */
-  services: ServiceAmino[];
-  /**
-   * Token that can be passed to `ListServices` to resume a paginated
-   * query.
-   */
+export interface ListServicesResponseSDKType {
+  services: ServiceSDKType[];
   next_page_token: string;
-}
-export interface ListServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.ListServicesResponse";
-  value: ListServicesResponseAmino;
 }
 /** Request message for the `BatchEnableServices` method. */
 export interface BatchEnableServicesRequest {
@@ -346,34 +257,9 @@ export interface BatchEnableServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `BatchEnableServices` method. */
-export interface BatchEnableServicesRequestAmino {
-  /**
-   * Parent to enable services on.
-   * 
-   * An example name would be:
-   * `projects/123` where `123` is the project number.
-   * 
-   * The `BatchEnableServices` method currently only supports projects.
-   */
+export interface BatchEnableServicesRequestSDKType {
   parent: string;
-  /**
-   * The identifiers of the services to enable on the project.
-   * 
-   * A valid identifier would be:
-   * serviceusage.googleapis.com
-   * 
-   * Enabling services requires that each service is public or is shared with
-   * the user enabling the service.
-   * 
-   * A single request can enable a maximum of 20 services at a time. If more
-   * than 20 services are specified, the request will fail, and no state changes
-   * will occur.
-   */
   service_ids: string[];
-}
-export interface BatchEnableServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchEnableServicesRequest";
-  value: BatchEnableServicesRequestAmino;
 }
 /**
  * Response message for the `BatchEnableServices` method.
@@ -398,18 +284,9 @@ export interface BatchEnableServicesResponseProtoMsg {
  * This response message is assigned to the `response` field of the returned
  * Operation when that operation is done.
  */
-export interface BatchEnableServicesResponseAmino {
-  /** The new state of the services after enabling. */
-  services: ServiceAmino[];
-  /**
-   * If allow_partial_success is true, and one or more services could not be
-   * enabled, this field contains the details about each failure.
-   */
-  failures: BatchEnableServicesResponse_EnableFailureAmino[];
-}
-export interface BatchEnableServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchEnableServicesResponse";
-  value: BatchEnableServicesResponseAmino;
+export interface BatchEnableServicesResponseSDKType {
+  services: ServiceSDKType[];
+  failures: BatchEnableServicesResponse_EnableFailureSDKType[];
 }
 /** Provides error messages for the failing services. */
 export interface BatchEnableServicesResponse_EnableFailure {
@@ -423,15 +300,9 @@ export interface BatchEnableServicesResponse_EnableFailureProtoMsg {
   value: Uint8Array;
 }
 /** Provides error messages for the failing services. */
-export interface BatchEnableServicesResponse_EnableFailureAmino {
-  /** The service id of a service that could not be enabled. */
+export interface BatchEnableServicesResponse_EnableFailureSDKType {
   service_id: string;
-  /** An error message describing why the service could not be enabled. */
   error_message: string;
-}
-export interface BatchEnableServicesResponse_EnableFailureAminoMsg {
-  type: "/google.api.serviceusage.v1.EnableFailure";
-  value: BatchEnableServicesResponse_EnableFailureAmino;
 }
 /** Request message for the `BatchGetServices` method. */
 export interface BatchGetServicesRequest {
@@ -458,28 +329,9 @@ export interface BatchGetServicesRequestProtoMsg {
   value: Uint8Array;
 }
 /** Request message for the `BatchGetServices` method. */
-export interface BatchGetServicesRequestAmino {
-  /**
-   * Parent to retrieve services from.
-   * If this is set, the parent of all of the services specified in `names` must
-   * match this field. An example name would be: `projects/123` where `123` is
-   * the project number. The `BatchGetServices` method currently only supports
-   * projects.
-   */
+export interface BatchGetServicesRequestSDKType {
   parent: string;
-  /**
-   * Names of the services to retrieve.
-   * 
-   * An example name would be:
-   * `projects/123/services/serviceusage.googleapis.com` where `123` is the
-   * project number.
-   * A single request can get a maximum of 30 services at a time.
-   */
   names: string[];
-}
-export interface BatchGetServicesRequestAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchGetServicesRequest";
-  value: BatchGetServicesRequestAmino;
 }
 /** Response message for the `BatchGetServices` method. */
 export interface BatchGetServicesResponse {
@@ -491,13 +343,8 @@ export interface BatchGetServicesResponseProtoMsg {
   value: Uint8Array;
 }
 /** Response message for the `BatchGetServices` method. */
-export interface BatchGetServicesResponseAmino {
-  /** The requested Service states. */
-  services: ServiceAmino[];
-}
-export interface BatchGetServicesResponseAminoMsg {
-  type: "/google.api.serviceusage.v1.BatchGetServicesResponse";
-  value: BatchGetServicesResponseAmino;
+export interface BatchGetServicesResponseSDKType {
+  services: ServiceSDKType[];
 }
 function createBaseEnableServiceRequest(): EnableServiceRequest {
   return {
@@ -507,7 +354,7 @@ function createBaseEnableServiceRequest(): EnableServiceRequest {
 export const EnableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.EnableServiceRequest",
   encode(message: EnableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -529,10 +376,35 @@ export const EnableServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): EnableServiceRequest {
+    const obj = createBaseEnableServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
+  },
+  toJSON(message: EnableServiceRequest): JsonSafe<EnableServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
+  },
   fromPartial(object: DeepPartial<EnableServiceRequest>): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+  fromSDK(object: EnableServiceRequestSDKType): EnableServiceRequest {
+    return {
+      name: object?.name
+    };
+  },
+  fromSDKJSON(object: any): EnableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+  toSDK(message: EnableServiceRequest): EnableServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   },
   fromAmino(object: EnableServiceRequestAmino): EnableServiceRequest {
     const message = createBaseEnableServiceRequest();
@@ -592,10 +464,37 @@ export const EnableServiceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): EnableServiceResponse {
+    const obj = createBaseEnableServiceResponse();
+    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
+    return obj;
+  },
+  toJSON(message: EnableServiceResponse): JsonSafe<EnableServiceResponse> {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<EnableServiceResponse>): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
+    if (object.service !== undefined && object.service !== null) {
+      message.service = Service.fromPartial(object.service);
+    }
     return message;
+  },
+  fromSDK(object: EnableServiceResponseSDKType): EnableServiceResponse {
+    return {
+      service: object.service ? Service.fromSDK(object.service) : undefined
+    };
+  },
+  fromSDKJSON(object: any): EnableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
+    };
+  },
+  toSDK(message: EnableServiceResponse): EnableServiceResponseSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
+    return obj;
   },
   fromAmino(object: EnableServiceResponseAmino): EnableServiceResponse {
     const message = createBaseEnableServiceResponse();
@@ -635,10 +534,10 @@ function createBaseDisableServiceRequest(): DisableServiceRequest {
 export const DisableServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.DisableServiceRequest",
   encode(message: DisableServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
-    if (message.disableDependentServices === true) {
+    if (message.disableDependentServices !== undefined) {
       writer.uint32(16).bool(message.disableDependentServices);
     }
     if (message.checkIfServiceHasUsage !== 0) {
@@ -669,12 +568,47 @@ export const DisableServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): DisableServiceRequest {
+    const obj = createBaseDisableServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (isSet(object.disableDependentServices)) obj.disableDependentServices = Boolean(object.disableDependentServices);
+    if (isSet(object.checkIfServiceHasUsage)) obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.checkIfServiceHasUsage);
+    return obj;
+  },
+  toJSON(message: DisableServiceRequest): JsonSafe<DisableServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    message.disableDependentServices !== undefined && (obj.disableDependentServices = message.disableDependentServices);
+    message.checkIfServiceHasUsage !== undefined && (obj.checkIfServiceHasUsage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
+    return obj;
+  },
   fromPartial(object: DeepPartial<DisableServiceRequest>): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
     message.name = object.name ?? "";
     message.disableDependentServices = object.disableDependentServices ?? false;
     message.checkIfServiceHasUsage = object.checkIfServiceHasUsage ?? 0;
     return message;
+  },
+  fromSDK(object: DisableServiceRequestSDKType): DisableServiceRequest {
+    return {
+      name: object?.name,
+      disableDependentServices: object?.disable_dependent_services,
+      checkIfServiceHasUsage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
+    };
+  },
+  fromSDKJSON(object: any): DisableServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      disable_dependent_services: isSet(object.disable_dependent_services) ? Boolean(object.disable_dependent_services) : false,
+      check_if_service_has_usage: isSet(object.check_if_service_has_usage) ? disableServiceRequest_CheckIfServiceHasUsageFromJSON(object.check_if_service_has_usage) : -1
+    };
+  },
+  toSDK(message: DisableServiceRequest): DisableServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    obj.disable_dependent_services = message.disableDependentServices;
+    message.checkIfServiceHasUsage !== undefined && (obj.check_if_service_has_usage = disableServiceRequest_CheckIfServiceHasUsageToJSON(message.checkIfServiceHasUsage));
+    return obj;
   },
   fromAmino(object: DisableServiceRequestAmino): DisableServiceRequest {
     const message = createBaseDisableServiceRequest();
@@ -742,10 +676,37 @@ export const DisableServiceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): DisableServiceResponse {
+    const obj = createBaseDisableServiceResponse();
+    if (isSet(object.service)) obj.service = Service.fromJSON(object.service);
+    return obj;
+  },
+  toJSON(message: DisableServiceResponse): JsonSafe<DisableServiceResponse> {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? Service.toJSON(message.service) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DisableServiceResponse>): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
-    message.service = object.service !== undefined && object.service !== null ? Service.fromPartial(object.service) : undefined;
+    if (object.service !== undefined && object.service !== null) {
+      message.service = Service.fromPartial(object.service);
+    }
     return message;
+  },
+  fromSDK(object: DisableServiceResponseSDKType): DisableServiceResponse {
+    return {
+      service: object.service ? Service.fromSDK(object.service) : undefined
+    };
+  },
+  fromSDKJSON(object: any): DisableServiceResponseSDKType {
+    return {
+      service: isSet(object.service) ? Service.fromSDKJSON(object.service) : undefined
+    };
+  },
+  toSDK(message: DisableServiceResponse): DisableServiceResponseSDKType {
+    const obj: any = {};
+    message.service !== undefined && (obj.service = message.service ? Service.toSDK(message.service) : undefined);
+    return obj;
   },
   fromAmino(object: DisableServiceResponseAmino): DisableServiceResponse {
     const message = createBaseDisableServiceResponse();
@@ -783,7 +744,7 @@ function createBaseGetServiceRequest(): GetServiceRequest {
 export const GetServiceRequest = {
   typeUrl: "/google.api.serviceusage.v1.GetServiceRequest",
   encode(message: GetServiceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     return writer;
@@ -805,10 +766,35 @@ export const GetServiceRequest = {
     }
     return message;
   },
+  fromJSON(object: any): GetServiceRequest {
+    const obj = createBaseGetServiceRequest();
+    if (isSet(object.name)) obj.name = String(object.name);
+    return obj;
+  },
+  toJSON(message: GetServiceRequest): JsonSafe<GetServiceRequest> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    return obj;
+  },
   fromPartial(object: DeepPartial<GetServiceRequest>): GetServiceRequest {
     const message = createBaseGetServiceRequest();
     message.name = object.name ?? "";
     return message;
+  },
+  fromSDK(object: GetServiceRequestSDKType): GetServiceRequest {
+    return {
+      name: object?.name
+    };
+  },
+  fromSDKJSON(object: any): GetServiceRequestSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : ""
+    };
+  },
+  toSDK(message: GetServiceRequest): GetServiceRequestSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    return obj;
   },
   fromAmino(object: GetServiceRequestAmino): GetServiceRequest {
     const message = createBaseGetServiceRequest();
@@ -849,16 +835,16 @@ function createBaseListServicesRequest(): ListServicesRequest {
 export const ListServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.ListServicesRequest",
   encode(message: ListServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
-    if (message.pageSize !== 0) {
+    if (message.pageSize !== undefined) {
       writer.uint32(16).int32(message.pageSize);
     }
-    if (message.pageToken !== "") {
+    if (message.pageToken !== undefined) {
       writer.uint32(26).string(message.pageToken);
     }
-    if (message.filter !== "") {
+    if (message.filter !== undefined) {
       writer.uint32(34).string(message.filter);
     }
     return writer;
@@ -889,6 +875,22 @@ export const ListServicesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListServicesRequest {
+    const obj = createBaseListServicesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (isSet(object.pageSize)) obj.pageSize = Number(object.pageSize);
+    if (isSet(object.pageToken)) obj.pageToken = String(object.pageToken);
+    if (isSet(object.filter)) obj.filter = String(object.filter);
+    return obj;
+  },
+  toJSON(message: ListServicesRequest): JsonSafe<ListServicesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    message.pageSize !== undefined && (obj.pageSize = Math.round(message.pageSize));
+    message.pageToken !== undefined && (obj.pageToken = message.pageToken);
+    message.filter !== undefined && (obj.filter = message.filter);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListServicesRequest>): ListServicesRequest {
     const message = createBaseListServicesRequest();
     message.parent = object.parent ?? "";
@@ -896,6 +898,30 @@ export const ListServicesRequest = {
     message.pageToken = object.pageToken ?? "";
     message.filter = object.filter ?? "";
     return message;
+  },
+  fromSDK(object: ListServicesRequestSDKType): ListServicesRequest {
+    return {
+      parent: object?.parent,
+      pageSize: object?.page_size,
+      pageToken: object?.page_token,
+      filter: object?.filter
+    };
+  },
+  fromSDKJSON(object: any): ListServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      page_size: isSet(object.page_size) ? Number(object.page_size) : 0,
+      page_token: isSet(object.page_token) ? String(object.page_token) : "",
+      filter: isSet(object.filter) ? String(object.filter) : ""
+    };
+  },
+  toSDK(message: ListServicesRequest): ListServicesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    obj.page_size = message.pageSize;
+    obj.page_token = message.pageToken;
+    obj.filter = message.filter;
+    return obj;
   },
   fromAmino(object: ListServicesRequestAmino): ListServicesRequest {
     const message = createBaseListServicesRequest();
@@ -949,7 +975,7 @@ export const ListServicesResponse = {
     for (const v of message.services) {
       Service.encode(v!, writer.uint32(10).fork()).ldelim();
     }
-    if (message.nextPageToken !== "") {
+    if (message.nextPageToken !== undefined) {
       writer.uint32(18).string(message.nextPageToken);
     }
     return writer;
@@ -974,11 +1000,49 @@ export const ListServicesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListServicesResponse {
+    const obj = createBaseListServicesResponse();
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
+    if (isSet(object.nextPageToken)) obj.nextPageToken = String(object.nextPageToken);
+    return obj;
+  },
+  toJSON(message: ListServicesResponse): JsonSafe<ListServicesResponse> {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    message.nextPageToken !== undefined && (obj.nextPageToken = message.nextPageToken);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListServicesResponse>): ListServicesResponse {
     const message = createBaseListServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
+  },
+  fromSDK(object: ListServicesResponseSDKType): ListServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
+      nextPageToken: object?.next_page_token
+    };
+  },
+  fromSDKJSON(object: any): ListServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      next_page_token: isSet(object.next_page_token) ? String(object.next_page_token) : ""
+    };
+  },
+  toSDK(message: ListServicesResponse): ListServicesResponseSDKType {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    obj.next_page_token = message.nextPageToken;
+    return obj;
   },
   fromAmino(object: ListServicesResponseAmino): ListServicesResponse {
     const message = createBaseListServicesResponse();
@@ -1023,7 +1087,7 @@ function createBaseBatchEnableServicesRequest(): BatchEnableServicesRequest {
 export const BatchEnableServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchEnableServicesRequest",
   encode(message: BatchEnableServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.serviceIds) {
@@ -1051,11 +1115,49 @@ export const BatchEnableServicesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): BatchEnableServicesRequest {
+    const obj = createBaseBatchEnableServicesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (Array.isArray(object?.serviceIds)) obj.serviceIds = object.serviceIds.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: BatchEnableServicesRequest): JsonSafe<BatchEnableServicesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    if (message.serviceIds) {
+      obj.serviceIds = message.serviceIds.map(e => e);
+    } else {
+      obj.serviceIds = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchEnableServicesRequest>): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
     message.parent = object.parent ?? "";
     message.serviceIds = object.serviceIds?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: BatchEnableServicesRequestSDKType): BatchEnableServicesRequest {
+    return {
+      parent: object?.parent,
+      serviceIds: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchEnableServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      service_ids: Array.isArray(object?.service_ids) ? object.service_ids.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: BatchEnableServicesRequest): BatchEnableServicesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    if (message.serviceIds) {
+      obj.service_ids = message.serviceIds.map(e => e);
+    } else {
+      obj.service_ids = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchEnableServicesRequestAmino): BatchEnableServicesRequest {
     const message = createBaseBatchEnableServicesRequest();
@@ -1128,11 +1230,57 @@ export const BatchEnableServicesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): BatchEnableServicesResponse {
+    const obj = createBaseBatchEnableServicesResponse();
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
+    if (Array.isArray(object?.failures)) obj.failures = object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: BatchEnableServicesResponse): JsonSafe<BatchEnableServicesResponse> {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    if (message.failures) {
+      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toJSON(e) : undefined);
+    } else {
+      obj.failures = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchEnableServicesResponse>): BatchEnableServicesResponse {
     const message = createBaseBatchEnableServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     message.failures = object.failures?.map(e => BatchEnableServicesResponse_EnableFailure.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: BatchEnableServicesResponseSDKType): BatchEnableServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchEnableServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : [],
+      failures: Array.isArray(object?.failures) ? object.failures.map((e: any) => BatchEnableServicesResponse_EnableFailure.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: BatchEnableServicesResponse): BatchEnableServicesResponseSDKType {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    if (message.failures) {
+      obj.failures = message.failures.map(e => e ? BatchEnableServicesResponse_EnableFailure.toSDK(e) : undefined);
+    } else {
+      obj.failures = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchEnableServicesResponseAmino): BatchEnableServicesResponse {
     const message = createBaseBatchEnableServicesResponse();
@@ -1179,10 +1327,10 @@ function createBaseBatchEnableServicesResponse_EnableFailure(): BatchEnableServi
 export const BatchEnableServicesResponse_EnableFailure = {
   typeUrl: "/google.api.serviceusage.v1.EnableFailure",
   encode(message: BatchEnableServicesResponse_EnableFailure, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.serviceId !== "") {
+    if (message.serviceId !== undefined) {
       writer.uint32(10).string(message.serviceId);
     }
-    if (message.errorMessage !== "") {
+    if (message.errorMessage !== undefined) {
       writer.uint32(18).string(message.errorMessage);
     }
     return writer;
@@ -1207,11 +1355,41 @@ export const BatchEnableServicesResponse_EnableFailure = {
     }
     return message;
   },
+  fromJSON(object: any): BatchEnableServicesResponse_EnableFailure {
+    const obj = createBaseBatchEnableServicesResponse_EnableFailure();
+    if (isSet(object.serviceId)) obj.serviceId = String(object.serviceId);
+    if (isSet(object.errorMessage)) obj.errorMessage = String(object.errorMessage);
+    return obj;
+  },
+  toJSON(message: BatchEnableServicesResponse_EnableFailure): JsonSafe<BatchEnableServicesResponse_EnableFailure> {
+    const obj: any = {};
+    message.serviceId !== undefined && (obj.serviceId = message.serviceId);
+    message.errorMessage !== undefined && (obj.errorMessage = message.errorMessage);
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchEnableServicesResponse_EnableFailure>): BatchEnableServicesResponse_EnableFailure {
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
     message.serviceId = object.serviceId ?? "";
     message.errorMessage = object.errorMessage ?? "";
     return message;
+  },
+  fromSDK(object: BatchEnableServicesResponse_EnableFailureSDKType): BatchEnableServicesResponse_EnableFailure {
+    return {
+      serviceId: object?.service_id,
+      errorMessage: object?.error_message
+    };
+  },
+  fromSDKJSON(object: any): BatchEnableServicesResponse_EnableFailureSDKType {
+    return {
+      service_id: isSet(object.service_id) ? String(object.service_id) : "",
+      error_message: isSet(object.error_message) ? String(object.error_message) : ""
+    };
+  },
+  toSDK(message: BatchEnableServicesResponse_EnableFailure): BatchEnableServicesResponse_EnableFailureSDKType {
+    const obj: any = {};
+    obj.service_id = message.serviceId;
+    obj.error_message = message.errorMessage;
+    return obj;
   },
   fromAmino(object: BatchEnableServicesResponse_EnableFailureAmino): BatchEnableServicesResponse_EnableFailure {
     const message = createBaseBatchEnableServicesResponse_EnableFailure();
@@ -1254,7 +1432,7 @@ function createBaseBatchGetServicesRequest(): BatchGetServicesRequest {
 export const BatchGetServicesRequest = {
   typeUrl: "/google.api.serviceusage.v1.BatchGetServicesRequest",
   encode(message: BatchGetServicesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.parent !== "") {
+    if (message.parent !== undefined) {
       writer.uint32(10).string(message.parent);
     }
     for (const v of message.names) {
@@ -1282,11 +1460,49 @@ export const BatchGetServicesRequest = {
     }
     return message;
   },
+  fromJSON(object: any): BatchGetServicesRequest {
+    const obj = createBaseBatchGetServicesRequest();
+    if (isSet(object.parent)) obj.parent = String(object.parent);
+    if (Array.isArray(object?.names)) obj.names = object.names.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: BatchGetServicesRequest): JsonSafe<BatchGetServicesRequest> {
+    const obj: any = {};
+    message.parent !== undefined && (obj.parent = message.parent);
+    if (message.names) {
+      obj.names = message.names.map(e => e);
+    } else {
+      obj.names = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchGetServicesRequest>): BatchGetServicesRequest {
     const message = createBaseBatchGetServicesRequest();
     message.parent = object.parent ?? "";
     message.names = object.names?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: BatchGetServicesRequestSDKType): BatchGetServicesRequest {
+    return {
+      parent: object?.parent,
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchGetServicesRequestSDKType {
+    return {
+      parent: isSet(object.parent) ? String(object.parent) : "",
+      names: Array.isArray(object?.names) ? object.names.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: BatchGetServicesRequest): BatchGetServicesRequestSDKType {
+    const obj: any = {};
+    obj.parent = message.parent;
+    if (message.names) {
+      obj.names = message.names.map(e => e);
+    } else {
+      obj.names = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchGetServicesRequestAmino): BatchGetServicesRequest {
     const message = createBaseBatchGetServicesRequest();
@@ -1352,10 +1568,43 @@ export const BatchGetServicesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): BatchGetServicesResponse {
+    const obj = createBaseBatchGetServicesResponse();
+    if (Array.isArray(object?.services)) obj.services = object.services.map((e: any) => Service.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: BatchGetServicesResponse): JsonSafe<BatchGetServicesResponse> {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toJSON(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<BatchGetServicesResponse>): BatchGetServicesResponse {
     const message = createBaseBatchGetServicesResponse();
     message.services = object.services?.map(e => Service.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: BatchGetServicesResponseSDKType): BatchGetServicesResponse {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): BatchGetServicesResponseSDKType {
+    return {
+      services: Array.isArray(object?.services) ? object.services.map((e: any) => Service.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: BatchGetServicesResponse): BatchGetServicesResponseSDKType {
+    const obj: any = {};
+    if (message.services) {
+      obj.services = message.services.map(e => e ? Service.toSDK(e) : undefined);
+    } else {
+      obj.services = [];
+    }
+    return obj;
   },
   fromAmino(object: BatchGetServicesResponseAmino): BatchGetServicesResponse {
     const message = createBaseBatchGetServicesResponse();

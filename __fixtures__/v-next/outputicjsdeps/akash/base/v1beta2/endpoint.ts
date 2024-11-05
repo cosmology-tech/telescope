@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial, Exact } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "akash.base.v1beta2";
 /** This describes how the endpoint is implemented when the lease is deployed */
 export enum Endpoint_Kind {
   /** SHARED_HTTP - Describes an endpoint that becomes a Kubernetes Ingress */
@@ -10,7 +12,7 @@ export enum Endpoint_Kind {
   LEASED_IP = 2,
   UNRECOGNIZED = -1,
 }
-export const Endpoint_KindAmino = Endpoint_Kind;
+export const Endpoint_KindSDKType = Endpoint_Kind;
 export function endpoint_KindFromJSON(object: any): Endpoint_Kind {
   switch (object) {
     case 0:
@@ -51,13 +53,9 @@ export interface EndpointProtoMsg {
   value: Uint8Array;
 }
 /** Endpoint describes a publicly accessible IP service */
-export interface EndpointAmino {
+export interface EndpointSDKType {
   kind: Endpoint_Kind;
   sequence_number: number;
-}
-export interface EndpointAminoMsg {
-  type: "/akash.base.v1beta2.Endpoint";
-  value: EndpointAmino;
 }
 function createBaseEndpoint(): Endpoint {
   return {
@@ -71,7 +69,7 @@ export const Endpoint = {
     if (message.kind !== 0) {
       writer.uint32(8).int32(message.kind);
     }
-    if (message.sequenceNumber !== 0) {
+    if (message.sequenceNumber !== undefined) {
       writer.uint32(16).uint32(message.sequenceNumber);
     }
     return writer;
@@ -96,11 +94,41 @@ export const Endpoint = {
     }
     return message;
   },
-  fromPartial(object: DeepPartial<Endpoint>): Endpoint {
+  fromJSON(object: any): Endpoint {
+    const obj = createBaseEndpoint();
+    if (isSet(object.kind)) obj.kind = endpoint_KindFromJSON(object.kind);
+    if (isSet(object.sequenceNumber)) obj.sequenceNumber = Number(object.sequenceNumber);
+    return obj;
+  },
+  toJSON(message: Endpoint): JsonSafe<Endpoint> {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    message.sequenceNumber !== undefined && (obj.sequenceNumber = Math.round(message.sequenceNumber));
+    return obj;
+  },
+  fromPartial<I extends Exact<DeepPartial<Endpoint>, I>>(object: I): Endpoint {
     const message = createBaseEndpoint();
     message.kind = object.kind ?? 0;
     message.sequenceNumber = object.sequenceNumber ?? 0;
     return message;
+  },
+  fromSDK(object: EndpointSDKType): Endpoint {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequenceNumber: object?.sequence_number
+    };
+  },
+  fromSDKJSON(object: any): EndpointSDKType {
+    return {
+      kind: isSet(object.kind) ? endpoint_KindFromJSON(object.kind) : -1,
+      sequence_number: isSet(object.sequence_number) ? Number(object.sequence_number) : 0
+    };
+  },
+  toSDK(message: Endpoint): EndpointSDKType {
+    const obj: any = {};
+    message.kind !== undefined && (obj.kind = endpoint_KindToJSON(message.kind));
+    obj.sequence_number = message.sequenceNumber;
+    return obj;
   },
   fromAmino(object: EndpointAmino): Endpoint {
     const message = createBaseEndpoint();
@@ -120,6 +148,12 @@ export const Endpoint = {
   },
   fromAminoMsg(object: EndpointAminoMsg): Endpoint {
     return Endpoint.fromAmino(object.value);
+  },
+  toAminoMsg(message: Endpoint): EndpointAminoMsg {
+    return {
+      type: "akash/base/v1beta2/endpoint",
+      value: Endpoint.toAmino(message)
+    };
   },
   fromProtoMsg(message: EndpointProtoMsg): Endpoint {
     return Endpoint.decode(message.value);

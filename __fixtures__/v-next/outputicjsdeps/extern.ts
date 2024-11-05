@@ -4,14 +4,10 @@
 * and run the transpile command or npm scripts command that is used to regenerate this bundle.
 */
 
+import { QueryClient, createProtobufRpcClient, ProtobufRpcClient } from '@cosmjs/stargate'
+import { connectComet, HttpEndpoint } from "@cosmjs/tendermint-rpc";
 
-import { HttpEndpoint } from "@interchainjs/types";
-import {
-  createQueryRpc,
-} from '@interchainjs/cosmos/utils';
-import { Rpc } from "./helpers";
-
-const _rpcClients: Record<string, Rpc> = {};
+const _rpcClients: Record<string, ProtobufRpcClient> = {};
 
 export const getRpcEndpointKey = (rpcEndpoint: string | HttpEndpoint) => {
     if (typeof rpcEndpoint === 'string') {
@@ -28,11 +24,19 @@ export const getRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
     if (_rpcClients.hasOwnProperty(key)) {
         return _rpcClients[key];
     }
-    const rpc = await createRpcClient(rpcEndpoint);
+    const cometClient = await connectComet(rpcEndpoint);
+    //@ts-ignore
+    const client = new QueryClient(cometClient);
+    const rpc = createProtobufRpcClient(client);
     _rpcClients[key] = rpc;
     return rpc;
 }
 
 export const createRpcClient = async (rpcEndpoint: string | HttpEndpoint) => {
-  return createQueryRpc(rpcEndpoint)
+  const cometClient = await connectComet(rpcEndpoint);
+  //@ts-ignore
+  const client = new QueryClient(cometClient);
+  const rpc = createProtobufRpcClient(client);
+
+  return rpc;
 }

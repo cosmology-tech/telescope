@@ -1,6 +1,8 @@
-import { LabelDescriptor, LabelDescriptorAmino } from "./label";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { isSet, DeepPartial } from "../../helpers.js";
+import { JsonSafe } from "../../json-safe.js";
+export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
  * 
@@ -50,34 +52,11 @@ export interface LogDescriptorProtoMsg {
  *       - key: /customer_id
  *         description: Identifier of a library customer
  */
-export interface LogDescriptorAmino {
-  /**
-   * The name of the log. It must be less than 512 characters long and can
-   * include the following characters: upper- and lower-case alphanumeric
-   * characters [A-Za-z0-9], and punctuation characters including
-   * slash, underscore, hyphen, period [/_-.].
-   */
+export interface LogDescriptorSDKType {
   name: string;
-  /**
-   * The set of labels that are available to describe a specific log entry.
-   * Runtime requests that contain labels not specified here are
-   * considered invalid.
-   */
-  labels: LabelDescriptorAmino[];
-  /**
-   * A human-readable description of this log. This information appears in
-   * the documentation and can contain details.
-   */
+  labels: LabelDescriptorSDKType[];
   description: string;
-  /**
-   * The human-readable name for this log. This information appears on
-   * the user interface and should be concise.
-   */
   display_name: string;
-}
-export interface LogDescriptorAminoMsg {
-  type: "/google.api.LogDescriptor";
-  value: LogDescriptorAmino;
 }
 function createBaseLogDescriptor(): LogDescriptor {
   return {
@@ -90,16 +69,16 @@ function createBaseLogDescriptor(): LogDescriptor {
 export const LogDescriptor = {
   typeUrl: "/google.api.LogDescriptor",
   encode(message: LogDescriptor, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.name !== "") {
+    if (message.name !== undefined) {
       writer.uint32(10).string(message.name);
     }
     for (const v of message.labels) {
       LabelDescriptor.encode(v!, writer.uint32(18).fork()).ldelim();
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(26).string(message.description);
     }
-    if (message.displayName !== "") {
+    if (message.displayName !== undefined) {
       writer.uint32(34).string(message.displayName);
     }
     return writer;
@@ -130,6 +109,26 @@ export const LogDescriptor = {
     }
     return message;
   },
+  fromJSON(object: any): LogDescriptor {
+    const obj = createBaseLogDescriptor();
+    if (isSet(object.name)) obj.name = String(object.name);
+    if (Array.isArray(object?.labels)) obj.labels = object.labels.map((e: any) => LabelDescriptor.fromJSON(e));
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (isSet(object.displayName)) obj.displayName = String(object.displayName);
+    return obj;
+  },
+  toJSON(message: LogDescriptor): JsonSafe<LogDescriptor> {
+    const obj: any = {};
+    message.name !== undefined && (obj.name = message.name);
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toJSON(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+    message.description !== undefined && (obj.description = message.description);
+    message.displayName !== undefined && (obj.displayName = message.displayName);
+    return obj;
+  },
   fromPartial(object: DeepPartial<LogDescriptor>): LogDescriptor {
     const message = createBaseLogDescriptor();
     message.name = object.name ?? "";
@@ -137,6 +136,34 @@ export const LogDescriptor = {
     message.description = object.description ?? "";
     message.displayName = object.displayName ?? "";
     return message;
+  },
+  fromSDK(object: LogDescriptorSDKType): LogDescriptor {
+    return {
+      name: object?.name,
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDK(e)) : [],
+      description: object?.description,
+      displayName: object?.display_name
+    };
+  },
+  fromSDKJSON(object: any): LogDescriptorSDKType {
+    return {
+      name: isSet(object.name) ? String(object.name) : "",
+      labels: Array.isArray(object?.labels) ? object.labels.map((e: any) => LabelDescriptor.fromSDKJSON(e)) : [],
+      description: isSet(object.description) ? String(object.description) : "",
+      display_name: isSet(object.display_name) ? String(object.display_name) : ""
+    };
+  },
+  toSDK(message: LogDescriptor): LogDescriptorSDKType {
+    const obj: any = {};
+    obj.name = message.name;
+    if (message.labels) {
+      obj.labels = message.labels.map(e => e ? LabelDescriptor.toSDK(e) : undefined);
+    } else {
+      obj.labels = [];
+    }
+    obj.description = message.description;
+    obj.display_name = message.displayName;
+    return obj;
   },
   fromAmino(object: LogDescriptorAmino): LogDescriptor {
     const message = createBaseLogDescriptor();

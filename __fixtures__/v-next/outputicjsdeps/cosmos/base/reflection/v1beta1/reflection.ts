@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { JsonSafe } from "../../../../json-safe.js";
+import { DeepPartial, isSet } from "../../../../helpers.js";
+export const protobufPackage = "cosmos.base.reflection.v1beta1";
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesRequest {}
 export interface ListAllInterfacesRequestProtoMsg {
@@ -7,11 +9,7 @@ export interface ListAllInterfacesRequestProtoMsg {
   value: Uint8Array;
 }
 /** ListAllInterfacesRequest is the request type of the ListAllInterfaces RPC. */
-export interface ListAllInterfacesRequestAmino {}
-export interface ListAllInterfacesRequestAminoMsg {
-  type: "cosmos-sdk/ListAllInterfacesRequest";
-  value: ListAllInterfacesRequestAmino;
-}
+export interface ListAllInterfacesRequestSDKType {}
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
 export interface ListAllInterfacesResponse {
   /** interface_names is an array of all the registered interfaces. */
@@ -22,13 +20,8 @@ export interface ListAllInterfacesResponseProtoMsg {
   value: Uint8Array;
 }
 /** ListAllInterfacesResponse is the response type of the ListAllInterfaces RPC. */
-export interface ListAllInterfacesResponseAmino {
-  /** interface_names is an array of all the registered interfaces. */
+export interface ListAllInterfacesResponseSDKType {
   interface_names: string[];
-}
-export interface ListAllInterfacesResponseAminoMsg {
-  type: "cosmos-sdk/ListAllInterfacesResponse";
-  value: ListAllInterfacesResponseAmino;
 }
 /**
  * ListImplementationsRequest is the request type of the ListImplementations
@@ -46,13 +39,8 @@ export interface ListImplementationsRequestProtoMsg {
  * ListImplementationsRequest is the request type of the ListImplementations
  * RPC.
  */
-export interface ListImplementationsRequestAmino {
-  /** interface_name defines the interface to query the implementations for. */
+export interface ListImplementationsRequestSDKType {
   interface_name: string;
-}
-export interface ListImplementationsRequestAminoMsg {
-  type: "cosmos-sdk/ListImplementationsRequest";
-  value: ListImplementationsRequestAmino;
 }
 /**
  * ListImplementationsResponse is the response type of the ListImplementations
@@ -69,19 +57,14 @@ export interface ListImplementationsResponseProtoMsg {
  * ListImplementationsResponse is the response type of the ListImplementations
  * RPC.
  */
-export interface ListImplementationsResponseAmino {
+export interface ListImplementationsResponseSDKType {
   implementation_message_names: string[];
-}
-export interface ListImplementationsResponseAminoMsg {
-  type: "cosmos-sdk/ListImplementationsResponse";
-  value: ListImplementationsResponseAmino;
 }
 function createBaseListAllInterfacesRequest(): ListAllInterfacesRequest {
   return {};
 }
 export const ListAllInterfacesRequest = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesRequest",
-  aminoType: "cosmos-sdk/ListAllInterfacesRequest",
   encode(_: ListAllInterfacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -99,9 +82,27 @@ export const ListAllInterfacesRequest = {
     }
     return message;
   },
+  fromJSON(_: any): ListAllInterfacesRequest {
+    const obj = createBaseListAllInterfacesRequest();
+    return obj;
+  },
+  toJSON(_: ListAllInterfacesRequest): JsonSafe<ListAllInterfacesRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ListAllInterfacesRequest>): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
     return message;
+  },
+  fromSDK(_: ListAllInterfacesRequestSDKType): ListAllInterfacesRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): ListAllInterfacesRequestSDKType {
+    return {};
+  },
+  toSDK(_: ListAllInterfacesRequest): ListAllInterfacesRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ListAllInterfacesRequestAmino): ListAllInterfacesRequest {
     const message = createBaseListAllInterfacesRequest();
@@ -140,7 +141,6 @@ function createBaseListAllInterfacesResponse(): ListAllInterfacesResponse {
 }
 export const ListAllInterfacesResponse = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListAllInterfacesResponse",
-  aminoType: "cosmos-sdk/ListAllInterfacesResponse",
   encode(message: ListAllInterfacesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.interfaceNames) {
       writer.uint32(10).string(v!);
@@ -164,10 +164,43 @@ export const ListAllInterfacesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListAllInterfacesResponse {
+    const obj = createBaseListAllInterfacesResponse();
+    if (Array.isArray(object?.interfaceNames)) obj.interfaceNames = object.interfaceNames.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: ListAllInterfacesResponse): JsonSafe<ListAllInterfacesResponse> {
+    const obj: any = {};
+    if (message.interfaceNames) {
+      obj.interfaceNames = message.interfaceNames.map(e => e);
+    } else {
+      obj.interfaceNames = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListAllInterfacesResponse>): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
     message.interfaceNames = object.interfaceNames?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ListAllInterfacesResponseSDKType): ListAllInterfacesResponse {
+    return {
+      interfaceNames: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ListAllInterfacesResponseSDKType {
+    return {
+      interface_names: Array.isArray(object?.interface_names) ? object.interface_names.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: ListAllInterfacesResponse): ListAllInterfacesResponseSDKType {
+    const obj: any = {};
+    if (message.interfaceNames) {
+      obj.interface_names = message.interfaceNames.map(e => e);
+    } else {
+      obj.interface_names = [];
+    }
+    return obj;
   },
   fromAmino(object: ListAllInterfacesResponseAmino): ListAllInterfacesResponse {
     const message = createBaseListAllInterfacesResponse();
@@ -212,9 +245,8 @@ function createBaseListImplementationsRequest(): ListImplementationsRequest {
 }
 export const ListImplementationsRequest = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsRequest",
-  aminoType: "cosmos-sdk/ListImplementationsRequest",
   encode(message: ListImplementationsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.interfaceName !== "") {
+    if (message.interfaceName !== undefined) {
       writer.uint32(10).string(message.interfaceName);
     }
     return writer;
@@ -236,10 +268,35 @@ export const ListImplementationsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): ListImplementationsRequest {
+    const obj = createBaseListImplementationsRequest();
+    if (isSet(object.interfaceName)) obj.interfaceName = String(object.interfaceName);
+    return obj;
+  },
+  toJSON(message: ListImplementationsRequest): JsonSafe<ListImplementationsRequest> {
+    const obj: any = {};
+    message.interfaceName !== undefined && (obj.interfaceName = message.interfaceName);
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListImplementationsRequest>): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
     message.interfaceName = object.interfaceName ?? "";
     return message;
+  },
+  fromSDK(object: ListImplementationsRequestSDKType): ListImplementationsRequest {
+    return {
+      interfaceName: object?.interface_name
+    };
+  },
+  fromSDKJSON(object: any): ListImplementationsRequestSDKType {
+    return {
+      interface_name: isSet(object.interface_name) ? String(object.interface_name) : ""
+    };
+  },
+  toSDK(message: ListImplementationsRequest): ListImplementationsRequestSDKType {
+    const obj: any = {};
+    obj.interface_name = message.interfaceName;
+    return obj;
   },
   fromAmino(object: ListImplementationsRequestAmino): ListImplementationsRequest {
     const message = createBaseListImplementationsRequest();
@@ -282,7 +339,6 @@ function createBaseListImplementationsResponse(): ListImplementationsResponse {
 }
 export const ListImplementationsResponse = {
   typeUrl: "/cosmos.base.reflection.v1beta1.ListImplementationsResponse",
-  aminoType: "cosmos-sdk/ListImplementationsResponse",
   encode(message: ListImplementationsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.implementationMessageNames) {
       writer.uint32(10).string(v!);
@@ -306,10 +362,43 @@ export const ListImplementationsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ListImplementationsResponse {
+    const obj = createBaseListImplementationsResponse();
+    if (Array.isArray(object?.implementationMessageNames)) obj.implementationMessageNames = object.implementationMessageNames.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: ListImplementationsResponse): JsonSafe<ListImplementationsResponse> {
+    const obj: any = {};
+    if (message.implementationMessageNames) {
+      obj.implementationMessageNames = message.implementationMessageNames.map(e => e);
+    } else {
+      obj.implementationMessageNames = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ListImplementationsResponse>): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();
     message.implementationMessageNames = object.implementationMessageNames?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ListImplementationsResponseSDKType): ListImplementationsResponse {
+    return {
+      implementationMessageNames: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ListImplementationsResponseSDKType {
+    return {
+      implementation_message_names: Array.isArray(object?.implementation_message_names) ? object.implementation_message_names.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: ListImplementationsResponse): ListImplementationsResponseSDKType {
+    const obj: any = {};
+    if (message.implementationMessageNames) {
+      obj.implementation_message_names = message.implementationMessageNames.map(e => e);
+    } else {
+      obj.implementation_message_names = [];
+    }
+    return obj;
   },
   fromAmino(object: ListImplementationsResponseAmino): ListImplementationsResponse {
     const message = createBaseListImplementationsResponse();

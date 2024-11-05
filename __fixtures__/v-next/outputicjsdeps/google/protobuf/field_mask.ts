@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial } from "../../helpers.js";
+export const protobufPackage = "google.protobuf";
 /**
  * `FieldMask` represents a set of symbolic field paths, for example:
  * 
@@ -410,13 +412,8 @@ export interface FieldMaskProtoMsg {
  * request should verify the included field paths, and return an
  * `INVALID_ARGUMENT` error if any path is duplicated or unmappable.
  */
-export interface FieldMaskAmino {
-  /** The set of field mask paths. */
+export interface FieldMaskSDKType {
   paths: string[];
-}
-export interface FieldMaskAminoMsg {
-  type: "/google.protobuf.FieldMask";
-  value: FieldMaskAmino;
 }
 function createBaseFieldMask(): FieldMask {
   return {
@@ -448,10 +445,43 @@ export const FieldMask = {
     }
     return message;
   },
+  fromJSON(object: any): FieldMask {
+    const obj = createBaseFieldMask();
+    if (Array.isArray(object?.paths)) obj.paths = object.paths.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: FieldMask): JsonSafe<FieldMask> {
+    const obj: any = {};
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<FieldMask>): FieldMask {
     const message = createBaseFieldMask();
     message.paths = object.paths?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: FieldMaskSDKType): FieldMask {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): FieldMaskSDKType {
+    return {
+      paths: Array.isArray(object?.paths) ? object.paths.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: FieldMask): FieldMaskSDKType {
+    const obj: any = {};
+    if (message.paths) {
+      obj.paths = message.paths.map(e => e);
+    } else {
+      obj.paths = [];
+    }
+    return obj;
   },
   fromAmino(object: FieldMaskAmino): FieldMask {
     const message = createBaseFieldMask();

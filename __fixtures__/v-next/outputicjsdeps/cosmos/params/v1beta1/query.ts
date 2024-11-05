@@ -1,6 +1,8 @@
-import { ParamChange, ParamChangeAmino } from "./params";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { ParamChange, ParamChangeSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "cosmos.params.v1beta1";
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {
   /** subspace defines the module to query the parameter for. */
@@ -13,15 +15,9 @@ export interface QueryParamsRequestProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsRequest is request type for the Query/Params RPC method. */
-export interface QueryParamsRequestAmino {
-  /** subspace defines the module to query the parameter for. */
+export interface QueryParamsRequestSDKType {
   subspace: string;
-  /** key defines the key of the parameter in the subspace. */
   key: string;
-}
-export interface QueryParamsRequestAminoMsg {
-  type: "cosmos-sdk/QueryParamsRequest";
-  value: QueryParamsRequestAmino;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
 export interface QueryParamsResponse {
@@ -33,13 +29,8 @@ export interface QueryParamsResponseProtoMsg {
   value: Uint8Array;
 }
 /** QueryParamsResponse is response type for the Query/Params RPC method. */
-export interface QueryParamsResponseAmino {
-  /** param defines the queried parameter. */
-  param: ParamChangeAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "cosmos-sdk/QueryParamsResponse";
-  value: QueryParamsResponseAmino;
+export interface QueryParamsResponseSDKType {
+  param: ParamChangeSDKType;
 }
 /**
  * QuerySubspacesRequest defines a request type for querying for all registered
@@ -54,11 +45,7 @@ export interface QuerySubspacesRequestProtoMsg {
  * QuerySubspacesRequest defines a request type for querying for all registered
  * subspaces and all keys for a subspace.
  */
-export interface QuerySubspacesRequestAmino {}
-export interface QuerySubspacesRequestAminoMsg {
-  type: "cosmos-sdk/QuerySubspacesRequest";
-  value: QuerySubspacesRequestAmino;
-}
+export interface QuerySubspacesRequestSDKType {}
 /**
  * QuerySubspacesResponse defines the response types for querying for all
  * registered subspaces and all keys for a subspace.
@@ -74,12 +61,8 @@ export interface QuerySubspacesResponseProtoMsg {
  * QuerySubspacesResponse defines the response types for querying for all
  * registered subspaces and all keys for a subspace.
  */
-export interface QuerySubspacesResponseAmino {
-  subspaces: SubspaceAmino[];
-}
-export interface QuerySubspacesResponseAminoMsg {
-  type: "cosmos-sdk/QuerySubspacesResponse";
-  value: QuerySubspacesResponseAmino;
+export interface QuerySubspacesResponseSDKType {
+  subspaces: SubspaceSDKType[];
 }
 /**
  * Subspace defines a parameter subspace name and all the keys that exist for
@@ -97,13 +80,9 @@ export interface SubspaceProtoMsg {
  * Subspace defines a parameter subspace name and all the keys that exist for
  * the subspace.
  */
-export interface SubspaceAmino {
+export interface SubspaceSDKType {
   subspace: string;
   keys: string[];
-}
-export interface SubspaceAminoMsg {
-  type: "cosmos-sdk/Subspace";
-  value: SubspaceAmino;
 }
 function createBaseQueryParamsRequest(): QueryParamsRequest {
   return {
@@ -113,12 +92,11 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/cosmos.params.v1beta1.QueryParamsRequest",
-  aminoType: "cosmos-sdk/QueryParamsRequest",
   encode(message: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
-    if (message.key !== "") {
+    if (message.key !== undefined) {
       writer.uint32(18).string(message.key);
     }
     return writer;
@@ -143,11 +121,41 @@ export const QueryParamsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): QueryParamsRequest {
+    const obj = createBaseQueryParamsRequest();
+    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
+    if (isSet(object.key)) obj.key = String(object.key);
+    return obj;
+  },
+  toJSON(message: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+    message.key !== undefined && (obj.key = message.key);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     message.subspace = object.subspace ?? "";
     message.key = object.key ?? "";
     return message;
+  },
+  fromSDK(object: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {
+      subspace: object?.subspace,
+      key: object?.key
+    };
+  },
+  fromSDKJSON(object: any): QueryParamsRequestSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      key: isSet(object.key) ? String(object.key) : ""
+    };
+  },
+  toSDK(message: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    obj.subspace = message.subspace;
+    obj.key = message.key;
+    return obj;
   },
   fromAmino(object: QueryParamsRequestAmino): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
@@ -194,7 +202,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/cosmos.params.v1beta1.QueryParamsResponse",
-  aminoType: "cosmos-sdk/QueryParamsResponse",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.param !== undefined) {
       ParamChange.encode(message.param, writer.uint32(10).fork()).ldelim();
@@ -218,10 +225,37 @@ export const QueryParamsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryParamsResponse {
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.param)) obj.param = ParamChange.fromJSON(object.param);
+    return obj;
+  },
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
+    const obj: any = {};
+    message.param !== undefined && (obj.param = message.param ? ParamChange.toJSON(message.param) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.param = object.param !== undefined && object.param !== null ? ParamChange.fromPartial(object.param) : undefined;
+    if (object.param !== undefined && object.param !== null) {
+      message.param = ParamChange.fromPartial(object.param);
+    }
     return message;
+  },
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      param: object.param ? ParamChange.fromSDK(object.param) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      param: isSet(object.param) ? ParamChange.fromSDKJSON(object.param) : undefined
+    };
+  },
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.param !== undefined && (obj.param = message.param ? ParamChange.toSDK(message.param) : undefined);
+    return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
@@ -262,7 +296,6 @@ function createBaseQuerySubspacesRequest(): QuerySubspacesRequest {
 }
 export const QuerySubspacesRequest = {
   typeUrl: "/cosmos.params.v1beta1.QuerySubspacesRequest",
-  aminoType: "cosmos-sdk/QuerySubspacesRequest",
   encode(_: QuerySubspacesRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -280,9 +313,27 @@ export const QuerySubspacesRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QuerySubspacesRequest {
+    const obj = createBaseQuerySubspacesRequest();
+    return obj;
+  },
+  toJSON(_: QuerySubspacesRequest): JsonSafe<QuerySubspacesRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QuerySubspacesRequest>): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
     return message;
+  },
+  fromSDK(_: QuerySubspacesRequestSDKType): QuerySubspacesRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QuerySubspacesRequestSDKType {
+    return {};
+  },
+  toSDK(_: QuerySubspacesRequest): QuerySubspacesRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QuerySubspacesRequestAmino): QuerySubspacesRequest {
     const message = createBaseQuerySubspacesRequest();
@@ -321,7 +372,6 @@ function createBaseQuerySubspacesResponse(): QuerySubspacesResponse {
 }
 export const QuerySubspacesResponse = {
   typeUrl: "/cosmos.params.v1beta1.QuerySubspacesResponse",
-  aminoType: "cosmos-sdk/QuerySubspacesResponse",
   encode(message: QuerySubspacesResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.subspaces) {
       Subspace.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -345,10 +395,43 @@ export const QuerySubspacesResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QuerySubspacesResponse {
+    const obj = createBaseQuerySubspacesResponse();
+    if (Array.isArray(object?.subspaces)) obj.subspaces = object.subspaces.map((e: any) => Subspace.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: QuerySubspacesResponse): JsonSafe<QuerySubspacesResponse> {
+    const obj: any = {};
+    if (message.subspaces) {
+      obj.subspaces = message.subspaces.map(e => e ? Subspace.toJSON(e) : undefined);
+    } else {
+      obj.subspaces = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<QuerySubspacesResponse>): QuerySubspacesResponse {
     const message = createBaseQuerySubspacesResponse();
     message.subspaces = object.subspaces?.map(e => Subspace.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: QuerySubspacesResponseSDKType): QuerySubspacesResponse {
+    return {
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): QuerySubspacesResponseSDKType {
+    return {
+      subspaces: Array.isArray(object?.subspaces) ? object.subspaces.map((e: any) => Subspace.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: QuerySubspacesResponse): QuerySubspacesResponseSDKType {
+    const obj: any = {};
+    if (message.subspaces) {
+      obj.subspaces = message.subspaces.map(e => e ? Subspace.toSDK(e) : undefined);
+    } else {
+      obj.subspaces = [];
+    }
+    return obj;
   },
   fromAmino(object: QuerySubspacesResponseAmino): QuerySubspacesResponse {
     const message = createBaseQuerySubspacesResponse();
@@ -394,9 +477,8 @@ function createBaseSubspace(): Subspace {
 }
 export const Subspace = {
   typeUrl: "/cosmos.params.v1beta1.Subspace",
-  aminoType: "cosmos-sdk/Subspace",
   encode(message: Subspace, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.subspace !== "") {
+    if (message.subspace !== undefined) {
       writer.uint32(10).string(message.subspace);
     }
     for (const v of message.keys) {
@@ -424,11 +506,49 @@ export const Subspace = {
     }
     return message;
   },
+  fromJSON(object: any): Subspace {
+    const obj = createBaseSubspace();
+    if (isSet(object.subspace)) obj.subspace = String(object.subspace);
+    if (Array.isArray(object?.keys)) obj.keys = object.keys.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: Subspace): JsonSafe<Subspace> {
+    const obj: any = {};
+    message.subspace !== undefined && (obj.subspace = message.subspace);
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Subspace>): Subspace {
     const message = createBaseSubspace();
     message.subspace = object.subspace ?? "";
     message.keys = object.keys?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: SubspaceSDKType): Subspace {
+    return {
+      subspace: object?.subspace,
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): SubspaceSDKType {
+    return {
+      subspace: isSet(object.subspace) ? String(object.subspace) : "",
+      keys: Array.isArray(object?.keys) ? object.keys.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: Subspace): SubspaceSDKType {
+    const obj: any = {};
+    obj.subspace = message.subspace;
+    if (message.keys) {
+      obj.keys = message.keys.map(e => e);
+    } else {
+      obj.keys = [];
+    }
+    return obj;
   },
   fromAmino(object: SubspaceAmino): Subspace {
     const message = createBaseSubspace();

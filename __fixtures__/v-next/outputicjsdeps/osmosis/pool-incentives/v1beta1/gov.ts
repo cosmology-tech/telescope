@@ -1,6 +1,8 @@
-import { DistrRecord, DistrRecordAmino } from "./incentives";
-import { BinaryReader, BinaryWriter } from "../../../binary";
-import { DeepPartial } from "../../../helpers";
+import { DistrRecord, DistrRecordSDKType } from "./incentives.js";
+import { BinaryReader, BinaryWriter } from "../../../binary.js";
+import { isSet, DeepPartial } from "../../../helpers.js";
+import { JsonSafe } from "../../../json-safe.js";
+export const protobufPackage = "osmosis.poolincentives.v1beta1";
 /**
  * ReplacePoolIncentivesProposal is a gov Content type for updating the pool
  * incentives. If a ReplacePoolIncentivesProposal passes, the proposal’s records
@@ -28,14 +30,10 @@ export interface ReplacePoolIncentivesProposalProtoMsg {
  * pool and it is allocated to gauges and community pool by the DistrRecords
  * configuration. Note that gaugeId=0 represents the community pool.
  */
-export interface ReplacePoolIncentivesProposalAmino {
+export interface ReplacePoolIncentivesProposalSDKType {
   title: string;
   description: string;
-  records: DistrRecordAmino[];
-}
-export interface ReplacePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/replace-pool-incentives-proposal";
-  value: ReplacePoolIncentivesProposalAmino;
+  records: DistrRecordSDKType[];
 }
 /**
  * For example: if the existing DistrRecords were:
@@ -64,14 +62,10 @@ export interface UpdatePoolIncentivesProposalProtoMsg {
  * The result DistrRecords in state would be:
  * [(Gauge 0, 5), (Gauge 2, 4), (Gauge 3, 10)]
  */
-export interface UpdatePoolIncentivesProposalAmino {
+export interface UpdatePoolIncentivesProposalSDKType {
   title: string;
   description: string;
-  records: DistrRecordAmino[];
-}
-export interface UpdatePoolIncentivesProposalAminoMsg {
-  type: "osmosis/poolincentives/update-pool-incentives-proposal";
-  value: UpdatePoolIncentivesProposalAmino;
+  records: DistrRecordSDKType[];
 }
 function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposal {
   return {
@@ -82,12 +76,11 @@ function createBaseReplacePoolIncentivesProposal(): ReplacePoolIncentivesProposa
 }
 export const ReplacePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.ReplacePoolIncentivesProposal",
-  aminoType: "osmosis/poolincentives/replace-pool-incentives-proposal",
   encode(message: ReplacePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -118,12 +111,55 @@ export const ReplacePoolIncentivesProposal = {
     }
     return message;
   },
+  fromJSON(object: any): ReplacePoolIncentivesProposal {
+    const obj = createBaseReplacePoolIncentivesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ReplacePoolIncentivesProposal): JsonSafe<ReplacePoolIncentivesProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ReplacePoolIncentivesProposal>): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ReplacePoolIncentivesProposalSDKType): ReplacePoolIncentivesProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ReplacePoolIncentivesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ReplacePoolIncentivesProposal): ReplacePoolIncentivesProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
   },
   fromAmino(object: ReplacePoolIncentivesProposalAmino): ReplacePoolIncentivesProposal {
     const message = createBaseReplacePoolIncentivesProposal();
@@ -178,12 +214,11 @@ function createBaseUpdatePoolIncentivesProposal(): UpdatePoolIncentivesProposal 
 }
 export const UpdatePoolIncentivesProposal = {
   typeUrl: "/osmosis.poolincentives.v1beta1.UpdatePoolIncentivesProposal",
-  aminoType: "osmosis/poolincentives/update-pool-incentives-proposal",
   encode(message: UpdatePoolIncentivesProposal, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.title !== "") {
+    if (message.title !== undefined) {
       writer.uint32(10).string(message.title);
     }
-    if (message.description !== "") {
+    if (message.description !== undefined) {
       writer.uint32(18).string(message.description);
     }
     for (const v of message.records) {
@@ -214,12 +249,55 @@ export const UpdatePoolIncentivesProposal = {
     }
     return message;
   },
+  fromJSON(object: any): UpdatePoolIncentivesProposal {
+    const obj = createBaseUpdatePoolIncentivesProposal();
+    if (isSet(object.title)) obj.title = String(object.title);
+    if (isSet(object.description)) obj.description = String(object.description);
+    if (Array.isArray(object?.records)) obj.records = object.records.map((e: any) => DistrRecord.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: UpdatePoolIncentivesProposal): JsonSafe<UpdatePoolIncentivesProposal> {
+    const obj: any = {};
+    message.title !== undefined && (obj.title = message.title);
+    message.description !== undefined && (obj.description = message.description);
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toJSON(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<UpdatePoolIncentivesProposal>): UpdatePoolIncentivesProposal {
     const message = createBaseUpdatePoolIncentivesProposal();
     message.title = object.title ?? "";
     message.description = object.description ?? "";
     message.records = object.records?.map(e => DistrRecord.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: UpdatePoolIncentivesProposalSDKType): UpdatePoolIncentivesProposal {
+    return {
+      title: object?.title,
+      description: object?.description,
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): UpdatePoolIncentivesProposalSDKType {
+    return {
+      title: isSet(object.title) ? String(object.title) : "",
+      description: isSet(object.description) ? String(object.description) : "",
+      records: Array.isArray(object?.records) ? object.records.map((e: any) => DistrRecord.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: UpdatePoolIncentivesProposal): UpdatePoolIncentivesProposalSDKType {
+    const obj: any = {};
+    obj.title = message.title;
+    obj.description = message.description;
+    if (message.records) {
+      obj.records = message.records.map(e => e ? DistrRecord.toSDK(e) : undefined);
+    } else {
+      obj.records = [];
+    }
+    return obj;
   },
   fromAmino(object: UpdatePoolIncentivesProposalAmino): UpdatePoolIncentivesProposal {
     const message = createBaseUpdatePoolIncentivesProposal();

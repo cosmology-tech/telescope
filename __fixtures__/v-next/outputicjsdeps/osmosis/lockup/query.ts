@@ -1,20 +1,18 @@
-import { Timestamp } from "../../google/protobuf/timestamp";
-import { Duration, DurationAmino } from "../../google/protobuf/duration";
-import { Coin, CoinAmino } from "../../cosmos/base/v1beta1/coin";
-import { PeriodLock, PeriodLockAmino, SyntheticLock, SyntheticLockAmino } from "./lock";
-import { Params, ParamsAmino } from "./params";
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial, toTimestamp, fromTimestamp } from "../../helpers";
+import { Timestamp, TimestampSDKType } from "../../google/protobuf/timestamp.js";
+import { Duration, DurationSDKType } from "../../google/protobuf/duration.js";
+import { Coin, CoinSDKType } from "../../cosmos/base/v1beta1/coin.js";
+import { PeriodLock, PeriodLockSDKType, SyntheticLock, SyntheticLockSDKType } from "./lock.js";
+import { Params, ParamsSDKType } from "./params.js";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet, toTimestamp, fromTimestamp } from "../../helpers.js";
+export const protobufPackage = "osmosis.lockup";
 export interface ModuleBalanceRequest {}
 export interface ModuleBalanceRequestProtoMsg {
   typeUrl: "/osmosis.lockup.ModuleBalanceRequest";
   value: Uint8Array;
 }
-export interface ModuleBalanceRequestAmino {}
-export interface ModuleBalanceRequestAminoMsg {
-  type: "osmosis/lockup/module-balance-request";
-  value: ModuleBalanceRequestAmino;
-}
+export interface ModuleBalanceRequestSDKType {}
 export interface ModuleBalanceResponse {
   coins: Coin[];
 }
@@ -22,23 +20,15 @@ export interface ModuleBalanceResponseProtoMsg {
   typeUrl: "/osmosis.lockup.ModuleBalanceResponse";
   value: Uint8Array;
 }
-export interface ModuleBalanceResponseAmino {
-  coins: CoinAmino[];
-}
-export interface ModuleBalanceResponseAminoMsg {
-  type: "osmosis/lockup/module-balance-response";
-  value: ModuleBalanceResponseAmino;
+export interface ModuleBalanceResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface ModuleLockedAmountRequest {}
 export interface ModuleLockedAmountRequestProtoMsg {
   typeUrl: "/osmosis.lockup.ModuleLockedAmountRequest";
   value: Uint8Array;
 }
-export interface ModuleLockedAmountRequestAmino {}
-export interface ModuleLockedAmountRequestAminoMsg {
-  type: "osmosis/lockup/module-locked-amount-request";
-  value: ModuleLockedAmountRequestAmino;
-}
+export interface ModuleLockedAmountRequestSDKType {}
 export interface ModuleLockedAmountResponse {
   coins: Coin[];
 }
@@ -46,12 +36,8 @@ export interface ModuleLockedAmountResponseProtoMsg {
   typeUrl: "/osmosis.lockup.ModuleLockedAmountResponse";
   value: Uint8Array;
 }
-export interface ModuleLockedAmountResponseAmino {
-  coins: CoinAmino[];
-}
-export interface ModuleLockedAmountResponseAminoMsg {
-  type: "osmosis/lockup/module-locked-amount-response";
-  value: ModuleLockedAmountResponseAmino;
+export interface ModuleLockedAmountResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface AccountUnlockableCoinsRequest {
   owner: string;
@@ -60,12 +46,8 @@ export interface AccountUnlockableCoinsRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockableCoinsRequest";
   value: Uint8Array;
 }
-export interface AccountUnlockableCoinsRequestAmino {
+export interface AccountUnlockableCoinsRequestSDKType {
   owner: string;
-}
-export interface AccountUnlockableCoinsRequestAminoMsg {
-  type: "osmosis/lockup/account-unlockable-coins-request";
-  value: AccountUnlockableCoinsRequestAmino;
 }
 export interface AccountUnlockableCoinsResponse {
   coins: Coin[];
@@ -74,12 +56,8 @@ export interface AccountUnlockableCoinsResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockableCoinsResponse";
   value: Uint8Array;
 }
-export interface AccountUnlockableCoinsResponseAmino {
-  coins: CoinAmino[];
-}
-export interface AccountUnlockableCoinsResponseAminoMsg {
-  type: "osmosis/lockup/account-unlockable-coins-response";
-  value: AccountUnlockableCoinsResponseAmino;
+export interface AccountUnlockableCoinsResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface AccountUnlockingCoinsRequest {
   owner: string;
@@ -88,12 +66,8 @@ export interface AccountUnlockingCoinsRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockingCoinsRequest";
   value: Uint8Array;
 }
-export interface AccountUnlockingCoinsRequestAmino {
+export interface AccountUnlockingCoinsRequestSDKType {
   owner: string;
-}
-export interface AccountUnlockingCoinsRequestAminoMsg {
-  type: "osmosis/lockup/account-unlocking-coins-request";
-  value: AccountUnlockingCoinsRequestAmino;
 }
 export interface AccountUnlockingCoinsResponse {
   coins: Coin[];
@@ -102,12 +76,8 @@ export interface AccountUnlockingCoinsResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockingCoinsResponse";
   value: Uint8Array;
 }
-export interface AccountUnlockingCoinsResponseAmino {
-  coins: CoinAmino[];
-}
-export interface AccountUnlockingCoinsResponseAminoMsg {
-  type: "osmosis/lockup/account-unlocking-coins-response";
-  value: AccountUnlockingCoinsResponseAmino;
+export interface AccountUnlockingCoinsResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface AccountLockedCoinsRequest {
   owner: string;
@@ -116,12 +86,8 @@ export interface AccountLockedCoinsRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedCoinsRequest";
   value: Uint8Array;
 }
-export interface AccountLockedCoinsRequestAmino {
+export interface AccountLockedCoinsRequestSDKType {
   owner: string;
-}
-export interface AccountLockedCoinsRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-coins-request";
-  value: AccountLockedCoinsRequestAmino;
 }
 export interface AccountLockedCoinsResponse {
   coins: Coin[];
@@ -130,12 +96,8 @@ export interface AccountLockedCoinsResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedCoinsResponse";
   value: Uint8Array;
 }
-export interface AccountLockedCoinsResponseAmino {
-  coins: CoinAmino[];
-}
-export interface AccountLockedCoinsResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-coins-response";
-  value: AccountLockedCoinsResponseAmino;
+export interface AccountLockedCoinsResponseSDKType {
+  coins: CoinSDKType[];
 }
 export interface AccountLockedPastTimeRequest {
   owner: string;
@@ -145,13 +107,9 @@ export interface AccountLockedPastTimeRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeRequest";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeRequestAmino {
+export interface AccountLockedPastTimeRequestSDKType {
   owner: string;
-  timestamp: string;
-}
-export interface AccountLockedPastTimeRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-request";
-  value: AccountLockedPastTimeRequestAmino;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeResponse {
   locks: PeriodLock[];
@@ -160,12 +118,8 @@ export interface AccountLockedPastTimeResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeResponse";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedPastTimeResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-response";
-  value: AccountLockedPastTimeResponseAmino;
+export interface AccountLockedPastTimeResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyRequest {
   owner: string;
@@ -175,13 +129,9 @@ export interface AccountLockedPastTimeNotUnlockingOnlyRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeNotUnlockingOnlyRequestAmino {
+export interface AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
   owner: string;
-  timestamp: string;
-}
-export interface AccountLockedPastTimeNotUnlockingOnlyRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-not-unlocking-only-request";
-  value: AccountLockedPastTimeNotUnlockingOnlyRequestAmino;
+  timestamp: Date;
 }
 export interface AccountLockedPastTimeNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -190,12 +140,8 @@ export interface AccountLockedPastTimeNotUnlockingOnlyResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeNotUnlockingOnlyResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedPastTimeNotUnlockingOnlyResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-not-unlocking-only-response";
-  value: AccountLockedPastTimeNotUnlockingOnlyResponseAmino;
+export interface AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountUnlockedBeforeTimeRequest {
   owner: string;
@@ -205,13 +151,9 @@ export interface AccountUnlockedBeforeTimeRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeRequest";
   value: Uint8Array;
 }
-export interface AccountUnlockedBeforeTimeRequestAmino {
+export interface AccountUnlockedBeforeTimeRequestSDKType {
   owner: string;
-  timestamp: string;
-}
-export interface AccountUnlockedBeforeTimeRequestAminoMsg {
-  type: "osmosis/lockup/account-unlocked-before-time-request";
-  value: AccountUnlockedBeforeTimeRequestAmino;
+  timestamp: Date;
 }
 export interface AccountUnlockedBeforeTimeResponse {
   locks: PeriodLock[];
@@ -220,12 +162,8 @@ export interface AccountUnlockedBeforeTimeResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeResponse";
   value: Uint8Array;
 }
-export interface AccountUnlockedBeforeTimeResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountUnlockedBeforeTimeResponseAminoMsg {
-  type: "osmosis/lockup/account-unlocked-before-time-response";
-  value: AccountUnlockedBeforeTimeResponseAmino;
+export interface AccountUnlockedBeforeTimeResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedPastTimeDenomRequest {
   owner: string;
@@ -236,14 +174,10 @@ export interface AccountLockedPastTimeDenomRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomRequest";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeDenomRequestAmino {
+export interface AccountLockedPastTimeDenomRequestSDKType {
   owner: string;
-  timestamp: string;
+  timestamp: Date;
   denom: string;
-}
-export interface AccountLockedPastTimeDenomRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-denom-request";
-  value: AccountLockedPastTimeDenomRequestAmino;
 }
 export interface AccountLockedPastTimeDenomResponse {
   locks: PeriodLock[];
@@ -252,12 +186,8 @@ export interface AccountLockedPastTimeDenomResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomResponse";
   value: Uint8Array;
 }
-export interface AccountLockedPastTimeDenomResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedPastTimeDenomResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-past-time-denom-response";
-  value: AccountLockedPastTimeDenomResponseAmino;
+export interface AccountLockedPastTimeDenomResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface LockedDenomRequest {
   denom: string;
@@ -267,13 +197,9 @@ export interface LockedDenomRequestProtoMsg {
   typeUrl: "/osmosis.lockup.LockedDenomRequest";
   value: Uint8Array;
 }
-export interface LockedDenomRequestAmino {
+export interface LockedDenomRequestSDKType {
   denom: string;
-  duration: DurationAmino;
-}
-export interface LockedDenomRequestAminoMsg {
-  type: "osmosis/lockup/locked-denom-request";
-  value: LockedDenomRequestAmino;
+  duration: DurationSDKType;
 }
 export interface LockedDenomResponse {
   amount: string;
@@ -282,12 +208,8 @@ export interface LockedDenomResponseProtoMsg {
   typeUrl: "/osmosis.lockup.LockedDenomResponse";
   value: Uint8Array;
 }
-export interface LockedDenomResponseAmino {
+export interface LockedDenomResponseSDKType {
   amount: string;
-}
-export interface LockedDenomResponseAminoMsg {
-  type: "osmosis/lockup/locked-denom-response";
-  value: LockedDenomResponseAmino;
 }
 export interface LockedRequest {
   lockId: bigint;
@@ -296,12 +218,8 @@ export interface LockedRequestProtoMsg {
   typeUrl: "/osmosis.lockup.LockedRequest";
   value: Uint8Array;
 }
-export interface LockedRequestAmino {
-  lock_id: string;
-}
-export interface LockedRequestAminoMsg {
-  type: "osmosis/lockup/locked-request";
-  value: LockedRequestAmino;
+export interface LockedRequestSDKType {
+  lock_id: bigint;
 }
 export interface LockedResponse {
   lock?: PeriodLock;
@@ -310,12 +228,8 @@ export interface LockedResponseProtoMsg {
   typeUrl: "/osmosis.lockup.LockedResponse";
   value: Uint8Array;
 }
-export interface LockedResponseAmino {
-  lock?: PeriodLockAmino;
-}
-export interface LockedResponseAminoMsg {
-  type: "osmosis/lockup/locked-response";
-  value: LockedResponseAmino;
+export interface LockedResponseSDKType {
+  lock?: PeriodLockSDKType;
 }
 export interface SyntheticLockupsByLockupIDRequest {
   lockId: bigint;
@@ -324,12 +238,8 @@ export interface SyntheticLockupsByLockupIDRequestProtoMsg {
   typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDRequest";
   value: Uint8Array;
 }
-export interface SyntheticLockupsByLockupIDRequestAmino {
-  lock_id: string;
-}
-export interface SyntheticLockupsByLockupIDRequestAminoMsg {
-  type: "osmosis/lockup/synthetic-lockups-by-lockup-id-request";
-  value: SyntheticLockupsByLockupIDRequestAmino;
+export interface SyntheticLockupsByLockupIDRequestSDKType {
+  lock_id: bigint;
 }
 export interface SyntheticLockupsByLockupIDResponse {
   syntheticLocks: SyntheticLock[];
@@ -338,12 +248,8 @@ export interface SyntheticLockupsByLockupIDResponseProtoMsg {
   typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDResponse";
   value: Uint8Array;
 }
-export interface SyntheticLockupsByLockupIDResponseAmino {
-  synthetic_locks: SyntheticLockAmino[];
-}
-export interface SyntheticLockupsByLockupIDResponseAminoMsg {
-  type: "osmosis/lockup/synthetic-lockups-by-lockup-id-response";
-  value: SyntheticLockupsByLockupIDResponseAmino;
+export interface SyntheticLockupsByLockupIDResponseSDKType {
+  synthetic_locks: SyntheticLockSDKType[];
 }
 export interface AccountLockedLongerDurationRequest {
   owner: string;
@@ -353,13 +259,9 @@ export interface AccountLockedLongerDurationRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationRequest";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationRequestAmino {
+export interface AccountLockedLongerDurationRequestSDKType {
   owner: string;
-  duration: DurationAmino;
-}
-export interface AccountLockedLongerDurationRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-request";
-  value: AccountLockedLongerDurationRequestAmino;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationResponse {
   locks: PeriodLock[];
@@ -368,12 +270,8 @@ export interface AccountLockedLongerDurationResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationResponse";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedLongerDurationResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-response";
-  value: AccountLockedLongerDurationResponseAmino;
+export interface AccountLockedLongerDurationResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedDurationRequest {
   owner: string;
@@ -383,13 +281,9 @@ export interface AccountLockedDurationRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedDurationRequest";
   value: Uint8Array;
 }
-export interface AccountLockedDurationRequestAmino {
+export interface AccountLockedDurationRequestSDKType {
   owner: string;
-  duration: DurationAmino;
-}
-export interface AccountLockedDurationRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-duration-request";
-  value: AccountLockedDurationRequestAmino;
+  duration: DurationSDKType;
 }
 export interface AccountLockedDurationResponse {
   locks: PeriodLock[];
@@ -398,12 +292,8 @@ export interface AccountLockedDurationResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedDurationResponse";
   value: Uint8Array;
 }
-export interface AccountLockedDurationResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedDurationResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-duration-response";
-  value: AccountLockedDurationResponseAmino;
+export interface AccountLockedDurationResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyRequest {
   owner: string;
@@ -413,13 +303,9 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationNotUnlockingOnlyRequestAmino {
+export interface AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
   owner: string;
-  duration: DurationAmino;
-}
-export interface AccountLockedLongerDurationNotUnlockingOnlyRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-request";
-  value: AccountLockedLongerDurationNotUnlockingOnlyRequestAmino;
+  duration: DurationSDKType;
 }
 export interface AccountLockedLongerDurationNotUnlockingOnlyResponse {
   locks: PeriodLock[];
@@ -428,12 +314,8 @@ export interface AccountLockedLongerDurationNotUnlockingOnlyResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationNotUnlockingOnlyResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedLongerDurationNotUnlockingOnlyResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-response";
-  value: AccountLockedLongerDurationNotUnlockingOnlyResponseAmino;
+export interface AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface AccountLockedLongerDurationDenomRequest {
   owner: string;
@@ -444,14 +326,10 @@ export interface AccountLockedLongerDurationDenomRequestProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomRequest";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationDenomRequestAmino {
+export interface AccountLockedLongerDurationDenomRequestSDKType {
   owner: string;
-  duration: DurationAmino;
+  duration: DurationSDKType;
   denom: string;
-}
-export interface AccountLockedLongerDurationDenomRequestAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-denom-request";
-  value: AccountLockedLongerDurationDenomRequestAmino;
 }
 export interface AccountLockedLongerDurationDenomResponse {
   locks: PeriodLock[];
@@ -460,23 +338,15 @@ export interface AccountLockedLongerDurationDenomResponseProtoMsg {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomResponse";
   value: Uint8Array;
 }
-export interface AccountLockedLongerDurationDenomResponseAmino {
-  locks: PeriodLockAmino[];
-}
-export interface AccountLockedLongerDurationDenomResponseAminoMsg {
-  type: "osmosis/lockup/account-locked-longer-duration-denom-response";
-  value: AccountLockedLongerDurationDenomResponseAmino;
+export interface AccountLockedLongerDurationDenomResponseSDKType {
+  locks: PeriodLockSDKType[];
 }
 export interface QueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.lockup.QueryParamsRequest";
   value: Uint8Array;
 }
-export interface QueryParamsRequestAmino {}
-export interface QueryParamsRequestAminoMsg {
-  type: "osmosis/lockup/query-params-request";
-  value: QueryParamsRequestAmino;
-}
+export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   params: Params;
 }
@@ -484,19 +354,14 @@ export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.lockup.QueryParamsResponse";
   value: Uint8Array;
 }
-export interface QueryParamsResponseAmino {
-  params: ParamsAmino;
-}
-export interface QueryParamsResponseAminoMsg {
-  type: "osmosis/lockup/query-params-response";
-  value: QueryParamsResponseAmino;
+export interface QueryParamsResponseSDKType {
+  params: ParamsSDKType;
 }
 function createBaseModuleBalanceRequest(): ModuleBalanceRequest {
   return {};
 }
 export const ModuleBalanceRequest = {
   typeUrl: "/osmosis.lockup.ModuleBalanceRequest",
-  aminoType: "osmosis/lockup/module-balance-request",
   encode(_: ModuleBalanceRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -514,9 +379,27 @@ export const ModuleBalanceRequest = {
     }
     return message;
   },
+  fromJSON(_: any): ModuleBalanceRequest {
+    const obj = createBaseModuleBalanceRequest();
+    return obj;
+  },
+  toJSON(_: ModuleBalanceRequest): JsonSafe<ModuleBalanceRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ModuleBalanceRequest>): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
     return message;
+  },
+  fromSDK(_: ModuleBalanceRequestSDKType): ModuleBalanceRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): ModuleBalanceRequestSDKType {
+    return {};
+  },
+  toSDK(_: ModuleBalanceRequest): ModuleBalanceRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ModuleBalanceRequestAmino): ModuleBalanceRequest {
     const message = createBaseModuleBalanceRequest();
@@ -555,7 +438,6 @@ function createBaseModuleBalanceResponse(): ModuleBalanceResponse {
 }
 export const ModuleBalanceResponse = {
   typeUrl: "/osmosis.lockup.ModuleBalanceResponse",
-  aminoType: "osmosis/lockup/module-balance-response",
   encode(message: ModuleBalanceResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -579,10 +461,43 @@ export const ModuleBalanceResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ModuleBalanceResponse {
+    const obj = createBaseModuleBalanceResponse();
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ModuleBalanceResponse): JsonSafe<ModuleBalanceResponse> {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ModuleBalanceResponse>): ModuleBalanceResponse {
     const message = createBaseModuleBalanceResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ModuleBalanceResponseSDKType): ModuleBalanceResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ModuleBalanceResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ModuleBalanceResponse): ModuleBalanceResponseSDKType {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
   },
   fromAmino(object: ModuleBalanceResponseAmino): ModuleBalanceResponse {
     const message = createBaseModuleBalanceResponse();
@@ -625,7 +540,6 @@ function createBaseModuleLockedAmountRequest(): ModuleLockedAmountRequest {
 }
 export const ModuleLockedAmountRequest = {
   typeUrl: "/osmosis.lockup.ModuleLockedAmountRequest",
-  aminoType: "osmosis/lockup/module-locked-amount-request",
   encode(_: ModuleLockedAmountRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -643,9 +557,27 @@ export const ModuleLockedAmountRequest = {
     }
     return message;
   },
+  fromJSON(_: any): ModuleLockedAmountRequest {
+    const obj = createBaseModuleLockedAmountRequest();
+    return obj;
+  },
+  toJSON(_: ModuleLockedAmountRequest): JsonSafe<ModuleLockedAmountRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<ModuleLockedAmountRequest>): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
     return message;
+  },
+  fromSDK(_: ModuleLockedAmountRequestSDKType): ModuleLockedAmountRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): ModuleLockedAmountRequestSDKType {
+    return {};
+  },
+  toSDK(_: ModuleLockedAmountRequest): ModuleLockedAmountRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: ModuleLockedAmountRequestAmino): ModuleLockedAmountRequest {
     const message = createBaseModuleLockedAmountRequest();
@@ -684,7 +616,6 @@ function createBaseModuleLockedAmountResponse(): ModuleLockedAmountResponse {
 }
 export const ModuleLockedAmountResponse = {
   typeUrl: "/osmosis.lockup.ModuleLockedAmountResponse",
-  aminoType: "osmosis/lockup/module-locked-amount-response",
   encode(message: ModuleLockedAmountResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -708,10 +639,43 @@ export const ModuleLockedAmountResponse = {
     }
     return message;
   },
+  fromJSON(object: any): ModuleLockedAmountResponse {
+    const obj = createBaseModuleLockedAmountResponse();
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: ModuleLockedAmountResponse): JsonSafe<ModuleLockedAmountResponse> {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ModuleLockedAmountResponse>): ModuleLockedAmountResponse {
     const message = createBaseModuleLockedAmountResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ModuleLockedAmountResponseSDKType): ModuleLockedAmountResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ModuleLockedAmountResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: ModuleLockedAmountResponse): ModuleLockedAmountResponseSDKType {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
   },
   fromAmino(object: ModuleLockedAmountResponseAmino): ModuleLockedAmountResponse {
     const message = createBaseModuleLockedAmountResponse();
@@ -756,9 +720,8 @@ function createBaseAccountUnlockableCoinsRequest(): AccountUnlockableCoinsReques
 }
 export const AccountUnlockableCoinsRequest = {
   typeUrl: "/osmosis.lockup.AccountUnlockableCoinsRequest",
-  aminoType: "osmosis/lockup/account-unlockable-coins-request",
   encode(message: AccountUnlockableCoinsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -780,10 +743,35 @@ export const AccountUnlockableCoinsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockableCoinsRequest {
+    const obj = createBaseAccountUnlockableCoinsRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: AccountUnlockableCoinsRequest): JsonSafe<AccountUnlockableCoinsRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockableCoinsRequest>): AccountUnlockableCoinsRequest {
     const message = createBaseAccountUnlockableCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: AccountUnlockableCoinsRequestSDKType): AccountUnlockableCoinsRequest {
+    return {
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockableCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: AccountUnlockableCoinsRequest): AccountUnlockableCoinsRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: AccountUnlockableCoinsRequestAmino): AccountUnlockableCoinsRequest {
     const message = createBaseAccountUnlockableCoinsRequest();
@@ -826,7 +814,6 @@ function createBaseAccountUnlockableCoinsResponse(): AccountUnlockableCoinsRespo
 }
 export const AccountUnlockableCoinsResponse = {
   typeUrl: "/osmosis.lockup.AccountUnlockableCoinsResponse",
-  aminoType: "osmosis/lockup/account-unlockable-coins-response",
   encode(message: AccountUnlockableCoinsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -850,10 +837,43 @@ export const AccountUnlockableCoinsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockableCoinsResponse {
+    const obj = createBaseAccountUnlockableCoinsResponse();
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountUnlockableCoinsResponse): JsonSafe<AccountUnlockableCoinsResponse> {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockableCoinsResponse>): AccountUnlockableCoinsResponse {
     const message = createBaseAccountUnlockableCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountUnlockableCoinsResponseSDKType): AccountUnlockableCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockableCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountUnlockableCoinsResponse): AccountUnlockableCoinsResponseSDKType {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountUnlockableCoinsResponseAmino): AccountUnlockableCoinsResponse {
     const message = createBaseAccountUnlockableCoinsResponse();
@@ -898,9 +918,8 @@ function createBaseAccountUnlockingCoinsRequest(): AccountUnlockingCoinsRequest 
 }
 export const AccountUnlockingCoinsRequest = {
   typeUrl: "/osmosis.lockup.AccountUnlockingCoinsRequest",
-  aminoType: "osmosis/lockup/account-unlocking-coins-request",
   encode(message: AccountUnlockingCoinsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -922,10 +941,35 @@ export const AccountUnlockingCoinsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockingCoinsRequest {
+    const obj = createBaseAccountUnlockingCoinsRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: AccountUnlockingCoinsRequest): JsonSafe<AccountUnlockingCoinsRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockingCoinsRequest>): AccountUnlockingCoinsRequest {
     const message = createBaseAccountUnlockingCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: AccountUnlockingCoinsRequestSDKType): AccountUnlockingCoinsRequest {
+    return {
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockingCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: AccountUnlockingCoinsRequest): AccountUnlockingCoinsRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: AccountUnlockingCoinsRequestAmino): AccountUnlockingCoinsRequest {
     const message = createBaseAccountUnlockingCoinsRequest();
@@ -968,7 +1012,6 @@ function createBaseAccountUnlockingCoinsResponse(): AccountUnlockingCoinsRespons
 }
 export const AccountUnlockingCoinsResponse = {
   typeUrl: "/osmosis.lockup.AccountUnlockingCoinsResponse",
-  aminoType: "osmosis/lockup/account-unlocking-coins-response",
   encode(message: AccountUnlockingCoinsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -992,10 +1035,43 @@ export const AccountUnlockingCoinsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockingCoinsResponse {
+    const obj = createBaseAccountUnlockingCoinsResponse();
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountUnlockingCoinsResponse): JsonSafe<AccountUnlockingCoinsResponse> {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockingCoinsResponse>): AccountUnlockingCoinsResponse {
     const message = createBaseAccountUnlockingCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountUnlockingCoinsResponseSDKType): AccountUnlockingCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockingCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountUnlockingCoinsResponse): AccountUnlockingCoinsResponseSDKType {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountUnlockingCoinsResponseAmino): AccountUnlockingCoinsResponse {
     const message = createBaseAccountUnlockingCoinsResponse();
@@ -1040,9 +1116,8 @@ function createBaseAccountLockedCoinsRequest(): AccountLockedCoinsRequest {
 }
 export const AccountLockedCoinsRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedCoinsRequest",
-  aminoType: "osmosis/lockup/account-locked-coins-request",
   encode(message: AccountLockedCoinsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     return writer;
@@ -1064,10 +1139,35 @@ export const AccountLockedCoinsRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedCoinsRequest {
+    const obj = createBaseAccountLockedCoinsRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    return obj;
+  },
+  toJSON(message: AccountLockedCoinsRequest): JsonSafe<AccountLockedCoinsRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedCoinsRequest>): AccountLockedCoinsRequest {
     const message = createBaseAccountLockedCoinsRequest();
     message.owner = object.owner ?? "";
     return message;
+  },
+  fromSDK(object: AccountLockedCoinsRequestSDKType): AccountLockedCoinsRequest {
+    return {
+      owner: object?.owner
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedCoinsRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : ""
+    };
+  },
+  toSDK(message: AccountLockedCoinsRequest): AccountLockedCoinsRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    return obj;
   },
   fromAmino(object: AccountLockedCoinsRequestAmino): AccountLockedCoinsRequest {
     const message = createBaseAccountLockedCoinsRequest();
@@ -1110,7 +1210,6 @@ function createBaseAccountLockedCoinsResponse(): AccountLockedCoinsResponse {
 }
 export const AccountLockedCoinsResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedCoinsResponse",
-  aminoType: "osmosis/lockup/account-locked-coins-response",
   encode(message: AccountLockedCoinsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.coins) {
       Coin.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1134,10 +1233,43 @@ export const AccountLockedCoinsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedCoinsResponse {
+    const obj = createBaseAccountLockedCoinsResponse();
+    if (Array.isArray(object?.coins)) obj.coins = object.coins.map((e: any) => Coin.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedCoinsResponse): JsonSafe<AccountLockedCoinsResponse> {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toJSON(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedCoinsResponse>): AccountLockedCoinsResponse {
     const message = createBaseAccountLockedCoinsResponse();
     message.coins = object.coins?.map(e => Coin.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedCoinsResponseSDKType): AccountLockedCoinsResponse {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedCoinsResponseSDKType {
+    return {
+      coins: Array.isArray(object?.coins) ? object.coins.map((e: any) => Coin.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedCoinsResponse): AccountLockedCoinsResponseSDKType {
+    const obj: any = {};
+    if (message.coins) {
+      obj.coins = message.coins.map(e => e ? Coin.toSDK(e) : undefined);
+    } else {
+      obj.coins = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedCoinsResponseAmino): AccountLockedCoinsResponse {
     const message = createBaseAccountLockedCoinsResponse();
@@ -1183,9 +1315,8 @@ function createBaseAccountLockedPastTimeRequest(): AccountLockedPastTimeRequest 
 }
 export const AccountLockedPastTimeRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeRequest",
-  aminoType: "osmosis/lockup/account-locked-past-time-request",
   encode(message: AccountLockedPastTimeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.timestamp !== undefined) {
@@ -1213,11 +1344,41 @@ export const AccountLockedPastTimeRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeRequest {
+    const obj = createBaseAccountLockedPastTimeRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeRequest): JsonSafe<AccountLockedPastTimeRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeRequest>): AccountLockedPastTimeRequest {
     const message = createBaseAccountLockedPastTimeRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeRequestSDKType): AccountLockedPastTimeRequest {
+    return {
+      owner: object?.owner,
+      timestamp: object.timestamp ?? undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
+    };
+  },
+  toSDK(message: AccountLockedPastTimeRequest): AccountLockedPastTimeRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeRequestAmino): AccountLockedPastTimeRequest {
     const message = createBaseAccountLockedPastTimeRequest();
@@ -1264,7 +1425,6 @@ function createBaseAccountLockedPastTimeResponse(): AccountLockedPastTimeRespons
 }
 export const AccountLockedPastTimeResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeResponse",
-  aminoType: "osmosis/lockup/account-locked-past-time-response",
   encode(message: AccountLockedPastTimeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1288,10 +1448,43 @@ export const AccountLockedPastTimeResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeResponse {
+    const obj = createBaseAccountLockedPastTimeResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeResponse): JsonSafe<AccountLockedPastTimeResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeResponse>): AccountLockedPastTimeResponse {
     const message = createBaseAccountLockedPastTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeResponseSDKType): AccountLockedPastTimeResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedPastTimeResponse): AccountLockedPastTimeResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeResponseAmino): AccountLockedPastTimeResponse {
     const message = createBaseAccountLockedPastTimeResponse();
@@ -1337,9 +1530,8 @@ function createBaseAccountLockedPastTimeNotUnlockingOnlyRequest(): AccountLocked
 }
 export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyRequest",
-  aminoType: "osmosis/lockup/account-locked-past-time-not-unlocking-only-request",
   encode(message: AccountLockedPastTimeNotUnlockingOnlyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.timestamp !== undefined) {
@@ -1367,11 +1559,41 @@ export const AccountLockedPastTimeNotUnlockingOnlyRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequest {
+    const obj = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyRequest): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyRequest>): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyRequestSDKType): AccountLockedPastTimeNotUnlockingOnlyRequest {
+    return {
+      owner: object?.owner,
+      timestamp: object.timestamp ?? undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
+    };
+  },
+  toSDK(message: AccountLockedPastTimeNotUnlockingOnlyRequest): AccountLockedPastTimeNotUnlockingOnlyRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyRequestAmino): AccountLockedPastTimeNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyRequest();
@@ -1418,7 +1640,6 @@ function createBaseAccountLockedPastTimeNotUnlockingOnlyResponse(): AccountLocke
 }
 export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeNotUnlockingOnlyResponse",
-  aminoType: "osmosis/lockup/account-locked-past-time-not-unlocking-only-response",
   encode(message: AccountLockedPastTimeNotUnlockingOnlyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1442,10 +1663,43 @@ export const AccountLockedPastTimeNotUnlockingOnlyResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponse {
+    const obj = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeNotUnlockingOnlyResponse): JsonSafe<AccountLockedPastTimeNotUnlockingOnlyResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeNotUnlockingOnlyResponse>): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeNotUnlockingOnlyResponseSDKType): AccountLockedPastTimeNotUnlockingOnlyResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedPastTimeNotUnlockingOnlyResponse): AccountLockedPastTimeNotUnlockingOnlyResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeNotUnlockingOnlyResponseAmino): AccountLockedPastTimeNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedPastTimeNotUnlockingOnlyResponse();
@@ -1491,9 +1745,8 @@ function createBaseAccountUnlockedBeforeTimeRequest(): AccountUnlockedBeforeTime
 }
 export const AccountUnlockedBeforeTimeRequest = {
   typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeRequest",
-  aminoType: "osmosis/lockup/account-unlocked-before-time-request",
   encode(message: AccountUnlockedBeforeTimeRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.timestamp !== undefined) {
@@ -1521,11 +1774,41 @@ export const AccountUnlockedBeforeTimeRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockedBeforeTimeRequest {
+    const obj = createBaseAccountUnlockedBeforeTimeRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    return obj;
+  },
+  toJSON(message: AccountUnlockedBeforeTimeRequest): JsonSafe<AccountUnlockedBeforeTimeRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeRequest>): AccountUnlockedBeforeTimeRequest {
     const message = createBaseAccountUnlockedBeforeTimeRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     return message;
+  },
+  fromSDK(object: AccountUnlockedBeforeTimeRequestSDKType): AccountUnlockedBeforeTimeRequest {
+    return {
+      owner: object?.owner,
+      timestamp: object.timestamp ?? undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined
+    };
+  },
+  toSDK(message: AccountUnlockedBeforeTimeRequest): AccountUnlockedBeforeTimeRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
+    return obj;
   },
   fromAmino(object: AccountUnlockedBeforeTimeRequestAmino): AccountUnlockedBeforeTimeRequest {
     const message = createBaseAccountUnlockedBeforeTimeRequest();
@@ -1572,7 +1855,6 @@ function createBaseAccountUnlockedBeforeTimeResponse(): AccountUnlockedBeforeTim
 }
 export const AccountUnlockedBeforeTimeResponse = {
   typeUrl: "/osmosis.lockup.AccountUnlockedBeforeTimeResponse",
-  aminoType: "osmosis/lockup/account-unlocked-before-time-response",
   encode(message: AccountUnlockedBeforeTimeResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1596,10 +1878,43 @@ export const AccountUnlockedBeforeTimeResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountUnlockedBeforeTimeResponse {
+    const obj = createBaseAccountUnlockedBeforeTimeResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountUnlockedBeforeTimeResponse): JsonSafe<AccountUnlockedBeforeTimeResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountUnlockedBeforeTimeResponse>): AccountUnlockedBeforeTimeResponse {
     const message = createBaseAccountUnlockedBeforeTimeResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountUnlockedBeforeTimeResponseSDKType): AccountUnlockedBeforeTimeResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountUnlockedBeforeTimeResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountUnlockedBeforeTimeResponse): AccountUnlockedBeforeTimeResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountUnlockedBeforeTimeResponseAmino): AccountUnlockedBeforeTimeResponse {
     const message = createBaseAccountUnlockedBeforeTimeResponse();
@@ -1646,15 +1961,14 @@ function createBaseAccountLockedPastTimeDenomRequest(): AccountLockedPastTimeDen
 }
 export const AccountLockedPastTimeDenomRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomRequest",
-  aminoType: "osmosis/lockup/account-locked-past-time-denom-request",
   encode(message: AccountLockedPastTimeDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).ldelim();
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(26).string(message.denom);
     }
     return writer;
@@ -1682,12 +1996,47 @@ export const AccountLockedPastTimeDenomRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeDenomRequest {
+    const obj = createBaseAccountLockedPastTimeDenomRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.timestamp)) obj.timestamp = new Date(object.timestamp);
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeDenomRequest): JsonSafe<AccountLockedPastTimeDenomRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp.toISOString());
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeDenomRequest>): AccountLockedPastTimeDenomRequest {
     const message = createBaseAccountLockedPastTimeDenomRequest();
     message.owner = object.owner ?? "";
     message.timestamp = object.timestamp ?? undefined;
     message.denom = object.denom ?? "";
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeDenomRequestSDKType): AccountLockedPastTimeDenomRequest {
+    return {
+      owner: object?.owner,
+      timestamp: object.timestamp ?? undefined,
+      denom: object?.denom
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      timestamp: isSet(object.timestamp) ? new Date(object.timestamp) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+  toSDK(message: AccountLockedPastTimeDenomRequest): AccountLockedPastTimeDenomRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.timestamp !== undefined && (obj.timestamp = message.timestamp ?? undefined);
+    obj.denom = message.denom;
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeDenomRequestAmino): AccountLockedPastTimeDenomRequest {
     const message = createBaseAccountLockedPastTimeDenomRequest();
@@ -1738,7 +2087,6 @@ function createBaseAccountLockedPastTimeDenomResponse(): AccountLockedPastTimeDe
 }
 export const AccountLockedPastTimeDenomResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedPastTimeDenomResponse",
-  aminoType: "osmosis/lockup/account-locked-past-time-denom-response",
   encode(message: AccountLockedPastTimeDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -1762,10 +2110,43 @@ export const AccountLockedPastTimeDenomResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedPastTimeDenomResponse {
+    const obj = createBaseAccountLockedPastTimeDenomResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedPastTimeDenomResponse): JsonSafe<AccountLockedPastTimeDenomResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedPastTimeDenomResponse>): AccountLockedPastTimeDenomResponse {
     const message = createBaseAccountLockedPastTimeDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedPastTimeDenomResponseSDKType): AccountLockedPastTimeDenomResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedPastTimeDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedPastTimeDenomResponse): AccountLockedPastTimeDenomResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedPastTimeDenomResponseAmino): AccountLockedPastTimeDenomResponse {
     const message = createBaseAccountLockedPastTimeDenomResponse();
@@ -1811,9 +2192,8 @@ function createBaseLockedDenomRequest(): LockedDenomRequest {
 }
 export const LockedDenomRequest = {
   typeUrl: "/osmosis.lockup.LockedDenomRequest",
-  aminoType: "osmosis/lockup/locked-denom-request",
   encode(message: LockedDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(10).string(message.denom);
     }
     if (message.duration !== undefined) {
@@ -1841,11 +2221,43 @@ export const LockedDenomRequest = {
     }
     return message;
   },
+  fromJSON(object: any): LockedDenomRequest {
+    const obj = createBaseLockedDenomRequest();
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
+  },
+  toJSON(message: LockedDenomRequest): JsonSafe<LockedDenomRequest> {
+    const obj: any = {};
+    message.denom !== undefined && (obj.denom = message.denom);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<LockedDenomRequest>): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
     message.denom = object.denom ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
+  },
+  fromSDK(object: LockedDenomRequestSDKType): LockedDenomRequest {
+    return {
+      denom: object?.denom,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+  fromSDKJSON(object: any): LockedDenomRequestSDKType {
+    return {
+      denom: isSet(object.denom) ? String(object.denom) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+  toSDK(message: LockedDenomRequest): LockedDenomRequestSDKType {
+    const obj: any = {};
+    obj.denom = message.denom;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   },
   fromAmino(object: LockedDenomRequestAmino): LockedDenomRequest {
     const message = createBaseLockedDenomRequest();
@@ -1892,9 +2304,8 @@ function createBaseLockedDenomResponse(): LockedDenomResponse {
 }
 export const LockedDenomResponse = {
   typeUrl: "/osmosis.lockup.LockedDenomResponse",
-  aminoType: "osmosis/lockup/locked-denom-response",
   encode(message: LockedDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.amount !== "") {
+    if (message.amount !== undefined) {
       writer.uint32(10).string(message.amount);
     }
     return writer;
@@ -1916,10 +2327,35 @@ export const LockedDenomResponse = {
     }
     return message;
   },
+  fromJSON(object: any): LockedDenomResponse {
+    const obj = createBaseLockedDenomResponse();
+    if (isSet(object.amount)) obj.amount = String(object.amount);
+    return obj;
+  },
+  toJSON(message: LockedDenomResponse): JsonSafe<LockedDenomResponse> {
+    const obj: any = {};
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
   fromPartial(object: DeepPartial<LockedDenomResponse>): LockedDenomResponse {
     const message = createBaseLockedDenomResponse();
     message.amount = object.amount ?? "";
     return message;
+  },
+  fromSDK(object: LockedDenomResponseSDKType): LockedDenomResponse {
+    return {
+      amount: object?.amount
+    };
+  },
+  fromSDKJSON(object: any): LockedDenomResponseSDKType {
+    return {
+      amount: isSet(object.amount) ? String(object.amount) : ""
+    };
+  },
+  toSDK(message: LockedDenomResponse): LockedDenomResponseSDKType {
+    const obj: any = {};
+    obj.amount = message.amount;
+    return obj;
   },
   fromAmino(object: LockedDenomResponseAmino): LockedDenomResponse {
     const message = createBaseLockedDenomResponse();
@@ -1962,9 +2398,8 @@ function createBaseLockedRequest(): LockedRequest {
 }
 export const LockedRequest = {
   typeUrl: "/osmosis.lockup.LockedRequest",
-  aminoType: "osmosis/lockup/locked-request",
   encode(message: LockedRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lockId !== BigInt(0)) {
+    if (message.lockId !== undefined) {
       writer.uint32(8).uint64(message.lockId);
     }
     return writer;
@@ -1986,10 +2421,37 @@ export const LockedRequest = {
     }
     return message;
   },
+  fromJSON(object: any): LockedRequest {
+    const obj = createBaseLockedRequest();
+    if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
+    return obj;
+  },
+  toJSON(message: LockedRequest): JsonSafe<LockedRequest> {
+    const obj: any = {};
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<LockedRequest>): LockedRequest {
     const message = createBaseLockedRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     return message;
+  },
+  fromSDK(object: LockedRequestSDKType): LockedRequest {
+    return {
+      lockId: object?.lock_id
+    };
+  },
+  fromSDKJSON(object: any): LockedRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: LockedRequest): LockedRequestSDKType {
+    const obj: any = {};
+    obj.lock_id = message.lockId;
+    return obj;
   },
   fromAmino(object: LockedRequestAmino): LockedRequest {
     const message = createBaseLockedRequest();
@@ -2032,7 +2494,6 @@ function createBaseLockedResponse(): LockedResponse {
 }
 export const LockedResponse = {
   typeUrl: "/osmosis.lockup.LockedResponse",
-  aminoType: "osmosis/lockup/locked-response",
   encode(message: LockedResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.lock !== undefined) {
       PeriodLock.encode(message.lock, writer.uint32(10).fork()).ldelim();
@@ -2056,10 +2517,37 @@ export const LockedResponse = {
     }
     return message;
   },
+  fromJSON(object: any): LockedResponse {
+    const obj = createBaseLockedResponse();
+    if (isSet(object.lock)) obj.lock = PeriodLock.fromJSON(object.lock);
+    return obj;
+  },
+  toJSON(message: LockedResponse): JsonSafe<LockedResponse> {
+    const obj: any = {};
+    message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toJSON(message.lock) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<LockedResponse>): LockedResponse {
     const message = createBaseLockedResponse();
-    message.lock = object.lock !== undefined && object.lock !== null ? PeriodLock.fromPartial(object.lock) : undefined;
+    if (object.lock !== undefined && object.lock !== null) {
+      message.lock = PeriodLock.fromPartial(object.lock);
+    }
     return message;
+  },
+  fromSDK(object: LockedResponseSDKType): LockedResponse {
+    return {
+      lock: object.lock ? PeriodLock.fromSDK(object.lock) : undefined
+    };
+  },
+  fromSDKJSON(object: any): LockedResponseSDKType {
+    return {
+      lock: isSet(object.lock) ? PeriodLock.fromSDKJSON(object.lock) : undefined
+    };
+  },
+  toSDK(message: LockedResponse): LockedResponseSDKType {
+    const obj: any = {};
+    message.lock !== undefined && (obj.lock = message.lock ? PeriodLock.toSDK(message.lock) : undefined);
+    return obj;
   },
   fromAmino(object: LockedResponseAmino): LockedResponse {
     const message = createBaseLockedResponse();
@@ -2102,9 +2590,8 @@ function createBaseSyntheticLockupsByLockupIDRequest(): SyntheticLockupsByLockup
 }
 export const SyntheticLockupsByLockupIDRequest = {
   typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDRequest",
-  aminoType: "osmosis/lockup/synthetic-lockups-by-lockup-id-request",
   encode(message: SyntheticLockupsByLockupIDRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.lockId !== BigInt(0)) {
+    if (message.lockId !== undefined) {
       writer.uint32(8).uint64(message.lockId);
     }
     return writer;
@@ -2126,10 +2613,37 @@ export const SyntheticLockupsByLockupIDRequest = {
     }
     return message;
   },
+  fromJSON(object: any): SyntheticLockupsByLockupIDRequest {
+    const obj = createBaseSyntheticLockupsByLockupIDRequest();
+    if (isSet(object.lockId)) obj.lockId = BigInt(object.lockId.toString());
+    return obj;
+  },
+  toJSON(message: SyntheticLockupsByLockupIDRequest): JsonSafe<SyntheticLockupsByLockupIDRequest> {
+    const obj: any = {};
+    message.lockId !== undefined && (obj.lockId = (message.lockId || BigInt(0)).toString());
+    return obj;
+  },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDRequest>): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
-    message.lockId = object.lockId !== undefined && object.lockId !== null ? BigInt(object.lockId.toString()) : BigInt(0);
+    if (object.lockId !== undefined && object.lockId !== null) {
+      message.lockId = BigInt(object.lockId.toString());
+    }
     return message;
+  },
+  fromSDK(object: SyntheticLockupsByLockupIDRequestSDKType): SyntheticLockupsByLockupIDRequest {
+    return {
+      lockId: object?.lock_id
+    };
+  },
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDRequestSDKType {
+    return {
+      lock_id: isSet(object.lock_id) ? BigInt(object.lock_id.toString()) : BigInt(0)
+    };
+  },
+  toSDK(message: SyntheticLockupsByLockupIDRequest): SyntheticLockupsByLockupIDRequestSDKType {
+    const obj: any = {};
+    obj.lock_id = message.lockId;
+    return obj;
   },
   fromAmino(object: SyntheticLockupsByLockupIDRequestAmino): SyntheticLockupsByLockupIDRequest {
     const message = createBaseSyntheticLockupsByLockupIDRequest();
@@ -2172,7 +2686,6 @@ function createBaseSyntheticLockupsByLockupIDResponse(): SyntheticLockupsByLocku
 }
 export const SyntheticLockupsByLockupIDResponse = {
   typeUrl: "/osmosis.lockup.SyntheticLockupsByLockupIDResponse",
-  aminoType: "osmosis/lockup/synthetic-lockups-by-lockup-id-response",
   encode(message: SyntheticLockupsByLockupIDResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.syntheticLocks) {
       SyntheticLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2196,10 +2709,43 @@ export const SyntheticLockupsByLockupIDResponse = {
     }
     return message;
   },
+  fromJSON(object: any): SyntheticLockupsByLockupIDResponse {
+    const obj = createBaseSyntheticLockupsByLockupIDResponse();
+    if (Array.isArray(object?.syntheticLocks)) obj.syntheticLocks = object.syntheticLocks.map((e: any) => SyntheticLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: SyntheticLockupsByLockupIDResponse): JsonSafe<SyntheticLockupsByLockupIDResponse> {
+    const obj: any = {};
+    if (message.syntheticLocks) {
+      obj.syntheticLocks = message.syntheticLocks.map(e => e ? SyntheticLock.toJSON(e) : undefined);
+    } else {
+      obj.syntheticLocks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<SyntheticLockupsByLockupIDResponse>): SyntheticLockupsByLockupIDResponse {
     const message = createBaseSyntheticLockupsByLockupIDResponse();
     message.syntheticLocks = object.syntheticLocks?.map(e => SyntheticLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: SyntheticLockupsByLockupIDResponseSDKType): SyntheticLockupsByLockupIDResponse {
+    return {
+      syntheticLocks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): SyntheticLockupsByLockupIDResponseSDKType {
+    return {
+      synthetic_locks: Array.isArray(object?.synthetic_locks) ? object.synthetic_locks.map((e: any) => SyntheticLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: SyntheticLockupsByLockupIDResponse): SyntheticLockupsByLockupIDResponseSDKType {
+    const obj: any = {};
+    if (message.syntheticLocks) {
+      obj.synthetic_locks = message.syntheticLocks.map(e => e ? SyntheticLock.toSDK(e) : undefined);
+    } else {
+      obj.synthetic_locks = [];
+    }
+    return obj;
   },
   fromAmino(object: SyntheticLockupsByLockupIDResponseAmino): SyntheticLockupsByLockupIDResponse {
     const message = createBaseSyntheticLockupsByLockupIDResponse();
@@ -2245,9 +2791,8 @@ function createBaseAccountLockedLongerDurationRequest(): AccountLockedLongerDura
 }
 export const AccountLockedLongerDurationRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationRequest",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-request",
   encode(message: AccountLockedLongerDurationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -2275,11 +2820,43 @@ export const AccountLockedLongerDurationRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationRequest {
+    const obj = createBaseAccountLockedLongerDurationRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationRequest): JsonSafe<AccountLockedLongerDurationRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationRequest>): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationRequestSDKType): AccountLockedLongerDurationRequest {
+    return {
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationRequest): AccountLockedLongerDurationRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationRequestAmino): AccountLockedLongerDurationRequest {
     const message = createBaseAccountLockedLongerDurationRequest();
@@ -2326,7 +2903,6 @@ function createBaseAccountLockedLongerDurationResponse(): AccountLockedLongerDur
 }
 export const AccountLockedLongerDurationResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationResponse",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-response",
   encode(message: AccountLockedLongerDurationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2350,10 +2926,43 @@ export const AccountLockedLongerDurationResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationResponse {
+    const obj = createBaseAccountLockedLongerDurationResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationResponse): JsonSafe<AccountLockedLongerDurationResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationResponse>): AccountLockedLongerDurationResponse {
     const message = createBaseAccountLockedLongerDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationResponseSDKType): AccountLockedLongerDurationResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationResponse): AccountLockedLongerDurationResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationResponseAmino): AccountLockedLongerDurationResponse {
     const message = createBaseAccountLockedLongerDurationResponse();
@@ -2399,9 +3008,8 @@ function createBaseAccountLockedDurationRequest(): AccountLockedDurationRequest 
 }
 export const AccountLockedDurationRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedDurationRequest",
-  aminoType: "osmosis/lockup/account-locked-duration-request",
   encode(message: AccountLockedDurationRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -2429,11 +3037,43 @@ export const AccountLockedDurationRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedDurationRequest {
+    const obj = createBaseAccountLockedDurationRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
+  },
+  toJSON(message: AccountLockedDurationRequest): JsonSafe<AccountLockedDurationRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedDurationRequest>): AccountLockedDurationRequest {
     const message = createBaseAccountLockedDurationRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
+  },
+  fromSDK(object: AccountLockedDurationRequestSDKType): AccountLockedDurationRequest {
+    return {
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedDurationRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+  toSDK(message: AccountLockedDurationRequest): AccountLockedDurationRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   },
   fromAmino(object: AccountLockedDurationRequestAmino): AccountLockedDurationRequest {
     const message = createBaseAccountLockedDurationRequest();
@@ -2480,7 +3120,6 @@ function createBaseAccountLockedDurationResponse(): AccountLockedDurationRespons
 }
 export const AccountLockedDurationResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedDurationResponse",
-  aminoType: "osmosis/lockup/account-locked-duration-response",
   encode(message: AccountLockedDurationResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2504,10 +3143,43 @@ export const AccountLockedDurationResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedDurationResponse {
+    const obj = createBaseAccountLockedDurationResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedDurationResponse): JsonSafe<AccountLockedDurationResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedDurationResponse>): AccountLockedDurationResponse {
     const message = createBaseAccountLockedDurationResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedDurationResponseSDKType): AccountLockedDurationResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedDurationResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedDurationResponse): AccountLockedDurationResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedDurationResponseAmino): AccountLockedDurationResponse {
     const message = createBaseAccountLockedDurationResponse();
@@ -2553,9 +3225,8 @@ function createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest(): Account
 }
 export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyRequest",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-request",
   encode(message: AccountLockedLongerDurationNotUnlockingOnlyRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
@@ -2583,11 +3254,43 @@ export const AccountLockedLongerDurationNotUnlockingOnlyRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+    const obj = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyRequest>): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType): AccountLockedLongerDurationNotUnlockingOnlyRequest {
+    return {
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationNotUnlockingOnlyRequest): AccountLockedLongerDurationNotUnlockingOnlyRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyRequestAmino): AccountLockedLongerDurationNotUnlockingOnlyRequest {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyRequest();
@@ -2634,7 +3337,6 @@ function createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse(): Accoun
 }
 export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationNotUnlockingOnlyResponse",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-not-unlocking-only-response",
   encode(message: AccountLockedLongerDurationNotUnlockingOnlyResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2658,10 +3360,43 @@ export const AccountLockedLongerDurationNotUnlockingOnlyResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+    const obj = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): JsonSafe<AccountLockedLongerDurationNotUnlockingOnlyResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationNotUnlockingOnlyResponse>): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType): AccountLockedLongerDurationNotUnlockingOnlyResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationNotUnlockingOnlyResponse): AccountLockedLongerDurationNotUnlockingOnlyResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationNotUnlockingOnlyResponseAmino): AccountLockedLongerDurationNotUnlockingOnlyResponse {
     const message = createBaseAccountLockedLongerDurationNotUnlockingOnlyResponse();
@@ -2708,15 +3443,14 @@ function createBaseAccountLockedLongerDurationDenomRequest(): AccountLockedLonge
 }
 export const AccountLockedLongerDurationDenomRequest = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomRequest",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-denom-request",
   encode(message: AccountLockedLongerDurationDenomRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.owner !== "") {
+    if (message.owner !== undefined) {
       writer.uint32(10).string(message.owner);
     }
     if (message.duration !== undefined) {
       Duration.encode(message.duration, writer.uint32(18).fork()).ldelim();
     }
-    if (message.denom !== "") {
+    if (message.denom !== undefined) {
       writer.uint32(26).string(message.denom);
     }
     return writer;
@@ -2744,12 +3478,49 @@ export const AccountLockedLongerDurationDenomRequest = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationDenomRequest {
+    const obj = createBaseAccountLockedLongerDurationDenomRequest();
+    if (isSet(object.owner)) obj.owner = String(object.owner);
+    if (isSet(object.duration)) obj.duration = Duration.fromJSON(object.duration);
+    if (isSet(object.denom)) obj.denom = String(object.denom);
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationDenomRequest): JsonSafe<AccountLockedLongerDurationDenomRequest> {
+    const obj: any = {};
+    message.owner !== undefined && (obj.owner = message.owner);
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toJSON(message.duration) : undefined);
+    message.denom !== undefined && (obj.denom = message.denom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomRequest>): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
     message.owner = object.owner ?? "";
-    message.duration = object.duration !== undefined && object.duration !== null ? Duration.fromPartial(object.duration) : undefined;
+    if (object.duration !== undefined && object.duration !== null) {
+      message.duration = Duration.fromPartial(object.duration);
+    }
     message.denom = object.denom ?? "";
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationDenomRequestSDKType): AccountLockedLongerDurationDenomRequest {
+    return {
+      owner: object?.owner,
+      duration: object.duration ? Duration.fromSDK(object.duration) : undefined,
+      denom: object?.denom
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomRequestSDKType {
+    return {
+      owner: isSet(object.owner) ? String(object.owner) : "",
+      duration: isSet(object.duration) ? Duration.fromSDKJSON(object.duration) : undefined,
+      denom: isSet(object.denom) ? String(object.denom) : ""
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationDenomRequest): AccountLockedLongerDurationDenomRequestSDKType {
+    const obj: any = {};
+    obj.owner = message.owner;
+    message.duration !== undefined && (obj.duration = message.duration ? Duration.toSDK(message.duration) : undefined);
+    obj.denom = message.denom;
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationDenomRequestAmino): AccountLockedLongerDurationDenomRequest {
     const message = createBaseAccountLockedLongerDurationDenomRequest();
@@ -2800,7 +3571,6 @@ function createBaseAccountLockedLongerDurationDenomResponse(): AccountLockedLong
 }
 export const AccountLockedLongerDurationDenomResponse = {
   typeUrl: "/osmosis.lockup.AccountLockedLongerDurationDenomResponse",
-  aminoType: "osmosis/lockup/account-locked-longer-duration-denom-response",
   encode(message: AccountLockedLongerDurationDenomResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     for (const v of message.locks) {
       PeriodLock.encode(v!, writer.uint32(10).fork()).ldelim();
@@ -2824,10 +3594,43 @@ export const AccountLockedLongerDurationDenomResponse = {
     }
     return message;
   },
+  fromJSON(object: any): AccountLockedLongerDurationDenomResponse {
+    const obj = createBaseAccountLockedLongerDurationDenomResponse();
+    if (Array.isArray(object?.locks)) obj.locks = object.locks.map((e: any) => PeriodLock.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: AccountLockedLongerDurationDenomResponse): JsonSafe<AccountLockedLongerDurationDenomResponse> {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toJSON(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<AccountLockedLongerDurationDenomResponse>): AccountLockedLongerDurationDenomResponse {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
     message.locks = object.locks?.map(e => PeriodLock.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: AccountLockedLongerDurationDenomResponseSDKType): AccountLockedLongerDurationDenomResponse {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): AccountLockedLongerDurationDenomResponseSDKType {
+    return {
+      locks: Array.isArray(object?.locks) ? object.locks.map((e: any) => PeriodLock.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: AccountLockedLongerDurationDenomResponse): AccountLockedLongerDurationDenomResponseSDKType {
+    const obj: any = {};
+    if (message.locks) {
+      obj.locks = message.locks.map(e => e ? PeriodLock.toSDK(e) : undefined);
+    } else {
+      obj.locks = [];
+    }
+    return obj;
   },
   fromAmino(object: AccountLockedLongerDurationDenomResponseAmino): AccountLockedLongerDurationDenomResponse {
     const message = createBaseAccountLockedLongerDurationDenomResponse();
@@ -2870,7 +3673,6 @@ function createBaseQueryParamsRequest(): QueryParamsRequest {
 }
 export const QueryParamsRequest = {
   typeUrl: "/osmosis.lockup.QueryParamsRequest",
-  aminoType: "osmosis/lockup/query-params-request",
   encode(_: QueryParamsRequest, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     return writer;
   },
@@ -2888,9 +3690,27 @@ export const QueryParamsRequest = {
     }
     return message;
   },
+  fromJSON(_: any): QueryParamsRequest {
+    const obj = createBaseQueryParamsRequest();
+    return obj;
+  },
+  toJSON(_: QueryParamsRequest): JsonSafe<QueryParamsRequest> {
+    const obj: any = {};
+    return obj;
+  },
   fromPartial(_: DeepPartial<QueryParamsRequest>): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
     return message;
+  },
+  fromSDK(_: QueryParamsRequestSDKType): QueryParamsRequest {
+    return {};
+  },
+  fromSDKJSON(_: any): QueryParamsRequestSDKType {
+    return {};
+  },
+  toSDK(_: QueryParamsRequest): QueryParamsRequestSDKType {
+    const obj: any = {};
+    return obj;
   },
   fromAmino(_: QueryParamsRequestAmino): QueryParamsRequest {
     const message = createBaseQueryParamsRequest();
@@ -2929,7 +3749,6 @@ function createBaseQueryParamsResponse(): QueryParamsResponse {
 }
 export const QueryParamsResponse = {
   typeUrl: "/osmosis.lockup.QueryParamsResponse",
-  aminoType: "osmosis/lockup/query-params-response",
   encode(message: QueryParamsResponse, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
     if (message.params !== undefined) {
       Params.encode(message.params, writer.uint32(10).fork()).ldelim();
@@ -2953,10 +3772,37 @@ export const QueryParamsResponse = {
     }
     return message;
   },
+  fromJSON(object: any): QueryParamsResponse {
+    const obj = createBaseQueryParamsResponse();
+    if (isSet(object.params)) obj.params = Params.fromJSON(object.params);
+    return obj;
+  },
+  toJSON(message: QueryParamsResponse): JsonSafe<QueryParamsResponse> {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toJSON(message.params) : undefined);
+    return obj;
+  },
   fromPartial(object: DeepPartial<QueryParamsResponse>): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();
-    message.params = object.params !== undefined && object.params !== null ? Params.fromPartial(object.params) : undefined;
+    if (object.params !== undefined && object.params !== null) {
+      message.params = Params.fromPartial(object.params);
+    }
     return message;
+  },
+  fromSDK(object: QueryParamsResponseSDKType): QueryParamsResponse {
+    return {
+      params: object.params ? Params.fromSDK(object.params) : undefined
+    };
+  },
+  fromSDKJSON(object: any): QueryParamsResponseSDKType {
+    return {
+      params: isSet(object.params) ? Params.fromSDKJSON(object.params) : undefined
+    };
+  },
+  toSDK(message: QueryParamsResponse): QueryParamsResponseSDKType {
+    const obj: any = {};
+    message.params !== undefined && (obj.params = message.params ? Params.toSDK(message.params) : undefined);
+    return obj;
   },
   fromAmino(object: QueryParamsResponseAmino): QueryParamsResponse {
     const message = createBaseQueryParamsResponse();

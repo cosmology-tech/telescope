@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../binary";
-import { DeepPartial } from "../../helpers";
+import { BinaryReader, BinaryWriter } from "../../binary.js";
+import { JsonSafe } from "../../json-safe.js";
+import { DeepPartial, isSet } from "../../helpers.js";
+export const protobufPackage = "google.api";
 /**
  * `Context` defines which contexts an API requests.
  * 
@@ -88,17 +90,8 @@ export interface ContextProtoMsg {
  * You can also specify extension ID instead of fully qualified extension name
  * here.
  */
-export interface ContextAmino {
-  /**
-   * A list of RPC context rules that apply to individual API methods.
-   * 
-   * **NOTE:** All service configuration rules follow "last one wins" order.
-   */
-  rules: ContextRuleAmino[];
-}
-export interface ContextAminoMsg {
-  type: "/google.api.Context";
-  value: ContextAmino;
+export interface ContextSDKType {
+  rules: ContextRuleSDKType[];
 }
 /**
  * A context rule provides information about the context for an individual API
@@ -134,31 +127,12 @@ export interface ContextRuleProtoMsg {
  * A context rule provides information about the context for an individual API
  * element.
  */
-export interface ContextRuleAmino {
-  /**
-   * Selects the methods to which this rule applies.
-   * 
-   * Refer to [selector][google.api.DocumentationRule.selector] for syntax details.
-   */
+export interface ContextRuleSDKType {
   selector: string;
-  /** A list of full type names of requested contexts. */
   requested: string[];
-  /** A list of full type names of provided contexts. */
   provided: string[];
-  /**
-   * A list of full type names or extension IDs of extensions allowed in grpc
-   * side channel from client to backend.
-   */
   allowed_request_extensions: string[];
-  /**
-   * A list of full type names or extension IDs of extensions allowed in grpc
-   * side channel from backend to client.
-   */
   allowed_response_extensions: string[];
-}
-export interface ContextRuleAminoMsg {
-  type: "/google.api.ContextRule";
-  value: ContextRuleAmino;
 }
 function createBaseContext(): Context {
   return {
@@ -190,10 +164,43 @@ export const Context = {
     }
     return message;
   },
+  fromJSON(object: any): Context {
+    const obj = createBaseContext();
+    if (Array.isArray(object?.rules)) obj.rules = object.rules.map((e: any) => ContextRule.fromJSON(e));
+    return obj;
+  },
+  toJSON(message: Context): JsonSafe<Context> {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? ContextRule.toJSON(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<Context>): Context {
     const message = createBaseContext();
     message.rules = object.rules?.map(e => ContextRule.fromPartial(e)) || [];
     return message;
+  },
+  fromSDK(object: ContextSDKType): Context {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromSDK(e)) : []
+    };
+  },
+  fromSDKJSON(object: any): ContextSDKType {
+    return {
+      rules: Array.isArray(object?.rules) ? object.rules.map((e: any) => ContextRule.fromSDKJSON(e)) : []
+    };
+  },
+  toSDK(message: Context): ContextSDKType {
+    const obj: any = {};
+    if (message.rules) {
+      obj.rules = message.rules.map(e => e ? ContextRule.toSDK(e) : undefined);
+    } else {
+      obj.rules = [];
+    }
+    return obj;
   },
   fromAmino(object: ContextAmino): Context {
     const message = createBaseContext();
@@ -237,7 +244,7 @@ function createBaseContextRule(): ContextRule {
 export const ContextRule = {
   typeUrl: "/google.api.ContextRule",
   encode(message: ContextRule, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.selector !== "") {
+    if (message.selector !== undefined) {
       writer.uint32(10).string(message.selector);
     }
     for (const v of message.requested) {
@@ -283,6 +290,40 @@ export const ContextRule = {
     }
     return message;
   },
+  fromJSON(object: any): ContextRule {
+    const obj = createBaseContextRule();
+    if (isSet(object.selector)) obj.selector = String(object.selector);
+    if (Array.isArray(object?.requested)) obj.requested = object.requested.map((e: any) => String(e));
+    if (Array.isArray(object?.provided)) obj.provided = object.provided.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedRequestExtensions)) obj.allowedRequestExtensions = object.allowedRequestExtensions.map((e: any) => String(e));
+    if (Array.isArray(object?.allowedResponseExtensions)) obj.allowedResponseExtensions = object.allowedResponseExtensions.map((e: any) => String(e));
+    return obj;
+  },
+  toJSON(message: ContextRule): JsonSafe<ContextRule> {
+    const obj: any = {};
+    message.selector !== undefined && (obj.selector = message.selector);
+    if (message.requested) {
+      obj.requested = message.requested.map(e => e);
+    } else {
+      obj.requested = [];
+    }
+    if (message.provided) {
+      obj.provided = message.provided.map(e => e);
+    } else {
+      obj.provided = [];
+    }
+    if (message.allowedRequestExtensions) {
+      obj.allowedRequestExtensions = message.allowedRequestExtensions.map(e => e);
+    } else {
+      obj.allowedRequestExtensions = [];
+    }
+    if (message.allowedResponseExtensions) {
+      obj.allowedResponseExtensions = message.allowedResponseExtensions.map(e => e);
+    } else {
+      obj.allowedResponseExtensions = [];
+    }
+    return obj;
+  },
   fromPartial(object: DeepPartial<ContextRule>): ContextRule {
     const message = createBaseContextRule();
     message.selector = object.selector ?? "";
@@ -291,6 +332,49 @@ export const ContextRule = {
     message.allowedRequestExtensions = object.allowedRequestExtensions?.map(e => e) || [];
     message.allowedResponseExtensions = object.allowedResponseExtensions?.map(e => e) || [];
     return message;
+  },
+  fromSDK(object: ContextRuleSDKType): ContextRule {
+    return {
+      selector: object?.selector,
+      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => e) : [],
+      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => e) : [],
+      allowedRequestExtensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => e) : [],
+      allowedResponseExtensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => e) : []
+    };
+  },
+  fromSDKJSON(object: any): ContextRuleSDKType {
+    return {
+      selector: isSet(object.selector) ? String(object.selector) : "",
+      requested: Array.isArray(object?.requested) ? object.requested.map((e: any) => String(e)) : [],
+      provided: Array.isArray(object?.provided) ? object.provided.map((e: any) => String(e)) : [],
+      allowed_request_extensions: Array.isArray(object?.allowed_request_extensions) ? object.allowed_request_extensions.map((e: any) => String(e)) : [],
+      allowed_response_extensions: Array.isArray(object?.allowed_response_extensions) ? object.allowed_response_extensions.map((e: any) => String(e)) : []
+    };
+  },
+  toSDK(message: ContextRule): ContextRuleSDKType {
+    const obj: any = {};
+    obj.selector = message.selector;
+    if (message.requested) {
+      obj.requested = message.requested.map(e => e);
+    } else {
+      obj.requested = [];
+    }
+    if (message.provided) {
+      obj.provided = message.provided.map(e => e);
+    } else {
+      obj.provided = [];
+    }
+    if (message.allowedRequestExtensions) {
+      obj.allowed_request_extensions = message.allowedRequestExtensions.map(e => e);
+    } else {
+      obj.allowed_request_extensions = [];
+    }
+    if (message.allowedResponseExtensions) {
+      obj.allowed_response_extensions = message.allowedResponseExtensions.map(e => e);
+    } else {
+      obj.allowed_response_extensions = [];
+    }
+    return obj;
   },
   fromAmino(object: ContextRuleAmino): ContextRule {
     const message = createBaseContextRule();

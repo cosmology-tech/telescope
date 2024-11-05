@@ -1,5 +1,7 @@
-import { BinaryReader, BinaryWriter } from "../../../../binary";
-import { DeepPartial } from "../../../../helpers";
+import { BinaryReader, BinaryWriter } from "../../../../binary.js";
+import { isSet, DeepPartial } from "../../../../helpers.js";
+import { JsonSafe } from "../../../../json-safe.js";
+export const protobufPackage = "ibc.applications.transfer.v1";
 /**
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
@@ -21,18 +23,9 @@ export interface DenomTraceProtoMsg {
  * DenomTrace contains the base denomination for ICS20 fungible tokens and the
  * source tracing information path.
  */
-export interface DenomTraceAmino {
-  /**
-   * path defines the chain of port/channel identifiers used for tracing the
-   * source of the fungible token.
-   */
+export interface DenomTraceSDKType {
   path: string;
-  /** base denomination of the relayed fungible token. */
   base_denom: string;
-}
-export interface DenomTraceAminoMsg {
-  type: "cosmos-sdk/DenomTrace";
-  value: DenomTraceAmino;
 }
 /**
  * Params defines the set of IBC transfer parameters.
@@ -62,21 +55,9 @@ export interface ParamsProtoMsg {
  * TransfersEnabled parameter to true and then set the bank module's SendEnabled
  * parameter for the denomination to false.
  */
-export interface ParamsAmino {
-  /**
-   * send_enabled enables or disables all cross-chain token transfers from this
-   * chain.
-   */
+export interface ParamsSDKType {
   send_enabled: boolean;
-  /**
-   * receive_enabled enables or disables all cross-chain token transfers to this
-   * chain.
-   */
   receive_enabled: boolean;
-}
-export interface ParamsAminoMsg {
-  type: "cosmos-sdk/Params";
-  value: ParamsAmino;
 }
 function createBaseDenomTrace(): DenomTrace {
   return {
@@ -86,12 +67,11 @@ function createBaseDenomTrace(): DenomTrace {
 }
 export const DenomTrace = {
   typeUrl: "/ibc.applications.transfer.v1.DenomTrace",
-  aminoType: "cosmos-sdk/DenomTrace",
   encode(message: DenomTrace, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.path !== "") {
+    if (message.path !== undefined) {
       writer.uint32(10).string(message.path);
     }
-    if (message.baseDenom !== "") {
+    if (message.baseDenom !== undefined) {
       writer.uint32(18).string(message.baseDenom);
     }
     return writer;
@@ -116,11 +96,41 @@ export const DenomTrace = {
     }
     return message;
   },
+  fromJSON(object: any): DenomTrace {
+    const obj = createBaseDenomTrace();
+    if (isSet(object.path)) obj.path = String(object.path);
+    if (isSet(object.baseDenom)) obj.baseDenom = String(object.baseDenom);
+    return obj;
+  },
+  toJSON(message: DenomTrace): JsonSafe<DenomTrace> {
+    const obj: any = {};
+    message.path !== undefined && (obj.path = message.path);
+    message.baseDenom !== undefined && (obj.baseDenom = message.baseDenom);
+    return obj;
+  },
   fromPartial(object: DeepPartial<DenomTrace>): DenomTrace {
     const message = createBaseDenomTrace();
     message.path = object.path ?? "";
     message.baseDenom = object.baseDenom ?? "";
     return message;
+  },
+  fromSDK(object: DenomTraceSDKType): DenomTrace {
+    return {
+      path: object?.path,
+      baseDenom: object?.base_denom
+    };
+  },
+  fromSDKJSON(object: any): DenomTraceSDKType {
+    return {
+      path: isSet(object.path) ? String(object.path) : "",
+      base_denom: isSet(object.base_denom) ? String(object.base_denom) : ""
+    };
+  },
+  toSDK(message: DenomTrace): DenomTraceSDKType {
+    const obj: any = {};
+    obj.path = message.path;
+    obj.base_denom = message.baseDenom;
+    return obj;
   },
   fromAmino(object: DenomTraceAmino): DenomTrace {
     const message = createBaseDenomTrace();
@@ -168,12 +178,11 @@ function createBaseParams(): Params {
 }
 export const Params = {
   typeUrl: "/ibc.applications.transfer.v1.Params",
-  aminoType: "cosmos-sdk/Params",
   encode(message: Params, writer: BinaryWriter = BinaryWriter.create()): BinaryWriter {
-    if (message.sendEnabled === true) {
+    if (message.sendEnabled !== undefined) {
       writer.uint32(8).bool(message.sendEnabled);
     }
-    if (message.receiveEnabled === true) {
+    if (message.receiveEnabled !== undefined) {
       writer.uint32(16).bool(message.receiveEnabled);
     }
     return writer;
@@ -198,11 +207,41 @@ export const Params = {
     }
     return message;
   },
+  fromJSON(object: any): Params {
+    const obj = createBaseParams();
+    if (isSet(object.sendEnabled)) obj.sendEnabled = Boolean(object.sendEnabled);
+    if (isSet(object.receiveEnabled)) obj.receiveEnabled = Boolean(object.receiveEnabled);
+    return obj;
+  },
+  toJSON(message: Params): JsonSafe<Params> {
+    const obj: any = {};
+    message.sendEnabled !== undefined && (obj.sendEnabled = message.sendEnabled);
+    message.receiveEnabled !== undefined && (obj.receiveEnabled = message.receiveEnabled);
+    return obj;
+  },
   fromPartial(object: DeepPartial<Params>): Params {
     const message = createBaseParams();
     message.sendEnabled = object.sendEnabled ?? false;
     message.receiveEnabled = object.receiveEnabled ?? false;
     return message;
+  },
+  fromSDK(object: ParamsSDKType): Params {
+    return {
+      sendEnabled: object?.send_enabled,
+      receiveEnabled: object?.receive_enabled
+    };
+  },
+  fromSDKJSON(object: any): ParamsSDKType {
+    return {
+      send_enabled: isSet(object.send_enabled) ? Boolean(object.send_enabled) : false,
+      receive_enabled: isSet(object.receive_enabled) ? Boolean(object.receive_enabled) : false
+    };
+  },
+  toSDK(message: Params): ParamsSDKType {
+    const obj: any = {};
+    obj.send_enabled = message.sendEnabled;
+    obj.receive_enabled = message.receiveEnabled;
+    return obj;
   },
   fromAmino(object: ParamsAmino): Params {
     const message = createBaseParams();
