@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../../helper-func-types";
 import { buildUseMutation } from "../../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgTransfer } from "./tx";
-export const createTransfer = (clientResolver: SigningClientResolver) => buildTx<MsgTransfer>({
+export const createTransfer = (clientResolver?: SigningClientResolver) => buildTx<MsgTransfer>({
   clientResolver,
   typeUrl: MsgTransfer.typeUrl,
   encoders: toEncoders(MsgTransfer),

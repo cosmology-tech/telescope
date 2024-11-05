@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgRegisterDevFeeInfo, MsgCancelDevFeeInfo, MsgUpdateDevFeeInfo } from "./tx";
-export const createRegisterDevFeeInfo = (clientResolver: SigningClientResolver) => buildTx<MsgRegisterDevFeeInfo>({
+export const createRegisterDevFeeInfo = (clientResolver?: SigningClientResolver) => buildTx<MsgRegisterDevFeeInfo>({
   clientResolver,
   typeUrl: MsgRegisterDevFeeInfo.typeUrl,
   encoders: toEncoders(MsgRegisterDevFeeInfo),
@@ -11,7 +11,7 @@ export const createRegisterDevFeeInfo = (clientResolver: SigningClientResolver) 
 export const useRegisterDevFeeInfo = buildUseMutation<MsgRegisterDevFeeInfo, Error>({
   builderMutationFn: createRegisterDevFeeInfo
 });
-export const createCancelDevFeeInfo = (clientResolver: SigningClientResolver) => buildTx<MsgCancelDevFeeInfo>({
+export const createCancelDevFeeInfo = (clientResolver?: SigningClientResolver) => buildTx<MsgCancelDevFeeInfo>({
   clientResolver,
   typeUrl: MsgCancelDevFeeInfo.typeUrl,
   encoders: toEncoders(MsgCancelDevFeeInfo),
@@ -20,7 +20,7 @@ export const createCancelDevFeeInfo = (clientResolver: SigningClientResolver) =>
 export const useCancelDevFeeInfo = buildUseMutation<MsgCancelDevFeeInfo, Error>({
   builderMutationFn: createCancelDevFeeInfo
 });
-export const createUpdateDevFeeInfo = (clientResolver: SigningClientResolver) => buildTx<MsgUpdateDevFeeInfo>({
+export const createUpdateDevFeeInfo = (clientResolver?: SigningClientResolver) => buildTx<MsgUpdateDevFeeInfo>({
   clientResolver,
   typeUrl: MsgUpdateDevFeeInfo.typeUrl,
   encoders: toEncoders(MsgUpdateDevFeeInfo),

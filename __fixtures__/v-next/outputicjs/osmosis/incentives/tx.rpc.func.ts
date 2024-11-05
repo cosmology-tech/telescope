@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../helper-func-types";
 import { buildUseMutation } from "../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateGauge, MsgAddToGauge } from "./tx";
-export const createCreateGauge = (clientResolver: SigningClientResolver) => buildTx<MsgCreateGauge>({
+export const createCreateGauge = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateGauge>({
   clientResolver,
   typeUrl: MsgCreateGauge.typeUrl,
   encoders: toEncoders(MsgCreateGauge),
@@ -11,7 +11,7 @@ export const createCreateGauge = (clientResolver: SigningClientResolver) => buil
 export const useCreateGauge = buildUseMutation<MsgCreateGauge, Error>({
   builderMutationFn: createCreateGauge
 });
-export const createAddToGauge = (clientResolver: SigningClientResolver) => buildTx<MsgAddToGauge>({
+export const createAddToGauge = (clientResolver?: SigningClientResolver) => buildTx<MsgAddToGauge>({
   clientResolver,
   typeUrl: MsgAddToGauge.typeUrl,
   encoders: toEncoders(MsgAddToGauge),

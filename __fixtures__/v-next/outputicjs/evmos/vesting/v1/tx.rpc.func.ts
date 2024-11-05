@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateClawbackVestingAccount, MsgClawback } from "./tx";
-export const createCreateClawbackVestingAccount = (clientResolver: SigningClientResolver) => buildTx<MsgCreateClawbackVestingAccount>({
+export const createCreateClawbackVestingAccount = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateClawbackVestingAccount>({
   clientResolver,
   typeUrl: MsgCreateClawbackVestingAccount.typeUrl,
   encoders: toEncoders(MsgCreateClawbackVestingAccount),
@@ -11,7 +11,7 @@ export const createCreateClawbackVestingAccount = (clientResolver: SigningClient
 export const useCreateClawbackVestingAccount = buildUseMutation<MsgCreateClawbackVestingAccount, Error>({
   builderMutationFn: createCreateClawbackVestingAccount
 });
-export const createClawback = (clientResolver: SigningClientResolver) => buildTx<MsgClawback>({
+export const createClawback = (clientResolver?: SigningClientResolver) => buildTx<MsgClawback>({
   clientResolver,
   typeUrl: MsgClawback.typeUrl,
   encoders: toEncoders(MsgClawback),

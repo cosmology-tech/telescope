@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryAllProvidersAttributesRequest, QueryProvidersResponse, QueryProviderAttributesRequest, QueryProviderAuditorRequest, QueryAuditorAttributesRequest } from "./query";
-export const createGetAllProvidersAttributes = (clientResolver: RpcResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
+export const createGetAllProvidersAttributes = (clientResolver?: RpcResolver) => buildQuery<QueryAllProvidersAttributesRequest, QueryProvidersResponse>({
   encode: QueryAllProvidersAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
   service: "akash.audit.v1beta2.Query",
@@ -12,7 +12,7 @@ export const useGetAllProvidersAttributes = buildUseQuery<QueryAllProvidersAttri
   builderQueryFn: createGetAllProvidersAttributes,
   queryKeyPrefix: "AllProvidersAttributesQuery"
 });
-export const createGetProviderAttributes = (clientResolver: RpcResolver) => buildQuery<QueryProviderAttributesRequest, QueryProvidersResponse>({
+export const createGetProviderAttributes = (clientResolver?: RpcResolver) => buildQuery<QueryProviderAttributesRequest, QueryProvidersResponse>({
   encode: QueryProviderAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
   service: "akash.audit.v1beta2.Query",
@@ -23,7 +23,7 @@ export const useGetProviderAttributes = buildUseQuery<QueryProviderAttributesReq
   builderQueryFn: createGetProviderAttributes,
   queryKeyPrefix: "ProviderAttributesQuery"
 });
-export const createGetProviderAuditorAttributes = (clientResolver: RpcResolver) => buildQuery<QueryProviderAuditorRequest, QueryProvidersResponse>({
+export const createGetProviderAuditorAttributes = (clientResolver?: RpcResolver) => buildQuery<QueryProviderAuditorRequest, QueryProvidersResponse>({
   encode: QueryProviderAuditorRequest.encode,
   decode: QueryProvidersResponse.decode,
   service: "akash.audit.v1beta2.Query",
@@ -34,7 +34,7 @@ export const useGetProviderAuditorAttributes = buildUseQuery<QueryProviderAudito
   builderQueryFn: createGetProviderAuditorAttributes,
   queryKeyPrefix: "ProviderAuditorAttributesQuery"
 });
-export const createGetAuditorAttributes = (clientResolver: RpcResolver) => buildQuery<QueryAuditorAttributesRequest, QueryProvidersResponse>({
+export const createGetAuditorAttributes = (clientResolver?: RpcResolver) => buildQuery<QueryAuditorAttributesRequest, QueryProvidersResponse>({
   encode: QueryAuditorAttributesRequest.encode,
   decode: QueryProvidersResponse.decode,
   service: "akash.audit.v1beta2.Query",

@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../../helper-func-types";
 import { buildUseMutation } from "../../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateClient, MsgUpdateClient, MsgUpgradeClient, MsgSubmitMisbehaviour } from "./tx";
-export const createCreateClient = (clientResolver: SigningClientResolver) => buildTx<MsgCreateClient>({
+export const createCreateClient = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateClient>({
   clientResolver,
   typeUrl: MsgCreateClient.typeUrl,
   encoders: toEncoders(MsgCreateClient),
@@ -11,7 +11,7 @@ export const createCreateClient = (clientResolver: SigningClientResolver) => bui
 export const useCreateClient = buildUseMutation<MsgCreateClient, Error>({
   builderMutationFn: createCreateClient
 });
-export const createUpdateClient = (clientResolver: SigningClientResolver) => buildTx<MsgUpdateClient>({
+export const createUpdateClient = (clientResolver?: SigningClientResolver) => buildTx<MsgUpdateClient>({
   clientResolver,
   typeUrl: MsgUpdateClient.typeUrl,
   encoders: toEncoders(MsgUpdateClient),
@@ -20,7 +20,7 @@ export const createUpdateClient = (clientResolver: SigningClientResolver) => bui
 export const useUpdateClient = buildUseMutation<MsgUpdateClient, Error>({
   builderMutationFn: createUpdateClient
 });
-export const createUpgradeClient = (clientResolver: SigningClientResolver) => buildTx<MsgUpgradeClient>({
+export const createUpgradeClient = (clientResolver?: SigningClientResolver) => buildTx<MsgUpgradeClient>({
   clientResolver,
   typeUrl: MsgUpgradeClient.typeUrl,
   encoders: toEncoders(MsgUpgradeClient),
@@ -29,7 +29,7 @@ export const createUpgradeClient = (clientResolver: SigningClientResolver) => bu
 export const useUpgradeClient = buildUseMutation<MsgUpgradeClient, Error>({
   builderMutationFn: createUpgradeClient
 });
-export const createSubmitMisbehaviour = (clientResolver: SigningClientResolver) => buildTx<MsgSubmitMisbehaviour>({
+export const createSubmitMisbehaviour = (clientResolver?: SigningClientResolver) => buildTx<MsgSubmitMisbehaviour>({
   clientResolver,
   typeUrl: MsgSubmitMisbehaviour.typeUrl,
   encoders: toEncoders(MsgSubmitMisbehaviour),

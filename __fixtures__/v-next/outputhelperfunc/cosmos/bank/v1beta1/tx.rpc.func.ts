@@ -4,7 +4,7 @@ import { buildTx, ISigningClient, SigningClientResolver } from "../../../helper-
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSend, MsgSendSDKType, MsgSendResponse, MsgSendResponseSDKType, MsgMultiSend, MsgMultiSendSDKType, MsgMultiSendResponse, MsgMultiSendResponseSDKType } from "./tx";
-export const createSend = (clientResolver: SigningClientResolver) => buildTx<MsgSend>({
+export const createSend = (clientResolver?: SigningClientResolver) => buildTx<MsgSend>({
   clientResolver,
   typeUrl: MsgSend.typeUrl,
   encoders: toEncoders(MsgSend),
@@ -13,7 +13,7 @@ export const createSend = (clientResolver: SigningClientResolver) => buildTx<Msg
 export const useSend = buildUseMutation<MsgSend, Error>({
   builderMutationFn: createSend
 });
-export const createMultiSend = (clientResolver: SigningClientResolver) => buildTx<MsgMultiSend>({
+export const createMultiSend = (clientResolver?: SigningClientResolver) => buildTx<MsgMultiSend>({
   clientResolver,
   typeUrl: MsgMultiSend.typeUrl,
   encoders: toEncoders(MsgMultiSend),

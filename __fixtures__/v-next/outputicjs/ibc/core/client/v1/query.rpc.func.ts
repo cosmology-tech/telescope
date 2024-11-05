@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryClientStateRequest, QueryClientStateResponse, QueryClientStatesRequest, QueryClientStatesResponse, QueryConsensusStateRequest, QueryConsensusStateResponse, QueryConsensusStatesRequest, QueryConsensusStatesResponse, QueryClientStatusRequest, QueryClientStatusResponse, QueryClientParamsRequest, QueryClientParamsResponse, QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse, QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse } from "./query";
-export const createGetClientState = (clientResolver: RpcResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
+export const createGetClientState = (clientResolver?: RpcResolver) => buildQuery<QueryClientStateRequest, QueryClientStateResponse>({
   encode: QueryClientStateRequest.encode,
   decode: QueryClientStateResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -12,7 +12,7 @@ export const useGetClientState = buildUseQuery<QueryClientStateRequest, QueryCli
   builderQueryFn: createGetClientState,
   queryKeyPrefix: "ClientStateQuery"
 });
-export const createGetClientStates = (clientResolver: RpcResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
+export const createGetClientStates = (clientResolver?: RpcResolver) => buildQuery<QueryClientStatesRequest, QueryClientStatesResponse>({
   encode: QueryClientStatesRequest.encode,
   decode: QueryClientStatesResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -23,7 +23,7 @@ export const useGetClientStates = buildUseQuery<QueryClientStatesRequest, QueryC
   builderQueryFn: createGetClientStates,
   queryKeyPrefix: "ClientStatesQuery"
 });
-export const createGetConsensusState = (clientResolver: RpcResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
+export const createGetConsensusState = (clientResolver?: RpcResolver) => buildQuery<QueryConsensusStateRequest, QueryConsensusStateResponse>({
   encode: QueryConsensusStateRequest.encode,
   decode: QueryConsensusStateResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -34,7 +34,7 @@ export const useGetConsensusState = buildUseQuery<QueryConsensusStateRequest, Qu
   builderQueryFn: createGetConsensusState,
   queryKeyPrefix: "ConsensusStateQuery"
 });
-export const createGetConsensusStates = (clientResolver: RpcResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
+export const createGetConsensusStates = (clientResolver?: RpcResolver) => buildQuery<QueryConsensusStatesRequest, QueryConsensusStatesResponse>({
   encode: QueryConsensusStatesRequest.encode,
   decode: QueryConsensusStatesResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -45,7 +45,7 @@ export const useGetConsensusStates = buildUseQuery<QueryConsensusStatesRequest, 
   builderQueryFn: createGetConsensusStates,
   queryKeyPrefix: "ConsensusStatesQuery"
 });
-export const createGetClientStatus = (clientResolver: RpcResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
+export const createGetClientStatus = (clientResolver?: RpcResolver) => buildQuery<QueryClientStatusRequest, QueryClientStatusResponse>({
   encode: QueryClientStatusRequest.encode,
   decode: QueryClientStatusResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -56,7 +56,7 @@ export const useGetClientStatus = buildUseQuery<QueryClientStatusRequest, QueryC
   builderQueryFn: createGetClientStatus,
   queryKeyPrefix: "ClientStatusQuery"
 });
-export const createGetClientParams = (clientResolver: RpcResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
+export const createGetClientParams = (clientResolver?: RpcResolver) => buildQuery<QueryClientParamsRequest, QueryClientParamsResponse>({
   encode: QueryClientParamsRequest.encode,
   decode: QueryClientParamsResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -67,7 +67,7 @@ export const useGetClientParams = buildUseQuery<QueryClientParamsRequest, QueryC
   builderQueryFn: createGetClientParams,
   queryKeyPrefix: "ClientParamsQuery"
 });
-export const createGetUpgradedClientState = (clientResolver: RpcResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
+export const createGetUpgradedClientState = (clientResolver?: RpcResolver) => buildQuery<QueryUpgradedClientStateRequest, QueryUpgradedClientStateResponse>({
   encode: QueryUpgradedClientStateRequest.encode,
   decode: QueryUpgradedClientStateResponse.decode,
   service: "ibc.core.client.v1.Query",
@@ -78,7 +78,7 @@ export const useGetUpgradedClientState = buildUseQuery<QueryUpgradedClientStateR
   builderQueryFn: createGetUpgradedClientState,
   queryKeyPrefix: "UpgradedClientStateQuery"
 });
-export const createGetUpgradedConsensusState = (clientResolver: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
+export const createGetUpgradedConsensusState = (clientResolver?: RpcResolver) => buildQuery<QueryUpgradedConsensusStateRequest, QueryUpgradedConsensusStateResponse>({
   encode: QueryUpgradedConsensusStateRequest.encode,
   decode: QueryUpgradedConsensusStateResponse.decode,
   service: "ibc.core.client.v1.Query",

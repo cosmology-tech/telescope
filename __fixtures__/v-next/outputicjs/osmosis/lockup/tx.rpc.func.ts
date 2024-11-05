@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../helper-func-types";
 import { buildUseMutation } from "../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgLockTokens, MsgBeginUnlockingAll, MsgBeginUnlocking, MsgExtendLockup, MsgForceUnlock } from "./tx";
-export const createLockTokens = (clientResolver: SigningClientResolver) => buildTx<MsgLockTokens>({
+export const createLockTokens = (clientResolver?: SigningClientResolver) => buildTx<MsgLockTokens>({
   clientResolver,
   typeUrl: MsgLockTokens.typeUrl,
   encoders: toEncoders(MsgLockTokens),
@@ -11,7 +11,7 @@ export const createLockTokens = (clientResolver: SigningClientResolver) => build
 export const useLockTokens = buildUseMutation<MsgLockTokens, Error>({
   builderMutationFn: createLockTokens
 });
-export const createBeginUnlockingAll = (clientResolver: SigningClientResolver) => buildTx<MsgBeginUnlockingAll>({
+export const createBeginUnlockingAll = (clientResolver?: SigningClientResolver) => buildTx<MsgBeginUnlockingAll>({
   clientResolver,
   typeUrl: MsgBeginUnlockingAll.typeUrl,
   encoders: toEncoders(MsgBeginUnlockingAll),
@@ -20,7 +20,7 @@ export const createBeginUnlockingAll = (clientResolver: SigningClientResolver) =
 export const useBeginUnlockingAll = buildUseMutation<MsgBeginUnlockingAll, Error>({
   builderMutationFn: createBeginUnlockingAll
 });
-export const createBeginUnlocking = (clientResolver: SigningClientResolver) => buildTx<MsgBeginUnlocking>({
+export const createBeginUnlocking = (clientResolver?: SigningClientResolver) => buildTx<MsgBeginUnlocking>({
   clientResolver,
   typeUrl: MsgBeginUnlocking.typeUrl,
   encoders: toEncoders(MsgBeginUnlocking),
@@ -29,7 +29,7 @@ export const createBeginUnlocking = (clientResolver: SigningClientResolver) => b
 export const useBeginUnlocking = buildUseMutation<MsgBeginUnlocking, Error>({
   builderMutationFn: createBeginUnlocking
 });
-export const createExtendLockup = (clientResolver: SigningClientResolver) => buildTx<MsgExtendLockup>({
+export const createExtendLockup = (clientResolver?: SigningClientResolver) => buildTx<MsgExtendLockup>({
   clientResolver,
   typeUrl: MsgExtendLockup.typeUrl,
   encoders: toEncoders(MsgExtendLockup),
@@ -38,7 +38,7 @@ export const createExtendLockup = (clientResolver: SigningClientResolver) => bui
 export const useExtendLockup = buildUseMutation<MsgExtendLockup, Error>({
   builderMutationFn: createExtendLockup
 });
-export const createForceUnlock = (clientResolver: SigningClientResolver) => buildTx<MsgForceUnlock>({
+export const createForceUnlock = (clientResolver?: SigningClientResolver) => buildTx<MsgForceUnlock>({
   clientResolver,
   typeUrl: MsgForceUnlock.typeUrl,
   encoders: toEncoders(MsgForceUnlock),

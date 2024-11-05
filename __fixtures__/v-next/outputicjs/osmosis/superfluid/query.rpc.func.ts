@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { QueryParamsRequest, QueryParamsResponse, AssetTypeRequest, AssetTypeResponse, AllAssetsRequest, AllAssetsResponse, AssetMultiplierRequest, AssetMultiplierResponse, AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse, ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse, QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse, TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse, SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse, SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse, SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse, SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse, EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse, QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse, QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse } from "./query";
-export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver?: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -12,7 +12,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetAssetType = (clientResolver: RpcResolver) => buildQuery<AssetTypeRequest, AssetTypeResponse>({
+export const createGetAssetType = (clientResolver?: RpcResolver) => buildQuery<AssetTypeRequest, AssetTypeResponse>({
   encode: AssetTypeRequest.encode,
   decode: AssetTypeResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -23,7 +23,7 @@ export const useGetAssetType = buildUseQuery<AssetTypeRequest, AssetTypeResponse
   builderQueryFn: createGetAssetType,
   queryKeyPrefix: "AssetTypeQuery"
 });
-export const createGetAllAssets = (clientResolver: RpcResolver) => buildQuery<AllAssetsRequest, AllAssetsResponse>({
+export const createGetAllAssets = (clientResolver?: RpcResolver) => buildQuery<AllAssetsRequest, AllAssetsResponse>({
   encode: AllAssetsRequest.encode,
   decode: AllAssetsResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -34,7 +34,7 @@ export const useGetAllAssets = buildUseQuery<AllAssetsRequest, AllAssetsResponse
   builderQueryFn: createGetAllAssets,
   queryKeyPrefix: "AllAssetsQuery"
 });
-export const createGetAssetMultiplier = (clientResolver: RpcResolver) => buildQuery<AssetMultiplierRequest, AssetMultiplierResponse>({
+export const createGetAssetMultiplier = (clientResolver?: RpcResolver) => buildQuery<AssetMultiplierRequest, AssetMultiplierResponse>({
   encode: AssetMultiplierRequest.encode,
   decode: AssetMultiplierResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -45,7 +45,7 @@ export const useGetAssetMultiplier = buildUseQuery<AssetMultiplierRequest, Asset
   builderQueryFn: createGetAssetMultiplier,
   queryKeyPrefix: "AssetMultiplierQuery"
 });
-export const createGetAllIntermediaryAccounts = (clientResolver: RpcResolver) => buildQuery<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse>({
+export const createGetAllIntermediaryAccounts = (clientResolver?: RpcResolver) => buildQuery<AllIntermediaryAccountsRequest, AllIntermediaryAccountsResponse>({
   encode: AllIntermediaryAccountsRequest.encode,
   decode: AllIntermediaryAccountsResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -56,7 +56,7 @@ export const useGetAllIntermediaryAccounts = buildUseQuery<AllIntermediaryAccoun
   builderQueryFn: createGetAllIntermediaryAccounts,
   queryKeyPrefix: "AllIntermediaryAccountsQuery"
 });
-export const createGetConnectedIntermediaryAccount = (clientResolver: RpcResolver) => buildQuery<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse>({
+export const createGetConnectedIntermediaryAccount = (clientResolver?: RpcResolver) => buildQuery<ConnectedIntermediaryAccountRequest, ConnectedIntermediaryAccountResponse>({
   encode: ConnectedIntermediaryAccountRequest.encode,
   decode: ConnectedIntermediaryAccountResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -67,7 +67,7 @@ export const useGetConnectedIntermediaryAccount = buildUseQuery<ConnectedInterme
   builderQueryFn: createGetConnectedIntermediaryAccount,
   queryKeyPrefix: "ConnectedIntermediaryAccountQuery"
 });
-export const createGetTotalDelegationByValidatorForDenom = (clientResolver: RpcResolver) => buildQuery<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse>({
+export const createGetTotalDelegationByValidatorForDenom = (clientResolver?: RpcResolver) => buildQuery<QueryTotalDelegationByValidatorForDenomRequest, QueryTotalDelegationByValidatorForDenomResponse>({
   encode: QueryTotalDelegationByValidatorForDenomRequest.encode,
   decode: QueryTotalDelegationByValidatorForDenomResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -78,7 +78,7 @@ export const useGetTotalDelegationByValidatorForDenom = buildUseQuery<QueryTotal
   builderQueryFn: createGetTotalDelegationByValidatorForDenom,
   queryKeyPrefix: "TotalDelegationByValidatorForDenomQuery"
 });
-export const createGetTotalSuperfluidDelegations = (clientResolver: RpcResolver) => buildQuery<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse>({
+export const createGetTotalSuperfluidDelegations = (clientResolver?: RpcResolver) => buildQuery<TotalSuperfluidDelegationsRequest, TotalSuperfluidDelegationsResponse>({
   encode: TotalSuperfluidDelegationsRequest.encode,
   decode: TotalSuperfluidDelegationsResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -89,7 +89,7 @@ export const useGetTotalSuperfluidDelegations = buildUseQuery<TotalSuperfluidDel
   builderQueryFn: createGetTotalSuperfluidDelegations,
   queryKeyPrefix: "TotalSuperfluidDelegationsQuery"
 });
-export const createGetSuperfluidDelegationAmount = (clientResolver: RpcResolver) => buildQuery<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse>({
+export const createGetSuperfluidDelegationAmount = (clientResolver?: RpcResolver) => buildQuery<SuperfluidDelegationAmountRequest, SuperfluidDelegationAmountResponse>({
   encode: SuperfluidDelegationAmountRequest.encode,
   decode: SuperfluidDelegationAmountResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -100,7 +100,7 @@ export const useGetSuperfluidDelegationAmount = buildUseQuery<SuperfluidDelegati
   builderQueryFn: createGetSuperfluidDelegationAmount,
   queryKeyPrefix: "SuperfluidDelegationAmountQuery"
 });
-export const createGetSuperfluidDelegationsByDelegator = (clientResolver: RpcResolver) => buildQuery<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse>({
+export const createGetSuperfluidDelegationsByDelegator = (clientResolver?: RpcResolver) => buildQuery<SuperfluidDelegationsByDelegatorRequest, SuperfluidDelegationsByDelegatorResponse>({
   encode: SuperfluidDelegationsByDelegatorRequest.encode,
   decode: SuperfluidDelegationsByDelegatorResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -111,7 +111,7 @@ export const useGetSuperfluidDelegationsByDelegator = buildUseQuery<SuperfluidDe
   builderQueryFn: createGetSuperfluidDelegationsByDelegator,
   queryKeyPrefix: "SuperfluidDelegationsByDelegatorQuery"
 });
-export const createGetSuperfluidUndelegationsByDelegator = (clientResolver: RpcResolver) => buildQuery<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse>({
+export const createGetSuperfluidUndelegationsByDelegator = (clientResolver?: RpcResolver) => buildQuery<SuperfluidUndelegationsByDelegatorRequest, SuperfluidUndelegationsByDelegatorResponse>({
   encode: SuperfluidUndelegationsByDelegatorRequest.encode,
   decode: SuperfluidUndelegationsByDelegatorResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -122,7 +122,7 @@ export const useGetSuperfluidUndelegationsByDelegator = buildUseQuery<Superfluid
   builderQueryFn: createGetSuperfluidUndelegationsByDelegator,
   queryKeyPrefix: "SuperfluidUndelegationsByDelegatorQuery"
 });
-export const createGetSuperfluidDelegationsByValidatorDenom = (clientResolver: RpcResolver) => buildQuery<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse>({
+export const createGetSuperfluidDelegationsByValidatorDenom = (clientResolver?: RpcResolver) => buildQuery<SuperfluidDelegationsByValidatorDenomRequest, SuperfluidDelegationsByValidatorDenomResponse>({
   encode: SuperfluidDelegationsByValidatorDenomRequest.encode,
   decode: SuperfluidDelegationsByValidatorDenomResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -133,7 +133,7 @@ export const useGetSuperfluidDelegationsByValidatorDenom = buildUseQuery<Superfl
   builderQueryFn: createGetSuperfluidDelegationsByValidatorDenom,
   queryKeyPrefix: "SuperfluidDelegationsByValidatorDenomQuery"
 });
-export const createGetEstimateSuperfluidDelegatedAmountByValidatorDenom = (clientResolver: RpcResolver) => buildQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>({
+export const createGetEstimateSuperfluidDelegatedAmountByValidatorDenom = (clientResolver?: RpcResolver) => buildQuery<EstimateSuperfluidDelegatedAmountByValidatorDenomRequest, EstimateSuperfluidDelegatedAmountByValidatorDenomResponse>({
   encode: EstimateSuperfluidDelegatedAmountByValidatorDenomRequest.encode,
   decode: EstimateSuperfluidDelegatedAmountByValidatorDenomResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -144,7 +144,7 @@ export const useGetEstimateSuperfluidDelegatedAmountByValidatorDenom = buildUseQ
   builderQueryFn: createGetEstimateSuperfluidDelegatedAmountByValidatorDenom,
   queryKeyPrefix: "EstimateSuperfluidDelegatedAmountByValidatorDenomQuery"
 });
-export const createGetTotalDelegationByDelegator = (clientResolver: RpcResolver) => buildQuery<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse>({
+export const createGetTotalDelegationByDelegator = (clientResolver?: RpcResolver) => buildQuery<QueryTotalDelegationByDelegatorRequest, QueryTotalDelegationByDelegatorResponse>({
   encode: QueryTotalDelegationByDelegatorRequest.encode,
   decode: QueryTotalDelegationByDelegatorResponse.decode,
   service: "osmosis.superfluid.Query",
@@ -155,7 +155,7 @@ export const useGetTotalDelegationByDelegator = buildUseQuery<QueryTotalDelegati
   builderQueryFn: createGetTotalDelegationByDelegator,
   queryKeyPrefix: "TotalDelegationByDelegatorQuery"
 });
-export const createGetUnpoolWhitelist = (clientResolver: RpcResolver) => buildQuery<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse>({
+export const createGetUnpoolWhitelist = (clientResolver?: RpcResolver) => buildQuery<QueryUnpoolWhitelistRequest, QueryUnpoolWhitelistResponse>({
   encode: QueryUnpoolWhitelistRequest.encode,
   decode: QueryUnpoolWhitelistResponse.decode,
   service: "osmosis.superfluid.Query",

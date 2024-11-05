@@ -112,7 +112,7 @@ export const useRpcClient = <TData = ProtobufRpcClient>({
 };
 
 export interface UseQueryBuilderOptions<TReq, TRes> {
-  builderQueryFn: (clientResolver: RpcResolver) => (request: TReq) => Promise<TRes>,
+  builderQueryFn: (clientResolver?: RpcResolver) => (request: TReq) => Promise<TRes>,
   queryKeyPrefix: string,
 }
 
@@ -144,10 +144,6 @@ export function buildUseQuery<TReq, TRes>(opts: UseQueryBuilderOptions<TReq, TRe
       rpcResolver = clientResolver;
     }
 
-    if(!rpcResolver) {
-      throw new Error('RpcResolver is not initialized');
-    }
-
     const queryFn = opts.builderQueryFn(rpcResolver);
     return useQuery<TRes, Error, TData>(customizedQueryKey || [opts.queryKeyPrefix, request], () => queryFn(request), options);
   };
@@ -166,7 +162,7 @@ export interface ReactMutationParams<TData, TError, TVariables, TContext = unkno
 
 
 export interface UseMutationBuilderOptions<TMsg> {
-  builderMutationFn: (getSigningClientInstance: SigningClientResolver) => (
+  builderMutationFn: (clientResolver?: SigningClientResolver) => (
     signerAddress: string,
     message: TMsg,
     fee: StdFee | 'auto',
@@ -194,10 +190,6 @@ export function buildUseMutation<TMsg, TError>(opts: UseMutationBuilderOptions<T
       signingClientResolver = queryClient.getQueryData<ISigningClient>(queryKey);
     } else {
       clientResolver = clientResolver;
-    }
-
-    if(!signingClientResolver) {
-      throw new Error('SigningClientResolver is not initialized');
     }
 
     const mutationFn = opts.builderMutationFn(signingClientResolver);

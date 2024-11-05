@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryChannelRequest, QueryChannelResponse, QueryChannelsRequest, QueryChannelsResponse, QueryConnectionChannelsRequest, QueryConnectionChannelsResponse, QueryChannelClientStateRequest, QueryChannelClientStateResponse, QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse, QueryPacketCommitmentRequest, QueryPacketCommitmentResponse, QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse, QueryPacketReceiptRequest, QueryPacketReceiptResponse, QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse, QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse, QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse, QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse, QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse } from "./query";
-export const createGetChannel = (clientResolver: RpcResolver) => buildQuery<QueryChannelRequest, QueryChannelResponse>({
+export const createGetChannel = (clientResolver?: RpcResolver) => buildQuery<QueryChannelRequest, QueryChannelResponse>({
   encode: QueryChannelRequest.encode,
   decode: QueryChannelResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -12,7 +12,7 @@ export const useGetChannel = buildUseQuery<QueryChannelRequest, QueryChannelResp
   builderQueryFn: createGetChannel,
   queryKeyPrefix: "ChannelQuery"
 });
-export const createGetChannels = (clientResolver: RpcResolver) => buildQuery<QueryChannelsRequest, QueryChannelsResponse>({
+export const createGetChannels = (clientResolver?: RpcResolver) => buildQuery<QueryChannelsRequest, QueryChannelsResponse>({
   encode: QueryChannelsRequest.encode,
   decode: QueryChannelsResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -23,7 +23,7 @@ export const useGetChannels = buildUseQuery<QueryChannelsRequest, QueryChannelsR
   builderQueryFn: createGetChannels,
   queryKeyPrefix: "ChannelsQuery"
 });
-export const createGetConnectionChannels = (clientResolver: RpcResolver) => buildQuery<QueryConnectionChannelsRequest, QueryConnectionChannelsResponse>({
+export const createGetConnectionChannels = (clientResolver?: RpcResolver) => buildQuery<QueryConnectionChannelsRequest, QueryConnectionChannelsResponse>({
   encode: QueryConnectionChannelsRequest.encode,
   decode: QueryConnectionChannelsResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -34,7 +34,7 @@ export const useGetConnectionChannels = buildUseQuery<QueryConnectionChannelsReq
   builderQueryFn: createGetConnectionChannels,
   queryKeyPrefix: "ConnectionChannelsQuery"
 });
-export const createGetChannelClientState = (clientResolver: RpcResolver) => buildQuery<QueryChannelClientStateRequest, QueryChannelClientStateResponse>({
+export const createGetChannelClientState = (clientResolver?: RpcResolver) => buildQuery<QueryChannelClientStateRequest, QueryChannelClientStateResponse>({
   encode: QueryChannelClientStateRequest.encode,
   decode: QueryChannelClientStateResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -45,7 +45,7 @@ export const useGetChannelClientState = buildUseQuery<QueryChannelClientStateReq
   builderQueryFn: createGetChannelClientState,
   queryKeyPrefix: "ChannelClientStateQuery"
 });
-export const createGetChannelConsensusState = (clientResolver: RpcResolver) => buildQuery<QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse>({
+export const createGetChannelConsensusState = (clientResolver?: RpcResolver) => buildQuery<QueryChannelConsensusStateRequest, QueryChannelConsensusStateResponse>({
   encode: QueryChannelConsensusStateRequest.encode,
   decode: QueryChannelConsensusStateResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -56,7 +56,7 @@ export const useGetChannelConsensusState = buildUseQuery<QueryChannelConsensusSt
   builderQueryFn: createGetChannelConsensusState,
   queryKeyPrefix: "ChannelConsensusStateQuery"
 });
-export const createGetPacketCommitment = (clientResolver: RpcResolver) => buildQuery<QueryPacketCommitmentRequest, QueryPacketCommitmentResponse>({
+export const createGetPacketCommitment = (clientResolver?: RpcResolver) => buildQuery<QueryPacketCommitmentRequest, QueryPacketCommitmentResponse>({
   encode: QueryPacketCommitmentRequest.encode,
   decode: QueryPacketCommitmentResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -67,7 +67,7 @@ export const useGetPacketCommitment = buildUseQuery<QueryPacketCommitmentRequest
   builderQueryFn: createGetPacketCommitment,
   queryKeyPrefix: "PacketCommitmentQuery"
 });
-export const createGetPacketCommitments = (clientResolver: RpcResolver) => buildQuery<QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse>({
+export const createGetPacketCommitments = (clientResolver?: RpcResolver) => buildQuery<QueryPacketCommitmentsRequest, QueryPacketCommitmentsResponse>({
   encode: QueryPacketCommitmentsRequest.encode,
   decode: QueryPacketCommitmentsResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -78,7 +78,7 @@ export const useGetPacketCommitments = buildUseQuery<QueryPacketCommitmentsReque
   builderQueryFn: createGetPacketCommitments,
   queryKeyPrefix: "PacketCommitmentsQuery"
 });
-export const createGetPacketReceipt = (clientResolver: RpcResolver) => buildQuery<QueryPacketReceiptRequest, QueryPacketReceiptResponse>({
+export const createGetPacketReceipt = (clientResolver?: RpcResolver) => buildQuery<QueryPacketReceiptRequest, QueryPacketReceiptResponse>({
   encode: QueryPacketReceiptRequest.encode,
   decode: QueryPacketReceiptResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -89,7 +89,7 @@ export const useGetPacketReceipt = buildUseQuery<QueryPacketReceiptRequest, Quer
   builderQueryFn: createGetPacketReceipt,
   queryKeyPrefix: "PacketReceiptQuery"
 });
-export const createGetPacketAcknowledgement = (clientResolver: RpcResolver) => buildQuery<QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse>({
+export const createGetPacketAcknowledgement = (clientResolver?: RpcResolver) => buildQuery<QueryPacketAcknowledgementRequest, QueryPacketAcknowledgementResponse>({
   encode: QueryPacketAcknowledgementRequest.encode,
   decode: QueryPacketAcknowledgementResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -100,7 +100,7 @@ export const useGetPacketAcknowledgement = buildUseQuery<QueryPacketAcknowledgem
   builderQueryFn: createGetPacketAcknowledgement,
   queryKeyPrefix: "PacketAcknowledgementQuery"
 });
-export const createGetPacketAcknowledgements = (clientResolver: RpcResolver) => buildQuery<QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse>({
+export const createGetPacketAcknowledgements = (clientResolver?: RpcResolver) => buildQuery<QueryPacketAcknowledgementsRequest, QueryPacketAcknowledgementsResponse>({
   encode: QueryPacketAcknowledgementsRequest.encode,
   decode: QueryPacketAcknowledgementsResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -111,7 +111,7 @@ export const useGetPacketAcknowledgements = buildUseQuery<QueryPacketAcknowledge
   builderQueryFn: createGetPacketAcknowledgements,
   queryKeyPrefix: "PacketAcknowledgementsQuery"
 });
-export const createGetUnreceivedPackets = (clientResolver: RpcResolver) => buildQuery<QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse>({
+export const createGetUnreceivedPackets = (clientResolver?: RpcResolver) => buildQuery<QueryUnreceivedPacketsRequest, QueryUnreceivedPacketsResponse>({
   encode: QueryUnreceivedPacketsRequest.encode,
   decode: QueryUnreceivedPacketsResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -122,7 +122,7 @@ export const useGetUnreceivedPackets = buildUseQuery<QueryUnreceivedPacketsReque
   builderQueryFn: createGetUnreceivedPackets,
   queryKeyPrefix: "UnreceivedPacketsQuery"
 });
-export const createGetUnreceivedAcks = (clientResolver: RpcResolver) => buildQuery<QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse>({
+export const createGetUnreceivedAcks = (clientResolver?: RpcResolver) => buildQuery<QueryUnreceivedAcksRequest, QueryUnreceivedAcksResponse>({
   encode: QueryUnreceivedAcksRequest.encode,
   decode: QueryUnreceivedAcksResponse.decode,
   service: "ibc.core.channel.v1.Query",
@@ -133,7 +133,7 @@ export const useGetUnreceivedAcks = buildUseQuery<QueryUnreceivedAcksRequest, Qu
   builderQueryFn: createGetUnreceivedAcks,
   queryKeyPrefix: "UnreceivedAcksQuery"
 });
-export const createGetNextSequenceReceive = (clientResolver: RpcResolver) => buildQuery<QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse>({
+export const createGetNextSequenceReceive = (clientResolver?: RpcResolver) => buildQuery<QueryNextSequenceReceiveRequest, QueryNextSequenceReceiveResponse>({
   encode: QueryNextSequenceReceiveRequest.encode,
   decode: QueryNextSequenceReceiveResponse.decode,
   service: "ibc.core.channel.v1.Query",

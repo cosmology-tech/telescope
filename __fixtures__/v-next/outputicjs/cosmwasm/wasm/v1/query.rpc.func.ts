@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryContractInfoRequest, QueryContractInfoResponse, QueryContractHistoryRequest, QueryContractHistoryResponse, QueryContractsByCodeRequest, QueryContractsByCodeResponse, QueryAllContractStateRequest, QueryAllContractStateResponse, QueryRawContractStateRequest, QueryRawContractStateResponse, QuerySmartContractStateRequest, QuerySmartContractStateResponse, QueryCodeRequest, QueryCodeResponse, QueryCodesRequest, QueryCodesResponse, QueryPinnedCodesRequest, QueryPinnedCodesResponse } from "./query";
-export const createGetContractInfo = (clientResolver: RpcResolver) => buildQuery<QueryContractInfoRequest, QueryContractInfoResponse>({
+export const createGetContractInfo = (clientResolver?: RpcResolver) => buildQuery<QueryContractInfoRequest, QueryContractInfoResponse>({
   encode: QueryContractInfoRequest.encode,
   decode: QueryContractInfoResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -12,7 +12,7 @@ export const useGetContractInfo = buildUseQuery<QueryContractInfoRequest, QueryC
   builderQueryFn: createGetContractInfo,
   queryKeyPrefix: "ContractInfoQuery"
 });
-export const createGetContractHistory = (clientResolver: RpcResolver) => buildQuery<QueryContractHistoryRequest, QueryContractHistoryResponse>({
+export const createGetContractHistory = (clientResolver?: RpcResolver) => buildQuery<QueryContractHistoryRequest, QueryContractHistoryResponse>({
   encode: QueryContractHistoryRequest.encode,
   decode: QueryContractHistoryResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -23,7 +23,7 @@ export const useGetContractHistory = buildUseQuery<QueryContractHistoryRequest, 
   builderQueryFn: createGetContractHistory,
   queryKeyPrefix: "ContractHistoryQuery"
 });
-export const createGetContractsByCode = (clientResolver: RpcResolver) => buildQuery<QueryContractsByCodeRequest, QueryContractsByCodeResponse>({
+export const createGetContractsByCode = (clientResolver?: RpcResolver) => buildQuery<QueryContractsByCodeRequest, QueryContractsByCodeResponse>({
   encode: QueryContractsByCodeRequest.encode,
   decode: QueryContractsByCodeResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -34,7 +34,7 @@ export const useGetContractsByCode = buildUseQuery<QueryContractsByCodeRequest, 
   builderQueryFn: createGetContractsByCode,
   queryKeyPrefix: "ContractsByCodeQuery"
 });
-export const createGetAllContractState = (clientResolver: RpcResolver) => buildQuery<QueryAllContractStateRequest, QueryAllContractStateResponse>({
+export const createGetAllContractState = (clientResolver?: RpcResolver) => buildQuery<QueryAllContractStateRequest, QueryAllContractStateResponse>({
   encode: QueryAllContractStateRequest.encode,
   decode: QueryAllContractStateResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -45,7 +45,7 @@ export const useGetAllContractState = buildUseQuery<QueryAllContractStateRequest
   builderQueryFn: createGetAllContractState,
   queryKeyPrefix: "AllContractStateQuery"
 });
-export const createGetRawContractState = (clientResolver: RpcResolver) => buildQuery<QueryRawContractStateRequest, QueryRawContractStateResponse>({
+export const createGetRawContractState = (clientResolver?: RpcResolver) => buildQuery<QueryRawContractStateRequest, QueryRawContractStateResponse>({
   encode: QueryRawContractStateRequest.encode,
   decode: QueryRawContractStateResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -56,7 +56,7 @@ export const useGetRawContractState = buildUseQuery<QueryRawContractStateRequest
   builderQueryFn: createGetRawContractState,
   queryKeyPrefix: "RawContractStateQuery"
 });
-export const createGetSmartContractState = (clientResolver: RpcResolver) => buildQuery<QuerySmartContractStateRequest, QuerySmartContractStateResponse>({
+export const createGetSmartContractState = (clientResolver?: RpcResolver) => buildQuery<QuerySmartContractStateRequest, QuerySmartContractStateResponse>({
   encode: QuerySmartContractStateRequest.encode,
   decode: QuerySmartContractStateResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -67,7 +67,7 @@ export const useGetSmartContractState = buildUseQuery<QuerySmartContractStateReq
   builderQueryFn: createGetSmartContractState,
   queryKeyPrefix: "SmartContractStateQuery"
 });
-export const createGetCode = (clientResolver: RpcResolver) => buildQuery<QueryCodeRequest, QueryCodeResponse>({
+export const createGetCode = (clientResolver?: RpcResolver) => buildQuery<QueryCodeRequest, QueryCodeResponse>({
   encode: QueryCodeRequest.encode,
   decode: QueryCodeResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -78,7 +78,7 @@ export const useGetCode = buildUseQuery<QueryCodeRequest, QueryCodeResponse>({
   builderQueryFn: createGetCode,
   queryKeyPrefix: "CodeQuery"
 });
-export const createGetCodes = (clientResolver: RpcResolver) => buildQuery<QueryCodesRequest, QueryCodesResponse>({
+export const createGetCodes = (clientResolver?: RpcResolver) => buildQuery<QueryCodesRequest, QueryCodesResponse>({
   encode: QueryCodesRequest.encode,
   decode: QueryCodesResponse.decode,
   service: "cosmwasm.wasm.v1.Query",
@@ -89,7 +89,7 @@ export const useGetCodes = buildUseQuery<QueryCodesRequest, QueryCodesResponse>(
   builderQueryFn: createGetCodes,
   queryKeyPrefix: "CodesQuery"
 });
-export const createGetPinnedCodes = (clientResolver: RpcResolver) => buildQuery<QueryPinnedCodesRequest, QueryPinnedCodesResponse>({
+export const createGetPinnedCodes = (clientResolver?: RpcResolver) => buildQuery<QueryPinnedCodesRequest, QueryPinnedCodesResponse>({
   encode: QueryPinnedCodesRequest.encode,
   decode: QueryPinnedCodesResponse.decode,
   service: "cosmwasm.wasm.v1.Query",

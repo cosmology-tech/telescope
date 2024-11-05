@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryOrdersRequest, QueryOrdersResponse, QueryOrderRequest, QueryOrderResponse, QueryBidsRequest, QueryBidsResponse, QueryBidRequest, QueryBidResponse, QueryLeasesRequest, QueryLeasesResponse, QueryLeaseRequest, QueryLeaseResponse } from "./query";
-export const createGetOrders = (clientResolver: RpcResolver) => buildQuery<QueryOrdersRequest, QueryOrdersResponse>({
+export const createGetOrders = (clientResolver?: RpcResolver) => buildQuery<QueryOrdersRequest, QueryOrdersResponse>({
   encode: QueryOrdersRequest.encode,
   decode: QueryOrdersResponse.decode,
   service: "akash.market.v1beta2.Query",
@@ -12,7 +12,7 @@ export const useGetOrders = buildUseQuery<QueryOrdersRequest, QueryOrdersRespons
   builderQueryFn: createGetOrders,
   queryKeyPrefix: "OrdersQuery"
 });
-export const createGetOrder = (clientResolver: RpcResolver) => buildQuery<QueryOrderRequest, QueryOrderResponse>({
+export const createGetOrder = (clientResolver?: RpcResolver) => buildQuery<QueryOrderRequest, QueryOrderResponse>({
   encode: QueryOrderRequest.encode,
   decode: QueryOrderResponse.decode,
   service: "akash.market.v1beta2.Query",
@@ -23,7 +23,7 @@ export const useGetOrder = buildUseQuery<QueryOrderRequest, QueryOrderResponse>(
   builderQueryFn: createGetOrder,
   queryKeyPrefix: "OrderQuery"
 });
-export const createGetBids = (clientResolver: RpcResolver) => buildQuery<QueryBidsRequest, QueryBidsResponse>({
+export const createGetBids = (clientResolver?: RpcResolver) => buildQuery<QueryBidsRequest, QueryBidsResponse>({
   encode: QueryBidsRequest.encode,
   decode: QueryBidsResponse.decode,
   service: "akash.market.v1beta2.Query",
@@ -34,7 +34,7 @@ export const useGetBids = buildUseQuery<QueryBidsRequest, QueryBidsResponse>({
   builderQueryFn: createGetBids,
   queryKeyPrefix: "BidsQuery"
 });
-export const createGetBid = (clientResolver: RpcResolver) => buildQuery<QueryBidRequest, QueryBidResponse>({
+export const createGetBid = (clientResolver?: RpcResolver) => buildQuery<QueryBidRequest, QueryBidResponse>({
   encode: QueryBidRequest.encode,
   decode: QueryBidResponse.decode,
   service: "akash.market.v1beta2.Query",
@@ -45,7 +45,7 @@ export const useGetBid = buildUseQuery<QueryBidRequest, QueryBidResponse>({
   builderQueryFn: createGetBid,
   queryKeyPrefix: "BidQuery"
 });
-export const createGetLeases = (clientResolver: RpcResolver) => buildQuery<QueryLeasesRequest, QueryLeasesResponse>({
+export const createGetLeases = (clientResolver?: RpcResolver) => buildQuery<QueryLeasesRequest, QueryLeasesResponse>({
   encode: QueryLeasesRequest.encode,
   decode: QueryLeasesResponse.decode,
   service: "akash.market.v1beta2.Query",
@@ -56,7 +56,7 @@ export const useGetLeases = buildUseQuery<QueryLeasesRequest, QueryLeasesRespons
   builderQueryFn: createGetLeases,
   queryKeyPrefix: "LeasesQuery"
 });
-export const createGetLease = (clientResolver: RpcResolver) => buildQuery<QueryLeaseRequest, QueryLeaseResponse>({
+export const createGetLease = (clientResolver?: RpcResolver) => buildQuery<QueryLeaseRequest, QueryLeaseResponse>({
   encode: QueryLeaseRequest.encode,
   decode: QueryLeaseResponse.decode,
   service: "akash.market.v1beta2.Query",

@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryGrantsRequest, QueryGrantsResponse, QueryGranterGrantsRequest, QueryGranterGrantsResponse, QueryGranteeGrantsRequest, QueryGranteeGrantsResponse } from "./query";
-export const createGetGrants = (clientResolver: RpcResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
+export const createGetGrants = (clientResolver?: RpcResolver) => buildQuery<QueryGrantsRequest, QueryGrantsResponse>({
   encode: QueryGrantsRequest.encode,
   decode: QueryGrantsResponse.decode,
   service: "cosmos.authz.v1beta1.Query",
@@ -12,7 +12,7 @@ export const useGetGrants = buildUseQuery<QueryGrantsRequest, QueryGrantsRespons
   builderQueryFn: createGetGrants,
   queryKeyPrefix: "GrantsQuery"
 });
-export const createGetGranterGrants = (clientResolver: RpcResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
+export const createGetGranterGrants = (clientResolver?: RpcResolver) => buildQuery<QueryGranterGrantsRequest, QueryGranterGrantsResponse>({
   encode: QueryGranterGrantsRequest.encode,
   decode: QueryGranterGrantsResponse.decode,
   service: "cosmos.authz.v1beta1.Query",
@@ -23,7 +23,7 @@ export const useGetGranterGrants = buildUseQuery<QueryGranterGrantsRequest, Quer
   builderQueryFn: createGetGranterGrants,
   queryKeyPrefix: "GranterGrantsQuery"
 });
-export const createGetGranteeGrants = (clientResolver: RpcResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
+export const createGetGranteeGrants = (clientResolver?: RpcResolver) => buildQuery<QueryGranteeGrantsRequest, QueryGranteeGrantsResponse>({
   encode: QueryGranteeGrantsRequest.encode,
   decode: QueryGranteeGrantsResponse.decode,
   service: "cosmos.authz.v1beta1.Query",

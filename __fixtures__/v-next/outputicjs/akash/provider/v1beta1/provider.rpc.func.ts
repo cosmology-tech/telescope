@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgCreateProvider, MsgUpdateProvider, MsgDeleteProvider } from "./provider";
-export const createCreateProvider = (clientResolver: SigningClientResolver) => buildTx<MsgCreateProvider>({
+export const createCreateProvider = (clientResolver?: SigningClientResolver) => buildTx<MsgCreateProvider>({
   clientResolver,
   typeUrl: MsgCreateProvider.typeUrl,
   encoders: toEncoders(MsgCreateProvider),
@@ -11,7 +11,7 @@ export const createCreateProvider = (clientResolver: SigningClientResolver) => b
 export const useCreateProvider = buildUseMutation<MsgCreateProvider, Error>({
   builderMutationFn: createCreateProvider
 });
-export const createUpdateProvider = (clientResolver: SigningClientResolver) => buildTx<MsgUpdateProvider>({
+export const createUpdateProvider = (clientResolver?: SigningClientResolver) => buildTx<MsgUpdateProvider>({
   clientResolver,
   typeUrl: MsgUpdateProvider.typeUrl,
   encoders: toEncoders(MsgUpdateProvider),
@@ -20,7 +20,7 @@ export const createUpdateProvider = (clientResolver: SigningClientResolver) => b
 export const useUpdateProvider = buildUseMutation<MsgUpdateProvider, Error>({
   builderMutationFn: createUpdateProvider
 });
-export const createDeleteProvider = (clientResolver: SigningClientResolver) => buildTx<MsgDeleteProvider>({
+export const createDeleteProvider = (clientResolver?: SigningClientResolver) => buildTx<MsgDeleteProvider>({
   clientResolver,
   typeUrl: MsgDeleteProvider.typeUrl,
   encoders: toEncoders(MsgDeleteProvider),

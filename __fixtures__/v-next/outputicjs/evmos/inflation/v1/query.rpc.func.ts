@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryPeriodRequest, QueryPeriodResponse, QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse, QuerySkippedEpochsRequest, QuerySkippedEpochsResponse, QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse, QueryInflationRateRequest, QueryInflationRateResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export const createGetPeriod = (clientResolver: RpcResolver) => buildQuery<QueryPeriodRequest, QueryPeriodResponse>({
+export const createGetPeriod = (clientResolver?: RpcResolver) => buildQuery<QueryPeriodRequest, QueryPeriodResponse>({
   encode: QueryPeriodRequest.encode,
   decode: QueryPeriodResponse.decode,
   service: "evmos.inflation.v1.Query",
@@ -12,7 +12,7 @@ export const useGetPeriod = buildUseQuery<QueryPeriodRequest, QueryPeriodRespons
   builderQueryFn: createGetPeriod,
   queryKeyPrefix: "PeriodQuery"
 });
-export const createGetEpochMintProvision = (clientResolver: RpcResolver) => buildQuery<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>({
+export const createGetEpochMintProvision = (clientResolver?: RpcResolver) => buildQuery<QueryEpochMintProvisionRequest, QueryEpochMintProvisionResponse>({
   encode: QueryEpochMintProvisionRequest.encode,
   decode: QueryEpochMintProvisionResponse.decode,
   service: "evmos.inflation.v1.Query",
@@ -23,7 +23,7 @@ export const useGetEpochMintProvision = buildUseQuery<QueryEpochMintProvisionReq
   builderQueryFn: createGetEpochMintProvision,
   queryKeyPrefix: "EpochMintProvisionQuery"
 });
-export const createGetSkippedEpochs = (clientResolver: RpcResolver) => buildQuery<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>({
+export const createGetSkippedEpochs = (clientResolver?: RpcResolver) => buildQuery<QuerySkippedEpochsRequest, QuerySkippedEpochsResponse>({
   encode: QuerySkippedEpochsRequest.encode,
   decode: QuerySkippedEpochsResponse.decode,
   service: "evmos.inflation.v1.Query",
@@ -34,7 +34,7 @@ export const useGetSkippedEpochs = buildUseQuery<QuerySkippedEpochsRequest, Quer
   builderQueryFn: createGetSkippedEpochs,
   queryKeyPrefix: "SkippedEpochsQuery"
 });
-export const createGetCirculatingSupply = (clientResolver: RpcResolver) => buildQuery<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>({
+export const createGetCirculatingSupply = (clientResolver?: RpcResolver) => buildQuery<QueryCirculatingSupplyRequest, QueryCirculatingSupplyResponse>({
   encode: QueryCirculatingSupplyRequest.encode,
   decode: QueryCirculatingSupplyResponse.decode,
   service: "evmos.inflation.v1.Query",
@@ -45,7 +45,7 @@ export const useGetCirculatingSupply = buildUseQuery<QueryCirculatingSupplyReque
   builderQueryFn: createGetCirculatingSupply,
   queryKeyPrefix: "CirculatingSupplyQuery"
 });
-export const createGetInflationRate = (clientResolver: RpcResolver) => buildQuery<QueryInflationRateRequest, QueryInflationRateResponse>({
+export const createGetInflationRate = (clientResolver?: RpcResolver) => buildQuery<QueryInflationRateRequest, QueryInflationRateResponse>({
   encode: QueryInflationRateRequest.encode,
   decode: QueryInflationRateResponse.decode,
   service: "evmos.inflation.v1.Query",
@@ -56,7 +56,7 @@ export const useGetInflationRate = buildUseQuery<QueryInflationRateRequest, Quer
   builderQueryFn: createGetInflationRate,
   queryKeyPrefix: "InflationRateQuery"
 });
-export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver?: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "evmos.inflation.v1.Query",

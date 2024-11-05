@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryTokenPairsRequest, QueryTokenPairsResponse, QueryTokenPairRequest, QueryTokenPairResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export const createGetTokenPairs = (clientResolver: RpcResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
+export const createGetTokenPairs = (clientResolver?: RpcResolver) => buildQuery<QueryTokenPairsRequest, QueryTokenPairsResponse>({
   encode: QueryTokenPairsRequest.encode,
   decode: QueryTokenPairsResponse.decode,
   service: "evmos.erc20.v1.Query",
@@ -12,7 +12,7 @@ export const useGetTokenPairs = buildUseQuery<QueryTokenPairsRequest, QueryToken
   builderQueryFn: createGetTokenPairs,
   queryKeyPrefix: "TokenPairsQuery"
 });
-export const createGetTokenPair = (clientResolver: RpcResolver) => buildQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
+export const createGetTokenPair = (clientResolver?: RpcResolver) => buildQuery<QueryTokenPairRequest, QueryTokenPairResponse>({
   encode: QueryTokenPairRequest.encode,
   decode: QueryTokenPairResponse.decode,
   service: "evmos.erc20.v1.Query",
@@ -23,7 +23,7 @@ export const useGetTokenPair = buildUseQuery<QueryTokenPairRequest, QueryTokenPa
   builderQueryFn: createGetTokenPair,
   queryKeyPrefix: "TokenPairQuery"
 });
-export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver?: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "evmos.erc20.v1.Query",

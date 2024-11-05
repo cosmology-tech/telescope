@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryDevFeeInfosRequest, QueryDevFeeInfosResponse, QueryDevFeeInfoRequest, QueryDevFeeInfoResponse, QueryParamsRequest, QueryParamsResponse, QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse } from "./query";
-export const createGetDevFeeInfos = (clientResolver: RpcResolver) => buildQuery<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse>({
+export const createGetDevFeeInfos = (clientResolver?: RpcResolver) => buildQuery<QueryDevFeeInfosRequest, QueryDevFeeInfosResponse>({
   encode: QueryDevFeeInfosRequest.encode,
   decode: QueryDevFeeInfosResponse.decode,
   service: "evmos.fees.v1.Query",
@@ -12,7 +12,7 @@ export const useGetDevFeeInfos = buildUseQuery<QueryDevFeeInfosRequest, QueryDev
   builderQueryFn: createGetDevFeeInfos,
   queryKeyPrefix: "DevFeeInfosQuery"
 });
-export const createGetDevFeeInfo = (clientResolver: RpcResolver) => buildQuery<QueryDevFeeInfoRequest, QueryDevFeeInfoResponse>({
+export const createGetDevFeeInfo = (clientResolver?: RpcResolver) => buildQuery<QueryDevFeeInfoRequest, QueryDevFeeInfoResponse>({
   encode: QueryDevFeeInfoRequest.encode,
   decode: QueryDevFeeInfoResponse.decode,
   service: "evmos.fees.v1.Query",
@@ -23,7 +23,7 @@ export const useGetDevFeeInfo = buildUseQuery<QueryDevFeeInfoRequest, QueryDevFe
   builderQueryFn: createGetDevFeeInfo,
   queryKeyPrefix: "DevFeeInfoQuery"
 });
-export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver?: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "evmos.fees.v1.Query",
@@ -34,7 +34,7 @@ export const useGetParams = buildUseQuery<QueryParamsRequest, QueryParamsRespons
   builderQueryFn: createGetParams,
   queryKeyPrefix: "ParamsQuery"
 });
-export const createGetDevFeeInfosPerDeployer = (clientResolver: RpcResolver) => buildQuery<QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse>({
+export const createGetDevFeeInfosPerDeployer = (clientResolver?: RpcResolver) => buildQuery<QueryDevFeeInfosPerDeployerRequest, QueryDevFeeInfosPerDeployerResponse>({
   encode: QueryDevFeeInfosPerDeployerRequest.encode,
   decode: QueryDevFeeInfosPerDeployerResponse.decode,
   service: "evmos.fees.v1.Query",

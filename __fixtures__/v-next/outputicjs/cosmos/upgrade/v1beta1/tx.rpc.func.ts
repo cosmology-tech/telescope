@@ -2,7 +2,7 @@ import { buildTx, SigningClientResolver } from "../../../helper-func-types";
 import { buildUseMutation } from "../../../react-query";
 import { toEncoders, toConverters } from "@interchainjs/cosmos/utils";
 import { MsgSoftwareUpgrade, MsgCancelUpgrade } from "./tx";
-export const createSoftwareUpgrade = (clientResolver: SigningClientResolver) => buildTx<MsgSoftwareUpgrade>({
+export const createSoftwareUpgrade = (clientResolver?: SigningClientResolver) => buildTx<MsgSoftwareUpgrade>({
   clientResolver,
   typeUrl: MsgSoftwareUpgrade.typeUrl,
   encoders: toEncoders(MsgSoftwareUpgrade),
@@ -11,7 +11,7 @@ export const createSoftwareUpgrade = (clientResolver: SigningClientResolver) => 
 export const useSoftwareUpgrade = buildUseMutation<MsgSoftwareUpgrade, Error>({
   builderMutationFn: createSoftwareUpgrade
 });
-export const createCancelUpgrade = (clientResolver: SigningClientResolver) => buildTx<MsgCancelUpgrade>({
+export const createCancelUpgrade = (clientResolver?: SigningClientResolver) => buildTx<MsgCancelUpgrade>({
   clientResolver,
   typeUrl: MsgCancelUpgrade.typeUrl,
   encoders: toEncoders(MsgCancelUpgrade),

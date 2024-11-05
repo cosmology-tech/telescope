@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../../helper-func-types";
 import { buildUseQuery } from "../../../../react-query";
 import { QueryDenomTraceRequest, QueryDenomTraceResponse, QueryDenomTracesRequest, QueryDenomTracesResponse, QueryParamsRequest, QueryParamsResponse } from "./query";
-export const createGetDenomTrace = (clientResolver: RpcResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
+export const createGetDenomTrace = (clientResolver?: RpcResolver) => buildQuery<QueryDenomTraceRequest, QueryDenomTraceResponse>({
   encode: QueryDenomTraceRequest.encode,
   decode: QueryDenomTraceResponse.decode,
   service: "ibc.applications.transfer.v1.Query",
@@ -12,7 +12,7 @@ export const useGetDenomTrace = buildUseQuery<QueryDenomTraceRequest, QueryDenom
   builderQueryFn: createGetDenomTrace,
   queryKeyPrefix: "DenomTraceQuery"
 });
-export const createGetDenomTraces = (clientResolver: RpcResolver) => buildQuery<QueryDenomTracesRequest, QueryDenomTracesResponse>({
+export const createGetDenomTraces = (clientResolver?: RpcResolver) => buildQuery<QueryDenomTracesRequest, QueryDenomTracesResponse>({
   encode: QueryDenomTracesRequest.encode,
   decode: QueryDenomTracesResponse.decode,
   service: "ibc.applications.transfer.v1.Query",
@@ -23,7 +23,7 @@ export const useGetDenomTraces = buildUseQuery<QueryDenomTracesRequest, QueryDen
   builderQueryFn: createGetDenomTraces,
   queryKeyPrefix: "DenomTracesQuery"
 });
-export const createGetParams = (clientResolver: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
+export const createGetParams = (clientResolver?: RpcResolver) => buildQuery<QueryParamsRequest, QueryParamsResponse>({
   encode: QueryParamsRequest.encode,
   decode: QueryParamsResponse.decode,
   service: "ibc.applications.transfer.v1.Query",

@@ -15,7 +15,7 @@ export interface QueryBuilderOptions<TReq, TRes> {
   decode: (input: BinaryReader | Uint8Array, length?: number) => TRes
   service: string,
   method: string,
-  clientResolver: RpcResolver
+  clientResolver?: RpcResolver
 }
 
 export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
@@ -25,7 +25,7 @@ export function buildQuery<TReq, TRes>(opts: QueryBuilderOptions<TReq, TRes>) {
       if(isRpc(opts.clientResolver)) {
         rpc = opts.clientResolver;
       } else {
-        rpc = await getRpcClient(opts.clientResolver);
+        rpc = opts.clientResolver ? await getRpcClient(opts.clientResolver) : undefined;
       }
 
       if (!rpc) throw new Error("Query Rpc is not initialized");
@@ -69,7 +69,7 @@ export interface ISigningClient {
 }
 
 export interface TxBuilderOptions {
-  clientResolver: SigningClientResolver,
+  clientResolver?: SigningClientResolver,
   typeUrl: string,
   encoders?: Encoder[],
   converters?: AminoConverter[],

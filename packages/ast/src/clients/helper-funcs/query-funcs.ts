@@ -62,6 +62,7 @@ export function createQueryHelperCreator(
     );
     const arg = ast.identifier("clientResolver");
     arg.typeAnnotation = customHookArgumentsType;
+    arg.optional = true;
 
     const arrowFuncExp = ast.arrowFunctionExpression([arg], callExpression);
 

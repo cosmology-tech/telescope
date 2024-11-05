@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../../helper-func-types";
 import { buildUseQuery } from "../../../react-query";
 import { QueryProvidersRequest, QueryProvidersResponse, QueryProviderRequest, QueryProviderResponse } from "./query";
-export const createGetProviders = (clientResolver: RpcResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
+export const createGetProviders = (clientResolver?: RpcResolver) => buildQuery<QueryProvidersRequest, QueryProvidersResponse>({
   encode: QueryProvidersRequest.encode,
   decode: QueryProvidersResponse.decode,
   service: "akash.provider.v1beta2.Query",
@@ -12,7 +12,7 @@ export const useGetProviders = buildUseQuery<QueryProvidersRequest, QueryProvide
   builderQueryFn: createGetProviders,
   queryKeyPrefix: "ProvidersQuery"
 });
-export const createGetProvider = (clientResolver: RpcResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
+export const createGetProvider = (clientResolver?: RpcResolver) => buildQuery<QueryProviderRequest, QueryProviderResponse>({
   encode: QueryProviderRequest.encode,
   decode: QueryProviderResponse.decode,
   service: "akash.provider.v1beta2.Query",

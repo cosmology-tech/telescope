@@ -1,7 +1,7 @@
 import { RpcResolver, buildQuery } from "../../helper-func-types";
 import { buildUseQuery } from "../../react-query";
 import { QueryEpochsInfoRequest, QueryEpochsInfoResponse, QueryCurrentEpochRequest, QueryCurrentEpochResponse } from "./query";
-export const createGetEpochInfos = (clientResolver: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
+export const createGetEpochInfos = (clientResolver?: RpcResolver) => buildQuery<QueryEpochsInfoRequest, QueryEpochsInfoResponse>({
   encode: QueryEpochsInfoRequest.encode,
   decode: QueryEpochsInfoResponse.decode,
   service: "osmosis.epochs.v1beta1.Query",
@@ -12,7 +12,7 @@ export const useGetEpochInfos = buildUseQuery<QueryEpochsInfoRequest, QueryEpoch
   builderQueryFn: createGetEpochInfos,
   queryKeyPrefix: "EpochInfosQuery"
 });
-export const createGetCurrentEpoch = (clientResolver: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
+export const createGetCurrentEpoch = (clientResolver?: RpcResolver) => buildQuery<QueryCurrentEpochRequest, QueryCurrentEpochResponse>({
   encode: QueryCurrentEpochRequest.encode,
   decode: QueryCurrentEpochResponse.decode,
   service: "osmosis.epochs.v1beta1.Query",
