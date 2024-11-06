@@ -39,11 +39,56 @@ export const plugin = (builder: TelescopeBuilder) => {
       name: 'ReadOnlyAminoMsg',
       importAs: 'AminoMsg',
     };
-    UTILS.Pubkey = {
+    UTILS.AminoTypes = {
       type: 'import',
-      path: '@interchainjs/Pubkey',
-      name: 'Pubkey',
-      importAs: 'Pubkey',
+      path: '@interchainjs/AminoConverter',
+      name: 'AminoConverter',
+      importAs: 'AminoTypes',
+    };
+    UTILS.createProtobufRpcClient = {
+      type: 'import',
+      path: '@interchainjs/createRpcClient',
+      name: 'createRpcClient',
+      importAs: 'createProtobufRpcClient',
+    };
+    UTILS.defaultRegistryTypes = {
+      type: 'import',
+      path: '@interchainjs/GeneratedType',
+      name: 'GeneratedType',
+      importAs: 'defaultRegistryTypes',
+    };
+    UTILS.GeneratedType = {
+      type: 'import',
+      path: '@interchainjs/GeneratedType',
+      name: 'GeneratedType',
+    };
+    UTILS.HttpEndpoint = {
+      type: 'import',
+      path: '@interchainjs/HttpEndpoint',
+      name: 'HttpEndpoint',
+    };
+    UTILS.OfflineSigner = {
+      type: 'import',
+      path: '@interchainjs/OfflineSigner',
+      name: 'OfflineSigner',
+    };
+    UTILS.ProtobufRpcClient = {
+      type: 'import',
+      path: '@interchainjs/Rpc',
+      name: 'Rpc',
+      importAs: 'ProtobufRpcClient',
+    };
+    UTILS.Registry = {
+      type: 'import',
+      path: '@interchainjs/GlobalDecoderRegistry',
+      name: 'GlobalDecoderRegistry',
+      importAs: 'Registry',
+    };
+    UTILS.SigningStargateClient = {
+      type: 'import',
+      path: '@interchainjs/SigningClient',
+      name: 'SigningClient',
+      importAs: 'SigningStargateClient',
     };
   }
 };
