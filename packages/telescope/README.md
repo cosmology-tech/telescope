@@ -126,20 +126,76 @@ cca --boilerplate telescope
 
 Then, you'll navigate into `./your-project/packages/telescope` package for the next steps.
 
-### Add Protobufs
+### Download with CLI
 
-If you have `.proto` files, simply add them to a `./proto` folder.
+The old ` telescope install ` command has been deprecated
 
-However, if you want to get started quickly using existing protos from our registry, simply use the `install` command.
+You can use our CLI for download. To download the proto files, `download` command.
 
 ```sh
-telescope install
+telescope download
 ```
 
-It's not necessary, but you may also specify specific packages, e.g.
+You should now see some repos cloned in `./git-modules` and proto files generated in `./protos`. These are the proto files downloaded according to your config.
+
+Examples:
 
 ```sh
-telescope install @protobufs/osmosis
+# Telescope will do the download according to .json file of --config
+# Telescope will put proto into location specified by --out 
+telescope download --config ./protod.config.json --out ./git-modules
+```
+
+```sh
+# Telescope download from target repo according to --git-repo
+# in format of (i.e. <owner>/<repository> or <owner>/<repository>/<branch>)
+# <branch> can be empty, it will use main as default
+# Also --targets is required to specify the targets to download 
+# in format like cosmos/auth/v1beta1/auth.proto
+telescope download --git-repo target-repo --targets target-proto
+```
+
+```sh
+# ssh arg is optional, default is false
+telescope download --config ./protod.config.json --out ./git-modules --ssh true
+```
+
+
+```js
+// .protod.config.json example
+//
+// `repos` are the repository it's going to clone
+// in format of (i.e. { "owner": <owner>, "repo": <repo> } or { "owner": <owner>, "repo": <repo>, "branch": <branch> })
+// <branch> can be empty, it will use main as default
+//
+// `protoDirMapping` is the directory of repo specified if the proto is not under repo's root directory ./protos
+// in format of (i.e. <owner>/<repository> or <owner>/<repository>/<branch>)
+// <branch> can be empty, it will use main as default
+//
+// `outDir` is where the output proto will be put
+//
+// `targets` are the target proto to download 
+// `targets` can be patterns like:
+// "cosmos/bank/v1beta1/tx.proto",
+// "cosmos/gov/**/*.proto",
+// "cosmos/authz/**/*.proto",
+{
+  "repos": [
+    { "owner": "cosmos", "repo": "cosmos-sdk" },
+    ...
+  ],
+  "protoDirMapping": {
+    "gogo/protobuf/master": ".",
+    ...
+  },
+  "outDir": "protos",
+  "ssh": true,
+  "tempRepoDir": "git-modules",
+  "targets": [
+    "cosmos/auth/v1beta1/auth.proto",
+    ...
+  ]
+}
 ```
 
 ### Transpile
