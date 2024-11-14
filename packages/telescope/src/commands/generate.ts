@@ -13,18 +13,34 @@ export default async argv => {
         return shell.exit(1);
     }
 
-    const { name } = await prompt([
+    let results: { [key: string]: any } = {};
+
+    const argsFromCommand = process.argv.slice(2);
+    argsFromCommand.forEach((arg, index) => {
+        if (arg.startsWith('--')) {
+            let key = arg.slice(2).replace(/-/g, '').toUpperCase();
+            key = `__${key}__`;
+            const value = argsFromCommand[index + 1] && !argsFromCommand[index + 1].startsWith('--') ? argsFromCommand[index + 1] : '';
+
+            if (Array.isArray(value)) {
+                results[key] = value.split(',');
+            } else {
+                results[key] = value;
+            }
+        }
+    });
+    const { name } = results.__MODULENAME__ ? { name: results.__MODULENAME__ } : await prompt([
         {
             type: 'string',
             name: 'name',
             message: 'Enter your new module name',
         }
     ], argv);
-
     shell.exec(`git clone ${repo} ${name}`);
     shell.cd(name);
 
-    const questions = JSON.parse(fs.readFileSync(`.questions.json`));
+    let questions = JSON.parse(fs.readFileSync(`.questions.json`));
+    questions = questions.filter(question => !(question.name in results));
 
     const fullname = shell
         .exec('git config --global user.name', { silent: true })
@@ -46,10 +62,10 @@ export default async argv => {
         { allowCamelCase: true }
     );
 
-    const results = await prompt(questions, args);
-    let scopedResults;
+    const answerResults = await prompt(questions, args);
+    results = { ...results, answerResults }
 
-    const license = await prompt(
+    const license = results.__LICENSE__ ?? await prompt(
         [
             {
                 name: '__LICENSE__',
@@ -62,18 +78,23 @@ export default async argv => {
         []
     );
 
+    let scopedResults;
     if (results.__ACCESS__ === 'public') {
-        scopedResults = await prompt(
-            [
-                {
-                    type: 'confirm',
-                    name: 'scoped',
-                    message: 'use npm scopes?',
-                    required: true,
-                },
-            ],
-            []
-        );
+        if (results.__USENPMSCOPED__ !== undefined) {
+            scopedResults = { scoped: true }
+        } else {
+            scopedResults = await prompt(
+                [
+                    {
+                        type: 'confirm',
+                        name: 'scoped',
+                        message: 'use npm scopes?',
+                        required: true,
+                    },
+                ],
+                []
+            );
+        }
     }
 
     const files = []
@@ -99,7 +120,6 @@ Proprietary and confidential`;
                 content = content.replace(new RegExp(key, 'g'), results[key]);
             }
         });
-
         if (results.__ACCESS__ === 'public') {
             if (scopedResults.scoped) {
                 content = content.replace(
