@@ -16,4 +16,5 @@
     "files.exclude": {
         ".yarn/*": true
     },
+    "files.eol": "\n",
 }

@@ -126,11 +126,21 @@ cca --boilerplate telescope
 
 Then, you'll navigate into `./your-project/packages/telescope` package for the next steps.
 
-### Download with CLI
+You can also use `telescope generate` command to generate package according to the prompt or terminal command params such as:
+`telescope generate --access public --userfullname testname --useremail test@gmail.com --module-desc test --username salkfl --license MIT --module-name test --chain-name cosmos --use-npm-scoped`
+
+The available options are:
+`--userfullname` `--useremail` `--module-desc` `--username` `--module-name` `--chain-name` `--access` `--use-npm-scoped` `--license`
+
+If some required options are missing, it will prompt to ask for the info.
+
+To be noted, `--use-npm-scoped` only works when `--access` is `public`
+
+### Download protos with CLI
 
 The old ` telescope install ` command has been deprecated
 
-You can use our CLI for download. To download the proto files, `download` command.
+You can use our CLI to download protos by using `download` command.
 
 ```sh
 telescope download
