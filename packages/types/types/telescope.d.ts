@@ -225,6 +225,14 @@ export interface TelescopeOpts {
             };
         }[];
         useConnectComet?: boolean;
+        combinedClient?: {
+            clientName: string;
+            fileName: string;
+            include?: {
+                serviceTypes?: ("Query" | "Tx" | string)[];
+                patterns?: string[];
+            };
+        }[];
     };
     helperFuncCreators?: {
         enabled: boolean;
