@@ -213,6 +213,31 @@ const options: TelescopeOptions = {
         },
       },
     ],
+    combinedClient: [
+      {
+        name: "CosmosIbc",
+        fileName: "cosmos-ibc-client.ts",
+        include: {
+          patterns: [
+            "cosmos.gov.v1beta1.**",
+            "cosmos.gov.v1.**",
+            "ibc.core.channel.**",
+          ],
+        },
+      },
+      {
+        name: "AkashCosmos",
+        fileName: "akash-cosmos-client.ts",
+        include: {
+          patterns: [
+            "cosmos.group.v1.**",
+            "cosmos.nft.v1beta1.**",
+            "akash.audit.v1beta1.**",
+            "akash.audit.v1beta2.**",
+          ],
+        },
+      },
+    ],
   },
 
   reactQuery: {

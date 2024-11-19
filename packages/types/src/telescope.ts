@@ -279,7 +279,7 @@ export interface TelescopeOpts {
     }[];
     useConnectComet?: boolean;
     combinedClient?: {
-      clientName: string;
+      name: string;
       fileName: string;
       include?: {
         patterns?: string[];
