@@ -23,6 +23,7 @@ import { plugin as createMsgFuncs } from './generators/create-msg-funcs';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
 import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
+import { plugin as createCombinedStargateClients } from './generators/create-combined-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
 import { plugin as createHelpers } from './generators/create-helpers';
@@ -146,6 +147,8 @@ export class TelescopeBuilder {
 
     customizeUtils(this);
 
+    const allConverters = [];
+    const allRegistries = [];
     // [x] get bundle of all packages
     const bundles = bundlePackages(this.store).map((bundle) => {
       // store bundleFile in filesToInclude
@@ -171,9 +174,19 @@ export class TelescopeBuilder {
 
       // [x] write out one client for each base package, referencing the last two steps
       createStargateClients(this, bundler);
+      if (bundler.registries) {
+        allRegistries.push(...bundler.registries)
+      }
+      if (bundler.converters) {
+        allConverters.push(...bundler.converters)
 
+      }
       return bundler;
     });
+
+    if (this.options.rpcClients.combinedClient && this.options.rpcClients.combinedClient.length !== 0) {
+      createCombinedStargateClients(this, allRegistries, allConverters)
+    }
 
     // post run plugins
     bundles.forEach((bundler) => {
