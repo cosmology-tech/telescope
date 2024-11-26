@@ -37,6 +37,13 @@ export declare const isRefIncluded: (ref: ProtoRef, include?: {
     protos?: string[];
 }) => boolean;
 /**
+ * test if a package is included in certain pattern.
+ * @param input is a package.
+ * @param patterns to match the package
+ * @returns bool
+ */
+export declare const isPackageIncluded: (input: any, patterns: any) => any;
+/**
  * test if a proto ref is excluded from the operation.
  * @param ref a ProtoRef with proto file info and package.
  * @param exclude patterns(will be deprecated soon), packages, proto files to exclude

@@ -47,6 +47,7 @@ export const plugin = (
     bundler.registries.forEach(registry => {
         let rel = relative(dirname(clientFile), registry.localname);
         if (!rel.startsWith('.')) rel = `./${rel}`;
+        rel = toPosixPath(rel)
         const variable = variableSlug(registry.localname);
         registryVariables.push(variable);
         registryImports.push(importNamespace(variable, rel));
@@ -55,6 +56,7 @@ export const plugin = (
     bundler.converters.forEach(converter => {
         let rel = relative(dirname(clientFile), converter.localname);
         if (!rel.startsWith('.')) rel = `./${rel}`;
+        rel = toPosixPath(rel)
         const variable = variableSlug(converter.localname);
         converterVariables.push(variable);
         converterImports.push(importNamespace(variable, rel));
@@ -113,7 +115,6 @@ export const plugin = (
     if (getTxRpc) {
       cProg = cProg.concat(getTxRpc);
     }
-
     const clientOutFile = join(builder.outPath, clientFile);
     bundler.writeAst(cProg, clientOutFile);
 

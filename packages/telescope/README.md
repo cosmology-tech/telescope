@@ -443,6 +443,9 @@ See [LCD Clients](#lcd-clients) for more info.
 | `rpcClients.enabledServices`   | which services to enable                                                | [`Msg`,`Query`,`Service`]     |
 | `rpcClients.instantOps` |        will generate instant rpc operations in the file `service-ops.ts` under root folder, which contains customized classes having selected rpc methods    | `undefined`                        |
 | `rpcClients.serviceImplement` |     assign implement type of rpc methods, `Query` or `Tx`, by setting patterns under service types.       | `undefined`                        |
+  `rpcClients.combinedClient.name` | assign the client name like `{name}AminoConverters`, `get{name}SigningClient` etc | `undefined`
+| `rpcClients.combinedClient.fileName` | assign the file name of generated client in root directory | `undefined`
+| `rpcClients.combinedClient.include.patterns` | determine which proto files will be imported for the current client such as `cosmos.gov.v1beta1.**` | `undefined`
 
 See [RPC Clients](#rpc-clients) for more info.
 
@@ -1058,6 +1061,69 @@ export class CosmosAuthAccount {
     this.txDeposit = _CosmosGovV1beta1Txrpc.createClientImpl(rpc).deposit;
   }
 }
+```
+
+## Combined Clients Methods
+
+Using combined option to generate multiple module clients
+
+For example, for this config:
+```js
+{
+    combinedClient: [
+      {
+        name: "CosmosIbc",
+        fileName: "cosmos-ibc-client.ts",
+        include: {
+          patterns: [
+            "cosmos.gov.v1beta1*",
+            "cosmos.gov.v1*",
+            "ibc.core.channel.*",
+          ],
+        },
+      },
+      {
+        name: "AkashCosmos",
+        fileName: "akash-cosmos-client.ts",
+        include: {
+          patterns: [
+            "cosmos.group.v1*",
+            "cosmos.nft.v1beta1*",
+            "akash.**.v1beta2",
+            "akash.audit.v1beta1*",
+          ],
+        },
+      },
+    ],
+}
+```
+
+There'll be client files (`cosmos-ibc-client.ts`, `akash-cosmos-client.ts`) generated in the root folder according to fileName in the setting.
+The combined client will import proto files accroding to include.patterns. (The protos can come from different modules)
+For example the cosmos-ibc-client.ts will be like: 
+```ts
+export const cosmosIbcAminoConverters = {
+  ...cosmosGovV1TxAmino.AminoConverter,
+  ...cosmosGovV1beta1TxAmino.AminoConverter,
+  ...ibcCoreChannelV1TxAmino.AminoConverter
+};
+export const cosmosIbcProtoRegistry: ReadonlyArray<[string, GeneratedType]> = [...cosmosGovV1TxRegistry.registry, ...cosmosGovV1beta1TxRegistry.registry, ...ibcCoreChannelV1TxRegistry.registry];
+export const getCosmosIbcSigningClientOptions = ({
+  defaultTypes = defaultRegistryTypes
+}: {
+  ...
+};
+export const getCosmosIbcSigningClient = async ({
+  rpcEndpoint,
+  signer,
+  defaultTypes = defaultRegistryTypes
+}: {
+  rpcEndpoint: string | HttpEndpoint;
+  signer: OfflineSigner;
+  defaultTypes?: ReadonlyArray<[string, GeneratedType]>;
+}) => {
+  ...
+};
 ```
 
 ## Manually registering types
