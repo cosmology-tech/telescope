@@ -127,6 +127,28 @@ const options: TelescopeOptions = {
 
   rpcClients: {
     enabled: true,
+    clientStyle: {
+      useUpdatedClientStyle: true,
+      type: ['all-client', 'sdk-module-client', 'custom-client'],
+      customClientOption: [
+        {
+          name: "custom",
+          fileName: "custom-client.ts",
+          include: {
+            patterns: [
+              "cosmos.gov.v1beta1*",
+              "cosmos.gov.v1*",
+              "ibc.core.channel.*",
+            ],
+          },
+        },
+      ],
+      sdkModuleClientOption: [
+        'akash',
+        'osmosis',
+        'cosmos',
+      ],
+    },
     extensions: false,
     camelCase: true,
     scopedIsExclusive: false,
@@ -213,31 +235,6 @@ const options: TelescopeOptions = {
         },
       },
     ],
-    combinedClient: [
-      {
-        name: "CosmosIbc",
-        fileName: "cosmos-ibc-client.ts",
-        include: {
-          patterns: [
-            "cosmos.gov.v1beta1*",
-            "cosmos.gov.v1*",
-            "ibc.core.channel.*",
-          ],
-        },
-      },
-      {
-        name: "AkashCosmos",
-        fileName: "akash-cosmos-client.ts",
-        include: {
-          patterns: [
-            "cosmos.group.v1*",
-            "cosmos.nft.v1beta1*",
-            "akash.**.v1beta2",
-            "akash.audit.v1beta1*",
-          ],
-        },
-      },
-    ],
   },
 
   reactQuery: {
@@ -321,6 +318,9 @@ const options: TelescopeOptions = {
           },
           rpcClients: {
             inline: true,
+            clientStyle: {
+              useUpdatedClientStyle: true
+            },
           },
         },
       },

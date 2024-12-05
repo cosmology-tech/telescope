@@ -219,6 +219,18 @@ export interface TelescopeOpts {
   };
   rpcClients?: {
     type?: "tendermint" | "grpc-web" | "grpc-gateway";
+    clientStyle?: {
+      useUpdatedClientStyle?: boolean,
+      type?: ("all-client" | "sdk-module-client" | "custom-client")[],
+      customClientOption?: {
+        name: string;
+        fileName: string;
+        include?: {
+          patterns?: string[];
+        };
+      }[],
+      sdkModuleClientOption?: string[],
+    }
     enabled: boolean;
     inline?: boolean;
     extensions?: boolean;
@@ -227,13 +239,13 @@ export interface TelescopeOpts {
     bundle?: boolean;
     serviceImplement?: {
       [
-        key:
-          | "Msg"
-          | "Query"
-          | "Service"
-          | "ReflectionService"
-          | "ABCIApplication"
-          | string
+      key:
+        | "Msg"
+        | "Query"
+        | "Service"
+        | "ReflectionService"
+        | "ABCIApplication"
+        | string
       ]: {
         include?: {
           patterns?: string[];
@@ -278,13 +290,6 @@ export interface TelescopeOpts {
       };
     }[];
     useConnectComet?: boolean;
-    combinedClient?: {
-      name: string;
-      fileName: string;
-      include?: {
-        patterns?: string[];
-      };
-    }[];
   };
   helperFuncCreators?: {
     enabled: boolean;
@@ -480,6 +485,9 @@ export const defaultTelescopeOptions: TelescopeOptions = {
   },
   rpcClients: {
     type: "tendermint",
+    clientStyle: {
+      useUpdatedClientStyle: false,
+    },
     enabled: true,
     extensions: true,
     inline: false,

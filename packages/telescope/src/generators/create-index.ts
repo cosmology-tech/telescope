@@ -13,7 +13,6 @@ const version = process.env.NODE_ENV === 'test' ? 'latest' : pkg.version;
 export const plugin = (
     builder: TelescopeBuilder
 ) => {
-
     if (!builder.options.bundle.enabled) {
         return;
     }
