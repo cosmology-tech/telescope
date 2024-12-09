@@ -280,6 +280,26 @@ export interface TelescopeOpts {
             };
         };
     };
+    vueQuery?: {
+        enabled: boolean;
+        needExtraQueryKey?: boolean;
+        include?: {
+            /**
+             * @deprecated in favor of packages and protos supporting minimatch
+             */
+            patterns?: string[];
+            packages?: string[];
+            protos?: string[];
+        };
+        instantExport?: {
+            include: {
+                patterns?: string[];
+            };
+            nameMapping?: {
+                [key: string]: string;
+            };
+        };
+    };
     mobx?: {
         enabled: boolean;
         include?: {

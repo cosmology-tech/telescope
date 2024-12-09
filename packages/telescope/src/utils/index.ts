@@ -71,10 +71,23 @@ export const UTILS: { [key: string]: UtilValue } = {
   toTimestamp: '__helpers__',
   toUtf8: '@cosmjs/encoding',
   useQuery: '@tanstack/react-query',
+  useVueQuery: {
+    type: 'import',
+    name: 'useQuery',
+    path: '@tanstack/vue-query'
+  },
+  ComputedRef: 'vue',
+  computed: 'vue',
+  Ref: 'vue',
   useRpcEndpoint: '__react-query__',
   useRpcClient: '__react-query__',
   useTendermintClient: '__react-query__',
   ReactQueryParams: '__react-query__',
+  VueQueryParams: {
+    type: 'import',
+    name: 'VueQueryParams',
+    path: '../../../vue-query'
+  },
   buildUseMutation:'__react-query__',
   UseQueryParams:'__react-query__',
   buildUseQuery:'__react-query__',

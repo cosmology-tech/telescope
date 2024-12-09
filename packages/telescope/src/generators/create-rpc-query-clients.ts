@@ -5,8 +5,11 @@ import {
     createRpcClientClass,
     createRpcClientInterface,
     createRpcQueryHookInterfaces,
+    createRpcVueQueryHookInterfaces,
     createRpcQueryHookClientMap,
+    createRpcVueQueryHookClientMap,
     createRpcQueryHooks,
+    createRpcVueQueryHooks,
     // grpc-gateway:
     createGRPCGatewayQueryClass,
     createGRPCGatewayWrapperClass,
@@ -32,7 +35,7 @@ export const plugin = (
     bundler: Bundler
 ) => {
     const instantRpcBundlerFiles: {
-      [key: string]: BundlerFile[]
+        [key: string]: BundlerFile[]
     } = {};
     const reactQueryBundlerFiles = [];
     const mobxBundlerFiles = [];
@@ -65,7 +68,6 @@ export const plugin = (
             return;
         }
         ///
-
         let name, getImportsFrom;
 
         allowedRpcServices.forEach(svcKey => {
@@ -133,7 +135,7 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns,).map((key)=> proto[svcKey].methods[key]);
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns,).map((key) => proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
                         }
@@ -164,47 +166,47 @@ export const plugin = (
                         const useCamelCase = c.options.rpcClients?.camelCase;
 
                         instantOps.forEach((item) => {
-                          let nameMapping = {
-                            ...swapKeyValue(item.nameMapping?.All ?? {}),
-                            ...swapKeyValue(item.nameMapping?.Query ?? {})
-                          };
+                            let nameMapping = {
+                                ...swapKeyValue(item.nameMapping?.All ?? {}),
+                                ...swapKeyValue(item.nameMapping?.Query ?? {})
+                            };
 
-                          // get all query methods
-                          const patterns = item.include?.patterns;
-                          const serviceTypes = item.include?.serviceTypes;
+                            // get all query methods
+                            const patterns = item.include?.patterns;
+                            const serviceTypes = item.include?.serviceTypes;
 
-                          if(serviceTypes && !serviceTypes.includes("Query")){
-                            return
-                          }
+                            if (serviceTypes && !serviceTypes.includes("Query")) {
+                                return
+                            }
 
-                          const methodKeys = getQueryMethodNames(
-                            bundlerFile.package,
-                            Object.keys(proto[svcKey].methods ?? {}),
-                            patterns,
-                            useCamelCase ? camel : String
-                          );
+                            const methodKeys = getQueryMethodNames(
+                                bundlerFile.package,
+                                Object.keys(proto[svcKey].methods ?? {}),
+                                patterns,
+                                useCamelCase ? camel : String
+                            );
 
-                          if(!methodKeys || !methodKeys.length){
-                            return
-                          }
+                            if (!methodKeys || !methodKeys.length) {
+                                return
+                            }
 
-                          asts.push(
-                            createRpcClientInterface(
-                              ctx.generic,
-                              svc,
-                              item.className,
-                              methodKeys,
-                              nameMapping
-                            )
-                          );
+                            asts.push(
+                                createRpcClientInterface(
+                                    ctx.generic,
+                                    svc,
+                                    item.className,
+                                    methodKeys,
+                                    nameMapping
+                                )
+                            );
 
-                          bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
+                            bundlerFile.instantExportedMethods = methodKeys.map((key) => proto[svcKey].methods[key]);
 
-                          if(!instantRpcBundlerFiles[item.className]){
-                            instantRpcBundlerFiles[item.className] = [];
-                          }
+                            if (!instantRpcBundlerFiles[item.className]) {
+                                instantRpcBundlerFiles[item.className] = [];
+                            }
 
-                          instantRpcBundlerFiles[item.className].push({...bundlerFile});
+                            instantRpcBundlerFiles[item.className].push({ ...bundlerFile });
                         });
 
                         asts.push(createRpcClientClass(ctx.generic, svc));
@@ -212,8 +214,8 @@ export const plugin = (
                             asts.push(createRpcQueryExtension(ctx.generic, svc));
                         } else {
                             const env = c.proto.pluginValue('env');
-                            if(env === 'v-next'){
-                              asts.push(createRpcClientImpl(ctx.generic, svc));
+                            if (env === 'v-next') {
+                                asts.push(createRpcClientImpl(ctx.generic, svc));
                             }
                         }
 
@@ -231,11 +233,26 @@ export const plugin = (
 
                         if (includeReactQueryHooks) {
                             [].push.apply(asts, createRpcQueryHookInterfaces(ctx.generic, svc));
+
                         }
 
                         // enable getQueryService for plugins using it.
                         if (includeReactQueryHooks || includeMobxHooks) {
                             [].push.apply(asts, createRpcQueryHookClientMap(ctx.generic, svc));
+                        }
+
+                        // see if current file has been vueQuery enabled and included
+                        const includeVueQueryHooks = c.proto.pluginValue('vueQuery.enabled') && isRefIncluded(
+                            c.ref,
+                            c.proto.pluginValue('vueQuery.include')
+                        )
+
+                        if (includeVueQueryHooks) {
+                            [].push.apply(asts, createRpcVueQueryHookInterfaces(ctx.generic, svc));
+                        }
+
+                        if (includeVueQueryHooks) {
+                            [].push.apply(asts, createRpcVueQueryHookClientMap(ctx.generic, svc));
                         }
 
                         // react query
@@ -251,9 +268,12 @@ export const plugin = (
 
                             // get all query methods
                             const patterns = c.proto.pluginValue('reactQuery.instantExport.include.patterns');
-                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key)=> proto[svcKey].methods[key]);
+                            bundlerFile.instantExportedMethods = getQueryMethodNames(bundlerFile.package, Object.keys(proto[svcKey].methods ?? {}), patterns).map((key) => proto[svcKey].methods[key]);
 
                             reactQueryBundlerFiles.push(bundlerFile);
+                        }
+                        if (includeVueQueryHooks) {
+                            asts.push(createRpcVueQueryHooks(ctx.generic, proto[svcKey]));
                         }
 
                         // whether mobx plugin is enabled has been dealt with inside createMobxQueryStores
@@ -274,10 +294,22 @@ export const plugin = (
             return;
         }
 
-        const serviceImports = getDepsFromQueries(
+        let serviceImports = getDepsFromQueries(
             getImportsFrom,
             localname
         );
+
+        if (c.proto.pluginValue('vueQuery.enabled')) {
+            const reactiveRequests = []
+            serviceImports['./query']?.forEach(servImp => {
+                if (/^Query.*Request$/.test(servImp)) {
+                    reactiveRequests.push(`Reactive${servImp}`)
+                }
+            })
+            if (reactiveRequests.length > 0) {
+                serviceImports['./query'] = serviceImports['./query'].concat(reactiveRequests)
+            }
+        }
 
         // TODO we do NOT need all imports...
         const imports = buildAllImports(ctx, serviceImports, localname);
@@ -295,8 +327,8 @@ export const plugin = (
 
     bundler.addRPCQueryClients(clients);
 
-    Object.keys(instantRpcBundlerFiles).forEach((className)=>{
-      bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
+    Object.keys(instantRpcBundlerFiles).forEach((className) => {
+        bundler.addStateManagers(`instantRpc_${className}`, instantRpcBundlerFiles[className]);
     })
 
     bundler.addStateManagers("reactQuery", reactQueryBundlerFiles);
