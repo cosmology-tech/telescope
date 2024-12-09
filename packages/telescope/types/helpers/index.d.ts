@@ -6,6 +6,7 @@ export * from './internal-for-bigint';
 export * from './react-query';
 export * from './react-query-hooks';
 export * from './react-query-hooks-icjs';
+export * from './vue-query';
 export * from './mobx';
 export * from './grpc-gateway';
 export * from './grpc-web';
