@@ -335,6 +335,17 @@ export interface TelescopeOpts {
       };
     };
   };
+  vueQuery?: {
+    enabled: boolean;
+    include?: {
+      /**
+       * @deprecated in favor of packages and protos supporting minimatch
+       */
+      patterns?: string[];
+      packages?: string[];
+      protos?: string[];
+    };
+  },
   mobx?: {
     enabled: boolean;
     include?: {
