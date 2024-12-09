@@ -63,16 +63,12 @@ export const plugin = (builder: TelescopeBuilder) => {
     builder.options.stargateClients.addGetTxRpc ||
     builder.options.includeExternalHelpers ||
     builder.options.reactQuery?.enabled ||
-    (builder.options?.helperFuncCreators?.enabled &&
-      builder.options?.helperFuncCreators?.genCustomHooks)
+    builder.options?.helperFuncCreators?.enabled
   ) {
     // also react-query needs these...
     builder.files.push("extern.ts");
 
-    if (
-      builder.options?.helperFuncCreators?.enabled &&
-      builder.options?.helperFuncCreators?.genCustomHooks
-    ) {
+    if (builder.options?.helperFuncCreators?.enabled) {
       write(builder, "extern.ts", externalIcJs);
     } else {
       write(
