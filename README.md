@@ -510,6 +510,13 @@ See [Helper Functions Configuration](#helper-functions-configuration) for more i
 | `mobx.include.packages`          | if set, will create the pinia stores on matched packages files using minimatch           | `[]`     |
 | `mobx.include.patterns`          | if set, will create the pinia stores on matched patterns of proto files using minimatch(deprecated in favor of packages and protos have been supported minimatch)           | `[]`     |
 
+#### Vue Query
+| option                           | description                                                             | defaults |
+| -------------------------------- | ----------------------------------------------------------------------  | ---------|
+| `vueQuery.enabled`             | if true, will create vue composables that use `@tanstack/react-query` composables | `false`  |
+| `reactQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
+| `reactQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
+
 ### Typings and Formating
 
 | option                                    | description                                                     | defaults  |
