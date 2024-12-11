@@ -11,47 +11,17 @@ export declare const createRpcVueQueryHooks: (context: GenericParseContext, serv
 export declare const createRpcVueQueryHookInterfaces: (context: GenericParseContext, service: ProtoService) => t.ExportNamedDeclaration[];
 export declare const createRpcVueQueryHookClientMap: (context: GenericParseContext, service: ProtoService) => {
     type: string;
-    declarations: {
+    declaration: {
         type: string;
-        id: {
+        declarations: {
             type: string;
-            name: string;
-        };
-        init: {
-            type: string;
-            returnType: {
-                type: string;
-                typeAnnotation: {
-                    type: string;
-                    typeName: {
-                        type: string;
-                        name: string;
-                    };
-                    typeParameters: {
-                        type: string;
-                        params: {
-                            type: string;
-                            types: ({
-                                type: string;
-                                typeName: {
-                                    type: string;
-                                    name: string;
-                                };
-                            } | {
-                                type: string;
-                                typeName?: undefined;
-                            })[];
-                        }[];
-                    };
-                };
-            };
-            id: any;
-            generator: boolean;
-            async: boolean;
-            params: {
+            id: {
                 type: string;
                 name: string;
-                typeAnnotation: {
+            };
+            init: {
+                type: string;
+                returnType: {
                     type: string;
                     typeAnnotation: {
                         type: string;
@@ -77,106 +47,173 @@ export declare const createRpcVueQueryHookClientMap: (context: GenericParseConte
                         };
                     };
                 };
-            }[];
-            body: {
-                type: string;
-                body: ({
+                id: any;
+                generator: boolean;
+                async: boolean;
+                params: {
                     type: string;
-                    declarations: {
+                    name: string;
+                    typeAnnotation: {
                         type: string;
-                        id: {
+                        typeAnnotation: {
                             type: string;
-                            name: string;
+                            typeName: {
+                                type: string;
+                                name: string;
+                            };
+                            typeParameters: {
+                                type: string;
+                                params: {
+                                    type: string;
+                                    types: ({
+                                        type: string;
+                                        typeName: {
+                                            type: string;
+                                            name: string;
+                                        };
+                                    } | {
+                                        type: string;
+                                        typeName?: undefined;
+                                    })[];
+                                }[];
+                            };
                         };
-                        init: {
+                    };
+                }[];
+                body: {
+                    type: string;
+                    body: ({
+                        type: string;
+                        declarations: {
+                            type: string;
+                            id: {
+                                type: string;
+                                name: string;
+                            };
+                            init: {
+                                type: string;
+                                callee: {
+                                    type: string;
+                                    name: string;
+                                };
+                                arguments: any[];
+                            };
+                        }[];
+                        kind: string;
+                        argument?: undefined;
+                    } | {
+                        type: string;
+                        argument: {
                             type: string;
                             callee: {
                                 type: string;
                                 name: string;
                             };
-                            arguments: any[];
-                        };
-                    }[];
-                    kind: string;
-                    argument?: undefined;
-                } | {
-                    type: string;
-                    argument: {
-                        type: string;
-                        callee: {
-                            type: string;
-                            name: string;
-                        };
-                        arguments: {
-                            type: string;
-                            id: any;
-                            generator: boolean;
-                            async: boolean;
-                            params: any[];
-                            body: {
+                            arguments: {
                                 type: string;
+                                id: any;
+                                generator: boolean;
+                                async: boolean;
+                                params: any[];
                                 body: {
                                     type: string;
-                                    test: {
+                                    body: {
                                         type: string;
-                                        object: {
+                                        test: {
                                             type: string;
-                                            name: string;
-                                        };
-                                        computed: boolean;
-                                        property: {
-                                            type: string;
-                                            name: string;
-                                        };
-                                    };
-                                    consequent: {
-                                        type: string;
-                                        body: ({
-                                            type: string;
-                                            test: {
+                                            object: {
                                                 type: string;
-                                                callee: {
-                                                    type: string;
-                                                    object: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    computed: boolean;
-                                                    property: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                };
-                                                arguments: {
-                                                    type: string;
-                                                    object: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    computed: boolean;
-                                                    property: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                }[];
+                                                name: string;
                                             };
-                                            consequent: {
+                                            computed: boolean;
+                                            property: {
                                                 type: string;
-                                                body: {
+                                                name: string;
+                                            };
+                                        };
+                                        consequent: {
+                                            type: string;
+                                            body: ({
+                                                type: string;
+                                                test: {
                                                     type: string;
-                                                    argument: {
+                                                    callee: {
+                                                        type: string;
+                                                        object: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                        computed: boolean;
+                                                        property: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                    };
+                                                    arguments: {
+                                                        type: string;
+                                                        object: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                        computed: boolean;
+                                                        property: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                    }[];
+                                                };
+                                                consequent: {
+                                                    type: string;
+                                                    body: {
+                                                        type: string;
+                                                        argument: {
+                                                            type: string;
+                                                            callee: {
+                                                                type: string;
+                                                                object: {
+                                                                    type: string;
+                                                                    name: string;
+                                                                };
+                                                                computed: boolean;
+                                                                property: {
+                                                                    type: string;
+                                                                    name: string;
+                                                                };
+                                                            };
+                                                            arguments: {
+                                                                type: string;
+                                                                object: {
+                                                                    type: string;
+                                                                    name: string;
+                                                                };
+                                                                computed: boolean;
+                                                                property: {
+                                                                    type: string;
+                                                                    name: string;
+                                                                };
+                                                            }[];
+                                                        };
+                                                    }[];
+                                                    directives: any[];
+                                                };
+                                                alternate: any;
+                                                declarations?: undefined;
+                                                kind?: undefined;
+                                                expression?: undefined;
+                                                argument?: undefined;
+                                            } | {
+                                                type: string;
+                                                declarations: {
+                                                    type: string;
+                                                    id: {
+                                                        type: string;
+                                                        name: string;
+                                                    };
+                                                    init: {
                                                         type: string;
                                                         callee: {
                                                             type: string;
-                                                            object: {
-                                                                type: string;
-                                                                name: string;
-                                                            };
-                                                            computed: boolean;
-                                                            property: {
-                                                                type: string;
-                                                                name: string;
-                                                            };
+                                                            name: string;
                                                         };
                                                         arguments: {
                                                             type: string;
@@ -192,28 +229,17 @@ export declare const createRpcVueQueryHookClientMap: (context: GenericParseConte
                                                         }[];
                                                     };
                                                 }[];
-                                                directives: any[];
-                                            };
-                                            alternate: any;
-                                            declarations?: undefined;
-                                            kind?: undefined;
-                                            expression?: undefined;
-                                            argument?: undefined;
-                                        } | {
-                                            type: string;
-                                            declarations: {
+                                                kind: string;
+                                                test?: undefined;
+                                                consequent?: undefined;
+                                                alternate?: undefined;
+                                                expression?: undefined;
+                                                argument?: undefined;
+                                            } | {
                                                 type: string;
-                                                id: {
-                                                    type: string;
-                                                    name: string;
-                                                };
-                                                init: {
+                                                expression: {
                                                     type: string;
                                                     callee: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    arguments: {
                                                         type: string;
                                                         object: {
                                                             type: string;
@@ -224,83 +250,60 @@ export declare const createRpcVueQueryHookClientMap: (context: GenericParseConte
                                                             type: string;
                                                             name: string;
                                                         };
-                                                    }[];
+                                                    };
+                                                    arguments: ({
+                                                        type: string;
+                                                        object: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                        computed: boolean;
+                                                        property: {
+                                                            type: string;
+                                                            name: string;
+                                                        };
+                                                        name?: undefined;
+                                                    } | {
+                                                        type: string;
+                                                        name: string;
+                                                        object?: undefined;
+                                                        computed?: undefined;
+                                                        property?: undefined;
+                                                    })[];
                                                 };
-                                            }[];
-                                            kind: string;
-                                            test?: undefined;
-                                            consequent?: undefined;
-                                            alternate?: undefined;
-                                            expression?: undefined;
-                                            argument?: undefined;
-                                        } | {
-                                            type: string;
-                                            expression: {
+                                                test?: undefined;
+                                                consequent?: undefined;
+                                                alternate?: undefined;
+                                                declarations?: undefined;
+                                                kind?: undefined;
+                                                argument?: undefined;
+                                            } | {
                                                 type: string;
-                                                callee: {
-                                                    type: string;
-                                                    object: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    computed: boolean;
-                                                    property: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                };
-                                                arguments: ({
-                                                    type: string;
-                                                    object: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    computed: boolean;
-                                                    property: {
-                                                        type: string;
-                                                        name: string;
-                                                    };
-                                                    name?: undefined;
-                                                } | {
+                                                argument: {
                                                     type: string;
                                                     name: string;
-                                                    object?: undefined;
-                                                    computed?: undefined;
-                                                    property?: undefined;
-                                                })[];
-                                            };
-                                            test?: undefined;
-                                            consequent?: undefined;
-                                            alternate?: undefined;
-                                            declarations?: undefined;
-                                            kind?: undefined;
-                                            argument?: undefined;
-                                        } | {
-                                            type: string;
-                                            argument: {
-                                                type: string;
-                                                name: string;
-                                            };
-                                            test?: undefined;
-                                            consequent?: undefined;
-                                            alternate?: undefined;
-                                            declarations?: undefined;
-                                            kind?: undefined;
-                                            expression?: undefined;
-                                        })[];
-                                        directives: any[];
-                                    };
-                                    alternate: any;
-                                }[];
-                                directives: any[];
-                            };
-                        }[];
-                    };
-                    declarations?: undefined;
-                    kind?: undefined;
-                })[];
+                                                };
+                                                test?: undefined;
+                                                consequent?: undefined;
+                                                alternate?: undefined;
+                                                declarations?: undefined;
+                                                kind?: undefined;
+                                                expression?: undefined;
+                                            })[];
+                                            directives: any[];
+                                        };
+                                        alternate: any;
+                                    }[];
+                                    directives: any[];
+                                };
+                            }[];
+                        };
+                        declarations?: undefined;
+                        kind?: undefined;
+                    })[];
+                };
             };
-        };
-    }[];
-    kind: string;
+        }[];
+        kind: string;
+    };
 }[];
