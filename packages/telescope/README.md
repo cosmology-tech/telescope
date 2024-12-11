@@ -515,8 +515,8 @@ See [Helper Functions Configuration](#helper-functions-configuration) for more i
 | option                           | description                                                             | defaults |
 | -------------------------------- | ----------------------------------------------------------------------  | ---------|
 | `vueQuery.enabled`             | if true, will create vue composables that use `@tanstack/vue-query` composables | `false`  |
-| `vueQuery.include.protos`      | if set, will create the hooks on matched proto filenames or patterns using minimatch           | `[]`     |
-| `vueQuery.include.packages`    | if set, will create the hooks on matched packages files using minimatch           | `[]`     |
+| `vueQuery.include.protos`      | if set, will create the composables on matched proto filenames or patterns using minimatch           | `[]`     |
+| `vueQuery.include.packages`    | if set, will create the composables on matched packages files using minimatch           | `[]`     |
 
 ### Typings and Formating
 
