@@ -11,7 +11,7 @@ import { join } from 'path';
 import { getTestProtoStore } from '../test-utils';
 import { TelescopeParseContext } from '../src/build';
 
-const outPath = __dirname + '/../../../__fixtures__/v-next/outputosmojs';
+const outPath = __dirname + '/../../../__fixtures__/v-next/outputvuecomposables';
 const store = getTestProtoStore();
 store.traverseAll();
 

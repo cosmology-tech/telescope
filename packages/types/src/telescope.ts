@@ -227,13 +227,13 @@ export interface TelescopeOpts {
     bundle?: boolean;
     serviceImplement?: {
       [
-        key:
-          | "Msg"
-          | "Query"
-          | "Service"
-          | "ReflectionService"
-          | "ABCIApplication"
-          | string
+      key:
+        | "Msg"
+        | "Query"
+        | "Service"
+        | "ReflectionService"
+        | "ABCIApplication"
+        | string
       ]: {
         include?: {
           patterns?: string[];
@@ -501,6 +501,15 @@ export const defaultTelescopeOptions: TelescopeOptions = {
   },
 
   reactQuery: {
+    enabled: false,
+    include: {
+      patterns: [],
+      packages: [],
+      protos: [],
+    },
+  },
+
+  vueQuery: {
     enabled: false,
     include: {
       patterns: [],
