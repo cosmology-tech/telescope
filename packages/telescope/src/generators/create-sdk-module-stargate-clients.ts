@@ -26,7 +26,7 @@ export const plugin = (
 
     const registryImports = [];
     const converterImports = [];
-    const clientFile = join(`${bundler.bundle.base}`, 'client.ts');
+    const clientFile = bundler.bundle.base.concat('-sdk-module-client.ts');
     bundler.files.push(clientFile);
 
     const ctxRef: ProtoRef = {

@@ -16,14 +16,13 @@ import { duplicateImportPathsWithExt, variableSlug, toPosixPath, isPackageInclud
 import { buildAllImportsFromGenericContext } from '../imports';
 import { writeAstToFile } from '../utils/files';
 import { BundlerFile } from '../types';
-import minimatch from "minimatch";
 
 export const plugin = (
     builder: TelescopeBuilder,
     allRegistries: BundlerFile[],
     allConverters: BundlerFile[]
 ) => {
-    builder.options.rpcClients.combinedClient.map((currentClient) => {
+    builder.options.rpcClients.clientStyle.customClientOption.map((currentClient) => {
 
         if (!allRegistries || !allRegistries.length) {
             return;
@@ -33,6 +32,7 @@ export const plugin = (
         const converterImports = [];
 
         const clientFile = currentClient.fileName
+        builder.files.push(clientFile);
         const ctxRef: ProtoRef = {
             absolute: '/',
             filename: '/',

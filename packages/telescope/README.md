@@ -443,9 +443,11 @@ See [LCD Clients](#lcd-clients) for more info.
 | `rpcClients.enabledServices`   | which services to enable                                                | [`Msg`,`Query`,`Service`]     |
 | `rpcClients.instantOps` |        will generate instant rpc operations in the file `service-ops.ts` under root folder, which contains customized classes having selected rpc methods    | `undefined`                        |
 | `rpcClients.serviceImplement` |     assign implement type of rpc methods, `Query` or `Tx`, by setting patterns under service types.       | `undefined`                        |
-  `rpcClients.combinedClient.name` | assign the client name like `{name}AminoConverters`, `get{name}SigningClient` etc | `undefined`
-| `rpcClients.combinedClient.fileName` | assign the file name of generated client in root directory | `undefined`
-| `rpcClients.combinedClient.include.patterns` | determine which proto files will be imported for the current client such as `cosmos.gov.v1beta1.**` | `undefined`
+  `rpcClients.clientStyle.useUpdatedClientStyle` | The default value is `false`, which sets the generated client to use the legacy style. Setting it to `true` applies the updated style and activates the remaining options in clientStyle. | `false`
+| `rpcClients.clientStyle.type` | A string array containing possible values: `all-client`, `sdk-module-client`, and `custom-client`. The value `all-client` generates an all-module-client file. The value `sdk-module-client` generates a client for the module specified by the `sdkModuleClientOption`. The value `custom-client` generates a customized client as specified by `customClientOption` | `undefined`
+`rpcClients.clientStyle.customClientOption.name` | assign the client name like `{name}AminoConverters`, `get{name}SigningClient` etc | `undefined`
+| `rpcClients.clientStyle.customClientOption.fileName` | assign the file name of generated client in root directory | `undefined`
+| `rpcClients.clientStyle.customClientOption.include.patterns` | determine which proto files will be imported for the current client such as `cosmos.gov.v1beta1.**` | `undefined`
 
 See [RPC Clients](#rpc-clients) for more info.
 
@@ -1063,44 +1065,41 @@ export class CosmosAuthAccount {
 }
 ```
 
-## Combined Clients Methods
+## Client Style Methods
 
-Using combined option to generate multiple module clients
+Use client style to define the client file generated according to the config
 
 For example, for this config:
 ```js
-{
-    combinedClient: [
-      {
-        name: "CosmosIbc",
-        fileName: "cosmos-ibc-client.ts",
-        include: {
-          patterns: [
-            "cosmos.gov.v1beta1*",
-            "cosmos.gov.v1*",
-            "ibc.core.channel.*",
-          ],
+clientStyle: {
+      useUpdatedClientStyle: true,
+      type: ['all-client', 'sdk-module-client', 'custom-client'],
+      customClientOption: [
+        {
+          name: "custom",
+          fileName: "custom-client.ts",
+          include: {
+            patterns: [
+              "cosmos.gov.v1beta1*",
+              "cosmos.gov.v1*",
+              "ibc.core.channel.*",
+            ],
+          },
         },
-      },
-      {
-        name: "AkashCosmos",
-        fileName: "akash-cosmos-client.ts",
-        include: {
-          patterns: [
-            "cosmos.group.v1*",
-            "cosmos.nft.v1beta1*",
-            "akash.**.v1beta2",
-            "akash.audit.v1beta1*",
-          ],
-        },
-      },
-    ],
-}
+      ],
+      sdkModuleClientOption: [
+        'akash',
+        'osmosis',
+        'cosmos',
+      ],
+    },
 ```
 
-There'll be client files (`cosmos-ibc-client.ts`, `akash-cosmos-client.ts`) generated in the root folder according to fileName in the setting.
-The combined client will import proto files accroding to include.patterns. (The protos can come from different modules)
-For example the cosmos-ibc-client.ts will be like: 
+There'll be client files (`all-module-client.ts`, `akash-sdk-module-client.ts`, `osmosis-sdk-module-client.ts`, `cosmos-sdk-module-client.ts`, `custom-client.ts`) generated in the root directory according to the setting.<br>
+The `all-module-client.ts` file consolidates all proto imports into one file and exports them as a single client.<br>
+All sdk module client files will be identical to the legacy `client.ts` files generated in each module directory, except they will be located in the root directory. <br>
+The custom client imports proto files based on `include.patterns`, allowing protos to originate from different modules.<br>
+For example the custom-client.ts will be like: 
 ```ts
 export const cosmosIbcAminoConverters = {
   ...cosmosGovV1TxAmino.AminoConverter,

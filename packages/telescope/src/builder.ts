@@ -23,7 +23,9 @@ import { plugin as createMsgFuncs } from './generators/create-msg-funcs';
 import { plugin as createReactQueryBundle } from './generators/create-react-query-bundle';
 import { plugin as createMobxBundle } from './generators/create-mobx-bundle';
 import { plugin as createStargateClients } from './generators/create-stargate-clients';
-import { plugin as createCombinedStargateClients } from './generators/create-combined-stargate-clients';
+import { plugin as createCustomStargateClients } from './generators/create-custom-stargate-clients';
+import { plugin as createAllStargateClients } from './generators/create-all-stargate-clients';
+import { plugin as createSdkModuleStargateClients } from './generators/create-sdk-module-stargate-clients';
 import { plugin as createBundle } from './generators/create-bundle';
 import { plugin as createIndex } from './generators/create-index';
 import { plugin as createHelpers } from './generators/create-helpers';
@@ -74,7 +76,6 @@ export class TelescopeBuilder {
   readonly rpcMsgClients: BundlerFile[] = [];
   readonly registries: BundlerFile[] = [];
   readonly stateManagers: Record<string, BundlerFile[]> = {};
-
   constructor({
     protoDirs,
     outPath,
@@ -84,11 +85,13 @@ export class TelescopeBuilder {
     const fixedDirs = protoDirs.map((directory) => {
       return toPosixPath(directory);
     });
+
     this.protoDirs = fixedDirs;
     this.outPath = resolve(toPosixPath(outPath));
     this.options = sanitizeOptions(options);
     this.store = store ?? new ProtoStore(fixedDirs, this.options);
     this.store.traverseAll();
+
   }
 
   context(ref) {
@@ -127,6 +130,7 @@ export class TelescopeBuilder {
     [].push.apply(this.converters, files);
   }
 
+
   async build() {
     // check warnings
     if (
@@ -154,6 +158,7 @@ export class TelescopeBuilder {
       // store bundleFile in filesToInclude
       const bundler = new Bundler(this, bundle);
 
+
       // [x] write out all TS files for package
       createTypes(this, bundler);
 
@@ -172,20 +177,35 @@ export class TelescopeBuilder {
       createRPCMsgClients(this, bundler);
       createPiniaStore(this, bundler);
 
-      // [x] write out one client for each base package, referencing the last two steps
-      createStargateClients(this, bundler);
-      if (bundler.registries) {
-        allRegistries.push(...bundler.registries)
-      }
-      if (bundler.converters) {
-        allConverters.push(...bundler.converters)
+      if (this.options.rpcClients.clientStyle.useUpdatedClientStyle) {
+        // generate sdk-module client file
+        if (this.options.rpcClients.clientStyle.type.includes('sdk-module-client') && this.options.rpcClients.clientStyle.sdkModuleClientOption.includes(bundler.bundle.base)) {
+          createSdkModuleStargateClients(this, bundler)
+        }
 
+        // store registry and converter for all/custom client generation
+        if (bundler.registries) {
+          allRegistries.push(...bundler.registries)
+        }
+        if (bundler.converters) {
+          allConverters.push(...bundler.converters)
+        }
+      } else {
+        // [x] write out one client for each base package, referencing the last two steps
+        createStargateClients(this, bundler);
       }
       return bundler;
     });
 
-    if (this.options.rpcClients.combinedClient && this.options.rpcClients.combinedClient.length !== 0) {
-      createCombinedStargateClients(this, allRegistries, allConverters)
+    if (this.options.rpcClients.clientStyle.useUpdatedClientStyle) {
+      // generate cutsom client file
+      if (this.options.rpcClients.clientStyle.type.includes('custom-client') && this.options.rpcClients.clientStyle.customClientOption && this.options.rpcClients.clientStyle.customClientOption.length !== 0) {
+        createCustomStargateClients(this, allRegistries, allConverters)
+      }
+      // generate all module client file
+      if (this.options.rpcClients.clientStyle.type.includes('all-client')) {
+        createAllStargateClients(this, allRegistries, allConverters)
+      }
     }
 
     // post run plugins
