@@ -10,6 +10,7 @@ import {
     createProtoEnumToJSON,
     createProtoEnumFromJSON,
     createProtoType,
+    cloneAndWrapFieldsWithComputedRef,
     createProtoInterfaceEncodedType,
     createProtoTypeType,
     createSDKType,
@@ -79,7 +80,17 @@ export const buildBaseTypeScriptInterface = (
     obj: any
 ) => {
 
-    context.body.push(createProtoType(context.proto, name, obj));
+    const protoType = createProtoType(context.proto, name, obj)
+    context.body.push(protoType);
+
+    if (context.options.vueQuery?.enabled) {
+    // create interfaces with fields of ComputedRef
+    // eg: interface QueryBalanceRequest {
+    //   address: ComputedRef<string>;
+    //   denom: ComputedRef<string>;
+    // }
+        context.body.push(cloneAndWrapFieldsWithComputedRef(protoType))
+    }
 
     if (context.options.aminoEncoding?.enabled && !context.options.aminoEncoding?.useLegacyInlineEncoding || context.options.prototypes?.methods?.fromProto || context.options.prototypes?.methods?.toProto) {
         context.body.push(createProtoTypeType(context.proto, name, obj));

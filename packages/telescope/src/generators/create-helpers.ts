@@ -10,6 +10,7 @@ import {
   getHelper,
   getHelperForBigint,
   getReactQueryHelper,
+  getVueQueryHelper,
   mobx,
   grpcGateway,
   grpcWeb,
@@ -63,6 +64,7 @@ export const plugin = (builder: TelescopeBuilder) => {
     builder.options.stargateClients.addGetTxRpc ||
     builder.options.includeExternalHelpers ||
     builder.options.reactQuery?.enabled ||
+    builder.options.vueQuery?.enabled ||
     builder.options?.helperFuncCreators?.enabled
   ) {
     // also react-query needs these...
@@ -111,6 +113,11 @@ export const plugin = (builder: TelescopeBuilder) => {
     } else {
       write(builder, "react-query.ts", getReactQueryHelper(builder.options));
     }
+  }
+
+  if (builder.options.vueQuery?.enabled) {
+    builder.files.push("vue-query.ts");
+    write(builder, "vue-query.ts", getVueQueryHelper(builder.options));
   }
 
   if (builder.options.mobx?.enabled) {
