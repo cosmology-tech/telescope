@@ -22,15 +22,18 @@ export const plugin = (
         return;
     }
 
-    // we have scopes!
-    builder.options.rpcClients.scoped?.forEach(rpc => {
-        if (rpc.dir !== bundler.bundle.base) return;
-        makeRPC(
+    // if no scopes, do them all!
+    if (
+        !builder.options.rpcClients.scoped ||
+        !builder.options.rpcClients.scoped.length ||
+        !builder.options.rpcClients.scopedIsExclusive
+    ) {
+        return makeAllRPCBundles(
             builder,
-            bundler,
-            rpc
+            bundler
         );
-    });
+    }
+
 };
 
 const getFileName = (dir, filename) => {
@@ -39,24 +42,54 @@ const getFileName = (dir, filename) => {
     return localname + '.ts';
 };
 
-const makeRPC = (
+const makeAllRPCBundles = (
     builder: TelescopeBuilder,
-    bundler: Bundler,
-    rpc: {
-        dir: string;
-        filename?: string;
-        packages: string[];
-        protos?: string[];
-        addToBundle: boolean;
-        methodNameQuery?: string;
-        methodNameTx?: string;
-    }
+    bundler: Bundler
 ) => {
-    const dir = rpc.dir;
-    const packages = rpc.packages;
-    const protos = rpc.protos;
-    const methodName = rpc.methodNameQuery ?? 'createRPCQueryClient'
-    const localname = getFileName(dir, rpc.filename ?? 'rpc');
+
+    if (!builder.options.rpcClients.bundle) return;
+
+    const dir = bundler.bundle.base;
+    const filename = 'rpc'
+
+    // refs with services
+    const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
+        const proto = getNestedProto(ref.traversed);
+
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
+            return;
+        }
+
+        return true;
+    });
+
+    const check = refs.filter((ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        return base === bundler.bundle.base;
+    });
+
+    if (!check.length) {
+        // if there are no services
+        // exit the plugin
+        return;
+    }
+
+    const packages = refs.reduce((m, ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        if (base === 'cosmos' || base === bundler.bundle.base)
+            return [...new Set([...m, ref.proto.package])];
+        return m;
+    }, []);
+
+    const methodName = 'createRPCQueryClient'
+    const localname = getFileName(dir, filename ?? 'rpc');
 
     const obj = {};
     builder.rpcQueryClients.forEach(file => {
@@ -66,7 +99,6 @@ const makeRPC = (
         // and defaults to base for each
         if (!isRefIncluded(createEmptyProtoRef(file.package, file.proto), {
             packages,
-            protos
         })) {
             return;
         }
@@ -134,9 +166,8 @@ const makeRPC = (
         .concat(importStmts)
         .concat(rpcast);
 
-    const filename = bundler.getFilename(localname);
-    bundler.writeAst(prog, filename);
-    if (rpc.addToBundle) {
-        bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
-    }
+    const writeFilename = bundler.getFilename(localname);
+    bundler.writeAst(prog, writeFilename);
+    bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
+
 };

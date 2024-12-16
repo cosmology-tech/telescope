@@ -14,8 +14,11 @@ import { plugin as createRegistries } from './generators/create-registries';
 import { plugin as createLCDClients } from './generators/create-lcd-clients';
 import { plugin as createAggregatedLCDClient } from './generators/create-aggregated-lcd-client';
 import { plugin as createLCDClientsScoped } from './generators/create-lcd-client-scoped';
+import { plugin as createLCDClientsAll } from './generators/create-lcd-client-all';
 import { plugin as createRPCQueryClientsScoped } from './generators/create-rpc-query-client-scoped';
+import { plugin as createRPCQueryClientsAll } from './generators/create-rpc-query-client-all';
 import { plugin as createRPCMsgClientsScoped } from './generators/create-rpc-msg-client-scoped';
+import { plugin as createRPCMsgClientsAll } from './generators/create-rpc-msg-client-all';
 import { plugin as createRPCQueryClients } from './generators/create-rpc-query-clients';
 import { plugin as createRPCMsgClients } from './generators/create-rpc-msg-clients';
 import { plugin as createQueryFuncs } from './generators/create-query-funcs';
@@ -210,10 +213,12 @@ export class TelescopeBuilder {
 
     // post run plugins
     bundles.forEach((bundler) => {
+      createLCDClientsAll(this, bundler);
       createLCDClientsScoped(this, bundler);
+      createRPCQueryClientsAll(this, bundler);
       createRPCQueryClientsScoped(this, bundler);
+      createRPCMsgClientsAll(this,bundler);
       createRPCMsgClientsScoped(this, bundler);
-
       createBundle(this, bundler);
     });
 
