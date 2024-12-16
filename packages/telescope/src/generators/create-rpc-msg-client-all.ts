@@ -23,15 +23,17 @@ export const plugin = (
         return;
     }
 
-    // we have scopes!
-    builder.options.rpcClients.scoped?.forEach(rpc => {
-        if (rpc.dir !== bundler.bundle.base) return;
-        makeRPC(
+    // if no scopes, do them all!
+    if (
+        !builder.options.rpcClients.scoped ||
+        !builder.options.rpcClients.scoped.length ||
+        !builder.options.rpcClients.scopedIsExclusive
+    ) {
+        return makeAllRPCBundles(
             builder,
-            bundler,
-            rpc
+            bundler
         );
-    });
+    }
 };
 
 const getFileName = (dir, filename) => {
@@ -40,23 +42,45 @@ const getFileName = (dir, filename) => {
     return localname + '.ts';
 };
 
-const makeRPC = (
+const makeAllRPCBundles = (
     builder: TelescopeBuilder,
-    bundler: Bundler,
-    rpc: {
-        dir: string;
-        filename?: string;
-        packages: string[];
-        addToBundle: boolean;
-        methodNameQuery?: string;
-        methodNameTx?: string;
-        isAll?: boolean;
-    }
+    bundler: Bundler
 ) => {
-    const dir = rpc.dir;
-    const packages = rpc.packages;
-    const methodName = rpc.methodNameTx ?? 'createRPCMsgClient'
-    const localname = getFileName(dir, rpc.filename ?? 'rpc');
+
+    if (!builder.options.rpcClients.bundle) return;
+
+    const dir = bundler.bundle.base;
+    const filename = 'rpc';
+
+    // refs with services
+    const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
+        const proto = getNestedProto(ref.traversed);
+        if (!proto?.Msg || proto.Msg?.type !== 'Service') {
+            return;
+        }
+        return true;
+    });
+
+    const check = refs.filter((ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        return base === bundler.bundle.base;
+    });
+
+    if (!check.length) {
+        // if there are no services
+        // exit the plugin
+        return;
+    }
+
+    const packages = refs.reduce((m, ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        if (base === 'cosmos' || base === bundler.bundle.base)
+            return [...new Set([...m, ref.proto.package])];
+        return m;
+    }, []);
+
+    const methodName = 'createRPCMsgClient'
+    const localname = getFileName(dir, filename ?? 'rpc');
 
     const obj = {};
     builder.rpcMsgClients.forEach(file => {
@@ -85,9 +109,7 @@ const makeRPC = (
     let txRpcImport: any = [];
     switch (builder.options?.rpcClients?.type) {
         case "grpc-gateway":
-        // TODO no working scoped clients for grpc-gateway right now
         case "tendermint":
-            // TODO add addUtil to generic context
             ctx.proto.addUtil('Rpc');
 
             rpcast = createScopedRpcFactory(
@@ -97,12 +119,12 @@ const makeRPC = (
                 ctx.options
             );
 
-            if(rpc.isAll && ctx.proto.pluginValue('env') === 'v-next' && ctx.proto.pluginValue('rpcClients.extensions') && ctx.proto.pluginValue('stargateClients.addGetTxRpc')) {
-              const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
+            if (ctx.proto.pluginValue('env') === 'v-next' && ctx.proto.pluginValue('rpcClients.extensions') && ctx.proto.pluginValue('stargateClients.addGetTxRpc')) {
+                const txRpcName = 'getSigning' + pascal(bundler.bundle.base + 'TxRpc');
 
-              txRpcImport = importStmt([txRpcName], `./client${ctx.options.restoreImportExtension ?? ""}`)
+                txRpcImport = importStmt([txRpcName], `./client${ctx.options.restoreImportExtension ?? ""}`)
 
-              msgExt = createRpcMsgExtension(ctx.proto, txRpcName);
+                msgExt = createRpcMsgExtension(ctx.proto, txRpcName);
             }
             break;
         case "grpc-web":
@@ -139,9 +161,7 @@ const makeRPC = (
         .concat(rpcast)
         .concat(msgExt);
 
-    const filename = bundler.getFilename(localname);
-    bundler.writeAst(prog, filename);
-    if (rpc.addToBundle) {
-        bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
-    }
+    const writeFilename = bundler.getFilename(localname);
+    bundler.writeAst(prog, writeFilename);
+    bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
 };

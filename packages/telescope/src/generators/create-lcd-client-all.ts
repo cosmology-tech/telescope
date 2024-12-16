@@ -19,15 +19,17 @@ export const plugin = (
         return;
     }
 
-    // we have scopes!
-    builder.options.lcdClients.scoped?.forEach(lcd => {
-        if (lcd.dir !== bundler.bundle.base) return;
-        makeLCD(
+    // if no scopes, do them all!
+    if (
+        !builder.options.lcdClients.scoped ||
+        !builder.options.lcdClients.scoped.length ||
+        !builder.options.lcdClients.scopedIsExclusive
+    ) {
+        return createAllLCDBundles(
             builder,
-            bundler,
-            lcd
+            bundler
         );
-    });
+    }
 };
 
 const getFileName = (dir, filename) => {
@@ -36,23 +38,53 @@ const getFileName = (dir, filename) => {
     return localname + '.ts';
 };
 
-const makeLCD = (
+const createAllLCDBundles = (
     builder: TelescopeBuilder,
-    bundler: Bundler,
-    lcd: {
-        dir: string;
-        filename?: string;
-        packages: string[];
-        protos?: string[];
-        addToBundle: boolean;
-        methodName?: string;
-    }
+    bundler: Bundler
 ) => {
-    const dir = lcd.dir;
-    const packages = lcd.packages;
-    const protos = lcd.protos;
-    const methodName = lcd.methodName ?? 'createLCDClient'
-    const localname = getFileName(dir, lcd.filename);
+
+    if (!builder.options.lcdClients.bundle) return;
+
+    const dir = bundler.bundle.base;
+    const filename = 'lcd.ts'
+
+    // refs with services
+    const refs = builder.store.getProtos().filter((ref: ProtoRef) => {
+        const proto = getNestedProto(ref.traversed);
+        //// Anything except Msg Service OK...
+        const allowedRpcServices = builder.options.rpcClients.enabledServices.filter(a => a !== 'Msg');
+        const found = allowedRpcServices.some(svc => {
+            return proto?.[svc] &&
+                proto[svc]?.type === 'Service'
+        });
+
+        if (!found) {
+            return;
+        }
+
+        return true;
+    });
+
+    const check = refs.filter((ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        return base === bundler.bundle.base;
+    });
+
+    if (!check.length) {
+        // if there are no services
+        // exit the plugin
+        return;
+    }
+
+    const packages = refs.reduce((m, ref: ProtoRef) => {
+        const [base] = ref.proto.package.split('.');
+        if (base === 'cosmos' || base === bundler.bundle.base)
+            return [...new Set([...m, ref.proto.package])];
+        return m;
+    }, []);
+
+    const methodName = 'createLCDClient'
+    const localname = getFileName(dir, filename);
 
     const obj = {};
     builder.lcdClients.forEach(file => {
@@ -63,7 +95,6 @@ const makeLCD = (
         // if (!packages.includes(file.package)) {
         if (!isRefIncluded(createEmptyProtoRef(file.package, file.proto), {
             packages,
-            protos
         })) {
             return;
         }
@@ -100,10 +131,9 @@ const makeLCD = (
         .concat(importStmts)
         .concat(lcdast);
 
-    const filename = bundler.getFilename(localname);
-    bundler.writeAst(prog, filename);
+    const writeFilename = bundler.getFilename(localname);
+    bundler.writeAst(prog, writeFilename);
 
-    if (lcd.addToBundle) {
-        bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
-    }
+    bundler.addToBundleToPackage(`${dir}.ClientFactory`, localname)
+
 };
