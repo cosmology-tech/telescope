@@ -2,6 +2,7 @@ import { LabelDescriptor, LabelDescriptorSDKType } from "./label.js";
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
 import { JsonSafe } from "../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * A description of a log type. Example in YAML format:
@@ -37,6 +38,12 @@ export interface LogDescriptor {
    * the user interface and should be concise.
    */
   displayName: string;
+}
+export interface ReactiveLogDescriptor {
+  name: ComputedRef<string>;
+  labels: ComputedRef<LabelDescriptor[]>;
+  description: ComputedRef<string>;
+  displayName: ComputedRef<string>;
 }
 export interface LogDescriptorProtoMsg {
   typeUrl: "/google.api.LogDescriptor";

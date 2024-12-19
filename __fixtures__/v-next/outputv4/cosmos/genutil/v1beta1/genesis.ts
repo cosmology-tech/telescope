@@ -1,11 +1,15 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { bytesFromBase64, base64FromBytes, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.genutil.v1beta1";
 /** GenesisState defines the raw genesis transaction in JSON. */
 export interface GenesisState {
   /** gen_txs defines the genesis transactions. */
   genTxs: Uint8Array[];
+}
+export interface ReactiveGenesisState {
+  genTxs: ComputedRef<Uint8Array[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.genutil.v1beta1.GenesisState";

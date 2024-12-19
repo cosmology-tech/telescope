@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.claim.v1beta1";
 export enum Action {
   ActionAddLiquidity = 0,
@@ -57,6 +58,11 @@ export interface ClaimRecord {
    * index of bool in array refers to action enum #
    */
   actionCompleted: boolean[];
+}
+export interface ReactiveClaimRecord {
+  address: ComputedRef<string>;
+  initialClaimableAmount: ComputedRef<Coin[]>;
+  actionCompleted: ComputedRef<boolean[]>;
 }
 export interface ClaimRecordProtoMsg {
   typeUrl: "/osmosis.claim.v1beta1.ClaimRecord";

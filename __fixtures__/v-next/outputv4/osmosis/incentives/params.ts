@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
 import { JsonSafe } from "../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.incentives";
 /** Params holds parameters for the incentives module */
 export interface Params {
@@ -9,6 +10,9 @@ export interface Params {
    * (day, week, etc.)
    */
   distrEpochIdentifier: string;
+}
+export interface ReactiveParams {
+  distrEpochIdentifier: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.incentives.Params";

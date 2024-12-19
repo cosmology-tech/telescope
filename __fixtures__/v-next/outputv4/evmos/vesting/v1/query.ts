@@ -2,11 +2,15 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.vesting.v1";
 /** QueryBalancesRequest is the request type for the Query/Balances RPC method. */
 export interface QueryBalancesRequest {
   /** address of the clawback vesting account */
   address: string;
+}
+export interface ReactiveQueryBalancesRequest {
+  address: ComputedRef<string>;
 }
 export interface QueryBalancesRequestProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesRequest";
@@ -27,6 +31,11 @@ export interface QueryBalancesResponse {
   unvested: Coin[];
   /** current amount of vested tokens */
   vested: Coin[];
+}
+export interface ReactiveQueryBalancesResponse {
+  locked: ComputedRef<Coin[]>;
+  unvested: ComputedRef<Coin[]>;
+  vested: ComputedRef<Coin[]>;
 }
 export interface QueryBalancesResponseProtoMsg {
   typeUrl: "/evmos.vesting.v1.QueryBalancesResponse";

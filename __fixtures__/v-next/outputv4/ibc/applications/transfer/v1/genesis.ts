@@ -2,12 +2,18 @@ import { DenomTrace, DenomTraceSDKType, Params, ParamsSDKType } from "./transfer
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
 import { JsonSafe } from "../../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.applications.transfer.v1";
 /** GenesisState defines the ibc-transfer genesis state */
 export interface GenesisState {
   portId: string;
   denomTraces: DenomTrace[];
   params: Params;
+}
+export interface ReactiveGenesisState {
+  portId: ComputedRef<string>;
+  denomTraces: ComputedRef<DenomTrace[]>;
+  params: ComputedRef<Params>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/ibc.applications.transfer.v1.GenesisState";

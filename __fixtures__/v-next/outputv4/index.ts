@@ -25,6 +25,7 @@ export * from "./hooks.js";
 export * from "./mobx.stores.js";
 export * from "./extern.js";
 export * from "./react-query.js";
+export * from "./vue-query.js";
 export * from "./mobx.js";
 export * from "./pinia-endpoint.js";
 export * from "./json-safe.js";

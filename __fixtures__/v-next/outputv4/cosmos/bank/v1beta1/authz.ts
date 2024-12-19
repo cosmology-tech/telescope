@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.bank.v1beta1";
 /**
  * SendAuthorization allows the grantee to spend up to spend_limit coins from
@@ -11,6 +12,9 @@ export const protobufPackage = "cosmos.bank.v1beta1";
  */
 export interface SendAuthorization {
   spendLimit: Coin[];
+}
+export interface ReactiveSendAuthorization {
+  spendLimit: ComputedRef<Coin[]>;
 }
 export interface SendAuthorizationProtoMsg {
   typeUrl: "/cosmos.bank.v1beta1.SendAuthorization";

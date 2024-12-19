@@ -2,6 +2,7 @@ import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { Decimal } from "@cosmjs/math";
 import { isSet, DeepPartial } from "../../helpers.js";
 import { JsonSafe } from "../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.superfluid";
 /** Params holds parameters for the superfluid module */
 export interface Params {
@@ -12,6 +13,9 @@ export interface Params {
    * volatilities, and have base staking be 'resistant' to volatility.
    */
   minimumRiskFactor: string;
+}
+export interface ReactiveParams {
+  minimumRiskFactor: ComputedRef<string>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/osmosis.superfluid.Params";

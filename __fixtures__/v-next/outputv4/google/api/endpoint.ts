@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
 import { JsonSafe } from "../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.api";
 /**
  * `Endpoint` describes a network endpoint of a service that serves a set of
@@ -51,6 +52,12 @@ export interface Endpoint {
    * allowed to proceed.
    */
   allowCors: boolean;
+}
+export interface ReactiveEndpoint {
+  name: ComputedRef<string>;
+  aliases: ComputedRef<string[]>;
+  target: ComputedRef<string>;
+  allowCors: ComputedRef<boolean>;
 }
 export interface EndpointProtoMsg {
   typeUrl: "/google.api.Endpoint";

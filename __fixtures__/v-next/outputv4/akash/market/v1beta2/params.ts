@@ -2,11 +2,16 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.market.v1beta2";
 /** Params is the params for the x/market module */
 export interface Params {
   bidMinDeposit: Coin;
   orderMaxBids: number;
+}
+export interface ReactiveParams {
+  bidMinDeposit: ComputedRef<Coin>;
+  orderMaxBids: ComputedRef<number>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/akash.market.v1beta2.Params";

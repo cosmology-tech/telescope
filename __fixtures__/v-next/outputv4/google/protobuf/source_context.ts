@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../binary.js";
 import { isSet, DeepPartial } from "../../helpers.js";
 import { JsonSafe } from "../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "google.protobuf";
 /**
  * `SourceContext` represents information about the source of a
@@ -12,6 +13,9 @@ export interface SourceContext {
    * protobuf element.  For example: `"google/protobuf/source_context.proto"`.
    */
   fileName: string;
+}
+export interface ReactiveSourceContext {
+  fileName: ComputedRef<string>;
 }
 export interface SourceContextProtoMsg {
   typeUrl: "/google.protobuf.SourceContext";
