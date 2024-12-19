@@ -34,8 +34,10 @@ const options: TelescopeOptions = {
   },
 
   interfaces: {
-    enabled: false,
-    useUnionTypes: false
+    // enabled: false,
+    useUnionTypes: false,
+    enabled: true,
+    useGlobalDecoderRegistry: true
   },
 
   prototypes: {
@@ -168,9 +170,8 @@ const options: TelescopeOptions = {
   vueQuery: {
     enabled: true,
     include: {
-      patterns: ['osmosis/**/gamm/**/query.proto'],
-      protos: ['akash/cert/v1beta2/query.proto'],
-      packages: ['cosmos.bank.v1beta1', 'cosmos.staking.v1beta1', 'cosmos.gov.v1']
+      protos: ['osmosis/**/query.proto', 'cosmos/**/query.proto'],
+      packages: ['cosmos.bank.v1beta1']
     }
   },
 

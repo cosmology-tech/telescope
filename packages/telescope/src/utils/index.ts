@@ -83,14 +83,10 @@ export const UTILS: { [key: string]: UtilValue } = {
   useRpcClient: '__react-query__',
   useTendermintClient: '__react-query__',
   ReactQueryParams: '__react-query__',
-  VueQueryParams: {
-    type: 'import',
-    name: 'VueQueryParams',
-    path: '../../../vue-query'
-  },
-  buildUseMutation:'__react-query__',
-  UseQueryParams:'__react-query__',
-  buildUseQuery:'__react-query__',
+  VueQueryParams: '__vue-query__',
+  buildUseMutation: '__react-query__',
+  UseQueryParams: '__react-query__',
+  buildUseQuery: '__react-query__',
   UseQueryOptions: '@tanstack/react-query',
   QueryStore: '__mobx__',
   MobxResponse: '__mobx__',
@@ -105,19 +101,20 @@ export const UTILS: { [key: string]: UtilValue } = {
   BinaryWriter: '__binary__',
   TelescopeGeneratedType: '__types__',
   GlobalDecoderRegistry: '__registry__',
-  buildTx:'__helper-func-types__',
-  ISigningClient:'__helper-func-types__',
-  buildQuery:'__helper-func-types__',
-  SigningClientResolver:'__helper-func-types__',
-  RpcResolver:'__helper-func-types__',
-  toConverters:'@interchainjs/cosmos/utils',
-  toEncoders:'@interchainjs/cosmos/utils'
+  buildTx: '__helper-func-types__',
+  ISigningClient: '__helper-func-types__',
+  buildQuery: '__helper-func-types__',
+  SigningClientResolver: '__helper-func-types__',
+  RpcResolver: '__helper-func-types__',
+  toConverters: '@interchainjs/cosmos/utils',
+  toEncoders: '@interchainjs/cosmos/utils'
 };
 
 export const UTIL_HELPERS = [
   '__helpers__',
   '__extern__',
   '__react-query__',
+  '__vue-query__',
   '__mobx__',
   '__binary__',
   '__pinia-endpoint__',
@@ -137,8 +134,8 @@ export const fixlocalpaths = (imports: ImportObj[]) => {
       ...imp,
       path:
         UTIL_HELPERS.includes(imp.path) ||
-        imp.path.startsWith('.') ||
-        imp.path.startsWith('@')
+          imp.path.startsWith('.') ||
+          imp.path.startsWith('@')
           ? fixedPath
           : `./${fixedPath}`,
     };

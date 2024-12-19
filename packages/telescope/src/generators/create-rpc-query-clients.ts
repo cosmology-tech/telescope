@@ -302,7 +302,7 @@ export const plugin = (
         if (c.proto.pluginValue('vueQuery.enabled')) {
             const reactiveRequests = []
             serviceImports['./query']?.forEach(servImp => {
-                if (/^Query.*Request$/.test(servImp)) {
+                if (/^.*Request$/.test(servImp)) {
                     reactiveRequests.push(`Reactive${servImp}`)
                 }
             })
