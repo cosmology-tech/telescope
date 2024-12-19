@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.deployment.v1beta2";
 /**
  * DepositDeploymentAuthorization allows the grantee to deposit up to spend_limit coins from
@@ -13,6 +14,9 @@ export interface DepositDeploymentAuthorization {
    * the purpose of deployment.
    */
   spendLimit: Coin;
+}
+export interface ReactiveDepositDeploymentAuthorization {
+  spendLimit: ComputedRef<Coin>;
 }
 export interface DepositDeploymentAuthorizationProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.DepositDeploymentAuthorization";

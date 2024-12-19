@@ -2,10 +2,14 @@ import { Provider, ProviderSDKType } from "./provider.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, Exact } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.provider.v1beta2";
 /** GenesisState defines the basic genesis state used by provider module */
 export interface GenesisState {
   providers: Provider[];
+}
+export interface ReactiveGenesisState {
+  providers: ComputedRef<Provider[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.provider.v1beta2.GenesisState";

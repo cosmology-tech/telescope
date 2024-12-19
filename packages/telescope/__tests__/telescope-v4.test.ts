@@ -188,6 +188,15 @@ const options: TelescopeOptions = {
     }
   },
 
+  vueQuery: {
+    enabled: true,
+    include: {
+      patterns: ['osmosis/**/gamm/**/query.proto'],
+      protos: ['akash/cert/v1beta2/query.proto'],
+      packages: ['cosmos.bank.v1beta1', 'cosmos.staking.v1beta1', 'cosmos.gov.v1']
+    }
+  },
+
   mobx: {
     enabled: true,
     include: {

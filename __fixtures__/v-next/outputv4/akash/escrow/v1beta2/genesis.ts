@@ -2,11 +2,16 @@ import { Account, AccountSDKType, FractionalPayment, FractionalPaymentSDKType } 
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, Exact } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.escrow.v1beta2";
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisState {
   accounts: Account[];
   payments: FractionalPayment[];
+}
+export interface ReactiveGenesisState {
+  accounts: ComputedRef<Account[]>;
+  payments: ComputedRef<FractionalPayment[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.escrow.v1beta2.GenesisState";

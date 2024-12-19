@@ -2,6 +2,7 @@ import { Height, HeightSDKType } from "../../../core/client/v1/client.js";
 import { BinaryReader, BinaryWriter } from "../../../../binary.js";
 import { isSet, DeepPartial } from "../../../../helpers.js";
 import { JsonSafe } from "../../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "ibc.lightclients.localhost.v1";
 /**
  * ClientState defines a loopback (localhost) client. It requires (read-only)
@@ -12,6 +13,10 @@ export interface ClientState {
   chainId: string;
   /** self latest block height */
   height: Height;
+}
+export interface ReactiveClientState {
+  chainId: ComputedRef<string>;
+  height: ComputedRef<Height>;
 }
 export interface ClientStateProtoMsg {
   typeUrl: "/ibc.lightclients.localhost.v1.ClientState";

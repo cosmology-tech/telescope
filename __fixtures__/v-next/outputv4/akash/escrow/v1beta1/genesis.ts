@@ -2,11 +2,16 @@ import { Account, AccountSDKType, Payment, PaymentSDKType } from "./types.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, Exact } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.escrow.v1beta1";
 /** GenesisState defines the basic genesis state used by escrow module */
 export interface GenesisState {
   accounts: Account[];
   payments: Payment[];
+}
+export interface ReactiveGenesisState {
+  accounts: ComputedRef<Account[]>;
+  payments: ComputedRef<Payment[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.escrow.v1beta1.GenesisState";

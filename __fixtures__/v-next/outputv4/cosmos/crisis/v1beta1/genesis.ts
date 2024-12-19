@@ -2,6 +2,7 @@ import { Coin, CoinSDKType } from "../../base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.crisis.v1beta1";
 /** GenesisState defines the crisis module's genesis state. */
 export interface GenesisState {
@@ -10,6 +11,9 @@ export interface GenesisState {
    * module.
    */
   constantFee: Coin;
+}
+export interface ReactiveGenesisState {
+  constantFee: ComputedRef<Coin>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.crisis.v1beta1.GenesisState";

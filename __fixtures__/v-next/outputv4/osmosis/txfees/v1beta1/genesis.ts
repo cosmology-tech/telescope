@@ -2,11 +2,16 @@ import { FeeToken, FeeTokenSDKType } from "./feetoken.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.txfees.v1beta1";
 /** GenesisState defines the txfees module's genesis state. */
 export interface GenesisState {
   basedenom: string;
   feetokens: FeeToken[];
+}
+export interface ReactiveGenesisState {
+  basedenom: ComputedRef<string>;
+  feetokens: ComputedRef<FeeToken[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/osmosis.txfees.v1beta1.GenesisState";

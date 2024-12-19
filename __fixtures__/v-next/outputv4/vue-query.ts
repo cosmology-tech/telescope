@@ -4,7 +4,7 @@
 * and run the transpile command or npm scripts command that is used to regenerate this bundle.
 */
 
-import { getRpcClient } from './extern'
+import { getRpcClient } from './extern.js'
 import {
     useQuery,
     UseQueryOptions,
@@ -12,7 +12,7 @@ import {
 import { Ref, isRef } from 'vue'
 
 import { HttpEndpoint, ProtobufRpcClient } from '@cosmjs/stargate';
-import { Tendermint34Client } from '@cosmjs/tendermint-rpc';
+import { CometClient, connectComet, Tendermint34Client, Tendermint37Client } from '@cosmjs/tendermint-rpc';
 
 export interface VueQueryParams<TResponse, TData = TResponse> {
     options?: Omit<UseQueryOptions<TData, Error, TData>, 'queryKey'>;
@@ -58,7 +58,7 @@ export const useRpcClient = <TData = ProtobufRpcClient>({
 	return useQuery<ProtobufRpcClient | undefined, Error, TData>(params);
 };
 
-interface UseTendermintClient extends VueQueryParams<Tendermint34Client> {
+interface UseTendermintClient extends VueQueryParams<Tendermint34Client | Tendermint37Client | CometClient> {
     rpcEndpoint: Ref<string | HttpEndpoint>;
 }
 
@@ -69,9 +69,9 @@ export const useTendermintClient = ({
     rpcEndpoint,
     options,
 }: UseTendermintClient) => {
-    const { data: client } = useQuery<Tendermint34Client, Error, Tendermint34Client>({
+    const { data: client } = useQuery<Tendermint34Client | Tendermint37Client | CometClient, Error, Tendermint34Client | Tendermint37Client | CometClient>(
         queryKey: ['client', 'tendermint', rpcEndpoint],
-        queryFn: () => Tendermint34Client.connect(rpcEndpoint.value),
+        queryFn: () => connectComet(rpcEndpoint.value),
 		// allow overriding
 		throwOnError: (e) => {
 			throw new Error(`Failed to connect to ${rpcEndpoint}` + '\n' + e)

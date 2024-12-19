@@ -3,7 +3,7 @@ import { Params, ParamsSDKType, ValidatorSigningInfo, ValidatorSigningInfoSDKTyp
 import { Rpc } from "../../../helpers.js";
 import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType } from "./query.js";
+import { QueryParamsRequest, QueryParamsRequestSDKType, QueryParamsResponse, QueryParamsResponseSDKType, QuerySigningInfoRequest, QuerySigningInfoRequestSDKType, QuerySigningInfoResponse, QuerySigningInfoResponseSDKType, QuerySigningInfosRequest, QuerySigningInfosRequestSDKType, QuerySigningInfosResponse, QuerySigningInfosResponseSDKType, ReactiveQueryParamsRequest, ReactiveQuerySigningInfoRequest, ReactiveQuerySigningInfosRequest } from "./query.js";
 /** Query provides defines the gRPC querier service */
 export interface Query {
   /** Params queries the parameters of slashing module */

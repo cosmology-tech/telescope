@@ -2,10 +2,14 @@ import { AuditedAttributes, AuditedAttributesSDKType } from "./audit.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, Exact } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.audit.v1beta2";
 /** GenesisState defines the basic genesis state used by audit module */
 export interface GenesisState {
   attributes: AuditedAttributes[];
+}
+export interface ReactiveGenesisState {
+  attributes: ComputedRef<AuditedAttributes[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.audit.v1beta2.GenesisState";

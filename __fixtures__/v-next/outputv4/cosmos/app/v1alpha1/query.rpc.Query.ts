@@ -2,7 +2,7 @@ import { Config, ConfigSDKType } from "./config.js";
 import { Rpc } from "../../../helpers.js";
 import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType } from "./query.js";
+import { QueryConfigRequest, QueryConfigRequestSDKType, QueryConfigResponse, QueryConfigResponseSDKType, ReactiveQueryConfigRequest } from "./query.js";
 /** Query is the app module query service. */
 export interface Query {
   /** Config returns the current app config. */

@@ -2,6 +2,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.crypto.multisig";
 /**
  * LegacyAminoPubKey specifies a public key type
@@ -11,6 +12,10 @@ export const protobufPackage = "cosmos.crypto.multisig";
 export interface LegacyAminoPubKey {
   threshold: number;
   publicKeys: Any[];
+}
+export interface ReactiveLegacyAminoPubKey {
+  threshold: ComputedRef<number>;
+  publicKeys: ComputedRef<Any[]>;
 }
 export interface LegacyAminoPubKeyProtoMsg {
   typeUrl: "/cosmos.crypto.multisig.LegacyAminoPubKey";

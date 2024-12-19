@@ -2,10 +2,14 @@ import { Coin, CoinSDKType } from "../../../cosmos/base/v1beta1/coin.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.deployment.v1beta2";
 /** Params defines the parameters for the x/deployment package */
 export interface Params {
   deploymentMinDeposit: Coin;
+}
+export interface ReactiveParams {
+  deploymentMinDeposit: ComputedRef<Coin>;
 }
 export interface ParamsProtoMsg {
   typeUrl: "/akash.deployment.v1beta2.Params";

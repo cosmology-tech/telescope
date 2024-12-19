@@ -1,6 +1,7 @@
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "evmos.fees.v1";
 /**
  * DevFeeInfo defines an instance that organizes fee distribution conditions
@@ -16,6 +17,11 @@ export interface DevFeeInfo {
    * it defaults to deployer_address
    */
   withdrawAddress: string;
+}
+export interface ReactiveDevFeeInfo {
+  contractAddress: ComputedRef<string>;
+  deployerAddress: ComputedRef<string>;
+  withdrawAddress: ComputedRef<string>;
 }
 export interface DevFeeInfoProtoMsg {
   typeUrl: "/evmos.fees.v1.DevFeeInfo";

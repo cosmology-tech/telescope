@@ -3,7 +3,7 @@ import { Any, AnySDKType } from "../../../google/protobuf/any.js";
 import { Rpc } from "../../../helpers.js";
 import { BinaryReader } from "../../../binary.js";
 import { QueryClient, createProtobufRpcClient } from "@cosmjs/stargate";
-import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType } from "./query.js";
+import { QueryEvidenceRequest, QueryEvidenceRequestSDKType, QueryEvidenceResponse, QueryEvidenceResponseSDKType, QueryAllEvidenceRequest, QueryAllEvidenceRequestSDKType, QueryAllEvidenceResponse, QueryAllEvidenceResponseSDKType, ReactiveQueryEvidenceRequest, ReactiveQueryAllEvidenceRequest } from "./query.js";
 /** Query defines the gRPC querier service. */
 export interface Query {
   /** Evidence queries evidence based on evidence hash. */

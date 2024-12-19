@@ -2,10 +2,14 @@ import { GrantAuthorization, GrantAuthorizationSDKType } from "./authz.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.authz.v1beta1";
 /** GenesisState defines the authz module's genesis state. */
 export interface GenesisState {
   authorization: GrantAuthorization[];
+}
+export interface ReactiveGenesisState {
+  authorization: ComputedRef<GrantAuthorization[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.authz.v1beta1.GenesisState";

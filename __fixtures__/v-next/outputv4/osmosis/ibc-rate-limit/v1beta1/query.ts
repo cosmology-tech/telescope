@@ -2,9 +2,11 @@ import { Params, ParamsSDKType } from "./params.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial, isSet } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "osmosis.ibcratelimit.v1beta1";
 /** QueryParamsRequest is the request type for the Query/Params RPC method. */
 export interface QueryParamsRequest {}
+export interface ReactiveQueryParamsRequest {}
 export interface QueryParamsRequestProtoMsg {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.QueryParamsRequest";
   value: Uint8Array;
@@ -15,6 +17,9 @@ export interface QueryParamsRequestSDKType {}
 export interface QueryParamsResponse {
   /** params defines the parameters of the module. */
   params: Params;
+}
+export interface ReactiveQueryParamsResponse {
+  params: ComputedRef<Params>;
 }
 export interface QueryParamsResponseProtoMsg {
   typeUrl: "/osmosis.ibcratelimit.v1beta1.QueryParamsResponse";

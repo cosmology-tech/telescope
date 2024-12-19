@@ -2,11 +2,16 @@ import { Certificate, CertificateSDKType } from "./cert.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { isSet, DeepPartial, Exact } from "../../../helpers.js";
 import { JsonSafe } from "../../../json-safe.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "akash.cert.v1beta2";
 /** GenesisCertificate defines certificate entry at genesis */
 export interface GenesisCertificate {
   owner: string;
   certificate: Certificate;
+}
+export interface ReactiveGenesisCertificate {
+  owner: ComputedRef<string>;
+  certificate: ComputedRef<Certificate>;
 }
 export interface GenesisCertificateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisCertificate";
@@ -20,6 +25,9 @@ export interface GenesisCertificateSDKType {
 /** GenesisState defines the basic genesis state used by cert module */
 export interface GenesisState {
   certificates: GenesisCertificate[];
+}
+export interface ReactiveGenesisState {
+  certificates: ComputedRef<GenesisCertificate[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/akash.cert.v1beta2.GenesisState";

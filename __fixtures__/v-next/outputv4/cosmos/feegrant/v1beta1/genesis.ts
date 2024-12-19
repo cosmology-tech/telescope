@@ -2,10 +2,14 @@ import { Grant, GrantSDKType } from "./feegrant.js";
 import { BinaryReader, BinaryWriter } from "../../../binary.js";
 import { JsonSafe } from "../../../json-safe.js";
 import { DeepPartial } from "../../../helpers.js";
+import { ComputedRef } from "vue";
 export const protobufPackage = "cosmos.feegrant.v1beta1";
 /** GenesisState contains a set of fee allowances, persisted from the store */
 export interface GenesisState {
   allowances: Grant[];
+}
+export interface ReactiveGenesisState {
+  allowances: ComputedRef<Grant[]>;
 }
 export interface GenesisStateProtoMsg {
   typeUrl: "/cosmos.feegrant.v1beta1.GenesisState";
