@@ -185,10 +185,10 @@ const rpcClassMethod = (
                 t.objectProperty(
                     t.identifier('pagination'),
                     paginationDefaultFromPartial ? t.callExpression(
-                      t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
-                      [t.objectExpression([])]
+                        t.memberExpression(t.identifier("PageRequest"), t.identifier("fromPartial")),
+                        [t.objectExpression([])]
                     ) :
-                    t.identifier('undefined'),
+                        t.identifier('undefined'),
                     false,
                     false
                 )
@@ -349,7 +349,7 @@ export const getMethodDesc = (context: GenericParseContext, service: ProtoServic
 
     const methodsDesc = []
 
-    //check if service name is 'service' if it is then ommit it because proto method doesn't contain service prefix in it methods
+    //check if service name is 'service' if it is then omit it because proto method doesn't contain service prefix in it methods
     let service_name = service.name
     if (service_name == 'Service') {
         service_name = ''
